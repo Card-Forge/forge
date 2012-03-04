@@ -206,8 +206,8 @@ public class InputMulligan extends Input {
 
         ga.checkStateEffects();
         PhaseHandler.setGameBegins(1);
-        AllZone.getPhaseHandler().setNeedToNextPhase(false);
-        PhaseUtil.visuallyActivatePhase(AllZone.getPhaseHandler().getPhase());
+        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
+        PhaseUtil.visuallyActivatePhase(Singletons.getModel().getGameState().getPhaseHandler().getPhase());
 
         this.stop();
     }

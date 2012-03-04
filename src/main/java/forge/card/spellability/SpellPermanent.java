@@ -249,7 +249,7 @@ public class SpellPermanent extends Spell {
     public boolean canPlay() {
         final Card source = this.getSourceCard();
 
-        final Player turn = AllZone.getPhaseHandler().getPlayerTurn();
+        final Player turn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
         if (source.getName().equals("Serra Avenger")) {
             if (turn.equals(source.getController()) && (turn.getTurn() <= 3)) {
@@ -277,7 +277,7 @@ public class SpellPermanent extends Spell {
             card.setSVar("PayX", Integer.toString(xPay));
         }
         // Wait for Main2 if possible
-        if (AllZone.getPhaseHandler().is(Constant.Phase.MAIN1)) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.MAIN1)) {
             boolean wait = true;
             if (card.getSVar("PlayMain1").equals("TRUE")) {
                 wait = false;
@@ -335,13 +335,13 @@ public class SpellPermanent extends Spell {
         // save cards with flash for surprise blocking
         if (card.hasKeyword("Flash")
                 && !ComputerAIGeneral.hasETBTrigger(card)
-                && (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhaseHandler()
+                && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || Singletons.getModel().getGameState().getPhaseHandler()
                         .isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
             return false;
         }
         // Prevent the computer from summoning Ball Lightning type creatures after attacking
         if (card.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
-                && (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer()) || AllZone.getPhaseHandler()
+                && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer()) || Singletons.getModel().getGameState().getPhaseHandler()
                         .isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS))) {
             return false;
         }

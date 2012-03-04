@@ -24,12 +24,12 @@ import java.util.Map;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
-
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Constant.Zone;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -309,25 +309,25 @@ public abstract class Trigger extends TriggerReplacementBase {
                 // Upkeep->Combat_Begin (Before Declare Attackers)
 
                 final String[] split = phases.split("->", 2);
-                phases = AllZone.getPhaseHandler().buildActivateString(split[0], split[1]);
+                phases = Singletons.getModel().getGameState().getPhaseHandler().buildActivateString(split[0], split[1]);
             }
             final ArrayList<String> triggerPhases = new ArrayList<String>();
             for (final String s : phases.split(",")) {
                 triggerPhases.add(s);
             }
-            if (!triggerPhases.contains(AllZone.getPhaseHandler().getPhase())) {
+            if (!triggerPhases.contains(Singletons.getModel().getGameState().getPhaseHandler().getPhase())) {
                 return false;
             }
         }
 
         if (this.getMapParams().containsKey("PlayerTurn")) {
-            if (!AllZone.getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
+            if (!Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
                 return false;
             }
         }
 
         if (this.getMapParams().containsKey("OpponentTurn")) {
-            if (AllZone.getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
+            if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
                 return false;
             }
         }

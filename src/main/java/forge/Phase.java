@@ -80,7 +80,7 @@ public abstract class Phase implements java.io.Serializable {
      */
     public final void addUntil(Player p, final Command c) {
         if (null == p) {
-            p = AllZone.getPhaseHandler().getPlayerTurn();
+            p = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         }
 
         if (this.untilMap.containsKey(p)) {

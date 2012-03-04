@@ -317,7 +317,8 @@ public class GameNew {
         PhaseHandler.setGameBegins(1); // is this needed? It's already in InputMulligan...
 
         AllZone.getGameLog().add("Turn",
-                "Turn " + AllZone.getPhaseHandler().getTurn() + " (" + AllZone.getPhaseHandler().getPlayerTurn() + ")",
+                "Turn " + Singletons.getModel().getGameState().getPhaseHandler().getTurn()
+                    + " (" + Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn() + ")",
                 0);
     } // newGame()
 
@@ -554,7 +555,7 @@ public class GameNew {
 
     private static void computerStartsGame() {
         final Player computer = AllZone.getComputerPlayer();
-        AllZone.getPhaseHandler().setPlayerTurn(computer);
+        Singletons.getModel().getGameState().getPhaseHandler().setPlayerTurn(computer);
         // AllZone.getGameInfo().setPlayerWhoGotFirstTurn(computer.getName());
     }
 }

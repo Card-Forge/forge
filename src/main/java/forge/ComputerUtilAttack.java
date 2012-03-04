@@ -410,7 +410,7 @@ public class ComputerUtilAttack {
         // randomInt is used so that the computer doesn't always
         // do the same thing on turn 3 if he had the same creatures in play
         // I know this is a little confusing
-        this.random.setSeed(AllZone.getPhaseHandler().getTurn() + this.randomInt);
+        this.random.setSeed(Singletons.getModel().getGameState().getPhaseHandler().getTurn() + this.randomInt);
 
         final Combat combat = new Combat();
         combat.setAttackingPlayer(AllZone.getCombat().getAttackingPlayer());
@@ -459,7 +459,7 @@ public class ComputerUtilAttack {
                         || AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getComputerPlayer())
                         || (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Battlegrace Angel").size() >= 2)
                         || ((AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size() >= 1)
-                                && AllZone.getPhaseHandler().isFirstCombat()))) {
+                                && Singletons.getModel().getGameState().getPhaseHandler().isFirstCombat()))) {
             int biggest = 0;
             Card att = null;
             for (int i = 0; i < attackersLeft.size(); i++) {

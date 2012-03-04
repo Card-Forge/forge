@@ -24,6 +24,7 @@ import javax.swing.ImageIcon;
 import forge.AllZone;
 import forge.Card;
 import forge.Constant;
+import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
@@ -97,7 +98,7 @@ public class QuestPetPlant extends QuestPetAbstract {
 
                 @Override
                 public boolean canPlayAI() {
-                    return AllZone.getPhaseHandler().getPhase().equals(Constant.Phase.MAIN2);
+                    return Singletons.getModel().getGameState().getPhaseHandler().getPhase().equals(Constant.Phase.MAIN2);
                 }
 
                 @Override

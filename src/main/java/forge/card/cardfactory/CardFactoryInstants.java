@@ -457,7 +457,7 @@ public class CardFactoryInstants {
                 @Override
                 public boolean canPlay() {
                     return PhaseUtil.isBeforeAttackersAreDeclared()
-                            && AllZone.getPhaseHandler().isPlayerTurn(card.getController().getOpponent());
+                            && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(card.getController().getOpponent());
                 } // canPlay
 
                 @Override

@@ -67,9 +67,9 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleUntap() {
-        final Player turn = AllZone.getPhaseHandler().getPlayerTurn();
+        final Player turn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
-        AllZone.getPhaseHandler().turnReset();
+        Singletons.getModel().getGameState().getPhaseHandler().turnReset();
         Singletons.getModel().getGameSummary().notifyNextTurn();
 
         AllZone.getCombat().reset();
@@ -78,7 +78,7 @@ public class PhaseUtil {
 
         // For tokens a player starts the game with they don't recover from Sum.
         // Sickness on first turn
-        if (AllZone.getPhaseHandler().getTurn() > 0) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().getTurn() > 0) {
             final CardList list = turn.getCardsIncludePhasingIn(Zone.Battlefield);
             for (final Card c : list) {
                 c.setSickness(false);
@@ -95,7 +95,7 @@ public class PhaseUtil {
         // phase is skipped
 
         if (PhaseUtil.skipUntap(turn)) {
-            AllZone.getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
             return;
         }
 
@@ -105,7 +105,7 @@ public class PhaseUtil {
         // otherwise land seems to stay tapped when it is really untapped
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
 
-        AllZone.getPhaseHandler().setNeedToNextPhase(true);
+        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
     }
 
     // ******* UPKEEP PHASE *****
@@ -115,14 +115,14 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleUpkeep() {
-        final Player turn = AllZone.getPhaseHandler().getPlayerTurn();
+        final Player turn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
         if (PhaseUtil.skipUpkeep()) {
             // Slowtrips all say "on the next turn's upkeep" if there is no
             // upkeep next turn, the trigger will never occur.
             turn.clearSlowtripList();
             turn.getOpponent().clearSlowtripList();
-            AllZone.getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
             return;
         }
 
@@ -142,7 +142,7 @@ public class PhaseUtil {
             return true;
         }
 
-        final Player turn = AllZone.getPhaseHandler().getPlayerTurn();
+        final Player turn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
         if ((turn.getCardsIn(Zone.Hand).size() == 0) && AllZoneUtil.isCardInPlay("Gibbering Descent", turn)) {
             return true;
@@ -158,10 +158,10 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleDraw() {
-        final Player playerTurn = AllZone.getPhaseHandler().getPlayerTurn();
+        final Player playerTurn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
         if (PhaseUtil.skipDraw(playerTurn)) {
-            AllZone.getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
             return;
         }
 
@@ -179,7 +179,7 @@ public class PhaseUtil {
      */
     private static boolean skipDraw(final Player player) {
         // starting player skips his draw
-        if (AllZone.getPhaseHandler().getTurn() == 1) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().getTurn() == 1) {
             return true;
         }
 
@@ -212,10 +212,10 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleCombatBegin() {
-        final Player playerTurn = AllZone.getPhaseHandler().getPlayerTurn();
+        final Player playerTurn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
         if (PhaseUtil.skipCombat(playerTurn)) {
-            AllZone.getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
             return;
         }
     }
@@ -226,10 +226,10 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleCombatDeclareAttackers() {
-        final Player playerTurn = AllZone.getPhaseHandler().getPlayerTurn();
+        final Player playerTurn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
         if (PhaseUtil.skipCombat(playerTurn)) {
-            AllZone.getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
             playerTurn.removeKeyword("Skip your next combat phase.");
             return;
         }
@@ -362,7 +362,7 @@ public class PhaseUtil {
      * @return a boolean.
      */
     public static boolean isBeforeAttackersAreDeclared() {
-        final String phase = AllZone.getPhaseHandler().getPhase();
+        final String phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
         return phase.equals(Constant.Phase.UNTAP) || phase.equals(Constant.Phase.UPKEEP)
                 || phase.equals(Constant.Phase.DRAW) || phase.equals(Constant.Phase.MAIN1)
                 || phase.equals(Constant.Phase.COMBAT_BEGIN);
@@ -377,7 +377,7 @@ public class PhaseUtil {
      */
     public static void visuallyActivatePhase(final String s) {
         PhaseLabel lbl = null;
-        final Player p = AllZone.getPhaseHandler().getPlayerTurn();
+        final Player p = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final ControlMatchUI t = Singletons.getControl().getControlMatch();
 
         int i; // Index of field; computer is 0, human is 1

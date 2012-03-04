@@ -141,7 +141,7 @@ class CardFactoryLands {
                 @Override
                 public boolean addCard(final Card c) {
                     return AllZoneUtil.isCardInPlay(c) && c.isCreature()
-                            && (c.getTurnInZone() == AllZone.getPhaseHandler().getTurn());
+                            && (c.getTurnInZone() == Singletons.getModel().getGameState().getPhaseHandler().getTurn());
                 }
             };
 
@@ -153,7 +153,7 @@ class CardFactoryLands {
 
                 @Override
                 public boolean canPlayAI() {
-                    if (!(AllZone.getPhaseHandler().getPhase().equals(Constant.Phase.MAIN1) && AllZone.getPhaseHandler()
+                    if (!(Singletons.getModel().getGameState().getPhaseHandler().getPhase().equals(Constant.Phase.MAIN1) && Singletons.getModel().getGameState().getPhaseHandler()
                             .getPlayerTurn().isComputer())) {
                         return false;
                     }

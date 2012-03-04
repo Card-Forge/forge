@@ -37,11 +37,13 @@ public class MyObservable extends Observable {
         this.setChanged();
         this.notifyObservers();
 
-        if ((AllZone.getPhaseHandler() != null) && AllZone.getPhaseHandler().isNeedToNextPhase()) {
-            if (AllZone.getPhaseHandler().isNeedToNextPhaseInit()) {
+        if (Singletons.getModel() == null) { return; }
+
+        if ((Singletons.getModel().getGameState().getPhaseHandler() != null) && Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhase()) {
+            if (Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhaseInit()) {
                 // this is used.
-                AllZone.getPhaseHandler().setNeedToNextPhase(false);
-                AllZone.getPhaseHandler().nextPhase();
+                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
+                Singletons.getModel().getGameState().getPhaseHandler().nextPhase();
             }
         }
     }

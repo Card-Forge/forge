@@ -34,8 +34,9 @@ import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
-import forge.Player;
 import forge.Constant.Zone;
+import forge.Player;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -232,8 +233,8 @@ public final class AbilityFactoryProtection {
                 }
 
                 // will the creature attack (only relevant for sorcery speed)?
-                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
+                if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                        && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
                         && CardFactoryUtil.doesCreatureAttackAI(c)) {
                     return true;
                 }
@@ -247,7 +248,7 @@ public final class AbilityFactoryProtection {
                 }
 
                 // is the creature in blocked and the blocker would survive
-                if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+                if (Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
                         && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
                         && CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0))) {
                     return true;
@@ -298,7 +299,7 @@ public final class AbilityFactoryProtection {
         }
 
         // Phase Restrictions
-        if ((AllZone.getStack().size() == 0) && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
+        if ((AllZone.getStack().size() == 0) && Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
             // Instant-speed protections should not be cast outside of combat
             // when the stack is empty
             if (!AbilityFactory.isSorcerySpeed(sa)) {
@@ -345,7 +346,7 @@ public final class AbilityFactoryProtection {
      * @return a boolean.
      */
     private static boolean protectTgtAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!mandatory && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        if (!mandatory && Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
 
@@ -372,12 +373,12 @@ public final class AbilityFactoryProtection {
             // If the cost is tapping, don't activate before declare
             // attack/block
             if ((sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
-                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                        && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
                     list.remove(sa.getSourceCard());
                 }
-                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
-                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+                        && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
                     list.remove(sa.getSourceCard());
                 }
             }

@@ -43,7 +43,7 @@ public class GuiInput extends MyObservable implements Observer {
     public GuiInput() {
         AllZone.getInputControl().addObserver(this);
         AllZone.getStack().addObserver(this);
-        AllZone.getPhaseHandler().addObserver(this);
+        Singletons.getModel().getGameState().getPhaseHandler().addObserver(this);
     }
 
     /** {@inheritDoc} */

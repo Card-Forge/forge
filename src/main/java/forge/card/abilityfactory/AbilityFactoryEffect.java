@@ -226,23 +226,23 @@ public class AbilityFactoryEffect {
 
         if (params.containsKey("AILogic")) {
             logic = params.get("AILogic");
-            final PhaseHandler phase = AllZone.getPhaseHandler();
+            final PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
             if (logic.equals("BeginningOfOppTurn")) {
                 if (phase.isPlayerTurn(AllZone.getComputerPlayer()) || phase.isAfter(Constant.Phase.DRAW)) {
                     return false;
                 }
                 randomReturn = true;
             } else if (logic.equals("Fog")) {
-                if (AllZone.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
                     return false;
                 }
-                if (!AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (!Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     return false;
                 }
                 if (AllZone.getStack().size() != 0) {
                     return false;
                 }
-                if (AllZone.getPhaseHandler().isPreventCombatDamageThisTurn()) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().isPreventCombatDamageThisTurn()) {
                     return false;
                 }
                 randomReturn = CombatUtil.lifeInDanger(AllZone.getCombat());

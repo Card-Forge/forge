@@ -897,8 +897,8 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlayAI() {
-                if (AllZone.getPhaseHandler().isAfter(Constant.Phase.MAIN1)
-                        || AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.MAIN1)
+                        || Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
                     return false;
                 }
                 return ComputerUtil.canPayCost(this);
@@ -1031,7 +1031,7 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlayAI() {
 
-                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2)) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2)) {
                     return false;
                 }
 
@@ -1358,8 +1358,8 @@ public class CardFactoryUtil {
                     @Override
                     public boolean addCard(final Card c) {
                         return c.isCreature()
-                                && (CombatUtil.canAttack(c) || (CombatUtil.canAttackNextTurn(c) && AllZone
-                                        .getPhaseHandler().is(Constant.Phase.MAIN2)))
+                                && (CombatUtil.canAttack(c) || (CombatUtil.canAttackNextTurn(c)
+                                && Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.MAIN2)))
                                 && (((c.getNetDefense() + tough) > 0) || sourceCard.getName().equals("Skullclamp"));
                     }
                 });
@@ -3081,9 +3081,9 @@ public class CardFactoryUtil {
 
         // Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase")) {
-            final String cPhase = AllZone.getPhaseHandler().getPhase();
+            final String cPhase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
             if ((cPhase.equals(Constant.Phase.MAIN1) || cPhase.equals(Constant.Phase.MAIN2))
-                    && AllZone.getPhaseHandler().getPlayerTurn().equals(cardController)) {
+                    && Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().equals(cardController)) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);

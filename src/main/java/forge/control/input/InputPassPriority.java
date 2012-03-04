@@ -43,8 +43,8 @@ public class InputPassPriority extends Input implements java.io.Serializable {
         GuiDisplayUtil.updateGUI();
         ButtonUtil.enableOnlyOK();
 
-        final String phase = AllZone.getPhaseHandler().getPhase();
-        final Player player = AllZone.getPhaseHandler().getPriorityPlayer();
+        final String phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
+        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPriorityPlayer();
 
         if (player.isComputer()) {
             System.out.println(phase + ": Computer in passpriority");
@@ -52,7 +52,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
 
         final StringBuilder sb = new StringBuilder();
 
-        sb.append("Turn : ").append(AllZone.getPhaseHandler().getPlayerTurn()).append("\n");
+        sb.append("Turn : ").append(Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn()).append("\n");
         sb.append("Phase: ").append(phase).append("\n");
         sb.append("Stack: ");
         if (AllZone.getStack().size() != 0) {
@@ -69,7 +69,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        AllZone.getPhaseHandler().passPriority();
+        Singletons.getModel().getGameState().getPhaseHandler().passPriority();
         GuiDisplayUtil.updateGUI();
         final Input in = AllZone.getInputControl().getInput();
         if ((in == this) || (in == null)) {
@@ -82,7 +82,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     @Override
     public final void selectCard(final Card card, final PlayerZone zone) {
         if (Singletons.getModel().getGameAction().playCard(card)) {
-            AllZone.getPhaseHandler().setPriority(AllZone.getHumanPlayer());
+            Singletons.getModel().getGameState().getPhaseHandler().setPriority(AllZone.getHumanPlayer());
         }
         else {
             Singletons.getControl().getControlMatch().getMessageControl().remind();

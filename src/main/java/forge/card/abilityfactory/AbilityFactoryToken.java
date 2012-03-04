@@ -29,6 +29,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -292,18 +293,18 @@ public class AbilityFactoryToken extends AbilityFactory {
         }
 
         // Don't generate tokens without haste before main 2 if possible
-        if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2)
-                && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && !haste
+        if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2)
+                && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && !haste
                 && !mapParams.containsKey("ActivationPhases")) {
             return false;
         }
-        if ((AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhaseHandler().isBefore(
+        if ((Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || Singletons.getModel().getGameState().getPhaseHandler().isBefore(
                 Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
                 && !mapParams.containsKey("ActivationPhases") && !AbilityFactory.isSorcerySpeed(sa)
                 && !haste) {
             return false;
         }
-        if ((AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN) || AllZone.getPhaseHandler().isPlayerTurn(
+        if ((Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN) || Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(
                 AllZone.getHumanPlayer()))
                 && oneShot) {
             return false;
@@ -358,7 +359,7 @@ public class AbilityFactoryToken extends AbilityFactory {
             return chance;
         }
 
-        if (AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
             return ((r.nextFloat() < .95) && chance);
         }
         if (sa.isAbility()) {

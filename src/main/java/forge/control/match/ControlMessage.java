@@ -20,7 +20,6 @@ package forge.control.match;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import forge.AllZone;
 import forge.Constant;
 import forge.GuiInput;
 import forge.Singletons;
@@ -52,10 +51,10 @@ public class ControlMessage {
             public void actionPerformed(final ActionEvent evt) {
                 ControlMessage.this.btnOKActionPerformed(evt);
 
-                if (AllZone.getPhaseHandler().isNeedToNextPhase()) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhase()) {
                     // moves to next turn
-                    AllZone.getPhaseHandler().setNeedToNextPhase(false);
-                    AllZone.getPhaseHandler().nextPhase();
+                    Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
+                    Singletons.getModel().getGameState().getPhaseHandler().nextPhase();
                 }
                 ControlMessage.this.view.getBtnOK().requestFocusInWindow();
             }

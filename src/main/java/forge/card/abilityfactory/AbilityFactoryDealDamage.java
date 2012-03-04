@@ -31,6 +31,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -350,7 +351,7 @@ public class AbilityFactoryDealDamage {
         if (source.getName().equals("Stuffy Doll")) {
             // Now stuffy sits around for blocking
             // TODO(sol): this should also happen if Stuffy is going to die
-            return AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN, AllZone.getHumanPlayer());
+            return Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.END_OF_TURN, AllZone.getHumanPlayer());
         }
 
         if (this.abilityFactory.isAbility()) {
@@ -429,8 +430,8 @@ public class AbilityFactoryDealDamage {
 
         if (this.abilityFactory.isSpell()) {
             // If this is a spell, cast it instead of discarding
-            if ((AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN) || AllZone.getPhaseHandler().is(Constant.Phase.MAIN2))
-                    && AllZone.getPhaseHandler().isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize())) {
+            if ((Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.END_OF_TURN) || Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.MAIN2))
+                    && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize())) {
                 return true;
             }
         }
@@ -580,8 +581,8 @@ public class AbilityFactoryDealDamage {
                 // on the stack
                 // or from taking combat damage
                 final boolean freePing = isTrigger || saMe.getPayCosts() == null || tgt.getNumTargeted() > 0
-                        || (AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN) && saMe.isAbility()
-                                && AllZone.getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()));
+                        || (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.END_OF_TURN) && saMe.isAbility()
+                                && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()));
 
                 if (freePing && saMe.canTarget(AllZone.getHumanPlayer()) && tgt.addTarget(AllZone.getHumanPlayer())) {
                     continue;
@@ -596,8 +597,8 @@ public class AbilityFactoryDealDamage {
 
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (saMe.canTarget(AllZone.getHumanPlayer()) && ((AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN)
-                    && AllZone.getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()))
+            else if (saMe.canTarget(AllZone.getHumanPlayer()) && ((Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.END_OF_TURN)
+                    && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()))
                     || saMe.getPayCosts() == null || isTrigger)) {
                 if (tgt.addTarget(AllZone.getHumanPlayer())) {
                     System.out.println(saMe.getSourceCard() + " - damageChoosingTargets");

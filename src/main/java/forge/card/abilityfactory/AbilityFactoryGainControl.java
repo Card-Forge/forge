@@ -323,7 +323,7 @@ public class AbilityFactoryGainControl {
         // Don't steal something if I can't Attack without, or prevent it from
         // blocking at least
         if ((this.lose != null) && this.lose.contains("EOT")
-                && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+                && Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
             return false;
         }
 
@@ -525,7 +525,7 @@ public class AbilityFactoryGainControl {
                 }
             }
             if ((this.lose != null) && this.lose.contains("EOT")
-                    && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+                    && Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
         } else {

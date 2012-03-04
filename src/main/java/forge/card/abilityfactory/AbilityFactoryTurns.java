@@ -319,7 +319,7 @@ public class AbilityFactoryTurns {
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < numTurns; i++) {
-                    AllZone.getPhaseHandler().addExtraTurn(p);
+                    Singletons.getModel().getGameState().getPhaseHandler().addExtraTurn(p);
                 }
             }
         }
@@ -459,7 +459,7 @@ public class AbilityFactoryTurns {
 
         // 4) The current phase and/or step ends. The game skips straight to the
         // cleanup step. The cleanup step happens in its entirety.
-        AllZone.getPhaseHandler().setPhaseState(Constant.Phase.CLEANUP);
+        Singletons.getModel().getGameState().getPhaseHandler().setPhaseState(Constant.Phase.CLEANUP);
 
         // Update observers
         AllZone.getStack().updateObservers();

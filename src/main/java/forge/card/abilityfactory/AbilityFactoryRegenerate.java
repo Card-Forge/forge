@@ -31,6 +31,7 @@ import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -270,7 +271,7 @@ public class AbilityFactoryRegenerate {
                     }
                 }
             } else {
-                if (AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     boolean flag = false;
 
                     for (final Card c : list) {
@@ -314,7 +315,7 @@ public class AbilityFactoryRegenerate {
                     chance = true;
                 }
             } else {
-                if (AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     final CardList combatants = targetables.getType("Creature");
                     CardListUtil.sortByEvaluateCreature(combatants);
 
@@ -406,7 +407,7 @@ public class AbilityFactoryRegenerate {
         if (compTargetables.size() > 0) {
             final CardList combatants = compTargetables.getType("Creature");
             CardListUtil.sortByEvaluateCreature(combatants);
-            if (AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
                     if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {
                         tgt.addTarget(c);
@@ -688,7 +689,7 @@ public class AbilityFactoryRegenerate {
             // i control
         } else {
 
-            if (AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 final CardList combatants = list.getType("Creature");
 
                 for (final Card c : combatants) {

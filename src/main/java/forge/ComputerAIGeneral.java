@@ -80,7 +80,7 @@ public class ComputerAIGeneral implements Computer {
         final boolean nextPhase = ComputerUtil.playSpellAbilities(getSpellAbilities(list));
 
         if (nextPhase) {
-            AllZone.getPhaseHandler().passPriority();
+            Singletons.getModel().getGameState().getPhaseHandler().passPriority();
         }
     } // playCards()
 
@@ -263,7 +263,7 @@ public class ComputerAIGeneral implements Computer {
 
         final List<Card> att = AllZone.getCombat().getAttackers();
         if (!att.isEmpty()) {
-            AllZone.getPhaseHandler().setCombat(true);
+            Singletons.getModel().getGameState().getPhaseHandler().setCombat(true);
         }
 
         for (final Card element : att) {
@@ -276,7 +276,7 @@ public class ComputerAIGeneral implements Computer {
 
         AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
 
-        AllZone.getPhaseHandler().setNeedToNextPhase(true);
+        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
     }
 
     /**
@@ -300,7 +300,7 @@ public class ComputerAIGeneral implements Computer {
 
         AllZone.setCombat(ComputerUtilBlock.getBlockers(AllZone.getCombat(), blockers));
 
-        AllZone.getPhaseHandler().setNeedToNextPhase(true);
+        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
     }
 
     /**
@@ -355,13 +355,13 @@ public class ComputerAIGeneral implements Computer {
         if (AllZone.getStack().size() == 0) {
             final ArrayList<SpellAbility> sas = this.getSpellAbilities(cards);
             boolean pass = (sas.size() == 0)
-                    || AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN, AllZone.getComputerPlayer());
+                    || Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.END_OF_TURN, AllZone.getComputerPlayer());
             if (!pass) { // Each AF should check the phase individually
                 pass = ComputerUtil.playSpellAbilities(sas);
             }
 
             if (pass) {
-                AllZone.getPhaseHandler().passPriority();
+                Singletons.getModel().getGameState().getPhaseHandler().passPriority();
             }
             return;
         }
@@ -370,7 +370,7 @@ public class ComputerAIGeneral implements Computer {
         if (AllZone.getStack().peekInstance().getActivatingPlayer().isComputer()) {
             // probably should let my stuff resolve to force Human to respond to
             // it
-            AllZone.getPhaseHandler().passPriority();
+            Singletons.getModel().getGameState().getPhaseHandler().passPriority();
             return;
         }
 
@@ -387,7 +387,7 @@ public class ComputerAIGeneral implements Computer {
         possibleCounters = this.getPossibleETBCounters();
         if ((possibleCounters.size() > 0) && !ComputerUtil.playSpellAbilities(possibleCounters)) {
             // Responding Permanent w/ ETB Counter is on the Stack
-            // AllZone.getPhaseHandler().passPriority();
+            // Singletons.getModel().getGameState().getPhaseHandler().passPriority();
             return;
         }
         final ArrayList<SpellAbility> sas = this.getSpellAbilities(cards);
@@ -398,6 +398,6 @@ public class ComputerAIGeneral implements Computer {
             }
         }
         // if this hasn't been covered above, just PassPriority()
-        AllZone.getPhaseHandler().passPriority();
+        Singletons.getModel().getGameState().getPhaseHandler().passPriority();
     }
 }

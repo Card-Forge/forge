@@ -51,7 +51,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
         EndOfTurn.endOfTurnLighthouseChronologist();
 
         // reset mustAttackEntity for me
-        AllZone.getPhaseHandler().getPlayerTurn().setMustAttackEntity(null);
+        Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().setMustAttackEntity(null);
 
         EndOfTurn.removeAttackedBlockedThisTurn();
 
@@ -156,7 +156,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
             }
             if (c.getName().equals("Erg Raiders") && !c.getCreatureAttackedThisTurn() && !c.hasSickness()
-                    && AllZone.getPhaseHandler().isPlayerTurn(c.getController())) {
+                    && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(c.getController())) {
                 final Card raider = c;
                 final SpellAbility change = new Ability(raider, "0") {
                     @Override
@@ -174,7 +174,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
             }
             if (c.hasKeyword("At the beginning of your end step, return CARDNAME to its owner's hand.")
-                    && AllZone.getPhaseHandler().isPlayerTurn(c.getController())) {
+                    && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(c.getController())) {
                 final Card source = c;
                 final SpellAbility change = new Ability(source, "0") {
                     @Override
@@ -199,7 +199,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
     } // executeAt()
 
     private static void endOfTurnWallOfReverence() {
-        final Player player = AllZone.getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final CardList list = player.getCardsIn(Zone.Battlefield, "Wall of Reverence");
 
         Ability ability;
@@ -243,7 +243,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
     } // endOfTurnWallOfReverence()
 
     private static void endOfTurnLighthouseChronologist() {
-        final Player player = AllZone.getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final Player opponent = player.getOpponent();
         CardList list = opponent.getCardsIn(Zone.Battlefield);
 
@@ -260,7 +260,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
             ability = new Ability(list.get(i), "0") {
                 @Override
                 public void resolve() {
-                    AllZone.getPhaseHandler().addExtraTurn(card.getController());
+                    Singletons.getModel().getGameState().getPhaseHandler().addExtraTurn(card.getController());
                 }
             };
 

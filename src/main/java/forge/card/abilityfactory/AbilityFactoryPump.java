@@ -35,6 +35,7 @@ import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.PhaseHandler;
 import forge.Player;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -253,6 +254,7 @@ public class AbilityFactoryPump {
      *            the keywords
      * @param card
      *            the card
+     * @param sa SpellAbility
      * @return true, if successful
      */
     public boolean containsUsefulKeyword(final ArrayList<String> keywords, final Card card, final SpellAbility sa) {
@@ -271,10 +273,11 @@ public class AbilityFactoryPump {
      *            the keyword
      * @param card
      *            the card
+     * @param sa SpellAbility
      * @return true, if is useful keyword
      */
     public boolean isUsefulKeyword(final String keyword, final Card card, final SpellAbility sa) {
-        final PhaseHandler ph = AllZone.getPhaseHandler();
+        final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
         final Player computer = AllZone.getComputerPlayer();
         final Player human = AllZone.getHumanPlayer();
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
@@ -387,7 +390,7 @@ public class AbilityFactoryPump {
     private boolean shouldPumpCard(final SpellAbility sa, final Card c) {
         int attack = getNumAttack(sa);
         int defense = getNumDefense(sa);
-        PhaseHandler phase = AllZone.getPhaseHandler();
+        PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
 
         if (!c.canBeTargetedBy(sa)) {
             return false;
@@ -560,7 +563,7 @@ public class AbilityFactoryPump {
         final SpellAbilityRestriction restrict = sa.getRestrictions();
 
         // Phase Restrictions
-        if ((AllZone.getStack().size() == 0) && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_BEGIN)) {
+        if ((AllZone.getStack().size() == 0) && Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!this.abilityFactory.isCurse() && !AbilityFactory.isSorcerySpeed(sa)) {
@@ -662,7 +665,7 @@ public class AbilityFactoryPump {
     private boolean pumpTgtAI(final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         if (!mandatory
                 && !sa.isTrigger()
-                && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                && Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && !(this.abilityFactory.isCurse() && (defense < 0))
                 && !this.containsNonCombatKeyword(this.keywords)) {
             return false;
@@ -695,12 +698,12 @@ public class AbilityFactoryPump {
             // If the cost is tapping, don't activate before declare
             // attack/block
             if ((sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
-                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                        && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
                     list.remove(sa.getSourceCard());
                 }
-                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
-                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+                        && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
                     list.remove(sa.getSourceCard());
                 }
             }
@@ -1365,7 +1368,7 @@ public class AbilityFactoryPump {
         } // end Curse
 
         // don't use non curse PumpAll after Combat_Begin until AI is improved
-        if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN)) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN)) {
             return false;
         }
 

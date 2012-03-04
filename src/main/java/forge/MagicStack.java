@@ -420,17 +420,17 @@ public class MagicStack extends MyObservable {
             System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
         }
 
-        if (AllZone.getPhaseHandler().is(Constant.Phase.CLEANUP)) { // If something
+        if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.CLEANUP)) { // If something
                                                              // triggers during
                                                              // Cleanup, need to
                                                              // repeat
-            AllZone.getPhaseHandler().repeatPhase();
+            Singletons.getModel().getGameState().getPhaseHandler().repeatPhase();
         }
 
         // TODO: triggered abilities need to be fixed
         if (!((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic))) {
             // when something is added we need to setPriority
-            AllZone.getPhaseHandler().setPriority(sp.getActivatingPlayer());
+            Singletons.getModel().getGameState().getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
 
         if ((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic)) {
@@ -832,7 +832,7 @@ public class MagicStack extends MyObservable {
          */
 
         if (this.getSimultaneousStackEntryList().size() > 0) {
-            AllZone.getPhaseHandler().passPriority();
+            Singletons.getModel().getGameState().getPhaseHandler().passPriority();
         }
     }
 
@@ -893,7 +893,7 @@ public class MagicStack extends MyObservable {
 
         final SpellAbility sa = AllZone.getStack().pop();
 
-        AllZone.getPhaseHandler().resetPriority(); // ActivePlayer gains priority first
+        Singletons.getModel().getGameState().getPhaseHandler().resetPriority(); // ActivePlayer gains priority first
                                             // after Resolve
         final Card source = sa.getSourceCard();
         curResolvingCard = source;
@@ -1094,7 +1094,7 @@ public class MagicStack extends MyObservable {
 
         Singletons.getModel().getGameAction().checkStateEffects();
 
-        AllZone.getPhaseHandler().setNeedToNextPhase(false);
+        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
 
         this.curResolvingCard = null;
 
@@ -1334,7 +1334,7 @@ public class MagicStack extends MyObservable {
      * </p>
      */
     public final void chooseOrderOfSimultaneousStackEntryAll() {
-        final Player playerTurn = AllZone.getPhaseHandler().getPlayerTurn();
+        final Player playerTurn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
         this.chooseOrderOfSimultaneousStackEntry(playerTurn);
 

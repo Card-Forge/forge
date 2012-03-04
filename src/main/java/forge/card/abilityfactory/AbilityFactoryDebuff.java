@@ -33,6 +33,7 @@ import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -288,7 +289,7 @@ public final class AbilityFactoryDebuff {
         final SpellAbilityRestriction restrict = sa.getRestrictions();
 
         // Phase Restrictions
-        if ((AllZone.getStack().size() == 0) && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_BEGIN)) {
+        if ((AllZone.getStack().size() == 0) && Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!AbilityFactory.isSorcerySpeed(sa)) {
@@ -356,7 +357,7 @@ public final class AbilityFactoryDebuff {
     private static boolean debuffTgtAI(final AbilityFactory af, final SpellAbility sa, final ArrayList<String> kws,
             final boolean mandatory) {
         // this would be for evasive things like Flying, Unblockable, etc
-        if (!mandatory && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        if (!mandatory && Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
 
@@ -752,7 +753,7 @@ public final class AbilityFactoryDebuff {
         });
 
         // don't use DebuffAll after Combat_Begin until AI is improved
-        if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN)) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN)) {
             return false;
         }
 

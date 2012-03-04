@@ -26,6 +26,7 @@ import forge.Card;
 import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.Player;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 
@@ -407,11 +408,11 @@ public class StaticAbility {
             return false;
         }
 
-        if (this.mapParams.containsKey("PlayerTurn") && !AllZone.getPhaseHandler().isPlayerTurn(controller)) {
+        if (this.mapParams.containsKey("PlayerTurn") && !Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(controller)) {
             return false;
         }
 
-        if (this.mapParams.containsKey("OpponentTurn") && !AllZone.getPhaseHandler().isPlayerTurn(controller.getOpponent())) {
+        if (this.mapParams.containsKey("OpponentTurn") && !Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(controller.getOpponent())) {
             return false;
         }
 
@@ -430,10 +431,10 @@ public class StaticAbility {
                 // Upkeep->Combat_Begin (Before Declare Attackers)
 
                 final String[] split = phases.split("->", 2);
-                phases = AllZone.getPhaseHandler().buildActivateString(split[0], split[1]);
+                phases = Singletons.getModel().getGameState().getPhaseHandler().buildActivateString(split[0], split[1]);
             }
 
-            if (!phases.contains(AllZone.getPhaseHandler().getPhase())) {
+            if (!phases.contains(Singletons.getModel().getGameState().getPhaseHandler().getPhase())) {
                 return false;
             }
         }

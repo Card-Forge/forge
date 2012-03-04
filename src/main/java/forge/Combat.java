@@ -91,7 +91,7 @@ public class Combat {
         this.currentDefender = 0;
         this.nextDefender = 0;
 
-        this.initiatePossibleDefenders(AllZone.getPhaseHandler().getPlayerTurn().getOpponent());
+        this.initiatePossibleDefenders(Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getOpponent());
     }
 
     /**
@@ -240,7 +240,7 @@ public class Combat {
         if (this.attackingPlayer != null) {
             return this.attackingPlayer;
         } else {
-            return AllZone.getPhaseHandler().getPlayerTurn();
+            return Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         }
     }
 
@@ -255,7 +255,7 @@ public class Combat {
         if (this.attackingPlayer != null) {
             return this.defendingPlayer;
         } else {
-            return AllZone.getPhaseHandler().getPlayerTurn().getOpponent();
+            return Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getOpponent();
         }
     }
 
@@ -624,7 +624,7 @@ public class Combat {
                     // TODO if Declare Blockers and Declare Blockers (Abilities)
                     // merge this logic needs to be tweaked
                     if ((this.getBlockers(a).size() == 0)
-                            && AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+                            && Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
                         this.blocked.remove(a);
                     }
                 }
@@ -875,7 +875,7 @@ public class Combat {
         // This function handles both Regular and First Strike combat assignment
         final Player player = AllZone.getCombat().getDefendingPlayer();
 
-        final boolean bFirstStrike = AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE);
+        final boolean bFirstStrike = Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE);
 
         final HashMap<Card, Integer> defMap = AllZone.getCombat().getDefendingDamageMap();
 

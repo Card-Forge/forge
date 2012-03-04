@@ -309,11 +309,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      */
     public final void handleBeginPhase() {
-        AllZone.getPhaseHandler().setPhaseEffects(false);
+        Singletons.getModel().getGameState().getPhaseHandler().setPhaseEffects(false);
         // Handle effects that happen at the beginning of phases
-        final String phase = AllZone.getPhaseHandler().getPhase();
-        final Player turn = AllZone.getPhaseHandler().getPlayerTurn();
-        AllZone.getPhaseHandler().setSkipPhase(true);
+        final String phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
+        final Player turn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        Singletons.getModel().getGameState().getPhaseHandler().setSkipPhase(true);
         Singletons.getModel().getGameAction().checkStateEffects();
 
         // UNTAP
@@ -344,7 +344,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 PhaseUtil.handleDeclareAttackers();
                 CombatUtil.showCombat();
             } else {
-                AllZone.getPhaseHandler().setNeedToNextPhase(true);
+                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
             }
         }
         // COMBAT_DECLARE_BLOCKERS: we can skip AfterBlockers and AfterAttackers
@@ -354,7 +354,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 PhaseUtil.verifyCombat();
                 CombatUtil.showCombat();
             } else {
-                AllZone.getPhaseHandler().setNeedToNextPhase(true);
+                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
             }
         }
         // COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY
@@ -365,19 +365,19 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 PhaseUtil.handleDeclareBlockers();
                 CombatUtil.showCombat();
             } else {
-                AllZone.getPhaseHandler().setNeedToNextPhase(true);
+                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
             }
         }
         // COMBAT_FIRST_STRIKE_DAMAGE
         else if (phase.equals(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
             if (!this.inCombat()) {
-                AllZone.getPhaseHandler().setNeedToNextPhase(true);
+                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
             } else {
                 AllZone.getCombat().verifyCreaturesInPlay();
 
                 // no first strikers, skip this step
                 if (!AllZone.getCombat().setAssignedFirstStrikeDamage()) {
-                    AllZone.getPhaseHandler().setNeedToNextPhase(true);
+                    Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
                 } else {
                     if (!this.isPreventCombatDamageThisTurn()) {
                         Combat.dealAssignedDamage();
@@ -391,7 +391,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         // COMBAT_DAMAGE
         else if (phase.equals(Constant.Phase.COMBAT_DAMAGE)) {
             if (!this.inCombat()) {
-                AllZone.getPhaseHandler().setNeedToNextPhase(true);
+                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
             } else {
                 AllZone.getCombat().verifyCreaturesInPlay();
 
@@ -422,7 +422,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         }
         // CLEANUP
         else if (phase.equals(Constant.Phase.CLEANUP)) {
-            AllZone.getPhaseHandler().getPlayerTurn().clearAssignedDamage();
+            Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().clearAssignedDamage();
 
             // Reset Damage received map
             final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
@@ -436,10 +436,10 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 c.setDealtCombatDmgToComputerThisTurn(false);
                 c.setRegeneratedThisTurn(0);
                 c.clearMustBlockCards();
-                if (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
                     c.setCreatureAttackedLastComputerTurn(c.getCreatureAttackedThisTurn());
                 }
-                if (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
                     c.setCreatureAttackedLastHumanTurn(c.getCreatureAttackedThisTurn());
                 }
                 c.setCreatureAttackedThisTurn(false);
@@ -466,7 +466,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             AllZone.getComputerPlayer().setAttackedWithCreatureThisTurn(false);
         }
 
-        if (!AllZone.getPhaseHandler().isNeedToNextPhase()) {
+        if (!Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhase()) {
             // Run triggers if phase isn't being skipped
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Phase", phase);
@@ -536,7 +536,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         if (this.getPhaseOrder()[this.phaseIndex].equals(Constant.Phase.CLEANUP)) {
             this.bPreventCombatDamageThisTurn = false;
             if (!this.bRepeat) {
-                AllZone.getPhaseHandler().setPlayerTurn(this.handleNextTurn());
+                Singletons.getModel().getGameState().getPhaseHandler().setPlayerTurn(this.handleNextTurn());
             }
         }
 
@@ -582,9 +582,9 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         // pushes through that block
         this.updateObservers();
 
-        if ((AllZone.getPhaseHandler() != null) && AllZone.getPhaseHandler().isNeedToNextPhase()) {
-            AllZone.getPhaseHandler().setNeedToNextPhase(false);
-            AllZone.getPhaseHandler().nextPhase();
+        if ((Singletons.getModel().getGameState().getPhaseHandler() != null) && Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhase()) {
+            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
+            Singletons.getModel().getGameState().getPhaseHandler().nextPhase();
         }
     }
 
@@ -953,8 +953,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @return a boolean.
      */
     public static boolean canCastSorcery(final Player player) {
-        return AllZone.getPhaseHandler().isPlayerTurn(player)
-                && (AllZone.getPhaseHandler().getPhase().equals(Constant.Phase.MAIN2) || AllZone.getPhaseHandler()
+        return Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(player)
+                && (Singletons.getModel().getGameState().getPhaseHandler().getPhase().equals(Constant.Phase.MAIN2) || Singletons.getModel().getGameState().getPhaseHandler()
                         .getPhase().equals(Constant.Phase.MAIN1)) && (AllZone.getStack().size() == 0);
     }
 

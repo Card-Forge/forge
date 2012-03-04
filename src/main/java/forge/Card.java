@@ -1607,7 +1607,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     // set activating player for base spell ability
                     c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
                     // Any trigger should cause the phase not to skip
-                    AllZone.getPhaseHandler().setSkipPhase(false);
+                    Singletons.getModel().getGameState().getPhaseHandler().setSkipPhase(false);
                     if (c.getOwner().isHuman()) {
                         Singletons.getModel().getGameAction().playCardNoCost(c);
                     } else {
@@ -6951,11 +6951,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("enteredBattlefieldThisTurn")) {
-            if (!(this.getTurnInZone() == AllZone.getPhaseHandler().getTurn())) {
+            if (!(this.getTurnInZone() == Singletons.getModel().getGameState().getPhaseHandler().getTurn())) {
                 return false;
             }
         } else if (property.startsWith("notEnteredBattlefieldThisTurn")) {
-            if (this.getTurnInZone() == AllZone.getPhaseHandler().getTurn()) {
+            if (this.getTurnInZone() == Singletons.getModel().getGameState().getPhaseHandler().getTurn()) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToYouThisTurn")) {

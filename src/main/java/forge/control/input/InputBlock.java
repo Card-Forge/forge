@@ -93,7 +93,7 @@ public class InputBlock extends Input {
             // Done blocking
             ButtonUtil.reset();
 
-            AllZone.getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
         }
     }
 

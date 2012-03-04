@@ -28,6 +28,7 @@ import forge.Constant.Zone;
 import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 
@@ -134,7 +135,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 // Upkeep->Combat_Begin (Before Declare Attackers)
 
                 final String[] split = phases.split("->", 2);
-                phases = AllZone.getPhaseHandler().buildActivateString(split[0], split[1]);
+                phases = Singletons.getModel().getGameState().getPhaseHandler().buildActivateString(split[0], split[1]);
             }
 
             this.setPhases(phases);
@@ -221,17 +222,17 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkTimingRestrictions(final Card c, final SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
 
-        if (this.isPlayerTurn() && !AllZone.getPhaseHandler().isPlayerTurn(activator)) {
+        if (this.isPlayerTurn() && !Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }
 
-        if (this.isOpponentTurn() && AllZone.getPhaseHandler().isPlayerTurn(activator)) {
+        if (this.isOpponentTurn() && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }
 
         if (this.getPhases().size() > 0) {
             boolean isPhase = false;
-            final String currPhase = AllZone.getPhaseHandler().getPhase();
+            final String currPhase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
             for (final String s : this.getPhases()) {
                 if (s.equals(currPhase)) {
                     isPhase = true;

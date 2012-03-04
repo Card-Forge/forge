@@ -84,7 +84,7 @@ public class CardFactoryPlaneswalkers {
                 @Override
                 public void resolve() {
                     card.addCounterFromNonEffect(Counters.LOYALTY, 0);
-                    turn[0] = AllZone.getPhaseHandler().getTurn();
+                    turn[0] = Singletons.getModel().getGameState().getPhaseHandler().getTurn();
 
                     final Player player = card.getController();
                     final PlayerZone lib = player.getZone(Constant.Zone.Library);
@@ -116,7 +116,7 @@ public class CardFactoryPlaneswalkers {
                     // looks like standard Planeswalker stuff...
                     // maybe should check if library is empty, or 1 card?
                     return AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhaseHandler().getTurn()) && PhaseHandler.canCastSorcery(card.getController());
+                            && (turn[0] != Singletons.getModel().getGameState().getPhaseHandler().getTurn()) && PhaseHandler.canCastSorcery(card.getController());
                 } // canPlay()
             };
             final StringBuilder ab1 = new StringBuilder();
@@ -143,7 +143,7 @@ public class CardFactoryPlaneswalkers {
                 @Override
                 public void resolve() {
                     // card.subtractCounter(Counters.LOYALTY, 2);
-                    turn[0] = AllZone.getPhaseHandler().getTurn();
+                    turn[0] = Singletons.getModel().getGameState().getPhaseHandler().getTurn();
 
                     final Card target = this.getTargetCard();
                     Singletons.getModel().getGameAction().sacrifice(target);
@@ -186,7 +186,7 @@ public class CardFactoryPlaneswalkers {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (card.getCounters(Counters.LOYALTY) >= 2) && (turn[0] != AllZone.getPhaseHandler().getTurn())
+                            && (card.getCounters(Counters.LOYALTY) >= 2) && (turn[0] != Singletons.getModel().getGameState().getPhaseHandler().getTurn())
                             && PhaseHandler.canCastSorcery(card.getController());
                 } // canPlay()
             };
@@ -209,7 +209,7 @@ public class CardFactoryPlaneswalkers {
                 @Override
                 public void resolve() {
                     // card.subtractCounter(Counters.LOYALTY, 4);
-                    turn[0] = AllZone.getPhaseHandler().getTurn();
+                    turn[0] = Singletons.getModel().getGameState().getPhaseHandler().getTurn();
 
                     final Player target = this.getTargetPlayer();
                     final Player player = card.getController();
@@ -232,7 +232,7 @@ public class CardFactoryPlaneswalkers {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (card.getCounters(Counters.LOYALTY) >= 4) && (turn[0] != AllZone.getPhaseHandler().getTurn())
+                            && (card.getCounters(Counters.LOYALTY) >= 4) && (turn[0] != Singletons.getModel().getGameState().getPhaseHandler().getTurn())
                             && PhaseHandler.canCastSorcery(card.getController());
                 } // canPlay()
             };

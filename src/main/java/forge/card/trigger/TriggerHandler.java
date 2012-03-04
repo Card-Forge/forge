@@ -327,7 +327,7 @@ public class TriggerHandler {
             return;
         }
 
-        final Player playerAP = AllZone.getPhaseHandler().getPlayerTurn();
+        final Player playerAP = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
         if (playerAP == null) {
             // This should only happen outside of games, so it's safe to just
@@ -469,7 +469,7 @@ public class TriggerHandler {
         final Player[] controller = new Player[1];
 
         // Any trigger should cause the phase not to skip
-        AllZone.getPhaseHandler().setSkipPhase(false);
+        Singletons.getModel().getGameState().getPhaseHandler().setSkipPhase(false);
 
         regtrig.setRunParams(runParams);
 

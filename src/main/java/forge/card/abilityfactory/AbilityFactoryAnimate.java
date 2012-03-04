@@ -32,6 +32,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
+import forge.Singletons;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -321,21 +322,21 @@ public final class AbilityFactoryAnimate {
 
         // don't use instant speed animate abilities outside computers
         // Combat_Begin step
-        if (!AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_BEGIN)
-                && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && !AbilityFactory.isSorcerySpeed(sa)
+        if (!Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_BEGIN)
+                && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && !AbilityFactory.isSorcerySpeed(sa)
                 && !params.containsKey("ActivationPhases") && !params.containsKey("Permanent")) {
             return false;
         }
 
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if ((!AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || (AllZone.getCombat()
-                .getAttackers().isEmpty())) && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+        if ((!Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || (AllZone.getCombat()
+                .getAttackers().isEmpty())) && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
             return false;
         }
 
         // don't activate during main2 unless this effect is permanent
-        if (AllZone.getPhaseHandler().is(Constant.Phase.MAIN2) && !params.containsKey("Permanent")) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.MAIN2) && !params.containsKey("Permanent")) {
             return false;
         }
 
@@ -344,7 +345,7 @@ public final class AbilityFactoryAnimate {
 
             boolean bFlag = false;
             for (final Card c : defined) {
-                bFlag |= (!c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == AllZone.getPhaseHandler().getTurn()));
+                bFlag |= (!c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == Singletons.getModel().getGameState().getPhaseHandler().getTurn()));
 
                 // for creatures that could be improved (like Figure of Destiny)
                 if (c.isCreature() && (params.containsKey("Permanent") || (!c.isTapped() && !c.isSick()))) {
