@@ -195,6 +195,7 @@ public enum CSubmenuDraft implements ICSubmenu {
 
         Constant.Runtime.setGameType(GameType.Draft);
         GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+        Singletons.getView().getOverlay().hideOverlay();
     }
 
     /** */
