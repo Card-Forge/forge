@@ -357,6 +357,9 @@ public final class AbilityFactoryPlay {
         }
 
         for (int i = 0; i < amount; i++) {
+            if (tgtCards.isEmpty()) {
+                return;
+            }
             Card tgtCard = tgtCards.get(0);
             if (tgtCards.size() > 1) {
                 if (controller.isHuman()) {
@@ -384,13 +387,17 @@ public final class AbilityFactoryPlay {
                         }
                     });
                     tgtCard = CardFactoryUtil.getBestAI(tgtCards);
+                    if (tgtCard == null) {
+                        return;
+                    }
                 }
             }
             final StringBuilder sb = new StringBuilder();
             sb.append("Do you want to play " + tgtCard + "?");
             if (controller.isHuman() && optional
                     && !GameActionUtil.showYesNoDialog(source, sb.toString())) {
-                return;
+                i--;
+                continue;
             }
             // lands will be played
             if (tgtCard.isLand()) {
@@ -398,7 +405,8 @@ public final class AbilityFactoryPlay {
                 if (remember && controller.canPlayLand()) {
                     source.addRemembered(tgtCard);
                 }
-                return;
+                tgtCards.remove(tgtCard);
+                continue;
             }
 
             // get basic spells (no flashback, etc.)
@@ -415,6 +423,7 @@ public final class AbilityFactoryPlay {
             if (sas.isEmpty()) {
                 return;
             }
+            tgtCards.remove(tgtCard);
             SpellAbility tgtSA = null;
             // only one mode can be used
             if (sas.size() == 1) {
