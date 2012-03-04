@@ -57,6 +57,7 @@ import forge.gui.home.quest.VSubmenuQuestPrefs;
 import forge.gui.home.settings.VSubmenuAvatars;
 import forge.gui.home.settings.VSubmenuPreferences;
 import forge.gui.home.utilities.VSubmenuDeckEditor;
+import forge.gui.home.utilities.VSubmenuExit;
 import forge.gui.home.utilities.VSubmenuUtilities;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
@@ -126,6 +127,7 @@ public enum ViewHomeUI {
 
         allSubmenus.add(VSubmenuDeckEditor.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuUtilities.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuExit.SINGLETON_INSTANCE);
 
         // Parent layout
         pnlParent.setCornerDiameter(0);
@@ -284,8 +286,11 @@ public enum ViewHomeUI {
                 cards.show(pnlRight, item.getItemEnum());
                 lblPreviousSelected = lbl;
 
-                prefs.setPref(FPref.SUBMENU_CURRENTMENU, item.getItemEnum());
-                Singletons.getModel().getPreferences().save();
+                // Save for next time Forge is opened (unless it's exit ;) )
+                if (!item.getItemEnum().equals(EMenuItem.UTILITIES_EXIT.toString())) {
+                    prefs.setPref(FPref.SUBMENU_CURRENTMENU, item.getItemEnum());
+                    Singletons.getModel().getPreferences().save();
+                }
 
                 // Make sure this is called last, so it doesn't interfere
                 // with the selection display process.

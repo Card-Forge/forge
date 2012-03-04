@@ -19,5 +19,6 @@ public enum EMenuItem { /** */
     SETTINGS_AVATARS, /** */
 
     UTILITIES_EDITOR, /** */
-    UTILITIES_DOWNLOADS
+    UTILITIES_DOWNLOADS, /** */
+    UTILITIES_EXIT
 }

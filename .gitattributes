@@ -11470,8 +11470,10 @@ src/main/java/forge/gui/home/settings/VSubmenuAvatars.java -text
 src/main/java/forge/gui/home/settings/VSubmenuPreferences.java -text
 src/main/java/forge/gui/home/settings/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/utilities/CSubmenuDeckEditor.java -text
+src/main/java/forge/gui/home/utilities/CSubmenuExit.java -text
 src/main/java/forge/gui/home/utilities/CSubmenuUtilities.java -text
 src/main/java/forge/gui/home/utilities/VSubmenuDeckEditor.java -text
+src/main/java/forge/gui/home/utilities/VSubmenuExit.java -text
 src/main/java/forge/gui/home/utilities/VSubmenuUtilities.java -text
 src/main/java/forge/gui/home/utilities/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
