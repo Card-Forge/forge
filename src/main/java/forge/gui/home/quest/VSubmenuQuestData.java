@@ -5,17 +5,22 @@ import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.toolbox.*;
+import forge.item.PreconDeck;
 import forge.quest.data.QuestData;
-
+import forge.util.IStorageView;
 import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.text.WordUtils;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
-/** 
+/**
  * Singleton instance of "Colors" submenu in "Constructed" group.
- *
  */
 public enum VSubmenuQuestData implements IVSubmenu {
     /** */
@@ -81,14 +86,34 @@ public enum VSubmenuQuestData implements IVSubmenu {
         radClassic.setSelected(true);
 
         final ActionListener preconListener = new ActionListener() {
-            @Override public void actionPerformed(ActionEvent actionEvent) {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
                 cbxPrecon.setEnabled(radPreconStart.isSelected());
             }
         };
 
-        for (String preconDeck : QuestData.getPrecons().getNames()) {
+        final Map<String, String> preconDescriptions = new HashMap<String, String>();
+        IStorageView<PreconDeck> preconDecks = QuestData.getPrecons();
+        for (String preconDeck : preconDecks.getNames()) {
             cbxPrecon.addItem(preconDeck);
+            String description = preconDecks.get(preconDeck).getDescription();
+            description = "<html>" + WordUtils.wrap(description, 40, "<br>", false) + "</html>";
+            preconDescriptions.put(preconDeck, description);
         }
+
+        cbxPrecon.setRenderer(new BasicComboBoxRenderer() {
+            @Override
+            public Component getListCellRendererComponent(
+                    JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                Component defaultComponent =
+                        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (-1 < index && null != value) {
+                    String val = (String) value;
+                    list.setToolTipText(preconDescriptions.get(val));
+                }
+                return defaultComponent;
+            }
+        });
 
         final ButtonGroup group3 = new ButtonGroup();
         group3.add(radCompleteStart);
@@ -178,37 +203,51 @@ public enum VSubmenuQuestData implements IVSubmenu {
         return CSubmenuQuestData.SINGLETON_INSTANCE;
     }
 
-    /** @return {@link forge.gui.home.quest.QuestFileLister} */
+    /**
+     * @return {@link forge.gui.home.quest.QuestFileLister}
+     */
     public QuestFileLister getLstQuests() {
         return this.lstQuests;
     }
 
-    /** @return {@link javax.swing.JRadioButton} */
+    /**
+     * @return {@link javax.swing.JRadioButton}
+     */
     public JRadioButton getRadEasy() {
         return radEasy;
     }
 
-    /** @return {@link javax.swing.JRadioButton} */
+    /**
+     * @return {@link javax.swing.JRadioButton}
+     */
     public JRadioButton getRadMedium() {
         return radMedium;
     }
 
-    /** @return {@link javax.swing.JRadioButton} */
+    /**
+     * @return {@link javax.swing.JRadioButton}
+     */
     public JRadioButton getRadHard() {
         return radHard;
     }
 
-    /** @return {@link javax.swing.JRadioButton} */
+    /**
+     * @return {@link javax.swing.JRadioButton}
+     */
     public JRadioButton getRadExpert() {
         return radExpert;
     }
 
-    /** @return {@link javax.swing.JRadioButton} */
+    /**
+     * @return {@link javax.swing.JRadioButton}
+     */
     public JRadioButton getRadFantasy() {
         return radFantasy;
     }
 
-    /** @return {@link javax.swing.JRadioButton} */
+    /**
+     * @return {@link javax.swing.JRadioButton}
+     */
     public JRadioButton getRadClassic() {
         return radClassic;
     }
@@ -217,7 +256,9 @@ public enum VSubmenuQuestData implements IVSubmenu {
         return radCompleteStart;
     }
 
-    /** @return {@link javax.swing.JCheckBox} */
+    /**
+     * @return {@link javax.swing.JCheckBox}
+     */
     public JRadioButton getRadStandardStart() {
         return radStandardStart;
     }
@@ -225,13 +266,14 @@ public enum VSubmenuQuestData implements IVSubmenu {
     public JRadioButton getRadPreconStart() {
         return radPreconStart;
     }
-    
+
     public String getPrecon() {
         return (String) cbxPrecon.getSelectedItem();
     }
-    
 
-    /** @return {@link forge.gui.toolbox.FLabel} */
+    /**
+     * @return {@link forge.gui.toolbox.FLabel}
+     */
     public FLabel getBtnEmbark() {
         return btnEmbark;
     }
