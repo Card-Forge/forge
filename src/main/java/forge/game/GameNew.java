@@ -334,6 +334,7 @@ public class GameNew {
         gs.getStack().reset();
         gs.getCombat().reset();
         gs.getGameLog().reset();
+        gs.setGameOver(false);
 
         for (final Player p : gs.getPlayers()) {
             for (final Zone z : Player.ALL_ZONES) {

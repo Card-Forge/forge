@@ -763,6 +763,10 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean checkEndGameState() {
+        // if game is already over return true
+        if (Singletons.getModel().getGameState().isGameOver()) {
+            return true;
+        }
         // Win / Lose
         final GameSummary game = Singletons.getModel().getGameSummary();
         boolean humanWins = false;
@@ -799,6 +803,7 @@ public class GameAction {
 
         final boolean isGameDone = humanWins || computerWins;
         if (isGameDone) {
+            Singletons.getModel().getGameState().setGameOver(true);
             game.getPlayerRating(computer.getName()).setLossReason(computer.getLossState(),
                     computer.getLossConditionSource());
             game.getPlayerRating(human.getName()).setLossReason(human.getLossState(), human.getLossConditionSource());

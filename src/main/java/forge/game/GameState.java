@@ -60,6 +60,7 @@ public class GameState {
     private final ReplacementHandler replacementHandler = new ReplacementHandler();
     private Combat combat = new Combat();
     private final GameLog gameLog = new GameLog();
+    private boolean gameOver = false;
 
     private final PlayerZone stackZone = new DefaultPlayerZone(Constant.Zone.Stack, null);
 
@@ -280,6 +281,20 @@ public class GameState {
      */
     public ReplacementHandler getReplacementHandler() {
         return replacementHandler;
+    }
+
+    /**
+     * @return the gameOver
+     */
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    /**
+     * @param go the gameOver to set
+     */
+    public void setGameOver(boolean go) {
+        this.gameOver = go;
     }
 
 }
