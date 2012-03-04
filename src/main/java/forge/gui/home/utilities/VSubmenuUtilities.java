@@ -54,11 +54,11 @@ public enum VSubmenuUtilities implements IVSubmenu {
     private final FLabel btnImportPictures = new FLabel.Builder().opaque(true).hoverable(true)
             .text("Import Pictures").fontScaleFactor(0.5).build();
     private final FLabel btnHowToPlay = new FLabel.Builder().opaque(true)
-            .hoverable(true).text("How To Play").build();
+            .hoverable(true).fontScaleFactor(0.5).text("How To Play").build();
     private final FLabel btnDownloadPrices = new FLabel.Builder().opaque(true).hoverable(true)
             .text("Download Card Prices").fontScaleFactor(0.5).build();
     private final FLabel btnLicensing = new FLabel.Builder().opaque(true)
-            .hoverable(true).text("License Details").build();
+            .hoverable(true).fontScaleFactor(0.5).text("License Details").build();
 
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#populate()
