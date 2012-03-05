@@ -4,7 +4,7 @@ Types:Sorcery
 Text:no text
 A:SP$ ChangeZoneAll | Cost$ 3 B B | ChangeType$ Creature | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBSacrifice | SpellDescription$ Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
 SVar:DBSacrifice:DB$SacrificeAll | ValidCards$ Creature | SubAbility$ DBReturn
-SVar:DBReturn:DB$ChangeZoneAll | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBReturn:DB$ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_death.jpg
