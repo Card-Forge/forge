@@ -2452,23 +2452,40 @@ public class Card extends GameEntity implements Comparable<Card> {
         final StringBuilder sbMana = new StringBuilder();
 
         for (int i = 0; i < keyword.size(); i++) {
-            if (!keyword.get(i).toString().contains("Permanents don't untap during their controllers' untap steps")
-                    && !keyword.get(i).toString().contains("PreventAllDamageBy")
-                    && !keyword.get(i).toString().contains("CantBlock")
-                    && !keyword.get(i).toString().contains("CantBeBlockedBy")) {
-                if (keyword.get(i).toString().contains("CostChange")) {
+            if (!keyword.get(i).toString().startsWith("Permanents don't untap during their controllers' untap steps")
+                    && !keyword.get(i).toString().startsWith("PreventAllDamageBy")
+                    && !keyword.get(i).toString().startsWith("CantBlock")
+                    && !keyword.get(i).toString().startsWith("CantBeBlockedBy")) {
+                if (keyword.get(i).toString().startsWith("CostChange")) {
                     final String[] k = keyword.get(i).split(":");
                     if (k[k.length - 1].toString().startsWith("Desc|")) {
                         final String[] kk = k[k.length - 1].split("\\|");
                         sbLong.append(kk[1]).append("\r\n");
                     }
-                } else if (keyword.get(i).toString().contains("StaticEffect")) {
-                    final String[] k = keyword.get(i).split(":");
-                    sbLong.append(k[5]).append("\r\n");
-                } else if (keyword.get(i).toString().contains("Protection:")) {
+                } else if (keyword.get(i).toString().startsWith("etbCounter")) {
+                    final String[] p = keyword.get(i).split(":");
+                    final StringBuilder s = new StringBuilder();
+                    if (p.length > 4) {
+                        s.append(p[4]);
+                    } else {
+                        final Counters counter = Counters.valueOf(p[1]);
+                        final String numCounters = p[2];
+                        s.append(this.getName());
+                        s.append(" enters the battlefield with ");
+                        s.append(numCounters);
+                        s.append(" ");
+                        s.append(counter.getName());
+                        s.append(" counter");
+                        if ("1" != numCounters) {
+                            s.append("s");
+                        }
+                        s.append(" on it.");
+                    }
+                    sbLong.append(s).append("\r\n");;
+                } else if (keyword.get(i).toString().startsWith("Protection:")) {
                     final String[] k = keyword.get(i).split(":");
                     sbLong.append(k[2]).append("\r\n");
-                } else if (keyword.get(i).toString().contains("Creatures can't attack unless their controller pays")) {
+                } else if (keyword.get(i).toString().startsWith("Creatures can't attack unless their controller pays")) {
                     final String[] k = keyword.get(i).split(":");
                     if (!k[3].equals("no text")) {
                         sbLong.append(k[3]).append("\r\n");

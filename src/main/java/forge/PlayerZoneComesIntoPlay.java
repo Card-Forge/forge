@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Constant.Zone;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
@@ -107,8 +108,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             eachPlayer = true;
             addMax = 1;
         }
-        // 7/13: fastbond code removed, fastbond should be unlimited and will be
-        // handled elsewhere.
 
         if (adjustLandPlays) {
             if (eachPlayer) {
@@ -122,6 +121,24 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         if (this.trigger) {
             c.setSickness(true); // summoning sickness
             c.comesIntoPlay();
+            for (String keyword : c.getKeyword()) {
+                if (keyword.startsWith("etbCounter")) {
+                    final String[] p = keyword.split(":");
+                    final Counters counter = Counters.valueOf(p[1]);
+                    final String numCounters = p[2];
+                    final String condition = p.length > 3 ? p[3] : "";
+                    if (GameActionUtil.specialConditionsMet(c, condition)) {
+                        int toAdd = 0;
+                        if (numCounters.equals("X")) {
+                            toAdd = CardFactoryUtil.xCount(c, c.getSVar("X"));
+                        } else {
+                            toAdd = Integer.parseInt(numCounters);
+                        }
+    
+                        c.addCounter(counter, toAdd);
+                    }
+                }
+            }
 
             if (c.isLand()) {
                 CardList list = player.getCardsIn(Zone.Battlefield);
@@ -129,9 +146,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 list = list.filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
-                        return c.hasKeyword("Landfall")
-                                || c.hasKeyword("Landfall - Whenever a land enters the battlefield under your control, "
-                                        + "CARDNAME gets +2/+2 until end of turn.");
+                        return c.hasKeyword("Landfall");
                     }
                 });
 
@@ -158,7 +173,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                     sb.append(source).append(" - tap all lands ");
                     sb.append(tisLand.getController()).append(" controls.");
                     ability.setStackDescription(sb.toString());
-
                     AllZone.getStack().addSimultaneousStackEntry(ability);
 
                 }
@@ -185,10 +199,8 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                     // ability is before it is in play
                     if (oLands.size() <= (pLands.size() - 1)) {
                         AllZone.getStack().addSimultaneousStackEntry(ability);
-
                     }
                 }
-
             } // isLand()
         }
 
@@ -198,49 +210,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 AllZone.getStaticEffects().addStateBasedEffect(effect);
             }
         }
-
-        /*final CardList meek = player.getCardsIn(Zone.Graveyard, "Sword of the Meek");
-
-        if ((meek.size() > 0) && c.isCreature() && (c.getNetAttack() == 1) && (c.getNetDefense() == 1)) {
-            for (int i = 0; i < meek.size(); i++) {
-                final Card crd = meek.get(i);
-
-                final Ability ability = new Ability(meek.get(i), "0") {
-                    @Override
-                    public void resolve() {
-                        if (crd.getController().isHuman()) {
-                            if (GameActionUtil.showYesNoDialog(crd, "Attach " + crd + " to " + c + "?")) {
-                                if (player.getZone(Zone.Graveyard).contains(crd) && AllZoneUtil.isCardInPlay(c)
-                                        && c.isCreature() && (c.getNetAttack() == 1) && (c.getNetDefense() == 1)) {
-                                    AllZone.getGameAction().moveToPlay(crd);
-
-                                    crd.equipCard(c);
-                                }
-                            }
-
-                        } else {
-                            if (player.getZone(Zone.Graveyard).contains(crd) && AllZoneUtil.isCardInPlay(c)
-                                    && c.isCreature() && (c.getNetAttack() == 1) && (c.getNetDefense() == 1)) {
-                                AllZone.getGameAction().moveToPlay(crd);
-
-                                crd.equipCard(c);
-                            }
-                        }
-                    }
-                };
-
-                final StringBuilder sb = new StringBuilder();
-                sb.append(crd);
-                sb.append(" - Whenever a 1/1 creature enters the battlefield under your control, you may ");
-                sb.append("return Sword of the Meek from your graveyard to the battlefield, ");
-                sb.append("then attach it to that creature.");
-                ability.setStackDescription(sb.toString());
-
-                AllZone.getStack().addSimultaneousStackEntry(ability);
-
-            }
-        }*/
-
     } // end add()
 
     /** {@inheritDoc} */
@@ -270,8 +239,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             eachPlayer = true;
             addMax = -1;
         }
-        // 7/12: fastbond code removed, fastbond should be unlimited and will be
-        // handled elsewhere.
 
         if (adjustLandPlays) {
             if (eachPlayer) {
@@ -296,14 +263,12 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 final Command comm = GameActionUtil.getCommands().get(tempEffect);
                 comm.execute();
             }
-
         }
 
         for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
             final Command com = GameActionUtil.getCommands().get(effect);
             com.execute();
         }
-
     }
 
     /**

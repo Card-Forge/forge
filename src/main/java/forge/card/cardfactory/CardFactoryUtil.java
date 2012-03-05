@@ -5188,14 +5188,7 @@ public class CardFactoryUtil {
 
                 final int m = Integer.parseInt(parse.substring(8));
 
-                card.addComesIntoPlayCommand(new Command() {
-                    private static final long serialVersionUID = 339412525059881775L;
-
-                    @Override
-                    public void execute() {
-                        card.addCounter(Counters.P1P1, m);
-                    }
-                });
+                card.addIntrinsicKeyword("etbCounter:P1P1:" + m);
 
                 final SpellAbility ability = new Ability(card, "0") {
                     @Override
@@ -5234,40 +5227,35 @@ public class CardFactoryUtil {
                         }
                     }
                 });
-
             }
-
         } // Modular
 
         /*
          * WARNING: must keep this keyword processing before etbCounter keyword
          * processing.
          */
-        if (CardFactoryUtil.hasKeyword(card, "Graft") != -1) {
-            final int n = CardFactoryUtil.hasKeyword(card, "Graft");
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
+        final int graft = CardFactoryUtil.hasKeyword(card, "Graft");
+        if (graft != -1) {
+            final String parse = card.getKeyword().get(graft).toString();
 
-                final int m = Integer.parseInt(parse.substring(6));
-                final String abStr = "AB$ MoveCounter | Cost$ 0 | Source$ Self | "
-                        + "Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1";
-                card.setSVar("GraftTrig", abStr);
+            final int m = Integer.parseInt(parse.substring(6));
+            final String abStr = "AB$ MoveCounter | Cost$ 0 | Source$ Self | "
+                    + "Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1";
+            card.setSVar("GraftTrig", abStr);
 
-                String trigStr = "Mode$ ChangesZone | ValidCard$ Creature.Other | "
-                        + "Origin$ Any | Destination$ Battlefield";
-                trigStr += " | TriggerZones$ Battlefield | OptionalDecider$ You | "
-                        + "Execute$ GraftTrig | TriggerDescription$ ";
-                trigStr += "Whenever another creature enters the battlefield, you "
-                        + "may move a +1/+1 counter from this creature onto it.";
-                final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
-                card.addTrigger(myTrigger);
+            String trigStr = "Mode$ ChangesZone | ValidCard$ Creature.Other | "
+                    + "Origin$ Any | Destination$ Battlefield";
+            trigStr += " | TriggerZones$ Battlefield | OptionalDecider$ You | "
+                    + "Execute$ GraftTrig | TriggerDescription$ ";
+            trigStr += "Whenever another creature enters the battlefield, you "
+                    + "may move a +1/+1 counter from this creature onto it.";
+            final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
+            card.addTrigger(myTrigger);
 
-                card.addIntrinsicKeyword("etbCounter:P1P1:" + m);
-            }
-
+            card.addIntrinsicKeyword("etbCounter:P1P1:" + m);
         }
 
-        final int etbCounter = CardFactoryUtil.hasKeyword(card, "etbCounter");
+        /*final int etbCounter = CardFactoryUtil.hasKeyword(card, "etbCounter");
         // etbCounter:CounterType:CounterAmount:Condition:Description
         // enters the battlefield with CounterAmount of CounterType
         if (etbCounter != -1) {
@@ -5318,7 +5306,7 @@ public class CardFactoryUtil {
 
                 }
             }); // ComesIntoPlayCommand
-        } // if etbCounter
+        } // if etbCounter*/
 
         final int bloodthirst = CardFactoryUtil.hasKeyword(card, "Bloodthirst");
         if (bloodthirst != -1) {
