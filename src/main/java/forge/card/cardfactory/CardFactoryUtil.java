@@ -4077,78 +4077,6 @@ public class CardFactoryUtil {
         return "";
     }
 
-    /*
-     * //whenever CARDNAME becomes the target of a spell or ability, ... :
-     * public static void checkTargetingEffects(SpellAbility sa, final Card c) {
-     * 
-     * //if (AllZoneUtil.isCardInPlay(c)) //{ if (c.hasKeyword(
-     * "When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand."
-     * ) ) { // || (c.isCreature() && AllZoneUtil.isCardInPlay("Cowardice"))
-     * SpellAbility ability = new Ability(c, "0") { public void resolve() {
-     * Singletons.getModel().getGameAction().moveToHand(c); } }; StringBuilder
-     * sb = new StringBuilder();
-     * sb.append(c).append(" - return CARDNAME to its owner's hand.");
-     * ability.setStackDescription(sb.toString());
-     * 
-     * AllZone.getStack().add(ability); } if (c.hasKeyword(
-     * "When CARDNAME becomes the target of a spell or ability, destroy CARDNAME."
-     * ) || AllZoneUtil.isCardInPlay("Horobi, Death's Wail")) {
-     * 
-     * SpellAbility ability = new Ability(c, "0") { public void resolve() {
-     * Singletons.getModel().getGameAction().destroy(c); } }; StringBuilder sb =
-     * new StringBuilder(); sb.append(c).append(" - destroy CARDNAME.");
-     * ability.setStackDescription(sb.toString());
-     * 
-     * AllZone.getStack().add(ability); } if (c.hasKeyword(
-     * "When CARDNAME becomes the target of a spell or ability, sacrifice it."))
-     * { SpellAbility ability = new Ability(c, "0") { public void resolve() {
-     * Singletons.getModel().getGameAction().sacrifice(c); } }; StringBuilder sb
-     * = new StringBuilder(); sb.append(c).append(" - sacrifice CARDNAME.");
-     * ability.setStackDescription(sb.toString());
-     * 
-     * AllZone.getStack().add(ability); }
-     * 
-     * //When enchanted creature becomes the target of a spell or ability,
-     * <destroy/exile/sacrifice> <that creature/CARDNAME>. (It can't be
-     * regenerated.) ArrayList<Card> auras = c.getEnchantedBy(); for(int
-     * a=0;a<auras.size();a++) { final Card aura = auras.get(a);
-     * ArrayList<String> keywords = aura.getKeyword(); for(int
-     * i=0;i<keywords.size();i++) { final String keyword = keywords.get(i);
-     * if(keyword.startsWith(
-     * "When enchanted creature becomes the target of a spell or ability, ")) {
-     * final String action[] = new String[1]; action[0] = keyword.substring(66);
-     * String stackDesc = action[0]; stackDesc = stackDesc.replace("that",
-     * "enchanted"); stackDesc =
-     * stackDesc.substring(0,1).toUpperCase().concat(stackDesc.substring(1));
-     * stackDesc =
-     * aura.getName().concat(" (").concat(Integer.toString(aura.getUniqueNumber
-     * ())).concat(") - ").concat(stackDesc);
-     * 
-     * Ability saTrigger = new Ability(aura,"0") { public void resolve() { Card
-     * target = null; boolean noRegen = false;
-     * if(action[0].endsWith(" It can't be regenerated.")) { noRegen = true;
-     * action[0] = action[0].substring(0,action[0].length()-25); }
-     * 
-     * if(action[0].endsWith("CARDNAME.")) { target = aura; } else
-     * if(action[0].endsWith("that creature.")) { target = c; } else { throw new
-     * IllegalArgumentException("There is a problem in the keyword " + keyword +
-     * "for card \"" + c.getName() + "\""); }
-     * 
-     * if(action[0].startsWith("exile")) {
-     * Singletons.getModel().getGameAction().exile(target); } else
-     * if(action[0].startsWith("destroy")) { if(noRegen) {
-     * Singletons.getModel().getGameAction().destroyNoRegeneration(target); }
-     * else { Singletons.getModel().getGameAction().destroy(target); } } else
-     * if(action[0].startsWith("sacrifice")) {
-     * Singletons.getModel().getGameAction().sacrifice(target); } else { throw
-     * new IllegalArgumentException("There is a problem in the keyword " +
-     * keyword + "for card \"" + c.getName() + "\""); } } };
-     * 
-     * saTrigger.setStackDescription(stackDesc);
-     * 
-     * AllZone.getStack().add(saTrigger); } } } //} }
-     */
-
     /**
      * <p>
      * Copies stats like power, toughness, etc.
@@ -5188,7 +5116,7 @@ public class CardFactoryUtil {
 
                 final int m = Integer.parseInt(parse.substring(8));
 
-                card.addIntrinsicKeyword("etbCounter:P1P1:" + m);
+                card.addIntrinsicKeyword("etbCounter:P1P1:" + m + ":no Condition: ");
 
                 final SpellAbility ability = new Ability(card, "0") {
                     @Override

@@ -1549,23 +1549,6 @@ public final class GameActionUtil {
         }
     }; // Old Man of the Sea
 
-    /** Constant <code>homarid</code>. */
-    private static Command homarid = new Command() {
-        private static final long serialVersionUID = 7156319758035295773L;
-
-        @Override
-        public void execute() {
-            final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield, "Homarid");
-
-            for (final Card homarid : list) {
-                final int tide = homarid.getCounters(Counters.TIDE);
-                if (tide == 4) {
-                    homarid.setCounter(Counters.TIDE, 0, true);
-                }
-            }
-        } // execute()
-    };
-
     /** Constant <code>liuBei</code>. */
     private static Command liuBei = new Command() {
 
@@ -1723,7 +1706,6 @@ public final class GameActionUtil {
         GameActionUtil.getCommands().put("Ajani_Avatar_Token", GameActionUtil.ajaniAvatarToken);
         GameActionUtil.getCommands().put("Alpha_Status", GameActionUtil.alphaStatus);
         GameActionUtil.getCommands().put("Coat_of_Arms", GameActionUtil.coatOfArms);
-        GameActionUtil.getCommands().put("Homarid", GameActionUtil.homarid);
 
         GameActionUtil.getCommands().put("Liu_Bei", GameActionUtil.liuBei);
         GameActionUtil.getCommands().put("Old_Man_of_the_Sea", GameActionUtil.oldManOfTheSea);
