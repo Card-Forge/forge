@@ -33,6 +33,8 @@ import forge.Constant.Zone;
 import forge.PhaseHandler;
 import forge.Player;
 import forge.Singletons;
+import forge.card.replacement.ReplacementEffect;
+import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
@@ -350,6 +352,7 @@ public class AbilityFactoryEffect {
         String[] effectSVars = null;
         String[] effectKeywords = null;
         String[] effectStaticAbilities = null;
+        String[] effectReplacementEffects = null;
         String effectRemembered = null;
 
         if (params.containsKey("Abilities")) {
@@ -362,6 +365,10 @@ public class AbilityFactoryEffect {
 
         if (params.containsKey("StaticAbilities")) {
             effectStaticAbilities = params.get("StaticAbilities").split(",");
+        }
+        
+        if (params.containsKey("ReplacementEffects")) {
+            effectReplacementEffects = params.get("ReplacementEffects").split(",");
         }
 
         if (params.containsKey("SVars")) {
@@ -432,6 +439,16 @@ public class AbilityFactoryEffect {
         if (effectStaticAbilities != null) {
             for (final String s : effectStaticAbilities) {
                 eff.addStaticAbility(af.getHostCard().getSVar(s));
+            }
+        }
+        
+        // Grant replacement effects
+        if (effectReplacementEffects != null) {
+            for (final String s : effectReplacementEffects) {
+                final String actualReplacement = af.getHostCard().getSVar(s);
+                
+                final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff);
+                eff.addReplacementEffect(parsedReplacement);
             }
         }
 

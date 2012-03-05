@@ -6559,6 +6559,7 @@ res/cardsfolder/p/pitfall_trap.txt svneol=native#text/plain
 res/cardsfolder/p/pith_driller.txt svneol=native#text/plain
 res/cardsfolder/p/pithing_needle.txt svneol=native#text/plain
 res/cardsfolder/p/pixie_queen.txt svneol=native#text/plain
+res/cardsfolder/p/plagiarize.txt -text svneol=unset#text/plain
 res/cardsfolder/p/plague_beetle.txt svneol=native#text/plain
 res/cardsfolder/p/plague_dogs.txt svneol=native#text/plain
 res/cardsfolder/p/plague_fiend.txt svneol=native#text/plain
