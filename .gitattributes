@@ -6938,6 +6938,7 @@ res/cardsfolder/r/rampant_elephant.txt -text
 res/cardsfolder/r/rampant_growth.txt svneol=native#text/plain
 res/cardsfolder/r/rampart_crawler.txt svneol=native#text/plain
 res/cardsfolder/r/ramses_overdark.txt svneol=native#text/plain
+res/cardsfolder/r/rancid_earth.txt -text svneol=unset#text/plain
 res/cardsfolder/r/rancor.txt svneol=native#text/plain
 res/cardsfolder/r/ranger_en_vec.txt svneol=native#text/plain
 res/cardsfolder/r/ranger_of_eos.txt svneol=native#text/plain
