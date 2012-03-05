@@ -10,8 +10,8 @@ Deck Type=constructed
 Set=ROE
 Image=levelers_glory.jpg
 [main]
-8 Island
-10 Plains
+8 Island|ROE
+10 Plains|ROE
 1 Affa Guard Hound|ROE
 1 Alluring Siren|M10
 2 Caravan Escort|ROE

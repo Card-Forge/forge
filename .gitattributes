@@ -10540,6 +10540,7 @@ res/pics/precons/relic_breaker.jpg -text
 res/pics/precons/repel_the_dark.jpg -text
 res/pics/precons/spectral_legions.jpg -text
 res/pics/precons/swift_justice.jpg -text
+res/pics/precons/totem_power.jpg -text
 res/pics/precons/unnatural_schemes.jpg -text
 res/pics/tokens/g_0_1_plant_wall.jpg -text
 res/pics/tokens/g_0_2_plant_wall.jpg -text
@@ -10959,6 +10960,7 @@ res/quest/precons/Relic[!!-~]Breaker.dck -text
 res/quest/precons/Repel[!!-~]the[!!-~]Dark.dck -text
 res/quest/precons/Spectral[!!-~]Legions.dck -text
 res/quest/precons/Swift[!!-~]Justice.dck -text
+res/quest/precons/Totem[!!-~]Power.dck -text
 res/quest/precons/Unnatural[!!-~]Schemes.dck -text
 res/quest/price.txt svneol=native#text/plain
 res/quest/quest-opponent-icons.txt -text
