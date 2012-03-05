@@ -69,6 +69,24 @@ Fixes/Features:
 - Marked all retrace spellAbilities as non basic.
 - Fixed Moonbow Illusionist.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Infinite Hourglass.
+- AI Improvements of AF Pump.
+- Added the precon Naya Domain.
+- Added the precon Jund Appetite for War.
+- Added the precon Grixis Shambling Army.
+- Added the precon Esper Air Assault.
+- Fixed gainControlStackDescription accidentally modifying the targets of the spell.
+- Fixed Feral Hydra's type.
+- More work on the AI of AF Pump.
+- CheckStyle.
+- Updated some SVars and scripts.
+- fixed targeting of Telim'Tor's Edict
+- fatpacks list updated
+- Small fix to restart util for skin switching.
+- Added the new marbles skin.
+- Turns out one must explicitly rename things on TortoiseSVN.
+- Generate5ColorDeck will now always use all 5 colors.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -84,6 +102,9 @@ Aura Thief
 Blood Feud
 Prey Upon
 Karrthus, Tyrant of Jund
+Enduring Renewal
+Retraced Image
+Outmaneuver
 
 
 end
