@@ -1137,6 +1137,7 @@ res/cardsfolder/b/budoka_gardener_dokai_weaver_of_life.txt -text
 res/cardsfolder/b/budoka_pupil_ichiga_who_topples_oaks.txt -text
 res/cardsfolder/b/bull_aurochs.txt svneol=native#text/plain
 res/cardsfolder/b/bull_cerodon.txt svneol=native#text/plain
+res/cardsfolder/b/bull_elephant.txt -text
 res/cardsfolder/b/bull_hippo.txt svneol=native#text/plain
 res/cardsfolder/b/bull_rush.txt svneol=native#text/plain
 res/cardsfolder/b/bullwhip.txt svneol=native#text/plain
