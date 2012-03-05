@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.List;
 
-import forge.error.ErrorViewer;
-
 /** 
  * Restarts a java app.
  * Credit: http://leolewis.website.org/wordpress/2011/07/06/programmatically-restart-a-java-application/
@@ -63,7 +61,7 @@ public class RestartUtil {
                     try {
                         Runtime.getRuntime().exec(cmd.toString());
                     } catch (final IOException e) {
-                        e.printStackTrace();
+                        //e.printStackTrace();
                     }
                 }
             });
@@ -74,7 +72,7 @@ public class RestartUtil {
             // exit
             System.exit(0);
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex, "Restart \"%s\" exception", "");
+            //ErrorViewer.showError(ex, "Restart \"%s\" exception", "");
         }
     }
 }
