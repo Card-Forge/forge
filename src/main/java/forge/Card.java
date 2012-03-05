@@ -2481,7 +2481,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                         s.append(" on it.");
                     }
-                    sbLong.append(s).append("\r\n");;
+                    sbLong.append(s).append("\r\n");
                 } else if (keyword.get(i).toString().startsWith("Protection:")) {
                     final String[] k = keyword.get(i).split(":");
                     sbLong.append(k[2]).append("\r\n");
