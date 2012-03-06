@@ -1541,6 +1541,17 @@ public final class AbilityFactoryChangeZone {
                 return false;
             }
             list = list.getController(AllZone.getHumanPlayer());
+            list = list.filter(new CardListFilter() {
+                @Override
+                public boolean addCard(final Card c) {
+                    for (Card aura : c.getEnchantedBy()) {
+                        if (c.getOwner().isHuman() && aura.getController().isComputer()) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            });
         }
 
         // Only care about combatants during combat
