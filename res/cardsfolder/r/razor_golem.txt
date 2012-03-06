@@ -1,10 +1,10 @@
 Name:Razor Golem
 ManaCost:6
 Types:Artifact Creature Golem
-Text:Affinity for Plains (This spell costs 1 less to cast for each Plains you control.)
+Text:no text
 PT:3/4
 K:Vigilance
-K:CostChange:Player:Less:1:Self:All:All:Affinity/Plains
+K:CostChange:Player:Less:1:Self:All:All:Affinity/Plains:Affinity for Plains (This spell costs 1 less to cast for each Plains you control.)
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razor_golem.jpg
