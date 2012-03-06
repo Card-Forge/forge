@@ -19,8 +19,12 @@ package forge.gui.toolbox;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -44,6 +48,7 @@ public class FOverlay extends JPanel {
         super();
         this.setOpaque(false);
         this.setVisible(false);
+        this.setFocusTraversalKeysEnabled(false);
         this.btnClose = new JButton("X");
         this.btnClose.setForeground(Color.white);
         this.btnClose.setBorder(BorderFactory.createLineBorder(Color.white));
@@ -55,6 +60,17 @@ public class FOverlay extends JPanel {
             @Override
             public void mousePressed(final MouseEvent e) {
                 FOverlay.this.hideOverlay();
+            }
+        });
+
+        // Block all input events below the overlay
+        this.addMouseListener(new MouseAdapter() { });
+        this.addMouseMotionListener(new MouseMotionAdapter() { });
+        this.addKeyListener(new KeyAdapter() { });
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(final ComponentEvent evt) {
+                requestFocusInWindow();
             }
         });
     }
