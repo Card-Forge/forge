@@ -220,6 +220,7 @@ public final class QuestUtilCards {
     void addPreconDeck(PreconDeck precon) {
         this.q.getMyDecks().add(precon.getDeck());
         this.addAllCards(precon.getDeck().getMain().toFlatList());
+        this.addAllCards(precon.getDeck().getSideboard().toFlatList());
     }
 
     /**
