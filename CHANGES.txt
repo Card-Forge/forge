@@ -87,6 +87,28 @@ Fixes/Features:
 - Turns out one must explicitly rename things on TortoiseSVN.
 - Generate5ColorDeck will now always use all 5 colors.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- The etbCounter keyword is now parsed when needed (and is now visible for the AI).
+- Converted the triggered ability of Homarid to script.
+- Fixed Living Death.
+- Updated some SVars.
+- Fixed Memory Jar.
+- Added the precon Totem Power.
+- Fixed Toshiro Umezawa.
+- CheckStyle.
+- Fixed Soldevi Digger.
+- Removed "random selector on list update" from constructed submenu deck lists.
+- Bugfix: constructed submenu, start game with custom decks empty NPE
+- Bugfix: current skin wasn't selected in skin select box
+- Cleanup: removed redundant UI_USE_SKIN in prefs enum.
+- All events below overlay layer are now blocked.
+- Overlay utils moved from GuiUtils to OverlayUtils.
+- Minor fix.
+- All methods relating to overlay moved to OverlayUtil.
+- Splash frame: Disclaimer color updated to be the same as filled progress bar text color.
+- Restructuring in AF Pump and little improvements for Curses.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -105,6 +127,9 @@ Karrthus, Tyrant of Jund
 Enduring Renewal
 Retraced Image
 Outmaneuver
+Rancid Earth
+Bull Elephant
+Plagiarize
 
 
 end
