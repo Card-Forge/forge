@@ -1,9 +1,9 @@
 Name:Quicksilver Behemoth
 ManaCost:6 U
 Types:Creature Beast
-Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+Text:no text
+K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
 PT:4/5
-K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelayedTrig | TriggerDescription$ When CARDNAME attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
 T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelayedTrig | Secondary$ True | TriggerDescription$ When CARDNAME attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
 SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to its owner's hand at end of combat. (Return it only if it's on the battlefield.)

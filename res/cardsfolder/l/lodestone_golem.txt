@@ -1,9 +1,9 @@
 Name:Lodestone Golem
 ManaCost:4
 Types:Artifact Creature Golem
-Text:Nonartifact spells cost 1 more to cast.
+Text:no text
 PT:5/3
-K:CostChange:All:More:1:Spell:All:Artifact:NonType
+K:CostChange:All:More:1:Spell:All:Artifact:NonType:Nonartifact spells cost 1 more to cast.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lodestone_golem.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/127.jpg
