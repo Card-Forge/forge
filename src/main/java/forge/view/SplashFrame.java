@@ -34,6 +34,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import forge.gui.toolbox.FProgressBar;
 import forge.gui.toolbox.FSkin;
@@ -50,7 +51,6 @@ public class SplashFrame extends JFrame {
     private static final int DISCLAIMER_HEIGHT = 20;
     private static final int DISCLAIMER_TOP = 300;
     private static final int DISCLAIMER_FONT_SIZE = 9;
-    private static final Color DISCLAIMER_COLOR = Color.white;
 
     private static final int CLOSEBTN_PADDING_Y = 15;
     private static final int CLOSEBTN_SIDELENGTH = 15;
@@ -100,7 +100,7 @@ public class SplashFrame extends JFrame {
 
         lblDisclaimer.setFont(new Font("Tahoma", Font.PLAIN, SplashFrame.DISCLAIMER_FONT_SIZE));
         lblDisclaimer.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDisclaimer.setForeground(SplashFrame.DISCLAIMER_COLOR);
+        lblDisclaimer.setForeground(UIManager.getColor("ProgressBar.selectionForeground"));
         pnlContent.add(lblDisclaimer);
 
         // Add close button
