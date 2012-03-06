@@ -75,7 +75,7 @@ public class ComputerAIGeneral implements Computer {
      *            a {@link java.lang.String} object.
      */
     private void playCards() {
-        final CardList list = getAvailableSpellAbilities();
+        final CardList list = getAvailableCards();
 
         final boolean nextPhase = ComputerUtil.playSpellAbilities(getSpellAbilities(list));
 
@@ -125,7 +125,7 @@ public class ComputerAIGeneral implements Computer {
      * 
      * @return a {@link forge.CardList} object.
      */
-    private CardList getAvailableSpellAbilities() {
+    private CardList getAvailableCards() {
         final Player computer = AllZone.getComputerPlayer();
         final Player human = AllZone.getHumanPlayer();
         CardList all = computer.getCardsIn(Zone.Hand);
@@ -351,7 +351,7 @@ public class ComputerAIGeneral implements Computer {
      */
     public final void stackResponse() {
         // if top of stack is empty
-        final CardList cards = getAvailableSpellAbilities();
+        final CardList cards = getAvailableCards();
         if (AllZone.getStack().size() == 0) {
             final ArrayList<SpellAbility> sas = this.getSpellAbilities(cards);
             boolean pass = (sas.size() == 0)

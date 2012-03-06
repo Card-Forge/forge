@@ -269,10 +269,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        if (!checkZoneRestrictions(c, sa)) {
-            return false;
-        }
-
         Player activator = sa.getActivatingPlayer();
         if (activator == null) {
             activator = c.getController();
@@ -289,6 +285,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (!this.isAnyPlayer() && !activator.equals(c.getController())
                 && !c.hasKeyword("May be played by your opponent")) {
+            return false;
+        }
+
+        if (!checkZoneRestrictions(c, sa)) {
             return false;
         }
 

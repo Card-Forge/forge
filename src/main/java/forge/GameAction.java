@@ -1339,7 +1339,7 @@ public class GameAction {
      * @return an ArrayList<SpellAbility>.
      * get alternative costs as additional spell abilities
      */
-    public final ArrayList<SpellAbility> getAlternativeCosts(SpellAbility sa) {
+    public static final ArrayList<SpellAbility> getAlternativeCosts(SpellAbility sa) {
         ArrayList<SpellAbility> alternatives = new ArrayList<SpellAbility>();
         Card source = sa.getSourceCard();
         if (!sa.isBasicSpell()) {

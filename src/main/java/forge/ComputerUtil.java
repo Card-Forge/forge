@@ -63,64 +63,21 @@ public class ComputerUtil {
     public static boolean playSpellAbilities(final SpellAbility[] all) {
         // not sure "playing biggest spell" matters?
         ComputerUtil.sortSpellAbilityByCost(all);
-
-        for (final SpellAbility sa : all) {
+        final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        for (SpellAbility sa : all) {
+            //add alternative costs as additional spell abilities
+            abilities.addAll(GameAction.getAlternativeCosts(sa));
+            abilities.add(sa);
+        }
+        for (final SpellAbility sa : abilities) {
             // Don't add Counterspells to the "normal" playcard lookups
             final AbilityFactory af = sa.getAbilityFactory();
             if ((af != null) && af.getAPI().equals("Counter")) {
                 continue;
             }
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
-            final Card source = sa.getSourceCard();
 
-            boolean flashb = false;
-
-            if (source.hasStartOfKeyword("May be played without paying its mana cost")) {
-                final SpellAbility newSA = sa.copy();
-                final Cost cost = sa.getPayCosts();
-                for (final CostPart part : cost.getCostParts()) {
-                    if (part instanceof CostMana) {
-                        ((CostMana) part).setMana("0");
-                    }
-                }
-                cost.setNoManaCostChange(true);
-                newSA.setManaCost("0");
-                final StringBuilder sb = new StringBuilder();
-                sb.append(sa.getDescription()).append(" (without paying its mana cost)");
-                newSA.setDescription(sb.toString());
-                if (ComputerUtil.canBePlayedAndPayedByAI(newSA)) {
-                    ComputerUtil.handlePlayingSpellAbility(newSA);
-
-                    return false;
-                }
-            }
-
-            // Flashback
-            if (source.isInZone(Constant.Zone.Graveyard) && sa.isSpell() && (source.isInstant() || source.isSorcery())) {
-                for (final String keyword : source.getKeyword()) {
-                    if (keyword.startsWith("Flashback")) {
-                        final SpellAbility flashback = sa.copy();
-                        flashback.setActivatingPlayer(AllZone.getComputerPlayer());
-                        flashback.setFlashBackAbility(true);
-                        if (!keyword.equals("Flashback")) { // there is a
-                                                            // flashback cost
-                                                            // (and not the
-                                                            // cards
-                                                            // cost)
-                            final Cost fbCost = new Cost(keyword.substring(10), source.getName(), false);
-                            flashback.setPayCosts(fbCost);
-                        }
-                        if (ComputerUtil.canBePlayedAndPayedByAI(flashback)) {
-                            ComputerUtil.handlePlayingSpellAbility(flashback);
-
-                            return false;
-                        }
-                        flashb = true;
-                    }
-                }
-            }
-
-            if ((!flashb || source.hasStartOfKeyword("May be played")) && ComputerUtil.canBePlayedAndPayedByAI(sa)) {
+            if (ComputerUtil.canBePlayedAndPayedByAI(sa)) {
                 ComputerUtil.handlePlayingSpellAbility(sa);
 
                 if (!(sa instanceof AbilityStatic)) {
@@ -277,35 +234,17 @@ public class ComputerUtil {
     public static boolean playCounterSpell(final ArrayList<SpellAbility> possibleCounters) {
         SpellAbility bestSA = null;
         int bestRestriction = Integer.MIN_VALUE;
-
-        for (final SpellAbility sa : possibleCounters) {
+        final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        for (SpellAbility sa : possibleCounters) {
+            //add alternative costs as additional spell abilities
+            abilities.addAll(GameAction.getAlternativeCosts(sa));
+            abilities.add(sa);
+        }
+        for (final SpellAbility sa : abilities) {
             SpellAbility currentSA = sa;
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
-            final Card source = sa.getSourceCard();
-
-            // Flashback
-            if (source.isInZone(Constant.Zone.Graveyard) && sa.isSpell() && (source.isInstant() || source.isSorcery())) {
-                for (final String keyword : source.getKeyword()) {
-                    if (keyword.startsWith("Flashback")) {
-                        final SpellAbility flashback = sa.copy();
-                        flashback.setActivatingPlayer(AllZone.getComputerPlayer());
-                        flashback.setFlashBackAbility(true);
-                        if (!keyword.equals("Flashback")) { // there is a
-                                                            // flashback cost
-                                                            // (and not the
-                                                            // cards
-                                                            // cost)
-                            final Cost fbCost = new Cost(keyword.substring(10), source.getName(), false);
-                            flashback.setPayCosts(fbCost);
-                        }
-                        currentSA = flashback;
-                    }
-                }
-            }
-
-            if (ComputerUtil.canBePlayedAndPayedByAI(currentSA)) { // checks
-                                                                   // everything
-                                                                   // nescessary
+            // check everything necessary
+            if (ComputerUtil.canBePlayedAndPayedByAI(currentSA)) {
                 if (bestSA == null) {
                     bestSA = currentSA;
                     bestRestriction = ComputerUtil.counterSpellRestriction(currentSA);
