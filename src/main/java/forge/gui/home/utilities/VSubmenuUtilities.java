@@ -18,7 +18,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
-import forge.gui.GuiUtils;
+import forge.gui.OverlayUtils;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
@@ -179,7 +179,7 @@ public enum VSubmenuUtilities implements IVSubmenu {
 
     /** */
     public void showLicensing() {
-        final FOverlay overlay = GuiUtils.genericOverlay();
+        final FOverlay overlay = OverlayUtils.genericOverlay();
         final int w = overlay.getWidth();
 
         final String license = "Forge License Information" + "\r\n\r\n"
@@ -230,7 +230,7 @@ public enum VSubmenuUtilities implements IVSubmenu {
 
     /** */
     public void showHowToPlay() {
-        final FOverlay overlay = GuiUtils.genericOverlay();
+        final FOverlay overlay = OverlayUtils.genericOverlay();
         final int w = overlay.getWidth();
 
         final String directions = ForgeProps.getLocalized(Lang.HowTo.MESSAGE);
