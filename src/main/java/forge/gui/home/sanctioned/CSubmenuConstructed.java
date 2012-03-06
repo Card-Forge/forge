@@ -376,6 +376,8 @@ public enum CSubmenuConstructed implements ICSubmenu {
 
         final Deck deck;
 
+        if (selection.length == 0) { return null; }
+
         // Color deck
         if (lst0.getName().equals(ESubmenuConstructedTypes.COLORS.toString()) && colorCheck(selection)) {
             // Replace "random" with "AI" for deck generation code
