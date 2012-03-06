@@ -50,7 +50,6 @@ public class ForgePreferences {
         UI_RANDOM_FOIL ("false"), /** */
         UI_LAYOUT_PARAMS ("0.15,0.55,0.68,0.73,0.44,0.40"), /** */
         UI_SMOOTH_LAND ("false"), /** */
-        UI_USE_SKIN ("default"), /** */
         UI_AVATARS ("0,1"), /** */
         UI_CARD_OVERLAY ("true"), /** */
         UI_UPLOAD_DRAFT ("false"), /** */

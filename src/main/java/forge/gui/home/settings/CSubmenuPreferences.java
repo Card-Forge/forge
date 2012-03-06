@@ -184,7 +184,7 @@ public enum CSubmenuPreferences implements ICSubmenu {
 
         for (int i = 0; i < uglyNames.length; i++) {
             prettyNames[i] = WordUtils.capitalize(uglyNames[i].replace('_', ' '));
-            if (currentName.equalsIgnoreCase(uglyNames[i])) { currentIndex = i; }
+            if (currentName.equalsIgnoreCase(prettyNames[i])) { currentIndex = i; }
         }
 
         view.getLstChooseSkin().setListData(prettyNames);
