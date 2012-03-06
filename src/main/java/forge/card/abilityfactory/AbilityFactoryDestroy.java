@@ -30,6 +30,7 @@ import forge.CardListFilter;
 import forge.CardUtil;
 import forge.ComputerUtil;
 import forge.Constant.Zone;
+import forge.Counters;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -197,6 +198,14 @@ public class AbilityFactoryDestroy {
         if (abTgt != null) {
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             list = list.getNotKeyword("Indestructible");
+            if (!AbilityFactory.playReusable(sa)) {
+                list = list.filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return (!c.hasKeyword("Undying") || c.getCounters(Counters.P1P1) > 0);
+                    }
+                });
+            }
 
             // If NoRegen is not set, filter out creatures that have a
             // regeneration shield
@@ -281,7 +290,7 @@ public class AbilityFactoryDestroy {
             chance &= subAb.chkAIDrawback();
         }
 
-        return ((r.nextFloat() < .6667) && chance);
+        return chance;
     }
 
     /**
