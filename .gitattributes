@@ -5483,6 +5483,7 @@ res/cardsfolder/m/merrow_wavebreakers.txt svneol=native#text/plain
 res/cardsfolder/m/merrow_witsniper.txt svneol=native#text/plain
 res/cardsfolder/m/mesa_enchantress.txt svneol=native#text/plain
 res/cardsfolder/m/mesa_falcon.txt svneol=native#text/plain
+res/cardsfolder/m/mesmeric_fiend.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mesmeric_orb.txt svneol=native#text/plain
 res/cardsfolder/m/mesmeric_sliver.txt -text
 res/cardsfolder/m/mesmeric_trance.txt svneol=native#text/plain
