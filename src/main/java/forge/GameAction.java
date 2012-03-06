@@ -1361,16 +1361,18 @@ public class GameAction {
                 }
                 alternatives.add(flashback);
             }
-            if (sa.isSpell() && keyword.startsWith("May be played without paying its mana cost")) {
+            if (sa.isSpell() && keyword.equals("May be played without paying its mana cost")) {
                 final SpellAbility newSA = sa.copy();
                 SpellAbilityRestriction sar = new SpellAbilityRestriction();
                 sar.setVariables(sa.getRestrictions());
                 sar.setZone(null);
                 newSA.setRestrictions(sar);
                 final Cost cost = new Cost("", source.getName(), false);
-                for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                    if (!(part instanceof CostMana)) {
-                        cost.getCostParts().add(part);
+                if (newSA.getPayCosts() != null) {
+                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
+                        if (!(part instanceof CostMana)) {
+                            cost.getCostParts().add(part);
+                        }
                     }
                 }
                 cost.setNoManaCostChange(true);
@@ -1378,6 +1380,27 @@ public class GameAction {
                 newSA.setPayCosts(cost);
                 newSA.setManaCost("");
                 newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+                alternatives.add(newSA);
+            }
+            if (sa.isSpell() && keyword.startsWith("May be played without paying its mana cost and as though it has flash")) {
+                final SpellAbility newSA = sa.copy();
+                SpellAbilityRestriction sar = new SpellAbilityRestriction();
+                sar.setVariables(sa.getRestrictions());
+                sar.setInstantSpeed(true);
+                newSA.setRestrictions(sar);
+                final Cost cost = new Cost("", source.getName(), false);
+                if (newSA.getPayCosts() != null) {
+                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
+                        if (!(part instanceof CostMana)) {
+                            cost.getCostParts().add(part);
+                        }
+                    }
+                }
+                cost.setNoManaCostChange(true);
+                newSA.setBasicSpell(false);
+                newSA.setPayCosts(cost);
+                newSA.setManaCost("");
+                newSA.setDescription(sa.getDescription() + " (without paying its mana cost and as though it has flash)");
                 alternatives.add(newSA);
             }
         }

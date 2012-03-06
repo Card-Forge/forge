@@ -186,9 +186,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * <p>
      * checkZoneRestrictions.
      * </p>
-     * 
-     * @param cardZone
-     *            a PlayerZone object.
      * @param c
      *            a {@link forge.Card} object.
      * @param sa
