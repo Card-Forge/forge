@@ -2461,10 +2461,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (k.length > 8) {
                         sbLong.append(k[8]).append("\r\n");
                     }
-                    //if (k[k.length - 1].toString().startsWith("Desc|")) {
-                    //    final String[] kk = k[k.length - 1].split("\\|");
-                    //    sbLong.append(kk[1]).append("\r\n");
-                    //}
                 } else if (keyword.get(i).toString().startsWith("etbCounter")) {
                     final String[] p = keyword.get(i).split(":");
                     final StringBuilder s = new StringBuilder();
@@ -2761,7 +2757,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (keyword.startsWith("CostChange")) {
                 final String[] k = keyword.split(":");
                 if (k.length > 8) {
-                    sb.append(k[8]);
+                    sb.append(k[8]).append("\r\n");
                 }
             }
             if ((keyword.startsWith("Ripple") && !sb.toString().contains("Ripple"))
