@@ -259,7 +259,10 @@ public class AbilityFactoryPump {
      */
     public boolean containsUsefulKeyword(final ArrayList<String> keywords, final Card card, final SpellAbility sa) {
         for (final String keyword : keywords) {
-            if (isUsefulKeyword(keyword, card, sa)) {
+            if (!sa.getAbilityFactory().isCurse() && isUsefulPumpKeyword(keyword, card, sa)) {
+                return true;
+            }
+            if (sa.getAbilityFactory().isCurse() && isUsefulCurseKeyword(keyword, card, sa)) {
                 return true;
             }
         }
@@ -276,7 +279,49 @@ public class AbilityFactoryPump {
      * @param sa SpellAbility
      * @return true, if is useful keyword
      */
-    public boolean isUsefulKeyword(final String keyword, final Card card, final SpellAbility sa) {
+    public boolean isUsefulCurseKeyword(final String keyword, final Card card, final SpellAbility sa) {
+        final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
+        final Player computer = AllZone.getComputerPlayer();
+        final Player human = AllZone.getHumanPlayer();
+        int attack = getNumAttack(sa);
+        //int defense = getNumDefense(sa);
+        if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
+            return false;
+        } else if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
+            if (ph.isPlayerTurn(computer) || !CombatUtil.canAttack(card)
+                    || (card.getNetCombatDamage() <= 0)
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+                return false;
+            }
+        } else if (keyword.endsWith("CARDNAME can't block.")) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canBlock(card)
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+                return false;
+            }
+        } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
+            if (ph.isBefore(Constant.Phase.MAIN2) || card.isUntapped() || ph.isPlayerTurn(human)) {
+                return false;
+            }
+        } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if is useful keyword.
+     * 
+     * @param keyword
+     *            the keyword
+     * @param card
+     *            the card
+     * @param sa SpellAbility
+     * @return true, if is useful keyword
+     */
+    public boolean isUsefulPumpKeyword(final String keyword, final Card card, final SpellAbility sa) {
         final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
         final Player computer = AllZone.getComputerPlayer();
         final Player human = AllZone.getHumanPlayer();
@@ -374,23 +419,6 @@ public class AbilityFactoryPump {
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
                     || !AllZone.getCombat().getAttackerList().getKeyword("Flying").isEmpty()
                     || !card.hasKeyword("Flying")) {
-                return false;
-            }
-        } else if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
-            if (card.getController().isComputer() || ph.isPlayerTurn(computer) || !CombatUtil.canAttack(card)
-                    || (card.getNetCombatDamage() <= 0)) {
-                return false;
-            }
-        } else if (keyword.endsWith("CARDNAME can't block.")) {
-            if (card.getController().isComputer() || ph.isPlayerTurn(human) || !CombatUtil.canBlock(card)) {
-                return false;
-            }
-        } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
-            if (ph.isBefore(Constant.Phase.MAIN2) || card.isUntapped() || ph.isPlayerTurn(human)) {
-                return false;
-            }
-        } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)) {
                 return false;
             }
         } else if (keyword.equals("Shroud") || keyword.equals("Heyproof")) {
