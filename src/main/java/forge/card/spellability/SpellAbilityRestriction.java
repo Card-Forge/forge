@@ -195,7 +195,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public final boolean checkZoneRestrictions(final PlayerZone cardZone, final Card c, final SpellAbility sa) {
+    public final boolean checkZoneRestrictions(final Card c, final SpellAbility sa) {
+        if (this.getZone() == null) {
+            return true;
+        }
+        PlayerZone cardZone = AllZone.getZoneOf(c);
         if (!cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
             // Not a Spell, or on Battlefield, return false
@@ -265,14 +269,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        final PlayerZone cardZone = AllZone.getZoneOf(c);
-        if (!checkZoneRestrictions(cardZone, c, sa)) {
-            if (!sa.isSpell() || cardZone.is(Zone.Battlefield) || !this.getZone().equals(Zone.Hand)) {
-                return false;
-            } else if (!c.hasKeyword("May be played without paying its mana cost")
-                    && !(c.hasStartOfKeyword("Flashback") && cardZone.is(Zone.Graveyard))) {
-                return false;
-            }
+        if (!checkZoneRestrictions(c, sa)) {
+            return false;
         }
 
         Player activator = sa.getActivatingPlayer();
@@ -318,7 +316,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
-        if (this.getProwl() != null) {
+        if (this.getProwl() != null && !this.getProwl().isEmpty()) {
             // only true if the activating player has damaged the opponent with
             // one of the specified types
             boolean prowlFlag = false;

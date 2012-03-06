@@ -1327,15 +1327,62 @@ public class GameAction {
         return this.sacrificeDestroy(c);
     }
 
-
-
     private boolean startCut = false;
 
+    /**
+     * <p>
+     * getAlternativeCosts.
+     * </p>
+     * 
+     * @param sa
+     *            a SpellAbility.
+     * @return an ArrayList<SpellAbility>.
+     * get alternative costs as additional spell abilities
+     */
+    public final ArrayList<SpellAbility> getAlternativeCosts(SpellAbility sa) {
+        ArrayList<SpellAbility> alternatives = new ArrayList<SpellAbility>();
+        Card source = sa.getSourceCard();
+        if (!sa.isBasicSpell()) {
+            return alternatives;
+        }
+        for (final String keyword : source.getKeyword()) {
+            if (sa.isSpell() && keyword.startsWith("Flashback")) {
+                final SpellAbility flashback = sa.copy();
+                flashback.setFlashBackAbility(true);
+                SpellAbilityRestriction sar = new SpellAbilityRestriction();
+                sar.setVariables(sa.getRestrictions());
+                sar.setZone(Constant.Zone.Graveyard);
+                flashback.setRestrictions(sar);
 
-    // if Card had the type "Aura" this method would always return true, since
-    // local enchantments are always attached to something
-    // if Card is "Equipment", returns true if attached to something
-
+                // there is a flashback cost (and not the cards cost)
+                if (!keyword.equals("Flashback")) {
+                    final Cost fbCost = new Cost(keyword.substring(10), source.getName(), false);
+                    flashback.setPayCosts(fbCost);
+                }
+                alternatives.add(flashback);
+            }
+            if (sa.isSpell() && keyword.startsWith("May be played without paying its mana cost")) {
+                final SpellAbility newSA = sa.copy();
+                SpellAbilityRestriction sar = new SpellAbilityRestriction();
+                sar.setVariables(sa.getRestrictions());
+                sar.setZone(null);
+                newSA.setRestrictions(sar);
+                final Cost cost = new Cost("", source.getName(), false);
+                for (final CostPart part : newSA.getPayCosts().getCostParts()) {
+                    if (!(part instanceof CostMana)) {
+                        cost.getCostParts().add(part);
+                    }
+                }
+                cost.setNoManaCostChange(true);
+                newSA.setBasicSpell(false);
+                newSA.setPayCosts(cost);
+                newSA.setManaCost("");
+                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+                alternatives.add(newSA);
+            }
+        }
+        return alternatives;
+    }
 
     /**
      * <p>
@@ -1349,7 +1396,8 @@ public class GameAction {
     public final boolean playCard(final Card c) {
         // this can only be called by the Human
         final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-        final SpellAbility[] abilities = this.canPlaySpellAbility(c.getSpellAbility());
+        final ArrayList<SpellAbility> basicAbilities = c.getSpellAbilities();
+        final ArrayList<SpellAbility> abilities = c.getSpellAbilities();
         final ArrayList<String> choices = new ArrayList<String>();
         final Player human = AllZone.getHumanPlayer();
         final PlayerZone zone = AllZone.getZoneOf(c);
@@ -1359,56 +1407,15 @@ public class GameAction {
                 choices.add("Play land");
             }
         }
-
+        for (SpellAbility sa : basicAbilities) {
+            //add alternative costs as additional spell abilities
+            abilities.addAll(getAlternativeCosts(sa));
+        }
         for (final SpellAbility sa : abilities) {
-            // for uncastables like lotus bloom, check if manaCost is blank
             sa.setActivatingPlayer(human);
-            if (sa.canPlay() && (!sa.isSpell() || !sa.getManaCost().equals(""))) {
-                boolean extraMode = false;
-
-                // check for flashback keywords
-                if (zone.is(Constant.Zone.Graveyard) && sa.isSpell()
-                        && (c.isInstant() || c.isSorcery())) {
-                    for (final String keyword : c.getKeyword()) {
-                        if (keyword.startsWith("Flashback")) {
-                            if (sa.isBasicSpell()) {
-                                final SpellAbility flashback = sa.copy();
-                                flashback.setFlashBackAbility(true);
-
-                                // there is a flashback cost (and not the cards
-                                // cost)
-                                if (!keyword.equals("Flashback")) {
-                                    final Cost fbCost = new Cost(keyword.substring(10), c.getName(), false);
-                                    flashback.setPayCosts(fbCost);
-                                }
-                                choices.add(flashback.toString());
-                                map.put(flashback.toString(), flashback);
-                            }
-                            extraMode = true;
-                        }
-                    }
-                }
-                if (c.hasStartOfKeyword("May be played without paying its mana cost")) {
-                    final SpellAbility newSA = sa.copy();
-                    final Cost cost = new Cost("", c.getName(), false);
-                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                        if (!(part instanceof CostMana)) {
-                            cost.getCostParts().add(part);
-                        }
-                    }
-                    cost.setNoManaCostChange(true);
-                    newSA.setPayCosts(cost);
-                    newSA.setManaCost("");
-                    newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
-                    choices.add(newSA.toString());
-                    map.put(newSA.toString(), newSA);
-                    extraMode = true;
-                }
-                SpellAbilityRestriction restrictions = sa.getRestrictions();
-                if (!extraMode || (restrictions != null && restrictions.checkZoneRestrictions(zone, c, sa))) {
-                    choices.add(sa.toString());
-                    map.put(sa.toString(), sa);
-                }
+            if (sa.canPlay()) {
+                choices.add(sa.toString());
+                map.put(sa.toString(), sa);
             }
         }
 

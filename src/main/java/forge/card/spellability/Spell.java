@@ -104,6 +104,10 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         if (!this.getRestrictions().canPlay(card, this)) {
             return false;
         }
+        // for uncastables like lotus bloom, check if manaCost is blank
+        if (isBasicSpell() && getManaCost().equals("")) {
+            return false;
+        }
 
         if (this.getPayCosts() != null) {
             if (!CostPayment.canPayAdditionalCosts(this.getPayCosts(), this)) {

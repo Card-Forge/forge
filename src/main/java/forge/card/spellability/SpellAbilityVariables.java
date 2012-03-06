@@ -20,6 +20,7 @@ package forge.card.spellability;
 import java.util.ArrayList;
 
 import forge.Constant;
+import forge.Constant.Zone;
 
 /**
  * <p>
@@ -43,6 +44,42 @@ public class SpellAbilityVariables {
      * </p>
      */
     public SpellAbilityVariables() {
+    }
+
+    /**
+     * 
+     * @param sav
+     * SpellAbilityVariables
+     */
+    public void setVariables(SpellAbilityVariables sav) {
+        this.zone = sav.getZone();
+        this.phases = new ArrayList<String>(sav.getPhases());
+        this.sorcerySpeed = sav.isSorcerySpeed();
+        this.instantSpeed = sav.isInstantSpeed();
+        this.anyPlayer = sav.isAnyPlayer();
+        this.opponentTurn = sav.isOpponentTurn();
+        this.playerTurn = sav.isPlayerTurn();
+        this.activationLimit = sav.getActivationLimit();
+        this.numberTurnActivations = sav.getNumberTurnActivations();
+        this.activationNumberSacrifice = sav.getActivationNumberSacrifice();
+        this.cardsInHand = sav.getCardsInHand();
+        this.threshold = sav.isThreshold();
+        this.metalcraft = sav.isThreshold();
+        this.hellbent = sav.isHellbent();
+        this.prowl = new ArrayList<String>(sav.getProwl());
+        this.isPresent = sav.getIsPresent();
+        this.presentCompare = sav.getPresentCompare();
+        this.presentDefined = sav.getPresentDefined();
+        this.presentZone = sav.getPresentZone();
+        this.sVarToCheck = sav.getsVarToCheck();
+        this.sVarOperator = sav.getsVarOperator();
+        this.sVarOperand = sav.getsVarOperand();
+        this.lifeTotal = sav.getLifeTotal();
+        this.lifeAmount = sav.getLifeAmount();
+        this.manaSpent = sav.getManaSpent();
+        this.pwAbility = sav.isPwAbility();
+        this.allM12Empires = sav.isAllM12Empires();
+        this.notAllM12Empires = sav.isNotAllM12Empires();
     }
 
     // default values for Sorcery speed abilities
@@ -89,7 +126,7 @@ public class SpellAbilityVariables {
     private boolean hellbent = false;
 
     /** The prowl. */
-    private ArrayList<String> prowl = null;
+    private ArrayList<String> prowl = new ArrayList<String>();
 
     /** The s is present. */
     private String isPresent = null;
