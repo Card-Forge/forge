@@ -213,8 +213,8 @@ public enum CSubmenuConstructed implements ICSubmenu {
         btn.setCommand(new Command() { @Override
                     public void execute() { randomSelectColors(lst); } });
 
-        // Init with a random select.
-        randomSelectColors(lst);
+        // Init basic two color deck
+        lst.setSelectedIndices(new int[]{0, 1});
     }
 
     /** Handles all control for "themes" radio button click. */
@@ -242,8 +242,8 @@ public enum CSubmenuConstructed implements ICSubmenu {
         btn.setCommand(new Command() { @Override
                     public void execute() { randomSelectRegular(lst); } });
 
-        // Init with a random select.
-        randomSelectRegular(lst);
+        // Init first in list
+        lst.setSelectedIndex(0);
     }
 
     /** Handles all control for "custom" radio button click. */
@@ -269,8 +269,8 @@ public enum CSubmenuConstructed implements ICSubmenu {
         btn.setCommand(new Command() { @Override
                     public void execute() { randomSelectRegular(lst); } });
 
-        // Init with a random select.
-        randomSelectRegular(lst);
+        // Init first in list
+        lst.setSelectedIndex(0);
     }
 
     /** Handles all control for "quest event" radio button click. */
@@ -302,8 +302,8 @@ public enum CSubmenuConstructed implements ICSubmenu {
         btn.setCommand(new Command() { @Override
                     public void execute() { randomSelectRegular(lst); } });
 
-        // Init with a random select.
-        randomSelectRegular(lst);
+        // Init first in list
+        lst.setSelectedIndex(0);
     }
     /** 
      * Checks lengths of selected values for color lists
