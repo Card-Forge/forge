@@ -23,6 +23,7 @@ import forge.deck.DeckGroup;
 import forge.game.GameNew;
 import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
+import forge.gui.OverlayUtils;
 import forge.gui.deckeditor.DeckEditorBase;
 import forge.gui.deckeditor.DeckEditorLimited;
 import forge.gui.home.ICSubmenu;
@@ -47,7 +48,7 @@ public enum CSubmenuSealed implements ICSubmenu {
         @Override
         public void execute() {
             update();
-            GuiUtils.closeOverlay();
+            OverlayUtils.closeOverlay();
         }
     };
 
@@ -140,7 +141,7 @@ public enum CSubmenuSealed implements ICSubmenu {
             return;
         }
 
-        GuiUtils.startGameOverlay().showOverlay();
+        OverlayUtils.startGameOverlay().showOverlay();
 
         Constant.Runtime.HUMAN_DECK[0] = human;
         Constant.Runtime.COMPUTER_DECK[0] = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().get(0);

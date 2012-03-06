@@ -19,6 +19,7 @@ import forge.game.GameType;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
 import forge.gui.GuiUtils;
+import forge.gui.OverlayUtils;
 import forge.gui.deckeditor.DraftingProcess;
 import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FOverlay;
@@ -78,7 +79,7 @@ public enum CSubmenuDraft implements ICSubmenu {
         @Override
         public void execute() {
             update();
-            GuiUtils.closeOverlay();
+            OverlayUtils.closeOverlay();
         }
     };
 
@@ -182,7 +183,7 @@ public enum CSubmenuDraft implements ICSubmenu {
             return;
         }
 
-        GuiUtils.startGameOverlay().showOverlay();
+        OverlayUtils.startGameOverlay().showOverlay();
 
         DeckGroup opponentDecks = Singletons.getModel().getDecks().getDraft().get(human.getName());
 

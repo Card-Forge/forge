@@ -44,6 +44,7 @@ import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
+import forge.gui.OverlayUtils;
 import forge.gui.home.quest.CSubmenuChallenges;
 import forge.gui.home.quest.CSubmenuDuels;
 import forge.gui.toolbox.FSkin;
@@ -108,7 +109,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     @Override
     public final void startNextRound() {
         Singletons.getModel().savePrefs();
-        GuiUtils.closeOverlay();
+        OverlayUtils.closeOverlay();
         Singletons.getModel().getQuestPreferences().save();
 
         if (Constant.Quest.FANTASY_QUEST[0]) {
@@ -298,7 +299,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
 
-        GuiUtils.closeOverlay();
+        OverlayUtils.closeOverlay();
     }
 
     /**

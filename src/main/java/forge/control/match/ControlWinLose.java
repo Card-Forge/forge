@@ -15,6 +15,7 @@ import forge.deck.Deck;
 import forge.game.GameNew;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
+import forge.gui.OverlayUtils;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
@@ -61,14 +62,14 @@ public class ControlWinLose {
 
     /** Action performed when "continue" button is pressed in default win/lose UI. */
     public void actionOnContinue() {
-        GuiUtils.closeOverlay();
+        OverlayUtils.closeOverlay();
         startNextRound();
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
         Singletons.getModel().getMatchState().reset();
-        GuiUtils.closeOverlay();
+        OverlayUtils.closeOverlay();
         startNextRound();
     }
 
@@ -77,7 +78,7 @@ public class ControlWinLose {
         Singletons.getModel().getMatchState().reset();
         Singletons.getModel().savePrefs();
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
-        GuiUtils.closeOverlay();
+        OverlayUtils.closeOverlay();
     }
 
     /**

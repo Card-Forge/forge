@@ -15,7 +15,7 @@ import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
-import forge.gui.GuiUtils;
+import forge.gui.OverlayUtils;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
@@ -133,7 +133,7 @@ public enum VSubmenuSealed implements IVSubmenu {
 
     /** */
     public void showDirections() {
-        final FOverlay overlay = GuiUtils.genericOverlay();
+        final FOverlay overlay = OverlayUtils.genericOverlay();
         final int w = overlay.getWidth();
 
         final String instructions = "SEALED DECK MODE INSTRUCTIONS"

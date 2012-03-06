@@ -34,7 +34,7 @@ import forge.deck.generate.Generate3ColorDeck;
 import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameNew;
-import forge.gui.GuiUtils;
+import forge.gui.OverlayUtils;
 import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
@@ -365,7 +365,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
             GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
         }
 
-        GuiUtils.closeOverlay();
+        OverlayUtils.closeOverlay();
     }
 
     /** Generates deck from current list selection(s). */
