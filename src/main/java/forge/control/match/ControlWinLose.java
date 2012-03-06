@@ -62,14 +62,14 @@ public class ControlWinLose {
 
     /** Action performed when "continue" button is pressed in default win/lose UI. */
     public void actionOnContinue() {
-        OverlayUtils.closeOverlay();
+        OverlayUtils.hideOverlay();
         startNextRound();
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
         Singletons.getModel().getMatchState().reset();
-        OverlayUtils.closeOverlay();
+        OverlayUtils.hideOverlay();
         startNextRound();
     }
 
@@ -78,7 +78,7 @@ public class ControlWinLose {
         Singletons.getModel().getMatchState().reset();
         Singletons.getModel().savePrefs();
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
-        OverlayUtils.closeOverlay();
+        OverlayUtils.hideOverlay();
     }
 
     /**

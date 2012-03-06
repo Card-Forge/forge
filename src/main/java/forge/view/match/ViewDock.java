@@ -35,6 +35,7 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.control.match.ControlDock;
+import forge.gui.OverlayUtils;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
@@ -68,7 +69,7 @@ public class ViewDock extends FPanel {
         this.actClose = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                Singletons.getView().getOverlay().hideOverlay();
+                OverlayUtils.hideOverlay();
             }
         };
 
@@ -190,7 +191,7 @@ public class ViewDock extends FPanel {
     private void overlaySettings() {
         final FOverlay overlay = Singletons.getView().getOverlay();
         overlay.setLayout(new MigLayout("insets 0"));
-        overlay.showOverlay();
+        OverlayUtils.showOverlay();
 
         final JPanel parent = new JPanel();
         parent.setBackground(Color.red.darker());

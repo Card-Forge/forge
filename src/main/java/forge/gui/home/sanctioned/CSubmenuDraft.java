@@ -22,7 +22,6 @@ import forge.gui.GuiUtils;
 import forge.gui.OverlayUtils;
 import forge.gui.deckeditor.DraftingProcess;
 import forge.gui.home.ICSubmenu;
-import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FSkin;
 
 /** 
@@ -79,7 +78,7 @@ public enum CSubmenuDraft implements ICSubmenu {
         @Override
         public void execute() {
             update();
-            OverlayUtils.closeOverlay();
+            OverlayUtils.hideOverlay();
         }
     };
 
@@ -183,7 +182,8 @@ public enum CSubmenuDraft implements ICSubmenu {
             return;
         }
 
-        OverlayUtils.startGameOverlay().showOverlay();
+        OverlayUtils.startGameOverlay();
+        OverlayUtils.showOverlay();
 
         DeckGroup opponentDecks = Singletons.getModel().getDecks().getDraft().get(human.getName());
 
@@ -196,13 +196,12 @@ public enum CSubmenuDraft implements ICSubmenu {
 
         Constant.Runtime.setGameType(GameType.Draft);
         GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
-        Singletons.getView().getOverlay().hideOverlay();
+        OverlayUtils.hideOverlay();
     }
 
     /** */
     private void setupDraft() {
-        final FOverlay overlay = Singletons.getView().getOverlay();
-        overlay.showOverlay();
+        OverlayUtils.showOverlay();
 
         final DraftingProcess draft = new DraftingProcess();
 

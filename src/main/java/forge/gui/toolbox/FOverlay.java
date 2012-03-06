@@ -30,6 +30,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import forge.gui.OverlayUtils;
+
 /**
  * Semi-transparent overlay panel. Should be used with layered panes.
  * 
@@ -59,7 +61,7 @@ public class FOverlay extends JPanel {
         this.btnClose.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
-                FOverlay.this.hideOverlay();
+                OverlayUtils.hideOverlay();
             }
         });
 
@@ -73,20 +75,6 @@ public class FOverlay extends JPanel {
                 requestFocusInWindow();
             }
         });
-    }
-
-    /**
-     * Show overlay.
-     */
-    public void showOverlay() {
-        this.setVisible(true);
-    }
-
-    /**
-     * Hide overlay.
-     */
-    public void hideOverlay() {
-        this.setVisible(false);
     }
 
     /**

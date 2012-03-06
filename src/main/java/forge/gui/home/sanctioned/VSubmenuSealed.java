@@ -165,7 +165,7 @@ public enum VSubmenuSealed implements IVSubmenu {
         final JButton btnCloseBig = new FButton("OK");
         btnCloseBig.setBounds(new Rectangle((w / 2 - 100), 510, 200, 30));
         btnCloseBig.addActionListener(new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent arg0) { overlay.hideOverlay(); } });
+            public void actionPerformed(final ActionEvent arg0) { OverlayUtils.hideOverlay(); } });
 
         final FPanel pnl = new FPanel();
         pnl.setCornerDiameter(0);
@@ -177,6 +177,6 @@ public enum VSubmenuSealed implements IVSubmenu {
         overlay.setLayout(null);
         overlay.add(btnCloseBig);
         overlay.add(pnl);
-        overlay.showOverlay();
+        OverlayUtils.showOverlay();
     }
 }

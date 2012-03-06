@@ -25,7 +25,10 @@ import forge.gui.toolbox.FSkin;
 public final class OverlayUtils {
     private static int counter = 0;
 
-    /** @return {@forge.gui.toolbox.FOverlay} */
+    /** 
+     * A standardized overlay for a game start condition.
+     * @return {@forge.gui.toolbox.FOverlay}
+     */
     public static FOverlay startGameOverlay() {
         final FOverlay overlay = OverlayUtils.genericOverlay();
         final int w = overlay.getWidth();
@@ -49,11 +52,14 @@ public final class OverlayUtils {
 
         overlay.add(pnl);
 
-        return overlay;
+        return Singletons.getView().getOverlay();
     }
 
-    /** @param msg0 &emsp; {@link java.lang.String}
-        @return {@forge.gui.toolbox.FOverlay} */
+    /**
+     * A standardized overlay for a loading condition (note: thread issues, as of 1-Mar-12).
+     * @param msg0 &emsp; {@link java.lang.String}
+     * @return {@forge.gui.toolbox.FOverlay}
+     */
     // NOTE: This animation happens on the EDT; if the EDT is tied up doing something
     // else, the animation is effectively frozen.  So, this needs some work.
     public static FOverlay loadingOverlay(final String msg0) {
@@ -89,7 +95,10 @@ public final class OverlayUtils {
         return overlay;
     }
 
-    /** @return {@forge.gui.toolbox.FOverlay} */
+    /** 
+     * A template overlay with close button, null layout, ready for anything.
+     * @return {@forge.gui.toolbox.FOverlay}
+     */
     public static FOverlay genericOverlay() {
         final FOverlay overlay = Singletons.getView().getOverlay();
         final int w = overlay.getWidth();
@@ -102,7 +111,7 @@ public final class OverlayUtils {
         btnCloseTopRight.setBackground(new Color(0, 0, 0));
         btnCloseTopRight.setFocusPainted(false);
         btnCloseTopRight.addActionListener(new ActionListener() { @Override
-            public void actionPerformed(ActionEvent arg0) { overlay.hideOverlay(); } });
+            public void actionPerformed(ActionEvent arg0) { OverlayUtils.hideOverlay(); } });
 
         overlay.removeAll();
         overlay.setLayout(null);
@@ -111,9 +120,19 @@ public final class OverlayUtils {
         return overlay;
     }
 
-    /** Removes child components and closes overlay. */
-    public static void closeOverlay() {
+    /** @return {@link forge.gui.toolbox.FOverlay} */
+    public static FOverlay showOverlay() {
+        Singletons.getView().getOverlay().setVisible(true);
+        return Singletons.getView().getOverlay();
+    }
+
+    /**
+     * Removes child components and closes overlay.
+     * @return {@link forge.gui.toolbox.FOverlay}
+     */
+    public static FOverlay hideOverlay() {
         Singletons.getView().getOverlay().removeAll();
-        Singletons.getView().getOverlay().hideOverlay();
+        Singletons.getView().getOverlay().setVisible(false);
+        return Singletons.getView().getOverlay();
     }
 }

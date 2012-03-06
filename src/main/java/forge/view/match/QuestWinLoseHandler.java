@@ -109,7 +109,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     @Override
     public final void startNextRound() {
         Singletons.getModel().savePrefs();
-        OverlayUtils.closeOverlay();
+        OverlayUtils.hideOverlay();
         Singletons.getModel().getQuestPreferences().save();
 
         if (Constant.Quest.FANTASY_QUEST[0]) {
@@ -299,7 +299,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
 
-        OverlayUtils.closeOverlay();
+        OverlayUtils.hideOverlay();
     }
 
     /**

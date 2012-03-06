@@ -129,7 +129,7 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
                 if (n == JOptionPane.YES_OPTION) {
                     DraftingProcess.this.dispose();
                     CSubmenuDraft.SINGLETON_INSTANCE.update();
-                    OverlayUtils.closeOverlay();
+                    OverlayUtils.hideOverlay();
                 }
             } // windowClosing()
         });
@@ -341,7 +341,7 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
 
         // This should be handled in the exit command of the editor, not here.
         CSubmenuDraft.SINGLETON_INSTANCE.update();
-        OverlayUtils.closeOverlay();
+        OverlayUtils.hideOverlay();
     } /* saveDraft() */
 
     /*

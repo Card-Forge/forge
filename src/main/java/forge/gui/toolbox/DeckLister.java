@@ -41,6 +41,7 @@ import forge.Singletons;
 import forge.deck.CardCollections;
 import forge.deck.Deck;
 import forge.game.GameType;
+import forge.gui.OverlayUtils;
 import forge.gui.deckeditor.DeckEditorConstructed;
 import forge.gui.deckeditor.DeckEditorLimited;
 import forge.gui.deckeditor.DeckEditorQuest;
@@ -421,7 +422,7 @@ public class DeckLister extends JPanel {
     }
 
     private void editDeck(final Deck d0) {
-        Singletons.getView().getOverlay().showOverlay();
+        OverlayUtils.showOverlay();
 
         switch (this.gametype) {
         case Quest:

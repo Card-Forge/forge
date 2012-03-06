@@ -1,17 +1,18 @@
 package forge.gui.home.quest;
 
+import java.util.ArrayList;
+
 import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
+import forge.gui.OverlayUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.view.ViewHomeUI;
-
-import java.util.ArrayList;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -27,7 +28,7 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
         @Override
         public void execute() {
             AllZone.getQuestData().saveData();
-            Singletons.getView().getOverlay().hideOverlay();
+            OverlayUtils.hideOverlay();
             update();
         }
     };
@@ -52,6 +53,7 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
     @Override
     public Command getMenuCommand() {
         return new Command() {
+            @Override
             public void execute() {
                 if (AllZone.getQuestData() == null) {
                     ViewHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
@@ -73,7 +75,7 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
             public void execute() {
                 final DeckEditorQuest editor = new DeckEditorQuest(AllZone.getQuestData());
                 editor.show(cmdDeckExit);
-                Singletons.getView().getOverlay().showOverlay();
+                OverlayUtils.showOverlay();
                 editor.setVisible(true);
             }
         });

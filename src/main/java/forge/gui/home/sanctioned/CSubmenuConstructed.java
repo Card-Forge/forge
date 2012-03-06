@@ -354,7 +354,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
 
         overlay.add(pnl, "h 300px!, w 400px!");
 
-        overlay.showOverlay();
+        OverlayUtils.showOverlay();
 
         Constant.Runtime.HUMAN_DECK[0] =
                 generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks(), PlayerType.HUMAN);
@@ -365,7 +365,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
             GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
         }
 
-        OverlayUtils.closeOverlay();
+        OverlayUtils.hideOverlay();
     }
 
     /** Generates deck from current list selection(s). */

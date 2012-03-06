@@ -48,7 +48,7 @@ public enum CSubmenuSealed implements ICSubmenu {
         @Override
         public void execute() {
             update();
-            OverlayUtils.closeOverlay();
+            OverlayUtils.hideOverlay();
         }
     };
 
@@ -141,7 +141,8 @@ public enum CSubmenuSealed implements ICSubmenu {
             return;
         }
 
-        OverlayUtils.startGameOverlay().showOverlay();
+        OverlayUtils.startGameOverlay();
+        OverlayUtils.showOverlay();
 
         Constant.Runtime.HUMAN_DECK[0] = human;
         Constant.Runtime.COMPUTER_DECK[0] = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().get(0);

@@ -14,6 +14,7 @@ import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameNew;
 import forge.game.GameType;
+import forge.gui.OverlayUtils;
 import forge.gui.deckeditor.QuestCardShop;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
@@ -207,7 +208,7 @@ public class SubmenuQuestUtil {
                 .fontScaleAuto(false).fontSize(22).build(), "h 40px!, align center");
 
         overlay.add(pnl, "h 300px!, w 400px!");
-        overlay.showOverlay();
+        OverlayUtils.showOverlay();
 
         // Logic
         Constant.Runtime.HUMAN_DECK[0] = SubmenuQuestUtil.getCurrentDeck();
@@ -250,7 +251,7 @@ public class SubmenuQuestUtil {
         }
 
         // Start transisiton to match UI.
-        overlay.hideOverlay();
+        OverlayUtils.hideOverlay();
     }
 
     /** Selectable panels for duels and challenges. */
