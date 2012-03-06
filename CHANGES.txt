@@ -5,7 +5,7 @@ Forge Beta: ##-##-2012 ver 1.2.# rev #####
 10### cards in total.
 
 
-
+This version is primarily a maintenance release. The deck converter bugs found in the previous version have been fixed. Version 1.2.5 includes some major changes to the new UI and to alternative costs. If you notice any new bugs in these two areas you should notify the devs.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
