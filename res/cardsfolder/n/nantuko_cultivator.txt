@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigNantukoDiscardLand:AB$ Discard | Cost$ 0 | DiscardValid$ Land | NumCards$ NantukoX | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBNantukoPutCounter
 SVar:DBNantukoPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ NantukoY | SubAbility$ DBNantukoDraw
 SVar:DBNantukoDraw:DB$ Draw | NumCards$ NantukoY | SubAbility$ DBNantukoCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBNantukoCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NantukoX:Count$TypeInYourHand.Land
 SVar:NantukoY:Remembered$Amount
 SVar:RemAIDeck:True
