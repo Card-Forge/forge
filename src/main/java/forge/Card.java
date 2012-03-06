@@ -2458,10 +2458,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                     && !keyword.get(i).toString().startsWith("CantBeBlockedBy")) {
                 if (keyword.get(i).toString().startsWith("CostChange")) {
                     final String[] k = keyword.get(i).split(":");
-                    if (k[k.length - 1].toString().startsWith("Desc|")) {
-                        final String[] kk = k[k.length - 1].split("\\|");
-                        sbLong.append(kk[1]).append("\r\n");
+                    if (k.length > 8) {
+                        sbLong.append(k[8]).append("\r\n");
                     }
+                    //if (k[k.length - 1].toString().startsWith("Desc|")) {
+                    //    final String[] kk = k[k.length - 1].split("\\|");
+                    //    sbLong.append(kk[1]).append("\r\n");
+                    //}
                 } else if (keyword.get(i).toString().startsWith("etbCounter")) {
                     final String[] p = keyword.get(i).split(":");
                     final StringBuilder s = new StringBuilder();
@@ -2752,9 +2755,15 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        // Ripple + Dredge + Madness + CARDNAME is {color} + Recover.
+        // keyword descriptions
         for (int i = 0; i < kw.size(); i++) {
             final String keyword = kw.get(i);
+            if (keyword.startsWith("CostChange")) {
+                final String[] k = keyword.split(":");
+                if (k.length > 8) {
+                    sb.append(k[8]);
+                }
+            }
             if ((keyword.startsWith("Ripple") && !sb.toString().contains("Ripple"))
                     || (keyword.startsWith("Dredge") && !sb.toString().contains("Dredge"))
                     || (keyword.startsWith("Madness") && !sb.toString().contains("Madness"))
