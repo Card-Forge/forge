@@ -113,6 +113,40 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Improved and simplified the spell description field to the CostChange keyword. Several cards converted.
+- More CostChange keyword spell descriptions.
+- Restructured the way alternative costs of spells are handled for the human player.
+- More CostChange keyword spell descriptions.
+- Finished CostChange keyword spell descriptions.
+- Restructured the way alternative costs of spells are handled for the computer player.
+- Aluren will no longer allow you to pay the creatures mana cost at instant speed.
+- sideboard from precon is also added to the card pool
+- Added the event deck Deathfed as precon (available after 20 wins).
+- Added a fluff piece to the changes.txt file.
+- Text fix.
+- The AI will no longer use Oblivion Ring on a permanent that is enchanted with one of his own auras.
+- Little tweaks for the AI of AF Destroy.
+- Text fix
+- Fixed the text for Sacred Prey, now states "you gain 1 life".
+- Shutdown hook fix for skin switcher.
+- Fixed casting cost of Mesmeric Fiend.
+- Upgraded "Marble Blue" skin backgrounds to be more marbley.
+- Removed outdated "start game" overlay from a few submenus, replaced with standardized one.
+- compare strings fixed
+- Bugfix: Prevented editor from always being on top, which blocked the save dialog.
+- Added input panel's "remind()" flasher for ability mana cost interactions.
+- Improved thread handling for constructed mode game start.
+- Bugfix: Removed "always on top" from quest spell shop.
+- MoWrapLayout moved into forge.gui package.
+- SubTab class deleted.
+- TortoiseSVN confusion...
+- Converted Umbral Mantle to script.
+- Prevented some auras and equipment from possibly overwriting SVars of cards they are attached to.
+- Added a fluff piece to the changes.txt file.
+- Added a fluff piece to the changes.txt file.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -134,6 +168,9 @@ Outmaneuver
 Rancid Earth
 Bull Elephant
 Plagiarize
+Nantuko Cultivator
+Mesmeric Fiend
+Gurzigost
 
 
 end
