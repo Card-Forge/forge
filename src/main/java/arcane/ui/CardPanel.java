@@ -590,7 +590,7 @@ public class CardPanel extends JPanel implements CardContainer {
             return;
         }
 
-        if (card.isFaceDown()) {
+        if (card.isFaceDown() && !card.hasKeyword("You may look at this card.")) {
             this.titleText.setText("");
             this.showCastingCost = false;
         } else {

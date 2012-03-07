@@ -1189,10 +1189,12 @@ public class AbilityFactoryPump {
                 AllZone.getEndOfCombat().addUntil(untilEOT);
             } else if (this.params.containsKey("UntilYourNextUpkeep")) {
                 AllZone.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
+            } else if (params.containsKey("UntilHostLeavesPlay")) {
+                sa.getSourceCard().addLeavesPlayCommand(untilEOT);
             } else if (this.params.containsKey("UntilLoseControlOfHost")) {
                 sa.getSourceCard().addLeavesPlayCommand(untilEOT);
                 sa.getSourceCard().addChangeControllerCommand(untilEOT);
-            }  else {
+            } else {
                 AllZone.getEndOfTurn().addUntil(untilEOT);
             }
         }

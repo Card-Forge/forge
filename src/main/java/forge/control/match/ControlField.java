@@ -247,8 +247,6 @@ public class ControlField {
 
             final Iterable<Card> myIterable = YieldUtils.toIterable(c);
             final ArrayList<Card> choices = YieldUtils.toArrayList(myIterable);
-            // System.out.println("immediately after: "+choices);
-            // Iterator<Card> iter = myIterable.iterator();
 
             final ArrayList<Card> choices2 = new ArrayList<Card>();
 
@@ -257,24 +255,23 @@ public class ControlField {
             } else {
                 for (int i = 0; i < choices.size(); i++) {
                     final Card crd = choices.get(i);
-                    // System.out.println(crd+": "+crd.isFaceDown());
                     if (crd.isFaceDown()) {
-                        final Card faceDown = new Card();
-                        faceDown.setName("Face Down");
-                        choices2.add(faceDown);
-                        // System.out.println("Added: "+faceDown);
+                        if (!crd.hasKeyword("You may look at this card.")) {
+                            final Card faceDown = new Card();
+                            faceDown.setName("Face Down");
+                            choices2.add(faceDown);
+                        } else {
+                            final Card faceDown = AllZone.getCardFactory().copyCard(crd);
+                            faceDown.turnFaceUp();
+                            choices2.add(faceDown);
+                        }
                     } else {
                         choices2.add(crd);
                     }
                 }
-                // System.out.println("Face down cards replaced: "+choices2);
                 final Card choice = (Card) GuiUtils.chooseOneOrNone(this.title, choices2.toArray());
                 if (choice != null) {
                     this.doAction(choice);
-                    /*
-                     * Card choice = GuiUtils.getChoiceOptional(title, iter); if
-                     * (choice != null) doAction(choice);
-                     */
                 }
             }
         }

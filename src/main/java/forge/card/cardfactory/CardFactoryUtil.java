@@ -2443,6 +2443,9 @@ public class CardFactoryUtil {
                             return true;
                         }
                     }
+                    if (c.hasKeyword("You may look at this card.")) {
+                        return true;
+                    }
 
                     if (c.isLand()
                             && (c.hasKeyword("May be played") || c.hasKeyword("May be played by your opponent") || c

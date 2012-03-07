@@ -211,8 +211,9 @@ public class GameAction {
 
         copied.setTimestamp(AllZone.getNextTimestamp());
         for (String s : copied.getKeyword()) {
-            if (s.startsWith("May be played")) {
+            if (s.startsWith("May be played") || s.startsWith("You may look at this card.")) {
                 copied.removeAllExtrinsicKeyword(s);
+                copied.removeHiddenExtrinsicKeyword(s);
             }
         }
 
