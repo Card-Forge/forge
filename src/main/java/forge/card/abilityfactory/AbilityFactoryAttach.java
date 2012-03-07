@@ -311,8 +311,8 @@ public class AbilityFactoryAttach {
         final Card attachSource = sa.getSourceCard();
         // TODO AttachSource is currently set for the Source of the Spell, but
         // at some point can support attaching a different card
-        
-        // Don't equip if already equipping 
+
+        // Don't equip if already equipping
         if (attachSource.getEquippingCard() != null && attachSource.getEquippingCard().getController().isComputer()) {
             return null;
         }

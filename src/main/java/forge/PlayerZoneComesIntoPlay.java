@@ -134,7 +134,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                         } else {
                             toAdd = Integer.parseInt(numCounters);
                         }
-    
+
                         c.addCounter(counter, toAdd);
                     }
                 }

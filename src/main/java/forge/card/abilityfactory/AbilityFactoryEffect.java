@@ -366,7 +366,7 @@ public class AbilityFactoryEffect {
         if (params.containsKey("StaticAbilities")) {
             effectStaticAbilities = params.get("StaticAbilities").split(",");
         }
-        
+
         if (params.containsKey("ReplacementEffects")) {
             effectReplacementEffects = params.get("ReplacementEffects").split(",");
         }
@@ -441,12 +441,12 @@ public class AbilityFactoryEffect {
                 eff.addStaticAbility(af.getHostCard().getSVar(s));
             }
         }
-        
+
         // Grant replacement effects
         if (effectReplacementEffects != null) {
             for (final String s : effectReplacementEffects) {
                 final String actualReplacement = af.getHostCard().getSVar(s);
-                
+
                 final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff);
                 eff.addReplacementEffect(parsedReplacement);
             }

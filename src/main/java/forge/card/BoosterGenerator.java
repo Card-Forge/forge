@@ -71,7 +71,7 @@ public class BoosterGenerator {
         }
     }
 
-    private void MergeAllFacedCards() {
+    private void mergeAllFacedCards() {
         for (CardRarity v : CardRarity.values()) {
             List<CardPrinted> cp = new ArrayList<CardPrinted>(singleFacedByRarity.get(v));
             cp.addAll(twoFacedByRarity.get(v));
@@ -92,7 +92,7 @@ public class BoosterGenerator {
         for (final CardPrinted c : cards) {
             this.addToRarity(c);
         }
-        MergeAllFacedCards();
+        mergeAllFacedCards();
     }
 
     /**
@@ -106,7 +106,7 @@ public class BoosterGenerator {
         for (final Entry<CardPrinted, Integer> e : dPool) {
             this.addToRarity(e.getKey());
         }
-        MergeAllFacedCards();
+        mergeAllFacedCards();
     }
 
     /**
@@ -124,7 +124,7 @@ public class BoosterGenerator {
             this.addToRarity(c);
             // System.out.println(c);
         }
-        MergeAllFacedCards();
+        mergeAllFacedCards();
         // System.out.println("done");
     }
 
