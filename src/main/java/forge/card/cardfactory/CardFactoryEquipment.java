@@ -31,8 +31,6 @@ import forge.Counters;
 import forge.PhaseHandler;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityActivated;
-import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 
@@ -81,7 +79,7 @@ class CardFactoryEquipment {
     public static Card getCard(final Card card, final String cardName) {
 
         // *************** START *********** START **************************
-        if (cardName.equals("Umbral Mantle")) {
+        /*if (cardName.equals("Umbral Mantle")) {
             final Cost abCost = new Cost("0", cardName, true);
             final Target target = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));
             final AbilityActivated equip = new AbilityActivated(card, abCost, target) {
@@ -184,10 +182,10 @@ class CardFactoryEquipment {
 
             card.addEquipCommand(onEquip);
             card.addUnEquipCommand(onUnEquip);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Hedron Matrix")) {
+        if (cardName.equals("Hedron Matrix")) {
             /*
              * Equipped creature gets +X/+X, where X is its converted mana cost.
              */
