@@ -266,7 +266,7 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
             file.delete();
         } else {
             String destFilename = result == null ? null : result.getBestFileName() + FILE_EXTENSION;
-            if (file.getName() != destFilename) {
+            if (!file.getName().equals(destFilename)) {
                 file.renameTo(new File(file.getParentFile().getParentFile(), destFilename));
             }
         }
