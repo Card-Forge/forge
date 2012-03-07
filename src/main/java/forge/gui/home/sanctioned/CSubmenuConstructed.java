@@ -18,8 +18,8 @@ import java.util.Random;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
-
-import net.miginfocom.swing.MigLayout;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -37,9 +37,6 @@ import forge.game.GameNew;
 import forge.gui.OverlayUtils;
 import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FOverlay;
-import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -340,19 +337,34 @@ public enum CSubmenuConstructed implements ICSubmenu {
 
     /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
     private void startGame() {
-        OverlayUtils.startGameOverlay();
-        OverlayUtils.showOverlay();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                OverlayUtils.startGameOverlay();
+                OverlayUtils.showOverlay();
+            }
+        });
 
-        Constant.Runtime.HUMAN_DECK[0] =
-                generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks(), PlayerType.HUMAN);
-        Constant.Runtime.COMPUTER_DECK[0] =
-                generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER);
+        final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
+            @Override
+            public Object doInBackground() {
+                Constant.Runtime.HUMAN_DECK[0] =
+                        generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks(), PlayerType.HUMAN);
+                Constant.Runtime.COMPUTER_DECK[0] =
+                        generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER);
 
-        if (Constant.Runtime.HUMAN_DECK[0] != null && Constant.Runtime.COMPUTER_DECK[0] != null) {
-            GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
-        }
+                if (Constant.Runtime.HUMAN_DECK[0] != null && Constant.Runtime.COMPUTER_DECK[0] != null) {
+                    GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+                }
+                return null;
+            }
 
-        OverlayUtils.hideOverlay();
+            @Override
+            public void done() {
+                OverlayUtils.hideOverlay();
+            }
+        };
+        worker.execute();
     }
 
     /** Generates deck from current list selection(s). */
