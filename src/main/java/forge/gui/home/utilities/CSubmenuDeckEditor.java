@@ -47,7 +47,6 @@ public enum CSubmenuDeckEditor implements ICSubmenu {
     private <T extends DeckBase> void showDeckEditor() {
         DeckEditorBase<?, T> editor = (DeckEditorBase<?, T>) new DeckEditorConstructed();
         editor.show(null);
-        editor.setAlwaysOnTop(true);
         editor.setVisible(true);
     }
 }
