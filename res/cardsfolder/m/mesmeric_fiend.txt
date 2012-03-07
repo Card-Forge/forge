@@ -1,5 +1,5 @@
 Name:Mesmeric Fiend
-ManaCost:1 R
+ManaCost:1 B
 Types:Creature Nightmare Horror
 Text:no text
 PT:1/1
