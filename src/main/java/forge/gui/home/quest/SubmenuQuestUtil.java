@@ -197,17 +197,7 @@ public class SubmenuQuestUtil {
         final FOverlay overlay = Singletons.getView().getOverlay();
         final FPanel pnl = new FPanel();
 
-        // Overlay layout
-        overlay.setLayout(new MigLayout("insets 0, gap 0, align center"));
-
-        pnl.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap"));
-        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
-        pnl.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_LOGO)).build(),
-                "h 200px!, align center");
-        pnl.add(new FLabel.Builder().text("Loading new game...")
-                .fontScaleAuto(false).fontSize(22).build(), "h 40px!, align center");
-
-        overlay.add(pnl, "h 300px!, w 400px!");
+        OverlayUtils.startGameOverlay();
         OverlayUtils.showOverlay();
 
         // Logic

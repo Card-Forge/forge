@@ -340,20 +340,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
 
     /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
     private void startGame() {
-        final FOverlay overlay = Singletons.getView().getOverlay();
-        overlay.setLayout(new MigLayout("insets 0, gap 0, align center"));
-
-        final FPanel pnl = new FPanel();
-        pnl.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap"));
-        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
-
-        pnl.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_LOGO)).build(),
-                "h 200px!, align center");
-        pnl.add(new FLabel.Builder().text("Loading new game...")
-                .fontScaleAuto(false).fontSize(22).build(), "h 40px!, align center");
-
-        overlay.add(pnl, "h 300px!, w 400px!");
-
+        OverlayUtils.startGameOverlay();
         OverlayUtils.showOverlay();
 
         Constant.Runtime.HUMAN_DECK[0] =

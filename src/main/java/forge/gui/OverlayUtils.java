@@ -39,8 +39,6 @@ public final class OverlayUtils {
         // Adds the "loading" panel to generic overlay container
         // (which is preset with null layout and close button)
         final FPanel pnl = new FPanel();
-        pnl.setCornerDiameter(0);
-        pnl.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
         pnl.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap"));
         pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
         pnl.setBounds(new Rectangle(((w - pnlW) / 2), ((h - pnlH) / 2), pnlW, pnlH));
