@@ -180,7 +180,6 @@ public class SubmenuQuestUtil {
 
         final QuestCardShop g = new QuestCardShop(AllZone.getQuestData());
         g.show(exit);
-        g.setAlwaysOnTop(true);
         g.setVisible(true);
     }
 
