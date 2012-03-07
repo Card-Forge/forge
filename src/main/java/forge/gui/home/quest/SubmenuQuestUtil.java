@@ -17,7 +17,6 @@ import forge.game.GameType;
 import forge.gui.OverlayUtils;
 import forge.gui.deckeditor.QuestCardShop;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
@@ -193,8 +192,6 @@ public class SubmenuQuestUtil {
     public static void startGame() {
         final QuestData qData = AllZone.getQuestData();
         final QuestEvent event = selectedOpponent.getEvent();
-        final FOverlay overlay = Singletons.getView().getOverlay();
-        final FPanel pnl = new FPanel();
 
         OverlayUtils.startGameOverlay();
         OverlayUtils.showOverlay();

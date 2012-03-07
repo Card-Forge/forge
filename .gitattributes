@@ -11431,6 +11431,7 @@ src/main/java/forge/gui/MultiLineLabel.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
 src/main/java/forge/gui/MultiPhaseProgressMonitorWithETA.java svneol=native#text/plain
 src/main/java/forge/gui/OverlayUtils.java -text
+src/main/java/forge/gui/WrapLayout.java -text
 src/main/java/forge/gui/deckeditor/DeckController.java -text
 src/main/java/forge/gui/deckeditor/DeckEditorBase.java -text
 src/main/java/forge/gui/deckeditor/DeckEditorConstructed.java svneol=native#text/plain
@@ -11519,7 +11520,6 @@ src/main/java/forge/gui/toolbox/FScrollPane.java -text
 src/main/java/forge/gui/toolbox/FSkin.java -text
 src/main/java/forge/gui/toolbox/FTextArea.java -text
 src/main/java/forge/gui/toolbox/FVerticalTabPanel.java -text
-src/main/java/forge/gui/toolbox/SubTab.java -text
 src/main/java/forge/gui/toolbox/WrapLayout.java -text
 src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text

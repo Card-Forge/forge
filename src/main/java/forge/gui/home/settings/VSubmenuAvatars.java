@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.Singletons;
+import forge.gui.WrapLayout;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
@@ -18,7 +19,6 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.WrapLayout;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
