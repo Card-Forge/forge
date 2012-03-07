@@ -256,7 +256,7 @@ public class ControlField {
                 for (int i = 0; i < choices.size(); i++) {
                     final Card crd = choices.get(i);
                     if (crd.isFaceDown()) {
-                        if (!crd.hasKeyword("You may look at this card.")) {
+                        if (crd.getController().isComputer() || !crd.hasKeyword("You may look at this card.")) {
                             final Card faceDown = new Card();
                             faceDown.setName("Face Down");
                             choices2.add(faceDown);
