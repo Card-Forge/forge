@@ -23,7 +23,9 @@ public class RestartUtil {
     public static void restartApplication(final Runnable runBeforeRestart) {
         try {
             // java binary
-            final String java = System.getProperty("java.home") + "/bin/java";
+            final String java = System.getProperty("java.home")
+                    + File.separator + "bin" + File.separator + "java";
+
             // vm arguments
             final List<String> vmArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
             final StringBuffer vmArgsOneLine = new StringBuffer();
