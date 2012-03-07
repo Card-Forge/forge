@@ -3974,6 +3974,7 @@ res/cardsfolder/h/headlong_rush.txt svneol=native#text/plain
 res/cardsfolder/h/headstone.txt svneol=native#text/plain
 res/cardsfolder/h/heal.txt svneol=native#text/plain
 res/cardsfolder/h/heal_the_scars.txt -text
+res/cardsfolder/h/healers_headdress.txt -text
 res/cardsfolder/h/healing_leaves.txt svneol=native#text/plain
 res/cardsfolder/h/healing_salve.txt svneol=native#text/plain
 res/cardsfolder/h/heap_doll.txt svneol=native#text/plain
