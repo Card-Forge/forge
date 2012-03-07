@@ -1739,18 +1739,6 @@ public class AbilityFactory {
             c = hostCard;
         }
 
-        // The Wretched
-        else if (defined.equals("TriggeredBlocker.blocking")) {
-            final SpellAbility root = sa.getRootSpellAbility();
-            final Object crd = root.getTriggeringObject("Blocker");
-            // if (AllZoneUtil.getCardState((Card) crd).isBlocking()) {
-            // ;
-            // }
-            // {
-            c = AllZoneUtil.getCardState((Card) crd);
-            // }
-        }
-
         else if (defined.equals("OriginalHost")) {
             c = sa.getOriginalHost();
         }
@@ -2513,6 +2501,8 @@ public class AbilityFactory {
                 type = type.replace("TriggeredAttacker", "Card");
             } else if (type.contains("TriggeredBlocker")) {
                 type = type.replace("TriggeredBlocker", "Card");
+            } else {
+                type = type.replace("Triggered", "Card");
             }
 
             } else if (type.contains("Targeted")) {
