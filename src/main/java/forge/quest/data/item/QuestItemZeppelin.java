@@ -54,7 +54,7 @@ public class QuestItemZeppelin extends QuestItemAbstract {
     /** {@inheritDoc} */
     @Override
     public final String getPurchaseDescription() {
-        return "This extremely comfortable airship allows for more efficient and safe travelto faraway destinations.\n"
+        return "This extremely comfortable airship allows for more efficient and safe travel to faraway destinations.\n"
                 + "\nEffect: Quest assignments become available more frequently."
                 + "\nEffect: Adds +3 to max life during quest games."
                 + "\nEffect: Allows travel to far places, allowing you to see a new set of opponents,";
