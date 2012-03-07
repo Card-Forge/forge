@@ -21,6 +21,7 @@ import forge.AllZone;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.Command;
+import forge.Constant.Zone;
 import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.mana.ManaCost;
@@ -153,6 +154,10 @@ public class InputPayManaCostAbility extends InputMana {
     public final void selectCard(final Card card, final PlayerZone zone) {
         // only tap card if the mana is needed
         this.manaCost = InputPayManaCostUtil.activateManaAbility(this.fakeAbility, card, this.manaCost);
+
+        if (card.getManaAbility().isEmpty() || card.isInZone(Zone.Hand)) {
+            Singletons.getControl().getControlMatch().getMessageControl().remind();
+        }
 
         if (this.manaCost.isPaid()) {
             this.paidCommand.execute();
