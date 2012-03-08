@@ -302,17 +302,22 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public static final void playStack(final SpellAbility sa) {
+        sa.setActivatingPlayer(AllZone.getComputerPlayer());
         if (ComputerUtil.canPayCost(sa)) {
             final Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 sa.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
             }
-
-            sa.setActivatingPlayer(AllZone.getComputerPlayer());
-
-            ComputerUtil.payManaCost(sa);
-
-            AllZone.getStack().add(sa);
+            final Cost cost = sa.getPayCosts();
+            if (cost == null) {
+                ComputerUtil.payManaCost(sa);
+                AllZone.getStack().add(sa);
+            } else {
+                final CostPayment pay = new CostPayment(cost, sa);
+                if (pay.payComputerCosts()) {
+                    AllZone.getStack().add(sa);
+                }
+            }
         }
     }
 
