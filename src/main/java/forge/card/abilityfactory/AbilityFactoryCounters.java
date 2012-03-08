@@ -1257,12 +1257,6 @@ public class AbilityFactoryCounters {
             }
 
             @Override
-            public boolean canPlay() {
-                // super takes care of AdditionalCosts
-                return super.canPlay();
-            }
-
-            @Override
             public String getStackDescription() {
                 return AbilityFactoryCounters.proliferateStackDescription(this);
             }

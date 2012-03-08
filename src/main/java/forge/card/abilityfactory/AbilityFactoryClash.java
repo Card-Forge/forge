@@ -287,11 +287,6 @@ public final class AbilityFactoryClash {
             }
 
             @Override
-            public boolean canPlay() {
-                return true;
-            }
-
-            @Override
             public boolean doTrigger(final boolean mandatory) {
                 return true;
             }
@@ -326,11 +321,6 @@ public final class AbilityFactoryClash {
 
             @Override
             public boolean canPlayAI() {
-                return true;
-            }
-
-            @Override
-            public boolean canPlay() {
                 return true;
             }
 
