@@ -911,9 +911,27 @@ public final class AbilityFactoryChoose {
     private static void chooseNumberResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = af.getHostCard();
-        final int min = params.containsKey("Min") ? Integer.parseInt(params.get("Min")) : 0;
-        final int max = params.containsKey("Max") ? Integer.parseInt(params.get("Max")) : 99;
+        //final int min = params.containsKey("Min") ? Integer.parseInt(params.get("Min")) : 0;
+        //final int max = params.containsKey("Max") ? Integer.parseInt(params.get("Max")) : 99;
         final boolean random = params.containsKey("Random");
+
+        final int min;
+        if (!params.containsKey("Min")) {
+            min = Integer.parseInt("0");
+        } else if (params.get("Min").matches("[0-9][0-9]?")) {
+            min = Integer.parseInt(params.get("Min"));
+        } else {
+            min = CardFactoryUtil.xCount(card, card.getSVar(params.get("Min")));
+        } // Allow variables for Min
+
+        final int max;
+        if (!params.containsKey("Max")) {
+            max = Integer.parseInt("99");
+        } else if (params.get("Max").matches("[0-9][0-9]?")) {
+            max = Integer.parseInt(params.get("Max"));
+        } else {
+            max = CardFactoryUtil.xCount(card, card.getSVar(params.get("Max")));
+        } // Allow variables for Max
 
         final String[] choices = new String[max + 1];
         if (!random) {
@@ -941,6 +959,12 @@ public final class AbilityFactoryChoose {
                         chosen = randomGen.nextInt(max - min) + min;
                         final String message = "Randomly chosen number: " + chosen;
                         JOptionPane.showMessageDialog(null, message, "" + card, JOptionPane.PLAIN_MESSAGE);
+                    } else if (params.containsKey("ListTitle")) {
+                        final Object o = GuiUtils.chooseOne(params.get("ListTitle"), choices);
+                        if (null == o) {
+                            return;
+                        }
+                        chosen = Integer.parseInt((String) o);
                     } else {
                         final Object o = GuiUtils.chooseOne("Choose a number", choices);
                         if (null == o) {
