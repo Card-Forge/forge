@@ -1645,6 +1645,7 @@ res/cardsfolder/c/contagious_nim.txt svneol=native#text/plain
 res/cardsfolder/c/contaminated_bond.txt svneol=native#text/plain
 res/cardsfolder/c/contaminated_ground.txt svneol=native#text/plain
 res/cardsfolder/c/contemplation.txt svneol=native#text/plain
+res/cardsfolder/c/contested_cliffs.txt -text
 res/cardsfolder/c/contested_war_zone.txt svneol=native#text/plain
 res/cardsfolder/c/contract_from_below.txt -text
 res/cardsfolder/c/control_magic.txt svneol=native#text/plain

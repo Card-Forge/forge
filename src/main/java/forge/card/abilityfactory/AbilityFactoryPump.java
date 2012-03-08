@@ -1017,8 +1017,13 @@ public class AbilityFactoryPump {
             }
 
             if (params.containsKey("StackDescription")) {
+                if (params.get("StackDescription").equals("None")) {
+                    sb.append("");
+                } else {
                 sb.append(params.get("StackDescription"));
+                }
             }
+
             else {
                 for (final GameEntity c : tgts) {
                     sb.append(c).append(" ");
