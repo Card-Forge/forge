@@ -2497,10 +2497,23 @@ public class Card extends GameEntity implements Comparable<Card> {
                         || keyword.get(i).startsWith("Echo") || keyword.get(i).startsWith("Fading")
                         || keyword.get(i).startsWith("Ripple") || keyword.get(i).startsWith("Unearth")
                         || keyword.get(i).startsWith("Vanishing") || keyword.get(i).startsWith("Madness")
-                        || keyword.get(i).startsWith("Devour") || keyword.get(i).startsWith("Morph")) {
+                        || keyword.get(i).startsWith("Devour")) {
                     String k = keyword.get(i);
                     k = k.replace(":", " ");
                     sbLong.append(k).append("\r\n");
+                } else if (keyword.get(i).startsWith("Morph")) {
+                    sbLong.append("Morph");
+                    if (keyword.get(i).contains(":")) {
+                        final Cost mCost = new Cost(keyword.get(i).substring(6), this.getName(), true);
+                        if (!mCost.isOnlyManaCost()) {
+                            sbLong.append(" -");
+                        }
+                        sbLong.append(" ").append(mCost.toString()).delete(sbLong.length() - 2, sbLong.length());
+                        if (!mCost.isOnlyManaCost()) {
+                            sbLong.append(".");
+                        }
+                        sbLong.append("\r\n");
+                    }
                 } else if (keyword.get(i).startsWith("Champion")) {
                     final String k = this.getKeyword().get(i);
                     final String[] kk = k.split(":");
