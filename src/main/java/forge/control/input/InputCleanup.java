@@ -46,24 +46,25 @@ public class InputCleanup extends Input {
             return;
         }
 
-        ButtonUtil.disableAll();
         final int n = AllZone.getHumanPlayer().getCardsIn(Zone.Hand).size();
-
-        // MUST showMessage() before stop() or it will overwrite the next
-        // Input's message
-        final StringBuffer sb = new StringBuffer();
-        sb.append("Cleanup Phase: You can only have a maximum of ").append(AllZone.getHumanPlayer().getMaxHandSize());
-        sb.append(" cards, you currently have ").append(n).append(" cards in your hand - select a card to discard");
-        Singletons.getControl().getControlMatch().showMessage(sb.toString());
-
+        final int max = AllZone.getHumanPlayer().getMaxHandSize();
         // goes to the next phase
-        if ((n <= AllZone.getHumanPlayer().getMaxHandSize()) || (AllZone.getHumanPlayer().getMaxHandSize() == -1)) {
+        if (n <= max || max <= -1) {
             CombatUtil.removeAllDamage();
 
             Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
             Singletons.getModel().getGameState().getPhaseHandler().nextPhase(); // TODO keep an eye on this code,
                                             // see if we can get rid of it.
+            return;
         }
+        ButtonUtil.disableAll();
+
+        // MUST showMessage() before stop() or it will overwrite the next
+        // Input's message
+        final StringBuffer sb = new StringBuffer();
+        sb.append("Cleanup Phase: You can only have a maximum of ").append(max);
+        sb.append(" cards, you currently have ").append(n).append(" cards in your hand - select a card to discard");
+        Singletons.getControl().getControlMatch().showMessage(sb.toString());
     }
 
     /** {@inheritDoc} */
