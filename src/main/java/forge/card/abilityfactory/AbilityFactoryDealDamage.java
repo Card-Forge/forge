@@ -209,6 +209,7 @@ public class AbilityFactoryDealDamage {
     private String dealDamageStackDescription(final AbilityFactory af, final SpellAbility sa) {
         // when damageStackDescription is called, just build exactly what is
         // happening
+        final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
         final String name = af.getHostCard().toString();
         final int dmg = this.getNumDamage(sa);
@@ -220,50 +221,57 @@ public class AbilityFactoryDealDamage {
             tgts = sa.getTarget().getTargets();
         }
 
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(name).append(" -");
-        }
-        sb.append(" ");
-
-        final String conditionDesc = af.getMapParams().get("ConditionDescription");
-        if (conditionDesc != null) {
-            sb.append(conditionDesc).append(" ");
-        }
-
-        final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams()
-                .get("DamageSource"), sa);
-        final Card source = definedSources.get(0);
-
-        if (source != sa.getSourceCard()) {
-            sb.append(source.toString()).append(" deals");
-        } else {
-            sb.append("Deals");
-        }
-
-        sb.append(" ").append(dmg).append(" damage to ");
-
-        for (int i = 0; i < tgts.size(); i++) {
-            if (i != 0) {
-                sb.append(" ");
+        if (tgts.size() > 0) {
+            if (!(sa instanceof AbilitySub)) {
+                sb.append(name).append(" -");
             }
+            sb.append(" ");
 
-            final Object o = tgts.get(i);
-            if ((o instanceof Card) || (o instanceof Player)) {
-                sb.append(o.toString());
+            if (params.containsKey("StackDescription")) {
+                sb.append(params.get("StackDescription"));
+            }
+            else {
+                final String conditionDesc = af.getMapParams().get("ConditionDescription");
+                if (conditionDesc != null) {
+                    sb.append(conditionDesc).append(" ");
+                }
+
+                final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams()
+                        .get("DamageSource"), sa);
+                final Card source = definedSources.get(0);
+
+                if (source != sa.getSourceCard()) {
+                    sb.append(source.toString()).append(" deals");
+                } else {
+                    sb.append("Deals");
+                }
+
+                sb.append(" ").append(dmg).append(" damage to ");
+
+                for (int i = 0; i < tgts.size(); i++) {
+                    if (i != 0) {
+                        sb.append(" ");
+                    }
+
+                    final Object o = tgts.get(i);
+                    if ((o instanceof Card) || (o instanceof Player)) {
+                        sb.append(o.toString());
+                    }
+                }
+
+                if (af.getMapParams().containsKey("Radiance")) {
+                    sb.append(" and each other ").append(af.getMapParams().get("ValidTgts"))
+                            .append(" that shares a color with ");
+                    if (tgts.size() > 1) {
+                        sb.append("them");
+                    } else {
+                        sb.append("it");
+                    }
+                }
+
+                sb.append(". ");
             }
         }
-
-        if (af.getMapParams().containsKey("Radiance")) {
-            sb.append(" and each other ").append(af.getMapParams().get("ValidTgts"))
-                    .append(" that shares a color with ");
-            if (tgts.size() > 1) {
-                sb.append("them");
-            } else {
-                sb.append("it");
-            }
-        }
-
-        sb.append(". ");
 
         if (sa.getSubAbility() != null) {
             sb.append(sa.getSubAbility().getStackDescription());
