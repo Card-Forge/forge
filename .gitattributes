@@ -2067,6 +2067,7 @@ res/cardsfolder/d/deepwood_ghoul.txt svneol=native#text/plain
 res/cardsfolder/d/deepwood_legate.txt -text
 res/cardsfolder/d/deepwood_tantiv.txt svneol=native#text/plain
 res/cardsfolder/d/deepwood_wolverine.txt svneol=native#text/plain
+res/cardsfolder/d/defender_en_vec.txt -text
 res/cardsfolder/d/defender_of_chaos.txt svneol=native#text/plain
 res/cardsfolder/d/defender_of_law.txt svneol=native#text/plain
 res/cardsfolder/d/defender_of_the_order.txt svneol=native#text/plain
@@ -6254,6 +6255,7 @@ res/cardsfolder/o/orgg.txt svneol=native#text/plain
 res/cardsfolder/o/origin_spellbomb.txt svneol=native#text/plain
 res/cardsfolder/o/orim_samite_healer.txt svneol=native#text/plain
 res/cardsfolder/o/orims_chant.txt -text svneol=unset#text/plain
+res/cardsfolder/o/orims_cure.txt -text
 res/cardsfolder/o/orims_prayer.txt svneol=native#text/plain
 res/cardsfolder/o/orims_thunder.txt svneol=native#text/plain
 res/cardsfolder/o/orims_touch.txt -text svneol=unset#text/plain
@@ -7452,6 +7454,7 @@ res/cardsfolder/s/salvage_scout.txt svneol=native#text/plain
 res/cardsfolder/s/salvage_slasher.txt svneol=native#text/plain
 res/cardsfolder/s/salvage_titan.txt svneol=native#text/plain
 res/cardsfolder/s/salvaging_station.txt svneol=native#text/plain
+res/cardsfolder/s/samite_alchemist.txt -text
 res/cardsfolder/s/samite_archer.txt svneol=native#text/plain
 res/cardsfolder/s/samite_censer_bearer.txt -text
 res/cardsfolder/s/samite_healer.txt svneol=native#text/plain
