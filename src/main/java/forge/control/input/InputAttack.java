@@ -107,13 +107,6 @@ public class InputAttack extends Input {
 
             // just to make sure the attack symbol is marked
             AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
-
-            // for Castle Raptors, since it gets a bonus if untapped
-            for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-                final Command com = GameActionUtil.getCommands().get(effect);
-                com.execute();
-            }
-
             CombatUtil.showCombat();
         }
         else {

@@ -500,12 +500,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      */
     public final void nextPhase() {
-        // experimental, add executeCardStateEffects() here:
-        for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-            final Command com = GameActionUtil.getCommands().get(effect);
-            com.execute();
-        }
-
         this.needToNextPhase = false;
 
         // If the Stack isn't empty why is nextPhase being called?

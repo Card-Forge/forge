@@ -59,12 +59,6 @@ public class InputBlock extends Input {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        // for Castle Raptors, since it gets a bonus if untapped
-        for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-            final Command com = GameActionUtil.getCommands().get(effect);
-            com.execute();
-        }
-
         // could add "Reset Blockers" button
         ButtonUtil.enableOnlyOK();
 

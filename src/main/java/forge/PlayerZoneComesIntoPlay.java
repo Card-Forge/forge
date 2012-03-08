@@ -264,11 +264,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 comm.execute();
             }
         }
-
-        for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-            final Command com = GameActionUtil.getCommands().get(effect);
-            com.execute();
-        }
     }
 
     /**
