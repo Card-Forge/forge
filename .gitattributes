@@ -1674,6 +1674,7 @@ res/cardsfolder/c/coral_eel.txt svneol=native#text/plain
 res/cardsfolder/c/coral_fighters.txt svneol=native#text/plain
 res/cardsfolder/c/coral_helm.txt svneol=native#text/plain
 res/cardsfolder/c/coral_merfolk.txt svneol=native#text/plain
+res/cardsfolder/c/coral_net.txt -text svneol=unset#text/plain
 res/cardsfolder/c/coral_reef.txt svneol=native#text/plain
 res/cardsfolder/c/coral_trickster.txt svneol=native#text/plain
 res/cardsfolder/c/coralhelm_commander.txt svneol=native#text/plain
