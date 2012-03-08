@@ -147,6 +147,18 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed filterListByType dealing with the "Triggered..." argument.
+- Fixed Sivvi's Ruse description
+- Added the keyword "You may look at this card.".
+- CheckStyle.
+- Minor fix to the QuestItemZepplin.getPurchaseDescription() text, two words needed to have a space char to separate them.
+- Cleanup and a little tweak for "You may look at this card.".
+- Changed Refreshing Rain type to Instant.
+- Added a small update to Pump's stack description to enable "None".
+- Fixed Samite Alchemist.
+- DealDamage can handle custom stack descriptions now via StackDescription param.
+- Fixed Phylactery Lich.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -171,6 +183,13 @@ Plagiarize
 Nantuko Cultivator
 Mesmeric Fiend
 Gurzigost
+Healer's Headdress
+Intet, the Dreamer
+Defender en-Vec
+Orim's Cure
+Samite Alchemist
+Contested Cliffs
+Electrostatic Bolt
 
 
 end
