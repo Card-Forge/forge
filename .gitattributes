@@ -8235,6 +8235,7 @@ res/cardsfolder/s/soltari_champion.txt svneol=native#text/plain
 res/cardsfolder/s/soltari_crusader.txt svneol=native#text/plain
 res/cardsfolder/s/soltari_emissary.txt svneol=native#text/plain
 res/cardsfolder/s/soltari_foot_soldier.txt svneol=native#text/plain
+res/cardsfolder/s/soltari_guerrillas.txt -text svneol=unset#text/plain
 res/cardsfolder/s/soltari_lancer.txt svneol=native#text/plain
 res/cardsfolder/s/soltari_monk.txt svneol=native#text/plain
 res/cardsfolder/s/soltari_priest.txt svneol=native#text/plain
