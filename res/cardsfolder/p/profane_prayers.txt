@@ -2,7 +2,8 @@ Name:Profane Prayers
 ManaCost:2 B B
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ 2 B B | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ Profane Prayers deals X damage to target creature or player and you gain X life, where X is the number of Clerics on the battlefield.
+A:SP$ DealDamage | Cost$ 2 B B | Tgt$ TgtCP | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ Profane Prayers deals X damage to target creature or player and you gain X life, where X is the number of Clerics on the battlefield.
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$TypeOnBattlefield.Cleric
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
