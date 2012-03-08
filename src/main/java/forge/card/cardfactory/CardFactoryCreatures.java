@@ -367,32 +367,18 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void execute() {
-                    final Input target = new Input() {
-
-                        private static final long serialVersionUID = -806140334868210520L;
-
-                        @Override
-                        public void showMessage() {
-                            Singletons.getControl().getControlMatch().showMessage("Select an artifact you control");
-                            ButtonUtil.disableAll();
-                        }
-
-                        @Override
-                        public void selectCard(final Card card, final PlayerZone zone) {
-                            if (card.isArtifact() && zone.is(Constant.Zone.Battlefield)
-                                    && card.getController().isHuman()) {
-                                card.addCounter(Counters.PHYLACTERY, 1);
-                                this.stop();
-                            }
-                        }
-                    }; // Input target
 
                     if (card.getController().isHuman()) {
                         final CardList artifacts = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield)
                                 .getType("Artifact");
 
                         if (artifacts.size() != 0) {
-                            AllZone.getInputControl().setInput(target);
+                            Object o;
+                            o = GuiUtils.chooseOne("Select an artifact put a phylactery counter on", artifacts.toArray());
+                            if (o != null) {
+                                final Card c = (Card) o;
+                                c.addCounter(Counters.PHYLACTERY, 1);
+                            }
                         }
 
                     } else { // computer
