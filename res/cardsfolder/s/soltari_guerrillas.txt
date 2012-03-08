@@ -6,7 +6,7 @@ PT:3/2
 K:Shadow
 A:AB$ Effect | Cost$ 0 | Name$ Soltari Guerrillas Effect | ReplacementEffects$ EventGuerrillasDamageDone | SVars$ DamageGuerrillasCreature,GuerrillasX | RememberObjects$ Self | SpellDescription$ The next time CARDNAME would deal combat damage to an opponent this turn, it deals that damage to target creature instead.
 SVar:EventGuerrillasDamageDone:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ Opponent | ReplaceWith$ DamageGuerrillasCreature | IsCombat$ True | Description$ The next time Soltari Guerrillas would deal combat damage to an opponent this turn, it deals that damage to target creature instead.
-SVar:DamageGuerrillasCreature:AB$ DealDamage | Cost$ 0 | NumDmg$ GuerrillasX | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:DamageGuerrillasCreature:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | NumDmg$ GuerrillasX | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:GuerrillasX:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
