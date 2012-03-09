@@ -87,7 +87,6 @@ public abstract class SpellAbility {
     private boolean xCost = false;
     private boolean kickerAbility = false;
     private boolean cycling = false;
-    private boolean isCharm = false;
     private boolean isDelve = false;
 
     private int charmNumber;
@@ -1683,29 +1682,6 @@ public abstract class SpellAbility {
      */
     public final boolean isSuppressed() {
         return (this.temporarilySuppressed);
-    }
-
-    /**
-     * <p>
-     * setIsCharm.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setIsCharm(final boolean b) {
-        this.isCharm = b;
-    }
-
-    /**
-     * <p>
-     * isCharm.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isCharm() {
-        return this.isCharm;
     }
 
     /**

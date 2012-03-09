@@ -149,41 +149,42 @@ public final class AbilityFactoryCharm {
      *            the new up charm s as
      */
     public static void setupCharmSAs(final SpellAbility sa) {
+        if (sa.getAbilityFactory() == null || !sa.getAbilityFactory().getAPI().equals("Charm")) {
+            return;
+        }
         // make Charm choices
-        if (sa.isCharm()) {
-            final ArrayList<SpellAbility> choices = new ArrayList<SpellAbility>();
-            choices.addAll(sa.getCharmChoices());
-            for (int i = 0; i < choices.size(); i++) {
-                if (!sa.canPlay()) {
-                    choices.remove(sa);
-                }
+        final ArrayList<SpellAbility> choices = new ArrayList<SpellAbility>();
+        choices.addAll(sa.getCharmChoices());
+        for (int i = 0; i < choices.size(); i++) {
+            if (!sa.canPlay()) {
+                choices.remove(sa);
             }
-            for (int i = 0; i < sa.getCharmNumber(); i++) {
-                Object o;
-                if (i < sa.getMinCharmNumber()) {
-                    o = GuiUtils.chooseOne("Choose a mode", choices.toArray());
-                } else {
-                    o = GuiUtils.chooseOneOrNone("Choose a mode", choices.toArray());
-                }
-                if (null == o) {
-                    break;
-                }
-                final AbilitySub chosen = (AbilitySub) o;
-                sa.addCharmChoice(chosen);
-                choices.remove(chosen);
+        }
+        for (int i = 0; i < sa.getCharmNumber(); i++) {
+            Object o;
+            if (i < sa.getMinCharmNumber()) {
+                o = GuiUtils.chooseOne("Choose a mode", choices.toArray());
+            } else {
+                o = GuiUtils.chooseOneOrNone("Choose a mode", choices.toArray());
+            }
+            if (null == o) {
+                break;
+            }
+            final AbilitySub chosen = (AbilitySub) o;
+            sa.addCharmChoice(chosen);
+            choices.remove(chosen);
 
-                // walk down the SpellAbility tree and add to the child
-                // Ability_Sub
-                SpellAbility child = sa;
-                while (child.getSubAbility() != null) {
-                    child = child.getSubAbility();
-                }
-                child.setSubAbility(chosen);
-                if (chosen.getActivatingPlayer() == null) {
-                    chosen.setActivatingPlayer(child.getActivatingPlayer());
-                }
-                chosen.setParent(child);
+            // walk down the SpellAbility tree and add to the child
+            // Ability_Sub
+            SpellAbility child = sa;
+            while (child.getSubAbility() != null) {
+                child = child.getSubAbility();
             }
+            child.setSubAbility(chosen);
+            if (chosen.getActivatingPlayer() == null) {
+                chosen.setActivatingPlayer(child.getActivatingPlayer());
+            }
+            chosen.setParent(child);
         }
     }
 

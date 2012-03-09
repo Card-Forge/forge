@@ -496,7 +496,6 @@ public class AbilityFactory {
             } else if (this.isSp) {
                 spellAbility = AbilityFactoryCharm.createSpellCharm(this);
             }
-            spellAbility.setIsCharm(true);
             final int num = Integer.parseInt(this.mapParams.containsKey("CharmNum") ? this.mapParams.get("CharmNum")
                     : "1");
             spellAbility.setCharmNumber(num);
