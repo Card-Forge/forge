@@ -388,6 +388,5 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
         this.getBottomTableWithCards().sort(1, true);
 
         this.setVisible(true);
-        this.setAlwaysOnTop(true);
     }
 }
