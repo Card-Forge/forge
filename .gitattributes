@@ -1785,6 +1785,7 @@ res/cardsfolder/c/crossbow_infantry.txt svneol=native#text/plain
 res/cardsfolder/c/crossway_vampire.txt -text
 res/cardsfolder/c/crosswinds.txt svneol=native#text/plain
 res/cardsfolder/c/crovax_ascendant_hero.txt svneol=native#text/plain
+res/cardsfolder/c/crovax_the_cursed.txt -text svneol=unset#text/plain
 res/cardsfolder/c/crowd_favorites.txt svneol=native#text/plain
 res/cardsfolder/c/crowd_of_cinders.txt svneol=native#text/plain
 res/cardsfolder/c/crown_of_convergence.txt -text svneol=unset#text/plain

@@ -1,0 +1,16 @@
+Name:Crovax the Cursed
+ManaCost:2 B B
+Types:Legendary Creature Vampire
+Text:no text
+PT:0/0
+K:etbCounter:P1P1:4
+A:AB$ Pump | Cost$ B | KW$ Flying | SpellDescription$ Crovax gains flying until end of turn.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice a creature. If you do, put a +1/+1 counter on Crovax. If you don't, remove a +1/+1 counter from Crovax.
+SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Optional$ True | SacValid$ Creature | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBSubCounter
+SVar:DBSubCounter:DB$ RemoveCounter | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crovax_the_cursed.jpg
+End
