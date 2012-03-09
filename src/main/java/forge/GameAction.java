@@ -1404,6 +1404,22 @@ public class GameAction {
                 newSA.setDescription(sa.getDescription() + " (without paying its mana cost and as though it has flash)");
                 alternatives.add(newSA);
             }
+            if (sa.isSpell() && keyword.startsWith("Alternative Cost")) {
+                final SpellAbility newSA = sa.copy();
+                final Cost cost = new Cost(keyword.substring(17), source.getName(), false);
+                if (newSA.getPayCosts() != null) {
+                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
+                        if (!(part instanceof CostMana)) {
+                            cost.getCostParts().add(part);
+                        }
+                    }
+                }
+                newSA.setBasicSpell(false);
+                newSA.setPayCosts(cost);
+                newSA.setManaCost("");
+                newSA.setDescription(sa.getDescription() + " (by paying " + keyword.substring(17) + " instead of its mana cost)");
+                alternatives.add(newSA);
+            }
         }
         return alternatives;
     }
