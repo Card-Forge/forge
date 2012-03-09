@@ -2,9 +2,9 @@ Name:Curfew
 ManaCost:U
 Types:Instant
 Text:no text
-A:SP$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | SubAbility$ DBChangeZone | SpellDescription$ Each player returns a creature he or she controls to its owner's hand.
-SVar:DBChangeZone:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | DefinedPlayer$ Opponent | ChangeType$ Creature | ChangeNum$ 1 | Hidden$ True | IsCurse$ True
-SVar:RemRandomDeck:True
+A:SP$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | SubAbility$ DBChangeZone | SpellDescription$ Each player returns a creature he or she controls to its owner's hand.
+SVar:DBChangeZone:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | DefinedPlayer$ Opponent | ChangeType$ Creature.YouDontCtrl | ChangeNum$ 1 | Hidden$ True | IsCurse$ True
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curfew.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/68.jpg
