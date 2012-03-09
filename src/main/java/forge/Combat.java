@@ -805,6 +805,7 @@ public class Combat {
         if (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
                 || attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")) {
             this.addDefendingDamage(damage, attacker);
+            return;
         }
 
         if (block.size() == 1) {
