@@ -1702,6 +1702,7 @@ res/cardsfolder/c/corrupting_licid.txt -text
 res/cardsfolder/c/cosis_ravager.txt svneol=native#text/plain
 res/cardsfolder/c/cosis_trickster.txt svneol=native#text/plain
 res/cardsfolder/c/cosmic_horror.txt svneol=native#text/plain
+res/cardsfolder/c/cosmic_larva.txt -text
 res/cardsfolder/c/council_of_advisors.txt svneol=native#text/plain
 res/cardsfolder/c/counsel_of_the_soratami.txt svneol=native#text/plain
 res/cardsfolder/c/counterbalance.txt svneol=native#text/plain
