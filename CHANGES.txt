@@ -1,13 +1,13 @@
-Forge Beta: ##-##-2012 ver 1.2.# rev #####
+Forge Beta: 03-09-2012 ver 1.2.5 rev 14663
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-10### cards in total.
+10409 cards in total.
 
 
 This version is primarily a maintenance release. The deck converter bugs found in the previous version have been fixed. Version 1.2.5 includes some major changes to the new UI and to alternative costs. If you notice any new bugs in these two areas you should notify the devs.
 
-When you select a new skin in the Preferences view Forge should save the change to the preference file, quit and then automatically re-launch with the new skin displayed. during testing some people have noticed that Forge is not restarting on their computer and they have to re-launch Forge themselves.
+When you select a new skin in the Preferences view Forge should save the change to the preference file, quit and then automatically re-launch with the new skin displayed. During testing some people have noticed that Forge is not restarting on their computer and they have to re-launch Forge themselves.
 
 The zeppelin in quest mode has technical difficulties. We have a mechanic scheduled to look at it this weekend. :)
 
@@ -184,42 +184,53 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+Doublestrike
+Fnoed
+Friar Sol
+Jeff Wadsworth
+Max mtg
+Marc
+Slapshot5
+Sloth
+Squee1968
+Timmermac
+Chris H
 
 
 Added many cards, including:
 
-Homeward Path
-Brand
 Aura Thief
 Blood Feud
-Prey Upon
-Karrthus, Tyrant of Jund
-Enduring Renewal
-Retraced Image
-Outmaneuver
-Rancid Earth
+Brand
 Bull Elephant
-Plagiarize
-Nantuko Cultivator
-Mesmeric Fiend
+Contested Cliffs
+Coral Net
+Defender en-Vec
+Electrostatic Bolt
+Enduring Renewal
 Gurzigost
 Healer's Headdress
+Homeward Path
 Intet, the Dreamer
-Defender en-Vec
-Orim's Cure
-Samite Alchemist
-Contested Cliffs
-Electrostatic Bolt
-Thunderstaff
-Coral Net
-Mind Maggots
-Soltari Guerrillas
+Karrthus, Tyrant of Jund
 Keeper of the Mind
+Mesmeric Fiend
+Mind Maggots
+Nantuko Cultivator
+Orim's Cure
+Outmaneuver
+Plagiarize
+Prey Upon
+Rancid Earth
+Retraced Image
+Samite Alchemist
+Soltari Guerrillas
+Thunderstaff
 
 
 end
