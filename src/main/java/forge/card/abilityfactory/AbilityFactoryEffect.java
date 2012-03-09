@@ -354,6 +354,7 @@ public class AbilityFactoryEffect {
         String[] effectStaticAbilities = null;
         String[] effectReplacementEffects = null;
         String effectRemembered = null;
+        String effectImprinted = null;
 
         if (params.containsKey("Abilities")) {
             effectAbilities = params.get("Abilities").split(",");
@@ -381,6 +382,10 @@ public class AbilityFactoryEffect {
 
         if (params.containsKey("RememberObjects")) {
             effectRemembered = params.get("RememberObjects");
+        }
+
+        if (params.containsKey("ImprintCards")) {
+            effectImprinted = params.get("ImprintCards");
         }
 
         // Effect eff = new Effect();
@@ -472,6 +477,13 @@ public class AbilityFactoryEffect {
         if (effectRemembered != null) {
             for (final Object o : AbilityFactory.getDefinedObjects(card, effectRemembered, sa)) {
                 eff.addRemembered(o);
+            }
+        }
+
+        // Set Imprinted
+        if (effectImprinted != null) {
+            for (final Card c : AbilityFactory.getDefinedCards(card, effectImprinted, sa)) {
+                eff.addImprinted(c);
             }
         }
 
