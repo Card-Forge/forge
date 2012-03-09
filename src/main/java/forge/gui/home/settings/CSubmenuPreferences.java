@@ -192,19 +192,21 @@ public enum CSubmenuPreferences implements ICSubmenu {
         view.getLstChooseSkin().ensureIndexIsVisible(view.getLstChooseSkin().getSelectedIndex());
     }
 
+    @SuppressWarnings("serial")
     private void updateSkin() {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
-        final ForgePreferences prefs = Singletons.getModel().getPreferences();
         final String name = view.getLstChooseSkin().getSelectedValue().toString();
-
+        final ForgePreferences prefs = Singletons.getModel().getPreferences();
         if (name.equals(prefs.getPref(FPref.UI_SKIN))) { return; }
 
-        RestartUtil.restartApplication(new Runnable() {
-            @Override
-            public void run() {
-                prefs.setPref(FPref.UI_SKIN, name);
-                prefs.save();
-            }
-        });
+        view.getScrChooseSkin().setVisible(false);
+        view.getLblChooseSkin().setText("Please restart Forge (click here to close).");
+        view.getLblChooseSkin().setHoverable(true);
+        view.getLblChooseSkin().setCommand(new Command() { @Override
+            public void execute() { RestartUtil.restartApplication(new Runnable() {
+                    @Override public void run() { } }); } });
+
+        prefs.setPref(FPref.UI_SKIN, name);
+        prefs.save();
     }
 }

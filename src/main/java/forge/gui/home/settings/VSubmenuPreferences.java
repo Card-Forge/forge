@@ -56,6 +56,10 @@ public enum VSubmenuPreferences implements IVSubmenu {
         .text("Choose Skin").fontScaleAuto(false).fontStyle(Font.BOLD).fontSize(14).build();
 
     private final JList lstChooseSkin = new FList();
+    private final FLabel lblChooseSkin = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC)
+            .text("Various user-created themes for Forge backgrounds, fonts, and colors.")
+            .fontAlign(SwingConstants.LEFT).build();
+    private final JScrollPane scrChooseSkin = new FScrollPane(lstChooseSkin);
 
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
     private final JCheckBox cbSingletons = new OptionsCheckBox("Singleton Mode");
@@ -116,11 +120,8 @@ public enum VSubmenuPreferences implements IVSubmenu {
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints);
 
         pnlPrefs.add(lblTitleSkin, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Various user-created themes for Forge backgrounds, fonts, and colors."), regularConstraints);
-        pnlPrefs.add(new FScrollPane(lstChooseSkin), "h 120px!, w 150px!, gap 10% 0 0 2%, wrap");
-
-        pnlPrefs.add(new FLabel.Builder().text("Card Size").fontStyle(Font.BOLD).build(), regularConstraints);
-        pnlPrefs.add(new NoteLabel("Size of cards in hand and playing field, when possible"), regularConstraints);
+        pnlPrefs.add(lblChooseSkin, regularConstraints);
+        pnlPrefs.add(scrChooseSkin, "h 200px!, w 200px!, gap 10% 0 0 2%, wrap");
 
         pnlPrefs.add(cbRandomFoil, regularConstraints);
         pnlPrefs.add(new NoteLabel("Adds foiled effects to random cards."), regularConstraints);
@@ -323,6 +324,16 @@ public enum VSubmenuPreferences implements IVSubmenu {
     /** @return {@link javax.swing.JList} */
     public final JList getLstChooseSkin() {
         return lstChooseSkin;
+    }
+
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public final FLabel getLblChooseSkin() {
+        return lblChooseSkin;
+    }
+
+    /** @return {@link javax.swing.JScrollPane} */
+    public final JScrollPane getScrChooseSkin() {
+        return scrChooseSkin;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
