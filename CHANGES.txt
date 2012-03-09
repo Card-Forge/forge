@@ -159,6 +159,31 @@ Fixes/Features:
 - DealDamage can handle custom stack descriptions now via StackDescription param.
 - Fixed Phylactery Lich.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Hardcoded static abilities are now only be called by checkStaticAbilities.
+- Reordered InputCleanup to hopefully prevent the human from getting accidentally stuck (I have no idea if this works, because i can't reproduce the bug).
+- Added pic links for the Mortivore deck.
+- Improved the morph description for cards that are ! isOnlyManaCost().
+- Added a medium version of the Edna Krabappel deck.
+- Little tweak for playStack in ComputerUtil.
+- Fixed Profane Prayers (thanks to squee1968).
+- Small change to ChooseNumber to make Min/Max read SVars.
+- Small change to ChooseNumber to allow different titles for the list block to expand its uses slightly.
+- Changed title of choice list for Ashling's Prerogative
+- Fixed two AF's overwriting the canPlay() function.
+- Fixed text of Elbrus, the Binding Blade.
+- Fixed Goblin Machinist shuffling.
+- Fixed Lim-Dul the Necromancer making zombie enchantments.
+- Fixed Soltari Guerrillas so that it deals combat damage to the target creature.
+- Temporary visual fix for skin restart issue.
+- Removed "always on top" from drafting process.
+- Updating threading in draft start game process.
+- Updated threading for sealed start game process.
+- Updated threading for quest start game process.
+- Fixed Curfew.
+- Small improvement to Keeper of the Light
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -190,6 +215,11 @@ Orim's Cure
 Samite Alchemist
 Contested Cliffs
 Electrostatic Bolt
+Thunderstaff
+Coral Net
+Mind Maggots
+Soltari Guerrillas
+Keeper of the Mind
 
 
 end
