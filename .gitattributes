@@ -4067,6 +4067,7 @@ res/cardsfolder/h/heroes_remembered.txt svneol=native#text/plain
 res/cardsfolder/h/heroes_reunion.txt svneol=native#text/plain
 res/cardsfolder/h/heros_demise.txt svneol=native#text/plain
 res/cardsfolder/h/heros_resolve.txt svneol=native#text/plain
+res/cardsfolder/h/hesitation.txt -text svneol=unset#text/plain
 res/cardsfolder/h/hex.txt svneol=native#text/plain
 res/cardsfolder/h/hex_parasite.txt -text
 res/cardsfolder/h/hexplate_golem.txt svneol=native#text/plain
