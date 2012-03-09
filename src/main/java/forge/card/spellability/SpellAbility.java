@@ -89,10 +89,6 @@ public abstract class SpellAbility {
     private boolean cycling = false;
     private boolean isDelve = false;
 
-    private int charmNumber;
-    private int minCharmNumber;
-    private final ArrayList<SpellAbility> charmChoices = new ArrayList<SpellAbility>();
-
     private Input beforePayMana;
     private Input afterResolve;
     private Input afterPayMana;
@@ -1682,79 +1678,6 @@ public abstract class SpellAbility {
      */
     public final boolean isSuppressed() {
         return (this.temporarilySuppressed);
-    }
-
-    /**
-     * <p>
-     * setCharmNumber.
-     * </p>
-     * 
-     * @param i
-     *            an int
-     */
-    public final void setCharmNumber(final int i) {
-        this.charmNumber = i;
-    }
-
-    /**
-     * <p>
-     * getCharmNumber.
-     * </p>
-     * 
-     * @return an int
-     */
-    public final int getCharmNumber() {
-        return this.charmNumber;
-    }
-
-    /**
-     * <p>
-     * setMinCharmNumber.
-     * </p>
-     * 
-     * @param i
-     *            an int
-     * @since 1.1.6
-     */
-    public final void setMinCharmNumber(final int i) {
-        this.minCharmNumber = i;
-    }
-
-    /**
-     * <p>
-     * getMinCharmNumber.
-     * </p>
-     * 
-     * @return an int
-     * @since 1.1.6
-     */
-    public final int getMinCharmNumber() {
-        return this.minCharmNumber;
-    }
-
-    /**
-     * <p>
-     * addCharmChoice.
-     * </p>
-     * 
-     * @param sa
-     *            a SpellAbility
-     * @since 1.1.6
-     */
-    public final void addCharmChoice(final SpellAbility sa) {
-        this.charmChoices.add(sa);
-    }
-
-    /**
-     * <p>
-     * getCharmChoicesMade.
-     * </p>
-     * 
-     * @return an ArrayList<SpellAbility>
-     * @since 1.1.6
-     */
-    public final ArrayList<SpellAbility> getCharmChoices() {
-        return this.charmChoices;
     }
 
     /**

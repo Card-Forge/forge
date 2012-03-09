@@ -18,7 +18,10 @@
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import forge.AllZone;
+import forge.Card;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
@@ -148,30 +151,38 @@ public final class AbilityFactoryCharm {
      * @param sa
      *            the new up charm s as
      */
-    public static void setupCharmSAs(final SpellAbility sa) {
-        if (sa.getAbilityFactory() == null || !sa.getAbilityFactory().getAPI().equals("Charm")) {
-            return;
+    public static SpellAbility setupCharmSAs(final SpellAbility sa) {
+        AbilityFactory af = sa.getAbilityFactory();
+        if (af == null || !af.getAPI().equals("Charm") || sa.isWrapper()) {
+            return sa;
         }
-        // make Charm choices
-        final ArrayList<SpellAbility> choices = new ArrayList<SpellAbility>();
-        choices.addAll(sa.getCharmChoices());
-        for (int i = 0; i < choices.size(); i++) {
-            if (!sa.canPlay()) {
-                choices.remove(sa);
-            }
+        final HashMap<String, String> params = af.getMapParams();
+        final Card source = sa.getSourceCard();
+        //this resets all previous choices
+        sa.setSubAbility(null);
+        sa.setActivatingPlayer(AllZone.getHumanPlayer());
+        final int num = Integer.parseInt(params.containsKey("CharmNum") ? params.get("CharmNum")
+                : "1");
+        final int min = params.containsKey("MinCharmNum") ? Integer.parseInt(params.get("MinCharmNum")) : num;
+        final String[] saChoices = params.get("Choices").split(",");
+        ArrayList<SpellAbility> choices = new ArrayList<SpellAbility>();
+        for (final String saChoice : saChoices) {
+            final String ab = source.getSVar(saChoice);
+            final AbilityFactory charmAF = new AbilityFactory();
+            choices.add(charmAF.getAbility(ab, source));
         }
-        for (int i = 0; i < sa.getCharmNumber(); i++) {
+
+        for (int i = 0; i < num; i++) {
             Object o;
-            if (i < sa.getMinCharmNumber()) {
+            if (i < min) {
                 o = GuiUtils.chooseOne("Choose a mode", choices.toArray());
             } else {
                 o = GuiUtils.chooseOneOrNone("Choose a mode", choices.toArray());
             }
             if (null == o) {
-                break;
+                return null;
             }
             final AbilitySub chosen = (AbilitySub) o;
-            sa.addCharmChoice(chosen);
             choices.remove(chosen);
 
             // walk down the SpellAbility tree and add to the child
@@ -186,6 +197,7 @@ public final class AbilityFactoryCharm {
             }
             chosen.setParent(child);
         }
+        return sa;
     }
 
 } // end class AbilityFactory_Charm

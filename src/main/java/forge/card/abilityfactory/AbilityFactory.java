@@ -37,7 +37,6 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
-import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityCondition;
 import forge.card.spellability.SpellAbilityRestriction;
@@ -495,19 +494,6 @@ public class AbilityFactory {
                 spellAbility = AbilityFactoryCharm.createAbilityCharm(this);
             } else if (this.isSp) {
                 spellAbility = AbilityFactoryCharm.createSpellCharm(this);
-            }
-            final int num = Integer.parseInt(this.mapParams.containsKey("CharmNum") ? this.mapParams.get("CharmNum")
-                    : "1");
-            spellAbility.setCharmNumber(num);
-            final int min = this.mapParams.containsKey("MinCharmNum") ? Integer.parseInt(this.mapParams
-                    .get("MinCharmNum")) : num;
-            spellAbility.setMinCharmNumber(min);
-
-            final String[] saChoices = this.mapParams.get("Choices").split(",");
-            for (final String saChoice : saChoices) {
-                final String ab = this.hostC.getSVar(saChoice);
-                final AbilityFactory charmAF = new AbilityFactory();
-                spellAbility.addCharmChoice(charmAF.getAbility(ab, this.hostC));
             }
         }
 

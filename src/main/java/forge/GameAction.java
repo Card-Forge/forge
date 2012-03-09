@@ -2243,10 +2243,10 @@ public class GameAction {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final void playSpellAbility(final SpellAbility sa) {
+    public final void playSpellAbility(SpellAbility sa) {
         sa.setActivatingPlayer(AllZone.getHumanPlayer());
 
-        AbilityFactoryCharm.setupCharmSAs(sa);
+        sa = AbilityFactoryCharm.setupCharmSAs(sa);
 
         // Need to check PayCosts, and Ability + All SubAbilities for Target
         boolean newAbility = sa.getPayCosts() != null;
