@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 import forge.Command;
 import forge.Constant;
@@ -182,21 +183,37 @@ public enum CSubmenuDraft implements ICSubmenu {
             return;
         }
 
-        OverlayUtils.startGameOverlay();
-        OverlayUtils.showOverlay();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                OverlayUtils.startGameOverlay();
+                OverlayUtils.showOverlay();
+            }
+        });
 
-        DeckGroup opponentDecks = Singletons.getModel().getDecks().getDraft().get(human.getName());
+        final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
+            @Override
+            public Object doInBackground() {
+                DeckGroup opponentDecks = Singletons.getModel().getDecks().getDraft().get(human.getName());
 
-        Constant.Runtime.HUMAN_DECK[0] = human;
-        Constant.Runtime.COMPUTER_DECK[0] = opponentDecks.getAiDecks().get(aiIndex); //zero is human deck, so it must be +1
+                Constant.Runtime.HUMAN_DECK[0] = human;
+                Constant.Runtime.COMPUTER_DECK[0] = opponentDecks.getAiDecks().get(aiIndex); //zero is human deck, so it must be +1
 
-        if (Constant.Runtime.COMPUTER_DECK[0] == null) {
-            throw new IllegalStateException("Draft: Computer deck is null!");
-        }
+                if (Constant.Runtime.COMPUTER_DECK[0] == null) {
+                    throw new IllegalStateException("Draft: Computer deck is null!");
+                }
 
-        Constant.Runtime.setGameType(GameType.Draft);
-        GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
-        OverlayUtils.hideOverlay();
+                Constant.Runtime.setGameType(GameType.Draft);
+                GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+                return null;
+            }
+
+            @Override
+            public void done() {
+                OverlayUtils.hideOverlay();
+            }
+        };
+        worker.execute();
     }
 
     /** */
