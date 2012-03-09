@@ -1090,6 +1090,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.blockedThisTurn.add(attacker);
     }
 
+    /**
+     * <p>
+     * clearBlockedThisTurn.
+     * </p>
+     */
     void clearBlockedThisTurn() {
         this.blockedThisTurn.clear();
     }
@@ -1108,6 +1113,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.blockedByThisTurn.add(blocker);
     }
 
+    /**
+     * <p>
+     * clearBlockedByThisTurn.
+     * </p>
+     */
     void clearBlockedByThisTurn() {
         this.blockedByThisTurn.clear();
     }
