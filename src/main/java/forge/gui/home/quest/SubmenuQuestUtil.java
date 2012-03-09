@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
@@ -193,51 +195,64 @@ public class SubmenuQuestUtil {
         final QuestData qData = AllZone.getQuestData();
         final QuestEvent event = selectedOpponent.getEvent();
 
-        OverlayUtils.startGameOverlay();
-        OverlayUtils.showOverlay();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                OverlayUtils.startGameOverlay();
+                OverlayUtils.showOverlay();
+            }
+        });
 
-        // Logic
-        Constant.Runtime.HUMAN_DECK[0] = SubmenuQuestUtil.getCurrentDeck();
-        Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
-        Constant.Quest.OPP_ICON_NAME[0] = event.getIconFilename();
-        Constant.Runtime.setGameType(GameType.Quest);
+        final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
+            @Override
+            public Object doInBackground() {
+                Constant.Runtime.HUMAN_DECK[0] = SubmenuQuestUtil.getCurrentDeck();
+                Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
+                Constant.Quest.OPP_ICON_NAME[0] = event.getIconFilename();
+                Constant.Runtime.setGameType(GameType.Quest);
 
-        qData.randomizeOpponents();
-        qData.setCurrentEvent(event);
-        qData.saveData();
+                qData.randomizeOpponents();
+                qData.setCurrentEvent(event);
+                qData.saveData();
 
-        if (qData.isFantasy()) {
-            Constant.Quest.FANTASY_QUEST[0] = true;
-            int lifeAI = 20;
-            int lifeHuman = 20;
+                if (qData.isFantasy()) {
+                    Constant.Quest.FANTASY_QUEST[0] = true;
+                    int lifeAI = 20;
+                    int lifeHuman = 20;
 
-            if (selectedOpponent.getEvent().getEventType().equals("challenge")) {
-                int extraLife = 0;
+                    if (selectedOpponent.getEvent().getEventType().equals("challenge")) {
+                        int extraLife = 0;
 
-                // If zeppelin has been purchased, gear will be at level 2.
-                if (event.getEventType().equalsIgnoreCase("challenge")
-                    && !qData.getInventory().getItem("Zeppelin").isAvailableForPurchase()
-                    && VSubmenuChallenges.SINGLETON_INSTANCE.getCbZep().isSelected()) {
-                        extraLife = 3;
+                        // If zeppelin has been purchased, gear will be at level 2.
+                        if (event.getEventType().equalsIgnoreCase("challenge")
+                            && !qData.getInventory().getItem("Zeppelin").isAvailableForPurchase()
+                            && VSubmenuChallenges.SINGLETON_INSTANCE.getCbZep().isSelected()) {
+                                extraLife = 3;
+                        }
+                        lifeAI = ((QuestChallenge) event).getAILife();
+                        lifeHuman = qData.getLife() + extraLife;
+                    }
+
+                    GameNew.newGame(
+                            Constant.Runtime.HUMAN_DECK[0],
+                            Constant.Runtime.COMPUTER_DECK[0],
+                            QuestUtil.getHumanStartingCards(qData),
+                            QuestUtil.getComputerStartingCards(qData),
+                            lifeHuman,
+                            lifeAI);
+                } // End isFantasy
+                else {
+                    GameNew.newGame(SubmenuQuestUtil.getCurrentDeck(), event.getEventDeck());
                 }
-                lifeAI = ((QuestChallenge) event).getAILife();
-                lifeHuman = qData.getLife() + extraLife;
+                return null;
             }
 
-            GameNew.newGame(
-                    Constant.Runtime.HUMAN_DECK[0],
-                    Constant.Runtime.COMPUTER_DECK[0],
-                    QuestUtil.getHumanStartingCards(qData),
-                    QuestUtil.getComputerStartingCards(qData),
-                    lifeHuman,
-                    lifeAI);
-        } // End isFantasy
-        else {
-            GameNew.newGame(SubmenuQuestUtil.getCurrentDeck(), event.getEventDeck());
-        }
-
-        // Start transisiton to match UI.
-        OverlayUtils.hideOverlay();
+            @Override
+            public void done() {
+                OverlayUtils.hideOverlay();
+            }
+        };
+        worker.execute();
     }
 
     /** Selectable panels for duels and challenges. */
