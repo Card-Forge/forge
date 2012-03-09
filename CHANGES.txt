@@ -1,15 +1,11 @@
-Forge Beta: 03-09-2012 ver 1.2.5 rev 14663
+Forge Beta: 0#-##-2012 ver 1.2.5 rev 14###
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-10409 cards in total.
+10### cards in total.
 
 
-This version is primarily a maintenance release. The deck converter bugs found in the previous version have been fixed. Version 1.2.5 includes some major changes to the new UI and to alternative costs. If you notice any new bugs in these two areas you should notify the devs.
 
-When you select a new skin in the Preferences view Forge should save the change to the preference file, quit and then automatically re-launch with the new skin displayed. During testing some people have noticed that Forge is not restarting on their computer and they have to re-launch Forge themselves.
-
-The zeppelin in quest mode has technical difficulties. We have a mechanic scheduled to look at it this weekend. :)
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
@@ -21,216 +17,17 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-- Cleared out the changes.txt file, now ready for new material.
-- Cleanup and performance updates in ComputerUtilAttack.
-- Added Combat.getAttackerList() which returns a CardList - replaces Combat.getAttackers in most cases.
-- Little improvement in AF Pump AI.
-- Fixed a bug with the "AllValid" parameter in AF GainControl.
-- fixing file derivation algorithm
-- Added AF Fight.
-- Converted Nightfall Predator to use AF Fight.
-- Added the optional parameter "TargetsFromDifferentZone" (allows only targets with different controllers).
-- Fixed Tormod's Crypt.
-- Converted Triangle of War to script.
-- Fixed Fledgling Osprey and Skyrider Trainee.
-- Fixed Ironclaw Curse.
-- Fixed possible NPE's in findParentsTargetedCard.
-- Converted Insurrection to script.
-- Fixed Damia, Sage of Stone.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Full home UI rebuild: singleton design pattern, better menu structure, improved resizing dynamics, constructed mode rebuild.
-- Minor fix.
-- Cleanup in AF GainControl.
-- Quest starting lands incorrectly using Basic Land # instead of Snow Land #
-- Fixed Twinstrike.
-- Fixed Spiteful Shadows.
-- Fixed Chancellor of the Forge.
-- automatic filename repair in constructed folder
-- Refactored QuestEventManager to be a static factory.
-- Fixed start button bug in quest submenu.
-- forge.view.toolbox -> forge.gui.toolbox
-- Removed redundant and deprecated getPhaseHandler from AllZone in favor of model singleton getPhaseHandler.
-- Added some quest-related temp. files to .gitignore
-- Added option to start quests with a precon deck
-- Fixed sealed deck update problem.
-- Fixed overlay persistent bug in draft mode new game.
-- Returned exit button to main menu.
-- Updated broken finalizer in main with shutdown hook.
-- Removed deprecated ControlHomeUI.
-- Added tooltip text containing the deck description to the quest deck selector.
-- Minor update.
-- Small visual update in content download section.
-- Bugfix: NPE-after-1-game in constructed mode.
-- Rename: forge.gui.home.limited -> forge.gui.home.sanctioned
-- Fixed overlay for quest deck editor.
-- Bugfix: Random color select in constructed submenu.
-- Added a boolean variable "GameOver" to GameState to prevent multiple wins/losses per game.
-- Bugfix: Quest pet/plant handling. Zeppelin has deeper issues and needs a larger overhaul, will happen soon, not working at present.
-- Bugfix: Refresh quest events/stats across matches.
-- Fixes and improvements for AF Play.
-- Fixed Hellcarver Demon.
-- Added the optional parameter "NonBasicSpell" to all AF's (to mark all pseudo spells that are really alternative costs).
-- Marked all retrace spellAbilities as non basic.
-- Fixed Moonbow Illusionist.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed Infinite Hourglass.
-- AI Improvements of AF Pump.
-- Added the precon Naya Domain.
-- Added the precon Jund Appetite for War.
-- Added the precon Grixis Shambling Army.
-- Added the precon Esper Air Assault.
-- Fixed gainControlStackDescription accidentally modifying the targets of the spell.
-- Fixed Feral Hydra's type.
-- More work on the AI of AF Pump.
-- CheckStyle.
-- Updated some SVars and scripts.
-- fixed targeting of Telim'Tor's Edict
-- fatpacks list updated
-- Small fix to restart util for skin switching.
-- Added the new marbles skin.
-- Turns out one must explicitly rename things on TortoiseSVN.
-- Generate5ColorDeck will now always use all 5 colors.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- The etbCounter keyword is now parsed when needed (and is now visible for the AI).
-- Converted the triggered ability of Homarid to script.
-- Fixed Living Death.
-- Updated some SVars.
-- Fixed Memory Jar.
-- Added the precon Totem Power.
-- Fixed Toshiro Umezawa.
-- CheckStyle.
-- Fixed Soldevi Digger.
-- Removed "random selector on list update" from constructed submenu deck lists.
-- Bugfix: constructed submenu, start game with custom decks empty NPE
-- Bugfix: current skin wasn't selected in skin select box
-- Cleanup: removed redundant UI_USE_SKIN in prefs enum.
-- All events below overlay layer are now blocked.
-- Overlay utils moved from GuiUtils to OverlayUtils.
-- Minor fix.
-- All methods relating to overlay moved to OverlayUtil.
-- Splash frame: Disclaimer color updated to be the same as filled progress bar text color.
-- Restructuring in AF Pump and little improvements for Curses.
-- Ran set info script.
-- Ran oracle script.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Improved and simplified the spell description field to the CostChange keyword. Several cards converted.
-- More CostChange keyword spell descriptions.
-- Restructured the way alternative costs of spells are handled for the human player.
-- More CostChange keyword spell descriptions.
-- Finished CostChange keyword spell descriptions.
-- Restructured the way alternative costs of spells are handled for the computer player.
-- Aluren will no longer allow you to pay the creatures mana cost at instant speed.
-- sideboard from precon is also added to the card pool
-- Added the event deck Deathfed as precon (available after 20 wins).
-- Added a fluff piece to the changes.txt file.
-- Text fix.
-- The AI will no longer use Oblivion Ring on a permanent that is enchanted with one of his own auras.
-- Little tweaks for the AI of AF Destroy.
-- Text fix
-- Fixed the text for Sacred Prey, now states "you gain 1 life".
-- Shutdown hook fix for skin switcher.
-- Fixed casting cost of Mesmeric Fiend.
-- Upgraded "Marble Blue" skin backgrounds to be more marbley.
-- Removed outdated "start game" overlay from a few submenus, replaced with standardized one.
-- compare strings fixed
-- Bugfix: Prevented editor from always being on top, which blocked the save dialog.
-- Added input panel's "remind()" flasher for ability mana cost interactions.
-- Improved thread handling for constructed mode game start.
-- Bugfix: Removed "always on top" from quest spell shop.
-- MoWrapLayout moved into forge.gui package.
-- SubTab class deleted.
-- TortoiseSVN confusion...
-- Converted Umbral Mantle to script.
-- Prevented some auras and equipment from possibly overwriting SVars of cards they are attached to.
-- Added a fluff piece to the changes.txt file.
-- Added a fluff piece to the changes.txt file.
-- Ran set info script.
-- Ran oracle script.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed filterListByType dealing with the "Triggered..." argument.
-- Fixed Sivvi's Ruse description
-- Added the keyword "You may look at this card.".
-- CheckStyle.
-- Minor fix to the QuestItemZepplin.getPurchaseDescription() text, two words needed to have a space char to separate them.
-- Cleanup and a little tweak for "You may look at this card.".
-- Changed Refreshing Rain type to Instant.
-- Added a small update to Pump's stack description to enable "None".
-- Fixed Samite Alchemist.
-- DealDamage can handle custom stack descriptions now via StackDescription param.
-- Fixed Phylactery Lich.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Hardcoded static abilities are now only be called by checkStaticAbilities.
-- Reordered InputCleanup to hopefully prevent the human from getting accidentally stuck (I have no idea if this works, because i can't reproduce the bug).
-- Added pic links for the Mortivore deck.
-- Improved the morph description for cards that are ! isOnlyManaCost().
-- Added a medium version of the Edna Krabappel deck.
-- Little tweak for playStack in ComputerUtil.
-- Fixed Profane Prayers (thanks to squee1968).
-- Small change to ChooseNumber to make Min/Max read SVars.
-- Small change to ChooseNumber to allow different titles for the list block to expand its uses slightly.
-- Changed title of choice list for Ashling's Prerogative
-- Fixed two AF's overwriting the canPlay() function.
-- Fixed text of Elbrus, the Binding Blade.
-- Fixed Goblin Machinist shuffling.
-- Fixed Lim-Dul the Necromancer making zombie enchantments.
-- Fixed Soltari Guerrillas so that it deals combat damage to the target creature.
-- Temporary visual fix for skin restart issue.
-- Removed "always on top" from drafting process.
-- Updating threading in draft start game process.
-- Updated threading for sealed start game process.
-- Updated threading for quest start game process.
-- Fixed Curfew.
-- Small improvement to Keeper of the Light
-- Ran set info script.
-- Ran oracle script.
-- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
-- Preparing the changes.txt file for the next beta build and release.
+
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-Doublestrike
-Fnoed
-Friar Sol
-Jeff Wadsworth
-Max mtg
-Marc
-Slapshot5
-Sloth
-Squee1968
-Timmermac
-Chris H
+
 
 
 Added many cards, including:
 
-Aura Thief
-Blood Feud
-Brand
-Bull Elephant
-Contested Cliffs
-Coral Net
-Defender en-Vec
-Electrostatic Bolt
-Enduring Renewal
-Gurzigost
-Healer's Headdress
-Homeward Path
-Intet, the Dreamer
-Karrthus, Tyrant of Jund
-Keeper of the Mind
-Mesmeric Fiend
-Mind Maggots
-Nantuko Cultivator
-Orim's Cure
-Outmaneuver
-Plagiarize
-Prey Upon
-Rancid Earth
-Retraced Image
-Samite Alchemist
-Soltari Guerrillas
-Thunderstaff
+
 
 
 end
