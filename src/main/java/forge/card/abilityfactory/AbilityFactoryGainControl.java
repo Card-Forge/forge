@@ -421,7 +421,7 @@ public class AbilityFactoryGainControl {
             final Card tgtC = tgtCards.get(j);
             final Player originalController = tgtC.getController();
 
-            if (!tgtC.equals(this.hostCard)) {
+            if (!tgtC.equals(this.hostCard) && !this.hostCard.getGainControlTargets().contains(tgtC)) {
                 this.hostCard.addGainControlTarget(tgtC);
             }
 
