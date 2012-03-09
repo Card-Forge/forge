@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 
@@ -74,7 +75,7 @@ public enum CSubmenuSealed implements ICSubmenu {
 
         VSubmenuSealed.SINGLETON_INSTANCE.getBtnBuildDeck().addMouseListener(
                 new MouseAdapter() { @Override
-                    public void mousePressed(MouseEvent e) { setupSealed(); } });
+                    public void mousePressed(final MouseEvent e) { setupSealed(); } });
 
         VSubmenuSealed.SINGLETON_INSTANCE.getBtnStart().addMouseListener(
                 new MouseAdapter() {
@@ -91,15 +92,15 @@ public enum CSubmenuSealed implements ICSubmenu {
 
         VSubmenuSealed.SINGLETON_INSTANCE.getBtnDirections().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(final MouseEvent e) {
                 VSubmenuSealed.SINGLETON_INSTANCE.showDirections();
             }
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered(final MouseEvent e) {
                 VSubmenuSealed.SINGLETON_INSTANCE.getBtnDirections().setForeground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
             }
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited(final MouseEvent e) {
                 VSubmenuSealed.SINGLETON_INSTANCE.getBtnDirections().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             }
         });
@@ -118,12 +119,12 @@ public enum CSubmenuSealed implements ICSubmenu {
      */
     @Override
     public void update() {
-        List<Deck> humanDecks = new ArrayList<Deck>();
+        final List<Deck> humanDecks = new ArrayList<Deck>();
         aiDecks = new HashMap<String, Deck>();
 
         // Since AI decks are tied directly to the human choice,
         // they're just mapped in a parallel map and grabbed when the game starts.
-        for (DeckGroup d : Singletons.getModel().getDecks().getSealed()) {
+        for (final DeckGroup d : Singletons.getModel().getDecks().getSealed()) {
             aiDecks.put(d.getName(), d.getAiDecks().get(0));
             humanDecks.add(d.getHumanDeck());
         }
@@ -132,7 +133,7 @@ public enum CSubmenuSealed implements ICSubmenu {
     }
 
     private void startGame() {
-        Deck human = VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
+        final Deck human = VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
 
         if (human == null) {
             JOptionPane.showMessageDialog(null,
@@ -141,19 +142,36 @@ public enum CSubmenuSealed implements ICSubmenu {
             return;
         }
 
-        OverlayUtils.startGameOverlay();
-        OverlayUtils.showOverlay();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                OverlayUtils.startGameOverlay();
+                OverlayUtils.showOverlay();
+            }
+        });
 
-        Constant.Runtime.HUMAN_DECK[0] = human;
-        Constant.Runtime.COMPUTER_DECK[0] = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().get(0);
+        final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
+            @Override
+            public Object doInBackground() {
+                Constant.Runtime.HUMAN_DECK[0] = human;
+                Constant.Runtime.COMPUTER_DECK[0] = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().get(0);
 
-        GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+                GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+                return null;
+            }
+
+            @Override
+            public void done() {
+                OverlayUtils.hideOverlay();
+            }
+        };
+        worker.execute();
     }
 
     /** */
     @SuppressWarnings("unchecked")
     private <T extends DeckBase> void setupSealed() {
-        ArrayList<String> sealedTypes = new ArrayList<String>();
+        final ArrayList<String> sealedTypes = new ArrayList<String>();
         sealedTypes.add("Full Cardpool");
         sealedTypes.add("Block / Set");
         sealedTypes.add("Custom");
@@ -196,19 +214,19 @@ public enum CSubmenuSealed implements ICSubmenu {
 
         final ItemPool<CardPrinted> sDeck = sd.getCardpool();
 
-        Deck deck = new Deck(sDeckName);
+        final Deck deck = new Deck(sDeckName);
         deck.getSideboard().addAll(sDeck);
 
         for (final String element : Constant.Color.BASIC_LANDS) {
             deck.getSideboard().add(element, sd.getLandSetCode()[0], 18);
         }
 
-        DeckGroup sealed = new DeckGroup(sDeckName);
+        final DeckGroup sealed = new DeckGroup(sDeckName);
         sealed.setHumanDeck(deck);
         sealed.addAiDeck(sd.buildAIDeck(sDeck.toForgeCardList()));
         Singletons.getModel().getDecks().getSealed().add(sealed);
 
-        DeckEditorBase<?, T> editor = (DeckEditorBase<?, T>)
+        final DeckEditorBase<?, T> editor = (DeckEditorBase<?, T>)
                 new DeckEditorLimited(Singletons.getModel().getDecks().getSealed());
 
         editor.show(cmdExit);
