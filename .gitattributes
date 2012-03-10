@@ -8270,6 +8270,7 @@ res/cardsfolder/s/sootstoke_kindler.txt svneol=native#text/plain
 res/cardsfolder/s/sootwalkers.txt svneol=native#text/plain
 res/cardsfolder/s/sophic_centaur.txt -text
 res/cardsfolder/s/soramaro_first_to_dream.txt svneol=native#text/plain
+res/cardsfolder/s/soratami_cloud_chariot.txt -text svneol=unset#text/plain
 res/cardsfolder/s/soratami_cloudskater.txt svneol=native#text/plain
 res/cardsfolder/s/soratami_mindsweeper.txt svneol=native#text/plain
 res/cardsfolder/s/soratami_mirror_guard.txt svneol=native#text/plain
