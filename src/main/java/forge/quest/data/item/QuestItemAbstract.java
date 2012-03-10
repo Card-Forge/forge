@@ -20,7 +20,6 @@ package forge.quest.data.item;
 import javax.swing.ImageIcon;
 
 import forge.quest.data.QuestAssets;
-import forge.quest.data.bazaar.IQuestStallPurchasable;
 
 /**
  * <p>
@@ -33,7 +32,6 @@ import forge.quest.data.bazaar.IQuestStallPurchasable;
 public abstract class QuestItemAbstract implements IQuestStallPurchasable {
     private int level = 0;
     private final String name;
-    private final String shopName;
     private int maxLevel = 1;
 
     /**
@@ -46,9 +44,8 @@ public abstract class QuestItemAbstract implements IQuestStallPurchasable {
      * @param shopName
      *            a {@link java.lang.String} object.
      */
-    protected QuestItemAbstract(final String name, final String shopName) {
+    protected QuestItemAbstract(final String name) {
         this.name = name;
-        this.shopName = shopName;
     }
 
     /**
@@ -63,9 +60,8 @@ public abstract class QuestItemAbstract implements IQuestStallPurchasable {
      * @param maxLevel
      *            a int.
      */
-    protected QuestItemAbstract(final String name, final String shopName, final int maxLevel) {
+    protected QuestItemAbstract(final String name, final int maxLevel) {
         this.name = name;
-        this.shopName = shopName;
         this.maxLevel = maxLevel;
     }
 
@@ -86,18 +82,6 @@ public abstract class QuestItemAbstract implements IQuestStallPurchasable {
     @Override
     public String getPurchaseName() {
         return this.name;
-    }
-
-    /**
-     * <p>
-     * getStallName.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    @Override
-    public final String getStallName() {
-        return this.shopName;
     }
 
     /**

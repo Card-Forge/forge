@@ -24,6 +24,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
+import forge.AllZone;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.gui.toolbox.FOverlay;
@@ -136,7 +137,7 @@ public enum FView {
     public void instantiateCachedUIStates() {
         FView.this.match = new ViewMatchUI();
         FView.this.editor = new ViewEditorUI();
-        FView.this.bazaar = new ViewBazaarUI();
+        FView.this.bazaar = new ViewBazaarUI(AllZone.getQuest().getBazaar());
         ViewHomeUI.SINGLETON_INSTANCE.initialize();
     }
 }

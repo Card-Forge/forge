@@ -10,7 +10,7 @@ import forge.control.ControlBazaarUI;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
-import forge.quest.data.bazaar.QuestStallManager;
+import forge.quest.QuestStallManager;
 import forge.view.bazaar.ViewStall;
 
 
@@ -22,15 +22,18 @@ public class ViewBazaarUI extends FPanel {
     private final ViewStall pnlSingleStall;
     private final ControlBazaarUI control;
     private FLabel previousSelected;
+    private final QuestStallManager bazaar;
 
     /** Lays out containers and borders for resizeable layout and
-     *  instantiates top-level controller for bazaar UI. */
-    public ViewBazaarUI() {
+     *  instantiates top-level controller for bazaar UI. 
+     * @param bazaar0 */
+    public ViewBazaarUI(QuestStallManager bazaar0) {
         super();
 
         // Final inits
         this.pnlAllStalls = new JPanel();
         this.pnlSingleStall = new ViewStall(this);
+        this.bazaar = bazaar0; 
 
         // Component styling
         this.setCornerDiameter(0);
@@ -45,18 +48,19 @@ public class ViewBazaarUI extends FPanel {
         this.add(pnlSingleStall, "w 75%!, h 100%!");
 
         // Instantiate control
-        control = new ControlBazaarUI(this);
+        control = new ControlBazaarUI(this, bazaar);
         control.initBazaar();
         previousSelected = ((FLabel) pnlAllStalls.getComponent(0));
     }
 
     /** */
     public void populateStalls() {
-        for (final String s : QuestStallManager.getStallNames()) {
+        for (final String s : bazaar.getStallNames()) {
+            
             final FLabel lbl = new FLabel.Builder().text(s + "  ")
                     .fontAlign(SwingConstants.RIGHT).iconInBackground(true)
                     .fontScaleFactor(0.3).opaque(true).hoverable(true)
-                    .icon(QuestStallManager.getStall(s).getIcon()).selectable(true).build();
+                    .icon(FSkin.getIcon(bazaar.getStall(s).getIcon())).selectable(true).build();
 
             pnlAllStalls.add(lbl, "h 80px!, w 90%!, gap 0 0 10px 10px");
 

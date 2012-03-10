@@ -53,6 +53,8 @@ public class QuestController {
 
     private QuestEventManager eventManager = null; 
     
+    private QuestStallManager bazaar = null; 
+    
     // This is used by shop. Had no idea where else to place this
     private static transient IStorageView<PreconDeck> preconManager =
             new StorageView<PreconDeck>(new PreconReader(ForgeProps.getFile(NewConstants.Quest.PRECONS)));
@@ -243,6 +245,12 @@ public class QuestController {
      */
     public QuestMode getMode() {
         return model.getMode();
+    }
+
+    public final QuestStallManager getBazaar() {
+        if ( null == bazaar)
+            bazaar = new QuestStallManager(ForgeProps.getFile(NewConstants.Quest.BAZAAR));
+        return bazaar;
     }
 
     public QuestEventManager getEventManager() {

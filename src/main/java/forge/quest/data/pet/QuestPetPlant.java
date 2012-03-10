@@ -31,7 +31,6 @@ import forge.card.spellability.SpellAbility;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.bazaar.QuestStallManager;
 
 /**
  * <p>
@@ -167,10 +166,10 @@ public class QuestPetPlant extends QuestPetAbstract {
     }
 
     /** {@inheritDoc} */
-    @Override
-    public final String getStallName() {
-        return QuestStallManager.NURSERY;
-    }
+//    @Override
+//    public final String getStallName() {
+//        return QuestStallManager.NURSERY;
+//    }
 
     /** {@inheritDoc} */
     @Override

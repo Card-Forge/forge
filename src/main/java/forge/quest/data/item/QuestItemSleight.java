@@ -21,7 +21,6 @@ import javax.swing.ImageIcon;
 
 import forge.gui.toolbox.FSkin;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.bazaar.QuestStallManager;
 
 /**
  * <p>
@@ -38,7 +37,7 @@ public class QuestItemSleight extends QuestItemAbstract {
      * </p>
      */
     QuestItemSleight() {
-        super("Sleight", QuestStallManager.BOOKSTORE);
+        super("Sleight"); // , QuestStallManager.BOOKSTORE
 
     }
 

@@ -24,7 +24,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,13 +34,6 @@ import java.util.zip.GZIPOutputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -79,6 +71,7 @@ import forge.quest.data.QuestData;
 import forge.quest.data.QuestMode;
 import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.QuestPetManager;
+import forge.util.XmlUtil;
 
 /**
  * <p>
@@ -256,21 +249,8 @@ public class QuestDataIO {
         att.setValue(clasz.getCanonicalName());    
         n.getAttributes().setNamedItem(att);
 
-        String xmlData = nodeToString(n);
+        String xmlData = XmlUtil.nodeToString(n);
         return (T) xs.fromXML(xmlData);
-    }
-    
-    private static String nodeToString(Node node) {
-        StringWriter sw = new StringWriter();
-        try {
-            Transformer t = TransformerFactory.newInstance().newTransformer();
-            t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-            t.setOutputProperty(OutputKeys.INDENT, "yes");
-            t.transform(new DOMSource(node), new StreamResult(sw));
-        } catch (TransformerException te) {
-            System.out.println("nodeToString Transformer Exception");
-        }
-        return sw.toString();
     }
     
     

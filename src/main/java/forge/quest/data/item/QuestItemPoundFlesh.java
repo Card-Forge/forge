@@ -22,7 +22,6 @@ import javax.swing.ImageIcon;
 import forge.AllZone;
 import forge.gui.toolbox.FSkin;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.bazaar.QuestStallManager;
 
 /**
  * This item has special coding.
@@ -38,7 +37,7 @@ public class QuestItemPoundFlesh extends QuestItemAbstract {
      * </p>
      */
     QuestItemPoundFlesh() {
-        super("Pound of Flesh", QuestStallManager.ALCHEMIST, 29);
+        super("Pound of Flesh", 29); // QuestStallManager.ALCHEMIST, 
     }
 
     /** {@inheritDoc} */

@@ -21,8 +21,7 @@ import javax.swing.ImageIcon;
 
 import forge.Card;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.bazaar.QuestStallManager;
-import forge.quest.data.bazaar.IQuestStallPurchasable;
+import forge.quest.data.item.IQuestStallPurchasable;
 
 /**
  * <p>
@@ -273,17 +272,11 @@ public abstract class QuestPetAbstract implements IQuestStallPurchasable {
         return this.name;
     }
 
-    /**
-     * <p>
-     * getStallName.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    @Override
-    public String getStallName() {
-        return QuestStallManager.PET_SHOP;
-    }
+
+//    @Override
+//    public String getStallName() {
+//        return QuestStallManager.PET_SHOP;
+//    }
 
     /**
      * <p>

@@ -11581,6 +11581,7 @@ src/main/java/forge/quest/QuestDeckMap.java -text
 src/main/java/forge/quest/QuestDuel.java svneol=native#text/plain
 src/main/java/forge/quest/QuestEvent.java -text
 src/main/java/forge/quest/QuestEventManager.java svneol=native#text/plain
+src/main/java/forge/quest/QuestStallManager.java svneol=native#text/plain
 src/main/java/forge/quest/QuestUtil.java svneol=native#text/plain
 src/main/java/forge/quest/QuestUtilCards.java -text
 src/main/java/forge/quest/SellRules.java -text
@@ -11590,11 +11591,9 @@ src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestDuelDifficulty.java -text
 src/main/java/forge/quest/data/QuestMode.java -text
 src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
+src/main/java/forge/quest/data/QuestStallDefinition.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestStartPool.java -text
-src/main/java/forge/quest/data/bazaar/IQuestStallPurchasable.java svneol=native#text/plain
-src/main/java/forge/quest/data/bazaar/QuestStallDefinition.java svneol=native#text/plain
-src/main/java/forge/quest/data/bazaar/QuestStallManager.java svneol=native#text/plain
-src/main/java/forge/quest/data/bazaar/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/data/item/IQuestStallPurchasable.java svneol=native#text/plain
 src/main/java/forge/quest/data/item/QuestInventory.java svneol=native#text/plain
 src/main/java/forge/quest/data/item/QuestItemAbstract.java svneol=native#text/plain
 src/main/java/forge/quest/data/item/QuestItemElixir.java -text
@@ -11636,6 +11635,7 @@ src/main/java/forge/util/StorageImmediatelySerialized.java svneol=native#text/pl
 src/main/java/forge/util/StorageReaderFile.java -text
 src/main/java/forge/util/StorageReaderFolder.java -text
 src/main/java/forge/util/StorageView.java -text
+src/main/java/forge/util/XmlUtil.java -text
 src/main/java/forge/util/package-info.java -text
 src/main/java/forge/view/FView.java svneol=native#text/plain
 src/main/java/forge/view/Main.java -text

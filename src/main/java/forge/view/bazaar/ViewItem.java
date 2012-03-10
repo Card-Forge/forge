@@ -13,7 +13,7 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.bazaar.IQuestStallPurchasable;
+import forge.quest.data.item.IQuestStallPurchasable;
 
 /** An update-able panel instance representing a single item. */
 @SuppressWarnings("serial")
@@ -56,12 +56,12 @@ public class ViewItem extends FPanel {
         });
     }
 
-    /** @param i0 &emsp; {@link forge.quest.data.bazaar.IQuestStallPurchasable} */
+    /** @param i0 &emsp; {@link forge.quest.data.item.IQuestStallPurchasable} */
     public void setItem(IQuestStallPurchasable i0) {
         this.item = i0;
     }
 
-    /** @return {@link forge.quest.data.bazaar.IQuestStallPurchasable} */
+    /** @return {@link forge.quest.data.item.IQuestStallPurchasable} */
     public IQuestStallPurchasable getItem() {
         return this.item;
     }

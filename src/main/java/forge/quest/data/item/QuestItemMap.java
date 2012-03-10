@@ -21,7 +21,6 @@ import javax.swing.ImageIcon;
 
 import forge.gui.toolbox.FSkin;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.bazaar.QuestStallManager;
 
 /**
  * <p>
@@ -38,7 +37,7 @@ public class QuestItemMap extends QuestItemAbstract {
      * </p>
      */
     QuestItemMap() {
-        super("Map", QuestStallManager.GEAR);
+        super("Map"); // , QuestStallManager.GEAR
     }
 
     /** {@inheritDoc} */

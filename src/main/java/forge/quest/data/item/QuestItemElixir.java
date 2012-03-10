@@ -21,7 +21,6 @@ import javax.swing.ImageIcon;
 
 import forge.gui.toolbox.FSkin;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.bazaar.QuestStallManager;
 
 /**
  * This item has special coding.
@@ -37,7 +36,7 @@ public class QuestItemElixir extends QuestItemAbstract {
      * </p>
      */
     QuestItemElixir() {
-        super("Elixir of Life", QuestStallManager.ALCHEMIST, 15);
+        super("Elixir of Life", 15); // QuestStallManager.ALCHEMIST, 
     }
 
     /** {@inheritDoc} */

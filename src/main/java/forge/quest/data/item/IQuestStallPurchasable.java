@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data.bazaar;
+package forge.quest.data.item;
 
 import javax.swing.ImageIcon;
 
@@ -87,13 +87,4 @@ public interface IQuestStallPurchasable extends Comparable<Object> {
      * @param questAssets 
      */
     void onPurchase(QuestAssets questAssets);
-
-    /**
-     * <p>
-     * getStallName.
-     * </p>
-     * 
-     * @return the name of the stall form which this item can be purchased
-     */
-    String getStallName();
 }

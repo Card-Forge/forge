@@ -101,9 +101,8 @@ public enum ViewHomeUI {
     public void initialize() {
         // There's d a better home for this (model?)
         final File dirQuests = ForgeProps.getFile(NewConstants.Quest.DATA_DIR);
-        final String questname = Singletons.getModel()
-                .getQuestPreferences().getPreference(QPref.CURRENT_QUEST);
-        final File data = new File(dirQuests.getPath() + File.separator + questname);
+        final String questname = Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_QUEST);
+        final File data = new File(dirQuests.getPath(), questname);
 
         if (data.exists()) {
             AllZone.getQuest().load(QuestDataIO.loadData(data));

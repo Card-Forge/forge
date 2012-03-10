@@ -21,7 +21,6 @@ import javax.swing.ImageIcon;
 
 import forge.gui.toolbox.FSkin;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.bazaar.QuestStallManager;
 
 /**
  * <p>
@@ -42,7 +41,7 @@ public class QuestItemZeppelin extends QuestItemAbstract {
      * </p>
      */
     QuestItemZeppelin() {
-        super("Zeppelin", QuestStallManager.GEAR);
+        super("Zeppelin"); // , QuestStallManager.GEAR
     }
 
     /** {@inheritDoc} */

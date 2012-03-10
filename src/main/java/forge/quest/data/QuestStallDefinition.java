@@ -15,9 +15,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data.bazaar;
+package forge.quest.data;
 
-import javax.swing.ImageIcon;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
+import forge.gui.toolbox.FSkin.QuestIcons;
+import forge.gui.toolbox.FSkin.SkinProp;
 
 /**
  * <p>
@@ -27,39 +34,44 @@ import javax.swing.ImageIcon;
  * @author Forge
  * @version $Id$
  */
+@XStreamAlias("stall")
 public class QuestStallDefinition {
 
     /** The name. */
-    private String name;
+    @XStreamAsAttribute
+    private final String name;
 
     /** The display name. */
-    private String displayName;
+    @XStreamAsAttribute
+    private final String displayName;
 
-    /** The icon.. */
-    private ImageIcon icon;
-
-    /** The fluff. */
-    private String fluff;
+    @XStreamAsAttribute
+    private final QuestIcons icon;
+    
+    private final String description;
+    
+    private final List<String> items;
 
     /**
      * <p>
      * Constructor for QuestStallDefinition.
-     * </p>
+     * </p> Not used anyway
      * 
      * @param name
      *            a {@link java.lang.String} object.
      * @param displayName
      *            a {@link java.lang.String} object.
-     * @param fluff
+     * @param description
      *            a {@link java.lang.String} object.
-     * @param i0
+     * @param icon0
      *            a {@link javax.swing.ImageIcon} object.
      */
-    public QuestStallDefinition(final String name, final String displayName, final String fluff, final ImageIcon i0) {
-        this.setName(name);
-        this.setDisplayName(displayName);
-        this.setFluff(fluff);
-        this.setIcon(i0);
+    private QuestStallDefinition() {
+        name = null;
+        displayName = null;
+        description = null;
+        items = new ArrayList<String>();
+        icon = null;
     }
 
     /**
@@ -68,17 +80,7 @@ public class QuestStallDefinition {
      * @return the fluff
      */
     public String getFluff() {
-        return this.fluff;
-    }
-
-    /**
-     * Sets the fluff.
-     * 
-     * @param fluff0
-     *            the fluff to set
-     */
-    public void setFluff(final String fluff0) {
-        this.fluff = fluff0;
+        return this.description;
     }
 
     /**
@@ -86,18 +88,8 @@ public class QuestStallDefinition {
      * 
      * @return the iconName
      */
-    public ImageIcon getIcon() {
-        return this.icon;
-    }
-
-    /**
-     * Sets the icon name.
-     * 
-     * @param i0
-     *            the iconName to set
-     */
-    public void setIcon(final ImageIcon i0) {
-        this.icon = i0;
+    public QuestIcons getIcon() {
+        return icon;    
     }
 
     /**
@@ -110,16 +102,6 @@ public class QuestStallDefinition {
     }
 
     /**
-     * Sets the display name.
-     * 
-     * @param displayName0
-     *            the displayName to set
-     */
-    public void setDisplayName(final String displayName0) {
-        this.displayName = displayName0;
-    }
-
-    /**
      * Gets the name.
      * 
      * @return the name
@@ -128,13 +110,7 @@ public class QuestStallDefinition {
         return this.name;
     }
 
-    /**
-     * Sets the name.
-     * 
-     * @param name0
-     *            the name to set
-     */
-    public void setName(final String name0) {
-        this.name = name0;
+    public List<String> getItems() {
+        return items;
     }
 }

@@ -6,8 +6,10 @@ import java.awt.event.ComponentListener;
 
 import javax.swing.SwingUtilities;
 
+import com.google.common.collect.Iterables;
+
 import forge.gui.toolbox.FLabel;
-import forge.quest.data.bazaar.QuestStallManager;
+import forge.quest.QuestStallManager;
 import forge.view.ViewBazaarUI;
 
 /** 
@@ -17,13 +19,16 @@ import forge.view.ViewBazaarUI;
 public class ControlBazaarUI {
     private final ViewBazaarUI view;
     private final ComponentListener cadResize;
+    private final QuestStallManager model;
 
     /**
      * Controls top-level instance of bazaar.
      * @param v0 &emsp; {@link forge.view.ViewBazaarUI}
+     * @param bazaar 
      */
-    public ControlBazaarUI(ViewBazaarUI v0) {
+    public ControlBazaarUI(ViewBazaarUI v0, QuestStallManager bazaar0) {
         view = v0;
+        model = bazaar0;
 
         cadResize = new ComponentAdapter() {
             @Override
@@ -44,7 +49,7 @@ public class ControlBazaarUI {
     public void initBazaar() {
         view.populateStalls();
         ((FLabel) view.getPnlAllStalls().getComponent(0)).setSelected(true);
-        showStall(QuestStallManager.getStallNames().get(0));
+        showStall(Iterables.get(model.getStallNames(), 0));
     }
 
     /** @param s0 &emsp; {@link java.lang.String} */
@@ -52,7 +57,7 @@ public class ControlBazaarUI {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                view.getPnlSingleStall().setStall(QuestStallManager.getStall(s0));
+                view.getPnlSingleStall().setStall(model.getStall(s0));
                 view.getPnlSingleStall().updateStall();
             }
         });
