@@ -14,7 +14,6 @@ SVar:OppDraw:DB$ Draw | Defined$ Opponent | NumCards$ Y | SubAbility$ OppCleanup
 SVar:OppCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Y:Remembered$Amount
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card141830.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/179.jpg

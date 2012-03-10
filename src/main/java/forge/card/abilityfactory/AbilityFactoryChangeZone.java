@@ -1535,7 +1535,8 @@ public final class AbilityFactoryChangeZone {
         if (destination.equals(Zone.Exile) || origin.equals(Zone.Battlefield)) {
 
             // don't rush bouncing stuff when not going to attack
-            if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2)
+            if (!sa.isTrigger() && sa.getPayCosts() != null
+                    && Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2)
                     && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
                     && AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()).isEmpty()) {
                 return false;
