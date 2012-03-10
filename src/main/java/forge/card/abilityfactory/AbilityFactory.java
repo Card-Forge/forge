@@ -2004,16 +2004,25 @@ public class AbilityFactory {
                 }
             }
         } else if (defined.equals("EnchantedController")) {
+            if (card.getEnchantingCard() == null) {
+                return players;
+            }
             final Player p = card.getEnchantingCard().getController();
             if (!players.contains(p)) {
                 players.add(p);
             }
         } else if (defined.equals("EnchantedOwner")) {
+            if (card.getEnchantingCard() == null) {
+                return players;
+            }
             final Player p = card.getEnchantingCard().getOwner();
             if (!players.contains(p)) {
                 players.add(p);
             }
         } else if (defined.equals("EnchantedPlayer")) {
+            if (card.getEnchantingCard() == null) {
+                return players;
+            }
             final Object o = sa.getSourceCard().getEnchanting();
             if (o instanceof Player) {
                 if (!players.contains(o)) {
