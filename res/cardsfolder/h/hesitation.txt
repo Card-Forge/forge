@@ -8,4 +8,6 @@ SVar:DBSacrifice:DB$ Sacrifice
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hesitation.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/33.jpg
+Oracle:When a player casts a spell, sacrifice Hesitation and counter that spell.
 End
