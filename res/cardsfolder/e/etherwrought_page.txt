@@ -2,11 +2,11 @@ Name:Etherwrought Page
 ManaCost:1 W U B
 Types:Artifact
 Text:no text
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGenericChoice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, choose one - You gain 2 life; or look at the top card of your library, then you may put that card into your graveyard; or each opponent loses 1 life.
-SVar:TrigGenericChoice:AB$ GenericChoice | Cost$ 0 | Choices$ SVar1,SVar2,SVar3
-SVar:SVar1:DB$ GainLife | Defined$ You | LifeAmount$ 2 | ChoiceDescription$ You gain 2 life.
-SVar:SVar2:DB$ Dig | Cost$ 0 | DigNum$ 1 | ChangeNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0 | ChoiceDescription$ Look at the top card of your library, then you may put that card into your graveyard.
-SVar:SVar3:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | ChoiceDescription$ Opponent loses 1 life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, choose one - You gain 2 life; or look at the top card of your library, then you may put that card into your graveyard; or each opponent loses 1 life.
+SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBGainLife,DBDig,DBLoseLife | CharmNum$ 1
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+SVar:DBDig:DB$ Dig | DigNum$ 1 | ChangeNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0 | SpellDescription$ Look at the top card of your library, then you may put that card into your graveyard.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SpellDescription$ Opponent loses 1 life.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/etherwrought_page.jpg
