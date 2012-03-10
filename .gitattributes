@@ -6757,6 +6757,7 @@ res/cardsfolder/p/psychatog.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_barrier.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_drain.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_membrane.txt svneol=native#text/plain
+res/cardsfolder/p/psychic_miasma.txt -text svneol=unset#text/plain
 res/cardsfolder/p/psychic_overload.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_possession.txt -text
 res/cardsfolder/p/psychic_purge.txt svneol=native#text/plain
