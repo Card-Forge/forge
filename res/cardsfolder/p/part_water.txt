@@ -1,6 +1,6 @@
 Name:Part Water
 ManaCost:X X U
-Types:Instant
+Types:Sorcery
 Text:no text
 A:SP$ Pump | Cost$ X X U | KW$ Islandwalk | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature | TgtPrompt$ Select target Creatures | SpellDescription$ X target creatures gain islandwalk until end of turn.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
