@@ -7,7 +7,7 @@ Description=Mono W Equipment deck
 Icon=Wonder Woman.jpg
 Deck Type=constructed
 [main]
-24 Plains|MBS
+23 Plains|MBS
 2 Auriok Glaivemaster
 2 Kitesail Apprentice
 2 Kor Duelist
@@ -38,4 +38,5 @@ Deck Type=constructed
 1 Specter's Shroud
 1 Spidersilk Net
 1 Trusty Machete
+1 Armed Response
 [sideboard]
