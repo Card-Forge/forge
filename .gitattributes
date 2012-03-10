@@ -4792,6 +4792,7 @@ res/cardsfolder/k/kjeldoran_home_guard.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_javelineer.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_outpost.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_outrider.txt svneol=native#text/plain
+res/cardsfolder/k/kjeldoran_royal_guard.txt -text
 res/cardsfolder/k/kjeldoran_war_cry.txt svneol=native#text/plain
 res/cardsfolder/k/knacksaw_clique.txt -text
 res/cardsfolder/k/knight_captain_of_eos.txt svneol=native#text/plain
@@ -5615,6 +5616,7 @@ res/cardsfolder/m/mirror_entity.txt svneol=native#text/plain
 res/cardsfolder/m/mirror_gallery.txt svneol=native#text/plain
 res/cardsfolder/m/mirror_mad_phantasm.txt -text
 res/cardsfolder/m/mirror_sigil_sergeant.txt svneol=native#text/plain
+res/cardsfolder/m/mirror_strike.txt -text
 res/cardsfolder/m/mirror_universe.txt svneol=native#text/plain
 res/cardsfolder/m/mirror_wall.txt svneol=native#text/plain
 res/cardsfolder/m/mirrorworks.txt svneol=native#text/plain
@@ -9469,6 +9471,7 @@ res/cardsfolder/t/tunneler_wurm.txt svneol=native#text/plain
 res/cardsfolder/t/turbulent_dreams.txt -text
 res/cardsfolder/t/turf_wound.txt -text
 res/cardsfolder/t/turn_aside.txt svneol=native#text/plain
+res/cardsfolder/t/turn_the_tables.txt -text
 res/cardsfolder/t/turn_the_tide.txt svneol=native#text/plain
 res/cardsfolder/t/turn_to_dust.txt svneol=native#text/plain
 res/cardsfolder/t/turn_to_frog.txt -text
