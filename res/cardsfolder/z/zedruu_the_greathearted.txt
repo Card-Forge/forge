@@ -2,9 +2,9 @@ Name:Zedruu the Greathearted
 ManaCost:1 R W U
 Types:Legendary Creature Minotaur Monk
 PT:2/4
-A:AB$ Pump | Cost$ R W U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBPumpRemember | SpellDescription$ Target opponent gains control of target permanent you control.
-SVar:DBPumpRemember:DB$ Pump | RememberObjects$ Targeted | Static$ True | SubAbility$ DBPumpPermanent
-SVar:DBPumpPermanent:DB$ Pump | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent that you control | SubAbility$ DBGainControl
+A:AB$ Pump | Cost$ R W U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBPumpRemember | SpellDescription$ Target opponent gains control of target permanent you control. | StackDescription$ None
+SVar:DBPumpRemember:DB$ Pump | RememberObjects$ Targeted | Static$ True | SubAbility$ DBPumpPermanent | StackDescription$ None
+SVar:DBPumpPermanent:DB$ Pump | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent that you control | SubAbility$ DBGainControl | StackDescription$ None
 SVar:DBGainControl:DB$ GainControl | Defined$ Targeted | NewController$ Remembered | SubAbility$ DBForgetRemembered
 SVar:DBForgetRemembered:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ GainLife | TriggerDescription$ At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.
