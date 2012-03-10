@@ -680,11 +680,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public String getStackDescription() {
-                if (this.params.containsKey("SpellDescription")) {
-                    return af.getHostCard().getName() + " - " + this.params.get("SpellDescription");
-                } else {
-                    return AbilityFactoryDestroy.destroyAllStackDescription(af, this, this.noRegen);
-                }
+                return AbilityFactoryDestroy.destroyAllStackDescription(af, this, this.noRegen);
             }
 
             @Override
@@ -699,8 +695,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                // TODO Auto-generated method stub
-                return false;
+                return AbilityFactoryDestroy.destroyAllTriggerAI(af, this, mandatory);
             }
 
         };
@@ -726,26 +721,35 @@ public class AbilityFactoryDestroy {
         final StringBuilder sb = new StringBuilder();
         final String name = af.getHostCard().getName();
         final HashMap<String, String> params = af.getMapParams();
-
-        final String conditionDesc = params.get("ConditionDescription");
-        if (conditionDesc != null) {
-            sb.append(conditionDesc).append(" ");
-        }
-
-        ArrayList<Card> tgtCards;
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
+        if (!(sa instanceof AbilitySub)) {
+            sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
-            tgtCards = new ArrayList<Card>();
-            tgtCards.add(sa.getSourceCard());
+            sb.append(" ");
         }
 
-        sb.append(name).append(" - Destroy permanents.");
+        if (params.containsKey("SpellDescription")) {
+            sb.append(params.get("SpellDescription"));
+        } else {
+            final String conditionDesc = params.get("ConditionDescription");
+            if (conditionDesc != null) {
+                sb.append(conditionDesc).append(" ");
+            }
 
-        if (noRegen) {
-            sb.append(" They can't be regenerated");
+            ArrayList<Card> tgtCards;
+
+            final Target tgt = sa.getTarget();
+            if (tgt != null) {
+                tgtCards = tgt.getTargetCards();
+            } else {
+                tgtCards = new ArrayList<Card>();
+                tgtCards.add(sa.getSourceCard());
+            }
+
+            sb.append(name).append(" - Destroy permanents.");
+
+            if (noRegen) {
+                sb.append(" They can't be regenerated");
+            }
         }
 
         final AbilitySub abSub = sa.getSubAbility();
@@ -754,6 +758,73 @@ public class AbilityFactoryDestroy {
         }
 
         return sb.toString();
+    }
+
+    /**
+     * <p>
+     * destroyAllCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param noRegen
+     *            a boolean.
+     * @return a boolean.
+     */
+    private static boolean destroyAllTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        final Card source = sa.getSourceCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Target tgt = sa.getTarget();
+        String valid = "";
+        if (params.containsKey("ValidCards")) {
+            valid = params.get("ValidCards");
+        }
+        CardList humanlist = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        CardList computerlist = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        if (sa.getTarget() != null) {
+            tgt.resetTargets();
+            sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            computerlist.clear();
+        }
+        if (mandatory) {
+            return true;
+        }
+        humanlist = humanlist.getValidCards(valid.split(","), source.getController(), source);
+        computerlist = computerlist.getValidCards(valid.split(","), source.getController(), source);
+        humanlist = humanlist.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
+            }
+        });
+        if (humanlist.isEmpty()) {
+            return false;
+        }
+        computerlist = computerlist.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
+            }
+        });
+        // if only creatures are affected evaluate both lists and pass only if
+        // human creatures are more valuable
+        if ((humanlist.getNotType("Creature").size() == 0) && (computerlist.getNotType("Creature").size() == 0)) {
+            if (CardFactoryUtil.evaluateCreatureList(computerlist) >= CardFactoryUtil.evaluateCreatureList(humanlist)) {
+                return false;
+            }
+        } // otherwise evaluate both lists by CMC and pass only if human
+          // permanents are more valuable
+        else if (CardFactoryUtil.evaluatePermanentList(computerlist) >= CardFactoryUtil.evaluatePermanentList(humanlist)) {
+            return false;
+        }
+
+        final AbilitySub subAb = sa.getSubAbility();
+        if (subAb != null && !subAb.chkAIDrawback()) {
+            return false;
+        }
+        return true;
     }
 
     /**

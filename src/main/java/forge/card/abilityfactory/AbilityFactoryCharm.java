@@ -142,6 +142,7 @@ public final class AbilityFactoryCharm {
         final Card source = sa.getSourceCard();
         //this resets all previous choices
         sa.setSubAbility(null);
+        sa.setActivatingPlayer(AllZone.getComputerPlayer());
         final int num = Integer.parseInt(params.containsKey("CharmNum") ? params.get("CharmNum")
                 : "1");
         final String[] saChoices = params.get("Choices").split(",");
@@ -156,13 +157,13 @@ public final class AbilityFactoryCharm {
             for (SpellAbility sub : choices) {
                 if (sub.doTrigger(false)) {
                     chosen = (AbilitySub) sub;
+                    choices.remove(sub);
                     break;
                 }
             }
             if (chosen == null) {
                 return false;
             }
-            choices.remove(chosen);
 
             // walk down the SpellAbility tree and add to the child
             // Ability_Sub
