@@ -17,6 +17,8 @@
  */
 package forge.quest.data;
 
+import forge.quest.io.QuestDataIO;
+
 //when you create QuestDataOld and AFTER you copy the AI decks over
 //you have to call one of these two methods below
 //see Gui_QuestOptions for more details

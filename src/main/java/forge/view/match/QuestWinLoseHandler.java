@@ -51,13 +51,13 @@ import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
 import forge.model.FMatchState;
 import forge.properties.ForgePreferences.FPref;
+import forge.quest.QuestChallenge;
+import forge.quest.QuestController;
+import forge.quest.QuestEvent;
+import forge.quest.QuestUtil;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.QuestChallenge;
-import forge.quest.data.QuestController;
-import forge.quest.data.QuestEvent;
 import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.data.QuestUtil;
 import forge.util.MyRandom;
 
 /**

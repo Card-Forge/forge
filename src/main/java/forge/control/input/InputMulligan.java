@@ -37,7 +37,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GamePlayerRating;
-import forge.quest.data.QuestController;
+import forge.quest.QuestController;
  /**
   * <p>
   * InputMulligan class.

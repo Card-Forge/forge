@@ -24,15 +24,14 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.QuestChallenge;
+import forge.quest.QuestController;
+import forge.quest.QuestEvent;
+import forge.quest.QuestUtil;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.QuestChallenge;
-import forge.quest.data.QuestController;
-import forge.quest.data.QuestEvent;
-import forge.quest.data.QuestEventManager;
 import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.data.QuestUtil;
 import forge.quest.data.item.QuestItemZeppelin;
 import forge.quest.data.pet.QuestPetAbstract;
 
@@ -215,7 +214,7 @@ public class SubmenuQuestUtil {
                 Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
                 Constant.Runtime.setGameType(GameType.Quest);
 
-                QuestEventManager.INSTANCE.randomizeOpponents();
+                qData.getEventManager().randomizeOpponents();
                 qData.setCurrentEvent(event);
                 qData.save();
 

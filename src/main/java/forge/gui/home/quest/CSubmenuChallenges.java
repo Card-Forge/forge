@@ -14,9 +14,8 @@ import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
 import forge.gui.toolbox.FLabel;
-import forge.quest.data.QuestChallenge;
-import forge.quest.data.QuestController;
-import forge.quest.data.QuestEventManager;
+import forge.quest.QuestChallenge;
+import forge.quest.QuestController;
 import forge.view.ViewHomeUI;
 
 /** 
@@ -116,8 +115,7 @@ public enum CSubmenuChallenges implements ICSubmenu {
             view.getLblTitle().setText("Challenges: " + AllZone.getQuest().getRank());
 
             view.getPnlChallenges().removeAll();
-            final List<QuestChallenge> challenges =
-                    QuestEventManager.INSTANCE.generateChallenges();
+            final List<QuestChallenge> challenges = AllZone.getQuest().getEventManager().generateChallenges();
 
             for (final QuestChallenge c : challenges) {
                 final SelectablePanel temp = new SelectablePanel(c);

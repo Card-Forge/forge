@@ -23,6 +23,7 @@ import javax.swing.SwingWorker;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import forge.AllZone;
 import forge.CardList;
 import forge.Command;
 import forge.Constant;
@@ -40,8 +41,8 @@ import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.quest.data.QuestEvent;
-import forge.quest.data.QuestEventManager;
+import forge.quest.QuestController;
+import forge.quest.QuestEvent;
 import forge.util.IStorage;
 
 /** 
@@ -68,6 +69,8 @@ public enum CSubmenuConstructed implements ICSubmenu {
             if (e.getClickCount() == 2) { showDecklist(((JList) e.getSource())); }
         }
     };
+    
+    private final QuestController quest = AllZone.getQuest();
 
     static {
         COLOR_VALS.clear();
@@ -279,11 +282,11 @@ public enum CSubmenuConstructed implements ICSubmenu {
 
         final List<String> eventNames = new ArrayList<String>();
 
-        for (final QuestEvent e : QuestEventManager.INSTANCE.ALL_DUELS) {
+        for (final QuestEvent e : quest.getEventManager().ALL_DUELS) {
             eventNames.add(e.getEventDeck().getName());
         }
 
-        for (final QuestEvent e : QuestEventManager.INSTANCE.ALL_CHALLENGES) {
+        for (final QuestEvent e : quest.getEventManager().ALL_CHALLENGES) {
             eventNames.add(e.getEventDeck().getName());
         }
 
@@ -368,7 +371,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
     }
 
     /** Generates deck from current list selection(s). */
-    private static Deck generateDeck(final JList lst0, final PlayerType player0) {
+    private Deck generateDeck(final JList lst0, final PlayerType player0) {
         CardList cards = null;
         final String[] selection = Arrays.copyOf(lst0.getSelectedValues(),
                 lst0.getSelectedValues().length, String[].class);
@@ -416,7 +419,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
             deck.getMain().add(cards);
         }
         else if (lst0.getName().equals(ESubmenuConstructedTypes.QUESTEVENTS.toString())) {
-            deck = QuestEventManager.INSTANCE.getEvent(selection[0]).getEventDeck();
+            deck = quest.getEventManager().getEvent(selection[0]).getEventDeck();
         }
         // Custom deck
         else if (lst0.getName().equals(ESubmenuConstructedTypes.CUSTOM.toString())) {
@@ -441,7 +444,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
             deck = Singletons.getModel().getDecks().getConstructed().get(deckName);
         }
         else {
-            deck = QuestEventManager.INSTANCE.getEvent(deckName).getEventDeck();
+            deck = quest.getEventManager().getEvent(deckName).getEventDeck();
         }
 
         // Dump into map and display.

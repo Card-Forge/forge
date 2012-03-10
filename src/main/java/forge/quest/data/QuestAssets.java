@@ -8,6 +8,8 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
+import forge.quest.QuestDeckMap;
+import forge.quest.QuestUtilCards;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.QuestPetManager;
@@ -159,6 +161,13 @@ public class QuestAssets {
      */
     public void subtractCredits(final long c) {
         this.setCredits(this.getCredits() > c ? this.getCredits() - c : 0);
+    }
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public QuestDeckMap getDeckStorage() {
+        return new QuestDeckMap(myDecks);
     }
     
 }

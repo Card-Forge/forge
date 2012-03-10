@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data;
+package forge.quest;
 
 import java.util.List;
 
@@ -24,6 +24,7 @@ import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Player;
+import forge.quest.data.QuestAssets;
 
 /**
  * <p>
@@ -57,7 +58,7 @@ public class QuestUtil {
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      * @param qe
-     *            a {@link forge.quest.data.QuestEvent} object.
+     *            a {@link forge.quest.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
     public static CardList getComputerStartingCards(final QuestEvent qe) {
@@ -108,7 +109,7 @@ public class QuestUtil {
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      * @param qe
-     *            a {@link forge.quest.data.QuestEvent} object.
+     *            a {@link forge.quest.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
     public static CardList getHumanStartingCards(final QuestAssets qa, final QuestEvent qe) {

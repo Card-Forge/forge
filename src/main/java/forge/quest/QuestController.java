@@ -1,4 +1,4 @@
-package forge.quest.data;
+package forge.quest;
 
 
 import java.util.ArrayList;
@@ -10,7 +10,13 @@ import forge.item.CardPrinted;
 import forge.item.PreconDeck;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.data.QuestAchievements;
+import forge.quest.data.QuestAssets;
+import forge.quest.data.QuestData;
+import forge.quest.data.QuestMode;
+import forge.quest.data.QuestStartPool;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.quest.io.PreconReader;
 import forge.util.IStorage;
 import forge.util.IStorageView;
 import forge.util.Predicate;
@@ -28,9 +34,9 @@ public class QuestController {
     // Utility class to access cards, has access to private fields
     // Moved some methods there that otherwise would make this class even more
     // complex
-    private transient QuestUtilCards myCards;
+    private QuestUtilCards myCards;
 
-    private transient QuestEvent currentEvent;
+    private QuestEvent currentEvent;
 
     transient IStorage<Deck> decks;
 
@@ -45,6 +51,8 @@ public class QuestController {
     /** The available quests. */
     private List<Integer> availableQuests = null;
 
+    private QuestEventManager eventManager = null; 
+    
     // This is used by shop. Had no idea where else to place this
     private static transient IStorageView<PreconDeck> preconManager =
             new StorageView<PreconDeck>(new PreconReader(ForgeProps.getFile(NewConstants.Quest.PRECONS)));
@@ -103,11 +111,11 @@ public class QuestController {
     public void load(QuestData selectedQuest) {
         model = selectedQuest;
         // These are helper classes that hold no data.
-        this.decks = model == null ? null : new QuestDeckMap(model.getAssets().myDecks);
+        this.decks = model == null ? null : model.getAssets().getDeckStorage();
         this.myCards = model == null ? null : new QuestUtilCards(this);
         currentEvent = null;
         
-        QuestEventManager.INSTANCE.randomizeOpponents();
+        getEventManager().randomizeOpponents();
     }
 
     /**
@@ -175,11 +183,11 @@ public class QuestController {
         
         final Predicate<CardPrinted> filter;
         switch (startPool) {
-            case PRECON:
+            case Precon:
                 myCards.addPreconDeck(preconManager.get(preconName));
                 return;
     
-            case STANDARD:
+            case Standard:
                 filter = Singletons.getModel().getFormats().getStandard().getFilterPrinted();
                 break;
     
@@ -236,4 +244,11 @@ public class QuestController {
     public QuestMode getMode() {
         return model.getMode();
     }
+
+    public QuestEventManager getEventManager() {
+        if ( eventManager == null )
+            eventManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DECKS));
+        return eventManager;
+    }
+
 }

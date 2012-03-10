@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data;
+package forge.quest;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,9 +31,9 @@ import forge.AllZone;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-import forge.quest.BoosterUtils;
+import forge.quest.data.QuestAchievements;
+import forge.quest.data.QuestDuelDifficulty;
+import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.FileSection;
 import forge.util.FileUtil;
@@ -44,9 +44,7 @@ import forge.util.FileUtil;
  * @author Forge
  * @version $Id$
  */
-public enum QuestEventManager {
-    /** */
-    INSTANCE;
+public class QuestEventManager {
 
     private final Map<QuestDuelDifficulty, List<QuestDuel>> SortedDuels = new EnumMap<QuestDuelDifficulty, List<QuestDuel>>(QuestDuelDifficulty.class);
     
@@ -56,10 +54,10 @@ public enum QuestEventManager {
     public final List<QuestChallenge> ALL_CHALLENGES = new ArrayList<QuestChallenge>();
 
     /** Instantiate all events and difficulty lists. */
-    private QuestEventManager() {
+    public QuestEventManager(File dir) {
         QuestEvent tempEvent;
 
-        final File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckSerializer.DCK_FILE_FILTER);
+        final File[] allFiles = dir.listFiles(DeckSerializer.DCK_FILE_FILTER);
 
         for (final File f : allFiles) {
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(f));
@@ -86,7 +84,7 @@ public enum QuestEventManager {
      * 
      * @param s0
      *            &emsp; {@link java.lang.String}
-     * @return {@link forge.data.QuestEvent}
+     * @return {@link forge.quest.data.QuestEvent}
      */
     public QuestEvent getEvent(final String s0) {
         for (final QuestEvent q : ALL_DUELS) {

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data;
+package forge.quest.io;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -45,7 +45,6 @@ import javax.xml.transform.stream.StreamResult;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -73,6 +72,11 @@ import forge.item.PreconDeck;
 import forge.item.TournamentPack;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.QuestController;
+import forge.quest.data.QuestAchievements;
+import forge.quest.data.QuestAssets;
+import forge.quest.data.QuestData;
+import forge.quest.data.QuestMode;
 import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.QuestPetManager;
 
@@ -154,7 +158,6 @@ public class QuestDataIO {
      * @param input
      *            a {@link java.lang.String} object.
      */
-    @SuppressWarnings("unchecked")
     private static void updateSaveFile(final QuestData newData, final String input) {
         try {
             final DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -205,25 +208,27 @@ public class QuestDataIO {
                 }
                 
                 QuestAchievements qA = newData.getAchievements(); 
-                qA.win = Integer.parseInt(document.getElementsByTagName("win").item(0).getTextContent());
-                qA.lost = Integer.parseInt(document.getElementsByTagName("lost").item(0).getTextContent());
-                qA.winstreakBest = Integer.parseInt(document.getElementsByTagName("winstreakBest").item(0).getTextContent());
-                qA.winstreakCurrent = Integer.parseInt(document.getElementsByTagName("winstreakCurrent").item(0).getTextContent());
-                qA.challengesPlayed = Integer.parseInt(document.getElementsByTagName("challengesPlayed").item(0).getTextContent());
-                qA.completedChallenges = new ArrayList<Integer>();
+                setFinalField(QuestAchievements.class, "win", qA, Integer.parseInt(document.getElementsByTagName("win").item(0).getTextContent()));
+                setFinalField(QuestAchievements.class, "lost", qA, Integer.parseInt(document.getElementsByTagName("lost").item(0).getTextContent()));
+                setFinalField(QuestAchievements.class, "winstreakBest", qA, Integer.parseInt(document.getElementsByTagName("winstreakBest").item(0).getTextContent()));
+                setFinalField(QuestAchievements.class, "winstreakCurrent", qA, Integer.parseInt(document.getElementsByTagName("winstreakCurrent").item(0).getTextContent()));
+                setFinalField(QuestAchievements.class, "challengesPlayed", qA, Integer.parseInt(document.getElementsByTagName("challengesPlayed").item(0).getTextContent()));
+
+                ArrayList<Integer> completedChallenges = new ArrayList<Integer>();
+                setFinalField(QuestAchievements.class, "completedChallenges", qA, completedChallenges);
                 NodeList ccs = document.getElementsByTagName("completedChallenges").item(0).getChildNodes(); 
                 for(int iN = 0; iN < ccs.getLength(); iN++) {
                     Node n = ccs.item(iN);
                     if ( n.getNodeType() != Node.ELEMENT_NODE ) continue;
-                    qA.completedChallenges.add(Integer.parseInt(n.getTextContent()));
+                    completedChallenges.add(Integer.parseInt(n.getTextContent()));
                 }
                 
                 QuestAssets qS = newData.getAssets();
-                qS.credits = Integer.parseInt(document.getElementsByTagName("credits").item(0).getTextContent());
-                qS.life = Integer.parseInt(document.getElementsByTagName("life").item(0).getTextContent());
                 
                 XStream xs = getSerializer(true);
-                
+
+                setFinalField(QuestAssets.class, "credits", qS, Integer.parseInt(document.getElementsByTagName("credits").item(0).getTextContent()));
+                setFinalField(QuestAssets.class, "life", qS, Integer.parseInt(document.getElementsByTagName("life").item(0).getTextContent()));
                 setFinalField(QuestAssets.class, "cardPool", qS, readAsset(xs, document, "cardPool", ItemPool.class));
                 setFinalField(QuestAssets.class, "inventory", qS, readAsset(xs, document, "inventory", QuestInventory.class));
                 setFinalField(QuestAssets.class, "myDecks", qS, readAsset(xs, document, "myDecks", HashMap.class));

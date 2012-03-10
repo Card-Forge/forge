@@ -10,7 +10,7 @@ import forge.gui.OverlayUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
-import forge.quest.data.QuestController;
+import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.view.ViewHomeUI;
 

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data;
+package forge.quest;
 
 import forge.Singletons;
 import forge.card.BoosterGenerator;
@@ -23,7 +23,9 @@ import forge.card.CardEdition;
 import forge.card.FormatCollection;
 import forge.deck.Deck;
 import forge.item.*;
-import forge.quest.BoosterUtils;
+import forge.quest.data.QuestAssets;
+import forge.quest.data.QuestMode;
+import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
 import forge.util.Predicate;

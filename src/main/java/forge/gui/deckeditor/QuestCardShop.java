@@ -53,8 +53,8 @@ import forge.item.ItemPoolView;
 import forge.item.OpenablePack;
 import forge.item.PreconDeck;
 import forge.item.TournamentPack;
-import forge.quest.ReadPriceList;
-import forge.quest.data.QuestController;
+import forge.quest.QuestController;
+import forge.quest.io.ReadPriceList;
 import forge.util.Predicate;
 
 /**

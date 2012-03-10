@@ -46,7 +46,7 @@ import forge.gui.deckeditor.elements.TableView;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
-import forge.quest.data.QuestController;
+import forge.quest.QuestController;
 import forge.util.Predicate;
 
 //import forge.quest.data.QuestBoosterPack;

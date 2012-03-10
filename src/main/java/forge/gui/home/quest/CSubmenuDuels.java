@@ -9,9 +9,8 @@ import forge.Command;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
-import forge.quest.data.QuestController;
-import forge.quest.data.QuestDuel;
-import forge.quest.data.QuestEventManager;
+import forge.quest.QuestController;
+import forge.quest.QuestDuel;
 import forge.view.ViewHomeUI;
 
 /** 
@@ -110,7 +109,7 @@ public enum CSubmenuDuels implements ICSubmenu {
             view.getLblTitle().setText("Duels: " + AllZone.getQuest().getRank());
 
             view.getPnlDuels().removeAll();
-            final List<QuestDuel> duels = QuestEventManager.INSTANCE.generateDuels();
+            final List<QuestDuel> duels = AllZone.getQuest().getEventManager().generateDuels();
 
             for (final QuestDuel d : duels) {
                 final SelectablePanel temp = new SelectablePanel(d);

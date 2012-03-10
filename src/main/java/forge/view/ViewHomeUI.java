@@ -67,8 +67,8 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.quest.data.QuestDataIO;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.quest.io.QuestDataIO;
 
 /** Singleton instance of home screen UI.
  * Use "getPanel()" to work with the main container.
