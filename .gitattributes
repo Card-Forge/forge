@@ -8220,6 +8220,7 @@ res/cardsfolder/s/soaring_hope.txt svneol=native#text/plain
 res/cardsfolder/s/soaring_seacliff.txt svneol=native#text/plain
 res/cardsfolder/s/soilshaper.txt svneol=native#text/plain
 res/cardsfolder/s/sokenzan_bruiser.txt svneol=native#text/plain
+res/cardsfolder/s/sokenzan_renegade.txt -text svneol=unset#text/plain
 res/cardsfolder/s/sokenzan_spellblade.txt -text
 res/cardsfolder/s/sol_grail.txt -text
 res/cardsfolder/s/sol_ring.txt svneol=native#text/plain
