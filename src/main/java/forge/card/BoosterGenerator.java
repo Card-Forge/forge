@@ -114,7 +114,7 @@ public class BoosterGenerator {
      * Constructor for BoosterGenerator.
      * </p>
      * 
-     * @param cardSet
+     * @param filter
      *            the card set
      */
     public BoosterGenerator(Predicate<CardPrinted> filter) {
@@ -193,13 +193,15 @@ public class BoosterGenerator {
 
     /**
      * Gets the singleton booster pack.
+     * Singleton means that every card in every booster in whole draft is unique!
+     * First arg in pickRandomCards can't be copy, because picker must remove card from pool to ensure uniqueness.
      * 
      * @param nAnyCard
      *            the n any card
      * @return the singleton booster pack
      */
     public final List<CardPrinted> getSingletonBoosterPack(final int nAnyCard) {
-        return this.pickRandomCards(new ArrayList<CardPrinted>(this.allButLands), nAnyCard, true);
+        return this.pickRandomCards(allButLands, nAnyCard, true);
     }
 
     /**
