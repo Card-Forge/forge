@@ -1,4 +1,4 @@
-Forge Beta: 0#-##-2012 ver 1.2.5 rev 14###
+Forge Beta: 0#-##-2012 ver 1.#.# rev 14###
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
@@ -37,7 +37,8 @@ Fixes/Features:
 - The AI can now use Incendiary Command and Primal Command.
 - Enabled Entomber Exarch for the AI.
 - Fixed stack descriptions for Bazaar Trader and Zedruu, the Greathearted
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the recent commit logs to changes.txt.
+- Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
