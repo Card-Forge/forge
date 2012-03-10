@@ -19,6 +19,7 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import forge.AllZone;
 import forge.Card;
@@ -27,6 +28,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
+import forge.util.MyRandom;
 
 // Charm specific params:
 // Choices - a ","-delimited list of SVars containing ability choices
@@ -59,7 +61,7 @@ public final class AbilityFactoryCharm {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCharm.charmCanPlayAI(af, this);
+                return AbilityFactoryCharm.charmCanPlayAI(af, this, false);
             }
 
             @Override
@@ -74,7 +76,7 @@ public final class AbilityFactoryCharm {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCharm.charmCanPlayAI(af, this);
+                return AbilityFactoryCharm.charmCanPlayAI(af, this, mandatory);
             }
         }; // Ability_Activated
 
@@ -96,7 +98,7 @@ public final class AbilityFactoryCharm {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCharm.charmCanPlayAI(af, this);
+                return AbilityFactoryCharm.charmCanPlayAI(af, this, false);
             }
 
             @Override
@@ -134,9 +136,48 @@ public final class AbilityFactoryCharm {
         return sb.toString();
     }
 
-    private static boolean charmCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // TODO - enable Charms for the AI
-        return false;
+    private static boolean charmCanPlayAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+        final Random r = MyRandom.getRandom();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card source = sa.getSourceCard();
+        //this resets all previous choices
+        sa.setSubAbility(null);
+        final int num = Integer.parseInt(params.containsKey("CharmNum") ? params.get("CharmNum")
+                : "1");
+        final String[] saChoices = params.get("Choices").split(",");
+        ArrayList<SpellAbility> choices = new ArrayList<SpellAbility>();
+        for (final String saChoice : saChoices) {
+            final String ab = source.getSVar(saChoice);
+            final AbilityFactory charmAF = new AbilityFactory();
+            choices.add(charmAF.getAbility(ab, source));
+        }
+        for (int i = 0; i < num; i++) {
+            AbilitySub chosen = null;
+            for (SpellAbility sub : choices) {
+                if (sub.doTrigger(false)) {
+                    chosen = (AbilitySub) sub;
+                    break;
+                }
+            }
+            if (chosen == null) {
+                return false;
+            }
+            choices.remove(chosen);
+
+            // walk down the SpellAbility tree and add to the child
+            // Ability_Sub
+            SpellAbility child = sa;
+            while (child.getSubAbility() != null) {
+                child = child.getSubAbility();
+            }
+            child.setSubAbility(chosen);
+            if (chosen.getActivatingPlayer() == null) {
+                chosen.setActivatingPlayer(child.getActivatingPlayer());
+            }
+            chosen.setParent(child);
+        }
+        // prevent run-away activations - first time will always return true
+        return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
 
     private static void charmResolve(final AbilityFactory af, final SpellAbility sa) {
@@ -146,7 +187,7 @@ public final class AbilityFactoryCharm {
     }
 
     /**
-     * Sets the up charm s as.
+     * Sets the up charm s as. For HUMAN only
      * 
      * @param sa
      *            the new up charm s as
@@ -160,7 +201,6 @@ public final class AbilityFactoryCharm {
         final Card source = sa.getSourceCard();
         //this resets all previous choices
         sa.setSubAbility(null);
-        sa.setActivatingPlayer(AllZone.getHumanPlayer());
         final int num = Integer.parseInt(params.containsKey("CharmNum") ? params.get("CharmNum")
                 : "1");
         final int min = params.containsKey("MinCharmNum") ? Integer.parseInt(params.get("MinCharmNum")) : num;
