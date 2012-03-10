@@ -19,7 +19,7 @@ package forge.quest;
 
 import java.util.List;
 
-import forge.quest.data.QuestData;
+import forge.quest.data.QuestAchievements;
 import forge.util.FileSection;
 
 /** 
@@ -56,11 +56,11 @@ public class SellRules {
      * @param quest the quest
      * @return true, if successful
      */
-    public boolean meetsRequiremnts(QuestData quest) {
+    public boolean meetsRequiremnts(QuestAchievements quest) {
         if (quest.getWin() < minWins) {
             return false;
         }
-        if (quest.getDifficultyIndex() < minDifficulty || quest.getDifficultyIndex() > maxDifficulty) {
+        if (quest.getDifficulty() < minDifficulty || quest.getDifficulty() > maxDifficulty) {
             return false;
         }
 

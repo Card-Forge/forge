@@ -288,32 +288,6 @@ public final class Constant {
     }
 
     /**
-     * The Interface Quest.
-     */
-    public static class Quest {
-
-        /** The fantasy quest. */
-        public static final boolean[] FANTASY_QUEST = new boolean[1];
-
-        // public static final Quest_Assignment[] qa = new Quest_Assignment[1];
-
-        /** The human list. */
-        public static final CardList[] HUMAN_LIST = new CardList[1];
-
-        /** The computer list. */
-        public static final CardList[] COMPUTER_LIST = new CardList[1];
-
-        /** The human life. */
-        public static final int[] HUMAN_LIFE = new int[1];
-
-        /** The computer life. */
-        public static final int[] COMPUTER_LIFE = new int[1];
-
-        /** The opp icon name. */
-        public static final String[] OPP_ICON_NAME = new String[1];
-    }
-
-    /**
      * The Interface CardTypes.
      */
     public static class CardTypes {

@@ -15,6 +15,7 @@ import forge.gui.home.ICSubmenu;
 import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
 import forge.gui.toolbox.FLabel;
 import forge.quest.data.QuestChallenge;
+import forge.quest.data.QuestController;
 import forge.quest.data.QuestEventManager;
 import forge.view.ViewHomeUI;
 
@@ -25,6 +26,7 @@ import forge.view.ViewHomeUI;
 public enum CSubmenuChallenges implements ICSubmenu {
     /** */
     SINGLETON_INSTANCE;
+     
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#getCommand()
@@ -32,9 +34,10 @@ public enum CSubmenuChallenges implements ICSubmenu {
     @SuppressWarnings("serial")
     @Override
     public Command getMenuCommand() {
+        final QuestController qc = AllZone.getQuest();
         return new Command() {
             public void execute() {
-                if (AllZone.getQuestData() == null) {
+                if (qc.getAchievements() == null) {
                     ViewHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
                 }
             }
@@ -70,17 +73,18 @@ public enum CSubmenuChallenges implements ICSubmenu {
                     }
                 });
 
+        final QuestController quest = AllZone.getQuest();
         view.getCbPlant().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                AllZone.getQuestData().getPetManager().setUsePlant(view.getCbPlant().isSelected());
+                quest.getAssets().getPetManager().setUsePlant(view.getCbPlant().isSelected());
             }
         });
 
         view.getCbZep().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                AllZone.getQuestData().getPetManager().setUsePlant(view.getCbZep().isSelected());
+                quest.getAssets().getPetManager().setUsePlant(view.getCbZep().isSelected());
             }
         });
 
@@ -90,10 +94,10 @@ public enum CSubmenuChallenges implements ICSubmenu {
                 final int index = view.getCbxPet().getSelectedIndex();
                 if (index != -1 && index != 0) {
                     final String pet = ((String) view.getCbxPet().getSelectedItem());
-                    AllZone.getQuestData().getPetManager().setSelectedPet(pet.substring(7));
+                    quest.getAssets().getPetManager().setSelectedPet(pet.substring(7));
                 }
                 else {
-                    AllZone.getQuestData().getPetManager().setSelectedPet(null);
+                    quest.getAssets().getPetManager().setSelectedPet(null);
                 }
             }
         });
@@ -108,12 +112,12 @@ public enum CSubmenuChallenges implements ICSubmenu {
 
         final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
 
-        if (AllZone.getQuestData() != null) {
-            view.getLblTitle().setText("Challenges: " + AllZone.getQuestData().getRank());
+        if (AllZone.getQuest().getAchievements() != null) {
+            view.getLblTitle().setText("Challenges: " + AllZone.getQuest().getRank());
 
             view.getPnlChallenges().removeAll();
             final List<QuestChallenge> challenges =
-                    QuestEventManager.generateChallenges();
+                    QuestEventManager.INSTANCE.generateChallenges();
 
             for (final QuestChallenge c : challenges) {
                 final SelectablePanel temp = new SelectablePanel(c);

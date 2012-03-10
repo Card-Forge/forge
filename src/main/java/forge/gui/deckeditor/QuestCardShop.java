@@ -54,7 +54,7 @@ import forge.item.OpenablePack;
 import forge.item.PreconDeck;
 import forge.item.TournamentPack;
 import forge.quest.ReadPriceList;
-import forge.quest.data.QuestData;
+import forge.quest.data.QuestController;
 import forge.util.Predicate;
 
 /**
@@ -81,7 +81,7 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, DeckBase>
 
     private double multiplier;
 
-    private final QuestData questData;
+    private final QuestController questData;
 
     // get pricelist:
     private final ReadPriceList r = new ReadPriceList();
@@ -211,7 +211,7 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, DeckBase>
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      */
-    public QuestCardShop(final QuestData qd) {
+    public QuestCardShop(final QuestController qd) {
         this.questData = qd;
         try {
             this.setFilterBoxes(null);
@@ -265,7 +265,7 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, DeckBase>
         this.setTitle("Card Shop");
 
         this.creditsLabel.setBounds(new Rectangle(350, 365, 714, 31));
-        this.creditsLabel.setText("Total credits: " + this.questData.getCredits());
+        this.creditsLabel.setText("Total credits: " + this.questData.getAssets().getCredits());
         this.creditsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         this.sellPercentageLabel.setBounds(new Rectangle(380, 395, 450, 31));
         this.sellPercentageLabel.setText("(Sell percentage: " + this.multiplier + ")");
@@ -326,7 +326,7 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, DeckBase>
 
         final int value = this.getCardValue(item);
 
-        if (value <= this.questData.getCredits()) {
+        if (value <= this.questData.getAssets().getCredits()) {
 
             if (item instanceof CardPrinted) {
                 this.getTopTableWithCards().removeCard(item);
@@ -368,7 +368,7 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, DeckBase>
 
             }
 
-            this.creditsLabel.setText("Total credits: " + this.questData.getCredits());
+            this.creditsLabel.setText("Total credits: " + this.questData.getAssets().getCredits());
         } else {
             JOptionPane.showMessageDialog(null, "Not enough credits!");
         }
@@ -398,7 +398,7 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, DeckBase>
                 .getSellPriceLimit());
         this.questData.getCards().sellCard(card, price);
 
-        this.creditsLabel.setText("Total credits: " + this.questData.getCredits());
+        this.creditsLabel.setText("Total credits: " + this.questData.getAssets().getCredits());
     }
 
     @SuppressWarnings("rawtypes")

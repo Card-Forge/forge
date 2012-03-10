@@ -24,9 +24,13 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.data.QuestAchievements;
+import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestChallenge;
-import forge.quest.data.QuestData;
+import forge.quest.data.QuestController;
 import forge.quest.data.QuestEvent;
+import forge.quest.data.QuestEventManager;
+import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.QuestUtil;
 import forge.quest.data.item.QuestItemZeppelin;
@@ -47,28 +51,29 @@ public class SubmenuQuestUtil {
      * @return a int.
      */
     public static int nextChallengeInWins() {
-        final QuestData qData = AllZone.getQuestData();
-        final int challengesPlayed = qData.getChallengesPlayed();
+        final QuestController qData = AllZone.getQuest();
+        final int challengesPlayed = qData.getAchievements().getChallengesPlayed();
 
         int mul = 5;
-        if (qData.getInventory().hasItem("Zeppelin")) {
+        if (qData.getAssets().getInventory().hasItem("Zeppelin")) {
             mul = 3;
-        } else if (qData.getInventory().hasItem("Map")) {
+        } else if (qData.getAssets().getInventory().hasItem("Map")) {
             mul = 4;
         }
 
-        final int delta = (qData.getWin() < 20
-                ? 20 - qData.getWin()
-                : (challengesPlayed * mul) - qData.getWin());
+        final int wins = qData.getAchievements().getWin();
+        final int delta = (wins < 20 ? 20 - wins : (challengesPlayed * mul) - wins);
 
         return (delta > 0) ? delta : 0;
     }
 
     /** Updates stats, pets panels for both duels and challenges. */
     public static void updateStatsAndPet() {
-        final QuestData qData = AllZone.getQuestData();
+        final QuestController qData = AllZone.getQuest();
+        final QuestAchievements qA = qData.getAchievements();
+        final QuestAssets qS = qData.getAssets();
 
-        if (qData == null) { return; }
+        if (qA == null) { return; }
 
         final IStatsAndPet[] viewsToUpdate = new IStatsAndPet[] {
                 VSubmenuDuels.SINGLETON_INSTANCE,
@@ -83,10 +88,10 @@ public class SubmenuQuestUtil {
             view.getLblLife().setVisible(true);
 
             // Stats panel
-            view.getLblCredits().setText("Credits: " + qData.getCredits());
-            view.getLblLife().setText("Life: " + qData.getLife());
-            view.getLblWins().setText("Wins: " + qData.getWin());
-            view.getLblLosses().setText("Losses: " + qData.getLost());
+            view.getLblCredits().setText("Credits: " + qS.getCredits());
+            view.getLblLife().setText("Life: " + qS.getLife());
+            view.getLblWins().setText("Wins: " + qA.getWin());
+            view.getLblLosses().setText("Losses: " + qA.getLost());
             view.updateCurrentDeckStatus();
 
             final int num = SubmenuQuestUtil.nextChallengeInWins();
@@ -98,13 +103,13 @@ public class SubmenuQuestUtil {
             }
 
             view.getLblWinStreak().setText(
-                    "Win streak: " + qData.getWinStreakCurrent()
-                    + " (Best:" + qData.getWinStreakBest() + ")");
+                    "Win streak: " + qA.getWinStreakCurrent()
+                    + " (Best:" + qA.getWinStreakBest() + ")");
 
             // Start panel: pet, plant, zep.
-            if (qData.getMode().equals(QuestData.FANTASY)) {
-                final Set<String> petList = qData.getPetManager().getAvailablePetNames();
-                final QuestPetAbstract currentPet = qData.getPetManager().getSelectedPet();
+            if (qData.getMode() == QuestMode.Fantasy) {
+                final Set<String> petList = qS.getPetManager().getAvailablePetNames();
+                final QuestPetAbstract currentPet = qS.getPetManager().getSelectedPet();
 
                 view.getCbxPet().removeAllItems();
                 // Pet list visibility
@@ -121,19 +126,19 @@ public class SubmenuQuestUtil {
                 }
 
                 // Plant visiblity
-                if (qData.getPetManager().getPlant().getLevel() == 0) {
+                if (qS.getPetManager().getPlant().getLevel() == 0) {
                     view.getCbPlant().setVisible(false);
                 }
                 else {
                     view.getCbPlant().setVisible(true);
-                    view.getCbPlant().setSelected(qData.getPetManager().shouldPlantBeUsed());
+                    view.getCbPlant().setSelected(qS.getPetManager().shouldPlantBeUsed());
                 }
 
                 // Zeppelin visibility: everything about the zeppelin is screwy right now
                 // for some reason, needs a large overhaul, disabled for now. 4-03-12
                 if (false) { //view.equals(VSubmenuChallenges.SINGLETON_INSTANCE)) {
-                    final QuestItemZeppelin zeppelin = (QuestItemZeppelin) qData.getInventory().getItem("Zeppelin");
-                    view.getCbZep().setVisible(zeppelin.isAvailableForPurchase() ? true : false);
+                    final QuestItemZeppelin zeppelin = (QuestItemZeppelin) qS.getInventory().getItem("Zeppelin");
+                    view.getCbZep().setVisible(zeppelin.isAvailableForPurchase(qS) ? true : false);
                 }
                 else {
                     view.getCbZep().setVisible(false);
@@ -160,8 +165,8 @@ public class SubmenuQuestUtil {
     public static Deck getCurrentDeck() {
         Deck d = null;
 
-        if (AllZone.getQuestData() != null) {
-            d = AllZone.getQuestData().getMyDecks().get(
+        if (AllZone.getQuest().getAssets() != null) {
+            d = AllZone.getQuest().getMyDecks().get(
                 Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_DECK));
         }
 
@@ -174,12 +179,12 @@ public class SubmenuQuestUtil {
         final Command exit = new Command() {
             @Override
             public void execute() {
-                AllZone.getQuestData().saveData();
+                AllZone.getQuest().save();
                 updateStatsAndPet();
             }
         };
 
-        final QuestCardShop g = new QuestCardShop(AllZone.getQuestData());
+        final QuestCardShop g = new QuestCardShop(AllZone.getQuest());
         g.show(exit);
         g.setVisible(true);
     }
@@ -192,7 +197,7 @@ public class SubmenuQuestUtil {
 
     /** */
     public static void startGame() {
-        final QuestData qData = AllZone.getQuestData();
+        final QuestController qData = AllZone.getQuest();
         final QuestEvent event = selectedOpponent.getEvent();
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -208,15 +213,13 @@ public class SubmenuQuestUtil {
             public Object doInBackground() {
                 Constant.Runtime.HUMAN_DECK[0] = SubmenuQuestUtil.getCurrentDeck();
                 Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
-                Constant.Quest.OPP_ICON_NAME[0] = event.getIconFilename();
                 Constant.Runtime.setGameType(GameType.Quest);
 
-                qData.randomizeOpponents();
+                QuestEventManager.INSTANCE.randomizeOpponents();
                 qData.setCurrentEvent(event);
-                qData.saveData();
+                qData.save();
 
-                if (qData.isFantasy()) {
-                    Constant.Quest.FANTASY_QUEST[0] = true;
+                if (qData.getMode() == QuestMode.Fantasy) {
                     int lifeAI = 20;
                     int lifeHuman = 20;
 
@@ -225,21 +228,22 @@ public class SubmenuQuestUtil {
 
                         // If zeppelin has been purchased, gear will be at level 2.
                         if (event.getEventType().equalsIgnoreCase("challenge")
-                            && !qData.getInventory().getItem("Zeppelin").isAvailableForPurchase()
+                            && !qData.getAssets().getInventory().getItem("Zeppelin").isAvailableForPurchase(qData.getAssets())
                             && VSubmenuChallenges.SINGLETON_INSTANCE.getCbZep().isSelected()) {
                                 extraLife = 3;
                         }
                         lifeAI = ((QuestChallenge) event).getAILife();
-                        lifeHuman = qData.getLife() + extraLife;
+                        lifeHuman = qData.getAssets().getLife() + extraLife;
                     }
 
                     GameNew.newGame(
                             Constant.Runtime.HUMAN_DECK[0],
                             Constant.Runtime.COMPUTER_DECK[0],
-                            QuestUtil.getHumanStartingCards(qData),
-                            QuestUtil.getComputerStartingCards(qData),
+                            QuestUtil.getHumanStartingCards(qData.getAssets(), event),
+                            QuestUtil.getComputerStartingCards(event),
                             lifeHuman,
-                            lifeAI);
+                            lifeAI,
+                            event.getIconFilename());
                 } // End isFantasy
                 else {
                     GameNew.newGame(SubmenuQuestUtil.getCurrentDeck(), event.getEventDeck());

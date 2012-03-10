@@ -19,8 +19,8 @@ package forge.quest.data.item;
 
 import javax.swing.ImageIcon;
 
-import forge.AllZone;
-import forge.quest.data.bazaar.QuestStallPurchasable;
+import forge.quest.data.QuestAssets;
+import forge.quest.data.bazaar.IQuestStallPurchasable;
 
 /**
  * <p>
@@ -30,7 +30,7 @@ import forge.quest.data.bazaar.QuestStallPurchasable;
  * @author Forge
  * @version $Id$
  */
-public abstract class QuestItemAbstract implements QuestStallPurchasable {
+public abstract class QuestItemAbstract implements IQuestStallPurchasable {
     private int level = 0;
     private final String name;
     private final String shopName;
@@ -104,9 +104,9 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * This method will be invoked when an item is bought in a shop.
      */
     @Override
-    public void onPurchase() {
-        final int currentLevel = AllZone.getQuestData().getInventory().getItemLevel(this.name);
-        AllZone.getQuestData().getInventory().setItemLevel(this.name, currentLevel + 1);
+    public void onPurchase(QuestAssets qA) {
+        final int currentLevel = qA.getInventory().getItemLevel(this.name);
+        qA.getInventory().setItemLevel(this.name, currentLevel + 1);
     }
 
     /**
@@ -117,8 +117,8 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * @return a boolean.
      */
     @Override
-    public boolean isAvailableForPurchase() {
-        return AllZone.getQuestData().getInventory().getItemLevel(this.name) < this.maxLevel;
+    public boolean isAvailableForPurchase(QuestAssets qA) {
+        return qA.getInventory().getItemLevel(this.name) < this.maxLevel;
     }
 
     /**
@@ -188,16 +188,16 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
 
     /** @return a int. */
     @Override
-    public abstract int getBuyingPrice();
+    public abstract int getBuyingPrice(QuestAssets qA);
 
     /** @return a int. */
     @Override
-    public abstract int getSellingPrice();
+    public abstract int getSellingPrice(QuestAssets qA);
 
     /** {@inheritDoc} */
     @Override
     public final int compareTo(final Object o) {
-        final QuestStallPurchasable q = (QuestStallPurchasable) o;
+        final IQuestStallPurchasable q = (IQuestStallPurchasable) o;
         return this.getPurchaseName().compareTo(q.getPurchaseName());
     }
 }

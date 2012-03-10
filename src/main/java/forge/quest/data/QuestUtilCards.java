@@ -38,8 +38,9 @@ import java.util.Map.Entry;
  * created to decrease complexity of questData class
  */
 public final class QuestUtilCards {
-    private final QuestData q;
+    private final QuestController qc;
     private final QuestPreferences qpref;
+    private final QuestAssets qa;
 
     /**
      * Instantiates a new quest util cards.
@@ -47,8 +48,9 @@ public final class QuestUtilCards {
      * @param qd
      *            the qd
      */
-    public QuestUtilCards(final QuestData qd) {
-        this.q = qd;
+    public QuestUtilCards(final QuestController qd) {
+        this.qc = qd;
+        this.qa = qc.getAssets();
         this.qpref = Singletons.getModel().getQuestPreferences();
     }
 
@@ -121,10 +123,10 @@ public final class QuestUtilCards {
      *            the card
      */
     public void addSingleCard(final CardPrinted card) {
-        this.q.getCardPool().add(card);
+        this.qa.getCardPool().add(card);
 
         // register card into that list so that it would appear as a new one.
-        this.q.getNewCardList().add(card);
+        this.qa.getNewCardList().add(card);
     }
 
     private static final Predicate<CardPrinted> RARE_PREDICATE = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
@@ -178,9 +180,9 @@ public final class QuestUtilCards {
      *            the value
      */
     public void buyCard(final CardPrinted card, final int value) {
-        if (this.q.getCredits() >= value) {
-            this.q.setCredits(this.q.getCredits() - value);
-            this.q.getShopList().remove(card);
+        if (this.qa.getCredits() >= value) {
+            this.qa.setCredits(this.qa.getCredits() - value);
+            this.qa.getShopList().remove(card);
             this.addSingleCard(card);
         }
     }
@@ -194,9 +196,8 @@ public final class QuestUtilCards {
      *            the value
      */
     public void buyPack(final OpenablePack booster, final int value) {
-        if (this.q.getCredits() >= value) {
-            this.q.setCredits(this.q.getCredits() - value);
-            this.q.getShopList().remove(booster);
+        if (this.qa.getCredits() >= value) {
+            this.qa.setCredits(this.qa.getCredits() - value);
             this.addAllCards(booster.getCards());
         }
     }
@@ -210,15 +211,15 @@ public final class QuestUtilCards {
      *            the value
      */
     public void buyPreconDeck(final PreconDeck precon, final int value) {
-        if (this.q.getCredits() >= value) {
-            this.q.setCredits(this.q.getCredits() - value);
-            this.q.getShopList().remove(precon);
+        if (this.qa.getCredits() >= value) {
+            this.qa.setCredits(this.qa.getCredits() - value);
+            this.qa.getShopList().remove(precon);
             addPreconDeck(precon);
         }
     }
 
     void addPreconDeck(PreconDeck precon) {
-        this.q.getMyDecks().add(precon.getDeck());
+        this.qc.getMyDecks().add(precon.getDeck());
         this.addAllCards(precon.getDeck().getMain().toFlatList());
         this.addAllCards(precon.getDeck().getSideboard().toFlatList());
     }
@@ -247,17 +248,17 @@ public final class QuestUtilCards {
      */
     public void sellCard(final CardPrinted card, final int price, final boolean addToShop) {
         if (price > 0) {
-            this.q.setCredits(this.q.getCredits() + price);
+            this.qa.setCredits(this.qa.getCredits() + price);
         }
-        this.q.getCardPool().remove(card);
+        this.qa.getCardPool().remove(card);
         if (addToShop) {
-            this.q.getShopList().add(card);
+            this.qa.getShopList().add(card);
         }
 
         // remove card being sold from all decks
-        final int leftInPool = this.q.getCardPool().count(card);
+        final int leftInPool = this.qa.getCardPool().count(card);
         // remove sold cards from all decks:
-        for (final Deck deck : this.q.getMyDecks()) {
+        for (final Deck deck : this.qc.getMyDecks()) {
             deck.getMain().remove(card, deck.getMain().count(card) - leftInPool);
         }
     }
@@ -266,8 +267,8 @@ public final class QuestUtilCards {
      * Clear shop list.
      */
     public void clearShopList() {
-        if (null != this.q.getShopList()) {
-            this.q.getShopList().clear();
+        if (null != this.qa.getShopList()) {
+            this.qa.getShopList().clear();
         }
     }
 
@@ -277,12 +278,12 @@ public final class QuestUtilCards {
      * @return the sell mutliplier
      */
     public double getSellMutliplier() {
-        double multi = 0.20 + (0.001 * this.q.getWin());
+        double multi = 0.20 + (0.001 * this.qc.getAchievements().getWin());
         if (multi > 0.6) {
             multi = 0.6;
         }
 
-        final int lvlEstates = this.q.isFantasy() ? this.q.getInventory().getItemLevel("Estates") : 0;
+        final int lvlEstates = this.qc.getMode() == QuestMode.Fantasy  ? this.qa.getInventory().getItemLevel("Estates") : 0;
         switch (lvlEstates) {
         case 1:
             multi += 0.01;
@@ -306,7 +307,7 @@ public final class QuestUtilCards {
      * @return the sell price limit
      */
     public int getSellPriceLimit() {
-        return this.q.getWin() <= 50 ? 1000 : Integer.MAX_VALUE;
+        return this.qc.getAchievements().getWin() <= 50 ? 1000 : Integer.MAX_VALUE;
     }
 
     /**
@@ -340,7 +341,7 @@ public final class QuestUtilCards {
             final int rollD100 = MyRandom.getRandom().nextInt(100);
             final Predicate<CardEdition> filter = rollD100 < 40 ? this.filterT2booster
                     : (rollD100 < 75 ? this.filterExtButT2 : this.filterNotExt);
-            this.q.getShopList().addAllFlat(
+            this.qa.getShopList().addAllFlat(
                     filter.random(Singletons.getModel().getEditions(), 1, BoosterPack.FN_FROM_SET));
         }
     }
@@ -353,14 +354,14 @@ public final class QuestUtilCards {
      */
     public void generateTournamentsInShop(final int count) {
         Predicate<CardEdition> hasTournament = CardEdition.Predicates.HAS_TOURNAMENT_PACK;
-        this.q.getShopList().addAllFlat(hasTournament.random(Singletons.getModel().getEditions(),
+        this.qa.getShopList().addAllFlat(hasTournament.random(Singletons.getModel().getEditions(),
                 count,
                 TournamentPack.FN_FROM_SET));
     }
 
     public void generateFatPacksInShop(final int count) {
         Predicate<CardEdition> hasPack = CardEdition.Predicates.HAS_FAT_PACK;
-        this.q.getShopList().addAllFlat(hasPack.random(Singletons.getModel().getEditions(), count, FatPack.FN_FROM_SET));
+        this.qa.getShopList().addAllFlat(hasPack.random(Singletons.getModel().getEditions(), count, FatPack.FN_FROM_SET));
     }
 
     /**
@@ -371,12 +372,12 @@ public final class QuestUtilCards {
      */
     public void generatePreconsInShop(final int count) {
         final List<PreconDeck> meetRequirements = new ArrayList<PreconDeck>();
-        for (final PreconDeck deck : QuestData.getPrecons()) {
-            if (deck.getRecommendedDeals().meetsRequiremnts(this.q)) {
+        for (final PreconDeck deck : QuestController.getPrecons()) {
+            if (deck.getRecommendedDeals().meetsRequiremnts(this.qc.getAchievements())) {
                 meetRequirements.add(deck);
             }
         }
-        this.q.getShopList().addAllFlat(Predicate.getTrue(PreconDeck.class).random(meetRequirements, count));
+        this.qa.getShopList().addAllFlat(Predicate.getTrue(PreconDeck.class).random(meetRequirements, count));
     }
 
     /**
@@ -385,6 +386,8 @@ public final class QuestUtilCards {
     public void generateCardsInShop() {
         final BoosterGenerator pack = new BoosterGenerator(CardDb.instance().getAllCards());
 
+        int nLevel = this.qc.getAchievements().getLevel();
+        
         // Preferences
         final int startPacks = this.qpref.getPreferenceInt(QPref.SHOP_STARTING_PACKS);
         final int winsForPack = this.qpref.getPreferenceInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);
@@ -393,20 +396,20 @@ public final class QuestUtilCards {
         final int uncommon = this.qpref.getPreferenceInt(QPref.SHOP_SINGLES_UNCOMMON);
         final int rare = this.qpref.getPreferenceInt(QPref.SHOP_SINGLES_RARE);
 
-        final int levelPacks = this.q.getLevel() > 0 ? startPacks / this.q.getLevel() : startPacks;
-        final int winPacks = this.q.getWin() / winsForPack;
+        final int levelPacks = nLevel > 0 ? startPacks / nLevel : startPacks;
+        final int winPacks = this.qc.getAchievements().getWin() / winsForPack;
         final int totalPacks = Math.min(levelPacks + winPacks, maxPacks);
 
-        this.q.getShopList().clear();
+        this.qa.getShopList().clear();
         for (int i = 0; i < totalPacks; i++) {
-            this.q.getShopList().addAllFlat(pack.getBoosterPack(common, uncommon, rare, 0, 0, 0, 0, 0, 0));
+            this.qa.getShopList().addAllFlat(pack.getBoosterPack(common, uncommon, rare, 0, 0, 0, 0, 0, 0));
         }
 
         this.generateBoostersInShop(totalPacks);
         this.generatePreconsInShop(totalPacks);
         this.generateTournamentsInShop(totalPacks);
         this.generateFatPacksInShop(totalPacks);
-        this.q.getShopList().addAll(QuestUtilCards.generateBasicLands(10, 5));
+        this.qa.getShopList().addAll(QuestUtilCards.generateBasicLands(10, 5));
     }
 
     /**
@@ -415,7 +418,7 @@ public final class QuestUtilCards {
      * @return the cardpool
      */
     public ItemPool<CardPrinted> getCardpool() {
-        return this.q.getCardPool();
+        return this.qa.getCardPool();
     }
 
     /**
@@ -424,10 +427,10 @@ public final class QuestUtilCards {
      * @return the shop list
      */
     public ItemPoolView<InventoryItem> getShopList() {
-        if (this.q.getShopList().isEmpty()) {
+        if (this.qa.getShopList().isEmpty()) {
             this.generateCardsInShop();
         }
-        return this.q.getShopList();
+        return this.qa.getShopList();
     }
 
     /**
@@ -436,14 +439,14 @@ public final class QuestUtilCards {
      * @return the new cards
      */
     public ItemPoolView<InventoryItem> getNewCards() {
-        return this.q.getNewCardList();
+        return this.qa.getNewCardList();
     }
 
     /**
      * Reset new list.
      */
     public void resetNewList() {
-        this.q.getNewCardList().clear();
+        this.qa.getNewCardList().clear();
     }
 
     /**
@@ -475,7 +478,7 @@ public final class QuestUtilCards {
     private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnNewCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
-            return QuestUtilCards.this.q.getNewCardList().contains(from.getKey()) ? Integer.valueOf(1) : Integer
+            return QuestUtilCards.this.qa.getNewCardList().contains(from.getKey()) ? Integer.valueOf(1) : Integer
                     .valueOf(0);
         }
     };
@@ -484,7 +487,7 @@ public final class QuestUtilCards {
     private final Lambda1<Object, Entry<InventoryItem, Integer>> fnNewGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return QuestUtilCards.this.q.getNewCardList().contains(from.getKey()) ? "NEW" : "";
+            return QuestUtilCards.this.qa.getNewCardList().contains(from.getKey()) ? "NEW" : "";
         }
     };
 }

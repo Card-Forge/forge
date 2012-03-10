@@ -84,7 +84,7 @@ public class ControlMatchUI implements CardContainer {
      * Fires up controllers for each component of UI.
      * 
      */
-    public void initMatch() {
+    public void initMatch(String iconEnemy) {
         ControlMatchUI.this.showCombat("");
         ControlMatchUI.this.showStack();
 
@@ -97,8 +97,8 @@ public class ControlMatchUI implements CardContainer {
             if (i != 1 && Constant.Runtime.getGameType() == GameType.Quest) {
                     String filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator;
 
-                    if (Constant.Quest.OPP_ICON_NAME[0] != null) {
-                        filename += Constant.Quest.OPP_ICON_NAME[0];
+                    if (iconEnemy != null) {
+                        filename += iconEnemy;
                         final File f = new File(filename);
                         img = (f.exists()
                                 ? new ImageIcon(filename).getImage()

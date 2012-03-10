@@ -6,7 +6,7 @@ import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.toolbox.*;
 import forge.item.PreconDeck;
-import forge.quest.data.QuestData;
+import forge.quest.data.QuestController;
 import forge.util.IStorageView;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.text.WordUtils;
@@ -93,7 +93,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
         };
 
         final Map<String, String> preconDescriptions = new HashMap<String, String>();
-        IStorageView<PreconDeck> preconDecks = QuestData.getPrecons();
+        IStorageView<PreconDeck> preconDecks = QuestController.getPrecons();
         for (String preconDeck : preconDecks.getNames()) {
             cbxPrecon.addItem(preconDeck);
             String description = preconDecks.get(preconDeck).getDescription();
@@ -102,6 +102,8 @@ public enum VSubmenuQuestData implements IVSubmenu {
         }
 
         cbxPrecon.setRenderer(new BasicComboBoxRenderer() {
+            private static final long serialVersionUID = 3477357932538947199L;
+
             @Override
             public Component getListCellRendererComponent(
                     JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {

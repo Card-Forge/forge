@@ -30,6 +30,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.data.QuestAssets;
 import forge.quest.data.bazaar.QuestStallManager;
 
 /**
@@ -173,14 +174,14 @@ public class QuestPetPlant extends QuestPetAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final void onPurchase() {
-        AllZone.getQuestData().getPetManager().addPlantLevel();
+    public final void onPurchase(QuestAssets qA) {
+        qA.getPetManager().addPlantLevel();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean isAvailableForPurchase() {
-        final QuestPetPlant plant = (QuestPetPlant) AllZone.getQuestData().getPetManager().getPlant();
+    public final boolean isAvailableForPurchase(QuestAssets qA) {
+        final QuestPetPlant plant = (QuestPetPlant) qA.getPetManager().getPlant();
 
         return (plant == null) || (plant.getLevel() < plant.getMaxLevel());
     }

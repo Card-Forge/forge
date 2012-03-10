@@ -427,7 +427,7 @@ public class DeckLister extends JPanel {
         switch (this.gametype) {
         case Quest:
             Constant.Runtime.HUMAN_DECK[0] = d0;
-            final DeckEditorQuest editor = new DeckEditorQuest(AllZone.getQuestData());
+            final DeckEditorQuest editor = new DeckEditorQuest(AllZone.getQuest());
             editor.show(this.cmdEditorExit);
             editor.setVisible(true);
             editor.setAlwaysOnTop(true);
@@ -475,8 +475,8 @@ public class DeckLister extends JPanel {
         } else if (this.gametype.equals(GameType.Sealed)) {
             deckManager.getSealed().delete(d0.getName());
         } else if (this.gametype.equals(GameType.Quest)) {
-            AllZone.getQuestData().getMyDecks().delete(d0.getName());
-            AllZone.getQuestData().saveData();
+            AllZone.getQuest().getMyDecks().delete(d0.getName());
+            AllZone.getQuest().save();
         } else {
             deckManager.getConstructed().delete(d0.getName());
         }

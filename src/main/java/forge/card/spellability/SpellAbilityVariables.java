@@ -20,7 +20,6 @@ package forge.card.spellability;
 import java.util.ArrayList;
 
 import forge.Constant;
-import forge.Constant.Zone;
 
 /**
  * <p>

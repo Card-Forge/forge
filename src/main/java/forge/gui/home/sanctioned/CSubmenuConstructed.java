@@ -279,11 +279,11 @@ public enum CSubmenuConstructed implements ICSubmenu {
 
         final List<String> eventNames = new ArrayList<String>();
 
-        for (final QuestEvent e : QuestEventManager.ALL_DUELS) {
+        for (final QuestEvent e : QuestEventManager.INSTANCE.ALL_DUELS) {
             eventNames.add(e.getEventDeck().getName());
         }
 
-        for (final QuestEvent e : QuestEventManager.ALL_CHALLENGES) {
+        for (final QuestEvent e : QuestEventManager.INSTANCE.ALL_CHALLENGES) {
             eventNames.add(e.getEventDeck().getName());
         }
 
@@ -416,7 +416,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
             deck.getMain().add(cards);
         }
         else if (lst0.getName().equals(ESubmenuConstructedTypes.QUESTEVENTS.toString())) {
-            deck = QuestEventManager.getEvent(selection[0]).getEventDeck();
+            deck = QuestEventManager.INSTANCE.getEvent(selection[0]).getEventDeck();
         }
         // Custom deck
         else if (lst0.getName().equals(ESubmenuConstructedTypes.CUSTOM.toString())) {
@@ -441,7 +441,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
             deck = Singletons.getModel().getDecks().getConstructed().get(deckName);
         }
         else {
-            deck = QuestEventManager.getEvent(deckName).getEventDeck();
+            deck = QuestEventManager.INSTANCE.getEvent(deckName).getEventDeck();
         }
 
         // Dump into map and display.

@@ -46,7 +46,7 @@ import forge.gui.deckeditor.elements.TableView;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
-import forge.quest.data.QuestData;
+import forge.quest.data.QuestController;
 import forge.util.Predicate;
 
 //import forge.quest.data.QuestBoosterPack;
@@ -74,7 +74,7 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
 
     private FilterNameTypeSetPanel filterNameTypeSet;
 
-    private final QuestData questData;
+    private final QuestController questData;
     private final DeckController<Deck> controller;
 
     /**
@@ -179,7 +179,7 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
      * @param questData2
      *            the quest data2
      */
-    public DeckEditorQuest(final QuestData questData2) {
+    public DeckEditorQuest(final QuestController questData2) {
 
         this.questData = questData2;
         try {

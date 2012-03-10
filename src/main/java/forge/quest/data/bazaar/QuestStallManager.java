@@ -26,6 +26,7 @@ import java.util.TreeSet;
 
 import forge.AllZone;
 import forge.gui.toolbox.FSkin;
+import forge.quest.data.QuestAssets;
 
 /**
  * <p>
@@ -40,7 +41,7 @@ public class QuestStallManager {
     /** Constant <code>stalls</code>. */
     private static Map<String, QuestStallDefinition> stalls;
     /** Constant <code>items</code>. */
-    private static Map<String, SortedSet<QuestStallPurchasable>> items;
+    private static Map<String, SortedSet<IQuestStallPurchasable>> items;
 
     /**
      * Master method for assembling stall data: merchant...
@@ -109,18 +110,19 @@ public class QuestStallManager {
      * and maps to appropriate merchant.
      */
     public static void buildItems() {
-        final SortedSet<QuestStallPurchasable> itemSet = new TreeSet<QuestStallPurchasable>();
+        final SortedSet<IQuestStallPurchasable> itemSet = new TreeSet<IQuestStallPurchasable>();
 
-        itemSet.addAll(AllZone.getQuestData().getInventory().getItems());
-        itemSet.addAll(AllZone.getQuestData().getPetManager().getPetsAndPlants());
+        final QuestAssets qA = AllZone.getQuest().getAssets();
+        itemSet.addAll(qA.getInventory().getItems());
+        itemSet.addAll(qA.getPetManager().getPetsAndPlants());
 
-        QuestStallManager.items = new HashMap<String, SortedSet<QuestStallPurchasable>>();
+        QuestStallManager.items = new HashMap<String, SortedSet<IQuestStallPurchasable>>();
 
         for (final String stallName : QuestStallManager.getStallNames()) {
-            QuestStallManager.items.put(stallName, new TreeSet<QuestStallPurchasable>());
+            QuestStallManager.items.put(stallName, new TreeSet<IQuestStallPurchasable>());
         }
 
-        for (final QuestStallPurchasable purchasable : itemSet) {
+        for (final IQuestStallPurchasable purchasable : itemSet) {
             QuestStallManager.items.get(purchasable.getStallName()).add(purchasable);
         }
 
@@ -132,13 +134,14 @@ public class QuestStallManager {
      * @param stallName &emsp; {@link java.lang.String}
      * @return {@link java.util.List}.
      */
-    public static List<QuestStallPurchasable> getItems(final String stallName) {
+    public static List<IQuestStallPurchasable> getItems(final String stallName) {
         QuestStallManager.buildItems();
 
-        final List<QuestStallPurchasable> ret = new ArrayList<QuestStallPurchasable>();
+        final List<IQuestStallPurchasable> ret = new ArrayList<IQuestStallPurchasable>();
 
-        for (final QuestStallPurchasable purchasable : QuestStallManager.items.get(stallName)) {
-            if (purchasable.isAvailableForPurchase()) {
+        QuestAssets qA = AllZone.getQuest().getAssets();
+        for (final IQuestStallPurchasable purchasable : QuestStallManager.items.get(stallName)) {
+            if (purchasable.isAvailableForPurchase(qA)) {
                 ret.add(purchasable);
             }
         }

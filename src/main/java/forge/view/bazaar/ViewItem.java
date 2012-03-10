@@ -12,14 +12,15 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
-import forge.quest.data.bazaar.QuestStallPurchasable;
+import forge.quest.data.QuestAssets;
+import forge.quest.data.bazaar.IQuestStallPurchasable;
 
 /** An update-able panel instance representing a single item. */
 @SuppressWarnings("serial")
 public class ViewItem extends FPanel {
     private final FLabel lblIcon, lblName, lblPrice, btnPurchase;
     private final FTextArea tarDesc;
-    private QuestStallPurchasable item;
+    private IQuestStallPurchasable item;
 
     /** An update-able panel instance representing a single item. */
     public ViewItem() {
@@ -45,22 +46,23 @@ public class ViewItem extends FPanel {
         btnPurchase.setCommand(new Command() {
             @Override
             public void execute() {
-                AllZone.getQuestData().subtractCredits(getItem().getBuyingPrice());
-                AllZone.getQuestData().addCredits(getItem().getSellingPrice());
-                getItem().onPurchase();
-                AllZone.getQuestData().saveData();
+                QuestAssets qA = AllZone.getQuest().getAssets();
+                qA.subtractCredits(getItem().getBuyingPrice(qA));
+                qA.addCredits(getItem().getSellingPrice(qA));
+                getItem().onPurchase(qA);
+                AllZone.getQuest().save();
                 Singletons.getView().getViewBazaar().refreshLastInstance();
             }
         });
     }
 
-    /** @param i0 &emsp; {@link forge.quest.data.bazaar.QuestStallPurchasable} */
-    public void setItem(QuestStallPurchasable i0) {
+    /** @param i0 &emsp; {@link forge.quest.data.bazaar.IQuestStallPurchasable} */
+    public void setItem(IQuestStallPurchasable i0) {
         this.item = i0;
     }
 
-    /** @return {@link forge.quest.data.bazaar.QuestStallPurchasable} */
-    public QuestStallPurchasable getItem() {
+    /** @return {@link forge.quest.data.bazaar.IQuestStallPurchasable} */
+    public IQuestStallPurchasable getItem() {
         return this.item;
     }
 
@@ -69,12 +71,13 @@ public class ViewItem extends FPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                QuestAssets qA = AllZone.getQuest().getAssets();
                 lblIcon.setIcon(getItem().getIcon());
                 lblName.setText(getItem().getPurchaseName());
-                lblPrice.setText("Cost: " + String.valueOf(getItem().getBuyingPrice()) + " credits");
+                lblPrice.setText("Cost: " + String.valueOf(getItem().getBuyingPrice(qA)) + " credits");
                 tarDesc.setText(getItem().getPurchaseDescription());
 
-                if (AllZone.getQuestData().getCredits() < getItem().getBuyingPrice()) {
+                if (qA.getCredits() < getItem().getBuyingPrice(qA)) {
                     btnPurchase.setEnabled(false);
                 }
 

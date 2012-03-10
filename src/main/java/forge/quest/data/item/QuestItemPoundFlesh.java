@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 
 import forge.AllZone;
 import forge.gui.toolbox.FSkin;
+import forge.quest.data.QuestAssets;
 import forge.quest.data.bazaar.QuestStallManager;
 
 /**
@@ -45,7 +46,7 @@ public class QuestItemPoundFlesh extends QuestItemAbstract {
     public final String getPurchaseDescription() {
         return "The Alchemist welcomes contributions to his famous Elixer.\n"
                 + "But beware, you may build an immunity to its effects...\n"
-                + "\nEffect: Alchemist gives you " + getSellingPrice() + " credits."
+                + "\nEffect: Alchemist gives you " + getSellingPrice(AllZone.getQuest().getAssets()) + " credits."
                 + "\nEffect: Reduces maximum life by 1.";
     }
 
@@ -57,13 +58,13 @@ public class QuestItemPoundFlesh extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final int getBuyingPrice() {
+    public final int getBuyingPrice(QuestAssets qA) {
         return 0;
     }
 
     /** {@inheritDoc} */
-    public final int getSellingPrice() {
-        if (AllZone.getQuestData().getLife() < 2) {
+    public final int getSellingPrice(QuestAssets qA) {
+        if (qA.getLife() < 2) {
             return 0;
         } else if (this.getLevel() < 5) {
             return 250;
@@ -76,10 +77,10 @@ public class QuestItemPoundFlesh extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final void onPurchase()  {
-        if (AllZone.getQuestData().getLife() > 1) {
-            super.onPurchase();
-            AllZone.getQuestData().removeLife(1);
+    public final void onPurchase(QuestAssets qA)  {
+        if (qA.getLife() > 1) {
+            super.onPurchase(qA);
+            qA.removeLife(1);
         }
     }
 }

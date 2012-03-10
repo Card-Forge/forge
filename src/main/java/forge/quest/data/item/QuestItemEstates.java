@@ -20,6 +20,7 @@ package forge.quest.data.item;
 import javax.swing.ImageIcon;
 
 import forge.gui.toolbox.FSkin;
+import forge.quest.data.QuestAssets;
 import forge.quest.data.bazaar.QuestStallManager;
 
 /**
@@ -58,7 +59,7 @@ public class QuestItemEstates extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final int getBuyingPrice() {
+    public final int getBuyingPrice(QuestAssets qA) {
         if (this.getLevel() == 0) {
             return 500;
         } else if (this.getLevel() == 1) {
@@ -70,7 +71,7 @@ public class QuestItemEstates extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final int getSellingPrice() {
+    public final int getSellingPrice(QuestAssets qA) {
         return 0;
     }
 }

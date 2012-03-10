@@ -10,7 +10,7 @@ import forge.gui.OverlayUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
-import forge.quest.data.QuestData;
+import forge.quest.data.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.view.ViewHomeUI;
 
@@ -27,7 +27,7 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
     private final Command cmdDeckExit = new Command() {
         @Override
         public void execute() {
-            AllZone.getQuestData().saveData();
+            AllZone.getQuest().save();
             OverlayUtils.hideOverlay();
             update();
         }
@@ -52,10 +52,11 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
      */
     @Override
     public Command getMenuCommand() {
+        final QuestController qc = AllZone.getQuest();
         return new Command() {
             @Override
             public void execute() {
-                if (AllZone.getQuestData() == null) {
+                if (qc.getAchievements() == null) {
                     ViewHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
                 }
             }
@@ -73,7 +74,7 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
         VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new Command() {
             @Override
             public void execute() {
-                final DeckEditorQuest editor = new DeckEditorQuest(AllZone.getQuestData());
+                final DeckEditorQuest editor = new DeckEditorQuest(AllZone.getQuest());
                 editor.show(cmdDeckExit);
                 OverlayUtils.showOverlay();
                 editor.setVisible(true);
@@ -87,14 +88,15 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
     @Override
     public void update() {
         final VSubmenuQuestDecks view = VSubmenuQuestDecks.SINGLETON_INSTANCE;
-        final QuestData qData = AllZone.getQuestData();
+        final QuestController qData = AllZone.getQuest();
+        boolean hasQuest = qData.getAssets() != null;
         // Retrieve and set all decks
-        view.getLstDecks().setDecks(qData != null ? qData.getMyDecks() : new ArrayList<Deck>());
+        view.getLstDecks().setDecks(hasQuest ? qData.getMyDecks() : new ArrayList<Deck>());
 
         // Look through list for preferred deck from prefs
         currentDeck = null;
 
-        if (qData != null) {
+        if (hasQuest) {
             final String cd = Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_DECK);
 
             for (Deck d : qData.getMyDecks()) {

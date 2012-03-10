@@ -19,10 +19,10 @@ package forge.quest.data.pet;
 
 import javax.swing.ImageIcon;
 
-import forge.AllZone;
 import forge.Card;
+import forge.quest.data.QuestAssets;
 import forge.quest.data.bazaar.QuestStallManager;
-import forge.quest.data.bazaar.QuestStallPurchasable;
+import forge.quest.data.bazaar.IQuestStallPurchasable;
 
 /**
  * <p>
@@ -32,7 +32,7 @@ import forge.quest.data.bazaar.QuestStallPurchasable;
  * @author Forge
  * @version $Id$
  */
-public abstract class QuestPetAbstract implements QuestStallPurchasable {
+public abstract class QuestPetAbstract implements IQuestStallPurchasable {
 
     /** The level. */
     private int level;
@@ -67,13 +67,13 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * @return a int.
      */
     @Override
-    public final int getBuyingPrice() {
+    public final int getBuyingPrice(QuestAssets qA) {
         return this.getAllUpgradePrices()[this.level];
     }
 
     /** {@inheritDoc} */
     @Override
-    public final int getSellingPrice() {
+    public final int getSellingPrice(QuestAssets qA) {
         return 0;
     }
 
@@ -293,8 +293,8 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * @return a boolean.
      */
     @Override
-    public boolean isAvailableForPurchase() {
-        final QuestPetAbstract pet = AllZone.getQuestData().getPetManager().getPet(this.name);
+    public boolean isAvailableForPurchase(QuestAssets qA) {
+        final QuestPetAbstract pet = qA.getPetManager().getPet(this.name);
         if (pet == null) {
             return true;
         }
@@ -307,7 +307,7 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * </p>
      */
     @Override
-    public void onPurchase() {
-        AllZone.getQuestData().getPetManager().addPetLevel(this.name);
+    public void onPurchase(QuestAssets qA) {
+        qA.getPetManager().addPetLevel(this.name);
     }
 }

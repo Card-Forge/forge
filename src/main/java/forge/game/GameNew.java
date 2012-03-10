@@ -51,12 +51,12 @@ public class GameNew {
      *            &emsp; int.
      * @param computerLife
      *            &emsp; int.
+     * @param iconEnemy 
      */
     public static void newGame(final Deck humanDeck, final Deck computerDeck, final CardList human,
-            final CardList computer, final int humanLife, final int computerLife) {
+            final CardList computer, final int humanLife, final int computerLife, String iconEnemy) {
         Singletons.getControl().changeState(FControl.MATCH_SCREEN);
-        Singletons.getControl().getControlMatch().initMatch();
-        Constant.Quest.FANTASY_QUEST[0] = true;
+        Singletons.getControl().getControlMatch().initMatch(iconEnemy);
 
         GameNew.newGameCleanup();
         GameNew.newMatchCleanup();
@@ -88,8 +88,7 @@ public class GameNew {
      */
     public static void newGame(final Deck humanDeck, final Deck computerDeck) {
         Singletons.getControl().changeState(FControl.MATCH_SCREEN);
-        Singletons.getControl().getControlMatch().initMatch();
-        Constant.Quest.FANTASY_QUEST[0] = false;
+        Singletons.getControl().getControlMatch().initMatch(null);
 
         GameNew.newGameCleanup();
         GameNew.newMatchCleanup();

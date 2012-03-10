@@ -67,7 +67,7 @@ public class QuestFileLister extends JPanel {
     }
 
     /** @param qd0 &emsp; {@link forge.quest.data.QuestData}[] */
-    public void setQuests(QuestData[] qd0) {
+    public void setQuests(List<QuestData> qd0) {
         this.removeAll();
         List<RowPanel> tempRows = new ArrayList<RowPanel>();
         List<QuestData> sorted = new ArrayList<QuestData>();
@@ -95,13 +95,13 @@ public class QuestFileLister extends JPanel {
         RowPanel row;
         String mode;
         for (QuestData qd : sorted) {
-            mode = qd.getMode().equals("Realistic") ? "Classic" : qd.getMode();
+            mode = qd.getMode().toString();
             row = new RowPanel(qd);
             row.add(new DeleteButton(row), "w 15%!, h 20px!, gap 0 0 5px 0");
             row.add(new EditButton(row), "w 15%!, h 20px!, gaptop 5px");
             row.add(new FLabel.Builder().text(qd.getName()).build(), "w 40%!, h 20px!, gap 0 0 5px 0");
             row.add(new FLabel.Builder().text(mode).fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
-            row.add(new FLabel.Builder().text(qd.getWin() + "/" + qd.getLost())
+            row.add(new FLabel.Builder().text(qd.getAchievements().getWin() + "/" + qd.getAchievements().getLost())
                     .fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
             this.add(row, "w 98%!, h 30px!, gap 1% 0 0 0");
             tempRows.add(row);

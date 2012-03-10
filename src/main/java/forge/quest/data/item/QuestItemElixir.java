@@ -19,8 +19,8 @@ package forge.quest.data.item;
 
 import javax.swing.ImageIcon;
 
-import forge.AllZone;
 import forge.gui.toolbox.FSkin;
+import forge.quest.data.QuestAssets;
 import forge.quest.data.bazaar.QuestStallManager;
 
 /**
@@ -56,7 +56,7 @@ public class QuestItemElixir extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final int getBuyingPrice() {
+    public final int getBuyingPrice(QuestAssets qA) {
         if (this.getLevel() < 5) {
             return 250;
         } else if (this.getLevel() < 10) {
@@ -70,17 +70,17 @@ public class QuestItemElixir extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final int getSellingPrice() {
+    public final int getSellingPrice(QuestAssets qA) {
         return 0;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void onPurchase() {
-        super.onPurchase();
+    public final void onPurchase(QuestAssets qA) {
+        super.onPurchase(qA);
 
         if (this.getLevel() <= this.getMaxLevel()) {
-            AllZone.getQuestData().addLife(1);
+            qA.addLife(1);
         }
     }
 }

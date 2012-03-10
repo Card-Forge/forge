@@ -7,14 +7,17 @@ import forge.gui.GuiUtils;
 import forge.gui.home.ICSubmenu;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.data.QuestController;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestDataIO;
+import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.QuestStartPool;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,6 +67,7 @@ public enum CSubmenuQuestData implements ICSubmenu {
     public void update() {
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
         final File dirQuests = ForgeProps.getFile(NewConstants.Quest.DATA_DIR);
+        final QuestController qc = AllZone.getQuest();
 
         // Temporary transition code between v1.2.2 and v1.2.3.
         // Can be safely deleted after release of 1.2.3.
@@ -90,7 +94,7 @@ public enum CSubmenuQuestData implements ICSubmenu {
         }
 
         // Populate list with available quest datas.
-        view.getLstQuests().setQuests(arrQuests.values().toArray(new QuestData[0]));
+        view.getLstQuests().setQuests(new ArrayList<QuestData>(arrQuests.values()));
 
         // If there are quests available, force select.
         if (arrQuests.size() > 0) {
@@ -106,10 +110,10 @@ public enum CSubmenuQuestData implements ICSubmenu {
             }
 
             // Drop into AllZone.
-            AllZone.setQuestData(view.getLstQuests().getSelectedQuest());
+            qc.load(view.getLstQuests().getSelectedQuest());
         }
         else {
-            AllZone.setQuestData(null);
+            qc.load(null);
         }
 
         view.getLstQuests().setSelectCommand(cmdQuestSelect);
@@ -122,11 +126,8 @@ public enum CSubmenuQuestData implements ICSubmenu {
     private void newQuest() {
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
         int difficulty = 0;
-        QuestData newdata = new QuestData();
-
-        final String mode = view.getRadFantasy().isSelected()
-                ? forge.quest.data.QuestData.FANTASY
-                : forge.quest.data.QuestData.CLASSIC;
+   
+        final QuestMode mode = view.getRadFantasy().isSelected() ? QuestMode.Fantasy : QuestMode.Classic;
 
         if (view.getRadEasy().isSelected()) {
             difficulty = 0;
@@ -163,9 +164,8 @@ public enum CSubmenuQuestData implements ICSubmenu {
         }
 
         // Give the user a few cards to build a deck
-        newdata.newGame(difficulty, mode, startPool, startPrecon);
-        newdata.setName(questName);
-        newdata.saveData();
+        AllZone.getQuest().newGame(questName, difficulty, mode, startPool, startPrecon);
+        AllZone.getQuest().save();
 
         // Save in preferences.
         Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_QUEST, questName + ".dat");
@@ -176,12 +176,12 @@ public enum CSubmenuQuestData implements ICSubmenu {
 
     /** Changes between quest data files. */
     private void changeQuest() {
-        AllZone.setQuestData(VSubmenuQuestData.SINGLETON_INSTANCE
+        AllZone.getQuest().load(VSubmenuQuestData.SINGLETON_INSTANCE
                 .getLstQuests().getSelectedQuest());
 
         // Save in preferences.
         Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_QUEST,
-                AllZone.getQuestData().getName() + ".dat");
+                AllZone.getQuest().getName() + ".dat");
         Singletons.getModel().getQuestPreferences().save();
 
         SubmenuQuestUtil.updateStatsAndPet();

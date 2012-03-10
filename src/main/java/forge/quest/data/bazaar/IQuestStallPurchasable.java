@@ -19,13 +19,15 @@ package forge.quest.data.bazaar;
 
 import javax.swing.ImageIcon;
 
+import forge.quest.data.QuestAssets;
+
 /**
  * This interface defines a thing that can be sold at the Bazaar.
  * 
  * @author Forge
  * @version $Id$
  */
-public interface QuestStallPurchasable extends Comparable<Object> {
+public interface IQuestStallPurchasable extends Comparable<Object> {
     /**
      * <p>
      * getPurchaseName.
@@ -60,7 +62,7 @@ public interface QuestStallPurchasable extends Comparable<Object> {
      * 
      * @return the buying cost of the item in credits
      */
-    int getBuyingPrice();
+    int getBuyingPrice(QuestAssets qA);
 
     /**
      * <p>
@@ -69,7 +71,7 @@ public interface QuestStallPurchasable extends Comparable<Object> {
      * 
      * @return the selling cost of the item in credits
      */
-    int getSellingPrice();
+    int getSellingPrice(QuestAssets qA);
 
     /**
      * Returns if the item is available for purchase;.
@@ -78,12 +80,13 @@ public interface QuestStallPurchasable extends Comparable<Object> {
      *         <code>false</code> if the item should not be displayed in store
      *         since, for example, prerequisites are not met
      */
-    boolean isAvailableForPurchase();
+    boolean isAvailableForPurchase(QuestAssets questAssets);
 
     /**
      * Executed when the item is bought.
+     * @param questAssets 
      */
-    void onPurchase();
+    void onPurchase(QuestAssets questAssets);
 
     /**
      * <p>

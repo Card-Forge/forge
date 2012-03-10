@@ -17,20 +17,6 @@
  */
 package forge.quest.data;
 
-import forge.Singletons;
-import forge.deck.Deck;
-import forge.item.*;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.data.item.QuestInventory;
-import forge.quest.data.pet.QuestPetManager;
-import forge.util.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 //when you create QuestDataOld and AFTER you copy the AI decks over
 //you have to call one of these two methods below
 //see Gui_QuestOptions for more details
@@ -47,7 +33,7 @@ public final class QuestData {
 
     // This field holds the version of the Quest Data
     /** Constant <code>CURRENT_VERSION_NUMBER=2</code>. */
-    public static final int CURRENT_VERSION_NUMBER = 2;
+    public static final int CURRENT_VERSION_NUMBER = 3;
 
     // This field places the version number into QD instance,
     // but only when the object is created through the constructor
@@ -55,447 +41,30 @@ public final class QuestData {
     /** The version number. */
     private int versionNumber = QuestData.CURRENT_VERSION_NUMBER;
 
-    /** The rank index. */
-    private int rankIndex; // level
-
-    /** The win. */
-    private int win; // number of wins
-
-    /** The lost. */
-    private int lost;
-
-    private int winstreakBest = 0;
-
-    private int winstreakCurrent = 0;
-
-    /** The credits. */
-    private long credits; // this money is good for all modes
-
-    /** The life. */
-    private int life; // for fantasy mode, how much life bought at shop to start
-                      // game
-    // with
-    /** The inventory. */
-    private QuestInventory inventory = new QuestInventory(); // different
-                                                             // gadgets
-
-    /** The pet manager. */
-    private final QuestPetManager petManager = new QuestPetManager(); // pets
-                                                                      // that
-                                                                      // start
-                                                                      // match
-    // with you
-
-    // Diffuculty - they store both index and title
-    /** The diff index. */
-    private int diffIndex;
-
-    /** The difficulty. */
-    private String difficulty;
-
-    /** */
-    private String name = "";
+    private final String name;
 
     // Quest mode - there should be an enum :(
     /** The mode. */
-    private String mode = "";
+    private QuestMode mode;
 
-    /** The Constant FANTASY. */
-    public static final String FANTASY = "Fantasy";
 
-    /** The Constant CLASSIC. */
-    public static final String CLASSIC = "Classic";
-
-    // Decks collected by player
-    /** The my decks. */
-    private final HashMap<String, Deck> myDecks = new HashMap<String, Deck>();
-
-    private transient IStorage<Deck> decks;
-
-    // Cards associated with quest
-    /** The card pool. */
-    private final ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>(CardPrinted.class); // player's
-    // belonging
-    /** The shop list. */
-    private ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class); // the
-    // current
-    // shop
-    // list
-    /** The new card list. */
-    private ItemPool<InventoryItem> newCardList = new ItemPool<InventoryItem>(InventoryItem.class); // cards
-    // acquired
-    // since
-    // last
-    // game-win/loss
-
-    // Challenge history
-    /** The challenges played. */
-    private int challengesPlayed = 0;
-
-    /** The available challenges. */
-    private List<Integer> availableChallenges = new ArrayList<Integer>();
-
-    /** The completed challenges. */
-    private List<Integer> completedChallenges = new ArrayList<Integer>();
-
-    // Challenges used to be called quests. During the renaming,
-    // files could be corrupted. These fields ensure old files still work.
-    // These fields should be phased out after a little while.
-    // The old files, if played once, are updated automatically to the new
-    // system.
-    /** The quests played. */
-    private int questsPlayed = -1;
-
-    /** The available quests. */
-    private List<Integer> availableQuests = null;
-
-    /** The completed quests. */
-    private List<Integer> completedQuests = null;
-
-    // own randomizer seed
-    private long randomSeed = 0;
-
-    // Utility class to access cards, has access to private fields
-    // Moved some methods there that otherwise would make this class even more
-    // complex
-    private transient QuestUtilCards myCards;
-
-    private transient QuestEvent currentEvent;
-
-    // This is used by shop. Had no idea where else to place this
-    private static transient IStorageView<PreconDeck> preconManager =
-            new StorageView<PreconDeck>(new PreconReader(ForgeProps.getFile(NewConstants.Quest.PRECONS)));
-
-    /** The Constant RANK_TITLES. */
-    public static final String[] RANK_TITLES = new String[] { "Level 0 - Confused Wizard", "Level 1 - Mana Mage",
-            "Level 2 - Death by Megrim", "Level 3 - Shattered the Competition", "Level 4 - Black Knighted",
-            "Level 5 - Shockingly Good", "Level 6 - Regressed into Timmy", "Level 7 - Loves Blue Control",
-            "Level 8 - Immobilized by Fear", "Level 9 - Lands = Friends", "Level 10 - Forging new paths",
-            "Level 11 - Infect-o-tron", "Level 12 - Great Balls of Fire", "Level 13 - Artifact Schmartifact",
-            "Level 14 - Mike Mulligan's The Name", "Level 15 - Fresh Air: Good For The Health",
-            "Level 16 - In It For The Love", "Level 17 - Sticks, Stones, Bones", "Level 18 - Credits For Breakfast",
-            "Level 19 - Millasaurus", "Level 20 - One-turn Wonder", "Teaching Gandalf a Lesson",
-            "What Do You Do With The Other Hand?", "Freelance Sorcerer, Works Weekends",
-            "Should We Hire Commentators?", "Saltblasted For Your Talent", "Serra Angel Is Your Girlfriend", };
-
+    // gadgets
+    
+    private final QuestAssets assets;
+    private final QuestAchievements achievements;    
+    
     /**
      * Instantiates a new quest data.
+     * @param mode2 
+     * @param diff 
+     * @param name2 
      */
-    public QuestData() {
-        this("An Unknown Quest");
-    }
-
-    /**
-     * <p>
-     * Constructor for QuestData.
-     * </p>
-     * 
-     * @param s0
-     *            &emsp; String name
-     */
-    public QuestData(final String s0) {
-        this.initTransients();
-        this.setName(s0);
-
-        final QuestPreferences prefs = Singletons.getModel().getQuestPreferences();
-        final ItemPoolView<CardPrinted> lands = QuestUtilCards.generateBasicLands(
-                prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS), prefs.getPreferenceInt(QPref.STARTING_SNOW_LANDS));
-        this.getCardPool().addAll(lands);
-        this.randomizeOpponents();
-    }
-
-    private void initTransients() {
-        // These are helper classes that hold no data.
-        this.decks = new QuestDeckMap(this.myDecks);
-        this.myCards = new QuestUtilCards(this);
-
-        // to avoid NPE some pools will be created here if they are null
-        if (null == this.getNewCardList()) {
-            this.setNewCardList(new ItemPool<InventoryItem>(InventoryItem.class));
-        }
-        if (null == this.getShopList()) {
-            this.setShopList(new ItemPool<InventoryItem>(InventoryItem.class));
-        }
-
-        currentEvent = null;
-
-    }
-
-    /**
-     * New game.
-     * 
-     * @param diff
-     *            the diff
-     * @param mode
-     *            the mode
-     * @param startPool
-     *            the start type
-     */
-    public void newGame(final int diff, final String mode, final QuestStartPool startPool, final String preconName) {
-        this.setDifficulty(diff);
-
-        this.mode = mode;
-        this.life = this.mode.equals(QuestData.FANTASY) ? 15 : 20;
-
-        final Predicate<CardPrinted> filter;
-        switch (startPool) {
-            case PRECON:
-                myCards.addPreconDeck(preconManager.get(preconName));
-                return;
-
-            case STANDARD:
-                filter = Singletons.getModel().getFormats().getStandard().getFilterPrinted();
-                break;
-
-            default: //Unrestricted
-                filter = CardPrinted.Predicates.Presets.IS_TRUE;
-                break;
-        }
-
-        this.setCredits(Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_CREDITS, diff));
-        this.myCards.setupNewGameCardPool(filter, diff);
-    }
-
-    // All belongings
-    /**
-     * Gets the inventory.
-     * 
-     * @return the inventory
-     */
-    public QuestInventory getInventory() {
-        return this.inventory;
-    }
-
-    /**
-     * Gets the pet manager.
-     * 
-     * @return the pet manager
-     */
-    public QuestPetManager getPetManager() {
-        return this.petManager;
-    }
-
-    // Cards - class uses data from here
-    /**
-     * Gets the cards.
-     * 
-     * @return the cards
-     */
-    public QuestUtilCards getCards() {
-        return this.myCards;
-    }
-
-    // Challenge performance
-    /**
-     * Gets the challenges played.
-     * 
-     * @return the challenges played
-     */
-    public int getChallengesPlayed() {
-        // This should be phased out after a while, when
-        // old quest decks have been updated. (changes made 19-9-11)
-        if (this.questsPlayed != -1) {
-            this.challengesPlayed = this.questsPlayed;
-            this.questsPlayed = -1;
-        }
-
-        return this.challengesPlayed;
-    }
-
-    /**
-     * Adds the challenges played.
-     */
-    public void addChallengesPlayed() {
-        this.challengesPlayed++;
-    }
-
-    /**
-     * Gets the available challenges.
-     * 
-     * @return the available challenges
-     */
-    public List<Integer> getAvailableChallenges() {
-        // This should be phased out after a while, when
-        // old quest decks have been updated. (changes made 19-9-11)
-        if (this.availableQuests != null) {
-            this.availableChallenges = this.availableQuests;
-            this.availableQuests = null;
-        }
-
-        return this.availableChallenges != null ? new ArrayList<Integer>(this.availableChallenges) : null;
-    }
-
-    /**
-     * Sets the available challenges.
-     * 
-     * @param list
-     *            the new available challenges
-     */
-    public void setAvailableChallenges(final List<Integer> list) {
-        this.availableChallenges = list;
-    }
-
-    /**
-     * Clear available challenges.
-     */
-    public void clearAvailableChallenges() {
-        this.availableChallenges.clear();
-    }
-
-    /**
-     * <p>
-     * getCompletedChallenges.
-     * </p>
-     * Returns stored list of non-repeatable challenge IDs.
-     * 
-     * @return List<Integer>
-     */
-    public List<Integer> getCompletedChallenges() {
-        // This should be phased out after a while, when
-        // old quest decks have been updated. (changes made 19-9-11)
-        // Also, poorly named - this should be "getLockedChalleneges" or
-        // similar.
-        if (this.completedQuests != null) {
-            this.completedChallenges = this.completedQuests;
-            this.completedQuests = null;
-        }
-
-        return this.completedChallenges != null ? new ArrayList<Integer>(this.completedChallenges) : null;
-    }
-
-    /**
-     * <p>
-     * addCompletedChallenge.
-     * </p>
-     * Add non-repeatable challenge ID to list.
-     * 
-     * @param i
-     *            the i
-     */
-
-    // Poorly named - this should be "setLockedChalleneges" or similar.
-    public void addCompletedChallenge(final int i) {
-        this.completedChallenges.add(i);
-    }
-
-    // Wins & Losses
-    /**
-     * Gets the lost.
-     * 
-     * @return the lost
-     */
-    public int getLost() {
-        return this.lost;
-    }
-
-    /**
-     * Adds the lost.
-     */
-    public void addLost() {
-        this.lost++;
-
-        if (this.winstreakCurrent > this.winstreakBest) {
-            this.winstreakBest = this.winstreakCurrent;
-        }
-
-        this.winstreakCurrent = 0;
-    }
-
-    /**
-     * Gets the win.
-     * 
-     * @return the win
-     */
-    public int getWin() {
-        return this.win;
-    }
-
-    /**
-     * Adds the win.
-     */
-    public void addWin() { // changes getRank()
-        this.win++;
-        this.winstreakCurrent++;
-
-        if (this.winstreakCurrent > this.winstreakBest) {
-            this.winstreakBest = this.winstreakCurrent;
-        }
-
-        final int winsToLvlUp = Singletons.getModel().getQuestPreferences()
-                .getPreferenceInt(QPref.WINS_RANKUP, this.diffIndex);
-        if ((this.win % winsToLvlUp) == 0) {
-            this.rankIndex++;
-        }
-    }
-
-    // Life (only fantasy)
-    /**
-     * Gets the life.
-     * 
-     * @return the life
-     */
-    public int getLife() {
-        return this.isFantasy() ? this.life : 20;
-    }
-
-    /**
-     * Adds n life to maximum.
-     * 
-     * @param n
-     *            &emsp; int
-     */
-    public void addLife(final int n) {
-        this.life += n;
-    }
-
-    /**
-     * Removes n life from maximum.
-     * 
-     * @param n
-     *            &emsp; int
-     */
-    public void removeLife(final int n) {
-        this.life -= n;
-    }
-
-    // Credits
-    /**
-     * Adds the credits.
-     * 
-     * @param c
-     *            the c
-     */
-    public void addCredits(final long c) {
-        this.setCredits(this.getCredits() + c);
-    }
-
-    /**
-     * Subtract credits.
-     * 
-     * @param c
-     *            the c
-     */
-    public void subtractCredits(final long c) {
-        this.setCredits(this.getCredits() > c ? this.getCredits() - c : 0);
-    }
-
-    /**
-     * Gets the credits.
-     * 
-     * @return the credits
-     */
-    public long getCredits() {
-        return this.credits;
-    }
-
-    // Quest mode
-    /**
-     * Checks if is fantasy.
-     * 
-     * @return true, if is fantasy
-     */
-    public boolean isFantasy() {
-        return this.mode.equals(QuestData.FANTASY);
+    public QuestData(String name2, int diff, QuestMode mode2) {
+        this.name = name2;
+        
+        this.mode = mode2;
+        this.achievements = new QuestAchievements(diff);
+        this.assets = new QuestAssets(mode2);
     }
 
     /**
@@ -503,101 +72,12 @@ public final class QuestData {
      * 
      * @return the mode
      */
-    public String getMode() {
-        return this.mode == null ? "" : this.mode;
+    public QuestMode getMode() {
+        return this.mode;
     }
 
-    // Difficulty
-    /**
-     * Gets the difficulty.
-     * 
-     * @return the difficulty
-     */
-    public String getDifficulty() {
-        return this.difficulty;
-    }
-
-    /**
-     * Gets the difficulty index.
-     * 
-     * @return the difficulty index
-     */
-    public int getDifficultyIndex() {
-        return this.diffIndex;
-    }
-
-    /**
-     * Sets the difficulty.
-     * 
-     * @param i
-     *            the new difficulty
-     */
-    public void setDifficulty(final int i) {
-        this.diffIndex = i;
-        this.difficulty = QuestPreferences.getDifficulty(i);
-    }
-
-    // Level, read-only ( note: it increments in addWin() )
-    /**
-     * Gets the level.
-     * 
-     * @return the level
-     */
-    public int getLevel() {
-        return this.rankIndex;
-    }
-
-    /**
-     * Gets the rank.
-     * 
-     * @return the rank
-     */
-    public String getRank() {
-        if (this.rankIndex >= QuestData.RANK_TITLES.length) {
-            this.rankIndex = QuestData.RANK_TITLES.length - 1;
-        }
-        return QuestData.RANK_TITLES[this.rankIndex];
-    }
-
-    /**
-     * Gets the win streak best.
-     *
-     * @return int
-     */
-    public int getWinStreakBest() {
-        return this.winstreakBest;
-    }
-
-    /**
-     * Gets the win streak current.
-     *
-     * @return int
-     */
-    public int getWinStreakCurrent() {
-        return this.winstreakCurrent;
-    }
-
-    // decks management
-
-    // randomizer - related
-    /**
-     * Gets the random seed.
-     * 
-     * @return the random seed
-     */
-    public long getRandomSeed() {
-        return this.randomSeed;
-    }
-
-    /**
-     * This method should be called whenever the opponents should change.
-     */
-    public void randomizeOpponents() {
-        this.randomSeed = MyRandom.getRandom().nextLong();
-    }
 
     // SERIALIZATION - related things
-
     // This must be called by XML-serializer via reflection
     /**
      * Read resolve.
@@ -605,7 +85,6 @@ public final class QuestData {
      * @return the object
      */
     public Object readResolve() {
-        this.initTransients();
         return this;
     }
 
@@ -614,91 +93,6 @@ public final class QuestData {
      */
     public void saveData() {
         QuestDataIO.saveData(this);
-    }
-
-    /**
-     * Gets the card pool.
-     * 
-     * @return the cardPool
-     */
-    public ItemPool<CardPrinted> getCardPool() {
-        return this.cardPool;
-    }
-
-    /**
-     * Gets the shop list.
-     * 
-     * @return the shopList
-     */
-    public ItemPool<InventoryItem> getShopList() {
-        return this.shopList;
-    }
-
-    /**
-     * Sets the shop list.
-     * 
-     * @param shopList0
-     *            the shopList to set
-     */
-    public void setShopList(final ItemPool<InventoryItem> shopList0) {
-        this.shopList = shopList0;
-    }
-
-    /**
-     * Gets the new card list.
-     * 
-     * @return the newCardList
-     */
-    public ItemPool<InventoryItem> getNewCardList() {
-        return this.newCardList;
-    }
-
-    /**
-     * Sets the new card list.
-     * 
-     * @param newCardList0
-     *            the newCardList to set
-     */
-    public void setNewCardList(final ItemPool<InventoryItem> newCardList0) {
-        this.newCardList = newCardList0;
-    }
-
-    /**
-     * Gets the my decks.
-     * 
-     * @return the myDecks
-     */
-    public IStorage<Deck> getMyDecks() {
-        return this.decks;
-    }
-
-    /**
-     * Gets the precons.
-     *
-     * @return QuestPreconManager
-     */
-    public static IStorageView<PreconDeck> getPrecons() {
-        return QuestData.preconManager;
-    }
-
-    /**
-     * Sets the inventory.
-     * 
-     * @param inventory0
-     *            the inventory to set
-     */
-    public void setInventory(final QuestInventory inventory0) {
-        this.inventory = inventory0;
-    }
-
-    /**
-     * Sets the credits.
-     * 
-     * @param credits0
-     *            the credits to set
-     */
-    public void setCredits(final long credits0) {
-        this.credits = credits0;
     }
 
     /**
@@ -721,15 +115,6 @@ public final class QuestData {
     }
 
     /**
-     * Sets the name.
-     *
-     * @param s0 &emsp; {@link java.lang.String}
-     */
-    public void setName(final String s0) {
-        this.name = s0;
-    }
-
-    /**
      * Gets the name.
      *
      * @return {@link java.lang.String}
@@ -738,11 +123,21 @@ public final class QuestData {
         return this.name;
     }
 
-    public QuestEvent getCurrentEvent() {
-        return currentEvent;
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public QuestAssets getAssets() {
+        return assets;
     }
 
-    public void setCurrentEvent(QuestEvent currentEvent) {
-        this.currentEvent = currentEvent;
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public QuestAchievements getAchievements() {
+        return achievements;
     }
+
 }

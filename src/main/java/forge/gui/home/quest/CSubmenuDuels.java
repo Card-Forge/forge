@@ -9,6 +9,7 @@ import forge.Command;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
+import forge.quest.data.QuestController;
 import forge.quest.data.QuestDuel;
 import forge.quest.data.QuestEventManager;
 import forge.view.ViewHomeUI;
@@ -27,9 +28,10 @@ public enum CSubmenuDuels implements ICSubmenu {
     @SuppressWarnings("serial")
     @Override
     public Command getMenuCommand() {
+        final QuestController qc = AllZone.getQuest();
         return new Command() {
             public void execute() {
-                if (AllZone.getQuestData() == null) {
+                if (qc.getAchievements() == null) {
                     ViewHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
                 }
             }
@@ -65,17 +67,18 @@ public enum CSubmenuDuels implements ICSubmenu {
                     }
                 });
 
+        final QuestController quest = AllZone.getQuest();
         view.getCbPlant().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                AllZone.getQuestData().getPetManager().setUsePlant(view.getCbPlant().isSelected());
+                quest.getAssets().getPetManager().setUsePlant(view.getCbPlant().isSelected());
             }
         });
 
         view.getCbZep().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                AllZone.getQuestData().getPetManager().setUsePlant(view.getCbZep().isSelected());
+                quest.getAssets().getPetManager().setUsePlant(view.getCbZep().isSelected());
             }
         });
 
@@ -85,10 +88,10 @@ public enum CSubmenuDuels implements ICSubmenu {
                 final int index = view.getCbxPet().getSelectedIndex();
                 if (index != -1 && index != 0) {
                     final String pet = ((String) view.getCbxPet().getSelectedItem());
-                    AllZone.getQuestData().getPetManager().setSelectedPet(pet.substring(7));
+                    quest.getAssets().getPetManager().setSelectedPet(pet.substring(7));
                 }
                 else {
-                    AllZone.getQuestData().getPetManager().setSelectedPet(null);
+                    quest.getAssets().getPetManager().setSelectedPet(null);
                 }
             }
         });
@@ -103,11 +106,11 @@ public enum CSubmenuDuels implements ICSubmenu {
 
         final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
 
-        if (AllZone.getQuestData() != null) {
-            view.getLblTitle().setText("Duels: " + AllZone.getQuestData().getRank());
+        if (AllZone.getQuest().getAchievements() != null) {
+            view.getLblTitle().setText("Duels: " + AllZone.getQuest().getRank());
 
             view.getPnlDuels().removeAll();
-            final List<QuestDuel> duels = QuestEventManager.generateDuels();
+            final List<QuestDuel> duels = QuestEventManager.INSTANCE.generateDuels();
 
             for (final QuestDuel d : duels) {
                 final SelectablePanel temp = new SelectablePanel(d);

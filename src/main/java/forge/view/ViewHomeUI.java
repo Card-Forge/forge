@@ -106,7 +106,7 @@ public enum ViewHomeUI {
         final File data = new File(dirQuests.getPath() + File.separator + questname);
 
         if (data.exists()) {
-            AllZone.setQuestData(QuestDataIO.loadData(data));
+            AllZone.getQuest().load(QuestDataIO.loadData(data));
         }        //////////////////////////////
 
 

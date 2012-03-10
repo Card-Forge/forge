@@ -30,7 +30,7 @@ import forge.control.input.InputControl;
 import forge.game.GameState;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.quest.data.QuestData;
+import forge.quest.data.QuestController;
 
 /**
  * Please use public getters and setters instead of direct field access.
@@ -52,7 +52,7 @@ public final class AllZone {
     }
 
     /** Global <code>questData</code>. */
-    private static forge.quest.data.QuestData questData = null;
+    private static forge.quest.data.QuestController quest = null;
 
     /** Constant <code>NAME_CHANGER</code>. */
     private static final NameChanger NAME_CHANGER = new NameChanger();
@@ -121,22 +121,13 @@ public final class AllZone {
      * @return a {@link forge.quest.data.QuestData} object.
      * @since 1.0.15
      */
-    public static forge.quest.data.QuestData getQuestData() {
-        return AllZone.questData;
+    public static forge.quest.data.QuestController getQuest() {
+        if ( null == quest )
+            quest = new QuestController();
+        return AllZone.quest;
     }
 
-    /**
-     * <p>
-     * setQuestData.
-     * </p>
-     * 
-     * @param questData0
-     *            a {@link forge.quest.data.QuestData} object.
-     * @since 1.0.15
-     */
-    public static void setQuestData(final QuestData questData0) {
-        AllZone.questData = questData0;
-    }
+
 
     /**
      * <p>

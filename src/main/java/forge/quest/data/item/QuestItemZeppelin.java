@@ -19,8 +19,8 @@ package forge.quest.data.item;
 
 import javax.swing.ImageIcon;
 
-import forge.AllZone;
 import forge.gui.toolbox.FSkin;
+import forge.quest.data.QuestAssets;
 import forge.quest.data.bazaar.QuestStallManager;
 
 /**
@@ -68,20 +68,20 @@ public class QuestItemZeppelin extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final int getBuyingPrice() {
+    public final int getBuyingPrice(QuestAssets qA) {
         return 5000;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final int getSellingPrice() {
+    public final int getSellingPrice(QuestAssets qA) {
         return 0;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean isAvailableForPurchase() {
-        return super.isAvailableForPurchase() && AllZone.getQuestData().getInventory().hasItem("Map");
+    public final boolean isAvailableForPurchase(QuestAssets qA) {
+        return super.isAvailableForPurchase(qA) && qA.getInventory().hasItem("Map");
     }
 
     /**

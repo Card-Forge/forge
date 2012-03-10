@@ -20,6 +20,7 @@ package forge.quest.data.item;
 import javax.swing.ImageIcon;
 
 import forge.gui.toolbox.FSkin;
+import forge.quest.data.QuestAssets;
 import forge.quest.data.bazaar.QuestStallManager;
 
 /**
@@ -55,13 +56,13 @@ public class QuestItemLuckyCoin extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final int getBuyingPrice() {
+    public final int getBuyingPrice(QuestAssets qA) {
         return 2000;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final int getSellingPrice() {
+    public final int getSellingPrice(QuestAssets qA) {
         return 0;
     }
 }

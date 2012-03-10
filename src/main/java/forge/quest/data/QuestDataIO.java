@@ -21,9 +21,13 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.io.StringWriter;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
@@ -31,9 +35,18 @@ import java.util.zip.GZIPOutputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
@@ -61,6 +74,7 @@ import forge.item.TournamentPack;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.item.QuestInventory;
+import forge.quest.data.pet.QuestPetManager;
 
 /**
  * <p>
@@ -71,12 +85,16 @@ import forge.quest.data.item.QuestInventory;
  * @version $Id$
  */
 public class QuestDataIO {
-    /**
-     * <p>
-     * Constructor for QuestDataIO.
-     * </p>
-     */
-    public QuestDataIO() {
+
+
+    protected static XStream getSerializer(boolean isIgnoring) {
+        final XStream xStream = isIgnoring ? new IgnoringXStream() : new XStream();
+        xStream.registerConverter(new ItemPoolToXml());
+        xStream.registerConverter(new DeckSectionToXml());
+        xStream.registerConverter(new GameTypeToXml());
+        xStream.alias("CardPool", ItemPool.class);
+        xStream.alias("DeckSection", DeckSection.class);
+        return xStream;
     }
 
     /**
@@ -91,11 +109,6 @@ public class QuestDataIO {
     public static QuestData loadData(final File xmlSaveFile) {
         try {
             QuestData data = null;
-            final String name = xmlSaveFile.getName().substring(0, xmlSaveFile.getName().length() - 4);
-
-            if (!xmlSaveFile.exists()) {
-                return new QuestData(name);
-            }
 
             final GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
 
@@ -110,20 +123,13 @@ public class QuestDataIO {
                 xml.append(buf, 0, len);
             }
 
-            final IgnoringXStream xStream = new IgnoringXStream();
-            xStream.registerConverter(new ItemPoolToXml());
-            xStream.registerConverter(new DeckSectionToXml());
-            xStream.registerConverter(new GameTypeToXml());
-            xStream.alias("CardPool", ItemPool.class);
-            xStream.alias("DeckSection", DeckSection.class);
-            data = (QuestData) xStream.fromXML(xml.toString());
-            data.setName(name);
+            zin.close();
+            
+            data = (QuestData) getSerializer(true).fromXML(xml.toString());
 
             if (data.getVersionNumber() != QuestData.CURRENT_VERSION_NUMBER) {
                 QuestDataIO.updateSaveFile(data, xml.toString());
             }
-
-            zin.close();
 
             return data;
         } catch (final Exception ex) {
@@ -132,6 +138,12 @@ public class QuestDataIO {
         }
     }
 
+    private static <T> void setFinalField(Class<T> clasz, String fieldName, T instance, Object newValue) throws IllegalAccessException, NoSuchFieldException {
+        Field field = clasz.getDeclaredField(fieldName);
+        field.setAccessible(true);
+        field.set(instance, newValue); // no difference here (used only to set initial lives)
+    }
+    
     /**
      * <p>
      * updateSaveFile.
@@ -142,6 +154,7 @@ public class QuestDataIO {
      * @param input
      *            a {@link java.lang.String} object.
      */
+    @SuppressWarnings("unchecked")
     private static void updateSaveFile(final QuestData newData, final String input) {
         try {
             final DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -149,33 +162,74 @@ public class QuestDataIO {
             is.setCharacterStream(new StringReader(input));
             final Document document = builder.parse(is);
 
-            switch (newData.getVersionNumber()) {
+            final int saveVersion = newData.getVersionNumber(); 
+            
+            if( saveVersion < 3 ) {
+                // no difference here (used only to set initial lives)
+                setFinalField(QuestData.class, "assets", newData, new QuestAssets(QuestMode.Classic)); 
+
+                int diffIdx = Integer.parseInt(document.getElementsByTagName("diffIndex").item(0).getTextContent());
+                setFinalField(QuestData.class, "achievements", newData, new QuestAchievements(diffIdx)); 
+            }
+            
+            switch (saveVersion) {
             // There should be a fall-through b/w the cases so that each
             // version's changes get applied progressively
             case 0:
                 // First beta release with new file format,
                 // inventory needs to be migrated
-                newData.setInventory(new QuestInventory());
+                setFinalField(QuestAssets.class, "inventory", newData.getAssets(), new QuestInventory());
                 NodeList elements = document.getElementsByTagName("estatesLevel");
-                newData.getInventory().setItemLevel("Estates", Integer.parseInt(elements.item(0).getTextContent()));
+                newData.getAssets().getInventory().setItemLevel("Estates", Integer.parseInt(elements.item(0).getTextContent()));
                 elements = document.getElementsByTagName("luckyCoinLevel");
-                newData.getInventory().setItemLevel("Lucky Coin", Integer.parseInt(elements.item(0).getTextContent()));
+                newData.getAssets().getInventory().setItemLevel("Lucky Coin", Integer.parseInt(elements.item(0).getTextContent()));
                 elements = document.getElementsByTagName("sleightOfHandLevel");
-                newData.getInventory().setItemLevel("Sleight", Integer.parseInt(elements.item(0).getTextContent()));
+                newData.getAssets().getInventory().setItemLevel("Sleight", Integer.parseInt(elements.item(0).getTextContent()));
                 elements = document.getElementsByTagName("gearLevel");
 
                 final int gearLevel = Integer.parseInt(elements.item(0).getTextContent());
                 if (gearLevel >= 1) {
-                    newData.getInventory().setItemLevel("Map", 1);
+                    newData.getAssets().getInventory().setItemLevel("Map", 1);
                 }
                 if (gearLevel == 2) {
-                    newData.getInventory().setItemLevel("Zeppelin", 1);
+                    newData.getAssets().getInventory().setItemLevel("Zeppelin", 1);
                 }
                 // fall-through
             case 1:
                 // nothing to do here, everything is managed by CardPoolToXml
                 // deserializer
-                break;
+                
+            case 2:
+                if (StringUtils.isBlank(newData.getName())) {
+                    setFinalField(QuestData.class, "name", newData, "questData");
+                }
+                
+                QuestAchievements qA = newData.getAchievements(); 
+                qA.win = Integer.parseInt(document.getElementsByTagName("win").item(0).getTextContent());
+                qA.lost = Integer.parseInt(document.getElementsByTagName("lost").item(0).getTextContent());
+                qA.winstreakBest = Integer.parseInt(document.getElementsByTagName("winstreakBest").item(0).getTextContent());
+                qA.winstreakCurrent = Integer.parseInt(document.getElementsByTagName("winstreakCurrent").item(0).getTextContent());
+                qA.challengesPlayed = Integer.parseInt(document.getElementsByTagName("challengesPlayed").item(0).getTextContent());
+                qA.completedChallenges = new ArrayList<Integer>();
+                NodeList ccs = document.getElementsByTagName("completedChallenges").item(0).getChildNodes(); 
+                for(int iN = 0; iN < ccs.getLength(); iN++) {
+                    Node n = ccs.item(iN);
+                    if ( n.getNodeType() != Node.ELEMENT_NODE ) continue;
+                    qA.completedChallenges.add(Integer.parseInt(n.getTextContent()));
+                }
+                
+                QuestAssets qS = newData.getAssets();
+                qS.credits = Integer.parseInt(document.getElementsByTagName("credits").item(0).getTextContent());
+                qS.life = Integer.parseInt(document.getElementsByTagName("life").item(0).getTextContent());
+                
+                XStream xs = getSerializer(true);
+                
+                setFinalField(QuestAssets.class, "cardPool", qS, readAsset(xs, document, "cardPool", ItemPool.class));
+                setFinalField(QuestAssets.class, "inventory", qS, readAsset(xs, document, "inventory", QuestInventory.class));
+                setFinalField(QuestAssets.class, "myDecks", qS, readAsset(xs, document, "myDecks", HashMap.class));
+                setFinalField(QuestAssets.class, "petManager", qS, readAsset(xs, document, "petManager", QuestPetManager.class));
+                setFinalField(QuestAssets.class, "shopList", qS, readAsset(xs, document, "shopList", ItemPool.class));
+                setFinalField(QuestAssets.class, "newCardList", qS, readAsset(xs, document, "newCardList", ItemPool.class));
             default:
                 break;
             }
@@ -188,6 +242,33 @@ public class QuestDataIO {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    private static <T> T readAsset(XStream xs, Document doc, String tagName, Class<T> clasz) throws IllegalAccessException, NoSuchFieldException {
+        NodeList nn = doc.getElementsByTagName(tagName);
+        Node n = nn.item(0);
+
+        Attr att = doc.createAttribute("resolves-to");
+        att.setValue(clasz.getCanonicalName());    
+        n.getAttributes().setNamedItem(att);
+
+        String xmlData = nodeToString(n);
+        return (T) xs.fromXML(xmlData);
+    }
+    
+    private static String nodeToString(Node node) {
+        StringWriter sw = new StringWriter();
+        try {
+            Transformer t = TransformerFactory.newInstance().newTransformer();
+            t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            t.setOutputProperty(OutputKeys.INDENT, "yes");
+            t.transform(new DOMSource(node), new StreamResult(sw));
+        } catch (TransformerException te) {
+            System.out.println("nodeToString Transformer Exception");
+        }
+        return sw.toString();
+    }
+    
+    
     /**
      * <p>
      * saveData.
@@ -198,30 +279,32 @@ public class QuestDataIO {
      */
     public static void saveData(final QuestData qd) {
         try {
-            final XStream xStream = new XStream();
-            xStream.registerConverter(new ItemPoolToXml());
-            xStream.registerConverter(new DeckSectionToXml());
-            xStream.alias("CardPool", ItemPool.class);
-            xStream.alias("DeckSection", DeckSection.class);
+            final XStream xStream = getSerializer(false);
 
-            final File f = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR) + File.separator + qd.getName()
-                    + ".dat");
-            final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
-            final GZIPOutputStream zout = new GZIPOutputStream(bout);
-            xStream.toXML(qd, zout);
-            zout.flush();
-            zout.close();
-
-            // BufferedOutputStream boutUnp = new BufferedOutputStream(new
-            // FileOutputStream(f + ".xml"));
-            // xStream.toXML(qd, boutUnp);
-            // boutUnp.flush();
-            // boutUnp.close();
+            final File f = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR), qd.getName() );
+            savePacked(f + ".dat", xStream, qd);
+            saveUnpacked(f + ".xml", xStream, qd);
 
         } catch (final Exception ex) {
             ErrorViewer.showError(ex, "Error saving Quest Data.");
             throw new RuntimeException(ex);
         }
+    }
+
+    private static void savePacked(String f, XStream xStream, QuestData qd) throws IOException {
+        final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
+        final GZIPOutputStream zout = new GZIPOutputStream(bout);
+        xStream.toXML(qd, zout);
+        zout.flush();
+        zout.close();     
+    }
+    
+    
+    private static void saveUnpacked(String f, XStream xStream, QuestData qd) throws IOException {
+        BufferedOutputStream boutUnp = new BufferedOutputStream(new FileOutputStream(f));
+        xStream.toXML(qd, boutUnp);
+        boutUnp.flush();
+        boutUnp.close();        
     }
 
     /**
@@ -379,7 +462,7 @@ public class QuestDataIO {
             if (name == null) {
                 name = reader.getAttribute("s");
             }
-            return QuestData.getPrecons().get(name);
+            return QuestController.getPrecons().get(name);
         }
 
         protected BoosterPack readBooster(final HierarchicalStreamReader reader) {

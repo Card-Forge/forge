@@ -51,9 +51,11 @@ import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
 import forge.model.FMatchState;
 import forge.properties.ForgePreferences.FPref;
+import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestChallenge;
-import forge.quest.data.QuestData;
+import forge.quest.data.QuestController;
 import forge.quest.data.QuestEvent;
+import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.QuestUtil;
 import forge.util.MyRandom;
@@ -81,7 +83,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private static final String CONSTRAINTS_CARDS = "w 95%!, h 330px!, gap 0 0 0 20px";
 
     private final transient FMatchState matchState;
-    private final transient QuestData qData;
+    private final transient QuestController qData;
     private final transient QuestEvent qEvent;
 
     /**
@@ -93,7 +95,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         super(view0);
         this.view = view0;
         matchState = Singletons.getModel().getMatchState();
-        qData = AllZone.getQuestData();
+        qData = AllZone.getQuest();
         qEvent = qData.getCurrentEvent();
         this.wonMatch = matchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
         this.isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
@@ -112,26 +114,27 @@ public class QuestWinLoseHandler extends ControlWinLose {
         OverlayUtils.hideOverlay();
         Singletons.getModel().getQuestPreferences().save();
 
-        if (Constant.Quest.FANTASY_QUEST[0]) {
+        QuestAssets qa = qData.getAssets();
+        if (qData.getMode() == QuestMode.Fantasy) {
             int extraLife = 0;
 
             if (qEvent.getEventType().equals("challenge")) {
-                if (qData.getInventory().hasItem("Zeppelin")) {
+                if (qa.getInventory().hasItem("Zeppelin")) {
                     extraLife = 3;
                 }
             }
 
-            final CardList humanList = QuestUtil.getHumanStartingCards(qData, qEvent);
-            final CardList computerList = QuestUtil.getComputerStartingCards(qData, qEvent);
+            final CardList humanList = QuestUtil.getHumanStartingCards(qa, qEvent);
+            final CardList computerList = QuestUtil.getComputerStartingCards(qEvent);
 
-            final int humanLife = qData.getLife() + extraLife;
+            final int humanLife = qa.getLife() + extraLife;
             int computerLife = 20;
             if (qEvent.getEventType().equals("challenge")) {
                 computerLife = ((QuestChallenge) qEvent).getAILife();
             }
 
             GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
-                    humanList, computerList, humanLife, computerLife);
+                    humanList, computerList, humanLife, computerLife, qEvent.getIconFilename());
         } else {
             super.startNextRound();
         }
@@ -165,7 +168,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
                 final List<CardPrinted> antesPrinted = Singletons.getModel().getMatchState().addAnteLost(antes);
                 for (final CardPrinted ante : antesPrinted) {
                     //the last param here (should) determine if this is added to the Card Shop
-                    AllZone.getQuestData().getCards().sellCard(ante, 0, false);
+                    AllZone.getQuest().getCards().sellCard(ante, 0, false);
                 }
                 this.anteLost(antesPrinted);
             }
@@ -199,12 +202,12 @@ public class QuestWinLoseHandler extends ControlWinLose {
             }
 
             // Random rare for winning against a very hard deck
-            if (qData.getDifficultyIndex() == 4) {
+            if (qData.getAchievements().getDifficulty() == 4) {
                 this.awardRandomRare("You've won a random rare for winning against a very hard deck.");
             }
 
             // Award jackpot every 80 games won (currently 10 rares)
-            final int wins = qData.getWin();
+            final int wins = qData.getAchievements().getWin();
             if ((wins > 0) && ((wins % 80) == 0)) {
                 this.awardJackpot();
             }
@@ -216,8 +219,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         // Win or lose, still a chance to win a booster, frequency set in
         // preferences
-        final int outcome = this.wonMatch ? qData.getWin() : qData.getLost();
-        if ((outcome % Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.WINS_BOOSTER, qData.getDifficultyIndex())) == 0) {
+        final int outcome = this.wonMatch ? qData.getAchievements().getWin() : qData.getAchievements().getLost();
+        if ((outcome % Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.WINS_BOOSTER, qData.getAchievements().getDifficulty())) == 0) {
             this.awardBooster();
         }
 
@@ -276,10 +279,10 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         // Record win/loss in quest data
         if (this.wonMatch) {
-            qData.addWin();
+            qData.getAchievements().addWin();
         } else {
-            qData.addLost();
-            qData.subtractCredits(x);
+            qData.getAchievements().addLost();
+            qData.getAssets().subtractCredits(x);
         }
 
         qData.getCards().clearShopList();
@@ -293,7 +296,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         CSubmenuChallenges.SINGLETON_INSTANCE.update();
 
         qData.setCurrentEvent(null);
-        qData.saveData();
+        qData.save();
         Singletons.getModel().getQuestPreferences().save();
         Singletons.getModel().savePrefs();
 
@@ -338,7 +341,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         credBase += (int) ((base * multiplier)
                 + (Double.parseDouble(Singletons.getModel().getQuestPreferences().getPreference(QPref.REWARDS_WINS_MULTIPLIER))
-                        * qData.getWin()));
+                        * qData.getAchievements().getWin()));
 
         sb.append(diff + " opponent: " + credBase + " credits.<br>");
         // Gameplay bonuses (for each game win)
@@ -421,7 +424,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         // Estates bonus
         credTotal = credBase + credGameplay + credUndefeated;
         double estateValue = 0;
-        switch (qData.getInventory().getItemLevel("Estates")) {
+        switch (qData.getAssets().getInventory().getItemLevel("Estates")) {
         case 1:
             estateValue = .1;
             break;
@@ -459,7 +462,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         sb.append(String.format("%s <b>%d credits</b> in total.</h3>", congrats, credTotal));
         sb.append("</body></html>");
-        qData.addCredits(credTotal);
+        qData.getAssets().addCredits(credTotal);
 
         // Generate Swing components and attach.
         this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_GOLD), 0.5);
@@ -560,12 +563,12 @@ public class QuestWinLoseHandler extends ControlWinLose {
      */
     private void awardChallengeWin() {
         if (!((QuestChallenge) qEvent).getRepeatable()) {
-            qData.addCompletedChallenge(((QuestChallenge) qEvent).getId());
+            qData.getAchievements().addCompletedChallenge(((QuestChallenge) qEvent).getId());
         }
 
         // Note: challenge only registers as "played" if it's won.
         // This doesn't seem right, but it's easy to fix. Doublestrike 01-10-11
-        qData.addChallengesPlayed();
+        qData.getAchievements().addChallengesPlayed();
 
         final List<CardPrinted> cardsWon = ((QuestChallenge) qEvent).getCardRewardList();
         final long questRewardCredits = ((QuestChallenge) qEvent).getCreditsReward();
@@ -574,7 +577,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         sb.append("<html>Challenge completed.<br><br>");
         sb.append("Challenge bounty: <b>" + questRewardCredits + " credits.</b></html>");
 
-        qData.addCredits(questRewardCredits);
+        qData.getAssets().addCredits(questRewardCredits);
 
         // Generate Swing components and attach.
         this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
@@ -624,7 +627,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * @return boolean
      */
     private boolean getLuckyCoinResult() {
-        final boolean hasCoin = qData.getInventory().getItemLevel("Lucky Coin") >= 1;
+        final boolean hasCoin = qData.getAssets().getInventory().getItemLevel("Lucky Coin") >= 1;
 
         return MyRandom.getRandom().nextFloat() <= (hasCoin ? 0.65f : 0.5f);
     }

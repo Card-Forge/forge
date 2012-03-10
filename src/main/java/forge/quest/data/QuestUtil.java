@@ -44,7 +44,7 @@ public class QuestUtil {
      *            a {@link forge.quest.data.QuestData} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getComputerStartingCards(final QuestData qd) {
+    public static CardList getComputerStartingCards() {
         return new CardList();
     }
 
@@ -60,7 +60,7 @@ public class QuestUtil {
      *            a {@link forge.quest.data.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getComputerStartingCards(final QuestData qd, final QuestEvent qe) {
+    public static CardList getComputerStartingCards(final QuestEvent qe) {
         final CardList list = new CardList();
 
         if (qe.getEventType().equals("challenge")) {
@@ -84,7 +84,7 @@ public class QuestUtil {
      *            a {@link forge.quest.data.QuestData} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanStartingCards(final QuestData qd) {
+    public static CardList getHumanStartingCards(final QuestAssets qd) {
         final CardList list = new CardList();
 
         if (qd.getPetManager().shouldPetBeUsed()) {
@@ -111,8 +111,8 @@ public class QuestUtil {
      *            a {@link forge.quest.data.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanStartingCards(final QuestData qd, final QuestEvent qe) {
-        final CardList list = QuestUtil.getHumanStartingCards(qd);
+    public static CardList getHumanStartingCards(final QuestAssets qa, final QuestEvent qe) {
+        final CardList list = QuestUtil.getHumanStartingCards(qa);
 
         if (qe.getEventType().equals("challenge")) {
             final List<String> extras = ((QuestChallenge) qe).getHumanExtraCards();

@@ -37,7 +37,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GamePlayerRating;
-import forge.quest.data.QuestData;
+import forge.quest.data.QuestController;
  /**
   * <p>
   * InputMulligan class.
@@ -103,8 +103,8 @@ public class InputMulligan extends Input {
 
         final int newHand = this.doMulligan(humanPlayer, humanRating);
 
-        final QuestData quest = AllZone.getQuestData();
-        if ((quest != null) && quest.getInventory().hasItem("Sleight") && (humanRating.getMulliganCount() == 1)) {
+        final QuestController quest = AllZone.getQuest();
+        if (quest.isLoaded() && quest.getAssets().getInventory().hasItem("Sleight") && (humanRating.getMulliganCount() == 1)) {
             AllZone.getHumanPlayer().drawCard();
             humanRating.notifyOpeningHandSize(newHand + 1);
         }

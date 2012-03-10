@@ -185,7 +185,7 @@ public class FMatchState {
      * @since 1.2.3
      */
     public final void addAnteWonToCardPool() {
-        AllZone.getQuestData().getCards().addAllCards(antesWon);
+        AllZone.getQuest().getCards().addAllCards(antesWon);
     }
 
     /**
