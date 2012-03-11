@@ -121,7 +121,7 @@ public class QuestDataIO {
             }
 
             zin.close();
-            
+
             data = (QuestData) getSerializer(true).fromXML(xml.toString());
 
             if (data.getVersionNumber() != QuestData.CURRENT_VERSION_NUMBER) {
@@ -140,7 +140,7 @@ public class QuestDataIO {
         field.setAccessible(true);
         field.set(instance, newValue); // no difference here (used only to set initial lives)
     }
-    
+
     /**
      * <p>
      * updateSaveFile.
@@ -158,16 +158,16 @@ public class QuestDataIO {
             is.setCharacterStream(new StringReader(input));
             final Document document = builder.parse(is);
 
-            final int saveVersion = newData.getVersionNumber(); 
-            
-            if( saveVersion < 3 ) {
+            final int saveVersion = newData.getVersionNumber();
+
+            if (saveVersion < 3) {
                 // no difference here (used only to set initial lives)
-                setFinalField(QuestData.class, "assets", newData, new QuestAssets(QuestMode.Classic)); 
+                setFinalField(QuestData.class, "assets", newData, new QuestAssets(QuestMode.Classic));
 
                 int diffIdx = Integer.parseInt(document.getElementsByTagName("diffIndex").item(0).getTextContent());
-                setFinalField(QuestData.class, "achievements", newData, new QuestAchievements(diffIdx)); 
+                setFinalField(QuestData.class, "achievements", newData, new QuestAchievements(diffIdx));
             }
-            
+
             switch (saveVersion) {
             // There should be a fall-through b/w the cases so that each
             // version's changes get applied progressively
@@ -194,13 +194,13 @@ public class QuestDataIO {
             case 1:
                 // nothing to do here, everything is managed by CardPoolToXml
                 // deserializer
-                
+
             case 2:
                 if (StringUtils.isBlank(newData.getName())) {
                     setFinalField(QuestData.class, "name", newData, "questData");
                 }
-                
-                QuestAchievements qA = newData.getAchievements(); 
+
+                QuestAchievements qA = newData.getAchievements();
                 setFinalField(QuestAchievements.class, "win", qA, Integer.parseInt(document.getElementsByTagName("win").item(0).getTextContent()));
                 setFinalField(QuestAchievements.class, "lost", qA, Integer.parseInt(document.getElementsByTagName("lost").item(0).getTextContent()));
                 setFinalField(QuestAchievements.class, "winstreakBest", qA, Integer.parseInt(document.getElementsByTagName("winstreakBest").item(0).getTextContent()));
@@ -209,15 +209,17 @@ public class QuestDataIO {
 
                 ArrayList<Integer> completedChallenges = new ArrayList<Integer>();
                 setFinalField(QuestAchievements.class, "completedChallenges", qA, completedChallenges);
-                NodeList ccs = document.getElementsByTagName("completedChallenges").item(0).getChildNodes(); 
-                for(int iN = 0; iN < ccs.getLength(); iN++) {
+                NodeList ccs = document.getElementsByTagName("completedChallenges").item(0).getChildNodes();
+                for (int iN = 0; iN < ccs.getLength(); iN++) {
                     Node n = ccs.item(iN);
-                    if ( n.getNodeType() != Node.ELEMENT_NODE ) continue;
+                    if (n.getNodeType() != Node.ELEMENT_NODE) {
+                        continue;
+                    }
                     completedChallenges.add(Integer.parseInt(n.getTextContent()));
                 }
-                
+
                 QuestAssets qS = newData.getAssets();
-                
+
                 XStream xs = getSerializer(true);
 
                 setFinalField(QuestAssets.class, "credits", qS, Integer.parseInt(document.getElementsByTagName("credits").item(0).getTextContent()));
@@ -246,14 +248,13 @@ public class QuestDataIO {
         Node n = nn.item(0);
 
         Attr att = doc.createAttribute("resolves-to");
-        att.setValue(clasz.getCanonicalName());    
+        att.setValue(clasz.getCanonicalName());
         n.getAttributes().setNamedItem(att);
 
         String xmlData = XmlUtil.nodeToString(n);
         return (T) xs.fromXML(xmlData);
     }
-    
-    
+
     /**
      * <p>
      * saveData.
@@ -266,7 +267,7 @@ public class QuestDataIO {
         try {
             final XStream xStream = getSerializer(false);
 
-            final File f = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR), qd.getName() );
+            final File f = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR), qd.getName());
             savePacked(f + ".dat", xStream, qd);
             saveUnpacked(f + ".xml", xStream, qd);
 
@@ -281,15 +282,14 @@ public class QuestDataIO {
         final GZIPOutputStream zout = new GZIPOutputStream(bout);
         xStream.toXML(qd, zout);
         zout.flush();
-        zout.close();     
+        zout.close();
     }
-    
-    
+
     private static void saveUnpacked(String f, XStream xStream, QuestData qd) throws IOException {
         BufferedOutputStream boutUnp = new BufferedOutputStream(new FileOutputStream(f));
         xStream.toXML(qd, boutUnp);
         boutUnp.flush();
-        boutUnp.close();        
+        boutUnp.close();
     }
 
     /**

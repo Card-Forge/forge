@@ -146,7 +146,7 @@ public class ViewStall extends JPanel {
         if (AllZone.getQuest().getAssets() == null) { return; }
 
         QuestAssets qS = AllZone.getQuest().getAssets();
-        this.lblStats.setText( "Credits: " + qS.getCredits() + "         Life: " + qS.getLife());
+        this.lblStats.setText("Credits: " + qS.getCredits() + "         Life: " + qS.getLife());
 
         final List<IQuestStallPurchasable> items =
                 AllZone.getQuest().getBazaar().getItems(stall.getName());

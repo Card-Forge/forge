@@ -25,7 +25,7 @@ public class ViewBazaarUI extends FPanel {
     private final QuestStallManager bazaar;
 
     /** Lays out containers and borders for resizeable layout and
-     *  instantiates top-level controller for bazaar UI. 
+     *  instantiates top-level controller for bazaar UI.
      * @param bazaar0 */
     public ViewBazaarUI(QuestStallManager bazaar0) {
         super();
@@ -33,7 +33,7 @@ public class ViewBazaarUI extends FPanel {
         // Final inits
         this.pnlAllStalls = new JPanel();
         this.pnlSingleStall = new ViewStall(this);
-        this.bazaar = bazaar0; 
+        this.bazaar = bazaar0;
 
         // Component styling
         this.setCornerDiameter(0);
@@ -56,7 +56,7 @@ public class ViewBazaarUI extends FPanel {
     /** */
     public void populateStalls() {
         for (final String s : bazaar.getStallNames()) {
-            
+
             final FLabel lbl = new FLabel.Builder().text(s + "  ")
                     .fontAlign(SwingConstants.RIGHT).iconInBackground(true)
                     .fontScaleFactor(0.3).opaque(true).hoverable(true)
