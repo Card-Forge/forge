@@ -7815,6 +7815,7 @@ res/cardsfolder/s/shambling_shell.txt svneol=native#text/plain
 res/cardsfolder/s/shambling_strider.txt svneol=native#text/plain
 res/cardsfolder/s/shanodin_dryads.txt svneol=native#text/plain
 res/cardsfolder/s/shape_anew.txt -text
+res/cardsfolder/s/shape_stealer.txt -text svneol=unset#text/plain
 res/cardsfolder/s/shaper_guildmage.txt svneol=native#text/plain
 res/cardsfolder/s/shapeshifter.txt svneol=native#text/plain
 res/cardsfolder/s/shard_convergence.txt svneol=native#text/plain
