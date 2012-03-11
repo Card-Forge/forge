@@ -124,7 +124,7 @@ public class DeckGroup extends DeckBase {
         return new DeckGroup(name0);
     }
 
-    public final static Lambda1<String, DeckGroup> FN_NAME_SELECTOR = new Lambda1<String, DeckGroup>() {
+    public static final Lambda1<String, DeckGroup> FN_NAME_SELECTOR = new Lambda1<String, DeckGroup>() {
         @Override
         public String apply(DeckGroup arg1) {
             return arg1.getName();

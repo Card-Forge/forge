@@ -24,7 +24,7 @@ public class ControlBazaarUI {
     /**
      * Controls top-level instance of bazaar.
      * @param v0 &emsp; {@link forge.view.ViewBazaarUI}
-     * @param bazaar 
+     * @param bazaar
      */
     public ControlBazaarUI(ViewBazaarUI v0, QuestStallManager bazaar0) {
         view = v0;

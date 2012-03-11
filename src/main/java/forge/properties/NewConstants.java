@@ -217,7 +217,7 @@ public final class NewConstants {
 
         /** */
         public static final String PRECONS = "quest/precons-dir";
-        
+
         public static final String BAZAAR = "quest/bazaar";
     }
 

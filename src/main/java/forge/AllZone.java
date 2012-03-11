@@ -122,8 +122,9 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static forge.quest.QuestController getQuest() {
-        if ( null == quest )
+        if (null == quest) {
             quest = new QuestController();
+        }
         return AllZone.quest;
     }
 

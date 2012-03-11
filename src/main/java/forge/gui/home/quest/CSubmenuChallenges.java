@@ -25,7 +25,7 @@ import forge.view.ViewHomeUI;
 public enum CSubmenuChallenges implements ICSubmenu {
     /** */
     SINGLETON_INSTANCE;
-     
+
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#getCommand()

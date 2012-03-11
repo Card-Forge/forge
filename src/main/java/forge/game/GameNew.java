@@ -51,7 +51,7 @@ public class GameNew {
      *            &emsp; int.
      * @param computerLife
      *            &emsp; int.
-     * @param iconEnemy 
+     * @param iconEnemy
      */
     public static void newGame(final Deck humanDeck, final Deck computerDeck, final CardList human,
             final CardList computer, final int humanLife, final int computerLife, String iconEnemy) {

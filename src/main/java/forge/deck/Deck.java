@@ -272,7 +272,7 @@ public class Deck extends DeckBase implements Serializable {
         return out;
     }
 
-    public final static Lambda1<String, Deck> FN_NAME_SELECTOR = new Lambda1<String, Deck>() {
+    public static final Lambda1<String, Deck> FN_NAME_SELECTOR = new Lambda1<String, Deck>() {
         @Override
         public String apply(Deck arg1) {
             return arg1.getName();

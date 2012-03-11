@@ -69,7 +69,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
             if (e.getClickCount() == 2) { showDecklist(((JList) e.getSource())); }
         }
     };
-    
+
     private final QuestController quest = AllZone.getQuest();
 
     static {

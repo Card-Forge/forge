@@ -126,7 +126,7 @@ public enum CSubmenuQuestData implements ICSubmenu {
     private void newQuest() {
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
         int difficulty = 0;
-   
+
         final QuestMode mode = view.getRadFantasy().isSelected() ? QuestMode.Fantasy : QuestMode.Classic;
 
         if (view.getRadEasy().isSelected()) {
