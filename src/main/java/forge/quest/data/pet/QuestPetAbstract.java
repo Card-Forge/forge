@@ -219,7 +219,7 @@ public abstract class QuestPetAbstract implements IQuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public final String getPurchaseDescription() {
+    public final String getPurchaseDescription(QuestAssets qA) {
         return this.getDescription()
                 + "\n\nCurrent stats: " + this.getStats() + "\nUpgraded stats: "
                 + this.getUpgradedStats();

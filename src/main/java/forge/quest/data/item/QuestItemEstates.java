@@ -17,9 +17,6 @@
  */
 package forge.quest.data.item;
 
-import javax.swing.ImageIcon;
-
-import forge.gui.toolbox.FSkin;
 import forge.quest.data.QuestAssets;
 
 /**
@@ -30,47 +27,28 @@ import forge.quest.data.QuestAssets;
  * @author Forge
  * @version $Id$
  */
-public class QuestItemEstates extends QuestItemAbstract {
+public class QuestItemEstates extends QuestItemPassive {
     /**
      * <p>
      * Constructor for QuestItemEstates.
      * </p>
      */
     QuestItemEstates() {
-        super("Estates", 3); // QuestStallManager.BANKER,
+        super(QuestItemType.ESTATES); // QuestStallManager.BANKER,
     }
 
     /** {@inheritDoc} */
     @Override
-    public final String getPurchaseDescription() {
-        return String.format("Land owners have a strong voice in community matters.\n"
-                + "\nEffect: Gives a bonus of %d%% to match winnings."
-                + "\nEffect: Improves sell percentage by %.2f%%.",
-                (10 + (this.getLevel() * 5)),
-                (1 + (this.getLevel() * 0.75)));
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ImageIcon getIcon() {
-        return FSkin.getIcon(FSkin.QuestIcons.ICO_GOLD);
+    public final String getPurchaseDescription(QuestAssets qA) {
+        return String.format(super.getPurchaseDescription(qA),
+                (10 + (qA.getItemLevel(this.getItemType()) * 5)),
+                (1 + (qA.getItemLevel(this.getItemType()) * 0.75)));
     }
 
     /** {@inheritDoc} */
     @Override
     public final int getBuyingPrice(QuestAssets qA) {
-        if (this.getLevel() == 0) {
-            return 500;
-        } else if (this.getLevel() == 1) {
-            return 750;
-        } else {
-            return 1000;
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final int getSellingPrice(QuestAssets qA) {
-        return 0;
+        int level = qA.getItemLevel(this.getItemType());
+        return getBasePrice() * (2 + level);
     }
 }

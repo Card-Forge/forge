@@ -24,7 +24,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 import forge.gui.toolbox.FSkin.QuestIcons;
-import forge.gui.toolbox.FSkin.SkinProp;
 
 /**
  * <p>

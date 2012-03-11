@@ -44,7 +44,7 @@ public interface IQuestStallPurchasable extends Comparable<Object> {
      * 
      * @return an HTML formatted item description
      */
-    String getPurchaseDescription();
+    String getPurchaseDescription(QuestAssets qA);
 
     /**
      * <p>

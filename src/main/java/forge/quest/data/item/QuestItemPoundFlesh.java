@@ -17,11 +17,8 @@
  */
 package forge.quest.data.item;
 
-import javax.swing.ImageIcon;
-
-import forge.AllZone;
-import forge.gui.toolbox.FSkin;
 import forge.quest.data.QuestAssets;
+import forge.quest.data.QuestMode;
 
 /**
  * This item has special coding.
@@ -29,7 +26,7 @@ import forge.quest.data.QuestAssets;
  * @author Forge
  * @version $Id: QuestItemElixir.java 13728 2012-02-01 11:13:34Z moomarc $
  */
-public class QuestItemPoundFlesh extends QuestItemAbstract {
+public class QuestItemPoundFlesh extends QuestItemPassive {
 
     /**
      * <p>
@@ -37,22 +34,13 @@ public class QuestItemPoundFlesh extends QuestItemAbstract {
      * </p>
      */
     QuestItemPoundFlesh() {
-        super("Pound of Flesh", 29); // QuestStallManager.ALCHEMIST,
+        super(QuestItemType.POUND_FLESH); // QuestStallManager.ALCHEMIST,
     }
 
     /** {@inheritDoc} */
     @Override
-    public final String getPurchaseDescription() {
-        return "The Alchemist welcomes contributions to his famous Elixer.\n"
-                + "But beware, you may build an immunity to its effects...\n"
-                + "\nEffect: Alchemist gives you " + getSellingPrice(AllZone.getQuest().getAssets()) + " credits."
-                + "\nEffect: Reduces maximum life by 1.";
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ImageIcon getIcon() {
-        return FSkin.getIcon(FSkin.QuestIcons.ICO_BREW);
+    public final String getPurchaseDescription(QuestAssets qA) {
+        return String.format(super.getPurchaseDescription(qA), getSellingPrice(qA));
     }
 
     /** {@inheritDoc} */
@@ -63,23 +51,15 @@ public class QuestItemPoundFlesh extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     public final int getSellingPrice(QuestAssets qA) {
-        if (qA.getLife() < 2) {
+        int level = qA.getItemLevel(this.getItemType());
+        if (qA.getLife(QuestMode.Fantasy) < 2) {
             return 0;
-        } else if (this.getLevel() < 5) {
-            return 250;
-        } else if (this.getLevel() < 10) {
-            return 500;
+        } else if (level < 5) {
+            return this.getBasePrice();
+        } else if (level < 10) {
+            return this.getBasePrice() * 2;
         } else {
-            return 750;
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void onPurchase(QuestAssets qA)  {
-        if (qA.getLife() > 1) {
-            super.onPurchase(qA);
-            qA.removeLife(1);
+            return this.getBasePrice() * 3;
         }
     }
 }

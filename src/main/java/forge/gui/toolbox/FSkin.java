@@ -227,7 +227,7 @@ public enum FSkin {
         ICO_ZEP         (new int[] {0, 480, 80, 80}), /** */
         ICO_GEAR        (new int[] {80, 480, 80, 80}), /** */
         ICO_GOLD        (new int[] {160, 480, 80, 80}), /** */
-        ICO_ELIXER        (new int[] {240, 480, 80, 80}), /** */
+        ICO_ELIXIR        (new int[] {240, 480, 80, 80}), /** */
         ICO_BOOK      (new int[] {320, 480, 80, 80}), /** */
         ICO_BOTTLES     (new int[] {400, 480, 80, 80}), /** */
         ICO_BOX         (new int[] {480, 480, 80, 80}), /** */

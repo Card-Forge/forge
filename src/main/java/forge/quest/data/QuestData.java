@@ -35,7 +35,7 @@ public final class QuestData {
 
     // This field holds the version of the Quest Data
     /** Constant <code>CURRENT_VERSION_NUMBER=2</code>. */
-    public static final int CURRENT_VERSION_NUMBER = 3;
+    public static final int CURRENT_VERSION_NUMBER = 4;
 
     // This field places the version number into QD instance,
     // but only when the object is created through the constructor
@@ -66,7 +66,7 @@ public final class QuestData {
 
         this.mode = mode2;
         this.achievements = new QuestAchievements(diff);
-        this.assets = new QuestAssets(mode2);
+        this.assets = new QuestAssets();
     }
 
     /**

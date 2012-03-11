@@ -27,6 +27,7 @@ import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.quest.data.item.QuestItemType;
 import forge.util.MyRandom;
 import forge.util.Predicate;
 import net.slightlymagic.braids.util.lambda.Lambda1;
@@ -285,7 +286,7 @@ public final class QuestUtilCards {
             multi = 0.6;
         }
 
-        final int lvlEstates = this.qc.getMode() == QuestMode.Fantasy  ? this.qa.getInventory().getItemLevel("Estates") : 0;
+        final int lvlEstates = this.qc.getMode() == QuestMode.Fantasy ? this.qa.getItemLevel(QuestItemType.ESTATES) : 0;
         switch (lvlEstates) {
         case 1:
             multi += 0.01;

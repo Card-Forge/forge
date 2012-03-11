@@ -47,10 +47,13 @@ public class ViewItem extends FPanel {
             @Override
             public void execute() {
                 QuestAssets qA = AllZone.getQuest().getAssets();
-                qA.subtractCredits(getItem().getBuyingPrice(qA));
-                qA.addCredits(getItem().getSellingPrice(qA));
-                getItem().onPurchase(qA);
-                AllZone.getQuest().save();
+                int cost = getItem().getBuyingPrice(qA);
+                if ( qA.getCredits() - cost >= 0 ) {
+                    qA.subtractCredits(cost);
+                    qA.addCredits(getItem().getSellingPrice(qA));
+                    getItem().onPurchase(qA);
+                    AllZone.getQuest().save();
+                }
                 Singletons.getView().getViewBazaar().refreshLastInstance();
             }
         });
@@ -75,7 +78,7 @@ public class ViewItem extends FPanel {
                 lblIcon.setIcon(getItem().getIcon());
                 lblName.setText(getItem().getPurchaseName());
                 lblPrice.setText("Cost: " + String.valueOf(getItem().getBuyingPrice(qA)) + " credits");
-                tarDesc.setText(getItem().getPurchaseDescription());
+                tarDesc.setText(getItem().getPurchaseDescription(qA));
 
                 if (qA.getCredits() < getItem().getBuyingPrice(qA)) {
                     btnPurchase.setEnabled(false);

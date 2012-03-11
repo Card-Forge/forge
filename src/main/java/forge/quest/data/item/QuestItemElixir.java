@@ -17,9 +17,6 @@
  */
 package forge.quest.data.item;
 
-import javax.swing.ImageIcon;
-
-import forge.gui.toolbox.FSkin;
 import forge.quest.data.QuestAssets;
 
 /**
@@ -28,7 +25,7 @@ import forge.quest.data.QuestAssets;
  * @author Forge
  * @version $Id$
  */
-public class QuestItemElixir extends QuestItemAbstract {
+public class QuestItemElixir extends QuestItemPassive {
 
     /**
      * <p>
@@ -36,50 +33,21 @@ public class QuestItemElixir extends QuestItemAbstract {
      * </p>
      */
     QuestItemElixir() {
-        super("Elixir of Life", 15); // QuestStallManager.ALCHEMIST,
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final String getPurchaseDescription() {
-        return "A salty sweet smell rises from the vials bubbling behind the counter.\n"
-                + "\nEffect: Gives +1 to maximum life."
-                + "\nFine Print: Loses effectiveness after 15 uses.";
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ImageIcon getIcon() {
-        return FSkin.getIcon(FSkin.QuestIcons.ICO_ELIXER);
+        super(QuestItemType.ELIXIR_OF_LIFE); // QuestStallManager.ALCHEMIST,
     }
 
     /** {@inheritDoc} */
     @Override
     public final int getBuyingPrice(QuestAssets qA) {
-        if (this.getLevel() < 5) {
-            return 250;
-        } else if (this.getLevel() < 10) {
-            return 500;
-        } else if (this.getLevel() <= this.getMaxLevel()) {
-            return 750;
+        int level = qA.getItemLevel(this.getItemType());
+        if ( level < 5) {
+            return super.getBasePrice();
+        } else if (level < 10) {
+            return super.getBasePrice() * 2;
+        } else if (level <= this.getMaxLevel()) {
+            return super.getBasePrice() * 3;
         } else {
             return 0;
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final int getSellingPrice(QuestAssets qA) {
-        return 0;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void onPurchase(QuestAssets qA) {
-        super.onPurchase(qA);
-
-        if (this.getLevel() <= this.getMaxLevel()) {
-            qA.addLife(1);
         }
     }
 }

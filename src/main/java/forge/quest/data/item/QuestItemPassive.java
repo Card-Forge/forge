@@ -19,6 +19,12 @@ package forge.quest.data.item;
 
 import javax.swing.ImageIcon;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.QuestIcons;
 import forge.quest.data.QuestAssets;
 
 /**
@@ -29,25 +35,29 @@ import forge.quest.data.QuestAssets;
  * @author Forge
  * @version $Id$
  */
-public abstract class QuestItemAbstract implements IQuestStallPurchasable {
-    private int level = 0;
-    private final String name;
+public class QuestItemPassive implements IQuestStallPurchasable {
+    
+    @XStreamAsAttribute
+    private QuestItemType itemType;
+    public final QuestItemType getItemType() {
+        return itemType;
+    }
+    @XStreamAsAttribute
     private int maxLevel = 1;
+    
+    @XStreamAsAttribute
+    private String purchaseName = "Read this field from XML";
+    private String description = "Read from XML";
 
-    /**
-     * <p>
-     * Constructor for QuestItemAbstract.
-     * </p>
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @param shopName
-     *            a {@link java.lang.String} object.
-     */
-    protected QuestItemAbstract(final String name) {
-        this.name = name;
+    @XStreamAsAttribute
+    private int basePrice = 1000;
+    protected final int getBasePrice() {
+        return basePrice;
     }
 
+    @XStreamAsAttribute
+    private final QuestIcons icon = null;
+
     /**
      * <p>
      * Constructor for QuestItemAbstract.
@@ -57,12 +67,9 @@ public abstract class QuestItemAbstract implements IQuestStallPurchasable {
      *            a {@link java.lang.String} object.
      * @param shopName
      *            a {@link java.lang.String} object.
-     * @param maxLevel
-     *            a int.
      */
-    protected QuestItemAbstract(final String name, final int maxLevel) {
-        this.name = name;
-        this.maxLevel = maxLevel;
+    protected QuestItemPassive(final QuestItemType type0) {
+        this.itemType = type0;
     }
 
     /**
@@ -71,7 +78,7 @@ public abstract class QuestItemAbstract implements IQuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     public final String getName() {
-        return this.name;
+        return this.itemType.getKey();
     }
 
     /**
@@ -81,7 +88,7 @@ public abstract class QuestItemAbstract implements IQuestStallPurchasable {
      */
     @Override
     public String getPurchaseName() {
-        return this.name;
+        return StringUtils.isBlank(this.purchaseName) ? this.getName() : this.purchaseName;
     }
 
     /**
@@ -89,8 +96,8 @@ public abstract class QuestItemAbstract implements IQuestStallPurchasable {
      */
     @Override
     public void onPurchase(QuestAssets qA) {
-        final int currentLevel = qA.getInventory().getItemLevel(this.name);
-        qA.getInventory().setItemLevel(this.name, currentLevel + 1);
+        final int currentLevel = qA.getItemLevel(this.itemType);
+        qA.setItemLevel(this.itemType, currentLevel + 1);
     }
 
     /**
@@ -102,30 +109,7 @@ public abstract class QuestItemAbstract implements IQuestStallPurchasable {
      */
     @Override
     public boolean isAvailableForPurchase(QuestAssets qA) {
-        return qA.getInventory().getItemLevel(this.name) < this.maxLevel;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>level</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getLevel() {
-        return this.level;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>level</code>.
-     * </p>
-     * 
-     * @param level
-     *            a int.
-     */
-    public final void setLevel(final int level) {
-        this.level = level;
+        return qA.getItemLevel(this.itemType) < this.maxLevel;
     }
 
     /**
@@ -158,7 +142,9 @@ public abstract class QuestItemAbstract implements IQuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public abstract String getPurchaseDescription();
+    public String getPurchaseDescription(QuestAssets qA) {
+        return description;
+    }
 
     /**
      * <p>
@@ -168,16 +154,15 @@ public abstract class QuestItemAbstract implements IQuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public abstract ImageIcon getIcon();
+    public ImageIcon getIcon() { return FSkin.getIcon(icon); }
 
     /** @return a int. */
     @Override
-    public abstract int getBuyingPrice(QuestAssets qA);
+    public int getBuyingPrice(QuestAssets qA) { return basePrice; }
 
     /** @return a int. */
     @Override
-    public abstract int getSellingPrice(QuestAssets qA);
-
+    public int getSellingPrice(QuestAssets qA) { return 0; }
     /** {@inheritDoc} */
     @Override
     public final int compareTo(final Object o) {

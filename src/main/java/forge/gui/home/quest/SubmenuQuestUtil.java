@@ -32,7 +32,7 @@ import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.data.item.QuestItemZeppelin;
+import forge.quest.data.item.QuestItemType;
 import forge.quest.data.pet.QuestPetAbstract;
 
 /** 
@@ -54,9 +54,9 @@ public class SubmenuQuestUtil {
         final int challengesPlayed = qData.getAchievements().getChallengesPlayed();
 
         int mul = 5;
-        if (qData.getAssets().getInventory().hasItem("Zeppelin")) {
+        if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)) {
             mul = 3;
-        } else if (qData.getAssets().getInventory().hasItem("Map")) {
+        } else if (qData.getAssets().hasItem(QuestItemType.MAP)) {
             mul = 4;
         }
 
@@ -88,7 +88,7 @@ public class SubmenuQuestUtil {
 
             // Stats panel
             view.getLblCredits().setText("Credits: " + qS.getCredits());
-            view.getLblLife().setText("Life: " + qS.getLife());
+            view.getLblLife().setText("Life: " + qS.getLife(qData.getMode()));
             view.getLblWins().setText("Wins: " + qA.getWin());
             view.getLblLosses().setText("Losses: " + qA.getLost());
             view.updateCurrentDeckStatus();
@@ -133,15 +133,7 @@ public class SubmenuQuestUtil {
                     view.getCbPlant().setSelected(qS.getPetManager().shouldPlantBeUsed());
                 }
 
-                // Zeppelin visibility: everything about the zeppelin is screwy right now
-                // for some reason, needs a large overhaul, disabled for now. 4-03-12
-                if (false) { //view.equals(VSubmenuChallenges.SINGLETON_INSTANCE)) {
-                    final QuestItemZeppelin zeppelin = (QuestItemZeppelin) qS.getInventory().getItem("Zeppelin");
-                    view.getCbZep().setVisible(zeppelin.isAvailableForPurchase(qS) ? true : false);
-                }
-                else {
-                    view.getCbZep().setVisible(false);
-                }
+                view.getCbZep().setVisible(qS.hasItem(QuestItemType.ZEPPELIN));
             }
             else {
                 // Classic mode display changes
@@ -226,13 +218,12 @@ public class SubmenuQuestUtil {
                         int extraLife = 0;
 
                         // If zeppelin has been purchased, gear will be at level 2.
-                        if (event.getEventType().equalsIgnoreCase("challenge")
-                            && !qData.getAssets().getInventory().getItem("Zeppelin").isAvailableForPurchase(qData.getAssets())
+                        if ( qData.getAssets().hasItem(QuestItemType.ZEPPELIN)
                             && VSubmenuChallenges.SINGLETON_INSTANCE.getCbZep().isSelected()) {
                                 extraLife = 3;
                         }
                         lifeAI = ((QuestChallenge) event).getAILife();
-                        lifeHuman = qData.getAssets().getLife() + extraLife;
+                        lifeHuman = qData.getAssets().getLife(qData.getMode()) + extraLife;
                     }
 
                     GameNew.newGame(

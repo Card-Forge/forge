@@ -58,6 +58,7 @@ import forge.quest.QuestUtil;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.quest.data.item.QuestItemType;
 import forge.util.MyRandom;
 
 /**
@@ -119,7 +120,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             int extraLife = 0;
 
             if (qEvent.getEventType().equals("challenge")) {
-                if (qa.getInventory().hasItem("Zeppelin")) {
+                if (qa.hasItem(QuestItemType.ZEPPELIN)) {
                     extraLife = 3;
                 }
             }
@@ -127,7 +128,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             final CardList humanList = QuestUtil.getHumanStartingCards(qa, qEvent);
             final CardList computerList = QuestUtil.getComputerStartingCards(qEvent);
 
-            final int humanLife = qa.getLife() + extraLife;
+            final int humanLife = qa.getLife(qData.getMode()) + extraLife;
             int computerLife = 20;
             if (qEvent.getEventType().equals("challenge")) {
                 computerLife = ((QuestChallenge) qEvent).getAILife();
@@ -424,7 +425,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         // Estates bonus
         credTotal = credBase + credGameplay + credUndefeated;
         double estateValue = 0;
-        switch (qData.getAssets().getInventory().getItemLevel("Estates")) {
+        switch (qData.getAssets().getItemLevel(QuestItemType.ESTATES)) {
         case 1:
             estateValue = .1;
             break;
@@ -627,7 +628,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * @return boolean
      */
     private boolean getLuckyCoinResult() {
-        final boolean hasCoin = qData.getAssets().getInventory().getItemLevel("Lucky Coin") >= 1;
+        final boolean hasCoin = qData.getAssets().getItemLevel(QuestItemType.LUCKY_COIN) >= 1;
 
         return MyRandom.getRandom().nextFloat() <= (hasCoin ? 0.65f : 0.5f);
     }

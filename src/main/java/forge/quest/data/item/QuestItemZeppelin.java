@@ -17,9 +17,6 @@
  */
 package forge.quest.data.item;
 
-import javax.swing.ImageIcon;
-
-import forge.gui.toolbox.FSkin;
 import forge.quest.data.QuestAssets;
 
 /**
@@ -30,79 +27,21 @@ import forge.quest.data.QuestAssets;
  * @author Forge
  * @version $Id$
  */
-public class QuestItemZeppelin extends QuestItemAbstract {
-
-    /** The zeppelin used. */
-    private boolean zeppelinUsed = false;
-
+public class QuestItemZeppelin extends QuestItemPassive {
     /**
      * <p>
      * Constructor for QuestItemZeppelin.
      * </p>
      */
     QuestItemZeppelin() {
-        super("Zeppelin"); // , QuestStallManager.GEAR
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final String getPurchaseName() {
-        return "Zeppelin";
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final String getPurchaseDescription() {
-        return "This extremely comfortable airship allows for more efficient and safe travel to faraway destinations.\n"
-                + "\nEffect: Quest assignments become available more frequently."
-                + "\nEffect: Adds +3 to max life during quest games."
-                + "\nEffect: Allows travel to far places, allowing you to see a new set of opponents,";
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ImageIcon getIcon() {
-        return FSkin.getIcon(FSkin.QuestIcons.ICO_ZEP);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final int getBuyingPrice(QuestAssets qA) {
-        return 5000;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final int getSellingPrice(QuestAssets qA) {
-        return 0;
+        super(QuestItemType.ZEPPELIN); // , QuestStallManager.GEAR
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean isAvailableForPurchase(QuestAssets qA) {
-        return super.isAvailableForPurchase(qA) && qA.getInventory().hasItem("Map");
+        return super.isAvailableForPurchase(qA) && qA.hasItem(QuestItemType.MAP);
     }
 
-    /**
-     * <p>
-     * hasBeenUsed.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean hasBeenUsed() {
-        return this.zeppelinUsed;
-    }
 
-    /**
-     * <p>
-     * Setter for the field <code>zeppelinUsed</code>.
-     * </p>
-     * 
-     * @param used
-     *            a boolean.
-     */
-    public final void setZeppelinUsed(final boolean used) {
-        this.zeppelinUsed = used;
-    }
 }

@@ -34,6 +34,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -41,12 +42,13 @@ import org.xml.sax.SAXException;
 import com.thoughtworks.xstream.XStream;
 
 import forge.AllZone;
-import forge.gui.toolbox.FSkin.QuestIcons;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestStallDefinition;
 import forge.quest.data.item.IQuestStallPurchasable;
-import forge.quest.data.item.QuestItemAbstract;
+import forge.quest.data.item.QuestItemPassive;
+import forge.quest.data.item.QuestItemType;
 import forge.quest.data.pet.QuestPetAbstract;
+import forge.util.IgnoringXStream;
 import forge.util.XmlUtil;
 
 /**
@@ -61,7 +63,6 @@ public class QuestStallManager {
     private final File xmlFile;
 
     public QuestStallManager(File xmlFile0) {
-
         xmlFile = xmlFile0;
     }
 
@@ -71,10 +72,10 @@ public class QuestStallManager {
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             final Document document = builder.parse(xmlFile);
 
-            NodeList xmlStalls = document.getElementsByTagName("stalls").item(0).getChildNodes();
-
-            XStream xs = new XStream();
+            XStream xs = new IgnoringXStream();
             xs.autodetectAnnotations(true);
+
+            NodeList xmlStalls = document.getElementsByTagName("stalls").item(0).getChildNodes();
             for (int iN = 0; iN < xmlStalls.getLength(); iN++) {
                 Node n = xmlStalls.item(iN);
                 if (n.getNodeType() != Node.ELEMENT_NODE) { continue; }
@@ -84,6 +85,22 @@ public class QuestStallManager {
                 n.getAttributes().setNamedItem(att);
                 QuestStallDefinition stall = (QuestStallDefinition) xs.fromXML(XmlUtil.nodeToString(n));
                 stalls.put(stall.getName(), stall);
+            }
+
+            NodeList xmlQuestItems = document.getElementsByTagName("questItems").item(0).getChildNodes();
+            for (int iN = 0; iN < xmlQuestItems.getLength(); iN++) {
+                Node n = xmlQuestItems.item(iN);
+                if (n.getNodeType() != Node.ELEMENT_NODE) { continue; }
+                
+                NamedNodeMap attrs = n.getAttributes();
+                String sType = attrs.getNamedItem("itemType").getTextContent();
+                String name = attrs.getNamedItem("name").getTextContent();
+                QuestItemType qType = QuestItemType.smartValueOf(sType);
+                Attr att = document.createAttribute("resolves-to");
+                att.setValue(qType.getBazaarControllerClass().getCanonicalName());
+                attrs.setNamedItem(att);
+                QuestItemPassive ctrl = (QuestItemPassive) xs.fromXML(XmlUtil.nodeToString(n));
+                items.put(name, ctrl);
             }
 
         } catch (SAXException e) {
@@ -98,7 +115,8 @@ public class QuestStallManager {
     /** Constant <code>stalls</code>. */
     private final Map<String, QuestStallDefinition> stalls = new TreeMap<String, QuestStallDefinition>();
     /** Constant <code>items</code>. */
-    private final Map<String, SortedSet<IQuestStallPurchasable>> items = new TreeMap<String, SortedSet<IQuestStallPurchasable>>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, SortedSet<IQuestStallPurchasable>> itemsOnStalls = new TreeMap<String, SortedSet<IQuestStallPurchasable>>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, IQuestStallPurchasable> items = new TreeMap<String, IQuestStallPurchasable>();
 
     /**
      * <p>
@@ -125,11 +143,10 @@ public class QuestStallManager {
         final Map<String, IQuestStallPurchasable> itemSet = new HashMap<String, IQuestStallPurchasable>();
 
         final QuestAssets qA = AllZone.getQuest().getAssets();
-
-        for (QuestItemAbstract i : qA.getInventory().getItems()) { itemSet.put(i.getName(), i); }
         for (QuestPetAbstract i : qA.getPetManager().getPetsAndPlants()) { itemSet.put(i.getName(), i); }
+        itemSet.putAll(items);
 
-        items.clear();
+        itemsOnStalls.clear();
 
         for (QuestStallDefinition thisStall : stalls.values()) {
             TreeSet<IQuestStallPurchasable> set = new TreeSet<IQuestStallPurchasable>();
@@ -138,7 +155,7 @@ public class QuestStallManager {
                 IQuestStallPurchasable item = itemSet.get(itemName);
                 set.add(item);
             }
-            items.put(thisStall.getName(), set);
+            itemsOnStalls.put(thisStall.getName(), set);
         }
     }
 
@@ -154,7 +171,7 @@ public class QuestStallManager {
         final List<IQuestStallPurchasable> ret = new ArrayList<IQuestStallPurchasable>();
 
         QuestAssets qA = AllZone.getQuest().getAssets();
-        for (final IQuestStallPurchasable purchasable : items.get(stallName)) {
+        for (final IQuestStallPurchasable purchasable : itemsOnStalls.get(stallName)) {
             if (purchasable.isAvailableForPurchase(qA)) {
                 ret.add(purchasable);
             }
