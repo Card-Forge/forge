@@ -59,25 +59,25 @@ import forge.util.XmlUtil;
  */
 public class QuestStallManager {
     private final File xmlFile;
-    
-    public QuestStallManager(File xmlFile0)
-    {
+
+    public QuestStallManager(File xmlFile0) {
+
         xmlFile = xmlFile0;
     }
-    
+
     public void load() {
         DocumentBuilder builder;
         try {
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             final Document document = builder.parse(xmlFile);
-            
+
             NodeList xmlStalls = document.getElementsByTagName("stalls").item(0).getChildNodes();
 
             XStream xs = new XStream();
             xs.autodetectAnnotations(true);
-            for(int iN = 0; iN < xmlStalls.getLength(); iN++ ) {
+            for (int iN = 0; iN < xmlStalls.getLength(); iN++) {
                 Node n = xmlStalls.item(iN);
-                if ( n.getNodeType() != Node.ELEMENT_NODE ) { continue; }
+                if (n.getNodeType() != Node.ELEMENT_NODE) { continue; }
 
                 Attr att = document.createAttribute("resolves-to");
                 att.setValue(QuestStallDefinition.class.getCanonicalName());
@@ -85,7 +85,7 @@ public class QuestStallManager {
                 QuestStallDefinition stall = (QuestStallDefinition) xs.fromXML(XmlUtil.nodeToString(n));
                 stalls.put(stall.getName(), stall);
             }
-            
+
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -125,16 +125,16 @@ public class QuestStallManager {
         final Map<String, IQuestStallPurchasable> itemSet = new HashMap<String, IQuestStallPurchasable>();
 
         final QuestAssets qA = AllZone.getQuest().getAssets();
-        
-        for(QuestItemAbstract i : qA.getInventory().getItems()) { itemSet.put(i.getName(), i); }
-        for(QuestPetAbstract i : qA.getPetManager().getPetsAndPlants()) { itemSet.put(i.getName(), i); }
+
+        for (QuestItemAbstract i : qA.getInventory().getItems()) { itemSet.put(i.getName(), i); }
+        for (QuestPetAbstract i : qA.getPetManager().getPetsAndPlants()) { itemSet.put(i.getName(), i); }
 
         items.clear();
 
         for (QuestStallDefinition thisStall : stalls.values()) {
             TreeSet<IQuestStallPurchasable> set = new TreeSet<IQuestStallPurchasable>();
-            
-            for( String itemName : thisStall.getItems() ) {
+
+            for (String itemName : thisStall.getItems()) {
                 IQuestStallPurchasable item = itemSet.get(itemName);
                 set.add(item);
             }
@@ -167,8 +167,9 @@ public class QuestStallManager {
      * @return
      */
     public Set<String> getStallNames() {
-        if (stalls.isEmpty())
+        if (stalls.isEmpty()) {
             load();
+        }
         return stalls.keySet();
     }
 

@@ -47,7 +47,7 @@ import forge.util.FileUtil;
 public class QuestEventManager {
 
     private final Map<QuestDuelDifficulty, List<QuestDuel>> SortedDuels = new EnumMap<QuestDuelDifficulty, List<QuestDuel>>(QuestDuelDifficulty.class);
-    
+
     /** */
     public final List<QuestDuel> ALL_DUELS = new ArrayList<QuestDuel>();
     /** */
@@ -111,14 +111,13 @@ public class QuestEventManager {
         if (AllZone.getQuest().getAchievements() == null) {
             return null;
         }
-        
+
         final QuestController qCtrl = AllZone.getQuest();
         final int cntWins = qCtrl.getAchievements().getWin();
-        
+
         final int index = qCtrl.getAchievements().getDifficulty();
         final List<QuestDuel> duelOpponents = new ArrayList<QuestDuel>();
 
-        
         if (cntWins < qpref.getPreferenceInt(QPref.WINS_MEDIUMAI, index)) {
             duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.EASY).get(0));
             duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.EASY).get(1));
@@ -347,11 +346,11 @@ public class QuestEventManager {
      */
     private void assembleDuelDifficultyLists() {
         SortedDuels.clear();
-        SortedDuels.put(QuestDuelDifficulty.EASY, new ArrayList<QuestDuel>() );
-        SortedDuels.put(QuestDuelDifficulty.MEDIUM, new ArrayList<QuestDuel>() );
-        SortedDuels.put(QuestDuelDifficulty.HARD, new ArrayList<QuestDuel>() );
-        SortedDuels.put(QuestDuelDifficulty.EXPERT, new ArrayList<QuestDuel>() );
-        
+        SortedDuels.put(QuestDuelDifficulty.EASY, new ArrayList<QuestDuel>());
+        SortedDuels.put(QuestDuelDifficulty.MEDIUM, new ArrayList<QuestDuel>());
+        SortedDuels.put(QuestDuelDifficulty.HARD, new ArrayList<QuestDuel>());
+        SortedDuels.put(QuestDuelDifficulty.EXPERT, new ArrayList<QuestDuel>());
+
         String s;
 
         for (final QuestDuel qd : ALL_DUELS) {
@@ -370,13 +369,13 @@ public class QuestEventManager {
 
     public void randomizeOpponents() {
         long seed = new Random().nextLong();
-        Random r = new Random(seed); 
+        Random r = new Random(seed);
         Collections.shuffle(SortedDuels.get(QuestDuelDifficulty.EASY), r);
         Collections.shuffle(SortedDuels.get(QuestDuelDifficulty.MEDIUM), r);
         Collections.shuffle(SortedDuels.get(QuestDuelDifficulty.HARD), r);
         Collections.shuffle(SortedDuels.get(QuestDuelDifficulty.EXPERT), r);
     }
-    
+
     /**
      * <p>
      * getChallengeOpponentByNumber.

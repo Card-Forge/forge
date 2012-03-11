@@ -389,7 +389,7 @@ public final class QuestUtilCards {
         final BoosterGenerator pack = new BoosterGenerator(CardDb.instance().getAllCards());
 
         int nLevel = this.qc.getAchievements().getLevel();
-        
+
         // Preferences
         final int startPacks = this.qpref.getPreferenceInt(QPref.SHOP_STARTING_PACKS);
         final int winsForPack = this.qpref.getPreferenceInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);

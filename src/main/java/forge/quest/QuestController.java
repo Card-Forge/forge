@@ -30,7 +30,7 @@ public class QuestController {
 
     private QuestData model;
     // gadgets
-    
+
     // Utility class to access cards, has access to private fields
     // Moved some methods there that otherwise would make this class even more
     // complex
@@ -44,17 +44,17 @@ public class QuestController {
     // since
     // last
     // game-win/loss
-    
+
     /** The available challenges. */
     private List<Integer> availableChallenges = new ArrayList<Integer>();
 
     /** The available quests. */
     private List<Integer> availableQuests = null;
 
-    private QuestEventManager eventManager = null; 
-    
-    private QuestStallManager bazaar = null; 
-    
+    private QuestEventManager eventManager = null;
+
+    private QuestStallManager bazaar = null;
+
     // This is used by shop. Had no idea where else to place this
     private static transient IStorageView<PreconDeck> preconManager =
             new StorageView<PreconDeck>(new PreconReader(ForgeProps.getFile(NewConstants.Quest.PRECONS)));
@@ -116,7 +116,7 @@ public class QuestController {
         this.decks = model == null ? null : model.getAssets().getDeckStorage();
         this.myCards = model == null ? null : new QuestUtilCards(this);
         currentEvent = null;
-        
+
         getEventManager().randomizeOpponents();
     }
 
@@ -124,8 +124,9 @@ public class QuestController {
      * TODO: Write javadoc for this method.
      */
     public void save() {
-        if ( model != null )
+        if (model != null) {
             model.saveData();
+        }
     }
 
     /**
@@ -155,7 +156,7 @@ public class QuestController {
             this.availableChallenges = this.availableQuests;
             this.availableQuests = null;
         }
-    
+
         return this.availableChallenges != null ? new ArrayList<Integer>(this.availableChallenges) : null;
     }
 
@@ -180,24 +181,24 @@ public class QuestController {
      *            the start type
      */
     public void newGame(final String name, final int diff, final QuestMode mode, final QuestStartPool startPool, final String preconName) {
-        
+
         load(new QuestData(name, diff, mode));
-        
+
         final Predicate<CardPrinted> filter;
         switch (startPool) {
             case Precon:
                 myCards.addPreconDeck(preconManager.get(preconName));
                 return;
-    
+
             case Standard:
                 filter = Singletons.getModel().getFormats().getStandard().getFilterPrinted();
                 break;
-    
+
             default: //Unrestricted
                 filter = CardPrinted.Predicates.Presets.IS_TRUE;
                 break;
         }
-    
+
         this.getAssets().setCredits(Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_CREDITS, diff));
         this.myCards.setupNewGameCardPool(filter, diff);
     }
@@ -248,14 +249,16 @@ public class QuestController {
     }
 
     public final QuestStallManager getBazaar() {
-        if ( null == bazaar)
+        if (null == bazaar) {
             bazaar = new QuestStallManager(ForgeProps.getFile(NewConstants.Quest.BAZAAR));
+        }
         return bazaar;
     }
 
     public QuestEventManager getEventManager() {
-        if ( eventManager == null )
+        if (eventManager == null) {
             eventManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DECKS));
+        }
         return eventManager;
     }
 
