@@ -10632,7 +10632,7 @@ res/pics_link/card-pictures_x.txt svneol=native#text/plain
 res/pics_link/card-pictures_y.txt svneol=native#text/plain
 res/pics_link/card-pictures_z.txt svneol=native#text/plain
 res/quest/all-prices.txt svneol=native#text/plain
-res/quest/bazaar.xml -text
+res/quest/bazaar/index.xml -text
 res/quest/booster-images.txt -text
 res/quest/booster-prices.txt -text
 res/quest/decks/Abraham[!!-~]Lincoln[!!-~]3.dck -text

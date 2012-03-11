@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<bazaar>
+  <options>
+   <iconSize>80</iconSize>
+  </options>
+  <stalls>
+    <stall name="Alchemist" displayName="Orim, Samite Healer" icon="ICO_BOTTLES">
+      <description>The walls of this alchemist&apos;s stall are covered with shelves with potions, oils, powders, poultices and elixirs, each meticulously labeled.</description>
+      <items>
+        <string>Elixir of Life</string>
+        <string>Pound of Flesh</string>
+      </items> 	
+    </stall>
+    <stall name="Banker" displayName="Bank of Sarpadia" icon="ICO_COIN">
+      <description>A large book large enough to be seen from the outside rests on the Banker&apos;s desk.</description>
+      <items>
+        <string>Estates</string>
+        <string>Lucky Coin</string>
+      </items> 	
+    </stall>
+    <stall name="Bookstore" displayName="Beleren&apos;s Books" icon="ICO_BOOK">
+      <description>Tomes of different sizes are stacked in man-high towers.</description>
+      <items>
+        <string>Sleight</string>
+      </items> 	
+    </stall>
+    <stall name="Gear" displayName="The Rope and Axe" icon="ICO_GEAR">
+      <description>This adventurer&apos;s market has a tool for every need ... or so the plaque on the wall claims.</description>
+      <items>
+        <string>Map</string>
+        <string>Zeppelin</string>
+      </items> 	
+    </stall>
+    <stall name="Nursery" displayName="Force of Nature Nursery" icon="ICO_LEAF">
+      <description>The smells of the one hundred and one different plants forms a unique fragrance.</description>
+      <items>
+        <string>Plant</string>
+      </items> 	
+    </stall>
+    <stall name="Pet Shop" displayName="The Hive" icon="ICO_FOX">
+      <description>This large menagerie echoes with a multitude of animal noises.</description>
+      <items>
+        <string>Bird</string>
+        <string>Crocodile</string>
+        <string>Hound</string>
+        <string>Wolf</string>
+      </items> 	
+    </stall>
+  </stalls>
+  <questItems>
+    <item name="Sleight" purchaseName="Sleight of Hand Vol. I" maxLevel="1" basePrice="2000" itemType="SLEIGHT" icon="ICO_BOOK">
+      <description>These volumes explain how to perform the most difficult of sleights.
+
+Effect: Your first mulligan is free.</description>
+    </item>
+    <item name="Map" purchaseName="Adventurer&apos;s Map" maxLevel="1" basePrice="2000" itemType="MAP" icon="ICO_MAP">
+      <description>These ancient charts should facilitate navigation during your travels significantly.
+
+Effect: Quest assignments become available more frequently</description>
+    </item>
+    <item name="Lucky Coin" maxLevel="1" basePrice="2000" itemType="LUCKY_COIN" icon="ICO_COIN">
+      <description>This coin is believed to give good luck to its owner.
+
+Effect: Improves the chance of getting a random rare after each match by 15%.</description>
+    </item>
+    <item name="Estates" maxLevel="3" basePrice="250" itemType="ESTATES" icon="ICO_GOLD">
+      <description>Land owners have a strong voice in community matters.
+
+Effect: Gives a bonus of %d%% to match winnings.
+Effect: Improves sell percentage by %.2f%%.</description>
+    </item>
+    <item name="Zeppelin" maxLevel="1" basePrice="5000" itemType="ZEPPELIN" icon="ICO_ZEP">
+      <description>This extremely comfortable airship allows for more efficient and safe travel to faraway destinations.
+
+Effect: Quest assignments become available more frequently.
+Effect: Adds +3 to max life during quest games.
+Effect: Allows travel to far places, allowing you to see a new set of opponents.</description>
+    </item>
+    <item name="Pound of Flesh" maxLevel="29" basePrice="250" itemType="POUND_FLESH" icon="ICO_BREW">
+      <description>The Alchemist welcomes contributions to his famous Elixir.
+But beware, you may build an immunity to its effects...
+
+Effect: Alchemist gives you %d credits.
+Effect: Reduces maximum life by 1."</description>
+    </item>
+    <item name="Elixir of Life" maxLevel="15" basePrice="250" itemType="ELIXIR_OF_LIFE" icon="ICO_ELIXIR">
+      <description>A salty sweet smell rises from the vials bubbling behind the counter.
+
+Effect: Gives +1 to maximum life.
+Fine Print: Loses effectiveness after 15 uses.</description>
+    </item>
+  </questItems>
+</bazaar>
