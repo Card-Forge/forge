@@ -36,7 +36,7 @@ public class QuestItemElixir extends QuestItemAbstract {
      * </p>
      */
     QuestItemElixir() {
-        super("Elixir of Life", 15); // QuestStallManager.ALCHEMIST, 
+        super("Elixir of Life", 15); // QuestStallManager.ALCHEMIST,
     }
 
     /** {@inheritDoc} */

@@ -37,7 +37,7 @@ public class QuestItemPoundFlesh extends QuestItemAbstract {
      * </p>
      */
     QuestItemPoundFlesh() {
-        super("Pound of Flesh", 29); // QuestStallManager.ALCHEMIST, 
+        super("Pound of Flesh", 29); // QuestStallManager.ALCHEMIST,
     }
 
     /** {@inheritDoc} */

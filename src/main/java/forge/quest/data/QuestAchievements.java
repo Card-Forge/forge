@@ -21,10 +21,10 @@ public class QuestAchievements {
     int win; // number of wins
     int winstreakBest = 0;
     int winstreakCurrent = 0;
-    
+
     /** The lost. */
     int lost;
-    
+
     // Difficulty - will store only index from now.
     private int difficulty;
     /**
@@ -32,7 +32,7 @@ public class QuestAchievements {
      * @param diff
      */
     public QuestAchievements(int diff) {
-        difficulty = diff; 
+        difficulty = diff;
     }
 
     /**
@@ -45,13 +45,13 @@ public class QuestAchievements {
     public void addWin() { // changes getRank()
         this.win++;
         this.winstreakCurrent++;
-    
+
         if (this.winstreakCurrent > this.winstreakBest) {
             this.winstreakBest = this.winstreakCurrent;
         }
-    
+
     }
-    
+
     // Challenge performance
     /**
      * Gets the challenges played.
@@ -87,7 +87,7 @@ public class QuestAchievements {
      * @param i
      *            the i
      */
-    
+
     // Poorly named - this should be "setLockedChalleneges" or similar.
     public void addCompletedChallenge(final int i) {
         this.completedChallenges.add(i);

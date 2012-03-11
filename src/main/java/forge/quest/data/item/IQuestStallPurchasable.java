@@ -84,7 +84,7 @@ public interface IQuestStallPurchasable extends Comparable<Object> {
 
     /**
      * Executed when the item is bought.
-     * @param questAssets 
+     * @param questAssets
      */
     void onPurchase(QuestAssets questAssets);
 }

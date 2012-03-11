@@ -43,7 +43,7 @@ public class QuestAssets {
     /** The shop list. */
     final ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class); // the
     // gadgets
-    
+
     /** The pet manager. */
     final QuestPetManager petManager = new QuestPetManager(); // pets
     /**
@@ -57,15 +57,13 @@ public class QuestAssets {
     }
     public QuestAssets(QuestMode mode) {
         this.life = mode.equals(QuestMode.Fantasy) ? 15 : 20;
-        
 
         final QuestPreferences prefs = Singletons.getModel().getQuestPreferences();
         final ItemPoolView<CardPrinted> lands = QuestUtilCards.generateBasicLands(
                 prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS), prefs.getPreferenceInt(QPref.STARTING_SNOW_LANDS));
-        this.getCardPool().addAll(lands);        
+        this.getCardPool().addAll(lands);
     }
-    
-    
+
     /**
      * Gets the credits.
      * 
@@ -169,5 +167,5 @@ public class QuestAssets {
     public QuestDeckMap getDeckStorage() {
         return new QuestDeckMap(myDecks);
     }
-    
+
 }

@@ -37,7 +37,7 @@ public class QuestItemEstates extends QuestItemAbstract {
      * </p>
      */
     QuestItemEstates() {
-        super("Estates", 3); // QuestStallManager.BANKER, 
+        super("Estates", 3); // QuestStallManager.BANKER,
     }
 
     /** {@inheritDoc} */

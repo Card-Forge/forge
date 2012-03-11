@@ -47,9 +47,9 @@ public class QuestStallDefinition {
 
     @XStreamAsAttribute
     private final QuestIcons icon;
-    
+
     private final String description;
-    
+
     private final List<String> items;
 
     /**
@@ -89,7 +89,7 @@ public class QuestStallDefinition {
      * @return the iconName
      */
     public QuestIcons getIcon() {
-        return icon;    
+        return icon;
     }
 
     /**

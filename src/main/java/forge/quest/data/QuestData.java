@@ -51,19 +51,19 @@ public final class QuestData {
 
 
     // gadgets
-    
+
     private final QuestAssets assets;
-    private final QuestAchievements achievements;    
-    
+    private final QuestAchievements achievements;
+
     /**
      * Instantiates a new quest data.
-     * @param mode2 
-     * @param diff 
-     * @param name2 
+     * @param mode2
+     * @param diff
+     * @param name2
      */
     public QuestData(String name2, int diff, QuestMode mode2) {
         this.name = name2;
-        
+
         this.mode = mode2;
         this.achievements = new QuestAchievements(diff);
         this.assets = new QuestAssets(mode2);
