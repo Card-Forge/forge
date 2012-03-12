@@ -52,6 +52,16 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- CheckStyle.
+- Magic 2012 fat packs should now use M12 lands. Thank you Agetian.
+- CheckStyle.
+- CheckStyle.
+- Little fix for Wonder Woman 3.
+- moved items data to file
+- code to support items in external files
+- update deps. Add package info
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -78,6 +88,10 @@ Mirror Strike
 Turn the Tables
 Soratami Cloud Chariot
 Sokenzan Renegade
+Shape Stealer
+Sekki Seasons' Guide
+Divine Reckoning
+Deathrender
 
 
 end
