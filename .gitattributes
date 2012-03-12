@@ -7722,6 +7722,7 @@ res/cardsfolder/s/seizures.txt svneol=native#text/plain
 res/cardsfolder/s/sejiri_merfolk.txt svneol=native#text/plain
 res/cardsfolder/s/sejiri_refuge.txt svneol=native#text/plain
 res/cardsfolder/s/sejiri_steppe.txt svneol=native#text/plain
+res/cardsfolder/s/sekki_seasons_guide.txt -text svneol=unset#text/plain
 res/cardsfolder/s/sekkuar_deathkeeper.txt svneol=native#text/plain
 res/cardsfolder/s/selective_memory.txt -text
 res/cardsfolder/s/selenia_dark_angel.txt svneol=native#text/plain
