@@ -7864,6 +7864,7 @@ res/cardsfolder/s/shields_of_velis_vel.txt -text
 res/cardsfolder/s/shifting_sky.txt -text
 res/cardsfolder/s/shifting_sliver.txt svneol=native#text/plain
 res/cardsfolder/s/shifting_wall.txt svneol=native#text/plain
+res/cardsfolder/s/shifty_doppelganger.txt -text svneol=unset#text/plain
 res/cardsfolder/s/shimian_specter.txt svneol=native#text/plain
 res/cardsfolder/s/shimmer.txt -text
 res/cardsfolder/s/shimmer_myr.txt svneol=native#text/plain

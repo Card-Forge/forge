@@ -454,9 +454,9 @@ public class AbilityFactorySacrifice {
         if (valid.equals("Self")) {
             if (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)) {
                 Singletons.getModel().getGameAction().sacrifice(card);
-            }
-            if (remSacrificed) {
-                card.addRemembered(card);
+                if (remSacrificed) {
+                    card.addRemembered(card);
+                }
             }
         }
         else {

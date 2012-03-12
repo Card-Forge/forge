@@ -1,0 +1,15 @@
+Name:Shifty Doppelganger
+ManaCost:2 U
+Types:Creature Shapeshifter
+Text:no text
+PT:1/1
+A:AB$ ChangeZone | Cost$ 3 U Exile<1/CARDNAME> | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.YouOwn | Optional$ True | RememberChanged$ True | SubAbility$ DBAnimate | SpellDescription$ You may put a creature card from your hand onto the battlefield. If you do, that creature gains haste until end of turn. At the beginning of the next end step, sacrifice that creature. If you do, return CARDNAME to the battlefield.
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Keywords$ Haste | Triggers$ TrigSacrificeEOT | sVars$ TrigSac,DBBounce,DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | RememberObjects$ Self
+SVar:TrigSacrificeEOT:Mode$ Phase | Phase$ End of Turn | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the next end step, sacrifice CARDNAME.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | RememberSacrificed$ True | SubAbility$ DBBounce
+SVar:DBBounce:DB$ ChangeZoneAll | Origin$ Exile | Defined$ You | Destination$ Battlefield | ChangeType$ Card.IsRemembered | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shifty_doppelganger.jpg
+End

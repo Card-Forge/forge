@@ -477,11 +477,17 @@ public final class AbilityFactoryAnimate {
         final Card host = af.getHostCard();
         final Map<String, String> svars = host.getSVars();
         long timest = -1;
+        String animateRemembered = null;
 
         //if host is not on the battlefield don't apply
         if (params.containsKey("UntilHostLeavesPlay")
                 && !AllZoneUtil.isCardInPlay(sa.getSourceCard())) {
             return;
+        }
+        
+        // Remember Objects
+        if (params.containsKey("RememberObjects")) {
+            animateRemembered = params.get("RememberObjects");
         }
 
         // AF specific params
@@ -662,6 +668,13 @@ public final class AbilityFactoryAnimate {
                 for (final ReplacementEffect re : replacementsToRemove) {
                     re.setTemporarilySuppressed(true);
                     removedReplacements.add(re);
+                }
+            }
+            
+            // give Remembered
+            if (animateRemembered != null) {
+                for (final Object o : AbilityFactory.getDefinedObjects(host, animateRemembered, sa)) {
+                    c.addRemembered(o);
                 }
             }
 
