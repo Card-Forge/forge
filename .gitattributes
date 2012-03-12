@@ -11618,6 +11618,7 @@ src/main/java/forge/quest/data/pet/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/io/PreconReader.java -text
 src/main/java/forge/quest/io/QuestDataIO.java svneol=native#text/plain
 src/main/java/forge/quest/io/ReadPriceList.java svneol=native#text/plain
+src/main/java/forge/quest/io/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 src/main/java/forge/util/CopyFiles.java svneol=native#text/plain

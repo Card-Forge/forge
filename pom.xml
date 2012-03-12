@@ -751,7 +751,7 @@
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>2.3.18</version>
+            <version>2.3.19</version>
         </dependency>
 
         <!-- Mantis transitive depedencies -->
@@ -773,7 +773,7 @@
         <dependency>
             <groupId>org.apache.ant</groupId>
             <artifactId>ant-commons-logging</artifactId>
-            <version>1.8.2</version>
+            <version>1.8.3</version>
         </dependency>
         <dependency>
             <groupId>commons-discovery</groupId>
