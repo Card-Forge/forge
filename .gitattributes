@@ -2461,6 +2461,7 @@ res/cardsfolder/d/dust_bowl.txt svneol=native#text/plain
 res/cardsfolder/d/dust_corona.txt svneol=native#text/plain
 res/cardsfolder/d/dust_elemental.txt svneol=native#text/plain
 res/cardsfolder/d/dust_to_dust.txt svneol=native#text/plain
+res/cardsfolder/d/dustwalker.txt -text
 res/cardsfolder/d/dwarven_armorer.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_armory.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_berserker.txt svneol=native#text/plain
@@ -2849,6 +2850,7 @@ res/cardsfolder/f/faerie_harbinger.txt svneol=native#text/plain
 res/cardsfolder/f/faerie_macabre.txt svneol=native#text/plain
 res/cardsfolder/f/faerie_mechanist.txt svneol=native#text/plain
 res/cardsfolder/f/faerie_noble.txt svneol=native#text/plain
+res/cardsfolder/f/faerie_squadron.txt -text
 res/cardsfolder/f/faerie_swarm.txt svneol=native#text/plain
 res/cardsfolder/f/faerie_tauntings.txt svneol=native#text/plain
 res/cardsfolder/f/faerie_trickery.txt svneol=native#text/plain
@@ -6657,6 +6659,7 @@ res/cardsfolder/p/possessed_nomad.txt svneol=native#text/plain
 res/cardsfolder/p/postmortem_lunge.txt svneol=native#text/plain
 res/cardsfolder/p/poultice_sliver.txt svneol=native#text/plain
 res/cardsfolder/p/pouncing_jaguar.txt svneol=native#text/plain
+res/cardsfolder/p/pouncing_kavu.txt -text
 res/cardsfolder/p/pouncing_wurm.txt -text
 res/cardsfolder/p/powder_keg.txt svneol=native#text/plain
 res/cardsfolder/p/power_armor.txt svneol=native#text/plain
