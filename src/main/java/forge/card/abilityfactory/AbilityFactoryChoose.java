@@ -1727,6 +1727,7 @@ public final class AbilityFactoryChoose {
     private static void chooseCardResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card host = af.getHostCard();
+        final ArrayList<Card> chosen = new ArrayList<Card>();
 
         ArrayList<Player> tgtPlayers;
 
@@ -1742,29 +1743,50 @@ public final class AbilityFactoryChoose {
             choices = choices.getValidCards(params.get("Choices"), host.getController(), host);
         }
 
-        for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                final ArrayList<Card> chosen = new ArrayList<Card>();
-                if (sa.getActivatingPlayer().isHuman()) {
-                    final CardList land = AllZoneUtil.getLandsInPlay();
-                    final ArrayList<String> basic = CardUtil.getBasicTypes();
+        final String amount = params.containsKey("Amount") ? params.get("Amount") : "1";
+        final int validAmount = Integer.parseInt(amount);
 
-                    for (final String type : basic) {
-                        final CardList cl = land.getType(type);
-                        if (cl.size() > 0) {
-                            final String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
-                            final Object o = GuiUtils.chooseOne(prompt, cl.toArray());
-                            if (null != o) {
-                                final Card c = (Card) o;
-                                chosen.add(c);
+        if (params.containsKey("SunderingTitan")) {
+            final CardList land = AllZoneUtil.getLandsInPlay();
+            final ArrayList<String> basic = CardUtil.getBasicTypes();
+
+            for (final String type : basic) {
+                final CardList cl = land.getType(type);
+                if (cl.size() > 0) {
+                    final String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
+                    final Object o = GuiUtils.chooseOne(prompt, cl.toArray());
+                    if (null != o) {
+                        final Card c = (Card) o;
+                        chosen.add(c);
+                    }
+                }
+            }
+            host.setChosenCard(chosen);
+        }
+
+        if (!params.containsKey("SunderingTitan")) {
+            for (final Player p : tgtPlayers) {
+                if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                    for (int i = 0; i < validAmount; i++) {
+                        if (p.isHuman()) {
+                            final Object o = GuiUtils.chooseOneOrNone("Choose a card ", choices.toArray());
+                            if (o != null) {
+                                chosen.add((Card) o);
+                                choices.remove((Card) o);
+                            } else {
+                                break;
                             }
+                        } else { // Computer
+                            chosen.add(CardFactoryUtil.getBestAI(choices));
                         }
                     }
-
-                } else {
-                    // TODO - not implemented
+                    host.setChosenCard(chosen);
+                    if (params.containsKey("RememberChosen")) {
+                        for (final Card rem : chosen) {
+                            host.addRemembered(rem);
+                        }
+                    }
                 }
-                host.setChosenCard(chosen);
             }
         }
     }

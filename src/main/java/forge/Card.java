@@ -7290,6 +7290,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!source.getRemembered().contains(this)) {
                 return false;
             }
+        } else if (property.equals("IsNotRemembered")) {
+            if (source.getRemembered().contains(this)) {
+                return false;
+            }
         } else if (property.equals("IsImprinted")) {
             if (!source.getImprinted().contains(this)) {
                 return false;
