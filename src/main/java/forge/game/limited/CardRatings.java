@@ -19,6 +19,7 @@ package forge.game.limited;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -36,7 +37,7 @@ public class CardRatings {
     private static Map<String, Integer> blockRatings = new TreeMap<String, Integer>();
     private static Map<String, Integer> customRatings = new TreeMap<String, Integer>();
 
-    private static ArrayList<String> tempRatings = new ArrayList<String>();
+    private static List<String> tempRatings = new ArrayList<String>();
 
     /**
      * Instantiates a new card ratings.
@@ -60,7 +61,7 @@ public class CardRatings {
     }
 
     private void loadFullRatings() {
-        final ArrayList<String> sRatings = FileUtil.readFile("res/draft/fullRatings.dat");
+        final List<String> sRatings = FileUtil.readFile("res/draft/fullRatings.dat");
         if (sRatings.size() > 1) {
             for (final String s : sRatings) {
                 if (s.length() > 3) {
@@ -74,7 +75,7 @@ public class CardRatings {
     }
 
     private void loadBlockRatings() {
-        final ArrayList<String> sRatings = FileUtil.readFile("res/draft/blockRatings.dat");
+        final List<String> sRatings = FileUtil.readFile("res/draft/blockRatings.dat");
         if (sRatings.size() > 1) {
             for (final String s : sRatings) {
                 if (s.length() > 3) {
@@ -88,7 +89,7 @@ public class CardRatings {
     }
 
     private void loadCustomRatings() {
-        final ArrayList<String> sRatings = FileUtil.readFile("res/draft/customRatings.dat");
+        final List<String> sRatings = FileUtil.readFile("res/draft/customRatings.dat");
         if (sRatings.size() > 1) {
             for (final String s : sRatings) {
                 if (s.length() > 3) {

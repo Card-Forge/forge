@@ -92,6 +92,7 @@ public class QuestPetPlant extends QuestPetAbstract {
             petCard.setBaseDefense(4);
             petCard.addIntrinsicKeyword("Deathtouch");
 
+            // A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
             final Cost abCost = new Cost("T", petCard.getName(), true);
             final SpellAbility ability = new AbilityActivated(petCard, abCost, null) {
                 private static final long serialVersionUID = 7546242087593613719L;

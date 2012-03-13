@@ -136,7 +136,7 @@ public class SealedDeck {
 
             for (final String element : dList) {
                 if (element.endsWith(".sealed")) {
-                    final ArrayList<String> dfData = FileUtil.readFile("res/sealed/" + element);
+                    final List<String> dfData = FileUtil.readFile("res/sealed/" + element);
                     final CustomLimited cs = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
                     customs.add(cs);
                 }

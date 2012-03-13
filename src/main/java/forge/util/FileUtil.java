@@ -26,6 +26,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
@@ -116,7 +117,7 @@ public final class FileUtil {
      *            a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<String> readFile(final String filename) {
+    public static List<String> readFile(final String filename) {
         return FileUtil.readFile(new File(filename));
     }
 
@@ -132,30 +133,47 @@ public final class FileUtil {
      *            a {@link java.io.File} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<String> readFile(final File file) {
-        final ArrayList<String> list = new ArrayList<String>();
-        BufferedReader in;
-
+    public static List<String> readFile(final File file) {
         try {
             if ((file == null) || !file.exists()) {
-                return list;
+                return new ArrayList<String>();
             }
-
-            in = new BufferedReader(new FileReader(file));
-
-            String line;
-            while ((line = in.readLine()) != null) {
-                list.add(line);
-            }
-            in.close();
+            return readAllLines(new FileReader(file), false);
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("FileUtil : readFile() error, " + ex);
         }
-
-        return list;
     } // readFile()
 
+    public static List<String> readAllLines(Reader reader){ 
+        return readAllLines(reader, false);
+    }
+    
+    /**
+     * Reads all lines from given reader to a list of strings
+     * @param reader is a reader (e.g. FileReader, InputStreamReader)
+     * @param mayTrim defines whether to trim lines.
+     * @return list of strings
+     */
+    public static List<String> readAllLines(Reader reader, boolean mayTrim){
+        final ArrayList<String> list = new ArrayList<String>();
+        try {
+            BufferedReader in = new BufferedReader(reader);
+            String line;
+            while ((line = in.readLine()) != null) {
+                if ( mayTrim ) {
+                    line = line.trim();
+                }
+                list.add(line);
+            }
+            in.close();
+        } catch (IOException ex ) {
+            ErrorViewer.showError(ex);
+            throw new RuntimeException("FileUtil : readAllLines() error, " + ex);
+        }
+        return list;
+    }
+    
     /**
      * Download url into file.
      * 

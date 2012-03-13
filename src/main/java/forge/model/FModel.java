@@ -181,7 +181,7 @@ public enum FModel {
      */
     public static void loadDynamicGamedata() {
         if (!Constant.CardTypes.LOADED[0]) {
-            final ArrayList<String> typeListFile = FileUtil.readFile("res/gamedata/TypeLists.txt");
+            final List<String> typeListFile = FileUtil.readFile("res/gamedata/TypeLists.txt");
 
             ArrayList<String> tList = null;
 
@@ -262,7 +262,7 @@ public enum FModel {
         }
 
         if (!Constant.Keywords.LOADED[0]) {
-            final ArrayList<String> nskwListFile = FileUtil.readFile("res/gamedata/NonStackingKWList.txt");
+            final List<String> nskwListFile = FileUtil.readFile("res/gamedata/NonStackingKWList.txt");
 
             Constant.Keywords.NON_STACKING_LIST[0] = new ConstantStringArrayList();
 

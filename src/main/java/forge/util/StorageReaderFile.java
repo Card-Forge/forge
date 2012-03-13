@@ -18,7 +18,6 @@
 package forge.util;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -55,9 +54,8 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
     @Override
     public Map<String, T> readAll() {
         final Map<String, T> result = new TreeMap<String, T>();
-        final ArrayList<String> fData = FileUtil.readFile(this.file);
 
-        for (final String s : fData) {
+        for (final String s : FileUtil.readFile(this.file)) {
             if (!this.lineContainsObject(s)) {
                 continue;
             }
