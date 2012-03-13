@@ -62,6 +62,9 @@ Fixes/Features:
 - code to support items in external files
 - update deps. Add package info
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Removed duplicate added card from CHANGES.txt
+- CardReader.readCard is a public static function now. This will allow to store pets' characteristics as card description txt files.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -91,6 +94,10 @@ Shape Stealer
 Sekki Seasons' Guide
 Divine Reckoning
 Deathrender
+Dustwalker
+Faerie Squadron
+Pouncing Kavu
+Shifty Doppelganger
 
 
 end
