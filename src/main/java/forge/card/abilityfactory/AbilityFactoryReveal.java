@@ -2215,7 +2215,7 @@ public final class AbilityFactoryReveal {
                     final CardList revealed = new CardList();
                     if (params.containsKey("Random")) {
                         revealed.add(CardUtil.getRandom(handChoices.toArray()));
-                        GuiUtils.chooseOne("Revealed card(s)", revealed.toArray());
+                        GuiUtils.chooseOneOrNone("Revealed card(s)", revealed.toArray());
                     } else {
                         CardList valid = new CardList(handChoices);
                         int max = 1;
@@ -2226,7 +2226,9 @@ public final class AbilityFactoryReveal {
                             max = valid.size();
                         }
                         revealed.addAll(AbilityFactoryReveal.getRevealedList(sa.getActivatingPlayer(), valid, max));
-                        GuiUtils.chooseOne("Revealed card(s)", revealed.toArray());
+                        if (sa.getActivatingPlayer().isComputer()) {
+                            GuiUtils.chooseOneOrNone("Revealed card(s)", revealed.toArray());
+                        }
                     }
 
                     if (params.containsKey("RememberRevealed")) {
