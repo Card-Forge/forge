@@ -7581,6 +7581,9 @@ res/cardsfolder/s/scavenger_folk.txt svneol=native#text/plain
 res/cardsfolder/s/scavenging_ghoul.txt svneol=native#text/plain
 res/cardsfolder/s/scavenging_ooze.txt -text
 res/cardsfolder/s/scavenging_scarab.txt svneol=native#text/plain
+res/cardsfolder/s/scent_of_brine.txt -text
+res/cardsfolder/s/scent_of_cinder.txt -text
+res/cardsfolder/s/scent_of_ivy.txt -text
 res/cardsfolder/s/scent_of_nightshade.txt -text svneol=unset#text/plain
 res/cardsfolder/s/scepter_of_dominance.txt svneol=native#text/plain
 res/cardsfolder/s/scepter_of_empires.txt -text
@@ -7674,6 +7677,7 @@ res/cardsfolder/s/seance.txt -text
 res/cardsfolder/s/search_for_tomorrow.txt svneol=native#text/plain
 res/cardsfolder/s/searing_flesh.txt svneol=native#text/plain
 res/cardsfolder/s/searing_meditation.txt svneol=native#text/plain
+res/cardsfolder/s/searing_spear_askari.txt -text
 res/cardsfolder/s/searing_touch.txt svneol=native#text/plain
 res/cardsfolder/s/searing_wind.txt svneol=native#text/plain
 res/cardsfolder/s/seas_claim.txt svneol=native#text/plain
@@ -7703,6 +7707,7 @@ res/cardsfolder/s/seed_the_land.txt svneol=native#text/plain
 res/cardsfolder/s/seedborn_muse.txt svneol=native#text/plain
 res/cardsfolder/s/seedcradle_witch.txt svneol=native#text/plain
 res/cardsfolder/s/seedguide_ash.txt svneol=native#text/plain
+res/cardsfolder/s/seedling_charm.txt -text
 res/cardsfolder/s/seeds_of_strength.txt svneol=native#text/plain
 res/cardsfolder/s/seedtime.txt -text
 res/cardsfolder/s/seek_the_horizon.txt svneol=native#text/plain
@@ -7970,6 +7975,7 @@ res/cardsfolder/s/sign_in_blood.txt svneol=native#text/plain
 res/cardsfolder/s/signal_pest.txt svneol=native#text/plain
 res/cardsfolder/s/silence.txt -text
 res/cardsfolder/s/silent_arbiter.txt svneol=native#text/plain
+res/cardsfolder/s/silent_assassin.txt -text
 res/cardsfolder/s/silent_attendant.txt svneol=native#text/plain
 res/cardsfolder/s/silent_chant_zubera.txt svneol=native#text/plain
 res/cardsfolder/s/silent_departure.txt -text
