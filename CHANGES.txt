@@ -65,6 +65,19 @@ Fixes/Features:
 - Removed duplicate added card from CHANGES.txt
 - CardReader.readCard is a public static function now. This will allow to store pets' characteristics as card description txt files.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed a case in AF Reveal where the player can get stuck.
+- Start refactor of deck geneartor
+- Update checkstyle plugin
+- Fixed Radjan Spirit, it no longer has flying.
+- Converting Prismatic Lens over to Produced$ Any
+- Fixed Insist and Overmaster.
+- Ran oracle and set info scripts
+- Small change to ProtectAll AF to allow for scripts that only have ValidPlayers and no ValidCards.
+- Added RememberedPlayerCtrl to isValid
+- Fixed affected cards for Quicken
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -98,6 +111,19 @@ Dustwalker
 Faerie Squadron
 Pouncing Kavu
 Shifty Doppelganger
+Scent of Brine
+Scent of Cinder
+Scent of Ivy
+Searing Spear Askari
+Seedling Charm
+Silent Assassin
+Pure Intentions
+Scent of Jasmine
+Scrabbling Claws
+Scout's Warning
+Quicken
+Seht's Tiger
+Oriss, Samite Guardian
 
 
 end
