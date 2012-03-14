@@ -1108,34 +1108,40 @@ public final class AbilityFactoryProtection {
             }
         }
 
-        final String valid = params.get("ValidCards");
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        list = list.getValidCards(valid, sa.getActivatingPlayer(), host);
+        // Deal with permanents
+        String valid = "";
+        if (params.containsKey("ValidCards")) {
+            valid = params.get("ValidCards");
+        }
+        if (!valid.equals("")) {
+            CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            list = list.getValidCards(valid, sa.getActivatingPlayer(), host);
 
-        for (final Card tgtC : list) {
-            if (AllZoneUtil.isCardInPlay(tgtC)) {
-                for (final String gain : gains) {
-                    tgtC.addExtrinsicKeyword("Protection from " + gain);
-                }
+            for (final Card tgtC : list) {
+                if (AllZoneUtil.isCardInPlay(tgtC)) {
+                    for (final String gain : gains) {
+                        tgtC.addExtrinsicKeyword("Protection from " + gain);
+                    }
 
-                if (!params.containsKey("Permanent")) {
-                    // If not Permanent, remove protection at EOT
-                    final Command untilEOT = new Command() {
-                        private static final long serialVersionUID = -6573962672873853565L;
+                    if (!params.containsKey("Permanent")) {
+                        // If not Permanent, remove protection at EOT
+                        final Command untilEOT = new Command() {
+                            private static final long serialVersionUID = -6573962672873853565L;
 
-                        @Override
-                        public void execute() {
-                            if (AllZoneUtil.isCardInPlay(tgtC)) {
-                                for (final String gain : gains) {
-                                    tgtC.removeExtrinsicKeyword("Protection from " + gain);
+                            @Override
+                            public void execute() {
+                                if (AllZoneUtil.isCardInPlay(tgtC)) {
+                                    for (final String gain : gains) {
+                                        tgtC.removeExtrinsicKeyword("Protection from " + gain);
+                                    }
                                 }
                             }
+                        };
+                        if (params.containsKey("UntilEndOfCombat")) {
+                            AllZone.getEndOfCombat().addUntil(untilEOT);
+                        } else {
+                            AllZone.getEndOfTurn().addUntil(untilEOT);
                         }
-                    };
-                    if (params.containsKey("UntilEndOfCombat")) {
-                        AllZone.getEndOfCombat().addUntil(untilEOT);
-                    } else {
-                        AllZone.getEndOfTurn().addUntil(untilEOT);
                     }
                 }
             }
