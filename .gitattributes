@@ -6865,7 +6865,6 @@ res/cardsfolder/q/quest_for_ulas_temple.txt -text svneol=unset#text/plain
 res/cardsfolder/q/questing_phelddagrif.txt svneol=native#text/plain
 res/cardsfolder/q/quick_sliver.txt svneol=native#text/plain
 res/cardsfolder/q/quickchange.txt -text
-res/cardsfolder/q/quicken.txt -text
 res/cardsfolder/q/quickening_licid.txt -text
 res/cardsfolder/q/quicksand.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_amulet.txt svneol=native#text/plain
