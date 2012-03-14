@@ -123,6 +123,7 @@ Scrabbling Claws
 Scout's Warning
 Seht's Tiger
 Oriss, Samite Guardian
+Quicken
 
 
 end

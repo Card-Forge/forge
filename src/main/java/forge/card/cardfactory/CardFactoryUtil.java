@@ -1260,7 +1260,7 @@ public class CardFactoryUtil {
                     return false;
                 }
 
-                if (sourceCard.isInstant()) {
+                if (sourceCard.isInstant() || sourceCard.hasKeyword("Flash")) {
                     return true;
                 }
 
