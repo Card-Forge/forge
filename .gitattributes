@@ -7585,6 +7585,7 @@ res/cardsfolder/s/scavenging_scarab.txt svneol=native#text/plain
 res/cardsfolder/s/scent_of_brine.txt -text
 res/cardsfolder/s/scent_of_cinder.txt -text
 res/cardsfolder/s/scent_of_ivy.txt -text
+res/cardsfolder/s/scent_of_jasmine.txt -text
 res/cardsfolder/s/scent_of_nightshade.txt -text svneol=unset#text/plain
 res/cardsfolder/s/scepter_of_dominance.txt svneol=native#text/plain
 res/cardsfolder/s/scepter_of_empires.txt -text
@@ -7618,6 +7619,7 @@ res/cardsfolder/s/scourge_of_the_nobilis.txt svneol=native#text/plain
 res/cardsfolder/s/scourge_servant.txt svneol=native#text/plain
 res/cardsfolder/s/scourglass.txt svneol=native#text/plain
 res/cardsfolder/s/scouting_trek.txt -text
+res/cardsfolder/s/scrabbling_claws.txt -text
 res/cardsfolder/s/scragnoth.txt svneol=native#text/plain
 res/cardsfolder/s/scrap.txt svneol=native#text/plain
 res/cardsfolder/s/scrapbasket.txt svneol=native#text/plain
