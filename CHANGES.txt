@@ -78,6 +78,14 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Still a problem with Quicken. Removing it for now.
+- Removed Quicken from changes.txt new cards
+- Added Quicken (again!) this time with support for the 2006 ruling: "After Quicken resolves, you can Suspend a Sorcery in your hand any time you can cast an Instant. As soon as you actually cast a Sorcery, you lose this capability."
+- Fixed the LQ pic URL for Divine Reckoning and Shape Stealer.
+- Fixed Ertai's Trickery. (It now correctly checks the target validity on resolution instead of announcement)
+- Fixed some missing set info (thanks Xitax)
+- Added missing ETB tapped keyword to Runed Arch
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
