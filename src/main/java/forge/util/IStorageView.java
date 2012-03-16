@@ -43,7 +43,19 @@ public interface IStorageView<T> extends Iterable<T> {
      */
     Collection<String> getNames();
 
+    /**
+     * Contains.
+     *
+     * @param name the name
+     * @return true, if successful
+     */
     boolean contains(final String name);
+    
+    /**
+     * Gets the count.
+     *
+     * @return the count
+     */
     int getCount();
 
 }

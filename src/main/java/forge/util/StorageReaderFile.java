@@ -29,8 +29,9 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * This class treats every line of a given file as a source for a named object.
- *
- * @param <T> the generic type
+ * 
+ * @param <T>
+ *            the generic type
  */
 public abstract class StorageReaderFile<T> implements IItemReader<T> {
 
@@ -40,17 +41,27 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
     /**
      * Instantiates a new storage reader file.
      *
-     * @param file0 the file0
+     * @param pathname the pathname
+     * @param keySelector0 the key selector0
      */
-    public StorageReaderFile(final String pathname, Lambda1<String, T> keySelector0) {
+    public StorageReaderFile(final String pathname, final Lambda1<String, T> keySelector0) {
         this(new File(pathname), keySelector0);
     }
 
-    public StorageReaderFile(final File file0, Lambda1<String, T> keySelector0) {
+    /**
+     * Instantiates a new storage reader file.
+     *
+     * @param file0 the file0
+     * @param keySelector0 the key selector0
+     */
+    public StorageReaderFile(final File file0, final Lambda1<String, T> keySelector0) {
         this.file = file0;
-        keySelector = keySelector0;
+        this.keySelector = keySelector0;
     }
 
+    /* (non-Javadoc)
+     * @see forge.util.IItemReader#readAll()
+     */
     @Override
     public Map<String, T> readAll() {
         final Map<String, T> result = new TreeMap<String, T>();
@@ -68,7 +79,7 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
                 continue;
             }
 
-            result.put(keySelector.apply(item), item);
+            result.put(this.keySelector.apply(item), item);
         }
 
         return result;
@@ -76,25 +87,30 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
 
     /**
      * TODO: Write javadoc for this method.
-     *
-     * @param line the line
+     * 
+     * @param line
+     *            the line
      * @return the t
      */
     protected abstract T read(String line);
 
     /**
      * Line contains object.
-     *
-     * @param line the line
+     * 
+     * @param line
+     *            the line
      * @return true, if successful
      */
     protected boolean lineContainsObject(final String line) {
         return !StringUtils.isBlank(line) && !line.trim().startsWith("#");
     }
 
+    /* (non-Javadoc)
+     * @see forge.util.IItemReader#getItemKey(java.lang.Object)
+     */
     @Override
-    public String getItemKey(T item) {
-        return keySelector.apply(item);
+    public String getItemKey(final T item) {
+        return this.keySelector.apply(item);
     }
 
 }

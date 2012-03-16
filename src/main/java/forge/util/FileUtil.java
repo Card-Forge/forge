@@ -138,42 +138,49 @@ public final class FileUtil {
             if ((file == null) || !file.exists()) {
                 return new ArrayList<String>();
             }
-            return readAllLines(new FileReader(file), false);
+            return FileUtil.readAllLines(new FileReader(file), false);
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("FileUtil : readFile() error, " + ex);
         }
     } // readFile()
 
-    public static List<String> readAllLines(Reader reader){ 
-        return readAllLines(reader, false);
-    }
-    
     /**
-     * Reads all lines from given reader to a list of strings
+     * Read all lines.
+     *
+     * @param reader the reader
+     * @return the list
+     */
+    public static List<String> readAllLines(final Reader reader) {
+        return FileUtil.readAllLines(reader, false);
+    }
+
+    /**
+     * Reads all lines from given reader to a list of strings.
+     *
      * @param reader is a reader (e.g. FileReader, InputStreamReader)
      * @param mayTrim defines whether to trim lines.
      * @return list of strings
      */
-    public static List<String> readAllLines(Reader reader, boolean mayTrim){
+    public static List<String> readAllLines(final Reader reader, final boolean mayTrim) {
         final ArrayList<String> list = new ArrayList<String>();
         try {
-            BufferedReader in = new BufferedReader(reader);
+            final BufferedReader in = new BufferedReader(reader);
             String line;
             while ((line = in.readLine()) != null) {
-                if ( mayTrim ) {
+                if (mayTrim) {
                     line = line.trim();
                 }
                 list.add(line);
             }
             in.close();
-        } catch (IOException ex ) {
+        } catch (final IOException ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("FileUtil : readAllLines() error, " + ex);
         }
         return list;
     }
-    
+
     /**
      * Download url into file.
      * 

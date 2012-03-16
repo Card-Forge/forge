@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.quest.data;
 
 import java.util.EnumMap;
@@ -16,9 +33,9 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.item.QuestItemType;
 import forge.quest.data.pet.QuestPetManager;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public class QuestAssets {
 
@@ -46,40 +63,66 @@ public class QuestAssets {
     /** The pet manager. */
     final QuestPetManager petManager = new QuestPetManager(); // pets
 
-    
-    final Map<QuestItemType, QuestItemCondition> inventoryItems = new EnumMap<QuestItemType, QuestItemCondition>(QuestItemType.class);
+    /** The inventory items. */
+    final Map<QuestItemType, QuestItemCondition> inventoryItems = new EnumMap<QuestItemType, QuestItemCondition>(
+            QuestItemType.class);
 
-
+    /**
+     * Checks for item.
+     *
+     * @param itemType the item type
+     * @return true, if successful
+     */
     public final boolean hasItem(final QuestItemType itemType) {
         return this.inventoryItems.containsKey(itemType) && (this.inventoryItems.get(itemType).getLevel() > 0);
     }
 
-
+    /**
+     * Gets the item level.
+     *
+     * @param itemType the item type
+     * @return the item level
+     */
     public final int getItemLevel(final QuestItemType itemType) {
         final QuestItemCondition state = this.inventoryItems.get(itemType);
         return state == null ? 0 : state.getLevel();
     }
 
+    /**
+     * Gets the item condition.
+     *
+     * @param itemType the item type
+     * @return the item condition
+     */
     public final QuestItemCondition getItemCondition(final QuestItemType itemType) {
         return this.inventoryItems.get(itemType);
     }
-    
 
+    /**
+     * Sets the item level.
+     *
+     * @param itemType the item type
+     * @param level the level
+     */
     public final void setItemLevel(final QuestItemType itemType, final int level) {
         QuestItemCondition cond = this.inventoryItems.get(itemType);
-        if( null == cond ) {
+        if (null == cond) {
             try { // care to set appropriate state class here
-                cond = (QuestItemCondition) itemType.getModelClass().newInstance();
-            } catch (Exception e) {
-                // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
+                cond = itemType.getModelClass().newInstance();
+            } catch (final Exception e) {
+                // TODO Auto-generated catch block ignores the exception, but
+                // sends it to System.err and probably forge.log.
                 e.printStackTrace();
                 cond = new QuestItemCondition();
-            } 
-            this.inventoryItems.put(itemType, cond); 
+            }
+            this.inventoryItems.put(itemType, cond);
         }
         cond.setLevel(level);
     }
-    
+
+    /**
+     * Instantiates a new quest assets.
+     */
     public QuestAssets() {
         final QuestPreferences prefs = Singletons.getModel().getQuestPreferences();
         final ItemPoolView<CardPrinted> lands = QuestUtilCards.generateBasicLands(
@@ -99,13 +142,15 @@ public class QuestAssets {
     // Life (only fantasy)
     /**
      * Gets the life.
-     * 
+     *
+     * @param mode the mode
      * @return the life
      */
-    public int getLife(QuestMode mode) {
-        int base = mode.equals(QuestMode.Fantasy) ? 15 : 20;
-        return base + getItemLevel(QuestItemType.ELIXIR_OF_LIFE) - getItemLevel(QuestItemType.POUND_FLESH);
+    public int getLife(final QuestMode mode) {
+        final int base = mode.equals(QuestMode.Fantasy) ? 15 : 20;
+        return (base + this.getItemLevel(QuestItemType.ELIXIR_OF_LIFE)) - this.getItemLevel(QuestItemType.POUND_FLESH);
     }
+
     /**
      * Gets the new card list.
      * 
@@ -114,6 +159,7 @@ public class QuestAssets {
     public ItemPool<InventoryItem> getNewCardList() {
         return this.newCardList;
     }
+
     /**
      * Gets the shop list.
      * 
@@ -141,6 +187,7 @@ public class QuestAssets {
     public QuestPetManager getPetManager() {
         return this.petManager;
     }
+
     // Credits
     /**
      * Adds the credits.
@@ -151,6 +198,7 @@ public class QuestAssets {
     public void addCredits(final long c) {
         this.setCredits(this.getCredits() + c);
     }
+
     /**
      * Gets the card pool.
      * 
@@ -159,6 +207,7 @@ public class QuestAssets {
     public ItemPool<CardPrinted> getCardPool() {
         return this.cardPool;
     }
+
     /**
      * Subtract credits.
      * 
@@ -168,12 +217,14 @@ public class QuestAssets {
     public void subtractCredits(final long c) {
         this.setCredits(this.getCredits() > c ? this.getCredits() - c : 0);
     }
+
     /**
      * TODO: Write javadoc for this method.
-     * @return
+     *
+     * @return the deck storage
      */
     public QuestDeckMap getDeckStorage() {
-        return new QuestDeckMap(myDecks);
+        return new QuestDeckMap(this.myDecks);
     }
 
 }

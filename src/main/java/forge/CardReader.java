@@ -276,11 +276,13 @@ public class CardReader implements Runnable {
             }
 
             if (barProgress != null) {
-                barProgress.setMaximum((int) estimatedFilesRemaining);
-                SwingUtilities.invokeLater(new Runnable() { @Override
+                barProgress.setMaximum((int) this.estimatedFilesRemaining);
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         barProgress.setDescription("Preloading card images: ");
-                } });
+                    }
+                });
             }
 
             for (final File cardTxtFile : this.findNonDirsIterable) {
@@ -352,8 +354,9 @@ public class CardReader implements Runnable {
      */
     protected final Card loadCard(final InputStream inputStream) {
         this.rulesReader.reset();
-        
-        Card card = readCard( new LineReader(inputStream, this.charset), this.rulesReader, mapToFill );
+
+        final Card card = CardReader.readCard(new LineReader(inputStream, this.charset), this.rulesReader,
+                this.mapToFill);
 
         if (card.isInAlternateState()) {
             card.setState("Original");
@@ -363,40 +366,57 @@ public class CardReader implements Runnable {
         this.mapToFill.put(card.getName(), card);
         return card;
     }
-    
-    public static Card readCard(Iterable<String> lines)
-    {
-        return readCard(lines, null, null);
-    }
-    
+
     /**
-     * Returns the card read from input stream
+     * Read card.
+     *
+     * @param lines the lines
+     * @return the card
+     */
+    public static Card readCard(final Iterable<String> lines) {
+        return CardReader.readCard(lines, null, null);
+    }
+
+    /**
+     * Returns the card read from input stream.
+     *
      * @param lines are input lines
-     * @param rulesReader is used to fill CardPrinted characteristics 
+     * @param rulesReader is used to fill CardPrinted characteristics
      * @param mapToFill is used to eliminate duplicates
      * @return the card
      */
-    public static Card readCard(Iterable<String> lines, CardRulesReader rulesReader, Map<String, Card> mapToFill) {
+    public static Card readCard(final Iterable<String> lines, final CardRulesReader rulesReader,
+            final Map<String, Card> mapToFill) {
         final Card card = new Card();
         boolean ignoreTheRest = false;
-        
-        for(String line : lines ) {
+
+        for (String line : lines) {
             line = line.trim();
-            
-            if("End".equals(line)) { ignoreTheRest = true; }   
-            if(ignoreTheRest) { continue; } // have to deplete the iterator
-            // otherwise the underlying class would close its stream on finalize only 
 
-            if (line.isEmpty() || line.charAt(0) == '#') 
+            if ("End".equals(line)) {
+                // have to deplete the iterator
+                ignoreTheRest = true;
                 continue;
+                // otherwise the underlying class would close its stream on finalize only 
+            }
+            if (ignoreTheRest) {
+                continue;
+            } // have to deplete the iterator
+            // otherwise the underlying class would close its stream on finalize
+            // only
 
-            if ( null != rulesReader )
+            if (line.isEmpty() || (line.charAt(0) == '#')) {
+                continue;
+            }
+
+            if (null != rulesReader) {
                 rulesReader.parseLine(line);
+            }
 
             if (line.startsWith("Name:")) {
                 final String value = line.substring(5);
                 // System.out.println(s);
-                if (mapToFill != null && mapToFill.containsKey(value)) {
+                if ((mapToFill != null) && mapToFill.containsKey(value)) {
                     break; // this card has already been loaded.
                 } else {
                     card.setName(value);

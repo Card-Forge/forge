@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -57,22 +57,23 @@ public class ViewStall extends JPanel {
     private final FScrollPane scrInventory;
     private final ControlStall control;
     private final ViewBazaarUI parentView;
-    private List<ViewItem> lstItemPanels;
+    private final List<ViewItem> lstItemPanels;
     private QuestStallDefinition stall;
 
-    /** @param v0 {@link forge.view.ViewBazaarUI} */
+    /**
+     * @param v0
+     *            {@link forge.view.ViewBazaarUI}
+     */
     public ViewStall(final ViewBazaarUI v0) {
         // Final/component inits
         this.lblStallName = new FLabel.Builder().text("").fontAlign(SwingConstants.CENTER).build();
-        this.lblEmpty = new FLabel.Builder()
-            .text("The merchant does not have anything useful for sale.")
-            .fontAlign(SwingConstants.CENTER).build();
-        this.lblStats = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-                .fontScaleFactor(0.9).build();
+        this.lblEmpty = new FLabel.Builder().text("The merchant does not have anything useful for sale.")
+                .fontAlign(SwingConstants.CENTER).build();
+        this.lblStats = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontScaleFactor(0.9).build();
 
         this.tpnFluff = new JTextPane();
         this.pnlInventory = new JPanel();
-        this.scrInventory = new FScrollPane(pnlInventory);
+        this.scrInventory = new FScrollPane(this.pnlInventory);
         this.control = new ControlStall(this);
         this.parentView = v0;
         this.lstItemPanels = new ArrayList<ViewItem>();
@@ -80,98 +81,107 @@ public class ViewStall extends JPanel {
         // Component styling
         this.setOpaque(false);
 
-        tpnFluff.setOpaque(false);
-        tpnFluff.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tpnFluff.setFont(FSkin.getItalicFont(15));
-        tpnFluff.setFocusable(false);
-        tpnFluff.setEditable(false);
-        tpnFluff.setBorder(null);
+        this.tpnFluff.setOpaque(false);
+        this.tpnFluff.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.tpnFluff.setFont(FSkin.getItalicFont(15));
+        this.tpnFluff.setFocusable(false);
+        this.tpnFluff.setEditable(false);
+        this.tpnFluff.setBorder(null);
 
-        StyledDocument doc = tpnFluff.getStyledDocument();
-        SimpleAttributeSet center = new SimpleAttributeSet();
+        final StyledDocument doc = this.tpnFluff.getStyledDocument();
+        final SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
-        pnlInventory.setOpaque(false);
+        this.pnlInventory.setOpaque(false);
 
-        scrInventory.setBorder(null);
-        scrInventory.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrInventory.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        this.scrInventory.setBorder(null);
+        this.scrInventory.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        this.scrInventory.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         // Layout
         this.setLayout(new MigLayout("insets 0, gap 0, wrap, ay center"));
-        this.add(lblStallName, "w 90%!, h 40px!, gap 5% 0 10px 0");
-        this.add(tpnFluff, "w 90%!, h 20px!, gap 5% 0 10px 40px");
-        this.add(lblStats, "w 90%!, h 18px!, gap 5% 0 0 10px");
-        this.add(scrInventory, "w 95%!, h 70%!");
+        this.add(this.lblStallName, "w 90%!, h 40px!, gap 5% 0 10px 0");
+        this.add(this.tpnFluff, "w 90%!, h 20px!, gap 5% 0 10px 40px");
+        this.add(this.lblStats, "w 90%!, h 18px!, gap 5% 0 0 10px");
+        this.add(this.scrInventory, "w 95%!, h 70%!");
 
-        pnlInventory.setLayout(new MigLayout("insets 0, gap 0, wrap, alignx center, hidemode 3"));
-        pnlInventory.add(lblEmpty, "w 90%!, h 30px!, gap 5% 0 50px 50px");
+        this.pnlInventory.setLayout(new MigLayout("insets 0, gap 0, wrap, alignx center, hidemode 3"));
+        this.pnlInventory.add(this.lblEmpty, "w 90%!, h 30px!, gap 5% 0 50px 50px");
     }
 
     /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getLblStallName() {
-        return lblStallName;
+        return this.lblStallName;
     }
 
     /** @return {@link javax.swing.JTextPane} */
     public JTextPane getTpnFluff() {
-        return tpnFluff;
+        return this.tpnFluff;
     }
 
     /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getLblStats() {
-        return lblStats;
+        return this.lblStats;
     }
 
     /** @return {@link forge.gui.toolbox.FScrollPane} */
     public FScrollPane getScrInventory() {
-        return scrInventory;
+        return this.scrInventory;
     }
 
     /** @return {@link forge.control.bazaar.ControlStall} */
     public ControlStall getController() {
-        return control;
+        return this.control;
     }
 
-    /** @param q0 &emsp; {@link forge.quest.data.QuestStallDefinition} */
-    public void setStall(QuestStallDefinition q0) {
+    /**
+     * @param q0
+     *            &emsp; {@link forge.quest.data.QuestStallDefinition}
+     */
+    public void setStall(final QuestStallDefinition q0) {
         this.stall = q0;
     }
 
     /**
-     * Updates/hides pre-existing panels with new inventory list,
-     * and creates new panels if necessary.
+     * Updates/hides pre-existing panels with new inventory list, and creates
+     * new panels if necessary.
      */
     public void updateStall() {
-        QuestController qData = AllZone.getQuest();
-        if (qData.getAssets() == null) { return; }
-        
-        
-        QuestAssets qS = qData.getAssets();
+        final QuestController qData = AllZone.getQuest();
+        if (qData.getAssets() == null) {
+            return;
+        }
+
+        final QuestAssets qS = qData.getAssets();
         this.lblStats.setText("Credits: " + qS.getCredits() + "         Life: " + qS.getLife(qData.getMode()));
 
-        final List<IQuestStallPurchasable> items = AllZone.getQuest().getBazaar().getItems(stall.getName());
+        final List<IQuestStallPurchasable> items = AllZone.getQuest().getBazaar().getItems(this.stall.getName());
 
-        lblStallName.setText(stall.getDisplayName());
-        tpnFluff.setText(stall.getFluff());
+        this.lblStallName.setText(this.stall.getDisplayName());
+        this.tpnFluff.setText(this.stall.getFluff());
 
         // Hide all components
-        for (Component i : this.pnlInventory.getComponents()) { i.setVisible(false); }
+        for (final Component i : this.pnlInventory.getComponents()) {
+            i.setVisible(false);
+        }
         // No items available to purchase?
-        if (items.size() == 0) { lblEmpty.setVisible(true); return; }
+        if (items.size() == 0) {
+            this.lblEmpty.setVisible(true);
+            return;
+        }
 
         for (int i = 0; i < items.size(); i++) {
             // Add panel instances to match length of list, if necessary
             if (this.lstItemPanels.size() == i) {
                 final ViewItem pnlItem = new ViewItem();
-                lstItemPanels.add(i, pnlItem);
-                pnlInventory.add(pnlItem, "w 90%!, gap 5% 0 0 10px");
+                this.lstItemPanels.add(i, pnlItem);
+                this.pnlInventory.add(pnlItem, "w 90%!, gap 5% 0 0 10px");
             }
 
-            lstItemPanels.get(i).setItem(items.get(i));
-            lstItemPanels.get(i).update();
-            lstItemPanels.get(i).setVisible(true);
+            this.lstItemPanels.get(i).setItem(items.get(i));
+            this.lstItemPanels.get(i).update();
+            this.lstItemPanels.get(i).setVisible(true);
         }
     }
 

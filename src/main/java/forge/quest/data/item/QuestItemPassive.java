@@ -36,23 +36,36 @@ import forge.quest.data.QuestAssets;
  * @version $Id$
  */
 public class QuestItemPassive implements IQuestStallPurchasable {
-    
-    @XStreamAsAttribute
-    private QuestItemType itemType;
-    public final QuestItemType getItemType() {
-        return itemType;
-    }
-    @XStreamAsAttribute
-    private int maxLevel = 1;
-    
-    @XStreamAsAttribute
-    private String purchaseName = "Read this field from XML";
-    private String description = "Read from XML";
 
     @XStreamAsAttribute
-    private int basePrice = 1000;
+    private final QuestItemType itemType;
+
+    /**
+     * Gets the item type.
+     *
+     * @return the item type
+     */
+    public final QuestItemType getItemType() {
+        return this.itemType;
+    }
+
+    @XStreamAsAttribute
+    private final int maxLevel = 1;
+
+    @XStreamAsAttribute
+    private final String purchaseName = "Read this field from XML";
+    private final String description = "Read from XML";
+
+    @XStreamAsAttribute
+    private final int basePrice = 1000;
+
+    /**
+     * Gets the base price.
+     *
+     * @return the base price
+     */
     protected final int getBasePrice() {
-        return basePrice;
+        return this.basePrice;
     }
 
     @XStreamAsAttribute
@@ -62,11 +75,8 @@ public class QuestItemPassive implements IQuestStallPurchasable {
      * <p>
      * Constructor for QuestItemAbstract.
      * </p>
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @param shopName
-     *            a {@link java.lang.String} object.
+     *
+     * @param type0 the type0
      */
     protected QuestItemPassive(final QuestItemType type0) {
         this.itemType = type0;
@@ -93,9 +103,11 @@ public class QuestItemPassive implements IQuestStallPurchasable {
 
     /**
      * This method will be invoked when an item is bought in a shop.
+     *
+     * @param qA the q a
      */
     @Override
-    public void onPurchase(QuestAssets qA) {
+    public void onPurchase(final QuestAssets qA) {
         final int currentLevel = qA.getItemLevel(this.itemType);
         qA.setItemLevel(this.itemType, currentLevel + 1);
     }
@@ -104,11 +116,12 @@ public class QuestItemPassive implements IQuestStallPurchasable {
      * <p>
      * isAvailableForPurchase.
      * </p>
-     * 
+     *
+     * @param qA the q a
      * @return a boolean.
      */
     @Override
-    public boolean isAvailableForPurchase(QuestAssets qA) {
+    public boolean isAvailableForPurchase(final QuestAssets qA) {
         return qA.getItemLevel(this.itemType) < this.maxLevel;
     }
 
@@ -138,12 +151,13 @@ public class QuestItemPassive implements IQuestStallPurchasable {
      * <p>
      * getPurchaseDescription.
      * </p>
-     * 
+     *
+     * @param qA the q a
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public String getPurchaseDescription(QuestAssets qA) {
-        return description;
+    public String getPurchaseDescription(final QuestAssets qA) {
+        return this.description;
     }
 
     /**
@@ -154,15 +168,32 @@ public class QuestItemPassive implements IQuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public ImageIcon getIcon() { return FSkin.getIcon(icon); }
+    public ImageIcon getIcon() {
+        return FSkin.getIcon(this.icon);
+    }
 
-    /** @return a int. */
+    /**
+     * Gets the buying price.
+     *
+     * @param qA the q a
+     * @return a int.
+     */
     @Override
-    public int getBuyingPrice(QuestAssets qA) { return basePrice; }
+    public int getBuyingPrice(final QuestAssets qA) {
+        return this.basePrice;
+    }
 
-    /** @return a int. */
+    /**
+     * Gets the selling price.
+     *
+     * @param qA the q a
+     * @return a int.
+     */
     @Override
-    public int getSellingPrice(QuestAssets qA) { return 0; }
+    public int getSellingPrice(final QuestAssets qA) {
+        return 0;
+    }
+
     /** {@inheritDoc} */
     @Override
     public final int compareTo(final Object o) {

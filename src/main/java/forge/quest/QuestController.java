@@ -1,5 +1,21 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.quest;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +30,17 @@ import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestMode;
-import forge.quest.data.QuestStartPool;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.quest.data.QuestStartPool;
 import forge.quest.io.PreconReader;
 import forge.util.IStorage;
 import forge.util.IStorageView;
 import forge.util.Predicate;
 import forge.util.StorageView;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public class QuestController {
 
@@ -38,6 +54,7 @@ public class QuestController {
 
     private QuestEvent currentEvent;
 
+    /** The decks. */
     transient IStorage<Deck> decks;
 
     // acquired
@@ -56,8 +73,8 @@ public class QuestController {
     private QuestStallManager bazaar = null;
 
     // This is used by shop. Had no idea where else to place this
-    private static transient IStorageView<PreconDeck> preconManager =
-            new StorageView<PreconDeck>(new PreconReader(ForgeProps.getFile(NewConstants.Quest.PRECONS)));
+    private static transient IStorageView<PreconDeck> preconManager = new StorageView<PreconDeck>(new PreconReader(
+            ForgeProps.getFile(NewConstants.Quest.PRECONS)));
 
     /** The Constant RANK_TITLES. */
     public static final String[] RANK_TITLES = new String[] { "Level 0 - Confused Wizard", "Level 1 - Mana Mage",
@@ -87,51 +104,64 @@ public class QuestController {
      * @return the myDecks
      */
     public IStorage<Deck> getMyDecks() {
-        return decks;
+        return this.decks;
     }
 
+    /**
+     * Gets the current event.
+     *
+     * @return the current event
+     */
     public QuestEvent getCurrentEvent() {
-        return currentEvent;
+        return this.currentEvent;
     }
-    public void setCurrentEvent(QuestEvent currentEvent) {
+
+    /**
+     * Sets the current event.
+     *
+     * @param currentEvent the new current event
+     */
+    public void setCurrentEvent(final QuestEvent currentEvent) {
         this.currentEvent = currentEvent;
     }
 
     /**
      * Gets the precons.
-     *
+     * 
      * @return QuestPreconManager
      */
     public static IStorageView<PreconDeck> getPrecons() {
-        return preconManager;
+        return QuestController.preconManager;
     }
 
     /**
      * TODO: Write javadoc for this method.
-     * @param selectedQuest
+     *
+     * @param selectedQuest the selected quest
      */
-    public void load(QuestData selectedQuest) {
-        model = selectedQuest;
+    public void load(final QuestData selectedQuest) {
+        this.model = selectedQuest;
         // These are helper classes that hold no data.
-        this.decks = model == null ? null : model.getAssets().getDeckStorage();
-        this.myCards = model == null ? null : new QuestUtilCards(this);
-        currentEvent = null;
+        this.decks = this.model == null ? null : this.model.getAssets().getDeckStorage();
+        this.myCards = this.model == null ? null : new QuestUtilCards(this);
+        this.currentEvent = null;
 
-        getEventManager().randomizeOpponents();
+        this.getEventManager().randomizeOpponents();
     }
 
     /**
      * TODO: Write javadoc for this method.
      */
     public void save() {
-        if (model != null) {
-            model.saveData();
+        if (this.model != null) {
+            this.model.saveData();
         }
     }
 
     /**
      * TODO: Write javadoc for this method.
-     * @return
+     *
+     * @return true, if is loaded
      */
     public boolean isLoaded() {
         return false;
@@ -172,34 +202,35 @@ public class QuestController {
 
     /**
      * New game.
-     * 
-     * @param diff
-     *            the diff
-     * @param mode
-     *            the mode
-     * @param startPool
-     *            the start type
+     *
+     * @param name the name
+     * @param diff the diff
+     * @param mode the mode
+     * @param startPool the start type
+     * @param preconName the precon name
      */
-    public void newGame(final String name, final int diff, final QuestMode mode, final QuestStartPool startPool, final String preconName) {
+    public void newGame(final String name, final int diff, final QuestMode mode, final QuestStartPool startPool,
+            final String preconName) {
 
-        load(new QuestData(name, diff, mode));
+        this.load(new QuestData(name, diff, mode));
 
         final Predicate<CardPrinted> filter;
         switch (startPool) {
-            case Precon:
-                myCards.addPreconDeck(preconManager.get(preconName));
-                return;
+        case Precon:
+            this.myCards.addPreconDeck(QuestController.preconManager.get(preconName));
+            return;
 
-            case Standard:
-                filter = Singletons.getModel().getFormats().getStandard().getFilterPrinted();
-                break;
+        case Standard:
+            filter = Singletons.getModel().getFormats().getStandard().getFilterPrinted();
+            break;
 
-            default: //Unrestricted
-                filter = CardPrinted.Predicates.Presets.IS_TRUE;
-                break;
+        default: // Unrestricted
+            filter = CardPrinted.Predicates.Presets.IS_TRUE;
+            break;
         }
 
-        this.getAssets().setCredits(Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_CREDITS, diff));
+        this.getAssets().setCredits(
+                Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_CREDITS, diff));
         this.myCards.setupNewGameCardPool(filter, diff);
     }
 
@@ -209,57 +240,71 @@ public class QuestController {
      * @return the rank
      */
     public String getRank() {
-        int level = model.getAchievements().getLevel();
-        if (level >= RANK_TITLES.length) {
-            level = RANK_TITLES.length - 1;
+        int level = this.model.getAchievements().getLevel();
+        if (level >= QuestController.RANK_TITLES.length) {
+            level = QuestController.RANK_TITLES.length - 1;
         }
-        return RANK_TITLES[level];
+        return QuestController.RANK_TITLES[level];
     }
 
     /**
      * TODO: Write javadoc for this method.
-     * @return
+     *
+     * @return the assets
      */
     public QuestAssets getAssets() {
-        return model == null ? null : model.getAssets();
+        return this.model == null ? null : this.model.getAssets();
     }
 
     /**
      * TODO: Write javadoc for this method.
-     * @return
+     *
+     * @return the name
      */
     public String getName() {
-        return model == null ? null : model.getName();
+        return this.model == null ? null : this.model.getName();
     }
 
     /**
      * TODO: Write javadoc for this method.
-     * @return
+     *
+     * @return the achievements
      */
     public QuestAchievements getAchievements() {
-        return model == null ? null : model.getAchievements();
+        return this.model == null ? null : this.model.getAchievements();
     }
 
     /**
      * TODO: Write javadoc for this method.
-     * @return
+     *
+     * @return the mode
      */
     public QuestMode getMode() {
-        return model.getMode();
+        return this.model.getMode();
     }
 
+    /**
+     * Gets the bazaar.
+     *
+     * @return the bazaar
+     */
     public final QuestStallManager getBazaar() {
-        if (null == bazaar) {
-            bazaar = new QuestStallManager(ForgeProps.getFile(NewConstants.Quest.BAZAAR));
+        if (null == this.bazaar) {
+            this.bazaar = new QuestStallManager(ForgeProps.getFile(NewConstants.Quest.BAZAAR));
         }
-        return bazaar;
+        return this.bazaar;
     }
 
+    /**
+     * Gets the event manager.
+     *
+     * @return the event manager
+     */
     public QuestEventManager getEventManager() {
-        if (eventManager == null) {
-            eventManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DECKS));
+        if (this.eventManager == null) {
+            this.eventManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DECKS));
         }
-        return eventManager;
+        return this.eventManager;
     }
 
 }

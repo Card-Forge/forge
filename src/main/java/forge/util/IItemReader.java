@@ -34,5 +34,11 @@ public interface IItemReader<T> {
     Map<String, T> readAll();
     // T read(File file);
 
+    /**
+     * Gets the item key.
+     *
+     * @param item the item
+     * @return the item key
+     */
     String getItemKey(T item);
 }

@@ -25,33 +25,33 @@ public class ViewItem extends FPanel {
     /** An update-able panel instance representing a single item. */
     public ViewItem() {
         // Final inits
-        lblIcon = new FLabel.Builder().iconScaleFactor(1).iconInBackground(true).build();
-        lblName = new FLabel.Builder().fontStyle(Font.BOLD).build();
-        lblPrice = new FLabel.Builder().fontStyle(Font.BOLD).fontScaleFactor(0.8).build();
-        tarDesc = new FTextArea();
-        btnPurchase = new FLabel.Builder().text("Buy").opaque(true).fontScaleFactor(0.2).hoverable(true).build();
+        this.lblIcon = new FLabel.Builder().iconScaleFactor(1).iconInBackground(true).build();
+        this.lblName = new FLabel.Builder().fontStyle(Font.BOLD).build();
+        this.lblPrice = new FLabel.Builder().fontStyle(Font.BOLD).fontScaleFactor(0.8).build();
+        this.tarDesc = new FTextArea();
+        this.btnPurchase = new FLabel.Builder().text("Buy").opaque(true).fontScaleFactor(0.2).hoverable(true).build();
 
         this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // Layout
         this.setLayout(new MigLayout("insets 0, gap 0"));
 
-        this.add(lblIcon, "w 100px!, h n:90%:100px, ay center, span 1 3, gap 5px 5px 5px 5px");
-        this.add(lblName, "pushx, w 60%!, h 22px!, gap 0 0 5px 5px");
-        this.add(btnPurchase, "w 80px!, h 80px!, ay center, span 1 3, gap 0 15px 0 0, wrap");
+        this.add(this.lblIcon, "w 100px!, h n:90%:100px, ay center, span 1 3, gap 5px 5px 5px 5px");
+        this.add(this.lblName, "pushx, w 60%!, h 22px!, gap 0 0 5px 5px");
+        this.add(this.btnPurchase, "w 80px!, h 80px!, ay center, span 1 3, gap 0 15px 0 0, wrap");
 
-        this.add(tarDesc, "w 60%!, gap 0 0 0 10px, wrap");
-        this.add(lblPrice, "w 60%!, h 20px!, gap 0 0 0 5px");
+        this.add(this.tarDesc, "w 60%!, gap 0 0 0 10px, wrap");
+        this.add(this.lblPrice, "w 60%!, h 20px!, gap 0 0 0 5px");
 
-        btnPurchase.setCommand(new Command() {
+        this.btnPurchase.setCommand(new Command() {
             @Override
             public void execute() {
-                QuestAssets qA = AllZone.getQuest().getAssets();
-                int cost = getItem().getBuyingPrice(qA);
-                if ( qA.getCredits() - cost >= 0 ) {
+                final QuestAssets qA = AllZone.getQuest().getAssets();
+                final int cost = ViewItem.this.getItem().getBuyingPrice(qA);
+                if ((qA.getCredits() - cost) >= 0) {
                     qA.subtractCredits(cost);
-                    qA.addCredits(getItem().getSellingPrice(qA));
-                    getItem().onPurchase(qA);
+                    qA.addCredits(ViewItem.this.getItem().getSellingPrice(qA));
+                    ViewItem.this.getItem().onPurchase(qA);
                     AllZone.getQuest().save();
                 }
                 Singletons.getView().getViewBazaar().refreshLastInstance();
@@ -59,8 +59,11 @@ public class ViewItem extends FPanel {
         });
     }
 
-    /** @param i0 &emsp; {@link forge.quest.data.item.IQuestStallPurchasable} */
-    public void setItem(IQuestStallPurchasable i0) {
+    /**
+     * @param i0
+     *            &emsp; {@link forge.quest.data.item.IQuestStallPurchasable}
+     */
+    public void setItem(final IQuestStallPurchasable i0) {
         this.item = i0;
     }
 
@@ -74,18 +77,19 @@ public class ViewItem extends FPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                QuestAssets qA = AllZone.getQuest().getAssets();
-                lblIcon.setIcon(getItem().getIcon());
-                lblName.setText(getItem().getPurchaseName());
-                lblPrice.setText("Cost: " + String.valueOf(getItem().getBuyingPrice(qA)) + " credits");
-                tarDesc.setText(getItem().getPurchaseDescription(qA));
+                final QuestAssets qA = AllZone.getQuest().getAssets();
+                ViewItem.this.lblIcon.setIcon(ViewItem.this.getItem().getIcon());
+                ViewItem.this.lblName.setText(ViewItem.this.getItem().getPurchaseName());
+                ViewItem.this.lblPrice.setText("Cost: " + String.valueOf(ViewItem.this.getItem().getBuyingPrice(qA))
+                        + " credits");
+                ViewItem.this.tarDesc.setText(ViewItem.this.getItem().getPurchaseDescription(qA));
 
-                if (qA.getCredits() < getItem().getBuyingPrice(qA)) {
-                    btnPurchase.setEnabled(false);
+                if (qA.getCredits() < ViewItem.this.getItem().getBuyingPrice(qA)) {
+                    ViewItem.this.btnPurchase.setEnabled(false);
                 }
 
-                revalidate();
-                repaint();
+                ViewItem.this.revalidate();
+                ViewItem.this.repaint();
             }
         });
     }
