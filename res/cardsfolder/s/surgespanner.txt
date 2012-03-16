@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Creature Merfolk Wizard
 Text:no text
 PT:2/2
-T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever Surgespanner becomes tapped, you may pay 1U. If you do, return target permanent to its owner’s hand.
+T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever Surgespanner becomes tapped, you may pay 1U. If you do, return target permanent to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
