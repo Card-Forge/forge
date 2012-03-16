@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.gui.download;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -23,19 +23,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 import javax.swing.AbstractButton;
 import javax.swing.Box;
@@ -53,11 +52,14 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.esotericsoftware.minlog.Log;
 
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.FileUtil;
 import forge.util.MyRandom;
 
 /**
@@ -382,60 +384,51 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
             final byte[] buf = new byte[1024];
             int len;
             for (this.update(0); (this.card < this.cards.length) && !this.cancel; this.update(this.card + 1)) {
+
+                final String url = this.cards[this.card].getSource();
+                final File fileDest =  this.cards[this.card].getDestination();
+                final File base = fileDest.getParentFile();
+
                 try {
-                    final String url = this.cards[this.card].url;
-                    String cName;
-                    cName = this.cards[this.card].getName();
-                    cName = cName.replace("%20", " ");
-
-                    final File base = new File(this.cards[this.card].dir);
-                    final File f = new File(base, cName);
-
                     // test for folder existence
-                    if (!base.exists()) {
-                        // create folder
-                        if (!base.mkdir()) {
-                            System.out.println("Can't create folder" + this.cards[this.card].dir);
-                        }
+                    if (!base.exists() && !base.mkdir()) { // create folder if not found
+                        System.out.println("Can't create folder" + base.getAbsolutePath());
                     }
 
-                    try {
-                        in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
-                        out = new BufferedOutputStream(new FileOutputStream(f));
+                    in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
+                    out = new BufferedOutputStream(new FileOutputStream(fileDest));
 
-                        while ((len = in.read(buf)) != -1) {
-                            // user cancelled
-                            if (this.cancel) {
-                                in.close();
-                                out.flush();
-                                out.close();
+                    while ((len = in.read(buf)) != -1) {
+                        // user cancelled
+                        if (this.cancel) {
+                            in.close();
+                            out.flush();
+                            out.close();
 
-                                // delete what was written so far
-                                f.delete();
+                            // delete what was written so far
+                            fileDest.delete();
 
-                                return;
-                            } // if - cancel
+                            return;
+                        } // if - cancel
 
-                            out.write(buf, 0, len);
-                        } // while - read and write file
+                        out.write(buf, 0, len);
+                    } // while - read and write file
 
-                        in.close();
-                        out.flush();
-                        out.close();
-                    } catch (final ConnectException ce) {
-                        System.out.println("Connection refused for url: " + url);
-                    } catch (final MalformedURLException mURLe) {
-                        System.out.println("Error - possibly missing URL for: " + this.cards[this.card].getName());
-                    }
+                    in.close();
+                    out.flush();
+                    out.close();
+                } catch (final ConnectException ce) {
+                    System.out.println("Connection refused for url: " + url);
+                } catch (final MalformedURLException mURLe) {
+                    System.out.println("Error - possibly missing URL for: " + fileDest.getName());
                 } catch (final FileNotFoundException fnfe) {
-                    System.out.println("Error - the LQ picture for " + this.cards[this.card].getName()
-                            + " could not be found on the server. [" + this.cards[this.card].url + "] - "
-                            + fnfe.getMessage());
+                    String formatStr = "Error - the LQ picture %s could not be found on the server. [%s] - %s";
+                    System.out.println(String.format(formatStr, fileDest.getName(), url, fnfe.getMessage()));
                 } catch (final Exception ex) {
                     Log.error("LQ Pictures", "Error downloading pictures", ex);
                 }
 
-                // throttle
+                // throttle -- why?
                 try {
                     Thread.sleep(r.nextInt(750) + 420);
                 } catch (final InterruptedException e) {
@@ -451,7 +444,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
      * getNeededCards.
      * </p>
      * 
-     * @return an array of {@link forge.GuiDownloader.DownloadObject} objects.
+     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
      */
     protected abstract DownloadObject[] getNeededImages();
 
@@ -460,44 +453,30 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
      * readFile.
      * </p>
      * 
-     * @param filename
+     * @param urlsFile
      *            a {@link java.lang.String} object.
      * @param dir
      *            a {@link java.util.File} object.
-     * @return an array of {@link forge.GuiDownloader.DownloadObject} objects.
+     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
      */
-    protected static DownloadObject[] readFile(final String filename, final File dir) {
-        try {
-            final FileReader zrc = new FileReader(ForgeProps.getFile(filename));
-            final BufferedReader in = new BufferedReader(zrc);
-            final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
+    protected static List<DownloadObject> readFile(final String urlsFile, final File dir) {
+        List<String> fileLines = FileUtil.readFile(ForgeProps.getFile(urlsFile));
+        final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
+        final Pattern splitter = Pattern.compile(Pattern.quote("/"));
+        final Pattern replacer = Pattern.compile(Pattern.quote("%20"));
+        
+        for(String line : fileLines)
+        {
+            if( line.equals("") ||  line.startsWith("#")) { continue; }
 
-            String line;
-            StringTokenizer tok;
+            String[] parts = splitter.split(line);
 
-            line = in.readLine();
-            while ((line != null) && (!line.equals("")) && !line.startsWith("#")) {
-                tok = new StringTokenizer(line, "/");
-
-                // Maybe there's a better way to do this, but I just want the
-                // filename from a URL
-                String last = null;
-                while (tok.hasMoreTokens()) {
-                    last = tok.nextToken();
-                }
-                list.add(new DownloadObject(last, line, dir.getPath()));
-
-                line = in.readLine();
-            }
-
-            final DownloadObject[] out = new DownloadObject[list.size()];
-            list.toArray(out);
-            return out;
-
-        } catch (final Exception ex) {
-            ErrorViewer.showError(ex, "GuiDownloader: readFile() error");
-            throw new RuntimeException("GuiDownloader : readFile() error");
+            // Maybe there's a better way to do this, but I just want the
+            // filename from a URL
+            String last = parts[parts.length-1];
+            list.add(new DownloadObject(line, new File(dir, replacer.matcher(last).replaceAll(" "))));
         }
+        return list;
     } // readFile()
 
     /**
@@ -505,51 +484,27 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
      * readFile.
      * </p>
      * 
-     * @param filename
+     * @param urlNamesFile
      *            a {@link java.lang.String} object.
      * @param dir
      *            a {@link java.util.File} object.
-     * @return an array of {@link forge.GuiDownloader.DownloadObject} objects.
+     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
      */
-    protected static DownloadObject[] readFileWithNames(final String filename, final File dir) {
-        try {
-            final FileReader zrc = new FileReader(ForgeProps.getFile(filename));
-            final BufferedReader in = new BufferedReader(zrc);
-            final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
+    protected static ArrayList<DownloadObject> readFileWithNames(final String urlNamesFile, final File dir) {
+        List<String> fileLines = FileUtil.readFile(ForgeProps.getFile(urlNamesFile));
+        final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
+        final Pattern splitter = Pattern.compile(Pattern.quote(" "));
+        final Pattern replacer = Pattern.compile(Pattern.quote("%20"));
 
-            String line;
-            StringTokenizer tok;
-
-            line = in.readLine();
-            while ((line != null) && (!line.equals(""))) {
-                if (line.startsWith("#")) {
-                    line = in.readLine();
-                    continue;
-                }
-
-                String name = null;
-                String url = null;
-                tok = new StringTokenizer(line, " ");
-
-                if (tok.hasMoreTokens()) {
-                    name = tok.nextToken();
-                }
-                if (tok.hasMoreTokens()) {
-                    url = tok.nextToken();
-                }
-                list.add(new DownloadObject(name, url, dir.getPath()));
-
-                line = in.readLine();
-            }
-
-            final DownloadObject[] out = new DownloadObject[list.size()];
-            list.toArray(out);
-            return out;
-
-        } catch (final Exception ex) {
-            ErrorViewer.showError(ex, "GuiDownloader: readFile() error");
-            throw new RuntimeException("GuiDownloader : readFile() error");
+        for(String line : fileLines)
+        {
+            if( StringUtils.isBlank(line) ||  line.startsWith("#")) { continue; }
+            String[] parts = splitter.split(line, 2);
+            String url = parts.length > 1 ? parts[1] : null;
+            list.add(new DownloadObject(url, new File(dir, replacer.matcher(parts[0]).replaceAll(" "))));
         }
+
+        return list;
     } // readFile()
 
     /**
@@ -595,39 +550,21 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
      */
     protected static class DownloadObject {
 
-        /** The name. */
-        private final String name;
+        private final String source;
+        private final File destination;
 
-        /** The url. */
-        private final String url;
-
-        /** The dir. */
-        private final String dir;
-
-        /**
-         * Instantiates a new download object.
-         * 
-         * @param nameIn
-         *            the name in
-         * @param urlIn
-         *            the url in
-         * @param dirIn
-         *            the dir in
-         */
-        DownloadObject(final String nameIn, final String urlIn, final String dirIn) {
-            this.name = nameIn;
-            this.url = urlIn;
-            this.dir = dirIn;
+        DownloadObject(final String srcUrl, final File destFile) {
+            source = srcUrl;
+            destination = destFile;
             // System.out.println("Created download object: "+name+" "+url+" "+dir);
         }
 
-        /**
-         * Gets the name.
-         * 
-         * @return the name
-         */
-        public String getName() {
-            return this.name;
+        public String getSource() {
+            return source;
+        }
+
+        public File getDestination() {
+            return destination;
         }
     } // DownloadObject
 }

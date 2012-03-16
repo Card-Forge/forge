@@ -140,12 +140,15 @@ public final class NewConstants {
     public static final String IMAGE_TOKEN = "image/token";
     /** Constant <code>IMAGE_ICON="image/icon"</code>. */
     public static final String IMAGE_ICON = "image/icon";
+    public static final String IMAGE_SEALED_PRODUCT = "image/product";
     /** Constant <code>PICS_BOOSTER="pics/booster"</code>. */
     public static final String PICS_BOOSTER = "pics/booster";
     /** Constant <code>PICS_BOOSTER_IMAGES="pics/booster/images"</code>. */
     public static final String PICS_BOOSTER_IMAGES = "pics/booster/images";
     /** Constant <code>SOUND_BASE="sound/base"</code>. */
     public static final String SOUND_BASE = "sound/base";
+
+    
 
     /**
      * These properties are for a regular game.

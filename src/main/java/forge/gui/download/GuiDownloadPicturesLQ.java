@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.gui.download;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,6 +23,9 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import forge.AllZone;
+import forge.Card;
+import forge.GuiDisplayUtil;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -55,13 +58,11 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
      * getNeededCards.
      * </p>
      * 
-     * @return an array of {@link forge.GuiDownloader.DownloadObject} objects.
+     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
      */
     @Override
     protected final DownloadObject[] getNeededImages() {
         // read token names and urls
-        final DownloadObject[] cardTokenLQ = GuiDownloader.readFileWithNames(NewConstants.TOKEN_IMAGES,
-                ForgeProps.getFile(NewConstants.IMAGE_TOKEN));
         final ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
 
         final String base = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
@@ -70,32 +71,23 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         }
 
         final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
-        File file;
 
-        final DownloadObject[] a = { new DownloadObject("", "", "") };
-        final DownloadObject[] cardPlay = cList.toArray(a);
-        // check to see which cards we already have
-        for (final DownloadObject element : cardPlay) {
-            file = new File(base, element.getName());
-            if (!file.exists()) {
+        for (final DownloadObject element : cList) {
+            if (!element.getDestination().exists()) {
                 list.add(element);
             }
         }
 
         // add missing tokens to the list of things to download
-        final File filebase = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
-        for (final DownloadObject element : cardTokenLQ) {
-            file = new File(filebase, element.getName());
-            if (!file.exists()) {
+        for (final DownloadObject element : GuiDownloader.readFileWithNames(NewConstants.TOKEN_IMAGES,
+                ForgeProps.getFile(NewConstants.IMAGE_TOKEN))) {
+            if (!element.getDestination().exists()) {
                 list.add(element);
             }
         }
 
         // return all card names and urls that are needed
-        final DownloadObject[] out = new DownloadObject[list.size()];
-        list.toArray(out);
-
-        return out;
+        return list.toArray(new DownloadObject[list.size()]);
     } // getNeededImages()
 
     private List<DownloadObject> createDLObjects(final Card c, final String base) {
@@ -111,13 +103,12 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
             final String[] urls = url.split("\\\\");
 
             final String iName = GuiDisplayUtil.cleanString(c.getImageName());
-            ret.add(new DownloadObject(iName + ".jpg", urls[0], base));
+            ret.add(new DownloadObject(urls[0], new File(base, iName + ".jpg")));
 
-            if (urls.length > 1) {
-                for (int j = 1; j < urls.length; j++) {
-                    ret.add(new DownloadObject(iName + j + ".jpg", urls[j], base));
-                }
+            for (int j = 1; j < urls.length; j++) {
+                ret.add(new DownloadObject(urls[j], new File(base, iName + j + ".jpg")));
             }
+
         }
 
         return ret;

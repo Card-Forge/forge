@@ -11252,11 +11252,6 @@ src/main/java/forge/GameActionUtil.java svneol=native#text/plain
 src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GameLog.java -text
 src/main/java/forge/GuiDisplayUtil.java svneol=native#text/plain
-src/main/java/forge/GuiDownloadPicturesLQ.java svneol=native#text/plain
-src/main/java/forge/GuiDownloadPrices.java svneol=native#text/plain
-src/main/java/forge/GuiDownloadQuestImages.java -text
-src/main/java/forge/GuiDownloadSetPicturesLQ.java svneol=native#text/plain
-src/main/java/forge/GuiDownloader.java -text
 src/main/java/forge/GuiImportPicture.java svneol=native#text/plain
 src/main/java/forge/GuiInput.java svneol=native#text/plain
 src/main/java/forge/GuiMigrateLocalMWSSetPicturesHQ.java svneol=native#text/plain
@@ -11563,6 +11558,12 @@ src/main/java/forge/gui/deckeditor/elements/TableSorterCascade.java -text
 src/main/java/forge/gui/deckeditor/elements/TableView.java -text
 src/main/java/forge/gui/deckeditor/elements/package-info.java -text
 src/main/java/forge/gui/deckeditor/package-info.java -text
+src/main/java/forge/gui/download/GuiDownloadPicturesLQ.java svneol=native#text/plain
+src/main/java/forge/gui/download/GuiDownloadPrices.java svneol=native#text/plain
+src/main/java/forge/gui/download/GuiDownloadQuestImages.java -text
+src/main/java/forge/gui/download/GuiDownloadSetPicturesLQ.java svneol=native#text/plain
+src/main/java/forge/gui/download/GuiDownloader.java -text
+src/main/java/forge/gui/download/package-info.java -text
 src/main/java/forge/gui/game/CardDetailPanel.java svneol=native#text/plain
 src/main/java/forge/gui/game/CardPanel.java svneol=native#text/plain
 src/main/java/forge/gui/game/CardPicturePanel.java svneol=native#text/plain

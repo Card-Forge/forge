@@ -15,10 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.gui.download;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -53,50 +54,33 @@ public class GuiDownloadQuestImages extends GuiDownloader {
      * getNeededCards.
      * </p>
      * 
-     * @return an array of {@link forge.GuiDownloadSetPicturesLQ} objects.
+     * @return an array of {@link forge.gui.download.GuiDownloadSetPicturesLQ} objects.
      */
     @Override
     protected final DownloadObject[] getNeededImages() {
         // read all card names and urls
-        final DownloadObject[] questOpponents = GuiDownloader.readFile(NewConstants.Quest.OPPONENT_ICONS,
-                ForgeProps.getFile(NewConstants.Quest.OPPONENT_DIR));
-        final DownloadObject[] boosterImages = GuiDownloader.readFile(NewConstants.PICS_BOOSTER_IMAGES,
-                ForgeProps.getFile(NewConstants.PICS_BOOSTER));
-        final DownloadObject[] petIcons = GuiDownloader.readFileWithNames(NewConstants.Quest.PET_SHOP_ICONS,
-                ForgeProps.getFile(NewConstants.IMAGE_ICON));
-        final DownloadObject[] questPets = GuiDownloader.readFileWithNames(NewConstants.Quest.PET_TOKEN_IMAGES,
-                ForgeProps.getFile(NewConstants.IMAGE_TOKEN));
-        final ArrayList<DownloadObject> urls = new ArrayList<DownloadObject>();
+        final List<DownloadObject> urls = new ArrayList<DownloadObject>();
 
-        File file;
-        File dir = ForgeProps.getFile(NewConstants.Quest.OPPONENT_DIR);
-        for (final DownloadObject questOpponent : questOpponents) {
-            file = new File(dir, questOpponent.getName().replace("%20", " "));
-            if (!file.exists()) {
+        for (final DownloadObject questOpponent : GuiDownloader.readFile(NewConstants.Quest.OPPONENT_ICONS, ForgeProps.getFile(NewConstants.Quest.OPPONENT_DIR))) {
+            if (!questOpponent.getDestination().exists()) {
                 urls.add(questOpponent);
             }
         }
 
-        dir = ForgeProps.getFile(NewConstants.PICS_BOOSTER);
-        for (final DownloadObject boosterImage : boosterImages) {
-            file = new File(dir, boosterImage.getName().replace("%20", " "));
-            if (!file.exists()) {
+        for (final DownloadObject boosterImage : GuiDownloader.readFile(NewConstants.PICS_BOOSTER_IMAGES, ForgeProps.getFile(NewConstants.IMAGE_SEALED_PRODUCT))) {
+            if (!boosterImage.getDestination().exists()) {
                 urls.add(boosterImage);
             }
         }
 
-        dir = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-        for (final DownloadObject petIcon : petIcons) {
-            file = new File(dir, petIcon.getName().replace("%20", " "));
-            if (!file.exists()) {
+        for (final DownloadObject petIcon : GuiDownloader.readFileWithNames(NewConstants.Quest.PET_SHOP_ICONS, ForgeProps.getFile(NewConstants.IMAGE_ICON))) {
+            if (!petIcon.getDestination().exists()) {
                 urls.add(petIcon);
             }
         }
 
-        dir = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
-        for (final DownloadObject questPet : questPets) {
-            file = new File(dir, questPet.getName().replace("%20", " "));
-            if (!file.exists()) {
+        for (final DownloadObject questPet : GuiDownloader.readFileWithNames(NewConstants.Quest.PET_TOKEN_IMAGES, ForgeProps.getFile(NewConstants.IMAGE_TOKEN))) {
+            if (!questPet.getDestination().exists()) {
                 urls.add(questPet);
             }
         }

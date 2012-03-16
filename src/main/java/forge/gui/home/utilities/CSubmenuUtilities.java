@@ -1,12 +1,12 @@
 package forge.gui.home.utilities;
 
 import forge.Command;
-import forge.GuiDownloadPicturesLQ;
-import forge.GuiDownloadPrices;
-import forge.GuiDownloadQuestImages;
-import forge.GuiDownloadSetPicturesLQ;
 import forge.GuiImportPicture;
 import forge.error.BugzReporter;
+import forge.gui.download.GuiDownloadPicturesLQ;
+import forge.gui.download.GuiDownloadPrices;
+import forge.gui.download.GuiDownloadQuestImages;
+import forge.gui.download.GuiDownloadSetPicturesLQ;
 import forge.gui.home.ICSubmenu;
 
 /** 

@@ -20,6 +20,7 @@ package forge.item;
 import java.util.List;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
+import forge.ImageCache;
 import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
@@ -53,7 +54,7 @@ public class TournamentPack extends OpenablePack {
 
     @Override
     public final String getImageFilename() {
-        return "tournamentpacks/" + this.contents.getEdition();
+        return ImageCache.SEALED_PRODUCT + "tournamentpacks/" + this.contents.getEdition();
     }
 
 

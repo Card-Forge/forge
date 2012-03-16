@@ -19,6 +19,7 @@ package forge.item;
 
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
+import forge.ImageCache;
 import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.CardEdition;
@@ -60,7 +61,7 @@ public class BoosterPack extends OpenablePack {
      */
     @Override
     public final String getImageFilename() {
-        return "booster/" + this.contents.getEdition() + ".png";
+        return ImageCache.SEALED_PRODUCT + "booster/" + this.contents.getEdition() + ".png";
     }
 
     @Override

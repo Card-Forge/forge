@@ -17,13 +17,11 @@
  */
 package forge;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -51,7 +49,6 @@ import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
 import forge.gui.toolbox.FProgressBar;
-import forge.util.FileUtil;
 import forge.util.LineReader;
 import forge.view.SplashFrame;
 
@@ -386,7 +383,7 @@ public class CardReader implements Runnable {
         for(String line : lines ) {
             line = line.trim();
             
-            if("End".equals(line)) { ignoreTheRest = true; continue; }   
+            if("End".equals(line)) { ignoreTheRest = true; }   
             if(ignoreTheRest) { continue; } // have to deplete the iterator
             // otherwise the underlying class would close its stream on finalize only 
 
@@ -451,17 +448,13 @@ public class CardReader implements Runnable {
                 final String[] value = line.split(":", 3);
                 card.setSVar(value[1], value[2]);
             } else if (line.startsWith("A:")) {
-                final String value = line.substring(2);
-                card.addIntrinsicAbility(value);
+                card.addIntrinsicAbility(line.substring(2));
             } else if (line.startsWith("T:")) {
-                final String value = line.substring(2);
-                card.addTrigger(TriggerHandler.parseTrigger(value, card, true));
+                card.addTrigger(TriggerHandler.parseTrigger(line.substring(2), card, true));
             } else if (line.startsWith("S:")) {
-                final String value = line.substring(2);
-                card.addStaticAbilityString(value);
+                card.addStaticAbilityString(line.substring(2));
             } else if (line.startsWith("R:")) {
-                final String value = line.substring(2);
-                card.addReplacementEffect(ReplacementHandler.parseReplacement(value, card));
+                card.addReplacementEffect(ReplacementHandler.parseReplacement(line.substring(2), card));
             } else if (line.startsWith("SetInfo:")) {
                 final String value = line.substring("SetInfo:".length());
                 card.addSet(new EditionInfo(value));

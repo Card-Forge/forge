@@ -23,6 +23,7 @@ import java.util.Map;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 
+import forge.ImageCache;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.quest.SellRules;
@@ -59,7 +60,7 @@ public class PreconDeck implements InventoryItemFromSet {
      */
     @Override
     public String getImageFilename() {
-        return "precons/" + this.imageFilename;
+        return ImageCache.SEALED_PRODUCT + "precons/" + this.imageFilename;
     }
 
     /*

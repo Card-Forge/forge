@@ -64,14 +64,11 @@ public class ImageCache {
     private static final LoadingCache<String, BufferedImage> IMAGE_CACHE;
     /** Constant <code>FULL_SIZE</code>. */
     private static final Pattern FULL_SIZE = Pattern.compile("(.*)#(\\d+.\\d+)");
-    /** Constant <code>TOKEN="#Token"</code> */
-    /** Constant <code>NORMAL="#Normal"</code> */
-    /** Constant <code>TAPPED="#Tapped"</code> */
-    /** Constant <code>NORMAL="#Normal"</code> */
-    /** Constant <code>TAPPED="#Tapped"</code>. */
-    private static final String TOKEN = "#Token", NORMAL = "#Normal", TAPPED = "#Tapped";
-    private static final String SEALED_PRODUCT = "sealed://";
-
+     
+    private static final String NORMAL = "#Normal", TAPPED = "#Tapped";
+    public static final String SEALED_PRODUCT = "sealed://";
+    private static final String TOKEN = "token://";
+    
     static {
         IMAGE_CACHE = CacheBuilder.newBuilder()
                                   .softValues()
@@ -108,12 +105,12 @@ public class ImageCache {
                     } else {
                         // original
                         File path;
-                        if (key.endsWith(ImageCache.TOKEN)) {
-                            key = key.substring(0, key.length() - ImageCache.TOKEN.length());
+                        if (key.startsWith(ImageCache.TOKEN)) {
+                            key = key.substring(ImageCache.TOKEN.length());
                             path = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
                         } else if (key.startsWith(SEALED_PRODUCT)) {
                             key = key.substring(SEALED_PRODUCT.length());
-                            path = ForgeProps.getFile(NewConstants.IMAGE_BASE);
+                            path = ForgeProps.getFile(NewConstants.IMAGE_SEALED_PRODUCT);
                         } else {
                             path = ForgeProps.getFile(NewConstants.IMAGE_BASE);
                         }
@@ -300,7 +297,7 @@ public class ImageCache {
     private static String getKey(final Card card) {
 
         if ((card.isToken() && !card.isCopiedToken()) || card.isFaceDown()) {
-            return GuiDisplayUtil.cleanString(card.getImageName()) + ImageCache.TOKEN;
+            return ImageCache.TOKEN + GuiDisplayUtil.cleanString(card.getImageName());
         }
 
         return card.getImageFilename(); // key;
