@@ -6766,11 +6766,23 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else { // source not enchanting a player
                 return false;
             }
-        } else if (property.equals("RememberedPlayerCtrl")) {
-            final Object o = source.getRemembered();
-            if (o instanceof Player) {
-                if (!this.getController().isPlayer((Player) o)) {
-                  return false;
+        } else if (property.startsWith("RememberedPlayerCtrl")) {
+            if (source.getRemembered().isEmpty()) {
+                final Card newCard = AllZoneUtil.getCardState(source);
+                for (final Object o : newCard.getRemembered()) {
+                    if (o instanceof Player) {
+                        if (!this.getController().isPlayer((Player) o)) {
+                            return false;
+                          }
+                    }
+                }
+            }
+
+            for (final Object o : source.getRemembered()) {
+                if (o instanceof Player) {
+                    if (!this.getController().isPlayer((Player) o)) {
+                        return false;
+                      }
                 }
             }
         } else if (property.startsWith("YouOwn")) {
