@@ -86,6 +86,14 @@ Fixes/Features:
 - Fixed some missing set info (thanks Xitax)
 - Added missing ETB tapped keyword to Runed Arch
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- moved product images to separate folder
+- created a main.properties option to point to product images location
+- moved gui downloader to a separate package
+- introducted 'protocols' for imagecache item urls.
+- products and tokens use their unique prefixes to point to the picture location correctly.
+- Fixed the LQ pic URL for Burning Oil and Scorch the Fields.
+- Added LQ pic URLs to Huntmaster of the Fells / Ravager of the Fells.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
