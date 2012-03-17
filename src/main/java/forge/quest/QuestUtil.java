@@ -17,15 +17,12 @@
  */
 package forge.quest;
 
+import forge.*;
+import forge.quest.data.QuestAssets;
+
 import java.util.List;
 
-import forge.AllZone;
-import forge.Card;
-import forge.CardList;
-import forge.CardUtil;
-import forge.Player;
-import forge.quest.QuestEvent.QuestEventType;
-import forge.quest.data.QuestAssets;
+import static forge.quest.QuestEvent.QuestEventType.CHALLENGE;
 
 /**
  * <p>
@@ -65,7 +62,7 @@ public class QuestUtil {
     public static CardList getComputerStartingCards(final QuestEvent qe) {
         final CardList list = new CardList();
 
-        if (qe.getEventType().equals(QuestEventType.CHALLENGE)) {
+        if (qe.getEventType() == CHALLENGE) {
             final List<String> extras = ((QuestChallenge) qe).getAIExtraCards();
 
             for (final String s : extras) {
@@ -116,7 +113,7 @@ public class QuestUtil {
     public static CardList getHumanStartingCards(final QuestAssets qa, final QuestEvent qe) {
         final CardList list = QuestUtil.getHumanStartingCards(qa);
 
-        if (qe.getEventType().equals(QuestEventType.CHALLENGE)) {
+        if (qe.getEventType() == CHALLENGE) {
             final List<String> extras = ((QuestChallenge) qe).getHumanExtraCards();
 
             for (final String s : extras) {

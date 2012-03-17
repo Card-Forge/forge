@@ -17,31 +17,11 @@
  */
 package forge.view.match;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-import net.slightlymagic.braids.util.UtilFunctions;
-import forge.AllZone;
-import forge.CardList;
-import forge.Constant;
+import forge.*;
 import forge.Constant.Zone;
-import forge.Player;
-import forge.Singletons;
 import forge.control.FControl;
 import forge.control.match.ControlWinLose;
-import forge.game.GameEndReason;
-import forge.game.GameFormat;
-import forge.game.GameLossReason;
-import forge.game.GameNew;
-import forge.game.GamePlayerRating;
-import forge.game.GameSummary;
+import forge.game.*;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.gui.OverlayUtils;
@@ -55,12 +35,20 @@ import forge.quest.QuestChallenge;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestUtil;
-import forge.quest.QuestEvent.QuestEventType;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.item.QuestItemType;
 import forge.util.MyRandom;
+import net.slightlymagic.braids.util.UtilFunctions;
+
+import javax.swing.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
+
+import static forge.quest.QuestEvent.QuestEventType.CHALLENGE;
 
 /**
  * <p>
@@ -120,7 +108,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         if (qData.getMode() == QuestMode.Fantasy) {
             int extraLife = 0;
 
-            if (qEvent.getEventType().equals(QuestEventType.CHALLENGE)) {
+            if (qEvent.getEventType() == CHALLENGE) {
                 if (qa.hasItem(QuestItemType.ZEPPELIN)) {
                     extraLife = 3;
                 }
@@ -131,7 +119,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
             final int humanLife = qa.getLife(qData.getMode()) + extraLife;
             int computerLife = 20;
-            if (qEvent.getEventType().equals("challenge")) {
+            if (qEvent.getEventType() == CHALLENGE) {
                 computerLife = ((QuestChallenge) qEvent).getAILife();
             }
 
@@ -194,7 +182,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             this.awardEventCredits();
 
             // Challenge reward credits
-            if (qEvent.getEventType().equals(QuestEventType.CHALLENGE)) {
+            if (qEvent.getEventType() == CHALLENGE) {
                 this.awardChallengeWin();
             }
 
@@ -289,7 +277,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         qData.getCards().clearShopList();
 
-        if (!((QuestChallenge) qEvent).isRepeatable()) {
+        if (qEvent.getEventType() == CHALLENGE && !((QuestChallenge) qEvent).isRepeatable()) {
             qData.getAchievements().addCompletedChallenge(((QuestChallenge) qEvent).getId());
         }
 

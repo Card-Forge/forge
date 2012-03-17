@@ -1,15 +1,5 @@
 package forge.gui.home.quest;
 
-import java.io.File;
-import java.util.Set;
-
-import javax.swing.ImageIcon;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-
-import org.apache.commons.lang3.StringUtils;
-
-import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
@@ -29,7 +19,6 @@ import forge.properties.NewConstants;
 import forge.quest.QuestChallenge;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
-import forge.quest.QuestEvent.QuestEventType;
 import forge.quest.QuestUtil;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
@@ -37,6 +26,14 @@ import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.item.QuestItemType;
 import forge.quest.data.pet.QuestPetAbstract;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import java.io.File;
+import java.util.Set;
+
+import static forge.quest.QuestEvent.QuestEventType.CHALLENGE;
 
 /** 
  * Utilities for the quest submenu, all over the MVC spectrum.
@@ -217,7 +214,7 @@ public class SubmenuQuestUtil {
                     int lifeAI = 20;
                     int lifeHuman = 20;
 
-                    if (selectedOpponent.getEvent().getEventType().equals(QuestEventType.CHALLENGE)) {
+                    if (selectedOpponent.getEvent().getEventType() == CHALLENGE) {
                         int extraLife = 0;
 
                         // If zeppelin has been purchased, gear will be at level 2.
@@ -300,7 +297,7 @@ public class SubmenuQuestUtil {
 
             // Name
             final FLabel lblName = new FLabel.Builder().hoverable(false).build();
-            if (event.getEventType().equals(QuestEventType.CHALLENGE)) {
+            if (event.getEventType() == CHALLENGE) {
                 lblName.setText(event.getTitle() + ": "
                         + StringUtils.capitalize(event.getDifficulty())
                         + (((QuestChallenge) event).isRepeatable() ? ", Repeatable" : ""));
