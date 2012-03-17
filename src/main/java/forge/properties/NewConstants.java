@@ -141,8 +141,6 @@ public final class NewConstants {
     /** Constant <code>IMAGE_ICON="image/icon"</code>. */
     public static final String IMAGE_ICON = "image/icon";
     public static final String IMAGE_SEALED_PRODUCT = "image/product";
-    /** Constant <code>PICS_BOOSTER="pics/booster"</code>. */
-    public static final String PICS_BOOSTER = "pics/booster";
     /** Constant <code>PICS_BOOSTER_IMAGES="pics/booster/images"</code>. */
     public static final String PICS_BOOSTER_IMAGES = "pics/booster/images";
     /** Constant <code>SOUND_BASE="sound/base"</code>. */
