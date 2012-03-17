@@ -1,0 +1,7 @@
+Name:Wolf Pet
+ManaCost:no cost
+Colors:green
+Types:Creature Wolf Pet
+Text:Level 3 Wolf Pet
+PT:2/2
+End

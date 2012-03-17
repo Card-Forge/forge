@@ -1,0 +1,8 @@
+Name:Bird Pet
+ManaCost:no cost
+Colors:white
+Types:Creature Bird Pet
+Text:Level 2 Bird Pet
+PT:1/1
+K:Flying
+End

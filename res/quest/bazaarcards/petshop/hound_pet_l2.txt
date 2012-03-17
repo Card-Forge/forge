@@ -1,0 +1,8 @@
+Name:Hound Pet
+ManaCost:no cost
+Colors:red
+Types:Creature Hound Pet
+Text:Level 2 Hound Pet
+PT:1/1
+K:Haste
+End

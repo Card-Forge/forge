@@ -1,0 +1,8 @@
+Name:Crocodile Pet
+ManaCost:no cost
+Colors:black
+Types:Creature Crocodile Pet
+Text:Level 4 Crocodile Pet
+PT:3/1
+K:Swampwalk
+End

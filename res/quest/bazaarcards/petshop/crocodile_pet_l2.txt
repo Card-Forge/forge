@@ -1,0 +1,7 @@
+Name:Crocodile Pet
+ManaCost:no cost
+Colors:black
+Types:Creature Crocodile Pet
+Text:Level 2 Crocodile Pet
+PT:2/1
+End

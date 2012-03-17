@@ -1,0 +1,9 @@
+Name:Bird Pet
+ManaCost:no cost
+Colors:white
+Types:Creature Bird Pet
+Text:Level 4 Bird Pet
+PT:2/1
+K:Flying
+K:First Strike
+End
