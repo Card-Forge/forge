@@ -83,8 +83,10 @@ public class ControlMatchUI implements CardContainer {
     /**
      * Fires up controllers for each component of UI.
      * 
+     * @param strAvatarIcon &emsp; Filename of non-default avatar icon, if desired.
+     * 
      */
-    public void initMatch(String iconEnemy) {
+    public void initMatch(final String strAvatarIcon) {
         ControlMatchUI.this.showCombat("");
         ControlMatchUI.this.showStack();
 
@@ -97,8 +99,8 @@ public class ControlMatchUI implements CardContainer {
             if (i != 1 && Constant.Runtime.getGameType() == GameType.Quest) {
                     String filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator;
 
-                    if (iconEnemy != null) {
-                        filename += iconEnemy;
+                    if (strAvatarIcon != null) {
+                        filename += strAvatarIcon;
                         final File f = new File(filename);
                         img = (f.exists()
                                 ? new ImageIcon(filename).getImage()
