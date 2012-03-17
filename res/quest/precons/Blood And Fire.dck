@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Blood and Fire
-Description=The ultimate goal of the deck is to have three specific artifacts—Crown of Empires, Scepter of Empires, and Throne of Empires—on the battlefield at the same time.
+Description=This deck features more than a dozen creatures with the bloodthirst ability.
 Deck Type=constructed
 Set=M12
 Image=blood_and_fire.jpg
