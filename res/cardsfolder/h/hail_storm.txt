@@ -3,7 +3,7 @@ ManaCost:1 G G
 Types:Instant
 Text:no text
 A:SP$ DamageAll | Cost$ 1 G G | NumDmg$ 2 | ValidCards$ Creature.attacking | ValidDescription$ each attacking creature. | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals 2 damage to each attacking creature and 1 damage to you and each creature you control.
-SVar:DBDamage:DB$DealDamage | NumDmg$ 1 | SubAbility$ DBDamageAll
+SVar:DBDamage:DB$DealDamage | NumDmg$ 1 | Defined$ You | SubAbility$ DBDamageAll
 SVar:DBDamageAll:DB$DamageAll | NumDmg$ 1 | ValidCards$ Creature.YouCtrl | ValidDescription$ each creature you control.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
