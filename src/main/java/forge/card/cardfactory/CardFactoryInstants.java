@@ -369,7 +369,7 @@ public class CardFactoryInstants {
                 @Override
                 public boolean canPlay() {
                     final CardList library = card.getController().getCardsIn(Zone.Library);
-                    return library.size() >= 3;
+                    return library.size() >= 3 && super.canPlay();
                 }
 
                 @Override
