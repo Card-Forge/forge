@@ -94,6 +94,43 @@ Fixes/Features:
 - Fixed the LQ pic URL for Burning Oil and Scorch the Fields.
 - Added LQ pic URLs to Huntmaster of the Fells / Ravager of the Fells.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Small fix for RememberedPlayerCtrl restriction.
+- Updated some setinfos
+- Fixed Arachnus Web bug
+- Added some more missing SetInfo - thanks Xitax
+- Added LQ pic URLs to:
+Chalice of Life / Chalice of Death
+Lambholt Elder / Silverpelt Werewolf
+Scorned Villager / Moonscarred Werewolf
+Wolfbitten Captive / Krallenhorde Killer
+- Fixed Groundskeeper.
+- Added the missing LQ pic URLs to:
+Grafdigger's Cage
+Increasing Confusion
+Increasing Devotion
+Ovinomancer
+Pursuit of Knowledge
+Secrets of the Dead
+Thraben Doomsayer
+Undead Alchemist
+- Fixing Marsh Flitter double cost description
+- Update dependency, checkstyle
+- Fix Surgespanner apostrophe in detail
+- Several minor edits for readability.
+- Fixed repeatability for quest mode challenges, updated quest panels to reflect this.
+- Added QuestEventType enum to replace string equality checking for quest event types.
+- removed useless key
+- Minor updates involving QuestEventType enum.
+- removed some unused code
+- Fixed runtime avatar switching bug.
+- Checkstyle.
+- Commented out two lines causing compiler warnings.
+- Updated default avatar sprite (thanks WompWomp)
+- Added support for default avatars + skin-unique avatars.
+- Added the script versions of the quest pets
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -140,6 +177,7 @@ Scout's Warning
 Seht's Tiger
 Oriss, Samite Guardian
 Quicken
+Spellweaver Helix
 
 
 end
