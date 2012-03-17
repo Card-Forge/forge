@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
@@ -27,6 +29,7 @@ import forge.properties.NewConstants;
 import forge.quest.QuestChallenge;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
+import forge.quest.QuestEvent.QuestEventType;
 import forge.quest.QuestUtil;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
@@ -218,7 +221,7 @@ public class SubmenuQuestUtil {
                         int extraLife = 0;
 
                         // If zeppelin has been purchased, gear will be at level 2.
-                        if ( qData.getAssets().hasItem(QuestItemType.ZEPPELIN)
+                        if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)
                             && VSubmenuChallenges.SINGLETON_INSTANCE.getCbZep().isSelected()) {
                                 extraLife = 3;
                         }
@@ -296,13 +299,22 @@ public class SubmenuQuestUtil {
             this.add(lblIcon, "h 60px!, w 60px!, gap 10px 10px 10px 0, span 1 2");
 
             // Name
-            final FLabel lblName = new FLabel.Builder()
-                    .text(event.getTitle() + ": " + event.getDifficulty()).hoverable(false).build();
+            final FLabel lblName = new FLabel.Builder().hoverable(false).build();
+            if (event.getEventType().equals(QuestEventType.CHALLENGE)) {
+                lblName.setText(event.getTitle() + ": "
+                        + StringUtils.capitalize(event.getDifficulty())
+                        + (((QuestChallenge) event).isRepeatable() ? ", Repeatable" : ""));
+            }
+            else {
+                lblName.setText(event.getTitle() + ": "
+                        + StringUtils.capitalize(event.getDifficulty()));
+            }
             this.add(lblName, "h 31px!, gap 0 0 10px 5px, wrap");
 
             // Description
             final FTextArea tarDesc = new FTextArea();
             tarDesc.setText(event.getDescription());
+
             tarDesc.setFont(FSkin.getItalicFont(12));
             this.add(tarDesc, "w 80%!, h 30px!");
        }

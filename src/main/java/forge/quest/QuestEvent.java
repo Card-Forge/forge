@@ -28,6 +28,11 @@ import forge.deck.Deck;
  * unique event types: battles, quests, and others.
  */
 public class QuestEvent {
+    /** */
+    public enum QuestEventType { /** */
+        DUEL, /** */
+        CHALLENGE
+    }
     // Default vals if none provided in the event file.
     /** The event deck. */
     private Deck eventDeck = null;
@@ -48,7 +53,7 @@ public class QuestEvent {
     private String name = "Noname";
 
     /** The event type. */
-    private String eventType = null;
+    private QuestEventType eventType = null;
 
     /**
      * <p>
@@ -101,7 +106,7 @@ public class QuestEvent {
      * 
      * @return {@link forge.deck.Deck}
      */
-    public final String getEventType() {
+    public final QuestEventType getEventType() {
         return this.eventType;
     }
 
@@ -133,7 +138,7 @@ public class QuestEvent {
      * @param eventType0
      *            the eventType to set
      */
-    public void setEventType(final String eventType0) {
+    public void setEventType(final QuestEventType eventType0) {
         this.eventType = eventType0;
     }
 

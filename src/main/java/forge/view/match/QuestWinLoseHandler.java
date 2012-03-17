@@ -288,6 +288,10 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         qData.getCards().clearShopList();
 
+        if (!((QuestChallenge) qEvent).isRepeatable()) {
+            qData.getAchievements().addCompletedChallenge(((QuestChallenge) qEvent).getId());
+        }
+
         if (qData.getAvailableChallenges() != null) {
             qData.clearAvailableChallenges();
         }
@@ -563,12 +567,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * 
      */
     private void awardChallengeWin() {
-        if (!((QuestChallenge) qEvent).getRepeatable()) {
-            qData.getAchievements().addCompletedChallenge(((QuestChallenge) qEvent).getId());
-        }
-
-        // Note: challenge only registers as "played" if it's won.
-        // This doesn't seem right, but it's easy to fix. Doublestrike 01-10-11
+        // This method should perhaps be called addChallengesWon() since it's actually
+        // used for "wins before next challenge"
         qData.getAchievements().addChallengesPlayed();
 
         final List<CardPrinted> cardsWon = ((QuestChallenge) qEvent).getCardRewardList();

@@ -68,7 +68,7 @@ public class QuestChallenge extends QuestEvent {
      */
     public QuestChallenge() {
         super();
-        this.setEventType("challenge");
+        this.setEventType(QuestEventType.CHALLENGE);
     }
 
     /**
@@ -113,17 +113,6 @@ public class QuestChallenge extends QuestEvent {
      */
     public final int getId() {
         return this.id;
-    }
-
-    /**
-     * <p>
-     * getRepeatable.
-     * </p>
-     * 
-     * @return {@link java.lang.Boolean}.
-     */
-    public final boolean getRepeatable() {
-        return this.isRepeatable();
     }
 
     /**

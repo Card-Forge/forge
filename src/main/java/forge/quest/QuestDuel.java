@@ -32,7 +32,7 @@ public class QuestDuel extends QuestEvent {
      */
     public QuestDuel() {
         super();
-        this.setEventType("duel");
+        this.setEventType(QuestEventType.DUEL);
     }
 
 }
