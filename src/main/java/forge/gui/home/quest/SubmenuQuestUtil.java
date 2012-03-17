@@ -217,7 +217,7 @@ public class SubmenuQuestUtil {
                     int lifeAI = 20;
                     int lifeHuman = 20;
 
-                    if (selectedOpponent.getEvent().getEventType().equals("challenge")) {
+                    if (selectedOpponent.getEvent().getEventType().equals(QuestEventType.CHALLENGE)) {
                         int extraLife = 0;
 
                         // If zeppelin has been purchased, gear will be at level 2.

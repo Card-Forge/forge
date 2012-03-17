@@ -55,6 +55,7 @@ import forge.quest.QuestChallenge;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestUtil;
+import forge.quest.QuestEvent.QuestEventType;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
@@ -119,7 +120,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         if (qData.getMode() == QuestMode.Fantasy) {
             int extraLife = 0;
 
-            if (qEvent.getEventType().equals("challenge")) {
+            if (qEvent.getEventType().equals(QuestEventType.CHALLENGE)) {
                 if (qa.hasItem(QuestItemType.ZEPPELIN)) {
                     extraLife = 3;
                 }
@@ -193,7 +194,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             this.awardEventCredits();
 
             // Challenge reward credits
-            if (qEvent.getEventType().equals("challenge")) {
+            if (qEvent.getEventType().equals(QuestEventType.CHALLENGE)) {
                 this.awardChallengeWin();
             }
 
