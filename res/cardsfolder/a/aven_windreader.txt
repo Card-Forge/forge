@@ -4,7 +4,7 @@ Types:Creature Bird Soldier Wizard
 Text:no text
 PT:3/3
 K:Flying
-A:AB$ Dig | Cost$ 1 U | DigNum$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SpellDescription$ Target player reveals the top card of his or her library.
+A:AB$ Dig | Cost$ 1 U | DigNum$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | Reveal$ True | NoMove$ True | SpellDescription$ Target player reveals the top card of his or her library.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_windreader.jpg
