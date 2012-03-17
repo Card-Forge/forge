@@ -10,6 +10,7 @@ SVar:DBCursePutCounter:DB$ PutCounter | CounterType$ TIME | CounterNum$ 2 | Cond
 SVar:DBCurseCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:CurseX:TargetedPlayer$Valid Permanent.YouCtrl/HalfDown
 SVar:CurseY:Remembered$Amount
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_cabal.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/99.jpg
