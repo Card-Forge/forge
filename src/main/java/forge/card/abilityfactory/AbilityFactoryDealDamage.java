@@ -1678,7 +1678,7 @@ public class AbilityFactoryDealDamage {
 
     private boolean fightCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
 
-        final Target tgt = sa.getTarget();
+        //final Target tgt = sa.getTarget();
 
         return false;
     }

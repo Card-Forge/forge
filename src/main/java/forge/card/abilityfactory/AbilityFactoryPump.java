@@ -283,7 +283,7 @@ public class AbilityFactoryPump {
         final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
         final Player computer = AllZone.getComputerPlayer();
         final Player human = AllZone.getHumanPlayer();
-        int attack = getNumAttack(sa);
+        //int attack = getNumAttack(sa);
         //int defense = getNumDefense(sa);
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
