@@ -61,6 +61,7 @@ public class ForgePreferences {
         UI_BUGZ_PWD (""), /** */
         UI_ANTE ("false"), /** */
         UI_SKIN ("default"), /** */
+        UI_PREFERRED_AVATARS_ONLY ("false"), /** */
 
         SUBMENU_CURRENTMENU (EMenuItem.CONSTRUCTED.toString()), /** */
         SUBMENU_SANCTIONED ("false"), /** */
