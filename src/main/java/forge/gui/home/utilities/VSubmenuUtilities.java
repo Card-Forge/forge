@@ -104,7 +104,7 @@ public enum VSubmenuUtilities implements IVSubmenu {
 
         pnlContent.add(btnHowToPlay, constraintsBTN);
         pnlContent.add(new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-                .text("Rules of ")
+                .text("Rules of the Game.")
                 .fontStyle(Font.ITALIC).build(), constraintsLBL);
 
         pnlContent.add(btnLicensing, constraintsBTN);
