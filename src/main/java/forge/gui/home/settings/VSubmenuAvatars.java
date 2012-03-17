@@ -133,14 +133,14 @@ public enum VSubmenuAvatars implements IVSubmenu {
         lblAvatarHuman.setSelected(true);
 
         final String[] indexes = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
-        int humanIndex = Integer.parseInt(indexes[0]);
-        int aiIndex = Integer.parseInt(indexes[1]);
+        int aiIndex = Integer.parseInt(indexes[0]);
+        int humanIndex = Integer.parseInt(indexes[1]);
 
         if (humanIndex >= FSkin.getAvatars().size()) { humanIndex = 0; }
         if (aiIndex >= FSkin.getAvatars().size()) { aiIndex = 0; }
 
-        lblAvatarHuman.setIcon(new ImageIcon(FSkin.getAvatars().get(humanIndex)));
         lblAvatarAI.setIcon(new ImageIcon(FSkin.getAvatars().get(aiIndex)));
+        lblAvatarHuman.setIcon(new ImageIcon(FSkin.getAvatars().get(humanIndex)));
 
         Singletons.getModel().getPreferences().setPref(FPref.UI_AVATARS, aiIndex + "," + humanIndex);
         Singletons.getModel().getPreferences().save();
