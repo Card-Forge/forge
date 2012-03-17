@@ -10705,6 +10705,7 @@ res/pics_product/tournamentpacks/SHM.jpg -text
 res/pics_product/tournamentpacks/TMP.jpg -text
 res/pics_product/tournamentpacks/TSP.jpg -text
 res/pics_product/tournamentpacks/USG.jpg -text
+res/product-images.txt -text
 res/quest/all-prices.txt svneol=native#text/plain
 res/quest/bazaar/index.xml -text
 res/quest/bazaarcards/nursery/plant_wall_l1.txt -text
