@@ -45,7 +45,7 @@ import forge.util.MyRandom;
 
 /**
  * <p>
- * AbilityFactory_DealDamage class.
+ * AbilityFactoryDealDamage class.
  * </p>
  * 
  * @author Forge
@@ -58,7 +58,7 @@ public class AbilityFactoryDealDamage {
 
     /**
      * <p>
-     * Constructor for AbilityFactory_DealDamage.
+     * Constructor for AbilityFactoryDealDamage.
      * </p>
      * 
      * @param newAF
@@ -76,7 +76,7 @@ public class AbilityFactoryDealDamage {
 
     /**
      * <p>
-     * getAbilitDealDamagey.
+     * getAbilitDealDamage.
      * </p>
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
@@ -197,7 +197,7 @@ public class AbilityFactoryDealDamage {
 
     /**
      * <p>
-     * damageStackDescription.
+     * dealDamageStackDescription.
      * </p>
      * 
      * @param af
@@ -723,7 +723,7 @@ public class AbilityFactoryDealDamage {
 
     /**
      * <p>
-     * damageDoTriggerAI.
+     * damageDoTriggerAINoCost.
      * </p>
      * 
      * @param af
@@ -782,7 +782,7 @@ public class AbilityFactoryDealDamage {
 
     /**
      * <p>
-     * doResolve.
+     * dealDamageResolve.
      * </p>
      * 
      * @param saMe
@@ -1519,7 +1519,7 @@ public class AbilityFactoryDealDamage {
     // *************************************************************************
     /**
      * <p>
-     * getAbilityEachDamage.
+     * getAbilityFight.
      * </p>
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
@@ -1558,7 +1558,7 @@ public class AbilityFactoryDealDamage {
 
     /**
      * <p>
-     * getSpellEachDamage.
+     * getSpellFight.
      * </p>
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
@@ -1596,7 +1596,7 @@ public class AbilityFactoryDealDamage {
 
     /**
      * <p>
-     * getDrawbackEachDamage.
+     * getDrawbackFight.
      * </p>
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
@@ -1635,7 +1635,7 @@ public class AbilityFactoryDealDamage {
 
     /**
      * <p>
-     * eachDamageStackDescription.
+     * fightStackDescription.
      * </p>
      * 
      * @param af
