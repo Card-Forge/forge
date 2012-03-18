@@ -133,6 +133,21 @@ Undead Alchemist
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added product image download list (excludes boosters because there's already a list for that)
+- Added a fluff piece to the changes.txt file.
+- fix Hail Storm not damaging You
+- Fixed Oblivion Stone.
+- Fixed Aven Windreader.
+- Fixed Evil Eye of Urborg.
+- Fixed canPlay() function of Intuition.
+- Added SVar:RemAIDeck:True to Curse of the Cabal.
+- clean up javadoc comments in AFDealDamage
+- bazaar items data model
+- Added missing word in How to play description
+- Fixed ClassCastException at the end of quest games
+- Fixed bug where first quest game was always starting with 20 life.
+- Restored Zeppelin life behavior.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
