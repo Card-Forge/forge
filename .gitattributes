@@ -2212,6 +2212,7 @@ res/cardsfolder/d/dirtcowl_wurm.txt svneol=native#text/plain
 res/cardsfolder/d/dirtwater_wraith.txt svneol=native#text/plain
 res/cardsfolder/d/dirty_wererat.txt svneol=native#text/plain
 res/cardsfolder/d/disappear.txt svneol=native#text/plain
+res/cardsfolder/d/disarm.txt -text
 res/cardsfolder/d/disaster_radius.txt -text
 res/cardsfolder/d/disciple_of_grace.txt svneol=native#text/plain
 res/cardsfolder/d/disciple_of_griselbrand.txt -text
