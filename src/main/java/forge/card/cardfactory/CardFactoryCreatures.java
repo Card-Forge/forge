@@ -182,7 +182,7 @@ public class CardFactoryCreatures {
      *            a {@link forge.card.cardfactory.CardFactoryInterface} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCard(final Card card, final String cardName, final CardFactoryInterface cf) {
+    public static Card getCard(final Card card, final String cardName) {
 
         // *************** START *********** START **************************
         if (cardName.equals("Force of Savagery")) {
@@ -1798,7 +1798,6 @@ public class CardFactoryCreatures {
                 || cardName.equals("Phyrexian Metamorph") || cardName.equals("Phantasmal Image")
                 || cardName.equals("Body Double") || cardName.equals("Evil Twin")
                 || cardName.equals("Sakashima the Impostor")) {
-            final CardFactoryInterface cfact = cf;
             final Card[] copyTarget = new Card[1];
 
             final SpellAbility copy = new Spell(card) {
@@ -1839,7 +1838,10 @@ public class CardFactoryCreatures {
                             cloned.setBaseDefense(copyTarget[0].getBaseDefense());
                         }
                         else {
-                            cloned = cfact.getCard(copyTarget[0].getState("Original").getName(), card.getOwner());
+                            Card origin = copyTarget[0];
+                            // TODO: transform back before copying
+                            cloned = AbstractCardFactory.getCard2(origin, card.getOwner());
+                            // TODO: transform origin back to how it was (if needed)
                         }
                         card.addAlternateState("Cloner");
                         card.switchStates("Original", "Cloner");

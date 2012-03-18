@@ -450,6 +450,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         return result;
     }
 
+
     protected Card getCard2(final String cardName, final Player owner) {
         // o should be Card object
         final Card o = this.map.get(cardName);
@@ -458,8 +459,14 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             sb.append("CardFactory : getCard() invalid card name - ").append(cardName);
             throw new RuntimeException(sb.toString());
         }
+        return getCard2(o, owner);
+    }
+    
+    
+    public static Card getCard2(final Card original, final Player owner) {
 
-        final Card card = CardFactoryUtil.copyStats(o);
+        final String cardName = original.getName();
+        final Card card = CardFactoryUtil.copyStats(original);
         card.setOwner(owner);
         if (!card.isCardColorsOverridden()) {
             card.addColor(card.getManaCost());
@@ -494,7 +501,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         // ************** Link to different CardFactories *******************
         Card card2 = null;
         if (card.isCreature()) {
-            card2 = CardFactoryCreatures.getCard(card, cardName, this);
+            card2 = CardFactoryCreatures.getCard(card, cardName);
         } else if (card.isAura()) {
             card2 = CardFactoryAuras.getCard(card, cardName);
         } else if (card.isEquipment()) {
@@ -502,7 +509,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         } else if (card.isPlaneswalker()) {
             card2 = CardFactoryPlaneswalkers.getCard(card, cardName);
         } else if (card.isLand()) {
-            card2 = CardFactoryLands.getCard(card, cardName, this);
+            card2 = CardFactoryLands.getCard(card, cardName);
         } else if (card.isInstant()) {
             card2 = CardFactoryInstants.getCard(card, cardName);
         } else if (card.isSorcery()) {
@@ -1386,7 +1393,6 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Copy Artifact") || cardName.equals("Sculpting Steel")) {
-            final CardFactoryInterface cfact = this;
             final Card[] copyTarget = new Card[1];
 
             final SpellAbility copy = new Spell(card) {
@@ -1406,7 +1412,10 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                         AllZone.getTriggerHandler().suppressMode("Transformed");
 
-                        cloned = cfact.getCard(copyTarget[0].getState("Original").getName(), card.getOwner());
+                        // TODO: transform back and forth
+                        cloned = getCard2(copyTarget[0], card.getOwner());
+                        // TODO: untransform
+                        
                         card.addAlternateState("Cloner");
                         card.switchStates("Original", "Cloner");
                         card.setState("Original");

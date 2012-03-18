@@ -65,7 +65,7 @@ class CardFactoryLands {
      *            a {@link forge.card.cardfactory.CardFactoryInterface} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCard(final Card card, final String cardName, final CardFactoryInterface cf) {
+    public static Card getCard(final Card card, final String cardName) {
 
         // *************** START *********** START **************************
         // Ravinca Dual Lands

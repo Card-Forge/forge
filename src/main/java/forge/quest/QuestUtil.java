@@ -22,6 +22,7 @@ import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Player;
+import forge.card.cardfactory.AbstractCardFactory;
 import forge.quest.bazaar.QuestPetController;
 
 import java.util.List;
@@ -95,10 +96,10 @@ public class QuestUtil {
             if (pet != null) {
                 Card c = pet.getPetCard(qc.getAssets());
                 if ( c != null ){
-                    Card petCard = AllZone.getCardFactory().copyCard(c); 
+                    Card petCard = AbstractCardFactory.getCard2(c, AllZone.getHumanPlayer()); 
                     petCard.addController(AllZone.getHumanPlayer());
                     petCard.setToken(true);
-                    list.add(petCard);
+                    // list.add(petCard);
                 }
             }
         }
