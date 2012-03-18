@@ -45,6 +45,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
@@ -1986,6 +1987,16 @@ public final class AbilityFactoryChangeZone {
                         }
                     } else {
                         movedCard = Singletons.getModel().getGameAction().moveTo(pl.getZone(destination), tgtC);
+                        // If a card is Exiled from the stack, remove its spells from the stack
+                        if (params.containsKey("Fizzle")) {
+                            ArrayList<SpellAbility> spells = tgtC.getSpellAbilities();
+                            for (SpellAbility spell : spells) {
+                                if (tgtC.isInZone(Zone.Exile)) {
+                                    final SpellAbilityStackInstance si = AllZone.getStack().getInstanceFromSpellAbility(spell);
+                                    AllZone.getStack().remove(si);
+                                }
+                            }
+                        }
                         if (params.containsKey("ExileFaceDown")) {
                             movedCard.setState("FaceDown");
                         }

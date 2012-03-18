@@ -1,0 +1,13 @@
+Name:Knowledge Pool
+ManaCost:6
+Types:Artifact
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigKnowledgeExile | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, each player exiles the top three cards of his or her library.
+SVar:TrigKnowledgeExile:AB$ Mill | Cost$ 0 | NumCards$ 3 | Defined$ Each | Destination$ Exile | Imprint$ True
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromHand | Execute$ TrigKnowledgeExileSpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell from his or her hand, that player exiles it. If the player does, he or she may cast another nonland card exiled with CARDNAME without paying that card's mana cost.
+SVar:TrigKnowledgeExileSpell:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Stack | Destination$ Exile | Imprint$ True | Fizzle$ True | SubAbility$ DBKnowledgePlaySpell | RememberChanged$ True
+SVar:DBKnowledgePlaySpell:DB$ Play | ValidZone$ Exile | Valid$ Card.IsImprinted+nonLand | Controller$ TriggeredCardController | WithoutManaCost$ True | Optional$ True | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.IsRemembered | ConditionCompare$ EQ1 | SubAbility$ DBKnowledgeCleanup
+SVar:DBKnowledgeCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knowledge_pool.jpg
+End

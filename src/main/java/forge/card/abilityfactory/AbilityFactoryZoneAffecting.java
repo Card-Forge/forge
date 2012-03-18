@@ -990,6 +990,11 @@ public class AbilityFactoryZoneAffecting {
                         source.addRemembered(c);
                     }
                 }
+                if (params.containsKey("Imprint")) {
+                    for (final Card c : milled) {
+                        source.addImprinted(c);
+                    }
+                }
             }
         }
     }
