@@ -1,6 +1,6 @@
 Name:Obstinate Familiar
 ManaCost:R
-Types:Creature Human Wizard
+Types:Creature Lizard
 Text:no text
 PT:1/1
 R:Event$ Draw | ValidPlayer$ You | Optional$ True | Prevent$ True | AICheckSVar$ AIHandling | AISVarCompare$ EQ0 | Description$ If you would draw a card, you may skip that draw instead.

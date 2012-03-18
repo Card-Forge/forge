@@ -1,6 +1,6 @@
 Name:Savage Firecat
 ManaCost:3 R R
-Types:Creature Elemental
+Types:Creature Elemental Cat
 Text:no text
 PT:0/0
 K:etbCounter:P1P1:7

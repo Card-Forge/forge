@@ -1,6 +1,6 @@
 Name:Petradon
 ManaCost:6 R R
-Types:Creature Nightmare Horror
+Types:Creature Nightmare Beast
 Text:no text
 PT:5/6
 A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.

@@ -1,6 +1,6 @@
 Name:Vine Trellis
 ManaCost:1 G
-Types:Creature Wall
+Types:Creature Plant Wall
 Text:no text
 PT:0/4
 K:Defender

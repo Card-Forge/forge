@@ -1,6 +1,6 @@
 Name:Crater Hellion
 ManaCost:4 R R
-Types:Creature Hellion
+Types:Creature Hellion Beast
 Text:no text
 PT:6/6
 K:Echo:4 R R

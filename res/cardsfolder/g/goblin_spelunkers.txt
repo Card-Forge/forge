@@ -1,6 +1,6 @@
 Name:Goblin Spelunkers
 ManaCost:2 R
-Types:Creature Goblin
+Types:Creature Goblin Warrior
 Text:no text
 PT:2/2
 K:Mountainwalk

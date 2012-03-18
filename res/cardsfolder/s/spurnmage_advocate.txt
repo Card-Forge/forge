@@ -1,6 +1,6 @@
 Name:Spurnmage Advocate
 ManaCost:W
-Types:Creature Human Cleric
+Types:Creature Human Nomad
 Text:no text
 PT:1/1
 A:AB$ ChangeZone | Cost$ T | ValidTgts$ Card.YouDontCtrl | TargetMin$ 2 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBDestroy | SpellDescription$ Return two target cards from an opponent's graveyard to his or her hand. Destroy target attacking creature.
