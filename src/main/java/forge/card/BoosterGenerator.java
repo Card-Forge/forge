@@ -24,10 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
+import forge.util.Lambda1;
 import forge.util.MyRandom;
 import forge.util.Predicate;
 

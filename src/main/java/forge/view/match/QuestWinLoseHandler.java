@@ -31,14 +31,14 @@ import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
 import forge.model.FMatchState;
 import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestChallenge;
+import forge.quest.QuestEventChallenge;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
+import forge.quest.QuestMode;
 import forge.quest.QuestUtil;
+import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.data.item.QuestItemType;
 import forge.util.MyRandom;
 import net.slightlymagic.braids.util.UtilFunctions;
 
@@ -47,8 +47,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
-
-import static forge.quest.QuestEvent.QuestEventType.CHALLENGE;
 
 /**
  * <p>
@@ -108,19 +106,19 @@ public class QuestWinLoseHandler extends ControlWinLose {
         if (qData.getMode() == QuestMode.Fantasy) {
             int extraLife = 0;
 
-            if (qEvent.getEventType() == CHALLENGE) {
+            if (qEvent instanceof QuestEventChallenge ) {
                 if (qa.hasItem(QuestItemType.ZEPPELIN)) {
                     extraLife = 3;
                 }
             }
 
-            final CardList humanList = QuestUtil.getHumanStartingCards(qa, qEvent);
+            final CardList humanList = QuestUtil.getHumanStartingCards(qData, qEvent);
             final CardList computerList = QuestUtil.getComputerStartingCards(qEvent);
 
             final int humanLife = qa.getLife(qData.getMode()) + extraLife;
             int computerLife = 20;
-            if (qEvent.getEventType() == CHALLENGE) {
-                computerLife = ((QuestChallenge) qEvent).getAILife();
+            if (qEvent instanceof QuestEventChallenge) {
+                computerLife = ((QuestEventChallenge) qEvent).getAILife();
             }
 
             GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
@@ -182,7 +180,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             this.awardEventCredits();
 
             // Challenge reward credits
-            if (qEvent.getEventType() == CHALLENGE) {
+            if (qEvent instanceof QuestEventChallenge) {
                 this.awardChallengeWin();
             }
 
@@ -277,8 +275,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         qData.getCards().clearShopList();
 
-        if (qEvent.getEventType() == CHALLENGE && !((QuestChallenge) qEvent).isRepeatable()) {
-            qData.getAchievements().addCompletedChallenge(((QuestChallenge) qEvent).getId());
+        if (qEvent instanceof QuestEventChallenge && !((QuestEventChallenge) qEvent).isRepeatable()) {
+            qData.getAchievements().addCompletedChallenge(((QuestEventChallenge) qEvent).getId());
         }
 
         if (qData.getAvailableChallenges() != null) {
@@ -560,8 +558,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         // used for "wins before next challenge"
         qData.getAchievements().addChallengesPlayed();
 
-        final List<CardPrinted> cardsWon = ((QuestChallenge) qEvent).getCardRewardList();
-        final long questRewardCredits = ((QuestChallenge) qEvent).getCreditsReward();
+        final List<CardPrinted> cardsWon = ((QuestEventChallenge) qEvent).getCardRewardList();
+        final long questRewardCredits = ((QuestEventChallenge) qEvent).getCreditsReward();
 
         final StringBuilder sb = new StringBuilder();
         sb.append("<html>Challenge completed.<br><br>");
@@ -571,7 +569,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         // Generate Swing components and attach.
         this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
-        this.lblTemp1 = new TitleLabel("Challenge Rewards for \"" + ((QuestChallenge) qEvent).getTitle()
+        this.lblTemp1 = new TitleLabel("Challenge Rewards for \"" + ((QuestEventChallenge) qEvent).getTitle()
                 + "\"");
 
         this.lblTemp2 = new JLabel(sb.toString());

@@ -113,6 +113,7 @@ public interface CardFactoryInterface extends Iterable<Card> {
      *         blankCard
      */
     Card getCard(String cardName, Player owner);
+    //Card getCard2(final String cardName, final Card o, final Player owner);
 
     /**
      * Fetch a random combination of cards without any duplicates.

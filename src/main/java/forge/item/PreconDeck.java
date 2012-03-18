@@ -21,7 +21,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 
 import forge.ImageCache;
 import forge.Singletons;
@@ -29,6 +28,7 @@ import forge.deck.Deck;
 import forge.quest.SellRules;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import forge.util.Lambda1;
 
 /**
  * TODO: Write javadoc for this type.

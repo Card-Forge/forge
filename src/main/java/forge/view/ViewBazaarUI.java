@@ -10,7 +10,7 @@ import forge.control.ControlBazaarUI;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
-import forge.quest.QuestStallManager;
+import forge.quest.bazaar.QuestBazaarManager;
 import forge.view.bazaar.ViewStall;
 
 
@@ -22,12 +22,12 @@ public class ViewBazaarUI extends FPanel {
     private final ViewStall pnlSingleStall;
     private final ControlBazaarUI control;
     private FLabel previousSelected;
-    private final QuestStallManager bazaar;
+    private final QuestBazaarManager bazaar;
 
     /** Lays out containers and borders for resizeable layout and
      *  instantiates top-level controller for bazaar UI.
      * @param bazaar0 */
-    public ViewBazaarUI(QuestStallManager bazaar0) {
+    public ViewBazaarUI(QuestBazaarManager bazaar0) {
         super();
 
         // Final inits

@@ -14,8 +14,9 @@ import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
 import forge.gui.toolbox.FLabel;
-import forge.quest.QuestChallenge;
+import forge.quest.QuestEventChallenge;
 import forge.quest.QuestController;
+import forge.quest.bazaar.QuestPetController;
 import forge.view.ViewHomeUI;
 
 /** 
@@ -76,28 +77,18 @@ public enum CSubmenuChallenges implements ICSubmenu {
         view.getCbPlant().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                quest.getAssets().getPetManager().setUsePlant(view.getCbPlant().isSelected());
-            }
-        });
-
-        view.getCbZep().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                quest.getAssets().getPetManager().setUsePlant(view.getCbZep().isSelected());
+                quest.selectPet(0, view.getCbPlant().isSelected() ? "Plant" : null);
             }
         });
 
         view.getCbxPet().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                final int SLOT = 1;
                 final int index = view.getCbxPet().getSelectedIndex();
-                if (index != -1 && index != 0) {
-                    final String pet = ((String) view.getCbxPet().getSelectedItem());
-                    quest.getAssets().getPetManager().setSelectedPet(pet.substring(7));
-                }
-                else {
-                    quest.getAssets().getPetManager().setSelectedPet(null);
-                }
+                List<QuestPetController> pets = quest.getPetsStorage().getAvaliablePets(SLOT, quest.getAssets());
+                String petName = index <= 0 || index > pets.size() ? null : pets.get(index-1).getName(); 
+                quest.selectPet(SLOT, petName);
             }
         });
     }
@@ -115,9 +106,9 @@ public enum CSubmenuChallenges implements ICSubmenu {
             view.getLblTitle().setText("Challenges: " + AllZone.getQuest().getRank());
 
             view.getPnlChallenges().removeAll();
-            final List<QuestChallenge> challenges = AllZone.getQuest().getEventManager().generateChallenges();
+            final List<QuestEventChallenge> challenges = AllZone.getQuest().getEventManager().generateChallenges();
 
-            for (final QuestChallenge c : challenges) {
+            for (final QuestEventChallenge c : challenges) {
                 final SelectablePanel temp = new SelectablePanel(c);
                 view.getPnlChallenges().add(temp, "w 96%!, h 86px!, gap 2% 0 5px 5px");
             }

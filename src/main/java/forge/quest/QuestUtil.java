@@ -22,11 +22,9 @@ import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Player;
-import forge.quest.data.QuestAssets;
+import forge.quest.bazaar.QuestPetController;
 
 import java.util.List;
-
-import static forge.quest.QuestEvent.QuestEventType.CHALLENGE;
 
 /**
  * <p>
@@ -66,8 +64,8 @@ public class QuestUtil {
     public static CardList getComputerStartingCards(final QuestEvent qe) {
         final CardList list = new CardList();
 
-        if (qe.getEventType() == CHALLENGE) {
-            final List<String> extras = ((QuestChallenge) qe).getAIExtraCards();
+        if (qe instanceof QuestEventChallenge) {
+            final List<String> extras = ((QuestEventChallenge) qe).getAIExtraCards();
 
             for (final String s : extras) {
                 list.add(QuestUtil.readExtraCard(s, AllZone.getComputerPlayer()));
@@ -87,15 +85,22 @@ public class QuestUtil {
      *            a {@link forge.quest.data.QuestData} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanStartingCards(final QuestAssets qd) {
+    public static CardList getHumanStartingCards(final QuestController qc) {
         final CardList list = new CardList();
 
-        if (qd.getPetManager().shouldPetBeUsed()) {
-            list.add(qd.getPetManager().getSelectedPet().getPetCard());
-        }
-
-        if (qd.getPetManager().shouldPlantBeUsed()) {
-            list.add(qd.getPetManager().getPlant().getPetCard());
+        for( int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++ )
+        {
+            String petName = qc.getSelectedPet(iSlot); 
+            QuestPetController pet = qc.getPetsStorage().getPet(petName);
+            if (pet != null) {
+                Card c = pet.getPetCard(qc.getAssets());
+                if ( c != null ){
+                    Card petCard = AllZone.getCardFactory().copyCard(c); 
+                    petCard.addController(AllZone.getHumanPlayer());
+                    petCard.setToken(true);
+                    list.add(petCard);
+                }
+            }
         }
 
         return list;
@@ -114,11 +119,11 @@ public class QuestUtil {
      *            a {@link forge.quest.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanStartingCards(final QuestAssets qa, final QuestEvent qe) {
-        final CardList list = QuestUtil.getHumanStartingCards(qa);
+    public static CardList getHumanStartingCards(final QuestController qc, final QuestEvent qe) {
+        final CardList list = QuestUtil.getHumanStartingCards(qc);
 
-        if (qe.getEventType() == CHALLENGE) {
-            final List<String> extras = ((QuestChallenge) qe).getHumanExtraCards();
+        if (qe instanceof QuestEventChallenge) {
+            final List<String> extras = ((QuestEventChallenge) qe).getHumanExtraCards();
 
             for (final String s : extras) {
                 list.add(QuestUtil.readExtraCard(s, AllZone.getHumanPlayer()));

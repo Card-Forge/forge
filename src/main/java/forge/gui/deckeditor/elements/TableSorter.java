@@ -20,8 +20,8 @@ package forge.gui.deckeditor.elements;
 import java.util.Comparator;
 import java.util.Map.Entry;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.item.CardPrinted;
+import forge.util.Lambda1;
 
 /**
  * <p>

@@ -18,30 +18,27 @@
  * limitations under the Apache License.
  *
  */
-package net.slightlymagic.braids.util.lambda;
+package forge.util;
+
 
 /**
- * The Class Lambda2.
+ * The Class Lambda1.
  * 
  * @param <R>
  *            the generic type
  * @param <A1>
  *            the generic type
- * @param <A2>
- *            the generic type
  */
-public abstract class Lambda2<R, A1, A2> implements Lambda<R> {
+public abstract class Lambda1<R, A1> implements Lambda<R> {
 
     /**
      * Apply.
      * 
      * @param arg1
      *            the arg1
-     * @param arg2
-     *            the arg2
      * @return the r
      */
-    public abstract R apply(A1 arg1, A2 arg2);
+    public abstract R apply(A1 arg1);
 
     /*
      * (non-Javadoc)
@@ -59,7 +56,7 @@ public abstract class Lambda2<R, A1, A2> implements Lambda<R> {
      */
     @SuppressWarnings("unchecked")
     public final R apply(final Object[] args) {
-        return apply((A1) args[0], (A2) args[1]);
+        return apply((A1) args[0]);
     }
 
 }

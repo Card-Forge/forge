@@ -15,24 +15,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest;
+package forge.quest.bazaar;
 
+import forge.quest.data.QuestAssets;
 
 /**
  * <p>
- * QuestDuel class.
+ * QuestItemZeppelin class.
  * </p>
- * MODEL - A single duel event data instance, including meta and deck.
  * 
+ * @author Forge
+ * @version $Id$
  */
-public class QuestDuel extends QuestEvent {
-
+public class QuestItemZeppelin extends QuestItemBasic {
     /**
-     * Instantiates a new quest duel.
+     * <p>
+     * Constructor for QuestItemZeppelin.
+     * </p>
      */
-    public QuestDuel() {
-        super();
-        this.setEventType(QuestEventType.DUEL);
+    QuestItemZeppelin() {
+        super(QuestItemType.ZEPPELIN); // , QuestStallManager.GEAR
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public final boolean isAvailableForPurchase(QuestAssets qA) {
+        return super.isAvailableForPurchase(qA) && qA.hasItem(QuestItemType.MAP);
+    }
+
 
 }

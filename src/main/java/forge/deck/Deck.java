@@ -28,7 +28,6 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,6 +38,7 @@ import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import forge.util.Lambda1;
 
 /**
  * <p>

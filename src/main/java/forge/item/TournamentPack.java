@@ -19,12 +19,12 @@ package forge.item;
 
 import java.util.List;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.ImageCache;
 import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
+import forge.util.Lambda1;
 
 /**
  * TODO Write javadoc for this type.

@@ -15,40 +15,39 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data.item;
+package forge.quest.bazaar;
 
 import forge.quest.data.QuestAssets;
 
 /**
- * <p>
- * QuestItemEstates class.
- * </p>
+ * This item has special coding.
  * 
  * @author Forge
  * @version $Id$
  */
-public class QuestItemEstates extends QuestItemPassive {
+public class QuestItemElixir extends QuestItemBasic {
+
     /**
      * <p>
-     * Constructor for QuestItemEstates.
+     * Constructor for QuestItemElixir.
      * </p>
      */
-    QuestItemEstates() {
-        super(QuestItemType.ESTATES); // QuestStallManager.BANKER,
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final String getPurchaseDescription(QuestAssets qA) {
-        return String.format(super.getPurchaseDescription(qA),
-                (10 + (qA.getItemLevel(this.getItemType()) * 5)),
-                (1 + (qA.getItemLevel(this.getItemType()) * 0.75)));
+    QuestItemElixir() {
+        super(QuestItemType.ELIXIR_OF_LIFE); // QuestStallManager.ALCHEMIST,
     }
 
     /** {@inheritDoc} */
     @Override
     public final int getBuyingPrice(QuestAssets qA) {
         int level = qA.getItemLevel(this.getItemType());
-        return getBasePrice() * (2 + level);
+        if ( level < 5) {
+            return super.getBasePrice();
+        } else if (level < 10) {
+            return super.getBasePrice() * 2;
+        } else if (level <= this.getMaxLevel()) {
+            return super.getBasePrice() * 3;
+        } else {
+            return 0;
+        }
     }
 }

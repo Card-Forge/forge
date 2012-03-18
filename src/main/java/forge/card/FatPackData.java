@@ -1,7 +1,7 @@
 package forge.card;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.util.FileSection;
+import forge.util.Lambda1;
 import forge.util.StorageReaderFile;
 
 /** 

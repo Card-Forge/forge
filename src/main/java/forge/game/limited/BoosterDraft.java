@@ -29,7 +29,6 @@ import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
 import net.slightlymagic.braids.util.UtilFunctions;
-import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
@@ -48,6 +47,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
+import forge.util.Lambda1;
 
 /**
  * 

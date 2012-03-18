@@ -1,4 +1,4 @@
-package forge.quest.data;
+package forge.quest;
 
 public enum QuestStartPool {
     Complete,

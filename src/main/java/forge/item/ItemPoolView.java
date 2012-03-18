@@ -24,9 +24,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.CardList;
 import forge.card.CardRules;
+import forge.util.Lambda1;
 
 /**
  * <p>

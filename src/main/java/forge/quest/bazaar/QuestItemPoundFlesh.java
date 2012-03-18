@@ -15,10 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data.item;
+package forge.quest.bazaar;
 
+import forge.quest.QuestMode;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.QuestMode;
 
 /**
  * This item has special coding.
@@ -26,7 +26,7 @@ import forge.quest.data.QuestMode;
  * @author Forge
  * @version $Id: QuestItemElixir.java 13728 2012-02-01 11:13:34Z moomarc $
  */
-public class QuestItemPoundFlesh extends QuestItemPassive {
+public class QuestItemPoundFlesh extends QuestItemBasic {
 
     /**
      * <p>

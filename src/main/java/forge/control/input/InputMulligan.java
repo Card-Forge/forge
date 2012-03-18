@@ -38,7 +38,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GamePlayerRating;
 import forge.quest.QuestController;
-import forge.quest.data.item.QuestItemType;
+import forge.quest.bazaar.QuestItemType;
  /**
   * <p>
   * InputMulligan class.

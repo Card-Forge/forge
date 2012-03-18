@@ -32,7 +32,7 @@ import forge.item.CardPrinted;
  * quest-specific properties.
  * 
  */
-public class QuestChallenge extends QuestEvent {
+public class QuestEventChallenge extends QuestEvent {
     // ID (default -1, should be explicitly set at later time.)
     /** The id. */
     private int id = -1;
@@ -66,9 +66,8 @@ public class QuestChallenge extends QuestEvent {
     /**
      * Instantiates a new quest challenge.
      */
-    public QuestChallenge() {
+    public QuestEventChallenge() {
         super();
-        this.setEventType(QuestEventType.CHALLENGE);
     }
 
     /**

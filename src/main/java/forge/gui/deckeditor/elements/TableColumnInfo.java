@@ -21,7 +21,8 @@ import java.util.Map.Entry;
 
 import javax.swing.table.TableCellRenderer;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
+import forge.util.Lambda1;
+
 
 /**
  * Holds single column set up for TableModel. Contains name, width + functions

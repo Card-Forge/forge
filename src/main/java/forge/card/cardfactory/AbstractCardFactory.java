@@ -450,20 +450,9 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         return result;
     }
 
-    /**
-     * <p>
-     * getCard2.
-     * </p>
-     * 
-     * @param cardName
-     *            a {@link java.lang.String} object.
-     * @param owner
-     *            a {@link forge.Player} object.
-     * @return a {@link forge.Card} object.
-     */
     protected Card getCard2(final String cardName, final Player owner) {
         // o should be Card object
-        final Object o = this.map.get(cardName);
+        final Card o = this.map.get(cardName);
         if (o == null) {
             final StringBuilder sb = new StringBuilder();
             sb.append("CardFactory : getCard() invalid card name - ").append(cardName);

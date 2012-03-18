@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data.item;
+package forge.quest.bazaar;
 
 import javax.swing.ImageIcon;
 
@@ -35,10 +35,10 @@ import forge.quest.data.QuestAssets;
  * @author Forge
  * @version $Id$
  */
-public class QuestItemPassive implements IQuestStallPurchasable {
+public class QuestItemBasic implements IQuestBazaarItem {
 
     @XStreamAsAttribute
-    private final QuestItemType itemType;
+    private QuestItemType itemType;
 
     /**
      * Gets the item type.
@@ -50,14 +50,15 @@ public class QuestItemPassive implements IQuestStallPurchasable {
     }
 
     @XStreamAsAttribute
-    private final int maxLevel = 1;
+    private int maxLevel = 1;
 
     @XStreamAsAttribute
-    private final String purchaseName = "Read this field from XML";
-    private final String description = "Read from XML";
+    private String purchaseName = null;
+    
+    private String description = "Read from XML";
 
     @XStreamAsAttribute
-    private final int basePrice = 1000;
+    private int basePrice = 1000;
 
     /**
      * Gets the base price.
@@ -78,7 +79,7 @@ public class QuestItemPassive implements IQuestStallPurchasable {
      *
      * @param type0 the type0
      */
-    protected QuestItemPassive(final QuestItemType type0) {
+    protected QuestItemBasic(final QuestItemType type0) {
         this.itemType = type0;
     }
 
@@ -168,7 +169,7 @@ public class QuestItemPassive implements IQuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public ImageIcon getIcon() {
+    public ImageIcon getIcon(QuestAssets qA) {
         return FSkin.getIcon(this.icon);
     }
 
@@ -197,7 +198,7 @@ public class QuestItemPassive implements IQuestStallPurchasable {
     /** {@inheritDoc} */
     @Override
     public final int compareTo(final Object o) {
-        final IQuestStallPurchasable q = (IQuestStallPurchasable) o;
+        final IQuestBazaarItem q = (IQuestBazaarItem) o;
         return this.getPurchaseName().compareTo(q.getPurchaseName());
     }
 }

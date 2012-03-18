@@ -24,7 +24,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import net.slightlymagic.braids.util.UtilFunctions;
-import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
@@ -43,6 +42,7 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.util.FileUtil;
+import forge.util.Lambda1;
 import forge.util.MyRandom;
 
 /**

@@ -32,7 +32,6 @@ import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
 import forge.quest.data.QuestAchievements;
-import forge.quest.data.QuestDuelDifficulty;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.FileSection;
@@ -46,12 +45,12 @@ import forge.util.FileUtil;
  */
 public class QuestEventManager {
 
-    private final Map<QuestDuelDifficulty, List<QuestDuel>> SortedDuels = new EnumMap<QuestDuelDifficulty, List<QuestDuel>>(QuestDuelDifficulty.class);
+    private final Map<QuestEventDifficulty, List<QuestEventDuel>> SortedDuels = new EnumMap<QuestEventDifficulty, List<QuestEventDuel>>(QuestEventDifficulty.class);
 
     /** */
-    public final List<QuestDuel> ALL_DUELS = new ArrayList<QuestDuel>();
+    public final List<QuestEventDuel> ALL_DUELS = new ArrayList<QuestEventDuel>();
     /** */
-    public final List<QuestChallenge> ALL_CHALLENGES = new ArrayList<QuestChallenge>();
+    public final List<QuestEventChallenge> ALL_CHALLENGES = new ArrayList<QuestEventChallenge>();
 
     /** Instantiate all events and difficulty lists. */
     public QuestEventManager(File dir) {
@@ -64,11 +63,11 @@ public class QuestEventManager {
 
             if (contents.containsKey("quest")) {
                 tempEvent = readChallenge(contents.get("quest"));
-                ALL_CHALLENGES.add((QuestChallenge) tempEvent);
+                ALL_CHALLENGES.add((QuestEventChallenge) tempEvent);
             }
             else {
                 tempEvent = readDuel(contents.get("metadata"));
-                ALL_DUELS.add((QuestDuel) tempEvent);
+                ALL_DUELS.add((QuestEventDuel) tempEvent);
             }
 
             // Assemble metadata (may not be necessary later) and deck object.
@@ -93,7 +92,7 @@ public class QuestEventManager {
             }
         }
 
-        for (final QuestChallenge q : ALL_CHALLENGES) {
+        for (final QuestEventChallenge q : ALL_CHALLENGES) {
             if (q.getName().equals(s0)) {
                 return q;
             }
@@ -106,7 +105,7 @@ public class QuestEventManager {
      * 
      * @return an array of {@link java.lang.String} objects.
      */
-    public final List<QuestDuel> generateDuels() {
+    public final List<QuestEventDuel> generateDuels() {
         final QuestPreferences qpref = Singletons.getModel().getQuestPreferences();
         if (AllZone.getQuest().getAchievements() == null) {
             return null;
@@ -116,36 +115,36 @@ public class QuestEventManager {
         final int cntWins = qCtrl.getAchievements().getWin();
 
         final int index = qCtrl.getAchievements().getDifficulty();
-        final List<QuestDuel> duelOpponents = new ArrayList<QuestDuel>();
+        final List<QuestEventDuel> duelOpponents = new ArrayList<QuestEventDuel>();
 
         if (cntWins < qpref.getPreferenceInt(QPref.WINS_MEDIUMAI, index)) {
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.EASY).get(0));
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.EASY).get(1));
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.EASY).get(2));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.EASY).get(0));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.EASY).get(1));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.EASY).get(2));
         } else if (cntWins == qpref.getPreferenceInt(QPref.WINS_MEDIUMAI, index)) {
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.EASY).get(0));
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.MEDIUM).get(0));
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.MEDIUM).get(1));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.EASY).get(0));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.MEDIUM).get(0));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.MEDIUM).get(1));
         } else if (cntWins < qpref.getPreferenceInt(QPref.WINS_HARDAI, index)) {
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.MEDIUM).get(0));
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.MEDIUM).get(1));
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.MEDIUM).get(2));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.MEDIUM).get(0));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.MEDIUM).get(1));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.MEDIUM).get(2));
         }
 
         else if (cntWins == qpref.getPreferenceInt(QPref.WINS_HARDAI, index)) {
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.MEDIUM).get(0));
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.HARD).get(0));
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.HARD).get(1));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.MEDIUM).get(0));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.HARD).get(0));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.HARD).get(1));
         }
 
         else if (cntWins < qpref.getPreferenceInt(QPref.WINS_EXPERTAI, index)) {
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.HARD).get(0));
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.HARD).get(1));
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.HARD).get(2));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.HARD).get(0));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.HARD).get(1));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.HARD).get(2));
         } else {
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.HARD).get(0));
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.HARD).get(1));
-            duelOpponents.add(SortedDuels.get(QuestDuelDifficulty.EXPERT).get(0));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.HARD).get(0));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.HARD).get(1));
+            duelOpponents.add(SortedDuels.get(QuestEventDifficulty.EXPERT).get(0));
         }
 
         return duelOpponents;
@@ -155,8 +154,8 @@ public class QuestEventManager {
      *
      * @return a {@link java.util.List} object.
      */
-    public final List<QuestChallenge> generateChallenges() {
-        final List<QuestChallenge> challengeOpponents = new ArrayList<QuestChallenge>();
+    public final List<QuestEventChallenge> generateChallenges() {
+        final List<QuestEventChallenge> challengeOpponents = new ArrayList<QuestEventChallenge>();
         final QuestController qCtrl = AllZone.getQuest();
         final QuestAchievements qData = qCtrl.getAchievements();
 
@@ -171,7 +170,7 @@ public class QuestEventManager {
             final List<Integer> unlockedChallengeIds = new ArrayList<Integer>();
             final List<Integer> availableChallengeIds = new ArrayList<Integer>();
 
-            for (final QuestChallenge qc : ALL_CHALLENGES) {
+            for (final QuestEventChallenge qc : ALL_CHALLENGES) {
                 if ((qc.getWinsReqd() <= qData.getWin())
                         && !qData.getCompletedChallenges().contains(qc.getId())) {
                     unlockedChallengeIds.add(qc.getId());
@@ -207,8 +206,8 @@ public class QuestEventManager {
      * @param contents
      * @param qd
      */
-    private QuestDuel readDuel(final List<String> contents) {
-        final QuestDuel qd = new QuestDuel();
+    private QuestEventDuel readDuel(final List<String> contents) {
+        final QuestEventDuel qd = new QuestEventDuel();
         int eqpos;
         String key, value;
 
@@ -240,11 +239,11 @@ public class QuestEventManager {
      * @param contents
      * @param qc
      */
-    private QuestChallenge readChallenge(final List<String> contents) {
+    private QuestEventChallenge readChallenge(final List<String> contents) {
         int eqpos;
         String key, value;
 
-        final QuestChallenge qc = new QuestChallenge();
+        final QuestEventChallenge qc = new QuestEventChallenge();
         // Unique properties
         for (final String s : contents) {
             if (StringUtils.isBlank(s)) {
@@ -346,23 +345,23 @@ public class QuestEventManager {
      */
     private void assembleDuelDifficultyLists() {
         SortedDuels.clear();
-        SortedDuels.put(QuestDuelDifficulty.EASY, new ArrayList<QuestDuel>());
-        SortedDuels.put(QuestDuelDifficulty.MEDIUM, new ArrayList<QuestDuel>());
-        SortedDuels.put(QuestDuelDifficulty.HARD, new ArrayList<QuestDuel>());
-        SortedDuels.put(QuestDuelDifficulty.EXPERT, new ArrayList<QuestDuel>());
+        SortedDuels.put(QuestEventDifficulty.EASY, new ArrayList<QuestEventDuel>());
+        SortedDuels.put(QuestEventDifficulty.MEDIUM, new ArrayList<QuestEventDuel>());
+        SortedDuels.put(QuestEventDifficulty.HARD, new ArrayList<QuestEventDuel>());
+        SortedDuels.put(QuestEventDifficulty.EXPERT, new ArrayList<QuestEventDuel>());
 
         String s;
 
-        for (final QuestDuel qd : ALL_DUELS) {
+        for (final QuestEventDuel qd : ALL_DUELS) {
             s = qd.getDifficulty();
             if (s.equalsIgnoreCase("easy")) {
-                SortedDuels.get(QuestDuelDifficulty.EASY).add(qd);
+                SortedDuels.get(QuestEventDifficulty.EASY).add(qd);
             } else if (s.equalsIgnoreCase("medium")) {
-                SortedDuels.get(QuestDuelDifficulty.MEDIUM).add(qd);
+                SortedDuels.get(QuestEventDifficulty.MEDIUM).add(qd);
             } else if (s.equalsIgnoreCase("hard")) {
-                SortedDuels.get(QuestDuelDifficulty.HARD).add(qd);
+                SortedDuels.get(QuestEventDifficulty.HARD).add(qd);
             } else if (s.equalsIgnoreCase("very hard")) {
-                SortedDuels.get(QuestDuelDifficulty.EXPERT).add(qd);
+                SortedDuels.get(QuestEventDifficulty.EXPERT).add(qd);
             }
         }
     }
@@ -370,10 +369,10 @@ public class QuestEventManager {
     public void randomizeOpponents() {
         long seed = new Random().nextLong();
         Random r = new Random(seed);
-        Collections.shuffle(SortedDuels.get(QuestDuelDifficulty.EASY), r);
-        Collections.shuffle(SortedDuels.get(QuestDuelDifficulty.MEDIUM), r);
-        Collections.shuffle(SortedDuels.get(QuestDuelDifficulty.HARD), r);
-        Collections.shuffle(SortedDuels.get(QuestDuelDifficulty.EXPERT), r);
+        Collections.shuffle(SortedDuels.get(QuestEventDifficulty.EASY), r);
+        Collections.shuffle(SortedDuels.get(QuestEventDifficulty.MEDIUM), r);
+        Collections.shuffle(SortedDuels.get(QuestEventDifficulty.HARD), r);
+        Collections.shuffle(SortedDuels.get(QuestEventDifficulty.EXPERT), r);
     }
 
     /**
@@ -386,8 +385,8 @@ public class QuestEventManager {
      * @param n
      * @return
      */
-    private QuestChallenge getChallengeEventByNumber(final int n) {
-        for (final QuestChallenge qc : ALL_CHALLENGES) {
+    private QuestEventChallenge getChallengeEventByNumber(final int n) {
+        for (final QuestEventChallenge qc : ALL_CHALLENGES) {
             if (qc.getId() == n) {
                 return qc;
             }

@@ -20,9 +20,9 @@ package forge.game;
 import java.util.Collections;
 import java.util.List;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.card.CardRules;
 import forge.item.CardPrinted;
+import forge.util.Lambda1;
 import forge.util.Predicate;
 
 /**

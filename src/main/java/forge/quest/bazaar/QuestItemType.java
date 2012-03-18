@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data.item;
+package forge.quest.bazaar;
 
 import forge.quest.data.QuestItemCondition;
 
@@ -26,14 +26,14 @@ import forge.quest.data.QuestItemCondition;
 public enum QuestItemType {
 
     /** The SLEIGHT. */
-    SLEIGHT("Sleight", QuestItemPassive.class, QuestItemCondition.class), /** The ESTATES. */
+    SLEIGHT("Sleight", QuestItemBasic.class, QuestItemCondition.class), /** The ESTATES. */
  ESTATES("Estates", QuestItemEstates.class,
             QuestItemCondition.class), 
  /** The LUCK y_ coin. */
- LUCKY_COIN("Lucky Coin", QuestItemPassive.class, QuestItemCondition.class), 
+ LUCKY_COIN("Lucky Coin", QuestItemBasic.class, QuestItemCondition.class), 
  /** The MAP. */
  MAP(
-            "Map", QuestItemPassive.class, QuestItemCondition.class), 
+            "Map", QuestItemBasic.class, QuestItemCondition.class), 
  /** The ZEPPELIN. */
  ZEPPELIN("Zeppelin", QuestItemZeppelin.class,
             QuestItemCondition.class), 
@@ -44,10 +44,10 @@ public enum QuestItemType {
             "Pound of Flesh", QuestItemPoundFlesh.class, QuestItemCondition.class);
 
     private final String saveFileKey;
-    private final Class<? extends QuestItemPassive> bazaarControllerClass;
+    private final Class<? extends QuestItemBasic> bazaarControllerClass;
     private final Class<? extends QuestItemCondition> modelClass;
 
-    private QuestItemType(final String key, final Class<? extends QuestItemPassive> controllerClass0,
+    private QuestItemType(final String key, final Class<? extends QuestItemBasic> controllerClass0,
             final Class<? extends QuestItemCondition> modelClass0) {
         this.saveFileKey = key;
         this.bazaarControllerClass = controllerClass0;
@@ -68,7 +68,7 @@ public enum QuestItemType {
      *
      * @return the bazaar controller class
      */
-    public Class<? extends QuestItemPassive> getBazaarControllerClass() {
+    public Class<? extends QuestItemBasic> getBazaarControllerClass() {
         return this.bazaarControllerClass;
     }
 

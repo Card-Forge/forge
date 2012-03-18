@@ -28,10 +28,10 @@ import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.quest.QuestDeckMap;
+import forge.quest.QuestMode;
 import forge.quest.QuestUtilCards;
+import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.data.item.QuestItemType;
-import forge.quest.data.pet.QuestPetManager;
 
 /**
  * TODO: Write javadoc for this type.
@@ -60,13 +60,12 @@ public class QuestAssets {
     final ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class); // the
     // gadgets
 
-    /** The pet manager. */
-    final QuestPetManager petManager = new QuestPetManager(); // pets
-
     /** The inventory items. */
     final Map<QuestItemType, QuestItemCondition> inventoryItems = new EnumMap<QuestItemType, QuestItemCondition>(
             QuestItemType.class);
 
+    // Much the same like other map, but keyed by string (to support a lot of custom pets)
+    final Map<String, QuestItemCondition> combatPets = new HashMap<String, QuestItemCondition>();
     /**
      * Checks for item.
      *
@@ -98,6 +97,7 @@ public class QuestAssets {
         return this.inventoryItems.get(itemType);
     }
 
+    
     /**
      * Sets the item level.
      *
@@ -119,7 +119,25 @@ public class QuestAssets {
         }
         cond.setLevel(level);
     }
+    
+    public final int getPetLevel(final String name) {
+        final QuestItemCondition state = this.combatPets.get(name);
+        return state == null ? 0 : state.getLevel();
+    }
+    
+    public final QuestItemCondition getPetCondition(final String name) {
+        return this.combatPets.get(name);
+    }    
 
+    public final void setPetLevel(final String name, final int level) {
+        QuestItemCondition cond = this.combatPets.get(name);
+        if (null == cond) {
+            cond = new QuestItemCondition(); // pets have only level that should be serialized for now
+            this.combatPets.put(name, cond);
+        }
+        cond.setLevel(level);
+    }    
+    
     /**
      * Instantiates a new quest assets.
      */
@@ -179,14 +197,7 @@ public class QuestAssets {
         this.credits = credits0;
     }
 
-    /**
-     * Gets the pet manager.
-     * 
-     * @return the pet manager
-     */
-    public QuestPetManager getPetManager() {
-        return this.petManager;
-    }
+
 
     // Credits
     /**

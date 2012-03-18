@@ -23,11 +23,12 @@ package net.slightlymagic.braids.util.generator;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
 import com.google.code.jyield.Yieldable;
+
+import forge.util.Lambda1;
 
 /**
  * For documentation on Java-Yield and its generators, see.

@@ -15,33 +15,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data.item;
+package forge.quest.bazaar;
 
 import forge.quest.data.QuestAssets;
 
 /**
  * <p>
- * QuestItemZeppelin class.
+ * QuestItemEstates class.
  * </p>
  * 
  * @author Forge
  * @version $Id$
  */
-public class QuestItemZeppelin extends QuestItemPassive {
+public class QuestItemEstates extends QuestItemBasic {
     /**
      * <p>
-     * Constructor for QuestItemZeppelin.
+     * Constructor for QuestItemEstates.
      * </p>
      */
-    QuestItemZeppelin() {
-        super(QuestItemType.ZEPPELIN); // , QuestStallManager.GEAR
+    QuestItemEstates() {
+        super(QuestItemType.ESTATES); // QuestStallManager.BANKER,
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean isAvailableForPurchase(QuestAssets qA) {
-        return super.isAvailableForPurchase(qA) && qA.hasItem(QuestItemType.MAP);
+    public final String getPurchaseDescription(QuestAssets qA) {
+        return String.format(super.getPurchaseDescription(qA),
+                (10 + (qA.getItemLevel(this.getItemType()) * 5)),
+                (1 + (qA.getItemLevel(this.getItemType()) * 0.75)));
     }
 
-
+    /** {@inheritDoc} */
+    @Override
+    public final int getBuyingPrice(QuestAssets qA) {
+        int level = qA.getItemLevel(this.getItemType());
+        return getBasePrice() * (2 + level);
+    }
 }

@@ -23,7 +23,6 @@ import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 
 import org.apache.commons.lang3.StringUtils;
 

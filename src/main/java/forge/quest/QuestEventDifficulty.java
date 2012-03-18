@@ -1,10 +1,10 @@
-package forge.quest.data;
+package forge.quest;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-public enum QuestDuelDifficulty {
+public enum QuestEventDifficulty {
     EASY,
     MEDIUM,
     HARD,

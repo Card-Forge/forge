@@ -18,7 +18,9 @@
 package forge.quest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import forge.Singletons;
 import forge.deck.Deck;
@@ -26,12 +28,12 @@ import forge.item.CardPrinted;
 import forge.item.PreconDeck;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.bazaar.QuestBazaarManager;
+import forge.quest.bazaar.QuestPetStorage;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
-import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.data.QuestStartPool;
 import forge.quest.io.PreconReader;
 import forge.util.IStorage;
 import forge.util.IStorageView;
@@ -70,7 +72,9 @@ public class QuestController {
 
     private QuestEventManager eventManager = null;
 
-    private QuestStallManager bazaar = null;
+    private QuestBazaarManager bazaar = null;
+    
+    private QuestPetStorage pets = null;
 
     // This is used by shop. Had no idea where else to place this
     private static transient IStorageView<PreconDeck> preconManager = new StorageView<PreconDeck>(new PreconReader(
@@ -88,6 +92,19 @@ public class QuestController {
             "What Do You Do With The Other Hand?", "Freelance Sorcerer, Works Weekends",
             "Should We Hire Commentators?", "Saltblasted For Your Talent", "Serra Angel Is Your Girlfriend", };
 
+    public static final int MAX_PET_SLOTS = 2;
+
+    private Map<Integer, String> selectedPets = new HashMap<Integer, String>();
+
+    public void selectPet(Integer slot, String name) {
+        selectedPets.put(slot, name);
+    }
+    
+    public String getSelectedPet(Integer slot) {
+        return selectedPets.get(slot);
+    }    
+    
+    
     // Cards - class uses data from here
     /**
      * Gets the cards.
@@ -288,9 +305,9 @@ public class QuestController {
      *
      * @return the bazaar
      */
-    public final QuestStallManager getBazaar() {
+    public final QuestBazaarManager getBazaar() {
         if (null == this.bazaar) {
-            this.bazaar = new QuestStallManager(ForgeProps.getFile(NewConstants.Quest.BAZAAR));
+            this.bazaar = new QuestBazaarManager(ForgeProps.getFile(NewConstants.Quest.BAZAAR));
         }
         return this.bazaar;
     }
@@ -305,6 +322,14 @@ public class QuestController {
             this.eventManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DECKS));
         }
         return this.eventManager;
+    }
+    
+    public QuestPetStorage getPetsStorage() {
+        if ( this.pets == null ) {
+            this.pets = new QuestPetStorage(ForgeProps.getFile(NewConstants.Quest.BAZAAR));
+        }
+        
+        return this.pets;
     }
 
 }

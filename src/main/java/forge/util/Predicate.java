@@ -22,7 +22,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 
 /**
  * Predicate class allows to select items or type <U>, which are or contain an

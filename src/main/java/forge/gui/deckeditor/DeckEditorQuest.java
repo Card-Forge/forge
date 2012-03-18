@@ -31,7 +31,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 
-import net.slightlymagic.braids.util.lambda.Lambda0;
 import forge.Command;
 import forge.Constant;
 import forge.deck.Deck;
@@ -47,6 +46,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.quest.QuestController;
+import forge.util.Lambda0;
 import forge.util.Predicate;
 
 //import forge.quest.data.QuestBoosterPack;

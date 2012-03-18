@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest;
+package forge.quest.bazaar;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,12 +42,8 @@ import org.xml.sax.SAXException;
 import com.thoughtworks.xstream.XStream;
 
 import forge.AllZone;
+import forge.quest.QuestController;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.QuestStallDefinition;
-import forge.quest.data.item.IQuestStallPurchasable;
-import forge.quest.data.item.QuestItemPassive;
-import forge.quest.data.item.QuestItemType;
-import forge.quest.data.pet.QuestPetAbstract;
 import forge.util.IgnoringXStream;
 import forge.util.XmlUtil;
 
@@ -59,10 +55,10 @@ import forge.util.XmlUtil;
  * @author Forge
  * @version $Id$
  */
-public class QuestStallManager {
+public class QuestBazaarManager {
     private final File xmlFile;
 
-    public QuestStallManager(File xmlFile0) {
+    public QuestBazaarManager(File xmlFile0) {
         xmlFile = xmlFile0;
     }
 
@@ -99,7 +95,7 @@ public class QuestStallManager {
                 Attr att = document.createAttribute("resolves-to");
                 att.setValue(qType.getBazaarControllerClass().getCanonicalName());
                 attrs.setNamedItem(att);
-                QuestItemPassive ctrl = (QuestItemPassive) xs.fromXML(XmlUtil.nodeToString(n));
+                QuestItemBasic ctrl = (QuestItemBasic) xs.fromXML(XmlUtil.nodeToString(n));
                 items.put(name, ctrl);
             }
 
@@ -115,8 +111,8 @@ public class QuestStallManager {
     /** Constant <code>stalls</code>. */
     private final Map<String, QuestStallDefinition> stalls = new TreeMap<String, QuestStallDefinition>();
     /** Constant <code>items</code>. */
-    private final Map<String, SortedSet<IQuestStallPurchasable>> itemsOnStalls = new TreeMap<String, SortedSet<IQuestStallPurchasable>>(String.CASE_INSENSITIVE_ORDER);
-    private final Map<String, IQuestStallPurchasable> items = new TreeMap<String, IQuestStallPurchasable>();
+    private final Map<String, SortedSet<IQuestBazaarItem>> itemsOnStalls = new TreeMap<String, SortedSet<IQuestBazaarItem>>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, IQuestBazaarItem> items = new TreeMap<String, IQuestBazaarItem>();
 
     /**
      * <p>
@@ -125,7 +121,7 @@ public class QuestStallManager {
      * 
      * @param stallName
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.quest.data.QuestStallDefinition} object.
+     * @return a {@link forge.quest.bazaar.QuestStallDefinition} object.
      */
     public QuestStallDefinition getStall(final String stallName) {
         if (stalls.isEmpty()) {
@@ -140,19 +136,27 @@ public class QuestStallManager {
      * and maps to appropriate merchant.
      */
     public void buildItems() {
-        final Map<String, IQuestStallPurchasable> itemSet = new HashMap<String, IQuestStallPurchasable>();
+        final Map<String, IQuestBazaarItem> itemSet = new HashMap<String, IQuestBazaarItem>();
 
-        final QuestAssets qA = AllZone.getQuest().getAssets();
-        for (QuestPetAbstract i : qA.getPetManager().getPetsAndPlants()) { itemSet.put(i.getName(), i); }
+        final QuestController qCtrl = AllZone.getQuest();
+        for ( int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++)
+        {
+            for( QuestPetController pet : qCtrl.getPetsStorage().getAllPets(iSlot)) {
+                //System.out.println("Pet: " + pet.getName());
+                itemSet.put(pet.getName(), pet);
+            }
+        }
+        
         itemSet.putAll(items);
 
         itemsOnStalls.clear();
 
         for (QuestStallDefinition thisStall : stalls.values()) {
-            TreeSet<IQuestStallPurchasable> set = new TreeSet<IQuestStallPurchasable>();
+            TreeSet<IQuestBazaarItem> set = new TreeSet<IQuestBazaarItem>();
 
             for (String itemName : thisStall.getItems()) {
-                IQuestStallPurchasable item = itemSet.get(itemName);
+                IQuestBazaarItem item = itemSet.get(itemName);
+                //System.out.println(itemName);
                 set.add(item);
             }
             itemsOnStalls.put(thisStall.getName(), set);
@@ -165,13 +169,13 @@ public class QuestStallManager {
      * @param stallName &emsp; {@link java.lang.String}
      * @return {@link java.util.List}.
      */
-    public List<IQuestStallPurchasable> getItems(final String stallName) {
+    public List<IQuestBazaarItem> getItems(final String stallName) {
         buildItems();
 
-        final List<IQuestStallPurchasable> ret = new ArrayList<IQuestStallPurchasable>();
+        final List<IQuestBazaarItem> ret = new ArrayList<IQuestBazaarItem>();
 
         QuestAssets qA = AllZone.getQuest().getAssets();
-        for (final IQuestStallPurchasable purchasable : itemsOnStalls.get(stallName)) {
+        for (final IQuestBazaarItem purchasable : itemsOnStalls.get(stallName)) {
             if (purchasable.isAvailableForPurchase(qA)) {
                 ret.add(purchasable);
             }

@@ -10,7 +10,8 @@ import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
 import forge.quest.QuestController;
-import forge.quest.QuestDuel;
+import forge.quest.QuestEventDuel;
+import forge.quest.bazaar.QuestPetController;
 import forge.view.ViewHomeUI;
 
 /** 
@@ -70,28 +71,18 @@ public enum CSubmenuDuels implements ICSubmenu {
         view.getCbPlant().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                quest.getAssets().getPetManager().setUsePlant(view.getCbPlant().isSelected());
-            }
-        });
-
-        view.getCbZep().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                quest.getAssets().getPetManager().setUsePlant(view.getCbZep().isSelected());
+                quest.selectPet(0, view.getCbPlant().isSelected() ? "Plant" : null);
             }
         });
 
         view.getCbxPet().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                final int SLOT = 1;
                 final int index = view.getCbxPet().getSelectedIndex();
-                if (index != -1 && index != 0) {
-                    final String pet = ((String) view.getCbxPet().getSelectedItem());
-                    quest.getAssets().getPetManager().setSelectedPet(pet.substring(7));
-                }
-                else {
-                    quest.getAssets().getPetManager().setSelectedPet(null);
-                }
+                List<QuestPetController> pets = quest.getPetsStorage().getAvaliablePets(SLOT, quest.getAssets());
+                String petName = index <= 0 || index > pets.size() ? null : pets.get(index-1).getName(); 
+                quest.selectPet(SLOT, petName);
             }
         });
     }
@@ -109,9 +100,9 @@ public enum CSubmenuDuels implements ICSubmenu {
             view.getLblTitle().setText("Duels: " + AllZone.getQuest().getRank());
 
             view.getPnlDuels().removeAll();
-            final List<QuestDuel> duels = AllZone.getQuest().getEventManager().generateDuels();
+            final List<QuestEventDuel> duels = AllZone.getQuest().getEventManager().generateDuels();
 
-            for (final QuestDuel d : duels) {
+            for (final QuestEventDuel d : duels) {
                 final SelectablePanel temp = new SelectablePanel(d);
                 view.getPnlDuels().add(temp, "w 96%!, h 86px!, gap 2% 0 5px 5px");
             }

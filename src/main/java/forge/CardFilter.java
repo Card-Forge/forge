@@ -21,11 +21,11 @@ import java.util.List;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.generator.GeneratorFunctions;
-import net.slightlymagic.braids.util.lambda.Lambda1;
 
 import com.google.code.jyield.Generator;
 
 import forge.card.EditionInfo;
+import forge.util.Lambda1;
 
 /**
  * <p>

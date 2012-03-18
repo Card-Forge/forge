@@ -18,7 +18,7 @@
  * limitations under the Apache License.
  *
  */
-package net.slightlymagic.braids.util.lambda;
+package forge.util;
 
 /**
  * The Interface Lambda.

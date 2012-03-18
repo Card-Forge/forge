@@ -34,6 +34,7 @@ import java.util.zip.GZIPOutputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Attr;
@@ -42,6 +43,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
@@ -66,11 +68,11 @@ import forge.item.TournamentPack;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
+import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
-import forge.quest.data.item.QuestItemType;
-import forge.quest.data.pet.QuestPetManager;
+import forge.quest.data.QuestItemCondition;
 import forge.util.IgnoringXStream;
 import forge.util.XmlUtil;
 
@@ -131,7 +133,11 @@ public class QuestDataIO {
             data = (QuestData) QuestDataIO.getSerializer(true).fromXML(xml.toString());
 
             if (data.getVersionNumber() != QuestData.CURRENT_VERSION_NUMBER) {
-                QuestDataIO.updateSaveFile(data, xml.toString());
+                try {
+                    QuestDataIO.updateSaveFile(data, xml.toString());
+                } catch (final Exception e) {
+                    forge.error.ErrorViewer.showError(e);
+                }
             }
 
             return data;
@@ -158,150 +164,148 @@ public class QuestDataIO {
      *            a {@link forge.quest.data.QuestData} object.
      * @param input
      *            a {@link java.lang.String} object.
+     * @throws ParserConfigurationException 
+     * @throws IOException 
+     * @throws SAXException 
+     * @throws NoSuchFieldException 
+     * @throws IllegalAccessException 
      */
-    private static void updateSaveFile(final QuestData newData, final String input) {
-        try {
-            final DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            final InputSource is = new InputSource();
-            is.setCharacterStream(new StringReader(input));
-            final Document document = builder.parse(is);
+    private static void updateSaveFile(final QuestData newData, final String input) throws ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException {
 
-            final int saveVersion = newData.getVersionNumber();
+        final DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        final InputSource is = new InputSource();
+        is.setCharacterStream(new StringReader(input));
+        final Document document = builder.parse(is);
 
-            if (saveVersion < 3) {
-                QuestDataIO.setFinalField(QuestData.class, "assets", newData, new QuestAssets());
+        final int saveVersion = newData.getVersionNumber();
 
-                final int diffIdx = Integer.parseInt(document.getElementsByTagName("diffIndex").item(0)
-                        .getTextContent());
-                QuestDataIO.setFinalField(QuestData.class, "achievements", newData, new QuestAchievements(diffIdx));
+        if (saveVersion < 3) {
+            QuestDataIO.setFinalField(QuestData.class, "assets", newData, new QuestAssets());
+
+            final int diffIdx = Integer.parseInt(document.getElementsByTagName("diffIndex").item(0).getTextContent());
+            QuestDataIO.setFinalField(QuestData.class, "achievements", newData, new QuestAchievements(diffIdx));
+        }
+
+        if (saveVersion < 4) {
+            QuestDataIO.setFinalField(QuestAssets.class, "inventoryItems", newData.getAssets(), new EnumMap<QuestItemType, Integer>(QuestItemType.class));
+        }
+
+        if (saveVersion < 5) {
+            QuestDataIO.setFinalField(QuestAssets.class, "combatPets", newData.getAssets(), new HashMap<String, QuestItemCondition>() );
+        }
+        
+        final QuestAssets qS = newData.getAssets();
+
+        switch (saveVersion) {
+        // There should be a fall-through b/w the cases so that each
+        // version's changes get applied progressively
+        case 0:
+            // First beta release with new file format,
+            // inventory needs to be migrated
+            QuestDataIO.setFinalField(QuestAssets.class, "inventoryItems", newData.getAssets(), new EnumMap<QuestItemType, Integer>(QuestItemType.class));
+            qS.setItemLevel(QuestItemType.ESTATES, Integer.parseInt(document.getElementsByTagName("estatesLevel").item(0).getTextContent()));
+            qS.setItemLevel(QuestItemType.LUCKY_COIN, Integer.parseInt(document.getElementsByTagName("luckyCoinLevel").item(0).getTextContent()));
+            qS.setItemLevel(QuestItemType.SLEIGHT, Integer.parseInt(document.getElementsByTagName("sleightOfHandLevel").item(0).getTextContent()));
+
+            final int gearLevel = Integer.parseInt(document.getElementsByTagName("gearLevel").item(0).getTextContent());
+            if (gearLevel >= 1) {
+                newData.getAssets().setItemLevel(QuestItemType.MAP, 1);
+            }
+            if (gearLevel == 2) {
+                newData.getAssets().setItemLevel(QuestItemType.ZEPPELIN, 1);
+            }
+            // fall-through
+        case 1:
+            // nothing to do here, everything is managed by CardPoolToXml
+            // deserializer
+
+        case 2:
+            // questdata was divided into assets and achievements
+            if (StringUtils.isBlank(newData.getName())) {
+                QuestDataIO.setFinalField(QuestData.class, "name", newData, "questData");
             }
 
-            if (saveVersion < 4) {
-                QuestDataIO.setFinalField(QuestAssets.class, "inventoryItems", newData.getAssets(),
-                        new EnumMap<QuestItemType, Integer>(QuestItemType.class));
+            final QuestAchievements qA = newData.getAchievements();
+            QuestDataIO.setFinalField(QuestAchievements.class, "win", qA, Integer.parseInt(document.getElementsByTagName("win").item(0).getTextContent()));
+            QuestDataIO.setFinalField(QuestAchievements.class, "lost", qA, Integer.parseInt(document.getElementsByTagName("lost").item(0).getTextContent()));
+            QuestDataIO.setFinalField(QuestAchievements.class, "winstreakBest", qA, Integer.parseInt(document.getElementsByTagName("winstreakBest").item(0).getTextContent()));
+            QuestDataIO.setFinalField(QuestAchievements.class, "winstreakCurrent", qA, Integer.parseInt(document.getElementsByTagName("winstreakCurrent").item(0).getTextContent()));
+            QuestDataIO.setFinalField(QuestAchievements.class, "challengesPlayed", qA, Integer.parseInt(document.getElementsByTagName("challengesPlayed").item(0).getTextContent()));
+
+            final ArrayList<Integer> completedChallenges = new ArrayList<Integer>();
+            QuestDataIO.setFinalField(QuestAchievements.class, "completedChallenges", qA, completedChallenges);
+            final NodeList ccs = document.getElementsByTagName("completedChallenges").item(0).getChildNodes();
+            for (int iN = 0; iN < ccs.getLength(); iN++) {
+                final Node n = ccs.item(iN);
+                if (n.getNodeType() != Node.ELEMENT_NODE) {
+                    continue;
+                }
+                completedChallenges.add(Integer.parseInt(n.getTextContent()));
             }
 
-            final QuestAssets qS = newData.getAssets();
+            final XStream xs = QuestDataIO.getSerializer(true);
 
-            switch (saveVersion) {
-            // There should be a fall-through b/w the cases so that each
-            // version's changes get applied progressively
-            case 0:
-                // First beta release with new file format,
-                // inventory needs to be migrated
-                QuestDataIO.setFinalField(QuestAssets.class, "inventoryItems", newData.getAssets(),
-                        new EnumMap<QuestItemType, Integer>(QuestItemType.class));
-                NodeList elements = document.getElementsByTagName("estatesLevel");
-                qS.setItemLevel(QuestItemType.ESTATES, Integer.parseInt(elements.item(0).getTextContent()));
-                elements = document.getElementsByTagName("luckyCoinLevel");
-                qS.setItemLevel(QuestItemType.LUCKY_COIN, Integer.parseInt(elements.item(0).getTextContent()));
-                elements = document.getElementsByTagName("sleightOfHandLevel");
-                qS.setItemLevel(QuestItemType.SLEIGHT, Integer.parseInt(elements.item(0).getTextContent()));
-                elements = document.getElementsByTagName("gearLevel");
+            QuestDataIO.setFinalField(QuestAssets.class, "credits", qS, Integer.parseInt(document.getElementsByTagName("credits").item(0).getTextContent()));
+            QuestDataIO.setFinalField(QuestAssets.class, "cardPool", qS, QuestDataIO.readAsset(xs, document, "cardPool", ItemPool.class));
+            QuestDataIO.setFinalField(QuestAssets.class, "myDecks", qS, QuestDataIO.readAsset(xs, document, "myDecks", HashMap.class));
+            QuestDataIO.setFinalField(QuestAssets.class, "shopList", qS, QuestDataIO.readAsset(xs, document, "shopList", ItemPool.class));
+            QuestDataIO.setFinalField(QuestAssets.class, "newCardList", qS, QuestDataIO.readAsset(xs, document, "newCardList", ItemPool.class));
 
-                final int gearLevel = Integer.parseInt(elements.item(0).getTextContent());
-                if (gearLevel >= 1) {
-                    newData.getAssets().setItemLevel(QuestItemType.MAP, 1);
-                }
-                if (gearLevel == 2) {
-                    newData.getAssets().setItemLevel(QuestItemType.ZEPPELIN, 1);
-                }
-                // fall-through
-            case 1:
-                // nothing to do here, everything is managed by CardPoolToXml
-                // deserializer
-
-            case 2:
-                // questdata was divided into assets and achievements
-                if (StringUtils.isBlank(newData.getName())) {
-                    QuestDataIO.setFinalField(QuestData.class, "name", newData, "questData");
-                }
-
-                final QuestAchievements qA = newData.getAchievements();
-                QuestDataIO.setFinalField(QuestAchievements.class, "win", qA,
-                        Integer.parseInt(document.getElementsByTagName("win").item(0).getTextContent()));
-                QuestDataIO.setFinalField(QuestAchievements.class, "lost", qA,
-                        Integer.parseInt(document.getElementsByTagName("lost").item(0).getTextContent()));
-                QuestDataIO.setFinalField(QuestAchievements.class, "winstreakBest", qA,
-                        Integer.parseInt(document.getElementsByTagName("winstreakBest").item(0).getTextContent()));
-                QuestDataIO.setFinalField(QuestAchievements.class, "winstreakCurrent", qA,
-                        Integer.parseInt(document.getElementsByTagName("winstreakCurrent").item(0).getTextContent()));
-                QuestDataIO.setFinalField(QuestAchievements.class, "challengesPlayed", qA,
-                        Integer.parseInt(document.getElementsByTagName("challengesPlayed").item(0).getTextContent()));
-
-                final ArrayList<Integer> completedChallenges = new ArrayList<Integer>();
-                QuestDataIO.setFinalField(QuestAchievements.class, "completedChallenges", qA, completedChallenges);
-                final NodeList ccs = document.getElementsByTagName("completedChallenges").item(0).getChildNodes();
-                for (int iN = 0; iN < ccs.getLength(); iN++) {
-                    final Node n = ccs.item(iN);
-                    if (n.getNodeType() != Node.ELEMENT_NODE) {
+        case 3:
+            // QuestInventory class no longer exists - KV pairs of
+            // QuestItemPair => level moved to assets
+            final Node oldInventory = saveVersion > 0 ? document.getElementsByTagName("inventory").item(1) : null;
+            if ( null != oldInventory) {
+                for (int iN = 0; iN < oldInventory.getChildNodes().getLength(); iN++) {
+                    final Node _n = oldInventory.getChildNodes().item(iN);
+                    if (_n.getNodeType() != Node.ELEMENT_NODE) {
                         continue;
                     }
-                    completedChallenges.add(Integer.parseInt(n.getTextContent()));
-                }
-
-                final XStream xs = QuestDataIO.getSerializer(true);
-
-                QuestDataIO.setFinalField(QuestAssets.class, "credits", qS,
-                        Integer.parseInt(document.getElementsByTagName("credits").item(0).getTextContent()));
-                QuestDataIO.setFinalField(QuestAssets.class, "cardPool", qS,
-                        QuestDataIO.readAsset(xs, document, "cardPool", ItemPool.class));
-                QuestDataIO.setFinalField(QuestAssets.class, "myDecks", qS,
-                        QuestDataIO.readAsset(xs, document, "myDecks", HashMap.class));
-                QuestDataIO.setFinalField(QuestAssets.class, "petManager", qS,
-                        QuestDataIO.readAsset(xs, document, "petManager", QuestPetManager.class));
-                QuestDataIO.setFinalField(QuestAssets.class, "shopList", qS,
-                        QuestDataIO.readAsset(xs, document, "shopList", ItemPool.class));
-                QuestDataIO.setFinalField(QuestAssets.class, "newCardList", qS,
-                        QuestDataIO.readAsset(xs, document, "newCardList", ItemPool.class));
-
-            case 3:
-                // QuestInventory class no longer exists - KV pairs of
-                // QuestItemPair => level moved to assets
-                if (saveVersion > 0) {
-                    final Node oldInventory = document.getElementsByTagName("inventory").item(1);
-                    if (null != oldInventory) {
-                        for (int iN = 0; iN < oldInventory.getChildNodes().getLength(); iN++) {
-                            final Node _n = oldInventory.getChildNodes().item(iN);
-                            if (_n.getNodeType() != Node.ELEMENT_NODE) {
-                                continue;
-                            }
-                            final Element n = (Element) _n;
-                            final String name = n.getElementsByTagName("string").item(0).getTextContent();
-                            final QuestItemType qType = QuestItemType.valueFromSaveKey(name);
-                            int level = 0;
-                            for (int iX = 0; iX < n.getChildNodes().getLength(); iX++) {
-                                final Node _x = n.getChildNodes().item(iX);
-                                if (_x.getNodeType() != Node.ELEMENT_NODE) {
-                                    continue;
-                                }
-                                final Element x = (Element) _x;
-                                if (!x.getTagName().startsWith("forge.quest.data.")) {
-                                    continue;
-                                }
-                                final String sLevel = x.getElementsByTagName("level").item(0).getTextContent();
-                                if (StringUtils.isNotBlank(sLevel)) {
-                                    level = Integer.parseInt(sLevel);
-                                }
-                            }
-                            qS.setItemLevel(qType, level);
+                    final Element n = (Element) _n;
+                    final String name = n.getElementsByTagName("string").item(0).getTextContent();
+                    final QuestItemType qType = QuestItemType.valueFromSaveKey(name);
+                    int level = 0;
+                    for (int iX = 0; iX < n.getChildNodes().getLength(); iX++) {
+                        final Node _x = n.getChildNodes().item(iX);
+                        if (_x.getNodeType() != Node.ELEMENT_NODE) {
+                            continue;
+                        }
+                        final Element x = (Element) _x;
+                        if (!x.getTagName().startsWith("forge.quest.data.")) {
+                            continue;
+                        }
+                        final String sLevel = x.getElementsByTagName("level").item(0).getTextContent();
+                        if (StringUtils.isNotBlank(sLevel)) {
+                            level = Integer.parseInt(sLevel);
                         }
                     }
+                    qS.setItemLevel(qType, level);
                 }
-
-            case 4:
-                // pet manager will be re-engineered here
-
-            default:
-                break;
             }
 
-            // mark the QD as the latest version
-            newData.setVersionNumber(QuestData.CURRENT_VERSION_NUMBER);
+        case 4:
+            if (saveVersion > 0 ) {
+                NodeList pets = document.getElementsByTagName("pets").item(0).getChildNodes();
+                for (int i = 0; i < pets.getLength(); i++) {
+                    if ( pets.item(i).getNodeType() != Node.ELEMENT_NODE ) continue; 
+                    final Element entry = (Element) pets.item(i);
+                    String name = entry.getElementsByTagName("string").item(0).getTextContent();
+                    String sLevel = entry.getElementsByTagName("level").item(0).getTextContent();
+                    qS.setPetLevel(name, Integer.parseInt(sLevel));
+                }
+                    
+            }
 
-        } catch (final Exception e) {
-            forge.error.ErrorViewer.showError(e);
+            // pet manager will be re-engineered here
+
+        default:
+            break;
         }
+
+        // mark the QD as the latest version
+        newData.setVersionNumber(QuestData.CURRENT_VERSION_NUMBER);
+
+
     }
 
     @SuppressWarnings("unchecked")

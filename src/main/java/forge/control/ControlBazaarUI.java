@@ -9,7 +9,7 @@ import javax.swing.SwingUtilities;
 import com.google.common.collect.Iterables;
 
 import forge.gui.toolbox.FLabel;
-import forge.quest.QuestStallManager;
+import forge.quest.bazaar.QuestBazaarManager;
 import forge.view.ViewBazaarUI;
 
 /** 
@@ -19,14 +19,14 @@ import forge.view.ViewBazaarUI;
 public class ControlBazaarUI {
     private final ViewBazaarUI view;
     private final ComponentListener cadResize;
-    private final QuestStallManager model;
+    private final QuestBazaarManager model;
 
     /**
      * Controls top-level instance of bazaar.
      * @param v0 &emsp; {@link forge.view.ViewBazaarUI}
      * @param bazaar
      */
-    public ControlBazaarUI(ViewBazaarUI v0, QuestStallManager bazaar0) {
+    public ControlBazaarUI(ViewBazaarUI v0, QuestBazaarManager bazaar0) {
         view = v0;
         model = bazaar0;
 

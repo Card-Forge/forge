@@ -23,14 +23,13 @@ import forge.card.CardEdition;
 import forge.card.FormatCollection;
 import forge.deck.Deck;
 import forge.item.*;
+import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.data.item.QuestItemType;
+import forge.util.Lambda1;
 import forge.util.MyRandom;
 import forge.util.Predicate;
-import net.slightlymagic.braids.util.lambda.Lambda1;
 
 import java.util.ArrayList;
 import java.util.List;

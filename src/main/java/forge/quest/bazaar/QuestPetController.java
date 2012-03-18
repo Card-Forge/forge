@@ -15,31 +15,53 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data.pet;
+package forge.quest.bazaar;
 
 import javax.swing.ImageIcon;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
+import java.io.File;
+import java.util.List;
+import java.util.ArrayList;
+
 import forge.Card;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.item.IQuestStallPurchasable;
 
 /**
  * <p>
  * Abstract QuestPetAbstract class.
  * </p>
- * 
+ * It's not good to store in a single class pets properties and bazaar sellable - such is a tradeoff for speed of development  
  * @author Forge
  * @version $Id$
  */
-public abstract class QuestPetAbstract implements IQuestStallPurchasable {
+public class QuestPetController implements IQuestBazaarItem {
 
     /** The level. */
-    private int level;
-    private final int maxLevel;
-    // transient here ?
-    private final String name;
-    private final String description;
+    @XStreamAsAttribute()
+    private int maxLevel;
+    
+    private final List<QuestPetStats> levels = new ArrayList<QuestPetStats>();
 
+    @XStreamAsAttribute()
+    private final String name;
+    
+    @XStreamAlias(value="desc")
+    private final String description;
+    @XStreamAsAttribute()
+    private final String saveFileKey;
+    @XStreamAsAttribute()    
+    private int slot; 
+    
+    protected int getPetLevel(QuestAssets qA) {
+        int level = qA.getPetLevel(saveFileKey);
+        return level < 0 ? 0 : level > maxLevel ? maxLevel : level; 
+    }
+    
     /**
      * <p>
      * getPetCard.
@@ -47,16 +69,11 @@ public abstract class QuestPetAbstract implements IQuestStallPurchasable {
      * 
      * @return a {@link forge.Card} object.
      */
-    public abstract Card getPetCard();
-
-    /**
-     * <p>
-     * getAllUpgradePrices.
-     * </p>
-     * 
-     * @return an array of int.
-     */
-    public abstract int[] getAllUpgradePrices();
+    
+    
+    public Card getPetCard(QuestAssets qA) {
+        return this.levels.get(getPetLevel(qA)).getCard();
+    }
 
     /**
      * <p>
@@ -67,8 +84,11 @@ public abstract class QuestPetAbstract implements IQuestStallPurchasable {
      */
     @Override
     public final int getBuyingPrice(QuestAssets qA) {
-        return this.getAllUpgradePrices()[this.level];
+        int level = getPetLevel(qA);
+        // we'll buy next level 
+        return level >= maxLevel ? -1 /* cannot buy */ : this.levels.get(level + 1).getCost();
     }
+    
 
     /** {@inheritDoc} */
     @Override
@@ -78,32 +98,14 @@ public abstract class QuestPetAbstract implements IQuestStallPurchasable {
 
     /**
      * <p>
-     * getAllUpgradeDescriptions.
-     * </p>
-     * 
-     * @return an array of {@link java.lang.String} objects.
-     */
-    public abstract String[] getAllUpgradeDescriptions();
-
-    /**
-     * <p>
      * getUpgradeDescription.
      * </p>
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final String getUpgradeDescription() {
-        return this.getAllUpgradeDescriptions()[this.level];
+    public final String getUpgradeDescription(QuestAssets qA) {
+        return this.levels.get(getPetLevel(qA)).getNextLevel();
     }
-
-    /**
-     * <p>
-     * getAllImageNames.
-     * </p>
-     * 
-     * @return an array of {@link java.lang.String} objects.
-     */
-    public abstract ImageIcon[] getAllIcons();
 
     /**
      * <p>
@@ -113,18 +115,11 @@ public abstract class QuestPetAbstract implements IQuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public final ImageIcon getIcon() {
-        return this.getAllIcons()[this.level];
+    public final ImageIcon getIcon(QuestAssets qA) {
+        String path = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath() + File.separator;
+        int level = getPetLevel(qA);
+        return new ImageIcon( path + levels.get(level < maxLevel ? level + 1 : level ).getPicture() + ".jpg");
     }
-
-    /**
-     * <p>
-     * getAllStats.
-     * </p>
-     * 
-     * @return an array of {@link java.lang.String} objects.
-     */
-    public abstract String[] getAllStats();
 
     /**
      * <p>
@@ -133,8 +128,8 @@ public abstract class QuestPetAbstract implements IQuestStallPurchasable {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final String getStats() {
-        return this.getAllStats()[this.level];
+    public final String getStats(QuestAssets qA) {
+        return this.levels.get(getPetLevel(qA)).getStats();
     }
 
     /**
@@ -144,30 +139,9 @@ public abstract class QuestPetAbstract implements IQuestStallPurchasable {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final String getUpgradedStats() {
-        return this.getAllStats()[this.level + 1];
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>level</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getLevel() {
-        return this.level;
-    }
-
-    /**
-     * <p>
-     * incrementLevel.
-     * </p>
-     */
-    public final void incrementLevel() {
-        if (this.level < this.maxLevel) {
-            this.level++;
-        }
+    public final String getUpgradedStats(QuestAssets qA) {
+        int level = getPetLevel(qA);
+        return level >= maxLevel ? "N/A" : this.levels.get(level+1).getStats();
     }
 
     /**
@@ -181,35 +155,14 @@ public abstract class QuestPetAbstract implements IQuestStallPurchasable {
         return this.maxLevel;
     }
 
-    /**
-     * <p>
-     * Constructor for QuestPetAbstract.
-     * </p>
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @param description
-     *            a {@link java.lang.String} object.
-     * @param maxLevel
-     *            a int.
-     */
-    protected QuestPetAbstract(final String name, final String description, final int maxLevel) {
-        this.description = description;
-        this.name = name;
-        this.maxLevel = maxLevel;
+    // Never to be called, instances will be read from xml
+    private QuestPetController() {
+        this.description = null;
+        this.name = null;
+        this.maxLevel = 0;
+        this.saveFileKey = null;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>level</code>.
-     * </p>
-     * 
-     * @param level
-     *            a int.
-     */
-    public final void setLevel(final int level) {
-        this.level = level;
-    }
 
     /**
      * <p>
@@ -221,8 +174,8 @@ public abstract class QuestPetAbstract implements IQuestStallPurchasable {
     @Override
     public final String getPurchaseDescription(QuestAssets qA) {
         return this.getDescription()
-                + "\n\nCurrent stats: " + this.getStats() + "\nUpgraded stats: "
-                + this.getUpgradedStats();
+                + "\n\nCurrent stats: " + this.getStats(qA) + "\nUpgraded stats: "
+                + this.getUpgradedStats(qA);
 
     }
 
@@ -287,11 +240,7 @@ public abstract class QuestPetAbstract implements IQuestStallPurchasable {
      */
     @Override
     public boolean isAvailableForPurchase(QuestAssets qA) {
-        final QuestPetAbstract pet = qA.getPetManager().getPet(this.name);
-        if (pet == null) {
-            return true;
-        }
-        return pet.level < pet.getMaxLevel();
+        return getPetLevel(qA) < getMaxLevel();
     }
 
     /**
@@ -301,6 +250,18 @@ public abstract class QuestPetAbstract implements IQuestStallPurchasable {
      */
     @Override
     public void onPurchase(QuestAssets qA) {
-        qA.getPetManager().addPetLevel(this.name);
+        qA.setPetLevel(saveFileKey, getPetLevel(qA) + 1);
+    }
+
+    public String getSaveFileKey() {
+        return saveFileKey;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public int getSlot() {
+        return slot;
     }
 }

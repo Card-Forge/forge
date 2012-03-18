@@ -12,15 +12,15 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
+import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.item.IQuestStallPurchasable;
 
 /** An update-able panel instance representing a single item. */
 @SuppressWarnings("serial")
 public class ViewItem extends FPanel {
     private final FLabel lblIcon, lblName, lblPrice, btnPurchase;
     private final FTextArea tarDesc;
-    private IQuestStallPurchasable item;
+    private IQuestBazaarItem item;
 
     /** An update-able panel instance representing a single item. */
     public ViewItem() {
@@ -48,7 +48,7 @@ public class ViewItem extends FPanel {
             public void execute() {
                 final QuestAssets qA = AllZone.getQuest().getAssets();
                 final int cost = ViewItem.this.getItem().getBuyingPrice(qA);
-                if ((qA.getCredits() - cost) >= 0) {
+                if ( cost >= 0 && (qA.getCredits() - cost) >= 0) {
                     qA.subtractCredits(cost);
                     qA.addCredits(ViewItem.this.getItem().getSellingPrice(qA));
                     ViewItem.this.getItem().onPurchase(qA);
@@ -61,14 +61,14 @@ public class ViewItem extends FPanel {
 
     /**
      * @param i0
-     *            &emsp; {@link forge.quest.data.item.IQuestStallPurchasable}
+     *            &emsp; {@link forge.quest.bazaar.IQuestBazaarItem}
      */
-    public void setItem(final IQuestStallPurchasable i0) {
+    public void setItem(final IQuestBazaarItem i0) {
         this.item = i0;
     }
 
-    /** @return {@link forge.quest.data.item.IQuestStallPurchasable} */
-    public IQuestStallPurchasable getItem() {
+    /** @return {@link forge.quest.bazaar.IQuestBazaarItem} */
+    public IQuestBazaarItem getItem() {
         return this.item;
     }
 
@@ -78,13 +78,15 @@ public class ViewItem extends FPanel {
             @Override
             public void run() {
                 final QuestAssets qA = AllZone.getQuest().getAssets();
-                ViewItem.this.lblIcon.setIcon(ViewItem.this.getItem().getIcon());
-                ViewItem.this.lblName.setText(ViewItem.this.getItem().getPurchaseName());
-                ViewItem.this.lblPrice.setText("Cost: " + String.valueOf(ViewItem.this.getItem().getBuyingPrice(qA))
-                        + " credits");
-                ViewItem.this.tarDesc.setText(ViewItem.this.getItem().getPurchaseDescription(qA));
+                IQuestBazaarItem bazaarItem = ViewItem.this.getItem();
+                
+                ViewItem.this.lblIcon.setIcon(bazaarItem.getIcon(qA));
+                ViewItem.this.lblName.setText(bazaarItem.getPurchaseName());
+                ViewItem.this.lblPrice.setText("Cost: " + String.valueOf(bazaarItem.getBuyingPrice(qA)) + " credits");
+                String desc = bazaarItem.getPurchaseDescription(qA);
+                ViewItem.this.tarDesc.setText(desc);
 
-                if (qA.getCredits() < ViewItem.this.getItem().getBuyingPrice(qA)) {
+                if (qA.getCredits() < bazaarItem.getBuyingPrice(qA)) {
                     ViewItem.this.btnPurchase.setEnabled(false);
                 }
 

@@ -17,6 +17,7 @@
  */
 package forge.quest.data;
 
+import forge.quest.QuestMode;
 import forge.quest.io.QuestDataIO;
 
 //when you create QuestDataOld and AFTER you copy the AI decks over
@@ -33,9 +34,8 @@ import forge.quest.io.QuestDataIO;
  */
 public final class QuestData {
 
-    // This field holds the version of the Quest Data
-    /** Constant <code>CURRENT_VERSION_NUMBER=2</code>. */
-    public static final int CURRENT_VERSION_NUMBER = 4;
+    /** Holds the latest version of the Quest Data */
+    public static final int CURRENT_VERSION_NUMBER = 5;
 
     // This field places the version number into QD instance,
     // but only when the object is created through the constructor

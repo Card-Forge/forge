@@ -8,10 +8,10 @@ import forge.gui.home.ICSubmenu;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
+import forge.quest.QuestMode;
+import forge.quest.QuestStartPool;
 import forge.quest.data.QuestData;
-import forge.quest.data.QuestMode;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.data.QuestStartPool;
 import forge.quest.io.QuestDataIO;
 
 import javax.swing.*;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static forge.quest.data.QuestStartPool.*;
+import static forge.quest.QuestStartPool.*;
 
 /** 
  * TODO: Write javadoc for this type.

@@ -25,7 +25,6 @@ import java.util.StringTokenizer;
 import java.util.TreeMap;
 
 import net.slightlymagic.braids.util.generator.GeneratorFunctions;
-import net.slightlymagic.braids.util.lambda.Lambda1;
 
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
@@ -34,6 +33,7 @@ import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.Lambda1;
 
 /**
  * <p>

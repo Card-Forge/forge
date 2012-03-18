@@ -20,12 +20,12 @@ package forge.gui.deckeditor;
 import java.awt.Component;
 import java.util.ArrayList;
 
-import net.slightlymagic.braids.util.lambda.Lambda0;
 
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.DeckBase;
 import forge.util.IStorage;
+import forge.util.Lambda0;
 
 /**
  * TODO: Write javadoc for this type.

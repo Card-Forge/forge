@@ -33,7 +33,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.Command;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -55,6 +54,7 @@ import forge.item.PreconDeck;
 import forge.item.TournamentPack;
 import forge.quest.QuestController;
 import forge.quest.io.ReadPriceList;
+import forge.util.Lambda1;
 import forge.util.Predicate;
 
 /**

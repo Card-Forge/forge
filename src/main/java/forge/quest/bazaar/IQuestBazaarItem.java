@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data.item;
+package forge.quest.bazaar;
 
 import javax.swing.ImageIcon;
 
@@ -27,7 +27,7 @@ import forge.quest.data.QuestAssets;
  * @author Forge
  * @version $Id$
  */
-public interface IQuestStallPurchasable extends Comparable<Object> {
+public interface IQuestBazaarItem extends Comparable<Object> {
     /**
      * <p>
      * getPurchaseName.
@@ -53,7 +53,7 @@ public interface IQuestStallPurchasable extends Comparable<Object> {
      * 
      * @return the name of the image that is displayed in the bazaar
      */
-    ImageIcon getIcon();
+    ImageIcon getIcon(QuestAssets qA);
 
     /**
      * <p>

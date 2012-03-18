@@ -20,7 +20,6 @@ package forge.gui.deckeditor;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.Singletons;
 import forge.card.CardColor;
 import forge.card.CardEdition;
@@ -29,6 +28,7 @@ import forge.card.CardRarity;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
+import forge.util.Lambda1;
 
 /**
  * TODO: Write javadoc for this type.

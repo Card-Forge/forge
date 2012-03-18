@@ -27,12 +27,7 @@ import forge.deck.Deck;
  * MODEL - A basic event instance in Quest mode. Can be extended for use in
  * unique event types: battles, quests, and others.
  */
-public class QuestEvent {
-    /** */
-    public enum QuestEventType { /** */
-        DUEL, /** */
-        CHALLENGE
-    }
+public abstract class QuestEvent {
     // Default vals if none provided in the event file.
     /** The event deck. */
     private Deck eventDeck = null;
@@ -51,9 +46,6 @@ public class QuestEvent {
 
     /** The name. */
     private String name = "Noname";
-
-    /** The event type. */
-    private QuestEventType eventType = null;
 
     /**
      * <p>
@@ -101,17 +93,6 @@ public class QuestEvent {
 
     /**
      * <p>
-     * getEventDeck.
-     * </p>
-     * 
-     * @return {@link forge.deck.Deck}
-     */
-    public final QuestEventType getEventType() {
-        return this.eventType;
-    }
-
-    /**
-     * <p>
      * getIconFilename.
      * </p>
      * 
@@ -130,16 +111,6 @@ public class QuestEvent {
      */
     public final String getName() {
         return this.name;
-    }
-
-    /**
-     * Sets the event type.
-     * 
-     * @param eventType0
-     *            the eventType to set
-     */
-    public void setEventType(final QuestEventType eventType0) {
-        this.eventType = eventType0;
     }
 
     /**

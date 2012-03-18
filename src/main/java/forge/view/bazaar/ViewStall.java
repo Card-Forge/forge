@@ -36,9 +36,9 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.quest.QuestController;
+import forge.quest.bazaar.IQuestBazaarItem;
+import forge.quest.bazaar.QuestStallDefinition;
 import forge.quest.data.QuestAssets;
-import forge.quest.data.QuestStallDefinition;
-import forge.quest.data.item.IQuestStallPurchasable;
 import forge.view.ViewBazaarUI;
 
 /**
@@ -137,7 +137,7 @@ public class ViewStall extends JPanel {
 
     /**
      * @param q0
-     *            &emsp; {@link forge.quest.data.QuestStallDefinition}
+     *            &emsp; {@link forge.quest.bazaar.QuestStallDefinition}
      */
     public void setStall(final QuestStallDefinition q0) {
         this.stall = q0;
@@ -156,7 +156,7 @@ public class ViewStall extends JPanel {
         final QuestAssets qS = qData.getAssets();
         this.lblStats.setText("Credits: " + qS.getCredits() + "         Life: " + qS.getLife(qData.getMode()));
 
-        final List<IQuestStallPurchasable> items = AllZone.getQuest().getBazaar().getItems(this.stall.getName());
+        final List<IQuestBazaarItem> items = AllZone.getQuest().getBazaar().getItems(this.stall.getName());
 
         this.lblStallName.setText(this.stall.getDisplayName());
         this.tpnFluff.setText(this.stall.getFluff());
