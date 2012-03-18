@@ -1,0 +1,13 @@
+Name:Ward Sliver
+ManaCost:4 W
+Types:Creature Sliver
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You
+S:Mode$ Continuous | Affected$ Sliver | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ All Slivers have protection from the chosen color.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ward_sliver.jpg
+End

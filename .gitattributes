@@ -10044,6 +10044,7 @@ res/cardsfolder/w/war_spike_changeling.txt svneol=native#text/plain
 res/cardsfolder/w/war_torch_goblin.txt svneol=native#text/plain
 res/cardsfolder/w/warbreak_trumpeter.txt svneol=native#text/plain
 res/cardsfolder/w/ward_of_bones.txt -text
+res/cardsfolder/w/ward_sliver.txt -text svneol=unset#text/plain
 res/cardsfolder/w/warden_of_the_wall.txt -text
 res/cardsfolder/w/wargate.txt svneol=native#text/plain
 res/cardsfolder/w/warlords_axe.txt svneol=native#text/plain
