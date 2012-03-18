@@ -1,6 +1,6 @@
 Name:Boldwyr Heavyweights
 ManaCost:2 R R
-Types:Creature Giant
+Types:Creature Giant Warrior
 Text:no text
 PT:8/8
 K:Trample

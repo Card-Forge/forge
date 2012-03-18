@@ -1,6 +1,6 @@
 Name:Screeching Griffin
 ManaCost:3 W
-Types:Artifact Creature Construct
+Types:Creature Griffin
 Text:no text
 PT:2/2
 K:Flying

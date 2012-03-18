@@ -1,6 +1,6 @@
 Name:Nova Chaser
 ManaCost:3 R
-Types:Creature Elemental
+Types:Creature Elemental Warrior
 Text:no text
 PT:10/2
 K:Trample

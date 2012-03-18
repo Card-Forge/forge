@@ -1,6 +1,6 @@
 Name:Giant Harbinger
 ManaCost:4 R
-Types:Creature Giant
+Types:Creature Giant Shaman
 Text:no text
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Giant card, reveal it, then shuffle your library and put that card on top of it.

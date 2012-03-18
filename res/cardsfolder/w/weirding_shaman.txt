@@ -1,6 +1,6 @@
 Name:Weirding Shaman
 ManaCost:1 B
-Types:Creature Goblin
+Types:Creature Goblin Shaman
 Text:no text
 PT:2/1
 A:AB$ Token | Cost$ 3 B Sac<1/Goblin> | TokenAmount$ 2 | TokenName$ Goblin Rogue | TokenTypes$ Creature,Goblin,Rogue | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 black Goblin Rogue creature tokens onto the battlefield.
