@@ -1256,6 +1256,16 @@ public class AbilityFactory {
             }
         }
 
+        else if (this.api.equals("UnattachAll")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryAttach.createAbilityUnattachAll(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryAttach.createSpellUnattachAll(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryAttach.createDrawbackUnattachAll(this);
+            }
+        }
+
         else if (this.api.equals("Untap")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryPermanentState.createAbilityUntap(this);
