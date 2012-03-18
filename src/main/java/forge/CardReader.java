@@ -385,8 +385,7 @@ public class CardReader implements Runnable {
      * @param mapToFill is used to eliminate duplicates
      * @return the card
      */
-    public static Card readCard(final Iterable<String> lines, final CardRulesReader rulesReader,
-            final Map<String, Card> mapToFill) {
+    public static Card readCard(final Iterable<String> lines, final CardRulesReader rulesReader, final Map<String, Card> mapToFill) {
         final Card card = new Card();
         boolean ignoreTheRest = false;
 

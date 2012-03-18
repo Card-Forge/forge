@@ -27,29 +27,21 @@ public class QuestPetStats {
 
     @XStreamAsAttribute()
     @XStreamAlias(value = "pic")
-    private final String picture;
+    private String picture;
     
     @XStreamAsAttribute()
-    private final String stats;
+    private String stats;
     
     @XStreamAsAttribute()
-    private final String cardFile;
+    private String cardFile;
     
     @XStreamAsAttribute()
     private int cost;
     
     @XStreamAsAttribute()
-    private final String nextLevel;
+    private String nextLevel;
     
-    private transient Card petCard;
-
-    public QuestPetStats()
-    {
-        picture = null;
-        stats = null;
-        cardFile = null;
-        nextLevel = null;
-    }
+    private QuestPetStats() { }
     
     public final int getLevelValue() {
         return levelValue;
@@ -64,13 +56,13 @@ public class QuestPetStats {
     }
 
     public final Card getCard() {
-        if ( petCard == null ) {
-            List<String> cardLines = FileUtil.readFile(new File(ForgeProps.getFile(NewConstants.Quest.BAZAAR_DIR), cardFile));
-            petCard = CardReader.readCard(cardLines);
-            petCard.setImageFilename(picture);
-            petCard.setToken(true);
-            petCard.setOwner(AllZone.getHumanPlayer());
-        }
+        List<String> cardLines = FileUtil.readFile(new File(ForgeProps.getFile(NewConstants.Quest.BAZAAR_DIR), cardFile));
+        Card petCard = CardReader.readCard(cardLines);
+        petCard.setImageFilename(picture.replace('_', ' '));
+        petCard.setToken(true);
+        petCard.addController(AllZone.getHumanPlayer());
+        petCard.setOwner(AllZone.getHumanPlayer());
+        petCard.setSickness(true);
         return petCard;
     }
 

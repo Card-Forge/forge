@@ -96,10 +96,7 @@ public class QuestUtil {
             if (pet != null) {
                 Card c = pet.getPetCard(qc.getAssets());
                 if ( c != null ){
-                    Card petCard = AbstractCardFactory.getCard2(c, AllZone.getHumanPlayer()); 
-                    petCard.addController(AllZone.getHumanPlayer());
-                    petCard.setToken(true);
-                    // list.add(petCard);
+                    list.add(c);
                 }
             }
         }
