@@ -212,18 +212,16 @@ public class SubmenuQuestUtil {
 
                 if (qData.getMode() == QuestMode.Fantasy) {
                     int lifeAI = 20;
-                    int lifeHuman = 20;
-
                     if (selectedOpponent.getEvent().getEventType() == CHALLENGE) {
-                        int extraLife = 0;
-
-                        // If zeppelin has been purchased, gear will be at level 2.
-                        if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)
-                            && VSubmenuChallenges.SINGLETON_INSTANCE.getCbZep().isSelected()) {
-                                extraLife = 3;
-                        }
                         lifeAI = ((QuestChallenge) event).getAILife();
-                        lifeHuman = qData.getAssets().getLife(qData.getMode()) + extraLife;
+                    }
+
+                    int baseLifeHuman = qData.getAssets().getLife(qData.getMode());
+                    int extraLife = 0;
+                    // If zeppelin has been purchased, gear will be at level 2.
+                    if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)
+                        && VSubmenuChallenges.SINGLETON_INSTANCE.getCbZep().isSelected()) {
+                        extraLife = 3;
                     }
 
                     GameNew.newGame(
@@ -231,7 +229,7 @@ public class SubmenuQuestUtil {
                             Constant.Runtime.COMPUTER_DECK[0],
                             QuestUtil.getHumanStartingCards(qData.getAssets(), event),
                             QuestUtil.getComputerStartingCards(event),
-                            lifeHuman,
+                            baseLifeHuman + extraLife,
                             lifeAI,
                             event.getIconFilename());
                 } // End isFantasy
