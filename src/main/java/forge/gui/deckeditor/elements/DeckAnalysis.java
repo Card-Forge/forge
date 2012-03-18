@@ -28,11 +28,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -45,12 +44,12 @@ import javax.swing.border.BevelBorder;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.DefaultTableModel;
 
-import net.miginfocom.swing.MigLayout;
 import forge.card.CardRules;
 import forge.card.CardType;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.util.MyRandom;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -111,7 +110,7 @@ public class DeckAnalysis extends javax.swing.JDialog {
     private JSeparator jSeparator1;
     private JLabel jLabel2;
     private JButton jButtonOk;
-    private final JFrame jF;
+    private final JDialog parentDialog;
 
     /** The deck. */
     private final ItemPoolView<CardPrinted> deck;
@@ -126,11 +125,11 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @param deckView
      *            the deck view
      */
-    public DeckAnalysis(final JFrame g, final ItemPoolView<CardPrinted> deckView) {
+    public DeckAnalysis(final JDialog g, final ItemPoolView<CardPrinted> deckView) {
         super(g);
         this.deck = deckView;
 
-        this.jF = g;
+        this.parentDialog = g;
         this.initGUI();
     }
 
@@ -160,7 +159,7 @@ public class DeckAnalysis extends javax.swing.JDialog {
             this.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(final WindowEvent arg0) {
-                    DeckAnalysis.this.jF.setEnabled(true);
+                    DeckAnalysis.this.parentDialog.setEnabled(true);
                 }
 
                 @Override
@@ -475,7 +474,7 @@ public class DeckAnalysis extends javax.swing.JDialog {
             this.jButtonOk.addMouseListener(new MouseInputAdapter() {
                 @Override
                 public void mouseClicked(final MouseEvent e) {
-                    DeckAnalysis.this.jF.setEnabled(true);
+                    DeckAnalysis.this.parentDialog.setEnabled(true);
                     DeckAnalysis.this.dispose();
                 }
             });

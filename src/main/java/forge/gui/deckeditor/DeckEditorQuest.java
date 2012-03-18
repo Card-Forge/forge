@@ -18,6 +18,7 @@
 package forge.gui.deckeditor;
 
 // import java.awt.Font;
+
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,9 +28,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 
 import forge.Command;
 import forge.Constant;
@@ -176,11 +177,12 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
     /**
      * Instantiates a new deck editor quest.
      * 
+     * @param parent
      * @param questData2
      *            the quest data2
      */
-    public DeckEditorQuest(final QuestController questData2) {
-
+    public DeckEditorQuest(JFrame parent, final QuestController questData2) {
+        super(parent);
         this.questData = questData2;
         try {
             this.setFilterBoxes(new FilterCheckBoxes(false));

@@ -1,5 +1,11 @@
 package forge.gui.home.quest;
 
+import java.io.File;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
@@ -16,9 +22,9 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.quest.QuestEventChallenge;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
+import forge.quest.QuestEventChallenge;
 import forge.quest.QuestMode;
 import forge.quest.QuestUtil;
 import forge.quest.bazaar.QuestItemType;
@@ -28,13 +34,6 @@ import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences.QPref;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.StringUtils;
-
-import java.io.File;
-import java.util.List;
-
-import javax.swing.ImageIcon;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 
 /** 
  * Utilities for the quest submenu, all over the MVC spectrum.
@@ -186,7 +185,7 @@ public class SubmenuQuestUtil {
             }
         };
 
-        final QuestCardShop g = new QuestCardShop(AllZone.getQuest());
+        final QuestCardShop g = new QuestCardShop(Singletons.getView().getFrame(), AllZone.getQuest());
         g.show(exit);
         g.setVisible(true);
     }

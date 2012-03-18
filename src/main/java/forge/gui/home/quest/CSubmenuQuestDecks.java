@@ -74,7 +74,8 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
         VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new Command() {
             @Override
             public void execute() {
-                final DeckEditorQuest editor = new DeckEditorQuest(AllZone.getQuest());
+                final DeckEditorQuest editor =
+                        new DeckEditorQuest(Singletons.getView().getFrame(), AllZone.getQuest());
                 editor.show(cmdDeckExit);
                 OverlayUtils.showOverlay();
                 editor.setVisible(true);

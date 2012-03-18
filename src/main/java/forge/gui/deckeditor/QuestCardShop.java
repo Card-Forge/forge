@@ -28,8 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -211,7 +211,8 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, DeckBase>
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      */
-    public QuestCardShop(final QuestController qd) {
+    public QuestCardShop(JFrame parent, final QuestController qd) {
+        super(parent);
         this.questData = qd;
         try {
             this.setFilterBoxes(null);

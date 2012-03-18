@@ -20,12 +20,11 @@ package forge.gui.deckeditor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
 
 import forge.Command;
 import forge.deck.DeckBase;
@@ -45,7 +44,7 @@ import forge.util.Predicate;
  * @param <T> the generic type
  * @param <TModel> the generic type
  */
-public abstract class DeckEditorBase<T extends InventoryItem, TModel extends DeckBase> extends JFrame {
+public abstract class DeckEditorBase<T extends InventoryItem, TModel extends DeckBase> extends JDialog {
     private static final long serialVersionUID = -401223933343539977L;
 
     /** The filter boxes. */
@@ -64,6 +63,10 @@ public abstract class DeckEditorBase<T extends InventoryItem, TModel extends Dec
 
     /** The bottom. */
     private TableView<T> bottomTableWithCards;
+
+    public DeckEditorBase(JFrame parent) {
+        super(parent, ModalityType.APPLICATION_MODAL);
+    }
 
     // top shows available card pool
     // if constructed, top shows all cards

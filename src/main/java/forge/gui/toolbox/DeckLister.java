@@ -24,16 +24,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
-import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
@@ -45,6 +44,7 @@ import forge.gui.OverlayUtils;
 import forge.gui.deckeditor.DeckEditorConstructed;
 import forge.gui.deckeditor.DeckEditorLimited;
 import forge.gui.deckeditor.DeckEditorQuest;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Creates deck list for selected decks for quick deleting, editing, and basic
@@ -424,34 +424,34 @@ public class DeckLister extends JPanel {
     private void editDeck(final Deck d0) {
         OverlayUtils.showOverlay();
 
+        JFrame mainFrame = Singletons.getView().getFrame();
         switch (this.gametype) {
-        case Quest:
+            case Quest:
             Constant.Runtime.HUMAN_DECK[0] = d0;
-            final DeckEditorQuest editor = new DeckEditorQuest(AllZone.getQuest());
+            final DeckEditorQuest editor = new DeckEditorQuest(mainFrame, AllZone.getQuest());
             editor.show(this.cmdEditorExit);
             editor.setVisible(true);
-            editor.setAlwaysOnTop(true);
             break;
-        case Constructed:
-            final DeckEditorConstructed cEditor = new DeckEditorConstructed();
+            case Constructed:
+            final DeckEditorConstructed cEditor = 
+                    new DeckEditorConstructed(mainFrame);
             cEditor.show(this.cmdEditorExit);
             cEditor.getController().load(d0.getName());
             cEditor.setVisible(true);
-            cEditor.setAlwaysOnTop(true);
             break;
         case Sealed:
-            final DeckEditorLimited sEditor = new DeckEditorLimited(Singletons.getModel().getDecks().getSealed());
+            final DeckEditorLimited sEditor = 
+                    new DeckEditorLimited(mainFrame, Singletons.getModel().getDecks().getSealed());
             sEditor.show(this.cmdEditorExit);
             sEditor.getController().load(d0.getName());
             sEditor.setVisible(true);
-            sEditor.setAlwaysOnTop(true);
             break;
         case Draft:
-            final DeckEditorLimited dEditor = new DeckEditorLimited(Singletons.getModel().getDecks().getDraft());
+            final DeckEditorLimited dEditor =
+                    new DeckEditorLimited(mainFrame, Singletons.getModel().getDecks().getDraft());
             dEditor.show(this.cmdEditorExit);
             dEditor.getController().load(d0.getName());
             dEditor.setVisible(true);
-            dEditor.setAlwaysOnTop(true);
             break;
         default:
             break;

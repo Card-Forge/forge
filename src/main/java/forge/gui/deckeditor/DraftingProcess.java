@@ -30,8 +30,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
@@ -187,8 +187,8 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
     /**
      * Instantiates a new deck editor draft.
      */
-    public DraftingProcess() {
-
+    public DraftingProcess(JFrame parent) {
+        super(parent);
         try {
             this.setTopTableWithCards(new TableView<CardPrinted>("Choose one card", false, CardPrinted.class));
             this.setBottomTableWithCards(new TableView<CardPrinted>("Previously picked cards", true, CardPrinted.class));

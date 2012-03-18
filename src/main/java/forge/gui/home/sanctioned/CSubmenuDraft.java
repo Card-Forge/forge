@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -220,7 +219,7 @@ public enum CSubmenuDraft implements ICSubmenu {
     private void setupDraft() {
         OverlayUtils.showOverlay();
 
-        final DraftingProcess draft = new DraftingProcess();
+        final DraftingProcess draft = new DraftingProcess(Singletons.getView().getFrame());
 
         // Determine what kind of booster draft to run
         final ArrayList<String> draftTypes = new ArrayList<String>();

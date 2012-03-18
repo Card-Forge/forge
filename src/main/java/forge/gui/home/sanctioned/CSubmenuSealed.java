@@ -6,14 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-
-import net.slightlymagic.braids.util.UtilFunctions;
-
-import org.apache.commons.lang3.StringUtils;
 
 import forge.Command;
 import forge.Constant;
@@ -33,6 +28,8 @@ import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import net.slightlymagic.braids.util.UtilFunctions;
+import org.apache.commons.lang3.StringUtils;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -226,8 +223,9 @@ public enum CSubmenuSealed implements ICSubmenu {
         sealed.addAiDeck(sd.buildAIDeck(sDeck.toForgeCardList()));
         Singletons.getModel().getDecks().getSealed().add(sealed);
 
-        final DeckEditorBase<?, T> editor = (DeckEditorBase<?, T>)
-                new DeckEditorLimited(Singletons.getModel().getDecks().getSealed());
+        final DeckEditorBase<?, T> editor = (DeckEditorBase<?, T>) new DeckEditorLimited(
+                Singletons.getView().getFrame(),
+                Singletons.getModel().getDecks().getSealed());
 
         editor.show(cmdExit);
         editor.getController().setModel((T) sealed);

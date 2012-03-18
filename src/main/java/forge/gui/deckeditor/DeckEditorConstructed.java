@@ -18,9 +18,7 @@
 package forge.gui.deckeditor;
 
 import java.awt.Container;
-import java.awt.Dialog.ModalityType;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -30,12 +28,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -52,6 +49,7 @@ import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.util.Lambda0;
 import forge.util.Predicate;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * <p>
@@ -145,7 +143,6 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
         this.filterNameTypeSet.setListeners(new OnChangeTextUpdateDisplay(), this.getItemListenerUpdatesDisplay());
 
         this.setSize(1024, 740);
-        this.setExtendedState(Frame.MAXIMIZED_BOTH);
 
     }
 
@@ -153,7 +150,8 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
      * Instantiates a new deck editor common.
      *
      */
-    public DeckEditorConstructed() {
+    public DeckEditorConstructed(JFrame parent) {
+        super(parent);
         try {
             this.setFilterBoxes(new FilterCheckBoxes(true));
             this.setTopTableWithCards(new TableView<CardPrinted>("Avaliable Cards", true, true, CardPrinted.class));
