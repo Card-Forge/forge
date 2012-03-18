@@ -17,7 +17,11 @@
  */
 package forge.quest;
 
-import forge.*;
+import forge.AllZone;
+import forge.Card;
+import forge.CardList;
+import forge.CardUtil;
+import forge.Player;
 import forge.quest.data.QuestAssets;
 
 import java.util.List;
