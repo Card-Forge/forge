@@ -1,6 +1,6 @@
 Name:Phantom Warrior
 ManaCost:1 U U
-Types:Creature Illusion
+Types:Creature Illusion Warrior
 Text:no text
 PT:2/2
 K:Unblockable

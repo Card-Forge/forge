@@ -1,6 +1,6 @@
 Name:Nightmare
 ManaCost:5 B
-Types:Creature Nightmare
+Types:Creature Nightmare Horse
 Text:no text
 PT:*/*
 K:Flying

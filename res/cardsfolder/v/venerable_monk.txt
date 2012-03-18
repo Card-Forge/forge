@@ -1,6 +1,6 @@
 Name:Venerable Monk
 ManaCost:2 W
-Types:Creature Cleric
+Types:Creature Human Monk Cleric
 Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.

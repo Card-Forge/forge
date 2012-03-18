@@ -1,6 +1,6 @@
 Name:Chaotic Goo
 ManaCost:2 R R
-Types:Creature Centaur
+Types:Creature Ooze
 Text:no text
 PT:0/0
 K:etbCounter:P1P1:3
