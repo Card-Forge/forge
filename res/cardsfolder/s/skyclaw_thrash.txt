@@ -1,6 +1,6 @@
 Name:Skyclaw Thrash
 ManaCost:3 U R
-Types:Creature Viashino Warrior
+Types:Artifact Creature Viashino Warrior
 Text:no text
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ FlipCoin | TriggerDescription$ Whenever CARDNAME attacks, flip a coin. If you win the flip, CARDNAME gets +1/+1 and gains flying until end of turn.

@@ -1,6 +1,6 @@
 Name:Afflicted Deserter
 ManaCost:3 R
-Types:Creature Human Warrior Werewolf
+Types:Creature Human Werewolf
 Text:no text
 PT:3/2
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.

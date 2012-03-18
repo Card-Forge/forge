@@ -1,6 +1,6 @@
 Name:Nearheath Stalker
 ManaCost:4 R
-Types:Creature Vampire
+Types:Creature Vampire Rogue
 Text:no text
 PT:4/1
 K:Undying

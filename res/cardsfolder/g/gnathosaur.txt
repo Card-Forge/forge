@@ -1,6 +1,6 @@
 Name:Gnathosaur
 ManaCost:4 R R
-Types:Creature Beast
+Types:Creature Lizard
 Text:no text
 PT:5/4
 A:AB$ Pump | Cost$ Sac<1/Artifact> | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.

@@ -1,6 +1,6 @@
 Name:Bloodbraid Elf
 ManaCost:2 R G
-Types:Creature Elf
+Types:Creature Elf Berserker
 Text:no text
 PT:3/2
 K:Haste
