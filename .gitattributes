@@ -4910,6 +4910,7 @@ res/cardsfolder/k/kyren_glider.txt svneol=native#text/plain
 res/cardsfolder/k/kyren_legate.txt -text
 res/cardsfolder/k/kyren_negotiations.txt svneol=native#text/plain
 res/cardsfolder/k/kyren_sniper.txt svneol=native#text/plain
+res/cardsfolder/k/kyren_toy.txt -text svneol=unset#text/plain
 res/cardsfolder/k/kyscu_drake.txt -text
 res/cardsfolder/l/lab_rats.txt svneol=native#text/plain
 res/cardsfolder/l/laboratory_maniac.txt -text
