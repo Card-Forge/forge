@@ -1,6 +1,6 @@
 /*
  * Forge: Play Magic: the Gathering.
- * Copyright (C) 2011  Nate
+ * Copyright (C) 2011  Forge Team
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +22,9 @@ import forge.control.match.ControlPicture;
 import forge.gui.game.CardPicturePanel;
 import forge.gui.toolbox.FPanel;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 @SuppressWarnings("serial")
 public class ViewPicture extends FPanel {
@@ -48,7 +48,7 @@ public class ViewPicture extends FPanel {
 
     /**
      * Gets the controller.
-     *
+     * 
      * @return ControlPicture
      */
     public ControlPicture getControl() {
@@ -57,7 +57,7 @@ public class ViewPicture extends FPanel {
 
     /**
      * Gets the pnl picture.
-     *
+     * 
      * @return CardPicturePanel
      */
     public CardPicturePanel getPnlPicture() {
