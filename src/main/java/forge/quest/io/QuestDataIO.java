@@ -97,6 +97,7 @@ public class QuestDataIO {
         xStream.registerConverter(new ItemPoolToXml());
         xStream.registerConverter(new DeckSectionToXml());
         xStream.registerConverter(new GameTypeToXml());
+        xStream.autodetectAnnotations(true);
         xStream.alias("CardPool", ItemPool.class);
         xStream.alias("DeckSection", DeckSection.class);
         return xStream;
