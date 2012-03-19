@@ -8795,7 +8795,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (kw.startsWith("Protection:")) { // uses isValid
                     final String characteristic = kw.split(":")[1];
                     final String[] characteristics = characteristic.split(",");
-                    if (source.isValid(characteristics, this.getController(), this)) {
+                    if (source.isValid(characteristics, this.getController(), this)
+                      && !source.getName().contains("Flickering Ward")) {
                         return true;
                     }
                 }
