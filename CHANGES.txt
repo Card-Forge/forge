@@ -148,6 +148,30 @@ Undead Alchemist
 - Fixed bug where first quest game was always starting with 20 life.
 - Restored Zeppelin life behavior.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- data model update
+- Pets and plant are loaded from text files.
+- Card creation is an issue now.
+- might be better working now (
+- works somehow - only the second game starts properly
+- Fixed All Hallow's Eve.
+- Removed excess text from All Hallow's Eve.
+- Coverted deck editors and cardshop to JDialog.
+- This allows them to be modal and gets rid of the setAlwaysOnTop() call. (Which causes all manner of headaches on Linux)
+- add an AF UnattachAll. Removes all UnattachValid$ cards from target creature(s) and or player(s).
+- fix several creature types
+- fix several more creature types
+- fix several more creature types
+- Fixed Custody Battle.
+- Fixed Mortis Dogs
+- fix more creature types (thanks to catatafish)
+- fixing saves compatibility
+- quest loader will take attributes into account
+- Fixed Glade Gnarr's pump
+- Ran SetInfo script
+- Ran Oracle script
+- Added "CARDNAME can't be equipped." keyword and corrected some "CARDNAME can't be enchanted." implementation. They cards can now be targeted human, although attachment will fail with a relevant log message.
+- Ran scripts
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -195,6 +219,14 @@ Seht's Tiger
 Oriss, Samite Guardian
 Quicken
 Spellweaver Helix
+Knowledge Pool
+Ward Sliver
+Disarm
+Fulgent Distraction
+Endless Horizons
+Flickering Ward
+Goblin Brawler
+Blinding Beam
 
 
 end
