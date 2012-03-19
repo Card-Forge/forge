@@ -955,6 +955,11 @@ public class GameAction {
                         }
                     }
 
+                    if (AllZoneUtil.isCardInPlay(c) && !c.isEnchanting()) {
+                        this.moveToGraveyard(c);
+                        checkAgain = true;
+                    }
+
                 } // if isAura
 
                 if (c.isCreature()) {

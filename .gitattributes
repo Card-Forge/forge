@@ -3570,6 +3570,7 @@ res/cardsfolder/g/goblin_bangchuckers.txt -text
 res/cardsfolder/g/goblin_berserker.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_bomb.txt -text
 res/cardsfolder/g/goblin_bombardment.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_brawler.txt -text
 res/cardsfolder/g/goblin_brigand.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_bully.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_burrows.txt svneol=native#text/plain

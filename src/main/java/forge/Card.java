@@ -4174,6 +4174,14 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.Card} object.
      */
     public final void equipCard(final Card c) {
+        if (c.hasKeyword("CARDNAME can't be equipped.")) {
+            AllZone.getGameLog().add("ResolveStack", "Trying to equip " + c.getName()
+            + " but it can't be equipped.", 2);
+            return;
+        }
+        if (this.isEquipping()) {
+            this.unEquipCard(this.getEquipping().get(0));
+        }
         this.addEquipping(c);
         c.addEquippedBy(this);
         this.equip();
@@ -4352,6 +4360,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.GameEntity} object.
      */
     public final void enchantEntity(final GameEntity entity) {
+        if (entity.hasKeyword("CARDNAME can't be enchanted.")) {
+            AllZone.getGameLog().add("ResolveStack", "Trying to enchant " + entity.getName()
+            + " but it can't be enchanted.", 2);
+            return;
+        }
         this.addEnchanting(entity);
         entity.addEnchantedBy(this);
         this.enchant();
@@ -8869,12 +8882,23 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
 
-                if (kw.equals("CARDNAME can't be the target of Aura spells.")
-                        || kw.equals("CARDNAME can't be enchanted.")) {
+                if (kw.equals("CARDNAME can't be the target of Aura spells.")) {
                     if (source.isAura() && sa.isSpell()) {
                         return false;
                     }
                 }
+
+                if (kw.equals("CARDNAME can't be enchanted.")) {
+                    if (source.isAura() && source.getController().isComputer()) {
+                        return false;
+                    }
+                } //Sets source as invalid enchant target for computer player only.
+
+                if (kw.equals("CARDNAME can't be equipped.")) {
+                    if (source.isEquipment() && source.getController().isComputer()) {
+                        return false;
+                    }
+                } //Sets source as invalid equip target for computer player only.
 
                 if (kw.equals("CARDNAME can't be the target of red spells or abilities from red sources.")) {
                     if (source.isRed()) {
@@ -8919,7 +8943,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (this.hasProtectionFrom(aura) || this.hasKeyword("CARDNAME can't be enchanted.")
-                || ((tgt != null) && !this.isValid(tgt.getValidTgts(), aura.getController(), aura))) {
+            || ((tgt != null) && !this.isValid(tgt.getValidTgts(), aura.getController(), aura))) {
             return false;
         }
         return true;
