@@ -17,12 +17,15 @@
  */
 package forge.quest.bazaar;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 import forge.quest.data.QuestItemCondition;
 
 /**
  * TODO: Write javadoc for this type.
  * 
  */
+@XStreamAlias(value="forge.quest.data.item.QuestItemType")
 public enum QuestItemType {
 
     /** The SLEIGHT. */
