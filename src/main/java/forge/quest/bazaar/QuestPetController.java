@@ -17,14 +17,14 @@
  */
 package forge.quest.bazaar;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.ImageIcon;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-
-import java.io.File;
-import java.util.List;
-import java.util.ArrayList;
 
 import forge.Card;
 import forge.properties.ForgeProps;
@@ -35,7 +35,9 @@ import forge.quest.data.QuestAssets;
  * <p>
  * Abstract QuestPetAbstract class.
  * </p>
- * It's not good to store in a single class pets properties and bazaar sellable - such is a tradeoff for speed of development  
+ * It's not good to store in a single class pets properties and bazaar sellable
+ * - such is a tradeoff for speed of development
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -43,56 +45,60 @@ public class QuestPetController implements IQuestBazaarItem {
 
     /** The level. */
     @XStreamAsAttribute()
-    private int maxLevel;
-    
+    private final int maxLevel;
+
     private final List<QuestPetStats> levels = new ArrayList<QuestPetStats>();
 
     @XStreamAsAttribute()
     private final String name;
-    
-    @XStreamAlias(value="desc")
+
+    @XStreamAlias(value = "desc")
     private final String description;
     @XStreamAsAttribute()
     private final String saveFileKey;
-    @XStreamAsAttribute()    
-    private int slot; 
-    
-    protected int getPetLevel(QuestAssets qA) {
-        int level = qA.getPetLevel(saveFileKey);
-        return level < 0 ? 0 : level > maxLevel ? maxLevel : level; 
+    @XStreamAsAttribute()
+    private int slot;
+
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @param qA quest assets
+     * @return int
+     */
+    protected int getPetLevel(final QuestAssets qA) {
+        final int level = qA.getPetLevel(this.saveFileKey);
+        return level < 0 ? 0 : level > this.maxLevel ? this.maxLevel : level;
     }
-    
+
     /**
      * <p>
      * getPetCard.
      * </p>
-     * 
+     * @param qA quest assets
      * @return a {@link forge.Card} object.
      */
-    
-    
-    public Card getPetCard(QuestAssets qA) {
-        return this.levels.get(getPetLevel(qA)).getCard();
+
+    public Card getPetCard(final QuestAssets qA) {
+        return this.levels.get(this.getPetLevel(qA)).getCard();
     }
 
     /**
      * <p>
      * getPrice.
      * </p>
-     * 
+     * @param qA quest assets
      * @return a int.
      */
     @Override
-    public final int getBuyingPrice(QuestAssets qA) {
-        int level = getPetLevel(qA);
-        // we'll buy next level 
-        return level >= maxLevel ? -1 /* cannot buy */ : this.levels.get(level + 1).getCost();
+    public final int getBuyingPrice(final QuestAssets qA) {
+        final int level = this.getPetLevel(qA);
+        // we'll buy next level
+        return level >= this.maxLevel ? -1 /* cannot buy */ : this.levels.get(level + 1).getCost();
     }
-    
 
     /** {@inheritDoc} */
     @Override
-    public final int getSellingPrice(QuestAssets qA) {
+    public final int getSellingPrice(final QuestAssets qA) {
         return 0;
     }
 
@@ -100,48 +106,48 @@ public class QuestPetController implements IQuestBazaarItem {
      * <p>
      * getUpgradeDescription.
      * </p>
-     * 
+     * @param qA quest assets
      * @return a {@link java.lang.String} object.
      */
-    public final String getUpgradeDescription(QuestAssets qA) {
-        return this.levels.get(getPetLevel(qA)).getNextLevel();
+    public final String getUpgradeDescription(final QuestAssets qA) {
+        return this.levels.get(this.getPetLevel(qA)).getNextLevel();
     }
 
     /**
      * <p>
      * getIcon.
      * </p>
-     * 
+     * @param qA quest assets
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public final ImageIcon getIcon(QuestAssets qA) {
-        String path = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath() + File.separator;
-        int level = getPetLevel(qA);
-        return new ImageIcon( path + levels.get(level < maxLevel ? level + 1 : level ).getPicture() + ".jpg");
+    public final ImageIcon getIcon(final QuestAssets qA) {
+        final String path = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath() + File.separator;
+        final int level = this.getPetLevel(qA);
+        return new ImageIcon(path + this.levels.get(level < this.maxLevel ? level + 1 : level).getPicture() + ".jpg");
     }
 
     /**
      * <p>
      * getStats.
      * </p>
-     * 
+     * @param qA quest assets
      * @return a {@link java.lang.String} object.
      */
-    public final String getStats(QuestAssets qA) {
-        return this.levels.get(getPetLevel(qA)).getStats();
+    public final String getStats(final QuestAssets qA) {
+        return this.levels.get(this.getPetLevel(qA)).getStats();
     }
 
     /**
      * <p>
      * getUpgradedStats.
      * </p>
-     * 
+     * @param qA quest assets
      * @return a {@link java.lang.String} object.
      */
-    public final String getUpgradedStats(QuestAssets qA) {
-        int level = getPetLevel(qA);
-        return level >= maxLevel ? "N/A" : this.levels.get(level+1).getStats();
+    public final String getUpgradedStats(final QuestAssets qA) {
+        final int level = this.getPetLevel(qA);
+        return level >= this.maxLevel ? "N/A" : this.levels.get(level + 1).getStats();
     }
 
     /**
@@ -163,18 +169,16 @@ public class QuestPetController implements IQuestBazaarItem {
         this.saveFileKey = null;
     }
 
-
     /**
      * <p>
      * getPurchaseDescription.
      * </p>
-     * 
+     * @param qA quest assets
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public final String getPurchaseDescription(QuestAssets qA) {
-        return this.getDescription()
-                + "\n\nCurrent stats: " + this.getStats(qA) + "\nUpgraded stats: "
+    public final String getPurchaseDescription(final QuestAssets qA) {
+        return this.getDescription() + "\n\nCurrent stats: " + this.getStats(qA) + "\nUpgraded stats: "
                 + this.getUpgradedStats(qA);
 
     }
@@ -225,43 +229,49 @@ public class QuestPetController implements IQuestBazaarItem {
         return this.name;
     }
 
-
-//    @Override
-//    public String getStallName() {
-//        return QuestStallManager.PET_SHOP;
-//    }
+    // @Override
+    // public String getStallName() {
+    // return QuestStallManager.PET_SHOP;
+    // }
 
     /**
      * <p>
      * isAvailableForPurchase.
      * </p>
-     * 
+     * @param qA quest assets
      * @return a boolean.
      */
     @Override
-    public boolean isAvailableForPurchase(QuestAssets qA) {
-        return getPetLevel(qA) < getMaxLevel();
+    public boolean isAvailableForPurchase(final QuestAssets qA) {
+        return this.getPetLevel(qA) < this.getMaxLevel();
     }
 
     /**
      * <p>
      * onPurchase.
      * </p>
+     * @param qA quest assets
      */
     @Override
-    public void onPurchase(QuestAssets qA) {
-        qA.setPetLevel(saveFileKey, getPetLevel(qA) + 1);
+    public void onPurchase(final QuestAssets qA) {
+        qA.setPetLevel(this.saveFileKey, this.getPetLevel(qA) + 1);
     }
 
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @return String
+     */
     public String getSaveFileKey() {
-        return saveFileKey;
+        return this.saveFileKey;
     }
 
     /**
      * TODO: Write javadoc for this method.
-     * @return
+     * 
+     * @return int
      */
     public int getSlot() {
-        return slot;
+        return this.slot;
     }
 }

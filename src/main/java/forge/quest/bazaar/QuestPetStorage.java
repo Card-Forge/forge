@@ -23,92 +23,115 @@ import forge.quest.data.QuestAssets;
 import forge.util.IgnoringXStream;
 import forge.util.XmlUtil;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public class QuestPetStorage {
-    
-    Map<Integer, List<QuestPetController>> petsBySlot = new HashMap<Integer, List<QuestPetController>>();
-    Map<String, QuestPetController> petsByName = new HashMap<String, QuestPetController>();
-    
+
+    private Map<Integer, List<QuestPetController>> petsBySlot = new HashMap<Integer, List<QuestPetController>>();
+
+    private Map<String, QuestPetController> petsByName = new HashMap<String, QuestPetController>();
+
     /**
      * TODO: Write javadoc for Constructor.
-     * @param file
+     * 
+     * @param file File
      */
-    public QuestPetStorage(File file) {
+    public QuestPetStorage(final File file) {
         DocumentBuilder builder;
         try {
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             final Document document = builder.parse(file);
 
-            XStream xs = new IgnoringXStream();
+            final XStream xs = new IgnoringXStream();
             xs.autodetectAnnotations(true);
-            
-            NodeList xmlPets = document.getElementsByTagName("pets").item(0).getChildNodes();
-            for (int iN = 0; iN < xmlPets.getLength(); iN++) {
-                Node n = xmlPets.item(iN);
-                if (n.getNodeType() != Node.ELEMENT_NODE) { continue; }
 
-                Attr att = document.createAttribute("resolves-to");
+            final NodeList xmlPets = document.getElementsByTagName("pets").item(0).getChildNodes();
+            for (int iN = 0; iN < xmlPets.getLength(); iN++) {
+                final Node n = xmlPets.item(iN);
+                if (n.getNodeType() != Node.ELEMENT_NODE) {
+                    continue;
+                }
+
+                final Attr att = document.createAttribute("resolves-to");
                 att.setValue(QuestPetController.class.getCanonicalName());
                 n.getAttributes().setNamedItem(att);
-                String sXml = XmlUtil.nodeToString(n);
-                QuestPetController petCtrl = (QuestPetController) xs.fromXML(sXml);
-                addToMap(petCtrl);
+                final String sXml = XmlUtil.nodeToString(n);
+                final QuestPetController petCtrl = (QuestPetController) xs.fromXML(sXml);
+                this.addToMap(petCtrl);
             }
 
-        } catch (SAXException e) {
+        } catch (final SAXException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
-        } catch (ParserConfigurationException e) {
+        } catch (final ParserConfigurationException e) {
             e.printStackTrace();
         }
     }
 
     /**
      * TODO: Write javadoc for this method.
+     * 
      * @param petCtrl
      */
-    private void addToMap(QuestPetController petCtrl) {
-        int iSlot = petCtrl.getSlot();
-        List<QuestPetController> list = petsBySlot.get(Integer.valueOf(iSlot));
-        if ( null == list ) {
+    private void addToMap(final QuestPetController petCtrl) {
+        final int iSlot = petCtrl.getSlot();
+        List<QuestPetController> list = this.petsBySlot.get(Integer.valueOf(iSlot));
+        if (null == list) {
             list = new ArrayList<QuestPetController>();
-            petsBySlot.put(Integer.valueOf(iSlot), list);
+            this.petsBySlot.put(Integer.valueOf(iSlot), list);
         }
-        petsByName.put(petCtrl.getName(), petCtrl);
+        this.petsByName.put(petCtrl.getName(), petCtrl);
         list.add(petCtrl);
     }
 
     /**
      * TODO: Write javadoc for this method.
-     * @param petName
-     * @return
+     * 
+     * @param petName String
+     * @return QuestPetController
      */
-    public QuestPetController getPet(String petName) {
-        return petsByName.get(petName);
+    public QuestPetController getPet(final String petName) {
+        return this.petsByName.get(petName);
     }
 
     /**
      * TODO: Write javadoc for this method.
-     * @param i
-     * @param qA
-     * @return
+     * 
+     * @param iSlot int
+     * @param qA QuestAssets
+     * @return List
      */
-    public List<QuestPetController> getAvaliablePets(int iSlot, QuestAssets qA) {
-        List<QuestPetController> result = new ArrayList<QuestPetController>();
-        List<QuestPetController> allPossible = petsBySlot.get(Integer.valueOf(iSlot));
-        if ( null != allPossible ) for(QuestPetController c : allPossible) if( qA.getPetLevel(c.getSaveFileKey()) > 0 ) result.add(c); 
+    public List<QuestPetController> getAvaliablePets(final int iSlot, final QuestAssets qA) {
+        final List<QuestPetController> result = new ArrayList<QuestPetController>();
+        final List<QuestPetController> allPossible = this.petsBySlot.get(Integer.valueOf(iSlot));
+        if (null != allPossible) {
+            for (final QuestPetController c : allPossible) {
+                if (qA.getPetLevel(c.getSaveFileKey()) > 0) {
+                    result.add(c);
+                }
+            }
+        }
         return result;
     }
 
-    public List<QuestPetController> getAllPets(int iSlot) {
-        List<QuestPetController> result = new ArrayList<QuestPetController>();
-        List<QuestPetController> allPossible = petsBySlot.get(Integer.valueOf(iSlot));
-        if ( null != allPossible ) for(QuestPetController c : allPossible) result.add(c);
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @param iSlot int
+     * @return List<QuestPetController>
+     */
+    public List<QuestPetController> getAllPets(final int iSlot) {
+        final List<QuestPetController> result = new ArrayList<QuestPetController>();
+        final List<QuestPetController> allPossible = this.petsBySlot.get(Integer.valueOf(iSlot));
+        if (null != allPossible) {
+            for (final QuestPetController c : allPossible) {
+                result.add(c);
+            }
+        }
         return result;
     }
-    
+
 }
