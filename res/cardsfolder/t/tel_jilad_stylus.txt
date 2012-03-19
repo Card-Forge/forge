@@ -1,0 +1,10 @@
+Name:Tel-Jilad Stylus
+ManaCost:1
+Types:Artifact
+Text:no text
+A:AB$ ChangeZone | Cost$ T | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target permanent you own on the bottom of your library.
+SVar:Rarity:Uncommon
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_stylus.jpg
+End
