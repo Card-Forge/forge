@@ -172,6 +172,14 @@ Undead Alchemist
 - Added "CARDNAME can't be equipped." keyword and corrected some "CARDNAME can't be enchanted." implementation. They cards can now be targeted human, although attachment will fail with a relevant log message.
 - Ran scripts
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Small correction to the effect trigger in Blinding Beam
+- Fix license headers
+- checkstyle
+- Added RemIADeck to Qasali Ambusher (was generating an infinite loop when AI played it)
+- Ran Oracle and SetInfo scripts
+- token icons
+- CostChange can take MultiColored as a color now.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -227,6 +235,12 @@ Endless Horizons
 Flickering Ward
 Goblin Brawler
 Blinding Beam
+Kyren Toy
+Kyren Archive
+Tel-Jilad Stylus
+Urza's Filter
+Aleatory
+Chaotic Strike
 
 
 end
