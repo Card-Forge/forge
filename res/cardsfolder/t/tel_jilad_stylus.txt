@@ -7,4 +7,6 @@ SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_stylus.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/260.jpg
+Oracle:{T}: Put target permanent you own on the bottom of your library.
 End
