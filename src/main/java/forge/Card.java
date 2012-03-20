@@ -6997,7 +6997,22 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (!shares) {
                     return false;
                 }
+            } else if (restriction.equals("ThisTurnCast")) {
+                final CardList list = CardUtil.getThisTurnCast("Card", source);
+                if (list.isEmpty())  {
+                    return false;
+                }
+                boolean shares = false;
+                for (final Card card : list) {
+                    if (this.getName().equals(card.getName())) {
+                        shares = true;
+                    }
+                }
+                if (!shares) {
+                    return false;
+                }
             }
+
         } else if (property.startsWith("sharesTypeWith")) {
             if (!this.sharesTypeWith(source)) {
                 return false;
