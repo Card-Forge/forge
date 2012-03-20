@@ -180,6 +180,7 @@ res/cardsfolder/a/aladdins_ring.txt svneol=native#text/plain
 res/cardsfolder/a/alarum.txt svneol=native#text/plain
 res/cardsfolder/a/albino_troll.txt svneol=native#text/plain
 res/cardsfolder/a/alchors_tomb.txt svneol=native#text/plain
+res/cardsfolder/a/aleatory.txt -text
 res/cardsfolder/a/alert_shu_infantry.txt svneol=native#text/plain
 res/cardsfolder/a/alexi_zephyr_mage.txt svneol=native#text/plain
 res/cardsfolder/a/alexis_cloak.txt svneol=native#text/plain
@@ -1409,6 +1410,7 @@ res/cardsfolder/c/chaos_lord.txt -text
 res/cardsfolder/c/chaos_warp.txt svneol=native#text/plain
 res/cardsfolder/c/chaosphere.txt svneol=native#text/plain
 res/cardsfolder/c/chaotic_goo.txt svneol=native#text/plain
+res/cardsfolder/c/chaotic_strike.txt -text
 res/cardsfolder/c/chapel_geist.txt -text
 res/cardsfolder/c/char.txt svneol=native#text/plain
 res/cardsfolder/c/char_rumbler.txt svneol=native#text/plain
