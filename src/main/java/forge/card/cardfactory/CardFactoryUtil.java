@@ -2728,9 +2728,16 @@ public class CardFactoryUtil {
                 return c.getImprinted().get(0).getNetAttack();
             }
         }
+
         if (l[0].contains("ImprintedCardToughness")) {
             if (c.getImprinted().size() > 0) {
                 return c.getImprinted().get(0).getNetDefense();
+            }
+        }
+
+        if (l[0].contains("ImprintedCardManaCost")) {
+            if (c.getImprinted().get(0).getCMC() > 0) {
+                return c.getImprinted().get(0).getCMC();
             }
         }
 

@@ -6925,6 +6925,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (list.isEmpty() || !this.sharesColorWith(list.get(0))) {
                         return false;
                     }
+                } if (restriction.equals("Imprinted")) {
+                    for (final Card card : source.getImprinted()) {
+                        if (!this.sharesColorWith(card)) {
+                            return false;
+                        }
+                    }
                 } else {
                     boolean shares = false;
                     for (final Card card : sourceController.getCardsIn(Constant.Zone.Battlefield)) {
