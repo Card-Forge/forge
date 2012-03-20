@@ -58,7 +58,7 @@ public class QuestPetStats {
     public final Card getCard() {
         List<String> cardLines = FileUtil.readFile(new File(ForgeProps.getFile(NewConstants.Quest.BAZAAR_DIR), cardFile));
         Card petCard = CardReader.readCard(cardLines);
-        petCard.setImageFilename(picture.replace('_', ' '));
+        petCard.setImageName(picture.replace('_', ' '));
         petCard.setToken(true);
         petCard.addController(AllZone.getHumanPlayer());
         petCard.setOwner(AllZone.getHumanPlayer());
