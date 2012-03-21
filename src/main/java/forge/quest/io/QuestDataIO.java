@@ -68,6 +68,7 @@ import forge.item.TournamentPack;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
+import forge.quest.QuestMode;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
@@ -97,6 +98,7 @@ public class QuestDataIO {
         xStream.registerConverter(new ItemPoolToXml());
         xStream.registerConverter(new DeckSectionToXml());
         xStream.registerConverter(new GameTypeToXml());
+        xStream.registerConverter(new QuestModeToXml());
         xStream.autodetectAnnotations(true);
         xStream.alias("CardPool", ItemPool.class);
         xStream.alias("DeckSection", DeckSection.class);
@@ -135,7 +137,7 @@ public class QuestDataIO {
 
             if (data.getVersionNumber() != QuestData.CURRENT_VERSION_NUMBER) {
                 try {
-                    QuestDataIO.updateSaveFile(data, xml.toString());
+                    QuestDataIO.updateSaveFile(data, xml.toString(), xmlSaveFile.getName().replace(".dat", ""));
                 } catch (final Exception e) {
                     forge.error.ErrorViewer.showError(e);
                 }
@@ -171,7 +173,7 @@ public class QuestDataIO {
      * @throws NoSuchFieldException 
      * @throws IllegalAccessException 
      */
-    private static void updateSaveFile(final QuestData newData, final String input) throws ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException {
+    private static void updateSaveFile(final QuestData newData, final String input, String filename) throws ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException {
 
         final DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         final InputSource is = new InputSource();
@@ -223,25 +225,35 @@ public class QuestDataIO {
         case 2:
             // questdata was divided into assets and achievements
             if (StringUtils.isBlank(newData.getName())) {
-                QuestDataIO.setFinalField(QuestData.class, "name", newData, "questData");
+                QuestDataIO.setFinalField(QuestData.class, "name", newData, filename);
             }
 
             final QuestAchievements qA = newData.getAchievements();
             QuestDataIO.setFinalField(QuestAchievements.class, "win", qA, Integer.parseInt(document.getElementsByTagName("win").item(0).getTextContent()));
             QuestDataIO.setFinalField(QuestAchievements.class, "lost", qA, Integer.parseInt(document.getElementsByTagName("lost").item(0).getTextContent()));
-            QuestDataIO.setFinalField(QuestAchievements.class, "winstreakBest", qA, Integer.parseInt(document.getElementsByTagName("winstreakBest").item(0).getTextContent()));
-            QuestDataIO.setFinalField(QuestAchievements.class, "winstreakCurrent", qA, Integer.parseInt(document.getElementsByTagName("winstreakCurrent").item(0).getTextContent()));
+            
+            Node nw;
+            if ( (nw = document.getElementsByTagName("winstreakBest").item(0)) != null ) {
+                QuestDataIO.setFinalField(QuestAchievements.class, "winstreakBest", qA, Integer.parseInt(nw.getTextContent()));
+            }
+            if ( (nw = document.getElementsByTagName("winstreakCurrent").item(0)) != null ) {
+                QuestDataIO.setFinalField(QuestAchievements.class, "winstreakCurrent", qA, Integer.parseInt(nw.getTextContent()));    
+            }            
+            
             QuestDataIO.setFinalField(QuestAchievements.class, "challengesPlayed", qA, Integer.parseInt(document.getElementsByTagName("challengesPlayed").item(0).getTextContent()));
 
             final ArrayList<Integer> completedChallenges = new ArrayList<Integer>();
             QuestDataIO.setFinalField(QuestAchievements.class, "completedChallenges", qA, completedChallenges);
-            final NodeList ccs = document.getElementsByTagName("completedChallenges").item(0).getChildNodes();
-            for (int iN = 0; iN < ccs.getLength(); iN++) {
-                final Node n = ccs.item(iN);
-                if (n.getNodeType() != Node.ELEMENT_NODE) {
-                    continue;
+            
+            if ( ( nw = document.getElementsByTagName("completedChallenges").item(0) ) != null ) {
+                final NodeList ccs = nw.getChildNodes();
+                for (int iN = 0; iN < ccs.getLength(); iN++) {
+                    final Node n0 = ccs.item(iN);
+                    if (n0.getNodeType() != Node.ELEMENT_NODE) {
+                        continue;
+                    }
+                    completedChallenges.add(Integer.parseInt(n0.getTextContent()));
                 }
-                completedChallenges.add(Integer.parseInt(n.getTextContent()));
             }
 
             final XStream xs = QuestDataIO.getSerializer(true);
@@ -382,8 +394,28 @@ public class QuestDataIO {
                                                                  // deprecated
                                                                  // anyway
         }
-
     }
+    
+    private static class QuestModeToXml implements Converter {
+        @SuppressWarnings("rawtypes")
+        @Override
+        public boolean canConvert(final Class clasz) {
+            return clasz.equals(QuestMode.class);
+        }
+
+        @Override
+        public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
+            QuestMode mode = (QuestMode) source;
+            String sMode = mode.toString();
+            writer.setValue(sMode);
+        }
+
+        @Override
+        public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
+            final String value = reader.getValue();
+            return QuestMode.smartValueOf(value, QuestMode.Classic);
+        }
+    }    
 
     private static class ItemPoolToXml implements Converter {
         @SuppressWarnings("rawtypes")
