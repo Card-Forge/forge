@@ -34,6 +34,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.Constant.Zone;
 import forge.card.CardCharacteristics;
 import forge.card.EditionInfo;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -6796,6 +6797,22 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (!this.getController().isPlayer((Player) o)) {
                         return false;
                       }
+                }
+            }
+
+        } else if (property.equals("TargetedPlayerCtrl")) {
+            for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
+                final SpellAbility parent = AbilityFactory.findParentsTargetedPlayer(sa);
+                if (parent != null) {
+                    if (parent.getTarget() != null) {
+                        for (final Object o : parent.getTarget().getTargetPlayers()) {
+                            if (o instanceof Player) {
+                                if (!this.getController().isPlayer((Player) o)) {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         } else if (property.startsWith("YouOwn")) {
