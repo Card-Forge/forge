@@ -1381,7 +1381,6 @@ public class GameAction {
                         }
                     }
                 }
-                cost.setNoManaCostChange(true);
                 newSA.setBasicSpell(false);
                 newSA.setPayCosts(cost);
                 newSA.setManaCost("");
@@ -1402,7 +1401,6 @@ public class GameAction {
                         }
                     }
                 }
-                cost.setNoManaCostChange(true);
                 newSA.setBasicSpell(false);
                 newSA.setPayCosts(cost);
                 newSA.setManaCost("");

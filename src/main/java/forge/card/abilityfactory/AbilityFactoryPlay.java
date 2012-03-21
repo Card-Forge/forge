@@ -449,7 +449,6 @@ public final class AbilityFactoryPlay {
                             }
                         }
                     }
-                    cost.setNoManaCostChange(true);
                     newSA.setPayCosts(cost);
                     newSA.setManaCost("");
                     newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");

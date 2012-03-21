@@ -358,7 +358,6 @@ public class ComputerUtil {
                 }
             }
         }
-        cost.setNoManaCostChange(true);
         newSA.setPayCosts(cost);
         newSA.setManaCost("0");
         final StringBuilder sb = new StringBuilder();
@@ -570,7 +569,7 @@ public class ComputerUtil {
 
         ManaCost cost = new ManaCost(mana);
 
-        if ((sa.getPayCosts() == null) || !sa.getPayCosts().getNoManaCostChange()) {
+        if (sa.getPayCosts() == null) {
             cost = Singletons.getModel().getGameAction().getSpellCostChange(sa, cost);
         }
 

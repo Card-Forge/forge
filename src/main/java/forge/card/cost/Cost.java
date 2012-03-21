@@ -37,7 +37,6 @@ import forge.card.spellability.SpellAbility;
  */
 public class Cost {
     private boolean isAbility = true;
-    private boolean noManaCostChange = false;
     private final ArrayList<CostPart> costParts = new ArrayList<CostPart>();
 
     /**
@@ -60,24 +59,6 @@ public class Cost {
      */
     public final boolean getSacCost() {
         return this.sacCost;
-    }
-
-    /**
-     * Sets the no mana cost change.
-     *
-     * @param b the new no mana cost change
-     */
-    public final void setNoManaCostChange(boolean b) {
-        noManaCostChange = b;
-    }
-
-    /**
-     * Gets the no mana cost change.
-     *
-     * @return the no mana cost change
-     */
-    public final boolean getNoManaCostChange() {
-        return noManaCostChange;
     }
 
     private boolean tapCost = false;
@@ -388,10 +369,6 @@ public class Cost {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void changeCost(final SpellAbility sa) {
-
-        if (getNoManaCostChange()) {
-            return;
-        }
 
         // TODO: Change where ChangeCost happens
         for (final CostPart part : this.costParts) {
