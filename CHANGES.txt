@@ -180,6 +180,13 @@ Undead Alchemist
 - token icons
 - CostChange can take MultiColored as a color now.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Infernal Medusa.
+- better support for old quest saves
+- quest pets fixed
+- Fixed Pillory of the Sleepless and Ghostway
+- Finally figured out how to add TargetedPlayerCtrl to isValid in Cards.java
+- Ran Oracle and SetInfo scripts
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -241,6 +248,13 @@ Tel-Jilad Stylus
 Urza's Filter
 Aleatory
 Chaotic Strike
+Head Games
+Surprise Deployment
+Decree of Pain
+Thought Prison
+Twinning Glass
+Keeper of the Dead
+Searing Blaze
 
 
 end
