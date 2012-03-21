@@ -77,7 +77,7 @@ public class SubmenuQuestUtil {
                 }
                 else {
                     view.getCbPlant().setVisible(true);
-                    view.getCbPlant().setSelected(qCtrl.getSelectedPet(iSlot) != null);
+                    view.getCbPlant().setSelected(currentPetName != null);
                 }
             }
             if ( iSlot == 1 ) {

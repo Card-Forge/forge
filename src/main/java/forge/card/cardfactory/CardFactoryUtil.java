@@ -4096,8 +4096,7 @@ public class CardFactoryUtil {
      *            a {@link java.lang.Object} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card copyStats(final Card o) {
-        final Card sim = (Card) o;
+    public static Card copyStats(final Card sim) {
         final Card c = new Card();
 
         c.setFlip(sim.isFlip());

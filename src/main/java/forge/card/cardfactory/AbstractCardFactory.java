@@ -459,15 +459,19 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             sb.append("CardFactory : getCard() invalid card name - ").append(cardName);
             throw new RuntimeException(sb.toString());
         }
+        
         return getCard2(o, owner);
     }
     
+    public static Card getCard2(final Card o, final Player owner) {
+        final Card copy = CardFactoryUtil.copyStats(o);
+        copy.setOwner(owner);        
+        return buildAbilities(copy);
+    }    
     
-    public static Card getCard2(final Card original, final Player owner) {
+    public static Card buildAbilities(final Card card) {
+        final String cardName = card.getName();
 
-        final String cardName = original.getName();
-        final Card card = CardFactoryUtil.copyStats(original);
-        card.setOwner(owner);
         if (!card.isCardColorsOverridden()) {
             card.addColor(card.getManaCost());
         }
