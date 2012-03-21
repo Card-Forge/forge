@@ -8295,6 +8295,7 @@ res/cardsfolder/s/somber_hoverguard.txt svneol=native#text/plain
 res/cardsfolder/s/somberwald_dryad.txt -text
 res/cardsfolder/s/somberwald_spider.txt -text
 res/cardsfolder/s/somnomancer.txt svneol=native#text/plain
+res/cardsfolder/s/somnophore.txt -text
 res/cardsfolder/s/song_of_blood.txt -text
 res/cardsfolder/s/song_of_serenity.txt svneol=native#text/plain
 res/cardsfolder/s/songs_of_the_damned.txt svneol=native#text/plain
@@ -8304,6 +8305,7 @@ res/cardsfolder/s/sonic_seizure.txt svneol=native#text/plain
 res/cardsfolder/s/soot_imp.txt svneol=native#text/plain
 res/cardsfolder/s/sootfeather_flock.txt svneol=native#text/plain
 res/cardsfolder/s/soothing_balm.txt svneol=native#text/plain
+res/cardsfolder/s/soothsaying.txt -text
 res/cardsfolder/s/sootstoke_kindler.txt svneol=native#text/plain
 res/cardsfolder/s/sootwalkers.txt svneol=native#text/plain
 res/cardsfolder/s/sophic_centaur.txt -text
@@ -8359,6 +8361,8 @@ res/cardsfolder/s/souldrinker.txt svneol=native#text/plain
 res/cardsfolder/s/soulless_one.txt svneol=native#text/plain
 res/cardsfolder/s/soulquake.txt svneol=native#text/plain
 res/cardsfolder/s/souls_attendant.txt svneol=native#text/plain
+res/cardsfolder/s/souls_grace.txt -text
+res/cardsfolder/s/souls_majesty.txt -text
 res/cardsfolder/s/souls_might.txt svneol=native#text/plain
 res/cardsfolder/s/souls_of_the_faultless.txt svneol=native#text/plain
 res/cardsfolder/s/soulscour.txt svneol=native#text/plain
