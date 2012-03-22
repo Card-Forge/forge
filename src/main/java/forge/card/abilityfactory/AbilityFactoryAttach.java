@@ -1248,7 +1248,7 @@ public class AbilityFactoryAttach {
 
         return false;
     }
-    
+
     // **************************************************************
     // ************************ UnattachAll *************************
     // **************************************************************
@@ -1286,7 +1286,7 @@ public class AbilityFactoryAttach {
         };
         return abUnattachAll;
     }
-    
+
     /**
      * Creates the spell unattachAll.
      * 
@@ -1488,7 +1488,7 @@ public class AbilityFactoryAttach {
             String valid = params.get("UnattachValid");
             CardList unattachList = AllZoneUtil.getCardsIn(Zone.Battlefield);
             unattachList = unattachList.getValidCards(valid.split(","), source.getController(), source);
-            for ( final Card c : unattachList ) {
+            for (final Card c : unattachList) {
                 AbilityFactoryAttach.handleUnattachment(o, c, af);
             }
         }
@@ -1610,7 +1610,7 @@ public class AbilityFactoryAttach {
         card.enchantEntity(tgt);
     }
     */
-    
+
     private static boolean unattachAllPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // AI should only activate this during Human's turn
         boolean chance = AbilityFactoryAttach.unattachAllCanPlayAI(af, sa);

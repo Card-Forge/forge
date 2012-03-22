@@ -459,16 +459,16 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             sb.append("CardFactory : getCard() invalid card name - ").append(cardName);
             throw new RuntimeException(sb.toString());
         }
-        
+
         return getCard2(o, owner);
     }
-    
+
     public static Card getCard2(final Card o, final Player owner) {
         final Card copy = CardFactoryUtil.copyStats(o);
-        copy.setOwner(owner);        
+        copy.setOwner(owner);
         return buildAbilities(copy);
-    }    
-    
+    }
+
     public static Card buildAbilities(final Card card) {
         final String cardName = card.getName();
 
@@ -1419,7 +1419,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                         // TODO: transform back and forth
                         cloned = getCard2(copyTarget[0], card.getOwner());
                         // TODO: untransform
-                        
+
                         card.addAlternateState("Cloner");
                         card.switchStates("Original", "Cloner");
                         card.setState("Original");

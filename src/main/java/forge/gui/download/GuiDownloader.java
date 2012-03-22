@@ -464,16 +464,18 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
         final Pattern splitter = Pattern.compile(Pattern.quote("/"));
         final Pattern replacer = Pattern.compile(Pattern.quote("%20"));
-        
-        for(String line : fileLines)
-        {
-            if( line.equals("") ||  line.startsWith("#")) { continue; }
+
+        for (String line : fileLines) {
+
+            if (line.equals("") || line.startsWith("#")) {
+                continue;
+            }
 
             String[] parts = splitter.split(line);
 
             // Maybe there's a better way to do this, but I just want the
             // filename from a URL
-            String last = parts[parts.length-1];
+            String last = parts[parts.length - 1];
             list.add(new DownloadObject(line, new File(dir, replacer.matcher(last).replaceAll(" "))));
         }
         return list;
@@ -496,9 +498,11 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         final Pattern splitter = Pattern.compile(Pattern.quote(" "));
         final Pattern replacer = Pattern.compile(Pattern.quote("%20"));
 
-        for(String line : fileLines)
-        {
-            if( StringUtils.isBlank(line) ||  line.startsWith("#")) { continue; }
+        for (String line : fileLines) {
+
+            if (StringUtils.isBlank(line) || line.startsWith("#")) {
+                continue;
+            }
             String[] parts = splitter.split(line, 2);
             String url = parts.length > 1 ? parts[1] : null;
             list.add(new DownloadObject(url, new File(dir, replacer.matcher(parts[0]).replaceAll(" "))));

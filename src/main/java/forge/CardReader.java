@@ -396,7 +396,7 @@ public class CardReader implements Runnable {
                 // have to deplete the iterator
                 ignoreTheRest = true;
                 continue;
-                // otherwise the underlying class would close its stream on finalize only 
+                // otherwise the underlying class would close its stream on finalize only
             }
             if (ignoreTheRest) {
                 continue;

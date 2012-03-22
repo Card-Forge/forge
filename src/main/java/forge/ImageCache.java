@@ -64,11 +64,11 @@ public class ImageCache {
     private static final LoadingCache<String, BufferedImage> IMAGE_CACHE;
     /** Constant <code>FULL_SIZE</code>. */
     private static final Pattern FULL_SIZE = Pattern.compile("(.*)#(\\d+.\\d+)");
-     
+
     private static final String NORMAL = "#Normal", TAPPED = "#Tapped";
     public static final String SEALED_PRODUCT = "sealed://";
     private static final String TOKEN = "token://";
-    
+
     static {
         IMAGE_CACHE = CacheBuilder.newBuilder()
                                   .softValues()

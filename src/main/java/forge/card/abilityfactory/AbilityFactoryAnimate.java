@@ -484,7 +484,7 @@ public final class AbilityFactoryAnimate {
                 && !AllZoneUtil.isCardInPlay(sa.getSourceCard())) {
             return;
         }
-        
+
         // Remember Objects
         if (params.containsKey("RememberObjects")) {
             animateRemembered = params.get("RememberObjects");
@@ -670,7 +670,7 @@ public final class AbilityFactoryAnimate {
                     removedReplacements.add(re);
                 }
             }
-            
+
             // give Remembered
             if (animateRemembered != null) {
                 for (final Object o : AbilityFactory.getDefinedObjects(host, animateRemembered, sa)) {

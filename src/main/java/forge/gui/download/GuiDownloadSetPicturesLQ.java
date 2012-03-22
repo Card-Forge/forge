@@ -87,7 +87,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
             final String filename = CardUtil.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
             String url = urlBase + setCode2 + "/" + Base64Coder.encodeString(filename, true);
             cList.add(new DownloadObject(url, new File(this.picturesPath + File.separator + setCode3, filename)));
-            
+
             System.out.println(String.format("%s [%s - %s]", cardName, setCode3, thisSet.getName()));
         }
     }
