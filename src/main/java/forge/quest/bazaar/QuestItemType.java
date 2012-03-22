@@ -28,22 +28,19 @@ import forge.quest.data.QuestItemCondition;
 public enum QuestItemType {
 
     /** The SLEIGHT. */
-    SLEIGHT("Sleight", QuestItemBasic.class, QuestItemCondition.class), /** The ESTATES. */
- ESTATES("Estates", QuestItemEstates.class,
-            QuestItemCondition.class), 
- /** The LUCK y_ coin. */
- LUCKY_COIN("Lucky Coin", QuestItemBasic.class, QuestItemCondition.class), 
- /** The MAP. */
- MAP(
-            "Map", QuestItemBasic.class, QuestItemCondition.class), 
- /** The ZEPPELIN. */
- ZEPPELIN("Zeppelin", QuestItemZeppelin.class,
-            QuestItemCondition.class), 
- /** The ELIXI r_ o f_ life. */
- ELIXIR_OF_LIFE("Elixir of Life", QuestItemElixir.class, QuestItemCondition.class), 
- /** The POUN d_ flesh. */
- POUND_FLESH(
-            "Pound of Flesh", QuestItemPoundFlesh.class, QuestItemCondition.class);
+    SLEIGHT("Sleight", QuestItemBasic.class, QuestItemCondition.class),
+    /** The ESTATES. */
+    ESTATES("Estates", QuestItemEstates.class, QuestItemCondition.class),
+    /** The LUCKY_COIN. */
+    LUCKY_COIN("Lucky Coin", QuestItemBasic.class, QuestItemCondition.class),
+    /** The MAP. */
+    MAP("Map", QuestItemBasic.class, QuestItemCondition.class),
+    /** The ZEPPELIN. */
+    ZEPPELIN("Zeppelin", QuestItemZeppelin.class, QuestItemCondition.class),
+    /** The ELIXIR_OF_LIFE. */
+    ELIXIR_OF_LIFE("Elixir of Life", QuestItemElixir.class, QuestItemCondition.class),
+    /** The POUND_FLESH. */
+    POUND_FLESH("Pound of Flesh", QuestItemPoundFlesh.class, QuestItemCondition.class);
 
     private final String saveFileKey;
     private final Class<? extends QuestItemBasic> bazaarControllerClass;

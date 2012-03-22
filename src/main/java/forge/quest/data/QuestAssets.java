@@ -95,8 +95,8 @@ public class QuestAssets {
      */
     @SuppressWarnings("unchecked")
     public final <T extends QuestItemCondition> T getItemCondition(final QuestItemType itemType) {
-        QuestItemCondition current = this.inventoryItems.get(itemType); 
-        if ( !current.getClass().equals(itemType.getModelClass() ) ) {
+        QuestItemCondition current = this.inventoryItems.get(itemType);
+        if (!current.getClass().equals(itemType.getModelClass())) {
             try {
                 QuestItemCondition modern = itemType.getModelClass().newInstance();
                 modern.takeDataFrom(current);
@@ -107,12 +107,11 @@ public class QuestAssets {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-            
+
         }
         return (T) current;
     }
 
-    
     /**
      * Sets the item level.
      *
@@ -134,16 +133,16 @@ public class QuestAssets {
         }
         cond.setLevel(level);
     }
-    
+
     public final int getPetLevel(final String name) {
         final QuestItemCondition state = this.combatPets.get(name);
         return state == null ? 0 : state.getLevel();
     }
-    
+
     @SuppressWarnings("unchecked")
     public final <T extends QuestItemCondition> T getPetCondition(final String name) {
-        return (T)this.combatPets.get(name);
-    }    
+        return (T) this.combatPets.get(name);
+    }
 
     public final void setPetLevel(final String name, final int level) {
         QuestItemCondition cond = this.combatPets.get(name);
@@ -152,8 +151,8 @@ public class QuestAssets {
             this.combatPets.put(name, cond);
         }
         cond.setLevel(level);
-    }    
-    
+    }
+
     /**
      * Instantiates a new quest assets.
      */

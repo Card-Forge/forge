@@ -50,7 +50,7 @@ public interface IStorageView<T> extends Iterable<T> {
      * @return true, if successful
      */
     boolean contains(final String name);
-    
+
     /**
      * Gets the count.
      *

@@ -33,7 +33,7 @@ import org.w3c.dom.Node;
  * 
  */
 public class XmlUtil {
-    
+
     /**
      * Node to string.
      *

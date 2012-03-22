@@ -1,7 +1,7 @@
 package forge.quest.data;
 
 /** 
- * This class should store the quest items' properties that are to be serialized
+ * This class should store the quest items' properties that are to be serialized.
  *
  */
 public class QuestItemCondition {
@@ -16,11 +16,11 @@ public class QuestItemCondition {
     }
 
     public void setLevel(int level) {
-        this.level = level; 
+        this.level = level;
     }
 
     /**
-     * Copy data from the parameter instance to 'this' instance 
+     * Copy data from the parameter instance to 'this' instance.
      * @param current
      */
     public void takeDataFrom(QuestItemCondition source) {

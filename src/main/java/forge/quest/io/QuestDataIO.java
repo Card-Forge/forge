@@ -167,11 +167,11 @@ public class QuestDataIO {
      *            a {@link forge.quest.data.QuestData} object.
      * @param input
      *            a {@link java.lang.String} object.
-     * @throws ParserConfigurationException 
-     * @throws IOException 
-     * @throws SAXException 
-     * @throws NoSuchFieldException 
-     * @throws IllegalAccessException 
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     * @throws NoSuchFieldException
+     * @throws IllegalAccessException
      */
     private static void updateSaveFile(final QuestData newData, final String input, String filename) throws ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException {
 
@@ -194,9 +194,9 @@ public class QuestDataIO {
         }
 
         if (saveVersion < 5) {
-            QuestDataIO.setFinalField(QuestAssets.class, "combatPets", newData.getAssets(), new HashMap<String, QuestItemCondition>() );
+            QuestDataIO.setFinalField(QuestAssets.class, "combatPets", newData.getAssets(), new HashMap<String, QuestItemCondition>());
         }
-        
+
         final QuestAssets qS = newData.getAssets();
 
         switch (saveVersion) {
@@ -231,21 +231,21 @@ public class QuestDataIO {
             final QuestAchievements qA = newData.getAchievements();
             QuestDataIO.setFinalField(QuestAchievements.class, "win", qA, Integer.parseInt(document.getElementsByTagName("win").item(0).getTextContent()));
             QuestDataIO.setFinalField(QuestAchievements.class, "lost", qA, Integer.parseInt(document.getElementsByTagName("lost").item(0).getTextContent()));
-            
+
             Node nw;
-            if ( (nw = document.getElementsByTagName("winstreakBest").item(0)) != null ) {
+            if ((nw = document.getElementsByTagName("winstreakBest").item(0)) != null) {
                 QuestDataIO.setFinalField(QuestAchievements.class, "winstreakBest", qA, Integer.parseInt(nw.getTextContent()));
             }
-            if ( (nw = document.getElementsByTagName("winstreakCurrent").item(0)) != null ) {
-                QuestDataIO.setFinalField(QuestAchievements.class, "winstreakCurrent", qA, Integer.parseInt(nw.getTextContent()));    
-            }            
-            
+            if ((nw = document.getElementsByTagName("winstreakCurrent").item(0)) != null) {
+                QuestDataIO.setFinalField(QuestAchievements.class, "winstreakCurrent", qA, Integer.parseInt(nw.getTextContent()));
+            }
+
             QuestDataIO.setFinalField(QuestAchievements.class, "challengesPlayed", qA, Integer.parseInt(document.getElementsByTagName("challengesPlayed").item(0).getTextContent()));
 
             final ArrayList<Integer> completedChallenges = new ArrayList<Integer>();
             QuestDataIO.setFinalField(QuestAchievements.class, "completedChallenges", qA, completedChallenges);
-            
-            if ( ( nw = document.getElementsByTagName("completedChallenges").item(0) ) != null ) {
+
+            if ((nw = document.getElementsByTagName("completedChallenges").item(0)) != null) {
                 final NodeList ccs = nw.getChildNodes();
                 for (int iN = 0; iN < ccs.getLength(); iN++) {
                     final Node n0 = ccs.item(iN);
@@ -268,7 +268,7 @@ public class QuestDataIO {
             // QuestInventory class no longer exists - KV pairs of
             // QuestItemPair => level moved to assets
             final Node oldInventory = saveVersion > 0 ? document.getElementsByTagName("inventory").item(1) : null;
-            if ( null != oldInventory) {
+            if (null != oldInventory) {
                 for (int iN = 0; iN < oldInventory.getChildNodes().getLength(); iN++) {
                     final Node _n = oldInventory.getChildNodes().item(iN);
                     if (_n.getNodeType() != Node.ELEMENT_NODE) {
@@ -297,16 +297,18 @@ public class QuestDataIO {
             }
 
         case 4:
-            if (saveVersion > 0 ) {
+            if (saveVersion > 0) {
                 NodeList pets = document.getElementsByTagName("pets").item(0).getChildNodes();
                 for (int i = 0; i < pets.getLength(); i++) {
-                    if ( pets.item(i).getNodeType() != Node.ELEMENT_NODE ) continue; 
+                    if (pets.item(i).getNodeType() != Node.ELEMENT_NODE) {
+                        continue;
+                    }
                     final Element entry = (Element) pets.item(i);
                     String name = entry.getElementsByTagName("string").item(0).getTextContent();
                     String sLevel = entry.getElementsByTagName("level").item(0).getTextContent();
                     qS.setPetLevel(name, Integer.parseInt(sLevel));
                 }
-                    
+
             }
 
             // pet manager will be re-engineered here
@@ -395,7 +397,7 @@ public class QuestDataIO {
                                                                  // anyway
         }
     }
-    
+
     private static class QuestModeToXml implements Converter {
         @SuppressWarnings("rawtypes")
         @Override
@@ -415,7 +417,7 @@ public class QuestDataIO {
             final String value = reader.getValue();
             return QuestMode.smartValueOf(value, QuestMode.Classic);
         }
-    }    
+    }
 
     private static class ItemPoolToXml implements Converter {
         @SuppressWarnings("rawtypes")

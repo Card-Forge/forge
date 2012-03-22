@@ -48,7 +48,7 @@ public class ViewItem extends FPanel {
             public void execute() {
                 final QuestAssets qA = AllZone.getQuest().getAssets();
                 final int cost = ViewItem.this.getItem().getBuyingPrice(qA);
-                if ( cost >= 0 && (qA.getCredits() - cost) >= 0) {
+                if (cost >= 0 && (qA.getCredits() - cost) >= 0) {
                     qA.subtractCredits(cost);
                     qA.addCredits(ViewItem.this.getItem().getSellingPrice(qA));
                     ViewItem.this.getItem().onPurchase(qA);
@@ -79,7 +79,7 @@ public class ViewItem extends FPanel {
             public void run() {
                 final QuestAssets qA = AllZone.getQuest().getAssets();
                 IQuestBazaarItem bazaarItem = ViewItem.this.getItem();
-                
+
                 ViewItem.this.lblIcon.setIcon(bazaarItem.getIcon(qA));
                 ViewItem.this.lblName.setText(bazaarItem.getPurchaseName());
                 ViewItem.this.lblPrice.setText("Cost: " + String.valueOf(bazaarItem.getBuyingPrice(qA)) + " credits");

@@ -16,9 +16,9 @@ import forge.util.FileUtil;
  * TODO: Write javadoc for this type.
  *
  */
-@XStreamAlias(value="level")
+@XStreamAlias(value = "level")
 public class QuestPetStats {
-    
+
     @XStreamAsAttribute()
     @XStreamAlias(value = "value")
     private int levelValue;
@@ -26,23 +26,23 @@ public class QuestPetStats {
     @XStreamAsAttribute()
     @XStreamAlias(value = "pic")
     private String picture;
-    
+
     @XStreamAsAttribute()
     private String stats;
-    
+
     @XStreamAsAttribute()
     private String cardFile;
-    
+
     @XStreamAsAttribute()
     private int cost;
-    
+
     @XStreamAsAttribute()
     private String nextLevel;
-    
+
     private transient Card petCard = null;
-    
+
     private QuestPetStats() { }
-    
+
     public final int getLevelValue() {
         return levelValue;
     }
@@ -56,8 +56,8 @@ public class QuestPetStats {
     }
 
     public final Card getCard() {
-        if ( null == petCard )
-        {
+        if (null == petCard) {
+
             List<String> cardLines = FileUtil.readFile(new File(ForgeProps.getFile(NewConstants.Quest.BAZAAR_DIR), cardFile));
             petCard = CardReader.readCard(cardLines);
             petCard.setImageName(picture.replace('_', ' '));
