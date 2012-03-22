@@ -5297,6 +5297,7 @@ res/cardsfolder/m/magmatic_force.txt svneol=native#text/plain
 res/cardsfolder/m/magmaw.txt svneol=native#text/plain
 res/cardsfolder/m/magnetic_flux.txt svneol=native#text/plain
 res/cardsfolder/m/magnetic_mine.txt svneol=native#text/plain
+res/cardsfolder/m/magnetic_theft.txt -text
 res/cardsfolder/m/magnify.txt svneol=native#text/plain
 res/cardsfolder/m/magnigoth_treefolk.txt svneol=native#text/plain
 res/cardsfolder/m/magnivore.txt svneol=native#text/plain
