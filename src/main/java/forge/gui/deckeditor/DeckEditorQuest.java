@@ -18,25 +18,27 @@
 package forge.gui.deckeditor;
 
 // import java.awt.Font;
-
-import java.awt.Rectangle;
+import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 import forge.Command;
 import forge.Constant;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
-import forge.gui.GuiUtils;
 import forge.gui.deckeditor.elements.CardPanelHeavy;
 import forge.gui.deckeditor.elements.FilterCheckBoxes;
 import forge.gui.deckeditor.elements.FilterNameTypeSetPanel;
@@ -49,6 +51,7 @@ import forge.item.ItemPool;
 import forge.quest.QuestController;
 import forge.util.Lambda0;
 import forge.util.Predicate;
+import net.miginfocom.swing.MigLayout;
 
 //import forge.quest.data.QuestBoosterPack;
 
@@ -65,12 +68,10 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
     private static final long serialVersionUID = 152061168634545L;
 
     /** The custom menu. */
-    // private ImageIcon upIcon = Constant.IO.upIcon;
-    // private ImageIcon downIcon = Constant.IO.downIcon;
-
-    // private JLabel labelSortHint = new JLabel();
+    private final JButton clearFilterButton = new JButton();
     private final JButton addButton = new JButton();
     private final JButton removeButton = new JButton();
+    private final JLabel jLabelAnalysisGap = new JLabel("");
     private final JButton analysisButton = new JButton();
 
     private FilterNameTypeSetPanel filterNameTypeSet;
@@ -132,8 +133,6 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
      * </p>
      */
     public void setup() {
-        this.setLayout(null);
-
         final List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
         columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.FN_QTY_COMPARE,
                 PresetColumns.FN_QTY_GET));
@@ -161,23 +160,14 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
 
         this.filterNameTypeSet.setListeners(new OnChangeTextUpdateDisplay(), this.getItemListenerUpdatesDisplay());
 
-        // Window is too tall, lower height to min size used by constructed mode
-        // deck editor
-        // this.setSize(1024, 768);
-        this.setSize(1024, 740);
-        GuiUtils.centerFrame(this);
-        this.setResizable(false);
-
-        // TODO use this as soon the deck editor has resizable GUI
-        // //Use both so that when "un"maximizing, the frame isn't tiny
-        // setSize(1024, 740);
-        // setExtendedState(Frame.MAXIMIZED_BOTH);
-    } // setupAndDisplay()
+        setSize(1024, 740);
+    }
 
     /**
      * Instantiates a new deck editor quest.
      * 
      * @param parent
+     *            the parent frame for this deck editor instance
      * @param questData2
      *            the quest data2
      */
@@ -185,8 +175,8 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
         super(parent);
         this.questData = questData2;
         try {
-            this.setFilterBoxes(new FilterCheckBoxes(false));
-            this.setTopTableWithCards(new TableView<CardPrinted>("All Cards", true, CardPrinted.class));
+            this.setFilterBoxes(new FilterCheckBoxes(true));
+            this.setTopTableWithCards(new TableView<CardPrinted>("All Cards", true, true, CardPrinted.class));
             this.setBottomTableWithCards(new TableView<CardPrinted>("Your deck", true, CardPrinted.class));
             this.setCardView(new CardPanelHeavy());
             this.filterNameTypeSet = new FilterNameTypeSetPanel();
@@ -205,114 +195,108 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
     }
 
     private void jbInit() throws Exception {
-        this.getContentPane().setLayout(null);
 
-        // labelSortHint.setText("Click on the column name (like name or color) to sort the cards");
-        // labelSortHint.setBounds(new Rectangle(20, 27, 400, 19));
+        this.setTitle("Deck Editor");
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        this.filterNameTypeSet.setBounds(new Rectangle(19, 55, 726, 31));
-        this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 96, 726, 283));
-        this.getBottomTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 444, 726, 219));
+        final Font fButtons = new java.awt.Font("Dialog", 0, 13);
+        this.removeButton.setFont(fButtons);
+        this.addButton.setFont(fButtons);
+        this.clearFilterButton.setFont(fButtons);
+        this.analysisButton.setFont(fButtons);
 
-        this.removeButton.setBounds(new Rectangle(180, 408, 146, 25));
-        // removeButton.setIcon(upIcon);
-        this.removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        this.removeButton.setText("Remove Card");
-        this.removeButton.addActionListener(new ActionListener() {
+        this.addButton.setText("Add to Deck");
+        this.removeButton.setText("Remove from Deck");
+        this.clearFilterButton.setText("Clear Filter");
+        this.analysisButton.setText("Deck Analysis");
+
+        this.removeButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 DeckEditorQuest.this.removeButtonActionPerformed(e);
             }
         });
-        this.addButton.setText("Add Card");
-        this.addButton.addActionListener(new ActionListener() {
+        this.addButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 DeckEditorQuest.this.addButtonActionPerformed(e);
             }
         });
-        // addButton.setIcon(downIcon);
-        this.addButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        this.addButton.setBounds(new Rectangle(23, 408, 146, 25));
-
-        this.analysisButton.setText("Deck Analysis");
-        this.analysisButton.addActionListener(new ActionListener() {
+        this.clearFilterButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                DeckEditorQuest.this.clearFilterButtonActionPerformed(e);
+            }
+        });
+        this.analysisButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 DeckEditorQuest.this.analysisButtonActionPerformed(e);
             }
         });
-        this.analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        this.analysisButton.setBounds(new Rectangle(582, 408, 166, 25));
 
-        /**
-         * Type filtering
-         */
-        // Raise the filter boxes to top of window and move to the left.
-        // Need to replace the text based filters with the graphic version
-        this.getFilterBoxes().getLand().setBounds(17, 35, 62, 20);
-        this.getFilterBoxes().getCreature().setBounds(88, 35, 87, 20);
-        this.getFilterBoxes().getSorcery().setBounds(183, 35, 80, 20);
-        this.getFilterBoxes().getInstant().setBounds(270, 35, 80, 20);
-        this.getFilterBoxes().getPlaneswalker().setBounds(355, 35, 117, 20);
-        this.getFilterBoxes().getArtifact().setBounds(479, 35, 80, 20);
-        this.getFilterBoxes().getEnchantment().setBounds(570, 35, 115, 20);
-
+        // Type filtering
+        final Font f = new Font("Tahoma", Font.PLAIN, 10);
         for (final JCheckBox box : this.getFilterBoxes().getAllTypes()) {
-            // box.setFont(f);
+            box.setFont(f);
             box.setOpaque(false);
+        }
+
+        // Color filtering
+        for (final JCheckBox box : this.getFilterBoxes().getAllColors()) {
+            box.setOpaque(false);
+        }
+
+        final Container content = this.getContentPane();
+        final MigLayout layout = new MigLayout("fill");
+        content.setLayout(layout);
+
+        boolean isFirst = true;
+        for (final JCheckBox box : this.getFilterBoxes().getAllTypes()) {
+            String growParameter = "grow";
+            if (isFirst) {
+                growParameter = "cell 0 0, egx checkbox, grow, split 14";
+                isFirst = false;
+            }
+            content.add(box, growParameter);
             box.addItemListener(this.getItemListenerUpdatesDisplay());
         }
 
-        /**
-         * Color filtering
-         */
-        // Raise the color filtering boxes to top of window and move to the
-        // left.
-        this.getFilterBoxes().getWhite().setBounds(17, 10, 67, 20);
-        this.getFilterBoxes().getBlue().setBounds(94, 10, 60, 20);
-        this.getFilterBoxes().getBlack().setBounds(162, 10, 65, 20);
-        this.getFilterBoxes().getRed().setBounds(237, 10, 55, 20);
-        this.getFilterBoxes().getGreen().setBounds(302, 10, 70, 20);
-        this.getFilterBoxes().getColorless().setBounds(380, 10, 100, 20);
-
         for (final JCheckBox box : this.getFilterBoxes().getAllColors()) {
-            box.setOpaque(false);
+            content.add(box, "grow");
             box.addItemListener(this.getItemListenerUpdatesDisplay());
         }
-        /**
-         * Other
-         */
-        this.getCardView().setBounds(new Rectangle(765, 16, 239, 662));
-        this.getTopTableWithCards().getLabel().setBounds(new Rectangle(19, 375, 720, 31));
-        this.getBottomTableWithCards().getLabel().setBounds(new Rectangle(19, 660, 720, 31));
 
-        this.setTitle("Deck Editor");
+        content.add(this.clearFilterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
 
-        this.getContentPane().add(this.filterNameTypeSet, null);
-        this.getContentPane().add(this.getTopTableWithCards().getTableDecorated(), null);
-        this.getContentPane().add(this.getBottomTableWithCards().getTableDecorated(), null);
-        this.getContentPane().add(this.addButton, null);
-        this.getContentPane().add(this.removeButton, null);
-        this.getContentPane().add(this.analysisButton, null);
-        this.getContentPane().add(this.getBottomTableWithCards().getLabel(), null);
-        this.getContentPane().add(this.getTopTableWithCards().getLabel(), null);
-        // this.getContentPane().add(labelSortHint, null);
-        this.getContentPane().add(this.getCardView(), null);
+        content.add(this.filterNameTypeSet, "cell 0 1, grow");
+        content.add(this.getTopTableWithCards().getTableDecorated(), "cell 0 2 1 2, push, grow");
+        content.add(this.getTopTableWithCards().getLabel(), "cell 0 4");
 
-        for (final JCheckBox box : this.getFilterBoxes().getAllTypes()) {
-            this.getContentPane().add(box, null);
-        }
+        content.add(this.addButton, "w 100, h 49, sg button, cell 0 5, split 5");
+        content.add(this.removeButton, "w 100, h 49, sg button");
 
-        for (final JCheckBox box : this.getFilterBoxes().getAllColors()) {
-            this.getContentPane().add(box, null);
-        }
+        content.add(this.jLabelAnalysisGap, "wmin 75, growx");
+        content.add(this.analysisButton, "w 100, h 49, wrap");
 
+        content.add(this.getBottomTableWithCards().getTableDecorated(), "cell 0 6, grow");
+        content.add(this.getBottomTableWithCards().getLabel(), "cell 0 7");
+
+        content.add(this.getCardView(), "cell 1 0 1 8, flowy, growy");
+
+        this.getTopTableWithCards().getTable().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(final MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    DeckEditorQuest.this.addCardToDeck();
+                }
+            }
+        });
         this.getTopTableWithCards().getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(final KeyEvent e) {
                 if (e.getKeyChar() == ' ') {
-                    DeckEditorQuest.this.addButtonActionPerformed(null);
+                    DeckEditorQuest.this.addCardToDeck();
                 }
             }
         });
@@ -331,6 +315,41 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
     }
 
     private void addButtonActionPerformed(final ActionEvent e) {
+        addCardToDeck();
+    }
+
+    /**
+     * Clear filter button_action performed.
+     * 
+     * @param e
+     *            the e
+     */
+    void clearFilterButtonActionPerformed(final ActionEvent e) {
+        // disable automatic update triggered by listeners
+        this.setFiltersChangeFiringUpdate(false);
+
+        for (final JCheckBox box : this.getFilterBoxes().getAllTypes()) {
+            if (!box.isSelected()) {
+                box.doClick();
+            }
+        }
+        for (final JCheckBox box : this.getFilterBoxes().getAllColors()) {
+            if (!box.isSelected()) {
+                box.doClick();
+            }
+        }
+
+        this.filterNameTypeSet.clearFilters();
+
+        this.setFiltersChangeFiringUpdate(true);
+
+        this.getTopTableWithCards().setFilter(null);
+    }
+
+    /**
+     * Adds the card to deck.
+     */
+    void addCardToDeck() {
         final InventoryItem item = this.getTopTableWithCards().getSelectedCard();
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
@@ -339,6 +358,7 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
         final CardPrinted card = (CardPrinted) item;
         this.getTopTableWithCards().removeCard(card);
         this.getBottomTableWithCards().addCard(card);
+        this.controller.notifyModelChanged();
     }
 
     private void removeButtonActionPerformed(final ActionEvent e) {

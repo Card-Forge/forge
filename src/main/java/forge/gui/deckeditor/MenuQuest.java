@@ -65,10 +65,7 @@ public class MenuQuest extends MenuBase<Deck> {
      *            a {@link forge.Command} object.
      */
     public MenuQuest(final DeckController<Deck> d, final Command exit) {
-
         super(d, exit);
-
-        this.setupMenu();
     }
 
     /**

@@ -143,18 +143,18 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
         this.filterNameTypeSet.setListeners(new OnChangeTextUpdateDisplay(), this.getItemListenerUpdatesDisplay());
 
         this.setSize(1024, 740);
-
     }
 
     /**
      * Instantiates a new deck editor common.
      *
+     * @param parent the parent frame for this deck editor instance
      */
     public DeckEditorConstructed(JFrame parent) {
         super(parent);
         try {
             this.setFilterBoxes(new FilterCheckBoxes(true));
-            this.setTopTableWithCards(new TableView<CardPrinted>("Avaliable Cards", true, true, CardPrinted.class));
+            this.setTopTableWithCards(new TableView<CardPrinted>("Available Cards", true, true, CardPrinted.class));
             this.setBottomTableWithCards(new TableView<CardPrinted>("Deck", true, CardPrinted.class));
             this.setCardView(new CardPanelHeavy());
             this.filterNameTypeSet = new FilterNameTypeSetPanel();
@@ -258,7 +258,7 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
         content.add(this.clearFilterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
 
         content.add(this.filterNameTypeSet, "cell 0 1, grow");
-        content.add(this.getTopTableWithCards().getTableDecorated(), "cell 0 2 1 2, pushy, grow");
+        content.add(this.getTopTableWithCards().getTableDecorated(), "cell 0 2 1 2, push, grow");
         content.add(this.getTopTableWithCards().getLabel(), "cell 0 4");
 
         content.add(this.addButton, "w 100, h 49, sg button, cell 0 5, split 5");

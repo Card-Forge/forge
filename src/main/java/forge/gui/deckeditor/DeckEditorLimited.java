@@ -140,17 +140,16 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGro
         this.filterNameTypeSet.setListeners(new OnChangeTextUpdateDisplay(), this.getItemListenerUpdatesDisplay());
 
         this.setSize(1024, 740);
-
     }
 
     /**
      * Instantiates a new deck editor common.
      *
-     * @param mainFrame
+     * @param mainFrame the parent frame for this deck editor instance
      * @param deckMap the deck map
      */
     public DeckEditorLimited(JFrame mainFrame, final IStorage<DeckGroup> deckMap) {
-        super(mainFrame);
+         super(mainFrame);
         try {
             this.setFilterBoxes(new FilterCheckBoxes(true));
             this.setTopTableWithCards(new TableView<CardPrinted>("Avaliable Cards", true, true, CardPrinted.class));
@@ -249,7 +248,7 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGro
         content.add(this.clearFilterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
 
         content.add(this.filterNameTypeSet, "cell 0 1, grow");
-        content.add(this.getTopTableWithCards().getTableDecorated(), "cell 0 2 1 2, pushy, grow");
+        content.add(this.getTopTableWithCards().getTableDecorated(), "cell 0 2 1 2, push, grow");
         content.add(this.getTopTableWithCards().getLabel(), "cell 0 4");
 
         content.add(this.addButton, "w 100, h 49, sg button, cell 0 5, split 5");
@@ -280,9 +279,6 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGro
                 }
             }
         });
-
-        // javax.swing.JRootPane rootPane = this.getRootPane();
-        // rootPane.setDefaultButton(filterButton);
     }
 
     /*

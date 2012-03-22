@@ -63,7 +63,11 @@ public abstract class DeckEditorBase<T extends InventoryItem, TModel extends Dec
 
     /** The bottom. */
     private TableView<T> bottomTableWithCards;
-
+    /**
+     * Instantiates a new deck editor base.
+     *
+     * @param parent the parent frame for this deck editor
+     */
     public DeckEditorBase(JFrame parent) {
         super(parent, ModalityType.APPLICATION_MODAL);
     }
