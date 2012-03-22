@@ -8502,6 +8502,7 @@ res/cardsfolder/s/spirit_shield.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_weaver.txt svneol=native#text/plain
 res/cardsfolder/s/spiritmonger.txt svneol=native#text/plain
 res/cardsfolder/s/spiritual_asylum.txt svneol=native#text/plain
+res/cardsfolder/s/spiritual_focus.txt -text
 res/cardsfolder/s/spiritual_guardian.txt svneol=native#text/plain
 res/cardsfolder/s/spiritual_sanctuary.txt svneol=native#text/plain
 res/cardsfolder/s/spiritualize.txt -text svneol=unset#text/plain
