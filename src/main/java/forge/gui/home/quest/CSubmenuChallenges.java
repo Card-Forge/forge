@@ -14,8 +14,9 @@ import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
 import forge.gui.toolbox.FLabel;
-import forge.quest.QuestEventChallenge;
 import forge.quest.QuestController;
+import forge.quest.QuestEventChallenge;
+import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetController;
 import forge.view.ViewHomeUI;
 
@@ -27,7 +28,6 @@ public enum CSubmenuChallenges implements ICSubmenu {
     /** */
     SINGLETON_INSTANCE;
 
-
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#getCommand()
      */
@@ -36,6 +36,7 @@ public enum CSubmenuChallenges implements ICSubmenu {
     public Command getMenuCommand() {
         final QuestController qc = AllZone.getQuest();
         return new Command() {
+            @Override
             public void execute() {
                 if (qc.getAchievements() == null) {
                     ViewHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
@@ -66,6 +67,16 @@ public enum CSubmenuChallenges implements ICSubmenu {
                 new ActionListener() { @Override
             public void actionPerformed(final ActionEvent e) { SubmenuQuestUtil.startGame(); } });
 
+        ((FLabel) view.getLblZep()).setCommand(
+                new Command() {
+                    @Override
+                    public void execute() {
+                        AllZone.getQuest().setAvailableChallenges(null);
+                        AllZone.getQuest().getAssets().setItemLevel(QuestItemType.ZEPPELIN, 2);
+                        update();
+                    }
+                });
+
         view.getBtnCurrentDeck().setCommand(
                 new Command() { @Override
                     public void execute() {
@@ -84,11 +95,11 @@ public enum CSubmenuChallenges implements ICSubmenu {
         view.getCbxPet().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                final int SLOT = 1;
+                final int slot = 1;
                 final int index = view.getCbxPet().getSelectedIndex();
-                List<QuestPetController> pets = quest.getPetsStorage().getAvaliablePets(SLOT, quest.getAssets());
-                String petName = index <= 0 || index > pets.size() ? null : pets.get(index-1).getName(); 
-                quest.selectPet(SLOT, petName);
+                List<QuestPetController> pets = quest.getPetsStorage().getAvaliablePets(slot, quest.getAssets());
+                String petName = index <= 0 || index > pets.size() ? null : pets.get(index - 1).getName();
+                quest.selectPet(slot, petName);
             }
         });
     }

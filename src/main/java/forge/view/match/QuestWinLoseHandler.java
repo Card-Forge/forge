@@ -1,5 +1,4 @@
-/*
- * Forge: Play Magic: the Gathering.
+/** Forge: Play Magic: the Gathering.
  * Copyright (C) 2011  Forge Team
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,11 +16,21 @@
  */
 package forge.view.match;
 
-import forge.*;
+import forge.AllZone;
+import forge.CardList;
+import forge.Constant;
 import forge.Constant.Zone;
+import forge.Player;
+import forge.Singletons;
 import forge.control.FControl;
 import forge.control.match.ControlWinLose;
-import forge.game.*;
+
+import forge.game.GameEndReason;
+import forge.game.GameFormat;
+import forge.game.GameLossReason;
+import forge.game.GameNew;
+import forge.game.GamePlayerRating;
+import forge.game.GameSummary;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.gui.OverlayUtils;
@@ -42,11 +51,15 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
 import net.slightlymagic.braids.util.UtilFunctions;
 
-import javax.swing.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 /**
  * <p>
@@ -106,7 +119,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         if (qData.getMode() == QuestMode.Fantasy) {
             int extraLife = 0;
 
-            if (qEvent instanceof QuestEventChallenge ) {
+            if (qEvent instanceof QuestEventChallenge) {
                 if (qa.hasItem(QuestItemType.ZEPPELIN)) {
                     extraLife = 3;
                 }
@@ -273,7 +286,9 @@ public class QuestWinLoseHandler extends ControlWinLose {
             qData.getAssets().subtractCredits(x);
         }
 
+        // Reset cards and zeppelin use
         qData.getCards().clearShopList();
+        qData.getAssets().setItemLevel(QuestItemType.ZEPPELIN, 1);
 
         if (qEvent instanceof QuestEventChallenge && !((QuestEventChallenge) qEvent).isRepeatable()) {
             qData.getAchievements().addCompletedChallenge(((QuestEventChallenge) qEvent).getId());

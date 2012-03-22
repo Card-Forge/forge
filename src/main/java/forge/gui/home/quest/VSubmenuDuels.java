@@ -37,7 +37,8 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet {
     private final JButton btnStart  = new StartButton();
     private final JComboBox cbxPet  = new JComboBox();
     private final JCheckBox cbPlant = new FCheckBox("Summon Plant");
-    private final JCheckBox cbZep   = new FCheckBox("Launch Zeppelin");
+    private final JLabel lblZep   = new FLabel.Builder().text("Launch Zeppelin")
+            .fontScaleAuto(false).fontSize(14).build();
 
     private final FLabel lblLife      = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_LIFE))
@@ -136,6 +137,7 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet {
     }
 
     /** */
+    @Override
     public void updateCurrentDeckStatus() {
         final JLabel btnCurrentDeck = VSubmenuDuels.SINGLETON_INSTANCE.getBtnCurrentDeck();
         if (SubmenuQuestUtil.getCurrentDeck() == null) {
@@ -225,8 +227,8 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet {
     }
 
     @Override
-    public JCheckBox getCbZep() {
-        return cbZep;
+    public JLabel getLblZep() {
+        return lblZep;
     }
 
     @Override
@@ -258,14 +260,13 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet {
     }
 
     private void populateStart() {
-        final String constraints = "w 200px!, h 20px!, gap 0 10px 5px 5px";
         pnlStart.removeAll();
         pnlStart.setOpaque(false);
         pnlStart.setLayout(new MigLayout("insets 0, gap 0, align center, hidemode 3"));
 
-        pnlStart.add(cbxPet, constraints);
-        pnlStart.add(btnStart, "ax center, span 1 3, wrap");
-        pnlStart.add(cbPlant, constraints + ", wrap");
-        pnlStart.add(cbZep, constraints);
+        pnlStart.add(cbxPet, "h 20px!, ax center, gap 0 10px 10px 0");
+        pnlStart.add(btnStart, "ax center, span 1 2");
+        pnlStart.add(lblZep, "w 130px!, h 80px!, ax center, span 1 2, gap 10px 0 0 0");
+        pnlStart.add(cbPlant, "newline, h 30px!, gap 0 10px 10px 10px");
     }
 }

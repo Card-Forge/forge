@@ -39,8 +39,8 @@ public interface IStatsAndPet {
     /** @return {@link javax.swing.JCheckBox} */
     JCheckBox getCbPlant();
 
-    /** @return {@link javax.swing.JCheckBox} */
-    JCheckBox getCbZep();
+    /** @return {@link javax.swing.JLabel} */
+    JLabel getLblZep();
 
     /** */
     void updateCurrentDeckStatus();

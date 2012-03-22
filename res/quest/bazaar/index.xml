@@ -71,10 +71,11 @@ Effect: Improves sell percentage by %.2f%%.</description>
     </item>
     <item name="Zeppelin" maxLevel="1" basePrice="5000" itemType="ZEPPELIN" icon="ICO_ZEP">
       <description>This extremely comfortable airship allows for more efficient and safe travel to faraway destinations.
+      
 
-Effect: Quest assignments become available more frequently.
-Effect: Adds +3 to max life during quest games.
-Effect: Allows travel to far places, allowing you to see a new set of opponents.</description>
+Effect: Quest challenges become available more frequently.
+Effect: +3 life
+Effect: Activate once for a new set of challenges (re-fuels after a challenge is attempted).</description>
     </item>
     <item name="Pound of Flesh" maxLevel="29" basePrice="250" itemType="POUND_FLESH" icon="ICO_BREW">
       <description>The Alchemist welcomes contributions to his famous Elixir.

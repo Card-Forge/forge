@@ -2,9 +2,14 @@ package forge.gui.home.quest;
 
 import java.io.File;
 import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+
+import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.AllZone;
 import forge.Command;
@@ -32,8 +37,6 @@ import forge.quest.bazaar.QuestPetController;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences.QPref;
-import net.miginfocom.swing.MigLayout;
-import org.apache.commons.lang3.StringUtils;
 
 /** 
  * Utilities for the quest submenu, all over the MVC spectrum.
@@ -67,11 +70,11 @@ public class SubmenuQuestUtil {
     }
 
     private static void updatePlantAndPetForView(final IStatsAndPet view, final QuestController qCtrl) {
-        for( int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++ ) {
+        for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
             final List<QuestPetController> petList = qCtrl.getPetsStorage().getAvaliablePets(iSlot, qCtrl.getAssets());
             final String currentPetName = qCtrl.getSelectedPet(iSlot);
 
-            if ( iSlot == 0 ) { // Plant visiblity
+            if (iSlot == 0) { // Plant visiblity
                 if (petList.isEmpty()) {
                     view.getCbPlant().setVisible(false);
                 }
@@ -80,28 +83,36 @@ public class SubmenuQuestUtil {
                     view.getCbPlant().setSelected(currentPetName != null);
                 }
             }
-            if ( iSlot == 1 ) {
+            if (iSlot == 1) {
                 view.getCbxPet().removeAllItems();
                 // Pet list visibility
                 if (petList.size() > 0) {
                     view.getCbxPet().setEnabled(true);
                     view.getCbxPet().addItem("Don't summon a pet");
-                    
+
                     for (final QuestPetController pet : petList) {
                         String name = "Summon " + pet.getName();
                         view.getCbxPet().addItem(name);
-                        if ( pet.getName().equals(currentPetName) )
+                        if (pet.getName().equals(currentPetName)) {
                             view.getCbxPet().setSelectedItem(name);
+                        }
                     }
                 } else {
                     view.getCbxPet().setVisible(false);
                 }
             }
         }
-        view.getCbZep().setVisible(qCtrl.getAssets().hasItem(QuestItemType.ZEPPELIN));
+
+        if (view.equals(VSubmenuChallenges.SINGLETON_INSTANCE)) {
+            view.getLblZep().setVisible(qCtrl.getAssets().hasItem(QuestItemType.ZEPPELIN));
+            view.getLblZep().setEnabled(qCtrl.getAssets().getItemLevel(
+                    QuestItemType.ZEPPELIN) == 2 ? false : true);
+        }
+        else {
+            view.getLblZep().setVisible(false);
+        }
     }
-    
-    
+
     /** Updates stats, pets panels for both duels and challenges. */
     public static void updateStatsAndPet() {
         final QuestController qCtrl = AllZone.getQuest();
@@ -149,7 +160,7 @@ public class SubmenuQuestUtil {
                 // Classic mode display changes
                 view.getCbxPet().setVisible(false);
                 view.getCbPlant().setVisible(false);
-                view.getCbZep().setVisible(false);
+                view.getLblZep().setVisible(false);
                 view.getLblNextChallengeInWins().setVisible(false);
                 view.getBtnBazaar().setVisible(false);
                 view.getLblLife().setVisible(false);
@@ -228,8 +239,7 @@ public class SubmenuQuestUtil {
                     if (selectedOpponent.getEvent() instanceof QuestEventChallenge) {
                         lifeAI = ((QuestEventChallenge) event).getAILife();
 
-                        if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)
-                                && VSubmenuChallenges.SINGLETON_INSTANCE.getCbZep().isSelected()) {
+                        if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)) {
                             extraLifeHuman = 3;
                         }
                     }
@@ -330,3 +340,4 @@ public class SubmenuQuestUtil {
         }
     }
 }
+

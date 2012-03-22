@@ -233,7 +233,7 @@ public class FLabel extends JLabel {
         }
         @Override
         public void mouseClicked(MouseEvent e) {
-            if (cmdClick != null) { cmdClick.execute(); }
+            if (cmdClick != null && FLabel.this.isEnabled()) { cmdClick.execute(); }
             if (!selectable) { return; }
             if (selected) { setSelected(false); }
             else { setSelected(true); }
@@ -379,7 +379,7 @@ public class FLabel extends JLabel {
         }
 
         // Hover
-        if (hoverable && hovered && !selected) {
+        if (hoverable && hovered && !selected && isEnabled()) {
             g2d.setColor(clrHover);
             g2d.fillRect(0, 0, w, h);
             g2d.setColor(clrBorders);

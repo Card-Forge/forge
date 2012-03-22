@@ -1,5 +1,17 @@
 package forge.gui.home.quest;
 
+import static forge.quest.QuestStartPool.Complete;
+import static forge.quest.QuestStartPool.Precon;
+import static forge.quest.QuestStartPool.Standard;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.JOptionPane;
+
 import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
@@ -13,15 +25,6 @@ import forge.quest.QuestStartPool;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
-
-import javax.swing.*;
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import static forge.quest.QuestStartPool.*;
 
 /** 
  * TODO: Write javadoc for this type.

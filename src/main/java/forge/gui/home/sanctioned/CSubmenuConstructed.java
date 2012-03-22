@@ -282,11 +282,11 @@ public enum CSubmenuConstructed implements ICSubmenu {
 
         final List<String> eventNames = new ArrayList<String>();
 
-        for (final QuestEvent e : quest.getEventManager().ALL_DUELS) {
+        for (final QuestEvent e : quest.getEventManager().getAllDuels()) {
             eventNames.add(e.getEventDeck().getName());
         }
 
-        for (final QuestEvent e : quest.getEventManager().ALL_CHALLENGES) {
+        for (final QuestEvent e : quest.getEventManager().getAllChallenges()) {
             eventNames.add(e.getEventDeck().getName());
         }
 
