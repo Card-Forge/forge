@@ -110,7 +110,7 @@ public enum FSkin {
         IMG_WHITE       (new int[] {440, 200, 40, 40}), /** */
         IMG_2B          (new int[] {360, 400, 40, 40}), /** */
         IMG_2G          (new int[] {400, 400, 40, 40}), /** */
-        IMG_2R          (new int[] {440, 360, 40, 40}), /** */
+        IMG_2R          (new int[] {440, 400, 40, 40}), /** */
         IMG_2U          (new int[] {440, 360, 40, 40}), /** */
         IMG_2W          (new int[] {400, 360, 40, 40}), /** */
         IMG_BLACK_GREEN (new int[] {360, 240, 40, 40}), /** */
