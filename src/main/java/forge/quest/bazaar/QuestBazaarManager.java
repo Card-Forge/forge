@@ -87,7 +87,7 @@ public class QuestBazaarManager {
             for (int iN = 0; iN < xmlQuestItems.getLength(); iN++) {
                 Node n = xmlQuestItems.item(iN);
                 if (n.getNodeType() != Node.ELEMENT_NODE) { continue; }
-                
+
                 NamedNodeMap attrs = n.getAttributes();
                 String sType = attrs.getNamedItem("itemType").getTextContent();
                 String name = attrs.getNamedItem("name").getTextContent();
@@ -139,14 +139,14 @@ public class QuestBazaarManager {
         final Map<String, IQuestBazaarItem> itemSet = new HashMap<String, IQuestBazaarItem>();
 
         final QuestController qCtrl = AllZone.getQuest();
-        for ( int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++)
-        {
-            for( QuestPetController pet : qCtrl.getPetsStorage().getAllPets(iSlot)) {
+        for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
+
+            for (QuestPetController pet : qCtrl.getPetsStorage().getAllPets(iSlot)) {
                 //System.out.println("Pet: " + pet.getName());
                 itemSet.put(pet.getName(), pet);
             }
         }
-        
+
         itemSet.putAll(items);
 
         itemsOnStalls.clear();

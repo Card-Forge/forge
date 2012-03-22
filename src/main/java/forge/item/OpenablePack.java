@@ -32,10 +32,10 @@ import forge.util.Predicate;
  * TODO: Write javadoc for this type.
  */
 public abstract class OpenablePack implements InventoryItemFromSet {
-    
+
     /** The contents. */
     protected final BoosterData contents;
-    
+
     /** The name. */
     protected final String name;
     private List<CardPrinted> cards = null;

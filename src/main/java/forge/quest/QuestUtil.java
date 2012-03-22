@@ -89,13 +89,13 @@ public class QuestUtil {
     public static CardList getHumanStartingCards(final QuestController qc) {
         final CardList list = new CardList();
 
-        for( int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++ )
-        {
-            String petName = qc.getSelectedPet(iSlot); 
+        for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
+
+            String petName = qc.getSelectedPet(iSlot);
             QuestPetController pet = qc.getPetsStorage().getPet(petName);
             if (pet != null) {
                 Card c = pet.getPetCard(qc.getAssets());
-                if ( c != null ){
+                if (c != null) {
                     Card copy = AbstractCardFactory.getCard2(c, AllZone.getHumanPlayer());
                     copy.setSickness(true);
                     copy.addController(AllZone.getHumanPlayer());

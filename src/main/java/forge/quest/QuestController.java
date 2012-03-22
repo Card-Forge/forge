@@ -73,7 +73,7 @@ public class QuestController {
     private QuestEventManager eventManager = null;
 
     private QuestBazaarManager bazaar = null;
-    
+
     private QuestPetStorage pets = null;
 
     // This is used by shop. Had no idea where else to place this
@@ -99,12 +99,11 @@ public class QuestController {
     public void selectPet(Integer slot, String name) {
         selectedPets.put(slot, name);
     }
-    
+
     public String getSelectedPet(Integer slot) {
         return selectedPets.get(slot);
-    }    
-    
-    
+    }
+
     // Cards - class uses data from here
     /**
      * Gets the cards.
@@ -323,12 +322,12 @@ public class QuestController {
         }
         return this.eventManager;
     }
-    
+
     public QuestPetStorage getPetsStorage() {
-        if ( this.pets == null ) {
+        if (this.pets == null) {
             this.pets = new QuestPetStorage(ForgeProps.getFile(NewConstants.Quest.BAZAAR));
         }
-        
+
         return this.pets;
     }
 

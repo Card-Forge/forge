@@ -433,14 +433,14 @@ public class DeckLister extends JPanel {
             editor.setVisible(true);
             break;
             case Constructed:
-            final DeckEditorConstructed cEditor = 
+            final DeckEditorConstructed cEditor =
                     new DeckEditorConstructed(mainFrame);
             cEditor.show(this.cmdEditorExit);
             cEditor.getController().load(d0.getName());
             cEditor.setVisible(true);
             break;
         case Sealed:
-            final DeckEditorLimited sEditor = 
+            final DeckEditorLimited sEditor =
                     new DeckEditorLimited(mainFrame, Singletons.getModel().getDecks().getSealed());
             sEditor.show(this.cmdEditorExit);
             sEditor.getController().load(d0.getName());

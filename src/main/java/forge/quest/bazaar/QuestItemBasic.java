@@ -54,7 +54,7 @@ public class QuestItemBasic implements IQuestBazaarItem {
 
     @XStreamAsAttribute
     private String purchaseName = null;
-    
+
     private String description = "Read from XML";
 
     @XStreamAsAttribute

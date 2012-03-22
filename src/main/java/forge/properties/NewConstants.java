@@ -59,7 +59,7 @@ public final class NewConstants {
     public static final String CARD_PICTURES = "card-pictures";
     /** Constant <code>CARD_PICTURES_A="card-pictures_a"</code>. */
 
-    public static final class CardPicturesByLetter { 
+    public static final class CardPicturesByLetter {
         public static final String CARD_PICTURES_A = "card-pictures_a";
         /** Constant <code>CARD_PICTURES_B="card-pictures_b"</code>. */
         public static final String CARD_PICTURES_B = "card-pictures_b";
@@ -149,7 +149,6 @@ public final class NewConstants {
     /** Constant <code>SOUND_BASE="sound/base"</code>. */
     public static final String SOUND_BASE = "sound/base";
 
-    
 
     /**
      * These properties are for a regular game.

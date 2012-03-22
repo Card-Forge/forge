@@ -78,11 +78,11 @@ public enum CSubmenuDuels implements ICSubmenu {
         view.getCbxPet().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                final int SLOT = 1;
+                final int slot = 1;
                 final int index = view.getCbxPet().getSelectedIndex();
-                List<QuestPetController> pets = quest.getPetsStorage().getAvaliablePets(SLOT, quest.getAssets());
-                String petName = index <= 0 || index > pets.size() ? null : pets.get(index-1).getName(); 
-                quest.selectPet(SLOT, petName);
+                List<QuestPetController> pets = quest.getPetsStorage().getAvaliablePets(slot, quest.getAssets());
+                String petName = index <= 0 || index > pets.size() ? null : pets.get(index - 1).getName();
+                quest.selectPet(slot, petName);
             }
         });
     }

@@ -40,7 +40,7 @@ public class QuestItemElixir extends QuestItemBasic {
     @Override
     public final int getBuyingPrice(QuestAssets qA) {
         int level = qA.getItemLevel(this.getItemType());
-        if ( level < 5) {
+        if (level < 5) {
             return super.getBasePrice();
         } else if (level < 10) {
             return super.getBasePrice() * 2;
