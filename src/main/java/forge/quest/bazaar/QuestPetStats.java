@@ -6,10 +6,8 @@ import java.util.List;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardReader;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;

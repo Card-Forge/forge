@@ -1,7 +1,5 @@
 package forge.quest;
 
-import forge.game.GameType;
-
 /** 
  * TODO: Write javadoc for this type.
  *

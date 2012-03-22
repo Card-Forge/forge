@@ -18,4 +18,12 @@ public class QuestItemCondition {
     public void setLevel(int level) {
         this.level = level; 
     }
+
+    /**
+     * Copy data from the parameter instance to 'this' instance 
+     * @param current
+     */
+    public void takeDataFrom(QuestItemCondition source) {
+        this.level = source.level;
+    }
 }

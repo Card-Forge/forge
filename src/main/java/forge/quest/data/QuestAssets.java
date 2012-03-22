@@ -93,8 +93,23 @@ public class QuestAssets {
      * @param itemType the item type
      * @return the item condition
      */
-    public final QuestItemCondition getItemCondition(final QuestItemType itemType) {
-        return this.inventoryItems.get(itemType);
+    @SuppressWarnings("unchecked")
+    public final <T extends QuestItemCondition> T getItemCondition(final QuestItemType itemType) {
+        QuestItemCondition current = this.inventoryItems.get(itemType); 
+        if ( !current.getClass().equals(itemType.getModelClass() ) ) {
+            try {
+                QuestItemCondition modern = itemType.getModelClass().newInstance();
+                modern.takeDataFrom(current);
+                current = modern;
+                inventoryItems.put(itemType, modern);
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            
+        }
+        return (T) current;
     }
 
     
@@ -125,8 +140,9 @@ public class QuestAssets {
         return state == null ? 0 : state.getLevel();
     }
     
-    public final QuestItemCondition getPetCondition(final String name) {
-        return this.combatPets.get(name);
+    @SuppressWarnings("unchecked")
+    public final <T extends QuestItemCondition> T getPetCondition(final String name) {
+        return (T)this.combatPets.get(name);
     }    
 
     public final void setPetLevel(final String name, final int level) {
