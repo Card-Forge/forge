@@ -8365,6 +8365,7 @@ res/cardsfolder/s/souldrinker.txt svneol=native#text/plain
 res/cardsfolder/s/soulless_one.txt svneol=native#text/plain
 res/cardsfolder/s/soulquake.txt svneol=native#text/plain
 res/cardsfolder/s/souls_attendant.txt svneol=native#text/plain
+res/cardsfolder/s/souls_fire.txt -text
 res/cardsfolder/s/souls_grace.txt -text
 res/cardsfolder/s/souls_majesty.txt -text
 res/cardsfolder/s/souls_might.txt svneol=native#text/plain

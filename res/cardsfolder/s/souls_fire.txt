@@ -1,0 +1,13 @@
+Name:Soul's Fire
+ManaCost:2 R
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | SpellDescription$ Target creature you control on the battlefield deals damage equal to its power to target creature or player.
+SVar:SoulsDamage:DB$DealDamage | Tgt$ TgtCP | NumDmg$ X | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | DamageSource$ Targeted | SubAbility$ DBPump
+SVar:X:Targeted$CardPower
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_fire.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/115.jpg
+Oracle:Target creature you control on the battlefield deals damage equal to its power to target creature or player.
+End
