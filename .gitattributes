@@ -10718,11 +10718,13 @@ res/pics_product/precons/reign_of_vampirism.jpg -text
 res/pics_product/precons/relentless_dead.jpg -text
 res/pics_product/precons/relic_breaker.jpg -text
 res/pics_product/precons/repel_the_dark.jpg -text
+res/pics_product/precons/rot_from_within.jpg -text
 res/pics_product/precons/spectral_legions.jpg -text
 res/pics_product/precons/swift_justice.jpg -text
 res/pics_product/precons/totem_power.jpg -text
 res/pics_product/precons/unnatural_schemes.jpg -text
 res/pics_product/precons/vampire_onslaught.jpg -text
+res/pics_product/precons/war_of_attrition.jpg -text
 res/pics_product/tournamentpacks/2ED.jpg -text
 res/pics_product/tournamentpacks/3ED.jpg -text
 res/pics_product/tournamentpacks/4ED.jpg -text
@@ -11134,11 +11136,13 @@ res/quest/precons/Reign[!!-~]of[!!-~]Vampirism.dck -text
 res/quest/precons/Relentless[!!-~]Dead.dck -text
 res/quest/precons/Relic[!!-~]Breaker.dck -text
 res/quest/precons/Repel[!!-~]the[!!-~]Dark.dck -text
+res/quest/precons/Rot[!!-~]from[!!-~]Within.dck -text
 res/quest/precons/Spectral[!!-~]Legions.dck -text
 res/quest/precons/Swift[!!-~]Justice.dck -text
 res/quest/precons/Totem[!!-~]Power.dck -text
 res/quest/precons/Unnatural[!!-~]Schemes.dck -text
 res/quest/precons/Vampire[!!-~]Onslaught.dck -text
+res/quest/precons/War[!!-~]of[!!-~]Attrition.dck -text
 res/quest/price.txt svneol=native#text/plain
 res/quest/quest-opponent-icons.txt -text
 res/quest/quest-pet-shop-icons.txt -text

@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=20
+Credits=2000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=War of Attrition
+Description=This deck combines efficient, aggressive creatures with versatile Equipment, including several with living weapon, to overwhelm your opponent with an unrelenting stream of threats.
+Set=NPH
+Image=war_of_attrition.jpg
+[main]
+1 Apostle's Blessing|NPH
+1 Bonehoard|MBS
+1 Darksteel Axe|SOM
+2 Dread Statuary|WWK
+4 Elite Vanguard|M11
+4 Flayer Husk|MBS
+4 Journey to Nowhere|COM
+1 Kemba, Kha Regent|SOM
+2 Kor Duelist|ZEN
+4 Leonin Relic-Warder|MBS
+4 Leonin Skyhunter|MBS
+1 Mirran Crusader|MBS
+21 Plains|SOM
+4 Porcelain Legionnaire|NPH
+1 Puresteel Paladin|NPH
+1 Sickleslicer|NPH
+1 Skinwing|MBS
+2 Stoneforge Mystic|WWK
+1 Sword of Vengeance|M11
+[sideboard]
+1 Apostle's Blessing|NPH
+2 Arrest|SOM
+3 Celestial Purge|M11
+1 Kor Duelist|ZEN
+4 Kor Firewalker|WWK
+4 Revoke Existence|SOM
