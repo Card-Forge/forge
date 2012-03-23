@@ -5,6 +5,6 @@ Types:Creature Plant Wall
 Text:Level 6 Plant Wall
 PT:1/4
 K:Defender
-K:Deathtouch
+K:Wither
 A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 End
