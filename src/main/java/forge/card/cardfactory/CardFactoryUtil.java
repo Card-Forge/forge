@@ -4139,6 +4139,7 @@ public class CardFactoryUtil {
         to.setText(from.getSpellText());
         to.setManaCost(from.getManaCost());
         to.setColor(from.getColor());
+        to.setCardColorsOverridden(from.isCardColorsOverridden());
         to.setSVars(from.getSVars());
         to.setSets(from.getSets());
         to.setIntrinsicAbilities(from.getIntrinsicAbilities());
