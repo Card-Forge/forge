@@ -2,6 +2,7 @@ Name:Dizzying Gaze
 ManaCost:R
 Types:Enchantment Aura
 Text:no text
+K:Enchant creature you control
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature.YouCtrl | SpellDescription$ Enchant creature you control.
 A:AB$ DealDamage | Cost$ R | NumDmg$ 1 | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | DamageSource$ Enchanted | SpellDescription$ Enchanted creature deals 1 damage to target creature with flying.
 SVar:Rarity:Common
