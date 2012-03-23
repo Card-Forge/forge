@@ -10,7 +10,9 @@ g_1_1_wolf_pet.jpg                     http://www.cardforge.org/fpics/pets/token
 g_1_2_wolf_pet.jpg                     http://www.cardforge.org/fpics/pets/tokens/g_1_2_wolf_pet.jpg
 g_1_3_plant_wall.jpg                   http://www.cardforge.org/fpics/pets/tokens/g_1_3_plant_wall.jpg
 g_1_3_plant_wall_deathtouch.jpg        http://www.cardforge.org/fpics/pets/tokens/g_1_3_plant_wall_deathtouch.jpg
+g_1_3_plant_wall_wither.jpg            http://www.cardforge.org/fpics/pets/tokens/g_1_3_plant_wall_wither.jpg
 g_1_4_plant_wall.jpg                   http://www.cardforge.org/fpics/pets/tokens/g_1_4_plant_wall.jpg
+g_1_4_plant_wall_wither.jpg            http://www.cardforge.org/fpics/pets/tokens/g_1_4_plant_wall_wither.jpg
 g_2_2_wolf_pet.jpg                     http://www.cardforge.org/fpics/pets/tokens/g_2_2_wolf_pet.jpg
 g_2_2_wolf_pet_flanking.jpg            http://www.cardforge.org/fpics/pets/tokens/g_2_2_wolf_pet_flanking.jpg
 r_1_1_hound_pet.jpg                    http://www.cardforge.org/fpics/pets/tokens/r_1_1_hound_pet.jpg
