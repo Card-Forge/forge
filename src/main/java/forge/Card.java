@@ -67,7 +67,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private long value;
 
-    private final Map<String, CardCharacteristics> characteristicsMap = new HashMap<String, CardCharacteristics>();
+    private final Map<String, CardCharacteristics> characteristicsMap = new HashMap<String, CardCharacteristics>(2);
     private String curCharacteristics = "Original";
     private String preTFDCharacteristic = "Original";
 

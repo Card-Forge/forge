@@ -70,10 +70,11 @@ public class QuestController {
     /** The available quests. */
     private List<Integer> availableQuests = null;
 
-    private QuestEventManager eventManager = null;
+    private QuestEventManager duelManager = null;
+    private QuestEventManager challengesManager = null;
 
     private QuestBazaarManager bazaar = null;
-
+    
     private QuestPetStorage pets = null;
 
     // This is used by shop. Had no idea where else to place this
@@ -99,11 +100,12 @@ public class QuestController {
     public void selectPet(Integer slot, String name) {
         selectedPets.put(slot, name);
     }
-
+    
     public String getSelectedPet(Integer slot) {
         return selectedPets.get(slot);
-    }
-
+    }    
+    
+    
     // Cards - class uses data from here
     /**
      * Gets the cards.
@@ -162,7 +164,8 @@ public class QuestController {
         this.myCards = this.model == null ? null : new QuestUtilCards(this);
         this.currentEvent = null;
 
-        this.getEventManager().randomizeOpponents();
+        this.getChallengesManager().randomizeOpponents();
+        this.getDuelsManager().randomizeOpponents();
     }
 
     /**
@@ -316,18 +319,26 @@ public class QuestController {
      *
      * @return the event manager
      */
-    public QuestEventManager getEventManager() {
-        if (this.eventManager == null) {
-            this.eventManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DECKS));
+    public QuestEventManager getDuelsManager() {
+        if (this.duelManager == null) {
+            this.duelManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DUELS));
         }
-        return this.eventManager;
+        return this.duelManager;
     }
 
+    public QuestEventManager getChallengesManager() {
+        if (this.challengesManager == null) {
+            this.challengesManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.CHALLENGES));
+        }
+        return this.challengesManager;
+    }
+    
+    
     public QuestPetStorage getPetsStorage() {
-        if (this.pets == null) {
+        if ( this.pets == null ) {
             this.pets = new QuestPetStorage(ForgeProps.getFile(NewConstants.Quest.BAZAAR));
         }
-
+        
         return this.pets;
     }
 

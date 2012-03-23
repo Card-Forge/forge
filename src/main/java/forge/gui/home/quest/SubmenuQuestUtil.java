@@ -227,7 +227,8 @@ public class SubmenuQuestUtil {
                 Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
                 Constant.Runtime.setGameType(GameType.Quest);
 
-                qData.getEventManager().randomizeOpponents();
+                qData.getChallengesManager().randomizeOpponents();
+                qData.getDuelsManager().randomizeOpponents();
                 qData.setCurrentEvent(event);
                 qData.save();
 

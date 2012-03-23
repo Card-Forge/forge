@@ -100,7 +100,7 @@ public enum CSubmenuDuels implements ICSubmenu {
             view.getLblTitle().setText("Duels: " + AllZone.getQuest().getRank());
 
             view.getPnlDuels().removeAll();
-            final List<QuestEventDuel> duels = AllZone.getQuest().getEventManager().generateDuels();
+            final List<QuestEventDuel> duels = AllZone.getQuest().getDuelsManager().generateDuels();
 
             for (final QuestEventDuel d : duels) {
                 final SelectablePanel temp = new SelectablePanel(d);

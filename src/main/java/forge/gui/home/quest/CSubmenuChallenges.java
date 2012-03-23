@@ -117,7 +117,7 @@ public enum CSubmenuChallenges implements ICSubmenu {
             view.getLblTitle().setText("Challenges: " + AllZone.getQuest().getRank());
 
             view.getPnlChallenges().removeAll();
-            final List<QuestEventChallenge> challenges = AllZone.getQuest().getEventManager().generateChallenges();
+            final List<QuestEventChallenge> challenges = AllZone.getQuest().getChallengesManager().generateChallenges();
 
             for (final QuestEventChallenge c : challenges) {
                 final SelectablePanel temp = new SelectablePanel(c);
