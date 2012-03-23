@@ -197,6 +197,22 @@ Undead Alchemist
 - improved support for quest mode items model
 - Converted Brass Squire to script
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed cost description for Lurking Evil's ability
+- Fixed Tel-Jilad Wolf's pump value and description
+- Fixed link to 2/R mana icon
+- Fixed trigger restriction for Sword of the Meek
+- CheckStyle.
+- CheckStyle.
+- CheckStyle.
+- Fixed damage source for Delirium
+- does keep colors explicitly assigned to card copies
+- Separate QuestEventManager instances for Duels and challenges.
+- Duels and challenges lay in separate folders
+- deck can have comments
+- MBS event decks, Infect and Defile plus Into the Breach.
+- Changed Plant Wall in quest to have Wither instead of Deathtouch at levels 5 and 6
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -274,6 +290,12 @@ Silvergill Douser
 Urge to Feed
 Kor Outfitter
 Auriok Windwalker
+Magnetic Theft
+Spiritual Focus
+Stir the Pride
+Soul's Fire
+Scorching Lava
+Mass Polymorph
 
 
 end
