@@ -7112,6 +7112,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.getReceivedDamageFromThisTurn().keySet().contains(source)) {
                 return false;
             }
+        } else if (property.equals("wasDealtDamageByEquipeeThisTurn")) {
+            Card equipee = source.getEquippingCard();
+            if (!this.getReceivedDamageFromThisTurn().keySet().contains(equipee)) {
+                return false;
+            }
         } else if (property.startsWith("attackedThisTurn")) {
             if (!this.getCreatureAttackedThisTurn()) {
                 return false;
