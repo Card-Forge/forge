@@ -212,6 +212,8 @@ Undead Alchemist
 - MBS event decks, Infect and Defile plus Into the Breach.
 - Changed Plant Wall in quest to have Wither instead of Deathtouch at levels 5 and 6
 - Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt.
+- Ran scripts.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
