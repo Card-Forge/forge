@@ -215,6 +215,21 @@ Undead Alchemist
 - Added the recent commit logs to changes.txt.
 - Ran scripts.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Removed extraeneous SubAbility from Soul's Fire
+- Added 'wasDealtDamageByEquipeeThisTurn' to isValid
+- Fixed Qasali Ambusher.
+- Fixed some cards with "May be played without paying its mana cost" to work correctly in all zones.
+- Added debug script from Melira, Sylvok Outcast.
+- Updated download links and index.xml for bazaar to reflect the plant wall switching over to wither.
+- Forgot Rushwood Legate, while fixing cards with "May be played without paying its mana cost".
+- Set the WinsToUnlock for the new Event decks to 20 and raised the price of Into the Breach to 3000. (They are on a different level than the intro decks).
+- Added the event deck Vampire Onslaught.
+- Dizzying Gaze missing Enchant creature keyword
+- NPH event decks
+- restore original config
+- Fixed the p/t for Stabwhisker the Odious.
+- Fixed the mana cost for Drake Familiar.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -298,6 +313,7 @@ Stir the Pride
 Soul's Fire
 Scorching Lava
 Mass Polymorph
+Scythe of the Wretched
 
 
 end
