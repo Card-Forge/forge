@@ -42,7 +42,10 @@ import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityMana;
 import forge.gui.GuiUtils;
+import forge.gui.ListChooser;
 import forge.gui.game.CardPanel;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 
 /**
  * <p>
@@ -1478,6 +1481,30 @@ public final class GuiDisplayUtil {
         }
     }
 
+    /**
+     * <p>
+     * devModeTutor.
+     * </p>
+     * 
+     * @since 1.2.7
+     */
+    public static void devModeAddAnyCard() {
+        final Iterable<CardPrinted> uniqueCards = CardDb.instance().getAllUniqueCards();
+        final List<String> cards = new ArrayList<String>();
+        for (final CardPrinted c : uniqueCards) {
+            cards.add(c.getName());
+        }
+        Collections.sort(cards);
+
+        // use standard forge's list selection dialog
+        final ListChooser<String> c = new ListChooser<String>("Name the card", 0, 1, cards);
+        if (c.show()) {
+            CardPrinted cp = CardDb.instance().getCard(c.getSelectedValue());
+            Card forgeCard = cp.toForgeCard(AllZone.getHumanPlayer());
+            Singletons.getModel().getGameAction().moveToHand(forgeCard);
+        }
+    }    
+    
     /**
      * <p>
      * devModeAddCounter.

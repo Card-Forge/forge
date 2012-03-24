@@ -82,7 +82,7 @@ public class ViewTabber extends JPanel {
     private TriggerReactionMenu triggerMenu;
     private final JPanel pnlStack, pnlCombat, pnlConsole, pnlPlayers, pnlDev;
 
-    private DevLabel lblMilling, lblGenerateMana, lblSetupGame, lblTutor,
+    private DevLabel lblMilling, lblGenerateMana, lblSetupGame, lblTutor, lblAddCard,
             lblCounterPermanent, lblTapPermanent, lblUntapPermanent, lblUnlimitedLands, lblSetLife;
 
     private final FVerticalTabPanel vtpTabber;
@@ -518,6 +518,10 @@ public class ViewTabber extends JPanel {
     public DevLabel getLblTutor() {
         return this.lblTutor;
     }
+    
+    public DevLabel getAnyCard() {
+        return this.lblAddCard;
+    }
 
     /**
      * Gets the lbl counter permanent.
@@ -625,6 +629,7 @@ public class ViewTabber extends JPanel {
         lblTapPermanent = new DevLabel("Tap Permanent");
         lblUntapPermanent = new DevLabel("Untap Permanent");
         lblSetLife = new DevLabel("Set Player Life");
+        lblAddCard = new DevLabel("Add any card");
 
         devLBLs.add(lblMilling);
         // devLBLs.add(lblHandView);
@@ -633,6 +638,7 @@ public class ViewTabber extends JPanel {
         devLBLs.add(lblGenerateMana);
         devLBLs.add(lblSetupGame);
         devLBLs.add(lblTutor);
+        devLBLs.add(lblAddCard);
         devLBLs.add(lblCounterPermanent);
         devLBLs.add(lblTapPermanent);
         devLBLs.add(lblUntapPermanent);
@@ -646,6 +652,7 @@ public class ViewTabber extends JPanel {
         viewport.add(this.lblGenerateMana, constraints);
         viewport.add(this.lblSetupGame, constraints);
         viewport.add(this.lblTutor, constraints);
+        viewport.add(this.lblAddCard, constraints);
         viewport.add(this.lblCounterPermanent, constraints);
         viewport.add(this.lblTapPermanent, constraints);
         viewport.add(this.lblUntapPermanent, constraints);

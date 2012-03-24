@@ -70,8 +70,7 @@ public class DeckImport extends JDialog {
             + "<li class='knowncard'>Recognized cards will be shown in green. These cards will be auto-imported into a new deck<BR></li>"
             + "<li class='unknowncard'>Lines which seem to be cards but are either misspelled or unsupported by Forge, are shown in dark-red<BR></li>"
             + "<li class='comment'>Lines that appear unsignificant will be shown in gray<BR><BR></li>" + "</ul>"
-            + "<div class='comment'>Submit feedback to Max mtg on slightlymagic.net forum</div>"
-            + "<div class='comment'>Post bug-reports to http://cardforge.org/bugz/</div>" + "</html>";
+            + "</html>";
 
     private final JEditorPane htmlOutput = new JEditorPane("text/html", DeckImport.HTML_WELCOME_TEXT);
     private final JScrollPane scrollInput = new JScrollPane(this.txtInput);

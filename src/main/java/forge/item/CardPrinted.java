@@ -30,6 +30,7 @@ import forge.Player;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.util.Lambda1;
+import forge.util.MyRandom;
 import forge.util.Predicate;
 import forge.util.PredicateString;
 
@@ -302,6 +303,12 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
                 c.setState("Original");
             }
         }
+        
+        final int cntVariants = getCard().getEditionInfo(getEdition()).getCopiesCount();
+        if (cntVariants > 1) {
+            c.setRandomPicture(MyRandom.getRandom().nextInt(cntVariants - 1) + 1);
+            c.setImageFilename(CardUtil.buildFilename(c));
+        }        
         // else throw "Unsupported card";
         return c;
     }

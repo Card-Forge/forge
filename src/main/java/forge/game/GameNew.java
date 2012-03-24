@@ -127,11 +127,6 @@ public class GameNew {
             for (int i = 0; i < stackOfCards.getValue(); i++) {
 
                 final Card card = cardPrinted.toForgeCard(AllZone.getHumanPlayer());
-                final int cntVariants = cardPrinted.getCard().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
-                if (cntVariants > 1) {
-                    card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
-                    card.setImageFilename(CardUtil.buildFilename(card));
-                }
 
                 // Assign random foiling on approximately 1:20 cards
                 if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {

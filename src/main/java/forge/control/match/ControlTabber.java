@@ -37,7 +37,7 @@ import forge.view.match.ViewTabber;
  */
 public class ControlTabber extends MyObservable {
     private final ViewTabber view;
-    private final MouseListener madMilling, madUnlimited,
+    private final MouseListener madMilling, madUnlimited, madAddAnyCard,
         madMana, madSetup, madTutor, madCounter, madTap, madUntap, madLife;
 
     private Observer obsStack, obsLog;
@@ -104,6 +104,10 @@ public class ControlTabber extends MyObservable {
             public void mousePressed(final MouseEvent e) {
                 GuiDisplayUtil.devModeTutor(); } };
 
+        madAddAnyCard = new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                GuiDisplayUtil.devModeAddAnyCard(); } };                
+                
         madCounter = new MouseAdapter() { @Override
             public void mousePressed(final MouseEvent e) {
                 GuiDisplayUtil.devModeAddCounter(); } };
@@ -151,6 +155,10 @@ public class ControlTabber extends MyObservable {
         // DevMode: Tutor for card
         this.view.getLblTutor().removeMouseListener(madTutor);
         this.view.getLblTutor().addMouseListener(madTutor);
+        
+        this.view.getAnyCard().removeMouseListener(madAddAnyCard);
+        this.view.getAnyCard().addMouseListener(madAddAnyCard);
+        
 
         // DevMode: Add counter to permanent
         this.view.getLblCounterPermanent().removeMouseListener(madCounter);
