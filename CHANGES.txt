@@ -9,7 +9,7 @@ We have a new skin by WompWomp named "Firebloom" included in this version.
 
 The avatar-switch bug at runtime should now be fixed.
 
-The quest mode plant wall's Deathtouch ability was deemed to be too strong against the AI's attack code and this ability was changed to Wither in this version. The plant wall token image still needs to be changed and the in-game description for the plant wall in the bazaar will also need to be changed to reflect this plant wall modification.
+The quest mode plant wall's Deathtouch ability was deemed to be too strong against the AI's attack code and this ability was changed to Wither in this version. There are plans to make further adjustments to the pets as part of the upcoming forge 1.2.7 release.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
