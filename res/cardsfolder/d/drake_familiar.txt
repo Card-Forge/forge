@@ -1,5 +1,5 @@
 Name:Drake Familiar
-ManaCost:U
+ManaCost:1 U
 Types:Creature Drake
 Text:no text
 PT:2/1
