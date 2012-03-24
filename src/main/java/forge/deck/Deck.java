@@ -210,7 +210,7 @@ public class Deck extends DeckBase implements Serializable {
         final Iterator<String> lineIterator = lines.iterator();
         while (lineIterator.hasNext()) {
             final String line = lineIterator.next();
-            if (line.startsWith(";")) { continue; } // that is a comment or not-yet-supported card 
+            if (line.startsWith(";")) { continue; } // that is a comment or not-yet-supported card
             if (line.startsWith("[")) { break; } // there comes another section
 
             final Matcher m = p.matcher(line.trim());
