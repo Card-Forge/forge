@@ -290,16 +290,31 @@ public class ComputerUtilAttack {
      */
     public final boolean doesHumanAttackAndWin(final int nBlockingCreatures) {
         int totalAttack = 0;
-        final int stop = this.humanList.size() - nBlockingCreatures;
+        int totalPoison = 0;
+        int blockersLeft = nBlockingCreatures;
 
-        for (int i = 0; i < stop; i++) {
-            totalAttack += this.getAttack(this.humanList.get(i));
+        if (AllZone.getComputerPlayer().cantLose()) {
+            return false;
         }
 
-        // originally -3 so the computer will try to stay at 3 life
-        // 0 now to prevent the AI from not attacking when it's got low life
-        // (seems to happen too often)
-        return AllZone.getComputerPlayer().getLife() <= totalAttack;
+        for (Card attacker : humanList) {
+            if (!CombatUtil.canAttackNextTurn(attacker)) {
+                continue;
+            }
+            if (CombatUtil.canBeBlocked(attacker) && blockersLeft > 0) {
+                blockersLeft--;
+                continue;
+            }
+            totalAttack += CombatUtil.damageIfUnblocked(attacker, AllZone.getComputerPlayer(), null);
+            totalPoison += CombatUtil.poisonIfUnblocked(attacker, AllZone.getComputerPlayer(), null);
+        }
+
+        if(AllZone.getComputerPlayer().getLife() <= totalAttack
+                && !AllZone.getComputerPlayer().cantLoseForZeroOrLessLife()
+                && AllZone.getComputerPlayer().canLoseLife()) {
+            return true;
+        }
+        return AllZone.getComputerPlayer().getPoisonCounters() + totalPoison > 9;
     }
 
     /**
@@ -619,7 +634,8 @@ public class ComputerUtilAttack {
                 unblockableDamage += CombatUtil.damageIfUnblocked(attacker, AllZone.getHumanPlayer(), combat);
             }
         }
-        if (unblockableDamage > 0) {
+        if (unblockableDamage > 0 && !AllZone.getHumanPlayer().cantLoseForZeroOrLessLife()
+                && AllZone.getHumanPlayer().canLoseLife()) {
             turnsUntilDeathByUnblockable = AllZone.getHumanPlayer().getLife() / unblockableDamage;
         }
         if (unblockableDamage > AllZone.getHumanPlayer().getLife()) {
@@ -749,7 +765,7 @@ public class ComputerUtilAttack {
      */
     public final boolean shouldAttack(final Card attacker, final CardList defenders, final Combat combat) {
         boolean canBeKilledByOne = false; // indicates if the attacker can be
-                                          // killed by a single blockers
+                                          // killed by a single blocker
         boolean canKillAll = true; // indicates if the attacker can kill all
                                    // single blockers
         boolean canKillAllDangerous = true; // indicates if the attacker can
