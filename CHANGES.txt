@@ -230,6 +230,11 @@ Undead Alchemist
 - Fixed the p/t for Stabwhisker the Odious.
 - Fixed the mana cost for Drake Familiar.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a fluff piece to the changes.txt file.
+- CheckStyle.
+- Fixed two errors in the script of Szadek, Lord of Secrets.
+- devmode now allows tutoring for any card, even if it is not in your deck
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
