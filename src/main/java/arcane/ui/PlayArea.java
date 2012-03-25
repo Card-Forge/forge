@@ -351,11 +351,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         // Remove the wrapped stacks from the source row.
         for( int iRow = 0; iRow < rows.size(); iRow++ ) {
             CardStackRow row = rows.get(iRow);
-            // backwards iteration - I expect it to be safe for deletion
-            for( int iStack = row.size() - 1; iStack >= 0; iStack-- ) {
-                CardStack stack = row.get(iStack);
-                sourceRow.remove(stack);
-            }
+            if ( row != null )
+                sourceRow.removeAll(row);
         }
         return insertIndex;
     }
