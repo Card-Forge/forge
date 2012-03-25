@@ -53,6 +53,7 @@ import forge.item.FatPack;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
+import forge.item.ItemPredicate;
 import forge.item.OpenablePack;
 import forge.item.PreconDeck;
 import forge.item.TournamentPack;
@@ -220,7 +221,7 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, DeckBase>
         this.questData = qd;
         try {
             this.setFilterBoxes(new FilterCheckBoxes(true));
-            this.setTopTableWithCards(new TableView<InventoryItem>("Cards for sale", false, true, InventoryItem.class));
+            this.setTopTableWithCards(new TableView<InventoryItem>("Cards for sale", false, false, InventoryItem.class));
             this.setBottomTableWithCards(new TableView<InventoryItem>("Owned Cards", false, InventoryItem.class));
             this.setCardView(new CardPanelLite());
             this.filterNameTypeSet = new FilterNameTypeSetPanel();
@@ -327,9 +328,16 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, DeckBase>
      */
     @Override
     protected Predicate<InventoryItem> buildFilter() {
-        final Predicate<CardPrinted> cardFilter = Predicate.and(this.getFilterBoxes().buildFilter(),
+        final Predicate<CardPrinted> cardFilter = Predicate.and(
+                this.getFilterBoxes().buildFilter(),
                 this.filterNameTypeSet.buildFilter());
-        return Predicate.instanceOf(cardFilter, CardPrinted.class);
+
+        // Until this is filterable, always show packs and decks in the card shop
+        Predicate<InventoryItem> filter = Predicate.instanceOf(cardFilter, CardPrinted.class);
+        filter = Predicate.or(filter, ItemPredicate.Presets.IS_PACK);
+        filter = Predicate.or(filter, ItemPredicate.Presets.IS_DECK);
+
+        return filter;
     }
 
     /**

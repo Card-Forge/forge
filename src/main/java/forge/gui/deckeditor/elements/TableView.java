@@ -372,7 +372,7 @@ public final class TableView<T extends InventoryItem> {
     public void updateView(final boolean bForceFilter) {
         final boolean useFilter = (bForceFilter && (this.filter != null)) || !this.isUnfiltered();
 
-        if (useFilter || this.wantUnique) {
+        if (useFilter || this.wantUnique || bForceFilter) {
             this.model.clear();
         }
 
@@ -384,6 +384,8 @@ public final class TableView<T extends InventoryItem> {
         } else if (this.wantUnique) {
             this.model.addCards(CardRules.Predicates.Presets.CONSTANT_TRUE.uniqueByLast(this.pool,
                     this.pool.getFnToCardName(), this.pool.getFnToCard()));
+        } else if (!useFilter && bForceFilter) {
+            this.model.addCards(this.pool);
         }
 
         this.model.resort();
