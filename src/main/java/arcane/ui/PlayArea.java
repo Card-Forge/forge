@@ -60,7 +60,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private final boolean mirror;
 
     // Computed in layout.
-    private List<Row> rows = new ArrayList<Row>();
+    private List<CardStackRow> rows = new ArrayList<CardStackRow>();
     private int cardWidth, cardHeight;
     private int playAreaWidth, playAreaHeight;
     private int extraCardSpacingX, cardSpacingX, cardSpacingY;
@@ -93,7 +93,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     public final void doLayout() {
         final int tokenStackMax = 5;
         // Collect lands.
-        final Row allLands = new Row();
+        final CardStackRow allLands = new CardStackRow();
+        
         outerLoop:
         //
         for (final CardPanel panel : this.getCardPanels()) {
@@ -105,7 +106,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
             // Find lands with the same name.
             for (int i = 0, n = allLands.size(); i < n; i++) {
-                final Stack stack = allLands.get(i);
+                final CardStack stack = allLands.get(i);
                 final CardPanel firstPanel = stack.get(0);
                 if (firstPanel.getGameCard().getName().equals(panel.getGameCard().getName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getGameCard().isEnchanted()) {
@@ -131,13 +132,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 }
             }
 
-            final Stack stack = new Stack();
+            final CardStack stack = new CardStack();
             stack.add(panel);
             allLands.add(insertIndex == -1 ? allLands.size() : insertIndex, stack);
         }
 
         // Collect tokens.
-        final Row allTokens = new Row();
+        final CardStackRow allTokens = new CardStackRow();
         outerLoop:
         //
         for (final CardPanel panel : this.getCardPanels()) {
@@ -149,7 +150,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
             // Find tokens with the same name.
             for (int i = 0, n = allTokens.size(); i < n; i++) {
-                final Stack stack = allTokens.get(i);
+                final CardStack stack = allTokens.get(i);
                 final CardPanel firstPanel = stack.get(0);
                 if (firstPanel.getGameCard().getName().equals(panel.getGameCard().getName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty()) {
@@ -178,7 +179,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 }
             }
 
-            final Stack stack = new Stack();
+            final CardStack stack = new CardStack();
             stack.add(panel);
             allTokens.add(insertIndex == -1 ? allTokens.size() : insertIndex, stack);
         }
@@ -188,11 +189,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         // Get size of all the rows.
         int x, y = PlayArea.GUTTER_Y;
         int maxRowWidth = 0;
-        for (final Row row : this.rows) {
+        for (final CardStackRow row : this.rows) {
             int rowBottom = 0;
             x = PlayArea.GUTTER_X;
             for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
-                final Stack stack = row.get(stackIndex);
+                final CardStack stack = row.get(stackIndex);
                 rowBottom = Math.max(rowBottom, y + stack.getHeight());
                 x += stack.getWidth();
             }
@@ -205,11 +206,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         // Position all card panels.
         x = 0;
         y = PlayArea.GUTTER_Y;
-        for (final Row row : this.rows) {
+        for (final CardStackRow row : this.rows) {
             int rowBottom = 0;
             x = PlayArea.GUTTER_X;
             for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
-                final Stack stack = row.get(stackIndex);
+                final CardStack stack = row.get(stackIndex);
                 // Align others to the right.
                 if (RowType.other.isType(stack.get(0).getGameCard())) {
                     x = (this.playAreaWidth - PlayArea.GUTTER_X) + this.extraCardSpacingX;
@@ -238,9 +239,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * @param allLands
      * @param allTokens
      */
-    private void rowSpacing(final Row allLands, final Row allTokens) {
-        final Row allCreatures = new Row(this.getCardPanels(), RowType.creatureNonToken);
-        final Row allOthers = new Row(this.getCardPanels(), RowType.other);
+    private void rowSpacing(final CardStackRow allLands, final CardStackRow allTokens) {
+        final CardStackRow allCreatures = new CardStackRow(this.getCardPanels(), RowType.creatureNonToken);
+        final CardStackRow allOthers = new CardStackRow(this.getCardPanels(), RowType.other);
 
         this.cardWidth = this.getCardWidthMax();
         final Rectangle rect = this.getScrollPane().getVisibleRect();
@@ -254,10 +255,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             this.cardSpacingY = Math.round(this.cardHeight * PlayArea.CARD_SPACING_Y);
             this.stackSpacingX = this.stackVertical ? 0 : (int) Math.round(this.cardWidth * PlayArea.STACK_SPACING_X);
             this.stackSpacingY = Math.round(this.cardHeight * PlayArea.STACK_SPACING_Y);
-            final Row creatures = (Row) allCreatures.clone();
-            final Row tokens = (Row) allTokens.clone();
-            final Row lands = (Row) allLands.clone();
-            Row others = (Row) allOthers.clone();
+            final CardStackRow creatures = (CardStackRow) allCreatures.clone();
+            final CardStackRow tokens = (CardStackRow) allTokens.clone();
+            final CardStackRow lands = (CardStackRow) allLands.clone();
+            CardStackRow others = (CardStackRow) allOthers.clone();
             int afterFirstRow;
             if (this.mirror) {
                 // Wrap all creatures and lands.
@@ -273,13 +274,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 this.wrap(lands, this.rows, this.rows.size());
             }
             // Store the current rows and others.
-            final List<Row> storedRows = new ArrayList<Row>(this.rows.size());
-            for (final Row row : this.rows) {
-                storedRows.add((Row) row.clone());
+            final List<CardStackRow> storedRows = new ArrayList<CardStackRow>(this.rows.size());
+            for (final CardStackRow row : this.rows) {
+                storedRows.add((CardStackRow) row.clone());
             }
-            final Row storedOthers = (Row) others.clone();
+            final CardStackRow storedOthers = (CardStackRow) others.clone();
             // Fill in all rows with others.
-            for (final Row row : this.rows) {
+            for (final CardStackRow row : this.rows) {
                 this.fillRow(others, this.rows, row);
             }
             // Stop if everything fits, otherwise revert back to the stored
@@ -291,7 +292,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             others = storedOthers;
             // Try to put others on their own row(s) and fill in the rest.
             this.wrap(others, this.rows, afterFirstRow);
-            for (final Row row : this.rows) {
+            for (final CardStackRow row : this.rows) {
                 this.fillRow(others, this.rows, row);
             }
             // If that still doesn't fit, scale down.
@@ -308,21 +309,21 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * </p>
      * 
      * @param sourceRow
-     *            a {@link arcane.ui.PlayArea.Row} object.
+     *            a {@link arcane.ui.PlayArea.CardStackRow} object.
      * @param rows
      *            a {@link java.util.List} object.
      * @param insertIndex
      *            a int.
      * @return a int.
      */
-    private int wrap(final Row sourceRow, final List<Row> rows, final int insertIndex) {
+    private int wrap(final CardStackRow sourceRow, final List<CardStackRow> rows, final int insertIndex) {
         // The cards are sure to fit (with vertical scrolling) at the minimum
         // card width.
         final boolean allowHeightOverflow = this.cardWidth == this.getCardWidthMin();
 
-        Row currentRow = new Row();
+        CardStackRow currentRow = new CardStackRow();
         for (int i = 0, n = sourceRow.size() - 1; i <= n; i++) {
-            final Stack stack = sourceRow.get(i);
+            final CardStack stack = sourceRow.get(i);
             // If the row is not empty and this stack doesn't fit, add the row.
             final int rowWidth = currentRow.getWidth();
             if (!currentRow.isEmpty() && ((rowWidth + stack.getWidth()) > this.playAreaWidth)) {
@@ -334,7 +335,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     break;
                 }
                 rows.add(insertIndex == -1 ? rows.size() : insertIndex, currentRow);
-                currentRow = new Row();
+                currentRow = new CardStackRow();
             }
             currentRow.add(stack);
         }
@@ -348,8 +349,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
         // Remove the wrapped stacks from the source row.
-        for (final Row row : rows) {
-            for (final Stack stack : row) {
+        for( int iRow = 0; iRow < rows.size(); iRow++ ) {
+            CardStackRow row = rows.get(iRow);
+            // backwards iteration - I expect it to be safe for deletion
+            for( int iStack = row.size() - 1; iStack >= 0; iStack-- ) {
+                CardStack stack = row.get(iStack);
                 sourceRow.remove(stack);
             }
         }
@@ -362,18 +366,18 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * </p>
      * 
      * @param sourceRow
-     *            a {@link arcane.ui.PlayArea.Row} object.
+     *            a {@link arcane.ui.PlayArea.CardStackRow} object.
      * @param rows
      *            a {@link java.util.List} object.
      * @param rows
      *            a {@link java.util.List} object.
      * @param row
-     *            a {@link arcane.ui.PlayArea.Row} object.
+     *            a {@link arcane.ui.PlayArea.CardStackRow} object.
      */
-    private void fillRow(final Row sourceRow, final List<Row> rows, final Row row) {
+    private void fillRow(final CardStackRow sourceRow, final List<CardStackRow> rows, final CardStackRow row) {
         int rowWidth = row.getWidth();
         while (!sourceRow.isEmpty()) {
-            final Stack stack = sourceRow.get(0);
+            final CardStack stack = sourceRow.get(0);
             rowWidth += stack.getWidth();
             if (rowWidth > this.playAreaWidth) {
                 break;
@@ -395,9 +399,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      *            a {@link java.util.List} object.
      * @return a int.
      */
-    private int getRowsHeight(final List<Row> rows) {
+    private int getRowsHeight(final List<CardStackRow> rows) {
         int height = 0;
-        for (final Row row : rows) {
+        for (final CardStackRow row : rows) {
             height += row.getHeight();
         }
         return (height - this.cardSpacingY) + (PlayArea.GUTTER_Y * 2);
@@ -406,8 +410,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     /** {@inheritDoc} */
     @Override
     public final CardPanel getCardPanel(final int x, final int y) {
-        for (final Row row : this.rows) {
-            for (final Stack stack : row) {
+        for (final CardStackRow row : this.rows) {
+            for (final CardStack stack : row) {
                 for (final CardPanel panel : stack) {
                     final int panelX = panel.getCardX();
                     int panelY = panel.getCardY();
@@ -508,14 +512,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
     }
 
-    private class Row extends ArrayList<Stack> {
+    private class CardStackRow extends ArrayList<CardStack> {
         private static final long serialVersionUID = 716489891951011846L;
 
-        public Row() {
+        public CardStackRow() {
             super(16);
         }
 
-        public Row(final List<CardPanel> cardPanels, final RowType type) {
+        public CardStackRow(final List<CardPanel> cardPanels, final RowType type) {
             this();
             this.addAll(cardPanels, type);
         }
@@ -525,14 +529,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 if (!type.isType(panel.getGameCard()) || (panel.getAttachedToPanel() != null)) {
                     continue;
                 }
-                final Stack stack = new Stack();
+                final CardStack stack = new CardStack();
                 stack.add(panel);
                 this.add(stack);
             }
         }
 
         @Override
-        public boolean addAll(final Collection<? extends Stack> c) {
+        public boolean addAll(final Collection<? extends CardStack> c) {
             final boolean changed = super.addAll(c);
             c.clear();
             return changed;
@@ -543,7 +547,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 return 0;
             }
             int width = 0;
-            for (final Stack stack : this) {
+            for (final CardStack stack : this) {
                 width += stack.getWidth();
             }
             return (width + (PlayArea.GUTTER_X * 2)) - PlayArea.this.extraCardSpacingX;
@@ -554,17 +558,17 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 return 0;
             }
             int height = 0;
-            for (final Stack stack : this) {
+            for (final CardStack stack : this) {
                 height = Math.max(height, stack.getHeight());
             }
             return height;
         }
     }
 
-    private class Stack extends ArrayList<CardPanel> {
+    private class CardStack extends ArrayList<CardPanel> {
         private static final long serialVersionUID = 3863135156832080368L;
 
-        public Stack() {
+        public CardStack() {
             super(8);
         }
 

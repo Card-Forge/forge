@@ -51,7 +51,7 @@ public abstract class CardPanelContainer extends JPanel {
     /**
      * 
      */
-    private List<CardPanel> cardPanels = new ArrayList<CardPanel>();
+    private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
     /**
      * 
      */
@@ -595,16 +595,6 @@ public abstract class CardPanelContainer extends JPanel {
      */
     public final List<CardPanel> getCardPanels() {
         return this.cardPanels;
-    }
-
-    /**
-     * Sets the card panels.
-     * 
-     * @param cardPanels0
-     *            the cardPanels to set
-     */
-    public final void setCardPanels(final List<CardPanel> cardPanels0) {
-        this.cardPanels = cardPanels0;
     }
 
     /**
