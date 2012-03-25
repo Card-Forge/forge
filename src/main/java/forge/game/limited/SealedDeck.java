@@ -210,7 +210,7 @@ public class SealedDeck {
         final CardList aiPlayables = aiCardpool.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                return !(c.getSVar("RemAIDeck").equals("True"));
+                return !(c.getSVar("RemAIDeck").equals("True") || c.getSVar("RemRandomDeck").equals("True"));
             }
         });
 
