@@ -7099,6 +7099,7 @@ res/cardsfolder/r/recoup.txt -text
 res/cardsfolder/r/recover.txt svneol=native#text/plain
 res/cardsfolder/r/recumbent_bliss.txt svneol=native#text/plain
 res/cardsfolder/r/recuperate.txt svneol=native#text/plain
+res/cardsfolder/r/recurring_insight.txt -text
 res/cardsfolder/r/recurring_nightmare.txt svneol=native#text/plain
 res/cardsfolder/r/recycle.txt svneol=native#text/plain
 res/cardsfolder/r/red_cliffs_armada.txt svneol=native#text/plain
