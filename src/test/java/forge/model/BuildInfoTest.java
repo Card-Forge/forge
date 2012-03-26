@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import net.slightlymagic.braids.util.ClumsyRunnable;
 import net.slightlymagic.braids.util.testng.BraidsAssertFunctions;
+import net.slightlymagic.braids.util.testng.ClumsyRunnable;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

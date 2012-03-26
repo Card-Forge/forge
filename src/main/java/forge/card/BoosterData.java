@@ -14,7 +14,11 @@ public class BoosterData {
     public final String getEdition() {
         return edition;
     }
-
+    private final String landEdition;
+    public final String getLandEdition() {
+        return landEdition;
+    }
+    
     private final int nCommon;
     private final int nUncommon;
     private final int nRare;
@@ -39,10 +43,10 @@ public class BoosterData {
      * @param nDF
      *            the n df
      */
-    public BoosterData(final String edition, final int nC, final int nU, final int nR, final int nS, final int nDF) {
+    public BoosterData(final String edition, final String editionLand, final int nC, final int nU, final int nR, final int nS, final int nDF) {
         // if this booster has more that 10 cards, there must be a land in
         // 15th slot unless it's already taken
-        this(edition, nC, nU, nR, nS, nDF, (nC + nR + nU + nS + nDF) > 10 ? BoosterData.CARDS_PER_BOOSTER - nC - nR - nU
+        this(edition, editionLand, nC, nU, nR, nS, nDF, (nC + nR + nU + nS + nDF) > 10 ? BoosterData.CARDS_PER_BOOSTER - nC - nR - nU
                 - nS - nDF : 0, 68);
     }
 
@@ -64,7 +68,7 @@ public class BoosterData {
      * @param oneFoilPer
      *            the one foil per
      */
-    public BoosterData(final String edition0, final int nC, final int nU, final int nR, final int nS, final int nDF, final int nL,
+    public BoosterData(final String edition0, final String editionLand, final int nC, final int nU, final int nR, final int nS, final int nDF, final int nL,
             final int oneFoilPer) {
         this.nCommon = nC;
         this.nUncommon = nU;
@@ -74,6 +78,7 @@ public class BoosterData {
         this.nLand = nL > 0 ? nL : 0;
         this.foilRate = oneFoilPer;
         this.edition = edition0;
+        this.landEdition = editionLand;
     }
 
     /**
@@ -88,7 +93,9 @@ public class BoosterData {
     public final Predicate<CardPrinted> getEditionFilter() {
         return CardPrinted.Predicates.printedInSets(edition);
     }
-
+    public final Predicate<CardPrinted> getLandEditionFilter() {
+        return CardPrinted.Predicates.printedInSets(landEdition);
+    }
     /**
      * Gets the uncommon.
      * 
@@ -179,7 +186,11 @@ public class BoosterData {
             int nDf = section.getInt("DoubleFaced", 0);
             int nLand = section.getInt("BasicLands", 0);
             int nFoilRate = section.getInt("FoilRate", 68);
-            return new BoosterData(section.get("Set"), nC, nU, nR, nS, nDf, nLand, nFoilRate);
+            String edition = section.get("Set");
+            String editionLand = section.get("LandSet");
+            if( editionLand == null )
+                editionLand = edition;
+            return new BoosterData(edition, editionLand, nC, nU, nR, nS, nDf, nLand, nFoilRate);
         }
     }
 }

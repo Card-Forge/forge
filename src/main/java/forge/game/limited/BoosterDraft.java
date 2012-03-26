@@ -28,7 +28,6 @@ import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 
-import net.slightlymagic.braids.util.UtilFunctions;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
@@ -93,9 +92,12 @@ public final class BoosterDraft implements IBoosterDraft {
 
         case Block: // Draft from cards by block or set
 
-            final Object o = GuiUtils.chooseOne("Choose Block", UtilFunctions.iteratorToArray(Singletons.getModel().getBlocks().iterator(), new CardBlock[]{}));
-            final CardBlock block = (CardBlock) o;
-
+            List<CardBlock> blocks = new ArrayList<CardBlock>();
+            for(CardBlock b : Singletons.getModel().getBlocks()) {
+                blocks.add(b);
+            }
+            final CardBlock block = GuiUtils.chooseOne("Choose Block", blocks);
+            
             final CardEdition[] cardSets = block.getSets();
             final String[] sets = new String[cardSets.length];
             for (int k = cardSets.length - 1; k >= 0; --k) {

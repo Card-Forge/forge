@@ -35,7 +35,6 @@ import java.util.zip.ZipFile;
 
 import javax.swing.SwingUtilities;
 
-import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
 import net.slightlymagic.braids.util.generator.GeneratorFunctions;
 
@@ -621,43 +620,5 @@ public class CardReader implements Runnable {
         buf.append(CardReader.CARD_FILE_DOT_EXTENSION);
 
         return buf.toString();
-    }
-
-    /**
-     * Attempt to load a card by its canonical ASCII name.
-     * 
-     * @param canonicalASCIIName
-     *            the canonical ASCII name of the card
-     * 
-     * @return a new Card instance having that name, or null if not found
-     */
-    public final Card findCard(final String canonicalASCIIName) {
-        // Braids on
-        // 8/18/11
-        // 11:08 PM
-        UtilFunctions.checkNotNull("canonicalASCIIName", canonicalASCIIName);
-
-        final String cardFilePath = this.toMostLikelyPath(canonicalASCIIName);
-
-        Card result = null;
-
-        if (this.zip != null) {
-            final ZipEntry entry = this.zip.getEntry(cardFilePath);
-
-            if (entry != null) {
-                result = this.loadCard(entry);
-            }
-        }
-
-        if (result == null) {
-            result = this.loadCard(new File(this.cardsfolder, cardFilePath));
-        }
-
-        if ((result == null) || !(result.getName().equals(canonicalASCIIName))) {
-            // System.err.println(":Could not find \"" + cardFilePath + "\".");
-            result = this.loadCardsUntilYouFind(canonicalASCIIName);
-        }
-
-        return result;
     }
 }

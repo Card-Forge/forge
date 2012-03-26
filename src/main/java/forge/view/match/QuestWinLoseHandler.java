@@ -49,8 +49,6 @@ import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
-import net.slightlymagic.braids.util.UtilFunctions;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -534,18 +532,18 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * 
      */
     private void awardBooster() {
-        final GameFormat[] formats = UtilFunctions.iteratorToArray(Singletons.getModel().getFormats().iterator(), new GameFormat[]{});
-        final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1, formats);
-
+        final List<GameFormat> formats = new ArrayList<GameFormat>();
         String prefferedFormat = Singletons.getModel().getQuestPreferences().getPreference(QPref.BOOSTER_FORMAT);
-        int index = 0;
-        for (int i = 0; i < formats.length; i++) {
-            if (formats[i].toString().equals(prefferedFormat)) {
+        
+        int index = 0, i = 0;
+        for (GameFormat f : Singletons.getModel().getFormats()) {
+            formats.add(f);
+            if (f.toString().equals(prefferedFormat)) 
                 index = i;
-                break;
-            }
+            i++;
         }
-
+        
+        final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1, formats);
         ch.show(index);
 
         final GameFormat selected = ch.getSelectedValue();

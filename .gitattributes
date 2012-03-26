@@ -11842,7 +11842,6 @@ src/main/java/forge/view/match/ViewWinLose.java -text
 src/main/java/forge/view/match/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain
-src/main/java/net/slightlymagic/braids/util/ClumsyRunnable.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/ImmutableIterableFrom.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/UtilFunctions.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/generator/FindNonDirectoriesSkipDotDirectoriesGenerator.java svneol=native#text/plain
@@ -11883,5 +11882,6 @@ src/test/java/forge/gui/game/CardDetailPanelTest.java svneol=native#text/plain
 src/test/java/forge/model/BuildInfoTest.java -text
 src/test/java/forge/model/FModelTest.java -text
 src/test/java/net/slightlymagic/braids/util/testng/BraidsAssertFunctions.java svneol=native#text/plain
+src/test/java/net/slightlymagic/braids/util/testng/ClumsyRunnable.java svneol=native#text/plain
 src/test/java/net/slightlymagic/braids/util/testng/LICENSE.txt svneol=native#text/plain
 src/test/java/net/slightlymagic/braids/util/testng/package-info.java -text

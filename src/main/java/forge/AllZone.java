@@ -20,7 +20,6 @@ package forge;
 import java.util.Arrays;
 import java.util.List;
 
-import net.slightlymagic.braids.util.UtilFunctions;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.cardfactory.PreloadingCardFactory;
@@ -239,8 +238,7 @@ public final class AllZone {
      * @param factory
      *            the factory to set
      */
-    public static void setCardFactory(final CardFactoryInterface factory) {
-        UtilFunctions.checkNotNull("factory", factory);
+    private static void setCardFactory(final CardFactoryInterface factory) {
         AllZone.cardFactory = factory;
     }
 

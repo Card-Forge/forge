@@ -71,8 +71,7 @@ public class FatPack extends OpenablePack {
         for (int i = 0; i < fpData.getCntBoosters(); i++) {
             result.addAll(super.generate());
         }
-        CardEdition landEdition = Singletons.getModel().getEditions().get(fpData.getLandsEdition());
-        result.addAll(getRandomBasicLands(landEdition, fpData.getCntLands()));
+        result.addAll(getRandomBasicLands(fpData.getLandsEdition(), fpData.getCntLands()));
         return result;
     }
 

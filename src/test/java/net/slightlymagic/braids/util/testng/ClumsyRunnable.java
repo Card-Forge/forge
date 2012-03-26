@@ -18,7 +18,7 @@
  * limitations under the Apache License.
  *
  */
-package net.slightlymagic.braids.util;
+package net.slightlymagic.braids.util.testng;
 
 /**
  * Like Runnable, but it can throw any Exception.

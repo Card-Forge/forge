@@ -23,7 +23,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import net.slightlymagic.braids.util.UtilFunctions;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
@@ -79,8 +78,11 @@ public class SealedDeck {
             this.getLandSetCode()[0] = CardDb.instance().getCard("Plains").getEdition();
         } else if (sealedType.equals("Block")) {
 
-            final Object o = GuiUtils.chooseOne("Choose Block", UtilFunctions.iteratorToArray(Singletons.getModel().getBlocks().iterator(), new CardBlock[]{}));
-            final CardBlock block = (CardBlock) o;
+            List<CardBlock> blocks = new ArrayList<CardBlock>();
+            for(CardBlock b : Singletons.getModel().getBlocks()) {
+                blocks.add(b);
+            }
+            final CardBlock block = GuiUtils.chooseOne("Choose Block", blocks);
 
             final CardEdition[] cardSets = block.getSets();
             final String[] sets = new String[cardSets.length];

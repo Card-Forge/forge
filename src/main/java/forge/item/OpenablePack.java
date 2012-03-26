@@ -17,14 +17,10 @@
  */
 package forge.item;
 
-import java.util.Arrays;
 import java.util.List;
 
-import net.slightlymagic.braids.util.UtilFunctions;
-import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
-import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.util.Predicate;
 
@@ -148,24 +144,11 @@ public abstract class OpenablePack implements InventoryItemFromSet {
 
         final int cntLands = this.contents.getLand();
         if (cntLands > 0) {
-            myCards.add(this.getLandFromNearestSet());
+            myCards.add(this.getRandomBasicLand(this.contents.getLandEdition()));
         }
         return myCards;
     }
 
-    private CardPrinted getLandFromNearestSet() {
-        final CardEdition[] editions = UtilFunctions.iteratorToArray(Singletons.getModel().getEditions().iterator(),
-                new CardEdition[] {});
-        final int iThisSet = Arrays.binarySearch(editions, this.contents);
-        for (int iSet = iThisSet; iSet < editions.length; iSet++) {
-            final CardPrinted land = this.getRandomBasicLand(editions[iSet]);
-            if (null != land) {
-                return land;
-            }
-        }
-        // if not found (though that's impossible)
-        return this.getRandomBasicLand(Singletons.getModel().getEditions().get("M12"));
-    }
 
     /**
      * Gets the random basic land.
@@ -173,8 +156,8 @@ public abstract class OpenablePack implements InventoryItemFromSet {
      * @param set the set
      * @return the random basic land
      */
-    protected CardPrinted getRandomBasicLand(final CardEdition set) {
-        return this.getRandomBasicLands(set, 1).get(0);
+    protected CardPrinted getRandomBasicLand(final String setCode) {
+        return this.getRandomBasicLands(setCode, 1).get(0);
     }
 
     /**
@@ -184,8 +167,8 @@ public abstract class OpenablePack implements InventoryItemFromSet {
      * @param count the count
      * @return the random basic lands
      */
-    protected List<CardPrinted> getRandomBasicLands(final CardEdition set, final int count) {
-        return Predicate.and(CardPrinted.Predicates.printedInSets(set.getCode()),
+    protected List<CardPrinted> getRandomBasicLands(final String setCode, final int count) {
+        return Predicate.and(CardPrinted.Predicates.printedInSets(setCode),
                 CardRules.Predicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES).random(
                 CardDb.instance().getAllCards(), count);
     }

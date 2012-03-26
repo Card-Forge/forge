@@ -1,6 +1,5 @@
 package net.slightlymagic.braids.util.testng;
 
-import net.slightlymagic.braids.util.ClumsyRunnable;
 
 import org.testng.Assert;
 
