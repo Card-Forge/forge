@@ -11300,7 +11300,6 @@ src/main/java/forge/CardCharactersticName.java -text
 src/main/java/forge/CardColor.java svneol=native#text/plain
 src/main/java/forge/CardContainer.java svneol=native#text/plain
 src/main/java/forge/CardDamageHistory.java -text
-src/main/java/forge/CardFilter.java svneol=native#text/plain
 src/main/java/forge/CardKeywords.java -text svneol=native#text/plain
 src/main/java/forge/CardList.java svneol=native#text/plain
 src/main/java/forge/CardListFilter.java svneol=native#text/plain
@@ -11847,7 +11846,6 @@ src/main/java/net/slightlymagic/braids/util/ClumsyRunnable.java svneol=native#te
 src/main/java/net/slightlymagic/braids/util/ImmutableIterableFrom.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/UtilFunctions.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/generator/FindNonDirectoriesSkipDotDirectoriesGenerator.java svneol=native#text/plain
-src/main/java/net/slightlymagic/braids/util/generator/GeneratorFromArray.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/generator/GeneratorFunctions.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/generator/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/package-info.java svneol=native#text/plain
@@ -11876,7 +11874,6 @@ src/test/java/forge/PanelTest.java svneol=native#text/plain
 src/test/java/forge/PhaseHandlerTest.java -text
 src/test/java/forge/RunTest.java svneol=native#text/plain
 src/test/java/forge/TinyTest.java svneol=native#text/plain
-src/test/java/forge/card/cardFactory/CardFactoryUtilTest.java svneol=native#text/plain
 src/test/java/forge/card/mana/ManaPartTest.java svneol=native#text/plain
 src/test/java/forge/deck/generate/Generate2ColorDeckTest.java svneol=native#text/plain
 src/test/java/forge/deck/generate/Generate3ColorDeckTest.java svneol=native#text/plain

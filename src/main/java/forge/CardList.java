@@ -635,7 +635,13 @@ public class CardList implements Iterable<Card> {
      *         criteria; may be empty, but never null.
      */
     public final CardList filter(final CardListFilter filt) {
-        return CardFilter.filter(this, filt);
+        final CardList result = new CardList();
+        for (final Card card : this) {
+            if (filt.addCard(card)) {
+                result.add(card);
+            }
+        }
+        return result;
     }
 
     /**

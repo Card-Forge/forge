@@ -24,7 +24,6 @@ import java.util.Random;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardFilter;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Constant;
@@ -34,6 +33,7 @@ import forge.error.ErrorViewer;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.util.MyRandom;
+import forge.util.Predicate;
 
 /**
  * <p>
@@ -146,16 +146,9 @@ public class Generate3ColorDeck {
 
         // start with all cards
         // remove cards that generated decks don't like
-        final CardList allCards = CardFilter.filter(AllZone.getCardFactory(), new CardListFilter() {
-            @Override
-            public boolean addCard(final Card c) {
-                if (c.getSVar("RemRandomDeck").equals("True")) {
-                    return false;
-                }
-                return (!c.getSVar("RemAIDeck").equals("True") || ((pt != null) && pt.equals(PlayerType.HUMAN)));
-            }
-        });
-
+        Predicate<Card> toUse = pt == PlayerType.HUMAN ? GenerateDeckUtil.humanCanPlay : GenerateDeckUtil.aiCanPlay;
+        CardList allCards = new CardList(toUse.select(AllZone.getCardFactory()));
+        
         // reduce to cards that match the colors
         CardList cl1 = allCards.getColor(this.color1);
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {
