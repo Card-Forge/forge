@@ -5006,7 +5006,6 @@ public class CardFactoryUtil {
         if (CardFactoryUtil.hasKeyword(card, "Morph") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Morph");
             if (n != -1) {
-                card.setPrevIntrinsicKeyword(card.getIntrinsicKeyword());
                 card.setPrevType(card.getType());
 
                 final String parse = card.getKeyword().get(n).toString();

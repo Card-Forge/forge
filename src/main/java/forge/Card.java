@@ -78,6 +78,153 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Zone castFrom = null;
 
     private final CardDamageHistory damageHistory = new CardDamageHistory();
+    private Map<Counters, Integer> counters = new TreeMap<Counters, Integer>();
+    private final Map<String, Object> triggeringObjects = new TreeMap<String, Object>();
+    private ArrayList<String> extrinsicKeyword = new ArrayList<String>();
+    // Hidden keywords won't be displayed on the card
+    private final ArrayList<String> hiddenExtrinsicKeyword = new ArrayList<String>();
+
+    // which equipment cards are equipping this card?
+    private ArrayList<Card> equippedBy = new ArrayList<Card>();
+    // equipping size will always be 0 or 1
+    // if this card is of the type equipment, what card is it currently
+    // equipping?
+    private ArrayList<Card> equipping = new ArrayList<Card>();
+    // which auras enchanted this card?
+
+    // if this card is an Aura, what Entity is it enchanting?
+    private GameEntity enchanting = null;
+    private ArrayList<String> prevType = new ArrayList<String>();
+    private final ArrayList<String> choicesMade = new ArrayList<String>();
+    private final ArrayList<String> targetsForChoices = new ArrayList<String>();
+
+    // changes by AF animate and continuous static effects
+    private ArrayList<CardType> changedCardTypes = new ArrayList<CardType>();
+    private ArrayList<CardKeywords> changedCardKeywords = new ArrayList<CardKeywords>();
+
+    private final ArrayList<Object> rememberedObjects = new ArrayList<Object>();
+    private final ArrayList<Card> imprintedCards = new ArrayList<Card>();
+    private Card championedCard = null;
+    private final CardList devouredCards = new CardList();
+
+    private Map<Card, Integer> receivedDamageFromThisTurn = new TreeMap<Card, Integer>();
+    private Map<Card, Integer> dealtDamageToThisTurn = new TreeMap<Card, Integer>();
+    private final Map<Card, Integer> assignedDamageMap = new TreeMap<Card, Integer>();
+    private CardList blockedThisTurn = new CardList();
+    private CardList blockedByThisTurn = new CardList();
+
+    private boolean drawnThisTurn = false;
+    private boolean tapped = false;
+    private boolean sickness = true; // summoning sickness
+    private boolean token = false;
+    private boolean copiedToken = false;
+    private boolean copiedSpell = false;
+    private boolean spellWithChoices = false;
+    private boolean spellCopyingCard = false;
+
+    private boolean sirenAttackOrDestroy = false;
+    private final ArrayList<Card> mustBlockCards = new ArrayList<Card>();
+
+    private boolean canMorph = false;
+    private boolean kicked = false;
+    private boolean evoked = false;
+
+    private boolean levelUp = false;
+    private boolean bounceAtUntap = false;
+
+    private boolean unearth = false;
+    private boolean unearthed;
+
+    private boolean madness = false;
+    private boolean suspendCast = false;
+    private boolean suspend = false;
+
+    private boolean phasedOut = false;
+    private boolean directlyPhasedOut = true;
+
+    // for Vanguard / Manapool / Emblems etc.
+    private boolean isImmutable = false;
+
+    private long timestamp = -1; // permanents on the battlefield
+
+    // stack of set power/toughness
+    private ArrayList<CardPowerToughness> newPT = new ArrayList<CardPowerToughness>();
+    private int baseLoyalty = 0;
+    private String baseAttackString = null;
+    private String baseDefenseString = null;
+
+    private int damage;
+
+    // regeneration
+    private int nShield;
+    private int regeneratedThisTurn = 0;
+
+    private int turnInZone;
+
+    private int tempAttackBoost = 0;
+    private int tempDefenseBoost = 0;
+
+    private int semiPermanentAttackBoost = 0;
+    private int semiPermanentDefenseBoost = 0;
+
+    private int randomPicture = 0;
+
+    private int xManaCostPaid = 0;
+
+    private int xLifePaid = 0;
+
+    private int multiKickerMagnitude = 0;
+    private int replicateMagnitude = 0;
+
+    private int sunburstValue = 0;
+    private String colorsPaid = "";
+
+    private Player owner = null;
+    private ArrayList<Object> controllerObjects = new ArrayList<Object>();
+
+    // private String rarity = "";
+    private String text = "";
+    private String echoCost = "";
+    private String madnessCost = "";
+    private String chosenType = "";
+    // private String chosenColor = "";
+    private ArrayList<String> chosenColor = new ArrayList<String>();
+    private String namedCard = "";
+    private int chosenNumber;
+    private Player chosenPlayer;
+    private ArrayList<Card> chosenCard = new ArrayList<Card>();
+
+    private Card cloneOrigin = null;
+    private final ArrayList<Card> clones = new ArrayList<Card>();
+    private final ArrayList<Card> gainControlTargets = new ArrayList<Card>();
+    private final ArrayList<Command> gainControlReleaseCommands = new ArrayList<Command>();
+
+    private final ArrayList<AbilityTriggered> zcTriggers = new ArrayList<AbilityTriggered>();
+    private final ArrayList<Command> equipCommandList = new ArrayList<Command>();
+    private final ArrayList<Command> unEquipCommandList = new ArrayList<Command>();
+    private final ArrayList<Command> enchantCommandList = new ArrayList<Command>();
+    private final ArrayList<Command> unEnchantCommandList = new ArrayList<Command>();
+    private final ArrayList<Command> untapCommandList = new ArrayList<Command>();
+    private final ArrayList<Command> changeControllerCommandList = new ArrayList<Command>();
+
+    private static String[] storableSVars = { "ChosenX", "ChosenY" };
+
+    private final ArrayList<Card> hauntedBy = new ArrayList<Card>();
+    private Card haunting = null;
+
+    private Map<String, String> sVars = new TreeMap<String, String>();
+
+    // hacky code below, used to limit the number of times an ability
+    // can be used per turn like Vampire Bats
+    // should be put in SpellAbility, but it is put here for convenience
+    // this is make public just to make things easy
+    // this code presumes that each card only has one ability that can be
+    // used a limited number of times per turn
+    // CardFactory.SSP_canPlay(Card) uses these variables
+    
+    // Only used with Replicate
+    private int abilityUsed;
+
     /**
      * Instantiates a new card.
      */
@@ -97,20 +244,20 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (state.equals("FaceDown") && this.isDoubleFaced) {
             return false; // Doublefaced cards can't be turned face-down.
         }
-
+    
         if (!this.characteristicsMap.containsKey(state)) {
             System.out.println(this.getName() + " tried to switch to non-existant state \"" + state + "\"!");
             return false; // Nonexistant state.
         }
-
+    
         if (state.equals(this.curCharacteristics)) {
             return false;
         }
-
+    
         String cur = this.curCharacteristics;
-
+    
         this.curCharacteristics = state;
-
+    
         if ((cur.equals("Original") && state.equals("Transformed"))
                 || (cur.equals("Transformed") && state.equals("Original"))) {
             HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -118,7 +265,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             runParams.put("Transformer", this);
             AllZone.getTriggerHandler().runTrigger("Transformed", runParams);
         }
-
+    
         return true;
     }
 
@@ -174,7 +321,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             this.preTFDCharacteristic = this.curCharacteristics;
             return this.setState("FaceDown");
         }
-
+    
         return false;
     }
 
@@ -187,7 +334,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.curCharacteristics.equals("FaceDown")) {
             return this.setState(this.preTFDCharacteristic);
         }
-
+    
         return false;
     }
 
@@ -333,143 +480,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.otherTransformable = otherTransformable0;
     }
 
-    private Map<Counters, Integer> counters = new TreeMap<Counters, Integer>();
-    private final Map<String, Object> triggeringObjects = new TreeMap<String, Object>();
-    private ArrayList<String> extrinsicKeyword = new ArrayList<String>();
-    // Hidden keywords won't be displayed on the card
-    private final ArrayList<String> hiddenExtrinsicKeyword = new ArrayList<String>();
-    private ArrayList<String> prevIntrinsicKeyword = new ArrayList<String>();
-
-    // which equipment cards are equipping this card?
-    private ArrayList<Card> equippedBy = new ArrayList<Card>();
-    // equipping size will always be 0 or 1
-    // if this card is of the type equipment, what card is it currently
-    // equipping?
-    private ArrayList<Card> equipping = new ArrayList<Card>();
-    // which auras enchanted this card?
-
-    // if this card is an Aura, what Entity is it enchanting?
-    private GameEntity enchanting = null;
-    private ArrayList<String> prevType = new ArrayList<String>();
-    private final ArrayList<String> choicesMade = new ArrayList<String>();
-    private final ArrayList<String> targetsForChoices = new ArrayList<String>();
-
-    // changes by AF animate and continuous static effects
-    private ArrayList<CardType> changedCardTypes = new ArrayList<CardType>();
-    private ArrayList<CardKeywords> changedCardKeywords = new ArrayList<CardKeywords>();
-
-    private final ArrayList<Object> rememberedObjects = new ArrayList<Object>();
-    private final ArrayList<Card> imprintedCards = new ArrayList<Card>();
-    private Card championedCard = null;
-    private final CardList devouredCards = new CardList();
-
-    private Map<Card, Integer> receivedDamageFromThisTurn = new TreeMap<Card, Integer>();
-    private Map<Card, Integer> dealtDamageToThisTurn = new TreeMap<Card, Integer>();
-    private final Map<Card, Integer> assignedDamageMap = new TreeMap<Card, Integer>();
-    private CardList blockedThisTurn = new CardList();
-    private CardList blockedByThisTurn = new CardList();
-
-    private boolean drawnThisTurn = false;
-    private boolean tapped = false;
-    private boolean sickness = true; // summoning sickness
-    private boolean token = false;
-    private boolean copiedToken = false;
-    private boolean copiedSpell = false;
-    private boolean spellWithChoices = false;
-    private boolean spellCopyingCard = false;
-
-    private boolean sirenAttackOrDestroy = false;
-    private final ArrayList<Card> mustBlockCards = new ArrayList<Card>();
-
-    private boolean canMorph = false;
-    private boolean kicked = false;
-    private boolean evoked = false;
-
-    private boolean levelUp = false;
-    private boolean bounceAtUntap = false;
-
-    private boolean unearth = false;
-    private boolean unearthed;
-
-    private boolean madness = false;
-    private boolean suspendCast = false;
-    private boolean suspend = false;
-
-    private boolean phasedOut = false;
-    private boolean directlyPhasedOut = true;
-
-    // for Vanguard / Manapool / Emblems etc.
-    private boolean isImmutable = false;
-
-    private long timestamp = -1; // permanents on the battlefield
-
-    // stack of set power/toughness
-    private ArrayList<CardPowerToughness> newPT = new ArrayList<CardPowerToughness>();
-    private int baseLoyalty = 0;
-    private String baseAttackString = null;
-    private String baseDefenseString = null;
-
-    private int damage;
-
-    // regeneration
-    private int nShield;
-    private int regeneratedThisTurn = 0;
-
-    private int turnInZone;
-
-    private int tempAttackBoost = 0;
-    private int tempDefenseBoost = 0;
-
-    private int semiPermanentAttackBoost = 0;
-    private int semiPermanentDefenseBoost = 0;
-
-    private int randomPicture = 0;
-
-    private int xManaCostPaid = 0;
-
-    private int xLifePaid = 0;
-
-    private int multiKickerMagnitude = 0;
-    private int replicateMagnitude = 0;
-
-    private int sunburstValue = 0;
-    private String colorsPaid = "";
-
-    private Player owner = null;
-    private ArrayList<Object> controllerObjects = new ArrayList<Object>();
-
-    // private String rarity = "";
-    private String text = "";
-    private String echoCost = "";
-    private String madnessCost = "";
-    private String chosenType = "";
-    // private String chosenColor = "";
-    private ArrayList<String> chosenColor = new ArrayList<String>();
-    private String namedCard = "";
-    private int chosenNumber;
-    private Player chosenPlayer;
-    private ArrayList<Card> chosenCard = new ArrayList<Card>();
-
-    private Card cloneOrigin = null;
-    private final ArrayList<Card> clones = new ArrayList<Card>();
-    private final ArrayList<Card> gainControlTargets = new ArrayList<Card>();
-    private final ArrayList<Command> gainControlReleaseCommands = new ArrayList<Command>();
-
-    private final ArrayList<AbilityTriggered> zcTriggers = new ArrayList<AbilityTriggered>();
-    private final ArrayList<Command> equipCommandList = new ArrayList<Command>();
-    private final ArrayList<Command> unEquipCommandList = new ArrayList<Command>();
-    private final ArrayList<Command> enchantCommandList = new ArrayList<Command>();
-    private final ArrayList<Command> unEnchantCommandList = new ArrayList<Command>();
-    private final ArrayList<Command> untapCommandList = new ArrayList<Command>();
-    private final ArrayList<Command> changeControllerCommandList = new ArrayList<Command>();
-
-    private static String[] storableSVars = { "ChosenX", "ChosenY" };
-
-    private final ArrayList<Card> hauntedBy = new ArrayList<Card>();
-    private Card haunting = null;
-
-    private Map<String, String> sVars = new TreeMap<String, String>();
-
     /**
      * 
      * TODO Write javadoc for this method.
@@ -487,9 +497,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     // this code presumes that each card only has one ability that can be
     // used a limited number of times per turn
     // CardFactory.SSP_canPlay(Card) uses these variables
-
-    // Only used with Replicate
-    private int abilityUsed;
 
     /**
      * 
@@ -5320,65 +5327,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return this.extrinsicKeyword.size();
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>prevIntrinsicKeyword</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final ArrayList<String> getPrevIntrinsicKeyword() {
-        return new ArrayList<String>(this.prevIntrinsicKeyword);
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>prevIntrinsicKeyword</code>.
-     * </p>
-     * 
-     * @param a
-     *            a {@link java.util.ArrayList} object.
-     */
-    public final void setPrevIntrinsicKeyword(final ArrayList<String> a) {
-        this.prevIntrinsicKeyword = new ArrayList<String>(a);
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
-     * addPrevIntrinsicKeyword.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public final void addPrevIntrinsicKeyword(final String s) {
-        this.prevIntrinsicKeyword.add(s);
-    }
-
-    /**
-     * <p>
-     * removePrevIntrinsicKeyword.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public final void removePrevIntrinsicKeyword(final String s) {
-        this.prevIntrinsicKeyword.remove(s);
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
-     * getPrevIntrinsicKeywordSize.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getPrevIntrinsicKeywordSize() {
-        return this.prevIntrinsicKeyword.size();
-    }
 
     // Hidden Keywords will be returned without the indicator HIDDEN
     /**
