@@ -30,11 +30,11 @@ public class CardDamageHistory {
      * @param hasAttacked
      *            a boolean.
      */
-    public final void setCreatureAttackedThisCombat(final boolean hasAttacked, final Player controller) {
+    public final void setCreatureAttackedThisCombat(final boolean hasAttacked) {
         this.creatureAttackedThisCombat = hasAttacked;
+        
         if (hasAttacked) {
             this.setCreatureAttackedThisTurn(true);
-            controller.setAttackedWithCreatureThisTurn(true);
         }
     }
     /**

@@ -839,7 +839,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
             if (c.getDamageHistory().getCreatureAttackedThisCombat()) {
-                c.getDamageHistory().setCreatureAttackedThisCombat(false, null);
+                c.getDamageHistory().setCreatureAttackedThisCombat(false);
             }
             if (c.getDamageHistory().getCreatureBlockedThisCombat()) {
                 c.getDamageHistory().setCreatureBlockedThisCombat(false);

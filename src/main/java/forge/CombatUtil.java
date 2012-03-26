@@ -2705,7 +2705,8 @@ public class CombatUtil {
             }
         } // Sapling of Colfenor
 
-        c.getDamageHistory().setCreatureAttackedThisCombat(true, c.getController());
+        c.getDamageHistory().setCreatureAttackedThisCombat(true);
+        c.getController().setAttackedWithCreatureThisTurn(true);
     } // checkDeclareAttackers
 
     /**

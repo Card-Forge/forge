@@ -279,7 +279,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
-            c.getDamageHistory().setCreatureAttackedThisCombat(false, null);
+            c.getDamageHistory().setCreatureAttackedThisCombat(false);
             c.getDamageHistory().setCreatureBlockedThisCombat(false);
             c.getDamageHistory().setCreatureGotBlockedThisCombat(false);
         }
