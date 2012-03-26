@@ -1,4 +1,4 @@
-Set:10E|Commons:10|Uncommons:3|Rares:1
+Set:10E|LandSet:10E|Commons:10|Uncommons:3|Rares:1
 Set:2ED|Commons:11|Uncommons:3|Rares:1
 Set:3ED|Commons:11|Uncommons:3|Rares:1
 Set:4ED|Commons:11|Uncommons:3|Rares:1
@@ -11,11 +11,11 @@ Set:9ED|Commons:10|Uncommons:3|Rares:1
 Set:ALA|Commons:10|Uncommons:3|Rares:1
 Set:ALL|Commons:8|Uncommons:3|Rares:1
 Set:APC|Commons:11|Uncommons:3|Rares:1
-Set:ARB|Commons:10|Uncommons:3|Rares:1
+Set:ARB|LandSet:ALA|Commons:10|Uncommons:3|Rares:1
 Set:ARN|Commons:6|Uncommons:2
 Set:ATQ|Commons:5|Uncommons:2|Rares:1
 Set:BOK|Commons:11|Uncommons:3|Rares:1
-Set:CFX|Commons:10|Uncommons:3|Rares:1
+Set:CFX|LandSet:ALA|Commons:10|Uncommons:3|Rares:1
 Set:CHK|Commons:11|Uncommons:3|Rares:1
 Set:CHR|Commons:9|Uncommons:3
 Set:CSP|Commons:11|Uncommons:3|Rares:1
@@ -69,7 +69,7 @@ Set:ULG|Commons:11|Uncommons:3|Rares:1
 Set:USG|Commons:11|Uncommons:3|Rares:1
 Set:VIS|Commons:11|Uncommons:3|Rares:1
 Set:WTH|Commons:11|Uncommons:3|Rares:1
-Set:WWK|Commons:10|Uncommons:3|Rares:1
+Set:WWK|LandSet:ZEN|Commons:10|Uncommons:3|Rares:1
 Set:ZEN|Commons:10|Uncommons:3|Rares:1
 Set:ISD|Commons:9|Uncommons:3|DoubleFaced:1|Rares:1
-Set:DKA|Commons:9|Uncommons:3|DoubleFaced:1|Rares:1
+Set:DKA|LandSet:ISD|Commons:9|Uncommons:3|DoubleFaced:1|Rares:1
