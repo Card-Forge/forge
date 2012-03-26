@@ -8896,6 +8896,7 @@ res/cardsfolder/s/swans_of_bryn_argoll.txt svneol=native#text/plain
 res/cardsfolder/s/swarm_of_rats.txt svneol=native#text/plain
 res/cardsfolder/s/swarmyard.txt svneol=native#text/plain
 res/cardsfolder/s/swat.txt svneol=native#text/plain
+res/cardsfolder/s/sway_of_illusion.txt -text
 res/cardsfolder/s/sway_of_the_stars.txt svneol=native#text/plain
 res/cardsfolder/s/swell_of_courage.txt svneol=native#text/plain
 res/cardsfolder/s/swelter.txt svneol=native#text/plain
@@ -8946,7 +8947,9 @@ res/cardsfolder/s/syncopate.txt svneol=native#text/plain
 res/cardsfolder/s/synod_artificer.txt svneol=native#text/plain
 res/cardsfolder/s/synod_centurion.txt svneol=native#text/plain
 res/cardsfolder/s/synod_sanctum.txt svneol=native#text/plain
+res/cardsfolder/s/syphon_flesh.txt -text
 res/cardsfolder/s/syphon_life.txt svneol=native#text/plain
+res/cardsfolder/s/syphon_mind.txt -text
 res/cardsfolder/s/syphon_soul.txt svneol=native#text/plain
 res/cardsfolder/s/szadek_lord_of_secrets.txt svneol=native#text/plain
 res/cardsfolder/t/tablet_of_epityr.txt svneol=native#text/plain
