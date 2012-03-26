@@ -9,6 +9,6 @@ SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidCards$ Creature.Remembered
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_assassin.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/mm/en/160.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/160.jpg
 Oracle:{3}{B}: Destroy target blocking creature at end of combat.
 End

@@ -10,6 +10,6 @@ SVar:CantAttack:Mode$ Continuous | Affected$ Creature.RememberedPlayerCtrl | Add
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oriss_samite_guardian.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/fut/en/28.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/28.jpg
 Oracle:{T}: Prevent all damage that would be dealt to target creature this turn.\nGrandeur - Discard another card named Oriss, Samite Guardian: Target player can't cast spells this turn, and creatures that player controls can't attack this turn.
 End

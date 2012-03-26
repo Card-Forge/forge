@@ -12,6 +12,6 @@ SVar:Z:Count$Valid Merfolk.YouCtrl,Faerie.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silvergill_douser.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/lw/en/87.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/87.jpg
 Oracle:{T}: Target creature gets -X/-0 until end of turn, where X is the number of Merfolk and/or Faeries you control.
 End
