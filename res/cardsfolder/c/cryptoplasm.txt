@@ -1,0 +1,9 @@
+Name:Cryptoplasm
+ManaCost:1 U U
+Types:Creature Shapeshifter
+Text:no text
+PT:2/2
+K:At the beginning of your upkeep, you may have this creature become a copy of another target creature. If you do, this creature gains this ability.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptoplasm.jpg
+End

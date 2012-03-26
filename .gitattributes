@@ -1828,6 +1828,7 @@ res/cardsfolder/c/crypt_ripper.txt svneol=native#text/plain
 res/cardsfolder/c/crypt_sliver.txt svneol=native#text/plain
 res/cardsfolder/c/cryptic_annelid.txt svneol=native#text/plain
 res/cardsfolder/c/cryptic_command.txt svneol=native#text/plain
+res/cardsfolder/c/cryptoplasm.txt -text
 res/cardsfolder/c/cryptwailing.txt svneol=native#text/plain
 res/cardsfolder/c/crystal_ball.txt svneol=native#text/plain
 res/cardsfolder/c/crystal_chimes.txt svneol=native#text/plain

@@ -2201,13 +2201,21 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepVesuvanDoppelgangerKeyword() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final String keyword = "At the beginning of your upkeep, you may have this "
+        final String keyword1 = "At the beginning of your upkeep, you may have this "
                 + "creature become a copy of target creature except it doesn't copy that "
                 + "creature's color. If you do, this creature gains this ability.";
+        final String keyword2 = "At the beginning of your upkeep, you may have this "
+                + "creature become a copy of another target creature. If you do, "
+                + "this creature gains this ability.";
         CardList list = player.getCardsIn(Zone.Battlefield);
-        list = list.getKeyword(keyword);
+        list = list.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.hasAnyKeyword(new String[] {keyword1, keyword2});
+            }
+        });
 
         for (final Card c : list) {
+            final String keyword = c.hasKeyword(keyword1) ? keyword1 : keyword2;
             final SpellAbility ability = new Ability(c, "0") {
                 @Override
                 public void resolve() {
@@ -2246,9 +2254,11 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
 
                                     CardFactoryUtil.copyCharacteristics(newCopy, c);
-                                    c.addColor("U");
 
                                     c.addExtrinsicKeyword(keyword);
+                                    if (c.hasKeyword(keyword1)) {
+                                        c.addColor("U");
+                                    }
                                 }
                             }
                         };
