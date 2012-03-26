@@ -3,12 +3,8 @@ ManaCost:1 U
 Types:Creature Merfolk Wizard
 Text:no text
 PT:1/1
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | Secondary$ True | NumAtt$ -X | SpellDescription$ Target creature gets -X/-0 until end of turn, where X is the number of Merfolk you control
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | Secondary$ True | NumAtt$ -Y | SpellDescription$ Target creature gets -X/-0 until end of turn, where X is the number of Faeries you control
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | NumAtt$ -Z | SpellDescription$ Target creature gets -X/-0 until end of turn, where X is the number of Merfolk and Faeries you control
-SVar:X:Count$TypeYouCtrl.Merfolk
-SVar:Y:Count$TypeYouCtrl.Faerie
-SVar:Z:Count$Valid Merfolk.YouCtrl,Faerie.YouCtrl
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | NumAtt$ -X | SpellDescription$ Target creature gets -X/-0 until end of turn, where X is the number of Merfolk and/or Faeries you control
+SVar:X:Count$Valid Merfolk.YouCtrl,Faerie.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silvergill_douser.jpg
