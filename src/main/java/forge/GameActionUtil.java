@@ -755,10 +755,10 @@ public final class GameActionUtil {
         }
 
         if (player.isPlayer(AllZone.getHumanPlayer())) {
-            c.setDealtDmgToHumanThisTurn(true);
+            c.getDamageHistory().setDealtDmgToHumanThisTurn(true);
         }
         if (player.isPlayer(AllZone.getComputerPlayer())) {
-            c.setDealtDmgToComputerThisTurn(true);
+            c.getDamageHistory().setDealtDmgToComputerThisTurn(true);
         }
     }
 
@@ -855,10 +855,10 @@ public final class GameActionUtil {
         }
 
         if (player.isPlayer(AllZone.getHumanPlayer())) {
-            c.setDealtCombatDmgToHumanThisTurn(true);
+            c.getDamageHistory().setDealtCombatDmgToHumanThisTurn(true);
         }
         if (player.isPlayer(AllZone.getComputerPlayer())) {
-            c.setDealtCombatDmgToComputerThisTurn(true);
+            c.getDamageHistory().setDealtCombatDmgToComputerThisTurn(true);
         }
 
     } // executeCombatDamageToPlayerEffects

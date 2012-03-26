@@ -2591,7 +2591,7 @@ public class CombatUtil {
         AllZone.getTriggerHandler().runTrigger("Attacks", runParams);
 
         // Annihilator:
-        if (!c.getCreatureAttackedThisCombat()) {
+        if (!c.getDamageHistory().getCreatureAttackedThisCombat()) {
             final ArrayList<String> kws = c.getKeyword();
             final Pattern p = Pattern.compile("Annihilator [0-9]+");
             Matcher m;
@@ -2652,7 +2652,7 @@ public class CombatUtil {
             if (list.size() == 0) {
                 c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
             }
-        } else if (c.getName().equals("Witch-Maw Nephilim") && !c.getCreatureAttackedThisCombat()
+        } else if (c.getName().equals("Witch-Maw Nephilim") && !c.getDamageHistory().getCreatureAttackedThisCombat()
                 && (c.getNetAttack() >= 10)) {
             final Card charger = c;
             final Ability ability2 = new Ability(c, "0") {
@@ -2686,7 +2686,7 @@ public class CombatUtil {
 
         } // Witch-Maw Nephilim
 
-        else if (c.getName().equals("Sapling of Colfenor") && !c.getCreatureAttackedThisCombat()) {
+        else if (c.getName().equals("Sapling of Colfenor") && !c.getDamageHistory().getCreatureAttackedThisCombat()) {
             final Player player = c.getController();
 
             final PlayerZone lib = player.getZone(Constant.Zone.Library);
@@ -2705,7 +2705,7 @@ public class CombatUtil {
             }
         } // Sapling of Colfenor
 
-        c.setCreatureAttackedThisCombat(true);
+        c.getDamageHistory().setCreatureAttackedThisCombat(true, c.getController());
     } // checkDeclareAttackers
 
     /**
@@ -2734,13 +2734,13 @@ public class CombatUtil {
      */
     public static void checkDeclareBlockers(final CardList cl) {
         for (final Card c : cl) {
-            if (!c.getCreatureBlockedThisCombat()) {
+            if (!c.getDamageHistory().getCreatureBlockedThisCombat()) {
                 for (final Ability ab : CardFactoryUtil.getBushidoEffects(c)) {
                     AllZone.getStack().add(ab);
                 }
             }
 
-            c.setCreatureBlockedThisCombat(true);
+            c.getDamageHistory().setCreatureBlockedThisCombat(true);
         } // for
 
     } // checkDeclareBlockers
@@ -2764,7 +2764,7 @@ public class CombatUtil {
         runParams.put("Blocker", b);
         AllZone.getTriggerHandler().runTrigger("Blocks", runParams);
 
-        if (!a.getCreatureGotBlockedThisCombat()) {
+        if (!a.getDamageHistory().getCreatureGotBlockedThisCombat()) {
             final int blockers = AllZone.getCombat().getBlockers(a).size();
             runParams.put("NumBlockers", blockers);
             AllZone.getTriggerHandler().runTrigger("AttackerBlocked", runParams);
@@ -2842,7 +2842,7 @@ public class CombatUtil {
 
         } // flanking
 
-        a.setCreatureGotBlockedThisCombat(true);
+        a.getDamageHistory().setCreatureGotBlockedThisCombat(true);
         b.addBlockedThisTurn(a);
         a.addBlockedByThisTurn(b);
     }

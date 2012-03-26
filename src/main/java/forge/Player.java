@@ -2428,10 +2428,10 @@ public abstract class Player extends GameEntity {
                 return false;
             }
         } else if (property.equals("wasDealtDamageBySourceThisGame")) {
-            if (this.isHuman() && !source.getDealtDmgToHumanThisGame()) {
+            if (this.isHuman() && !source.getDamageHistory().getDealtDmgToHumanThisGame()) {
                 return false;
             }
-            if (this.isComputer() && !source.getDealtDmgToComputerThisGame()) {
+            if (this.isComputer() && !source.getDamageHistory().getDealtDmgToComputerThisGame()) {
                 return false;
             }
         }  else if (property.startsWith("wasDealtDamageThisTurn")) {

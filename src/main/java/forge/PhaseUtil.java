@@ -331,7 +331,7 @@ public class PhaseUtil {
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                return !c.getCreatureBlockedThisCombat();
+                return !c.getDamageHistory().getCreatureBlockedThisCombat();
             }
         });
 

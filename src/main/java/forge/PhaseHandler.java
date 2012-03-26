@@ -430,21 +430,21 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 c.resetPreventNextDamage();
                 c.resetReceivedDamageFromThisTurn();
                 c.resetDealtDamageToThisTurn();
-                c.setDealtDmgToHumanThisTurn(false);
-                c.setDealtDmgToComputerThisTurn(false);
-                c.setDealtCombatDmgToHumanThisTurn(false);
-                c.setDealtCombatDmgToComputerThisTurn(false);
+                c.getDamageHistory().setDealtDmgToHumanThisTurn(false);
+                c.getDamageHistory().setDealtDmgToComputerThisTurn(false);
+                c.getDamageHistory().setDealtCombatDmgToHumanThisTurn(false);
+                c.getDamageHistory().setDealtCombatDmgToComputerThisTurn(false);
                 c.setRegeneratedThisTurn(0);
                 c.clearMustBlockCards();
                 if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
-                    c.setCreatureAttackedLastComputerTurn(c.getCreatureAttackedThisTurn());
+                    c.getDamageHistory().setCreatureAttackedLastComputerTurn(c.getDamageHistory().getCreatureAttackedThisTurn());
                 }
                 if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
-                    c.setCreatureAttackedLastHumanTurn(c.getCreatureAttackedThisTurn());
+                    c.getDamageHistory().setCreatureAttackedLastHumanTurn(c.getDamageHistory().getCreatureAttackedThisTurn());
                 }
-                c.setCreatureAttackedThisTurn(false);
-                c.setCreatureBlockedThisTurn(false);
-                c.setCreatureGotBlockedThisTurn(false);
+                c.getDamageHistory().setCreatureAttackedThisTurn(false);
+                c.getDamageHistory().setCreatureBlockedThisTurn(false);
+                c.getDamageHistory().setCreatureGotBlockedThisTurn(false);
                 c.clearBlockedByThisTurn();
                 c.clearBlockedThisTurn();
             }
@@ -838,15 +838,15 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
-            if (c.getCreatureAttackedThisCombat()) {
-                c.setCreatureAttackedThisCombat(false);
+            if (c.getDamageHistory().getCreatureAttackedThisCombat()) {
+                c.getDamageHistory().setCreatureAttackedThisCombat(false, null);
             }
-            if (c.getCreatureBlockedThisCombat()) {
-                c.setCreatureBlockedThisCombat(false);
+            if (c.getDamageHistory().getCreatureBlockedThisCombat()) {
+                c.getDamageHistory().setCreatureBlockedThisCombat(false);
             }
 
-            if (c.getCreatureGotBlockedThisCombat()) {
-                c.setCreatureGotBlockedThisCombat(false);
+            if (c.getDamageHistory().getCreatureGotBlockedThisCombat()) {
+                c.getDamageHistory().setCreatureGotBlockedThisCombat(false);
             }
         }
     }

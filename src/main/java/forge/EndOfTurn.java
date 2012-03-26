@@ -111,7 +111,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
             }
             // Berserk is using this, so don't check isFaceDown()
             if (c.hasKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.")) {
-                if (c.getCreatureAttackedThisTurn()) {
+                if (c.getDamageHistory().getCreatureAttackedThisTurn()) {
                     final Card card = c;
                     final SpellAbility sac = new Ability(card, "0") {
                         @Override
@@ -155,7 +155,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 AllZone.getStack().addSimultaneousStackEntry(change);
 
             }
-            if (c.getName().equals("Erg Raiders") && !c.getCreatureAttackedThisTurn() && !c.hasSickness()
+            if (c.getName().equals("Erg Raiders") && !c.getDamageHistory().getCreatureAttackedThisTurn() && !c.hasSickness()
                     && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(c.getController())) {
                 final Card raider = c;
                 final SpellAbility change = new Ability(raider, "0") {
@@ -279,9 +279,9 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
-            c.setCreatureAttackedThisCombat(false);
-            c.setCreatureBlockedThisCombat(false);
-            c.setCreatureGotBlockedThisCombat(false);
+            c.getDamageHistory().setCreatureAttackedThisCombat(false, null);
+            c.getDamageHistory().setCreatureBlockedThisCombat(false);
+            c.getDamageHistory().setCreatureGotBlockedThisCombat(false);
         }
     }
 

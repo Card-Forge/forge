@@ -494,7 +494,7 @@ public class CardFactoryInstants {
                                 // +" flag: "+creature.getSirenAttackOrDestroy());
                                 // System.out.println("Siren's Call - EOT - "+creature.getName()
                                 // +" attacked?: "+creature.getCreatureAttackedThisCombat());
-                                if (creature.getSirenAttackOrDestroy() && !creature.getCreatureAttackedThisTurn()) {
+                                if (creature.getSirenAttackOrDestroy() && !creature.getDamageHistory().getCreatureAttackedThisTurn()) {
                                     if (AllZoneUtil.isCardInPlay(creature)) {
                                         // System.out.println("Siren's Call - destroying "+creature.getName());
                                         // this should probably go on the stack
