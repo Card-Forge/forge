@@ -35,6 +35,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.trigger.TriggerType;
 import forge.gui.GuiUtils;
 
 /**
@@ -222,7 +223,7 @@ public final class AbilityFactoryClash {
             runParams.put("Won", "False");
         }
 
-        AllZone.getTriggerHandler().runTrigger("Clashed", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.Clashed, runParams);
     }
 
     // *************************************************************************

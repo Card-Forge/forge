@@ -20,6 +20,7 @@ package forge;
 import java.util.HashMap;
 
 import forge.Constant.Zone;
+import forge.card.trigger.TriggerType;
 import forge.control.ControlMatchUI;
 import forge.view.match.ViewField.PhaseLabel;
 
@@ -305,7 +306,7 @@ public class PhaseUtil {
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attackers", list);
         runParams.put("AttackingPlayer", AllZone.getCombat().getAttackingPlayer());
-        AllZone.getTriggerHandler().runTrigger("AttackersDeclared", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams);
 
         for (final Card c : list) {
             CombatUtil.checkDeclareAttackers(c);

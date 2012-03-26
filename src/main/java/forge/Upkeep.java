@@ -25,6 +25,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
+import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.gui.GuiUtils;
 
@@ -2240,9 +2241,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     // Doppelganger/whatever the source is
                                     newCopy.setImageFilename(c.getImageFilename());
 
-                                    AllZone.getTriggerHandler().suppressMode("Transformed");
+                                    AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
                                     newCopy.setState(newTarget[0].getCurState());
-                                    AllZone.getTriggerHandler().clearSuppression("Transformed");
+                                    AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
 
                                     CardFactoryUtil.copyCharacteristics(newCopy, c);
                                     c.addColor("U");

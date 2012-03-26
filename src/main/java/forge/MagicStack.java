@@ -41,6 +41,7 @@ import forge.card.spellability.Target;
 import forge.card.spellability.TargetChoices;
 import forge.card.spellability.TargetSelection;
 import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCostAbility;
 import forge.gui.GuiUtils;
@@ -683,23 +684,23 @@ public class MagicStack extends MyObservable {
             runParams.put("Player", sp.getSourceCard().getController());
             runParams.put("Activator", sp.getActivatingPlayer());
             runParams.put("CastSA", sp);
-            AllZone.getTriggerHandler().runTrigger("SpellAbilityCast", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams);
 
             // Run SpellCast triggers
             if (sp.isSpell()) {
-                AllZone.getTriggerHandler().runTrigger("SpellCast", runParams);
+                AllZone.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams);
             }
 
             // Run AbilityCast triggers
             if (sp.isAbility() && !sp.isTrigger()) {
-                AllZone.getTriggerHandler().runTrigger("AbilityCast", runParams);
+                AllZone.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams);
             }
 
             // Run Cycled triggers
             if (sp.isCycling()) {
                 runParams.clear();
                 runParams.put("Card", sp.getSourceCard());
-                AllZone.getTriggerHandler().runTrigger("Cycled", runParams);
+                AllZone.getTriggerHandler().runTrigger(TriggerType.Cycled, runParams);
             }
 
             // Run BecomesTarget triggers
@@ -711,7 +712,7 @@ public class MagicStack extends MyObservable {
                         for (final Object tgt : tc.getTargets()) {
                             runParams.put("Target", tgt);
 
-                            AllZone.getTriggerHandler().runTrigger("BecomesTarget", runParams);
+                            AllZone.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
                         }
                     }
                 }
@@ -722,17 +723,17 @@ public class MagicStack extends MyObservable {
             else if (sp.getTargetCard() != null) {
                 runParams.put("Target", sp.getTargetCard());
 
-                AllZone.getTriggerHandler().runTrigger("BecomesTarget", runParams);
+                AllZone.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
             } else if ((sp.getTargetList() != null) && (sp.getTargetList().size() > 0)) {
                 for (final Card ctgt : sp.getTargetList()) {
                     runParams.put("Target", ctgt);
 
-                    AllZone.getTriggerHandler().runTrigger("BecomesTarget", runParams);
+                    AllZone.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
                 }
             } else if (sp.getTargetPlayer() != null) {
                 runParams.put("Target", sp.getTargetPlayer());
 
-                AllZone.getTriggerHandler().runTrigger("BecomesTarget", runParams);
+                AllZone.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
             }
         }
 

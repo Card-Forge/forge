@@ -25,6 +25,7 @@ import forge.Card;
 import forge.Player;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaPool;
+import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostUtil;
 
 /**
@@ -185,7 +186,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
         runParams.put("Player", player);
         runParams.put("AbilityMana", this);
         runParams.put("Produced", produced);
-        AllZone.getTriggerHandler().runTrigger("TapsForMana", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams);
 
     } // end produceMana(String)
 

@@ -29,6 +29,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import forge.Constant.Zone;
+import forge.card.trigger.TriggerType;
 
 /**
  * <p>
@@ -667,7 +668,7 @@ public class Combat {
                 // Run Unblocked Trigger
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
                 runParams.put("Attacker", attacker);
-                AllZone.getTriggerHandler().runTrigger("AttackerUnblocked", runParams);
+                AllZone.getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams);
 
             }
         }

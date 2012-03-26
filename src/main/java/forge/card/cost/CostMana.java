@@ -31,6 +31,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
+import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputMana;
 import forge.control.input.InputPayManaCostUtil;
@@ -439,12 +440,12 @@ public class CostMana extends CostPart {
                 // being tapped for convoke)
 
                 if (sa.getTappedForConvoke() != null) {
-                    AllZone.getTriggerHandler().suppressMode("Untaps");
+                    AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
                     for (final Card c : sa.getTappedForConvoke()) {
                         c.untap();
                         c.tap();
                     }
-                    AllZone.getTriggerHandler().clearSuppression("Untaps");
+                    AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
                     sa.clearTappedForConvoke();
                 }
 
@@ -455,11 +456,11 @@ public class CostMana extends CostPart {
                 // If we're paying for a spell with convoke, untap all creatures
                 // used for it.
                 if (sa.getTappedForConvoke() != null) {
-                    AllZone.getTriggerHandler().suppressMode("Untaps");
+                    AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
                     for (final Card c : sa.getTappedForConvoke()) {
                         c.untap();
                     }
-                    AllZone.getTriggerHandler().clearSuppression("Untaps");
+                    AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
                     sa.clearTappedForConvoke();
                 }
 

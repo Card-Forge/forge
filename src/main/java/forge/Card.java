@@ -48,6 +48,7 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerType;
 import forge.item.CardDb;
 import forge.util.MyRandom;
 
@@ -265,7 +266,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Mode", "Transformed");
             runParams.put("Transformer", this);
-            AllZone.getTriggerHandler().runTrigger("Transformed", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.Transformed, runParams);
         }
     
         return true;
@@ -1197,7 +1198,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("Card", this);
         runParams.put("CounterType", counterName);
         for (int i = 0; i < n; i++) {
-            AllZone.getTriggerHandler().runTrigger("CounterAdded", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
         }
 
         this.updateObservers();
@@ -1230,7 +1231,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("Card", this);
         runParams.put("CounterType", counterName);
         for (int i = 0; i < (multiplier * n); i++) {
-            AllZone.getTriggerHandler().runTrigger("CounterAdded", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
         }
 
         this.updateObservers();
@@ -1259,7 +1260,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             runParams.put("Card", this);
             runParams.put("CounterType", counterName);
             for (int i = 0; i < n; i++) {
-                AllZone.getTriggerHandler().runTrigger("CounterRemoved", runParams);
+                AllZone.getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams);
             }
 
             if (counterName.equals(Counters.TIME) && (aux == 0)) {
@@ -3864,7 +3865,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Equipment", this);
         runParams.put("Card", c);
-        AllZone.getTriggerHandler().runTrigger("Unequip", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.Unequip, runParams);
     }
 
     /**
@@ -4917,7 +4918,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Run triggers
             final Map<String, Object> runParams = new TreeMap<String, Object>();
             runParams.put("Card", this);
-            AllZone.getTriggerHandler().runTrigger("Taps", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.Taps, runParams);
         }
         this.setTapped(true);
     }
@@ -4932,7 +4933,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Run triggers
             final Map<String, Object> runParams = new TreeMap<String, Object>();
             runParams.put("Card", this);
-            AllZone.getTriggerHandler().runTrigger("Untaps", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.Untaps, runParams);
 
         }
 
@@ -5973,9 +5974,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             // Suppressed Exiling is as close as we can get to
             // "ceasing to exist"
-            AllZone.getTriggerHandler().suppressMode("ChangesZone");
+            AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
             Singletons.getModel().getGameAction().exile(this);
-            AllZone.getTriggerHandler().clearSuppression("ChangesZone");
+            AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
         return true;
     }
@@ -8025,7 +8026,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("DamageTarget", this);
         runParams.put("DamageAmount", damageToAdd);
         runParams.put("IsCombatDamage", isCombat);
-        AllZone.getTriggerHandler().runTrigger("DamageDone", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams);
 
         if (this.isPlaneswalker()) {
             this.subtractCounter(Counters.LOYALTY, damageToAdd);

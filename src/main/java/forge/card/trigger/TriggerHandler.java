@@ -54,7 +54,7 @@ import forge.control.input.Input;
  */
 public class TriggerHandler {
 
-    private final ArrayList<String> suppressedModes = new ArrayList<String>();
+    private final ArrayList<TriggerType> suppressedModes = new ArrayList<TriggerType>();
 
     private final ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
 
@@ -129,7 +129,7 @@ public class TriggerHandler {
      * @param mode
      *            a {@link java.lang.String} object.
      */
-    public final void suppressMode(final String mode) {
+    public final void suppressMode(final TriggerType mode) {
         this.suppressedModes.add(mode);
     }
 
@@ -141,7 +141,7 @@ public class TriggerHandler {
      * @param mode
      *            a {@link java.lang.String} object.
      */
-    public final void clearSuppression(final String mode) {
+    public final void clearSuppression(final TriggerType mode) {
         this.suppressedModes.remove(mode);
     }
 
@@ -201,72 +201,75 @@ public class TriggerHandler {
     public static Trigger parseTrigger(final HashMap<String, String> mapParams, final Card host, final boolean intrinsic) {
         Trigger ret = null;
 
-        final String mode = mapParams.get("Mode");
-        if (mode.equals("AbilityCast")) {
-            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
-        } else if (mode.equals("Always")) {
-            ret = new TriggerAlways(mapParams, host, intrinsic);
-        } else if (mode.equals("AttackerBlocked")) {
-            ret = new TriggerAttackerBlocked(mapParams, host, intrinsic);
-        } else if (mode.equals("AttackersDeclared")) {
-            ret = new TriggerAttackersDeclared(mapParams, host, intrinsic);
-        } else if (mode.equals("AttackerUnblocked")) {
-            ret = new TriggerAttackerUnblocked(mapParams, host, intrinsic);
-        } else if (mode.equals("Attacks")) {
-            ret = new TriggerAttacks(mapParams, host, intrinsic);
-        } else if (mode.equals("BecomesTarget")) {
-            ret = new TriggerBecomesTarget(mapParams, host, intrinsic);
-        } else if (mode.equals("Blocks")) {
-            ret = new TriggerBlocks(mapParams, host, intrinsic);
-        } else if (mode.equals("Championed")) {
-            ret = new TriggerChampioned(mapParams, host, intrinsic);
-        } else if (mode.equals("ChangesController")) {
-            ret = new TriggerChangesController(mapParams, host, intrinsic);
-        } else if (mode.equals("ChangesZone")) {
-            ret = new TriggerChangesZone(mapParams, host, intrinsic);
-        } else if (mode.equals("Clashed")) {
-            ret = new TriggerClashed(mapParams, host, intrinsic);
-        } else if (mode.equals("CounterAdded")) {
-            ret = new TriggerCounterAdded(mapParams, host, intrinsic);
-        } else if (mode.equals("CounterRemoved")) {
-            ret = new TriggerCounterRemoved(mapParams, host, intrinsic);
-        } else if (mode.equals("Cycled")) {
-            ret = new TriggerCycled(mapParams, host, intrinsic);
-        } else if (mode.equals("DamageDone")) {
-            ret = new TriggerDamageDone(mapParams, host, intrinsic);
-        } else if (mode.equals("Discarded")) {
-            ret = new TriggerDiscarded(mapParams, host, intrinsic);
-        } else if (mode.equals("Drawn")) {
-            ret = new TriggerDrawn(mapParams, host, intrinsic);
-        } else if (mode.equals("LandPlayed")) {
-            ret = new TriggerLandPlayed(mapParams, host, intrinsic);
-        } else if (mode.equals("LifeGained")) {
-            ret = new TriggerLifeGained(mapParams, host, intrinsic);
-        } else if (mode.equals("LifeLost")) {
-            ret = new TriggerLifeLost(mapParams, host, intrinsic);
-        } else if (mode.equals("Phase")) {
-            ret = new TriggerPhase(mapParams, host, intrinsic);
-        } else if (mode.equals("Sacrificed")) {
-            ret = new TriggerSacrificed(mapParams, host, intrinsic);
-        } else if (mode.equals("Shuffled")) {
-            ret = new TriggerShuffled(mapParams, host, intrinsic);
-        } else if (mode.equals("SpellAbilityCast")) {
-            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
-        } else if (mode.equals("SpellCast")) {
-            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
-        } else if (mode.equals("Taps")) {
-            ret = new TriggerTaps(mapParams, host, intrinsic);
-        } else if (mode.equals("TapsForMana")) {
-            ret = new TriggerTapsForMana(mapParams, host, intrinsic);
-        } else if (mode.equals("Transformed")) {
-            ret = new TriggerTransformed(mapParams, host, intrinsic);
-        } else if (mode.equals("TurnFaceUp")) {
-            ret = new TriggerTurnFaceUp(mapParams, host, intrinsic);
-        } else if (mode.equals("Unequip")) {
-            ret = new TriggerUnequip(mapParams, host, intrinsic);
-        } else if (mode.equals("Untaps")) {
-            ret = new TriggerUntaps(mapParams, host, intrinsic);
-        }
+//        final String mode = mapParams.get("Mode");
+        final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
+        ret = type.createTrigger(mapParams, host, intrinsic);
+//        
+//        if (mode.equals("AbilityCast")) {
+//            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
+//        } else if (mode.equals("Always")) {
+//            ret = new TriggerAlways(mapParams, host, intrinsic);
+//        } else if (mode.equals("AttackerBlocked")) {
+//            ret = new TriggerAttackerBlocked(mapParams, host, intrinsic);
+//        } else if (mode.equals("AttackersDeclared")) {
+//            ret = new TriggerAttackersDeclared(mapParams, host, intrinsic);
+//        } else if (mode.equals("AttackerUnblocked")) {
+//            ret = new TriggerAttackerUnblocked(mapParams, host, intrinsic);
+//        } else if (mode.equals("Attacks")) {
+//            ret = new TriggerAttacks(mapParams, host, intrinsic);
+//        } else if (mode.equals("BecomesTarget")) {
+//            ret = new TriggerBecomesTarget(mapParams, host, intrinsic);
+//        } else if (mode.equals("Blocks")) {
+//            ret = new TriggerBlocks(mapParams, host, intrinsic);
+//        } else if (mode.equals("Championed")) {
+//            ret = new TriggerChampioned(mapParams, host, intrinsic);
+//        } else if (mode.equals("ChangesController")) {
+//            ret = new TriggerChangesController(mapParams, host, intrinsic);
+//        } else if (mode.equals("ChangesZone")) {
+//            ret = new TriggerChangesZone(mapParams, host, intrinsic);
+//        } else if (mode.equals("Clashed")) {
+//            ret = new TriggerClashed(mapParams, host, intrinsic);
+//        } else if (mode.equals("CounterAdded")) {
+//            ret = new TriggerCounterAdded(mapParams, host, intrinsic);
+//        } else if (mode.equals("CounterRemoved")) {
+//            ret = new TriggerCounterRemoved(mapParams, host, intrinsic);
+//        } else if (mode.equals("Cycled")) {
+//            ret = new TriggerCycled(mapParams, host, intrinsic);
+//        } else if (mode.equals("DamageDone")) {
+//            ret = new TriggerDamageDone(mapParams, host, intrinsic);
+//        } else if (mode.equals("Discarded")) {
+//            ret = new TriggerDiscarded(mapParams, host, intrinsic);
+//        } else if (mode.equals("Drawn")) {
+//            ret = new TriggerDrawn(mapParams, host, intrinsic);
+//        } else if (mode.equals("LandPlayed")) {
+//            ret = new TriggerLandPlayed(mapParams, host, intrinsic);
+//        } else if (mode.equals("LifeGained")) {
+//            ret = new TriggerLifeGained(mapParams, host, intrinsic);
+//        } else if (mode.equals("LifeLost")) {
+//            ret = new TriggerLifeLost(mapParams, host, intrinsic);
+//        } else if (mode.equals("Phase")) {
+//            ret = new TriggerPhase(mapParams, host, intrinsic);
+//        } else if (mode.equals("Sacrificed")) {
+//            ret = new TriggerSacrificed(mapParams, host, intrinsic);
+//        } else if (mode.equals("Shuffled")) {
+//            ret = new TriggerShuffled(mapParams, host, intrinsic);
+//        } else if (mode.equals("SpellAbilityCast")) {
+//            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
+//        } else if (mode.equals("SpellCast")) {
+//            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
+//        } else if (mode.equals("Taps")) {
+//            ret = new TriggerTaps(mapParams, host, intrinsic);
+//        } else if (mode.equals("TapsForMana")) {
+//            ret = new TriggerTapsForMana(mapParams, host, intrinsic);
+//        } else if (mode.equals("Transformed")) {
+//            ret = new TriggerTransformed(mapParams, host, intrinsic);
+//        } else if (mode.equals("TurnFaceUp")) {
+//            ret = new TriggerTurnFaceUp(mapParams, host, intrinsic);
+//        } else if (mode.equals("Unequip")) {
+//            ret = new TriggerUnequip(mapParams, host, intrinsic);
+//        } else if (mode.equals("Untaps")) {
+//            ret = new TriggerUntaps(mapParams, host, intrinsic);
+//        }
 
         return ret;
     }
@@ -322,7 +325,7 @@ public class TriggerHandler {
      * @param runParams
      *            a {@link java.util.Map} object.
      */
-    public final void runTrigger(final String mode, final Map<String, Object> runParams) {
+    public final void runTrigger(final TriggerType mode, final Map<String, Object> runParams) {
         if (this.suppressedModes.contains(mode)) {
             return;
         }
@@ -413,10 +416,10 @@ public class TriggerHandler {
      *            a {@link java.util.HashMap} object.
      * @return a boolean.
      */
-    private boolean runSingleTrigger(final Trigger regtrig, final String mode, final Map<String, Object> runParams) {
+    private boolean runSingleTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
         final Map<String, String> params = regtrig.getMapParams();
 
-        if (!params.get("Mode").equals(mode)) {
+        if (!params.get("Mode").equals(mode.toString())) {
             return false; // Not the right mode.
         }
         if (!regtrig.zonesCheck()) {

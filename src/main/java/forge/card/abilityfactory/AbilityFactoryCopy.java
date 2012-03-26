@@ -42,6 +42,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.trigger.TriggerType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -364,7 +365,7 @@ public final class AbilityFactoryCopy {
         for (final Card c : tgtCards) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
 
-                AllZone.getTriggerHandler().suppressMode("Transformed");
+                AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
                 boolean wasInAlt = false;
                 if (c.isInAlternateState()) {
                     wasInAlt = true;
@@ -439,7 +440,7 @@ public final class AbilityFactoryCopy {
                     sa.getSourceCard().addClone(copy);
                     crds[i] = copy;
 
-                    AllZone.getTriggerHandler().clearSuppression("Transformed");
+                    AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
                 }
 
                 // have to do this since getTargetCard() might change

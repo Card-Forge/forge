@@ -24,6 +24,7 @@ import java.util.Stack;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
+import forge.card.trigger.TriggerType;
 
 /**
  * <p>
@@ -471,7 +472,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Phase", phase);
             runParams.put("Player", turn);
-            AllZone.getTriggerHandler().runTrigger("Phase", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.Phase, runParams);
 
         }
 

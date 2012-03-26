@@ -43,6 +43,7 @@ import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayManaCostUtil;
@@ -132,12 +133,12 @@ public class GameAction {
             lastKnownInfo = c;
             copied = c;
         } else {
-            AllZone.getTriggerHandler().suppressMode("Transformed");
+            AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
             if (c.isCloned()) {
                 c.switchStates(CardCharactersticName.Cloner, CardCharactersticName.Original);
                 c.setState(CardCharactersticName.Original);
             }
-            AllZone.getTriggerHandler().clearSuppression("Transformed");
+            AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
 
             lastKnownInfo = CardUtil.getLKICopy(c);
             copied = AllZone.getCardFactory().copyCard(c);
@@ -156,7 +157,7 @@ public class GameAction {
         }
 
         if (suppress) {
-            AllZone.getTriggerHandler().suppressMode("ChangesZone");
+            AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         }
 
         zone.add(copied);
@@ -187,11 +188,11 @@ public class GameAction {
             runParams.put("Origin", null);
         }
         runParams.put("Destination", zone.getZoneType().name());
-        AllZone.getTriggerHandler().runTrigger("ChangesZone", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
         // AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
 
         if (suppress) {
-            AllZone.getTriggerHandler().clearSuppression("ChangesZone");
+            AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
 
         // remove all counters from the card if destination is not the
@@ -204,9 +205,9 @@ public class GameAction {
                     .is(Constant.Zone.Library))) {
                 copied.clearCounters();
             }
-            AllZone.getTriggerHandler().suppressMode("Transformed");
+            AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
             copied.setState(CardCharactersticName.Original);
-            AllZone.getTriggerHandler().clearSuppression("Transformed");
+            AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
         }
 
         copied.setTimestamp(AllZone.getNextTimestamp());
@@ -333,7 +334,7 @@ public class GameAction {
             return;
         }
 
-        AllZone.getTriggerHandler().suppressMode("ChangesZone");
+        AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         ((PlayerZoneComesIntoPlay) AllZone.getHumanPlayer().getZone(Zone.Battlefield)).setTriggers(false);
         ((PlayerZoneComesIntoPlay) AllZone.getComputerPlayer().getZone(Zone.Battlefield)).setTriggers(false);
 
@@ -351,9 +352,9 @@ public class GameAction {
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
-        AllZone.getTriggerHandler().runTrigger("ChangesController", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams);
 
-        AllZone.getTriggerHandler().clearSuppression("ChangesZone");
+        AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         ((PlayerZoneComesIntoPlay) AllZone.getHumanPlayer().getZone(Zone.Battlefield)).setTriggers(true);
         ((PlayerZoneComesIntoPlay) AllZone.getComputerPlayer().getZone(Zone.Battlefield)).setTriggers(true);
     }
@@ -590,9 +591,9 @@ public class GameAction {
         }
 
         if (c.isInAlternateState()) {
-            AllZone.getTriggerHandler().suppressMode("Transformed");
+            AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
             c.setState(CardCharactersticName.Original);
-            AllZone.getTriggerHandler().clearSuppression("Transformed");
+            AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
         }
 
         if ((p != null) && p.is(Constant.Zone.Battlefield)) {
@@ -615,7 +616,7 @@ public class GameAction {
             runParams.put("Origin", null);
         }
         runParams.put("Destination", Constant.Zone.Library);
-        AllZone.getTriggerHandler().runTrigger("ChangesZone", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
 
         return c;
     }
@@ -886,7 +887,7 @@ public class GameAction {
             this.checkStaticAbilities();
 
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            AllZone.getTriggerHandler().runTrigger("Always", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.Always, runParams);
 
             final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             Card c;
@@ -1099,7 +1100,7 @@ public class GameAction {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
-        AllZone.getTriggerHandler().runTrigger("Sacrificed", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams);
 
         return true;
     }
@@ -1791,11 +1792,11 @@ public class GameAction {
                         // AND that you can't use mana tapabilities of convoked
                         // creatures
                         // to pay the convoked cost.
-                        AllZone.getTriggerHandler().suppressMode("Taps");
+                        AllZone.getTriggerHandler().suppressMode(TriggerType.Taps);
                         for (final Card c : sa.getTappedForConvoke()) {
                             c.tap();
                         }
-                        AllZone.getTriggerHandler().clearSuppression("Taps");
+                        AllZone.getTriggerHandler().clearSuppression(TriggerType.Taps);
 
                         manaCost = newCost;
                     }

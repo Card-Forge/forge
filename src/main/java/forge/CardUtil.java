@@ -35,6 +35,7 @@ import forge.card.EditionInfo;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityList;
+import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostUtil;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
@@ -912,14 +913,14 @@ public final class CardUtil {
             return c;
         }
         final CardCharactersticName state = c.getCurState();
-        AllZone.getTriggerHandler().suppressMode("Transformed");
+        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
         if (c.isInAlternateState()) {
             c.setState(CardCharactersticName.Original);
         }
         final Card res = AllZone.getCardFactory().copyCard(c);
         c.setState(state);
         res.setState(state);
-        AllZone.getTriggerHandler().clearSuppression("Transformed");
+        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
         res.setControllerObjects(c.getControllerObjects());
         res.addTempAttackBoost(c.getTempAttackBoost());
         res.addSemiPermanentAttackBoost(c.getSemiPermanentAttackBoost());

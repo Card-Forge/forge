@@ -53,6 +53,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
 import forge.gui.GuiUtils;
@@ -1818,7 +1819,7 @@ public class CardFactoryCreatures {
                     if (copyTarget[0] != null) {
                         Card cloned;
 
-                        AllZone.getTriggerHandler().suppressMode("Transformed");
+                        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
 
                         if (copyTarget[0].isToken()) {
                             cloned = CardFactoryUtil.copyStats(copyTarget[0]);
@@ -1880,7 +1881,7 @@ public class CardFactoryCreatures {
                             card.setFlip(false);
                         }
 
-                        AllZone.getTriggerHandler().clearSuppression("Transformed");
+                        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
 
                     }
 

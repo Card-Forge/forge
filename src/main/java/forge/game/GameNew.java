@@ -19,6 +19,7 @@ import forge.GameAction;
 import forge.PhaseHandler;
 import forge.Player;
 import forge.Singletons;
+import forge.card.trigger.TriggerType;
 import forge.control.FControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
@@ -121,7 +122,7 @@ public class GameNew {
         final ArrayList<String> hAnteRemoved = new ArrayList<String>();
         final ArrayList<String> cAnteRemoved = new ArrayList<String>();
 
-        AllZone.getTriggerHandler().suppressMode("Transformed");
+        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
         for (final Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {
             final CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
@@ -175,7 +176,7 @@ public class GameNew {
 
             }
         }
-        AllZone.getTriggerHandler().clearSuppression("Transformed");
+        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
         if (rAICards.size() > 0) {
             final StringBuilder sb = new StringBuilder(
                     "AI deck contains the following cards that it can't play or may be buggy:\n");

@@ -63,6 +63,7 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostUtil;
@@ -982,7 +983,7 @@ public class CardFactoryUtil {
                 // Run triggers
                 final Map<String, Object> runParams = new TreeMap<String, Object>();
                 runParams.put("Card", sourceCard);
-                AllZone.getTriggerHandler().runTrigger("TurnFaceUp", runParams);
+                AllZone.getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams);
             }
 
             @Override
@@ -1835,7 +1836,7 @@ public class CardFactoryUtil {
                         final HashMap<String, Object> runParams = new HashMap<String, Object>();
                         runParams.put("Card", spell.getSourceCard());
                         runParams.put("Championed", card);
-                        AllZone.getTriggerHandler().runTrigger("Championed", runParams);
+                        AllZone.getTriggerHandler().runTrigger(TriggerType.Championed, runParams);
                     }
                 }
             } // selectCard()
@@ -4104,7 +4105,7 @@ public class CardFactoryUtil {
         c.setDoubleFaced(sim.isDoubleFaced());
         c.setCurSetCode(sim.getCurSetCode());
 
-        AllZone.getTriggerHandler().suppressMode("Transformed");
+        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
         final CardCharactersticName origState = sim.getCurState();
         for (final CardCharactersticName state : sim.getStates()) {
             c.addAlternateState(state);
@@ -4116,7 +4117,7 @@ public class CardFactoryUtil {
         sim.setState(origState);
         c.setState(origState);
 
-        AllZone.getTriggerHandler().clearSuppression("Transformed");
+        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
         return c;
     } // copyStats()
 
@@ -4819,9 +4820,9 @@ public class CardFactoryUtil {
 
                     eff.addTrigger(copyTrigger);
 
-                    AllZone.getTriggerHandler().suppressMode("ChangesZone");
+                    AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
                     Singletons.getModel().getGameAction().moveToPlay(eff);
-                    AllZone.getTriggerHandler().clearSuppression("ChangesZone");
+                    AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
                     if (card.getController().isHuman()) {
                         Singletons.getModel().getGameAction().playSpellAbilityNoStack(origSA, false);

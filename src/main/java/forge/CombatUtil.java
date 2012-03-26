@@ -33,6 +33,7 @@ import forge.card.spellability.Ability;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostAbility;
 import forge.gui.GuiUtils;
 
@@ -2588,7 +2589,7 @@ public class CombatUtil {
         otherAttackers.remove(c);
         runParams.put("OtherAttackers", otherAttackers);
         runParams.put("Attacked", AllZone.getCombat().getDefenderByAttacker(c));
-        AllZone.getTriggerHandler().runTrigger("Attacks", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams);
 
         // Annihilator:
         if (!c.getDamageHistory().getCreatureAttackedThisCombat()) {
@@ -2722,7 +2723,7 @@ public class CombatUtil {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
-        AllZone.getTriggerHandler().runTrigger("AttackerUnblocked", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams);
     }
 
     /**
@@ -2763,12 +2764,12 @@ public class CombatUtil {
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attacker", a);
         runParams.put("Blocker", b);
-        AllZone.getTriggerHandler().runTrigger("Blocks", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams);
 
         if (!a.getDamageHistory().getCreatureGotBlockedThisCombat()) {
             final int blockers = AllZone.getCombat().getBlockers(a).size();
             runParams.put("NumBlockers", blockers);
-            AllZone.getTriggerHandler().runTrigger("AttackerBlocked", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams);
 
             // Bushido
             for (final Ability ab : CardFactoryUtil.getBushidoEffects(a)) {

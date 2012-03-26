@@ -27,6 +27,7 @@ import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
+import forge.card.trigger.TriggerType;
 
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid
@@ -241,12 +242,12 @@ public class InputPayManaCost extends InputMana {
             // tapped for convoke)
 
             if (this.spell.getTappedForConvoke() != null) {
-                AllZone.getTriggerHandler().suppressMode("Untaps");
+                AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
                 for (final Card c : this.spell.getTappedForConvoke()) {
                     c.untap();
                     c.tap();
                 }
-                AllZone.getTriggerHandler().clearSuppression("Untaps");
+                AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
                 this.spell.clearTappedForConvoke();
             }
         }
@@ -257,11 +258,11 @@ public class InputPayManaCost extends InputMana {
     public final void selectButtonCancel() {
         // If this is a spell with convoke, untap all creatures used for it.
         if (this.spell.getTappedForConvoke() != null) {
-            AllZone.getTriggerHandler().suppressMode("Untaps");
+            AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
             for (final Card c : this.spell.getTappedForConvoke()) {
                 c.untap();
             }
-            AllZone.getTriggerHandler().clearSuppression("Untaps");
+            AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
             this.spell.clearTappedForConvoke();
         }
 

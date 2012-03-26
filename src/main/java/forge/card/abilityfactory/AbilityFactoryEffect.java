@@ -42,6 +42,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.card.trigger.TriggerType;
 import forge.util.MyRandom;
 
 /**
@@ -510,9 +511,9 @@ public class AbilityFactoryEffect {
         }
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
-        AllZone.getTriggerHandler().suppressMode("ChangesZone");
+        AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         Singletons.getModel().getGameAction().moveToPlay(eff);
-        AllZone.getTriggerHandler().clearSuppression("ChangesZone");
+        AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
 } // end class AbilityFactoryEffect

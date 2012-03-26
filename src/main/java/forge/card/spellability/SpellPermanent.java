@@ -38,6 +38,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 
 /**
@@ -112,7 +113,7 @@ public class SpellPermanent extends Spell {
                     final HashMap<String, Object> runParams = new HashMap<String, Object>();
                     runParams.put("Card", source);
                     runParams.put("Championed", source.getChampionedCard());
-                    AllZone.getTriggerHandler().runTrigger("Championed", runParams);
+                    AllZone.getTriggerHandler().runTrigger(TriggerType.Championed, runParams);
                 } else {
                     Singletons.getModel().getGameAction().sacrifice(this.getSourceCard());
                 }

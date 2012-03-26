@@ -53,6 +53,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
 import forge.game.GameLossReason;
@@ -183,7 +184,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
     @Override
     public final Card copyCard(final Card in) {
         final CardCharactersticName curState = in.getCurState();
-        AllZone.getTriggerHandler().suppressMode("Transformed");
+        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
         if (in.isInAlternateState()) {
             in.setState(CardCharactersticName.Original);
         }
@@ -201,7 +202,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             in.setState(curState);
             out.setState(curState);
         }
-        AllZone.getTriggerHandler().clearSuppression("Transformed");
+        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
 
         // I'm not sure if we really should be copying enchant/equip stuff over.
         out.setEquipping(in.getEquipping());
@@ -1418,7 +1419,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                     if (copyTarget[0] != null) {
                         Card cloned;
 
-                        AllZone.getTriggerHandler().suppressMode("Transformed");
+                        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
 
                         // TODO: transform back and forth
                         cloned = getCard2(copyTarget[0], card.getOwner());
@@ -1452,7 +1453,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                             card.setFlip(false);
                         }
 
-                        AllZone.getTriggerHandler().clearSuppression("Transformed");
+                        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
                     }
 
                     Singletons.getModel().getGameAction().moveToPlay(card);

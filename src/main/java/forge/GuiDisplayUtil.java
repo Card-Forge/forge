@@ -41,6 +41,7 @@ import arcane.ui.util.Animation;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityMana;
+import forge.card.trigger.TriggerType;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.gui.game.CardPanel;
@@ -1351,7 +1352,7 @@ public final class GuiDisplayUtil {
                     AllZone.getComputerPlayer());
         }
 
-        AllZone.getTriggerHandler().suppressMode("ChangesZone");
+        AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         AllZone.getCombat().reset();
         for (final Card c : humanDevSetup) {
             AllZone.getHumanPlayer().getZone(Zone.Hand).add(c);
@@ -1393,7 +1394,7 @@ public final class GuiDisplayUtil {
             AllZone.getComputerPlayer().getZone(Zone.Exile).setCards(computerDevExileSetup);
         }
 
-        AllZone.getTriggerHandler().clearSuppression("ChangesZone");
+        AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         if (setComputerLife > 0) {
             AllZone.getComputerPlayer().setLife(setComputerLife, null);

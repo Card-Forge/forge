@@ -34,6 +34,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
+import forge.card.trigger.TriggerType;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
@@ -349,7 +350,7 @@ public abstract class Player extends GameEntity {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Player", this);
             runParams.put("LifeAmount", lifeGain);
-            AllZone.getTriggerHandler().runTrigger("LifeGained", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams);
         } else {
             System.out.println("Player - trying to gain negative or 0 life");
         }
@@ -406,7 +407,7 @@ public abstract class Player extends GameEntity {
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", this);
         runParams.put("LifeAmount", toLose);
-        AllZone.getTriggerHandler().runTrigger("LifeLost", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams);
 
         return newLifeSet;
     }
@@ -548,7 +549,7 @@ public abstract class Player extends GameEntity {
             runParams.put("DamageTarget", this);
             runParams.put("DamageAmount", damageToDo);
             runParams.put("IsCombatDamage", isCombat);
-            AllZone.getTriggerHandler().runTrigger("DamageDone", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams);
         }
     }
 
@@ -1288,7 +1289,7 @@ public abstract class Player extends GameEntity {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", c);
             runParams.put("Number", this.numDrawnThisTurn);
-            AllZone.getTriggerHandler().runTrigger("Drawn", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams);
         }
         // lose:
         else if (!Constant.Runtime.DEV_MODE[0] || Constant.Runtime.MILL[0]) {
@@ -1554,7 +1555,7 @@ public abstract class Player extends GameEntity {
         runParams.put("Player", this);
         runParams.put("Card", c);
         runParams.put("Cause", cause);
-        AllZone.getTriggerHandler().runTrigger("Discarded", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.Discarded, runParams);
 
     } // end doDiscard
 
@@ -1741,7 +1742,7 @@ public abstract class Player extends GameEntity {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", this);
-        AllZone.getTriggerHandler().runTrigger("Shuffled", runParams);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams);
 
     } // shuffle
       // //////////////////////////////
@@ -1804,7 +1805,7 @@ public abstract class Player extends GameEntity {
             // Run triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", land);
-            AllZone.getTriggerHandler().runTrigger("LandPlayed", runParams);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams);
         }
 
         AllZone.getStack().unfreezeStack();

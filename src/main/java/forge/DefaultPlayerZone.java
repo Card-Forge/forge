@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Observable;
 
 import forge.Constant.Zone;
+import forge.card.trigger.TriggerType;
 
 /**
  * <p>
@@ -104,9 +105,9 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         c.setTurnInZone(Singletons.getModel().getGameState().getPhaseHandler().getTurn());
 
         if (!this.is(Zone.Battlefield) && c.isTapped()) {
-            AllZone.getTriggerHandler().suppressMode("Untaps");
+            AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
             c.untap();
-            AllZone.getTriggerHandler().clearSuppression("Untaps");
+            AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
         }
 
         this.getCardList().add(c);
@@ -149,9 +150,9 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         }
 
         if (!this.is(Zone.Battlefield) && c.isTapped()) {
-            AllZone.getTriggerHandler().suppressMode("Untaps");
+            AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
             c.untap();
-            AllZone.getTriggerHandler().clearSuppression("Untaps");
+            AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
         }
 
         this.getCardList().add(index, c);
