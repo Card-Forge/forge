@@ -521,6 +521,12 @@ public final class AbilityFactoryReveal {
                                                 c.setTapped(true);
                                             }
                                         }
+                                        if (params.containsKey("ExileFaceDown")) {
+                                            c.setState("FaceDown");
+                                        }
+                                        if (params.containsKey("Imprint")) {
+                                            host.addImprinted(c);
+                                        }
                                     }
                                     // Singletons.getModel().getGameAction().revealToComputer()
                                     // - for when this exists

@@ -211,6 +211,9 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         for (final Object o : in.getRemembered()) {
             out.addRemembered(o);
         }
+        for (final Card o : in.getImprinted()) {
+            out.addImprinted(o);
+        }
 
         return out;
 
