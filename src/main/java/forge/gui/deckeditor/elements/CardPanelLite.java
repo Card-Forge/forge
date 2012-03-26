@@ -30,6 +30,7 @@ import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
+import forge.CardCharactersticName;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.gui.game.CardDetailPanel;
@@ -168,10 +169,10 @@ public class CardPanelLite extends CardPanelBase {
         final Card cur = this.detail.getCard();
         if (cur != null) {
             if (cur.isDoubleFaced()) {
-                if (cur.getCurState().equals("Transformed")) {
-                    cur.setState("Original");
+                if (cur.getCurState() == CardCharactersticName.Transformed) {
+                    cur.setState(CardCharactersticName.Original);
                 } else {
-                    cur.setState("Transformed");
+                    cur.setState(CardCharactersticName.Transformed);
                 }
             }
 

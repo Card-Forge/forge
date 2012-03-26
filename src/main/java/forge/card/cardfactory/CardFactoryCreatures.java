@@ -29,6 +29,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
+import forge.CardCharactersticName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
@@ -1843,12 +1844,12 @@ public class CardFactoryCreatures {
                             cloned = AbstractCardFactory.getCard2(origin, card.getOwner());
                             // TODO: transform origin back to how it was (if needed)
                         }
-                        card.addAlternateState("Cloner");
-                        card.switchStates("Original", "Cloner");
-                        card.setState("Original");
+                        card.addAlternateState(CardCharactersticName.Cloner);
+                        card.switchStates(CardCharactersticName.Original, CardCharactersticName.Cloner);
+                        card.setState(CardCharactersticName.Original);
 
-                        if (copyTarget[0].getCurState().equals("Transformed") && copyTarget[0].isDoubleFaced()) {
-                            cloned.setState("Transformed");
+                        if (copyTarget[0].getCurState() == CardCharactersticName.Transformed && copyTarget[0].isDoubleFaced()) {
+                            cloned.setState(CardCharactersticName.Transformed);
                         }
 
                         CardFactoryUtil.copyCharacteristics(cloned, card);
@@ -1861,10 +1862,10 @@ public class CardFactoryCreatures {
                         // If target is a flipped card, also copy the flipped
                         // state.
                         if (copyTarget[0].isFlip()) {
-                            cloned.setState("Flipped");
+                            cloned.setState(CardCharactersticName.Flipped);
                             cloned.setImageFilename(CardUtil.buildFilename(cloned));
-                            card.addAlternateState("Flipped");
-                            card.setState("Flipped");
+                            card.addAlternateState(CardCharactersticName.Flipped);
+                            card.setState(CardCharactersticName.Flipped);
                             CardFactoryUtil.copyCharacteristics(cloned, card);
                             CardFactoryUtil.addAbilityFactoryAbilities(card);
                             for (int i = 0; i < card.getStaticAbilityStrings().size(); i++) {
@@ -1874,7 +1875,7 @@ public class CardFactoryCreatures {
 
                             card.setFlip(true);
 
-                            card.setState("Original");
+                            card.setState(CardCharactersticName.Original);
                         } else {
                             card.setFlip(false);
                         }

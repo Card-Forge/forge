@@ -359,7 +359,7 @@ public class CardReader implements Runnable {
                 this.mapToFill);
 
         if (card.isInAlternateState()) {
-            card.setState("Original");
+            card.setState(CardCharactersticName.Original);
         }
 
         this.listRulesToFill.add(this.rulesReader.getCard());
@@ -479,21 +479,22 @@ public class CardReader implements Runnable {
                 card.addSet(new EditionInfo(value));
                 // 8/18/11 11:08 PM
             } else if (line.equals("ALTERNATE")) {
-                String mode;
+                CardCharactersticName mode;
                 if (card.isFlip()) {
-                    mode = "Flipped";
+                    mode = CardCharactersticName.Flipped;
                 } else if (card.isDoubleFaced()) {
-                    mode = "Transformed";
+                    mode = CardCharactersticName.Transformed;
                 } else {
                     mode = card.isTransformable();
                 }
                 card.addAlternateState(mode);
                 card.setState(mode);
             } else if (line.startsWith("AlternateMode:")) {
-                final String value = line.substring("AlternateMode:".length());
-                if (value.equalsIgnoreCase("Flip")) {
+                //System.out.println(card.getName());
+                final CardCharactersticName value = CardCharactersticName.smartValueOf(line.substring("AlternateMode:".length()));
+                if (value == CardCharactersticName.Flipped) {
                     card.setFlip(true);
-                } else if (value.equalsIgnoreCase("DoubleFaced")) {
+                } else if (value == CardCharactersticName.Transformed ) {
                     card.setDoubleFaced(true);
                 } else {
                     card.setTransformable(value);

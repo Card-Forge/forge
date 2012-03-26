@@ -1449,7 +1449,7 @@ public final class GuiDisplayUtil {
                 } else if (info.equalsIgnoreCase("SummonSick:True")) {
                     c.setSickness(true);
                 } else if (info.equalsIgnoreCase("FaceDown:True")) {
-                    c.setState("FaceDown");
+                    c.setState(CardCharactersticName.FaceDown);
                 }
             }
 

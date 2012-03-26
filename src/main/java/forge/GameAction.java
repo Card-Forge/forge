@@ -134,8 +134,8 @@ public class GameAction {
         } else {
             AllZone.getTriggerHandler().suppressMode("Transformed");
             if (c.isCloned()) {
-                c.switchStates("Cloner", "Original");
-                c.setState("Original");
+                c.switchStates(CardCharactersticName.Cloner, CardCharactersticName.Original);
+                c.setState(CardCharactersticName.Original);
             }
             AllZone.getTriggerHandler().clearSuppression("Transformed");
 
@@ -205,7 +205,7 @@ public class GameAction {
                 copied.clearCounters();
             }
             AllZone.getTriggerHandler().suppressMode("Transformed");
-            copied.setState("Original");
+            copied.setState(CardCharactersticName.Original);
             AllZone.getTriggerHandler().clearSuppression("Transformed");
         }
 
@@ -591,7 +591,7 @@ public class GameAction {
 
         if (c.isInAlternateState()) {
             AllZone.getTriggerHandler().suppressMode("Transformed");
-            c.setState("Original");
+            c.setState(CardCharactersticName.Original);
             AllZone.getTriggerHandler().clearSuppression("Transformed");
         }
 

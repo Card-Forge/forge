@@ -911,10 +911,10 @@ public final class CardUtil {
         if (c.isToken()) {
             return c;
         }
-        final String state = c.getCurState();
+        final CardCharactersticName state = c.getCurState();
         AllZone.getTriggerHandler().suppressMode("Transformed");
         if (c.isInAlternateState()) {
-            c.setState("Original");
+            c.setState(CardCharactersticName.Original);
         }
         final Card res = AllZone.getCardFactory().copyCard(c);
         c.setState(state);

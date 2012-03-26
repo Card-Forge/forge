@@ -32,6 +32,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
+import forge.CardCharactersticName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
@@ -4104,8 +4105,8 @@ public class CardFactoryUtil {
         c.setCurSetCode(sim.getCurSetCode());
 
         AllZone.getTriggerHandler().suppressMode("Transformed");
-        final String origState = sim.getCurState();
-        for (final String state : sim.getStates()) {
+        final CardCharactersticName origState = sim.getCurState();
+        for (final CardCharactersticName state : sim.getStates()) {
             c.addAlternateState(state);
             c.setState(state);
             sim.setState(state);

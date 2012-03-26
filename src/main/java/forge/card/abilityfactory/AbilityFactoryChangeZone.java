@@ -25,6 +25,7 @@ import java.util.Random;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.CardCharactersticName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
@@ -957,7 +958,7 @@ public final class AbilityFactoryChangeZone {
                 } else if (destination.equals(Zone.Exile)) {
                     movedCard = Singletons.getModel().getGameAction().exile(c);
                     if (params.containsKey("ExileFaceDown")) {
-                        movedCard.setState("FaceDown");
+                        movedCard.setState(CardCharactersticName.FaceDown);
                     }
                 } else {
                     movedCard = Singletons.getModel().getGameAction().moveTo(destZone, c);
@@ -1149,7 +1150,7 @@ public final class AbilityFactoryChangeZone {
             } else if (destination.equals(Zone.Exile)) {
                 newCard = Singletons.getModel().getGameAction().exile(c);
                 if (params.containsKey("ExileFaceDown")) {
-                    newCard.setState("FaceDown");
+                    newCard.setState(CardCharactersticName.FaceDown);
                 }
             } else {
                 newCard = Singletons.getModel().getGameAction().moveTo(destZone, c);
@@ -1998,7 +1999,7 @@ public final class AbilityFactoryChangeZone {
                             }
                         }
                         if (params.containsKey("ExileFaceDown")) {
-                            movedCard.setState("FaceDown");
+                            movedCard.setState(CardCharactersticName.FaceDown);
                         }
                     }
                 }
@@ -2419,7 +2420,7 @@ public final class AbilityFactoryChangeZone {
             } else {
                 final Card movedCard = Singletons.getModel().getGameAction().moveTo(destination, c, libraryPos);
                 if (params.containsKey("ExileFaceDown")) {
-                    movedCard.setState("FaceDown");
+                    movedCard.setState(CardCharactersticName.FaceDown);
                 }
             }
 

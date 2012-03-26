@@ -26,6 +26,7 @@ import java.util.Random;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.CardCharactersticName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
@@ -367,7 +368,7 @@ public final class AbilityFactoryCopy {
                 boolean wasInAlt = false;
                 if (c.isInAlternateState()) {
                     wasInAlt = true;
-                    c.setState("Original");
+                    c.setState(CardCharactersticName.Original);
                 }
 
                 // start copied Kiki code
@@ -415,22 +416,22 @@ public final class AbilityFactoryCopy {
 
                     if (c.isDoubleFaced()) { // Cloned DFC's can't transform
                         if (wasInAlt) {
-                            copy.setState("Transformed");
+                            copy.setState(CardCharactersticName.Transformed);
                         }
                     }
                     if (c.isFlip()) { // Cloned Flips CAN flip.
-                        copy.setState("Original");
-                        c.setState("Original");
+                        copy.setState(CardCharactersticName.Original);
+                        c.setState(CardCharactersticName.Original);
                         copy.setImageFilename(c.getImageFilename());
                         if (!c.isInAlternateState()) {
-                            copy.setState("Flipped");
+                            copy.setState(CardCharactersticName.Flipped);
                         }
 
-                        c.setState("Flipped");
+                        c.setState(CardCharactersticName.Flipped);
                     }
 
                     if (c.isFaceDown()) {
-                        c.setState("FaceDown");
+                        c.setState(CardCharactersticName.FaceDown);
                     }
                     copy = Singletons.getModel().getGameAction().moveToPlay(copy);
 

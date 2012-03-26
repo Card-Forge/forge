@@ -25,6 +25,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import forge.AllZone;
 import forge.Card;
+import forge.CardCharactersticName;
 import forge.CardUtil;
 import forge.Player;
 import forge.card.CardRarity;
@@ -292,15 +293,16 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             c.setCurSetCode(this.getEdition());
             c.setRandomPicture(this.artIndex + 1);
             c.setImageFilename(this.getImageFilename());
-            if (c.isFlip()) {
-                c.setState("Flipped");
+            
+            if (c.hasAlternateState()) {
+                if (c.isFlip()) {
+                    c.setState(CardCharactersticName.Flipped);
+                }
+                if (c.isDoubleFaced()) {
+                    c.setState(CardCharactersticName.Transformed);
+                }
                 c.setImageFilename(CardUtil.buildFilename(c));
-                c.setState("Original");
-            }
-            if (c.isDoubleFaced()) {
-                c.setState("Transformed");
-                c.setImageFilename(CardUtil.buildFilename(c));
-                c.setState("Original");
+                c.setState(CardCharactersticName.Original);
             }
         }
         

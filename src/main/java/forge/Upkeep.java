@@ -2234,7 +2234,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                      */
 
                                     final Card newCopy = AllZone.getCardFactory().getCard(
-                                            newTarget[0].getState("Original").getName(), player);
+                                            newTarget[0].getState(CardCharactersticName.Original).getName(), player);
                                     newCopy.setCurSetCode(newTarget[0].getCurSetCode());
                                     // preserve the image of the Vesuvan
                                     // Doppelganger/whatever the source is

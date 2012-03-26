@@ -140,19 +140,6 @@ public class GameNew {
                 } else {
                     AllZone.getHumanPlayer().getZone(Zone.Library).add(card);
                 }
-
-                if (card.hasAlternateState()) {
-                    if (card.isDoubleFaced()) {
-                        card.setState("Transformed");
-                    }
-                    if (card.isFlip()) {
-                        card.setState("Flipped");
-                    }
-
-                    card.setImageFilename(CardUtil.buildFilename(card));
-
-                    card.setState("Original");
-                }
             }
         }
         final ArrayList<String> rAICards = new ArrayList<String>();
@@ -186,18 +173,6 @@ public class GameNew {
                     // ImageCache.getImage(card);
                 }
 
-                if (card.hasAlternateState()) {
-                    if (card.isDoubleFaced()) {
-                        card.setState("Transformed");
-                    }
-                    if (card.isFlip()) {
-                        card.setState("Flipped");
-                    }
-
-                    card.setImageFilename(CardUtil.buildFilename(card));
-
-                    card.setState("Original");
-                }
             }
         }
         AllZone.getTriggerHandler().clearSuppression("Transformed");

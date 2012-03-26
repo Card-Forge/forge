@@ -32,6 +32,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
+import forge.CardCharactersticName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
@@ -181,10 +182,10 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
      */
     @Override
     public final Card copyCard(final Card in) {
-        final String curState = in.getCurState();
+        final CardCharactersticName curState = in.getCurState();
         AllZone.getTriggerHandler().suppressMode("Transformed");
         if (in.isInAlternateState()) {
-            in.setState("Original");
+            in.setState(CardCharactersticName.Original);
         }
         final Card out = this.getCard(in.getName(), in.getOwner());
         out.setUniqueNumber(in.getUniqueNumber());
@@ -192,7 +193,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
         CardFactoryUtil.copyCharacteristics(in, out);
         if (in.hasAlternateState()) {
-            for (final String state : in.getStates()) {
+            for (final CardCharactersticName state : in.getStates()) {
                 in.setState(state);
                 out.setState(state);
                 CardFactoryUtil.copyCharacteristics(in, out);
@@ -488,8 +489,8 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
         CardFactoryUtil.parseKeywords(card, cardName);
 
-        for (final String state : card.getStates()) {
-            if (card.isDoubleFaced() && state.equals("FaceDown")) {
+        for (final CardCharactersticName state : card.getStates()) {
+            if (card.isDoubleFaced() && state== CardCharactersticName.FaceDown) {
                 continue; // Ignore FaceDown for DFC since they have none.
             }
             card.setState(state);
@@ -502,7 +503,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             }
         }
 
-        card.setState("Original");
+        card.setState(CardCharactersticName.Original);
 
         // ******************************************************************
         // ************** Link to different CardFactories *******************
@@ -1423,12 +1424,12 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                         cloned = getCard2(copyTarget[0], card.getOwner());
                         // TODO: untransform
 
-                        card.addAlternateState("Cloner");
-                        card.switchStates("Original", "Cloner");
-                        card.setState("Original");
+                        card.addAlternateState(CardCharactersticName.Cloner);
+                        card.switchStates(CardCharactersticName.Original, CardCharactersticName.Cloner);
+                        card.setState(CardCharactersticName.Original);
 
-                        if (copyTarget[0].getCurState().equals("Transformed") && copyTarget[0].isDoubleFaced()) {
-                            cloned.setState("Transformed");
+                        if (copyTarget[0].getCurState() == CardCharactersticName.Transformed && copyTarget[0].isDoubleFaced()) {
+                            cloned.setState(CardCharactersticName.Transformed);
                         }
 
                         CardFactoryUtil.copyCharacteristics(cloned, card);
@@ -1437,16 +1438,16 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                         // If target is a flipped card, also copy the flipped
                         // state.
                         if (copyTarget[0].isFlip()) {
-                            cloned.setState("Flipped");
+                            cloned.setState(CardCharactersticName.Flipped);
                             cloned.setImageFilename(CardUtil.buildFilename(cloned));
-                            card.addAlternateState("Flipped");
-                            card.setState("Flipped");
+                            card.addAlternateState(CardCharactersticName.Flipped);
+                            card.setState(CardCharactersticName.Flipped);
                             CardFactoryUtil.copyCharacteristics(cloned, card);
                             this.grantExtras();
 
                             card.setFlip(true);
 
-                            card.setState("Original");
+                            card.setState(CardCharactersticName.Original);
                         } else {
                             card.setFlip(false);
                         }

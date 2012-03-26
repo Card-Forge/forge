@@ -27,6 +27,7 @@ import net.miginfocom.swing.MigLayout;
 import arcane.ui.CardPanel;
 import arcane.ui.ViewPanel;
 import forge.Card;
+import forge.CardCharactersticName;
 import forge.GuiDisplayUtil;
 import forge.gui.game.CardDetailPanel;
 import forge.item.CardPrinted;
@@ -132,7 +133,7 @@ public class CardPanelHeavy extends CardPanelBase {
     public final void setCard(final Card c) {
         if (this.picture.getCard() != null) {
             if (this.picture.getCard().isInAlternateState()) {
-                this.picture.getCard().setState("Original");
+                this.picture.getCard().setState(CardCharactersticName.Original);
             }
         }
         this.picture.setCard(c);
@@ -159,13 +160,13 @@ public class CardPanelHeavy extends CardPanelBase {
     final void changeStateButtonActionPerformed(final ActionEvent e) {
         final Card cur = this.picture.getCard();
         if (cur.isInAlternateState()) {
-            cur.setState("Original");
+            cur.setState(CardCharactersticName.Original);
         } else {
             if (cur.isFlip()) {
-                cur.setState("Flipped");
+                cur.setState(CardCharactersticName.Flipped);
             }
             if (cur.isDoubleFaced()) {
-                cur.setState("Transformed");
+                cur.setState(CardCharactersticName.Transformed);
             }
         }
 

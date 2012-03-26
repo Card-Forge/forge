@@ -11292,6 +11292,7 @@ src/main/java/forge/AllZone.java svneol=native#text/plain
 src/main/java/forge/AllZoneUtil.java svneol=native#text/plain
 src/main/java/forge/ButtonUtil.java svneol=native#text/plain
 src/main/java/forge/Card.java svneol=native#text/plain
+src/main/java/forge/CardCharactersticName.java -text
 src/main/java/forge/CardColor.java svneol=native#text/plain
 src/main/java/forge/CardContainer.java svneol=native#text/plain
 src/main/java/forge/CardDamageHistory.java -text
