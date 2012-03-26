@@ -235,6 +235,30 @@ Undead Alchemist
 - Fixed two errors in the script of Szadek, Lord of Secrets.
 - devmode now allows tutoring for any card, even if it is not in your deck
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Committing progress on draggable panel match UI (it's completely independent of the original, not implemented yet.)
+- Renamed the Blood and Fire precon deck jpg pic to "blood_and_fire.jpg" and this should now match the Image file name found in the "Blood And Fire.dck" deck file.
+- Fixed Wolfhunter's Quiver, should now do 3 damage to werewolf creatures.
+- Added icon for Quest for Ula's Temple
+- Updated list of booster image download links
+- Always show packs and decks in quest card shop (until they can be filtered properly)
+- Improved AI's attack decisions by better predictions of counterattacks.
+- Fixed Bear Umbra.
+- The AI will no longer put cards with RemRandomDeck into sealed decks.
+- Updated three SVars.
+- Renamed 2 classes, tried to fix the empty screen at game start
+- removeAll instead of iteration and personal deletion of each element
+- Fixed the quest duel deck Starfire 3 and it should no longer appear as a mystery opponent.
+- Replaced (+-) sign that caused Unmappable UTF errors.
+- moved fields related to combat in current and last turn from Card to a dedicated class
+- propper setter
+- removed PrevIntrinsticKeywords, since they were read by no branch of code
+- Removed card characteristic name constants in favor of an Enumeration
+- When Brass Squire was converted to script, I forgot to commit the revised CardFactoryCreatures.java with the squire removed.
+- TriggerTypes replaced from strings to enum, new trigger parser based on reflection.
+- Fixed some magiccards.info links (not sure if these are even used anymore, but fixed anyway)
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -319,6 +343,7 @@ Soul's Fire
 Scorching Lava
 Mass Polymorph
 Scythe of the Wretched
+Clone Shell
 
 
 end
