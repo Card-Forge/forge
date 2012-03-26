@@ -2063,66 +2063,6 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Brass Squire")) {
-
-            final Target t2 = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));
-            final AbilitySub sub = new AbilitySub(card, t2) {
-                private static final long serialVersionUID = -8926850792424930054L;
-
-                @Override
-                public boolean chkAIDrawback() {
-                    return false;
-                }
-
-                @Override
-                public void resolve() {
-                    final Card equipment = this.getParent().getTargetCard();
-                    final Card creature = this.getTargetCard();
-                    if (AllZoneUtil.isCardInPlay(equipment) && AllZoneUtil.isCardInPlay(creature)) {
-                        if (equipment.canBeTargetedBy(this) && creature.canBeTargetedBy(this)) {
-                            if (equipment.isEquipping()) {
-                                final Card equipped = equipment.getEquipping().get(0);
-                                if (!equipped.equals(creature)) {
-                                    equipment.unEquipCard(equipped);
-                                    equipment.equipCard(creature);
-                                }
-                            } else {
-                                equipment.equipCard(this.getTargetCard());
-                            }
-                        }
-                    }
-                }
-
-                @Override
-                public boolean doTrigger(final boolean b) {
-                    return false;
-                }
-            };
-
-            final Cost abCost = new Cost("T", cardName, true);
-            final Target t1 = new Target(card, "Select target equipment you control", "Equipment.YouCtrl".split(","));
-            final AbilityActivated ability = new AbilityActivated(card, abCost, t1) {
-                private static final long serialVersionUID = 3818559481920103914L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-
-                @Override
-                public void resolve() {
-                    sub.resolve();
-                }
-            };
-            ability.setSubAbility(sub);
-            final StringBuilder sb = new StringBuilder();
-            sb.append(cardName);
-            sb.append(" - Attach target Equipment you control to target creature you control.");
-            ability.setStackDescription(sb.toString());
-            card.addSpellAbility(ability);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         else if (cardName.equals("Duct Crawler") || cardName.equals("Shrewd Hatchling")
                 || cardName.equals("Spin Engine") || cardName.equals("Screeching Griffin")) {
             final String theCost;
