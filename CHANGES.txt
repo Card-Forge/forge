@@ -259,6 +259,16 @@ Undead Alchemist
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Changed implementation of Silvergill Douser to only have only one ability.
+- fix LQ pic URL for Genju of the Spires
+- removing unused code
+- carving away some code we won't ever need.
+- clean up imports in CFCreatures
+- add Slime counters
+- Typo/simplification in Vengeful Pharaoh
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -344,6 +354,13 @@ Scorching Lava
 Mass Polymorph
 Scythe of the Wretched
 Clone Shell
+Sway of Illusion
+Syphon Flesh
+Syphon Mind
+Recurring Insight
+Cryptoplasm
+Temporal Cascade
+Added Thermal
 
 
 end
