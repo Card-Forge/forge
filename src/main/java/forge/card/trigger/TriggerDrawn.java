@@ -76,9 +76,8 @@ public class TriggerDrawn extends Trigger {
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(this.getName());
-        copy.setID(this.getId());
 
+        copyFieldsTo(copy);
         return copy;
     }
 

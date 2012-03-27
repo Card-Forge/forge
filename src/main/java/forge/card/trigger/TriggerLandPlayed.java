@@ -73,12 +73,12 @@ public class TriggerLandPlayed extends Trigger {
     public final Trigger getCopy() {
         final Trigger copy = new TriggerLandPlayed(this.getName(), this.getMapParams(), this.getHostCard(),
                 this.isIntrinsic());
-        copy.setID(this.getId());
 
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }
 
+        copyFieldsTo(copy);
         return copy;
     }
 

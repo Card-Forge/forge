@@ -418,6 +418,8 @@ public class TriggerHandler {
      */
     private boolean runSingleTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
         final Map<String, String> params = regtrig.getMapParams();
+        
+        
         if (regtrig.getMode() != mode) {
             return false; // Not the right mode.
         }

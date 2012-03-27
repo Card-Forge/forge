@@ -714,4 +714,15 @@ public abstract class Trigger extends TriggerReplacementBase {
     void setMode(TriggerType triggerType) {
         mode = triggerType;
     }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param triggerAlways
+     * @return
+     */
+    public void copyFieldsTo(Trigger copy) {
+        copy.setName(this.getName());
+        copy.setID(this.getId());
+        copy.setMode(this.getMode());
+    }
 }
