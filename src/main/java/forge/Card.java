@@ -69,7 +69,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private long value;
 
-    private final Map<CardCharactersticName, CardCharacteristics> characteristicsMap 
+    private final Map<CardCharactersticName, CardCharacteristics> characteristicsMap
     = new EnumMap<CardCharactersticName, CardCharacteristics>(CardCharactersticName.class);
     private CardCharactersticName curCharacteristics = CardCharactersticName.Original;
     private CardCharactersticName preTFDCharacteristic = CardCharactersticName.Original;
@@ -224,7 +224,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     // this code presumes that each card only has one ability that can be
     // used a limited number of times per turn
     // CardFactory.SSP_canPlay(Card) uses these variables
-    
+
     // Only used with Replicate
     private int abilityUsed;
 
@@ -247,20 +247,20 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (state == CardCharactersticName.FaceDown && this.isDoubleFaced) {
             return false; // Doublefaced cards can't be turned face-down.
         }
-    
+
         if (!this.characteristicsMap.containsKey(state)) {
             System.out.println(this.getName() + " tried to switch to non-existant state \"" + state + "\"!");
             return false; // Nonexistant state.
         }
-    
+
         if (state.equals(this.curCharacteristics)) {
             return false;
         }
-    
+
         CardCharactersticName cur = this.curCharacteristics;
-    
+
         this.curCharacteristics = state;
-    
+
         if ((cur == CardCharactersticName.Original && state == CardCharactersticName.Transformed)
                 || (cur == CardCharactersticName.Transformed && state == CardCharactersticName.Original)) {
             HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -268,7 +268,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             runParams.put("Transformer", this);
             AllZone.getTriggerHandler().runTrigger(TriggerType.Transformed, runParams);
         }
-    
+
         return true;
     }
 
@@ -324,7 +324,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             this.preTFDCharacteristic = this.curCharacteristics;
             return this.setState(CardCharactersticName.FaceDown);
         }
-    
+
         return false;
     }
 
@@ -337,7 +337,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.curCharacteristics == CardCharactersticName.FaceDown) {
             return this.setState(this.preTFDCharacteristic);
         }
-    
+
         return false;
     }
 
@@ -6571,6 +6571,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                     final CardList list = sourceController.getCardsIn(Zone.Library);
                     if (list.isEmpty() || !this.sharesCreatureTypeWith(list.get(0))) {
                         return false;
+                    }
+                } if (restriction.equals("Enchanted")) {
+                    for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
+                        final SpellAbility root = AbilityFactory.findRootAbility(sa);
+                        Card c = source.getEnchantingCard();
+                        if ((c == null) && (root != null)
+                            && (root.getPaidList("Sacrificed") != null)
+                            && !root.getPaidList("Sacrificed").isEmpty()) {
+                            c = root.getPaidList("Sacrificed").get(0).getEnchantingCard();
+                            if (!this.sharesCreatureTypeWith(c)) {
+                                return false;
+                            }
+                        }
                     }
                 } else {
                     boolean shares = false;

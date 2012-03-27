@@ -1793,9 +1793,14 @@ res/cardsfolder/c/crovax_ascendant_hero.txt svneol=native#text/plain
 res/cardsfolder/c/crovax_the_cursed.txt -text svneol=unset#text/plain
 res/cardsfolder/c/crowd_favorites.txt svneol=native#text/plain
 res/cardsfolder/c/crowd_of_cinders.txt svneol=native#text/plain
+res/cardsfolder/c/crown_of_ascension.txt -text
+res/cardsfolder/c/crown_of_awe.txt -text
 res/cardsfolder/c/crown_of_convergence.txt -text svneol=unset#text/plain
 res/cardsfolder/c/crown_of_empires.txt -text
 res/cardsfolder/c/crown_of_flames.txt svneol=native#text/plain
+res/cardsfolder/c/crown_of_fury.txt -text
+res/cardsfolder/c/crown_of_suspicion.txt -text
+res/cardsfolder/c/crown_of_vigor.txt -text
 res/cardsfolder/c/crucible_of_fire.txt svneol=native#text/plain
 res/cardsfolder/c/crucible_of_worlds.txt svneol=native#text/plain
 res/cardsfolder/c/crude_rampart.txt svneol=native#text/plain
