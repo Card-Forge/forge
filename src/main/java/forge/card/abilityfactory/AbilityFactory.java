@@ -274,18 +274,8 @@ public class AbilityFactory {
 
     // *******************************************************
 
-    /**
-     * <p>
-     * Getter for the field <code>mapParams</code>.
-     * </p>
-     * 
-     * @param abString
-     *            a {@link java.lang.String} object.
-     * @param hostCard
-     *            a {@link forge.Card} object.
-     * @return a {@link java.util.HashMap} object.
-     */
-    public final HashMap<String, String> getMapParams(final String abString, final Card hostCard) {
+
+    public static final HashMap<String, String> getMapParams(final String abString, final Card hostCard) {
         final HashMap<String, String> mapParameters = new HashMap<String, String>();
 
         if (!(abString.length() > 0)) {
@@ -340,7 +330,7 @@ public class AbilityFactory {
 
         this.hostC = hostCard;
 
-        this.mapParams = this.getMapParams(abString, hostCard);
+        this.mapParams = AbilityFactory.getMapParams(abString, hostCard);
 
         // parse universal parameters
 

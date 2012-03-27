@@ -1566,8 +1566,7 @@ public class CombatUtil {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final AbilityFactory abilityFactory = new AbilityFactory();
-            final HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
+            final HashMap<String, String> abilityParams = AbilityFactory.getMapParams(ability, source);
             if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
                 continue;
             }
@@ -1641,8 +1640,7 @@ public class CombatUtil {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final AbilityFactory abilityFactory = new AbilityFactory();
-            final HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
+            final HashMap<String, String> abilityParams = AbilityFactory.getMapParams(ability, source);
 
             // DealDamage triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
@@ -1772,8 +1770,7 @@ public class CombatUtil {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final AbilityFactory abilityFactory = new AbilityFactory();
-            final HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
+            final HashMap<String, String> abilityParams = AbilityFactory.getMapParams(ability, source);
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
@@ -1891,8 +1888,7 @@ public class CombatUtil {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final AbilityFactory abilityFactory = new AbilityFactory();
-            final HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
+            final HashMap<String, String> abilityParams = AbilityFactory.getMapParams(ability, source);
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
@@ -1999,8 +1995,7 @@ public class CombatUtil {
                 continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
-            AbilityFactory abilityFactory = new AbilityFactory();
-            final HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
+            final HashMap<String, String> abilityParams = AbilityFactory.getMapParams(ability, source);
             // Destroy triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
                     || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
@@ -2052,8 +2047,7 @@ public class CombatUtil {
                 continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
-            AbilityFactory abilityFactory = new AbilityFactory();
-            final HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
+            final HashMap<String, String> abilityParams = AbilityFactory.getMapParams(ability, source);
             // Destroy triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
                     || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {

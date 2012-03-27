@@ -1980,7 +1980,7 @@ public final class AbilityFactoryChoose {
         final Card host = af.getHostCard();
         final BiMap<String, String> choices = HashBiMap.create();
         for (String s : Arrays.asList(params.get("Choices").split(","))) {
-            final HashMap<String, String> theseParams = af.getMapParams(host.getSVar(s), host);
+            final HashMap<String, String> theseParams = AbilityFactory.getMapParams(host.getSVar(s), host);
             choices.put(s, theseParams.get("ChoiceDescription"));
         }
 

@@ -197,7 +197,8 @@ public final class AbilityFactoryChangeZone {
      * @return a boolean.
      */
     public static boolean isHidden(final String origin, final boolean hiddenOverride) {
-        return (hiddenOverride || origin.equals("Library") || origin.equals("Hand") || origin.equals("Sideboard"));
+        return hiddenOverride || Zone.smartValueOf(origin).isHidden();
+
     }
 
     /**
@@ -210,8 +211,7 @@ public final class AbilityFactoryChangeZone {
      * @return a boolean.
      */
     public static boolean isKnown(final String origin) {
-        return (origin.equals("Graveyard") || origin.equals("Exile") || origin.equals("Battlefield")
-                || origin.equals("Stack") || origin.equals("Ante"));
+        return Zone.smartValueOf(origin).isKnown();
     }
 
     /**

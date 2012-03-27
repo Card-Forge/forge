@@ -181,28 +181,35 @@ public final class Constant {
     public enum Zone {
 
         /** The Hand. */
-        Hand,
+        Hand(true),
 
         /** The Library. */
-        Library,
+        Library(true),
 
         /** The Graveyard. */
-        Graveyard,
+        Graveyard(false),
 
         /** The Battlefield. */
-        Battlefield,
+        Battlefield(false),
 
         /** The Exile. */
-        Exile,
+        Exile(false),
 
         /** The Command. */
-        Command,
+        Command(false),
 
         /** The Stack. */
-        Stack,
+        Stack(false),
 
+        Sideboard(true),
         /** Ante. */
-        Ante;
+        Ante(false);
+        
+        
+        private final boolean holdsHiddenInfo;
+        private Zone(boolean holdsHidden) {
+            holdsHiddenInfo = holdsHidden;
+        }
 
         /**
          * Smart value of.
@@ -241,6 +248,14 @@ public final class Constant {
             }
             return result;
         }
+
+        public boolean isHidden() {
+            return holdsHiddenInfo;
+        }
+
+        public boolean isKnown() {
+            return !holdsHiddenInfo;
+        }        
     }
 
     /**
