@@ -269,6 +269,9 @@ public enum Counters {
     /** The SLEIGHT. */
     SLEIGHT(),
 
+    /** The SLIME. */
+    SLIME(),
+
     /** The SOOT. */
     SOOT(),
 
