@@ -84,7 +84,9 @@ public enum TriggerType {
             Class<?>[] pp = c.getParameterTypes();
             if ( pp[0] == HashMap.class ) {
                 try {
-                    return c.newInstance(mapParams, host, intrinsic);
+                    Trigger res = c.newInstance(mapParams, host, intrinsic);
+                    res.setMode(this);
+                    return res;
                 } catch (IllegalArgumentException e) {
                     // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
                     e.printStackTrace();

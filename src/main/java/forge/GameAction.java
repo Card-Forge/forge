@@ -80,18 +80,18 @@ public class GameAction {
      * changeZone.
      * </p>
      * 
-     * @param prev
+     * @param zoneFrom
      *            a {@link forge.PlayerZone} object.
-     * @param zone
+     * @param zoneTo
      *            a {@link forge.PlayerZone} object.
      * @param c
      *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card changeZone(final PlayerZone prev, final PlayerZone zone, final Card c) {
-        if ((prev == null) && !c.isToken()) {
-            zone.add(c);
-            Player p = zone.getPlayer();
+    public static Card changeZone(final PlayerZone zoneFrom, final PlayerZone zoneTo, final Card c) {
+        if ((zoneFrom == null) && !c.isToken()) {
+            zoneTo.add(c);
+            Player p = zoneTo.getPlayer();
             if (p != null) {
                 p.updateLabelObservers();
             }
@@ -99,23 +99,23 @@ public class GameAction {
         }
 
         boolean suppress;
-        if ((prev == null) && !c.isToken()) {
+        if ((zoneFrom == null) && !c.isToken()) {
             suppress = true;
         } else if (c.isToken()) {
             suppress = false;
         } else {
-            suppress = prev.equals(zone);
+            suppress = zoneFrom.equals(zoneTo);
         }
 
         if (!suppress) {
             HashMap<String, Object> repParams = new HashMap<String, Object>();
             repParams.put("Event", "Moved");
             repParams.put("Affected", c);
-            repParams.put("Origin", prev != null ? prev.getZoneType() : null);
-            repParams.put("Destination", zone.getZoneType());
+            repParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType() : null);
+            repParams.put("Destination", zoneTo.getZoneType());
 
             if (AllZone.getReplacementHandler().run(repParams)) {
-                if (AllZone.getStack().isResolving(c) && !zone.is(Constant.Zone.Graveyard)) {
+                if (AllZone.getStack().isResolving(c) && !zoneTo.is(Constant.Zone.Graveyard)) {
                     return Singletons.getModel().getGameAction().moveToGraveyard(c);
                 }
                 return c;
@@ -128,8 +128,8 @@ public class GameAction {
 
         // Don't copy Tokens, Cards staying in same zone, or cards entering
         // Battlefield
-        if (c.isToken() || suppress || zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Stack)
-                || (prev.is(Constant.Zone.Stack) && zone.is(Constant.Zone.Battlefield))) {
+        if (c.isToken() || suppress || zoneTo.is(Constant.Zone.Battlefield) || zoneTo.is(Constant.Zone.Stack)
+                || (zoneFrom.is(Constant.Zone.Stack) && zoneTo.is(Constant.Zone.Battlefield))) {
             lastKnownInfo = c;
             copied = c;
         } else {
@@ -160,34 +160,34 @@ public class GameAction {
             AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         }
 
-        zone.add(copied);
+        zoneTo.add(copied);
 
         // Tokens outside the battlefield disappear immideately.
-        if (copied.isToken() && !zone.is(Constant.Zone.Battlefield)) {
-            zone.remove(copied);
+        if (copied.isToken() && !zoneTo.is(Constant.Zone.Battlefield)) {
+            zoneTo.remove(copied);
         }
 
-        if (prev != null) {
-            if (prev.is(Constant.Zone.Battlefield) && c.isCreature()) {
+        if (zoneFrom != null) {
+            if (zoneFrom.is(Constant.Zone.Battlefield) && c.isCreature()) {
                 AllZone.getCombat().removeFromCombat(c);
             }
 
-            prev.remove(c);
+            zoneFrom.remove(c);
         }
 
-        Player p = zone.getPlayer();
+        Player p = zoneTo.getPlayer();
         if (p != null) {
             p.updateLabelObservers();
         }
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", lastKnownInfo);
-        if (prev != null) {
-            runParams.put("Origin", prev.getZoneType().name());
+        if (zoneFrom != null) {
+            runParams.put("Origin", zoneFrom.getZoneType().name());
         } else {
             runParams.put("Origin", null);
         }
-        runParams.put("Destination", zone.getZoneType().name());
+        runParams.put("Destination", zoneTo.getZoneType().name());
         AllZone.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
         // AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
 
@@ -198,10 +198,10 @@ public class GameAction {
         // remove all counters from the card if destination is not the
         // battlefield
         // UNLESS we're dealing with Skullbriar, the Walking Grave
-        if (!zone.is(Constant.Zone.Battlefield)) {
+        if (!zoneTo.is(Constant.Zone.Battlefield)) {
             // remove all counters from the card if destination is not the battlefield
             // UNLESS we're dealing with Skullbriar, the Walking Grave
-            if (!(c.getName().equals("Skullbriar, the Walking Grave") && !zone.is(Constant.Zone.Hand) && !zone
+            if (!(c.getName().equals("Skullbriar, the Walking Grave") && !zoneTo.is(Constant.Zone.Hand) && !zoneTo
                     .is(Constant.Zone.Library))) {
                 copied.clearCounters();
             }

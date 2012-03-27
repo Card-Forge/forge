@@ -20,7 +20,6 @@ package forge.card.trigger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -329,14 +328,15 @@ public class TriggerHandler {
         if (this.suppressedModes.contains(mode)) {
             return;
         }
-
+        
         final Player playerAP = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-
         if (playerAP == null) {
             // This should only happen outside of games, so it's safe to just
             // abort.
             return;
         }
+
+        //System.out.println("T:" + mode.toString() + " > " + TextUtil.mapToString(runParams) );
 
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
@@ -418,8 +418,7 @@ public class TriggerHandler {
      */
     private boolean runSingleTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
         final Map<String, String> params = regtrig.getMapParams();
-
-        if (!params.get("Mode").equals(mode.toString())) {
+        if (regtrig.getMode() != mode) {
             return false; // Not the right mode.
         }
         if (!regtrig.zonesCheck()) {
@@ -440,6 +439,7 @@ public class TriggerHandler {
                               // don't trigger again.
             }
         }
+
         if (!regtrig.performTest(runParams)) {
             return false; // Test failed.
         }

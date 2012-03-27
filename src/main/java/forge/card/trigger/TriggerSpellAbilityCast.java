@@ -60,15 +60,15 @@ public class TriggerSpellAbilityCast extends Trigger {
         final Card cast = spellAbility.getSourceCard();
         final SpellAbilityStackInstance si = AllZone.getStack().getInstanceFromSpellAbility(spellAbility);
 
-        if (this.getMapParams().get("Mode").equals("SpellCast")) {
+        if (this.getMode() == TriggerType.SpellCast) {
             if (!spellAbility.isSpell()) {
                 return false;
             }
-        } else if (this.getMapParams().get("Mode").equals("AbilityCast")) {
+        } else if (this.getMode() == TriggerType.AbilityCast) {
             if (!spellAbility.isAbility()) {
                 return false;
             }
-        } else if (this.getMapParams().get("Mode").equals("SpellAbilityCast")) {
+        } else if (this.getMode() == TriggerType.SpellAbilityCast) {
             // Empty block for readability.
         }
 

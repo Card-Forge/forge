@@ -29,14 +29,6 @@ import javax.swing.SwingUtilities;
 public final class UtilFunctions {
 
     /**
-     * Do not instantiate.
-     */
-    private UtilFunctions() {
-        // empty
-    }
-
-
-    /**
      * Invoke the given Runnable in an Event Dispatch Thread and wait for it to
      * finish; but <B>try to use SwingUtilities.invokeLater instead whenever
      * feasible.</B>
@@ -69,27 +61,6 @@ public final class UtilFunctions {
                 // 11:19 PM
             }
         }
-    }
-
- 
-    /**
-     * Safely converts an object to a String.
-     * 
-     * @param obj
-     *            to convert; may be null
-     * 
-     * @return "null" if obj is null, obj.toString() otherwise
-     */
-    public static String safeToString(final Object obj) {
-        String result;
-
-        if (obj == null) {
-            result = "null";
-        } else {
-            result = obj.toString();
-        }
-
-        return result;
     }
 
 

@@ -25,6 +25,7 @@ import java.util.Random;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerType;
 import forge.util.MyRandom;
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
@@ -88,8 +89,7 @@ public class ComputerUtilAttack {
         for (final Card attacker : in) {
             final ArrayList<Trigger> registeredTriggers = attacker.getTriggers();
             for (final Trigger trigger : registeredTriggers) {
-                final HashMap<String, String> trigParams = trigger.getMapParams();
-                if (trigParams.get("Mode").equals("Attacks")) {
+                if( trigger.getMode() == TriggerType.Attacks) {
                     list.add(attacker);
                 }
             }

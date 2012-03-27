@@ -28,7 +28,7 @@ import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import net.slightlymagic.braids.util.UtilFunctions;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 /** 
@@ -190,7 +190,7 @@ public enum CSubmenuSealed implements ICSubmenu {
             sd = new SealedDeck("Custom");
         }
         else {
-            throw new IllegalStateException("choice <<" + UtilFunctions.safeToString(o)
+            throw new IllegalStateException("choice <<" + TextUtil.safeToString(o)
                     + ">> does not equal any of the sealedTypes.");
         }
 

@@ -433,7 +433,7 @@ public class SpellPermanent extends Spell {
             // These triggers all care for ETB effects
 
             final HashMap<String, String> params = tr.getMapParams();
-            if (!params.get("Mode").equals("ChangesZone")) {
+            if (tr.getMode() != TriggerType.ChangesZone) {
                 continue;
             }
 

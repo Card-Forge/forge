@@ -1435,7 +1435,8 @@ public class CombatUtil {
             return false;
         }
 
-        if (trigParams.get("Mode").equals("Attacks")) {
+        TriggerType mode = trigger.getMode();
+        if (mode == TriggerType.Attacks ) {
             willTrigger = true;
             if (attacker.isAttacking()) {
                 return false; // The trigger should have triggered already
@@ -1450,7 +1451,7 @@ public class CombatUtil {
         }
 
         // defender == null means unblocked
-        if ((defender == null) && trigParams.get("Mode").equals("AttackerUnblocked")) {
+        if ((defender == null) && mode == TriggerType.AttackerUnblocked) {
             willTrigger = true;
             if (trigParams.containsKey("ValidCard")) {
                 if (!TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)) {
@@ -1463,7 +1464,7 @@ public class CombatUtil {
             return willTrigger;
         }
 
-        if (trigParams.get("Mode").equals("Blocks")) {
+        if (mode == TriggerType.Blocks) {
             willTrigger = true;
             if (trigParams.containsKey("ValidBlocked")) {
                 if (!TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidBlocked").split(","), source)) {
@@ -1475,7 +1476,7 @@ public class CombatUtil {
                     return false;
                 }
             }
-        } else if (trigParams.get("Mode").equals("AttackerBlocked") && (defender != null)) {
+        } else if (mode == TriggerType.AttackerBlocked && (defender != null)) {
             willTrigger = true;
             if (trigParams.containsKey("ValidBlocker")) {
                 if (!TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidBlocker").split(","), source)) {

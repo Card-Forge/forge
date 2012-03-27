@@ -124,6 +124,8 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     /** The run params. */
     private Map<String, Object> runParams;
+    
+    private TriggerType mode;
 
     /** The overriding ability. */
     private SpellAbility overridingAbility = null;
@@ -695,5 +697,21 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     public void setId(final int id0) {
         this.id = id0;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public TriggerType getMode() {
+        return mode;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param triggerType
+     */
+    void setMode(TriggerType triggerType) {
+        mode = triggerType;
     }
 }
