@@ -9085,6 +9085,7 @@ res/cardsfolder/t/temple_garden.txt svneol=native#text/plain
 res/cardsfolder/t/temple_of_the_false_god.txt svneol=native#text/plain
 res/cardsfolder/t/temporal_adept.txt svneol=native#text/plain
 res/cardsfolder/t/temporal_aperture.txt svneol=native#text/plain
+res/cardsfolder/t/temporal_cascade.txt -text
 res/cardsfolder/t/temporal_distortion.txt -text
 res/cardsfolder/t/temporal_eddy.txt svneol=native#text/plain
 res/cardsfolder/t/temporal_fissure.txt svneol=native#text/plain
@@ -9158,6 +9159,7 @@ res/cardsfolder/t/thelonite_druid.txt -text
 res/cardsfolder/t/thelonite_hermit.txt svneol=native#text/plain
 res/cardsfolder/t/thelonite_monk.txt svneol=native#text/plain
 res/cardsfolder/t/thermal_blast.txt svneol=native#text/plain
+res/cardsfolder/t/thermal_flux.txt -text
 res/cardsfolder/t/thermal_glider.txt svneol=native#text/plain
 res/cardsfolder/t/thermal_navigator.txt svneol=native#text/plain
 res/cardsfolder/t/thermokarst.txt svneol=native#text/plain
