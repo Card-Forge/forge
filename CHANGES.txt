@@ -269,6 +269,21 @@ Undead Alchemist
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- isValid supports "sharesColorWith Enchanted" where Enchanted is same as the defined type so will find an aura sacrificed as a cost.
+- Removed an bit of the Rakdos Riteknife script left over from my first attempts.
+- Fix to help prevent ETB-bounce loop for Whitemane Lion.
+- Corrected name of added card in changes.txt
+- Added flying to Notorious Throng's tokens
+- Trigger "mode" key is now stored in a field of trigger
+- This should fix triggers
+- AbilityFactory getMapParams is static.
+- Fix channel activation cost of Shinen of Furys Fire
+- CheckStyle.
+- Fixing Carnage Altar CC
+- Converted Hedron Matrix to script.
+- xCount now supports EquippedCardManaCost.
+- Added the code block to support "SetAsKicked" to mark nonPermanent kicked spells from the script line. Will start converting soon.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -361,6 +376,15 @@ Recurring Insight
 Cryptoplasm
 Temporal Cascade
 Thermal Flux
+Crown of Ascension
+Crown of Awe
+Crown of Fury
+Crown of Suspicion
+Crown of Vigor
+Rooting Kavu
+Flames of the Blood Hand
+Imagecrafter
+Tattoo Ward
 
 
 end
