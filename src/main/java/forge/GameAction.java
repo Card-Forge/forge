@@ -618,6 +618,11 @@ public class GameAction {
         runParams.put("Destination", Constant.Zone.Library);
         AllZone.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
 
+        Player owner = p.getPlayer();
+        if (owner != null) {
+            owner.updateLabelObservers();
+        }
+
         return c;
     }
 
