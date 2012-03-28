@@ -428,8 +428,7 @@ public class SpellPermanent extends Spell {
         }
 
         // Trigger play improvements
-        final ArrayList<Trigger> triggers = card.getTriggers();
-        for (final Trigger tr : triggers) {
+        for (final Trigger tr : card.getTriggers()) {
             // These triggers all care for ETB effects
 
             final HashMap<String, String> params = tr.getMapParams();
@@ -437,7 +436,7 @@ public class SpellPermanent extends Spell {
                 continue;
             }
 
-            if (!params.get("Destination").equals("Battlefield")) {
+            if (!params.get("Destination").equals(Zone.Battlefield.toString())) {
                 continue;
             }
 

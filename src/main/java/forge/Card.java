@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -689,7 +690,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Trigger> getTriggers() {
+    public final List<Trigger> getTriggers() {
         return this.getCharacteristics().getTriggers();
     }
 
@@ -720,7 +721,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param trigs
      *            a {@link java.util.ArrayList} object.
      */
-    public final void setTriggers(final ArrayList<Trigger> trigs) {
+    public final void setTriggers(final List<Trigger> trigs) {
         final ArrayList<Trigger> copyList = new ArrayList<Trigger>();
         for (final Trigger t : trigs) {
             if (t.getIsIntrinsic()) {
@@ -6613,7 +6614,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (!shares) {
                     return false;
                }
-            } else if (restriction.equals("Battlefield")) {
+            } else if (restriction.equals(Constant.Zone.Battlefield.toString())) {
                 final CardList list = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
                 if (list.isEmpty()) {
                     return false;

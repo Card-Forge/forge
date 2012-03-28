@@ -151,14 +151,13 @@ public class ComputerAIGeneral implements Computer {
      * @return a boolean.
      */
     public static boolean hasETBTrigger(final Card card) {
-        final ArrayList<Trigger> triggers = card.getTriggers();
-        for (final Trigger tr : triggers) {
+        for (final Trigger tr : card.getTriggers()) {
             final HashMap<String, String> params = tr.getMapParams();
             if (tr.getMode() != TriggerType.ChangesZone) {
                 continue;
             }
 
-            if (!params.get("Destination").equals("Battlefield")) {
+            if (!params.get("Destination").equals(Zone.Battlefield.toString())) {
                 continue;
             }
 

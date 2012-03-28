@@ -18,6 +18,7 @@
 package forge.card;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.CardColor;
 import forge.card.replacement.ReplacementEffect;
@@ -264,7 +265,7 @@ public class CardCharacteristics {
      * 
      * @return the triggers
      */
-    public final ArrayList<Trigger> getTriggers() {
+    public final List<Trigger> getTriggers() {
         return this.triggers;
     }
 

@@ -43,6 +43,11 @@ public abstract class AllZoneUtil {
      */
     public static CardList getCardsIn(final Constant.Zone zone) {
         final CardList cards = new CardList();
+        getCardsIn(zone, cards);
+        return cards;
+    }
+
+    private static void getCardsIn(final Constant.Zone zone, final CardList cards) {
         if (zone == Zone.Stack) {
             cards.addAll(AllZone.getStackZone().getCards());
         } else {
@@ -50,32 +55,25 @@ public abstract class AllZoneUtil {
                 cards.addAll(p.getZone(zone).getCards());
             }
         }
-        return cards;
-    }
-
-    /**
-     * 
-     * getCardsIn.
-     * 
-     * @param zones
-     *            a List<Constant.Zone>
-     * @return CardList
-     */
-    public static CardList getCardsIn(final List<Constant.Zone> zones) {
+    }    
+    
+    public static CardList getCardsIn(final Iterable<Constant.Zone> zones) {
         final CardList cards = new CardList();
         for (final Zone z : zones) {
-            if (z == Zone.Stack) {
-                cards.addAll(AllZone.getStackZone().getCards());
-                continue;
-            }
-
-            for (final Player p : AllZone.getPlayersInGame()) {
-                cards.addAll(p.getZone(z).getCards());
-            }
+            getCardsIn(z, cards);
         }
         return cards;
     }
 
+    public static CardList getCardsIn(final Constant.Zone[] zones) {
+        final CardList cards = new CardList();
+        for (final Zone z : zones) {
+            getCardsIn(z, cards);
+        }
+        return cards;
+    }
+    
+    
     /**
      * gets a list of all cards owned by both players that have are currently in
      * the given zone.

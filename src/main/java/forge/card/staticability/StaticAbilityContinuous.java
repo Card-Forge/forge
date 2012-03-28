@@ -312,8 +312,7 @@ public class StaticAbilityContinuous {
 
             // remove triggers
             if (params.containsKey("RemoveTriggers") || removeAllAbilities) {
-                final ArrayList<Trigger> triggers = affectedCard.getTriggers();
-                for (final Trigger trigger : triggers) {
+                for (final Trigger trigger : affectedCard.getTriggers()) {
                     trigger.setTemporarilySuppressed(true);
                 }
             }

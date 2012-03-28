@@ -341,13 +341,13 @@ public class TriggerHandler {
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
         final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
-        CardList allCards = AllZoneUtil.getCardsInGame();
+        CardList allCards = AllZoneUtil.getCardsIn(Zone.StaticAbilitiesSourceZones);
         boolean checkStatics = false;
 
         // Static triggers
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
-                if (t.getMapParams().containsKey("Static")) {
+                if (t.isStatic()) {
                     checkStatics |= this.runSingleTrigger(t, mode, runParams);
                 }
             }
@@ -358,11 +358,11 @@ public class TriggerHandler {
         }
 
         // AP
-        allCards = playerAP.getAllCards();
+        allCards = playerAP.getCardsIn(Zone.StaticAbilitiesSourceZones);
         allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP));
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
-                if (!t.getMapParams().containsKey("Static")) {
+                if (!t.isStatic()) {
                     this.runSingleTrigger(t, mode, runParams);
                 }
             }
@@ -379,11 +379,11 @@ public class TriggerHandler {
         }
 
         // NAP
-        allCards = playerAP.getOpponent().getAllCards();
+        allCards = playerAP.getOpponent().getCardsIn(Zone.StaticAbilitiesSourceZones);
         allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP.getOpponent()));
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
-                if (!t.getMapParams().containsKey("Static")) {
+                if (!t.isStatic()) {
                     this.runSingleTrigger(t, mode, runParams);
                 }
             }
@@ -451,18 +451,12 @@ public class TriggerHandler {
         // Torpor Orb check
         final CardList torporOrbs = AllZoneUtil.getCardsIn(Zone.Battlefield, "Torpor Orb");
 
-        if (torporOrbs.size() != 0) {
-            if (params.containsKey("Destination")) {
-                if ((params.get("Destination").equals("Battlefield") || params.get("Destination").equals("Any"))
-                        && mode.equals("ChangesZone")
-                        && ((params.get("ValidCard").contains("Creature")) || (params.get("ValidCard").contains("Self") && regtrig
-                                .getHostCard().isCreature()))) {
-                    return false;
-                }
-            } else {
-                if (mode.equals("ChangesZone")
-                        && ((params.get("ValidCard").contains("Creature")) || (params.get("ValidCard").contains("Self") && regtrig
-                                .getHostCard().isCreature()))) {
+        if (torporOrbs.size() != 0 && mode == TriggerType.ChangesZone) {
+            String destination = params.get("Destination");
+            // if destination is not set, or set to 'battlefield' or 'any'
+            if (null == destination || Zone.Battlefield.toString().equals(destination) || "Any".equals(destination) ) {
+                if (params.get("ValidCard").contains("Creature") 
+                || (params.get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature())) {
                     return false;
                 }
             }
@@ -1074,7 +1068,7 @@ public class TriggerHandler {
         // Card src = (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
         // System.out.println("Trigger going on stack for "+mode+".  Card = "+src);
 
-        if (params.containsKey("Static") && params.get("Static").equals("True")) {
+        if (regtrig.isStatic()) {
             Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
         } else {
             AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);

@@ -86,8 +86,7 @@ public class ComputerUtilAttack {
 
         // Cards with triggers should come first (for Battle Cry)
         for (final Card attacker : in) {
-            final ArrayList<Trigger> registeredTriggers = attacker.getTriggers();
-            for (final Trigger trigger : registeredTriggers) {
+            for (final Trigger trigger : attacker.getTriggers()) {
                 if (trigger.getMode() == TriggerType.Attacks) {
                     list.add(attacker);
                 }

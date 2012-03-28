@@ -1380,6 +1380,15 @@ public abstract class Player extends GameEntity {
         return result;
     }
 
+    public final CardList getCardsIn(final Constant.Zone[] zones) {
+        final CardList result = new CardList();
+        for (final Constant.Zone z : zones) {
+            if (this.getZone(z) != null) {
+                result.addAll(this.getZone(z).getCards());
+            }
+        }
+        return result;
+    }
     /**
      * gets a list of all cards with requested cardName in a given player's
      * requested zone. This function makes a CardList from Card[].

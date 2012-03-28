@@ -725,4 +725,12 @@ public abstract class Trigger extends TriggerReplacementBase {
         copy.setID(this.getId());
         copy.setMode(this.getMode());
     }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public boolean isStatic() {
+        return getMapParams().containsKey("Static"); // && params.get("Static").equals("True") [always true if present]
+    }
 }

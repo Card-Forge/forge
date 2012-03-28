@@ -20,6 +20,7 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import forge.AllZone;
@@ -627,7 +628,7 @@ public final class AbilityFactoryAnimate {
             // suppress triggers from the animated card
             final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
             if (params.containsKey("OverwriteTriggers") || params.containsKey("RemoveAllAbilities")) {
-                final ArrayList<Trigger> triggersToRemove = c.getTriggers();
+                final List<Trigger> triggersToRemove = c.getTriggers();
                 for (final Trigger trigger : triggersToRemove) {
                     trigger.setSuppressed(true);
                     removedTriggers.add(trigger);
@@ -1251,7 +1252,7 @@ public final class AbilityFactoryAnimate {
             // suppress triggers from the animated card
             final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
             if (params.containsKey("OverwriteTriggers") || params.containsKey("RemoveAllAbilities")) {
-                final ArrayList<Trigger> triggersToRemove = c.getTriggers();
+                final List<Trigger> triggersToRemove = c.getTriggers();
                 for (final Trigger trigger : triggersToRemove) {
                     trigger.setSuppressed(true);
                     removedTriggers.add(trigger);

@@ -204,7 +204,9 @@ public final class Constant {
         Sideboard(true),
         /** Ante. */
         Ante(false);
-
+        
+        public static final Zone[] StaticAbilitiesSourceZones = new Zone[]{Battlefield, Graveyard, Exile, Hand};  
+        
         private final boolean holdsHiddenInfo;
         private Zone(boolean holdsHidden) {
             holdsHiddenInfo = holdsHidden;
@@ -254,7 +256,7 @@ public final class Constant {
 
         public boolean isKnown() {
             return !holdsHiddenInfo;
-        }
+        }        
     }
 
     /**
