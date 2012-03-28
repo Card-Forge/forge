@@ -1,5 +1,5 @@
 Name:Carnage Altar
-ManaCost:3
+ManaCost:2
 Types:Artifact
 Text:no text
 A:AB$ Draw | Cost$ 3 Sac<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
