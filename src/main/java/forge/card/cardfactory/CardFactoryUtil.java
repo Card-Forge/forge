@@ -2894,6 +2894,22 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(oppController.getLife(), m, c);
         }
 
+        //  Count$TargetedLifeTotal (targeted player's life total)
+        if (sq[0].contains("TargetedLifeTotal")) {
+            for (final SpellAbility sa : c.getCharacteristics().getSpellAbility()) {
+                final SpellAbility parent = AbilityFactory.findParentsTargetedPlayer(sa);
+                if (parent != null) {
+                    if (parent.getTarget() != null) {
+                        for (final Object tgtP : parent.getTarget().getTargetPlayers()) {
+                            if (tgtP instanceof Player) {
+                                return CardFactoryUtil.doXMath(((Player) tgtP).getLife(), m, c);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         if (sq[0].contains("LifeYouLostThisTurn")) {
             return CardFactoryUtil.doXMath(cardController.getLifeLostThisTurn(), m, c);
         }
@@ -3252,6 +3268,22 @@ public class CardFactoryUtil {
             }
             if (!oh) {
                 someCards.addAll(oppController.getCardsIn(Zone.Hand));
+            }
+        }
+
+        //  Count$InTargetedHand (targeted player's cards in hand)
+        if (sq[0].contains("InTargetedHand")) {
+            for (final SpellAbility sa : c.getCharacteristics().getSpellAbility()) {
+                final SpellAbility parent = AbilityFactory.findParentsTargetedPlayer(sa);
+                if (parent != null) {
+                    if (parent.getTarget() != null) {
+                        for (final Object tgtP : parent.getTarget().getTargetPlayers()) {
+                            if (tgtP instanceof Player) {
+                                someCards.addAll(((Player) tgtP).getCardsIn(Zone.Hand));
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -4098,7 +4130,7 @@ public class CardFactoryUtil {
      * Copies stats like power, toughness, etc.
      * </p>
      * 
-     * @param o
+     * @param sim
      *            a {@link java.lang.Object} object.
      * @return a {@link forge.Card} object.
      */
