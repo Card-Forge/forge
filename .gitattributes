@@ -9177,6 +9177,7 @@ res/cardsfolder/t/thermal_navigator.txt svneol=native#text/plain
 res/cardsfolder/t/thermokarst.txt svneol=native#text/plain
 res/cardsfolder/t/thermopod.txt svneol=native#text/plain
 res/cardsfolder/t/thicket_basilisk.txt svneol=native#text/plain
+res/cardsfolder/t/thicket_elemental.txt -text
 res/cardsfolder/t/thief_of_hope.txt svneol=native#text/plain
 res/cardsfolder/t/thieves_fortune.txt -text
 res/cardsfolder/t/thieving_magpie.txt svneol=native#text/plain
