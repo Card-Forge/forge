@@ -3068,7 +3068,11 @@ public class CardFactoryUtil {
         }
         // Count$CardManaCost
         if (sq[0].contains("CardManaCost")) {
-            return CardFactoryUtil.doXMath(CardUtil.getConvertedManaCost(c), m, c);
+            if (sq[0].contains("Equipped") && c.isEquipping()) {
+                return CardFactoryUtil.doXMath(CardUtil.getConvertedManaCost(c.getEquipping().get(0)), m, c);
+            } else {
+                return CardFactoryUtil.doXMath(CardUtil.getConvertedManaCost(c), m, c);
+            }
         }
         // Count$CardNumColors
         if (sq[0].contains("CardNumColors")) {
@@ -4169,7 +4173,9 @@ public class CardFactoryUtil {
                 final AbilityFactory af = new AbilityFactory();
                 // System.out.println(cardName);
                 final SpellAbility sa = af.getAbility(ia.get(i), card);
-
+                if (sa.getAbilityFactory().getMapParams().containsKey("SetAsKicked")) {
+                    sa.setKickerAbility(true);
+                }
                 card.addSpellAbility(sa);
 
                 final String bbCost = card.getSVar("Buyback");

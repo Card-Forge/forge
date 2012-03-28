@@ -185,10 +185,10 @@ class CardFactoryEquipment {
         }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        if (cardName.equals("Hedron Matrix")) {
-            /*
-             * Equipped creature gets +X/+X, where X is its converted mana cost.
-             */
+        /*if (cardName.equals("Hedron Matrix")) {
+             //
+             //Equipped creature gets +X/+X, where X is its converted mana cost.
+             //
             final Ability equip = new Ability(card, "4") {
 
                 // not changed
@@ -289,10 +289,10 @@ class CardFactoryEquipment {
             card.addEquipCommand(onEquip);
             card.addUnEquipCommand(onUnEquip);
 
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Blade of the Bloodchief")) {
+        /*else*/ if (cardName.equals("Blade of the Bloodchief")) {
             final Ability triggeredAbility = new Ability(card, "0") {
                 @Override
                 public void resolve() {
