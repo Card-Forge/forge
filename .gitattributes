@@ -9489,6 +9489,7 @@ res/cardsfolder/t/treetop_sentinel.txt svneol=native#text/plain
 res/cardsfolder/t/treetop_village.txt svneol=native#text/plain
 res/cardsfolder/t/tremble.txt svneol=native#text/plain
 res/cardsfolder/t/tremor.txt svneol=native#text/plain
+res/cardsfolder/t/trench_gorger.txt -text
 res/cardsfolder/t/trench_wurm.txt svneol=native#text/plain
 res/cardsfolder/t/trenching_steed.txt svneol=native#text/plain
 res/cardsfolder/t/trepanation_blade.txt -text
@@ -9832,6 +9833,7 @@ res/cardsfolder/v/veteran_cavalier.txt svneol=native#text/plain
 res/cardsfolder/v/veteran_explorer.txt svneol=native#text/plain
 res/cardsfolder/v/veteran_of_the_depths.txt svneol=native#text/plain
 res/cardsfolder/v/veteran_swordsmith.txt svneol=native#text/plain
+res/cardsfolder/v/veterans_armaments.txt -text
 res/cardsfolder/v/veterans_reflexes.txt svneol=native#text/plain
 res/cardsfolder/v/veterans_voice.txt -text
 res/cardsfolder/v/vex.txt svneol=native#text/plain
