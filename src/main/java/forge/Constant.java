@@ -204,8 +204,7 @@ public final class Constant {
         Sideboard(true),
         /** Ante. */
         Ante(false);
-        
-        
+
         private final boolean holdsHiddenInfo;
         private Zone(boolean holdsHidden) {
             holdsHiddenInfo = holdsHidden;
@@ -255,7 +254,7 @@ public final class Constant {
 
         public boolean isKnown() {
             return !holdsHiddenInfo;
-        }        
+        }
     }
 
     /**

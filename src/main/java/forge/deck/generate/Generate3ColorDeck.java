@@ -148,7 +148,7 @@ public class Generate3ColorDeck {
         // remove cards that generated decks don't like
         Predicate<Card> toUse = pt == PlayerType.HUMAN ? GenerateDeckUtil.humanCanPlay : GenerateDeckUtil.aiCanPlay;
         CardList allCards = new CardList(toUse.select(AllZone.getCardFactory()));
-        
+
         // reduce to cards that match the colors
         CardList cl1 = allCards.getColor(this.color1);
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {

@@ -32,19 +32,19 @@ import forge.util.Predicate;
  */
 public class GenerateDeckUtil {
 
-    public static final Predicate<Card> aiCanPlay = new Predicate<Card>(){
+    public static final Predicate<Card> aiCanPlay = new Predicate<Card>() {
         @Override
         public boolean isTrue(Card c) {
             return !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True");
         }
     };
-    
-    public static final Predicate<Card> humanCanPlay = new Predicate<Card>(){
+
+    public static final Predicate<Card> humanCanPlay = new Predicate<Card>() {
         @Override
         public boolean isTrue(Card c) {
             return !c.getSVar("RemRandomDeck").equals("True");
         }
-    };    
+    };
     /**
      * 
      * Arrays of dual and tri-land cards.

@@ -93,11 +93,11 @@ public final class BoosterDraft implements IBoosterDraft {
         case Block: // Draft from cards by block or set
 
             List<CardBlock> blocks = new ArrayList<CardBlock>();
-            for(CardBlock b : Singletons.getModel().getBlocks()) {
+            for (CardBlock b : Singletons.getModel().getBlocks()) {
                 blocks.add(b);
             }
             final CardBlock block = GuiUtils.chooseOne("Choose Block", blocks);
-            
+
             final CardEdition[] cardSets = block.getSets();
             final String[] sets = new String[cardSets.length];
             for (int k = cardSets.length - 1; k >= 0; --k) {

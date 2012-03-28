@@ -106,8 +106,8 @@ public class ControlTabber extends MyObservable {
 
         madAddAnyCard = new MouseAdapter() { @Override
             public void mousePressed(final MouseEvent e) {
-                GuiDisplayUtil.devModeAddAnyCard(); } };                
-                
+                GuiDisplayUtil.devModeAddAnyCard(); } };
+
         madCounter = new MouseAdapter() { @Override
             public void mousePressed(final MouseEvent e) {
                 GuiDisplayUtil.devModeAddCounter(); } };
@@ -155,10 +155,9 @@ public class ControlTabber extends MyObservable {
         // DevMode: Tutor for card
         this.view.getLblTutor().removeMouseListener(madTutor);
         this.view.getLblTutor().addMouseListener(madTutor);
-        
+
         this.view.getAnyCard().removeMouseListener(madAddAnyCard);
         this.view.getAnyCard().addMouseListener(madAddAnyCard);
-        
 
         // DevMode: Add counter to permanent
         this.view.getLblCounterPermanent().removeMouseListener(madCounter);

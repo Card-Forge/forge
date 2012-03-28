@@ -14,57 +14,57 @@ import javax.swing.border.EmptyBorder;
  */
 @SuppressWarnings("serial")
 public final class DragTab extends JLabel implements ILocalRepaint {
-	private boolean selected = false;
-	private int priority = 10;
-	
-	public DragTab(final String title0) {
-		super(title0);
-		setToolTipText(title0);
-		setOpaque(false);
-		setSelected(false);
-		setBorder(new EmptyBorder(2, 5, 2, 5));
-		
-		this.addMouseListener(SRearrangingUtil.getRearrangeClickEvent());
-		this.addMouseMotionListener(SRearrangingUtil.getRearrangeDragEvent());
-	}
+    private boolean selected = false;
+    private int priority = 10;
 
-	public void setSelected(final boolean isSelected0) {
-		selected = isSelected0;
-		repaintThis();
-	}
+    public DragTab(final String title0) {
+        super(title0);
+        setToolTipText(title0);
+        setOpaque(false);
+        setSelected(false);
+        setBorder(new EmptyBorder(2, 5, 2, 5));
 
-	public void priorityDecrease() {
-		priority++;
-	}
+        this.addMouseListener(SRearrangingUtil.getRearrangeClickEvent());
+        this.addMouseMotionListener(SRearrangingUtil.getRearrangeDragEvent());
+    }
 
-	public void priorityOne() {
-		priority = 1;
-	}
-	
-	public int getPriority() {
-		return priority;
-	}
-	
-	public void repaintThis() {
+    public void setSelected(final boolean isSelected0) {
+        selected = isSelected0;
+        repaintThis();
+    }
+
+    public void priorityDecrease() {
+        priority++;
+    }
+
+    public void priorityOne() {
+        priority = 1;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void repaintThis() {
         final Dimension d = DragTab.this.getSize();
         repaint(0, 0, d.width, d.height);
-	}
+    }
 
-	@Override
-	public void paintComponent(final Graphics g) {
-		if(!selected) {
-			g.setColor(Color.white);
-			g.fillRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
-			g.setColor(Color.LIGHT_GRAY);
-			g.drawRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
-		}
-		else {
-			g.setColor(Color.orange);
-			g.fillRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
-			g.setColor(Color.red);
-			g.drawRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
-		}
+    @Override
+    public void paintComponent(final Graphics g) {
+        if (!selected) {
+            g.setColor(Color.white);
+            g.fillRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
+            g.setColor(Color.LIGHT_GRAY);
+            g.drawRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
+        }
+        else {
+            g.setColor(Color.orange);
+            g.fillRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
+            g.setColor(Color.red);
+            g.drawRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
+        }
 
-		super.paintComponent(g);
-	}
+        super.paintComponent(g);
+    }
 }

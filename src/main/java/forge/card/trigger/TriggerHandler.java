@@ -203,7 +203,7 @@ public class TriggerHandler {
 //        final String mode = mapParams.get("Mode");
         final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
         ret = type.createTrigger(mapParams, host, intrinsic);
-//        
+//
 //        if (mode.equals("AbilityCast")) {
 //            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
 //        } else if (mode.equals("Always")) {
@@ -328,7 +328,7 @@ public class TriggerHandler {
         if (this.suppressedModes.contains(mode)) {
             return;
         }
-        
+
         final Player playerAP = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         if (playerAP == null) {
             // This should only happen outside of games, so it's safe to just
@@ -418,8 +418,7 @@ public class TriggerHandler {
      */
     private boolean runSingleTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
         final Map<String, String> params = regtrig.getMapParams();
-        
-        
+
         if (regtrig.getMode() != mode) {
             return false; // Not the right mode.
         }

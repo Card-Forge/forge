@@ -1436,7 +1436,7 @@ public class CombatUtil {
         }
 
         TriggerType mode = trigger.getMode();
-        if (mode == TriggerType.Attacks ) {
+        if (mode == TriggerType.Attacks) {
             willTrigger = true;
             if (attacker.isAttacking()) {
                 return false; // The trigger should have triggered already

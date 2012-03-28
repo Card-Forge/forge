@@ -124,7 +124,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     /** The run params. */
     private Map<String, Object> runParams;
-    
+
     private TriggerType mode;
 
     /** The overriding ability. */

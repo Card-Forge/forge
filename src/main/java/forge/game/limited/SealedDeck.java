@@ -79,7 +79,7 @@ public class SealedDeck {
         } else if (sealedType.equals("Block")) {
 
             List<CardBlock> blocks = new ArrayList<CardBlock>();
-            for(CardBlock b : Singletons.getModel().getBlocks()) {
+            for (CardBlock b : Singletons.getModel().getBlocks()) {
                 blocks.add(b);
             }
             final CardBlock block = GuiUtils.chooseOne("Choose Block", blocks);

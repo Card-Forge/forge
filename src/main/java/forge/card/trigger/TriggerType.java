@@ -16,10 +16,9 @@ public enum TriggerType {
     Tapped(TriggerTaps.class),
     Untaps(TriggerUntaps.class),
     Taps(TriggerTaps.class),
-    
+
     ChangesZone(TriggerChangesZone.class),
-    
-    
+
     Clashed(TriggerClashed.class),
     TapsForMana(TriggerTapsForMana.class),
     CounterAdded(TriggerCounterAdded.class),
@@ -48,7 +47,7 @@ public enum TriggerType {
     Discarded(TriggerDiscarded.class),
     Shuffled(TriggerShuffled.class),
     LandPlayed(TriggerLandPlayed.class);
-    
+
     private final Class<? extends Trigger> classTrigger;
     private TriggerType(Class<? extends Trigger> clasz) {
         classTrigger = clasz;
@@ -67,9 +66,9 @@ public enum TriggerType {
             }
         }
 
-        throw new RuntimeException("Element " + value + " not found in TriggerType enum" );
+        throw new RuntimeException("Element " + value + " not found in TriggerType enum");
     }
-    
+
     /**
      * TODO: Write javadoc for this method.
      * @param mapParams
@@ -82,7 +81,7 @@ public enum TriggerType {
         Constructor<? extends Trigger>[] cc = (Constructor<? extends Trigger>[]) classTrigger.getDeclaredConstructors();
         for (Constructor<? extends Trigger> c : cc) {
             Class<?>[] pp = c.getParameterTypes();
-            if ( pp[0] == HashMap.class ) {
+            if (pp[0] == HashMap.class) {
                 try {
                     Trigger res = c.newInstance(mapParams, host, intrinsic);
                     res.setMode(this);
