@@ -31,6 +31,7 @@ import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
 import forge.Singletons;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.control.input.Input;
 import forge.gui.GuiUtils;
 
@@ -288,6 +289,16 @@ public class TargetSelection {
         // If all cards must be from different zones
         if (tgt.isDifferentZone() && !targeted.isEmpty()) {
             choices = choices.getController(targeted.get(0).getController().getOpponent());
+        }
+        // If the cards must have a specific controller
+        if (tgt.getDefinedController() != null) {
+            ArrayList<Player> pl = AbilityFactory.getDefinedPlayers(card, tgt.getDefinedController(), this.ability);
+            if (pl != null && !pl.isEmpty()) {
+                Player controller = pl.get(0);
+                choices = choices.getController(controller);
+            } else {
+                choices.clear();
+            }
         }
 
         if (zone.contains(Constant.Zone.Battlefield)) {
