@@ -32,7 +32,7 @@ public class CardDamageHistory {
      */
     public final void setCreatureAttackedThisCombat(final boolean hasAttacked) {
         this.creatureAttackedThisCombat = hasAttacked;
-        
+
         if (hasAttacked) {
             this.setCreatureAttackedThisTurn(true);
         }
@@ -331,6 +331,6 @@ public class CardDamageHistory {
      */
     public final boolean getDealtCombatDmgToComputerThisTurn() {
         return this.dealtCombatDmgToComputerThisTurn;
-    }    
-    
+    }
+
 }

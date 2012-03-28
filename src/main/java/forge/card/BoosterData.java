@@ -18,7 +18,7 @@ public class BoosterData {
     public final String getLandEdition() {
         return landEdition;
     }
-    
+
     private final int nCommon;
     private final int nUncommon;
     private final int nRare;
@@ -188,8 +188,9 @@ public class BoosterData {
             int nFoilRate = section.getInt("FoilRate", 68);
             String edition = section.get("Set");
             String editionLand = section.get("LandSet");
-            if( editionLand == null )
+            if (editionLand == null) {
                 editionLand = edition;
+            }
             return new BoosterData(edition, editionLand, nC, nU, nR, nS, nDf, nLand, nFoilRate);
         }
     }

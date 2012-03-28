@@ -18,7 +18,6 @@
 package forge;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -89,7 +88,7 @@ public class ComputerUtilAttack {
         for (final Card attacker : in) {
             final ArrayList<Trigger> registeredTriggers = attacker.getTriggers();
             for (final Trigger trigger : registeredTriggers) {
-                if( trigger.getMode() == TriggerType.Attacks) {
+                if (trigger.getMode() == TriggerType.Attacks) {
                     list.add(attacker);
                 }
             }
@@ -309,7 +308,7 @@ public class ComputerUtilAttack {
             totalPoison += CombatUtil.poisonIfUnblocked(attacker, AllZone.getComputerPlayer(), null);
         }
 
-        if(AllZone.getComputerPlayer().getLife() <= totalAttack
+        if (AllZone.getComputerPlayer().getLife() <= totalAttack
                 && !AllZone.getComputerPlayer().cantLoseForZeroOrLessLife()
                 && AllZone.getComputerPlayer().canLoseLife()) {
             return true;

@@ -7,8 +7,8 @@ package forge;
 public enum CardCharactersticName {
     Original,
     FaceDown,
-    Flipped, 
-    Cloner, 
+    Flipped,
+    Cloner,
     Transformed,
     Alternate,
     Cloned;
@@ -31,9 +31,13 @@ public enum CardCharactersticName {
                 return v;
             }
         }
-        if ("Flip".equalsIgnoreCase(value)) return CardCharactersticName.Flipped;
-        if ("DoubleFaced".equalsIgnoreCase(value)) return CardCharactersticName.Transformed;
-        
-        throw new IllegalArgumentException("No element named " + value + " in enum CardCharactersticName");        
+        if ("Flip".equalsIgnoreCase(value)) {
+            return CardCharactersticName.Flipped;
+        }
+        if ("DoubleFaced".equalsIgnoreCase(value)) {
+            return CardCharactersticName.Transformed;
+        }
+
+        throw new IllegalArgumentException("No element named " + value + " in enum CardCharactersticName");
     }
 }

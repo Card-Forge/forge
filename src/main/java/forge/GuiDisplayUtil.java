@@ -1504,8 +1504,8 @@ public final class GuiDisplayUtil {
             Card forgeCard = cp.toForgeCard(AllZone.getHumanPlayer());
             Singletons.getModel().getGameAction().moveToHand(forgeCard);
         }
-    }    
-    
+    }
+
     /**
      * <p>
      * devModeAddCounter.

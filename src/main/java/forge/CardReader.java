@@ -493,7 +493,7 @@ public class CardReader implements Runnable {
                 final CardCharactersticName value = CardCharactersticName.smartValueOf(line.substring("AlternateMode:".length()));
                 if (value == CardCharactersticName.Flipped) {
                     card.setFlip(true);
-                } else if (value == CardCharactersticName.Transformed ) {
+                } else if (value == CardCharactersticName.Transformed) {
                     card.setDoubleFaced(true);
                 } else {
                     card.setTransformable(value);

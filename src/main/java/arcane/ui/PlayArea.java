@@ -94,7 +94,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         final int tokenStackMax = 5;
         // Collect lands.
         final CardStackRow allLands = new CardStackRow();
-        
+
         outerLoop:
         //
         for (final CardPanel panel : this.getCardPanels()) {
@@ -349,10 +349,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
         // Remove the wrapped stacks from the source row.
-        for( int iRow = 0; iRow < rows.size(); iRow++ ) {
+        for (int iRow = 0; iRow < rows.size(); iRow++) {
             CardStackRow row = rows.get(iRow);
-            if ( row != null )
+            if (row != null) {
                 sourceRow.removeAll(row);
+            }
         }
         return insertIndex;
     }
