@@ -4896,6 +4896,7 @@ res/cardsfolder/k/krosan_colossus.txt svneol=native#text/plain
 res/cardsfolder/k/krosan_constrictor.txt svneol=native#text/plain
 res/cardsfolder/k/krosan_grip.txt svneol=native#text/plain
 res/cardsfolder/k/krosan_groundshaker.txt svneol=native#text/plain
+res/cardsfolder/k/krosan_reclamation.txt -text
 res/cardsfolder/k/krosan_restorer.txt svneol=native#text/plain
 res/cardsfolder/k/krosan_tusker.txt svneol=native#text/plain
 res/cardsfolder/k/krosan_verge.txt svneol=native#text/plain
@@ -5492,6 +5493,7 @@ res/cardsfolder/m/memory_erosion.txt svneol=native#text/plain
 res/cardsfolder/m/memory_jar.txt -text
 res/cardsfolder/m/memory_lapse.txt svneol=native#text/plain
 res/cardsfolder/m/memory_plunder.txt -text
+res/cardsfolder/m/memorys_journey.txt -text
 res/cardsfolder/m/mending_hands.txt svneol=native#text/plain
 res/cardsfolder/m/meng_huo_barbarian_king.txt svneol=native#text/plain
 res/cardsfolder/m/meng_huos_horde.txt svneol=native#text/plain
