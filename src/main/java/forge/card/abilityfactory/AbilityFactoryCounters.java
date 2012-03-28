@@ -1347,12 +1347,38 @@ public class AbilityFactoryCounters {
     private static boolean proliferateShouldPlayAI(final SpellAbility sa) {
         boolean chance = true;
         final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
+        if (subAb != null && !subAb.chkAIDrawback()) {
+            return false;
         }
+        CardList hperms = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        CardList cperms = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        cperms = cperms.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card crd) {
+                for (final Counters c1 : Counters.values()) {
+                    if (crd.getCounters(c1) != 0 && !CardFactoryUtil.isNegativeCounter(c1)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
-        // TODO Make sure Human has poison counters or there are some counters
-        // we want to proliferate
+        hperms = hperms.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card crd) {
+                for (final Counters c1 : Counters.values()) {
+                    if (crd.getCounters(c1) != 0 && CardFactoryUtil.isNegativeCounter(c1)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+        if ((cperms.size() == 0) && (hperms.size() == 0) && (AllZone.getHumanPlayer().getPoisonCounters() == 0)) {
+            return false;
+        }
         return chance;
     }
 
@@ -1391,7 +1417,6 @@ public class AbilityFactoryCounters {
      */
     private static void proliferateResolve(final AbilityFactory af, final SpellAbility sa) {
         CardList hperms = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-
         CardList cperms = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
 
         if (af.getHostCard().getController().isHuman()) {
@@ -1458,36 +1483,28 @@ public class AbilityFactoryCounters {
             cperms = cperms.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card crd) {
-                    int pos = 0;
-                    int neg = 0;
                     for (final Counters c1 : Counters.values()) {
                         if (crd.getCounters(c1) != 0) {
-                            if (CardFactoryUtil.isNegativeCounter(c1)) {
-                                neg++;
-                            } else {
-                                pos++;
+                            if (!CardFactoryUtil.isNegativeCounter(c1)) {
+                                return true;
                             }
                         }
                     }
-                    return pos > neg;
+                    return false;
                 }
             });
 
             hperms = hperms.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card crd) {
-                    int pos = 0;
-                    int neg = 0;
                     for (final Counters c1 : Counters.values()) {
                         if (crd.getCounters(c1) != 0) {
                             if (CardFactoryUtil.isNegativeCounter(c1)) {
-                                neg++;
-                            } else {
-                                pos++;
+                                return true;
                             }
                         }
                     }
-                    return pos < neg;
+                    return false;
                 }
             });
 
@@ -1518,22 +1535,24 @@ public class AbilityFactoryCounters {
             } // else
             sb.append("</html>");
 
-            // add a counter for each counter type, if it would benefit the
+            // add a counter of one counter type, if it would benefit the
             // computer
             for (final Card c : cperms) {
                 for (final Counters c1 : Counters.values()) {
-                    if (c.getCounters(c1) != 0) {
+                    if (c.getCounters(c1) != 0 && !CardFactoryUtil.isNegativeCounter(c1)) {
                         c.addCounter(c1, 1);
+                        break;
                     }
                 }
             }
 
-            // add a counter for each counter type, if it would screw over the
+            // add a counter of one counter type, if it would screw over the
             // player
             for (final Card c : hperms) {
                 for (final Counters c1 : Counters.values()) {
-                    if (c.getCounters(c1) != 0) {
+                    if (c.getCounters(c1) != 0 && CardFactoryUtil.isNegativeCounter(c1)) {
                         c.addCounter(c1, 1);
+                        break;
                     }
                 }
             }
