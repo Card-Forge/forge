@@ -9136,6 +9136,7 @@ res/cardsfolder/t/terramorphic_expanse.txt svneol=native#text/plain
 res/cardsfolder/t/terrarion.txt -text
 res/cardsfolder/t/terravore.txt svneol=native#text/plain
 res/cardsfolder/t/territorial_baloth.txt svneol=native#text/plain
+res/cardsfolder/t/territorial_dispute.txt -text
 res/cardsfolder/t/terror.txt svneol=native#text/plain
 res/cardsfolder/t/test_of_endurance.txt svneol=native#text/plain
 res/cardsfolder/t/testament_of_faith.txt svneol=native#text/plain
