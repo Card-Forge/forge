@@ -284,6 +284,18 @@ Undead Alchemist
 - xCount now supports EquippedCardManaCost.
 - Added the code block to support "SetAsKicked" to mark nonPermanent kicked spells from the script line. Will start converting soon.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CardFactoryUtil can now count life total and cards in hand of targeted players
+- Added some real code to proliferateShouldPlayAI.
+- Fixed proliferateResolve for the AI.
+- shortened effect name for Flames of the Blood Hand
+- Removed RemAIDeck from Thicket Elemental
+- CheckStyle.
+- Added the parameter "TargetsWithDefinedController" which filters possible targets controller's with getDefinedPlayers.
+- The moveToLibrary function will now update the player label observer.
+- static keyword may be accessed as method of Trigger 
+- triggers are stored as list (unlike array)
+- Converted three cards with ETB triggers from AB to DB.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -385,6 +397,23 @@ Rooting Kavu
 Flames of the Blood Hand
 Imagecrafter
 Tattoo Ward
+Pulse of the Dross
+Pulse of the Forge
+Awe Strike
+Tsabo's Decree
+Toxic Stench
+Dwell on the Past
+Krosan Reclamation
+Memory's Journey
+Shield Dancer
+Trench Gorger
+Veteran's Armaments
+Undying Flames
+Recross the Paths
+Banefire
+Stream of Consciousness
+Tribal Unity
+Ventifact Bottle
 
 
 end
