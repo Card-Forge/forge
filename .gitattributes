@@ -8762,6 +8762,7 @@ res/cardsfolder/s/straw_golem.txt svneol=native#text/plain
 res/cardsfolder/s/straw_soldiers.txt svneol=native#text/plain
 res/cardsfolder/s/stream_hopper.txt svneol=native#text/plain
 res/cardsfolder/s/stream_of_acid.txt svneol=native#text/plain
+res/cardsfolder/s/stream_of_consciousness.txt -text
 res/cardsfolder/s/stream_of_life.txt svneol=native#text/plain
 res/cardsfolder/s/stream_of_unconsciousness.txt svneol=native#text/plain
 res/cardsfolder/s/streambed_aquitects.txt -text
