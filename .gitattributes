@@ -9813,6 +9813,7 @@ res/cardsfolder/v/venser_the_sojourner.txt svneol=native#text/plain
 res/cardsfolder/v/vensers_journal.txt svneol=native#text/plain
 res/cardsfolder/v/vensers_sliver.txt svneol=native#text/plain
 res/cardsfolder/v/vent_sentinel.txt svneol=native#text/plain
+res/cardsfolder/v/ventifact_bottle.txt -text
 res/cardsfolder/v/verdant_catacombs.txt svneol=native#text/plain
 res/cardsfolder/v/verdant_eidolon.txt svneol=native#text/plain
 res/cardsfolder/v/verdant_embrace.txt -text
