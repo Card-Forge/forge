@@ -79,7 +79,7 @@ public enum VSubmenuUtilities implements IVSubmenu {
 
         pnlContent.add(btnDownloadSetPics, constraintsBTN);
         pnlContent.add(new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-                .text("Download full card picture sets for all cards from legacy releases of MTG.")
+                .text("Download all pictures of each card (one for each set the card appeared in)")
                 .fontStyle(Font.ITALIC).build(), constraintsLBL);
 
         pnlContent.add(btnDownloadQuestImages, constraintsBTN);
