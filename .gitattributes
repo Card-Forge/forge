@@ -622,6 +622,7 @@ res/cardsfolder/b/balthor_the_stout.txt svneol=native#text/plain
 res/cardsfolder/b/bamboozle.txt -text
 res/cardsfolder/b/bandage.txt svneol=native#text/plain
 res/cardsfolder/b/bane_of_the_living.txt svneol=native#text/plain
+res/cardsfolder/b/banefire.txt -text
 res/cardsfolder/b/baneful_omen.txt -text
 res/cardsfolder/b/baneslayer_angel.txt svneol=native#text/plain
 res/cardsfolder/b/banewasp_affliction.txt -text svneol=unset#text/plain
