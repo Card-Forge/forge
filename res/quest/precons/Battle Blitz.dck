@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Battle Blitz
+Description=At first, the "Battle Blitz" deck looks like a classic red-white deck. It's got some low-cost attackers, it's got some creatures with first strike (or, in the case of Hearthfire Hobgoblin, double strike), and it's got some burn spells. But then it starts getting tricky!
+Deck Type=constructed
+Set=EVE
+Image=battle_blitz.jpg
+[main]
+1 Revelsong Horn|SHM
+13 Mountain|SHM
+11 Plains|SHM
+1 Balefire Liege|EVE
+2 Ballynock Cohort|SHM
+2 Ballynock Trapper|EVE
+2 Battlegate Mimic|EVE
+2 Belligerent Hatchling|EVE
+2 Duergar Assailant|EVE
+3 Duergar Mine-Captain|EVE
+1 Hatchet Bully|EVE
+1 Hateflayer|EVE
+3 Hearthfire Hobgoblin|EVE
+2 Kithkin Spellduster|EVE
+2 Outrage Shaman|EVE
+1 Patrol Signaler|EVE
+1 Safehold Sentry|SHM
+2 Power of Fire|SHM
+2 Scourge of the Nobilis|EVE
+2 Niveous Wisps|SHM
+2 Puncture Blast|EVE
+2 Puncture Bolt|SHM
+[sideboard]
