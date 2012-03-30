@@ -2473,12 +2473,12 @@ res/cardsfolder/d/duskhunter_bat.txt svneol=native#text/plain
 res/cardsfolder/d/duskmantle_house_of_shadow.txt svneol=native#text/plain
 res/cardsfolder/d/duskrider_falcon.txt svneol=native#text/plain
 res/cardsfolder/d/duskrider_peregrine.txt svneol=native#text/plain
+res/cardsfolder/d/duskwalker.txt -text
 res/cardsfolder/d/duskworker.txt svneol=native#text/plain
 res/cardsfolder/d/dust_bowl.txt svneol=native#text/plain
 res/cardsfolder/d/dust_corona.txt svneol=native#text/plain
 res/cardsfolder/d/dust_elemental.txt svneol=native#text/plain
 res/cardsfolder/d/dust_to_dust.txt svneol=native#text/plain
-res/cardsfolder/d/dustwalker.txt -text
 res/cardsfolder/d/dwarven_armorer.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_armory.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_berserker.txt svneol=native#text/plain
