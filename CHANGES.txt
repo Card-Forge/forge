@@ -296,6 +296,10 @@ Undead Alchemist
 - triggers are stored as list (unlike array)
 - Converted three cards with ETB triggers from AB to DB.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Rupture (the sacrifice was a cost instead of an ability)
+- Attempt at improving the description of the "Download LQ Set Pictures" button.
+- CheckStyle.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -414,6 +418,12 @@ Banefire
 Stream of Consciousness
 Tribal Unity
 Ventifact Bottle
+Territorial Dispute
+Stalking Yeti
+Anathemancer
+Gomazoa
+Grab the Reins
+Dispersal Shield
 
 
 end
