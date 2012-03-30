@@ -94,11 +94,15 @@ public enum VSubmenuQuestData implements IVSubmenu {
 
         final Map<String, String> preconDescriptions = new HashMap<String, String>();
         IStorageView<PreconDeck> preconDecks = QuestController.getPrecons();
-        for (String preconDeck : preconDecks.getNames()) {
-            cbxPrecon.addItem(preconDeck);
-            String description = preconDecks.get(preconDeck).getDescription();
+        for (PreconDeck preconDeck : preconDecks) {
+            if (preconDeck.getRecommendedDeals().getMinWins() > 0) {
+                continue;
+            }
+            String name = preconDeck.getName();
+            cbxPrecon.addItem(name);
+            String description = preconDeck.getDescription();
             description = "<html>" + WordUtils.wrap(description, 40, "<br>", false) + "</html>";
-            preconDescriptions.put(preconDeck, description);
+            preconDescriptions.put(name, description);
         }
 
         cbxPrecon.setRenderer(new BasicComboBoxRenderer() {

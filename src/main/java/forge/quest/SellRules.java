@@ -76,7 +76,13 @@ public class SellRules {
         return cost;
     }
 
-
-
+    /**
+     * Gets the minWins.
+     *
+     * @return the minWins
+     */
+    public final int getMinWins() {
+        return minWins;
+    }
 
 }
