@@ -2256,6 +2256,7 @@ res/cardsfolder/d/dispatch.txt svneol=native#text/plain
 res/cardsfolder/d/dispel.txt svneol=native#text/plain
 res/cardsfolder/d/dispellers_capsule.txt svneol=native#text/plain
 res/cardsfolder/d/dispense_justice.txt svneol=native#text/plain
+res/cardsfolder/d/dispersal_shield.txt -text
 res/cardsfolder/d/disperse.txt svneol=native#text/plain
 res/cardsfolder/d/dispersing_orb.txt svneol=native#text/plain
 res/cardsfolder/d/disrupt.txt svneol=native#text/plain
