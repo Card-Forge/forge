@@ -1,8 +1,8 @@
-Forge Beta: 0#-##-2012 ver 1.#.# rev 14###
+Forge Beta: 03-30-2012 ver 1.2.6 rev 14985
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-10### cards in total.
+10524 cards in total.
 
 
 We have a new skin by WompWomp named "Firebloom" included in this version.
@@ -304,126 +304,142 @@ Undead Alchemist
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+Agetian
+Catatafish
+Dave
+Doublestrike
+Fnoed
+Friar Sol
+Jeff Wadsworth
+Marc
+Max mtg
+SBeauchamp
+Skiera
+Slapshot5
+Sloth
+Squee1968
+WompWomp
+Xitax
+Chris H
 
 
 Added many cards, including:
 
-Cosmic Larva
-Peer Pressure
-Brooding Saurian
-Rooftop Storm
-Fist of Suns
-Mask of the Mimic
-Soltari Guerrillas
-Hesitation
-Crovax the Cursed
-Psychic Miasma
-Talon of Pain
-Kjeldoran Royal Guards
-Mirror Strike
-Turn the Tables
-Soratami Cloud Chariot
-Sokenzan Renegade
-Shape Stealer
-Sekki Seasons' Guide
-Divine Reckoning
-Deathrender
-Dustwalker
-Faerie Squadron
-Pouncing Kavu
-Shifty Doppelganger
-Scent of Brine
-Scent of Cinder
-Scent of Ivy
-Searing Spear Askari
-Seedling Charm
-Silent Assassin
-Pure Intentions
-Scent of Jasmine
-Scrabbling Claws
-Scout's Warning
-Seht's Tiger
-Oriss, Samite Guardian
-Quicken
-Spellweaver Helix
-Knowledge Pool
-Ward Sliver
-Disarm
-Fulgent Distraction
-Endless Horizons
-Flickering Ward
-Goblin Brawler
-Blinding Beam
-Kyren Toy
-Kyren Archive
-Tel-Jilad Stylus
-Urza's Filter
 Aleatory
-Chaotic Strike
-Head Games
-Surprise Deployment
-Decree of Pain
-Thought Prison
-Twinning Glass
-Keeper of the Dead
-Searing Blaze
-Ebony Charm
-Somnophore
-Soothsaying
-Soul's Grace
-Soul's Majesty
-Silvergill Douser
-Urge to Feed
-Kor Outfitter
+Anathemancer
 Auriok Windwalker
-Magnetic Theft
-Spiritual Focus
-Stir the Pride
-Soul's Fire
-Scorching Lava
-Mass Polymorph
-Scythe of the Wretched
+Awe Strike
+Banefire
+Blinding Beam
+Brooding Saurian
+Chaotic Strike
 Clone Shell
-Sway of Illusion
-Syphon Flesh
-Syphon Mind
-Recurring Insight
-Cryptoplasm
-Temporal Cascade
-Thermal Flux
+Cosmic Larva
+Crovax the Cursed
 Crown of Ascension
 Crown of Awe
 Crown of Fury
 Crown of Suspicion
 Crown of Vigor
-Rooting Kavu
-Flames of the Blood Hand
-Imagecrafter
-Tattoo Ward
-Pulse of the Dross
-Pulse of the Forge
-Awe Strike
-Tsabo's Decree
-Toxic Stench
+Cryptoplasm
+Deathrender
+Decree of Pain
+Disarm
+Dispersal Shield
+Divine Reckoning
+Dustwalker
 Dwell on the Past
-Krosan Reclamation
-Memory's Journey
-Shield Dancer
-Trench Gorger
-Veteran's Armaments
-Undying Flames
-Recross the Paths
-Banefire
-Stream of Consciousness
-Tribal Unity
-Ventifact Bottle
-Territorial Dispute
-Stalking Yeti
-Anathemancer
+Ebony Charm
+Endless Horizons
+Faerie Squadron
+Fist of Suns
+Flames of the Blood Hand
+Flickering Ward
+Fulgent Distraction
+Goblin Brawler
 Gomazoa
 Grab the Reins
-Dispersal Shield
+Head Games
+Hesitation
+Imagecrafter
+Keeper of the Dead
+Kjeldoran Royal Guards
+Knowledge Pool
+Kor Outfitter
+Krosan Reclamation
+Kyren Archive
+Kyren Toy
+Magnetic Theft
+Mask of the Mimic
+Mass Polymorph
+Memory's Journey
+Mirror Strike
+Oriss, Samite Guardian
+Peer Pressure
+Pouncing Kavu
+Psychic Miasma
+Pulse of the Dross
+Pulse of the Forge
+Pure Intentions
+Quicken
+Recross the Paths
+Recurring Insight
+Rooftop Storm
+Rooting Kavu
+Scent of Brine
+Scent of Cinder
+Scent of Ivy
+Scent of Jasmine
+Scorching Lava
+Scout's Warning
+Scrabbling Claws
+Scythe of the Wretched
+Searing Blaze
+Searing Spear Askari
+Seedling Charm
+Seht's Tiger
+Sekki Seasons' Guide
+Shape Stealer
+Shield Dancer
+Shifty Doppelganger
+Silent Assassin
+Silvergill Douser
+Sokenzan Renegade
+Soltari Guerrillas
+Somnophore
+Soothsaying
+Soratami Cloud Chariot
+Soul's Fire
+Soul's Grace
+Soul's Majesty
+Spellweaver Helix
+Spiritual Focus
+Stalking Yeti
+Stir the Pride
+Stream of Consciousness
+Surprise Deployment
+Sway of Illusion
+Syphon Flesh
+Syphon Mind
+Talon of Pain
+Tattoo Ward
+Tel-Jilad Stylus
+Temporal Cascade
+Territorial Dispute
+Thermal Flux
+Thought Prison
+Toxic Stench
+Trench Gorger
+Tribal Unity
+Tsabo's Decree
+Turn the Tables
+Twinning Glass
+Undying Flames
+Urge to Feed
+Urza's Filter
+Ventifact Bottle
+Veteran's Armaments
+Ward Sliver
 
 
 end
