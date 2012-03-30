@@ -1097,7 +1097,7 @@ public class GameAction {
      */
     public final boolean sacrifice(final Card c) {
         if (c.isImmutable()) {
-            System.out.println("Trying to sacrifice immutables");
+            System.out.println("Trying to sacrifice immutables: " + c);
             return false;
         }
         this.sacrificeDestroy(c);
