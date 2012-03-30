@@ -5171,6 +5171,7 @@ res/cardsfolder/l/loafing_giant.txt -text svneol=unset#text/plain
 res/cardsfolder/l/loam_dweller.txt svneol=native#text/plain
 res/cardsfolder/l/loam_lion.txt svneol=native#text/plain
 res/cardsfolder/l/loamdragger_giant.txt svneol=native#text/plain
+res/cardsfolder/l/loaming_shaman.txt -text
 res/cardsfolder/l/lobotomy.txt svneol=native#text/plain
 res/cardsfolder/l/loch_korrigan.txt svneol=native#text/plain
 res/cardsfolder/l/lockjaw_snapper.txt svneol=native#text/plain
