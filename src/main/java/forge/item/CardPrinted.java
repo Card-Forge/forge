@@ -293,7 +293,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             c.setCurSetCode(this.getEdition());
             c.setRandomPicture(this.artIndex + 1);
             c.setImageFilename(this.getImageFilename());
-            
+
             if (c.hasAlternateState()) {
                 if (c.isFlip()) {
                     c.setState(CardCharactersticName.Flipped);
@@ -305,12 +305,12 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
                 c.setState(CardCharactersticName.Original);
             }
         }
-        
+
         final int cntVariants = getCard().getEditionInfo(getEdition()).getCopiesCount();
         if (cntVariants > 1) {
             c.setRandomPicture(MyRandom.getRandom().nextInt(cntVariants - 1) + 1);
             c.setImageFilename(CardUtil.buildFilename(c));
-        }        
+        }
         // else throw "Unsupported card";
         return c;
     }

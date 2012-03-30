@@ -454,8 +454,8 @@ public class TriggerHandler {
         if (torporOrbs.size() != 0 && mode == TriggerType.ChangesZone) {
             String destination = params.get("Destination");
             // if destination is not set, or set to 'battlefield' or 'any'
-            if (null == destination || Zone.Battlefield.toString().equals(destination) || "Any".equals(destination) ) {
-                if (params.get("ValidCard").contains("Creature") 
+            if (null == destination || Zone.Battlefield.toString().equals(destination) || "Any".equals(destination)) {
+                if (params.get("ValidCard").contains("Creature")
                 || (params.get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature())) {
                     return false;
                 }

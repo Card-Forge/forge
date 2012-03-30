@@ -534,15 +534,16 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private void awardBooster() {
         final List<GameFormat> formats = new ArrayList<GameFormat>();
         String prefferedFormat = Singletons.getModel().getQuestPreferences().getPreference(QPref.BOOSTER_FORMAT);
-        
+
         int index = 0, i = 0;
         for (GameFormat f : Singletons.getModel().getFormats()) {
             formats.add(f);
-            if (f.toString().equals(prefferedFormat)) 
+            if (f.toString().equals(prefferedFormat)) {
                 index = i;
+            }
             i++;
         }
-        
+
         final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1, formats);
         ch.show(index);
 

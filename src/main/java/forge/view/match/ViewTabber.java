@@ -518,7 +518,7 @@ public class ViewTabber extends JPanel {
     public DevLabel getLblTutor() {
         return this.lblTutor;
     }
-    
+
     public DevLabel getAnyCard() {
         return this.lblAddCard;
     }
