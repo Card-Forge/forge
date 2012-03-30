@@ -1,4 +1,4 @@
-Forge Beta: 03-30-2012 ver 1.2.6 rev 14985
+Forge Beta: 03-30-2012 ver 1.2.6 rev 14987
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
@@ -299,6 +299,9 @@ Undead Alchemist
 - Fixed Rupture (the sacrifice was a cost instead of an ability)
 - Attempt at improving the description of the "Download LQ Set Pictures" button.
 - CheckStyle.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
+- Fixed Silent Assassin.
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
