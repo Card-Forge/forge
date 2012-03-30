@@ -2,9 +2,7 @@ Name:Hound Pet
 ManaCost:no cost
 Colors:red
 Types:Creature Hound Pet
-Text:Level 4 Hound Pet
 PT:2/1
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrainedHoundAttack | TriggerDescription$ Whenever CARDNAME attacks alone, it gets +2/+0 until end of turn.
-SVar:TrainedHoundAttack:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
+A:AB$ Pump | Cost$ 1 X | ValidCards$ Card.Self | NumAtt$ +X | KW$ HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ CARDNAME gets +X/+0 until end of turn. Sacrifice it at the beginning of the next end step.
 End

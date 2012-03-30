@@ -10790,6 +10790,10 @@ res/pics_product/tournamentpacks/TSP.jpg -text
 res/pics_product/tournamentpacks/USG.jpg -text
 res/product-images.txt -text
 res/quest/all-prices.txt svneol=native#text/plain
+res/quest/bazaar/ape_pet_l1.txt -text
+res/quest/bazaar/ape_pet_l2.txt -text
+res/quest/bazaar/ape_pet_l3.txt -text
+res/quest/bazaar/ape_pet_l4.txt -text
 res/quest/bazaar/bird_pet_l1.txt -text
 res/quest/bazaar/bird_pet_l2.txt -text
 res/quest/bazaar/bird_pet_l3.txt -text

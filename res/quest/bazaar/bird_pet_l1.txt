@@ -1,8 +1,6 @@
 Name:Bird Pet
 ManaCost:no cost
-Colors:white
+Colors:blue
 Types:Creature Bird Pet
-Text:Level 1 Bird Pet
-PT:0/1
-K:Flying
+PT:1/1
 End

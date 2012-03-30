@@ -1,7 +1,7 @@
 Name:Wolf Pet
 ManaCost:no cost
-Colors:green
+Colors:white
 Types:Creature Wolf Pet
-Text:Level 3 Wolf Pet
-PT:2/2
+PT:2/1
+K:First Strike
 End

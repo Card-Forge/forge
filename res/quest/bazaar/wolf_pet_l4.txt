@@ -1,8 +1,8 @@
 Name:Wolf Pet
 ManaCost:no cost
-Colors:green
+Colors:white
 Types:Creature Wolf Pet
-Text:Level 4 Wolf Pet
-PT:2/2
-K:Flanking
+PT:2/1
+K:First Strike
+K:Vigilance
 End
