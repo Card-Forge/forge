@@ -18,7 +18,6 @@
 package forge;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import forge.Constant.Zone;
 

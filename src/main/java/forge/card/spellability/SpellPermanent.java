@@ -17,7 +17,6 @@
  */
 package forge.card.spellability;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import forge.AllZone;

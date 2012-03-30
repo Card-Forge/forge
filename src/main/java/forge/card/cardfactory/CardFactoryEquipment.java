@@ -19,16 +19,9 @@ package forge.card.cardfactory;
 
 import java.util.ArrayList;
 
-import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
-import forge.CardUtil;
-import forge.Command;
-import forge.Constant;
 import forge.Counters;
-import forge.PhaseHandler;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.trigger.Trigger;
