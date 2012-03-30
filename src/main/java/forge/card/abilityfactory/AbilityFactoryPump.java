@@ -1363,10 +1363,8 @@ public class AbilityFactoryPump {
         this.params = this.abilityFactory.getMapParams();
         final int defense = this.getNumDefense(sa);
 
+        // prevent runaway activations
         final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn()); // to
-        // prevent
-        // runaway
-        // activations
 
         if (this.params.containsKey("ValidCards")) {
             valid = this.params.get("ValidCards");
@@ -1376,6 +1374,13 @@ public class AbilityFactoryPump {
         comp = comp.getValidCards(valid, this.hostCard.getController(), this.hostCard);
         CardList human = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         human = human.getValidCards(valid, this.hostCard.getController(), this.hostCard);
+
+        final Target tgt = sa.getTarget();
+        if (tgt != null && sa.canTarget(AllZone.getHumanPlayer()) && params.containsKey("IsCurse")) {
+            tgt.resetTargets();
+            sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            comp = new CardList();
+        }
 
         // only count creatures that can attack
         comp = comp.filter(new CardListFilter() {
