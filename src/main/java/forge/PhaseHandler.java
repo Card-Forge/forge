@@ -380,10 +380,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 if (!AllZone.getCombat().setAssignedFirstStrikeDamage()) {
                     Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
                 } else {
-                    if (!this.isPreventCombatDamageThisTurn()) {
-                        Combat.dealAssignedDamage();
-                    }
-
+                    Combat.dealAssignedDamage();
                     Singletons.getModel().getGameAction().checkStateEffects();
                     CombatUtil.showCombat();
                 }
@@ -397,11 +394,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 AllZone.getCombat().verifyCreaturesInPlay();
 
                 AllZone.getCombat().setAssignedDamage();
-
-                if (!this.isPreventCombatDamageThisTurn()) {
-                    Combat.dealAssignedDamage();
-                }
-
+                Combat.dealAssignedDamage();
                 Singletons.getModel().getGameAction().checkStateEffects();
                 CombatUtil.showCombat();
             }

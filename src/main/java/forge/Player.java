@@ -599,6 +599,10 @@ public abstract class Player extends GameEntity {
             return damage;
         }
 
+        if (isCombat && Singletons.getModel().getGameState().getPhaseHandler().isPreventCombatDamageThisTurn()) {
+            return 0;
+        }
+
         if (this.hasProtectionFrom(source)) {
             return 0;
         }
@@ -801,7 +805,7 @@ public abstract class Player extends GameEntity {
         repParams.put("DamageSource", source);
         repParams.put("DamageAmount", damage);
         repParams.put("IsCombat", isCombat);
-        repParams.put("Prevention", false);
+        repParams.put("Prevention", true);
 
         if (AllZone.getReplacementHandler().run(repParams)) {
             return 0;

@@ -7724,6 +7724,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             return damageIn;
         }
 
+        if (isCombat && Singletons.getModel().getGameState().getPhaseHandler().isPreventCombatDamageThisTurn()) {
+            return 0;
+        }
+
         int restDamage = damageIn;
 
         if (this.hasProtectionFrom(source)) {
@@ -7834,7 +7838,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         repParams.put("DamageSource", source);
         repParams.put("DamageAmount", damage);
         repParams.put("IsCombat", isCombat);
-        repParams.put("Prevention", false);
+        repParams.put("Prevention", true);
 
         if (AllZone.getReplacementHandler().run(repParams)) {
             return 0;
