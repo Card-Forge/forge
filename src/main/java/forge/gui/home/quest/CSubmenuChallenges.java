@@ -112,12 +112,12 @@ public enum CSubmenuChallenges implements ICSubmenu {
         SubmenuQuestUtil.updateStatsAndPet();
 
         final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
-
-        if (AllZone.getQuest().getAchievements() != null) {
-            view.getLblTitle().setText("Challenges: " + AllZone.getQuest().getRank());
+        final QuestController qCtrl = AllZone.getQuest();
+        if (qCtrl.getAchievements() != null) {
+            view.getLblTitle().setText("Challenges: " + qCtrl.getRank());
 
             view.getPnlChallenges().removeAll();
-            final List<QuestEventChallenge> challenges = AllZone.getQuest().getChallengesManager().generateChallenges();
+            final List<QuestEventChallenge> challenges = qCtrl.getChallengesManager().generateChallenges(qCtrl);
 
             for (final QuestEventChallenge c : challenges) {
                 final SelectablePanel temp = new SelectablePanel(c);

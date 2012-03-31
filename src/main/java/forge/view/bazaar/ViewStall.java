@@ -156,7 +156,7 @@ public class ViewStall extends JPanel {
         final QuestAssets qS = qData.getAssets();
         this.lblStats.setText("Credits: " + qS.getCredits() + "         Life: " + qS.getLife(qData.getMode()));
 
-        final List<IQuestBazaarItem> items = AllZone.getQuest().getBazaar().getItems(this.stall.getName());
+        final List<IQuestBazaarItem> items = qData.getBazaar().getItems(qData, this.stall.getName());
 
         this.lblStallName.setText(this.stall.getDisplayName());
         this.tpnFluff.setText(this.stall.getFluff());

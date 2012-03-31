@@ -135,10 +135,9 @@ public class QuestBazaarManager {
      * Retrieves all creatures and items, iterates through them,
      * and maps to appropriate merchant.
      */
-    public void buildItems() {
+    public void buildItems(final QuestController qCtrl) {
         final Map<String, IQuestBazaarItem> itemSet = new HashMap<String, IQuestBazaarItem>();
 
-        final QuestController qCtrl = AllZone.getQuest();
         for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
 
             for (QuestPetController pet : qCtrl.getPetsStorage().getAllPets(iSlot)) {
@@ -169,8 +168,8 @@ public class QuestBazaarManager {
      * @param stallName &emsp; {@link java.lang.String}
      * @return {@link java.util.List}.
      */
-    public List<IQuestBazaarItem> getItems(final String stallName) {
-        buildItems();
+    public List<IQuestBazaarItem> getItems(final QuestController qCtrl, final String stallName) {
+        buildItems(qCtrl);
 
         final List<IQuestBazaarItem> ret = new ArrayList<IQuestBazaarItem>();
 

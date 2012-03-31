@@ -712,9 +712,9 @@ public final class AbilityFactoryAnimate {
                 } else if (params.containsKey("UntilHostLeavesPlay")) {
                     host.addLeavesPlayCommand(unanimate);
                 } else if (params.containsKey("UntilYourNextUpkeep")) {
-                    AllZone.getUpkeep().addUntil(host.getController(), unanimate);
+                    Singletons.getModel().getGameState().getUpkeep().addUntil(host.getController(), unanimate);
                 } else if (params.containsKey("UntilControllerNextUntap")) {
-                    AllZone.getUntap().addUntil(c.getController(), unanimate);
+                    Singletons.getModel().getGameState().getUntap().addUntil(c.getController(), unanimate);
                 } else {
                     AllZone.getEndOfTurn().addUntil(unanimate);
                 }

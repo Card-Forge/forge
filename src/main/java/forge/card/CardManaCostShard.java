@@ -193,7 +193,7 @@ public class CardManaCostShard {
             CardManaCostShard.WR, CardManaCostShard.WG, CardManaCostShard.UB, CardManaCostShard.UR,
             CardManaCostShard.UG, CardManaCostShard.BR, CardManaCostShard.BG, CardManaCostShard.RG,
             CardManaCostShard.W2, CardManaCostShard.U2, CardManaCostShard.B2, CardManaCostShard.R2,
-            CardManaCostShard.G2 };
+            CardManaCostShard.G2, CardManaCostShard.S };
 
     private int getCMC() {
         if (0 != (this.shard & Atom.IS_X)) {

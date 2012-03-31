@@ -36,7 +36,7 @@ import forge.control.input.InputPayManaCostUtil;
 public class ManaCost {
     // holds Mana_Part objects
     // ManaPartColor is stored before ManaPartColorless
-    private final ArrayList<Object> manaPart;
+    private final ArrayList<ManaPart> manaPart;
     private final HashMap<String, Integer> sunburstMap = new HashMap<String, Integer>();
     private int xcounter = 0;
     private final ArrayList<String> manaNeededToAvoidNegativeEffect = new ArrayList<String>();
@@ -465,7 +465,7 @@ public class ManaCost {
      *            a {@link java.lang.String} object.
      */
     public final void combineManaCost(final String extra) {
-        final ArrayList<Object> extraParts = this.split(extra);
+        final ArrayList<ManaPart> extraParts = this.split(extra);
 
         ManaPartColorless part = null;
         for (int i = 0; i < this.manaPart.size(); i++) {
@@ -479,7 +479,7 @@ public class ManaCost {
         }
 
         while (extraParts.size() > 0) {
-            final Object o = extraParts.get(0);
+            final ManaPart o = extraParts.get(0);
             if (o instanceof ManaPartColorless) {
                 if (part == null) {
                     part = (ManaPartColorless) o;
@@ -580,8 +580,8 @@ public class ManaCost {
      *            a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    private ArrayList<Object> split(final String cost) {
-        final ArrayList<Object> list = new ArrayList<Object>();
+    private ArrayList<ManaPart> split(final String cost) {
+        final ArrayList<ManaPart> list = new ArrayList<ManaPart>();
 
         // handles costs like "3", "G", "GW", "10", "S"
         if ((cost.length() == 1) || (cost.length() == 2)) {
@@ -609,14 +609,14 @@ public class ManaCost {
             if (o instanceof ManaPartSnow) {
                 // move snow cost to the end of the list
                 list.remove(0);
-                list.add(o);
+                list.add((ManaPartSnow)o);
             }
             o = list.get(0);
 
             if (o instanceof ManaPartColorless) {
                 // move colorless cost to the end of the list
                 list.remove(0);
-                list.add(o);
+                list.add((ManaPartColorless)o);
             }
         } // else
 

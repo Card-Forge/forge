@@ -169,33 +169,6 @@ public final class AllZone {
         return Singletons.getModel().getGameState().getEndOfCombat();
     }
 
-    /**
-     * <p>
-     * getUpkeep.
-     * </p>
-     * 
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.EndOfCombat} object.
-     * @since 1.0.16
-     */
-    public static forge.Upkeep getUpkeep() {
-        return Singletons.getModel().getGameState().getUpkeep();
-    }
-
-    /**
-     * <p>
-     * getUpkeep.
-     * </p>
-     * 
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.Untap} object.
-     * @since 1.2.0
-     */
-    public static forge.Untap getUntap() {
-        return Singletons.getModel().getGameState().getUntap();
-    }
 
     /**
      * <p>

@@ -100,8 +100,8 @@ public class PhaseUtil {
             return;
         }
 
-        AllZone.getUntap().executeUntil(turn);
-        AllZone.getUntap().executeAt();
+        Singletons.getModel().getGameState().getUntap().executeUntil(turn);
+        Singletons.getModel().getGameState().getUntap().executeAt();
 
         // otherwise land seems to stay tapped when it is really untapped
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
@@ -127,8 +127,8 @@ public class PhaseUtil {
             return;
         }
 
-        AllZone.getUpkeep().executeUntil(turn);
-        AllZone.getUpkeep().executeAt();
+        Singletons.getModel().getGameState().getUpkeep().executeUntil(turn);
+        Singletons.getModel().getGameState().getUpkeep().executeAt();
     }
 
     /**

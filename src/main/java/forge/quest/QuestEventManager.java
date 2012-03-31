@@ -162,9 +162,8 @@ public class QuestEventManager {
      *
      * @return a {@link java.util.List} object.
      */
-    public final List<QuestEventChallenge> generateChallenges() {
+    public final List<QuestEventChallenge> generateChallenges(final QuestController qCtrl) {
         final List<QuestEventChallenge> challengeOpponents = new ArrayList<QuestEventChallenge>();
-        final QuestController qCtrl = AllZone.getQuest();
         final QuestAchievements qData = qCtrl.getAchievements();
 
         int maxChallenges = qData.getWin() / 10;
