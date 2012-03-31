@@ -52,6 +52,15 @@ public enum CSubmenuPreferences implements ICSubmenu {
             }
         });
 
+        view.getCbManaBurn().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(final ItemEvent arg0) {
+                final boolean toggle = view.getCbManaBurn().isSelected();
+                prefs.setPref(FPref.UI_MANABURN, String.valueOf(toggle));
+                prefs.save();
+            }
+        });
+
         view.getCbScaleLarger().addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(final ItemEvent arg0) {
@@ -167,6 +176,7 @@ public enum CSubmenuPreferences implements ICSubmenu {
         view.getCbSingletons().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_SINGLETONS));
         view.getCbRemoveArtifacts().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
         view.getCbAnte().setSelected(prefs.getPrefBoolean(FPref.UI_ANTE));
+        view.getCbManaBurn().setSelected(prefs.getPrefBoolean(FPref.UI_MANABURN));
         view.getCbUploadDraft().setSelected(prefs.getPrefBoolean(FPref.UI_UPLOAD_DRAFT));
         view.getCbStackLand().setSelected(prefs.getPrefBoolean(FPref.UI_SMOOTH_LAND));
         view.getCbDevMode().setSelected(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));

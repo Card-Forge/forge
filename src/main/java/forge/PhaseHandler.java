@@ -25,6 +25,7 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
 import forge.card.trigger.TriggerType;
+import forge.properties.ForgePreferences.FPref;
 
 /**
  * <p>
@@ -503,8 +504,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         }
         this.bPhaseEffects = true;
         if (!AllZoneUtil.isCardInPlay("Upwelling")) {
-            AllZone.getHumanPlayer().getManaPool().clearPool();
-            AllZone.getComputerPlayer().getManaPool().clearPool();
+            for (Player p : AllZone.getPlayersInGame()) {
+                int burn = p.getManaPool().clearPool();
+                if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
+                    p.loseLife(burn, null);
+                }
+            }
         }
 
         if (this.getPhase().equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {

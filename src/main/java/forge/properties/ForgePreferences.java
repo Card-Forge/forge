@@ -60,6 +60,7 @@ public class ForgePreferences {
         UI_BUGZ_NAME (""), /** */
         UI_BUGZ_PWD (""), /** */
         UI_ANTE ("false"), /** */
+        UI_MANABURN("false"), /** */
         UI_SKIN ("default"), /** */
         UI_PREFERRED_AVATARS_ONLY ("false"), /** */
 

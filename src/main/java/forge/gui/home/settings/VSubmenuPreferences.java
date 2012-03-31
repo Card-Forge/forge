@@ -67,6 +67,7 @@ public enum VSubmenuPreferences implements IVSubmenu {
     private final JCheckBox cbAnte = new OptionsCheckBox("Play for Ante");
     private final JCheckBox cbUploadDraft = new OptionsCheckBox("Upload Draft Pics");
     private final JCheckBox cbStackLand = new OptionsCheckBox("Stack AI Land");
+    private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
     private final JCheckBox cbDevMode = new OptionsCheckBox(ForgeProps.getLocalized(NewGameText.DEV_MODE));
     private final JCheckBox cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
@@ -112,6 +113,9 @@ public enum VSubmenuPreferences implements IVSubmenu {
 
         pnlPrefs.add(cbStackLand, regularConstraints);
         pnlPrefs.add(new NoteLabel("Minimizes mana lock in AI hands, giving a slight advantage to computer."), regularConstraints);
+        
+        pnlPrefs.add(cbManaBurn, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Play with mana burn (from pre-Magic 2010 rules)."), regularConstraints);
 
         pnlPrefs.add(cbDevMode, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enables menu with functions for testing during development."), regularConstraints);
@@ -374,6 +378,11 @@ public enum VSubmenuPreferences implements IVSubmenu {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbAnte() {
         return cbAnte;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbManaBurn() {
+        return cbManaBurn;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

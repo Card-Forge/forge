@@ -314,13 +314,17 @@ public class ManaPool {
     /**
      * <p>
      * clearPool.
+     * 
+     * @return - the amount of mana removed this way
      * </p>
      */
-    public final void clearPool() {
+    public final int clearPool() {
+        int numRemoved = 0;
+        
         if (this.floatingMana.size() == 0) {
             this.calculateManaTotals();
             this.owner.updateObservers();
-            return;
+            return numRemoved;
         }
 
         if (AllZoneUtil.isCardInPlay("Omnath, Locus of Mana", this.owner)) {
@@ -331,13 +335,17 @@ public class ManaPool {
                     i++;
                     continue;
                 }
+                numRemoved++;
                 this.floatingMana.remove(i);
             }
         } else {
+            numRemoved = this.floatingMana.size();
             this.floatingMana.clear();
         }
         this.calculateManaTotals();
         this.owner.updateObservers();
+        
+        return numRemoved;
     }
 
     /**

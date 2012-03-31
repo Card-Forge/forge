@@ -398,7 +398,8 @@ public abstract class Player extends GameEntity {
             // this is for players being able to pay 0 life
             // nothing to do
         } else {
-            System.out.println("Player - trying to lose positive life");
+            System.out.println("Player - trying to lose negative life");
+            return false;
         }
 
         this.lifeLostThisTurn += toLose;
