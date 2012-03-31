@@ -17,7 +17,19 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-
+- Fixed the file name of Duskwalker.
+- Balancing Quest Pets as mentioned on the forums
+- Added Ape Pet as a 5th pet.
+- Cleared out the changes.txt file, now ready for new material.
+- Fixed type line of Fungus Sliver.
+- Added the precon Battle Blitz.
+- Fixed picture count of Samite Alchemist.
+- Added SVar:RemAIDeck:True to Moonmist.
+- It's no longer possible to start a quest with a deck that needs more than 0 wins to unlock (i.e. Event Decks).
+- Added some basic targeting to AF PumpAll (isCurse only).
+- Java warning cleanup
+- Pass the full Card object into Cost not just the name, so CostParts can be loaded from SVars in the future.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -27,7 +39,10 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-
+Loaming Shaman
+Kjeldoran Elite Guard
+Gaea's Blessing
+Tuktuk Scrapper
 
 
 end
