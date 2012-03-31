@@ -594,6 +594,9 @@ public class AbilityFactoryToken extends AbilityFactory {
                 if (remember != null) {
                     AllZoneUtil.getCardState(sa.getSourceCard()).addRemembered(c);
                 }
+                if (this.abilityFactory.getMapParams().get("RememberSource") != null) {
+                    AllZoneUtil.getCardState(c).addRemembered(host);
+                }
             }
         }
     }
