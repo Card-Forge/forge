@@ -884,7 +884,7 @@ public class CardFactoryUtil {
      */
     public static AbilityActivated abilityUnearth(final Card sourceCard, final String manaCost) {
 
-        final Cost cost = new Cost(manaCost, sourceCard.getName(), true);
+        final Cost cost = new Cost(sourceCard, manaCost, true);
         final AbilityActivated unearth = new AbilityActivated(sourceCard, cost, null) {
             private static final long serialVersionUID = -5633945565395478009L;
 
@@ -1025,7 +1025,7 @@ public class CardFactoryUtil {
      */
     public static SpellAbility abilityCycle(final Card sourceCard, String cycleCost) {
         cycleCost += " Discard<1/CARDNAME>";
-        final Cost abCost = new Cost(cycleCost, sourceCard.getName(), true);
+        final Cost abCost = new Cost(sourceCard, cycleCost, true);
 
         final SpellAbility cycle = new AbilityActivated(sourceCard, abCost, null) {
             private static final long serialVersionUID = -4960704261761785512L;
@@ -1095,7 +1095,7 @@ public class CardFactoryUtil {
     public static SpellAbility abilityTypecycle(final Card sourceCard, String cycleCost, final String type) {
         String description;
         cycleCost += " Discard<1/CARDNAME>";
-        final Cost abCost = new Cost(cycleCost, sourceCard.getName(), true);
+        final Cost abCost = new Cost(sourceCard, cycleCost, true);
 
         final SpellAbility cycle = new AbilityActivated(sourceCard, abCost, null) {
             private static final long serialVersionUID = -4960704261761785512L;
@@ -1180,7 +1180,7 @@ public class CardFactoryUtil {
      */
     public static SpellAbility abilityTransmute(final Card sourceCard, String transmuteCost) {
         transmuteCost += " Discard<1/CARDNAME>";
-        final Cost abCost = new Cost(transmuteCost, sourceCard.getName(), true);
+        final Cost abCost = new Cost(sourceCard, transmuteCost, true);
 
         final SpellAbility transmute = new AbilityActivated(sourceCard, abCost, null) {
             private static final long serialVersionUID = -4960704261761785512L;
@@ -1516,7 +1516,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.card.spellability.AbilityMana} object.
      */
     public static AbilityMana getEldraziSpawnAbility(final Card c) {
-        final Cost cost = new Cost("Sac<1/CARDNAME>", c.getName(), true);
+        final Cost cost = new Cost(c, "Sac<1/CARDNAME>", true);
         final AbilityMana mana = new AbilityMana(c, cost, "1") {
             private static final long serialVersionUID = -2478676548112738019L;
         };
@@ -4216,7 +4216,7 @@ public class CardFactoryUtil {
                     final String newCost = CardUtil.addManaCosts(card.getManaCost(), bbCost);
                     if (bbSA.getPayCosts() != null) {
                         // create new Cost
-                        bbSA.setPayCosts(new Cost(newCost, sa.getSourceCard().getName(), false));
+                        bbSA.setPayCosts(new Cost(card, newCost, false));
                     }
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
@@ -4580,7 +4580,7 @@ public class CardFactoryUtil {
             final SpellAbility[] abilities = card.getSpellAbility();
             if ((abilities.length > 0) && abilities[0].isSpell()) {
                 final String altCost = card.getSVar("FullCost");
-                final Cost abCost = new Cost(altCost, card.getName(), abilities[0].isAbility());
+                final Cost abCost = new Cost(card, altCost, abilities[0].isAbility());
                 abilities[0].setPayCosts(abCost);
             }
         }
@@ -4624,7 +4624,7 @@ public class CardFactoryUtil {
                 final SpellAbility sa = abilities[0];
                 final SpellAbility altCostSA = sa.copy();
 
-                final Cost abCost = new Cost(altCost, card.getName(), altCostSA.isAbility());
+                final Cost abCost = new Cost(card, altCost, altCostSA.isAbility());
                 altCostSA.setPayCosts(abCost);
 
                 final StringBuilder sb = new StringBuilder();
@@ -5052,7 +5052,7 @@ public class CardFactoryUtil {
                 card.setCanMorph(true);
 
                 final String[] k = parse.split(":");
-                final Cost cost = new Cost(k[1], cardName, true);
+                final Cost cost = new Cost(card, k[1], true);
 
                 final int attack = card.getBaseAttack();
                 final int defense = card.getBaseDefense();

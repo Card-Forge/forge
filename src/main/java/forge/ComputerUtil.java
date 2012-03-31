@@ -350,7 +350,7 @@ public class ComputerUtil {
      */
     public static final void playSpellAbilityWithoutPayingManaCost(final SpellAbility sa) {
         final SpellAbility newSA = sa.copy();
-        final Cost cost = new Cost("", sa.getSourceCard().getName(), false);
+        final Cost cost = new Cost(sa.getSourceCard(), "", false);
         if (newSA.getPayCosts() != null) {
             for (final CostPart part : newSA.getPayCosts().getCostParts()) {
                 if (!(part instanceof CostMana)) {

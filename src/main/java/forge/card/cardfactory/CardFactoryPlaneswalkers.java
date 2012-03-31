@@ -136,7 +136,7 @@ public class CardFactoryPlaneswalkers {
              * battlefield.
              */
             final Target target2 = new Target(card, "TgtC");
-            final Cost cost2 = new Cost("SubCounter<2/LOYALTY>", cardName, true);
+            final Cost cost2 = new Cost(card, "SubCounter<2/LOYALTY>", true);
             final SpellAbility ability2 = new AbilityActivated(card, cost2, target2) {
                 private static final long serialVersionUID = 4322453486268967722L;
 
@@ -202,7 +202,7 @@ public class CardFactoryPlaneswalkers {
              * power to target player.
              */
             final Target target3 = new Target(card, "Select target player", "Player");
-            final Cost cost3 = new Cost("SubCounter<4/LOYALTY>", cardName, true);
+            final Cost cost3 = new Cost(card, "SubCounter<4/LOYALTY>", true);
             final SpellAbility ability3 = new AbilityActivated(card, cost3, target3) {
                 private static final long serialVersionUID = -5488579738767048060L;
 

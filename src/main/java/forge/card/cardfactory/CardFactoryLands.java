@@ -145,7 +145,7 @@ class CardFactoryLands {
                 }
             };
 
-            final Cost abCost = new Cost("G U T", cardName, true);
+            final Cost abCost = new Cost(card, "G U T", true);
             final AbilityActivated ability = new AbilityActivated(card, abCost, null) {
                 private static final long serialVersionUID = 1416258136308898492L;
 

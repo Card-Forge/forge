@@ -175,7 +175,7 @@ public class SpellPermanent extends Spell {
      */
     public SpellPermanent(final Card sourceCard) {
         // Add Costs for all SpellPermanents
-        this(sourceCard, new Cost(sourceCard.getManaCost(), sourceCard.getName(), false), null);
+        this(sourceCard, new Cost(sourceCard, sourceCard.getManaCost(), false), null);
     } // Spell_Permanent()
 
     /**

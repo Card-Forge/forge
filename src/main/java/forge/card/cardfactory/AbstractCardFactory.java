@@ -595,7 +595,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                     final String col = color;
                     // card.setChosenType(input[0]);
 
-                    final Cost a1Cost = new Cost("3 T", cardName, true);
+                    final Cost a1Cost = new Cost(card, "3 T", true);
                     final AbilityActivated a1 = new AbilityActivated(card, a1Cost, null) {
 
                         private static final long serialVersionUID = -2114111483117171609L;
@@ -844,7 +844,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Goblin Charbelcher")) {
-            final Cost abCost = new Cost("3 T", cardName, true);
+            final Cost abCost = new Cost(card, "3 T", true);
             final AbilityActivated ability = new AbilityActivated(card, abCost, new Target(card, "TgtCP")) {
                 private static final long serialVersionUID = -840041589720758423L;
 
@@ -914,7 +914,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
              * next turn's upkeep.
              */
 
-            final Cost abCost = new Cost("1 T Sac<1/CARDNAME>", cardName, true);
+            final Cost abCost = new Cost(card, "1 T Sac<1/CARDNAME>", true);
             final Target target = new Target(card, "Select target player", new String[] { "Player" });
             final AbilityActivated ability = new AbilityActivated(card, abCost, target) {
                 private static final long serialVersionUID = -6711849408085138636L;
@@ -996,7 +996,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         // *************** START *********** START **************************
         else if (cardName.equals("Grindstone")) {
             final Target target = new Target(card, "Select target player", new String[] { "Player" });
-            final Cost abCost = new Cost("3 T", cardName, true);
+            final Cost abCost = new Cost(card, "3 T", true);
             final AbilityActivated ab1 = new AbilityActivated(card, abCost, target) {
                 private static final long serialVersionUID = -6281219446216L;
 
@@ -1094,7 +1094,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Scroll Rack")) {
-            final Cost abCost = new Cost("1 T", cardName, true);
+            final Cost abCost = new Cost(card, "1 T", true);
             final AbilityActivated ability = new AbilityActivated(card, abCost, null) {
                 private static final long serialVersionUID = -5588587187720068547L;
 
@@ -1234,7 +1234,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             sb.append(cardName).append(" - play card without paying its mana cost.");
             freeCast.setStackDescription(sb.toString());
 
-            final Cost abCost = new Cost("5 T", cardName, true);
+            final Cost abCost = new Cost(card, "5 T", true);
             final AbilityActivated ability = new AbilityActivated(card, abCost, null) {
                 private static final long serialVersionUID = -7328518969488588777L;
 

@@ -205,7 +205,7 @@ public class CardFactoryCreatures {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Gilder Bairn")) {
-            final Cost abCost = new Cost("2 GU Untap", cardName, true);
+            final Cost abCost = new Cost(card, "2 GU Untap", true);
             final Target tgt = new Target(card, "Select target permanent.", new String[] { "Permanent" });
             final AbilityActivated a1 = new AbilityActivated(card, abCost, tgt) {
                 private static final long serialVersionUID = -1847685865277129366L;
@@ -717,7 +717,7 @@ public class CardFactoryCreatures {
         // *************** START *********** START **************************
         else if (cardName.equals("Rhys the Redeemed")) {
 
-            final Cost abCost = new Cost("4 GW GW T", card.getName(), true);
+            final Cost abCost = new Cost(card, "4 GW GW T", true);
             final AbilityActivated copyTokens1 = new AbilityActivated(card, abCost, null) {
                 private static final long serialVersionUID = 6297992502069547478L;
 
@@ -824,7 +824,7 @@ public class CardFactoryCreatures {
         // *************** START *********** START **************************
         else if (cardName.equals("Master of the Wild Hunt")) {
 
-            final Cost abCost = new Cost("T", cardName, true);
+            final Cost abCost = new Cost(card, "T", true);
             final Target abTgt = new Target(card, "Target a creature to Hunt", "Creature".split(","));
             final AbilityActivated ability = new AbilityActivated(card, abCost, abTgt) {
                 private static final long serialVersionUID = 35050145102566898L;
@@ -1015,7 +1015,7 @@ public class CardFactoryCreatures {
         // *************** START *********** START **************************
         else if (cardName.equals("Molten Hydra")) {
             final Target target = new Target(card, "TgtCP");
-            final Cost abCost = new Cost("T", cardName, true);
+            final Cost abCost = new Cost(card, "T", true);
             final AbilityActivated ability2 = new AbilityActivated(card, abCost, target) {
                 private static final long serialVersionUID = 2626619319289064289L;
 
@@ -1374,7 +1374,7 @@ public class CardFactoryCreatures {
              * permanent.
              */
 
-            final Cost cost = new Cost("Sac<1/CARDNAME>", cardName, true);
+            final Cost cost = new Cost(card, "Sac<1/CARDNAME>", true);
             final Target tgt = new Target(card, "Select a permanent", "Permanent".split(","));
             final SpellAbility ability = new AbilityActivated(card, cost, tgt) {
                 private static final long serialVersionUID = -5084369399105353155L;
@@ -1569,7 +1569,7 @@ public class CardFactoryCreatures {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Phyrexian Scuta")) {
-            final Cost abCost = new Cost("3 B PayLife<3>", cardName, false);
+            final Cost abCost = new Cost(card, "3 B PayLife<3>", false);
             final SpellAbility kicker = new Spell(card, abCost, null) {
                 private static final long serialVersionUID = -6420757044982294960L;
 
@@ -2006,7 +2006,7 @@ public class CardFactoryCreatures {
              * name revealed this way. Activate this ability only during your
              * turn.
              */
-            final Cost abCost = new Cost("X T", cardName, true);
+            final Cost abCost = new Cost(card, "X T", true);
             final Target target = new Target(card, "Select target opponent", "Opponent".split(","));
             final AbilityActivated discard = new AbilityActivated(card, abCost, target) {
                 private static final long serialVersionUID = 4839778470534392198L;
@@ -2074,7 +2074,7 @@ public class CardFactoryCreatures {
                 theCost = "R";
             }
 
-            final SpellAbility finalAb = new AbilityActivated(card, new Cost(theCost, cardName, true), new Target(card,
+            final SpellAbility finalAb = new AbilityActivated(card, new Cost(card, theCost, true), new Target(card,
                     "Select target creature.", "Creature")) {
                 private static final long serialVersionUID = 2391351140880148283L;
 

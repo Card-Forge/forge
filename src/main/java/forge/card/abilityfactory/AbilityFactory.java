@@ -351,7 +351,7 @@ public class AbilityFactory {
             if (!this.mapParams.containsKey("Cost")) {
                 throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + hostCard.getName());
             }
-            this.abCost = new Cost(this.mapParams.get("Cost"), hostCard.getName(), this.isAb);
+            this.abCost = new Cost(hostCard, this.mapParams.get("Cost"), this.isAb);
         }
 
         if (this.mapParams.containsKey("ValidTgts")) {
@@ -2600,7 +2600,7 @@ public class AbilityFactory {
         if (unlessCost.equals("X")) {
             unlessCost = Integer.toString(AbilityFactory.calculateAmount(source, params.get("UnlessCost"), sa));
         }
-        final Cost cost = new Cost(unlessCost, source.getName(), true);
+        final Cost cost = new Cost(source, unlessCost, true);
 
         final SpellAbility ability = new AbilityActivated(source, cost, null) {
             private static final long serialVersionUID = 2502577469482777440L;

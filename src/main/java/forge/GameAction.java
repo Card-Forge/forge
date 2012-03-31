@@ -425,7 +425,7 @@ public class GameAction {
 
                     final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover"))
                             .split(":")[1];
-                    final Cost cost = new Cost(recoverCost, recoverable.getName(), true);
+                    final Cost cost = new Cost(recoverable, recoverCost, true);
 
                     final Command paidCommand = new Command() {
                         private static final long serialVersionUID = -6357156873861051845L;
@@ -1368,7 +1368,7 @@ public class GameAction {
 
                 // there is a flashback cost (and not the cards cost)
                 if (!keyword.equals("Flashback")) {
-                    final Cost fbCost = new Cost(keyword.substring(10), source.getName(), false);
+                    final Cost fbCost = new Cost(source, keyword.substring(10), false);
                     flashback.setPayCosts(fbCost);
                 }
                 alternatives.add(flashback);
@@ -1379,7 +1379,7 @@ public class GameAction {
                 sar.setVariables(sa.getRestrictions());
                 sar.setZone(null);
                 newSA.setRestrictions(sar);
-                final Cost cost = new Cost("", source.getName(), false);
+                final Cost cost = new Cost(source, "", false);
                 if (newSA.getPayCosts() != null) {
                     for (final CostPart part : newSA.getPayCosts().getCostParts()) {
                         if (!(part instanceof CostMana)) {
@@ -1399,7 +1399,7 @@ public class GameAction {
                 sar.setVariables(sa.getRestrictions());
                 sar.setInstantSpeed(true);
                 newSA.setRestrictions(sar);
-                final Cost cost = new Cost("", source.getName(), false);
+                final Cost cost = new Cost(source, "", false);
                 if (newSA.getPayCosts() != null) {
                     for (final CostPart part : newSA.getPayCosts().getCostParts()) {
                         if (!(part instanceof CostMana)) {
@@ -1415,7 +1415,7 @@ public class GameAction {
             }
             if (sa.isSpell() && keyword.startsWith("Alternative Cost")) {
                 final SpellAbility newSA = sa.copy();
-                final Cost cost = new Cost(keyword.substring(17), source.getName(), false);
+                final Cost cost = new Cost(source, keyword.substring(17), false);
                 if (newSA.getPayCosts() != null) {
                     for (final CostPart part : newSA.getPayCosts().getCostParts()) {
                         if (!(part instanceof CostMana)) {
@@ -2273,7 +2273,7 @@ public class GameAction {
             final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
             CostPayment payment = null;
             if (sa.getPayCosts() == null) {
-                payment = new CostPayment(new Cost("0", sa.getSourceCard().getName(), sa.isAbility()), sa);
+                payment = new CostPayment(new Cost(sa.getSourceCard(), "0", sa.isAbility()), sa);
             } else {
                 payment = new CostPayment(sa.getPayCosts(), sa);
             }

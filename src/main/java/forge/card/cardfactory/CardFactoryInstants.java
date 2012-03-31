@@ -233,7 +233,7 @@ public class CardFactoryInstants {
              * Return all artifacts target player owns to his or her hand.
              */
             Target t = new Target(card, "Select target player", "Player");
-            Cost cost = new Cost("1 U", cardName, false);
+            Cost cost = new Cost(card, "1 U", false);
 
             SpellAbility spell = new Spell(card, cost, t) {
                 private static final long serialVersionUID = -4098702062413878046L;
@@ -385,7 +385,7 @@ public class CardFactoryInstants {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Suffer the Past")) {
-            final Cost cost = new Cost("X B", cardName, false);
+            final Cost cost = new Cost(card, "X B", false);
             final Target tgt = new Target(card, "Select a Player", "Player");
             final SpellAbility spell = new Spell(card, cost, tgt) {
                 private static final long serialVersionUID = 1168802375190293222L;
@@ -627,7 +627,7 @@ public class CardFactoryInstants {
              * of the chosen type target player controls, or untap all tapped
              * permanents of that type that player controls.
              */
-            final Cost abCost = new Cost("2 U U", cardName, false);
+            final Cost abCost = new Cost(card, "2 U U", false);
             final Target target = new Target(card, "Select target player", "Player".split(","));
             final SpellAbility spell = new Spell(card, abCost, target) {
                 private static final long serialVersionUID = -2175586347805121896L;
@@ -689,7 +689,7 @@ public class CardFactoryInstants {
                 }
             };
 
-            final Cost abCost = new Cost("G", cardName, false);
+            final Cost abCost = new Cost(card, "G", false);
             final Target t1 = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));
             final SpellAbility spell = new Spell(card, abCost, t1) {
                 private static final long serialVersionUID = 8964235807056739219L;

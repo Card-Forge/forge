@@ -85,7 +85,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      *            a int.
      */
     public AbilityMana(final Card sourceCard, final String parse, final String produced, final int num) {
-        this(sourceCard, new Cost(parse, sourceCard.getName(), true), produced, num);
+        this(sourceCard, new Cost(sourceCard, parse, true), produced, num);
     }
 
     /**

@@ -437,7 +437,7 @@ public class CardFactorySorceries {
         // *************** START *********** START **************************
         else if (cardName.equals("Martial Coup")) {
 
-            final Cost cost = new Cost(card.getManaCost(), cardName, false);
+            final Cost cost = new Cost(card, card.getManaCost(), false);
             final SpellAbility spell = new Spell(card, cost, null) {
 
                 private static final long serialVersionUID = -29101524966207L;
@@ -702,7 +702,7 @@ public class CardFactorySorceries {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Haunting Echoes")) {
-            final Cost cost = new Cost("3 B B", cardName, false);
+            final Cost cost = new Cost(card, "3 B B", false);
             final Target tgt = new Target(card, "Select a Player", "Player");
             final SpellAbility spell = new Spell(card, cost, tgt) {
                 private static final long serialVersionUID = 42470566751344693L;
@@ -772,7 +772,7 @@ public class CardFactorySorceries {
                 }
             };
 
-            final Cost abCost = new Cost("2 U", cardName, false);
+            final Cost abCost = new Cost(card, "2 U", false);
             final Target t1 = new Target(card, "Select target permanent", "Permanent".split(","));
             final SpellAbility spell = new Spell(card, abCost, t1) {
                 private static final long serialVersionUID = 8964235802256739219L;
@@ -1255,7 +1255,7 @@ public class CardFactorySorceries {
              * damage to that player.
              */
             final Target tgt = new Target(card, "Select target player", "Player");
-            final Cost cost = new Cost("1 W W", cardName, false);
+            final Cost cost = new Cost(card, "1 W W", false);
             final SpellAbility spell = new Spell(card, cost, tgt) {
                 private static final long serialVersionUID = 8555498267738686288L;
 
@@ -1903,7 +1903,7 @@ public class CardFactorySorceries {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Turn to Slag")) {
-            final Cost abCost = new Cost("3 R R", cardName, false);
+            final Cost abCost = new Cost(card, "3 R R", false);
             final Target target = new Target(card, "Select target creature", "Creature".split(","));
             final SpellAbility spell = new Spell(card, abCost, target) {
                 private static final long serialVersionUID = 3848014348910653252L;
@@ -1946,7 +1946,7 @@ public class CardFactorySorceries {
              * library.
              */
 
-            final Cost abCost = new Cost("U U", cardName, false);
+            final Cost abCost = new Cost(card, "U U", false);
             final SpellAbility spell = new Spell(card, abCost, null) {
                 private static final long serialVersionUID = -8497142072380944393L;
 

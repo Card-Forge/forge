@@ -51,7 +51,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
      *            a {@link java.lang.String} object.
      */
     public AbilityActivated(final Card card, final String manacost) {
-        this(card, new Cost(manacost, card.getName(), true), null);
+        this(card, new Cost(card, manacost, true), null);
     }
 
     /**

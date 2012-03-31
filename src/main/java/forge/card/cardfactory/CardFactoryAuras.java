@@ -256,7 +256,7 @@ class CardFactoryAuras {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Earthbind")) {
-            final Cost cost = new Cost(card.getManaCost(), cardName, false);
+            final Cost cost = new Cost(card, card.getManaCost(), false);
             final Target tgt = new Target(card, "C");
             final SpellAbility spell = new SpellPermanent(card, cost, tgt) {
 
@@ -359,7 +359,7 @@ class CardFactoryAuras {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Guilty Conscience")) {
-            final Cost cost = new Cost(card.getManaCost(), cardName, false);
+            final Cost cost = new Cost(card, card.getManaCost(), false);
             final Target tgt = new Target(card, "C");
             final SpellAbility spell = new SpellPermanent(card, cost, tgt) {
 
@@ -461,7 +461,7 @@ class CardFactoryAuras {
             tgt.setZone(Constant.Zone.Graveyard);
             animate.setTarget(tgt);
 
-            final Cost cost = new Cost("1 B", cardName, false);
+            final Cost cost = new Cost(card, "1 B", false);
             animate.setPayCosts(cost);
 
             animate.getRestrictions().setZone(Constant.Zone.Hand);

@@ -326,7 +326,7 @@ class CardFactoryEquipment {
                                                          // keywords to add
 
                 // final String manaCost = tmpCost.trim();
-                final Cost abCost = new Cost(tmpCost.trim(), card.getName(), true);
+                final Cost abCost = new Cost(card, tmpCost.trim(), true);
                 int power = 0;
                 int tough = 0;
 

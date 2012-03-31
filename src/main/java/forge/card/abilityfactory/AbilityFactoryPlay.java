@@ -441,7 +441,7 @@ public final class AbilityFactoryPlay {
             if (params.containsKey("WithoutManaCost")) {
                 if (controller.isHuman()) {
                     final SpellAbility newSA = tgtSA.copy();
-                    final Cost cost = new Cost("", tgtCard.getName(), false);
+                    final Cost cost = new Cost(tgtCard, "", false);
                     if (newSA.getPayCosts() != null) {
                         for (final CostPart part : newSA.getPayCosts().getCostParts()) {
                             if (!(part instanceof CostMana)) {

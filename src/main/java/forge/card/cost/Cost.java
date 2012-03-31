@@ -148,19 +148,18 @@ public class Cost {
      * <p>
      * Constructor for Cost.
      * </p>
-     * 
+     * @param card 
+     *            a Card object that the Cost is associated with
      * @param parse
-     *            a {@link java.lang.String} object.
-     * @param cardName
      *            a {@link java.lang.String} object.
      * @param bAbility
      *            a boolean.
      */
-    public Cost(String parse, final String cardName, final boolean bAbility) {
+    public Cost(final Card card, String parse, final boolean bAbility) {
         this.isAbility = bAbility;
         // when adding new costs for cost string, place them here
-        this.name = cardName;
-
+        this.name = card.getName();
+                
         while (parse.contains(Cost.TAP_X_STR)) {
             final String[] splitStr = this.abCostParse(parse, Cost.TAP_X_STR, 3);
             parse = this.abUpdateParse(parse, Cost.TAP_X_STR);
@@ -359,7 +358,7 @@ public class Cost {
         final String str = parse.substring(startPos, endPos + 1);
         return parse.replace(str, "").trim();
     }
-
+    
     /**
      * <p>
      * changeCost.

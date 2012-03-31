@@ -2175,7 +2175,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 } else if (keyword.get(i).startsWith("Morph")) {
                     sbLong.append("Morph");
                     if (keyword.get(i).contains(":")) {
-                        final Cost mCost = new Cost(keyword.get(i).substring(6), this.getName(), true);
+                        final Cost mCost = new Cost(this, keyword.get(i).substring(6), true);
                         if (!mCost.isOnlyManaCost()) {
                             sbLong.append(" -");
                         }
@@ -2462,7 +2462,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (keyword.startsWith("Flashback")) {
                 sb.append("Flashback");
                 if (keyword.contains(" ")) {
-                    final Cost fbCost = new Cost(keyword.substring(10), this.getName(), true);
+                    final Cost fbCost = new Cost(this, keyword.substring(10), true);
                     if (!fbCost.isOnlyManaCost()) {
                         sb.append(" -");
                     }
