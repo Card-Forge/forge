@@ -86,14 +86,14 @@ public class StaticAbilityContinuous {
 
         if (params.containsKey("SetPower")) {
             setP = params.get("SetPower");
-            setPower = setP.matches("[0-9][0-9]?") ? Integer.parseInt(setP) : CardFactoryUtil.xCount(hostCard,
-                    hostCard.getSVar(setP));
+            setPower = setP.matches("[0-9][0-9]?") ? Integer.parseInt(setP) :
+                AbilityFactory.calculateAmount(hostCard, setP, null);
         }
 
         if (params.containsKey("SetToughness")) {
             setT = params.get("SetToughness");
-            setToughness = setT.matches("[0-9][0-9]?") ? Integer.parseInt(setT) : CardFactoryUtil.xCount(hostCard,
-                    hostCard.getSVar(setT));
+            setToughness = setT.matches("[0-9][0-9]?") ? Integer.parseInt(setT) :
+                AbilityFactory.calculateAmount(hostCard, setT, null);
         }
 
         if (params.containsKey("AddPower")) {
