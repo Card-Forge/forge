@@ -1912,10 +1912,10 @@ public class GameAction {
                                     || (k[4].equals("Self") && originalCard.equals(card))
                                     || (k[4].equals("Enchanted") && originalCard.getEnchantedBy().contains(card)) || k[4]
                                         .equals("All"))
-                            && ((CardUtil.getColors(originalCard).contains(k[5])) || k[5].equals("All"))
-                                    || (k[5].equals("Multicolored") && (CardUtil.getColors(originalCard).size() > 1))
-                            && ((originalCard.isType(k[6]))
-                                    || (!(originalCard.isType(k[6])) && k[7].contains("NonType")) || k[6].equals("All"))) {
+                            && (CardUtil.getColors(originalCard).contains(k[5]) || k[5].equals("All")
+                                    || (k[5].equals("Multicolored") && (CardUtil.getColors(originalCard).size() > 1)))
+                            && (originalCard.isType(k[6])
+                                    || (!originalCard.isType(k[6]) && k[7].contains("NonType")) || k[6].equals("All"))) {
                         if (k[7].contains("CardIsTapped")) {
                             if (!card.isTapped()) {
                                 k[3] = "0";
@@ -2099,9 +2099,9 @@ public class GameAction {
                                         || (k[4].equals("Self") && originalCard.equals(card))
                                         || (k[4].equals("Enchanted") && originalCard.getEnchantedBy().contains(card)) || k[4]
                                             .equals("All"))
-                                && ((CardUtil.getColors(originalCard).contains(k[5])) || k[5].equals("All"))
-                                        || (k[5].equals("MultiColored") && (CardUtil.getColors(originalCard).size() > 1))
-                                && ((originalCard.isType(k[6]))
+                                && (CardUtil.getColors(originalCard).contains(k[5]) || k[5].equals("All")
+                                        || (k[5].equals("MultiColored") && (CardUtil.getColors(originalCard).size() > 1)))
+                                && (originalCard.isType(k[6])
                                         || (!(originalCard.isType(k[6])) && k[7].contains("NonType")) || k[6]
                                             .equals("All"))) {
                             if (k[7].contains("CardIsTapped")) {
