@@ -7,8 +7,8 @@ K:Double Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneHuman | TriggerDescription$ When CARDNAME enters the battlefield, each player puts a creature card with converted mana cost 3 or less from his or her graveyard onto the battlefield.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | ManaNotSpent$ R | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless R was spent to cast it.
 SVar:TrigChangeZoneHuman:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouCtrl+cmcLE3 | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBChangeZoneOpp | SpellDescription$ Each player puts a creature card with converted mana cost 3 or less from his or her graveyard onto the battlefield.
-SVar:DBChangeZoneOpp:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouDontCtrl+cmcLE3 | DefinedPlayer$ Opponent | ChangeNum$ 1 | Hidden$ True
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:DBChangeZoneOpp:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouDontCtrl+cmcLE3 | DefinedPlayer$ Opponent | ChangeNum$ 1 | Hidden$ True
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:red
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_champion.jpg
