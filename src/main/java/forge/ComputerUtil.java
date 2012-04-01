@@ -800,7 +800,7 @@ public class ComputerUtil {
 
                 // TODO: Change this if AI is able use to mana abilities that
                 // produce more than one mana (111230 - ArsenalNut)
-                final String color = InputPayManaCostUtil.getLongColorString(manaProduced);
+                final String color = InputPayManaCostUtil.getLongColorString(manaProduced.split(" ")[0]);
                 costPart.payMana(color);
 
                 if (!test) {

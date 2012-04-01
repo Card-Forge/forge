@@ -379,7 +379,8 @@ public class ManaCost {
      */
     public final boolean addMana(final String mana) {
         if (!this.isNeeded(mana)) {
-            throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
+            System.out.println("ManaCost : addMana() error, mana not needed - " + mana);
+            //throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
         }
 
         ManaPart choice = null;
