@@ -86,9 +86,7 @@ public class ViewItem extends FPanel {
                 String desc = bazaarItem.getPurchaseDescription(qA);
                 ViewItem.this.tarDesc.setText(desc);
 
-                if (qA.getCredits() < bazaarItem.getBuyingPrice(qA)) {
-                    ViewItem.this.btnPurchase.setEnabled(false);
-                }
+                ViewItem.this.btnPurchase.setEnabled(!(qA.getCredits() < bazaarItem.getBuyingPrice(qA)));
 
                 ViewItem.this.revalidate();
                 ViewItem.this.repaint();
