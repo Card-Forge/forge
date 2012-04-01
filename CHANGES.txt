@@ -30,6 +30,20 @@ Fixes/Features:
 - Java warning cleanup
 - Pass the full Card object into Cost not just the name, so CostParts can be loaded from SVars in the future.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed type checking in getSpellCostChange Multicolor broke the logic).
+- StaticAbilityContinuous SetPower and SetToughness characteristic-defining now use AbilityFactory.calculateAmount instead of CardFactoryUtil.xCount
+- Fixed Haunting Apparition.
+- Improved Fog effects: They now work with Damage Replacement abilities and Leyline of Punishment. Additionally the AI will predict the prevention.
+- AllZone Upkeep and Untap were removed due to little references they had had
+- Added snow as manashard
+- In manacost list of ManaParts is a propper way to go.
+- removed AllZone.getQuest in a few places.
+- implement the pre-Magic 2010 mana burn rule as an option (default: off)
+- update SetInfo for Revive
+- add SetInfo and Oracle to Gutter Grime
+- Fixed Exoskeletal Armor.
+- Updated some SVars (including some AB->DB conversions).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
