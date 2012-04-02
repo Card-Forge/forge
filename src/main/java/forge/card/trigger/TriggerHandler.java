@@ -449,15 +449,14 @@ public class TriggerHandler {
         }
 
         // Torpor Orb check
-        final CardList torporOrbs = AllZoneUtil.getCardsIn(Zone.Battlefield, "Torpor Orb");
-
-        if (torporOrbs.size() != 0 && mode == TriggerType.ChangesZone) {
-            String destination = params.get("Destination");
-            // if destination is not set, or set to 'battlefield' or 'any'
-            if (null == destination || Zone.Battlefield.toString().equals(destination) || "Any".equals(destination)) {
-                if (params.get("ValidCard").contains("Creature")
-                || (params.get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature())) {
-                    return false;
+        if (mode.equals(TriggerType.ChangesZone) && AllZoneUtil.isCardInPlay("Torpor Orb")) {
+            if (runParams.get("Destination") instanceof String) {
+                String dest = (String) runParams.get("Destination");
+                if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
+                    Card card = (Card) runParams.get("Card");
+                    if (card.isCreature()) {
+                        return false;
+                    }
                 }
             }
 
