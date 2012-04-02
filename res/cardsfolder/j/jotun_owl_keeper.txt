@@ -4,7 +4,7 @@ Types:Creature Giant
 Text:no text
 PT:3/3
 K:Cumulative upkeep:WU
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, put a 1/1 white Bird creature token with flying onto the battlefield for each age counter on it.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put a 1/1 white Bird creature token with flying onto the battlefield for each age counter on it.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Bird | TokenImage$ W 1 1 Bird Flying | TokenTypes$ Creature,Bird | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:X:TriggeredCard$CardCounters.AGE
 SVar:Rarity:Uncommon

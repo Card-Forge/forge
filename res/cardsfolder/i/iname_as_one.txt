@@ -5,7 +5,7 @@ Text:no text
 PT:8/8
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle your library.
 SVar:TrigSearch:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Spirit.YouCtrl | ChangeNum$ 1
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield.
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidCard$ Card.Self | SubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | ChangeType$ Spirit.YouCtrl | ChangeNum$ 1
 SVar:Rarity:Rare

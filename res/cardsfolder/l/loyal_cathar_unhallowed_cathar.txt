@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 Text:no text
 PT:2/2
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDelay | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control at the beginning of the next end step.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDelay | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control at the beginning of the next end step.
 SVar:TrigDelay:AB$ DelayedTrigger | Cost$ 0 | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ return CARDNAME to the battlefield transformed
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ TrigTransform
 SVar:TrigTransform:DB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
