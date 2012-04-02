@@ -4,7 +4,7 @@ Types:Artifact Creature Bird
 Text:no text
 PT:1/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return another target artifact card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return another target artifact card from your graveyard to your hand.
 SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.Other+YouCtrl | Cost$ 0
 SVar:SacMe:1
 SVar:Rarity:Rare

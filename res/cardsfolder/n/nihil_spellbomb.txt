@@ -3,7 +3,7 @@ ManaCost:1
 Types:Artifact
 Text:no text
 A:AB$ ChangeZoneAll | Cost$ T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | Shuffle$ True | SpellDescription$ Exile all cards from target player's graveyard.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may pay B. If you do, draw a card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may pay B. If you do, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ B | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
