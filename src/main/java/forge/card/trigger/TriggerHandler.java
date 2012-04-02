@@ -481,7 +481,7 @@ public class TriggerHandler {
         final AbilityFactory abilityFactory = new AbilityFactory();
 
         final SpellAbility[] sa = new SpellAbility[1];
-        Card host = AllZoneUtil.getCardState(regtrig.getHostCard());
+        Card host = AllZoneUtil.getCardState(regtrig.getHostCard()); 
 
         if (host == null) {
             host = regtrig.getHostCard();
@@ -508,6 +508,11 @@ public class TriggerHandler {
 
         controller[0] = host.getController();
         sa[0].setActivatingPlayer(host.getController());
+        if (params.containsKey("TriggerController")) {
+            Player p = AbilityFactory.getDefinedPlayers(host, params.get("TriggerController"), sa[0]).get(0);
+            controller[0] = p;
+            sa[0].setActivatingPlayer(p);
+        }
         sa[0].setStackDescription(sa[0].toString());
         // TODO - for Charms to supports AI, this needs to be removed
         if (sa[0].getActivatingPlayer().isHuman()) {
