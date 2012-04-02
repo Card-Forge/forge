@@ -44,6 +44,11 @@ Fixes/Features:
 - Fixed Exoskeletal Armor.
 - Updated some SVars (including some AB->DB conversions).
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- step was typed incorrectly
+- The AI can now use mana abilities that produce more than a single colored mana as though they produce only the single mana (and the game will no longer crash).
+- Fixing Cold Storage description
+- Fixed wrongly disabled Buy button in Bazaar
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -57,6 +62,7 @@ Loaming Shaman
 Kjeldoran Elite Guard
 Gaea's Blessing
 Tuktuk Scrapper
+Gutter Grime
 
 
 end
