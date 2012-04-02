@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, destroy target nonblack creature.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDestroy | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, destroy target nonblack creature.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chime_of_night.jpg

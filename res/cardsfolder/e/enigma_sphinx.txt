@@ -4,7 +4,7 @@ Types:Artifact Creature Sphinx
 Text:no text
 PT:5/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put it into your library third from the top.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME is put into your graveyard from the battlefield, put it into your library third from the top.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 2
 K:Cascade
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enigma_sphinx.jpg
