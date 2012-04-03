@@ -74,7 +74,6 @@ Name=SkieraCube
 1 Chandra Nalaar|M11
 1 Chandra's Phoenix|M12
 1 Chandra, the Firebrand|M12
-1 Chaos Warp|COM
 1 Char|RAV
 1 Chimeric Mass|SOM
 1 Chrome Mox|MRD
@@ -127,6 +126,7 @@ Name=SkieraCube
 1 Elspeth Tirel|SOM
 1 Elspeth, Knight-Errant|ALA
 1 Ember Hauler|M11
+1 Emeria Angel|ZEN
 1 Enclave Cryptologist|ROE
 1 Engineered Explosives|5DN
 1 Enlightened Tutor|MIR
@@ -137,10 +137,10 @@ Name=SkieraCube
 1 Everflowing Chalice|WWK
 1 Evolving Wilds|ROE
 1 Exalted Angel|ONS
-1 Exclude|INV
 1 Exhume|USG
 1 Fact or Fiction|INV
 1 Faith's Fetters|RAV
+1 Faithless Looting|DKA
 1 Farseek|RAV
 1 Fauna Shaman|M11
 1 Fetid Heath|EVE
@@ -178,13 +178,13 @@ Name=SkieraCube
 1 Goblin Guide|ZEN
 1 Goblin Patrol|USG
 1 Goblin Ruinblaster|ZEN
-1 Goblin Wardriver|MBS
 1 Godless Shrine|GPT
 1 Goldmeadow Harrier|LRW
 1 Grafted Wargear|5DN
 1 Grand Arbiter Augustin IV|DIS
 1 Grand Coliseum|ONS
 1 Grave Titan|M12
+1 Gravecrawler|DKA
 1 Graveborn Muse|LGN
 1 Great Sable Stag|M10
 1 Green Sun's Zenith|MBS
@@ -195,10 +195,10 @@ Name=SkieraCube
 1 Harrow|ZEN
 1 Hearth Kami|CHK
 1 Hell's Thunder|ALA
+1 Hellrider|DKA
 1 Hellspark Elemental|CFX
 1 Hero of Bladehold|MBS
 1 Hero of Oxid Ridge|MBS
-1 Hurricane|POR
 1 Hymn to Tourach|FEM
 1 Hypnotic Specter|M10
 1 Icy Manipulator|MRD
@@ -230,6 +230,7 @@ Name=SkieraCube
 1 Kird Ape|ARN
 1 Kitchen Finks|SHM
 1 Knight of Meadowgrain|LRW
+1 Knight Of The Reliquary|CFX
 1 Knight of the White Orchid|ALA
 1 Kodama of the North Tree|CHK
 1 Kodama's Reach|COM
@@ -241,7 +242,6 @@ Name=SkieraCube
 1 Krosan Tusker|ONS
 1 Land Tax|LEG
 1 Lavaclaw Reaches|WWK
-1 Leonin Relic-Warder|MBS
 1 Library of Alexandria|ARN
 1 Life from the Loam|RAV
 1 Lightning Bolt|M11
@@ -256,7 +256,6 @@ Name=SkieraCube
 1 Lone Missionary|ROE
 1 Looter il-Kor|TSP
 1 Lotus Cobra|ZEN
-1 Loxodon Hierarch|RAV
 1 Loxodon Warhammer|MRD
 1 Maelstrom Pulse|ARB
 1 Magma Jet|5DN
@@ -309,7 +308,6 @@ Name=SkieraCube
 1 Nether Void|LEG
 1 Nevinyrral's Disk|LEB
 1 Nezumi Graverobber|CHK
-1 Nezumi Shortfang|CHK
 1 Night's Whisper|5DN
 1 Noble Hierarch|CFX
 1 Noxious Revival|NPH
@@ -368,7 +366,6 @@ Name=SkieraCube
 1 Remand|RAV
 1 Repeal|GPT
 1 Reveillark|MOR
-1 Revoke Existence|SOM
 1 Rift Bolt|TSP
 1 Ring of Gix|ULG
 1 Rishadan Port|MMQ
@@ -410,6 +407,7 @@ Name=SkieraCube
 1 Soltari Monk|TMP
 1 Soltari Priest|TSB
 1 Soltari Trooper|TMP
+1 Sorin, Lord of Innistrad|DKA
 1 Sower of Temptation|LRW
 1 Spectral Procession|SHM
 1 Sphinx of Jwar Isle|ZEN
@@ -417,21 +415,20 @@ Name=SkieraCube
 1 Spined Thopter|NPH
 1 Squee, Goblin Nabob|MMQ
 1 Staggershock|ROE
-1 Starstorm|ONS
 1 Steam Vents|GPT
 1 Steel Hellkite|SOM
 1 Steppe Lynx|ZEN
 1 Stillmoon Cavalier|EVE
 1 Stirring Wildwood|WWK
-1 Stormblood Berserker|M12
 1 Stomping Ground|GPT
 1 Stone Rain|TMP
 1 Stoneforge Mystic|WWK
-1 Stonewood Invocation|TSP
 1 Stormbind|TSB
 1 Stormblood Berserker|M12
 1 Stormfront Pegasus|M12
+1 Strangleroot Geist|DKA
 1 Strip Mine|ATQ
+1 Stromkirk Noble|ISD
 1 Student of Warfare|ROE
 1 Stupor|TSB
 1 Sulfuric Vortex|SCG
@@ -448,23 +445,24 @@ Name=SkieraCube
 1 Taiga|LEB
 1 Tangle Wire|NMS
 1 Tarmogoyf|FUT
+1 Teferi, Mage of Zhalfir|TSP
 1 Temple Garden|RAV
 1 Temporal Isolation|TSP
 1 Terminate|PLS
 1 Terramorphic Expanse|TSP
 1 Tezzeret the Seeker|ALA
 1 Tezzeret, Agent of Bolas|MBS
+1 Thalia, Guardian of Thraben|DKA
 1 Thawing Glaciers|ALL
 1 Thieving Magpie|UDS
 1 Thirst for Knowledge|MRD
 1 Thornling|CFX
 1 Thoughtseize|LRW
-1 Thrashing Wumpus|MMQ
 1 Thrun, the Last Troll|MBS
-1 Tidehollow Sculler|ALA
 1 Time Spiral|USG
 1 Tinker|ULG
 1 Tombstalker|FUT
+1 Torch Fiend|DKA
 1 Treachery|UDS
 1 Treetop Village|ULG
 1 Triskelion|MRD
@@ -479,6 +477,7 @@ Name=SkieraCube
 1 Underground Sea|LEB
 1 Upheaval|ODY
 1 Vampire Hexmage|ZEN
+1 Vampire Interloper|ISD
 1 Vampire Lacerator|ZEN
 1 Vampire Nighthawk|ZEN
 1 Vampiric Tutor|VIS
@@ -493,6 +492,7 @@ Name=SkieraCube
 1 Volcanic Hammer|S99
 1 Volcanic Island|LEB
 1 Volrath's Stronghold|STH
+1 Vorapede|DKA
 1 Wake Thrasher|EVE
 1 Wall of Blossoms|STH
 1 Wall of Denial|COM
