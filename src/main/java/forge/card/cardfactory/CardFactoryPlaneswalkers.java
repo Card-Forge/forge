@@ -68,7 +68,7 @@ public class CardFactoryPlaneswalkers {
         }
 
         // *************** START *********** START **************************
-        if (cardName.equals("Sarkhan the Mad")) {
+        /*if (cardName.equals("Sarkhan the Mad")) {
 
             // Planeswalker book-keeping
             final int[] turn = new int[1];
@@ -80,7 +80,7 @@ public class CardFactoryPlaneswalkers {
              * Sarkhan the Mad deals damage to himself equal to that card's
              * converted mana cost.
              */
-            final SpellAbility ability1 = new Ability(card, "0") {
+            /*final SpellAbility ability1 = new Ability(card, "0") {
                 @Override
                 public void resolve() {
                     card.addCounterFromNonEffect(Counters.LOYALTY, 0);
@@ -135,7 +135,7 @@ public class CardFactoryPlaneswalkers {
              * puts a 5/5 red Dragon creature token with flying onto the
              * battlefield.
              */
-            final Target target2 = new Target(card, "TgtC");
+            /*final Target target2 = new Target(card, "TgtC");
             final Cost cost2 = new Cost(card, "SubCounter<2/LOYALTY>", true);
             final SpellAbility ability2 = new AbilityActivated(card, cost2, target2) {
                 private static final long serialVersionUID = 4322453486268967722L;
@@ -201,7 +201,7 @@ public class CardFactoryPlaneswalkers {
              * -4: Each Dragon creature you control deals damage equal to its
              * power to target player.
              */
-            final Target target3 = new Target(card, "Select target player", "Player");
+            /*final Target target3 = new Target(card, "Select target player", "Player");
             final Cost cost3 = new Cost(card, "SubCounter<4/LOYALTY>", true);
             final SpellAbility ability3 = new AbilityActivated(card, cost3, target3) {
                 private static final long serialVersionUID = -5488579738767048060L;
@@ -249,7 +249,7 @@ public class CardFactoryPlaneswalkers {
             card.setSets(card.getSets());
 
             return card;
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         return card;
     }
