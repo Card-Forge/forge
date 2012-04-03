@@ -35,6 +35,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
+import forge.PhaseType;
 import forge.Player;
 import forge.PlayerZone;
 import forge.Singletons;
@@ -268,7 +269,7 @@ public final class AbilityFactoryReveal {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")
                 && !params.containsKey("DestinationZone")) {
             return false;
         }

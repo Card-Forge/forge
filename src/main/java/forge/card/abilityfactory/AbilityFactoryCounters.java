@@ -34,6 +34,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
 import forge.PhaseHandler;
+import forge.PhaseType;
 import forge.Player;
 import forge.PlayerZone;
 import forge.Singletons;
@@ -390,7 +391,7 @@ public class AbilityFactoryCounters {
         }
 
         // Don't use non P1P1/M1M1 counters before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")
                 && !(type.equals("P1P1") || type.equals("M1M1"))) {
             return false;
         }
@@ -1819,7 +1820,7 @@ public class AbilityFactoryCounters {
             if (type.equals("P1P1") && sa.isAbility() && source.isCreature()
                     && sa.getPayCosts() != null && sa.getPayCosts().getTap()
                     && (phase.isNextTurn(AllZone.getHumanPlayer())
-                    || phase.isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY))) {
+                    || phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY))) {
                 boolean combatants = false;
                 for (Card c : hList) {
                     if (!c.equals(source) && c.isUntapped()) {

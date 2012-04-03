@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.PhaseType;
 import forge.Constant.Zone;
 import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
@@ -1428,7 +1429,7 @@ public class CombatUtil {
             combat = AllZone.getCombat();
         }
 
-        if (!trigger.zonesCheck()) {
+        if (!trigger.zonesCheck(AllZone.getZoneOf(trigger.getHostCard()))) {
             return false;
         }
         if (!trigger.requirementsCheck()) {
@@ -2505,10 +2506,10 @@ public class CombatUtil {
 
         final Card crd = c;
 
-        final String phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
+        final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
 
-        if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                || phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+        if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                || phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
             if (!cost.equals("0")) {
                 final Ability ability = new Ability(c, cost) {
                     @Override

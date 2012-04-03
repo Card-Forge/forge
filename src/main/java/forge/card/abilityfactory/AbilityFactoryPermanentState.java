@@ -28,9 +28,9 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.ComputerUtil;
-import forge.Constant;
 import forge.Constant.Zone;
 import forge.PhaseHandler;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -804,7 +804,7 @@ public class AbilityFactoryPermanentState {
 
         if (turn.isHuman()) {
             // Tap things down if it's Human's turn
-        } else if (phase.inCombat() && phase.isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+        } else if (phase.inCombat() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             // TODO Tap creatures down if in combat
         } else {
             // Generally don't want to tap things during AI turn outside of
@@ -1564,7 +1564,7 @@ public class AbilityFactoryPermanentState {
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
 
-        if (Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN)) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
             return false;
         }
 

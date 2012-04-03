@@ -36,6 +36,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.GameEntity;
+import forge.PhaseType;
 import forge.Player;
 import forge.PlayerZone;
 import forge.Singletons;
@@ -497,7 +498,7 @@ public final class AbilityFactoryChangeZone {
         }
 
         // don't use fetching to top of library/graveyard before main2
-        if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")
                 && !destination.equals("Battlefield") && !destination.equals("Hand")) {
             return false;
         }
@@ -1476,7 +1477,7 @@ public final class AbilityFactoryChangeZone {
                     }
                 }
                 // Save combatants
-                else if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                else if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     final CardList combatants = aiPermanents.getType("Creature");
                     CardListUtil.sortByEvaluateCreature(combatants);
 
@@ -1528,7 +1529,7 @@ public final class AbilityFactoryChangeZone {
         if (origin.equals(Zone.Battlefield)
                 && destination.equals(Zone.Exile)
                 && (subAPI.equals("DelayedTrigger") || (subAPI.equals("ChangeZone") && subAffected.equals("Remembered")))
-                && !(Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa
+                && !(Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa
                         .isAbility())) {
             return false;
         }
@@ -1538,7 +1539,7 @@ public final class AbilityFactoryChangeZone {
 
             // don't rush bouncing stuff when not going to attack
             if (!sa.isTrigger() && sa.getPayCosts() != null
-                    && Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2)
+                    && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                     && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
                     && AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()).isEmpty()) {
                 return false;
@@ -2237,7 +2238,7 @@ public final class AbilityFactoryChangeZone {
             }
 
             // Don't cast during main1?
-            if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.MAIN1, AllZone.getComputerPlayer())) {
+            if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN1, AllZone.getComputerPlayer())) {
                 return false;
             }
         } else if (origin.equals(Zone.Graveyard)) {

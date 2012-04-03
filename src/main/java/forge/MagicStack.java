@@ -421,7 +421,7 @@ public class MagicStack extends MyObservable {
             System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
         }
 
-        if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.CLEANUP)) { // If something
+        if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.CLEANUP)) { // If something
                                                              // triggers during
                                                              // Cleanup, need to
                                                              // repeat

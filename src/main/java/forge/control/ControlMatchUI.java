@@ -29,6 +29,7 @@ import forge.Card;
 import forge.CardContainer;
 import forge.CardList;
 import forge.Constant;
+import forge.PhaseType;
 import forge.Constant.Zone;
 import forge.GuiMultipleBlockers;
 import forge.Player;
@@ -253,62 +254,62 @@ public class ControlMatchUI implements CardContainer {
      * @param phase &emsp; {@link java.lang.String}
      * @return boolean
      */
-    public final boolean stopAtPhase(final Player turn, final String phase) {
+    public final boolean stopAtPhase(final Player turn, final PhaseType phase) {
         final List<ControlField> fieldControllers = ControlMatchUI.this.getFieldControls();
 
         // AI field is at index [0]
         if (turn.isComputer()) {
-            if (phase.equals(Constant.Phase.UPKEEP)) {
+            if (phase.equals(PhaseType.UPKEEP)) {
                 return fieldControllers.get(0).getView().getLblUpkeep().getEnabled();
-            } else if (phase.equals(Constant.Phase.DRAW)) {
+            } else if (phase.equals(PhaseType.DRAW)) {
                 return fieldControllers.get(0).getView().getLblDraw().getEnabled();
-            } else if (phase.equals(Constant.Phase.MAIN1)) {
+            } else if (phase.equals(PhaseType.MAIN1)) {
                 return fieldControllers.get(0).getView().getLblMain1().getEnabled();
-            } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
+            } else if (phase.equals(PhaseType.COMBAT_BEGIN)) {
                 return fieldControllers.get(0).getView().getLblBeginCombat().getEnabled();
-            } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+            } else if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return fieldControllers.get(0).getView().getLblDeclareAttackers().getEnabled();
-            } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+            } else if (phase.equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return fieldControllers.get(0).getView().getLblDeclareBlockers().getEnabled();
-            } else if (phase.equals(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
+            } else if (phase.equals(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
                 return fieldControllers.get(0).getView().getLblFirstStrike().getEnabled();
-            } else if (phase.equals(Constant.Phase.COMBAT_DAMAGE)) {
+            } else if (phase.equals(PhaseType.COMBAT_DAMAGE)) {
                 return fieldControllers.get(0).getView().getLblCombatDamage().getEnabled();
-            } else if (phase.equals(Constant.Phase.COMBAT_END)) {
+            } else if (phase.equals(PhaseType.COMBAT_END)) {
                 return fieldControllers.get(0).getView().getLblEndCombat().getEnabled();
-            } else if (phase.equals(Constant.Phase.MAIN2)) {
+            } else if (phase.equals(PhaseType.MAIN2)) {
                 return fieldControllers.get(0).getView().getLblMain2().getEnabled();
-            } else if (phase.equals(Constant.Phase.END_OF_TURN)) {
+            } else if (phase.equals(PhaseType.END_OF_TURN)) {
                 return fieldControllers.get(0).getView().getLblEndTurn().getEnabled();
-            } else if (phase.equals(Constant.Phase.DRAW)) {
+            } else if (phase.equals(PhaseType.DRAW)) {
                 return fieldControllers.get(0).getView().getLblDraw().getEnabled();
             }
         }
         // Human field is at index [1]
         else {
-            if (phase.equals(Constant.Phase.UPKEEP)) {
+            if (phase.equals(PhaseType.UPKEEP)) {
                 return fieldControllers.get(1).getView().getLblUpkeep().getEnabled();
-            } else if (phase.equals(Constant.Phase.DRAW)) {
+            } else if (phase.equals(PhaseType.DRAW)) {
                 return fieldControllers.get(1).getView().getLblDraw().getEnabled();
-            } else if (phase.equals(Constant.Phase.MAIN1)) {
+            } else if (phase.equals(PhaseType.MAIN1)) {
                 return fieldControllers.get(1).getView().getLblMain1().getEnabled();
-            } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
+            } else if (phase.equals(PhaseType.COMBAT_BEGIN)) {
                 return fieldControllers.get(1).getView().getLblBeginCombat().getEnabled();
-            } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+            } else if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return fieldControllers.get(1).getView().getLblDeclareAttackers().getEnabled();
-            } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+            } else if (phase.equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return fieldControllers.get(1).getView().getLblDeclareBlockers().getEnabled();
-            } else if (phase.equals(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
+            } else if (phase.equals(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
                 return fieldControllers.get(1).getView().getLblFirstStrike().getEnabled();
-            } else if (phase.equals(Constant.Phase.COMBAT_DAMAGE)) {
+            } else if (phase.equals(PhaseType.COMBAT_DAMAGE)) {
                 return fieldControllers.get(1).getView().getLblCombatDamage().getEnabled();
-            } else if (phase.equals(Constant.Phase.COMBAT_END)) {
+            } else if (phase.equals(PhaseType.COMBAT_END)) {
                 return fieldControllers.get(1).getView().getLblEndCombat().getEnabled();
-            } else if (phase.equals(Constant.Phase.MAIN2)) {
+            } else if (phase.equals(PhaseType.MAIN2)) {
                 return fieldControllers.get(1).getView().getLblMain2().getEnabled();
-            } else if (phase.equals(Constant.Phase.END_OF_TURN)) {
+            } else if (phase.equals(PhaseType.END_OF_TURN)) {
                 return fieldControllers.get(1).getView().getLblEndTurn().getEnabled();
-            } else if (phase.equals(Constant.Phase.DRAW)) {
+            } else if (phase.equals(PhaseType.DRAW)) {
                 return fieldControllers.get(1).getView().getLblDraw().getEnabled();
             }
         }

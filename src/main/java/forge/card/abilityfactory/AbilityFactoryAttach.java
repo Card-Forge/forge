@@ -32,10 +32,10 @@ import forge.CardUtil;
 import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
-import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.GameEntity;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -920,7 +920,7 @@ public class AbilityFactoryAttach {
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
-        if (Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && !"Curse".equals(af.getMapParams().get("AILogic"))) {
             return false;
         }
@@ -1421,7 +1421,7 @@ public class AbilityFactoryAttach {
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
-        if (Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && !"Curse".equals(af.getMapParams().get("AILogic"))) {
             return false;
         }

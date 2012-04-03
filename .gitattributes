@@ -11397,6 +11397,7 @@ src/main/java/forge/MyObservable.java svneol=native#text/plain
 src/main/java/forge/NameChanger.java svneol=native#text/plain
 src/main/java/forge/Phase.java svneol=native#text/plain
 src/main/java/forge/PhaseHandler.java -text
+src/main/java/forge/PhaseType.java -text
 src/main/java/forge/PhaseUtil.java svneol=native#text/plain
 src/main/java/forge/Player.java svneol=native#text/plain
 src/main/java/forge/PlayerType.java svneol=native#text/plain
@@ -11918,7 +11919,6 @@ src/test/java/forge/GuiMigrateLocalMWSSetPicturesHQTest.java svneol=native#text/
 src/test/java/forge/GuiMultipleBlockers4Test.java svneol=native#text/plain
 src/test/java/forge/GuiProgressBarWindowTest.java svneol=native#text/plain
 src/test/java/forge/PanelTest.java svneol=native#text/plain
-src/test/java/forge/PhaseHandlerTest.java -text
 src/test/java/forge/RunTest.java svneol=native#text/plain
 src/test/java/forge/TinyTest.java svneol=native#text/plain
 src/test/java/forge/card/mana/ManaPartTest.java svneol=native#text/plain

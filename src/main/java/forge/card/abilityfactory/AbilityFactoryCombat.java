@@ -26,8 +26,8 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CombatUtil;
 import forge.ComputerUtil;
-import forge.Constant;
 import forge.Constant.Zone;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -207,7 +207,7 @@ public final class AbilityFactoryCombat {
         if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
             return false;
         }
-        if (!Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        if (!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
 
@@ -247,9 +247,9 @@ public final class AbilityFactoryCombat {
         // AI should only activate this during Human's turn
         boolean chance;
         if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer().getOpponent())) {
-            chance = Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE);
+            chance = Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
         } else {
-            chance = Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DAMAGE);
+            chance = Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
         }
 
         final AbilitySub subAb = sa.getSubAbility();
@@ -281,9 +281,9 @@ public final class AbilityFactoryCombat {
 
         boolean chance;
         if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer().getOpponent())) {
-            chance = Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE);
+            chance = Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
         } else {
-            chance = Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DAMAGE);
+            chance = Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
         }
 
         // check SubAbilities DoTrigger?
@@ -928,7 +928,7 @@ public final class AbilityFactoryCombat {
         }
 
         // only use on creatures that can attack
-        if (!Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2)) {
+        if (!Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
             return false;
         }
 

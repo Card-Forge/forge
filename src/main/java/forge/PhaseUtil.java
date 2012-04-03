@@ -19,6 +19,7 @@ package forge;
 
 import java.util.HashMap;
 
+import forge.PhaseType;
 import forge.Constant.Zone;
 import forge.card.trigger.TriggerType;
 import forge.control.ControlMatchUI;
@@ -363,10 +364,10 @@ public class PhaseUtil {
      * @return a boolean.
      */
     public static boolean isBeforeAttackersAreDeclared() {
-        final String phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
-        return phase.equals(Constant.Phase.UNTAP) || phase.equals(Constant.Phase.UPKEEP)
-                || phase.equals(Constant.Phase.DRAW) || phase.equals(Constant.Phase.MAIN1)
-                || phase.equals(Constant.Phase.COMBAT_BEGIN);
+        final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
+        return phase.equals(PhaseType.UNTAP) || phase.equals(PhaseType.UPKEEP)
+                || phase.equals(PhaseType.DRAW) || phase.equals(PhaseType.MAIN1)
+                || phase.equals(PhaseType.COMBAT_BEGIN);
     }
 
     /**
@@ -376,7 +377,7 @@ public class PhaseUtil {
      * @param s
      *            &emsp; Phase state
      */
-    public static void visuallyActivatePhase(final String s) {
+    public static void visuallyActivatePhase(final PhaseType s) {
         PhaseLabel lbl = null;
         final Player p = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final ControlMatchUI t = Singletons.getControl().getControlMatch();
@@ -388,29 +389,29 @@ public class PhaseUtil {
             i = 1;
         }
 
-        if (s.equals(Constant.Phase.UPKEEP)) {
+        if (s.equals(PhaseType.UPKEEP)) {
             lbl = t.getFieldControls().get(i).getView().getLblUpkeep();
-        } else if (s.equals(Constant.Phase.DRAW)) {
+        } else if (s.equals(PhaseType.DRAW)) {
             lbl = t.getFieldControls().get(i).getView().getLblDraw();
-        } else if (s.equals(Constant.Phase.MAIN1)) {
+        } else if (s.equals(PhaseType.MAIN1)) {
             lbl = t.getFieldControls().get(i).getView().getLblMain1();
-        } else if (s.equals(Constant.Phase.COMBAT_BEGIN)) {
+        } else if (s.equals(PhaseType.COMBAT_BEGIN)) {
             lbl = t.getFieldControls().get(i).getView().getLblBeginCombat();
-        } else if (s.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+        } else if (s.equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             lbl = t.getFieldControls().get(i).getView().getLblDeclareAttackers();
-        } else if (s.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+        } else if (s.equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             lbl = t.getFieldControls().get(i).getView().getLblDeclareBlockers();
-        } else if (s.equals(Constant.Phase.COMBAT_DAMAGE)) {
+        } else if (s.equals(PhaseType.COMBAT_DAMAGE)) {
             lbl = t.getFieldControls().get(i).getView().getLblCombatDamage();
-        } else if (s.equals(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
+        } else if (s.equals(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
             lbl = t.getFieldControls().get(i).getView().getLblFirstStrike();
-        } else if (s.equals(Constant.Phase.COMBAT_END)) {
+        } else if (s.equals(PhaseType.COMBAT_END)) {
             lbl = t.getFieldControls().get(i).getView().getLblEndCombat();
-        } else if (s.equals(Constant.Phase.MAIN2)) {
+        } else if (s.equals(PhaseType.MAIN2)) {
             lbl = t.getFieldControls().get(i).getView().getLblMain2();
-        } else if (s.equals(Constant.Phase.END_OF_TURN)) {
+        } else if (s.equals(PhaseType.END_OF_TURN)) {
             lbl = t.getFieldControls().get(i).getView().getLblEndTurn();
-        } else if (s.equals(Constant.Phase.CLEANUP)) {
+        } else if (s.equals(PhaseType.CLEANUP)) {
             lbl = t.getFieldControls().get(i).getView().getLblCleanup();
         } else {
             return;

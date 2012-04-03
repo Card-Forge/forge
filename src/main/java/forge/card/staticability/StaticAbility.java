@@ -18,11 +18,13 @@
 package forge.card.staticability;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.PhaseType;
 import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.Player;
@@ -422,18 +424,7 @@ public class StaticAbility {
         }
 
         if (this.mapParams.containsKey("Phases")) {
-            String phases = this.mapParams.get("Phases");
-
-            if (phases.contains("->")) {
-                // If phases lists a Range, split and Build Activate String
-                // Combat_Begin->Combat_End (During Combat)
-                // Draw-> (After Upkeep)
-                // Upkeep->Combat_Begin (Before Declare Attackers)
-
-                final String[] split = phases.split("->", 2);
-                phases = Singletons.getModel().getGameState().getPhaseHandler().buildActivateString(split[0], split[1]);
-            }
-
+            List<PhaseType> phases = PhaseType.parseRange(this.mapParams.get("Phases"));
             if (!phases.contains(Singletons.getModel().getGameState().getPhaseHandler().getPhase())) {
                 return false;
             }

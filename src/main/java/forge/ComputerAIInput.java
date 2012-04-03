@@ -19,6 +19,7 @@ package forge;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.PhaseType;
 import forge.control.input.Input;
 
 /**
@@ -89,28 +90,39 @@ public class ComputerAIInput extends Input {
      */
     private void think() {
         // TODO instead of setNextPhase, pass priority
-        final String phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
+        final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
 
         if (AllZone.getStack().size() > 0) {
             this.computer.stackNotEmpty();
-        } else if (phase.equals(Constant.Phase.MAIN1)) {
-            Log.debug("Computer main1");
-            this.computer.main();
-        } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
-            this.computer.beginCombat();
-        } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
-            this.computer.declareAttackers();
-        } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
-            this.computer.declareAttackersAfter();
-        } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-            this.computer.declareBlockersAfter();
-        } else if (phase.equals(Constant.Phase.COMBAT_END)) {
-            this.computer.endOfCombat();
-        } else if (phase.equals(Constant.Phase.MAIN2)) {
-            Log.debug("Computer main2");
-            this.computer.main();
-        } else {
-            this.computer.stackNotEmpty();
+        } else { 
+            switch(phase) {
+                case MAIN1:
+                    Log.debug("Computer main1"); 
+                    this.computer.main();
+                    break;
+                case COMBAT_BEGIN:
+                    this.computer.beginCombat();
+                    break;
+                case COMBAT_DECLARE_ATTACKERS:
+                    this.computer.declareAttackers();
+                    break;
+                case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
+                    this.computer.declareAttackersAfter();
+                    break;
+                case COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY:
+                    this.computer.declareBlockersAfter();
+                    break;
+                case COMBAT_END:
+                    this.computer.endOfCombat();
+                    break;
+                case MAIN2:
+                    Log.debug("Computer main2");
+                    this.computer.main();
+                    break;
+                default:
+                    this.computer.stackNotEmpty();
+                    break;
+            }
         }
 
     } // think

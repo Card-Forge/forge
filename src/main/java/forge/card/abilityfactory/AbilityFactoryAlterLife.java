@@ -26,8 +26,8 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.ComputerUtil;
-import forge.Constant;
 import forge.Counters;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cost.Cost;
@@ -309,7 +309,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't use lifegain before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -704,7 +704,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't use loselife before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases") && !priority) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases") && !priority) {
             return false;
         }
 
@@ -1158,7 +1158,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't use poison before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -1377,7 +1377,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't use setLife before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 

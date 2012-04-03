@@ -414,6 +414,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             return this.blankCard;
         }
 
+        //System.out.println(cardName);
         return this.getCard2(cardName, owner);
     }
 
@@ -1504,12 +1505,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Sylvan Library")) {
-            final Trigger drawStepTrigger = forge.card.trigger.TriggerHandler.parseTrigger(
-                    "Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | "
-                            + "TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of "
-                            + "your draw step, you may draw two additional cards. If you do, choose two "
-                            + "cards in your hand drawn this turn. For each of those cards, "
-                            + "pay 4 life or put the card on top of your library.", card, true);
+
             final Ability ability = new Ability(card, "") {
                 @Override
                 public void resolve() {
@@ -1556,9 +1552,14 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             sb.append("If you do, choose two cards in your hand drawn this turn. For each of those cards, ");
             sb.append("pay 4 life or put the card on top of your library.");
             ability.setStackDescription(sb.toString());
-
+            
+            final Trigger drawStepTrigger = forge.card.trigger.TriggerHandler.parseTrigger(
+                    "Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | "
+                            + "TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of "
+                            + "your draw step, you may draw two additional cards. If you do, choose two "
+                            + "cards in your hand drawn this turn. For each of those cards, "
+                            + "pay 4 life or put the card on top of your library.", card, true);
             drawStepTrigger.setOverridingAbility(ability);
-
             card.addTrigger(drawStepTrigger);
         } // *************** END ************ END **************************
 

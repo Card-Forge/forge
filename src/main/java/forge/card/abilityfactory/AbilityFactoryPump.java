@@ -30,10 +30,10 @@ import forge.CardUtil;
 import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
-import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.PhaseHandler;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -290,21 +290,21 @@ public class AbilityFactoryPump {
         } else if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
             if (ph.isPlayerTurn(computer) || !CombatUtil.canAttack(card)
                     || (card.getNetCombatDamage() <= 0)
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME can't block.")) {
             if (ph.isPlayerTurn(human) || !CombatUtil.canBlock(card)
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return false;
             }
         } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
-            if (ph.isBefore(Constant.Phase.MAIN2) || card.isUntapped() || ph.isPlayerTurn(human)) {
+            if (ph.getPhase().isBefore(PhaseType.MAIN2) || card.isUntapped() || ph.isPlayerTurn(human)) {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
         }
@@ -338,48 +338,48 @@ public class AbilityFactoryPump {
         if (evasive) {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || !CombatUtil.canBeBlocked(card)
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || (card.getNetCombatDamage() <= 0) || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
                 return false;
             }
         } else if (keyword.endsWith("Haste")) {
             if (!card.hasSickness() || ph.isPlayerTurn(human) || card.isTapped()
                     || card.hasKeyword("CARDNAME can attack as though it had haste.")
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || !CombatUtil.canAttackNextTurn(card)) {
                 return false;
             }
         } else if (combatRelevant) {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || !CombatUtil.canBeBlocked(card)
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
                 return false;
             }
         } else if (keyword.equals("Double Strike")) {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || card.getNetCombatDamage() <= 0
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 return false;
             }
         } else if (keyword.startsWith("Rampage")) {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || !CombatUtil.canBeBlocked(card)
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 2)) {
                 return false;
             }
         } else if (keyword.startsWith("Flanking")) {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || !CombatUtil.canBeBlocked(card)
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || AllZoneUtil.getCreaturesInPlay(human).getNotKeyword("Flanking").size() < 1) {
                 return false;
             }
         } else if (keyword.startsWith("Trample")) {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || !CombatUtil.canBeBlocked(card)
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)
                     || card.getNetCombatDamage() + attack <= 1) {
                 return false;
@@ -393,7 +393,7 @@ public class AbilityFactoryPump {
             }
             if ((ph.isPlayerTurn(human))
                     || !(CombatUtil.canAttack(card) || card.isAttacking())
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 return false;
             }
         } else if (keyword.endsWith("Wither")) {
@@ -416,13 +416,13 @@ public class AbilityFactoryPump {
             }
         } else if (keyword.equals("Vigilance")) {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
                 return false;
             }
         } else if (keyword.equals("Reach")) {
             if (ph.isPlayerTurn(computer)
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                     || !AllZone.getCombat().getAttackerList().getKeyword("Flying").isEmpty()
                     || !card.hasKeyword("Flying")) {
                 return false;
@@ -453,7 +453,7 @@ public class AbilityFactoryPump {
         }
 
         // will the creature attack (only relevant for sorcery speed)?
-        if (phase.isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+        if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(AllZone.getComputerPlayer())
                 && CardFactoryUtil.doesCreatureAttackAI(c)
                 && attack > 0) {
@@ -469,13 +469,13 @@ public class AbilityFactoryPump {
         }
 
         // is the creature unblocked and the spell will pump its power?
-        if (phase.is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isUnblocked(c) && (attack > 0)) {
             return true;
         }
 
         // is the creature blocked and the blocker would survive
-        if (phase.is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) && (attack > 0)
+        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) && (attack > 0)
                 && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
                 && AllZone.getCombat().getBlockers(c) != null
                 && !AllZone.getCombat().getBlockers(c).isEmpty()
@@ -485,8 +485,8 @@ public class AbilityFactoryPump {
 
         // if the life of the computer is in danger, try to pump
         // potential blockers before declaring blocks
-        if (phase.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                && phase.isBefore(Constant.Phase.COMBAT_DAMAGE)
+        if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                && phase.getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
                 && phase.isPlayerTurn(AllZone.getHumanPlayer())
                 && !AllZone.getCombat().getAttackers().isEmpty()
                 && CombatUtil.canBlock(c, AllZone.getCombat())
@@ -611,7 +611,7 @@ public class AbilityFactoryPump {
         final SpellAbilityRestriction restrict = sa.getRestrictions();
 
         // Phase Restrictions
-        if ((AllZone.getStack().size() == 0) && Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_BEGIN)) {
+        if ((AllZone.getStack().size() == 0) && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!this.abilityFactory.isCurse() && !AbilityFactory.isSorcerySpeed(sa)) {
@@ -713,7 +713,7 @@ public class AbilityFactoryPump {
     private boolean pumpTgtAI(final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         if (!mandatory
                 && !sa.isTrigger()
-                && Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && !(this.abilityFactory.isCurse() && (defense < 0))
                 && !this.containsNonCombatKeyword(this.keywords)) {
             return false;
@@ -746,11 +746,11 @@ public class AbilityFactoryPump {
             // If the cost is tapping, don't activate before declare
             // attack/block
             if ((sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
-                if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
                     list.remove(sa.getSourceCard());
                 }
-                if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+                if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                         && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
                     list.remove(sa.getSourceCard());
                 }
@@ -1428,7 +1428,7 @@ public class AbilityFactoryPump {
         } // end Curse
 
         // don't use non curse PumpAll after Combat_Begin until AI is improved
-        if (Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN)) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
             return false;
         }
 

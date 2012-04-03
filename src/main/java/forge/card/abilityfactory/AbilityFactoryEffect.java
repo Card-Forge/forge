@@ -28,9 +28,9 @@ import forge.CardListFilter;
 import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
-import forge.Constant;
 import forge.Constant.Zone;
 import forge.PhaseHandler;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.replacement.ReplacementEffect;
@@ -231,7 +231,7 @@ public class AbilityFactoryEffect {
             logic = params.get("AILogic");
             final PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
             if (logic.equals("BeginningOfOppTurn")) {
-                if (phase.isPlayerTurn(AllZone.getComputerPlayer()) || phase.isAfter(Constant.Phase.DRAW)) {
+                if (phase.isPlayerTurn(AllZone.getComputerPlayer()) || phase.getPhase().isAfter(PhaseType.DRAW)) {
                     return false;
                 }
                 randomReturn = true;
@@ -239,7 +239,7 @@ public class AbilityFactoryEffect {
                 if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
                     return false;
                 }
-                if (!Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     return false;
                 }
                 if (AllZone.getStack().size() != 0) {

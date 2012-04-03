@@ -41,6 +41,7 @@ import forge.Command;
 import forge.CommandArgs;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.PhaseType;
 import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameActionUtil;
@@ -899,7 +900,7 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlayAI() {
-                if (Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.MAIN1)
+                if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.MAIN1)
                         || Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
                     return false;
                 }
@@ -1033,7 +1034,7 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlayAI() {
 
-                if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2)) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
                     return false;
                 }
 
@@ -1361,7 +1362,7 @@ public class CardFactoryUtil {
                     public boolean addCard(final Card c) {
                         return c.isCreature()
                                 && (CombatUtil.canAttack(c) || (CombatUtil.canAttackNextTurn(c)
-                                && Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.MAIN2)))
+                                && Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN2)))
                                 && (((c.getNetDefense() + tough) > 0) || sourceCard.getName().equals("Skullclamp"));
                     }
                 });
@@ -3113,8 +3114,8 @@ public class CardFactoryUtil {
 
         // Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase")) {
-            final String cPhase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
-            if ((cPhase.equals(Constant.Phase.MAIN1) || cPhase.equals(Constant.Phase.MAIN2))
+            final PhaseType cPhase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
+            if ((cPhase.equals(PhaseType.MAIN1) || cPhase.equals(PhaseType.MAIN2))
                     && Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().equals(cardController)) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {

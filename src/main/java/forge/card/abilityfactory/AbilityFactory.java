@@ -30,6 +30,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -1438,11 +1439,11 @@ public class AbilityFactory {
             return false;
         }
 
-        if (sa.getRestrictions().getPlaneswalker() && Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.MAIN2)) {
+        if (sa.getRestrictions().getPlaneswalker() && Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN2)) {
             return true;
         }
 
-        return (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.END_OF_TURN) && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(
+        return (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN) && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(
                 AllZone.getComputerPlayer()));
     }
 
@@ -1458,8 +1459,8 @@ public class AbilityFactory {
      */
     public static boolean waitForBlocking(final SpellAbility sa) {
 
-        return (sa.getSourceCard().isCreature() && sa.getPayCosts().getTap() && (Singletons.getModel().getGameState().getPhaseHandler().isBefore(
-                Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) || Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(
+        return (sa.getSourceCard().isCreature() && sa.getPayCosts().getTap() && (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(
+                PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) || Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(
                 AllZone.getHumanPlayer())));
     }
 

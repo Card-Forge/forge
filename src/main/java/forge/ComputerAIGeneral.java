@@ -355,7 +355,7 @@ public class ComputerAIGeneral implements Computer {
         if (AllZone.getStack().size() == 0) {
             final ArrayList<SpellAbility> sas = this.getSpellAbilities(cards);
             boolean pass = (sas.size() == 0)
-                    || Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.END_OF_TURN, AllZone.getComputerPlayer());
+                    || Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN, AllZone.getComputerPlayer());
             if (!pass) { // Each AF should check the phase individually
                 pass = ComputerUtil.playSpellAbilities(sas);
             }

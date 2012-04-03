@@ -32,6 +32,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameEntity;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -323,7 +324,7 @@ public class AbilityFactoryGainControl {
         // Don't steal something if I can't Attack without, or prevent it from
         // blocking at least
         if ((this.lose != null) && this.lose.contains("EOT")
-                && Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+                && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             return false;
         }
 
@@ -524,7 +525,7 @@ public class AbilityFactoryGainControl {
                 }
             }
             if ((this.lose != null) && this.lose.contains("EOT")
-                    && Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+                    && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
         } else {

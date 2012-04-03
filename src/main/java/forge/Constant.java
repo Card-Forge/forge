@@ -125,57 +125,6 @@ public final class Constant {
     }
 
     /**
-     * The Interface Phase.
-     */
-    public static class Phase {
-
-        /** The Constant Untap. */
-        public static final String UNTAP = "Untap";
-
-        /** The Constant Upkeep. */
-        public static final String UPKEEP = "Upkeep";
-
-        /** The Constant Draw. */
-        public static final String DRAW = "Draw";
-
-        /** The Constant Main1. */
-        public static final String MAIN1 = "Main1";
-
-        /** The Constant Combat_Begin. */
-        public static final String COMBAT_BEGIN = "BeginCombat";
-
-        /** The Constant Combat_Declare_Attackers. */
-        public static final String COMBAT_DECLARE_ATTACKERS = "Declare Attackers";
-
-        /** The Constant Combat_Declare_Attackers_InstantAbility. */
-        public static final String COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY = "Declare Attackers - Play Instants and Abilities";
-
-        /** The Constant Combat_Declare_Blockers. */
-        public static final String COMBAT_DECLARE_BLOCKERS = "Declare Blockers";
-
-        /** The Constant Combat_Declare_Blockers_InstantAbility. */
-        public static final String COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY = "Declare Blockers - Play Instants and Abilities";
-
-        /** The Constant Combat_Damage. */
-        public static final String COMBAT_DAMAGE = "Combat Damage";
-
-        /** The Constant Combat_FirstStrikeDamage. */
-        public static final String COMBAT_FIRST_STRIKE_DAMAGE = "First Strike Damage";
-
-        /** The Constant Combat_End. */
-        public static final String COMBAT_END = "EndCombat";
-
-        /** The Constant Main2. */
-        public static final String MAIN2 = "Main2";
-
-        /** The Constant End_Of_Turn. */
-        public static final String END_OF_TURN = "End of Turn";
-
-        /** The Constant Cleanup. */
-        public static final String CLEANUP = "Cleanup";
-    }
-
-    /**
      * The Enum Zone.
      */
     public enum Zone {
@@ -205,20 +154,14 @@ public final class Constant {
         /** Ante. */
         Ante(false);
 
-        public static final Zone[] StaticAbilitiesSourceZones = new Zone[]{Battlefield, Graveyard, Exile, Hand};
+        public static final Zone[] StaticAbilitiesSourceZones = new Zone[]{Battlefield, Graveyard, Exile/*, Hand*/};
 
         private final boolean holdsHiddenInfo;
         private Zone(boolean holdsHidden) {
             holdsHiddenInfo = holdsHidden;
         }
 
-        /**
-         * Smart value of.
-         * 
-         * @param value
-         *            the value
-         * @return the zone
-         */
+
         public static Zone smartValueOf(final String value) {
             if (value == null) {
                 return null;
@@ -235,13 +178,6 @@ public final class Constant {
             throw new IllegalArgumentException("No element named " + value + " in enum Zone");
         }
 
-        /**
-         * List value of.
-         * 
-         * @param values
-         *            the values
-         * @return the list
-         */
         public static List<Zone> listValueOf(final String values) {
             final List<Zone> result = new ArrayList<Constant.Zone>();
             for (final String s : values.split("[, ]+")) {
@@ -355,3 +291,5 @@ public final class Constant {
     }
 
 } // Constant
+
+

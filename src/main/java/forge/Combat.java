@@ -625,7 +625,7 @@ public class Combat {
                     // TODO if Declare Blockers and Declare Blockers (Abilities)
                     // merge this logic needs to be tweaked
                     if ((this.getBlockers(a).size() == 0)
-                            && Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+                            && Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                         this.blocked.remove(a);
                     }
                 }
@@ -880,7 +880,7 @@ public class Combat {
         // This function handles both Regular and First Strike combat assignment
         final Player player = AllZone.getCombat().getDefendingPlayer();
 
-        final boolean bFirstStrike = Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE);
+        final boolean bFirstStrike = Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
 
         final HashMap<Card, Integer> defMap = AllZone.getCombat().getDefendingDamageMap();
 

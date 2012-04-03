@@ -18,8 +18,10 @@
 package forge.card.spellability;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.Constant;
+import forge.PhaseType;
 
 /**
  * <p>
@@ -52,7 +54,7 @@ public class SpellAbilityVariables {
      */
     public void setVariables(SpellAbilityVariables sav) {
         this.zone = sav.getZone();
-        this.phases = new ArrayList<String>(sav.getPhases());
+        this.phases = new ArrayList<PhaseType>(sav.getPhases());
         this.sorcerySpeed = sav.isSorcerySpeed();
         this.instantSpeed = sav.isInstantSpeed();
         this.anyPlayer = sav.isAnyPlayer();
@@ -86,7 +88,7 @@ public class SpellAbilityVariables {
     private Constant.Zone zone = Constant.Zone.Battlefield;
 
     /** The phases. */
-    private ArrayList<String> phases = new ArrayList<String>();
+    private List<PhaseType> phases = new ArrayList<PhaseType>();
 
     /** The b sorcery speed. */
     private boolean sorcerySpeed = false;
@@ -435,10 +437,8 @@ public class SpellAbilityVariables {
      * @param phasesString
      *            a {@link java.lang.String} object.
      */
-    public final void setPhases(final String phasesString) {
-        for (final String s : phasesString.split(",")) {
-            this.phases.add(s);
-        }
+    public final void setPhases(final List<PhaseType> phases) {
+        this.phases.addAll(phases);
     }
 
     /**
@@ -745,19 +745,10 @@ public class SpellAbilityVariables {
      * 
      * @return the phases
      */
-    public final ArrayList<String> getPhases() {
+    public final List<PhaseType> getPhases() {
         return this.phases;
     }
 
-    /**
-     * Sets the phases.
-     * 
-     * @param phases0
-     *            the new phases
-     */
-    public final void setPhases(final ArrayList<String> phases0) {
-        this.phases = phases0;
-    }
 
     /**
      * Gets the present defined.

@@ -18,6 +18,7 @@
 package forge.card.trigger;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import forge.AllZone;
@@ -28,6 +29,7 @@ import forge.Command;
 import forge.CommandArgs;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.PhaseType;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
@@ -42,6 +44,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.util.TextUtil;
 
 /**
  * <p>
@@ -200,76 +203,17 @@ public class TriggerHandler {
     public static Trigger parseTrigger(final HashMap<String, String> mapParams, final Card host, final boolean intrinsic) {
         Trigger ret = null;
 
-//        final String mode = mapParams.get("Mode");
-        final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
+        final TriggerType type = TriggerType.smartValueOf(mapParams.remove("Mode"));
         ret = type.createTrigger(mapParams, host, intrinsic);
-//
-//        if (mode.equals("AbilityCast")) {
-//            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
-//        } else if (mode.equals("Always")) {
-//            ret = new TriggerAlways(mapParams, host, intrinsic);
-//        } else if (mode.equals("AttackerBlocked")) {
-//            ret = new TriggerAttackerBlocked(mapParams, host, intrinsic);
-//        } else if (mode.equals("AttackersDeclared")) {
-//            ret = new TriggerAttackersDeclared(mapParams, host, intrinsic);
-//        } else if (mode.equals("AttackerUnblocked")) {
-//            ret = new TriggerAttackerUnblocked(mapParams, host, intrinsic);
-//        } else if (mode.equals("Attacks")) {
-//            ret = new TriggerAttacks(mapParams, host, intrinsic);
-//        } else if (mode.equals("BecomesTarget")) {
-//            ret = new TriggerBecomesTarget(mapParams, host, intrinsic);
-//        } else if (mode.equals("Blocks")) {
-//            ret = new TriggerBlocks(mapParams, host, intrinsic);
-//        } else if (mode.equals("Championed")) {
-//            ret = new TriggerChampioned(mapParams, host, intrinsic);
-//        } else if (mode.equals("ChangesController")) {
-//            ret = new TriggerChangesController(mapParams, host, intrinsic);
-//        } else if (mode.equals("ChangesZone")) {
-//            ret = new TriggerChangesZone(mapParams, host, intrinsic);
-//        } else if (mode.equals("Clashed")) {
-//            ret = new TriggerClashed(mapParams, host, intrinsic);
-//        } else if (mode.equals("CounterAdded")) {
-//            ret = new TriggerCounterAdded(mapParams, host, intrinsic);
-//        } else if (mode.equals("CounterRemoved")) {
-//            ret = new TriggerCounterRemoved(mapParams, host, intrinsic);
-//        } else if (mode.equals("Cycled")) {
-//            ret = new TriggerCycled(mapParams, host, intrinsic);
-//        } else if (mode.equals("DamageDone")) {
-//            ret = new TriggerDamageDone(mapParams, host, intrinsic);
-//        } else if (mode.equals("Discarded")) {
-//            ret = new TriggerDiscarded(mapParams, host, intrinsic);
-//        } else if (mode.equals("Drawn")) {
-//            ret = new TriggerDrawn(mapParams, host, intrinsic);
-//        } else if (mode.equals("LandPlayed")) {
-//            ret = new TriggerLandPlayed(mapParams, host, intrinsic);
-//        } else if (mode.equals("LifeGained")) {
-//            ret = new TriggerLifeGained(mapParams, host, intrinsic);
-//        } else if (mode.equals("LifeLost")) {
-//            ret = new TriggerLifeLost(mapParams, host, intrinsic);
-//        } else if (mode.equals("Phase")) {
-//            ret = new TriggerPhase(mapParams, host, intrinsic);
-//        } else if (mode.equals("Sacrificed")) {
-//            ret = new TriggerSacrificed(mapParams, host, intrinsic);
-//        } else if (mode.equals("Shuffled")) {
-//            ret = new TriggerShuffled(mapParams, host, intrinsic);
-//        } else if (mode.equals("SpellAbilityCast")) {
-//            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
-//        } else if (mode.equals("SpellCast")) {
-//            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
-//        } else if (mode.equals("Taps")) {
-//            ret = new TriggerTaps(mapParams, host, intrinsic);
-//        } else if (mode.equals("TapsForMana")) {
-//            ret = new TriggerTapsForMana(mapParams, host, intrinsic);
-//        } else if (mode.equals("Transformed")) {
-//            ret = new TriggerTransformed(mapParams, host, intrinsic);
-//        } else if (mode.equals("TurnFaceUp")) {
-//            ret = new TriggerTurnFaceUp(mapParams, host, intrinsic);
-//        } else if (mode.equals("Unequip")) {
-//            ret = new TriggerUnequip(mapParams, host, intrinsic);
-//        } else if (mode.equals("Untaps")) {
-//            ret = new TriggerUntaps(mapParams, host, intrinsic);
-//        }
 
+        String triggerZones = mapParams.remove("TriggerZones");
+        if ( null != triggerZones )
+            ret.setTriggerZone(EnumSet.copyOf(Zone.listValueOf(triggerZones)));
+
+        String triggerPhases = mapParams.remove("TriggerPhases");
+        if ( null != triggerPhases )
+            ret.setTriggerPhases(PhaseType.parseRange(triggerPhases));
+        
         return ret;
     }
 
@@ -336,7 +280,9 @@ public class TriggerHandler {
             return;
         }
 
-        //System.out.println("T:" + mode.toString() + " > " + TextUtil.mapToString(runParams) );
+        if( 0 == 1 ) {
+            System.out.println("T:" + mode.toString() + " > " + TextUtil.mapToString(runParams) );
+        }
 
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
@@ -414,7 +360,7 @@ public class TriggerHandler {
      *            a {@link java.lang.String} object.
      * @param runParams
      *            a {@link java.util.HashMap} object.
-     * @return a boolean.
+     * @return false if trigger is not happening.
      */
     private boolean runSingleTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
         final Map<String, String> params = regtrig.getMapParams();
@@ -422,7 +368,10 @@ public class TriggerHandler {
         if (regtrig.getMode() != mode) {
             return false; // Not the right mode.
         }
-        if (!regtrig.zonesCheck()) {
+        
+        // System.out.println( "  " + regtrig.getMode().toString() + "@" + regtrig.getHostCard() + "> " + TextUtil.mapToString(params));
+        
+        if (!regtrig.zonesCheck(AllZone.getZoneOf(regtrig.getHostCard()))) {
             return false; // Host card isn't where it needs to be.
         }
         if (!regtrig.phasesCheck()) {

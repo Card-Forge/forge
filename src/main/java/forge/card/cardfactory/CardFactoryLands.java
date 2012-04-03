@@ -32,6 +32,7 @@ import forge.Counters;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
+import forge.PhaseType;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
@@ -108,16 +109,13 @@ class CardFactoryLands {
                     final int life = card.getController().getLife();
                     if (2 < life) {
 
-                        final StringBuilder question = new StringBuilder();
-                        question.append("Pay 2 life? If you don't, ").append(card.getName());
-                        question.append(" enters the battlefield tapped.");
+                        final String question = String.format("Pay 2 life? If you don't, %s enters the battlefield tapped.", card.getName());
 
                         if (GameActionUtil.showYesNoDialog(card, question.toString())) {
                             AllZone.getHumanPlayer().loseLife(2, card);
                         } else {
                             this.tapCard();
                         }
-
                     } // if
                     else {
                         this.tapCard();
@@ -153,7 +151,7 @@ class CardFactoryLands {
 
                 @Override
                 public boolean canPlayAI() {
-                    if (!(Singletons.getModel().getGameState().getPhaseHandler().getPhase().equals(Constant.Phase.MAIN1) && Singletons.getModel().getGameState().getPhaseHandler()
+                    if (!(Singletons.getModel().getGameState().getPhaseHandler().getPhase().equals(PhaseType.MAIN1) && Singletons.getModel().getGameState().getPhaseHandler()
                             .getPlayerTurn().isComputer())) {
                         return false;
                     }

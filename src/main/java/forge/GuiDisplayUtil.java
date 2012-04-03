@@ -1303,7 +1303,7 @@ public final class GuiDisplayUtil {
         }
 
         if (!tChangePhase.trim().toLowerCase().equals("none")) {
-            Singletons.getModel().getGameState().getPhaseHandler().setDevPhaseState(tChangePhase);
+            Singletons.getModel().getGameState().getPhaseHandler().setDevPhaseState(forge.PhaseType.smartValueOf(tChangePhase));
         }
 
         if (!tHumanSetupCardsInPlay.trim().toLowerCase().equals("none")) {

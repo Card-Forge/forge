@@ -30,8 +30,8 @@ import forge.CardList;
 import forge.CardUtil;
 import forge.Command;
 import forge.ComputerUtil;
-import forge.Constant;
 import forge.Constant.Zone;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.replacement.ReplacementEffect;
@@ -323,7 +323,7 @@ public final class AbilityFactoryAnimate {
 
         // don't use instant speed animate abilities outside computers
         // Combat_Begin step
-        if (!Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_BEGIN)
+        if (!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_BEGIN)
                 && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && !AbilityFactory.isSorcerySpeed(sa)
                 && !params.containsKey("ActivationPhases") && !params.containsKey("Permanent")) {
             return false;
@@ -331,13 +331,13 @@ public final class AbilityFactoryAnimate {
 
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if ((!Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || (AllZone.getCombat()
+        if ((!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || (AllZone.getCombat()
                 .getAttackers().isEmpty())) && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
             return false;
         }
 
         // don't activate during main2 unless this effect is permanent
-        if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.MAIN2) && !params.containsKey("Permanent")) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN2) && !params.containsKey("Permanent")) {
             return false;
         }
 

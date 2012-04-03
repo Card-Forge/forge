@@ -28,8 +28,8 @@ import forge.CardListUtil;
 import forge.CardUtil;
 import forge.CombatUtil;
 import forge.ComputerUtil;
-import forge.Constant;
 import forge.Constant.Zone;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -285,7 +285,7 @@ public class AbilityFactoryPreventDamage {
                     }
                 }
             } else {
-                if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     boolean flag = false;
                     for (final Object o : objects) {
                         if (o instanceof Card) {
@@ -336,7 +336,7 @@ public class AbilityFactoryPreventDamage {
             }
 
         } // Protect combatants
-        else if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        else if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             if (sa.canTarget(AllZone.getComputerPlayer()) && CombatUtil.wouldLoseLife(AllZone.getCombat())
                     && (CombatUtil.lifeInDanger(AllZone.getCombat()) || sa.isAbility())) {
                 tgt.addTarget(AllZone.getComputerPlayer());
@@ -441,7 +441,7 @@ public class AbilityFactoryPreventDamage {
         if (compTargetables.size() > 0) {
             final CardList combatants = compTargetables.getType("Creature");
             CardListUtil.sortByEvaluateCreature(combatants);
-            if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
                     if (CombatUtil.combatantWouldBeDestroyed(c)) {
                         tgt.addTarget(c);
@@ -689,7 +689,7 @@ public class AbilityFactoryPreventDamage {
             // control
 
         } // Protect combatants
-        else if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        else if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             // TODO
         }
 

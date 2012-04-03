@@ -23,7 +23,7 @@ import java.util.HashMap;
 import forge.AllZone;
 import forge.Card;
 import forge.ComputerUtil;
-import forge.Constant;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.spellability.AbilityActivated;
@@ -459,7 +459,7 @@ public class AbilityFactoryTurns {
 
         // 4) The current phase and/or step ends. The game skips straight to the
         // cleanup step. The cleanup step happens in its entirety.
-        Singletons.getModel().getGameState().getPhaseHandler().setPhaseState(Constant.Phase.CLEANUP);
+        Singletons.getModel().getGameState().getPhaseHandler().setPhaseState(PhaseType.CLEANUP);
 
         // Update observers
         AllZone.getStack().updateObservers();

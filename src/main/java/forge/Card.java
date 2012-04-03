@@ -265,7 +265,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         if ((cur == CardCharactersticName.Original && state == CardCharactersticName.Transformed)
                 || (cur == CardCharactersticName.Transformed && state == CardCharactersticName.Original)) {
             HashMap<String, Object> runParams = new HashMap<String, Object>();
-            runParams.put("Mode", "Transformed");
             runParams.put("Transformer", this);
             AllZone.getTriggerHandler().runTrigger(TriggerType.Transformed, runParams);
         }

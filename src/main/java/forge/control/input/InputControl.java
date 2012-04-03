@@ -21,7 +21,7 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 import forge.ComputerAIInput;
-import forge.Constant;
+import forge.PhaseType;
 import forge.MyObservable;
 import forge.PhaseHandler;
 import forge.Player;
@@ -168,7 +168,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.control.input.Input} object.
      */
     public final Input updateInput() {
-        final String phase = this.model.getGameState().getPhaseHandler().getPhase();
+        final PhaseType phase = this.model.getGameState().getPhaseHandler().getPhase();
         final Player playerTurn = this.model.getGameState().getPhaseHandler().getPlayerTurn();
         final Player priority = this.model.getGameState().getPhaseHandler().getPriorityPlayer();
 
@@ -209,13 +209,13 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         }
 
         // Special Inputs needed for the following phases:
-        if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+        if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             this.model.getGameState().getStack().freezeStack();
 
             if (playerTurn.isHuman()) {
                 return new InputAttack();
             }
-        } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+        } else if (phase.equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             this.model.getGameState().getStack().freezeStack();
             if (playerTurn.isHuman()) {
                 this.aiInput.getComputer().declareBlockers();
@@ -229,7 +229,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                     return new InputBlock();
                 }
             }
-        } else if (phase.equals(Constant.Phase.CLEANUP)) {
+        } else if (phase.equals(PhaseType.CLEANUP)) {
             // discard
             if (this.model.getGameState().getStack().size() == 0) {
                 // resolve things

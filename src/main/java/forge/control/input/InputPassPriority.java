@@ -20,6 +20,7 @@ package forge.control.input;
 import forge.AllZone;
 import forge.ButtonUtil;
 import forge.Card;
+import forge.PhaseType;
 import forge.GuiDisplayUtil;
 import forge.Player;
 import forge.PlayerZone;
@@ -43,7 +44,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
         GuiDisplayUtil.updateGUI();
         ButtonUtil.enableOnlyOK();
 
-        final String phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
+        final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPriorityPlayer();
 
         if (player.isComputer()) {

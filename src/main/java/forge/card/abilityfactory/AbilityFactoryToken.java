@@ -26,8 +26,8 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
-import forge.Constant;
 import forge.Constant.Zone;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -293,18 +293,19 @@ public class AbilityFactoryToken extends AbilityFactory {
         }
 
         // Don't generate tokens without haste before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().isBefore(Constant.Phase.MAIN2)
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && !haste
                 && !mapParams.containsKey("ActivationPhases")) {
             return false;
         }
-        if ((Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || Singletons.getModel().getGameState().getPhaseHandler().isBefore(
-                Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
+        if ((Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) 
+                || Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(
+                        PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
                 && !mapParams.containsKey("ActivationPhases") && !AbilityFactory.isSorcerySpeed(sa)
                 && !haste) {
             return false;
         }
-        if ((Singletons.getModel().getGameState().getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN) || Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(
+        if ((Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN) || Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(
                 AllZone.getHumanPlayer()))
                 && oneShot) {
             return false;
@@ -359,7 +360,7 @@ public class AbilityFactoryToken extends AbilityFactory {
             return chance;
         }
 
-        if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
             return ((r.nextFloat() < .95) && chance);
         }
         if (sa.isAbility()) {

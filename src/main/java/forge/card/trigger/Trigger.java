@@ -17,16 +17,16 @@
  */
 package forge.card.trigger;
 
-import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
+import forge.PhaseType;
 import forge.Constant.Zone;
 import forge.PlayerZone;
 import forge.Singletons;
@@ -186,6 +186,8 @@ public abstract class Trigger extends TriggerReplacementBase {
     /** The is intrinsic. */
     private boolean isIntrinsic;
 
+    private List<PhaseType> validPhases;
+
     /**
      * Gets the checks if is intrinsic.
      * 
@@ -275,22 +277,11 @@ public abstract class Trigger extends TriggerReplacementBase {
      * 
      * @return a boolean.
      */
-    public final boolean zonesCheck() {
-        if (this.getMapParams().containsKey("TriggerZones")) {
-            final List<Zone> triggerZones = new ArrayList<Zone>();
-            final PlayerZone zone = AllZone.getZoneOf(this.getHostCard());
-            for (final String s : this.getMapParams().get("TriggerZones").split(",")) {
-                triggerZones.add(Zone.smartValueOf(s));
-            }
-            if (zone == null) {
-                return false;
-            }
-            if (!triggerZones.contains(zone.getZoneType()) || this.getHostCard().isPhasedOut()) {
-                return false;
-            }
-        }
-
-        return true;
+    public final boolean zonesCheck(PlayerZone hostCardZone) {
+        return !this.getHostCard().isPhasedOut() && 
+              ( validHostZones == null || validHostZones.isEmpty() || 
+                ( hostCardZone != null && validHostZones.contains(hostCardZone.getZoneType()))
+              );
     }
 
     /**
@@ -301,23 +292,8 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @return a boolean.
      */
     public final boolean phasesCheck() {
-        if (this.getMapParams().containsKey("TriggerPhases")) {
-            String phases = this.getMapParams().get("TriggerPhases");
-
-            if (phases.contains("->")) {
-                // If phases lists a Range, split and Build Activate String
-                // Combat_Begin->Combat_End (During Combat)
-                // Draw-> (After Upkeep)
-                // Upkeep->Combat_Begin (Before Declare Attackers)
-
-                final String[] split = phases.split("->", 2);
-                phases = Singletons.getModel().getGameState().getPhaseHandler().buildActivateString(split[0], split[1]);
-            }
-            final ArrayList<String> triggerPhases = new ArrayList<String>();
-            for (final String s : phases.split(",")) {
-                triggerPhases.add(s);
-            }
-            if (!triggerPhases.contains(Singletons.getModel().getGameState().getPhaseHandler().getPhase())) {
+        if ( null != validPhases ) {
+            if (!validPhases.contains(Singletons.getModel().getGameState().getPhaseHandler().getPhase())) {
                 return false;
             }
         }
@@ -603,6 +579,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     /** The temporary. */
     private boolean temporary = false;
+    private EnumSet<Zone> validHostZones;
 
     /**
      * Sets the temporary.
@@ -724,13 +701,20 @@ public abstract class Trigger extends TriggerReplacementBase {
         copy.setName(this.getName());
         copy.setID(this.getId());
         copy.setMode(this.getMode());
+        copy.setTriggerPhases(this.validPhases);
+        copy.setTriggerZone(validHostZones);
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public boolean isStatic() {
         return getMapParams().containsKey("Static"); // && params.get("Static").equals("True") [always true if present]
+    }
+
+
+    public void setTriggerZone(EnumSet<Zone> zones) {
+        validHostZones = zones;
+    }
+
+    public void setTriggerPhases(List<PhaseType> phases) {
+        validPhases = phases;
     }
 }

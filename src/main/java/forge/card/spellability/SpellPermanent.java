@@ -31,6 +31,7 @@ import forge.ComputerAIGeneral;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -277,7 +278,7 @@ public class SpellPermanent extends Spell {
             card.setSVar("PayX", Integer.toString(xPay));
         }
         // Wait for Main2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.MAIN1)) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN1)) {
             boolean wait = true;
             if (card.getSVar("PlayMain1").equals("TRUE")) {
                 wait = false;
@@ -335,14 +336,14 @@ public class SpellPermanent extends Spell {
         // save cards with flash for surprise blocking
         if (card.hasKeyword("Flash")
                 && !ComputerAIGeneral.hasETBTrigger(card)
-                && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || Singletons.getModel().getGameState().getPhaseHandler()
-                        .isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
+                && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) 
+                     || Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
             return false;
         }
         // Prevent the computer from summoning Ball Lightning type creatures after attacking
         if (card.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
-                && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer()) || Singletons.getModel().getGameState().getPhaseHandler()
-                        .isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS))) {
+                && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer()) 
+                     || Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
             return false;
         }
 

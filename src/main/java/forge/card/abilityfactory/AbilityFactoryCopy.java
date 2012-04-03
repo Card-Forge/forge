@@ -31,8 +31,8 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
 import forge.ComputerUtil;
-import forge.Constant;
 import forge.Constant.Zone;
+import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -235,7 +235,7 @@ public final class AbilityFactoryCopy {
         // TODO - I'm sure someone can do this AI better
 
         final HashMap<String, String> params = af.getMapParams();
-        if (params.containsKey("AtEOT") && !Singletons.getModel().getGameState().getPhaseHandler().is(Constant.Phase.MAIN1)) {
+        if (params.containsKey("AtEOT") && !Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN1)) {
             return false;
         } else {
             double chance = .4; // 40 percent chance with instant speed stuff
