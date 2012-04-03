@@ -334,9 +334,10 @@ public class AbilityFactoryPump {
                 || keyword.endsWith("Unblockable") || keyword.endsWith("Fear") || keyword.endsWith("Intimidate"));
         final boolean combatRelevant = (keyword.endsWith("First Strike")
                 || keyword.contains("Bushido") || keyword.endsWith("Deathtouch"));
-        // give evasive keywords to creatures that can attack
+        // give evasive keywords to creatures that can or do attack
         if (evasive) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
+            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || !CombatUtil.canBeBlocked(card)
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || (card.getNetCombatDamage() <= 0) || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
                 return false;
@@ -349,30 +350,35 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (combatRelevant) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || !CombatUtil.canBeBlocked(card)
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
                 return false;
             }
         } else if (keyword.equals("Double Strike")) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || card.getNetCombatDamage() <= 0
+            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || card.getNetCombatDamage() <= 0
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 return false;
             }
         } else if (keyword.startsWith("Rampage")) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || !CombatUtil.canBeBlocked(card)
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 2)) {
                 return false;
             }
         } else if (keyword.startsWith("Flanking")) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || !CombatUtil.canBeBlocked(card)
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || AllZoneUtil.getCreaturesInPlay(human).getNotKeyword("Flanking").size() < 1) {
                 return false;
             }
         } else if (keyword.startsWith("Trample")) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || !CombatUtil.canBeBlocked(card)
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)
                     || card.getNetCombatDamage() + attack <= 1) {
@@ -386,7 +392,7 @@ public class AbilityFactoryPump {
                 return true;
             }
             if ((ph.isPlayerTurn(human))
-                    || !CombatUtil.canAttack(card)
+                    || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 return false;
             }
