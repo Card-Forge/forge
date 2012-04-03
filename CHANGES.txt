@@ -49,6 +49,15 @@ Fixes/Features:
 - Fixing Cold Storage description
 - Fixed wrongly disabled Buy button in Bazaar
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Torpor Orb only vaguely doing what it's supposed to do.
+- Added the optional parameter "TriggerController" to Triggers. The TriggerController controls the trigger and makes all decisions.
+- Converted all cards with "When CARDNAME dies,..." to use TriggerController.
+- Converted some cards with "When CARDNAME is put into a graveyard from the battlefield,..." to use TriggerController (A).
+- Converted some cards with "When CARDNAME is put into a graveyard from the battlefield,..." to use TriggerController (C-F).
+- Converted some cards with "When CARDNAME is put into a graveyard from the battlefield,..." to use TriggerController (G-I).
+- Converted some cards with "When CARDNAME is put into a graveyard from the battlefield,..." to use TriggerController (J-N).
+- Converted Sarkhan the Mad to script (again).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
