@@ -110,10 +110,10 @@ Excellent at blocking the nastiest of critters!</desc>
       <desc>This ferocious animal may have been raised in captivity, but it has been trained to kill.</desc>
       <levels>
         <level value="0" stats="You do not own a wolf" nextLevel="Purchase Wolf"/>
-        <level value="1" pic="w_1_1_wolf_pet" stats="1/1 W" cost="250" cardFile="wolf_pet_l1.txt" nextLevel="The wolfs speed allows it to strike first." />
-        <level value="2" pic="w_1_1_wolf_pet_first_strike" stats="1/1 W First Strike" cost="350" cardFile="wolf_pet_l2.txt" nextLevel="Improve offensive prowess of your wolf." />
-        <level value="3" pic="w_2_1_wolf_pet" stats="2/1 W First Strike" cost="500" cardFile="wolf_pet_l3.txt" nextLevel="Your wolf stands ever vigilant."/>
-        <level value="4" pic="w_2_1_wolf_pet_first_strike_vigilance" stats="2/1 W First Strike Vigilance" cost="750" cardFile="wolf_pet_l4.txt" nextLevel="You cannot train your wolf any further"/>
+        <level value="1" pic="petwolf_lvl1" stats="1/1 W" cost="250" cardFile="wolf_pet_l1.txt" nextLevel="The wolf's speed allows it to strike first." />
+        <level value="2" pic="petwolf_lvl2" stats="1/1 W First Strike" cost="350" cardFile="wolf_pet_l2.txt" nextLevel="Improve offensive prowess of your wolf." />
+        <level value="3" pic="petwolf_lvl3" stats="2/1 W First Strike" cost="500" cardFile="wolf_pet_l3.txt" nextLevel="Your wolf stands ever vigilant."/>
+        <level value="4" pic="petwolf_lvl4" stats="2/1 W First Strike Vigilance" cost="750" cardFile="wolf_pet_l4.txt" nextLevel="You cannot train your wolf any further"/>
       </levels>
     </pet>
     <pet name="Bird" slot="1" saveFileKey="Bird" maxLevel="4">
@@ -150,10 +150,10 @@ Excellent at blocking the nastiest of critters!</desc>
       <desc>This beast swells up to deal some hearty damage.</desc>
       <levels>
         <level value="0" stats="You do not own an Ape" cost="0" cardfile="null" nextLevel="Purchase Ape"/>
-        <level value="1" pic="g_1_1_ape_pet" stats="1/1 G" cost="250" cardFile="ape_pet_l1.txt" nextLevel="Ape starts putting on some extra pounds." />
-        <level value="2" pic="g_2_1_ape_pet" stats="2/1 G" cost="400" cardFile="ape_pet_l2.txt" nextLevel="Your Ape uses his weight advantage to stomp past smaller beasts." />
-        <level value="3" pic="g_2_1_ape_pet_trample" stats="2/1 G Trample" cost="450" cardFile="ape_pet_l3.txt" nextLevel="Your Ape intensity grows in battle able to dish out and take more damage."/>
-        <level value="4" pic="g_2_1_ape_pet_trample_pump" stats="2/1 G Trample Pump" cost="750" cardFile="ape_pet_l4.txt" nextLevel="You cannot train your crocodile any further"/>
+        <level value="1" pic="petape_lvl1" stats="1/1 G" cost="250" cardFile="ape_pet_l1.txt" nextLevel="Ape starts putting on some extra pounds." />
+        <level value="2" pic="petape_lvl2" stats="2/1 G" cost="400" cardFile="ape_pet_l2.txt" nextLevel="Your Ape uses his weight advantage to stomp past smaller beasts." />
+        <level value="3" pic="petape_lvl3" stats="2/1 G Trample" cost="450" cardFile="ape_pet_l3.txt" nextLevel="Your Ape intensity grows in battle able to dish out and take more damage."/>
+        <level value="4" pic="petape_lvl4" stats="2/1 G Trample Pump" cost="750" cardFile="ape_pet_l4.txt" nextLevel="You cannot train your Ape any further"/>
       </levels>
     </pet>
   </pets>
