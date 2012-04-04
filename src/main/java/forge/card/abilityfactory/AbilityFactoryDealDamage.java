@@ -996,7 +996,26 @@ public class AbilityFactoryDealDamage {
         }
         final int dmg = this.getNumDamage(sa);
 
-        sb.append(name).append(" - Deals " + dmg + " damage to " + desc);
+        if (!(sa instanceof AbilitySub)) {
+            sb.append(name).append(" -");
+        }
+        sb.append(" ");
+
+        if (params.containsKey("StackDescription")) {
+            sb.append(params.get("StackDescription"));
+        } else {
+            final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams()
+                    .get("DamageSource"), sa);
+            final Card source = definedSources.get(0);
+
+            if (source != sa.getSourceCard()) {
+                sb.append(source.toString()).append(" deals");
+            } else {
+                sb.append("Deals");
+            }
+
+            sb.append(" ").append(dmg).append(" damage to ").append(desc);
+        }
 
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
@@ -1226,7 +1245,9 @@ public class AbilityFactoryDealDamage {
      */
     private void damageAllResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card card = sa.getSourceCard();
+        final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                params.get("DamageSource"), sa);
+        final Card card = definedSources.get(0);
 
         final int dmg = this.getNumDamage(sa);
 
@@ -1426,13 +1447,17 @@ public class AbilityFactoryDealDamage {
             dmg += this.getNumDamage(sa) + " damage";
         }
 
-        sb.append("Each ").append(desc).append(" deals ").append(dmg).append(" to ");
-        for (final Player p : tgtPlayers) {
-            sb.append(p);
-        }
-        if (params.containsKey("DefinedCards")) {
-            if (params.get("DefinedCards").equals("Self")) {
-                sb.append(" itself");
+        if (params.containsKey("StackDescription")) {
+            sb.append(params.get("StackDescription"));
+        } else {
+            sb.append("Each ").append(desc).append(" deals ").append(dmg).append(" to ");
+            for (final Player p : tgtPlayers) {
+                sb.append(p);
+            }
+            if (params.containsKey("DefinedCards")) {
+                if (params.get("DefinedCards").equals("Self")) {
+                    sb.append(" itself");
+                }
             }
         }
         sb.append(".");
@@ -1506,11 +1531,26 @@ public class AbilityFactoryDealDamage {
             }
         }
 
-        if (params.containsKey("DefinedCards") && params.get("DefinedCards").equals("Self")) {
-            for (final Card source : sources) {
-                final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
-                // System.out.println(source+" deals "+dmg+" damage to "+source);
-                source.addDamage(dmg, source);
+        if (params.containsKey("DefinedCards")) {
+            if (params.get("DefinedCards").equals("Self")) {
+                for (final Card source : sources) {
+                    final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
+                    // System.out.println(source+" deals "+dmg+" damage to "+source);
+                    source.addDamage(dmg, source);
+                }
+            }
+            if (params.get("DefinedCards").equals("Remembered")) {
+                for (final Card source : sources) {
+                    final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
+                    Card rememberedcard;
+                    for (final Object o : sa.getSourceCard().getRemembered()) {
+                        if (o instanceof Card) {
+                            rememberedcard = (Card) o;
+                            // System.out.println(source + " deals " + dmg + " damage to " + rememberedcard);
+                            rememberedcard.addDamage(dmg, source);
+                        }
+                    }
+                }
             }
         }
     }
