@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Instant
 Text:no text
 A:SP$ PumpAll | Cost$ 2 G | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn. If CARDNAME was kicked, Zombie creatures you control get an additional +2/+2 until end of turn.
-A:SP$ PumpAll | Cost$ 2 G B | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBPumpYourZombies | SpellDescription$ Kicker B (You may pay an additional B as you cast this spell.)
+A:SP$ PumpAll | Cost$ 2 G B | SetAsKicked$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBPumpYourZombies | SpellDescription$ Kicker B (You may pay an additional B as you cast this spell.)
 SVar:DBPumpYourZombies:DB$ PumpAll | ValidCards$ Creature.Zombie+YouCtrl | NumAtt$+2 | NumDef$ +2
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

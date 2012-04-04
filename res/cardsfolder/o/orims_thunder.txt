@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Instant
 Text:no text
 A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
-A:SP$ Destroy | Cost$ 2 W R | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBDamage | SpellDescription$ Kicker R (You may pay an additional R as you cast this spell.) If CARDNAME was kicked, it deals damage equal to that permanent's converted mana cost to target creature.
+A:SP$ Destroy | Cost$ 2 W R | SetAsKicked$ True | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBDamage | SpellDescription$ Kicker R (You may pay an additional R as you cast this spell.) If CARDNAME was kicked, it deals damage equal to that permanent's converted mana cost to target creature.
 SVar:DBDamage:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X
 SVar:X:Remembered$CardManaCost
 SVar:Rarity:Common
