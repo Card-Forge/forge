@@ -365,9 +365,8 @@ public class PhaseUtil {
      */
     public static boolean isBeforeAttackersAreDeclared() {
         final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
-        return phase.equals(PhaseType.UNTAP) || phase.equals(PhaseType.UPKEEP)
-                || phase.equals(PhaseType.DRAW) || phase.equals(PhaseType.MAIN1)
-                || phase.equals(PhaseType.COMBAT_BEGIN);
+        return phase == PhaseType.UNTAP || phase == PhaseType.UPKEEP || phase == PhaseType.DRAW 
+            || phase == PhaseType.MAIN1 || phase == PhaseType.COMBAT_BEGIN;
     }
 
     /**
@@ -382,39 +381,49 @@ public class PhaseUtil {
         final Player p = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final ControlMatchUI t = Singletons.getControl().getControlMatch();
 
-        int i; // Index of field; computer is 0, human is 1
-        if (p.isComputer()) {
-            i = 0;
-        } else {
-            i = 1;
-        }
+        // Index of field; computer is 0, human is 1
+        int i = p.isComputer() ? 0 : 1;
 
-        if (s.equals(PhaseType.UPKEEP)) {
-            lbl = t.getFieldControls().get(i).getView().getLblUpkeep();
-        } else if (s.equals(PhaseType.DRAW)) {
-            lbl = t.getFieldControls().get(i).getView().getLblDraw();
-        } else if (s.equals(PhaseType.MAIN1)) {
-            lbl = t.getFieldControls().get(i).getView().getLblMain1();
-        } else if (s.equals(PhaseType.COMBAT_BEGIN)) {
-            lbl = t.getFieldControls().get(i).getView().getLblBeginCombat();
-        } else if (s.equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            lbl = t.getFieldControls().get(i).getView().getLblDeclareAttackers();
-        } else if (s.equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-            lbl = t.getFieldControls().get(i).getView().getLblDeclareBlockers();
-        } else if (s.equals(PhaseType.COMBAT_DAMAGE)) {
-            lbl = t.getFieldControls().get(i).getView().getLblCombatDamage();
-        } else if (s.equals(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
-            lbl = t.getFieldControls().get(i).getView().getLblFirstStrike();
-        } else if (s.equals(PhaseType.COMBAT_END)) {
-            lbl = t.getFieldControls().get(i).getView().getLblEndCombat();
-        } else if (s.equals(PhaseType.MAIN2)) {
-            lbl = t.getFieldControls().get(i).getView().getLblMain2();
-        } else if (s.equals(PhaseType.END_OF_TURN)) {
-            lbl = t.getFieldControls().get(i).getView().getLblEndTurn();
-        } else if (s.equals(PhaseType.CLEANUP)) {
-            lbl = t.getFieldControls().get(i).getView().getLblCleanup();
-        } else {
-            return;
+        switch(s)
+        {
+            case UPKEEP:
+                lbl = t.getFieldControls().get(i).getView().getLblUpkeep();
+                break;
+           case DRAW:
+                lbl = t.getFieldControls().get(i).getView().getLblDraw();
+                break;
+           case MAIN1:
+                lbl = t.getFieldControls().get(i).getView().getLblMain1();
+                break;
+           case COMBAT_BEGIN:
+                lbl = t.getFieldControls().get(i).getView().getLblBeginCombat();
+                break;
+           case COMBAT_DECLARE_ATTACKERS:
+                lbl = t.getFieldControls().get(i).getView().getLblDeclareAttackers();
+                break;
+           case COMBAT_DECLARE_BLOCKERS:
+                lbl = t.getFieldControls().get(i).getView().getLblDeclareBlockers();
+                break;
+           case COMBAT_DAMAGE:
+                lbl = t.getFieldControls().get(i).getView().getLblCombatDamage();
+                break;
+           case COMBAT_FIRST_STRIKE_DAMAGE:
+                lbl = t.getFieldControls().get(i).getView().getLblFirstStrike();
+                break;
+           case COMBAT_END:
+                lbl = t.getFieldControls().get(i).getView().getLblEndCombat();
+                break;
+           case MAIN2:
+                lbl = t.getFieldControls().get(i).getView().getLblMain2();
+                break;
+           case END_OF_TURN:
+                lbl = t.getFieldControls().get(i).getView().getLblEndTurn();
+                break;
+           case CLEANUP:
+                lbl = t.getFieldControls().get(i).getView().getLblCleanup();
+                break;
+            default:
+                return;
         }
 
         t.resetAllPhaseButtons();

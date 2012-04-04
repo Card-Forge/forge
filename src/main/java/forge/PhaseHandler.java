@@ -311,148 +311,151 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         Singletons.getModel().getGameState().getPhaseHandler().setSkipPhase(true);
         Singletons.getModel().getGameAction().checkStateEffects();
 
-        // UNTAP
-        if (phase.equals(PhaseType.UNTAP)) {
-            Singletons.getControl().getControlMatch().showStack();
-            PhaseUtil.handleUntap();
-        }
-        // UPKEEP
-        else if (phase.equals(PhaseType.UPKEEP)) {
-            PhaseUtil.handleUpkeep();
-        }
-        // DRAW
-        else if (phase.equals(PhaseType.DRAW)) {
-            PhaseUtil.handleDraw();
-        }
-        // COMBAT_BEGIN
-        else if (phase.equals(PhaseType.COMBAT_BEGIN)) {
-            PhaseUtil.verifyCombat();
-            PhaseUtil.handleCombatBegin();
-        }
-        // COMBAT_DECLARE_ATTACKERS
-        else if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            PhaseUtil.handleCombatDeclareAttackers();
-        }
-        // COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY
-        else if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
-            if (this.inCombat()) {
-                PhaseUtil.handleDeclareAttackers();
-                CombatUtil.showCombat();
-            } else {
-                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
-            }
-        }
-        // COMBAT_DECLARE_BLOCKERS: we can skip AfterBlockers and AfterAttackers
-        // if necessary
-        else if (phase.equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-            if (this.inCombat()) {
-                PhaseUtil.verifyCombat();
-                CombatUtil.showCombat();
-            } else {
-                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
-            }
-        }
-        // COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY
-        else if (phase.equals(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-            // After declare blockers are finished being declared mark them
-            // blocked and trigger blocking things
-            if (this.inCombat()) {
-                PhaseUtil.handleDeclareBlockers();
-                CombatUtil.showCombat();
-            } else {
-                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
-            }
-        }
-        // COMBAT_FIRST_STRIKE_DAMAGE
-        else if (phase.equals(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
-            if (!this.inCombat()) {
-                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
-            } else {
-                AllZone.getCombat().verifyCreaturesInPlay();
+        switch( phase ) 
+        {
+            case UNTAP:
+                Singletons.getControl().getControlMatch().showStack();
+                PhaseUtil.handleUntap();
+                break;
+            
+            case UPKEEP:
+                PhaseUtil.handleUpkeep();
+                break;
 
-                // no first strikers, skip this step
-                if (!AllZone.getCombat().setAssignedFirstStrikeDamage()) {
+            case DRAW:
+                PhaseUtil.handleDraw();
+                break;
+
+            case COMBAT_BEGIN:
+                PhaseUtil.verifyCombat();
+                PhaseUtil.handleCombatBegin();
+                break;
+
+            case COMBAT_DECLARE_ATTACKERS:
+                PhaseUtil.handleCombatDeclareAttackers();
+                break;
+
+            case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
+                if (this.inCombat()) {
+                    PhaseUtil.handleDeclareAttackers();
+                    CombatUtil.showCombat();
+                } else {
+                    Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+                }
+                break;
+            // we can skip AfterBlockers and AfterAttackers if necessary
+            case COMBAT_DECLARE_BLOCKERS:
+                if (this.inCombat()) {
+                    PhaseUtil.verifyCombat();
+                    CombatUtil.showCombat();
+                } else {
+                    Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+                }
+                break;
+
+            case COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY:
+                // After declare blockers are finished being declared mark them
+                // blocked and trigger blocking things
+                if (this.inCombat()) {
+                    PhaseUtil.handleDeclareBlockers();
+                    CombatUtil.showCombat();
+                } else {
+                    Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+                }
+                break;
+
+            case COMBAT_FIRST_STRIKE_DAMAGE:
+                if (!this.inCombat()) {
                     Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
                 } else {
+                    AllZone.getCombat().verifyCreaturesInPlay();
+    
+                    // no first strikers, skip this step
+                    if (!AllZone.getCombat().setAssignedFirstStrikeDamage()) {
+                        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+                    } else {
+                        Combat.dealAssignedDamage();
+                        Singletons.getModel().getGameAction().checkStateEffects();
+                        CombatUtil.showCombat();
+                    }
+                }
+                break;
+
+            case COMBAT_DAMAGE:
+                if (!this.inCombat()) {
+                    Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+                } else {
+                    AllZone.getCombat().verifyCreaturesInPlay();
+    
+                    AllZone.getCombat().setAssignedDamage();
                     Combat.dealAssignedDamage();
                     Singletons.getModel().getGameAction().checkStateEffects();
                     CombatUtil.showCombat();
                 }
-            }
-        }
-        // COMBAT_DAMAGE
-        else if (phase.equals(PhaseType.COMBAT_DAMAGE)) {
-            if (!this.inCombat()) {
-                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
-            } else {
-                AllZone.getCombat().verifyCreaturesInPlay();
+                break;
 
-                AllZone.getCombat().setAssignedDamage();
-                Combat.dealAssignedDamage();
-                Singletons.getModel().getGameAction().checkStateEffects();
+            case COMBAT_END:
+                // End Combat always happens
+                AllZone.getEndOfCombat().executeUntil();
+                AllZone.getEndOfCombat().executeAt();
                 CombatUtil.showCombat();
-            }
-        }
-        // COMBAT_END
-        else if (phase.equals(PhaseType.COMBAT_END)) {
-            // End Combat always happens
-            AllZone.getEndOfCombat().executeUntil();
-            AllZone.getEndOfCombat().executeAt();
-            CombatUtil.showCombat();
-            Singletons.getControl().getControlMatch().showStack();
-        } else if (phase.equals(PhaseType.MAIN2)) {
-            CombatUtil.showCombat();
-            Singletons.getControl().getControlMatch().showStack();
-        }
-        // END_OF_TURN
-        else if (phase.equals(PhaseType.END_OF_TURN)) {
-            AllZone.getEndOfTurn().executeAt();
-        }
-        // CLEANUP
-        else if (phase.equals(PhaseType.CLEANUP)) {
-            Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().clearAssignedDamage();
+                Singletons.getControl().getControlMatch().showStack();
+                break;
+            
+            case MAIN2:
+                CombatUtil.showCombat();
+                Singletons.getControl().getControlMatch().showStack();
+                break;
 
-            // Reset Damage received map
-            final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
-            for (final Card c : list) {
-                c.resetPreventNextDamage();
-                c.resetReceivedDamageFromThisTurn();
-                c.resetDealtDamageToThisTurn();
-                c.getDamageHistory().setDealtDmgToHumanThisTurn(false);
-                c.getDamageHistory().setDealtDmgToComputerThisTurn(false);
-                c.getDamageHistory().setDealtCombatDmgToHumanThisTurn(false);
-                c.getDamageHistory().setDealtCombatDmgToComputerThisTurn(false);
-                c.setRegeneratedThisTurn(0);
-                c.clearMustBlockCards();
-                if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
-                    c.getDamageHistory().setCreatureAttackedLastComputerTurn(c.getDamageHistory().getCreatureAttackedThisTurn());
-                }
-                if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
-                    c.getDamageHistory().setCreatureAttackedLastHumanTurn(c.getDamageHistory().getCreatureAttackedThisTurn());
-                }
-                c.getDamageHistory().setCreatureAttackedThisTurn(false);
-                c.getDamageHistory().setCreatureBlockedThisTurn(false);
-                c.getDamageHistory().setCreatureGotBlockedThisTurn(false);
-                c.clearBlockedByThisTurn();
-                c.clearBlockedThisTurn();
-            }
-            AllZone.getHumanPlayer().resetPreventNextDamage();
-            AllZone.getComputerPlayer().resetPreventNextDamage();
+            case END_OF_TURN:
+                AllZone.getEndOfTurn().executeAt();
+                break;
 
-            AllZone.getEndOfTurn().executeUntil();
-            final CardList cHand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
-            final CardList hHand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
-            for (final Card c : cHand) {
-                c.setDrawnThisTurn(false);
-            }
-            for (final Card c : hHand) {
-                c.setDrawnThisTurn(false);
-            }
-            AllZone.getHumanPlayer().resetNumDrawnThisTurn();
-            AllZone.getComputerPlayer().resetNumDrawnThisTurn();
-            AllZone.getHumanPlayer().setAttackedWithCreatureThisTurn(false);
-            AllZone.getComputerPlayer().setAttackedWithCreatureThisTurn(false);
-        }
+            case CLEANUP:
+                Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().clearAssignedDamage();
+    
+                // Reset Damage received map
+                final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+                for (final Card c : list) {
+                    c.resetPreventNextDamage();
+                    c.resetReceivedDamageFromThisTurn();
+                    c.resetDealtDamageToThisTurn();
+                    c.getDamageHistory().setDealtDmgToHumanThisTurn(false);
+                    c.getDamageHistory().setDealtDmgToComputerThisTurn(false);
+                    c.getDamageHistory().setDealtCombatDmgToHumanThisTurn(false);
+                    c.getDamageHistory().setDealtCombatDmgToComputerThisTurn(false);
+                    c.setRegeneratedThisTurn(0);
+                    c.clearMustBlockCards();
+                    if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
+                        c.getDamageHistory().setCreatureAttackedLastComputerTurn(c.getDamageHistory().getCreatureAttackedThisTurn());
+                    }
+                    if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+                        c.getDamageHistory().setCreatureAttackedLastHumanTurn(c.getDamageHistory().getCreatureAttackedThisTurn());
+                    }
+                    c.getDamageHistory().setCreatureAttackedThisTurn(false);
+                    c.getDamageHistory().setCreatureBlockedThisTurn(false);
+                    c.getDamageHistory().setCreatureGotBlockedThisTurn(false);
+                    c.clearBlockedByThisTurn();
+                    c.clearBlockedThisTurn();
+                }
+                AllZone.getHumanPlayer().resetPreventNextDamage();
+                AllZone.getComputerPlayer().resetPreventNextDamage();
+    
+                AllZone.getEndOfTurn().executeUntil();
+                final CardList cHand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+                final CardList hHand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
+                for (final Card c : cHand) {
+                    c.setDrawnThisTurn(false);
+                }
+                for (final Card c : hHand) {
+                    c.setDrawnThisTurn(false);
+                }
+                AllZone.getHumanPlayer().resetNumDrawnThisTurn();
+                AllZone.getComputerPlayer().resetNumDrawnThisTurn();
+                AllZone.getHumanPlayer().setAttackedWithCreatureThisTurn(false);
+                AllZone.getComputerPlayer().setAttackedWithCreatureThisTurn(false);
+                break;
+          }
 
         if (!Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhase()) {
             // Run triggers if phase isn't being skipped
@@ -467,7 +470,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         AllZone.getStack().unfreezeStack();
 
         // UNTAP
-        if (!phase.equals(PhaseType.UNTAP)) {
+        if (phase != PhaseType.UNTAP) {
             // during untap
             this.resetPriority();
         }
@@ -505,14 +508,14 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             }
         }
 
-        if (this.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        if (this.getPhase() == PhaseType.COMBAT_DECLARE_ATTACKERS) {
             AllZone.getStack().unfreezeStack();
             this.nCombatsThisTurn++;
-        } else if (this.getPhase().equals(PhaseType.UNTAP)) {
+        } else if (this.getPhase() == PhaseType.UNTAP) {
             this.nCombatsThisTurn = 0;
         }
 
-        if (this.getPhase().equals(PhaseType.COMBAT_END)) {
+        if (this.getPhase() == PhaseType.COMBAT_END) {
             Singletons.getControl().getControlMatch().showStack();
             AllZone.getCombat().reset();
             this.resetAttackedThisCombat(this.getPlayerTurn());
@@ -553,11 +556,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             }
         }
 
-        AllZone.getGameLog().add("Phase", this.getPlayerTurn() + " " + this.getPhase(), 6);
+        AllZone.getGameLog().add("Phase", this.getPlayerTurn() + " " + this.getPhase().Name, 6);
 
         // **** Anything BELOW Here is actually in the next phase. Maybe move
         // this to handleBeginPhase
-        if (this.getPhase().equals(PhaseType.UNTAP)) {
+        if (this.getPhase() == PhaseType.UNTAP) {
             this.turn++;
             AllZone.getGameLog().add("Turn", "Turn " + this.turn + " (" + this.getPlayerTurn() + ")", 0);
         }
@@ -641,7 +644,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @return a boolean.
      */
     public final synchronized boolean is(final PhaseType phase, final Player player) {
-        return this.getPhase().equals(phase) && this.getPlayerTurn().isPlayer(player);
+        return this.getPhase() == phase && this.getPlayerTurn().isPlayer(player);
     }
 
     /**
@@ -654,7 +657,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @return a boolean.
      */
     public final synchronized boolean is(final PhaseType phase) {
-        return (this.getPhase().equals(phase));
+        return this.getPhase() == phase;
     }
 
     /**
@@ -895,9 +898,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @return a boolean.
      */
     public static boolean canCastSorcery(final Player player) {
-        return Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(player)
-                && (Singletons.getModel().getGameState().getPhaseHandler().getPhase().equals(PhaseType.MAIN2) || Singletons.getModel().getGameState().getPhaseHandler()
-                        .getPhase().equals(PhaseType.MAIN1)) && (AllZone.getStack().size() == 0);
+        PhaseHandler now = Singletons.getModel().getGameState().getPhaseHandler(); 
+        return now.isPlayerTurn(player) && now.getPhase().isMain() && AllZone.getStack().size() == 0;
     }
 
 

@@ -258,61 +258,23 @@ public class ControlMatchUI implements CardContainer {
         final List<ControlField> fieldControllers = ControlMatchUI.this.getFieldControls();
 
         // AI field is at index [0]
-        if (turn.isComputer()) {
-            if (phase.equals(PhaseType.UPKEEP)) {
-                return fieldControllers.get(0).getView().getLblUpkeep().getEnabled();
-            } else if (phase.equals(PhaseType.DRAW)) {
-                return fieldControllers.get(0).getView().getLblDraw().getEnabled();
-            } else if (phase.equals(PhaseType.MAIN1)) {
-                return fieldControllers.get(0).getView().getLblMain1().getEnabled();
-            } else if (phase.equals(PhaseType.COMBAT_BEGIN)) {
-                return fieldControllers.get(0).getView().getLblBeginCombat().getEnabled();
-            } else if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                return fieldControllers.get(0).getView().getLblDeclareAttackers().getEnabled();
-            } else if (phase.equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                return fieldControllers.get(0).getView().getLblDeclareBlockers().getEnabled();
-            } else if (phase.equals(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
-                return fieldControllers.get(0).getView().getLblFirstStrike().getEnabled();
-            } else if (phase.equals(PhaseType.COMBAT_DAMAGE)) {
-                return fieldControllers.get(0).getView().getLblCombatDamage().getEnabled();
-            } else if (phase.equals(PhaseType.COMBAT_END)) {
-                return fieldControllers.get(0).getView().getLblEndCombat().getEnabled();
-            } else if (phase.equals(PhaseType.MAIN2)) {
-                return fieldControllers.get(0).getView().getLblMain2().getEnabled();
-            } else if (phase.equals(PhaseType.END_OF_TURN)) {
-                return fieldControllers.get(0).getView().getLblEndTurn().getEnabled();
-            } else if (phase.equals(PhaseType.DRAW)) {
-                return fieldControllers.get(0).getView().getLblDraw().getEnabled();
-            }
+        int index = turn.isComputer() ? 0 : 1;
+        ViewField vf = fieldControllers.get(index).getView();
+        
+        switch (phase) {
+            case UPKEEP: return vf.getLblUpkeep().getEnabled();
+            case DRAW: return vf.getLblDraw().getEnabled();
+            case MAIN1: return vf.getLblMain1().getEnabled();
+            case COMBAT_BEGIN: return vf.getLblBeginCombat().getEnabled();
+            case COMBAT_DECLARE_ATTACKERS: return vf.getLblDeclareAttackers().getEnabled();
+            case COMBAT_DECLARE_BLOCKERS: return vf.getLblDeclareBlockers().getEnabled();
+            case COMBAT_FIRST_STRIKE_DAMAGE: return vf.getLblFirstStrike().getEnabled();
+            case COMBAT_DAMAGE: return vf.getLblCombatDamage().getEnabled();
+            case COMBAT_END: return vf.getLblEndCombat().getEnabled();
+            case MAIN2: return vf.getLblMain2().getEnabled();
+            case END_OF_TURN: return vf.getLblEndTurn().getEnabled();
         }
-        // Human field is at index [1]
-        else {
-            if (phase.equals(PhaseType.UPKEEP)) {
-                return fieldControllers.get(1).getView().getLblUpkeep().getEnabled();
-            } else if (phase.equals(PhaseType.DRAW)) {
-                return fieldControllers.get(1).getView().getLblDraw().getEnabled();
-            } else if (phase.equals(PhaseType.MAIN1)) {
-                return fieldControllers.get(1).getView().getLblMain1().getEnabled();
-            } else if (phase.equals(PhaseType.COMBAT_BEGIN)) {
-                return fieldControllers.get(1).getView().getLblBeginCombat().getEnabled();
-            } else if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                return fieldControllers.get(1).getView().getLblDeclareAttackers().getEnabled();
-            } else if (phase.equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                return fieldControllers.get(1).getView().getLblDeclareBlockers().getEnabled();
-            } else if (phase.equals(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
-                return fieldControllers.get(1).getView().getLblFirstStrike().getEnabled();
-            } else if (phase.equals(PhaseType.COMBAT_DAMAGE)) {
-                return fieldControllers.get(1).getView().getLblCombatDamage().getEnabled();
-            } else if (phase.equals(PhaseType.COMBAT_END)) {
-                return fieldControllers.get(1).getView().getLblEndCombat().getEnabled();
-            } else if (phase.equals(PhaseType.MAIN2)) {
-                return fieldControllers.get(1).getView().getLblMain2().getEnabled();
-            } else if (phase.equals(PhaseType.END_OF_TURN)) {
-                return fieldControllers.get(1).getView().getLblEndTurn().getEnabled();
-            } else if (phase.equals(PhaseType.DRAW)) {
-                return fieldControllers.get(1).getView().getLblDraw().getEnabled();
-            }
-        }
+      
         return true;
     }
 

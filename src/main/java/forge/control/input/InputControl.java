@@ -209,13 +209,13 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         }
 
         // Special Inputs needed for the following phases:
-        if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        if (phase == PhaseType.COMBAT_DECLARE_ATTACKERS) {
             this.model.getGameState().getStack().freezeStack();
 
             if (playerTurn.isHuman()) {
                 return new InputAttack();
             }
-        } else if (phase.equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+        } else if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS) {
             this.model.getGameState().getStack().freezeStack();
             if (playerTurn.isHuman()) {
                 this.aiInput.getComputer().declareBlockers();
@@ -229,7 +229,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                     return new InputBlock();
                 }
             }
-        } else if (phase.equals(PhaseType.CLEANUP)) {
+        } else if (phase == PhaseType.CLEANUP) {
             // discard
             if (this.model.getGameState().getStack().size() == 0) {
                 // resolve things

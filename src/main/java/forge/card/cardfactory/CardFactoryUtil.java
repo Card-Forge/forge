@@ -3114,9 +3114,8 @@ public class CardFactoryUtil {
 
         // Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase")) {
-            final PhaseType cPhase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
-            if ((cPhase.equals(PhaseType.MAIN1) || cPhase.equals(PhaseType.MAIN2))
-                    && Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().equals(cardController)) {
+            final PhaseHandler cPhase = Singletons.getModel().getGameState().getPhaseHandler();
+            if (cPhase.getPhase().isMain() && cPhase.getPlayerTurn().equals(cardController)) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);

@@ -43,6 +43,10 @@ public enum PhaseType {
     public final boolean isAfter(final PhaseType phase) {
         return this.Index > phase.Index;
     }
+    
+    public final boolean isMain() {
+        return this == MAIN1 || this == MAIN2;
+    }
 
 
     public final boolean isBefore(final PhaseType phase) {

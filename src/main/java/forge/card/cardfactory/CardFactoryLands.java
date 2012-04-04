@@ -151,8 +151,8 @@ class CardFactoryLands {
 
                 @Override
                 public boolean canPlayAI() {
-                    if (!(Singletons.getModel().getGameState().getPhaseHandler().getPhase().equals(PhaseType.MAIN1) && Singletons.getModel().getGameState().getPhaseHandler()
-                            .getPlayerTurn().isComputer())) {
+                    if (Singletons.getModel().getGameState().getPhaseHandler().getPhase() != PhaseType.MAIN1 
+                     && Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
                         return false;
                     }
                     this.inPlay.clear();

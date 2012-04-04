@@ -2508,8 +2508,7 @@ public class CombatUtil {
 
         final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
 
-        if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                || phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+        if (phase == PhaseType.COMBAT_DECLARE_ATTACKERS || phase == PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) {
             if (!cost.equals("0")) {
                 final Ability ability = new Ability(c, cost) {
                     @Override
