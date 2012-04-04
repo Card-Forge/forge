@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 K:Fading:5
 A:AB$ ChangeZone | Cost$ SubCounter<1/FADE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, each player returns to the battlefield all cards he or she owns exiled with CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, each player returns to the battlefield all cards he or she owns exiled with CARDNAME.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True

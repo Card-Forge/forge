@@ -4,7 +4,7 @@ Types:Creature Elemental
 Text:no text
 PT:4/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturnCreatures | TriggerDescription$ When CARDNAME leaves the battlefield, return up to two target creature cards with power 2 or less from your graveyard to the battlefield.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturnCreatures | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return up to two target creature cards with power 2 or less from your graveyard to the battlefield.
 K:Evoke:5 W
 SVar:TrigReturnCreatures:DB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.powerLE2+YouCtrl | TgtPrompt$ Choose target creature
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
