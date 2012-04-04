@@ -58,6 +58,20 @@ Fixes/Features:
 - Converted some cards with "When CARDNAME is put into a graveyard from the battlefield,..." to use TriggerController (J-N).
 - Converted Sarkhan the Mad to script (again).
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Improvements for the AI of AF Pump.
+- PhaseType switched to enum
+- Updated SkieraCube to most recent version
+- Converted some cards with "When CARDNAME is put into a graveyard from the battlefield,..." to use TriggerController (O-R).
+- Converted some cards with "When CARDNAME is put into a graveyard from the battlefield,..." to use TriggerController (S-Z).
+- Converted some cards with "WWhen CARDNAME leaves the battlefield,..." to use TriggerController (A-J).
+- Fixed Drudge Spell.
+- Adding some exception handling that seems to be happening around the time the Quest game not loading anything.
+- DamageAll can now set the damage source with DamageSource param
+- EachDamage now handles Remembered defined cards
+- DamageAll and EachDamage support StackDescription param now
+- Added SetAsKicked parameter to nonPermanent kicker spells (they'll now be countered by Ertai's Trickery and interact with any other 'kicked' isValid check)
+- Corrected the targeting restriction on Agadeem Occultist to a resolution condition.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -72,6 +86,8 @@ Kjeldoran Elite Guard
 Gaea's Blessing
 Tuktuk Scrapper
 Gutter Grime
+Alpha Brawl
+Sylvan Hierophant
 
 
 end
