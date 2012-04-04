@@ -325,7 +325,7 @@ public class ComputerUtilBlock {
                 continue;
             }
 
-            Card blocker = new Card();
+            Card blocker = null;
 
             final CardList blockers = ComputerUtilBlock.getPossibleBlockers(attacker,
                     ComputerUtilBlock.getBlockersLeft(), combat);
@@ -345,20 +345,26 @@ public class ComputerUtilBlock {
                 }
             } // no safe blockers
             else {
+                // 3.Blockers that can destroy the attacker and have an upside when dying
                 killingBlockers = ComputerUtilBlock.getKillingBlockers(attacker, blockers, combat);
-                if (killingBlockers.size() > 0) {
-                    // 3.Blockers that can destroy the attacker and are worth
-                    // less
+                for (Card b : killingBlockers) {
+                    if ((b.hasKeyword("Undying") && b.getCounters(Counters.P1P1) == 0)
+                            || !b.getSVar("SacMe").equals("")) {
+                        blocker = b;
+                        break;
+                    }
+                }
+                // 4.Blockers that can destroy the attacker and are worth less
+                if (blocker == null && killingBlockers.size() > 0) {
                     final Card worst = CardFactoryUtil.getWorstCreatureAI(killingBlockers);
 
                     if ((CardFactoryUtil.evaluateCreature(worst) + ComputerUtilBlock.getDiff()) < CardFactoryUtil
-                            .evaluateCreature(attacker)
-                            || (worst.hasKeyword("Undying") && worst.getCounters(Counters.P1P1) == 0)) {
+                            .evaluateCreature(attacker)) {
                         blocker = worst;
                     }
                 }
             }
-            if (blocker.getName() != "") {
+            if (blocker != null) {
                 currentAttackers.remove(attacker);
                 ComputerUtilBlock.getBlockersLeft().remove(blocker);
                 combat.addBlocker(attacker, blocker);
