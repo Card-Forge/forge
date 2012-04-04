@@ -4025,6 +4025,7 @@ res/cardsfolder/h/heart_of_ramos.txt svneol=native#text/plain
 res/cardsfolder/h/heart_of_yavimaya.txt svneol=native#text/plain
 res/cardsfolder/h/heart_sliver.txt svneol=native#text/plain
 res/cardsfolder/h/heart_warden.txt svneol=native#text/plain
+res/cardsfolder/h/heart_wolf.txt -text
 res/cardsfolder/h/heartbeat_of_spring.txt -text
 res/cardsfolder/h/hearth_charm.txt svneol=native#text/plain
 res/cardsfolder/h/hearth_kami.txt -text
