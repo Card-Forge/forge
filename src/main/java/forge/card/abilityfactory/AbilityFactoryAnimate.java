@@ -529,6 +529,11 @@ public final class AbilityFactoryAnimate {
             keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
         }
 
+        final ArrayList<String> removeKeywords = new ArrayList<String>();
+        if (params.containsKey("RemoveKeywords")) {
+            removeKeywords.addAll(Arrays.asList(params.get("RemoveKeywords").split(" & ")));
+        }
+
         final ArrayList<String> hiddenKeywords = new ArrayList<String>();
         if (params.containsKey("HiddenKeywords")) {
             hiddenKeywords.addAll(Arrays.asList(params.get("HiddenKeywords").split(" & ")));
@@ -590,7 +595,7 @@ public final class AbilityFactoryAnimate {
         for (final Card c : tgts) {
 
             final long colorTimestamp = AbilityFactoryAnimate.doAnimate(c, af, power, toughness, types, removeTypes,
-                    finalDesc, keywords, hiddenKeywords, timestamp);
+                    finalDesc, keywords, removeKeywords, hiddenKeywords, timestamp);
 
             // give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
@@ -745,7 +750,8 @@ public final class AbilityFactoryAnimate {
      */
     private static long doAnimate(final Card c, final AbilityFactory af, final int power, final int toughness,
             final ArrayList<String> types, final ArrayList<String> removeTypes, final String colors,
-            final ArrayList<String> keywords, final ArrayList<String> hiddenKeywords, final long timestamp) {
+            final ArrayList<String> keywords, final ArrayList<String> removeKeywords,
+            final ArrayList<String> hiddenKeywords, final long timestamp) {
         final HashMap<String, String> params = af.getMapParams();
 
         boolean removeSuperTypes = false;
@@ -793,7 +799,7 @@ public final class AbilityFactoryAnimate {
                     removeCreatureTypes, timestamp);
         }
 
-        c.addChangedCardKeywords(keywords, null, params.containsKey("RemoveAllAbilities"), timestamp);
+        c.addChangedCardKeywords(keywords, removeKeywords, params.containsKey("RemoveAllAbilities"), timestamp);
 
         for (final String k : hiddenKeywords) {
             c.addExtrinsicKeyword(k);
@@ -1214,7 +1220,7 @@ public final class AbilityFactoryAnimate {
         for (final Card c : list) {
 
             final long colorTimestamp = AbilityFactoryAnimate.doAnimate(c, af, power, toughness, types, removeTypes,
-                    finalDesc, keywords, hiddenKeywords, timestamp);
+                    finalDesc, keywords, null, hiddenKeywords, timestamp);
 
             // give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
