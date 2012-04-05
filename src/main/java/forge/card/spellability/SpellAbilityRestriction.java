@@ -126,7 +126,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (params.containsKey("ActivationPhases")) {
-            this.setPhases(PhaseType.parseRange(params.get("ActivationPhases")) );
+            this.setPhases(PhaseType.parseRange(params.get("ActivationPhases")));
         }
 
         if (params.containsKey("ActivationCardsInHand")) {
@@ -223,7 +223,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             boolean isPhase = false;
             final PhaseType currPhase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
             for (final PhaseType s : this.getPhases()) {
-                if (s.equals(currPhase)) {
+                if (s == currPhase) {
                     isPhase = true;
                     break;
                 }

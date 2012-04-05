@@ -52,7 +52,7 @@ public enum PhaseType {
     public final boolean isBefore(final PhaseType phase) {
         return this.Index < phase.Index;
     }
-    
+
     public static PhaseType smartValueOf(final String value) {
         if (value == null) {
             return null;
@@ -85,17 +85,18 @@ public enum PhaseType {
     public static List<PhaseType> parseRange(String values) {
         final List<PhaseType> result = new ArrayList<PhaseType>();
         for (final String s : values.split(",")) {
-            int idxArrow = s.indexOf("->"); 
-            if ( idxArrow >= 0 ) {
+            int idxArrow = s.indexOf("->");
+            if (idxArrow >= 0) {
                 PhaseType from = PhaseType.smartValueOf(s.substring(0, idxArrow));
                 String sTo = s.substring(idxArrow + 2);
                 PhaseType to = StringUtils.isBlank(sTo) ? PhaseType.CLEANUP : PhaseType.smartValueOf(sTo);
-                for( int i = from.Index; i <= to.Index; i++) {
+                for (int i = from.Index; i <= to.Index; i++) {
                     result.add(PhaseType.getByIndex(i));
                 }
             }
-            else 
+            else {
                 result.add(PhaseType.smartValueOf(s));
+            }
         }
         return result;
     }

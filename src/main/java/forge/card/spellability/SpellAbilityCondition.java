@@ -201,7 +201,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             boolean isPhase = false;
             final PhaseType currPhase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
             for (final PhaseType s : this.getPhases()) {
-                if (s.equals(currPhase)) {
+                if (s == currPhase) {
                     isPhase = true;
                     break;
                 }
