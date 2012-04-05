@@ -1340,12 +1340,12 @@ public class CardFactorySorceries {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Winds of Change")) {
+        /*else if (cardName.equals("Winds of Change")) {
             /*
              * Each player shuffles the cards from his or her hand into his or
              * her library, then draws that many cards.
              */
-            final SpellAbility spell = new Spell(card) {
+            /*final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 1137557863607126794L;
 
                 @Override
@@ -1378,7 +1378,7 @@ public class CardFactorySorceries {
 
             }; // SpellAbility
             card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Molten Psyche")) {
