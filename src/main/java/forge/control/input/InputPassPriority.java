@@ -54,7 +54,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
         final StringBuilder sb = new StringBuilder();
 
         sb.append("Turn : ").append(Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn()).append("\n");
-        sb.append("Phase: ").append(phase).append("\n");
+        sb.append("Phase: ").append(phase.Name).append("\n");
         sb.append("Stack: ");
         if (AllZone.getStack().size() != 0) {
             sb.append(AllZone.getStack().size()).append(" to Resolve.");
