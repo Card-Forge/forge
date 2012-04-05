@@ -18,7 +18,7 @@ Colors:blue
 Types:Legendary Creature Human Wizard
 Text:no text
 PT:3/3
-S:Mode$Continuous | AffectedCards$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
+S:Mode$Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
 SVar:Picture1:http://www.wizards.com/global/images/magic/general/tobita_master_of_winds.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/310.jpg
 Oracle:Creatures you control have flying.
