@@ -20,6 +20,8 @@ package forge.card.abilityfactory;
 import java.util.HashMap;
 
 import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 
@@ -85,21 +87,23 @@ public final class AbilityFactoryCleanup {
      */
     private static void doResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
+        Card source = sa.getSourceCard();
 
         if (params.containsKey("ClearRemembered")) {
-            sa.getSourceCard().clearRemembered();
+            source.clearRemembered();
+            AllZoneUtil.getCardState(source).clearRemembered();
         }
         if (params.containsKey("ClearImprinted")) {
-            sa.getSourceCard().clearImprinted();
+            source.clearImprinted();
         }
         if (params.containsKey("ClearChosenX")) {
-            sa.getSourceCard().setSVar("ChosenX", "");
+            source.setSVar("ChosenX", "");
         }
         if (params.containsKey("ClearChosenY")) {
-            sa.getSourceCard().setSVar("ChosenY", "");
+            source.setSVar("ChosenY", "");
         }
         if (params.containsKey("ClearTriggered")) {
-            AllZone.getTriggerHandler().clearDelayedTrigger(sa.getSourceCard());
+            AllZone.getTriggerHandler().clearDelayedTrigger(source);
         }
     }
 
