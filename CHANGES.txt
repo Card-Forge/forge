@@ -72,6 +72,21 @@ Fixes/Features:
 - Added SetAsKicked parameter to nonPermanent kicker spells (they'll now be countered by Ertai's Trickery and interact with any other 'kicked' isValid check)
 - Corrected the targeting restriction on Agadeem Occultist to a resolution condition.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Converted some cards with "When CARDNAME leaves the battlefield,..." to use TriggerController (K-R).
+- Converted some cards with "When CARDNAME leaves the battlefield,..." to use TriggerController (S-Z).
+- New images are in for the Ape and Wolf pets... only 3 to go
+- Added the optional parameter "RemoveKeywords" to AF Animate. AF Debuff shouldn't be used anymore.
+- Fixed Chimeric Sphere.
+- Fixed Summit Apes.
+- The AI will now trade block with creatures with the SacMe SVar more willingly.
+- some if-elses replaced with switches.
+- equals against enum PhaseType members replaced by == operator
+- Displays current phase as text
+- Fixed Phase triggers.
+- Fixed Silent Assassin.
+- Converted Umezawa's Jitte to AF Charm and tweaked Bogardan Hellkite (by Squee).
+- Cleanup and more use of "==" instead of "equals".
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -88,6 +103,7 @@ Tuktuk Scrapper
 Gutter Grime
 Alpha Brawl
 Sylvan Hierophant
+Heart Wolf
 
 
 end
