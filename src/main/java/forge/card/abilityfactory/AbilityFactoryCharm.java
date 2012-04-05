@@ -152,10 +152,20 @@ public final class AbilityFactoryCharm {
             final AbilityFactory charmAF = new AbilityFactory();
             choices.add(charmAF.getAbility(ab, source));
         }
+        boolean timingRight = false; //is there a reason to play the charm now?
+        if (sa.isTrigger()) {
+            timingRight = true;
+        }
         for (int i = 0; i < num; i++) {
             AbilitySub chosen = null;
             for (SpellAbility sub : choices) {
-                if (sub.doTrigger(false)) {
+                if (!timingRight && sub.canPlayAI()) {
+                    chosen = (AbilitySub) sub;
+                    choices.remove(sub);
+                    timingRight = true;
+                    break;
+                }
+                if ((timingRight || i < num-1) && sub.doTrigger(false)) {
                     chosen = (AbilitySub) sub;
                     choices.remove(sub);
                     break;
@@ -177,6 +187,9 @@ public final class AbilityFactoryCharm {
             }
             chosen.setParent(child);
         }
+        if (!timingRight) {
+            return false;
+        }
         // prevent run-away activations - first time will always return true
         return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
@@ -188,7 +201,7 @@ public final class AbilityFactoryCharm {
     }
 
     /**
-     * Sets the up charm s as. For HUMAN only
+     * Setup charm. For HUMAN only
      * 
      * @param sa
      *            the new up charm s as

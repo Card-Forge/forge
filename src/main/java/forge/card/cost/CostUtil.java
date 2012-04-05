@@ -48,6 +48,9 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkSacrificeCost(final Cost cost, final Card source) {
+        if (cost == null) {
+            return true;
+        }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
                 final CostSacrifice sac = (CostSacrifice) part;
@@ -78,6 +81,9 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkCreatureSacrificeCost(final Cost cost, final Card source) {
+        if (cost == null) {
+            return true;
+        }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
                 final CostSacrifice sac = (CostSacrifice) part;
@@ -112,6 +118,9 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkLifeCost(final Cost cost, final Card source, final int remainingLife) {
+        if (cost == null) {
+            return true;
+        }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPayLife) {
                 final CostPayLife payLife = (CostPayLife) part;
@@ -133,6 +142,9 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkDiscardCost(final Cost cost, final Card source) {
+        if (cost == null) {
+            return true;
+        }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostDiscard) {
                 final CostDiscard disc = (CostDiscard) part;
@@ -158,6 +170,9 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkRemoveCounterCost(final Cost cost, final Card source) {
+        if (cost == null) {
+            return true;
+        }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostRemoveCounter) {
                 final CostRemoveCounter remCounter = (CostRemoveCounter) part;
@@ -193,6 +208,9 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkAddM1M1CounterCost(final Cost cost, final Card source) {
+        if (cost == null) {
+            return true;
+        }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPutCounter) {
                 final CostPutCounter addCounter = (CostPutCounter) part;
@@ -215,6 +233,9 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean hasDiscardHandCost(final Cost cost) {
+        if (cost == null) {
+            return false;
+        }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostDiscard) {
                 final CostDiscard disc = (CostDiscard) part;
