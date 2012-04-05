@@ -460,7 +460,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         if (!Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhase()) {
             // Run triggers if phase isn't being skipped
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            runParams.put("Phase", phase);
+            runParams.put("Phase", phase.Name);
             runParams.put("Player", turn);
             AllZone.getTriggerHandler().runTrigger(TriggerType.Phase, runParams);
 
