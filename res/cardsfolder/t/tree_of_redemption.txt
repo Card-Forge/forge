@@ -1,10 +1,9 @@
 Name:Tree of Redemption
-ManaCost:0
+ManaCost:3 G
 Types:Creature Plant
 Text:no text
 PT:0/13
 K:Defender
-K:Haste
 A:AB$ Pump | Cost$ T | RememberToughness$ True | SubAbility$ TreeRedemption | SpellDescription$ Exchange your life total with Tree of CARDNAME's toughness.
 SVar:TreeRedemption:DB$Animate | Toughness$ X | Permanent$ True | SubAbility$ ExchangeLifeUp
 SVar:ExchangeLifeUp:DB$ GainLife | Defined$ You | LifeAmount$ RedeemLifeX | ConditionCheckSVar$ X | ConditionSVarCompare$ LTZ | SubAbility$ ExchangeLifeDown
