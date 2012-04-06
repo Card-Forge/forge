@@ -511,7 +511,12 @@ class CardFactoryAuras {
                 @Override
                 public void execute() {
                     if (targetC[0] != null) {
-                        AllZone.getStack().addSimultaneousStackEntry(attach);
+                        //too slow - must be done immediately
+                        //otherwise before attach is resolved state effect kills aura as it has no target...
+//                        AllZone.getStack().addSimultaneousStackEntry(attach);
+
+                        //this seems to work, but I'm not 100% sure of possible side effects (hopefully none)
+                        attach.resolve();
                     } else {
                         // note: this should be a state-based action, but it doesn't work currently.
                         // I don't know if that because it's hard-coded or what, but this fixes
