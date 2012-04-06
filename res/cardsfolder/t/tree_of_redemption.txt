@@ -1,0 +1,23 @@
+Name:Tree of Redemption
+ManaCost:0
+Types:Creature Plant
+Text:no text
+PT:0/13
+K:Defender
+K:Haste
+A:AB$ Pump | Cost$ T | RememberToughness$ True | SubAbility$ TreeRedemption | SpellDescription$ Exchange your life total with Tree of CARDNAME's toughness.
+SVar:TreeRedemption:DB$Animate | Toughness$ X | Permanent$ True | SubAbility$ ExchangeLifeUp
+SVar:ExchangeLifeUp:DB$ GainLife | Defined$ You | LifeAmount$ RedeemLifeX | ConditionCheckSVar$ X | ConditionSVarCompare$ LTZ | SubAbility$ ExchangeLifeDown
+SVar:ExchangeLifeDown:DB$ LoseLife | Defined$ You | LifeAmount$ LostRedemptionX | ConditionCheckSVar$ X | ConditionSVarCompare$ GTZ | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearValueRemembered$ True
+SVar:X:Count$YourLifeTotal
+SVar:Y:Count$CardToughness
+SVar:Z:Number$RememberedValue
+SVar:RedeemLifeX:SVar$Z/Minus.X
+SVar:LostRedemptionX:SVar$X/Minus.Z
+SVar:RemAIDeck:True
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tree_of_redemption.jpg
+SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/207.jpg
+Oracle:Defender\n{T}: Exchange your life total with Tree of Redemption's toughness.
+End

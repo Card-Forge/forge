@@ -9492,6 +9492,7 @@ res/cardsfolder/t/treasure_hunter.txt svneol=native#text/plain
 res/cardsfolder/t/treasure_mage.txt svneol=native#text/plain
 res/cardsfolder/t/treasure_trove.txt svneol=native#text/plain
 res/cardsfolder/t/tree_monkey.txt svneol=native#text/plain
+res/cardsfolder/t/tree_of_redemption.txt -text
 res/cardsfolder/t/tree_of_tales.txt svneol=native#text/plain
 res/cardsfolder/t/treefolk_harbinger.txt svneol=native#text/plain
 res/cardsfolder/t/treefolk_healer.txt svneol=native#text/plain
