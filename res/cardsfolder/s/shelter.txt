@@ -1,8 +1,8 @@
 Name:Shelter
-ManaCost:W
+ManaCost:1 W
 Types:Instant
 Text:no text
-A:SP$ Protection | Cost$ W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SubAbility$ DBDraw | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn. Draw a card.
+A:SP$ Protection | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SubAbility$ DBDraw | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Common
