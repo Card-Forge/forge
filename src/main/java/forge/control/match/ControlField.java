@@ -489,9 +489,21 @@ public class ControlField {
                             ((InputBlock) input).removeFromAllBlocking(c);
                         }
                     } else {
-                        Singletons.getControl().getControlMatch().getMessageControl()
-                            .getInputControl().selectCard(c,
+                        //Yosei, the Morning Star required cards to be chosen on computer side
+                        //earlier it was enforced that cards must be in player zone
+                        //this can potentially break some other functionality
+                        //(tapping lands works ok but some custom cards may not...)
+                        if (c.getController() != null) {
+                            Singletons.getControl().getControlMatch().getMessageControl()
+                                    .getInputControl().selectCard(c,
+                                    c.getController().getZone(Zone.Battlefield));
+                        } else {
+                            //in weird case card has no controller revert to default behaviour
+                            Singletons.getControl().getControlMatch().getMessageControl()
+                                    .getInputControl().selectCard(c,
                                     AllZone.getHumanPlayer().getZone(Zone.Battlefield));
+
+                        }
                     }
                 }
             }

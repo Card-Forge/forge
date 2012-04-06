@@ -1644,8 +1644,11 @@ public class CardFactoryCreatures {
                     sb.append(" - tap up to 5 permanents target player controls. ");
                     sb.append("Target player skips his or her next untap step.");
                     ability.setStackDescription(sb.toString());
-                    AllZone.getStack().add(ability);
+
+                    //adding ability to stack first cause infinite loop (with observers notification)
+                    //so it has to be stop first and add ability later
                     this.stop();
+                    AllZone.getStack().add(ability);
                 }
 
                 @Override
