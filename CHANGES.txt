@@ -98,6 +98,24 @@ Fixes/Features:
 - Fixed bugs with Yosei, the Morning Star - warning: possible regression...
 - Fixing Ape and Bird Lvl 4 triggers.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed the casting cost for Shelter.
+- Fixed card panel description for Stalking Yeti
+- AI can't use Viscid Lemures ability properly, so added RemAIDeck
+- Added the ability to remember and recall integer values. This is needed for cards like Tree of Redemption where the referenced value might change. It currently only supports RememberToughness, but it can be referenced easily for other values. To recall the value, use SVar:X:Number$RememberedValue.
+- Oops. Left my debugging info in the script for Tree of Redemption. Fixed!
+- Cleanup in PhaseHandler. Don't need to go retrieve PhaseHandler when I'm already inside the object.
+- Fixing typo in Relentless Rats
+- Fixing typo in Goblin Digging Team
+- Fixing double cost description of Shared Discovery.
+- Deck generation uses CardPrinted
+- remove warnings or unused items
+- Gathered phase-related classes in a package
+- from constants removed strange constantstringarray, removed some warnings.
+- moved player-related stuff to a package
+- Removed unused classes SimpleCombat, ExternalPanel, ImagePreviewPanel, Move
+- move refactoring
+- removed old card alignment code from guiDisplay
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -119,6 +137,7 @@ Wall of Vipers
 Wandering Eye
 Wash Out
 Whirlpool Warrior
+Tree of Redemption
 
 
 end
