@@ -23,11 +23,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import forge.Card;
 import forge.card.CardColor;
 import forge.card.CardManaCost;
 import forge.card.CardRules;
-import forge.item.CardPrinted;
 import forge.util.Predicate;
 
 /**

@@ -24,8 +24,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import com.google.common.base.Predicates;
-
 import forge.PlayerType;
 import forge.Singletons;
 import forge.card.CardColor;
