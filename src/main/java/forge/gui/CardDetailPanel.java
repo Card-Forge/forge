@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package forge.gui.game;
+package forge.gui;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -37,8 +37,6 @@ import forge.AllZone;
 import forge.Card;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.gui.CardContainer;
-import forge.gui.GuiDisplayUtil;
 import forge.Counters;
 import forge.GameEntity;
 

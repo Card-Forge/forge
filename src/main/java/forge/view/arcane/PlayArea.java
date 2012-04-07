@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package arcane.ui;
+package forge.view.arcane;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -27,8 +27,8 @@ import java.util.List;
 
 import javax.swing.JScrollPane;
 
-import arcane.ui.util.CardPanelMouseListener;
 import forge.Card;
+import forge.view.arcane.util.CardPanelMouseListener;
 
 /**
  * <p>
@@ -314,7 +314,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * </p>
      * 
      * @param sourceRow
-     *            a {@link arcane.ui.PlayArea.CardStackRow} object.
+     *            a {@link forge.view.arcane.PlayArea.CardStackRow} object.
      * @param rows
      *            a {@link java.util.List} object.
      * @param insertIndex
@@ -383,13 +383,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * </p>
      * 
      * @param sourceRow
-     *            a {@link arcane.ui.PlayArea.CardStackRow} object.
+     *            a {@link forge.view.arcane.PlayArea.CardStackRow} object.
      * @param rows
      *            a {@link java.util.List} object.
      * @param rows
      *            a {@link java.util.List} object.
      * @param row
-     *            a {@link arcane.ui.PlayArea.CardStackRow} object.
+     *            a {@link forge.view.arcane.PlayArea.CardStackRow} object.
      */
     private void fillRow(final CardStackRow sourceRow, final List<CardStackRow> rows, final CardStackRow row) {
         int rowWidth = row.getWidth();

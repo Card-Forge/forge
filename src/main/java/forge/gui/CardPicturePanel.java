@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package forge.gui.game;
+package forge.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
@@ -26,14 +26,13 @@ import java.awt.event.ComponentEvent;
 
 import javax.swing.JPanel;
 
-import arcane.ui.ScaledImagePanel;
-import arcane.ui.ScaledImagePanel.MultipassType;
-import arcane.ui.ScaledImagePanel.ScalingType;
 import forge.Card;
 import forge.ImageCache;
-import forge.gui.CardContainer;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
+import forge.view.arcane.ScaledImagePanel;
+import forge.view.arcane.ScaledImagePanel.MultipassType;
+import forge.view.arcane.ScaledImagePanel.ScalingType;
 
 /**
  * The class CardPicturePanel. Shows the full-sized image in a label. if there's

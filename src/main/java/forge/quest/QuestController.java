@@ -37,8 +37,8 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.PreconReader;
 import forge.util.IStorage;
 import forge.util.IStorageView;
-import forge.util.Predicate;
 import forge.util.StorageView;
+import forge.util.closures.Predicate;
 
 /**
  * TODO: Write javadoc for this type.

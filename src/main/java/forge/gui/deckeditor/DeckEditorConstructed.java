@@ -47,8 +47,8 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
-import forge.util.Lambda0;
-import forge.util.Predicate;
+import forge.util.closures.Lambda0;
+import forge.util.closures.Predicate;
 import net.miginfocom.swing.MigLayout;
 
 /**

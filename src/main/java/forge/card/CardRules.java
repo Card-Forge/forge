@@ -26,10 +26,10 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.util.Predicate;
-import forge.util.PredicateString;
-import forge.util.Predicate.ComparableOp;
-import forge.util.Predicate.PredicatesOp;
+import forge.util.closures.Predicate;
+import forge.util.closures.PredicateString;
+import forge.util.closures.Predicate.ComparableOp;
+import forge.util.closures.Predicate.PredicatesOp;
 
 
 /**

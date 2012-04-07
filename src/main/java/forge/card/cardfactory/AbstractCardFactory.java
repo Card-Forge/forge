@@ -19,7 +19,9 @@ package forge.card.cardfactory;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -27,7 +29,6 @@ import java.util.TreeSet;
 
 import javax.swing.JOptionPane;
 
-import net.slightlymagic.braids.util.ImmutableIterableFrom;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -90,7 +91,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
     private final Map<String, Card> map = new TreeMap<String, Card>();
 
     /** This is a special list of cards, with all abilities attached. */
-    private final CardList allCards = new CardList();
+    protected List<Card> allCardsReadOnly;
 
     private Set<String> removedCardList;
     private final Card blankCard = new Card(); // new code
@@ -135,9 +136,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
      * 
      * @return allCards
      */
-    protected final CardList getAllCards() {
-        return this.allCards;
-    } // getAllCards()
+    protected abstract List<Card> getAllCards();
 
     /**
      * Getter for map.
@@ -156,20 +155,11 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
      */
     @Override
     public Iterator<Card> iterator() {
-        return new ImmutableIterableFrom<Card>(this.allCards);
-    }
-
-    /**
-     * Typical size method.
-     * 
-     * @return an estimate of the number of items encountered by this object's
-     *         iterator
-     * 
-     * @see #iterator
-     */
-    @Override
-    public final int size() {
-        return this.allCards.size();
+        if ( allCardsReadOnly == null )
+        {
+            allCardsReadOnly = Collections.unmodifiableList(getAllCards());
+        }
+        return allCardsReadOnly.iterator();
     }
 
     /**
@@ -232,17 +222,11 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
      */
     @Override
     public final Card copyCardintoNew(final Card in) {
-
         final Card out = CardFactoryUtil.copyStats(in);
         out.setOwner(in.getOwner());
-        final CardList all = new CardList(this.getAllCards());
-        CardList tokens = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        tokens = tokens.filter(CardListFilter.TOKEN);
-        all.addAll(tokens);
         out.setCopiedSpell(true);
         this.copiedList.add(out);
         return out;
-
     }
 
     /**
@@ -417,45 +401,6 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         //System.out.println(cardName);
         return this.getCard2(cardName, owner);
     }
-
-    /**
-     * Fetch a random combination of cards without any duplicates.
-     * 
-     * This algorithm is reasonably fast if numCards is small. If it is larger
-     * than, say, size()/10, it starts to get noticeably slow.
-     * 
-     * @param numCards
-     *            the number of cards to return
-     * @return a list of fleshed-out card instances
-     */
-    @Override
-    public final CardList getRandomCombinationWithoutRepetition(final int numCards) {
-        final Set<Integer> intSelections = new TreeSet<Integer>();
-
-        if (numCards >= this.size()) {
-            final StringBuilder sb = new StringBuilder();
-            sb.append("numCards (").append(numCards);
-            sb.append(") is larger than the size of the card database.");
-            throw new IllegalArgumentException(sb.toString());
-        } else if (numCards >= (this.size() / 4)) {
-            final StringBuilder sb = new StringBuilder();
-            sb.append("numCards (").append(numCards);
-            sb.append(") is too large for this algorithm; it will take too long to complete.");
-            throw new IllegalArgumentException(sb.toString());
-        }
-
-        while (intSelections.size() < numCards) {
-            intSelections.add((int) (Math.random() * this.size()));
-        }
-
-        final CardList result = new CardList(numCards);
-        for (final Integer index : intSelections) {
-            result.add(this.allCards.get(index));
-        }
-
-        return result;
-    }
-
 
     protected Card getCard2(final String cardName, final Player owner) {
         // o should be Card object

@@ -34,7 +34,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import arcane.ui.PlayArea;
 import forge.AllZone;
 import forge.Constant.Zone;
 import forge.Singletons;
@@ -46,6 +45,7 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinProp;
+import forge.view.arcane.PlayArea;
 
 /**
  * Assembles Swing components of player field instance.

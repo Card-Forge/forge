@@ -15,13 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package arcane.ui;
+package forge.view.arcane;
 
 import java.awt.event.MouseEvent;
 
 import javax.swing.JScrollPane;
 
-import arcane.ui.util.CardPanelMouseListener;
+import forge.view.arcane.util.CardPanelMouseListener;
+
 
 /**
  * <p>

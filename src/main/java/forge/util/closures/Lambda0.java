@@ -18,7 +18,7 @@
  * limitations under the Apache License.
  *
  */
-package forge.util;
+package forge.util.closures;
 
 
 /**

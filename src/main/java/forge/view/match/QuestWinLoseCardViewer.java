@@ -27,8 +27,8 @@ import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
-import forge.gui.game.CardDetailPanel;
-import forge.gui.game.CardPicturePanel;
+import forge.gui.CardDetailPanel;
+import forge.gui.CardPicturePanel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;

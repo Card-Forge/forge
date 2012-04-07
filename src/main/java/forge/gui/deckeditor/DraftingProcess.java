@@ -56,7 +56,7 @@ import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiBoosterDraft;
-import forge.util.Predicate;
+import forge.util.closures.Predicate;
 
 /**
  * <p>

@@ -22,7 +22,7 @@ import java.awt.Component;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
-import forge.gui.game.CardPicturePanel;
+import forge.gui.CardPicturePanel;
 import forge.gui.layout.DragTab;
 import forge.gui.layout.EDocID;
 import forge.gui.layout.ICDoc;
@@ -85,7 +85,7 @@ public enum VPicture implements IVDoc {
         return null;
     }
 
-    /** @return {@link forge.gui.game.CardPicturePanel} */
+    /** @return {@link forge.gui.CardPicturePanel} */
     public CardPicturePanel getPnlPicture() {
         return pnlPicture;
     }

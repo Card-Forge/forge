@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package arcane.ui.util;
+package forge.view.arcane.util;
 
 import java.awt.Component;
 import java.awt.Container;

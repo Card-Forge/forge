@@ -1,8 +1,8 @@
 package forge.card;
 
 import forge.util.FileSection;
-import forge.util.Lambda1;
 import forge.util.StorageReaderFile;
+import forge.util.closures.Lambda1;
 
 /** 
  * TODO: Write javadoc for this type.

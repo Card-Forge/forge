@@ -33,7 +33,7 @@ import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.util.Lambda1;
+import forge.util.closures.Lambda1;
 
 /**
  * <p>

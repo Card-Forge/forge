@@ -20,7 +20,6 @@ package forge.card.cardfactory;
 import java.util.Iterator;
 
 import forge.Card;
-import forge.CardList;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
@@ -37,16 +36,6 @@ public interface CardFactoryInterface extends Iterable<Card> {
      */
     @Override
     Iterator<Card> iterator();
-
-    /**
-     * Typical size method.
-     * 
-     * @return an estimate of the number of items encountered by this object's
-     *         iterator
-     * 
-     * @see #iterator
-     */
-    int size();
 
     /**
      * <p>
@@ -114,17 +103,5 @@ public interface CardFactoryInterface extends Iterable<Card> {
      */
     Card getCard(String cardName, Player owner);
     //Card getCard2(final String cardName, final Card o, final Player owner);
-
-    /**
-     * Fetch a random combination of cards without any duplicates.
-     * 
-     * This algorithm is reasonably fast if numCards is small. If it is larger
-     * than, say, size()/10, it starts to get noticeably slow.
-     * 
-     * @param numCards
-     *            the number of cards to return
-     * @return a list of fleshed-out card instances
-     */
-    CardList getRandomCombinationWithoutRepetition(int numCards);
 
 }

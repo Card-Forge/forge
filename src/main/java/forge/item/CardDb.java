@@ -34,8 +34,8 @@ import forge.Singletons;
 import forge.card.CardInSet;
 import forge.card.CardRules;
 import forge.card.MtgDataParser;
-import forge.util.Lambda1;
-import forge.util.Predicate;
+import forge.util.closures.Lambda1;
+import forge.util.closures.Predicate;
 
 /**
  * <p>

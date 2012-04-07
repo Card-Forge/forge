@@ -33,6 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.io.OldDeckFileFormatException;
 import forge.error.ErrorViewer;
+import forge.util.closures.Lambda1;
 
 /**
  * This class treats every file in the given folder as a source for a named

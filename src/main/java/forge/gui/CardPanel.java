@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.game;
+package forge.gui;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -27,8 +27,6 @@ import javax.swing.JPanel;
 
 import forge.Card;
 import forge.ImageCache;
-import forge.gui.CardContainer;
-import forge.gui.GuiDisplayUtil;
 
 /**
  * The class CardPanel. A card panel stores a card to display it on the

@@ -22,7 +22,7 @@ import java.awt.Component;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
-import forge.gui.game.CardDetailPanel;
+import forge.gui.CardDetailPanel;
 import forge.gui.layout.DragTab;
 import forge.gui.layout.EDocID;
 import forge.gui.layout.ICDoc;
@@ -57,7 +57,7 @@ public enum VDetail implements IVDoc {
         pnl.add(pnlDetail, "w 100%!, h 100%!");
     }
 
-    /** @return {@link forge.gui.game.CardDetailPanel} */
+    /** @return {@link forge.gui.CardDetailPanel} */
     public CardDetailPanel getPnlDetail() {
         return pnlDetail;
     }

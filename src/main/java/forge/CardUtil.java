@@ -43,7 +43,7 @@ import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.MyRandom;
-import forge.util.Predicate;
+import forge.util.closures.Predicate;
 
 /**
  * <p>

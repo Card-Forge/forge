@@ -55,6 +55,8 @@ import forge.view.SplashFrame;
  * @version $Id$
  */
 public class PreloadingCardFactory extends AbstractCardFactory {
+    
+    protected final List<Card> allCards = new ArrayList<Card>();
     /**
      * <p>
      * Constructor for CardFactory.
@@ -127,5 +129,13 @@ public class PreloadingCardFactory extends AbstractCardFactory {
         CardDb.setup(listCardRules.iterator());
 
     } // readCard()
+
+    /* (non-Javadoc)
+     * @see forge.card.cardfactory.AbstractCardFactory#getAllCards()
+     */
+    @Override
+    protected List<Card> getAllCards() {
+        return allCards;
+    }
 
 } // end class PreloadingCardFactory

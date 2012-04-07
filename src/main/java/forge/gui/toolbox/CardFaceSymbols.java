@@ -23,9 +23,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import arcane.ui.util.UI;
 
 import com.esotericsoftware.minlog.Log;
+
+import forge.view.arcane.util.UI;
 
 /**
  * <p>

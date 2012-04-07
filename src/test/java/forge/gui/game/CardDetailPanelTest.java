@@ -3,6 +3,8 @@ package forge.gui.game;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import forge.gui.CardDetailPanel;
+
 /**
  * Created by IntelliJ IDEA. User: dhudson
  */

@@ -23,7 +23,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 
-import net.slightlymagic.braids.util.UtilFunctions;
+import forge.util.ThreadUtil;
+
 import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
 
 /**
@@ -184,7 +185,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 
         if (numUnits > 0) {
             // dialog must exist before we exit this method.
-            UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() {
+            ThreadUtil.invokeInEventDispatchThreadAndWait(new Runnable() {
                 @Override
                 public void run() {
                     // (Re)create the progress bar.

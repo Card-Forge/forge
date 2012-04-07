@@ -1,7 +1,7 @@
 package forge.item;
 
 
-import forge.util.Predicate;
+import forge.util.closures.Predicate;
 
 /**
  * Filtering conditions for miscellaneous InventoryItems.

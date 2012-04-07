@@ -46,7 +46,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
-import forge.util.Lambda1;
+import forge.util.closures.Lambda1;
 
 /**
  * 

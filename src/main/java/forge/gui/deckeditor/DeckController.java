@@ -25,7 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.DeckBase;
 import forge.util.IStorage;
-import forge.util.Lambda0;
+import forge.util.closures.Lambda0;
 
 /**
  * TODO: Write javadoc for this type.

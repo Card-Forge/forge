@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package arcane.ui;
+package forge.view.arcane;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -36,9 +36,6 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
-import arcane.ui.ScaledImagePanel.MultipassType;
-import arcane.ui.ScaledImagePanel.ScalingType;
-import arcane.ui.util.GlowText;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.Counters;
@@ -47,6 +44,9 @@ import forge.Singletons;
 import forge.gui.CardContainer;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.properties.ForgePreferences.FPref;
+import forge.view.arcane.ScaledImagePanel.MultipassType;
+import forge.view.arcane.ScaledImagePanel.ScalingType;
+import forge.view.arcane.util.GlowText;
 
 /**
  * <p>
@@ -208,7 +208,7 @@ public class CardPanel extends JPanel implements CardContainer {
      * </p>
      * 
      * @param panel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      */
     public final void setImage(final CardPanel panel) {
         synchronized (panel.imagePanel) {
@@ -226,7 +226,7 @@ public class CardPanel extends JPanel implements CardContainer {
      * </p>
      * 
      * @param scalingType
-     *            a {@link arcane.ui.ScaledImagePanel.ScalingType} object.
+     *            a {@link forge.view.arcane.ScaledImagePanel.ScalingType} object.
      */
     public final void setScalingType(final ScalingType scalingType) {
         this.imagePanel.setScalingType(scalingType);

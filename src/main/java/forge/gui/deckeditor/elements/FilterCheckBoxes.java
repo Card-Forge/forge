@@ -26,7 +26,7 @@ import javax.swing.JCheckBox;
 
 import forge.card.CardRules;
 import forge.item.CardPrinted;
-import forge.util.Predicate;
+import forge.util.closures.Predicate;
 
 /**
  * A structural class for some checkboxes need for a deck editor, contains no

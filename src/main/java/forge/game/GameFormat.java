@@ -22,8 +22,8 @@ import java.util.List;
 
 import forge.card.CardRules;
 import forge.item.CardPrinted;
-import forge.util.Lambda1;
-import forge.util.Predicate;
+import forge.util.closures.Lambda1;
+import forge.util.closures.Predicate;
 
 /**
  * TODO: Write javadoc for this type.

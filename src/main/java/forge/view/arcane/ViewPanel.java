@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package arcane.ui;
+package forge.view.arcane;
 
 import java.awt.BorderLayout;
 
@@ -76,7 +76,7 @@ public class ViewPanel extends JPanel {
      * </p>
      * 
      * @param panel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      */
     public final void setCardPanel(final CardPanel panel) {
         // CardPanel newPanel = new CardPanel(panel.gameCard);

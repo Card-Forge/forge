@@ -49,8 +49,8 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.quest.QuestController;
-import forge.util.Lambda0;
-import forge.util.Predicate;
+import forge.util.closures.Lambda0;
+import forge.util.closures.Predicate;
 import net.miginfocom.swing.MigLayout;
 
 //import forge.quest.data.QuestBoosterPack;

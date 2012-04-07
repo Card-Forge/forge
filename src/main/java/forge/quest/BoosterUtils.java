@@ -28,9 +28,9 @@ import forge.card.CardRules;
 import forge.card.UnOpenedProduct;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
-import forge.util.Lambda1;
 import forge.util.MyRandom;
-import forge.util.Predicate;
+import forge.util.closures.Lambda1;
+import forge.util.closures.Predicate;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
 /**

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package arcane.ui.util;
+package forge.view.arcane.util;
 
 import java.awt.Container;
 import java.awt.EventQueue;
@@ -27,8 +27,8 @@ import java.util.TimerTask;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
-import arcane.ui.CardPanel;
-import arcane.util.Util;
+import forge.view.arcane.CardPanel;
+
 
 /**
  * <p>
@@ -191,7 +191,7 @@ public abstract class Animation {
      * </p>
      * 
      * @param panel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      */
     public static void tapCardToggle(final CardPanel panel) {
         new Animation(200) {
@@ -233,9 +233,9 @@ public abstract class Animation {
      * @param endWidth
      *            a int.
      * @param animationPanel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param placeholder
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param layeredPane
      *            a {@link javax.swing.JLayeredPane} object.
      * @param speed
@@ -324,9 +324,9 @@ public abstract class Animation {
      * @param endWidth
      *            a int.
      * @param animationPanel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param placeholder
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param layeredPane
      *            a {@link javax.swing.JLayeredPane} object.
      * @param speed
@@ -382,7 +382,7 @@ public abstract class Animation {
      * </p>
      * 
      * @param placeholder
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      */
     public static void moveCard(final CardPanel placeholder) {
         UI.invokeLater(new Runnable() {
@@ -464,7 +464,7 @@ public abstract class Animation {
      * </p>
      * 
      * @param overPanel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param clientFrame
      *            a {@link java.awt.Frame} object.
      * @param delay
@@ -534,13 +534,14 @@ public abstract class Animation {
                 // clientFrame.clearArrows();
                 animationPanel.setTappedAngle(overPanel.getTappedAngle());
                 try {
-                    Util.invokeAndWait(new Runnable() {
+                    SwingUtilities.invokeAndWait(new Runnable() {
                         public void run() {
                             layeredPane.add(animationPanel);
                             layeredPane.setLayer(animationPanel, JLayeredPane.DRAG_LAYER);
                         }
                     });
-                } catch (Exception e) {
+                } catch (Exception ex) {
+                    throw new RuntimeException("Error invoking runnable in UI thread.", ex);
                 }
             }
 

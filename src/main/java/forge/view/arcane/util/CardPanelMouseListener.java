@@ -15,11 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package arcane.ui.util;
+package forge.view.arcane.util;
 
-import arcane.ui.CardPanel;
 
 import java.awt.event.MouseEvent;
+
+import forge.view.arcane.CardPanel;
 
 /**
  * <p>CardPanelMouseListener interface.</p>
@@ -31,7 +32,7 @@ public interface CardPanelMouseListener {
     /**
      * <p>mouseOver.</p>
      *
-     * @param panel a {@link arcane.ui.CardPanel} object.
+     * @param panel a {@link forge.view.arcane.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
     void mouseOver(CardPanel panel, MouseEvent evt);
@@ -39,7 +40,7 @@ public interface CardPanelMouseListener {
     /**
      * <p>mouseOut.</p>
      *
-     * @param panel a {@link arcane.ui.CardPanel} object.
+     * @param panel a {@link forge.view.arcane.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
     void mouseOut(CardPanel panel, MouseEvent evt);
@@ -47,7 +48,7 @@ public interface CardPanelMouseListener {
     /**
      * <p>mouseLeftClicked.</p>
      *
-     * @param panel a {@link arcane.ui.CardPanel} object.
+     * @param panel a {@link forge.view.arcane.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
     void mouseLeftClicked(CardPanel panel, MouseEvent evt);
@@ -55,7 +56,7 @@ public interface CardPanelMouseListener {
     /**
      * <p>mouseMiddleClicked.</p>
      *
-     * @param panel a {@link arcane.ui.CardPanel} object.
+     * @param panel a {@link forge.view.arcane.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
     void mouseMiddleClicked(CardPanel panel, MouseEvent evt);
@@ -63,7 +64,7 @@ public interface CardPanelMouseListener {
     /**
      * <p>mouseRightClicked.</p>
      *
-     * @param panel a {@link arcane.ui.CardPanel} object.
+     * @param panel a {@link forge.view.arcane.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
     void mouseRightClicked(CardPanel panel, MouseEvent evt);
@@ -71,7 +72,7 @@ public interface CardPanelMouseListener {
     /**
      * <p>mouseDragStart.</p>
      *
-     * @param dragPanel a {@link arcane.ui.CardPanel} object.
+     * @param dragPanel a {@link forge.view.arcane.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
     void mouseDragStart(CardPanel dragPanel, MouseEvent evt);
@@ -79,7 +80,7 @@ public interface CardPanelMouseListener {
     /**
      * <p>mouseDragged.</p>
      *
-     * @param dragPanel a {@link arcane.ui.CardPanel} object.
+     * @param dragPanel a {@link forge.view.arcane.CardPanel} object.
      * @param dragOffsetX a int.
      * @param dragOffsetY a int.
      * @param evt a {@link java.awt.event.MouseEvent} object.
@@ -89,7 +90,7 @@ public interface CardPanelMouseListener {
     /**
      * <p>mouseDragEnd.</p>
      *
-     * @param dragPanel a {@link arcane.ui.CardPanel} object.
+     * @param dragPanel a {@link forge.view.arcane.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
     void mouseDragEnd(CardPanel dragPanel, MouseEvent evt);

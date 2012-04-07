@@ -28,8 +28,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.Card;
-import forge.gui.game.CardDetailPanel;
-import forge.gui.game.CardPicturePanel;
+import forge.gui.CardDetailPanel;
+import forge.gui.CardPicturePanel;
 import forge.item.CardPrinted;
 
 /**

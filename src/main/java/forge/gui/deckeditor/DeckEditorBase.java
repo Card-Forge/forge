@@ -36,7 +36,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
-import forge.util.Predicate;
+import forge.util.closures.Predicate;
 
 /**
  * The Class DeckEditorBase.

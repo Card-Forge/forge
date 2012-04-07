@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package arcane.ui;
+package forge.view.arcane;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -29,10 +29,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
-import arcane.ui.util.CardPanelMouseListener;
-import arcane.ui.util.UI;
 import forge.Card;
 import forge.Constant;
+import forge.view.arcane.util.CardPanelMouseListener;
+import forge.view.arcane.util.UI;
 
 /**
  * Manages mouse events and common functionality for CardPanel containing
@@ -236,7 +236,7 @@ public abstract class CardPanelContainer extends JPanel {
      *            a int.
      * @param y
      *            a int.
-     * @return a {@link arcane.ui.CardPanel} object.
+     * @return a {@link forge.view.arcane.CardPanel} object.
      */
     protected abstract CardPanel getCardPanel(int x, int y);
 
@@ -245,7 +245,7 @@ public abstract class CardPanelContainer extends JPanel {
      * 
      * @param card
      *            a {@link forge.Card} object.
-     * @return a {@link arcane.ui.CardPanel} object.
+     * @return a {@link forge.view.arcane.CardPanel} object.
      */
     public final CardPanel addCard(final Card card) {
         final CardPanel placeholder = new CardPanel(card);
@@ -267,7 +267,7 @@ public abstract class CardPanelContainer extends JPanel {
      * 
      * @param gameCardID
      *            a int.
-     * @return a {@link arcane.ui.CardPanel} object.
+     * @return a {@link forge.view.arcane.CardPanel} object.
      */
     public final CardPanel getCardPanel(final int gameCardID) {
         for (final CardPanel panel : this.getCardPanels()) {
@@ -284,7 +284,7 @@ public abstract class CardPanelContainer extends JPanel {
      * </p>
      * 
      * @param fromPanel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      */
     public final void removeCardPanel(final CardPanel fromPanel) {
         UI.invokeAndWait(new Runnable() {
@@ -411,7 +411,7 @@ public abstract class CardPanelContainer extends JPanel {
      * </p>
      * 
      * @param listener
-     *            a {@link arcane.ui.util.CardPanelMouseListener} object.
+     *            a {@link forge.view.arcane.util.CardPanelMouseListener} object.
      */
     public final void addCardPanelMouseListener(final CardPanelMouseListener listener) {
         this.listeners.add(listener);
@@ -423,7 +423,7 @@ public abstract class CardPanelContainer extends JPanel {
      * </p>
      * 
      * @param panel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param evt
      *            a {@link java.awt.event.MouseEvent} object.
      */
@@ -439,7 +439,7 @@ public abstract class CardPanelContainer extends JPanel {
      * </p>
      * 
      * @param panel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param evt
      *            a {@link java.awt.event.MouseEvent} object.
      */
@@ -455,7 +455,7 @@ public abstract class CardPanelContainer extends JPanel {
      * </p>
      * 
      * @param panel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param evt
      *            a {@link java.awt.event.MouseEvent} object.
      */
@@ -471,7 +471,7 @@ public abstract class CardPanelContainer extends JPanel {
      * </p>
      * 
      * @param dragPanel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param evt
      *            a {@link java.awt.event.MouseEvent} object.
      */
@@ -487,7 +487,7 @@ public abstract class CardPanelContainer extends JPanel {
      * </p>
      * 
      * @param dragPanel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param dragOffsetX
      *            a int.
      * @param dragOffsetY
@@ -508,7 +508,7 @@ public abstract class CardPanelContainer extends JPanel {
      * </p>
      * 
      * @param dragPanel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param evt
      *            a {@link java.awt.event.MouseEvent} object.
      */
@@ -524,7 +524,7 @@ public abstract class CardPanelContainer extends JPanel {
      * </p>
      * 
      * @param panel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param evt
      *            a {@link java.awt.event.MouseEvent} object.
      */
@@ -540,7 +540,7 @@ public abstract class CardPanelContainer extends JPanel {
      * </p>
      * 
      * @param panel
-     *            a {@link arcane.ui.CardPanel} object.
+     *            a {@link forge.view.arcane.CardPanel} object.
      * @param evt
      *            a {@link java.awt.event.MouseEvent} object.
      */

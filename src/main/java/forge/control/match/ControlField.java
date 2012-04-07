@@ -27,8 +27,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import net.slightlymagic.braids.util.ImmutableIterableFrom;
-
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
 
@@ -277,7 +275,7 @@ public class ControlField {
         }
 
         protected Iterable<Card> getCardsAsIterable() {
-            return new ImmutableIterableFrom<Card>(this.zone.getCards());
+            return this.zone.getCards();
         }
 
         protected void doAction(final Card c) {
@@ -342,8 +340,7 @@ public class ControlField {
 
                         @Override
                         protected Iterable<Card> getCardsAsIterable() {
-                            return new ImmutableIterableFrom<Card>(CardFactoryUtil.getExternalZoneActivationCards(AllZone
-                                    .getHumanPlayer()));
+                            return CardFactoryUtil.getExternalZoneActivationCards(AllZone.getHumanPlayer());
                         }
 
                         @Override
@@ -359,8 +356,7 @@ public class ControlField {
 
                         @Override
                         protected Iterable<Card> getCardsAsIterable() {
-                            return new ImmutableIterableFrom<Card>(CardFactoryUtil.getExternalZoneActivationCards(AllZone
-                                    .getComputerPlayer()));
+                            return CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer());
                         }
 
                         @Override
@@ -456,9 +452,9 @@ public class ControlField {
                 if (c != null && c.isInZone(Zone.Battlefield)) {
                     if (c.isTapped()
                             && ((input instanceof InputPayManaCost) || (input instanceof InputPayManaCostAbility))) {
-                        final arcane.ui.CardPanel cardPanel = ControlField.this.view.getTabletop().getCardPanel(
+                        final forge.view.arcane.CardPanel cardPanel = ControlField.this.view.getTabletop().getCardPanel(
                                 c.getUniqueNumber());
-                        for (final arcane.ui.CardPanel cp : cardPanel.getAttachedPanels()) {
+                        for (final forge.view.arcane.CardPanel cp : cardPanel.getAttachedPanels()) {
                             if (cp.getCard().isUntapped()) {
                                 break;
                             }
@@ -468,9 +464,9 @@ public class ControlField {
                     final CardList att = AllZone.getCombat().getAttackerList();
                     if ((c.isTapped() || c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
                             && (input instanceof InputAttack)) {
-                        final arcane.ui.CardPanel cardPanel = ControlField.this.view.getTabletop().getCardPanel(
+                        final forge.view.arcane.CardPanel cardPanel = ControlField.this.view.getTabletop().getCardPanel(
                                 c.getUniqueNumber());
-                        for (final arcane.ui.CardPanel cp : cardPanel.getAttachedPanels()) {
+                        for (final forge.view.arcane.CardPanel cp : cardPanel.getAttachedPanels()) {
                             if (cp.getCard().isUntapped() && !cp.getCard().hasSickness()) {
                                 break;
                             }

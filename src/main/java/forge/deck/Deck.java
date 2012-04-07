@@ -38,7 +38,7 @@ import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.util.FileSection;
 import forge.util.FileUtil;
-import forge.util.Lambda1;
+import forge.util.closures.Lambda1;
 
 /**
  * <p>

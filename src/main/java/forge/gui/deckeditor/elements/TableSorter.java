@@ -21,7 +21,7 @@ import java.util.Comparator;
 import java.util.Map.Entry;
 
 import forge.item.CardPrinted;
-import forge.util.Lambda1;
+import forge.util.closures.Lambda1;
 
 /**
  * <p>

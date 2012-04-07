@@ -41,8 +41,8 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.util.FileUtil;
-import forge.util.Lambda1;
 import forge.util.MyRandom;
+import forge.util.closures.Lambda1;
 
 /**
  * <p>

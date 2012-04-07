@@ -23,7 +23,7 @@ import java.util.List;
 
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
-import forge.util.Lambda1;
+import forge.util.closures.Lambda1;
 
 /**
  * TODO: Write javadoc for this type.

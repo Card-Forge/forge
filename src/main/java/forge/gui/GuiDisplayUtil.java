@@ -32,8 +32,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
-import arcane.ui.PlayArea;
-import arcane.ui.util.Animation;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -44,13 +42,13 @@ import forge.Constant;
 import forge.Counters;
 import forge.Singletons;
 import forge.Constant.Zone;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityMana;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
-import forge.gui.game.CardPanel;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.view.arcane.PlayArea;
+import forge.view.arcane.util.Animation;
 
 /**
  * <p>
@@ -243,61 +241,20 @@ public final class GuiDisplayUtil {
     }
 
 
- 
-    /**
-     * <p>
-     * isStackable.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public static boolean isStackable(final Card c) {
-        if (c.isLand() || (c.getName().startsWith("Mox") && !c.getName().equals("Mox Diamond"))
-                || (c.isLand() && c.isEnchanted()) || (c.isAura() && c.isEnchanting())
-                || (c.isToken() && CardFactoryUtil.multipleControlled(c))
-                || (c.isCreature() && (c.isEquipped() || c.isEnchanted())) || (c.isEquipment() && c.isEquipping())
-                || (c.isEnchantment())) {
-            return true;
-        }
-
-        return false;
-    }
-
-    // ~
-    /**
-     * <p>
-     * setupConnectedCards.
-     * </p>
-     * 
-     * @param connectedCards
-     *            a {@link java.util.ArrayList} object.
-     */
-    public static void setupConnectedCards(final ArrayList<CardPanel> connectedCards) {
-        for (int i = connectedCards.size() - 1; i > 0; i--) {
-            // System.out.println("We should have a stack");
-            final CardPanel cp = connectedCards.get(i);
-            cp.setConnectedCard(connectedCards.get(i - 1));
-        }
-    }
-
-    // ~
-
     /**
      * <p>
      * setupPlayZone.
      * </p>
      * 
      * @param p
-     *            a {@link arcane.ui.PlayArea} object.
+     *            a {@link forge.view.arcane.PlayArea} object.
      * @param c
      *            an array of {@link forge.Card} objects.
      */
     public static void setupPlayZone(final PlayArea p, final List<Card> c) {
         List<Card> tmp, diff;
         tmp = new ArrayList<Card>();
-        for (final arcane.ui.CardPanel cpa : p.getCardPanels()) {
+        for (final forge.view.arcane.CardPanel cpa : p.getCardPanels()) {
             tmp.add(cpa.getGameCard());
         }
         diff = new ArrayList<Card>(tmp);
@@ -312,7 +269,7 @@ public final class GuiDisplayUtil {
         diff = new ArrayList<Card>(c);
         diff.removeAll(tmp);
 
-        arcane.ui.CardPanel toPanel = null;
+        forge.view.arcane.CardPanel toPanel = null;
         for (final Card card : diff) {
             toPanel = p.addCard(card);
             Animation.moveCard(toPanel);
@@ -322,7 +279,7 @@ public final class GuiDisplayUtil {
             toPanel = p.getCardPanel(card.getUniqueNumber());
             if (card.isTapped()) {
                 toPanel.setTapped(true);
-                toPanel.setTappedAngle(arcane.ui.CardPanel.TAPPED_ANGLE);
+                toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
             } else {
                 toPanel.setTapped(false);
                 toPanel.setTappedAngle(0);
@@ -331,7 +288,7 @@ public final class GuiDisplayUtil {
             if (card.isEnchanted()) {
                 final ArrayList<Card> enchants = card.getEnchantedBy();
                 for (final Card e : enchants) {
-                    final arcane.ui.CardPanel cardE = p.getCardPanel(e.getUniqueNumber());
+                    final forge.view.arcane.CardPanel cardE = p.getCardPanel(e.getUniqueNumber());
                     if (cardE != null) {
                         toPanel.getAttachedPanels().add(cardE);
                     }
@@ -341,7 +298,7 @@ public final class GuiDisplayUtil {
             if (card.isEquipped()) {
                 final ArrayList<Card> enchants = card.getEquippedBy();
                 for (final Card e : enchants) {
-                    final arcane.ui.CardPanel cardE = p.getCardPanel(e.getUniqueNumber());
+                    final forge.view.arcane.CardPanel cardE = p.getCardPanel(e.getUniqueNumber());
                     if (cardE != null) {
                         toPanel.getAttachedPanels().add(cardE);
                     }

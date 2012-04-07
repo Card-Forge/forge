@@ -26,7 +26,7 @@ import java.util.Map.Entry;
 import forge.card.CardColor;
 import forge.card.CardManaCost;
 import forge.card.CardRules;
-import forge.util.Predicate;
+import forge.util.closures.Predicate;
 
 /**
  * <p>

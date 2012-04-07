@@ -18,7 +18,7 @@
  * limitations under the Apache License.
  *
  */
-package net.slightlymagic.braids.util;
+package forge.util;
 
 import java.lang.reflect.InvocationTargetException;
 import javax.swing.SwingUtilities;
@@ -26,7 +26,7 @@ import javax.swing.SwingUtilities;
 /**
  * Some general-purpose functions.
  */
-public final class UtilFunctions {
+public final class ThreadUtil {
 
     /**
      * Invoke the given Runnable in an Event Dispatch Thread and wait for it to

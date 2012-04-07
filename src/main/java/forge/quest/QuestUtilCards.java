@@ -27,9 +27,9 @@ import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.util.Lambda1;
 import forge.util.MyRandom;
-import forge.util.Predicate;
+import forge.util.closures.Lambda1;
+import forge.util.closures.Predicate;
 
 import java.util.ArrayList;
 import java.util.List;

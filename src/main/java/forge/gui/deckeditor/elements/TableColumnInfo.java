@@ -21,7 +21,7 @@ import java.util.Map.Entry;
 
 import javax.swing.table.TableCellRenderer;
 
-import forge.util.Lambda1;
+import forge.util.closures.Lambda1;
 
 
 /**

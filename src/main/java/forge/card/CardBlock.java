@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.item.CardPrinted;
-import forge.util.Lambda1;
-import forge.util.Predicate;
 import forge.util.StorageReaderFile;
+import forge.util.closures.Lambda1;
+import forge.util.closures.Predicate;
 
 /**
  * This is a CardBlock class.

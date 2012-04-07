@@ -28,7 +28,7 @@ import forge.card.CardRarity;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
-import forge.util.Lambda1;
+import forge.util.closures.Lambda1;
 
 /**
  * TODO: Write javadoc for this type.

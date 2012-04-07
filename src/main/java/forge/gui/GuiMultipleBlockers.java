@@ -34,7 +34,6 @@ import forge.Card;
 import forge.CardList;
 import forge.Singletons;
 import forge.error.ErrorViewer;
-import forge.gui.game.CardPanel;
 
 /**
  * <p>Constructor for Gui_MultipleBlockers4.</p>

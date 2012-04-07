@@ -59,8 +59,8 @@ import forge.item.PreconDeck;
 import forge.item.TournamentPack;
 import forge.quest.QuestController;
 import forge.quest.io.ReadPriceList;
-import forge.util.Lambda1;
-import forge.util.Predicate;
+import forge.util.closures.Lambda1;
+import forge.util.closures.Predicate;
 import net.miginfocom.swing.MigLayout;
 
 /**

@@ -20,19 +20,21 @@ package forge.gui.deckeditor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
-import forge.CardList;
 import forge.Command;
+import forge.card.CardRules;
 import forge.deck.Deck;
 import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.io.DeckSerializer;
 import forge.error.ErrorViewer;
 import forge.game.player.PlayerType;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -73,10 +75,9 @@ public final class MenuCommon extends MenuBase<Deck> {
         final Deck randomDeck = new Deck();
 
         // The only remaining reference to global variable!
-        final CardList random = new CardList(forge.AllZone.getCardFactory().getRandomCombinationWithoutRepetition(
-                15 * 5));
 
-        randomDeck.getMain().add(random);
+
+        randomDeck.getMain().addAllFlat(Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND).random(CardDb.instance().getAllUniqueCards(), CardPrinted.FN_GET_RULES, 15*5));
         randomDeck.getMain().add("Plains");
         randomDeck.getMain().add("Island");
         randomDeck.getMain().add("Swamp");

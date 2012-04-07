@@ -28,7 +28,7 @@ import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
 import com.google.code.jyield.Yieldable;
 
-import forge.util.Lambda1;
+import forge.util.closures.Lambda1;
 
 /**
  * For documentation on Java-Yield and its generators, see.

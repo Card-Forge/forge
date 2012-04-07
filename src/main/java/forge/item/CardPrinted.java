@@ -30,10 +30,10 @@ import forge.CardUtil;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.game.player.Player;
-import forge.util.Lambda1;
 import forge.util.MyRandom;
-import forge.util.Predicate;
-import forge.util.PredicateString;
+import forge.util.closures.Lambda1;
+import forge.util.closures.Predicate;
+import forge.util.closures.PredicateString;
 
 /**
  * <p>

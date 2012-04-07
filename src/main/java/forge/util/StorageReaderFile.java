@@ -26,6 +26,8 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.util.closures.Lambda1;
+
 /**
  * This class treats every line of a given file as a source for a named object.
  * 

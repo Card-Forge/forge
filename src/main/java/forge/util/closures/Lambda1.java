@@ -18,22 +18,45 @@
  * limitations under the Apache License.
  *
  */
-package forge.util;
+package forge.util.closures;
+
 
 /**
- * The Interface Lambda.
+ * The Class Lambda1.
  * 
  * @param <R>
  *            the generic type
+ * @param <A1>
+ *            the generic type
  */
-public interface Lambda<R> {
+public abstract class Lambda1<R, A1> implements Lambda<R> {
 
     /**
      * Apply.
      * 
-     * @param args
-     *            the args
+     * @param arg1
+     *            the arg1
      * @return the r
      */
-    R apply(Object[] args);
+    public abstract R apply(A1 arg1);
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * net.slightlymagic.braids.util.lambda.Lambda#apply(java.lang.Object[])
+     */
+
+    // TODO @Override
+    /**
+     * Apply.
+     *
+     * @param args Object[]
+     * @return R
+     */
+    @SuppressWarnings("unchecked")
+    public final R apply(final Object[] args) {
+        return apply((A1) args[0]);
+    }
+
 }

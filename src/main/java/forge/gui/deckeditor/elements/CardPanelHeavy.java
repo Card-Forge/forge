@@ -24,16 +24,16 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import net.miginfocom.swing.MigLayout;
-import arcane.ui.CardPanel;
-import arcane.ui.ViewPanel;
 import forge.Card;
 import forge.CardCharactersticName;
+import forge.gui.CardDetailPanel;
 import forge.gui.GuiDisplayUtil;
-import forge.gui.game.CardDetailPanel;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.view.arcane.CardPanel;
+import forge.view.arcane.ViewPanel;
 
 /**
  * This panel is to be placed in the right part of a deck editor.

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package arcane.ui;
+package forge.view.arcane;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -94,7 +94,7 @@ public class ScaledImagePanel extends JPanel {
      * </p>
      * 
      * @param multiPassType
-     *            a {@link arcane.ui.ScaledImagePanel.MultipassType} object.
+     *            a {@link forge.view.arcane.ScaledImagePanel.MultipassType} object.
      */
     public final void setScalingMultiPassType(final MultipassType multiPassType) {
         this.multiPassType = multiPassType;
@@ -106,7 +106,7 @@ public class ScaledImagePanel extends JPanel {
      * </p>
      * 
      * @param scalingType
-     *            a {@link arcane.ui.ScaledImagePanel.ScalingType} object.
+     *            a {@link forge.view.arcane.ScaledImagePanel.ScalingType} object.
      */
     public final void setScalingType(final ScalingType scalingType) {
         this.scalingType = scalingType;
@@ -152,7 +152,7 @@ public class ScaledImagePanel extends JPanel {
      * getScalingInfo.
      * </p>
      * 
-     * @return a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
+     * @return a {@link forge.view.arcane.ScaledImagePanel.ScalingInfo} object.
      */
     private ScalingInfo getScalingInfo() {
         final int panelWidth = this.getWidth();
@@ -219,7 +219,7 @@ public class ScaledImagePanel extends JPanel {
      * @param g2
      *            a {@link java.awt.Graphics2D} object.
      * @param info
-     *            a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
+     *            a {@link forge.view.arcane.ScaledImagePanel.ScalingInfo} object.
      * @param hints
      *            a int.
      */
@@ -237,7 +237,7 @@ public class ScaledImagePanel extends JPanel {
      * @param g2
      *            a {@link java.awt.Graphics2D} object.
      * @param info
-     *            a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
+     *            a {@link forge.view.arcane.ScaledImagePanel.ScalingInfo} object.
      * @param hint
      *            a {@link java.lang.Object} object.
      */
@@ -320,7 +320,7 @@ public class ScaledImagePanel extends JPanel {
      * </p>
      * 
      * @param info
-     *            a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
+     *            a {@link forge.view.arcane.ScaledImagePanel.ScalingInfo} object.
      * @return a {@link java.awt.Image} object.
      */
     private Image getSourceImage(final ScalingInfo info) {

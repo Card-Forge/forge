@@ -26,7 +26,7 @@ import java.util.Map.Entry;
 
 import forge.CardList;
 import forge.card.CardRules;
-import forge.util.Lambda1;
+import forge.util.closures.Lambda1;
 
 /**
  * <p>

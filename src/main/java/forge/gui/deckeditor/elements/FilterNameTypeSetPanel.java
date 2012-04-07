@@ -36,8 +36,8 @@ import forge.card.CardRules;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.item.CardPrinted;
-import forge.util.Predicate;
-import forge.util.PredicateString.StringOp;
+import forge.util.closures.Predicate;
+import forge.util.closures.PredicateString.StringOp;
 
 /**
  * A panel that holds Name, Type, Rules text fields aligned horizontally

@@ -28,7 +28,7 @@ import forge.deck.Deck;
 import forge.quest.SellRules;
 import forge.util.FileSection;
 import forge.util.FileUtil;
-import forge.util.Lambda1;
+import forge.util.closures.Lambda1;
 
 /**
  * TODO: Write javadoc for this type.

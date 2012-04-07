@@ -46,8 +46,8 @@ import forge.gui.deckeditor.elements.TableView;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.util.IStorage;
-import forge.util.Lambda0;
-import forge.util.Predicate;
+import forge.util.closures.Lambda0;
+import forge.util.closures.Predicate;
 import net.miginfocom.swing.MigLayout;
 
 /**

@@ -32,14 +32,14 @@ import java.util.Observer;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
-import arcane.ui.CardPanel;
-import arcane.ui.HandArea;
-import arcane.ui.util.Animation;
 import forge.AllZone;
 import forge.Card;
 import forge.Constant.Zone;
 import forge.Singletons;
 import forge.game.player.PlayerZone;
+import forge.view.arcane.CardPanel;
+import forge.view.arcane.HandArea;
+import forge.view.arcane.util.Animation;
 import forge.view.match.ViewHand;
 
 /**
@@ -112,7 +112,7 @@ public class ControlHand {
 
                 List<Card> tmp, diff;
                 tmp = new ArrayList<Card>();
-                for (final arcane.ui.CardPanel cpa : p.getCardPanels()) {
+                for (final forge.view.arcane.CardPanel cpa : p.getCardPanels()) {
                     tmp.add(cpa.getGameCard());
                 }
                 diff = new ArrayList<Card>(tmp);
@@ -139,10 +139,10 @@ public class ControlHand {
                 int startWidth, startX, startY;
                 startWidth = 10;
                 startX = fromZoneX - Math.round(startWidth / 2.0f);
-                startY = fromZoneY - Math.round(Math.round(startWidth * arcane.ui.CardPanel.ASPECT_RATIO) / 2.0f);
+                startY = fromZoneY - Math.round(Math.round(startWidth * forge.view.arcane.CardPanel.ASPECT_RATIO) / 2.0f);
 
                 int endWidth, endX, endY;
-                arcane.ui.CardPanel toPanel = null;
+                forge.view.arcane.CardPanel toPanel = null;
 
                 for (final Card card : diff) {
                     toPanel = p.addCard(card);
@@ -151,7 +151,7 @@ public class ControlHand {
                             toPanel.getCardLocation(), layeredPane);
                     endX = toPos.x;
                     endY = toPos.y;
-                    final arcane.ui.CardPanel animationPanel = new arcane.ui.CardPanel(card);
+                    final forge.view.arcane.CardPanel animationPanel = new forge.view.arcane.CardPanel(card);
                     if (Singletons.getView().getFrame().isShowing()) {
                         Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel,
                                 layeredPane, 500);

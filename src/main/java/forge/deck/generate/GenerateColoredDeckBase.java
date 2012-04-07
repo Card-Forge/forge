@@ -35,7 +35,7 @@ import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
-import forge.util.Predicate;
+import forge.util.closures.Predicate;
 
 /**
  * <p>

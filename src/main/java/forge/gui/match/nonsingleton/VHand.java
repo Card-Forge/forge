@@ -23,11 +23,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
-import arcane.ui.HandArea;
 import forge.gui.layout.DragTab;
 import forge.gui.layout.EDocID;
 import forge.gui.layout.ICDoc;
 import forge.gui.layout.IVDoc;
+import forge.view.arcane.HandArea;
 
 /**
  * Assembles Swing components of hand area.
@@ -87,7 +87,7 @@ public enum VHand implements IVDoc {
     /**
      * Gets the hand area.
      *
-     * @return {@link arcane.ui.HandArea}
+     * @return {@link forge.view.arcane.HandArea}
      */
     public HandArea getHandArea() {
         return VHand.this.hand;

@@ -35,7 +35,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import arcane.ui.PlayArea;
 import forge.gui.layout.DragTab;
 import forge.gui.layout.EDocID;
 import forge.gui.layout.ICDoc;
@@ -43,6 +42,7 @@ import forge.gui.layout.IVDoc;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinProp;
+import forge.view.arcane.PlayArea;
 
 /** 
  * Assembles Swing components of a player field instance.

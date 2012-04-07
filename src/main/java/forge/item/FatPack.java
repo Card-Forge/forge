@@ -24,7 +24,7 @@ import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.FatPackData;
-import forge.util.Lambda1;
+import forge.util.closures.Lambda1;
 
 /**
  * TODO Write javadoc for this type.

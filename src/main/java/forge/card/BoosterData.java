@@ -2,9 +2,9 @@ package forge.card;
 
 import forge.item.CardPrinted;
 import forge.util.FileSection;
-import forge.util.Lambda1;
-import forge.util.Predicate;
 import forge.util.StorageReaderFile;
+import forge.util.closures.Lambda1;
+import forge.util.closures.Predicate;
 
 /**
  * The Class BoosterData.

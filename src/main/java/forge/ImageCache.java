@@ -25,7 +25,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import arcane.ui.util.ImageUtil;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -40,6 +39,7 @@ import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.view.arcane.util.ImageUtil;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means

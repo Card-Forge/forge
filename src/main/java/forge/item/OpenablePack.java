@@ -22,7 +22,7 @@ import java.util.List;
 import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
 import forge.card.CardRules;
-import forge.util.Predicate;
+import forge.util.closures.Predicate;
 
 /**
  * TODO: Write javadoc for this type.
