@@ -22,6 +22,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import forge.card.cost.CostMana;
+
 /**
  * <p>
  * CardManaCost class.
@@ -40,14 +42,16 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     private Float compareWeight = null;
 
     /** The Constant empty. */
-    public static final CardManaCost EMPTY = new CardManaCost();
+    public static final CardManaCost EMPTY = new CardManaCost(-1);
+    public static final CardManaCost ZERO = new CardManaCost(0);
+    public static final CardManaCost ONE = new CardManaCost(1);
 
     // pass mana cost parser here
-    private CardManaCost() {
-        this.hasNoCost = true;
-        this.genericCost = 0;
-        this.stringValue = "";
+    private CardManaCost(int cmc) {
+        this.hasNoCost = cmc < 0;
+        this.genericCost = cmc < 0 ? 0 : cmc;
         this.shards = Collections.unmodifiableList(new ArrayList<CardManaCostShard>());
+        this.stringValue = this.getSimpleString();
     }
 
     // public ctor, should give it a mana parser
@@ -206,6 +210,31 @@ public final class CardManaCost implements Comparable<CardManaCost> {
          * @return the total colorless cost
          */
         int getTotalColorlessCost();
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public boolean hasPhyrexian() {
+        for(CardManaCostShard shard : shards) {
+            if ( shard.isPhyrexian() )
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public int countX() {
+        int iX = 0;
+        for(CardManaCostShard shard : shards) {
+            if ( shard == CardManaCostShard.X )
+                iX++;
+        }
+        return iX;
     }
 
 }

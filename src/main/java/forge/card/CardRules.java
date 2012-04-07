@@ -18,12 +18,11 @@
 package forge.card;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -809,6 +808,12 @@ public final class CardRules {
             public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicate.compose(Presets.IS_CREATURE,
                     PredicatesOp.NOR, Presets.IS_LAND);
 
+            @SuppressWarnings("unchecked")
+            public static final Predicate<CardRules> isNonCreatureSpellForGenerator = Predicate.or( Arrays.asList(
+                    Presets.IS_SORCERY, Presets.IS_INSTANT, Presets.IS_PLANESWALKER, Presets.IS_ENCHANTMENT, 
+                    Predicate.compose(Presets.IS_ARTIFACT, PredicatesOp.GT, Presets.IS_CREATURE ))
+            );
+            
             /** The Constant isWhite. */
             public static final Predicate<CardRules> IS_WHITE = Predicates.isColor(CardColor.WHITE);
 

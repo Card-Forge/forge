@@ -93,7 +93,7 @@ public final class MenuCommon extends MenuBase<Deck> {
         }
 
         final Deck genConstructed = new Deck();
-        genConstructed.getMain().add((new Generate2ColorDeck("AI", "AI")).get2ColorDeck(60, PlayerType.HUMAN));
+        genConstructed.getMain().addAll((new Generate2ColorDeck("AI", "AI")).get2ColorDeck(60, PlayerType.HUMAN));
         this.getController().setModel(genConstructed);
     }
 

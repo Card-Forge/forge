@@ -317,4 +317,12 @@ public class CardManaCostShard {
     public String getImageKey() {
         return this.imageKey;
     }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public boolean isPhyrexian() {
+        return (this.shard & Atom.OR_2_LIFE) != 0;
+    }
 }

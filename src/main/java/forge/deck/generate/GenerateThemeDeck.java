@@ -26,10 +26,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import forge.AllZone;
-import forge.Card;
-import forge.CardList;
 import forge.error.ErrorViewer;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 import forge.util.MyRandom;
 
 /**
@@ -40,7 +41,7 @@ import forge.util.MyRandom;
  * @author Forge
  * @version $Id$
  */
-public class GenerateThemeDeck {
+public class GenerateThemeDeck extends GenerateColoredDeckBase{
     private BufferedReader in = null;
 
     /**
@@ -95,8 +96,8 @@ public class GenerateThemeDeck {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList getThemeDeck(final String themeName, final int size) {
-        final CardList tDeck = new CardList();
+    public final ItemPoolView<CardPrinted> getThemeDeck(final String themeName, final int size) {
+        final ItemPool<CardPrinted> tDeck = new ItemPool<CardPrinted>(CardPrinted.class);
 
         final ArrayList<Grp> groups = new ArrayList<Grp>();
 
@@ -197,7 +198,7 @@ public class GenerateThemeDeck {
                 }
 
                 final int n = cardCounts.get(s);
-                tDeck.add(AllZone.getCardFactory().getCard(s, AllZone.getComputerPlayer()));
+                tDeck.add(CardDb.instance().getCard(s));
                 cardCounts.put(s, n + 1);
                 tmpDeck += s + "\n";
 
@@ -210,94 +211,18 @@ public class GenerateThemeDeck {
             numBLands = (int) (p * size);
         } else { // otherwise, just fill in the rest of the deck with basic
                  // lands
-            numBLands = size - tDeck.size();
+            numBLands = size - tDeck.countAll();
         }
 
         tmpDeck += "numBLands:" + numBLands + "\n";
 
-        if (numBLands > 0) {
-            // attempt to optimize basic land counts according to
-            // color representation
-            final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
-                    new CCnt("Mountain", 0), new CCnt("Forest", 0) };
+        addBasicLand(tDeck, numBLands);
+        
+        tmpDeck += "DeckSize:" + tDeck.countAll() + "\n";
 
-            // count each instance of a color in mana costs
-            // TODO count hybrid mana differently?
-            for (int i = 0; i < tDeck.size(); i++) {
-                final String mc = tDeck.get(i).getManaCost();
+        adjustDeckSize(tDeck, size);
 
-                for (int j = 0; j < mc.length(); j++) {
-                    final char c = mc.charAt(j);
-
-                    if (c == 'W') {
-                        clrCnts[0].count++;
-                    } else if (c == 'U') {
-                        clrCnts[1].count++;
-                    } else if (c == 'B') {
-                        clrCnts[2].count++;
-                    } else if (c == 'R') {
-                        clrCnts[3].count++;
-                    } else if (c == 'G') {
-                        clrCnts[4].count++;
-                    }
-                }
-            }
-
-            int totalColor = 0;
-            for (int i = 0; i < 5; i++) {
-                totalColor += clrCnts[i].count;
-                tmpDeck += clrCnts[i].color + ":" + clrCnts[i].count + "\n";
-            }
-
-            tmpDeck += "totalColor:" + totalColor + "\n";
-
-            for (int i = 0; i < 5; i++) {
-                if (clrCnts[i].count > 0) { // calculate number of lands for
-                                            // each color
-                    final float p = (float) clrCnts[i].count / (float) totalColor;
-                    final int nLand = (int) (numBLands * p);
-                    tmpDeck += "numLand-" + clrCnts[i].color + ":" + nLand + "\n";
-
-                    cardCounts.put(clrCnts[i].color, 2);
-                    for (int j = 0; j < nLand; j++) {
-                        tDeck.add(AllZone.getCardFactory().getCard(clrCnts[i].color, AllZone.getComputerPlayer()));
-                    }
-                }
-            }
-        }
-        tmpDeck += "DeckSize:" + tDeck.size() + "\n";
-
-        if (tDeck.size() < size) {
-            final int diff = size - tDeck.size();
-
-            for (int i = 0; i < diff; i++) {
-                s = tDeck.get(r.nextInt(tDeck.size())).getName();
-
-                while (cardCounts.get(s) >= 4) {
-                    s = tDeck.get(r.nextInt(tDeck.size())).getName();
-                }
-
-                final int n = cardCounts.get(s);
-                tDeck.add(AllZone.getCardFactory().getCard(s, AllZone.getComputerPlayer()));
-                cardCounts.put(s, n + 1);
-                tmpDeck += "Added:" + s + "\n";
-            }
-        } else if (tDeck.size() > size) {
-            final int diff = tDeck.size() - size;
-
-            for (int i = 0; i < diff; i++) {
-                Card c = tDeck.get(r.nextInt(tDeck.size()));
-
-                while (c.isBasicLand()) {
-                    c = tDeck.get(r.nextInt(tDeck.size()));
-                }
-
-                tDeck.remove(c);
-                tmpDeck += "Removed:" + s + "\n";
-            }
-        }
-
-        tmpDeck += "DeckSize:" + tDeck.size() + "\n";
+        tmpDeck += "DeckSize:" + tDeck.countAll() + "\n";
         if (testing) {
             ErrorViewer.showError(tmpDeck);
         }
@@ -325,28 +250,6 @@ public class GenerateThemeDeck {
             throw new RuntimeException("GenerateThemeDeck : readLine error");
         }
     } // readLine(Card)
-
-    private class CCnt {
-
-        /** The Color. */
-        private final String color;
-
-        /** The Count. */
-        private int count;
-
-        /**
-         * Instantiates a new c cnt.
-         * 
-         * @param clr
-         *            the clr
-         * @param cnt
-         *            the cnt
-         */
-        public CCnt(final String clr, final int cnt) {
-            this.color = clr;
-            this.count = cnt;
-        }
-    }
 
     private class Grp {
 

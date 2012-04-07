@@ -29,19 +29,10 @@ import forge.Constant;
  */
 public final class CardColor implements Comparable<CardColor> {
 
-    /** The Constant WHITE. */
     public static final byte WHITE = 1 << 1;
-
-    /** The Constant BLUE. */
     public static final byte BLUE = 1 << 2;
-
-    /** The Constant BLACK. */
     public static final byte BLACK = 1 << 3;
-
-    /** The Constant RED. */
     public static final byte RED = 1 << 4;
-
-    /** The Constant GREEN. */
     public static final byte GREEN = 1 << 5;
 
     private final byte myColor;
@@ -56,8 +47,34 @@ public final class CardColor implements Comparable<CardColor> {
      *            the mana
      */
     public CardColor(final CardManaCost mana) {
-        this.myColor = mana.getColorProfile();
+        this(mana.getColorProfile());
+    }
+    
+    private CardColor(final byte mask) {
+        this.myColor = mask;
         this.orderWeight = this.getOrderWeight();
+        
+    }
+
+    public static CardColor fromMask(int mask) {
+        return new CardColor((byte)mask);
+    }
+    
+    public static CardColor fromNames(String... colors) {
+        byte mask = 0;
+        for(String s : colors) {
+            if ( s.equalsIgnoreCase(Constant.Color.WHITE) || s.equalsIgnoreCase("w"))
+                mask |= WHITE;
+            if ( s.equalsIgnoreCase(Constant.Color.BLUE) || s.equalsIgnoreCase("u"))
+                mask |= BLUE;
+            if ( s.equalsIgnoreCase(Constant.Color.BLACK) || s.equalsIgnoreCase("b"))
+                mask |= BLACK;
+            if ( s.equalsIgnoreCase(Constant.Color.RED) || s.equalsIgnoreCase("r"))
+                mask |= RED;
+            if ( s.equalsIgnoreCase(Constant.Color.GREEN) || s.equalsIgnoreCase("g"))
+                mask |= GREEN;
+        }
+        return fromMask(mask);
     }
 
     private CardColor() {
@@ -66,7 +83,7 @@ public final class CardColor implements Comparable<CardColor> {
     }
 
     /** The null color. */
-    private static CardColor nullColor = new CardColor();
+    private static final CardColor nullColor = new CardColor();
 
     /**
      * Checks for any color.
@@ -75,7 +92,7 @@ public final class CardColor implements Comparable<CardColor> {
      *            the colormask
      * @return true, if successful
      */
-    public boolean hasAnyColor(final byte colormask) {
+    public boolean hasAnyColor(final int colormask) {
         return (this.myColor & colormask) != 0;
     }
 
@@ -86,8 +103,19 @@ public final class CardColor implements Comparable<CardColor> {
      *            the colormask
      * @return true, if successful
      */
-    public boolean hasAllColors(final byte colormask) {
+    public boolean hasAllColors(final int colormask) {
         return (this.myColor & colormask) == colormask;
+    }
+
+    /** this has no other colors except defined by operand  */
+    public boolean hasNoColorsExcept(final int colormask) {
+        return (this.myColor & ~colormask) == 0;
+    }
+    
+    
+    /** Operand has no other colors except defined by this */
+    public boolean containsAllColorsFrom(int colorProfile) {
+        return (~this.myColor & colorProfile) == 0;
     }
 
     /**
@@ -254,6 +282,12 @@ public final class CardColor implements Comparable<CardColor> {
         return this.isEqual(CardColor.GREEN);
     }
 
+    public CardColor inverse() {
+        byte mask = this.myColor;
+        mask ^= ( WHITE | BLUE | BLACK | GREEN | RED ); 
+        return fromMask(mask);
+    }
+    
     /*
      * (non-Javadoc)
      * 
@@ -292,43 +326,12 @@ public final class CardColor implements Comparable<CardColor> {
     }
 
     /**
-     * Sets the null color.
-     * 
-     * @param nullColor0
-     *            the nullColor to set
-     */
-    public static void setNullColor(final CardColor nullColor0) {
-        CardColor.nullColor = nullColor0;
-    }
-
-    /**
      * Shares color with.
      *
      * @param ccOther the cc other
      * @return true, if successful
      */
     public boolean sharesColorWith(CardColor ccOther) {
-
-        if (this.isWhite() && ccOther.isWhite()) {
-            return true;
-        }
-
-        if (this.isBlue() && ccOther.isBlue()) {
-            return true;
-        }
-
-        if (this.isBlack() && ccOther.isBlack()) {
-            return true;
-        }
-
-        if (this.isRed() && ccOther.isRed()) {
-            return true;
-        }
-
-        if (this.isGreen() && ccOther.isGreen()) {
-            return true;
-        }
-
-        return false;
+        return ( this.myColor & ccOther.myColor ) != 0;
     }
 }

@@ -3,7 +3,8 @@ package forge.deck.generate;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import forge.CardList;
+import forge.item.CardPrinted;
+import forge.item.ItemPoolView;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson
@@ -17,7 +18,7 @@ public class Generate2ColorDeckTest {
     @Test(enabled = false)
     public void generate2ColorDeckTest1() {
         final Generate2ColorDeck gen = new Generate2ColorDeck("white", "blue");
-        final CardList cardList = gen.get2ColorDeck(60, null);
+        final ItemPoolView<CardPrinted> cardList = gen.get2ColorDeck(60, null);
         Assert.assertNotNull(cardList);
     }
 }

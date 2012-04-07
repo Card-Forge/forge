@@ -18,8 +18,16 @@
 package forge.deck.generate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import forge.Card;
+import forge.card.CardColor;
+import forge.card.CardManaCost;
+import forge.card.CardRules;
+import forge.item.CardPrinted;
 import forge.util.Predicate;
 
 /**
@@ -32,99 +40,91 @@ import forge.util.Predicate;
  */
 public class GenerateDeckUtil {
 
-    public static final Predicate<Card> aiCanPlay = new Predicate<Card>() {
+    public static final Predicate<CardRules> aiCanPlay = new Predicate<CardRules>() {
         @Override
-        public boolean isTrue(Card c) {
-            return !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True");
+        public boolean isTrue(CardRules c) {
+            return !c.getRemAIDecks() && c.getRemRandomDecks(); 
         }
     };
 
-    public static final Predicate<Card> humanCanPlay = new Predicate<Card>() {
+    public static final Predicate<CardRules> humanCanPlay = new Predicate<CardRules>() {
         @Override
-        public boolean isTrue(Card c) {
-            return !c.getSVar("RemRandomDeck").equals("True");
+        public boolean isTrue(CardRules c) {
+            return !c.getRemRandomDecks();
         }
     };
-    /**
-     * 
-     * Arrays of dual and tri-land cards.
-     * 
-     * @param colors
-     *            a String
-     * @return ArrayList<String>
-     */
-    public static ArrayList<String> getDualLandList(final String colors) {
 
-        final ArrayList<String> dLands = new ArrayList<String>();
+    public static final Predicate<CardRules> colorlessCards = new Predicate<CardRules>() {
+        @Override
+        public boolean isTrue(CardRules c) {
+            CardManaCost mc = c.getManaCost(); 
+            return mc.getColorProfile() == 0 && !mc.isEmpty();
+        }
+    };    
+    
+    public static class ContainsAllColorsFrom extends Predicate<CardRules> {
+        private final CardColor allowedColor;
+        public ContainsAllColorsFrom(CardColor color) {
+            allowedColor = color;
+        }
 
-        if (colors.length() > 3) {
+        @Override
+        public boolean isTrue(CardRules subject) {
+            return allowedColor.containsAllColorsFrom(subject.getManaCost().getColorProfile());
+        }
+    }
+    
+    public static class FilterCMC extends Predicate<CardRules> {
+        private final int min;
+        private final int max;
+
+        public FilterCMC(int from, int to) {
+            min = from; max = to;
+        }
+        
+        @Override
+        public boolean isTrue(CardRules c) {
+            CardManaCost mc = c.getManaCost();
+            int cmc = mc.getCMC();
+            return cmc >= min && cmc <= max && !mc.isEmpty();
+        }
+    }
+
+    private static Map<Integer, String[]> dualLands = new HashMap<Integer, String[]>();
+    static {
+        dualLands.put(CardColor.WHITE | CardColor.BLUE, new String[]{"Tundra", "Hallowed Fountain", "Flooded Strand"});
+        dualLands.put(CardColor.BLACK | CardColor.BLUE, new String[]{"Underground Sea", "Watery Grave", "Polluted Delta"});
+        dualLands.put(CardColor.BLACK | CardColor.RED, new String[]{"Badlands", "Blood Crypt", "Bloodstained Mire"});
+        dualLands.put(CardColor.GREEN | CardColor.RED, new String[]{"Taiga", "Stomping Ground", "Wooded Foothills"});
+        dualLands.put(CardColor.GREEN | CardColor.WHITE, new String[]{"Savannah", "Temple Garden", "Windswept Heath"});
+        
+        dualLands.put(CardColor.WHITE | CardColor.BLACK, new String[]{"Scrubland", "Godless Shrine", "Marsh Flats"});
+        dualLands.put(CardColor.BLUE | CardColor.RED, new String[]{"Volcanic Island", "Steam Vents", "Scalding Tarn"});
+        dualLands.put(CardColor.BLACK | CardColor.GREEN, new String[]{"Bayou", "Overgrown Tomb", "Verdant Catacombs"});
+        dualLands.put(CardColor.WHITE | CardColor.RED, new String[]{"Plateau","Sacred Foundry","Arid Mesa"});
+        dualLands.put(CardColor.GREEN | CardColor.BLUE, new String[]{"Tropical Island", "Breeding Pool", "Misty Rainforest"});
+    }
+    
+    
+    
+    public static List<String> getDualLandList(final CardColor color) {
+
+        final List<String> dLands = new ArrayList<String>();
+
+        if (color.countColors() > 3) {
             dLands.add("Rupture Spire");
             dLands.add("Undiscovered Paradise");
         }
 
-        if (colors.length() > 2) {
+        if (color.countColors() > 2) {
             dLands.add("Evolving Wilds");
             dLands.add("Terramorphic Expanse");
         }
-
-        if (colors.contains("W") && colors.contains("U")) {
-            dLands.add("Tundra");
-            dLands.add("Hallowed Fountain");
-            dLands.add("Flooded Strand");
-        }
-
-        if (colors.contains("U") && colors.contains("B")) {
-            dLands.add("Underground Sea");
-            dLands.add("Watery Grave");
-            dLands.add("Polluted Delta");
-        }
-
-        if (colors.contains("B") && colors.contains("R")) {
-            dLands.add("Badlands");
-            dLands.add("Blood Crypt");
-            dLands.add("Bloodstained Mire");
-        }
-
-        if (colors.contains("R") && colors.contains("G")) {
-            dLands.add("Taiga");
-            dLands.add("Stomping Ground");
-            dLands.add("Wooded Foothills");
-        }
-
-        if (colors.contains("G") && colors.contains("W")) {
-            dLands.add("Savannah");
-            dLands.add("Temple Garden");
-            dLands.add("Windswept Heath");
-        }
-
-        if (colors.contains("W") && colors.contains("B")) {
-            dLands.add("Scrubland");
-            dLands.add("Godless Shrine");
-            dLands.add("Marsh Flats");
-        }
-
-        if (colors.contains("U") && colors.contains("R")) {
-            dLands.add("Volcanic Island");
-            dLands.add("Steam Vents");
-            dLands.add("Scalding Tarn");
-        }
-
-        if (colors.contains("B") && colors.contains("G")) {
-            dLands.add("Bayou");
-            dLands.add("Overgrown Tomb");
-            dLands.add("Verdant Catacombs");
-        }
-
-        if (colors.contains("R") && colors.contains("W")) {
-            dLands.add("Plateau");
-            dLands.add("Sacred Foundry");
-            dLands.add("Arid Mesa");
-        }
-
-        if (colors.contains("G") && colors.contains("U")) {
-            dLands.add("Tropical Island");
-            dLands.add("Breeding Pool");
-            dLands.add("Misty Rainforest");
+        for(Entry<Integer, String[]> dual : dualLands.entrySet()) {
+            if( color.hasAllColors(dual.getKey()) ) {
+                for(String s : dual.getValue())
+                    dLands.add(s);
+            }
         }
 
         return dLands;

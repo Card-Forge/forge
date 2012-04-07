@@ -39,6 +39,7 @@ import forge.gui.OverlayUtils;
 import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
+import forge.item.ItemPoolView;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
@@ -372,7 +373,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
 
     /** Generates deck from current list selection(s). */
     private Deck generateDeck(final JList lst0, final PlayerType player0) {
-        CardList cards = null;
+        ItemPoolView<CardPrinted> cards = null;
         final String[] selection = Arrays.copyOf(lst0.getSelectedValues(),
                 lst0.getSelectedValues().length, String[].class);
 
@@ -406,7 +407,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
 
             // After generating card lists, build deck.
             deck = new Deck();
-            deck.getMain().add(cards);
+            deck.getMain().addAll(cards);
         }
 
         // Theme deck
@@ -416,7 +417,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
 
             // After generating card lists, build deck.
             deck = new Deck();
-            deck.getMain().add(cards);
+            deck.getMain().addAll(cards);
         }
         else if (lst0.getName().equals(ESubmenuConstructedTypes.QUESTEVENTS.toString())) {
             deck = quest.getDuelsManager().getEvent(selection[0]).getEventDeck();

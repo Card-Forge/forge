@@ -224,9 +224,16 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         for (final Entry<T, Integer> e : map) {
             this.remove(e.getKey(), e.getValue());
         }
-        this.setListInSync(false);
+        // need not set out-of-sync: either remove did set, or nothing was removed
     }
 
+    public void removeAllFlat(final Iterable<T> flat) {
+        for (final T e : flat) {
+            this.remove(e);
+        }
+        // need not set out-of-sync: either remove did set, or nothing was removed        
+    }    
+    
     /**
      * 
      * Clear.

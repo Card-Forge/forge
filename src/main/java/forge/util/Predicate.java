@@ -57,7 +57,9 @@ public abstract class Predicate<T> {
         /** The NOR. */
         NOR,
         /** The NAND. */
-        NAND
+        NAND,
+        GT,
+        LT
     }
 
     /**
@@ -1016,6 +1018,10 @@ class Node<T> extends Predicate<T> {
         switch (this.operator) {
         case AND:
             return this.getFilter1().isTrue(card) && this.getFilter2().isTrue(card);
+        case GT:
+            return this.getFilter1().isTrue(card) && !this.getFilter2().isTrue(card);
+        case LT:
+            return !this.getFilter1().isTrue(card) && this.getFilter2().isTrue(card);
         case NAND:
             return !(this.getFilter1().isTrue(card) && this.getFilter2().isTrue(card));
         case OR:
