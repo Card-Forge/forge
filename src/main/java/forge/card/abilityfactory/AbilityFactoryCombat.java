@@ -24,10 +24,8 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.CombatUtil;
 import forge.ComputerUtil;
 import forge.Constant.Zone;
-import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -36,6 +34,8 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.phase.CombatUtil;
+import forge.game.phase.PhaseType;
 
 /**
  * <p>

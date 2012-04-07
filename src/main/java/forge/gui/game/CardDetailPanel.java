@@ -35,9 +35,9 @@ import javax.swing.border.EtchedBorder;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardContainer;
 import forge.Constant;
 import forge.Constant.Zone;
+import forge.gui.CardContainer;
 import forge.Counters;
 import forge.GameEntity;
 import forge.GuiDisplayUtil;

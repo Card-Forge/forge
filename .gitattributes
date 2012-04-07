@@ -11353,7 +11353,6 @@ src/main/java/forge/ButtonUtil.java svneol=native#text/plain
 src/main/java/forge/Card.java svneol=native#text/plain
 src/main/java/forge/CardCharactersticName.java -text
 src/main/java/forge/CardColor.java svneol=native#text/plain
-src/main/java/forge/CardContainer.java svneol=native#text/plain
 src/main/java/forge/CardDamageHistory.java -text
 src/main/java/forge/CardKeywords.java -text svneol=native#text/plain
 src/main/java/forge/CardList.java svneol=native#text/plain
@@ -11365,8 +11364,6 @@ src/main/java/forge/CardType.java svneol=native#text/plain
 src/main/java/forge/CardUtil.java svneol=native#text/plain
 src/main/java/forge/Color.java svneol=native#text/plain
 src/main/java/forge/ColorChanger.java -text
-src/main/java/forge/Combat.java svneol=native#text/plain
-src/main/java/forge/CombatUtil.java svneol=native#text/plain
 src/main/java/forge/Command.java svneol=native#text/plain
 src/main/java/forge/CommandArgs.java svneol=native#text/plain
 src/main/java/forge/CommandList.java svneol=native#text/plain
@@ -11381,8 +11378,6 @@ src/main/java/forge/Constant.java svneol=native#text/plain
 src/main/java/forge/ConstantStringArrayList.java svneol=native#text/plain
 src/main/java/forge/Counters.java svneol=native#text/plain
 src/main/java/forge/DefaultPlayerZone.java svneol=native#text/plain
-src/main/java/forge/EndOfCombat.java svneol=native#text/plain
-src/main/java/forge/EndOfTurn.java svneol=native#text/plain
 src/main/java/forge/ExternalPanel.java svneol=native#text/plain
 src/main/java/forge/GameAction.java svneol=native#text/plain
 src/main/java/forge/GameActionUtil.java svneol=native#text/plain
@@ -11403,10 +11398,6 @@ src/main/java/forge/MagicStack.java svneol=native#text/plain
 src/main/java/forge/Move.java svneol=native#text/plain
 src/main/java/forge/MyObservable.java svneol=native#text/plain
 src/main/java/forge/NameChanger.java svneol=native#text/plain
-src/main/java/forge/Phase.java svneol=native#text/plain
-src/main/java/forge/PhaseHandler.java -text
-src/main/java/forge/PhaseType.java -text
-src/main/java/forge/PhaseUtil.java svneol=native#text/plain
 src/main/java/forge/Player.java svneol=native#text/plain
 src/main/java/forge/PlayerType.java svneol=native#text/plain
 src/main/java/forge/PlayerUtil.java svneol=native#text/plain
@@ -11417,8 +11408,6 @@ src/main/java/forge/Singletons.java svneol=native#text/plain
 src/main/java/forge/StaticEffect.java svneol=native#text/plain
 src/main/java/forge/StaticEffects.java svneol=native#text/plain
 src/main/java/forge/UndoCommand.java svneol=native#text/plain
-src/main/java/forge/Untap.java -text
-src/main/java/forge/Upkeep.java svneol=native#text/plain
 src/main/java/forge/ZCTrigger.java svneol=native#text/plain
 src/main/java/forge/card/BoosterData.java -text
 src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
@@ -11661,6 +11650,17 @@ src/main/java/forge/game/limited/IBoosterDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/SealedDeck.java svneol=native#text/plain
 src/main/java/forge/game/limited/package-info.java svneol=native#text/plain
 src/main/java/forge/game/package-info.java -text
+src/main/java/forge/game/phase/Combat.java svneol=native#text/plain
+src/main/java/forge/game/phase/CombatUtil.java svneol=native#text/plain
+src/main/java/forge/game/phase/EndOfCombat.java svneol=native#text/plain
+src/main/java/forge/game/phase/EndOfTurn.java svneol=native#text/plain
+src/main/java/forge/game/phase/Phase.java svneol=native#text/plain
+src/main/java/forge/game/phase/PhaseHandler.java -text
+src/main/java/forge/game/phase/PhaseType.java -text
+src/main/java/forge/game/phase/PhaseUtil.java svneol=native#text/plain
+src/main/java/forge/game/phase/Untap.java -text
+src/main/java/forge/game/phase/Upkeep.java svneol=native#text/plain
+src/main/java/forge/gui/CardContainer.java svneol=native#text/plain
 src/main/java/forge/gui/CardListViewer.java -text
 src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain
 src/main/java/forge/gui/GuiUtils.java svneol=native#text/plain

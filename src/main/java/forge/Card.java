@@ -932,7 +932,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * clearBlockedThisTurn.
      * </p>
      */
-    void clearBlockedThisTurn() {
+    public void clearBlockedThisTurn() {
         this.blockedThisTurn.clear();
     }
 
@@ -955,7 +955,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * clearBlockedByThisTurn.
      * </p>
      */
-    void clearBlockedByThisTurn() {
+    public void clearBlockedByThisTurn() {
         this.blockedByThisTurn.clear();
     }
 

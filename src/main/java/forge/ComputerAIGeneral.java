@@ -30,6 +30,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
+import forge.game.phase.PhaseType;
 
 /**
  * <p>

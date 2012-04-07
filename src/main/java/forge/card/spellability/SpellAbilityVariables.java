@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Constant;
-import forge.PhaseType;
+import forge.game.phase.PhaseType;
 
 /**
  * <p>

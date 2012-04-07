@@ -32,7 +32,6 @@ import forge.Counters;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
-import forge.PhaseType;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
@@ -40,6 +39,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.phase.PhaseType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 

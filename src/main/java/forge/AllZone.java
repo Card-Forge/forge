@@ -27,6 +27,8 @@ import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.InputControl;
 import forge.game.GameState;
+import forge.game.phase.Combat;
+import forge.game.phase.EndOfTurn;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
@@ -148,7 +150,7 @@ public final class AllZone {
      * 
      * Will eventually be marked deprecated.
      * 
-     * @return a {@link forge.EndOfTurn} object.
+     * @return a {@link forge.game.phase.EndOfTurn} object.
      * @since 1.0.15
      */
     public static EndOfTurn getEndOfTurn() {
@@ -162,10 +164,10 @@ public final class AllZone {
      * 
      * Will eventually be marked deprecated.
      * 
-     * @return a {@link forge.EndOfCombat} object.
+     * @return a {@link forge.game.phase.EndOfCombat} object.
      * @since 1.0.15
      */
-    public static forge.EndOfCombat getEndOfCombat() {
+    public static forge.game.phase.EndOfCombat getEndOfCombat() {
         return Singletons.getModel().getGameState().getEndOfCombat();
     }
 
@@ -300,7 +302,7 @@ public final class AllZone {
      * 
      * Will eventually be marked deprecated.
      * 
-     * @return a {@link forge.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
      * @since 1.0.15
      */
     public static Combat getCombat() {
@@ -315,7 +317,7 @@ public final class AllZone {
      * Will eventually be marked deprecated.
      * 
      * @param attackers
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @since 1.0.15
      */
     public static void setCombat(final Combat attackers) {

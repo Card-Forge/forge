@@ -30,6 +30,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import forge.error.ErrorViewer;
+import forge.gui.CardContainer;
 import forge.gui.game.CardPanel;
 
 /**

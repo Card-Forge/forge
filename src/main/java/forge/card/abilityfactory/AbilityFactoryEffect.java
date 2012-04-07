@@ -25,12 +25,9 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant.Zone;
-import forge.PhaseHandler;
-import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.replacement.ReplacementEffect;
@@ -43,6 +40,9 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.game.phase.CombatUtil;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.util.MyRandom;
 
 /**

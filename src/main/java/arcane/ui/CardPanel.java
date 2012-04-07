@@ -41,10 +41,10 @@ import arcane.ui.ScaledImagePanel.ScalingType;
 import arcane.ui.util.GlowText;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardContainer;
 import forge.Counters;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.gui.CardContainer;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.properties.ForgePreferences.FPref;
 

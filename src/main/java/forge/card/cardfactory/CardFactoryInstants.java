@@ -26,7 +26,6 @@ import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.PhaseUtil;
 import forge.Player;
 import forge.PlayerZone;
 import forge.Singletons;
@@ -36,6 +35,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.phase.PhaseUtil;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 

@@ -27,7 +27,6 @@ import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
 import forge.Constant.Zone;
-import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -40,6 +39,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.phase.PhaseType;
 import forge.util.MyRandom;
 
 /**

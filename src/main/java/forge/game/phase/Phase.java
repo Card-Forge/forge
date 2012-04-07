@@ -15,9 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.phase;
 
 import java.util.HashMap;
+
+import forge.Command;
+import forge.CommandList;
+import forge.Player;
+import forge.Singletons;
 
 
 /**

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.phase;
 
 import java.util.HashMap;
 import java.util.Observer;
@@ -23,6 +23,15 @@ import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.GameActionUtil;
+import forge.MyObservable;
+import forge.Player;
+import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.trigger.TriggerType;
 import forge.properties.ForgePreferences.FPref;
@@ -938,7 +947,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param phase
-     *            a {@link java.lang.PhaseType} object.
+     *            a {@link java.forge.game.phase.PhaseType} object.
      */
     public final void setDevPhaseState(final PhaseType phase) {
         this.phaseIndex = phase.Index;

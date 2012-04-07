@@ -24,13 +24,13 @@ import java.util.Map;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.PhaseType;
 import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.Player;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.game.phase.PhaseType;
 
 /**
  * The Class StaticAbility.

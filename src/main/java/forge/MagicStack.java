@@ -44,6 +44,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCostAbility;
+import forge.game.phase.PhaseType;
 import forge.gui.GuiUtils;
 
 /**

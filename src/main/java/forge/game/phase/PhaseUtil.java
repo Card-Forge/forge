@@ -15,14 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.phase;
 
 import java.util.HashMap;
 
-import forge.PhaseType;
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.Player;
+import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.trigger.TriggerType;
 import forge.control.ControlMatchUI;
+import forge.game.phase.PhaseType;
 import forge.view.match.ViewField.PhaseLabel;
 
 /**

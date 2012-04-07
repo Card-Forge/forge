@@ -15,33 +15,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-package forge;
+package forge.game.phase;
 
 /**
- * The class CardContainer. A card container is an object that references a
- * card.
+ * <p>
+ * Handles "until end of combat" effects and "at end of combat" hardcoded triggers.
+ * </p>
  * 
- * @author Clemens Koza
- * @version V0.0 17.02.2010
+ * @author Forge
+ * @version $Id$
  */
-public interface CardContainer {
-    /**
-     * <p>
-     * setCard.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     */
-    void setCard(Card card);
+public class EndOfCombat extends Phase implements java.io.Serializable {
 
-    /**
-     * <p>
-     * getCard.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     */
-    Card getCard();
-}
+    /** Constant <code>serialVersionUID=3035250030566186842L</code>. */
+    private static final long serialVersionUID = 3035250030566186842L;
+
+} // end class EndOfCombat

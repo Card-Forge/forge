@@ -20,6 +20,8 @@ package forge;
 import java.util.List;
 
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.game.phase.Combat;
+import forge.game.phase.CombatUtil;
 
 /**
  * <p>
@@ -178,7 +180,7 @@ public class ComputerUtilBlock {
      * @param blockersLeft
      *            a {@link forge.CardList} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
     private static CardList getPossibleBlockers(final Card attacker, final CardList blockersLeft, final Combat combat) {
@@ -206,7 +208,7 @@ public class ComputerUtilBlock {
      * @param blockersLeft
      *            a {@link forge.CardList} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
     private static CardList getSafeBlockers(final Card attacker, final CardList blockersLeft, final Combat combat) {
@@ -232,7 +234,7 @@ public class ComputerUtilBlock {
      * @param blockersLeft
      *            a {@link forge.CardList} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
     private static CardList getKillingBlockers(final Card attacker, final CardList blockersLeft, final Combat combat) {
@@ -253,7 +255,7 @@ public class ComputerUtilBlock {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
     public static CardList sortPotentialAttackers(final Combat combat) {
@@ -312,8 +314,8 @@ public class ComputerUtilBlock {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
-     * @return a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
      */
     private static Combat makeGoodBlocks(final Combat combat) {
 
@@ -381,8 +383,8 @@ public class ComputerUtilBlock {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
-     * @return a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
      */
     private static Combat makeGangBlocks(final Combat combat) {
 
@@ -510,8 +512,8 @@ public class ComputerUtilBlock {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
-     * @return a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
      */
     private static Combat makeTradeBlocks(final Combat combat) {
 
@@ -545,8 +547,8 @@ public class ComputerUtilBlock {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
-     * @return a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
      */
     private static Combat makeChumpBlocks(final Combat combat) {
 
@@ -582,8 +584,8 @@ public class ComputerUtilBlock {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
-     * @return a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
      */
     private static Combat reinforceBlockersAgainstTrample(final Combat combat) {
 
@@ -634,8 +636,8 @@ public class ComputerUtilBlock {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
-     * @return a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
      */
     private static Combat reinforceBlockersToKill(final Combat combat) {
 
@@ -707,10 +709,10 @@ public class ComputerUtilBlock {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @param possibleBlockers
      *            a {@link forge.CardList} object.
-     * @return a {@link forge.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
      */
     private static Combat resetBlockers(final Combat combat, final CardList possibleBlockers) {
 
@@ -746,10 +748,10 @@ public class ComputerUtilBlock {
      * </p>
      * 
      * @param originalCombat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @param possibleBlockers
      *            a {@link forge.CardList} object.
-     * @return a {@link forge.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
      */
     public static Combat getBlockers(final Combat originalCombat, final CardList possibleBlockers) {
 

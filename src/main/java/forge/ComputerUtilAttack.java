@@ -24,6 +24,8 @@ import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
+import forge.game.phase.Combat;
+import forge.game.phase.CombatUtil;
 import forge.util.MyRandom;
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
@@ -110,7 +112,7 @@ public class ComputerUtilAttack {
      * @param attacker
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
     public final boolean isEffectiveAttacker(final Card attacker, final Combat combat) {
@@ -202,7 +204,7 @@ public class ComputerUtilAttack {
      * @param attackers
      *            a {@link forge.CardList} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
     public final CardList notNeededAsBlockers(final CardList attackers, final Combat combat) {
@@ -375,7 +377,7 @@ public class ComputerUtilAttack {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @param bAssault
      *            a boolean.
      */
@@ -414,7 +416,7 @@ public class ComputerUtilAttack {
      * Getter for the field <code>attackers</code>.
      * </p>
      * 
-     * @return a {@link forge.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
      */
     public final Combat getAttackers() {
         // if this method is called multiple times during a turn,
@@ -757,7 +759,7 @@ public class ComputerUtilAttack {
      * @param defenders
      *            a {@link forge.CardList} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
     public final boolean shouldAttack(final Card attacker, final CardList defenders, final Combat combat) {

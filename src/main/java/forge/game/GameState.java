@@ -18,22 +18,22 @@
 package forge.game;
 
 import forge.AIPlayer;
-import forge.Combat;
 import forge.Constant;
 import forge.DefaultPlayerZone;
-import forge.EndOfCombat;
-import forge.EndOfTurn;
 import forge.GameLog;
 import forge.HumanPlayer;
 import forge.MagicStack;
-import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
 import forge.StaticEffects;
-import forge.Untap;
-import forge.Upkeep;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
+import forge.game.phase.Combat;
+import forge.game.phase.EndOfCombat;
+import forge.game.phase.EndOfTurn;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.Untap;
+import forge.game.phase.Upkeep;
 
 /**
  * Represents the state of a <i>single game</i> and is

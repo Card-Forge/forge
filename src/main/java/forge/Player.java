@@ -36,6 +36,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameLossReason;
+import forge.game.phase.PhaseHandler;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 

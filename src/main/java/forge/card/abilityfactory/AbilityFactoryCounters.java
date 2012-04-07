@@ -33,8 +33,6 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
-import forge.PhaseHandler;
-import forge.PhaseType;
 import forge.Player;
 import forge.PlayerZone;
 import forge.Singletons;
@@ -47,6 +45,8 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 

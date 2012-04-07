@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.mana.ManaCost;
 import forge.control.input.InputPayManaCostUtil;
+import forge.game.phase.CombatUtil;
 
 /**
  * <p>

@@ -19,8 +19,8 @@ package forge;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.PhaseType;
 import forge.control.input.Input;
+import forge.game.phase.PhaseType;
 
 /**
  * <p>

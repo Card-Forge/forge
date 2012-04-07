@@ -29,7 +29,6 @@ import forge.Command;
 import forge.CommandArgs;
 import forge.ComputerUtil;
 import forge.Constant;
-import forge.PhaseType;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
@@ -44,6 +43,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.game.phase.PhaseType;
 import forge.util.TextUtil;
 
 /**
@@ -280,9 +280,9 @@ public class TriggerHandler {
             return;
         }
 
-        if( 0 == 1 ) {
-            System.out.println("T:" + mode.toString() + " > " + TextUtil.mapToString(runParams) );
-        }
+//        if( 0 == 1 ) {
+//            System.out.println("T:" + mode.toString() + " > " + TextUtil.mapToString(runParams) );
+//        }
 
         // This is done to allow the list of triggers to be modified while
         // triggers are running.

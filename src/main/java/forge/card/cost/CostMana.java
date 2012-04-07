@@ -24,7 +24,6 @@ import forge.ButtonUtil;
 import forge.Card;
 import forge.ComputerUtil;
 import forge.Constant.Zone;
-import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
 import forge.Singletons;
@@ -35,6 +34,7 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputMana;
 import forge.control.input.InputPayManaCostUtil;
+import forge.game.phase.PhaseHandler;
 
 /**
  * The Class CostMana.

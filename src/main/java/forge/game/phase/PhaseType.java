@@ -1,4 +1,4 @@
-package forge;
+package forge.game.phase;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;

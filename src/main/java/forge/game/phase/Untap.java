@@ -15,10 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.phase;
 
 import java.util.ArrayList;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.ButtonUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.Constant;
+import forge.Counters;
+import forge.GameActionUtil;
+import forge.GameEntity;
+import forge.Player;
+import forge.PlayerZone;
+import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.control.input.Input;

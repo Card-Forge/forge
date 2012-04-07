@@ -49,6 +49,7 @@ import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameEndReason;
 import forge.game.GameSummary;
+import forge.game.phase.PhaseHandler;
 import forge.gui.GuiUtils;
 import forge.view.match.ViewWinLose;
 

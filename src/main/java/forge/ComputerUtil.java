@@ -38,6 +38,8 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.InputPayManaCostUtil;
 import forge.error.ErrorViewer;
+import forge.game.phase.Combat;
+import forge.game.phase.CombatUtil;
 
 /**
  * <p>
@@ -1623,7 +1625,7 @@ public class ComputerUtil {
      * getAttackers.
      * </p>
      * 
-     * @return a {@link forge.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
      */
     public static Combat getAttackers() {
         final ComputerUtilAttack att = new ComputerUtilAttack(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield),
@@ -1637,7 +1639,7 @@ public class ComputerUtil {
      * getBlockers.
      * </p>
      * 
-     * @return a {@link forge.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
      */
     public static Combat getBlockers() {
         final CardList blockers = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);

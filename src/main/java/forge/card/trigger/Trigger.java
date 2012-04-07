@@ -26,7 +26,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
-import forge.PhaseType;
 import forge.Constant.Zone;
 import forge.PlayerZone;
 import forge.Singletons;
@@ -34,6 +33,7 @@ import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.phase.PhaseType;
 
 /**
  * <p>

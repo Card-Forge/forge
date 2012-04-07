@@ -15,8 +15,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.phase;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.CardListUtil;
+import forge.Counters;
+import forge.Player;
+import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;

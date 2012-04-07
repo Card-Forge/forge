@@ -21,11 +21,11 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 import forge.ComputerAIInput;
-import forge.PhaseType;
 import forge.MyObservable;
-import forge.PhaseHandler;
 import forge.Player;
 import forge.Singletons;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.model.FModel;
 
 /**

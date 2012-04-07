@@ -31,7 +31,6 @@ import forge.ComputerAIGeneral;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -40,6 +39,7 @@ import forge.card.cost.Cost;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
+import forge.game.phase.PhaseType;
 
 /**
  * <p>

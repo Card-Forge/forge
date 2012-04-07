@@ -20,11 +20,11 @@ package forge.control.input;
 import forge.AllZone;
 import forge.ButtonUtil;
 import forge.Card;
-import forge.PhaseType;
 import forge.GuiDisplayUtil;
 import forge.Player;
 import forge.PlayerZone;
 import forge.Singletons;
+import forge.game.phase.PhaseType;
 
 /**
  * <p>

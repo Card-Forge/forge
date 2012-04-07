@@ -23,7 +23,6 @@ import java.util.HashMap;
 import forge.AllZone;
 import forge.Card;
 import forge.ComputerUtil;
-import forge.PhaseType;
 import forge.Player;
 import forge.Singletons;
 import forge.card.spellability.AbilityActivated;
@@ -31,6 +30,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.phase.PhaseType;
 
 /**
  * <p>

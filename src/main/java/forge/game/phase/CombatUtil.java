@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.phase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +25,23 @@ import java.util.regex.Pattern;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.PhaseType;
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.Command;
+import forge.ComputerUtil;
+import forge.Constant;
+import forge.Counters;
+import forge.GameAction;
+import forge.GameActionUtil;
+import forge.GameEntity;
+import forge.Player;
+import forge.PlayerUtil;
+import forge.PlayerZone;
+import forge.Singletons;
+import forge.Constant.Color;
 import forge.Constant.Zone;
 import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
@@ -57,7 +73,7 @@ public class CombatUtil {
      * @param blocker
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
     public static boolean canBlock(final Card blocker, final Combat combat) {
@@ -134,7 +150,7 @@ public class CombatUtil {
      * @param attacker
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
     public static boolean canBeBlocked(final Card attacker, final Combat combat) {
@@ -388,7 +404,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
     public static boolean finishedMandatoryBlocks(final Combat combat) {
@@ -444,7 +460,7 @@ public class CombatUtil {
      * @param blocker
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
     public static boolean mustBlockAnAttacker(final Card blocker, final Combat combat) {
@@ -515,7 +531,7 @@ public class CombatUtil {
      * @param blocker
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
     public static boolean canBlock(final Card attacker, final Card blocker, final Combat combat) {
@@ -708,7 +724,7 @@ public class CombatUtil {
      * @param c
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
     public static boolean canAttack(final Card c, final Combat combat) {
@@ -960,7 +976,7 @@ public class CombatUtil {
      * @param attacked
      *            a {@link forge.Player} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a int.
      */
     public static int damageIfUnblocked(final Card attacker, final Player attacked, final Combat combat) {
@@ -987,7 +1003,7 @@ public class CombatUtil {
      * @param attacked
      *            a {@link forge.Player} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a int.
      */
     public static int poisonIfUnblocked(final Card attacker, final Player attacked, final Combat combat) {
@@ -1053,7 +1069,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a int.
      */
     public static int lifeThatWouldRemain(final Combat combat) {
@@ -1095,7 +1111,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a int.
      */
     public static int resultingPoison(final Combat combat) {
@@ -1136,7 +1152,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
     public static boolean lifeInDanger(final Combat combat) {
@@ -1175,7 +1191,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
     public static boolean wouldLoseLife(final Combat combat) {
@@ -1190,7 +1206,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
     public static boolean lifeInSeriousDanger(final Combat combat) {
@@ -1417,7 +1433,7 @@ public class CombatUtil {
      * @param trigger
      *            a {@link forge.card.trigger.Trigger} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
     public static boolean combatTriggerWillTrigger(final Card attacker, final Card defender, final Trigger trigger,
@@ -1710,7 +1726,7 @@ public class CombatUtil {
      * @param defender
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a int.
      */
     public static int predictPowerBonusOfAttacker(final Card attacker, final Card defender, final Combat combat) {
@@ -1837,7 +1853,7 @@ public class CombatUtil {
      * @param defender
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @return a int.
      */
     public static int predictToughnessBonusOfAttacker(final Card attacker, final Card defender, final Combat combat) {
@@ -2077,7 +2093,7 @@ public class CombatUtil {
      * @param defender
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @param withoutAbilities
      *            a boolean.
      * @return a boolean.
@@ -2219,7 +2235,7 @@ public class CombatUtil {
      * @param attacker
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.Combat} object.
+     *            a {@link forge.game.phase.Combat} object.
      * @param withoutAbilities
      *            a boolean.
      * @return a boolean.
