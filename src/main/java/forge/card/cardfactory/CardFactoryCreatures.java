@@ -27,7 +27,6 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
-import forge.ButtonUtil;
 import forge.Card;
 import forge.CardCharactersticName;
 import forge.CardList;
@@ -56,6 +55,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
+import forge.view.ButtonUtil;
 
 /**
  * <p>

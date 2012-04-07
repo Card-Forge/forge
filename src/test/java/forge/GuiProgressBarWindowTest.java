@@ -5,6 +5,8 @@ import javax.swing.WindowConstants;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import forge.gui.GuiProgressBarWindow;
+
 /**
  * Created by IntelliJ IDEA. User: dhudson
  */

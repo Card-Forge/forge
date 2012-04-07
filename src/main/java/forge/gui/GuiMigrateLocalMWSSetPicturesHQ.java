@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.gui;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -51,6 +51,10 @@ import javax.swing.event.ChangeListener;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.AllZone;
+import forge.Card;
+import forge.CardUtil;
+import forge.Singletons;
 import forge.card.EditionInfo;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
@@ -134,7 +138,7 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
      * 
      * @param c
      *            an array of
-     *            {@link forge.GuiMigrateLocalMWSSetPicturesHQ.MCard} objects.
+     *            {@link forge.gui.GuiMigrateLocalMWSSetPicturesHQ.MCard} objects.
      */
     private GuiMigrateLocalMWSSetPicturesHQ(final MCard[] c) {
         this.cards = c;
@@ -475,7 +479,7 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
      * getNeededCards.
      * </p>
      * 
-     * @return an array of {@link forge.GuiMigrateLocalMWSSetPicturesHQ.MCard}
+     * @return an array of {@link forge.gui.GuiMigrateLocalMWSSetPicturesHQ.MCard}
      *         objects.
      */
     private static MCard[] getNeededCards() {

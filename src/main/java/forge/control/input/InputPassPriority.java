@@ -18,13 +18,13 @@
 package forge.control.input;
 
 import forge.AllZone;
-import forge.ButtonUtil;
 import forge.Card;
-import forge.GuiDisplayUtil;
 import forge.Singletons;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerZone;
+import forge.gui.GuiDisplayUtil;
+import forge.view.ButtonUtil;
 
 /**
  * <p>

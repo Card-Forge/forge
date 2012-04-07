@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.card.trigger;
 
 /**
  * <p>
@@ -84,7 +84,7 @@ public enum ZCTrigger {
      * 
      * @param description
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.ZCTrigger} object.
+     * @return a {@link forge.card.trigger.ZCTrigger} object.
      */
     public static ZCTrigger getTrigger(final String description) {
         for (final ZCTrigger t : ZCTrigger.values()) {

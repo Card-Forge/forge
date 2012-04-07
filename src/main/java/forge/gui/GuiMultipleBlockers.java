@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
@@ -29,8 +29,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
+import forge.AllZone;
+import forge.Card;
+import forge.CardList;
+import forge.Singletons;
 import forge.error.ErrorViewer;
-import forge.gui.CardContainer;
 import forge.gui.game.CardPanel;
 
 /**

@@ -38,9 +38,9 @@ import forge.Card;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.gui.CardContainer;
+import forge.gui.GuiDisplayUtil;
 import forge.Counters;
 import forge.GameEntity;
-import forge.GuiDisplayUtil;
 
 /**
  * The class CardDetailPanel. Shows the details of a card.

@@ -24,9 +24,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.AllZone;
-import forge.GuiDisplayUtil;
 import forge.MyObservable;
 import forge.Singletons;
+import forge.gui.GuiDisplayUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.match.ViewTabber;
 

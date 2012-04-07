@@ -28,7 +28,6 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
-import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
@@ -52,6 +51,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerUtil;
 import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
+import forge.view.ButtonUtil;
 
 /**
  * <p>

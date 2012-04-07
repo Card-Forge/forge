@@ -21,7 +21,6 @@ import java.util.HashMap;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
-import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
@@ -40,6 +39,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerAIGeneral;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.view.ButtonUtil;
 
 /**
  * <p>

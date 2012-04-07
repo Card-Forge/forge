@@ -50,6 +50,7 @@ import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
+import forge.card.trigger.ZCTrigger;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.item.CardDb;
@@ -3224,7 +3225,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param c
      *            a {@link forge.Command} object.
      * @param typeIn
-     *            a {@link forge.ZCTrigger} object.
+     *            a {@link forge.card.trigger.ZCTrigger} object.
      */
     public final void addTrigger(final Command c, final ZCTrigger typeIn) {
         this.zcTriggers.add(new AbilityTriggered(this, c, typeIn));
@@ -3238,7 +3239,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param c
      *            a {@link forge.Command} object.
      * @param typeIn
-     *            a {@link forge.ZCTrigger} object.
+     *            a {@link forge.card.trigger.ZCTrigger} object.
      */
     public final void removeTrigger(final Command c, final ZCTrigger typeIn) {
         this.zcTriggers.remove(new AbilityTriggered(this, c, typeIn));
@@ -3250,7 +3251,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param type
-     *            a {@link forge.ZCTrigger} object.
+     *            a {@link forge.card.trigger.ZCTrigger} object.
      */
     public final void executeTrigger(final ZCTrigger type) {
         for (final AbilityTriggered t : this.zcTriggers) {

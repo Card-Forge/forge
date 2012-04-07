@@ -11348,7 +11348,6 @@ src/main/java/arcane/util/Util.java svneol=native#text/plain
 src/main/java/arcane/util/package-info.java svneol=native#text/plain
 src/main/java/forge/AllZone.java svneol=native#text/plain
 src/main/java/forge/AllZoneUtil.java svneol=native#text/plain
-src/main/java/forge/ButtonUtil.java svneol=native#text/plain
 src/main/java/forge/Card.java svneol=native#text/plain
 src/main/java/forge/CardCharactersticName.java -text
 src/main/java/forge/CardColor.java svneol=native#text/plain
@@ -11367,19 +11366,12 @@ src/main/java/forge/Command.java svneol=native#text/plain
 src/main/java/forge/CommandArgs.java svneol=native#text/plain
 src/main/java/forge/CommandList.java svneol=native#text/plain
 src/main/java/forge/CommandReturn.java svneol=native#text/plain
-src/main/java/forge/ComputerUtilBlock.java svneol=native#text/plain
 src/main/java/forge/Constant.java svneol=native#text/plain
 src/main/java/forge/Counters.java svneol=native#text/plain
 src/main/java/forge/GameAction.java svneol=native#text/plain
 src/main/java/forge/GameActionUtil.java svneol=native#text/plain
 src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GameLog.java -text
-src/main/java/forge/GuiDisplayUtil.java svneol=native#text/plain
-src/main/java/forge/GuiImportPicture.java svneol=native#text/plain
-src/main/java/forge/GuiInput.java svneol=native#text/plain
-src/main/java/forge/GuiMigrateLocalMWSSetPicturesHQ.java svneol=native#text/plain
-src/main/java/forge/GuiMultipleBlockers.java svneol=native#text/plain
-src/main/java/forge/GuiProgressBarWindow.java svneol=native#text/plain
 src/main/java/forge/HandSizeOp.java svneol=native#text/plain
 src/main/java/forge/ImageCache.java svneol=native#text/plain
 src/main/java/forge/MagicStack.java svneol=native#text/plain
@@ -11389,7 +11381,6 @@ src/main/java/forge/Singletons.java svneol=native#text/plain
 src/main/java/forge/StaticEffect.java svneol=native#text/plain
 src/main/java/forge/StaticEffects.java svneol=native#text/plain
 src/main/java/forge/UndoCommand.java svneol=native#text/plain
-src/main/java/forge/ZCTrigger.java svneol=native#text/plain
 src/main/java/forge/card/BoosterData.java -text
 src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
 src/main/java/forge/card/CardBlock.java -text
@@ -11557,6 +11548,7 @@ src/main/java/forge/card/trigger/TriggerTurnFaceUp.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerType.java -text
 src/main/java/forge/card/trigger/TriggerUnequip.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerUntaps.java svneol=native#text/plain
+src/main/java/forge/card/trigger/ZCTrigger.java svneol=native#text/plain
 src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
 src/main/java/forge/control/ControlBazaarUI.java -text
 src/main/java/forge/control/ControlMatchUI.java -text
@@ -11647,6 +11639,7 @@ src/main/java/forge/game/player/ComputerAIGeneral.java svneol=native#text/plain
 src/main/java/forge/game/player/ComputerAIInput.java svneol=native#text/plain
 src/main/java/forge/game/player/ComputerUtil.java svneol=native#text/plain
 src/main/java/forge/game/player/ComputerUtilAttack.java svneol=native#text/plain
+src/main/java/forge/game/player/ComputerUtilBlock.java svneol=native#text/plain
 src/main/java/forge/game/player/DefaultPlayerZone.java svneol=native#text/plain
 src/main/java/forge/game/player/HumanPlayer.java svneol=native#text/plain
 src/main/java/forge/game/player/IPlayerZone.java svneol=native#text/plain
@@ -11658,6 +11651,12 @@ src/main/java/forge/game/player/PlayerZoneComesIntoPlay.java svneol=native#text/
 src/main/java/forge/gui/CardContainer.java svneol=native#text/plain
 src/main/java/forge/gui/CardListViewer.java -text
 src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain
+src/main/java/forge/gui/GuiDisplayUtil.java svneol=native#text/plain
+src/main/java/forge/gui/GuiImportPicture.java svneol=native#text/plain
+src/main/java/forge/gui/GuiInput.java svneol=native#text/plain
+src/main/java/forge/gui/GuiMigrateLocalMWSSetPicturesHQ.java svneol=native#text/plain
+src/main/java/forge/gui/GuiMultipleBlockers.java svneol=native#text/plain
+src/main/java/forge/gui/GuiProgressBarWindow.java svneol=native#text/plain
 src/main/java/forge/gui/GuiUtils.java svneol=native#text/plain
 src/main/java/forge/gui/ListChooser.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabel.java svneol=native#text/plain
@@ -11872,6 +11871,7 @@ src/main/java/forge/util/StorageView.java -text
 src/main/java/forge/util/TextUtil.java -text
 src/main/java/forge/util/XmlUtil.java -text
 src/main/java/forge/util/package-info.java -text
+src/main/java/forge/view/ButtonUtil.java svneol=native#text/plain
 src/main/java/forge/view/FView.java svneol=native#text/plain
 src/main/java/forge/view/Main.java -text
 src/main/java/forge/view/SplashFrame.java -text

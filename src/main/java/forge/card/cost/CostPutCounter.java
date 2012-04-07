@@ -17,7 +17,6 @@
  */
 package forge.card.cost;
 
-import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.Constant.Zone;
@@ -29,6 +28,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.player.PlayerZone;
+import forge.view.ButtonUtil;
 
 /**
  * The Class CostPutCounter.

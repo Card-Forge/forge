@@ -28,7 +28,7 @@ import arcane.ui.CardPanel;
 import arcane.ui.ViewPanel;
 import forge.Card;
 import forge.CardCharactersticName;
-import forge.GuiDisplayUtil;
+import forge.gui.GuiDisplayUtil;
 import forge.gui.game.CardDetailPanel;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;

@@ -38,6 +38,7 @@ import forge.card.spellability.SpellAbilityList;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.player.DefaultPlayerZone;
+import forge.gui.GuiDisplayUtil;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;

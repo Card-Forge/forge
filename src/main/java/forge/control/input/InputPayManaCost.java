@@ -18,7 +18,6 @@
 package forge.control.input;
 
 import forge.AllZone;
-import forge.ButtonUtil;
 import forge.Card;
 import forge.Constant.Zone;
 import forge.Singletons;
@@ -28,6 +27,7 @@ import forge.card.trigger.TriggerType;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.PlayerZone;
+import forge.view.ButtonUtil;
 
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid

@@ -18,7 +18,6 @@
 package forge.card.cost;
 
 import forge.AllZone;
-import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
@@ -31,6 +30,7 @@ import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerZone;
+import forge.view.ButtonUtil;
 
 /**
  * The Class CostDiscard.

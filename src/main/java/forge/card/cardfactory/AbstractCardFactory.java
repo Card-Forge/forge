@@ -30,7 +30,6 @@ import javax.swing.JOptionPane;
 import net.slightlymagic.braids.util.ImmutableIterableFrom;
 import forge.AllZone;
 import forge.AllZoneUtil;
-import forge.ButtonUtil;
 import forge.Card;
 import forge.CardCharactersticName;
 import forge.CardList;
@@ -61,6 +60,7 @@ import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
+import forge.view.ButtonUtil;
 
 /**
  * <p>

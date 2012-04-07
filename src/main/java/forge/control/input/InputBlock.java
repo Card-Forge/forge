@@ -20,12 +20,12 @@ package forge.control.input;
 import java.util.ArrayList;
 
 import forge.AllZone;
-import forge.ButtonUtil;
 import forge.Card;
 import forge.Constant;
 import forge.Singletons;
 import forge.game.phase.CombatUtil;
 import forge.game.player.PlayerZone;
+import forge.view.ButtonUtil;
 
 /**
  * <p>

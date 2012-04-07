@@ -15,11 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.gui;
 
 import java.util.Observable;
 import java.util.Observer;
 
+import forge.AllZone;
+import forge.Card;
+import forge.MyObservable;
+import forge.Singletons;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.player.PlayerZone;

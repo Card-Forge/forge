@@ -25,7 +25,6 @@ import javax.swing.WindowConstants;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
-import forge.GuiProgressBarWindow;
 
 /**
  * GUI Progress Monitor that displays the ETA (Estimated Time of Arrival or

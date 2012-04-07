@@ -23,8 +23,8 @@ import forge.Card;
 import forge.CardCharactersticName;
 import forge.CardList;
 import forge.Command;
-import forge.ZCTrigger;
 import forge.card.CardCharacteristics;
+import forge.card.trigger.ZCTrigger;
 
 /**
  * <p>
@@ -79,7 +79,7 @@ public class AbilityTriggered extends Ability implements Command {
      * @param sourceCommand
      *            a {@link forge.Command} object.
      * @param situation
-     *            a {@link forge.ZCTrigger} object.
+     *            a {@link forge.card.trigger.ZCTrigger} object.
      */
     public AbilityTriggered(final Card sourceCard, final Command sourceCommand, final ZCTrigger situation) {
         super(sourceCard, "0");

@@ -39,8 +39,6 @@ import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.HandSizeOp;
 import forge.Singletons;
-import forge.Constant.Color;
-import forge.Constant.Runtime;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;

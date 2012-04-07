@@ -35,6 +35,7 @@ import com.google.common.collect.ComputationException;
 import com.google.common.util.concurrent.UncheckedExecutionException;
 import com.mortennobel.imagescaling.ResampleOp;
 
+import forge.gui.GuiDisplayUtil;
 import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;

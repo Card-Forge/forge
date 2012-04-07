@@ -26,9 +26,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import forge.Card;
-import forge.GuiDisplayUtil;
 import forge.ImageCache;
 import forge.gui.CardContainer;
+import forge.gui.GuiDisplayUtil;
 
 /**
  * The class CardPanel. A card panel stores a card to display it on the

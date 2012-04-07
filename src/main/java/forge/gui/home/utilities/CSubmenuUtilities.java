@@ -1,8 +1,8 @@
 package forge.gui.home.utilities;
 
 import forge.Command;
-import forge.GuiImportPicture;
 import forge.error.BugzReporter;
+import forge.gui.GuiImportPicture;
 import forge.gui.download.GuiDownloadPicturesLQ;
 import forge.gui.download.GuiDownloadPrices;
 import forge.gui.download.GuiDownloadQuestImages;

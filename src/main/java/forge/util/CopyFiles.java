@@ -29,7 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 
-import forge.GuiDisplayUtil;
+import forge.gui.GuiDisplayUtil;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 

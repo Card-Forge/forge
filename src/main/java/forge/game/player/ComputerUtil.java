@@ -29,7 +29,6 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.CardUtil;
-import forge.ComputerUtilBlock;
 import forge.Constant;
 import forge.GameAction;
 import forge.Singletons;

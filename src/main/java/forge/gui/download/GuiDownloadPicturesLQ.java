@@ -25,7 +25,7 @@ import javax.swing.JFrame;
 
 import forge.AllZone;
 import forge.Card;
-import forge.GuiDisplayUtil;
+import forge.gui.GuiDisplayUtil;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 

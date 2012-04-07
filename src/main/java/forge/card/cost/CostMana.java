@@ -20,7 +20,6 @@ package forge.card.cost;
 import com.google.common.base.Strings;
 
 import forge.AllZone;
-import forge.ButtonUtil;
 import forge.Card;
 import forge.Constant.Zone;
 import forge.Singletons;
@@ -35,6 +34,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerZone;
+import forge.view.ButtonUtil;
 
 /**
  * The Class CostMana.

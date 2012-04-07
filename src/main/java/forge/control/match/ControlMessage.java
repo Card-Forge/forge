@@ -21,8 +21,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import forge.Constant;
-import forge.GuiInput;
 import forge.Singletons;
+import forge.gui.GuiInput;
 import forge.view.match.ViewMessage;
 
 /**

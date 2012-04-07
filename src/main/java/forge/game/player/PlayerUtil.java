@@ -18,7 +18,6 @@
 package forge.game.player;
 
 import forge.AllZone;
-import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
@@ -27,6 +26,7 @@ import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.view.ButtonUtil;
 
 /**
  * <p>
