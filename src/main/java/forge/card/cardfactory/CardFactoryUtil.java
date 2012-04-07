@@ -37,8 +37,6 @@ import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Command;
 import forge.CommandArgs;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameActionUtil;
 import forge.HandSizeOp;
@@ -66,7 +64,8 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 import forge.view.ButtonUtil;
@@ -908,7 +907,7 @@ public class CardFactoryUtil {
             }
         };
         final SpellAbilityRestriction restrict = new SpellAbilityRestriction();
-        restrict.setZone(Zone.Graveyard);
+        restrict.setZone(ZoneType.Graveyard);
         restrict.setSorcerySpeed(true);
         unearth.setRestrictions(restrict);
 
@@ -1040,8 +1039,8 @@ public class CardFactoryUtil {
 
                 // The AI should cycle lands if it has 6 already and no cards in
                 // hand with higher CMC
-                final CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
-                CardList lands = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+                CardList lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 lands.addAll(hand);
                 lands = lands.getType("Land");
 
@@ -1076,7 +1075,7 @@ public class CardFactoryUtil {
         sbStack.append(sourceCard).append(" Cycling: Draw a card");
         cycle.setStackDescription(sbStack.toString());
 
-        cycle.getRestrictions().setZone(Constant.Zone.Hand);
+        cycle.getRestrictions().setZone(ZoneType.Hand);
         return cycle;
     } // abilityCycle()
 
@@ -1119,7 +1118,7 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                final CardList cards = sourceCard.getController().getCardsIn(Zone.Library);
+                final CardList cards = sourceCard.getController().getCardsIn(ZoneType.Library);
                 final CardList sameType = new CardList();
 
                 for (int i = 0; i < cards.size(); i++) {
@@ -1163,7 +1162,7 @@ public class CardFactoryUtil {
         sbStack.append("cycling: Search your library for a ").append(description).append(" card.)");
         cycle.setStackDescription(sbStack.toString());
 
-        cycle.getRestrictions().setZone(Constant.Zone.Hand);
+        cycle.getRestrictions().setZone(ZoneType.Hand);
 
         return cycle;
     } // abilityTypecycle()
@@ -1198,7 +1197,7 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                final CardList cards = sourceCard.getController().getCardsIn(Zone.Library);
+                final CardList cards = sourceCard.getController().getCardsIn(ZoneType.Library);
                 final CardList sameCost = new CardList();
 
                 for (int i = 0; i < cards.size(); i++) {
@@ -1237,7 +1236,7 @@ public class CardFactoryUtil {
         sbStack.append("for a card with the same converted mana cost.)");
         transmute.setStackDescription(sbStack.toString());
 
-        transmute.getRestrictions().setZone(Constant.Zone.Hand);
+        transmute.getRestrictions().setZone(ZoneType.Hand);
         return transmute;
     } // abilityTransmute()
 
@@ -1292,7 +1291,7 @@ public class CardFactoryUtil {
         sbStack.append(suspendCounters).append(" turns.)");
         suspend.setStackDescription(sbStack.toString());
 
-        suspend.getRestrictions().setZone(Constant.Zone.Hand);
+        suspend.getRestrictions().setZone(ZoneType.Hand);
         return suspend;
     } // abilitySuspend()
 
@@ -1356,7 +1355,7 @@ public class CardFactoryUtil {
             }
 
             CardList getCreature() {
-                CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 list = list.getTargetableCards(this).filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
@@ -1648,7 +1647,7 @@ public class CardFactoryUtil {
         final SpellAbility desc = new Ability(sourceCard, "0") {
             @Override
             public void resolve() {
-                final CardList cards = sourceCard.getController().getCardsIn(Zone.Graveyard);
+                final CardList cards = sourceCard.getController().getCardsIn(ZoneType.Graveyard);
                 final CardList sameCost = new CardList();
                 final int cost = CardUtil.getConvertedManaCost(manacost);
                 for (int i = 0; i < cards.size(); i++) {
@@ -1988,7 +1987,7 @@ public class CardFactoryUtil {
 
             @Override
             public void selectCard(final Card card2, final PlayerZone zone) {
-                if (card2.isCreature() && card2.isArtifact() && zone.is(Constant.Zone.Battlefield)
+                if (card2.isCreature() && card2.isArtifact() && zone.is(ZoneType.Battlefield)
                         && card.canBeTargetedBy(ability)) {
                     ability.setTargetCard(card2);
                     final StringBuilder sb = new StringBuilder();
@@ -2037,7 +2036,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList getHumanCreatureAI(final String keyword, final SpellAbility spell, final boolean targeted) {
-        CardList creature = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        CardList creature = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         creature = creature.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -2065,7 +2064,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList getHumanCreatureAI(final int toughness, final SpellAbility spell, final boolean targeted) {
-        CardList creature = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        CardList creature = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         creature = creature.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -2108,7 +2107,7 @@ public class CardFactoryUtil {
      * @return a int.
      */
     public static int getNumberOfPermanentsByColor(final String color) {
-        final CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         final CardList coloredPerms = new CardList();
 
@@ -2130,7 +2129,7 @@ public class CardFactoryUtil {
      * @return a boolean.
      */
     public static boolean multipleControlled(final Card c) {
-        final CardList list = c.getController().getCardsIn(Zone.Battlefield);
+        final CardList list = c.getController().getCardsIn(ZoneType.Battlefield);
         list.remove(c);
 
         return list.containsName(c.getName());
@@ -2147,7 +2146,7 @@ public class CardFactoryUtil {
      */
     public static boolean oppHasKismet(final Player player) {
         final Player opp = player.getOpponent();
-        CardList list = opp.getCardsIn(Zone.Battlefield);
+        CardList list = opp.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -2170,7 +2169,7 @@ public class CardFactoryUtil {
      * @return a int.
      */
     public static int getNumberOfManaSymbolsControlledByColor(final String colorAbb, final Player player) {
-        final CardList cards = player.getCardsIn(Zone.Battlefield);
+        final CardList cards = player.getCardsIn(ZoneType.Battlefield);
         return CardFactoryUtil.getNumberOfManaSymbolsByColor(colorAbb, cards);
     }
 
@@ -2286,7 +2285,7 @@ public class CardFactoryUtil {
         } else {
             // If an Aura's target is removed before it resolves, the Aura
             // fizzles
-            if (source.isAura() && !target.isInZone(Constant.Zone.Battlefield)) {
+            if (source.isAura() && !target.isInZone(ZoneType.Battlefield)) {
                 return false;
             }
         }
@@ -2408,11 +2407,11 @@ public class CardFactoryUtil {
         final CardList cl = new CardList();
         final Player opponent = activator.getOpponent();
 
-        cl.addAll(CardFactoryUtil.getActivateablesFromZone(activator.getZone(Constant.Zone.Graveyard), activator));
-        cl.addAll(CardFactoryUtil.getActivateablesFromZone(activator.getZone(Constant.Zone.Exile), activator));
-        cl.addAll(CardFactoryUtil.getActivateablesFromZone(activator.getZone(Constant.Zone.Library), activator));
-        cl.addAll(CardFactoryUtil.getActivateablesFromZone(activator.getZone(Constant.Zone.Command), activator));
-        cl.addAll(CardFactoryUtil.getActivateablesFromZone(opponent.getZone(Constant.Zone.Exile), activator));
+        cl.addAll(CardFactoryUtil.getActivateablesFromZone(activator.getZone(ZoneType.Graveyard), activator));
+        cl.addAll(CardFactoryUtil.getActivateablesFromZone(activator.getZone(ZoneType.Exile), activator));
+        cl.addAll(CardFactoryUtil.getActivateablesFromZone(activator.getZone(ZoneType.Library), activator));
+        cl.addAll(CardFactoryUtil.getActivateablesFromZone(activator.getZone(ZoneType.Command), activator));
+        cl.addAll(CardFactoryUtil.getActivateablesFromZone(opponent.getZone(ZoneType.Exile), activator));
 
         return cl;
     }
@@ -2433,7 +2432,7 @@ public class CardFactoryUtil {
         CardList cl = new CardList(zone.getCards());
 
         // Only check the top card of the library
-        if (zone.is(Constant.Zone.Library) && !cl.isEmpty()) {
+        if (zone.is(ZoneType.Library) && !cl.isEmpty()) {
             cl = new CardList(cl.get(0));
         }
 
@@ -2441,7 +2440,7 @@ public class CardFactoryUtil {
             cl = cl.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
-                    if (zone.is(Constant.Zone.Graveyard)) {
+                    if (zone.is(ZoneType.Graveyard)) {
                         if (c.hasUnearth()) {
                             return true;
                         }
@@ -2457,7 +2456,7 @@ public class CardFactoryUtil {
                     }
 
                     for (final SpellAbility sa : c.getSpellAbility()) {
-                        final Zone restrictZone = sa.getRestrictions().getZone();
+                        final ZoneType restrictZone = sa.getRestrictions().getZone();
                         if (zone.is(restrictZone)) {
                             return true;
                         }
@@ -2465,8 +2464,8 @@ public class CardFactoryUtil {
                         if (sa.isSpell()
                                 && (c.hasKeyword("May be played") || c.hasKeyword("May be played by your Opponent")
                                         || c.hasKeyword("May be played without paying its mana cost") || (c
-                                        .hasStartOfKeyword("Flashback") && zone.is(Zone.Graveyard)))
-                                && restrictZone.equals(Zone.Hand)) {
+                                        .hasStartOfKeyword("Flashback") && zone.is(ZoneType.Graveyard)))
+                                && restrictZone.equals(ZoneType.Hand)) {
                             return true;
                         }
                     }
@@ -2556,7 +2555,7 @@ public class CardFactoryUtil {
         if (l[0].contains("Valid")) {
             final String restrictions = l[0].replace("Valid ", "");
             final String[] rest = restrictions.split(",");
-            CardList cardsonbattlefield = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            CardList cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             cardsonbattlefield = cardsonbattlefield.getValidCards(rest, players.get(0), source);
 
             n = cardsonbattlefield.size();
@@ -2569,13 +2568,13 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("CardsInHand")) {
             if (players.size() > 0) {
-                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(Zone.Hand).size(), m, source);
+                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(ZoneType.Hand).size(), m, source);
             }
         }
 
         if (sq[0].contains("DomainPlayer")) {
             final CardList someCards = new CardList();
-            someCards.addAll(players.get(0).getCardsIn(Zone.Battlefield));
+            someCards.addAll(players.get(0).getCardsIn(ZoneType.Battlefield));
             final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
 
             for (int i = 0; i < basic.length; i++) {
@@ -2588,18 +2587,18 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("CardsInLibrary")) {
             if (players.size() > 0) {
-                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(Zone.Library).size(), m, source);
+                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(ZoneType.Library).size(), m, source);
             }
         }
 
         if (sq[0].contains("CardsInGraveyard")) {
             if (players.size() > 0) {
-                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(Zone.Graveyard).size(), m, source);
+                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(ZoneType.Graveyard).size(), m, source);
             }
         }
         if (sq[0].contains("LandsInGraveyard")) {
             if (players.size() > 0) {
-                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(Zone.Graveyard).getType("Land").size(), m,
+                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(ZoneType.Graveyard).getType("Land").size(), m,
                         source);
             }
         }
@@ -2612,7 +2611,7 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("CardsInPlay")) {
             if (players.size() > 0) {
-                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(Zone.Battlefield).size(), m, source);
+                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(ZoneType.Battlefield).size(), m, source);
             }
         }
 
@@ -2624,7 +2623,7 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("TopOfLibraryCMC")) {
             if (players.size() > 0) {
-                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(Zone.Library, 1).getTotalConvertedManaCost(),
+                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(ZoneType.Library, 1).getTotalConvertedManaCost(),
                         m, source);
             }
         }
@@ -2725,7 +2724,7 @@ public class CardFactoryUtil {
             String restrictions = l[0].replace("Valid ", "");
             restrictions = restrictions.replace("Count$", "");
             final String[] rest = restrictions.split(",");
-            CardList cardsonbattlefield = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            CardList cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             cardsonbattlefield = cardsonbattlefield.getValidCards(rest, cardController, c);
 
             n = cardsonbattlefield.size();
@@ -2843,7 +2842,7 @@ public class CardFactoryUtil {
 
         // Count$Domain
         if (sq[0].contains("Domain")) {
-            someCards.addAll(cardController.getCardsIn(Zone.Battlefield));
+            someCards.addAll(cardController.getCardsIn(ZoneType.Battlefield));
             final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
 
             for (int i = 0; i < basic.length; i++) {
@@ -2856,7 +2855,7 @@ public class CardFactoryUtil {
 
         // Count$OpponentDom
         if (sq[0].contains("OpponentDom")) {
-            someCards.addAll(cardController.getOpponent().getCardsIn(Zone.Battlefield));
+            someCards.addAll(cardController.getOpponent().getCardsIn(ZoneType.Battlefield));
             final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
 
             for (int i = 0; i < basic.length; i++) {
@@ -2869,7 +2868,7 @@ public class CardFactoryUtil {
 
         // Count$ColoredCreatures *a DOMAIN for creatures*
         if (sq[0].contains("ColoredCreatures")) {
-            someCards.addAll(cardController.getCardsIn(Zone.Battlefield));
+            someCards.addAll(cardController.getCardsIn(ZoneType.Battlefield));
             someCards = someCards.filter(CardListFilter.CREATURES);
 
             final String[] colors = { "green", "white", "red", "blue", "black" };
@@ -2976,21 +2975,21 @@ public class CardFactoryUtil {
 
         // Count$TopOfLibraryCMC
         if (sq[0].contains("TopOfLibraryCMC")) {
-            final CardList topcard = cardController.getCardsIn(Zone.Library, 1);
+            final CardList topcard = cardController.getCardsIn(ZoneType.Library, 1);
             return CardFactoryUtil.doXMath(topcard.getTotalConvertedManaCost(), m, c);
         }
 
         // Count$EnchantedControllerCreatures
         if (sq[0].contains("EnchantedControllerCreatures")) {
-            CardList enchantedControllerInPlay = c.getEnchantingCard().getController().getCardsIn(Zone.Battlefield);
+            CardList enchantedControllerInPlay = c.getEnchantingCard().getController().getCardsIn(ZoneType.Battlefield);
             enchantedControllerInPlay = enchantedControllerInPlay.getType("Creature");
             return enchantedControllerInPlay.size();
         }
 
         // Count$LowestLibrary
         if (sq[0].contains("LowestLibrary")) {
-            return Math.min(AllZone.getHumanPlayer().getZone(Zone.Library).size(),
-                    AllZone.getComputerPlayer().getZone(Zone.Library).size());
+            return Math.min(AllZone.getHumanPlayer().getZone(ZoneType.Library).size(),
+                    AllZone.getComputerPlayer().getZone(ZoneType.Library).size());
         }
 
         // Count$Chroma.<mana letter>
@@ -3030,7 +3029,7 @@ public class CardFactoryUtil {
         // Count$wasCastFrom<Zone>.<true>.<false>
         if (sq[0].startsWith("wasCastFrom")) {
             final String strZone = sq[0].substring(11);
-            final Zone realZone = Zone.smartValueOf(strZone);
+            final ZoneType realZone = ZoneType.smartValueOf(strZone);
             if (c.getCastFrom() == realZone) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
@@ -3055,8 +3054,8 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("GraveyardWithGE20Cards")) {
-            if (Math.max(AllZone.getHumanPlayer().getZone(Zone.Graveyard).size(),
-                    AllZone.getComputerPlayer().getZone(Zone.Graveyard).size()) >= 20) {
+            if (Math.max(AllZone.getHumanPlayer().getZone(ZoneType.Graveyard).size(),
+                    AllZone.getComputerPlayer().getZone(ZoneType.Graveyard).size()) >= 20) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
@@ -3146,12 +3145,12 @@ public class CardFactoryUtil {
         // Count$ThisTurnEntered <ZoneDestination> <Valid>
         if (sq[0].contains("ThisTurnEntered")) {
             final String[] workingCopy = l[0].split("_");
-            Zone destination, origin;
+            ZoneType destination, origin;
             String validFilter;
 
-            destination = Zone.smartValueOf(workingCopy[1]);
+            destination = ZoneType.smartValueOf(workingCopy[1]);
             if (workingCopy[2].equals("from")) {
-                origin = Zone.smartValueOf(workingCopy[3]);
+                origin = ZoneType.smartValueOf(workingCopy[3]);
                 validFilter = workingCopy[4];
             } else {
                 origin = null;
@@ -3184,7 +3183,7 @@ public class CardFactoryUtil {
 
         // Count$Morbid.<True>.<False>
         if (sq[0].startsWith("Morbid")) {
-            final CardList res = CardUtil.getThisTurnEntered(Zone.Graveyard, Zone.Battlefield, "Creature", c);
+            final CardList res = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Battlefield, "Creature", c);
             if (res.size() > 0) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
@@ -3204,77 +3203,77 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("YouCtrl")) {
             if (!mf) {
-                someCards.addAll(cardController.getCardsIn(Zone.Battlefield));
+                someCards.addAll(cardController.getCardsIn(ZoneType.Battlefield));
                 mf = true;
             }
         }
 
         if (sq[0].contains("InYourYard")) {
             if (!my) {
-                someCards.addAll(cardController.getCardsIn(Zone.Graveyard));
+                someCards.addAll(cardController.getCardsIn(ZoneType.Graveyard));
                 my = true;
             }
         }
 
         if (sq[0].contains("InYourLibrary")) {
             if (!my) {
-                someCards.addAll(cardController.getCardsIn(Zone.Library));
+                someCards.addAll(cardController.getCardsIn(ZoneType.Library));
                 my = true;
             }
         }
 
         if (sq[0].contains("InYourHand")) {
             if (!mh) {
-                someCards.addAll(cardController.getCardsIn(Zone.Hand));
+                someCards.addAll(cardController.getCardsIn(ZoneType.Hand));
                 mh = true;
             }
         }
 
         if (sq[0].contains("OppCtrl")) {
             if (!of) {
-                someCards.addAll(oppController.getCardsIn(Zone.Battlefield));
+                someCards.addAll(oppController.getCardsIn(ZoneType.Battlefield));
                 of = true;
             }
         }
 
         if (sq[0].contains("InOppYard")) {
             if (!oy) {
-                someCards.addAll(oppController.getCardsIn(Zone.Graveyard));
+                someCards.addAll(oppController.getCardsIn(ZoneType.Graveyard));
                 oy = true;
             }
         }
 
         if (sq[0].contains("InOppHand")) {
             if (!oh) {
-                someCards.addAll(oppController.getCardsIn(Zone.Hand));
+                someCards.addAll(oppController.getCardsIn(ZoneType.Hand));
                 oh = true;
             }
         }
 
         if (sq[0].contains("OnBattlefield")) {
             if (!mf) {
-                someCards.addAll(cardController.getCardsIn(Zone.Battlefield));
+                someCards.addAll(cardController.getCardsIn(ZoneType.Battlefield));
             }
             if (!of) {
-                someCards.addAll(oppController.getCardsIn(Zone.Battlefield));
+                someCards.addAll(oppController.getCardsIn(ZoneType.Battlefield));
             }
         }
 
         if (sq[0].contains("InAllYards")) {
             if (!my) {
-                someCards.addAll(cardController.getCardsIn(Zone.Graveyard));
+                someCards.addAll(cardController.getCardsIn(ZoneType.Graveyard));
             }
             if (!oy) {
-                someCards.addAll(oppController.getCardsIn(Zone.Graveyard));
+                someCards.addAll(oppController.getCardsIn(ZoneType.Graveyard));
             }
         }
 
         if (sq[0].contains("InAllHands")) {
             if (!mh) {
-                someCards.addAll(cardController.getCardsIn(Zone.Hand));
+                someCards.addAll(cardController.getCardsIn(ZoneType.Hand));
             }
             if (!oh) {
-                someCards.addAll(oppController.getCardsIn(Zone.Hand));
+                someCards.addAll(oppController.getCardsIn(ZoneType.Hand));
             }
         }
 
@@ -3286,7 +3285,7 @@ public class CardFactoryUtil {
                     if (parent.getTarget() != null) {
                         for (final Object tgtP : parent.getTarget().getTargetPlayers()) {
                             if (tgtP instanceof Player) {
-                                someCards.addAll(((Player) tgtP).getCardsIn(Zone.Hand));
+                                someCards.addAll(((Player) tgtP).getCardsIn(ZoneType.Hand));
                             }
                         }
                     }
@@ -3568,7 +3567,7 @@ public class CardFactoryUtil {
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (card.isType(type) && zone.is(Constant.Zone.Battlefield)) {
+                if (card.isType(type) && zone.is(ZoneType.Battlefield)) {
                     card.untap();
                     this.count++;
                     if (this.count == this.stop) {
@@ -3725,7 +3724,7 @@ public class CardFactoryUtil {
     public static String getPropagandaCost(final Card c) {
         int cost = 0;
 
-        final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card card : list) {
             if (card.hasStartOfKeyword("Creatures can't attack unless their controller pays")) {
                 final int keywordPosition = card
@@ -3764,7 +3763,7 @@ public class CardFactoryUtil {
      * @return a int.
      */
     public static int getUsableManaSources(final Player player) {
-        CardList list = player.getCardsIn(Zone.Battlefield);
+        CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -4080,7 +4079,7 @@ public class CardFactoryUtil {
         final boolean extraLand = player.getNumLandsPlayed() > 0;
 
         if (extraLand) {
-            final CardList fastbonds = player.getCardsIn(Zone.Battlefield, "Fastbond");
+            final CardList fastbonds = player.getCardsIn(ZoneType.Battlefield, "Fastbond");
             for (final Card f : fastbonds) {
                 final SpellAbility ability = new Ability(f, "0") {
                     @Override
@@ -4646,7 +4645,7 @@ public class CardFactoryUtil {
                 final SpellAbilityRestriction restriction = new SpellAbilityRestriction();
                 restriction.setRestrictions(mapParams);
                 if (!mapParams.containsKey("ActivationZone")) {
-                    restriction.setZone(Constant.Zone.Hand);
+                    restriction.setZone(ZoneType.Hand);
                 }
                 altCostSA.setRestrictions(restriction);
                 altCostSA.setDescription(sb.toString());
@@ -4713,7 +4712,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
-                    if (!zone.is(Constant.Zone.Battlefield) || !c.isCreature()) {
+                    if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
                         return;
                     }
                     if (c.canBeTargetedBy(haunterDiesWork)) {
@@ -4984,7 +4983,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void execute() {
-                    final CardList clICtrl = card.getOwner().getCardsIn(Zone.Battlefield);
+                    final CardList clICtrl = card.getOwner().getCardsIn(ZoneType.Battlefield);
 
                     boolean fnd = false;
 
@@ -5040,7 +5039,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void execute() {
-                    final CardList cardsInPlay = AllZoneUtil.getCardsIn(Zone.Battlefield).getType("World");
+                    final CardList cardsInPlay = AllZoneUtil.getCardsIn(ZoneType.Battlefield).getType("World");
                     cardsInPlay.remove(card);
                     for (int i = 0; i < cardsInPlay.size(); i++) {
                         Singletons.getModel().getGameAction().sacrificeDestroy(cardsInPlay.get(i));
@@ -5151,7 +5150,7 @@ public class CardFactoryUtil {
                                     count++;
                                 }
                                 // is this needed?
-                                AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
+                                AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).updateObservers();
                             }
                             numCreatures[0] = count;
                         }
@@ -5189,7 +5188,7 @@ public class CardFactoryUtil {
                     public void execute() {
                         // Target as Modular is Destroyed
                         if (card.getController().isComputer()) {
-                            CardList choices = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                            CardList choices = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                             choices = choices.filter(new CardListFilter() {
                                 @Override
                                 public boolean addCard(final Card c) {

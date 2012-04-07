@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game.player;
+package forge.game.zone;
 
 import java.util.List;
 
 import forge.Card;
-import forge.Constant;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -172,7 +172,7 @@ interface IPlayerZone {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    boolean is(Constant.Zone zone);
+    boolean is(ZoneType zone);
 
     /**
      * Checks if is.
@@ -181,7 +181,7 @@ interface IPlayerZone {
      *            the zones
      * @return true, if successful
      */
-    boolean is(List<Constant.Zone> zones);
+    boolean is(List<ZoneType> zones);
 
     /**
      * <p>
@@ -194,7 +194,7 @@ interface IPlayerZone {
      *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
-    boolean is(Constant.Zone zone, Player player);
+    boolean is(ZoneType zone, Player player);
 
     /**
      * <p>
@@ -212,7 +212,7 @@ interface IPlayerZone {
      * 
      * @return a {@link java.lang.String} object.
      */
-    Constant.Zone getZoneType(); // returns the Zone's name like Graveyard
+    ZoneType getZoneType(); // returns the Zone's name like Graveyard
 
     /**
      * <p>

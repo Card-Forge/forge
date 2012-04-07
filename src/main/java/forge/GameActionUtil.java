@@ -22,7 +22,6 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
-import forge.Constant.Zone;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
@@ -34,7 +33,8 @@ import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameLossReason;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -88,8 +88,8 @@ public final class GameActionUtil {
 
                 if (!c.isCopiedSpell()) {
                     final CardList humanNexus = AllZone.getHumanPlayer()
-                            .getCardsIn(Zone.Battlefield, "Maelstrom Nexus");
-                    final CardList computerNexus = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield,
+                            .getCardsIn(ZoneType.Battlefield, "Maelstrom Nexus");
+                    final CardList computerNexus = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield,
                             "Maelstrom Nexus");
 
                     final CardList maelstromNexii = new CardList();
@@ -117,7 +117,7 @@ public final class GameActionUtil {
                 final Ability ability = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        final CardList topOfLibrary = controller.getCardsIn(Zone.Library);
+                        final CardList topOfLibrary = controller.getCardsIn(ZoneType.Library);
                         final CardList revealed = new CardList();
 
                         if (topOfLibrary.size() == 0) {
@@ -212,9 +212,9 @@ public final class GameActionUtil {
             @Override
             public void execute() {
 
-                final CardList humanThrummingStone = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield,
+                final CardList humanThrummingStone = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield,
                         "Thrumming Stone");
-                final CardList computerThrummingStone = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield,
+                final CardList computerThrummingStone = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield,
                         "Thrumming Stone");
 
                 for (int i = 0; i < humanThrummingStone.size(); i++) {
@@ -248,7 +248,7 @@ public final class GameActionUtil {
                     final Ability ability = new Ability(c, "0") {
                         @Override
                         public void resolve() {
-                            final CardList topOfLibrary = controller.getCardsIn(Zone.Library);
+                            final CardList topOfLibrary = controller.getCardsIn(ZoneType.Library);
                             final CardList revealed = new CardList();
                             int rippleNumber = rippleCount;
                             if (topOfLibrary.size() == 0) {
@@ -722,7 +722,7 @@ public final class GameActionUtil {
             return;
         }
 
-        final CardList playerPerms = player.getCardsIn(Zone.Battlefield);
+        final CardList playerPerms = player.getCardsIn(ZoneType.Battlefield);
 
         if (AllZoneUtil.isCardInPlay("Lich", player)) {
             final CardList lichs = playerPerms.getName("Lich");
@@ -732,7 +732,7 @@ public final class GameActionUtil {
                     @Override
                     public void resolve() {
                         for (int i = 0; i < damage; i++) {
-                            CardList nonTokens = player.getCardsIn(Zone.Battlefield);
+                            CardList nonTokens = player.getCardsIn(ZoneType.Battlefield);
                             nonTokens = nonTokens.filter(CardListFilter.NON_TOKEN);
                             if (nonTokens.size() == 0) {
                                 player.loseConditionMet(GameLossReason.SpellEffect, lich.getName());
@@ -785,7 +785,7 @@ public final class GameActionUtil {
         }
 
         if (c.isCreature() && AllZoneUtil.isCardInPlay("Contested War Zone", player)) {
-            final CardList zones = player.getCardsIn(Zone.Battlefield, "Contested War Zone");
+            final CardList zones = player.getCardsIn(ZoneType.Battlefield, "Contested War Zone");
             for (final Card zone : zones) {
                 final Ability ability = new Ability(zone, "0") {
                     @Override
@@ -996,7 +996,7 @@ public final class GameActionUtil {
                 @Override
                 public void resolve() {
 
-                    final CardList libList = opponent.getCardsIn(Zone.Library);
+                    final CardList libList = opponent.getCardsIn(ZoneType.Library);
                     int count = 0;
                     int broken = 0;
                     for (int i = 0; i < libList.size(); i = i + 4) {
@@ -1108,26 +1108,26 @@ public final class GameActionUtil {
     public static boolean specialConditionsMet(final Card sourceCard, final String specialConditions) {
 
         if (specialConditions.contains("CardsInHandMore")) {
-            final CardList specialConditionsCardList = sourceCard.getController().getCardsIn(Zone.Hand);
+            final CardList specialConditionsCardList = sourceCard.getController().getCardsIn(ZoneType.Hand);
             final String condition = specialConditions.split("/")[1];
             if (specialConditionsCardList.size() < Integer.valueOf(condition)) {
                 return false;
             }
         }
         if (specialConditions.contains("OppHandEmpty")) {
-            final CardList oppHand = sourceCard.getController().getOpponent().getCardsIn(Zone.Hand);
+            final CardList oppHand = sourceCard.getController().getOpponent().getCardsIn(ZoneType.Hand);
             if (!(oppHand.size() == 0)) {
                 return false;
             }
         }
         if (specialConditions.contains("TopCardOfLibraryIsBlack")) {
-            final PlayerZone lib = sourceCard.getController().getZone(Constant.Zone.Library);
+            final PlayerZone lib = sourceCard.getController().getZone(ZoneType.Library);
             if (!(lib.get(0).isBlack())) {
                 return false;
             }
         }
         if (specialConditions.contains("LibraryLE")) {
-            final CardList library = sourceCard.getController().getCardsIn(Zone.Library);
+            final CardList library = sourceCard.getController().getCardsIn(ZoneType.Library);
             final String maxnumber = specialConditions.split("/")[1];
             if (library.size() > Integer.valueOf(maxnumber)) {
                 return false;
@@ -1141,7 +1141,7 @@ public final class GameActionUtil {
             }
         }
         if (specialConditions.contains("OppCreatureInPlayGE")) {
-            CardList oppInPlay = sourceCard.getController().getOpponent().getCardsIn(Zone.Battlefield);
+            CardList oppInPlay = sourceCard.getController().getOpponent().getCardsIn(ZoneType.Battlefield);
             oppInPlay = oppInPlay.getType("Creature");
             final String maxnumber = specialConditions.split("/")[1];
             if (!(oppInPlay.size() >= Integer.valueOf(maxnumber))) {
@@ -1149,7 +1149,7 @@ public final class GameActionUtil {
             }
         }
         if (specialConditions.contains("LandYouCtrlLE")) {
-            CardList landInPlay = sourceCard.getController().getCardsIn(Zone.Battlefield);
+            CardList landInPlay = sourceCard.getController().getCardsIn(ZoneType.Battlefield);
             landInPlay = landInPlay.getType("Land");
             final String maxnumber = specialConditions.split("/")[1];
             if (!(landInPlay.size() <= Integer.valueOf(maxnumber))) {
@@ -1157,7 +1157,7 @@ public final class GameActionUtil {
             }
         }
         if (specialConditions.contains("LandOppCtrlLE")) {
-            CardList oppLandInPlay = sourceCard.getController().getOpponent().getCardsIn(Zone.Battlefield);
+            CardList oppLandInPlay = sourceCard.getController().getOpponent().getCardsIn(ZoneType.Battlefield);
             oppLandInPlay = oppLandInPlay.getType("Land");
             final String maxnumber = specialConditions.split("/")[1];
             if (!(oppLandInPlay.size() <= Integer.valueOf(maxnumber))) {
@@ -1165,18 +1165,18 @@ public final class GameActionUtil {
             }
         }
         if (specialConditions.contains("OppCtrlMoreCreatures")) {
-            CardList creaturesInPlayYou = sourceCard.getController().getCardsIn(Zone.Battlefield);
+            CardList creaturesInPlayYou = sourceCard.getController().getCardsIn(ZoneType.Battlefield);
             creaturesInPlayYou = creaturesInPlayYou.getType("Creature");
-            CardList creaturesInPlayOpp = sourceCard.getController().getOpponent().getCardsIn(Zone.Battlefield);
+            CardList creaturesInPlayOpp = sourceCard.getController().getOpponent().getCardsIn(ZoneType.Battlefield);
             creaturesInPlayOpp = creaturesInPlayOpp.getType("Creature");
             if (creaturesInPlayYou.size() > creaturesInPlayOpp.size()) {
                 return false;
             }
         }
         if (specialConditions.contains("OppCtrlMoreLands")) {
-            CardList landsInPlayYou = sourceCard.getController().getCardsIn(Zone.Battlefield);
+            CardList landsInPlayYou = sourceCard.getController().getCardsIn(ZoneType.Battlefield);
             landsInPlayYou = landsInPlayYou.getType("Land");
-            CardList landsInPlayOpp = sourceCard.getController().getOpponent().getCardsIn(Zone.Battlefield);
+            CardList landsInPlayOpp = sourceCard.getController().getOpponent().getCardsIn(ZoneType.Battlefield);
             landsInPlayOpp = landsInPlayOpp.getType("Land");
             if (landsInPlayYou.size() > landsInPlayOpp.size()) {
                 return false;
@@ -1184,7 +1184,7 @@ public final class GameActionUtil {
         }
         if (specialConditions.contains("EnchantedControllerCreaturesGE")) {
             CardList enchantedControllerInPlay = sourceCard.getEnchantingCard().getController()
-                    .getCardsIn(Zone.Battlefield);
+                    .getCardsIn(ZoneType.Battlefield);
             enchantedControllerInPlay = enchantedControllerInPlay.getType("Creature");
             final String maxnumber = specialConditions.split("/")[1];
             if (!(enchantedControllerInPlay.size() >= Integer.valueOf(maxnumber))) {
@@ -1209,20 +1209,20 @@ public final class GameActionUtil {
             }
         }
         if (specialConditions.contains("Hellbent")) {
-            final CardList handcards = sourceCard.getController().getCardsIn(Zone.Hand);
+            final CardList handcards = sourceCard.getController().getCardsIn(ZoneType.Hand);
             if (handcards.size() > 0) {
                 return false;
             }
         }
         if (specialConditions.contains("Metalcraft")) {
-            CardList cardsinPlay = sourceCard.getController().getCardsIn(Zone.Battlefield);
+            CardList cardsinPlay = sourceCard.getController().getCardsIn(ZoneType.Battlefield);
             cardsinPlay = cardsinPlay.getType("Artifact");
             if (cardsinPlay.size() < 3) {
                 return false;
             }
         }
         if (specialConditions.contains("Morbid")) {
-            final CardList res = CardUtil.getThisTurnEntered(Zone.Graveyard, Zone.Battlefield, "Creature", sourceCard);
+            final CardList res = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Battlefield, "Creature", sourceCard);
             if (res.size() < 1) {
                 return false;
             }
@@ -1231,7 +1231,7 @@ public final class GameActionUtil {
         if (specialConditions.contains("isPresent")) {
 
             final String requirements = specialConditions.replaceAll("isPresent ", "");
-            CardList cardsinPlay = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            CardList cardsinPlay = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             final String[] conditions = requirements.split(",");
             cardsinPlay = cardsinPlay.getValidCards(conditions, sourceCard.getController(), sourceCard);
             if (cardsinPlay.isEmpty()) {
@@ -1241,7 +1241,7 @@ public final class GameActionUtil {
         //is a card of a certain type/color present in yard
         if (specialConditions.contains("isInGraveyard")) {
             final String requirements = specialConditions.replaceAll("isInGraveyard ", "");
-            CardList cardsinYards = AllZoneUtil.getCardsIn(Zone.Graveyard);
+            CardList cardsinYards = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
             final String[] conditions = requirements.split(",");
             cardsinYards = cardsinYards.getValidCards(conditions, sourceCard.getController(), sourceCard);
             if (cardsinYards.isEmpty()) {
@@ -1251,7 +1251,7 @@ public final class GameActionUtil {
         //is no card of a certain type/color present?
         if (specialConditions.contains("isNotPresent")) {
             final String requirements = specialConditions.replaceAll("isNotPresent ", "");
-            CardList cardsInPlay = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            CardList cardsInPlay = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             final String[] conditions = requirements.split(",");
             cardsInPlay = cardsInPlay.getValidCards(conditions, sourceCard.getController(), sourceCard);
             if (!cardsInPlay.isEmpty()) {
@@ -1412,15 +1412,15 @@ public final class GameActionUtil {
             }
             // add +1/+1 to cards
             list.clear();
-            final int num = AllZoneUtil.getCardsIn(Zone.Battlefield, "Coat of Arms").size();
+            final int num = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Coat of Arms").size();
 
             // for each zone found add +1/+1 to each card
             for (int j = 0; j < num; j++) {
-                final CardList creature = AllZoneUtil.getCardsIn(Zone.Battlefield);
+                final CardList creature = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
                 for (int i = 0; i < creature.size(); i++) {
                     final Card crd = creature.get(i);
-                    CardList type = AllZoneUtil.getCardsIn(Zone.Battlefield);
+                    CardList type = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
                     type = type.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card card) {
@@ -1458,12 +1458,12 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            final CardList alphaStatuses = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield)
+            final CardList alphaStatuses = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield)
                     .getName("Alpha Status");
-            alphaStatuses.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getName("Alpha Status"));
+            alphaStatuses.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getName("Alpha Status"));
 
-            final CardList allCreatures = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
-            allCreatures.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Creature"));
+            final CardList allCreatures = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
+            allCreatures.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature"));
 
             for (int i = 0; i < this.previouslyPumped.size(); i++) {
                 this.previouslyPumped.get(i).addSemiPermanentAttackBoost(0 - this.previouslyPumpedValue.get(i));
@@ -1498,10 +1498,10 @@ public final class GameActionUtil {
         @Override
         public void execute() {
             // get all creatures
-            final CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield, "Umbra Stalker");
+            final CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Umbra Stalker");
             for (final Card c : cards) {
                 final Player player = c.getController();
-                final CardList grave = player.getCardsIn(Zone.Graveyard);
+                final CardList grave = player.getCardsIn(ZoneType.Graveyard);
                 final int pt = CardFactoryUtil.getNumberOfManaSymbolsByColor("B", grave);
                 c.setBaseAttack(pt);
                 c.setBaseDefense(pt);
@@ -1515,7 +1515,7 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
             list = list.filter(new CardListFilter() {
                 @Override
@@ -1538,7 +1538,7 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield, "Old Man of the Sea");
+            final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Old Man of the Sea");
             for (final Card oldman : list) {
                 if (!oldman.getGainControlTargets().isEmpty()) {
                     if (oldman.getNetAttack() < oldman.getGainControlTargets().get(0).getNetAttack()) {
@@ -1559,7 +1559,7 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield, "Liu Bei, Lord of Shu");
+            final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Liu Bei, Lord of Shu");
 
             if (list.size() > 0) {
                 for (int i = 0; i < list.size(); i++) {
@@ -1578,7 +1578,7 @@ public final class GameActionUtil {
         } // execute()
 
         private boolean getsBonus(final Card c) {
-            CardList list = c.getController().getCardsIn(Zone.Battlefield);
+            CardList list = c.getController().getCardsIn(ZoneType.Battlefield);
             list = list.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
@@ -1598,7 +1598,7 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             list = list.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
@@ -1616,7 +1616,7 @@ public final class GameActionUtil {
         }
 
         private int countSoundTheCalls() {
-            CardList list = AllZoneUtil.getCardsIn(Zone.Graveyard);
+            CardList list = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
             list = list.getName("Sound the Call");
             return list.size();
         }
@@ -1630,7 +1630,7 @@ public final class GameActionUtil {
         @Override
         public void execute() {
             // get all creatures
-            final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield, "Tarmogoyf");
+            final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Tarmogoyf");
 
             for (int i = 0; i < list.size(); i++) {
                 final Card c = list.get(i);
@@ -1641,7 +1641,7 @@ public final class GameActionUtil {
         } // execute()
 
         private int countDiffTypes() {
-            final CardList list = AllZoneUtil.getCardsIn(Zone.Graveyard);
+            final CardList list = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
 
             int count = 0;
             for (int q = 0; q < list.size(); q++) {

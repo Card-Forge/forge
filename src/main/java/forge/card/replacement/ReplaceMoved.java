@@ -3,8 +3,8 @@ package forge.card.replacement;
 import java.util.HashMap;
 
 import forge.Card;
-import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -36,14 +36,14 @@ public class ReplaceMoved extends ReplacementEffect {
             }
         }
         if (this.getMapParams().containsKey("Origin")) {
-            Zone z = Zone.smartValueOf(this.getMapParams().get("Origin"));
-            if (z != (Zone) runParams.get("Origin")) {
+            ZoneType z = ZoneType.smartValueOf(this.getMapParams().get("Origin"));
+            if (z != (ZoneType) runParams.get("Origin")) {
                 return false;
             }
         }
         if (this.getMapParams().containsKey("Destination")) {
-            Zone z = Zone.smartValueOf(this.getMapParams().get("Destination"));
-            if (z != (Zone) runParams.get("Destination")) {
+            ZoneType z = ZoneType.smartValueOf(this.getMapParams().get("Destination"));
+            if (z != (ZoneType) runParams.get("Destination")) {
                 return false;
             }
         }

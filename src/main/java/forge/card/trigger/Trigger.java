@@ -26,14 +26,14 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -395,13 +395,13 @@ public abstract class Trigger extends TriggerReplacementBase {
         if (this.getMapParams().containsKey("IsPresent")) {
             final String sIsPresent = this.getMapParams().get("IsPresent");
             String presentCompare = "GE1";
-            Zone presentZone = Zone.Battlefield;
+            ZoneType presentZone = ZoneType.Battlefield;
             String presentPlayer = "Any";
             if (this.getMapParams().containsKey("PresentCompare")) {
                 presentCompare = this.getMapParams().get("PresentCompare");
             }
             if (this.getMapParams().containsKey("PresentZone")) {
-                presentZone = Zone.smartValueOf(this.getMapParams().get("PresentZone"));
+                presentZone = ZoneType.smartValueOf(this.getMapParams().get("PresentZone"));
             }
             if (this.getMapParams().containsKey("PresentPlayer")) {
                 presentPlayer = this.getMapParams().get("PresentPlayer");
@@ -434,13 +434,13 @@ public abstract class Trigger extends TriggerReplacementBase {
         if (this.getMapParams().containsKey("IsPresent2")) {
             final String sIsPresent = this.getMapParams().get("IsPresent2");
             String presentCompare = "GE1";
-            Zone presentZone = Zone.Battlefield;
+            ZoneType presentZone = ZoneType.Battlefield;
             String presentPlayer = "Any";
             if (this.getMapParams().containsKey("PresentCompare2")) {
                 presentCompare = this.getMapParams().get("PresentCompare2");
             }
             if (this.getMapParams().containsKey("PresentZone2")) {
-                presentZone = Zone.smartValueOf(this.getMapParams().get("PresentZone2"));
+                presentZone = ZoneType.smartValueOf(this.getMapParams().get("PresentZone2"));
             }
             if (this.getMapParams().containsKey("PresentPlayer2")) {
                 presentPlayer = this.getMapParams().get("PresentPlayer2");
@@ -579,7 +579,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     /** The temporary. */
     private boolean temporary = false;
-    private EnumSet<Zone> validHostZones;
+    private EnumSet<ZoneType> validHostZones;
 
     /**
      * Sets the temporary.
@@ -710,7 +710,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
 
-    public void setTriggerZone(EnumSet<Zone> zones) {
+    public void setTriggerZone(EnumSet<ZoneType> zones) {
         validHostZones = zones;
     }
 

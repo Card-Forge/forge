@@ -24,7 +24,6 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
@@ -36,6 +35,7 @@ import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -952,7 +952,7 @@ public final class AbilityFactoryCombat {
         boolean chance = false;
 
         if (abTgt != null) {
-            CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
+            CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
             list = list.getTargetableCards(sa);
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             list = list.filter(new CardListFilter() {

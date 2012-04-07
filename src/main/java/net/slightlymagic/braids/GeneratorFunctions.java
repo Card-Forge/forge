@@ -18,7 +18,7 @@
  * limitations under the Apache License.
  *
  */
-package net.slightlymagic.braids.util.generator;
+package net.slightlymagic.braids;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;

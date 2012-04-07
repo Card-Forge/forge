@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game.player;
+package forge.game.zone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +24,9 @@ import java.util.Observable;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.Constant;
 import forge.Singletons;
-import forge.Constant.Zone;
 import forge.card.trigger.TriggerType;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -43,12 +42,12 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
 
     /** The cards. */
     private List<Card> cardList = new ArrayList<Card>();
-    private final Constant.Zone zoneName;
+    private final ZoneType zoneName;
     private final Player player;
     private boolean update = true;
 
     private final CardList cardsAddedThisTurn = new CardList();
-    private final ArrayList<Constant.Zone> cardsAddedThisTurnSource = new ArrayList<Constant.Zone>();
+    private final ArrayList<ZoneType> cardsAddedThisTurnSource = new ArrayList<ZoneType>();
 
     /**
      * <p>
@@ -60,7 +59,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @param inPlayer
      *            a {@link forge.game.player.Player} object.
      */
-    public DefaultPlayerZone(final Constant.Zone zone, final Player inPlayer) {
+    public DefaultPlayerZone(final ZoneType zone, final Player inPlayer) {
         this.zoneName = zone;
         this.player = inPlayer;
     }
@@ -89,17 +88,17 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
             }
         }
 
-        if (this.is(Zone.Graveyard)
+        if (this.is(ZoneType.Graveyard)
                 && c.hasKeyword("If CARDNAME would be put into a graveyard "
                         + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
-            final PlayerZone lib = c.getOwner().getZone(Constant.Zone.Library);
+            final PlayerZone lib = c.getOwner().getZone(ZoneType.Library);
             lib.add(c);
             c.getOwner().shuffle();
             return;
         }
 
-        if (c.isUnearthed() && (this.is(Zone.Graveyard) || this.is(Zone.Hand) || this.is(Zone.Library))) {
-            final PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
+        if (c.isUnearthed() && (this.is(ZoneType.Graveyard) || this.is(ZoneType.Hand) || this.is(ZoneType.Library))) {
+            final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
             removed.add(c);
             c.setUnearthed(false);
             return;
@@ -109,7 +108,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
 
         c.setTurnInZone(Singletons.getModel().getGameState().getPhaseHandler().getTurn());
 
-        if (!this.is(Zone.Battlefield) && c.isTapped()) {
+        if (!this.is(ZoneType.Battlefield) && c.isTapped()) {
             AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
             c.untap();
             AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
@@ -154,7 +153,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
             }
         }
 
-        if (!this.is(Zone.Battlefield) && c.isTapped()) {
+        if (!this.is(ZoneType.Battlefield) && c.isTapped()) {
             AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
             c.untap();
             AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
@@ -236,7 +235,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @return a boolean
      */
     @Override
-    public final boolean is(final Constant.Zone zone) {
+    public final boolean is(final ZoneType zone) {
         return zone.equals(this.zoneName);
     }
 
@@ -246,7 +245,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @see forge.IPlayerZone#is(java.util.List)
      */
     @Override
-    public final boolean is(final List<Constant.Zone> zones) {
+    public final boolean is(final List<ZoneType> zones) {
         return zones.contains(this.zoneName);
     }
 
@@ -260,7 +259,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @return a boolean
      */
     @Override
-    public final boolean is(final Constant.Zone zone, final Player player) {
+    public final boolean is(final ZoneType zone, final Player player) {
         return (zone.equals(this.zoneName) && this.player.isPlayer(player));
     }
 
@@ -284,7 +283,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public final Constant.Zone getZoneType() {
+    public final ZoneType getZoneType() {
         return this.zoneName;
     }
 
@@ -410,7 +409,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList getCardsAddedThisTurn(final Constant.Zone origin) {
+    public final CardList getCardsAddedThisTurn(final ZoneType origin) {
         //System.out.print("Request cards put into " + this.getZoneType() + " from " + origin + ".Amount: ");
         final CardList ret = new CardList();
         for (int i = 0; i < this.cardsAddedThisTurn.size(); i++) {

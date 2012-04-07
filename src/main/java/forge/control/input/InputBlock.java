@@ -21,10 +21,10 @@ import java.util.ArrayList;
 
 import forge.AllZone;
 import forge.Card;
-import forge.Constant;
 import forge.Singletons;
 import forge.game.phase.CombatUtil;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 
 /**
@@ -95,7 +95,7 @@ public class InputBlock extends Input {
         // is attacking?
         if (AllZone.getCombat().getAttackers().contains(card)) {
             this.currentAttacker = card;
-        } else if (zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer()) && card.isCreature()
+        } else if (zone.is(ZoneType.Battlefield, AllZone.getHumanPlayer()) && card.isCreature()
                 && CombatUtil.canBlock(this.currentAttacker, card, AllZone.getCombat())
                 && this.currentAttacker != null && !this.allBlocking.contains(card)
                 && card.getController().isHuman()) {

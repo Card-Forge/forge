@@ -21,7 +21,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
 
 /**
  * <p>
@@ -55,7 +55,7 @@ public abstract class Input implements java.io.Serializable {
      * @param c
      *            a {@link forge.Card} object.
      * @param zone
-     *            a {@link forge.game.player.PlayerZone} object.
+     *            a {@link forge.game.zone.PlayerZone} object.
      */
     public void selectCard(final Card c, final PlayerZone zone) {
     }

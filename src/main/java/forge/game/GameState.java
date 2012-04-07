@@ -17,9 +17,7 @@
  */
 package forge.game;
 
-import forge.Constant;
 import forge.GameLog;
-import forge.MagicStack;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
@@ -30,10 +28,12 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.Untap;
 import forge.game.phase.Upkeep;
 import forge.game.player.AIPlayer;
-import forge.game.player.DefaultPlayerZone;
 import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.DefaultPlayerZone;
+import forge.game.zone.MagicStack;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 
 /**
  * Represents the state of a <i>single game</i> and is
@@ -62,7 +62,7 @@ public class GameState {
     private final GameLog gameLog = new GameLog();
     private boolean gameOver = false;
 
-    private final PlayerZone stackZone = new DefaultPlayerZone(Constant.Zone.Stack, null);
+    private final PlayerZone stackZone = new DefaultPlayerZone(ZoneType.Stack, null);
 
     private long timestamp = 0;
     private GameSummary gameSummary;

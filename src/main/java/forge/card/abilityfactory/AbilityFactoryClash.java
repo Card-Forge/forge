@@ -26,7 +26,6 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.Constant;
 import forge.GameActionUtil;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
@@ -36,6 +35,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 
 /**
@@ -598,10 +598,10 @@ public final class AbilityFactoryClash {
     private static boolean twoPilesCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = af.getHostCard();
-        Constant.Zone zone = null;
+        ZoneType zone = null;
 
         if (params.containsKey("Zone")) {
-            zone = Constant.Zone.smartValueOf(params.get("Zone"));
+            zone = ZoneType.smartValueOf(params.get("Zone"));
         }
 
         String valid = "";
@@ -641,11 +641,11 @@ public final class AbilityFactoryClash {
     private static void twoPilesResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = af.getHostCard();
-        Constant.Zone zone = null;
+        ZoneType zone = null;
         boolean pile1WasChosen = true;
 
         if (params.containsKey("Zone")) {
-            zone = Constant.Zone.smartValueOf(params.get("Zone"));
+            zone = ZoneType.smartValueOf(params.get("Zone"));
         }
 
         String valid = "";

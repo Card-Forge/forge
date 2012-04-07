@@ -26,7 +26,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
 import forge.CardUtil;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -40,6 +39,7 @@ import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -320,7 +320,7 @@ public class AbilityFactoryPreventDamage {
 
             final CardList threatenedTargets = new CardList();
             // filter AIs battlefield by what I can target
-            CardList targetables = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+            CardList targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
 
             for (final Card c : targetables) {
@@ -343,7 +343,7 @@ public class AbilityFactoryPreventDamage {
                 chance = true;
             } else {
                 // filter AIs battlefield by what I can target
-                CardList targetables = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                CardList targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
 
                 if (targetables.size() == 0) {
@@ -426,7 +426,7 @@ public class AbilityFactoryPreventDamage {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        CardList targetables = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList targetables = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
         final CardList compTargetables = targetables.getController(AllZone.getComputerPlayer());
 
@@ -731,7 +731,7 @@ public class AbilityFactoryPreventDamage {
         }
 
         if (params.containsKey("ValidCards")) {
-            list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         }
 
         list = AbilityFactory.filterListByType(list, params.get("ValidCards"), sa);

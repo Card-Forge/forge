@@ -27,7 +27,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -43,6 +42,7 @@ import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 /**
@@ -272,7 +272,7 @@ public final class AbilityFactoryPlay {
         CardList cards;
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            Zone zone = tgt.getZone().get(0);
+            ZoneType zone = tgt.getZone().get(0);
             cards = AllZoneUtil.getCardsIn(zone);
             cards = cards.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
             if (cards.isEmpty()) {
@@ -340,9 +340,9 @@ public final class AbilityFactoryPlay {
 
         final Target tgt = sa.getTarget();
         if (params.containsKey("Valid")) {
-            Zone zone = Zone.Hand;
+            ZoneType zone = ZoneType.Hand;
             if (params.containsKey("ValidZone")) {
-                zone = Zone.smartValueOf(params.get("ValidZone"));
+                zone = ZoneType.smartValueOf(params.get("ValidZone"));
             }
             tgtCards = AllZoneUtil.getCardsIn(zone);
             tgtCards = AbilityFactory.filterListByType(tgtCards, params.get("Valid"), sa);

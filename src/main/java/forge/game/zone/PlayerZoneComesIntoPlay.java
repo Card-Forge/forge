@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game.player;
+package forge.game.zone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +26,13 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
-import forge.Constant;
 import forge.Counters;
 import forge.GameActionUtil;
-import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -60,7 +59,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
      * @param player
      *            a {@link forge.game.player.Player} object.
      */
-    public PlayerZoneComesIntoPlay(final Constant.Zone zone, final Player player) {
+    public PlayerZoneComesIntoPlay(final ZoneType zone, final Player player) {
         super(zone, player);
     }
 
@@ -83,7 +82,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 c.setTapped(true);
             } else {
                 // ETBTapped static abilities
-                final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+                final CardList allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
                 for (final Card ca : allp) {
                     final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
                     for (final StaticAbility stAb : staticAbilities) {
@@ -150,7 +149,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             }
 
             if (c.isLand()) {
-                CardList list = player.getCardsIn(Zone.Battlefield);
+                CardList list = player.getCardsIn(ZoneType.Battlefield);
 
                 list = list.filter(new CardListFilter() {
                     @Override
@@ -164,14 +163,14 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 }
 
                 // Tectonic Instability
-                final CardList tis = AllZoneUtil.getCardsIn(Zone.Battlefield, "Tectonic Instability");
+                final CardList tis = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Tectonic Instability");
                 final Card tisLand = c;
                 for (final Card ti : tis) {
                     final Card source = ti;
                     final SpellAbility ability = new Ability(source, "") {
                         @Override
                         public void resolve() {
-                            CardList lands = tisLand.getController().getCardsIn(Zone.Battlefield);
+                            CardList lands = tisLand.getController().getCardsIn(ZoneType.Battlefield);
                             lands = lands.filter(CardListFilter.LANDS);
                             for (final Card land : lands) {
                                 land.tap();
@@ -186,7 +185,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
 
                 }
 
-                final CardList les = c.getOwner().getOpponent().getCardsIn(Zone.Battlefield, "Land Equilibrium");
+                final CardList les = c.getOwner().getOpponent().getCardsIn(ZoneType.Battlefield, "Land Equilibrium");
                 final Card lesLand = c;
                 if (les.size() > 0) {
                     final Card source = les.get(0);

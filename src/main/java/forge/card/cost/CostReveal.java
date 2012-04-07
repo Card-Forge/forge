@@ -20,15 +20,14 @@ package forge.card.cost;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.view.ButtonUtil;
 
@@ -61,12 +60,12 @@ public class CostReveal extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        CardList handList = activator.getCardsIn(Zone.Hand);
+        CardList handList = activator.getCardsIn(ZoneType.Hand);
         final String type = this.getType();
         final Integer amount = this.convertAmount();
 
         if (this.getThis()) {
-            if (!source.isInZone(Constant.Zone.Hand)) {
+            if (!source.isInZone(ZoneType.Hand)) {
                 return false;
             }
         } else {
@@ -91,7 +90,7 @@ public class CostReveal extends CostPartWithList {
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
-        CardList hand = activator.getCardsIn(Zone.Hand);
+        CardList hand = activator.getCardsIn(ZoneType.Hand);
         this.resetList();
 
         if (this.getThis()) {
@@ -147,7 +146,7 @@ public class CostReveal extends CostPartWithList {
         } else {
             Integer c = this.convertAmount();
 
-            CardList handList = activator.getCardsIn(Zone.Hand);
+            CardList handList = activator.getCardsIn(ZoneType.Hand);
             handList = handList.getValidCards(this.getType().split(";"), activator, ability.getSourceCard());
 
             if (c == null) {
@@ -241,7 +240,7 @@ public class CostReveal extends CostPartWithList {
                     this.done();
                 }
 
-                if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() < nNeeded) {
+                if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() < nNeeded) {
                     this.stop();
                 }
                 final StringBuilder type = new StringBuilder("");
@@ -268,7 +267,7 @@ public class CostReveal extends CostPartWithList {
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (zone.is(Constant.Zone.Hand) && handList.contains(card)) {
+                if (zone.is(ZoneType.Hand) && handList.contains(card)) {
                     // send in CardList for Typing
                     handList.remove(card);
                     part.addToList(card);
@@ -277,7 +276,7 @@ public class CostReveal extends CostPartWithList {
                     // in case no more cards in hand
                     if (this.nReveal == nNeeded) {
                         this.done();
-                    } else if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
+                    } else if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
                         // really
                         // shouldn't
                         // happen

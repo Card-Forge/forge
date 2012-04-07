@@ -34,7 +34,6 @@ import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
-import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -52,7 +51,8 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 import forge.view.ButtonUtil;
@@ -191,7 +191,7 @@ public class CardFactoryCreatures {
 
                 @Override
                 public boolean canPlayAI() {
-                    final CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                    final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
                     return list.containsName("Glorious Anthem") || list.containsName("Gaea's Anthem");
                 }
@@ -228,7 +228,7 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void chooseTargetAI() {
-                    CardList perms = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                    CardList perms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                     perms = perms.getTargetableCards(this).filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
@@ -241,7 +241,7 @@ public class CardFactoryCreatures {
 
                 @Override
                 public boolean canPlayAI() {
-                    CardList perms = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                    CardList perms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                     perms = perms.getTargetableCards(this).filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
@@ -317,13 +317,13 @@ public class CardFactoryCreatures {
                 @Override
                 public boolean canPlayAI() {
                     int reqHand = 1;
-                    if (AllZone.getZoneOf(card).is(Constant.Zone.Hand)) {
+                    if (AllZone.getZoneOf(card).is(ZoneType.Hand)) {
                         reqHand++;
                     }
 
                     // Don't play if it would sacrifice as soon as it comes into
                     // play
-                    return AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Hand).size() > reqHand;
+                    return AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).size() > reqHand;
                 }
             };
             card.clearFirstSpell();
@@ -333,7 +333,7 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void resolve() {
-                    final CardList hand = card.getController().getCardsIn(Zone.Hand);
+                    final CardList hand = card.getController().getCardsIn(ZoneType.Hand);
                     if (hand.size() == 0) {
                         Singletons.getModel().getGameAction().sacrifice(card);
                     } else {
@@ -369,7 +369,7 @@ public class CardFactoryCreatures {
                 public void execute() {
 
                     if (card.getController().isHuman()) {
-                        final CardList artifacts = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield)
+                        final CardList artifacts = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield)
                                 .getType("Artifact");
 
                         if (artifacts.size() != 0) {
@@ -382,7 +382,7 @@ public class CardFactoryCreatures {
                         }
 
                     } else { // computer
-                        CardList art = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                        CardList art = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                         art = art.filter(new CardListFilter() {
                             @Override
                             public boolean addCard(final Card c) {
@@ -417,8 +417,8 @@ public class CardFactoryCreatures {
 
                 @Override
                 public boolean canPlayAI() {
-                    return (!AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Artifact").isEmpty() && AllZone
-                            .getZoneOf(this.getSourceCard()).is(Constant.Zone.Hand));
+                    return (!AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Artifact").isEmpty() && AllZone
+                            .getZoneOf(this.getSourceCard()).is(ZoneType.Hand));
                 }
             });
             card.addComesIntoPlayCommand(intoPlay);
@@ -433,7 +433,7 @@ public class CardFactoryCreatures {
                     // TODO - this needs to be targeted
                     final Player opp = card.getController().getOpponent();
 
-                    CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+                    CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
                     list = list.getValidCards("Card.Other+YouCtrl".split(","), card.getController(), card);
 
                     for (final Card c : list) {
@@ -465,7 +465,7 @@ public class CardFactoryCreatures {
             final SpellAbility ability = new Ability(card, "2") {
                 @Override
                 public boolean canPlay() {
-                    CardList possible = card.getController().getCardsIn(Zone.Hand);
+                    CardList possible = card.getController().getCardsIn(ZoneType.Hand);
                     possible = possible.filter(CardListFilter.NON_LANDS);
                     return !possible.isEmpty() && super.canPlay();
                 }
@@ -494,7 +494,7 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
-                    if (zone.is(Constant.Zone.Hand) && !c.isLand()) {
+                    if (zone.is(ZoneType.Hand) && !c.isLand()) {
                         Singletons.getModel().getGameAction().exile(c);
                         chosen.push(c);
                         final StringBuilder sb = new StringBuilder();
@@ -567,7 +567,7 @@ public class CardFactoryCreatures {
                         return;
                     }
 
-                    if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.canBeTargetedBy(ability)) {
+                    if (c.isLand() && zone.is(ZoneType.Battlefield) && c.canBeTargetedBy(ability)) {
                         // System.out.println("c is: " +c);
                         target[index[0]] = c;
                         index[0]++;
@@ -622,9 +622,9 @@ public class CardFactoryCreatures {
                         // AI chooses the color that appears in the keywords of
                         // the most cards in its deck, hand and on battlefield
                         final CardList list = new CardList();
-                        list.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Library));
-                        list.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Hand));
-                        list.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
+                        list.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Library));
+                        list.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand));
+                        list.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield));
 
                         color[0] = Constant.Color.WHITE;
                         int max = list.getKeywordsContain(color[0]).size();
@@ -705,7 +705,7 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void execute() {
-                    final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield, "Stangg Twin");
+                    final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Stangg Twin");
 
                     if (list.size() == 1) {
                         Singletons.getModel().getGameAction().exile(list.get(0));
@@ -766,7 +766,7 @@ public class CardFactoryCreatures {
                         lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor((String) o);
 
                     } else {
-                        final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+                        final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
                         final String color = CardFactoryUtil.getMostProminentColor(list);
                         lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor(color);
                     }
@@ -795,7 +795,7 @@ public class CardFactoryCreatures {
                 @Override
                 public void resolve() {
                     final Player player = card.getController();
-                    final PlayerZone lib = player.getZone(Constant.Zone.Library);
+                    final PlayerZone lib = player.getZone(ZoneType.Library);
 
                     if (lib.size() < 1) {
                         return;
@@ -831,7 +831,7 @@ public class CardFactoryCreatures {
 
                 @Override
                 public boolean canPlayAI() {
-                    CardList wolves = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                    CardList wolves = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                     wolves = wolves.getType("Wolf");
 
                     wolves = wolves.filter(new CardListFilter() {
@@ -851,7 +851,7 @@ public class CardFactoryCreatures {
 
                     final int totalPower = power;
 
-                    CardList targetables = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+                    CardList targetables = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
 
                     targetables = targetables.getTargetableCards(this).filter(new CardListFilter() {
                         @Override
@@ -872,7 +872,7 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void resolve() {
-                    CardList wolves = card.getController().getCardsIn(Zone.Battlefield);
+                    CardList wolves = card.getController().getCardsIn(ZoneType.Battlefield);
                     wolves = wolves.getType("Wolf");
 
                     wolves = wolves.filter(new CardListFilter() {
@@ -1104,7 +1104,7 @@ public class CardFactoryCreatures {
                             if (card.getName().equals("Academy Rector")) {
                                 Singletons.getModel().getGameAction().exile(card);
                             }
-                            CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
+                            CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
                             list = list.getType("Enchantment");
 
                             if (list.size() > 0) {
@@ -1163,7 +1163,7 @@ public class CardFactoryCreatures {
                                             message[0] = "Select an enchantment";
                                         }
 
-                                        final CardList allCards = AllZoneUtil.getCardsIn(Zone.Battlefield);
+                                        final CardList allCards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
                                         // Make sure that we were able to match
                                         // the selected aura with our list of
@@ -1214,7 +1214,7 @@ public class CardFactoryCreatures {
 
                     // player is the computer
                     else {
-                        CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Library);
+                        CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Library);
                         list = list.filter(new CardListFilter() {
                             @Override
                             public boolean addCard(final Card c) {
@@ -1277,7 +1277,7 @@ public class CardFactoryCreatures {
                 } // resolve()
 
                 public int countKithkin() {
-                    CardList kithkin = card.getController().getCardsIn(Zone.Battlefield);
+                    CardList kithkin = card.getController().getCardsIn(ZoneType.Battlefield);
                     kithkin = kithkin.filter(new CardListFilter() {
 
                         @Override
@@ -1383,7 +1383,7 @@ public class CardFactoryCreatures {
                 public boolean canPlayAI() {
 
                     // Dark Depths:
-                    CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Dark Depths");
+                    CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Dark Depths");
                     list = list.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card crd) {
@@ -1397,7 +1397,7 @@ public class CardFactoryCreatures {
                     }
 
                     // Get rid of Planeswalkers:
-                    list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+                    list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
                     list = list.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card crd) {
@@ -1440,7 +1440,7 @@ public class CardFactoryCreatures {
                     int intermSumPower = 0;
                     int intermSumToughness = 0;
                     // intermSumPower = intermSumToughness = 0;
-                    CardList creats = card.getController().getCardsIn(Zone.Graveyard);
+                    CardList creats = card.getController().getCardsIn(ZoneType.Graveyard);
                     creats = creats.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
@@ -1473,7 +1473,7 @@ public class CardFactoryCreatures {
                                 count++;
                             }
                             // is this needed?
-                            AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
+                            AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).updateObservers();
                         }
                         numCreatures[0] = count;
                     }
@@ -1493,7 +1493,7 @@ public class CardFactoryCreatures {
                 @Override
                 public boolean canPlayAI() {
                     // get all creatures
-                    CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard);
+                    CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
                     list = list.filter(CardListFilter.CREATURES);
                     return 0 < list.size();
                 }
@@ -1516,12 +1516,12 @@ public class CardFactoryCreatures {
                     final Player player = card.getController();
                     final Player opp = player.getOpponent();
                     int max = 0;
-                    CardList play = opp.getCardsIn(Zone.Battlefield);
+                    CardList play = opp.getCardsIn(ZoneType.Battlefield);
                     play = play.filter(CardListFilter.NON_TOKEN);
                     play = play.filter(CardListFilter.WHITE);
                     max += play.size();
 
-                    CardList grave = opp.getCardsIn(Zone.Graveyard);
+                    CardList grave = opp.getCardsIn(ZoneType.Graveyard);
                     grave = grave.filter(CardListFilter.WHITE);
                     max += grave.size();
 
@@ -1653,7 +1653,7 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
-                    if (zone.is(Constant.Zone.Battlefield, ability.getTargetPlayer()) && !targetPerms.contains(c)) {
+                    if (zone.is(ZoneType.Battlefield, ability.getTargetPlayer()) && !targetPerms.contains(c)) {
                         if (c.canBeTargetedBy(ability)) {
                             targetPerms.add(c);
                         }
@@ -1745,7 +1745,7 @@ public class CardFactoryCreatures {
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
-                                if (c.isCreature() && zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer())
+                                if (c.isCreature() && zone.is(ZoneType.Battlefield, AllZone.getHumanPlayer())
                                         && !toSac.contains(c)) {
                                     toSac.add(c);
                                 }
@@ -1958,7 +1958,7 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone z) {
-                    if (z.is(Constant.Zone.Battlefield)
+                    if (z.is(ZoneType.Battlefield)
                             && (c.isCreature() || (cardName.equals("Phyrexian Metamorph") && c.isArtifact()))) {
                         if (cardName.equals("Jwari Shapeshifter") && !c.isType("Ally")) {
                             return;
@@ -1975,7 +1975,7 @@ public class CardFactoryCreatures {
                 @Override
                 public void showMessage() {
                     final String message = "Select a creature in a graveyard";
-                    final CardList choices = AllZoneUtil.getCardsIn(Zone.Graveyard);
+                    final CardList choices = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
                     final Object o = GuiUtils.chooseOneOrNone(message, choices.toArray());
                     if (null == o) {
                         this.stop();
@@ -2019,7 +2019,7 @@ public class CardFactoryCreatures {
                     // name a card
                     final String choice = JOptionPane.showInputDialog(null, "Name a card", cardName,
                             JOptionPane.QUESTION_MESSAGE);
-                    final CardList hand = this.getTargetPlayer().getCardsIn(Zone.Hand);
+                    final CardList hand = this.getTargetPlayer().getCardsIn(ZoneType.Hand);
                     int numCards = card.getXManaCostPaid();
                     numCards = Math.min(hand.size(), numCards);
 

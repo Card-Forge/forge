@@ -35,8 +35,8 @@ import java.util.zip.ZipFile;
 
 import javax.swing.SwingUtilities;
 
-import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
-import net.slightlymagic.braids.util.generator.GeneratorFunctions;
+import net.slightlymagic.braids.FindNonDirectoriesSkipDotDirectoriesGenerator;
+import net.slightlymagic.braids.GeneratorFunctions;
 
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;

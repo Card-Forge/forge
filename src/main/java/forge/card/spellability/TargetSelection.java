@@ -25,13 +25,12 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.control.input.Input;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.view.ButtonUtil;
 
@@ -250,10 +249,10 @@ public class TargetSelection {
      */
     public final void chooseValidInput() {
         final Target tgt = this.getTgt();
-        final List<Zone> zone = tgt.getZone();
+        final List<ZoneType> zone = tgt.getZone();
         final boolean mandatory = this.target.getMandatory() ? this.target.hasCandidates(this.ability, true) : false;
 
-        if (zone.contains(Constant.Zone.Stack) && (zone.size() == 1)) {
+        if (zone.contains(ZoneType.Stack) && (zone.size() == 1)) {
             // If Zone is Stack, the choices are handled slightly differently
             this.chooseCardFromStack(mandatory);
             return;
@@ -301,7 +300,7 @@ public class TargetSelection {
             }
         }
 
-        if (zone.contains(Constant.Zone.Battlefield)) {
+        if (zone.contains(ZoneType.Battlefield)) {
             AllZone.getInputControl().setInput(this.inputTargetSpecific(choices, true, mandatory, objects));
         } else {
             this.chooseCardFromList(choices, true, mandatory);

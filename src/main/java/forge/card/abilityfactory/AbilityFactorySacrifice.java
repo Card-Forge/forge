@@ -25,8 +25,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -38,6 +36,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -256,7 +255,7 @@ public class AbilityFactorySacrifice {
             num = (num == null) ? "1" : num;
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 
-            CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+            CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
             list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             if (list.size() == 0) {
@@ -393,9 +392,9 @@ public class AbilityFactorySacrifice {
                     amount = Math.min(ComputerUtil.determineLeftoverMana(sa), amount);
                 }
 
-                CardList humanList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+                CardList humanList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
                 humanList = humanList.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-                CardList computerList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                CardList computerList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 computerList = computerList.getValidCards(valid.split(","), sa.getActivatingPlayer(),
                         sa.getSourceCard());
 
@@ -452,7 +451,7 @@ public class AbilityFactorySacrifice {
         final boolean remSacrificed = params.containsKey("RememberSacrificed");
 
         if (valid.equals("Self")) {
-            if (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)) {
+            if (AllZone.getZoneOf(card).is(ZoneType.Battlefield)) {
                 Singletons.getModel().getGameAction().sacrifice(card);
                 if (remSacrificed) {
                     card.addRemembered(card);
@@ -497,7 +496,7 @@ public class AbilityFactorySacrifice {
      */
     private static CardList sacrificeAI(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy) {
-        CardList battlefield = p.getCardsIn(Zone.Battlefield);
+        CardList battlefield = p.getCardsIn(ZoneType.Battlefield);
         CardList sacList = AbilityFactory.filterListByType(battlefield, valid, sa);
         sacList = ComputerUtil.sacrificePermanents(amount, sacList, destroy);
 
@@ -522,7 +521,7 @@ public class AbilityFactorySacrifice {
      */
     private static CardList sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy, final boolean optional) {
-        CardList battlefield = p.getCardsIn(Zone.Battlefield);
+        CardList battlefield = p.getCardsIn(ZoneType.Battlefield);
         CardList list = AbilityFactory.filterListByType(battlefield, valid, sa);
         CardList sacList = new CardList();
 
@@ -749,8 +748,8 @@ public class AbilityFactorySacrifice {
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        CardList humanlist = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        CardList computerlist = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        CardList humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        CardList computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
         humanlist = humanlist.getValidCards(valid.split(","), source.getController(), source);
         computerlist = computerlist.getValidCards(valid.split(","), source.getController(), source);
@@ -826,7 +825,7 @@ public class AbilityFactorySacrifice {
         if (params.containsKey("Defined")) {
             list = new CardList(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
         } else {
-            list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         }
 
         final boolean remSacrificed = params.containsKey("RememberSacrificed");

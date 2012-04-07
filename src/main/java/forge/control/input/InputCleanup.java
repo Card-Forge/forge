@@ -19,10 +19,9 @@ package forge.control.input;
 
 import forge.AllZone;
 import forge.Card;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.game.phase.CombatUtil;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 import forge.Singletons;
 
@@ -46,7 +45,7 @@ public class InputCleanup extends Input {
             return;
         }
 
-        final int n = AllZone.getHumanPlayer().getCardsIn(Zone.Hand).size();
+        final int n = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).size();
         final int max = AllZone.getHumanPlayer().getMaxHandSize();
         // goes to the next phase
         if (n <= max || max <= -1) {
@@ -70,7 +69,7 @@ public class InputCleanup extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectCard(final Card card, final PlayerZone zone) {
-        if (zone.is(Constant.Zone.Hand, AllZone.getHumanPlayer())) {
+        if (zone.is(ZoneType.Hand, AllZone.getHumanPlayer())) {
             card.getController().discard(card, null);
             if (AllZone.getStack().size() == 0) {
                 this.showMessage();
@@ -84,7 +83,7 @@ public class InputCleanup extends Input {
      * </p>
      */
     public void aiCleanupDiscard() {
-        final int size = AllZone.getComputerPlayer().getCardsIn(Zone.Hand).size();
+        final int size = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).size();
 
         if (AllZone.getComputerPlayer().getMaxHandSize() != -1) {
             final int numDiscards = size - AllZone.getComputerPlayer().getMaxHandSize();

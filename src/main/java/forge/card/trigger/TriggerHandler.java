@@ -27,8 +27,6 @@ import forge.Card;
 import forge.CardList;
 import forge.Command;
 import forge.CommandArgs;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -45,6 +43,7 @@ import forge.game.phase.PhaseType;
 //import forge.util.TextUtil;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -208,7 +207,7 @@ public class TriggerHandler {
 
         String triggerZones = mapParams.remove("TriggerZones");
         if ( null != triggerZones )
-            ret.setTriggerZone(EnumSet.copyOf(Zone.listValueOf(triggerZones)));
+            ret.setTriggerZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
 
         String triggerPhases = mapParams.remove("TriggerPhases");
         if ( null != triggerPhases )
@@ -287,7 +286,7 @@ public class TriggerHandler {
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
         final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
-        CardList allCards = AllZoneUtil.getCardsIn(Zone.StaticAbilitiesSourceZones);
+        CardList allCards = AllZoneUtil.getCardsIn(ZoneType.StaticAbilitiesSourceZones);
         boolean checkStatics = false;
 
         // Static triggers
@@ -304,8 +303,8 @@ public class TriggerHandler {
         }
 
         // AP
-        allCards = playerAP.getCardsIn(Zone.StaticAbilitiesSourceZones);
-        allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP));
+        allCards = playerAP.getCardsIn(ZoneType.StaticAbilitiesSourceZones);
+        allCards.addAll(AllZoneUtil.getCardsIn(ZoneType.Stack).getController(playerAP));
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
                 if (!t.isStatic()) {
@@ -325,8 +324,8 @@ public class TriggerHandler {
         }
 
         // NAP
-        allCards = playerAP.getOpponent().getCardsIn(Zone.StaticAbilitiesSourceZones);
-        allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP.getOpponent()));
+        allCards = playerAP.getOpponent().getCardsIn(ZoneType.StaticAbilitiesSourceZones);
+        allCards.addAll(AllZoneUtil.getCardsIn(ZoneType.Stack).getController(playerAP.getOpponent()));
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
                 if (!t.isStatic()) {

@@ -19,7 +19,6 @@ package forge.view.match;
 import forge.AllZone;
 import forge.CardList;
 import forge.Constant;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.control.match.ControlWinLose;
@@ -31,6 +30,7 @@ import forge.game.GameNew;
 import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.gui.OverlayUtils;
@@ -156,14 +156,14 @@ public class QuestWinLoseHandler extends ControlWinLose {
         //do per-game actions
         if (matchState.hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             if (isAnte) {
-                final CardList antes = AllZone.getComputerPlayer().getCardsIn(Zone.Ante);
+                final CardList antes = AllZone.getComputerPlayer().getCardsIn(ZoneType.Ante);
                 final List<CardPrinted> antesPrinted = Singletons.getModel().getMatchState().addAnteWon(antes);
                 this.anteWon(antesPrinted);
 
             }
         } else {
             if (isAnte) {
-                final CardList antes = AllZone.getHumanPlayer().getCardsIn(Zone.Ante);
+                final CardList antes = AllZone.getHumanPlayer().getCardsIn(ZoneType.Ante);
                 final List<CardPrinted> antesPrinted = Singletons.getModel().getMatchState().addAnteLost(antes);
                 for (final CardPrinted ante : antesPrinted) {
                     //the last param here (should) determine if this is added to the Card Shop

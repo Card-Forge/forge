@@ -29,7 +29,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -43,6 +42,7 @@ import forge.card.spellability.Target;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 /**
@@ -448,7 +448,7 @@ public final class AbilityFactoryDebuff {
      * @return a boolean.
      */
     private static boolean debuffMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -737,9 +737,9 @@ public final class AbilityFactoryDebuff {
             valid = params.get("ValidCards");
         }
 
-        CardList comp = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        CardList comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         comp = comp.getValidCards(valid, hostCard.getController(), hostCard);
-        CardList human = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         human = human.getValidCards(valid, hostCard.getController(), hostCard);
 
         // TODO - add blocking situations here also
@@ -784,7 +784,7 @@ public final class AbilityFactoryDebuff {
             valid = params.get("ValidCards");
         }
 
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card tgtC : list) {

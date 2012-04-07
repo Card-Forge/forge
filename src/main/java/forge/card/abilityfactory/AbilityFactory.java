@@ -26,8 +26,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Command;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -43,6 +41,7 @@ import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -386,7 +385,7 @@ public class AbilityFactory {
                                                          // something
                 // not in play, this Key
                 // should be set
-                this.abTgt.setZone(Zone.listValueOf(this.mapParams.get("TgtZone")));
+                this.abTgt.setZone(ZoneType.listValueOf(this.mapParams.get("TgtZone")));
             }
 
             // Target Type mostly for Counter: Spell,Activated,Triggered,Ability
@@ -571,7 +570,7 @@ public class AbilityFactory {
             if (this.isTargeted) { // Since all "CopySpell" ABs copy things on
                                    // the
                 // Stack no need for it to be everywhere
-                this.abTgt.setZone(Zone.Stack);
+                this.abTgt.setZone(ZoneType.Stack);
             }
 
             if (this.isAb) {
@@ -591,7 +590,7 @@ public class AbilityFactory {
             // Since all "Counter" ABs Counter things on the Stack no need for
             // it to be everywhere
             if (this.isTargeted) {
-                this.abTgt.setZone(Zone.Stack);
+                this.abTgt.setZone(ZoneType.Stack);
             }
 
             if (this.isAb) {
@@ -1746,7 +1745,7 @@ public class AbilityFactory {
         }
 
         else if (defined.equals("TopOfLibrary")) {
-            final CardList lib = hostCard.getController().getCardsIn(Constant.Zone.Library);
+            final CardList lib = hostCard.getController().getCardsIn(ZoneType.Library);
             if (lib.size() > 0) {
                 c = lib.get(0);
             } else {
@@ -1807,12 +1806,12 @@ public class AbilityFactory {
             }
         } else if (defined.startsWith("ThisTurnEntered")) {
             final String[] workingCopy = defined.split("_");
-            Zone destination, origin;
+            ZoneType destination, origin;
             String validFilter;
 
-            destination = Zone.smartValueOf(workingCopy[1]);
+            destination = ZoneType.smartValueOf(workingCopy[1]);
             if (workingCopy[2].equals("from")) {
-                origin = Zone.smartValueOf(workingCopy[3]);
+                origin = ZoneType.smartValueOf(workingCopy[3]);
                 validFilter = workingCopy[4];
             } else {
                 origin = null;
@@ -2127,7 +2126,7 @@ public class AbilityFactory {
                     sas.add(spell);
                 }
             } //is it exiled?
-            if (!sas.get(0).getSourceCard().isInZone(Constant.Zone.Exile)) {
+            if (!sas.get(0).getSourceCard().isInZone(ZoneType.Exile)) {
                 sas.clear();
             }
         }

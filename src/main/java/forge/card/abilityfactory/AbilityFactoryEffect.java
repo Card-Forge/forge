@@ -26,7 +26,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
@@ -43,6 +42,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 /**
@@ -250,8 +250,8 @@ public class AbilityFactoryEffect {
                 }
                 randomReturn = CombatUtil.lifeInDanger(AllZone.getCombat());
             } else if (logic.equals("Evasion")) {
-                CardList comp = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
-                CardList human = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
+                CardList comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
+                CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
 
                 // only count creatures that can attack or block
                 comp = comp.filter(new CardListFilter() {
@@ -279,7 +279,7 @@ public class AbilityFactoryEffect {
             if (name == null) {
                 name = sa.getSourceCard().getName() + "'s Effect";
             }
-            final CardList list = sa.getActivatingPlayer().getCardsIn(Zone.Battlefield, name);
+            final CardList list = sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield, name);
             if (list.size() != 0) {
                 return false;
             }

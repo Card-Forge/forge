@@ -36,9 +36,9 @@ import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.Constant.Zone;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -114,7 +114,7 @@ public class Combat {
      */
     public final void initiatePossibleDefenders(final Player defender) {
         this.defenders.add(defender);
-        CardList planeswalkers = defender.getCardsIn(Zone.Battlefield);
+        CardList planeswalkers = defender.getCardsIn(ZoneType.Battlefield);
         planeswalkers = planeswalkers.getType("Planeswalker");
         for (final Card pw : planeswalkers) {
             this.defenders.add(pw);

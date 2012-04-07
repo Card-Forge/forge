@@ -25,11 +25,11 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Singletons;
-import forge.Constant.Zone;
 import forge.card.trigger.TriggerType;
 import forge.control.ControlMatchUI;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.view.match.ViewField.PhaseLabel;
 
 /**
@@ -88,7 +88,7 @@ public class PhaseUtil {
         // For tokens a player starts the game with they don't recover from Sum.
         // Sickness on first turn
         if (Singletons.getModel().getGameState().getPhaseHandler().getTurn() > 0) {
-            final CardList list = turn.getCardsIncludePhasingIn(Zone.Battlefield);
+            final CardList list = turn.getCardsIncludePhasingIn(ZoneType.Battlefield);
             for (final Card c : list) {
                 c.setSickness(false);
             }
@@ -112,7 +112,7 @@ public class PhaseUtil {
         Singletons.getModel().getGameState().getUntap().executeAt();
 
         // otherwise land seems to stay tapped when it is really untapped
-        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
+        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
 
         Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
     }
@@ -153,7 +153,7 @@ public class PhaseUtil {
 
         final Player turn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
-        if ((turn.getCardsIn(Zone.Hand).size() == 0) && AllZoneUtil.isCardInPlay("Gibbering Descent", turn)) {
+        if ((turn.getCardsIn(ZoneType.Hand).size() == 0) && AllZoneUtil.isCardInPlay("Gibbering Descent", turn)) {
             return true;
         }
 
@@ -299,7 +299,7 @@ public class PhaseUtil {
         if (list.size() == 1) {
             final Player attackingPlayer = AllZone.getCombat().getAttackingPlayer();
 
-            CardList exalted = attackingPlayer.getCardsIn(Zone.Battlefield);
+            CardList exalted = attackingPlayer.getCardsIn(ZoneType.Battlefield);
             exalted = exalted.getKeyword("Exalted");
 
             if (exalted.size() > 0) {

@@ -29,7 +29,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Command;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityActivated;
@@ -43,6 +42,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -1210,9 +1210,9 @@ public final class AbilityFactoryAnimate {
         }
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         } else {
-            list = tgtPlayers.get(0).getCardsIn(Zone.Battlefield);
+            list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
         }
 
         list = list.getValidCards(valid.split(","), host.getController(), host);

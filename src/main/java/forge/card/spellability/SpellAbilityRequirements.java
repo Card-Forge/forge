@@ -24,7 +24,7 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.CostPayment;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
 
 /**
  * <p>

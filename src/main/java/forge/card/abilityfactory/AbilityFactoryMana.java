@@ -27,7 +27,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
-import forge.Constant.Zone;
 import forge.Counters;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -41,6 +40,7 @@ import forge.card.spellability.Target;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -335,7 +335,7 @@ public class AbilityFactoryMana {
                             String chosen = Constant.Color.BLACK;
                             if (logic.equals("MostProminentInComputerHand")) {
                                 chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
-                                        Zone.Hand));
+                                        ZoneType.Hand));
                             }
                             GuiUtils.chooseOne("Computer picked: ", chosen);
                             abMana.setExpressChoice(InputPayManaCostUtil.getShortColorString(chosen));
@@ -648,7 +648,7 @@ public class AbilityFactoryMana {
                 cards.add(c);
             }
         } else {
-            cards = AllZoneUtil.getCardsIn(Zone.Battlefield).getValidCards(validCard, abMana.getActivatingPlayer(),
+            cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield).getValidCards(validCard, abMana.getActivatingPlayer(),
                     card);
         }
 
@@ -875,7 +875,7 @@ public class AbilityFactoryMana {
      * @return a boolean.
      */
     private static boolean hasUrzaLands(final Player p) {
-        final CardList landsControlled = p.getCardsIn(Zone.Battlefield);
+        final CardList landsControlled = p.getCardsIn(ZoneType.Battlefield);
 
         return (landsControlled.containsName("Urza's Mine") && landsControlled.containsName("Urza's Tower") && landsControlled
                 .containsName("Urza's Power Plant"));

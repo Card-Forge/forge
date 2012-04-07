@@ -34,9 +34,9 @@ import javax.swing.SwingUtilities;
 
 import forge.AllZone;
 import forge.Card;
-import forge.Constant.Zone;
 import forge.Singletons;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.HandArea;
 import forge.view.arcane.util.Animation;
@@ -77,7 +77,7 @@ public class ControlHand {
                 }
                 final Card c = view.getHandArea().getCardFromMouseOverPanel();
                 if (c != null) {
-                    Singletons.getControl().getControlMatch().getMessageControl().getInputControl().selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Hand));
+                    Singletons.getControl().getControlMatch().getMessageControl().getInputControl().selectCard(c, AllZone.getHumanPlayer().getZone(ZoneType.Hand));
                     Singletons.getView().getViewMatch().getBtnOK().requestFocusInWindow();
                 }
             }
@@ -168,7 +168,7 @@ public class ControlHand {
 
     /** Adds observers to hand panel. */
     public void addObservers() {
-        AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(o1);
+        AllZone.getHumanPlayer().getZone(ZoneType.Hand).addObserver(o1);
     }
 
     /** Adds listeners to hand panel: clicks, mouseover, etc. */
@@ -210,7 +210,7 @@ public class ControlHand {
                 }
 
                 Singletons.getControl().getControlMatch().getMessageControl().getInputControl()
-                        .selectCard(cardobj, AllZone.getHumanPlayer().getZone(Zone.Hand));
+                        .selectCard(cardobj, AllZone.getHumanPlayer().getZone(ZoneType.Hand));
             }
         });
     }

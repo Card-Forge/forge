@@ -41,10 +41,10 @@ import forge.CardUtil;
 import forge.Constant;
 import forge.Counters;
 import forge.Singletons;
-import forge.Constant.Zone;
 import forge.card.spellability.AbilityMana;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.view.arcane.PlayArea;
@@ -325,8 +325,8 @@ public final class GuiDisplayUtil {
      * </p>
      */
     public static void updateGUI() {
-        AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
+        AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).updateObservers();
+        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
         //AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();
         AllZone.getComputerPlayer().updateObservers();
         AllZone.getHumanPlayer().updateObservers();
@@ -506,43 +506,43 @@ public final class GuiDisplayUtil {
         AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         AllZone.getCombat().reset();
         for (final Card c : humanDevSetup) {
-            AllZone.getHumanPlayer().getZone(Zone.Hand).add(c);
+            AllZone.getHumanPlayer().getZone(ZoneType.Hand).add(c);
             Singletons.getModel().getGameAction().moveToPlay(c);
             c.setSickness(false);
         }
 
         for (final Card c : computerDevSetup) {
-            AllZone.getComputerPlayer().getZone(Zone.Hand).add(c);
+            AllZone.getComputerPlayer().getZone(ZoneType.Hand).add(c);
             Singletons.getModel().getGameAction().moveToPlay(c);
             c.setSickness(false);
         }
 
         if (computerDevGraveyardSetup.size() > 0) {
-            AllZone.getComputerPlayer().getZone(Zone.Graveyard).setCards(computerDevGraveyardSetup);
+            AllZone.getComputerPlayer().getZone(ZoneType.Graveyard).setCards(computerDevGraveyardSetup);
         }
         if (humanDevGraveyardSetup.size() > 0) {
-            AllZone.getHumanPlayer().getZone(Zone.Graveyard).setCards(humanDevGraveyardSetup);
+            AllZone.getHumanPlayer().getZone(ZoneType.Graveyard).setCards(humanDevGraveyardSetup);
         }
 
         if (computerDevHandSetup.size() > 0) {
-            AllZone.getComputerPlayer().getZone(Zone.Hand).setCards(computerDevHandSetup);
+            AllZone.getComputerPlayer().getZone(ZoneType.Hand).setCards(computerDevHandSetup);
         }
         if (humanDevHandSetup.size() > 0) {
-            AllZone.getHumanPlayer().getZone(Zone.Hand).setCards(humanDevHandSetup);
+            AllZone.getHumanPlayer().getZone(ZoneType.Hand).setCards(humanDevHandSetup);
         }
 
         if (humanDevLibrarySetup.size() > 0) {
-            AllZone.getHumanPlayer().getZone(Zone.Library).setCards(humanDevLibrarySetup);
+            AllZone.getHumanPlayer().getZone(ZoneType.Library).setCards(humanDevLibrarySetup);
         }
         if (computerDevLibrarySetup.size() > 0) {
-            AllZone.getComputerPlayer().getZone(Zone.Library).setCards(computerDevLibrarySetup);
+            AllZone.getComputerPlayer().getZone(ZoneType.Library).setCards(computerDevLibrarySetup);
         }
 
         if (humanDevExileSetup.size() > 0) {
-            AllZone.getHumanPlayer().getZone(Zone.Exile).setCards(humanDevExileSetup);
+            AllZone.getHumanPlayer().getZone(ZoneType.Exile).setCards(humanDevExileSetup);
         }
         if (computerDevExileSetup.size() > 0) {
-            AllZone.getComputerPlayer().getZone(Zone.Exile).setCards(computerDevExileSetup);
+            AllZone.getComputerPlayer().getZone(ZoneType.Exile).setCards(computerDevExileSetup);
         }
 
         AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
@@ -556,16 +556,16 @@ public final class GuiDisplayUtil {
 
         Singletons.getModel().getGameAction().checkStateEffects();
         Singletons.getModel().getGameState().getPhaseHandler().updateObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Exile).updateObservers();
-        AllZone.getComputerPlayer().getZone(Zone.Exile).updateObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();
-        AllZone.getComputerPlayer().getZone(Zone.Hand).updateObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Graveyard).updateObservers();
-        AllZone.getComputerPlayer().getZone(Zone.Graveyard).updateObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
-        AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Library).updateObservers();
-        AllZone.getComputerPlayer().getZone(Zone.Library).updateObservers();
+        AllZone.getHumanPlayer().getZone(ZoneType.Exile).updateObservers();
+        AllZone.getComputerPlayer().getZone(ZoneType.Exile).updateObservers();
+        AllZone.getHumanPlayer().getZone(ZoneType.Hand).updateObservers();
+        AllZone.getComputerPlayer().getZone(ZoneType.Hand).updateObservers();
+        AllZone.getHumanPlayer().getZone(ZoneType.Graveyard).updateObservers();
+        AllZone.getComputerPlayer().getZone(ZoneType.Graveyard).updateObservers();
+        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
+        AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).updateObservers();
+        AllZone.getHumanPlayer().getZone(ZoneType.Library).updateObservers();
+        AllZone.getComputerPlayer().getZone(ZoneType.Library).updateObservers();
     }
 
     /**
@@ -623,7 +623,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeTutor() {
-        final CardList lib = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
+        final CardList lib = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
         final Object o = GuiUtils.chooseOneOrNone("Choose a card", lib.toArray());
         if (null == o) {
             return;
@@ -665,7 +665,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeAddCounter() {
-        final CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Object o = GuiUtils.chooseOneOrNone("Add counters to which card?", play.toArray());
         if (null == o) {
             return;
@@ -697,7 +697,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeTapPerm() {
-        final CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Object o = GuiUtils.chooseOneOrNone("Choose a permanent", play.toArray());
         if (null == o) {
             return;
@@ -715,7 +715,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeUntapPerm() {
-        final CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Object o = GuiUtils.chooseOneOrNone("Choose a permanent", play.toArray());
         if (null == o) {
             return;

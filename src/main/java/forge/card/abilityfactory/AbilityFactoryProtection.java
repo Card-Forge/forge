@@ -32,7 +32,6 @@ import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -46,6 +45,7 @@ import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 
 /**
@@ -433,7 +433,7 @@ public final class AbilityFactoryProtection {
         final HashMap<String, String> params = af.getMapParams();
         final Card host = af.getHostCard();
 
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -1115,7 +1115,7 @@ public final class AbilityFactoryProtection {
             valid = params.get("ValidCards");
         }
         if (!valid.equals("")) {
-            CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             list = list.getValidCards(valid, sa.getActivatingPlayer(), host);
 
             for (final Card tgtC : list) {

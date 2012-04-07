@@ -23,13 +23,13 @@ import java.util.List;
 
 import forge.AllZone;
 import forge.Card;
-import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 
 /**
@@ -71,7 +71,7 @@ public class ReplacementHandler {
 
         // Round up Static replacement effects
         for (final Player p : AllZone.getPlayersInGame()) {
-            for (final Card crd : p.getCardsIn(Zone.Battlefield)) {
+            for (final Card crd : p.getCardsIn(ZoneType.Battlefield)) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (replacementEffect.requirementsCheck()) {
                         if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams)) {

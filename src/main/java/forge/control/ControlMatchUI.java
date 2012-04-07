@@ -28,7 +28,6 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.control.match.ControlDetail;
 import forge.control.match.ControlDock;
@@ -40,6 +39,7 @@ import forge.control.match.ControlTabber;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.CardContainer;
 import forge.gui.GuiMultipleBlockers;
 import forge.gui.toolbox.FLabel;
@@ -121,12 +121,12 @@ public class ControlMatchUI implements CardContainer {
 
         // Update observers
         AllZone.getHumanPlayer().updateObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
+        AllZone.getHumanPlayer().getZone(ZoneType.Hand).updateObservers();
+        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
 
         AllZone.getComputerPlayer().updateObservers();
-        AllZone.getComputerPlayer().getZone(Zone.Hand).updateObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
+        AllZone.getComputerPlayer().getZone(ZoneType.Hand).updateObservers();
+        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
 
         AllZone.getStack().updateObservers();
         AllZone.getInputControl().updateObservers();

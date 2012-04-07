@@ -22,14 +22,14 @@ import javax.swing.JOptionPane;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 
 /**
@@ -105,7 +105,7 @@ public class CostReturn extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         if (!this.getThis()) {
-            CardList typeList = activator.getCardsIn(Zone.Battlefield);
+            CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
             typeList = typeList.getValidCards(this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
@@ -144,7 +144,7 @@ public class CostReturn extends CostPartWithList {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
-        final CardList list = activator.getCardsIn(Zone.Battlefield);
+        final CardList list = activator.getCardsIn(ZoneType.Battlefield);
         if (c == null) {
             final String sVar = source.getSVar(amount);
             // Generalize this
@@ -228,7 +228,7 @@ public class CostReturn extends CostPartWithList {
                     msg.append("s");
                 }
 
-                this.typeList = sa.getActivatingPlayer().getCardsIn(Zone.Battlefield);
+                this.typeList = sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
                 this.typeList = this.typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(),
                         sa.getSourceCard());
                 Singletons.getControl().getControlMatch().showMessage(msg.toString());

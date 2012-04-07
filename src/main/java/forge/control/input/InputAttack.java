@@ -20,10 +20,9 @@ package forge.control.input;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.game.phase.CombatUtil;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 import forge.Singletons;
 
@@ -59,7 +58,7 @@ public class InputAttack extends Input {
 
         if (AllZone.getCombat().getRemainingDefenders() == 0) {
             // Nothing left to attack, has to attack this defender
-            CardList possibleAttackers = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+            CardList possibleAttackers = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
             possibleAttackers = possibleAttackers.getType("Creature");
             for (int i = 0; i < possibleAttackers.size(); i++) {
                 final Card c = possibleAttackers.get(i);
@@ -93,7 +92,7 @@ public class InputAttack extends Input {
             return;
         }
 
-        if (zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer())
+        if (zone.is(ZoneType.Battlefield, AllZone.getHumanPlayer())
                 && CombatUtil.canAttack(card, AllZone.getCombat())) {
 
             // TODO add the propaganda code here and remove it in
@@ -104,7 +103,7 @@ public class InputAttack extends Input {
             AllZone.getCombat().addAttacker(card);
 
             // just to make sure the attack symbol is marked
-            AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
+            AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
             CombatUtil.showCombat();
         }
         else {
@@ -120,7 +119,7 @@ public class InputAttack extends Input {
      * @param card
      *            a {@link forge.Card} object.
      * @param zone
-     *            a {@link forge.game.player.PlayerZone} object.
+     *            a {@link forge.game.zone.PlayerZone} object.
      */
     public void unselectCard(final Card card, final PlayerZone zone) {
 

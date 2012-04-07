@@ -39,7 +39,6 @@ import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.HandSizeOp;
 import forge.Singletons;
-import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.SpellAbility;
@@ -47,6 +46,10 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameLossReason;
 import forge.game.phase.PhaseHandler;
+import forge.game.zone.DefaultPlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.PlayerZoneComesIntoPlay;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -130,11 +133,11 @@ public abstract class Player extends GameEntity {
     private boolean attackedWithCreatureThisTurn = false;
 
     /** The zones. */
-    private final Map<Constant.Zone, PlayerZone> zones = new EnumMap<Constant.Zone, PlayerZone>(Constant.Zone.class);
+    private final Map<ZoneType, PlayerZone> zones = new EnumMap<ZoneType, PlayerZone>(ZoneType.class);
 
     /** The Constant ALL_ZONES. */
-    public static final List<Zone> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(Zone.Battlefield,
-            Zone.Library, Zone.Graveyard, Zone.Hand, Zone.Exile, Zone.Command, Zone.Ante));
+    public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
+            ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante));
 
     /**
      * <p>
@@ -161,8 +164,8 @@ public abstract class Player extends GameEntity {
      *            a int.
      */
     public Player(final String myName, final int myLife, final int myPoisonCounters) {
-        for (final Zone z : Player.ALL_ZONES) {
-            final PlayerZone toPut = z == Zone.Battlefield ? new PlayerZoneComesIntoPlay(z, this)
+        for (final ZoneType z : Player.ALL_ZONES) {
+            final PlayerZone toPut = z == ZoneType.Battlefield ? new PlayerZoneComesIntoPlay(z, this)
                     : new DefaultPlayerZone(z, this);
             this.zones.put(z, toPut);
         }
@@ -521,7 +524,7 @@ public abstract class Player extends GameEntity {
                 "As long as you have 0 or less life, all damage is dealt to you as though its source had infect.");
 
         if ((this.getLife() <= 0) && !infect) {
-            final CardList cards = this.getCardsIn(Zone.Battlefield);
+            final CardList cards = this.getCardsIn(ZoneType.Battlefield);
             for (final Card card : cards) {
                 if (card.hasKeyword(sb.toString())) {
                     infect = true;
@@ -637,7 +640,7 @@ public abstract class Player extends GameEntity {
         }
 
         // Prevent Damage static abilities
-        final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
@@ -685,7 +688,7 @@ public abstract class Player extends GameEntity {
         int restDamage = damage;
 
         if (AllZoneUtil.isCardInPlay("Sulfuric Vapors") && source.isSpell() && source.isRed()) {
-            final int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Sulfuric Vapors").size();
+            final int amount = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Sulfuric Vapors").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += 1;
             }
@@ -693,21 +696,21 @@ public abstract class Player extends GameEntity {
 
         if (AllZoneUtil.isCardInPlay("Pyromancer's Swath", source.getController())
                 && (source.isInstant() || source.isSorcery())) {
-            final int amount = source.getController().getCardsIn(Zone.Battlefield, "Pyromancer's Swath").size();
+            final int amount = source.getController().getCardsIn(ZoneType.Battlefield, "Pyromancer's Swath").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += 2;
             }
         }
         //
         if (AllZoneUtil.isCardInPlay("Furnace of Rath")) {
-            final int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Furnace of Rath").size();
+            final int amount = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Furnace of Rath").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
             }
         }
         //
         if (AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) && source.isCreature()) {
-            final int amount = source.getController().getCardsIn(Zone.Battlefield, "Gratuitous Violence").size();
+            final int amount = source.getController().getCardsIn(ZoneType.Battlefield, "Gratuitous Violence").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
             }
@@ -715,7 +718,7 @@ public abstract class Player extends GameEntity {
         //
         if (AllZoneUtil.isCardInPlay("Fire Servant", source.getController()) && source.isRed()
                 && (source.isInstant() || source.isSorcery())) {
-            final int amount = source.getController().getCardsIn(Zone.Battlefield, "Fire Servant").size();
+            final int amount = source.getController().getCardsIn(ZoneType.Battlefield, "Fire Servant").size();
             for (int i = 0; i < amount; i++) {
                 restDamage *= 2;
             }
@@ -723,7 +726,7 @@ public abstract class Player extends GameEntity {
 
         //
         if (AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell()) {
-            final int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Benevolent Unicorn").size();
+            final int amount = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Benevolent Unicorn").size();
             for (int i = 0; i < amount; i++) {
                 if (restDamage > 0) {
                     restDamage -= 1;
@@ -776,7 +779,7 @@ public abstract class Player extends GameEntity {
 
         if (AllZoneUtil.isCardInPlay("Crumbling Sanctuary")) {
             for (int i = 0; i < damage; i++) {
-                final CardList lib = this.getCardsIn(Zone.Library);
+                final CardList lib = this.getCardsIn(ZoneType.Library);
                 if (lib.size() > 0) {
                     Singletons.getModel().getGameAction().exile(lib.get(0));
                 }
@@ -1239,7 +1242,7 @@ public abstract class Player extends GameEntity {
             }
 
             if (!firstFromDraw && AllZoneUtil.isCardInPlay("Chains of Mephistopheles")) {
-                if (!this.getZone(Zone.Hand).isEmpty()) {
+                if (!this.getZone(ZoneType.Hand).isEmpty()) {
                     if (this.isHuman()) {
                         this.discardChainsOfMephistopheles();
                     } else { // Computer
@@ -1266,7 +1269,7 @@ public abstract class Player extends GameEntity {
      */
     private CardList doDraw() {
         final CardList drawn = new CardList();
-        final PlayerZone library = this.getZone(Constant.Zone.Library);
+        final PlayerZone library = this.getZone(ZoneType.Library);
 
         // Replacement effects
         final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
@@ -1285,7 +1288,7 @@ public abstract class Player extends GameEntity {
 
             if ((this.numDrawnThisTurn == 0) && this.isComputer()) {
                 boolean reveal = false;
-                final CardList cards = this.getCardsIn(Zone.Battlefield);
+                final CardList cards = this.getCardsIn(ZoneType.Battlefield);
                 for (final Card card : cards) {
                     if (card.hasKeyword("Reveal the first card you draw each turn")) {
                         reveal = true;
@@ -1326,7 +1329,7 @@ public abstract class Player extends GameEntity {
      *            the zone
      * @return the zone
      */
-    public final PlayerZone getZone(final Zone zone) {
+    public final PlayerZone getZone(final ZoneType zone) {
         return this.zones.get(zone);
     }
 
@@ -1338,8 +1341,8 @@ public abstract class Player extends GameEntity {
      *            the zone
      * @return a CardList with all the cards currently in requested zone
      */
-    public final CardList getCardsIn(final Constant.Zone zone) {
-        final List<Card> cards = zone == Zone.Stack ? AllZone.getStackZone().getCards() : this.getZone(zone).getCards();
+    public final CardList getCardsIn(final ZoneType zone) {
+        final List<Card> cards = zone == ZoneType.Stack ? AllZone.getStackZone().getCards() : this.getZone(zone).getCards();
         return new CardList(cards);
     }
 
@@ -1359,8 +1362,8 @@ public abstract class Player extends GameEntity {
      *            the zone
      * @return the cards include phasing in
      */
-    public final CardList getCardsIncludePhasingIn(final Constant.Zone zone) {
-        final List<Card> cards = zone == Zone.Stack ? AllZone.getStackZone().getCards() : this.getZone(zone)
+    public final CardList getCardsIncludePhasingIn(final ZoneType zone) {
+        final List<Card> cards = zone == ZoneType.Stack ? AllZone.getStackZone().getCards() : this.getZone(zone)
                 .getCards(false);
         return new CardList(cards);
     }
@@ -1375,7 +1378,7 @@ public abstract class Player extends GameEntity {
      *            the n
      * @return a CardList with all the cards currently in requested zone
      */
-    public final CardList getCardsIn(final Constant.Zone zone, final int n) {
+    public final CardList getCardsIn(final ZoneType zone, final int n) {
         return new CardList(this.getZone(zone).getCards(n));
     }
 
@@ -1386,9 +1389,9 @@ public abstract class Player extends GameEntity {
      *            the zones
      * @return a CardList with all the cards currently in requested zones
      */
-    public final CardList getCardsIn(final List<Constant.Zone> zones) {
+    public final CardList getCardsIn(final List<ZoneType> zones) {
         final CardList result = new CardList();
-        for (final Constant.Zone z : zones) {
+        for (final ZoneType z : zones) {
             if (this.getZone(z) != null) {
                 result.addAll(this.getZone(z).getCards());
             }
@@ -1396,9 +1399,9 @@ public abstract class Player extends GameEntity {
         return result;
     }
 
-    public final CardList getCardsIn(final Constant.Zone[] zones) {
+    public final CardList getCardsIn(final ZoneType[] zones) {
         final CardList result = new CardList();
-        for (final Constant.Zone z : zones) {
+        for (final ZoneType z : zones) {
             if (this.getZone(z) != null) {
                 result.addAll(this.getZone(z).getCards());
             }
@@ -1415,7 +1418,7 @@ public abstract class Player extends GameEntity {
      *            the card name
      * @return a CardList with all the cards currently in that player's library
      */
-    public final CardList getCardsIn(final Constant.Zone zone, final String cardName) {
+    public final CardList getCardsIn(final ZoneType zone, final String cardName) {
         return this.getCardsIn(zone).getName(cardName);
     }
 
@@ -1428,13 +1431,13 @@ public abstract class Player extends GameEntity {
      */
     protected final CardList getDredge() {
         final CardList dredge = new CardList();
-        final CardList cl = this.getCardsIn(Zone.Graveyard);
+        final CardList cl = this.getCardsIn(ZoneType.Graveyard);
 
         for (final Card c : cl) {
             final ArrayList<String> kw = c.getKeyword();
             for (int i = 0; i < kw.size(); i++) {
                 if (kw.get(i).toString().startsWith("Dredge")) {
-                    if (this.getCardsIn(Zone.Library).size() >= this.getDredgeNumber(c)) {
+                    if (this.getCardsIn(ZoneType.Library).size() >= this.getDredgeNumber(c)) {
                         dredge.add(c);
                     }
                 }
@@ -1594,7 +1597,7 @@ public abstract class Player extends GameEntity {
      * @return the card list
      */
     public final CardList discardHand(final SpellAbility sa) {
-        final CardList list = this.getCardsIn(Zone.Hand);
+        final CardList list = this.getCardsIn(ZoneType.Hand);
         this.discardRandom(list.size(), sa);
         return list;
     }
@@ -1643,7 +1646,7 @@ public abstract class Player extends GameEntity {
     public final CardList discardRandom(final int num, final SpellAbility sa, final String valid) {
         final CardList discarded = new CardList();
         for (int i = 0; i < num; i++) {
-            CardList list = this.getCardsIn(Zone.Hand);
+            CardList list = this.getCardsIn(ZoneType.Hand);
             list = list.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
             if (list.size() != 0) {
                 final Card disc = CardUtil.getRandom(list.toArray());
@@ -1678,7 +1681,7 @@ public abstract class Player extends GameEntity {
      * @return the card list
      */
     public final CardList mill(final int n) {
-        return this.mill(n, Constant.Zone.Graveyard, false);
+        return this.mill(n, ZoneType.Graveyard, false);
     }
 
     /**
@@ -1694,13 +1697,13 @@ public abstract class Player extends GameEntity {
      *            a boolean.
      * @return the card list
      */
-    public final CardList mill(final int n, final Constant.Zone zone, final boolean bottom) {
-        final CardList lib = this.getCardsIn(Zone.Library);
+    public final CardList mill(final int n, final ZoneType zone, final boolean bottom) {
+        final CardList lib = this.getCardsIn(ZoneType.Library);
         final CardList milled = new CardList();
 
         final int max = Math.min(n, lib.size());
 
-        final Zone destination = this.getZone(zone).getZoneType();
+        final ZoneType destination = this.getZone(zone).getZoneType();
 
         for (int i = 0; i < max; i++) {
             if (bottom) {
@@ -1732,8 +1735,8 @@ public abstract class Player extends GameEntity {
      * </p>
      */
     public final void shuffle() {
-        final PlayerZone library = this.getZone(Constant.Zone.Library);
-        final Card[] c = this.getCardsIn(Zone.Library).toArray();
+        final PlayerZone library = this.getZone(ZoneType.Library);
+        final Card[] c = this.getCardsIn(ZoneType.Library).toArray();
 
         if (c.length <= 1) {
             return;
@@ -1795,7 +1798,7 @@ public abstract class Player extends GameEntity {
      */
     public final void scry(int numScry) {
         final CardList topN = new CardList();
-        final PlayerZone library = this.getZone(Constant.Zone.Library);
+        final PlayerZone library = this.getZone(ZoneType.Library);
         numScry = Math.min(numScry, library.size());
         for (int i = 0; i < numScry; i++) {
             topN.add(library.get(i));
@@ -1816,7 +1819,7 @@ public abstract class Player extends GameEntity {
     public final void playLand(final Card land) {
         if (this.canPlayLand()) {
             land.addController(this);
-            Singletons.getModel().getGameAction().moveTo(this.getZone(Constant.Zone.Battlefield), land);
+            Singletons.getModel().getGameAction().moveTo(this.getZone(ZoneType.Battlefield), land);
             CardFactoryUtil.playLandEffects(land);
             this.numLandsPlayed++;
 
@@ -1850,7 +1853,7 @@ public abstract class Player extends GameEntity {
         }
 
         // CantBeCast static abilities
-        final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
@@ -1861,7 +1864,7 @@ public abstract class Player extends GameEntity {
         }
 
         return PhaseHandler.canCastSorcery(this)
-                && ((this.numLandsPlayed < this.maxLandsToPlay) || (this.getCardsIn(Zone.Battlefield, "Fastbond")
+                && ((this.numLandsPlayed < this.maxLandsToPlay) || (this.getCardsIn(ZoneType.Battlefield, "Fastbond")
                         .size() > 0));
     }
 
@@ -1898,7 +1901,7 @@ public abstract class Player extends GameEntity {
      * @return a {@link forge.Card} object.
      */
     public final Card getPlaneswalker() {
-        final CardList c = this.getCardsIn(Zone.Battlefield).getType("Planeswalker");
+        final CardList c = this.getCardsIn(ZoneType.Battlefield).getType("Planeswalker");
         if ((null != c) && (c.size() > 0)) {
             return c.get(0);
         } else {
@@ -2214,14 +2217,14 @@ public abstract class Player extends GameEntity {
             return false;
         }
 
-        CardList list = this.getCardsIn(Zone.Battlefield);
+        CardList list = this.getCardsIn(ZoneType.Battlefield);
         list = list.getKeyword("You can't lose the game.");
 
         if (list.size() > 0) {
             return true;
         }
 
-        CardList oppList = this.getOpponent().getCardsIn(Zone.Battlefield);
+        CardList oppList = this.getOpponent().getCardsIn(ZoneType.Battlefield);
         oppList = oppList.getKeyword("Your opponents can't lose the game.");
 
         return oppList.size() > 0;
@@ -2235,7 +2238,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean cantLoseForZeroOrLessLife() {
-        CardList list = this.getCardsIn(Zone.Battlefield);
+        CardList list = this.getCardsIn(ZoneType.Battlefield);
         list = list.getKeyword("You don't lose the game for having 0 or less life.");
 
         return list.size() > 0;
@@ -2249,14 +2252,14 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean cantWin() {
-        CardList list = this.getCardsIn(Zone.Battlefield);
+        CardList list = this.getCardsIn(ZoneType.Battlefield);
         list = list.getKeyword("You can't win the game.");
 
         if (list.size() > 0) {
             return true;
         }
 
-        CardList oppList = this.getOpponent().getCardsIn(Zone.Battlefield);
+        CardList oppList = this.getOpponent().getCardsIn(ZoneType.Battlefield);
         oppList = oppList.getKeyword("Your opponents can't win the game.");
 
         return oppList.size() > 0;
@@ -2318,7 +2321,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean hasMetalcraft() {
-        final CardList list = this.getCardsIn(Zone.Battlefield).getType("Artifact");
+        final CardList list = this.getCardsIn(ZoneType.Battlefield).getType("Artifact");
         return list.size() >= 3;
     }
 
@@ -2330,7 +2333,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean hasThreshold() {
-        return this.getZone(Zone.Graveyard).getCards().size() >= 7;
+        return this.getZone(ZoneType.Graveyard).getCards().size() >= 7;
     }
 
     /**
@@ -2341,7 +2344,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean hasHellbent() {
-        return this.getZone(Zone.Hand).getCards().isEmpty();
+        return this.getZone(ZoneType.Hand).getCards().isEmpty();
     }
 
     /**
@@ -2352,7 +2355,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean hasLandfall() {
-        final CardList list = ((DefaultPlayerZone) this.getZone(Zone.Battlefield)).getCardsAddedThisTurn(null).getType(
+        final CardList list = ((DefaultPlayerZone) this.getZone(ZoneType.Battlefield)).getCardsAddedThisTurn(null).getType(
                 "Land");
         return !list.isEmpty();
     }
@@ -2675,7 +2678,7 @@ public abstract class Player extends GameEntity {
          */
         final Player player = source.getController();
         final Player opponent = player.getOpponent();
-        final Constant.Zone lib = Constant.Zone.Library;
+        final ZoneType lib = ZoneType.Library;
 
         final PlayerZone pLib = player.getZone(lib);
         final PlayerZone oLib = opponent.getZone(lib);
@@ -2759,7 +2762,7 @@ public abstract class Player extends GameEntity {
      * Update label observers.
      */
     public final void updateLabelObservers() {
-        this.getZone(Zone.Hand).updateObservers();
+        this.getZone(ZoneType.Hand).updateObservers();
     }
 
     // //////////////////////////////

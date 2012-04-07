@@ -23,10 +23,10 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.Constant.Zone;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -90,7 +90,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         }
 
         // CantBeActivated static abilities
-        final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {

@@ -22,9 +22,9 @@ import forge.Card;
 import forge.CardList;
 import forge.GameActionUtil;
 import forge.Singletons;
-import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 
 /**
@@ -144,14 +144,14 @@ public class HumanPlayer extends Player {
         if (o.equals("Yes")) {
             final Card c = GuiUtils.chooseOne("Select card to dredge", this.getDredge().toArray());
             // rule 702.49a
-            if (this.getDredgeNumber(c) <= AllZone.getHumanPlayer().getZone(Zone.Library).size()) {
+            if (this.getDredgeNumber(c) <= AllZone.getHumanPlayer().getZone(ZoneType.Library).size()) {
 
                 // might have to make this more sophisticated
                 // dredge library, put card in hand
                 Singletons.getModel().getGameAction().moveToHand(c);
 
                 for (int i = 0; i < this.getDredgeNumber(c); i++) {
-                    final Card c2 = AllZone.getHumanPlayer().getZone(Zone.Library).get(0);
+                    final Card c2 = AllZone.getHumanPlayer().getZone(ZoneType.Library).get(0);
                     Singletons.getModel().getGameAction().moveToGraveyard(c2);
                 }
                 dredged = true;
@@ -174,7 +174,7 @@ public class HumanPlayer extends Player {
     /** {@inheritDoc} */
     @Override
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
-        if (this.getCardsIn(Zone.Hand).size() > 0) {
+        if (this.getCardsIn(ZoneType.Hand).size() > 0) {
             AllZone.getInputControl().setInput(PlayerUtil.inputDiscardNumUnless(num, uType, sa));
         }
     }

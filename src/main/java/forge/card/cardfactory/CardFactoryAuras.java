@@ -30,8 +30,6 @@ import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
@@ -40,7 +38,8 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 
 /**
@@ -368,7 +367,7 @@ class CardFactoryAuras {
                 @Override
                 public boolean canPlayAI() {
 
-                    final CardList stuffy = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Stuffy Doll");
+                    final CardList stuffy = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Stuffy Doll");
 
                     if (stuffy.size() > 0) {
                         this.setTargetCard(stuffy.get(0));
@@ -423,7 +422,7 @@ class CardFactoryAuras {
                     // This includes creatures Animate Dead can't enchant once
                     // in play.
                     // The human may try to Animate them, the AI will not.
-                    return AllZoneUtil.getCardsIn(Zone.Graveyard).filter(CardListFilter.CREATURES);
+                    return AllZoneUtil.getCardsIn(ZoneType.Graveyard).filter(CardListFilter.CREATURES);
                 }
 
                 @Override
@@ -458,18 +457,18 @@ class CardFactoryAuras {
             // Target AbCost and Restriction are set here to get this working as
             // expected
             final Target tgt = new Target(card, "Select a creature in a graveyard", "Creature".split(","));
-            tgt.setZone(Constant.Zone.Graveyard);
+            tgt.setZone(ZoneType.Graveyard);
             animate.setTarget(tgt);
 
             final Cost cost = new Cost(card, "1 B", false);
             animate.setPayCosts(cost);
 
-            animate.getRestrictions().setZone(Constant.Zone.Hand);
+            animate.getRestrictions().setZone(ZoneType.Hand);
 
             final Ability attach = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    final PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
+                    final PlayerZone play = card.getController().getZone(ZoneType.Battlefield);
 
                     // Animate Dead got destroyed before its ability resolved
                     if (!play.contains(card)) {
@@ -479,7 +478,7 @@ class CardFactoryAuras {
                     final Card animated = targetC[0];
                     final PlayerZone grave = AllZone.getZoneOf(animated);
 
-                    if (!grave.is(Constant.Zone.Graveyard)) {
+                    if (!grave.is(ZoneType.Graveyard)) {
                         // Animated Creature got removed before ability resolved
                         Singletons.getModel().getGameAction().sacrifice(card);
                         return;
@@ -532,7 +531,7 @@ class CardFactoryAuras {
                 public void resolve() {
                     final Card c = targetC[0];
 
-                    final PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
+                    final PlayerZone play = card.getController().getZone(ZoneType.Battlefield);
 
                     if (play.contains(c)) {
                         Singletons.getModel().getGameAction().sacrifice(c);
@@ -547,7 +546,7 @@ class CardFactoryAuras {
                 public void execute() {
                     final Card c = targetC[0];
 
-                    final PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
+                    final PlayerZone play = card.getController().getZone(ZoneType.Battlefield);
 
                     if (play.contains(c)) {
                         AllZone.getStack().addSimultaneousStackEntry(detach);

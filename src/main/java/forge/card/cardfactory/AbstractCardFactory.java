@@ -37,8 +37,6 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Command;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -56,7 +54,8 @@ import forge.control.input.InputPayManaCost;
 import forge.game.GameLossReason;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -602,8 +601,8 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public boolean canPlay() {
-                    final CardList grave = AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard);
-                    final CardList aiGrave = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard);
+                    final CardList grave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
+                    final CardList aiGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
                     return ((grave.getType("Creature").size() > 1) || (aiGrave.getType("Creature").size() > 1))
                             && super.canPlay();
                 }
@@ -615,8 +614,8 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public void showMessage() {
-                    CardList grave = AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard);
-                    CardList aiGrave = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard);
+                    CardList grave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
+                    CardList aiGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
                     grave = grave.getType("Creature");
                     aiGrave = aiGrave.getType("Creature");
 
@@ -639,9 +638,9 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                             CardList newGrave;
                             final Card c = (Card) o;
                             if (c.getOwner().isHuman()) {
-                                newGrave = AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard);
+                                newGrave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
                             } else {
-                                newGrave = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard);
+                                newGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
                             }
 
                             newGrave = newGrave.getType("Creature");
@@ -691,7 +690,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
-                    if (zone.is(Constant.Zone.Hand) && c.isLand()) {
+                    if (zone.is(ZoneType.Hand) && c.isLand()) {
                         AllZone.getHumanPlayer().discard(c, null);
                         this.stop();
                     } else if (c.equals(card)) {
@@ -705,13 +704,13 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 @Override
                 public void resolve() {
                     if (card.getController().isHuman()) {
-                        if (AllZone.getHumanPlayer().getZone(Zone.Hand).isEmpty()) {
+                        if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).isEmpty()) {
                             Singletons.getModel().getGameAction().sacrifice(card);
                         } else {
                             AllZone.getInputControl().setInput(discard);
                         }
                     } else {
-                        CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+                        CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
                         list = list.filter(new CardListFilter() {
                             @Override
                             public boolean addCard(final Card c) {
@@ -748,7 +747,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public boolean canPlay() {
-                    CardList list = card.getController().getCardsIn(Zone.Hand);
+                    CardList list = card.getController().getCardsIn(ZoneType.Hand);
                     list.remove(card);
                     list = list.filter(new CardListFilter() {
                         @Override
@@ -796,7 +795,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public void resolve() {
-                    final CardList topOfLibrary = card.getController().getCardsIn(Zone.Library);
+                    final CardList topOfLibrary = card.getController().getCardsIn(ZoneType.Library);
                     final CardList revealed = new CardList();
 
                     if (topOfLibrary.size() == 0) {
@@ -880,7 +879,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                     final int limit = 4; // at most, this can target 4 cards
                     final Player player = this.getTargetPlayer();
 
-                    CardList lands = player.getCardsIn(Zone.Graveyard);
+                    CardList lands = player.getCardsIn(ZoneType.Graveyard);
                     lands = lands.filter(CardListFilter.BASIC_LANDS);
                     if (card.getController().isHuman()) {
                         // now, select up to four lands
@@ -925,7 +924,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 }
 
                 private CardList getComputerLands() {
-                    final CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard);
+                    final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
                     return list.getType("Basic");
                 }
             }; // ability
@@ -948,7 +947,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public boolean canPlayAI() {
-                    final CardList libList = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
+                    final CardList libList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
                     // CardList list =
                     // AllZoneUtil.getCardsInPlay("Painter's Servant");
                     return libList.size() > 0; // && list.size() > 0;
@@ -957,7 +956,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 @Override
                 public void resolve() {
                     final Player target = this.getTargetPlayer();
-                    final CardList library = this.getTargetPlayer().getCardsIn(Zone.Library);
+                    final CardList library = this.getTargetPlayer().getCardsIn(ZoneType.Library);
 
                     boolean loop = true;
                     final CardList grinding = new CardList();
@@ -1068,7 +1067,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
-                                if (zone.is(Constant.Zone.Hand, AllZone.getHumanPlayer()) && !this.exiled.contains(c)) {
+                                if (zone.is(ZoneType.Hand, AllZone.getHumanPlayer()) && !this.exiled.contains(c)) {
                                     this.exiled.add(c);
                                     this.showMessage();
                                 }
@@ -1083,7 +1082,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                                 // Put that many cards from the top of your
                                 // library into your hand.
                                 // Ruling: This is not a draw...
-                                final PlayerZone lib = AllZone.getHumanPlayer().getZone(Constant.Zone.Library);
+                                final PlayerZone lib = AllZone.getHumanPlayer().getZone(ZoneType.Library);
                                 int numCards = 0;
                                 while ((lib.size() > 0) && (numCards < this.exiled.size())) {
                                     Singletons.getModel().getGameAction().moveToHand(lib.get(0));
@@ -1143,7 +1142,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public boolean canPlay() {
-                    final PlayerZone lib = card.getController().getZone(Constant.Zone.Library);
+                    final PlayerZone lib = card.getController().getZone(ZoneType.Library);
                     return super.canPlay() && ((lib.size() > 0) && lib.get(0).equals(topCard[0]));
                 }
 
@@ -1186,7 +1185,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public void resolve() {
-                    final PlayerZone lib = card.getController().getZone(Constant.Zone.Library);
+                    final PlayerZone lib = card.getController().getZone(ZoneType.Library);
                     if (lib.size() > 0) {
 
                         // shuffle your library
@@ -1356,7 +1355,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 @Override
                 public void resolve() {
                     if (card.getController().isComputer()) {
-                        final CardList cards = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield).getType("Artifact");
+                        final CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield).getType("Artifact");
                         if (!cards.isEmpty()) {
                             copyTarget[0] = CardFactoryUtil.getBestAI(cards);
                         }
@@ -1432,7 +1431,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone z) {
-                    if (z.is(Constant.Zone.Battlefield) && c.isArtifact()) {
+                    if (z.is(ZoneType.Battlefield) && c.isArtifact()) {
                         copyTarget[0] = c;
                         this.stopSetNext(new InputPayManaCost(copy));
                     }
@@ -1465,7 +1464,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                                 @Override
                                 public void showMessage() {
-                                    if (AllZone.getHumanPlayer().getZone(Constant.Zone.Hand).size() == 0) {
+                                    if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
                                         this.stop();
                                     }
                                     Singletons.getControl().getControlMatch().showMessage(prompt);
@@ -1474,7 +1473,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                                 @Override
                                 public void selectCard(final Card card, final PlayerZone zone) {
-                                    if (zone.is(Constant.Zone.Hand) && card.getDrawnThisTurn()) {
+                                    if (zone.is(ZoneType.Hand) && card.getDrawnThisTurn()) {
                                         if (player.canPayLife(4) && GameActionUtil.showYesNoDialog(card, cardQuestion)) {
                                             player.payLife(4, card);
                                             // card stays in hand

@@ -30,7 +30,6 @@ import forge.CardCharactersticName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
@@ -43,6 +42,7 @@ import forge.card.trigger.TriggerType;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -280,7 +280,7 @@ public final class AbilityFactoryCopy {
         final Target abTgt = sa.getTarget();
 
         if (abTgt != null) {
-            CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             abTgt.resetTargets();
             // target loop

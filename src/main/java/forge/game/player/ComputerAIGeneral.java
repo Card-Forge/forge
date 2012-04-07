@@ -28,7 +28,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.Singletons;
-import forge.Constant.Zone;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -36,6 +35,7 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.game.phase.PhaseType;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -99,9 +99,9 @@ public class ComputerAIGeneral implements Computer {
      * @return a boolean.
      */
     public static boolean hasACardGivingHaste() {
-        final CardList all = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        final CardList all = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         all.addAll(CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer()));
-        all.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Hand));
+        all.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand));
 
         for (final Card c : all) {
             for (final SpellAbility sa : c.getSpellAbility()) {
@@ -135,15 +135,15 @@ public class ComputerAIGeneral implements Computer {
     private CardList getAvailableCards() {
         final Player computer = AllZone.getComputerPlayer();
         final Player human = AllZone.getHumanPlayer();
-        CardList all = computer.getCardsIn(Zone.Hand);
-        all.addAll(computer.getCardsIn(Zone.Battlefield));
-        all.addAll(computer.getCardsIn(Zone.Exile));
-        all.addAll(computer.getCardsIn(Zone.Graveyard));
-        if (!computer.getCardsIn(Zone.Library).isEmpty()) {
-            all.add(computer.getCardsIn(Zone.Library).get(0));
+        CardList all = computer.getCardsIn(ZoneType.Hand);
+        all.addAll(computer.getCardsIn(ZoneType.Battlefield));
+        all.addAll(computer.getCardsIn(ZoneType.Exile));
+        all.addAll(computer.getCardsIn(ZoneType.Graveyard));
+        if (!computer.getCardsIn(ZoneType.Library).isEmpty()) {
+            all.add(computer.getCardsIn(ZoneType.Library).get(0));
         }
-        all.addAll(human.getCardsIn(Zone.Exile));
-        all.addAll(human.getCardsIn(Zone.Battlefield));
+        all.addAll(human.getCardsIn(ZoneType.Exile));
+        all.addAll(human.getCardsIn(ZoneType.Battlefield));
         return all;
     }
 
@@ -163,7 +163,7 @@ public class ComputerAIGeneral implements Computer {
                 continue;
             }
 
-            if (!params.get("Destination").equals(Zone.Battlefield.toString())) {
+            if (!params.get("Destination").equals(ZoneType.Battlefield.toString())) {
                 continue;
             }
 
@@ -185,13 +185,13 @@ public class ComputerAIGeneral implements Computer {
     private ArrayList<SpellAbility> getPossibleETBCounters() {
         final Player computer = AllZone.getComputerPlayer();
         final Player human = AllZone.getHumanPlayer();
-        CardList all = computer.getCardsIn(Zone.Hand);
-        all.addAll(computer.getCardsIn(Zone.Exile));
-        all.addAll(computer.getCardsIn(Zone.Graveyard));
-        if (!computer.getCardsIn(Zone.Library).isEmpty()) {
-            all.add(computer.getCardsIn(Zone.Library).get(0));
+        CardList all = computer.getCardsIn(ZoneType.Hand);
+        all.addAll(computer.getCardsIn(ZoneType.Exile));
+        all.addAll(computer.getCardsIn(ZoneType.Graveyard));
+        if (!computer.getCardsIn(ZoneType.Library).isEmpty()) {
+            all.add(computer.getCardsIn(ZoneType.Library).get(0));
         }
-        all.addAll(human.getCardsIn(Zone.Exile));
+        all.addAll(human.getCardsIn(ZoneType.Exile));
 
         final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : all) {
@@ -280,7 +280,7 @@ public class ComputerAIGeneral implements Computer {
             Log.debug(sb.toString());
         }
 
-        AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
+        AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).updateObservers();
 
         Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
     }

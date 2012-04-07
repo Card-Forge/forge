@@ -28,7 +28,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
-import forge.Constant.Zone;
 import forge.Counters;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -41,6 +40,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 /**
@@ -192,7 +192,7 @@ public class AbilityFactoryDestroy {
         final boolean noRegen = params.containsKey("NoRegen");
 
         CardList list;
-        list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         list = list.getTargetableCards(sa);
 
         if (abTgt != null) {
@@ -335,7 +335,7 @@ public class AbilityFactoryDestroy {
 
         if (tgt != null) {
             CardList list;
-            list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             list = list.getTargetableCards(sa);
             list = list.getValidCards(tgt.getValidTgts(), source.getController(), source);
 
@@ -781,8 +781,8 @@ public class AbilityFactoryDestroy {
         if (params.containsKey("ValidCards")) {
             valid = params.get("ValidCards");
         }
-        CardList humanlist = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        CardList computerlist = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        CardList humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        CardList computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         if (sa.getTarget() != null) {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getHumanPlayer());
@@ -860,8 +860,8 @@ public class AbilityFactoryDestroy {
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        CardList humanlist = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        CardList computerlist = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        CardList humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        CardList computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
         final Target tgt = sa.getTarget();
 
@@ -962,7 +962,7 @@ public class AbilityFactoryDestroy {
             valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
         }
 
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         if (targetPlayer != null) {
             list = list.getController(targetPlayer);

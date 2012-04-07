@@ -25,7 +25,7 @@ import javax.swing.WindowConstants;
 
 import forge.util.ThreadUtil;
 
-import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
+import net.slightlymagic.braids.BaseProgressMonitor;
 
 /**
  * GUI Progress Monitor that displays the ETA (Estimated Time of Arrival or
@@ -173,7 +173,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      * 
      * @param numUnits
      *            cannot be higher than Integer.MAX_VALUE
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#setTotalUnitsThisPhase(long)
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#setTotalUnitsThisPhase(long)
      */
     @Override
     public final void setTotalUnitsThisPhase(final long numUnits) {
@@ -224,7 +224,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      * 
      * @param numUnits
      *            the num units
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#incrementUnitsCompletedThisPhase(long)
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#incrementUnitsCompletedThisPhase(long)
      */
     @Override
     public final void incrementUnitsCompletedThisPhase(final long numUnits) {

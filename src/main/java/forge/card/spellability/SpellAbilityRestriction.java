@@ -23,14 +23,14 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -90,11 +90,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (params.containsKey("ActivationZone")) {
-            this.setZone(Zone.smartValueOf(params.get("ActivationZone")));
+            this.setZone(ZoneType.smartValueOf(params.get("ActivationZone")));
         }
 
         if (params.containsKey("Flashback")) {
-            this.setZone(Zone.Graveyard);
+            this.setZone(ZoneType.Graveyard);
         }
 
         if (params.containsKey("SorcerySpeed")) {
@@ -144,7 +144,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 this.setPresentCompare(params.get("PresentCompare"));
             }
             if (params.containsKey("PresentZone")) {
-                this.setPresentZone(Zone.smartValueOf(params.get("PresentZone")));
+                this.setPresentZone(ZoneType.smartValueOf(params.get("PresentZone")));
             }
         }
 
@@ -188,7 +188,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (!cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
             // Not a Spell, or on Battlefield, return false
-            if (!sa.isSpell() || cardZone.is(Zone.Battlefield) || !this.getZone().equals(Zone.Hand)) {
+            if (!sa.isSpell() || cardZone.is(ZoneType.Battlefield) || !this.getZone().equals(ZoneType.Hand)) {
                 return false;
             } else if (!c.hasKeyword("May be played") && !c.hasKeyword("May be played by your opponent")) {
                 return false;
@@ -282,7 +282,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.getCardsInHand() != -1) {
-            if (activator.getCardsIn(Zone.Hand).size() != this.getCardsInHand()) {
+            if (activator.getCardsIn(ZoneType.Hand).size() != this.getCardsInHand()) {
                 return false;
             }
         }

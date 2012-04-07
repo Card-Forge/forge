@@ -27,12 +27,10 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Command;
-import forge.Constant;
 import forge.Counters;
 import forge.GameAction;
 import forge.GameActionUtil;
 import forge.Singletons;
-import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
@@ -43,7 +41,8 @@ import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerUtil;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.view.ButtonUtil;
 
@@ -125,7 +124,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
     private static void upkeepBraidOfFire() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
-        final CardList braids = player.getCardsIn(Zone.Battlefield, "Braid of Fire");
+        final CardList braids = player.getCardsIn(ZoneType.Battlefield, "Braid of Fire");
 
         for (int i = 0; i < braids.size(); i++) {
             final Card c = braids.get(i);
@@ -163,7 +162,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepEcho() {
-        CardList list = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getCardsIn(Zone.Battlefield);
+        CardList list = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -278,7 +277,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepUpkeepCost() {
-        final CardList list = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getCardsIn(Zone.Battlefield);
+        final CardList list = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
 
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
@@ -472,8 +471,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
          * regenerated.
          */
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList the = AllZoneUtil.getCardsIn(Zone.Battlefield, "The Abyss");
-        final CardList magus = AllZoneUtil.getCardsIn(Zone.Battlefield, "Magus of the Abyss");
+        final CardList the = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "The Abyss");
+        final CardList magus = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Magus of the Abyss");
 
         final CardList cards = new CardList();
         cards.addAll(the);
@@ -551,7 +550,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
          * you don't, tap Yawgmoth Demon and it deals 2 damage to you.
          */
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList cards = player.getCardsIn(Zone.Battlefield, "Yawgmoth Demon");
+        final CardList cards = player.getCardsIn(ZoneType.Battlefield, "Yawgmoth Demon");
 
         for (int i = 0; i < cards.size(); i++) {
             final Card c = cards.get(i);
@@ -559,7 +558,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final Ability sacrificeArtifact = new Ability(c, "") {
                 @Override
                 public void resolve() {
-                    final CardList artifacts = player.getCardsIn(Zone.Battlefield).filter(CardListFilter.ARTIFACTS);
+                    final CardList artifacts = player.getCardsIn(ZoneType.Battlefield).filter(CardListFilter.ARTIFACTS);
 
                     if (player.isHuman()) {
                         AllZone.getInputControl().setInput(new Input() {
@@ -584,7 +583,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             @Override
                             public void selectCard(final Card artifact, final PlayerZone zone) {
                                 // probably need to restrict by controller also
-                                if (artifact.isArtifact() && zone.is(Constant.Zone.Battlefield)
+                                if (artifact.isArtifact() && zone.is(ZoneType.Battlefield)
                                         && zone.getPlayer().isHuman()) {
                                     Singletons.getModel().getGameAction().sacrifice(artifact);
                                     this.stop();
@@ -629,8 +628,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
          * least power, you choose one of them.
          */
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList drops = player.getCardsIn(Zone.Battlefield, "Drop of Honey");
-        drops.addAll(player.getCardsIn(Zone.Battlefield, "Porphyry Nodes"));
+        final CardList drops = player.getCardsIn(ZoneType.Battlefield, "Drop of Honey");
+        drops.addAll(player.getCardsIn(ZoneType.Battlefield, "Porphyry Nodes"));
         final CardList cards = drops;
 
         for (int i = 0; i < cards.size(); i++) {
@@ -705,7 +704,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
          */
 
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList cards = player.getCardsIn(Zone.Battlefield, "Demonic Hordes");
+        final CardList cards = player.getCardsIn(ZoneType.Battlefield, "Demonic Hordes");
 
         for (int i = 0; i < cards.size(); i++) {
 
@@ -737,7 +736,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     final Ability pay = new Ability(c, "0") {
                         @Override
                         public void resolve() {
-                            if (AllZone.getZoneOf(c).is(Constant.Zone.Battlefield)) {
+                            if (AllZone.getZoneOf(c).is(ZoneType.Battlefield)) {
                                 final StringBuilder cost = new StringBuilder();
                                 cost.append("Pay cost for ").append(c).append("\r\n");
                                 GameActionUtil.payManaDuringAbilityResolve(cost.toString(), noPay.getManaCost(),
@@ -793,9 +792,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
     private static void upkeepInkDissolver() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final Player opponent = player.getOpponent();
-        final CardList kinship = player.getCardsIn(Zone.Battlefield, "Ink Dissolver");
+        final CardList kinship = player.getCardsIn(ZoneType.Battlefield, "Ink Dissolver");
 
-        final PlayerZone library = player.getZone(Constant.Zone.Library);
+        final PlayerZone library = player.getZone(ZoneType.Library);
         // Players would not choose to trigger Kinship ability if library is
         // empty.
         // Useful for games when the "Milling = Loss Condition" check box is
@@ -813,7 +812,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 // abilities when ready
                 @Override
                 public void resolve() {
-                    final PlayerZone library = player.getZone(Constant.Zone.Library);
+                    final PlayerZone library = player.getZone(ZoneType.Library);
                     if (library.size() <= 0) {
                         return;
                     }
@@ -879,9 +878,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepKithkinZephyrnaut() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList kinship = player.getCardsIn(Zone.Battlefield, "Kithkin Zephyrnaut");
+        final CardList kinship = player.getCardsIn(ZoneType.Battlefield, "Kithkin Zephyrnaut");
 
-        final PlayerZone library = player.getZone(Constant.Zone.Library);
+        final PlayerZone library = player.getZone(ZoneType.Library);
         // Players would not choose to trigger Kinship ability if library is
         // empty.
         // Useful for games when the "Milling = Loss Condition" check box is
@@ -899,7 +898,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 // abilities when ready
                 @Override
                 public void resolve() {
-                    final PlayerZone library = player.getZone(Constant.Zone.Library);
+                    final PlayerZone library = player.getZone(ZoneType.Library);
                     if (library.size() <= 0) {
                         return;
                     }
@@ -981,9 +980,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepLeafCrownedElder() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList kinship = player.getCardsIn(Zone.Battlefield, "Leaf-Crowned Elder");
+        final CardList kinship = player.getCardsIn(ZoneType.Battlefield, "Leaf-Crowned Elder");
 
-        final PlayerZone library = player.getZone(Constant.Zone.Library);
+        final PlayerZone library = player.getZone(ZoneType.Library);
         // Players would not choose to trigger Kinship ability if library is
         // empty.
         // Useful for games when the "Milling = Loss Condition" check box is
@@ -1001,7 +1000,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 // abilities when ready
                 @Override
                 public void resolve() {
-                    final PlayerZone library = player.getZone(Constant.Zone.Library);
+                    final PlayerZone library = player.getZone(ZoneType.Library);
                     if (library.size() <= 0) {
                         return;
                     }
@@ -1081,9 +1080,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepMudbuttonClanger() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList kinship = player.getCardsIn(Zone.Battlefield, "Mudbutton Clanger");
+        final CardList kinship = player.getCardsIn(ZoneType.Battlefield, "Mudbutton Clanger");
 
-        final PlayerZone library = player.getZone(Constant.Zone.Library);
+        final PlayerZone library = player.getZone(ZoneType.Library);
         // Players would not choose to trigger Kinship ability if library is
         // empty.
         // Useful for games when the "Milling = Loss Condition" check box is
@@ -1101,7 +1100,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 // abilities when ready
                 @Override
                 public void resolve() {
-                    final PlayerZone library = player.getZone(Constant.Zone.Library);
+                    final PlayerZone library = player.getZone(ZoneType.Library);
                     if (library.size() <= 0) {
                         return;
                     }
@@ -1178,10 +1177,10 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepNightshadeSchemers() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList kinship = player.getCardsIn(Zone.Battlefield, "Nightshade Schemers");
+        final CardList kinship = player.getCardsIn(ZoneType.Battlefield, "Nightshade Schemers");
         final Player opponent = player.getOpponent();
 
-        final PlayerZone library = player.getZone(Constant.Zone.Library);
+        final PlayerZone library = player.getZone(ZoneType.Library);
         // Players would not choose to trigger Kinship ability if library is
         // empty.
         // Useful for games when the "Milling = Loss Condition" check box is
@@ -1199,7 +1198,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 // abilities when ready
                 @Override
                 public void resolve() {
-                    final PlayerZone library = player.getZone(Constant.Zone.Library);
+                    final PlayerZone library = player.getZone(ZoneType.Library);
                     if (library.size() <= 0) {
                         return;
                     }
@@ -1263,9 +1262,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepPyroclastConsul() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList kinship = player.getCardsIn(Zone.Battlefield, "Pyroclast Consul");
+        final CardList kinship = player.getCardsIn(ZoneType.Battlefield, "Pyroclast Consul");
 
-        final PlayerZone library = player.getZone(Constant.Zone.Library);
+        final PlayerZone library = player.getZone(ZoneType.Library);
         // Players would not choose to trigger Kinship ability if library is
         // empty.
         // Useful for games when the "Milling = Loss Condition" check box is
@@ -1283,7 +1282,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 // abilities when ready
                 @Override
                 public void resolve() {
-                    final PlayerZone library = player.getZone(Constant.Zone.Library);
+                    final PlayerZone library = player.getZone(ZoneType.Library);
                     if (library.size() <= 0) {
                         return;
                     }
@@ -1362,10 +1361,10 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepSensationGorger() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList kinship = player.getCardsIn(Zone.Battlefield, "Sensation Gorger");
+        final CardList kinship = player.getCardsIn(ZoneType.Battlefield, "Sensation Gorger");
         final Player opponent = player.getOpponent();
 
-        final PlayerZone library = player.getZone(Constant.Zone.Library);
+        final PlayerZone library = player.getZone(ZoneType.Library);
         // Players would not choose to trigger Kinship ability if library is
         // empty.
         // Useful for games when the "Milling = Loss Condition" check box is
@@ -1383,8 +1382,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 // abilities when ready
                 @Override
                 public void resolve() {
-                    final PlayerZone library = player.getZone(Constant.Zone.Library);
-                    final PlayerZone hand = player.getZone(Constant.Zone.Hand);
+                    final PlayerZone library = player.getZone(ZoneType.Library);
+                    final PlayerZone hand = player.getZone(ZoneType.Hand);
                     if (library.size() <= 0) {
                         return;
                     }
@@ -1454,10 +1453,10 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepSqueakingPieGrubfellows() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList kinship = player.getCardsIn(Zone.Battlefield, "Squeaking Pie Grubfellows");
+        final CardList kinship = player.getCardsIn(ZoneType.Battlefield, "Squeaking Pie Grubfellows");
         final Player opponent = player.getOpponent();
 
-        final PlayerZone library = player.getZone(Constant.Zone.Library);
+        final PlayerZone library = player.getZone(ZoneType.Library);
         // Players would not choose to trigger Kinship ability if library is
         // empty.
         // Useful for games when the "Milling = Loss Condition" check box is
@@ -1475,7 +1474,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 // abilities when ready
                 @Override
                 public void resolve() {
-                    final PlayerZone library = player.getZone(Constant.Zone.Library);
+                    final PlayerZone library = player.getZone(ZoneType.Library);
                     if (library.size() <= 0) {
                         return;
                     }
@@ -1540,9 +1539,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepWanderingGraybeard() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList kinship = player.getCardsIn(Zone.Battlefield, "Wandering Graybeard");
+        final CardList kinship = player.getCardsIn(ZoneType.Battlefield, "Wandering Graybeard");
 
-        final PlayerZone library = player.getZone(Constant.Zone.Library);
+        final PlayerZone library = player.getZone(ZoneType.Library);
         // Players would not choose to trigger Kinship ability if library is
         // empty.
         // Useful for games when the "Milling = Loss Condition" check box is
@@ -1560,7 +1559,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 // abilities when ready
                 @Override
                 public void resolve() {
-                    final PlayerZone library = player.getZone(Constant.Zone.Library);
+                    final PlayerZone library = player.getZone(ZoneType.Library);
                     if (library.size() <= 0) {
                         return;
                     }
@@ -1624,9 +1623,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepWaterspoutWeavers() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList kinship = player.getCardsIn(Zone.Battlefield, "Waterspout Weavers");
+        final CardList kinship = player.getCardsIn(ZoneType.Battlefield, "Waterspout Weavers");
 
-        final PlayerZone library = player.getZone(Constant.Zone.Library);
+        final PlayerZone library = player.getZone(ZoneType.Library);
         // Players would not choose to trigger Kinship ability if library is
         // empty.
         // Useful for games when the "Milling = Loss Condition" check box is
@@ -1644,7 +1643,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 // abilities when ready
                 @Override
                 public void resolve() {
-                    final PlayerZone library = player.getZone(Constant.Zone.Library);
+                    final PlayerZone library = player.getZone(ZoneType.Library);
                     if (library.size() <= 0) {
                         return;
                     }
@@ -1729,9 +1728,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepWinnowerPatrol() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList kinship = player.getCardsIn(Zone.Battlefield, "Winnower Patrol");
+        final CardList kinship = player.getCardsIn(ZoneType.Battlefield, "Winnower Patrol");
 
-        final PlayerZone library = player.getZone(Constant.Zone.Library);
+        final PlayerZone library = player.getZone(ZoneType.Library);
         // Players would not choose to trigger Kinship ability if library is
         // empty.
         // Useful for games when the "Milling = Loss Condition" check box is
@@ -1749,7 +1748,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 // abilities when ready
                 @Override
                 public void resolve() {
-                    final PlayerZone library = player.getZone(Constant.Zone.Library);
+                    final PlayerZone library = player.getZone(ZoneType.Library);
                     if (library.size() <= 0) {
                         return;
                     }
@@ -1813,9 +1812,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepWolfSkullShaman() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList kinship = player.getCardsIn(Zone.Battlefield, "Wolf-Skull Shaman");
+        final CardList kinship = player.getCardsIn(ZoneType.Battlefield, "Wolf-Skull Shaman");
 
-        final PlayerZone library = player.getZone(Constant.Zone.Library);
+        final PlayerZone library = player.getZone(ZoneType.Library);
         // Players would not choose to trigger Kinship ability if library is
         // empty.
         // Useful for games when the "Milling = Loss Condition" check box is
@@ -1833,7 +1832,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 // abilities when ready
                 @Override
                 public void resolve() {
-                    final PlayerZone library = player.getZone(Constant.Zone.Library);
+                    final PlayerZone library = player.getZone(ZoneType.Library);
                     if (library.size() <= 0) {
                         return;
                     }
@@ -1905,7 +1904,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
     private static void upkeepSuspend() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
-        CardList list = player.getCardsIn(Zone.Exile);
+        CardList list = player.getCardsIn(ZoneType.Exile);
 
         list = list.filter(new CardListFilter() {
             @Override
@@ -1934,7 +1933,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
     private static void upkeepVanishing() {
 
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        CardList list = player.getCardsIn(Zone.Battlefield);
+        CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -1971,7 +1970,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
     private static void upkeepFading() {
 
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        CardList list = player.getCardsIn(Zone.Battlefield);
+        CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -2011,7 +2010,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepOathOfDruids() {
-        final CardList oathList = AllZoneUtil.getCardsIn(Zone.Battlefield, "Oath of Druids");
+        final CardList oathList = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Oath of Druids");
         if (oathList.isEmpty()) {
             return;
         }
@@ -2024,8 +2023,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 final Ability ability = new Ability(oath, "0") {
                     @Override
                     public void resolve() {
-                        final CardList libraryList = player.getCardsIn(Zone.Library);
-                        final PlayerZone battlefield = player.getZone(Constant.Zone.Battlefield);
+                        final CardList libraryList = player.getCardsIn(ZoneType.Library);
+                        final PlayerZone battlefield = player.getZone(ZoneType.Battlefield);
                         boolean oathFlag = true;
 
                         if (AllZoneUtil.compareTypeAmountInPlay(player, "Creature") < 0) {
@@ -2037,8 +2036,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     oathFlag = false;
                                 }
                             } else { // if player == Computer
-                                final CardList creaturesInLibrary = player.getCardsIn(Zone.Library).getType("Creature");
-                                final CardList creaturesInBattlefield = player.getCardsIn(Zone.Battlefield).getType(
+                                final CardList creaturesInLibrary = player.getCardsIn(ZoneType.Library).getType("Creature");
+                                final CardList creaturesInBattlefield = player.getCardsIn(ZoneType.Battlefield).getType(
                                         "Creature");
 
                                 // if there are at least 3 creatures in library,
@@ -2093,7 +2092,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepOathOfGhouls() {
-        final CardList oathList = AllZoneUtil.getCardsIn(Zone.Battlefield, "Oath of Ghouls");
+        final CardList oathList = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Oath of Ghouls");
         if (oathList.isEmpty()) {
             return;
         }
@@ -2105,7 +2104,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 final Ability ability = new Ability(oathList.get(0), "0") {
                     @Override
                     public void resolve() {
-                        final CardList graveyardCreatures = player.getCardsIn(Zone.Graveyard).getType("Creature");
+                        final CardList graveyardCreatures = player.getCardsIn(ZoneType.Graveyard).getType("Creature");
 
                         if (AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0) {
                             if (player.isHuman()) {
@@ -2144,8 +2143,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepKarma() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList karmas = AllZoneUtil.getCardsIn(Zone.Battlefield, "Karma");
-        final CardList swamps = player.getCardsIn(Zone.Battlefield).getType("Swamp");
+        final CardList karmas = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Karma");
+        final CardList swamps = player.getCardsIn(ZoneType.Battlefield).getType("Swamp");
 
         // determine how much damage to deal the current player
         final int damage = swamps.size();
@@ -2189,7 +2188,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
          * controlled at the beginning of this turn.
          */
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield, "Power Surge");
+        final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Power Surge");
         final int damage = player.getNumPowerSurgeLands();
 
         for (final Card surge : list) {
@@ -2225,7 +2224,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
         final String keyword2 = "At the beginning of your upkeep, you may have this "
                 + "creature become a copy of another target creature. If you do, "
                 + "this creature gains this ability.";
-        CardList list = player.getCardsIn(Zone.Battlefield);
+        CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 return c.hasAnyKeyword(new String[] {keyword1, keyword2});
@@ -2298,7 +2297,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                             @Override
                             public void selectCard(final Card selectedCard, final PlayerZone z) {
-                                if (z.is(Constant.Zone.Battlefield) && selectedCard.isCreature()
+                                if (z.is(ZoneType.Battlefield) && selectedCard.isCreature()
                                         && selectedCard.canBeTargetedBy(switchTargets)) {
                                     newTarget[0] = selectedCard;
                                     final StringBuilder sb = new StringBuilder();
@@ -2329,14 +2328,14 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepTangleWire() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList wires = AllZoneUtil.getCardsIn(Zone.Battlefield, "Tangle Wire");
+        final CardList wires = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Tangle Wire");
 
         for (final Card source : wires) {
             final SpellAbility ability = new Ability(source, "0") {
                 @Override
                 public void resolve() {
                     final int num = source.getCounters(Counters.FADE);
-                    final CardList list = player.getCardsIn(Zone.Battlefield).filter(new CardListFilter() {
+                    final CardList list = player.getCardsIn(ZoneType.Battlefield).filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
                             return (c.isArtifact() || c.isLand() || c.isCreature()) && c.isUntapped();
@@ -2373,7 +2372,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                                 @Override
                                 public void selectCard(final Card card, final PlayerZone zone) {
-                                    if (zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer())
+                                    if (zone.is(ZoneType.Battlefield, AllZone.getHumanPlayer())
                                             && list.contains(card)) {
                                         card.tap();
                                         list.remove(card);
@@ -2403,7 +2402,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
     private static void upkeepBlazeCounters() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
-        CardList blaze = player.getCardsIn(Zone.Battlefield);
+        CardList blaze = player.getCardsIn(ZoneType.Battlefield);
         blaze = blaze.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -2502,7 +2501,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
     private static void upkeepCurseOfMisfortunes() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
-        final CardList misfortunes = player.getCardsIn(Zone.Battlefield, "Curse of Misfortunes");
+        final CardList misfortunes = player.getCardsIn(ZoneType.Battlefield, "Curse of Misfortunes");
 
         for (int i = 0; i < misfortunes.size(); i++) {
             final Card source = misfortunes.get(i);
@@ -2510,7 +2509,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final Ability ability = new Ability(source, "0") {
                 @Override
                 public void resolve() {
-                    CardList enchantmentsInLibrary = source.getController().getCardsIn(Zone.Library);
+                    CardList enchantmentsInLibrary = source.getController().getCardsIn(ZoneType.Library);
                     final CardList enchantmentsAttached = new CardList(source.getEnchantingPlayer().getEnchantedBy());
                     enchantmentsInLibrary = enchantmentsInLibrary.filter(new CardListFilter() {
                         @Override
@@ -2537,7 +2536,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     }
                     if (enchantment != null) {
                         GameAction.changeZone(AllZone.getZoneOf(enchantment),
-                                enchantment.getOwner().getZone(Constant.Zone.Battlefield), enchantment);
+                                enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment);
                         enchantment.enchantEntity(source.getEnchantingPlayer());
                     }
                     source.getController().shuffle();

@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import forge.Card;
-import forge.Constant;
 import forge.Counters;
 import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -239,7 +239,7 @@ public class Cost {
             parse = this.abUpdateParse(parse, Cost.EXILE_STR);
 
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, Constant.Zone.Battlefield));
+            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Battlefield));
         }
 
         while (parse.contains(Cost.EXILE_FROM_HAND_STR)) {
@@ -247,7 +247,7 @@ public class Cost {
             parse = this.abUpdateParse(parse, Cost.EXILE_FROM_HAND_STR);
 
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, Constant.Zone.Hand));
+            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Hand));
         }
 
         while (parse.contains(Cost.EXILE_FROM_GRAVE_STR)) {
@@ -255,7 +255,7 @@ public class Cost {
             parse = this.abUpdateParse(parse, Cost.EXILE_FROM_GRAVE_STR);
 
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, Constant.Zone.Graveyard));
+            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard));
         }
 
         while (parse.contains(Cost.EXILE_FROM_TOP_STR)) {
@@ -263,7 +263,7 @@ public class Cost {
             parse = this.abUpdateParse(parse, Cost.EXILE_FROM_TOP_STR);
 
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, Constant.Zone.Library));
+            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Library));
         }
 
         while (parse.contains(Cost.RETURN_STR)) {

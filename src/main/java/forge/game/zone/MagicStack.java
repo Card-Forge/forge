@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.zone;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +24,15 @@ import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.Constant.Zone;
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.Command;
+import forge.GameActionUtil;
+import forge.MyObservable;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
@@ -47,7 +55,6 @@ import forge.control.input.InputPayManaCostAbility;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.GuiUtils;
 import forge.view.ButtonUtil;
@@ -188,7 +195,7 @@ public class MagicStack extends MyObservable {
         // on the stack zone, move there
         if (ability.isSpell()) {
             final Card source = ability.getSourceCard();
-            if (!source.isCopiedSpell() && !source.isInZone(Constant.Zone.Stack)) {
+            if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
                 ability.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
             }
         }
@@ -765,7 +772,7 @@ public class MagicStack extends MyObservable {
 
                         @Override
                         public void selectCard(final Card c, final PlayerZone zone) {
-                            if (zone.is(Constant.Zone.Battlefield) && c.getController().isHuman() && c.isLand()) {
+                            if (zone.is(ZoneType.Battlefield) && c.getController().isHuman() && c.isLand()) {
                                 Singletons.getModel().getGameAction().sacrifice(c);
                                 this.stop();
                             }
@@ -802,9 +809,9 @@ public class MagicStack extends MyObservable {
          */
         if (sp.isSpell() && AllZoneUtil.isCardInPlay("Bazaar of Wonders")) {
             boolean found = false;
-            CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            CardList all = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             all = all.filter(CardListFilter.NON_TOKEN);
-            final CardList graves = AllZoneUtil.getCardsIn(Zone.Graveyard);
+            final CardList graves = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
             all.addAll(graves);
 
             for (final Card c : all) {
@@ -814,7 +821,7 @@ public class MagicStack extends MyObservable {
             }
 
             if (found) {
-                final CardList bazaars = AllZoneUtil.getCardsIn(Zone.Battlefield, "Bazaar of Wonders"); // should
+                final CardList bazaars = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Bazaar of Wonders"); // should
                 // only
                 // be
                 // 1...
@@ -921,7 +928,7 @@ public class MagicStack extends MyObservable {
         }
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
-                && AllZone.getZoneOf(source).is(Constant.Zone.Graveyard)) {
+                && AllZone.getZoneOf(source).is(ZoneType.Graveyard)) {
             final CardList creats = AllZoneUtil.getCreaturesInPlay();
             final Ability haunterDiesWork = new Ability(source, "0") {
                 @Override
@@ -950,7 +957,7 @@ public class MagicStack extends MyObservable {
 
                     @Override
                     public void selectCard(final Card c, final PlayerZone zone) {
-                        if (!zone.is(Constant.Zone.Battlefield) || !c.isCreature()) {
+                        if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
                             return;
                         }
                         if (c.canBeTargetedBy(haunterDiesWork)) {
@@ -1003,8 +1010,8 @@ public class MagicStack extends MyObservable {
             Singletons.getModel().getGameAction().exile(source);
             sa.setFlashBackAbility(false);
         } else if (source.hasKeyword("Rebound")
-                && source.getCastFrom() == Zone.Hand
-                && AllZone.getZoneOf(source).is(Zone.Stack)
+                && source.getCastFrom() == ZoneType.Hand
+                && AllZone.getZoneOf(source).is(ZoneType.Stack)
                 && source.getOwner().isPlayer(source.getController())) //This may look odd, but it's a provision for when we add Commandeer
         {
 
@@ -1073,7 +1080,7 @@ public class MagicStack extends MyObservable {
         // If Spell and still on the Stack then let it goto the graveyard or
         // replace its own movement
         else if (!source.isCopiedSpell() && (source.isInstant() || source.isSorcery() || fizzle)
-                && source.isInZone(Constant.Zone.Stack)) {
+                && source.isInZone(ZoneType.Stack)) {
             Singletons.getModel().getGameAction().moveToGraveyard(source);
         }
     }
@@ -1113,7 +1120,7 @@ public class MagicStack extends MyObservable {
         // verified by System.identityHashCode(card);
         final Card tmp = sa.getSourceCard();
         if (tmp.getClones().size() > 0) {
-            for (final Card c : AllZoneUtil.getCardsIn(Zone.Battlefield)) {
+            for (final Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
                 if (c.equals(tmp)) {
                     c.setClones(tmp.getClones());
                 }

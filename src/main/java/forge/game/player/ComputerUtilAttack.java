@@ -26,16 +26,15 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
-import forge.Constant;
 import forge.Counters;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
@@ -255,7 +254,7 @@ public class ComputerUtilAttack {
         final int humanExaltedBonus = this.countExaltedBonus(AllZone.getHumanPlayer());
 
         if (humanExaltedBonus > 0) {
-            final int nFinestHours = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size();
+            final int nFinestHours = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield, "Finest Hour").size();
 
             if (((blockersNeeded == 0) || (nFinestHours > 0)) && (this.humanList.size() > 0)) {
                 //
@@ -337,7 +336,7 @@ public class ComputerUtilAttack {
         // Beastmaster Ascension
         if (AllZoneUtil.isCardInPlay("Beastmaster Ascension", AllZone.getComputerPlayer())
                 && (this.attackers.size() > 1)) {
-            final CardList beastions = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Battlefield)
+            final CardList beastions = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield)
                     .getName("Beastmaster Ascension");
             int minCreatures = 7;
             for (final Card beastion : beastions) {
@@ -481,8 +480,8 @@ public class ComputerUtilAttack {
         if ((combat.getAttackers().isEmpty())
                 && ((this.countExaltedBonus(AllZone.getComputerPlayer()) >= 3)
                         || AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getComputerPlayer())
-                        || (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Battlegrace Angel").size() >= 2)
-                        || ((AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size() >= 1)
+                        || (AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Battlegrace Angel").size() >= 2)
+                        || ((AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Finest Hour").size() >= 1)
                                 && Singletons.getModel().getGameState().getPhaseHandler().isFirstCombat()))) {
             int biggest = 0;
             Card att = null;
@@ -729,7 +728,7 @@ public class ComputerUtilAttack {
      * @return a int.
      */
     public final int countExaltedBonus(final Player player) {
-        CardList list = player.getCardsIn(Zone.Battlefield);
+        CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {

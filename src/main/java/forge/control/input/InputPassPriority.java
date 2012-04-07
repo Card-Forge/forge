@@ -22,7 +22,7 @@ import forge.Card;
 import forge.Singletons;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
 import forge.gui.GuiDisplayUtil;
 import forge.view.ButtonUtil;
 

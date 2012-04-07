@@ -24,13 +24,13 @@ import java.util.Map;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * The Class StaticAbility.
@@ -384,12 +384,12 @@ public class StaticAbility {
 
         if (this.mapParams.containsKey("EffectZone")) {
             if (!this.mapParams.get("EffectZone").equals("All")
-                    && !Zone.listValueOf(this.mapParams.get("EffectZone"))
+                    && !ZoneType.listValueOf(this.mapParams.get("EffectZone"))
                         .contains(AllZone.getZoneOf(this.hostCard).getZoneType())) {
                 return false;
             }
         } else {
-            if (!this.hostCard.isInZone(Zone.Battlefield)) { // default
+            if (!this.hostCard.isInZone(ZoneType.Battlefield)) { // default
                 return false;
             }
         }
@@ -431,10 +431,10 @@ public class StaticAbility {
         }
 
         if (this.mapParams.containsKey("TopCardOfLibraryIs")) {
-            if (controller.getCardsIn(Zone.Library).isEmpty()) {
+            if (controller.getCardsIn(ZoneType.Library).isEmpty()) {
                 return false;
             }
-            final Card topCard = controller.getCardsIn(Zone.Library).get(0);
+            final Card topCard = controller.getCardsIn(ZoneType.Library).get(0);
             if (!topCard.isValid(this.mapParams.get("TopCardOfLibraryIs").split(","), controller, this.hostCard)) {
                 return false;
             }

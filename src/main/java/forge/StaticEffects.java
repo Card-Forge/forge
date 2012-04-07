@@ -23,12 +23,12 @@ import java.util.HashMap;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -318,7 +318,7 @@ public class StaticEffects {
     public final void rePopulateStateBasedList() {
         this.reset();
 
-        final CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         Log.debug("== Start add state effects ==");
         for (int i = 0; i < cards.size(); i++) {

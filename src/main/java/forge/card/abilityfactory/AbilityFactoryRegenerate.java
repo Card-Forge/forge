@@ -27,7 +27,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
 import forge.Command;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -40,6 +39,7 @@ import forge.card.spellability.Target;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -289,7 +289,7 @@ public class AbilityFactoryRegenerate {
         } else {
             tgt.resetTargets();
             // filter AIs battlefield by what I can target
-            CardList targetables = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+            CardList targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
 
             if (targetables.size() == 0) {
@@ -392,7 +392,7 @@ public class AbilityFactoryRegenerate {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        CardList targetables = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList targetables = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
         final CardList compTargetables = targetables.getController(AllZone.getComputerPlayer());
 
@@ -676,7 +676,7 @@ public class AbilityFactoryRegenerate {
             valid = params.get("ValidCards");
         }
 
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
 
         if (list.size() == 0) {
@@ -760,7 +760,7 @@ public class AbilityFactoryRegenerate {
             valid = params.get("ValidCards");
         }
 
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card c : list) {

@@ -21,11 +21,11 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.Constant;
 import forge.Singletons;
-import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 
 /**
@@ -53,7 +53,7 @@ public final class PlayerUtil {
      */
     public static boolean worshipFlag(final Player player) {
         // Instead of hardcoded Ali from Cairo like cards, it is now a Keyword
-        CardList list = player.getCardsIn(Zone.Battlefield);
+        CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.getKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.");
         list = list.filter(new CardListFilter() {
             @Override
@@ -88,7 +88,7 @@ public final class PlayerUtil {
 
             @Override
             public void showMessage() {
-                if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
+                if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
                     this.stop();
                 }
                 Singletons.getControl().getControlMatch().showMessage(
@@ -103,14 +103,14 @@ public final class PlayerUtil {
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (zone.is(Constant.Zone.Hand)) {
+                if (zone.is(ZoneType.Hand)) {
                     card.getController().discard(card, sp);
                     this.n++;
 
                     if (card.isType(uType.toString())) {
                         this.stop();
                     } else {
-                        if ((this.n == nCards) || (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0)) {
+                        if ((this.n == nCards) || (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0)) {
                             this.stop();
                         } else {
                             this.showMessage();
@@ -144,7 +144,7 @@ public final class PlayerUtil {
 
             @Override
             public void showMessage() {
-                if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
+                if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
                     this.stop();
                 }
                 if (nCards == 0) {
@@ -157,12 +157,12 @@ public final class PlayerUtil {
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (zone.is(Constant.Zone.Hand)) {
+                if (zone.is(ZoneType.Hand)) {
                     card.getController().discard(card, sp);
                     this.n++;
 
                     // in case no more cards in hand
-                    if ((this.n == nCards) || (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0)) {
+                    if ((this.n == nCards) || (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0)) {
                         this.stop();
                     } else {
                         this.showMessage();
@@ -186,7 +186,7 @@ public final class PlayerUtil {
 
             @Override
             public void showMessage() {
-                if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
+                if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
                     this.stop();
                 }
 
@@ -196,7 +196,7 @@ public final class PlayerUtil {
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (zone.is(Constant.Zone.Hand)) {
+                if (zone.is(ZoneType.Hand)) {
                     card.getController().discard(card, null);
                     this.done();
                 }
@@ -238,7 +238,7 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input inputSacrificePermanents(final int nCards) {
-        final CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        final CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
     } // input_sacrificePermanents()
 
@@ -255,7 +255,7 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input inputSacrificePermanents(final int nCards, final String type) {
-        CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
 
         list = list.getType(type);
         return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a " + type + " to sacrifice");
@@ -294,7 +294,7 @@ public final class PlayerUtil {
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (zone.equals(AllZone.getHumanPlayer().getZone(Zone.Battlefield)) && list.contains(card)) {
+                if (zone.equals(AllZone.getHumanPlayer().getZone(ZoneType.Battlefield)) && list.contains(card)) {
                     Singletons.getModel().getGameAction().sacrifice(card);
                     this.n++;
                     list.remove(card);
@@ -334,7 +334,7 @@ public final class PlayerUtil {
                 Singletons.getControl().getControlMatch().showMessage("Select a card to put on the " + topOrBottom + " of your library.");
                 ButtonUtil.disableAll();
 
-                if ((this.n == num) || (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0)) {
+                if ((this.n == num) || (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0)) {
                     this.stop();
                 }
             }
@@ -346,7 +346,7 @@ public final class PlayerUtil {
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (zone.is(Constant.Zone.Hand)) {
+                if (zone.is(ZoneType.Hand)) {
                     int position = 0;
                     if (topOrBottom.equalsIgnoreCase("bottom")) {
                         position = -1;

@@ -34,7 +34,6 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.control.input.Input;
@@ -44,7 +43,8 @@ import forge.control.input.InputMana;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostAbility;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.GuiUtils;
@@ -118,9 +118,9 @@ public class ControlField {
      * stats, etc.
      */
     public void addObservers() {
-        this.player.getZone(Zone.Hand).addObserver(observerZones);
+        this.player.getZone(ZoneType.Hand).addObserver(observerZones);
         this.player.addObserver(observerDetails);
-        this.player.getZone(Zone.Battlefield).addObserver(observerPlay);
+        this.player.getZone(ZoneType.Battlefield).addObserver(observerPlay);
     }
 
     /**
@@ -318,11 +318,11 @@ public class ControlField {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (!ControlField.this.player.isComputer()) {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Hand), HumanHand.BASE)
+                    new ZoneAction(ControlField.this.player.getZone(ZoneType.Hand), HumanHand.BASE)
                     .actionPerformed(null);
                 } else if (Constant.Runtime.DEV_MODE[0]
                         || ControlField.this.player.hasKeyword("Play with your hand revealed.")) {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Hand), ComputerHand.BASE)
+                    new ZoneAction(ControlField.this.player.getZone(ZoneType.Hand), ComputerHand.BASE)
                     .actionPerformed(null);
                 }
             }
@@ -333,7 +333,7 @@ public class ControlField {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (!ControlField.this.player.isComputer()) {
-                    new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard),
+                    new ZoneAction(AllZone.getHumanPlayer().getZone(ZoneType.Graveyard),
                             NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
 
                         private static final long serialVersionUID = 8120331222693706164L;
@@ -349,7 +349,7 @@ public class ControlField {
                         }
                     } .actionPerformed(null);
                 } else {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
+                    new ZoneAction(ControlField.this.player.getZone(ZoneType.Graveyard),
                             NewConstants.Lang.GuiDisplay.COMPUTER_FLASHBACK) {
 
                         private static final long serialVersionUID = 8120331222693706164L;
@@ -375,10 +375,10 @@ public class ControlField {
                 if (!Constant.Runtime.DEV_MODE[0]) { return; }
 
                 if (!ControlField.this.player.isComputer()) {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Library), HumanLibrary.BASE)
+                    new ZoneAction(ControlField.this.player.getZone(ZoneType.Library), HumanLibrary.BASE)
                     .actionPerformed(null);
                 } else {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Library), ComputerLibrary.BASE)
+                    new ZoneAction(ControlField.this.player.getZone(ZoneType.Library), ComputerLibrary.BASE)
                     .actionPerformed(null);
                 }
             }
@@ -389,10 +389,10 @@ public class ControlField {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Exile),
+                    new ZoneAction(ControlField.this.player.getZone(ZoneType.Exile),
                             NewConstants.Lang.GuiDisplay.COMPUTER_EXILED).actionPerformed(null);
                 } else {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Exile),
+                    new ZoneAction(ControlField.this.player.getZone(ZoneType.Exile),
                             NewConstants.Lang.GuiDisplay.HUMAN_EXILED).actionPerformed(null);
                 }
             }
@@ -403,10 +403,10 @@ public class ControlField {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
+                    new ZoneAction(ControlField.this.player.getZone(ZoneType.Graveyard),
                             NewConstants.Lang.GuiDisplay.COMPUTER_GRAVEYARD).actionPerformed(null);
                 } else {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
+                    new ZoneAction(ControlField.this.player.getZone(ZoneType.Graveyard),
                             NewConstants.Lang.GuiDisplay.HUMAN_GRAVEYARD).actionPerformed(null);
                 }
             }
@@ -449,7 +449,7 @@ public class ControlField {
 
                 final Input input = Singletons.getControl().getControlMatch().getMessageControl().getInputControl().getInput();
 
-                if (c != null && c.isInZone(Zone.Battlefield)) {
+                if (c != null && c.isInZone(ZoneType.Battlefield)) {
                     if (c.isTapped()
                             && ((input instanceof InputPayManaCost) || (input instanceof InputPayManaCostAbility))) {
                         final forge.view.arcane.CardPanel cardPanel = ControlField.this.view.getTabletop().getCardPanel(
@@ -492,12 +492,12 @@ public class ControlField {
                         if (c.getController() != null) {
                             Singletons.getControl().getControlMatch().getMessageControl()
                                     .getInputControl().selectCard(c,
-                                    c.getController().getZone(Zone.Battlefield));
+                                    c.getController().getZone(ZoneType.Battlefield));
                         } else {
                             //in weird case card has no controller revert to default behaviour
                             Singletons.getControl().getControlMatch().getMessageControl()
                                     .getInputControl().selectCard(c,
-                                    AllZone.getHumanPlayer().getZone(Zone.Battlefield));
+                                    AllZone.getHumanPlayer().getZone(ZoneType.Battlefield));
 
                         }
                     }

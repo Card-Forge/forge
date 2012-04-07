@@ -26,9 +26,9 @@ import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Singletons;
-import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 /**
@@ -132,7 +132,7 @@ public class AIPlayer extends Player {
     /** {@inheritDoc} */
     @Override
     public final CardList mayDrawCards(final int n) {
-        if (this.getCardsIn(Zone.Library).size() > n) {
+        if (this.getCardsIn(ZoneType.Library).size() > n) {
             return this.drawCards(n);
         } else {
             return new CardList();
@@ -156,12 +156,12 @@ public class AIPlayer extends Player {
             dredgers.shuffle();
             final Card c = dredgers.get(0);
             // rule 702.49a
-            if (this.getDredgeNumber(c) <= this.getCardsIn(Zone.Library).size()) {
+            if (this.getDredgeNumber(c) <= this.getCardsIn(ZoneType.Library).size()) {
                 // dredge library, put card in hand
                 Singletons.getModel().getGameAction().moveToHand(c);
                 // put dredge number in graveyard
                 for (int i = 0; i < this.getDredgeNumber(c); i++) {
-                    final Card c2 = this.getCardsIn(Zone.Library).get(0);
+                    final Card c2 = this.getCardsIn(ZoneType.Library).get(0);
                     Singletons.getModel().getGameAction().moveToGraveyard(c2);
                 }
                 return true;
@@ -179,7 +179,7 @@ public class AIPlayer extends Player {
     /** {@inheritDoc} */
     @Override
     public final CardList discard(final int num, final SpellAbility sa, final boolean duringResolution) {
-        int max = this.getCardsIn(Zone.Hand).size();
+        int max = this.getCardsIn(ZoneType.Hand).size();
         max = Math.min(max, num);
         final CardList discarded = ComputerUtil.discardNumTypeAI(max, null, sa);
         for (int i = 0; i < discarded.size(); i++) {
@@ -192,7 +192,7 @@ public class AIPlayer extends Player {
     /** {@inheritDoc} */
     @Override
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
-        final CardList hand = this.getCardsIn(Zone.Hand);
+        final CardList hand = this.getCardsIn(ZoneType.Hand);
         final CardList tHand = hand.getType(uType);
 
         if (tHand.size() > 0) {
@@ -227,9 +227,9 @@ public class AIPlayer extends Player {
                     position = -1;
                 }
             }
-            final CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+            final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
 
-            CardList blIP = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+            CardList blIP = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
             blIP = blIP.getType("Basic");
             if (blIP.size() > 5) {
@@ -261,7 +261,7 @@ public class AIPlayer extends Player {
         for (int i = 0; i < num; i++) {
             boolean bottom = false;
             if (topN.get(i).isBasicLand()) {
-                CardList bl = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                CardList bl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 bl = bl.filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
@@ -276,7 +276,7 @@ public class AIPlayer extends Player {
                 bottom = bl.size() > 5; // if control more than 5 Basic land,
                                         // probably don't need more
             } else if (topN.get(i).isCreature()) {
-                CardList cl = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                CardList cl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 cl = cl.filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {

@@ -20,8 +20,8 @@ package forge.card.spellability;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.Constant;
 import forge.game.phase.PhaseType;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -85,7 +85,7 @@ public class SpellAbilityVariables {
 
     // default values for Sorcery speed abilities
     /** The zone. */
-    private Constant.Zone zone = Constant.Zone.Battlefield;
+    private ZoneType zone = ZoneType.Battlefield;
 
     /** The phases. */
     private List<PhaseType> phases = new ArrayList<PhaseType>();
@@ -140,7 +140,7 @@ public class SpellAbilityVariables {
     private String presentDefined = null;
 
     /** The present zone. */
-    private Constant.Zone presentZone = Constant.Zone.Battlefield;
+    private ZoneType presentZone = ZoneType.Battlefield;
 
     /** The svar to check. */
     private String sVarToCheck = null;
@@ -246,7 +246,7 @@ public class SpellAbilityVariables {
      * @param zone
      *            a {@link java.lang.String} object.
      */
-    public final void setZone(final Constant.Zone zone) {
+    public final void setZone(final ZoneType zone) {
         this.zone = zone;
     }
 
@@ -257,7 +257,7 @@ public class SpellAbilityVariables {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final Constant.Zone getZone() {
+    public final ZoneType getZone() {
         return this.zone;
     }
 
@@ -533,7 +533,7 @@ public class SpellAbilityVariables {
      * 
      * @return the present zone
      */
-    public final Constant.Zone getPresentZone() {
+    public final ZoneType getPresentZone() {
         return this.presentZone;
     }
 
@@ -543,7 +543,7 @@ public class SpellAbilityVariables {
      * @param presentZone
      *            the new present zone
      */
-    public final void setPresentZone(final Constant.Zone presentZone) {
+    public final void setPresentZone(final ZoneType presentZone) {
         this.presentZone = presentZone;
     }
 

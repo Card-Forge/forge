@@ -35,12 +35,12 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.control.match.ControlField;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
@@ -291,11 +291,11 @@ public class ViewField extends FPanel {
      *            &emsp; Player obj
      */
     public void updateZones(final Player p0) {
-        this.getLblHand().setText("" + p0.getZone(Zone.Hand).size());
-        this.getLblGraveyard().setText("" + p0.getZone(Zone.Graveyard).size());
-        this.getLblLibrary().setText("" + p0.getZone(Zone.Library).size());
+        this.getLblHand().setText("" + p0.getZone(ZoneType.Hand).size());
+        this.getLblGraveyard().setText("" + p0.getZone(ZoneType.Graveyard).size());
+        this.getLblLibrary().setText("" + p0.getZone(ZoneType.Library).size());
         this.getLblFlashback().setText("" + CardFactoryUtil.getExternalZoneActivationCards(p0).size());
-        this.getLblExile().setText("" + p0.getZone(Zone.Exile).size());
+        this.getLblExile().setText("" + p0.getZone(ZoneType.Exile).size());
     }
 
     /**

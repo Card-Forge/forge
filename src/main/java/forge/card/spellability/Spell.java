@@ -23,8 +23,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
@@ -32,6 +30,7 @@ import forge.card.staticability.StaticAbility;
 import forge.error.ErrorViewer;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -59,7 +58,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
         this.setManaCost(sourceCard.getManaCost());
         this.setStackDescription(sourceCard.getSpellText());
-        this.getRestrictions().setZone(Constant.Zone.Hand);
+        this.getRestrictions().setZone(ZoneType.Hand);
     }
 
     /**
@@ -82,7 +81,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         this.setPayCosts(abCost);
         this.setTarget(abTgt);
         this.setStackDescription(sourceCard.getSpellText());
-        this.getRestrictions().setZone(Constant.Zone.Hand);
+        this.getRestrictions().setZone(ZoneType.Hand);
     }
 
     /** {@inheritDoc} */
@@ -116,7 +115,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         // CantBeCast static abilities
-        final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         allp.add(card);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
@@ -136,7 +135,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         final Card card = this.getSourceCard();
         if (card.getSVar("NeedsToPlay").length() > 0) {
             final String needsToPlay = card.getSVar("NeedsToPlay");
-            CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
             list = list.getValidCards(needsToPlay.split(","), card.getController(), card);
             if (list.isEmpty()) {

@@ -26,7 +26,7 @@ import forge.MyObservable;
 import forge.Singletons;
 import forge.control.input.Input;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
 
 /**
  * <p>
@@ -121,7 +121,7 @@ public class GuiInput extends MyObservable implements Observer {
      * @param card
      *            a {@link forge.Card} object.
      * @param zone
-     *            a {@link forge.game.player.PlayerZone} object.
+     *            a {@link forge.game.zone.PlayerZone} object.
      */
     public final void selectCard(final Card card, final PlayerZone zone) {
         this.getInput().selectCard(card, zone);

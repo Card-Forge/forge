@@ -37,7 +37,8 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityList;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostUtil;
-import forge.game.player.DefaultPlayerZone;
+import forge.game.zone.DefaultPlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiDisplayUtil;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
@@ -850,10 +851,10 @@ public final class CardUtil {
      *            a Card object
      * @return a CardList that matches the given criteria
      */
-    public static CardList getThisTurnEntered(final Constant.Zone to, final Constant.Zone from, final String valid,
+    public static CardList getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid,
             final Card src) {
         CardList res = new CardList();
-        if (to != Constant.Zone.Stack) {
+        if (to != ZoneType.Stack) {
             res.addAll(((DefaultPlayerZone) AllZone.getComputerPlayer().getZone(to)).getCardsAddedThisTurn(from));
             res.addAll(((DefaultPlayerZone) AllZone.getHumanPlayer().getZone(to)).getCardsAddedThisTurn(from));
         } else {

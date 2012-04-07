@@ -21,13 +21,13 @@ import java.util.HashMap;
 
 import forge.AllZoneUtil;
 import forge.CardList;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -78,7 +78,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (params.containsKey("ConditionZone")) {
-            this.setZone(Zone.smartValueOf(params.get("ContitionZone")));
+            this.setZone(ZoneType.smartValueOf(params.get("ContitionZone")));
         }
 
         if (params.containsKey("ConditionSorcerySpeed")) {
@@ -233,7 +233,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (this.getCardsInHand() != -1) {
             // Can handle Library of Alexandria, or Hellbent
-            if (activator.getCardsIn(Zone.Hand).size() != this.getCardsInHand()) {
+            if (activator.getCardsIn(ZoneType.Hand).size() != this.getCardsInHand()) {
                 return false;
             }
         }
@@ -243,7 +243,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (this.getPresentDefined() != null) {
                 list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), this.getPresentDefined(), sa));
             } else {
-                list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+                list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             }
 
             list = list.getValidCards(this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getSourceCard());

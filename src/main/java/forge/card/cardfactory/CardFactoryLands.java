@@ -25,8 +25,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -38,7 +36,8 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 import forge.view.ButtonUtil;
@@ -156,14 +155,14 @@ class CardFactoryLands {
                         return false;
                     }
                     this.inPlay.clear();
-                    this.inPlay.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
+                    this.inPlay.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield));
                     return (this.inPlay.filter(targets).size() > 1) && super.canPlayAI();
                 }
 
                 @Override
                 public void resolve() {
                     this.inPlay.clear();
-                    this.inPlay.addAll(AllZoneUtil.getCardsIn(Zone.Battlefield));
+                    this.inPlay.addAll(AllZoneUtil.getCardsIn(ZoneType.Battlefield));
                     for (final Card targ : this.inPlay.filter(targets)) {
                         targ.addCounter(Counters.P1P1, 1);
                     }
@@ -219,7 +218,7 @@ class CardFactoryLands {
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
-                                if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.isUntapped()) {
+                                if (c.isLand() && zone.is(ZoneType.Battlefield) && c.isUntapped()) {
                                     Singletons.getModel().getGameAction().sacrifice(c);
                                     if (paid[0] < 1) {
                                         paid[0]++;
@@ -273,7 +272,7 @@ class CardFactoryLands {
 
                 @Override
                 public void execute() {
-                    final CardList land = this.player.getCardsIn(Zone.Battlefield).getValidCards(type[0], this.player,
+                    final CardList land = this.player.getCardsIn(ZoneType.Battlefield).getValidCards(type[0], this.player,
                             card);
 
                     if (this.player.isComputer()) {
@@ -309,7 +308,7 @@ class CardFactoryLands {
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
-                                if (c.isLand() && zone.is(Zone.Battlefield) && land.contains(c)) {
+                                if (c.isLand() && zone.is(ZoneType.Battlefield) && land.contains(c)) {
                                     Singletons.getModel().getGameAction().sacrifice(c);
                                     this.stop();
                                 }
@@ -337,7 +336,7 @@ class CardFactoryLands {
                 @Override
                 public void execute() {
                     final Player player = card.getController();
-                    final CardList land = player.getCardsIn(Zone.Battlefield, "Sheltered Valley");
+                    final CardList land = player.getCardsIn(ZoneType.Battlefield, "Sheltered Valley");
                     land.remove(card);
 
                     if (land.size() > 0) {
@@ -402,7 +401,7 @@ class CardFactoryLands {
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
-                                if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.isUntapped()) {
+                                if (c.isLand() && zone.is(ZoneType.Battlefield) && c.isUntapped()) {
                                     Singletons.getModel().getGameAction().sacrifice(c);
                                     if (paid[0] < 1) {
                                         paid[0]++;
@@ -467,7 +466,7 @@ class CardFactoryLands {
                 }
 
                 public void computerExecute() {
-                    CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+                    CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
                     hand = hand.getType(type);
                     if (hand.size() > 0) {
                         this.revealCard(hand.get(0));
@@ -490,7 +489,7 @@ class CardFactoryLands {
 
                         @Override
                         public void selectCard(final Card c, final PlayerZone zone) {
-                            if (zone.is(Constant.Zone.Hand) && c.isType(type)) {
+                            if (zone.is(ZoneType.Hand) && c.isType(type)) {
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append("Revealed card: ").append(c.getName());
                                 JOptionPane.showMessageDialog(null, sb.toString(), card.getName(),
@@ -682,7 +681,7 @@ class CardFactoryLands {
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
-                                if (c.isLand() && zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer())
+                                if (c.isLand() && zone.is(ZoneType.Battlefield, AllZone.getHumanPlayer())
                                         && !c.isType("Lair")) {
                                     Singletons.getModel().getGameAction().moveToHand(c);
                                     this.stop();
@@ -720,7 +719,7 @@ class CardFactoryLands {
                     final Player player = card.getController();
                     final StringBuilder sb = new StringBuilder();
                     sb.append(type[0]).append(".untapped");
-                    final CardList land = player.getCardsIn(Zone.Battlefield)
+                    final CardList land = player.getCardsIn(ZoneType.Battlefield)
                             .getValidCards(sb.toString(), player, card);
 
                     if (player.isComputer()) {
@@ -751,7 +750,7 @@ class CardFactoryLands {
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
-                                if (zone.is(Constant.Zone.Battlefield) && land.contains(c)) {
+                                if (zone.is(ZoneType.Battlefield) && land.contains(c)) {
                                     Singletons.getModel().getGameAction().moveToHand(c);
                                     this.stop();
                                 }

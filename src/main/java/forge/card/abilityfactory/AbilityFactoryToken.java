@@ -25,7 +25,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -40,6 +39,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 /**
@@ -274,7 +274,7 @@ public class AbilityFactoryToken extends AbilityFactory {
         for (final String type : this.tokenTypes) {
             if (type.equals("Legendary")) {
                 // Don't kill AIs Legendary tokens
-                if (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, this.tokenName).size() > 0) {
+                if (AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, this.tokenName).size() > 0) {
                     return false;
                 }
             }

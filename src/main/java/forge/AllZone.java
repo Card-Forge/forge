@@ -20,7 +20,6 @@ package forge;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.cardfactory.PreloadingCardFactory;
 import forge.card.replacement.ReplacementHandler;
@@ -30,7 +29,9 @@ import forge.game.GameState;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfTurn;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.MagicStack;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
@@ -226,7 +227,7 @@ public final class AllZone {
      * 
      * Will eventually be marked deprecated.
      * 
-     * @return a {@link forge.MagicStack} object.
+     * @return a {@link forge.game.zone.MagicStack} object.
      * @since 1.0.15
      */
     public static MagicStack getStack() {
@@ -333,7 +334,7 @@ public final class AllZone {
      * 
      * Will eventually be marked deprecated.
      * 
-     * @return a {@link forge.game.player.PlayerZone} object.
+     * @return a {@link forge.game.zone.PlayerZone} object.
      * @since 1.0.15
      */
     public static PlayerZone getStackZone() {
@@ -347,7 +348,7 @@ public final class AllZone {
      * 
      * @param c
      *            a {@link forge.Card} object.
-     * @return a {@link forge.game.player.PlayerZone} object.
+     * @return a {@link forge.game.zone.PlayerZone} object.
      */
     public static PlayerZone getZoneOf(final Card c) {
         final GameState gameState = Singletons.getModel().getGameState();
@@ -360,7 +361,7 @@ public final class AllZone {
         }
 
         for (final Player p : gameState.getPlayers()) {
-            for (final Zone z : Player.ALL_ZONES) {
+            for (final ZoneType z : Player.ALL_ZONES) {
                 final PlayerZone pz = p.getZone(z);
                 if (pz.contains(c)) {
                     return pz;
@@ -381,13 +382,13 @@ public final class AllZone {
      *            Constant.Zone
      * @return boolean
      */
-    public static boolean isCardInZone(final Card c, final Constant.Zone zone) {
+    public static boolean isCardInZone(final Card c, final ZoneType zone) {
         final GameState gameState = Singletons.getModel().getGameState();
         if (gameState == null) {
             return false;
         }
 
-        if (zone.equals(Constant.Zone.Stack)) {
+        if (zone.equals(ZoneType.Stack)) {
             if (gameState.getStackZone().contains(c)) {
                 return true;
             }
@@ -413,7 +414,7 @@ public final class AllZone {
             return;
         }
         for (final Player p : gameState.getPlayers()) {
-            for (final Zone z : Player.ALL_ZONES) {
+            for (final ZoneType z : Player.ALL_ZONES) {
                 p.getZone(z).resetCardsAddedThisTurn();
             }
         }

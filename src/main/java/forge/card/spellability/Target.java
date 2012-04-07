@@ -24,9 +24,9 @@ import java.util.List;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.Constant;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -240,7 +240,7 @@ public class Target {
         return (this.choice != null) && (this.getMinTargets(c, sa) <= this.choice.getNumTargeted());
     }
 
-    private List<Constant.Zone> tgtZone = Arrays.asList(Constant.Zone.Battlefield);
+    private List<ZoneType> tgtZone = Arrays.asList(ZoneType.Battlefield);
 
     /**
      * <p>
@@ -250,7 +250,7 @@ public class Target {
      * @param tZone
      *            a {@link java.lang.String} object.
      */
-    public final void setZone(final Constant.Zone tZone) {
+    public final void setZone(final ZoneType tZone) {
         this.tgtZone = Arrays.asList(tZone);
     }
 
@@ -260,7 +260,7 @@ public class Target {
      * @param tZone
      *            the new zone
      */
-    public final void setZone(final List<Constant.Zone> tZone) {
+    public final void setZone(final List<ZoneType> tZone) {
         this.tgtZone = tZone;
     }
 
@@ -271,7 +271,7 @@ public class Target {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final List<Constant.Zone> getZone() {
+    public final List<ZoneType> getZone() {
         return this.tgtZone;
     }
 

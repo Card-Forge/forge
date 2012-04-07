@@ -20,11 +20,11 @@ package forge.control.input;
 import forge.AllZone;
 import forge.Card;
 import forge.Command;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 
 //if cost is paid, Command.execute() is called
@@ -155,7 +155,7 @@ public class InputPayManaCostAbility extends InputMana {
         // only tap card if the mana is needed
         this.manaCost = InputPayManaCostUtil.activateManaAbility(this.fakeAbility, card, this.manaCost);
 
-        if (card.getManaAbility().isEmpty() || card.isInZone(Zone.Hand)) {
+        if (card.getManaAbility().isEmpty() || card.isInZone(ZoneType.Hand)) {
             Singletons.getControl().getControlMatch().getMessageControl().remind();
         }
 

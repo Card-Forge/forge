@@ -48,13 +48,13 @@ import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.CardList;
 import forge.CardUtil;
-import forge.Constant.Zone;
 import forge.GameLog;
-import forge.MagicStack;
 import forge.Singletons;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.match.ControlTabber;
 import forge.game.player.Player;
+import forge.game.zone.MagicStack;
+import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction;
 import forge.gui.MultiLineLabelUI;
 import forge.gui.toolbox.FSkin;
@@ -414,7 +414,7 @@ public class ViewTabber extends JPanel {
             temp[5].setText("");
         }
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-            CardList list = p0.getCardsIn(Zone.Ante);
+            CardList list = p0.getCardsIn(ZoneType.Ante);
             StringBuilder sb = new StringBuilder();
             sb.append("Ante'd: ");
             for (int i = 0; i < list.size(); i++) {

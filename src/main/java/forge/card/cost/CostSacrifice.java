@@ -22,14 +22,14 @@ import javax.swing.JOptionPane;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 
 /**
@@ -98,7 +98,7 @@ public class CostSacrifice extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         // You can always sac all
         if (!this.getThis()) {
-            CardList typeList = activator.getCardsIn(Zone.Battlefield);
+            CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
             typeList = typeList.getValidCards(this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
@@ -143,7 +143,7 @@ public class CostSacrifice extends CostPartWithList {
         final String amount = this.getAmount();
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
-        CardList list = activator.getCardsIn(Zone.Battlefield);
+        CardList list = activator.getCardsIn(ZoneType.Battlefield);
         list = list.getValidCards(type.split(";"), activator, source);
 
         if (this.getThis()) {
@@ -188,7 +188,7 @@ public class CostSacrifice extends CostPartWithList {
         if (this.getThis()) {
             this.getList().add(source);
         } else if (this.getAmount().equals("All")) {
-            CardList typeList = activator.getCardsIn(Zone.Battlefield);
+            CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
             typeList = typeList.getValidCards(this.getType().split(","), activator, source);
             // Does the AI want to use Sacrifice All?
             return false;

@@ -24,8 +24,6 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -33,7 +31,8 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.view.ButtonUtil;
 
@@ -46,14 +45,14 @@ public class CostExile extends CostPartWithList {
     // ExileFromGraveyard<Num/Type{/TypeDescription}>
     // ExileFromTop<Num/Type{/TypeDescription}> (of library)
 
-    private Constant.Zone from = Constant.Zone.Battlefield;
+    private ZoneType from = ZoneType.Battlefield;
 
     /**
      * Gets the from.
      * 
      * @return the from
      */
-    public final Constant.Zone getFrom() {
+    public final ZoneType getFrom() {
         return this.from;
     }
 
@@ -69,7 +68,7 @@ public class CostExile extends CostPartWithList {
      * @param from
      *            the from
      */
-    public CostExile(final String amount, final String type, final String description, final Constant.Zone from) {
+    public CostExile(final String amount, final String type, final String description, final ZoneType from) {
         super(amount, type, description);
         if (from != null) {
             this.from = from;
@@ -89,13 +88,13 @@ public class CostExile extends CostPartWithList {
 
         if (this.getThis()) {
             sb.append(this.getType());
-            if (!this.from.equals(Zone.Battlefield)) {
+            if (!this.from.equals(ZoneType.Battlefield)) {
                 sb.append(" from your ").append(this.from);
             }
             return sb.toString();
         }
 
-        if (this.from.equals(Zone.Battlefield)) {
+        if (this.from.equals(ZoneType.Battlefield)) {
             final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
 
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
@@ -199,9 +198,9 @@ public class CostExile extends CostPartWithList {
         }
         if (this.getThis()) {
             CostUtil.setInput(CostExile.exileThis(ability, payment, this));
-        } else if (this.from.equals(Constant.Zone.Battlefield) || this.from.equals(Constant.Zone.Hand)) {
+        } else if (this.from.equals(ZoneType.Battlefield) || this.from.equals(ZoneType.Hand)) {
             CostUtil.setInput(CostExile.exileType(ability, this, this.getType(), payment, c));
-        } else if (this.from.equals(Constant.Zone.Library)) {
+        } else if (this.from.equals(ZoneType.Library)) {
             CostExile.exileFromTop(ability, this, payment, c);
         } else {
             CostUtil.setInput(CostExile.exileFrom(ability, this, this.getType(), payment, c));
@@ -237,8 +236,8 @@ public class CostExile extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
 
-            if (this.from.equals(Constant.Zone.Library)) {
-                this.setList(AllZone.getComputerPlayer().getCardsIn(Zone.Library, c));
+            if (this.from.equals(ZoneType.Library)) {
+                this.setList(AllZone.getComputerPlayer().getCardsIn(ZoneType.Library, c));
             } else {
                 this.setList(ComputerUtil.chooseExileFrom(this.getFrom(), this.getType(), source,
                         ability.getTargetCard(), c));
@@ -268,7 +267,7 @@ public class CostExile extends CostPartWithList {
             final int nNeeded) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Exile ").append(nNeeded).append(" cards from the top of your library?");
-        final CardList list = sa.getActivatingPlayer().getCardsIn(Zone.Library, nNeeded);
+        final CardList list = sa.getActivatingPlayer().getCardsIn(ZoneType.Library, nNeeded);
 
         if (list.size() > nNeeded) {
             // I don't believe this is possible
@@ -403,7 +402,7 @@ public class CostExile extends CostPartWithList {
                     msg.append("s");
                 }
 
-                if (part.getFrom().equals(Constant.Zone.Hand)) {
+                if (part.getFrom().equals(ZoneType.Hand)) {
                     msg.append(" from your Hand");
                 }
                 this.typeList = sa.getActivatingPlayer().getCardsIn(part.getFrom());

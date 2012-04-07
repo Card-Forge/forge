@@ -33,7 +33,6 @@ import java.util.TreeMap;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.Constant.Zone;
 import forge.card.CardCharacteristics;
 import forge.card.EditionInfo;
 import forge.card.abilityfactory.AbilityFactory;
@@ -53,6 +52,7 @@ import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.item.CardDb;
 import forge.util.MyRandom;
 
@@ -82,7 +82,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean isFlip = false;
     private CardCharactersticName otherTransformable = null;
 
-    private Zone castFrom = null;
+    private ZoneType castFrom = null;
 
     private final CardDamageHistory damageHistory = new CardDamageHistory();
     private Map<Counters, Integer> counters = new TreeMap<Counters, Integer>();
@@ -5497,7 +5497,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isSpell() {
-        return (this.isInstant() || this.isSorcery() || (this.isAura() && !AllZoneUtil.getCardsIn(Zone.Battlefield)
+        return (this.isInstant() || this.isSorcery() || (this.isAura() && !AllZoneUtil.getCardsIn(ZoneType.Battlefield)
                 .contains(this)));
     }
 
@@ -6470,7 +6470,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("ControllerControls")) {
             final String type = property.substring(18);
-            final CardList list = this.getController().getCardsIn(Zone.Battlefield);
+            final CardList list = this.getController().getCardsIn(ZoneType.Battlefield);
             if (list.getType(type).isEmpty()) {
                 return false;
             }
@@ -6526,31 +6526,31 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("Above")) { // "Are Above" Source
-            final CardList list = this.getOwner().getCardsIn(Zone.Graveyard);
+            final CardList list = this.getOwner().getCardsIn(ZoneType.Graveyard);
             if (!list.getAbove(source, this)) {
                 return false;
             }
         } else if (property.startsWith("DirectlyAbove")) { // "Are Directly Above"
                                                            // Source
-            final CardList list = this.getOwner().getCardsIn(Zone.Graveyard);
+            final CardList list = this.getOwner().getCardsIn(ZoneType.Graveyard);
             if (!list.getDirectlyAbove(source, this)) {
                 return false;
             }
         } else if (property.startsWith("TopGraveyardCreature")) {
-            CardList list = this.getOwner().getCardsIn(Zone.Graveyard);
+            CardList list = this.getOwner().getCardsIn(ZoneType.Graveyard);
             list = list.getType("Creature");
             list.reverse();
             if (list.isEmpty() || !this.equals(list.get(0))) {
                 return false;
             }
         } else if (property.startsWith("TopGraveyard")) {
-            final CardList list = this.getOwner().getCardsIn(Zone.Graveyard);
+            final CardList list = this.getOwner().getCardsIn(ZoneType.Graveyard);
             list.reverse();
             if (list.isEmpty() || !this.equals(list.get(0))) {
                 return false;
             }
         } else if (property.startsWith("TopLibrary")) {
-            final CardList list = this.getOwner().getCardsIn(Zone.Library);
+            final CardList list = this.getOwner().getCardsIn(ZoneType.Library);
             if (list.isEmpty() || !this.equals(list.get(0))) {
                 return false;
             }
@@ -6574,7 +6574,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else {
                 final String restriction = property.split("SharesColorWith ")[1];
                 if (restriction.equals("TopCardOfLibrary")) {
-                    final CardList list = sourceController.getCardsIn(Zone.Library);
+                    final CardList list = sourceController.getCardsIn(ZoneType.Library);
                     if (list.isEmpty() || !this.sharesColorWith(list.get(0))) {
                         return false;
                     }
@@ -6586,7 +6586,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 } else {
                     boolean shares = false;
-                    for (final Card card : sourceController.getCardsIn(Constant.Zone.Battlefield)) {
+                    for (final Card card : sourceController.getCardsIn(ZoneType.Battlefield)) {
                         if (card.isValid(restriction, sourceController, source) && this.sharesColorWith(card)) {
                             shares = true;
                         }
@@ -6604,7 +6604,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else {
                 final String restriction = property.split("sharesCreatureTypeWith ")[1];
                 if (restriction.equals("TopCardOfLibrary")) {
-                    final CardList list = sourceController.getCardsIn(Zone.Library);
+                    final CardList list = sourceController.getCardsIn(ZoneType.Library);
                     if (list.isEmpty() || !this.sharesCreatureTypeWith(list.get(0))) {
                         return false;
                     }
@@ -6623,7 +6623,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 } else {
                     boolean shares = false;
-                    for (final Card card : sourceController.getCardsIn(Constant.Zone.Battlefield)) {
+                    for (final Card card : sourceController.getCardsIn(ZoneType.Battlefield)) {
                         if (card.isValid(restriction, sourceController, source) && this.sharesCreatureTypeWith(card)) {
                             shares = true;
                         }
@@ -6636,12 +6636,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("sharesNameWith")) {
             final String restriction = property.split("sharesNameWith ")[1];
             if (restriction.equals("YourGraveyard")) {
-                final CardList list = sourceController.getCardsIn(Zone.Graveyard);
+                final CardList list = sourceController.getCardsIn(ZoneType.Graveyard);
                 if (list.isEmpty())  {
                     return false;
                 }
                 boolean shares = false;
-                for (final Card card : sourceController.getCardsIn(Constant.Zone.Graveyard)) {
+                for (final Card card : sourceController.getCardsIn(ZoneType.Graveyard)) {
                     if (this.getName().equals(card.getName())) {
                         shares = true;
                     }
@@ -6649,13 +6649,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (!shares) {
                     return false;
                }
-            } else if (restriction.equals(Constant.Zone.Battlefield.toString())) {
-                final CardList list = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
+            } else if (restriction.equals(ZoneType.Battlefield.toString())) {
+                final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
                 if (list.isEmpty()) {
                     return false;
                 }
                 boolean shares = false;
-                for (final Card card : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
+                for (final Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
                     if (this.getName().equals(card.getName())) {
                         shares = true;
                     }
@@ -6822,7 +6822,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.startsWith("lowestCMC")) {
-            final CardList list = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
+            final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             for (final Card crd : list) {
                 if (!crd.isLand() && !crd.isImmutable() && (crd.getCMC() < this.getCMC())) {
                     return false;
@@ -7048,13 +7048,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("wasCastFrom")) {
             final String strZone = property.substring(11);
-            final Zone realZone = Constant.Zone.smartValueOf(strZone);
+            final ZoneType realZone = ZoneType.smartValueOf(strZone);
             if (realZone != this.getCastFrom()) {
                 return false;
             }
         } else if (property.startsWith("wasNotCastFrom")) {
             final String strZone = property.substring(14);
-            final Zone realZone = Constant.Zone.smartValueOf(strZone);
+            final ZoneType realZone = ZoneType.smartValueOf(strZone);
             if (realZone == this.getCastFrom()) {
                 return false;
             }
@@ -7814,7 +7814,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Prevent Damage static abilities
-        final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
@@ -7923,7 +7923,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         int restDamage = damage;
 
         if (AllZoneUtil.isCardInPlay("Sulfuric Vapors") && source.isSpell() && source.isRed()) {
-            final int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Sulfuric Vapors").size();
+            final int amount = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Sulfuric Vapors").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += 1;
             }
@@ -7931,14 +7931,14 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (AllZoneUtil.isCardInPlay("Pyromancer's Swath", source.getController())
                 && (source.isInstant() || source.isSorcery()) && this.isCreature()) {
-            final int amount = source.getController().getCardsIn(Zone.Battlefield, "Pyromancer's Swath").size();
+            final int amount = source.getController().getCardsIn(ZoneType.Battlefield, "Pyromancer's Swath").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += 2;
             }
         }
 
         if (AllZoneUtil.isCardInPlay("Furnace of Rath") && this.isCreature()) {
-            final int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Furnace of Rath").size();
+            final int amount = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Furnace of Rath").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
             }
@@ -7946,7 +7946,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) && source.isCreature()
                 && this.isCreature()) {
-            final int amount = source.getController().getCardsIn(Zone.Battlefield, "Gratuitous Violence").size();
+            final int amount = source.getController().getCardsIn(ZoneType.Battlefield, "Gratuitous Violence").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
             }
@@ -7954,14 +7954,14 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (AllZoneUtil.isCardInPlay("Fire Servant", source.getController()) && source.isRed()
                 && (source.isInstant() || source.isSorcery())) {
-            final int amount = source.getController().getCardsIn(Zone.Battlefield, "Fire Servant").size();
+            final int amount = source.getController().getCardsIn(ZoneType.Battlefield, "Fire Servant").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
             }
         }
 
         if (AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell() && this.isCreature()) {
-            final int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Benevolent Unicorn").size();
+            final int amount = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Benevolent Unicorn").size();
             for (int i = 0; i < amount; i++) {
                 if (restDamage > 0) {
                     restDamage -= 1;
@@ -7970,7 +7970,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (AllZoneUtil.isCardInPlay("Lashknife Barrier", this.getController()) && this.isCreature()) {
-            final int amount = this.getController().getCardsIn(Zone.Battlefield, "Lashknife Barrier").size();
+            final int amount = this.getController().getCardsIn(ZoneType.Battlefield, "Lashknife Barrier").size();
             for (int i = 0; i < amount; i++) {
                 if (restDamage > 0) {
                     restDamage -= 1;
@@ -8523,7 +8523,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            Constant.Zone
      * @return boolean
      */
-    public boolean isInZone(final Constant.Zone zone) {
+    public boolean isInZone(final ZoneType zone) {
         return AllZone.isCardInZone(this, zone);
     }
 
@@ -8542,7 +8542,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // CantTarget static abilities
-        final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
@@ -8553,7 +8553,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // keywords don't work outside battlefield
-        if (!this.isInZone(Constant.Zone.Battlefield)) {
+        if (!this.isInZone(ZoneType.Battlefield)) {
             return true;
         }
 
@@ -8685,7 +8685,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return the castFrom
      */
-    public Zone getCastFrom() {
+    public ZoneType getCastFrom() {
         return this.castFrom;
     }
 
@@ -8693,7 +8693,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param castFrom0
      *            the castFrom to set
      */
-    public void setCastFrom(final Zone castFrom0) {
+    public void setCastFrom(final ZoneType castFrom0) {
         this.castFrom = castFrom0;
     }
 

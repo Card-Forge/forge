@@ -27,7 +27,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -41,6 +40,7 @@ import forge.card.spellability.TargetSelection;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 /**
@@ -434,7 +434,7 @@ public class AbilityFactoryDealDamage {
             return false;
         }
 
-        final CardList hand = comp.getCardsIn(Zone.Hand);
+        final CardList hand = comp.getCardsIn(ZoneType.Hand);
 
         if (this.abilityFactory.isSpell()) {
             // If this is a spell, cast it instead of discarding
@@ -473,7 +473,7 @@ public class AbilityFactoryDealDamage {
         final Target tgt = saMe.getTarget();
         final Card source = saMe.getSourceCard();
         final HashMap<String, String> params = this.abilityFactory.getMapParams();
-        CardList hPlay = pl.getCardsIn(Zone.Battlefield);
+        CardList hPlay = pl.getCardsIn(ZoneType.Battlefield);
         hPlay = hPlay.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
 
         final ArrayList<Object> objects = tgt.getTargets();
@@ -1140,7 +1140,7 @@ public class AbilityFactoryDealDamage {
         }
 
         // TODO: X may be something different than X paid
-        CardList list = player.getCardsIn(Zone.Battlefield);
+        CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.getValidCards(validC.split(","), source.getController(), source);
 
         final CardListFilter filterKillable = new CardListFilter() {
@@ -1265,7 +1265,7 @@ public class AbilityFactoryDealDamage {
         }
 
         if (params.containsKey("ValidCards")) {
-            list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         }
 
         if (targetPlayer != null) {
@@ -1498,7 +1498,7 @@ public class AbilityFactoryDealDamage {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
 
-        CardList sources = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList sources = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         if (params.containsKey("ValidCards")) {
             sources = sources.getValidCards(params.get("ValidCards"), card.getController(), card);
         }

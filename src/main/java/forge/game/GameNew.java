@@ -14,7 +14,6 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Constant;
-import forge.Constant.Zone;
 import forge.GameAction;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
@@ -23,6 +22,7 @@ import forge.control.input.InputMulligan;
 import forge.deck.Deck;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
@@ -67,12 +67,12 @@ public class GameNew {
         AllZone.getHumanPlayer().updateObservers();
 
         for (final Card c : human) {
-            AllZone.getHumanPlayer().getZone(Zone.Battlefield).add(c);
+            AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).add(c);
             c.setSickness(true);
         }
 
         for (final Card c : computer) {
-            AllZone.getComputerPlayer().getZone(Zone.Battlefield).add(c);
+            AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).add(c);
             c.setSickness(true);
         }
 
@@ -139,7 +139,7 @@ public class GameNew {
                         && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
                     hAnteRemoved.add(card.getName());
                 } else {
-                    AllZone.getHumanPlayer().getZone(Zone.Library).add(card);
+                    AllZone.getHumanPlayer().getZone(ZoneType.Library).add(card);
                 }
             }
         }
@@ -165,7 +165,7 @@ public class GameNew {
                         && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
                     cAnteRemoved.add(card.getName());
                 } else {
-                    AllZone.getComputerPlayer().getZone(Zone.Library).add(card);
+                    AllZone.getComputerPlayer().getZone(ZoneType.Library).add(card);
                 }
 
                 if (card.getSVar("RemAIDeck").equals("True") && !rAICards.contains(card.getName())) {
@@ -230,12 +230,12 @@ public class GameNew {
         final boolean smoothLand = Constant.Runtime.SMOOTH[0];
 
         if (smoothLand) {
-            final Iterable<Card> c1 = GameNew.smoothComputerManaCurve(AllZone.getComputerPlayer().getCardsIn(Zone.Library));
-            AllZone.getComputerPlayer().getZone(Zone.Library).setCards(c1);
+            final Iterable<Card> c1 = GameNew.smoothComputerManaCurve(AllZone.getComputerPlayer().getCardsIn(ZoneType.Library));
+            AllZone.getComputerPlayer().getZone(ZoneType.Library).setCards(c1);
         } else {
             // WTF? (it was so before refactor)
-            AllZone.getComputerPlayer().getZone(Zone.Library)
-                    .setCards(AllZone.getComputerPlayer().getCardsIn(Zone.Library));
+            AllZone.getComputerPlayer().getZone(ZoneType.Library)
+                    .setCards(AllZone.getComputerPlayer().getCardsIn(ZoneType.Library));
             AllZone.getComputerPlayer().shuffle();
         }
 
@@ -257,7 +257,7 @@ public class GameNew {
             final String nl = System.getProperty("line.separator");
             final StringBuilder msg = new StringBuilder();
             for (final Player p : AllZone.getPlayersInGame()) {
-                final CardList lib = p.getCardsIn(Zone.Library);
+                final CardList lib = p.getCardsIn(ZoneType.Library);
                 Card ante;
                 if ((lib.size() > 0) && (lib.getNotType("Basic").size() > 1)) {
                     ante = CardUtil.getRandom(lib.toArray());
@@ -270,7 +270,7 @@ public class GameNew {
                     throw new RuntimeException(p + " library is empty.");
                 }
                 AllZone.getGameLog().add("Ante", p + " anted " + ante, 0);
-                Singletons.getModel().getGameAction().moveTo(Zone.Ante, ante);
+                Singletons.getModel().getGameAction().moveTo(ZoneType.Ante, ante);
                 msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
             }
             JOptionPane.showMessageDialog(null, msg, "Ante", JOptionPane.INFORMATION_MESSAGE);
@@ -281,7 +281,7 @@ public class GameNew {
             AllZone.getComputerPlayer().drawCard();
         }
 
-        Singletons.getControl().getControlMatch().setCard(AllZone.getHumanPlayer().getCardsIn(Zone.Hand).get(0));
+        Singletons.getControl().getControlMatch().setCard(AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).get(0));
 
         AllZone.getInputControl().setInput(new InputMulligan());
         PhaseHandler.setGameBegins(1); // is this needed? It's already in InputMulligan...
@@ -307,7 +307,7 @@ public class GameNew {
         gs.setGameOver(false);
 
         for (final Player p : gs.getPlayers()) {
-            for (final Zone z : Player.ALL_ZONES) {
+            for (final ZoneType z : Player.ALL_ZONES) {
                 p.getZone(z).reset();
             }
         }
@@ -448,9 +448,9 @@ public class GameNew {
      */
     private static void seeWhoPlaysFirst() {
         final GameAction ga = Singletons.getModel().getGameAction();
-        CardList hLibrary = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
+        CardList hLibrary = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
         hLibrary = hLibrary.filter(CardListFilter.NON_LANDS);
-        CardList cLibrary = AllZone.getComputerPlayer().getCardsIn(Zone.Library);
+        CardList cLibrary = AllZone.getComputerPlayer().getCardsIn(ZoneType.Library);
         cLibrary = cLibrary.filter(CardListFilter.NON_LANDS);
 
         final boolean starterDetermined = false;
@@ -479,9 +479,9 @@ public class GameNew {
             }
 
             cutCount = cutCount + 1;
-            ga.moveTo(AllZone.getHumanPlayer().getZone(Constant.Zone.Library),
+            ga.moveTo(AllZone.getHumanPlayer().getZone(ZoneType.Library),
                     ga.getHumanCut());
-            ga.moveTo(AllZone.getComputerPlayer().getZone(Constant.Zone.Library),
+            ga.moveTo(AllZone.getComputerPlayer().getZone(ZoneType.Library),
                     ga.getComputerCut());
 
             final StringBuilder sb = new StringBuilder();

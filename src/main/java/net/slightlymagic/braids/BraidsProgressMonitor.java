@@ -18,7 +18,7 @@
  * limitations under the Apache License.
  *
  */
-package net.slightlymagic.braids.util.progress_monitor;
+package net.slightlymagic.braids;
 
 /**
  * Interface for a progress monitor that can have multiple phases and

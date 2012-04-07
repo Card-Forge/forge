@@ -22,14 +22,13 @@ import java.util.Iterator;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 
 /**
  * This is for the "Mill" Cost. Putting cards from the top of your library into
@@ -57,7 +56,7 @@ public class CostMill extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        final PlayerZone zone = activator.getZone(Constant.Zone.Library);
+        final PlayerZone zone = activator.getZone(ZoneType.Library);
 
         Integer i = this.convertAmount();
 
@@ -95,7 +94,7 @@ public class CostMill extends CostPartWithList {
             c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
 
-        this.setList(AllZone.getComputerPlayer().getCardsIn(Zone.Library, c));
+        this.setList(AllZone.getComputerPlayer().getCardsIn(ZoneType.Library, c));
 
         if ((this.getList() == null) || (this.getList().size() < c)) {
             return false;
@@ -139,7 +138,7 @@ public class CostMill extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
-        final CardList list = activator.getCardsIn(Zone.Library, c);
+        final CardList list = activator.getCardsIn(ZoneType.Library, c);
 
         if ((list == null) || (list.size() > c)) {
             // I don't believe this is possible

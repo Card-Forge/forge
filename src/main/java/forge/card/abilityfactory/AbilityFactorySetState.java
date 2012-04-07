@@ -26,13 +26,13 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharactersticName;
 import forge.CardList;
-import forge.Constant.Zone;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * AbilityFactory for abilities that cause cards to change states.
@@ -403,7 +403,7 @@ public class AbilityFactorySetState {
             valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
         }
 
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         if (targetPlayer != null) {
             list = list.getController(targetPlayer);

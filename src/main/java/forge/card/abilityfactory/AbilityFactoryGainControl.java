@@ -28,8 +28,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -42,6 +40,7 @@ import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
 
@@ -305,7 +304,7 @@ public class AbilityFactoryGainControl {
             }
         }
 
-        CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         list = list.getValidCards(tgt.getValidTgts(), this.hostCard.getController(), this.hostCard);
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
@@ -393,7 +392,7 @@ public class AbilityFactoryGainControl {
 
         final Target tgt = sa.getTarget();
         if (this.params.containsKey("AllValid")) {
-            tgtCards = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
+            tgtCards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
         } else if ((tgt != null) && !this.params.containsKey("Defined")) {
             tgtCards.addAll(tgt.getTargetCards());
@@ -517,7 +516,7 @@ public class AbilityFactoryGainControl {
     private boolean gainControlDrawbackAI(final SpellAbility sa) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (this.params.containsKey("AllValid")) {
-                CardList tgtCards = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)
+                CardList tgtCards = AllZoneUtil.getCardsIn(ZoneType.Battlefield)
                         .getController(AllZone.getHumanPlayer());
                 tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
                 if (tgtCards.isEmpty()) {

@@ -35,10 +35,9 @@ import javax.swing.border.EtchedBorder;
 
 import forge.AllZone;
 import forge.Card;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameEntity;
+import forge.game.zone.ZoneType;
 
 /**
  * The class CardDetailPanel. Shows the details of a card.
@@ -297,16 +296,16 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         if ((card.hasKeyword("Play with the top card of your library revealed.") || card
                 .hasKeyword("Players play with the top card of their libraries revealed."))
                 && (card.getController() != null)
-                && card.isInZone(Constant.Zone.Battlefield)
-                && !card.getController().getZone(Zone.Library).isEmpty()) {
+                && card.isInZone(ZoneType.Battlefield)
+                && !card.getController().getZone(ZoneType.Library).isEmpty()) {
             area.append("\r\nTop card of your library: ");
-            area.append(card.getController().getCardsIn(Zone.Library, 1));
+            area.append(card.getController().getCardsIn(ZoneType.Library, 1));
         }
         if (card.hasKeyword("Players play with the top card of their libraries revealed.")
-                && (card.getController() != null) && card.isInZone(Constant.Zone.Battlefield)
-                && !card.getController().getOpponent().getZone(Zone.Library).isEmpty()) {
+                && (card.getController() != null) && card.isInZone(ZoneType.Battlefield)
+                && !card.getController().getOpponent().getZone(ZoneType.Library).isEmpty()) {
             area.append("\r\nTop card of your opponent's library: ");
-            area.append(card.getController().getOpponent().getCardsIn(Zone.Library, 1));
+            area.append(card.getController().getOpponent().getCardsIn(ZoneType.Library, 1));
         }
 
         // chosen type

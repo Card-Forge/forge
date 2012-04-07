@@ -19,14 +19,14 @@ package forge.control.input;
 
 import forge.AllZone;
 import forge.Card;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 
 //pays the cost of a card played from the player's hand
@@ -268,7 +268,7 @@ public class InputPayManaCost extends InputMana {
 
         this.resetManaCost();
         AllZone.getHumanPlayer().getManaPool().unpaid(this.spell, true);
-        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers(); // DO
+        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers(); // DO
 
         this.stop();
     }

@@ -19,7 +19,6 @@ package forge.card.cost;
 
 import forge.Card;
 import forge.CardList;
-import forge.Constant.Zone;
 import forge.Counters;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -27,7 +26,8 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 
 /**
@@ -135,7 +135,7 @@ public class CostPutCounter extends CostPartWithList {
             }
         } else {
             // 3 Cards have Put a -1/-1 Counter on a Creature you control.
-            final CardList typeList = activator.getCardsIn(Zone.Battlefield).getValidCards(this.getType().split(";"),
+            final CardList typeList = activator.getCardsIn(ZoneType.Battlefield).getValidCards(this.getType().split(";"),
                     activator, source);
 
             if (typeList.size() == 0) {
@@ -214,7 +214,7 @@ public class CostPutCounter extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
 
-            final CardList typeList = activator.getCardsIn(Zone.Battlefield).getValidCards(this.getType().split(";"),
+            final CardList typeList = activator.getCardsIn(ZoneType.Battlefield).getValidCards(this.getType().split(";"),
                     activator, source);
 
             Card card = null;
@@ -268,7 +268,7 @@ public class CostPutCounter extends CostPartWithList {
                     msg.append("s");
                 }
 
-                this.typeList = sa.getActivatingPlayer().getCardsIn(Zone.Battlefield);
+                this.typeList = sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
                 this.typeList = this.typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(),
                         sa.getSourceCard());
                 Singletons.getControl().getControlMatch().showMessage(msg.toString());

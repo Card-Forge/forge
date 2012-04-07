@@ -26,7 +26,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
-import forge.Constant.Zone;
 import forge.StaticEffect;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -35,6 +34,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * The Class StaticAbility_Continuous.
@@ -374,9 +374,9 @@ public class StaticAbilityContinuous {
         CardList affectedCards = new CardList();
 
         if (params.containsKey("AffectedZone")) {
-            affectedCards.addAll(AllZoneUtil.getCardsIn(Zone.listValueOf(params.get("AffectedZone"))));
+            affectedCards.addAll(AllZoneUtil.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
         } else {
-            affectedCards = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            affectedCards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         }
 
         if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {

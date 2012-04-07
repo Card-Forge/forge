@@ -22,12 +22,12 @@ import java.util.Random;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.Constant.Zone;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 
 /**
@@ -61,7 +61,7 @@ public class CostUtil {
                     continue;
                 }
 
-                CardList typeList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 typeList = typeList.getValidCards(type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null) {
                     return false;
@@ -96,7 +96,7 @@ public class CostUtil {
                     continue;
                 }
 
-                CardList typeList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 typeList = typeList.getValidCards(type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null) {
                     return false;
@@ -150,7 +150,7 @@ public class CostUtil {
                 final CostDiscard disc = (CostDiscard) part;
 
                 final String type = disc.getType();
-                CardList typeList = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+                CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
                 typeList = typeList.getValidCards(type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "DiscardCost", typeList) == null) {
                     return false;

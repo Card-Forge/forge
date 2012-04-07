@@ -23,8 +23,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.GameAction;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -35,7 +33,8 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseUtil;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.quest.QuestController;
 import forge.quest.bazaar.QuestItemType;
 import forge.view.ButtonUtil;
@@ -80,7 +79,7 @@ public class InputMulligan extends Input {
      * @return an int
      */
     public final int doMulligan(final Player player, final GamePlayerRating playerRating) {
-        final CardList hand = player.getCardsIn(Zone.Hand);
+        final CardList hand = player.getCardsIn(ZoneType.Hand);
         for (final Card c : hand) {
             Singletons.getModel().getGameAction().moveToLibrary(c);
         }
@@ -131,7 +130,7 @@ public class InputMulligan extends Input {
         // 0 in its hand
         while (aiTakesMulligan) {
 
-            final CardList handList = aiPlayer.getCardsIn(Zone.Hand);
+            final CardList handList = aiPlayer.getCardsIn(ZoneType.Hand);
             final boolean hasLittleCmc0Cards = handList.getValidCards("Card.cmcEQ0", aiPlayer, null).size() < 2;
             aiTakesMulligan = (handList.size() > InputMulligan.AI_MULLIGAN_THRESHOLD) && hasLittleCmc0Cards;
 
@@ -143,7 +142,7 @@ public class InputMulligan extends Input {
         // Human Leylines & Chancellors
         ButtonUtil.reset();
         final AbilityFactory af = new AbilityFactory();
-        final CardList humanOpeningHand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
+        final CardList humanOpeningHand = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand);
 
         for (final Card c : humanOpeningHand) {
             final ArrayList<String> kws = c.getKeyword();
@@ -169,7 +168,7 @@ public class InputMulligan extends Input {
         }
 
         // Computer Leylines & Chancellors
-        final CardList aiOpeningHand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+        final CardList aiOpeningHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
         for (final Card c : aiOpeningHand) {
             if (!c.getName().startsWith("Leyline")) {
                 final ArrayList<String> kws = c.getKeyword();
@@ -191,7 +190,7 @@ public class InputMulligan extends Input {
                 }
             }
             if (c.getName().startsWith("Leyline")
-                    && !(c.getName().startsWith("Leyline of Singularity") && (AllZoneUtil.getCardsIn(Zone.Battlefield,
+                    && !(c.getName().startsWith("Leyline of Singularity") && (AllZoneUtil.getCardsIn(ZoneType.Battlefield,
                             "Leyline of Singularity").size() > 0))) {
                 ga.moveToPlay(c);
                 ga.checkStateEffects();
@@ -201,8 +200,8 @@ public class InputMulligan extends Input {
 
         if (ga.isStartCut() && !(humanOpeningHand.contains(ga.getHumanCut())
                         || aiOpeningHand.contains(ga.getComputerCut()))) {
-            ga.moveTo(AllZone.getHumanPlayer().getZone(Constant.Zone.Library), ga.getHumanCut());
-            ga.moveTo(AllZone.getComputerPlayer().getZone(Constant.Zone.Library), ga.getComputerCut());
+            ga.moveTo(AllZone.getHumanPlayer().getZone(ZoneType.Library), ga.getHumanCut());
+            ga.moveTo(AllZone.getComputerPlayer().getZone(ZoneType.Library), ga.getComputerCut());
         }
 
         ga.checkStateEffects();
@@ -216,9 +215,9 @@ public class InputMulligan extends Input {
     @Override
     public void selectCard(Card c0, PlayerZone z0) {
 
-        if (c0.getName().equals("Serum Powder") && z0.is(Zone.Hand)) {
+        if (c0.getName().equals("Serum Powder") && z0.is(ZoneType.Hand)) {
             if (GameActionUtil.showYesNoDialog(c0, "Use " + c0.getName() + "'s ability?")) {
-                CardList hand = c0.getController().getCardsIn(Zone.Hand);
+                CardList hand = c0.getController().getCardsIn(ZoneType.Hand);
                 for (Card c : hand) {
                     Singletons.getModel().getGameAction().exile(c);
                 }

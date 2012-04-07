@@ -26,8 +26,6 @@ import forge.CardList;
 import forge.CardUtil;
 import forge.Command;
 import forge.CommandReturn;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -39,6 +37,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerAIGeneral;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 
 /**
@@ -76,7 +75,7 @@ public class SpellPermanent extends Spell {
     private final CommandReturn championGetCreature = new CommandReturn() {
         @Override
         public Object execute() {
-            final CardList cards = SpellPermanent.this.getSourceCard().getController().getCardsIn(Zone.Battlefield);
+            final CardList cards = SpellPermanent.this.getSourceCard().getController().getCardsIn(ZoneType.Battlefield);
             return cards.getValidCards(SpellPermanent.this.championValid, SpellPermanent.this.getSourceCard()
                     .getController(), SpellPermanent.this.getSourceCard());
         }
@@ -97,7 +96,7 @@ public class SpellPermanent extends Spell {
             } else if (controller.isHuman()) {
                 AllZone.getInputControl().setInput(SpellPermanent.this.championInputComes);
             } else { // Computer
-                CardList computer = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                CardList computer = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 computer = computer.getValidCards(SpellPermanent.this.championValid, controller, source);
                 computer.remove(source);
 
@@ -288,7 +287,7 @@ public class SpellPermanent extends Spell {
                 wait = false;
             }
             // get all cards the computer controls with BuffedBy
-            final CardList buffed = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+            final CardList buffed = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             for (int j = 0; j < buffed.size(); j++) {
                 final Card buffedcard = buffed.get(j);
                 if (buffedcard.getSVar("BuffedBy").length() > 0) {
@@ -301,7 +300,7 @@ public class SpellPermanent extends Spell {
             } // BuffedBy
 
             // get all cards the human controls with AntiBuffedBy
-            final CardList antibuffed = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+            final CardList antibuffed = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
             for (int k = 0; k < antibuffed.size(); k++) {
                 final Card buffedcard = antibuffed.get(k);
                 if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
@@ -312,9 +311,9 @@ public class SpellPermanent extends Spell {
                     }
                 }
             } // AntiBuffedBy
-            final CardList vengevines = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard, "Vengevine");
+            final CardList vengevines = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard, "Vengevine");
             if (vengevines.size() > 0) {
-                final CardList creatures = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+                final CardList creatures = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
                 final CardList creatures2 = new CardList();
                 for (int i = 0; i < creatures.size(); i++) {
                     if (creatures.get(i).isCreature()
@@ -360,13 +359,13 @@ public class SpellPermanent extends Spell {
         String mana = this.getPayCosts().getTotalMana();
         // check on legendary
         if (card.isType("Legendary")) {
-            final CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+            final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             if (list.containsName(card.getName())) {
                 return false;
             }
         }
         if (card.isPlaneswalker()) {
-            CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+            CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             list = list.getType("Planeswalker");
 
             for (int i = 0; i < list.size(); i++) {
@@ -379,7 +378,7 @@ public class SpellPermanent extends Spell {
             }
         }
         if (card.isType("World")) {
-            CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+            CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             list = list.getType("World");
             if (list.size() > 0) {
                 return false;
@@ -398,7 +397,7 @@ public class SpellPermanent extends Spell {
             }
 
             final CardList cl = (CardList) this.championGetCreature.execute();
-            if ((o == null) || !(cl.size() > 0) || !this.getSourceCard().isInZone(Constant.Zone.Hand)) {
+            if ((o == null) || !(cl.size() > 0) || !this.getSourceCard().isInZone(ZoneType.Hand)) {
                 return false;
             }
         }
@@ -436,7 +435,7 @@ public class SpellPermanent extends Spell {
                 continue;
             }
 
-            if (!params.get("Destination").equals(Zone.Battlefield.toString())) {
+            if (!params.get("Destination").equals(ZoneType.Battlefield.toString())) {
                 continue;
             }
 
@@ -494,6 +493,6 @@ public class SpellPermanent extends Spell {
     public void resolve() {
         final Card c = this.getSourceCard();
         c.addController(this.getActivatingPlayer());
-        Singletons.getModel().getGameAction().moveTo(this.getActivatingPlayer().getZone(Constant.Zone.Battlefield), c);
+        Singletons.getModel().getGameAction().moveTo(this.getActivatingPlayer().getZone(ZoneType.Battlefield), c);
     }
 }

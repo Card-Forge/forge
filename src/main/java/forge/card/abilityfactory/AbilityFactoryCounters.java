@@ -28,8 +28,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.Counters;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -45,7 +43,8 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerZone;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 import forge.view.ButtonUtil;
@@ -280,7 +279,7 @@ public class AbilityFactoryCounters {
 
         final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
 
-        list = player.getCardsIn(Zone.Battlefield);
+        list = player.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -432,7 +431,7 @@ public class AbilityFactoryCounters {
 
         final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
 
-        list = player.getCardsIn(Zone.Battlefield);
+        list = player.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -545,7 +544,7 @@ public class AbilityFactoryCounters {
                 // things like Powder Keg, which are way too complex for the AI
             }
         } else {
-            list = player.getCardsIn(Zone.Battlefield);
+            list = player.getCardsIn(ZoneType.Battlefield);
             list = list.getTargetableCards(sa);
             if (abTgt != null) {
                 list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
@@ -553,7 +552,7 @@ public class AbilityFactoryCounters {
             if (list.isEmpty() && mandatory) {
                 // If there isn't any prefered cards to target, gotta choose
                 // non-preferred ones
-                list = player.getOpponent().getCardsIn(Zone.Battlefield);
+                list = player.getOpponent().getCardsIn(ZoneType.Battlefield);
                 list = list.getTargetableCards(sa);
                 if (abTgt != null) {
                     list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
@@ -724,7 +723,7 @@ public class AbilityFactoryCounters {
                 final PlayerZone zone = AllZone.getZoneOf(tgtCard);
                 if (zone == null) {
                     // Do nothing, token disappeared
-                } else if (zone.is(Constant.Zone.Battlefield)) {
+                } else if (zone.is(ZoneType.Battlefield)) {
                     tgtCard.addCounter(Counters.valueOf(type), counterAmount);
                 } else {
                     // adding counters to something like re-suspend cards
@@ -1171,7 +1170,7 @@ public class AbilityFactoryCounters {
                     }
                 }
                 else {
-                    if (zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Exile)) {
+                    if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Exile)) {
                         if (params.containsKey("UpTo") && sa.getActivatingPlayer().isHuman()) {
                             final ArrayList<String> choices = new ArrayList<String>();
                             for (int i = 0; i <= counterAmount; i++) {
@@ -1351,8 +1350,8 @@ public class AbilityFactoryCounters {
         if (subAb != null && !subAb.chkAIDrawback()) {
             return false;
         }
-        CardList hperms = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        CardList cperms = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        CardList hperms = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        CardList cperms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         cperms = cperms.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card crd) {
@@ -1417,8 +1416,8 @@ public class AbilityFactoryCounters {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void proliferateResolve(final AbilityFactory af, final SpellAbility sa) {
-        CardList hperms = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        CardList cperms = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        CardList hperms = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        CardList cperms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
         if (af.getHostCard().getController().isHuman()) {
             cperms.addAll(hperms);
@@ -1742,8 +1741,8 @@ public class AbilityFactoryCounters {
         final boolean curse = af.isCurse();
         final Target tgt = sa.getTarget();
 
-        hList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        cList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        hList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        cList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
         hList = hList.getValidCards(valid, source.getController(), source);
         cList = cList.getValidCards(valid, source.getController(), source);
@@ -1878,7 +1877,7 @@ public class AbilityFactoryCounters {
         final int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
         final String valid = params.get("ValidCards");
 
-        CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         cards = cards.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();
@@ -1888,7 +1887,7 @@ public class AbilityFactoryCounters {
         }
 
         for (final Card tgtCard : cards) {
-            if (AllZone.getZoneOf(tgtCard).is(Constant.Zone.Battlefield)) {
+            if (AllZone.getZoneOf(tgtCard).is(ZoneType.Battlefield)) {
                 tgtCard.addCounter(Counters.valueOf(type), counterAmount);
             } else {
                 // adding counters to something like re-suspend cards
@@ -2101,7 +2100,7 @@ public class AbilityFactoryCounters {
         int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
         final String valid = params.get("ValidCards");
 
-        CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         cards = cards.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();
@@ -2394,13 +2393,13 @@ public class AbilityFactoryCounters {
             }
         } else { // targeted
             final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
-            CardList list = player.getCardsIn(Zone.Battlefield);
+            CardList list = player.getCardsIn(ZoneType.Battlefield);
             list = list.getTargetableCards(sa);
             list = list.getValidCards(abTgt.getValidTgts(), host.getController(), host);
             if (list.isEmpty() && mandatory) {
                 // If there isn't any prefered cards to target, gotta choose
                 // non-preferred ones
-                list = player.getOpponent().getCardsIn(Zone.Battlefield);
+                list = player.getOpponent().getCardsIn(ZoneType.Battlefield);
                 list = list.getTargetableCards(sa);
                 list = list.getValidCards(abTgt.getValidTgts(), host.getController(), host);
                 preferred = false;

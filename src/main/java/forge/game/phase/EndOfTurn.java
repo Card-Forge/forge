@@ -25,10 +25,10 @@ import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Counters;
 import forge.Singletons;
-import forge.Constant.Zone;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 
 /**
@@ -54,7 +54,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
         // TODO - should this freeze the Stack?
 
         // Pyrohemia and Pestilence
-        final CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList all = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         EndOfTurn.endOfTurnWallOfReverence();
         EndOfTurn.endOfTurnLighthouseChronologist();
@@ -209,7 +209,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
     private static void endOfTurnWallOfReverence() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList list = player.getCardsIn(Zone.Battlefield, "Wall of Reverence");
+        final CardList list = player.getCardsIn(ZoneType.Battlefield, "Wall of Reverence");
 
         Ability ability;
         for (int i = 0; i < list.size(); i++) {
@@ -254,7 +254,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
     private static void endOfTurnLighthouseChronologist() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final Player opponent = player.getOpponent();
-        CardList list = opponent.getCardsIn(Zone.Battlefield);
+        CardList list = opponent.getCardsIn(ZoneType.Battlefield);
 
         list = list.filter(new CardListFilter() {
             @Override

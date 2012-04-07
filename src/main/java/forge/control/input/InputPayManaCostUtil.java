@@ -26,7 +26,6 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
-import forge.Constant.Zone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryMana;
@@ -34,6 +33,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 
 /**
@@ -193,7 +193,7 @@ public class InputPayManaCostUtil {
 
         manaCost = AllZone.getHumanPlayer().getManaPool().subtractMana(sa, manaCost, chosen);
 
-        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
+        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
         // DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
         return manaCost;
 

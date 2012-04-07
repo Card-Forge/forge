@@ -30,7 +30,6 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Command;
-import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
@@ -47,6 +46,7 @@ import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -324,7 +324,7 @@ public class AbilityFactoryAttach {
         // I believe this is the only case where mandatory will be true, so just
         // check that when starting that work
         // But we shouldn't attach to things with Protection
-        if (tgt.getZone().contains(Zone.Battlefield) && !mandatory) {
+        if (tgt.getZone().contains(ZoneType.Battlefield) && !mandatory) {
             list = list.getTargetableCards(sa);
         } else {
             list = list.getUnprotectedCards(attachSource);
@@ -1486,7 +1486,7 @@ public class AbilityFactoryAttach {
         // If Cast Targets will be checked on the Stack
         for (final Object o : targets) {
             String valid = params.get("UnattachValid");
-            CardList unattachList = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            CardList unattachList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             unattachList = unattachList.getValidCards(valid.split(","), source.getController(), source);
             for (final Card c : unattachList) {
                 AbilityFactoryAttach.handleUnattachment(o, c, af);

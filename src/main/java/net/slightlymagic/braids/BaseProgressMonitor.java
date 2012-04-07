@@ -18,7 +18,7 @@
  * limitations under the Apache License.
  *
  */
-package net.slightlymagic.braids.util.progress_monitor;
+package net.slightlymagic.braids;
 
 import java.util.Date;
 
@@ -30,7 +30,7 @@ import com.esotericsoftware.minlog.Log;
  * 
  * Absolute times are measured in seconds, in congruence with ProgressMonitor.
  * 
- * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor
+ * @see net.slightlymagic.braids.BraidsProgressMonitor
  */
 public class BaseProgressMonitor implements BraidsProgressMonitor {
     private int numPhases;
@@ -167,7 +167,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Gets the num phases.
      * 
      * @return the num phases
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getNumPhases()
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getNumPhases()
      */
     public final int getNumPhases() {
         return this.numPhases;
@@ -177,7 +177,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Gets the min update interval sec.
      * 
      * @return the min update interval sec
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getMinUpdateIntervalSec()
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getMinUpdateIntervalSec()
      */
     public final float getMinUpdateIntervalSec() {
         return this.minUIUpdateIntervalSec;
@@ -187,7 +187,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Gets the current phase.
      * 
      * @return the current phase
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getCurrentPhase()
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getCurrentPhase()
      */
     public final int getCurrentPhase() {
         return this.currentPhase;
@@ -197,7 +197,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Gets the units completed so far this phase.
      * 
      * @return the units completed so far this phase
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getUnitsCompletedSoFarThisPhase()
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getUnitsCompletedSoFarThisPhase()
      */
     public final long getUnitsCompletedSoFarThisPhase() {
         return this.unitsCompletedSoFarThisPhase;
@@ -207,7 +207,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Gets the total units this phase.
      * 
      * @return the total units this phase
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getTotalUnitsThisPhase()
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getTotalUnitsThisPhase()
      */
     public final long getTotalUnitsThisPhase() {
         return this.totalUnitsThisPhase;
@@ -217,7 +217,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Gets the last ui update time.
      * 
      * @return the last ui update time
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getLastUIUpdateTime()
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getLastUIUpdateTime()
      */
     public final long getLastUIUpdateTime() {
         return this.lastUIUpdateTime;
@@ -227,7 +227,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Gets the phase one start time.
      * 
      * @return the phase one start time
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getPhaseOneStartTime()
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getPhaseOneStartTime()
      */
     public final long getPhaseOneStartTime() {
         return this.phaseOneStartTime;
@@ -237,7 +237,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Gets the current phase start time.
      * 
      * @return the current phase start time
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getCurrentPhaseStartTime()
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getCurrentPhaseStartTime()
      */
     public final long getCurrentPhaseStartTime() {
         return this.currentPhaseStartTime;
@@ -248,7 +248,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * 
      * @param value
      *            the new min update interval sec
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#setMinUpdateIntervalSec(float)
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#setMinUpdateIntervalSec(float)
      */
     public final void setMinUpdateIntervalSec(final float value) {
         this.minUIUpdateIntervalSec = value;
@@ -259,7 +259,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * 
      * @param value
      *            the new total units this phase
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#setTotalUnitsThisPhase(long)
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#setTotalUnitsThisPhase(long)
      */
     public void setTotalUnitsThisPhase(final long value) {
         this.totalUnitsThisPhase = value;
@@ -269,7 +269,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Gets the percent complete of this phase as string.
      * 
      * @return the percent complete of this phase as string
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getPercentCompleteOfThisPhaseAsString()
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getPercentCompleteOfThisPhaseAsString()
      */
     public final String getPercentCompleteOfThisPhaseAsString() {
 
@@ -286,7 +286,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Gets the total percent complete as string.
      * 
      * @return the total percent complete as string
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getTotalPercentCompleteAsString()
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getTotalPercentCompleteAsString()
      */
     public final String getTotalPercentCompleteAsString() {
         Float percent = getTotalPercentCompleteAsFloat();
@@ -315,7 +315,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * @param thisPhaseOnly
      *            the this phase only
      * @return the relative eta as string
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getRelativeETAAsString(boolean)
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getRelativeETAAsString(boolean)
      */
     public final String getRelativeETAAsString(final boolean thisPhaseOnly) {
 
@@ -365,7 +365,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * @param thisPhaseOnly
      *            the this phase only
      * @return the absolute eta as local time string
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getAbsoluteETAAsLocalTimeString(boolean)
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getAbsoluteETAAsLocalTimeString(boolean)
      */
     public final String getAbsoluteETAAsLocalTimeString(final boolean thisPhaseOnly) {
         Long etaTime = getAbsoluteETATime(thisPhaseOnly);
@@ -382,7 +382,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * 
      * @param numUnits
      *            the num units
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#incrementUnitsCompletedThisPhase(long)
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#incrementUnitsCompletedThisPhase(long)
      */
     public void incrementUnitsCompletedThisPhase(final long numUnits) {
         this.unitsCompletedSoFarThisPhase += numUnits;
@@ -400,7 +400,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Should update ui.
      * 
      * @return true, if successful
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#shouldUpdateUI()
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#shouldUpdateUI()
      */
     public final boolean shouldUpdateUI() {
 
@@ -416,7 +416,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * 
      * @param totalUnitsNextPhase
      *            the total units next phase
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#markCurrentPhaseAsComplete(long)
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#markCurrentPhaseAsComplete(long)
      */
     public final void markCurrentPhaseAsComplete(final long totalUnitsNextPhase) {
 
@@ -462,7 +462,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * 
      * @param message
      *            the message
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#sendMessage(java.lang.String)
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#sendMessage(java.lang.String)
      */
     public final void sendMessage(final String message) {
     }
@@ -472,7 +472,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * 
      * @param value
      *            the new current phase as exponential
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#setCurrentPhaseAsExponential(float)
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#setCurrentPhaseAsExponential(float)
      */
     public final void setCurrentPhaseAsExponential(final float value) {
         this.currentPhaseExponent = value;
@@ -482,7 +482,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Gets the current phase exponent.
      * 
      * @return the current phase exponent
-     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#getCurrentPhaseExponent()
+     * @see net.slightlymagic.braids.BraidsProgressMonitor#getCurrentPhaseExponent()
      */
     public final float getCurrentPhaseExponent() {
         return this.currentPhaseExponent;

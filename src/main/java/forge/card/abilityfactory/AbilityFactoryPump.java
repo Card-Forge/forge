@@ -28,7 +28,6 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Command;
-import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -45,6 +44,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 /**
@@ -730,7 +730,7 @@ public class AbilityFactoryPump {
             }
         } else {
             if (!tgt.canTgtCreature()) {
-                Zone zone = tgt.getZone().get(0);
+                ZoneType zone = tgt.getZone().get(0);
                 list = AllZoneUtil.getCardsIn(zone);
             } else {
                 list = this.getPumpCreatures(sa);
@@ -801,7 +801,7 @@ public class AbilityFactoryPump {
      * @return a boolean.
      */
     private boolean pumpMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -1123,8 +1123,8 @@ public class AbilityFactoryPump {
             }
         }
 
-        final Zone pumpZone = this.params.containsKey("PumpZone") ? Zone.smartValueOf(this.params.get("PumpZone"))
-                : Zone.Battlefield;
+        final ZoneType pumpZone = this.params.containsKey("PumpZone") ? ZoneType.smartValueOf(this.params.get("PumpZone"))
+                : ZoneType.Battlefield;
 
         final int size = tgtCards.size();
         for (int j = 0; j < size; j++) {
@@ -1376,9 +1376,9 @@ public class AbilityFactoryPump {
             valid = this.params.get("ValidCards");
         }
 
-        CardList comp = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        CardList comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         comp = comp.getValidCards(valid, this.hostCard.getController(), this.hostCard);
-        CardList human = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         human = human.getValidCards(valid, this.hostCard.getController(), this.hostCard);
 
         final Target tgt = sa.getTarget();
@@ -1450,7 +1450,7 @@ public class AbilityFactoryPump {
     private void pumpAllResolve(final SpellAbility sa) {
         CardList list;
         ArrayList<Player> tgtPlayers = null;
-        final ArrayList<Zone> affectedZones = new ArrayList<Zone>();
+        final ArrayList<ZoneType> affectedZones = new ArrayList<ZoneType>();
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -1462,20 +1462,20 @@ public class AbilityFactoryPump {
 
         if (this.params.containsKey("PumpZone")) {
             for (final String zone : this.params.get("PumpZone").split(",")) {
-                affectedZones.add(Zone.valueOf(zone));
+                affectedZones.add(ZoneType.valueOf(zone));
             }
         } else {
-            affectedZones.add(Zone.Battlefield);
+            affectedZones.add(ZoneType.Battlefield);
         }
 
         list = new CardList();
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            for (final Zone zone : affectedZones) {
+            for (final ZoneType zone : affectedZones) {
                 list.addAll(AllZoneUtil.getCardsIn(zone));
             }
 
         } else {
-            for (final Zone zone : affectedZones) {
+            for (final ZoneType zone : affectedZones) {
                 list.addAll(tgtPlayers.get(0).getCardsIn(zone));
             }
         }
@@ -1495,7 +1495,7 @@ public class AbilityFactoryPump {
 
             // only pump things in the affected zones.
             boolean found = false;
-            for (final Zone z : affectedZones) {
+            for (final ZoneType z : affectedZones) {
                 if (c.isInZone(z)) {
                     found = true;
                     break;

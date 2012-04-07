@@ -24,7 +24,7 @@ import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-import net.slightlymagic.braids.util.generator.GeneratorFunctions;
+import net.slightlymagic.braids.GeneratorFunctions;
 
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;

@@ -22,11 +22,11 @@ import java.util.List;
 
 import forge.AllZone;
 import forge.Card;
-import forge.Constant.Zone;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * The Class StaticAbility_CantBeCast.
@@ -63,7 +63,7 @@ public class StaticAbilityCantBeCast {
         }
 
         if (params.containsKey("Origin")) {
-            List<Zone> src = Zone.listValueOf(params.get("Origin"));
+            List<ZoneType> src = ZoneType.listValueOf(params.get("Origin"));
             if (!src.contains(AllZone.getZoneOf(card).getZoneType())) {
                 return false;
             }

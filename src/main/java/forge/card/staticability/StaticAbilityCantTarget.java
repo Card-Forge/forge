@@ -20,10 +20,9 @@ package forge.card.staticability;
 import java.util.HashMap;
 
 import forge.Card;
-import forge.Constant;
-import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * The Class StaticAbilityCantTarget.
@@ -49,11 +48,11 @@ public class StaticAbilityCantTarget {
         final Player activator = spellAbility.getActivatingPlayer();
 
         if (params.containsKey("AffectedZone")) {
-            if (!card.isInZone(Zone.smartValueOf(params.get("AffectedZone")))) {
+            if (!card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
                 return false;
             }
         } else { // default zone is battlefield
-            if (!card.isInZone(Constant.Zone.Battlefield)) {
+            if (!card.isInZone(ZoneType.Battlefield)) {
                 return false;
             }
         }
