@@ -28,11 +28,11 @@ import javax.swing.SwingUtilities;
 
 import forge.CardList;
 import forge.Command;
-import forge.PlayerType;
 import forge.deck.Deck;
 import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.io.DeckSerializer;
 import forge.error.ErrorViewer;
+import forge.game.player.PlayerType;
 
 /**
  * <p>

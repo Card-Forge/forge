@@ -15,12 +15,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.player;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import forge.AllZone;
+import forge.Card;
+import forge.CardList;
+import forge.Constant;
+import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.trigger.TriggerType;
 
@@ -53,7 +58,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @param zone
      *            a {@link java.lang.String} object.
      * @param inPlayer
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public DefaultPlayerZone(final Constant.Zone zone, final Player inPlayer) {
         this.zoneName = zone;
@@ -251,7 +256,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @param zone
      *            a {@link java.lang.String} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean
      */
     @Override
@@ -264,7 +269,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * Getter for the field <code>player</code>.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     @Override
     public final Player getPlayer() {

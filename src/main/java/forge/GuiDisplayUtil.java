@@ -42,6 +42,7 @@ import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityMana;
 import forge.card.trigger.TriggerType;
+import forge.game.player.Player;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.gui.game.CardPanel;
@@ -1425,7 +1426,7 @@ public final class GuiDisplayUtil {
      * @param data
      *            an array of {@link java.lang.String} objects.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.CardList} object.
      */
     public static CardList devProcessCardsForZone(final String[] data, final Player player) {

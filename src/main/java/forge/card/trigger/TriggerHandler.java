@@ -27,11 +27,9 @@ import forge.Card;
 import forge.CardList;
 import forge.Command;
 import forge.CommandArgs;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
-import forge.Player;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryCharm;
@@ -45,6 +43,8 @@ import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.game.phase.PhaseType;
 //import forge.util.TextUtil;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 
 /**
  * <p>

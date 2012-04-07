@@ -15,11 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.player;
 
 import java.util.List;
 import java.util.Random;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.CardListUtil;
+import forge.Constant;
+import forge.Counters;
+import forge.GameEntity;
+import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.trigger.Trigger;
@@ -715,7 +725,7 @@ public class ComputerUtilAttack {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a int.
      */
     public final int countExaltedBonus(final Player player) {

@@ -30,10 +30,10 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.GameActionUtil;
 import forge.MyObservable;
-import forge.Player;
 import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.trigger.TriggerType;
+import forge.game.player.Player;
 import forge.properties.ForgePreferences.FPref;
 
 /**
@@ -72,7 +72,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     public final boolean isPlayerTurn(final Player player) {
@@ -85,7 +85,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param s
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void setPlayerTurn(final Player s) {
         this.playerTurn = s;
@@ -96,7 +96,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * Getter for the field <code>playerTurn</code>.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public final Player getPlayerTurn() {
         return this.playerTurn;
@@ -111,7 +111,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * getPriorityPlayer.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public final Player getPriorityPlayer() {
         return this.pPlayerPriority;
@@ -123,7 +123,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param p
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void setPriorityPlayer(final Player p) {
         this.pPlayerPriority = p;
@@ -136,7 +136,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * getFirstPriority.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public final Player getFirstPriority() {
         return this.pFirstPriority;
@@ -148,7 +148,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param p
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void setFirstPriority(final Player p) {
         this.pFirstPriority = p;
@@ -160,7 +160,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param p
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void setPriority(final Player p) {
         if (AllZone.getStack() != null) {
@@ -592,7 +592,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * handleNextTurn.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     private Player handleNextTurn() {
         final Player nextTurn = this.extraTurns.isEmpty() ? this.getPlayerTurn().getOpponent() : this.extraTurns.pop();
@@ -614,8 +614,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param turn
-     *            a {@link forge.Player} object.
-     * @return a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     private Player skipTurnTimeVault(Player turn) {
         // time vault:
@@ -650,7 +650,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @param phase
      *            a {@link java.lang.String} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     public final synchronized boolean is(final PhaseType phase, final Player player) {
@@ -697,7 +697,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * getNextTurn.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public final Player getNextTurn() {
         if (this.extraTurns.isEmpty()) {
@@ -713,7 +713,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param pl
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     public final boolean isNextTurn(final Player pl) {
@@ -727,7 +727,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void addExtraTurn(final Player player) {
         // use a stack to handle extra turns, make sure the bottom of the stack
@@ -745,7 +745,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void skipTurn(final Player player) {
         // skipping turn without having extras is equivalent to giving your
@@ -789,7 +789,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void resetAttackedThisCombat(final Player player) {
         // resets the status of attacked/blocked this phase
@@ -904,7 +904,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     public static boolean canCastSorcery(final Player player) {

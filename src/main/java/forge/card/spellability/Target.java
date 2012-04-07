@@ -25,8 +25,8 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.Constant;
-import forge.Player;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.game.player.Player;
 
 /**
  * <p>

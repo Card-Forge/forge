@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 
 /**
  * <p>

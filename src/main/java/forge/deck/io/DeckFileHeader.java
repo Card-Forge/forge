@@ -17,8 +17,8 @@
  */
 package forge.deck.io;
 
-import forge.PlayerType;
 import forge.game.GameType;
+import forge.game.player.PlayerType;
 import forge.util.FileSection;
 
 /**

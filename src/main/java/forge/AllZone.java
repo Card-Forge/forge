@@ -29,6 +29,8 @@ import forge.control.input.InputControl;
 import forge.game.GameState;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfTurn;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
@@ -80,7 +82,7 @@ public final class AllZone {
      * 
      * Will eventually be marked deprecated.
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      * @since 1.0.15
      */
     public static Player getHumanPlayer() {
@@ -98,7 +100,7 @@ public final class AllZone {
      * 
      * Will eventually be marked deprecated.
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      * @since 1.0.15
      */
     public static Player getComputerPlayer() {
@@ -331,7 +333,7 @@ public final class AllZone {
      * 
      * Will eventually be marked deprecated.
      * 
-     * @return a {@link forge.PlayerZone} object.
+     * @return a {@link forge.game.player.PlayerZone} object.
      * @since 1.0.15
      */
     public static PlayerZone getStackZone() {
@@ -345,7 +347,7 @@ public final class AllZone {
      * 
      * @param c
      *            a {@link forge.Card} object.
-     * @return a {@link forge.PlayerZone} object.
+     * @return a {@link forge.game.player.PlayerZone} object.
      */
     public static PlayerZone getZoneOf(final Card c) {
         final GameState gameState = Singletons.getModel().getGameState();

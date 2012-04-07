@@ -19,6 +19,7 @@ package forge;
 
 import java.util.ArrayList;
 import forge.Constant.Zone;
+import forge.game.player.Player;
 
 /**
  * AllZoneUtil contains static functions used to get CardLists of various cards
@@ -262,7 +263,7 @@ public abstract class AllZoneUtil {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param type
      *            a {@link java.lang.String} object.
      * @return a int.
@@ -281,7 +282,7 @@ public abstract class AllZoneUtil {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param type
      *            a {@link java.lang.String} object.
      * @return a int.
@@ -319,7 +320,7 @@ public abstract class AllZoneUtil {
      * </p>
      * 
      * @param player
-     *            the {@link forge.Player} player to determine if is affected by
+     *            the {@link forge.game.player.Player} player to determine if is affected by
      *            Doubling Season
      * @return a int.
      */
@@ -336,7 +337,7 @@ public abstract class AllZoneUtil {
      * </p>
      * 
      * @param player
-     *            the {@link forge.Player} player to determine if is affected by
+     *            the {@link forge.game.player.Player} player to determine if is affected by
      *            Doubling Season
      * @return a int.
      */

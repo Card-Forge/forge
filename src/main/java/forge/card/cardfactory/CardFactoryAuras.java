@@ -32,7 +32,6 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
@@ -41,6 +40,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 
 /**

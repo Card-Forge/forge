@@ -21,8 +21,8 @@ import java.util.Iterator;
 
 import forge.Card;
 import forge.CardList;
-import forge.Player;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 
 /**
  * The Interface CardFactoryInterface.
@@ -108,7 +108,7 @@ public interface CardFactoryInterface extends Iterable<Card> {
      * @param cardName
      *            a {@link java.lang.String} object.
      * @param owner
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.Card} instance, owned by owner; or the special
      *         blankCard
      */

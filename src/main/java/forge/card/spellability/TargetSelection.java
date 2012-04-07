@@ -28,11 +28,11 @@ import forge.Card;
 import forge.CardList;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.control.input.Input;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 
 /**

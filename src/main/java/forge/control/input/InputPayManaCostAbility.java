@@ -22,10 +22,10 @@ import forge.ButtonUtil;
 import forge.Card;
 import forge.Command;
 import forge.Constant.Zone;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.PlayerZone;
 
 //if cost is paid, Command.execute() is called
 

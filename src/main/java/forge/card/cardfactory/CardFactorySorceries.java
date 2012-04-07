@@ -35,13 +35,9 @@ import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.HandSizeOp;
-import forge.Player;
-import forge.PlayerUtil;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
@@ -51,6 +47,10 @@ import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostAbility;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
+import forge.game.player.PlayerUtil;
+import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 
 /**

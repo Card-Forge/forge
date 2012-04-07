@@ -37,13 +37,10 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Command;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameActionUtil;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
@@ -57,6 +54,9 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
 import forge.game.GameLossReason;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -404,7 +404,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
      * @param cardName
      *            a {@link java.lang.String} object.
      * @param owner
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.Card} instance, owned by owner; or the special
      *         blankCard
      */

@@ -30,13 +30,10 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.CardUtil;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.GameEntity;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -50,6 +47,9 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -800,7 +800,7 @@ public final class AbilityFactoryChangeZone {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     private static void changeHiddenOriginResolveHuman(final AbilityFactory af, final SpellAbility sa, Player player) {
         final HashMap<String, String> params = af.getMapParams();
@@ -1000,7 +1000,7 @@ public final class AbilityFactoryChangeZone {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     private static void changeHiddenOriginResolveAI(final AbilityFactory af, final SpellAbility sa, Player player) {
         final HashMap<String, String> params = af.getMapParams();

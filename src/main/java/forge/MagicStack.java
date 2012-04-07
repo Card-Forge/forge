@@ -45,6 +45,9 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCostAbility;
 import forge.game.phase.PhaseType;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 
 /**
@@ -1351,7 +1354,7 @@ public class MagicStack extends MyObservable {
      * </p>
      * 
      * @param activePlayer
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void chooseOrderOfSimultaneousStackEntry(final Player activePlayer) {
         if (this.getSimultaneousStackEntryList().size() == 0) {

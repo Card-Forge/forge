@@ -15,10 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.player;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.AllZone;
+import forge.Singletons;
 import forge.control.input.Input;
 import forge.game.phase.PhaseType;
 
@@ -42,7 +44,7 @@ public class ComputerAIInput extends Input {
      * </p>
      * 
      * @param iComputer
-     *            a {@link forge.Computer} object.
+     *            a {@link forge.game.player.Computer} object.
      */
     public ComputerAIInput(final Computer iComputer) {
         this.computer = iComputer;
@@ -77,7 +79,7 @@ public class ComputerAIInput extends Input {
      * Getter for the field <code>computer</code>.
      * </p>
      * 
-     * @return a {@link forge.Computer} object.
+     * @return a {@link forge.game.player.Computer} object.
      */
     public final Computer getComputer() {
         return this.computer;

@@ -25,11 +25,11 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import forge.Constant;
-import forge.PlayerType;
 import forge.Singletons;
 import forge.card.CardColor;
 import forge.card.CardRules;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
+import forge.game.player.PlayerType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;

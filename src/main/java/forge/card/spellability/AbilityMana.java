@@ -22,11 +22,11 @@ import java.util.HashMap;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.Player;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostUtil;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -154,7 +154,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      * @param produced
      *            a {@link java.lang.String} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void produceMana(final String produced, final Player player) {
         final Card source = this.getSourceCard();

@@ -19,9 +19,9 @@ package forge.card.cost;
 
 import forge.Card;
 import forge.Counters;
-import forge.Player;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 
 /**
  * The Class CostRemoveCounter.

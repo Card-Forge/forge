@@ -20,12 +20,12 @@ package forge.control.input;
 import java.util.LinkedList;
 import java.util.Stack;
 
-import forge.ComputerAIInput;
 import forge.MyObservable;
-import forge.Player;
 import forge.Singletons;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.ComputerAIInput;
+import forge.game.player.Player;
 import forge.model.FModel;
 
 /**

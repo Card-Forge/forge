@@ -23,13 +23,13 @@ import java.util.List;
 
 import forge.AllZone;
 import forge.Card;
-import forge.ComputerUtil;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
-import forge.Player;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.gui.GuiUtils;
 
 /**

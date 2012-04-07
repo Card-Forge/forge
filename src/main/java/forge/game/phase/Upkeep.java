@@ -28,14 +28,10 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Command;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Counters;
 import forge.GameAction;
 import forge.GameActionUtil;
-import forge.Player;
-import forge.PlayerUtil;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -45,6 +41,10 @@ import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
+import forge.game.player.PlayerUtil;
+import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 
 /**

@@ -21,10 +21,10 @@ import java.util.ArrayList;
 
 import forge.AllZone;
 import forge.Card;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.CostPayment;
+import forge.game.player.PlayerZone;
 
 /**
  * <p>

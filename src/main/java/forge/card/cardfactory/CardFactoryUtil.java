@@ -38,14 +38,11 @@ import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Command;
 import forge.CommandArgs;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameActionUtil;
 import forge.HandSizeOp;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
@@ -68,6 +65,9 @@ import forge.control.input.InputPayManaCostUtil;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -2142,7 +2142,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     public static boolean oppHasKismet(final Player player) {
@@ -2166,7 +2166,7 @@ public class CardFactoryUtil {
      * @param colorAbb
      *            a {@link java.lang.String} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a int.
      */
     public static int getNumberOfManaSymbolsControlledByColor(final String colorAbb, final Player player) {
@@ -2401,7 +2401,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param activator
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.CardList} object.
      */
     public static CardList getExternalZoneActivationCards(final Player activator) {
@@ -2425,7 +2425,7 @@ public class CardFactoryUtil {
      * @param zone
      *            a PlayerZone object.
      * @param activator
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     public static CardList getActivateablesFromZone(final PlayerZone zone, final Player activator) {
@@ -3760,7 +3760,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a int.
      */
     public static int getUsableManaSources(final Player player) {
@@ -3786,7 +3786,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param controller
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.CardList} object.
      */
     public static CardList makeTokenSaproling(final Player controller) {
@@ -3804,7 +3804,7 @@ public class CardFactoryUtil {
      * @param imageName
      *            a {@link java.lang.String} object.
      * @param controller
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param manaCost
      *            a {@link java.lang.String} object.
      * @param types

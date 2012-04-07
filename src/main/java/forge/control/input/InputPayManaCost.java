@@ -21,13 +21,13 @@ import forge.AllZone;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.Constant.Zone;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.phase.PhaseHandler;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid

@@ -25,6 +25,7 @@ import com.google.code.jyield.Generator;
 import com.google.code.jyield.Yieldable;
 
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 import forge.util.MyRandom;
 
 /**
@@ -449,7 +450,7 @@ public class CardList implements Iterable<Card> {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.CardList} object.
      */
     public final CardList getController(final Player player) {
@@ -467,7 +468,7 @@ public class CardList implements Iterable<Card> {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.CardList} object.
      */
     public final CardList getOwner(final Player player) {
@@ -791,7 +792,7 @@ public class CardList implements Iterable<Card> {
      * @param restrictions
      *            a {@link java.lang.String} object.
      * @param sourceController
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param source
      *            a {@link forge.Card} object.
      * @return a {@link forge.CardList} object.
@@ -808,7 +809,7 @@ public class CardList implements Iterable<Card> {
      * @param restrictions
      *            a {@link java.lang.String} object.
      * @param sourceController
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param source
      *            a {@link forge.Card} object.
      * @return a {@link forge.CardList} object.

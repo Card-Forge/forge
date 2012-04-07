@@ -25,9 +25,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.ComputerUtil;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -40,6 +38,8 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.util.MyRandom;
 
 /**

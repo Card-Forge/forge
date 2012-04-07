@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +29,18 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardUtil;
+import forge.Constant;
+import forge.GameActionUtil;
+import forge.GameEntity;
+import forge.HandSizeOp;
+import forge.Singletons;
+import forge.Constant.Color;
+import forge.Constant.Runtime;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
@@ -219,7 +231,7 @@ public abstract class Player extends GameEntity {
      * </p>
      * 
      * @param p1
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     public final boolean isPlayer(final Player p1) {
@@ -231,7 +243,7 @@ public abstract class Player extends GameEntity {
      * getOpponent.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public abstract Player getOpponent();
 

@@ -23,9 +23,9 @@ import java.util.Map;
 
 import forge.AllZone;
 import forge.Card;
-import forge.Player;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRequirements;
+import forge.game.player.Player;
 
 /**
  * <p>

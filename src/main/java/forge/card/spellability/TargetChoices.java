@@ -20,7 +20,7 @@ package forge.card.spellability;
 import java.util.ArrayList;
 
 import forge.Card;
-import forge.Player;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -94,7 +94,7 @@ public class TargetChoices {
      * </p>
      * 
      * @param p
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     public final boolean addTarget(final Player p) {

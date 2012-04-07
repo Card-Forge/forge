@@ -25,11 +25,11 @@ import forge.CardList;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 
 /**
  * This is for the "Mill" Cost. Putting cards from the top of your library into

@@ -50,6 +50,8 @@ import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.item.CardDb;
 import forge.util.MyRandom;
 
@@ -3588,7 +3590,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Getter for the field <code>owner</code>.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public final Player getOwner() {
         return this.owner;
@@ -3597,7 +3599,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     /**
      * Get the controller for this card.
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public final Player getController() {
         if (this.controllerObjects.size() == 0) {
@@ -3701,7 +3703,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void setOwner(final Player player) {
         this.owner = player;
@@ -3943,7 +3945,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * getEnchantingPlayer.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public final Player getEnchantingPlayer() {
         if ((this.enchanting != null) && (this.enchanting instanceof Player)) {
@@ -6276,7 +6278,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param restriction
      *            a {@link java.lang.String} object.
      * @param sourceController
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param source
      *            a {@link forge.Card} object.
      * @return a boolean.
@@ -6324,7 +6326,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param property
      *            a {@link java.lang.String} object.
      * @param sourceController
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param source
      *            a {@link forge.Card} object.
      * @return a boolean.

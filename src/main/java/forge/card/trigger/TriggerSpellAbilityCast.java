@@ -22,10 +22,10 @@ import java.util.HashMap;
 import forge.AllZone;
 
 import forge.Card;
-import forge.Player;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
+import forge.game.player.Player;
 
 /**
  * <p>

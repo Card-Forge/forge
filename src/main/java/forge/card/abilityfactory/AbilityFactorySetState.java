@@ -27,12 +27,12 @@ import forge.Card;
 import forge.CardCharactersticName;
 import forge.CardList;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.player.Player;
 
 /**
  * AbilityFactory for abilities that cause cards to change states.

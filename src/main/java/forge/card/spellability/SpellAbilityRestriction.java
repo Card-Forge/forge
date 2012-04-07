@@ -24,13 +24,13 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.Constant.Zone;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 
 /**
  * <p>

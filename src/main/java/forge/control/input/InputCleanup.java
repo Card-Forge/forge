@@ -23,7 +23,7 @@ import forge.Card;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.game.phase.CombatUtil;
-import forge.PlayerZone;
+import forge.game.player.PlayerZone;
 import forge.Singletons;
 
 /**

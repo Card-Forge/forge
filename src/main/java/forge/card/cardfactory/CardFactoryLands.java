@@ -30,8 +30,6 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameActionUtil;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
@@ -40,6 +38,8 @@ import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 

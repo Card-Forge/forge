@@ -22,11 +22,11 @@ import java.util.List;
 
 import forge.AllZone;
 import forge.Card;
-import forge.Player;
 import forge.Constant.Zone;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseHandler;
+import forge.game.player.Player;
 
 /**
  * The Class StaticAbility_CantBeCast.

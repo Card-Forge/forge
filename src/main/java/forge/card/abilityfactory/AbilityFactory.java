@@ -26,11 +26,9 @@ import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Command;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
-import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -43,6 +41,8 @@ import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 
 /**
  * <p>

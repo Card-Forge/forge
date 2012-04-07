@@ -23,9 +23,9 @@ import forge.AllZone;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.Constant;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.game.phase.CombatUtil;
+import forge.game.player.PlayerZone;
 
 /**
  * <p>

@@ -21,10 +21,10 @@ import forge.AllZone;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.GuiDisplayUtil;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 
 /**
  * <p>

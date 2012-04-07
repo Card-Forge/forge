@@ -21,8 +21,8 @@ import java.util.HashMap;
 
 import forge.Command;
 import forge.CommandList;
-import forge.Player;
 import forge.Singletons;
+import forge.game.player.Player;
 
 
 /**
@@ -79,7 +79,7 @@ public abstract class Phase implements java.io.Serializable {
      * </p>
      * 
      * @param p
-     *            a {@link forge.Player} object
+     *            a {@link forge.game.player.Player} object
      * @param c
      *            a {@link forge.Command} object.
      */

@@ -31,15 +31,11 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Counters;
 import forge.GameAction;
 import forge.GameActionUtil;
 import forge.GameEntity;
-import forge.Player;
-import forge.PlayerUtil;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.TriggerReplacementBase;
@@ -51,6 +47,10 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostAbility;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
+import forge.game.player.PlayerUtil;
+import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 
 /**
@@ -926,7 +926,7 @@ public class CombatUtil {
      * @param attacker
      *            a {@link forge.Card} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a int.
      */
     public static int getTotalFirstStrikeBlockPower(final Card attacker, final Player player) {
@@ -973,7 +973,7 @@ public class CombatUtil {
      * @param attacker
      *            a {@link forge.Card} object.
      * @param attacked
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param combat
      *            a {@link forge.game.phase.Combat} object.
      * @return a int.
@@ -1000,7 +1000,7 @@ public class CombatUtil {
      * @param attacker
      *            a {@link forge.Card} object.
      * @param attacked
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param combat
      *            a {@link forge.game.phase.Combat} object.
      * @return a int.
@@ -1030,7 +1030,7 @@ public class CombatUtil {
      * @param attackers
      *            a {@link forge.CardList} object.
      * @param attacked
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a int.
      */
     public static int sumDamageIfUnblocked(final CardList attackers, final Player attacked) {
@@ -1050,7 +1050,7 @@ public class CombatUtil {
      * @param attackers
      *            a {@link forge.CardList} object.
      * @param attacked
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a int.
      */
     public static int sumPoisonIfUnblocked(final CardList attackers, final Player attacked) {

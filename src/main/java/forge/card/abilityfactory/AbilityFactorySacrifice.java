@@ -25,10 +25,8 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -38,6 +36,8 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -487,7 +487,7 @@ public class AbilityFactorySacrifice {
      * </p>
      * 
      * @param p
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param amount
      *            a int.
      * @param valid
@@ -510,7 +510,7 @@ public class AbilityFactorySacrifice {
      * </p>
      * 
      * @param p
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param amount
      *            a int.
      * @param valid

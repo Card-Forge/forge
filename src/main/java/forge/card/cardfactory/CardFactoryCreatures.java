@@ -38,8 +38,6 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameActionUtil;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
@@ -54,6 +52,8 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 

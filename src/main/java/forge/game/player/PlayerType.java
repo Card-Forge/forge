@@ -15,19 +15,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.player;
 
-import java.util.Observer;
-
-//PlayerZone observers the cards that are added to its zone
 /**
- * <p>
- * Abstract PlayerZone class.
- * </p>
+ * The Enum PlayerType.
  * 
- * @author Forge
- * @version $Id$
+ * @author jendave
  */
-public abstract class PlayerZone extends MyObservable implements IPlayerZone, Observer {
+public enum PlayerType {
 
+    /** The HUMAN. */
+    HUMAN,
+
+    /** The COMPUTER. */
+    COMPUTER
 }

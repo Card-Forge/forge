@@ -21,14 +21,14 @@ import java.util.ArrayList;
 
 import forge.AllZone;
 import forge.Card;
-import forge.ComputerUtil;
-import forge.Player;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.GameLossReason;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 
 /**
  * <p>

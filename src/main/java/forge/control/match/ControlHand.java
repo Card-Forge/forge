@@ -38,8 +38,8 @@ import arcane.ui.util.Animation;
 import forge.AllZone;
 import forge.Card;
 import forge.Constant.Zone;
-import forge.PlayerZone;
 import forge.Singletons;
+import forge.game.player.PlayerZone;
 import forge.view.match.ViewHand;
 
 /**

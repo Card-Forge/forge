@@ -27,13 +27,13 @@ import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Constant.Zone;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
+import forge.game.player.PlayerZone;
 
 /**
  * <p>

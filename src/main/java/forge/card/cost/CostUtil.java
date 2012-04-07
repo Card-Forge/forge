@@ -22,12 +22,12 @@ import java.util.Random;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.ComputerUtil;
 import forge.Constant.Zone;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.player.ComputerUtil;
 import forge.gui.GuiUtils;
 
 /**

@@ -28,7 +28,6 @@ import forge.Card;
 import forge.CardList;
 import forge.Constant;
 import forge.GameActionUtil;
-import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -36,6 +35,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
+import forge.game.player.Player;
 import forge.gui.GuiUtils;
 
 /**

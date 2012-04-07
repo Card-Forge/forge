@@ -27,8 +27,6 @@ import java.util.List;
 
 import arcane.util.MultiplexOutputStream;
 import forge.AllZone;
-import forge.ComputerAIGeneral;
-import forge.ComputerAIInput;
 import forge.Constant;
 import forge.GameAction;
 import forge.Singletons;
@@ -41,6 +39,8 @@ import forge.control.input.InputControl;
 import forge.deck.CardCollections;
 import forge.game.GameState;
 import forge.game.GameSummary;
+import forge.game.player.ComputerAIGeneral;
+import forge.game.player.ComputerAIInput;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;

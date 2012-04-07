@@ -22,8 +22,8 @@ import java.util.HashMap;
 import forge.Card;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 
 /**
  * The Class StaticAbilityCantTarget.

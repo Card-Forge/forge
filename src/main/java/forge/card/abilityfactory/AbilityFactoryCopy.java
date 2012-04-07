@@ -30,9 +30,7 @@ import forge.CardCharactersticName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
-import forge.ComputerUtil;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
@@ -43,6 +41,8 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
 import forge.game.phase.PhaseType;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 

@@ -30,7 +30,6 @@ import forge.CardList;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GuiMultipleBlockers;
-import forge.Player;
 import forge.Singletons;
 import forge.control.match.ControlDetail;
 import forge.control.match.ControlDock;
@@ -41,6 +40,7 @@ import forge.control.match.ControlPicture;
 import forge.control.match.ControlTabber;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.gui.CardContainer;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
@@ -250,7 +250,7 @@ public class ControlMatchUI implements CardContainer {
      * 
      * Checks if game control should stop at a phase, for either
      * a forced programmatic stop, or a user-induced phase toggle.
-     * @param turn &emsp; {@link forge.Player}
+     * @param turn &emsp; {@link forge.game.player.Player}
      * @param phase &emsp; {@link java.lang.String}
      * @return boolean
      */

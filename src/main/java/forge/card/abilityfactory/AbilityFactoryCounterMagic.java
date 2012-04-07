@@ -22,7 +22,6 @@ import java.util.HashMap;
 
 import forge.AllZone;
 import forge.Card;
-import forge.ComputerUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -34,6 +33,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
+import forge.game.player.ComputerUtil;
 import forge.util.MyRandom;
 
 //Destination - send countered spell to: (only applies to Spells; ignored for Abilities)

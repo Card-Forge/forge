@@ -15,8 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.player;
 
+import forge.AllZone;
+import forge.Card;
+import forge.CardList;
+import forge.GameActionUtil;
+import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -65,7 +70,7 @@ public class HumanPlayer extends Player {
      * getOpponent.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     @Override
     public final Player getOpponent() {

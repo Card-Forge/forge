@@ -25,13 +25,13 @@ import forge.Card;
 import forge.CardList;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
 import forge.error.ErrorViewer;
 import forge.game.phase.PhaseHandler;
+import forge.game.player.Player;
 
 /**
  * <p>

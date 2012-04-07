@@ -24,13 +24,13 @@ import forge.Card;
 import forge.CardList;
 import forge.Command;
 import forge.CommandArgs;
-import forge.ComputerUtil;
 import forge.GameEntity;
-import forge.Player;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.control.input.Input;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 
 //only SpellAbility can go on the stack
 //override any methods as needed
@@ -368,7 +368,7 @@ public abstract class SpellAbility {
      * Getter for the field <code>activatingPlayer</code>.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public Player getActivatingPlayer() {
         return this.activatingPlayer;
@@ -380,7 +380,7 @@ public abstract class SpellAbility {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public void setActivatingPlayer(final Player player) {
         // trickle down activating player
@@ -1353,7 +1353,7 @@ public abstract class SpellAbility {
      * </p>
      * 
      * @param p
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public void setTargetPlayer(final Player p) {
         if ((p == null) || (!(p.isHuman() || p.isComputer()))) {
@@ -1376,7 +1376,7 @@ public abstract class SpellAbility {
      * Getter for the field <code>targetPlayer</code>.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public Player getTargetPlayer() {
         if (this.targetPlayer == null) {

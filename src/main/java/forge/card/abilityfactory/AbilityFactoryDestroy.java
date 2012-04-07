@@ -28,10 +28,8 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
-import forge.ComputerUtil;
 import forge.Constant.Zone;
 import forge.Counters;
-import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -41,6 +39,8 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.util.MyRandom;
 
 /**

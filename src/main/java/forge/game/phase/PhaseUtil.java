@@ -24,12 +24,12 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.Player;
 import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.trigger.TriggerType;
 import forge.control.ControlMatchUI;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.view.match.ViewField.PhaseLabel;
 
 /**
@@ -48,7 +48,7 @@ public class PhaseUtil {
      * </p>
      * 
      * @param p
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     private static boolean skipUntap(final Player p) {
@@ -183,7 +183,7 @@ public class PhaseUtil {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     private static boolean skipDraw(final Player player) {
@@ -250,7 +250,7 @@ public class PhaseUtil {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     private static boolean skipCombat(final Player player) {

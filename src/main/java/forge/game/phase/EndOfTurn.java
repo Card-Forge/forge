@@ -24,11 +24,11 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Counters;
-import forge.Player;
 import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 import forge.gui.GuiUtils;
 
 /**

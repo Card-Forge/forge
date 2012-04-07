@@ -22,13 +22,13 @@ import forge.Card;
 import forge.CardList;
 import forge.Constant.Zone;
 import forge.Counters;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 
 /**
  * The Class CostPutCounter.

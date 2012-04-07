@@ -29,9 +29,7 @@ import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Command;
-import forge.ComputerUtil;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.Singletons;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityActivated;
@@ -43,6 +41,8 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 
 /**
  * <p>

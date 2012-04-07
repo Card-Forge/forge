@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +23,12 @@ import java.util.List;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.ComputerUtilBlock;
+import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;

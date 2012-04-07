@@ -35,10 +35,10 @@ import forge.CardList;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.GameEntity;
-import forge.Player;
 import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.trigger.TriggerType;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -110,7 +110,7 @@ public class Combat {
      * </p>
      * 
      * @param defender
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void initiatePossibleDefenders(final Player defender) {
         this.defenders.add(defender);
@@ -221,7 +221,7 @@ public class Combat {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void setAttackingPlayer(final Player player) {
         this.attackingPlayer = player;
@@ -233,7 +233,7 @@ public class Combat {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void setDefendingPlayer(final Player player) {
         this.defendingPlayer = player;
@@ -244,7 +244,7 @@ public class Combat {
      * Getter for the field <code>attackingPlayer</code>.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public final Player getAttackingPlayer() {
         if (this.attackingPlayer != null) {
@@ -259,7 +259,7 @@ public class Combat {
      * Getter for the field <code>defendingPlayer</code>.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public final Player getDefendingPlayer() {
         if (this.attackingPlayer != null) {

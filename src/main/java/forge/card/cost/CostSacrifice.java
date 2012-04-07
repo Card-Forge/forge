@@ -23,14 +23,14 @@ import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
-import forge.ComputerUtil;
 import forge.Constant.Zone;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 
 /**
  * The Class CostSacrifice.

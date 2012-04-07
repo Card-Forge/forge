@@ -15,9 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.player;
 
 import java.util.List;
+
+import forge.Card;
+import forge.Constant;
 
 /**
  * <p>
@@ -188,7 +191,7 @@ interface IPlayerZone {
      * @param zone
      *            a {@link java.lang.String} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     boolean is(Constant.Zone zone, Player player);
@@ -198,7 +201,7 @@ interface IPlayerZone {
      * getPlayer.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     Player getPlayer(); // the Player that owns this zone
 

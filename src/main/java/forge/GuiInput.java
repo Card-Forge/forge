@@ -21,6 +21,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.control.input.Input;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 
 /**
  * <p>
@@ -101,7 +103,7 @@ public class GuiInput extends MyObservable implements Observer {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public final void selectPlayer(final Player player) {
         this.getInput().selectPlayer(player);
@@ -115,7 +117,7 @@ public class GuiInput extends MyObservable implements Observer {
      * @param card
      *            a {@link forge.Card} object.
      * @param zone
-     *            a {@link forge.PlayerZone} object.
+     *            a {@link forge.game.player.PlayerZone} object.
      */
     public final void selectCard(final Card card, final PlayerZone zone) {
         this.getInput().selectCard(card, zone);

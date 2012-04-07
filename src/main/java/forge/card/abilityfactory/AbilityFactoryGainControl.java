@@ -28,11 +28,9 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameEntity;
-import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
@@ -42,6 +40,8 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
 
@@ -584,7 +584,7 @@ public class AbilityFactoryGainControl {
      * @param i
      *            a int.
      * @param originalController
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.Command} object.
      */
     private Command getLoseControlCommand(final Card c, final Player originalController) {

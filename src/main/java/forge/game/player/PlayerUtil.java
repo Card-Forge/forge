@@ -15,8 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.player;
 
+import forge.AllZone;
+import forge.ButtonUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.Constant;
+import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -41,7 +48,7 @@ public final class PlayerUtil {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     public static boolean worshipFlag(final Player player) {

@@ -28,10 +28,8 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Command;
-import forge.ComputerUtil;
 import forge.Constant.Zone;
 import forge.GameEntity;
-import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -45,6 +43,8 @@ import forge.card.spellability.Target;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.util.MyRandom;
 
 /**

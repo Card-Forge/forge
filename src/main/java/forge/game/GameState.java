@@ -17,14 +17,9 @@
  */
 package forge.game;
 
-import forge.AIPlayer;
 import forge.Constant;
-import forge.DefaultPlayerZone;
 import forge.GameLog;
-import forge.HumanPlayer;
 import forge.MagicStack;
-import forge.Player;
-import forge.PlayerZone;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
@@ -34,6 +29,11 @@ import forge.game.phase.EndOfTurn;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.Untap;
 import forge.game.phase.Upkeep;
+import forge.game.player.AIPlayer;
+import forge.game.player.DefaultPlayerZone;
+import forge.game.player.HumanPlayer;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 
 /**
  * Represents the state of a <i>single game</i> and is

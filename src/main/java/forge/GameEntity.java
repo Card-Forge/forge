@@ -20,6 +20,7 @@ package forge;
 import java.util.ArrayList;
 
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 
 /**
  * <p>

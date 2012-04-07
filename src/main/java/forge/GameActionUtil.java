@@ -32,6 +32,9 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameLossReason;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -452,7 +455,7 @@ public final class GameActionUtil {
      * </p>
      * 
      * @param caller
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param source
      *            a {@link forge.Card} object.
      * @return a boolean.
@@ -708,7 +711,7 @@ public final class GameActionUtil {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param c
      *            a {@link forge.Card} object.
      * @param damage
@@ -769,7 +772,7 @@ public final class GameActionUtil {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param c
      *            a {@link forge.Card} object.
      * @param damage
@@ -1722,7 +1725,7 @@ public final class GameActionUtil {
      * </p>
      * 
      * @param p
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public static void doPowerSink(final Player p) {
         // get all lands with mana abilities

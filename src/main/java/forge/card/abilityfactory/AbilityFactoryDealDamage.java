@@ -27,9 +27,7 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
-import forge.ComputerUtil;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -41,6 +39,8 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.game.phase.PhaseType;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.util.MyRandom;
 
 /**
@@ -463,7 +463,7 @@ public class AbilityFactoryDealDamage {
      * @param noPrevention
      *            a boolean.
      * @param pl
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param mandatory
      *            a boolean.
      * @return a {@link forge.Card} object.
@@ -1124,7 +1124,7 @@ public class AbilityFactoryDealDamage {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param dmg
      *            a int.
      * @return a {@link forge.CardList} object.

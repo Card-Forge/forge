@@ -21,8 +21,8 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
-import forge.Player;
 import forge.card.cardfactory.AbstractCardFactory;
+import forge.game.player.Player;
 import forge.quest.bazaar.QuestPetController;
 
 import java.util.List;

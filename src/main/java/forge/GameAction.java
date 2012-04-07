@@ -50,6 +50,10 @@ import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameEndReason;
 import forge.game.GameSummary;
 import forge.game.phase.PhaseHandler;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
+import forge.game.player.PlayerZoneComesIntoPlay;
 import forge.gui.GuiUtils;
 import forge.view.match.ViewWinLose;
 
@@ -82,9 +86,9 @@ public class GameAction {
      * </p>
      * 
      * @param zoneFrom
-     *            a {@link forge.PlayerZone} object.
+     *            a {@link forge.game.player.PlayerZone} object.
      * @param zoneTo
-     *            a {@link forge.PlayerZone} object.
+     *            a {@link forge.game.player.PlayerZone} object.
      * @param c
      *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
@@ -228,7 +232,7 @@ public class GameAction {
      * </p>
      * 
      * @param zone
-     *            a {@link forge.PlayerZone} object.
+     *            a {@link forge.game.player.PlayerZone} object.
      * @param c
      *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
@@ -526,7 +530,7 @@ public class GameAction {
      * @param c
      *            a {@link forge.Card} object.
      * @param p
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.Card} object.
      */
     public final Card moveToPlay(final Card c, final Player p) {

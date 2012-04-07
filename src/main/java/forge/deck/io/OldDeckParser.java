@@ -30,9 +30,9 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import forge.PlayerType;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
+import forge.game.player.PlayerType;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.IStorage;

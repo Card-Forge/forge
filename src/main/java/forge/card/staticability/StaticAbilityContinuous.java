@@ -27,7 +27,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.StaticEffect;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -35,6 +34,7 @@ import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.player.Player;
 
 /**
  * The Class StaticAbility_Continuous.

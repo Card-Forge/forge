@@ -26,11 +26,9 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
-import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -41,6 +39,8 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.InputPayManaCostUtil;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -788,7 +788,7 @@ public class AbilityFactoryMana {
      * @param colors
      *            a {@link java.util.ArrayList} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a {@link java.lang.String} object.
      */
     private static String generatedReflectedMana(final AbilityMana abMana, final AbilityFactory af,
@@ -871,7 +871,7 @@ public class AbilityFactoryMana {
      * </p>
      * 
      * @param p
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     private static boolean hasUrzaLands(final Player p) {

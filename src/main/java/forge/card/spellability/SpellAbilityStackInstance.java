@@ -21,7 +21,7 @@ import java.util.HashMap;
 
 import forge.Card;
 import forge.CardList;
-import forge.Player;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -193,7 +193,7 @@ public class SpellAbilityStackInstance {
      * Getter for the field <code>activatingPlayer</code>.
      * </p>
      * 
-     * @return a {@link forge.Player} object.
+     * @return a {@link forge.game.player.Player} object.
      */
     public final Player getActivatingPlayer() {
         return this.activatingPlayer;

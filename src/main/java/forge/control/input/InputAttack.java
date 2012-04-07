@@ -24,7 +24,7 @@ import forge.CardList;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.game.phase.CombatUtil;
-import forge.PlayerZone;
+import forge.game.player.PlayerZone;
 import forge.Singletons;
 
 /**
@@ -120,7 +120,7 @@ public class InputAttack extends Input {
      * @param card
      *            a {@link forge.Card} object.
      * @param zone
-     *            a {@link forge.PlayerZone} object.
+     *            a {@link forge.game.player.PlayerZone} object.
      */
     public void unselectCard(final Card card, final PlayerZone zone) {
 

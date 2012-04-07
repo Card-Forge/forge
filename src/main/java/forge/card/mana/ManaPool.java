@@ -25,11 +25,11 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
-import forge.Player;
 import forge.Singletons;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
+import forge.game.player.Player;
 import forge.gui.GuiUtils;
 
 /**
@@ -62,7 +62,7 @@ public class ManaPool {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      */
     public ManaPool(final Player player) {
         owner = player;

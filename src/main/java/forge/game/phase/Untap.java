@@ -29,12 +29,12 @@ import forge.Constant;
 import forge.Counters;
 import forge.GameActionUtil;
 import forge.GameEntity;
-import forge.Player;
-import forge.PlayerZone;
 import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.control.input.Input;
+import forge.game.player.Player;
+import forge.game.player.PlayerZone;
 
 /**
  * <p>

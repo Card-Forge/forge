@@ -28,6 +28,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
+import forge.game.player.Player;
 
 /**
  * <p>

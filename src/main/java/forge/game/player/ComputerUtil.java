@@ -15,13 +15,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.CardListUtil;
+import forge.CardUtil;
+import forge.ComputerUtilBlock;
+import forge.Constant;
+import forge.GameAction;
+import forge.Singletons;
 import forge.Constant.Zone;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -452,7 +463,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     public static boolean canPayCost(final SpellAbility sa, final Player player) {
@@ -484,7 +495,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a int.
      * @since 1.0.15
      */
@@ -523,7 +534,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
     public static boolean canPayAdditionalCosts(final SpellAbility sa, final Player player) {
@@ -557,7 +568,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @param test
      *            (is for canPayCost, if true does not change the game state)
      * @param extraMana
@@ -909,7 +920,7 @@ public class ComputerUtil {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.CardList} object.
      */
     public static CardList getAvailableMana(final Player player) {
@@ -1078,7 +1089,7 @@ public class ComputerUtil {
      * </p>
      * 
      * @param player
-     *            a {@link forge.Player} object.
+     *            a {@link forge.game.player.Player} object.
      * @return HashMap<String, CardList>
      */
     public static HashMap<String, ArrayList<AbilityMana>> mapManaSources(final Player player) {

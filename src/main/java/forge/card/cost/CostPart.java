@@ -18,8 +18,8 @@
 package forge.card.cost;
 
 import forge.Card;
-import forge.Player;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 
 /**
  * The Class CostPart.

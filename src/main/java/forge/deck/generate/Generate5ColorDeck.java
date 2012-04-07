@@ -19,11 +19,11 @@ package forge.deck.generate;
 
 import java.util.Arrays;
 import java.util.List;
-import forge.PlayerType;
 import forge.card.CardColor;
 import forge.card.CardRules;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.error.ErrorViewer;
+import forge.game.player.PlayerType;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;

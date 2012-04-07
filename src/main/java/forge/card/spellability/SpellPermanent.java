@@ -27,11 +27,8 @@ import forge.CardList;
 import forge.CardUtil;
 import forge.Command;
 import forge.CommandReturn;
-import forge.ComputerAIGeneral;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -40,6 +37,9 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.game.phase.PhaseType;
+import forge.game.player.ComputerAIGeneral;
+import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 
 /**
  * <p>

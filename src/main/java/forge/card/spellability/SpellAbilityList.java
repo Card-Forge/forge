@@ -19,7 +19,7 @@ package forge.card.spellability;
 
 import java.util.ArrayList;
 
-import forge.ComputerUtil;
+import forge.game.player.ComputerUtil;
 
 /**
  * <p>
