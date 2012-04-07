@@ -41,7 +41,6 @@ import forge.Player;
 import forge.PlayerUtil;
 import forge.PlayerZone;
 import forge.Singletons;
-import forge.Constant.Color;
 import forge.Constant.Zone;
 import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;

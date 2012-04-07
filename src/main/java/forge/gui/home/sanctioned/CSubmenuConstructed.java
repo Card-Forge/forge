@@ -24,7 +24,6 @@ import javax.swing.SwingWorker;
 import org.apache.commons.lang3.ArrayUtils;
 
 import forge.AllZone;
-import forge.CardList;
 import forge.Command;
 import forge.Constant;
 import forge.PlayerType;

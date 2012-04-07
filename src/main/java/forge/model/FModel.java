@@ -23,7 +23,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import arcane.util.MultiplexOutputStream;
@@ -31,7 +30,6 @@ import forge.AllZone;
 import forge.ComputerAIGeneral;
 import forge.ComputerAIInput;
 import forge.Constant;
-import forge.ConstantStringArrayList;
 import forge.GameAction;
 import forge.Singletons;
 import forge.card.BoosterData;
@@ -183,61 +181,50 @@ public enum FModel {
         if (!Constant.CardTypes.LOADED[0]) {
             final List<String> typeListFile = FileUtil.readFile("res/gamedata/TypeLists.txt");
 
-            ArrayList<String> tList = null;
-
-            Constant.CardTypes.CARD_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.SUPER_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.BASIC_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.LAND_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.CREATURE_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.INSTANT_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.SORCERY_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.ENCHANTMENT_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.ARTIFACT_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.WALKER_TYPES[0] = new ConstantStringArrayList();
+            List<String> tList = null;
 
             if (typeListFile.size() > 0) {
                 for (int i = 0; i < typeListFile.size(); i++) {
                     final String s = typeListFile.get(i);
 
                     if (s.equals("[CardTypes]")) {
-                        tList = Constant.CardTypes.CARD_TYPES[0].getList();
+                        tList = Constant.CardTypes.CARD_TYPES;
                     }
 
                     else if (s.equals("[SuperTypes]")) {
-                        tList = Constant.CardTypes.SUPER_TYPES[0].getList();
+                        tList = Constant.CardTypes.SUPER_TYPES;
                     }
 
                     else if (s.equals("[BasicTypes]")) {
-                        tList = Constant.CardTypes.BASIC_TYPES[0].getList();
+                        tList = Constant.CardTypes.BASIC_TYPES;
                     }
 
                     else if (s.equals("[LandTypes]")) {
-                        tList = Constant.CardTypes.LAND_TYPES[0].getList();
+                        tList = Constant.CardTypes.LAND_TYPES;
                     }
 
                     else if (s.equals("[CreatureTypes]")) {
-                        tList = Constant.CardTypes.CREATURE_TYPES[0].getList();
+                        tList = Constant.CardTypes.CREATURE_TYPES;
                     }
 
                     else if (s.equals("[InstantTypes]")) {
-                        tList = Constant.CardTypes.INSTANT_TYPES[0].getList();
+                        tList = Constant.CardTypes.INSTANT_TYPES;
                     }
 
                     else if (s.equals("[SorceryTypes]")) {
-                        tList = Constant.CardTypes.SORCERY_TYPES[0].getList();
+                        tList = Constant.CardTypes.SORCERY_TYPES;
                     }
 
                     else if (s.equals("[EnchantmentTypes]")) {
-                        tList = Constant.CardTypes.ENCHANTMENT_TYPES[0].getList();
+                        tList = Constant.CardTypes.ENCHANTMENT_TYPES;
                     }
 
                     else if (s.equals("[ArtifactTypes]")) {
-                        tList = Constant.CardTypes.ARTIFACT_TYPES[0].getList();
+                        tList = Constant.CardTypes.ARTIFACT_TYPES;
                     }
 
                     else if (s.equals("[WalkerTypes]")) {
-                        tList = Constant.CardTypes.WALKER_TYPES[0].getList();
+                        tList = Constant.CardTypes.WALKER_TYPES;
                     }
 
                     else if (s.length() > 1) {
@@ -264,13 +251,12 @@ public enum FModel {
         if (!Constant.Keywords.LOADED[0]) {
             final List<String> nskwListFile = FileUtil.readFile("res/gamedata/NonStackingKWList.txt");
 
-            Constant.Keywords.NON_STACKING_LIST[0] = new ConstantStringArrayList();
 
             if (nskwListFile.size() > 1) {
                 for (int i = 0; i < nskwListFile.size(); i++) {
                     final String s = nskwListFile.get(i);
                     if (s.length() > 1) {
-                        Constant.Keywords.NON_STACKING_LIST[0].getList().add(s);
+                        Constant.Keywords.NON_STACKING_LIST.add(s);
                     }
                 }
             }

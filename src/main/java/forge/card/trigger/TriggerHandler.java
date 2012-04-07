@@ -44,7 +44,7 @@ import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.game.phase.PhaseType;
-import forge.util.TextUtil;
+//import forge.util.TextUtil;
 
 /**
  * <p>

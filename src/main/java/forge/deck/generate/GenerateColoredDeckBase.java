@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import forge.Constant;
 import forge.PlayerType;
 import forge.Singletons;
 import forge.card.CardColor;
@@ -50,6 +51,7 @@ public abstract class GenerateColoredDeckBase {
     protected final int maxDuplicates;
 
     protected CardColor colors;
+    protected final ItemPool<CardPrinted> tDeck;
     
     StringBuilder tmpDeck = new StringBuilder();
     
@@ -68,11 +70,12 @@ public abstract class GenerateColoredDeckBase {
      */
     public GenerateColoredDeckBase() {
         this.maxDuplicates = Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS) ? 1 : 4;
+        tDeck = new ItemPool<CardPrinted>(CardPrinted.class);
     }
 
 
 
-    protected void addSome(ItemPool<CardPrinted> tDeck, int cnt, List<CardPrinted> source) {
+    protected void addSome(int cnt, List<CardPrinted> source) {
         for (int i = 0; i < cnt; i++) {
             CardPrinted c;
             int lc = 0;
@@ -92,7 +95,7 @@ public abstract class GenerateColoredDeckBase {
         }
     }
 
-    protected int addSomeStr(ItemPool<CardPrinted> tDeck, int cnt, List<String> source) {
+    protected int addSomeStr(int cnt, List<String> source) {
         int res = 0;
         for (int i = 0; i < cnt; i++) {
             String s;
@@ -111,7 +114,7 @@ public abstract class GenerateColoredDeckBase {
         return res;
     }
     
-    protected void addBasicLand(ItemPool<CardPrinted> tDeck, int cnt) {
+    protected void addBasicLand(int cnt) {
         // attempt to optimize basic land counts according to colors of picked cards
         final CCnt[] clrCnts = countLands(tDeck);
         // total of all ClrCnts
@@ -141,12 +144,12 @@ public abstract class GenerateColoredDeckBase {
         }
     }
     
-    protected void adjustDeckSize(ItemPool<CardPrinted> tDeck, int targetSize) {
+    protected void adjustDeckSize(int targetSize) {
         // fix under-sized or over-sized decks, due to integer arithmetic
         int actualSize = tDeck.countAll();
         if (actualSize < targetSize) {
             final int diff = targetSize - actualSize;
-            addSome(tDeck, diff, tDeck.toFlatList());
+            addSome(diff, tDeck.toFlatList());
         } else if (actualSize > targetSize) {
 
             Predicate<CardRules> exceptBasicLand = Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND);
@@ -164,7 +167,7 @@ public abstract class GenerateColoredDeckBase {
     } 
     
     
-    protected void addCmcAdjusted(ItemPool<CardPrinted> tDeck, List<CardPrinted> source, int cnt, List<FilterCMC> cmcLevels, int[] cmcAmounts) {
+    protected void addCmcAdjusted(List<CardPrinted> source, int cnt, List<FilterCMC> cmcLevels, int[] cmcAmounts) {
         final List<CardPrinted> curved = new ArrayList<CardPrinted>();
 
         
@@ -175,7 +178,7 @@ public abstract class GenerateColoredDeckBase {
         for(CardPrinted c: curved) 
             this.cardCounts.put(c.getName(), 0);
 
-        addSome(tDeck, cnt, curved);
+        addSome(cnt, curved);
     }
     
     protected List<CardPrinted> selectCardsOfMatchingColorForPlayer(PlayerType pt) 
@@ -196,8 +199,11 @@ public abstract class GenerateColoredDeckBase {
     protected static CCnt[] countLands(ItemPool<CardPrinted> outList) {
         // attempt to optimize basic land counts according
         // to color representation
-        final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
-                new CCnt("Mountain", 0), new CCnt("Forest", 0) };
+        
+        String[] bl = Constant.Color.BASIC_LANDS; 
+        
+        final CCnt[] clrCnts = { new CCnt(bl[0], 0), new CCnt(bl[1], 0), new CCnt(bl[2], 0),
+                new CCnt(bl[3], 0), new CCnt(bl[4], 0) };
 
         // count each card color using mana costs
         // TODO: count hybrid mana differently?

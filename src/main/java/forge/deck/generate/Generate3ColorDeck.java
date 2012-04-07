@@ -25,7 +25,6 @@ import forge.card.CardRules;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.error.ErrorViewer;
 import forge.item.CardPrinted;
-import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 
@@ -87,19 +86,16 @@ public class Generate3ColorDeck extends GenerateColoredDeckBase {
         final List<CardPrinted> creatures = CardRules.Predicates.Presets.IS_CREATURE.select(cards, CardPrinted.FN_GET_RULES);
         final List<CardPrinted> spells = CardRules.Predicates.Presets.isNonCreatureSpellForGenerator.select(cards, CardPrinted.FN_GET_RULES);
 
-        
-        final ItemPool<CardPrinted> tDeck = new ItemPool<CardPrinted>(CardPrinted.class);
-        
         final int creatCnt = (int) (creatPercentage * size);
         tmpDeck.append( "Creature Count:" + creatCnt + "\n" );
-        addCmcAdjusted(tDeck, creatures, creatCnt, cmcLevels, cmcAmounts);
+        addCmcAdjusted(creatures, creatCnt, cmcLevels, cmcAmounts);
         
         final int spellCnt = (int) (spellPercentage * size);
         tmpDeck.append( "Spell Count:" + spellCnt + "\n" );
-        addCmcAdjusted(tDeck, spells, spellCnt, cmcLevels, cmcAmounts);
+        addCmcAdjusted(spells, spellCnt, cmcLevels, cmcAmounts);
 
         // Add lands
-        int numLands = landsPercentage > 0 ? (int) (landsPercentage * size) : size - tDeck.countAll(); 
+        int numLands = (int) (landsPercentage * size); 
 
         tmpDeck.append( "numLands:" + numLands + "\n");
 
@@ -109,13 +105,13 @@ public class Generate3ColorDeck extends GenerateColoredDeckBase {
         for(String s : duals) {
             this.cardCounts.put(s, 0);
         }
-        int dblsAdded = addSomeStr(tDeck, (numLands / 4), duals);
+        int dblsAdded = addSomeStr((numLands / 4), duals);
         numLands -= dblsAdded;
 
-        addBasicLand(tDeck, numLands);
+        addBasicLand(numLands);
         tmpDeck.append( "DeckSize:" + tDeck.countAll() + "\n" );
 
-        adjustDeckSize(tDeck, size);
+        adjustDeckSize(size);
         tmpDeck.append( "DeckSize:" + tDeck.countAll() + "\n" );
         if (ForgeProps.getProperty("showdeck/3color", "false").equals("true")) {
             ErrorViewer.showError(tmpDeck.toString());

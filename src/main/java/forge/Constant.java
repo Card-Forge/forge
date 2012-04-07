@@ -248,34 +248,34 @@ public final class Constant {
         public static final boolean[] LOADED = { false };
 
         /** The card types. */
-        public static final ConstantStringArrayList[] CARD_TYPES = new ConstantStringArrayList[1];
+        public static final List<String> CARD_TYPES = new ArrayList<String>();
 
         /** The super types. */
-        public static final ConstantStringArrayList[] SUPER_TYPES = new ConstantStringArrayList[1];
+        public static final List<String> SUPER_TYPES = new ArrayList<String>();
 
         /** The basic types. */
-        public static final ConstantStringArrayList[] BASIC_TYPES = new ConstantStringArrayList[1];
+        public static final List<String> BASIC_TYPES = new ArrayList<String>();
 
         /** The land types. */
-        public static final ConstantStringArrayList[] LAND_TYPES = new ConstantStringArrayList[1];
+        public static final List<String> LAND_TYPES = new ArrayList<String>();
 
         /** The creature types. */
-        public static final ConstantStringArrayList[] CREATURE_TYPES = new ConstantStringArrayList[1];
+        public static final List<String> CREATURE_TYPES = new ArrayList<String>();
 
         /** The instant types. */
-        public static final ConstantStringArrayList[] INSTANT_TYPES = new ConstantStringArrayList[1];
+        public static final List<String> INSTANT_TYPES = new ArrayList<String>();
 
         /** The sorcery types. */
-        public static final ConstantStringArrayList[] SORCERY_TYPES = new ConstantStringArrayList[1];
+        public static final List<String> SORCERY_TYPES = new ArrayList<String>();
 
         /** The enchantment types. */
-        public static final ConstantStringArrayList[] ENCHANTMENT_TYPES = new ConstantStringArrayList[1];
+        public static final List<String> ENCHANTMENT_TYPES = new ArrayList<String>();
 
         /** The artifact types. */
-        public static final ConstantStringArrayList[] ARTIFACT_TYPES = new ConstantStringArrayList[1];
+        public static final List<String> ARTIFACT_TYPES = new ArrayList<String>();
 
         /** The walker types. */
-        public static final ConstantStringArrayList[] WALKER_TYPES = new ConstantStringArrayList[1];
+        public static final List<String> WALKER_TYPES = new ArrayList<String>();
     }
 
     /**
@@ -287,7 +287,7 @@ public final class Constant {
         public static final boolean[] LOADED = { false };
 
         /** The Non stacking list. */
-        public static final ConstantStringArrayList[] NON_STACKING_LIST = new ConstantStringArrayList[1];
+        public static final List<String> NON_STACKING_LIST = new ArrayList<String>();
     }
 
 } // Constant

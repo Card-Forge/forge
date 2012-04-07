@@ -17,20 +17,16 @@
  */
 package forge.deck.generate;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Random;
 
 import forge.error.ErrorViewer;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
-import forge.item.ItemPool;
 import forge.item.ItemPoolView;
+import forge.util.FileUtil;
 import forge.util.MyRandom;
 
 /**
@@ -42,8 +38,9 @@ import forge.util.MyRandom;
  * @version $Id$
  */
 public class GenerateThemeDeck extends GenerateColoredDeckBase{
-    private BufferedReader in = null;
-
+    private int basicLandPercentage = 0;
+    private boolean testing = false;
+    
     /**
      * <p>
      * Constructor for GenerateThemeDeck.
@@ -97,79 +94,14 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase{
      * @return a {@link forge.CardList} object.
      */
     public final ItemPoolView<CardPrinted> getThemeDeck(final String themeName, final int size) {
-        final ItemPool<CardPrinted> tDeck = new ItemPool<CardPrinted>(CardPrinted.class);
-
-        final ArrayList<Grp> groups = new ArrayList<Grp>();
-
-        final Map<String, Integer> cardCounts = new HashMap<String, Integer>();
-
         String s = "";
-        int bLandPercentage = 0;
-        boolean testing = false;
 
         // read theme file
         final String tFileName = "res/quest/themes/" + themeName + ".thm";
-        final File tFile = new File(tFileName);
-        if (!tFile.exists()) {
-            throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- file not found -- filename is "
-                    + tFile.getAbsolutePath());
-        }
-
-        try {
-            this.in = new BufferedReader(new FileReader(tFile));
-        } catch (final Exception ex) {
-            ErrorViewer.showError(ex, "File \"%s\" exception", tFile.getAbsolutePath());
-            throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- file exception -- filename is "
-                    + tFile.getPath());
-        }
-
-        s = this.readLine();
-        while (!s.equals("End")) {
-            if (s.startsWith("[Group")) {
-                final Grp g = new Grp();
-
-                final String[] ss = s.replaceAll("[\\[\\]]", "").split(" ");
-                for (final String element : ss) {
-                    if (element.startsWith("Percentage")) {
-                        final String p = element.substring("Percentage".length() + 1);
-                        g.percentage = Integer.parseInt(p);
-                    }
-                    if (element.startsWith("MaxCnt")) {
-                        final String m = element.substring("MaxCnt".length() + 1);
-                        g.maxCnt = Integer.parseInt(m);
-                    }
-                }
-
-                s = this.readLine();
-                while (!s.equals("[/Group]")) {
-                    g.cardnames.add(s);
-                    cardCounts.put(s, 0);
-
-                    s = this.readLine();
-                }
-
-                groups.add(g);
-            }
-
-            if (s.startsWith("BasicLandPercentage")) {
-                bLandPercentage = Integer.parseInt(s.substring("BasicLandPercentage".length() + 1));
-            }
-
-            if (s.equals("Testing")) {
-                testing = true;
-            }
-
-            s = this.readLine();
-        }
-
-        try {
-            this.in.close();
-        } catch (final IOException ex) {
-            ErrorViewer.showError(ex, "File \"%s\" exception", tFile.getAbsolutePath());
-            throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- file exception -- filename is "
-                    + tFile.getPath());
-        }
-
+        List<String> lines = FileUtil.readFile(tFileName);
+        
+        final List<Grp> groups = readGroups(lines);
+        
         String tmpDeck = "";
 
         // begin assigning cards to the deck
@@ -194,7 +126,7 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase{
                 }
                 if (lc > size) {
                     throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- looped too much -- filename is "
-                            + tFile.getAbsolutePath());
+                            + tFileName);
                 }
 
                 final int n = cardCounts.get(s);
@@ -206,9 +138,9 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase{
         }
 
         int numBLands = 0;
-        if (bLandPercentage > 0) { // if theme explicitly defines this
-            final float p = (float) (bLandPercentage * .01);
-            numBLands = (int) (p * size);
+        
+        if (basicLandPercentage > 0) { // if theme explicitly defines this
+            numBLands = (int) (size * basicLandPercentage / 100f);
         } else { // otherwise, just fill in the rest of the deck with basic
                  // lands
             numBLands = size - tDeck.countAll();
@@ -216,11 +148,11 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase{
 
         tmpDeck += "numBLands:" + numBLands + "\n";
 
-        addBasicLand(tDeck, numBLands);
+        addBasicLand(numBLands);
         
         tmpDeck += "DeckSize:" + tDeck.countAll() + "\n";
 
-        adjustDeckSize(tDeck, size);
+        adjustDeckSize(size);
 
         tmpDeck += "DeckSize:" + tDeck.countAll() + "\n";
         if (testing) {
@@ -230,26 +162,6 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase{
         return tDeck;
     }
 
-    /**
-     * <p>
-     * readLine.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    private String readLine() {
-        // makes the checked exception, into an unchecked runtime exception
-        try {
-            String s = this.in.readLine();
-            if (s != null) {
-                s = s.trim();
-            }
-            return s;
-        } catch (final Exception ex) {
-            ErrorViewer.showError(ex);
-            throw new RuntimeException("GenerateThemeDeck : readLine error");
-        }
-    } // readLine(Card)
 
     private class Grp {
 
@@ -261,5 +173,50 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase{
 
         /** The Percentage. */
         private int percentage;
+    }
+    
+    
+    private List<Grp> readGroups(List<String> lines) {
+        final List<Grp> groups = new ArrayList<Grp>();
+        
+        Grp g = null;
+        for(String s: lines) {
+            if ( s.equals("End") )
+                break;
+            
+            if (s.startsWith("[Group")) {
+                g = new Grp();
+                final String[] ss = s.replaceAll("[\\[\\]]", "").split(" ");
+                for (final String element : ss) {
+                    if (element.startsWith("Percentage")) {
+                        final String p = element.substring("Percentage".length() + 1);
+                        g.percentage = Integer.parseInt(p);
+                    }
+                    if (element.startsWith("MaxCnt")) {
+                        final String m = element.substring("MaxCnt".length() + 1);
+                        g.maxCnt = Integer.parseInt(m);
+                    }
+                }
+                groups.add(g);
+                
+                continue;
+            }
+
+            if (s.equals("[/Group]")) {
+                g = null;
+            }
+
+            if (s.startsWith("BasicLandPercentage")) {
+                basicLandPercentage = Integer.parseInt(s.substring("BasicLandPercentage".length() + 1));
+            } else if (s.equals("Testing")) {
+                testing = true;
+            } else if ( g != null ) {
+                g.cardnames.add(s);
+                cardCounts.put(s, 0);
+            }
+           
+        }
+        return groups;
+        
     }
 }

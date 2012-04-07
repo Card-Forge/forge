@@ -453,7 +453,7 @@ public final class CardUtil {
         final ArrayList<String> types = new ArrayList<String>();
 
         // types.addAll(getCardTypes());
-        types.addAll(Constant.CardTypes.CARD_TYPES[0].getList());
+        types.addAll(Constant.CardTypes.CARD_TYPES);
 
         // not currently used by Forge
         types.add("Plane");
@@ -482,7 +482,7 @@ public final class CardUtil {
         // types.add("Sorcery");
         // types.add("Tribal");
 
-        types.addAll(Constant.CardTypes.CARD_TYPES[0].getList());
+        types.addAll(Constant.CardTypes.CARD_TYPES);
 
         return types;
     }
@@ -498,7 +498,7 @@ public final class CardUtil {
     public static ArrayList<String> getBasicTypes() {
         final ArrayList<String> types = new ArrayList<String>();
 
-        types.addAll(Constant.CardTypes.BASIC_TYPES[0].getList());
+        types.addAll(Constant.CardTypes.BASIC_TYPES);
 
         return types;
     }
@@ -511,8 +511,8 @@ public final class CardUtil {
     public static ArrayList<String> getLandTypes() {
         final ArrayList<String> types = new ArrayList<String>();
 
-        types.addAll(Constant.CardTypes.BASIC_TYPES[0].getList());
-        types.addAll(Constant.CardTypes.LAND_TYPES[0].getList());
+        types.addAll(Constant.CardTypes.BASIC_TYPES);
+        types.addAll(Constant.CardTypes.LAND_TYPES);
 
         return types;
     }
@@ -528,7 +528,7 @@ public final class CardUtil {
     public static ArrayList<String> getCreatureTypes() {
         final ArrayList<String> types = new ArrayList<String>();
 
-        types.addAll(Constant.CardTypes.CREATURE_TYPES[0].getList());
+        types.addAll(Constant.CardTypes.CREATURE_TYPES);
 
         return types;
     }
@@ -544,7 +544,7 @@ public final class CardUtil {
      */
 
     public static boolean isASuperType(final String cardType) {
-        return (Constant.CardTypes.SUPER_TYPES[0].getList().contains(cardType));
+        return (Constant.CardTypes.SUPER_TYPES.contains(cardType));
     }
 
     /**
@@ -570,7 +570,7 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isACreatureType(final String cardType) {
-        return (Constant.CardTypes.CREATURE_TYPES[0].getList().contains(cardType));
+        return (Constant.CardTypes.CREATURE_TYPES.contains(cardType));
     }
 
     /**
@@ -583,7 +583,7 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isALandType(final String cardType) {
-        return (Constant.CardTypes.LAND_TYPES[0].getList().contains(cardType));
+        return (Constant.CardTypes.LAND_TYPES.contains(cardType));
     }
 
     /**
@@ -594,7 +594,7 @@ public final class CardUtil {
      * @return true, if is a planeswalker type
      */
     public static boolean isAPlaneswalkerType(final String cardType) {
-        return (Constant.CardTypes.WALKER_TYPES[0].getList().contains(cardType));
+        return (Constant.CardTypes.WALKER_TYPES.contains(cardType));
     }
 
     /**
@@ -607,7 +607,7 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isABasicLandType(final String cardType) {
-        return (Constant.CardTypes.BASIC_TYPES[0].getList().contains(cardType));
+        return (Constant.CardTypes.BASIC_TYPES.contains(cardType));
     }
 
     // this function checks, if duplicates of a keyword are not necessary (like
@@ -622,7 +622,7 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isNonStackingKeyword(final String keyword) {
-        return Constant.Keywords.NON_STACKING_LIST[0].getList().contains(keyword);
+        return Constant.Keywords.NON_STACKING_LIST.contains(keyword);
     }
 
     /**
