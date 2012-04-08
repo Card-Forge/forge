@@ -71,6 +71,34 @@ If you have a low end machine you may find that the scripts above will prevent j
 In this case you can try the following. Remove the background jpg picture from /res/images/ui/ folder. You can try using low quality pictures rather than the high quality pictures. Or you can try removing all of the jpg pictures from the pics folder.
 
 
+Forge failed to launch:
+
+If you're trying to run Forge for the first time, but it doesn't open up, you can try the following to get some output and help yourself/us solve the problem.
+
+1) Open up a terminal
+- Under Windows, press Windows+R, type "cmd", hit enter
+- Under Linux, you probably know that yourself. Use your distribution's application menu, and search for "terminal" in a group like "utilities".
+- Launch the program named "Console.app" which can be found in your /Applications/Utilities/ folder. Highlight the "All Messages" option and click on the "Clear Display" button before launching Forge.
+
+2) Go to the folder where you unpacked Forge
+- Windows: Let's say your forge is in D:\Programs\Forge.
+- Type "D:", Enter to change to the D: drive.
+- Type "cd \Programs\Forge", Enter to change to the directory.
+- NOTE: On nonenglish systems, you might have problems due to the poor localization of Windows. Go to the innermost directory you find (worst case is "\"), then "dir", Enter to show all folders in that folder. Search for the one you're probably wanting. For Example the German "Programme" could really be "Program Files" or something like that.
+- NOTE: You might have to "quote" directory names with Spaces in them
+- Linux: Let's say your forge is in /home/user/Forge
+- Type "cd /home/user/Forge", Enter
+- NOTE: You might have to "quote" or 'quote' directory names with Spaces in them
+- Current versions of Forge no longer include a launcher script for Mac OS, proceed to step three.
+
+3) Run Forge
+- On Windows, just type "forge.exe", Enter
+- On Linux, just type "forge.sh", Enter
+- Launch the Forge application bundle by double clicking on the program named "Forge.app".
+
+Now you will probably see some sort of Error in the console. the first few lines contain a message that might help you. If you can't fix the problem yourself, please take the complete output and report your problem on the Forum.
+
+
 The Card Pictures disappear when you restart Forge:
 
 if you're running Windows 7, make sure you're running the program as an admin, otherwise no changes will be made to your system (nothing is saved). In Windows 7, Forge may be happier when run from somewhere in the My Documents structure, (they call them Libraries now???) or from another partition other than C:. The user has little permission to do much on the system drive.
