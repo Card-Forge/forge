@@ -116,9 +116,25 @@ Fixes/Features:
 - move refactoring
 - removed old card alignment code from guiDisplay
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- arcane.ui.* => forge.view.arcane.*
+- removed generateRandomCards from cardfactory
+- same as previuos
+- Zone moved to a personal package
+- CardFactoryCreatures: card-specific code moved into methods for better readability
+- Fixing issue with Stupefying Touch having two Attach spells.
+- Adding Avacyn Restored Branch
+- Should just be branching straight to the folder instead of creating folder first.
+- Creating branch of Avacyn Restored
+- add an accessor to ViewMatchUI.java
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
+
+
+
+
+These new Avacyn Restored cards have been added to the new Avacyn Restored branch and are not yet available in the forge betas/snapshot builds.
 
 
 
