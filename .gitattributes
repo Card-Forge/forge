@@ -11421,8 +11421,10 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryTurns.java svneol=native#t
 src/main/java/forge/card/abilityfactory/AbilityFactoryZoneAffecting.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/AbstractCardFactory.java svneol=native#text/plain
+src/main/java/forge/card/cardfactory/CardFactoryArtifacts.java -text
 src/main/java/forge/card/cardfactory/CardFactoryAuras.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryCreatures.java svneol=native#text/plain
+src/main/java/forge/card/cardfactory/CardFactoryEnchantments.java -text
 src/main/java/forge/card/cardfactory/CardFactoryEquipment.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryInstants.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryInterface.java svneol=native#text/plain
