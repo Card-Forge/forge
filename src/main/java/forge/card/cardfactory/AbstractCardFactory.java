@@ -154,8 +154,8 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
      */
     @Override
     public Iterator<Card> iterator() {
-        if ( allCardsReadOnly == null )
-        {
+        if (allCardsReadOnly == null) {
+
             allCardsReadOnly = Collections.unmodifiableList(getAllCards());
         }
         return allCardsReadOnly.iterator();
@@ -1496,7 +1496,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             sb.append("If you do, choose two cards in your hand drawn this turn. For each of those cards, ");
             sb.append("pay 4 life or put the card on top of your library.");
             ability.setStackDescription(sb.toString());
-            
+
             final Trigger drawStepTrigger = forge.card.trigger.TriggerHandler.parseTrigger(
                     "Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | "
                             + "TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of "

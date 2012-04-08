@@ -54,8 +54,8 @@ public abstract class AllZoneUtil {
                 cards.addAll(p.getZone(zone).getCards());
             }
         }
-    }    
-    
+    }
+
     public static CardList getCardsIn(final Iterable<ZoneType> zones) {
         final CardList cards = new CardList();
         for (final ZoneType z : zones) {
@@ -71,7 +71,7 @@ public abstract class AllZoneUtil {
         }
         return cards;
     }
-    
+
     /**
      * gets a list of all cards owned by both players that have are currently in
      * the given zone.

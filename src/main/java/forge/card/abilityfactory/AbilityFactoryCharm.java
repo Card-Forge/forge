@@ -165,7 +165,7 @@ public final class AbilityFactoryCharm {
                     timingRight = true;
                     break;
                 }
-                if ((timingRight || i < num-1) && sub.doTrigger(false)) {
+                if ((timingRight || i < num - 1) && sub.doTrigger(false)) {
                     chosen = (AbilitySub) sub;
                     choices.remove(sub);
                     break;

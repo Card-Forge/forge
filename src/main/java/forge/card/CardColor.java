@@ -49,30 +49,35 @@ public final class CardColor implements Comparable<CardColor> {
     public CardColor(final CardManaCost mana) {
         this(mana.getColorProfile());
     }
-    
+
     private CardColor(final byte mask) {
         this.myColor = mask;
         this.orderWeight = this.getOrderWeight();
-        
+
     }
 
     public static CardColor fromMask(int mask) {
-        return new CardColor((byte)mask);
+        return new CardColor((byte) mask);
     }
-    
+
     public static CardColor fromNames(String... colors) {
         byte mask = 0;
-        for(String s : colors) {
-            if ( s.equalsIgnoreCase(Constant.Color.WHITE) || s.equalsIgnoreCase("w"))
+        for (String s : colors) {
+            if (s.equalsIgnoreCase(Constant.Color.WHITE) || s.equalsIgnoreCase("w")) {
                 mask |= WHITE;
-            if ( s.equalsIgnoreCase(Constant.Color.BLUE) || s.equalsIgnoreCase("u"))
+            }
+            if (s.equalsIgnoreCase(Constant.Color.BLUE) || s.equalsIgnoreCase("u")) {
                 mask |= BLUE;
-            if ( s.equalsIgnoreCase(Constant.Color.BLACK) || s.equalsIgnoreCase("b"))
+            }
+            if (s.equalsIgnoreCase(Constant.Color.BLACK) || s.equalsIgnoreCase("b")) {
                 mask |= BLACK;
-            if ( s.equalsIgnoreCase(Constant.Color.RED) || s.equalsIgnoreCase("r"))
+            }
+            if (s.equalsIgnoreCase(Constant.Color.RED) || s.equalsIgnoreCase("r")) {
                 mask |= RED;
-            if ( s.equalsIgnoreCase(Constant.Color.GREEN) || s.equalsIgnoreCase("g"))
+            }
+            if (s.equalsIgnoreCase(Constant.Color.GREEN) || s.equalsIgnoreCase("g")) {
                 mask |= GREEN;
+            }
         }
         return fromMask(mask);
     }
@@ -107,13 +112,12 @@ public final class CardColor implements Comparable<CardColor> {
         return (this.myColor & colormask) == colormask;
     }
 
-    /** this has no other colors except defined by operand  */
+    /** this has no other colors except defined by operand.  */
     public boolean hasNoColorsExcept(final int colormask) {
         return (this.myColor & ~colormask) == 0;
     }
-    
-    
-    /** Operand has no other colors except defined by this */
+
+    /** Operand has no other colors except defined by this. */
     public boolean containsAllColorsFrom(int colorProfile) {
         return (~this.myColor & colorProfile) == 0;
     }
@@ -284,10 +288,10 @@ public final class CardColor implements Comparable<CardColor> {
 
     public CardColor inverse() {
         byte mask = this.myColor;
-        mask ^= ( WHITE | BLUE | BLACK | GREEN | RED ); 
+        mask ^= (WHITE | BLUE | BLACK | GREEN | RED);
         return fromMask(mask);
     }
-    
+
     /*
      * (non-Javadoc)
      * 
@@ -332,6 +336,6 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean sharesColorWith(CardColor ccOther) {
-        return ( this.myColor & ccOther.myColor ) != 0;
+        return (this.myColor & ccOther.myColor) != 0;
     }
 }

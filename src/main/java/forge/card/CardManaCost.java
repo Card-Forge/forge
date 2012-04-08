@@ -215,9 +215,10 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      * @return
      */
     public boolean hasPhyrexian() {
-        for(CardManaCostShard shard : shards) {
-            if ( shard.isPhyrexian() )
+        for (CardManaCostShard shard : shards) {
+            if (shard.isPhyrexian()) {
                 return true;
+            }
         }
         return false;
     }
@@ -228,9 +229,10 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      */
     public int countX() {
         int iX = 0;
-        for(CardManaCostShard shard : shards) {
-            if ( shard == CardManaCostShard.X )
+        for (CardManaCostShard shard : shards) {
+            if (shard == CardManaCostShard.X) {
                 iX++;
+            }
         }
         return iX;
     }

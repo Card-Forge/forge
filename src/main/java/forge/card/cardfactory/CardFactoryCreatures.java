@@ -83,8 +83,7 @@ public class CardFactoryCreatures {
         card.clearFirstSpell();
         card.addSpellAbility(spell);
     }
-    
-    
+
     private static void getCard_GilderBairn(final Card card, final String cardName) {
         final Cost abCost = new Cost(card, "2 GU Untap", true);
         final Target tgt = new Target(card, "Select target permanent.", new String[] { "Permanent" });
@@ -185,7 +184,7 @@ public class CardFactoryCreatures {
         };
         card.addComesIntoPlayCommand(intoPlay);
     }
-    
+
     private static void getCard_MinotaurExplorer(final Card card, final String cardName) {
         final SpellAbility creature = new SpellPermanent(card) {
             private static final long serialVersionUID = -7326018877172328480L;
@@ -230,12 +229,12 @@ public class CardFactoryCreatures {
 
             }
         };
-        
+
         card.clearFirstSpell();
         card.addFirstSpellAbility(creature);
-        card.addComesIntoPlayCommand(intoPlay);        
+        card.addComesIntoPlayCommand(intoPlay);
     }
-    
+
     private static void getCard_PhylacteryLich(final Card card, final String cardName) {
         final Command intoPlay = new Command() {
             private static final long serialVersionUID = -1601957445498569156L;
@@ -296,10 +295,9 @@ public class CardFactoryCreatures {
                         .getZoneOf(this.getSourceCard()).is(ZoneType.Hand));
             }
         });
-        card.addComesIntoPlayCommand(intoPlay);    
+        card.addComesIntoPlayCommand(intoPlay);
     }
-    
-    
+
     private static void getCard_SkySwallower(final Card card, final String cardName) {
         final SpellAbility ability = new Ability(card, "0") {
 
@@ -333,7 +331,7 @@ public class CardFactoryCreatures {
         };
         card.addComesIntoPlayCommand(intoPlay);
     }
-    
+
     private static void getCard_JhoiraOfTheGhitu(final Card card, final String cardName) {
         final Stack<Card> chosen = new Stack<Card>();
         final SpellAbility ability = new Ability(card, "2") {
@@ -382,7 +380,7 @@ public class CardFactoryCreatures {
 
         card.addSpellAbility(ability);
     }
-    
+
     private static void getCard_VedalkenPlotter(final Card card, final String cardName) {
         final Card[] target = new Card[2];
         final int[] index = new int[1];
@@ -616,7 +614,7 @@ public class CardFactoryCreatures {
         sbStack.append(card.getName());
         sbStack.append(" - For each creature token you control, put a token ");
         sbStack.append("that's a copy of that creature onto the battlefield.");
-        copyTokens1.setStackDescription(sbStack.toString());        
+        copyTokens1.setStackDescription(sbStack.toString());
     }
 
     private static void getCard_TrevaTheRenewer(final Card card, final String cardName) {
@@ -653,7 +651,7 @@ public class CardFactoryCreatures {
         final StringBuilder sb2 = new StringBuilder();
         sb2.append(card.getName()).append(" - ").append(player);
         sb2.append(" gains life equal to permanents of the chosen color.");
-        ability2.setStackDescription(sb2.toString());        
+        ability2.setStackDescription(sb2.toString());
     }
 
     private static void getCard_SphinxJwar(final Card card, final String cardName) {
@@ -846,7 +844,7 @@ public class CardFactoryCreatures {
         sb.append("chooses among any number of those Wolves.");
         ability.setDescription(sb.toString());
 
-        card.addSpellAbility(ability);        
+        card.addSpellAbility(ability);
     }
 
     private static void getCard_ApocalypseHydra(final Card card, final String cardName) {
@@ -943,7 +941,7 @@ public class CardFactoryCreatures {
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append("Molten Hydra deals damage to number of +1/+1 ");
         sbStack.append("counters on it to target creature or player.");
-        ability2.setStackDescription(sbStack.toString());        
+        ability2.setStackDescription(sbStack.toString());
     }
 
     private static void getCard_AcademyRector(final Card card, final String cardName) {
@@ -1124,7 +1122,7 @@ public class CardFactoryCreatures {
             } // execute()
         }; // Command destroy
 
-        card.addDestroyCommand(destroy);        
+        card.addDestroyCommand(destroy);
     }
 
     private static void getCard_KinsbaileBorderguard(final Card card, final String cardName) {
@@ -1194,9 +1192,9 @@ public class CardFactoryCreatures {
         };
 
         card.addComesIntoPlayCommand(intoPlay);
-        card.addDestroyCommand(destroy);        
+        card.addDestroyCommand(destroy);
     }
-    
+
     private static void getCard_MultikickerP1P1(final Card card, final String cardName) {
         final AbilityStatic ability = new AbilityStatic(card, "0") {
             @Override
@@ -1220,7 +1218,7 @@ public class CardFactoryCreatures {
 
             }
         };
-        card.addComesIntoPlayCommand(comesIntoPlay);        
+        card.addComesIntoPlayCommand(comesIntoPlay);
     }
 
     private static void getCard_VampireHexmage(final Card card, final String cardName) {
@@ -1279,7 +1277,7 @@ public class CardFactoryCreatures {
             }
         };
         card.addSpellAbility(ability);
-    }    
+    }
 
     private static void getCard_SurturedGhoul(final Card card, final String cardName) {
         final int[] numCreatures = new int[1];
@@ -1351,9 +1349,9 @@ public class CardFactoryCreatures {
                 list = list.filter(CardListFilter.CREATURES);
                 return 0 < list.size();
             }
-        });        
-    }    
-    
+        });
+    }
+
     private static void getCard_NamelessRace(final Card card, final String cardName) {
         /*
          * As Nameless Race enters the battlefield, pay any amount of life.
@@ -1417,8 +1415,8 @@ public class CardFactoryCreatures {
         sb.append(cardName).append(" - pay any amount of life.");
         ability.setStackDescription(sb.toString());
 
-        card.addComesIntoPlayCommand(intoPlay);        
-    }    
+        card.addComesIntoPlayCommand(intoPlay);
+    }
 
     private static void getCard_PhyrexianScuta(final Card card, final String cardName) {
         final Cost abCost = new Cost(card, "3 B PayLife<3>", false);
@@ -1447,7 +1445,7 @@ public class CardFactoryCreatures {
         kicker.setStackDescription(sb.toString());
 
         card.addSpellAbility(kicker);
-    }    
+    }
 
     private static void getCard_YoseiTheMorningStar(final Card card, final String cardName) {
         final CardList targetPerms = new CardList();
@@ -1556,9 +1554,9 @@ public class CardFactoryCreatures {
                 }
             } // execute()
         };
-        card.addDestroyCommand(destroy);        
+        card.addDestroyCommand(destroy);
     }
-    
+
     private static void getCard_PhyrexianDreadnought(final Card card, final String cardName) {
         final Player player = card.getController();
         final CardList toSac = new CardList();
@@ -1641,9 +1639,9 @@ public class CardFactoryCreatures {
             }
         };
 
-        card.addComesIntoPlayCommand(comesIntoPlay);        
+        card.addComesIntoPlayCommand(comesIntoPlay);
     }
-    
+
     private static void getCard_ClonesSeries(final Card card, final String cardName) {
         final Card[] copyTarget = new Card[1];
 
@@ -1904,9 +1902,9 @@ public class CardFactoryCreatures {
         sbStack.append(cardName).append(" - name a card.");
         discard.setStackDescription(sbStack.toString());
 
-        card.addSpellAbility(discard);        
+        card.addSpellAbility(discard);
     }
-    
+
     private static void getCard_DuctCrawler(final Card card, final String cardName) {
         final String theCost;
         if (cardName.equals("Duct Crawler")) {
@@ -1947,14 +1945,14 @@ public class CardFactoryCreatures {
         };
         finalAb.setDescription(theCost + ": Target creature can't block CARDNAME this turn.");
 
-        card.addSpellAbility(finalAb);        
-    }    
-    
-//    // This is a hardcoded card template  
+        card.addSpellAbility(finalAb);
+    }
+
+//    // This is a hardcoded card template
 //
 //    private static void getCard_(final Card card, final String cardName) {
 //    }
-    
+
     public static Card getCard(final Card card, final String cardName) {
 
         if (cardName.equals("Force of Savagery")) {
@@ -2019,8 +2017,8 @@ public class CardFactoryCreatures {
         } else if (cardName.equals("Duct Crawler") || cardName.equals("Shrewd Hatchling")
                 || cardName.equals("Spin Engine") || cardName.equals("Screeching Griffin")) {
             getCard_DuctCrawler(card, cardName);
-        } 
-        
+        }
+
         // ***************************************************
         // end of card specific code
         // ***************************************************
@@ -2095,7 +2093,7 @@ public class CardFactoryCreatures {
                 return i;
             }
         }
-    
+
         return -1;
     }
 }
