@@ -414,4 +414,9 @@ public class ViewMatchUI extends FPanel {
     public JButton getBtnOK() {
         return this.message.getBtnOK();
     }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlBattlefield() {
+        return this.pnlBattlefield;
+    }
 }
