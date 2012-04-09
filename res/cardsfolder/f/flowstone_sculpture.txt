@@ -3,10 +3,11 @@ ManaCost:6
 Types:Artifact Creature Shapeshifter
 Text:no text
 PT:4/4
-A:AB$ PutCounter | Cost$ 2 Discard<1/Card> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME
-A:AB$ Pump | Cost$ 2 Discard<1/Card> | Defined$ Self | KW$ Flying | Permanent$ True | SpellDescription$ or CARDNAME gains flying
-A:AB$ Pump | Cost$ 2 Discard<1/Card> | Defined$ Self | KW$ First Strike | Permanent$ True | SpellDescription$ or CARDNAME gains first strike
-A:AB$ Pump | Cost$ 2 Discard<1/Card> | Defined$ Self | KW$ Trample | Permanent$ True | SpellDescription$ or CARDNAME gains trample
+A:AB$ GenericChoice | Cost$ 2 Discard<1/Card> | Choices$ ChooseCounters,ChooseFlying,ChooseFirstStrike,ChooseTrample | SpellDescription$ Put a +1/+1 counter on CARDNAME or CARDNAME gains flying, first strike, or trample. (This effect lasts indefinitely.)
+SVar:ChooseCounters:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ChoiceDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:ChooseFlying:DB$ Pump | Defined$ Self | KW$ Flying | Permanent$ True | ChoiceDescription$ CARDNAME gains flying.
+SVar:ChooseFirstStrike:DB$ Pump | Defined$ Self | KW$ First Strike | Permanent$ True | ChoiceDescription$ CARDNAME gains first strike.
+SVar:ChooseTrample:DB$ Pump | Defined$ Self | KW$ Trample | Permanent$ True | ChoiceDescription$ CARDNAME gains trample.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_sculpture.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/278.jpg
