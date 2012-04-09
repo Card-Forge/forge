@@ -10,17 +10,14 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
+import forge.gui.toolbox.FSkin;
 
 /**
  * Top-level container in drag layout.  A cell holds
@@ -46,10 +43,11 @@ final class DragCell extends JPanel implements ILocalRepaint {
     private final JPanel pnlBody = new JPanel(cards);
     private final JPanel pnlBorderRight = new JPanel();
     private final JPanel pnlBorderBottom = new JPanel();
+    private final int tabPaddingPx = 2;
+    private final int margin = 2 * tabPaddingPx;
 
     // Tab handling layout stuff
     private final List<IVDoc> allDocs = new ArrayList<IVDoc>();
-    private final Map<DragTab, Integer> tabWidths = new HashMap<DragTab, Integer>();
     private final JLabel lblHandle = new DragHandle();
     private final JLabel lblOverflow = new JLabel();
     private IVDoc docSelected = null;
@@ -72,8 +70,6 @@ final class DragCell extends JPanel implements ILocalRepaint {
         this.setBackground(Color.black);
         pnlHead.setBackground(Color.DARK_GRAY);
         pnlBody.setBackground(Color.LIGHT_GRAY);
-        pnlBorderRight.setOpaque(false);
-        pnlBorderBottom.setOpaque(false);
 
         lblOverflow.setForeground(Color.white);
         lblOverflow.setHorizontalAlignment(SwingConstants.CENTER);
@@ -83,15 +79,20 @@ final class DragCell extends JPanel implements ILocalRepaint {
         lblOverflow.setBackground(Color.black);
         lblOverflow.setToolTipText("Other tabs");
 
+        pnlBorderRight.setOpaque(false);
         pnlBorderRight.setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
         pnlBorderRight.addMouseListener(SResizingUtil.getResizeXListener());
         pnlBorderRight.addMouseMotionListener(SResizingUtil.getDragXListener());
 
+        pnlBorderBottom.setOpaque(false);
         pnlBorderBottom.setCursor(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
         pnlBorderBottom.addMouseListener(SResizingUtil.getResizeYListener());
         pnlBorderBottom.addMouseMotionListener(SResizingUtil.getDragYListener());
 
         lblOverflow.addMouseListener(SOverflowUtil.getOverflowListener());
+
+        pnlHead.add(lblHandle, "pushx, growx, h 100%!, gap " + tabPaddingPx + "px " + tabPaddingPx + "px 0 0", -1);
+        pnlHead.add(lblOverflow, "w 20px!, h 100%!, gap " + tabPaddingPx + "px " + tabPaddingPx + "px 0 0", -1);
     }
 
     /** @return {@link javax.swing.JPanel} */
@@ -241,6 +242,10 @@ final class DragCell extends JPanel implements ILocalRepaint {
     public void addDoc(final IVDoc doc0) {
         pnlBody.add(doc0.getDocumentID().toString(), doc0.getDocument());
         allDocs.add(doc0);
+        pnlHead.add(doc0.getTabLabel(), "h 100%!, gap " + tabPaddingPx + "px " + tabPaddingPx + "px 0 0", allDocs.size() - 1);
+
+        // Ensure that a tab is selected
+        setSelected(getSelected());
     }
 
     /** Removes a document from the layout and tabs.
@@ -248,6 +253,7 @@ final class DragCell extends JPanel implements ILocalRepaint {
     public void removeDoc(final IVDoc doc0) {
         pnlBody.remove(doc0.getDocument());
         allDocs.remove(doc0);
+        pnlHead.remove(doc0.getTabLabel());
     }
 
     /** Deselects previous selection, if exists, and then
@@ -285,78 +291,46 @@ final class DragCell extends JPanel implements ILocalRepaint {
         return docSelected;
     }
 
-    /** Rebuilds all tabs in head bar. Used when a tab is added or removed. */
-    public void rebuild() {
-        pnlHead.removeAll();
-
-        for (final IVDoc t : allDocs) {
-            pnlHead.add(t.getTabLabel(), "h 100%!, gap 2px 2px 0 0");
-        }
-
-        setSelected(getSelected());
-
-        pnlHead.add(lblHandle, "pushx, growx, h 100%!, gap 2px 2px 0 0");
-        pnlHead.add(lblOverflow, "w 20px!, h 100%!, gap 2px 2px 0 0");
-        pnlHead.revalidate();
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                tabWidths.clear();
-                refresh();
-            }
-        });
-    }
-
-    /** Refreshes visual display of head bar. */
+    /**
+     * Refreshes visual display of head bar.
+     */
     public void refresh() {
-        final int wHead = pnlHead.getWidth();
-        if (docSelected == null)     { return; }
-        if (wHead == 0)             { return; }
-        if (allDocs.isEmpty())        { return; }
-
-        if (tabWidths.isEmpty()) {
-            for (final IVDoc vDoc : allDocs) {
-                tabWidths.put(vDoc.getTabLabel(), vDoc.getTabLabel().getWidth());
-            }
-        }
+        final int headW = pnlHead.getWidth();
+        if (docSelected == null)    { return; }
+        if (headW <= 0)             { return; }
+        if (allDocs.isEmpty())      { return; }
 
         // Order tabs by priority
         final List<DragTab> priority = new ArrayList<DragTab>();
-        DragTab nextTab = docSelected.getTabLabel();
+        final DragTab selectedTab = docSelected.getTabLabel();
+        DragTab nextTab = selectedTab;
 
         while (nextTab != null) {
             priority.add(nextTab);
             nextTab = getNextTabInPriority(nextTab.getPriority());
         }
 
-        int wProjected = 50;
+        // Like Einstein's cosmological constant, the extra "8" here
+        // makes the whole thing work, but the reason for its existence is unknown.
+        // Part of it is 4px of padding from lblHandle...
+        int tempW = lblOverflow.getWidth() + margin + 8;
         int docOverflowCounter = 0;
 
+        // Hide/show all other tabs.
         for (final DragTab tab : priority) {
+            tempW += tab.getWidth() + margin;
             tab.setVisible(false);
             tab.setMaximumSize(null);
-            tab.setPreferredSize(null);
-            tab.setMinimumSize(null);
 
-            // Extra +4 is for gap pixels (2 on left and right).
-            if (wProjected + tabWidths.get(tab) + 4 < wHead) {
-                wProjected += tabWidths.get(tab) + 4;
-                tab.setVisible(true);
-            }
-            else if (wHead - wProjected > 40) {
-                final Dimension d = new Dimension(wHead - wProjected - 4, tab.getHeight());
-                tab.setMaximumSize(d);
-                tab.setPreferredSize(d);
-                tab.setMinimumSize(d);
-                tab.setVisible(true);
-                wProjected = wHead + 1;
-            }
-            else {
-                docOverflowCounter++;
-            }
+            if (tab.equals(selectedTab) || tempW < headW) { tab.setVisible(true); }
+            else { docOverflowCounter++; }
         }
 
+        // Resize selected tab if necessary.
+        tempW = (docOverflowCounter == 0 ? headW - margin : headW - lblOverflow.getWidth() - margin - 10);
+        selectedTab.setMaximumSize(new Dimension(tempW, 20));
+
+        // Update overflow label
         lblOverflow.setText("+" + docOverflowCounter);
         if (docOverflowCounter == 0) { lblOverflow.setVisible(false); }
         else { lblOverflow.setVisible(true); }
@@ -389,7 +363,7 @@ final class DragCell extends JPanel implements ILocalRepaint {
 
     /** Paints dragging handle image the length of the label. */
     private class DragHandle extends JLabel {
-        private final Image img = new ImageIcon("handle.png").getImage();
+        private final Image img = FSkin.getImage(FSkin.LayoutImages.IMG_HANDLE);
         private final int imgW = img.getWidth(null);
         private final int imgH = img.getHeight(null);
         private boolean hovered = false;
@@ -415,6 +389,7 @@ final class DragCell extends JPanel implements ILocalRepaint {
         public void paintComponent(final Graphics g) {
             super.paintComponent(g);
             if (!hovered) { return; }
+            if (imgW < 1) { return; }
 
             for (int x = 0; x < getWidth(); x += imgW) {
                 g.drawImage(img, x, (int) ((getHeight() - imgH) / 2), null);

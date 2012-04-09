@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
+import forge.Singletons;
 
 /** */
 public enum FViewNew {
@@ -23,6 +24,7 @@ public enum FViewNew {
     // Layout vars
     private final JFrame frmDocument = new JFrame();
     private final JPanel pnlContent = new JPanel();
+    private final JPanel pnlInsets = new JPanel(new BorderLayout());
     private final JPanel pnlPreview = new PreviewPanel();
     private final JPanel pnlTabOverflow = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final JLayeredPane lpnDocument = new JLayeredPane();
@@ -38,10 +40,9 @@ public enum FViewNew {
         frmDocument.setLocationRelativeTo(null);
         frmDocument.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmDocument.setContentPane(lpnDocument);
-        frmDocument.setTitle("Drag Layout: 4");
+        frmDocument.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
 
-        final JPanel pnlInsets = new JPanel(new BorderLayout());
-        pnlInsets.add(pnlContent);
+        pnlInsets.add(pnlContent, BorderLayout.CENTER);
         pnlInsets.setBackground(Color.black);
         pnlInsets.setBorder(new EmptyBorder(
                 FViewNew.BORDER_T, FViewNew.BORDER_T, 0, 0));
@@ -62,13 +63,57 @@ public enum FViewNew {
 
     /** */
     public void populate() {
-        SIOUtil.saveLayout();
-        SIOUtil.loadLayout();
+        DragCell cell0 = new DragCell();
+        DragCell cell1 = new DragCell();
+        DragCell cell2 = new DragCell();
+        DragCell cell3 = new DragCell();
+        DragCell cell4 = new DragCell();
+        DragCell cell5 = new DragCell();
+
+        cell0.addDoc(EDocID.REPORT_STACK.getDoc());
+        cell0.addDoc(EDocID.REPORT_COMBAT.getDoc());
+        cell0.addDoc(EDocID.REPORT_LOG.getDoc());
+        cell0.addDoc(EDocID.REPORT_PLAYERS.getDoc());
+        cell1.addDoc(EDocID.REPORT_MESSAGE.getDoc());
+        cell2.addDoc(EDocID.YOUR_BATTLEFIELD.getDoc());
+        cell3.addDoc(EDocID.YOUR_HAND.getDoc());
+        cell4.addDoc(EDocID.YOUR_DOCK.getDoc());
+        cell5.addDoc(EDocID.CARD_DETAIL.getDoc());
+        cell5.addDoc(EDocID.CARD_PICTURE.getDoc());
+        cell5.addDoc(EDocID.CARD_ANTES.getDoc());
+
+        addDragCell(cell0);
+        addDragCell(cell1);
+        addDragCell(cell2);
+        addDragCell(cell3);
+        addDragCell(cell4);
+        addDragCell(cell5);
+
+        cell0.setRoughBounds(0, 0, 0.2, 0.7);
+        cell1.setRoughBounds(0, 0.7, 0.2, 0.3);
+        cell2.setRoughBounds(0.2, 0, 0.6, 0.5);
+        cell3.setRoughBounds(0.2, 0.5, 0.6, 0.5);
+        cell4.setRoughBounds(0.8, 0, 0.2, 0.25);
+        cell5.setRoughBounds(0.8, 0.25, 0.2, 0.75);
+
+        // TODO save a default layout, and then remove these lines and load it every time.
+        //SIOUtil.saveLayout();
+        //SIOUtil.loadLayout();
+    }
+
+    /** @return {@link javax.swing.JFrame} */
+    public JFrame getFrame() {
+        return frmDocument;
     }
 
     /** @return {@link javax.swing.JLayeredPane} */
     public JLayeredPane getLpnDocument() {
         return lpnDocument;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlInsets() {
+        return pnlInsets;
     }
 
     /** @return {@link javax.swing.JPanel} */

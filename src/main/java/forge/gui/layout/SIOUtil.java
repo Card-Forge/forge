@@ -36,8 +36,8 @@ final class SIOUtil {
             throw new IllegalThreadStateException("This operation should be independent of the EDT.");
         }
 
-        try { save(); }
-        catch (final Exception e) { e.printStackTrace(); }
+       // try { save(); }
+       // catch (final Exception e) { e.printStackTrace(); }
     }
 
     /** Publicly-accessible load method, to neatly handle exception handling. */
@@ -46,8 +46,11 @@ final class SIOUtil {
             throw new IllegalThreadStateException("This operation should be independent of the EDT.");
         }
 
-        try { load(); }
-        catch (final Exception e) { e.printStackTrace(); }
+        // try { load(); }
+        // catch (final Exception e) { e.printStackTrace(); }
+        // TODO save layout after resize / rearrange
+        // TODO layout save
+        int todo = 5;
     }
 
     private static void save() throws Exception {
@@ -84,7 +87,7 @@ final class SIOUtil {
         final XMLEventReader reader = inputFactory.createXMLEventReader(new FileInputStream(FILE));
 
         view.removeAllDragCells();
-        while (reader.hasNext()) {
+        /*while (reader.hasNext()) {
             XMLEvent event = reader.nextEvent();
 
             if (event.isStartElement()) {
@@ -92,11 +95,11 @@ final class SIOUtil {
 
                 if (startElement.getName().getLocalPart() == (ITEM)) {
 
-                }*/
+                }*
 
                 //System.err.println(event.isStartElement());
             }
-        }
+        }*/
     }
 
     private static void createNode(final XMLEventWriter writer0, final Element name0,

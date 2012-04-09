@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 
@@ -30,7 +31,6 @@ final class SResizingUtil {
     private static int evtX;
     private static int dY;
     private static int evtY;
-    private static boolean lock = true;
 
     /** Minimum cell width. */
     public static final int W_MIN = 100;
@@ -78,34 +78,8 @@ final class SResizingUtil {
     private static final ComponentListener CAD_RESIZE = new ComponentAdapter() {
         @Override
         public void componentResized(final ComponentEvent e) {
-            SwingWorker<Object, Void> w = new SwingWorker<Object, Void>() {
-
-                @Override
-                protected Object doInBackground() {
-                    resizeWindow();
-                    FViewNew.SINGLETON_INSTANCE.getPnlContent().revalidate();
-                    return null;
-                }
-
-                @Override
-                protected void done() {
-                    for (final DragCell t : FViewNew.SINGLETON_INSTANCE.getDragCells()) { t.refresh(); }
-                }
-            };
-            w.execute();
-
-            /*
-             *  // Revalidation must be asynchronous, to give the UI a chance to "catch up"
-        // before figuring out the tab displays in each panel.
-        try { SwingUtilities.invokeAndWait(new Runnable() { @Override
-            public void run() {     } });
-        } catch (final Exception e) { e.printStackTrace(); }
-
-        // When the EDT is clear, title bars can be updated.
-        SwingUtilities.invokeLater(new Runnable() { @Override
-            public void run() {    } });
-             */
-
+            resizeWindow();
+            SRearrangingUtil.updateBorders();
         }
     };
 
@@ -113,13 +87,18 @@ final class SResizingUtil {
     public static void resizeWindow() {
         final List<DragCell> cells = FViewNew.SINGLETON_INSTANCE.getDragCells();
         final JPanel pnlContent = FViewNew.SINGLETON_INSTANCE.getPnlContent();
+        final JPanel pnlInsets = FViewNew.SINGLETON_INSTANCE.getPnlInsets();
+
+        pnlInsets.setBounds(FViewNew.SINGLETON_INSTANCE.getFrame().getContentPane().getBounds());
+        pnlInsets.validate();
+
         final int w = pnlContent.getWidth();
         final int h = pnlContent.getHeight();
 
         double roughVal = 0;
         int smoothVal = 0;
 
-        // This is the core of the pixel-perfect layout. To avoid +-1 px errors on borders
+        // This is the core of the pixel-perfect layout. To avoid ±1 px errors on borders
         // from rounding individual panels, the intermediate values (exactly accurate, in %)
         // for width and height are rounded based on comparison to other panels in the
         // layout.  This is to avoid errors such as:
@@ -127,6 +106,7 @@ final class SResizingUtil {
         // 30% = 29.4px -> 29px (!)
         for (final DragCell cellA : cells) {
             roughVal = cellA.getRoughX() * w + cellA.getRoughW() * w;
+
             smoothVal = (int) Math.round(roughVal);
             for (final DragCell cellB : cells) {
                 if ((cellB.getRoughX() * w + cellB.getRoughW() * w) == roughVal) {
@@ -153,10 +133,10 @@ final class SResizingUtil {
         // Lock in final bounds and build heads.
         for (final DragCell t : cells) {
             t.setSmoothBounds();
-            t.rebuild();
+            t.validate();
+            t.refresh();
         }
 
-        SRearrangingUtil.updateBorders();
         cells.clear();
     }
 
@@ -167,29 +147,25 @@ final class SResizingUtil {
         boolean leftLock = false;
         boolean rightLock = false;
 
-        for (DragCell t : LEFT_PANELS) {
+        for (final DragCell t : LEFT_PANELS) {
             if ((t.getW() + dX) < W_MIN) { leftLock = true; break; }
         }
 
-        for (DragCell t : RIGHT_PANELS) {
-            if ((t.getW() + dX) < W_MIN) { rightLock = true; break; }
+        for (final DragCell t : RIGHT_PANELS) {
+            if ((t.getW() - dX) < W_MIN) { rightLock = true; break; }
         }
 
-        if (lock && dX < 0 && leftLock) { return; }
-        if (lock && dX > 0 && rightLock) { return; }
+        if (dX < 0 && leftLock) { return; }
+        if (dX > 0 && rightLock) { return; }
 
-        for (DragCell t : LEFT_PANELS) {
+        for (final DragCell t : LEFT_PANELS) {
             t.setBounds(t.getX(), t.getY(), t.getW() + dX, t.getH());
             t.refresh();
-            t.revalidate();
-            t.repaintThis();
         }
 
-        for (DragCell t : RIGHT_PANELS) {
+        for (final DragCell t : RIGHT_PANELS) {
             t.setBounds(t.getX() + dX, t.getY(), t.getW() - dX, t.getH());
             t.refresh();
-            t.revalidate();
-            t.repaintThis();
         }
     }
 
@@ -200,24 +176,24 @@ final class SResizingUtil {
         boolean topLock = false;
         boolean bottomLock = false;
 
-        for (DragCell t : TOP_PANELS) {
+        for (final DragCell t : TOP_PANELS) {
             if ((t.getH() + dY) < H_MIN) { topLock = true; break; }
         }
 
-        for (DragCell t : BOTTOM_PANELS) {
-            if ((t.getH() + dY) < H_MIN) { bottomLock = true; break; }
+        for (final DragCell t : BOTTOM_PANELS) {
+            if ((t.getH() - dY) < H_MIN) { bottomLock = true; break; }
         }
 
-        if (lock && dY < 0 && topLock) { return; }
-        if (lock && dY > 0 && bottomLock) { return; }
+        if (dY < 0 && topLock) { return; }
+        if (dY > 0 && bottomLock) { return; }
 
-        for (DragCell t : TOP_PANELS) {
+        for (final DragCell t : TOP_PANELS) {
             t.setBounds(t.getX(), t.getY(), t.getW(), t.getH() + dY);
             t.revalidate();
             t.repaintThis();
         }
 
-        for (DragCell t : BOTTOM_PANELS) {
+        for (final DragCell t : BOTTOM_PANELS) {
             t.setBounds(t.getX(), t.getY() + dY, t.getW(), t.getH() - dY);
             t.revalidate();
             t.repaintThis();
@@ -354,17 +330,26 @@ final class SResizingUtil {
 
     /** */
     public static void endResizeX() {
-        SIOUtil.saveLayout();
+        final SwingWorker<Object, Void> w = new SwingWorker<Object, Void>() {
+            @Override
+            public Object doInBackground() {
+                SIOUtil.saveLayout();
+                return null;
+            }
+        };
+        w.execute();
     }
 
     /** */
     public static void endResizeY() {
-        SIOUtil.saveLayout();
-    }
-
-    /** @param bool0 &emsp; boolean */
-    public static void setLock(final boolean bool0) {
-        SResizingUtil.lock = bool0;
+        final SwingWorker<Object, Void> w = new SwingWorker<Object, Void>() {
+            @Override
+            public Object doInBackground() {
+                SIOUtil.saveLayout();
+                return null;
+            }
+        };
+        w.execute();
     }
 
     /** @return {@link java.awt.event.MouseListener} */

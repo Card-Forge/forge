@@ -14,7 +14,8 @@ import java.util.List;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+
+import forge.gui.toolbox.FSkin;
 
 /**
  * Package-private utilities for rearranging drag behavior using
@@ -52,15 +53,15 @@ final class SRearrangingUtil {
 
     private static final Toolkit TOOLS = Toolkit.getDefaultToolkit();
     private static final Cursor CUR_L = TOOLS.createCustomCursor(
-            TOOLS.getImage("L.png"), new Point(16, 16), "CUR_L");
+            FSkin.getImage(FSkin.LayoutImages.IMG_CUR_L), new Point(16, 16), "CUR_L");
     private static final Cursor CUR_T = TOOLS.createCustomCursor(
-            TOOLS.getImage("T.png"), new Point(16, 16), "CUR_T");
+            FSkin.getImage(FSkin.LayoutImages.IMG_CUR_T), new Point(16, 16), "CUR_T");
     private static final Cursor CUR_B = TOOLS.createCustomCursor(
-            TOOLS.getImage("B.png"), new Point(16, 16), "CUR_B");
+            FSkin.getImage(FSkin.LayoutImages.IMG_CUR_B), new Point(16, 16), "CUR_B");
     private static final Cursor CUR_R = TOOLS.createCustomCursor(
-            TOOLS.getImage("R.png"), new Point(16, 16), "CUR_R");
+            FSkin.getImage(FSkin.LayoutImages.IMG_CUR_R), new Point(16, 16), "CUR_R");
     private static final Cursor CUR_TAB = TOOLS.createCustomCursor(
-            TOOLS.getImage("TAB.png"), new Point(16, 16), "CUR_TAB");
+            FSkin.getImage(FSkin.LayoutImages.IMG_CUR_TAB), new Point(16, 16), "CUR_TAB");
 
     private static final MouseListener MAD_REARRANGE = new MouseAdapter() {
         @Override
@@ -148,12 +149,7 @@ final class SRearrangingUtil {
             break;
         }
 
-        if (cellTarget.equals(cellSrc)) {
-            dropzone = Dropzone.NONE;
-            pnlDocument.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
-            pnlPreview.setBounds(0, 0, 0, 0);
-        }
-        else if (evtX < (tempX + nestingMargin)
+        if (evtX < (tempX + nestingMargin)
                 && (cellTarget.getW() / 2) > SResizingUtil.W_MIN) {
             dropzone = Dropzone.LEFT;
             pnlDocument.setCursor(CUR_L);
@@ -178,7 +174,7 @@ final class SRearrangingUtil {
                     tempH - FViewNew.BORDER_T
             );
         }
-        else if (evtY < (tempY + nestingMargin + FViewNew.HEAD_H)
+        else if (evtY < (tempY + nestingMargin + FViewNew.HEAD_H) && evtY > tempY + FViewNew.HEAD_H
                 && (cellTarget.getH() / 2) > SResizingUtil.H_MIN) {
             dropzone = Dropzone.TOP;
             pnlDocument.setCursor(CUR_T);
@@ -202,6 +198,11 @@ final class SRearrangingUtil {
                 tempW - FViewNew.BORDER_T,
                 tempH
             );
+        }
+        else if (cellTarget.equals(cellSrc)) {
+            dropzone = Dropzone.NONE;
+            pnlDocument.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+            pnlPreview.setBounds(0, 0, 0, 0);
         }
         else {
             dropzone = Dropzone.BODY;
@@ -228,15 +229,16 @@ final class SRearrangingUtil {
 
         // Source and target are the same?
         if (dropzone.equals(Dropzone.NONE)) { return; }
+        if (cellTarget.equals(cellSrc) && cellSrc.getDocs().size() == 1) { return; }
 
         // Prep vals for possible resize
         tempX = cellTarget.getX();
         tempY = cellTarget.getY();
         tempW = cellTarget.getW();
         tempH = cellTarget.getH();
+        cellNew = new DragCell();
 
         // Insert a new cell if necessary, change bounds on target as appropriate.
-        cellNew = new DragCell();
         switch (dropzone) {
             case LEFT:
                 cellNew.setBounds(
@@ -287,113 +289,134 @@ final class SRearrangingUtil {
             cellNew.setSelected(vDoc);
         }
 
-        cellSrc.setSelected(srcSelectedDoc);
-        cellNew.rebuild();
+        // Remove old cell if necessary
+        if (cellSrc.getDocs().size() == 0) {
+            fillGap();
+            FViewNew.SINGLETON_INSTANCE.removeDragCell(cellSrc);
+        }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                //cellSrc.refresh();
-                if (cellSrc.getDocs().size() == 0) {
-                    fillGap();
-                    FViewNew.SINGLETON_INSTANCE.removeDragCell(cellSrc);
-                    updateBorders();
-                }
-            }
-        });
+        cellSrc.setSelected(srcSelectedDoc);
+        cellSrc.refresh();
+        cellTarget.refresh();
+        cellNew.validate();
+        cellNew.refresh();
+        updateBorders();
+        SIOUtil.saveLayout();
     }
 
     /** The gap created by displaced panels must be filled.
      * from any side which shares corners with the gap.  */
     private static void fillGap() {
-        // TODO should be in SResizingUtil?
-        boolean foundT = false;
-        boolean foundB = false;
-        boolean foundR = false;
-        boolean foundL = false;
-        JPanel targetBorder = null;
+        final List<DragCell> cellsToResize = new ArrayList<DragCell>();
         final int srcX = cellSrc.getAbsX();
         final int srcX2 = cellSrc.getAbsX2();
         final int srcY = cellSrc.getAbsY();
         final int srcY2 = cellSrc.getAbsY2();
+        final int srcW = cellSrc.getW();
+        final int srcH = cellSrc.getH();
 
-        // Look for matching panels on left side.
-        for (final DragCell pnl : FViewNew.SINGLETON_INSTANCE.getDragCells()) {
-            if (pnl.getAbsX2() == srcX && pnl.getAbsY() == srcY) {
+        boolean foundT = false;
+        boolean foundB = false;
+        boolean foundR = false;
+        boolean foundL = false;
+
+        cellsToResize.clear();
+        foundT = false;
+        foundB = false;
+        // Look for matching panels to left of source, expand them to the right.
+        for (final DragCell cell : FViewNew.SINGLETON_INSTANCE.getDragCells()) {
+            if (cell.getAbsX2() != srcX) { continue; }
+
+            if (cell.getAbsY() == srcY) {
                 foundT = true;
-                targetBorder = pnl.getBorderRight();
+                cellsToResize.add(cell);
             }
-            if (pnl.getAbsX2() == srcX && pnl.getAbsY2() == srcY2) {
+            if (cell.getAbsY2() == srcY2) {
                 foundB = true;
+                if (!cellsToResize.contains(cell)) { cellsToResize.add(cell); }
             }
+            if (cell.getAbsY() > srcY && cell.getAbsY2() < srcY2) { cellsToResize.add(cell); }
         }
 
         if (foundT && foundB) {
-            SResizingUtil.setLock(false);
-            SResizingUtil.startResizeX(new MouseEvent(targetBorder, 501, 0L, 0,
-                (int) targetBorder.getLocationOnScreen().getX(), (int) targetBorder.getLocationOnScreen().getY(), 1, false));
-            SResizingUtil.resizeX(new MouseEvent(targetBorder, 506, 0L, 0,
-                srcX2 - FViewNew.BORDER_T, targetBorder.getY(), 1, false));
-            SResizingUtil.setLock(true);
+            for (final DragCell cell : cellsToResize) {
+                cell.setBounds(cell.getX(), cell.getY(), cell.getW() + srcW, cell.getH());
+            }
             return;
         }
 
-        // Look for matching panels on right side.
-        for (final DragCell pnl : FViewNew.SINGLETON_INSTANCE.getDragCells()) {
-            if (pnl.getAbsX() == srcX2 && pnl.getAbsY() == srcY) {
+        cellsToResize.clear();
+        foundT = false;
+        foundB = false;
+        // Look for matching panels to right of source, expand them to the left.
+        for (final DragCell cell : FViewNew.SINGLETON_INSTANCE.getDragCells()) {
+            if (cell.getAbsX() != srcX2) { continue; }
+
+            if (cell.getAbsY() == srcY) {
                 foundT = true;
-                targetBorder = cellSrc.getBorderRight();
+                cellsToResize.add(cell);
             }
-            if (pnl.getAbsX() == srcX2 && pnl.getAbsY2() == srcY2) {
+            if (cell.getAbsY2() == srcY2) {
                 foundB = true;
+                if (!cellsToResize.contains(cell)) { cellsToResize.add(cell); }
             }
+            if (cell.getAbsY() > srcY && cell.getAbsY2() < srcY2) { cellsToResize.add(cell); }
         }
 
         if (foundT && foundB) {
-            SResizingUtil.setLock(false);
-            SResizingUtil.startResizeX(new MouseEvent(targetBorder, 501, 0L, 0,
-                    (int) targetBorder.getLocationOnScreen().getX(), (int) targetBorder.getLocationOnScreen().getY(), 1, false));
-            SResizingUtil.resizeX(new MouseEvent(targetBorder, 506, 0L, 0,
-                    srcX - FViewNew.BORDER_T, targetBorder.getY(), 1, false));
-            SResizingUtil.setLock(true);
+            for (final DragCell cell : cellsToResize) {
+                cell.setBounds(cellSrc.getX(), cell.getY(), cell.getW() + srcW, cell.getH());
+            }
             return;
         }
 
-        // Look for matching panels on bottom side.
-        for (final DragCell pnl : FViewNew.SINGLETON_INSTANCE.getDragCells()) {
-            if (pnl.getAbsY() == srcY2 && pnl.getAbsX() == srcX) {
+        cellsToResize.clear();
+        foundL = false;
+        foundR = false;
+        // Look for matching panels below source, expand them upwards.
+        for (final DragCell cell : FViewNew.SINGLETON_INSTANCE.getDragCells()) {
+            if (cell.getAbsY() != srcY2) { continue; }
+
+            if (cell.getAbsX() == srcX) {
                 foundL = true;
-                targetBorder = cellSrc.getBorderBottom();
+                cellsToResize.add(cell);
             }
-            if (pnl.getAbsY() == srcY2 && pnl.getAbsX2() == srcX2) {
+            if (cell.getAbsX2() == srcX2) {
                 foundR = true;
+                if (!cellsToResize.contains(cell)) { cellsToResize.add(cell); }
             }
+            if (cell.getAbsX() > srcX && cell.getAbsX2() < srcX2) { cellsToResize.add(cell); }
         }
 
         if (foundL && foundR) {
-            SResizingUtil.startResizeY(new MouseEvent(targetBorder, 501, 0L, 0,
-                    (int) targetBorder.getLocationOnScreen().getX(), (int) targetBorder.getLocationOnScreen().getY(), 1, false));
-            SResizingUtil.resizeY(new MouseEvent(targetBorder, 506, 0L, 0,
-                    targetBorder.getX(), srcY - FViewNew.BORDER_T, 1, false));
+            for (final DragCell cell : cellsToResize) {
+                cell.setBounds(cell.getX(), cellSrc.getY(), cell.getW(), cell.getH() + srcH);
+            }
             return;
         }
 
-        // Look for matching panels on top side.
-        for (final DragCell pnl : FViewNew.SINGLETON_INSTANCE.getDragCells()) {
-            if (pnl.getAbsY2() == srcY && pnl.getAbsX() == srcX) {
+        cellsToResize.clear();
+        foundL = false;
+        foundR = false;
+        // Look for matching panels above source, expand them downwards.
+        for (final DragCell cell : FViewNew.SINGLETON_INSTANCE.getDragCells()) {
+            if (cell.getAbsY2() != srcY) { continue; }
+
+            if (cell.getAbsX() == srcX) {
                 foundL = true;
-                targetBorder = pnl.getBorderBottom();
+                cellsToResize.add(cell);
             }
-            if (pnl.getAbsY2() == srcY && pnl.getAbsX2() == srcX2) {
+            if (cell.getAbsX2() == srcX2) {
                 foundR = true;
+                if (!cellsToResize.contains(cell)) { cellsToResize.add(cell); }
             }
+            if (cell.getAbsX() > srcX && cell.getAbsX2() < srcX2) { cellsToResize.add(cell); }
         }
 
         if (foundL && foundR) {
-            SResizingUtil.startResizeY(new MouseEvent(targetBorder, 501, 0L, 0,
-                    (int) targetBorder.getLocationOnScreen().getX(), (int) targetBorder.getLocationOnScreen().getY(), 1, false));
-            SResizingUtil.resizeY(new MouseEvent(targetBorder, 506, 0L, 0,
-                    targetBorder.getX(), srcY2 - FViewNew.BORDER_T, 1, false));
+            for (final DragCell cell : cellsToResize) {
+                cell.setBounds(cell.getX(), cell.getY(), cell.getW(), cell.getH() + srcH);
+            }
             return;
         }
 

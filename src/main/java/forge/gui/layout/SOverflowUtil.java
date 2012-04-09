@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  * <br><br><i>(S at beginning of class name denotes a static factory.)</i>
  */
 final class SOverflowUtil {
-    private static final MouseListener MAD_OVERFLOW = new MouseAdapter() {
+    private static final MouseListener MAD_OVERFLOW_SELECT = new MouseAdapter() {
         @Override
         public void mouseReleased(final MouseEvent e) {
             final JLabel src = ((JLabel) e.getSource());
@@ -73,7 +73,7 @@ final class SOverflowUtil {
 
     /** @return {@link java.awt.event.MouseListener} */
     public static MouseListener getOverflowListener() {
-        return MAD_OVERFLOW;
+        return MAD_OVERFLOW_SELECT;
     }
 
     /** @return {@link java.awt.event.MouseListener} */
@@ -105,7 +105,7 @@ final class SOverflowUtil {
                 public void mousePressed(final MouseEvent e) {
                     FViewNew.SINGLETON_INSTANCE.getPnlTabOverflow().setVisible(false);
                     parent0.setSelected(tab0);
-                    parent0.rebuild();
+                    parent0.refresh();
                 }
             });
         }
