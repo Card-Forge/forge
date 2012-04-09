@@ -37,10 +37,10 @@ import forge.util.MyRandom;
  * @author Forge
  * @version $Id$
  */
-public class GenerateThemeDeck extends GenerateColoredDeckBase{
+public class GenerateThemeDeck extends GenerateColoredDeckBase {
     private int basicLandPercentage = 0;
     private boolean testing = false;
-    
+
     /**
      * <p>
      * Constructor for GenerateThemeDeck.
@@ -99,9 +99,9 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase{
         // read theme file
         final String tFileName = "res/quest/themes/" + themeName + ".thm";
         List<String> lines = FileUtil.readFile(tFileName);
-        
+
         final List<Grp> groups = readGroups(lines);
-        
+
         String tmpDeck = "";
 
         // begin assigning cards to the deck
@@ -138,7 +138,7 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase{
         }
 
         int numBLands = 0;
-        
+
         if (basicLandPercentage > 0) { // if theme explicitly defines this
             numBLands = (int) (size * basicLandPercentage / 100f);
         } else { // otherwise, just fill in the rest of the deck with basic
@@ -149,7 +149,7 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase{
         tmpDeck += "numBLands:" + numBLands + "\n";
 
         addBasicLand(numBLands);
-        
+
         tmpDeck += "DeckSize:" + tDeck.countAll() + "\n";
 
         adjustDeckSize(size);
@@ -174,16 +174,16 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase{
         /** The Percentage. */
         private int percentage;
     }
-    
-    
+
     private List<Grp> readGroups(List<String> lines) {
         final List<Grp> groups = new ArrayList<Grp>();
-        
+
         Grp g = null;
-        for(String s: lines) {
-            if ( s.equals("End") )
+        for (String s : lines) {
+            if (s.equals("End")) {
                 break;
-            
+            }
+
             if (s.startsWith("[Group")) {
                 g = new Grp();
                 final String[] ss = s.replaceAll("[\\[\\]]", "").split(" ");
@@ -198,7 +198,7 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase{
                     }
                 }
                 groups.add(g);
-                
+
                 continue;
             }
 
@@ -210,13 +210,13 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase{
                 basicLandPercentage = Integer.parseInt(s.substring("BasicLandPercentage".length() + 1));
             } else if (s.equals("Testing")) {
                 testing = true;
-            } else if ( g != null ) {
+            } else if (g != null) {
                 g.cardnames.add(s);
                 cardCounts.put(s, 0);
             }
-           
+
         }
         return groups;
-        
+
     }
 }

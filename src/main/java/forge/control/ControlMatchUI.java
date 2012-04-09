@@ -260,7 +260,7 @@ public class ControlMatchUI implements CardContainer {
         // AI field is at index [0]
         int index = turn.isComputer() ? 0 : 1;
         ViewField vf = fieldControllers.get(index).getView();
-        
+
         switch (phase) {
             case UPKEEP: return vf.getLblUpkeep().getEnabled();
             case DRAW: return vf.getLblDraw().getEnabled();
@@ -274,7 +274,7 @@ public class ControlMatchUI implements CardContainer {
             case MAIN2: return vf.getLblMain2().getEnabled();
             case END_OF_TURN: return vf.getLblEndTurn().getEnabled();
         }
-      
+
         return true;
     }
 

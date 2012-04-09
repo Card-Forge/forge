@@ -41,7 +41,7 @@ public class GenerateDeckUtil {
     public static final Predicate<CardRules> aiCanPlay = new Predicate<CardRules>() {
         @Override
         public boolean isTrue(CardRules c) {
-            return !c.getRemAIDecks() && c.getRemRandomDecks(); 
+            return !c.getRemAIDecks() && c.getRemRandomDecks();
         }
     };
 
@@ -55,11 +55,11 @@ public class GenerateDeckUtil {
     public static final Predicate<CardRules> colorlessCards = new Predicate<CardRules>() {
         @Override
         public boolean isTrue(CardRules c) {
-            CardManaCost mc = c.getManaCost(); 
+            CardManaCost mc = c.getManaCost();
             return mc.getColorProfile() == 0 && !mc.isEmpty();
         }
-    };    
-    
+    };
+
     public static class ContainsAllColorsFrom extends Predicate<CardRules> {
         private final CardColor allowedColor;
         public ContainsAllColorsFrom(CardColor color) {
@@ -71,7 +71,7 @@ public class GenerateDeckUtil {
             return allowedColor.containsAllColorsFrom(subject.getManaCost().getColorProfile());
         }
     }
-    
+
     public static class FilterCMC extends Predicate<CardRules> {
         private final int min;
         private final int max;
@@ -79,7 +79,7 @@ public class GenerateDeckUtil {
         public FilterCMC(int from, int to) {
             min = from; max = to;
         }
-        
+
         @Override
         public boolean isTrue(CardRules c) {
             CardManaCost mc = c.getManaCost();
@@ -95,16 +95,14 @@ public class GenerateDeckUtil {
         dualLands.put(CardColor.BLACK | CardColor.RED, new String[]{"Badlands", "Blood Crypt", "Bloodstained Mire"});
         dualLands.put(CardColor.GREEN | CardColor.RED, new String[]{"Taiga", "Stomping Ground", "Wooded Foothills"});
         dualLands.put(CardColor.GREEN | CardColor.WHITE, new String[]{"Savannah", "Temple Garden", "Windswept Heath"});
-        
+
         dualLands.put(CardColor.WHITE | CardColor.BLACK, new String[]{"Scrubland", "Godless Shrine", "Marsh Flats"});
         dualLands.put(CardColor.BLUE | CardColor.RED, new String[]{"Volcanic Island", "Steam Vents", "Scalding Tarn"});
         dualLands.put(CardColor.BLACK | CardColor.GREEN, new String[]{"Bayou", "Overgrown Tomb", "Verdant Catacombs"});
-        dualLands.put(CardColor.WHITE | CardColor.RED, new String[]{"Plateau","Sacred Foundry","Arid Mesa"});
+        dualLands.put(CardColor.WHITE | CardColor.RED, new String[]{"Plateau", "Sacred Foundry", "Arid Mesa"});
         dualLands.put(CardColor.GREEN | CardColor.BLUE, new String[]{"Tropical Island", "Breeding Pool", "Misty Rainforest"});
     }
-    
-    
-    
+
     public static List<String> getDualLandList(final CardColor color) {
 
         final List<String> dLands = new ArrayList<String>();
@@ -118,10 +116,11 @@ public class GenerateDeckUtil {
             dLands.add("Evolving Wilds");
             dLands.add("Terramorphic Expanse");
         }
-        for(Entry<Integer, String[]> dual : dualLands.entrySet()) {
-            if( color.hasAllColors(dual.getKey()) ) {
-                for(String s : dual.getValue())
+        for (Entry<Integer, String[]> dual : dualLands.entrySet()) {
+            if (color.hasAllColors(dual.getKey())) {
+                for (String s : dual.getValue()) {
                     dLands.add(s);
+                }
             }
         }
 

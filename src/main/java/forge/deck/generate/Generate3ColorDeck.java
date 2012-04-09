@@ -44,9 +44,9 @@ public class Generate3ColorDeck extends GenerateColoredDeckBase {
     final List<FilterCMC> cmcLevels = Arrays.asList(
         new GenerateDeckUtil.FilterCMC(0, 2),
         new GenerateDeckUtil.FilterCMC(3, 5),
-        new GenerateDeckUtil.FilterCMC(6, 20) );
+        new GenerateDeckUtil.FilterCMC(6, 20));
     final int[] cmcAmounts = {12, 9, 3};
-    
+
     /**
      * <p>
      * Constructor for Generate3ColorDeck.
@@ -62,8 +62,8 @@ public class Generate3ColorDeck extends GenerateColoredDeckBase {
     public Generate3ColorDeck(final String clr1, final String clr2, final String clr3) {
         if (clr1.equals("AI")) {
             int color1 = r.nextInt(5);
-            int color2 = ( color1 + 1 + r.nextInt(4) ) % 5 ;
-            colors = CardColor.fromMask(CardColor.WHITE << color1 | CardColor.WHITE << color2).inverse();            
+            int color2 = (color1 + 1 + r.nextInt(4)) % 5;
+            colors = CardColor.fromMask(CardColor.WHITE << color1 | CardColor.WHITE << color2).inverse();
         } else {
             colors = CardColor.fromNames(clr1, clr2, clr3);
         }
@@ -87,32 +87,32 @@ public class Generate3ColorDeck extends GenerateColoredDeckBase {
         final List<CardPrinted> spells = CardRules.Predicates.Presets.isNonCreatureSpellForGenerator.select(cards, CardPrinted.FN_GET_RULES);
 
         final int creatCnt = (int) (creatPercentage * size);
-        tmpDeck.append( "Creature Count:" + creatCnt + "\n" );
+        tmpDeck.append("Creature Count:").append(creatCnt).append("\n");
         addCmcAdjusted(creatures, creatCnt, cmcLevels, cmcAmounts);
-        
+
         final int spellCnt = (int) (spellPercentage * size);
-        tmpDeck.append( "Spell Count:" + spellCnt + "\n" );
+        tmpDeck.append("Spell Count:").append(spellCnt).append("\n");
         addCmcAdjusted(spells, spellCnt, cmcLevels, cmcAmounts);
 
         // Add lands
-        int numLands = (int) (landsPercentage * size); 
+        int numLands = (int) (landsPercentage * size);
 
-        tmpDeck.append( "numLands:" + numLands + "\n");
+        tmpDeck.append("numLands:").append(numLands).append("\n");
 
-        // Add dual lands 
+        // Add dual lands
 
         List<String> duals = GenerateDeckUtil.getDualLandList(colors);
-        for(String s : duals) {
+        for (String s : duals) {
             this.cardCounts.put(s, 0);
         }
         int dblsAdded = addSomeStr((numLands / 4), duals);
         numLands -= dblsAdded;
 
         addBasicLand(numLands);
-        tmpDeck.append( "DeckSize:" + tDeck.countAll() + "\n" );
+        tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
 
         adjustDeckSize(size);
-        tmpDeck.append( "DeckSize:" + tDeck.countAll() + "\n" );
+        tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
         if (ForgeProps.getProperty("showdeck/3color", "false").equals("true")) {
             ErrorViewer.showError(tmpDeck.toString());
         }

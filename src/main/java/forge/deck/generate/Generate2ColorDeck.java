@@ -39,15 +39,15 @@ import forge.properties.ForgeProps;
 public class Generate2ColorDeck extends GenerateColoredDeckBase {
     final float landsPercentage = 0.42f;
     final float creatPercentage = 0.34f;
-    final float spellPercentage = 0.24f;    
+    final float spellPercentage = 0.24f;
 
     final List<FilterCMC> cmcLevels = Arrays.asList(
-            new GenerateDeckUtil.FilterCMC(0, 2), 
-            new GenerateDeckUtil.FilterCMC(3, 4), 
-            new GenerateDeckUtil.FilterCMC(5, 6), 
+            new GenerateDeckUtil.FilterCMC(0, 2),
+            new GenerateDeckUtil.FilterCMC(3, 4),
+            new GenerateDeckUtil.FilterCMC(5, 6),
             new GenerateDeckUtil.FilterCMC(7, 20));
     final int[] cmcAmounts = {10, 8, 6, 2};
-    
+
     // mana curve of the card pool
     // 20x 0 - 2
     // 16x 3 - 4
@@ -66,10 +66,10 @@ public class Generate2ColorDeck extends GenerateColoredDeckBase {
      *            a {@link java.lang.String} object.
      */
     public Generate2ColorDeck(final String clr1, final String clr2) {
-        
+
         if (clr1.equals("AI")) {
             int color1 = r.nextInt(5);
-            int color2 = ( color1 + 1 + r.nextInt(4) ) % 5 ;
+            int color2 = (color1 + 1 + r.nextInt(4)) % 5;
             colors = CardColor.fromMask(CardColor.WHITE << color1 | CardColor.WHITE << color2);
         } else {
             colors = CardColor.fromNames(clr1, clr2);
@@ -83,36 +83,35 @@ public class Generate2ColorDeck extends GenerateColoredDeckBase {
         final List<CardPrinted> creatures = CardRules.Predicates.Presets.IS_CREATURE.select(cards, CardPrinted.FN_GET_RULES);
         final List<CardPrinted> spells = CardRules.Predicates.Presets.isNonCreatureSpellForGenerator.select(cards, CardPrinted.FN_GET_RULES);
 
-        
-        
+
         final int creatCnt = (int) (creatPercentage * size);
-        tmpDeck.append( "Creature Count:" + creatCnt + "\n" );
+        tmpDeck.append("Creature Count:").append(creatCnt).append("\n");
         addCmcAdjusted(creatures, creatCnt, cmcLevels, cmcAmounts);
-        
+
         final int spellCnt = (int) (spellPercentage * size);
-        tmpDeck.append( "Spell Count:" + spellCnt + "\n" );
+        tmpDeck.append("Spell Count:").append(spellCnt).append("\n");
         addCmcAdjusted(spells, spellCnt, cmcLevels, cmcAmounts);
 
         // Add lands
-        int numLands = (int) (landsPercentage * size); 
+        int numLands = (int) (landsPercentage * size);
 
-        tmpDeck.append( "numLands:" + numLands + "\n");
+        tmpDeck.append("numLands:").append(numLands).append("\n");
 
-        // Add dual lands 
+        // Add dual lands
 
         List<String> duals = GenerateDeckUtil.getDualLandList(colors);
-        for(String s : duals) {
+        for (String s : duals) {
             this.cardCounts.put(s, 0);
         }
-        
+
         int dblsAdded = addSomeStr((numLands / 6), duals);
         numLands -= dblsAdded;
 
         addBasicLand(numLands);
-        tmpDeck.append( "DeckSize:" + tDeck.countAll() + "\n" );
+        tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
 
         adjustDeckSize(size);
-        tmpDeck.append( "DeckSize:" + tDeck.countAll() + "\n" );
+        tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
         if (ForgeProps.getProperty("showdeck/2color", "false").equals("true")) {
             ErrorViewer.showError(tmpDeck.toString());
         }

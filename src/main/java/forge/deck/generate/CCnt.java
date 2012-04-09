@@ -77,7 +77,7 @@ public class CCnt {
     public void setCount(final int count0) {
         this.count = count0;
     }
-    
+
     public void increment() { this.count++; }
     public void increment(int amount) { this.count += amount; }
 }

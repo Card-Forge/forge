@@ -52,12 +52,12 @@ public abstract class GenerateColoredDeckBase {
 
     protected CardColor colors;
     protected final ItemPool<CardPrinted> tDeck;
-    
+
     StringBuilder tmpDeck = new StringBuilder();
-    
+
 //    protected final float landsPercentage = 0.42f;
 //    protected float creatPercentage = 0.34f;
-//    protected float spellPercentage = 0.24f;    
+//    protected float spellPercentage = 0.24f;
     /**
      * <p>
      * Constructor for Generate2ColorDeck.
@@ -113,7 +113,7 @@ public abstract class GenerateColoredDeckBase {
         }
         return res;
     }
-    
+
     protected void addBasicLand(int cnt) {
         // attempt to optimize basic land counts according to colors of picked cards
         final CCnt[] clrCnts = countLands(tDeck);
@@ -121,18 +121,20 @@ public abstract class GenerateColoredDeckBase {
         int totalColor = 0;
         for (int i = 0; i < 5; i++) {
             totalColor += clrCnts[i].getCount();
-            tmpDeck.append( clrCnts[i].Color + ":" + clrCnts[i].getCount() + "\n");
+            tmpDeck.append(clrCnts[i].Color).append(":").append(clrCnts[i].getCount()).append("\n");
         }
 
-        tmpDeck.append( "totalColor:" + totalColor + "\n");
+        tmpDeck.append("totalColor:").append(totalColor).append("\n");
 
         for (int i = 0; i < 5; i++) {
-            if (clrCnts[i].getCount() <= 0) continue;
+            if (clrCnts[i].getCount() <= 0) {
+                continue;
+            }
 
             // calculate number of lands for each color
             float p = (float) clrCnts[i].getCount() / (float) totalColor;
             final int nLand = (int) (cnt * p);
-            tmpDeck.append( "nLand-" + clrCnts[i].Color + ":" + nLand + "\n");
+            tmpDeck.append("nLand-").append(clrCnts[i].Color).append(":").append(nLand).append("\n");
 
             // just to prevent a null exception by the deck size fixing
             // code
@@ -143,7 +145,7 @@ public abstract class GenerateColoredDeckBase {
             }
         }
     }
-    
+
     protected void adjustDeckSize(int targetSize) {
         // fix under-sized or over-sized decks, due to integer arithmetic
         int actualSize = tDeck.countAll();
@@ -154,75 +156,74 @@ public abstract class GenerateColoredDeckBase {
 
             Predicate<CardRules> exceptBasicLand = Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND);
 
-            for( int i = 0; i < 3 && actualSize > targetSize; i++ ) {
+            for (int i = 0; i < 3 && actualSize > targetSize; i++) {
                 List<CardPrinted> toRemove = exceptBasicLand.random(tDeck.toFlatList(), CardPrinted.FN_GET_RULES, actualSize - targetSize);
                 tDeck.removeAllFlat(toRemove);
 
-                for(CardPrinted c: toRemove)
-                    tmpDeck.append( "Removed:" + c.getName() + "\n" );
-            
+                for (CardPrinted c : toRemove) {
+                    tmpDeck.append("Removed:").append(c.getName()).append("\n");
+                }
                 actualSize = tDeck.countAll();
             }
         }
-    } 
-    
-    
+    }
+
     protected void addCmcAdjusted(List<CardPrinted> source, int cnt, List<FilterCMC> cmcLevels, int[] cmcAmounts) {
         final List<CardPrinted> curved = new ArrayList<CardPrinted>();
 
-        
-        for(int i = 0; i < cmcAmounts.length; i++){
+        for (int i = 0; i < cmcAmounts.length; i++) {
             curved.addAll(cmcLevels.get(i).random(source, CardPrinted.FN_GET_RULES, cmcAmounts[i]));
         }
 
-        for(CardPrinted c: curved) 
+        for (CardPrinted c : curved) {
             this.cardCounts.put(c.getName(), 0);
+        }
 
         addSome(cnt, curved);
     }
-    
-    protected List<CardPrinted> selectCardsOfMatchingColorForPlayer(PlayerType pt) 
-    {
+
+    protected List<CardPrinted> selectCardsOfMatchingColorForPlayer(PlayerType pt) {
+
         // start with all cards
         // remove cards that generated decks don't like
         Predicate<CardRules> canPlay = pt == PlayerType.HUMAN ? GenerateDeckUtil.humanCanPlay : GenerateDeckUtil.aiCanPlay;
         Predicate<CardRules> hasColor = new GenerateDeckUtil.ContainsAllColorsFrom(colors);
 
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {
-            hasColor = Predicate.or( hasColor, GenerateDeckUtil.colorlessCards );
+            hasColor = Predicate.or(hasColor, GenerateDeckUtil.colorlessCards);
         }
 
         return Predicate.and(canPlay, hasColor).select(CardDb.instance().getAllCards(), CardPrinted.FN_GET_RULES);
 
     }
-    
+
     protected static CCnt[] countLands(ItemPool<CardPrinted> outList) {
         // attempt to optimize basic land counts according
         // to color representation
-        
-        String[] bl = Constant.Color.BASIC_LANDS; 
-        
+
+        String[] bl = Constant.Color.BASIC_LANDS;
+
         final CCnt[] clrCnts = { new CCnt(bl[0], 0), new CCnt(bl[1], 0), new CCnt(bl[2], 0),
                 new CCnt(bl[3], 0), new CCnt(bl[4], 0) };
 
         // count each card color using mana costs
         // TODO: count hybrid mana differently?
-        for( Entry<CardPrinted, Integer> cpe : outList)
-        {
+        for (Entry<CardPrinted, Integer> cpe : outList) {
+
             int profile = cpe.getKey().getCard().getManaCost().getColorProfile();
 
-            if ((profile & CardColor.WHITE) != 0 ) {
+            if ((profile & CardColor.WHITE) != 0) {
                 clrCnts[0].increment(cpe.getValue());
-            } else if ((profile & CardColor.BLUE) != 0 ) {
+            } else if ((profile & CardColor.BLUE) != 0) {
                 clrCnts[1].increment(cpe.getValue());
-            } else if ((profile & CardColor.BLACK) != 0 ) {
+            } else if ((profile & CardColor.BLACK) != 0) {
                 clrCnts[2].increment(cpe.getValue());
-            } else if ((profile & CardColor.RED) != 0 ) {
+            } else if ((profile & CardColor.RED) != 0) {
                 clrCnts[3].increment(cpe.getValue());
-            } else if ((profile & CardColor.GREEN) != 0 ) {
+            } else if ((profile & CardColor.GREEN) != 0) {
                 clrCnts[4].increment(cpe.getValue());
             }
-            
+
         }
         return clrCnts;
     }

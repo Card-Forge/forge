@@ -44,15 +44,15 @@ public class Generate5ColorDeck extends GenerateColoredDeckBase {
     final List<FilterCMC> cmcLevels = Arrays.asList(
             new GenerateDeckUtil.FilterCMC(0, 2),
             new GenerateDeckUtil.FilterCMC(3, 5),
-            new GenerateDeckUtil.FilterCMC(6, 20) );
-    final int[] cmcAmounts = {15, 10, 5};    
+            new GenerateDeckUtil.FilterCMC(6, 20));
+    final int[] cmcAmounts = {15, 10, 5};
 
     // resulting mana curve of the card pool
     // 30x 0 - 2
     // 20x 3 - 5
     // 10x 6 - 20
     // =60x - card pool
-        
+
     /**
      * Instantiates a new generate5 color deck.
      */
@@ -76,34 +76,34 @@ public class Generate5ColorDeck extends GenerateColoredDeckBase {
         // build subsets based on type
         final List<CardPrinted> creatures = CardRules.Predicates.Presets.IS_CREATURE.select(cards, CardPrinted.FN_GET_RULES);
         final List<CardPrinted> spells = CardRules.Predicates.Presets.isNonCreatureSpellForGenerator.select(cards, CardPrinted.FN_GET_RULES);
-       
+
         final int creatCnt = (int) (creatPercentage * size);
-        tmpDeck.append( "Creature Count:" + creatCnt + "\n" );
+        tmpDeck.append("Creature Count:").append(creatCnt).append("\n");
         addCmcAdjusted(creatures, creatCnt, cmcLevels, cmcAmounts);
-        
+
         final int spellCnt = (int) (spellPercentage * size);
-        tmpDeck.append( "Spell Count:" + spellCnt + "\n" );
+        tmpDeck.append("Spell Count:").append(spellCnt).append("\n");
         addCmcAdjusted(spells, spellCnt, cmcLevels, cmcAmounts);
 
         // Add lands
-        int numLands = (int) (landsPercentage * size); 
+        int numLands = (int) (landsPercentage * size);
 
-        tmpDeck.append( "numLands:" + numLands + "\n");
+        tmpDeck.append("numLands:").append(numLands).append("\n");
 
-        // Add dual lands 
+        // Add dual lands
 
         List<String> duals = GenerateDeckUtil.getDualLandList(colors);
-        for(String s : duals) {
+        for (String s : duals) {
             this.cardCounts.put(s, 0);
         }
         int dblsAdded = addSomeStr((numLands / 4), duals);
         numLands -= dblsAdded;
 
         addBasicLand(numLands);
-        tmpDeck.append( "DeckSize:" + tDeck.countAll() + "\n" );
+        tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
 
         adjustDeckSize(size);
-        tmpDeck.append( "DeckSize:" + tDeck.countAll() + "\n" );
+        tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
         if (ForgeProps.getProperty("showdeck/5color", "false").equals("true")) {
             ErrorViewer.showError(tmpDeck.toString());
         }
