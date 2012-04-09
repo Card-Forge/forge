@@ -272,6 +272,22 @@ public enum FSkin {
     }
 
     /** */
+    public enum LayoutImages implements SkinProp { /** */
+        IMG_HANDLE  (new int[] {320, 450, 80, 20}), /** */
+        IMG_CUR_L   (new int[] {644, 524, 32, 32}), /** */
+        IMG_CUR_R   (new int[] {644, 564, 32, 32}), /** */
+        IMG_CUR_T   (new int[] {644, 604, 32, 32}), /** */
+        IMG_CUR_B   (new int[] {644, 644, 32, 32}), /** */
+        IMG_CUR_TAB (new int[] {644, 684, 32, 32});
+
+        private int[] coords;
+        /** @param xy &emsp; int[] coordinates */
+        LayoutImages(final int[] xy) { this.coords = xy; }
+        /** @return int[] */
+        public int[] getCoords() { return coords; }
+    }
+
+    /** */
     public enum ButtonImages implements SkinProp { /** */
         IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}), /** */
         IMG_BTN_START_OVER      (new int[] {480, 280, 160, 80}), /** */
@@ -488,6 +504,7 @@ public enum FSkin {
         for (final ManaImages e : ManaImages.values())                    { FSkin.setImage(e); }
         for (final ColorlessManaImages e : ColorlessManaImages.values())  { FSkin.setImage(e); }
         for (final GameplayImages e : GameplayImages.values())            { FSkin.setImage(e); }
+        for (final LayoutImages e : LayoutImages.values())                { FSkin.setImage(e); }
 
         // Foils have a separate sprite, so uses a specific method.
         for (final Foils e : Foils.values()) { FSkin.setFoil(e); }
