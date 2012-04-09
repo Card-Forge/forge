@@ -77,7 +77,8 @@ public final class MenuCommon extends MenuBase<Deck> {
         // The only remaining reference to global variable!
 
 
-        randomDeck.getMain().addAllFlat(Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND).random(CardDb.instance().getAllUniqueCards(), CardPrinted.FN_GET_RULES, 15*5));
+        randomDeck.getMain().addAllFlat(Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND)
+                .random(CardDb.instance().getAllUniqueCards(), CardPrinted.FN_GET_RULES, 15 * 5));
         randomDeck.getMain().add("Plains");
         randomDeck.getMain().add("Island");
         randomDeck.getMain().add("Swamp");

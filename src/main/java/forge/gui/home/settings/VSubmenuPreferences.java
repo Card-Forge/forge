@@ -113,7 +113,7 @@ public enum VSubmenuPreferences implements IVSubmenu {
 
         pnlPrefs.add(cbStackLand, regularConstraints);
         pnlPrefs.add(new NoteLabel("Minimizes mana lock in AI hands, giving a slight advantage to computer."), regularConstraints);
-        
+
         pnlPrefs.add(cbManaBurn, regularConstraints);
         pnlPrefs.add(new NoteLabel("Play with mana burn (from pre-Magic 2010 rules)."), regularConstraints);
 

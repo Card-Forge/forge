@@ -96,10 +96,10 @@ public class ComputerAIInput extends Input {
 
         if (AllZone.getStack().size() > 0) {
             this.computer.stackNotEmpty();
-        } else { 
+        } else {
             switch(phase) {
                 case MAIN1:
-                    Log.debug("Computer main1"); 
+                    Log.debug("Computer main1");
                     this.computer.main();
                     break;
                 case COMBAT_BEGIN:

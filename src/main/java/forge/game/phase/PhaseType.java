@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
- 
+
 public enum PhaseType {
     UNTAP("Untap", 0),
     UPKEEP("Upkeep", 1),
@@ -23,27 +23,28 @@ public enum PhaseType {
     MAIN2("Main2", 12),
     END_OF_TURN("End of Turn", 13),
     CLEANUP("Cleanup", 14);
-    
+
     public final String Name;
     public final int Index;
     private PhaseType(String name, int index) {
         Name = name;
         Index = index;
     }
-    
+
     public static PhaseType getByIndex(int idx) {
-        for( PhaseType ph : PhaseType.values() )
-        {
-            if ( ph.Index == idx ) return ph;
+        for (PhaseType ph : PhaseType.values()) {
+
+            if (ph.Index == idx) {
+                return ph;
+            }
         }
-        throw new InvalidParameterException("No PhaseType found with index " + idx );
+        throw new InvalidParameterException("No PhaseType found with index " + idx);
     }
-    
 
     public final boolean isAfter(final PhaseType phase) {
         return this.Index > phase.Index;
     }
-    
+
     public final boolean isMain() {
         return this == MAIN1 || this == MAIN2;
     }

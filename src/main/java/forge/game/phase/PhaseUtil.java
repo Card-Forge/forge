@@ -372,7 +372,7 @@ public class PhaseUtil {
      */
     public static boolean isBeforeAttackersAreDeclared() {
         final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
-        return phase == PhaseType.UNTAP || phase == PhaseType.UPKEEP || phase == PhaseType.DRAW 
+        return phase == PhaseType.UNTAP || phase == PhaseType.UPKEEP || phase == PhaseType.DRAW
             || phase == PhaseType.MAIN1 || phase == PhaseType.COMBAT_BEGIN;
     }
 
@@ -391,8 +391,8 @@ public class PhaseUtil {
         // Index of field; computer is 0, human is 1
         int i = p.isComputer() ? 0 : 1;
 
-        switch(s)
-        {
+        switch(s) {
+
             case UPKEEP:
                 lbl = t.getFieldControls().get(i).getView().getLblUpkeep();
                 break;

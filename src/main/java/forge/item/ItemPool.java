@@ -231,9 +231,9 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         for (final T e : flat) {
             this.remove(e);
         }
-        // need not set out-of-sync: either remove did set, or nothing was removed        
-    }    
-    
+        // need not set out-of-sync: either remove did set, or nothing was removed
+    }
+
     /**
      * 
      * Clear.

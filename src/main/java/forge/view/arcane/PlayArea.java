@@ -276,10 +276,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             // Store the current rows and others.
             final List<CardStackRow> storedRows = new ArrayList<CardStackRow>(this.rows.size());
             for (final CardStackRow row : this.rows) {
-                try{
+                try {
                     storedRows.add((CardStackRow) row.clone());
                 }
-                catch(NullPointerException e){
+                catch (NullPointerException e) {
                     System.out.println("Null pointer exception in Row Spacing. Possibly also part of the issue.");
                 }
             }
@@ -342,9 +342,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 try {
                     rows.add(insertIndex == -1 ? rows.size() : insertIndex, currentRow);
                 }
-                catch(ArrayIndexOutOfBoundsException e) {
-                    System.out.println("ArrayIndex Out of Bounds when trying to add row in PlayArea. Someone fix this logic, " +
-                            " I believe it causes the no cards loading in issue we've noticed.");
+                catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("ArrayIndex Out of Bounds when trying to add row in PlayArea. Someone fix this logic, "
+                            + " I believe it causes the no cards loading in issue we've noticed.");
                     // TODO: There's a crash here, maybe when rows == [null] and currentRow == [[Plant Wall]] and insertIndex is 0
                 }
                 currentRow = new CardStackRow();
@@ -360,9 +360,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 try {
                     rows.add(insertIndex == -1 ? rows.size() : insertIndex, currentRow);
                 }
-                catch(ArrayIndexOutOfBoundsException e) {
-                    System.out.println("ArrayIndex Out of Bounds when trying to add row in PlayArea. Someone fix this logic, " +
-                    		" I believe it causes the no cards loading in issue we've noticed.");
+                catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("ArrayIndex Out of Bounds when trying to add row in PlayArea. Someone fix this logic, "
+                            + " I believe it causes the no cards loading in issue we've noticed.");
                     // TODO: There's a crash here, maybe when rows == [null] and currentRow == [[Plant Wall]] and insertIndex is 0
                 }
             }
