@@ -127,6 +127,12 @@ Fixes/Features:
 - Creating branch of Avacyn Restored
 - add an accessor to ViewMatchUI.java
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- the cards that were hardcoded right in AbstractCardFactory moved to their own static classes
+- Added some new material to the README.txt file.
+- Further work on draggable layout.
+- A few additions to default skin.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
