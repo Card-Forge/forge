@@ -335,13 +335,13 @@ public class SpellPermanent extends Spell {
         // save cards with flash for surprise blocking
         if (card.hasKeyword("Flash")
                 && !ComputerAIGeneral.hasETBTrigger(card)
-                && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) 
+                && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
                      || Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
             return false;
         }
         // Prevent the computer from summoning Ball Lightning type creatures after attacking
         if (card.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
-                && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer()) 
+                && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())
                      || Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
             return false;
         }

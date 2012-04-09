@@ -278,9 +278,9 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @return a boolean.
      */
     public final boolean zonesCheck(PlayerZone hostCardZone) {
-        return !this.getHostCard().isPhasedOut() && 
-              ( validHostZones == null || validHostZones.isEmpty() || 
-                ( hostCardZone != null && validHostZones.contains(hostCardZone.getZoneType()))
+        return !this.getHostCard().isPhasedOut()
+                && (validHostZones == null || validHostZones.isEmpty()
+                || (hostCardZone != null && validHostZones.contains(hostCardZone.getZoneType()))
               );
     }
 
@@ -292,7 +292,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @return a boolean.
      */
     public final boolean phasesCheck() {
-        if ( null != validPhases ) {
+        if (null != validPhases) {
             if (!validPhases.contains(Singletons.getModel().getGameState().getPhaseHandler().getPhase())) {
                 return false;
             }

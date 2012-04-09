@@ -55,7 +55,7 @@ import forge.view.SplashFrame;
  * @version $Id$
  */
 public class PreloadingCardFactory extends AbstractCardFactory {
-    
+
     protected final List<Card> allCards = new ArrayList<Card>();
     /**
      * <p>

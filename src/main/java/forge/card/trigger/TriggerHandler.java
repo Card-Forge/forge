@@ -206,13 +206,15 @@ public class TriggerHandler {
         ret = type.createTrigger(mapParams, host, intrinsic);
 
         String triggerZones = mapParams.remove("TriggerZones");
-        if ( null != triggerZones )
+        if (null != triggerZones) {
             ret.setTriggerZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
+        }
 
         String triggerPhases = mapParams.remove("TriggerPhases");
-        if ( null != triggerPhases )
+        if (null != triggerPhases) {
             ret.setTriggerPhases(PhaseType.parseRange(triggerPhases));
-        
+        }
+
         return ret;
     }
 
@@ -367,9 +369,9 @@ public class TriggerHandler {
         if (regtrig.getMode() != mode) {
             return false; // Not the right mode.
         }
-        
+
         // System.out.println( "  " + regtrig.getMode().toString() + "@" + regtrig.getHostCard() + "> " + TextUtil.mapToString(params));
-        
+
         if (!regtrig.zonesCheck(AllZone.getZoneOf(regtrig.getHostCard()))) {
             return false; // Host card isn't where it needs to be.
         }
@@ -429,7 +431,7 @@ public class TriggerHandler {
         final AbilityFactory abilityFactory = new AbilityFactory();
 
         final SpellAbility[] sa = new SpellAbility[1];
-        Card host = AllZoneUtil.getCardState(regtrig.getHostCard()); 
+        Card host = AllZoneUtil.getCardState(regtrig.getHostCard());
 
         if (host == null) {
             host = regtrig.getHostCard();

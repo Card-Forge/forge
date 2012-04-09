@@ -34,7 +34,7 @@ class CardFactoryEnchantments {
      * @return
      */
     public static Card getCard(final Card card, final String cardName) {
-        
+
         if (cardName.equals("Bridge from Below")) {
             final SpellAbility spell = new SpellPermanent(card) {
                 private static final long serialVersionUID = 7254358703158629514L;
@@ -49,8 +49,8 @@ class CardFactoryEnchantments {
             // Keywords.
             card.clearFirstSpell();
             card.addSpellAbility(spell);
-        }        
-        
+        }
+
      // *************** START *********** START **************************
         else if (cardName.equals("Night Soil")) {
             final SpellAbility nightSoil = new Ability(card, "1") {
@@ -140,7 +140,7 @@ class CardFactoryEnchantments {
 
             nightSoil.setAfterPayMana(soilTarget);
             card.addSpellAbility(nightSoil);
-        } // *************** END ************ END **************************        
+        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Standstill")) {
@@ -218,7 +218,7 @@ class CardFactoryEnchantments {
             card.addComesIntoPlayCommand(intoPlay);
             card.addDestroyCommand(toGrave);
         } // *************** END ************ END **************************
-        
+
         // *************** START *********** START **************************
         else if (cardName.equals("Copy Artifact")) {
             final Card[] copyTarget = new Card[1];
@@ -320,8 +320,7 @@ class CardFactoryEnchantments {
             copy.setStackDescription(sb.toString());
             copy.setBeforePayMana(runtime);
         } // *************** END ************ END **************************
-        
-        
+
         return card;
     }
 

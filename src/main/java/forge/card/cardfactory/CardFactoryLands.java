@@ -150,7 +150,7 @@ class CardFactoryLands {
 
                 @Override
                 public boolean canPlayAI() {
-                    if (Singletons.getModel().getGameState().getPhaseHandler().getPhase() != PhaseType.MAIN1 
+                    if (Singletons.getModel().getGameState().getPhaseHandler().getPhase() != PhaseType.MAIN1
                      && Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
                         return false;
                     }

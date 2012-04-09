@@ -610,14 +610,14 @@ public class ManaCost {
             if (o instanceof ManaPartSnow) {
                 // move snow cost to the end of the list
                 list.remove(0);
-                list.add((ManaPartSnow)o);
+                list.add((ManaPartSnow) o);
             }
             o = list.get(0);
 
             if (o instanceof ManaPartColorless) {
                 // move colorless cost to the end of the list
                 list.remove(0);
-                list.add((ManaPartColorless)o);
+                list.add((ManaPartColorless) o);
             }
         } // else
 

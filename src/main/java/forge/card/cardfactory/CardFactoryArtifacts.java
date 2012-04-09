@@ -43,7 +43,7 @@ class CardFactoryArtifacts {
      * @return
      */
     public static Card getCard(final Card card, final String cardName) {
-        
+
         if (cardName.equals("Sarpadian Empires, Vol. VII")) {
 
             final String[] choices = { "Citizen", "Camarid", "Thrull", "Goblin", "Saproling" };
@@ -136,8 +136,8 @@ class CardFactoryArtifacts {
 
             card.addComesIntoPlayCommand(intoPlay);
 
-        } // *************** END ************ END **************************    
-        
+        } // *************** END ************ END **************************
+
         // *************** START *********** START **************************
         else if (cardName.equals("Mox Diamond")) {
             final Input discard = new Input() {
@@ -223,7 +223,7 @@ class CardFactoryArtifacts {
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
-        
+
         // *************** START *********** START **************************
         else if (cardName.equals("Goblin Charbelcher")) {
             final Cost abCost = new Cost(card, "3 T", true);
@@ -667,7 +667,6 @@ class CardFactoryArtifacts {
 
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
-        
 
         // *************** START *********** START **************************
         else if (cardName.equals("Sylvan Library")) {
@@ -830,8 +829,7 @@ class CardFactoryArtifacts {
             copy.setStackDescription(sb.toString());
             copy.setBeforePayMana(runtime);
         } // *************** END ************ END **************************
-        
-        
+
         return card;
     }
 
