@@ -351,7 +351,7 @@ public class QuestDataIO {
 
             final File f = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR), qd.getName());
             QuestDataIO.savePacked(f + ".dat", xStream, qd);
-            QuestDataIO.saveUnpacked(f + ".xml", xStream, qd);
+            //QuestDataIO.saveUnpacked(f + ".xml", xStream, qd);
 
         } catch (final Exception ex) {
             ErrorViewer.showError(ex, "Error saving Quest Data.");
@@ -367,6 +367,7 @@ public class QuestDataIO {
         zout.close();
     }
 
+    @SuppressWarnings("unused") // used only for debug purposes
     private static void saveUnpacked(final String f, final XStream xStream, final QuestData qd) throws IOException {
         final BufferedOutputStream boutUnp = new BufferedOutputStream(new FileOutputStream(f));
         xStream.toXML(qd, boutUnp);
