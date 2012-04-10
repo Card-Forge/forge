@@ -1,4 +1,4 @@
-Name:AAA Molten Psyche
+Name:Molten Psyche
 ManaCost:1 R R
 Types:Sorcery
 Text:no text
