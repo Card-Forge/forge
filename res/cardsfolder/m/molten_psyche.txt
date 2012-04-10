@@ -1,7 +1,17 @@
-Name:Molten Psyche
+Name:AAA Molten Psyche
 ManaCost:1 R R
 Types:Sorcery
-Text:Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.\r\nMetalcraft - If you control three or more artifacts, CARDNAME deals damage to each opponent equal to the number of cards that player has drawn this turn.
+Text:no text
+A:SP$ ChangeZoneAll | Cost$ 1 R R | Defined$ You | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | Shuffle$ True | SubAbility$ PsychoDraw | SpellDescription$ Each player shuffles the cards from his or her hand into his or her library, then draws that many cards. Metalcraft - If you control three or more artifacts, Molten Psyche deals damage to each opponent equal to the number of cards that player has drawn this turn.
+SVar:PsychoDraw:DB$Draw | NumCards$ X | Defined$ You | SubAbility$ PsychOpp
+SVar:PsychOpp:DB$ ChangeZoneAll | Defined$ Opponent | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | ForgetOtherRemembered$ True | Shuffle$ True | SubAbility$ PsychoDrawOpp
+SVar:PsychoDrawOpp:DB$Draw | NumCards$ X | Defined$ Opponent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True | SubAbility$ MindFlame
+SVar:MindFlame:DB$DealDamage | Defined$ Opponent | NumDmg$ Y | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE3 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+SVar:X:Remembered$Amount
+SVar:Y:Count$OppDrewThisTurn
+SVar:NeedsToPlayVar:Z LE2
+SVar:Z:Count$InYourHand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_psyche.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/98.jpg
