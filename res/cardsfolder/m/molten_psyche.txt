@@ -7,7 +7,7 @@ SVar:PsychoDraw:DB$Draw | NumCards$ X | Defined$ You | SubAbility$ PsychOpp
 SVar:PsychOpp:DB$ ChangeZoneAll | Defined$ Opponent | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | ForgetOtherRemembered$ True | Shuffle$ True | SubAbility$ PsychoDrawOpp
 SVar:PsychoDrawOpp:DB$Draw | NumCards$ X | Defined$ Opponent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True | SubAbility$ MindFlame
-SVar:MindFlame:DB$DealDamage | Defined$ Opponent | NumDmg$ Y | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE3 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+SVar:MindFlame:DB$DealDamage | Defined$ Opponent | NumDmg$ Y | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE3
 SVar:X:Remembered$Amount
 SVar:Y:Count$OppDrewThisTurn
 SVar:NeedsToPlayVar:Z LE2
