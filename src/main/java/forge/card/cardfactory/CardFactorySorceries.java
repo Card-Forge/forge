@@ -1380,7 +1380,7 @@ public class CardFactorySorceries {
         }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Molten Psyche")) {
+        /*else if (cardName.equals("Molten Psyche")) {
             /*
              * Each player shuffles the cards from his or her hand into his or
              * her library, then draws that many cards. Metalcraft - If you
@@ -1388,7 +1388,7 @@ public class CardFactorySorceries {
              * each opponent equal to the number of cards that player has drawn
              * this turn.
              */
-            final SpellAbility spell = new Spell(card) {
+            /*final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -1276674329039279896L;
 
                 @Override
@@ -1431,7 +1431,7 @@ public class CardFactorySorceries {
 
             }; // SpellAbility
             card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Praetor's Counsel")) {
