@@ -16,7 +16,7 @@ You can place your deck files from an earlier version of Forge into the /res/dec
 
 3) The /res/draft/ and the /res/sealed/ folders contains files for the sealed and draft mode. You should copy over your files inside of these folders that end in the extension ".draft" or ".zsealed".
 
-4) The /res/quest/ folder contains your questData file. This file includes all of the information for your current quest. You will not be able to continue your quest in a newer version of Forge unless you copy over the file named "questData.dat".
+4) The /res/quest/data folder contains your questData files. These files include all of the information for your current quests. You will not be able to continue your quests in a newer version of Forge unless you copy over the your quest data files files. These files have a ".dat" or a ".xml" extension.
 
 5) The Forge root folder contains a preference file named "forge.preferences" and you should also move a copy of this file over to the newer version.
 
