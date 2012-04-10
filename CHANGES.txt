@@ -133,6 +133,14 @@ Fixes/Features:
 - Further work on draggable layout.
 - A few additions to default skin.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Flowstone Sculpture wasn't displaying the 'Put a +1/+1 counter on CARDNAME' ability in the card info panel. So while correcting it decided to make it use generic choice for the ability selection instead of separate pumps.
+- Refined Flicker's script (Remembered cards weren't being cleared).
+- CheckStyle.
+- Improved script for Tree of Redemption. Should get final makeover when Sol (or another dev) implements his StoreSVar AF.
+- CheckStyle plus StringBuilder.
+- CheckStyle.
+- Fixed Consuming Vapors not clearing remembered list.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -142,7 +150,11 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 These new Avacyn Restored cards have been added to the new Avacyn Restored branch and are not yet available in the forge betas/snapshot builds.
 
-
+Avacyn, Angel of Hope
+Cloudshift
+Demonic Taskmaster
+Griselbrand
+Restoration Angel
 
 
 Added many cards, including:
