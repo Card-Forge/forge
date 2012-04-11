@@ -141,6 +141,15 @@ Fixes/Features:
 - CheckStyle.
 - Fixed Consuming Vapors not clearing remembered list.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Converted Molten Psyche to script. (Thanks Squee)
+- Added the script version of Molten Psyche to AVR branch accidentally, so committing to main branch as well so its not broken with the hardcoded one removed.
+- Removed debugging info from Molten Psyche (main branch)
+- Removed debugging info from Molten Psyche (AVR branch)
+- Urg... final fix to Molten Psyche script. Sorry.
+- Minor update to the README.txt file.
+- Disabled quest being saving as unpacked XML - will write only .dat files
+- moved to afterPayMana the moment when player chooses an object to copy with clones. An option "not to copy anything" is present now. Note: Need a mechanism to choose the card to copy in GameAction.changeZone (actual problem is - the function won't await user's input - it wants to return right then). That would make Clones ETB correctly from any location.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
