@@ -905,7 +905,7 @@ public class MagicStack extends MyObservable {
                             // resolving
         this.setResolving(true);
 
-        final SpellAbility sa = AllZone.getStack().pop();
+        final SpellAbility sa = this.pop();
 
         Singletons.getModel().getGameState().getPhaseHandler().resetPriority(); // ActivePlayer gains priority first
                                             // after Resolve

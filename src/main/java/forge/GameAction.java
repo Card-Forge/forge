@@ -102,6 +102,8 @@ public class GameAction {
             }
             return c;
         }
+        
+//        System.err.println(String.format("%s moves from %s to %s", c.toString(), zoneFrom.getZoneType().name(), zoneTo.getZoneType().name()));
 
         boolean suppress;
         if ((zoneFrom == null) && !c.isToken()) {
@@ -138,18 +140,17 @@ public class GameAction {
             lastKnownInfo = c;
             copied = c;
         } else {
+            lastKnownInfo = CardUtil.getLKICopy(c);
+            
             AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
             if (c.isCloned()) {
                 c.switchStates(CardCharactersticName.Cloner, CardCharactersticName.Original);
                 c.setState(CardCharactersticName.Original);
+                c.clearStates(CardCharactersticName.Cloner);
             }
             AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
-
-            lastKnownInfo = CardUtil.getLKICopy(c);
             copied = AllZone.getCardFactory().copyCard(c);
-
             copied.setUnearthed(c.isUnearthed());
-
             copied.setTapped(false);
         }
 
@@ -165,6 +166,8 @@ public class GameAction {
             AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         }
 
+        // "enter the battlefield as a copy" - apply code here
+        // but how to query for input here and continue later while the callers assume synchronous result?
         zoneTo.add(copied);
 
         // Tokens outside the battlefield disappear immideately.
@@ -176,7 +179,6 @@ public class GameAction {
             if (zoneFrom.is(ZoneType.Battlefield) && c.isCreature()) {
                 AllZone.getCombat().removeFromCombat(c);
             }
-
             zoneFrom.remove(c);
         }
 
@@ -231,20 +233,20 @@ public class GameAction {
      * moveTo.
      * </p>
      * 
-     * @param zone
+     * @param zoneTo
      *            a {@link forge.game.zone.PlayerZone} object.
      * @param c
      *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public final Card moveTo(final PlayerZone zone, Card c) {
+    public final Card moveTo(final PlayerZone zoneTo, Card c) {
         // Ideally move to should never be called without a prevZone
         // Remove card from Current Zone, if it has one
-        final PlayerZone prev = AllZone.getZoneOf(c);
+        final PlayerZone zoneFrom = AllZone.getZoneOf(c);
         // String prevName = prev != null ? prev.getZoneName() : "";
 
         if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")
-                && !zone.is(ZoneType.Exile)) {
+                && !zoneTo.is(ZoneType.Exile)) {
             final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
             c.removeAllExtrinsicKeyword("If CARDNAME would leave the battlefield, "
                     + "exile it instead of putting it anywhere else.");
@@ -253,17 +255,17 @@ public class GameAction {
 
         // Card lastKnownInfo = c;
 
-        c = GameAction.changeZone(prev, zone, c);
+        c = GameAction.changeZone(zoneFrom, zoneTo, c);
 
-        if (zone.is(ZoneType.Stack)) {
-            c.setCastFrom(prev.getZoneType());
-        } else if (prev == null) {
+        if (zoneTo.is(ZoneType.Stack)) {
+            c.setCastFrom(zoneFrom.getZoneType());
+        } else if (zoneFrom == null) {
             c.setCastFrom(null);
-        } else if (!(zone.is(ZoneType.Battlefield) && prev.is(ZoneType.Stack))) {
+        } else if (!(zoneTo.is(ZoneType.Battlefield) && zoneFrom.is(ZoneType.Stack))) {
             c.setCastFrom(null);
         }
 
-        if (c.isAura() && zone.is(ZoneType.Battlefield) && ((prev == null) || !prev.is(ZoneType.Stack))
+        if (c.isAura() && zoneTo.is(ZoneType.Battlefield) && ((zoneFrom == null) || !zoneFrom.is(ZoneType.Stack))
                 && !c.isEnchanting()) {
             // TODO Need a way to override this for Abilities that put Auras
             // into play attached to things

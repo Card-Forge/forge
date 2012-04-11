@@ -282,7 +282,7 @@ public class TriggerHandler {
         }
 
 //        if( 0 == 1 ) {
-//            System.out.println("T:" + mode.toString() + " > " + TextUtil.mapToString(runParams) );
+//            System.out.println("T:" + mode.toString() + " > " + forge.util.TextUtil.mapToString(runParams) );
 //        }
 
         // This is done to allow the list of triggers to be modified while
@@ -370,7 +370,8 @@ public class TriggerHandler {
             return false; // Not the right mode.
         }
 
-        // System.out.println( "  " + regtrig.getMode().toString() + "@" + regtrig.getHostCard() + "> " + TextUtil.mapToString(params));
+        //System.out.println( "  " + regtrig.getMode().toString() + "@" + regtrig.getHostCard() + "> " + TextUtil.mapToString(params)); 
+        
 
         if (!regtrig.zonesCheck(AllZone.getZoneOf(regtrig.getHostCard()))) {
             return false; // Host card isn't where it needs to be.

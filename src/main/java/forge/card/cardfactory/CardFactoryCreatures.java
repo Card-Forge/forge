@@ -1725,7 +1725,6 @@ public class CardFactoryCreatures {
                     }
 
                     AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
-
                 }
 
                 //keep the Clone card image for the cloned card
@@ -1795,18 +1794,20 @@ public class CardFactoryCreatures {
 
             @Override
             public void selectButtonCancel() {
-                this.stop();
+                // player chooses not to copy anything - that's legal
+                AllZone.getStack().add(copy);
+                AllZone.getInputControl().resetInput();
             }
 
             @Override
             public void selectCard(final Card c, final PlayerZone z) {
-                if (z.is(ZoneType.Battlefield)
-                        && (c.isCreature() || (cardName.equals("Phyrexian Metamorph") && c.isArtifact()))) {
-                    if (cardName.equals("Jwari Shapeshifter") && !c.isType("Ally")) {
-                        return;
-                    }
+                if ( !z.is(ZoneType.Battlefield) ) return;
+                if (cardName.equals("Jwari Shapeshifter") && !c.isType("Ally")) return;
+                if (c.isCreature() || (cardName.equals("Phyrexian Metamorph") && c.isArtifact())) {
                     copyTarget[0] = c;
-                    this.stopSetNext(new InputPayManaCost(copy));
+                    
+                    AllZone.getStack().add(copy);
+                    AllZone.getInputControl().resetInput();
                 }
             }
         };
@@ -1839,7 +1840,7 @@ public class CardFactoryCreatures {
         if (cardName.equals("Body Double")) {
             copy.setBeforePayMana(graveyardRuntime);
         } else {
-            copy.setBeforePayMana(runtime);
+            copy.setAfterPayMana(runtime);
         }
     }
 
