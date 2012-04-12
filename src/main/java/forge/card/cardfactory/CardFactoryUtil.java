@@ -5103,6 +5103,19 @@ public class CardFactoryUtil {
             }
         } // madness
 
+        if (CardFactoryUtil.hasKeyword(card, "Miracle") != -1) {
+            final int n = CardFactoryUtil.hasKeyword(card, "Miracle");
+            if (n != -1) {
+                final String parse = card.getKeyword().get(n).toString();
+                // card.removeIntrinsicKeyword(parse);
+
+                final String[] k = parse.split(":");
+
+                card.setMiracle(true);
+                card.setMiracleCost(k[1]);
+            }
+        } // miracle
+
         if (CardFactoryUtil.hasKeyword(card, "Devour") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Devour");
             if (n != -1) {

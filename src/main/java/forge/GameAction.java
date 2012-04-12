@@ -700,6 +700,60 @@ public class GameAction {
 
     /**
      * <p>
+     * drawMiracle.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     */
+    public final void drawMiracle(final Card c) {
+        // Whenever a card with miracle is the first card drawn in a turn,
+        // you may cast it for it's miracle cost
+        if (!c.hasMiracle()) {
+            return;
+        }
+
+        final Card miracle = c;
+        final Ability cast = new Ability(miracle, miracle.getMiracleCost()) {
+            @Override
+            public void resolve() {
+                GameAction.this.playCardNoCost(miracle);
+                System.out.println("Miracle cost paid");
+            }
+        };
+
+        final StringBuilder sb = new StringBuilder();
+        sb.append(miracle.getName()).append(" - Cast via Miracle");
+        cast.setStackDescription(sb.toString());
+
+        final Ability activate = new Ability(miracle, "0") {
+            @Override
+            public void resolve() {
+                // pay miracle cost here.
+                if (miracle.getOwner().isHuman()) {
+                    if (GameActionUtil.showYesNoDialog(miracle, miracle + " - Drawn. Pay Miracle Cost?")) {
+                        if (cast.getManaCost().equals("0")) {
+                            AllZone.getStack().add(cast);
+                        } else {
+                            AllZone.getInputControl().setInput(new InputPayManaCost(cast));
+                        }
+                    }
+                } else {
+                    // computer will ALWAYS pay a miracle cost if he has the mana.
+                    ComputerUtil.playStack(cast);
+                }
+            }
+        };
+
+        final StringBuilder sbAct = new StringBuilder();
+        sbAct.append(miracle.getName()).append(" - Drawn. Pay Miracle Cost?");
+        activate.setStackDescription(sbAct.toString());
+
+        AllZone.getStack().add(activate);
+    }
+
+    /**
+     * <p>
      * discardPutIntoPlayInstead.
      * </p>
      * 

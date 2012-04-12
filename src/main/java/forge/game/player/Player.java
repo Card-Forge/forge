@@ -1300,9 +1300,16 @@ public abstract class Player extends GameEntity {
                 }
             }
 
-            this.setLastDrawnCard(c);
-            c.setDrawnThisTurn(true);
-            this.numDrawnThisTurn++;
+            if (PhaseHandler.getGameBegins() == 1) {
+                this.setLastDrawnCard(c);
+                c.setDrawnThisTurn(true);
+                this.numDrawnThisTurn++;
+            }
+
+            // Miracle draws
+            if (this.numDrawnThisTurn == 1) {
+                Singletons.getModel().getGameAction().drawMiracle(c);
+            }
 
             // Run triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();

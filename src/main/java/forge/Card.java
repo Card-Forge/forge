@@ -144,6 +144,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean unearthed;
 
     private boolean madness = false;
+    private boolean miracle = false;
     private boolean suspendCast = false;
     private boolean suspend = false;
 
@@ -194,6 +195,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String text = "";
     private String echoCost = "";
     private String madnessCost = "";
+    private String miracleCost = "";
     private String chosenType = "";
     // private String chosenColor = "";
     private ArrayList<String> chosenColor = new ArrayList<String>();
@@ -5864,6 +5866,52 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setMadnessCost(final String cost) {
         this.madnessCost = cost;
+    }
+
+    /**
+     * <p>
+     * hasMiracle.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean hasMiracle() {
+        return this.miracle;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>miracle</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setMiracle(final boolean b) {
+        this.miracle = b;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>miracleCost</code>.
+     * </p>
+     * 
+     * @return a {@link java.lang.String} object.
+     */
+    public final String getMiracleCost() {
+        return this.miracleCost;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>miracleCost</code>.
+     * </p>
+     * 
+     * @param cost
+     *            a {@link java.lang.String} object.
+     */
+    public final void setMiracleCost(final String cost) {
+        this.miracleCost = cost;
     }
 
     /**
