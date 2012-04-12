@@ -102,7 +102,7 @@ public class GameAction {
             }
             return c;
         }
-        
+
 //        System.err.println(String.format("%s moves from %s to %s", c.toString(), zoneFrom.getZoneType().name(), zoneTo.getZoneType().name()));
 
         boolean suppress;
@@ -141,7 +141,7 @@ public class GameAction {
             copied = c;
         } else {
             lastKnownInfo = CardUtil.getLKICopy(c);
-            
+
             AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
             if (c.isCloned()) {
                 c.switchStates(CardCharactersticName.Cloner, CardCharactersticName.Original);

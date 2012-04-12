@@ -370,8 +370,7 @@ public class TriggerHandler {
             return false; // Not the right mode.
         }
 
-        //System.out.println( "  " + regtrig.getMode().toString() + "@" + regtrig.getHostCard() + "> " + TextUtil.mapToString(params)); 
-        
+        //System.out.println( "  " + regtrig.getMode().toString() + "@" + regtrig.getHostCard() + "> " + TextUtil.mapToString(params));
 
         if (!regtrig.zonesCheck(AllZone.getZoneOf(regtrig.getHostCard()))) {
             return false; // Host card isn't where it needs to be.

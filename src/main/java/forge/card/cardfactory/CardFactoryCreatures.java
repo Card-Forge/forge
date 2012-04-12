@@ -1801,11 +1801,15 @@ public class CardFactoryCreatures {
 
             @Override
             public void selectCard(final Card c, final PlayerZone z) {
-                if ( !z.is(ZoneType.Battlefield) ) return;
-                if (cardName.equals("Jwari Shapeshifter") && !c.isType("Ally")) return;
+                if (!z.is(ZoneType.Battlefield)) {
+                    return;
+                }
+                if (cardName.equals("Jwari Shapeshifter") && !c.isType("Ally")) {
+                    return;
+                }
                 if (c.isCreature() || (cardName.equals("Phyrexian Metamorph") && c.isArtifact())) {
                     copyTarget[0] = c;
-                    
+
                     AllZone.getStack().add(copy);
                     AllZone.getInputControl().resetInput();
                 }
