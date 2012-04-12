@@ -450,6 +450,8 @@ public class MagicStack extends MyObservable {
         if ((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic)) {
             // TODO: make working triggered ability
             sp.resolve();
+            Singletons.getModel().getGameAction().checkStateEffects();
+            GuiDisplayUtil.updateGUI();
         } else {
             if (sp.isKickerAbility()) {
                 sp.getSourceCard().setKicked(true);

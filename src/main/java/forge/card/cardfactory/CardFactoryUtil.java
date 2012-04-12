@@ -971,19 +971,19 @@ public class CardFactoryUtil {
      *            a int.
      * @return a {@link forge.card.spellability.AbilityActivated} object.
      */
-    public static AbilityActivated abilityMorphUp(final Card sourceCard, final Cost cost, final String orgManaCost,
+    public static AbilityStatic abilityMorphUp(final Card sourceCard, final Cost cost, final String orgManaCost,
             final int a, final int d) {
-        final AbilityActivated morphUp = new AbilityActivated(sourceCard, cost, null) {
+        final AbilityStatic morphUp = new AbilityStatic(sourceCard, cost, null) {
             private static final long serialVersionUID = -3663857013937085953L;
 
             @Override
             public void resolve() {
-                sourceCard.turnFaceUp();
-
-                // Run triggers
-                final Map<String, Object> runParams = new TreeMap<String, Object>();
-                runParams.put("Card", sourceCard);
-                AllZone.getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams);
+                if (sourceCard.turnFaceUp()) {
+                    // Run triggers
+                    final Map<String, Object> runParams = new TreeMap<String, Object>();
+                    runParams.put("Card", sourceCard);
+                    AllZone.getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams);
+                }
             }
 
             @Override

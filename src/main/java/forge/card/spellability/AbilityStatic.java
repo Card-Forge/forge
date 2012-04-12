@@ -18,6 +18,7 @@
 package forge.card.spellability;
 
 import forge.Card;
+import forge.card.cost.Cost;
 
 /**
  * <p>
@@ -40,5 +41,14 @@ public abstract class AbilityStatic extends Ability {
      */
     public AbilityStatic(final Card sourceCard, final String manaCost) {
         super(sourceCard, manaCost);
+    }
+    
+    public AbilityStatic(final Card sourceCard, final Cost abCost, final Target tgt) {
+        super(sourceCard, abCost.getTotalMana());
+        this.setManaCost(abCost.getTotalMana());
+        this.setPayCosts(abCost);
+        if ((tgt != null) && tgt.doesTarget()) {
+            this.setTarget(tgt);
+        }
     }
 }
