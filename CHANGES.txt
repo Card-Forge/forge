@@ -150,6 +150,15 @@ Fixes/Features:
 - Disabled quest being saving as unpacked XML - will write only .dat files
 - moved to afterPayMana the moment when player chooses an object to copy with clones. An option "not to copy anything" is present now. Note: Need a mechanism to choose the card to copy in GameAction.changeZone (actual problem is - the function won't await user's input - it wants to return right then). That would make Clones ETB correctly from any location.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Fixed Krosan Reclamation, target player should shuffle up to two target cards and not three.
+- Added support for the Miracle keyword
+- Converting MorphUp to AbilityStatic
+- Added StoreSVar AF for calculating and storing values to SVars for amounts that need to be calculated before they are going to be used.
+- Simplified Tree of Redemption's script logistics
+* Note: We should probably remove the references to RememberToughness, I didn't get a chance to track those down.
+- Removed my initial work on remembered integer values in favor of Sol's StoreSVar AF.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -164,6 +173,11 @@ Cloudshift
 Demonic Taskmaster
 Griselbrand
 Restoration Angel
+Banishing Stroke
+Howlgeist
+Emancipation angel
+Latch Seeker
+Thunderous Wrath
 
 
 Added many cards, including:
