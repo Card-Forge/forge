@@ -6450,7 +6450,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                       }
                 }
             }
-
         } else if (property.equals("TargetedPlayerCtrl")) {
             for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
                 final SpellAbility parent = AbilityFactory.findParentsTargetedPlayer(sa);
@@ -6463,6 +6462,23 @@ public class Card extends GameEntity implements Comparable<Card> {
                                 }
                             }
                         }
+                    }
+                }
+            }
+        } else if (property.equals("TargetedControllerCtrl")) {
+            for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
+                final ArrayList<Card> list = AbilityFactory.getDefinedCards(source, "Targeted", sa);
+                final ArrayList<SpellAbility> sas = AbilityFactory.getDefinedSpellAbilities(source, "Targeted", sa);
+                for (final Card c : list) {
+                    final Player p = c.getController();
+                    if (!this.getController().isPlayer(p)) {
+                        return false;
+                    }
+                }
+                for (final SpellAbility s : sas) {
+                    final Player p = s.getSourceCard().getController();
+                    if (!this.getController().isPlayer(p)) {
+                        return false;
                     }
                 }
             }
