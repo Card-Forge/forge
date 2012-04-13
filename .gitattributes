@@ -10057,6 +10057,7 @@ res/cardsfolder/w/walking_corpse.txt -text
 res/cardsfolder/w/walking_dead.txt svneol=native#text/plain
 res/cardsfolder/w/walking_desecration.txt svneol=native#text/plain
 res/cardsfolder/w/walking_dream.txt svneol=native#text/plain
+res/cardsfolder/w/walking_sponge.txt -text
 res/cardsfolder/w/walking_wall.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_air.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_blood.txt svneol=native#text/plain

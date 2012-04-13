@@ -1,0 +1,16 @@
+Name:Walking Sponge
+ManaCost:1 U
+Types:Creature Sponge
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | StackDescription$ None | SubAbility$ MakeChoice | SpellDescription$ Target creature loses your choice of flying, first strike, or trample until end of turn.
+SVar:MakeChoice:DB$ GenericChoice | Choices$ SpongeFly,SpongeStrike,SpongeTramp
+SVar:SpongeFly:DB$Animate | Defined$ Targeted | RemoveKeywords$ Flying | ChoiceDescription$ Targeted creature loses flying.
+SVar:SpongeStrike:DB$Animate | Defined$ Targeted | RemoveKeywords$ First Strike | ChoiceDescription$ Targeted creature loses first strike.
+SVar:SpongeTramp:DB$Animate | Defined$ Targeted | RemoveKeywords$ Trample | ChoiceDescription$ Targeted creature loses trample.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_sponge.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/47.jpg
+Oracle:{T}: Target creature loses your choice of flying, first strike, or trample until end of turn.
+End
