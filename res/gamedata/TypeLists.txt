@@ -277,5 +277,7 @@ Liliana
 Nissa
 Sarkhan
 Sorin
+Tamiyo
 Tezzeret
+Tibalt
 Venser
