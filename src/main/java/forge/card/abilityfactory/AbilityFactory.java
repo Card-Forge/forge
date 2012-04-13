@@ -1206,7 +1206,7 @@ public class AbilityFactory {
                 spellAbility = AbilityFactoryStoreSVar.createDrawbackStoreSVar(this);
             }
         }
-        
+
         else if (this.api.equals("Tap")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryPermanentState.createAbilityTap(this);
@@ -2478,14 +2478,6 @@ public class AbilityFactory {
             for (final Object o : tgts) {
                 host.addRemembered(o);
             }
-        }
-
-        // Remember current integer values (for cards like Tree of Redemption)
-        // TODO - It would be better to expand this to the form "RememberValue$ Toughness"
-        // to make it neater to expand for other values.
-        if (params.containsKey("RememberToughness")) {
-            final Integer remToughness = host.getNetDefense();
-            host.addRememberedInteger(remToughness);
         }
     }
 

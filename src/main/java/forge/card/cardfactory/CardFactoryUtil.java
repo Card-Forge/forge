@@ -2692,13 +2692,6 @@ public class CardFactoryUtil {
             final String number = l[0].replace("Number$", "");
             if (number.equals("ChosenNumber")) {
                 return CardFactoryUtil.doXMath(c.getChosenNumber(), m, c);
-            }
-            if (number.equals("RememberedValue")) {
-                for (final Integer i : c.getRememberedInteger()) {
-                    if (i instanceof Integer) {
-                        return CardFactoryUtil.doXMath(Integer.valueOf(i), m, c);
-                    }
-                }
             } else {
                 return CardFactoryUtil.doXMath(Integer.parseInt(number), m, c);
             }

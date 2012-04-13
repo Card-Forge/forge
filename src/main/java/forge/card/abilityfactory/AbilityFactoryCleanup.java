@@ -105,9 +105,6 @@ public final class AbilityFactoryCleanup {
         if (params.containsKey("ClearTriggered")) {
             AllZone.getTriggerHandler().clearDelayedTrigger(source);
         }
-        if (params.containsKey("ClearValueRemembered")) {
-            source.clearRememberedInteger();
-        }
     }
 
 } // end class AbilityFactory_Cleanup

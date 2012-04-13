@@ -110,7 +110,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private ArrayList<CardKeywords> changedCardKeywords = new ArrayList<CardKeywords>();
 
     private final ArrayList<Object> rememberedObjects = new ArrayList<Object>();
-    private final ArrayList<Integer> rememberedIntegers = new ArrayList<Integer>();
     private final ArrayList<Card> imprintedCards = new ArrayList<Card>();
     private Card championedCard = null;
     private final CardList devouredCards = new CardList();
@@ -575,38 +574,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void clearRemembered() {
         this.rememberedObjects.clear();
-    }
-
-    /**
-     * <p>
-     * addRememberedInteger.
-     * </p>
-     * 
-     * @param i
-     *            a {@link java.lang.Integer} integer.
-     */
-    public final void addRememberedInteger(final Integer i) {
-        this.rememberedIntegers.add(i);
-    }
-
-    /**
-     * <p>
-     * getRememberedInteger.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} integer.
-     */
-    public final ArrayList<Integer> getRememberedInteger() {
-        return this.rememberedIntegers;
-    }
-
-    /**
-     * <p>
-     * clearRememberedInteger.
-     * </p>
-     */
-    public final void clearRememberedInteger() {
-        this.rememberedIntegers.clear();
     }
 
     /**
