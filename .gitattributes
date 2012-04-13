@@ -11416,6 +11416,7 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryRegenerate.java svneol=nat
 src/main/java/forge/card/abilityfactory/AbilityFactoryReveal.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactorySacrifice.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactorySetState.java svneol=native#text/plain
+src/main/java/forge/card/abilityfactory/AbilityFactoryStoreSVar.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryToken.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryTurns.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryZoneAffecting.java svneol=native#text/plain

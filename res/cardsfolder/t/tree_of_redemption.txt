@@ -4,12 +4,11 @@ Types:Creature Plant
 Text:no text
 PT:0/13
 K:Defender
-A:AB$ Pump | Cost$ T | RememberToughness$ True | SubAbility$ TreeRedemption | SpellDescription$ Exchange your life total with Tree of CARDNAME's toughness.
-SVar:TreeRedemption:DB$Animate | Toughness$ X | Permanent$ True | SubAbility$ ExchangeLife
-SVar:ExchangeLife:DB$ SetLife | Defined$ You | LifeAmount$ Y | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearValueRemembered$ True
+A:AB$ StoreSVar | Cost$ T | SVar$ OldToughness | Type$ Count | Expression$ CardToughness | SubAbility$ TreeRedemption | SpellDescription$ Exchange your life total with CARDNAME's toughness. | StackDescription$ Exchange your life total with CARDNAME's toughness.
+SVar:TreeRedemption:DB$ Animate | Toughness$ X | Permanent$ True | SubAbility$ SetLife
+SVar:SetLife:DB$ SetLife | Defined$ You | LifeAmount$ OldToughness 
+SVar:OldToughness:Number$13
 SVar:X:Count$YourLifeTotal
-SVar:Y:Number$RememberedValue
 SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tree_of_redemption.jpg

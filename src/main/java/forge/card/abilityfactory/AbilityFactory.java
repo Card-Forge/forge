@@ -1197,6 +1197,16 @@ public class AbilityFactory {
             }
         }
 
+        else if (this.api.equals("StoreSVar")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryStoreSVar.createAbilityStoreSVar(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryStoreSVar.createSpellStoreSVar(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryStoreSVar.createDrawbackStoreSVar(this);
+            }
+        }
+        
         else if (this.api.equals("Tap")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryPermanentState.createAbilityTap(this);
