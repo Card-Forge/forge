@@ -599,8 +599,9 @@ class CardFactoryArtifacts {
                             Singletons.getModel().getGameAction().playCardNoCost(freeCard);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Error in " + cardName + ".  freeCard is null", "",
-                                JOptionPane.INFORMATION_MESSAGE);
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append("Error in ").append(cardName).append(".  freeCard is null");
+                        JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
                     }
 
                 }
@@ -630,8 +631,9 @@ class CardFactoryArtifacts {
 
                         // reveal the top card
                         topCard[0] = lib.get(0);
-                        JOptionPane.showMessageDialog(null, "Revealed card:\n" + topCard[0].getName(), card.getName(),
-                                JOptionPane.PLAIN_MESSAGE);
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append("Revealed card:\n").append(topCard[0].getName());
+                        JOptionPane.showMessageDialog(null, sb.toString(), card.getName(), JOptionPane.PLAIN_MESSAGE);
 
                         card.addSpellAbility(freeCast);
                         card.addExtrinsicKeyword("Play with the top card of your library revealed.");
@@ -679,7 +681,9 @@ class CardFactoryArtifacts {
                         final String cardQuestion = "Pay 4 life and keep in hand?";
                         player.drawCards(2);
                         for (int i = 0; i < 2; i++) {
-                            final String prompt = card + " - Select a card drawn this turn: " + (2 - i) + " of 2";
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append(card).append(" - Select a card drawn this turn: ").append(2 - i).append(" of 2");
+                            final String prompt = sb.toString();
                             AllZone.getInputControl().setInput(new Input() {
                                 private static final long serialVersionUID = -3389565833121544797L;
 
@@ -718,12 +722,14 @@ class CardFactoryArtifacts {
             sb.append("pay 4 life or put the card on top of your library.");
             ability.setStackDescription(sb.toString());
 
-            final Trigger drawStepTrigger = forge.card.trigger.TriggerHandler.parseTrigger(
-                    "Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | "
-                            + "TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of "
-                            + "your draw step, you may draw two additional cards. If you do, choose two "
-                            + "cards in your hand drawn this turn. For each of those cards, "
-                            + "pay 4 life or put the card on top of your library.", card, true);
+            final StringBuilder sbTrg = new StringBuilder();
+            sbTrg.append("Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | ");
+            sbTrg.append("TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of ");
+            sbTrg.append("your draw step, you may draw two additional cards. If you do, choose two ");
+            sbTrg.append("cards in your hand drawn this turn. For each of those cards, ");
+            sbTrg.append("pay 4 life or put the card on top of your library.");
+            final Trigger drawStepTrigger = forge.card.trigger.TriggerHandler.parseTrigger(sbTrg.toString(), card, true);
+
             drawStepTrigger.setOverridingAbility(ability);
             card.addTrigger(drawStepTrigger);
         } // *************** END ************ END **************************
