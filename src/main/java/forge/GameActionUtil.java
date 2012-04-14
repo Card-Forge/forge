@@ -36,6 +36,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
 
 /**
@@ -417,7 +418,7 @@ public final class GameActionUtil {
      * @return a boolean.
      */
     public static boolean showYesNoDialog(final Card c, String question, final boolean defaultNo) {
-        Singletons.getControl().getControlMatch().setCard(c);
+        CMatchUI.SINGLETON_INSTANCE.setCard(c);
         final StringBuilder title = new StringBuilder();
         title.append(c.getName()).append(" - Ability");
 
@@ -503,7 +504,7 @@ public final class GameActionUtil {
      * @return a boolean.
      */
     private static boolean showLandfallDialog(final Card c) {
-        Singletons.getControl().getControlMatch().setCard(c);
+        CMatchUI.SINGLETON_INSTANCE.setCard(c);
         final String[] choices = { "Yes", "No" };
 
         Object q = null;

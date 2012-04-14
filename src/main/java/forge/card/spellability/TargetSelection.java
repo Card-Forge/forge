@@ -25,13 +25,13 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -344,7 +344,7 @@ public class TargetSelection {
                 sb.append("\n");
                 sb.append(tgt.getVTSelection());
 
-                Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
 
                 // If reached Minimum targets, enable OK button
                 if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa)) {
@@ -376,7 +376,7 @@ public class TargetSelection {
                 // leave this in temporarily, there some seriously wrong things
                 // going on here
                 if (targeted && !card.canBeTargetedBy(sa)) {
-                    Singletons.getControl().getControlMatch().showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
+                    CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
                 } else if (choices.contains(card)) {
                     tgt.addTarget(card);
                     this.done();

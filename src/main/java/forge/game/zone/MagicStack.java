@@ -57,6 +57,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -761,7 +762,7 @@ public class MagicStack extends MyObservable {
 
                         @Override
                         public void showMessage() {
-                            Singletons.getControl().getControlMatch().showMessage("Mana Vortex - select a land to sacrifice");
+                            CMatchUI.SINGLETON_INSTANCE.showMessage("Mana Vortex - select a land to sacrifice");
                             ButtonUtil.enableOnlyCancel();
                         }
 
@@ -953,7 +954,7 @@ public class MagicStack extends MyObservable {
 
                     @Override
                     public void showMessage() {
-                        Singletons.getControl().getControlMatch().showMessage("Choose target creature to haunt.");
+                        CMatchUI.SINGLETON_INSTANCE.showMessage("Choose target creature to haunt.");
                         ButtonUtil.disableAll();
                     }
 
@@ -967,7 +968,7 @@ public class MagicStack extends MyObservable {
                             MagicStack.this.add(haunterDiesWork);
                             this.stop();
                         } else {
-                            Singletons.getControl().getControlMatch().showMessage("Cannot target this card (Shroud? Protection?).");
+                            CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this card (Shroud? Protection?).");
                         }
                     }
                 };

@@ -34,6 +34,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -408,7 +409,7 @@ public class CostExile extends CostPartWithList {
                 this.typeList = sa.getActivatingPlayer().getCardsIn(part.getFrom());
                 this.typeList = this.typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(),
                         sa.getSourceCard());
-                Singletons.getControl().getControlMatch().showMessage(msg.toString());
+                CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 

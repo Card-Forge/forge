@@ -34,6 +34,8 @@ import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.SDisplayUtil;
 import forge.properties.ForgePreferences.FPref;
 
 /**
@@ -321,7 +323,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
         switch(phase) {
             case UNTAP:
-                Singletons.getControl().getControlMatch().showStack();
+                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 PhaseUtil.handleUntap();
                 break;
 
@@ -406,12 +408,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 AllZone.getEndOfCombat().executeUntil();
                 AllZone.getEndOfCombat().executeAt();
                 CombatUtil.showCombat();
-                Singletons.getControl().getControlMatch().showStack();
+                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 break;
 
             case MAIN2:
                 CombatUtil.showCombat();
-                Singletons.getControl().getControlMatch().showStack();
+                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 break;
 
             case END_OF_TURN:
@@ -526,7 +528,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         }
 
         if (this.getPhase() == PhaseType.COMBAT_END) {
-            Singletons.getControl().getControlMatch().showStack();
+            SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
             AllZone.getCombat().reset();
             this.resetAttackedThisCombat(this.getPlayerTurn());
             this.bCombat = false;

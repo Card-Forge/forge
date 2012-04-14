@@ -40,6 +40,9 @@ import forge.game.GameState;
 import forge.game.GameSummary;
 import forge.game.player.ComputerAIGeneral;
 import forge.game.player.ComputerAIInput;
+import forge.gui.match.VMatchUI;
+import forge.gui.match.nonsingleton.VField;
+import forge.gui.match.views.VDev;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -51,8 +54,6 @@ import forge.util.HttpUtil;
 import forge.util.IStorageView;
 import forge.util.MultiplexOutputStream;
 import forge.util.StorageView;
-import forge.view.match.ViewField;
-import forge.view.match.ViewTabber;
 
 /**
  * The default Model implementation for Forge.
@@ -392,7 +393,7 @@ public enum FModel {
      */
     public final boolean savePrefs() {
         final ForgePreferences fp = this.preferences;
-        final List<ViewField> fieldViews = Singletons.getView().getViewMatch().getFieldViews();
+        final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
         // AI field is at index [0]
         fp.setPref(FPref.PHASE_AI_UPKEEP, String.valueOf(fieldViews.get(0).getLblUpkeep().getEnabled()));
@@ -426,11 +427,11 @@ public enum FModel {
         fp.setPref(FPref.PHASE_HUMAN_EOT, String.valueOf(fieldViews.get(1).getLblEndTurn().getEnabled()));
         fp.setPref(FPref.PHASE_HUMAN_CLEANUP, String.valueOf(fieldViews.get(1).getLblCleanup().getEnabled()));
 
-        final ViewTabber v = Singletons.getView().getViewMatch().getViewTabber();
+        final VDev v = VMatchUI.SINGLETON_INSTANCE.getViewDevMode();
         Constant.Runtime.MILL[0] = v.getLblMilling().getEnabled();
 
         fp.setPref(FPref.DEV_MILLING_LOSS, String.valueOf(Constant.Runtime.MILL[0]));
-        fp.setPref(FPref.UI_LAYOUT_PARAMS, String.valueOf(Singletons.getView().getViewMatch().getLayoutParams()));
+        //fp.setPref(FPref.UI_LAYOUT_PARAMS, String.valueOf(Singletons.getView().getViewMatch().getLayoutParams()));
         fp.setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(v.getLblUnlimitedLands().getEnabled()));
 
         fp.save();
@@ -445,7 +446,7 @@ public enum FModel {
      */
     public final boolean loadPrefs() {
         final ForgePreferences fp = Singletons.getModel().getPreferences();
-        final List<ViewField> fieldViews = Singletons.getView().getViewMatch().getFieldViews();
+        final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
         Constant.Runtime.MILL[0] = fp.getPrefBoolean(FPref.DEV_MILLING_LOSS);
         Constant.Runtime.DEV_MODE[0] = fp.getPrefBoolean(FPref.DEV_MODE_ENABLED);
@@ -482,7 +483,7 @@ public enum FModel {
         fieldViews.get(1).getLblEndTurn().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
         fieldViews.get(1).getLblCleanup().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
 
-        Singletons.getView().getViewMatch().setLayoutParams(fp.getPref(FPref.UI_LAYOUT_PARAMS));
+        //Singletons.getView().getViewMatch().setLayoutParams(fp.getPref(FPref.UI_LAYOUT_PARAMS));
         return true;
     }
 

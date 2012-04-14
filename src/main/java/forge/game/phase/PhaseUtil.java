@@ -26,11 +26,10 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
-import forge.control.ControlMatchUI;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.view.match.ViewField.PhaseLabel;
+import forge.gui.match.CMatchUI;
+import forge.gui.match.nonsingleton.VField.PhaseLabel;
 
 /**
  * <p>
@@ -386,13 +385,12 @@ public class PhaseUtil {
     public static void visuallyActivatePhase(final PhaseType s) {
         PhaseLabel lbl = null;
         final Player p = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final ControlMatchUI t = Singletons.getControl().getControlMatch();
+        final CMatchUI t = CMatchUI.SINGLETON_INSTANCE;
 
         // Index of field; computer is 0, human is 1
         int i = p.isComputer() ? 0 : 1;
 
         switch(s) {
-
             case UPKEEP:
                 lbl = t.getFieldControls().get(i).getView().getLblUpkeep();
                 break;
@@ -434,7 +432,6 @@ public class PhaseUtil {
         }
 
         t.resetAllPhaseButtons();
-        Singletons.getView().getViewMatch().repaint();
         lbl.setActive(true);
     }
 }

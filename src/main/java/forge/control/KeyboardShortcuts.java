@@ -16,7 +16,10 @@ import javax.swing.KeyStroke;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.SDisplayUtil;
 import forge.gui.home.settings.VSubmenuPreferences.KeyboardShortcutField;
+import forge.gui.match.controllers.CDock;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
@@ -49,7 +52,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                Singletons.getControl().getControlMatch().getTabberControl().showPnlStack();
+                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
             }
         };
 
@@ -58,7 +61,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                Singletons.getControl().getControlMatch().getTabberControl().showPnlCombat();
+                SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
             }
         };
 
@@ -67,7 +70,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                Singletons.getControl().getControlMatch().getTabberControl().showPnlGameLog();
+                SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
             }
         };
 
@@ -76,7 +79,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                Singletons.getControl().getControlMatch().getTabberControl().showPnlPlayers();
+                SDisplayUtil.showTab(EDocID.REPORT_PLAYERS.getDoc());
             }
         };
 
@@ -85,7 +88,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                Singletons.getControl().getControlMatch().getTabberControl().showPnlDev();
+                SDisplayUtil.showTab(EDocID.DEV_MODE.getDoc());
             }
         };
 
@@ -94,7 +97,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                Singletons.getControl().getControlMatch().getDockControl().concede();
+                CDock.SINGLETON_INSTANCE.concede();
             }
         };
 

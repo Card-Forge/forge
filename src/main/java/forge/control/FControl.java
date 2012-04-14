@@ -31,10 +31,13 @@ import javax.swing.WindowConstants;
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
+import forge.gui.home.VHomeUI;
 import forge.gui.home.quest.SubmenuQuestUtil;
+import forge.gui.match.VMatchUI;
+import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.gui.toolbox.FSkin;
-import forge.view.ViewHomeUI;
+import forge.view.FView;
 
 /**
  * <p>
@@ -77,7 +80,7 @@ public enum FControl {
             @Override
             public void windowClosing(final WindowEvent e) {
                 Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-                Singletons.getControl().getControlMatch().getDockControl().concede();
+                CDock.SINGLETON_INSTANCE.concede();
             }
         };
 
@@ -94,7 +97,7 @@ public enum FControl {
         // Default action on window close
         this.waDefault = new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(final WindowEvent e) {
                 Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             }
          };
@@ -112,7 +115,7 @@ public enum FControl {
         CardFaceSymbols.loadImages();
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
-        this.display = Singletons.getView().getLayeredContentPane();
+        this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
 
         //Singletons.getView().initialize();
 
@@ -146,13 +149,14 @@ public enum FControl {
         // Fire up new state
         switch (i0) {
             case HOME_SCREEN:
-                display.add(ViewHomeUI.SINGLETON_INSTANCE.getPanel(), JLayeredPane.DEFAULT_LAYER);
-                sizeChildren();
+                VHomeUI.SINGLETON_INSTANCE.populate();
+                FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(false);
+                //sizeChildren();
                 break;
 
             case MATCH_SCREEN:
-                display.add(Singletons.getView().getViewMatch(), JLayeredPane.DEFAULT_LAYER);
-                sizeChildren();
+                VMatchUI.SINGLETON_INSTANCE.populate();
+                FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
                 Singletons.getView().getFrame().addWindowListener(waConcede);
                 break;
 
@@ -168,17 +172,6 @@ public enum FControl {
 
             default:
         }
-    }
-
-    /** Gets the match controller.
-     * @return {@link forge.control.match.ControlMatchUI}
-     */
-    public ControlMatchUI getControlMatch() {
-        if (getState() != FControl.MATCH_SCREEN) {
-            throw new IllegalArgumentException("FControl$getControlMatch\n"
-                    + "may only be called while the match UI is showing.");
-        }
-        return Singletons.getView().getViewMatch().getControl();
     }
 
     /** 
@@ -198,10 +191,10 @@ public enum FControl {
 
     /** Remove all children from a specified layer. */
     private void clearChildren(final int layer0) {
-        final Component[] children = Singletons.getView()
-                .getLayeredContentPane().getComponentsInLayer(layer0);
+        final Component[] children = FView.SINGLETON_INSTANCE.getLpnDocument()
+                .getComponentsInLayer(layer0);
 
-        for (Component c : children) {
+        for (final Component c : children) {
             display.remove(c);
         }
     }

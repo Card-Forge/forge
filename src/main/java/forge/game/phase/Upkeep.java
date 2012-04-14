@@ -44,6 +44,7 @@ import forge.game.player.PlayerUtil;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -495,9 +496,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                                 @Override
                                 public void showMessage() {
-                                    Singletons
-                                            .getControl()
-                                            .getControlMatch()
+                                    CMatchUI.SINGLETON_INSTANCE
                                             .showMessage(
                                                     abyss.getName() + " - Select one nonartifact creature to destroy");
                                     ButtonUtil.disableAll();
@@ -566,9 +565,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                             @Override
                             public void showMessage() {
-                                Singletons
-                                        .getControl()
-                                        .getControlMatch()
+                                CMatchUI.SINGLETON_INSTANCE
                                         .showMessage(
                                                 "Yawgmoth Demon - Select one artifact to sacrifice or be dealt 2 damage");
                                 ButtonUtil.enableOnlyCancel();
@@ -2285,7 +2282,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                             @Override
                             public void showMessage() {
-                                Singletons.getControl().getControlMatch()
+                                CMatchUI.SINGLETON_INSTANCE
                                         .showMessage(c.getName() + " - Select target creature.");
                                 ButtonUtil.enableOnlyCancel();
                             }
@@ -2359,9 +2356,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                         this.stop();
                                         return;
                                     }
-                                    Singletons
-                                            .getControl()
-                                            .getControlMatch()
+                                    CMatchUI.SINGLETON_INSTANCE
                                             .showMessage(
                                                     source.getName()
                                                             + " - Select "

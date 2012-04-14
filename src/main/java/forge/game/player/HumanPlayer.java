@@ -26,6 +26,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 
 /**
  * <p>
@@ -250,7 +251,7 @@ public class HumanPlayer extends Player {
     protected final void clashMoveToTopOrBottom(final Card c) {
         String choice = "";
         final String[] choices = { "top", "bottom" };
-        Singletons.getControl().getControlMatch().setCard(c);
+        CMatchUI.SINGLETON_INSTANCE.setCard(c);
         choice = GuiUtils.chooseOne(c.getName() + " - Top or bottom of Library", choices);
 
         if (choice.equals("bottom")) {

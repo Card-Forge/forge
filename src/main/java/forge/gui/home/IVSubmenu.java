@@ -2,7 +2,12 @@ package forge.gui.home;
 
 import javax.swing.JPanel;
 
-/** Dictates methods required for a submenu view. */
+/**
+ * Dictates methods required for a submenu view.
+ * 
+ * <br><br><i>(I at beginning of class name denotes an interface.)</i>
+ * <br><i>(V at beginning of class name denotes a view class.)</i>
+ */
 public interface IVSubmenu {
     /** Allows static factory creation by decoupling UI components.
      * @return {@link javax.swing.JPanel} */

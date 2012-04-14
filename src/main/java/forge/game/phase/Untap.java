@@ -33,6 +33,7 @@ import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -208,7 +209,7 @@ public class Untap extends Phase implements java.io.Serializable {
 
                     @Override
                     public void showMessage() {
-                        Singletons.getControl().getControlMatch().showMessage("Select one tapped land to untap");
+                        CMatchUI.SINGLETON_INSTANCE.showMessage("Select one tapped land to untap");
                         ButtonUtil.enableOnlyCancel();
                     }
 
@@ -256,7 +257,7 @@ public class Untap extends Phase implements java.io.Serializable {
 
                     @Override
                     public void showMessage() {
-                        Singletons.getControl().getControlMatch().showMessage("Select one tapped artifact to untap");
+                        CMatchUI.SINGLETON_INSTANCE.showMessage("Select one tapped artifact to untap");
                         ButtonUtil.enableOnlyCancel();
                     }
 
@@ -305,7 +306,7 @@ public class Untap extends Phase implements java.io.Serializable {
 
                     @Override
                     public void showMessage() {
-                        Singletons.getControl().getControlMatch().showMessage("Select one creature to untap");
+                        CMatchUI.SINGLETON_INSTANCE.showMessage("Select one creature to untap");
                         ButtonUtil.enableOnlyCancel();
                     }
 

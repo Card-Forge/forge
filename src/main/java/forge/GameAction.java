@@ -55,7 +55,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneComesIntoPlay;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
-import forge.view.match.ViewWinLose;
+import forge.gui.match.ViewWinLose;
 
 /**
  * Methods for common actions performed during a game.

@@ -12,13 +12,13 @@ import forge.AllZone;
 import forge.Command;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
+import forge.gui.home.VHomeUI;
 import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
 import forge.gui.toolbox.FLabel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventChallenge;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetController;
-import forge.view.ViewHomeUI;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -39,7 +39,7 @@ public enum CSubmenuChallenges implements ICSubmenu {
             @Override
             public void execute() {
                 if (qc.getAchievements() == null) {
-                    ViewHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
+                    VHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
                 }
             }
         };
@@ -80,7 +80,7 @@ public enum CSubmenuChallenges implements ICSubmenu {
         view.getBtnCurrentDeck().setCommand(
                 new Command() { @Override
                     public void execute() {
-                        ViewHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DECKS);
+                        VHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DECKS);
                     }
                 });
 

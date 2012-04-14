@@ -10,9 +10,9 @@ import forge.gui.OverlayUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
+import forge.gui.home.VHomeUI;
 import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.view.ViewHomeUI;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -57,7 +57,7 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
             @Override
             public void execute() {
                 if (qc.getAchievements() == null) {
-                    ViewHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
+                    VHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
                 }
             }
         };

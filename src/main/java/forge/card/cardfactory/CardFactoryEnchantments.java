@@ -19,6 +19,7 @@ import forge.game.GameLossReason;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /** 
@@ -294,7 +295,7 @@ class CardFactoryEnchantments {
                 public void showMessage() {
                     final StringBuilder sb = new StringBuilder();
                     sb.append(cardName).append(" - Select an artifact on the battlefield");
-                    Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                    CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                     ButtonUtil.enableOnlyCancel();
                 }
 

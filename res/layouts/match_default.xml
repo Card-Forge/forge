@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<layout>
+	<cell x="0.0" y="0.0" w="0.2" h="0.643">
+		<doc>REPORT_STACK</doc>
+		<doc>REPORT_COMBAT</doc>
+		<doc>REPORT_LOG</doc>
+		<doc>REPORT_PLAYERS</doc>
+	</cell>
+	<cell x="0.0" y="0.643" w="0.2" h="0.357">
+		<doc>REPORT_MESSAGE</doc>
+		<doc>DEV_MODE</doc>
+		<doc>CARD_ANTES</doc>
+		<doc>BUTTON_DOCK</doc>
+	</cell>
+	<cell x="0.2" y="0.0" w="0.6" h="0.364">
+		<doc>FIELD_0</doc>
+	</cell>
+	<cell x="0.2" y="0.732" w="0.6" h="0.268">
+		<doc>HAND_1</doc>
+	</cell>
+	<cell x="0.8" y="0.0" w="0.2" h="0.466">
+		<doc>CARD_DETAIL</doc>
+	</cell>
+	<cell x="0.2" y="0.364" w="0.6" h="0.368">
+		<doc>FIELD_1</doc>
+	</cell>
+	<cell x="0.8" y="0.466" w="0.2" h="0.534">
+		<doc>CARD_PICTURE</doc>
+	</cell>
+</layout>

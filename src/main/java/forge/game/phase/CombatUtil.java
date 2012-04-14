@@ -52,6 +52,9 @@ import forge.game.player.PlayerUtil;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.SDisplayUtil;
+import forge.gui.match.views.VCombat;
 
 /**
  * <p>
@@ -2431,8 +2434,6 @@ public class CombatUtil {
      * </p>
      */
     public static void showCombat() {
-        Singletons.getControl().getControlMatch().showCombat("");
-
         Card[] defend = null;
         final StringBuilder display = new StringBuilder();
 
@@ -2471,8 +2472,9 @@ public class CombatUtil {
                 }
             } // loop through attackers
         }
-        Singletons.getControl().getControlMatch().showCombat(display.toString().trim());
 
+        SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
+        VCombat.SINGLETON_INSTANCE.updateCombat(display.toString().trim());
     } // showBlockers()
 
     /**

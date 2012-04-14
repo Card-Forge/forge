@@ -17,16 +17,16 @@
  */
 package forge.gui.match.nonsingleton;
 
-import java.awt.Component;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
-import forge.gui.layout.DragTab;
-import forge.gui.layout.EDocID;
-import forge.gui.layout.ICDoc;
-import forge.gui.layout.IVDoc;
+import forge.game.player.Player;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.DragTab;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
 import forge.view.arcane.HandArea;
 
 /**
@@ -34,56 +34,98 @@ import forge.view.arcane.HandArea;
  * 
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VHand implements IVDoc {
-    /** */
-    SINGLETON_INSTANCE;
-
-    private final JPanel pnl = new JPanel();
+public class VHand implements IVDoc {
+    // Fields used with interface IVDoc
+    private final CHand control;
+    private DragCell parentCell;
+    private final EDocID docID;
     private final DragTab tab = new DragTab("Your Hand");
 
+    // Other fields
+    private Player player = null;
+
+    // Top-level containers
     private final JScrollPane scroller = new JScrollPane();
     private final HandArea hand = new HandArea(scroller);
 
-    /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#populate()
+    //========= Constructor
+    /**
+     * Assembles Swing components of a player hand instance.
+     * 
+     * @param id0 &emsp; {@link forge.gui.framework.EDocID}
+     * @param player0 &emsp; {@link forge.game.player.Player}
      */
-    @Override
-    public void populate() {
+    public VHand(final EDocID id0, final Player player0) {
+        docID = id0;
+        id0.setDoc(this);
+        tab.setText(player0.getName() + " Hand");
+
+        player = player0;
+
+        scroller.setBorder(null);
         scroller.setViewportView(VHand.this.hand);
         scroller.setOpaque(false);
         scroller.getViewport().setOpaque(false);
-        scroller.setBorder(null);
+
         hand.setOpaque(false);
 
-        pnl.removeAll();
+        control = new CHand(player, this);
+    }
+
+    //========= Overridden methods
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#populate()
+     */
+    @Override
+    public void populate() {
+        final JPanel pnl = parentCell.getBody();
         pnl.setLayout(new MigLayout("insets 0, gap 0"));
+
         pnl.add(scroller, "w 100%, h 100%!");
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getDocumentID()
+     * @see forge.gui.framework.IVDoc#getDocumentID()
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.YOUR_HAND;
+        return docID;
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getDocument()
+     * @see forge.gui.framework.IVDoc#setParentCell()
      */
     @Override
-    public Component getDocument() {
-        return pnl;
+    public void setParentCell(final DragCell cell0) {
+        this.parentCell = cell0;
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getTabLabel()
+     * @see forge.gui.framework.IVDoc#getParentCell()
+     */
+    @Override
+    public DragCell getParentCell() {
+        return this.parentCell;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getTabLabel()
      */
     @Override
     public DragTab getTabLabel() {
         return tab;
     }
 
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getControl()
+     */
+    @Override
+    public ICDoc getControl() {
+        return control;
+    }
+
+    //========= Retrieval methods
     /**
      * Gets the hand area.
      *
@@ -93,11 +135,20 @@ public enum VHand implements IVDoc {
         return VHand.this.hand;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getControl()
+    /**
+     * Gets the player currently associated with this hand.
+     * @return {@link forge.game.player.Player}
      */
-    @Override
-    public ICDoc getControl() {
-        return null;
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    /**
+     * Sets the player currently associated with this field.
+     * @param player0 &emsp; {@link forge.game.player.Player}
+     */
+    public void setPlayer(final Player player0) {
+        this.player = player0;
+        if (player0 != null) { tab.setText(player0.getName() + " Field"); }
     }
 }

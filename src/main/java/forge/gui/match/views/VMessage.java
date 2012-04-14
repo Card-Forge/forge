@@ -17,21 +17,21 @@
  */
 package forge.gui.match.views;
 
-import java.awt.Component;
 import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.gui.layout.DragTab;
-import forge.gui.layout.EDocID;
-import forge.gui.layout.ICDoc;
-import forge.gui.layout.IVDoc;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.DragTab;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
+import forge.gui.match.controllers.CMessage;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
@@ -45,24 +45,19 @@ public enum VMessage implements IVDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final JPanel pnl = new JPanel();
+    // Fields used with interface IVDoc
+    private DragCell parentCell;
     private final DragTab tab = new DragTab("Message Report");
 
+    // Various components
     private final JButton btnOK = new FButton("OK");
     private final JButton btnCancel = new FButton("Cancel");
     private final JTextArea tarMessage = new JTextArea();
     private final JLabel lblGames = new FLabel.Builder().fontScaleAuto(false)
             .fontSize(12).fontStyle(Font.BOLD).fontAlign(SwingConstants.CENTER).build();
 
-    /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#populate()
-     */
-    @Override
-    public void populate() {
-        pnl.removeAll();
-        pnl.setToolTipText("Input Area");
-        pnl.setLayout(new MigLayout("wrap 2, fill, insets 0, gap 0"));
-
+    //========= Constructor
+    private VMessage() {
         lblGames.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
 
         tarMessage.setOpaque(false);
@@ -71,16 +66,42 @@ public enum VMessage implements IVDoc {
         tarMessage.setLineWrap(true);
         tarMessage.setWrapStyleWord(true);
         tarMessage.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tarMessage.setFont(FSkin.getFont(16));
+        tarMessage.setFont(FSkin.getFont(12));
+    }
 
-        pnl.add(lblGames, "span 2 1, w 96%!, gapleft 2%, h 10%, wrap");
-        pnl.add(tarMessage, "span 2 1, h 70%!, w 96%!, gapleft 2%, gaptop 1%");
-        pnl.add(btnOK, "w 47%!, gapright 2%, gapleft 1%");
-        pnl.add(btnCancel, "w 47%!, gapright 1%");
+    //========== Overridden methods
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#populate()
+     */
+    @Override
+    public void populate() {
+        parentCell.getBody().setLayout(new MigLayout("wrap 2, fill, insets 0, gap 0"));
+
+        parentCell.getBody().add(lblGames, "span 2 1, w 96%!, gapleft 2%, h 30px, wrap");
+        parentCell.getBody().add(tarMessage, "span 2 1, h 70%!, w 96%!, gap 2% 0 1% 0");
+        parentCell.getBody().add(btnOK, "w 47%!, gap 2% 1% 0 5px");
+        parentCell.getBody().add(btnCancel, "w 47%!, gap 0 1% 0 5px");
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getDocumentID()
+     * @see forge.gui.framework.IVDoc#setParentCell()
+     */
+    @Override
+    public void setParentCell(final DragCell cell0) {
+        this.parentCell = cell0;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getParentCell()
+     */
+    @Override
+    public DragCell getParentCell() {
+        return this.parentCell;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getDocumentID()
      */
     @Override
     public EDocID getDocumentID() {
@@ -88,119 +109,38 @@ public enum VMessage implements IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getControl()
+     * @see forge.gui.framework.IVDoc#getControl()
      */
     @Override
     public ICDoc getControl() {
-        return null;
+        return CMessage.SINGLETON_INSTANCE;
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getDocument()
-     */
-    @Override
-    public Component getDocument() {
-        return pnl;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getTabLabel()
+     * @see forge.gui.framework.IVDoc#getTabLabel()
      */
     @Override
     public DragTab getTabLabel() {
         return tab;
     }
 
-    /** Flashes animation on input panel if play is currently waiting on input. */
-    public void remind() {
-        /*
-         * THIS SHOULD COMPLETELY AND TOTALLY BE IN A
-         * UTIL LIBRARY THAT CAN FLASH IT ON ANY COMPONENT
-         * IN THE LAYOUT.
-         */
-
-        /*
-         * THESE VALUES WERE PREVIOUSLY CLASS VARIABLES; SHOULD BE METHOD-SPECIFIC SOMEHOW.
-         *    private Timer timer1 = null;
-    private static int counter = 0;
-    private int[] newA = null, newR = null, newG = null, newB = null;
-    private boolean remindIsRunning = false;
-         */
-
-
-        // To adjust, only touch these two values.
-       /* final int steps = 5;    // Number of delays
-        final int delay = 80;  // Milliseconds between steps
-
-        if (remindIsRunning) { return; }
-
-        remindIsRunning = true;
-        final int oldR = getBackground().getRed();
-        final int oldG = getBackground().getGreen();
-        final int oldB = getBackground().getBlue();
-        final int oldA = getBackground().getAlpha();
-        counter = 0;
-        newR = new int[steps];
-        newG = new int[steps];
-        newB = new int[steps];
-        newA = new int[steps];
-
-        for (int i = 0; i < steps; i++) {
-            newR[i] = (int) ((255 - oldR) / steps * i);
-            newG[i] = (int) (oldG / steps * i);
-            newB[i] = (int) (oldB / steps * i);
-            newA[i] = (int) ((255 - oldA) / steps * i);
-        }
-
-        final TimerTask tt = new TimerTask() {
-            @Override
-            public void run() {
-                counter++;
-                if (counter != (steps - 1)) {
-                    SwingUtilities.invokeLater(new Runnable() { @Override
-                        public void run() { setBackground(new Color(newR[counter], oldG, oldB, newA[counter])); } });
-                }
-                else {
-                    SwingUtilities.invokeLater(new Runnable() { @Override
-                        public void run() { setBackground(new Color(oldR, oldG, oldB, oldA)); } });
-                    remindIsRunning = false;
-                    timer1.cancel();
-                    newR = null;
-                    newG = null;
-                    newB = null;
-                    newA = null;
-                }
-            }
-        };
-
-        timer1 = new Timer();
-        timer1.scheduleAtFixedRate(tt, 0, delay);*/
-    }
-
-    /**
-     * Gets the btn ok.
-     * 
-     * @return JButton
-     */
+    //========= Retrieval methods
+    /** @return {@link javax.swing.JButton} */
     public JButton getBtnOK() {
         return this.btnOK;
     }
 
-    /**
-     * Gets the btn cancel.
-     * 
-     * @return JButton
-     */
+    /** @return {@link javax.swing.JButton} */
     public JButton getBtnCancel() {
         return this.btnCancel;
     }
 
-    /** @return JTextArea */
+    /** @return {@link javax.swing.JTextArea} */
     public JTextArea getTarMessage() {
         return this.tarMessage;
     }
 
-    /** @return JLabel */
+    /** @return {@link javax.swing.JLabel} */
     public JLabel getLblGames() {
         return this.lblGames;
     }

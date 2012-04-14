@@ -1,7 +1,9 @@
 package forge.gui.home;
 
 /** 
- * TODO: Write javadoc for this type.
+ * These are the identifiers for topics found in home screen submenus.
+ * 
+ * <br><br><i>(E at beginning of class name denotes an enum.)</i>
  *
  */
 public enum EMenuItem { /** */

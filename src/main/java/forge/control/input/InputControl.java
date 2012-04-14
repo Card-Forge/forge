@@ -21,11 +21,11 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 import forge.MyObservable;
-import forge.Singletons;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerAIInput;
 import forge.game.player.Player;
+import forge.gui.match.CMatchUI;
 import forge.model.FModel;
 
 /**
@@ -247,7 +247,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             final boolean skip = this.model.getGameState().getPhaseHandler().doSkipPhase();
             this.model.getGameState().getPhaseHandler().setSkipPhase(false);
             if ((this.model.getGameState().getStack().size() == 0)
-                    && !Singletons.getControl().getControlMatch().stopAtPhase(playerTurn, phase) && skip) {
+                    && !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(playerTurn, phase) && skip) {
                 this.model.getGameState().getPhaseHandler().passPriority();
                 return null;
             } else {

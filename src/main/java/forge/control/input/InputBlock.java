@@ -25,6 +25,9 @@ import forge.Singletons;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.gui.framework.SDisplayUtil;
+import forge.gui.match.CMatchUI;
+import forge.gui.match.views.VMessage;
 import forge.view.ButtonUtil;
 
 /**
@@ -65,14 +68,14 @@ public class InputBlock extends Input {
             final StringBuilder sb = new StringBuilder();
             sb.append("To Block, click on your Opponents attacker first, then your blocker(s). ");
             sb.append("To cancel a block right-click on your blocker");
-            Singletons.getControl().getControlMatch().showMessage(sb.toString());
+            CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
         } else {
             final String attackerName = this.currentAttacker.isFaceDown() ? "Morph" : this.currentAttacker.getName();
             final StringBuilder sb = new StringBuilder();
             sb.append("Select a creature to block ").append(attackerName).append(" (");
             sb.append(this.currentAttacker.getUniqueNumber()).append("). ");
             sb.append("To cancel a block right-click on your blocker");
-            Singletons.getControl().getControlMatch().showMessage(sb.toString());
+            CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
         }
 
         CombatUtil.showCombat();
@@ -102,7 +105,7 @@ public class InputBlock extends Input {
                 this.allBlocking.add(card);
                 AllZone.getCombat().addBlocker(this.currentAttacker, card);
         } else {
-            Singletons.getControl().getControlMatch().getMessageControl().remind();
+            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
         this.showMessage();
     } // selectCard()

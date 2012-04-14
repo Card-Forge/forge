@@ -32,8 +32,8 @@ import javax.swing.SwingConstants;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.Singletons;
 import forge.error.ErrorViewer;
+import forge.gui.match.CMatchUI;
 
 /**
  * <p>Constructor for Gui_MultipleBlockers4.</p>
@@ -241,7 +241,7 @@ public class GuiMultipleBlockers extends JFrame {
             final CardContainer cardPanel = (CardContainer) o;
             final Card c = cardPanel.getCard();
 
-            Singletons.getControl().getControlMatch().setCard(c);
+            CMatchUI.SINGLETON_INSTANCE.setCard(c);
         }
     }
 }

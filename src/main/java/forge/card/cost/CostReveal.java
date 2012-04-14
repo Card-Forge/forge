@@ -20,7 +20,6 @@ package forge.card.cost;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -29,6 +28,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -256,7 +256,7 @@ public class CostReveal extends CostPartWithList {
                     sb.append(nNeeded - this.nReveal);
                     sb.append(" remaining.");
                 }
-                Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 

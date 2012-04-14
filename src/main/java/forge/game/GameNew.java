@@ -20,15 +20,20 @@ import forge.card.trigger.TriggerType;
 import forge.control.FControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
+import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.match.CMatchUI;
+import forge.gui.match.VMatchUI;
+import forge.gui.match.controllers.CMessage;
+import forge.gui.match.nonsingleton.VField;
+import forge.gui.match.views.VAntes;
 import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
 import forge.util.MyRandom;
-import forge.view.match.ViewField;
 
 /** 
  * Methods for all things related to starting a new game.
@@ -40,24 +45,24 @@ public class GameNew {
      * immediately, and life totals to be adjusted, for computer and human.
      * 
      * @param humanDeck
-     *            &emsp; {@link forge.deck.Deck} object.
+     *              &emsp; {@link forge.deck.Deck} object.
      * @param computerDeck
-     *            &emsp; {@link forge.deck.Deck} object.
+     *              &emsp; {@link forge.deck.Deck} object.
      * @param human
-     *            &emsp; {@link forge.CardList} object.
+     *              &emsp; {@link forge.CardList} object.
      * @param computer
-     *            &emsp; {@link forge.CardList} object.
+     *              &emsp; {@link forge.CardList} object.
      * @param humanLife
-     *            &emsp; int.
+     *              &emsp; int.
      * @param computerLife
-     *            &emsp; int.
+     *              &emsp; int.
      * @param iconEnemy
-     *            &emsp; String.
+     *              &emsp; {@link java.lang.String}
      */
     public static void newGame(final Deck humanDeck, final Deck computerDeck, final CardList human,
             final CardList computer, final int humanLife, final int computerLife, String iconEnemy) {
         Singletons.getControl().changeState(FControl.MATCH_SCREEN);
-        Singletons.getControl().getControlMatch().initMatch(iconEnemy);
+        CMatchUI.SINGLETON_INSTANCE.initMatch(iconEnemy);
 
         GameNew.newGameCleanup();
         GameNew.newMatchCleanup();
@@ -89,7 +94,7 @@ public class GameNew {
      */
     public static void newGame(final Deck humanDeck, final Deck computerDeck) {
         Singletons.getControl().changeState(FControl.MATCH_SCREEN);
-        Singletons.getControl().getControlMatch().initMatch(null);
+        CMatchUI.SINGLETON_INSTANCE.initMatch(null);
 
         GameNew.newGameCleanup();
         GameNew.newMatchCleanup();
@@ -111,7 +116,7 @@ public class GameNew {
         forge.card.trigger.Trigger.resetIDs();
         AllZone.getTriggerHandler().clearTriggerSettings();
         AllZone.getTriggerHandler().clearDelayedTrigger();
-        Singletons.getControl().getControlMatch().getMessageControl().updateGameCount();
+        CMessage.SINGLETON_INSTANCE.updateGameCount();
 
         // friendliness
         Card.resetUniqueNumber();
@@ -270,6 +275,7 @@ public class GameNew {
                     throw new RuntimeException(p + " library is empty.");
                 }
                 AllZone.getGameLog().add("Ante", p + " anted " + ante, 0);
+                VAntes.SINGLETON_INSTANCE.setAnteCard(p, ante);
                 Singletons.getModel().getGameAction().moveTo(ZoneType.Ante, ante);
                 msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
             }
@@ -281,10 +287,10 @@ public class GameNew {
             AllZone.getComputerPlayer().drawCard();
         }
 
-        Singletons.getControl().getControlMatch().setCard(AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).get(0));
+        CMatchUI.SINGLETON_INSTANCE.setCard(AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).get(0));
 
         AllZone.getInputControl().setInput(new InputMulligan());
-        // PhaseHandler.setGameBegins(1); // is this needed? It's already in InputMulligan...
+        PhaseHandler.setGameBegins(1); // is this needed? It's already in InputMulligan...
 
         AllZone.getGameLog().add("Turn",
                 "Turn " + Singletons.getModel().getGameState().getPhaseHandler().getTurn()
@@ -323,26 +329,28 @@ public class GameNew {
 
         // Update mouse events in case of dev mode toggle
         if (Constant.Runtime.DEV_MODE[0]) {
-            Singletons.getView().getViewMatch()
-                .getViewTabber().getVtpTabber().getAllVTabs().get(4).setVisible(true);
-            final List<ViewField> allFields = Singletons.getView().getViewMatch().getFieldViews();
+            // TODO restore this functionality!!!
+            //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(true);
+            final List<VField> allFields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
-            for (final ViewField field : allFields) {
+            for (final VField field : allFields) {
                 ((FLabel) field.getLblHand()).setHoverable(true);
                 ((FLabel) field.getLblLibrary()).setHoverable(true);
             }
         }
         else {
-            Singletons.getView().getViewMatch()
-                .getViewTabber().getVtpTabber().getAllVTabs().get(4).setVisible(false);
-            final List<ViewField> allFields = Singletons.getView().getViewMatch().getFieldViews();
+            // TODO restore this functionality!!!
+            //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(false);
+            final List<VField> allFields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
-            for (final ViewField field : allFields) {
+            for (final VField field : allFields) {
                 ((FLabel) field.getLblHand()).setHoverable(false);
                 ((FLabel) field.getLblLibrary()).setHoverable(false);
             }
         }
 
+        VAntes.SINGLETON_INSTANCE.setAnteCard(AllZone.getComputerPlayer(), null);
+        VAntes.SINGLETON_INSTANCE.setAnteCard(AllZone.getHumanPlayer(), null);
         AllZone.getInputControl().resetInput();
         Singletons.getModel().getMatchState().reset();
         Singletons.getModel().loadPrefs();

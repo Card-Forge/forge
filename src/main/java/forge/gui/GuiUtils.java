@@ -39,7 +39,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.Card;
-import forge.Singletons;
+import forge.gui.match.CMatchUI;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -343,7 +343,7 @@ public final class GuiUtils {
             @Override
             public void valueChanged(final ListSelectionEvent ev) {
                 if (list.getSelectedValue() instanceof Card) {
-                    Singletons.getControl().getControlMatch().setCard((Card) list.getSelectedValue());
+                    CMatchUI.SINGLETON_INSTANCE.setCard((Card) list.getSelectedValue());
                 }
             }
         });

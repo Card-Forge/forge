@@ -20,11 +20,14 @@ package forge.control.input;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
+import forge.Singletons;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.gui.framework.SDisplayUtil;
+import forge.gui.match.CMatchUI;
+import forge.gui.match.views.VMessage;
 import forge.view.ButtonUtil;
-import forge.Singletons;
 
 /**
  * <p>
@@ -54,7 +57,7 @@ public class InputAttack extends Input {
         sb.append("Declare Attackers: Select Creatures to Attack ");
         sb.append(o.toString());
 
-        Singletons.getControl().getControlMatch().showMessage(sb.toString());
+        CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
 
         if (AllZone.getCombat().getRemainingDefenders() == 0) {
             // Nothing left to attack, has to attack this defender
@@ -107,7 +110,7 @@ public class InputAttack extends Input {
             CombatUtil.showCombat();
         }
         else {
-            Singletons.getControl().getControlMatch().getMessageControl().remind();
+            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
     } // selectCard()
 

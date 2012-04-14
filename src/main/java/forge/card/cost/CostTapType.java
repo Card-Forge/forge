@@ -20,7 +20,6 @@ package forge.card.cost;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -28,6 +27,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -242,7 +242,7 @@ public class CostTapType extends CostPartWithList {
                 }
 
                 final int left = nCards - this.nTapped;
-                Singletons.getControl().getControlMatch()
+                CMatchUI.SINGLETON_INSTANCE
                         .showMessage("Select a " + tapType.getDescription() + " to tap (" + left + " left)");
                 ButtonUtil.enableOnlyCancel();
             }

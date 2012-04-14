@@ -32,7 +32,6 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
 import forge.Command;
 
@@ -207,11 +206,6 @@ public class FPanel extends JPanel {
     /** @param b0 &emsp; boolean */
     public void setHovered(final boolean b0) {
         this.hovered = b0;
-    }
-
-    @Override
-    public void setBorder(final Border bord0) {
-        // Intentionally empty
     }
 
     /*

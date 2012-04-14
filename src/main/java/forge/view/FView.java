@@ -1,53 +1,56 @@
-/*
- * Forge: Play Magic: the Gathering.
- * Copyright (C) 2011  Forge Team
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package forge.view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
+import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.FControl;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.SLayoutConstants;
+import forge.gui.framework.SOverflowUtil;
+import forge.gui.framework.SResizingUtil;
+import forge.gui.home.VHomeUI;
+import forge.gui.match.VMatchUI;
 import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 
-/**
- * The main view for Forge: a java swing application. All view class instances
- * should be accessible from here.
- */
+/** */
 public enum FView {
     /** */
     SINGLETON_INSTANCE;
-
-    private final JFrame frame = new JFrame();
-    private final JLayeredPane lpnContent = new JLayeredPane();
-    private final FOverlay overlay = new FOverlay();
-
+    private final List<DragCell> allCells = new ArrayList<DragCell>();
     private SplashFrame splash;
-    private ViewMatchUI match = null;
+
+    // Non-singleton instances (deprecated, but not updated yet)
     private ViewEditorUI editor = null;
     private ViewBazaarUI bazaar = null;
 
-    /** The splash frame is guaranteed to exist when this constructor exits. */
+    // Top-level UI components; all have getters.
+    private final JFrame frmDocument = new JFrame();
+    private final JPanel pnlContent = new JPanel();
+    private final FPanel pnlInsets = new FPanel(new BorderLayout());
+    private final JPanel pnlPreview = new PreviewPanel();
+    private final JPanel pnlTabOverflow = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
+    private final JLayeredPane lpnDocument = new JLayeredPane();
+    private final FOverlay pnlOverlay = new FOverlay();
+
+    //
     private FView() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -58,29 +61,43 @@ public enum FView {
         });
     }
 
-    /** Transitions between splash and main UI.  Called after everything is initialized. */
+    /** */
     public void initialize() {
         SplashFrame.PROGRESS_BAR.setDescription("Creating display components.");
-
-        // After events and shortcuts are assembled, instantiate all different state screens
-        Singletons.getView().instantiateCachedUIStates();
+        Singletons.getView().cacheUIStates();
 
         // Frame styling
-        frame.setMinimumSize(new Dimension(800, 600));
-        frame.setLocationRelativeTo(null);
-        frame.setExtendedState(frame.getExtendedState() | Frame.MAXIMIZED_BOTH);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setIconImage(FSkin.getIcon(FSkin.ForgeIcons.ICO_FAVICON).getImage());
-        frame.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
+        frmDocument.setMinimumSize(new Dimension(800, 600));
+        frmDocument.setLocationRelativeTo(null);
+        frmDocument.setExtendedState(frmDocument.getExtendedState() | Frame.MAXIMIZED_BOTH);
+        frmDocument.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frmDocument.setIconImage(FSkin.getIcon(FSkin.ForgeIcons.ICO_FAVICON).getImage());
+        frmDocument.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
 
-        // Content pane
-        FView.this.lpnContent.setOpaque(true);
-        frame.setContentPane(FView.this.lpnContent);
+        // Frame components
+        frmDocument.setContentPane(lpnDocument);
+        lpnDocument.add(pnlInsets, (Integer) 1);
+        lpnDocument.add(pnlPreview, (Integer) 2);
+        lpnDocument.add(pnlTabOverflow, (Integer) 3);
+        lpnDocument.add(pnlOverlay, JLayeredPane.MODAL_LAYER);
 
-        // Overlay
-        overlay.setBounds(0, 0, frame.getWidth(), frame.getHeight());
-        overlay.setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
-        FView.this.lpnContent.add(overlay, JLayeredPane.MODAL_LAYER);
+        pnlInsets.add(pnlContent, BorderLayout.CENTER);
+        pnlInsets.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        pnlInsets.setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));
+        pnlInsets.setBorder(new EmptyBorder(
+                SLayoutConstants.BORDER_T, SLayoutConstants.BORDER_T, 0, 0));
+
+        pnlContent.setOpaque(false);
+        pnlContent.setLayout(null);
+
+        pnlOverlay.setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
+
+        // Populate all drag tabs. After they are realized,
+        // their controller can initialize actions on their components.
+        for (EDocID doc : EDocID.values()) {
+            if (doc.getDoc().getControl() == null) { continue; }
+            doc.getDoc().getControl().initialize();
+        }
 
         // All is ready to go - fire up home screen and discard splash frame.
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
@@ -88,31 +105,95 @@ public enum FView {
         FView.this.splash.dispose();
         FView.this.splash = null;
 
-        frame.setVisible(true);
-    }
+        frmDocument.setVisible(true);
 
-    /** @return {@link javax.swing.JLayeredPane} */
-    public JLayeredPane getLayeredContentPane() {
-        return FView.this.lpnContent;
+        // TODO MOVE TO CONTROL!
+        // TODO delete FViewOld
+        lpnDocument.addMouseListener(SOverflowUtil.getHideOverflowListener());
+        lpnDocument.addComponentListener(SResizingUtil.getWindowResizeListener());
     }
 
     /** @return {@link javax.swing.JFrame} */
     public JFrame getFrame() {
-        return this.frame;
+        return frmDocument;
+    }
+
+    /** @return {@link javax.swing.JLayeredPane} */
+    public JLayeredPane getLpnDocument() {
+        return lpnDocument;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlInsets() {
+        return pnlInsets;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlContent() {
+        return pnlContent;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlPreview() {
+        return pnlPreview;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlTabOverflow() {
+        return pnlTabOverflow;
     }
 
     /** @return {@link forge.gui.toolbox.FOverlay} */
     public FOverlay getOverlay() {
-        return FView.this.overlay;
+        return FView.this.pnlOverlay;
     }
 
-    /** @return {@link forge.view.ViewMatchUI} */
-    public ViewMatchUI getViewMatch() {
-        if (Singletons.getControl().getState() != FControl.MATCH_SCREEN) {
-            throw new IllegalArgumentException("FView$getVIewMatch\n"
-                    + "may only be called while the match UI is showing.");
+    /** @return {@link java.util.List}<{@link forge.gui.framework.DragCell}> */
+    public List<DragCell> getDragCells() {
+        final List<DragCell> clone = new ArrayList<DragCell>();
+        clone.addAll(allCells);
+        return clone;
+    }
+
+    /** @param pnl0 &emsp; {@link forge.gui.framework.DragCell} */
+    public void addDragCell(final DragCell pnl0) {
+        allCells.add(pnl0);
+        pnlContent.add(pnl0);
+    }
+
+    /** @param pnl0 &emsp; {@link forge.gui.framework.DragCell} */
+    public void removeDragCell(final DragCell pnl0) {
+        allCells.remove(pnl0);
+        pnlContent.remove(pnl0);
+    }
+
+    /** */
+    public void removeAllDragCells() {
+        allCells.clear();
+        pnlContent.removeAll();
+    }
+
+    /** PreviewPanel shows where a dragged component could
+     * come to rest when the mouse is released.<br>
+     * This class is an unfortunate necessity to overcome
+     * translucency issues for preview panel. */
+    @SuppressWarnings("serial")
+    class PreviewPanel extends JPanel {
+        /** PreviewPanel shows where a dragged component could
+         * come to rest when the mouse is released. */
+        public PreviewPanel() {
+            super();
+            setOpaque(false);
+            setVisible(false);
+            setBorder(new LineBorder(Color.DARK_GRAY, 2));
         }
-        return FView.this.match;
+
+        @Override
+        public void paintComponent(final Graphics g) {
+            super.paintComponent(g);
+            g.setColor(new Color(0, 0, 0, 50));
+            g.fillRect(0, 0, getWidth(), getHeight());
+        }
     }
 
     /** @return {@link forge.view.ViewEditorUI} */
@@ -133,11 +214,11 @@ public enum FView {
         return FView.this.bazaar;
     }
 
-    /** Like it says. */
-    public void instantiateCachedUIStates() {
-        FView.this.match = new ViewMatchUI();
+    /** */
+    private void cacheUIStates() {
         FView.this.editor = new ViewEditorUI();
         FView.this.bazaar = new ViewBazaarUI(AllZone.getQuest().getBazaar());
-        ViewHomeUI.SINGLETON_INSTANCE.initialize();
+        VMatchUI.SINGLETON_INSTANCE.instantiate();
+        VHomeUI.SINGLETON_INSTANCE.instantiate();
     }
 }

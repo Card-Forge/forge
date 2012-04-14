@@ -22,6 +22,7 @@ import forge.Card;
 import forge.Singletons;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
+import forge.gui.match.CMatchUI;
 
 /**
  * <p>
@@ -44,7 +45,7 @@ public abstract class Input implements java.io.Serializable {
      * </p>
      */
     public void showMessage() {
-        Singletons.getControl().getControlMatch().showMessage("Blank Input");
+        CMatchUI.SINGLETON_INSTANCE.showMessage("Blank Input");
     }
 
     /**

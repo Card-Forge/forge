@@ -54,6 +54,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
 import forge.view.ButtonUtil;
 
@@ -361,7 +362,7 @@ public class CardFactoryCreatures {
             @Override
             public void showMessage() {
                 ButtonUtil.disableAll();
-                Singletons.getControl().getControlMatch().showMessage("Exile a nonland card from your hand.");
+                CMatchUI.SINGLETON_INSTANCE.showMessage("Exile a nonland card from your hand.");
             }
 
             @Override
@@ -413,9 +414,9 @@ public class CardFactoryCreatures {
             @Override
             public void showMessage() {
                 if (index[0] == 0) {
-                    Singletons.getControl().getControlMatch().showMessage("Select target land you control.");
+                    CMatchUI.SINGLETON_INSTANCE.showMessage("Select target land you control.");
                 } else {
-                    Singletons.getControl().getControlMatch().showMessage("Select target land opponent controls.");
+                    CMatchUI.SINGLETON_INSTANCE.showMessage("Select target land opponent controls.");
                 }
 
                 ButtonUtil.enableOnlyCancel();
@@ -1039,7 +1040,7 @@ public class CardFactoryCreatures {
 
                                             @Override
                                             public void showMessage() {
-                                                Singletons.getControl().getControlMatch().showMessage(msg);
+                                                CMatchUI.SINGLETON_INSTANCE.showMessage(msg);
                                                 ButtonUtil.enableOnlyOK();
                                             }
 
@@ -1476,7 +1477,7 @@ public class CardFactoryCreatures {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Select up to 5 target permanents.  Selected (");
                 sb.append(targetPerms.size()).append(") so far.  Click OK when done.");
-                Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                 ButtonUtil.enableOnlyOK();
             }
 
@@ -1518,7 +1519,7 @@ public class CardFactoryCreatures {
             public void showMessage() {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(card.getName()).append(" - Select target player");
-                Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -1574,7 +1575,7 @@ public class CardFactoryCreatures {
                             toDisplay += "Currently, (" + toSac.size() + ") selected with a total power of: "
                                     + getTotalPower();
                             toDisplay += "  Click OK when Done.";
-                            Singletons.getControl().getControlMatch().showMessage(toDisplay);
+                            CMatchUI.SINGLETON_INSTANCE.showMessage(toDisplay);
                             ButtonUtil.enableAll();
                         }
 
@@ -1788,7 +1789,7 @@ public class CardFactoryCreatures {
                     message += "or artifact ";
                 }
                 message += "on the battlefield";
-                Singletons.getControl().getControlMatch().showMessage(cardName + " - " + message);
+                CMatchUI.SINGLETON_INSTANCE.showMessage(cardName + " - " + message);
                 ButtonUtil.enableOnlyCancel();
             }
 

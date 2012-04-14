@@ -39,6 +39,7 @@ import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.match.CMatchUI;
 
 /**
  * <p>
@@ -729,7 +730,7 @@ public class Combat {
                         this.addDefendingDamage(damageDealt, attacker);
                     } else {
                         if (attacker.hasKeyword("Trample") || (block.size() > 1)) {
-                            Singletons.getControl().getControlMatch().assignDamage(attacker, block, damageDealt);
+                            CMatchUI.SINGLETON_INSTANCE.assignDamage(attacker, block, damageDealt);
                         } else {
                             block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
                         }
@@ -782,7 +783,7 @@ public class Combat {
                         this.addDefendingDamage(damageDealt, attacker);
                     } else {
                         if (attacker.hasKeyword("Trample") || (block.size() > 1)) {
-                            Singletons.getControl().getControlMatch().assignDamage(attacker, block, damageDealt);
+                            CMatchUI.SINGLETON_INSTANCE.assignDamage(attacker, block, damageDealt);
                         } else {
                             block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
                         }

@@ -327,7 +327,7 @@ public final class GuiDisplayUtil {
     public static void updateGUI() {
         AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).updateObservers();
         AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
-        //AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();
+        //AllZone.getHumanPlayer().getZone(ZoneType.Hand).updateObservers();
         AllZone.getComputerPlayer().updateObservers();
         AllZone.getHumanPlayer().updateObservers();
     }

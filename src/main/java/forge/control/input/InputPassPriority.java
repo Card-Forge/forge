@@ -24,6 +24,9 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.gui.GuiDisplayUtil;
+import forge.gui.framework.SDisplayUtil;
+import forge.gui.match.CMatchUI;
+import forge.gui.match.views.VMessage;
 import forge.view.ButtonUtil;
 
 /**
@@ -64,7 +67,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
         sb.append("\n");
         sb.append("Priority: ").append(player);
 
-        Singletons.getControl().getControlMatch().showMessage(sb.toString());
+        CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
     }
 
     /** {@inheritDoc} */
@@ -86,7 +89,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
             Singletons.getModel().getGameState().getPhaseHandler().setPriority(AllZone.getHumanPlayer());
         }
         else {
-            Singletons.getControl().getControlMatch().getMessageControl().remind();
+            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
     } // selectCard()
 }

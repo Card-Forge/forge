@@ -18,7 +18,6 @@
 package forge.gui.match.nonsingleton;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -30,15 +29,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.gui.layout.DragTab;
-import forge.gui.layout.EDocID;
-import forge.gui.layout.ICDoc;
-import forge.gui.layout.IVDoc;
+import forge.AllZone;
+import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.mana.ManaPool;
+import forge.game.player.Player;
+import forge.game.zone.ZoneType;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.DragTab;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
+import forge.gui.match.controllers.CPlayers;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinProp;
@@ -49,18 +54,30 @@ import forge.view.arcane.PlayArea;
  * 
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VField implements IVDoc {
-    /** */
-    SINGLETON_INSTANCE;
+public class VField implements IVDoc {
+    // Fields used with interface IVDoc
+    private final CField control;
+    private DragCell parentCell;
+    private final EDocID docID;
+    private final DragTab tab = new DragTab("Field");
 
-    private final JPanel pnl = new JPanel();
-    private final DragTab tab = new DragTab("Your Battlefield");
+    // Other fields
+    private Player player = null;
+
+    // Top-level containers
     private final JScrollPane scroller = new JScrollPane();
-    private final PlayArea tabletop = new PlayArea(scroller, true);
+    private final PlayArea tabletop;
+    private final JPanel avatarArea = new JPanel();
+    private final JPanel phaseArea  = new JPanel();
+    private final JPanel pnlDetails = new JPanel();
 
-    private final Border inactiveBorder = new LineBorder(new Color(0, 0, 0, 0), 1);
-    private final Border hoverBorder = new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1);
+    // Avatar area
+    private final JLabel lblAvatar = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+            .iconScaleFactor(1.0f).build();
+    private final JLabel lblLife = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+            .fontStyle(Font.BOLD).build();
 
+    // Info labels
     private FLabel lblHand = getBuiltFLabel(FSkin.ZoneImages.ICO_HAND, "99", "Cards in hand");
     private FLabel lblGraveyard = getBuiltFLabel(FSkin.ZoneImages.ICO_GRAVEYARD, "99", "Cards in graveyard");
     private FLabel lblLibrary = getBuiltFLabel(FSkin.ZoneImages.ICO_LIBRARY, "99", "Cards in library");
@@ -74,6 +91,7 @@ public enum VField implements IVDoc {
     private FLabel lblWhite = getBuiltFLabel(FSkin.ManaImages.IMG_WHITE, "99", "White mana");
     private FLabel lblColorless = getBuiltFLabel(FSkin.ManaImages.IMG_COLORLESS, "99", "Colorless mana");
 
+    // Phase labels
     private PhaseLabel lblUpkeep = new PhaseLabel("UP");
     private PhaseLabel lblDraw = new PhaseLabel("DR");
     private PhaseLabel lblMain1 = new PhaseLabel("M1");
@@ -87,44 +105,55 @@ public enum VField implements IVDoc {
     private PhaseLabel lblEndTurn = new PhaseLabel("ET");
     private PhaseLabel lblCleanup = new PhaseLabel("CL");
 
-    private final JPanel avatarArea = new JPanel();
-    private final JPanel phaseArea  = new JPanel();
-    private final JPanel pnlDetails = new JPanel();
-    private final JLabel lblAvatar = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-            .iconScaleFactor(1.0f).build();
-    private final JLabel lblLife = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-            .fontStyle(Font.BOLD).build();
-
-    private final Color clrHover
-        = FSkin.getColor(FSkin.Colors.CLR_HOVER);
-    private final Color clrPhaseActiveEnabled
-        = FSkin.getColor(FSkin.Colors.CLR_PHASE_ACTIVE_ENABLED);
-    private final Color clrPhaseActiveDisabled
-        = FSkin.getColor(FSkin.Colors.CLR_PHASE_ACTIVE_DISABLED);
-    private final Color clrPhaseInactiveEnabled
-        = FSkin.getColor(FSkin.Colors.CLR_PHASE_INACTIVE_ENABLED);
-    private final Color clrPhaseInactiveDisabled
-        = FSkin.getColor(FSkin.Colors.CLR_PHASE_INACTIVE_DISABLED);
-
-    /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#populate()
+    //========= Constructor
+    /**
+     * Assembles Swing components of a player field instance.
+     * 
+     * @param player0 &emsp; {@link forge.game.player.Player}
+     * @param id0 &emsp; {@link forge.gui.framework.EDocID}
      */
-    @Override
-    public void populate() {
-        // Avatar and life
+    public VField(final EDocID id0, final Player player0) {
+        this.docID = id0;
+        id0.setDoc(this);
+
+        this.player = player0;
+        if (player0 != null) { tab.setText(player0.getName() + " Field"); }
+        else { tab.setText("NO PLAYER FOR " + docID.toString()); }
+
+        // TODO player is hard-coded into tabletop...should be dynamic
+        // (haven't looked into it too deeply). Doublestrike 12-04-12
+        tabletop = new PlayArea(scroller,
+                player.equals(AllZone.getComputerPlayer()) ? true : false);
+
+        control = new CField(player, this);
+
         avatarArea.setOpaque(false);
         avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
         avatarArea.setLayout(new MigLayout("insets 0, gap 0"));
         avatarArea.add(lblAvatar, "w 100%!, h 70%!, wrap, gaptop 4%");
         avatarArea.add(lblLife, "w 100%!, h 30%!, gaptop 4%");
 
-        // Phases
+        // Player area hover effect
+        avatarArea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                avatarArea.setOpaque(true);
+                avatarArea.setBorder(new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1));
+            }
+
+            @Override
+            public void mouseExited(final MouseEvent e) {
+                avatarArea.setOpaque(false);
+                avatarArea.setBorder(new LineBorder(new Color(0, 0, 0, 0), 1));
+            }
+        });
+
         phaseArea.setOpaque(false);
         phaseArea.setLayout(new MigLayout("insets 0 0 1% 0, gap 0, wrap"));
         populatePhase();
 
-        // Play area
-        tabletop.setBorder(new MatteBorder(0, 1, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        tabletop.setBorder(new MatteBorder(0, 1, 0, 0,
+                FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);
@@ -132,56 +161,37 @@ public enum VField implements IVDoc {
         scroller.getViewport().setOpaque(false);
         scroller.setBorder(null);
 
-        // Pool info
         pnlDetails.setOpaque(false);
         pnlDetails.setLayout(new MigLayout("insets 0, gap 0, wrap"));
         populateDetails();
+    }
 
-        // Final layout
-        pnl.removeAll();
+    //========= Overridden methods
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#populate()
+     */
+    @Override
+    public void populate() {
+        final JPanel pnl = parentCell.getBody();
         pnl.setLayout(new MigLayout("insets 0, gap 0"));
+
         pnl.add(avatarArea, "w 10%!, h 30%!");
         pnl.add(phaseArea, "w 5%!, h 100%!, span 1 2");
         pnl.add(scroller, "w 85%!, h 100%!, span 1 2, wrap");
         pnl.add(pnlDetails, "w 10%!, h 69%!, gapleft 1px");
-
-        // TODO Player hover effect
-        /*
-        avatarArea.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(final MouseEvent e) {
-                VField.this.avatarArea.setOpaque(true);
-                VField.this.avatarArea.setBorder(VField.this.hoverBorder);
-            }
-
-            @Override
-            public void mouseExited(final MouseEvent e) {
-                VField.this.avatarArea.setOpaque(false);
-                VField.this.avatarArea.setBorder(VField.this.inactiveBorder);
-            }
-        });
-        */
     }
 
-
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getDocumentID()
+     * @see forge.gui.framework.IVDoc#getDocumentID()
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.YOUR_BATTLEFIELD;
+        return docID;
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getDocument()
-     */
-    @Override
-    public Component getDocument() {
-        return pnl;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getTabLabel()
+     * @see forge.gui.framework.IVDoc#getTabLabel()
      */
     @Override
     public DragTab getTabLabel() {
@@ -189,12 +199,30 @@ public enum VField implements IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getControl()
+     * @see forge.gui.framework.IVDoc#getControl()
      */
     @Override
     public ICDoc getControl() {
-        return null;
+        return control;
     }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#setParentCell()
+     */
+    @Override
+    public void setParentCell(final DragCell cell0) {
+        this.parentCell = cell0;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getParentCell()
+     */
+    @Override
+    public DragCell getParentCell() {
+        return this.parentCell;
+    }
+
+    //========= Populate helper methods
 
     /** Adds phase indicator labels to phase area JPanel container. */
     private void populatePhase() {
@@ -284,32 +312,39 @@ public enum VField implements IVDoc {
         pnlDetails.add(row6, constraintsRow);
     }
 
+    private FLabel getBuiltFLabel(SkinProp p0, String s0, String s1) {
+        return new FLabel.Builder().icon(new ImageIcon(FSkin.getImage(p0)))
+            .opaque(false).fontScaleAuto(false).fontSize(14)
+            .fontStyle(Font.BOLD).iconAlpha(0.6f).iconInBackground(true)
+            .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT).build();
+    }
+
     // ========== Observer update methods
     /**
      * Handles observer update of player Zones - hand, graveyard, etc.
      * 
-     * @p aram p0
-     *            &emsp; Player obj
-     *
+     * @param p0 &emsp; {@link forge.game.player.Player}
+     */
     public void updateZones(final Player p0) {
-        this.getLblHand().setText("" + p0.getZone(Zone.Hand).size());
-        this.getLblGraveyard().setText("" + p0.getZone(Zone.Graveyard).size());
-        this.getLblLibrary().setText("" + p0.getZone(Zone.Library).size());
+        this.getLblHand().setText("" + p0.getZone(ZoneType.Hand).size());
+        this.getLblGraveyard().setText("" + p0.getZone(ZoneType.Graveyard).size());
+        this.getLblLibrary().setText("" + p0.getZone(ZoneType.Library).size());
         this.getLblFlashback().setText("" + CardFactoryUtil.getExternalZoneActivationCards(p0).size());
-        this.getLblExile().setText("" + p0.getZone(Zone.Exile).size());
+        this.getLblExile().setText("" + p0.getZone(ZoneType.Exile).size());
     }
 
     /**
      * Handles observer update of non-Zone details - life, poison, etc. Also
      * updates "players" panel in tabber for this player.
      * 
-     * @p aram p0
-     *            &emsp; Player obj
-     *
+     * @param p0 &emsp; {@link forge.game.player.Player}
+     */
     public void updateDetails(final Player p0) {
         // "Players" panel update
-        Singletons.getControl().getControlMatch()
-            .getTabberControl().getView().updatePlayerLabels(p0);
+        CPlayers.SINGLETON_INSTANCE.update();
+
+        // Mana pool update
+        updateManaPool(p0);
 
         // Poison/life
         this.getLblLife().setText("" + p0.getLife());
@@ -328,28 +363,32 @@ public enum VField implements IVDoc {
         else {
             this.getLblPoison().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
-
-        //mana pool
-        updateManaPool(p0);
     }
 
     /**
      * Handles observer update of the mana pool.
      * 
-     * @p aram p0
-     *            &emsp; Player obj
-     *
+     * @param p0 &emsp; {@link forge.game.player.Player}
+     */
     public void updateManaPool(final Player p0) {
         ManaPool m = p0.getManaPool();
-        getLblBlack().setText("" + m.getAmountOfColor(forge.Constant.Color.BLACK));
-        getLblBlue().setText("" + m.getAmountOfColor(forge.Constant.Color.BLUE));
-        getLblGreen().setText("" + m.getAmountOfColor(forge.Constant.Color.GREEN));
-        getLblRed().setText("" + m.getAmountOfColor(forge.Constant.Color.RED));
-        getLblWhite().setText("" + m.getAmountOfColor(forge.Constant.Color.WHITE));
-        getLblColorless().setText("" + m.getAmountOfColor(forge.Constant.Color.COLORLESS));
+        this.lblBlack.setText("" + m.getAmountOfColor(forge.Constant.Color.BLACK));
+        this.lblBlue.setText("" + m.getAmountOfColor(forge.Constant.Color.BLUE));
+        this.lblGreen.setText("" + m.getAmountOfColor(forge.Constant.Color.GREEN));
+        this.lblRed.setText("" + m.getAmountOfColor(forge.Constant.Color.RED));
+        this.lblWhite.setText("" + m.getAmountOfColor(forge.Constant.Color.WHITE));
+        this.lblColorless.setText("" + m.getAmountOfColor(forge.Constant.Color.COLORLESS));
     }
 
-    // ========= Retrieval methods
+    //========= Retrieval methods
+    /**
+     * Gets the player currently associated with this field.
+     * @return {@link forge.game.player.Player}
+     */
+    public Player getPlayer() {
+        return this.player;
+    }
+
     /**
      * Gets the tabletop.
      *
@@ -499,19 +538,14 @@ public enum VField implements IVDoc {
         return this.lblCleanup;
     }
 
-    // ========== Custom class handling
-
-    private FLabel getBuiltFLabel(SkinProp p0, String s0, String s1) {
-        return new FLabel.Builder().icon(new ImageIcon(FSkin.getImage(p0)))
-            .opaque(false).fontScaleFactor(0.5).iconAlpha(0.6f).iconInBackground(true)
-            .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT).build();
-    }
+    //========== Custom class handling
 
     /**
      * Shows phase labels, handles repainting and on/off states. A PhaseLabel
      * has "skip" and "active" states, meaning "this phase is (not) skipped" and
      * "this is the current phase".
      */
+    @SuppressWarnings("serial")
     public class PhaseLabel extends JLabel {
         private boolean enabled = true;
         private boolean active = false;
@@ -613,15 +647,15 @@ public enum VField implements IVDoc {
 
             // Set color according to skip or active or hover state of label
             if (this.hover) {
-                c = clrHover;
+                c = FSkin.getColor(FSkin.Colors.CLR_HOVER);
             } else if (this.active && this.enabled) {
-                c = clrPhaseActiveEnabled;
+                c = FSkin.getColor(FSkin.Colors.CLR_PHASE_ACTIVE_ENABLED);
             } else if (!this.active && this.enabled) {
-                c = clrPhaseInactiveEnabled;
+                c = FSkin.getColor(FSkin.Colors.CLR_PHASE_INACTIVE_ENABLED);
             } else if (this.active && !this.enabled) {
-                c = clrPhaseActiveDisabled;
+                c = FSkin.getColor(FSkin.Colors.CLR_PHASE_ACTIVE_DISABLED);
             } else {
-                c = clrPhaseInactiveDisabled;
+                c = FSkin.getColor(FSkin.Colors.CLR_PHASE_INACTIVE_DISABLED);
             }
 
             // Center vertically and horizontally. Show border if active.

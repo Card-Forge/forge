@@ -46,6 +46,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
 import forge.view.ButtonUtil;
 
@@ -1428,7 +1429,7 @@ public class AbilityFactoryCounters {
                 @Override
                 public void showMessage() {
                     ButtonUtil.enableOnlyCancel();
-                    Singletons.getControl().getControlMatch().showMessage("Proliferate: Choose permanents and/or players");
+                    CMatchUI.SINGLETON_INSTANCE.showMessage("Proliferate: Choose permanents and/or players");
                 }
 
                 @Override

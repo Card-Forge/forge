@@ -133,11 +133,7 @@ public class GuiInput extends MyObservable implements Observer {
         return this.getInput().toString();
     }
 
-    /**
-     * Gets the input.
-     * 
-     * @return the input
-     */
+    /** @return {@link forge.gui.GuiInput.Input} */
     public Input getInput() {
         return this.input;
     }

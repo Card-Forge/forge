@@ -35,6 +35,10 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.gui.framework.SDisplayUtil;
+import forge.gui.match.CMatchUI;
+import forge.gui.match.VMatchUI;
+import forge.gui.match.views.VMessage;
 import forge.quest.QuestController;
 import forge.quest.bazaar.QuestItemType;
 import forge.view.ButtonUtil;
@@ -57,9 +61,9 @@ public class InputMulligan extends Input {
     @Override
     public final void showMessage() {
         ButtonUtil.enableAll();
-        Singletons.getView().getViewMatch().getBtnOK().setText("No");
-        Singletons.getView().getViewMatch().getBtnCancel().setText("Yes");
-        Singletons.getControl().getControlMatch().showMessage("Do you want to Mulligan?");
+        VMatchUI.SINGLETON_INSTANCE.getBtnOK().setText("No");
+        VMatchUI.SINGLETON_INSTANCE.getBtnCancel().setText("Yes");
+        CMatchUI.SINGLETON_INSTANCE.showMessage("Do you want to Mulligan?");
     }
 
     /** {@inheritDoc} */
@@ -224,7 +228,7 @@ public class InputMulligan extends Input {
                 c0.getController().drawCards(hand.size());
             }
         } else {
-            Singletons.getControl().getControlMatch().getMessageControl().remind();
+            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
     }
 }

@@ -50,6 +50,7 @@ import forge.game.player.PlayerUtil;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -116,9 +117,9 @@ public class CardFactorySorceries {
                 @Override
                 public void showMessage() {
                     if (index[0] == 0) {
-                        Singletons.getControl().getControlMatch().showMessage("Select target land you control.");
+                        CMatchUI.SINGLETON_INSTANCE.showMessage("Select target land you control.");
                     } else {
-                        Singletons.getControl().getControlMatch().showMessage("Select target land opponent controls.");
+                        CMatchUI.SINGLETON_INSTANCE.showMessage("Select target land opponent controls.");
                     }
 
                     ButtonUtil.enableOnlyCancel();
@@ -608,7 +609,7 @@ public class CardFactorySorceries {
                         final StringBuilder sb = new StringBuilder();
                         sb.append("Select target ").append(humanBasic.get(this.count));
                         sb.append(" land to not sacrifice");
-                        Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                        CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                         ButtonUtil.enableOnlyCancel();
                     }
                 }
@@ -1068,7 +1069,7 @@ public class CardFactorySorceries {
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Select target creatures and/or players.  Currently, ");
                     sb.append(this.getNumTargets()).append(" targets.  Click OK when done.");
-                    Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                    CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                 }
 
                 private int getNumTargets() {
@@ -1102,11 +1103,11 @@ public class CardFactorySorceries {
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
                     if (!c.canBeTargetedBy(spell)) {
-                        Singletons.getControl().getControlMatch().showMessage("Cannot target this card.");
+                        CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this card.");
                         return; // cannot target
                     }
                     if (targets.contains(c)) {
-                        Singletons.getControl().getControlMatch().showMessage("You have already selected this target.");
+                        CMatchUI.SINGLETON_INSTANCE.showMessage("You have already selected this target.");
                         return; // cannot target the same creature twice.
                     }
 
@@ -1119,11 +1120,11 @@ public class CardFactorySorceries {
                 @Override
                 public void selectPlayer(final Player player) {
                     if (!player.canBeTargetedBy(spell)) {
-                        Singletons.getControl().getControlMatch().showMessage("Cannot target this player.");
+                        CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this player.");
                         return; // cannot target
                     }
                     if (targetPlayers.contains(player)) {
-                        Singletons.getControl().getControlMatch().showMessage("You have already selected this player.");
+                        CMatchUI.SINGLETON_INSTANCE.showMessage("You have already selected this player.");
                         return; // cannot target the same player twice.
                     }
                     targetPlayers.add(player);
@@ -1606,7 +1607,7 @@ public class CardFactorySorceries {
                     final StringBuilder sb = new StringBuilder();
                     sb.append(cardName).append(" - Select a target creature to gain Fear (up to ");
                     sb.append(this.stop - this.count).append(" more)");
-                    Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                    CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                     ButtonUtil.enableAll();
                 }
 
@@ -1648,7 +1649,7 @@ public class CardFactorySorceries {
                 public void showMessage() {
                     final StringBuilder sb = new StringBuilder();
                     sb.append(cardName).append(" - Select target creature to get -X/-X");
-                    Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                    CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                     ButtonUtil.enableOnlyCancel();
                 }
 
@@ -1729,7 +1730,7 @@ public class CardFactorySorceries {
                 public void showMessage() {
                     final StringBuilder sb = new StringBuilder();
                     sb.append(cardName).append(" - Select target player to lose life");
-                    Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                    CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                     ButtonUtil.enableOnlyCancel();
                 }
 

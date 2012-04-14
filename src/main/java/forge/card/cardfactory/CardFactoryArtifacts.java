@@ -28,6 +28,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /** 
@@ -145,7 +146,7 @@ class CardFactoryArtifacts {
 
                 @Override
                 public void showMessage() {
-                    Singletons.getControl().getControlMatch().showMessage("Discard a land card (or select Mox Diamond to sacrifice it)");
+                    CMatchUI.SINGLETON_INSTANCE.showMessage("Discard a land card (or select Mox Diamond to sacrifice it)");
                     ButtonUtil.enableOnlyCancel();
                 }
 
@@ -493,7 +494,7 @@ class CardFactoryArtifacts {
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append(card.getName()).append(" - Exile cards from hand.  Currently, ");
                                 sb.append(this.exiled.size()).append(" selected.  (Press OK when done.)");
-                                Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                                 ButtonUtil.enableOnlyOK();
                             }
 
@@ -528,7 +529,7 @@ class CardFactoryArtifacts {
 
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append(card.getName()).append(" - Returning cards to top of library.");
-                                Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
 
                                 // Then look at the exiled cards and put them on
                                 // top of your library in any order.
@@ -692,7 +693,7 @@ class CardFactoryArtifacts {
                                     if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
                                         this.stop();
                                     }
-                                    Singletons.getControl().getControlMatch().showMessage(prompt);
+                                    CMatchUI.SINGLETON_INSTANCE.showMessage(prompt);
                                     ButtonUtil.disableAll();
                                 }
 
@@ -809,7 +810,7 @@ class CardFactoryArtifacts {
                 public void showMessage() {
                     final StringBuilder sb = new StringBuilder();
                     sb.append(cardName).append(" - Select an artifact on the battlefield");
-                    Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                    CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                     ButtonUtil.enableOnlyCancel();
                 }
 

@@ -17,17 +17,14 @@
  */
 package forge.gui.match.views;
 
-import java.awt.Component;
-
-import javax.swing.JPanel;
-
 import net.miginfocom.swing.MigLayout;
 import forge.gui.CardDetailPanel;
-import forge.gui.layout.DragTab;
-import forge.gui.layout.EDocID;
-import forge.gui.layout.ICDoc;
-import forge.gui.layout.IVDoc;
-import forge.gui.toolbox.FSkin;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.DragTab;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
+import forge.gui.match.controllers.CDetail;
 
 /** 
  * Assembles Swing components of card detail area.
@@ -38,32 +35,41 @@ public enum VDetail implements IVDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final JPanel pnl = new JPanel();
+    // Fields used with interface IVDoc
+    private DragCell parentCell;
     private final DragTab tab = new DragTab("Card Detail");
 
+    // Top-level containers
     private final CardDetailPanel pnlDetail = new CardDetailPanel(null);
 
+    //========= Overridden methods
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#populate()
+     * @see forge.gui.framework.IVDoc#populate()
      */
     @Override
     public void populate() {
-        pnlDetail.setOpaque(false);
-
-        pnl.removeAll();
-        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-        pnl.setLayout(new MigLayout("insets 0, gap 0"));
-
-        pnl.add(pnlDetail, "w 100%!, h 100%!");
-    }
-
-    /** @return {@link forge.gui.CardDetailPanel} */
-    public CardDetailPanel getPnlDetail() {
-        return pnlDetail;
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
+        parentCell.getBody().add(pnlDetail, "w 100%!, h 100%!");
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getDocumentID()
+     * @see forge.gui.framework.IVDoc#setParentCell()
+     */
+    @Override
+    public void setParentCell(final DragCell cell0) {
+        this.parentCell = cell0;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getParentCell()
+     */
+    @Override
+    public DragCell getParentCell() {
+        return this.parentCell;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getDocumentID()
      */
     @Override
     public EDocID getDocumentID() {
@@ -71,15 +77,7 @@ public enum VDetail implements IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getDocument()
-     */
-    @Override
-    public Component getDocument() {
-        return pnl;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getTabLabel()
+     * @see forge.gui.framework.IVDoc#getTabLabel()
      */
     @Override
     public DragTab getTabLabel() {
@@ -87,10 +85,17 @@ public enum VDetail implements IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getControl()
+     * @see forge.gui.framework.IVDoc#getControl()
      */
     @Override
     public ICDoc getControl() {
-        return null;
+        return CDetail.SINGLETON_INSTANCE;
+    }
+
+    //========= Retrieval methods
+
+    /** @return {@link forge.gui.CardDetailPanel} */
+    public CardDetailPanel getPnlDetail() {
+        return pnlDetail;
     }
 }

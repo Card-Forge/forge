@@ -17,14 +17,18 @@
  */
 package forge.gui.match.views;
 
-import java.awt.Component;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
-import javax.swing.JPanel;
-
-import forge.gui.layout.DragTab;
-import forge.gui.layout.EDocID;
-import forge.gui.layout.ICDoc;
-import forge.gui.layout.IVDoc;
+import net.miginfocom.swing.MigLayout;
+import forge.AllZone;
+import forge.GameLog;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.DragTab;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
+import forge.gui.match.controllers.CLog;
 import forge.gui.toolbox.FSkin;
 
 /** 
@@ -36,36 +40,45 @@ public enum VLog implements IVDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final JPanel pnl = new JPanel();
-    private final DragTab tab = new DragTab("Game Log");
+    // Fields used with interface IVDoc
+    private DragCell parentCell;
+    private final DragTab tab = new DragTab("Log");
 
+    //========== Overridden methods
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#populate()
+     * @see forge.gui.framework.IVDoc#populate()
      */
     @Override
     public void populate() {
-        pnl.removeAll();
-        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        // (Panel uses observers to update, no permanent components here.)
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getDocumentID()
+     * @see forge.gui.framework.IVDoc#setParentCell()
+     */
+    @Override
+    public void setParentCell(final DragCell cell0) {
+        this.parentCell = cell0;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getParentCell()
+     */
+    @Override
+    public DragCell getParentCell() {
+        return this.parentCell;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getDocumentID()
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.REPORT_STACK;
+        return EDocID.REPORT_LOG;
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getDocument()
-     */
-    @Override
-    public Component getDocument() {
-        return pnl;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getTabLabel()
+     * @see forge.gui.framework.IVDoc#getTabLabel()
      */
     @Override
     public DragTab getTabLabel() {
@@ -73,10 +86,42 @@ public enum VLog implements IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.layout.IVDoc#getControl()
+     * @see forge.gui.framework.IVDoc#getControl()
      */
     @Override
     public ICDoc getControl() {
-        return null;
+        return CLog.SINGLETON_INSTANCE;
+    }
+
+    //========== Observer update methods
+    /** */
+    public void updateConsole() {
+        // No need to update this unless it's showing
+        if (!parentCell.getSelected().equals(this)) { return; }
+
+        final GameLog gl = AllZone.getGameLog();
+
+        parentCell.getBody().setLayout(new MigLayout("insets 1%, gap 1%, wrap"));
+        parentCell.getBody().removeAll();
+
+        // by default, grab everything logging level 3 or less
+        // TODO - some option to make this configurable is probably desirable
+        // TODO - add these components to resize adapter in constructor
+        JTextArea tar = new JTextArea(gl.getLogText(3));
+        tar.setOpaque(false);
+        tar.setBorder(null);
+        tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+
+        tar.setFocusable(false);
+        tar.setEditable(false);
+        tar.setLineWrap(true);
+        tar.setWrapStyleWord(true);
+
+        JScrollPane jsp = new JScrollPane(tar);
+        jsp.setOpaque(false);
+        jsp.setBorder(null);
+        jsp.getViewport().setOpaque(false);
+
+        parentCell.getBody().add(jsp, "w 98%!");
     }
 }

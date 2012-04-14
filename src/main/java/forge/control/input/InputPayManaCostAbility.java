@@ -20,11 +20,13 @@ package forge.control.input;
 import forge.AllZone;
 import forge.Card;
 import forge.Command;
-import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.gui.framework.SDisplayUtil;
+import forge.gui.match.CMatchUI;
+import forge.gui.match.views.VMessage;
 import forge.view.ButtonUtil;
 
 //if cost is paid, Command.execute() is called
@@ -156,7 +158,7 @@ public class InputPayManaCostAbility extends InputMana {
         this.manaCost = InputPayManaCostUtil.activateManaAbility(this.fakeAbility, card, this.manaCost);
 
         if (card.getManaAbility().isEmpty() || card.isInZone(ZoneType.Hand)) {
-            Singletons.getControl().getControlMatch().getMessageControl().remind();
+            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
 
         if (this.manaCost.isPaid()) {
@@ -194,7 +196,7 @@ public class InputPayManaCostAbility extends InputMana {
         if (this.showOnlyOKButton) {
             ButtonUtil.enableOnlyOK();
         }
-        Singletons.getControl().getControlMatch().showMessage(this.message + "Pay Mana Cost: \r\n" + this.manaCost.toString());
+        CMatchUI.SINGLETON_INSTANCE.showMessage(this.message + "Pay Mana Cost: \r\n" + this.manaCost.toString());
     }
 
     /* (non-Javadoc)

@@ -21,7 +21,6 @@ import com.google.common.base.Strings;
 
 import forge.AllZone;
 import forge.Card;
-import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
@@ -34,6 +33,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -277,7 +277,7 @@ public class CostMana extends CostPart {
                     ButtonUtil.enableOnlyCancel();
                 }
 
-                Singletons.getControl().getControlMatch().showMessage(
+                CMatchUI.SINGLETON_INSTANCE.showMessage(
                         "Pay X Mana Cost for " + sa.getSourceCard().getName() + "\n" + this.xPaid + " Paid so far.");
             }
 
@@ -474,7 +474,7 @@ public class CostMana extends CostPart {
             public void showMessage() {
                 ButtonUtil.enableOnlyCancel();
                 final String displayMana = this.mana.toString().replace("X", "").trim();
-                Singletons.getControl().getControlMatch().showMessage("Pay Mana Cost: " + displayMana);
+                CMatchUI.SINGLETON_INSTANCE.showMessage("Pay Mana Cost: " + displayMana);
 
                 final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + displayMana);
                 if (this.phyLifeToLose > 0) {
@@ -487,7 +487,7 @@ public class CostMana extends CostPart {
                     msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
                 }
 
-                Singletons.getControl().getControlMatch().showMessage(msg.toString());
+                CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
                 if (this.mana.isPaid()) {
                     this.done();
                 }

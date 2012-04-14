@@ -67,6 +67,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
 import forge.view.ButtonUtil;
 
@@ -808,7 +809,7 @@ public class CardFactoryUtil {
                 if (spell.getTargetCard() != null) {
                     this.stop();
                 }
-                Singletons.getControl().getControlMatch().showMessage("Select target Spell: ");
+                CMatchUI.SINGLETON_INSTANCE.showMessage("Select target Spell: ");
                 final Card choice = GuiUtils.chooseOneOrNone("Choose a Spell", choices.toArray());
                 if (choice != null) {
                     spell.setTargetCard(choice);
@@ -856,7 +857,7 @@ public class CardFactoryUtil {
 
             @Override
             public void showMessage() {
-                Singletons.getControl().getControlMatch().showMessage(message);
+                CMatchUI.SINGLETON_INSTANCE.showMessage(message);
                 ButtonUtil.disableAll();
             }
 
@@ -1752,7 +1753,7 @@ public class CardFactoryUtil {
 
             @Override
             public void showMessage() {
-                Singletons.getControl().getControlMatch().showMessage(message);
+                CMatchUI.SINGLETON_INSTANCE.showMessage(message);
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -1764,7 +1765,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (targeted && !card.canBeTargetedBy(spell)) {
-                    Singletons.getControl().getControlMatch()
+                    CMatchUI.SINGLETON_INSTANCE
                             .showMessage("Cannot target this card (Shroud? Protection?).");
                 } else if (choices.contains(card)) {
                     spell.setTargetCard(card);
@@ -1810,7 +1811,7 @@ public class CardFactoryUtil {
 
             @Override
             public void showMessage() {
-                Singletons.getControl().getControlMatch().showMessage(message);
+                CMatchUI.SINGLETON_INSTANCE.showMessage(message);
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -1890,7 +1891,7 @@ public class CardFactoryUtil {
      * (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) { this.stop();
      * }
      * 
-     * Singletons.getControl().getControlMatch().showMessage(
+     * CMatchUI.SINGLETON_INSTANCE.showMessage(
      * "Select a card to discard"); ButtonUtil.disableAll(); }
      * 
      * @Override public void selectCard(final Card card, final PlayerZone zone)
@@ -1901,7 +1902,7 @@ public class CardFactoryUtil {
      * (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0)) { this.done();
      * } else { this.showMessage(); } } }
      * 
-     * void done() { Singletons.getControl().getControlMatch().showMessage(
+     * void done() { CMatchUI.SINGLETON_INSTANCE.showMessage(
      * "Returning cards to hand.");
      * Singletons.getModel().getGameAction().exile(recall); final CardList grave
      * = AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard); for (int i = 1; i
@@ -1934,7 +1935,7 @@ public class CardFactoryUtil {
             public void showMessage() {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Select target wolf to damage for ").append(spell.getSourceCard());
-                Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -1976,7 +1977,7 @@ public class CardFactoryUtil {
 
             @Override
             public void showMessage() {
-                Singletons.getControl().getControlMatch().showMessage("Select target artifact creature");
+                CMatchUI.SINGLETON_INSTANCE.showMessage("Select target artifact creature");
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -3549,7 +3550,7 @@ public class CardFactoryUtil {
             public void showMessage() {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Select a ").append(type).append(" to untap");
-                Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -4699,7 +4700,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void showMessage() {
-                    Singletons.getControl().getControlMatch().showMessage("Choose target creature to haunt.");
+                    CMatchUI.SINGLETON_INSTANCE.showMessage("Choose target creature to haunt.");
                     ButtonUtil.disableAll();
                 }
 
@@ -4713,7 +4714,7 @@ public class CardFactoryUtil {
                         AllZone.getStack().add(haunterDiesWork);
                         this.stop();
                     } else {
-                        Singletons.getControl().getControlMatch()
+                        CMatchUI.SINGLETON_INSTANCE
                                 .showMessage("Cannot target this card (Shroud? Protection?).");
                     }
                 }

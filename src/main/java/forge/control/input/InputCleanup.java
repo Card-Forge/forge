@@ -19,11 +19,12 @@ package forge.control.input;
 
 import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
-import forge.Singletons;
 
 /**
  * <p>
@@ -63,7 +64,7 @@ public class InputCleanup extends Input {
         final StringBuffer sb = new StringBuffer();
         sb.append("Cleanup Phase: You can only have a maximum of ").append(max);
         sb.append(" cards, you currently have ").append(n).append(" cards in your hand - select a card to discard");
-        Singletons.getControl().getControlMatch().showMessage(sb.toString());
+        CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
     }
 
     /** {@inheritDoc} */

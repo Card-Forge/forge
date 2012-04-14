@@ -39,6 +39,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
 import forge.view.ButtonUtil;
 
@@ -206,7 +207,7 @@ class CardFactoryLands {
                             public void showMessage() {
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append(cardName).append(" - Select an untapped land to sacrifice");
-                                Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                                 ButtonUtil.enableOnlyCancel();
                             }
 
@@ -224,7 +225,7 @@ class CardFactoryLands {
                                         paid[0]++;
                                         final StringBuilder sb = new StringBuilder();
                                         sb.append(cardName).append(" - Select an untapped land to sacrifice");
-                                        Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                                        CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                                     } else {
                                         this.stop();
                                     }
@@ -295,7 +296,7 @@ class CardFactoryLands {
 
                             @Override
                             public void showMessage() {
-                                Singletons.getControl().getControlMatch().showMessage(
+                                CMatchUI.SINGLETON_INSTANCE.showMessage(
                                         cardName + " - Select one " + type[0] + " to sacrifice");
                                 ButtonUtil.enableOnlyCancel();
                             }
@@ -388,7 +389,7 @@ class CardFactoryLands {
 
                             @Override
                             public void showMessage() {
-                                Singletons.getControl().getControlMatch().showMessage(
+                                CMatchUI.SINGLETON_INSTANCE.showMessage(
                                         "Scorched Ruins - Select an untapped land to sacrifice");
                                 ButtonUtil.enableOnlyCancel();
                             }
@@ -405,7 +406,7 @@ class CardFactoryLands {
                                     Singletons.getModel().getGameAction().sacrifice(c);
                                     if (paid[0] < 1) {
                                         paid[0]++;
-                                        Singletons.getControl().getControlMatch().showMessage(
+                                        CMatchUI.SINGLETON_INSTANCE.showMessage(
                                                 "Scorched Ruins - Select an untapped land to sacrifice");
                                     } else {
                                         this.stop();
@@ -483,7 +484,7 @@ class CardFactoryLands {
                         public void showMessage() {
                             final StringBuilder sb = new StringBuilder();
                             sb.append(card.getName()).append(" - Reveal a card.");
-                            Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                            CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                             ButtonUtil.enableOnlyCancel();
                         }
 
@@ -669,7 +670,7 @@ class CardFactoryLands {
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append(cardName);
                                 sb.append(" - Select one non-Lair land to return to your hand");
-                                Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                                 ButtonUtil.enableOnlyCancel();
                             }
 
@@ -738,7 +739,7 @@ class CardFactoryLands {
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append(card).append(" - Select one untapped ");
                                 sb.append(type[0]).append(" to return");
-                                Singletons.getControl().getControlMatch().showMessage(sb.toString());
+                                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
                                 ButtonUtil.enableOnlyCancel();
                             }
 

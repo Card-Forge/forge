@@ -19,7 +19,7 @@ package forge.view;
 
 import javax.swing.JButton;
 
-import forge.Singletons;
+import forge.gui.match.VMatchUI;
 
 /**
  * <p>
@@ -109,7 +109,7 @@ public class ButtonUtil {
      * @return a {@link forge.MyButton} object.
      */
     private static JButton getOK() {
-        return Singletons.getView().getViewMatch().getBtnOK();
+        return VMatchUI.SINGLETON_INSTANCE.getBtnOK();
     }
 
     /**
@@ -120,6 +120,6 @@ public class ButtonUtil {
      * @return a {@link forge.MyButton} object.
      */
     private static JButton getCancel() {
-        return Singletons.getView().getViewMatch().getBtnCancel();
+        return VMatchUI.SINGLETON_INSTANCE.getBtnCancel();
     }
 }
