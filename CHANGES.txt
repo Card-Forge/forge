@@ -165,6 +165,13 @@ Fixes/Features:
 * Note: We should probably remove the references to RememberToughness, I didn't get a chance to track those down.
 - Removed my initial work on remembered integer values in favor of Sol's StoreSVar AF.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added TargetedControllerControls to isValid
+- Added Planeswalker types Tamiyo and Tibalt
+- StringBuilder.
+- Boom - it's landed. Draggable layout for match UI.
+- Javadoc updates.
+- FOverlay instance changed to singleton.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -201,6 +208,8 @@ Wandering Eye
 Wash Out
 Whirlpool Warrior
 Tree of Redemption
+Weight of Spires
+Walking Sponge
 
 
 end
