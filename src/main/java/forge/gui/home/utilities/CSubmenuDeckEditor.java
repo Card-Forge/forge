@@ -8,7 +8,9 @@ import forge.gui.deckeditor.DeckEditorConstructed;
 import forge.gui.home.ICSubmenu;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Controls the deck editor submenu option in the home UI.
+ * 
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 public enum CSubmenuDeckEditor implements ICSubmenu {

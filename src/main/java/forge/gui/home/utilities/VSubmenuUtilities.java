@@ -33,7 +33,9 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang;
 
 /** 
- * Singleton instance of "Colors" submenu in "Constructed" group.
+ * Assembles Swing components of utilities submenu singleton.
+ *
+ * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
 public enum VSubmenuUtilities implements IVSubmenu {

@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -25,7 +26,9 @@ import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FSkin;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Controls the draft submenu in the home UI.
+ * 
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 @SuppressWarnings("serial")

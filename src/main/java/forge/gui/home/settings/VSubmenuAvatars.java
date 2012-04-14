@@ -22,7 +22,9 @@ import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
- * Singleton instance of "Draft" submenu in "Constructed" group.
+ * Assembles Swing components of avatars submenu singleton.
+ *
+ * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public enum VSubmenuAvatars implements IVSubmenu {
     /** */

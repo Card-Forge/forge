@@ -40,7 +40,9 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
 
 /** 
- * Singleton instance of "Draft" submenu in "Constructed" group.
+ * Assembles Swing components of preferences submenu singleton.
+ *
+ * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public enum VSubmenuPreferences implements IVSubmenu {
     /** */

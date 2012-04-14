@@ -27,7 +27,9 @@ import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 
 /** 
- * Singleton instance of "Colors" submenu in "Constructed" group.
+ * Assembles Swing components of quest preferences submenu singleton.
+ *
+ * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
 public enum VSubmenuQuestPrefs implements IVSubmenu {

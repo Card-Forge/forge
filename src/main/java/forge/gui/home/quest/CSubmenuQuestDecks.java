@@ -15,7 +15,9 @@ import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Controls the quest decks submenu in the home UI.
+ * 
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 @SuppressWarnings("serial")
 public enum CSubmenuQuestDecks implements ICSubmenu {

@@ -33,7 +33,9 @@ import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 
 /** 
- * Singleton instance of "Draft" submenu in "Constructed" group.
+ * Assembles Swing components of draft submenu singleton.
+ *
+ * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public enum VSubmenuDraft implements IVSubmenu {
     /** */

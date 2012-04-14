@@ -46,7 +46,9 @@ import forge.quest.QuestEvent;
 import forge.util.IStorage;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Controls the constructed submenu in the home UI.
+ * 
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 @SuppressWarnings("serial")

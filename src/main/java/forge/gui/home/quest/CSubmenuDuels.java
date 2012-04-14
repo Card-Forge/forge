@@ -15,7 +15,9 @@ import forge.quest.QuestEventDuel;
 import forge.quest.bazaar.QuestPetController;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Controls the quest duels submenu in the home UI.
+ * 
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 public enum CSubmenuDuels implements ICSubmenu {

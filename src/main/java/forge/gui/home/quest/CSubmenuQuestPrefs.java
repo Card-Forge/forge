@@ -8,7 +8,9 @@ import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Controls the quest preferences submenu in the home UI.
+ * 
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 public enum CSubmenuQuestPrefs implements ICSubmenu {

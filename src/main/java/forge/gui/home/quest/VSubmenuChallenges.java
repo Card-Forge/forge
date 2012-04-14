@@ -22,7 +22,11 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 
-/**  */
+/**
+ * Assembles Swing components of quest challenges submenu singleton.
+ *
+ * <br><br><i>(V at beginning of class name denotes a view class.)</i>
+ */
 public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet {
     /** */
     SINGLETON_INSTANCE;

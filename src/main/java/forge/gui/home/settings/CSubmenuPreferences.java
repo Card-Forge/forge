@@ -17,7 +17,9 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Controls the preferences submenu in the home UI.
+ * 
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 public enum CSubmenuPreferences implements ICSubmenu {

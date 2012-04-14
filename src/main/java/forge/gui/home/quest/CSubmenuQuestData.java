@@ -27,7 +27,9 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Controls the quest data submenu in the home UI.
+ * 
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 @SuppressWarnings("serial")

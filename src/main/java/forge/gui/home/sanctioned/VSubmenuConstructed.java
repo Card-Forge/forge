@@ -24,7 +24,9 @@ import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Assembles Swing components of constructed submenu singleton.
+ *
+ * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
 public enum VSubmenuConstructed implements IVSubmenu {

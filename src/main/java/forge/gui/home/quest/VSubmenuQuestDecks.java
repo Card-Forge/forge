@@ -13,7 +13,9 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 
 /** 
- * Singleton instance of "Colors" submenu in "Constructed" group.
+ * Assembles Swing components of quest decks submenu singleton.
+ *
+ * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
 public enum VSubmenuQuestDecks implements IVSubmenu {

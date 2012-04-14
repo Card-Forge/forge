@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.Command;
 import forge.Constant;
@@ -29,10 +32,11 @@ import forge.item.ItemPool;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Controls the sealed submenu in the home UI.
+ * 
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 @SuppressWarnings("serial")

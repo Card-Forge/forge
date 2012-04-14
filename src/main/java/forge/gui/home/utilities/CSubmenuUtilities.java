@@ -10,7 +10,9 @@ import forge.gui.download.GuiDownloadSetPicturesLQ;
 import forge.gui.home.ICSubmenu;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Controls the utilities submenu in the home UI.
+ * 
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 @SuppressWarnings("serial")

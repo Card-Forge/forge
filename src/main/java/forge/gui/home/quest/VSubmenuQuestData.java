@@ -1,26 +1,40 @@
 package forge.gui.home.quest;
 
-import forge.gui.home.EMenuGroup;
-import forge.gui.home.EMenuItem;
-import forge.gui.home.ICSubmenu;
-import forge.gui.home.IVSubmenu;
-import forge.gui.toolbox.*;
-import forge.item.PreconDeck;
-import forge.quest.QuestController;
-import forge.util.IStorageView;
-import net.miginfocom.swing.MigLayout;
-import org.apache.commons.lang3.text.WordUtils;
-
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
+
+import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.text.WordUtils;
+
+import forge.gui.home.EMenuGroup;
+import forge.gui.home.EMenuItem;
+import forge.gui.home.ICSubmenu;
+import forge.gui.home.IVSubmenu;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FRadioButton;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
+import forge.item.PreconDeck;
+import forge.quest.QuestController;
+import forge.util.IStorageView;
+
 /**
- * Singleton instance of "Colors" submenu in "Constructed" group.
+ * Assembles Swing components of quest data submenu singleton.
+ *
+ * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public enum VSubmenuQuestData implements IVSubmenu {
     /** */

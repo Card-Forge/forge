@@ -4,7 +4,9 @@ import forge.Command;
 import forge.gui.home.ICSubmenu;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Controls the exit submenu option in the home UI.
+ * 
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 public enum CSubmenuExit implements ICSubmenu {

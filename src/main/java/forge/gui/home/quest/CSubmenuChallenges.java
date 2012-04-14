@@ -21,7 +21,9 @@ import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetController;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Controls the quest challenges submenu in the home UI.
+ * 
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
 public enum CSubmenuChallenges implements ICSubmenu {
