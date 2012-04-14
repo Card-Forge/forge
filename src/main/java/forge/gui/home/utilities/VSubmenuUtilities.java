@@ -18,14 +18,13 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
-import forge.gui.OverlayUtils;
+import forge.gui.SOverlayUtils;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
@@ -181,7 +180,7 @@ public enum VSubmenuUtilities implements IVSubmenu {
 
     /** */
     public void showLicensing() {
-        final FOverlay overlay = OverlayUtils.genericOverlay();
+        final JPanel overlay = SOverlayUtils.genericOverlay();
         final int w = overlay.getWidth();
 
         final String license = "Forge License Information" + "\r\n\r\n"
@@ -215,7 +214,7 @@ public enum VSubmenuUtilities implements IVSubmenu {
         final JButton btnCloseBig = new FButton("OK");
         btnCloseBig.setBounds(new Rectangle((w / 2 - 100), 510, 200, 30));
         btnCloseBig.addActionListener(new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent arg0) { OverlayUtils.hideOverlay(); } });
+            public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
 
         final FPanel pnl = new FPanel();
         pnl.setCornerDiameter(0);
@@ -227,12 +226,12 @@ public enum VSubmenuUtilities implements IVSubmenu {
         overlay.setLayout(null);
         overlay.add(btnCloseBig);
         overlay.add(pnl);
-        OverlayUtils.showOverlay();
+        SOverlayUtils.showOverlay();
     }
 
     /** */
     public void showHowToPlay() {
-        final FOverlay overlay = OverlayUtils.genericOverlay();
+        final JPanel overlay = SOverlayUtils.genericOverlay();
         final int w = overlay.getWidth();
 
         final String directions = ForgeProps.getLocalized(Lang.HowTo.MESSAGE);
@@ -257,7 +256,7 @@ public enum VSubmenuUtilities implements IVSubmenu {
         final JButton btnCloseBig = new FButton("OK");
         btnCloseBig.setBounds(new Rectangle((w / 2 - 100), 510, 200, 30));
         btnCloseBig.addActionListener(new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent arg0) { OverlayUtils.hideOverlay(); } });
+            public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
 
         final FScrollPane scr = new FScrollPane(tpnDirections, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -267,7 +266,7 @@ public enum VSubmenuUtilities implements IVSubmenu {
         overlay.setLayout(null);
         overlay.add(btnCloseBig);
         overlay.add(scr);
-        OverlayUtils.showOverlay();
+        SOverlayUtils.showOverlay();
     }
 
     /* (non-Javadoc)

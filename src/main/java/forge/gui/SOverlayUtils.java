@@ -8,11 +8,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
@@ -21,16 +21,17 @@ import forge.gui.toolbox.FSkin;
 /** 
  * All overlay interaction is handled here.
  *
+ * <br><br><i>(S at beginning of class name denotes a static factory.)</i>
  */
-public final class OverlayUtils {
+public final class SOverlayUtils {
     private static int counter = 0;
 
     /** 
      * A standardized overlay for a game start condition.
-     * @return {@forge.gui.toolbox.FOverlay}
+     * @return {@link javax.swing.JPanel}
      */
-    public static FOverlay startGameOverlay() {
-        final FOverlay overlay = OverlayUtils.genericOverlay();
+    public static JPanel startGameOverlay() {
+        final JPanel overlay = SOverlayUtils.genericOverlay();
         final int w = overlay.getWidth();
         final int h = overlay.getHeight();
         final int pnlW = 400;
@@ -50,18 +51,18 @@ public final class OverlayUtils {
 
         overlay.add(pnl);
 
-        return Singletons.getView().getOverlay();
+        return FOverlay.SINGLETON_INSTANCE.getPanel();
     }
 
     /**
      * A standardized overlay for a loading condition (note: thread issues, as of 1-Mar-12).
      * @param msg0 &emsp; {@link java.lang.String}
-     * @return {@forge.gui.toolbox.FOverlay}
+     * @return {@link javax.swing.JPanel}
      */
     // NOTE: This animation happens on the EDT; if the EDT is tied up doing something
     // else, the animation is effectively frozen.  So, this needs some work.
-    public static FOverlay loadingOverlay(final String msg0) {
-        final FOverlay overlay = OverlayUtils.genericOverlay();
+    public static JPanel loadingOverlay(final String msg0) {
+        final JPanel overlay = SOverlayUtils.genericOverlay();
         final FPanel pnlLoading = new FPanel();
         final int w = overlay.getWidth();
         final int h = overlay.getHeight();
@@ -79,13 +80,13 @@ public final class OverlayUtils {
 
         overlay.add(pnlLoading);
 
-        OverlayUtils.counter = 0;
+        SOverlayUtils.counter = 0;
         final Timer timer = new Timer(300, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                lblLoading.setMinimumSize(new Dimension(10 * (OverlayUtils.counter++), 20));
+                lblLoading.setMinimumSize(new Dimension(10 * (SOverlayUtils.counter++), 20));
                 lblLoading.revalidate();
-                if (OverlayUtils.counter > 13) { OverlayUtils.counter = 0; }
+                if (SOverlayUtils.counter > 13) { SOverlayUtils.counter = 0; }
             }
         });
         timer.start();
@@ -95,10 +96,10 @@ public final class OverlayUtils {
 
     /** 
      * A template overlay with close button, null layout, ready for anything.
-     * @return {@forge.gui.toolbox.FOverlay}
+     * @return {@link javax.swing.JPanel}
      */
-    public static FOverlay genericOverlay() {
-        final FOverlay overlay = Singletons.getView().getOverlay();
+    public static JPanel genericOverlay() {
+        final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
         final int w = overlay.getWidth();
 
         final JButton btnCloseTopRight = new JButton("X");
@@ -109,7 +110,7 @@ public final class OverlayUtils {
         btnCloseTopRight.setBackground(new Color(0, 0, 0));
         btnCloseTopRight.setFocusPainted(false);
         btnCloseTopRight.addActionListener(new ActionListener() { @Override
-            public void actionPerformed(ActionEvent arg0) { OverlayUtils.hideOverlay(); } });
+            public void actionPerformed(ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
 
         overlay.removeAll();
         overlay.setLayout(null);
@@ -118,19 +119,19 @@ public final class OverlayUtils {
         return overlay;
     }
 
-    /** @return {@link forge.gui.toolbox.FOverlay} */
-    public static FOverlay showOverlay() {
-        Singletons.getView().getOverlay().setVisible(true);
-        return Singletons.getView().getOverlay();
+    /** @return {@link javax.swing.JPane} */
+    public static JPanel showOverlay() {
+        FOverlay.SINGLETON_INSTANCE.getPanel().setVisible(true);
+        return FOverlay.SINGLETON_INSTANCE.getPanel();
     }
 
     /**
      * Removes child components and closes overlay.
-     * @return {@link forge.gui.toolbox.FOverlay}
+     * @return {@link javax.swing.JPane}
      */
-    public static FOverlay hideOverlay() {
-        Singletons.getView().getOverlay().removeAll();
-        Singletons.getView().getOverlay().setVisible(false);
-        return Singletons.getView().getOverlay();
+    public static JPanel hideOverlay() {
+        FOverlay.SINGLETON_INSTANCE.getPanel().removeAll();
+        FOverlay.SINGLETON_INSTANCE.getPanel().setVisible(false);
+        return FOverlay.SINGLETON_INSTANCE.getPanel();
     }
 }

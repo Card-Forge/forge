@@ -269,6 +269,7 @@ res/decks/Zvi[!!-~]Mowshowitz's[!!-~]Mono-Black[!!-~]Control.dck
 res/decks/constructed/*.dck
 res/decks/o1.bdk
 res/images/themes
+res/layouts/*.xml
 res/oracleScript.log
 res/pics
 res/pics/*.jpg

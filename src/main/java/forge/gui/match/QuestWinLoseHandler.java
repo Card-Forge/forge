@@ -32,7 +32,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
-import forge.gui.OverlayUtils;
+import forge.gui.SOverlayUtils;
 import forge.gui.home.quest.CSubmenuChallenges;
 import forge.gui.home.quest.CSubmenuDuels;
 import forge.gui.toolbox.FSkin;
@@ -110,7 +110,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     @Override
     public final void startNextRound() {
         Singletons.getModel().savePrefs();
-        OverlayUtils.hideOverlay();
+        SOverlayUtils.hideOverlay();
         Singletons.getModel().getQuestPreferences().save();
 
         QuestAssets qa = qData.getAssets();
@@ -307,7 +307,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
 
-        OverlayUtils.hideOverlay();
+        SOverlayUtils.hideOverlay();
     }
 
     /**

@@ -35,7 +35,7 @@ import forge.Constant;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.gui.ForgeAction;
-import forge.gui.OverlayUtils;
+import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VDock;
 import forge.item.CardPrinted;
@@ -171,7 +171,7 @@ public enum CDock implements ICDoc {
         VDock.SINGLETON_INSTANCE.getBtnSettings()
             .addMouseListener(new MouseAdapter() { @Override
                 public void mousePressed(final MouseEvent e) {
-                    OverlayUtils.showOverlay(); } });
+                    SOverlayUtils.showOverlay(); } });
 
         VDock.SINGLETON_INSTANCE.getBtnEndTurn()
             .addMouseListener(new MouseAdapter() { @Override

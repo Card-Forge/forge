@@ -30,7 +30,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import forge.gui.OverlayUtils;
+import forge.gui.SOverlayUtils;
 
 /**
  * Semi-transparent overlay panel. Should be used with layered panes.
@@ -40,39 +40,42 @@ import forge.gui.OverlayUtils;
 // Currently used only once, in top level UI, with layering already in place.
 // Getter in AllZone: getOverlay()
 @SuppressWarnings("serial")
-public class FOverlay extends JPanel {
-    private final JButton btnClose;
+public enum FOverlay {
+    /** */
+    SINGLETON_INSTANCE;
+
+    private final JButton btnClose = new JButton("X");
+    private final JPanel pnl = new OverlayPanel();
 
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
      */
-    public FOverlay() {
-        super();
-        this.setOpaque(false);
-        this.setVisible(false);
-        this.setFocusTraversalKeysEnabled(false);
-        this.btnClose = new JButton("X");
-        this.btnClose.setForeground(Color.white);
-        this.btnClose.setBorder(BorderFactory.createLineBorder(Color.white));
-        this.btnClose.setOpaque(false);
-        this.btnClose.setBackground(new Color(0, 0, 0));
-        this.btnClose.setFocusPainted(false);
+    private FOverlay() {
+        pnl.setOpaque(false);
+        pnl.setVisible(false);
+        pnl.setFocusTraversalKeysEnabled(false);
 
-        this.btnClose.addMouseListener(new MouseAdapter() {
+        btnClose.setForeground(Color.white);
+        btnClose.setBorder(BorderFactory.createLineBorder(Color.white));
+        btnClose.setOpaque(false);
+        btnClose.setBackground(new Color(0, 0, 0));
+        btnClose.setFocusPainted(false);
+
+        btnClose.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
-                OverlayUtils.hideOverlay();
+                SOverlayUtils.hideOverlay();
             }
         });
 
         // Block all input events below the overlay
-        this.addMouseListener(new MouseAdapter() { });
-        this.addMouseMotionListener(new MouseMotionAdapter() { });
-        this.addKeyListener(new KeyAdapter() { });
-        this.addComponentListener(new ComponentAdapter() {
+        pnl.addMouseListener(new MouseAdapter() { });
+        pnl.addMouseMotionListener(new MouseMotionAdapter() { });
+        pnl.addKeyListener(new KeyAdapter() { });
+        pnl.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(final ComponentEvent evt) {
-                requestFocusInWindow();
+                pnl.requestFocusInWindow();
             }
         });
     }
@@ -88,18 +91,25 @@ public class FOverlay extends JPanel {
         return this.btnClose;
     }
 
-    /**
-     * For some reason, the alpha channel background doesn't work properly on
-     * Windows 7, so the paintComponent override is required for a
-     * semi-transparent overlay.
-     * 
-     * @param g
-     *            &emsp; Graphics object
-     */
-    @Override
-    public void paintComponent(final Graphics g) {
-        super.paintComponent(g);
-        g.setColor(this.getBackground());
-        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPanel() {
+        return this.pnl;
+    }
+
+    private class OverlayPanel extends JPanel {
+        /**
+         * For some reason, the alpha channel background doesn't work properly on
+         * Windows 7, so the paintComponent override is required for a
+         * semi-transparent overlay.
+         * 
+         * @param g
+         *            &emsp; Graphics object
+         */
+        @Override
+        public void paintComponent(final Graphics g) {
+            super.paintComponent(g);
+            g.setColor(this.getBackground());
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        }
     }
 }

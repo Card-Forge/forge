@@ -44,7 +44,7 @@ import forge.deck.DeckGroup;
 import forge.error.ErrorViewer;
 import forge.game.limited.IBoosterDraft;
 import forge.gui.GuiUtils;
-import forge.gui.OverlayUtils;
+import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.elements.CardPanelLite;
 import forge.gui.deckeditor.elements.ManaCostRenderer;
 import forge.gui.deckeditor.elements.TableColumnInfo;
@@ -129,7 +129,7 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
                 if (n == JOptionPane.YES_OPTION) {
                     DraftingProcess.this.dispose();
                     CSubmenuDraft.SINGLETON_INSTANCE.update();
-                    OverlayUtils.hideOverlay();
+                    SOverlayUtils.hideOverlay();
                 }
             } // windowClosing()
         });
@@ -341,7 +341,7 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
 
         // This should be handled in the exit command of the editor, not here.
         CSubmenuDraft.SINGLETON_INSTANCE.update();
-        OverlayUtils.hideOverlay();
+        SOverlayUtils.hideOverlay();
     } /* saveDraft() */
 
     /*

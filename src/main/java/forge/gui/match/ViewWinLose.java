@@ -16,7 +16,7 @@ import forge.Singletons;
 import forge.game.GameType;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
-import forge.gui.OverlayUtils;
+import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
@@ -38,7 +38,7 @@ public class ViewWinLose {
 
     /** */
     public ViewWinLose() {
-        final FOverlay overlay = Singletons.getView().getOverlay();
+        final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
         final FMatchState matchState = Singletons.getModel().getMatchState();
 
         final JPanel pnlLeft = new JPanel();
@@ -157,7 +157,7 @@ public class ViewWinLose {
         pnlLog.add(scrLog, "w 300px!, h 100px!, gap 0 0 10px 0");
         pnlLeft.add(pnlLog, "w 100%!");
 
-        OverlayUtils.showOverlay();
+        SOverlayUtils.showOverlay();
     }
 
     /** @return {@link forge.gui.toolbox.FButton} */

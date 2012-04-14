@@ -22,7 +22,7 @@ import forge.deck.DeckGroup;
 import forge.game.GameNew;
 import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
-import forge.gui.OverlayUtils;
+import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.DeckEditorBase;
 import forge.gui.deckeditor.DeckEditorLimited;
 import forge.gui.home.ICSubmenu;
@@ -50,7 +50,7 @@ public enum CSubmenuSealed implements ICSubmenu {
         @Override
         public void execute() {
             update();
-            OverlayUtils.hideOverlay();
+            SOverlayUtils.hideOverlay();
         }
     };
 
@@ -146,8 +146,8 @@ public enum CSubmenuSealed implements ICSubmenu {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                OverlayUtils.startGameOverlay();
-                OverlayUtils.showOverlay();
+                SOverlayUtils.startGameOverlay();
+                SOverlayUtils.showOverlay();
             }
         });
 
@@ -163,7 +163,7 @@ public enum CSubmenuSealed implements ICSubmenu {
 
             @Override
             public void done() {
-                OverlayUtils.hideOverlay();
+                SOverlayUtils.hideOverlay();
             }
         };
         worker.execute();

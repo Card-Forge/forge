@@ -21,7 +21,11 @@ import javax.xml.stream.events.XMLEvent;
 import forge.view.FView;
 
 
-/** Package-private class for handling layout saving and loading. */
+/**
+ * Handles layout saving and loading.
+ * 
+ * <br><br><i>(S at beginning of class name denotes a static factory.)</i>
+ */
 public final class SIOUtil {
     /** Each cell must save these elements of its display. */
     private enum Property {

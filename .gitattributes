@@ -11645,7 +11645,7 @@ src/main/java/forge/gui/ListChooser.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabel.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
 src/main/java/forge/gui/MultiPhaseProgressMonitorWithETA.java svneol=native#text/plain
-src/main/java/forge/gui/OverlayUtils.java -text
+src/main/java/forge/gui/SOverlayUtils.java -text
 src/main/java/forge/gui/WrapLayout.java -text
 src/main/java/forge/gui/deckeditor/DeckController.java -text
 src/main/java/forge/gui/deckeditor/DeckEditorBase.java -text

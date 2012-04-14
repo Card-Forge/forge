@@ -6,7 +6,7 @@ import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.gui.OverlayUtils;
+import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
@@ -30,7 +30,7 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
         @Override
         public void execute() {
             AllZone.getQuest().save();
-            OverlayUtils.hideOverlay();
+            SOverlayUtils.hideOverlay();
             update();
         }
     };
@@ -79,7 +79,7 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
                 final DeckEditorQuest editor =
                         new DeckEditorQuest(Singletons.getView().getFrame(), AllZone.getQuest());
                 editor.show(cmdDeckExit);
-                OverlayUtils.showOverlay();
+                SOverlayUtils.showOverlay();
                 editor.setVisible(true);
             }
         });

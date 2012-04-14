@@ -48,7 +48,6 @@ public enum FView {
     private final JPanel pnlPreview = new PreviewPanel();
     private final JPanel pnlTabOverflow = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final JLayeredPane lpnDocument = new JLayeredPane();
-    private final FOverlay pnlOverlay = new FOverlay();
 
     //
     private FView() {
@@ -79,7 +78,7 @@ public enum FView {
         lpnDocument.add(pnlInsets, (Integer) 1);
         lpnDocument.add(pnlPreview, (Integer) 2);
         lpnDocument.add(pnlTabOverflow, (Integer) 3);
-        lpnDocument.add(pnlOverlay, JLayeredPane.MODAL_LAYER);
+        lpnDocument.add(FOverlay.SINGLETON_INSTANCE.getPanel(), JLayeredPane.MODAL_LAYER);
 
         pnlInsets.add(pnlContent, BorderLayout.CENTER);
         pnlInsets.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
@@ -90,7 +89,7 @@ public enum FView {
         pnlContent.setOpaque(false);
         pnlContent.setLayout(null);
 
-        pnlOverlay.setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
+        FOverlay.SINGLETON_INSTANCE.getPanel().setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
 
         // Populate all drag tabs. After they are realized,
         // their controller can initialize actions on their components.
@@ -141,11 +140,6 @@ public enum FView {
     /** @return {@link javax.swing.JPanel} */
     public JPanel getPnlTabOverflow() {
         return pnlTabOverflow;
-    }
-
-    /** @return {@link forge.gui.toolbox.FOverlay} */
-    public FOverlay getOverlay() {
-        return FView.this.pnlOverlay;
     }
 
     /** @return {@link java.util.List}<{@link forge.gui.framework.DragCell}> */

@@ -15,7 +15,7 @@ import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
-import forge.gui.OverlayUtils;
+import forge.gui.SOverlayUtils;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
@@ -24,7 +24,6 @@ import forge.gui.home.StartButton;
 import forge.gui.toolbox.DeckLister;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
@@ -135,7 +134,7 @@ public enum VSubmenuSealed implements IVSubmenu {
 
     /** */
     public void showDirections() {
-        final FOverlay overlay = OverlayUtils.genericOverlay();
+        final JPanel overlay = SOverlayUtils.genericOverlay();
         final int w = overlay.getWidth();
 
         final String instructions = "SEALED DECK MODE INSTRUCTIONS"
@@ -167,7 +166,7 @@ public enum VSubmenuSealed implements IVSubmenu {
         final JButton btnCloseBig = new FButton("OK");
         btnCloseBig.setBounds(new Rectangle((w / 2 - 100), 510, 200, 30));
         btnCloseBig.addActionListener(new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent arg0) { OverlayUtils.hideOverlay(); } });
+            public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
 
         final FPanel pnl = new FPanel();
         pnl.setCornerDiameter(0);
@@ -179,6 +178,6 @@ public enum VSubmenuSealed implements IVSubmenu {
         overlay.setLayout(null);
         overlay.add(btnCloseBig);
         overlay.add(pnl);
-        OverlayUtils.showOverlay();
+        SOverlayUtils.showOverlay();
     }
 }

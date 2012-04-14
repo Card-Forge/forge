@@ -34,7 +34,7 @@ import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameNew;
 import forge.game.player.PlayerType;
-import forge.gui.OverlayUtils;
+import forge.gui.SOverlayUtils;
 import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
@@ -345,8 +345,8 @@ public enum CSubmenuConstructed implements ICSubmenu {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                OverlayUtils.startGameOverlay();
-                OverlayUtils.showOverlay();
+                SOverlayUtils.startGameOverlay();
+                SOverlayUtils.showOverlay();
             }
         });
 
@@ -366,7 +366,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
 
             @Override
             public void done() {
-                OverlayUtils.hideOverlay();
+                SOverlayUtils.hideOverlay();
             }
         };
         worker.execute();

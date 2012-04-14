@@ -20,7 +20,7 @@ import forge.game.GameType;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
 import forge.gui.GuiUtils;
-import forge.gui.OverlayUtils;
+import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.DraftingProcess;
 import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FSkin;
@@ -81,7 +81,7 @@ public enum CSubmenuDraft implements ICSubmenu {
         @Override
         public void execute() {
             update();
-            OverlayUtils.hideOverlay();
+            SOverlayUtils.hideOverlay();
         }
     };
 
@@ -188,8 +188,8 @@ public enum CSubmenuDraft implements ICSubmenu {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                OverlayUtils.startGameOverlay();
-                OverlayUtils.showOverlay();
+                SOverlayUtils.startGameOverlay();
+                SOverlayUtils.showOverlay();
             }
         });
 
@@ -212,7 +212,7 @@ public enum CSubmenuDraft implements ICSubmenu {
 
             @Override
             public void done() {
-                OverlayUtils.hideOverlay();
+                SOverlayUtils.hideOverlay();
             }
         };
         worker.execute();
@@ -220,7 +220,7 @@ public enum CSubmenuDraft implements ICSubmenu {
 
     /** */
     private void setupDraft() {
-        OverlayUtils.showOverlay();
+        SOverlayUtils.showOverlay();
 
         final DraftingProcess draft = new DraftingProcess(Singletons.getView().getFrame());
 
