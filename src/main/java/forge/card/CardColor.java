@@ -88,7 +88,7 @@ public final class CardColor implements Comparable<CardColor> {
     }
 
     /** The null color. */
-    private static final CardColor nullColor = new CardColor();
+    private static final CardColor NULL_COLOR = new CardColor();
 
     /**
      * Checks for any color.
@@ -326,7 +326,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return the nullColor
      */
     public static CardColor getNullColor() {
-        return CardColor.nullColor;
+        return CardColor.NULL_COLOR;
     }
 
     /**
