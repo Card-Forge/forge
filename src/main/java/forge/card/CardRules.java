@@ -809,7 +809,7 @@ public final class CardRules {
                     PredicatesOp.NOR, Presets.IS_LAND);
 
             @SuppressWarnings("unchecked")
-            public static final Predicate<CardRules> isNonCreatureSpellForGenerator = Predicate.or(Arrays.asList(
+            public static final Predicate<CardRules> IS_NONCREATURE_SPELL_FOR_GENERATOR = Predicate.or(Arrays.asList(
                     Presets.IS_SORCERY, Presets.IS_INSTANT, Presets.IS_PLANESWALKER, Presets.IS_ENCHANTMENT,
                     Predicate.compose(Presets.IS_ARTIFACT, PredicatesOp.GT, Presets.IS_CREATURE))
             );

@@ -84,7 +84,7 @@ public class Generate3ColorDeck extends GenerateColoredDeckBase {
         List<CardPrinted> cards = selectCardsOfMatchingColorForPlayer(pt);
         // build subsets based on type
         final List<CardPrinted> creatures = CardRules.Predicates.Presets.IS_CREATURE.select(cards, CardPrinted.FN_GET_RULES);
-        final List<CardPrinted> spells = CardRules.Predicates.Presets.isNonCreatureSpellForGenerator.select(cards, CardPrinted.FN_GET_RULES);
+        final List<CardPrinted> spells = CardRules.Predicates.Presets.IS_NONCREATURE_SPELL_FOR_GENERATOR.select(cards, CardPrinted.FN_GET_RULES);
 
         final int creatCnt = (int) (creatPercentage * size);
         tmpDeck.append("Creature Count:").append(creatCnt).append("\n");
