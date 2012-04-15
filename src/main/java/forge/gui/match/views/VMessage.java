@@ -66,7 +66,7 @@ public enum VMessage implements IVDoc {
         tarMessage.setLineWrap(true);
         tarMessage.setWrapStyleWord(true);
         tarMessage.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tarMessage.setFont(FSkin.getFont(12));
+        tarMessage.setFont(FSkin.getFont(14));
     }
 
     //========== Overridden methods
