@@ -121,7 +121,7 @@ public abstract class GenerateColoredDeckBase {
         int totalColor = 0;
         for (int i = 0; i < 5; i++) {
             totalColor += clrCnts[i].getCount();
-            tmpDeck.append(clrCnts[i].Color).append(":").append(clrCnts[i].getCount()).append("\n");
+            tmpDeck.append(clrCnts[i].color).append(":").append(clrCnts[i].getCount()).append("\n");
         }
 
         tmpDeck.append("totalColor:").append(totalColor).append("\n");
@@ -134,14 +134,14 @@ public abstract class GenerateColoredDeckBase {
             // calculate number of lands for each color
             float p = (float) clrCnts[i].getCount() / (float) totalColor;
             final int nLand = (int) (cnt * p);
-            tmpDeck.append("nLand-").append(clrCnts[i].Color).append(":").append(nLand).append("\n");
+            tmpDeck.append("nLand-").append(clrCnts[i].color).append(":").append(nLand).append("\n");
 
             // just to prevent a null exception by the deck size fixing
             // code
-            this.cardCounts.put(clrCnts[i].Color, nLand);
+            this.cardCounts.put(clrCnts[i].color, nLand);
 
             for (int j = 0; j <= nLand; j++) {
-                tDeck.add(CardDb.instance().getCard(clrCnts[i].Color));
+                tDeck.add(CardDb.instance().getCard(clrCnts[i].color));
             }
         }
     }

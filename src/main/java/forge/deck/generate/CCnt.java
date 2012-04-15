@@ -29,7 +29,7 @@ package forge.deck.generate;
 public class CCnt {
 
     /** The Color. */
-    public final String Color;
+    public final String color;
 
     /** The Count. */
     private int count;
@@ -55,7 +55,7 @@ public class CCnt {
      *            a int.
      */
     public CCnt(final String clr, final int cnt) {
-        Color = clr;
+        color = clr;
         this.setCount(cnt);
     }
 
