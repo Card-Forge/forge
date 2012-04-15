@@ -134,7 +134,7 @@ public enum VHomeUI implements IVTopLevelUI {
         pnlParent.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
         pnlParent.setLayout(null);
         pnlParent.add(pnlLeft);
-        pnlParent.add(pnlRight);        
+        pnlParent.add(pnlRight);
 
         // Left pane holds scroller with menu panel.
         pnlMenu.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
@@ -162,7 +162,7 @@ public enum VHomeUI implements IVTopLevelUI {
             allGroupPanels.get(e).setLayout(new MigLayout("insets 0, gap 0, wrap"));
             allGroupPanels.get(e).setName(e.toString());
         }
-        
+
         // For each item: Add to its group, and add to the card layout in right panel.
         for (final IVSubmenu item : allSubmenus) {
             allSubmenuLabels.put(EMenuItem.valueOf(item.getItemEnum()), makeItemLabel(item));
@@ -183,7 +183,7 @@ public enum VHomeUI implements IVTopLevelUI {
                 groupClick(e, allGroupLabels.get(e));
             }
         }
-        
+
         // Select previous
         EMenuItem selected = null;
         try {
@@ -218,7 +218,7 @@ public enum VHomeUI implements IVTopLevelUI {
 
     @Override
     public void populate() {
-        FView.SINGLETON_INSTANCE.getLpnDocument().add(pnlParent, JLayeredPane.DEFAULT_LAYER);        
+        FView.SINGLETON_INSTANCE.getLpnDocument().add(pnlParent, JLayeredPane.DEFAULT_LAYER);
     }
 
     private void groupClick(final EMenuGroup e0, final JLabel lbl0) {

@@ -179,7 +179,7 @@ public class AbilityFactoryStoreSVar {
      */
     public static String storeSVarStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        
+
         final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof AbilitySub) {
@@ -187,7 +187,7 @@ public class AbilityFactoryStoreSVar {
         } else {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         }
-        
+
         if (params.containsKey("StackDescription")) {
             sb.append(params.get("StackDescription"));
             return sb.toString();
@@ -264,42 +264,42 @@ public class AbilityFactoryStoreSVar {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public static void storeSVarResolve(final AbilityFactory af, final SpellAbility sa) {
-        //SVar$ OldToughness | Type$ Count | Expression$ CardToughness 
+        //SVar$ OldToughness | Type$ Count | Expression$ CardToughness
         final HashMap<String, String> params = af.getMapParams();
         Card source = sa.getSourceCard();
-        
+
         String key = null;
         String type = null;
         String expr = null;
-        
-        if (params.containsKey("SVar")) {        
+
+        if (params.containsKey("SVar")) {
             key = params.get("SVar");
         }
-        
+
         if (params.containsKey("Type")) {
             type = params.get("Type");
         }
-        
+
         if (params.containsKey("Expression")) {
             expr = params.get("Expression");
         }
-        
+
         if (key == null || type == null || expr == null) {
             System.out.println("SVar, Type and Expression paramaters required for StoreSVar. They are missing for " + source.getName());
             return;
         }
-        
+
         int value = 0;
-        
+
         if (type.equals("Count")) {
             value = CardFactoryUtil.xCount(source, expr);
         }
         //TODO For other types call a different function
-        
+
         StringBuilder numBuilder = new StringBuilder();
         numBuilder.append("Number$");
         numBuilder.append(value);
-        
+
         source.setSVar(key, numBuilder.toString());
     }
 
