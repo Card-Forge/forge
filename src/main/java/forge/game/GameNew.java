@@ -275,7 +275,7 @@ public class GameNew {
                     throw new RuntimeException(p + " library is empty.");
                 }
                 AllZone.getGameLog().add("Ante", p + " anted " + ante, 0);
-                VAntes.SINGLETON_INSTANCE.setAnteCard(p, ante);
+                VAntes.SINGLETON_INSTANCE.addAnteCard(p, ante);
                 Singletons.getModel().getGameAction().moveTo(ZoneType.Ante, ante);
                 msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
             }
@@ -349,8 +349,7 @@ public class GameNew {
             }
         }
 
-        VAntes.SINGLETON_INSTANCE.setAnteCard(AllZone.getComputerPlayer(), null);
-        VAntes.SINGLETON_INSTANCE.setAnteCard(AllZone.getHumanPlayer(), null);
+        VAntes.SINGLETON_INSTANCE.clearAnteCards();
         AllZone.getInputControl().resetInput();
         Singletons.getModel().getMatchState().reset();
         Singletons.getModel().loadPrefs();
