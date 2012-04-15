@@ -75,8 +75,8 @@ public enum VDock implements IVDoc {
         pnl.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         pnl.add(btnConcede);
-        pnl.add(btnSettings);
-        pnl.add(btnEndTurn);
+        //pnl.add(btnSettings);
+        //pnl.add(btnEndTurn);
         pnl.add(btnViewDeckList);
         pnl.add(btnRevertLayout);
     }
