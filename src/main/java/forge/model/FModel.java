@@ -167,14 +167,6 @@ public enum FModel {
         FModel.loadDynamicGamedata();
     }
 
-    public final IStorageView<BoosterData> getTournamentPacks() {
-        return tournaments;
-    }
-
-    public final IStorageView<BoosterData> getBoosters() {
-        return boosters;
-    }
-
     /**
      * Load dynamic gamedata.
      */
@@ -431,7 +423,6 @@ public enum FModel {
         Constant.Runtime.MILL[0] = v.getLblMilling().getEnabled();
 
         fp.setPref(FPref.DEV_MILLING_LOSS, String.valueOf(Constant.Runtime.MILL[0]));
-        //fp.setPref(FPref.UI_LAYOUT_PARAMS, String.valueOf(Singletons.getView().getViewMatch().getLayoutParams()));
         fp.setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(v.getLblUnlimitedLands().getEnabled()));
 
         fp.save();
@@ -501,13 +492,23 @@ public enum FModel {
         }
     }
 
+    /** @return {@link forge.util.IStorageView}<{@link forge.card.CardBlock}> */
     public IStorageView<CardBlock> getBlocks() {
         return blocks;
     }
 
+    /** @return {@link forge.util.IStorageView}<{@link forge.card.FatPackData}> */
     public IStorageView<FatPackData> getFatPacks() {
         return fatPacks;
     }
 
+    /** @return {@link forge.util.IStorageView}<{@link forge.card.BoosterData}> */
+    public final IStorageView<BoosterData> getTournamentPacks() {
+        return tournaments;
+    }
 
+    /** @return {@link forge.util.IStorageView}<{@link forge.card.BoosterData}> */
+    public final IStorageView<BoosterData> getBoosters() {
+        return boosters;
+    }
 }

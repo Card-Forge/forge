@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import forge.Command;
+import forge.Constant;
 import forge.Singletons;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.framework.ICDoc;
@@ -24,15 +25,23 @@ public enum CDev implements ICDoc {
     //========= Start mouse listener inits
     private final MouseListener madMilling = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            VDev.SINGLETON_INSTANCE.getLblMilling().toggleEnabled(); } };
+            VDev.SINGLETON_INSTANCE.getLblMilling().toggleEnabled();
+            Singletons.getModel().savePrefs();
+    } };
 
     private final MouseListener madUnlimited = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().toggleEnabled(); } };
+            VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().toggleEnabled();
+            System.out.println(VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getEnabled());
+            Singletons.getModel().getPreferences().setPref(FPref.DEV_UNLIMITED_LAND,
+                    String.valueOf(VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getEnabled()));
+            Singletons.getModel().getPreferences().save();
+    } };
 
     private final MouseListener madMana = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeGenerateMana(); } };
+            GuiDisplayUtil.devModeGenerateMana();
+            Singletons.getModel().getPreferences().save(); } };
 
     private final MouseListener madSetup = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
@@ -87,6 +96,8 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblTapPermanent().addMouseListener(madTap);
         VDev.SINGLETON_INSTANCE.getLblUntapPermanent().addMouseListener(madUntap);
         VDev.SINGLETON_INSTANCE.getLblSetLife().addMouseListener(madLife);
+
+        VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(Constant.Runtime.MILL[0]);
     }
 
     /* (non-Javadoc)
