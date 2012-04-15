@@ -172,6 +172,14 @@ Fixes/Features:
 - Javadoc updates.
 - FOverlay instance changed to singleton.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Fixed the activation cost for Samite Censer-Bearer.
+- Enlarged font size in message panel.
+- Added "revert to default layout" button in dock.
+- Added multiple card handling and labels to ante panel.
+- Temporarily removed "end of turn" and "settings" button in Dock panel.
+- Fixed dev mode milling and unlimited lands saving.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
