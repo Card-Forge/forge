@@ -69,7 +69,7 @@ public enum VMatchUI implements IVTopLevelUI {
         if (isPopulated) { return; }
         else { isPopulated = true; }
 
-        SIOUtil.loadLayout();
+        SIOUtil.loadLayout(null);
     }
 
     /** */

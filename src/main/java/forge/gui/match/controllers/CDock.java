@@ -22,12 +22,14 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 import forge.AllZone;
 import forge.Command;
@@ -37,9 +39,11 @@ import forge.deck.Deck;
 import forge.gui.ForgeAction;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
+import forge.gui.framework.SIOUtil;
 import forge.gui.match.views.VDock;
 import forge.item.CardPrinted;
 import forge.properties.NewConstants;
+import forge.view.FView;
 
 /**
  * Controls the dock panel in the match UI.
@@ -68,10 +72,25 @@ public enum CDock implements ICDoc {
         System.err.println("If some gameplay guru could implement this, that would be great...");
     }
 
+    private void revertLayout() {
+        SOverlayUtils.genericOverlay();
+        FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
+
+        final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
+            @Override
+            public Void doInBackground() {
+                SIOUtil.loadLayout(new File(SIOUtil.FILE_DEFAULT));
+                SOverlayUtils.hideOverlay();
+                return null;
+            }
+        };
+        w.execute();
+    }
+
     /**
      * View deck list.
      */
-    public void viewDeckList() {
+    private void viewDeckList() {
         new DeckListAction(NewConstants.Lang.GuiDisplay.HUMAN_DECKLIST).actionPerformed(null);
     }
 
@@ -182,6 +201,11 @@ public enum CDock implements ICDoc {
             .addMouseListener(new MouseAdapter() { @Override
                 public void mousePressed(final MouseEvent e) {
                     viewDeckList(); } });
+
+        VDock.SINGLETON_INSTANCE.getBtnRevertLayout()
+        .addMouseListener(new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                revertLayout(); } });
     }
 
     /* (non-Javadoc)

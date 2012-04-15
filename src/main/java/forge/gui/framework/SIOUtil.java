@@ -36,7 +36,8 @@ public final class SIOUtil {
         doc
     };
 
-    private static final String FILE_DEFAULT = "res/layouts/match_default.xml";
+    /** */
+    public static final String FILE_DEFAULT = "res/layouts/match_default.xml";
     private static final String FILE_PREFERRED = "res/layouts/match_preferred.xml";
     private static final XMLEventFactory EF = XMLEventFactory.newInstance();
     private static final XMLEvent NEWLINE = EF.createDTD("\n");
@@ -52,13 +53,16 @@ public final class SIOUtil {
         catch (final Exception e) { e.printStackTrace(); }
     }
 
-    /** Publicly-accessible load method, to neatly handle exception handling. */
-    public static void loadLayout() {
+    /**
+     * Publicly-accessible load method, to neatly handle exception handling.
+     * @param f0 &emsp; {@link java.io.File}
+     */
+    public static void loadLayout(final File f0) {
         if (SwingUtilities.isEventDispatchThread()) {
             throw new IllegalThreadStateException("This operation should be independent of the EDT.");
         }
 
-        try { load(); }
+        try { load(f0); }
         catch (final Exception e) { e.printStackTrace(); }
     }
 
@@ -104,12 +108,15 @@ public final class SIOUtil {
         writer.close();
     }
 
-    private static void load() throws Exception {
+    private static void load(final File f) throws Exception {
         final FView view = FView.SINGLETON_INSTANCE;
         final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
         final XMLEventReader reader;
-        if (new File(FILE_PREFERRED).exists()) {
+        if (f != null && f.exists()) {
+            reader = inputFactory.createXMLEventReader(new FileInputStream(f));
+        }
+        else if (new File(FILE_PREFERRED).exists()) {
             reader = inputFactory.createXMLEventReader(new FileInputStream(FILE_PREFERRED));
         }
         else {
