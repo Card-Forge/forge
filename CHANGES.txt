@@ -7,9 +7,12 @@ Forge Beta: 0#-##-2012 ver 1.2.7 rev 1####
 
 Some adjustments to the pets in quest mode were made. This includes a new pet. :)
 
+Some people have noticed recently that cost change was working for the human player but not the computer player. A fix was made and this should no longer be a problem.
+
 The Battlefield UI has a new feature implemented which allows us to move and resize the panels to new places on the battlefield. This allows us to personalize the battlefield display to our own liking. You should try moving panels by clicking and dragging their tabs.
 
 If you do not like your efforts to personalize the battlefield display you can revert the display to the default layout by clicking on the Dock button labeled "Revert layout".
+
 
 A couple of problems with the quest mode were noticed some time ago and they have been discussed on the developer section of the forge forum.
 
