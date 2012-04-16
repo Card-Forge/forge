@@ -54,7 +54,7 @@ public enum VAntes implements IVDoc {
     private final DragTab tab = new DragTab("Ante");
 
     // Other fields
-    private Comparator<AntePanel> c = new Comparator<AntePanel>() {
+    private final Comparator<AntePanel> c = new Comparator<AntePanel>() {
         @Override
         public int compare(AntePanel arg0, AntePanel arg1) {
             return arg0.getID().compareTo(arg1.getID());
@@ -69,6 +69,7 @@ public enum VAntes implements IVDoc {
     private VAntes() {
         pnl.setLayout(new WrapLayout());
         pnl.setOpaque(false);
+        scroller.setBorder(null);
         scroller.setOpaque(false);
         scroller.getViewport().setOpaque(false);
     }
