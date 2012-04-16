@@ -184,6 +184,16 @@ Fixes/Features:
 - Temporarily removed "end of turn" and "settings" button in Dock panel.
 - Fixed dev mode milling and unlimited lands saving.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Head Games, should now be treated as a SP$ ability rather than an AB$ ability.
+- CheckStyle.
+- CheckStyle.
+- CheckStyle.
+- Added a fluff piece to the changes.txt file.
+- Spell corrected the title of the checkbox for "Upload Draft Picks".
+- Removed border around scroller element in Ante panel.
+- Fixed window resizing / drag cell bug.
+- Fixed getSpellCostChange not being applied for the AI.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -203,6 +213,8 @@ Howlgeist
 Emancipation angel
 Latch Seeker
 Thunderous Wrath
+Revenge of the Hunted
+Temporal Mastery
 
 
 Added many cards, including:
