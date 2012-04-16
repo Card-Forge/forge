@@ -47,7 +47,7 @@ public enum VMessage implements IVDoc {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Message Report");
+    private final DragTab tab = new DragTab("Prompt");
 
     // Various components
     private final JButton btnOK = new FButton("OK");
