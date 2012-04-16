@@ -580,9 +580,7 @@ public class ComputerUtil {
 
         ManaCost cost = new ManaCost(mana);
 
-        if (sa.getPayCosts() == null) {
-            cost = Singletons.getModel().getGameAction().getSpellCostChange(sa, cost);
-        }
+        cost = Singletons.getModel().getGameAction().getSpellCostChange(sa, cost);
 
         final ManaPool manapool = player.getManaPool();
 
