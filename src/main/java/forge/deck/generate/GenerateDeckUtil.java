@@ -41,7 +41,7 @@ public class GenerateDeckUtil {
     public static final Predicate<CardRules> aiCanPlay = new Predicate<CardRules>() {
         @Override
         public boolean isTrue(CardRules c) {
-            return !c.getRemAIDecks() && c.getRemRandomDecks();
+            return !c.getRemAIDecks() && !c.getRemRandomDecks();
         }
     };
 

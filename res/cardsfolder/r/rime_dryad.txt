@@ -4,7 +4,6 @@ Types:Creature Dryad
 Text:no text
 PT:1/2
 K:Snow forestwalk
-SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rime_dryad.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/148.jpg
