@@ -82,7 +82,7 @@ public abstract class GenerateColoredDeckBase {
             do {
                 c = source.get(this.r.nextInt(source.size()));
                 lc++;
-            } while ((this.cardCounts.get(c.getName()) > (this.maxDuplicates - 1)) || (lc > 100));
+            } while ((this.cardCounts.get(c.getName()) > (this.maxDuplicates - 1)) && (lc <= 100));
 
             if (lc > 100) {
                 throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- Cr12");
@@ -103,7 +103,7 @@ public abstract class GenerateColoredDeckBase {
             do {
                 s = source.get(this.r.nextInt(source.size()));
                 lc++;
-            } while ((this.cardCounts.get(s) > (this.maxDuplicates - 1)) || (lc > 20));
+            } while ((this.cardCounts.get(s) > 3) && (lc <= 20));
             // not an error if looped too much - could play singleton mode, with 6 slots for 3 non-basic lands.
 
             tDeck.add(CardDb.instance().getCard(s));
