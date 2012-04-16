@@ -3,6 +3,10 @@ petape_lvl1.jpg                        http://www.cardforge.org/fpics/pets/2012p
 petape_lvl2.jpg                        http://www.cardforge.org/fpics/pets/2012pets/PetApe_LVL2.jpg
 petape_lvl3.jpg                        http://www.cardforge.org/fpics/pets/2012pets/PetApe_LVL3.jpg
 petape_lvl4.jpg                        http://www.cardforge.org/fpics/pets/2012pets/PetApe_LVL4.jpg
+petbird_lvl1.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetBird_LVL1.jpg
+petbird_lvl2.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetBird_LVL2.jpg
+petbird_lvl3.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetBird_LVL3.jpg
+petbird_lvl4.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetBird_LVL4.jpg
 petwolf_lvl1.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL1.jpg
 petwolf_lvl2.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL2.jpg
 petwolf_lvl3.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL3.jpg
@@ -23,7 +27,3 @@ r_1_1_hound_pet.jpg                    http://www.cardforge.org/fpics/pets/token
 r_1_1_hound_pet_haste.jpg              http://www.cardforge.org/fpics/pets/tokens/r_1_1_hound_pet_haste.jpg
 r_2_1_hound_pet.jpg                    http://www.cardforge.org/fpics/pets/tokens/r_2_1_hound_pet.jpg
 r_2_1_hound_pet_alone.jpg              http://www.cardforge.org/fpics/pets/tokens/r_2_1_hound_pet_alone.jpg
-w_0_1_bird_pet.jpg                     http://www.cardforge.org/fpics/pets/tokens/w_0_1_bird_pet.jpg
-w_1_1_bird_pet.jpg                     http://www.cardforge.org/fpics/pets/tokens/w_1_1_bird_pet.jpg
-w_2_1_bird_pet.jpg                     http://www.cardforge.org/fpics/pets/tokens/w_2_1_bird_pet.jpg
-w_2_1_bird_pet_first_strike.jpg        http://www.cardforge.org/fpics/pets/tokens/w_2_1_bird_pet_first_strike.jpg
