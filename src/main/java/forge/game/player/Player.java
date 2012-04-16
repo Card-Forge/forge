@@ -20,7 +20,6 @@ package forge.game.player;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +36,6 @@ import forge.CardUtil;
 import forge.Constant;
 import forge.GameActionUtil;
 import forge.GameEntity;
-import forge.HandSizeOp;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
@@ -111,6 +109,9 @@ public abstract class Player extends GameEntity {
 
     /** The num lands played. */
     private int numLandsPlayed = 0;
+
+    /** The max hand size. */
+    private int maxHandSize = 7;
 
     /** The last drawn card. */
     private Card lastDrawnCard;
@@ -202,7 +203,6 @@ public abstract class Player extends GameEntity {
         this.numLandsPlayed = 0;
         this.prowl = new ArrayList<String>();
 
-        this.handSizeOperations = new ArrayList<HandSizeOp>();
         this.keywords.clear();
         this.manaPool = new ManaPool(this);
 
@@ -2483,12 +2483,14 @@ public abstract class Player extends GameEntity {
             if (!this.getEnchantedBy().contains(source)) {
                 return false;
             }
+        } else if (property.startsWith("Chosen")) {
+            if (!source.getChosenPlayer().equals(this)) {
+                return false;
+            }
         }
 
         return true;
     }
-
-    private ArrayList<HandSizeOp> handSizeOperations;
 
     /**
      * <p>
@@ -2498,86 +2500,19 @@ public abstract class Player extends GameEntity {
      * @return a int.
      */
     public final int getMaxHandSize() {
-
-        int ret = 7;
-        for (int i = 0; i < this.handSizeOperations.size(); i++) {
-            if (this.handSizeOperations.get(i).getMode().equals("=")) {
-                ret = this.handSizeOperations.get(i).getAmount();
-            } else if (this.handSizeOperations.get(i).getMode().equals("+") && (ret >= 0)) {
-                ret = ret + this.handSizeOperations.get(i).getAmount();
-            } else if (this.handSizeOperations.get(i).getMode().equals("-") && (ret >= 0)) {
-                ret = ret - this.handSizeOperations.get(i).getAmount();
-                if (ret < 0) {
-                    ret = 0;
-                }
-            }
-        }
-        return ret;
+        return maxHandSize;
     }
 
     /**
      * <p>
-     * sortHandSizeOperations.
-     * </p>
-     */
-    public final void sortHandSizeOperations() {
-        Collections.sort(handSizeOperations, new Comparator<HandSizeOp>() {
-            @Override public int compare(HandSizeOp o1, HandSizeOp o2) {
-                return o1.getHsTimeStamp() - o2.getHsTimeStamp();
-            }
-        });
-    }
-
-    /**
-     * <p>
-     * addHandSizeOperation.
+     * setMaxHandSize.
      * </p>
      * 
-     * @param theNew
-     *            a {@link forge.HandSizeOp} object.
-     */
-    public final void addHandSizeOperation(final HandSizeOp theNew) {
-        this.handSizeOperations.add(theNew);
-    }
-
-    /**
-     * <p>
-     * removeHandSizeOperation.
-     * </p>
-     * 
-     * @param timestamp
+     * @param size
      *            a int.
      */
-    public final void removeHandSizeOperation(final int timestamp) {
-        for (int i = 0; i < this.handSizeOperations.size(); i++) {
-            if (this.handSizeOperations.get(i).getHsTimeStamp() == timestamp) {
-                this.handSizeOperations.remove(i);
-                break;
-            }
-        }
-    }
-
-    /**
-     * <p>
-     * clearHandSizeOperations.
-     * </p>
-     */
-    public final void clearHandSizeOperations() {
-        this.handSizeOperations.clear();
-    }
-
-    /** Constant <code>NextHandSizeStamp=0</code>. */
-    private static int nextHandSizeStamp = 0;
-
-    /**
-     * <p>
-     * getHandSizeStamp.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public static int getHandSizeStamp() {
-        return Player.nextHandSizeStamp++;
+    public final void setMaxHandSize(int size) {
+        maxHandSize = size;
     }
 
     /**

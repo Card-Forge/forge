@@ -1,9 +1,9 @@
 Name:Thought Eater
 ManaCost:1 U
 Types:Creature Beast
-Text:Your maximum hand size is reduced by three.
+Text:no text
 PT:2/2
-K:HandSize - 3 Self
+S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ -3 | Description$ Your maximum hand size is reduced by three.
 K:Flying
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

@@ -950,6 +950,9 @@ public class GameAction {
 
             boolean checkAgain = false;
 
+            AllZone.getHumanPlayer().setMaxHandSize(7);
+            AllZone.getComputerPlayer().setMaxHandSize(7);
+
             this.checkStaticAbilities();
 
             final HashMap<String, Object> runParams = new HashMap<String, Object>();

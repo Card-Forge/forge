@@ -1,8 +1,10 @@
 Name:Cursed Rack
 ManaCost:4
 Types:Artifact
-Text:As Cursed Rack enters the battlefield, choose an opponent. The chosen player's maximum hand size is four.
-K:HandSize = 4 Opponent
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseP | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose an opponent.
+SVar:ChooseP:AB$ ChoosePlayer | Cost$ 0 | Defined$ You | Choices$ Opponent | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Player.Chosen | SetMaxHandSize$ 4 | Description$ The chosen player's maximum hand size is four.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_rack.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/330.jpg

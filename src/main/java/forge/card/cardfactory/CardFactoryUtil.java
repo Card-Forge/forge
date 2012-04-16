@@ -39,7 +39,6 @@ import forge.Command;
 import forge.CommandArgs;
 import forge.Counters;
 import forge.GameActionUtil;
-import forge.HandSizeOp;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
@@ -4432,7 +4431,7 @@ public class CardFactoryUtil {
             }
         } // echo
 
-        if (CardFactoryUtil.hasKeyword(card, "HandSize") != -1) {
+        /*if (CardFactoryUtil.hasKeyword(card, "HandSize") != -1) {
             final String toParse = card.getKeyword().get(CardFactoryUtil.hasKeyword(card, "HandSize"));
             card.removeIntrinsicKeyword(toParse);
 
@@ -4507,7 +4506,7 @@ public class CardFactoryUtil {
             card.addComesIntoPlayCommand(entersPlay);
             card.addLeavesPlayCommand(leavesPlay);
             card.addChangeControllerCommand(controllerChanges);
-        } // HandSize
+        }*/ // HandSize
 
         if (CardFactoryUtil.hasKeyword(card, "Suspend") != -1) {
             // Suspend:<TimeCounters>:<Cost>

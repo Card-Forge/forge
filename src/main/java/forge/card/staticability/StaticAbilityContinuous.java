@@ -221,6 +221,20 @@ public class StaticAbilityContinuous {
                     p.addKeyword(keyword);
                 }
             }
+
+            if (params.containsKey("SetMaxHandSize")) {
+                String mhs = params.get("SetMaxHandSize");
+                int max = mhs.matches("[0-9][0-9]?") ? Integer.parseInt(mhs)
+                        : AbilityFactory.calculateAmount(hostCard, mhs, null);
+                p.setMaxHandSize(max);
+            }
+
+            if (params.containsKey("RaiseMaxHandSize")) {
+                String rmhs = params.get("RaiseMaxHandSize");
+                int rmax = rmhs.matches("[0-9][0-9]?") ? Integer.parseInt(rmhs)
+                        : AbilityFactory.calculateAmount(hostCard, rmhs, null);
+                p.setMaxHandSize(p.getMaxHandSize() + rmax);
+            }
         }
 
         // start modifying the cards
@@ -348,14 +362,12 @@ public class StaticAbilityContinuous {
 
         final String[] strngs = params.get("Affected").split(",");
 
-        for (final String str : strngs) {
-            if (str.equals("Player") || str.equals("You")) {
-                players.add(controller);
-            }
+        if (AllZone.getHumanPlayer().isValid(strngs, controller, hostCard)) {
+            players.add(AllZone.getHumanPlayer());
+        }
 
-            if (str.equals("Player") || str.equals("Opponent")) {
-                players.add(controller.getOpponent());
-            }
+        if (AllZone.getComputerPlayer().isValid(strngs, controller, hostCard)) {
+            players.add(AllZone.getComputerPlayer());
         }
 
         return players;

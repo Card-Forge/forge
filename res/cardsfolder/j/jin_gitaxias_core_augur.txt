@@ -1,10 +1,10 @@
 Name:Jin-Gitaxias, Core Augur
 ManaCost:8 U U
 Types:Legendary Creature Praetor
-Text:Each opponent's maximum hand size is reduced by seven.
+Text:no text
 PT:5/4
 K:Flash
-K:HandSize - 7 Opponent
+S:Mode$ Continuous | Affected$ Opponent | RaiseMaxHandSize$ -7 | Description$ Each opponent's maximum hand size is reduced by seven.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw seven cards.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 7
 SVar:Rarity:Mythic

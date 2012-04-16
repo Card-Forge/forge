@@ -163,13 +163,7 @@ public class StaticAbility {
             return 9; // This is the collection of 7b and 7c
         }
 
-        if (this.mapParams.containsKey("AddHiddenKeyword")) {
-            return 10; // rules change
-        }
-
-        // Layer 1, 2 & 3 are not supported
-
-        return 0;
+        return 10; // rules change
     }
 
     /**

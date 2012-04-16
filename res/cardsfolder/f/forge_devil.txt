@@ -4,7 +4,7 @@ Types:Creature Devil
 Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to target creature and 1 damage to you.
-SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBDamageYou
+SVar:TrigDealDamage:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBDamageYou
 SVar:DBDamageYou:DB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forge_devil.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/91.jpg

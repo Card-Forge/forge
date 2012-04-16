@@ -34,7 +34,6 @@ import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
-import forge.HandSizeOp;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
@@ -1435,7 +1434,7 @@ public class CardFactorySorceries {
         }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Praetor's Counsel")) {
+        /*else if (cardName.equals("Praetor's Counsel")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 2208683667850222369L;
 
@@ -1458,7 +1457,7 @@ public class CardFactorySorceries {
                 }
             }; // SpellAbility
             card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Profane Command")) {

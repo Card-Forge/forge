@@ -1,9 +1,9 @@
 Name:Thought Devourer
 ManaCost:2 U U
 Types:Creature Beast
-Text:Your maximum hand size is reduced by four.
+Text:no text
 PT:4/4
-K:HandSize - 4 Self
+S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ -4 | Description$ Your maximum hand size is reduced by four.
 K:Flying
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
