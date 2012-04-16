@@ -157,7 +157,7 @@ public final class SRearrangingUtil {
             pnlPreview.setBounds(
                     cellTarget.getX() + SLayoutConstants.BORDER_T,
                     cellTarget.getY() + SLayoutConstants.BORDER_T,
-                    (int) ((tempW - SLayoutConstants.BORDER_T) / 2),
+                    ((tempW - SLayoutConstants.BORDER_T) / 2),
                     tempH - SLayoutConstants.BORDER_T
             );
 
@@ -166,7 +166,7 @@ public final class SRearrangingUtil {
                 && (cellTarget.getW() / 2) > SResizingUtil.W_MIN) {
             dropzone = Dropzone.RIGHT;
             pnlDocument.setCursor(CUR_R);
-            tempW = (int) Math.round(cellTarget.getW() / 2);
+            tempW = Math.round(cellTarget.getW() / 2);
 
             pnlPreview.setBounds(
                     cellTarget.getX() + cellTarget.getW() - tempW,
@@ -184,14 +184,14 @@ public final class SRearrangingUtil {
                 cellTarget.getX() + SLayoutConstants.BORDER_T,
                 cellTarget.getY() + SLayoutConstants.BORDER_T,
                 tempW - SLayoutConstants.BORDER_T,
-                (int) (tempH / 2)
+                (tempH / 2)
             );
         }
         else if (evtY > (tempY + tempH - nestingMargin)
                 && (cellTarget.getH() / 2) > SResizingUtil.H_MIN) {
             dropzone = Dropzone.BOTTOM;
             pnlDocument.setCursor(CUR_B);
-            tempH = (int) Math.round(cellTarget.getH() / 2);
+            tempH = Math.round(cellTarget.getH() / 2);
 
             pnlPreview.setBounds(
                 cellTarget.getX() + SLayoutConstants.BORDER_T,
@@ -244,7 +244,7 @@ public final class SRearrangingUtil {
             case LEFT:
                 cellNew.setBounds(
                     tempX, tempY,
-                    (int) Math.round(tempW / 2), tempH);
+                    Math.round(tempW / 2), tempH);
                 cellTarget.setBounds(
                     tempX + cellNew.getW(), tempY,
                     tempW - cellNew.getW(), tempH);
@@ -253,7 +253,7 @@ public final class SRearrangingUtil {
             case RIGHT:
                 cellTarget.setBounds(
                     tempX, tempY,
-                    (int) Math.round(tempW / 2), tempH);
+                    Math.round(tempW / 2), tempH);
                 cellNew.setBounds(
                     cellTarget.getX() + cellTarget.getW(), tempY ,
                     tempW - cellTarget.getW(), tempH);
@@ -262,7 +262,7 @@ public final class SRearrangingUtil {
             case TOP:
                 cellNew.setBounds(
                     tempX, tempY,
-                    tempW, tempH - (int) Math.round(tempH / 2));
+                    tempW, tempH - Math.round(tempH / 2));
                 cellTarget.setBounds(
                     tempX, tempY + cellNew.getH(),
                     tempW, tempH - cellNew.getH());
@@ -271,7 +271,7 @@ public final class SRearrangingUtil {
             case BOTTOM:
                 cellTarget.setBounds(
                     tempX, tempY,
-                    tempW, (int) Math.round(tempH / 2));
+                    tempW, Math.round(tempH / 2));
 
                 cellNew.setBounds(
                     tempX, cellTarget.getY() + cellTarget.getH(),
@@ -290,11 +290,14 @@ public final class SRearrangingUtil {
             cellNew.setSelected(vDoc);
         }
 
-        // Remove old cell if necessary
+        // Remove old cell if necessary, or, enforce rough bounds on new cell.
         if (cellSrc.getDocs().size() == 0) {
             fillGap();
             FView.SINGLETON_INSTANCE.removeDragCell(cellSrc);
         }
+
+        cellNew.setRoughBounds();
+        cellTarget.setRoughBounds();
 
         cellSrc.setSelected(srcSelectedDoc);
         cellSrc.refresh();
@@ -311,6 +314,7 @@ public final class SRearrangingUtil {
     /** The gap created by displaced panels must be filled.
      * from any side which shares corners with the gap.  */
     private static void fillGap() {
+        // Variables to help with matching the borders
         final List<DragCell> cellsToResize = new ArrayList<DragCell>();
         final int srcX = cellSrc.getAbsX();
         final int srcX2 = cellSrc.getAbsX2();
@@ -319,11 +323,13 @@ public final class SRearrangingUtil {
         final int srcW = cellSrc.getW();
         final int srcH = cellSrc.getH();
 
+        // Border check flags
         boolean foundT = false;
         boolean foundB = false;
         boolean foundR = false;
         boolean foundL = false;
 
+        // Start algorithm
         cellsToResize.clear();
         foundT = false;
         foundB = false;
@@ -345,6 +351,7 @@ public final class SRearrangingUtil {
         if (foundT && foundB) {
             for (final DragCell cell : cellsToResize) {
                 cell.setBounds(cell.getX(), cell.getY(), cell.getW() + srcW, cell.getH());
+                cell.setRoughBounds();
             }
             return;
         }
@@ -370,6 +377,7 @@ public final class SRearrangingUtil {
         if (foundT && foundB) {
             for (final DragCell cell : cellsToResize) {
                 cell.setBounds(cellSrc.getX(), cell.getY(), cell.getW() + srcW, cell.getH());
+                cell.setRoughBounds();
             }
             return;
         }
@@ -395,6 +403,8 @@ public final class SRearrangingUtil {
         if (foundL && foundR) {
             for (final DragCell cell : cellsToResize) {
                 cell.setBounds(cell.getX(), cellSrc.getY(), cell.getW(), cell.getH() + srcH);
+
+                cell.setRoughBounds();
             }
             return;
         }
@@ -420,6 +430,8 @@ public final class SRearrangingUtil {
         if (foundL && foundR) {
             for (final DragCell cell : cellsToResize) {
                 cell.setBounds(cell.getX(), cell.getY(), cell.getW(), cell.getH() + srcH);
+
+                cell.setRoughBounds();
             }
             return;
         }

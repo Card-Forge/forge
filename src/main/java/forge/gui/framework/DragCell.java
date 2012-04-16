@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
+import forge.view.FView;
 
 /**
  * Top-level container in drag layout.  A cell holds
@@ -173,7 +174,18 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         return this.getAbsY() + this.getH();
     }
 
-    /** Percent bounds of this cell.  Will be smoothed
+    /**
+     * Automatically calculates rough bounds of this cell.
+     */
+    public void setRoughBounds() {
+        final double contentW = FView.SINGLETON_INSTANCE.getPnlContent().getWidth();
+        final double contentH = FView.SINGLETON_INSTANCE.getPnlContent().getHeight();
+
+        setRoughBounds(this.getX() / contentW, this.getY()  / contentH,
+                this.getW() / contentW, this.getH() / contentH);
+    }
+
+    /** Explicitly sets percent bounds of this cell.  Will be smoothed
      *  later to avoid pixel rounding errors.
      *  @param x0 &emsp; double
      *  @param y0 &emsp; double
@@ -400,7 +412,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
             if (imgW < 1) { return; }
 
             for (int x = 0; x < getWidth(); x += imgW) {
-                g.drawImage(img, x, (int) ((getHeight() - imgH) / 2), null);
+                g.drawImage(img, x, ((getHeight() - imgH) / 2), null);
             }
         }
     }

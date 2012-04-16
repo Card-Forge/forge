@@ -60,11 +60,13 @@ public enum VMatchUI implements IVTopLevelUI {
     private boolean isPopulated = false;
 
     /** */
+    @Override
     public void instantiate() {
 
     }
 
     /** */
+    @Override
     public void populate() {
         if (isPopulated) { return; }
         else { isPopulated = true; }
@@ -72,7 +74,7 @@ public enum VMatchUI implements IVTopLevelUI {
         SIOUtil.loadLayout(null);
     }
 
-    /** */
+    /** NEVER ACTUALLY CALLED; could be removed... */
     public void defaultLayout() {
         final DragCell cell0 = new DragCell();
         final DragCell cell1 = new DragCell();
