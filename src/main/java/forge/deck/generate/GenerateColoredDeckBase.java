@@ -186,11 +186,11 @@ public abstract class GenerateColoredDeckBase {
 
         // start with all cards
         // remove cards that generated decks don't like
-        Predicate<CardRules> canPlay = pt == PlayerType.HUMAN ? GenerateDeckUtil.humanCanPlay : GenerateDeckUtil.aiCanPlay;
+        Predicate<CardRules> canPlay = pt == PlayerType.HUMAN ? GenerateDeckUtil.HUMAN_CAN_PLAY : GenerateDeckUtil.AI_CAN_PLAY;
         Predicate<CardRules> hasColor = new GenerateDeckUtil.ContainsAllColorsFrom(colors);
 
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {
-            hasColor = Predicate.or(hasColor, GenerateDeckUtil.colorlessCards);
+            hasColor = Predicate.or(hasColor, GenerateDeckUtil.COLORLESS_CARDS);
         }
 
         return Predicate.and(canPlay, hasColor).select(CardDb.instance().getAllCards(), CardPrinted.FN_GET_RULES);

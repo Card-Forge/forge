@@ -38,21 +38,21 @@ import forge.util.closures.Predicate;
  */
 public class GenerateDeckUtil {
 
-    public static final Predicate<CardRules> aiCanPlay = new Predicate<CardRules>() {
+    public static final Predicate<CardRules> AI_CAN_PLAY = new Predicate<CardRules>() {
         @Override
         public boolean isTrue(CardRules c) {
             return !c.getRemAIDecks() && !c.getRemRandomDecks();
         }
     };
 
-    public static final Predicate<CardRules> humanCanPlay = new Predicate<CardRules>() {
+    public static final Predicate<CardRules> HUMAN_CAN_PLAY = new Predicate<CardRules>() {
         @Override
         public boolean isTrue(CardRules c) {
             return !c.getRemRandomDecks();
         }
     };
 
-    public static final Predicate<CardRules> colorlessCards = new Predicate<CardRules>() {
+    public static final Predicate<CardRules> COLORLESS_CARDS = new Predicate<CardRules>() {
         @Override
         public boolean isTrue(CardRules c) {
             CardManaCost mc = c.getManaCost();
