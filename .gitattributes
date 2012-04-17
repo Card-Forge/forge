@@ -3383,6 +3383,7 @@ res/cardsfolder/g/garzas_assassin.txt -text svneol=unset#text/plain
 res/cardsfolder/g/gaseous_form.txt svneol=native#text/plain
 res/cardsfolder/g/gate_hound.txt svneol=native#text/plain
 res/cardsfolder/g/gate_to_phyrexia.txt svneol=native#text/plain
+res/cardsfolder/g/gate_to_the_aether.txt -text
 res/cardsfolder/g/gatekeeper_of_malakir.txt svneol=native#text/plain
 res/cardsfolder/g/gathan_raiders.txt svneol=native#text/plain
 res/cardsfolder/g/gather_courage.txt -text
@@ -10204,6 +10205,7 @@ res/cardsfolder/w/wei_night_raiders.txt svneol=native#text/plain
 res/cardsfolder/w/wei_scout.txt svneol=native#text/plain
 res/cardsfolder/w/wei_strike_force.txt svneol=native#text/plain
 res/cardsfolder/w/weight_of_spires.txt -text
+res/cardsfolder/w/weird_harvest.txt -text
 res/cardsfolder/w/weirding_shaman.txt svneol=native#text/plain
 res/cardsfolder/w/welding_jar.txt svneol=native#text/plain
 res/cardsfolder/w/welkin_guide.txt svneol=native#text/plain
