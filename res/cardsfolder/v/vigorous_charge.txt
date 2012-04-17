@@ -4,8 +4,8 @@ Types:Instant
 Text:no text
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | KW$ Trample | SpellDescription$ Target creature gains trample until end of turn. Whenever that creature deals combat damage this turn, if CARDNAME was kicked, you gain life equal to that damage.
 A:SP$ Pump | Cost$ G W | SetAsKicked$ True | ValidTgts$ Creature | KW$ Trample | SubAbility$ VigorousPumping | SpellDescription$ Kicker W (You may pay an additional W as you cast this spell.)
-SVar:VigorousPumping:DB$ Effect | Cost$ 2 G | TgtPrompt$ Select target creature | Triggers$ TrigDamage,EndTrackingEffect | SVars$ VigorousLife,X,ExileEffect | RememberObjects$ Targeted
-SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | CombatDamage$ True | Execute$ VigorousLife | CombatDamage$ True | TriggerDescription$ Whenever the targeted creature deals combat damage this turn, you gain life equal to that damage.
+SVar:VigorousPumping:DB$ Effect | TgtPrompt$ Select target creature | Triggers$ TrigDamage,EndTrackingEffect | SVars$ VigorousLife,X,ExileEffect | RememberObjects$ Targeted
+SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | CombatDamage$ True | Execute$ VigorousLife | TriggerDescription$ Whenever the targeted creature deals combat damage this turn, you gain life equal to that damage.
 SVar:VigorousLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:EndTrackingEffect:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ ExileEffect | Static$ True
