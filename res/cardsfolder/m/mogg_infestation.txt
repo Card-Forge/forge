@@ -1,0 +1,12 @@
+Name:Mogg Infestation
+ManaCost:3 R R
+Types:Sorcery
+Text:no text
+A:SP$ DestroyAll | Cost$ 3 R R | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | ValidDescription$ all creatures targeted player controls | RememberDestroyed$ True | SubAbility$ DBTokenInfestation | SpellDescription$ Destroy all creatures target player controls. For each creature that died this way, put two 1/1 red Goblin creature tokens onto the battlefield under that player's control.
+SVar:DBTokenInfestation:DB$ Token | TokenAmount$ X | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ Targeted | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
+SVar:X:Remembered$Amount.Twice
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_infestation.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/93.jpg
+Oracle:Destroy all creatures target player controls. For each creature that died this way, put two 1/1 red Goblin creature tokens onto the battlefield under that player's control.
+End

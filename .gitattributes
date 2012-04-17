@@ -5723,6 +5723,7 @@ res/cardsfolder/m/mogg_cannon.txt -text
 res/cardsfolder/m/mogg_conscripts.txt -text
 res/cardsfolder/m/mogg_fanatic.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_hollows.txt svneol=native#text/plain
+res/cardsfolder/m/mogg_infestation.txt -text
 res/cardsfolder/m/mogg_jailer.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_maniac.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_raider.txt svneol=native#text/plain
