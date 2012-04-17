@@ -2,13 +2,14 @@ Name:Furnace of Rath
 ManaCost:1 R R R
 Types:Enchantment
 Text:no text
-R:Event$ DamageDone | ValidSource$ Card | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
-R:Event$ DamageDone | ValidSource$ Card | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+R:Event$ DamageDone | ValidSource$ Card | ValidTarget$ Creature,Player | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+R:Event$ DamageDone | ValidSource$ Card | ValidTarget$ Creature,Player | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
 SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
 SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
+SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_of_rath.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/187.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/177.jpg
