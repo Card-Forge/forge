@@ -199,6 +199,22 @@ Fixes/Features:
 - Fixed window resizing / drag cell bug.
 - Fixed getSpellCostChange not being applied for the AI.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Reverted changes made to the main.properties file, think this may have been an unintentional edit.
+- Added a fluff piece to the changes.txt file.
+- Renamed "Message Report" panel name to "Prompt".
+- Added a fluff piece to the changes.txt file.
+- Added the the options "SetMaxHandSize" and "RaiseMaxHandSize" to continuous static abilities.
+- Converted all cards with the old HandSize keyword as well as Praetor's Counsel.
+- Fixed singleton mode freezing.
+- Edited a fluff piece in the changes.txt file.
+- Fixed random deck generation for the AI.
+- Updated some SVars.
+- Updated image references for new bird pet (bazaar index and dl links)
+- Cleanup.
+- CheckStyle.
+- Made the triggered ability for Glint Hawk Idol optional.
+- Added missing rarity info to Furnace of Rath. Also changed its valid targets from permanent to creature
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -220,6 +236,17 @@ Latch Seeker
 Thunderous Wrath
 Revenge of the Hunted
 Temporal Mastery
+Tamiyo, the Moon Sage
+Reforge the Soul
+Zealous Conscripts
+Cathars' Crusade
+Herald of War
+Demonlord of Ashmouth
+Arcane Melee
+Tibalt, the Fiend-Blooded
+Harvester of Souls
+Desolate Lighthouse
+Angel's Tomb
 
 
 Added many cards, including:
@@ -239,6 +266,8 @@ Whirlpool Warrior
 Tree of Redemption
 Weight of Spires
 Walking Sponge
+Vigorous Charge
+Vintara Elephant
 
 
 end
