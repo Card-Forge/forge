@@ -9898,6 +9898,7 @@ res/cardsfolder/v/vigilant_martyr.txt svneol=native#text/plain
 res/cardsfolder/v/vigilant_sentry.txt svneol=native#text/plain
 res/cardsfolder/v/vigor.txt -text
 res/cardsfolder/v/vigor_mortis.txt -text svneol=unset#text/plain
+res/cardsfolder/v/vigorous_charge.txt -text
 res/cardsfolder/v/vile_deacon.txt svneol=native#text/plain
 res/cardsfolder/v/vile_requiem.txt svneol=native#text/plain
 res/cardsfolder/v/village_bell_ringer.txt -text
@@ -9914,6 +9915,7 @@ res/cardsfolder/v/vine_kami.txt -text
 res/cardsfolder/v/vine_trellis.txt svneol=native#text/plain
 res/cardsfolder/v/vinelasher_kudzu.txt svneol=native#text/plain
 res/cardsfolder/v/vines_of_vastwood.txt svneol=native#text/plain
+res/cardsfolder/v/vintara_elephant.txt -text
 res/cardsfolder/v/vintara_snapper.txt svneol=native#text/plain
 res/cardsfolder/v/violent_eruption.txt -text
 res/cardsfolder/v/violent_outburst.txt svneol=native#text/plain
