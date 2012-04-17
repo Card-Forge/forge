@@ -6,19 +6,23 @@ Once the Forge archive has been decompressed you should then be able to launch F
 
 After downloading and installing a newer version of Forge you may want to move certain files from the older version over to the newer version of Forge. You should maintain your older version of Forge as a back up in case you make a mistake while installing the newer version.
 
-1) The /res/pics/ folder contains the card pictures, token pictures (mtg card tokens an quest pet/plant tokens) and the booster package images. Please note that the /res/pics/icons/ folder was moved out of this folder and placed in the /res/images/ folder.
+1) The /res/pics/ folder contains the card pictures and token pictures (mtg card tokens and quest pet/plant tokens). Please note that the /res/pics/icons/ folder was moved out of this folder and placed in the /res/images/ folder. The booster package images were moved to the /res/pics_product/booster/ folder.
 
 The /res/images/icons/ folder contains the quest opponent icons, small quest pet/plant icons (non-tokens) and some icons that are used by forge's quest mode. While several of these pictures ship with the forge archive most of them have to be downloaded using the Home screen -> Utilities -> Download Quest Images command.
 
-2) The /res/decks/ folder contains your deck files. You should copy over the files with the extension ".dck". In version 1.2.4 and later the /decks/ folder contains 4 subdirectories named constructed, cube, draft and sealed.
+2) The /res/pics_product/ folder contains four folders which in turn contain pictures for the booster, fatpacks, precons and tournamentpacks products.
+
+3) The /res/decks/ folder contains your deck files. You should copy over the files with the extension ".dck". In version 1.2.4 and later the /decks/ folder contains 4 subdirectories named constructed, cube, draft and sealed.
 
 You can place your deck files from an earlier version of Forge into the /res/decks/ folder. When you next launch Forge these decks will be converted to a newer format and will be moved into the proper subdirectory.
 
-3) The /res/draft/ and the /res/sealed/ folders contains files for the sealed and draft mode. You should copy over your files inside of these folders that end in the extension ".draft" or ".zsealed".
+4) The /res/draft/ and the /res/sealed/ folders contains files for the sealed and draft mode. You should copy over your files inside of these folders that end in the extension ".draft" or ".zsealed".
 
-4) The /res/quest/data folder contains your questData files. These files include all of the information for your current quests. You will not be able to continue your quests in a newer version of Forge unless you copy over the your quest data files files. These files have a ".dat" or a ".xml" extension.
+5) The /res/quest/data folder contains your questData files. These files include all of the information for your current quests. You will not be able to continue your quests in a newer version of Forge unless you copy over the your quest data files. These files have a ".dat" extension. You can now have multiple ongoing quests at the same time.
 
-5) The Forge root folder contains a preference file named "forge.preferences" and you should also move a copy of this file over to the newer version.
+6) The Forge root folder contains a preference file named "forge.preferences" and you should also move a copy of this file over to the newer version.
+
+7) The /res/layouts/ folder contains a file named "match_preferred.xml". This file contains information that forge uses when setting the layout for the battlefield display.
 
 
 Advanced Updating to a newer version Instructions:
