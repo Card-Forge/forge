@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_fables.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/47.jpg
+Oracle:Each other Wizard creature you control enters the battlefield with an additional +1/+1 counter on it.\n{2}, Remove a +1/+1 counter from a creature you control: Draw a card.
 End

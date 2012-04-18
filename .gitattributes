@@ -8492,6 +8492,7 @@ res/cardsfolder/s/spike_colony.txt svneol=native#text/plain
 res/cardsfolder/s/spike_drone.txt svneol=native#text/plain
 res/cardsfolder/s/spike_feeder.txt svneol=native#text/plain
 res/cardsfolder/s/spike_hatcher.txt svneol=native#text/plain
+res/cardsfolder/s/spike_rogue.txt -text
 res/cardsfolder/s/spike_soldier.txt svneol=native#text/plain
 res/cardsfolder/s/spike_tiller.txt svneol=native#text/plain
 res/cardsfolder/s/spike_weaver.txt svneol=native#text/plain
