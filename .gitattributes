@@ -10530,6 +10530,7 @@ res/cardsfolder/z/zephyr_falcon.txt svneol=native#text/plain
 res/cardsfolder/z/zephyr_net.txt svneol=native#text/plain
 res/cardsfolder/z/zephyr_spirit.txt svneol=native#text/plain
 res/cardsfolder/z/zephyr_sprite.txt svneol=native#text/plain
+res/cardsfolder/z/zerapa_minotaur.txt -text
 res/cardsfolder/z/zhalfirin_commander.txt svneol=native#text/plain
 res/cardsfolder/z/zhalfirin_knight.txt svneol=native#text/plain
 res/cardsfolder/z/zhang_fei_fierce_warrior.txt svneol=native#text/plain
@@ -10556,6 +10557,7 @@ res/cardsfolder/z/zoetic_cavern.txt svneol=native#text/plain
 res/cardsfolder/z/zof_shade.txt svneol=native#text/plain
 res/cardsfolder/z/zombie_apocalypse.txt -text
 res/cardsfolder/z/zombie_assassin.txt -text
+res/cardsfolder/z/zombie_boa.txt -text
 res/cardsfolder/z/zombie_cannibal.txt svneol=native#text/plain
 res/cardsfolder/z/zombie_cutthroat.txt svneol=native#text/plain
 res/cardsfolder/z/zombie_goliath.txt svneol=native#text/plain
