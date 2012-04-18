@@ -18,6 +18,8 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -888,26 +890,36 @@ public class GameAction {
 
         // search for cards with static abilities
         final CardList allCards = AllZoneUtil.getCardsInGame();
-        final CardList cardsWithStAbs = new CardList();
+        final ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
         for (final Card card : allCards) {
-            final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
-            if (!staticAbilities.isEmpty() && !card.isFaceDown()) {
-                cardsWithStAbs.add(card);
+            for (StaticAbility sa : card.getStaticAbilities()) {
+                if (sa.getMapParams().get("Mode").equals("Continuous")) {
+                    staticAbilities.add(sa);
+                }
             }
         }
 
-        cardsWithStAbs.reverse(); // roughly timestamp order
-
-        // apply continuous effects
-        for (int layer = 4; layer < 11; layer++) {
-            for (final Card card : cardsWithStAbs) {
-                final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
-                for (final StaticAbility stAb : staticAbilities) {
-                    if (stAb.getLayer() == layer) {
-                        stAb.applyAbility("Continuous");
-                    }
+        final Comparator<StaticAbility> comp = new Comparator<StaticAbility>() {
+            @Override
+            public int compare(final StaticAbility a, final StaticAbility b) {
+                if (a.getLayer() > b.getLayer()) {
+                    return 1;
                 }
+                if (a.getLayer() < b.getLayer()) {
+                    return -1;
+                }
+                if (a.getHostCard().getTimestamp() > b.getHostCard().getTimestamp()) {
+                    return 1;
+                }
+                if (a.getHostCard().getTimestamp() < b.getHostCard().getTimestamp()) {
+                    return -1;
+                }
+                return 0;
             }
+        };
+        Collections.sort(staticAbilities, comp);
+        for (final StaticAbility stAb : staticAbilities) {
+            stAb.applyAbility("Continuous");
         }
 
         // card state effects like Glorious Anthem

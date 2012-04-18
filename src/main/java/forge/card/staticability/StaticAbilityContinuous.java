@@ -229,7 +229,7 @@ public class StaticAbilityContinuous {
                 p.setMaxHandSize(max);
             }
 
-            if (params.containsKey("RaiseMaxHandSize")) {
+            if (params.containsKey("RaiseMaxHandSize") && p.getMaxHandSize() >= 0) {
                 String rmhs = params.get("RaiseMaxHandSize");
                 int rmax = rmhs.matches("[0-9][0-9]?") ? Integer.parseInt(rmhs)
                         : AbilityFactory.calculateAmount(hostCard, rmhs, null);

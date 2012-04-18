@@ -41,6 +41,8 @@ public class StaticAbility {
 
     private HashMap<String, String> mapParams = new HashMap<String, String>();
 
+    private int layer = 0;
+
     /** The temporarily suppressed. */
     private boolean temporarilySuppressed = false;
 
@@ -127,7 +129,7 @@ public class StaticAbility {
      * 
      * @return the layer
      */
-    public final int getLayer() {
+    public final int generateLayer() {
 
         if (!this.mapParams.get("Mode").equals("Continuous")) {
             return 0;
@@ -194,6 +196,7 @@ public class StaticAbility {
     public StaticAbility(final String params, final Card host) {
         this.mapParams = this.getMapParams(params, host);
         this.hostCard = host;
+        this.layer = this.generateLayer();
     }
 
     /**
@@ -209,6 +212,7 @@ public class StaticAbility {
         for (final Map.Entry<String, String> entry : params.entrySet()) {
             this.mapParams.put(entry.getKey(), entry.getValue());
         }
+        this.layer = this.generateLayer();
         this.hostCard = host;
     }
 
@@ -521,6 +525,20 @@ public class StaticAbility {
      */
     public final boolean isSuppressed() {
         return (this.suppressed || this.temporarilySuppressed);
+    }
+
+    /**
+     * @return the layer
+     */
+    public int getLayer() {
+        return layer;
+    }
+
+    /**
+     * @param layer the layer to set
+     */
+    public void setLayer(int layer) {
+        this.layer = layer;
     }
 
 } // end class StaticEffectFactory
