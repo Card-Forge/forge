@@ -3261,6 +3261,10 @@ public class CardFactoryUtil {
             }
         }
 
+        if (sq[0].contains("SpellsOnStack")) {
+            someCards.addAll(AllZoneUtil.getCardsIn(ZoneType.Stack));
+        }
+
         if (sq[0].contains("InAllHands")) {
             if (!mh) {
                 someCards.addAll(cardController.getCardsIn(ZoneType.Hand));

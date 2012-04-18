@@ -1,0 +1,17 @@
+Name:Venser, Shaper Savant
+ManaCost:2 U U
+Types:Legendary Creature Human Wizard
+Text:no text
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Execute$ ChooseTgtMode | TriggerDescription$ When CARDNAME enters the battlefield, return target spell or permanent to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ LT1 | Execute$ BouncePermanent | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, return target spell or permanent to its owner's hand.
+SVar:ChooseTgtMode:AB$ Charm | Cost$ 0 | Defined$ You | Choices$ BounceSpell,BouncePermanent
+SVar:BounceSpell:DB$ChangeZone | TargetType$ Spell | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Destination$ Hand | TargetMin$ 1 | TargetMax$ 1 | SpellDescription$ Return target spell to its owner's hand.
+SVar:BouncePermanent:DB$ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | TargetMin$ 1 | TargetMax$ 1 | SpellDescription$ Return target permanent to its owner's hand.
+SVar:X:Count$SpellsOnStack
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/venser_shaper_savant.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/46.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Venser, Shaper Savant enters the battlefield, return target spell or permanent to its owner's hand.
+End

@@ -1888,6 +1888,8 @@ public final class AbilityFactoryChangeZone {
      */
     private static void changeKnownOriginResolve(final AbilityFactory af, final SpellAbility sa) {
         ArrayList<Card> tgtCards;
+        ArrayList<SpellAbility> sas;
+
         final HashMap<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
         final Player player = sa.getActivatingPlayer();
@@ -1904,6 +1906,28 @@ public final class AbilityFactoryChangeZone {
                 tgtCards.add(c);
             }
         }
+
+        // changing zones for spells on the stack
+        if (tgt != null) {
+            sas = tgt.getTargetSAs();
+        } else {
+            sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        for (final SpellAbility tgtSA : sas) {
+            final Card tgtSACard = tgtSA.getSourceCard();
+
+            if (!tgtSA.isSpell()) { // Catch any abilities or triggers that slip through somehow
+                continue;
+            }
+
+            final SpellAbilityStackInstance si = AllZone.getStack().getInstanceFromSpellAbility(tgtSA);
+            if (si == null) {
+                continue;
+            }
+
+            removeFromStack(tgtSA, sa, si);
+        } // End of change from stack
 
         final String remember = params.get("RememberChanged");
         final String imprint = params.get("Imprint");
@@ -2041,6 +2065,54 @@ public final class AbilityFactoryChangeZone {
             }
         }
         return ret;
+    }
+
+    /**
+     * <p>
+     * removeFromStack.
+     * </p>
+     *
+     * @param tgtSA
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param srcSA
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param si
+     *            a {@link forge.card.spellability.SpellAbilityStackInstance}
+     *            object.
+     */
+    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si) {
+        AllZone.getStack().remove(si);
+
+        final AbilityFactory af = srcSA.getAbilityFactory();
+        final HashMap<String, String> params = af.getMapParams();
+
+        if (params.containsKey("Destination")) {
+            if (tgtSA.isAbility()) {
+                // Shouldn't be able to target Abilities but leaving this in for now
+            } else if (tgtSA.isFlashBackAbility())  {
+                Singletons.getModel().getGameAction().exile(tgtSA.getSourceCard());
+            } else if (params.get("Destination").equals("Graveyard")) {
+                Singletons.getModel().getGameAction().moveToGraveyard(tgtSA.getSourceCard());
+            } else if (params.get("Destination").equals("Exile")) {
+                Singletons.getModel().getGameAction().exile(tgtSA.getSourceCard());
+            } else if (params.get("Destination").equals("TopOfLibrary")) {
+                Singletons.getModel().getGameAction().moveToLibrary(tgtSA.getSourceCard());
+            } else if (params.get("Destination").equals("Hand")) {
+                Singletons.getModel().getGameAction().moveToHand(tgtSA.getSourceCard());
+            } else if (params.get("Destination").equals("BottomOfLibrary")) {
+                Singletons.getModel().getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+            } else if (params.get("Destination").equals("ShuffleIntoLibrary")) {
+                Singletons.getModel().getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+                tgtSA.getSourceCard().getController().shuffle();
+            } else {
+                throw new IllegalArgumentException("AbilityFactory_ChangeZone: Invalid Destination argument for card "
+                        + srcSA.getSourceCard().getName());
+            }
+
+            if (!tgtSA.isAbility()) {
+                System.out.println("Moving spell to " + params.get("Destination"));
+            }
+        }
     }
 
     // *************************************************************************************
