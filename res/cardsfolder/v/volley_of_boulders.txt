@@ -1,0 +1,17 @@
+Name:Volley of Boulders
+ManaCost:8 R
+Types:Sorcery
+Text:no text
+K:Flashback R R R R R R
+A:SP$DealDamage | Cost$ 8 R | Tgt$ TgtCP | TgtPrompt$ Select target creature or player (1) | NumDmg$ 1 | SubAbility$ Dmg2 | SpellDescription$ CARDNAME deals 6 damage divided as you choose among any number of target creatures and/or players.
+SVar:Dmg2:DB$DealDamage | Tgt$ TgtCP | TgtPrompt$ Select target creature or player (2) | NumDmg$ 1 | SubAbility$ Dmg3
+SVar:Dmg3:DB$DealDamage | Tgt$ TgtCP | TgtPrompt$ Select target creature or player (3) | NumDmg$ 1 | SubAbility$ Dmg4
+SVar:Dmg4:DB$DealDamage | Tgt$ TgtCP | TgtPrompt$ Select target creature or player (4) | NumDmg$ 1 | SubAbility$ Dmg5
+SVar:Dmg5:DB$DealDamage | Tgt$ TgtCP | TgtPrompt$ Select target creature or player (5) | NumDmg$ 1 | SubAbility$ Dmg6
+SVar:Dmg6:DB$DealDamage | Tgt$ TgtCP | TgtPrompt$ Select target creature or player (6) | NumDmg$ 1
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/volley_of_boulders.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/227.jpg
+Oracle:Volley of Boulders deals 6 damage divided as you choose among any number of target creatures and/or players.\nFlashback {R}{R}{R}{R}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+End
