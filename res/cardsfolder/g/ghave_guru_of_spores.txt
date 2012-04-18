@@ -1,0 +1,14 @@
+Name:Ghave, Guru of Spores
+ManaCost:2 B G W
+Types:Legendary Creature Fungus Shaman
+Text:no text
+PT:0/0
+K:etbCounter:P1P1:5
+A:AB$ Token | Cost$ SubCounter<1/P1P1/Creature.YouCtrl/Creature you Control> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
+A:AB$ PutCounter | Cost$ Sac<1/Creature> | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghave_guru_of_spores.jpg
+SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/200.jpg
+Oracle:Ghave, Guru of Spores enters the battlefield with five +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from a creature you control: Put a 1/1 green Saproling creature token onto the battlefield.\n{1}, Sacrifice a creature: Put a +1/+1 counter on target creature.
+End
