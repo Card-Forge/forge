@@ -268,9 +268,8 @@ public class CostPutCounter extends CostPartWithList {
                     msg.append("s");
                 }
 
-                this.typeList = sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
-                this.typeList = this.typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(),
-                        sa.getSourceCard());
+                this.typeList = sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield).
+                        getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }

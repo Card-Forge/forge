@@ -7509,6 +7509,7 @@ res/cardsfolder/s/safewright_quest.txt svneol=native#text/plain
 res/cardsfolder/s/saffi_eriksdotter.txt -text svneol=unset#text/plain
 res/cardsfolder/s/sage_aven.txt svneol=native#text/plain
 res/cardsfolder/s/sage_of_epityr.txt svneol=native#text/plain
+res/cardsfolder/s/sage_of_fables.txt -text
 res/cardsfolder/s/sage_of_lat_nam.txt svneol=native#text/plain
 res/cardsfolder/s/sage_owl.txt svneol=native#text/plain
 res/cardsfolder/s/sages_dousing.txt svneol=native#text/plain
