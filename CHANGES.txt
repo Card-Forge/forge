@@ -215,6 +215,14 @@ Fixes/Features:
 - Made the triggered ability for Glint Hawk Idol optional.
 - Added missing rarity info to Furnace of Rath. Also changed its valid targets from permanent to creature
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- removed some excess params from Vigorous Charge.
+- Updated the README.txt file.
+- Static ability PreventDamage can now handle "HalfUp" for Amount
+- Added SVar:RemAIDeck:True to Kyren Toy.
+- Initial Checkin for Remove Counter from Type (still needs some fine tuning, but should be functional for Human)
+- Added support to ChangeZone AF for targeting spells on stack. Might need some tweaking.
+- Added counting of cards on the stack
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -224,29 +232,31 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 These new Avacyn Restored cards have been added to the new Avacyn Restored branch and are not yet available in the forge betas/snapshot builds.
 
-Avacyn, Angel of Hope
-Cloudshift
-Demonic Taskmaster
-Griselbrand
-Restoration Angel
-Banishing Stroke
-Howlgeist
-Emancipation angel
-Latch Seeker
-Thunderous Wrath
-Revenge of the Hunted
-Temporal Mastery
-Tamiyo, the Moon Sage
-Reforge the Soul
-Zealous Conscripts
-Cathars' Crusade
-Herald of War
-Demonlord of Ashmouth
-Arcane Melee
-Tibalt, the Fiend-Blooded
-Harvester of Souls
-Desolate Lighthouse
 Angel's Tomb
+Arcane Melee
+Avacyn, Angel of Hope
+Banishing Stroke
+Cathars' Crusade
+Cloudshift
+Craterhoof Behemoth
+Demonic Taskmaster
+Demonlord of Ashmouth
+Desolate Lighthouse
+Emancipation angel
+Gisela, Blade of Goldnight
+Griselbrand
+Harvester of Souls
+Herald of War
+Howlgeist
+Latch Seeker
+Reforge the Soul
+Restoration Angel
+Revenge of the Hunted
+Tamiyo, the Moon Sage
+Temporal Mastery
+Thunderous Wrath
+Tibalt, the Fiend-Blooded
+Zealous Conscripts
 
 
 Added many cards, including:
@@ -268,6 +278,15 @@ Weight of Spires
 Walking Sponge
 Vigorous Charge
 Vintara Elephant
+Weird Harvest
+Gate to the AEther
+Simulacrum
+Harsh Justice
+Mogg Infestation
+Sage of Fables
+Spike Rogue
+Ghave, Guru of Spores
+Venser, Shaper Savant
 
 
 end
