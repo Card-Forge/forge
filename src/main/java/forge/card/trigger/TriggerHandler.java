@@ -307,6 +307,12 @@ public class TriggerHandler {
         // AP
         allCards = playerAP.getCardsIn(ZoneType.StaticAbilitiesSourceZones);
         allCards.addAll(AllZoneUtil.getCardsIn(ZoneType.Stack).getController(playerAP));
+        if (runParams.containsKey("Card")) {
+            Card card = (Card) runParams.get("Card");
+            if (!allCards.contains(card)) {
+                allCards.add(card);
+            }
+        }
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
                 if (!t.isStatic()) {

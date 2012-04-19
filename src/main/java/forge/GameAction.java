@@ -605,7 +605,9 @@ public class GameAction {
             AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
         }
 
+        Card lastKnownInfo = c;
         if ((p != null) && p.is(ZoneType.Battlefield)) {
+            lastKnownInfo = CardUtil.getLKICopy(c);
             c = AllZone.getCardFactory().copyCard(c);
         }
 
@@ -618,13 +620,13 @@ public class GameAction {
         library.add(c, libPosition);
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Card", c);
+        runParams.put("Card", lastKnownInfo);
         if (p != null) {
             runParams.put("Origin", p.getZoneType().name());
         } else {
             runParams.put("Origin", null);
         }
-        runParams.put("Destination", ZoneType.Library);
+        runParams.put("Destination", ZoneType.Library.name());
         AllZone.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
 
         Player owner = p.getPlayer();
