@@ -557,6 +557,8 @@ public class AbilityFactoryPump {
                         return containsUsefulKeyword(keywords, c, sa);
                     }
                 });
+            } else {
+                return new CardList();
             }
         }
 
