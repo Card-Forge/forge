@@ -169,7 +169,9 @@ public enum VStack implements IVDoc {
             tar.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSpellAbility().getSourceCard());
+                    if (!spell.getStackDescription().startsWith("Morph ")) {
+                        CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSpellAbility().getSourceCard());
+                    }
                 }
             });
 
@@ -179,10 +181,10 @@ public enum VStack implements IVDoc {
              * 
              * Problem is described in TODO right above this.
              */
-            /*
-             * if (i == 0) {
-             * AllZone.getDisplay().setCard(spell.getSourceCard()); }
-             */
+            if (i == 0 && !spell.getStackDescription().startsWith("Morph ")) {
+                CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSourceCard()); 
+            }
+            
 
             parentCell.getBody().add(tar, "w 98%!");
             stackTARs.add(tar);
