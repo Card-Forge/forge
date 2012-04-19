@@ -326,7 +326,9 @@ public class CostDiscard extends CostPartWithList {
                     sb.append(" remaining.");
                 }
                 CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-                ButtonUtil.enableOnlyCancel();
+                if (nNeeded > 0) {
+                    ButtonUtil.enableOnlyCancel();
+                }
             }
 
             @Override
