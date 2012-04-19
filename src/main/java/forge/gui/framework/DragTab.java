@@ -60,6 +60,12 @@ public final class DragTab extends JLabel implements ILocalRepaint {
         return priority;
     }
 
+    // There should be no need for this method.
+    @SuppressWarnings("unused")
+    private void setPriority() {
+        // Intentionally empty.
+    }
+
     @Override
     public void repaintThis() {
         final Dimension d = DragTab.this.getSize();
