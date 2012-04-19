@@ -223,6 +223,12 @@ Fixes/Features:
 - Added support to ChangeZone AF for targeting spells on stack. Might need some tweaking.
 - Added counting of cards on the stack
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Better handling of ordering of continuous static abilities.
+- Lowercased the font file for the simpsons skin.
+- remove font
+- remove font
+- Re-add the lowercased font.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -232,6 +238,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 These new Avacyn Restored cards have been added to the new Avacyn Restored branch and are not yet available in the forge betas/snapshot builds.
 
+Angel of Glory's Rise
 Angel's Tomb
 Arcane Melee
 Avacyn, Angel of Hope
@@ -242,16 +249,19 @@ Craterhoof Behemoth
 Demonic Taskmaster
 Demonlord of Ashmouth
 Desolate Lighthouse
-Emancipation angel
+Druids' Repository
+Emancipation Angel
 Gisela, Blade of Goldnight
 Griselbrand
 Harvester of Souls
 Herald of War
 Howlgeist
 Latch Seeker
+Moonsilver Spear
 Reforge the Soul
 Restoration Angel
 Revenge of the Hunted
+Slayers' Stronghold
 Tamiyo, the Moon Sage
 Temporal Mastery
 Thunderous Wrath
@@ -287,6 +297,12 @@ Sage of Fables
 Spike Rogue
 Ghave, Guru of Spores
 Venser, Shaper Savant
+Volley of Boulders
+Plow Through Reito
+Pious Warrior
+Zombie Boa
+Zerapa Minotaur
+Xathrid Demon
 
 
 end
