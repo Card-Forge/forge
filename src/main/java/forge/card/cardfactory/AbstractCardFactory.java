@@ -165,7 +165,9 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         if (in.hasAlternateState()) {
             for (final CardCharactersticName state : in.getStates()) {
                 in.setState(state);
-                out.addAlternateState(state);
+                if (state == CardCharactersticName.Cloner) {
+                    out.addAlternateState(state);
+                }
                 out.setState(state);
                 CardFactoryUtil.copyCharacteristics(in, out);
             }
