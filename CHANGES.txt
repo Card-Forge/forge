@@ -22,6 +22,8 @@ Some people have noticed special quests do not have the start in play cards appe
 
 We hope to have this problem fixed at some point in the future.
 
+A bug with the transform and flip cards has been reported recently. This bug prevents you from casting these cards from your hand. It is currently being investigated, but has not been fixed yet.
+
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
 
