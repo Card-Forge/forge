@@ -15,14 +15,14 @@ If you do not like your efforts to personalize the battlefield display you can r
 
 A bug with the constructed mode has been discovered and has not yet been fixed. If you select "Fully random color deck" and activate the "Singleton Mode" checkbox Forge will freeze when you click on the Start button. This is now fixed and you can once again use singleton mode.
 
+A bug with the transform and flip cards has been reported recently. This bug prevents you from casting these cards from your hand. It is currently being investigated and a possible fix has been submitted to the SVN.
+
 
 A couple of problems with the quest mode were noticed some time ago and they have been discussed on the developer section of the forge forum.
 
 Some people have noticed special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries.
 
 We hope to have this problem fixed at some point in the future.
-
-A bug with the transform and flip cards has been reported recently. This bug prevents you from casting these cards from your hand. It is currently being investigated, but has not been fixed yet.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
