@@ -413,7 +413,12 @@ public class MagicStack extends MyObservable {
         else if (sp.isAbility()) {
             sb.append(" activated ");
         }
-        sb.append(sp.getSourceCard());
+        
+        if (sp.getStackDescription().startsWith("Morph ")) {
+            sb.append("Morph");
+        } else {
+            sb.append(sp.getSourceCard());
+        }
 
         if (sp.getTarget() != null) {
             sb.append(" targeting ");
