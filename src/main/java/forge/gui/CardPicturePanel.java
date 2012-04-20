@@ -115,10 +115,6 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
     public void setCard(final Card c) {
         this.card = c;
         this.inventoryItem = null;
-        if (!this.isShowing()) {
-            return;
-        }
-
         this.setImage();
     }
 
