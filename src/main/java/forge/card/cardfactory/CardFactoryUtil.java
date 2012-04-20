@@ -4822,7 +4822,7 @@ public class CardFactoryUtil {
             final String abString = "DB$ MustBlock | ValidTgts$ Creature.YouDontCtrl | "
                     + "TgtPrompt$ Select target creature defending player controls | SubAbility$ DBUntap";
             final String dbString = "DB$ Untap | Defined$ Targeted";
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, false);
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
             card.addTrigger(parsedTrigger);
             card.setSVar("ProvokeAbility", abString);
             card.setSVar("DBUntap", dbString);
