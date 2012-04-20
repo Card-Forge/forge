@@ -436,7 +436,7 @@ public final class SRearrangingUtil {
             return;
         }
 
-        throw new UnsupportedOperationException("For some reason, there's a problem filling the gap.");
+        throw new UnsupportedOperationException("Gap was not filled.");
     }
 
     /** Hides outer borders for components on edges,

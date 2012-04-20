@@ -79,10 +79,10 @@ public final class SIOUtil {
         writer.add(NEWLINE);
 
         for (final DragCell cell : cells) {
-            x0 = ((double) Math.round(((double) cell.getX() / (double) pnl.getWidth()) * 1000)) / 1000;
-            y0 = ((double) Math.round(((double) cell.getY() / (double) pnl.getHeight()) * 1000)) / 1000;
-            w0 = ((double) Math.round(((double) cell.getW() / (double) pnl.getWidth()) * 1000)) / 1000;
-            h0 = ((double) Math.round(((double) cell.getH() / (double) pnl.getHeight()) * 1000)) / 1000;
+            x0 = ((double) Math.round(((double) cell.getX() / (double) pnl.getWidth()) * 100000)) / 100000;
+            y0 = ((double) Math.round(((double) cell.getY() / (double) pnl.getHeight()) * 100000)) / 100000;
+            w0 = ((double) Math.round(((double) cell.getW() / (double) pnl.getWidth()) * 100000)) / 100000;
+            h0 = ((double) Math.round(((double) cell.getH() / (double) pnl.getHeight()) * 100000)) / 100000;
 
             //cell.setRoughBounds(x, y, w, h);
 
