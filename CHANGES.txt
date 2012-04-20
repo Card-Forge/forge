@@ -231,6 +231,23 @@ Fixes/Features:
 - remove font
 - Re-add the lowercased font.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Minor update to DragTab.
+- The CardDetail panel will now switch to cards hitting the stack again. Morph sources are no longer shown.
+- The Game log will no longer reveal the name of Morphs.
+- Added a fluff piece to the changes.txt file.
+- Fixed ChangeZone triggers not working on cards moving to hand or library themselves.
+- Update dependency. Add package docs
+- Quick fix for the double faced cards not castable problem.
+- Fixed Arcane Melee (AVR).
+- Added SVar:EquipMe:Once to Training Drone.
+- Fixed the AI playing useless Curse Pump spells.
+- Edit.
+- Fixed possibility to get stuck paying a discard cost of 0.
+- Updated some SVars.
+- Fixed Sarcomite Myr ability cost.
+- Fixed card detail / pic mouseover bug in match UI.
+- Fixed resizing bug in drag cell layout.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -242,11 +259,13 @@ These new Avacyn Restored cards have been added to the new Avacyn Restored branc
 
 Angel of Glory's Rise
 Angel's Tomb
+Appetite for Brains
 Arcane Melee
 Avacyn, Angel of Hope
 Banishing Stroke
 Cathars' Crusade
 Cloudshift
+Commander's Authority
 Craterhoof Behemoth
 Demonic Taskmaster
 Demonlord of Ashmouth
@@ -258,7 +277,9 @@ Griselbrand
 Harvester of Souls
 Herald of War
 Howlgeist
+Human Frailty
 Latch Seeker
+Misthollow Griffin
 Moonsilver Spear
 Reforge the Soul
 Restoration Angel
