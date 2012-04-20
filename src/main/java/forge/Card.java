@@ -728,7 +728,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setTriggers(final List<Trigger> trigs) {
         final ArrayList<Trigger> copyList = new ArrayList<Trigger>();
         for (final Trigger t : trigs) {
-            if (t.getIsIntrinsic()) {
+            if (t.isIntrinsic()) {
                 final Trigger newtrig = t.getCopy();
                 newtrig.setHostCard(this);
                 copyList.add(newtrig);

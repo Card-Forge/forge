@@ -189,25 +189,6 @@ public abstract class Trigger extends TriggerReplacementBase {
     private List<PhaseType> validPhases;
 
     /**
-     * Gets the checks if is intrinsic.
-     * 
-     * @return the checks if is intrinsic
-     */
-    public final boolean getIsIntrinsic() {
-        return this.isIntrinsic();
-    }
-
-    /**
-     * Sets the checks if is intrinsic.
-     * 
-     * @param b
-     *            the new checks if is intrinsic
-     */
-    public final void setIsIntrinsic(final boolean b) {
-        this.setIntrinsic(b);
-    }
-
-    /**
      * <p>
      * Constructor for Trigger.
      * </p>

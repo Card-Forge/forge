@@ -387,7 +387,7 @@ public class TriggerHandler {
         if (!regtrig.requirementsCheck()) {
             return false; // Conditions aren't right.
         }
-        if (regtrig.getHostCard().isFaceDown() && regtrig.getIsIntrinsic()) {
+        if (regtrig.getHostCard().isFaceDown() && regtrig.isIntrinsic()) {
             return false; // Morphed cards only have pumped triggers go off.
         }
         if (regtrig instanceof TriggerAlways) {
