@@ -11410,6 +11410,7 @@ src/main/java/forge/card/abilityfactory/AbilityFactory.java svneol=native#text/p
 src/main/java/forge/card/abilityfactory/AbilityFactoryAlterLife.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryAnimate.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryAttach.java svneol=native#text/plain
+src/main/java/forge/card/abilityfactory/AbilityFactoryBond.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryChangeZone.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCharm.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryChoose.java svneol=native#text/plain

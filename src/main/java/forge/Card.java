@@ -234,6 +234,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     // Only used with Replicate
     private int abilityUsed;
 
+    // Soulbond pairing card
+    private Card pairedWith = null;
+
     /**
      * Instantiates a new card.
      */
@@ -2085,6 +2088,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.append("\r\n");
         }
 
+        if (this.pairedWith != null) {
+            sb.append("\r\n \r\nPaired With: ").append(this.pairedWith);
+            sb.append("\r\n");
+        }
+
         if (this.characteristicsMap.get(CardCharactersticName.Cloner) != null) {
             sb.append("\r\nCloned by: ").append(this.characteristicsMap.get(CardCharactersticName.Cloner).getName()).append(" (")
                     .append(this.getUniqueNumber()).append(")");
@@ -2260,6 +2268,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                         sb.append("\r\n");
                     }
                     sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)");
+                } else if (keyword.get(i).startsWith("Soulbond")) {
+                    sbLong.append(keyword.get(i));
+                    sbLong.append(" (You may pair this creature ");
+                    sbLong.append("with another unpaired creature when either ");
+                    sbLong.append("enters the battlefield. They remain paired for ");
+                    sbLong.append("as long as you control both of them)");
                 } else {
                     if ((i != 0) && (sb.length() != 0)) {
                         sb.append(", ");
@@ -6556,6 +6570,20 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.hauntedBy.contains(source)) {
                 return false;
             }
+        } else if (property.contains("Paired")) {
+            if (property.contains("With")) { // PairedWith
+                if (!this.isPaired() || this.pairedWith != source) {
+                    return false;
+                }
+            } else if (property.startsWith("Not")) {  // NotPaired
+                if (this.isPaired()) {
+                    return false;
+                }
+            } else { // Paired
+                if (!this.isPaired()) {
+                    return false;
+                }
+            }
         } else if (property.startsWith("Above")) { // "Are Above" Source
             final CardList list = this.getOwner().getCardsIn(ZoneType.Graveyard);
             if (!list.getAbove(source, this)) {
@@ -8401,6 +8429,36 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void removeHauntedBy(final Card c) {
         this.hauntedBy.remove(c);
+    }
+
+    /**
+     * Gets the pairing.
+     * 
+     * @return the pairedWith
+     */
+    public final Card getPairedWith() {
+        return this.pairedWith;
+    }
+
+    /**
+     * Sets the pairing.
+     * 
+     * @param c
+     *            the new pairedWith
+     */
+    public final void setPairedWith(final Card c) {
+        this.pairedWith = c;
+    }
+
+    /**
+     * <p>
+     * isPaired.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isPaired() {
+        return this.pairedWith != null;
     }
 
     /**

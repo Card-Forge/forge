@@ -217,6 +217,11 @@ public class GameAction {
             AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
             copied.setState(CardCharactersticName.Original);
             AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
+            // Soulbond unpairing
+            if (c.isPaired()) {
+                c.getPairedWith().setPairedWith(null);
+                c.setPairedWith(null);
+            }
         }
 
         copied.setTimestamp(AllZone.getNextTimestamp());
@@ -1063,6 +1068,14 @@ public class GameAction {
                         this.destroy(c);
                         AllZone.getCombat().removeFromCombat(c);
                         checkAgain = true;
+                    }
+                    // Soulbond unpairing
+                    if (c.isPaired()) {
+                        Card partner = c.getPairedWith();
+                        if (!partner.isCreature() || c.getController() != partner.getController()) {
+                            c.setPairedWith(null);
+                            partner.setPairedWith(null);
+                        }
                     }
                 }
 

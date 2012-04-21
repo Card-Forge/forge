@@ -4881,6 +4881,29 @@ public class CardFactoryUtil {
             card.addSpellAbility(newSA);
         }
 
+        if (card.hasKeyword("Soulbond")) {
+            // Setup ETB trigger for card with Soulbond keyword
+            final String actualTriggerSelf = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+                    + "ValidCard$ Card.Self | Execute$ TrigBondOther | OptionalDecider$ You | "
+                    + "IsPresent$ Creature.Other+YouCtrl+NotPaired | Secondary$ True | "
+                    + "TriggerDescription$ When CARDNAME enters the battlefield, "
+                    + "you may pair CARDNAME with another unpaired creature you control";
+            final String abStringSelf = "AB$ Bond | Cost$ 0 | Defined$ Self | ValidCards$ Creature.Other+YouCtrl+NotPaired";
+            final Trigger parsedTriggerSelf = TriggerHandler.parseTrigger(actualTriggerSelf, card, true);
+            card.addTrigger(parsedTriggerSelf);
+            card.setSVar("TrigBondOther", abStringSelf);
+            // Setup ETB trigger for other creatures you control
+            final String actualTriggerOther = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+                    + "ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | "
+                    + "Execute$ TrigBondSelf | IsPresent$ Creature.Self+NotPaired | Secondary$ True | "
+                    + " TriggerDescription$ When another unpaired creature you control enters the battlefield, "
+                    + "you may pair it with CARDNAME";
+            final String abStringOther = "AB$ Bond | Cost$ 0 | Defined$ TriggeredCard | ValidCards$ Creature.Self+NotPaired";
+            final Trigger parsedTriggerOther = TriggerHandler.parseTrigger(actualTriggerOther, card, true);
+            card.addTrigger(parsedTriggerOther);
+            card.setSVar("TrigBondSelf", abStringOther);
+        }
+
         return card;
     }
 
