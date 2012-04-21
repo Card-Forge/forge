@@ -140,10 +140,10 @@ Excellent at blocking the nastiest of critters!</desc>
       <desc>With its razor sharp teeth, this monster is extremely dangerous and hard to track.</desc>
       <levels>
         <level value="0" stats="You do not own a crocodile" cost="0" cardfile="null" nextLevel="Purchase Crocodile"/>
-        <level value="1" pic="b_1_1_crocodile_pet" stats="1/1 B" cost="250" cardFile="crocodile_pet_l1.txt" nextLevel="Crocodile hides, not able to block or be tracked when its not your turn." />
-        <level value="2" pic="b_2_1_crocodile_pet" stats="2/1 B Hides" cost="350" cardFile="crocodile_pet_l2.txt" nextLevel="Improve the durability of your Crocodile" />
-        <level value="3" pic="b_2_2_crocodile_pet" stats="2/2 B Hides" cost="450" cardFile="crocodile_pet_l3.txt" nextLevel="Crocodiles teeth become razor sharp, being a major danger for anything in its way"/>
-        <level value="4" pic="b_2_2_crocodile_pet_deathtouch" stats="2/2 B Hides Deathtouch" cost="750" cardFile="crocodile_pet_l4.txt" nextLevel="You cannot train your crocodile any further"/>
+        <level value="1" pic="petcrocodile_lvl1" stats="1/1 B" cost="250" cardFile="crocodile_pet_l1.txt" nextLevel="Crocodile hides, not able to block or be tracked when its not your turn." />
+        <level value="2" pic="petcrocodile_lvl2" stats="2/1 B Hides" cost="350" cardFile="crocodile_pet_l2.txt" nextLevel="Improve the durability of your Crocodile" />
+        <level value="3" pic="petcrocodile_lvl3" stats="2/2 B Hides" cost="450" cardFile="crocodile_pet_l3.txt" nextLevel="Crocodiles teeth become razor sharp, being a major danger for anything in its way"/>
+        <level value="4" pic="petcrocodile_lvl4" stats="2/2 B Hides Deathtouch" cost="750" cardFile="crocodile_pet_l4.txt" nextLevel="You cannot train your crocodile any further"/>
       </levels>
     </pet>
 	<pet name="Ape" slot="1" saveFileKey="Ape" maxLevel="4">
