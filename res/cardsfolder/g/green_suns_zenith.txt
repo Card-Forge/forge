@@ -2,7 +2,7 @@ Name:Green Sun's Zenith
 ManaCost:X G
 Types:Sorcery
 Text:no text
-A:SP$ ChangeZone | Cost$ X G | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Green+cmcLEX | ChangeNum$ 1 | SubAbility$ DBShuffle | StackDescription$ Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library. | SpellDescription$ Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library.
+A:SP$ ChangeZone | Cost$ X G | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Green+cmcLEX | ChangeNum$ 1 | SubAbility$ DBShuffle | StackDescription$ Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library. | SpellDescription$ Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library. Shuffle CARDNAME into its owner's library.
 SVar:X:Count$xPaid
 SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True
 SVar:Rarity:Rare
