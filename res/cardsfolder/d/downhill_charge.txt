@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Instant
 Text:no text
 A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is the number of Mountains you control.
-A:SP$ Pump | Cost$ Sac<1/Mountain> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ You may sacrifice a Mountain rather than pay CARDNAME's mana cost.
+SVar:AltCost:Cost$ Sac<1/Mountain> | Description$ You may sacrifice a Mountain rather than pay CARDNAME's mana cost.
 SVar:X:Count$TypeYouCtrl.Mountain
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/downhill_charge.jpg

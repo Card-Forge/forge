@@ -36,6 +36,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.CombatUtil;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -285,22 +286,26 @@ public class AbilityFactoryPreventDamage {
                     }
                 }
             } else {
-                if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                PhaseHandler handler = Singletons.getModel().getGameState().getPhaseHandler();
+                if (handler.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     boolean flag = false;
                     for (final Object o : objects) {
                         if (o instanceof Card) {
                             final Card c = (Card) o;
                             flag |= CombatUtil.combatantWouldBeDestroyed(c);
                         } else if (o instanceof Player) {
+                            // Don't need to worry about Combat Damage during AI's turn
                             final Player p = (Player) o;
-                            flag |= (p.isComputer() && ((CombatUtil.wouldLoseLife(AllZone.getCombat()) && sa
-                                    .isAbility()) || CombatUtil.lifeInDanger(AllZone.getCombat())));
+                            if (!handler.isPlayerTurn(p)) {
+                                flag |= (p.isComputer() && ((CombatUtil.wouldLoseLife(AllZone.getCombat()) && sa
+                                        .isAbility()) || CombatUtil.lifeInDanger(AllZone.getCombat())));
+                            }
                         }
                     }
 
                     chance = flag;
                 } else { // if nothing on the stack, and it's not declare
-                         // blockers. no need to regen
+                         // blockers. no need to prevent
                     return false;
                 }
             }
