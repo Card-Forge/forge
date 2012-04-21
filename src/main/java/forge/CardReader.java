@@ -501,11 +501,12 @@ public class CardReader implements Runnable {
             } else if (line.startsWith("Colors:")) {
                 final String value = line.substring("Colors:".length());
                 final ArrayList<CardColor> newCols = new ArrayList<CardColor>();
+                final CardColor newCol = new CardColor(card);
                 for (final String col : value.split(",")) {
-                    final CardColor newCol = new CardColor(card);
                     newCol.addToCardColor(col);
-                    newCols.add(newCol);
                 }
+                newCol.fixColorless();
+                newCols.add(newCol);
 
                 card.setColor(newCols);
                 card.setCardColorsOverridden(true);

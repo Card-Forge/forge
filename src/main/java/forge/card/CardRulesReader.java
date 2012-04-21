@@ -125,6 +125,12 @@ public class CardRulesReader {
         } else if (line.equals("ALTERNATE")) {
             this.characteristics[1] = new CardRuleCharacteristics();
             this.curCharacteristics = 1;
+        } else if (line.startsWith("Colors:")) {
+            // This is forge.card.CardColor not forge.CardColor.
+            // Why do we have two classes with the same name?
+            final String value = line.substring("Colors:".length());
+            CardColor newCol = CardColor.fromNames(value.split(","));
+            this.characteristics[this.curCharacteristics].setColor(newCol);
         }
 
     }
