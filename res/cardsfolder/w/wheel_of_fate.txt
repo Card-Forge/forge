@@ -2,7 +2,7 @@ Name:Wheel of Fate
 ManaCost:no cost
 Types:Sorcery
 Text:no text
-K:CARDNAME is red.
+Colors:red
 K:Suspend:4:1 R
 A:SP$ Discard | Cost$ 0 | Mode$ Hand | Defined$ Each | SubAbility$ DBDraw | SpellDescription$ Each player discards his or her hand, then draws seven cards.
 SVar:DBDraw:DB$Draw | Defined$ Each | NumCards$ 7

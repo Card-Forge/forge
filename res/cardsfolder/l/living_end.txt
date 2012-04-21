@@ -2,7 +2,7 @@ Name:Living End
 ManaCost:no cost
 Types:Sorcery
 Text:no text
-K:CARDNAME is black.
+Colors:black
 K:Suspend:3:2 B B
 A:SP$ ChangeZoneAll | Cost$ 0 | ChangeType$ Creature | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ SacAll | SpellDescription$ Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
 SVar:SacAll:DB$ SacrificeAll | ValidCards$ Creature | SubAbility$ ReturnAll

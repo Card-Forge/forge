@@ -2,7 +2,7 @@ Name:Summoner's Pact
 ManaCost:0
 Types:Instant
 Text:no text
-K:CARDNAME is green.
+Colors:green
 A:SP$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Green+YouOwn | ChangeNum$ 1 | SubAbility$ DBShuffle | SpellDescription$ Search your library for a green creature card, reveal it, and put it into your hand. Then shuffle your library. At the beginning of your next upkeep, pay 2 G G. If you don't, you lose the game.
 SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True | SubAbility$ DBDelTrig
 SVar:DBDelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseGame | TriggerDescription$ At the beginning of your next upkeep, pay 2 G G. If you don't, you lose the game.

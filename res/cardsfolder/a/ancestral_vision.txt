@@ -2,7 +2,7 @@ Name:Ancestral Vision
 ManaCost:no cost
 Types:Sorcery
 Text:no text
-K:CARDNAME is blue.
+Colors:blue
 K:Suspend:4:U
 A:SP$ Draw | Cost$ 0 | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws three cards. | ActivationLimit$ 0
 SVar:Rarity:Rare

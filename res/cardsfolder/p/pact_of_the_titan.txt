@@ -2,7 +2,7 @@ Name:Pact of the Titan
 ManaCost:0
 Types:Instant
 Text:no text
-K:CARDNAME is red.
+Colors:red
 A:SP$ Token | Cost$ 0| TokenAmount$ 1 | TokenName$ Giant | TokenTypes$ Creature,Giant | TokenOwner$ You | TokenColors$ Red | TokenPower$ 4 | TokenToughness$ 4 | SubAbility$ DBDelTrig | SpellDescription$ Put a 4/4 red Giant creature token onto the battlefield. At the beginning of your next upkeep, pay 4 R. If you don't, you lose the game.
 SVar:DBDelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseGame | TriggerDescription$ At the beginning of your next upkeep, pay 4 R. If you don't, you lose the game.
 SVar:TrigLoseGame:SP$LosesGame | Cost$ 0 | UnlessCost$ 4 R | UnlessPayer$ You | Defined$ You
