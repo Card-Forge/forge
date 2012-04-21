@@ -248,6 +248,12 @@ Fixes/Features:
 - Fixed card detail / pic mouseover bug in match UI.
 - Fixed resizing bug in drag cell layout.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Provoke keyword.
+- Removed duplicate getter/setter for isIntrinsic variable.
+- Vodalian Illusionst thought it was part of Teferi's Honor Guard
+- Fixed SVar:RemAIDeck:True in Quillmane Baku.
+- added Soulbond mechanic
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -261,6 +267,7 @@ Angel of Glory's Rise
 Angel's Tomb
 Appetite for Brains
 Arcane Melee
+Archwing Dragon
 Avacyn, Angel of Hope
 Banishing Stroke
 Cathars' Crusade
@@ -278,17 +285,25 @@ Harvester of Souls
 Herald of War
 Howlgeist
 Human Frailty
+Joint Assault
 Latch Seeker
+Lightning Mauler
 Misthollow Griffin
 Moonsilver Spear
 Reforge the Soul
 Restoration Angel
 Revenge of the Hunted
+Silverblade Paladin
+Skirk Drill Sergeant
 Slayers' Stronghold
+Snapping Thragg
+Soul of the Harvest
 Tamiyo, the Moon Sage
 Temporal Mastery
 Thunderous Wrath
 Tibalt, the Fiend-Blooded
+Wingcrafter
+Wolfir Avenger
 Zealous Conscripts
 
 
