@@ -7,15 +7,19 @@ import forge.CardCharactersticName;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Command;
+import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
+import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
 import forge.game.GameLossReason;
+import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
@@ -320,6 +324,70 @@ class CardFactoryEnchantments {
             sb.append(cardName).append(" - enters the battlefield as a copy of selected card.");
             copy.setStackDescription(sb.toString());
             copy.setBeforePayMana(runtime);
+        } // *************** END ************ END **************************
+
+        // *************** START *********** START **************************
+        else if (cardName.equals("Sylvan Library")) {
+
+            final Ability ability = new Ability(card, "") {
+                @Override
+                public void resolve() {
+                    final Player player = card.getController();
+                    if (player.isHuman()) {
+                        final String cardQuestion = "Pay 4 life and keep in hand?";
+                        player.drawCards(2);
+                        for (int i = 0; i < 2; i++) {
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append(card).append(" - Select a card drawn this turn: ").append(2 - i).append(" of 2");
+                            final String prompt = sb.toString();
+                            AllZone.getInputControl().setInput(new Input() {
+                                private static final long serialVersionUID = -3389565833121544797L;
+
+                                @Override
+                                public void showMessage() {
+                                    if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
+                                        this.stop();
+                                    }
+                                    CMatchUI.SINGLETON_INSTANCE.showMessage(prompt);
+                                    ButtonUtil.disableAll();
+                                }
+
+                                @Override
+                                public void selectCard(final Card card, final PlayerZone zone) {
+                                    if (zone.is(ZoneType.Hand) && card.getDrawnThisTurn()) {
+                                        if (player.canPayLife(4) && GameActionUtil.showYesNoDialog(card, cardQuestion)) {
+                                            player.payLife(4, card);
+                                            // card stays in hand
+                                        } else {
+                                            Singletons.getModel().getGameAction().moveToLibrary(card);
+                                        }
+                                        this.stop();
+                                    }
+                                }
+                            }); // end Input
+                        }
+                    } else {
+                        // Computer, but he's too stupid to play this
+                    }
+                } // resolve
+            }; // Ability
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append("At the beginning of your draw step, you may draw two additional cards. ");
+            sb.append("If you do, choose two cards in your hand drawn this turn. For each of those cards, ");
+            sb.append("pay 4 life or put the card on top of your library.");
+            ability.setStackDescription(sb.toString());
+
+            final StringBuilder sbTrg = new StringBuilder();
+            sbTrg.append("Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | ");
+            sbTrg.append("TriggerZones$ Battlefield | TriggerDescription$ At the beginning of ");
+            sbTrg.append("your draw step, you may draw two additional cards. If you do, choose two ");
+            sbTrg.append("cards in your hand drawn this turn. For each of those cards, ");
+            sbTrg.append("pay 4 life or put the card on top of your library.");
+            final Trigger drawStepTrigger = TriggerHandler.parseTrigger(sbTrg.toString(), card, true);
+
+            drawStepTrigger.setOverridingAbility(ability);
+            card.addTrigger(drawStepTrigger);
         } // *************** END ************ END **************************
 
         return card;

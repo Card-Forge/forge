@@ -1,7 +1,7 @@
 Name:Sylvan Library
 ManaCost:1 G
 Types:Enchantment
-Text:At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
+Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_library.jpg
