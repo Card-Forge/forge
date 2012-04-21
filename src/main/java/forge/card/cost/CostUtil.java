@@ -188,7 +188,7 @@ public class CostUtil {
                 if (amount == null) {
                     amount = currentNum;
                 }
-                final double chance = percent * (currentNum / part.convertAmount());
+                final double chance = percent * (currentNum / amount);
                 if (chance <= CostUtil.r.nextFloat()) {
                     return false;
                 }
