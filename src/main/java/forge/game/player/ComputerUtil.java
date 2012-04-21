@@ -1183,7 +1183,7 @@ public class ComputerUtil {
 
         final CardList lands = computer.getCardsIn(ZoneType.Graveyard);
         for (final Card crd : lands) {
-            if (crd.isLand() && crd.hasStartOfKeyword("May be played")) {
+            if (crd.isLand() && crd.hasKeyword("May be played")) {
                 landList.add(crd);
             }
         }
