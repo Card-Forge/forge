@@ -710,7 +710,13 @@ public final class AbilityFactoryProtection {
                 JOptionPane.showMessageDialog(null, "Computer chooses " + gains, "" + host, JOptionPane.PLAIN_MESSAGE);
             }
         } else {
-            gains.addAll(choices);
+            if (params.get("Gains").equals("ChosenColor")) {
+                for (final String color : host.getChosenColor()) {
+                    gains.add(color.toLowerCase());
+                }
+            } else {
+                gains.addAll(choices);
+            }
         }
 
         ArrayList<Card> tgtCards;

@@ -1460,6 +1460,7 @@ res/cardsfolder/c/chittering_rats.txt svneol=native#text/plain
 res/cardsfolder/c/cho_arrim_bruiser.txt svneol=native#text/plain
 res/cardsfolder/c/cho_arrim_legate.txt -text
 res/cardsfolder/c/cho_manno_revolutionary.txt svneol=native#text/plain
+res/cardsfolder/c/cho_mannos_blessing.txt -text
 res/cardsfolder/c/choke.txt svneol=native#text/plain
 res/cardsfolder/c/choking_fumes.txt svneol=native#text/plain
 res/cardsfolder/c/choking_sands.txt svneol=native#text/plain
@@ -3147,6 +3148,7 @@ res/cardsfolder/f/flight_spellbomb.txt svneol=native#text/plain
 res/cardsfolder/f/fling.txt svneol=native#text/plain
 res/cardsfolder/f/flint_golem.txt svneol=native#text/plain
 res/cardsfolder/f/floating_dream_zubera.txt svneol=native#text/plain
+res/cardsfolder/f/floating_shield.txt -text
 res/cardsfolder/f/flood.txt svneol=native#text/plain
 res/cardsfolder/f/flood_plain.txt svneol=native#text/plain
 res/cardsfolder/f/floodbringer.txt svneol=native#text/plain
@@ -6485,6 +6487,7 @@ res/cardsfolder/p/pendrell_mists.txt svneol=native#text/plain
 res/cardsfolder/p/pennon_blade.txt svneol=native#text/plain
 res/cardsfolder/p/pentad_prism.txt svneol=native#text/plain
 res/cardsfolder/p/pentarch_paladin.txt -text
+res/cardsfolder/p/pentarch_ward.txt -text
 res/cardsfolder/p/pentavus.txt svneol=native#text/plain
 res/cardsfolder/p/penumbra_bobcat.txt svneol=native#text/plain
 res/cardsfolder/p/penumbra_kavu.txt svneol=native#text/plain
