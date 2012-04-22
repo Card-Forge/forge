@@ -678,6 +678,10 @@ public class CombatUtil {
             }
         }
 
+        if (attacker.hasKeyword("CARDNAME can't be blocked except by creatures with defender.") && !blocker.hasKeyword("Defender")) {
+            return false;
+        }
+
         if (attacker.hasKeyword("Horsemanship")) {
             if (!blocker.hasKeyword("Horsemanship")) {
                 return false;

@@ -4409,6 +4409,7 @@ res/cardsfolder/i/infested_roothold.txt svneol=native#text/plain
 res/cardsfolder/i/infiltrate.txt svneol=native#text/plain
 res/cardsfolder/i/infiltration_lens.txt svneol=native#text/plain
 res/cardsfolder/i/infiltrator_il_kor.txt svneol=native#text/plain
+res/cardsfolder/i/infiltrators_magemark.txt -text
 res/cardsfolder/i/infinite_hourglass.txt -text
 res/cardsfolder/i/inflame.txt svneol=native#text/plain
 res/cardsfolder/i/information_dealer.txt svneol=native#text/plain
