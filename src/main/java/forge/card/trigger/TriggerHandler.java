@@ -307,9 +307,10 @@ public class TriggerHandler {
         // AP
         allCards = playerAP.getCardsIn(ZoneType.StaticAbilitiesSourceZones);
         allCards.addAll(AllZoneUtil.getCardsIn(ZoneType.Stack).getController(playerAP));
-        if (runParams.containsKey("Card")) {
+        if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
+            String type = (String) runParams.get("Destination");
             Card card = (Card) runParams.get("Card");
-            if (!allCards.contains(card)) {
+            if ((type.equals("Hand") || type.equals("Library")) && !allCards.contains(card)) {
                 allCards.add(card);
             }
         }
