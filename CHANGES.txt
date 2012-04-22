@@ -254,6 +254,19 @@ Fixes/Features:
 - Fixed SVar:RemAIDeck:True in Quillmane Baku.
 - added Soulbond mechanic
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- The new art for the crocodile pet is in.
+- Added spell description to Tribal Unity.
+- Fixed Terminus.
+- Changing K:CARDNAME is <color> to Colors:<color>{,<color>,...}
+- CardRulesReader now parses Colors: fixing a bug with the DeckEditor
+- Fixed description of Green Sun's Zenith.
+- Small AI improvement for PreventDamage
+- Small tweaks to Downhill Charge and Keeper of the Mind
+- Fixed Sylvan Library.
+- Fixed a bug with "May be played by your opponent".
+- Fixed a possible NPE in checkRemoveCounterCost.
+- Fixed some changeZone triggers triggering twice.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -274,12 +287,15 @@ Cathars' Crusade
 Cloudshift
 Commander's Authority
 Craterhoof Behemoth
+Defy Death
 Demonic Taskmaster
 Demonlord of Ashmouth
 Desolate Lighthouse
 Druids' Repository
 Emancipation Angel
+Exquisite Blood
 Gisela, Blade of Goldnight
+Goldnight Redeemer
 Griselbrand
 Harvester of Souls
 Herald of War
@@ -293,6 +309,7 @@ Moonsilver Spear
 Reforge the Soul
 Restoration Angel
 Revenge of the Hunted
+Sandals of Abdallah
 Silverblade Paladin
 Skirk Drill Sergeant
 Slayers' Stronghold
@@ -300,10 +317,12 @@ Snapping Thragg
 Soul of the Harvest
 Tamiyo, the Moon Sage
 Temporal Mastery
+Terminus
 Thunderous Wrath
 Tibalt, the Fiend-Blooded
 Wingcrafter
 Wolfir Avenger
+Wolfir Silverheart
 Zealous Conscripts
 
 
