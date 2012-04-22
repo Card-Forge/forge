@@ -869,6 +869,17 @@ public class MagicStack extends MyObservable {
         return this.getStack().size();
     }
 
+    /**
+     * <p>
+     * isEmpty.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isEmpty() {
+        return this.getStack().size() == 0;
+    }
+
     // Push should only be used by add.
     /**
      * <p>
@@ -1122,6 +1133,7 @@ public class MagicStack extends MyObservable {
 
         // TODO: change to use forge.view.FView?
         GuiDisplayUtil.updateGUI();
+        this.updateObservers();
 
         // TODO: this is a huge hack. Why is this necessary?
         // hostCard in AF is not the same object that's on the battlefield
@@ -1214,9 +1226,13 @@ public class MagicStack extends MyObservable {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility pop() {
-        final SpellAbility sp = this.getStack().pop().getSpellAbility();
+        final SpellAbilityStackInstance si = this.getStack().pop();
+        final SpellAbility sp = si.getSpellAbility();
         this.decrementSplitSecond(sp);
-        this.updateObservers();
+		// NOTE (12/04/22): Update Observers here causes multi-targeting bug
+		// We Update Observers after the Stack Finishes Resolving
+		// No need to do it sooner
+        //this.updateObservers();
         return sp;
     }
 
