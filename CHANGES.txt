@@ -22,7 +22,7 @@ A couple of problems with the quest mode were noticed some time ago and they hav
 
 Some people have noticed special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries.
 
-We hope to have this problem fixed at some point in the future.
+We hope to have this problem fixed at some point in the future. We have a fix to the bug that affected the special quests. This should allow the start in play cards to appear at the start of a match.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
