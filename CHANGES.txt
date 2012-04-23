@@ -267,6 +267,11 @@ Fixes/Features:
 - Fixed a possible NPE in checkRemoveCounterCost.
 - Fixed some changeZone triggers triggering twice.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed the effect description for Sandals of Abdallah so that the original sandals is referenced, not the effect. Also made the svar names unique.
+- Re-fixing Multi-targeting bug caused by Updating Observers in a weird spot
+- Fixed concurrent list modification bug in PlayArea.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -283,6 +288,7 @@ Arcane Melee
 Archwing Dragon
 Avacyn, Angel of Hope
 Banishing Stroke
+Builder's Blessing
 Cathars' Crusade
 Cloudshift
 Commander's Authority
@@ -291,6 +297,7 @@ Defy Death
 Demonic Taskmaster
 Demonlord of Ashmouth
 Desolate Lighthouse
+Drafna's Restoration
 Druids' Repository
 Emancipation Angel
 Exquisite Blood
@@ -306,6 +313,7 @@ Latch Seeker
 Lightning Mauler
 Misthollow Griffin
 Moonsilver Spear
+Moorland Inquisitor
 Reforge the Soul
 Restoration Angel
 Revenge of the Hunted
@@ -318,6 +326,7 @@ Soul of the Harvest
 Tamiyo, the Moon Sage
 Temporal Mastery
 Terminus
+Thraben Valiant
 Thunderous Wrath
 Tibalt, the Fiend-Blooded
 Wingcrafter
@@ -360,6 +369,13 @@ Pious Warrior
 Zombie Boa
 Zerapa Minotaur
 Xathrid Demon
+Charisma
+Infiltrator's Magemark
+Cho-Manno's Blessing
+Floating Shield
+Pentarch Ward
+Wormfang Crab
+Woebringer Demon
 
 
 end
