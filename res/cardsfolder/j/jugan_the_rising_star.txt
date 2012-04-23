@@ -5,10 +5,10 @@ Text:no text
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may distribute five +1/+1 counters among any number of target creatures.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ SVar=PutCounter2
-SVar:PutCounter2:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (2) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ SVar=PutCounter3
-SVar:PutCounter3:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (3) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ SVar=PutCounter4
-SVar:PutCounter4:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (4) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ SVar=PutCounter5
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter2
+SVar:PutCounter2:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (2) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter3
+SVar:PutCounter3:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (3) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter4
+SVar:PutCounter4:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (4) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter5
 SVar:PutCounter5:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (5) | CounterType$ P1P1 | CounterNum$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jugan_the_rising_star.jpg
