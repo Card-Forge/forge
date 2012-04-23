@@ -23,6 +23,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JScrollPane;
@@ -393,8 +394,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      */
     private void fillRow(final CardStackRow sourceRow, final List<CardStackRow> rows, final CardStackRow row) {
         int rowWidth = row.getWidth();
-        while (!sourceRow.isEmpty()) {
-            final CardStack stack = sourceRow.get(0);
+
+        final Iterator itr = sourceRow.iterator();
+
+        while (itr.hasNext()) {
+            final CardStack stack = (CardStack) itr.next();
+
             rowWidth += stack.getWidth();
             if (rowWidth > this.playAreaWidth) {
                 break;
@@ -403,7 +408,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     && (((this.getRowsHeight(rows) - row.getHeight()) + stack.getHeight()) > this.playAreaHeight)) {
                 break;
             }
-            row.add(sourceRow.remove(0));
+            row.add(stack);
+            itr.remove();
         }
     }
 
