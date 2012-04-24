@@ -368,7 +368,7 @@ public class ComputerUtilAttack {
 
         if ((CombatUtil.sumDamageIfUnblocked(remainingAttackers, human) >= human.getLife())
                 && AllZone.getHumanPlayer().canLoseLife()
-                && !((human.cantLoseForZeroOrLessLife() || human.cantLose() || computer.cantWin()) && (human.getLife() < 1))) {
+                && !((human.cantLoseForZeroOrLessLife() || computer.cantWin()) && (human.getLife() < 1))) {
             return true;
         }
 

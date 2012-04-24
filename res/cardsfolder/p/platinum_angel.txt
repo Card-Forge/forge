@@ -4,8 +4,8 @@ Types:Artifact Creature Angel
 Text:no text
 PT:4/4
 K:Flying
-K:You can't lose the game.
-K:Your opponents can't win the game.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game.
+S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't win the game. | Description$ Opponents can't win the game.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/platinum_angel.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/212.jpg

@@ -2,7 +2,7 @@ Name:Transcendence
 ManaCost:3 W W W
 Types:Enchantment
 Text:no text
-K:You don't lose the game for having 0 or less life.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ You don't lose the game for having 0 or less life. | Description$ You don't lose the game for having 0 or less life.
 T:Mode$ Always | LifeTotal$ You | LifeAmount$ GE20 | TriggerZones$ Battlefield | Execute$ TrigLoseGame | TriggerDescription$ When you have 20 or more life, you lose the game.
 T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLifeGain | TriggerDescription$ Whenever you lose life, you gain 2 life for each 1 life you lost. (Damage dealt to you causes you to lose life.)
 SVar:TrigLoseGame:AB$ LosesGame | Cost$ 0 | Defined$ You

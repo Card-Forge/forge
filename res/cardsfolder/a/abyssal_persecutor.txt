@@ -5,8 +5,8 @@ Text:no text
 PT:6/6
 K:Flying
 K:Trample
-K:You can't win the game.
-K:Your opponents can't lose the game.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't win the game. | Description$ You can't win the game.
+S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't lose the game. | Description$ Your opponents can't lose the game.
 SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_persecutor.jpg

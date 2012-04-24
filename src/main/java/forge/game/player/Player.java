@@ -2225,17 +2225,7 @@ public abstract class Player extends GameEntity {
             return false;
         }
 
-        CardList list = this.getCardsIn(ZoneType.Battlefield);
-        list = list.getKeyword("You can't lose the game.");
-
-        if (list.size() > 0) {
-            return true;
-        }
-
-        CardList oppList = this.getOpponent().getCardsIn(ZoneType.Battlefield);
-        oppList = oppList.getKeyword("Your opponents can't lose the game.");
-
-        return oppList.size() > 0;
+        return (this.hasKeyword("You can't lose the game.") || this.getOpponent().hasKeyword("You can't win the game."));
     }
 
     /**
@@ -2246,10 +2236,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean cantLoseForZeroOrLessLife() {
-        CardList list = this.getCardsIn(ZoneType.Battlefield);
-        list = list.getKeyword("You don't lose the game for having 0 or less life.");
-
-        return list.size() > 0;
+        return (this.hasKeyword("You don't lose the game for having 0 or less life."));
     }
 
     /**
@@ -2260,17 +2247,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean cantWin() {
-        CardList list = this.getCardsIn(ZoneType.Battlefield);
-        list = list.getKeyword("You can't win the game.");
-
-        if (list.size() > 0) {
-            return true;
-        }
-
-        CardList oppList = this.getOpponent().getCardsIn(ZoneType.Battlefield);
-        oppList = oppList.getKeyword("Your opponents can't win the game.");
-
-        return oppList.size() > 0;
+        return (this.hasKeyword("You can't win the game.") || this.getOpponent().hasKeyword("You can't lose the game."));
     }
 
     /**

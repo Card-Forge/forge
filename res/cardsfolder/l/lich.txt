@@ -1,8 +1,8 @@
 Name:Lich
 ManaCost:B B B B
 Types:Enchantment
-Text:As CARDNAME enters the battlefield, you lose life equal to your life total.\r\nYou don't lose the game for having 0 or less life.\r\nWhenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.\r\nWhen CARDNAME is put into a graveyard from the battlefield, you lose the game.
-K:You don't lose the game for having 0 or less life.
+Text:As CARDNAME enters the battlefield, you lose life equal to your life total.\r\nWhenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.\r\nWhen CARDNAME is put into a graveyard from the battlefield, you lose the game.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ You don't lose the game for having 0 or less life. | Description$ You don't lose the game for having 0 or less life.
 R:Event$ GainLife | ValidPlayer$ You | ReplaceWith$ Draw | Description$ If you would gain life, draw that many cards instead.
 SVar:Draw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X
 SVar:X:ReplaceCount$LifeGained
