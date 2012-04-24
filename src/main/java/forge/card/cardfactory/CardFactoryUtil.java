@@ -2754,6 +2754,17 @@ public class CardFactoryUtil {
             return highest;
         }
 
+        if (l[0].contains("GreatestPowerYouDontControl")) {
+            final CardList list = AllZoneUtil.getCreaturesInPlay(c.getController().getOpponent());
+            int highest = 0;
+            for (final Card crd : list) {
+                if (crd.getNetAttack() > highest) {
+                    highest = crd.getNetAttack();
+                }
+            }
+            return highest;
+        }
+
         if (l[0].contains("HighestCMCRemembered")) {
             final CardList list = new CardList();
             int highest = 0;
