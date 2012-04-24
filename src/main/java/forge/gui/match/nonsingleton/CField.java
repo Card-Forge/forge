@@ -296,7 +296,8 @@ public class CField implements ICDoc {
                 for (int i = 0; i < choices.size(); i++) {
                     final Card crd = choices.get(i);
                     if (crd.isFaceDown()) {
-                        if (crd.getController().isComputer() || !crd.hasKeyword("You may look at this card.")) {
+                        if ((crd.getController().isComputer() && !crd.hasKeyword("Your opponent may look at this card.")) 
+                                || !crd.hasKeyword("You may look at this card.")) {
                             final Card faceDown = new Card();
                             faceDown.setName("Face Down");
                             choices2.add(faceDown);

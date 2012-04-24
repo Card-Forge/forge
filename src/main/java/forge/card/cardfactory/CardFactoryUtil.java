@@ -2478,7 +2478,7 @@ public class CardFactoryUtil {
                 @Override
                 public boolean addCard(final Card c) {
 
-                    if (c.hasKeyword("May be played by your opponent")) {
+                    if (c.hasKeyword("May be played by your opponent") || c.hasKeyword("Your opponent may look at this card.")) {
                         return true;
                     }
                     return false;
