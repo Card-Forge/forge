@@ -1,8 +1,9 @@
 Name:Gosta Dirk
 ManaCost:3 W W U U
 Types:Legendary Creature Human Warrior
-Text:Creatures with islandwalk can be blocked as though they didn't have islandwalk.
+Text:no text
 PT:4/4
+S:Mode$ Continuous | Affected$ Creature.withIslandwalk | AddHiddenKeyword$ May be blocked as though it doesn't have Islandwalk. | Description$ Creatures with islandwalk can be blocked as though they didn't have islandwalk.
 K:First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gosta_dirk.jpg

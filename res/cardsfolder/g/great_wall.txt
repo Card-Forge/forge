@@ -1,7 +1,8 @@
 Name:Great Wall
 ManaCost:2 W
 Types:Enchantment
-Text:Creatures with plainswalk can be blocked as though they didn't have plainswalk.
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.withPlainswalk | AddHiddenKeyword$ May be blocked as though it doesn't have Plainswalk. | Description$ Creatures with plainswalk can be blocked as though they didn't have plainswalk.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_wall.jpg

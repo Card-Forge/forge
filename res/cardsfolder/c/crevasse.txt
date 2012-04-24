@@ -1,7 +1,8 @@
 Name:Crevasse
 ManaCost:2 R
 Types:Enchantment
-Text:Creatures with mountainwalk can be blocked as though they didn't have mountainwalk.
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.withMountainwalk | AddHiddenKeyword$ May be blocked as though it doesn't have Mountainwalk. | Description$ Creatures with mountainwalk can be blocked as though they didn't have mountainwalk.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crevasse.jpg

@@ -1,8 +1,10 @@
 Name:Lord Magnus
 ManaCost:3 G W W
 Types:Legendary Creature Human Druid
-Text:Creatures with plainswalk can be blocked as though they didn't have plainswalk.\r\nCreatures with forestwalk can be blocked as though they didn't have forestwalk.
+Text:no text
 PT:4/3
+S:Mode$ Continuous | Affected$ Creature.withPlainswalk | AddHiddenKeyword$ May be blocked as though it doesn't have Plainswalk. | Description$ Creatures with plainswalk can be blocked as though they didn't have plainswalk.
+S:Mode$ Continuous | Affected$ Creature.withForestwalk | AddHiddenKeyword$ May be blocked as though it doesn't have Forestwalk. | Description$ Creatures with forestwalk can be blocked as though they didn't have forestwalk.
 K:First Strike
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

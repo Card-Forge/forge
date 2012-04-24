@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.esotericsoftware.minlog.Log;
 
 import forge.AllZone;
@@ -190,157 +192,79 @@ public class CombatUtil {
         }
 
         // Landwalk
-        if (!AllZoneUtil.isCardInPlay("Staff of the Ages")) {
-            // "Creatures with landwalk abilities can be blocked as though they didn't have those abilities."
-            final CardList blkCL = attacker.getController().getOpponent().getCardsIn(ZoneType.Battlefield);
-            CardList temp = new CardList();
+        if (isUnblockableFromLandwalk(attacker)) {
+            return false;
+        }
 
-            if (attacker.hasKeyword("Plainswalk")) {
-                temp = blkCL.getType("Plains");
-                if (!AllZoneUtil.isCardInPlay("Lord Magnus") && !AllZoneUtil.isCardInPlay("Great Wall")
-                        && !temp.isEmpty()) {
-                    return false;
-                }
+        return true;
+    }
+
+
+    public static boolean isUnblockableFromLandwalk(final Card attacker) {
+        //May be blocked as though it doesn't have landwalk.   
+
+        if (attacker.hasKeyword("May be blocked as though it doesn't have landwalk.")) {
+            return false;
+        }
+
+        // "Creatures with landwalk abilities can be blocked as though they didn't have those abilities."
+        final Player defendingPlayer = attacker.getController().getOpponent();
+        CardList defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
+        
+        ArrayList<String> walkTypes = new ArrayList<String>();
+        
+        for (String basic : Constant.Color.BASIC_LANDS) {
+            StringBuilder sbLand = new StringBuilder();
+            sbLand.append(basic);
+            sbLand.append("walk");
+            String landwalk = sbLand.toString();
+            
+            StringBuilder sbSnow = new StringBuilder();
+            sbSnow.append("Snow ");
+            sbSnow.append(landwalk.toLowerCase());
+            String snowwalk = sbSnow.toString();
+            
+            sbLand.insert(0, "May be blocked as though it doesn't have ");
+            sbLand.append(".");
+
+            String mayBeBlocked = sbLand.toString();
+
+            if (attacker.hasKeyword(landwalk) && !attacker.hasKeyword(mayBeBlocked)) {
+                walkTypes.add(basic);
             }
-
-            if (attacker.hasKeyword("Islandwalk")) {
-                temp = blkCL.getType("Island");
-                if (!AllZoneUtil.isCardInPlay("Undertow") && !AllZoneUtil.isCardInPlay("Gosta Dirk") && !temp.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if (attacker.hasKeyword("Swampwalk")) {
-                temp = blkCL.getType("Swamp");
-                if (!AllZoneUtil.isCardInPlay("Ur-drago") && !AllZoneUtil.isCardInPlay("Quagmire") && !temp.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if (attacker.hasKeyword("Mountainwalk")) {
-                temp = blkCL.getType("Mountain");
-                if (!AllZoneUtil.isCardInPlay("Crevasse") && !temp.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if (attacker.hasKeyword("Forestwalk")) {
-                temp = blkCL.getType("Forest");
-                if (!AllZoneUtil.isCardInPlay("Lord Magnus") && !AllZoneUtil.isCardInPlay("Deadfall")
-                        && !temp.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if (attacker.hasKeyword("Legendary landwalk")) {
-                temp = blkCL.filter(new CardListFilter() {
-                    @Override
-                    public boolean addCard(final Card c) {
-                        return c.isLand() && c.isType("Legendary");
-                    }
-                });
-                if (!temp.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if (attacker.hasKeyword("Snow swampwalk")) {
-                temp = blkCL.filter(new CardListFilter() {
-                    @Override
-                    public boolean addCard(final Card c) {
-                        return c.isType("Swamp") && c.isSnow();
-                    }
-                });
-                if (!temp.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if (attacker.hasKeyword("Snow forestwalk")) {
-                temp = blkCL.filter(new CardListFilter() {
-                    @Override
-                    public boolean addCard(final Card c) {
-                        return c.isType("Forest") && c.isSnow();
-                    }
-                });
-                if (!temp.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if (attacker.hasKeyword("Snow islandwalk")) {
-                temp = blkCL.filter(new CardListFilter() {
-                    @Override
-                    public boolean addCard(final Card c) {
-                        return c.isType("Island") && c.isSnow();
-                    }
-                });
-                if (!temp.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if (attacker.hasKeyword("Snow plainswalk")) {
-                temp = blkCL.filter(new CardListFilter() {
-                    @Override
-                    public boolean addCard(final Card c) {
-                        return c.isType("Plains") && c.isSnow();
-                    }
-                });
-                if (!temp.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if (attacker.hasKeyword("Snow mountainwalk")) {
-                temp = blkCL.filter(new CardListFilter() {
-                    @Override
-                    public boolean addCard(final Card c) {
-                        return c.isType("Mountain") && c.isSnow();
-                    }
-                });
-                if (!temp.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if (attacker.hasKeyword("Snow landwalk")) {
-                temp = blkCL.filter(new CardListFilter() {
-                    @Override
-                    public boolean addCard(final Card c) {
-                        return c.isLand() && c.isSnow();
-                    }
-                });
-                if (!temp.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if (attacker.hasKeyword("Desertwalk")) {
-                temp = blkCL.filter(new CardListFilter() {
-                    @Override
-                    public boolean addCard(final Card c) {
-                        return c.isLand() && c.isType("Desert");
-                    }
-                });
-                if (!temp.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if (attacker.hasKeyword("Nonbasic landwalk")) {
-                temp = blkCL.filter(new CardListFilter() {
-                    @Override
-                    public boolean addCard(final Card c) {
-                        return c.isLand() && !c.isBasicLand();
-                    }
-                });
-                if (!temp.isEmpty()) {
-                    return false;
-                }
+            
+            if (attacker.hasKeyword(snowwalk)) {
+                StringBuilder sbSnowType = new StringBuilder();
+                sbSnowType.append(basic);
+                sbSnowType.append(".Snow");
+                walkTypes.add(sbSnowType.toString());
             }
         }
-        return true;
+        
+        if (attacker.hasKeyword("Legendary landwalk")) {
+            walkTypes.add("Land.Legendary");
+        }
+
+        if (attacker.hasKeyword("Desertwalk")) {
+            walkTypes.add("Desert");
+        }
+
+        if (attacker.hasKeyword("Nonbasic landwalk")) {
+            walkTypes.add("Land.nonBasic");
+        }
+        
+        if (attacker.hasKeyword("Snow landwalk")) {
+            walkTypes.add("Land.Snow");
+        }
+
+        if (walkTypes.isEmpty()) {
+            return false;
+        }
+        
+        String valid = StringUtils.join(walkTypes, ",");
+        defendingLands = defendingLands.getValidCards(valid, defendingPlayer, attacker);
+        
+        return !defendingLands.isEmpty();
     }
 
     /**
