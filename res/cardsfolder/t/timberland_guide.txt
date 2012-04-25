@@ -1,0 +1,10 @@
+Name:Timberland Guide
+ManaCost:1 G
+Types:Creature Human Scout
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ GoodWood | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature.
+SVar:GoodWood:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/timberland_guide.jpg
+End

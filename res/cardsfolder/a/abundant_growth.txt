@@ -1,0 +1,13 @@
+Name:Abundant Growth
+ManaCost:G
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ G | ValidTgts$ Land | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:FreeCard:DB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ AbundantGrowthTap | Description$ Enchanted land has "T: Add one mana of any color to your mana pool."
+SVar:AbundantGrowthTap:AB$ Mana | Cost$ T | Produced$ Any
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abundant_growth.jpg
+End

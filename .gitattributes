@@ -43,6 +43,7 @@ res/cardsfolder/a/absorb_vis.txt svneol=native#text/plain
 res/cardsfolder/a/abu_jafar.txt -text
 res/cardsfolder/a/abuna_acolyte.txt svneol=native#text/plain
 res/cardsfolder/a/abunas_chant.txt -text
+res/cardsfolder/a/abundant_growth.txt -text
 res/cardsfolder/a/abyssal_gatekeeper.txt svneol=native#text/plain
 res/cardsfolder/a/abyssal_horror.txt svneol=native#text/plain
 res/cardsfolder/a/abyssal_hunter.txt svneol=native#text/plain
@@ -8427,6 +8428,7 @@ res/cardsfolder/s/snapping_creeper.txt svneol=native#text/plain
 res/cardsfolder/s/snapping_drake.txt svneol=native#text/plain
 res/cardsfolder/s/snapping_thragg.txt -text svneol=unset#text/plain
 res/cardsfolder/s/snapsail_glider.txt svneol=native#text/plain
+res/cardsfolder/s/snare_the_skies.txt -text
 res/cardsfolder/s/snarling_undorak.txt svneol=native#text/plain
 res/cardsfolder/s/sneak_attack.txt svneol=native#text/plain
 res/cardsfolder/s/sneaky_homunculus.txt svneol=native#text/plain
@@ -9486,6 +9488,7 @@ res/cardsfolder/t/tiger_claws.txt svneol=native#text/plain
 res/cardsfolder/t/tigereye_cameo.txt svneol=native#text/plain
 res/cardsfolder/t/tilling_treefolk.txt svneol=native#text/plain
 res/cardsfolder/t/timber_protector.txt svneol=native#text/plain
+res/cardsfolder/t/timberland_guide.txt -text
 res/cardsfolder/t/timberland_ruins.txt svneol=native#text/plain
 res/cardsfolder/t/timberline_ridge.txt svneol=native#text/plain
 res/cardsfolder/t/timbermare.txt svneol=native#text/plain
@@ -10073,6 +10076,7 @@ res/cardsfolder/v/vigilance.txt svneol=native#text/plain
 res/cardsfolder/v/vigilant_drake.txt svneol=native#text/plain
 res/cardsfolder/v/vigilant_martyr.txt svneol=native#text/plain
 res/cardsfolder/v/vigilant_sentry.txt svneol=native#text/plain
+res/cardsfolder/v/vigilante_justice.txt -text
 res/cardsfolder/v/vigor.txt -text
 res/cardsfolder/v/vigor_mortis.txt -text svneol=unset#text/plain
 res/cardsfolder/v/vigorous_charge.txt -text
