@@ -198,7 +198,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (c.hasKeyword("May be played by your opponent") && !activator.isPlayer(c.getController())) {
                 return true;
             }
-            System.out.println(c.getName() + " didn't pass checkZoneRestrictions");
             return false;
         }
 
