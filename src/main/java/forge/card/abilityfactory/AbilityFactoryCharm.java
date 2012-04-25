@@ -234,7 +234,7 @@ public final class AbilityFactoryCharm {
                 o = GuiUtils.chooseOneOrNone("Choose a mode", choices.toArray());
             }
             if (null == o) {
-                return null;
+                return sa;
             }
             final AbilitySub chosen = (AbilitySub) o;
             choices.remove(chosen);
