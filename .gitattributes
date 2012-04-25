@@ -1410,6 +1410,7 @@ res/cardsfolder/c/chambered_nautilus.txt svneol=native#text/plain
 res/cardsfolder/c/chameleon_blur.txt -text
 res/cardsfolder/c/chameleon_colossus.txt svneol=native#text/plain
 res/cardsfolder/c/champion_lancer.txt svneol=native#text/plain
+res/cardsfolder/c/champion_of_lambholt.txt -text
 res/cardsfolder/c/champion_of_the_parish.txt -text
 res/cardsfolder/c/champions_drake.txt svneol=native#text/plain
 res/cardsfolder/c/champions_helm.txt svneol=native#text/plain
@@ -9308,6 +9309,7 @@ res/cardsfolder/t/terrain_generator.txt svneol=native#text/plain
 res/cardsfolder/t/terramorphic_expanse.txt svneol=native#text/plain
 res/cardsfolder/t/terrarion.txt -text
 res/cardsfolder/t/terravore.txt svneol=native#text/plain
+res/cardsfolder/t/terrifying_presence.txt -text
 res/cardsfolder/t/territorial_baloth.txt svneol=native#text/plain
 res/cardsfolder/t/territorial_dispute.txt -text
 res/cardsfolder/t/terror.txt svneol=native#text/plain
