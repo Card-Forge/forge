@@ -3,7 +3,7 @@ ManaCost:G G
 Types:Enchantment
 Text:no text
 A:AB$ ChangeZone | Cost$ G G | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-T:Mode$ SpellCast | ValidCard$ Card.Black+YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever an opponent casts a black spell, you may pay G G. If you do, you draw a card.
+T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever an opponent casts a black spell, you may pay G G. If you do, you draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ G G | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

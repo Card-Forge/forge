@@ -1,0 +1,12 @@
+Name:Predator's Gambit
+ManaCost:B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 1 | Description$ Enchanted creature gets +2/+1.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Intimidate | CheckSVar$ X | SVarCompare$ EQ1 | Description$ If enchanted creature's controller controls no other creatures, it has intimidate.
+SVar:X:Count$EnchantedControllerCreatures
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/predators_gambit.jpg
+End

@@ -1,0 +1,10 @@
+Name:Wolfir Silverheart
+ManaCost:3 G G
+Types:Creature Wolf Warrior
+Text:no text
+PT:4/4
+K:Soulbond
+S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddPower$ 4 | AddToughness$ 4 | Description$ As long as CARDNAME is paired with another creature, each of those creatures gets +4/+4.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfir_silverheart.jpg
+End

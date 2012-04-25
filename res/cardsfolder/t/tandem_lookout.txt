@@ -1,0 +1,12 @@
+Name:Tandem Lookout
+ManaCost:2 U
+Types:Creature Human Scout
+Text:no text
+PT:2/1
+K:Soulbond
+S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddTrigger$ DamageTrigger | AddSVar$ TrigDraw | Description$ As long as CARDNAME is paired with another creature, each of those creatures have "Whenever this creature deals damage to an opponent, draw a card."
+SVar:DamageTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, draw a card
+SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tandem_lookout.jpg
+End

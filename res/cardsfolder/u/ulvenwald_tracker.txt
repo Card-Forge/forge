@@ -1,0 +1,11 @@
+Name:Ulvenwald Tracker
+ManaCost:G
+Types:Creature Human Shaman
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ 1 G T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ TrackerFight | StackDescription$ None | SpellDescription$ Target creature you control fights another target creature.
+SVar:TrackerFight:DB$ Fight | Defined$ Targeted | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Choose target creature to fight the first target
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_tracker.jpg
+End

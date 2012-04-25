@@ -1,0 +1,9 @@
+Name:Favorable Winds
+ManaCost:1 U
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.withFlying+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control with flying get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/favorable_winds.jpg
+End

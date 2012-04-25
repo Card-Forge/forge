@@ -1,0 +1,10 @@
+Name:Amass the Components
+ManaCost:3 U
+Types:Sorcery
+Text:no text
+A:SP$ Draw | Cost$ 3 U | NumCards$ 3 | SubAbility$ ChangeZoneDB | SpellDescription$ Draw three cards, then put a card from your hand on the bottom of your library. 
+SVar:ChangeZoneDB:DB$ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 1 | Mandatory$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/amass_the_components.jpg
+End

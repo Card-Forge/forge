@@ -1,0 +1,10 @@
+Name:Gallows at Willow Hill
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Destroy | Cost$ 3 T tapXType<3/Human> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ GhostToken | SpellDescription$ Destroy target creature. Its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.
+SVar:GhostToken:DB$Token | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ TargetedController | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gallows_at_willow_hill.jpg
+End

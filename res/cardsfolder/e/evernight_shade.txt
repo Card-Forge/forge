@@ -1,0 +1,10 @@
+Name:Evernight Shade
+ManaCost:3 B
+Types:Creature Shade
+Text:no text
+PT:1/1
+K:Undying
+A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/evernight_shade.jpg
+End

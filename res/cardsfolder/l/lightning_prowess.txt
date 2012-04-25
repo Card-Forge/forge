@@ -1,0 +1,11 @@
+Name:Lightning Prowess
+ManaCost:2 R
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Haste | AddAbility$ Damage | Description$ Enchanted creature has haste and "T: This creature deals 1 damage to target creature or player."
+SVar:Damage:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_prowess.jpg
+End

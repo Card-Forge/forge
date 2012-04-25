@@ -1,0 +1,9 @@
+Name:Thraben Valiant
+ManaCost:1 W
+Types:Creature Human Soldier
+Text:no text
+PT:2/1
+K:Vigilance
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/global/images/magic/general/thraben_valiant.jpg
+End

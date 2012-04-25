@@ -1,0 +1,8 @@
+Name:Nettle Swine
+ManaCost:3 G
+Types:Creature Boar
+Text:no text
+PT:4/3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nettle_swine.jpg
+End

@@ -1,0 +1,11 @@
+Name:Griselbrand
+ManaCost:4 B B B B
+Types:Legendary Creature Demon
+Text:no text
+PT:7/7
+K:Flying
+K:Lifelink
+A:AB$ Draw | Cost$ PayLife<7> | NumCards$ 7 | SpellDescription$ Draw seven cards.
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/griselbrand.jpg
+End

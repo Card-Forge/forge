@@ -5,7 +5,6 @@ Text:no text
 PT:2/3
 S:Mode$ Continuous | Affected$ Creature.Soldier+Other+YouCtrl | AddToughness$ 1 | Description$ Other soldier creatures you control get +0/+1.
 SVar:PlayMain1:TRUE
-SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_armorsmith.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/38.jpg

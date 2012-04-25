@@ -1,0 +1,10 @@
+Name:Scroll of Griselbrand
+ManaCost:1
+Types:Artifact
+Text:no text
+A:AB$ Discard | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DemonBlight | SpellDescription$ Target player discards a card. If you control a Demon, that player loses 3 life.
+SVar:DemonBlight:DB$ LoseLife | Defined$ Targeted | ConditionPresent$ Demon.YouCtrl | ConditionCompare$ GE1 | LifeAmount$ 3 | ConditionDescription$ If you control a Demon,
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_of_griselbrand.jpg
+End

@@ -1,0 +1,9 @@
+Name:Slayers' Stronghold
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Pump | Cost$ R W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | KW$ Vigilance & Haste | SpellDescription$ Target creature gets +2/+0 and gains vigilance and haste until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/slayers_stronghold.jpg
+End

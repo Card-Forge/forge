@@ -1,0 +1,10 @@
+Name:Scrapskin Drake
+ManaCost:2 U
+Types:Creature Zombie Drake
+Text:no text
+PT:2/3
+K:Flying
+K:CARDNAME can block only creatures with flying.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapskin_drake.jpg
+End

@@ -1,0 +1,11 @@
+Name:Triumph of Ferocity
+ManaCost:2 G
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFerociousDraw | TriggerDescription$ At the beginning of your upkeep, draw a card if you control the creature with the greatest power or tied for the greatest power.
+SVar:TrigFerociousDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | ConditionPresent$ Creature | ConditionCompare$ GE1 | ConditionCheckSVar$ YourFerocity | ConditionSVarCompare$ GEOppsFerocity
+SVar:YourFerocity:Count$GreatestPowerYouControl
+SVar:OppsFerocity:Count$GreatestPowerYouDontControl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/triumph_of_ferocity.jpg
+End

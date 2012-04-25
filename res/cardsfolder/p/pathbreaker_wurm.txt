@@ -1,0 +1,10 @@
+Name:Pathbreaker Wurm
+ManaCost:4 G G
+Types:Creature Wurm
+Text:no text
+PT:6/4
+K:Soulbond
+S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ Trample | Description$ As long as CARDNAME is paired with another creature, both creatures have trample.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pathbreaker_wurm.jpg
+End

@@ -1,0 +1,11 @@
+Name:Seraph Sanctuary
+ManaCost:no cost
+Types:Land
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ HavenLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Angel.YouCtrl | TriggerZones$ Battlefield | Execute$ HavenLife | TriggerDescription$ Whenever an Angel enters the battlefield under your control, you gain 1 life.
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+SVar:HavenLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seraph_sanctuary.jpg
+End

@@ -1,0 +1,8 @@
+Name:Human Frailty
+ManaCost:B
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.Human | TgtPrompt$ Choose target Human creature. | SpellDescription$ Destroy target Human creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/human_frailty.jpg
+End

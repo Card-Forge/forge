@@ -1,0 +1,10 @@
+Name:Hanweir Lancer
+ManaCost:2 R 
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:Soulbond
+S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ First Strike | Description$ As long as CARDNAME is paired with another creature, both creature have first strike.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hanweir_lancer.jpg
+End

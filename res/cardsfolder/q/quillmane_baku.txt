@@ -8,7 +8,7 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | 
 A:AB$ ChangeZone | Cost$ 1 T SubCounter<X/KI> | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | ChangeNum$ 1 | SpellDescription$ Return target creature with converted mana cost X or less to its owner's hand.
 SVar:X:Targeted$CardManaCost
 # We'll need to improve the script at some stage, especially if we add Hunter of Eyeblights or Razorfin Abolisher.
-RemAIDeck:True
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quillmane_baku.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/48.jpg

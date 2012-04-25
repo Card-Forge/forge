@@ -1,0 +1,9 @@
+Name:Farbog Explorer
+ManaCost:2 W
+Types:Creature Human Scout
+Text:no text
+PT:2/3
+K:Swampwalk
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/farbog_explorer.jpg
+End

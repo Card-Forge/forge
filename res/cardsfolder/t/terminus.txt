@@ -1,0 +1,9 @@
+Name:Terminus
+ManaCost:4 W W
+Types:Sorcery
+Text:no text
+K:Miracle:W
+A:SP$ ChangeZoneAll | Cost$ 4 W W | ChangeType$ Creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 |SpellDescription$ Put all creatures on the bottom of their owners' libraries.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/terminus.jpg
+End

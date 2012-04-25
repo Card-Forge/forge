@@ -1,0 +1,12 @@
+Name:Emancipation Angel
+ManaCost:1 W W
+Types:Creature Angel
+Text:no text
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a permanent you control to its owner's hand.
+SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Permanent.YouCtrl
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emancipation_angel.jpg
+End

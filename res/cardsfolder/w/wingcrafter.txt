@@ -1,0 +1,10 @@
+Name:Wingcrafter
+ManaCost:U
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+K:Soulbond
+S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ Flying | Description$ As long as CARDNAME is paired with another creature, both creature have flying.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wingcrafter.jpg
+End

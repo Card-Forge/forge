@@ -1,0 +1,9 @@
+Name:Geist Snatch
+ManaCost:2 U U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Counter target creature spell. Put a 1/1 blue Spirit creature token with flying onto the battlefield.
+SVar:DBToken:DB$ Token | Cost$ 0 | TokenImage$ U 1 1 Spirit | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying 
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/geist_snatch.jpg
+End

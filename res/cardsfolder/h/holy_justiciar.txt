@@ -1,0 +1,11 @@
+Name:Holy Justiciar
+ManaCost:3 W
+Types:Creature Human Cleric
+Text:no text
+PT:2/1
+A:AB$ Tap | Cost$ 2 W T | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBExile | SpellDescription$ Tap target creature. If that creature is a Zombie, exile it.
+SVar:DBExile:DB$ChangeZone | ConditionDefined$ Targeted | ConditionPresent$ Creature.Zombie | ConditionCompare$ EQ1 | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | ConditionDescription$ If that creature is a Zombie,
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/holy_justiciar.jpg
+End

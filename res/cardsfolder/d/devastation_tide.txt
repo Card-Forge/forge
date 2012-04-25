@@ -1,0 +1,10 @@
+Name:Devastation Tide
+ManaCost:3 U U
+Types:Sorcery
+Text:no text
+K:Miracle:1 U
+A:SP$ ChangeZoneAll | Cost$ 3 U U | ChangeType$ Permanent.nonLand | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all nonland permanents to their owners' hands.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/devastation_tide.jpg
+End

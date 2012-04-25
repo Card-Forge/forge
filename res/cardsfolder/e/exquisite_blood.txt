@@ -1,0 +1,10 @@
+Name:Exquisite Blood
+ManaCost:4 B
+Types:Enchantment
+Text:no text
+T:Mode$ LifeLost | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigLifeGain | TriggerDescription$ Whenever an opponent loses life, you gain that much life.
+SVar:TrigLifeGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$LifeAmount
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/exquisite_blood.jpg
+End

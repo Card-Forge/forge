@@ -1,0 +1,10 @@
+Name:Scroll of Avacyn
+ManaCost:1
+Types:Artifact
+Text:no text
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SubAbility$ BlessedLife | SpellDescription$ Draw a card. If you control an Angel, you gain 5 life.
+SVar:BlessedLife:DB$GainLife | Cost$ 0 | Defined$ You | ConditionPresent$ Angel.YouCtrl | ConditionCompare$ GE1 | LifeAmount$ 5 | ConditionDescription$ If you control an Angel,
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_of_avacyn.jpg
+End

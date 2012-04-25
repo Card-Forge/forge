@@ -5,7 +5,6 @@ Text:no text
 PT:4/4
 K:CARDNAME can't be blocked except by two or more creatures.
 K:Soulshift:6
-SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vine_kami.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/249.jpg

@@ -1,0 +1,12 @@
+Name:Avacyn, Angel of Hope
+ManaCost:5 W W W
+Types:Legendary Creature Angel
+Text:no text
+PT:8/8
+K:Flying
+K:Vigilance
+K:Indestructible
+S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddHiddenKeyword$ HIDDEN Indestructible | Description$ CARDNAME and other permanents you control are indestructible.
+SVar:Rarity:Mythic
+SVar:Picture:http://resources.wizards.com/global/images/magic/general/avacyn_angel_of_hope.jpg
+End

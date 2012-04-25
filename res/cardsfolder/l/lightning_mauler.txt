@@ -1,0 +1,10 @@
+Name:Lightning Mauler
+ManaCost:1 R
+Types:Creature Human Berserker
+Text:no text
+PT:2/1
+K:Soulbond
+S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ Haste | Description$ As long as CARDNAME is paired with another creature, both creatures have haste.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_mauler.jpg
+End

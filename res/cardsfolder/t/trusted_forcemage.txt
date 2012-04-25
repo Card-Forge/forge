@@ -1,0 +1,10 @@
+Name:Trusted Forcemage
+ManaCost:2 G
+Types:Creature Human Shaman
+Text:no text
+PT:2/2
+K:Soulbond
+S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddPower$ 1 | AddToughness$ 1 | Description$ As long as CARDNAME is paired with another creature, each of those creatures gets +1/+1.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/trusted_forcemage.jpg
+End

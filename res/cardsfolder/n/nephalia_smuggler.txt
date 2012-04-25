@@ -1,0 +1,10 @@
+Name:Nephalia Smuggler
+ManaCost:U
+Types:Creature Human Rogue
+Text:no text
+PT:1/1
+A:AB$ChangeZone | Cost$ 3 U T | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | Origin$ Battlefield | Destination$ Exile | SubAbility$ SmuggleIn | SpellDescription$ Exile another target creature you control, then return that card to the battlefield under your control.
+SVar:SmuggleIn:DB$ChangeZone | Defined$ Targeted | Origin$ Exile | Destination$ Battlefield | GainControl$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nephalia_smuggler.jpg
+End

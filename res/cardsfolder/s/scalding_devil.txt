@@ -1,0 +1,9 @@
+Name:Scalding Devil
+ManaCost:1 R
+Types:Creature - Devil
+Text:no text
+PT:1/1
+A:AB$ DealDamage | Cost$ 2 R | Tgt$ TgtP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scalding_devil.jpg
+End

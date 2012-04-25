@@ -6,6 +6,7 @@ PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. & HIDDEN CARDNAME can't block. | CheckSVar$ X | SVarCompare$ EQ1 | Description$ CARDNAME can't attack or block unless it's equipped.
 SVar:X:Count$Valid Card.Self+unequipped
 SVar:BuffedBy:Artifact.Equipment
+SVar:EquipMe:Once
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/training_drone.jpg

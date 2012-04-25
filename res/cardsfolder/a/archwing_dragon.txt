@@ -1,0 +1,13 @@
+Name:Archwing Dragon
+ManaCost:2 R R
+Types:Creature Dragon
+Text:no text
+PT:4/4
+K:Flying
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the end step, return CARDNAME to its owner's hand.
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/archwing_dragon.jpg
+End

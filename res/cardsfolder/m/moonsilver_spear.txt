@@ -1,0 +1,10 @@
+Name:Moonsilver Spear
+ManaCost:4
+Types:Artifact Equipment
+Text:Equipped creature has first strike.
+K:eqPump 4:+0/+0/First Strike
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigAngelToken | TriggerDescription$ Whenever equipped creature attacks, put a 4/4 white Angel token with flying onto the battlefield.
+SVar:TrigAngelToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/moonsilver_spear.jpg
+End

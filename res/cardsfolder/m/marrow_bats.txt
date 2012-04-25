@@ -1,0 +1,10 @@
+Name:Marrow Bats
+ManaCost:4 B
+Types:Creature Bat Skeleton
+Text:no text
+PT:4/1
+K:Flying
+A:AB$ Regenerate | Cost$ PayLife<4> | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marrow_bats.jpg
+End

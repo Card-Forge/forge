@@ -1,0 +1,10 @@
+Name:Howlgeist
+ManaCost:5 G
+Types:Creature Spirit Wolf
+Text:no text
+PT:4/2
+K:Creatures with power less than CARDNAME's power can't block it.
+K:Undying
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/howlgeist.jpg
+End

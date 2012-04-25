@@ -1,0 +1,11 @@
+Name:Blessing of Nature
+ManaCost:4 G
+Types:Sorcery
+Text:no text
+A:SP$PutCounter | Cost$ 4 G | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter2 | SpellDescription$ Distribute four +1+1 counters among any number of target creatures.
+SVar:PutCounter2:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (2) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter3
+SVar:PutCounter3:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (3) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter4
+SVar:PutCounter4:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (4) | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blessing_of_nature.jpg
+End

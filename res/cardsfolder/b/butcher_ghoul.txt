@@ -1,0 +1,9 @@
+Name:Butcher Ghoul
+ManaCost:1 B
+Types:Creature Zombie
+Text:no text
+PT:1/1
+K:Undying
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/butcher_ghoul.jpg
+End

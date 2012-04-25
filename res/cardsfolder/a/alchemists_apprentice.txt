@@ -1,0 +1,10 @@
+Name:Alchemist's Apprentice
+ManaCost:1 U
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+A:AB$ Draw | Cost$ Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/alchemists_apprentice.jpg
+End

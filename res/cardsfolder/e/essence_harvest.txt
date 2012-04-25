@@ -1,0 +1,11 @@
+Name:Essence Harvest
+ManaCost:2 B 
+Types:Sorcery
+Text:no text
+A:SP$ LoseLife | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Target player loses X life and you gain X life, where X is the highest power amongst creatures you control.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$GreatestPowerYouControl
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_harvest.jpg
+End

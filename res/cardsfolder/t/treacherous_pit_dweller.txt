@@ -1,0 +1,12 @@
+Name:Treacherous Pit-Dweller
+ManaCost:B B
+Types:Creature Demon
+Text:no text
+PT:4/3
+K:Undying
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME enters the battlefield from a graveyard, target opponent gains control of it.
+SVar:TrigGainControl:AB$GainControl | Cost$ 0 | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_pit_dweller.jpg
+End

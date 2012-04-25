@@ -1,0 +1,9 @@
+Name:Moorland Inquisitor
+ManaCost:1 W
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+A:AB$ Pump | Cost$ 2 W | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/global/images/magic/general/moorland_inquisitor.jpg
+End

@@ -1,0 +1,10 @@
+Name:Misthollow Griffin
+ManaCost:2 U U
+Types:Creature Griffin
+Text:no text
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN May be played | AffectedZone$ Exile | EffectZone$ Exile | Description$ You may cast CARDNAME from exile.
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/misthollow_griffin.jpg
+End

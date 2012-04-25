@@ -6,7 +6,6 @@ PT:5/2
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has haste as long as a Warrior card is in your graveyard.
 SVar:X:Count$TypeInYourYard.Warrior
-SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_firebrand.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/111.jpg

@@ -1,0 +1,10 @@
+Name:Haunted Guardian
+ManaCost:2
+Types:Artifact Creature Construct
+Text:no text
+PT:2/1
+K:Defender
+K:First Strike
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/haunted_guardian.jpg
+End

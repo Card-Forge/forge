@@ -4,7 +4,6 @@ Types:Enchantment Aura
 Text:You control enchanted creature.
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ GainControl
-SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/control_magic.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/53.jpg

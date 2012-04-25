@@ -1,0 +1,12 @@
+Name:Gloom Surgeon
+ManaCost:1 B
+Types:Creature Spirit
+Text:no text
+PT:2/1
+R:Event$ DamageDone | ValidTarget$ Card.Self | IsCombat$ True | ReplaceWith$ Exile | PreventionEffect$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage and exile that many cards from the top of your library.
+SVar:Exile:AB$ Dig | Cost$ 0 | DigNum$ X | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile
+SVar:X:ReplaceCount$DamageAmount
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gloom_surgeon.jpg
+End
