@@ -277,6 +277,9 @@ Fixes/Features:
 - Simplifying how Landwalk is handled
 - Removing Hardcoded Card Names in Landwalk handling
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed "May be played by your opponent" keyword.
+- Added the keyword "Your opponent may look at this card.".
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -297,9 +300,12 @@ Arcane Melee
 Archwing Dragon
 Avacyn, Angel of Hope
 Banishing Stroke
+Banners Raised
+Bladed Bracers
 Blessing of Nature
 Blood Artist
 Bloodflow Connoisseur
+Bower Passage
 Builder's Blessing
 Butcher Ghoul
 Call to Serve
@@ -308,11 +314,15 @@ Cathars' Crusade
 Cathedral Sanctifier
 Cloudshift
 Commander's Authority
+Corpse Traders
 Craterhoof Behemoth
 Crippling Chill
 Cursebreak
+Dangerous Wager
+Death Wind
 Defang
 Defy Death
+Demonic Rising
 Demonic Taskmaster
 Demonlord of Ashmouth
 Desolate Lighthouse
@@ -320,43 +330,60 @@ Devastation Tide
 Devout Chaplain
 Diregraf Escort
 Drafna's Restoration
+Dread Slaver
 Dreadwaters
+Driver of the Dead
 Druid's Familiar
 Druids' Repository
 Elgaud Shieldmate
 Emancipation Angel
+Essence Harvest
 Evernight Shade
 Exquisite Blood
 Farbog Explorer
 Favorable Winds
+Fervent Cathar
 Flowering Lumberknot
 Gallows at Willow Hill
 Galvanic Alchemist
 Geist Snatch
 Geist Trappers
 Ghostform
+Ghostly Touch
+Ghoulflesh
 Gisela, Blade of Goldnight
+Gloom Surgeon
 Goldnight Commander
 Goldnight Redeemer
+Grave Exchange
 Griselbrand
+Grounded
 Gryff Vanguard
 Hanweir Lancer
 Harvester of Souls
+Haunted Guardian
 Havengul Skaab
 Herald of War
 Holy Justiciar
+Homicidal Seclusion
 Howlgeist
 Human Frailty
+Hunted Ghoul
 Into the Void
 Joint Assault
+Kruin Striker
 Lair Delve
 Latch Seeker
 Leap of Faith
 Lightning Mauler
+Lightning Prowess
 Lone Revenant
 Lunar Mystic
+Maalfeld Twins
+Mad Prophet
 Marrow Bats
 Mass Appeal
+Mental Agony
 Midnight Duelist
 Midvast Protector
 Mist Raven
@@ -365,20 +392,27 @@ Moonlight Geist
 Moonsilver Spear
 Moorland Inquisitor
 Narstad Scrapper
+Natural End
 Nearheath Pilgrim
+Necrobite
 Nettle Swine
 Nightshade Peddler
 Pathbreaker Wurm
 Polluted Dead
+Predator's Gambit
+Rain of Thorns
 Reforge the Soul
 Renegade Demon
 Restoration Angel
 Revenge of the Hunted
 Riders of Gavony
 Righteous Blow
+Riot Ringleader
 Rotcrown Ghoul
 Sandals of Abdallah
+Scalding Devil
 Scrapskin Drake
+Scroll of Avacyn
 Scroll of Griselbrand
 Searchlight Geist
 Seraph of Dawn
@@ -391,6 +425,7 @@ Snapping Thragg
 Soul of the Harvest
 Soulcage Fiend
 Spectral Gateguards
+Spectral Prison
 Spirit Away
 Stern Mentor
 Stonewright
@@ -402,15 +437,25 @@ Thraben Valiant
 Thunderous Wrath
 Tibalt, the Fiend-Blooded
 Tormentor's Trident
+Treacherous Pit-Dweller
+Triumph of Cruelty
+Triumph of Ferocity
 Trusted Forcemage
+Ulvenwald Tracker
+Ulvenwald Tracker
 Undead Executioner
 Unhallowed Pact
 Vanishment
+Vessel of Endless Rest
 Voice of the Provinces
+Vorstclaw
 Wandering Wolf
+Wild Defiance
+Wildwood Geist
 Wingcrafter
 Wolfir Avenger
 Wolfir Silverheart
+Yew Spirit
 Zealous Conscripts
 Zealous Strike
 
@@ -456,6 +501,8 @@ Floating Shield
 Pentarch Ward
 Wormfang Crab
 Woebringer Demon
+Chancellor of the Spires
+Praetor's Grasp
 
 
 end
