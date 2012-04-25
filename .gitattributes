@@ -6727,6 +6727,7 @@ res/cardsfolder/p/pilgrims_eye.txt svneol=native#text/plain
 res/cardsfolder/p/pili_pala.txt svneol=native#text/plain
 res/cardsfolder/p/pillage.txt svneol=native#text/plain
 res/cardsfolder/p/pillaging_horde.txt svneol=native#text/plain
+res/cardsfolder/p/pillar_of_flame.txt -text
 res/cardsfolder/p/pillarfield_ox.txt svneol=native#text/plain
 res/cardsfolder/p/pillory_of_the_sleepless.txt svneol=native#text/plain
 res/cardsfolder/p/pincer_spider.txt svneol=native#text/plain
@@ -7593,6 +7594,7 @@ res/cardsfolder/r/runes_of_the_deus.txt svneol=native#text/plain
 res/cardsfolder/r/runic_repetition.txt -text
 res/cardsfolder/r/rupture.txt svneol=native#text/plain
 res/cardsfolder/r/rupture_spire.txt svneol=native#text/plain
+res/cardsfolder/r/rush_of_blood.txt -text
 res/cardsfolder/r/rush_of_knowledge.txt svneol=native#text/plain
 res/cardsfolder/r/rushing_river.txt -text
 res/cardsfolder/r/rushwood_dryad.txt svneol=native#text/plain
@@ -8483,6 +8485,7 @@ res/cardsfolder/s/soltari_visionary.txt -text
 res/cardsfolder/s/somber_hoverguard.txt svneol=native#text/plain
 res/cardsfolder/s/somberwald_dryad.txt -text
 res/cardsfolder/s/somberwald_spider.txt -text
+res/cardsfolder/s/somberwald_vigilante.txt -text
 res/cardsfolder/s/somnomancer.txt svneol=native#text/plain
 res/cardsfolder/s/somnophore.txt -text
 res/cardsfolder/s/song_of_blood.txt -text
@@ -9340,6 +9343,7 @@ res/cardsfolder/t/thallid_devourer.txt svneol=native#text/plain
 res/cardsfolder/t/thallid_germinator.txt svneol=native#text/plain
 res/cardsfolder/t/thallid_shell_dweller.txt svneol=native#text/plain
 res/cardsfolder/t/that_which_was_taken.txt svneol=native#text/plain
+res/cardsfolder/t/thatcher_revolt.txt -text
 res/cardsfolder/t/thaumatog.txt svneol=native#text/plain
 res/cardsfolder/t/thawing_glaciers.txt svneol=native#text/plain
 res/cardsfolder/t/the_abyss.txt svneol=native#text/plain
@@ -9799,6 +9803,7 @@ res/cardsfolder/u/unblinking_bleb.txt svneol=native#text/plain
 res/cardsfolder/u/unbreathing_horde.txt -text
 res/cardsfolder/u/unburden.txt svneol=native#text/plain
 res/cardsfolder/u/unburial_rites.txt -text
+res/cardsfolder/u/uncanny_speed.txt -text
 res/cardsfolder/u/unchecked_growth.txt -text
 res/cardsfolder/u/uncle_istvan.txt svneol=native#text/plain
 res/cardsfolder/u/uncontrollable_anger.txt svneol=native#text/plain

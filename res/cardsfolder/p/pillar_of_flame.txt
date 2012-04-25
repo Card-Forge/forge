@@ -1,0 +1,9 @@
+Name:Pillar of Flame
+ManaCost:R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ R | Tgt$ TgtCP | NumDmg$ 2 | SubAbility$ Toast | SpellDescription$ CARDNAME deals 2 damage to target creature or player. If a creature dealt damage this way would die this turn, exile it instead.
+SVar:Toast:DB$Pump | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | Defined$ Targeted
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pillar_of_flame.jpg
+End
