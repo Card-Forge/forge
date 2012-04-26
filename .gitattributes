@@ -3981,6 +3981,7 @@ res/cardsfolder/g/guided_strike.txt svneol=native#text/plain
 res/cardsfolder/g/guiding_spirit.txt -text
 res/cardsfolder/g/guiltfeeder.txt svneol=native#text/plain
 res/cardsfolder/g/guilty_conscience.txt svneol=native#text/plain
+res/cardsfolder/g/guise_of_fire.txt -text
 res/cardsfolder/g/gulf_squid.txt -text
 res/cardsfolder/g/guma.txt svneol=native#text/plain
 res/cardsfolder/g/gurzigost.txt -text svneol=unset#text/plain
@@ -4305,6 +4306,7 @@ res/cardsfolder/h/horseshoe_crab.txt svneol=native#text/plain
 res/cardsfolder/h/hostile_realm.txt svneol=native#text/plain
 res/cardsfolder/h/hot_springs.txt svneol=native#text/plain
 res/cardsfolder/h/hotheaded_giant.txt -text
+res/cardsfolder/h/hound_of_griselbrand.txt -text
 res/cardsfolder/h/hour_of_reckoning.txt -text
 res/cardsfolder/h/hoverguard_observer.txt svneol=native#text/plain
 res/cardsfolder/h/hoverguard_sweepers.txt svneol=native#text/plain
@@ -7102,6 +7104,7 @@ res/cardsfolder/r/raging_goblin.txt svneol=native#text/plain
 res/cardsfolder/r/raging_gorilla.txt svneol=native#text/plain
 res/cardsfolder/r/raging_kavu.txt svneol=native#text/plain
 res/cardsfolder/r/raging_minotaur.txt svneol=native#text/plain
+res/cardsfolder/r/raging_poltergeist.txt -text
 res/cardsfolder/r/raging_ravine.txt svneol=native#text/plain
 res/cardsfolder/r/raging_spirit.txt svneol=native#text/plain
 res/cardsfolder/r/ragnar.txt svneol=native#text/plain
