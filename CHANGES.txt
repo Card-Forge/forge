@@ -280,6 +280,15 @@ Fixes/Features:
 - Fixed "May be played by your opponent" keyword.
 - Added the keyword "Your opponent may look at this card.".
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updating AVR branch?
+- Cleanup.
+- Merged AVR branch.
+- fixed the ETB of Restoration Angel (Defined$Targeted needs AB base instead of DB)
+- Small fix
+- Small fix - removed some end-line spaces
+- Fixed Sparkspitter.
+- Fixing pyrokinesis Spell Description
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -458,6 +467,10 @@ Wolfir Silverheart
 Yew Spirit
 Zealous Conscripts
 Zealous Strike
+Ghostly Flicker
+Nephalia Smuggler
+Conjurer's Closet
+Deadeye Navigator
 
 
 Added many cards, including:
@@ -503,6 +516,17 @@ Wormfang Crab
 Woebringer Demon
 Chancellor of the Spires
 Praetor's Grasp
+Champion of Lambholt
+Terrifying Presence
+Abundant Growth
+Snare the Skies
+Timberland Guide
+Vigilante Justice
+Pillar of Flame
+Rush of Blood
+Somberwald Vigilante
+Thatcher Revolt
+Uncanny Speed
 
 
 end
