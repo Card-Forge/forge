@@ -2,9 +2,8 @@ Name:Soul Nova
 ManaCost:3 W W
 Types:Instant
 Text:no text
-A:SP$ ChangeZone | Cost$ 3 W W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBChangeZoneAll | RememberTargets$ True | SpellDescription$ Exile target attacking creature and all Equipment attached to it.
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered.Equipment+Attached | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+A:SP$ ChangeZone | Cost$ 3 W W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile target attacking creature and all Equipment attached to it.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Targeted.Equipment+Attached | Origin$ Battlefield | Destination$ Exile
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_nova.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/25.jpg

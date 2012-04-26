@@ -1829,7 +1829,7 @@ public class CardFactorySorceries {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Turn to Slag")) {
+        /*else if (cardName.equals("Turn to Slag")) {
             final Cost abCost = new Cost(card, "3 R R", false);
             final Target target = new Target(card, "Select target creature", "Creature".split(","));
             final SpellAbility spell = new Spell(card, abCost, target) {
@@ -1859,7 +1859,7 @@ public class CardFactorySorceries {
             spell.setDescription(sb.toString());
 
             card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Transmute Artifact")) {
