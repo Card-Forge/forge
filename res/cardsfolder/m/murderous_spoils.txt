@@ -5,7 +5,7 @@ Text:no text
 A:SP$ Destroy | Cost$ 5 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ StealEquip | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. You gain control of all Equipment that was attached to it. (This effect lasts indefinitely.)
 SVar:StealEquip:DB$ GainControl | AllValid$ Targeted.Equipment+Attached
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eaten_by_spiders.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/murderous_spoils.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/48.jpg
 Oracle:Destroy target nonblack creature. It can't be regenerated. You gain control of all Equipment that was attached to it. (This effect lasts indefinitely.)
 End
