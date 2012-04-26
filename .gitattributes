@@ -3432,6 +3432,7 @@ res/cardsfolder/g/galvanoth.txt -text
 res/cardsfolder/g/gamble.txt svneol=native#text/plain
 res/cardsfolder/g/game_trail_changeling.txt svneol=native#text/plain
 res/cardsfolder/g/gamekeeper.txt -text
+res/cardsfolder/g/gang_of_devils.txt -text
 res/cardsfolder/g/gang_of_elk.txt svneol=native#text/plain
 res/cardsfolder/g/gangrenous_goliath.txt svneol=native#text/plain
 res/cardsfolder/g/gangrenous_zombies.txt svneol=native#text/plain
@@ -4084,6 +4085,7 @@ res/cardsfolder/h/haunting_misery.txt svneol=native#text/plain
 res/cardsfolder/h/haunting_wind.txt svneol=native#text/plain
 res/cardsfolder/h/havengul_runebinder.txt -text
 res/cardsfolder/h/havengul_skaab.txt -text
+res/cardsfolder/h/havengul_vampire.txt -text
 res/cardsfolder/h/havenwood_battleground.txt svneol=native#text/plain
 res/cardsfolder/h/havenwood_wurm.txt svneol=native#text/plain
 res/cardsfolder/h/havoc.txt svneol=native#text/plain
@@ -4858,6 +4860,7 @@ res/cardsfolder/k/kemba_kha_regent.txt svneol=native#text/plain
 res/cardsfolder/k/kembas_skyguard.txt svneol=native#text/plain
 res/cardsfolder/k/kemuri_onna.txt svneol=native#text/plain
 res/cardsfolder/k/kessig_cagebreakers.txt -text
+res/cardsfolder/k/kessig_malcontents.txt -text
 res/cardsfolder/k/kessig_recluse.txt -text
 res/cardsfolder/k/kessig_wolf.txt -text
 res/cardsfolder/k/kessig_wolf_run.txt -text
@@ -5459,6 +5462,7 @@ res/cardsfolder/m/malakir_bloodwitch.txt svneol=native#text/plain
 res/cardsfolder/m/malevolent_awakening.txt svneol=native#text/plain
 res/cardsfolder/m/malfegor.txt -text svneol=unset#text/plain
 res/cardsfolder/m/malicious_advice.txt svneol=native#text/plain
+res/cardsfolder/m/malicious_intent.txt -text
 res/cardsfolder/m/malignant_growth.txt svneol=native#text/plain
 res/cardsfolder/m/mammoth_umbra.txt svneol=native#text/plain
 res/cardsfolder/m/man_o_war.txt svneol=native#text/plain
