@@ -1,0 +1,10 @@
+Name:Eaten by Spiders
+ManaCost:2 G
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SubAbility$ ChompEquip | RememberTargets$ True | SpellDescription$ Destroy target creature with flying and all Equipment attached to that creature.
+SVar:ChompEquip:DB$ DestroyAll | ValidCards$ Remembered.Equipment+Attached | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eaten_by_spiders.jpg
+End

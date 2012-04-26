@@ -2577,6 +2577,7 @@ res/cardsfolder/e/earthlore.txt svneol=native#text/plain
 res/cardsfolder/e/earthquake.txt svneol=native#text/plain
 res/cardsfolder/e/earthshaker.txt svneol=native#text/plain
 res/cardsfolder/e/eastern_paladin.txt svneol=native#text/plain
+res/cardsfolder/e/eaten_by_spiders.txt -text
 res/cardsfolder/e/eater_of_days.txt svneol=native#text/plain
 res/cardsfolder/e/eater_of_the_dead.txt -text
 res/cardsfolder/e/ebon_dragon.txt svneol=native#text/plain
