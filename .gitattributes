@@ -2127,6 +2127,7 @@ res/cardsfolder/d/deepwood_ghoul.txt svneol=native#text/plain
 res/cardsfolder/d/deepwood_legate.txt -text
 res/cardsfolder/d/deepwood_tantiv.txt svneol=native#text/plain
 res/cardsfolder/d/deepwood_wolverine.txt svneol=native#text/plain
+res/cardsfolder/d/defang.txt -text
 res/cardsfolder/d/defender_en_vec.txt -text
 res/cardsfolder/d/defender_of_chaos.txt svneol=native#text/plain
 res/cardsfolder/d/defender_of_law.txt svneol=native#text/plain
