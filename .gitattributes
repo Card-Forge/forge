@@ -5389,7 +5389,6 @@ res/cardsfolder/l/lys_alana_bowmaster.txt svneol=native#text/plain
 res/cardsfolder/l/lys_alana_huntmaster.txt svneol=native#text/plain
 res/cardsfolder/l/lys_alana_scarblade.txt -text
 res/cardsfolder/l/lyzolda_the_blood_witch.txt svneol=native#text/plain
-res/cardsfolder/m/defang.txt -text
 res/cardsfolder/m/ma_chao_western_warrior.txt svneol=native#text/plain
 res/cardsfolder/m/maalfeld_twins.txt -text
 res/cardsfolder/m/macabre_waltz.txt svneol=native#text/plain
@@ -5988,6 +5987,7 @@ res/cardsfolder/m/murasa_pyromancer.txt svneol=native#text/plain
 res/cardsfolder/m/murder_of_crows.txt -text
 res/cardsfolder/m/murderous_betrayal.txt -text svneol=unset#text/plain
 res/cardsfolder/m/murderous_redcap.txt svneol=native#text/plain
+res/cardsfolder/m/murderous_spoils.txt -text
 res/cardsfolder/m/murk_dwellers.txt svneol=native#text/plain
 res/cardsfolder/m/murkfiend_liege.txt svneol=native#text/plain
 res/cardsfolder/m/murmuring_bosk.txt svneol=native#text/plain

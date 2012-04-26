@@ -2,8 +2,8 @@ Name:Necrobite
 ManaCost:2 B
 Types:Instant
 Text:no text
-A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | SubAbility$ DBRegen | SpellDescription$ Target creature gains deathtouch until end of turn. Regenerate it 
-SVar:DBRegen:DB$ Regenerate | Cost$ 0 | Defined$ Targeted 
+A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | SubAbility$ DBRegen | SpellDescription$ Target creature gains deathtouch until end of turn. Regenerate it
+SVar:DBRegen:DB$ Regenerate | Cost$ 0 | Defined$ Targeted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrobite.jpg
 End
