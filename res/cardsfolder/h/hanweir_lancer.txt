@@ -1,5 +1,5 @@
 Name:Hanweir Lancer
-ManaCost:2 R 
+ManaCost:2 R
 Types:Creature Human Knight
 Text:no text
 PT:2/2

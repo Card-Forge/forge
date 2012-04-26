@@ -1,4 +1,4 @@
-Name:Gryff Vanguard 
+Name:Gryff Vanguard
 ManaCost:4 U
 Types:Creature Human Knight
 Text:no text

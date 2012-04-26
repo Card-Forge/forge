@@ -6,7 +6,7 @@ PT:3/3
 K:Vigilance
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseType | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
 SVar:ChooseType:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentHumanControls
-S:Mode$ Continuous | Affected$ Creature.Human+YouCtrl | AddKeyword$ Protection:Creature.ChosenType:Protection from ChosenType | Description$ Human creatures you control have protection from creatures of the chosen type. 
+S:Mode$ Continuous | Affected$ Creature.Human+YouCtrl | AddKeyword$ Protection:Creature.ChosenType:Protection from ChosenType | Description$ Human creatures you control have protection from creatures of the chosen type.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

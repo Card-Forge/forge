@@ -1663,6 +1663,7 @@ res/cardsfolder/c/conflux.txt svneol=native#text/plain
 res/cardsfolder/c/confound.txt svneol=native#text/plain
 res/cardsfolder/c/congregate.txt svneol=native#text/plain
 res/cardsfolder/c/congregation_at_dawn.txt svneol=native#text/plain
+res/cardsfolder/c/conjurer's_closet.txt -text
 res/cardsfolder/c/conjurers_bauble.txt svneol=native#text/plain
 res/cardsfolder/c/conquer.txt svneol=native#text/plain
 res/cardsfolder/c/conquering_manticore.txt svneol=native#text/plain
@@ -2049,6 +2050,7 @@ res/cardsfolder/d/dead_iron_sledge.txt svneol=native#text/plain
 res/cardsfolder/d/dead_reckoning.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dead_weight.txt -text
 res/cardsfolder/d/deadapult.txt svneol=native#text/plain
+res/cardsfolder/d/deadeye_navigator.txt -text
 res/cardsfolder/d/deadfall.txt svneol=native#text/plain
 res/cardsfolder/d/deadly_allure.txt -text
 res/cardsfolder/d/deadly_grub.txt svneol=native#text/plain

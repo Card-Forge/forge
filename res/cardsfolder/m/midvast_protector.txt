@@ -8,4 +8,3 @@ SVar:TrigProtect:AB$ Protection | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPro
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midvast_protector.jpg
 End
- 
