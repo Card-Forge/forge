@@ -10,4 +10,5 @@ SVar:X:TargetedPlayer$CardsInHand
 A:AB$ GainControl | Cost$ SubCounter<6/LOYALTY> | AllValid$ Creature | Untap$ True | AddKWs$ Haste | LoseControl$ EOT | Planeswalker$ True | Ultimate$ True | SpellDescription$ Gain control of all creatures until end of turn. Untap them. They gain haste until end of turn.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tibalt_the_fiend_blooded.jpg
+SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/161.jpg
 End

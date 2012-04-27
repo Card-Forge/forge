@@ -6,4 +6,5 @@ K:eqPump 2:+1/+1
 S:Mode$ Continuous | Affected$ Card.EquippedBy+Human,Card.EquippedBy+Angel | AddKeyword$ Vigilance | Description$ As long as equipped creature is a Human or an Angel, it has vigilance.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladed_bracers.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/213.jpg
 End

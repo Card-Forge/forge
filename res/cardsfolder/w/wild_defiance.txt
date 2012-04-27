@@ -6,4 +6,5 @@ T:Mode$ BecomesTarget | ValidTarget$ Creature.YouCtrl | ValidSource$ Instant,Sor
 SVar:WildPump:DB$ Pump | Defined$ TriggeredTarget | NumAtt$ +3 | NumDef$ +3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_defiance.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/203.jpg
 End

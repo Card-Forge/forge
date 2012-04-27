@@ -5,4 +5,5 @@ Text:no text
 A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ First Strike | SpellDescription$ Target creature gets +2/+2 and gains first strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zealous_strike.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/41.jpg
 End

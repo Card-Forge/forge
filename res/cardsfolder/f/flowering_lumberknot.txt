@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.Self+NotPaired | AddHiddenKeyword$ HIDDE
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowering_lumberknot.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/178.jpg
 End

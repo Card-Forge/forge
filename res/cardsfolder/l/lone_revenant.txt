@@ -9,4 +9,5 @@ SVar:TrigDig:AB$ Dig | Cost$ 0 | DigNum$ 4
 SVar:NumYouCtrl:Count$Valid Creature.Other+YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lone_revenant.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/64.jpg
 End

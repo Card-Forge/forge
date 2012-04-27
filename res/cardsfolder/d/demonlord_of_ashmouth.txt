@@ -14,4 +14,5 @@ SVar:NeedsToPlay:Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonlord_of_ashmouth.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/96.jpg
 End

@@ -6,4 +6,5 @@ PT:2/1
 K:Creatures with power less than CARDNAME's power can't block it.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wandering_wolf.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/202.jpg
 End

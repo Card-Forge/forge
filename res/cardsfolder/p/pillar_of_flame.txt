@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ R | Tgt$ TgtCP | NumDmg$ 2 | SubAbility$ Toast | SpellD
 SVar:Toast:DB$Pump | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | Defined$ Targeted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pillar_of_flame.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/149.jpg
 End

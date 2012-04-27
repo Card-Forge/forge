@@ -10,4 +10,5 @@ SVar:RestorationExile:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.nonAngel+You
 SVar:RestorationReturn:DB$ChangeZone | Defined$ Targeted | Origin$ Exile | Destination$ Battlefield | GainControl$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/restoration_angel.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/32.jpg
 End

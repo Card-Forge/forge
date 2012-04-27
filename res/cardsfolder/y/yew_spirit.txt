@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 2 G G | NumAtt$ +X | NumDef$ +X | SpellDescription$ CARDNAME 
 SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yew_spirit.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/207.jpg
 End

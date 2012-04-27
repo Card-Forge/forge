@@ -7,4 +7,5 @@ SVar:BlessedLife:DB$GainLife | Cost$ 0 | Defined$ You | ConditionPresent$ Angel.
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_of_avacyn.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/220.jpg
 End

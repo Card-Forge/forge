@@ -6,4 +6,5 @@ K:CostChange:All:Less:2:Spell:All:Instant/Sorcery:OnlyOneBonus:Instant and sorce
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_melee.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/44.jpg
 End

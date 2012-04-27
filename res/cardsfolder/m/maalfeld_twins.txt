@@ -8,4 +8,5 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ B 2 2 Zombie |  TokenAmount$ 2 
 SVar:SacMe:4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maalfeld_twins.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/112.jpg
 End

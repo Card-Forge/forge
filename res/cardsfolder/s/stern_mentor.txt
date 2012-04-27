@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddAbi
 SVar:Mill:AB$ Mill | Cost$ T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top two cards of his or her library into his or her graveyard.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stern_mentor.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/77.jpg
 End

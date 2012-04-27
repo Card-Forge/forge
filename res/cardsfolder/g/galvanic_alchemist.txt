@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddAbi
 SVar:Untap:AB$Untap | Cost$ 2 U | Defined$ Self | SpellDescription$ Untap CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanic_alchemist.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/54.jpg
 End

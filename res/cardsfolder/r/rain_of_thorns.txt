@@ -8,4 +8,5 @@ SVar:DestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select
 SVar:DestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land;
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_thorns.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/190.jpg
 End

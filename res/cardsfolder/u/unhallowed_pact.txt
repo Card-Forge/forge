@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unhallowed_pact.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/124.jpg
 End

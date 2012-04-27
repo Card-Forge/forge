@@ -6,4 +6,5 @@ S:Mode$ Continuous | Affected$ Creature.untapped+YouCtrl | AddToughness$ 2 | Des
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/builders_blessing.jpg
 Oracle:Untapped creatures you control get +0/+2.
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/8.jpg
 End

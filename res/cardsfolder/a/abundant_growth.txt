@@ -10,4 +10,5 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ AbundantGrowthTap 
 SVar:AbundantGrowthTap:AB$ Mana | Cost$ T | Produced$ Any
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abundant_growth.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/167.jpg
 End

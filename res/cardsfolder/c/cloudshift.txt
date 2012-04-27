@@ -7,4 +7,5 @@ SVar:DBReturn:DB$ChangeZone | Defined$ Targeted | Origin$ Exile | Destination$ B
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudshift.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/12.jpg
 End

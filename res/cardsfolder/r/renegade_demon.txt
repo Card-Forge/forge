@@ -5,4 +5,5 @@ Text:no text
 PT:5/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_demon.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/118.jpg
 End

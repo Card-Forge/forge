@@ -7,4 +7,5 @@ K:Double Strike
 K:Undying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hound_of_griselbrand.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/141.jpg
 End

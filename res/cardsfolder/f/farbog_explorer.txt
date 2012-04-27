@@ -6,4 +6,5 @@ PT:2/3
 K:Swampwalk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/farbog_explorer.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/21.jpg
 End

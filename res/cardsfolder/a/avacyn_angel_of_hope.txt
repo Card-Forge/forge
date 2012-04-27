@@ -9,4 +9,5 @@ K:Indestructible
 S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddHiddenKeyword$ HIDDEN Indestructible | Description$ CARDNAME and other permanents you control are indestructible.
 SVar:Rarity:Mythic
 SVar:Picture:http://resources.wizards.com/global/images/magic/general/avacyn_angel_of_hope.jpg
+SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/6.jpg
 End

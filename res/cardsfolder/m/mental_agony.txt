@@ -6,4 +6,5 @@ A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | 
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mental_agony.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/114.jpg
 End

@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigProtect:AB$ Protection | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midvast_protector.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/28.jpg
 End

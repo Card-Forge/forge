@@ -6,4 +6,5 @@ K:Miracle:R
 A:SP$ DealDamage | Cost$ 4 R R | Tgt$ TgtCP | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature or player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderous_wrath.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/160.jpg
 End

@@ -7,4 +7,5 @@ SVar:STPrevent:Mode$ PreventDamage | Source$ Creature.IsNotRemembered | Descript
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terrifying_presence.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/196.jpg
 End

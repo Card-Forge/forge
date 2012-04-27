@@ -6,4 +6,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigAnimateTomb:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Artifact,Creature,Angel | Colors$ White | Keywords$ Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angels_tomb.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/211.jpg
 End

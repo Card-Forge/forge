@@ -6,4 +6,5 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 3 | AddToughness$ 1 
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homicidal_seclusion.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/108.jpg
 End

@@ -6,4 +6,5 @@ PT:2/1
 K:Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/global/images/magic/general/thraben_valiant.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/39.jpg
 End

@@ -8,4 +8,5 @@ SVar:X:Count$GreatestPowerYouControl
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_harvest.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/100.jpg
 End

@@ -10,4 +10,5 @@ SVar:TrigTapUnTap:AB$ TapOrUntap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ S
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_touch.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/58.jpg
 End

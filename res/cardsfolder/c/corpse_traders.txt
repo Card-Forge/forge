@@ -7,4 +7,5 @@ A:SP$ Discard | Cost$ 2 B Sac<1/Creature> | ValidTgts$ Player | Mode$ RevealYouC
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_traders.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/90.jpg
 End

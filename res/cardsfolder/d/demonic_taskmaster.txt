@@ -10,4 +10,5 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature.Other
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_taskmaster.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/95.jpg
 End

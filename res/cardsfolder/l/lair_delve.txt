@@ -5,4 +5,5 @@ Text:no text
 A:SP$ Dig | Cost$ 2 G | DigNum$ 2 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature,Land | DestinationZone2$ Library | SpellDescription$ Reval the top two cards of your library. Put all creature and land cards revealed this way into your hand and the rest on the bottom of your library in any order.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lair_delve.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/184.jpg
 End

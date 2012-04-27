@@ -7,4 +7,5 @@ SVar:DBPutCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ 2 | Defined$ T
 SVar:X:Targeted$Valid Angel
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defy_death.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/16.jpg
 End

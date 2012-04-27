@@ -9,4 +9,5 @@ SVar:TrigCanNotBlock:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | KW$ HIDDEN CARDN
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fervent_cathar.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/135.jpg
 End

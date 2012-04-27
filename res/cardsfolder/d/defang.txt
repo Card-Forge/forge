@@ -7,4 +7,5 @@ A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ PreventDamage | Source$ Creature.EnchantedBy | Description$ Prevent all damage that would be dealt by enchanted creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defang.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/15.jpg
 End

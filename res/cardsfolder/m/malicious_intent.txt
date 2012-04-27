@@ -9,4 +9,5 @@ SVar:HostileAct:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malicious_intent.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/147.jpg
 End

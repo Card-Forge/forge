@@ -7,4 +7,5 @@ T:Mode$ SpellCast | ValidCard$ Instant | ValidActivatingPlayer$ You | TriggerZon
 SVar:TrigDraw:AB$Draw | Cost$ 1 | Defined$ You | NumCards$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lunar_mystic.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/65.jpg
 End

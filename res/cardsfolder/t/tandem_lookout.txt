@@ -9,4 +9,5 @@ SVar:DamageTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Oppo
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tandem_lookout.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/80.jpg
 End

@@ -9,4 +9,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.Other+YouCtrl/Times.2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldnight_redeemer.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/23.jpg
 End

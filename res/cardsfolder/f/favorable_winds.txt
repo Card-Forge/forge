@@ -6,4 +6,5 @@ S:Mode$ Continuous | Affected$ Creature.withFlying+YouCtrl | AddPower$ 1 | AddTo
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/favorable_winds.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/51.jpg
 End

@@ -7,4 +7,5 @@ T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | TriggerZones$ B
 SVar:RogueDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somberwald_vigilante.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/156.jpg
 End

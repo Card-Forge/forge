@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Intimidate | C
 SVar:X:Count$EnchantedControllerCreatures
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predators_gambit.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/117.jpg
 End

@@ -8,4 +8,5 @@ SVar:DBExile:DB$ChangeZone | ConditionDefined$ Targeted | ConditionPresent$ Crea
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/holy_justiciar.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/25.jpg
 End

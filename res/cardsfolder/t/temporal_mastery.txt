@@ -7,4 +7,5 @@ A:SP$ AddTurn | Cost$ 5 U U | NumTurns$ 1 | SubAbility$ DBExile | SpellDescripti
 SVar:DBExile:DB$ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_mastery.jpg
+SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/81.jpg
 End

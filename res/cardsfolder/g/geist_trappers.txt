@@ -7,4 +7,5 @@ K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ Reach | Description$ As long as CARDNAME is paired with another creature, both creatures have reach.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geist_trappers.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/179.jpg
 End

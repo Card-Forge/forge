@@ -7,4 +7,5 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_wind.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/93.jpg
 End

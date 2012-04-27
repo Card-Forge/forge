@@ -7,4 +7,5 @@ A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | AddToughness$ -1 | AddType$ Zombie | AddColor$ Black | Description$ Enchanted creature gets -1/-1 and is a black Zombie in addition to its other colors and types.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoulflesh.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/103.jpg
 End

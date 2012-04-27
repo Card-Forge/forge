@@ -7,4 +7,5 @@ K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ Double Strike | Description$ As long as CARDNAME is paired with another creature, both creature have double strike.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silverblade_paladin.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/36.jpg
 End

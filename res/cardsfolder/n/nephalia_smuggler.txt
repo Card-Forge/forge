@@ -7,4 +7,5 @@ A:AB$ChangeZone | Cost$ 3 U T | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ S
 SVar:SmuggleIn:DB$ChangeZone | Defined$ Targeted | Origin$ Exile | Destination$ Battlefield | GainControl$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nephalia_smuggler.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/69.jpg
 End

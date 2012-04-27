@@ -5,4 +5,5 @@ Text:no text
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Reach | SpellDescription$ Target creature gets +1/+1 and gains reach until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snare_the_skies.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/193.jpg
 End

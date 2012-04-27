@@ -7,4 +7,5 @@ A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grounded.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/181.jpg
 End

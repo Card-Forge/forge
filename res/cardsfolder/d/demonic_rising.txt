@@ -7,4 +7,5 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ B 5 5 Demon | TokenAmount$ 1 | 
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_rising.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/94.jpg
 End

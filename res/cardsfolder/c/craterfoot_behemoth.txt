@@ -9,4 +9,5 @@ SVar:BehemothPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | Num
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/craterhoof_behemoth.jpg
+SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/172.jpg
 End

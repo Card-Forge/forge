@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotcrown_ghoul.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/72.jpg
 End

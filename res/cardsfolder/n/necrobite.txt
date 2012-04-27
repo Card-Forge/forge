@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:DBRegen:DB$ Regenerate | Cost$ 0 | Defined$ Targeted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrobite.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/115.jpg
 End

@@ -7,4 +7,5 @@ A:SP$ Pump | Cost$ 4 G G | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revenge_of_the_hunted.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/191.jpg
 End

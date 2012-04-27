@@ -10,4 +10,5 @@ SVar:Dmg3:DB$DealDamage | Tgt$ TgtCP | TgtPrompt$ Select target creature or play
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gang_of_devils.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/136.jpg
 End

@@ -7,4 +7,5 @@ K:Flash
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfir_avenger.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/205.jpg
 End

@@ -7,4 +7,5 @@ SVar:ConjurerExile:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPr
 SVar:ConjurerReturn:DB$ChangeZone | Defined$ Targeted | Origin$ Exile | Destination$ Battlefield | GainControl$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conjurer's_closet.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/214.jpg
 End

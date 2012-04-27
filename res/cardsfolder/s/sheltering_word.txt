@@ -7,4 +7,5 @@ SVar:LifeTough:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardToughness
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sheltering_word.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/192.jpg
 End

@@ -7,4 +7,5 @@ SVar:AndJusticeForAll:DB$ DealDamage | Tgt$ TgtCP | NumDmg$ 1
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilante_justice.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/165.jpg
 End

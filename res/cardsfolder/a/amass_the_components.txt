@@ -7,4 +7,5 @@ SVar:ChangeZoneDB:DB$ChangeZone | Origin$ Hand | Destination$ Library | LibraryP
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amass_the_components.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/43.jpg
 End

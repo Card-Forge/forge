@@ -7,4 +7,5 @@ K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ Vigilance | Description$ As long as CARDNAME is paired with another creature, both creatures have vigilance.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_gateguards.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/37.jpg
 End

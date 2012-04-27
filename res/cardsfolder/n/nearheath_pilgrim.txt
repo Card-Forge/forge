@@ -7,4 +7,5 @@ K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ Lifelink | Description$ As long as CARDNAME is paired with another creature, both creatures have lifelink.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nearheath_pilgrim.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/31.jpg
 End

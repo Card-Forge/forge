@@ -7,4 +7,5 @@ K:Flying
 A:AB$ Pump | Cost$ 3 B | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/searchlight_geist.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/119.jpg
 End

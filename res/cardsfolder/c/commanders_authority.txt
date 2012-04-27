@@ -9,4 +9,5 @@ SVar:CommanderTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones
 SVar:CommanderToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Human | TokenTypes$ Creature,Human | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ White
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/commanders_authority.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/13.jpg
 End

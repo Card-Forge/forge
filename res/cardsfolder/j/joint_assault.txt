@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ G | Tgt$ TgtC | NumAtt$ 2 | NumDef$ 2 | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Targeted.PairedWith | NumAtt$ 2 | NumDef$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joint_assault.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/183.jpg
 End

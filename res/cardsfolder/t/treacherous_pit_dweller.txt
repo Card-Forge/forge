@@ -9,4 +9,5 @@ SVar:TrigGainControl:AB$GainControl | Cost$ 0 | Defined$ Self | ValidTgts$ Oppon
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_pit_dweller.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/121.jpg
 End

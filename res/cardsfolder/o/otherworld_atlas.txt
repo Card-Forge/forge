@@ -7,4 +7,5 @@ A:AB$ Draw | Cost$ T | Defined$ Each | NumCards$ X | SpellDescription$ Each play
 SVar:X:Count$CardCounters.CHARGE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/otherworld_atlas.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/219.jpg
 End

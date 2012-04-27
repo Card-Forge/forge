@@ -7,4 +7,5 @@ SVar:Disinter:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidT
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vessel_of_endless_rest.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/224.jpg
 End

@@ -9,4 +9,5 @@ T:Mode$ SpellCast | TargetsValid$ Card.EnchantedBy | TriggerZones$ Battlefield |
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_prison.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/75.jpg
 End
