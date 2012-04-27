@@ -1,0 +1,14 @@
+Name:Dual Casting
+ManaCost:1 R
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ForkStick | Description$ Enchanted creature has "R, T: Copy target instant or sorcery spell you control. You may choose new targets for the copy."
+SVar:ForkStick:AB$ CopySpell | Cost$ R T | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dual_casting.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/133.jpg
+Oracle:Enchant creature\nEnchanted creature has "{R}, {T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy."
+End
