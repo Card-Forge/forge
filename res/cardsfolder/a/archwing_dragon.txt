@@ -11,4 +11,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archwing_dragon.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/126.jpg
+Oracle:Flying, haste\nAt the beginning of the end step, return Archwing Dragon to its owner's hand.
 End

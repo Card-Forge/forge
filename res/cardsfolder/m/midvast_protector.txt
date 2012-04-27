@@ -8,4 +8,5 @@ SVar:TrigProtect:AB$ Protection | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPro
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midvast_protector.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/28.jpg
+Oracle:When Midvast Protector enters the battlefield, target creature you control gains protection from the color of your choice until end of turn.
 End

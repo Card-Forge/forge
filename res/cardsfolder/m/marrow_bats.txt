@@ -8,4 +8,5 @@ A:AB$ Regenerate | Cost$ PayLife<4> | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marrow_bats.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/113.jpg
+Oracle:Flying\nPay 4 life: Regenerate Marrow Bats.
 End

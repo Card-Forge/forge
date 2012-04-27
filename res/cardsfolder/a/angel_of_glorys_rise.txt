@@ -10,4 +10,5 @@ SVar:ReturnOfTheHumans:DB$ ChangeZoneAll | ChangeType$ Creature.Human+YouCtrl | 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_glorys_rise.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/1.jpg
+Oracle:Flying\nWhen Angel of Glory's Rise enters the battlefield, exile all Zombies, then return all Human creature cards from your graveyard to the battlefield.
 End

@@ -8,4 +8,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select targ
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/polluted_dead.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/116.jpg
+Oracle:When Polluted Dead dies, destroy target land.
 End

@@ -8,4 +8,5 @@ K:First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunted_guardian.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/216.jpg
+Oracle:Defender, first strike
 End

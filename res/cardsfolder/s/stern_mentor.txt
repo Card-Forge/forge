@@ -9,4 +9,5 @@ SVar:Mill:AB$ Mill | Cost$ T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choo
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stern_mentor.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/77.jpg
+Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Stern Mentor is paired with another creature, each of those creatures has "{T}: Target player puts the top two cards of his or her library into his or her graveyard."
 End

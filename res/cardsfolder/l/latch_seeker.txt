@@ -7,4 +7,5 @@ K:Unblockable
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/latch_seeker.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/63.jpg
+Oracle:Latch Seeker is unblockable.
 End

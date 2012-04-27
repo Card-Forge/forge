@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 3 U | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/into_the_void.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/62.jpg
+Oracle:Return up to two target creatures to their owners' hands.
 End

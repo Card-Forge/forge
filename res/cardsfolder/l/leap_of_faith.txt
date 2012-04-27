@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leap_of_faith.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/26.jpg
+Oracle:Target creature gains flying until end of turn. Prevent all damage that would be dealt to that creature this turn.
 End

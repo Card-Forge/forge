@@ -10,4 +10,5 @@ SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/champion_of_lambholt.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/171.jpg
+Oracle:Creatures with power less than Champion of Lambholt's power can't block creatures you control.\nWhenever another creature enters the battlefield under your control, put a +1/+1 counter on Champion of Lambholt.
 End

@@ -8,4 +8,5 @@ SVar:SmuggleIn:DB$ChangeZone | Defined$ Targeted | Origin$ Exile | Destination$ 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nephalia_smuggler.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/69.jpg
+Oracle:{3}{U}, {T}: Exile another target creature you control, then return that card to the battlefield under your control.
 End

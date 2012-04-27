@@ -6,4 +6,5 @@ PT:4/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nettle_swine.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/186.jpg
+Oracle:
 End

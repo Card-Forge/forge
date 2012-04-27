@@ -8,4 +8,5 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aggravate.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/125.jpg
+Oracle:Aggravate deals 1 damage to each creature target player controls. Each creature dealt damage this way attacks this turn if able.
 End

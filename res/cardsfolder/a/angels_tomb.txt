@@ -7,4 +7,5 @@ SVar:TrigAnimateTomb:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 3 | Toughness
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angels_tomb.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/211.jpg
+Oracle:Whenever a creature enters the battlefield under your control, you may have Angel's Tomb become a 3/3 white Angel artifact creature with flying until end of turn.
 End

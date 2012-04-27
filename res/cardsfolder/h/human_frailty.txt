@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.Human | TgtPrompt$ Choose target H
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/human_frailty.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/109.jpg
+Oracle:Destroy target Human creature.
 End

@@ -8,4 +8,5 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crippling_chill.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/46.jpg
+Oracle:Tap target creature. It doesn't untap during its controller's next untap step.\nDraw a card.
 End

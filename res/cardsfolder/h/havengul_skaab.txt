@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havengul_skaab.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/60.jpg
+Oracle:Whenever Havengul Skaab attacks, return another creature you control to its owner's hand.
 End

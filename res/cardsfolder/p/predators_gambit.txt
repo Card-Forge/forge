@@ -10,4 +10,5 @@ SVar:X:Count$EnchantedControllerCreatures
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predators_gambit.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/117.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+1.\nEnchanted creature has intimidate as long as its controller controls no other creatures. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
 End

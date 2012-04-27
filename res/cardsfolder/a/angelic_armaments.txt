@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddType$ Angel | AddColor$ 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_armaments.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/212.jpg
+Oracle:Equipped creature gets +2/+2, has flying, and is a white Angel in addition to its other colors and types.\nEquip {4}
 End

@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Descri
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grounded.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/181.jpg
+Oracle:Enchant creature\nEnchanted creature loses flying.
 End

@@ -8,4 +8,5 @@ SVar:X:TriggerCount$LifeAmount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exquisite_blood.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/102.jpg
+Oracle:Whenever an opponent loses life, you gain that much life.
 End

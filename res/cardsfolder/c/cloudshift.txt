@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudshift.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/12.jpg
+Oracle:Exile target creature you control, then return that card to the battlefield under your control.
 End

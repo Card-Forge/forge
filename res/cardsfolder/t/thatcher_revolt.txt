@@ -6,4 +6,5 @@ A:SP$ Token | Cost$ 2 R | TokenAmount$ 3 | TokenName$ Human | TokenTypes$ Creatu
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thatcher_revolt.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/158.jpg
+Oracle:Put three 1/1 red Human creature tokens with haste onto the battlefield. Sacrifice those tokens at the beginning of the next end step.
 End

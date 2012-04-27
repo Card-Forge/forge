@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostform.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/56.jpg
+Oracle:Up to two target creatures are unblockable this turn.
 End

@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN May be playe
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misthollow_griffin.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/68.jpg
+Oracle:Flying\nYou may cast Misthollow Griffin from exile.
 End

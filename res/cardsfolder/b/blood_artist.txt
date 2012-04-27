@@ -10,4 +10,5 @@ SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_artist.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/86.jpg
+Oracle:Whenever Blood Artist or another creature dies, target player loses 1 life and you gain 1 life.
 End

@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_appeal.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/66.jpg
+Oracle:Draw a card for each Human you control.
 End

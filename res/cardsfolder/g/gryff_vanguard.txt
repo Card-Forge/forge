@@ -9,4 +9,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gryff_vanguard.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/59.jpg
+Oracle:Flying\nWhen Gryff Vanguard enters the battlefield, draw a card.
 End

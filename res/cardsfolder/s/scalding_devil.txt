@@ -7,4 +7,5 @@ A:AB$ DealDamage | Cost$ 2 R | Tgt$ TgtP | NumDmg$ 1 | SpellDescription$ CARDNAM
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scalding_devil.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/155.jpg
+Oracle:{2}{R}: Scalding Devil deals 1 damage to target player.
 End

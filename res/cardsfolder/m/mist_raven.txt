@@ -9,4 +9,5 @@ SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_raven.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/67.jpg
+Oracle:Flying\nWhen Mist Raven enters the battlefield, return target creature to its owner's hand.
 End

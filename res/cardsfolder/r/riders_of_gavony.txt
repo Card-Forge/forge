@@ -12,4 +12,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riders_of_gavony.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/33.jpg
+Oracle:Vigilance\nAs Riders of Gavony enters the battlefield, choose a creature type.\nHuman creatures you control have protection from creatures of the chosen type.
 End

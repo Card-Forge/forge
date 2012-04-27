@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_of_griselbrand.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/221.jpg
+Oracle:{1}, Sacrifice Scroll of Griselbrand: Target opponent discards a card. If you control a Demon, that player loses 3 life.
 End

@@ -11,4 +11,5 @@ SVar:AbundantGrowthTap:AB$ Mana | Cost$ T | Produced$ Any
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abundant_growth.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/167.jpg
+Oracle:Enchant land\nWhen Abundant Growth enters the battlefield, draw a card.\nEnchanted land has "{T}: Add one mana of any color to your mana pool."
 End

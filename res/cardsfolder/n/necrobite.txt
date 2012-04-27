@@ -7,4 +7,5 @@ SVar:DBRegen:DB$ Regenerate | Cost$ 0 | Defined$ Targeted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrobite.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/115.jpg
+Oracle:Target creature gains deathtouch until end of turn. Regenerate it.
 End

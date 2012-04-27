@@ -8,4 +8,5 @@ SVar:DBExile:DB$ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_mastery.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/81.jpg
+Oracle:Take an extra turn after this one. Exile Temporal Mastery.\nMiracle {1}{U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
 End

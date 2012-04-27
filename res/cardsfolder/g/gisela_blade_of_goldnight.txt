@@ -14,4 +14,5 @@ S:Mode$ PreventDamage | Target$ You,Permanent.YouCtrl | Amount$ HalfUp | Descrip
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gisela_blade_of_goldnight.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/209.jpg
+Oracle:Flying, first strike\nIf a source would deal damage to an opponent or a permanent an opponent controls, that source deals double that damage to that player or permanent instead.\nIf a source would deal damage to you or a permanent you control, prevent half that damage, rounded up.
 End

@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emancipation_angel.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/19.jpg
+Oracle:Flying\nWhen Emancipation Angel enters the battlefield, return a permanent you control to its owner's hand.
 End

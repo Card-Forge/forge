@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlight_geist.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/29.jpg
+Oracle:Flying\n{3}{W}: Prevent all combat damage that would be dealt to and dealt by Moonlight Geist this turn.
 End

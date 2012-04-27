@@ -7,4 +7,5 @@ K:Swampwalk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/farbog_explorer.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/21.jpg
+Oracle:Swampwalk (This creature is unblockable as long as defending player controls a Swamp.)
 End

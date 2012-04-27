@@ -7,4 +7,5 @@ A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vanishment.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/82.jpg
+Oracle:Put target nonland permanent on top of its owner's library.\nMiracle {U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
 End

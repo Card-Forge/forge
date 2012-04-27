@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_hymn.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/128.jpg
+Oracle:Add {R} to your mana pool for each creature you control.
 End

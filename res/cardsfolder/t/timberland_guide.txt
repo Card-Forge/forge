@@ -8,4 +8,5 @@ SVar:GoodWood:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timberland_guide.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/197.jpg
+Oracle:When Timberland Guide enters the battlefield, put a +1/+1 counter on target creature.
 End

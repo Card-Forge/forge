@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/captain_of_the_mists.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/45.jpg
+Oracle:Whenever another Human enters the battlefield under your control, untap Captain of the Mists.\n{1}{U}, {T}: You may tap or untap target permanent.
 End

@@ -8,4 +8,5 @@ A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any col
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vessel_of_endless_rest.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/224.jpg
+Oracle:When Vessel of Endless Rest enters the battlefield, put target card from a graveyard on the bottom of its owner's library.\n{T}: Add one mana of any color to your mana pool.
 End

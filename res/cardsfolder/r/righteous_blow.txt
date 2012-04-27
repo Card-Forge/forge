@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ W | ValidTgts$ Creature.attacking,Creature.blocking | T
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_blow.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/34.jpg
+Oracle:Righteous Blow deals 2 damage to target attacking or blocking creature.
 End

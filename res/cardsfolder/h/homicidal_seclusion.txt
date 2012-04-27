@@ -7,4 +7,5 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homicidal_seclusion.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/108.jpg
+Oracle:As long as you control exactly one creature, that creature gets +3/+1 and has lifelink.
 End

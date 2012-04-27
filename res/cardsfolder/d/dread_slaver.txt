@@ -9,4 +9,5 @@ SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCard | Types$ Zombie | Colors$ Bl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_slaver.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/98.jpg
+Oracle:Whenever a creature dealt damage by Dread Slaver this turn dies, return it to the battlefield under your control. That creature is a black Zombie in addition to its other colors and types.
 End

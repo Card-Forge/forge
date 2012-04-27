@@ -14,4 +14,5 @@ SVar:TamiyoReturn:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Gra
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tamiyo_the_moon_sage.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/79.jpg
+Oracle:[+1] Tap target permanent. It doesn't untap during its controller's next untap step.\n[-2] Draw a card for each tapped creature target player controls.\n[-8] You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
 End

@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_melee.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/44.jpg
+Oracle:Instant and sorcery spells cost {2} less to cast.
 End

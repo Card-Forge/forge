@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/holy_justiciar.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/25.jpg
+Oracle:{2}{W}, {T}: Tap target creature. If that creature is a Zombie, exile it.
 End

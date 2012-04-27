@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | AddToughnes
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoulflesh.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/103.jpg
+Oracle:Enchant creature\nEnchanted creature gets -1/-1 and is a black Zombie in addition to its other colors and types.
 End

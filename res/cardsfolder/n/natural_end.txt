@@ -7,4 +7,5 @@ SVar:NaturalLife:DB$GainLife | Defined$ You | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_end.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/185.jpg
+Oracle:Destroy target artifact or enchantment. You gain 3 life.
 End

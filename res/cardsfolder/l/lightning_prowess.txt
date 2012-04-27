@@ -9,4 +9,5 @@ SVar:Damage:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_prowess.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/145.jpg
+Oracle:Enchant creature\nEnchanted creature has haste and "{T}: This creature deals 1 damage to target creature or player."
 End

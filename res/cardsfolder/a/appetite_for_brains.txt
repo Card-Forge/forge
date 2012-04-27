@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ B | Origin$ Hand | Destination$ Exile | ValidTgts$ Oppo
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/appetite_for_brains.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/84.jpg
+Oracle:Target opponent reveals his or her hand. You choose a card from it with converted mana cost 4 or greater and exile that card.
 End

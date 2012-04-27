@@ -8,4 +8,5 @@ SVar:X:Count$CardCounters.CHARGE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/otherworld_atlas.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/219.jpg
+Oracle:{T}: Put a charge counter on Otherworld Atlas.\n{T}: Each player draws a card for each charge counter on Otherworld Atlas.
 End

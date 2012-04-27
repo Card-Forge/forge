@@ -7,4 +7,5 @@ SVar:DBReturn:DB$ChangeZone | Defined$ Targeted | Origin$ Exile | Destination$ B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_flicker.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/57.jpg
+Oracle:Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.
 End

@@ -9,4 +9,5 @@ SVar:X:Count$Valid Human.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig_malcontents.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/142.jpg
+Oracle:When Kessig Malcontents enters the battlefield, it deals damage to target player equal to the number of Humans you control.
 End

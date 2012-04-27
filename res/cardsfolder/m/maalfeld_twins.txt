@@ -9,4 +9,5 @@ SVar:SacMe:4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maalfeld_twins.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/112.jpg
+Oracle:When Maalfeld Twins dies, put two 2/2 black Zombie creature tokens onto the battlefield.
 End

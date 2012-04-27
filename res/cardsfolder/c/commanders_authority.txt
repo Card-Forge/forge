@@ -10,4 +10,5 @@ SVar:CommanderToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Human | Tok
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/commanders_authority.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/13.jpg
+Oracle:Enchant creature\nEnchanted creature has "At the beginning of your upkeep, put a 1/1 white Human creature token onto the battlefield."
 End

@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malicious_intent.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/147.jpg
+Oracle:Enchant creature\nEnchanted creature has "{T}: Target creature can't block this turn."
 End
