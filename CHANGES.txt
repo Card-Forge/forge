@@ -289,6 +289,21 @@ Fixes/Features:
 - Fixed Sparkspitter.
 - Fixing pyrokinesis Spell Description
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- manually added changes from HEAD revision of AVR branch into trunk
+- Converted Turn to Slag to script.
+- Moved Defang.txt.
+- Updated some SVars.
+- Adding AVR SetInfo for non-reprints
+- Most of the reprints, messed up three of the basic lands, coming shortly.
+- SetInfo for the rest of the reprints
+- Fixing the name of Blessings of Nature
+- Updated AVR Block Data files (I think I got all of them properly)
+- Fixing Miracle for Reforge the Soul
+- Fixing Scalding Devil type line
+- Fixing Corpse Traders SpellAbility
+- deleting obsolete branch for mana fixes
+- Fixed Umezawa's Jitte description.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -296,8 +311,65 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 
 
-These new Avacyn Restored cards have been added to the new Avacyn Restored branch and are not yet available in the forge betas/snapshot builds.
+All of the new AVR cards have been moved to the main branch and should now be available for people to use and play test.
 
+
+
+
+Added many cards, including:
+
+Loaming Shaman
+Kjeldoran Elite Guard
+Gaea's Blessing
+Tuktuk Scrapper
+Gutter Grime
+Alpha Brawl
+Sylvan Hierophant
+Heart Wolf
+Wall of Vipers
+Wandering Eye
+Wash Out
+Whirlpool Warrior
+Tree of Redemption
+Weight of Spires
+Walking Sponge
+Vigorous Charge
+Vintara Elephant
+Weird Harvest
+Gate to the AEther
+Simulacrum
+Harsh Justice
+Mogg Infestation
+Sage of Fables
+Spike Rogue
+Ghave, Guru of Spores
+Venser, Shaper Savant
+Volley of Boulders
+Plow Through Reito
+Pious Warrior
+Zombie Boa
+Zerapa Minotaur
+Xathrid Demon
+Charisma
+Infiltrator's Magemark
+Cho-Manno's Blessing
+Floating Shield
+Pentarch Ward
+Wormfang Crab
+Woebringer Demon
+Chancellor of the Spires
+Praetor's Grasp
+Champion of Lambholt
+Terrifying Presence
+Abundant Growth
+Snare the Skies
+Timberland Guide
+Vigilante Justice
+Pillar of Flame
+Rush of Blood
+Somberwald Vigilante
+Thatcher Revolt
+Uncanny Speed
 Alchemist's Apprentice
 Alchemist's Refuge
 Amass the Components
@@ -471,62 +543,15 @@ Ghostly Flicker
 Nephalia Smuggler
 Conjurer's Closet
 Deadeye Navigator
-
-
-Added many cards, including:
-
-Loaming Shaman
-Kjeldoran Elite Guard
-Gaea's Blessing
-Tuktuk Scrapper
-Gutter Grime
-Alpha Brawl
-Sylvan Hierophant
-Heart Wolf
-Wall of Vipers
-Wandering Eye
-Wash Out
-Whirlpool Warrior
-Tree of Redemption
-Weight of Spires
-Walking Sponge
-Vigorous Charge
-Vintara Elephant
-Weird Harvest
-Gate to the AEther
-Simulacrum
-Harsh Justice
-Mogg Infestation
-Sage of Fables
-Spike Rogue
-Ghave, Guru of Spores
-Venser, Shaper Savant
-Volley of Boulders
-Plow Through Reito
-Pious Warrior
-Zombie Boa
-Zerapa Minotaur
-Xathrid Demon
-Charisma
-Infiltrator's Magemark
-Cho-Manno's Blessing
-Floating Shield
-Pentarch Ward
-Wormfang Crab
-Woebringer Demon
-Chancellor of the Spires
-Praetor's Grasp
-Champion of Lambholt
-Terrifying Presence
-Abundant Growth
-Snare the Skies
-Timberland Guide
-Vigilante Justice
-Pillar of Flame
-Rush of Blood
-Somberwald Vigilante
-Thatcher Revolt
-Uncanny Speed
+Eaten by Spiders
+Gang of Devils
+Havengul Vampire
+Kessig Malcontents
+Malicious Intent
+Guise of Fire
+Hound of Griselbrand
+Raging Poltergeist
+Murderous Spoils
 
 
 end
