@@ -4,7 +4,7 @@ Types:Legendary Artifact Equipment
 Text:no text
 K:eqPump 2:0/0
 T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Creature,Player,Planeswalker | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage, put two charge counters on CARDNAME.
-A:AB$ Charm | Cost$ SubCounter<1/CHARGE> | Choices$ JittePump,JitteCurse,JitteLife | Defined$ You | SpellDescription$ Choose one - 
+A:AB$ Charm | Cost$ SubCounter<1/CHARGE> | Choices$ JittePump,JitteCurse,JitteLife | Defined$ You | SpellDescription$ Choose one - Equipped creature gets +2/+2 until end of turn; or target creature gets -1/-1 until end of turn; or you gain 2 life.
 SVar:JittePump:DB$ Pump | Defined$ Equipped | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Equipped creature gets +2/+2 until end of turn;
 SVar:JitteCurse:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ or target creature gets -1/-1 until end of turn;
 SVar:JitteLife:DB$ GainLife | LifeAmount$ 2 | SpellDescription$ or you gain 2 life.
