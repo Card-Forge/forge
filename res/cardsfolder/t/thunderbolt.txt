@@ -8,5 +8,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderbolt.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/115.jpg
+SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/159.jpg
 Oracle:Choose one - Thunderbolt deals 3 damage to target player; or Thunderbolt deals 4 damage to target creature with flying.
 End
