@@ -289,13 +289,7 @@ public class GameNew {
 
         CMatchUI.SINGLETON_INSTANCE.setCard(AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).get(0));
 
-        AllZone.getInputControl().setInput(new InputMulligan());
-        PhaseHandler.setGameBegins(1); // is this needed? It's already in InputMulligan...
-
-        AllZone.getGameLog().add("Turn",
-                "Turn " + Singletons.getModel().getGameState().getPhaseHandler().getTurn()
-                    + " (" + Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn() + ")",
-                0);
+        AllZone.getInputControl().setInput(new InputMulligan());        
     } // newGame()
 
     private static void newGameCleanup() {

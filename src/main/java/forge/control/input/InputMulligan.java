@@ -94,6 +94,7 @@ public class InputMulligan extends Input {
         for (int i = 0; i < newHand; i++) {
             player.drawCard();
         }
+        AllZone.getGameLog().add("Mulligan", player + " has mulliganed down to " + newHand + " cards.", 0);
         playerRating.notifyHasMulliganed();
         playerRating.notifyOpeningHandSize(newHand);
         return newHand;
@@ -210,6 +211,10 @@ public class InputMulligan extends Input {
 
         ga.checkStateEffects();
         PhaseHandler.setGameBegins(1);
+        AllZone.getGameLog().add("Turn",
+                "Turn " + Singletons.getModel().getGameState().getPhaseHandler().getTurn()
+                    + " (" + Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn() + ")",
+                0);
         Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
         PhaseUtil.visuallyActivatePhase(Singletons.getModel().getGameState().getPhaseHandler().getPhase());
 
