@@ -2,7 +2,7 @@ Name:Reforge the Soul
 ManaCost:3 R R
 Types:Sorcery
 Text:no text
-Miracle:1 R
+K:Miracle:1 R
 A:SP$ Discard | Cost$ 3 R R | Mode$ Hand | Defined$ Each | SubAbility$ DBEachDraw | SpellDescription$ Each player discards his or her hand and draws seven cards.
 SVar:DBEachDraw:DB$Draw | Defined$ Each | NumCards$ 7
 SVar:NeedsToPlayVar:X LE2
