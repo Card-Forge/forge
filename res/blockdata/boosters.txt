@@ -14,6 +14,7 @@ Set:APC|Commons:11|Uncommons:3|Rares:1
 Set:ARB|LandSet:ALA|Commons:10|Uncommons:3|Rares:1
 Set:ARN|Commons:6|Uncommons:2
 Set:ATQ|Commons:5|Uncommons:2|Rares:1
+Set:AVR|Commons:10|Uncommons:3|Rares:1
 Set:BOK|Commons:11|Uncommons:3|Rares:1
 Set:CFX|LandSet:ALA|Commons:10|Uncommons:3|Rares:1
 Set:CHK|Commons:11|Uncommons:3|Rares:1
