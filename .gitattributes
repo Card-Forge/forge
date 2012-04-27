@@ -2943,6 +2943,7 @@ res/cardsfolder/f/faithless_looting.txt -text
 res/cardsfolder/f/faiths_fetters.txt -text
 res/cardsfolder/f/faiths_shield.txt -text
 res/cardsfolder/f/falkenrath_aristocrat.txt -text
+res/cardsfolder/f/falkenrath_exterminator.txt -text
 res/cardsfolder/f/falkenrath_marauders.txt -text
 res/cardsfolder/f/falkenrath_noble.txt -text
 res/cardsfolder/f/falkenrath_torturer.txt -text
@@ -4155,6 +4156,7 @@ res/cardsfolder/h/heed_the_mists.txt svneol=native#text/plain
 res/cardsfolder/h/heedless_one.txt svneol=native#text/plain
 res/cardsfolder/h/heidar_rimewind_master.txt svneol=native#text/plain
 res/cardsfolder/h/heightened_awareness.txt svneol=native#text/plain
+res/cardsfolder/h/heirs_of_stromkirk.txt -text
 res/cardsfolder/h/helionaut.txt svneol=native#text/plain
 res/cardsfolder/h/heliophial.txt svneol=native#text/plain
 res/cardsfolder/h/helium_squirter.txt -text
