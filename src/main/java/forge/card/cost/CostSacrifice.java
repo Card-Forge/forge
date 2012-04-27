@@ -104,6 +104,10 @@ public class CostSacrifice extends CostPartWithList {
 
             final Integer amount = this.convertAmount();
 
+            if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
+                typeList = typeList.getNotType("Creature");
+            }
+
             if ((amount != null) && (typeList.size() < amount)) {
                 return false;
             }
@@ -111,8 +115,14 @@ public class CostSacrifice extends CostPartWithList {
             // If amount is null, it's either "ALL" or "X"
             // if X is defined, it needs to be calculated and checked, if X is
             // choice, it can be Paid even if it's 0
-        } else if (!AllZoneUtil.isCardInPlay(source)) {
-            return false;
+        }
+        else {
+            if (!AllZoneUtil.isCardInPlay(source)) {
+                return false;
+            }
+            else if (source.isCreature() && activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
+                return false;
+            }
         }
 
         return true;
@@ -146,6 +156,9 @@ public class CostSacrifice extends CostPartWithList {
         final Player activator = ability.getActivatingPlayer();
         CardList list = activator.getCardsIn(ZoneType.Battlefield);
         list = list.getValidCards(type.split(";"), activator, source);
+        if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
+            list = list.getNotType("Creature");
+        }
 
         if (this.getThis()) {
             CostUtil.setInput(CostSacrifice.sacrificeThis(ability, payment, this));
@@ -191,6 +204,9 @@ public class CostSacrifice extends CostPartWithList {
         } else if (this.getAmount().equals("All")) {
             CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
             typeList = typeList.getValidCards(this.getType().split(","), activator, source);
+            if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
+                typeList = typeList.getNotType("Creature");
+            }
             // Does the AI want to use Sacrifice All?
             return false;
         } else {

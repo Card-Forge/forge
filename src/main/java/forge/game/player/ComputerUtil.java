@@ -1327,8 +1327,13 @@ public class ComputerUtil {
      */
     public static CardList chooseSacrificeType(final String type, final Card activate, final Card target,
             final int amount) {
-        CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        Player activator = AllZone.getComputerPlayer();
+        CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
+        if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
+            typeList = typeList.getNotType("Creature");
+        }
+
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
             typeList.remove(target); // don't sacrifice the card we're pumping
         }

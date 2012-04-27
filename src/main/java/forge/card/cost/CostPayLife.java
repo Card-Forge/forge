@@ -96,6 +96,10 @@ public class CostPayLife extends CostPart {
             return false;
         }
 
+        if (activator.hasKeyword("You can't pay life to cast spells or activate abilities.")) {
+            return false;
+        }
+
         return true;
     }
 
