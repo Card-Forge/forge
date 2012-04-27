@@ -1,6 +1,6 @@
 Name:Scalding Devil
 ManaCost:1 R
-Types:Creature - Devil
+Types:Creature Devil
 Text:no text
 PT:1/1
 A:AB$ DealDamage | Cost$ 2 R | Tgt$ TgtP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
