@@ -39,6 +39,7 @@ SetInfo:LEB|Land|http://magiccards.info/scans/en/be/289.jpg|3
 SetInfo:NPH|Land|http://magiccards.info/scans/en/nph/166.jpg|2
 SetInfo:INV|Land|http://magiccards.info/scans/en/in/331.jpg|4
 SetInfo:MMQ|Land|http://magiccards.info/scans/en/mm/331.jpg|4
+SetInfo:AVR|Land|http://magiccards.info/scans/en/avr/230.jpg|3
 SetInfo:ALA|Land|http://magiccards.info/scans/en/ala/230.jpg|4
 SetInfo:M11|Land|http://magiccards.info/scans/en/m11/230.jpg|4
 SetInfo:M10|Land|http://magiccards.info/scans/en/m10/230.jpg|4
