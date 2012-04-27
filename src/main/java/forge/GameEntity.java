@@ -75,14 +75,15 @@ public abstract class GameEntity extends MyObservable {
      *            a int.
      * @param source
      *            a {@link forge.Card} object.
+     * @return whether or not damage was dealt
      */
-    public void addDamage(final int damage, final Card source) {
+    public boolean addDamage(final int damage, final Card source) {
         int damageToDo = damage;
 
         damageToDo = this.replaceDamage(damageToDo, source, false);
         damageToDo = this.preventDamage(damageToDo, source, false);
 
-        this.addDamageAfterPrevention(damageToDo, source, false);
+        return this.addDamageAfterPrevention(damageToDo, source, false);
     }
 
     /**
@@ -94,13 +95,14 @@ public abstract class GameEntity extends MyObservable {
      *            a int.
      * @param source
      *            a {@link forge.Card} object.
+     * @return whether or not damage was dealt
      */
-    public void addDamageWithoutPrevention(final int damage, final Card source) {
+    public boolean addDamageWithoutPrevention(final int damage, final Card source) {
         int damageToDo = damage;
 
         damageToDo = this.replaceDamage(damageToDo, source, false);
 
-        this.addDamageAfterPrevention(damageToDo, source, false);
+        return this.addDamageAfterPrevention(damageToDo, source, false);
     }
 
     // This function handles damage after replacement and prevention effects are
@@ -116,10 +118,9 @@ public abstract class GameEntity extends MyObservable {
      *            a {@link forge.Card} object.
      * @param isCombat
      *            a boolean.
+     * @return whether or not damage was dealt
      */
-    public void addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat) {
-
-    }
+    public abstract boolean addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat);
 
     /**
      * <p>
@@ -197,9 +198,7 @@ public abstract class GameEntity extends MyObservable {
      *            a boolean.
      * @return a int.
      */
-    public int replaceDamage(final int damage, final Card source, final boolean isCombat) {
-        return 0;
-    }
+    public abstract int replaceDamage(final int damage, final Card source, final boolean isCombat);
 
     /**
      * <p>
@@ -214,9 +213,7 @@ public abstract class GameEntity extends MyObservable {
      *            a boolean.
      * @return a int.
      */
-    public int preventDamage(final int damage, final Card source, final boolean isCombat) {
-        return 0;
-    }
+    public abstract int preventDamage(final int damage, final Card source, final boolean isCombat);
 
     // ////////////////////////
     //

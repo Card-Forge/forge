@@ -1248,6 +1248,7 @@ public class AbilityFactoryDealDamage {
         final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(),
                 params.get("DamageSource"), sa);
         final Card card = definedSources.get(0);
+        final Card source = sa.getSourceCard();
 
         final int dmg = this.getNumDamage(sa);
 
@@ -1275,13 +1276,17 @@ public class AbilityFactoryDealDamage {
         list = AbilityFactory.filterListByType(list, params.get("ValidCards"), sa);
 
         for (final Card c : list) {
-            c.addDamage(dmg, card);
+            if (c.addDamage(dmg, card) && params.containsKey("RememberDamaged")) {
+                source.addRemembered(c);
+            }
         }
 
         if (!players.equals("")) {
             final ArrayList<Player> playerList = AbilityFactory.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
-                p.addDamage(dmg, card);
+                if (p.addDamage(dmg, card) && params.containsKey("RememberDamaged")) {
+                    source.addRemembered(p);
+                }
             }
         }
     }

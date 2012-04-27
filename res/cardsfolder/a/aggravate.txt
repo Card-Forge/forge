@@ -1,0 +1,11 @@
+Name:Aggravate
+ManaCost:3 R R
+Types:Instant
+Text:no text
+A:SP$ DamageAll | Cost$ 3 R R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | RememberDamaged$ True | ValidCards$ Creature | ValidDescription$ each creature target player controls. | SubAbility$ DBAttack | SpellDescription$ CARDNAME deals 1 damage to each creature target player controls.
+SVar:DBAttack:DB$ PumpAll | Defined$ Remembered | KW$ HIDDEN CARDNAME attacks each turn if able. | SubAbility$ DBCleanup | SpellDescription$ Each creature dealt damage this way attacks this turn if able.
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aggravate.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/125.jpg
+End

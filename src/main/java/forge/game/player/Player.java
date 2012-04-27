@@ -516,10 +516,16 @@ public abstract class Player extends GameEntity {
      *            a {@link forge.Card} object.
      * @param isCombat
      *            a boolean.
+     * @return whether or not damage was dealt
      */
     @Override
-    public final void addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat) {
+    public final boolean addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat) {
         final int damageToDo = damage;
+
+        if (damageToDo == 0) {
+            return false;
+        }
+
         boolean infect = source.hasKeyword("Infect");
         final StringBuilder sb = new StringBuilder(
                 "As long as you have 0 or less life, all damage is dealt to you as though its source had infect.");
@@ -547,26 +553,27 @@ public abstract class Player extends GameEntity {
                 this.loseLife(damageToDo, source);
             }
         }
-        if (damageToDo > 0) {
-            this.addAssignedDamage(damageToDo, source);
-            GameActionUtil.executeDamageDealingEffects(source, damageToDo);
-            GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
 
-            if (isCombat) {
-                final ArrayList<String> types = source.getType();
-                for (final String type : types) {
-                    source.getController().addProwlType(type);
-                }
+        this.addAssignedDamage(damageToDo, source);
+        GameActionUtil.executeDamageDealingEffects(source, damageToDo);
+        GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
+
+        if (isCombat) {
+            final ArrayList<String> types = source.getType();
+            for (final String type : types) {
+                source.getController().addProwlType(type);
             }
-
-            // Run triggers
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            runParams.put("DamageSource", source);
-            runParams.put("DamageTarget", this);
-            runParams.put("DamageAmount", damageToDo);
-            runParams.put("IsCombatDamage", isCombat);
-            AllZone.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams);
         }
+
+        // Run triggers
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("DamageSource", source);
+        runParams.put("DamageTarget", this);
+        runParams.put("DamageAmount", damageToDo);
+        runParams.put("IsCombatDamage", isCombat);
+        AllZone.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams);
+
+        return true;
     }
 
     /**

@@ -8114,14 +8114,15 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.Card} object.
      * @param isCombat
      *            a boolean.
+     * @return whether or not damage as dealt
      */
     @Override
-    public final void addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat) {
+    public final boolean addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat) {
         final int damageToAdd = damageIn;
         boolean wither = false;
 
         if (damageToAdd == 0) {
-            return; // Rule 119.8
+            return false; // Rule 119.8
         }
 
         System.out.println("Adding " + damageToAdd + " damage to " + this.getName());
@@ -8142,7 +8143,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (this.isPlaneswalker()) {
             this.subtractCounter(Counters.LOYALTY, damageToAdd);
-            return;
+            return true;
         }
 
         if ((source.hasKeyword("Wither") || source.hasKeyword("Infect"))) {
@@ -8159,7 +8160,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (AllZoneUtil.isCardInPlay(this) && !wither) {
             this.damage += damageToAdd;
         }
-
+        return true;
     }
 
     private String curSetCode = "";
