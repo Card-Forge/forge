@@ -2907,6 +2907,7 @@ res/cardsfolder/e/extra_arms.txt svneol=native#text/plain
 res/cardsfolder/e/extract.txt svneol=native#text/plain
 res/cardsfolder/e/extractor_demon.txt svneol=native#text/plain
 res/cardsfolder/e/extraplanar_lens.txt -text svneol=unset#text/plain
+res/cardsfolder/e/extravagant_spirit.txt -text
 res/cardsfolder/e/extruder.txt svneol=native#text/plain
 res/cardsfolder/e/exuberant_firestoker.txt svneol=native#text/plain
 res/cardsfolder/e/eye_of_nowhere.txt svneol=native#text/plain
