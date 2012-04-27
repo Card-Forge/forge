@@ -526,19 +526,8 @@ public abstract class Player extends GameEntity {
             return false;
         }
 
-        boolean infect = source.hasKeyword("Infect");
-        final StringBuilder sb = new StringBuilder(
-                "As long as you have 0 or less life, all damage is dealt to you as though its source had infect.");
-
-        if ((this.getLife() <= 0) && !infect) {
-            final CardList cards = this.getCardsIn(ZoneType.Battlefield);
-            for (final Card card : cards) {
-                if (card.hasKeyword(sb.toString())) {
-                    infect = true;
-                    break;
-                }
-            }
-        }
+        boolean infect = source.hasKeyword("Infect") || 
+			this.hasKeyword("All damage is dealt to you as though its source had infect.");
 
         if (infect) {
             this.addPoisonCounters(damageToDo, source);
