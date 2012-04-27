@@ -1,4 +1,4 @@
-Name:Blessing of Nature
+Name:Blessings of Nature
 ManaCost:4 G
 Types:Sorcery
 Text:no text
@@ -7,5 +7,6 @@ SVar:PutCounter2:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:PutCounter3:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (3) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter4
 SVar:PutCounter4:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (4) | CounterType$ P1P1 | CounterNum$ 1
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blessing_of_nature.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blessings_of_nature.jpg
+SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/168.jpg
 End

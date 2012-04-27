@@ -859,8 +859,8 @@ res/cardsfolder/b/blessed_wind.txt svneol=native#text/plain
 res/cardsfolder/b/blessed_wine.txt svneol=native#text/plain
 res/cardsfolder/b/blessing.txt svneol=native#text/plain
 res/cardsfolder/b/blessing_of_leeches.txt svneol=native#text/plain
-res/cardsfolder/b/blessing_of_nature.txt -text
 res/cardsfolder/b/blessing_of_the_nephilim.txt svneol=native#text/plain
+res/cardsfolder/b/blessings_of_nature.txt -text
 res/cardsfolder/b/blight.txt svneol=native#text/plain
 res/cardsfolder/b/blight_mamba.txt svneol=native#text/plain
 res/cardsfolder/b/blight_sickle.txt svneol=native#text/plain
