@@ -2659,6 +2659,22 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
+     * getFirstSpellAbility.
+     * </p>
+     * 
+     * @return a SpellAbility object.
+     */
+    public final SpellAbility getFirstSpellAbility() {
+        final ArrayList<SpellAbility> sas = this.getCharacteristics().getSpellAbility();
+        if (!sas.isEmpty()) {
+            return sas.get(0);
+        }
+
+        return null;
+    }
+
+    /**
+     * <p>
      * clearSpellAbility.
      * </p>
      */

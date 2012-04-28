@@ -714,50 +714,41 @@ public class GameAction {
      * drawMiracle.
      * </p>
      * 
-     * @param c
+     * @param card
      *            a {@link forge.Card} object.
      */
-    public final void drawMiracle(final Card c) {
+    public final void drawMiracle(final Card card) {
         // Whenever a card with miracle is the first card drawn in a turn,
         // you may cast it for it's miracle cost
-        if (!c.hasMiracle()) {
+        if (!card.hasMiracle()) {
             return;
         }
 
-        final Card miracle = c;
-        final Ability cast = new Ability(miracle, miracle.getMiracleCost()) {
-            @Override
-            public void resolve() {
-                GameAction.this.playCardNoCost(miracle);
-                System.out.println("Miracle cost paid");
-            }
-        };
+        final SpellAbility miracle = card.getFirstSpellAbility().copy();
+        miracle.setPayCosts(new Cost(card, card.getMiracleCost(), false));
 
         final StringBuilder sb = new StringBuilder();
-        sb.append(miracle.getName()).append(" - Cast via Miracle");
-        cast.setStackDescription(sb.toString());
+        sb.append(card.getName()).append(" - Cast via Miracle");
+        miracle.setStackDescription(sb.toString());
 
-        final Ability activate = new Ability(miracle, "0") {
+        // TODO Convert this to a Trigger  
+        final Ability activate = new Ability(card, "0") {
             @Override
             public void resolve() {
                 // pay miracle cost here.
-                if (miracle.getOwner().isHuman()) {
-                    if (GameActionUtil.showYesNoDialog(miracle, miracle + " - Drawn. Pay Miracle Cost?")) {
-                        if (cast.getManaCost().equals("0")) {
-                            AllZone.getStack().add(cast);
-                        } else {
-                            AllZone.getInputControl().setInput(new InputPayManaCost(cast));
-                        }
+                if (card.getOwner().isHuman()) {
+                    if (GameActionUtil.showYesNoDialog(card, card + " - Drawn. Pay Miracle Cost?")) {
+                        Singletons.getModel().getGameAction().playSpellAbility(miracle);
                     }
                 } else {
                     // computer will ALWAYS pay a miracle cost if he has the mana.
-                    ComputerUtil.playStack(cast);
+                    ComputerUtil.playStack(miracle);
                 }
             }
         };
 
         final StringBuilder sbAct = new StringBuilder();
-        sbAct.append(miracle.getName()).append(" - Drawn. Pay Miracle Cost?");
+        sbAct.append(card.getName()).append(" - Drawn. Pay Miracle Cost?");
         activate.setStackDescription(sbAct.toString());
 
         AllZone.getStack().add(activate);
@@ -784,51 +775,41 @@ public class GameAction {
      * discardMadness.
      * </p>
      * 
-     * @param c
+     * @param card
      *            a {@link forge.Card} object.
      */
-    public final void discardMadness(final Card c) {
+    public final void discardMadness(final Card card) {
         // Whenever a card with madness is discarded, you may cast it for it's
         // madness cost
-        if (!c.hasMadness()) {
+        if (!card.hasMadness()) {
             return;
         }
 
-        final Card madness = c;
-        final Ability cast = new Ability(madness, madness.getMadnessCost()) {
-            @Override
-            public void resolve() {
-                GameAction.this.playCardNoCost(madness);
-                System.out.println("Madness cost paid");
-            }
-        };
+        final SpellAbility madness = card.getFirstSpellAbility().copy();
+        madness.setPayCosts(new Cost(card, card.getMadnessCost(), false));
 
         final StringBuilder sb = new StringBuilder();
-        sb.append(madness.getName()).append(" - Cast via Madness");
-        cast.setStackDescription(sb.toString());
+        sb.append(card.getName()).append(" - Cast via Madness");
+        madness.setStackDescription(sb.toString());
 
-        final Ability activate = new Ability(madness, "0") {
+        // TODO Convert this to a Trigger  
+        final Ability activate = new Ability(card, "0") {
             @Override
             public void resolve() {
-                // pay madness cost here.
-                if (madness.getOwner().isHuman()) {
-                    if (GameActionUtil.showYesNoDialog(madness, madness + " - Discarded. Pay Madness Cost?")) {
-                        if (cast.getManaCost().equals("0")) {
-                            AllZone.getStack().add(cast);
-                        } else {
-                            AllZone.getInputControl().setInput(new InputPayManaCost(cast));
-                        }
+                // pay miracle cost here.
+                if (card.getOwner().isHuman()) {
+                    if (GameActionUtil.showYesNoDialog(card, card + " - Discarded. Pay Madness Cost?")) {
+                        Singletons.getModel().getGameAction().playSpellAbility(madness);
                     }
                 } else {
-                    // computer will ALWAYS pay a madness cost if he has the
-                    // mana.
-                    ComputerUtil.playStack(cast);
+                    // computer will ALWAYS pay a miracle cost if he has the mana.
+                    ComputerUtil.playStack(madness);
                 }
             }
         };
 
         final StringBuilder sbAct = new StringBuilder();
-        sbAct.append(madness.getName()).append(" - Discarded. Pay Madness Cost?");
+        sbAct.append(card.getName()).append(" - Drawn. Pay Madness Cost?");
         activate.setStackDescription(sbAct.toString());
 
         AllZone.getStack().add(activate);
