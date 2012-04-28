@@ -2153,7 +2153,7 @@ public final class AbilityFactoryChangeZone {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryChangeZone.changeZoneAllCanPlayAI(af, this);
+                return AbilityFactoryChangeZone.changeZoneAllDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -2187,6 +2187,14 @@ public final class AbilityFactoryChangeZone {
             @Override
             public String getStackDescription() {
                 return AbilityFactoryChangeZone.changeZoneAllStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryChangeZone.changeZoneAllTriggerAINoCost(af, this, mandatory);
+                }
+                return AbilityFactoryChangeZone.changeZoneAllDoTriggerAI(af, this, mandatory);
             }
         };
         AbilityFactoryChangeZone.setMiscellaneous(af, spChangeZone);
@@ -2223,7 +2231,7 @@ public final class AbilityFactoryChangeZone {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryChangeZone.changeZoneAllCanPlayAI(af, this);
+                return AbilityFactoryChangeZone.changeZoneAllDoTriggerAI(af, this, mandatory);
             }
         };
         AbilityFactoryChangeZone.setMiscellaneous(af, dbChangeZone);
@@ -2386,6 +2394,139 @@ public final class AbilityFactoryChangeZone {
         // make sure this will actually do something:
 
         return true;
+    }
+
+    /**
+     * <p>
+     * gainLifeDoTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    public static boolean changeZoneAllDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+            // payment it's usually
+            // not mandatory
+            return false;
+        }
+        return changeZoneAllTriggerAINoCost(af, sa, mandatory);
+    }
+
+    /**
+     * <p>
+     * gainLifeDoTriggerAINoCost.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    public static boolean changeZoneAllTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        // Change Zone All, can be any type moving from one zone to another
+        final HashMap<String, String> params = af.getMapParams();
+        final String destination = params.get("Destination");
+        final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
+
+        CardList humanType = AllZone.getHumanPlayer().getCardsIn(origin);
+        humanType = AbilityFactory.filterListByType(humanType, params.get("ChangeType"), sa);
+        CardList computerType = AllZone.getComputerPlayer().getCardsIn(origin);
+        computerType = AbilityFactory.filterListByType(computerType, params.get("ChangeType"), sa);
+
+        // TODO improve restrictions on when the AI would want to use this
+        // spBounceAll has some AI we can compare to.
+        if (origin.equals(ZoneType.Hand) || origin.equals(ZoneType.Library)) {
+            final Target tgt = sa.getTarget();
+            if (tgt != null) {
+                if (AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).isEmpty()
+                        || !AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+                    return false;
+                }
+                tgt.resetTargets();
+                tgt.addTarget(AllZone.getHumanPlayer());
+            }
+        } else if (origin.equals(ZoneType.Battlefield)) {
+            // this statement is assuming the AI is trying to use this spell offensively
+            // if the AI is using it defensively, then something else needs to occur
+            // if only creatures are affected evaluate both lists and pass only
+            // if human creatures are more valuable
+            if ((humanType.getNotType("Creature").size() == 0) && (computerType.getNotType("Creature").size() == 0)) {
+                if (CardFactoryUtil.evaluateCreatureList(computerType) > CardFactoryUtil
+                        .evaluateCreatureList(humanType)) {
+                    return false;
+                }
+            } // otherwise evaluate both lists by CMC and pass only if human
+              // permanents are more valuable
+            else if (CardFactoryUtil.evaluatePermanentList(computerType) > CardFactoryUtil
+                    .evaluatePermanentList(humanType)) {
+                return false;
+            }
+        } else if (origin.equals(ZoneType.Graveyard)) {
+            final Target tgt = sa.getTarget();
+            if (tgt != null) {
+                if (AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard).isEmpty()
+                        || !AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+                    return false;
+                }
+                tgt.resetTargets();
+                tgt.addTarget(AllZone.getHumanPlayer());
+            }
+        } else if (origin.equals(ZoneType.Exile)) {
+
+        } else if (origin.equals(ZoneType.Stack)) {
+            // time stop can do something like this:
+            // Origin$ Stack | Destination$ Exile | SubAbility$ DBSkip
+            // DBSKipToPhase | DB$SkipToPhase | Phase$ Cleanup
+            // otherwise, this situation doesn't exist
+            return false;
+        }
+
+        if (destination.equals(ZoneType.Battlefield)) {
+            if (params.get("GainControl") != null) {
+                // Check if the cards are valuable enough
+                if ((humanType.getNotType("Creature").size() == 0) && (computerType.getNotType("Creature").size() == 0)) {
+                    if ((CardFactoryUtil.evaluateCreatureList(computerType) + CardFactoryUtil
+                            .evaluateCreatureList(humanType)) < 1) {
+                        return false;
+                    }
+                } // otherwise evaluate both lists by CMC and pass only if human
+                  // permanents are less valuable
+                else if ((CardFactoryUtil.evaluatePermanentList(computerType) + CardFactoryUtil
+                        .evaluatePermanentList(humanType)) < 1) {
+                    return false;
+                }
+            } else {
+                // don't activate if human gets more back than AI does
+                if ((humanType.getNotType("Creature").size() == 0) && (computerType.getNotType("Creature").size() == 0)) {
+                    if (CardFactoryUtil.evaluateCreatureList(computerType) < CardFactoryUtil
+                            .evaluateCreatureList(humanType)) {
+                        return false;
+                    }
+                } // otherwise evaluate both lists by CMC and pass only if human
+                  // permanents are less valuable
+                else if (CardFactoryUtil.evaluatePermanentList(computerType) < CardFactoryUtil
+                        .evaluatePermanentList(humanType)) {
+                    return false;
+                }
+            }
+        }
+
+        boolean chance = true;
+        final AbilitySub subAb = sa.getSubAbility();
+        if (subAb != null) {
+            chance &= subAb.chkAIDrawback();
+        }
+
+        return chance;
     }
 
     /**
