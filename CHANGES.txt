@@ -5,6 +5,8 @@ Forge Beta: 0#-##-2012 ver 1.2.7 rev 1####
 10### cards in total.
 
 
+This version includes 90% (+) of the cards that are available in the new Avacyn Restored card set.
+
 Some adjustments to the pets in quest mode were made. This includes a new pet. :)
 
 Some people have noticed recently that cost change was working for the human player but not the computer player. A fix was made and this should no longer be a problem.
@@ -304,14 +306,20 @@ Fixes/Features:
 - deleting obsolete branch for mana fixes
 - Fixed Umezawa's Jitte description.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed card text for Into the Void.
+- Damage Functions now return whether or not they dealt any damage
+- DamageAll can now Remember what Cards it damaged
+- Simplified Phyrexian Unlife
+- Updated mtg-data.txt
+- Ran OracleScript for AVR cards
+- Moved the "Start Game" stuff to only after Mulliganing and Leylining is finished.
+- Added Miracle to CardDetailPanel
+- Added some Keywords related to Angel of Jubilation
+- Fkxed Angel of Jubilation
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
-
-
-
-
-All of the new AVR cards have been moved to the main branch and should now be available for people to use and play test.
 
 
 
@@ -552,6 +560,16 @@ Guise of Fire
 Hound of Griselbrand
 Raging Poltergeist
 Murderous Spoils
+Aggravate
+Battle Hymn
+Dual Casting
+Falkenrath Exterminator
+Heirs of Stromkirk
+Megatherium
+Extravagant Spirit
+Fettergeist
+Outwit
+Angel of Jubilation
 
 
 end
