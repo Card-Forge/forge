@@ -1025,6 +1025,7 @@ res/cardsfolder/b/bonesplitter.txt svneol=native#text/plain
 res/cardsfolder/b/bonesplitter_sliver.txt svneol=native#text/plain
 res/cardsfolder/b/bonethorn_valesk.txt svneol=native#text/plain
 res/cardsfolder/b/boneyard_wurm.txt -text
+res/cardsfolder/b/bonfire_of_the_damned.txt -text
 res/cardsfolder/b/book_of_rass.txt svneol=native#text/plain
 res/cardsfolder/b/boomerang.txt svneol=native#text/plain
 res/cardsfolder/b/boon_reflection.txt svneol=native#text/plain
@@ -2784,6 +2785,7 @@ res/cardsfolder/e/entangling_vines.txt svneol=native#text/plain
 res/cardsfolder/e/entomb.txt svneol=native#text/plain
 res/cardsfolder/e/entomber_exarch.txt -text
 res/cardsfolder/e/entrails_feaster.txt -text
+res/cardsfolder/e/entreat_the_angels.txt -text
 res/cardsfolder/e/entropic_eidolon.txt svneol=native#text/plain
 res/cardsfolder/e/entropic_specter.txt svneol=native#text/plain
 res/cardsfolder/e/envelop.txt svneol=native#text/plain
