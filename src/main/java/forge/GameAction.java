@@ -37,6 +37,7 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityStatic;
+import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRequirements;
 import forge.card.spellability.SpellAbilityRestriction;
@@ -741,15 +742,18 @@ public class GameAction {
                         Singletons.getModel().getGameAction().playSpellAbility(miracle);
                     }
                 } else {
-                    // computer will ALWAYS pay a miracle cost if he has the mana.
-                    ComputerUtil.playStack(miracle);
+                    Spell spell = (Spell) miracle;
+                    if (spell.canPlayFromEffectAI(false, false)) {
+                        ComputerUtil.playStack(miracle);
+                    }
                 }
             }
         };
 
         final StringBuilder sbAct = new StringBuilder();
-        sbAct.append(card.getName()).append(" - Drawn. Pay Miracle Cost?");
+        sbAct.append(card.getName()).append(" - Miracle.");
         activate.setStackDescription(sbAct.toString());
+        activate.setActivatingPlayer(card.getOwner());
 
         AllZone.getStack().add(activate);
     }
