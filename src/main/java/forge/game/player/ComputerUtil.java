@@ -1762,7 +1762,7 @@ public class ComputerUtil {
                         continue;
                     }
                 } else {
-                    if (!Singletons.getModel().getGameAction().sacrifice(c)) {
+                    if (!Singletons.getModel().getGameAction().sacrifice(c, null)) {
                         continue;
                     }
                 }

@@ -73,7 +73,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                     @Override
                     public void resolve() {
                         if (AllZoneUtil.isCardInPlay(card)) {
-                            Singletons.getModel().getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card, null);
                         }
                     }
                 };

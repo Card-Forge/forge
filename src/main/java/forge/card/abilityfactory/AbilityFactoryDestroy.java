@@ -552,7 +552,7 @@ public class AbilityFactoryDestroy {
         for (final Card tgtC : tgtCards) {
             if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 if (sac) {
-                    Singletons.getModel().getGameAction().sacrifice(tgtC);
+                    Singletons.getModel().getGameAction().sacrifice(tgtC, sa);
                 } else if (noRegen) {
                     Singletons.getModel().getGameAction().destroyNoRegeneration(tgtC);
                 } else {
@@ -566,7 +566,7 @@ public class AbilityFactoryDestroy {
         for (final Card unTgtC : untargetedCards) {
             if (AllZoneUtil.isCardInPlay(unTgtC)) {
                 if (sac) {
-                    Singletons.getModel().getGameAction().sacrifice(unTgtC);
+                    Singletons.getModel().getGameAction().sacrifice(unTgtC, sa);
                 } else if (noRegen) {
                     Singletons.getModel().getGameAction().destroyNoRegeneration(unTgtC);
                 } else {

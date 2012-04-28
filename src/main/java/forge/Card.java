@@ -1275,7 +1275,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final boolean hasVanish = CardFactoryUtil.hasKeyword(this, "Vanishing") != -1;
 
                 if (hasVanish && AllZoneUtil.isCardInPlay(this)) {
-                    Singletons.getModel().getGameAction().sacrifice(this);
+                    Singletons.getModel().getGameAction().sacrifice(this, null);
                 }
 
                 if (this.hasSuspend() && AllZoneUtil.isCardExiled(this)) {

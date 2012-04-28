@@ -506,7 +506,7 @@ public class CardFactorySorceries {
                     // selected are sacrificed.
                     for (int i = 0; i < target.size(); i++) {
                         if (AllZoneUtil.isCardInPlay(target.get(i)) && !saveList.contains(target.get(i))) {
-                            Singletons.getModel().getGameAction().sacrifice(target.get(i));
+                            Singletons.getModel().getGameAction().sacrifice(target.get(i), this);
                         }
                     }
                 } // resolve()
@@ -738,7 +738,7 @@ public class CardFactorySorceries {
                     if (compLand.size() > humLand.size()) {
                         compLand.shuffle();
                         for (int i = 0; i < (compLand.size() - humLand.size()); i++) {
-                            Singletons.getModel().getGameAction().sacrifice(compLand.get(i));
+                            Singletons.getModel().getGameAction().sacrifice(compLand.get(i), this);
                         }
                     } else if (humLand.size() > compLand.size()) {
                         final int diff = humLand.size() - compLand.size();
@@ -765,7 +765,7 @@ public class CardFactorySorceries {
                         CardListUtil.sortCMC(compCreats);
                         compCreats.reverse();
                         for (int i = 0; i < (compCreats.size() - humCreats.size()); i++) {
-                            Singletons.getModel().getGameAction().sacrifice(compCreats.get(i));
+                            Singletons.getModel().getGameAction().sacrifice(compCreats.get(i), this);
                         }
                     } else if (humCreats.size() > compCreats.size()) {
                         final int diff = humCreats.size() - compCreats.size();
@@ -1895,7 +1895,7 @@ public class CardFactorySorceries {
                     if (toSac != null) {
                         final Card c = (Card) toSac;
                         baseCMC = CardUtil.getConvertedManaCost(c);
-                        Singletons.getModel().getGameAction().sacrifice(c);
+                        Singletons.getModel().getGameAction().sacrifice(c, this);
                     } else {
                         return;
                     }

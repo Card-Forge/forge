@@ -296,7 +296,7 @@ public final class PlayerUtil {
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (zone.equals(AllZone.getHumanPlayer().getZone(ZoneType.Battlefield)) && list.contains(card)) {
-                    Singletons.getModel().getGameAction().sacrifice(card);
+                    Singletons.getModel().getGameAction().sacrifice(card, null);
                     this.n++;
                     list.remove(card);
 

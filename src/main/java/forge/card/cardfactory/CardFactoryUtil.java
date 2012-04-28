@@ -1816,7 +1816,7 @@ public class CardFactoryUtil {
 
             @Override
             public void selectButtonCancel() {
-                Singletons.getModel().getGameAction().sacrifice(crd);
+                Singletons.getModel().getGameAction().sacrifice(crd, null);
                 this.stop();
             }
 
@@ -1824,7 +1824,7 @@ public class CardFactoryUtil {
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (choices.contains(card)) {
                     if (card == spell.getSourceCard()) {
-                        Singletons.getModel().getGameAction().sacrifice(spell.getSourceCard());
+                        Singletons.getModel().getGameAction().sacrifice(spell.getSourceCard(), null);
                         this.stop();
                     } else {
                         spell.getSourceCard().setChampionedCard(card);
@@ -5179,7 +5179,7 @@ public class CardFactoryUtil {
                                 numCreatures[0] = selection.size();
                                 for (int m = 0; m < selection.size(); m++) {
                                     card.addDevoured(selection.get(m));
-                                    Singletons.getModel().getGameAction().sacrifice(selection.get(m));
+                                    Singletons.getModel().getGameAction().sacrifice(selection.get(m), null);
                                 }
                             }
 
@@ -5190,7 +5190,7 @@ public class CardFactoryUtil {
                                 final Card c = creats.get(i);
                                 if ((c.getNetAttack() <= 1) && ((c.getNetAttack() + c.getNetDefense()) <= 3)) {
                                     card.addDevoured(c);
-                                    Singletons.getModel().getGameAction().sacrifice(c);
+                                    Singletons.getModel().getGameAction().sacrifice(c, null);
                                     count++;
                                 }
                                 // is this needed?

@@ -91,7 +91,7 @@ public class SpellPermanent extends Spell {
 
             final CardList creature = (CardList) SpellPermanent.this.championGetCreature.execute();
             if (creature.size() == 0) {
-                Singletons.getModel().getGameAction().sacrifice(source);
+                Singletons.getModel().getGameAction().sacrifice(source, null);
                 return;
             } else if (controller.isHuman()) {
                 AllZone.getInputControl().setInput(SpellPermanent.this.championInputComes);
@@ -114,7 +114,7 @@ public class SpellPermanent extends Spell {
                     runParams.put("Championed", source.getChampionedCard());
                     AllZone.getTriggerHandler().runTrigger(TriggerType.Championed, runParams);
                 } else {
-                    Singletons.getModel().getGameAction().sacrifice(this.getSourceCard());
+                    Singletons.getModel().getGameAction().sacrifice(this.getSourceCard(), null);
                 }
             } // computer
         } // resolve()

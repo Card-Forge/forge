@@ -480,7 +480,7 @@ class CardFactoryAuras {
 
                     if (!grave.is(ZoneType.Graveyard)) {
                         // Animated Creature got removed before ability resolved
-                        Singletons.getModel().getGameAction().sacrifice(card);
+                        Singletons.getModel().getGameAction().sacrifice(card, null);
                         return;
                     }
 
@@ -496,7 +496,7 @@ class CardFactoryAuras {
 
                     if (CardFactoryUtil.hasProtectionFrom(card, animated)) {
                         // Animated a creature with protection
-                        Singletons.getModel().getGameAction().sacrifice(card);
+                        Singletons.getModel().getGameAction().sacrifice(card, null);
                         return;
                     }
 
@@ -534,7 +534,7 @@ class CardFactoryAuras {
                     final PlayerZone play = card.getController().getZone(ZoneType.Battlefield);
 
                     if (play.contains(c)) {
-                        Singletons.getModel().getGameAction().sacrifice(c);
+                        Singletons.getModel().getGameAction().sacrifice(c, null);
                     }
                 }
             }; // Detach

@@ -145,7 +145,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     } else if (GameActionUtil.showYesNoDialog(c, sb.toString())) {
                         abMana.produceMana();
                     } else {
-                        Singletons.getModel().getGameAction().sacrifice(c);
+                        Singletons.getModel().getGameAction().sacrifice(c, null);
                     }
 
                 }
@@ -182,7 +182,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                     @Override
                     public void execute() {
-                        Singletons.getModel().getGameAction().sacrifice(c);
+                        Singletons.getModel().getGameAction().sacrifice(c, null);
                     }
                 };
 
@@ -201,7 +201,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             if (ComputerUtil.canPayCost(aiPaid)) {
                                 ComputerUtil.playNoStack(aiPaid);
                             } else {
-                                Singletons.getModel().getGameAction().sacrifice(c);
+                                Singletons.getModel().getGameAction().sacrifice(c, null);
                             }
                         }
                     }
@@ -360,7 +360,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                         @Override
                         public void execute() {
-                            Singletons.getModel().getGameAction().sacrifice(c);
+                            Singletons.getModel().getGameAction().sacrifice(c, null);
                         }
                     };
 
@@ -378,7 +378,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 if (ComputerUtil.canPayCost(aiPaid)) {
                                     ComputerUtil.playNoStack(aiPaid);
                                 } else {
-                                    Singletons.getModel().getGameAction().sacrifice(c);
+                                    Singletons.getModel().getGameAction().sacrifice(c, null);
                                 }
                             }
                         }
@@ -582,7 +582,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 // probably need to restrict by controller also
                                 if (artifact.isArtifact() && zone.is(ZoneType.Battlefield)
                                         && zone.getPlayer().isHuman()) {
-                                    Singletons.getModel().getGameAction().sacrifice(artifact);
+                                    Singletons.getModel().getGameAction().sacrifice(artifact, null);
                                     this.stop();
                                 }
                             } // selectCard()
@@ -592,7 +592,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         if (null == target) {
                             this.tapAndDamage(player);
                         } else {
-                            Singletons.getModel().getGameAction().sacrifice(target);
+                            Singletons.getModel().getGameAction().sacrifice(target, null);
                         }
                     }
                 } // resolve
@@ -722,7 +722,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     } else {
                         final Card target = CardFactoryUtil.getBestLandAI(playerLand);
 
-                        Singletons.getModel().getGameAction().sacrifice(target);
+                        Singletons.getModel().getGameAction().sacrifice(target, null);
                     }
                 } // end resolve()
             }; // end noPay ability
@@ -1982,7 +1982,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     public void resolve() {
                         final int fadeCounters = card.getCounters(Counters.FADE);
                         if (fadeCounters <= 0) {
-                            Singletons.getModel().getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card, null);
                         } else {
                             card.subtractCounter(Counters.FADE, 1);
                         }

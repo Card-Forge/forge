@@ -1176,7 +1176,7 @@ public class GameAction {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public final boolean sacrifice(final Card c) {
+    public final boolean sacrifice(final Card c, final SpellAbility source) {
         if (c.isImmutable()) {
             System.out.println("Trying to sacrifice immutables: " + c);
             return false;

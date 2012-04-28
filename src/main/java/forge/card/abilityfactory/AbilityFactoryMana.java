@@ -369,7 +369,7 @@ public class AbilityFactoryMana {
             final int num = card.getCounters(Counters.getType(deplete));
             if (num == 0) {
                 abMana.setUndoable(false);
-                Singletons.getModel().getGameAction().sacrifice(card);
+                Singletons.getModel().getGameAction().sacrifice(card, null);
             }
         }
 

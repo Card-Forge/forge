@@ -213,14 +213,14 @@ class CardFactoryLands {
 
                             @Override
                             public void selectButtonCancel() {
-                                Singletons.getModel().getGameAction().sacrifice(card);
+                                Singletons.getModel().getGameAction().sacrifice(card, null);
                                 this.stop();
                             }
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
                                 if (c.isLand() && zone.is(ZoneType.Battlefield) && c.isUntapped()) {
-                                    Singletons.getModel().getGameAction().sacrifice(c);
+                                    Singletons.getModel().getGameAction().sacrifice(c, null);
                                     if (paid[0] < 1) {
                                         paid[0]++;
                                         final StringBuilder sb = new StringBuilder();
@@ -234,7 +234,7 @@ class CardFactoryLands {
                         }; // Input
                         if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardListFilter.UNTAPPED)
                                 .size() < 2)) {
-                            Singletons.getModel().getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card, null);
                             return;
                         } else {
                             AllZone.getInputControl().setInput(target);
@@ -283,12 +283,12 @@ class CardFactoryLands {
                             // if any are tapped, sacrifice it
                             // else sacrifice random
                             if (tappedLand.size() > 0) {
-                                Singletons.getModel().getGameAction().sacrifice(tappedLand.get(0));
+                                Singletons.getModel().getGameAction().sacrifice(tappedLand.get(0), null);
                             } else {
-                                Singletons.getModel().getGameAction().sacrifice(land.get(0));
+                                Singletons.getModel().getGameAction().sacrifice(land.get(0), null);
                             }
                         } else {
-                            Singletons.getModel().getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card, null);
                         }
                     } else { // this is the human resolution
                         final Input target = new Input() {
@@ -303,14 +303,14 @@ class CardFactoryLands {
 
                             @Override
                             public void selectButtonCancel() {
-                                Singletons.getModel().getGameAction().sacrifice(card);
+                                Singletons.getModel().getGameAction().sacrifice(card, null);
                                 this.stop();
                             }
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
                                 if (c.isLand() && zone.is(ZoneType.Battlefield) && land.contains(c)) {
-                                    Singletons.getModel().getGameAction().sacrifice(c);
+                                    Singletons.getModel().getGameAction().sacrifice(c, null);
                                     this.stop();
                                 }
                             } // selectCard()
@@ -342,7 +342,7 @@ class CardFactoryLands {
 
                     if (land.size() > 0) {
                         for (final Card c : land) {
-                            Singletons.getModel().getGameAction().sacrifice(c);
+                            Singletons.getModel().getGameAction().sacrifice(c, null);
                         }
                     }
                 }
@@ -367,21 +367,21 @@ class CardFactoryLands {
                             CardList tappedPlains = new CardList(plains);
                             tappedPlains = tappedPlains.getType("Basic");
                             for (final Card c : tappedPlains) {
-                                Singletons.getModel().getGameAction().sacrifice(c);
+                                Singletons.getModel().getGameAction().sacrifice(c, null);
                             }
                             for (int i = 0; i < tappedPlains.size(); i++) {
-                                Singletons.getModel().getGameAction().sacrifice(plains.get(i));
+                                Singletons.getModel().getGameAction().sacrifice(plains.get(i), null);
                             }
                             // if any are tapped, sacrifice it
                             // else sacrifice random
                         } else {
-                            Singletons.getModel().getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card, null);
                         }
                     } else { // this is the human resolution
                         final int[] paid = { 0 };
                         if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardListFilter.UNTAPPED)
                                 .size() < 2)) {
-                            Singletons.getModel().getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card, null);
                             return;
                         }
                         final Input target = new Input() {
@@ -396,14 +396,14 @@ class CardFactoryLands {
 
                             @Override
                             public void selectButtonCancel() {
-                                Singletons.getModel().getGameAction().sacrifice(card);
+                                Singletons.getModel().getGameAction().sacrifice(card, null);
                                 this.stop();
                             }
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
                                 if (c.isLand() && zone.is(ZoneType.Battlefield) && c.isUntapped()) {
-                                    Singletons.getModel().getGameAction().sacrifice(c);
+                                    Singletons.getModel().getGameAction().sacrifice(c, null);
                                     if (paid[0] < 1) {
                                         paid[0]++;
                                         CMatchUI.SINGLETON_INSTANCE.showMessage(
@@ -659,7 +659,7 @@ class CardFactoryLands {
                                 Singletons.getModel().getGameAction().moveToHand(CardFactoryUtil.getWorstLand(land));
                             }
                         } else {
-                            Singletons.getModel().getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card, null);
                         }
                     } else { // this is the human resolution
                         final Input target = new Input() {
@@ -676,7 +676,7 @@ class CardFactoryLands {
 
                             @Override
                             public void selectButtonCancel() {
-                                Singletons.getModel().getGameAction().sacrifice(card);
+                                Singletons.getModel().getGameAction().sacrifice(card, null);
                                 this.stop();
                             }
 
@@ -728,7 +728,7 @@ class CardFactoryLands {
                             final Card c = CardFactoryUtil.getWorstLand(land);
                             Singletons.getModel().getGameAction().moveToHand(c);
                         } else {
-                            Singletons.getModel().getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card, null);
                         }
                     } else { // this is the human resolution
                         final Input target = new Input() {
@@ -745,7 +745,7 @@ class CardFactoryLands {
 
                             @Override
                             public void selectButtonCancel() {
-                                Singletons.getModel().getGameAction().sacrifice(card);
+                                Singletons.getModel().getGameAction().sacrifice(card, null);
                                 this.stop();
                             }
 

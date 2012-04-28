@@ -154,7 +154,7 @@ class CardFactoryArtifacts {
                         AllZone.getHumanPlayer().discard(c, null);
                         this.stop();
                     } else if (c.equals(card)) {
-                        Singletons.getModel().getGameAction().sacrifice(card);
+                        Singletons.getModel().getGameAction().sacrifice(card, null);
                         this.stop();
                     }
                 }
@@ -165,7 +165,7 @@ class CardFactoryArtifacts {
                 public void resolve() {
                     if (card.getController().isHuman()) {
                         if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).isEmpty()) {
-                            Singletons.getModel().getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card, null);
                         } else {
                             AllZone.getInputControl().setInput(discard);
                         }

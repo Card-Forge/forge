@@ -459,7 +459,7 @@ public final class AbilityFactoryCopy {
                                 if (params.get("AtEOT").equals("Sacrifice")) {
                                     // maybe do a setSacrificeAtEOT, but
                                     // probably not.
-                                    Singletons.getModel().getGameAction().sacrifice(target[index]);
+                                    Singletons.getModel().getGameAction().sacrifice(target[index], sa);
                                 } else if (params.get("AtEOT").equals("Exile")) {
                                     Singletons.getModel().getGameAction().exile(target[index]);
                                 }

@@ -209,7 +209,7 @@ public class CardFactoryCreatures {
             public void resolve() {
                 final CardList hand = card.getController().getCardsIn(ZoneType.Hand);
                 if (hand.size() == 0) {
-                    Singletons.getModel().getGameAction().sacrifice(card);
+                    Singletons.getModel().getGameAction().sacrifice(card, null);
                 } else {
                     card.getController().discardRandom(this);
                 }
@@ -547,7 +547,7 @@ public class CardFactoryCreatures {
                     @Override
                     public void execute() {
                         if (AllZoneUtil.isCardInPlay(card)) {
-                            Singletons.getModel().getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card, null);
                         }
                     }
                 });
@@ -1587,7 +1587,7 @@ public class CardFactoryCreatures {
                         @Override
                         public void selectButtonCancel() {
                             toSac.clear();
-                            Singletons.getModel().getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card, null);
                             this.stop();
                         }
 
@@ -1603,10 +1603,10 @@ public class CardFactoryCreatures {
                         private void done() {
                             if (getTotalPower() >= 12) {
                                 for (final Card sac : toSac) {
-                                    Singletons.getModel().getGameAction().sacrifice(sac);
+                                    Singletons.getModel().getGameAction().sacrifice(sac, null);
                                 }
                             } else {
-                                Singletons.getModel().getGameAction().sacrifice(card);
+                                Singletons.getModel().getGameAction().sacrifice(card, null);
                             }
                             toSac.clear();
                             this.stop();

@@ -781,7 +781,7 @@ public class MagicStack extends MyObservable {
                         @Override
                         public void selectCard(final Card c, final PlayerZone zone) {
                             if (zone.is(ZoneType.Battlefield) && c.getController().isHuman() && c.isLand()) {
-                                Singletons.getModel().getGameAction().sacrifice(c);
+                                Singletons.getModel().getGameAction().sacrifice(c, null);
                                 this.stop();
                             }
                         }

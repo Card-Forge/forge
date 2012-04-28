@@ -452,8 +452,7 @@ public class AbilityFactorySacrifice {
 
         if (valid.equals("Self")) {
             if (AllZone.getZoneOf(card).is(ZoneType.Battlefield)) {
-                Singletons.getModel().getGameAction().sacrifice(card);
-                if (remSacrificed) {
+                if (Singletons.getModel().getGameAction().sacrifice(card, sa) && remSacrificed) {
                     card.addRemembered(card);
                 }
             }
@@ -543,7 +542,7 @@ public class AbilityFactorySacrifice {
                         sacList.add(c);
                     }
                 } else {
-                    if (Singletons.getModel().getGameAction().sacrifice(c)) {
+                    if (Singletons.getModel().getGameAction().sacrifice(c, sa)) {
                         sacList.add(c);
                     }
                 }
@@ -836,7 +835,7 @@ public class AbilityFactorySacrifice {
         list = AbilityFactory.filterListByType(list, valid, sa);
 
         for (int i = 0; i < list.size(); i++) {
-            if (Singletons.getModel().getGameAction().sacrifice(list.get(i)) && remSacrificed) {
+            if (Singletons.getModel().getGameAction().sacrifice(list.get(i), sa) && remSacrificed) {
                 card.addRemembered(list.get(i));
             }
         }
