@@ -800,21 +800,24 @@ public class GameAction {
         final Ability activate = new Ability(card, "0") {
             @Override
             public void resolve() {
-                // pay miracle cost here.
+                // pay madness cost here.
                 if (card.getOwner().isHuman()) {
                     if (GameActionUtil.showYesNoDialog(card, card + " - Discarded. Pay Madness Cost?")) {
                         Singletons.getModel().getGameAction().playSpellAbility(madness);
                     }
                 } else {
-                    // computer will ALWAYS pay a miracle cost if he has the mana.
-                    ComputerUtil.playStack(madness);
+                    Spell spell = (Spell) madness;
+                    if (spell.canPlayFromEffectAI(false, false)) {
+                        ComputerUtil.playStack(madness);
+                    }
                 }
             }
         };
 
         final StringBuilder sbAct = new StringBuilder();
-        sbAct.append(card.getName()).append(" - Drawn. Pay Madness Cost?");
+        sbAct.append(card.getName()).append(" - Madness.");
         activate.setStackDescription(sbAct.toString());
+        activate.setActivatingPlayer(card.getOwner());
 
         AllZone.getStack().add(activate);
     }
