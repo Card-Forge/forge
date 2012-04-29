@@ -551,13 +551,14 @@ public class AbilityFactoryDestroy {
 
         for (final Card tgtC : tgtCards) {
             if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
+                boolean destroyed = false;
                 if (sac) {
-                    Singletons.getModel().getGameAction().sacrifice(tgtC, sa);
+                    destroyed = Singletons.getModel().getGameAction().sacrifice(tgtC, sa);
                 } else if (noRegen) {
-                    Singletons.getModel().getGameAction().destroyNoRegeneration(tgtC);
+                    destroyed = Singletons.getModel().getGameAction().destroyNoRegeneration(tgtC);
                 } else {
-                    Singletons.getModel().getGameAction().destroy(tgtC);
-                } if (remDestroyed) {
+                    destroyed = Singletons.getModel().getGameAction().destroy(tgtC);
+                } if (destroyed  && remDestroyed) {
                     card.addRemembered(tgtC);
                 }
             }
@@ -565,13 +566,14 @@ public class AbilityFactoryDestroy {
 
         for (final Card unTgtC : untargetedCards) {
             if (AllZoneUtil.isCardInPlay(unTgtC)) {
+                boolean destroyed = false;
                 if (sac) {
-                    Singletons.getModel().getGameAction().sacrifice(unTgtC, sa);
+                    destroyed = Singletons.getModel().getGameAction().sacrifice(unTgtC, sa);
                 } else if (noRegen) {
-                    Singletons.getModel().getGameAction().destroyNoRegeneration(unTgtC);
+                    destroyed = Singletons.getModel().getGameAction().destroyNoRegeneration(unTgtC);
                 } else {
-                    Singletons.getModel().getGameAction().destroy(unTgtC);
-                } if (remDestroyed) {
+                    destroyed = Singletons.getModel().getGameAction().destroy(unTgtC);
+                } if (destroyed  && remDestroyed) {
                     card.addRemembered(unTgtC);
                 }
             }
