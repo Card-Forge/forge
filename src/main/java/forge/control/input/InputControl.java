@@ -168,9 +168,10 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.control.input.Input} object.
      */
     public final Input updateInput() {
-        final PhaseType phase = this.model.getGameState().getPhaseHandler().getPhase();
-        final Player playerTurn = this.model.getGameState().getPhaseHandler().getPlayerTurn();
-        final Player priority = this.model.getGameState().getPhaseHandler().getPriorityPlayer();
+        final PhaseHandler handler = this.model.getGameState().getPhaseHandler();
+        final PhaseType phase = handler.getPhase();
+        final Player playerTurn = handler.getPlayerTurn();
+        final Player priority = handler.getPriorityPlayer();
 
         // TODO this resolving portion needs more work, but fixes Death Cloud
         // issues
@@ -196,15 +197,15 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             return this.input;
         }
 
-        if ((PhaseHandler.getGameBegins() != 0) && this.model.getGameState().getPhaseHandler().doPhaseEffects()) {
+        if ((PhaseHandler.getGameBegins() != 0) && handler.doPhaseEffects()) {
             // Handle begin phase stuff, then start back from the top
-            this.model.getGameState().getPhaseHandler().handleBeginPhase();
+            handler.handleBeginPhase();
             return this.updateInput();
         }
 
         // If the Phase we're in doesn't allow for Priority, return null to move
         // to next phase
-        if (this.model.getGameState().getPhaseHandler().isNeedToNextPhase()) {
+        if (handler.isNeedToNextPhase()) {
             return null;
         }
 
@@ -212,7 +213,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         if (phase == PhaseType.COMBAT_DECLARE_ATTACKERS) {
             this.model.getGameState().getStack().freezeStack();
 
-            if (playerTurn.isHuman()) {
+            if (playerTurn.isHuman() && !handler.getAutoPass()) {
                 return new InputAttack();
             }
         } else if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS) {
@@ -223,9 +224,10 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             } else {
                 if (this.model.getGameState().getCombat().getAttackers().isEmpty()) {
                     // no active attackers, skip the Blocking phase
-                    this.model.getGameState().getPhaseHandler().setNeedToNextPhase(true);
+                    handler.setNeedToNextPhase(true);
                     return null;
                 } else {
+                    handler.setAutoPass(false);
                     return new InputBlock();
                 }
             }
@@ -244,11 +246,8 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         if (priority == null) {
             return null;
         } else if (priority.isHuman()) {
-            final boolean skip = this.model.getGameState().getPhaseHandler().doSkipPhase();
-            this.model.getGameState().getPhaseHandler().setSkipPhase(false);
-            if ((this.model.getGameState().getStack().size() == 0)
-                    && !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(playerTurn, phase) && skip) {
-                this.model.getGameState().getPhaseHandler().passPriority();
+            if (autoSkipHumanPriority(playerTurn, phase)) {
+                handler.passPriority();
                 return null;
             } else {
                 return new InputPassPriority();
@@ -260,6 +259,22 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             return null;
         }
     } // getInput()
+
+    private boolean autoSkipHumanPriority(Player turn, PhaseType phase) {
+        PhaseHandler handler = this.model.getGameState().getPhaseHandler();
+        // Handler tells me if I should skip, and I reset the flag
+        final boolean skip = handler.doSkipPhase();
+        handler.setSkipPhase(false);
+
+        // If the stack isn't empty, and skip is disallowed, stop auto passing
+        if (!skip || !this.model.getGameState().getStack().isEmpty()) {
+            handler.setAutoPass(false);
+            return false;
+        }
+
+        // Player is AutoPassing, or Player doesn't stop on this phase
+        return handler.getAutoPass() || !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
+    }
 
     /**
      * Sets the computer.

@@ -64,12 +64,7 @@ public enum CDock implements ICDoc {
      * End turn.
      */
     public void endTurn() {
-        // Big thanks to you, Gameplay Guru, since I was too lazy to figure this
-        // out before release. Doublestrike 24-11-11
-        //
-        System.err.println("forge.control.match > CDock > endTurn()");
-        System.out.println("Should skip to the end of turn, or entire turn.");
-        System.err.println("If some gameplay guru could implement this, that would be great...");
+        Singletons.getModel().getGameState().getPhaseHandler().autoPassToCleanup();
     }
 
     private void revertLayout() {

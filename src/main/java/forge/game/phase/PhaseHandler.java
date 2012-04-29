@@ -32,6 +32,8 @@ import forge.GameActionUtil;
 import forge.MyObservable;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
+import forge.control.input.Input;
+import forge.control.input.InputControl;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.EDocID;
@@ -67,6 +69,10 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     private boolean bPreventCombatDamageThisTurn;
 
     private Player playerTurn = AllZone.getHumanPlayer();
+
+    private Player skipToTurn = AllZone.getHumanPlayer();
+    private PhaseType skipToPhase = PhaseType.CLEANUP;
+    private boolean autoPass = false;
 
     /**
      * <p>
@@ -296,6 +302,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         this.bPreventCombatDamageThisTurn = false;
         this.bCombat = false;
         this.bRepeat = false;
+        this.autoPass = false;
         this.updateObservers();
     }
 
@@ -320,6 +327,10 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         final Player turn = this.getPlayerTurn();
         this.setSkipPhase(true);
         Singletons.getModel().getGameAction().checkStateEffects();
+
+        if (this.isAutoPassedPhase(turn, phase)) {
+            this.setAutoPass(false);
+        }
 
         switch(phase) {
             case UNTAP:
@@ -583,7 +594,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         // pushes through that block
         this.updateObservers();
 
-        if ((this != null) && this.isNeedToNextPhase()) {
+        if (this.isNeedToNextPhase()) {
             this.setNeedToNextPhase(false);
             this.nextPhase();
         }
@@ -821,13 +832,13 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final void passPriority() {
         final Player actingPlayer = this.getPriorityPlayer();
-        final Player lastToAct = this.getFirstPriority();
+        final Player firstAction = this.getFirstPriority();
 
         // actingPlayer is the player who may act
-        // the lastToAct is the player who gained Priority First in this segment
+        // the firstAction is the player who gained Priority First in this segment
         // of Priority
 
-        if (lastToAct.equals(actingPlayer)) {
+        if (firstAction.equals(actingPlayer)) {
             // pass the priority to other player
             this.setPriorityPlayer(actingPlayer.getOpponent());
             AllZone.getInputControl().resetInput();
@@ -845,6 +856,35 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 }
             }
             AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
+        }
+    }
+
+    public void setAutoPass(boolean bAutoPass) {
+        this.autoPass = bAutoPass;
+    }
+
+    public boolean getAutoPass() {
+        return this.autoPass;
+    }
+
+    public boolean isAutoPassedPhase(Player skipToTurn, PhaseType skipToPhase) {
+        return this.skipToTurn == skipToTurn && this.skipToPhase == skipToPhase;
+    }
+
+    public void autoPassToCleanup() {
+        this.autoPassTo(playerTurn, PhaseType.CLEANUP);
+    }
+
+    public void autoPassTo(Player skipToTurn, PhaseType skipToPhase) {
+        this.skipToTurn = skipToTurn;
+        this.skipToPhase = skipToPhase;
+        this.autoPass = true;
+        this.bSkipPhase = true;
+
+        if (this.getPriorityPlayer().isHuman()) {
+            // TODO This doesn't work quite 100% but pretty close
+            this.passPriority();
+            AllZone.getInputControl().resetInput();
         }
     }
 
