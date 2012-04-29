@@ -1174,11 +1174,18 @@ public class GameAction {
      * 
      * @param c
      *            a {@link forge.Card} object.
+     * @param source
+     *            a SpellAbility object.
      * @return a boolean.
      */
     public final boolean sacrifice(final Card c, final SpellAbility source) {
         if (c.isImmutable()) {
             System.out.println("Trying to sacrifice immutables: " + c);
+            return false;
+        }
+        if (source != null && !c.getController().equals(source.getActivatingPlayer())
+                && c.getController().hasKeyword("Spells and abilities your opponents control can't cause"
+                        + " you to sacrifice permanents.")) {
             return false;
         }
         this.sacrificeDestroy(c);
