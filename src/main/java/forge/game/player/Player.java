@@ -1721,18 +1721,6 @@ public abstract class Player extends GameEntity {
         return milled;
     }
 
-    /**
-     * <p>
-     * handToLibrary.
-     * </p>
-     * 
-     * @param numToLibrary
-     *            a int.
-     * @param libPos
-     *            a {@link java.lang.String} object.
-     */
-    public abstract void handToLibrary(final int numToLibrary, String libPos);
-
     // //////////////////////////////
     /**
      * <p>
@@ -2087,28 +2075,6 @@ public abstract class Player extends GameEntity {
      *            a {@link forge.CardList} object.
      */
     public abstract void sacrificePermanent(String prompt, CardList choices);
-
-    /**
-     * <p>
-     * sacrificeCreature.
-     * </p>
-     */
-    public final void sacrificeCreature() {
-        final CardList choices = AllZoneUtil.getCreaturesInPlay(this);
-        this.sacrificePermanent("Select a creature to sacrifice.", choices);
-    }
-
-    /**
-     * <p>
-     * sacrificeCreature.
-     * </p>
-     * 
-     * @param choices
-     *            a {@link forge.CardList} object.
-     */
-    public final void sacrificeCreature(final CardList choices) {
-        this.sacrificePermanent("Select a creature to sacrifice.", choices);
-    }
 
     // Game win/loss
 

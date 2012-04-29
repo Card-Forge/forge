@@ -208,50 +208,6 @@ public class AIPlayer extends Player {
         AllZone.getComputerPlayer().discard(num, sa, false);
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final void handToLibrary(final int numToLibrary, final String libPosIn) {
-        final String libPos = libPosIn;
-
-        for (int i = 0; i < numToLibrary; i++) {
-            int position;
-            if (libPos.equalsIgnoreCase("Top")) {
-                position = 0;
-            } else if (libPos.equalsIgnoreCase("Bottom")) {
-                position = -1;
-            } else {
-                final Random r = MyRandom.getRandom();
-                if (r.nextBoolean()) {
-                    position = 0;
-                } else {
-                    position = -1;
-                }
-            }
-            final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-
-            CardList blIP = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-
-            blIP = blIP.getType("Basic");
-            if (blIP.size() > 5) {
-                final CardList blIH = hand.getType("Basic");
-                if (blIH.size() > 0) {
-                    final Card card = blIH.get(CardUtil.getRandomIndex(blIH));
-
-                    Singletons.getModel().getGameAction().moveToLibrary(card, position);
-                } else {
-                    CardListUtil.sortAttackLowFirst(hand);
-                    CardListUtil.sortNonFlyingFirst(hand);
-
-                    Singletons.getModel().getGameAction().moveToLibrary(hand.get(0), position);
-                }
-            } else {
-                CardListUtil.sortCMC(hand);
-
-                Singletons.getModel().getGameAction().moveToLibrary(hand.get(0), position);
-            }
-        }
-    }
-
     // /////////////////////////
 
     /** {@inheritDoc} */

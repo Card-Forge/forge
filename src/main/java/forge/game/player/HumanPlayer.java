@@ -195,24 +195,6 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     @Override
-    public final void handToLibrary(final int numToLibrary, String libPos) {
-        if (libPos.equals("Top") || libPos.equals("Bottom")) {
-            libPos = libPos.toLowerCase();
-        } else {
-            String s = "card";
-            if (numToLibrary > 1) {
-                s += "s";
-            }
-
-            final Object o = GuiUtils.chooseOne("Do you want to put the " + s
-                    + " on the top or bottom of your library?", new Object[] { "top", "bottom" });
-            libPos = o.toString();
-        }
-        AllZone.getInputControl().setInput(PlayerUtil.inputPutFromHandToLibrary(libPos, numToLibrary));
-    }
-
-    /** {@inheritDoc} */
-    @Override
     protected final void doScry(final CardList topN, final int n) {
         int num = n;
         for (int i = 0; i < num; i++) {
