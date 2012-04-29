@@ -83,9 +83,8 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         }
 
         final Card c = this.getSourceCard();
-        if (c.isFaceDown() && this.isIntrinsic()) { // Intrinsic abilities can't
-                                                    // be
-            // activated by face down cards
+        if (c.isFaceDown() && this.isIntrinsic()) {
+            // Intrinsic abilities can't be activated by face down cards
             return false;
         }
 
@@ -101,6 +100,10 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         }
 
         if (c.hasKeyword("CARDNAME's activated abilities can't be activated.") || this.isSuppressed()) {
+            return false;
+        }
+
+        if (this.isCycling() && AllZoneUtil.isCardInPlay("Stabilizer")) {
             return false;
         }
 

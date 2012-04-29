@@ -1024,58 +1024,16 @@ public class CardFactoryUtil {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility abilityCycle(final Card sourceCard, String cycleCost) {
-        cycleCost += " Discard<1/CARDNAME>";
-        final Cost abCost = new Cost(sourceCard, cycleCost, true);
+        StringBuilder sb = new StringBuilder();
+        sb.append("AB$ Draw | Cost$ ");
+        sb.append(cycleCost);
+        sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Cycling ");
+        sb.append("| SpellDescription$ Draw a card.");
 
-        final SpellAbility cycle = new AbilityActivated(sourceCard, abCost, null) {
-            private static final long serialVersionUID = -4960704261761785512L;
-
-            @Override
-            public boolean canPlayAI() {
-
-                if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
-                    return false;
-                }
-
-                // The AI should cycle lands if it has 6 already and no cards in
-                // hand with higher CMC
-                final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                CardList lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                lands.addAll(hand);
-                lands = lands.getType("Land");
-
-                if (sourceCard.isLand() && (lands.size() >= Math.max(hand.getHighestConvertedManaCost(), 6))) {
-                    return true;
-                }
-
-                // TODO - When else should AI Cycle?
-                return false;
-            }
-
-            @Override
-            public boolean canPlay() {
-                if (AllZoneUtil.isCardInPlay("Stabilizer")) {
-                    return false;
-                }
-                return super.canPlay();
-            }
-
-            @Override
-            public void resolve() {
-                sourceCard.getController().drawCard();
-            }
-        };
+        AbilityFactory af = new AbilityFactory();
+        SpellAbility cycle = af.getAbility(sb.toString(), sourceCard);
         cycle.setIsCycling(true);
-        final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Cycling ").append(cycle.getManaCost()).append(" (");
-        sbDesc.append(abCost.toString()).append(" Draw a card.)");
-        cycle.setDescription(sbDesc.toString());
 
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(sourceCard).append(" Cycling: Draw a card");
-        cycle.setStackDescription(sbStack.toString());
-
-        cycle.getRestrictions().setZone(ZoneType.Hand);
         return cycle;
     } // abilityCycle()
 
@@ -1093,76 +1051,23 @@ public class CardFactoryUtil {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility abilityTypecycle(final Card sourceCard, String cycleCost, final String type) {
-        String description;
-        cycleCost += " Discard<1/CARDNAME>";
-        final Cost abCost = new Cost(sourceCard, cycleCost, true);
+        StringBuilder sb = new StringBuilder();
+        sb.append("AB$ ChangeZone | Cost$ ").append(cycleCost);
 
-        final SpellAbility cycle = new AbilityActivated(sourceCard, abCost, null) {
-            private static final long serialVersionUID = -4960704261761785512L;
-
-            @Override
-            public boolean canPlayAI() {
-                return false;
-            }
-
-            // some AI code could be added (certain colored mana needs analyze
-            // method maybe)
-
-            @Override
-            public boolean canPlay() {
-                if (AllZoneUtil.isCardInPlay("Stabilizer")) {
-                    return false;
-                }
-                return super.canPlay();
-            }
-
-            @Override
-            public void resolve() {
-                final CardList cards = sourceCard.getController().getCardsIn(ZoneType.Library);
-                final CardList sameType = new CardList();
-
-                for (int i = 0; i < cards.size(); i++) {
-                    if (cards.get(i).isType(type)) {
-                        sameType.add(cards.get(i));
-                    }
-                }
-
-                if (sameType.size() == 0) {
-                    sourceCard.getController().discard(sourceCard, this);
-                    return;
-                }
-
-                final Object o = GuiUtils.chooseOneOrNone("Select a card", sameType.toArray());
-                if (o != null) {
-                    // ability.setTargetCard((Card)o);
-
-                    sourceCard.getController().discard(sourceCard, this);
-                    final Card c1 = (Card) o;
-                    Singletons.getModel().getGameAction().moveToHand(c1);
-
-                }
-                sourceCard.getController().shuffle();
-            }
-        };
-        if (type.contains("Basic")) {
-            description = "Basic land";
-        } else {
-            description = type;
+        String desc = type;
+        if (type.equals("Basic")) {
+            desc = "Basic land";
         }
 
+        sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ ").append(desc).append("cycling ");
+        sb.append("| Origin$ Library | Destination$ Hand |");
+        sb.append("ChangeType$ ").append(type);
+        sb.append(" | SpellDescription$ Search your library for a ").append(desc).append(" card, reveal it,");
+        sb.append(" and put it into your hand. Then shuffle your library.");
+
+        AbilityFactory af = new AbilityFactory();
+        SpellAbility cycle = af.getAbility(sb.toString(), sourceCard);
         cycle.setIsCycling(true);
-        final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append(description).append("cycling (").append(abCost.toString());
-        sbDesc.append(" Search your library for a ").append(description);
-        sbDesc.append(" card, reveal it, and put it into your hand. Then shuffle your library.)");
-        cycle.setDescription(sbDesc.toString());
-
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(sourceCard).append(" ").append(description);
-        sbStack.append("cycling: Search your library for a ").append(description).append(" card.)");
-        cycle.setStackDescription(sbStack.toString());
-
-        cycle.getRestrictions().setZone(ZoneType.Hand);
 
         return cycle;
     } // abilityTypecycle()
