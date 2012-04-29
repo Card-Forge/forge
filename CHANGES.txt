@@ -317,6 +317,22 @@ Fixes/Features:
 - Added some Keywords related to Angel of Jubilation
 - Fkxed Angel of Jubilation
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Miracle of Blessings of Nature.
+- Update Miracle and Madness to use playSpellAbility so they go through costChange()
+- Added basic AI to Miracle.
+- Added DoTriggerAI and canPlayFromEffectAI functions to AF ChangeZoneAll (mainly for Terminus).
+- Added basic AI to Madness.
+- First step towards the player keyword "Spells and abilities your opponents control can't cause you to sacrifice permanents."
+- Fixing Exterminator CC
+- Initial checkin for EndTurn and skipToPhase functionality. The first priority doesn't pass automatically for some reason, but it does help speed things along, so it's worth being there until that first passing can get worked out.
+- Convert cycling and typecycling to AF Scripts
+- No need for two variables when we can just have one
+- Some cleanup, and simplification
+- Fixed some trigger descriptions.
+- Added the keyword "Damage that would be dealt by CARDNAME can't be prevented.".
+- Deleted some unused functions.
+- Further steps towards the player keyword "Spells and abilities your opponents control can't cause you to sacrifice permanents."
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -570,6 +586,11 @@ Extravagant Spirit
 Fettergeist
 Outwit
 Angel of Jubilation
+Bonfire of the Damned
+Entreat the Angels
+Excruciator
+Malignus
+Hidden Predators
 
 
 end
