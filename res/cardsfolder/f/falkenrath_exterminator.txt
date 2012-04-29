@@ -1,5 +1,5 @@
 Name:Falkenrath Exterminator
-ManaCost:2 R
+ManaCost:1 R
 Types:Creature Vampire Archer
 Text:no text
 PT:1/1
