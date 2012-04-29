@@ -5477,6 +5477,7 @@ res/cardsfolder/m/malfegor.txt -text svneol=unset#text/plain
 res/cardsfolder/m/malicious_advice.txt svneol=native#text/plain
 res/cardsfolder/m/malicious_intent.txt -text
 res/cardsfolder/m/malignant_growth.txt svneol=native#text/plain
+res/cardsfolder/m/malignus.txt -text
 res/cardsfolder/m/mammoth_umbra.txt svneol=native#text/plain
 res/cardsfolder/m/man_o_war.txt svneol=native#text/plain
 res/cardsfolder/m/mana_breach.txt svneol=native#text/plain
