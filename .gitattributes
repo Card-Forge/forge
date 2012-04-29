@@ -9189,6 +9189,7 @@ res/cardsfolder/t/tainted_well.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_wood.txt svneol=native#text/plain
 res/cardsfolder/t/taj_nar_swordsmith.txt svneol=native#text/plain
 res/cardsfolder/t/tajuru_archer.txt svneol=native#text/plain
+res/cardsfolder/t/tajuru_preserver.txt -text
 res/cardsfolder/t/take_possession.txt svneol=native#text/plain
 res/cardsfolder/t/takenos_cavalry.txt svneol=native#text/plain
 res/cardsfolder/t/takenuma_bleeder.txt svneol=native#text/plain
