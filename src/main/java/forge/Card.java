@@ -7884,7 +7884,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
 
-        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) {
+        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")
+                || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
         }
 

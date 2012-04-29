@@ -2876,6 +2876,7 @@ res/cardsfolder/e/excise.txt svneol=native#text/plain
 res/cardsfolder/e/exclude.txt svneol=native#text/plain
 res/cardsfolder/e/exclusion_ritual.txt -text
 res/cardsfolder/e/excommunicate.txt svneol=native#text/plain
+res/cardsfolder/e/excruciator.txt -text
 res/cardsfolder/e/execute.txt svneol=native#text/plain
 res/cardsfolder/e/executioners_capsule.txt svneol=native#text/plain
 res/cardsfolder/e/executioners_hood.txt -text
