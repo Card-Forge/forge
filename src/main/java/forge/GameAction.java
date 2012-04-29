@@ -721,7 +721,7 @@ public class GameAction {
     public final void drawMiracle(final Card card) {
         // Whenever a card with miracle is the first card drawn in a turn,
         // you may cast it for it's miracle cost
-        if (!card.hasMiracle()) {
+        if (card.getMiracleCost() == null) {
             return;
         }
 
@@ -785,7 +785,7 @@ public class GameAction {
     public final void discardMadness(final Card card) {
         // Whenever a card with madness is discarded, you may cast it for it's
         // madness cost
-        if (!card.hasMadness()) {
+        if (card.getMadnessCost() == null) {
             return;
         }
 

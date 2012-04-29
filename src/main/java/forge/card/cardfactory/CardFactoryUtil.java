@@ -5033,8 +5033,6 @@ public class CardFactoryUtil {
                 // card.removeIntrinsicKeyword(parse);
 
                 final String[] k = parse.split(":");
-
-                card.setMadness(true);
                 card.setMadnessCost(k[1]);
             }
         } // madness
@@ -5046,8 +5044,6 @@ public class CardFactoryUtil {
                 // card.removeIntrinsicKeyword(parse);
 
                 final String[] k = parse.split(":");
-
-                card.setMiracle(true);
                 card.setMiracleCost(k[1]);
             }
         } // miracle
