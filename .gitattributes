@@ -7128,6 +7128,7 @@ res/cardsfolder/r/ragnar.txt svneol=native#text/plain
 res/cardsfolder/r/raid_bombardment.txt svneol=native#text/plain
 res/cardsfolder/r/raiding_nightstalker.txt svneol=native#text/plain
 res/cardsfolder/r/rain_of_blades.txt svneol=native#text/plain
+res/cardsfolder/r/rain_of_daggers.txt -text
 res/cardsfolder/r/rain_of_embers.txt svneol=native#text/plain
 res/cardsfolder/r/rain_of_filth.txt -text svneol=unset#text/plain
 res/cardsfolder/r/rain_of_rust.txt svneol=native#text/plain

@@ -2,7 +2,7 @@ Name:Overwhelming Forces
 ManaCost:6 B B
 Types:Sorcery
 Text:no text
-A:SP$ DestroyAll | Cost$ 6 B B | ValidCards$ Creature.YouDontCtrl | RememberDestroyed$ True | SubAbility$ DBDrawCard | SpellDescription$ Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
+A:SP$ DestroyAll | Cost$ 6 B B | ValidCards$ Creature | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberDestroyed$ True | SubAbility$ DBDrawCard | SpellDescription$ Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
 SVar:DBDrawCard:DB$Draw | NumCards$ X
 SVar:X:Remembered$Amount
 SVar:Rarity:Rare

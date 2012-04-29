@@ -1,0 +1,13 @@
+Name:Rain of Daggers
+ManaCost:4 B B
+Types:Sorcery
+Text:no text
+A:SP$ DestroyAll | Cost$ 4 B B | ValidCards$ Creature | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberDestroyed$ True | SubAbility$ DBLoseLife | SpellDescription$ Destroy all creatures target opponent controls. You lose 2 life for each creature destroyed this way.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
+SVar:X:Remembered$Amount/Twice
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_daggers.jpg
+SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/25.jpg
+Oracle:Destroy all creatures target opponent controls. You lose 2 life for each creature destroyed this way.
+End
