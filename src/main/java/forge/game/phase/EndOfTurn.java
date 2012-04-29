@@ -80,6 +80,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Sacrifice ").append(card);
                 sac.setStackDescription(sb.toString());
+                sac.setDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(sac);
 
@@ -97,6 +98,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Exile ").append(card);
                 exile.setStackDescription(sb.toString());
+                exile.setDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(exile);
 
@@ -114,6 +116,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Destroy ").append(card);
                 destroy.setStackDescription(sb.toString());
+                destroy.setDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(destroy);
 
@@ -133,6 +136,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Destroy ").append(card);
                     sac.setStackDescription(sb.toString());
+                    sac.setDescription(sb.toString());
 
                     AllZone.getStack().addSimultaneousStackEntry(sac);
 
@@ -160,6 +164,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(vale.getName()).append(" changes controllers.");
                 change.setStackDescription(sb.toString());
+                change.setDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(change);
 
@@ -178,6 +183,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(raider).append(" deals 2 damage to controller.");
                 change.setStackDescription(sb.toString());
+                change.setDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(change);
 
@@ -196,6 +202,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(source).append(" - At the beginning of your end step, return CARDNAME to its owner's hand.");
                 change.setStackDescription(sb.toString());
+                change.setDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(change);
 
@@ -245,6 +252,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
             final StringBuilder sb = new StringBuilder();
             sb.append(card).append(" - ").append(player).append(" gains life equal to target creature's power.");
             ability.setStackDescription(sb.toString());
+            ability.setDescription(sb.toString());
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
@@ -276,6 +284,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
             final StringBuilder sb = new StringBuilder();
             sb.append(card).append(" - ").append(card.getController()).append(" takes an extra turn.");
             ability.setStackDescription(sb.toString());
+            ability.setDescription(sb.toString());
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
