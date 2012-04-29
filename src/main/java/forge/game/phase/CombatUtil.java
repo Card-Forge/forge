@@ -41,6 +41,7 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityFactorySacrifice;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.staticability.StaticAbility;
@@ -50,7 +51,6 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostAbility;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerUtil;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
@@ -2548,9 +2548,10 @@ public class CombatUtil {
                         public void resolve() {
                             if (crd.getController().isHuman()) {
                                 final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                                ComputerUtil.sacrificePermanents(a, list, false);
+                                ComputerUtil.sacrificePermanents(a, list, false, this);
                             } else {
-                                AllZone.getInputControl().setInput(PlayerUtil.inputSacrificePermanents(a));
+                                AbilityFactorySacrifice.sacrificeHuman(AllZone.getHumanPlayer(), a, "Permanent", this,
+                                        false, false);
                             }
 
                         }
@@ -2559,6 +2560,7 @@ public class CombatUtil {
                     sb.append("Annihilator - Defending player sacrifices ").append(a).append(" permanents.");
                     ability.setStackDescription(sb.toString());
                     ability.setDescription(sb.toString());
+                    ability.setActivatingPlayer(c.getController());
 
                     AllZone.getStack().add(ability);
                 } // find

@@ -1713,9 +1713,12 @@ public class ComputerUtil {
      *            a {@link forge.CardList} object.
      * @param destroy
      *            the destroy
+     * @param source
+     *            the source SpellAbility
      * @return the card list
      */
-    public static CardList sacrificePermanents(final int amount, final CardList list, final boolean destroy) {
+    public static CardList sacrificePermanents(final int amount, final CardList list, final boolean destroy,
+            SpellAbility source) {
         final CardList sacList = new CardList();
         // used in Annihilator and AF_Sacrifice
         int max = list.size();
@@ -1762,7 +1765,7 @@ public class ComputerUtil {
                         continue;
                     }
                 } else {
-                    if (!Singletons.getModel().getGameAction().sacrifice(c, null)) {
+                    if (!Singletons.getModel().getGameAction().sacrifice(c, source)) {
                         continue;
                     }
                 }

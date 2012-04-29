@@ -497,7 +497,7 @@ public class AbilityFactorySacrifice {
             final boolean destroy) {
         CardList battlefield = p.getCardsIn(ZoneType.Battlefield);
         CardList sacList = AbilityFactory.filterListByType(battlefield, valid, sa);
-        sacList = ComputerUtil.sacrificePermanents(amount, sacList, destroy);
+        sacList = ComputerUtil.sacrificePermanents(amount, sacList, destroy, sa);
 
         return sacList;
     }
@@ -518,7 +518,7 @@ public class AbilityFactorySacrifice {
      * @param message
      *            a {@link java.lang.String} object.
      */
-    private static CardList sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
+    public static CardList sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy, final boolean optional) {
         CardList battlefield = p.getCardsIn(ZoneType.Battlefield);
         CardList list = AbilityFactory.filterListByType(battlefield, valid, sa);
