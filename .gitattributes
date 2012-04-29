@@ -4218,6 +4218,7 @@ res/cardsfolder/h/hidden_guerrillas.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_herd.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_horror.txt -text
 res/cardsfolder/h/hidden_path.txt svneol=native#text/plain
+res/cardsfolder/h/hidden_predators.txt -text
 res/cardsfolder/h/hidden_spider.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_stag.txt -text svneol=unset#text/plain
 res/cardsfolder/h/hideous_end.txt svneol=native#text/plain
