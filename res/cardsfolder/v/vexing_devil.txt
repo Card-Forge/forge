@@ -1,0 +1,13 @@
+Name:Vexing Devil
+ManaCost:R
+Types:Creature Devil
+Text:no text
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | OptionalDecider$ Opponent | TriggerDescription$ When CARDNAME enters the battlefield, any opponent may have it deal 4 damage to him or her. If a player does, sacrifice CARDNAME.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ 4 | SubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ Self
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_devil.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/164.jpg
+Oracle:When Vexing Devil enters the battlefield, any opponent may have it deal 4 damage to him or her. If a player does, sacrifice Vexing Devil.
+End
