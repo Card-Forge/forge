@@ -783,61 +783,6 @@ public class CardFactoryUtil {
         return CardFactoryUtil.getCheapestPermanentAI(list, null, false);
     }
 
-    /**
-     * <p>
-     * inputSpell.
-     * </p>
-     * 
-     * @param spell
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param choices
-     *            a {@link forge.CardList} object.
-     * @param free
-     *            a boolean.
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input inputSpell(final SpellAbility spell, final CardList choices, final boolean free) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 2781418414287281005L;
-
-            @Override
-            public void showMessage() {
-                if (choices.size() == 0) {
-                    this.stop();
-                }
-                if (spell.getTargetCard() != null) {
-                    this.stop();
-                }
-                CMatchUI.SINGLETON_INSTANCE.showMessage("Select target Spell: ");
-                final Card choice = GuiUtils.chooseOneOrNone("Choose a Spell", choices.toArray());
-                if (choice != null) {
-                    spell.setTargetCard(choice);
-                    this.done();
-                } else {
-                    this.stop();
-                }
-
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.stop();
-            }
-
-            void done() {
-                choices.clear();
-                if (spell.getManaCost().equals("0") || this.isFree()) {
-                    if (spell.getTargetCard() != null) {
-                        AllZone.getStack().add(spell);
-                    }
-                    this.stop();
-                } else {
-                    this.stopSetNext(new InputPayManaCost(spell));
-                }
-            }
-        };
-        return target;
-    } // inputSpell()
 
     /**
      * <p>
@@ -1413,24 +1358,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * getEldraziSpawnAbility.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.card.spellability.AbilityMana} object.
-     */
-    public static AbilityMana getEldraziSpawnAbility(final Card c) {
-        final Cost cost = new Cost(c, "Sac<1/CARDNAME>", true);
-        final AbilityMana mana = new AbilityMana(c, cost, "1") {
-            private static final long serialVersionUID = -2478676548112738019L;
-        };
-        mana.setDescription("Sacrifice CARDNAME: Add 1 to your mana pool.");
-        return mana;
-    }
-
-    /**
-     * <p>
      * entersBattleFieldWithCounters.
      * </p>
      * 
@@ -1466,21 +1393,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.Command} object.
      */
     public static Command fading(final Card sourceCard, final int power) {
-        final Command fade = new Command() {
-            private static final long serialVersionUID = 431920157968451817L;
-            private boolean firstTime = true;
-
-            @Override
-            public void execute() {
-
-                // testAndSet - only needed when enters the battlefield.
-                if (this.firstTime) {
-                    sourceCard.addCounter(Counters.FADE, power);
-                }
-                this.firstTime = false;
-            }
-        };
-        return fade;
+        return entersBattleFieldWithCounters(sourceCard, Counters.FADE, power);
     } // fading
 
     /**
@@ -1495,21 +1408,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.Command} object.
      */
     public static Command vanishing(final Card sourceCard, final int power) {
-        final Command age = new Command() {
-            private static final long serialVersionUID = 431920157968451817L;
-            private boolean firstTime = true;
-
-            @Override
-            public void execute() {
-
-                // testAndSet - only needed when enters the battlefield
-                if (this.firstTime) {
-                    sourceCard.addCounter(Counters.TIME, power);
-                }
-                this.firstTime = false;
-            }
-        };
-        return age;
+        return entersBattleFieldWithCounters(sourceCard, Counters.TIME, power);
     } // vanishing
 
     /**
@@ -4350,83 +4249,6 @@ public class CardFactoryUtil {
 
             }
         } // echo
-
-        /*if (CardFactoryUtil.hasKeyword(card, "HandSize") != -1) {
-            final String toParse = card.getKeyword().get(CardFactoryUtil.hasKeyword(card, "HandSize"));
-            card.removeIntrinsicKeyword(toParse);
-
-            final String[] parts = toParse.split(" ");
-            final String mode = parts[1];
-            final int amount;
-            if (parts[2].equals("INF")) {
-                amount = -1;
-            } else {
-                amount = Integer.parseInt(parts[2]);
-            }
-            final String target = parts[3];
-
-            final Command entersPlay, leavesPlay, controllerChanges;
-
-            entersPlay = new Command() {
-                private static final long serialVersionUID = 98743547743456L;
-
-                @Override
-                public void execute() {
-                    card.setSVar("HSStamp", "" + Player.getHandSizeStamp());
-                    if (target.equals("Self") || target.equals("All")) {
-                        card.getController().addHandSizeOperation(
-                                new HandSizeOp(mode, amount, Integer.parseInt(card.getSVar("HSStamp"))));
-                    }
-                    if (target.equals("Opponent") || target.equals("All")) {
-                        card.getController()
-                                .getOpponent()
-                                .addHandSizeOperation(
-                                        new HandSizeOp(mode, amount, Integer.parseInt(card.getSVar("HSStamp"))));
-                    }
-                }
-            };
-
-            leavesPlay = new Command() {
-                private static final long serialVersionUID = -6843545358873L;
-
-                @Override
-                public void execute() {
-                    if (target.equals("Self") || target.equals("All")) {
-                        card.getController().removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                    }
-                    if (target.equals("Opponent") || target.equals("All")) {
-                        card.getController().getOpponent()
-                                .removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                    }
-                }
-            };
-
-            controllerChanges = new Command() {
-                private static final long serialVersionUID = 778987998465463L;
-
-                @Override
-                public void execute() {
-                    Log.debug("HandSize", "Control changed: " + card.getController());
-                    if (card.getController().isHuman()) {
-                        AllZone.getHumanPlayer().removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                        AllZone.getComputerPlayer().addHandSizeOperation(
-                                new HandSizeOp(mode, amount, Integer.parseInt(card.getSVar("HSStamp"))));
-
-                        AllZone.getComputerPlayer().sortHandSizeOperations();
-                    } else if (card.getController().isComputer()) {
-                        AllZone.getComputerPlayer().removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                        AllZone.getHumanPlayer().addHandSizeOperation(
-                                new HandSizeOp(mode, amount, Integer.parseInt(card.getSVar("HSStamp"))));
-
-                        AllZone.getHumanPlayer().sortHandSizeOperations();
-                    }
-                }
-            };
-
-            card.addComesIntoPlayCommand(entersPlay);
-            card.addLeavesPlayCommand(leavesPlay);
-            card.addChangeControllerCommand(controllerChanges);
-        }*/ // HandSize
 
         if (CardFactoryUtil.hasKeyword(card, "Suspend") != -1) {
             // Suspend:<TimeCounters>:<Cost>
