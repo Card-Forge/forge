@@ -93,10 +93,14 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
         final Card card = this.getSourceCard();
 
-        final Player activator = this.getActivatingPlayer();
+        Player activator = this.getActivatingPlayer();
+        if (activator == null) {
+            activator = this.getSourceCard().getController();
+        }
 
-        if (!(card.isInstant() || card.hasKeyword("Flash") || PhaseHandler.canCastSorcery(activator)
-               || this.getRestrictions().isInstantSpeed())) {
+        if (!(card.isInstant() || PhaseHandler.canCastSorcery(activator) || card.hasKeyword("Flash")
+               || this.getRestrictions().isInstantSpeed()
+               || activator.hasKeyword("You may cast nonland cards as though they had flash."))) {
             return false;
         }
 

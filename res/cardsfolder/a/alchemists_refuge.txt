@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Effect | Cost$ U G T | Name$ Refuge Effect | StaticAbilities$ QuickSpell | SpellDescription$ Until end of turn, you may cast nonland cards as though they had flash.
-SVar:QuickSpell:Mode$ Continuous | Affected$ Card.nonLand+YouCtrl | AddHiddenKeyword$ HIDDEN Flash | AffectedZone$ Exile,Graveyard,Hand,Library
+SVar:QuickSpell:Mode$ Continuous | Affected$ You | AddKeyword$ You may cast nonland cards as though they had flash. | Description$ You may cast nonland cards as though they had flash.
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
