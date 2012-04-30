@@ -93,7 +93,9 @@ public class AbilityFactoryAttach {
                 public void resolve() {
                     // The Spell_Permanent (Auras) version of this AF needs to
                     // move the card into play before Attaching
-                    final Card c = Singletons.getModel().getGameAction().moveToPlay(this.getSourceCard());
+                    this.getSourceCard().addController(this.getActivatingPlayer());
+                    final Card c = Singletons.getModel().getGameAction()
+                            .moveTo(this.getActivatingPlayer().getZone(ZoneType.Battlefield), this.getSourceCard());
                     this.setSourceCard(c);
                     AbilityFactoryAttach.attachResolve(this.af, this);
                 }
