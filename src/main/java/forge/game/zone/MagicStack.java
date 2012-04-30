@@ -57,6 +57,8 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.GuiUtils;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
@@ -900,6 +902,7 @@ public class MagicStack extends MyObservable {
         final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
         this.getStack().push(si);
 
+        SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
         this.updateObservers();
 
         if (sp.isSpell() && !sp.getSourceCard().isCopiedSpell()) {
