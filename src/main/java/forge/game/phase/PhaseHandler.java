@@ -334,7 +334,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
         switch(phase) {
             case UNTAP:
-                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+                //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 PhaseUtil.handleUntap();
                 break;
 
@@ -419,12 +419,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 AllZone.getEndOfCombat().executeUntil();
                 AllZone.getEndOfCombat().executeAt();
                 CombatUtil.showCombat();
-                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+                //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 break;
 
             case MAIN2:
                 CombatUtil.showCombat();
-                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+                //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 break;
 
             case END_OF_TURN:
@@ -539,7 +539,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         }
 
         if (this.getPhase() == PhaseType.COMBAT_END) {
-            SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+            //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
             AllZone.getCombat().reset();
             this.resetAttackedThisCombat(this.getPlayerTurn());
             this.bCombat = false;
