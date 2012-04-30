@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:ConjurerExile:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to flicker | Origin$ Battlefield | Destination$ Exile | SubAbility$ ConjurerReturn
 SVar:ConjurerReturn:DB$ChangeZone | Defined$ Targeted | Origin$ Exile | Destination$ Battlefield | GainControl$ True
 SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conjurer's_closet.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/conjurers_closet.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/214.jpg
 Oracle:At the beginning of your end step, you may exile target creature you control, then return that card to the battlefield under your control.
 End
