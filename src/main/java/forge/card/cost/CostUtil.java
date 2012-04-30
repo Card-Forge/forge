@@ -35,8 +35,6 @@ import forge.gui.GuiUtils;
  */
 public class CostUtil {
     private static Random r = new Random();
-    private static double p1p1Percent = .25;
-    private static double otherPercent = .9;
 
     /**
      * Check sacrifice cost.
@@ -151,6 +149,9 @@ public class CostUtil {
 
                 final String type = disc.getType();
                 CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+                if (typeList.size() > AllZone.getComputerPlayer().getMaxHandSize()) {
+                    continue;
+                }
                 typeList = typeList.getValidCards(type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "DiscardCost", typeList) == null) {
                     return false;
@@ -173,6 +174,11 @@ public class CostUtil {
         if (cost == null) {
             return true;
         }
+        double p1p1Percent = .25;
+        if (source.isCreature()) {
+            p1p1Percent = .1;
+        }
+        final double otherPercent = .9;
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostRemoveCounter) {
                 final CostRemoveCounter remCounter = (CostRemoveCounter) part;
@@ -181,7 +187,7 @@ public class CostUtil {
                 // through here
                 // 4+ counters will always pass. 0 counters will never
                 final Counters type = remCounter.getCounter();
-                final double percent = type.name().equals("P1P1") ? CostUtil.p1p1Percent : CostUtil.otherPercent;
+                final double percent = type.name().equals("P1P1") ? p1p1Percent : otherPercent;
                 final int currentNum = source.getCounters(type);
 
                 Integer amount = part.convertAmount();
@@ -194,7 +200,6 @@ public class CostUtil {
                 }
             }
         }
-
         return true;
     }
 
@@ -221,7 +226,6 @@ public class CostUtil {
                 }
             }
         }
-
         return true;
     }
 
