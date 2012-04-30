@@ -228,7 +228,7 @@ public class GameAction {
         copied.setTimestamp(AllZone.getNextTimestamp());
         for (String s : copied.getKeyword()) {
             if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
-                    || s.startsWith("May be played by your opponent") 
+                    || s.startsWith("May be played by your opponent")
                     || s.startsWith("Your opponent may look at this card.")) {
                 copied.removeAllExtrinsicKeyword(s);
                 copied.removeHiddenExtrinsicKeyword(s);
@@ -1466,6 +1466,27 @@ public class GameAction {
                 SpellAbilityRestriction sar = new SpellAbilityRestriction();
                 sar.setVariables(sa.getRestrictions());
                 sar.setZone(null);
+                newSA.setRestrictions(sar);
+                final Cost cost = new Cost(source, "", false);
+                if (newSA.getPayCosts() != null) {
+                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
+                        if (!(part instanceof CostMana)) {
+                            cost.getCostParts().add(part);
+                        }
+                    }
+                }
+                newSA.setBasicSpell(false);
+                newSA.setPayCosts(cost);
+                newSA.setManaCost("");
+                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+                alternatives.add(newSA);
+            }
+            if (sa.isSpell() && keyword.equals("May be played by your opponent without paying its mana cost")) {
+                final SpellAbility newSA = sa.copy();
+                SpellAbilityRestriction sar = new SpellAbilityRestriction();
+                sar.setVariables(sa.getRestrictions());
+                sar.setZone(null);
+                sar.setOpponentOnly(true);
                 newSA.setRestrictions(sar);
                 final Cost cost = new Cost(source, "", false);
                 if (newSA.getPayCosts() != null) {

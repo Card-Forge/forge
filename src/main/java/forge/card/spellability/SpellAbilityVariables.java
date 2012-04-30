@@ -58,6 +58,7 @@ public class SpellAbilityVariables {
         this.sorcerySpeed = sav.isSorcerySpeed();
         this.instantSpeed = sav.isInstantSpeed();
         this.anyPlayer = sav.isAnyPlayer();
+        this.setOpponentOnly(sav.isAnyPlayer());
         this.opponentTurn = sav.isOpponentTurn();
         this.playerTurn = sav.isPlayerTurn();
         this.activationLimit = sav.getActivationLimit();
@@ -98,6 +99,9 @@ public class SpellAbilityVariables {
 
     /** The b any player. */
     private boolean anyPlayer = false;
+
+    /** The b any player. */
+    private boolean opponentOnly = false;
 
     /** The b opponent turn. */
     private boolean opponentTurn = false;
@@ -878,6 +882,20 @@ public class SpellAbilityVariables {
      */
     public final boolean isAnyPlayer() {
         return this.anyPlayer;
+    }
+
+    /**
+     * @return the opponentOnly
+     */
+    public boolean isOpponentOnly() {
+        return opponentOnly;
+    }
+
+    /**
+     * @param opponentOnly the opponentOnly to set
+     */
+    public void setOpponentOnly(boolean opponentOnly) {
+        this.opponentOnly = opponentOnly;
     }
 
 } // end class SpellAbilityVariables

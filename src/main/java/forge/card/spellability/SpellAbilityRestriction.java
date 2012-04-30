@@ -206,7 +206,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
     /**
      * <p>
-     * checkZoneRestrictions.
+     * checkTimingRestrictions.
      * </p>
      * @param c
      *            a {@link forge.Card} object.
@@ -239,9 +239,33 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
-
-
         return true;
+    }
+
+    /**
+     * <p>
+     * checkActivatorRestrictions.
+     * </p>
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    public final boolean checkActivatorRestrictions(final Card c, final SpellAbility sa) {
+        Player activator = sa.getActivatingPlayer();
+        if (this.isAnyPlayer()) {
+            return true;
+        }
+
+        if (activator.equals(c.getController()) && !this.isOpponentOnly()) {
+            return true;
+        }
+        if (!activator.equals(c.getController())
+                && (this.isOpponentOnly() || c.hasKeyword("May be played by your opponent"))) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -263,6 +287,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         Player activator = sa.getActivatingPlayer();
         if (activator == null) {
             activator = c.getController();
+            sa.setActivatingPlayer(activator);
             System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
         }
 
@@ -274,8 +299,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        if (!this.isAnyPlayer() && !activator.equals(c.getController())
-                && !c.hasKeyword("May be played by your opponent")) {
+        if (!checkActivatorRestrictions(c, sa)) {
             return false;
         }
 

@@ -2254,8 +2254,7 @@ public class CardFactoryUtil {
                     }
 
                     if (c.isLand()
-                            && (c.hasKeyword("May be played") || c.hasKeyword("May be played by your opponent") || c
-                                    .hasKeyword("May be played without paying its mana cost"))) {
+                            && (c.hasKeyword("May be played") || c.hasKeyword("May be played without paying its mana cost"))) {
                         return true;
                     }
 
@@ -2266,9 +2265,8 @@ public class CardFactoryUtil {
                         }
 
                         if (sa.isSpell()
-                                && (c.hasKeyword("May be played") || c.hasKeyword("May be played by your Opponent")
-                                        || c.hasKeyword("May be played without paying its mana cost") || (c
-                                        .hasStartOfKeyword("Flashback") && zone.is(ZoneType.Graveyard)))
+                                && (c.hasKeyword("May be played") || c.hasKeyword("May be played without paying its mana cost")
+                                        || (c.hasStartOfKeyword("Flashback") && zone.is(ZoneType.Graveyard)))
                                 && restrictZone.equals(ZoneType.Hand)) {
                             return true;
                         }
@@ -2282,7 +2280,8 @@ public class CardFactoryUtil {
                 @Override
                 public boolean addCard(final Card c) {
 
-                    if (c.hasKeyword("May be played by your opponent") || c.hasKeyword("Your opponent may look at this card.")) {
+                    if (c.hasStartOfKeyword("May be played by your opponent")
+                            || c.hasKeyword("Your opponent may look at this card.")) {
                         return true;
                     }
                     return false;
