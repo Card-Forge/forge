@@ -6,7 +6,7 @@ PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, Human creatures you control get +1/+0 until end of turn.
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Human+YouCtrl | NumAtt$ +1
 SVar:Rarity:Common
-SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/riot_ringleader.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riot_ringleader.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/152.jpg
 Oracle:Whenever Riot Ringleader attacks, Human creatures you control get +1/+0 until end of turn.
 End
