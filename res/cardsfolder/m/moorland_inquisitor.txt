@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ 2 W | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
 SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/global/images/magic/general/moorland_inquisitor.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/moorland_inquisitor.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/30.jpg
 Oracle:{2}{W}: Moorland Inquisitor gains first strike until end of turn.
 End
