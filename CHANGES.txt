@@ -333,6 +333,10 @@ Fixes/Features:
 - Deleted some unused functions.
 - Further steps towards the player keyword "Spells and abilities your opponents control can't cause you to sacrifice permanents."
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Little fix for RememberDestroyed parameter.
+- Added the player keyword "Spells and abilities your opponents control can't cause you to sacrifice permanents.".
+- Fixed Entreat flying Angels, it's tokens should now have flying.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -591,6 +595,11 @@ Entreat the Angels
 Excruciator
 Malignus
 Hidden Predators
+Vexing Devil
+Longhorn Firebeast
+Sigarda, Host of Herons
+Tajuru Preserver
+Rain of Daggers
 
 
 end
