@@ -1,0 +1,12 @@
+Name:Burn at the Stake
+ManaCost:2 R R R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ 2 R R R tapXType<X/Creature> | CostDesc$ As an additional cost to cast CARDNAME, tap any number of untapped creatures you control. | Tgt$ TgtCP | NumDmg$ BurnAtTheStakeDmg | SpellDescription$ CARDNAME deals damage to target creature or player equal to three times the number of creatures tapped this way.
+SVar:X:XChoice
+SVar:BurnAtTheStakeDmg:Number$3/Times.ChosenX
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/burn_at_the_stake.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/130.jpg
+Oracle:As an additional cost to cast Burn at the Stake, tap any number of untapped creatures you control.\nBurn at the Stake deals damage to target creature or player equal to three times the number of creatures tapped this way.
+End
