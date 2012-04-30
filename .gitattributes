@@ -5924,6 +5924,7 @@ res/cardsfolder/m/moorish_cavalry.txt svneol=native#text/plain
 res/cardsfolder/m/moorland_haunt.txt -text
 res/cardsfolder/m/moorland_inquisitor.txt -text
 res/cardsfolder/m/morale.txt svneol=native#text/plain
+res/cardsfolder/m/morality_shift.txt -text
 res/cardsfolder/m/moratorium_stone.txt svneol=native#text/plain
 res/cardsfolder/m/morbid_bloom.txt svneol=native#text/plain
 res/cardsfolder/m/morbid_hunger.txt svneol=native#text/plain
