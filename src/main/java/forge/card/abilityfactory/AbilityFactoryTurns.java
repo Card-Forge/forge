@@ -28,6 +28,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.phase.ExtraTurn;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -319,7 +320,10 @@ public class AbilityFactoryTurns {
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < numTurns; i++) {
-                    Singletons.getModel().getGameState().getPhaseHandler().addExtraTurn(p);
+                    ExtraTurn extra = Singletons.getModel().getGameState().getPhaseHandler().addExtraTurn(p);
+                    if (params.containsKey("loseAtEndStep")) {
+                        extra.setLoseAtEndStep(true);
+                    }
                 }
             }
         }

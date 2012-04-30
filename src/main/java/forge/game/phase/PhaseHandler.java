@@ -32,12 +32,8 @@ import forge.GameActionUtil;
 import forge.MyObservable;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
-import forge.control.input.Input;
-import forge.control.input.InputControl;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.framework.EDocID;
-import forge.gui.framework.SDisplayUtil;
 import forge.properties.ForgePreferences.FPref;
 
 /**
@@ -61,7 +57,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     /** Constant <code>GameBegins=0</code>. */
     private static int gameBegins = 0;
 
-    private final Stack<Player> extraTurns = new Stack<Player>();
+    private final Stack<ExtraTurn> extraTurns = new Stack<ExtraTurn>();
 
     private int extraCombats;
 
@@ -608,7 +604,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.game.player.Player} object.
      */
     private Player handleNextTurn() {
-        final Player nextTurn = this.extraTurns.isEmpty() ? this.getPlayerTurn().getOpponent() : this.extraTurns.pop();
 
         AllZone.getStack().setCardsCastLastTurn();
         AllZone.getStack().clearCardsCastThisTurn();
@@ -618,7 +613,33 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         AllZone.getComputerPlayer().setLifeLostThisTurn(0);
         AllZone.getHumanPlayer().setLifeLostThisTurn(0);
 
-        return this.skipTurnTimeVault(nextTurn);
+        return getNextActivePlayer();
+    }
+    
+    /**
+     * <p>
+     * getNextActivePlayer.
+     * </p>
+     * 
+     * @return a {@link forge.game.player.Player} object.
+     */
+    private Player getNextActivePlayer() {
+        Player nextTurn = this.getPlayerTurn().getOpponent();
+        if (!this.extraTurns.isEmpty()) {
+            ExtraTurn extraTurn = this.extraTurns.pop();
+            nextTurn = extraTurn.getPlayer();
+            if (skipTurnTimeVault(nextTurn)) {
+                return getNextActivePlayer();
+            }
+            if (extraTurn.isLoseAtEndStep()) {
+                nextTurn.addKeyword("At the beginning of the end step, you lose the game.");
+            }
+            return nextTurn;
+        }
+        if (skipTurnTimeVault(nextTurn)) {
+            return getNextActivePlayer();
+        }
+        return nextTurn;
     }
 
     /**
@@ -630,7 +651,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.game.player.Player} object.
      */
-    private Player skipTurnTimeVault(Player turn) {
+    private boolean skipTurnTimeVault(Player turn) {
         // time vault:
         CardList vaults = turn.getCardsIn(ZoneType.Battlefield, "Time Vault");
         vaults = vaults.filter(new CardListFilter() {
@@ -646,13 +667,13 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             if (turn.isHuman()) {
                 if (GameActionUtil.showYesNoDialog(crd, "Untap " + crd + "?")) {
                     crd.untap();
-                    turn = this.extraTurns.isEmpty() ? turn.getOpponent() : this.extraTurns.pop();
+                    return true;
                 }
             } else {
                 // TODO Should AI skip his turn for time vault?
             }
         }
-        return turn;
+        return false;
     }
 
     /**
@@ -717,7 +738,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             return this.getPlayerTurn().getOpponent();
         }
 
-        return this.extraTurns.peek();
+        return this.extraTurns.peek().getPlayer();
     }
 
     /**
@@ -742,14 +763,14 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @param player
      *            a {@link forge.game.player.Player} object.
      */
-    public final void addExtraTurn(final Player player) {
+    public final ExtraTurn addExtraTurn(final Player player) {
         // use a stack to handle extra turns, make sure the bottom of the stack
         // restores original turn order
         if (this.extraTurns.isEmpty()) {
-            this.extraTurns.push(this.getPlayerTurn().getOpponent());
+            this.extraTurns.push(new ExtraTurn(this.getPlayerTurn().getOpponent()));
         }
 
-        this.extraTurns.push(player);
+        return this.extraTurns.push(new ExtraTurn(player));
     }
 
     /**

@@ -3095,6 +3095,7 @@ res/cardsfolder/f/filigree_sages.txt svneol=native#text/plain
 res/cardsfolder/f/fill_with_fright.txt svneol=native#text/plain
 res/cardsfolder/f/filth.txt svneol=native#text/plain
 res/cardsfolder/f/filthy_cur.txt svneol=native#text/plain
+res/cardsfolder/f/final_fortune.txt -text
 res/cardsfolder/f/final_judgment.txt svneol=native#text/plain
 res/cardsfolder/f/final_revels.txt svneol=native#text/plain
 res/cardsfolder/f/final_sting_faerie.txt svneol=native#text/plain
@@ -5096,6 +5097,7 @@ res/cardsfolder/l/lashknife_barrier.txt svneol=native#text/plain
 res/cardsfolder/l/lashwrithe.txt svneol=native#text/plain
 res/cardsfolder/l/last_breath.txt svneol=native#text/plain
 res/cardsfolder/l/last_caress.txt svneol=native#text/plain
+res/cardsfolder/l/last_chance.txt -text
 res/cardsfolder/l/last_gasp.txt svneol=native#text/plain
 res/cardsfolder/l/last_kiss.txt svneol=native#text/plain
 res/cardsfolder/l/last_laugh.txt svneol=native#text/plain
@@ -10376,6 +10378,7 @@ res/cardsfolder/w/warren_scourge_elf.txt svneol=native#text/plain
 res/cardsfolder/w/warrior_angel.txt svneol=native#text/plain
 res/cardsfolder/w/warriors_charge.txt svneol=native#text/plain
 res/cardsfolder/w/warriors_honor.txt svneol=native#text/plain
+res/cardsfolder/w/warriors_oath.txt -text
 res/cardsfolder/w/warriors_stand.txt -text
 res/cardsfolder/w/warstorm_surge.txt svneol=native#text/plain
 res/cardsfolder/w/warthog.txt svneol=native#text/plain
@@ -11845,6 +11848,7 @@ src/main/java/forge/game/phase/Combat.java svneol=native#text/plain
 src/main/java/forge/game/phase/CombatUtil.java svneol=native#text/plain
 src/main/java/forge/game/phase/EndOfCombat.java svneol=native#text/plain
 src/main/java/forge/game/phase/EndOfTurn.java svneol=native#text/plain
+src/main/java/forge/game/phase/ExtraTurn.java -text
 src/main/java/forge/game/phase/Phase.java svneol=native#text/plain
 src/main/java/forge/game/phase/PhaseHandler.java -text
 src/main/java/forge/game/phase/PhaseType.java -text

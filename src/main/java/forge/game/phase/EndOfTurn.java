@@ -27,6 +27,7 @@ import forge.Counters;
 import forge.Singletons;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameLossReason;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
@@ -53,7 +54,6 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
         // TODO - should this freeze the Stack?
 
-        // Pyrohemia and Pestilence
         final CardList all = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         EndOfTurn.endOfTurnWallOfReverence();
@@ -208,6 +208,21 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
             }
 
+        }
+        Player activePlayer = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        if (activePlayer.hasKeyword("At the beginning of the end step, you lose the game.")) {
+            final Card source = new Card();
+            final SpellAbility change = new Ability(source, "0") {
+                @Override
+                public void resolve() {
+                    this.getActivatingPlayer().loseConditionMet(GameLossReason.SpellEffect, "");
+                }
+            };
+            change.setStackDescription("At the beginning of the end step, you lose the game.");
+            change.setDescription("At the beginning of the end step, you lose the game.");
+            change.setActivatingPlayer(activePlayer);
+
+            AllZone.getStack().addSimultaneousStackEntry(change);
         }
 
         this.execute(this.getAt());
