@@ -101,9 +101,9 @@ public class CostRemoveCounter extends CostPartWithList {
             if (this.getAmount().equals("All")) {
                 sb.append("s");
             }
-            
+
             sb.append(" from ");
-            
+
             if (this.getThis()) {
                 sb.append(this.getType());
             } else {
@@ -136,7 +136,7 @@ public class CostRemoveCounter extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         final Counters cntrs = this.getCounter();
-        
+
         boolean payable = false;
         final Integer amount = this.convertAmount();
         if (this.getThis()) {
@@ -149,7 +149,7 @@ public class CostRemoveCounter extends CostPartWithList {
                     activator, source);
 
             if (amount != null) {
-                for(Card c : typeList) {
+                for (Card c : typeList) {
                     if (c.getCounters(cntrs) - amount < 0) {
                         payable = true;
                         break;
@@ -248,12 +248,12 @@ public class CostRemoveCounter extends CostPartWithList {
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
-        
+
         if (!this.getThis()) {
             // TODO AI Can't handle remove counter by type
             return false;
         }
-        
+
         if (c == null) {
             final String sVar = source.getSVar(amount);
             if (sVar.equals("XChoice")) {
@@ -271,7 +271,7 @@ public class CostRemoveCounter extends CostPartWithList {
         }
         return true;
     }
-    
+
     /**
      * <p>
      * returnType.
@@ -326,11 +326,11 @@ public class CostRemoveCounter extends CostPartWithList {
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (this.typeList.contains(card)) {
-                    if (card.getCounters(costRemoveCounter.getCounter()) > 0) {        
+                    if (card.getCounters(costRemoveCounter.getCounter()) > 0) {
                         this.nRemove++;
                         costRemoveCounter.addToList(card);
                         card.subtractCounter(costRemoveCounter.getCounter(), 1);
-    
+
                         if (nNeeded == this.nRemove) {
                             this.done();
                         } else {

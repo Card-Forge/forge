@@ -2464,7 +2464,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || (keyword.startsWith("Dredge") && !sb.toString().contains("Dredge"))
                     || (keyword.startsWith("Madness") && !sb.toString().contains("Madness"))
                     || (keyword.startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))
-                    || (keyword.startsWith("Recover") && !sb.toString().contains("Recover")) 
+                    || (keyword.startsWith("Recover") && !sb.toString().contains("Recover"))
                     || (keyword.startsWith("Miracle") && !sb.toString().contains("Miracle"))) {
                 sb.append(keyword.replace(":", " ")).append("\r\n");
             }

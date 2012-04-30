@@ -415,7 +415,7 @@ public class MagicStack extends MyObservable {
         else if (sp.isAbility()) {
             sb.append(" activated ");
         }
-        
+
         if (sp.getStackDescription().startsWith("Morph ")) {
             sb.append("Morph");
         } else {
@@ -1232,9 +1232,9 @@ public class MagicStack extends MyObservable {
         final SpellAbilityStackInstance si = this.getStack().pop();
         final SpellAbility sp = si.getSpellAbility();
         this.decrementSplitSecond(sp);
-		// NOTE (12/04/22): Update Observers here causes multi-targeting bug
-		// We Update Observers after the Stack Finishes Resolving
-		// No need to do it sooner
+        // NOTE (12/04/22): Update Observers here causes multi-targeting bug
+        // We Update Observers after the Stack Finishes Resolving
+        // No need to do it sooner
         //this.updateObservers();
         return sp;
     }

@@ -526,8 +526,8 @@ public abstract class Player extends GameEntity {
             return false;
         }
 
-        boolean infect = source.hasKeyword("Infect") || 
-			this.hasKeyword("All damage is dealt to you as though its source had infect.");
+        boolean infect = source.hasKeyword("Infect")
+                || this.hasKeyword("All damage is dealt to you as though its source had infect.");
 
         if (infect) {
             this.addPoisonCounters(damageToDo, source);

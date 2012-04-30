@@ -732,7 +732,7 @@ public class GameAction {
         sb.append(card.getName()).append(" - Cast via Miracle");
         miracle.setStackDescription(sb.toString());
 
-        // TODO Convert this to a Trigger  
+        // TODO Convert this to a Trigger
         final Ability activate = new Ability(card, "0") {
             @Override
             public void resolve() {
@@ -796,7 +796,7 @@ public class GameAction {
         sb.append(card.getName()).append(" - Cast via Madness");
         madness.setStackDescription(sb.toString());
 
-        // TODO Convert this to a Trigger  
+        // TODO Convert this to a Trigger
         final Ability activate = new Ability(card, "0") {
             @Override
             public void resolve() {

@@ -289,7 +289,7 @@ public class GameNew {
 
         CMatchUI.SINGLETON_INSTANCE.setCard(AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).get(0));
 
-        AllZone.getInputControl().setInput(new InputMulligan());        
+        AllZone.getInputControl().setInput(new InputMulligan());
     } // newGame()
 
     private static void newGameCleanup() {

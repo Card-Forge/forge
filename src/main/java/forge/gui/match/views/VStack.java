@@ -182,9 +182,8 @@ public enum VStack implements IVDoc {
              * Problem is described in TODO right above this.
              */
             if (i == 0 && !spell.getStackDescription().startsWith("Morph ")) {
-                CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSourceCard()); 
+                CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSourceCard());
             }
-            
 
             parentCell.getBody().add(tar, "w 98%!");
             stackTARs.add(tar);
