@@ -2,10 +2,9 @@ Name:Pyroblast
 ManaCost:R
 Types:Instant
 Text:no text
-A:SP$ Counter | Cost$ R | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | PrecostDesc$ Choose one -  | SpellDescription$ Counter target spell if it's blue;
-A:SP$ Destroy | Cost$ R | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | ConditionDefined$ Targeted | ConditionPresent$ Card.Blue | ConditionCompare$ GE1 | SpellDescription$  or destroy target permanent if it's blue.
+A:SP$ Counter | Cost$ R | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | AITgts$ Card.Blue | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | PrecostDesc$ Choose one -  | SpellDescription$ Counter target spell if it's blue;
+A:SP$ Destroy | Cost$ R | ValidTgts$ Permanent | AITgts$ Card.Blue | TgtPrompt$ Select target permanent | ConditionDefined$ Targeted | ConditionPresent$ Card.Blue | ConditionCompare$ GE1 | SpellDescription$  or destroy target permanent if it's blue.
 SVar:X:Targeted$Valid Card.Blue
-SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyroblast.jpg
