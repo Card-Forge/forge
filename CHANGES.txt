@@ -337,6 +337,27 @@ Fixes/Features:
 - Added the player keyword "Spells and abilities your opponents control can't cause you to sacrifice permanents.".
 - Fixed Entreat flying Angels, it's tokens should now have flying.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed the description of Malignus.
+- Now the Stack panel will always be shown, whenever a SpellAbility hits the stack.
+- Removed unnecessary auto switching to the Stack panel at the beginning of some phases.
+- added AVR to set lists
+- added a stack description
+- Added the player keyword "At the beginning of the end step, you lose the game.".
+- Added the keyword "May be played by your opponent without paying its mana cost".
+- Fixed a bug with auras not being played by their owner.
+- CheckStyle.
+- Fixed the LQ pic URL for Conjurer's Closet.
+- Fixed the LQ pic URL for Moorland Inquisitor.
+- Fixed the LQ pic URL for Avacyn, Angel of Hope.
+- Fixed the LQ pic URL for Thraben Valiant.
+- Fixed the LQ pic URL for Riot Ringleader.
+- Tweaked cost evaluation AI functions a little.
+- Added the player keyword "You may cast nonland cards as though they had flash.".
+- Converted some cards to use it
+- fixed infinite loop in Play AF
+- fixed error with added SVars
+- fixed cost of Tamiyo's ultimate
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -600,6 +621,14 @@ Longhorn Firebeast
 Sigarda, Host of Herons
 Tajuru Preserver
 Rain of Daggers
+Burn at the Stake
+Morality Shift
+Final Fortune
+Last Chance
+Warrior's Oath
+Stolen Goods
+Descendants' Path
+Descent into Madness
 
 
 end
