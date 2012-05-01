@@ -396,7 +396,7 @@ public final class AbilityFactoryPlay {
             sb.append("Do you want to play " + tgtCard + "?");
             if (controller.isHuman() && optional
                     && !GameActionUtil.showYesNoDialog(source, sb.toString())) {
-                i--;
+                // i--;  // This causes an infinite loop (ArsenalNut)
                 continue;
             }
             // lands will be played
