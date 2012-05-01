@@ -7,7 +7,6 @@ SVar:TrigDig:AB$ Dig | Cost$ 0| DigNum$ 1 | Reveal$ True | RememberRevealed$ Tru
 SVar:DBPlayIT:DB$ Play | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | RememberPlayed$ True | ConditionCheckSVar$ MatchType | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MatchType:Remembered$Valid Creature.sharesCreatureTypeWith Card
-SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/descendants_path.jpg
