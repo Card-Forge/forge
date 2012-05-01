@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:5/5
 K:Soulbond
-S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddAbility$ DeadeyeFlicker | AddSVar$ DeadeyeReturn,DBCleanup | Description$ As long as CARDNAME is paired with another creature, both creatures have "1 U: Exile this creature, then return it to the battlefield under your control."
+S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddAbility$ DeadeyeFlicker | AddSVar$ DeadeyeReturn & DBCleanup | Description$ As long as CARDNAME is paired with another creature, both creatures have "1 U: Exile this creature, then return it to the battlefield under your control."
 SVar:DeadeyeFlicker:AB$ChangeZone | Cost$ 1 U | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DeadeyeReturn | SpellDescription$ Exile this creature, then return it to the battlefield under your control.
 SVar:DeadeyeReturn:DB$ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
