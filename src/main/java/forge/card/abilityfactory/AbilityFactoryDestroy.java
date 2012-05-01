@@ -197,6 +197,9 @@ public class AbilityFactoryDestroy {
 
         if (abTgt != null) {
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
+            if (params.containsKey("AITgts")) {
+                list = list.getValidCards(params.get("AITgts"), sa.getActivatingPlayer(), source);
+            }
             list = list.getNotKeyword("Indestructible");
             if (!AbilityFactory.playReusable(sa)) {
                 list = list.filter(new CardListFilter() {
