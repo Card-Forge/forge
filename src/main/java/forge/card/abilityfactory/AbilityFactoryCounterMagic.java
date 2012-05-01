@@ -242,6 +242,10 @@ public class AbilityFactoryCounterMagic {
             if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
             }
+            if (params.containsKey("AITgts") && (topSA.getSourceCard() == null
+                    || !topSA.getSourceCard().isValid(params.get("AITgts"), sa.getActivatingPlayer(), source))) {
+                return false;
+            }
 
             tgt.resetTargets();
             if (TargetSelection.matchSpellAbility(sa, topSA, tgt)) {
