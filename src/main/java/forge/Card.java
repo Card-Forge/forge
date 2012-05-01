@@ -7051,15 +7051,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.equals("hasActivatedAbilityWithTapCost")) {
-            boolean hasIt = false;
             for (final SpellAbility sa : this.getSpellAbilities()) {
                 if (sa.isAbility() && (sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
-                    hasIt = true;
+                    return true;
                 }
             }
-            if (!hasIt) {
-                return false;
+            return false;
+        } else if (property.equals("hasActivatedAbility")) {
+            for (final SpellAbility sa : this.getSpellAbilities()) {
+                if (sa.isAbility()) {
+                    return true;
+                }
             }
+            return false;
         } else if (property.equals("NoAbilities")) {
             if (!((this.getAbilityText().trim().equals("") || this.isFaceDown()) && (this.getUnhiddenKeyword().size() == 0))) {
                 return false;

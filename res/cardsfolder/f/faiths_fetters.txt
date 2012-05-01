@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Enchantment Aura
 Text:no text
 K:Enchant permanent
-A:SP$ Attach | Cost$ 3 W | ValidTgts$ Permanent | AILogic$ Curse
+A:SP$ Attach | Cost$ 3 W | ValidTgts$ Permanent | AITgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4
 S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | NonMana$ True | Description$ Enchanted permanent's activated abilities can't be activated unless they're mana abilities. If enchanted permanent is a creature, it can't attack or block.
