@@ -74,6 +74,9 @@ public enum Counters {
     /** The DEPLETION. */
     DEPLETION(),
 
+    /** The DESPAIR. */
+    DESPAIR(),
+    
     /** The DEVOTION. */
     DEVOTION(),
 

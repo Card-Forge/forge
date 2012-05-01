@@ -1,0 +1,16 @@
+Name:Descendants' Path
+ManaCost:2 G
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, reveal the top card of your library. If it's a creature card that shares a creature type with a creature you control, you may cast that card without paying its mana cost. Otherwise, put that card on the bottom of your library.
+SVar:TrigDig:AB$ Dig | Cost$ 0| DigNum$ 1 | Reveal$ True | RememberRevealed$ True | ChangeNum$ All | ChangeValid$ Creature.sharesCreatureTypeWith Creature.YouCtrl | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ -1 | SubAbility$ DBPlayIT
+SVar:DBPlayIT:DB$ Play | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | RememberPlayed$ True | ConditionCheckSVar$ MatchType | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:MatchType:Remembered$Valid Creature.sharesCreatureTypeWith Card
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/descendants_path.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/173.jpg
+Oracle:At the beginning of your upkeep, reveal the top card of your library. If it's a creature card that shares a creature type with a creature you control, you may cast that card without paying its mana cost. Otherwise, put that card on the bottom of your library.
+End

@@ -1,0 +1,16 @@
+Name:Descent into Madness
+ManaCost:3 B B
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a despair counter on CARDNAME, then each player exiles X permanents he or she controls and/or cards from his or her hand, where X is the number of despair counters on CARDNAME.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DESPAIR | CounterNum$ 1 | SubAbility$ DBExileSelf
+SVar:DBExileSelf:DB$ ChangeZone | Cost$ 0 | DefinedPlayer$ Self | ChangeType$ Permanent.YouCtrl,Card | ChangeNum$ X | Hidden$ True | Origin$ Battlefield,Hand | Destination$ Exile | SubAbility$ DBExileOpponent
+SVar:DBExileOpponent:DB$ ChangeZone | Cost$ 0 | DefinedPlayer$ Opponent | ChangeType$ Permanent.YouDontCtrl,Card | ChangeNum$ X | Hidden$ True | Origin$ Battlefield,Hand | Destination$ Exile
+SVar:X:Count$CardCounters.DESPAIR
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/descent_into_madness.jpg
+SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/97.jpg
+Oracle:At the beginning of your upkeep, put a despair counter on Descent into Madness, then each player exiles X permanents he or she controls and/or cards from his or her hand, where X is the number of despair counters on Descent into Madness.
+End

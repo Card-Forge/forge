@@ -2201,6 +2201,8 @@ res/cardsfolder/d/dermoplasm.txt -text svneol=unset#text/plain
 res/cardsfolder/d/descendant_of_kiyomaro.txt -text
 res/cardsfolder/d/descendant_of_masumaro.txt -text
 res/cardsfolder/d/descendant_of_soramaro.txt svneol=native#text/plain
+res/cardsfolder/d/descendants_path.txt -text
+res/cardsfolder/d/descent_into_madness.txt -text
 res/cardsfolder/d/desecrated_earth.txt svneol=native#text/plain
 res/cardsfolder/d/desecration_elemental.txt svneol=native#text/plain
 res/cardsfolder/d/desert.txt svneol=native#text/plain
