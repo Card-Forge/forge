@@ -321,6 +321,9 @@ public class AbilityFactoryAttach {
 
         CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
+        if (params.containsKey("AITgts")) {
+            list = list.getValidCards(params.get("AITgts"), sa.getActivatingPlayer(), attachSource);
+        }
 
         // TODO If Attaching without casting, don't need to actually target.
         // I believe this is the only case where mandatory will be true, so just
