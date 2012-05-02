@@ -358,6 +358,18 @@ Fixes/Features:
 - fixed error with added SVars
 - fixed cost of Tamiyo's ultimate
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added "AITgts" parameter to AF Attach (Example: Grounded).
+- Added "AITgts" parameter to AF Counter (Example: Burnout).
+- update scm plugin
+- Added "AITgts" parameter to AF Destroy (Example: Hydroblast).
+- Added AITgts to two more cards.
+- Added AITgts to three more cards.
+- Updated AI SVars of AVR cards (A-G).
+- update compiler plugin and guava dep
+- The AI will now play cards with Soulbond in Main1.
+- Updated SVars and descriptions of some more AVR cards.
+- Moved the displaying of damage to the text area of the card detail panel (it's not important enough to waste a line on every card).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
