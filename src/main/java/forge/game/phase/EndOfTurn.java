@@ -210,7 +210,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
         }
         Player activePlayer = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        if (activePlayer.hasKeyword("At the beginning of the end step, you lose the game.")) {
+        if (activePlayer.hasKeyword("At the beginning of this turn's end step, you lose the game.")) {
             final Card source = new Card();
             final SpellAbility change = new Ability(source, "0") {
                 @Override
@@ -218,8 +218,8 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                     this.getActivatingPlayer().loseConditionMet(GameLossReason.SpellEffect, "");
                 }
             };
-            change.setStackDescription("At the beginning of the end step, you lose the game.");
-            change.setDescription("At the beginning of the end step, you lose the game.");
+            change.setStackDescription("At the beginning of this turn's end step, you lose the game.");
+            change.setDescription("At the beginning of this turn's end step, you lose the game.");
             change.setActivatingPlayer(activePlayer);
 
             AllZone.getStack().addSimultaneousStackEntry(change);

@@ -321,8 +321,11 @@ public class AbilityFactoryTurns {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < numTurns; i++) {
                     ExtraTurn extra = Singletons.getModel().getGameState().getPhaseHandler().addExtraTurn(p);
-                    if (params.containsKey("loseAtEndStep")) {
+                    if (params.containsKey("LoseAtEndStep")) {
                         extra.setLoseAtEndStep(true);
+                    }
+                    if (params.containsKey("SkipUntap")) {
+                        extra.setSkipUntap(true);
                     }
                 }
             }

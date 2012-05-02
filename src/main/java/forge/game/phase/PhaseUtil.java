@@ -56,6 +56,9 @@ public class PhaseUtil {
             p.removeKeyword("Skip your next untap step.");
             return true;
         }
+        if (p.hasKeyword("Skip the untap step of this turn.")) {
+            return true;
+        }
 
         if (AllZoneUtil.isCardInPlay("Sands of Time") || AllZoneUtil.isCardInPlay("Stasis")) {
             return true;

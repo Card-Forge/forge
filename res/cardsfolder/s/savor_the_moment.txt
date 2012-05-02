@@ -1,0 +1,10 @@
+Name:Savor the Moment
+ManaCost:1 U U
+Types:Sorcery
+Text:no text
+A:SP$ AddTurn | Cost$ 1 U U | NumTurns$ 1 | SkipUntap$ True | SpellDescription$ Take an extra turn after this one. Skip the untap step of that turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/savor_the_moment.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/50.jpg
+Oracle:Take an extra turn after this one. Skip the untap step of that turn.
+End

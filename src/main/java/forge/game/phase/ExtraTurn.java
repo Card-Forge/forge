@@ -35,7 +35,7 @@ public class ExtraTurn {
     private boolean skipUntap = false;
     /**
      * TODO: Write javadoc for Constructor.
-     * @param player
+     * @param player the player
      */
     public ExtraTurn(Player player) {
         this.player = player;
@@ -66,7 +66,7 @@ public class ExtraTurn {
      * @param loseAtEndStep the loseAtEndStep to set
      */
     public void setLoseAtEndStep(boolean loseAtEndStep) {
-        this.loseAtEndStep = loseAtEndStep; 
+        this.loseAtEndStep = loseAtEndStep;
     }
 
     /**

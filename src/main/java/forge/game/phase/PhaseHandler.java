@@ -612,10 +612,14 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         AllZone.getHumanPlayer().resetProwl();
         AllZone.getComputerPlayer().setLifeLostThisTurn(0);
         AllZone.getHumanPlayer().setLifeLostThisTurn(0);
+        for (Player player : AllZone.getPlayersInGame()) {
+            player.removeKeyword("At the beginning of this turn's end step, you lose the game.");
+            player.removeKeyword("Skip the untap step of this turn.");
+        }
 
         return getNextActivePlayer();
     }
-    
+
     /**
      * <p>
      * getNextActivePlayer.
@@ -632,7 +636,10 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 return getNextActivePlayer();
             }
             if (extraTurn.isLoseAtEndStep()) {
-                nextTurn.addKeyword("At the beginning of the end step, you lose the game.");
+                nextTurn.addKeyword("At the beginning of this turn's end step, you lose the game.");
+            }
+            if (extraTurn.isSkipUntap()) {
+                nextTurn.addKeyword("Skip the untap step of this turn.");
             }
             return nextTurn;
         }
