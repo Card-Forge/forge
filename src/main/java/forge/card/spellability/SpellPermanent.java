@@ -286,6 +286,9 @@ public class SpellPermanent extends Spell {
                     || card.hasKeyword("Haste"))) || card.hasKeyword("Exalted")) {
                 wait = false;
             }
+            if (card.hasKeyword("Soulbond") && !AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()).isEmpty()) {
+                wait = false;
+            }
             // get all cards the computer controls with BuffedBy
             final CardList buffed = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             for (int j = 0; j < buffed.size(); j++) {
