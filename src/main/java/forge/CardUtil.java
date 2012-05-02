@@ -937,6 +937,9 @@ public final class CardUtil {
         res.setReceivedDamageFromThisTurn(c.getReceivedDamageFromThisTurn());
         res.getDamageHistory().setCreatureGotBlockedThisTurn(c.getDamageHistory().getCreatureGotBlockedThisTurn());
         res.setEnchanting(c.getEnchanting());
+        res.setEnchantedBy(c.getEnchantedBy());
+        res.setEquipping(c.getEquipping());
+        res.setEquippedBy(c.getEquippedBy());
         res.setHaunting(c.getHaunting());
         for (final Card haunter : c.getHauntedBy()) {
             res.addHauntedBy(haunter);
