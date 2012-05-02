@@ -6707,6 +6707,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
 
+        } else if (property.startsWith("SecondSpellCastThisTurn")) {
+            final CardList list = CardUtil.getThisTurnCast("Card", source);
+            if (list.size() < 2)  {
+                return false;
+            }
+            else if (list.get(1) != this) {
+                return false;
+            }
+
         } else if (property.startsWith("sharesTypeWith")) {
             if (!this.sharesTypeWith(source)) {
                 return false;
