@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Zombie
 Text:no text
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPump | TriggerController$ TriggeredCardController | OptionalDecider$ You | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, target creature gets -2/-2 until end of turn.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPump | TriggerController$ TriggeredCardController | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may have target creature get -2/-2 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_executioner.jpg

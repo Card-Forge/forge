@@ -4,7 +4,6 @@ Types:Sorcery
 Text:no text
 K:Miracle:G
 A:SP$ Pump | Cost$ 4 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +6 | NumDef$ +6 | KW$ Trample & HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ Until end of turn, target creature gets +6/+6 and gains trample, and all creatures able to block it this turn do so.
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revenge_of_the_hunted.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/191.jpg
