@@ -7,6 +7,7 @@ K:Intimidate
 T:Mode$ DamageDone | ValidSource$ Human | ValidTarget$ You  | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Human deals damage to you, destroy it.
 S:Mode$ Continuous | Affected$ Creature.nonHuman+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Undying | Description$ Other non-Human creatures you control get +1/+1 and have undying.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredSource
+SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mikaeus_the_unhallowed.jpg
 SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/70.jpg

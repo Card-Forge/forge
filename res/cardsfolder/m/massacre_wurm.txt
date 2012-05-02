@@ -7,6 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature an opponent controls is put into a graveyard from the battlefield, that player loses 2 life.
 SVar:TrigMassacre:AB$PumpAll | Cost$ 0 | NumAtt$ -2 | NumDef$ -2 | ValidCards$ Creature.YouDontCtrl | IsCurse$ True
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | LifeAmount$ 2 | Defined$ Opponent
+SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/massacre_wurm.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/46.jpg
