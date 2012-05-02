@@ -11,6 +11,10 @@ petcrocodile_lvl1.jpg                  http://www.cardforge.org/fpics/pets/2012p
 petcrocodile_lvl2.jpg                  http://www.cardforge.org/fpics/pets/2012pets/PetCrocodile_LVL2.jpg
 petcrocodile_lvl3.jpg                  http://www.cardforge.org/fpics/pets/2012pets/PetCrocodile_LVL3.jpg
 petcrocodile_lvl4.jpg                  http://www.cardforge.org/fpics/pets/2012pets/PetCrocodile_LVL4.jpg
+pethound_lvl1.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetHound_LVL1.jpg
+pethound_lvl2.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetHound_LVL2.jpg
+pethound_lvl3.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetHound_LVL3.jpg
+pethound_lvl4.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetHound_LVL4.jpg
 petwolf_lvl1.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL1.jpg
 petwolf_lvl2.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL2.jpg
 petwolf_lvl3.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL3.jpg
@@ -23,7 +27,3 @@ g_1_3_plant_wall_deathtouch.jpg        http://www.cardforge.org/fpics/pets/token
 g_1_3_plant_wall_wither.jpg            http://www.cardforge.org/fpics/pets/tokens/g_1_3_plant_wall_wither.jpg
 g_1_4_plant_wall.jpg                   http://www.cardforge.org/fpics/pets/tokens/g_1_4_plant_wall.jpg
 g_1_4_plant_wall_wither.jpg            http://www.cardforge.org/fpics/pets/tokens/g_1_4_plant_wall_wither.jpg
-r_1_1_hound_pet.jpg                    http://www.cardforge.org/fpics/pets/tokens/r_1_1_hound_pet.jpg
-r_1_1_hound_pet_haste.jpg              http://www.cardforge.org/fpics/pets/tokens/r_1_1_hound_pet_haste.jpg
-r_2_1_hound_pet.jpg                    http://www.cardforge.org/fpics/pets/tokens/r_2_1_hound_pet.jpg
-r_2_1_hound_pet_alone.jpg              http://www.cardforge.org/fpics/pets/tokens/r_2_1_hound_pet_alone.jpg

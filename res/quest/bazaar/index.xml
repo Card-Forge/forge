@@ -130,10 +130,10 @@ Excellent at blocking the nastiest of critters!</desc>
       <desc>Dogs are said to be man's best friend. Definitely not this one.</desc>
       <levels>
         <level value="0" stats="You do not own a hound" nextLevel="Purchase Hound"/>
-        <level value="1" pic="r_1_1_hound_pet" stats="1/1 R" cost="250" cardFile="hound_pet_l1.txt" nextLevel="Give Haste to your hound." />
-        <level value="2" pic="r_1_1_hound_pet_haste" stats="1/1 R Haste" cost="400" cardFile="hound_pet_l2.txt" nextLevel="Improve the attack power of your hound." />
-        <level value="3" pic="r_2_1_hound_pet" stats="2/1 R Haste" cost="500" cardFile="hound_pet_l3.txt" nextLevel="Your hound can burst into flames, dealing extra damage but perishing in the process."/>
-        <level value="4" pic="r_2_1_hound_pet_flameburst" stats="2/1 R Haste Burst Into Flames" cost="700" cardFile="hound_pet_l4.txt" nextLevel="You cannot train your hound any further"/>
+        <level value="1" pic="pethound_lvl1" stats="1/1 R" cost="250" cardFile="hound_pet_l1.txt" nextLevel="Give Haste to your hound." />
+        <level value="2" pic="pethound_lvl2" stats="1/1 R Haste" cost="400" cardFile="hound_pet_l2.txt" nextLevel="Improve the attack power of your hound." />
+        <level value="3" pic="pethound_lvl3" stats="2/1 R Haste" cost="500" cardFile="hound_pet_l3.txt" nextLevel="Your hound can burst into flames, dealing extra damage but perishing in the process."/>
+        <level value="4" pic="pethound_lvl4" stats="2/1 R Haste Burst Into Flames" cost="700" cardFile="hound_pet_l4.txt" nextLevel="You cannot train your hound any further"/>
       </levels>
     </pet>
     <pet name="Crocodile" slot="1" saveFileKey="Crocodile" maxLevel="4">
