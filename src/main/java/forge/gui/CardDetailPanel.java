@@ -56,7 +56,6 @@ public class CardDetailPanel extends JPanel implements CardContainer {
     private final JLabel nameCostLabel;
     private final JLabel typeLabel;
     private final JLabel powerToughnessLabel;
-    private final JLabel damageLabel;
     private final JLabel idLabel;
     private final JLabel setInfoLabel;
     private final JTextArea cdArea;
@@ -83,11 +82,9 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         this.nameCostLabel = new JLabel();
         this.typeLabel = new JLabel();
         this.powerToughnessLabel = new JLabel();
-        this.damageLabel = new JLabel();
         cdLabels.add(this.nameCostLabel);
         cdLabels.add(this.typeLabel);
         cdLabels.add(this.powerToughnessLabel);
-        cdLabels.add(this.damageLabel);
 
         final JPanel idr = new JPanel(new GridBagLayout());
         final GridBagConstraints c1 = new GridBagConstraints();
@@ -132,7 +129,6 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         this.nameCostLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         this.typeLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         this.powerToughnessLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        this.damageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         this.idLabel.setFont(new java.awt.Font("Dialog", 0, 14));
 
         java.awt.Font f = new java.awt.Font("Dialog", 0, 14);
@@ -150,7 +146,6 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         this.nameCostLabel.setText("");
         this.typeLabel.setText("");
         this.powerToughnessLabel.setText("");
-        this.damageLabel.setText("");
         this.idLabel.setText("");
         this.setInfoLabel.setText("");
         this.setInfoLabel.setOpaque(false);
@@ -179,14 +174,8 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         } else {
             this.typeLabel.setText("Creature");
         }
-
         if (card.isCreature()) {
             this.powerToughnessLabel.setText(card.getNetAttack() + " / " + card.getNetDefense());
-            this.damageLabel.setText("Damage: " + card.getDamage() + " Assigned Damage: "
-                    + card.getTotalAssignedDamage());
-        }
-        if (card.isPlaneswalker()) {
-            this.damageLabel.setText("Assigned Damage: " + card.getTotalAssignedDamage());
         }
 
         this.idLabel.setText("Card ID  " + card.getUniqueNumber());
@@ -272,6 +261,32 @@ public class CardDetailPanel extends JPanel implements CardContainer {
                 }
                 area.append(counter.getName() + " counters: ");
                 area.append(card.getCounters(counter));
+            }
+        }
+
+        if (card.isCreature()) {
+            int damage = card.getDamage();
+            if (damage > 0) {
+                if (area.length() != 0) {
+                    area.append("\n");
+                }
+                area.append("Damage: " + damage);
+            }
+            int assigned = card.getTotalAssignedDamage();
+            if (assigned > 0) {
+                if (area.length() != 0) {
+                    area.append("\n");
+                }
+                area.append("Assigned Damage: " + assigned);
+            }
+        }
+        if (card.isPlaneswalker()) {
+            int assigned = card.getTotalAssignedDamage();
+            if (assigned > 0) {
+                if (area.length() != 0) {
+                    area.append("\n");
+                }
+                area.append("Assigned Damage: " + assigned);
             }
         }
 
@@ -477,11 +492,6 @@ public class CardDetailPanel extends JPanel implements CardContainer {
     /** @return JLabel */
     public JLabel getPowerToughnessLabel() {
         return this.powerToughnessLabel;
-    }
-
-    /** @return JLabel */
-    public JLabel getDamageLabel() {
-        return this.damageLabel;
     }
 
     /** @return JLabel */
