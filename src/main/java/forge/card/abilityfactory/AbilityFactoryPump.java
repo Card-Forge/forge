@@ -427,7 +427,7 @@ public class AbilityFactoryPump {
                     || !card.hasKeyword("Flying")) {
                 return false;
             }
-        } else if (keyword.equals("Shroud") || keyword.equals("Heyproof")) {
+        } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
             if (!AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(card)) {
                 return false;
             }
@@ -532,7 +532,6 @@ public class AbilityFactoryPump {
     private CardList getCurseCreatures(final SpellAbility sa, final int defense, final int attack) {
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
         list = list.getTargetableCards(sa);
-
         if ((defense < 0) && !list.isEmpty()) { // with spells that give -X/-X,
                                                 // compi will try to destroy a
                                                 // creature
@@ -643,6 +642,9 @@ public class AbilityFactoryPump {
             final int xPay = ComputerUtil.determineLeftoverMana(sa);
             source.setSVar("PayX", Integer.toString(xPay));
             defense = xPay;
+            if (this.numDefense.equals("-X")) {
+                defense = -xPay;
+            }
         } else {
             defense = this.getNumDefense(sa);
         }
