@@ -370,6 +370,18 @@ Fixes/Features:
 - Updated SVars and descriptions of some more AVR cards.
 - Moved the displaying of damage to the text area of the card detail panel (it's not important enough to waste a line on every card).
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- New Hound pet art is in. Updated bazaar index and download links.
+- The AI can now use Death Wind.
+- added SecondSpellCastThisTurn property and added Second Guess
+- Updated some AI SVars.
+- Added info about EnchantedBy, Equipping and EquippedBy to LKI copies.
+- Cards will now restore their last position if canceled out when attempting to be cast from a Zone where it matters (Descendant's Path + Flashback changing Zone position bug)
+- bug fix for enchantment and equipment not dropping off during "flicker" mechanic
+- Fixing bug with abilities that create delayed trigger e.g. Venser, the Sojourner. Changed parseTrigger() to use get() method of HashMap rather than remove().
+- Deleting AVR card branch
+- Deleting DKA card branch
+- Improved script for Wild Evocation (no longer have to choose the Remembered card)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -641,6 +653,9 @@ Warrior's Oath
 Stolen Goods
 Descendants' Path
 Descent into Madness
+Second Guess
+Savor the Moment
+Wild Evocation
 
 
 end
