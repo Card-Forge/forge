@@ -321,13 +321,10 @@ public class TriggerHandler {
                 }
             }
         }
-        for (int i = 0; i < delayedTriggersWorkingCopy.size(); i++) {
-            final Trigger deltrig = delayedTriggersWorkingCopy.get(i);
+        for (Trigger deltrig : delayedTriggersWorkingCopy) {
             if (deltrig.getHostCard().getController().equals(playerAP)) {
                 if (this.runSingleTrigger(deltrig, mode, runParams)) {
-                    delayedTriggersWorkingCopy.remove(deltrig);
                     this.delayedTriggers.remove(deltrig);
-                    i--;
                 }
             }
         }
@@ -342,13 +339,10 @@ public class TriggerHandler {
                 }
             }
         }
-        for (int i = 0; i < delayedTriggersWorkingCopy.size(); i++) {
-            final Trigger deltrig = delayedTriggersWorkingCopy.get(i);
+        for (Trigger deltrig : delayedTriggersWorkingCopy) {
             if (deltrig.getHostCard().getController().equals(playerAP.getOpponent())) {
                 if (this.runSingleTrigger(deltrig, mode, runParams)) {
-                    delayedTriggersWorkingCopy.remove(deltrig);
                     this.delayedTriggers.remove(deltrig);
-                    i--;
                 }
             }
         }
