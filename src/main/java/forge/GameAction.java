@@ -94,11 +94,17 @@ public class GameAction {
      *            a {@link forge.game.zone.PlayerZone} object.
      * @param c
      *            a {@link forge.Card} object.
+     * @param position TODO
      * @return a {@link forge.Card} object.
      */
-    public static Card changeZone(final PlayerZone zoneFrom, final PlayerZone zoneTo, final Card c) {
+    public static Card changeZone(final PlayerZone zoneFrom, final PlayerZone zoneTo, final Card c, Integer position) {
         if ((zoneFrom == null) && !c.isToken()) {
-            zoneTo.add(c);
+            if (position == null) {
+                zoneTo.add(c);
+            }
+            else {
+                zoneTo.add(c, position);
+            }
             Player p = zoneTo.getPlayer();
             if (p != null) {
                 p.updateLabelObservers();
@@ -171,7 +177,12 @@ public class GameAction {
 
         // "enter the battlefield as a copy" - apply code here
         // but how to query for input here and continue later while the callers assume synchronous result?
-        zoneTo.add(copied);
+        if (position == null) {
+            zoneTo.add(copied);
+        }
+        else {
+            zoneTo.add(copied, position);
+        }
 
         // Tokens outside the battlefield disappear immideately.
         if (copied.isToken() && !zoneTo.is(ZoneType.Battlefield)) {
@@ -250,6 +261,10 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveTo(final PlayerZone zoneTo, Card c) {
+        return moveTo(zoneTo, c, null);
+    }
+    
+    public final Card moveTo(final PlayerZone zoneTo, Card c, Integer position) {
         // Ideally move to should never be called without a prevZone
         // Remove card from Current Zone, if it has one
         final PlayerZone zoneFrom = AllZone.getZoneOf(c);
@@ -265,7 +280,7 @@ public class GameAction {
 
         // Card lastKnownInfo = c;
 
-        c = GameAction.changeZone(zoneFrom, zoneTo, c);
+        c = GameAction.changeZone(zoneFrom, zoneTo, c, position);
 
         if (zoneTo.is(ZoneType.Stack)) {
             c.setCastFrom(zoneFrom.getZoneType());
@@ -300,7 +315,7 @@ public class GameAction {
         final PlayerZone hand = c.getOwner().getZone(ZoneType.Hand);
         final PlayerZone play = c.getController().getZone(ZoneType.Battlefield);
 
-        c = GameAction.changeZone(hand, play, c);
+        c = GameAction.changeZone(hand, play, c, null);
 
         return c;
     }

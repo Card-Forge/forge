@@ -180,6 +180,21 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     public final boolean contains(final Card c) {
         return this.getCardList().contains(c);
     }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.IPlayerZone#getPosition(forge.Card)
+     */
+    @Override
+    public final Integer getPosition(final Card c) {
+        int index = this.getCardList().indexOf(c);
+        if (index == -1) {
+            return null;
+        }
+        return index;
+    }
+    
 
     /**
      * Removes the.

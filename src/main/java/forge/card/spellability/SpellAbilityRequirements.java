@@ -40,6 +40,7 @@ public class SpellAbilityRequirements {
     private CostPayment payment = null;
     private boolean isFree = false;
     private boolean skipStack = false;
+    private Integer zonePosition = null;
 
     /**
      * <p>
@@ -111,6 +112,7 @@ public class SpellAbilityRequirements {
                 final Card c = this.ability.getSourceCard();
 
                 this.fromZone = AllZone.getZoneOf(c);
+                this.zonePosition = this.fromZone.getPosition(c);
                 this.ability.setSourceCard(Singletons.getModel().getGameAction().moveToStack(c));
             }
         }
@@ -142,7 +144,7 @@ public class SpellAbilityRequirements {
             final Card c = this.ability.getSourceCard();
             if (this.bCasting && !c.isCopiedSpell()) { // and not a copy
                 // add back to where it came from
-                Singletons.getModel().getGameAction().moveTo(this.fromZone, c);
+                Singletons.getModel().getGameAction().moveTo(this.fromZone, c, this.zonePosition);
             }
 
             this.select.resetTargets();
@@ -195,7 +197,7 @@ public class SpellAbilityRequirements {
             final Card c = this.ability.getSourceCard();
             if (this.bCasting && !c.isCopiedSpell()) { // and not a copy
                 // add back to Previous Zone
-                Singletons.getModel().getGameAction().moveTo(this.fromZone, c);
+                Singletons.getModel().getGameAction().moveTo(this.fromZone, c, this.zonePosition);
             }
 
             if (this.select != null) {

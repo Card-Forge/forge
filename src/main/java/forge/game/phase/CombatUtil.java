@@ -2910,7 +2910,7 @@ public class CombatUtil {
                         }
                         if ((enchantment != null) && AllZoneUtil.isCardInPlay(attacker)) {
                             GameAction.changeZone(AllZone.getZoneOf(enchantment),
-                                    enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment);
+                                    enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment, null);
                             enchantment.enchantEntity(attacker);
                         }
                         attacker.getController().shuffle();

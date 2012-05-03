@@ -2531,7 +2531,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     }
                     if (enchantment != null) {
                         GameAction.changeZone(AllZone.getZoneOf(enchantment),
-                                enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment);
+                                enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment, null);
                         enchantment.enchantEntity(source.getEnchantingPlayer());
                     }
                     source.getController().shuffle();
