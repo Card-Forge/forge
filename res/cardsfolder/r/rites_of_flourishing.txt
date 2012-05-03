@@ -1,7 +1,8 @@
 Name:Rites of Flourishing
 ManaCost:2 G
 Types:Enchantment
-Text:Each player may play an additional land on each of his or her turns.
+Text:no text
+K:AdjustLandPlays:Each:1:Each player may play an additional land on each of his or her turns.
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws an additional card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredPlayer
 SVar:Rarity:Rare

@@ -1,7 +1,8 @@
 Name:Azusa, Lost but Seeking
 ManaCost:2 G
 Types:Legendary Creature Human Monk
-Text:You may play two additional lands on each of your turns.
+Text:no text
+K:AdjustLandPlays:You:2:You may play two additional lands on each of your turns.
 PT:1/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azusa_lost_but_seeking.jpg

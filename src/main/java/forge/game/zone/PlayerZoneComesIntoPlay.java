@@ -100,7 +100,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         // Keep track of max lands can play per turn
         int addMax = 0;
 
-        boolean adjustLandPlays = false;
+        /*boolean adjustLandPlays = false;
         boolean eachPlayer = false;
 
         if (c.getName().equals("Exploration") || c.getName().equals("Oracle of Mul Daya")) {
@@ -110,8 +110,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             addMax = 2;
             adjustLandPlays = true;
         } else if (c.getName().equals("Storm Cauldron") || c.getName().equals("Rites of Flourishing")) {
-            // these two aren't in yet, but will just need the other part of the
-            // card to work with more lands
             adjustLandPlays = true;
             eachPlayer = true;
             addMax = 1;
@@ -123,6 +121,19 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 AllZone.getComputerPlayer().addMaxLandsToPlay(addMax);
             } else {
                 player.addMaxLandsToPlay(addMax);
+            }
+        }*/
+
+        for (String keyword : c.getKeyword()) {
+            if (keyword.startsWith("AdjustLandPlays")) {
+                final String[] k = keyword.split(":");
+                addMax = Integer.valueOf(k[2]);
+                if (k[1].equals("Each")) {
+                    AllZone.getHumanPlayer().addMaxLandsToPlay(addMax);
+                    AllZone.getComputerPlayer().addMaxLandsToPlay(addMax);
+                } else {
+                    c.getController().addMaxLandsToPlay(addMax);
+                }
             }
         }
 
@@ -231,7 +242,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         // Keep track of max lands can play per turn
         int addMax = 0;
 
-        boolean adjustLandPlays = false;
+        /*boolean adjustLandPlays = false;
         boolean eachPlayer = false;
 
         if (c.getName().equals("Exploration") || c.getName().equals("Oracle of Mul Daya")) {
@@ -241,8 +252,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             addMax = -2;
             adjustLandPlays = true;
         } else if (c.getName().equals("Storm Cauldron") || c.getName().equals("Rites of Flourishing")) {
-            // once their second half of their abilities are programmed these
-            // two can be added in
             adjustLandPlays = true;
             eachPlayer = true;
             addMax = -1;
@@ -254,6 +263,19 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 AllZone.getComputerPlayer().addMaxLandsToPlay(addMax);
             } else {
                 c.getController().addMaxLandsToPlay(addMax);
+            }
+        }*/
+
+        for (String keyword : c.getKeyword()) {
+            if (keyword.startsWith("AdjustLandPlays")) {
+                final String[] k = keyword.split(":");
+                addMax = -Integer.valueOf(k[2]);
+                if (k[1].equals("Each")) {
+                    AllZone.getHumanPlayer().addMaxLandsToPlay(addMax);
+                    AllZone.getComputerPlayer().addMaxLandsToPlay(addMax);
+                } else {
+                    c.getController().addMaxLandsToPlay(addMax);
+                }
             }
         }
 
