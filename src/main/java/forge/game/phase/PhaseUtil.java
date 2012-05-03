@@ -260,8 +260,15 @@ public class PhaseUtil {
         if (player.hasKeyword("Skip your next combat phase.")) {
             return true;
         }
-
         if (player.hasKeyword("Skip your combat phase.")) {
+            return true;
+        }
+        if (player.hasKeyword("Skip all combat phases of your next turn.")) {
+            player.removeKeyword("Skip all combat phases of your next turn.");
+            player.addKeyword("Skip all combat phases of this turn.");
+            return true;
+        }
+        if (player.hasKeyword("Skip all combat phases of this turn.")) {
             return true;
         }
 

@@ -2725,6 +2725,7 @@ res/cardsfolder/e/emissary_of_hope.txt svneol=native#text/plain
 res/cardsfolder/e/emmessi_tome.txt svneol=native#text/plain
 res/cardsfolder/e/emperor_crocodile.txt svneol=native#text/plain
 res/cardsfolder/e/empress_galina.txt svneol=native#text/plain
+res/cardsfolder/e/empty_city_ruse.txt -text
 res/cardsfolder/e/empty_shrine_kannushi.txt svneol=native#text/plain
 res/cardsfolder/e/empty_the_catacombs.txt svneol=native#text/plain
 res/cardsfolder/e/empty_the_warrens.txt svneol=native#text/plain
@@ -2969,6 +2970,7 @@ res/cardsfolder/f/false_defeat.txt svneol=native#text/plain
 res/cardsfolder/f/false_demise.txt svneol=native#text/plain
 res/cardsfolder/f/false_memories.txt -text
 res/cardsfolder/f/false_mourning.txt svneol=native#text/plain
+res/cardsfolder/f/false_peace.txt -text
 res/cardsfolder/f/false_prophet.txt svneol=native#text/plain
 res/cardsfolder/f/false_summoning.txt svneol=native#text/plain
 res/cardsfolder/f/falter.txt svneol=native#text/plain

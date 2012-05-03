@@ -454,8 +454,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     c.clearBlockedByThisTurn();
                     c.clearBlockedThisTurn();
                 }
-                AllZone.getHumanPlayer().resetPreventNextDamage();
-                AllZone.getComputerPlayer().resetPreventNextDamage();
 
                 AllZone.getEndOfTurn().executeUntil();
                 final CardList cHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
@@ -466,10 +464,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 for (final Card c : hHand) {
                     c.setDrawnThisTurn(false);
                 }
-                AllZone.getHumanPlayer().resetNumDrawnThisTurn();
-                AllZone.getComputerPlayer().resetNumDrawnThisTurn();
-                AllZone.getHumanPlayer().setAttackedWithCreatureThisTurn(false);
-                AllZone.getComputerPlayer().setAttackedWithCreatureThisTurn(false);
+                for (Player player : AllZone.getPlayersInGame()) {
+                    player.resetPreventNextDamage();
+                    player.resetNumDrawnThisTurn();
+                    player.setAttackedWithCreatureThisTurn(false);
+                }
+                this.getPlayerTurn().removeKeyword("Skip all combat phases of this turn.");
                 break;
 
             default:
