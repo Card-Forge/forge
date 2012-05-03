@@ -10502,6 +10502,7 @@ res/cardsfolder/w/wild_colos.txt svneol=native#text/plain
 res/cardsfolder/w/wild_defiance.txt -text
 res/cardsfolder/w/wild_dogs.txt -text svneol=unset#text/plain
 res/cardsfolder/w/wild_elephant.txt svneol=native#text/plain
+res/cardsfolder/w/wild_evocation.txt -text
 res/cardsfolder/w/wild_griffin.txt svneol=native#text/plain
 res/cardsfolder/w/wild_growth.txt svneol=native#text/plain
 res/cardsfolder/w/wild_hunger.txt -text
