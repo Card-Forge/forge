@@ -7090,6 +7090,7 @@ res/cardsfolder/q/quill_slinger_boggart.txt svneol=native#text/plain
 res/cardsfolder/q/quilled_slagwurm.txt svneol=native#text/plain
 res/cardsfolder/q/quilled_sliver.txt svneol=native#text/plain
 res/cardsfolder/q/quillmane_baku.txt -text
+res/cardsfolder/q/quillspike.txt -text
 res/cardsfolder/q/quirion_druid.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_dryad.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_elves.txt -text
