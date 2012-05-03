@@ -202,15 +202,15 @@ public class TriggerHandler {
     public static Trigger parseTrigger(final HashMap<String, String> mapParams, final Card host, final boolean intrinsic) {
         Trigger ret = null;
 
-        final TriggerType type = TriggerType.smartValueOf(mapParams.remove("Mode"));
+        final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
         ret = type.createTrigger(mapParams, host, intrinsic);
 
-        String triggerZones = mapParams.remove("TriggerZones");
+        String triggerZones = mapParams.get("TriggerZones");
         if (null != triggerZones) {
             ret.setTriggerZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
         }
 
-        String triggerPhases = mapParams.remove("TriggerPhases");
+        String triggerPhases = mapParams.get("TriggerPhases");
         if (null != triggerPhases) {
             ret.setTriggerPhases(PhaseType.parseRange(triggerPhases));
         }
