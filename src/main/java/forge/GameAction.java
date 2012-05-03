@@ -234,6 +234,42 @@ public class GameAction {
                 c.getPairedWith().setPairedWith(null);
                 c.setPairedWith(null);
             }
+            // Handle unequipping creatures
+            if (copied.isEquipped()) {
+                final CardList equipments = new CardList(copied.getEquippedBy());
+                for (final Card equipment : equipments) {
+                    if (AllZoneUtil.isCardInPlay(equipment)) {
+                        equipment.unEquipCard(copied);
+                    }
+                }
+            }
+            // Handle unequipping creatures
+            if (copied.isEquipped()) {
+                final CardList equipments = new CardList(copied.getEquippedBy());
+                for (final Card equipment : equipments) {
+                    if (AllZoneUtil.isCardInPlay(equipment)) {
+                        equipment.unEquipCard(copied);
+                    }
+                }
+            }
+            // equipment moving off battlefield
+            if (copied.isEquipping()) {
+                final Card equippedCreature = copied.getEquipping().get(0);
+                if (AllZoneUtil.isCardInPlay(equippedCreature)) {
+                    copied.unEquipCard(equippedCreature);
+                }
+            }
+            // remove enchantments from creatures
+            if (copied.isEnchanted()) {
+                final CardList auras = new CardList(copied.getEnchantedBy());
+                for (final Card aura : auras) {
+                    aura.unEnchantEntity(copied);
+                }
+            }
+            // unenchant creature if moving aura
+            if (copied.isEnchanting()) {
+                copied.unEnchantEntity(copied.getEnchanting());
+            }
         }
 
         copied.setTimestamp(AllZone.getNextTimestamp());
