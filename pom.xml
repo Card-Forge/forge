@@ -158,7 +158,7 @@
     </scm>
 
     <prerequisites>
-        <maven>3.0.3</maven>
+        <maven>3.0.4</maven>
     </prerequisites>
 
     <mailingLists>
@@ -182,7 +182,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.0</version>
+                <version>1.1</version>
                 <executions>
                     <execution>
                         <phase>validate</phase>
@@ -320,7 +320,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.0</version>
+                <version>3.1</version>
                 <configuration>
                     <port>8081</port>
                 </configuration>
