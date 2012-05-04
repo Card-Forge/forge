@@ -1,7 +1,7 @@
 Name:Seachrome Coast
 ManaCost:no cost
 Types:Land
-Text:CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
+Text:no text
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 K:CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
