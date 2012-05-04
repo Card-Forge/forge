@@ -1133,7 +1133,7 @@ public class CardFactoryUtil {
             }
         };
         final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Suspend ").append(suspendCounters).append(": ").append(suspendCost);
+        sbDesc.append("Suspend ").append(suspendCounters).append(" - ").append(suspendCost);
         suspend.setDescription(sbDesc.toString());
 
         final StringBuilder sbStack = new StringBuilder();
