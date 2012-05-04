@@ -1,8 +1,8 @@
-Forge Beta: 0#-##-2012 ver 1.2.7 rev 1####
+Forge Beta: 05-04-2012 ver 1.2.7
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-10### cards in total.
+10790 cards in total.
 
 
 This version includes 90% (+) of the cards that are available in the new Avacyn Restored card set.
@@ -382,71 +382,44 @@ Fixes/Features:
 - Deleting DKA card branch
 - Improved script for Wild Evocation (no longer have to choose the Remembered card)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed a possible ConcurrentModificationException.
+- Consolidated all the "can play X extra lands" into keyword format so that they don't have to be hardcoded each time. Just commented out the old code for now, but if its good then feel free to remove it instead.
+- Converted Azusa, Lost but Seeking; Exploration; Oracle of Mul Daya; Rites of Flourishing and Storm Cauldron
+- Small tweak to Suspend Spell Description
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Catatafish
+Dave
+Doublestrike
+Fnoed
+Friar Sol
+Marc
+Mark
+Max mtg
+Skiera
+Slapshot5
+Sloth
+Squee1968
+Xitax
+Zirbert
+ZzzzSleep
+Chris H
 
 
 Added many cards, including:
 
-Loaming Shaman
-Kjeldoran Elite Guard
-Gaea's Blessing
-Tuktuk Scrapper
-Gutter Grime
-Alpha Brawl
-Sylvan Hierophant
-Heart Wolf
-Wall of Vipers
-Wandering Eye
-Wash Out
-Whirlpool Warrior
-Tree of Redemption
-Weight of Spires
-Walking Sponge
-Vigorous Charge
-Vintara Elephant
-Weird Harvest
-Gate to the AEther
-Simulacrum
-Harsh Justice
-Mogg Infestation
-Sage of Fables
-Spike Rogue
-Ghave, Guru of Spores
-Venser, Shaper Savant
-Volley of Boulders
-Plow Through Reito
-Pious Warrior
-Zombie Boa
-Zerapa Minotaur
-Xathrid Demon
-Charisma
-Infiltrator's Magemark
-Cho-Manno's Blessing
-Floating Shield
-Pentarch Ward
-Wormfang Crab
-Woebringer Demon
-Chancellor of the Spires
-Praetor's Grasp
-Champion of Lambholt
-Terrifying Presence
 Abundant Growth
-Snare the Skies
-Timberland Guide
-Vigilante Justice
-Pillar of Flame
-Rush of Blood
-Somberwald Vigilante
-Thatcher Revolt
-Uncanny Speed
+Aggravate
 Alchemist's Apprentice
 Alchemist's Refuge
+Alpha Brawl
 Amass the Components
 Angel of Glory's Rise
+Angel of Jubilation
 Angel's Tomb
 Angelic Armaments
 Appetite for Brains
@@ -455,30 +428,41 @@ Archwing Dragon
 Avacyn, Angel of Hope
 Banishing Stroke
 Banners Raised
+Battle Hymn
 Bladed Bracers
 Blessing of Nature
 Blood Artist
 Bloodflow Connoisseur
+Bonfire of the Damned
 Bower Passage
 Builder's Blessing
+Burn at the Stake
 Butcher Ghoul
 Call to Serve
 Captain of the Mists
 Cathars' Crusade
 Cathedral Sanctifier
+Champion of Lambholt
+Chancellor of the Spires
+Charisma
+Cho-Manno's Blessing
 Cloudshift
 Commander's Authority
+Conjurer's Closet
 Corpse Traders
 Craterhoof Behemoth
 Crippling Chill
 Cursebreak
 Dangerous Wager
+Deadeye Navigator
 Death Wind
 Defang
 Defy Death
 Demonic Rising
 Demonic Taskmaster
 Demonlord of Ashmouth
+Descendants' Path
+Descent into Madness
 Desolate Lighthouse
 Devastation Tide
 Devout Chaplain
@@ -489,20 +473,36 @@ Dreadwaters
 Driver of the Dead
 Druid's Familiar
 Druids' Repository
+Dual Casting
+Eaten by Spiders
 Elgaud Shieldmate
 Emancipation Angel
+Empty City Ruse
+Entreat the Angels
 Essence Harvest
 Evernight Shade
+Excruciator
 Exquisite Blood
+Extravagant Spirit
+Falkenrath Exterminator
+False Peace
 Farbog Explorer
 Favorable Winds
 Fervent Cathar
+Fettergeist
+Final Fortune
+Floating Shield
 Flowering Lumberknot
+Gaea's Blessing
 Gallows at Willow Hill
 Galvanic Alchemist
+Gang of Devils
+Gate to the AEther
 Geist Snatch
 Geist Trappers
+Ghave, Guru of Spores
 Ghostform
+Ghostly Flicker
 Ghostly Touch
 Ghoulflesh
 Gisela, Blade of Goldnight
@@ -513,47 +513,77 @@ Grave Exchange
 Griselbrand
 Grounded
 Gryff Vanguard
+Guise of Fire
+Gutter Grime
 Hanweir Lancer
+Harsh Justice
 Harvester of Souls
 Haunted Guardian
 Havengul Skaab
+Havengul Vampire
+Heart Wolf
+Heirs of Stromkirk
 Herald of War
+Hidden Predators
 Holy Justiciar
 Homicidal Seclusion
+Hound of Griselbrand
 Howlgeist
 Human Frailty
 Hunted Ghoul
+Infiltrator's Magemark
 Into the Void
 Joint Assault
+Kessig Malcontents
+Kjeldoran Elite Guard
 Kruin Striker
 Lair Delve
+Last Chance
 Latch Seeker
 Leap of Faith
 Lightning Mauler
 Lightning Prowess
+Loaming Shaman
 Lone Revenant
+Longhorn Firebeast
 Lunar Mystic
 Maalfeld Twins
 Mad Prophet
+Malicious Intent
+Malignus
 Marrow Bats
 Mass Appeal
+Megatherium
 Mental Agony
 Midnight Duelist
 Midvast Protector
 Mist Raven
 Misthollow Griffin
+Mogg Infestation
 Moonlight Geist
 Moonsilver Spear
 Moorland Inquisitor
+Morality Shift
+Murderous Spoils
 Narstad Scrapper
 Natural End
 Nearheath Pilgrim
 Necrobite
+Nephalia Smuggler
 Nettle Swine
 Nightshade Peddler
+Outwit
 Pathbreaker Wurm
+Pentarch Ward
+Pillar of Flame
+Pious Warrior
+Plow Through Reito
 Polluted Dead
+Praetor's Grasp
 Predator's Gambit
+Quillspike
+Raging Poltergeist
+Rain of Daggers
 Rain of Thorns
 Reforge the Soul
 Renegade Demon
@@ -563,99 +593,93 @@ Riders of Gavony
 Righteous Blow
 Riot Ringleader
 Rotcrown Ghoul
+Rush of Blood
+Sage of Fables
 Sandals of Abdallah
+Savor the Moment
 Scalding Devil
 Scrapskin Drake
 Scroll of Avacyn
 Scroll of Griselbrand
 Searchlight Geist
+Second Guess
 Seraph of Dawn
 Seraph Sanctuary
 Sheltering Word
+Sigarda, Host of Herons
 Silverblade Paladin
+Simulacrum
 Skirk Drill Sergeant
 Slayers' Stronghold
 Snapping Thragg
+Snare the Skies
+Somberwald Vigilante
 Soul of the Harvest
 Soulcage Fiend
 Spectral Gateguards
 Spectral Prison
+Spike Rogue
 Spirit Away
 Stern Mentor
+Stolen Goods
 Stonewright
+Sylvan Hierophant
+Tajuru Preserver
 Tamiyo, the Moon Sage
 Tandem Lookout
 Temporal Mastery
 Terminus
+Terrifying Presence
+Thatcher Revolt
 Thraben Valiant
 Thunderous Wrath
 Tibalt, the Fiend-Blooded
+Timberland Guide
 Tormentor's Trident
 Treacherous Pit-Dweller
+Tree of Redemption
 Triumph of Cruelty
 Triumph of Ferocity
 Trusted Forcemage
+Tuktuk Scrapper
 Ulvenwald Tracker
 Ulvenwald Tracker
+Uncanny Speed
 Undead Executioner
 Unhallowed Pact
 Vanishment
+Venser, Shaper Savant
 Vessel of Endless Rest
+Vexing Devil
+Vigilante Justice
+Vigorous Charge
+Vintara Elephant
 Voice of the Provinces
+Volley of Boulders
 Vorstclaw
+Walking Sponge
+Wall of Vipers
+Wandering Eye
 Wandering Wolf
+Warrior's Oath
+Wash Out
+Weight of Spires
+Weird Harvest
+Whirlpool Warrior
 Wild Defiance
+Wild Evocation
 Wildwood Geist
 Wingcrafter
+Woebringer Demon
 Wolfir Avenger
 Wolfir Silverheart
+Wormfang Crab
+Xathrid Demon
 Yew Spirit
 Zealous Conscripts
 Zealous Strike
-Ghostly Flicker
-Nephalia Smuggler
-Conjurer's Closet
-Deadeye Navigator
-Eaten by Spiders
-Gang of Devils
-Havengul Vampire
-Kessig Malcontents
-Malicious Intent
-Guise of Fire
-Hound of Griselbrand
-Raging Poltergeist
-Murderous Spoils
-Aggravate
-Battle Hymn
-Dual Casting
-Falkenrath Exterminator
-Heirs of Stromkirk
-Megatherium
-Extravagant Spirit
-Fettergeist
-Outwit
-Angel of Jubilation
-Bonfire of the Damned
-Entreat the Angels
-Excruciator
-Malignus
-Hidden Predators
-Vexing Devil
-Longhorn Firebeast
-Sigarda, Host of Herons
-Tajuru Preserver
-Rain of Daggers
-Burn at the Stake
-Morality Shift
-Final Fortune
-Last Chance
-Warrior's Oath
-Stolen Goods
-Descendants' Path
-Descent into Madness
-Second Guess
-Savor the Moment
-Wild Evocation
+Zerapa Minotaur
+Zombie Boa
 
 
 end
