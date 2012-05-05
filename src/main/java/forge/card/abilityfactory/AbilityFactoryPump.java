@@ -331,7 +331,8 @@ public class AbilityFactoryPump {
             return false;
         }
         final boolean evasive = (keyword.endsWith("Flying") || keyword.endsWith("Horsemanship")
-                || keyword.endsWith("Unblockable") || keyword.endsWith("Fear") || keyword.endsWith("Intimidate"));
+                || keyword.endsWith("Unblockable") || keyword.endsWith("Fear") || keyword.endsWith("Intimidate")
+                || keyword.endsWith("Shadow"));
         final boolean combatRelevant = (keyword.endsWith("First Strike")
                 || keyword.contains("Bushido") || keyword.endsWith("Deathtouch"));
         // give evasive keywords to creatures that can or do attack
