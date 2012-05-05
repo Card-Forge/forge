@@ -6,7 +6,6 @@ PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature enters the battlefield under your control, CARDNAME gets +1/+0 and gains trample until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | KW$ Trample
 SVar:BuffedBy:Creature
-SVar:BuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kruin_striker.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/143.jpg
