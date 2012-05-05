@@ -401,6 +401,27 @@ public class AbilityFactoryToken extends AbilityFactory {
      * @return a boolean.
      */
     private boolean tokenDoTriggerAINoCost(final SpellAbility sa, final boolean mandatory) {
+        final Card source = sa.getSourceCard();
+        final Target tgt = sa.getTarget();
+        if (tgt != null) {
+            tgt.resetTargets();
+            if (tgt.canOnlyTgtOpponent()) {
+                tgt.addTarget(AllZone.getHumanPlayer());
+            } else {
+                tgt.addTarget(AllZone.getComputerPlayer());
+            }
+        }
+        if (this.tokenAmount.equals("X") || this.tokenPower.equals("X") || this.tokenToughness.equals("X")) {
+            int x = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa);
+            if (source.getSVar("X").equals("Count$xPaid")) {
+                // Set PayX here to maximum value.
+                x = ComputerUtil.determineLeftoverMana(sa);
+                source.setSVar("PayX", Integer.toString(x));
+            }
+            if (x <= 0) {
+                return false;
+            }
+        }
 
         return true;
     }
