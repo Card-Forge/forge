@@ -4,6 +4,7 @@ Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ CatharsCounters | TriggerDescription$ Whenever a creature enters the battlefield under your control, put a +1/+1 counter on each creature you control.
 SVar:CatharsCounters:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cathars_crusade.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/10.jpg
