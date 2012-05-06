@@ -2,7 +2,7 @@ Forge Beta: 0#-##-2012 ver 1.2.8
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-10790 cards in total.
+10### cards in total.
 
 
 
@@ -18,6 +18,15 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Fixes/Features:
 
 - Cleared out the changes.txt file, now ready for new material.
+- Minor edit to Seachrome Coast to remove the extra copy of the etb text.
+- Update site and buildnumber plugin
+- Prophetic Prism now using Any
+- Fixed tokenDoTriggerAINoCost not setting targets and XCosts.
+- Added SVar:BuffedBy:Creature to Cathars' Crusade.
+- Added Shadow to isUsefulPumpKeyword.
+- Removed the second "SVar:BuffedBy:Creature" from Kruin Striker.
+- Added targeting to AF Effect with Fog AILogic.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
