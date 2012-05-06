@@ -5,7 +5,9 @@ Forge Beta: 0#-##-2012 ver 1.2.8
 10### cards in total.
 
 
+Some people have noticed special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries.
 
+A possible fix was submitted to the SVN for forge version 1.2.7. We have received several reports that the above bugs are still occuring. We hope to have this problem fixed at some point in the future.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
