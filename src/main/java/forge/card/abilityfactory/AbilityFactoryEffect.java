@@ -27,6 +27,7 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
 import forge.Singletons;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.AbilityActivated;
@@ -249,6 +250,18 @@ public class AbilityFactoryEffect {
                     return false;
                 }
                 randomReturn = CombatUtil.lifeInDanger(AllZone.getCombat());
+                final Target tgt = sa.getTarget();
+                if (tgt != null) {
+                    tgt.resetTargets();
+                    CardList list = AllZone.getCombat().getAttackerList();
+                    list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+                    list = list.getTargetableCards(sa);
+                    Card target = CardFactoryUtil.getBestCreatureAI(list);
+                    if (target == null) {
+                        return false;
+                    }
+                    tgt.addTarget(target);
+                }
             } else if (logic.equals("Evasion")) {
                 CardList comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
                 CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
