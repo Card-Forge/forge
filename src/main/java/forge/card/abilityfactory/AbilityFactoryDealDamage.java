@@ -824,6 +824,9 @@ public class AbilityFactoryDealDamage {
 
         final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(saMe.getSourceCard(),
                 params.get("DamageSource"), saMe);
+        if (definedSources == null) {
+            return;
+        }
         final Card source = definedSources.get(0);
 
         for (final Object o : tgts) {
