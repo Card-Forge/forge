@@ -359,6 +359,10 @@ public final class AbilityFactoryChoose {
                                 if (logic.equals("MostProminentHumanControls")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(AllZone.getHumanPlayer()
                                             .getCardsIn(ZoneType.Battlefield));
+                                    if (!CardUtil.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
+                                        chosen = CardFactoryUtil.getMostProminentCreatureType(AllZoneUtil.getCardsInGame()
+                                                .getController(AllZone.getHumanPlayer()));
+                                    }
                                 }
                                 if (logic.equals("MostProminentInComputerDeck")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(AllZoneUtil.getCardsInGame()
