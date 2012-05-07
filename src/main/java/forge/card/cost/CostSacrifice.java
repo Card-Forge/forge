@@ -203,7 +203,7 @@ public class CostSacrifice extends CostPartWithList {
             this.getList().add(source);
         } else if (this.getAmount().equals("All")) {
             CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
-            typeList = typeList.getValidCards(this.getType().split(","), activator, source);
+            typeList = typeList.getValidCards(this.getType().split(";"), activator, source);
             if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
                 typeList = typeList.getNotType("Creature");
             }
