@@ -1754,7 +1754,8 @@ public class AbilityFactoryDealDamage {
             fighter2 = tgts.get(1);
         }
 
-        if (fighter1 == null || fighter2 == null) {
+        if (fighter1 == null || fighter2 == null || !AllZoneUtil.isCardInPlay(fighter1)
+                || !AllZoneUtil.isCardInPlay(fighter2)) {
             return;
         }
 

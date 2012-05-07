@@ -163,7 +163,7 @@ public abstract class AllZoneUtil {
      * @return a boolean.
      */
     public static boolean isCardInPlay(final Card card) {
-        return AllZoneUtil.getCardsIn(ZoneType.Battlefield).contains(card);
+        return card.getController().getCardsIn(ZoneType.Battlefield).contains(card);
     }
 
     /**
