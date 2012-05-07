@@ -88,12 +88,8 @@ public class ComputerUtil {
             }
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
 
-            if (ComputerUtil.canBePlayedAndPayedByAI(sa)) {
-                ComputerUtil.handlePlayingSpellAbility(sa);
-
-                if (!(sa instanceof AbilityStatic)) {
-                    return false;
-                }
+            if (ComputerUtil.canBePlayedAndPayedByAI(sa) && ComputerUtil.handlePlayingSpellAbility(sa)) {
+                return false;
             }
         }
         return true;
@@ -124,13 +120,13 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static void handlePlayingSpellAbility(final SpellAbility sa) {
+    public static boolean handlePlayingSpellAbility(final SpellAbility sa) {
 
         if (sa instanceof AbilityStatic) {
             if (ComputerUtil.payManaCost(sa, AllZone.getComputerPlayer(), false, 0)) {
                 sa.resolve();
             }
-            return;
+            return false;
         }
 
         AllZone.getStack().freezeStack();
@@ -148,6 +144,7 @@ public class ComputerUtil {
             sa.chooseTargetAI();
             sa.getBeforePayManaAI().execute();
             AllZone.getStack().addAndUnfreeze(sa);
+            return true;
         } else {
             if ((tgt != null) && tgt.doesTarget()) {
                 sa.chooseTargetAI();
@@ -156,10 +153,14 @@ public class ComputerUtil {
             final CostPayment pay = new CostPayment(cost, sa);
             if (pay.payComputerCosts()) {
                 AllZone.getStack().addAndUnfreeze(sa);
+                return true;
                 // TODO: solve problems with TapsForMana triggers by adding
                 // sources tapped here if possible (ArsenalNut)
             }
         }
+        //Should not arrive here
+        System.out.println("AI failed to play " + sa.getSourceCard());
+        return false;
     }
 
     /**
