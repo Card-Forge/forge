@@ -220,6 +220,7 @@ public class GameAction {
         // battlefield
         // UNLESS we're dealing with Skullbriar, the Walking Grave
         if (!zoneTo.is(ZoneType.Battlefield)) {
+            copied.setSuspendCast(false);
             // remove all counters from the card if destination is not the battlefield
             // UNLESS we're dealing with Skullbriar, the Walking Grave
             if (!(c.getName().equals("Skullbriar, the Walking Grave") && !zoneTo.is(ZoneType.Hand) && !zoneTo
