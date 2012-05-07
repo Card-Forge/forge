@@ -1329,7 +1329,7 @@ public class ComputerUtil {
             final int amount) {
         Player activator = AllZone.getComputerPlayer();
         CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
-        typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
+        typeList = typeList.getValidCards(type.split(";"), activate.getController(), activate);
         if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             typeList = typeList.getNotType("Creature");
         }
