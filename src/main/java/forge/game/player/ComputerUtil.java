@@ -119,12 +119,19 @@ public class ComputerUtil {
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
      */
     public static boolean handlePlayingSpellAbility(final SpellAbility sa) {
 
         if (sa instanceof AbilityStatic) {
-            if (ComputerUtil.payManaCost(sa, AllZone.getComputerPlayer(), false, 0)) {
+            final Cost cost = sa.getPayCosts();
+            if (cost == null && ComputerUtil.payManaCost(sa, AllZone.getComputerPlayer(), false, 0)) {
                 sa.resolve();
+            } else {
+                final CostPayment pay = new CostPayment(cost, sa);
+                if (pay.payComputerCosts()) {
+                    sa.resolve();
+                }
             }
             return false;
         }
