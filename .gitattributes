@@ -10649,7 +10649,12 @@ res/cardsfolder/w/word_of_binding.txt svneol=native#text/plain
 res/cardsfolder/w/word_of_blasting.txt svneol=native#text/plain
 res/cardsfolder/w/word_of_seizing.txt svneol=native#text/plain
 res/cardsfolder/w/word_of_undoing.txt -text
+res/cardsfolder/w/words_of_war.txt -text
+res/cardsfolder/w/words_of_waste.txt -text
+res/cardsfolder/w/words_of_wilding.txt -text
+res/cardsfolder/w/words_of_wind.txt -text
 res/cardsfolder/w/words_of_wisdom.txt svneol=native#text/plain
+res/cardsfolder/w/words_of_worship.txt -text
 res/cardsfolder/w/workhorse.txt svneol=native#text/plain
 res/cardsfolder/w/world_queller.txt -text
 res/cardsfolder/w/worldgorger_dragon.txt svneol=native#text/plain

@@ -1,0 +1,15 @@
+Name:Words of Wind
+ManaCost:2 U
+Types:Enchantment
+Text:no text
+A:AB$ Effect | Cost$ 1 | Name$ Words of Wind Effect | ReplacementEffects$ DrawReplace | SVars$ ExileEffect,BounceYou,BounceOpp | SpellDescription$ The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead.
+SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ BounceYou | Description$ The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead.
+SVar:BounceYou:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ChangeType$ Permanent.YouCtrl | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | SubAbility$ BounceOpp
+SVar:BounceOpp:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | DefinedPlayer$ Opponent | ChangeType$ Permanent.YouDontCtrl | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_wind.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/on/en/122.jpg
+Oracle:{1}: The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead.
+End
