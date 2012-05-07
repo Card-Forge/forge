@@ -2459,14 +2459,14 @@ public final class AbilityFactoryChangeZone {
             // if the AI is using it defensively, then something else needs to occur
             // if only creatures are affected evaluate both lists and pass only
             // if human creatures are more valuable
-            if ((humanType.getNotType("Creature").size() == 0) && (computerType.getNotType("Creature").size() == 0)) {
-                if (CardFactoryUtil.evaluateCreatureList(computerType) > CardFactoryUtil
+            if ((humanType.getNotType("Creature").isEmpty()) && (computerType.getNotType("Creature").isEmpty())) {
+                if (CardFactoryUtil.evaluateCreatureList(computerType) >= CardFactoryUtil
                         .evaluateCreatureList(humanType)) {
                     return false;
                 }
             } // otherwise evaluate both lists by CMC and pass only if human
               // permanents are more valuable
-            else if (CardFactoryUtil.evaluatePermanentList(computerType) > CardFactoryUtil
+            else if (CardFactoryUtil.evaluatePermanentList(computerType) >= CardFactoryUtil
                     .evaluatePermanentList(humanType)) {
                 return false;
             }
@@ -2506,14 +2506,14 @@ public final class AbilityFactoryChangeZone {
                 }
             } else {
                 // don't activate if human gets more back than AI does
-                if ((humanType.getNotType("Creature").size() == 0) && (computerType.getNotType("Creature").size() == 0)) {
-                    if (CardFactoryUtil.evaluateCreatureList(computerType) < CardFactoryUtil
+                if ((humanType.getNotType("Creature").isEmpty()) && (computerType.getNotType("Creature").isEmpty())) {
+                    if (CardFactoryUtil.evaluateCreatureList(computerType) <= CardFactoryUtil
                             .evaluateCreatureList(humanType)) {
                         return false;
                     }
                 } // otherwise evaluate both lists by CMC and pass only if human
                   // permanents are less valuable
-                else if (CardFactoryUtil.evaluatePermanentList(computerType) < CardFactoryUtil
+                else if (CardFactoryUtil.evaluatePermanentList(computerType) <= CardFactoryUtil
                         .evaluatePermanentList(humanType)) {
                     return false;
                 }
