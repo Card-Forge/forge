@@ -299,7 +299,7 @@ public class AbilityFactoryEffect {
         }
 
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
+        if (tgt != null && tgt.canTgtPlayer()) {
             tgt.resetTargets();
             if (tgt.canOnlyTgtOpponent() || logic.equals("BeginningOfOppTurn")) {
                 tgt.addTarget(AllZone.getHumanPlayer());
