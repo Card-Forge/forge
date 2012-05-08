@@ -2856,6 +2856,7 @@ res/cardsfolder/e/ethersworn_adjudicator.txt svneol=native#text/plain
 res/cardsfolder/e/ethersworn_canonist.txt -text
 res/cardsfolder/e/ethersworn_shieldmage.txt -text
 res/cardsfolder/e/etherwrought_page.txt -text svneol=unset#text/plain
+res/cardsfolder/e/eunuchs_intrigues.txt -text
 res/cardsfolder/e/evacuation.txt svneol=native#text/plain
 res/cardsfolder/e/evaporate.txt svneol=native#text/plain
 res/cardsfolder/e/evasive_action.txt svneol=native#text/plain
@@ -3771,6 +3772,7 @@ res/cardsfolder/g/goblin_tunneler.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_turncoat.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_vandal.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_war_buggy.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_war_cry.txt -text
 res/cardsfolder/g/goblin_war_drums.txt -text
 res/cardsfolder/g/goblin_war_paint.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_war_strike.txt svneol=native#text/plain

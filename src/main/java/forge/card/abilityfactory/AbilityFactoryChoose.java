@@ -1766,29 +1766,34 @@ public final class AbilityFactoryChoose {
                 }
             }
             host.setChosenCard(chosen);
+            return;
         }
 
-        if (!params.containsKey("SunderingTitan")) {
-            for (final Player p : tgtPlayers) {
-                if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                    for (int i = 0; i < validAmount; i++) {
-                        if (p.isHuman()) {
-                            final Object o = GuiUtils.chooseOneOrNone("Choose a card ", choices.toArray());
-                            if (o != null) {
-                                chosen.add((Card) o);
-                                choices.remove((Card) o);
-                            } else {
-                                break;
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                for (int i = 0; i < validAmount; i++) {
+                    if (p.isHuman()) {
+                        final Object o = GuiUtils.chooseOneOrNone("Choose a card ", choices.toArray());
+                        if (o != null) {
+                            chosen.add((Card) o);
+                            choices.remove((Card) o);
+                        } else {
+                            break;
+                        }
+                    } else { // Computer
+                        if (params.containsKey("AILogic") && params.get("AILogic").equals("BestBlocker")) {
+                            if (choices.filter(CardListFilter.UNTAPPED).isEmpty()) {
+                                choices = choices.filter(CardListFilter.UNTAPPED);
                             }
-                        } else { // Computer
-                            chosen.add(CardFactoryUtil.getBestAI(choices));
+                            chosen.add(CardFactoryUtil.getBestCreatureAI(choices));
                         }
+                        chosen.add(CardFactoryUtil.getBestAI(choices));
                     }
-                    host.setChosenCard(chosen);
-                    if (params.containsKey("RememberChosen")) {
-                        for (final Card rem : chosen) {
-                            host.addRemembered(rem);
-                        }
+                }
+                host.setChosenCard(chosen);
+                if (params.containsKey("RememberChosen")) {
+                    for (final Card rem : chosen) {
+                        host.addRemembered(rem);
                     }
                 }
             }
