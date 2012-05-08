@@ -7410,6 +7410,7 @@ res/cardsfolder/r/retraced_image.txt -text svneol=unset#text/plain
 res/cardsfolder/r/retract.txt svneol=native#text/plain
 res/cardsfolder/r/retribution_of_the_meek.txt svneol=native#text/plain
 res/cardsfolder/r/retromancer.txt svneol=native#text/plain
+res/cardsfolder/r/return_of_the_nightstalkers.txt -text
 res/cardsfolder/r/return_to_battle.txt svneol=native#text/plain
 res/cardsfolder/r/return_to_dust.txt svneol=native#text/plain
 res/cardsfolder/r/reveillark.txt svneol=native#text/plain
