@@ -29,6 +29,22 @@ Fixes/Features:
 - Removed the second "SVar:BuffedBy:Creature" from Kruin Striker.
 - Added targeting to AF Effect with Fog AILogic.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a fluff piece to the changes.txt file.
+- Fixed a possible IndexOutOfBoundsException in dealDamageResolve.
+- Fixed SuspendCast never being set to false;
+- Fixed a little bug in decideAIPayment of CostSacrifice.
+- Fixed a little bug in chooseSacrificeType.
+- Added a little more safety code to prevent AI freezing.
+- A little AI tweak to support Awe Strike.
+- Removed Words of War (it was not completely right).
+- Improved changeZoneAllTriggerAINoCost.
+- Improved the AILogic "MostProminentHumanControls".
+- Fixed AF Fight not checking for fighters on battlefield.
+- Fixed AI payment of non-mana costs of static abilities (for example morph).
+- Fixed isCardInPlay.
+- Converted Academy Rector and Lost Auramancers to script.
+- Cleanup.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -38,7 +54,10 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-
+Words of Waste
+Words of Wilding
+Words of Wind
+Words of Worship
 
 
 end
