@@ -945,7 +945,7 @@ public class CardFactoryCreatures {
         ability2.setStackDescription(sbStack.toString());
     }
 
-    private static void getCard_AcademyRector(final Card card, final String cardName) {
+    /*private static void getCard_AcademyRector(final Card card, final String cardName) {
         final SpellAbility ability = new Ability(card, "0") {
 
             @Override
@@ -1124,7 +1124,7 @@ public class CardFactoryCreatures {
         }; // Command destroy
 
         card.addDestroyCommand(destroy);
-    }
+    }*/
 
     private static void getCard_KinsbaileBorderguard(final Card card, final String cardName) {
         final SpellAbility ability = new Ability(card, "0") {
@@ -1993,8 +1993,6 @@ public class CardFactoryCreatures {
             getCard_ApocalypseHydra(card, cardName);
         } else if (cardName.equals("Molten Hydra")) {
             getCard_MoltenHydra(card, cardName);
-        } else if (cardName.equals("Academy Rector") || cardName.equals("Lost Auramancers")) {
-            getCard_AcademyRector(card, cardName);
         } else if (cardName.equals("Kinsbaile Borderguard")) {
             getCard_KinsbaileBorderguard(card, cardName);
         } else if (cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite")

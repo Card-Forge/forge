@@ -1,8 +1,10 @@
 Name:Lost Auramancers
 ManaCost:2 W W
 Types:Creature Human Wizard
-Text:When Lost Auramancers is put into a graveyard from the battlefield, if it had no time counters on it, you may search your library for an enchantment card and put it onto the battlefield. If you do, shuffle your library.
+Text:no text
 PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self+counters_EQ0_TIME | Origin$ Battlefield | Destination$ Graveyard | Execute$ DBReturn | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, if it had no time counters on it, you may search your library for an enchantment card and put it onto the battlefield. If you do, shuffle your library.
+SVar:DBReturn:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Enchantment.YouOwn | ChangeNum$ 1
 K:Vanishing:3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_auramancers.jpg
