@@ -152,7 +152,6 @@ public abstract class AllZoneUtil {
     }
 
     // /Check if a certain card is in play
-
     /**
      * <p>
      * isCardInPlay.
@@ -163,6 +162,9 @@ public abstract class AllZoneUtil {
      * @return a boolean.
      */
     public static boolean isCardInPlay(final Card card) {
+        if (card.getController() == null) {
+            return false;
+        }
         return card.getController().getCardsIn(ZoneType.Battlefield).contains(card);
     }
 
