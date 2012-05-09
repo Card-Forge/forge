@@ -67,7 +67,7 @@ public final class AbilityFactoryRepeat {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return true;
+                return AbilityFactoryRepeat.repeatCanPlayAI(this) || mandatory;
             }
 
             @Override
@@ -105,7 +105,7 @@ public final class AbilityFactoryRepeat {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return true;
+                return AbilityFactoryRepeat.repeatCanPlayAI(this) || mandatory;
             }
 
             @Override
@@ -148,7 +148,7 @@ public final class AbilityFactoryRepeat {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return true;
+                return AbilityFactoryRepeat.repeatCanPlayAI(this) || mandatory;
             }
 
             @Override

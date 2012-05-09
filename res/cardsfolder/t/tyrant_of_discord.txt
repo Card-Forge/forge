@@ -8,7 +8,7 @@ SVar:TrigRepeat:AB$ Repeat | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select t
 SVar:DBClear:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBSac
 SVar:DBSac:DB$Sacrifice | Defined$ Targeted | SacValid$ Permanent | Amount$ 1  | RememberSacrificed$ True | Random$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tyrant_of_discord.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/162.jpg
