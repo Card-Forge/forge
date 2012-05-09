@@ -5,7 +5,6 @@ Text:no text
 A:SP$ Repeat | Cost$ 8 G G | RepeatSubAbility$ DBDig | RepeatDefined$ Remembered | RepeatPresent$ Permanent | RepeatCompare$ EQ1 | StackDescription$ Exile the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you do, repeat this process. | SpellDescription$ Exile the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you do, repeat this process.
 SVar:DBDig:DB$ Dig | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Permanent | ConditionCompare$ EQ1 | Optional$ True | RememberChanged$ True | ForgetOtherRemembered$ True
-SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_surge.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/189.jpg
