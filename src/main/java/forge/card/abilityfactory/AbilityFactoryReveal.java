@@ -327,7 +327,7 @@ public final class AbilityFactoryReveal {
      */
     private static void digResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
         final Player player = sa.getActivatingPlayer();
         Player choser = player;
         int numToDig = AbilityFactory.calculateAmount(af.getHostCard(), params.get("DigNum"), sa);
@@ -480,7 +480,7 @@ public final class AbilityFactoryReveal {
                                     }
                                 }
                                 if (params.containsKey("ForgetOtherRemembered")) {
-                                    sa.getSourceCard().clearRemembered();
+                                    host.clearRemembered();
                                 }
                                 if (params.containsKey("RememberChanged")) {
                                     host.addRemembered(c);
