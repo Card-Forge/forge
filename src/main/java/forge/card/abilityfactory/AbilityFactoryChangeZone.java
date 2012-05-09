@@ -884,8 +884,6 @@ public final class AbilityFactoryChangeZone {
             fetchList = AbilityFactory.filterListByType(fetchList, params.get("ChangeType"), sa);
         }
 
-        final PlayerZone destZone = player.getZone(destination);
-
         final String remember = params.get("RememberChanged");
         final String imprint = params.get("Imprint");
 
@@ -961,7 +959,7 @@ public final class AbilityFactoryChangeZone {
                         movedCard.setState(CardCharactersticName.FaceDown);
                     }
                 } else {
-                    movedCard = Singletons.getModel().getGameAction().moveTo(destZone, c);
+                    movedCard = Singletons.getModel().getGameAction().moveTo(destination, c);
                 }
 
                 if (remember != null) {
@@ -1153,7 +1151,7 @@ public final class AbilityFactoryChangeZone {
                     newCard.setState(CardCharactersticName.FaceDown);
                 }
             } else {
-                newCard = Singletons.getModel().getGameAction().moveTo(destZone, c);
+                newCard = Singletons.getModel().getGameAction().moveTo(destination, c);
             }
 
             if (remember != null) {
@@ -1892,7 +1890,6 @@ public final class AbilityFactoryChangeZone {
 
         final HashMap<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
-        final Player player = sa.getActivatingPlayer();
         final Card hostCard = sa.getSourceCard();
 
         final ZoneType destination = ZoneType.valueOf(params.get("Destination"));
@@ -1915,8 +1912,6 @@ public final class AbilityFactoryChangeZone {
         }
 
         for (final SpellAbility tgtSA : sas) {
-            final Card tgtSACard = tgtSA.getSourceCard();
-
             if (!tgtSA.isSpell()) { // Catch any abilities or triggers that slip through somehow
                 continue;
             }
@@ -1936,21 +1931,8 @@ public final class AbilityFactoryChangeZone {
             hostCard.clearImprinted();
         }
 
-        if (params.containsKey("ForgetOtherRemembered")) {
-            hostCard.clearRemembered();
-        }
-
-        boolean optional = params.containsKey("Optional");
-
         if (tgtCards.size() != 0) {
             for (final Card tgtC : tgtCards) {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Do you want to move " + tgtC + " from " + origin + " to " + destination + "?");
-                if (player.isHuman() && optional
-                        && !GameActionUtil.showYesNoDialog(hostCard, sb.toString())) {
-                    continue;
-                }
-
                 final PlayerZone originZone = AllZone.getZoneOf(tgtC);
                 // if Target isn't in the expected Zone, continue
                 if ((originZone == null) || !originZone.is(origin)) {
@@ -1965,10 +1947,6 @@ public final class AbilityFactoryChangeZone {
                 }
 
                 Card movedCard = null;
-                Player pl = player;
-                if (!destination.equals(ZoneType.Battlefield)) {
-                    pl = tgtC.getOwner();
-                }
 
                 if (destination.equals(ZoneType.Library)) {
                     // library position is zero indexed
@@ -2024,7 +2002,7 @@ public final class AbilityFactoryChangeZone {
                             AllZone.getCombat().addUnblockedAttacker(tgtC);
                         }
                     } else {
-                        movedCard = Singletons.getModel().getGameAction().moveTo(pl.getZone(destination), tgtC);
+                        movedCard = Singletons.getModel().getGameAction().moveTo(destination, tgtC);
                         // If a card is Exiled from the stack, remove its spells from the stack
                         if (params.containsKey("Fizzle")) {
                             ArrayList<SpellAbility> spells = tgtC.getSpellAbilities();

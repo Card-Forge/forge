@@ -300,7 +300,7 @@ public class GameAction {
     public final Card moveTo(final PlayerZone zoneTo, Card c) {
         return moveTo(zoneTo, c, null);
     }
-    
+
     public final Card moveTo(final PlayerZone zoneTo, Card c, Integer position) {
         // Ideally move to should never be called without a prevZone
         // Remove card from Current Zone, if it has one
