@@ -25,6 +25,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -460,7 +461,9 @@ public class AbilityFactorySacrifice {
         else {
             CardList sacList = null;
             for (final Player p : tgts) {
-                if (p.isComputer()) {
+                if (params.containsKey("Random")) {
+                    sacList = AbilityFactorySacrifice.sacrificeRandom(p, amount, valid, sa, destroy);
+                } else if (p.isComputer()) {
                     if (params.containsKey("Optional") && sa.getActivatingPlayer().isHuman()) {
                         continue;
                     }
@@ -551,6 +554,42 @@ public class AbilityFactorySacrifice {
 
             } else {
                 return sacList;
+            }
+        }
+        return sacList;
+    }
+
+    /**
+     * <p>
+     * sacrificeRandom.
+     * </p>
+     * 
+     * @param p
+     *            a {@link forge.game.player.Player} object.
+     * @param amount
+     *            a int.
+     * @param valid
+     *            a {@link java.lang.String} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     */
+    private static CardList sacrificeRandom(final Player p, final int amount, final String valid, final SpellAbility sa,
+            final boolean destroy) {
+        CardList sacList = new CardList();
+        for (int i = 0; i < amount; i++) {
+            CardList battlefield = p.getCardsIn(ZoneType.Battlefield);
+            CardList list = AbilityFactory.filterListByType(battlefield, valid, sa);
+            if (list.size() != 0) {
+                final Card sac = CardUtil.getRandom(list.toArray());
+                if (destroy) {
+                    if (Singletons.getModel().getGameAction().destroy(sac)) {
+                        sacList.add(sac);
+                    }
+                } else {
+                    if (Singletons.getModel().getGameAction().sacrifice(sac, sa)) {
+                        sacList.add(sac);
+                    }
+                }
             }
         }
         return sacList;
