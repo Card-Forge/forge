@@ -2049,9 +2049,6 @@ public class AbilityFactory {
                 players.add(p);
             }
         } else if (defined.equals("EnchantedPlayer")) {
-            if (card.getEnchantingCard() == null) {
-                return players;
-            }
             final Object o = sa.getSourceCard().getEnchanting();
             if (o instanceof Player) {
                 if (!players.contains(o)) {
