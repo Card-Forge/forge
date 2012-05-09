@@ -1936,8 +1936,21 @@ public final class AbilityFactoryChangeZone {
             hostCard.clearImprinted();
         }
 
+        if (params.containsKey("ForgetOtherRemembered")) {
+            hostCard.clearRemembered();
+        }
+
+        boolean optional = params.containsKey("Optional");
+
         if (tgtCards.size() != 0) {
             for (final Card tgtC : tgtCards) {
+                final StringBuilder sb = new StringBuilder();
+                sb.append("Do you want to move " + tgtC + " from " + origin + " to " + destination + "?");
+                if (player.isHuman() && optional
+                        && !GameActionUtil.showYesNoDialog(hostCard, sb.toString())) {
+                    continue;
+                }
+
                 final PlayerZone originZone = AllZone.getZoneOf(tgtC);
                 // if Target isn't in the expected Zone, continue
                 if ((originZone == null) || !originZone.is(origin)) {
