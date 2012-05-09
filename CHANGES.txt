@@ -45,6 +45,15 @@ Fixes/Features:
 - Converted Academy Rector and Lost Auramancers to script.
 - Cleanup.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the precon Angelic Might.
+- Added the precon Solitary Fiends.
+- Added 7ED setinfo to Infernal Contract.
+- added support for random sacrifice choice
+- added support for ForgetOtherRemembered and Optional to changeKnownOriginResolve
+- Adding Repeat AF.
+- added default value for RepeatSVarCompare
+- Fixed Drake Familiar.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -58,6 +67,16 @@ Words of Waste
 Words of Wilding
 Words of Wind
 Words of Worship
+Words of War
+Return of the Nightstalkers
+Eunuchs' Intrigues
+Goblin War Cry
+Advice from the Fae
+Consign to Dream
+Prismwake Merrow
+Ad Nauseam
+Primal Surge
+Tyrant of Discord
 
 
 end
