@@ -252,10 +252,16 @@ public final class AbilityFactoryRepeat {
         }
 
         if (params.containsKey("RepeatCheckSVar")) {
+            String sVarOperator = "GE";
+            String sVarOperand = "1";
+            if (params.containsKey("RepeatSVarCompare")) {
+                sVarOperator = params.get("RepeatSVarCompare").substring(0, 2);
+                sVarOperand = params.get("RepeatSVarCompare").substring(2);
+            }
             final int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("RepeatCheckSVar"), sa);
-            final int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("RepeatSVarCompare").substring(2), sa);
+            final int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), sVarOperand, sa);
 
-            if (!AllZoneUtil.compare(svarValue, params.get("RepeatSVarCompare").substring(0, 2), operandValue)) {
+            if (!AllZoneUtil.compare(svarValue, sVarOperator, operandValue)) {
                 return false;
             }
         }
