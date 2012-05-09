@@ -73,6 +73,7 @@ res/cardsfolder/a/acridian.txt svneol=native#text/plain
 res/cardsfolder/a/act_of_aggression.txt svneol=native#text/plain
 res/cardsfolder/a/act_of_treason.txt svneol=native#text/plain
 res/cardsfolder/a/active_volcano.txt svneol=native#text/plain
+res/cardsfolder/a/ad_nauseam.txt -text
 res/cardsfolder/a/adamaro_first_to_desire.txt svneol=native#text/plain
 res/cardsfolder/a/adaptive_automaton.txt svneol=native#text/plain
 res/cardsfolder/a/adarkar_sentinel.txt svneol=native#text/plain
@@ -6924,6 +6925,7 @@ res/cardsfolder/p/primal_frenzy.txt svneol=native#text/plain
 res/cardsfolder/p/primal_order.txt svneol=native#text/plain
 res/cardsfolder/p/primal_plasma.txt svneol=native#text/plain
 res/cardsfolder/p/primal_rage.txt svneol=native#text/plain
+res/cardsfolder/p/primal_surge.txt -text
 res/cardsfolder/p/primal_whisperer.txt svneol=native#text/plain
 res/cardsfolder/p/primalcrux.txt svneol=native#text/plain
 res/cardsfolder/p/primeval_force.txt -text
@@ -9829,6 +9831,7 @@ res/cardsfolder/t/twitch.txt svneol=native#text/plain
 res/cardsfolder/t/two_headed_sliver.txt -text
 res/cardsfolder/t/typhoid_rats.txt -text
 res/cardsfolder/t/typhoon.txt svneol=native#text/plain
+res/cardsfolder/t/tyrant_of_discord.txt -text
 res/cardsfolder/t/tyrranax.txt svneol=native#text/plain
 res/cardsfolder/u/uktabi_drake.txt svneol=native#text/plain
 res/cardsfolder/u/uktabi_efreet.txt svneol=native#text/plain
@@ -11683,6 +11686,7 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryPreventDamage.java svneol=
 src/main/java/forge/card/abilityfactory/AbilityFactoryProtection.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryPump.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryRegenerate.java svneol=native#text/plain
+src/main/java/forge/card/abilityfactory/AbilityFactoryRepeat.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryReveal.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactorySacrifice.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactorySetState.java svneol=native#text/plain

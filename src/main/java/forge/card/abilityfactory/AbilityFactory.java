@@ -1113,6 +1113,16 @@ public class AbilityFactory {
             }
         }
 
+        else if (this.api.equals("Repeat")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryRepeat.createAbilityRepeat(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryRepeat.createSpellRepeat(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryRepeat.createDrawbackRepeat(this);
+            }
+        }
+
         else if (this.api.equals("Reveal")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryReveal.createAbilityReveal(this);

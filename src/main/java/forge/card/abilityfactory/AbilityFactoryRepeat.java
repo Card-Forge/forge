@@ -1,0 +1,310 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package forge.card.abilityfactory;
+
+import java.util.HashMap;
+
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.GameActionUtil;
+import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
+import forge.game.zone.ZoneType;
+
+/**
+ * <p>
+ * AbilityFactory_Repeat class.
+ * </p>
+ * 
+ * @author Forge
+ * @version $Id: AbilityFactoryRepeat.java 15090 2012-04-07 12:50:31Z Max mtg $
+ */
+public final class AbilityFactoryRepeat {
+
+    private AbilityFactoryRepeat() {
+        throw new AssertionError();
+    }
+
+    /**
+     * <p>
+     * getAbilityRepeat.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @since 1.0.15
+     */
+    public static SpellAbility createAbilityRepeat(final AbilityFactory af) {
+        final SpellAbility abRepeat = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = -8019637116128196482L;
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryRepeat.repeatCanPlayAI(this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return true;
+            }
+
+            @Override
+            public String getStackDescription() {
+                return AbilityFactoryRepeat.repeatStackDescription(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                AbilityFactoryRepeat.repeatResolve(af, this);
+            }
+        };
+
+        return abRepeat;
+    }
+
+    /**
+     * <p>
+     * createSpellRepeat.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @since 1.0.15
+     */
+    public static SpellAbility createSpellRepeat(final AbilityFactory af) {
+        final SpellAbility spRepeat = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = -4991665176268317217L;
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryRepeat.repeatCanPlayAI(this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return true;
+            }
+
+            @Override
+            public String getStackDescription() {
+                return AbilityFactoryRepeat.repeatStackDescription(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                AbilityFactoryRepeat.repeatResolve(af, this);
+            }
+        };
+
+        return spRepeat;
+    }
+
+    /**
+     * <p>
+     * createDrawbackRepeat.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @since 1.0.15
+     */
+    public static SpellAbility createDrawbackRepeat(final AbilityFactory af) {
+        final SpellAbility dbRepeat = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = -3850086157052881036L;
+
+            @Override
+            public boolean canPlayAI() {
+                return true;
+            }
+
+            @Override
+            public boolean chkAIDrawback() {
+                return true;
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return true;
+            }
+
+            @Override
+            public String getStackDescription() {
+                return AbilityFactoryRepeat.repeatStackDescription(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                AbilityFactoryRepeat.repeatResolve(af, this);
+            }
+        };
+
+        return dbRepeat;
+    }
+
+    private static boolean repeatCanPlayAI(final SpellAbility sa) {
+        final Target tgt = sa.getTarget();
+        if (tgt != null) {
+            if (!AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+                return false;
+            }
+            tgt.resetTargets();
+            tgt.addTarget(AllZone.getHumanPlayer());
+        }
+        return true;
+    }
+
+    /**
+     * <p>
+     * repeatResolve.
+     * </p>
+     * 
+     * @param AF
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param SA
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     */
+    private static void repeatResolve(final AbilityFactory af, final SpellAbility sa) {
+        final AbilityFactory afRepeat = new AbilityFactory();
+
+        // setup subability to repeat
+        final SpellAbility repeat = afRepeat.getAbility(
+                af.getHostCard().getSVar(af.getMapParams().get("RepeatSubAbility")), af.getHostCard());
+        repeat.setActivatingPlayer(af.getHostCard().getController());
+        ((AbilitySub) repeat).setParent(sa);
+
+        //execute repeat ability at least once
+        do {
+             AbilityFactory.resolve(repeat, false);
+       } while (checkRepeatConditions(af, sa));
+
+    }
+
+    /**
+     * <p>
+     * checkRepeatConditions.
+     * </p>
+     * 
+     * @param AF
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param SA
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     */
+    private static boolean checkRepeatConditions(final AbilityFactory af, final SpellAbility sa) {
+        //boolean doAgain = false;
+        final HashMap<String, String> params = af.getMapParams();
+
+        if (params.containsKey("RepeatPresent")) {
+            final String repeatPresent = params.get("RepeatPresent");
+            CardList list = new CardList();
+
+            String repeatCompare = "GE1";
+            if (params.containsKey("RepeatCompare")) {
+                repeatCompare = params.get("RepeatCompare");
+            }
+
+            if (params.containsKey("RepeatDefined")) {
+                list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("RepeatDefined"), sa));
+            } else {
+                list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            }
+
+            list = list.getValidCards(repeatPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+
+            int right;
+            final String rightString = repeatCompare.substring(2);
+            try { // If this is an Integer, just parse it
+                right = Integer.parseInt(rightString);
+            } catch (final NumberFormatException e) { // Otherwise, grab it from
+                                                      // the
+                // SVar
+                right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar(rightString));
+            }
+
+            final int left = list.size();
+
+            if (!AllZoneUtil.compare(left, repeatCompare, right)) {
+                return false;
+            }
+        }
+
+        if (params.containsKey("RepeatCheckSVar")) {
+            final int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("RepeatCheckSVar"), sa);
+            final int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("RepeatSVarCompare").substring(2), sa);
+
+            if (!AllZoneUtil.compare(svarValue, params.get("RepeatSVarCompare").substring(0, 2), operandValue)) {
+                return false;
+            }
+        }
+
+        if (params.containsKey("RepeatOptional")) {
+            if (sa.getActivatingPlayer().isComputer()) {
+                //TODO add logic to have computer make better choice (ArsenalNut)
+                return false;
+            } else {
+                final StringBuilder sb = new StringBuilder();
+                sb.append("Do you want to repeat this process again?");
+                if (!GameActionUtil.showYesNoDialog(sa.getSourceCard(), sb.toString())) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * <p>
+     * repeatStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    private static String repeatStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        final HashMap<String, String> params = af.getMapParams();
+
+        final StringBuilder sb = new StringBuilder();
+        final Card host = af.getHostCard();
+
+        if (!(sa instanceof AbilitySub)) {
+            sb.append(host.getName()).append(" -");
+        }
+
+        sb.append(" ");
+
+        if (params.containsKey("StackDescription")) {
+            sb.append(params.get("StackDescription"));
+        } else {
+            sb.append("Repeat something. Somebody should really write a better StackDescription!");
+        }
+
+        return sb.toString();
+    } // end repeatStackDescription()
+} // end class AbilityFactory_Repeat
