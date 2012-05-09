@@ -6,6 +6,8 @@ PT:3/3
 K:Evoke:3 U
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.
 SVar:TrigDraw:DB$Draw | Cost$ 0 | NumCards$ X | Defined$ You | IsPresent$ Card.YouDontCtrl | PresentCompare$ GTY | PresentZone$ Hand
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0
 SVar:Y:Count$InYourHand
 SVar:X:Count$InOppHand/Minus.Y
 SVar:Rarity:Rare
