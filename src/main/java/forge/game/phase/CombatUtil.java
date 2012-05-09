@@ -2575,8 +2575,7 @@ public class CombatUtil {
                 c.tap();
             }
         } // Mijae Djinn
-
-        else if (c.getName().equals("Spectral Bears")) {
+        /*else if (c.getName().equals("Spectral Bears")) {
             final Player opp = c.getController().getOpponent();
             CardList list = opp.getCardsIn(ZoneType.Battlefield);
             list = list.filter(new CardListFilter() {
@@ -2595,7 +2594,7 @@ public class CombatUtil {
             if (list.size() == 0) {
                 c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
             }
-        } else if (c.getName().equals("Witch-Maw Nephilim") && !c.getDamageHistory().getCreatureAttackedThisCombat()
+        }*/ else if (c.getName().equals("Witch-Maw Nephilim") && !c.getDamageHistory().getCreatureAttackedThisCombat()
                 && (c.getNetAttack() >= 10)) {
             final Card charger = c;
             final Ability ability2 = new Ability(c, "0") {
