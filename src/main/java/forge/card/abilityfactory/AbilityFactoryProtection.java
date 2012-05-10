@@ -704,8 +704,19 @@ public final class AbilityFactoryProtection {
                 final String choice = (String) o;
                 gains.add(choice);
             } else {
-                // TODO - needs improvement
-                final String choice = choices.get(0);
+                String choice = choices.get(0);
+                if (params.containsKey("AILogic")) {
+                    final String logic = params.get("AILogic");
+                    if (logic.equals("MostProminentHumanCreatures")) {
+                        CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                        if (list.isEmpty()) {
+                            list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer());
+                        }
+                        if (!list.isEmpty()) {
+                            choice = CardFactoryUtil.getMostProminentColor(list);
+                        }
+                    }
+                }
                 gains.add(choice);
                 JOptionPane.showMessageDialog(null, "Computer chooses " + gains, "" + host, JOptionPane.PLAIN_MESSAGE);
             }
