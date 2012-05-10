@@ -12061,6 +12061,7 @@ src/main/java/forge/gui/toolbox/FRadioButton.java -text
 src/main/java/forge/gui/toolbox/FScrollPane.java -text
 src/main/java/forge/gui/toolbox/FSkin.java -text
 src/main/java/forge/gui/toolbox/FTextArea.java -text
+src/main/java/forge/gui/toolbox/SaveOpenDialog.java -text
 src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text

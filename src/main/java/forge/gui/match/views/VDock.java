@@ -60,7 +60,7 @@ public enum VDock implements IVDoc {
     private final JLabel btnViewDeckList =
             new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_DECKLIST), "View Deck List");
     private final JLabel btnRevertLayout =
-            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_REVERTLAYOUT), "Revert Layout");
+            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_REVERTLAYOUT), "Open Layout");
 
     //========= Overridden methods
 

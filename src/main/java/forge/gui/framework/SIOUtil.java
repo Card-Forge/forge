@@ -38,7 +38,7 @@ public final class SIOUtil {
 
     /** */
     public static final String FILE_DEFAULT = "res/layouts/match_default.xml";
-    private static final String FILE_PREFERRED = "res/layouts/match_preferred.xml";
+    public static final String FILE_PREFERRED = "res/layouts/match_preferred.xml";
     private static final XMLEventFactory EF = XMLEventFactory.newInstance();
     private static final XMLEvent NEWLINE = EF.createDTD("\n");
     private static final XMLEvent TAB = EF.createDTD("\t");

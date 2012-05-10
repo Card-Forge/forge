@@ -41,6 +41,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SIOUtil;
 import forge.gui.match.views.VDock;
+import forge.gui.toolbox.SaveOpenDialog;
 import forge.item.CardPrinted;
 import forge.properties.NewConstants;
 import forge.view.FView;
@@ -70,16 +71,22 @@ public enum CDock implements ICDoc {
     private void revertLayout() {
         SOverlayUtils.genericOverlay();
         FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
-
-        final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
+        
+        
+        final SwingWorker<Void,Void> w = new SwingWorker<Void,Void>() {
             @Override
             public Void doInBackground() {
-                SIOUtil.loadLayout(new File(SIOUtil.FILE_DEFAULT));
+                SaveOpenDialog dlgSave = new SaveOpenDialog();
+                File LoadFile = new File(SIOUtil.FILE_PREFERRED);
+                LoadFile = dlgSave.OpenXMLDialog(LoadFile);
+            
+                SIOUtil.loadLayout(LoadFile);
                 SOverlayUtils.hideOverlay();
                 return null;
             }
         };
-        w.execute();
+        w.execute();         
+                
     }
 
     /**
