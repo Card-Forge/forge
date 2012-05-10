@@ -54,6 +54,13 @@ Fixes/Features:
 - added default value for RepeatSVarCompare
 - Fixed Drake Familiar.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Curse of Thirst.
+- Converted Spectral Bears and Spectral Force to script.
+- The AI can now use Tyrant of Discord.
+- Fixed changeKnownOriginResolve.
+- Removed SVar:RemAIDeck:True from Primal Surge.
+- Fixed Slithermuse.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
