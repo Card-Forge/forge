@@ -590,7 +590,9 @@ public class AbilityFactoryDealDamage {
                 // or from taking combat damage
                 final boolean freePing = isTrigger || saMe.getPayCosts() == null || tgt.getNumTargeted() > 0
                         || (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN) && saMe.isAbility()
-                                && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()));
+                                && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()))
+                            || (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN2)
+                                && saMe.getRestrictions().getPlaneswalker());
 
                 if (freePing && saMe.canTarget(AllZone.getHumanPlayer()) && tgt.addTarget(AllZone.getHumanPlayer())) {
                     continue;
