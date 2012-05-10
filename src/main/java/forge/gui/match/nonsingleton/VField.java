@@ -610,13 +610,14 @@ public class VField implements IVDoc {
         }
 
         /**
-         * Determines if this phase is the current phase (or not).
+         * Makes this phase the current phase (or not).
          * 
          * @param b
          *            &emsp; boolean, true if phase is current
          */
         public void setActive(final boolean b) {
             this.active = b;
+            this.repaintOnlyThisLabel();
         }
 
         /**
