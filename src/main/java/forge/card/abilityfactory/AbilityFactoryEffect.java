@@ -249,7 +249,9 @@ public class AbilityFactoryEffect {
                 if (Singletons.getModel().getGameState().getPhaseHandler().isPreventCombatDamageThisTurn()) {
                     return false;
                 }
-                randomReturn = CombatUtil.lifeInDanger(AllZone.getCombat());
+                if (!CombatUtil.lifeInDanger(AllZone.getCombat())) {
+                    return false;
+                }
                 final Target tgt = sa.getTarget();
                 if (tgt != null) {
                     tgt.resetTargets();
@@ -262,6 +264,9 @@ public class AbilityFactoryEffect {
                     }
                     tgt.addTarget(target);
                 }
+                randomReturn = true;
+            } else if (logic.equals("Always")) {
+                randomReturn = true;
             } else if (logic.equals("Evasion")) {
                 CardList comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
                 CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
@@ -283,6 +288,8 @@ public class AbilityFactoryEffect {
                     randomReturn = false;
                 }
             }
+        } else { //no AILogic
+            return false;
         }
 
         final String stackable = params.get("Stackable");

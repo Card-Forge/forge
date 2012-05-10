@@ -5,6 +5,7 @@ Text:no text
 A:SP$ Effect | Cost$ 3 U | Name$ Plagiarize Effect | ReplacementEffects$ EventDraw | SVars$ ABDraw | RememberObjects$ Targeted | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | SpellDescription$ Until end of turn, if target player would draw a card, instead that player skips that draw and you draw a card.
 SVar:EventDraw:Event$ Draw | ValidPlayer$ Player.IsRemembered | ReplaceWith$ ABDraw | Description$ If the targeted player would draw a card, that player skips that draw and you draw a card.
 SVar:ABDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SpellDescription$ You draw a card.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plagiarize.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/44.jpg

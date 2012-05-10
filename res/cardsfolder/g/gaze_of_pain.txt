@@ -7,6 +7,7 @@ SVar:TrigAttackerUnblocked:Mode$ AttackerUnblocked | ValidCard$ Creature.YouCtrl
 SVar:Damage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBPump
 SVar:DBPump:DB$Pump | Defined$ TriggeredAttacker | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:X:TriggeredAttacker$CardPower
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_pain.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/16.jpg
