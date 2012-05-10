@@ -395,9 +395,11 @@ public final class AbilityFactoryAnimate {
      */
     private static boolean animatePlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // AI should only activate this during Human's turn
-        boolean chance = AbilityFactoryAnimate.animateTgtAI(af, sa);
+        boolean chance = true;
 
-        // TODO - restrict the subAbility a bit
+        if (sa.getTarget() != null) {
+            chance = AbilityFactoryAnimate.animateTgtAI(af, sa);
+        }
 
         final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
@@ -425,7 +427,11 @@ public final class AbilityFactoryAnimate {
             return false;
         }
 
-        boolean chance = AbilityFactoryAnimate.animateTgtAI(af, sa);
+        boolean chance = true;
+
+        if (sa.getTarget() != null) {
+            chance = AbilityFactoryAnimate.animateTgtAI(af, sa);
+        }
 
         // Improve AI for triggers. If source is a creature with:
         // When ETB, sacrifice a creature. Check to see if the AI has something
