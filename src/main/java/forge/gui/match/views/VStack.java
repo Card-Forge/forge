@@ -205,6 +205,7 @@ public enum VStack implements IVDoc {
         }
 
         VMatchUI.SINGLETON_INSTANCE.getBtnOK().requestFocusInWindow();
+        parentCell.getBody().repaint();
     }
 
     /** Returns array with [background, foreground] colors. */
