@@ -9,6 +9,8 @@ Some people have noticed special quests do not have the start in play cards appe
 
 A possible fix was submitted to the SVN for forge version 1.2.7. We have received several reports that the above bugs are still occuring. We hope to have this problem fixed at some point in the future.
 
+The dock now has a new button labeled "Open Layout" along with old button with original function "Revert Layout". Modifying the battlefield layout will result in your changes being saved to a file named  "match_preferred.xml". You can copy and rename that file to share your layouts with other people.
+
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
 
@@ -60,6 +62,18 @@ Fixes/Features:
 - Fixed changeKnownOriginResolve.
 - Removed SVar:RemAIDeck:True from Primal Surge.
 - Fixed Slithermuse.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Dawnfluke.
+- Fixed an issue with the phase labels not updating completely, especially in custom layouts.
+- Fixed a bug with the stack not repainting after changes are made.
+- Tweaked AF DealDamage AI.
+- Added the AILogic "Always" to AF Effect.
+- Changed "Revert Layout" to "Open Layout" To revert to factory layout, open "match_default.xml"
+- Improved AI of Glint Hawk Idol.
+- Added AILogic parameter to AF Protection.
+- adding *.jpg to ignore list for res/pics/tokens
+- adding branch for mana restrictions
+- Refactored some of the new code for a general open dialog. Dock now has new button "Open Layout" along with old button with original function "Revert Layout"
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
