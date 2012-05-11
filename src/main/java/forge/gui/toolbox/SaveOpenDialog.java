@@ -35,21 +35,45 @@ public class SaveOpenDialog extends JPanel {
     
     private JFileChooser fc;
     
+    
+    /**
+     *  Enum to contain information for filetype filtering in the open/save dialog.
+     *  Add more entries to enum as needed.
+     *  
+     *  
+     */
+    public enum Filetypes {
+        LAYOUT ("Layout File", "xml");
+    
+        private final String TypeName;
+        private final String TypeExtension;
+        Filetypes(String Name, String Extension) {
+            this.TypeName = Name;
+            this.TypeExtension = Extension;
+        }
+    }
+    
     public SaveOpenDialog() {
         fc = new JFileChooser();
     }
     
     /**
-     * Shows the open dialog for xml files (layouts). If no file selected, returns default.
-     *
+     * Shows the open dialog for files. If no file selected, returns default. Pass null
+     * to Type and Extension to allow all files to be viewed/opened.
+     * @param defFileName pass the default file to use, also determines directory
+     * @param type label to tell what type of file to filter
+     * 
      *
      */
-    public File OpenXMLDialog(File defFileName) {
+    public File OpenDialog(File defFileName, Filetypes type) {
         File RetFile = defFileName;
         fc.setCurrentDirectory(defFileName);
-        fc.setAcceptAllFileFilterUsed(false);
-        FileFilter filter = new FileNameExtensionFilter("Layout Files", "xml");
-        fc.addChoosableFileFilter(filter);
+        
+        if (type!=null) {
+            fc.setAcceptAllFileFilterUsed(false);
+            FileFilter filter = new FileNameExtensionFilter(type.TypeName, type.TypeExtension);
+            fc.addChoosableFileFilter(filter);
+        }
         
          
         int RetValue = fc.showOpenDialog(getParent());

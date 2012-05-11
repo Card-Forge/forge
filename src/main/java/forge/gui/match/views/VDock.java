@@ -60,7 +60,9 @@ public enum VDock implements IVDoc {
     private final JLabel btnViewDeckList =
             new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_DECKLIST), "View Deck List");
     private final JLabel btnRevertLayout =
-            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_REVERTLAYOUT), "Open Layout");
+            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_REVERTLAYOUT), "Revert Layout");
+    private final JLabel btnOpenLayout =
+            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_OPENLAYOUT), "Open Layout");
 
     //========= Overridden methods
 
@@ -79,6 +81,7 @@ public enum VDock implements IVDoc {
         pnl.add(btnEndTurn);
         pnl.add(btnViewDeckList);
         pnl.add(btnRevertLayout);
+        pnl.add(btnOpenLayout);
     }
 
     /* (non-Javadoc)
@@ -146,6 +149,10 @@ public enum VDock implements IVDoc {
     /** @return {@link javax.swing.JLabel} */
     public JLabel getBtnRevertLayout() {
         return btnRevertLayout;
+    }
+    
+    public JLabel getBtnOpenLayout() {
+        return btnOpenLayout;
     }
 
     //========= Custom class handling
