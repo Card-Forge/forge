@@ -53,13 +53,18 @@ public class SaveOpenDialog extends JPanel {
         }
     }
     
+    /**
+     * 
+     * constructor for a save or open dialog
+     */
     public SaveOpenDialog() {
         fc = new JFileChooser();
     }
     
+    
     /**
-     * Shows the open dialog for files. If no file selected, returns default. Pass null
-     * to Type and Extension to allow all files to be viewed/opened.
+     * Shows the open dialog for files. If no file selected, returns null. Pass null
+     * to Type to allow all files to be viewed/opened.
      * @param defFileName pass the default file to use, also determines directory
      * @param type label to tell what type of file to filter
      * 
@@ -79,8 +84,9 @@ public class SaveOpenDialog extends JPanel {
         int RetValue = fc.showOpenDialog(getParent());
         if (RetValue == JFileChooser.APPROVE_OPTION) {
             RetFile = fc.getSelectedFile();
+            return RetFile;
         }
-        return RetFile;
+        return null;
     }
     
     /**

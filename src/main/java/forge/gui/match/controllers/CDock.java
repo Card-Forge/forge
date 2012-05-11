@@ -93,10 +93,16 @@ public enum CDock implements ICDoc {
             @Override
             public Void doInBackground() {
                 SaveOpenDialog dlgOpen = new SaveOpenDialog();
-                File LoadFile = new File(SIOUtil.FILE_PREFERRED);
-                LoadFile = dlgOpen.OpenDialog(LoadFile, null);
+                File DefFile = new File(SIOUtil.FILE_PREFERRED);
+                File LoadFile = dlgOpen.OpenDialog(DefFile, Filetypes.LAYOUT);
             
-                SIOUtil.loadLayout(LoadFile);
+                if (LoadFile!=null) {
+                    SIOUtil.loadLayout(LoadFile);
+                }
+                else {
+                    SIOUtil.loadLayout(DefFile);
+                }
+                SIOUtil.saveLayout();
                 SOverlayUtils.hideOverlay();
                 return null;
             }
