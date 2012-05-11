@@ -439,6 +439,7 @@ public class ComputerUtilAttack {
         combat.setAttackingPlayer(AllZone.getCombat().getAttackingPlayer());
         combat.setDefendingPlayer(AllZone.getCombat().getDefendingPlayer());
 
+        AllZone.getCombat().initiatePossibleDefenders(AllZone.getCombat().getDefendingPlayer());
         combat.setDefenders(AllZone.getCombat().getDefenders());
 
         if (this.attackers.isEmpty()) {

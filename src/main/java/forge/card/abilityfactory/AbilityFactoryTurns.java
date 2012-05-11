@@ -457,8 +457,7 @@ public class AbilityFactoryTurns {
         AllZone.getStack().getStack().clear();
 
         // 2) All attacking and blocking creatures are removed from combat.
-        AllZone.getCombat().resetAttackers();
-        AllZone.getCombat().resetBlockers();
+        AllZone.getCombat().reset();
 
         // 3) State-based actions are checked. No player gets priority, and no
         // triggered abilities are put onto the stack.
