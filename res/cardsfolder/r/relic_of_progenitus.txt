@@ -2,7 +2,7 @@ Name:Relic of Progenitus
 ManaCost:1
 Types:Artifact
 Text:no text
-A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | Chooser$ Targeted
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | Chooser$ Targeted | SpellDescription$ Target player exiles a card from his or her graveyard.
 A:AB$ ChangeZoneAll | Cost$ 1 Exile<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SubAbility$ DBDraw | SpellDescription$ Exile all cards from all graveyards. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemRandomDeck:True
