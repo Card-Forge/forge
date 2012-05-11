@@ -356,6 +356,7 @@ res/pics/WWK
 res/pics/ZEN
 res/pics/booster
 res/pics/icons
+res/pics/tokens/*.jpg
 res/quest/data
 res/quest/quest.preferences
 res/quest/questData.dat
