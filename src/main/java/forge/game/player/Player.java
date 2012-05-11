@@ -385,6 +385,9 @@ public abstract class Player extends GameEntity {
                 || AllZoneUtil.isCardInPlay("Forsaken Wastes")) {
             return false;
         }
+        if (this.hasKeyword("You can't gain life.")) {
+            return false;
+        }
         return true;
     }
 
