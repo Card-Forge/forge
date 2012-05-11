@@ -83,6 +83,22 @@ public enum CDock implements ICDoc {
         };
         w.execute();
     }
+    
+    private void saveLayout() {
+        final SwingWorker<Void,Void> w = new SwingWorker<Void,Void>() {
+            @Override
+            public Void doInBackground() {
+                SaveOpenDialog dlgSave = new SaveOpenDialog();
+                File DefFile = new File(SIOUtil.FILE_PREFERRED);
+                File SaveFile = dlgSave.SaveDialog(DefFile, Filetypes.LAYOUT);
+                if (SaveFile!=null) {
+                    SIOUtil.saveLayout(SaveFile);
+                }
+                return null;
+            }
+        };
+        w.execute();
+    }
 
     private void openLayout() {
         SOverlayUtils.genericOverlay();
@@ -98,11 +114,9 @@ public enum CDock implements ICDoc {
             
                 if (LoadFile!=null) {
                     SIOUtil.loadLayout(LoadFile);
+                    SIOUtil.saveLayout(null);
                 }
-                else {
-                    SIOUtil.loadLayout(DefFile);
-                }
-                SIOUtil.saveLayout();
+                
                 SOverlayUtils.hideOverlay();
                 return null;
             }
@@ -235,6 +249,11 @@ public enum CDock implements ICDoc {
         .addMouseListener(new MouseAdapter() { @Override
             public void mousePressed(final MouseEvent e) {
                 openLayout(); } });
+        
+        VDock.SINGLETON_INSTANCE.getBtnSaveLayout()
+        .addMouseListener(new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                saveLayout(); } });
     }
 
     /* (non-Javadoc)

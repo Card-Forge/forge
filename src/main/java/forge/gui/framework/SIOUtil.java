@@ -43,14 +43,19 @@ public final class SIOUtil {
     private static final XMLEvent NEWLINE = EF.createDTD("\n");
     private static final XMLEvent TAB = EF.createDTD("\t");
 
-    /** Publicly-accessible save method, to neatly handle exception handling. */
-    public static void saveLayout() {
+    /** Publicly-accessible save method, to neatly handle exception handling.
+     * @param f0 file to save layout to, if null, saves to FILE_PREFERRED
+     * 
+     * 
+     */
+    public static void saveLayout(final File f0) {
         if (SwingUtilities.isEventDispatchThread()) {
             throw new IllegalThreadStateException("This operation should be independent of the EDT.");
         }
+        
+            try { save(f0); }
+            catch (final Exception e) { e.printStackTrace(); }       
 
-        try { save(); }
-        catch (final Exception e) { e.printStackTrace(); }
     }
 
     /**
@@ -66,9 +71,18 @@ public final class SIOUtil {
         catch (final Exception e) { e.printStackTrace(); }
     }
 
-    private static void save() throws Exception {
+    private static void save(final File f0) throws Exception {
+        
+        final String fWriteTo;
+        if (f0==null) {
+            fWriteTo = FILE_PREFERRED;    
+        }
+        else {
+            fWriteTo = f0.getPath();
+        }        
+        
         final XMLOutputFactory out = XMLOutputFactory.newInstance();
-        final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(FILE_PREFERRED));
+        final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(fWriteTo));
         final List<DragCell> cells = FView.SINGLETON_INSTANCE.getDragCells();
         final JPanel pnl = FView.SINGLETON_INSTANCE.getPnlContent();
         double x0, y0, w0, h0;

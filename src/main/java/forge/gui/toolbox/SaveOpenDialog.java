@@ -43,7 +43,8 @@ public class SaveOpenDialog extends JPanel {
      *  
      */
     public enum Filetypes {
-        LAYOUT ("Layout File", "xml");
+        LAYOUT  ("Layout File", "xml"),
+        DECK    ("Deck File",   "dck");
     
         private final String TypeName;
         private final String TypeExtension;
@@ -70,39 +71,60 @@ public class SaveOpenDialog extends JPanel {
      * 
      *
      */
-    public File OpenDialog(File defFileName, Filetypes type) {
-        File RetFile = defFileName;
+    public File OpenDialog(final File defFileName, final Filetypes type) {
         fc.setCurrentDirectory(defFileName);
         
         if (type!=null) {
             fc.setAcceptAllFileFilterUsed(false);
-            FileFilter filter = new FileNameExtensionFilter(type.TypeName, type.TypeExtension);
+            final FileFilter filter = new FileNameExtensionFilter(type.TypeName, type.TypeExtension);
             fc.addChoosableFileFilter(filter);
         }
         
          
         int RetValue = fc.showOpenDialog(getParent());
         if (RetValue == JFileChooser.APPROVE_OPTION) {
-            RetFile = fc.getSelectedFile();
+            final File RetFile = fc.getSelectedFile();
             return RetFile;
         }
         return null;
     }
     
     /**
-     * Shows the save dialog. Not implemented anywhere yet.
+     * Shows the save dialog.
+     * 
+     * @param defFileName default file name/directory to show when save dialog is opened
+     * @param type file types to show in dialog
      * 
      * 
      */
-    public File SaveDialog(File defFileName) {
+    public File SaveDialog(final File defFileName, final Filetypes type) {
         File RetFile = defFileName;
         fc.setCurrentDirectory(defFileName);
         
+        /* set the file filter if desired */
+        if (type!=null) {
+            fc.setAcceptAllFileFilterUsed(false);
+            final FileFilter filter = new FileNameExtensionFilter(type.TypeName, type.TypeExtension);
+            fc.addChoosableFileFilter(filter);
+        }
+        
         int RetValue = fc.showSaveDialog(getParent());
+        
+        /* user picked save */
         if (RetValue == JFileChooser.APPROVE_OPTION) {
             RetFile = fc.getSelectedFile();
+            
+            /* Adds extension if it is known and not given */
+            if (type!=null & !(RetFile.getAbsolutePath().endsWith(type.TypeExtension))) {
+                RetFile = new File(RetFile.getAbsolutePath()+"."+type.TypeExtension);
+            }
+            
+            
+            return RetFile;
         }
-        return RetFile;
+        
+        /* user picked cancel */
+        return null;
     }
     
 }

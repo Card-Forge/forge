@@ -307,7 +307,7 @@ public final class SRearrangingUtil {
         updateBorders();
 
         final Thread t = new Thread() { @Override
-            public void run() { SIOUtil.saveLayout(); } };
+            public void run() { SIOUtil.saveLayout(null); } };
         t.start();
     }
 
