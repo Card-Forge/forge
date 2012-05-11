@@ -91,9 +91,8 @@ public final class BoosterUtils {
                 CardPrinted.Predicates.Presets.IS_MYTHIC_RARE);
         final boolean haveMythics = filterMythics.any(cardpool);
         for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {
-            if (MyRandom.getRandom().nextInt(7) < 1) { // a bit higher chance to
-                                                       // get
-                // a mythic
+            if (MyRandom.getRandom().nextInt(10) < 1) {
+                // 10% chance of upgrading a Rare into a Mythic
                 nRares--;
                 nMythics++;
             }
