@@ -2,7 +2,7 @@ Name:Omen Machine
 ManaCost:6
 Types:Artifact
 Text:no text
-K:Players can't draw cards.
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't draw cards. | Description$ Players can't draw cards.
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | Execute$ TrigOmenExileCardYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's draw step, that player exiles the top card of his or her library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
 SVar:TrigOmenExileCardYou:AB$ Mill | Cost$ 0 | NumCards$ 1 | Defined$ You | Destination$ Exile | RememberMilled$ True | SubAbility$ DBOmenLandYou
 SVar:DBOmenLandYou:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | ChangeType$ Remembered.Land+YouCtrl | ChangeNum$ 1 | DefinedPlayer$ You | Hidden$ True | Mandatory$ True | SubAbility$ DBOmenPlayYou
