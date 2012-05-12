@@ -75,6 +75,22 @@ Fixes/Features:
 - adding branch for mana restrictions
 - Refactored some of the new code for a general open dialog. Dock now has new button "Open Layout" along with old button with original function "Revert Layout"
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Aggravate.
+- Fixed initiatePossibleDefenders being called in the wrong phases (which made it possible to attack planeswalkers which weren't on the battlefield anymore).
+- Removed a superfluous function.
+- Improved functionality of "Load Layout" dock button.
+- Fixed AI of Graveyard Shovel and an ability description of Relic of Progenitus.
+- Added the player keyword "You can't gain life.".
+- Reduce the likelihood of upgrading Rares to Mythics for new quests.
+- Added "Save Layout" feature. Save dialog function in forge.gui.toolbox improved. Save layout functions in SIOUtil slightly modified to accept these changes.
+- Convert Living Weapon to script
+- Converted parts of Forsaken Wastes and Leyline of Punishment to script.
+- Converted Platinum Emperion to script.
+- Added the player keyword "You can't draw cards.".
+- Converted Maralen of the Mornsong and Omen Machine to script.
+- Created Ability Borrowing branch
+- Fixed Painbringer.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -98,6 +114,9 @@ Prismwake Merrow
 Ad Nauseam
 Primal Surge
 Tyrant of Discord
+Impelled Giant
+Merrow Bonegnawer
+Stigma Lasher
 
 
 end
