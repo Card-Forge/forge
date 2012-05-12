@@ -381,8 +381,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canGainLife() {
-        if (AllZoneUtil.isCardInPlay("Leyline of Punishment") || AllZoneUtil.isCardInPlay("Platinum Emperion", this)
-                || AllZoneUtil.isCardInPlay("Forsaken Wastes")) {
+        if (AllZoneUtil.isCardInPlay("Platinum Emperion", this)) {
             return false;
         }
         if (this.hasKeyword("You can't gain life.")) {
