@@ -157,33 +157,28 @@ class CardFactoryEquipment {
 
         if (card.hasKeyword("Living Weapon")) {
             card.removeIntrinsicKeyword("Living Weapon");
-            final Ability etbAbility = new Ability(card, "0") {
-
-                @Override
-                public void resolve() {
-                    final String[] types = new String[] { "Creature", "Germ" };
-                    final String[] keywords = new String[0];
-                    final CardList germs = CardFactoryUtil.makeToken("Germ", "B 0 0 Germ", card.getController(), "B",
-                            types, 1, 1, keywords);
-
-                    card.equipCard(germs.get(0));
-
-                    for (final Card c : germs) {
-                        c.setBaseAttack(0);
-                        c.setBaseDefense(0);
-                    }
-                }
-
-            };
 
             final StringBuilder sbTrig = new StringBuilder();
             sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ");
-            sbTrig.append("ValidCard$ Card.Self | Execute$ TrigOverriding | TriggerDescription$ ");
+            sbTrig.append("ValidCard$ Card.Self | Execute$ TrigGerm | TriggerDescription$ ");
             sbTrig.append("Living Weapon (When this Equipment enters the battlefield, ");
             sbTrig.append("put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)");
+            
+            final StringBuilder sbGerm = new StringBuilder();
+            sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenName$ Germ | TokenTypes$ Creature,Germ | RememberTokens$ True | ");
+            sbGerm.append("TokenOwner$ You | TokenColors$ Black | TokenPower$ 0 | TokenToughness$ 0 | TokenImage$ B 0 0 Germ | SubAbility$ DBGermAttach");
+            
+            final StringBuilder sbAttach = new StringBuilder();
+            sbAttach.append("DB$ Attach | Defined$ Remembered | SubAbility$ DBGermClear");
+            
+            final StringBuilder sbClear = new StringBuilder();
+            sbClear.append("DB$ Cleanup | ClearRemembered$ True");
+            
+            card.setSVar("TrigGerm", sbGerm.toString());
+            card.setSVar("DBGermAttach", sbAttach.toString());
+            card.setSVar("DBGermClear", sbClear.toString());
+            
             final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
-            etbTrigger.setOverridingAbility(etbAbility);
-
             card.addTrigger(etbTrigger);
         }
 
