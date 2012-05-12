@@ -381,10 +381,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canGainLife() {
-        if (AllZoneUtil.isCardInPlay("Platinum Emperion", this)) {
-            return false;
-        }
-        if (this.hasKeyword("You can't gain life.")) {
+        if (this.hasKeyword("You can't gain life.") || this.hasKeyword("Your life total can't change.")) {
             return false;
         }
         return true;
@@ -438,7 +435,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canLoseLife() {
-        if (AllZoneUtil.isCardInPlay("Platinum Emperion", this)) {
+        if (this.hasKeyword("Your life total can't change.")) {
             return false;
         }
         return true;
@@ -470,7 +467,7 @@ public abstract class Player extends GameEntity {
         if (this.life < lifePayment) {
             return false;
         }
-        if ((lifePayment > 0) && AllZoneUtil.isCardInPlay("Platinum Emperion", this)) {
+        if ((lifePayment > 0) && this.hasKeyword("Your life total can't change.")) {
             return false;
         }
         return true;
