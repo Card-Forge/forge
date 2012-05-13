@@ -330,11 +330,6 @@ public class StaticEffects {
                     Log.debug("Added " + effect);
                 }
             }
-            if (c.isEmblem() && !CardFactoryUtil.checkEmblemKeyword(c).equals("")) {
-                final String s = CardFactoryUtil.checkEmblemKeyword(c);
-                this.addStateBasedEffect(s);
-                Log.debug("Added " + s);
-            }
         }
         Log.debug("== End add state effects ==");
 
