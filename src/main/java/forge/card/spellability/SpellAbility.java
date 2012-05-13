@@ -1641,6 +1641,8 @@ public abstract class SpellAbility {
      */
     public final boolean canTarget(final GameEntity entity) {
         if (entity.isValid(this.getTarget().getValidTgts(), this.getActivatingPlayer(), this.getSourceCard())
+                && (this.getTarget() == null || !this.getTarget().isUniqueTargets()
+                    || !TargetSelection.getUniqueTargets(this).contains(entity))
                 && entity.canBeTargetedBy(this)) {
             return true;
         }
