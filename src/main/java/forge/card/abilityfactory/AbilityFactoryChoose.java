@@ -1996,7 +1996,7 @@ public final class AbilityFactoryChoose {
         ArrayList<Player> tgtPlayers;
 
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
+        if (!params.containsKey("Defined")) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
