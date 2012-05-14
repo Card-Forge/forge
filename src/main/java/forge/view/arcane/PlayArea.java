@@ -395,10 +395,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private void fillRow(final CardStackRow sourceRow, final List<CardStackRow> rows, final CardStackRow row) {
         int rowWidth = row.getWidth();
 
-        final Iterator itr = sourceRow.iterator();
+        final Iterator<CardStack> itr = sourceRow.iterator();
 
         while (itr.hasNext()) {
-            final CardStack stack = (CardStack) itr.next();
+            final CardStack stack = itr.next();
 
             rowWidth += stack.getWidth();
             if (rowWidth > this.playAreaWidth) {

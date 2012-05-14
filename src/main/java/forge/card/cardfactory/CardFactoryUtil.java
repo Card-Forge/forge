@@ -919,8 +919,6 @@ public class CardFactoryUtil {
     public static AbilityStatic abilityMorphUp(final Card sourceCard, final Cost cost, final String orgManaCost,
             final int a, final int d) {
         final AbilityStatic morphUp = new AbilityStatic(sourceCard, cost, null) {
-            private static final long serialVersionUID = -3663857013937085953L;
-
             @Override
             public void resolve() {
                 if (sourceCard.turnFaceUp()) {

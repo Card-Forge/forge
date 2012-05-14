@@ -20,7 +20,6 @@ import forge.card.trigger.TriggerType;
 import forge.control.FControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;

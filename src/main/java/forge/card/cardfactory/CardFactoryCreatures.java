@@ -35,7 +35,6 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.Counters;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;

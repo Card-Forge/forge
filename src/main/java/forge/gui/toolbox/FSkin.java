@@ -214,6 +214,7 @@ public enum FSkin {
         ICO_ENDTURN     (new int[] {320, 640, 80, 80}), /** */
         ICO_CONCEDE     (new int[] {240, 640, 80, 80}), /** */
         ICO_REVERTLAYOUT (new int[] {400, 720, 80, 80}), /** */
+        ICO_OPENLAYOUT  (new int[] {480, 640, 80, 80}),
         ICO_SAVELAYOUT  (new int[] {480, 720, 80, 80}),
         ICO_DECKLIST    (new int[] {400, 640, 80, 80});
 
