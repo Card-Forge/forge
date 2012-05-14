@@ -1002,7 +1002,13 @@ public class GameAction {
         }
 
         if (this.checkEndGameState()) {
+            // Clear Simultaneous triggers at the end of the game
             new ViewWinLose();
+            Singletons.getModel().getGameState().getStack().clearSimultaneousStack();
+            if (!refreeze) {
+                AllZone.getStack().unfreezeStack();
+            }
+            return;
         }
 
         // do this twice, sometimes creatures/permanents will survive when they
