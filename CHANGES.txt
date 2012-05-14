@@ -103,6 +103,12 @@ Fixes/Features:
 - Made Gomazoa playable by the AI.
 - strip out spaces in filenames
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed a problem with TargetUnique.
+- Cleanup of CardFactoryUtil.
+- A Morphed card on the stack will no longer reveal its colors.
+- Added a fluff piece to the changes.txt file.
+- Clear Simultaneous triggers at the end of the game
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -135,6 +141,7 @@ Tyrant of Discord
 Impelled Giant
 Merrow Bonegnawer
 Stigma Lasher
+Shaper Parasite
 
 
 end
