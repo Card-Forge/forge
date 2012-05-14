@@ -602,7 +602,7 @@ public class ComputerUtil {
             } else {
                 // For Count$xPaid set PayX in the AFs then use that here
                 // Else calculate it as appropriate.
-                final String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X";
+                final String xSvar = card.getSVar("X").startsWith("Count$xPaid") ? "PayX" : "X";
                 if (!card.getSVar(xSvar).equals("")) {
                     if (xSvar.equals("PayX")) {
                         manaToAdd = Integer.parseInt(card.getSVar(xSvar)) * cost.getXcounter(); // X
