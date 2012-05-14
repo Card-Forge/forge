@@ -2784,6 +2784,7 @@ res/cardsfolder/e/enraging_licid.txt -text
 res/cardsfolder/e/enshrined_memories.txt svneol=native#text/plain
 res/cardsfolder/e/enslave.txt svneol=native#text/plain
 res/cardsfolder/e/enslaved_dwarf.txt svneol=native#text/plain
+res/cardsfolder/e/enslaved_horror.txt -text
 res/cardsfolder/e/enslaved_scout.txt svneol=native#text/plain
 res/cardsfolder/e/ensnare.txt svneol=native#text/plain
 res/cardsfolder/e/ensnaring_bridge.txt svneol=native#text/plain

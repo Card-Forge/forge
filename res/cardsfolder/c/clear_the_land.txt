@@ -2,8 +2,7 @@ Name:Clear the Land
 ManaCost:2 G
 Types:Sorcery
 Text:no text
-A:SP$ Dig | Cost$ 2 G | DigNum$ 5 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | DestinationZone2$ Exile | SubAbility$ DBDig | SpellDescription$ Each player reveals the top five cards of his or her library, puts all land cards revealed this way onto the battlefield tapped, and exiles the rest.
-SVar:DBDig:DB$ Dig | DigNum$ 5 | Defined$ Opponent | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | DestinationZone2$ Exile
+A:SP$ Dig | Cost$ 2 G | DigNum$ 5 | Defined$ Each | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | DestinationZone2$ Exile | SpellDescription$ Each player reveals the top five cards of his or her library, puts all land cards revealed this way onto the battlefield tapped, and exiles the rest.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clear_the_land.jpg
