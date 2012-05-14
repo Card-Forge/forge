@@ -29,7 +29,7 @@ import forge.control.input.InputPayManaCostUtil;
  * @author Forge
  * @version $Id$
  */
-public class Mana {
+public class ManaPaid {
     private String color;
     private int amount = 0;
     private Card sourceCard = null;
@@ -46,7 +46,7 @@ public class Mana {
      * @param source
      *            a {@link forge.Card} object.
      */
-    public Mana(final String col, final int amt, final Card source) {
+    public ManaPaid(final String col, final int amt, final Card source) {
         this.color = col;
         this.amount = amt;
         if (source == null) {
@@ -117,12 +117,12 @@ public class Mana {
      * toSingleArray.
      * </p>
      * 
-     * @return an array of {@link forge.card.mana.Mana} objects.
+     * @return an array of {@link forge.card.mana.ManaPaid} objects.
      */
-    public final Mana[] toSingleArray() {
-        final Mana[] normalize = new Mana[this.amount];
+    public final ManaPaid[] toSingleArray() {
+        final ManaPaid[] normalize = new ManaPaid[this.amount];
         for (int i = 0; i < normalize.length; i++) {
-            normalize[i] = new Mana(this.color, 1, this.sourceCard);
+            normalize[i] = new ManaPaid(this.color, 1, this.sourceCard);
         }
         return normalize;
     }

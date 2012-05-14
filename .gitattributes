@@ -11649,7 +11649,6 @@ src/main/java/forge/card/CardCoreType.java -text
 src/main/java/forge/card/CardEdition.java -text
 src/main/java/forge/card/CardInSet.java -text
 src/main/java/forge/card/CardManaCost.java -text
-src/main/java/forge/card/CardManaCostShard.java -text
 src/main/java/forge/card/CardRarity.java -text
 src/main/java/forge/card/CardRuleCharacteristics.java -text
 src/main/java/forge/card/CardRules.java -text
@@ -11734,14 +11733,11 @@ src/main/java/forge/card/cost/CostTapType.java -text
 src/main/java/forge/card/cost/CostUntap.java -text
 src/main/java/forge/card/cost/CostUtil.java -text
 src/main/java/forge/card/cost/package-info.java svneol=native#text/plain
-src/main/java/forge/card/mana/Mana.java svneol=native#text/plain
+src/main/java/forge/card/mana/IParserManaCost.java -text
 src/main/java/forge/card/mana/ManaCost.java svneol=native#text/plain
-src/main/java/forge/card/mana/ManaPart.java svneol=native#text/plain
-src/main/java/forge/card/mana/ManaPartColor.java svneol=native#text/plain
-src/main/java/forge/card/mana/ManaPartColorless.java svneol=native#text/plain
-src/main/java/forge/card/mana/ManaPartPhyrexian.java svneol=native#text/plain
-src/main/java/forge/card/mana/ManaPartSnow.java svneol=native#text/plain
-src/main/java/forge/card/mana/ManaPartSplit.java svneol=native#text/plain
+src/main/java/forge/card/mana/ManaCostParser.java -text
+src/main/java/forge/card/mana/ManaCostShard.java -text
+src/main/java/forge/card/mana/ManaPaid.java svneol=native#text/plain
 src/main/java/forge/card/mana/ManaPool.java svneol=native#text/plain
 src/main/java/forge/card/mana/package-info.java svneol=native#text/plain
 src/main/java/forge/card/package-info.java svneol=native#text/plain
@@ -12131,6 +12127,7 @@ src/main/java/forge/quest/io/ReadPriceList.java svneol=native#text/plain
 src/main/java/forge/quest/io/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
+src/main/java/forge/util/BinaryUtil.java -text
 src/main/java/forge/util/CopyFiles.java svneol=native#text/plain
 src/main/java/forge/util/FileFinder.java svneol=native#text/plain
 src/main/java/forge/util/FileSection.java -text

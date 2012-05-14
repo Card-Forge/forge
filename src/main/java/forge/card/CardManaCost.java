@@ -19,8 +19,10 @@ package forge.card;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
+
+import forge.card.mana.ManaCostShard;
+import forge.card.mana.IParserManaCost;
 
 /**
  * <p>
@@ -32,7 +34,7 @@ import java.util.List;
  */
 
 public final class CardManaCost implements Comparable<CardManaCost> {
-    private final List<CardManaCostShard> shards;
+    private final List<ManaCostShard> shards;
     private final int genericCost;
     private final boolean hasNoCost; // lands cost
     private final String stringValue; // precalculated for toString;
@@ -48,7 +50,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     private CardManaCost(int cmc) {
         this.hasNoCost = cmc < 0;
         this.genericCost = cmc < 0 ? 0 : cmc;
-        this.shards = Collections.unmodifiableList(new ArrayList<CardManaCostShard>());
+        this.shards = Collections.unmodifiableList(new ArrayList<ManaCostShard>());
         this.stringValue = this.getSimpleString();
     }
 
@@ -59,14 +61,14 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      * @param parser
      *            the parser
      */
-    public CardManaCost(final ManaParser parser) {
+    public CardManaCost(final IParserManaCost parser) {
         if (!parser.hasNext()) {
             throw new RuntimeException("Empty manacost passed to parser (this should have been handled before)");
         }
-        final List<CardManaCostShard> shardsTemp = new ArrayList<CardManaCostShard>();
+        final List<ManaCostShard> shardsTemp = new ArrayList<ManaCostShard>();
         this.hasNoCost = false;
         while (parser.hasNext()) {
-            final CardManaCostShard shard = parser.next();
+            final ManaCostShard shard = parser.next();
             if (shard != null) {
                 shardsTemp.add(shard);
             } // null is OK - that was generic mana
@@ -90,7 +92,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
             sb.append(this.genericCost);
             isFirst = false;
         }
-        for (final CardManaCostShard s : this.shards) {
+        for (final ManaCostShard s : this.shards) {
             if (!isFirst) {
                 sb.append(' ');
             } else {
@@ -108,7 +110,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      */
     public int getCMC() {
         int sum = 0;
-        for (final CardManaCostShard s : this.shards) {
+        for (final ManaCostShard s : this.shards) {
             sum += s.getCmc();
         }
         return sum + this.genericCost;
@@ -121,7 +123,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      */
     public byte getColorProfile() {
         byte result = 0;
-        for (final CardManaCostShard s : this.shards) {
+        for (final ManaCostShard s : this.shards) {
             result |= s.getColorMask();
         }
         return result;
@@ -132,7 +134,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      * 
      * @return the shards
      */
-    public List<CardManaCostShard> getShards() {
+    public List<ManaCostShard> getShards() {
         return this.shards;
     }
 
@@ -176,7 +178,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     private Float getCompareWeight() {
         if (this.compareWeight == null) {
             float weight = this.genericCost;
-            for (final CardManaCostShard s : this.shards) {
+            for (final ManaCostShard s : this.shards) {
                 weight += s.getCmpc();
             }
             if (this.hasNoCost) {
@@ -198,24 +200,11 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     }
 
     /**
-     * The Interface ManaParser.
-     */
-    public interface ManaParser extends Iterator<CardManaCostShard> {
-
-        /**
-         * Gets the total colorless cost.
-         * 
-         * @return the total colorless cost
-         */
-        int getTotalColorlessCost();
-    }
-
-    /**
      * TODO: Write javadoc for this method.
      * @return
      */
     public boolean hasPhyrexian() {
-        for (CardManaCostShard shard : shards) {
+        for (ManaCostShard shard : shards) {
             if (shard.isPhyrexian()) {
                 return true;
             }
@@ -229,8 +218,8 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      */
     public int countX() {
         int iX = 0;
-        for (CardManaCostShard shard : shards) {
-            if (shard == CardManaCostShard.X) {
+        for (ManaCostShard shard : shards) {
+            if (shard == ManaCostShard.X) {
                 iX++;
             }
         }

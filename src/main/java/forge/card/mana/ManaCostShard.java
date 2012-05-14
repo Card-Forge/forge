@@ -15,12 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.card;
+package forge.card.mana;
+
+import forge.card.CardColor;
+import forge.util.BinaryUtil;
 
 /**
  * The Class CardManaCostShard.
  */
-public class CardManaCostShard {
+public class ManaCostShard {
 
     private final int shard;
 
@@ -42,7 +45,7 @@ public class CardManaCostShard {
      * @param sValue
      *            the s value
      */
-    protected CardManaCostShard(final int value, final String sValue) {
+    protected ManaCostShard(final int value, final String sValue) {
         this(value, sValue, sValue);
     }
 
@@ -56,7 +59,7 @@ public class CardManaCostShard {
      * @param imgKey
      *            the img key
      */
-    protected CardManaCostShard(final int value, final String sValue, final String imgKey) {
+    protected ManaCostShard(final int value, final String sValue, final String imgKey) {
         this.shard = value;
         this.cmc = this.getCMC();
         this.cmpc = this.getCmpCost();
@@ -66,7 +69,8 @@ public class CardManaCostShard {
 
     /** A bitmask to represent any mana symbol as an integer. */
     public abstract static class Atom {
-        // int COLORLESS = 1 << 0;
+        public static final int COLORLESS = 1 << 0;
+                
         /** The Constant WHITE. */
         public static final int WHITE = 1 << 1;
 
@@ -105,95 +109,98 @@ public class CardManaCostShard {
      * I choose the latter, because memory for boxed objects will be taken from
      * heap, while unboxed values will lay on stack, which is faster
      */
+    
+    public static final ManaCostShard COLORLESS = new ManaCostShard(Atom.COLORLESS, "1");
+    
     /** The Constant X. */
-    public static final CardManaCostShard X = new CardManaCostShard(Atom.IS_X, "X");
+    public static final ManaCostShard X = new ManaCostShard(Atom.IS_X, "X");
 
     /** The Constant S. */
-    public static final CardManaCostShard S = new CardManaCostShard(Atom.IS_SNOW, "S");
+    public static final ManaCostShard S = new ManaCostShard(Atom.IS_SNOW, "S");
 
     /** The Constant WHITE. */
-    public static final CardManaCostShard WHITE = new CardManaCostShard(Atom.WHITE, "W");
+    public static final ManaCostShard WHITE = new ManaCostShard(Atom.WHITE, "W");
 
     /** The Constant BLUE. */
-    public static final CardManaCostShard BLUE = new CardManaCostShard(Atom.BLUE, "U");
+    public static final ManaCostShard BLUE = new ManaCostShard(Atom.BLUE, "U");
 
     /** The Constant BLACK. */
-    public static final CardManaCostShard BLACK = new CardManaCostShard(Atom.BLACK, "B");
+    public static final ManaCostShard BLACK = new ManaCostShard(Atom.BLACK, "B");
 
     /** The Constant RED. */
-    public static final CardManaCostShard RED = new CardManaCostShard(Atom.RED, "R");
+    public static final ManaCostShard RED = new ManaCostShard(Atom.RED, "R");
 
     /** The Constant GREEN. */
-    public static final CardManaCostShard GREEN = new CardManaCostShard(Atom.GREEN, "G");
+    public static final ManaCostShard GREEN = new ManaCostShard(Atom.GREEN, "G");
 
     /** The Constant PW. */
-    public static final CardManaCostShard PW = new CardManaCostShard(Atom.WHITE | Atom.OR_2_LIFE, "W/P", "PW");
+    public static final ManaCostShard PW = new ManaCostShard(Atom.WHITE | Atom.OR_2_LIFE, "W/P", "PW");
 
     /** The Constant PU. */
-    public static final CardManaCostShard PU = new CardManaCostShard(Atom.BLUE | Atom.OR_2_LIFE, "U/P", "PU");
+    public static final ManaCostShard PU = new ManaCostShard(Atom.BLUE | Atom.OR_2_LIFE, "U/P", "PU");
 
     /** The Constant PB. */
-    public static final CardManaCostShard PB = new CardManaCostShard(Atom.BLACK | Atom.OR_2_LIFE, "B/P", "PB");
+    public static final ManaCostShard PB = new ManaCostShard(Atom.BLACK | Atom.OR_2_LIFE, "B/P", "PB");
 
     /** The Constant PR. */
-    public static final CardManaCostShard PR = new CardManaCostShard(Atom.RED | Atom.OR_2_LIFE, "R/P", "PR");
+    public static final ManaCostShard PR = new ManaCostShard(Atom.RED | Atom.OR_2_LIFE, "R/P", "PR");
 
     /** The Constant PG. */
-    public static final CardManaCostShard PG = new CardManaCostShard(Atom.GREEN | Atom.OR_2_LIFE, "G/P", "PG");
+    public static final ManaCostShard PG = new ManaCostShard(Atom.GREEN | Atom.OR_2_LIFE, "G/P", "PG");
 
     /** The Constant WU. */
-    public static final CardManaCostShard WU = new CardManaCostShard(Atom.WHITE | Atom.BLUE, "W/U", "WU");
+    public static final ManaCostShard WU = new ManaCostShard(Atom.WHITE | Atom.BLUE, "W/U", "WU");
 
     /** The Constant WB. */
-    public static final CardManaCostShard WB = new CardManaCostShard(Atom.WHITE | Atom.BLACK, "W/B", "WB");
+    public static final ManaCostShard WB = new ManaCostShard(Atom.WHITE | Atom.BLACK, "W/B", "WB");
 
     /** The Constant WR. */
-    public static final CardManaCostShard WR = new CardManaCostShard(Atom.WHITE | Atom.RED, "W/R", "RW");
+    public static final ManaCostShard WR = new ManaCostShard(Atom.WHITE | Atom.RED, "W/R", "RW");
 
     /** The Constant WG. */
-    public static final CardManaCostShard WG = new CardManaCostShard(Atom.WHITE | Atom.GREEN, "W/G", "GW");
+    public static final ManaCostShard WG = new ManaCostShard(Atom.WHITE | Atom.GREEN, "W/G", "GW");
 
     /** The Constant UB. */
-    public static final CardManaCostShard UB = new CardManaCostShard(Atom.BLUE | Atom.BLACK, "U/B", "UB");
+    public static final ManaCostShard UB = new ManaCostShard(Atom.BLUE | Atom.BLACK, "U/B", "UB");
 
     /** The Constant UR. */
-    public static final CardManaCostShard UR = new CardManaCostShard(Atom.BLUE | Atom.RED, "U/R", "UR");
+    public static final ManaCostShard UR = new ManaCostShard(Atom.BLUE | Atom.RED, "U/R", "UR");
 
     /** The Constant UG. */
-    public static final CardManaCostShard UG = new CardManaCostShard(Atom.BLUE | Atom.GREEN, "U/G", "GU");
+    public static final ManaCostShard UG = new ManaCostShard(Atom.BLUE | Atom.GREEN, "U/G", "GU");
 
     /** The Constant BR. */
-    public static final CardManaCostShard BR = new CardManaCostShard(Atom.BLACK | Atom.RED, "B/R", "BR");
+    public static final ManaCostShard BR = new ManaCostShard(Atom.BLACK | Atom.RED, "B/R", "BR");
 
     /** The Constant BG. */
-    public static final CardManaCostShard BG = new CardManaCostShard(Atom.BLACK | Atom.GREEN, "B/G", "BG");
+    public static final ManaCostShard BG = new ManaCostShard(Atom.BLACK | Atom.GREEN, "B/G", "BG");
 
     /** The Constant RG. */
-    public static final CardManaCostShard RG = new CardManaCostShard(Atom.RED | Atom.GREEN, "R/G", "RG");
+    public static final ManaCostShard RG = new ManaCostShard(Atom.RED | Atom.GREEN, "R/G", "RG");
 
     /** The Constant W2. */
-    public static final CardManaCostShard W2 = new CardManaCostShard(Atom.WHITE | Atom.OR_2_COLORLESS, "2/W", "2W");
+    public static final ManaCostShard W2 = new ManaCostShard(Atom.WHITE | Atom.OR_2_COLORLESS, "2/W", "2W");
 
     /** The Constant U2. */
-    public static final CardManaCostShard U2 = new CardManaCostShard(Atom.BLUE | Atom.OR_2_COLORLESS, "2/U", "2U");
+    public static final ManaCostShard U2 = new ManaCostShard(Atom.BLUE | Atom.OR_2_COLORLESS, "2/U", "2U");
 
     /** The Constant B2. */
-    public static final CardManaCostShard B2 = new CardManaCostShard(Atom.BLACK | Atom.OR_2_COLORLESS, "2/B", "2B");
+    public static final ManaCostShard B2 = new ManaCostShard(Atom.BLACK | Atom.OR_2_COLORLESS, "2/B", "2B");
 
     /** The Constant R2. */
-    public static final CardManaCostShard R2 = new CardManaCostShard(Atom.RED | Atom.OR_2_COLORLESS, "2/R", "2R");
+    public static final ManaCostShard R2 = new ManaCostShard(Atom.RED | Atom.OR_2_COLORLESS, "2/R", "2R");
 
     /** The Constant G2. */
-    public static final CardManaCostShard G2 = new CardManaCostShard(Atom.GREEN | Atom.OR_2_COLORLESS, "2/G", "2G");
+    public static final ManaCostShard G2 = new ManaCostShard(Atom.GREEN | Atom.OR_2_COLORLESS, "2/G", "2G");
 
-    private static final CardManaCostShard[] ALL_POSSIBLE = new CardManaCostShard[] { CardManaCostShard.X,
-            CardManaCostShard.WHITE, CardManaCostShard.BLUE, CardManaCostShard.BLACK, CardManaCostShard.RED,
-            CardManaCostShard.GREEN, CardManaCostShard.PW, CardManaCostShard.PU, CardManaCostShard.PB,
-            CardManaCostShard.PR, CardManaCostShard.PG, CardManaCostShard.WU, CardManaCostShard.WB,
-            CardManaCostShard.WR, CardManaCostShard.WG, CardManaCostShard.UB, CardManaCostShard.UR,
-            CardManaCostShard.UG, CardManaCostShard.BR, CardManaCostShard.BG, CardManaCostShard.RG,
-            CardManaCostShard.W2, CardManaCostShard.U2, CardManaCostShard.B2, CardManaCostShard.R2,
-            CardManaCostShard.G2, CardManaCostShard.S };
+    private static final ManaCostShard[] ALL_POSSIBLE = new ManaCostShard[] { ManaCostShard.X,
+            ManaCostShard.WHITE, ManaCostShard.BLUE, ManaCostShard.BLACK, ManaCostShard.RED,
+            ManaCostShard.GREEN, ManaCostShard.PW, ManaCostShard.PU, ManaCostShard.PB,
+            ManaCostShard.PR, ManaCostShard.PG, ManaCostShard.WU, ManaCostShard.WB,
+            ManaCostShard.WR, ManaCostShard.WG, ManaCostShard.UB, ManaCostShard.UR,
+            ManaCostShard.UG, ManaCostShard.BR, ManaCostShard.BG, ManaCostShard.RG,
+            ManaCostShard.W2, ManaCostShard.U2, ManaCostShard.B2, ManaCostShard.R2,
+            ManaCostShard.G2, ManaCostShard.S };
 
     private int getCMC() {
         if (0 != (this.shard & Atom.IS_X)) {
@@ -245,7 +252,7 @@ public class CardManaCostShard {
      * 
      * @return the color mask
      */
-    final byte getColorMask() {
+    public final byte getColorMask() {
         byte result = 0;
         if (0 != (this.shard & Atom.WHITE)) {
             result |= CardColor.WHITE;
@@ -272,8 +279,8 @@ public class CardManaCostShard {
      *            the atoms
      * @return the card mana cost shard
      */
-    public static CardManaCostShard valueOf(final int atoms) {
-        for (final CardManaCostShard element : CardManaCostShard.ALL_POSSIBLE) {
+    public static ManaCostShard valueOf(final int atoms) {
+        for (final ManaCostShard element : ManaCostShard.ALL_POSSIBLE) {
             if (element.shard == atoms) {
                 return element;
             }
@@ -324,5 +331,27 @@ public class CardManaCostShard {
      */
     public boolean isPhyrexian() {
         return (this.shard & Atom.OR_2_LIFE) != 0;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public boolean isSnow() {
+        return (this.shard & Atom.IS_SNOW) != 0;
+    }
+    
+    public boolean isMonoColor() {
+        int colormask = this.shard & (Atom.WHITE | Atom.BLUE | Atom.BLACK | Atom.RED | Atom.GREEN);
+        return BinaryUtil.bitCount(colormask) == 1;
+        
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public boolean isOr2Colorless() {
+        return (this.shard & Atom.OR_2_COLORLESS) != 0;
     }
 }
