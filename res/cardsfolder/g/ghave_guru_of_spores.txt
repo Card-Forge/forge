@@ -4,8 +4,8 @@ Types:Legendary Creature Fungus Shaman
 Text:no text
 PT:0/0
 K:etbCounter:P1P1:5
-A:AB$ Token | Cost$ SubCounter<1/P1P1/Creature.YouCtrl/Creature you Control> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
-A:AB$ PutCounter | Cost$ Sac<1/Creature> | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+A:AB$ Token | Cost$ 1 SubCounter<1/P1P1/Creature.YouCtrl/Creature you Control> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
+A:AB$ PutCounter | Cost$ 1 Sac<1/Creature> | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghave_guru_of_spores.jpg
