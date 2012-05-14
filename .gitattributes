@@ -1550,6 +1550,7 @@ res/cardsfolder/c/cleanfall.txt svneol=native#text/plain
 res/cardsfolder/c/cleanse.txt svneol=native#text/plain
 res/cardsfolder/c/cleansing_beam.txt svneol=native#text/plain
 res/cardsfolder/c/clear.txt svneol=native#text/plain
+res/cardsfolder/c/clear_the_land.txt -text
 res/cardsfolder/c/clearwater_goblet.txt svneol=native#text/plain
 res/cardsfolder/c/clergy_en_vec.txt svneol=native#text/plain
 res/cardsfolder/c/clickslither.txt svneol=native#text/plain
