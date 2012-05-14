@@ -2,7 +2,7 @@ Name:Graveyard Shovel
 ManaCost:2
 Types:Artifact
 Text:no text
-A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | Chooser$ Targeted | Mandatory$ True | SubAbility$ DBGainLife | ForgetOtherTargets$ True | RememberChanged$ True | SpellDescription$ Target player exiles a card from his or her graveyard. If it's a creature card, you gain 2 life.
+A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | Chooser$ Targeted | Mandatory$ True | SubAbility$ DBGainLife | ForgetOtherTargets$ True | RememberChanged$ True | IsCurse$ True | SpellDescription$ Target player exiles a card from his or her graveyard. If it's a creature card, you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Creature

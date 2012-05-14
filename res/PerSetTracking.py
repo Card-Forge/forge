@@ -90,7 +90,7 @@ for currentSet in setCodes :
         currentMissing.sort()
         currentImplemented.sort()
 
-        with open(sys.path[0] + os.sep + "PerSetTrackingResults" + os.sep + "set_" + currentSet + ".txt", "w") as output :
+        with open(sys.path[0] + os.sep + "PerSetTrackingResults" + os.sep + "set_" + currentSet.strip() + ".txt", "w") as output :
                 output.write("Implemented (" + str(len(currentImplemented)) + "):\n")
                 for everyImplemented in currentImplemented :
                         output.write(everyImplemented + '\n')

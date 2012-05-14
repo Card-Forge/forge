@@ -1481,8 +1481,7 @@ public class CardFactoryUtil {
                 } else {
                     // Wiser choice should be here
                     Card choice = null;
-                    sameCost.shuffle();
-                    choice = sameCost.getCard(0);
+                    choice = CardFactoryUtil.getBestCreatureAI(sameCost);
 
                     if (!(choice == null)) {
                         Singletons.getModel().getGameAction().moveToHand(choice);
@@ -1674,49 +1673,6 @@ public class CardFactoryUtil {
     }
 
     /**
-     * custom input method only for use in Recall.
-     * 
-     * @param numCards
-     *            a int.
-     * @param recall
-     *            a {@link forge.Card} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return input
-     */
-    /*
-     * public static Input inputDiscardRecall(final int numCards, final Card
-     * recall, final SpellAbility sa) { final Input target = new Input() {
-     * private static final long serialVersionUID = 1942999595292561944L;
-     * private int n = 0;
-     * 
-     * @Override public void showMessage() { if
-     * (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) { this.stop();
-     * }
-     * 
-     * CMatchUI.SINGLETON_INSTANCE.showMessage(
-     * "Select a card to discard"); ButtonUtil.disableAll(); }
-     * 
-     * @Override public void selectCard(final Card card, final PlayerZone zone)
-     * { if (zone.is(Constant.Zone.Hand)) { card.getController().discard(card,
-     * sa); this.n++;
-     * 
-     * // in case no more cards in hand if ((this.n == numCards) ||
-     * (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0)) { this.done();
-     * } else { this.showMessage(); } } }
-     * 
-     * void done() { CMatchUI.SINGLETON_INSTANCE.showMessage(
-     * "Returning cards to hand.");
-     * Singletons.getModel().getGameAction().exile(recall); final CardList grave
-     * = AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard); for (int i = 1; i
-     * <= this.n; i++) { final String title = "Return card from grave to hand";
-     * final Object o = GuiUtils.getChoice(title, grave.toArray()); if (o ==
-     * null) { break; } final Card toHand = (Card) o; grave.remove(toHand);
-     * Singletons.getModel().getGameAction().moveToHand(toHand); } this.stop();
-     * } }; return target; } // input_discardRecall()
-     */
-
-    /**
      * <p>
      * masterOfTheWildHuntInputTargetCreature.
      * </p>
@@ -1831,34 +1787,6 @@ public class CardFactoryUtil {
      * getHumanCreatureAI.
      * </p>
      * 
-     * @param keyword
-     *            a {@link java.lang.String} object.
-     * @param spell
-     *            a {@link forge.Card} object.
-     * @param targeted
-     *            a boolean.
-     * @return a {@link forge.CardList} object.
-     */
-    public static CardList getHumanCreatureAI(final String keyword, final SpellAbility spell, final boolean targeted) {
-        CardList creature = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        creature = creature.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card c) {
-                if (targeted) {
-                    return c.isCreature() && c.hasKeyword(keyword) && c.canBeTargetedBy(spell);
-                } else {
-                    return c.isCreature() && c.hasKeyword(keyword);
-                }
-            }
-        });
-        return creature;
-    } // getHumanCreatureAI()
-
-    /**
-     * <p>
-     * getHumanCreatureAI.
-     * </p>
-     * 
      * @param toughness
      *            a int.
      * @param spell
@@ -1921,44 +1849,6 @@ public class CardFactoryUtil {
             }
         }
         return coloredPerms.size();
-    }
-
-    /**
-     * <p>
-     * multipleControlled.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public static boolean multipleControlled(final Card c) {
-        final CardList list = c.getController().getCardsIn(ZoneType.Battlefield);
-        list.remove(c);
-
-        return list.containsName(c.getName());
-    }
-
-    /**
-     * <p>
-     * oppHasKismet.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    public static boolean oppHasKismet(final Player player) {
-        final Player opp = player.getOpponent();
-        CardList list = opp.getCardsIn(ZoneType.Battlefield);
-        list = list.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card c) {
-                return c.getName().equals("Kismet") || c.getName().equals("Frozen AEther")
-                        || c.getName().equals("Loxodon Gatekeeper");
-            }
-        });
-        return list.size() > 0;
     }
 
     /**
@@ -2163,6 +2053,7 @@ public class CardFactoryUtil {
         if (!CardFactoryUtil.isCounterable(c)) {
             return false;
         }
+        //TODO: Add code for Autumn's Veil here
 
         return true;
     }
@@ -3781,9 +3672,7 @@ public class CardFactoryUtil {
         final Card target = ability.getTargetCard();
         int neededDamage = -1;
 
-        final Card c = ability.getSourceCard();
-
-        if ((target != null) && c.getText().contains("deals X damage to target") && !c.getName().equals("Death Grasp")) {
+        if ((target != null)) {
             neededDamage = target.getNetDefense() - target.getDamage();
         }
 
@@ -3919,27 +3808,6 @@ public class CardFactoryUtil {
         return (c == Counters.AGE) || (c == Counters.BLAZE) || (c == Counters.BRIBERY) || (c == Counters.DOOM)
                 || (c == Counters.ICE) || (c == Counters.M1M1) || (c == Counters.M0M2) || (c == Counters.M0M1)
                 || (c == Counters.TIME);
-    }
-
-    /**
-     * <p>
-     * checkEmblemKeyword.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String checkEmblemKeyword(final Card c) {
-        if (c.hasKeyword("Artifacts, creatures, enchantments, and lands you control are indestructible.")) {
-            return "Elspeth_Emblem";
-        }
-
-        if (c.hasKeyword("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'")) {
-            return "Koth_Emblem";
-        }
-
-        return "";
     }
 
     /**
@@ -5003,59 +4871,6 @@ public class CardFactoryUtil {
 
             card.addIntrinsicKeyword("etbCounter:P1P1:" + m);
         }
-
-        /*final int etbCounter = CardFactoryUtil.hasKeyword(card, "etbCounter");
-        // etbCounter:CounterType:CounterAmount:Condition:Description
-        // enters the battlefield with CounterAmount of CounterType
-        if (etbCounter != -1) {
-            final String parse = card.getKeyword().get(etbCounter).toString();
-            card.removeIntrinsicKeyword(parse);
-
-            final String[] p = parse.split(":");
-            final Counters counter = Counters.valueOf(p[1]);
-            final String numCounters = p[2];
-            final String condition = p.length > 3 ? p[3] : "";
-
-            final StringBuilder sb = new StringBuilder(card.getSpellText());
-            if (sb.length() != 0) {
-                sb.append("\n");
-            }
-            if (p.length > 4) {
-                sb.append(p[4]);
-            } else {
-                sb.append(card.getName());
-                sb.append(" enters the battlefield with ");
-                sb.append(numCounters);
-                sb.append(" ");
-                sb.append(counter.getName());
-                sb.append(" counter");
-                if ("1" != numCounters) {
-                    sb.append("s");
-                }
-                sb.append(" on it.");
-            }
-
-            card.setText(sb.toString());
-
-            card.addComesIntoPlayCommand(new Command() {
-                private static final long serialVersionUID = -2292898970576123040L;
-
-                @Override
-                public void execute() {
-                    if (GameActionUtil.specialConditionsMet(card, condition)) {
-                        int toAdd = -1;
-                        if (numCounters.equals("X")) {
-                            toAdd = CardFactoryUtil.xCount(card, card.getSVar("X"));
-                        } else {
-                            toAdd = Integer.parseInt(numCounters);
-                        }
-
-                        card.addCounter(counter, toAdd);
-                    }
-
-                }
-            }); // ComesIntoPlayCommand
-        } // if etbCounter*/
 
         final int bloodthirst = CardFactoryUtil.hasKeyword(card, "Bloodthirst");
         if (bloodthirst != -1) {

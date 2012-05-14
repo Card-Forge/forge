@@ -4456,6 +4456,7 @@ res/cardsfolder/i/immolation.txt svneol=native#text/plain
 res/cardsfolder/i/immortal_coil.txt -text svneol=unset#text/plain
 res/cardsfolder/i/impaler_shrike.txt svneol=native#text/plain
 res/cardsfolder/i/impatience.txt -text svneol=unset#text/plain
+res/cardsfolder/i/impelled_giant.txt -text
 res/cardsfolder/i/impending_disaster.txt svneol=native#text/plain
 res/cardsfolder/i/imperial_edict.txt svneol=native#text/plain
 res/cardsfolder/i/imperial_hellkite.txt svneol=native#text/plain
@@ -5678,6 +5679,7 @@ res/cardsfolder/m/merfolk_thaumaturgist.txt svneol=native#text/plain
 res/cardsfolder/m/merfolk_traders.txt svneol=native#text/plain
 res/cardsfolder/m/merfolk_wayfinder.txt -text
 res/cardsfolder/m/merieke_ri_berit.txt svneol=native#text/plain
+res/cardsfolder/m/merrow_bonegnawer.txt -text
 res/cardsfolder/m/merrow_commerce.txt svneol=native#text/plain
 res/cardsfolder/m/merrow_grimeblotter.txt svneol=native#text/plain
 res/cardsfolder/m/merrow_harbinger.txt svneol=native#text/plain
@@ -8082,6 +8084,7 @@ res/cardsfolder/s/shanodin_dryads.txt svneol=native#text/plain
 res/cardsfolder/s/shape_anew.txt -text
 res/cardsfolder/s/shape_stealer.txt -text svneol=unset#text/plain
 res/cardsfolder/s/shaper_guildmage.txt svneol=native#text/plain
+res/cardsfolder/s/shaper_parasite.txt -text
 res/cardsfolder/s/shapeshifter.txt svneol=native#text/plain
 res/cardsfolder/s/shard_convergence.txt svneol=native#text/plain
 res/cardsfolder/s/shard_phoenix.txt svneol=native#text/plain
@@ -8897,6 +8900,7 @@ res/cardsfolder/s/stern_mentor.txt -text
 res/cardsfolder/s/stern_proctor.txt svneol=native#text/plain
 res/cardsfolder/s/steward_of_valeron.txt svneol=native#text/plain
 res/cardsfolder/s/stifle.txt svneol=native#text/plain
+res/cardsfolder/s/stigma_lasher.txt -text
 res/cardsfolder/s/still_life.txt svneol=native#text/plain
 res/cardsfolder/s/stillmoon_cavalier.txt svneol=native#text/plain
 res/cardsfolder/s/stingerfling_spider.txt svneol=native#text/plain
@@ -10837,6 +10841,7 @@ res/draft/rare.txt svneol=native#text/plain
 res/draft/uncommon.txt svneol=native#text/plain
 res/gamedata/NonStackingKWList.txt svneol=native#text/plain
 res/gamedata/TypeLists.txt svneol=native#text/plain
+res/gui/display_new_layout.xml -text svneol=unset#text/plain
 res/images/deckeditor/filter_artifact_n.png -text svneol=unset#image/png
 res/images/deckeditor/filter_artifact_y.png -text svneol=unset#image/png
 res/images/deckeditor/filter_black_n.png -text svneol=unset#image/png

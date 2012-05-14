@@ -1,7 +1,8 @@
 Name:Forsaken Wastes
 ManaCost:2 B
 Types:World Enchantment
-Text:Players cannot gain life.
+Text:no text
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't gain life. | Description$ Players can't gain life.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player loses 1 life.
 T:Mode$ SpellCast | TargetsValid$ Card.Self | Execute$ TrigLoseLife5 | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes the target of a spell, that spell's controller loses 5 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 1

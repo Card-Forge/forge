@@ -1,6 +1,6 @@
 Name:Phyrexian Devourer
 ManaCost:6
-Types:Artifact Creature Devourer
+Types:Artifact Creature Construct
 Text:no text
 PT:1/1
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature.Self+powerGE7 | PresentCompare$ GE1 | Execute$ TrigSac | TriggerDescription$ When CARDNAME's power is 7 or greater, sacrifice it.

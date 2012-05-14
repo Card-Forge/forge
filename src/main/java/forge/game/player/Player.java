@@ -381,8 +381,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canGainLife() {
-        if (AllZoneUtil.isCardInPlay("Leyline of Punishment") || AllZoneUtil.isCardInPlay("Platinum Emperion", this)
-                || AllZoneUtil.isCardInPlay("Forsaken Wastes")) {
+        if (this.hasKeyword("You can't gain life.") || this.hasKeyword("Your life total can't change.")) {
             return false;
         }
         return true;
@@ -436,7 +435,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canLoseLife() {
-        if (AllZoneUtil.isCardInPlay("Platinum Emperion", this)) {
+        if (this.hasKeyword("Your life total can't change.")) {
             return false;
         }
         return true;
@@ -468,7 +467,7 @@ public abstract class Player extends GameEntity {
         if (this.life < lifePayment) {
             return false;
         }
-        if ((lifePayment > 0) && AllZoneUtil.isCardInPlay("Platinum Emperion", this)) {
+        if ((lifePayment > 0) && this.hasKeyword("Your life total can't change.")) {
             return false;
         }
         return true;
@@ -1140,8 +1139,7 @@ public abstract class Player extends GameEntity {
      * @return true if a player can draw a card, false otherwise
      */
     public final boolean canDraw() {
-        if (AllZoneUtil.isCardInPlay("Omen Machine") || AllZoneUtil.isCardInPlay("Maralen of the Mornsong"))
-        {
+        if (this.hasKeyword("You can't draw cards.")) {
             return false;
         }
         return true;

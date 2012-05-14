@@ -43,7 +43,7 @@ import forge.view.ButtonUtil;
 public class CostExile extends CostPartWithList {
     // Exile<Num/Type{/TypeDescription}>
     // ExileFromHand<Num/Type{/TypeDescription}>
-    // ExileFromGraveyard<Num/Type{/TypeDescription}>
+    // ExileFromGrave<Num/Type{/TypeDescription}>
     // ExileFromTop<Num/Type{/TypeDescription}> (of library)
 
     private ZoneType from = ZoneType.Battlefield;
@@ -189,11 +189,9 @@ public class CostExile extends CostPartWithList {
             // Generalize this
             if (sVar.equals("XChoice")) {
                 c = CostUtil.chooseXValue(source, list.size());
-            }
-            if (sVar.equals("YChoice")) {
+            } else if (sVar.equals("YChoice")) {
                 c = CostUtil.chooseYValue(source, list.size());
-            }
-            else {
+            } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }

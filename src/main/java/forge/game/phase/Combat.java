@@ -98,10 +98,6 @@ public class Combat {
         this.attackingPlayer = null;
         this.defendingPlayer = null;
 
-        this.defenders.clear();
-        this.currentDefender = 0;
-        this.nextDefender = 0;
-
         this.initiatePossibleDefenders(Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getOpponent());
     }
 
@@ -114,6 +110,9 @@ public class Combat {
      *            a {@link forge.game.player.Player} object.
      */
     public final void initiatePossibleDefenders(final Player defender) {
+        this.defenders.clear();
+        this.currentDefender = 0;
+        this.nextDefender = 0;
         this.defenders.add(defender);
         CardList planeswalkers = defender.getCardsIn(ZoneType.Battlefield);
         planeswalkers = planeswalkers.getType("Planeswalker");
@@ -529,20 +528,6 @@ public class Combat {
     public final void addBlocker(final Card attacker, final Card blocker) {
         this.blocked.add(attacker);
         this.getList(attacker).add(blocker);
-    }
-
-    /**
-     * <p>
-     * resetBlockers.
-     * </p>
-     */
-    public final void resetBlockers() {
-        this.reset();
-
-        final CardList att = this.getAttackerList();
-        for (int i = 0; i < att.size(); i++) {
-            this.addAttacker(att.get(i));
-        }
     }
 
     /**

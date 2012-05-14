@@ -823,14 +823,7 @@ public class AbilityFactoryZoneAffecting {
 
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
-        if (AbilityFactory.playReusable(sa)) {
-            randomReturn = true;
-            // some other variables here, like deck size, and phase and other
-            // fun
-            // stuff
-        }
-
-        if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (params.get("NumCards").equals("X") && source.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), AllZone.getHumanPlayer()
                     .getCardsIn(ZoneType.Library).size());
@@ -838,6 +831,11 @@ public class AbilityFactoryZoneAffecting {
             if (cardsToDiscard <= 0) {
                 return false;
             }
+        }
+
+        if (AbilityFactory.playReusable(sa)) {
+            randomReturn = true;
+            // some other variables here, like deck size, and phase and other fun stuff
         }
 
         return randomReturn;

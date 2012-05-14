@@ -5,15 +5,12 @@ Text:no text
 PT:0/3
 K:Defender
 K:Flying
-# You can not clear a remembered object from a card on the stack, so this card is cleaned beforehand.
-A:AB$ Pump | Cost$ T | SubAbility$ DBCleanup | Static$ True | StackDescription$ None | SpellDescription$ Put CARDNAME and each creature it's blocking on top of their owners' libraries, then those players shuffle their libraries.
-SVar:JellyBounceBlocked:DB$ ChangeZoneAll | ChangeType$ Creature.blockedBySource | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | RememberChanged$ True | SubAbility$ JellyBounceSelf
+A:AB$ ChangeZoneAll | Cost$ T | ChangeType$ Creature.blockedBySource | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ JellyBounceSelf | SpellDescription$ Put CARDNAME and each creature it's blocking on top of their owners' libraries, then those players shuffle their libraries.
 SVar:JellyBounceSelf:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SubAbility$ WobbleOppJelly
 SVar:WobbleOppJelly:DB$ Shuffle | Defined$ Opponent | SubAbility$ WobbleYourJelly | ConditionCheckSVar$ X
-SVar:WobbleYourJelly:DB$ Shuffle | Defined$ You
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ JellyBounceBlocked
+SVar:WobbleYourJelly:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gomazoa.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/46.jpg

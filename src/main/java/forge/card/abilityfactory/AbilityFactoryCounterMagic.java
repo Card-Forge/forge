@@ -239,7 +239,7 @@ public class AbilityFactoryCounterMagic {
         if (tgt != null) {
 
             final SpellAbility topSA = AllZone.getStack().peekAbility();
-            if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer()) {
+            if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
             }
             if (params.containsKey("AITgts") && (topSA.getSourceCard() == null
@@ -321,7 +321,7 @@ public class AbilityFactoryCounterMagic {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             final SpellAbility topSA = AllZone.getStack().peekAbility();
-            if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer()) {
+            if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
             }
 
@@ -410,7 +410,7 @@ public class AbilityFactoryCounterMagic {
         for (final SpellAbility tgtSA : sas) {
             final Card tgtSACard = tgtSA.getSourceCard();
 
-            if (tgtSA.isSpell() && !CardFactoryUtil.isCounterable(tgtSACard)) {
+            if (tgtSA.isSpell() && !CardFactoryUtil.isCounterableBy(tgtSACard, sa)) {
                 continue;
             }
 

@@ -42,6 +42,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.framework.SIOUtil;
 import forge.gui.match.views.VDock;
 import forge.gui.toolbox.SaveOpenDialog;
+import forge.gui.toolbox.SaveOpenDialog.Filetypes;
 import forge.item.CardPrinted;
 import forge.properties.NewConstants;
 import forge.view.FView;
@@ -67,8 +68,39 @@ public enum CDock implements ICDoc {
     public void endTurn() {
         Singletons.getModel().getGameState().getPhaseHandler().autoPassToCleanup();
     }
-
+    
     private void revertLayout() {
+        SOverlayUtils.genericOverlay();
+        FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
+
+        final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
+            @Override
+            public Void doInBackground() {
+                SIOUtil.loadLayout(new File(SIOUtil.FILE_DEFAULT));
+                SOverlayUtils.hideOverlay();
+                return null;
+            }
+        };
+        w.execute();
+    }
+    
+    private void saveLayout() {
+        final SwingWorker<Void,Void> w = new SwingWorker<Void,Void>() {
+            @Override
+            public Void doInBackground() {
+                SaveOpenDialog dlgSave = new SaveOpenDialog();
+                File DefFile = new File(SIOUtil.FILE_PREFERRED);
+                File SaveFile = dlgSave.SaveDialog(DefFile, Filetypes.LAYOUT);
+                if (SaveFile!=null) {
+                    SIOUtil.saveLayout(SaveFile);
+                }
+                return null;
+            }
+        };
+        w.execute();
+    }
+
+    private void openLayout() {
         SOverlayUtils.genericOverlay();
         FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
         
@@ -76,11 +108,15 @@ public enum CDock implements ICDoc {
         final SwingWorker<Void,Void> w = new SwingWorker<Void,Void>() {
             @Override
             public Void doInBackground() {
-                SaveOpenDialog dlgSave = new SaveOpenDialog();
-                File LoadFile = new File(SIOUtil.FILE_PREFERRED);
-                LoadFile = dlgSave.OpenXMLDialog(LoadFile);
+                SaveOpenDialog dlgOpen = new SaveOpenDialog();
+                File DefFile = new File(SIOUtil.FILE_PREFERRED);
+                File LoadFile = dlgOpen.OpenDialog(DefFile, Filetypes.LAYOUT);
             
-                SIOUtil.loadLayout(LoadFile);
+                if (LoadFile!=null) {
+                    SIOUtil.loadLayout(LoadFile);
+                    SIOUtil.saveLayout(null);
+                }
+                
                 SOverlayUtils.hideOverlay();
                 return null;
             }
@@ -208,6 +244,16 @@ public enum CDock implements ICDoc {
         .addMouseListener(new MouseAdapter() { @Override
             public void mousePressed(final MouseEvent e) {
                 revertLayout(); } });
+        
+        VDock.SINGLETON_INSTANCE.getBtnOpenLayout()
+        .addMouseListener(new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                openLayout(); } });
+        
+        VDock.SINGLETON_INSTANCE.getBtnSaveLayout()
+        .addMouseListener(new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                saveLayout(); } });
     }
 
     /* (non-Javadoc)

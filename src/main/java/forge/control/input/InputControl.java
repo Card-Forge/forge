@@ -20,6 +20,7 @@ package forge.control.input;
 import java.util.LinkedList;
 import java.util.Stack;
 
+import forge.AllZone;
 import forge.MyObservable;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -214,6 +215,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             this.model.getGameState().getStack().freezeStack();
 
             if (playerTurn.isHuman() && !handler.getAutoPass()) {
+                AllZone.getCombat().initiatePossibleDefenders(AllZone.getComputerPlayer());
                 return new InputAttack();
             }
         } else if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS) {
