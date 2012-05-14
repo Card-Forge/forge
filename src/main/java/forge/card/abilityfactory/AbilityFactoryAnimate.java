@@ -178,7 +178,7 @@ public final class AbilityFactoryAnimate {
      */
     private static String animateStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
         final Map<String, String> svars = host.getSVars();
 
         int power = -1;
@@ -481,7 +481,7 @@ public final class AbilityFactoryAnimate {
     private static void animateResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
         final Map<String, String> svars = host.getSVars();
         long timest = -1;
         String animateRemembered = null;
@@ -1113,7 +1113,7 @@ public final class AbilityFactoryAnimate {
      */
     private static void animateAllResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
         final Map<String, String> svars = host.getSVars();
         long timest = -1;
 

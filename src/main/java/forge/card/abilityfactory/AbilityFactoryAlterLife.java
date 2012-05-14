@@ -212,7 +212,7 @@ public class AbilityFactoryAlterLife {
     public static String gainLifeStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("LifeAmount"), sa);
 
         if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -278,7 +278,7 @@ public class AbilityFactoryAlterLife {
             source.setSVar("PayX", Integer.toString(xPay));
             lifeAmount = xPay;
         } else {
-            lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+            lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
         }
 
         // don't use it if no life to gain
@@ -427,7 +427,7 @@ public class AbilityFactoryAlterLife {
     public static void gainLifeResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
 
-        final int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
+        final int lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("LifeAmount"), sa);
         ArrayList<Player> tgtPlayers;
 
         final Target tgt = sa.getTarget();
@@ -607,7 +607,7 @@ public class AbilityFactoryAlterLife {
     static String loseLifeStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("LifeAmount"), sa);
 
         if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -664,7 +664,7 @@ public class AbilityFactoryAlterLife {
 
         // TODO handle proper calculation of X values based on Cost and what
         // would be paid
-        int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+        int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -831,7 +831,7 @@ public class AbilityFactoryAlterLife {
     public static void loseLifeResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
 
-        final int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
+        final int lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("LifeAmount"), sa);
 
         ArrayList<Player> tgtPlayers;
 
@@ -1036,7 +1036,7 @@ public class AbilityFactoryAlterLife {
      */
     private static void poisonResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Num"), sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Num"), sa);
 
         ArrayList<Player> tgtPlayers;
 
@@ -1068,7 +1068,7 @@ public class AbilityFactoryAlterLife {
     private static String poisonStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Num"), sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Num"), sa);
 
         if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -1135,7 +1135,7 @@ public class AbilityFactoryAlterLife {
      */
     private static boolean poisonCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
-        final Card source = af.getHostCard();
+        final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
         // int humanPoison = AllZone.getHumanPlayer().getPoisonCounters();
         // int humanLife = AllZone.getHumanPlayer().getLife();
@@ -1316,7 +1316,7 @@ public class AbilityFactoryAlterLife {
     private static String setLifeStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("LifeAmount"), sa);
 
         if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" -");
@@ -1391,7 +1391,7 @@ public class AbilityFactoryAlterLife {
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
-            amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
         }
 
         // prevent run-away activations - first time will always return true
@@ -1475,7 +1475,7 @@ public class AbilityFactoryAlterLife {
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
-            amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
         }
 
         if (source.getName().equals("Eternity Vessel")
@@ -1527,7 +1527,7 @@ public class AbilityFactoryAlterLife {
     private static void setLifeResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
 
-        final int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
+        final int lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("LifeAmount"), sa);
         ArrayList<Player> tgtPlayers;
 
         final Target tgt = sa.getTarget();
