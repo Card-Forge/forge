@@ -25,7 +25,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import forge.card.CardManaCost;
-import forge.card.CardManaCostShard;
+import forge.card.mana.ManaCostShard;
 import forge.gui.toolbox.CardFaceSymbols;
 
 /**
@@ -68,7 +68,7 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
 
         final int genericManaCost = this.value.getGenericCost();
         final boolean hasGeneric = (genericManaCost > 0) || this.value.isPureGeneric();
-        final List<CardManaCostShard> shards = this.value.getShards();
+        final List<ManaCostShard> shards = this.value.getShards();
 
         final int cellWidth = this.getWidth();
         final int cntGlyphs = hasGeneric ? shards.size() + 1 : shards.size();
@@ -82,7 +82,7 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
             xpos += offset;
         }
 
-        for (final CardManaCostShard s : shards) {
+        for (final ManaCostShard s : shards) {
             CardFaceSymbols.drawSymbol(s.getImageKey(), g, (int) xpos, 1);
             xpos += offset;
         }

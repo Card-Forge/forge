@@ -25,7 +25,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.CardManaCost.ManaParser;
+import forge.card.mana.ManaCostShard;
+import forge.card.mana.IParserManaCost;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
@@ -287,7 +288,7 @@ public final class MtgDataParser implements Iterator<CardRules> {
     /**
      * This is a mana-parser for mana written in curly braces like {2}{R}{B}.
      */
-    public static final class ManaParserMtgData implements ManaParser {
+    public static final class ManaParserMtgData implements IParserManaCost {
         private final String cost;
 
         private int nextBracket;
@@ -335,7 +336,7 @@ public final class MtgDataParser implements Iterator<CardRules> {
          * @see java.util.Iterator#next()
          */
         @Override
-        public CardManaCostShard next() {
+        public ManaCostShard next() {
             final int closeBracket = this.cost.indexOf('}', this.nextBracket);
             final String unparsed = this.cost.substring(this.nextBracket + 1, closeBracket);
             this.nextBracket = this.cost.indexOf('{', closeBracket + 1);
@@ -350,34 +351,34 @@ public final class MtgDataParser implements Iterator<CardRules> {
             for (int iChar = 0; iChar < unparsed.length(); iChar++) {
                 switch (unparsed.charAt(iChar)) {
                 case 'W':
-                    atoms |= CardManaCostShard.Atom.WHITE;
+                    atoms |= ManaCostShard.Atom.WHITE;
                     break;
                 case 'U':
-                    atoms |= CardManaCostShard.Atom.BLUE;
+                    atoms |= ManaCostShard.Atom.BLUE;
                     break;
                 case 'B':
-                    atoms |= CardManaCostShard.Atom.BLACK;
+                    atoms |= ManaCostShard.Atom.BLACK;
                     break;
                 case 'R':
-                    atoms |= CardManaCostShard.Atom.RED;
+                    atoms |= ManaCostShard.Atom.RED;
                     break;
                 case 'G':
-                    atoms |= CardManaCostShard.Atom.GREEN;
+                    atoms |= ManaCostShard.Atom.GREEN;
                     break;
                 case '2':
-                    atoms |= CardManaCostShard.Atom.OR_2_COLORLESS;
+                    atoms |= ManaCostShard.Atom.OR_2_COLORLESS;
                     break;
                 case 'P':
-                    atoms |= CardManaCostShard.Atom.OR_2_LIFE;
+                    atoms |= ManaCostShard.Atom.OR_2_LIFE;
                     break;
                 case 'X':
-                    atoms |= CardManaCostShard.Atom.IS_X;
+                    atoms |= ManaCostShard.Atom.IS_X;
                     break;
                 default:
                     break;
                 }
             }
-            return CardManaCostShard.valueOf(atoms);
+            return ManaCostShard.valueOf(atoms);
         }
 
         /*

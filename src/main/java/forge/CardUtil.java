@@ -762,24 +762,6 @@ public final class CardUtil {
 
     /**
      * <p>
-     * getWeightedManaCost.
-     * </p>
-     * 
-     * @param manaCost
-     *            a {@link java.lang.String} object.
-     * @return a double.
-     */
-    public static double getWeightedManaCost(final String manaCost) {
-        if (manaCost.equals("")) {
-            return 0;
-        }
-
-        final ManaCost cost = new ManaCost(manaCost);
-        return cost.getWeightedManaCost();
-    }
-
-    /**
-     * <p>
      * getShortColorsString.
      * </p>
      * 

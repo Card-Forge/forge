@@ -18,11 +18,11 @@
 package forge.card.mana;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.StringTokenizer;
-
+import java.util.List;
+import java.util.Map.Entry;
 import forge.Constant;
+import forge.card.CardManaCost;
 import forge.control.input.InputPayManaCostUtil;
 
 /**
@@ -36,9 +36,9 @@ import forge.control.input.InputPayManaCostUtil;
 public class ManaCost {
     // holds Mana_Part objects
     // ManaPartColor is stored before ManaPartColorless
-    private final ArrayList<ManaPart> manaPart;
+    private final HashMap<ManaCostShard, Integer> unpaidShards = new HashMap<ManaCostShard, Integer>();
     private final HashMap<String, Integer> sunburstMap = new HashMap<String, Integer>();
-    private int xcounter = 0;
+    private int cntX = 0;
     private final ArrayList<String> manaNeededToAvoidNegativeEffect = new ArrayList<String>();
     private final ArrayList<String> manaPaidToAvoidNegativeEffect = new ArrayList<String>();
 
@@ -54,20 +54,19 @@ public class ManaCost {
      * @param manaCost
      *            a {@link java.lang.String} object.
      */
-    public ManaCost(String manaCost) {
-        if (manaCost.equals("") || manaCost.equals("C")) {
-            manaCost = "0";
+    public ManaCost(String sCost) {
+        if ("0".equals(sCost) || "C".equals(sCost) || sCost.isEmpty()) {
+            return;
         }
 
-        while (manaCost.contains("X")) {
-            if (manaCost.length() < 2) {
-                manaCost = "0";
-            } else {
-                manaCost = manaCost.replaceFirst("X ", "");
-            }
-            this.setXcounter(this.getXcounter() + 1);
+        final CardManaCost manaCost = new CardManaCost(new ManaCostParser(sCost));
+        for (ManaCostShard shard : manaCost.getShards()) {
+            if ( shard == ManaCostShard.X ) 
+                cntX++;
+            else 
+                increaseShard(shard, 1);
         }
-        this.manaPart = this.split(manaCost);
+        increaseColorlessMana(manaCost.getGenericCost());
     }
 
     /**
@@ -119,18 +118,14 @@ public class ManaCost {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    private ArrayList<ManaPartPhyrexian> getUnpaidPhyrexianMana() {
-        final ArrayList<ManaPartPhyrexian> res = new ArrayList<ManaPartPhyrexian>();
-        for (final Object o : this.manaPart) {
-            if (o instanceof ManaPartPhyrexian) {
-                final ManaPartPhyrexian phy = (ManaPartPhyrexian) o;
-
-                if (!phy.isPaid()) {
-                    res.add(phy);
-                }
-            }
+    private List<ManaCostShard> getUnpaidPhyrexianMana() {
+        ArrayList<ManaCostShard> res = new ArrayList<ManaCostShard>();
+        for(final Entry<ManaCostShard, Integer> part : this.unpaidShards.entrySet() )
+        {
+            if( !part.getKey().isPhyrexian() ) continue;
+            for(int i = 0; i < part.getValue(); i++)
+                res.add(part.getKey());
         }
-
         return res;
     }
 
@@ -142,12 +137,9 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean containsPhyrexianMana() {
-        for (final Object o : this.manaPart) {
-            if (o instanceof ManaPartPhyrexian) {
-                return true;
-            }
+        for(ManaCostShard shard : unpaidShards.keySet()) {
+            if ( shard.isPhyrexian() ) return true; 
         }
-
         return false;
     }
 
@@ -159,10 +151,12 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean payPhyrexian() {
-        final ArrayList<ManaPartPhyrexian> phy = this.getUnpaidPhyrexianMana();
+        final List<ManaCostShard> phy = this.getUnpaidPhyrexianMana();
 
         if (phy.size() > 0) {
-            phy.get(0).payLife();
+            Integer cnt = unpaidShards.get(phy.get(0));
+            if( cnt <= 1 ) unpaidShards.remove(phy.get(0));
+            else unpaidShards.put(phy.get(0), Integer.valueOf(cnt - 1));
 
             return true;
         }
@@ -182,11 +176,13 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean isColor(final String color) {
-        for (final Object s : this.manaPart) {
-            if (s.toString().contains(color)
-                    || (s.toString().matches(".*[0-9].*") && "1".equals(color))) {
+        if ( "1".equals(color) ) return getColorlessManaAmount() > 0;
+        
+        for(ManaCostShard shard : unpaidShards.keySet())
+        {
+            String ss = shard.toString(); 
+            if (ss.contains(color))
                 return true;
-            }
         }
         return false;
     }
@@ -214,10 +210,8 @@ public class ManaCost {
         if (mana.length() > 1) {
             mana = InputPayManaCostUtil.getShortColorString(mana);
         }
-        ManaPart m;
-        for (int i = 0; i < this.manaPart.size(); i++) {
-            m = (ManaPart) this.manaPart.get(i);
-            if (m.isNeeded(mana)) {
+        for(ManaCostShard shard : unpaidShards.keySet()) {
+            if (canBePaidWith(shard, mana)) {
                 return true;
             }
         }
@@ -229,18 +223,18 @@ public class ManaCost {
      * isNeeded.
      * </p>
      * 
-     * @param mana
+     * @param paid
      *            a {@link forge.card.mana.Mana} object.
      * @return a boolean.
      */
-    public final boolean isNeeded(final Mana mana) {
-        ManaPart m;
-        for (int i = 0; i < this.manaPart.size(); i++) {
-            m = (ManaPart) this.manaPart.get(i);
-            if (m.isNeeded(mana)) {
+    public final boolean isNeeded(final Mana paid) {
+        for (ManaCostShard shard : unpaidShards.keySet()) {
+            
+            if (canBePaidWith(shard, paid)) {
                 return true;
             }
-            if ((m instanceof ManaPartSnow) && mana.isSnow()) {
+            
+            if (shard.isSnow() && paid.isSnow()) {
                 return true;
             }
         }
@@ -255,14 +249,7 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean isPaid() {
-        ManaPart m;
-        for (int i = 0; i < this.manaPart.size(); i++) {
-            m = (ManaPart) this.manaPart.get(i);
-            if (!m.isPaid()) {
-                return false;
-            }
-        }
-        return true;
+        return unpaidShards.isEmpty();
     } // isPaid()
 
     /**
@@ -304,21 +291,19 @@ public class ManaCost {
      *            a int.
      */
     public final void increaseColorlessMana(final int manaToAdd) {
-        if (manaToAdd <= 0) {
-            return;
-        }
-
-        ManaPart m;
-        for (int i = 0; i < this.manaPart.size(); i++) {
-            m = (ManaPart) this.manaPart.get(i);
-            if (m instanceof ManaPartColorless) {
-                ((ManaPartColorless) m).addToManaNeeded(manaToAdd);
-                return;
-            }
-        }
-        this.manaPart.add(new ManaPartColorless(manaToAdd));
+        increaseShard(ManaCostShard.COLORLESS, manaToAdd);
     }
 
+    public final void increaseShard(final ManaCostShard shard, final int toAdd) {
+        if (toAdd <= 0) {
+            return;
+        }
+        
+        Integer cnt = unpaidShards.get(shard);
+        unpaidShards.put(shard, Integer.valueOf(cnt == null || cnt == 0 ? toAdd : toAdd + cnt ));
+    }
+    
+    
     /**
      * <p>
      * decreaseColorlessMana
@@ -330,25 +315,22 @@ public class ManaCost {
      *            cost.Used by Delve.
      */
     public final void decreaseColorlessMana(final int manaToSubtract) {
+        decreaseShard(ManaCostShard.COLORLESS, manaToSubtract);
+    }
+
+    
+    public final void decreaseShard(final ManaCostShard shard, final int manaToSubtract) {
         if (manaToSubtract <= 0) {
             return;
         }
 
-        ManaPart m;
-        for (int i = 0; i < this.manaPart.size(); i++) {
-            m = (ManaPart) this.manaPart.get(i);
-            if (m instanceof ManaPartColorless) {
-                final int remainingColorless = ((ManaPartColorless) m).getManaNeeded() - manaToSubtract;
-                if (remainingColorless <= 0) {
-                    this.manaPart.remove(m);
-                    break;
-                } else {
-                    this.manaPart.remove(m);
-                    this.manaPart.add(new ManaPartColorless(remainingColorless));
-                }
-            }
-        }
+        Integer genericCnt = unpaidShards.get(shard);
+        if( null == genericCnt || genericCnt - manaToSubtract <= 0 )
+            unpaidShards.remove(shard);
+        else
+            unpaidShards.put(shard, Integer.valueOf(genericCnt - manaToSubtract));
     }
+    
 
     /**
      * <p>
@@ -360,12 +342,8 @@ public class ManaCost {
      * @return an int.
      */
     public final int getColorlessManaAmount() {
-        for (final Object m : this.manaPart) {
-            if (m instanceof ManaPartColorless) {
-                return ((ManaPartColorless) m).getManaNeeded();
-            }
-        }
-        return 0;
+        Integer genericCnt = unpaidShards.get(ManaCostShard.COLORLESS);
+        return genericCnt == null ? 0 : genericCnt;
     }
 
     /**
@@ -383,18 +361,17 @@ public class ManaCost {
             //throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
         }
 
-        ManaPart choice = null;
-
-        for (int i = 0; i < this.manaPart.size(); i++) {
-            final ManaPart m = (ManaPart) this.manaPart.get(i);
-            if (m.isNeeded(mana)) {
+        ManaCostShard choice = null;
+        for(ManaCostShard toPay : unpaidShards.keySet())
+        {
+            if (canBePaidWith(toPay, mana)) {
                 // if m is a better to pay than choice
                 if (choice == null) {
-                    choice = m;
+                    choice = toPay;
                     continue;
                 }
-                if (m.isColor(mana) && choice.isEasierToPay(m)) {
-                    choice = m;
+                if (isFisrtChoiceBetter(toPay, choice)) {
+                    choice = toPay;
                 }
             }
         } // for
@@ -402,7 +379,7 @@ public class ManaCost {
             return false;
         }
 
-        choice.reduce(mana);
+        decreaseShard(choice, 1);
         if (!mana.equals(Constant.Color.COLORLESS)) {
             if (this.sunburstMap.containsKey(mana)) {
                 this.sunburstMap.put(mana, this.sunburstMap.get(mana) + 1);
@@ -413,6 +390,36 @@ public class ManaCost {
         return true;
     }
 
+    private boolean isFisrtChoiceBetter(ManaCostShard s1, ManaCostShard s2 ) {
+        return getPayPriority(s1) > getPayPriority(s2);
+    }
+    
+    private int getPayPriority(ManaCostShard s1) {
+        if ( s1 == ManaCostShard.COLORLESS ) return 0;
+
+        if( s1.isMonoColor() ) {
+            if ( s1.isOr2Colorless() ) return 9;
+            if ( !s1.isPhyrexian() ) return 10;
+            return 8;
+        }
+        
+        return 5;
+    }
+    
+    private boolean canBePaidWith(ManaCostShard shard, Mana mana) {
+        //System.err.println(String.format("ManaPaid: paying for %s with %s" , shard, mana));
+        // debug here even more;
+        return canBePaidWith(shard, InputPayManaCostUtil.getShortColorString(mana.getColor()) );
+    }
+
+    private boolean canBePaidWith(ManaCostShard shard, String mana) {
+        // most debug here!!
+        String sShard = shard.toString();
+        boolean res = "1".equals(sShard) || sShard.contains(mana); 
+        //System.out.println(String.format("Str: paying for %s with %s => %d" , shard, mana, res ? 1 : 0));
+        return res;
+    }    
+    
     /**
      * <p>
      * addMana.
@@ -427,18 +434,17 @@ public class ManaCost {
             throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
         }
 
-        ManaPart choice = null;
-
-        for (int i = 0; i < this.manaPart.size(); i++) {
-            final ManaPart m = (ManaPart) this.manaPart.get(i);
-            if (m.isNeeded(mana)) {
+        ManaCostShard choice = null;
+        for(ManaCostShard toPay : unpaidShards.keySet())
+        {
+            if (canBePaidWith(toPay, mana)) {
                 // if m is a better to pay than choice
                 if (choice == null) {
-                    choice = m;
+                    choice = toPay;
                     continue;
                 }
-                if (m.isColor(mana) && choice.isEasierToPay(m)) {
-                    choice = m;
+                if (isFisrtChoiceBetter(toPay, choice)) {
+                    choice = toPay;
                 }
             }
         } // for
@@ -446,7 +452,8 @@ public class ManaCost {
             return false;
         }
 
-        choice.reduce(mana);
+        decreaseShard(choice, 1);
+
         if (!mana.isColor(Constant.Color.COLORLESS)) {
             if (this.sunburstMap.containsKey(mana.getColor())) {
                 this.sunburstMap.put(mana.getColor(), this.sunburstMap.get(mana.getColor()) + 1);
@@ -466,35 +473,14 @@ public class ManaCost {
      *            a {@link java.lang.String} object.
      */
     public final void combineManaCost(final String extra) {
-        final ArrayList<ManaPart> extraParts = this.split(extra);
-
-        ManaPartColorless part = null;
-        for (int i = 0; i < this.manaPart.size(); i++) {
-            final Object o = this.manaPart.get(i);
-            if (o instanceof ManaPartColorless) {
-                part = (ManaPartColorless) o;
-            }
+        final CardManaCost manaCost = new CardManaCost(new ManaCostParser(extra));
+        for(ManaCostShard shard : manaCost.getShards()) {
+            if ( shard == ManaCostShard.X ) 
+                cntX++;
+            else 
+                increaseShard(shard, 1);
         }
-        if (part != null) {
-            this.manaPart.remove(part);
-        }
-
-        while (extraParts.size() > 0) {
-            final ManaPart o = extraParts.get(0);
-            if (o instanceof ManaPartColorless) {
-                if (part == null) {
-                    part = (ManaPartColorless) o;
-                } else {
-                    part.addToManaNeeded(((ManaPartColorless) o).getManaNeeded());
-                }
-            } else {
-                this.manaPart.add(o);
-            }
-            extraParts.remove(o);
-        }
-        if (part != null) {
-            this.manaPart.add(part);
-        }
+        increaseColorlessMana(manaCost.getGenericCost());
     }
 
     /**
@@ -507,9 +493,6 @@ public class ManaCost {
     public final String toString(final boolean addX) {
         // Boolean addX used to add Xs into the returned value
         final StringBuilder sb = new StringBuilder();
-        final ArrayList<Object> list = new ArrayList<Object>(this.manaPart);
-        // need to reverse everything since the colored mana is stored first
-        Collections.reverse(list);
 
         if (addX) {
             for (int i = 0; i < this.getXcounter(); i++) {
@@ -517,8 +500,15 @@ public class ManaCost {
             }
         }
 
-        for (int i = 0; i < list.size(); i++) {
-            sb.append(list.get(i).toString()).append(" ");
+        int nGeneric = getColorlessManaAmount();
+        if( nGeneric > 0 )
+            sb.append(nGeneric).append(" ");
+            
+        for( Entry<ManaCostShard, Integer> s : unpaidShards.entrySet() ) {
+            if ( s.getKey() == ManaCostShard.COLORLESS) continue;
+            for (int i = 0; i < s.getValue(); i++) {
+                sb.append(s.getKey().toString()).append(" ");
+            }
         }
 
         final String str = sb.toString().trim();
@@ -545,118 +535,11 @@ public class ManaCost {
      */
     public final int getConvertedManaCost() {
         int cmc = 0;
-        for (final Object s : this.manaPart) {
-            cmc += ((ManaPart) s).getConvertedManaCost();
+        
+        for (final Entry<ManaCostShard, Integer> s : this.unpaidShards.entrySet()) {
+            cmc += s.getKey().getCmc() * s.getValue();
         }
         return cmc;
-    }
-
-    /**
-     * Returns Mana cost, adjusted slightly to make colored mana parts more
-     * significant. Should only be used for comparison purposes; using this
-     * method allows the sort: 2 < X 2 < 1 U < U U == UR U < X U U < X X U U
-     * 
-     * @return The converted cost + 0.0001* the number of colored mana in the
-     *         cost + 0.00001 * the number of X's in the cost
-     */
-    public final double getWeightedManaCost() {
-        double cmc = 0;
-        for (final Object s : this.manaPart) {
-            cmc += ((ManaPart) s).getConvertedManaCost();
-            if (s instanceof ManaPartColor) {
-                cmc += 0.0001;
-            }
-        }
-
-        cmc += 0.00001 * this.getXcounter();
-        return cmc;
-    }
-
-    /**
-     * <p>
-     * split.
-     * </p>
-     * 
-     * @param cost
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
-    private ArrayList<ManaPart> split(final String cost) {
-        final ArrayList<ManaPart> list = new ArrayList<ManaPart>();
-
-        // handles costs like "3", "G", "GW", "10", "S"
-        if ((cost.length() == 1) || (cost.length() == 2)) {
-            if (Character.isDigit(cost.charAt(0))) {
-                list.add(new ManaPartColorless(cost));
-            } else if (cost.charAt(0) == 'S') {
-                list.add(new ManaPartSnow());
-            } else if (cost.charAt(0) == 'P') {
-                list.add(new ManaPartPhyrexian(cost));
-            } else {
-                list.add(new ManaPartColor(cost));
-            }
-        } else {
-            // handles "3 GW", "10 GW", "1 G G", "G G", "S 1"
-            // all costs that have a length greater than 2 have a space
-            final StringTokenizer tok = new StringTokenizer(cost);
-
-            while (tok.hasMoreTokens()) {
-                list.add(this.getManaPart(tok.nextToken()));
-            }
-
-            // ManaPartColorless needs to be added AFTER the colored mana
-            // in order for isNeeded() and addMana() to work correctly
-            Object o = list.get(0);
-            if (o instanceof ManaPartSnow) {
-                // move snow cost to the end of the list
-                list.remove(0);
-                list.add((ManaPartSnow) o);
-            }
-            o = list.get(0);
-
-            if (o instanceof ManaPartColorless) {
-                // move colorless cost to the end of the list
-                list.remove(0);
-                list.add((ManaPartColorless) o);
-            }
-        } // else
-
-        return list;
-    } // split()
-
-    /**
-     * <p>
-     * Getter for the field <code>manaPart</code>.
-     * </p>
-     * 
-     * @param partCost
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.card.mana.ManaPart} object.
-     */
-    private ManaPart getManaPart(final String partCost) {
-        if (partCost.length() == 3) {
-            return new ManaPartSplit(partCost);
-        } else if (Character.isDigit(partCost.charAt(0))) {
-            return new ManaPartColorless(partCost);
-        } else if (partCost.equals("S")) {
-            return new ManaPartSnow();
-        } else if (partCost.startsWith("P")) {
-            return new ManaPartPhyrexian(partCost);
-        } else {
-            return new ManaPartColor(partCost);
-        }
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>xcounter</code>.
-     * </p>
-     * 
-     * @param xcounter
-     *            a int.
-     */
-    public final void setXcounter(final int xcounter) {
-        this.xcounter = xcounter;
     }
 
     /**
@@ -666,9 +549,7 @@ public class ManaCost {
      * 
      * @return a int.
      */
-    public final int getXcounter() {
-        return this.xcounter;
-    }
+    public final int getXcounter() { return cntX; } 
 
     /**
      * <p>
@@ -678,12 +559,7 @@ public class ManaCost {
      * @since 1.0.15
      */
     public final void removeColorlessMana() {
-
-        for (int i = 0; i < this.manaPart.size(); i++) {
-            if (this.manaPart.get(i) instanceof ManaPartColorless) {
-                this.manaPart.remove(this.manaPart.get(i));
-            }
-        }
+        unpaidShards.remove(ManaCostShard.COLORLESS);
     }
 
     /**
