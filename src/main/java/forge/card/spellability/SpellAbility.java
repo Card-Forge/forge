@@ -27,7 +27,7 @@ import forge.CommandArgs;
 import forge.GameEntity;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
-import forge.card.mana.ManaPaid;
+import forge.card.mana.Mana;
 import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -105,7 +105,7 @@ public abstract class SpellAbility {
 
     private AbilityFactory abilityFactory = null;
 
-    private final ArrayList<ManaPaid> payingMana = new ArrayList<ManaPaid>();
+    private final ArrayList<Mana> payingMana = new ArrayList<Mana>();
     private final ArrayList<AbilityMana> paidAbilities = new ArrayList<AbilityMana>();
 
     private HashMap<String, CardList> paidLists = new HashMap<String, CardList>();
@@ -812,7 +812,7 @@ public abstract class SpellAbility {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<ManaPaid> getPayingMana() {
+    public ArrayList<Mana> getPayingMana() {
         return this.payingMana;
     }
 

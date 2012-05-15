@@ -18,12 +18,9 @@
 package forge.card.mana;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.StringTokenizer;
-
 import forge.Constant;
 import forge.card.CardManaCost;
 import forge.control.input.InputPayManaCostUtil;
@@ -41,6 +38,7 @@ public class ManaCost {
     // ManaPartColor is stored before ManaPartColorless
     private final HashMap<ManaCostShard, Integer> unpaidShards = new HashMap<ManaCostShard, Integer>();
     private final HashMap<String, Integer> sunburstMap = new HashMap<String, Integer>();
+    private int cntX = 0;
     private final ArrayList<String> manaNeededToAvoidNegativeEffect = new ArrayList<String>();
     private final ArrayList<String> manaPaidToAvoidNegativeEffect = new ArrayList<String>();
 
@@ -63,12 +61,12 @@ public class ManaCost {
 
         final CardManaCost manaCost = new CardManaCost(new ManaCostParser(sCost));
         for (ManaCostShard shard : manaCost.getShards()) {
-            increaseShard(shard, 1);
+            if ( shard == ManaCostShard.X ) 
+                cntX++;
+            else 
+                increaseShard(shard, 1);
         }
-        int generic = manaCost.getGenericCost();
-        if (generic > 0) {
-            unpaidShards.put(ManaCostShard.COLORLESS, Integer.valueOf(generic));
-        }
+        increaseColorlessMana(manaCost.getGenericCost());
     }
 
     /**
@@ -226,10 +224,10 @@ public class ManaCost {
      * </p>
      * 
      * @param paid
-     *            a {@link forge.card.mana.ManaPaid} object.
+     *            a {@link forge.card.mana.Mana} object.
      * @return a boolean.
      */
-    public final boolean isNeeded(final ManaPaid paid) {
+    public final boolean isNeeded(final Mana paid) {
         for (ManaCostShard shard : unpaidShards.keySet()) {
             
             if (canBePaidWith(shard, paid)) {
@@ -260,10 +258,10 @@ public class ManaCost {
      * </p>
      * 
      * @param mana
-     *            a {@link forge.card.mana.ManaPaid} object.
+     *            a {@link forge.card.mana.Mana} object.
      * @return a boolean.
      */
-    public final boolean payMana(final ManaPaid mana) {
+    public final boolean payMana(final Mana mana) {
         return this.addMana(mana);
     }
 
@@ -408,7 +406,7 @@ public class ManaCost {
         return 5;
     }
     
-    private boolean canBePaidWith(ManaCostShard shard, ManaPaid mana) {
+    private boolean canBePaidWith(ManaCostShard shard, Mana mana) {
         //System.err.println(String.format("ManaPaid: paying for %s with %s" , shard, mana));
         // debug here even more;
         return canBePaidWith(shard, InputPayManaCostUtil.getShortColorString(mana.getColor()) );
@@ -428,10 +426,10 @@ public class ManaCost {
      * </p>
      * 
      * @param mana
-     *            a {@link forge.card.mana.ManaPaid} object.
+     *            a {@link forge.card.mana.Mana} object.
      * @return a boolean.
      */
-    public final boolean addMana(final ManaPaid mana) {
+    public final boolean addMana(final Mana mana) {
         if (!this.isNeeded(mana)) {
             throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
         }
@@ -477,12 +475,12 @@ public class ManaCost {
     public final void combineManaCost(final String extra) {
         final CardManaCost manaCost = new CardManaCost(new ManaCostParser(extra));
         for(ManaCostShard shard : manaCost.getShards()) {
-            Integer cnt = unpaidShards.get(shard);
-            unpaidShards.put(shard, cnt == null ? Integer.valueOf(1) : Integer.valueOf(cnt + 1));
+            if ( shard == ManaCostShard.X ) 
+                cntX++;
+            else 
+                increaseShard(shard, 1);
         }
-        int generic = manaCost.getGenericCost() + this.getColorlessManaAmount();
-        if( generic > 0)
-            unpaidShards.put(ManaCostShard.COLORLESS, Integer.valueOf(generic));
+        increaseColorlessMana(manaCost.getGenericCost());
     }
 
     /**
@@ -551,10 +549,7 @@ public class ManaCost {
      * 
      * @return a int.
      */
-    public final int getXcounter() {
-        Integer x = unpaidShards.get(ManaCostShard.X);
-        return x == null ? 0 : x;
-    }
+    public final int getXcounter() { return cntX; } 
 
     /**
      * <p>
