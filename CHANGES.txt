@@ -109,6 +109,17 @@ Fixes/Features:
 - Added a fluff piece to the changes.txt file.
 - Clear Simultaneous triggers at the end of the game
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed AI of Increasing Confusion.
+- Replaced some instances of af.getHostCard() with sa.getSourceCard().
+- merge updates from Trunk 15508-15541
+- costmanaparser
+- made it buildable (there were missing refs to VDock and FSkin)
+- removed some obvious warnings
+- Switched mana to ManaCostShards, removed special classes for each mana kind
+- Fixed the ability costs for Ghave, Guru of Spores.
+- Fixed Iceberg.
+- Improved AI for Soulbond.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -142,6 +153,8 @@ Impelled Giant
 Merrow Bonegnawer
 Stigma Lasher
 Shaper Parasite
+Clear the Land
+Enslaved Horror
 
 
 end
