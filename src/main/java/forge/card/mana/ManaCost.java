@@ -57,16 +57,18 @@ public class ManaCost {
      *            a {@link java.lang.String} object.
      */
     public ManaCost(String sCost) {
-        if ( "0".equals(sCost) || "C".equals(sCost) ) 
+        if ("0".equals(sCost) || "C".equals(sCost) || sCost.isEmpty()) {
             return;
+        }
 
         final CardManaCost manaCost = new CardManaCost(new ManaCostParser(sCost));
-        for(ManaCostShard shard : manaCost.getShards()) {
+        for (ManaCostShard shard : manaCost.getShards()) {
             increaseShard(shard, 1);
         }
         int generic = manaCost.getGenericCost();
-        if( generic > 0 )
+        if (generic > 0) {
             unpaidShards.put(ManaCostShard.COLORLESS, Integer.valueOf(generic));
+        }
     }
 
     /**
