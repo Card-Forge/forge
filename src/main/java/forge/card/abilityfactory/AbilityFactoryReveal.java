@@ -33,6 +33,7 @@ import forge.CardList;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.AbilityActivated;
@@ -441,6 +442,7 @@ public final class AbilityFactoryReveal {
                     }
 
                     if (!noMove) {
+                        CardList movedCards = new CardList();
                         if (mitosis) {
                             valid = AbilityFactoryReveal.sharesNameWithCardOnBattlefield(top);
                             for (final Card c : top) {
@@ -458,7 +460,7 @@ public final class AbilityFactoryReveal {
                                     rest.add(c);
                                 }
                             }
-                            if (valid.isEmpty()) {
+                            if (valid.isEmpty() && choser.isHuman()) {
                                 valid.add(dummy);
                             }
                         } else {
@@ -466,26 +468,7 @@ public final class AbilityFactoryReveal {
                         }
 
                         if (changeAll) {
-                            for (final Card c : valid) {
-                                if (c.equals(dummy)) {
-                                    continue;
-                                }
-                                final PlayerZone zone = c.getOwner().getZone(destZone1);
-                                if (zone.is(ZoneType.Library)) {
-                                    Singletons.getModel().getGameAction().moveToLibrary(c, libraryPosition);
-                                } else {
-                                    Singletons.getModel().getGameAction().moveTo(zone, c);
-                                    if (destZone1.equals(ZoneType.Battlefield) && params.containsKey("Tapped")) {
-                                        c.setTapped(true);
-                                    }
-                                }
-                                if (params.containsKey("ForgetOtherRemembered")) {
-                                    host.clearRemembered();
-                                }
-                                if (params.containsKey("RememberChanged")) {
-                                    host.addRemembered(c);
-                                }
-                            }
+                            movedCards.addAll(valid);
                         } else {
                             int j = 0;
                             if (choser.isHuman()) {
@@ -508,61 +491,61 @@ public final class AbilityFactoryReveal {
                                         break;
                                     }
                                     valid.remove(chosen);
-                                    final PlayerZone zone = chosen.getOwner().getZone(destZone1);
-                                    if (zone.is(ZoneType.Library)) {
-                                        // System.out.println("Moving to lib position: "+libraryPosition);
-                                        Singletons.getModel().getGameAction().moveToLibrary(chosen, libraryPosition);
-                                    } else {
-                                        final Card c = Singletons.getModel().getGameAction().moveTo(zone, chosen);
-                                        if (destZone1.equals(ZoneType.Battlefield) && !keywords.isEmpty()) {
-                                            for (final String kw : keywords) {
-                                                c.addExtrinsicKeyword(kw);
-                                            }
-                                            if (params.containsKey("Tapped")) {
-                                                c.setTapped(true);
-                                            }
-                                        }
-                                        if (params.containsKey("ExileFaceDown")) {
-                                            c.setState(CardCharactersticName.FaceDown);
-                                        }
-                                        if (params.containsKey("Imprint")) {
-                                            host.addImprinted(c);
-                                        }
-                                    }
                                     // Singletons.getModel().getGameAction().revealToComputer()
                                     // - for when this exists
                                     j++;
                                 }
                             } // human
-                            else { // computer (pick the first cards)
+                            else { // computer
                                 int changeNum = Math.min(destZone1ChangeNum, valid.size());
                                 if (anyNumber) {
                                     changeNum = valid.size(); // always take all
                                 }
                                 for (j = 0; j < changeNum; j++) {
-                                    final Card chosen = valid.get(0);
-                                    if (chosen.equals(dummy)) {
+                                    final Card chosen = CardFactoryUtil.getBestAI(valid);
+                                    if (chosen == null) {
                                         break;
-                                    }
-                                    final PlayerZone zone = chosen.getOwner().getZone(destZone1);
-                                    if (zone.is(ZoneType.Library)) {
-                                        Singletons.getModel().getGameAction().moveToLibrary(chosen, libraryPosition);
-                                    } else {
-                                        final Card c = Singletons.getModel().getGameAction().moveTo(zone, chosen);
-                                        if (destZone1.equals(ZoneType.Battlefield) && !keywords.isEmpty()) {
-                                            for (final String kw : keywords) {
-                                                chosen.addExtrinsicKeyword(kw);
-                                            }
-                                            if (params.containsKey("Tapped")) {
-                                                c.setTapped(true);
-                                            }
-                                        }
                                     }
                                     if (changeValid.length() > 0) {
                                         GuiUtils.chooseOne("Computer picked: ", chosen);
                                     }
                                     valid.remove(chosen);
                                 }
+                            }
+                        }
+                        if (params.containsKey("ForgetOtherRemembered")) {
+                            host.clearRemembered();
+                        }
+                        movedCards.reverse();
+                        for (Card c : movedCards) {
+                            if (c.equals(dummy)) {
+                                continue;
+                            }
+                            final PlayerZone zone = c.getOwner().getZone(destZone1);
+                            if (zone.is(ZoneType.Library)) {
+                                Singletons.getModel().getGameAction().moveToLibrary(c, libraryPosition);
+                            } else {
+                                Singletons.getModel().getGameAction().moveTo(zone, c);
+                                if (destZone1.equals(ZoneType.Battlefield)) {
+                                    for (final String kw : keywords) {
+                                        c.addExtrinsicKeyword(kw);
+                                    }
+                                    if (params.containsKey("Tapped")) {
+                                        c.setTapped(true);
+                                    }
+                                }
+                                if (params.containsKey("ExileFaceDown")) {
+                                    c.setState(CardCharactersticName.FaceDown);
+                                }
+                                if (params.containsKey("Imprint")) {
+                                    host.addImprinted(c);
+                                }
+                            }
+                            if (params.containsKey("ForgetOtherRemembered")) {
+                                host.clearRemembered();
+                            }
+                            if (params.containsKey("RememberChanged")) {
+                                host.addRemembered(c);
                             }
                         }
 
