@@ -716,6 +716,20 @@ public class CardList implements Iterable<Card> {
 
     /**
      * <p>
+     * removeAll.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     */
+    public final void removeAll(final CardList list) {
+        for (Card c : list) {
+            this.list.remove(c);
+        }
+    }
+
+    /**
+     * <p>
      * clear.
      * </p>
      */

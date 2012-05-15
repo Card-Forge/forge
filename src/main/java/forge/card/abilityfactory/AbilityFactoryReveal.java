@@ -342,6 +342,8 @@ public final class AbilityFactoryReveal {
         int destZone1ChangeNum = 1;
         final boolean mitosis = params.containsKey("Mitosis");
         String changeValid = params.containsKey("ChangeValid") ? params.get("ChangeValid") : "";
+        //andOrValid is for cards with "creature card and/or a land card"
+        String andOrValid = params.containsKey("AndOrValid") ? params.get("AndOrValid") : "";
         final boolean anyNumber = params.containsKey("AnyNumber");
 
         final int libraryPosition2 = params.containsKey("LibraryPosition2") ? Integer.parseInt(params
@@ -443,22 +445,24 @@ public final class AbilityFactoryReveal {
 
                     if (!noMove) {
                         CardList movedCards = new CardList();
+                        CardList andOrCards = new CardList();
                         if (mitosis) {
                             valid = AbilityFactoryReveal.sharesNameWithCardOnBattlefield(top);
                             for (final Card c : top) {
-                                if (!valid.contains(c)) {
-                                    rest.add(c);
-                                }
+                                rest.add(c);
                             }
                         } else if (!changeValid.equals("")) {
                             if (changeValid.contains("ChosenType")) {
                                 changeValid = changeValid.replace("ChosenType", host.getChosenType());
                             }
                             valid = top.getValidCards(changeValid.split(","), host.getController(), host);
+                            if (!andOrValid.equals("")) {
+                                andOrCards = top.getValidCards(andOrValid.split(","), host.getController(), host);
+                                andOrCards.removeAll(valid);
+                                valid.addAll(andOrCards);
+                            }
                             for (final Card c : top) {
-                                if (!valid.contains(c)) {
-                                    rest.add(c);
-                                }
+                                rest.add(c);
                             }
                             if (valid.isEmpty() && choser.isHuman()) {
                                 valid.add(dummy);
@@ -474,6 +478,9 @@ public final class AbilityFactoryReveal {
                             if (choser.isHuman()) {
                                 while ((j < destZone1ChangeNum) || (anyNumber && (j < numToDig))) {
                                     // let user get choice
+                                    if (valid.isEmpty()) {
+                                        break;
+                                    }
                                     Card chosen = null;
                                     String prompt = "Choose a card to put into the ";
                                     if (destZone1.equals(ZoneType.Library) && (libraryPosition == -1)) {
@@ -490,7 +497,16 @@ public final class AbilityFactoryReveal {
                                     if ((chosen == null) || chosen.getName().equals("[No valid cards]")) {
                                         break;
                                     }
+                                    movedCards.add(chosen);
                                     valid.remove(chosen);
+                                    if (!andOrValid.equals("")) {
+                                        andOrCards.remove(chosen);
+                                        if (!chosen.isValid(andOrValid.split(","), host.getController(), host)) {
+                                            valid = andOrCards;
+                                        } else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
+                                            valid.removeAll(andOrCards);
+                                        }
+                                    }
                                     // Singletons.getModel().getGameAction().revealToComputer()
                                     // - for when this exists
                                     j++;
@@ -509,7 +525,16 @@ public final class AbilityFactoryReveal {
                                     if (changeValid.length() > 0) {
                                         GuiUtils.chooseOne("Computer picked: ", chosen);
                                     }
+                                    movedCards.add(chosen);
                                     valid.remove(chosen);
+                                    if (!andOrValid.equals("")) {
+                                        andOrCards.remove(chosen);
+                                        if (!chosen.isValid(andOrValid.split(","), host.getController(), host)) {
+                                            valid = andOrCards;
+                                        } else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
+                                            valid.removeAll(andOrCards);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -547,12 +572,7 @@ public final class AbilityFactoryReveal {
                             if (params.containsKey("RememberChanged")) {
                                 host.addRemembered(c);
                             }
-                        }
-
-                        // dump anything not selected from valid back into the
-                        // rest
-                        if (!changeAll) {
-                            rest.addAll(valid);
+                            rest.remove(c);
                         }
                         if (rest.contains(dummy)) {
                             rest.remove(dummy);
