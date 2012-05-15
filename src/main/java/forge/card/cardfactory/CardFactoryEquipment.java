@@ -20,7 +20,6 @@ package forge.card.cardfactory;
 import java.util.ArrayList;
 
 import forge.Card;
-import forge.CardList;
 import forge.Counters;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
