@@ -13,7 +13,7 @@ Deck Type=constructed
 1 Undead Warchief|TSB
 1 Cemetery Reaper|M10
 1 Smokespew Invoker|LGN
-23 Swamp|MBS
+24 Swamp|MBS
 1 Zombie Master|6ED
 1 Null Champion|ROE
 1 Wretched Anurid|ONS
@@ -46,4 +46,6 @@ Deck Type=constructed
 1 Boneknitter
 1 Endless Ranks of the Dead
 1 Cellar Door
+1 Gravecrawler
+1 Mikaeus, the Unhallowed
 [sideboard]

@@ -14,12 +14,12 @@ Deck Type=constructed
 1 Mox Sapphire
 4 Hedron Crab
 3 Mind Funeral
-5 Swamp|M12
+4 Swamp|M12
 2 Damnation
 9 Island|M12
+1 Nephalia Drownyard
 1 Ancestral Recall
-1 Divination
-2 Jace Beleren
+1 Jace Beleren
 3 Tome Scour
 2 Nemesis of Reason
 1 Time Walk
@@ -27,4 +27,6 @@ Deck Type=constructed
 4 Counterspell
 1 Mox Jet
 1 Szadek, Lord of Secrets
+1 Chancellor of the Spires
+1 Jace, Memory Adept
 [sideboard]
