@@ -782,7 +782,7 @@ public class ComputerUtilAttack {
                                             // wither or infect
         boolean isWorthLessThanAllKillers = true;
         boolean canBeBlocked = false;
-        boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE");
+        boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");
         int numberOfPossibleBlockers = 0;
 
         if (!this.isEffectiveAttacker(attacker, combat)) {

@@ -10,6 +10,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | Secondary$ True | Tr
 SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Choose target permanent. | SubAbility$ DBPump
 SVar:DBPump:DB$Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.
 SVar:TrigCounter:AB$Counter | Cost$ 0 | Defined$ TriggeredSourceSA | UnlessCost$ 2 | UnlessPayer$ TriggeredSourceSAController
+SVar:HasAttackEffect:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_titan.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/55.jpg

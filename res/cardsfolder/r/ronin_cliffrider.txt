@@ -6,6 +6,7 @@ PT:2/2
 K:Bushido 1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You| TriggerDescription$ Whenever CARDNAME attacks, you may have it deal 1 damage to each creature defending player controls.
 SVar:TrigDamage:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.YouDontCtrl | NumDmg$ 1| ValidDescription$ each creature defending player controls.
+SVar:HasAttackEffect:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ronin_cliffrider.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/116.jpg
