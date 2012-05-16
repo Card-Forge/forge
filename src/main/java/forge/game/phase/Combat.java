@@ -97,6 +97,8 @@ public class Combat {
 
         this.attackingPlayer = null;
         this.defendingPlayer = null;
+        this.currentDefender = 0;
+        this.nextDefender = 0;
 
         this.initiatePossibleDefenders(Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getOpponent());
     }
@@ -111,8 +113,6 @@ public class Combat {
      */
     public final void initiatePossibleDefenders(final Player defender) {
         this.defenders.clear();
-        this.currentDefender = 0;
-        this.nextDefender = 0;
         this.defenders.add(defender);
         CardList planeswalkers = defender.getCardsIn(ZoneType.Battlefield);
         planeswalkers = planeswalkers.getType("Planeswalker");
