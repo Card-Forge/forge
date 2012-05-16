@@ -518,7 +518,10 @@ public final class AbilityFactoryReveal {
                                     changeNum = valid.size(); // always take all
                                 }
                                 for (j = 0; j < changeNum; j++) {
-                                    final Card chosen = CardFactoryUtil.getBestAI(valid);
+                                    Card chosen = CardFactoryUtil.getBestAI(valid);
+                                    if (sa.getActivatingPlayer().isHuman() && p.isHuman()) {
+                                        chosen = CardFactoryUtil.getWorstAI(valid);
+                                    }
                                     if (chosen == null) {
                                         break;
                                     }

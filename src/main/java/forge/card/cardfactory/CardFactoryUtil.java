@@ -694,6 +694,19 @@ public class CardFactoryUtil {
         return biggest;
     }
 
+    /**
+     * <p>
+     * getWorstAI.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @return a {@link forge.Card} object.
+     */
+    public static Card getWorstAI(final CardList list) {
+        return CardFactoryUtil.getWorstPermanentAI(list, false, false, false, true);
+    }
+
     // returns null if list.size() == 0
     /**
      * <p>
