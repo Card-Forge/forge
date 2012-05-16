@@ -20,9 +20,6 @@ package forge.card.trigger;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
-
 import forge.Card;
 import forge.CardList;
 import forge.card.spellability.SpellAbility;
@@ -64,9 +61,7 @@ public class TriggerAttacks extends Trigger {
         }
 
         if (this.getMapParams().containsKey("Attacked")) {
-            if (this.getMapParams().get("Attacked").equals("Player")
-                    && StringUtils.isNumeric(runParams2.get("Attacked").toString())
-                    && (Integer.parseInt(runParams2.get("Attacked").toString()) > 0)) {
+            if (this.getMapParams().get("Attacked").equals("Player") && (Integer) runParams2.get("Attacked") > 0) {
                 return false;
             }
         }

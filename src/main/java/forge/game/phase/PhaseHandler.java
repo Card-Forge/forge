@@ -343,7 +343,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 break;
 
             case COMBAT_BEGIN:
-                PhaseUtil.verifyCombat();
+                //PhaseUtil.verifyCombat();
                 PhaseUtil.handleCombatBegin();
                 break;
 
