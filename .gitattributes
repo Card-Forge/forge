@@ -274,6 +274,7 @@ res/cardsfolder/a/ancient_spider.txt svneol=native#text/plain
 res/cardsfolder/a/ancient_spring.txt svneol=native#text/plain
 res/cardsfolder/a/ancient_stirrings.txt svneol=native#text/plain
 res/cardsfolder/a/ancient_tomb.txt svneol=native#text/plain
+res/cardsfolder/a/ancient_ziggurat.txt -text
 res/cardsfolder/a/andradite_leech.txt svneol=native#text/plain
 res/cardsfolder/a/angel_of_despair.txt svneol=native#text/plain
 res/cardsfolder/a/angel_of_flight_alabaster.txt -text
@@ -6052,6 +6053,7 @@ res/cardsfolder/m/myr_mindservant.txt -text
 res/cardsfolder/m/myr_moonvessel.txt svneol=native#text/plain
 res/cardsfolder/m/myr_propagator.txt svneol=native#text/plain
 res/cardsfolder/m/myr_quadropod.txt svneol=native#text/plain
+res/cardsfolder/m/myr_reservoir.txt -text
 res/cardsfolder/m/myr_retriever.txt svneol=native#text/plain
 res/cardsfolder/m/myr_servitor.txt -text
 res/cardsfolder/m/myr_sire.txt svneol=native#text/plain

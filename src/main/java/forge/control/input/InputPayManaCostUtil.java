@@ -92,6 +92,8 @@ public class InputPayManaCostUtil {
                 it.remove();
             } else if (AbilityFactory.isInstantSpeed(ma)) {
                 it.remove();
+            } else if (!ma.meetsManaRestrictions(sa, manaCost)) {
+                it.remove();
             }
 
             if (!skipExpress) {

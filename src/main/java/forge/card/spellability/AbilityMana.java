@@ -23,6 +23,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostUtil;
@@ -217,6 +218,58 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * <p>
+     * getManaRestrictions.
+     * </p>
+     * 
+     * @return a {@link java.lang.String} object.
+     */
+    public String getManaRestrictions() {
+        HashMap<String, String> mapParams = this.getAbilityFactory().getMapParams();
+        if (mapParams.containsKey("RestrictValid")) {
+            return mapParams.get("RestrictValid");
+        }
+        return null;
+    }
+
+    /**
+     * <p>
+     * meetsManaRestrictions.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param manaCost
+     *            a {@link forge.card.mana.ManaCost} object.
+     * @return a boolean.
+     */
+    public boolean meetsManaRestrictions(final SpellAbility sa, final ManaCost manaCost) {
+        String manaRestrictions = this.getManaRestrictions();
+        // No restrictions
+        if (manaRestrictions == null) {
+            return true;
+        }
+
+        // Loop over restrictions
+        for (final String restriction : manaRestrictions.split(",")) {
+            // add withXCost to Card.hasProperty for Rosheen Meanderer
+            if (restriction.startsWith("Activated")) {
+                if (!sa.isAbility()) {
+                    continue;
+                }
+                else {
+                    restriction.replace("Activated", "Card");
+                }
+            }
+            if (sa.getSourceCard().isValid(restriction, this.getActivatingPlayer(), this.getSourceCard())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
