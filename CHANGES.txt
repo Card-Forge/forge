@@ -120,6 +120,19 @@ Fixes/Features:
 - Fixed Iceberg.
 - Improved AI for Soulbond.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Reorganized some parts of digResolve (some more parameters now work together or without certain others).
+- add check for empty cost string
+- Fixed Endless Wurm.
+- Fixed Inquisitor's Flail.
+- ManaPaid back to Mana
+- Merged ManaCost upgrade from branch into trunk (r15546-15556)
+- remove warnings, removed manaparser
+- adding RestrictValid parameter support to AbilityMana and InputPayMAnaCostUtil
+- Fixed Trusted Advisor and similar cards.
+- adding RestrictValid parameter support to ComputerUtil to check restriction for AI
+- MyObservable - moved frequent calls to a variable, moved the very class to utils package
+- Added the AI SVar "HasAttackEffect".
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -155,6 +168,7 @@ Stigma Lasher
 Shaper Parasite
 Clear the Land
 Enslaved Horror
+Gift of the Gargantuan
 
 
 end
