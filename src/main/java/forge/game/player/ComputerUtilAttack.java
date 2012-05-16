@@ -782,6 +782,7 @@ public class ComputerUtilAttack {
                                             // wither or infect
         boolean isWorthLessThanAllKillers = true;
         boolean canBeBlocked = false;
+        boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE");
         int numberOfPossibleBlockers = 0;
 
         if (!this.isEffectiveAttacker(attacker, combat)) {
@@ -855,7 +856,7 @@ public class ComputerUtilAttack {
             }
         case 2: // attack expecting to attract a group block or destroying a
                 // single blocker and surviving
-            if ((canKillAll && !canBeKilledByOne) || !canBeBlocked) {
+            if (((canKillAll || hasAttackEffect) && !canBeKilledByOne) || !canBeBlocked) {
                 System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
                 return true;
             }
