@@ -769,6 +769,11 @@ public class ComputerUtil {
                     continue;
                 }
 
+                // Check for mana restrictions
+                if (!m.meetsManaRestrictions(sa, costPart)) {
+                    continue;
+                }
+
                 String manaProduced;
                 // Check if paying snow mana
                 if ("S".equals(costParts[nPart])) {
