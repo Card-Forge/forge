@@ -31,7 +31,6 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
 import forge.GameActionUtil;
-import forge.MyObservable;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -60,6 +59,7 @@ import forge.gui.GuiUtils;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
+import forge.util.MyObservable;
 import forge.view.ButtonUtil;
 
 /**

@@ -20,6 +20,8 @@ package forge;
 
 import java.util.ArrayList;
 
+import forge.util.MyObservable;
+
 
 /**
  * <p>

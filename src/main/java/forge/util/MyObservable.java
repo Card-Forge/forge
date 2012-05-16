@@ -15,9 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.util;
 
 import java.util.Observable;
+
+import forge.Singletons;
+import forge.game.phase.PhaseHandler;
 
 /**
  * <p>
@@ -38,12 +41,13 @@ public class MyObservable extends Observable {
         this.notifyObservers();
 
         if (Singletons.getModel() == null) { return; }
-
-        if ((Singletons.getModel().getGameState().getPhaseHandler() != null) && Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhase()) {
-            if (Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhaseInit()) {
+        PhaseHandler phases = Singletons.getModel().getGameState().getPhaseHandler(); 
+        
+        if ((phases != null) && phases.isNeedToNextPhase()) {
+            if (phases.isNeedToNextPhaseInit()) {
                 // this is used.
-                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
-                Singletons.getModel().getGameState().getPhaseHandler().nextPhase();
+                phases.setNeedToNextPhase(false);
+                phases.nextPhase();
             }
         }
     }

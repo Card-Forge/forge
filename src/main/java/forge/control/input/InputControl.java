@@ -21,13 +21,13 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 import forge.AllZone;
-import forge.MyObservable;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerAIInput;
 import forge.game.player.Player;
 import forge.gui.match.CMatchUI;
 import forge.model.FModel;
+import forge.util.MyObservable;
 
 /**
  * <p>
