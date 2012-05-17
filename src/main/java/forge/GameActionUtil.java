@@ -380,6 +380,14 @@ public final class GameActionUtil {
             }
             return;
         }
+        if (manaCost.equals("0")) {
+            if (showYesNoDialog(hostCard, "Do you want to pay 0?")) {
+                paid.execute();
+            } else {
+                unpaid.execute();
+            }
+            return;
+        }
         // temporarily disable the Resolve flag, so the user can payMana for the
         // resolving Ability
         final boolean bResolving = AllZone.getStack().getResolving();
