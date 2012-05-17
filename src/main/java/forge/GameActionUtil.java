@@ -131,8 +131,7 @@ public final class GameActionUtil {
                         while (cascadedCard == null) {
                             crd = topOfLibrary.get(count++);
                             revealed.add(crd);
-                            if ((!crd.isLand() && (CardUtil.getConvertedManaCost(crd.getManaCost()) < CardUtil
-                                    .getConvertedManaCost(cascCard.getManaCost())))) {
+                            if ((!crd.isLand() && (crd.getManaCost().getCMC() < cascCard.getManaCost().getCMC()))) {
                                 cascadedCard = crd;
                             }
 

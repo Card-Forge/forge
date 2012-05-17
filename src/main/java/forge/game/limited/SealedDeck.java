@@ -32,8 +32,11 @@ import forge.Constant;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
+import forge.card.CardColor;
 import forge.card.CardEdition;
+import forge.card.CardManaCost;
 import forge.card.UnOpenedProduct;
+import forge.card.mana.ManaCostShard;
 import forge.card.spellability.AbilityMana;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
@@ -352,23 +355,22 @@ public class SealedDeck {
                 // count each card color using mana costs
                 // TODO: count hybrid mana differently?
                 for (i = 0; i < deck.size(); i++) {
-                    final String mc = deck.get(i).getManaCost();
+                    final CardManaCost mc = deck.get(i).getManaCost();
 
                     // count each mana symbol in the mana cost
-                    for (int j = 0; j < mc.length(); j++) {
-                        final char c = mc.charAt(j);
-
-                        if (c == 'W') {
+                    for (ManaCostShard shard : mc.getShards()) {
+                        byte mask = shard.getColorMask();
+                        
+                        if ((mask & CardColor.WHITE) > 0 ) 
                             clrCnts[0].setCount(clrCnts[0].getCount() + 1);
-                        } else if (c == 'U') {
+                        if ((mask & CardColor.BLUE) > 0 ) 
                             clrCnts[1].setCount(clrCnts[1].getCount() + 1);
-                        } else if (c == 'B') {
+                        if ((mask & CardColor.BLACK) > 0 ) 
                             clrCnts[2].setCount(clrCnts[2].getCount() + 1);
-                        } else if (c == 'R') {
+                        if ((mask & CardColor.RED) > 0 ) 
                             clrCnts[3].setCount(clrCnts[3].getCount() + 1);
-                        } else if (c == 'G') {
+                        if ((mask & CardColor.GREEN) > 0 )
                             clrCnts[4].setCount(clrCnts[4].getCount() + 1);
-                        }
                     }
                 }
 

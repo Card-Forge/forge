@@ -20,12 +20,15 @@ package forge.gui.toolbox;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.CardManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.view.arcane.util.UI;
 
 /**
@@ -130,22 +133,27 @@ public class CardFaceSymbols {
      * @param y
      *            a int.
      */
-    public static void draw(Graphics g, String manaCost, int x, int y) {
-        if (manaCost.length() == 0) {
+    public static void draw(Graphics g, CardManaCost manaCost, int x, int y) {
+        if (manaCost.isEmpty()) {
             return;
         }
-        manaCost = UI.getDisplayManaCost(manaCost);
-        StringTokenizer tok = new StringTokenizer(manaCost, " ");
-        while (tok.hasMoreTokens()) {
-            String symbol = tok.nextToken();
-            Image image = MANA_IMAGES.get(symbol);
-            if (image == null) {
-                Log.info("Symbol not recognized \"" + symbol + "\" in mana cost: " + manaCost);
-                continue;
-            }
-            g.drawImage(image, x, y, null);
-            x += symbol.length() > 2 ? 10 : 14; // slash.png is only 10 pixels
-                                                // wide.
+        
+        
+        final int genericManaCost = manaCost.getGenericCost();
+        final boolean hasGeneric = (genericManaCost > 0) || manaCost.isPureGeneric();
+        final List<ManaCostShard> shards = manaCost.getShards();
+
+        int xpos = x;
+        final int offset = 14;
+        if (hasGeneric) {
+            final String sGeneric = Integer.toString(genericManaCost);
+            CardFaceSymbols.drawSymbol(sGeneric, g, xpos, y);
+            xpos += offset;
+        }
+
+        for (final ManaCostShard s : shards) {
+            CardFaceSymbols.drawSymbol(s.getImageKey(), g, xpos, y);
+            xpos += offset;
         }
     }
 
@@ -224,14 +232,19 @@ public class CardFaceSymbols {
      *            a {@link java.lang.String} object.
      * @return a int.
      */
-    public static int getWidth(final String manaCost) {
-        int width = 0;
+    public static int getWidth(final CardManaCost manaCost) {
+        int width = manaCost.getShards().size();
+        if ( manaCost.getGenericCost() > 0 || ( manaCost.getGenericCost() == 0 && width == 0 ) );
+            width++;
+
+        /*
         StringTokenizer tok = new StringTokenizer(manaCost, " ");
         while (tok.hasMoreTokens()) {
             String symbol = tok.nextToken();
             width += symbol.length() > 2 ? 10 : 14; // slash.png is only 10
                                                     // pixels wide.
         }
-        return width;
+        */
+        return width * 14;
     }
 }

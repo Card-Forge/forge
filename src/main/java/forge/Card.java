@@ -34,6 +34,7 @@ import java.util.TreeMap;
 import com.esotericsoftware.minlog.Log;
 
 import forge.card.CardCharacteristics;
+import forge.card.CardManaCost;
 import forge.card.EditionInfo;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -1587,7 +1588,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param s
      *            a {@link java.lang.String} object.
      */
-    public final void setManaCost(final String s) {
+    public final void setManaCost(final CardManaCost s) {
         this.getCharacteristics().setManaCost(s);
     }
 
@@ -1598,7 +1599,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final String getManaCost() {
+    public final CardManaCost getManaCost() {
         return this.getCharacteristics().getManaCost();
     }
 
@@ -1775,7 +1776,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public final int getCMC() {
-        return CardUtil.getConvertedManaCost(this.getCharacteristics().getManaCost());
+        return this.getCharacteristics().getManaCost().getCMC();
     }
 
     /**
@@ -7055,7 +7056,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.equals("CostsPhyrexianMana")) {
-            if (!this.getCharacteristics().getManaCost().contains("P")) {
+            if (!this.getCharacteristics().getManaCost().hasPhyrexian()) {
                 return false;
             }
         } else if (property.equals("IsRemembered")) {

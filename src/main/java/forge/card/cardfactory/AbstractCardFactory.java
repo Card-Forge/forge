@@ -406,7 +406,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         final String cardName = card.getName();
 
         if (!card.isCardColorsOverridden()) {
-            card.addColor(card.getManaCost());
+            card.addColor(card.getManaCost().toString());
         }
         // may have to change the spell
 

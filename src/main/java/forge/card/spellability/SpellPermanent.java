@@ -323,15 +323,13 @@ public class SpellPermanent extends Spell {
                 final CardList creatures = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
                 final CardList creatures2 = new CardList();
                 for (int i = 0; i < creatures.size(); i++) {
-                    if (creatures.get(i).isCreature()
-                            && (CardUtil.getConvertedManaCost(creatures.get(i).getManaCost()) <= 3)) {
+                    if (creatures.get(i).isCreature() && creatures.get(i).getManaCost().getCMC() <= 3) {
                         creatures2.add(creatures.get(i));
                     }
                 }
                 if (((creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0))
                         .size()) > 1)
-                        && card.isCreature()
-                        && (CardUtil.getConvertedManaCost(card.getManaCost()) <= 3)) {
+                        && card.isCreature() && card.getManaCost().getCMC() <= 3) {
                     wait = false;
                 }
             } // AI Improvement for Vengevine Beached As End
