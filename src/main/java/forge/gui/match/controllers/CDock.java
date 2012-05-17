@@ -68,7 +68,7 @@ public enum CDock implements ICDoc {
     public void endTurn() {
         Singletons.getModel().getGameState().getPhaseHandler().autoPassToCleanup();
     }
-    
+
     private void revertLayout() {
         SOverlayUtils.genericOverlay();
         FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
@@ -83,16 +83,16 @@ public enum CDock implements ICDoc {
         };
         w.execute();
     }
-    
+
     private void saveLayout() {
-        final SwingWorker<Void,Void> w = new SwingWorker<Void,Void>() {
+        final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
             @Override
             public Void doInBackground() {
-                SaveOpenDialog dlgSave = new SaveOpenDialog();
-                File DefFile = new File(SIOUtil.FILE_PREFERRED);
-                File SaveFile = dlgSave.SaveDialog(DefFile, Filetypes.LAYOUT);
-                if (SaveFile!=null) {
-                    SIOUtil.saveLayout(SaveFile);
+                final SaveOpenDialog dlgSave = new SaveOpenDialog();
+                final File defFile = new File(SIOUtil.FILE_PREFERRED);
+                final File saveFile = dlgSave.SaveDialog(defFile, Filetypes.LAYOUT);
+                if (saveFile != null) {
+                    SIOUtil.saveLayout(saveFile);
                 }
                 return null;
             }
@@ -103,26 +103,24 @@ public enum CDock implements ICDoc {
     private void openLayout() {
         SOverlayUtils.genericOverlay();
         FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
-        
-        
-        final SwingWorker<Void,Void> w = new SwingWorker<Void,Void>() {
+
+        final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
             @Override
             public Void doInBackground() {
-                SaveOpenDialog dlgOpen = new SaveOpenDialog();
-                File DefFile = new File(SIOUtil.FILE_PREFERRED);
-                File LoadFile = dlgOpen.OpenDialog(DefFile, Filetypes.LAYOUT);
-            
-                if (LoadFile!=null) {
-                    SIOUtil.loadLayout(LoadFile);
+                final SaveOpenDialog dlgOpen = new SaveOpenDialog();
+                final File defFile = new File(SIOUtil.FILE_PREFERRED);
+                final File loadFile = dlgOpen.OpenDialog(defFile, Filetypes.LAYOUT);
+
+                if (loadFile != null) {
+                    SIOUtil.loadLayout(loadFile);
                     SIOUtil.saveLayout(null);
                 }
-                
+
                 SOverlayUtils.hideOverlay();
                 return null;
             }
         };
-        w.execute();         
-                
+        w.execute();
     }
 
     /**
@@ -244,12 +242,12 @@ public enum CDock implements ICDoc {
         .addMouseListener(new MouseAdapter() { @Override
             public void mousePressed(final MouseEvent e) {
                 revertLayout(); } });
-        
+
         VDock.SINGLETON_INSTANCE.getBtnOpenLayout()
         .addMouseListener(new MouseAdapter() { @Override
             public void mousePressed(final MouseEvent e) {
                 openLayout(); } });
-        
+
         VDock.SINGLETON_INSTANCE.getBtnSaveLayout()
         .addMouseListener(new MouseAdapter() { @Override
             public void mousePressed(final MouseEvent e) {
