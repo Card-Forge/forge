@@ -553,7 +553,7 @@ public final class AbilityFactoryReveal {
                         if (zone.is(ZoneType.Library)) {
                             Singletons.getModel().getGameAction().moveToLibrary(c, libraryPosition);
                         } else {
-                            Singletons.getModel().getGameAction().moveTo(zone, c);
+                            c = Singletons.getModel().getGameAction().moveTo(zone, c);
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 for (final String kw : keywords) {
                                     c.addExtrinsicKeyword(kw);
