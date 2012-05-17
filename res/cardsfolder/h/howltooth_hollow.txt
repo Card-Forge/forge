@@ -1,9 +1,9 @@
 Name:Howltooth Hollow
 ManaCost:no cost
 Types:Land
-Text:Hideaway
-K:CARDNAME enters the battlefield tapped.
-T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.
+Text:no text
+K:Hideaway
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.
 SVar:TrigDig:AB$ Dig | Cost$ 0  | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 A:AB$ Play | Cost$ B T | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ Hands | ConditionSVarCompare$ EQ0 | ForgetRemembered$ True | SpellDescription$ You may play the exiled card without paying its mana cost if each player has no cards in hand.
