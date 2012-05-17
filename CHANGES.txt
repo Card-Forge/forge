@@ -133,6 +133,18 @@ Fixes/Features:
 - MyObservable - moved frequent calls to a variable, moved the very class to utils package
 - Added the AI SVar "HasAttackEffect".
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added "SVar:HasAttackEffect:TRUE" to some cards.
+- Added "SVar:HasAttackEffect:TRUE" to two more cards.
+- Updated some decks with new cards.
+- Fixed a bug with initiatePossibleDefenders.
+- More Cleanup in Combat class.
+- Added a medium version of the Radiant deck.
+- Updated three decks with new cards.
+- Improved AI of AF Dig.
+- Cleanup in AF Dig.
+- Checkstyle fixes to CDock.
+- CardCharacteristics stores manacost as CardManaCost instead of String
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
