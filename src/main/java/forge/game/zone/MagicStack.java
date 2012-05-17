@@ -239,6 +239,21 @@ public class MagicStack extends MyObservable {
 
     /**
      * <p>
+     * removeFromFrozenStack.
+     * </p>
+     * @param sa
+     *            a SpellAbility.
+     */
+    public final void removeFromFrozenStack(SpellAbility sa) {
+        SpellAbilityStackInstance si = this.getInstanceFromSpellAbility(sa);
+        this.getFrozenStack().remove(si);
+        if (this.getFrozenStack().isEmpty()) {
+            clearFrozen();
+        }
+    }
+
+    /**
+     * <p>
      * setResolving.
      * </p>
      * 
