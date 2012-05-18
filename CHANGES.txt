@@ -189,7 +189,7 @@ Abundance
 Acorn Catapult
 Howltooth Hollow
 Shelldock Isle
-Sledge Sliver
+Sedge Sliver
 
 
 end

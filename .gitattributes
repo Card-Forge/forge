@@ -10622,6 +10622,7 @@ res/cardsfolder/w/withered_wretch.txt svneol=native#text/plain
 res/cardsfolder/w/withering_boon.txt svneol=native#text/plain
 res/cardsfolder/w/withering_gaze.txt svneol=native#text/plain
 res/cardsfolder/w/withering_hex.txt svneol=native#text/plain
+res/cardsfolder/w/withering_wisps.txt -text
 res/cardsfolder/w/witherscale_wurm.txt -text svneol=unset#text/plain
 res/cardsfolder/w/withstand.txt svneol=native#text/plain
 res/cardsfolder/w/withstand_death.txt svneol=native#text/plain
