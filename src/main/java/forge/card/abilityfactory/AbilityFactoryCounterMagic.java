@@ -403,7 +403,7 @@ public class AbilityFactoryCounterMagic {
 
         if (this.params.containsKey("ForgetOtherTargets")) {
             if (this.params.get("ForgetOtherTargets").equals("True")) {
-                af.getHostCard().clearRemembered();
+                sa.getSourceCard().clearRemembered();
             }
         }
 
@@ -428,7 +428,7 @@ public class AbilityFactoryCounterMagic {
 
             if (this.params.containsKey("RememberTargets")) {
                 if (this.params.get("RememberTargets").equals("True")) {
-                    af.getHostCard().addRemembered(tgtSACard);
+                    sa.getSourceCard().addRemembered(tgtSACard);
                 }
             }
         }

@@ -207,8 +207,8 @@ public class AbilityFactoryCounters {
         }
 
         final Counters cType = Counters.valueOf(params.get("CounterType"));
-        final Card card = af.getHostCard();
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+        final Card card = sa.getSourceCard();
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
 
         sb.append("Put ");
         if (params.containsKey("UpTo")) {
@@ -328,7 +328,7 @@ public class AbilityFactoryCounters {
         }
 
         // TODO handle proper calculation of X values based on Cost
-        int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+        int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -428,7 +428,7 @@ public class AbilityFactoryCounters {
         Card choice = null;
         final String type = params.get("CounterType");
         final String amountStr = params.get("CounterNum");
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
 
@@ -533,7 +533,7 @@ public class AbilityFactoryCounters {
         final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
         final String type = params.get("CounterType");
         final String amountStr = params.get("CounterNum");
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         if (abTgt == null) {
             // No target. So must be defined
@@ -689,9 +689,9 @@ public class AbilityFactoryCounters {
     private static void putResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
 
-        final Card card = af.getHostCard();
+        final Card card = sa.getSourceCard();
         final String type = params.get("CounterType");
-        int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+        int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
         final int max = params.containsKey("MaxFromEffect") ? Integer.parseInt(params.get("MaxFromEffect")) : -1;
 
         if (params.containsKey("UpTo")) {
@@ -862,7 +862,7 @@ public class AbilityFactoryCounters {
      */
     private static String removeStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card card = af.getHostCard();
+        final Card card = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
 
         if (!(sa instanceof AbilitySub)) {
@@ -873,7 +873,7 @@ public class AbilityFactoryCounters {
 
         final String counterName = params.get("CounterType");
 
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
 
         sb.append("Remove ");
         if (params.containsKey("UpTo")) {
@@ -968,7 +968,7 @@ public class AbilityFactoryCounters {
         }
 
         // TODO handle proper calculation of X values based on Cost
-        // final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
+        // final int amount = calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
@@ -1023,7 +1023,7 @@ public class AbilityFactoryCounters {
         // AllZone.getComputerPlayer();
 
         // TODO handle proper calculation of X values based on Cost
-        // final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
+        // final int amount = calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         // prevent run-away activations - first time will always return true
         boolean chance = true;
@@ -1088,9 +1088,9 @@ public class AbilityFactoryCounters {
     private static void removeResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
 
-        final Card card = af.getHostCard();
+        final Card card = sa.getSourceCard();
         final String type = params.get("CounterType");
-        int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+        int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
 
         ArrayList<Card> tgtCards;
 
@@ -1420,7 +1420,7 @@ public class AbilityFactoryCounters {
         CardList hperms = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         CardList cperms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
-        if (af.getHostCard().getController().isHuman()) {
+        if (sa.getSourceCard().getController().isHuman()) {
             cperms.addAll(hperms);
             final CardList unchosen = cperms;
             AllZone.getInputControl().setInput(new Input() {
@@ -1699,7 +1699,7 @@ public class AbilityFactoryCounters {
         }
 
         final Counters cType = Counters.valueOf(params.get("CounterType"));
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
 
         sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
         if (amount != 1) {
@@ -1785,7 +1785,7 @@ public class AbilityFactoryCounters {
             amount = ComputerUtil.determineLeftoverMana(sa);
             source.setSVar("PayX", Integer.toString(amount));
         } else {
-            amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
         }
 
         // prevent run-away activations - first time will always return true
@@ -1875,7 +1875,7 @@ public class AbilityFactoryCounters {
         final HashMap<String, String> params = af.getMapParams();
 
         final String type = params.get("CounterType");
-        final int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+        final int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
         final String valid = params.get("ValidCards");
 
         CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
@@ -2030,7 +2030,7 @@ public class AbilityFactoryCounters {
         }
 
         final Counters cType = Counters.valueOf(params.get("CounterType"));
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
         String amountString = Integer.toString(amount);
 
         if (params.containsKey("AllCounters")) {
@@ -2098,7 +2098,7 @@ public class AbilityFactoryCounters {
         final HashMap<String, String> params = af.getMapParams();
 
         final String type = params.get("CounterType");
-        int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+        int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
         final String valid = params.get("ValidCards");
 
         CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
@@ -2243,7 +2243,7 @@ public class AbilityFactoryCounters {
     private static String moveCounterStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
 
         if (sa instanceof AbilitySub) {
             sb.append(" ");
@@ -2266,7 +2266,7 @@ public class AbilityFactoryCounters {
         }
 
         final Counters cType = Counters.valueOf(params.get("CounterType"));
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
 
         sb.append("Move ").append(amount).append(" ").append(cType.getName()).append(" counter");
         if (amount != 1) {
@@ -2305,7 +2305,7 @@ public class AbilityFactoryCounters {
         final String amountStr = params.get("CounterNum");
 
         // TODO handle proper calculation of X values based on Cost
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         // don't use it if no counters to add
         if (amount <= 0) {
@@ -2365,7 +2365,7 @@ public class AbilityFactoryCounters {
     private static boolean moveCounterDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
         final Target abTgt = sa.getTarget();
         final String type = params.get("CounterType");
         final String amountStr = params.get("CounterNum");
@@ -2469,7 +2469,7 @@ public class AbilityFactoryCounters {
         final Card host = af.getHostCard();
 
         final Counters cType = Counters.valueOf(params.get("CounterType"));
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
 
         final ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
         Card source = null;
