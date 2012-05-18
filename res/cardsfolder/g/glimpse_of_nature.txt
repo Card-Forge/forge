@@ -3,7 +3,7 @@ ManaCost:G
 Types:Sorcery
 Text:no text
 A:SP$ Effect | Cost$ G | Name$ Glimpse of Nature Effect | Triggers$ CreatureSpell | SVars$ TrigDraw | SpellDescription$ Whenever you cast a creature spell this turn, draw a card.
-SVar:CreatureSpell:Mode$ SpellCast | ValidCard$ Creature.YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell this turn, draw a card.
+SVar:CreatureSpell:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell this turn, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:PlayMain1:TRUE

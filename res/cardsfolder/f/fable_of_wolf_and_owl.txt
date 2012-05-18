@@ -2,8 +2,8 @@ Name:Fable of Wolf and Owl
 ManaCost:3 GU GU GU
 Types:Enchantment
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Card.Green+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigWolf | TriggerDescription$ Whenever you cast a green spell, you may put a 2/2 green Wolf creature token onto the battlefield.
-T:Mode$ SpellCast | ValidCard$ Card.Blue+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigBird | TriggerDescription$ Whenever you cast a blue spell, you may put a 1/1 blue Bird creature token with flying onto the battlefield.
+T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigWolf | TriggerDescription$ Whenever you cast a green spell, you may put a 2/2 green Wolf creature token onto the battlefield.
+T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigBird | TriggerDescription$ Whenever you cast a blue spell, you may put a 1/1 blue Bird creature token with flying onto the battlefield.
 SVar:TrigWolf:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2
 SVar:TrigBird:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:BuffedBy:Card.Green,Card.Blue
