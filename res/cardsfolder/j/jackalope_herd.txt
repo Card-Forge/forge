@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Creature Rabbit Beast
 Text:no text
 PT:4/5
-T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When you cast a spell, return CARDNAME to its owner's hand.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When you cast a spell, return CARDNAME to its owner's hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Rarity:Common

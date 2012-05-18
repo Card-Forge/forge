@@ -20,7 +20,7 @@ Colors:Red
 Types:Creature Werewolf
 Text:no text
 PT:5/5
-T:Mode$ SpellCast | ValidCard$ Card.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever an opponent casts a spell, CARDNAME deals 2 damage to that player.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever an opponent casts a spell, CARDNAME deals 2 damage to that player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 2
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:Picture1:http://www.wizards.com/global/images/magic/general/tovolars_magehunter.jpg

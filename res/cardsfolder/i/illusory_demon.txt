@@ -4,7 +4,7 @@ Types:Creature Demon Illusion
 Text:no text
 PT:4/3
 K:Flying
-T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you cast a spell, sacrifice CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you cast a spell, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Self
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

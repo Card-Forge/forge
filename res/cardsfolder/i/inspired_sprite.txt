@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Flash
 K:Flying
-T:Mode$ SpellCast | ValidCard$ Wizard.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a Wizard spell, you may untap CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Wizard | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a Wizard spell, you may untap CARDNAME.
 A:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
