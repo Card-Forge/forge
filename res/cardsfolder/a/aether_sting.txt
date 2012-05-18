@@ -2,8 +2,8 @@ Name:AEther Sting
 ManaCost:3 R
 Types:Enchantment
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Creature | ValidControllingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever an opponent casts a creature spell, CARDNAME deals 1 damage to that player.
-SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ 1
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever an opponent casts a creature spell, CARDNAME deals 1 damage to that player.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredActivator | NumDmg$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_sting.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/76.jpg

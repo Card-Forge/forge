@@ -3,7 +3,8 @@ ManaCost:2 U
 Types:Enchantment
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a player casts a creature spell, that player sacrifices a permanent unless he or she pays 1.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | UnlessCost$ 1 | UnlessPayer$ TriggeredPlayer | Defined$ TriggeredPlayer | SacValid$ Permanent
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | UnlessCost$ 1 | UnlessPayer$ TriggeredActivator | Defined$ TriggeredActivator | SacValid$ Permanent
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_barrier.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/27.jpg

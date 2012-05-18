@@ -5,7 +5,7 @@ Text:no text
 PT:6/6
 K:Unblockable
 K:Suspend:9:2 U
-T:Mode$ SpellCast | ValidCard$ Card.YouDontCtrl | Execute$ TrigRemoveCounter | IsPresent$ Card.counters_GE1_TIME+Self | PresentZone$ Exile | TriggerDescription$ Whenever an opponent casts a spell, if CARDNAME is suspended, remove a time counter from it.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | Execute$ TrigRemoveCounter | IsPresent$ Card.counters_GE1_TIME+Self | PresentZone$ Exile | TriggerDescription$ Whenever an opponent casts a spell, if CARDNAME is suspended, remove a time counter from it.
 SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ TIME | CounterNum$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_sea_kraken.jpg

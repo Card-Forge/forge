@@ -2,7 +2,7 @@ Name:Cloven Casting
 ManaCost:5 U R
 Types:Enchantment
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Instant.MultiColor,Sorcery.MultiColor | ValidControllingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a multicolored instant or sorcery spell, you may pay 1. If you do, copy that spell. You may choose new targets for the copy.
+T:Mode$ SpellCast | ValidCard$ Instant.MultiColor,Sorcery.MultiColor | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a multicolored instant or sorcery spell, you may pay 1. If you do, copy that spell. You may choose new targets for the copy.
 SVar:TrigCopy:AB$ CopySpell | Cost$ 1 | Defined$ TriggeredSpellAbility
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
