@@ -2,7 +2,7 @@ Name:Sphinx-Bone Wand
 ManaCost:7
 Types:Artifact
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may put a charge counter on CARDNAME. If you do, CARDNAME deals damage equal to the number of charge counters on it to target creature or player.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may put a charge counter on CARDNAME. If you do, CARDNAME deals damage equal to the number of charge counters on it to target creature or player.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$DealDamage | Tgt$ TgtCP | NumDmg$ X
 SVar:X:Count$CardCounters.CHARGE

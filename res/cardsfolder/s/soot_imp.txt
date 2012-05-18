@@ -5,7 +5,7 @@ Text:no text
 PT:1/2
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Card.nonBlack | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a nonblack spell, that player loses 1 life.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 1
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredActivator | LifeAmount$ 1
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soot_imp.jpg

@@ -2,7 +2,7 @@ Name:Presence of the Master
 ManaCost:3 W
 Types:Enchantment
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Card.Enchantment | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a player casts an enchantment spell, counter it.
+T:Mode$ SpellCast | ValidCard$ Enchantment | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a player casts an enchantment spell, counter it.
 SVar:TrigCounter:AB$Counter | Cost$ 0 | Defined$ TriggeredSpellAbility
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

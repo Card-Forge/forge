@@ -4,7 +4,7 @@ Types:Sorcery
 Text:no text
 A:SP$Effect | Cost$ R | Name$ Overmaster effect | Triggers$ SpellCastTrig | SVars$ Mastery,DBCleanup | SubAbility$ DBDraw | SpellDescription$ The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidControllingPlayer$ You | Execute$ Mastery | TriggerDescription$ The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.
+SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ Mastery | TriggerDescription$ The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.
 SVar:Mastery:AB$ Pump | Cost$ 0 | Defined$ TriggeredCard | KW$ HIDDEN CARDNAME can't be countered. | PumpZone$ Stack | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Graveyard
 SVar:RemAIDeck:True

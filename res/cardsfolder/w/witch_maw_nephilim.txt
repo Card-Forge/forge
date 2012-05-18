@@ -3,7 +3,7 @@ ManaCost:G W U B
 Types:Creature Nephilim
 Text:Whenever CARDNAME attacks, it gains trample until end of turn if its power is 10 or greater.
 PT:1/1
-T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell, you may put two +1/+1 counters on CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell, you may put two +1/+1 counters on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
 SVar:BuffedBy:Card
 SVar:Rarity:Rare

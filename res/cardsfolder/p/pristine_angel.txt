@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self+untapped | AddKeyword$ Protection from artifacts & Protection from white & Protection from blue & Protection from black & Protection from red & Protection from green | Description$ As long as CARDNAME is untapped, it has protection from artifacts and from all colors.
-T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a spell, you may untap CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a spell, you may untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pristine_angel.jpg

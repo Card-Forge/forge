@@ -4,7 +4,7 @@ Types:Creature Djinn
 Text:no text
 PT:5/5
 K:Flying
-T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever you cast a spell, return target permanent to its owner's hand.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever you cast a spell, return target permanent to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidespout_tyrant.jpg

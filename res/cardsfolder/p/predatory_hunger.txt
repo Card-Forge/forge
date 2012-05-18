@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
-T:Mode$ SpellCast | ValidCard$ Creature.YouDontCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts a creature spell, put a +1/+1 counter on enchanted creature.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts a creature spell, put a +1/+1 counter on enchanted creature.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predatory_hunger.jpg
