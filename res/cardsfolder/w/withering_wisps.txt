@@ -7,6 +7,7 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 A:AB$ DamageAll | Cost$ B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | ActivationLimit$ X | SpellDescription$ CARDNAME deals 1 damage to each creature and each player. Activate this ability no more times each turn than the number of snow Swamps you control.
 SVar:X:Count$Valid Swamp.Snow+YouCtrl
 SVar:NeedsToPlay:Creature
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withering_wisps.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/56.jpg
