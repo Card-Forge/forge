@@ -23,6 +23,7 @@ b_3_3_angel.jpg                        http://www.cardforge.org/fpics/tokens/b_3
 b_3_3_kavu.jpg                         http://www.cardforge.org/fpics/tokens/b_3_3_kavu.jpg
 b_4_4_horror.jpg                       http://www.cardforge.org/fpics/tokens/b_4_4_horror.jpg
 b_5_5_demon.jpg                        http://www.cardforge.org/fpics/tokens/b_5_5_demon.jpg
+b_5_5_demon_avr.jpg                    http://www.cardforge.org/fpics/tokens/b_5_5_demon_avr.jpg
 b_5_5_urami.jpg                        http://www.cardforge.org/fpics/tokens/b_5_5_urami.jpg
 b_5_5_zombie_giant.jpg                 http://www.cardforge.org/fpics/tokens/b_5_5_zombie_giant.jpg
 b_6_6_wurm.jpg                         http://www.cardforge.org/fpics/tokens/b_6_6_wurm.jpg
@@ -123,6 +124,7 @@ r_1_1_elemental_cat.jpg                http://www.cardforge.org/fpics/tokens/r_1
 r_1_1_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_1_1_elemental.jpg
 r_1_1_goblin.jpg                       http://www.cardforge.org/fpics/tokens/r_1_1_goblin.jpg
 r_1_1_goblin_scout.jpg                 http://www.cardforge.org/fpics/tokens/r_1_1_goblin_scout.jpg
+r_1_1_human_avr.jpg                    http://www.cardforge.org/fpics/tokens/r_1_1_human_avr.jpg 
 r_1_1_survivor.jpg                     http://www.cardforge.org/fpics/tokens/r_1_1_survivor.jpg
 r_2_1_goblin.jpg                       http://www.cardforge.org/fpics/tokens/r_2_1_goblin.jpg
 r_3_1_carnivore.jpg                    http://www.cardforge.org/fpics/tokens/r_3_1_carnivore.jpg
@@ -150,6 +152,7 @@ u_1_1_faerie.jpg                       http://www.cardforge.org/fpics/tokens/u_1
 u_1_1_illusion.jpg                     http://www.cardforge.org/fpics/tokens/u_1_1_illusion.jpg
 u_1_1_merfolk_wizard.jpg               http://www.cardforge.org/fpics/tokens/u_1_1_merfolk_wizard.jpg
 u_1_1_thopter.jpg                      http://www.cardforge.org/fpics/tokens/u_1_1_thopter.jpg
+u_1_1_spirit_avr.jpg                   http://www.cardforge.org/fpics/tokens/u_1_1_spirit_avr.jpg
 u_2_2_elemental_flying.jpg             http://www.cardforge.org/fpics/tokens/u_2_2_elemental_flying.jpg
 u_2_2_homunculus.jpg                   http://www.cardforge.org/fpics/tokens/u_2_2_homunculus.jpg
 u_2_2_illusion.jpg                     http://www.cardforge.org/fpics/tokens/u_2_2_illusion.jpg
@@ -168,12 +171,14 @@ w_1_1_bird_soldier.jpg                 http://www.cardforge.org/fpics/tokens/w_1
 w_1_1_citizen.jpg                      http://www.cardforge.org/fpics/tokens/w_1_1_citizen.jpg
 w_1_1_goldmeadow_harrier.jpg           http://www.cardforge.org/fpics/tokens/w_1_1_goldmeadow_harrier.jpg
 w_1_1_human_dka.jpg                    http://www.cardforge.org/fpics/tokens/w_1_1_human_dka.jpg 
+w_1_1_human_avr.jpg                    http://www.cardforge.org/fpics/tokens/w_1_1_human_avr.jpg 
 w_1_1_kithkin_soldier.jpg              http://www.cardforge.org/fpics/tokens/w_1_1_kithkin_soldier.jpg
 w_1_1_kor_soldier.jpg                  http://www.cardforge.org/fpics/tokens/w_1_1_kor_soldier.jpg
 w_1_1_pegasus.jpg                      http://www.cardforge.org/fpics/tokens/w_1_1_pegasus.jpg
 w_1_1_soldier.jpg                      http://www.cardforge.org/fpics/tokens/w_1_1_soldier.jpg
 w_1_1_soldier_ally.jpg                 http://www.cardforge.org/fpics/tokens/w_1_1_soldier_ally.jpg
 w_1_1_spirit.jpg                       http://www.cardforge.org/fpics/tokens/w_1_1_spirit.jpg
+w_1_1_spirit_avr.jpg                   http://www.cardforge.org/fpics/tokens/w_1_1_spirit_avr.jpg
 w_2_2_cat.jpg                          http://www.cardforge.org/fpics/tokens/w_2_2_cat.jpg
 w_2_2_griffin.jpg                      http://www.cardforge.org/fpics/tokens/w_2_2_griffin.jpg
 w_2_2_knight.jpg                       http://www.cardforge.org/fpics/tokens/w_2_2_knight.jpg
@@ -182,6 +187,7 @@ w_2_2_reflection.jpg                   http://www.cardforge.org/fpics/tokens/w_2
 w_3_3_bird.jpg                         http://www.cardforge.org/fpics/tokens/w_3_3_bird.jpg
 w_3_3_spirit.jpg                       http://www.cardforge.org/fpics/tokens/w_3_3_spirit.jpg
 w_4_4_angel.jpg                        http://www.cardforge.org/fpics/tokens/w_4_4_angel.jpg
+w_4_4_angel_avr.jpg                    http://www.cardforge.org/fpics/tokens/w_4_4_angel_avr.jpg
 w_4_4_elemental.jpg                    http://www.cardforge.org/fpics/tokens/w_4_4_elemental.jpg
 w_5_5_giant_warrior.jpg                http://www.cardforge.org/fpics/tokens/w_5_5_giant_warrior.jpg
 w_n_n_avatar.jpg                       http://www.cardforge.org/fpics/tokens/w_n_n_avatar.jpg
@@ -195,7 +201,8 @@ chandra_the_firebrand_effect.jpg       http://www.cardforge.org/fpics/effects/ch
 elspeth_knight_errant_emblem.jpg       http://www.cardforge.org/fpics/effects/elspeth_knight_errant_emblem.jpg
 koth_of_the_hammer_emblem.jpg          http://www.cardforge.org/fpics/effects/koth_of_the_hammer_emblem.jpg
 sorin_lord_of_innistrad_emblem.jpg     http://www.cardforge.org/fpics/effects/sorin_lord_of_innistrad_effect.jpg
-venser_the_sojourner_emblem.jpg        http://www.cardforge.org/fpics/effects/venser_the_sojourner_emblem.jpg
+tamiyo_moon_sage_emblem.jpg            http://www.cardforge.org/fpics/effects/sorin_lord_of_innistrad_effect.jpg
+venser_the_sojourner_emblem.jpg        http://www.cardforge.org/fpics/effects/tamiyo-the-moon-sage-emblem.jpg
 morph.jpg                              http://www.cardforge.org/fpics/effects/morph.jpg
 
 # //These tokens are not currently used by any cards in Forge, but links provided should they be scripted so the correct name is used:
