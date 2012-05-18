@@ -145,6 +145,10 @@ Fixes/Features:
 - Checkstyle fixes to CDock.
 - CardCharacteristics stores manacost as CardManaCost instead of String
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Sludge Strider's 'leaves the battlefield' trigger.
+- Quick fix for unless costs of zero mana.
+- A triggered ability that fails targeting will no longer clear the whole frozen stack (only its own stack instance).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -181,6 +185,11 @@ Shaper Parasite
 Clear the Land
 Enslaved Horror
 Gift of the Gargantuan
+Abundance
+Acorn Catapult
+Howltooth Hollow
+Shelldock Isle
+Sledge Sliver
 
 
 end
