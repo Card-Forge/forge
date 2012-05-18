@@ -372,10 +372,6 @@ public class TriggerHandler {
         }
 
         //System.out.println( "  " + regtrig.getMode().toString() + "@" + regtrig.getHostCard() + "> " + TextUtil.mapToString(params));
-
-        if (!regtrig.zonesCheck(AllZone.getZoneOf(regtrig.getHostCard()))) {
-            return false; // Host card isn't where it needs to be.
-        }
         if (!regtrig.phasesCheck()) {
             return false; // It's not the right phase to go off.
         }
@@ -398,14 +394,17 @@ public class TriggerHandler {
         if (regtrig.isSuppressed()) {
             return false; // Trigger removed by effect
         }
+        if (!regtrig.zonesCheck(AllZone.getZoneOf(regtrig.getHostCard()))) {
+            return false; // Host card isn't where it needs to be.
+        }
 
         // Torpor Orb check
-        if (mode.equals(TriggerType.ChangesZone) && AllZoneUtil.isCardInPlay("Torpor Orb")) {
+        if (mode.equals(TriggerType.ChangesZone)) {
             if (runParams.get("Destination") instanceof String) {
                 String dest = (String) runParams.get("Destination");
                 if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
                     Card card = (Card) runParams.get("Card");
-                    if (card.isCreature()) {
+                    if (card.isCreature() && AllZoneUtil.isCardInPlay("Torpor Orb")) {
                         return false;
                     }
                 }
