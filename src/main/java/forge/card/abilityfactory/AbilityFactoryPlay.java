@@ -408,6 +408,9 @@ public final class AbilityFactoryPlay {
                 }
                 continue;
             }
+            if (params.containsKey("ForgetRemembered")) {
+                source.clearRemembered();
+            }
             // lands will be played
             if (tgtCard.isLand()) {
                 controller.playLand(tgtCard);
