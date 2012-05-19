@@ -2219,6 +2219,7 @@ res/cardsfolder/d/desert_nomads.txt svneol=native#text/plain
 res/cardsfolder/d/desert_sandstorm.txt svneol=native#text/plain
 res/cardsfolder/d/desert_twister.txt svneol=native#text/plain
 res/cardsfolder/d/deserted_temple.txt svneol=native#text/plain
+res/cardsfolder/d/desertion.txt -text
 res/cardsfolder/d/desolate_lighthouse.txt -text
 res/cardsfolder/d/desolation_angel.txt svneol=native#text/plain
 res/cardsfolder/d/desolation_giant.txt svneol=native#text/plain

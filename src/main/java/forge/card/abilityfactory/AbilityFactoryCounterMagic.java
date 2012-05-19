@@ -519,6 +519,9 @@ public class AbilityFactoryCounterMagic {
             Singletons.getModel().getGameAction().moveToLibrary(tgtSA.getSourceCard());
         } else if (this.destination.equals("Hand")) {
             Singletons.getModel().getGameAction().moveToHand(tgtSA.getSourceCard());
+        } else if (this.destination.equals("Battlefield")) {
+            Card c = Singletons.getModel().getGameAction().moveToPlay(tgtSA.getSourceCard(), srcSA.getActivatingPlayer());
+            c.addController(srcSA.getActivatingPlayer());
         } else if (this.destination.equals("BottomOfLibrary")) {
             Singletons.getModel().getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
         } else if (this.destination.equals("ShuffleIntoLibrary")) {
