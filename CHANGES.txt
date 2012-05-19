@@ -149,6 +149,20 @@ Fixes/Features:
 - Quick fix for unless costs of zero mana.
 - A triggered ability that fails targeting will no longer clear the whole frozen stack (only its own stack instance).
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Uploaded the Avacyn Restored set and token images. Updated scripts for token generators in the set to use set specific tokens. Updated token links.
+- Added the optional parameter "ForgetRemembered" to AF Play.
+- ActivationLimit can calculate values from svars now.
+- Fixed typo in recently added cards (my commit comment was misspelled)
+- Updated card prices.
+- Updated two AI SVars.
+- Replaced some instances of af.getHostCard() with sa.getSourceCard().
+- Fixed a lot of sloppily scripted SpellCast triggers (A-E).
+- Fixed a lot of sloppily scripted SpellCast triggers (F-H).
+- Fixed a lot of sloppily scripted SpellCast triggers (I-M).
+- Fixed a lot of sloppily scripted SpellCast triggers (N-Z).
+- Reordered trigger condition checks for better performance.
+- Updated two AI SVars.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -190,6 +204,9 @@ Acorn Catapult
 Howltooth Hollow
 Shelldock Isle
 Sedge Sliver
+Withering Wisps
+Anthem of Rakdos
+Apocalypse Chime
 
 
 end
