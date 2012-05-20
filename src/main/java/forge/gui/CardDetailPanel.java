@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
@@ -59,6 +60,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
     private final JLabel idLabel;
     private final JLabel setInfoLabel;
     private final JTextArea cdArea;
+    private final JScrollPane scrArea;
 
     /**
      * <p>
@@ -114,13 +116,15 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         this.setInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         this.cdArea = new JTextArea(4, 12);
-        GridBagConstraints areaConstrains = new GridBagConstraints();
-        areaConstrains.fill = GridBagConstraints.BOTH;
-        areaConstrains.gridx = 0;
-        areaConstrains.gridy = 1;
-        areaConstrains.weightx = 1.0;
-        areaConstrains.weighty = 1.0;
-        this.add(new JScrollPane(this.cdArea), areaConstrains);
+        this.scrArea = new JScrollPane(this.cdArea);
+
+        GridBagConstraints areaConstraints = new GridBagConstraints();
+        areaConstraints.fill = GridBagConstraints.BOTH;
+        areaConstraints.gridx = 0;
+        areaConstraints.gridy = 1;
+        areaConstraints.weightx = 1.0;
+        areaConstraints.weighty = 1.0;
+        this.add(scrArea, areaConstraints);
         this.cdArea.setLineWrap(true);
         this.cdArea.setWrapStyleWord(true);
         this.cdArea.setEditable(false);
@@ -465,6 +469,13 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         this.cdArea.setText(area.toString());
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                scrArea.getVerticalScrollBar().setValue(scrArea.getVerticalScrollBar().getMinimum());
+            }
+        });
     }
 
     /**
