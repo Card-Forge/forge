@@ -399,6 +399,26 @@ public class Combat {
 
     /**
      * <p>
+     * addAttacker.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param defender
+     *            a GameEntity object.
+     */
+    public final void addAttacker(final Card c, GameEntity defender) {
+        int n = defenders.indexOf(defender);
+        if (-1 == n) {
+            System.out.println("Trying to add Attacker " + c + " to missing defender " + defender);
+        } else {
+            this.map.put(c, new CardList());
+            this.attackerToDefender.put(c, n);
+        }
+    }
+
+    /**
+     * <p>
      * getDefenderByAttacker.
      * </p>
      * 

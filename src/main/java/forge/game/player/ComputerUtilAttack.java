@@ -672,19 +672,15 @@ public class ComputerUtilAttack {
             // at 0 ratio expect to potentially gain an advantage by attacking
             // first
             // if the ai has a slight advantage
-            // or the ai has a significant advantage numerically but only a
-            // slight disadvantage damage/life
-            this.aiAggression = 2; // attack expecting to destroy creatures/be
-            // unblockable
+            // or the ai has a significant advantage numerically but only a slight disadvantage damage/life
+            this.aiAggression = 2; // attack expecting to destroy creatures/be unblockable
         } else if ((ratioDiff < 0) && (aiLifeToPlayerDamageRatio > 1)) {
             // the player is overmatched but there are a few turns before death
-            this.aiAggression = 2; // attack expecting to destroy creatures/be
-            // unblockable
+            this.aiAggression = 2; // attack expecting to destroy creatures/be unblockable
         } else if (doUnblockableAttack || ((ratioDiff * -1) < turnsUntilDeathByUnblockable)) {
-            this.aiAggression = 1; // look for unblockable creatures that might
-                                   // be
-            // able to attack for a bit of
-            // fatal damage even if the player is significantly better
+            this.aiAggression = 1;
+            // look for unblockable creatures that might be
+            // able to attack for a bit of fatal damage even if the player is significantly better
         } else if (ratioDiff < 0) {
             this.aiAggression = 0;
         } // stay at home to block
@@ -703,14 +699,13 @@ public class ComputerUtilAttack {
 
         for (int i = 0; i < attackersLeft.size(); i++) {
             final Card attacker = attackersLeft.get(i);
-            int totalFirstStrikeBlockPower = 0;
-            if (!attacker.hasFirstStrike() && !attacker.hasDoubleStrike()) {
-                totalFirstStrikeBlockPower = CombatUtil.getTotalFirstStrikeBlockPower(attacker,
-                        AllZone.getHumanPlayer());
+            if ((this.aiAggression < 3) && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
+                    && CombatUtil.getTotalFirstStrikeBlockPower(attacker, AllZone.getHumanPlayer())
+                    >= attacker.getKillDamage()) {
+                continue;
             }
 
             if (this.shouldAttack(attacker, this.blockers, combat)
-                    && ((totalFirstStrikeBlockPower < attacker.getKillDamage()) || (this.aiAggression == 5))
                     && CombatUtil.canAttack(attacker, combat)) {
                 combat.addAttacker(attacker);
             }
