@@ -142,7 +142,7 @@ public enum VHomeUI implements IVTopLevelUI {
         scrMenu.setBorder(null);
 
         pnlLeft.setLayout(new MigLayout("insets 0, gap 0, align center, wrap"));
-        pnlLeft.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_LOGO))
+        pnlLeft.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_LOGO))
                 .iconScaleFactor(1.0f).build(), "w 150px!, h 150px!, align center");
 
         pnlLeft.add(scrMenu, "pushy, growy, w 98%!, gap 1% 0 1% 0");

@@ -301,7 +301,7 @@ public class SSubmenuQuestUtil {
 
             final FLabel lblIcon = new FLabel.Builder().iconScaleFactor(1).build();
             if (!file.exists()) {
-                lblIcon.setIcon(FSkin.getIcon(FSkin.ForgeIcons.ICO_UNKNOWN));
+                lblIcon.setIcon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_UNKNOWN));
             }
             else {
                 lblIcon.setIcon(new ImageIcon(file.toString()));

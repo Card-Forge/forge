@@ -67,7 +67,7 @@ public enum FView {
         frmDocument.setLocationRelativeTo(null);
         frmDocument.setExtendedState(frmDocument.getExtendedState() | Frame.MAXIMIZED_BOTH);
         frmDocument.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frmDocument.setIconImage(FSkin.getIcon(FSkin.ForgeIcons.ICO_FAVICON).getImage());
+        frmDocument.setIconImage(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON).getImage());
         frmDocument.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
 
         // Frame components

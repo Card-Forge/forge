@@ -60,10 +60,10 @@ public class QuestFileLister extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        icoDelete = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE);
-        icoDeleteOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE_OVER);
-        icoEdit = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT);
-        icoEditOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT_OVER);
+        icoDelete = FSkin.getIcon(FSkin.InterfaceIcons.ICO_DELETE);
+        icoDeleteOver = FSkin.getIcon(FSkin.InterfaceIcons.ICO_DELETE_OVER);
+        icoEdit = FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT);
+        icoEditOver = FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT_OVER);
     }
 
     /** @param qd0 &emsp; {@link forge.quest.data.QuestData}[] */

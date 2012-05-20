@@ -62,14 +62,14 @@ public enum VCardCatalog implements IVDoc, ITableContainer {
             .fontSize(14)
             .text("Add card")
             .tooltip("Add selected card to current deck (or double click the row)")
-            .icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_PLUS))
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PLUS))
             .iconScaleAuto(false).hoverable(true).build();
 
     private final JLabel btnAdd4 = new FLabel.Builder()
             .fontSize(14)
             .text("Add 4 of card")
             .tooltip("Add up to 4 of selected card to current deck")
-            .icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_PLUS))
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PLUS))
             .iconScaleAuto(false).hoverable(true).build();
 
     private JTable tblCards = null;

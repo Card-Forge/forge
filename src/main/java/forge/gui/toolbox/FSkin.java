@@ -257,7 +257,7 @@ public enum FSkin {
     }
 
     /** */
-    public enum ForgeIcons implements SkinProp { /** */
+    public enum InterfaceIcons implements SkinProp { /** */
         ICO_DELETE          (new int[] {640, 480, 20, 20}), /** */
         ICO_DELETE_OVER     (new int[] {660, 480, 20, 20}), /** */
         ICO_EDIT            (new int[] {640, 500, 20, 20}), /** */
@@ -270,12 +270,11 @@ public enum FSkin {
         ICO_SAVEAS          (new int[] {660, 580, 20, 20}), /** */
         ICO_UNKNOWN         (new int[] {80, 720, 80, 80}), /** */
         ICO_LOGO            (new int[] {480, 0, 200, 200}), /** */
-        ICO_DEFAULT_MAGE    (new int[] {0, 720, 80, 80}), /** */
         ICO_FAVICON         (new int[] {0, 640, 80, 80});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
-        ForgeIcons(final int[] xy) { this.coords = xy; }
+        InterfaceIcons(final int[] xy) { this.coords = xy; }
         /** @return int[] */
         public int[] getCoords() { return coords; }
     }
@@ -524,7 +523,7 @@ public enum FSkin {
         for (final Colors e : Colors.values()) { FSkin.setColor(e); }
         for (final ZoneImages e : ZoneImages.values())                    { FSkin.setImage(e); }
         for (final DockIcons e : DockIcons.values())                      { FSkin.setIcon(e); }
-        for (final ForgeIcons e : ForgeIcons.values())                    { FSkin.setIcon(e); }
+        for (final InterfaceIcons e : InterfaceIcons.values())                    { FSkin.setIcon(e); }
         for (final ButtonImages e : ButtonImages.values())                { FSkin.setIcon(e); }
         for (final QuestIcons e : QuestIcons.values())                    { FSkin.setIcon(e); }
 

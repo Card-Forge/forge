@@ -44,7 +44,7 @@ public final class SOverlayUtils {
         pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
         pnl.setBounds(new Rectangle(((w - pnlW) / 2), ((h - pnlH) / 2), pnlW, pnlH));
 
-        pnl.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_LOGO)).build(),
+        pnl.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_LOGO)).build(),
                 "h 200px!, align center");
         pnl.add(new FLabel.Builder().text("Loading new game...")
                 .fontSize(22).build(), "h 40px!, align center");

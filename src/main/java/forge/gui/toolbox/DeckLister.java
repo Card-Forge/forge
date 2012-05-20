@@ -102,10 +102,10 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        this.icoDelete = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE);
-        this.icoDeleteOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE_OVER);
-        this.icoEdit = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT);
-        this.icoEditOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT_OVER);
+        this.icoDelete = FSkin.getIcon(FSkin.InterfaceIcons.ICO_DELETE);
+        this.icoDeleteOver = FSkin.getIcon(FSkin.InterfaceIcons.ICO_DELETE_OVER);
+        this.icoEdit = FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT);
+        this.icoEditOver = FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT_OVER);
     }
 
     /**

@@ -43,7 +43,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
             .tooltip("Save (in default directory)")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
-            .icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_SAVE))
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_SAVE))
             .text(" ").hoverable(true).build();
 
     private final JLabel btnExport = new FLabel.Builder()
@@ -51,7 +51,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
             .tooltip("Export...")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
-            .icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_SAVEAS))
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_SAVEAS))
             .text(" ").hoverable(true).build();
 
     private final JLabel btnImport = new FLabel.Builder()
@@ -59,7 +59,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
             .tooltip("Import...")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
-            .icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_OPEN))
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_OPEN))
             .text(" ").hoverable(true).build();
 
     private final JLabel btnNew = new FLabel.Builder()
@@ -67,7 +67,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
             .tooltip("New Deck")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
-            .icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_NEW))
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_NEW))
             .text(" ").hoverable(true).build();
 
     private final JPanel pnlRemoveButtons =
@@ -77,14 +77,14 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
             .fontSize(14)
             .text("Remove card")
             .tooltip("Remove selected card to current deck (or double click the row)")
-            .icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_MINUS))
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS))
             .iconScaleAuto(false).hoverable(true).build();
 
     private final JLabel btnRemove4 = new FLabel.Builder()
             .fontSize(14)
             .text("Remove 4 of card")
             .tooltip("Remove up to 4 of selected card to current deck")
-            .icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_MINUS))
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS))
             .iconScaleAuto(false).hoverable(true).build();
 
     private final JTextField txfTitle = new FTextField();
