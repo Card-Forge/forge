@@ -10860,6 +10860,7 @@ res/lang/en.properties svneol=native#text/plain
 res/lang/howTo/de.properties svneol=native#text/plain
 res/lang/howTo/en.properties svneol=native#text/plain
 res/lang/lang.properties svneol=native#text/plain
+res/layouts/editor_default.xml -text
 res/layouts/match_default.xml -text
 res/licenses/java-yield-license.txt svneol=native#text/plain
 res/licenses/log4j-license.txt svneol=native#text/plain
