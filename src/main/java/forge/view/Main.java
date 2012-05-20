@@ -45,15 +45,6 @@ public final class Main {
      */
     public static void main(final String[] args) {
         ExceptionHandler.registerErrorHandling();
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // Only works if the program is not ABORTed / KILLed.
-                // Used instead of a finalizer to avoid leak issues.
-                Singletons.getModel().close();
-            }
-        }));
-
         try {
             Singletons.setModel(FModel.SINGLETON_INSTANCE);
             Singletons.setView(FView.SINGLETON_INSTANCE);
@@ -67,6 +58,16 @@ public final class Main {
 
         } catch (final Throwable exn) {
             ErrorViewer.showError(exn);
+        }
+    }
+
+    /** @throws Throwable  */
+    protected void finalize() throws Throwable {
+        try { } catch (Exception e) { }
+        finally {
+            super.finalize();
+            //more code can be written here as per need of application
+            Singletons.getModel().close();
         }
     }
 }
