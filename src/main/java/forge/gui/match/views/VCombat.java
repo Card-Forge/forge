@@ -75,7 +75,7 @@ public enum VCombat implements IVDoc {
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.MATCH_COMBAT;
+        return EDocID.REPORT_COMBAT;
     }
 
     /* (non-Javadoc)

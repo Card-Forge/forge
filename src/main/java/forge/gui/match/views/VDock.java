@@ -108,7 +108,7 @@ public enum VDock implements IVDoc {
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.MATCH_DOCK;
+        return EDocID.BUTTON_DOCK;
     }
 
     /* (non-Javadoc)

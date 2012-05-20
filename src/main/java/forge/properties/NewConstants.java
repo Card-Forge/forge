@@ -799,7 +799,7 @@ public final class NewConstants {
                 /** The AI_LAND. */
                 public static final String AI_LAND = "%s/NewGame/ailand";
 
-                /** The MATCH_DEV_MODE. */
+                /** The DEV_MODE. */
                 public static final String DEV_MODE = "%s/NewGame/devmode";
 
                 /** The QUEST_MODE. */

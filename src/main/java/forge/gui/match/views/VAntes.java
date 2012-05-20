@@ -106,7 +106,7 @@ public enum VAntes implements IVDoc {
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.MATCH_ANTES;
+        return EDocID.CARD_ANTES;
     }
 
     /* (non-Javadoc)

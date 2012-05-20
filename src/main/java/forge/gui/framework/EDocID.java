@@ -31,6 +31,7 @@ import forge.gui.match.views.VStack;
 public enum EDocID { /** */
     CARD_PICTURE (VPicture.SINGLETON_INSTANCE), /** */
     CARD_DETAIL (VDetail.SINGLETON_INSTANCE), /** */
+    CARD_ANTES (VAntes.SINGLETON_INSTANCE), /** */
 
     EDITOR_FILTERS (VFilters.SINGLETON_INSTANCE), /** */
     EDITOR_PREFERENCES (VEditorPreferences.SINGLETON_INSTANCE), /** */
@@ -41,22 +42,22 @@ public enum EDocID { /** */
     EDITOR_CURRENTDECK (VCurrentDeck.SINGLETON_INSTANCE), /** */
     EDITOR_DECKGEN (VDeckgen.SINGLETON_INSTANCE), /** */
 
-    MATCH_ANTES (VAntes.SINGLETON_INSTANCE), /** */
-    MATCH_MESSAGE (VMessage.SINGLETON_INSTANCE), /** */
-    MATCH_STACK (VStack.SINGLETON_INSTANCE), /** */
-    MATCH_COMBAT (VCombat.SINGLETON_INSTANCE), /** */
-    MATCH_LOG (VLog.SINGLETON_INSTANCE), /** */
-    MATCH_PLAYERS (VPlayers.SINGLETON_INSTANCE), /** */
-    MATCH_DEV_MODE (VDev.SINGLETON_INSTANCE), /** */
-    MATCH_DOCK (VDock.SINGLETON_INSTANCE), /** */
+    REPORT_MESSAGE (VMessage.SINGLETON_INSTANCE), /** */
+    REPORT_STACK (VStack.SINGLETON_INSTANCE), /** */
+    REPORT_COMBAT (VCombat.SINGLETON_INSTANCE), /** */
+    REPORT_LOG (VLog.SINGLETON_INSTANCE), /** */
+    REPORT_PLAYERS (VPlayers.SINGLETON_INSTANCE), /** */
+
+    DEV_MODE (VDev.SINGLETON_INSTANCE), /** */
+    BUTTON_DOCK (VDock.SINGLETON_INSTANCE), /** */
 
     // Non-user battlefields (AI or teammate), use setDoc to register.
-    MATCH_FIELD_0 (null), /** */
-    MATCH_FIELD_1 (null), /** */
+    FIELD_0 (null), /** */
+    FIELD_1 (null), /** */
 
     // Non-user hands (AI or teammate), use setDoc to register.
-    MATCH_HAND_0 (null), /** */
-    MATCH_HAND_1 (null);
+    HAND_0 (null), /** */
+    HAND_1 (null);
 
     // End enum declarations, start enum methods.
     private IVDoc vDoc;

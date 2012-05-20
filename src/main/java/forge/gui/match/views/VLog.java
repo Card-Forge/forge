@@ -74,7 +74,7 @@ public enum VLog implements IVDoc {
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.MATCH_LOG;
+        return EDocID.REPORT_LOG;
     }
 
     /* (non-Javadoc)
