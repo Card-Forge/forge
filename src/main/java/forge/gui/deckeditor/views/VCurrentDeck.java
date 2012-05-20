@@ -48,7 +48,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
 
     private final JLabel btnExport = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("Export...")
+            .tooltip("Save As")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_SAVEAS))
@@ -56,7 +56,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
 
     private final JLabel btnImport = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("Import...")
+            .tooltip("Load")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_OPEN))
