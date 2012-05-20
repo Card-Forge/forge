@@ -947,6 +947,9 @@ public final class AbilityFactoryChangeZone {
                     }
 
                     movedCard = Singletons.getModel().getGameAction().moveTo(c.getController().getZone(destination), c);
+                    if (params.containsKey("Tapped")) {
+                        movedCard.setTapped(true);
+                    }
                 } else if (destination.equals(ZoneType.Exile)) {
                     movedCard = Singletons.getModel().getGameAction().exile(c);
                     if (params.containsKey("ExileFaceDown")) {
@@ -1104,7 +1107,7 @@ public final class AbilityFactoryChangeZone {
                 Singletons.getModel().getGameAction().moveToLibrary(c, libraryPos);
             } else if (ZoneType.Battlefield.equals(destination)) {
                 if (params.containsKey("Tapped")) {
-                    c.tap();
+                    c.setTapped(true);
                 }
                 if (params.containsKey("GainControl")) {
                     c.addController(sa.getSourceCard());
@@ -1139,6 +1142,9 @@ public final class AbilityFactoryChangeZone {
                 }
 
                 newCard = Singletons.getModel().getGameAction().moveTo(c.getController().getZone(destination), c);
+                if (params.containsKey("Tapped")) {
+                    newCard.setTapped(true);
+                }
             } else if (destination.equals(ZoneType.Exile)) {
                 newCard = Singletons.getModel().getGameAction().exile(c);
                 if (params.containsKey("ExileFaceDown")) {
@@ -2008,6 +2014,9 @@ public final class AbilityFactoryChangeZone {
                             AllZone.getCombat().addAttacker(tgtC);
                             AllZone.getCombat().addUnblockedAttacker(tgtC);
                         }
+                        if (params.containsKey("Tapped") || params.containsKey("Ninjutsu")) {
+                            tgtC.setTapped(true);
+                        }
                     } else {
                         movedCard = Singletons.getModel().getGameAction().moveTo(destination, tgtC);
                         // If a card is Exiled from the stack, remove its spells from the stack
@@ -2619,9 +2628,8 @@ public final class AbilityFactoryChangeZone {
                         continue;
                     }
                 }
-
                 if (params.containsKey("Tapped")) {
-                    c.tap();
+                    c.setTapped(true);
                 }
             }
 
@@ -2632,6 +2640,9 @@ public final class AbilityFactoryChangeZone {
                 final Card movedCard = Singletons.getModel().getGameAction().moveTo(destination, c, libraryPos);
                 if (params.containsKey("ExileFaceDown")) {
                     movedCard.setState(CardCharactersticName.FaceDown);
+                }
+                if (params.containsKey("Tapped")) {
+                    movedCard.setTapped(true);
                 }
             }
 
