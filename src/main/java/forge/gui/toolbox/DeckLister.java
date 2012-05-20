@@ -129,16 +129,16 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         rowTitle.add(new FLabel.Builder().text("Delete").fontAlign(SwingConstants.CENTER).build(),
                 "w 10%!, h 20px!, gaptop 5px");
         rowTitle.add(new FLabel.Builder().text("Edit")
-                .fontScaleAuto(false).fontSize(14).fontAlign(SwingConstants.CENTER).build(),
+                .fontSize(14).fontAlign(SwingConstants.CENTER).build(),
                 "w 10%!, h 20px!, gaptop 5px");
         rowTitle.add(new FLabel.Builder().text("Deck Name")
-                .fontScaleAuto(false).fontSize(14).fontAlign(SwingConstants.CENTER).build(),
+                .fontSize(14).fontAlign(SwingConstants.CENTER).build(),
                 "w 58%!, h 20px!, gaptop 5px");
         rowTitle.add(new FLabel.Builder().text("Main")
-                .fontScaleAuto(false).fontSize(14).fontAlign(SwingConstants.CENTER).build(),
+                .fontSize(14).fontAlign(SwingConstants.CENTER).build(),
                 "w 10%!, h 20px!, gaptop 5px");
         rowTitle.add(new FLabel.Builder().text("Side")
-                .fontScaleAuto(false).fontSize(14).fontAlign(SwingConstants.CENTER).build(),
+                .fontSize(14).fontAlign(SwingConstants.CENTER).build(),
                 "w 10%!, h 20px!, gaptop 5px");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 

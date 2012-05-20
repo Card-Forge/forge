@@ -34,16 +34,13 @@ public enum VStatistics implements IVDoc {
     // Global stats
     private JLabel lblTotal = new FLabel.Builder()
             .text("Total cards: 0").tooltip("TOTAL CARDS")
-            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD)
-            .fontScaleAuto(false).build();
+            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
     private JLabel lblTMC = new FLabel.Builder()
             .text("Total mana cost: 0").tooltip("TOTAL MANA COST")
-            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD)
-            .fontScaleAuto(false).build();
+            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
     private JLabel lblAMC = new FLabel.Builder()
             .text("Average mana cost: 0.00").tooltip("AVERAGE MANA COST")
-            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD)
-            .fontScaleAuto(false).build();
+            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
 
     // Total and color count labels
     private final JPanel pnlStats = new JPanel();
@@ -258,8 +255,7 @@ public enum VStatistics implements IVDoc {
     private JLabel buildLabel(final ImageIcon icon0, final boolean zebra) {
         final JLabel lbl = new FLabel.Builder().text("0")
                 .icon(icon0).iconScaleAuto(false)
-                .fontSize(11).fontScaleAuto(false)
-                .build();
+                .fontSize(11).build();
 
         if (zebra) {
             lbl.setOpaque(true);

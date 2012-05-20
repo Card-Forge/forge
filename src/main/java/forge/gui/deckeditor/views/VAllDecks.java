@@ -31,7 +31,7 @@ public enum VAllDecks implements IVDoc {
     private JScrollPane scroller = new JScrollPane(lstDecks);
 
     private final JLabel btnImport = new FLabel.Builder()
-        .fontScaleAuto(false).fontSize(14)
+        .fontSize(14)
         .text("Import Deck").tooltip("Attempt to import a deck from a non-Forge format")
         .opaque(true).hoverable(true).build();
 

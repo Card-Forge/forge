@@ -51,7 +51,7 @@ public enum VCardCatalog implements IVDoc, ITableContainer {
     private final JLabel lblSorcery = buildLabel(SEditorUtil.ICO_SORCERY);
 
     private final JLabel lblTitle = new FLabel.Builder()
-            .fontScaleAuto(false).fontSize(14).build();
+            .fontSize(14).build();
 
     private final JPanel pnlHeader = new JPanel(new MigLayout("insets 0, gap 0"));
 
@@ -59,14 +59,14 @@ public enum VCardCatalog implements IVDoc, ITableContainer {
             new JPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
 
     private final JLabel btnAdd = new FLabel.Builder()
-            .fontScaleAuto(false).fontSize(14)
+            .fontSize(14)
             .text("Add card")
             .tooltip("Add selected card to current deck (or double click the row)")
             .icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_PLUS))
             .iconScaleAuto(false).hoverable(true).build();
 
     private final JLabel btnAdd4 = new FLabel.Builder()
-            .fontScaleAuto(false).fontSize(14)
+            .fontSize(14)
             .text("Add 4 of card")
             .tooltip("Add up to 4 of selected card to current deck")
             .icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_PLUS))
@@ -307,7 +307,7 @@ public enum VCardCatalog implements IVDoc, ITableContainer {
     private JLabel buildLabel(final ImageIcon icon0) {
         final JLabel lbl = new FLabel.Builder().text("0")
                 .icon(icon0).iconScaleAuto(false)
-                .fontSize(11).fontScaleAuto(false)
+                .fontSize(11)
                 .build();
 
             return lbl;

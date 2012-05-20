@@ -39,7 +39,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
     // Other fields
 
     private final JLabel btnSave = new FLabel.Builder()
-            .fontScaleAuto(false).fontSize(14)
+            .fontSize(14)
             .tooltip("Save (in default directory)")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
@@ -47,7 +47,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
             .text(" ").hoverable(true).build();
 
     private final JLabel btnExport = new FLabel.Builder()
-            .fontScaleAuto(false).fontSize(14)
+            .fontSize(14)
             .tooltip("Export...")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
@@ -55,7 +55,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
             .text(" ").hoverable(true).build();
 
     private final JLabel btnImport = new FLabel.Builder()
-            .fontScaleAuto(false).fontSize(14)
+            .fontSize(14)
             .tooltip("Import...")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
@@ -63,7 +63,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
             .text(" ").hoverable(true).build();
 
     private final JLabel btnNew = new FLabel.Builder()
-            .fontScaleAuto(false).fontSize(14)
+            .fontSize(14)
             .tooltip("New Deck")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
@@ -74,14 +74,14 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
             new JPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
 
     private final JLabel btnRemove = new FLabel.Builder()
-            .fontScaleAuto(false).fontSize(14)
+            .fontSize(14)
             .text("Remove card")
             .tooltip("Remove selected card to current deck (or double click the row)")
             .icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_MINUS))
             .iconScaleAuto(false).hoverable(true).build();
 
     private final JLabel btnRemove4 = new FLabel.Builder()
-            .fontScaleAuto(false).fontSize(14)
+            .fontSize(14)
             .text("Remove 4 of card")
             .tooltip("Remove up to 4 of selected card to current deck")
             .icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_MINUS))
@@ -93,7 +93,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
     private final JPanel pnlHeader = new JPanel();
 
     private final JLabel lblTitle = new FLabel.Builder().text("Title")
-            .fontScaleAuto(false).fontSize(14).build();
+            .fontSize(14).build();
 
     private final JPanel pnlStats = new JPanel();
     private final JLabel lblTotal = buildLabel(SEditorUtil.ICO_TOTAL);
@@ -398,7 +398,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
     private JLabel buildLabel(final ImageIcon icon0) {
         final JLabel lbl = new FLabel.Builder().text("0")
             .icon(icon0).iconScaleAuto(false)
-            .fontSize(11).fontScaleAuto(false)
+            .fontSize(11)
             .build();
 
         return lbl;

@@ -238,7 +238,7 @@ public enum VHomeUI implements IVTopLevelUI {
     /** Custom title label styling. */
     @SuppressWarnings("serial")
     private JLabel makeTitleLabel(final EMenuGroup e0) {
-        final FLabel lbl = new FLabel.Builder().fontScaleAuto(false).fontSize(16)
+        final FLabel lbl = new FLabel.Builder().fontSize(16)
                 .hoverable(true).fontAlign(SwingConstants.LEFT).build();
 
         lbl.setBorder(BorderFactory.createCompoundBorder(
@@ -257,7 +257,7 @@ public enum VHomeUI implements IVTopLevelUI {
     private FLabel makeItemLabel(final IVSubmenu item) {
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
 
-        final FLabel lbl = new FLabel.Builder().fontScaleAuto(false).fontSize(15)
+        final FLabel lbl = new FLabel.Builder().fontSize(15)
                 .hoverable(true).selectable(true).text(item.getMenuTitle())
                 .fontAlign(SwingConstants.LEFT).build();
 

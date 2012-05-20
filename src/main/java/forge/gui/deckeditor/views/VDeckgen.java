@@ -27,22 +27,22 @@ public enum VDeckgen implements IVDoc {
     // Deckgen buttons
     private final JLabel btnRandCardpool = new FLabel.Builder()
         .tooltip("Generate random constructed cardpool in current deck area")
-        .text("Random Cardpool").fontScaleAuto(false).fontSize(14)
+        .text("Random Cardpool").fontSize(14)
         .opaque(true).hoverable(true).build();
 
     private final JLabel btnRandDeck2 = new FLabel.Builder()
         .tooltip("Generate 2 color constructed deck in current deck area")
-        .text("Constructed (2 color)").fontScaleAuto(false).fontSize(14)
+        .text("Constructed (2 color)").fontSize(14)
         .opaque(true).hoverable(true).build();
 
     private final JLabel btnRandDeck3 = new FLabel.Builder()
         .tooltip("Generate 3 color constructed deck in current deck area")
-        .text("Constructed (3 color)").fontScaleAuto(false).fontSize(14)
+        .text("Constructed (3 color)").fontSize(14)
         .opaque(true).hoverable(true).build();
 
     private final JLabel btnRandDeck5 = new FLabel.Builder()
         .tooltip("Generate 5 color constructed deck in current deck area")
-        .text("Constructed (5 color)").fontScaleAuto(false).fontSize(14)
+        .text("Constructed (5 color)").fontSize(14)
         .opaque(true).hoverable(true).build();
 
     //========== Constructor

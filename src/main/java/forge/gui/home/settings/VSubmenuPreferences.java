@@ -55,7 +55,7 @@ public enum VSubmenuPreferences implements IVSubmenu {
             .hoverable(true).text("Reset to defaults").build();
 
     private final FLabel lblTitleSkin = new FLabel.Builder()
-        .text("Choose Skin").fontScaleAuto(false).fontStyle(Font.BOLD).fontSize(14).build();
+        .text("Choose Skin").fontStyle(Font.BOLD).fontSize(14).build();
 
     private final JList lstChooseSkin = new FList();
     private final FLabel lblChooseSkin = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC)

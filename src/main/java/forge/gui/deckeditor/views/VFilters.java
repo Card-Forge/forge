@@ -41,9 +41,9 @@ public enum VFilters implements IVDoc {
     private final JTextField txfContains = new FTextField();
     private final JTextField txfWithout = new FTextField();
     private final JLabel lblContains = new FLabel.Builder()
-        .text("Contains:").fontScaleAuto(false).fontSize(14).build();
+        .text("Contains:").fontSize(14).build();
     private final JLabel lblWithout = new FLabel.Builder()
-        .text("Without:").fontScaleAuto(false).fontSize(14).build();
+        .text("Without:").fontSize(14).build();
 
     // Interval filter components
     private final JComboBox cbxSets = new JComboBox();
@@ -55,26 +55,26 @@ public enum VFilters implements IVDoc {
     private final JComboBox cbxCMCHigh = new JComboBox();
 
     private final JLabel lblP = new FLabel.Builder()
-        .fontScaleAuto(false).fontSize(12).text(" <= Power <= ").build();
+        .fontSize(12).text(" <= Power <= ").build();
 
     private final JLabel lblT = new FLabel.Builder()
-        .fontScaleAuto(false).fontSize(12).text(" <= Toughness <= ").build();
+        .fontSize(12).text(" <= Toughness <= ").build();
 
     private final JLabel lblCMC = new FLabel.Builder()
-        .fontScaleAuto(false).fontSize(12).text(" <= CMC <= ").build();
+        .fontSize(12).text(" <= CMC <= ").build();
 
     // Title labels
     private final JLabel lblProperties = new FLabel.Builder()
         .text("Properties").tooltip("Filter by color, type, set, or format. Click to toggle.")
-        .hoverable(true).fontScaleAuto(false).fontSize(14).build();
+        .hoverable(true).fontSize(14).build();
 
     private final JLabel lblText = new FLabel.Builder()
         .text("Card Text").tooltip("Filter by card name, type, and text, space delimited. Click to reset.")
-        .hoverable(true).fontScaleAuto(false).fontSize(14).build();
+        .hoverable(true).fontSize(14).build();
 
     private final JLabel lblIntervals = new FLabel.Builder()
         .text("Intervals").tooltip("Filter by power, toughness, or converted mana cost. Click to reset.")
-        .hoverable(true).fontScaleAuto(false).fontSize(14).build();
+        .hoverable(true).fontSize(14).build();
 
     // Container components
     private final JPanel pnlText = new JPanel(new MigLayout(

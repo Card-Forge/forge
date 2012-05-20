@@ -32,15 +32,15 @@ public enum VEditorPreferences implements IVDoc {
 
     private JLabel lblStats = new FLabel.Builder()
         .text("Stat Bars").tooltip("Toggle statistics bars")
-        .fontScaleAuto(false).fontSize(12).build();
+        .fontSize(12).build();
 
     private JLabel lblCatalog = new FLabel.Builder()
         .text("Card Catalog Columns").tooltip("Toggle columns in card catalog panel")
-        .fontScaleAuto(false).fontSize(12).build();
+        .fontSize(12).build();
 
     private JLabel lblDeck = new FLabel.Builder()
         .text("Current Deck Columns").tooltip("Toggle columns in current deck panel")
-        .fontScaleAuto(false).fontSize(12).build();
+        .fontSize(12).build();
 
     private JCheckBox chbCatalogColor = new FCheckBox("Color");
     private JCheckBox chbCatalogRarity = new FCheckBox("Rarity");

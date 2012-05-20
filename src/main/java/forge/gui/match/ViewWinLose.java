@@ -151,7 +151,7 @@ public class ViewWinLose {
         pnlLog.setOpaque(false);
 
         pnlLog.add(new FLabel.Builder().text("Game Log").fontAlign(SwingConstants.CENTER)
-                .fontScaleFactor(0.8).fontStyle(Font.BOLD).build(),
+                .fontSize(18).fontStyle(Font.BOLD).build(),
                 "w 300px!, h 28px!, gap 0 0 20px 0");
 
         pnlLog.add(scrLog, "w 300px!, h 100px!, gap 0 0 10px 0");

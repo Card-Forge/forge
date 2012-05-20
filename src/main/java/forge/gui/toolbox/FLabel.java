@@ -49,9 +49,7 @@ public class FLabel extends JLabel {
     */
     public static class Builder extends FLabel {
         //========== Default values for FLabel are set here.
-        private double  bldFontScaleFactor  = 0.6;
         private double  bldIconScaleFactor  = 0.8;
-        private int     bldFontScaleBy      = SwingConstants.VERTICAL;
         private int     bldFontStyle        = Font.PLAIN;
         private int     bldFontSize         = 14;
         private float   bldIconAlpha        = 1.0f;
@@ -62,7 +60,6 @@ public class FLabel extends JLabel {
         private boolean bldHoverable        = false;
         private boolean bldOpaque           = false;
         private boolean bldIconInBackground = false;
-        private boolean bldFontScaleAuto    = true;
         private boolean bldIconScaleAuto    = true;
 
         private String  bldText, bldToolTip;
@@ -117,18 +114,6 @@ public class FLabel extends JLabel {
 
         /**@param b0 &emsp; boolean
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder fontScaleAuto(final boolean b0) { this.bldFontScaleAuto = b0; return this; }
-
-        /**@param d0 &emsp; double between 0 and 1, 0.6 by default
-         * @return {@link forge.gui.toolbox.Builder} */
-        public Builder fontScaleFactor(final double d0) { this.bldFontScaleFactor = d0; return this; }
-
-        /**@param i0 &emsp; SwingConstants.HORIZONTAL or .VERTICAL
-         * @return {@link forge.gui.toolbox.Builder} */
-        public Builder fontScaleBy(final int i0) { this.bldFontScaleBy = i0; return this; }
-
-        /**@param b0 &emsp; boolean
-         * @return {@link forge.gui.toolbox.Builder} */
         public Builder iconScaleAuto(final boolean b0) { this.bldIconScaleAuto = b0; return this; }
 
         /**@param d0 &emsp; double between 0 and 1, 0.8 by default
@@ -163,18 +148,15 @@ public class FLabel extends JLabel {
         super(b0.bldText);
 
         // Init fields from builder
-        this.fontScaleFactor = b0.bldFontScaleFactor;
         this.iconScaleFactor = b0.bldIconScaleFactor;
 
         this.opaque = b0.bldOpaque;
         this.iconInBackground = b0.bldIconInBackground;
-        this.fontScaleAuto = b0.bldFontScaleAuto;
         this.iconScaleAuto = b0.bldIconScaleAuto;
         this.selectable = b0.bldSelectable;
         this.iconAlignX = b0.bldIconAlignX;
         this.iconInsets = b0.bldIconInsets;
 
-        this.setFontScaleBy(b0.bldFontScaleBy);
         this.setFontStyle(b0.bldFontStyle);
         this.setFontSize(b0.bldFontSize);
         this.setIconAlpha(b0.bldIconAlpha);
@@ -208,17 +190,17 @@ public class FLabel extends JLabel {
 
     // Custom properties, assigned either at realization (using builder)
     // or dynamically (using methods below).
-    private double fontScaleFactor, iconScaleFactor;
-    private int fontScaleBy, fontStyle, iconAlignX;
+    private double iconScaleFactor;
+    private int fontStyle, iconAlignX;
     private boolean selectable, selected, hoverable, hovered, opaque,
-        iconInBackground, fontScaleAuto, iconScaleAuto;
+        iconInBackground, iconScaleAuto;
     private Point iconInsets;
 
     // Various variables used in image rendering.
     private Image img;
     private Graphics2D g2d;
     private Command cmdClick;
-    private int x, y, w, h, iw, ih, sw, sh, ref;
+    private int x, y, w, h, iw, ih, sw, sh;
     private double iar;
 
     private AlphaComposite alphaDim, alphaStrong;
@@ -278,18 +260,6 @@ public class FLabel extends JLabel {
     private void setIconAlpha(final float f0) {
         this.alphaDim = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, f0);
         this.alphaStrong = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f);
-    }
-
-    /** @param i0 &emsp; int, must be SwingConstants.HORIZONTAL or VERTICAL */
-    // NOT public; must be set when label is built.
-    private void setFontScaleBy(final int i0) {
-        if (i0 != SwingConstants.HORIZONTAL && i0 != SwingConstants.VERTICAL) {
-            throw new IllegalArgumentException("FLabel$setScaleBy "
-                    + "must be passed either SwingConstants.HORIZONTAL "
-                    + "or SwingConstants.VERTICAL.");
-        }
-
-        this.fontScaleBy = i0;
     }
 
     private void setFontSize(final int i0) {
@@ -428,20 +398,6 @@ public class FLabel extends JLabel {
     }
 
     private void resize() {
-        if (fontScaleAuto) {
-            ref = (fontScaleBy == SwingConstants.VERTICAL ? getHeight() : getWidth());
-            switch (fontStyle) {
-                case Font.BOLD:
-                    setFont(FSkin.getBoldFont((int) (ref * fontScaleFactor)));
-                    break;
-                case Font.ITALIC:
-                    setFont(FSkin.getItalicFont((int) (ref * fontScaleFactor)));
-                    break;
-                default:
-                    setFont(FSkin.getFont((int) (ref * fontScaleFactor)));
-            }
-        }
-
         // Non-background icon
         if (img != null && iconScaleAuto  && !iconInBackground) {
             h = (int) (getHeight() * iconScaleFactor);

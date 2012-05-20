@@ -42,13 +42,13 @@ public enum VProbabilities implements IVDoc {
     // Title labels
     private final JLabel lblReshuffle = new FLabel.Builder()
             .hoverable(true).text("RE-SHUFFLE").tooltip("See a new sample shuffle")
-            .fontScaleAuto(false).fontSize(12).build();
+            .fontSize(12).build();
     private final JLabel lblSampleHand = new FLabel.Builder().fontStyle(Font.BOLD)
-            .fontSize(14).fontScaleAuto(false).text("SAMPLE HAND").build();
+            .fontSize(14).text("SAMPLE HAND").build();
     private final JLabel lblRemainingDraws = new FLabel.Builder().fontStyle(Font.BOLD)
-            .fontSize(14).fontScaleAuto(false).text("REMAINING DRAWS").build();
+            .fontSize(14).text("REMAINING DRAWS").build();
     private final JLabel lblExplanation = new FLabel.Builder()
-            .fontSize(11).fontScaleAuto(false).text("XX % = frequency that card will appear at that position").build();
+            .fontSize(11).text("XX % = frequency that card will appear at that position").build();
 
     // Layout containers
     private final JPanel pnlContent = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
@@ -162,7 +162,7 @@ public enum VProbabilities implements IVDoc {
 
     private <T extends InventoryItem, TModel extends DeckBase> JLabel buildLabel(final boolean zebra) {
         final JLabel lbl = new FLabel.Builder().text("--")
-                .fontAlign(SwingConstants.CENTER).fontSize(13).fontScaleAuto(false)
+                .fontAlign(SwingConstants.CENTER).fontSize(13)
                 .build();
 
         lbl.addMouseListener(new MouseAdapter() {

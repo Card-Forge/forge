@@ -26,7 +26,7 @@ public enum VSubmenuQuestDecks implements IVSubmenu {
     private final JPanel pnl = new JPanel();
     private final DeckLister lstDecks = new DeckLister(GameType.Quest);
     private final FLabel btnNewDeck = new FLabel.Builder().opaque(true)
-            .hoverable(true).text("Build a New Deck").fontScaleAuto(false).fontSize(18).build();
+            .hoverable(true).text("Build a New Deck").fontSize(18).build();
 
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#populate()
