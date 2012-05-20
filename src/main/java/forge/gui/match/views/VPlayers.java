@@ -123,7 +123,7 @@ public enum VPlayers implements IVDoc {
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.REPORT_PLAYERS;
+        return EDocID.MATCH_PLAYERS;
     }
 
     /* (non-Javadoc)

@@ -52,7 +52,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+                SDisplayUtil.showTab(EDocID.MATCH_STACK.getDoc());
             }
         };
 
@@ -61,7 +61,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
+                SDisplayUtil.showTab(EDocID.MATCH_COMBAT.getDoc());
             }
         };
 
@@ -70,7 +70,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
+                SDisplayUtil.showTab(EDocID.MATCH_LOG.getDoc());
             }
         };
 
@@ -79,7 +79,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                SDisplayUtil.showTab(EDocID.REPORT_PLAYERS.getDoc());
+                SDisplayUtil.showTab(EDocID.MATCH_PLAYERS.getDoc());
             }
         };
 
@@ -88,7 +88,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                SDisplayUtil.showTab(EDocID.DEV_MODE.getDoc());
+                SDisplayUtil.showTab(EDocID.MATCH_DEV_MODE.getDoc());
             }
         };
 

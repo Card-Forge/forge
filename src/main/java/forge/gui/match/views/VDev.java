@@ -139,7 +139,7 @@ public enum VDev implements IVDoc {
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.DEV_MODE;
+        return EDocID.MATCH_DEV_MODE;
     }
 
     /* (non-Javadoc)

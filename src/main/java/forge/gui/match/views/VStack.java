@@ -95,7 +95,7 @@ public enum VStack implements IVDoc {
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.REPORT_STACK;
+        return EDocID.MATCH_STACK;
     }
 
     /* (non-Javadoc)

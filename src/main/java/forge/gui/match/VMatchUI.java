@@ -26,11 +26,11 @@ public enum VMatchUI implements IVTopLevelUI {
     SINGLETON_INSTANCE;
 
     // Instantiate non-singleton tab instances
-    private final IVDoc field0 = new VField(EDocID.FIELD_0, AllZone.getComputerPlayer());
-    private final IVDoc field1 = new VField(EDocID.FIELD_1, AllZone.getHumanPlayer());
+    private final IVDoc field0 = new VField(EDocID.MATCH_FIELD_0, AllZone.getComputerPlayer());
+    private final IVDoc field1 = new VField(EDocID.MATCH_FIELD_1, AllZone.getHumanPlayer());
 
-    private final IVDoc hand0 = new VHand(EDocID.HAND_0, AllZone.getComputerPlayer());
-    private final IVDoc hand1 = new VHand(EDocID.HAND_1, AllZone.getHumanPlayer());
+    private final IVDoc hand0 = new VHand(EDocID.MATCH_HAND_0, AllZone.getComputerPlayer());
+    private final IVDoc hand1 = new VHand(EDocID.MATCH_HAND_1, AllZone.getHumanPlayer());
 
 
     // Other instantiations

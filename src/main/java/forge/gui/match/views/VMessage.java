@@ -105,7 +105,7 @@ public enum VMessage implements IVDoc {
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.REPORT_MESSAGE;
+        return EDocID.MATCH_MESSAGE;
     }
 
     /* (non-Javadoc)

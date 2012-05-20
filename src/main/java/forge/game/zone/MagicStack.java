@@ -917,7 +917,7 @@ public class MagicStack extends MyObservable {
         final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
         this.getStack().push(si);
 
-        SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+        SDisplayUtil.showTab(EDocID.MATCH_STACK.getDoc());
         this.updateObservers();
 
         if (sp.isSpell() && !sp.getSourceCard().isCopiedSpell()) {

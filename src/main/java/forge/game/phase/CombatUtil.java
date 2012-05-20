@@ -2401,7 +2401,7 @@ public class CombatUtil {
             } // loop through attackers
         }
 
-        SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
+        SDisplayUtil.showTab(EDocID.MATCH_COMBAT.getDoc());
         VCombat.SINGLETON_INSTANCE.updateCombat(display.toString().trim());
     } // showBlockers()
 

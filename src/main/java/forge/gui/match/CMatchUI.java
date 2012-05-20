@@ -67,7 +67,7 @@ public enum CMatchUI implements CardContainer {
      * 
      */
     public void initMatch(final String strAvatarIcon) {
-        SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
+        SDisplayUtil.showTab(EDocID.MATCH_LOG.getDoc());
 
         // Update avatars
         final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
