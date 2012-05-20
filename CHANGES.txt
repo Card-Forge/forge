@@ -5,6 +5,16 @@ Forge Beta: 0#-##-2012 ver 1.2.8
 10### cards in total.
 
 
+The deck editor(s) now uses the new UI. It now includes:
+
+* a better text search (can search for multiple terms, and "not" terms
+* interval filters for P/T and CMC
+* add/remove 4
+* better statistics and draw probabilities
+* Toggle-able, sort-able, resize-able, move-able columns
+* and of course uses the drag cell layout.
+
+
 Some people have noticed special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries.
 
 A possible fix was submitted to the SVN for forge version 1.2.7. We have received several reports that the above bugs are still occuring. We hope to have this problem fixed at some point in the future.
@@ -163,6 +173,20 @@ Fixes/Features:
 - Reordered trigger condition checks for better performance.
 - Updated two AI SVars.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- The AI will now cast Equipments in Main1 if a possible attacker is present.
+- Deck editor UI integration.
+- Default layout file for editor added.
+- Removed font scaling from FLabel.
+- Updated Firebloom skin with improved icons and compressed background images (thanks WompWomp).
+- Updated load/save layout icons.
+- Removed some legacy accessors from VMatchUI.
+- Updated document ID enum with more descriptive names.
+- Rolling back last commit; unforeseen problems.
+- Renamed "ForgeIcons" enum in FSkin to more accurate "InterfaceIcons".
+- Fixed "Tapped" parameter in AF ChangeZone.
+- Fixed and simplified Deadeye Navigator.
+- Fixed a tooltip typo.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -207,6 +231,8 @@ Sedge Sliver
 Withering Wisps
 Anthem of Rakdos
 Apocalypse Chime
+Spinerock Knoll
+Desertion
 
 
 end
