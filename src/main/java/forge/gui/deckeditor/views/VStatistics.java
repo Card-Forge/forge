@@ -98,7 +98,7 @@ public enum VStatistics implements IVDoc {
         lblColorless.setToolTipText("Total Card Count");
 
         // Type stats
-        lblArtifact.setToolTipText("Artiface Card Count");
+        lblArtifact.setToolTipText("Artifact Card Count");
         lblCreature.setToolTipText("Creature Card Count");
         lblColorless.setToolTipText("Colorless Card Count");
         lblEnchantment.setToolTipText("Enchantment Card Count");

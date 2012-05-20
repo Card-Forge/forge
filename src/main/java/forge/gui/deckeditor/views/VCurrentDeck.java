@@ -157,7 +157,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
         lblRed.setToolTipText("Red Card Count");
         lblWhite.setToolTipText("White Card Count");
         lblColorless.setToolTipText("Total Card Count");
-        lblArtifact.setToolTipText("Artiface Card Count");
+        lblArtifact.setToolTipText("Artifact Card Count");
         lblCreature.setToolTipText("Creature Card Count");
         lblColorless.setToolTipText("Colorless Card Count");
         lblEnchantment.setToolTipText("Enchantment Card Count");
