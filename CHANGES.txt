@@ -186,6 +186,8 @@ Fixes/Features:
 - Fixed "Tapped" parameter in AF ChangeZone.
 - Fixed and simplified Deadeye Navigator.
 - Fixed a tooltip typo.
+- Added the recent commit logs to changes.txt.
+- Replaced two tooltips.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
