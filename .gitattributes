@@ -9,6 +9,7 @@
 /CHANGES.txt svneol=native#text/plain
 /LICENSE.txt svneol=native#text/plain
 /README.txt svneol=native#text/plain
+/editor.preferences -text
 /forge.properties svneol=native#text/plain
 /pom.xml svneol=native#text/xml
 res/AllTokens.txt svneol=native#text/plain
@@ -10854,32 +10855,6 @@ res/draft/rare.txt svneol=native#text/plain
 res/draft/uncommon.txt svneol=native#text/plain
 res/gamedata/NonStackingKWList.txt svneol=native#text/plain
 res/gamedata/TypeLists.txt svneol=native#text/plain
-res/images/deckeditor/filter_artifact_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_artifact_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_black_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_black_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_blue_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_blue_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_colorless_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_colorless_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_creature_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_creature_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_enchant_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_enchant_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_green_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_green_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_instant_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_instant_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_land_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_land_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_planeswalker_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_planeswalker_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_red_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_red_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_sorcery_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_sorcery_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_white_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_white_y.png -text svneol=unset#image/png
 res/lang/de.properties svneol=native#text/plain
 res/lang/en.properties svneol=native#text/plain
 res/lang/howTo/de.properties svneol=native#text/plain
@@ -11610,7 +11585,6 @@ res/skins/the_simpsons/bg_texture.jpg -text
 res/skins/the_simpsons/font1.ttf -text
 res/skins/the_simpsons/sprite_avatars.png -text
 res/skins/the_simpsons/sprite_icons.png -text
-res/sound/tap.mp3 -text svneol=unset#audio/mpeg
 res/token-images.txt -text
 src/main/config/Forge.icns -text
 src/main/config/backgroundImage.jpg -text svneol=unset#image/jpeg
@@ -11935,34 +11909,47 @@ src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
 src/main/java/forge/gui/MultiPhaseProgressMonitorWithETA.java svneol=native#text/plain
 src/main/java/forge/gui/SOverlayUtils.java -text
 src/main/java/forge/gui/WrapLayout.java -text
-src/main/java/forge/gui/deckeditor/DeckController.java -text
-src/main/java/forge/gui/deckeditor/DeckEditorBase.java -text
-src/main/java/forge/gui/deckeditor/DeckEditorConstructed.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/DeckEditorLimited.java -text
-src/main/java/forge/gui/deckeditor/DeckEditorQuest.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/CDeckEditorUI.java -text
 src/main/java/forge/gui/deckeditor/DeckImport.java -text
-src/main/java/forge/gui/deckeditor/DraftingProcess.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/MenuBase.java -text
 src/main/java/forge/gui/deckeditor/MenuCommon.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/MenuLimited.java -text
-src/main/java/forge/gui/deckeditor/MenuQuest.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/PresetColumns.java -text
-src/main/java/forge/gui/deckeditor/QuestCardShop.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/elements/CardPanelBase.java -text
-src/main/java/forge/gui/deckeditor/elements/CardPanelHeavy.java -text
-src/main/java/forge/gui/deckeditor/elements/CardPanelLite.java -text
-src/main/java/forge/gui/deckeditor/elements/CheckBoxWithIcon.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/elements/DeckAnalysis.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/elements/FilterCheckBoxes.java -text
-src/main/java/forge/gui/deckeditor/elements/FilterNameTypeSetPanel.java -text
-src/main/java/forge/gui/deckeditor/elements/ManaCostRenderer.java -text
-src/main/java/forge/gui/deckeditor/elements/TableColumnInfo.java -text
-src/main/java/forge/gui/deckeditor/elements/TableModel.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/elements/TableSorter.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/elements/TableSorterCascade.java -text
-src/main/java/forge/gui/deckeditor/elements/TableView.java -text
-src/main/java/forge/gui/deckeditor/elements/package-info.java -text
+src/main/java/forge/gui/deckeditor/SEditorIO.java -text
+src/main/java/forge/gui/deckeditor/SEditorUtil.java -text
+src/main/java/forge/gui/deckeditor/SFilterUtil.java -text
+src/main/java/forge/gui/deckeditor/VDeckEditorUI.java -text
+src/main/java/forge/gui/deckeditor/controllers/ACEditorBase.java -text
+src/main/java/forge/gui/deckeditor/controllers/CAllDecks.java -text
+src/main/java/forge/gui/deckeditor/controllers/CCardCatalog.java -text
+src/main/java/forge/gui/deckeditor/controllers/CCurrentDeck.java -text
+src/main/java/forge/gui/deckeditor/controllers/CDeckgen.java -text
+src/main/java/forge/gui/deckeditor/controllers/CEditorConstructed.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/controllers/CEditorDraftingProcess.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/controllers/CEditorLimited.java -text
+src/main/java/forge/gui/deckeditor/controllers/CEditorPreferences.java -text
+src/main/java/forge/gui/deckeditor/controllers/CEditorQuest.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/controllers/CEditorQuestCardShop.java -text
+src/main/java/forge/gui/deckeditor/controllers/CFilters.java -text
+src/main/java/forge/gui/deckeditor/controllers/CProbabilities.java -text
+src/main/java/forge/gui/deckeditor/controllers/CStatistics.java -text
 src/main/java/forge/gui/deckeditor/package-info.java -text
+src/main/java/forge/gui/deckeditor/tables/DeckController.java -text
+src/main/java/forge/gui/deckeditor/tables/IntegerRenderer.java -text
+src/main/java/forge/gui/deckeditor/tables/ManaCostRenderer.java -text
+src/main/java/forge/gui/deckeditor/tables/SColumnUtil.java -text
+src/main/java/forge/gui/deckeditor/tables/TableColumnInfo.java -text
+src/main/java/forge/gui/deckeditor/tables/TableModel.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/tables/TableSorter.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/tables/TableSorterCascade.java -text
+src/main/java/forge/gui/deckeditor/tables/TableView.java -text
+src/main/java/forge/gui/deckeditor/tables/package-info.java -text
+src/main/java/forge/gui/deckeditor/views/ITableContainer.java -text
+src/main/java/forge/gui/deckeditor/views/VAllDecks.java -text
+src/main/java/forge/gui/deckeditor/views/VCardCatalog.java -text
+src/main/java/forge/gui/deckeditor/views/VCurrentDeck.java -text
+src/main/java/forge/gui/deckeditor/views/VDeckgen.java -text
+src/main/java/forge/gui/deckeditor/views/VEditorPreferences.java -text
+src/main/java/forge/gui/deckeditor/views/VFilters.java -text
+src/main/java/forge/gui/deckeditor/views/VProbabilities.java -text
+src/main/java/forge/gui/deckeditor/views/VStatistics.java -text
 src/main/java/forge/gui/download/GuiDownloadPicturesLQ.java svneol=native#text/plain
 src/main/java/forge/gui/download/GuiDownloadPrices.java svneol=native#text/plain
 src/main/java/forge/gui/download/GuiDownloadQuestImages.java -text
@@ -11978,8 +11965,8 @@ src/main/java/forge/gui/framework/ILocalRepaint.java -text
 src/main/java/forge/gui/framework/IVDoc.java -text
 src/main/java/forge/gui/framework/IVTopLevelUI.java -text
 src/main/java/forge/gui/framework/SDisplayUtil.java -text
-src/main/java/forge/gui/framework/SIOUtil.java -text
 src/main/java/forge/gui/framework/SLayoutConstants.java -text
+src/main/java/forge/gui/framework/SLayoutIO.java -text
 src/main/java/forge/gui/framework/SOverflowUtil.java -text
 src/main/java/forge/gui/framework/SRearrangingUtil.java -text
 src/main/java/forge/gui/framework/SResizingUtil.java -text
@@ -11999,7 +11986,7 @@ src/main/java/forge/gui/home/quest/CSubmenuQuestPrefs.java -text
 src/main/java/forge/gui/home/quest/IStatsAndPet.java -text
 src/main/java/forge/gui/home/quest/QuestFileLister.java -text
 src/main/java/forge/gui/home/quest/QuestPreferencesHandler.java -text
-src/main/java/forge/gui/home/quest/SubmenuQuestUtil.java -text
+src/main/java/forge/gui/home/quest/SSubmenuQuestUtil.java -text
 src/main/java/forge/gui/home/quest/VSubmenuChallenges.java -text
 src/main/java/forge/gui/home/quest/VSubmenuDuels.java -text
 src/main/java/forge/gui/home/quest/VSubmenuQuestData.java -text
@@ -12074,6 +12061,7 @@ src/main/java/forge/gui/toolbox/FRadioButton.java -text
 src/main/java/forge/gui/toolbox/FScrollPane.java -text
 src/main/java/forge/gui/toolbox/FSkin.java -text
 src/main/java/forge/gui/toolbox/FTextArea.java -text
+src/main/java/forge/gui/toolbox/FTextField.java -text
 src/main/java/forge/gui/toolbox/SaveOpenDialog.java -text
 src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
@@ -12166,6 +12154,7 @@ src/main/java/forge/util/closures/Lambda.java svneol=native#text/plain
 src/main/java/forge/util/closures/Lambda0.java -text
 src/main/java/forge/util/closures/Lambda1.java svneol=native#text/plain
 src/main/java/forge/util/closures/Predicate.java -text
+src/main/java/forge/util/closures/PredicateInteger.java -text
 src/main/java/forge/util/closures/PredicateString.java -text
 src/main/java/forge/util/closures/package-info.java -text svneol=native#text/plain
 src/main/java/forge/util/package-info.java -text

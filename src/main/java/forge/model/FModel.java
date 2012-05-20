@@ -419,7 +419,7 @@ public enum FModel {
         fp.setPref(FPref.PHASE_HUMAN_EOT, String.valueOf(fieldViews.get(1).getLblEndTurn().getEnabled()));
         fp.setPref(FPref.PHASE_HUMAN_CLEANUP, String.valueOf(fieldViews.get(1).getLblCleanup().getEnabled()));
 
-        final VDev v = VMatchUI.SINGLETON_INSTANCE.getViewDevMode();
+        final VDev v = VDev.SINGLETON_INSTANCE;
         Constant.Runtime.MILL[0] = v.getLblMilling().getEnabled();
 
         fp.setPref(FPref.DEV_MILLING_LOSS, String.valueOf(Constant.Runtime.MILL[0]));

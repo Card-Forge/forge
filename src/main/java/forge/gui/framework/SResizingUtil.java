@@ -332,7 +332,7 @@ public final class SResizingUtil {
     /** */
     public static void endResize() {
         final Thread t = new Thread() { @Override
-            public void run() { SIOUtil.saveLayout(null); } };
+            public void run() { SLayoutIO.saveLayout(null); } };
         t.start();
     }
 

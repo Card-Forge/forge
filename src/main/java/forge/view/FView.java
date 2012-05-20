@@ -19,11 +19,10 @@ import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.FControl;
+import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SLayoutConstants;
-import forge.gui.framework.SOverflowUtil;
-import forge.gui.framework.SResizingUtil;
 import forge.gui.home.VHomeUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.toolbox.FOverlay;
@@ -38,7 +37,6 @@ public enum FView {
     private SplashFrame splash;
 
     // Non-singleton instances (deprecated, but not updated yet)
-    private ViewEditorUI editor = null;
     private ViewBazaarUI bazaar = null;
 
     // Top-level UI components; all have getters.
@@ -63,7 +61,6 @@ public enum FView {
     /** */
     public void initialize() {
         SplashFrame.PROGRESS_BAR.setDescription("Creating display components.");
-        Singletons.getView().cacheUIStates();
 
         // Frame styling
         frmDocument.setMinimumSize(new Dimension(800, 600));
@@ -91,10 +88,12 @@ public enum FView {
 
         FOverlay.SINGLETON_INSTANCE.getPanel().setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
 
-        // Populate all drag tabs. After they are realized,
-        // their controller can initialize actions on their components.
+        // Populate all drag tab components.
+        this.cacheUIStates();
+
+        // Initialize actions on all drag tab components (which should
+        // be realized / populated already).
         for (EDocID doc : EDocID.values()) {
-            if (doc.getDoc().getControl() == null) { continue; }
             doc.getDoc().getControl().initialize();
         }
 
@@ -105,11 +104,6 @@ public enum FView {
         FView.this.splash = null;
 
         frmDocument.setVisible(true);
-
-        // TODO MOVE TO CONTROL!
-        // TODO delete FViewOld
-        lpnDocument.addMouseListener(SOverflowUtil.getHideOverflowListener());
-        lpnDocument.addComponentListener(SResizingUtil.getWindowResizeListener());
     }
 
     /** @return {@link javax.swing.JFrame} */
@@ -190,15 +184,6 @@ public enum FView {
         }
     }
 
-    /** @return {@link forge.view.ViewEditorUI} */
-    public ViewEditorUI getViewEditor() {
-        if (Singletons.getControl().getState() != FControl.DEFAULT_EDITOR) {
-            throw new IllegalArgumentException("FView$getViewEditor\n"
-                    + "may only be called while the editor UI is showing.");
-        }
-        return FView.this.editor;
-    }
-
     /** @return {@link forge.view.ViewBazaarUI} */
     public ViewBazaarUI getViewBazaar() {
         if (Singletons.getControl().getState() != FControl.QUEST_BAZAAR) {
@@ -210,9 +195,9 @@ public enum FView {
 
     /** */
     private void cacheUIStates() {
-        FView.this.editor = new ViewEditorUI();
         FView.this.bazaar = new ViewBazaarUI(AllZone.getQuest().getBazaar());
         VMatchUI.SINGLETON_INSTANCE.instantiate();
         VHomeUI.SINGLETON_INSTANCE.instantiate();
+        VDeckEditorUI.SINGLETON_INSTANCE.instantiate();
     }
 }

@@ -33,7 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
-import forge.gui.deckeditor.elements.TableSorter;
+import forge.gui.deckeditor.tables.TableSorter;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.util.FileSection;

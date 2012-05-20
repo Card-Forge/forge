@@ -279,7 +279,7 @@ public final class QuestUtilCards {
      * 
      * @return the sell mutliplier
      */
-    public double getSellMutliplier() {
+    public double getSellMultiplier() {
         double multi = 0.20 + (0.001 * this.qc.getAchievements().getWin());
         if (multi > 0.6) {
             multi = 0.6;

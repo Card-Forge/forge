@@ -307,7 +307,7 @@ public final class SRearrangingUtil {
         updateBorders();
 
         final Thread t = new Thread() { @Override
-            public void run() { SIOUtil.saveLayout(null); } };
+            public void run() { SLayoutIO.saveLayout(null); } };
         t.start();
     }
 
@@ -437,6 +437,19 @@ public final class SRearrangingUtil {
         }
 
         throw new UnsupportedOperationException("Gap was not filled.");
+    }
+
+    /**
+     * Fills a gap left by a source cell.
+     * <br><br>
+     * Cell will not be removed, but its coordinates will be filled
+     * by its neighbors.
+     * 
+     * @param sourceCell0 &emsp; {@link forge.gui.framework.DragCell}
+     */
+    public static void fillGap(final DragCell sourceCell0) {
+        cellSrc = sourceCell0;
+        fillGap();
     }
 
     /** Hides outer borders for components on edges,

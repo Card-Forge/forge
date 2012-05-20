@@ -144,14 +144,14 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet {
     @Override
     public void updateCurrentDeckStatus() {
         final JLabel btnCurrentDeck = VSubmenuChallenges.SINGLETON_INSTANCE.getBtnCurrentDeck();
-        if (SubmenuQuestUtil.getCurrentDeck() == null) {
+        if (SSubmenuQuestUtil.getCurrentDeck() == null) {
             btnCurrentDeck.setBackground(Color.red.darker());
             btnCurrentDeck.setText("  Build, then select a deck in the \"Decks\" submenu.  ");
         }
         else {
             btnCurrentDeck.setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
             btnCurrentDeck.setText("Current deck: "
-                    + SubmenuQuestUtil.getCurrentDeck().getName());
+                    + SSubmenuQuestUtil.getCurrentDeck().getName());
         }
     }
 

@@ -10,7 +10,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.IVTopLevelUI;
-import forge.gui.framework.SIOUtil;
+import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.SResizingUtil;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
@@ -71,7 +71,7 @@ public enum VMatchUI implements IVTopLevelUI {
         if (isPopulated) { return; }
         else { isPopulated = true; }
 
-        SIOUtil.loadLayout(null);
+        SLayoutIO.loadLayout(null);
     }
 
     /** NEVER ACTUALLY CALLED; could be removed... */

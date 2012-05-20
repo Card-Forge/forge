@@ -20,10 +20,10 @@ public interface ICDoc {
     Command getCommandOnSelect();
 
     /**
-     * Call this method after the view singleton has been fully realized
+     * This method is called once, after the view singleton has been fully realized
      * for the first time. It should execute operations which should only
-     * be done once, but require non-null view components.<br><br>
-     * 
+     * be done once, but require non-null view components.
+     * <br><br>
      * This method should only be called once, in FView, after singletons are populated.
      */
     void initialize();

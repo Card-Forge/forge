@@ -31,8 +31,12 @@ import javax.swing.WindowConstants;
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
+import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.VDeckEditorUI;
+import forge.gui.framework.SOverflowUtil;
+import forge.gui.framework.SResizingUtil;
 import forge.gui.home.VHomeUI;
-import forge.gui.home.quest.SubmenuQuestUtil;
+import forge.gui.home.quest.SSubmenuQuestUtil;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.CardFaceSymbols;
@@ -55,16 +59,24 @@ public enum FControl {
     private JLayeredPane display;
     private int state = -1;
 
-    private WindowListener waDefault, waConcede, waLeaveBazaar;
+    private WindowListener waDefault, waConcede, waLeaveBazaar, waLeaveEditor;
 
     /** */
     public static final int HOME_SCREEN = 0;
     /** */
     public static final int MATCH_SCREEN = 1;
     /** */
-    public static final int DEFAULT_EDITOR = 2;
+    public static final int DECK_EDITOR_CONSTRUCTED = 2;
     /** */
     public static final int QUEST_BAZAAR = 3;
+    /** */
+    public static final int DECK_EDITOR_LIMITED = 4;
+    /** */
+    public static final int DECK_EDITOR_QUEST = 5;
+    /** */
+    public static final int QUEST_CARD_SHOP = 6;
+    /** */
+    public static final int DRAFTING_PROCESS = 7;
 
     /**
      * <p>
@@ -75,11 +87,21 @@ public enum FControl {
      * instantiated separately by each state's top level view class.
      */
     private FControl() {
+        this.waDefault = new WindowAdapter() {
+            @Override
+            public void windowClosing(final WindowEvent e) {
+                Singletons.getView().getFrame().setDefaultCloseOperation(
+                        WindowConstants.EXIT_ON_CLOSE);
+            }
+        };
+
         // "Close" button override during match
         this.waConcede = new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
-                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                Singletons.getView().getFrame().setDefaultCloseOperation(
+                        WindowConstants.DO_NOTHING_ON_CLOSE);
+
                 CDock.SINGLETON_INSTANCE.concede();
             }
         };
@@ -88,19 +110,28 @@ public enum FControl {
         this.waLeaveBazaar = new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
-                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-                changeState(0);
-                SubmenuQuestUtil.updateStatsAndPet();
+                Singletons.getView().getFrame().setDefaultCloseOperation(
+                        WindowConstants.DO_NOTHING_ON_CLOSE);
+
+                changeState(FControl.HOME_SCREEN);
+                SSubmenuQuestUtil.updateStatsAndPet();
             }
         };
 
-        // Default action on window close
-        this.waDefault = new WindowAdapter() {
-            @Override
-            public void windowClosing(final WindowEvent e) {
-                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            }
+         this.waLeaveEditor = new WindowAdapter() {
+             @Override
+             public void windowClosing(final WindowEvent ev) {
+                 Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
+                 if (CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().exit()) {
+                     changeState(FControl.HOME_SCREEN);
+                 }
+             }
          };
+
+         FView.SINGLETON_INSTANCE.getLpnDocument().addMouseListener(SOverflowUtil.getHideOverflowListener());
+         FView.SINGLETON_INSTANCE.getLpnDocument().addComponentListener(SResizingUtil.getWindowResizeListener());
+         Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
 
     /** After view and model have been initialized, control can start. */
@@ -116,8 +147,6 @@ public enum FControl {
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
-
-        //Singletons.getView().initialize();
 
         // Handles resizing in null layouts of layers in JLayeredPane.
         Singletons.getView().getFrame().addComponentListener(new ComponentAdapter() {
@@ -141,17 +170,19 @@ public enum FControl {
         clearChildren(JLayeredPane.DEFAULT_LAYER);
         this.state = i0;
 
-        /// TODO should these be here?
+        Singletons.getView().getFrame().removeWindowListener(waDefault);
         Singletons.getView().getFrame().removeWindowListener(waConcede);
         Singletons.getView().getFrame().removeWindowListener(waLeaveBazaar);
-        Singletons.getView().getFrame().addWindowListener(waDefault);
+        Singletons.getView().getFrame().removeWindowListener(waLeaveEditor);
 
         // Fire up new state
         switch (i0) {
             case HOME_SCREEN:
+                Singletons.getView().getFrame().addWindowListener(waDefault);
                 VHomeUI.SINGLETON_INSTANCE.populate();
                 FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(false);
-                //sizeChildren();
+                VHomeUI.SINGLETON_INSTANCE.updateLayout();
+                sizeChildren();
                 break;
 
             case MATCH_SCREEN:
@@ -160,8 +191,14 @@ public enum FControl {
                 Singletons.getView().getFrame().addWindowListener(waConcede);
                 break;
 
-            case DEFAULT_EDITOR:
-                display.add(Singletons.getView().getViewEditor(), JLayeredPane.DEFAULT_LAYER);
+            case DECK_EDITOR_CONSTRUCTED:
+            case DECK_EDITOR_LIMITED:
+            case DECK_EDITOR_QUEST:
+            case QUEST_CARD_SHOP:
+            case DRAFTING_PROCESS:
+                VDeckEditorUI.SINGLETON_INSTANCE.populate();
+                FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
+                Singletons.getView().getFrame().addWindowListener(waLeaveEditor);
                 break;
 
             case QUEST_BAZAAR:

@@ -202,16 +202,7 @@ public enum VHomeUI implements IVTopLevelUI {
         pnlParent.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(final ComponentEvent e) {
-                final int w = pnlParent.getWidth();
-                final int h = pnlParent.getHeight();
-                pnlRight.setBounds(new Rectangle(
-                        2 * insets + leftWidthPx, insets,
-                        w - leftWidthPx - 3 * insets, h - 2 * insets));
-                pnlLeft.setBounds(new Rectangle(
-                        insets, insets,
-                        leftWidthPx, h - 2 * insets
-                        ));
-                pnlParent.revalidate();
+                updateLayout();
             }
         });
     }
@@ -312,5 +303,19 @@ public enum VHomeUI implements IVTopLevelUI {
     /** @return {@link javax.swing.JPanel} the parent panel containing the home UI. */
     public JPanel getPanel() {
         return pnlParent;
+    }
+
+    /** Updates the null layout percentage dimensions. */
+    public void updateLayout() {
+        final int w = pnlParent.getWidth();
+        final int h = pnlParent.getHeight();
+        pnlRight.setBounds(new Rectangle(
+                2 * insets + leftWidthPx, insets,
+                w - leftWidthPx - 3 * insets, h - 2 * insets));
+        pnlLeft.setBounds(new Rectangle(
+                insets, insets,
+                leftWidthPx, h - 2 * insets
+                ));
+        pnlParent.revalidate();
     }
 }

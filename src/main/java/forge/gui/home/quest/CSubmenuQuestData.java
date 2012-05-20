@@ -189,7 +189,7 @@ public enum CSubmenuQuestData implements ICSubmenu {
                 AllZone.getQuest().getName() + ".dat");
         Singletons.getModel().getQuestPreferences().save();
 
-        SubmenuQuestUtil.updateStatsAndPet();
+        SSubmenuQuestUtil.updateStatsAndPet();
 
         CSubmenuDuels.SINGLETON_INSTANCE.update();
         CSubmenuChallenges.SINGLETON_INSTANCE.update();

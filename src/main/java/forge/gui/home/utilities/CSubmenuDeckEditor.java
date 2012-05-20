@@ -1,10 +1,9 @@
 package forge.gui.home.utilities;
 
 import forge.Command;
-import forge.Singletons;
-import forge.deck.DeckBase;
-import forge.gui.deckeditor.DeckEditorBase;
-import forge.gui.deckeditor.DeckEditorConstructed;
+import forge.control.FControl;
+import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.home.ICSubmenu;
 
 /** 
@@ -44,13 +43,9 @@ public enum CSubmenuDeckEditor implements ICSubmenu {
 
     /**
      * Shows constructed mode editor.
-     * @param <T> extends DeckBase
      */
-    @SuppressWarnings("unchecked")
-    private <T extends DeckBase> void showDeckEditor() {
-        DeckEditorBase<?, T> editor =
-                (DeckEditorBase<?, T>) new DeckEditorConstructed(Singletons.getView().getFrame());
-        editor.show(null);
-        editor.setVisible(true);
+    private void showDeckEditor() {
+        CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorConstructed());
+        FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_CONSTRUCTED);
     }
 }

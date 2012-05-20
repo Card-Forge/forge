@@ -17,24 +17,6 @@
  */
 package forge.gui.deckeditor;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import javax.swing.JFileChooser;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.SwingUtilities;
-
-import forge.Command;
-import forge.card.CardRules;
-import forge.deck.Deck;
-import forge.deck.generate.Generate2ColorDeck;
-import forge.deck.io.DeckSerializer;
-import forge.error.ErrorViewer;
-import forge.game.player.PlayerType;
-import forge.item.CardDb;
-import forge.item.CardPrinted;
-import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -44,11 +26,11 @@ import forge.util.closures.Predicate;
  * @author Forge
  * @version $Id$
  */
-public final class MenuCommon extends MenuBase<Deck> {
+public final class MenuCommon {
 
-    /** Constant <code>serialVersionUID=-4037993759604768755L</code>. */
+    /** Constant <code>serialVersionUID=-4037993759604768755L</code>. *
     private static final long serialVersionUID = -4037993759604768755L;
-    /** Constant <code>previousDirectory</code>. */
+    /** Constant <code>previousDirectory</code>. *
     private static File previousDirectory = null;
 
     /**
@@ -58,7 +40,7 @@ public final class MenuCommon extends MenuBase<Deck> {
      *            the ctrl
      * @param exit
      *            a Command
-     */
+     *
     public MenuCommon(final DeckController<Deck> ctrl, final Command exit) {
         super(ctrl, exit);
 
@@ -132,7 +114,7 @@ public final class MenuCommon extends MenuBase<Deck> {
      * <p>
      * exportDeck.
      * </p>
-     */
+     *
     private void exportDeck() {
         final File filename = this.getExportFilename();
         if (filename == null) {
@@ -168,7 +150,7 @@ public final class MenuCommon extends MenuBase<Deck> {
      * <p>
      * Generate Proxy for a Deck.
      * </p>
-     */
+     *
     private void generateProxies() {
         final File filename = this.getProxiesFilename();
         if (filename == null) {
@@ -206,7 +188,7 @@ public final class MenuCommon extends MenuBase<Deck> {
      * (non-Javadoc)
      * 
      * @see forge.gui.deckeditor.MenuBase#getDefaultFileMenu()
-     */
+     *
     @Override
     protected JMenu getDefaultFileMenu() {
         final JMenu fileMenu = super.getDefaultFileMenu();
@@ -327,4 +309,5 @@ public final class MenuCommon extends MenuBase<Deck> {
 
         return fileMenu;
     } // setupMenu()
+    */
 }

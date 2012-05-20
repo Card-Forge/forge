@@ -39,7 +39,7 @@ import forge.deck.Deck;
 import forge.gui.ForgeAction;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.gui.framework.SIOUtil;
+import forge.gui.framework.SLayoutIO;
 import forge.gui.match.views.VDock;
 import forge.gui.toolbox.SaveOpenDialog;
 import forge.gui.toolbox.SaveOpenDialog.Filetypes;
@@ -76,7 +76,7 @@ public enum CDock implements ICDoc {
         final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
             @Override
             public Void doInBackground() {
-                SIOUtil.loadLayout(new File(SIOUtil.FILE_DEFAULT));
+                SLayoutIO.loadLayout(null);
                 SOverlayUtils.hideOverlay();
                 return null;
             }
@@ -89,10 +89,10 @@ public enum CDock implements ICDoc {
             @Override
             public Void doInBackground() {
                 final SaveOpenDialog dlgSave = new SaveOpenDialog();
-                final File defFile = new File(SIOUtil.FILE_PREFERRED);
+                final File defFile = new File(SLayoutIO.getFilePreferred());
                 final File saveFile = dlgSave.SaveDialog(defFile, Filetypes.LAYOUT);
                 if (saveFile != null) {
-                    SIOUtil.saveLayout(saveFile);
+                    SLayoutIO.saveLayout(saveFile);
                 }
                 return null;
             }
@@ -108,12 +108,12 @@ public enum CDock implements ICDoc {
             @Override
             public Void doInBackground() {
                 final SaveOpenDialog dlgOpen = new SaveOpenDialog();
-                final File defFile = new File(SIOUtil.FILE_PREFERRED);
+                final File defFile = new File(SLayoutIO.getFilePreferred());
                 final File loadFile = dlgOpen.OpenDialog(defFile, Filetypes.LAYOUT);
 
                 if (loadFile != null) {
-                    SIOUtil.loadLayout(loadFile);
-                    SIOUtil.saveLayout(null);
+                    SLayoutIO.loadLayout(loadFile);
+                    SLayoutIO.saveLayout(null);
                 }
 
                 SOverlayUtils.hideOverlay();

@@ -41,15 +41,22 @@ import javax.swing.text.ElementIterator;
 
 import net.miginfocom.swing.MigLayout;
 import forge.deck.Deck;
+import forge.deck.DeckBase;
 import forge.deck.DeckRecognizer;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.gui.GuiUtils;
+import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.item.CardPrinted;
+import forge.item.InventoryItem;
 
 /**
+ * 
  * Dialog for quick import of decks.
+ *
+ * @param <TItem>
+ * @param <TModel>
  */
-public class DeckImport extends JDialog {
+public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> extends JDialog {
     private static final long serialVersionUID = -5837776824284093004L;
 
     private final JTextArea txtInput = new JTextArea();
@@ -83,7 +90,7 @@ public class DeckImport extends JDialog {
     /** The tokens. */
     private final List<DeckRecognizer.Token> tokens = new ArrayList<DeckRecognizer.Token>();
 
-    private final DeckEditorConstructed host;
+    private final ACEditorBase<TItem, TModel> host;
 
     /**
      * Instantiates a new deck import.
@@ -91,7 +98,7 @@ public class DeckImport extends JDialog {
      * @param g
      *            the g
      */
-    public DeckImport(final DeckEditorConstructed g) {
+    public DeckImport(final ACEditorBase<TItem, TModel> g) {
         this.host = g;
 
         final int wWidth = 600;
@@ -136,6 +143,7 @@ public class DeckImport extends JDialog {
         });
 
         this.cmdAccept.addActionListener(new ActionListener() {
+            @SuppressWarnings("unchecked")
             @Override
             public void actionPerformed(final ActionEvent e) {
                 final String warning = "This will replace contents of your currently open deck with whatever you are importing. Proceed?";
@@ -145,7 +153,7 @@ public class DeckImport extends JDialog {
                     return;
                 }
                 final Deck toSet = DeckImport.this.buildDeck();
-                DeckImport.this.host.getController().setModel(toSet);
+                DeckImport.this.host.getDeckController().setModel((TModel) toSet);
                 DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
         });
