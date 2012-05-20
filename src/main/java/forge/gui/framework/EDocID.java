@@ -54,14 +54,10 @@ public enum EDocID { /** */
     // Non-user battlefields (AI or teammate), use setDoc to register.
     FIELD_0 (null), /** */
     FIELD_1 (null), /** */
-    FIELD_2 (null), /** */
-    FIELD_3 (null), /** */
 
     // Non-user hands (AI or teammate), use setDoc to register.
     HAND_0 (null), /** */
-    HAND_1 (null), /** */
-    HAND_2 (null), /** */
-    HAND_3 (null); /** */
+    HAND_1 (null);
 
     // End enum declarations, start enum methods.
     private IVDoc vDoc;
