@@ -4,15 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
 import forge.AllZone;
+import forge.Singletons;
+import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
+import forge.gui.framework.SRearrangingUtil;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
+import forge.gui.match.views.VDev;
 import forge.gui.match.views.VMessage;
+import forge.properties.ForgePreferences.FPref;
+import forge.view.FView;
 
 /** 
  * Top level view class for match UI drag layout.<br>
@@ -35,7 +42,6 @@ public enum VMatchUI implements IVTopLevelUI {
 
     // Other instantiations
     private final CMatchUI control = null;
-    private boolean isPopulated = false;
 
     /** */
     @Override
@@ -45,10 +51,24 @@ public enum VMatchUI implements IVTopLevelUI {
     /** */
     @Override
     public void populate() {
-        if (isPopulated) { return; }
-        else { isPopulated = true; }
-
         SLayoutIO.loadLayout(null);
+
+        // Pull dev mode if necessary, remove parent cell if required.
+        if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)) {
+            VDev.SINGLETON_INSTANCE.getParentCell().removeDoc(VDev.SINGLETON_INSTANCE);
+        }
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                for (final DragCell c : FView.SINGLETON_INSTANCE.getDragCells()) {
+                    if (c.getDocs().size() == 0) {
+                        SRearrangingUtil.fillGap(c);
+                        FView.SINGLETON_INSTANCE.removeDragCell(c);
+                    }
+                }
+            }
+        });
     }
 
     //========== Retrieval methods

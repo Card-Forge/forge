@@ -35,24 +35,6 @@ public enum VDeckEditorUI implements IVTopLevelUI {
             @Override
             public Void doInBackground() {
                 SLayoutIO.loadLayout(null);
-
-               /* this can be used for toggling panels in and out of the view (e.g. dev mode)
-
-                make  are separate
-                layout states for each deck editor state.
-                however, the empty cells should still be removed.
-
-                VFilters.SINGLETON_INSTANCE.getParentCell().removeDoc(VFilters.SINGLETON_INSTANCE);
-                VProbabilities.SINGLETON_INSTANCE.getParentCell().removeDoc(VProbabilities.SINGLETON_INSTANCE);
-
-                System.out.println(FView.SINGLETON_INSTANCE.getDragCells().size());
-
-                for (final DragCell c : FView.SINGLETON_INSTANCE.getDragCells()) {
-                    if (c.getDocs().size() == 0) {
-                        SRearrangingUtil.fillGap(c);
-                        FView.SINGLETON_INSTANCE.removeDragCell(c);
-                    }
-                } */
                 return null;
             }
         };
