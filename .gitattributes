@@ -11067,6 +11067,8 @@ res/pics_product/tournamentpacks/SHM.jpg -text
 res/pics_product/tournamentpacks/TMP.jpg -text
 res/pics_product/tournamentpacks/TSP.jpg -text
 res/pics_product/tournamentpacks/USG.jpg -text
+res/preferences/editor.preferences -text
+res/preferences/main.properties -text
 res/product-images.txt -text
 res/quest/all-prices.txt svneol=native#text/plain
 res/quest/bazaar/ape_pet_l1.txt -text

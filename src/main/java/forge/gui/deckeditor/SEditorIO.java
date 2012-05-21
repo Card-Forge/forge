@@ -1,7 +1,10 @@
 package forge.gui.deckeditor;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -179,7 +182,7 @@ public class SEditorIO {
      */
     private static void save() throws Exception {
         final XMLOutputFactory out = XMLOutputFactory.newInstance();
-        final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(NewConstants.PREFERENCES_FILE_EDITOR));
+        final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(NewConstants.PREFS_EDITOR_FILE));
 
         writer.add(EVENT_FACTORY.createStartDocument());
         writer.add(NEWLINE);
@@ -232,8 +235,28 @@ public class SEditorIO {
     }
 
     private static void load() throws Exception {
+        // Preferences files have been consolidated into res/preferences/.
+        // This code is here temporarily to facilitate this transfer.
+        // After a while, this can be deleted.  Doublestrike 21-5-12
+        final File oldFile = new File("editor.preferences");
+        if (oldFile.exists()) {
+            final File newFile = new File(NewConstants.PREFS_EDITOR_FILE);
+            final InputStream in = new FileInputStream(oldFile);
+            final OutputStream out = new FileOutputStream(newFile);
+
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+
+            oldFile.delete();
+        }  // END TEMPORARY CONSOLIDATION FACILITATION
+
         final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-        final String fileAddress = NewConstants.PREFERENCES_FILE_EDITOR;
+        final String fileAddress = NewConstants.PREFS_EDITOR_FILE;
         final XMLEventReader reader = inputFactory.createXMLEventReader(new FileInputStream(fileAddress));
 
         PREFS.clear();

@@ -43,10 +43,12 @@ public final class NewConstants {
     /** Constant <code>CARDFORGE_URL = "program/cardforgeURL"</code>. */
     public static final String CARDFORGE_URL = "program/cardforgeURL";
 
-    /** Constant <code>PREFERENCE_FILE = "forge.preferences"</code>. */
-    public static final String PREFERENCE_FILE = "forge.preferences";
-    /** Constant <code>PREFERENCE_FILE = "forge.preferences"</code>. */
-    public static final String PREFERENCES_FILE_EDITOR = "editor.preferences";
+    /** Constant <code>PREFS_GLOBAL_FILE = "forge.preferences"</code>. */
+    public static final String PREFS_GLOBAL_FILE = "res/preferences/forge.preferences";
+    /** Constant <code>PREFS_GLOBAL_FILE = "editor.preferences"</code>. */
+    public static final String PREFS_EDITOR_FILE = "res/preferences/editor.preferences";
+    /** */
+    public static final String PREFS_MAIN_PROPERTIES_FILE = "res/preferences/main.properties";
 
     /** Constant <code>LAYOUT_DIR = "res/layouts/"</code>. */
     public static final String LAYOUT_DIR = "res/layouts/";
