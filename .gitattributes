@@ -1354,6 +1354,7 @@ res/cardsfolder/c/cave_sense.txt svneol=native#text/plain
 res/cardsfolder/c/cave_tiger.txt svneol=native#text/plain
 res/cardsfolder/c/cavern_crawler.txt svneol=native#text/plain
 res/cardsfolder/c/cavern_harpy.txt svneol=native#text/plain
+res/cardsfolder/c/cavern_of_souls.txt -text
 res/cardsfolder/c/cavern_thoctar.txt svneol=native#text/plain
 res/cardsfolder/c/caverns_of_despair.txt svneol=native#text/plain
 res/cardsfolder/c/caves_of_koilos.txt svneol=native#text/plain

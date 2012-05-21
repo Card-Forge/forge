@@ -34,8 +34,8 @@ public class Mana {
     private String color;
     private Card sourceCard = null;
     private AbilityMana sourceAbility = null;
-    boolean hasRestrictions = false;
-    boolean paidWithCounterable = true;
+    private boolean hasRestrictions = false;
+    private boolean pumpCounterMagic = false;
 
     /**
      * <p>
@@ -57,7 +57,7 @@ public class Mana {
               this.hasRestrictions = true;
           }
           if (manaAbility.cannotCounterPaidWith()) {
-              this.paidWithCounterable = false;
+              this.pumpCounterMagic = true;
           }
         }
         if (source == null) {
@@ -116,8 +116,8 @@ public class Mana {
      * 
      * @return a boolean.
      */
-    public final boolean isPaidWithCounterable() {
-        return this.paidWithCounterable;
+    public final boolean addsNoCounterMagic() {
+        return this.pumpCounterMagic;
     }
 
     /**

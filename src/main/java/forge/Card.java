@@ -133,6 +133,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final ArrayList<Card> mustBlockCards = new ArrayList<Card>();
 
     private boolean canMorph = false;
+    private boolean canCounter = true;
     private boolean kicked = false;
     private boolean evoked = false;
 
@@ -3201,6 +3202,29 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean isFaceDown() {
         return this.curCharacteristics == CardCharactersticName.FaceDown;
+    }
+
+    /**
+     * <p>
+     * setCanCounter.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setCanCounter(final boolean b) {
+        this.canCounter = b;
+    }
+
+    /**
+     * <p>
+     * getCanCounter.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean getCanCounter() {
+        return this.canCounter;
     }
 
     /**

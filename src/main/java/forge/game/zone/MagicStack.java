@@ -1142,6 +1142,7 @@ public class MagicStack extends MyObservable {
         // hostCard in AF is not the same object that's on the battlefield
         // verified by System.identityHashCode(card);
         final Card tmp = sa.getSourceCard();
+        tmp.setCanCounter(true); // reset mana pumped counter magic flag
         if (tmp.getClones().size() > 0) {
             for (final Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
                 if (c.equals(tmp)) {

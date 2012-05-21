@@ -2029,7 +2029,7 @@ public class CardFactoryUtil {
      * @return a boolean.
      */
     public static boolean isCounterable(final Card c) {
-        if (c.hasKeyword("CARDNAME can't be countered.")) {
+        if (c.hasKeyword("CARDNAME can't be countered.") || !c.getCanCounter()) {
             return false;
         }
 

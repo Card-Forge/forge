@@ -417,6 +417,9 @@ public class ManaPool {
                 manaCost.payMana(mana);
                 manaPaid.add(mana);
                 this.removeManaFrom(this.floatingMana, mana);
+                if (mana.addsNoCounterMagic() && sa.getSourceCard() != null) {
+                    sa.getSourceCard().setCanCounter(false);
+                }
                 if (manaCost.isPaid()) {
                     keepPayingFromPool = false;
                 }
@@ -455,6 +458,9 @@ public class ManaPool {
                 manaCost.payMana(mana);
                 manaPaid.add(mana);
                 this.removeManaFrom(this.floatingMana, mana);
+                if (mana.addsNoCounterMagic() && sa.getSourceCard() != null) {
+                    sa.getSourceCard().setCanCounter(false);
+                }
         }
         return manaCost;
     }
@@ -488,6 +494,9 @@ public class ManaPool {
                 manaCost.payMana(mana);
                 manaPaid.add(mana);
                 this.removeManaFrom(this.floatingMana, mana);
+                if (mana.addsNoCounterMagic() && sa.getSourceCard() != null) {
+                    sa.getSourceCard().setCanCounter(false);
+                }
             }
         }
         return manaCost;
@@ -521,6 +530,9 @@ public class ManaPool {
         abilitiesUsedToPay.clear();
         // move non-undoable paying mana back to floating
         if (refund) {
+            if (ability.getSourceCard() != null) {
+                ability.getSourceCard().setCanCounter(true);
+            }
             for (final Mana m : manaPaid) {
                 this.addManaToPool(this.floatingMana, m);
             }
