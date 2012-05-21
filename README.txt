@@ -6,9 +6,9 @@ Once the Forge archive has been decompressed you should then be able to launch F
 
 After downloading and installing a newer version of Forge you may want to move certain files from the older version over to the newer version of Forge. You should maintain your older version of Forge as a back up in case you make a mistake while installing the newer version.
 
-1) The /res/pics/ folder contains the card pictures and token pictures (mtg card tokens and quest pet/plant tokens). Please note that the /res/pics/icons/ folder was moved out of this folder and placed in the /res/images/ folder. The booster package images were moved to the /res/pics_product/booster/ folder.
+1) The /res/pics/ folder contains the card pictures, icons and token pictures (mtg card tokens and quest pet/plant tokens). Please note that the /res/images/icons/ folder was moved back to the /res/pics/icons/ folder. The forge /res/images/ folder no longer is used as of version 1.2.8.
 
-The /res/images/icons/ folder contains the quest opponent icons, small quest pet/plant icons (non-tokens) and some icons that are used by forge's quest mode. While several of these pictures ship with the forge archive most of them have to be downloaded using the Home screen -> Utilities -> Download Quest Images command.
+The /res/pics/icons/ folder contains the quest opponent icons, small quest pet/plant icons (non-tokens) and some icons that are used by forge's quest mode. While several of these pictures ship with the forge archive most of them have to be downloaded using the Home screen -> Utilities -> Download Quest Images command.
 
 2) The /res/pics_product/ folder contains four folders which in turn contain pictures for the booster, fatpacks, precons and tournamentpacks products.
 
