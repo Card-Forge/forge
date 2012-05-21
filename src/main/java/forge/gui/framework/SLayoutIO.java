@@ -72,10 +72,6 @@ public final class SLayoutIO {
      * @param f0 &emsp; {@link java.io.File}
      */
     public static void loadLayout(final File f0) {
-        if (SwingUtilities.isEventDispatchThread()) {
-            throw new IllegalThreadStateException("This operation should be independent of the EDT.");
-        }
-
         try { load(f0); }
         catch (final Exception e) { e.printStackTrace(); }
     }

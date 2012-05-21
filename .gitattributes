@@ -9,7 +9,6 @@
 /CHANGES.txt svneol=native#text/plain
 /LICENSE.txt svneol=native#text/plain
 /README.txt svneol=native#text/plain
-/editor.preferences -text
 /forge.properties svneol=native#text/plain
 /pom.xml svneol=native#text/xml
 res/AllTokens.txt svneol=native#text/plain
