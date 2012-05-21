@@ -307,8 +307,10 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
                     restriction.replace("Activated", "Card");
                 }
             }
-            if (sa.getSourceCard().isValid(restriction, this.getActivatingPlayer(), this.getSourceCard())) {
-                return true;
+            if (sa.getSourceCard() != null) {
+                if (sa.getSourceCard().isValid(restriction, this.getActivatingPlayer(), this.getSourceCard())) {
+                    return true;
+                }
             }
         }
 
