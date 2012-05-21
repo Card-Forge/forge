@@ -14,6 +14,13 @@ The deck editors now use the new UI. The new deck editors include:
 * Toggle-able, sort-able, resize-able, move-able columns
 * and of course uses the drag cell layout.
 
+With the update to the new deck editors several people have noticed an error when they run the snapshot build. We hope to have this fixed in the near future. This start up error states:
+
+Detailed error trace:
+java.lang.NullPointerException
+at forge.gui.deckeditor.controllers.CEditorPreferences.initialize(CEditorPreferences.java:45)
+at forge.view.FView.initialize(FView.java:97)
+
 
 The res/images/icons/ folder has been moved to res/pics/icons/. This folder holds the quest opponent icons, bazaar pets, and bazaar plants. If you have downloaded this content, it will still work, but the folder must be moved on your computer.
 
