@@ -5,7 +5,7 @@ Forge Beta: 0#-##-2012 ver 1.2.8
 10### cards in total.
 
 
-The deck editor(s) now uses the new UI. It now includes:
+The deck editors now use the new UI. The new deck editors include:
 
 * a better text search (can search for multiple terms, and "not" terms
 * interval filters for P/T and CMC
@@ -13,6 +13,9 @@ The deck editor(s) now uses the new UI. It now includes:
 * better statistics and draw probabilities
 * Toggle-able, sort-able, resize-able, move-able columns
 * and of course uses the drag cell layout.
+
+
+The res/images/icons/ folder has been moved to res/pics/icons/. This folder holds the quest opponent icons, bazaar pets, and bazaar plants. If you have downloaded this content, it will still work, but the folder must be moved on your computer.
 
 
 Some people have noticed special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries.
