@@ -23,7 +23,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardUtil;
 import forge.Command;
 import forge.CommandReturn;
 import forge.Singletons;

@@ -40,7 +40,6 @@ import forge.CommandArgs;
 import forge.Counters;
 import forge.GameActionUtil;
 import forge.Singletons;
-import forge.card.CardManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -922,8 +921,6 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @param cost
      *            a {@link forge.card.cost.Cost} object.
-     * @param orgManaCost
-     *            a {@link java.lang.String} object.
      * @param a
      *            a int.
      * @param d
@@ -932,7 +929,6 @@ public class CardFactoryUtil {
      */
     public static AbilityStatic abilityMorphUp(final Card sourceCard, final Cost cost, final int a, final int d) {
         final AbilityStatic morphUp = new AbilityStatic(sourceCard, cost, null) {
-            private static final long serialVersionUID = -3663857013937085953L;
 
             @Override
             public void resolve() {
@@ -4694,8 +4690,6 @@ public class CardFactoryUtil {
 
                 final int attack = card.getBaseAttack();
                 final int defense = card.getBaseDefense();
-
-                final CardManaCost orgManaCost = card.getManaCost();
 
                 card.addSpellAbility(CardFactoryUtil.abilityMorphDown(card));
 
