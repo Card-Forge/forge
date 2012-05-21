@@ -189,6 +189,16 @@ Fixes/Features:
 - Added the recent commit logs to changes.txt.
 - Replaced two tooltips.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Some preparations for better planeswalker attacking AI.
+- Replaced finalizer method in main(), attempting to fix race condition at startup.
+- Fixed dev mode toggle in preferences submenu/match UI.
+- Updated card detail text area to always scroll to top.
+- Fixed unlimited lands bug.
+- Fixed a two more copies of the tooltip typo.
+- reworked Mana object paradigm and ManaPool
+- Fixed Tamiyo's (and Venser's) emblem image download link
+- Check for null spellAbility source card in mana restrictions. Makes multikicker not payable with restricted mana.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -235,6 +245,7 @@ Anthem of Rakdos
 Apocalypse Chime
 Spinerock Knoll
 Desertion
+Avizoa
 
 
 end
