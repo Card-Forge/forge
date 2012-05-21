@@ -201,8 +201,8 @@ chandra_the_firebrand_effect.jpg       http://www.cardforge.org/fpics/effects/ch
 elspeth_knight_errant_emblem.jpg       http://www.cardforge.org/fpics/effects/elspeth_knight_errant_emblem.jpg
 koth_of_the_hammer_emblem.jpg          http://www.cardforge.org/fpics/effects/koth_of_the_hammer_emblem.jpg
 sorin_lord_of_innistrad_emblem.jpg     http://www.cardforge.org/fpics/effects/sorin_lord_of_innistrad_effect.jpg
-tamiyo_moon_sage_emblem.jpg            http://www.cardforge.org/fpics/effects/sorin_lord_of_innistrad_effect.jpg
-venser_the_sojourner_emblem.jpg        http://www.cardforge.org/fpics/effects/tamiyo-the-moon-sage-emblem.jpg
+tamiyo_the_moon_sage_emblem.jpg        http://www.cardforge.org/fpics/effects/tamiyo-the-moon-sage-emblem.jpg
+venser_the_sojourner_emblem.jpg        http://www.cardforge.org/fpics/effects/venser_the_sojourner_emblem.jpg
 morph.jpg                              http://www.cardforge.org/fpics/effects/morph.jpg
 
 # //These tokens are not currently used by any cards in Forge, but links provided should they be scripted so the correct name is used:
