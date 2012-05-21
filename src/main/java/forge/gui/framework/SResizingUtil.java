@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import forge.gui.toolbox.FOverlay;
 import forge.view.FView;
 
 /**
@@ -90,6 +91,7 @@ public final class SResizingUtil {
         final JPanel pnlContent = FView.SINGLETON_INSTANCE.getPnlContent();
         final JPanel pnlInsets = FView.SINGLETON_INSTANCE.getPnlInsets();
 
+        FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(FView.SINGLETON_INSTANCE.getFrame().getContentPane().getBounds());
         pnlInsets.setBounds(FView.SINGLETON_INSTANCE.getFrame().getContentPane().getBounds());
         pnlInsets.validate();
 
