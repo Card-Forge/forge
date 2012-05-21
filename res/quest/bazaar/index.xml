@@ -98,12 +98,12 @@ Fine Print: Loses effectiveness after 15 uses.</description>
 Excellent at blocking the nastiest of critters!</desc>
       <levels>
         <level value="0" stats="You do not own a plant" nextLevel="Purchase Plant"/>
-        <level value="1" pic="g_0_1_plant_wall" stats="0/1, G, Defender" cost="100" cardFile="plant_wall_l1.txt" nextLevel="Improve the defense power of your plant." />
-        <level value="2" pic="g_0_2_plant_wall" stats="0/2, G, Defender" cost="150" cardFile="plant_wall_l2.txt" nextLevel="Improve the defense power of your plant." />
-        <level value="3" pic="g_0_3_plant_wall" stats="0/3, G, Defender" cost="200" cardFile="plant_wall_l3.txt" nextLevel="Improve the defense power of your plant."/>
-        <level value="4" pic="g_1_3_plant_wall" stats="1/3, G, Defender" cost="300" cardFile="plant_wall_l4.txt" nextLevel="Grow venomous thorns on your plant." />
-        <level value="5" pic="g_1_3_plant_wall_wither" stats="1/3, G, Defender, Wither" cost="750" cardFile="plant_wall_l5.txt" nextLevel="Improve the defense power of your plant and your plant will have healing properties" />
-        <level value="6" pic="g_1_4_plant_wall_wither" stats="1/4, G, Defender, Wither, T: Gain 1 life" cost="1000" cardFile="plant_wall_l6.txt" nextLevel="You cannot train your plant any further."/>
+        <level value="1" pic="plantwall_lvl1" stats="0/1, G, Defender" cost="100" cardFile="plant_wall_l1.txt" nextLevel="Improve the defense power of your plant." />
+        <level value="2" pic="plantwall_lvl2" stats="0/2, G, Defender" cost="150" cardFile="plant_wall_l2.txt" nextLevel="Improve the defense power of your plant." />
+        <level value="3" pic="plantwall_lvl3" stats="0/3, G, Defender" cost="200" cardFile="plant_wall_l3.txt" nextLevel="Improve the defense power of your plant."/>
+        <level value="4" pic="plantwall_lvl4" stats="1/3, G, Defender" cost="300" cardFile="plant_wall_l4.txt" nextLevel="Grow venomous thorns on your plant." />
+        <level value="5" pic="plantwall_lvl5" stats="1/3, G, Defender, Wither" cost="750" cardFile="plant_wall_l5.txt" nextLevel="Improve the defense power of your plant and your plant will have healing properties" />
+        <level value="6" pic="plantwall_lvl6" stats="1/4, G, Defender, Wither, T: Gain 1 life" cost="1000" cardFile="plant_wall_l6.txt" nextLevel="You cannot train your plant any further."/>
       </levels>
     </pet>
     <pet name="Wolf" slot="1" saveFileKey="Wolf" maxLevel="4" >
