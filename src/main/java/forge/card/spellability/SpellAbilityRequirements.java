@@ -233,7 +233,7 @@ public class SpellAbilityRequirements {
             this.ability.setStackDescription(sb.toString());
         }
 
-        AllZone.getHumanPlayer().getManaPool().clearPay(this.ability, false);
+        AllZone.getHumanPlayer().getManaPool().clearManaPaid(this.ability, false);
         AllZone.getStack().addAndUnfreeze(this.ability);
     }
 }

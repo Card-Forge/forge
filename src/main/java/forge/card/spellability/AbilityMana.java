@@ -17,12 +17,15 @@
  */
 package forge.card.spellability;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
+import forge.card.mana.Mana;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerType;
@@ -43,7 +46,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
 
     private String origProduced;
     private String lastExpressChoice = "";
-    private String lastProduced = "";
+    private ArrayList<Mana> lastProduced = new ArrayList<Mana>();;
     private int amount = 1;
 
     /** The reflected. */
@@ -163,9 +166,26 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
         // change this, once ManaPool moves to the Player
         // this.getActivatingPlayer().ManaPool.addManaToFloating(origProduced,
         // getSourceCard());
-        manaPool.addManaToFloating(produced, source);
-        //store produced to last produced
-        this.lastProduced = produced;
+
+        //clear lastProduced
+        this.lastProduced.clear();
+
+        // loop over mana produced string
+        for (final String c : produced.split(" ")) {
+            try {
+                int colorlessAmount = Integer.parseInt(c);
+                final String color = InputPayManaCostUtil.getLongColorString(c);
+                for (int i = 0; i < colorlessAmount; i++) {
+                    this.lastProduced.add(new Mana(color, source, this));
+                }
+            } catch (NumberFormatException e) {
+                final String color = InputPayManaCostUtil.getLongColorString(c);
+                this.lastProduced.add(new Mana(color, source, this));
+            }
+        }
+
+        // add the mana produced to the mana pool
+        manaPool.addManaToFloating(this.lastProduced);
 
         // TODO all of the following would be better as trigger events
         // "tapped for mana"
@@ -222,12 +242,35 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
 
     /**
      * <p>
+     * cannotCounterPaidWith.
+     * </p>
+     * 
+     * @return a {@link java.lang.String} object.
+     */
+    public boolean cannotCounterPaidWith() {
+        final AbilityFactory manaAF = this.getAbilityFactory();
+        if (manaAF == null) {
+            return false;
+        }
+        HashMap<String, String> mapParams = this.getAbilityFactory().getMapParams();
+        if (mapParams.containsKey("AddsNoCounter")) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * <p>
      * getManaRestrictions.
      * </p>
      * 
      * @return a {@link java.lang.String} object.
      */
     public String getManaRestrictions() {
+        final AbilityFactory manaAF = this.getAbilityFactory();
+        if (manaAF == null) {
+            return null;
+        }
         HashMap<String, String> mapParams = this.getAbilityFactory().getMapParams();
         if (mapParams.containsKey("RestrictValid")) {
             return mapParams.get("RestrictValid");
@@ -352,7 +395,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getLastProduced() {
+    public ArrayList<Mana> getLastProduced() {
         return this.lastProduced;
     }
 

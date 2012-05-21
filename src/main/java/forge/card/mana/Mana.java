@@ -19,6 +19,7 @@ package forge.card.mana;
 
 import forge.Card;
 import forge.Constant;
+import forge.card.spellability.AbilityMana;
 import forge.control.input.InputPayManaCostUtil;
 
 /**
@@ -31,8 +32,10 @@ import forge.control.input.InputPayManaCostUtil;
  */
 public class Mana {
     private String color;
-    private int amount = 0;
     private Card sourceCard = null;
+    private AbilityMana sourceAbility = null;
+    boolean hasRestrictions = false;
+    boolean paidWithCounterable = true;
 
     /**
      * <p>
@@ -41,14 +44,22 @@ public class Mana {
      * 
      * @param col
      *            a {@link java.lang.String} object.
-     * @param amt
-     *            a int.
      * @param source
      *            a {@link forge.Card} object.
+     * @param manaAbility
+     *            a {@link forge.card.spellability.AbilityMana} object
      */
-    public Mana(final String col, final int amt, final Card source) {
+    public Mana(final String col, final Card source, final AbilityMana manaAbility) {
         this.color = col;
-        this.amount = amt;
+        if (manaAbility != null) {
+          this.sourceAbility = manaAbility;
+          if (manaAbility.getManaRestrictions() != null) {
+              this.hasRestrictions = true;
+          }
+          if (manaAbility.cannotCounterPaidWith()) {
+              this.paidWithCounterable = false;
+          }
+        }
         if (source == null) {
             return;
         }
@@ -65,66 +76,15 @@ public class Mana {
      */
     @Override
     public final String toString() {
-        if (this.color.equals(Constant.Color.COLORLESS)) {
-            return Integer.toString(this.amount);
-        }
-
         String manaString = "";
-        final StringBuilder sbMana = new StringBuilder();
-
-        manaString = InputPayManaCostUtil.getShortColorString(this.color);
-
-        for (int i = 0; i < this.amount; i++) {
-            sbMana.append(manaString);
-        }
-        return sbMana.toString();
-    }
-
-    /**
-     * <p>
-     * toDescriptiveString.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String toDescriptiveString() {
-        // this will be used for advanced choice box
         if (this.color.equals(Constant.Color.COLORLESS)) {
-            return Integer.toString(this.amount);
+            manaString = "1";
+        }
+        else {
+            manaString = InputPayManaCostUtil.getShortColorString(this.color);
         }
 
-        String manaString = "";
-        final StringBuilder sbMana = new StringBuilder();
-
-        manaString = InputPayManaCostUtil.getShortColorString(this.color);
-
-        for (int i = 0; i < this.amount; i++) {
-            sbMana.append(manaString);
-        }
-
-        if (this.isSnow()) {
-            sbMana.append("(S)");
-        }
-
-        sbMana.append(" From ");
-        sbMana.append(this.sourceCard.getName());
-
-        return sbMana.toString();
-    }
-
-    /**
-     * <p>
-     * toSingleArray.
-     * </p>
-     * 
-     * @return an array of {@link forge.card.mana.Mana} objects.
-     */
-    public final Mana[] toSingleArray() {
-        final Mana[] normalize = new Mana[this.amount];
-        for (int i = 0; i < normalize.length; i++) {
-            normalize[i] = new Mana(this.color, 1, this.sourceCard);
-        }
-        return normalize;
+        return manaString;
     }
 
     /**
@@ -140,6 +100,28 @@ public class Mana {
 
     /**
      * <p>
+     * isRestricted.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isRestricted() {
+        return this.hasRestrictions;
+    }
+
+    /**
+     * <p>
+     * isRestricted.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isPaidWithCounterable() {
+        return this.paidWithCounterable;
+    }
+
+    /**
+     * <p>
      * fromBasicLand.
      * </p>
      * 
@@ -148,28 +130,6 @@ public class Mana {
     public final boolean fromBasicLand() {
         return this.sourceCard.isBasicLand();
     } // for Imperiosaur
-
-    /**
-     * <p>
-     * getColorlessAmount.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getColorlessAmount() {
-        return this.color.equals(Constant.Color.COLORLESS) ? this.amount : 0;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>amount</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getAmount() {
-        return this.amount;
-    }
 
     /**
      * <p>
@@ -240,21 +200,26 @@ public class Mana {
 
     /**
      * <p>
-     * decrementAmount.
+     * Getter for the field <code>sourceCard</code>.
      * </p>
+     * 
+     * @return a {@link forge.card.spellability.AbilityMana} object.
      */
-    public final void decrementAmount() {
-        this.amount--;
+    public final AbilityMana getSourceAbility() {
+        return this.sourceAbility;
     }
 
     /**
      * <p>
-     * decrementAmount.
+     * fromSourceCard.
      * </p>
      * 
-     * @param amountDecrement a int.
+     * @param ma
+     *            a {@link forge.Card} object.
+     * @return a boolean.
      */
-    public void decrementAmount(final int amountDecrement) {
-        this.amount -= amountDecrement;
+    public final boolean fromSourceAbility(final AbilityMana ma) {
+        return this.sourceAbility.equals(ma);
     }
+
 }

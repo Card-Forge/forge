@@ -635,17 +635,16 @@ public class ComputerUtil {
             }
             cost.setManaNeededToAvoidNegativeEffect(negEffects);
             // TODO: should it be an error condition if amountAdded is greater
-            // than the colorless
-            // in the original cost? (ArsenalNut - 120102)
+            // than the colorless in the original cost? (ArsenalNut - 120102)
             // adjust colorless amount to account for added mana
             cost.decreaseColorlessMana(amountAdded);
         }
 
-        cost = manapool.subtractMana(sa, cost);
+        cost = manapool.payManaFromPool(sa, cost);
 
         if (cost.isPaid()) {
             // refund any mana taken from mana pool when test
-            manapool.clearPay(sa, test);
+            manapool.clearManaPaid(sa, test);
             return true;
         }
 
@@ -732,7 +731,7 @@ public class ComputerUtil {
                 throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for "
                         + sa.getSourceCard().getName());
             }
-            manapool.clearPay(sa, test); // refund any mana taken from mana pool
+            manapool.clearManaPaid(sa, test); // refund any mana taken from mana pool
             return false;
         }
 
@@ -838,7 +837,7 @@ public class ComputerUtil {
                     // resolve mana ability
                     m.resolve();
                     // subtract mana from mana pool
-                    cost = manapool.subtractMana(sa, cost, m);
+                    cost = manapool.payManaFromAbility(sa, cost, m);
                 } else {
                     cost.payMana(color);
                 }
@@ -855,7 +854,7 @@ public class ComputerUtil {
 
         } // end of cost parts loop
 
-        manapool.clearPay(sa, test);
+        manapool.clearManaPaid(sa, test);
         // check if paid
         if (cost.isPaid()) {
             // if (sa instanceof Spell_Permanent) // should probably add this

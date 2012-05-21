@@ -159,7 +159,7 @@ public class InputPayManaCostUtil {
                 } else if (am.isAnyMana()) {
                         colorMatches.add(am);
                 } else {
-                    final String[] m = ManaPool.formatMana(am);
+                    final String[] m = am.getManaProduced().split(" ");
                     for (final String color : m) {
                         if (manaCost.isColor(color)) {
                             // checking if color
@@ -193,7 +193,7 @@ public class InputPayManaCostUtil {
 
         Singletons.getModel().getGameAction().playSpellAbility(chosen);
 
-        manaCost = AllZone.getHumanPlayer().getManaPool().subtractMana(sa, manaCost, chosen);
+        manaCost = AllZone.getHumanPlayer().getManaPool().payManaFromAbility(sa, manaCost, chosen);
 
         AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
         // DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
@@ -220,7 +220,7 @@ public class InputPayManaCostUtil {
             manaStr = CardUtil.getShortColor(color);
         }
 
-        return mp.subtractOne(sa, manaCost, manaStr);
+        return mp.payManaFromPool(sa, manaCost, manaStr);
     }
 
     /**
@@ -266,7 +266,7 @@ public class InputPayManaCostUtil {
                 }
             }
         } else {
-            for (final String color : ManaPool.formatMana(am)) {
+            for (final String color : am.getManaProduced().split(" ")) {
                 if (mana.contains(color)) {
                     return true;
                 }

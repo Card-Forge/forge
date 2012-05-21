@@ -277,7 +277,7 @@ public class CostPayment {
         }
 
         // Move this to CostMana
-        AllZone.getHumanPlayer().getManaPool().unpaid(this.ability, false);
+        AllZone.getHumanPlayer().getManaPool().refundManaPaid(this.ability, false);
     }
 
     /**
