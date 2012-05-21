@@ -92,6 +92,8 @@ public enum FControl {
             public void windowClosing(final WindowEvent e) {
                 Singletons.getView().getFrame().setDefaultCloseOperation(
                         WindowConstants.EXIT_ON_CLOSE);
+
+                System.exit(0);
             }
         };
 
@@ -131,7 +133,6 @@ public enum FControl {
 
          FView.SINGLETON_INSTANCE.getLpnDocument().addMouseListener(SOverflowUtil.getHideOverflowListener());
          FView.SINGLETON_INSTANCE.getLpnDocument().addComponentListener(SResizingUtil.getWindowResizeListener());
-         Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
 
     /** After view and model have been initialized, control can start. */

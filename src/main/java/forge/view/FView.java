@@ -11,7 +11,6 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -49,13 +48,7 @@ public enum FView {
 
     //
     private FView() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try { splash = new SplashFrame(); }
-                catch (Exception e) { e.printStackTrace(); }
-            }
-        });
+        splash = new SplashFrame();
     }
 
     /** */

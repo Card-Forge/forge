@@ -21,7 +21,6 @@ import javax.swing.SwingUtilities;
 
 import forge.Singletons;
 import forge.control.FControl;
-import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
 import forge.model.FModel;
 
@@ -45,20 +44,27 @@ public final class Main {
      */
     public static void main(final String[] args) {
         ExceptionHandler.registerErrorHandling();
+
+        Singletons.setModel(FModel.SINGLETON_INSTANCE);
+
         try {
-            Singletons.setModel(FModel.SINGLETON_INSTANCE);
-            Singletons.setView(FView.SINGLETON_INSTANCE);
-            Singletons.setControl(FControl.SINGLETON_INSTANCE);
-
-            // Use splash frame to initialize everything, then transition to core UI.
-            Singletons.getControl().initialize();
-
-            SwingUtilities.invokeLater(new Runnable() { @Override
-                public void run() { Singletons.getView().initialize(); } });
-
-        } catch (final Throwable exn) {
-            ErrorViewer.showError(exn);
+            SwingUtilities.invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    Singletons.setView(FView.SINGLETON_INSTANCE);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        Singletons.setControl(FControl.SINGLETON_INSTANCE);
+
+        // Use splash frame to initialize everything, then transition to core UI.
+        Singletons.getControl().initialize();
+
+        SwingUtilities.invokeLater(new Runnable() { @Override
+            public void run() { Singletons.getView().initialize(); } });
     }
 
     /** @throws Throwable  */

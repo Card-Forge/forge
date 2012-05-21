@@ -63,10 +63,8 @@ public class SplashFrame extends JFrame {
      * Create the frame; this <strong>must</strong> be called from an event
      * dispatch thread.
      * 
-     * @throws Exception {@link IllegalStateException} if not called from an
-     *          event dispatch thread.
      */
-    public SplashFrame() throws Exception {
+    public SplashFrame() {
         super();
 
         if (!SwingUtilities.isEventDispatchThread()) {
