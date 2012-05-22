@@ -97,7 +97,7 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
 
         @Override
         public String getDescription() {
-            return "Simple Deck File .html";
+            return "Proxy File .html";
         }
     };
 

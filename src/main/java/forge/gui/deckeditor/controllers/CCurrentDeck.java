@@ -57,6 +57,10 @@ public enum CCurrentDeck implements ICDoc {
             .setCommand(new Command() { @Override
                 public void execute() { exportDeck(); } });
 
+        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies())
+        .setCommand(new Command() { @Override
+            public void execute() { printProxies(); } });
+
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen())
             .setCommand(new Command() { @Override
                 public void execute() { openDeck(); } });
@@ -183,6 +187,24 @@ public enum CCurrentDeck implements ICDoc {
         }
     }
 
+    /** */
+    @SuppressWarnings("unchecked")
+    private void printProxies() {
+        final File filename = this.getPrintProxiesFilename();
+        if (filename == null) {
+            return;
+        }
+
+        try {
+            DeckSerializer.writeDeckHtml(
+                ((DeckController<Deck>) CDeckEditorUI.SINGLETON_INSTANCE
+                .getCurrentEditorController().getDeckController()).getModel(), filename);
+        } catch (final Exception ex) {
+            ErrorViewer.showError(ex);
+            throw new RuntimeException("Error exporting deck." + ex);
+        }
+    }
+
     private File getExportFilename() {
         final JFileChooser save = new JFileChooser(previousDirectory);
         save.setDialogTitle("Export Deck");
@@ -196,6 +218,23 @@ public enum CCurrentDeck implements ICDoc {
             previousDirectory = file.getParentFile();
 
             return check.endsWith(".dck") ? file : new File(check + ".dck");
+        }
+        return null;
+    }
+
+    private File getPrintProxiesFilename() {
+        final JFileChooser save = new JFileChooser(previousDirectory);
+        save.setDialogTitle("Print Proxes");
+        save.setDialogType(JFileChooser.SAVE_DIALOG);
+        save.setFileFilter(DeckSerializer.HTML_FILTER);
+
+        if (save.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            final File file = save.getSelectedFile();
+            final String check = file.getAbsolutePath();
+
+            previousDirectory = file.getParentFile();
+
+            return check.endsWith(".html") ? file : new File(check + ".html");
         }
         return null;
     }
