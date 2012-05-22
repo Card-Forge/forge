@@ -299,20 +299,23 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
         // Loop over restrictions
         for (final String restriction : manaRestrictions.split(",")) {
             // add withXCost to Card.hasProperty for Rosheen Meanderer
-            if (restriction.startsWith("Activated")) {
-                if (!sa.isAbility()) {
-                    continue;
-                }
-                else {
+            if (sa.isAbility()) {
+                if (restriction.startsWith("Activated")) {
                     restriction.replace("Activated", "Card");
                 }
+                else {
+                    continue;
+                }
             }
+
             if (sa.getSourceCard() != null) {
                 if (sa.getSourceCard().isValid(restriction, this.getActivatingPlayer(), this.getSourceCard())) {
                     return true;
                 }
             }
+
         }
+
 
         return false;
     }
