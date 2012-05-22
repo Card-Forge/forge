@@ -209,6 +209,28 @@ Fixes/Features:
 - Fixed Tamiyo's (and Venser's) emblem image download link
 - Check for null spellAbility source card in mana restrictions. Makes multikicker not payable with restricted mana.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Bugfix: Race condition at startup, resulting in "Cannot instantiate SplashFrame" error.
+- Rollback (temporary): Remove second-game-constructed load layout bug.
+- Removed images/ directory reference in main.properties. Card pics, tokens, and icons (that is, downloadable content) all reside in the pics/ directory.
+- Fixed overlay resizing to correspond with window resize.
+- Removed legacy "layout params" from preferences.
+- Consolidated preference files and main.properties under res/preferences/.
+- Updated methods to make change smoothly without losing old preferences.
+- Added a fluff piece to the changes.txt file.
+- Edited the readme.txt file.
+- Added a fluff piece to the changes.txt file.
+- added support for mana adding counter magic protection
+- Updated plant pet images to use same template as the other new pets. Updated token image download links etc.
+- Updated two AI SVars.
+- KO'd a few insignificant compiler warnings.
+- Returned dev mode toggle functionality.
+- updated for new Mana constructor
+- merged r15541-r15645 from the Trunk into mana_restrictions branch
+- Fixed an AI error concerning Indestructible in combination with Double Strike.
+- Adding proxy printing back (work in progress)
+- Darn dev mode toggle still causing problems. Rolling back.
+- Start of conversion of home menu to drag layout. No effect on working project files.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -256,6 +278,7 @@ Apocalypse Chime
 Spinerock Knoll
 Desertion
 Avizoa
+Acidic Dagger
 
 
 end
