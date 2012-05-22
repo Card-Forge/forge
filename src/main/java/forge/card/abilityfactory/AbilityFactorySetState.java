@@ -58,6 +58,11 @@ public class AbilityFactorySetState {
             }
 
             @Override
+            public boolean canPlayAI() {
+                return false;
+            }
+
+            @Override
             public void resolve() {
                 AbilityFactorySetState.setStateResolve(abilityFactory, this);
             }
@@ -89,6 +94,11 @@ public class AbilityFactorySetState {
             @Override
             public String getStackDescription() {
                 return AbilityFactorySetState.setStateStackDescription(abilityFactory, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return false;
             }
 
             @Override
