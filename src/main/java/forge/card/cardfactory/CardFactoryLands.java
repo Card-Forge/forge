@@ -472,7 +472,7 @@ class CardFactoryLands {
                     if (hand.size() > 0) {
                         this.revealCard(hand.get(0));
                     } else {
-                        card.tap();
+                        card.setTapped(true);
                     }
                 }
 
@@ -501,7 +501,7 @@ class CardFactoryLands {
 
                         @Override
                         public void selectButtonCancel() {
-                            card.tap();
+                            card.setTapped(true);
                             this.stop();
                         }
                     });
