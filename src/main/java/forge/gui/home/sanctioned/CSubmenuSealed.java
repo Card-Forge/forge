@@ -27,6 +27,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorLimited;
+import forge.gui.framework.ICDoc;
 import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
@@ -42,7 +43,7 @@ import forge.util.TextUtil;
  *
  */
 @SuppressWarnings("serial")
-public enum CSubmenuSealed implements ICSubmenu {
+public enum CSubmenuSealed implements ICSubmenu, ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -226,5 +227,13 @@ public enum CSubmenuSealed implements ICSubmenu {
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(editor);
         FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_LIMITED);
         editor.getDeckController().setModel((T) sealed);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
+     */
+    @Override
+    public Command getCommandOnSelect() {
+        return null;
     }
 }

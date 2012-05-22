@@ -24,6 +24,7 @@ import forge.gui.GuiUtils;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorDraftingProcess;
+import forge.gui.framework.ICDoc;
 import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FSkin;
 
@@ -34,7 +35,7 @@ import forge.gui.toolbox.FSkin;
  *
  */
 @SuppressWarnings("serial")
-public enum CSubmenuDraft implements ICSubmenu {
+public enum CSubmenuDraft implements ICSubmenu, ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -255,5 +256,13 @@ public enum CSubmenuDraft implements ICSubmenu {
         };
 
         return ai;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
+     */
+    @Override
+    public Command getCommandOnSelect() {
+        return null;
     }
 }

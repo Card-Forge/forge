@@ -9,6 +9,7 @@ import forge.control.FControl;
 import forge.deck.Deck;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorQuest;
+import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.VHomeUI;
@@ -21,7 +22,7 @@ import forge.quest.data.QuestPreferences.QPref;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 @SuppressWarnings("serial")
-public enum CSubmenuQuestDecks implements ICSubmenu {
+public enum CSubmenuQuestDecks implements ICSubmenu, ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -120,5 +121,13 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
     /** @return forge.deck.Deck */
     public Deck getCurrentDeck() {
         return this.currentDeck;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
+     */
+    @Override
+    public Command getCommandOnSelect() {
+        return null;
     }
 }

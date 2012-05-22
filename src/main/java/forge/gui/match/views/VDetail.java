@@ -85,10 +85,10 @@ public enum VDetail implements IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getControl()
+     * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getControl() {
+    public ICDoc getLayoutControl() {
         return CDetail.SINGLETON_INSTANCE;
     }
 

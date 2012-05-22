@@ -128,10 +128,10 @@ public enum VEditorPreferences implements IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getControl()
+     * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getControl() {
+    public ICDoc getLayoutControl() {
         return CEditorPreferences.SINGLETON_INSTANCE;
     }
 

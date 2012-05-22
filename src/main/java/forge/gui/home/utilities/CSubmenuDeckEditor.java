@@ -4,6 +4,7 @@ import forge.Command;
 import forge.control.FControl;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorConstructed;
+import forge.gui.framework.ICDoc;
 import forge.gui.home.ICSubmenu;
 
 /** 
@@ -12,7 +13,7 @@ import forge.gui.home.ICSubmenu;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CSubmenuDeckEditor implements ICSubmenu {
+public enum CSubmenuDeckEditor implements ICSubmenu, ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -47,5 +48,13 @@ public enum CSubmenuDeckEditor implements ICSubmenu {
     private void showDeckEditor() {
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorConstructed());
         FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_CONSTRUCTED);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
+     */
+    @Override
+    public Command getCommandOnSelect() {
+        return null;
     }
 }

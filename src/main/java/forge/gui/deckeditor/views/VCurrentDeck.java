@@ -219,10 +219,10 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getControl()
+     * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getControl() {
+    public ICDoc getLayoutControl() {
         return CCurrentDeck.SINGLETON_INSTANCE;
     }
 

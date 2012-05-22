@@ -138,7 +138,7 @@ public enum CMatchUI implements CardContainer {
         final List<CField> controllers = new ArrayList<CField>();
 
         for (final VField f : fields) {
-            controllers.add((CField) f.getControl());
+            controllers.add((CField) f.getLayoutControl());
         }
 
         return controllers;

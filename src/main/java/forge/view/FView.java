@@ -87,7 +87,7 @@ public enum FView {
         // Initialize actions on all drag tab components (which should
         // be realized / populated already).
         for (EDocID doc : EDocID.values()) {
-            doc.getDoc().getControl().initialize();
+            doc.getDoc().getLayoutControl().initialize();
         }
 
         // All is ready to go - fire up home screen and discard splash frame.

@@ -6,6 +6,7 @@ import java.util.List;
 
 import forge.AllZone;
 import forge.Command;
+import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.VHomeUI;
@@ -20,7 +21,7 @@ import forge.quest.bazaar.QuestPetController;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CSubmenuDuels implements ICSubmenu {
+public enum CSubmenuDuels implements ICSubmenu, ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -109,5 +110,13 @@ public enum CSubmenuDuels implements ICSubmenu {
                 view.getPnlDuels().add(temp, "w 96%!, h 86px!, gap 2% 0 5px 5px");
             }
         }
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
+     */
+    @Override
+    public Command getCommandOnSelect() {
+        return null;
     }
 }

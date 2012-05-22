@@ -30,7 +30,7 @@ public interface IVDoc {
     /** Retrieves control object associated with this document.
      * @return {@link forge.gui.home.ICSubmenu}
      */
-    ICDoc getControl();
+    ICDoc getLayoutControl();
 
     /** Sets the current parent cell of this view,
      * allowing access to its body and head sections.

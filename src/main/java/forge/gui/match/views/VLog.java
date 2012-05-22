@@ -86,10 +86,10 @@ public enum VLog implements IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getControl()
+     * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getControl() {
+    public ICDoc getLayoutControl() {
         return CLog.SINGLETON_INSTANCE;
     }
 
