@@ -4382,6 +4382,7 @@ res/cardsfolder/h/hunted_lammasu.txt svneol=native#text/plain
 res/cardsfolder/h/hunted_phantasm.txt svneol=native#text/plain
 res/cardsfolder/h/hunted_troll.txt svneol=native#text/plain
 res/cardsfolder/h/hunted_wumpus.txt svneol=native#text/plain
+res/cardsfolder/h/hunter_sliver.txt -text
 res/cardsfolder/h/hunters_feast.txt svneol=native#text/plain
 res/cardsfolder/h/hunters_insight.txt -text
 res/cardsfolder/h/hunting_cheetah.txt svneol=native#text/plain
