@@ -286,6 +286,7 @@ res/cardsfolder/a/angel_of_jubilation.txt -text
 res/cardsfolder/a/angel_of_light.txt svneol=native#text/plain
 res/cardsfolder/a/angel_of_mercy.txt svneol=native#text/plain
 res/cardsfolder/a/angel_of_retribution.txt svneol=native#text/plain
+res/cardsfolder/a/angel_of_salvation.txt -text
 res/cardsfolder/a/angelfire_crusader.txt svneol=native#text/plain
 res/cardsfolder/a/angelheart_vial.txt svneol=native#text/plain
 res/cardsfolder/a/angelic_arbiter.txt -text svneol=unset#text/plain
