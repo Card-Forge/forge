@@ -6936,6 +6936,7 @@ res/cardsfolder/p/priest_of_urabrask.txt svneol=native#text/plain
 res/cardsfolder/p/priest_of_yawgmoth.txt svneol=native#text/plain
 res/cardsfolder/p/priests_of_norn.txt svneol=native#text/plain
 res/cardsfolder/p/primal_bellow.txt svneol=native#text/plain
+res/cardsfolder/p/primal_beyond.txt -text
 res/cardsfolder/p/primal_boost.txt svneol=native#text/plain
 res/cardsfolder/p/primal_clay.txt svneol=native#text/plain
 res/cardsfolder/p/primal_cocoon.txt svneol=native#text/plain
