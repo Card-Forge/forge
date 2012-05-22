@@ -355,6 +355,7 @@ res/cardsfolder/a/apprentice_necromancer.txt svneol=native#text/plain
 res/cardsfolder/a/apprentice_sorcerer.txt svneol=native#text/plain
 res/cardsfolder/a/apprentice_wizard.txt svneol=native#text/plain
 res/cardsfolder/a/aquamoeba.txt svneol=native#text/plain
+res/cardsfolder/a/aquamorph_entity.txt -text
 res/cardsfolder/a/aquastrand_spider.txt -text
 res/cardsfolder/a/aquitects_will.txt svneol=native#text/plain
 res/cardsfolder/a/araba_mothrider.txt svneol=native#text/plain
