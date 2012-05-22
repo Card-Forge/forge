@@ -2112,9 +2112,9 @@ public class CombatUtil {
 
         else { // no double strike for defender
                // Attacker may kill the blocker before he can deal any damage
-            if (attacker.hasKeyword("Double Strike")
-                    || (attacker.hasKeyword("First Strike") && !defender.hasKeyword("Indestructible") && !defender
-                            .hasKeyword("First Strike"))) {
+            if ((attacker.hasKeyword("Double Strike") || attacker.hasKeyword("First Strike"))
+                    && !defender.hasKeyword("Indestructible")
+                    && !defender.hasKeyword("First Strike")) {
 
                 if (attackerDamage >= defenderLife) {
                     return false;

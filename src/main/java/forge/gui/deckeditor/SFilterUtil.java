@@ -508,7 +508,7 @@ public class SFilterUtil {
         @Override
         public void itemStateChanged(final ItemEvent arg0) {
             if (!preventFiltering) {
-                ((CFilters) VFilters.SINGLETON_INSTANCE.getControl()).buildFilter();
+                ((CFilters) VFilters.SINGLETON_INSTANCE.getLayoutControl()).buildFilter();
             }
         }
     }

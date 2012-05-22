@@ -12,6 +12,11 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.DragTab;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
@@ -29,9 +34,13 @@ import forge.gui.toolbox.FScrollPane;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
-public enum VSubmenuConstructed implements IVSubmenu {
+public enum VSubmenuConstructed implements IVSubmenu, IVDoc {
     /** */
     SINGLETON_INSTANCE;
+
+    // Fields used with interface IVDoc
+    private DragCell parentCell;
+    private final DragTab tab = new DragTab("Constructed Mode");
 
     /** */
     private final JPanel pnl            = new JPanel();
@@ -90,10 +99,10 @@ public enum VSubmenuConstructed implements IVSubmenu {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.home.IVSubmenu#getControl()
+     * @see forge.gui.home.IVSubmenu#getSubmenuControl()
      */
     @Override
-    public ICSubmenu getControl() {
+    public ICSubmenu getSubmenuControl() {
         return CSubmenuConstructed.SINGLETON_INSTANCE;
     }
 
@@ -265,5 +274,47 @@ public enum VSubmenuConstructed implements IVSubmenu {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbRemoveSmall() {
         return cbRemoveSmall;
+    }
+
+    //========== Overridden from IVDoc
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getDocumentID()
+     */
+    @Override
+    public EDocID getDocumentID() {
+        return EDocID.HOME_CONSTRUCTED;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getTabLabel()
+     */
+    @Override
+    public DragTab getTabLabel() {
+        return tab;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getLayoutControl()
+     */
+    @Override
+    public ICDoc getLayoutControl() {
+        return CSubmenuConstructed.SINGLETON_INSTANCE;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#setParentCell(forge.gui.framework.DragCell)
+     */
+    @Override
+    public void setParentCell(DragCell cell0) {
+        this.parentCell = cell0;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getParentCell()
+     */
+    @Override
+    public DragCell getParentCell() {
+        return parentCell;
     }
 }

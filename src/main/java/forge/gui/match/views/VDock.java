@@ -120,10 +120,10 @@ public enum VDock implements IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getControl()
+     * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getControl() {
+    public ICDoc getLayoutControl() {
         return CDock.SINGLETON_INSTANCE;
     }
 
@@ -153,11 +153,13 @@ public enum VDock implements IVDoc {
     public JLabel getBtnRevertLayout() {
         return btnRevertLayout;
     }
-    
+
+    /** @return {@link javax.swing.JLabel} */
     public JLabel getBtnOpenLayout() {
         return btnOpenLayout;
     }
-    
+
+    /** @return {@link javax.swing.JLabel} */
     public JLabel getBtnSaveLayout() {
         return btnSaveLayout;
     }

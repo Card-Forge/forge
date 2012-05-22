@@ -1,0 +1,20 @@
+Name:Angel of Salvation
+ManaCost:6 W W
+Types:Creature Angel
+Text:no text
+PT:5/5
+K:Flash
+K:Convoke
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ HolyHeal | TriggerDescription$ When CARDNAME enters the battlefield, prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
+SVar:HolyHeal:DB$ PreventDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (1) | Amount$ 1 | SubAbility$ Heal2
+SVar:Heal2:DB$ PreventDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (2) | Amount$ 1 | SubAbility$ Heal3
+SVar:Heal3:DB$ PreventDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (3) | Amount$ 1 | SubAbility$ Heal4
+SVar:Heal4:DB$ PreventDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (4) | Amount$ 1 | SubAbility$ Heal5
+SVar:Heal5:DB$ PreventDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (5) | Amount$ 1
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_salvation.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/1.jpg
+Oracle:Flash, convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nFlying\nWhen Angel of Salvation enters the battlefield, prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
+End

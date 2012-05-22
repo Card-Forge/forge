@@ -140,51 +140,6 @@ public class CardFactoryCreatures {
         a1.setDescription(sb.toString());
     }
 
-    private static void getCard_PrimalPlasma(final Card card, final String cardName) {
-        card.setBaseAttack(3);
-        card.setBaseDefense(3);
-        final SpellAbility ability = new Ability(card, "0") {
-            @Override
-            public void resolve() {
-                String choice = "";
-                final String[] choices = { "3/3", "2/2 with flying", "1/6 with defender" };
-
-                if (card.getController().isHuman()) {
-                    choice = GuiUtils.chooseOne("Choose one", choices);
-                } else {
-                    choice = choices[MyRandom.getRandom().nextInt(3)];
-                }
-
-                if (choice.equals("2/2 with flying")) {
-                    card.setBaseAttack(2);
-                    card.setBaseDefense(2);
-                    card.addIntrinsicKeyword("Flying");
-                }
-                if (choice.equals("1/6 with defender")) {
-                    card.setBaseAttack(1);
-                    card.setBaseDefense(6);
-                    card.addIntrinsicKeyword("Defender");
-                    card.addType("Wall");
-                }
-
-            } // resolve()
-        }; // SpellAbility
-        final Command intoPlay = new Command() {
-            private static final long serialVersionUID = 8957338395786245312L;
-
-            @Override
-            public void execute() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append(card.getName()).append(" - choose: 3/3, 2/2 flying, 1/6 defender");
-                ability.setStackDescription(sb.toString());
-
-                AllZone.getStack().addSimultaneousStackEntry(ability);
-
-            }
-        };
-        card.addComesIntoPlayCommand(intoPlay);
-    }
-
     private static void getCard_MinotaurExplorer(final Card card, final String cardName) {
         final SpellAbility creature = new SpellPermanent(card) {
             private static final long serialVersionUID = -7326018877172328480L;
@@ -1964,8 +1919,6 @@ public class CardFactoryCreatures {
             getCard_ForceOfSavagery(card, cardName);
         } else if (cardName.equals("Gilder Bairn")) {
             getCard_GilderBairn(card, cardName);
-        } else if (cardName.equals("Primal Plasma") || cardName.equals("Primal Clay")) {
-            getCard_PrimalPlasma(card, cardName);
         } else if (cardName.equals("Minotaur Explorer") || cardName.equals("Balduvian Horde") || cardName.equals("Pillaging Horde")) {
             getCard_MinotaurExplorer(card, cardName);
         } else if (cardName.equals("Phylactery Lich")) {

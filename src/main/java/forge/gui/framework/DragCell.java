@@ -310,7 +310,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
                 doc.getTabLabel().priorityOne();
                 doc.getTabLabel().setSelected(true);
                 doc.populate();
-                doc.getControl().update();
+                doc.getLayoutControl().update();
             }
             else {
                 doc.getTabLabel().setSelected(false);

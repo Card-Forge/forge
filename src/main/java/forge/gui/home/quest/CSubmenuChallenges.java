@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import forge.AllZone;
 import forge.Command;
+import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.VHomeUI;
@@ -26,7 +27,7 @@ import forge.quest.bazaar.QuestPetController;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CSubmenuChallenges implements ICSubmenu {
+public enum CSubmenuChallenges implements ICSubmenu, ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -137,5 +138,13 @@ public enum CSubmenuChallenges implements ICSubmenu {
                 view.getPnlChallenges().add(lbl, "w 50%!, h 30px!, gap 25% 0 50px 0");
             }
         }
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
+     */
+    @Override
+    public Command getCommandOnSelect() {
+        return null;
     }
 }

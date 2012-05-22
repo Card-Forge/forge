@@ -70,6 +70,14 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_NEW))
             .text(" ").hoverable(true).build();
 
+    private final JLabel btnPrintProxies = new FLabel.Builder()
+            .fontSize(14)
+            .tooltip("Print Proxies")
+            .iconInBackground(true)
+            .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS))
+            .text(" ").hoverable(true).build();
+
     private final JPanel pnlRemoveButtons =
             new JPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
 
@@ -139,6 +147,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
 
         pnlHeader.add(btnImport, "w 26px!, h 26px!, gap 0 5px 0 0");
         pnlHeader.add(btnExport, "w 26px!, h 26px!, gap 0 20px 0 0");
+        //pnlHeader.add(btnPrintProxies, "w 26px!, h 26px!, gap 0 20px 0 0");
 
         pnlRemove.setOpaque(false);
         pnlRemove.setLayout(new MigLayout("insets 0, gap 0, ax center"));
@@ -210,10 +219,10 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getControl()
+     * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getControl() {
+    public ICDoc getLayoutControl() {
         return CCurrentDeck.SINGLETON_INSTANCE;
     }
 
@@ -366,6 +375,11 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
     /** @return {@link javax.swing.JLabel} */
     public JLabel getBtnSaveAs() {
         return btnExport;
+    }
+
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getBtnPrintProxies() {
+        return btnPrintProxies;
     }
 
     /** @return {@link javax.swing.JLabel} */

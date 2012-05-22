@@ -287,6 +287,7 @@ res/cardsfolder/a/angel_of_jubilation.txt -text
 res/cardsfolder/a/angel_of_light.txt svneol=native#text/plain
 res/cardsfolder/a/angel_of_mercy.txt svneol=native#text/plain
 res/cardsfolder/a/angel_of_retribution.txt svneol=native#text/plain
+res/cardsfolder/a/angel_of_salvation.txt -text
 res/cardsfolder/a/angelfire_crusader.txt svneol=native#text/plain
 res/cardsfolder/a/angelheart_vial.txt svneol=native#text/plain
 res/cardsfolder/a/angelic_arbiter.txt -text svneol=unset#text/plain
@@ -329,6 +330,7 @@ res/cardsfolder/a/anodet_lurker.txt svneol=native#text/plain
 res/cardsfolder/a/anoint.txt svneol=native#text/plain
 res/cardsfolder/a/anowon_the_ruin_sage.txt svneol=native#text/plain
 res/cardsfolder/a/ant_queen.txt svneol=native#text/plain
+res/cardsfolder/a/antagonism.txt -text
 res/cardsfolder/a/anthem_of_rakdos.txt -text
 res/cardsfolder/a/anthroplasm.txt svneol=native#text/plain
 res/cardsfolder/a/antler_skulkin.txt svneol=native#text/plain
@@ -356,6 +358,7 @@ res/cardsfolder/a/apprentice_necromancer.txt svneol=native#text/plain
 res/cardsfolder/a/apprentice_sorcerer.txt svneol=native#text/plain
 res/cardsfolder/a/apprentice_wizard.txt svneol=native#text/plain
 res/cardsfolder/a/aquamoeba.txt svneol=native#text/plain
+res/cardsfolder/a/aquamorph_entity.txt -text
 res/cardsfolder/a/aquastrand_spider.txt -text
 res/cardsfolder/a/aquitects_will.txt svneol=native#text/plain
 res/cardsfolder/a/araba_mothrider.txt svneol=native#text/plain
@@ -4381,6 +4384,7 @@ res/cardsfolder/h/hunted_lammasu.txt svneol=native#text/plain
 res/cardsfolder/h/hunted_phantasm.txt svneol=native#text/plain
 res/cardsfolder/h/hunted_troll.txt svneol=native#text/plain
 res/cardsfolder/h/hunted_wumpus.txt svneol=native#text/plain
+res/cardsfolder/h/hunter_sliver.txt -text
 res/cardsfolder/h/hunters_feast.txt svneol=native#text/plain
 res/cardsfolder/h/hunters_insight.txt -text
 res/cardsfolder/h/hunting_cheetah.txt svneol=native#text/plain

@@ -169,7 +169,6 @@ public enum VHomeUI implements IVTopLevelUI {
             pnlRight.add(item.getItemEnum(), item.getPanel());
             allGroupPanels.get(item.getGroupEnum()).add(
                     allSubmenuLabels.get(EMenuItem.valueOf(item.getItemEnum())), strItemConstraints);
-            item.getControl().initialize();
         }
 
         // For each group: add its title, then its panel, then "click" if necessary.
@@ -279,8 +278,8 @@ public enum VHomeUI implements IVTopLevelUI {
                 // with the selection display process.
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        if (item.getControl().getMenuCommand() != null) {
-                            item.getControl().getMenuCommand().execute();
+                        if (item.getSubmenuControl().getMenuCommand() != null) {
+                            item.getSubmenuControl().getMenuCommand().execute();
                         }
                     }
                 });

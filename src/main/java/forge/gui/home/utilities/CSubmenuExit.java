@@ -14,12 +14,6 @@ public enum CSubmenuExit implements ICSubmenu {
     SINGLETON_INSTANCE;
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
-     */
-    @Override
-    public void initialize() { }
-
-    /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#getCommand()
      */
     @SuppressWarnings("serial")
@@ -34,4 +28,11 @@ public enum CSubmenuExit implements ICSubmenu {
      */
     @Override
     public void update() { }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.ICSubmenu#initialize()
+     */
+    @Override
+    public void initialize() {
+    }
 }

@@ -16,7 +16,7 @@ public interface IVSubmenu {
     /** Retrives control object associated with this instance.
      * @return {@link forge.gui.home.ICSubmenu}
      */
-    ICSubmenu getControl();
+    ICSubmenu getSubmenuControl();
 
     /** Returns parent menu grouping of this submenu, useful for
      * functions such as expanding and collapsing in the menu area.
