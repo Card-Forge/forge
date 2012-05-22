@@ -118,7 +118,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (params.containsKey("ActivationLimit")) {
-            this.setActivationLimit(Integer.parseInt(params.get("ActivationLimit")));
+            this.setLimitToCheck(params.get("ActivationLimit"));
         }
 
         if (params.containsKey("ActivationNumberSacrifice")) {
@@ -307,8 +307,15 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        if ((this.getActivationLimit() != -1) && (this.getNumberTurnActivations() >= this.getActivationLimit())) {
-            return false;
+        if (this.getLimitToCheck() != null) {
+            String limit = this.getLimitToCheck();
+            int activationLimit = limit.matches("[0-9][0-9]?")
+              ? Integer.parseInt(limit) : AbilityFactory.calculateAmount(c, limit, sa);
+            this.setActivationLimit(activationLimit);
+
+            if ((this.getActivationLimit() != -1) && (this.getNumberTurnActivations() >= this.getActivationLimit())) {
+                return false;
+            }
         }
 
         if (this.getCardsInHand() != -1) {

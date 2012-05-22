@@ -60,10 +60,10 @@ public enum VSubmenuConstructed implements IVSubmenu {
             JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final FLabel btnHumanRandom = new FLabel.Builder().text("Random").fontSize(14).opaque(true)
-            .hoverable(true).fontScaleAuto(false).build();
+            .hoverable(true).build();
 
     private final FLabel btnAIRandom = new FLabel.Builder().text("Random").fontSize(14).opaque(true)
-            .hoverable(true).fontScaleAuto(false).build();
+            .hoverable(true).build();
 
     private VSubmenuConstructed() {
         // Radio button group: Human
@@ -147,7 +147,7 @@ public enum VSubmenuConstructed implements IVSubmenu {
         // Add radio buttons: Human
         pnlRadiosHuman.setOpaque(false);
         pnlRadiosHuman.add(new FLabel.Builder().text("Select your deck:")
-                .fontStyle(Font.BOLD).fontScaleAuto(false).fontSize(16)
+                .fontStyle(Font.BOLD).fontSize(16)
                 .fontAlign(SwingConstants.LEFT).build(), strRadioConstraints);
         pnlRadiosHuman.add(radColorsHuman, strRadioConstraints);
         pnlRadiosHuman.add(radThemesHuman, strRadioConstraints);
@@ -157,7 +157,7 @@ public enum VSubmenuConstructed implements IVSubmenu {
         // Add radio buttons: AI
         pnlRadiosAI.setOpaque(false);
         pnlRadiosAI.add(new FLabel.Builder().text("Select an AI deck:")
-                .fontStyle(Font.BOLD).fontScaleAuto(false).fontSize(16)
+                .fontStyle(Font.BOLD).fontSize(16)
                 .fontAlign(SwingConstants.LEFT).build(), strRadioConstraints);
         pnlRadiosAI.add(radColorsAI, strRadioConstraints);
         pnlRadiosAI.add(radThemesAI, strRadioConstraints);

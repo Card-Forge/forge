@@ -43,6 +43,7 @@ res/cardsfolder/a/absorb_vis.txt svneol=native#text/plain
 res/cardsfolder/a/abu_jafar.txt -text
 res/cardsfolder/a/abuna_acolyte.txt svneol=native#text/plain
 res/cardsfolder/a/abunas_chant.txt -text
+res/cardsfolder/a/abundance.txt -text
 res/cardsfolder/a/abundant_growth.txt -text
 res/cardsfolder/a/abyssal_gatekeeper.txt svneol=native#text/plain
 res/cardsfolder/a/abyssal_horror.txt svneol=native#text/plain
@@ -63,10 +64,12 @@ res/cardsfolder/a/accumulated_knowledge.txt svneol=native#text/plain
 res/cardsfolder/a/accursed_centaur.txt svneol=native#text/plain
 res/cardsfolder/a/acid_rain.txt svneol=native#text/plain
 res/cardsfolder/a/acid_web_spider.txt svneol=native#text/plain
+res/cardsfolder/a/acidic_dagger.txt -text
 res/cardsfolder/a/acidic_slime.txt svneol=native#text/plain
 res/cardsfolder/a/acidic_sliver.txt svneol=native#text/plain
 res/cardsfolder/a/acidic_soil.txt svneol=native#text/plain
 res/cardsfolder/a/acolyte_of_xathrid.txt svneol=native#text/plain
+res/cardsfolder/a/acorn_catapult.txt -text
 res/cardsfolder/a/acorn_harvest.txt svneol=native#text/plain
 res/cardsfolder/a/acquire.txt svneol=native#text/plain
 res/cardsfolder/a/acridian.txt svneol=native#text/plain
@@ -326,6 +329,7 @@ res/cardsfolder/a/anodet_lurker.txt svneol=native#text/plain
 res/cardsfolder/a/anoint.txt svneol=native#text/plain
 res/cardsfolder/a/anowon_the_ruin_sage.txt svneol=native#text/plain
 res/cardsfolder/a/ant_queen.txt svneol=native#text/plain
+res/cardsfolder/a/anthem_of_rakdos.txt -text
 res/cardsfolder/a/anthroplasm.txt svneol=native#text/plain
 res/cardsfolder/a/antler_skulkin.txt svneol=native#text/plain
 res/cardsfolder/a/anurid_barkripper.txt svneol=native#text/plain
@@ -343,6 +347,7 @@ res/cardsfolder/a/aphetto_runecaster.txt svneol=native#text/plain
 res/cardsfolder/a/aphetto_vulture.txt svneol=native#text/plain
 res/cardsfolder/a/aphotic_wisps.txt svneol=native#text/plain
 res/cardsfolder/a/apocalypse.txt svneol=native#text/plain
+res/cardsfolder/a/apocalypse_chime.txt -text
 res/cardsfolder/a/apocalypse_hydra.txt svneol=native#text/plain
 res/cardsfolder/a/apostles_blessing.txt svneol=native#text/plain
 res/cardsfolder/a/apothecary_initiate.txt svneol=native#text/plain
@@ -574,6 +579,7 @@ res/cardsfolder/a/avenger_of_zendikar.txt svneol=native#text/plain
 res/cardsfolder/a/avenging_angel.txt svneol=native#text/plain
 res/cardsfolder/a/avenging_druid.txt -text
 res/cardsfolder/a/avian_changeling.txt svneol=native#text/plain
+res/cardsfolder/a/avizoa.txt -text
 res/cardsfolder/a/avoid_fate.txt svneol=native#text/plain
 res/cardsfolder/a/awakener_druid.txt svneol=native#text/plain
 res/cardsfolder/a/awakening.txt svneol=native#text/plain
@@ -1552,6 +1558,7 @@ res/cardsfolder/c/cleanfall.txt svneol=native#text/plain
 res/cardsfolder/c/cleanse.txt svneol=native#text/plain
 res/cardsfolder/c/cleansing_beam.txt svneol=native#text/plain
 res/cardsfolder/c/clear.txt svneol=native#text/plain
+res/cardsfolder/c/clear_the_land.txt -text
 res/cardsfolder/c/clearwater_goblet.txt svneol=native#text/plain
 res/cardsfolder/c/clergy_en_vec.txt svneol=native#text/plain
 res/cardsfolder/c/clickslither.txt svneol=native#text/plain
@@ -2216,6 +2223,7 @@ res/cardsfolder/d/desert_nomads.txt svneol=native#text/plain
 res/cardsfolder/d/desert_sandstorm.txt svneol=native#text/plain
 res/cardsfolder/d/desert_twister.txt svneol=native#text/plain
 res/cardsfolder/d/deserted_temple.txt svneol=native#text/plain
+res/cardsfolder/d/desertion.txt -text
 res/cardsfolder/d/desolate_lighthouse.txt -text
 res/cardsfolder/d/desolation_angel.txt svneol=native#text/plain
 res/cardsfolder/d/desolation_giant.txt svneol=native#text/plain
@@ -2785,6 +2793,7 @@ res/cardsfolder/e/enraging_licid.txt -text
 res/cardsfolder/e/enshrined_memories.txt svneol=native#text/plain
 res/cardsfolder/e/enslave.txt svneol=native#text/plain
 res/cardsfolder/e/enslaved_dwarf.txt svneol=native#text/plain
+res/cardsfolder/e/enslaved_horror.txt -text
 res/cardsfolder/e/enslaved_scout.txt svneol=native#text/plain
 res/cardsfolder/e/ensnare.txt svneol=native#text/plain
 res/cardsfolder/e/ensnaring_bridge.txt svneol=native#text/plain
@@ -3600,6 +3609,7 @@ res/cardsfolder/g/gideons_lawkeeper.txt svneol=native#text/plain
 res/cardsfolder/g/gift_of_estates.txt svneol=native#text/plain
 res/cardsfolder/g/gift_of_granite.txt svneol=native#text/plain
 res/cardsfolder/g/gift_of_the_deity.txt svneol=native#text/plain
+res/cardsfolder/g/gift_of_the_gargantuan.txt -text
 res/cardsfolder/g/gift_of_the_woods.txt svneol=native#text/plain
 res/cardsfolder/g/gigadrowse.txt svneol=native#text/plain
 res/cardsfolder/g/gigantomancer.txt svneol=native#text/plain
@@ -4345,6 +4355,7 @@ res/cardsfolder/h/howling_fury.txt svneol=native#text/plain
 res/cardsfolder/h/howling_gale.txt svneol=native#text/plain
 res/cardsfolder/h/howling_mine.txt svneol=native#text/plain
 res/cardsfolder/h/howling_wolf.txt svneol=native#text/plain
+res/cardsfolder/h/howltooth_hollow.txt -text
 res/cardsfolder/h/hua_tuo_honored_physician.txt svneol=native#text/plain
 res/cardsfolder/h/huang_zhong_shu_general.txt svneol=native#text/plain
 res/cardsfolder/h/hulking_cyclops.txt svneol=native#text/plain
@@ -7954,6 +7965,7 @@ res/cardsfolder/s/second_wind.txt svneol=native#text/plain
 res/cardsfolder/s/secretkeeper.txt -text
 res/cardsfolder/s/secrets_of_the_dead.txt -text
 res/cardsfolder/s/security_detail.txt svneol=native#text/plain
+res/cardsfolder/s/sedge_sliver.txt -text
 res/cardsfolder/s/sedge_troll.txt svneol=native#text/plain
 res/cardsfolder/s/sedraxis_alchemist.txt svneol=native#text/plain
 res/cardsfolder/s/sedraxis_specter.txt svneol=native#text/plain
@@ -8109,6 +8121,7 @@ res/cardsfolder/s/shatterstorm.txt svneol=native#text/plain
 res/cardsfolder/s/shauku_endbringer.txt svneol=native#text/plain
 res/cardsfolder/s/shaukus_minion.txt svneol=native#text/plain
 res/cardsfolder/s/shell_skulkin.txt svneol=native#text/plain
+res/cardsfolder/s/shelldock_isle.txt -text
 res/cardsfolder/s/shelter.txt -text
 res/cardsfolder/s/sheltered_valley.txt svneol=native#text/plain
 res/cardsfolder/s/sheltering_prayers.txt svneol=native#text/plain
@@ -8726,6 +8739,7 @@ res/cardsfolder/s/spined_sliver.txt svneol=native#text/plain
 res/cardsfolder/s/spined_thopter.txt svneol=native#text/plain
 res/cardsfolder/s/spined_wurm.txt svneol=native#text/plain
 res/cardsfolder/s/spineless_thug.txt svneol=native#text/plain
+res/cardsfolder/s/spinerock_knoll.txt -text
 res/cardsfolder/s/spinneret_sliver.txt svneol=native#text/plain
 res/cardsfolder/s/spiny_starfish.txt -text
 res/cardsfolder/s/spiraling_duelist.txt svneol=native#text/plain
@@ -10617,6 +10631,7 @@ res/cardsfolder/w/withered_wretch.txt svneol=native#text/plain
 res/cardsfolder/w/withering_boon.txt svneol=native#text/plain
 res/cardsfolder/w/withering_gaze.txt svneol=native#text/plain
 res/cardsfolder/w/withering_hex.txt svneol=native#text/plain
+res/cardsfolder/w/withering_wisps.txt -text
 res/cardsfolder/w/witherscale_wurm.txt -text svneol=unset#text/plain
 res/cardsfolder/w/withstand.txt svneol=native#text/plain
 res/cardsfolder/w/withstand_death.txt svneol=native#text/plain
@@ -10845,37 +10860,12 @@ res/draft/uncommon.txt svneol=native#text/plain
 res/gamedata/NonStackingKWList.txt svneol=native#text/plain
 res/gamedata/TypeLists.txt svneol=native#text/plain
 res/gui/display_new_layout.xml -text svneol=unset#text/plain
-res/images/deckeditor/filter_artifact_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_artifact_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_black_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_black_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_blue_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_blue_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_colorless_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_colorless_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_creature_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_creature_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_enchant_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_enchant_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_green_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_green_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_instant_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_instant_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_land_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_land_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_planeswalker_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_planeswalker_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_red_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_red_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_sorcery_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_sorcery_y.png -text svneol=unset#image/png
-res/images/deckeditor/filter_white_n.png -text svneol=unset#image/png
-res/images/deckeditor/filter_white_y.png -text svneol=unset#image/png
 res/lang/de.properties svneol=native#text/plain
 res/lang/en.properties svneol=native#text/plain
 res/lang/howTo/de.properties svneol=native#text/plain
 res/lang/howTo/en.properties svneol=native#text/plain
 res/lang/lang.properties svneol=native#text/plain
+res/layouts/editor_default.xml -text
 res/layouts/match_default.xml -text
 res/licenses/java-yield-license.txt svneol=native#text/plain
 res/licenses/log4j-license.txt svneol=native#text/plain
@@ -11080,6 +11070,8 @@ res/pics_product/tournamentpacks/SHM.jpg -text
 res/pics_product/tournamentpacks/TMP.jpg -text
 res/pics_product/tournamentpacks/TSP.jpg -text
 res/pics_product/tournamentpacks/USG.jpg -text
+res/preferences/editor.preferences -text
+res/preferences/main.properties -text
 res/product-images.txt -text
 res/quest/all-prices.txt svneol=native#text/plain
 res/quest/bazaar/ape_pet_l1.txt -text
@@ -11369,6 +11361,7 @@ res/quest/duels/Professor[!!-~]X[!!-~]2.dck -text
 res/quest/duels/Professor[!!-~]X[!!-~]3.dck -text
 res/quest/duels/R2-D2[!!-~]3.dck -text
 res/quest/duels/Radagast[!!-~]2.dck -text
+res/quest/duels/Radiant[!!-~]2.dck -text
 res/quest/duels/Radiant[!!-~]3.dck -text
 res/quest/duels/Radioactive[!!-~]Man[!!-~]3.dck -text
 res/quest/duels/Radioactive[!!-~]Man[!!-~]4.dck -text
@@ -11600,7 +11593,6 @@ res/skins/the_simpsons/bg_texture.jpg -text
 res/skins/the_simpsons/font1.ttf -text
 res/skins/the_simpsons/sprite_avatars.png -text
 res/skins/the_simpsons/sprite_icons.png -text
-res/sound/tap.mp3 -text svneol=unset#audio/mpeg
 res/token-images.txt -text
 src/main/config/Forge.icns -text
 src/main/config/backgroundImage.jpg -text svneol=unset#image/jpeg
@@ -11637,7 +11629,6 @@ src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GameLog.java -text
 src/main/java/forge/HandSizeOp.java svneol=native#text/plain
 src/main/java/forge/ImageCache.java svneol=native#text/plain
-src/main/java/forge/MyObservable.java svneol=native#text/plain
 src/main/java/forge/NameChanger.java svneol=native#text/plain
 src/main/java/forge/Singletons.java svneol=native#text/plain
 src/main/java/forge/StaticEffect.java svneol=native#text/plain
@@ -11926,34 +11917,47 @@ src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
 src/main/java/forge/gui/MultiPhaseProgressMonitorWithETA.java svneol=native#text/plain
 src/main/java/forge/gui/SOverlayUtils.java -text
 src/main/java/forge/gui/WrapLayout.java -text
-src/main/java/forge/gui/deckeditor/DeckController.java -text
-src/main/java/forge/gui/deckeditor/DeckEditorBase.java -text
-src/main/java/forge/gui/deckeditor/DeckEditorConstructed.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/DeckEditorLimited.java -text
-src/main/java/forge/gui/deckeditor/DeckEditorQuest.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/CDeckEditorUI.java -text
 src/main/java/forge/gui/deckeditor/DeckImport.java -text
-src/main/java/forge/gui/deckeditor/DraftingProcess.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/MenuBase.java -text
 src/main/java/forge/gui/deckeditor/MenuCommon.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/MenuLimited.java -text
-src/main/java/forge/gui/deckeditor/MenuQuest.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/PresetColumns.java -text
-src/main/java/forge/gui/deckeditor/QuestCardShop.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/elements/CardPanelBase.java -text
-src/main/java/forge/gui/deckeditor/elements/CardPanelHeavy.java -text
-src/main/java/forge/gui/deckeditor/elements/CardPanelLite.java -text
-src/main/java/forge/gui/deckeditor/elements/CheckBoxWithIcon.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/elements/DeckAnalysis.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/elements/FilterCheckBoxes.java -text
-src/main/java/forge/gui/deckeditor/elements/FilterNameTypeSetPanel.java -text
-src/main/java/forge/gui/deckeditor/elements/ManaCostRenderer.java -text
-src/main/java/forge/gui/deckeditor/elements/TableColumnInfo.java -text
-src/main/java/forge/gui/deckeditor/elements/TableModel.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/elements/TableSorter.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/elements/TableSorterCascade.java -text
-src/main/java/forge/gui/deckeditor/elements/TableView.java -text
-src/main/java/forge/gui/deckeditor/elements/package-info.java -text
+src/main/java/forge/gui/deckeditor/SEditorIO.java -text
+src/main/java/forge/gui/deckeditor/SEditorUtil.java -text
+src/main/java/forge/gui/deckeditor/SFilterUtil.java -text
+src/main/java/forge/gui/deckeditor/VDeckEditorUI.java -text
+src/main/java/forge/gui/deckeditor/controllers/ACEditorBase.java -text
+src/main/java/forge/gui/deckeditor/controllers/CAllDecks.java -text
+src/main/java/forge/gui/deckeditor/controllers/CCardCatalog.java -text
+src/main/java/forge/gui/deckeditor/controllers/CCurrentDeck.java -text
+src/main/java/forge/gui/deckeditor/controllers/CDeckgen.java -text
+src/main/java/forge/gui/deckeditor/controllers/CEditorConstructed.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/controllers/CEditorDraftingProcess.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/controllers/CEditorLimited.java -text
+src/main/java/forge/gui/deckeditor/controllers/CEditorPreferences.java -text
+src/main/java/forge/gui/deckeditor/controllers/CEditorQuest.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/controllers/CEditorQuestCardShop.java -text
+src/main/java/forge/gui/deckeditor/controllers/CFilters.java -text
+src/main/java/forge/gui/deckeditor/controllers/CProbabilities.java -text
+src/main/java/forge/gui/deckeditor/controllers/CStatistics.java -text
 src/main/java/forge/gui/deckeditor/package-info.java -text
+src/main/java/forge/gui/deckeditor/tables/DeckController.java -text
+src/main/java/forge/gui/deckeditor/tables/IntegerRenderer.java -text
+src/main/java/forge/gui/deckeditor/tables/ManaCostRenderer.java -text
+src/main/java/forge/gui/deckeditor/tables/SColumnUtil.java -text
+src/main/java/forge/gui/deckeditor/tables/TableColumnInfo.java -text
+src/main/java/forge/gui/deckeditor/tables/TableModel.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/tables/TableSorter.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/tables/TableSorterCascade.java -text
+src/main/java/forge/gui/deckeditor/tables/TableView.java -text
+src/main/java/forge/gui/deckeditor/tables/package-info.java -text
+src/main/java/forge/gui/deckeditor/views/ITableContainer.java -text
+src/main/java/forge/gui/deckeditor/views/VAllDecks.java -text
+src/main/java/forge/gui/deckeditor/views/VCardCatalog.java -text
+src/main/java/forge/gui/deckeditor/views/VCurrentDeck.java -text
+src/main/java/forge/gui/deckeditor/views/VDeckgen.java -text
+src/main/java/forge/gui/deckeditor/views/VEditorPreferences.java -text
+src/main/java/forge/gui/deckeditor/views/VFilters.java -text
+src/main/java/forge/gui/deckeditor/views/VProbabilities.java -text
+src/main/java/forge/gui/deckeditor/views/VStatistics.java -text
 src/main/java/forge/gui/download/GuiDownloadPicturesLQ.java svneol=native#text/plain
 src/main/java/forge/gui/download/GuiDownloadPrices.java svneol=native#text/plain
 src/main/java/forge/gui/download/GuiDownloadQuestImages.java -text
@@ -11969,8 +11973,8 @@ src/main/java/forge/gui/framework/ILocalRepaint.java -text
 src/main/java/forge/gui/framework/IVDoc.java -text
 src/main/java/forge/gui/framework/IVTopLevelUI.java -text
 src/main/java/forge/gui/framework/SDisplayUtil.java -text
-src/main/java/forge/gui/framework/SIOUtil.java -text
 src/main/java/forge/gui/framework/SLayoutConstants.java -text
+src/main/java/forge/gui/framework/SLayoutIO.java -text
 src/main/java/forge/gui/framework/SOverflowUtil.java -text
 src/main/java/forge/gui/framework/SRearrangingUtil.java -text
 src/main/java/forge/gui/framework/SResizingUtil.java -text
@@ -11990,7 +11994,7 @@ src/main/java/forge/gui/home/quest/CSubmenuQuestPrefs.java -text
 src/main/java/forge/gui/home/quest/IStatsAndPet.java -text
 src/main/java/forge/gui/home/quest/QuestFileLister.java -text
 src/main/java/forge/gui/home/quest/QuestPreferencesHandler.java -text
-src/main/java/forge/gui/home/quest/SubmenuQuestUtil.java -text
+src/main/java/forge/gui/home/quest/SSubmenuQuestUtil.java -text
 src/main/java/forge/gui/home/quest/VSubmenuChallenges.java -text
 src/main/java/forge/gui/home/quest/VSubmenuDuels.java -text
 src/main/java/forge/gui/home/quest/VSubmenuQuestData.java -text
@@ -12065,6 +12069,7 @@ src/main/java/forge/gui/toolbox/FRadioButton.java -text
 src/main/java/forge/gui/toolbox/FScrollPane.java -text
 src/main/java/forge/gui/toolbox/FSkin.java -text
 src/main/java/forge/gui/toolbox/FTextArea.java -text
+src/main/java/forge/gui/toolbox/FTextField.java -text
 src/main/java/forge/gui/toolbox/SaveOpenDialog.java -text
 src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
@@ -12144,6 +12149,7 @@ src/main/java/forge/util/IStorageView.java -text
 src/main/java/forge/util/IgnoringXStream.java -text
 src/main/java/forge/util/LineReader.java -text
 src/main/java/forge/util/MultiplexOutputStream.java svneol=native#text/plain
+src/main/java/forge/util/MyObservable.java svneol=native#text/plain
 src/main/java/forge/util/MyRandom.java svneol=native#text/plain
 src/main/java/forge/util/StorageImmediatelySerialized.java svneol=native#text/plain
 src/main/java/forge/util/StorageReaderFile.java -text
@@ -12156,6 +12162,7 @@ src/main/java/forge/util/closures/Lambda.java svneol=native#text/plain
 src/main/java/forge/util/closures/Lambda0.java -text
 src/main/java/forge/util/closures/Lambda1.java svneol=native#text/plain
 src/main/java/forge/util/closures/Predicate.java -text
+src/main/java/forge/util/closures/PredicateInteger.java -text
 src/main/java/forge/util/closures/PredicateString.java -text
 src/main/java/forge/util/closures/package-info.java -text svneol=native#text/plain
 src/main/java/forge/util/package-info.java -text

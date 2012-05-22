@@ -4,7 +4,7 @@ Types:Sorcery
 Text:no text
 A:SP$Effect | Cost$ G | Name$ Insist effect | Triggers$ SpellCastTrig | SVars$ Insistence,DBCleanup | SubAbility$ DBDraw | SpellDescription$ The next creature spell you cast this turn can't be countered by spells or abilities.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Creature | ValidControllingPlayer$ You | Execute$ Insistence | TriggerDescription$ The next creature spell you cast this turn can't be countered by spells or abilities.
+SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ Insistence | TriggerDescription$ The next creature spell you cast this turn can't be countered by spells or abilities.
 SVar:Insistence:AB$ Pump | Cost$ 0 | Defined$ TriggeredCard | KW$ HIDDEN CARDNAME can't be countered. | PumpZone$ Stack | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Graveyard
 SVar:RemAIDeck:True

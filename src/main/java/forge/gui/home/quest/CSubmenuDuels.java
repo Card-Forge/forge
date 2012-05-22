@@ -9,7 +9,7 @@ import forge.Command;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.VHomeUI;
-import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
+import forge.gui.home.quest.SSubmenuQuestUtil.SelectablePanel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventDuel;
 import forge.quest.bazaar.QuestPetController;
@@ -52,15 +52,15 @@ public enum CSubmenuDuels implements ICSubmenu {
 
         view.getBtnSpellShop().setCommand(
                 new Command() { @Override
-                    public void execute() { SubmenuQuestUtil.showSpellShop(); } });
+                    public void execute() { SSubmenuQuestUtil.showSpellShop(); } });
 
         view.getBtnBazaar().setCommand(
                 new Command() { @Override
-                    public void execute() { SubmenuQuestUtil.showBazaar(); } });
+                    public void execute() { SSubmenuQuestUtil.showBazaar(); } });
 
         view.getBtnStart().addActionListener(
                 new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent e) { SubmenuQuestUtil.startGame(); } });
+            public void actionPerformed(final ActionEvent e) { SSubmenuQuestUtil.startGame(); } });
 
         view.getBtnCurrentDeck().setCommand(
                 new Command() { @Override
@@ -94,7 +94,7 @@ public enum CSubmenuDuels implements ICSubmenu {
      */
     @Override
     public void update() {
-        SubmenuQuestUtil.updateStatsAndPet();
+        SSubmenuQuestUtil.updateStatsAndPet();
 
         final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
 

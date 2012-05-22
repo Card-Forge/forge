@@ -2,7 +2,9 @@
  * Forge: Play Magic: the Gathering.
  * Copyright (C) 2011  Forge Team
  *
- * This program is free software: you can redistribute it and/or modify
+ *
+import forge.view.SplashFrame;
+ This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -214,8 +216,8 @@ public enum FSkin {
         ICO_ENDTURN     (new int[] {320, 640, 80, 80}), /** */
         ICO_CONCEDE     (new int[] {240, 640, 80, 80}), /** */
         ICO_REVERTLAYOUT (new int[] {400, 720, 80, 80}), /** */
-        ICO_OPENLAYOUT  (new int[] {480, 640, 80, 80}),
-        ICO_SAVELAYOUT  (new int[] {480, 720, 80, 80}),
+        ICO_OPENLAYOUT  (new int[] {0, 800, 80, 80}), /** */
+        ICO_SAVELAYOUT  (new int[] {80, 800, 80, 80}), /** */
         ICO_DECKLIST    (new int[] {400, 640, 80, 80});
 
         private int[] coords;
@@ -257,19 +259,24 @@ public enum FSkin {
     }
 
     /** */
-    public enum ForgeIcons implements SkinProp { /** */
-        ICO_EDIT            (new int[] {640, 500, 20, 20}), /** */
-        ICO_EDIT_OVER       (new int[] {660, 500, 20, 20}), /** */
+    public enum InterfaceIcons implements SkinProp { /** */
         ICO_DELETE          (new int[] {640, 480, 20, 20}), /** */
         ICO_DELETE_OVER     (new int[] {660, 480, 20, 20}), /** */
+        ICO_EDIT            (new int[] {640, 500, 20, 20}), /** */
+        ICO_EDIT_OVER       (new int[] {660, 500, 20, 20}), /** */
+        ICO_OPEN            (new int[] {660, 520, 20, 20}), /** */
+        ICO_MINUS           (new int[] {660, 620, 20, 20}), /** */
+        ICO_NEW             (new int[] {660, 540, 20, 20}), /** */
+        ICO_PLUS            (new int[] {660, 600, 20, 20}), /** */
+        ICO_SAVE            (new int[] {660, 560, 20, 20}), /** */
+        ICO_SAVEAS          (new int[] {660, 580, 20, 20}), /** */
         ICO_UNKNOWN         (new int[] {80, 720, 80, 80}), /** */
         ICO_LOGO            (new int[] {480, 0, 200, 200}), /** */
-        ICO_DEFAULT_MAGE    (new int[] {0, 720, 80, 80}), /** */
         ICO_FAVICON         (new int[] {0, 640, 80, 80});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
-        ForgeIcons(final int[] xy) { this.coords = xy; }
+        InterfaceIcons(final int[] xy) { this.coords = xy; }
         /** @return int[] */
         public int[] getCoords() { return coords; }
     }
@@ -277,15 +284,33 @@ public enum FSkin {
     /** */
     public enum LayoutImages implements SkinProp { /** */
         IMG_HANDLE  (new int[] {320, 450, 80, 20}), /** */
-        IMG_CUR_L   (new int[] {644, 524, 32, 32}), /** */
-        IMG_CUR_R   (new int[] {644, 564, 32, 32}), /** */
-        IMG_CUR_T   (new int[] {644, 604, 32, 32}), /** */
-        IMG_CUR_B   (new int[] {644, 644, 32, 32}), /** */
-        IMG_CUR_TAB (new int[] {644, 684, 32, 32});
+        IMG_CUR_L   (new int[] {564, 724, 32, 32}), /** */
+        IMG_CUR_R   (new int[] {564, 764, 32, 32}), /** */
+        IMG_CUR_T   (new int[] {604, 724, 32, 32}), /** */
+        IMG_CUR_B   (new int[] {604, 764, 32, 32}), /** */
+        IMG_CUR_TAB (new int[] {644, 764, 32, 32});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
         LayoutImages(final int[] xy) { this.coords = xy; }
+        /** @return int[] */
+        public int[] getCoords() { return coords; }
+    }
+
+    /** */
+    public enum EditorImages implements SkinProp { /** */
+        IMG_ARTIFACT        (new int[] {280, 720, 40, 40}), /** */
+        IMG_CREATURE        (new int[] {240, 720, 40, 40}), /** */
+        IMG_ENCHANTMENT     (new int[] {320, 720, 40, 40}), /** */
+        IMG_INSTANT         (new int[] {360, 720, 40, 40}), /** */
+        IMG_LAND            (new int[] {120, 720, 40, 40}), /** */
+        IMG_MULTI           (new int[] {80, 720, 40, 40}), /** */
+        IMG_PLANESWALKER    (new int[] {200, 720, 40, 40}), /** */
+        IMG_SORCERY         (new int[] {160, 720, 40, 40});
+
+        private int[] coords;
+        /** @param xy &emsp; int[] coordinates */
+        EditorImages(final int[] xy) { this.coords = xy; }
         /** @return int[] */
         public int[] getCoords() { return coords; }
     }
@@ -500,10 +525,11 @@ public enum FSkin {
         for (final Colors e : Colors.values()) { FSkin.setColor(e); }
         for (final ZoneImages e : ZoneImages.values())                    { FSkin.setImage(e); }
         for (final DockIcons e : DockIcons.values())                      { FSkin.setIcon(e); }
-        for (final ForgeIcons e : ForgeIcons.values())                    { FSkin.setIcon(e); }
+        for (final InterfaceIcons e : InterfaceIcons.values())                    { FSkin.setIcon(e); }
         for (final ButtonImages e : ButtonImages.values())                { FSkin.setIcon(e); }
         for (final QuestIcons e : QuestIcons.values())                    { FSkin.setIcon(e); }
 
+        for (final EditorImages e : EditorImages.values())                { FSkin.setImage(e); }
         for (final ManaImages e : ManaImages.values())                    { FSkin.setImage(e); }
         for (final ColorlessManaImages e : ColorlessManaImages.values())  { FSkin.setImage(e); }
         for (final GameplayImages e : GameplayImages.values())            { FSkin.setImage(e); }
@@ -514,6 +540,9 @@ public enum FSkin {
 
         // Assemble avatar images
         FSkin.assembleAvatars();
+
+        // Table zebra striping
+        UIManager.put("Table.alternateRowColor", new Color(240, 240, 240));
 
         // Images loaded; can start UI init.
         SwingUtilities.invokeLater(new Runnable() {

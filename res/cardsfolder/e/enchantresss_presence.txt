@@ -2,7 +2,7 @@ Name:Enchantress's Presence
 ManaCost:2 G
 Types:Enchantment
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Card.Enchantment+YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an enchantment spell, draw a card.
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an enchantment spell, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

@@ -43,6 +43,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityMana;
@@ -197,8 +198,7 @@ public class CardFactoryUtil {
         cheapest = all.get(0);
 
         for (int i = 0; i < all.size(); i++) {
-            if (CardUtil.getConvertedManaCost(cheapest.getManaCost()) <= CardUtil.getConvertedManaCost(cheapest
-                    .getManaCost())) {
+            if (cheapest.getManaCost().getCMC() <= cheapest.getManaCost().getCMC()) {
                 cheapest = all.get(i);
             }
         }
@@ -306,7 +306,7 @@ public class CardFactoryUtil {
 
         int bigCMC = 0;
         for (int i = 0; i < all.size(); i++) {
-            final int curCMC = CardUtil.getConvertedManaCost(all.get(i).getManaCost());
+            final int curCMC = all.get(i).getManaCost().getCMC();
 
             if (curCMC > bigCMC) {
                 bigCMC = curCMC;
@@ -340,7 +340,7 @@ public class CardFactoryUtil {
 
         int bigCMC = 0;
         for (int i = 0; i < all.size(); i++) {
-            final int curCMC = CardUtil.getConvertedManaCost(all.get(i).getManaCost());
+            final int curCMC = all.get(i).getManaCost().getCMC();
 
             if (curCMC > bigCMC) {
                 bigCMC = curCMC;
@@ -694,6 +694,19 @@ public class CardFactoryUtil {
         return biggest;
     }
 
+    /**
+     * <p>
+     * getWorstAI.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @return a {@link forge.Card} object.
+     */
+    public static Card getWorstAI(final CardList list) {
+        return CardFactoryUtil.getWorstPermanentAI(list, false, false, false, true);
+    }
+
     // returns null if list.size() == 0
     /**
      * <p>
@@ -908,17 +921,15 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @param cost
      *            a {@link forge.card.cost.Cost} object.
-     * @param orgManaCost
-     *            a {@link java.lang.String} object.
      * @param a
      *            a int.
      * @param d
      *            a int.
      * @return a {@link forge.card.spellability.AbilityActivated} object.
      */
-    public static AbilityStatic abilityMorphUp(final Card sourceCard, final Cost cost, final String orgManaCost,
-            final int a, final int d) {
+    public static AbilityStatic abilityMorphUp(final Card sourceCard, final Cost cost, final int a, final int d) {
         final AbilityStatic morphUp = new AbilityStatic(sourceCard, cost, null) {
+
             @Override
             public void resolve() {
                 if (sourceCard.turnFaceUp()) {
@@ -1049,8 +1060,7 @@ public class CardFactoryUtil {
                 final CardList sameCost = new CardList();
 
                 for (int i = 0; i < cards.size(); i++) {
-                    if (CardUtil.getConvertedManaCost(cards.get(i).getManaCost()) == CardUtil
-                            .getConvertedManaCost(sourceCard.getManaCost())) {
+                    if (cards.get(i).getManaCost().getCMC() == sourceCard.getManaCost().getCMC()) {
                         sameCost.add(cards.get(i));
                     }
                 }
@@ -1453,8 +1463,7 @@ public class CardFactoryUtil {
                 final CardList sameCost = new CardList();
                 final int cost = CardUtil.getConvertedManaCost(manacost);
                 for (int i = 0; i < cards.size(); i++) {
-                    if ((CardUtil.getConvertedManaCost(cards.get(i).getManaCost()) <= cost)
-                            && cards.get(i).isType("Spirit")) {
+                    if (cards.get(i).getManaCost().getCMC() <= cost && cards.get(i).isType("Spirit")) {
                         sameCost.add(cards.get(i));
                     }
                 }
@@ -1881,7 +1890,7 @@ public class CardFactoryUtil {
         for (int i = 0; i < cards.size(); i++) {
             final Card c = cards.get(i);
             if (!c.isToken()) {
-                String manaCost = c.getManaCost();
+                String manaCost = c.getManaCost().toString();
                 manaCost = manaCost.trim();
                 count += CardFactoryUtil.countOccurrences(manaCost, colorAbb);
             }
@@ -3092,7 +3101,7 @@ public class CardFactoryUtil {
             int mmc = 0;
             int cmc = 0;
             for (int i = 0; i < someCards.size(); i++) {
-                cmc = CardUtil.getConvertedManaCost(someCards.getCard(i).getManaCost());
+                cmc = someCards.getCard(i).getManaCost().getCMC();
                 if (cmc > mmc) {
                     mmc = cmc;
                 }
@@ -3584,7 +3593,7 @@ public class CardFactoryUtil {
             final String[] tokenKeywords = new String[kal.size()];
             kal.toArray(tokenKeywords);
             final CardList tokens = CardFactoryUtil.makeToken(thisToken.getName(), thisToken.getImageName(),
-                    thisToken.getController(), thisToken.getManaCost(), tokenTypes, thisToken.getBaseAttack(),
+                    thisToken.getController(), thisToken.getManaCost().toString(), tokenTypes, thisToken.getBaseAttack(),
                     thisToken.getBaseDefense(), tokenKeywords);
 
             for (final Card token : tokens) {
@@ -3896,7 +3905,7 @@ public class CardFactoryUtil {
                 final String bbCost = card.getSVar("Buyback");
                 if (!bbCost.equals("")) {
                     final SpellAbility bbSA = sa.copy();
-                    final String newCost = CardUtil.addManaCosts(card.getManaCost(), bbCost);
+                    final String newCost = CardUtil.addManaCosts(card.getManaCost().toString(), bbCost);
                     if (bbSA.getPayCosts() != null) {
                         // create new Cost
                         bbSA.setPayCosts(new Cost(card, newCost, false));
@@ -3952,7 +3961,7 @@ public class CardFactoryUtil {
             final String[] k = parse.split(":");
             final String kickerCost = k[1];
 
-            final ManaCost mc = new ManaCost(card.getManaCost());
+            final ManaCost mc = new ManaCost(card.getManaCost().toString());
             mc.combineManaCost(kickerCost);
 
             kickedSpell.setKickerAbility(true);
@@ -4130,15 +4139,11 @@ public class CardFactoryUtil {
             }
         } // Suspend
 
-        if (card.getManaCost().contains("X")) {
+        int xCount = card.getManaCost().getShardCount(ManaCostShard.X);
+        if (xCount > 0) {
             final SpellAbility sa = card.getSpellAbility()[0];
             sa.setIsXCost(true);
-
-            if (card.getManaCost().startsWith("X X")) {
-                sa.setXManaCost("2");
-            } else if (card.getManaCost().startsWith("X")) {
-                sa.setXManaCost("1");
-            }
+            sa.setXManaCost(Integer.toString(xCount));
         } // X
 
         int cardnameSpot = CardFactoryUtil.hasKeyword(card, "CARDNAME is ");
@@ -4686,13 +4691,11 @@ public class CardFactoryUtil {
                 final int attack = card.getBaseAttack();
                 final int defense = card.getBaseDefense();
 
-                final String orgManaCost = card.getManaCost();
-
                 card.addSpellAbility(CardFactoryUtil.abilityMorphDown(card));
 
                 card.turnFaceDown();
 
-                card.addSpellAbility(CardFactoryUtil.abilityMorphUp(card, cost, orgManaCost, attack, defense));
+                card.addSpellAbility(CardFactoryUtil.abilityMorphUp(card, cost, attack, defense));
 
                 card.turnFaceUp();
             }

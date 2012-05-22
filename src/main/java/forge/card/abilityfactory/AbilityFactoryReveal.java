@@ -33,6 +33,7 @@ import forge.CardList;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.AbilityActivated;
@@ -341,6 +342,8 @@ public final class AbilityFactoryReveal {
         int destZone1ChangeNum = 1;
         final boolean mitosis = params.containsKey("Mitosis");
         String changeValid = params.containsKey("ChangeValid") ? params.get("ChangeValid") : "";
+        //andOrValid is for cards with "creature card and/or a land card"
+        String andOrValid = params.containsKey("AndOrValid") ? params.get("AndOrValid") : "";
         final boolean anyNumber = params.containsKey("AnyNumber");
 
         final int libraryPosition2 = params.containsKey("LibraryPosition2") ? Integer.parseInt(params
@@ -375,247 +378,249 @@ public final class AbilityFactoryReveal {
                     params.get("Choser"), sa);
             if (!chosers.isEmpty()) {
                 choser = chosers.get(0);
-                System.out.println("choser: " + choser);
             }
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+            if (tgt != null && !p.canBeTargetedBy(sa)) {
+                continue;
+            }
+            final CardList top = new CardList();
+            CardList valid = new CardList();
+            final CardList rest = new CardList();
+            final PlayerZone library = p.getZone(ZoneType.Library);
 
-                final CardList top = new CardList();
-                CardList valid = new CardList();
-                final CardList rest = new CardList();
-                final PlayerZone library = p.getZone(ZoneType.Library);
+            numToDig = Math.min(numToDig, library.size());
+            for (int i = 0; i < numToDig; i++) {
+                top.add(library.get(i));
+            }
 
-                numToDig = Math.min(numToDig, library.size());
-                for (int i = 0; i < numToDig; i++) {
-                    top.add(library.get(i));
+            if (top.size() > 0) {
+                final Card dummy = new Card();
+                dummy.setName("[No valid cards]");
+                boolean cardsRevealed = false;
+
+                if (params.containsKey("Reveal")) {
+                    GuiUtils.chooseOne("Revealing cards from library", top.toArray());
+                    cardsRevealed = true;
+                    // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
+                    // - for when it exists
+                } else if (params.containsKey("RevealOptional")) {
+                    String question = "Reveal: ";
+                    for (final Card c : top) {
+                        question += c + " ";
+                    }
+                    if (p.isHuman() && GameActionUtil.showYesNoDialog(host, question)) {
+                        GuiUtils.chooseOne(host + "Revealing cards from library", top.toArray());
+                        // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
+                        cardsRevealed = true;
+                    } else if (p.isComputer() && (top.get(0).isInstant() || top.get(0).isSorcery())) {
+                        GuiUtils.chooseOne(host + "Revealing cards from library", top.toArray());
+                        cardsRevealed = true;
+                    }
+                } else if (params.containsKey("RevealValid")) {
+                    final String revealValid = params.get("RevealValid");
+                    final CardList toReveal = top.getValidCards(revealValid, host.getController(), host);
+                    if (!toReveal.isEmpty()) {
+                        GuiUtils.chooseOne("Revealing cards from library", toReveal.toArray());
+                        if (params.containsKey("RememberRevealed")) {
+                            for (final Card one : toReveal) {
+                                host.addRemembered(one);
+                            }
+                        }
+                    }
+                    // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
+                    // - for when it exists
+                } else if (choser.isHuman()) {
+                    // show the user the revealed cards
+                    GuiUtils.chooseOne("Looking at cards from library", top.toArray());
+                    cardsRevealed = true;
                 }
 
-                if (top.size() > 0) {
-                    final Card dummy = new Card();
-                    dummy.setName("[No valid cards]");
-                    boolean cardsRevealed = false;
+                if ((params.containsKey("RememberRevealed")) && cardsRevealed) {
+                    for (final Card one : top) {
+                        host.addRemembered(one);
+                    }
+                }
 
-                    if (params.containsKey("Reveal")) {
-                        GuiUtils.chooseOne("Revealing cards from library", top.toArray());
-                        cardsRevealed = true;
-                        // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
-                        // - for when it exists
-                    } else if (params.containsKey("RevealOptional")) {
-                        String question = "Reveal: ";
+                if (!noMove) {
+                    CardList movedCards = new CardList();
+                    CardList andOrCards = new CardList();
+                    if (mitosis) {
+                        valid = AbilityFactoryReveal.sharesNameWithCardOnBattlefield(top);
                         for (final Card c : top) {
-                            question += c + " ";
+                            rest.add(c);
                         }
-                        if (p.isHuman() && GameActionUtil.showYesNoDialog(host, question)) {
-                            GuiUtils.chooseOne(host + "Revealing cards from library", top.toArray());
-                            // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
-                            cardsRevealed = true;
-                        } else if (p.isComputer() && (top.get(0).isInstant() || top.get(0).isSorcery())) {
-                            GuiUtils.chooseOne(host + "Revealing cards from library", top.toArray());
-                            cardsRevealed = true;
+                    } else if (!changeValid.equals("")) {
+                        if (changeValid.contains("ChosenType")) {
+                            changeValid = changeValid.replace("ChosenType", host.getChosenType());
                         }
-                    } else if (params.containsKey("RevealValid")) {
-                        final String revealValid = params.get("RevealValid");
-                        final CardList toReveal = top.getValidCards(revealValid, host.getController(), host);
-                        if (!toReveal.isEmpty()) {
-                            GuiUtils.chooseOne("Revealing cards from library", toReveal.toArray());
-                            if (params.containsKey("RememberRevealed")) {
-                                for (final Card one : toReveal) {
-                                    host.addRemembered(one);
-                                }
-                            }
+                        valid = top.getValidCards(changeValid.split(","), host.getController(), host);
+                        if (!andOrValid.equals("")) {
+                            andOrCards = top.getValidCards(andOrValid.split(","), host.getController(), host);
+                            andOrCards.removeAll(valid);
+                            valid.addAll(andOrCards);
                         }
-                        // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
-                        // - for when it exists
-                    } else if (choser.isHuman()) {
-                        // show the user the revealed cards
-                        GuiUtils.chooseOne("Looking at cards from library", top.toArray());
-                        cardsRevealed = true;
+                        for (final Card c : top) {
+                            rest.add(c);
+                        }
+                        if (valid.isEmpty() && choser.isHuman()) {
+                            valid.add(dummy);
+                        }
+                    } else {
+                        valid = top;
                     }
 
-                    if ((params.containsKey("RememberRevealed")) && cardsRevealed) {
-                        for (final Card one : top) {
-                            host.addRemembered(one);
-                        }
-                    }
-
-                    if (!noMove) {
-                        if (mitosis) {
-                            valid = AbilityFactoryReveal.sharesNameWithCardOnBattlefield(top);
-                            for (final Card c : top) {
-                                if (!valid.contains(c)) {
-                                    rest.add(c);
+                    if (changeAll) {
+                        movedCards.addAll(valid);
+                    } else {
+                        int j = 0;
+                        if (choser.isHuman()) {
+                            while ((j < destZone1ChangeNum) || (anyNumber && (j < numToDig))) {
+                                // let user get choice
+                                if (valid.isEmpty()) {
+                                    break;
                                 }
-                            }
-                        } else if (!changeValid.equals("")) {
-                            if (changeValid.contains("ChosenType")) {
-                                changeValid = changeValid.replace("ChosenType", host.getChosenType());
-                            }
-                            valid = top.getValidCards(changeValid.split(","), host.getController(), host);
-                            for (final Card c : top) {
-                                if (!valid.contains(c)) {
-                                    rest.add(c);
+                                Card chosen = null;
+                                String prompt = "Choose a card to put into the ";
+                                if (destZone1.equals(ZoneType.Library) && (libraryPosition == -1)) {
+                                    prompt = "Chose a card to put on the bottom of the ";
                                 }
-                            }
-                            if (valid.isEmpty()) {
-                                valid.add(dummy);
-                            }
-                        } else {
-                            valid = top;
-                        }
-
-                        if (changeAll) {
-                            for (final Card c : valid) {
-                                if (c.equals(dummy)) {
-                                    continue;
+                                if (destZone1.equals(ZoneType.Library) && (libraryPosition == 0)) {
+                                    prompt = "Chose a card to put on top of the ";
                                 }
-                                final PlayerZone zone = c.getOwner().getZone(destZone1);
-                                if (zone.is(ZoneType.Library)) {
-                                    Singletons.getModel().getGameAction().moveToLibrary(c, libraryPosition);
+                                if (anyNumber || optional) {
+                                    chosen = GuiUtils.chooseOneOrNone(prompt + destZone1, valid.toArray());
                                 } else {
-                                    Singletons.getModel().getGameAction().moveTo(zone, c);
-                                    if (destZone1.equals(ZoneType.Battlefield) && params.containsKey("Tapped")) {
-                                        c.setTapped(true);
+                                    chosen = GuiUtils.chooseOne(prompt + destZone1, valid.toArray());
+                                }
+                                if ((chosen == null) || chosen.getName().equals("[No valid cards]")) {
+                                    break;
+                                }
+                                movedCards.add(chosen);
+                                valid.remove(chosen);
+                                if (!andOrValid.equals("")) {
+                                    andOrCards.remove(chosen);
+                                    if (!chosen.isValid(andOrValid.split(","), host.getController(), host)) {
+                                        valid = andOrCards;
+                                    } else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
+                                        valid.removeAll(andOrCards);
                                     }
                                 }
-                                if (params.containsKey("ForgetOtherRemembered")) {
-                                    host.clearRemembered();
-                                }
-                                if (params.containsKey("RememberChanged")) {
-                                    host.addRemembered(c);
-                                }
+                                // Singletons.getModel().getGameAction().revealToComputer()
+                                // - for when this exists
+                                j++;
                             }
-                        } else {
-                            int j = 0;
-                            if (choser.isHuman()) {
-                                while ((j < destZone1ChangeNum) || (anyNumber && (j < numToDig))) {
-                                    // let user get choice
-                                    Card chosen = null;
-                                    String prompt = "Choose a card to put into the ";
-                                    if (destZone1.equals(ZoneType.Library) && (libraryPosition == -1)) {
-                                        prompt = "Chose a card to put on the bottom of the ";
-                                    }
-                                    if (destZone1.equals(ZoneType.Library) && (libraryPosition == 0)) {
-                                        prompt = "Chose a card to put on top of the ";
-                                    }
-                                    if (anyNumber || optional) {
-                                        chosen = GuiUtils.chooseOneOrNone(prompt + destZone1, valid.toArray());
-                                    } else {
-                                        chosen = GuiUtils.chooseOne(prompt + destZone1, valid.toArray());
-                                    }
-                                    if ((chosen == null) || chosen.getName().equals("[No valid cards]")) {
-                                        break;
-                                    }
-                                    valid.remove(chosen);
-                                    final PlayerZone zone = chosen.getOwner().getZone(destZone1);
-                                    if (zone.is(ZoneType.Library)) {
-                                        // System.out.println("Moving to lib position: "+libraryPosition);
-                                        Singletons.getModel().getGameAction().moveToLibrary(chosen, libraryPosition);
-                                    } else {
-                                        final Card c = Singletons.getModel().getGameAction().moveTo(zone, chosen);
-                                        if (destZone1.equals(ZoneType.Battlefield) && !keywords.isEmpty()) {
-                                            for (final String kw : keywords) {
-                                                c.addExtrinsicKeyword(kw);
-                                            }
-                                            if (params.containsKey("Tapped")) {
-                                                c.setTapped(true);
-                                            }
-                                        }
-                                        if (params.containsKey("ExileFaceDown")) {
-                                            c.setState(CardCharactersticName.FaceDown);
-                                        }
-                                        if (params.containsKey("Imprint")) {
-                                            host.addImprinted(c);
-                                        }
-                                    }
-                                    // Singletons.getModel().getGameAction().revealToComputer()
-                                    // - for when this exists
-                                    j++;
-                                }
-                            } // human
-                            else { // computer (pick the first cards)
-                                int changeNum = Math.min(destZone1ChangeNum, valid.size());
-                                if (anyNumber) {
-                                    changeNum = valid.size(); // always take all
-                                }
-                                for (j = 0; j < changeNum; j++) {
-                                    final Card chosen = valid.get(0);
-                                    if (chosen.equals(dummy)) {
-                                        break;
-                                    }
-                                    final PlayerZone zone = chosen.getOwner().getZone(destZone1);
-                                    if (zone.is(ZoneType.Library)) {
-                                        Singletons.getModel().getGameAction().moveToLibrary(chosen, libraryPosition);
-                                    } else {
-                                        final Card c = Singletons.getModel().getGameAction().moveTo(zone, chosen);
-                                        if (destZone1.equals(ZoneType.Battlefield) && !keywords.isEmpty()) {
-                                            for (final String kw : keywords) {
-                                                chosen.addExtrinsicKeyword(kw);
-                                            }
-                                            if (params.containsKey("Tapped")) {
-                                                c.setTapped(true);
-                                            }
-                                        }
-                                    }
-                                    if (changeValid.length() > 0) {
-                                        GuiUtils.chooseOne("Computer picked: ", chosen);
-                                    }
-                                    valid.remove(chosen);
-                                }
+                        } // human
+                        else { // computer
+                            int changeNum = Math.min(destZone1ChangeNum, valid.size());
+                            if (anyNumber) {
+                                changeNum = valid.size(); // always take all
                             }
-                        }
-
-                        // dump anything not selected from valid back into the
-                        // rest
-                        if (!changeAll) {
-                            rest.addAll(valid);
-                        }
-                        if (rest.contains(dummy)) {
-                            rest.remove(dummy);
-                        }
-
-                        // now, move the rest to destZone2
-                        if (destZone2.equals(ZoneType.Library)) {
-                            if (choser.isHuman()) {
-                                // put them in any order
-                                while (rest.size() > 0) {
-                                    Card chosen;
-                                    if (rest.size() > 1) {
-                                        String prompt = "Put the rest on top of the library in any order";
-                                        if (libraryPosition2 == -1) {
-                                            prompt = "Put the rest on the bottom of the library in any order";
-                                        }
-                                        chosen = GuiUtils.chooseOne(prompt, rest.toArray());
-                                    } else {
-                                        chosen = rest.get(0);
-                                    }
-                                    Singletons.getModel().getGameAction().moveToLibrary(chosen, libraryPosition2);
-                                    rest.remove(chosen);
+                            for (j = 0; j < changeNum; j++) {
+                                Card chosen = CardFactoryUtil.getBestAI(valid);
+                                if (sa.getActivatingPlayer().isHuman() && p.isHuman()) {
+                                    chosen = CardFactoryUtil.getWorstAI(valid);
                                 }
-                            } else { // Computer
-                                for (int i = 0; i < rest.size(); i++) {
-                                    Singletons.getModel().getGameAction().moveToLibrary(rest.get(i), libraryPosition2);
+                                if (chosen == null) {
+                                    break;
                                 }
-                            }
-                        } else {
-                            // just move them randomly
-                            for (int i = 0; i < rest.size(); i++) {
-                                Card c = rest.get(i);
-                                final PlayerZone toZone = c.getOwner().getZone(destZone2);
-                                c = Singletons.getModel().getGameAction().moveTo(toZone, c);
-                                if (destZone2.equals(ZoneType.Battlefield) && !keywords.isEmpty()) {
-                                    for (final String kw : keywords) {
-                                        c.addExtrinsicKeyword(kw);
+                                if (changeValid.length() > 0) {
+                                    GuiUtils.chooseOne("Computer picked: ", chosen);
+                                }
+                                movedCards.add(chosen);
+                                valid.remove(chosen);
+                                if (!andOrValid.equals("")) {
+                                    andOrCards.remove(chosen);
+                                    if (!chosen.isValid(andOrValid.split(","), host.getController(), host)) {
+                                        valid = andOrCards;
+                                    } else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
+                                        valid.removeAll(andOrCards);
                                     }
                                 }
                             }
-
                         }
                     }
-                } // end if canBeTargetedBy
-            } // end foreach player
-        }
+                    if (params.containsKey("ForgetOtherRemembered")) {
+                        host.clearRemembered();
+                    }
+                    movedCards.reverse();
+                    for (Card c : movedCards) {
+                        if (c.equals(dummy)) {
+                            continue;
+                        }
+                        final PlayerZone zone = c.getOwner().getZone(destZone1);
+                        if (zone.is(ZoneType.Library)) {
+                            Singletons.getModel().getGameAction().moveToLibrary(c, libraryPosition);
+                        } else {
+                            c = Singletons.getModel().getGameAction().moveTo(zone, c);
+                            if (destZone1.equals(ZoneType.Battlefield)) {
+                                for (final String kw : keywords) {
+                                    c.addExtrinsicKeyword(kw);
+                                }
+                                if (params.containsKey("Tapped")) {
+                                    c.setTapped(true);
+                                }
+                            }
+                            if (params.containsKey("ExileFaceDown")) {
+                                c.setState(CardCharactersticName.FaceDown);
+                            }
+                            if (params.containsKey("Imprint")) {
+                                host.addImprinted(c);
+                            }
+                        }
+                        if (params.containsKey("ForgetOtherRemembered")) {
+                            host.clearRemembered();
+                        }
+                        if (params.containsKey("RememberChanged")) {
+                            host.addRemembered(c);
+                        }
+                        rest.remove(c);
+                    }
+                    if (rest.contains(dummy)) {
+                        rest.remove(dummy);
+                    }
+
+                    // now, move the rest to destZone2
+                    if (destZone2.equals(ZoneType.Library)) {
+                        if (choser.isHuman()) {
+                            // put them in any order
+                            while (rest.size() > 0) {
+                                Card chosen;
+                                if (rest.size() > 1) {
+                                    String prompt = "Put the rest on top of the library in any order";
+                                    if (libraryPosition2 == -1) {
+                                        prompt = "Put the rest on the bottom of the library in any order";
+                                    }
+                                    chosen = GuiUtils.chooseOne(prompt, rest.toArray());
+                                } else {
+                                    chosen = rest.get(0);
+                                }
+                                Singletons.getModel().getGameAction().moveToLibrary(chosen, libraryPosition2);
+                                rest.remove(chosen);
+                            }
+                        } else { // Computer
+                            for (int i = 0; i < rest.size(); i++) {
+                                Singletons.getModel().getGameAction().moveToLibrary(rest.get(i), libraryPosition2);
+                            }
+                        }
+                    } else {
+                        // just move them randomly
+                        for (int i = 0; i < rest.size(); i++) {
+                            Card c = rest.get(i);
+                            final PlayerZone toZone = c.getOwner().getZone(destZone2);
+                            c = Singletons.getModel().getGameAction().moveTo(toZone, c);
+                            if (destZone2.equals(ZoneType.Battlefield) && !keywords.isEmpty()) {
+                                for (final String kw : keywords) {
+                                    c.addExtrinsicKeyword(kw);
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        } // end foreach player
     } // end resolve
 
     // returns a CardList that is a subset of list with cards that share a name
@@ -2277,38 +2282,5 @@ public final class AbilityFactoryReveal {
         }
         return chosen;
     }
-
-    /*
-     * private static CardList getRevealedList(final Card card, final
-     * SpellAbility sa, final CardList valid) { final CardList revealed = new
-     * CardList(); if (sa.getActivatingPlayer().isComputer()) { //not really
-     * implemented for computer //would need
-     * GuiUtils.getChoice("Revealed card(s)", revealed.toArray()); } else {
-     * AllZone.getInputControl().setInput(new Input() { private static final
-     * long serialVersionUID = 3851585340769670736L;
-     * 
-     * @Override public void showMessage() { //in case hand is empty, don't do
-     * anything if (card.getController().getCardsIn(Zone.Hand).size() == 0)
-     * stop();
-     * 
-     * AllZone.getDisplay().showMessage(card.getName() +
-     * " - Reveal a card.  Revealed " + revealed.size() +
-     * " so far.  Click OK when done."); ButtonUtil.enableOnlyOK(); }
-     * 
-     * @Override public void selectCard(Card c, PlayerZone zone) { if
-     * (zone.is(Constant.Zone.Hand) && valid.contains(c) &&
-     * !revealed.contains(c)) { revealed.add(c);
-     * 
-     * //in case no more cards in hand to reveal if (revealed.size() ==
-     * card.getController().getCardsIn(Zone.Hand).size()) { done(); } else {
-     * showMessage(); } } }
-     * 
-     * @Override public void selectButtonOK() { done(); }
-     * 
-     * void done() { stop(); GuiUtils.getChoice("Revealed card(s)",
-     * revealed.toArray()); } }); }
-     * 
-     * return revealed; }
-     */
 
 } // end class AbilityFactory_Reveal

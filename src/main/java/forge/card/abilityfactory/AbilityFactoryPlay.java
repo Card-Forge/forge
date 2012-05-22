@@ -25,6 +25,7 @@ import java.util.Random;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.CardCharactersticName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.GameActionUtil;
@@ -326,6 +327,7 @@ public final class AbilityFactoryPlay {
         Player activator = sa.getActivatingPlayer();
         boolean optional = params.containsKey("Optional");
         boolean remember = params.containsKey("RememberPlayed");
+        boolean wasFaceDown = false;
         int amount = 1;
         if (params.containsKey("Amount")) {
             amount = AbilityFactory.calculateAmount(source, params.get("Amount"), sa);
@@ -392,12 +394,22 @@ public final class AbilityFactoryPlay {
                     }
                 }
             }
+            if (tgtCard.isFaceDown()) {
+                tgtCard.setState(CardCharactersticName.Original);
+                wasFaceDown = true;
+            }
             final StringBuilder sb = new StringBuilder();
             sb.append("Do you want to play " + tgtCard + "?");
             if (controller.isHuman() && optional
                     && !GameActionUtil.showYesNoDialog(source, sb.toString())) {
                 // i--;  // This causes an infinite loop (ArsenalNut)
+                if (wasFaceDown) {
+                    tgtCard.setState(CardCharactersticName.FaceDown);
+                }
                 continue;
+            }
+            if (params.containsKey("ForgetRemembered")) {
+                source.clearRemembered();
             }
             // lands will be played
             if (tgtCard.isLand()) {

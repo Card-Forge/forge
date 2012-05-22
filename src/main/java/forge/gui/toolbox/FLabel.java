@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -48,18 +49,17 @@ public class FLabel extends JLabel {
     */
     public static class Builder extends FLabel {
         //========== Default values for FLabel are set here.
-        private double  bldFontScaleFactor  = 0.6;
         private double  bldIconScaleFactor  = 0.8;
-        private int     bldFontScaleBy      = SwingConstants.VERTICAL;
         private int     bldFontStyle        = Font.PLAIN;
         private int     bldFontSize         = 14;
         private float   bldIconAlpha        = 1.0f;
+        private int     bldIconAlignX       = SwingConstants.LEFT;
+        private Point   bldIconInsets       = new Point(0, 0);
 
         private boolean bldSelectable       = false;
         private boolean bldHoverable        = false;
         private boolean bldOpaque           = false;
         private boolean bldIconInBackground = false;
-        private boolean bldFontScaleAuto    = true;
         private boolean bldIconScaleAuto    = true;
 
         private String  bldText, bldToolTip;
@@ -74,71 +74,69 @@ public class FLabel extends JLabel {
         // Begin builder methods.
         /**@param s0 &emsp; {@link java.lang.String}
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder text(String s0) { this.bldText = s0; return this; }
+        public Builder text(final String s0) { this.bldText = s0; return this; }
 
         /**@param s0 &emsp; {@link java.lang.String}
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder tooltip(String s0) { this.bldToolTip = s0; return this; }
+        public Builder tooltip(final String s0) { this.bldToolTip = s0; return this; }
 
         /**@param i0 &emsp; {@link javax.swing.ImageIcon}
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder icon(ImageIcon i0) { this.bldIcon = i0; return this; }
+        public Builder icon(final ImageIcon i0) { this.bldIcon = i0; return this; }
 
         /**@param i0 &emsp; SwingConstants.CENTER, .LEFT, or .RIGHT
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder fontAlign(int i0) { this.bldFontAlign = i0; return this; }
+        public Builder fontAlign(final int i0) { this.bldFontAlign = i0; return this; }
 
         /**@param b0 &emsp; boolean
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder opaque(boolean b0) { this.bldOpaque = b0; return this; }
+        public Builder opaque(final boolean b0) { this.bldOpaque = b0; return this; }
 
         /**@param b0 &emsp; boolean
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder hoverable(boolean b0) { this.bldHoverable = b0; return this; }
+        public Builder hoverable(final boolean b0) { this.bldHoverable = b0; return this; }
 
         /**@param b0 &emsp; boolean
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder selectable(boolean b0) { this.bldSelectable = b0; return this; }
+        public Builder selectable(final boolean b0) { this.bldSelectable = b0; return this; }
 
         /**@param c0 &emsp; {@link forge.Command} to execute if clicked
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder cmdClick(Command c0) { this.bldCmd = c0; return this; }
+        public Builder cmdClick(final Command c0) { this.bldCmd = c0; return this; }
 
         /**@param i0 &emsp; int
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder fontSize(int i0) { this.bldFontSize = i0; return this; }
+        public Builder fontSize(final int i0) { this.bldFontSize = i0; return this; }
 
         /**@param i0 &emsp; Font.PLAIN, Font.BOLD, or Font.ITALIC
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder fontStyle(int i0) { this.bldFontStyle = i0; return this; }
+        public Builder fontStyle(final int i0) { this.bldFontStyle = i0; return this; }
 
         /**@param b0 &emsp; boolean
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder fontScaleAuto(boolean b0) { this.bldFontScaleAuto = b0; return this; }
-
-        /**@param d0 &emsp; double between 0 and 1, 0.6 by default
-         * @return {@link forge.gui.toolbox.Builder} */
-        public Builder fontScaleFactor(double d0) { this.bldFontScaleFactor = d0; return this; }
-
-        /**@param i0 &emsp; SwingConstants.HORIZONTAL or .VERTICAL
-         * @return {@link forge.gui.toolbox.Builder} */
-        public Builder fontScaleBy(int i0) { this.bldFontScaleBy = i0; return this; }
-
-        /**@param b0 &emsp; boolean
-         * @return {@link forge.gui.toolbox.Builder} */
-        public Builder iconScaleAuto(boolean b0) { this.bldIconScaleAuto = b0; return this; }
+        public Builder iconScaleAuto(final boolean b0) { this.bldIconScaleAuto = b0; return this; }
 
         /**@param d0 &emsp; double between 0 and 1, 0.8 by default
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder iconScaleFactor(double d0) { this.bldIconScaleFactor = d0; return this; }
+        public Builder iconScaleFactor(final double d0) { this.bldIconScaleFactor = d0; return this; }
 
         /**@param b0 &emsp; boolean, icon will be drawn independent of text
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder iconInBackground(boolean b0) { this.bldIconInBackground = b0; return this; }
+        public Builder iconInBackground(final boolean b0) { this.bldIconInBackground = b0; return this; }
 
         /**@param f0 &emsp; 0.0f - 1.0f. If icon is in background, this alpha is applied.
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder iconAlpha(float f0) { this.bldIconAlpha = f0; return this; }
+        public Builder iconAlpha(final float f0) { this.bldIconAlpha = f0; return this; }
+
+        /**@param i0 &emsp; Int. Only available for background icon.
+         * SwingConstants.HORIZONTAL .VERTICAL or .CENTER
+         * @return {@link forge.gui.toolbox.Builder} */
+        public Builder iconAlignX(final int i0) { this.bldIconAlignX = i0; return this; }
+
+        /**@param i0 &emsp; Point. Only available for background icon.
+         * Additional padding to top left corner of icon, after alignX.
+         * @return {@link forge.gui.toolbox.Builder} */
+        public Builder iconInsets(final Point i0) { this.bldIconInsets = i0; return this; }
     }
 
     //========== Constructors
@@ -146,20 +144,19 @@ public class FLabel extends JLabel {
     protected FLabel() { }
 
     // Call this using FLabel.Builder()...
-    private FLabel(Builder b0) {
+    private FLabel(final Builder b0) {
         super(b0.bldText);
 
         // Init fields from builder
-        this.fontScaleFactor = b0.bldFontScaleFactor;
         this.iconScaleFactor = b0.bldIconScaleFactor;
 
         this.opaque = b0.bldOpaque;
         this.iconInBackground = b0.bldIconInBackground;
-        this.fontScaleAuto = b0.bldFontScaleAuto;
         this.iconScaleAuto = b0.bldIconScaleAuto;
         this.selectable = b0.bldSelectable;
+        this.iconAlignX = b0.bldIconAlignX;
+        this.iconInsets = b0.bldIconInsets;
 
-        this.setFontScaleBy(b0.bldFontScaleBy);
         this.setFontStyle(b0.bldFontStyle);
         this.setFontSize(b0.bldFontSize);
         this.setIconAlpha(b0.bldIconAlpha);
@@ -193,46 +190,47 @@ public class FLabel extends JLabel {
 
     // Custom properties, assigned either at realization (using builder)
     // or dynamically (using methods below).
-    private double fontScaleFactor, iconScaleFactor;
-    private int fontScaleBy, fontStyle;
+    private double iconScaleFactor;
+    private int fontStyle, iconAlignX;
     private boolean selectable, selected, hoverable, hovered, opaque,
-        iconInBackground, fontScaleAuto, iconScaleAuto;
+        iconInBackground, iconScaleAuto;
+    private Point iconInsets;
 
     // Various variables used in image rendering.
     private Image img;
     private Graphics2D g2d;
     private Command cmdClick;
-    private int x, y, w, h, iw, ih, sw, sh, ref;
+    private int x, y, w, h, iw, ih, sw, sh;
     private double iar;
 
     private AlphaComposite alphaDim, alphaStrong;
 
     private final ActionListener fireResize = new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent evt) { resize(); resizeTimer.stop(); }
+        public void actionPerformed(final ActionEvent evt) { resize(); resizeTimer.stop(); }
     };
 
-    private Timer resizeTimer = new Timer(10, fireResize);
+    private final Timer resizeTimer = new Timer(10, fireResize);
 
     // Resize adapter; on a timer to prevent resizing while "sliding" between sizes
     private final ComponentAdapter cadResize = new ComponentAdapter() {
         @Override
-        public void componentResized(ComponentEvent e) { resizeTimer.restart(); }
+        public void componentResized(final ComponentEvent e) { resizeTimer.restart(); }
     };
 
     // Mouse event handler
     private final MouseAdapter madEvents = new MouseAdapter() {
         @Override
-        public void mouseEntered(MouseEvent e) {
+        public void mouseEntered(final MouseEvent e) {
             hovered = true; repaintOnlyThisLabel();
         }
 
         @Override
-        public void mouseExited(MouseEvent e) {
+        public void mouseExited(final MouseEvent e) {
             hovered = false; repaintOnlyThisLabel();
         }
         @Override
-        public void mouseClicked(MouseEvent e) {
+        public void mouseClicked(final MouseEvent e) {
             if (cmdClick != null && FLabel.this.isEnabled()) { cmdClick.execute(); }
             if (!selectable) { return; }
             if (selected) { setSelected(false); }
@@ -243,7 +241,7 @@ public class FLabel extends JLabel {
     //========== Methods
     /** @param b0 &emsp; boolean */
     // Must be public.
-    public void setHoverable(boolean b0) {
+    public void setHoverable(final boolean b0) {
         this.hoverable = b0;
         if (!b0) { this.removeMouseListener(madEvents); }
         else { this.addMouseListener(madEvents); }
@@ -251,7 +249,7 @@ public class FLabel extends JLabel {
 
     /** @param b0 &emsp; boolean */
     // Must be public.
-    public void setSelected(boolean b0) {
+    public void setSelected(final boolean b0) {
         this.selected = b0;
         repaintOnlyThisLabel();
     }
@@ -259,24 +257,12 @@ public class FLabel extends JLabel {
     /** Sets alpha if icon is in background.
      * @param f0 &emsp; float */
     // NOT public; must be set when label is built.
-    private void setIconAlpha(float f0) {
+    private void setIconAlpha(final float f0) {
         this.alphaDim = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, f0);
         this.alphaStrong = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f);
     }
 
-    /** @param i0 &emsp; int, must be SwingConstants.HORIZONTAL or VERTICAL */
-    // NOT public; must be set when label is built.
-    private void setFontScaleBy(int i0) {
-        if (i0 != SwingConstants.HORIZONTAL && i0 != SwingConstants.VERTICAL) {
-            throw new IllegalArgumentException("FLabel$setScaleBy "
-                    + "must be passed either SwingConstants.HORIZONTAL "
-                    + "or SwingConstants.VERTICAL.");
-        }
-
-        this.fontScaleBy = i0;
-    }
-
-    private void setFontSize(int i0) {
+    private void setFontSize(final int i0) {
         switch(this.fontStyle) {
             case Font.BOLD: this.setFont(FSkin.getBoldFont(i0)); break;
             case Font.ITALIC: this.setFont(FSkin.getItalicFont(i0)); break;
@@ -286,7 +272,7 @@ public class FLabel extends JLabel {
 
     /** @param i0 &emsp; Font.PLAIN, .BOLD, or .ITALIC */
     // NOT public; must be set when label is built.
-    private void setFontStyle(int i0) {
+    private void setFontStyle(final int i0) {
         if (i0 != Font.PLAIN && i0 != Font.BOLD && i0 != Font.ITALIC) {
             throw new IllegalArgumentException("FLabel$setFontStyle "
                     + "must be passed either Font.PLAIN, Font.BOLD, or Font.ITALIC.");
@@ -296,7 +282,7 @@ public class FLabel extends JLabel {
 
     /** @param i0 &emsp; SwingConstants.CENTER, .LEFT or .RIGHT */
     // NOT public; must be set when label is built.
-    private void setFontAlign(int i0) {
+    private void setFontAlign(final int i0) {
         if (i0 != SwingConstants.CENTER && i0 != SwingConstants.LEFT && i0 != SwingConstants.RIGHT) {
             throw new IllegalArgumentException("FLabel$setFontStyle "
                     + "must be passed either SwingConstants.CENTER, "
@@ -345,7 +331,7 @@ public class FLabel extends JLabel {
     }
 
     /** @param c0 &emsp; {@link forge.Command} on click */
-    public void setCommand(Command c0) {
+    public void setCommand(final Command c0) {
         this.cmdClick = c0;
     }
 
@@ -363,7 +349,7 @@ public class FLabel extends JLabel {
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(final Graphics g) {
         g2d = (Graphics2D) g.create();
         w = getWidth();
         h = getHeight();
@@ -388,10 +374,16 @@ public class FLabel extends JLabel {
 
         // Icon in background
         if (iconInBackground) {
-            x = 3;
-            sh = (int) ((h - 2 * x) * iconScaleFactor);
+            sh = (int) (h * iconScaleFactor);
             sw = (int) (sh * iar);
-            y = (int) ((h - sh) / 2);
+
+            if (iconAlignX == SwingConstants.CENTER) {
+                x = (int) ((w - sw) / 2 + iconInsets.getX());
+            }
+            else {
+                x = (int) iconInsets.getX();
+            }
+            y = (int) (((h - sh) / 2) + iconInsets.getY());
 
             if (hoverable && hovered && !selected) {
                 g2d.setComposite(alphaStrong);
@@ -406,24 +398,10 @@ public class FLabel extends JLabel {
     }
 
     private void resize() {
-        if (fontScaleAuto) {
-            ref = (fontScaleBy == SwingConstants.VERTICAL ? getHeight() : getWidth());
-            switch (fontStyle) {
-                case Font.BOLD:
-                    setFont(FSkin.getBoldFont((int) (ref * fontScaleFactor)));
-                    break;
-                case Font.ITALIC:
-                    setFont(FSkin.getItalicFont((int) (ref * fontScaleFactor)));
-                    break;
-                default:
-                    setFont(FSkin.getFont((int) (ref * fontScaleFactor)));
-            }
-        }
-
         // Non-background icon
         if (img != null && iconScaleAuto  && !iconInBackground) {
             h = (int) (getHeight() * iconScaleFactor);
-            w = (int) (h * iar * iconScaleFactor);
+            w = (int) (h * iar);
             if (w == 0 || h == 0) { return; }
 
             FLabel.super.setIcon(new ImageIcon(img.getScaledInstance(w, h, Image.SCALE_SMOOTH)));

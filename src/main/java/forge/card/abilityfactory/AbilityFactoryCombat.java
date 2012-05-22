@@ -423,7 +423,7 @@ public final class AbilityFactoryCombat {
 
     private static String mustAttackStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof AbilitySub) {
@@ -520,7 +520,7 @@ public final class AbilityFactoryCombat {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 Object entity;
                 if (params.get("Defender").equals("Self")) {
-                    entity = af.getHostCard();
+                    entity = sa.getSourceCard();
                 } else {
                     entity = p.getOpponent();
                 }
@@ -854,7 +854,7 @@ public final class AbilityFactoryCombat {
 
     private static String mustBlockStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof AbilitySub) {
@@ -994,7 +994,7 @@ public final class AbilityFactoryCombat {
 
     private static void mustBlockResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
 
         ArrayList<Card> tgtCards;
 

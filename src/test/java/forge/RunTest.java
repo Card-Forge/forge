@@ -7,8 +7,10 @@ import java.util.Set;
 
 import org.testng.annotations.Test;
 
+import forge.card.CardManaCost;
 import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.phase.CombatUtil;
 
@@ -125,13 +127,13 @@ public class RunTest {
 
         // ********* test CardUtil.getColors()
         c = new Card();
-        c.setManaCost("G");
+        c.setManaCost(new CardManaCost(new ManaCostParser("G")));
         ArrayList<String> color = CardUtil.getColors(c);
         this.check("49", color.contains(Constant.Color.GREEN));
         this.check("50", color.size() == 1);
 
         c = new Card();
-        c.setManaCost("W B G R U");
+        c.setManaCost(new CardManaCost(new ManaCostParser("W B G R U")));
         color = CardUtil.getColors(c);
         final Set<String> set = new HashSet<String>(color);
         System.out.println("color: " + color);
@@ -143,7 +145,7 @@ public class RunTest {
         this.check("56", color.contains(Constant.Color.WHITE));
 
         c = new Card();
-        c.setManaCost("2");
+        c.setManaCost(new CardManaCost(new ManaCostParser("2")));
         color = CardUtil.getColors(c);
         this.check("57", color.size() == 1);
         this.check("58", color.contains(Constant.Color.COLORLESS));
@@ -154,7 +156,7 @@ public class RunTest {
         this.check("60", color.contains(Constant.Color.COLORLESS));
 
         c = new Card();
-        c.setManaCost("");
+        c.setManaCost(new CardManaCost(new ManaCostParser("")));
         color = CardUtil.getColors(c);
         this.check("61", color.size() == 1);
         this.check("62", color.contains(Constant.Color.COLORLESS));
@@ -170,13 +172,13 @@ public class RunTest {
         this.check("66", color.contains(Constant.Color.GREEN));
 
         c = new Card();
-        c.setManaCost("11 W W B B U U R R G G");
+        c.setManaCost(new CardManaCost(new ManaCostParser("11 W W B B U U R R G G")));
         color = CardUtil.getColors(c);
         this.check("67", color.size() == 5);
 
         c = new Card();
         c = cf.getCard("Elvish Warrior", null);
-        c.setManaCost("11");
+        c.setManaCost(new CardManaCost(new ManaCostParser("11")));
         color = CardUtil.getColors(c);
         this.check("68", color.size() == 1);
         this.check("69", color.contains(Constant.Color.COLORLESS));

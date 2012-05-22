@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 K:Cumulative upkeep:1
 A:AB$ GainLife | Cost$ 2 | Defined$ You | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
-T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When you play a card, sacrifice CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When you play a card, sacrifice CARDNAME.
 T:Mode$ LandPlayed | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When you play a card, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0
 SVar:RemAIDeck:True

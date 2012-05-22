@@ -148,7 +148,7 @@ public class SpellAbilityRequirements {
             }
 
             this.select.resetTargets();
-            AllZone.getStack().clearFrozen();
+            AllZone.getStack().removeFromFrozenStack(this.ability);
             return;
         } else {
             this.needPayment();

@@ -290,7 +290,12 @@ public final class BoosterDraft implements IBoosterDraft {
         }
     } // computerChoose()
 
-    private int getCurrentBoosterIndex() {
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @return int
+     */
+    public int getCurrentBoosterIndex() {
         return this.currentBoosterPick % BoosterDraft.N_PLAYERS;
     }
 

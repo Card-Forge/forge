@@ -112,6 +112,9 @@ public class SpellAbilityVariables {
     /** The activation limit. */
     private int activationLimit = -1;
 
+    /** The limitToCheck to check. */
+    private String limitToCheck = null;
+
     /** The number turn activations. */
     private int numberTurnActivations = 0;
 
@@ -631,6 +634,30 @@ public class SpellAbilityVariables {
      */
     public final int getActivationLimit() {
         return this.activationLimit;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>limitToCheck</code>.
+     * </p>
+     * 
+     * @param limit
+     *            a {@link java.lang.String} object.
+     */
+    public final void setLimitToCheck(final String limit) {
+        this.limitToCheck = limit;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>limitToCheck</code>.
+     * </p>
+     * 
+     * @return the limitToCheck
+     *            a {@link java.lang.String} object.
+     */
+    public final String getLimitToCheck() {
+        return this.limitToCheck;
     }
 
     /**

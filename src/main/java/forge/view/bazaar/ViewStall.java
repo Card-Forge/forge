@@ -69,7 +69,7 @@ public class ViewStall extends JPanel {
         this.lblStallName = new FLabel.Builder().text("").fontAlign(SwingConstants.CENTER).build();
         this.lblEmpty = new FLabel.Builder().text("The merchant does not have anything useful for sale.")
                 .fontAlign(SwingConstants.CENTER).build();
-        this.lblStats = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontScaleFactor(0.9).build();
+        this.lblStats = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontSize(12).build();
 
         this.tpnFluff = new JTextPane();
         this.pnlInventory = new JPanel();

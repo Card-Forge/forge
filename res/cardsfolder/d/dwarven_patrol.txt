@@ -4,7 +4,7 @@ Types:Creature Dwarf
 Text:no text
 PT:4/2
 K:CARDNAME doesn't untap during your untap step.
-T:Mode$ SpellCast | ValidCard$ Spell.nonRed+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a nonred spell, untap CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Card.nonRed | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a nonred spell, untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

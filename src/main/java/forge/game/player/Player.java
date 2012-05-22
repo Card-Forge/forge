@@ -49,7 +49,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneComesIntoPlay;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
-import forge.gui.match.VMatchUI;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 
 /**
@@ -1838,7 +1838,8 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canPlayLand() {
-        if (VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getLblUnlimitedLands().getEnabled() && this.isHuman()
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)
+                && this.isHuman()
                 && Constant.Runtime.DEV_MODE[0]) {
             return PhaseHandler.canCastSorcery(this);
         }

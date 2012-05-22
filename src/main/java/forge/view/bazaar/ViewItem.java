@@ -27,9 +27,9 @@ public class ViewItem extends FPanel {
         // Final inits
         this.lblIcon = new FLabel.Builder().iconScaleFactor(1).iconInBackground(true).build();
         this.lblName = new FLabel.Builder().fontStyle(Font.BOLD).build();
-        this.lblPrice = new FLabel.Builder().fontStyle(Font.BOLD).fontScaleFactor(0.8).build();
+        this.lblPrice = new FLabel.Builder().fontStyle(Font.BOLD).fontSize(12).build();
         this.tarDesc = new FTextArea();
-        this.btnPurchase = new FLabel.Builder().text("Buy").opaque(true).fontScaleFactor(0.2).hoverable(true).build();
+        this.btnPurchase = new FLabel.Builder().text("Buy").opaque(true).fontSize(20).hoverable(true).build();
 
         this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 

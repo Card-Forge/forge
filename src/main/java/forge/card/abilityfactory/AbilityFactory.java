@@ -2478,7 +2478,7 @@ public class AbilityFactory {
             return;
         }
 
-        host = af.getHostCard();
+        host = sa.getSourceCard();
 
         if (params.containsKey("ForgetOtherTargets")) {
             host.clearRemembered();

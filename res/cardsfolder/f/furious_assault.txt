@@ -2,7 +2,7 @@ Name:Furious Assault
 ManaCost:2 R
 Types:Enchantment
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a creature spell, CARDNAME deals 1 damage to target player.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a creature spell, CARDNAME deals 1 damage to target player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ 1
 SVar:BuffedBy:Creature
 SVar:Rarity:Common

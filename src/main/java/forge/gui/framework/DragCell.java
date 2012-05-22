@@ -147,7 +147,12 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      * @return int
      */
     public int getAbsX() {
-        return (int) this.getLocationOnScreen().getX();
+        int i = 0;
+
+        try { i = (int) this.getLocationOnScreen().getX(); }
+        catch (final Exception e) { }
+
+        return i;
     }
 
     /**
@@ -155,7 +160,12 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      * @return int
      */
     public int getAbsX2() {
-        return this.getAbsX() + this.getW();
+        int i = 0;
+
+        try { i = this.getAbsX() + this.getW(); }
+        catch (final Exception e) { }
+
+        return i;
     }
 
     /**
@@ -163,7 +173,12 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      * @return int
      */
     public int getAbsY() {
-        return (int) this.getLocationOnScreen().getY();
+        int i = 0;
+
+        try { i = (int) this.getLocationOnScreen().getY(); }
+        catch (final Exception e) { }
+
+        return i;
     }
 
     /**
@@ -171,7 +186,12 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      * @return int
      */
     public int getAbsY2() {
-        return this.getAbsY() + this.getH();
+        int i = 0;
+
+        try { i = this.getAbsY() + this.getH(); }
+        catch (final Exception e) { }
+
+        return i;
     }
 
     /**

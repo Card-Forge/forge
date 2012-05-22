@@ -410,8 +410,8 @@ public class CardListUtil {
         final Comparator<Card> com = new Comparator<Card>() {
             @Override
             public int compare(final Card a, final Card b) {
-                final int cmcA = CardUtil.getConvertedManaCost(a.getManaCost());
-                final int cmcB = CardUtil.getConvertedManaCost(b.getManaCost());
+                final int cmcA = a.getManaCost().getCMC();
+                final int cmcB = b.getManaCost().getCMC();
 
                 if (cmcA == cmcB) {
                     return 0;
@@ -547,7 +547,7 @@ public class CardListUtil {
         int cmc = 0;
 
         for (int i = 0; i < c.size(); i++) {
-            cmc += CardUtil.getConvertedManaCost(c.get(i).getManaCost());
+            cmc += c.get(i).getManaCost().getCMC();
         }
         // System.out.println("Total CMC: " +cmc);
 

@@ -6,6 +6,8 @@ K:eqPump 3:0/0
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDamage | TriggerDescription$ Whenever equipped creature attacks, it deals damage equal to its power to defending player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Opponent,Planeswalker.YouDontCtrl | DamageSource$ Equipped | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ X
 SVar:X:TriggeredAttacker$CardPower
+S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
+SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mage_slayer.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/pch/91.jpg

@@ -74,7 +74,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
         pnlTitleLoad.setLayout(new MigLayout("insets 0, align center"));
         pnlTitleLoad.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlTitleLoad.add(new FLabel.Builder().text("Load a previous Quest")
-                .fontScaleAuto(false).fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
+                .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
 
         final FScrollPane scr = new FScrollPane(lstQuests);
         scr.setBorder(null);
@@ -85,7 +85,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
         pnlTitleNew.setLayout(new MigLayout("insets 0, align center"));
         pnlTitleNew.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlTitleNew.add(new FLabel.Builder().text("Start a new Quest")
-                .fontScaleAuto(false).fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
+                .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
 
         final ButtonGroup group1 = new ButtonGroup();
         group1.add(radEasy);
@@ -171,7 +171,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
 
         pnlViewport.add(new FLabel.Builder().text("Old quest data? Put into "
                 + "res/quest/data, and restart Forge.")
-                .fontAlign(SwingConstants.CENTER).fontScaleAuto(false).fontSize(12)
+                .fontAlign(SwingConstants.CENTER).fontSize(12)
                 .build(), "w 96%!, h 18px!, gap 2% 0 0 4px");
 
         pnlViewport.add(scr, "w 96%!, pushy, growy, gap 2% 0 0 30px");

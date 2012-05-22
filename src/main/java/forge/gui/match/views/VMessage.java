@@ -53,7 +53,7 @@ public enum VMessage implements IVDoc {
     private final JButton btnOK = new FButton("OK");
     private final JButton btnCancel = new FButton("Cancel");
     private final JTextArea tarMessage = new JTextArea();
-    private final JLabel lblGames = new FLabel.Builder().fontScaleAuto(false)
+    private final JLabel lblGames = new FLabel.Builder()
             .fontSize(12).fontStyle(Font.BOLD).fontAlign(SwingConstants.CENTER).build();
 
     //========= Constructor

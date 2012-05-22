@@ -403,7 +403,7 @@ public class AbilityFactoryCounterMagic {
 
         if (this.params.containsKey("ForgetOtherTargets")) {
             if (this.params.get("ForgetOtherTargets").equals("True")) {
-                af.getHostCard().clearRemembered();
+                sa.getSourceCard().clearRemembered();
             }
         }
 
@@ -428,7 +428,7 @@ public class AbilityFactoryCounterMagic {
 
             if (this.params.containsKey("RememberTargets")) {
                 if (this.params.get("RememberTargets").equals("True")) {
-                    af.getHostCard().addRemembered(tgtSACard);
+                    sa.getSourceCard().addRemembered(tgtSACard);
                 }
             }
         }
@@ -519,6 +519,9 @@ public class AbilityFactoryCounterMagic {
             Singletons.getModel().getGameAction().moveToLibrary(tgtSA.getSourceCard());
         } else if (this.destination.equals("Hand")) {
             Singletons.getModel().getGameAction().moveToHand(tgtSA.getSourceCard());
+        } else if (this.destination.equals("Battlefield")) {
+            Card c = Singletons.getModel().getGameAction().moveToPlay(tgtSA.getSourceCard(), srcSA.getActivatingPlayer());
+            c.addController(srcSA.getActivatingPlayer());
         } else if (this.destination.equals("BottomOfLibrary")) {
             Singletons.getModel().getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
         } else if (this.destination.equals("ShuffleIntoLibrary")) {

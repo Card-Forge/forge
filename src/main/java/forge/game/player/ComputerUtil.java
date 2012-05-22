@@ -1891,4 +1891,74 @@ public class ComputerUtil {
         }
         return prevented;
     }
+
+    /**
+     * <p>
+     * castPermanentInMain1.
+     * </p>
+     * 
+     * @param sa
+     *            a SpellAbility object.
+     * @return a boolean.
+     */
+    public static boolean castPermanentInMain1(final SpellAbility sa) {
+        final Card card = sa.getSourceCard();
+        if (card.getSVar("PlayMain1").equals("TRUE")) {
+            return true;
+        }
+        if ((card.isCreature() && (ComputerAIGeneral.hasACardGivingHaste()
+                || card.hasKeyword("Haste"))) || card.hasKeyword("Exalted")) {
+            return true;
+        }
+
+        // get all cards the computer controls with BuffedBy
+        final CardList buffed = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        for (int j = 0; j < buffed.size(); j++) {
+            final Card buffedcard = buffed.get(j);
+            if (buffedcard.getSVar("BuffedBy").length() > 0) {
+                final String buffedby = buffedcard.getSVar("BuffedBy");
+                final String[] bffdby = buffedby.split(",");
+                if (card.isValid(bffdby, buffedcard.getController(), buffedcard)) {
+                    return true;
+                }
+            }
+            if (card.isEquipment() && buffedcard.isCreature() && CombatUtil.canAttack(buffedcard)) {
+                return true;
+            }
+            if (card.isCreature() && buffedcard.hasKeyword("Soulbond") && !buffedcard.isPaired()) {
+                return true;
+            }
+            if (card.hasKeyword("Soulbond") && buffedcard.isCreature() && !buffedcard.isPaired()) {
+                return true;
+            }
+        } // BuffedBy
+
+        // get all cards the human controls with AntiBuffedBy
+        final CardList antibuffed = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        for (int k = 0; k < antibuffed.size(); k++) {
+            final Card buffedcard = antibuffed.get(k);
+            if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
+                final String buffedby = buffedcard.getSVar("AntiBuffedBy");
+                final String[] bffdby = buffedby.split(",");
+                if (card.isValid(bffdby, buffedcard.getController(), buffedcard)) {
+                    return true;
+                }
+            }
+        } // AntiBuffedBy
+        final CardList vengevines = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard, "Vengevine");
+        if (vengevines.size() > 0) {
+            final CardList creatures = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+            final CardList creatures2 = new CardList();
+            for (int i = 0; i < creatures.size(); i++) {
+                if (creatures.get(i).isCreature() && creatures.get(i).getManaCost().getCMC() <= 3) {
+                    creatures2.add(creatures.get(i));
+                }
+            }
+            if (((creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0)).size()) > 1)
+                    && card.isCreature() && card.getManaCost().getCMC() <= 3) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -31,6 +31,9 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Constant;
+import forge.card.CardColor;
+import forge.card.CardManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.card.spellability.AbilityMana;
 import forge.deck.Deck;
 import forge.util.MyRandom;
@@ -514,23 +517,22 @@ public class BoosterDraftAI {
         // count each card color using mana costs
         // TODO: count hybrid mana differently?
         for (i = 0; i < outList.size(); i++) {
-            final String mc = outList.get(i).getManaCost();
+            final CardManaCost mc = outList.get(i).getManaCost();
 
             // count each mana symbol in the mana cost
-            for (int j = 0; j < mc.length(); j++) {
-                final char c = mc.charAt(j);
-
-                if (c == 'W') {
+            for (ManaCostShard shard : mc.getShards()) {
+                byte mask = shard.getColorMask();
+                
+                if ((mask & CardColor.WHITE) > 0 ) 
                     clrCnts[0].setCount(clrCnts[0].getCount() + 1);
-                } else if (c == 'U') {
+                if ((mask & CardColor.BLUE) > 0 ) 
                     clrCnts[1].setCount(clrCnts[1].getCount() + 1);
-                } else if (c == 'B') {
+                if ((mask & CardColor.BLACK) > 0 ) 
                     clrCnts[2].setCount(clrCnts[2].getCount() + 1);
-                } else if (c == 'R') {
+                if ((mask & CardColor.RED) > 0 ) 
                     clrCnts[3].setCount(clrCnts[3].getCount() + 1);
-                } else if (c == 'G') {
+                if ((mask & CardColor.GREEN) > 0 )
                     clrCnts[4].setCount(clrCnts[4].getCount() + 1);
-                }
             }
         }
 

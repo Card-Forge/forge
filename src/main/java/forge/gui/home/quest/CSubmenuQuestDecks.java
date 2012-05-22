@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
+import forge.control.FControl;
 import forge.deck.Deck;
-import forge.gui.SOverlayUtils;
-import forge.gui.deckeditor.DeckEditorQuest;
+import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.controllers.CEditorQuest;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.VHomeUI;
@@ -25,15 +26,6 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
     SINGLETON_INSTANCE;
 
     private Deck currentDeck;
-
-    private final Command cmdDeckExit = new Command() {
-        @Override
-        public void execute() {
-            AllZone.getQuest().save();
-            SOverlayUtils.hideOverlay();
-            update();
-        }
-    };
 
     private final Command cmdDeckSelect = new Command() {
         @Override
@@ -76,11 +68,8 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
         VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new Command() {
             @Override
             public void execute() {
-                final DeckEditorQuest editor =
-                        new DeckEditorQuest(Singletons.getView().getFrame(), AllZone.getQuest());
-                editor.show(cmdDeckExit);
-                SOverlayUtils.showOverlay();
-                editor.setVisible(true);
+                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorQuest(AllZone.getQuest()));
+                FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_QUEST);
             }
         });
     }
@@ -116,7 +105,6 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
 
         view.getLstDecks().setSelectCommand(cmdDeckSelect);
         view.getLstDecks().setDeleteCommand(cmdDeckDelete);
-        view.getLstDecks().setExitCommand(cmdDeckExit);
 
         if (view.getLstDecks().getSelectedDeck() != null) {
             Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_DECK, view.getLstDecks().getSelectedDeck().getName());

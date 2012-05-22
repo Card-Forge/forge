@@ -78,7 +78,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
         pnlTitleRewards.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlTitleRewards.add(new FLabel.Builder().text("Rewards")
                 .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COIN))
-                .fontScaleAuto(false).fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
+                .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
 
         pnlContent.add(pnlTitleRewards, "w 96%!, h 36px!, gap 2% 0 10px 20px");
         pnlContent.add(pnlRewards, "w 96%!, gap 2% 0 10px 20px");
@@ -90,7 +90,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
         pnlTitleBooster.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlTitleBooster.add(new FLabel.Builder().text("Booster Pack Ratios")
                 .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOOK))
-                .fontScaleAuto(false).fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
+                .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
         pnlContent.add(pnlTitleBooster, "w 96%!, h 36px!, gap 2% 0 10px 10px");
         pnlContent.add(pnlBooster, "w 96%!, gap 2% 0 10px 20px");
         populateBooster();
@@ -101,7 +101,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
         pnlTitleDifficulty.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlTitleDifficulty.add(new FLabel.Builder().text("Difficulty Adjustments")
                 .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_NOTES))
-                .fontScaleAuto(false).fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
+                .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
         pnlContent.add(pnlTitleDifficulty, "w 96%!, h 36px!, gap 2% 0 10px 10px");
         pnlContent.add(pnlDifficulty, "w 96%!, gap 2% 0 10px 20px");
         populateDifficulty();
@@ -112,7 +112,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
         pnlTitleShop.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlTitleShop.add(new FLabel.Builder().text("Shop Preferences")
                 .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COIN))
-                .fontScaleAuto(false).fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
+                .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
         pnlContent.add(pnlTitleShop, "w 96%!, h 36px!, gap 2% 0 10px 10px");
         pnlContent.add(pnlShop, "w 96%!, gap 2% 0 10px 20px");
         populateShop();

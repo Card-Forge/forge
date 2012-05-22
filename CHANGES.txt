@@ -5,6 +5,26 @@ Forge Beta: 0#-##-2012 ver 1.2.8
 10### cards in total.
 
 
+The deck editors now use the new UI. The new deck editors include:
+
+* a better text search (can search for multiple terms, and "not" terms
+* interval filters for P/T and CMC
+* add/remove 4
+* better statistics and draw probabilities
+* Toggle-able, sort-able, resize-able, move-able columns
+* and of course uses the drag cell layout.
+
+With the update to the new deck editors several people have noticed an error when they run the snapshot build. We hope to have this fixed in the near future. This start up error states:
+
+Detailed error trace:
+java.lang.NullPointerException
+at forge.gui.deckeditor.controllers.CEditorPreferences.initialize(CEditorPreferences.java:45)
+at forge.view.FView.initialize(FView.java:97)
+
+
+The res/images/icons/ folder has been moved to res/pics/icons/. This folder holds the quest opponent icons, bazaar pets, and bazaar plants. If you have downloaded this content, it will still work, but the folder must be moved on your computer.
+
+
 Some people have noticed special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries.
 
 A possible fix was submitted to the SVN for forge version 1.2.7. We have received several reports that the above bugs are still occuring. We hope to have this problem fixed at some point in the future.
@@ -109,6 +129,86 @@ Fixes/Features:
 - Added a fluff piece to the changes.txt file.
 - Clear Simultaneous triggers at the end of the game
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed AI of Increasing Confusion.
+- Replaced some instances of af.getHostCard() with sa.getSourceCard().
+- merge updates from Trunk 15508-15541
+- costmanaparser
+- made it buildable (there were missing refs to VDock and FSkin)
+- removed some obvious warnings
+- Switched mana to ManaCostShards, removed special classes for each mana kind
+- Fixed the ability costs for Ghave, Guru of Spores.
+- Fixed Iceberg.
+- Improved AI for Soulbond.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Reorganized some parts of digResolve (some more parameters now work together or without certain others).
+- add check for empty cost string
+- Fixed Endless Wurm.
+- Fixed Inquisitor's Flail.
+- ManaPaid back to Mana
+- Merged ManaCost upgrade from branch into trunk (r15546-15556)
+- remove warnings, removed manaparser
+- adding RestrictValid parameter support to AbilityMana and InputPayMAnaCostUtil
+- Fixed Trusted Advisor and similar cards.
+- adding RestrictValid parameter support to ComputerUtil to check restriction for AI
+- MyObservable - moved frequent calls to a variable, moved the very class to utils package
+- Added the AI SVar "HasAttackEffect".
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added "SVar:HasAttackEffect:TRUE" to some cards.
+- Added "SVar:HasAttackEffect:TRUE" to two more cards.
+- Updated some decks with new cards.
+- Fixed a bug with initiatePossibleDefenders.
+- More Cleanup in Combat class.
+- Added a medium version of the Radiant deck.
+- Updated three decks with new cards.
+- Improved AI of AF Dig.
+- Cleanup in AF Dig.
+- Checkstyle fixes to CDock.
+- CardCharacteristics stores manacost as CardManaCost instead of String
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Sludge Strider's 'leaves the battlefield' trigger.
+- Quick fix for unless costs of zero mana.
+- A triggered ability that fails targeting will no longer clear the whole frozen stack (only its own stack instance).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Uploaded the Avacyn Restored set and token images. Updated scripts for token generators in the set to use set specific tokens. Updated token links.
+- Added the optional parameter "ForgetRemembered" to AF Play.
+- ActivationLimit can calculate values from svars now.
+- Fixed typo in recently added cards (my commit comment was misspelled)
+- Updated card prices.
+- Updated two AI SVars.
+- Replaced some instances of af.getHostCard() with sa.getSourceCard().
+- Fixed a lot of sloppily scripted SpellCast triggers (A-E).
+- Fixed a lot of sloppily scripted SpellCast triggers (F-H).
+- Fixed a lot of sloppily scripted SpellCast triggers (I-M).
+- Fixed a lot of sloppily scripted SpellCast triggers (N-Z).
+- Reordered trigger condition checks for better performance.
+- Updated two AI SVars.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- The AI will now cast Equipments in Main1 if a possible attacker is present.
+- Deck editor UI integration.
+- Default layout file for editor added.
+- Removed font scaling from FLabel.
+- Updated Firebloom skin with improved icons and compressed background images (thanks WompWomp).
+- Updated load/save layout icons.
+- Removed some legacy accessors from VMatchUI.
+- Updated document ID enum with more descriptive names.
+- Rolling back last commit; unforeseen problems.
+- Renamed "ForgeIcons" enum in FSkin to more accurate "InterfaceIcons".
+- Fixed "Tapped" parameter in AF ChangeZone.
+- Fixed and simplified Deadeye Navigator.
+- Fixed a tooltip typo.
+- Added the recent commit logs to changes.txt.
+- Replaced two tooltips.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Some preparations for better planeswalker attacking AI.
+- Replaced finalizer method in main(), attempting to fix race condition at startup.
+- Fixed dev mode toggle in preferences submenu/match UI.
+- Updated card detail text area to always scroll to top.
+- Fixed unlimited lands bug.
+- Fixed a two more copies of the tooltip typo.
+- reworked Mana object paradigm and ManaPool
+- Fixed Tamiyo's (and Venser's) emblem image download link
+- Check for null spellAbility source card in mana restrictions. Makes multikicker not payable with restricted mana.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -142,6 +242,20 @@ Impelled Giant
 Merrow Bonegnawer
 Stigma Lasher
 Shaper Parasite
+Clear the Land
+Enslaved Horror
+Gift of the Gargantuan
+Abundance
+Acorn Catapult
+Howltooth Hollow
+Shelldock Isle
+Sedge Sliver
+Withering Wisps
+Anthem of Rakdos
+Apocalypse Chime
+Spinerock Knoll
+Desertion
+Avizoa
 
 
 end

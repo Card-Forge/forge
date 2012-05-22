@@ -3,6 +3,14 @@
  */
 package forge.gui.framework;
 
+import forge.gui.deckeditor.views.VAllDecks;
+import forge.gui.deckeditor.views.VCardCatalog;
+import forge.gui.deckeditor.views.VCurrentDeck;
+import forge.gui.deckeditor.views.VDeckgen;
+import forge.gui.deckeditor.views.VEditorPreferences;
+import forge.gui.deckeditor.views.VFilters;
+import forge.gui.deckeditor.views.VProbabilities;
+import forge.gui.deckeditor.views.VStatistics;
 import forge.gui.match.views.VAntes;
 import forge.gui.match.views.VCombat;
 import forge.gui.match.views.VDetail;
@@ -25,6 +33,15 @@ public enum EDocID { /** */
     CARD_DETAIL (VDetail.SINGLETON_INSTANCE), /** */
     CARD_ANTES (VAntes.SINGLETON_INSTANCE), /** */
 
+    EDITOR_FILTERS (VFilters.SINGLETON_INSTANCE), /** */
+    EDITOR_PREFERENCES (VEditorPreferences.SINGLETON_INSTANCE), /** */
+    EDITOR_ALLDECKS (VAllDecks.SINGLETON_INSTANCE), /** */
+    EDITOR_STATISTICS (VStatistics.SINGLETON_INSTANCE), /** */
+    EDITOR_PROBABILITIES (VProbabilities.SINGLETON_INSTANCE), /** */
+    EDITOR_CATALOG (VCardCatalog.SINGLETON_INSTANCE), /** */
+    EDITOR_CURRENTDECK (VCurrentDeck.SINGLETON_INSTANCE), /** */
+    EDITOR_DECKGEN (VDeckgen.SINGLETON_INSTANCE), /** */
+
     REPORT_MESSAGE (VMessage.SINGLETON_INSTANCE), /** */
     REPORT_STACK (VStack.SINGLETON_INSTANCE), /** */
     REPORT_COMBAT (VCombat.SINGLETON_INSTANCE), /** */
@@ -37,14 +54,10 @@ public enum EDocID { /** */
     // Non-user battlefields (AI or teammate), use setDoc to register.
     FIELD_0 (null), /** */
     FIELD_1 (null), /** */
-    FIELD_2 (null), /** */
-    FIELD_3 (null), /** */
 
     // Non-user hands (AI or teammate), use setDoc to register.
     HAND_0 (null), /** */
-    HAND_1 (null), /** */
-    HAND_2 (null), /** */
-    HAND_3 (null); /** */
+    HAND_1 (null);
 
     // End enum declarations, start enum methods.
     private IVDoc vDoc;
@@ -61,7 +74,7 @@ public enum EDocID { /** */
 
     /** @return {@link forge.gui.framework.IVDoc} */
     public IVDoc getDoc() {
-        if (vDoc == null) { throw new NullPointerException("No document found!"); }
+        if (vDoc == null) { throw new NullPointerException("No document found for " + this.name() + "."); }
         return vDoc;
     }
 }

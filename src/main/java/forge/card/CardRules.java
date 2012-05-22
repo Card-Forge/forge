@@ -27,18 +27,17 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.util.closures.Predicate;
-import forge.util.closures.PredicateString;
 import forge.util.closures.Predicate.ComparableOp;
 import forge.util.closures.Predicate.PredicatesOp;
+import forge.util.closures.PredicateString;
 
 
 /**
- * <p>
- * CardOracle class.
- * </p>
+ * A collection of methods containing full
+ * meta and gameplay properties of a card.
  * 
  * @author Forge
- * @version $Id: CardOracle.java 9708 2011-08-09 19:34:12Z jendave $
+ * @version $Id: CardRules.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardRules {
 
@@ -389,8 +388,31 @@ public final class CardRules {
             return new LeafNumber(LeafNumber.CardField.CMC, op, what);
         }
 
-        // Power
-        // Toughness
+        /**
+         *
+         * @param op
+         *            the op
+         * @param what
+         *            the what
+         * @return the predicate
+         */
+        public static Predicate<CardRules> power(final ComparableOp op, final int what) {
+            return new LeafNumber(LeafNumber.CardField.POWER, op, what);
+        }
+
+        /**
+        *
+        * @param op
+        *            the op
+        * @param what
+        *            the what
+        * @return the predicate
+        */
+       public static Predicate<CardRules> toughness(final ComparableOp op, final int what) {
+           return new LeafNumber(LeafNumber.CardField.TOUGHNESS, op, what);
+       }
+
+        // P/T
         /**
          * Rules.
          * 
@@ -462,7 +484,7 @@ public final class CardRules {
          * @return the predicate
          */
         public static Predicate<CardRules> wasPrintedInSets(final List<String> setCodes) {
-            return new PredicateExitsInSets(setCodes);
+            return new PredicateExistsInSets(setCodes);
         }
 
         /**
@@ -568,7 +590,7 @@ public final class CardRules {
          * @return the predicate
          */
         public static Predicate<CardRules> hasCntColors(final byte cntColors) {
-            return new LeafColor(LeafColor.ColorOperator.Equals, cntColors);
+            return new LeafColor(LeafColor.ColorOperator.CountColors, cntColors);
         }
 
         /**
@@ -634,18 +656,18 @@ public final class CardRules {
             @Override
             public boolean isTrue(final CardRules subject) {
                 switch (this.op) {
-                case CountColors:
-                    return subject.getColor().countColors() == this.color;
-                case CountColorsGreaterOrEqual:
-                    return subject.getColor().countColors() >= this.color;
-                case Equals:
-                    return subject.getColor().isEqual(this.color);
-                case HasAllOf:
-                    return subject.getColor().hasAllColors(this.color);
-                case HasAnyOf:
-                    return subject.getColor().hasAnyColor(this.color);
-                default:
-                    return false;
+                    case CountColors:
+                        return subject.getColor().countColors() == this.color;
+                    case CountColorsGreaterOrEqual:
+                        return subject.getColor().countColors() >= this.color;
+                    case Equals:
+                        return subject.getColor().isEqual(this.color);
+                    case HasAllOf:
+                        return subject.getColor().hasAllColors(this.color);
+                    case HasAnyOf:
+                        return subject.getColor().hasAnyColor(this.color);
+                    default:
+                        return false;
                 }
             }
         }
@@ -747,10 +769,10 @@ public final class CardRules {
             }
         }
 
-        private static class PredicateExitsInSets extends Predicate<CardRules> {
+        private static class PredicateExistsInSets extends Predicate<CardRules> {
             private final List<String> sets;
 
-            public PredicateExitsInSets(final List<String> wantSets) {
+            public PredicateExistsInSets(final List<String> wantSets) {
                 this.sets = wantSets; // maybe should make a copy here?
             }
 
@@ -808,6 +830,9 @@ public final class CardRules {
             public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicate.compose(Presets.IS_CREATURE,
                     PredicatesOp.NOR, Presets.IS_LAND);
 
+            /**
+             * 
+             */
             @SuppressWarnings("unchecked")
             public static final Predicate<CardRules> IS_NONCREATURE_SPELL_FOR_GENERATOR = Predicate.or(Arrays.asList(
                     Presets.IS_SORCERY, Presets.IS_INSTANT, Presets.IS_PLANESWALKER, Presets.IS_ENCHANTMENT,

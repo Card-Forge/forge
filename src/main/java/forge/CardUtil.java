@@ -31,6 +31,7 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardCharacteristics;
+import forge.card.CardManaCost;
 import forge.card.EditionInfo;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
@@ -254,32 +255,22 @@ public final class CardUtil {
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<String> getOnlyColors(final Card c) {
-        final String m = c.getManaCost();
+        final CardManaCost m = c.getManaCost();
+        final byte color_profile = m.getColorProfile();
+        
         final Set<String> colors = new HashSet<String>();
+        if ((color_profile & forge.card.CardColor.WHITE) > 0 )
+            colors.add(Constant.Color.WHITE);
+        if ((color_profile & forge.card.CardColor.BLACK) > 0 )
+            colors.add(Constant.Color.BLACK);
+        if ((color_profile & forge.card.CardColor.BLUE) > 0 )
+            colors.add(Constant.Color.BLUE);
+        if ((color_profile & forge.card.CardColor.RED) > 0 )
+            colors.add(Constant.Color.RED);
+        if ((color_profile & forge.card.CardColor.GREEN) > 0 )
+            colors.add(Constant.Color.GREEN);
 
-        for (int i = 0; i < m.length(); i++) {
-            switch (m.charAt(i)) {
-            case ' ':
-                break;
-            case 'G':
-                colors.add(Constant.Color.GREEN);
-                break;
-            case 'W':
-                colors.add(Constant.Color.WHITE);
-                break;
-            case 'B':
-                colors.add(Constant.Color.BLACK);
-                break;
-            case 'U':
-                colors.add(Constant.Color.BLUE);
-                break;
-            case 'R':
-                colors.add(Constant.Color.RED);
-                break;
-            default:
-                break;
-            }
-        }
+
         for (final String kw : c.getKeyword()) {
             if (kw.startsWith(c.getName() + " is ") || kw.startsWith("CARDNAME is ")) {
                 for (final String color : Constant.Color.COLORS) {
@@ -344,7 +335,7 @@ public final class CardUtil {
         if (c.isToken() && !c.isCopiedToken()) {
             return 0;
         }
-        return CardUtil.getConvertedManaCost(c.getManaCost());
+        return c.getManaCost().getCMC();
     }
 
     /**

@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * Predicate class allows to select items or type <U>, which are or contain an
  * object of type <T>, matching to some criteria set by predicate. No need to
- * write that simple operations by hand.
+ * write that simple operation by hand.
  * 
  * PS: com.google.common.base.Predicates contains almost the same functionality,
  * except for they keep filtering, transformations aside from the predicate in
@@ -58,7 +58,9 @@ public abstract class Predicate<T> {
         NOR,
         /** The NAND. */
         NAND,
+        /** */
         GT,
+        /** */
         LT
     }
 
@@ -84,9 +86,8 @@ public abstract class Predicate<T> {
         LT_OR_EQUAL
     }
 
-    // This is the main method, predicates were made for.
     /**
-     * Checks if is true.
+     * This is the main method, predicates were made for.
      * 
      * @param subject
      *            the subject
@@ -94,11 +95,10 @@ public abstract class Predicate<T> {
      */
     public abstract boolean isTrue(T subject);
 
-    // These are checks against constants, they will let build simpler
-    // expressions
     // Overloaded only in LeafConstant
     /**
-     * Checks if is 1.
+     * These are checks against constants, they will let simpler
+     * expressions be built.
      * 
      * @return true, if is 1
      */
@@ -675,7 +675,8 @@ public abstract class Predicate<T> {
     // Static builder methods - they choose concrete implementation by
     // themselves
     /**
-     * Brigde.
+     * Brigde (transforms a predicate of type T into a predicate
+     * of type U, using a bridge function passed as an argument).
      * 
      * @param <U>
      *            the generic type
@@ -706,19 +707,6 @@ public abstract class Predicate<T> {
      */
     public static <U, T> Predicate<U> instanceOf(final Predicate<T> predicate, final Class<T> clsTarget) {
         return new BridgeToInstance<T, U>(predicate, clsTarget);
-    }
-
-    /**
-     * Not.
-     * 
-     * @param <T>
-     *            the generic type
-     * @param operand1
-     *            the operand1
-     * @return the predicate
-     */
-    public static <T> Predicate<T> not(final Predicate<T> operand1) {
-        return new Not<T>(operand1);
     }
 
     /**
@@ -840,6 +828,32 @@ public abstract class Predicate<T> {
     public static <T, U> Predicate<T> or(final Predicate<T> operand1, final Predicate<U> operand2,
             final Lambda1<U, T> bridge) {
         return new NodeOrBridged<T, U>(operand1, operand2, bridge);
+    }
+
+    /**
+     * Not.
+     * 
+     * @param <T>
+     *            the generic type
+     * @param operand1
+     *            the operand1
+     * @return the predicate
+     */
+    public static <T> Predicate<T> not(final Predicate<T> operand1) {
+        return new Not<T>(operand1);
+    }
+
+    /**
+     * Not.
+     * 
+     * @param <T>
+     *            the generic type
+     * @param operand
+     *            the operand
+     * @return the predicate
+     */
+    public static <T> Predicate<T> not(final Iterable<Predicate<T>> operand) {
+        return new MultiNodeNot<T>(operand);
     }
 
     /**
@@ -1251,6 +1265,35 @@ final class MultiNodeOr<T> extends MultiNode<T> {
         return false;
     }
 }
+
+
+/**
+ * 
+ * TODO: Write javadoc for this type.
+ *
+ * @param <T>
+ */
+final class MultiNodeNot<T> extends MultiNode<T> {
+    /**
+     * 
+     * TODO: Write javadoc for Constructor.
+     * @param filters Iterable<Predicate<T>>
+     */
+    public MultiNodeNot(final Iterable<Predicate<T>> filters) {
+        super(filters);
+    }
+
+    @Override
+    public boolean isTrue(final T subject) {
+        for (final Predicate<T> p : this.getOperands()) {
+            if (!p.isTrue(subject)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
 
 /**
  * 

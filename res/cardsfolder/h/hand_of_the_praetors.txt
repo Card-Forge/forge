@@ -5,7 +5,7 @@ Text:no text
 PT:3/2
 K:Infect
 S:Mode$ Continuous | Affected$ Creature.withInfect+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control with infect get +1/+1.
-T:Mode$ SpellCast | ValidCard$ Creature.withInfect+YouCtrl | Execute$ TrigPoison | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with infect, target player gets a poison counter.
+T:Mode$ SpellCast | ValidCard$ Card.withInfect | ValidActivatingPlayer$ You | Execute$ TrigPoison | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with infect, target player gets a poison counter.
 SVar:TrigPoison:AB$Poison | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | Num$ 1
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare

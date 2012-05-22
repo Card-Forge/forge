@@ -21,7 +21,6 @@ import javax.swing.SwingUtilities;
 
 import forge.Singletons;
 import forge.control.FControl;
-import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
 import forge.model.FModel;
 
@@ -45,28 +44,36 @@ public final class Main {
      */
     public static void main(final String[] args) {
         ExceptionHandler.registerErrorHandling();
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // Only works if the program is not ABORTed / KILLed.
-                // Used instead of a finalizer to avoid leak issues.
-                Singletons.getModel().close();
-            }
-        }));
+
+        Singletons.setModel(FModel.SINGLETON_INSTANCE);
 
         try {
-            Singletons.setModel(FModel.SINGLETON_INSTANCE);
-            Singletons.setView(FView.SINGLETON_INSTANCE);
-            Singletons.setControl(FControl.SINGLETON_INSTANCE);
+            SwingUtilities.invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    Singletons.setView(FView.SINGLETON_INSTANCE);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-            // Use splash frame to initialize everything, then transition to core UI.
-            Singletons.getControl().initialize();
+        Singletons.setControl(FControl.SINGLETON_INSTANCE);
 
-            SwingUtilities.invokeLater(new Runnable() { @Override
-                public void run() { Singletons.getView().initialize(); } });
+        // Use splash frame to initialize everything, then transition to core UI.
+        Singletons.getControl().initialize();
 
-        } catch (final Throwable exn) {
-            ErrorViewer.showError(exn);
+        SwingUtilities.invokeLater(new Runnable() { @Override
+            public void run() { Singletons.getView().initialize(); } });
+    }
+
+    /** @throws Throwable  */
+    protected void finalize() throws Throwable {
+        try { } catch (Exception e) { }
+        finally {
+            super.finalize();
+            //more code can be written here as per need of application
+            Singletons.getModel().close();
         }
     }
 }

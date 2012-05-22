@@ -32,7 +32,7 @@ public enum VSubmenuDeckEditor implements IVSubmenu {
 
         pnl.add(new FLabel.Builder().text("Open Deck Editor").opaque(true)
                 .hoverable(true).cmdClick(CSubmenuDeckEditor.SINGLETON_INSTANCE.getMenuCommand())
-                .fontScaleAuto(false).fontSize(16).build(), "w 200px!, h 40px!");
+                .fontSize(16).build(), "w 200px!, h 40px!");
     }
 
     /* (non-Javadoc)

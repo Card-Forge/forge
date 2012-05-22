@@ -2,7 +2,7 @@ Name:Leyline of Lightning
 ManaCost:2 R R
 Types:Enchantment
 Text:If Leyline of Lightning is in your opening hand, you may begin the game with it on the battlefield.
-T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a spell, you may pay 1. If you do, CARDNAME deals 1 damage to target player.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a spell, you may pay 1. If you do, CARDNAME deals 1 damage to target player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 1 | Tgt$ TgtP | NumDmg$ 1
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

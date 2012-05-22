@@ -3,8 +3,8 @@ ManaCost:2 WU
 Types:Creature Kithkin Soldier Wizard
 Text:no text
 PT:2/2
-T:Mode$ SpellCast | ValidCard$ Card.White+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump11 | TriggerDescription$ Whenever you cast a white spell, CARDNAME gets +1/+1 until end of turn.
-T:Mode$ SpellCast | ValidCard$ Card.Blue+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPumpKW | TriggerDescription$ Whenever you cast a blue spell, CARDNAME gains flying until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump11 | TriggerDescription$ Whenever you cast a white spell, CARDNAME gets +1/+1 until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpKW | TriggerDescription$ Whenever you cast a blue spell, CARDNAME gains flying until end of turn.
 SVar:TrigPump11:AB$Pump | Cost$ 0 | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
 SVar:TrigPumpKW:AB$Pump | Cost$ 0 | KW$ Flying | Defined$ Self
 SVar:BuffedBy:Card.White,Card.Blue

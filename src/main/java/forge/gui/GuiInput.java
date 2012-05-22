@@ -22,11 +22,11 @@ import java.util.Observer;
 
 import forge.AllZone;
 import forge.Card;
-import forge.MyObservable;
 import forge.Singletons;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
+import forge.util.MyObservable;
 
 /**
  * <p>

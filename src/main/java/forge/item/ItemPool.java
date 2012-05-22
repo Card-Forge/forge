@@ -227,6 +227,11 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         // need not set out-of-sync: either remove did set, or nothing was removed
     }
 
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @param flat Iterable<T>
+     */
     public void removeAllFlat(final Iterable<T> flat) {
         for (final T e : flat) {
             this.remove(e);

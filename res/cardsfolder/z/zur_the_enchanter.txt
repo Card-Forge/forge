@@ -6,6 +6,7 @@ PT:1/4
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME attacks, you may search your library for an enchantment card with converted mana cost 3 or less and put it onto the battlefield. If you do, shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Enchantment.cmcLE3 | ChangeNum$ 1
+SVar:HasAttackEffect:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zur_the_enchanter.jpg
 SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/135.jpg

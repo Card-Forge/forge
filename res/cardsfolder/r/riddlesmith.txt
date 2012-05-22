@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Human Artificer
 Text:no text
 PT:2/1
-T:Mode$ SpellCast | ValidCard$ Artifact.YouCtrl | Execute$ TrigLoot | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, you may draw a card. If you do, discard a card.
+T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigLoot | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, you may draw a card. If you do, discard a card.
 SVar:TrigLoot:AB$Draw | Cost$ 0 | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Rarity:Uncommon

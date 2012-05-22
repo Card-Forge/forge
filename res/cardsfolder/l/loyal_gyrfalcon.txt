@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Flying
 K:Defender
-T:Mode$ SpellCast | ValidCard$ Card.White | ValidControllingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDebuff | TriggerDescription$ Whenever you cast a white spell, CARDNAME loses defender until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDebuff | TriggerDescription$ Whenever you cast a white spell, CARDNAME loses defender until end of turn.
 SVar:TrigDebuff:AB$ Debuff | Cost$ 0 | Defined$ Self | Keywords$ Defender
 SVar:BuffedBy:Card.White
 SVar:Rarity:Uncommon

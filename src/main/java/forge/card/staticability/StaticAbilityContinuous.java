@@ -277,19 +277,6 @@ public class StaticAbilityContinuous {
                 }
             }
 
-            // add abilities
-            if (addAbilities != null) {
-                for (final String abilty : addAbilities) {
-                    if (abilty.startsWith("AB")) { // grant the ability
-                        final AbilityFactory af = new AbilityFactory();
-                        final SpellAbility sa = af.getAbility(abilty, affectedCard);
-                        sa.setType("Temporary");
-                        sa.setOriginalHost(hostCard);
-                        affectedCard.addSpellAbility(sa);
-                    }
-                }
-            }
-
             // add SVars
             if (addSVars != null) {
                 for (final String sVar : addSVars) {
@@ -301,6 +288,19 @@ public class StaticAbilityContinuous {
                         actualSVar = actualSVar.split(":")[1];
                     }
                     affectedCard.setSVar(name, actualSVar);
+                }
+            }
+
+            // add abilities
+            if (addAbilities != null) {
+                for (final String abilty : addAbilities) {
+                    if (abilty.startsWith("AB")) { // grant the ability
+                        final AbilityFactory af = new AbilityFactory();
+                        final SpellAbility sa = af.getAbility(abilty, affectedCard);
+                        sa.setType("Temporary");
+                        sa.setOriginalHost(hostCard);
+                        affectedCard.addSpellAbility(sa);
+                    }
                 }
             }
 

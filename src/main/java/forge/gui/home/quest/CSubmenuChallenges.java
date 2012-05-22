@@ -13,7 +13,7 @@ import forge.Command;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.VHomeUI;
-import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
+import forge.gui.home.quest.SSubmenuQuestUtil.SelectablePanel;
 import forge.gui.toolbox.FLabel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventChallenge;
@@ -59,15 +59,15 @@ public enum CSubmenuChallenges implements ICSubmenu {
 
         view.getBtnSpellShop().setCommand(
                 new Command() { @Override
-                    public void execute() { SubmenuQuestUtil.showSpellShop(); } });
+                    public void execute() { SSubmenuQuestUtil.showSpellShop(); } });
 
         view.getBtnBazaar().setCommand(
                 new Command() { @Override
-                    public void execute() { SubmenuQuestUtil.showBazaar(); } });
+                    public void execute() { SSubmenuQuestUtil.showBazaar(); } });
 
         view.getBtnStart().addActionListener(
                 new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent e) { SubmenuQuestUtil.startGame(); } });
+            public void actionPerformed(final ActionEvent e) { SSubmenuQuestUtil.startGame(); } });
 
         ((FLabel) view.getLblZep()).setCommand(
                 new Command() {
@@ -111,7 +111,7 @@ public enum CSubmenuChallenges implements ICSubmenu {
      */
     @Override
     public void update() {
-        SubmenuQuestUtil.updateStatsAndPet();
+        SSubmenuQuestUtil.updateStatsAndPet();
 
         final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
         final QuestController qCtrl = AllZone.getQuest();

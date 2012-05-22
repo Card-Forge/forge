@@ -25,6 +25,7 @@ import forge.CardList;
 import forge.Command;
 import forge.CommandArgs;
 import forge.GameEntity;
+import forge.card.CardManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
@@ -267,10 +268,14 @@ public abstract class SpellAbility {
      * @param cost
      *            a {@link java.lang.String} object.
      */
-    public void setManaCost(final String cost) {
-        this.manaCost = cost;
+    public void setManaCost(final CardManaCost cost) {
+        this.manaCost = cost.toString();
     }
 
+    public void setManaCost(final String cost) {
+        this.manaCost = cost;
+    }    
+    
     /**
      * <p>
      * Getter for the field <code>additionalManaCost</code>.

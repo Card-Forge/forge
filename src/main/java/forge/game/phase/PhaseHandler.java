@@ -29,12 +29,12 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.GameActionUtil;
-import forge.MyObservable;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.MyObservable;
 
 /**
  * <p>
@@ -343,7 +343,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 break;
 
             case COMBAT_BEGIN:
-                PhaseUtil.verifyCombat();
+                //PhaseUtil.verifyCombat();
                 PhaseUtil.handleCombatBegin();
                 break;
 

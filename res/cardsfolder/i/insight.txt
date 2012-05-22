@@ -2,7 +2,7 @@ Name:Insight
 ManaCost:2 U
 Types:Enchantment
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Card.Green+YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts a green spell, you draw a card.
+T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts a green spell, you draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

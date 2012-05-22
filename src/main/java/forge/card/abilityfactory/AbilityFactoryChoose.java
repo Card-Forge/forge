@@ -285,7 +285,7 @@ public final class AbilityFactoryChoose {
      */
     private static void chooseTypeResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card card = af.getHostCard();
+        final Card card = sa.getSourceCard();
         final String type = params.get("Type");
         final ArrayList<String> invalidTypes = new ArrayList<String>();
         if (params.containsKey("InvalidTypes")) {
@@ -639,7 +639,7 @@ public final class AbilityFactoryChoose {
      */
     private static void chooseColorResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card card = af.getHostCard();
+        final Card card = sa.getSourceCard();
 
         ArrayList<Player> tgtPlayers;
 
@@ -914,7 +914,7 @@ public final class AbilityFactoryChoose {
      */
     private static void chooseNumberResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card card = af.getHostCard();
+        final Card card = sa.getSourceCard();
         //final int min = params.containsKey("Min") ? Integer.parseInt(params.get("Min")) : 0;
         //final int max = params.containsKey("Max") ? Integer.parseInt(params.get("Max")) : 99;
         final boolean random = params.containsKey("Random");
@@ -1187,7 +1187,7 @@ public final class AbilityFactoryChoose {
      */
     private static void choosePlayerResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card card = af.getHostCard();
+        final Card card = sa.getSourceCard();
 
         ArrayList<Player> tgtPlayers;
 
@@ -1445,7 +1445,7 @@ public final class AbilityFactoryChoose {
      */
     private static void nameCardResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
 
         ArrayList<Player> tgtPlayers;
 
@@ -1730,7 +1730,7 @@ public final class AbilityFactoryChoose {
      */
     private static void chooseCardResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
         final ArrayList<Card> chosen = new ArrayList<Card>();
 
         ArrayList<Player> tgtPlayers;
@@ -1986,7 +1986,7 @@ public final class AbilityFactoryChoose {
 
     private static void chooseGenericResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
         final BiMap<String, String> choices = HashBiMap.create();
         for (String s : Arrays.asList(params.get("Choices").split(","))) {
             final HashMap<String, String> theseParams = AbilityFactory.getMapParams(host.getSVar(s), host);
@@ -2008,7 +2008,7 @@ public final class AbilityFactoryChoose {
                 AbilityFactory afChoice = new AbilityFactory();
                 final SpellAbility chosenSA = afChoice.getAbility(host.getSVar(choices.inverse().get(choice)), host);
 
-                chosenSA.setActivatingPlayer(af.getHostCard().getController());
+                chosenSA.setActivatingPlayer(sa.getSourceCard().getController());
                 ((AbilitySub) chosenSA).setParent(sa);
                 AbilityFactory.resolve(chosenSA, false);
             }

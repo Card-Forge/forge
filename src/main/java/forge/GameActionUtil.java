@@ -131,8 +131,7 @@ public final class GameActionUtil {
                         while (cascadedCard == null) {
                             crd = topOfLibrary.get(count++);
                             revealed.add(crd);
-                            if ((!crd.isLand() && (CardUtil.getConvertedManaCost(crd.getManaCost()) < CardUtil
-                                    .getConvertedManaCost(cascCard.getManaCost())))) {
+                            if ((!crd.isLand() && (crd.getManaCost().getCMC() < cascCard.getManaCost().getCMC()))) {
                                 cascadedCard = crd;
                             }
 
@@ -375,6 +374,14 @@ public final class GameActionUtil {
             if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(hostCard, "Do you want to pay "
                     + amount + " life?")) {
                 AllZone.getHumanPlayer().payLife(amount, null);
+                paid.execute();
+            } else {
+                unpaid.execute();
+            }
+            return;
+        }
+        if (manaCost.equals("0")) {
+            if (showYesNoDialog(hostCard, "Do you want to pay 0?")) {
                 paid.execute();
             } else {
                 unpaid.execute();

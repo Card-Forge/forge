@@ -142,7 +142,7 @@ public enum VHomeUI implements IVTopLevelUI {
         scrMenu.setBorder(null);
 
         pnlLeft.setLayout(new MigLayout("insets 0, gap 0, align center, wrap"));
-        pnlLeft.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_LOGO))
+        pnlLeft.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_LOGO))
                 .iconScaleFactor(1.0f).build(), "w 150px!, h 150px!, align center");
 
         pnlLeft.add(scrMenu, "pushy, growy, w 98%!, gap 1% 0 1% 0");
@@ -202,16 +202,7 @@ public enum VHomeUI implements IVTopLevelUI {
         pnlParent.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(final ComponentEvent e) {
-                final int w = pnlParent.getWidth();
-                final int h = pnlParent.getHeight();
-                pnlRight.setBounds(new Rectangle(
-                        2 * insets + leftWidthPx, insets,
-                        w - leftWidthPx - 3 * insets, h - 2 * insets));
-                pnlLeft.setBounds(new Rectangle(
-                        insets, insets,
-                        leftWidthPx, h - 2 * insets
-                        ));
-                pnlParent.revalidate();
+                updateLayout();
             }
         });
     }
@@ -247,7 +238,7 @@ public enum VHomeUI implements IVTopLevelUI {
     /** Custom title label styling. */
     @SuppressWarnings("serial")
     private JLabel makeTitleLabel(final EMenuGroup e0) {
-        final FLabel lbl = new FLabel.Builder().fontScaleAuto(false).fontSize(16)
+        final FLabel lbl = new FLabel.Builder().fontSize(16)
                 .hoverable(true).fontAlign(SwingConstants.LEFT).build();
 
         lbl.setBorder(BorderFactory.createCompoundBorder(
@@ -266,7 +257,7 @@ public enum VHomeUI implements IVTopLevelUI {
     private FLabel makeItemLabel(final IVSubmenu item) {
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
 
-        final FLabel lbl = new FLabel.Builder().fontScaleAuto(false).fontSize(15)
+        final FLabel lbl = new FLabel.Builder().fontSize(15)
                 .hoverable(true).selectable(true).text(item.getMenuTitle())
                 .fontAlign(SwingConstants.LEFT).build();
 
@@ -312,5 +303,19 @@ public enum VHomeUI implements IVTopLevelUI {
     /** @return {@link javax.swing.JPanel} the parent panel containing the home UI. */
     public JPanel getPanel() {
         return pnlParent;
+    }
+
+    /** Updates the null layout percentage dimensions. */
+    public void updateLayout() {
+        final int w = pnlParent.getWidth();
+        final int h = pnlParent.getHeight();
+        pnlRight.setBounds(new Rectangle(
+                2 * insets + leftWidthPx, insets,
+                w - leftWidthPx - 3 * insets, h - 2 * insets));
+        pnlLeft.setBounds(new Rectangle(
+                insets, insets,
+                leftWidthPx, h - 2 * insets
+                ));
+        pnlParent.revalidate();
     }
 }

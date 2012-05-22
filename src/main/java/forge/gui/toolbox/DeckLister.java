@@ -2,7 +2,9 @@
  * Forge: Play Magic: the Gathering.
  * Copyright (C) 2011  Nate
  *
- * This program is free software: you can redistribute it and/or modify
+ * This prog
+import forge.gui.deckeditor.CDeckEditorUI;
+ram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -24,27 +26,31 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
+import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
+import forge.control.FControl;
 import forge.deck.CardCollections;
 import forge.deck.Deck;
+import forge.deck.DeckBase;
 import forge.game.GameType;
-import forge.gui.SOverlayUtils;
-import forge.gui.deckeditor.DeckEditorConstructed;
-import forge.gui.deckeditor.DeckEditorLimited;
-import forge.gui.deckeditor.DeckEditorQuest;
-import net.miginfocom.swing.MigLayout;
+import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.controllers.ACEditorBase;
+import forge.gui.deckeditor.controllers.CEditorConstructed;
+import forge.gui.deckeditor.controllers.CEditorLimited;
+import forge.gui.deckeditor.controllers.CEditorQuest;
+import forge.gui.framework.ILocalRepaint;
 
 /**
  * Creates deck list for selected decks for quick deleting, editing, and basic
@@ -52,7 +58,7 @@ import net.miginfocom.swing.MigLayout;
  * 
  */
 @SuppressWarnings("serial")
-public class DeckLister extends JPanel {
+public class DeckLister extends JPanel implements ILocalRepaint {
     private final ImageIcon icoDelete;
     private final ImageIcon icoDeleteOver;
     private final ImageIcon icoEdit;
@@ -60,7 +66,7 @@ public class DeckLister extends JPanel {
     private RowPanel previousSelect;
     private RowPanel[] rows;
     private final GameType gametype;
-    private Command cmdEditorExit, cmdDelete, cmdRowSelect;
+    private Command cmdDelete, cmdRowSelect;
     private final Color clrDefault, clrHover, clrActive, clrBorders;
 
     /**
@@ -87,7 +93,6 @@ public class DeckLister extends JPanel {
     public DeckLister(final GameType gt0, final Command cmd0) {
         super();
         this.gametype = gt0;
-        this.cmdEditorExit = cmd0;
 
         this.clrDefault = new Color(0, 0, 0, 0);
         this.clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
@@ -97,10 +102,10 @@ public class DeckLister extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        this.icoDelete = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE);
-        this.icoDeleteOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE_OVER);
-        this.icoEdit = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT);
-        this.icoEditOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT_OVER);
+        this.icoDelete = FSkin.getIcon(FSkin.InterfaceIcons.ICO_DELETE);
+        this.icoDeleteOver = FSkin.getIcon(FSkin.InterfaceIcons.ICO_DELETE_OVER);
+        this.icoEdit = FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT);
+        this.icoEditOver = FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT_OVER);
     }
 
     /**
@@ -118,18 +123,22 @@ public class DeckLister extends JPanel {
         // scroll panes will have difficulty dynamically resizing if 100% width
         // is set.
         final JPanel rowTitle = new TitlePanel();
-        rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
 
         rowTitle.add(new FLabel.Builder().text("Delete").fontAlign(SwingConstants.CENTER).build(),
                 "w 10%!, h 20px!, gaptop 5px");
-        rowTitle.add(new FLabel.Builder().text("Edit").fontAlign(SwingConstants.CENTER).build(),
+        rowTitle.add(new FLabel.Builder().text("Edit")
+                .fontSize(14).fontAlign(SwingConstants.CENTER).build(),
                 "w 10%!, h 20px!, gaptop 5px");
-        rowTitle.add(new FLabel.Builder().text("Deck Name").fontAlign(SwingConstants.CENTER).build(),
-                "w 60%!, h 20px!, gaptop 5px");
-        rowTitle.add(new FLabel.Builder().text("Main").fontAlign(SwingConstants.CENTER).build(),
+        rowTitle.add(new FLabel.Builder().text("Deck Name")
+                .fontSize(14).fontAlign(SwingConstants.CENTER).build(),
+                "w 58%!, h 20px!, gaptop 5px");
+        rowTitle.add(new FLabel.Builder().text("Main")
+                .fontSize(14).fontAlign(SwingConstants.CENTER).build(),
                 "w 10%!, h 20px!, gaptop 5px");
-        rowTitle.add(new FLabel.Builder().text("Side").fontAlign(SwingConstants.CENTER).build(),
+        rowTitle.add(new FLabel.Builder().text("Side")
+                .fontSize(14).fontAlign(SwingConstants.CENTER).build(),
                 "w 10%!, h 20px!, gaptop 5px");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
@@ -142,7 +151,7 @@ public class DeckLister extends JPanel {
             row = new RowPanel(d);
             row.add(new DeleteButton(row), "w 10%!, h 20px!, gaptop 5px");
             row.add(new EditButton(row), "w 10%!, h 20px!, gaptop 5px");
-            row.add(new GenericLabel(d.getName()), "w 60%!, h 20px!, gaptop 5px");
+            row.add(new GenericLabel(d.getName()), "w 58%!, h 20px!, gaptop 5px");
             row.add(new MainLabel(String.valueOf(d.getMain().countAll())), "w 10%, h 20px!, gaptop 5px");
             row.add(new GenericLabel(String.valueOf(d.getSideboard().countAll())), "w 10%!, h 20px!, gaptop 5px");
             this.add(row, "w 98%!, h 30px!, gapleft 1%");
@@ -169,7 +178,8 @@ public class DeckLister extends JPanel {
     }
 
     /** Prevent panel from repainting the whole screen. */
-    public void repaintOnlyThisPanel() {
+    @Override
+    public void repaintThis() {
         final Dimension d = DeckLister.this.getSize();
         this.repaint(0, 0, d.width, d.height);
     }
@@ -400,15 +410,6 @@ public class DeckLister extends JPanel {
         this.cmdRowSelect = c0;
     }
 
-    /**
-     * Sets the exit command.
-     *
-     * @param c0 &emsp; {@link forge.Command} command executed on editor exit.
-     */
-    public void setExitCommand(final Command c0) {
-        this.cmdEditorExit = c0;
-    }
-
     private void selectHandler(final RowPanel r0) {
         if (this.previousSelect != null) {
             this.previousSelect.setSelected(false);
@@ -420,41 +421,39 @@ public class DeckLister extends JPanel {
             this.cmdRowSelect.execute();
         }
     }
-
-    private void editDeck(final Deck d0) {
-        SOverlayUtils.showOverlay();
-
-        JFrame mainFrame = Singletons.getView().getFrame();
+    @SuppressWarnings("unchecked")
+    private <T extends DeckBase> void editDeck(final Deck d0) {
         switch (this.gametype) {
             case Quest:
-            Constant.Runtime.HUMAN_DECK[0] = d0;
-            final DeckEditorQuest editor = new DeckEditorQuest(mainFrame, AllZone.getQuest());
-            editor.show(this.cmdEditorExit);
-            editor.setVisible(true);
-            break;
+                    Constant.Runtime.HUMAN_DECK[0] = d0;
+                    final CEditorQuest qEditor = new CEditorQuest(AllZone.getQuest());
+                    CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(qEditor);
+                    FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_QUEST);
+                break;
             case Constructed:
-            final DeckEditorConstructed cEditor =
-                    new DeckEditorConstructed(mainFrame);
-            cEditor.show(this.cmdEditorExit);
-            cEditor.getController().load(d0.getName());
-            cEditor.setVisible(true);
-            break;
-        case Sealed:
-            final DeckEditorLimited sEditor =
-                    new DeckEditorLimited(mainFrame, Singletons.getModel().getDecks().getSealed());
-            sEditor.show(this.cmdEditorExit);
-            sEditor.getController().load(d0.getName());
-            sEditor.setVisible(true);
-            break;
-        case Draft:
-            final DeckEditorLimited dEditor =
-                    new DeckEditorLimited(mainFrame, Singletons.getModel().getDecks().getDraft());
-            dEditor.show(this.cmdEditorExit);
-            dEditor.getController().load(d0.getName());
-            dEditor.setVisible(true);
-            break;
-        default:
-            break;
+                    CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorConstructed());
+                    FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_CONSTRUCTED);
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(d0.getName());
+                break;
+            case Sealed:
+                final ACEditorBase<?, T> sEditor = (ACEditorBase<?, T>)
+                    new CEditorLimited(Singletons.getModel().getDecks().getSealed());
+
+                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(sEditor);
+
+                sEditor.getDeckController().load(d0.getName());
+                FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_LIMITED);
+                break;
+            case Draft:
+                final ACEditorBase<?, T> dEditor = (ACEditorBase<?, T>)
+                        new CEditorLimited(Singletons.getModel().getDecks().getDraft());
+                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(dEditor);
+
+                dEditor.getDeckController().load(d0.getName());
+                FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_LIMITED);
+                break;
+            default:
+                break;
         }
     }
 
@@ -482,7 +481,7 @@ public class DeckLister extends JPanel {
         }
 
         this.remove(r0);
-        this.repaintOnlyThisPanel();
+        this.repaintThis();
         this.revalidate();
 
         if (this.cmdDelete != null) {

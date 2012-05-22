@@ -76,7 +76,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         final Player player = c.getController();
 
         if (this.trigger) {
-            if (c.hasKeyword("CARDNAME enters the battlefield tapped.")) {
+            if (c.hasKeyword("CARDNAME enters the battlefield tapped.") || c.hasKeyword("Hideaway")) {
                 // it enters the battlefield this way, and should not fire
                 // triggers
                 c.setTapped(true);

@@ -8,6 +8,7 @@
 /release.properties
 res/PerSetTrackingResults
 res/cardsfolder/cardsfolder.zip
+res/cardsfolder/test_cards
 res/decks/30to1's[!!-~]Mine[!!-~]Combo.dck
 res/decks/A[!!-~]Real[!!-~]BoonNoggle[!!-~](Levi[!!-~]Howa).dck
 res/decks/AI_o1.dck
@@ -268,7 +269,6 @@ res/decks/Zemox's[!!-~]Mono-Green[!!-~]Infect.dck
 res/decks/Zvi[!!-~]Mowshowitz's[!!-~]Mono-Black[!!-~]Control.dck
 res/decks/constructed/*.dck
 res/decks/o1.bdk
-res/images/themes
 res/layouts/*.xml
 res/oracleScript.log
 res/pics
@@ -289,6 +289,7 @@ res/pics/APC
 res/pics/ARB
 res/pics/ARN
 res/pics/ATQ
+res/pics/AVR
 res/pics/BOK
 res/pics/CFX
 res/pics/CHK
@@ -357,6 +358,8 @@ res/pics/ZEN
 res/pics/booster
 res/pics/icons
 res/pics/tokens/*.jpg
+res/pics_product/*.jpg
+res/preferences/forge.preferences
 res/quest/data
 res/quest/quest.preferences
 res/quest/questData.dat

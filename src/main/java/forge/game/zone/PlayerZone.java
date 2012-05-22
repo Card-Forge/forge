@@ -19,7 +19,7 @@ package forge.game.zone;
 
 import java.util.Observer;
 
-import forge.MyObservable;
+import forge.util.MyObservable;
 
 //PlayerZone observers the cards that are added to its zone
 /**

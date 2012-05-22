@@ -7,6 +7,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, put two 1/1 white Soldier creature tokens onto the battlefield tapped and attacking.
 SVar:TrigBattleCry:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other | NumAtt$ 1
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenTapped$ True | TokenAttacking$ True
+SVar:HasAttackEffect:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hero_of_bladehold.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/8.jpg

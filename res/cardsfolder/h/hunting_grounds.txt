@@ -2,7 +2,7 @@ Name:Hunting Grounds
 ManaCost:G W
 Types:Enchantment
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Spell.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigChangeZone | OptionalDecider$ You | Threshold$ True | TriggerDescription$ Threshold - Whenever an opponent casts a spell, you may put a creature card from your hand onto the battlefield.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigChangeZone | OptionalDecider$ You | Threshold$ True | TriggerDescription$ Threshold - Whenever an opponent casts a spell, you may put a creature card from your hand onto the battlefield.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | ChangeType$ Creature | ChangeNum$ 1 | Origin$ Hand | Destination$ Battlefield
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_grounds.jpg

@@ -19,10 +19,15 @@ package forge.properties;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,7 +53,6 @@ public class ForgePreferences {
     public enum FPref { /** */
         UI_USE_OLD ("false"), /** */
         UI_RANDOM_FOIL ("false"), /** */
-        UI_LAYOUT_PARAMS ("0.15,0.55,0.68,0.73,0.44,0.40"), /** */
         UI_SMOOTH_LAND ("false"), /** */
         UI_AVATARS ("0,1"), /** */
         UI_CARD_OVERLAY ("true"), /** */
@@ -146,7 +150,27 @@ public class ForgePreferences {
     public ForgePreferences() {
         preferenceValues = new HashMap<FPref, String>();
         try {
-            final BufferedReader input = new BufferedReader(new FileReader(NewConstants.PREFERENCE_FILE));
+            // Preferences files have been consolidated into res/prefs/.
+            // This code is here temporarily to facilitate this transfer.
+            // After a while, this can be deleted.  Doublestrike 21-5-12
+            final File oldFile = new File("forge.preferences");
+            if (oldFile.exists()) {
+                final File newFile = new File(NewConstants.PREFS_GLOBAL_FILE);
+                final InputStream in = new FileInputStream(oldFile);
+                final OutputStream out = new FileOutputStream(newFile);
+
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+                in.close();
+                out.close();
+
+                oldFile.delete();
+            }  // END TEMPORARY CONSOLIDATION FACILITATION
+
+            final BufferedReader input = new BufferedReader(new FileReader(NewConstants.PREFS_GLOBAL_FILE));
             String line = null;
             while ((line = input.readLine()) != null) {
                 if (line.startsWith("#") || (line.length() == 0)) {
@@ -171,7 +195,7 @@ public class ForgePreferences {
         BufferedWriter writer = null;
 
         try {
-            writer = new BufferedWriter(new FileWriter(NewConstants.PREFERENCE_FILE));
+            writer = new BufferedWriter(new FileWriter(NewConstants.PREFS_GLOBAL_FILE));
             for (FPref key : FPref.values()) {
                 writer.write(key + "=" + getPref(key));
                 writer.newLine();

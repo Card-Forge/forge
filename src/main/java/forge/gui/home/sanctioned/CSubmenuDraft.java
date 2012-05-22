@@ -13,6 +13,7 @@ import javax.swing.SwingWorker;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
+import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameNew;
@@ -21,7 +22,8 @@ import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
 import forge.gui.GuiUtils;
 import forge.gui.SOverlayUtils;
-import forge.gui.deckeditor.DraftingProcess;
+import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.controllers.CEditorDraftingProcess;
 import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FSkin;
 
@@ -77,14 +79,6 @@ public enum CSubmenuDraft implements ICSubmenu {
             "Walter", "Wilfred", "William", "Winston"
     };
 
-    private final Command cmdDeckExit = new Command() {
-        @Override
-        public void execute() {
-            update();
-            SOverlayUtils.hideOverlay();
-        }
-    };
-
     private final Command cmdDeckSelect = new Command() {
         @Override
         public void execute() {
@@ -102,7 +96,6 @@ public enum CSubmenuDraft implements ICSubmenu {
         view.populate();
         CSubmenuDraft.SINGLETON_INSTANCE.update();
 
-        view.getLstHumanDecks().setExitCommand(cmdDeckExit);
         view.getLstHumanDecks().setSelectCommand(cmdDeckSelect);
 
         view.getBtnBuildDeck().addMouseListener(
@@ -220,9 +213,7 @@ public enum CSubmenuDraft implements ICSubmenu {
 
     /** */
     private void setupDraft() {
-        SOverlayUtils.showOverlay();
-
-        final DraftingProcess draft = new DraftingProcess(Singletons.getView().getFrame());
+        final CEditorDraftingProcess draft = new CEditorDraftingProcess();
 
         // Determine what kind of booster draft to run
         final ArrayList<String> draftTypes = new ArrayList<String>();
@@ -244,6 +235,9 @@ public enum CSubmenuDraft implements ICSubmenu {
         else if (o.toString().equals(draftTypes.get(2))) {
             draft.showGui(new BoosterDraft(CardPoolLimitation.Custom));
         }
+
+        CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(draft);
+        FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_LIMITED);
     }
 
     private String[] generateNames() {

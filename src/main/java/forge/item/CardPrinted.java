@@ -36,9 +36,10 @@ import forge.util.closures.Predicate;
 import forge.util.closures.PredicateString;
 
 /**
- * <p>
- * CardReference class.
- * </p>
+ * A viciously lightweight version of a card, for instances
+ * where a full set of meta and rules is not needed.
+ * <br><br>
+ * The full set of rules is in the CardRules class.
  * 
  * @author Forge
  * @version $Id: CardReference.java 9708 2011-08-09 19:34:12Z jendave $
@@ -164,8 +165,10 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
         return this.card.getType().toString();
     }
 
-    // Lambda to get rules for selects from list of printed cards
-    /** The Constant fnGetRules. */
+    /**
+     * Lambda to get rules for selects from list of printed cards.
+     * 
+     */
     public static final Lambda1<CardRules, CardPrinted> FN_GET_RULES = new Lambda1<CardRules, CardPrinted>() {
         @Override
         public CardRules apply(final CardPrinted from) {

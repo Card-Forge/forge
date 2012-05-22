@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Flash
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, counter target activated ability.
-T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | Execute$ TrigBounce | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a spell, you may return CARDNAME to its owner's hand.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a spell, you may return CARDNAME to its owner's hand.
 SVar:TrigCounter:DB$Counter | Cost$ 0 | TargetType$ Activated | TgtPrompt$ Select target ability | ValidTgts$ Permanent
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand
 SVar:Rarity:Uncommon

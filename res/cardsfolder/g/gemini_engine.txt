@@ -9,6 +9,7 @@ SVar:TrigSac:Mode$ Phase | Phase$ EndCombat | Execute$ TrigSacrifice | TriggerDe
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | SacValid$ Self | Mandatory$ True
 SVar:X:Count$CardPower
 SVar:Y:Count$CardToughness
+SVar:HasAttackEffect:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemini_engine.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/121.jpg

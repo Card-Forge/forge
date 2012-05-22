@@ -44,10 +44,10 @@ public final class SOverlayUtils {
         pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
         pnl.setBounds(new Rectangle(((w - pnlW) / 2), ((h - pnlH) / 2), pnlW, pnlH));
 
-        pnl.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_LOGO)).build(),
+        pnl.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_LOGO)).build(),
                 "h 200px!, align center");
         pnl.add(new FLabel.Builder().text("Loading new game...")
-                .fontScaleAuto(false).fontSize(22).build(), "h 40px!, align center");
+                .fontSize(22).build(), "h 40px!, align center");
 
         overlay.add(pnl);
 
@@ -75,7 +75,7 @@ public final class SOverlayUtils {
         pnlLoading.setBounds(((w - 170) / 2), ((h - 80) / 2), 170, 80);
         pnlLoading.setLayout(new MigLayout("wrap, align center"));
         pnlLoading.add(new FLabel.Builder().fontSize(18)
-                .fontScaleAuto(false).text(msg0).build(), "h 20px!, w 140px!, gap 0 0 5px 0");
+                .text(msg0).build(), "h 20px!, w 140px!, gap 0 0 5px 0");
         pnlLoading.add(lblLoading, "gap 0 0 0 10px");
 
         overlay.add(pnlLoading);

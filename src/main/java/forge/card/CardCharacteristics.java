@@ -34,7 +34,7 @@ import forge.card.trigger.Trigger;
 public class CardCharacteristics {
     private String name = "";
     private ArrayList<String> type = new ArrayList<String>();
-    private String manaCost = "";
+    private CardManaCost manaCost = CardManaCost.EMPTY;
     private ArrayList<CardColor> cardColor = new ArrayList<CardColor>();
     private boolean cardColorsOverridden = false;
     private int baseAttack = 0;
@@ -94,7 +94,7 @@ public class CardCharacteristics {
      * 
      * @return the manaCost
      */
-    public final String getManaCost() {
+    public final CardManaCost getManaCost() {
         return this.manaCost;
     }
 
@@ -104,7 +104,7 @@ public class CardCharacteristics {
      * @param manaCost0
      *            the manaCost to set
      */
-    public final void setManaCost(final String manaCost0) {
+    public final void setManaCost(final CardManaCost manaCost0) {
         this.manaCost = manaCost0;
     }
 

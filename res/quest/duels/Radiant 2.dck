@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Radiant 2
+Title=Radiant
+Difficulty=medium
+Description=WU flying creature deck with Radiant, Archangel, Gravitational Shift and Moat
+Icon=Radiant.jpg
+Deck Type=constructed
+[main]
+4 Plains|M12
+2 Island|M12
+4 Seachrome Coast
+4 Sejiri Refuge
+3 Glacial Fortress
+4 Flooded Strand
+1 Nimbus Maze
+1 Radiant, Archangel
+2 Soulcatcher
+1 Archon of Redemption
+2 Pride of the Clouds
+1 Sprite Noble
+1 Serra Aviary
+1 Favorable Winds
+1 Moat
+1 Gravitational Shift
+1 Abbey Griffin
+1 Araba Mothrider
+1 Armored Griffin
+1 Armored Pegasus
+1 Assault Griffin
+1 Aven Riftwatcher
+1 Avian Changeling
+1 Azorius First-Wing
+1 Blinding Angel
+1 Cloud Elemental
+1 Courier Hawk
+1 Esper Cormorants
+1 Flying Men
+1 Griffin Sentinel
+1 Gryff Vanguard
+1 Hazerider Drake
+1 Knight of Sursi
+1 Messenger Falcons
+1 Mulldrifter
+1 Pegasus Charger
+1 Peregrine Griffin
+1 Requiem Angel
+1 Shepherd of the Lost
+1 Sky Spirit
+1 Suntail Hawk
+1 Talon Trooper
+1 Tempest Drake
+[sideboard]

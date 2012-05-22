@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Creature Elf Druid
 Text:no text
 PT:3/3
-T:Mode$ SpellCast | ValidCard$ Card.Druid+YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a Druid spell, you may draw a card.
+T:Mode$ SpellCast | ValidCard$ Druid | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a Druid spell, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 A:AB$ ChangeZoneAll | Cost$ tapXType<7/Druid> | Origin$ Battlefield | Destination$ Battlefield | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Land | GainControl$ True | CostDesc$ Tap seven untapped Druids you control: | SpellDescription$ Gain control of all lands target player controls.
 SVar:Rarity:Rare

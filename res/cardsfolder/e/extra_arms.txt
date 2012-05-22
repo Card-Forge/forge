@@ -6,6 +6,8 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 4 R | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, it deals 2 damage to target creature or player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | DamageSource$ TriggeredCard | NumDmg$ 2
+S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
+SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extra_arms.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/92.jpg

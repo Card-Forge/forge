@@ -3,8 +3,8 @@ ManaCost:2 RG
 Types:Creature Goblin Warrior Shaman
 Text:no text
 PT:2/3
-T:Mode$ SpellCast | ValidCard$ Card.Red+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump11 | TriggerDescription$ Whenever you cast a red spell, CARDNAME gets +1/+1 until end of turn.
-T:Mode$ SpellCast | ValidCard$ Card.Green+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPumpKW | TriggerDescription$ Whenever you cast a green spell, CARDNAME gains forestwalk until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump11 | TriggerDescription$ Whenever you cast a red spell, CARDNAME gets +1/+1 until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpKW | TriggerDescription$ Whenever you cast a green spell, CARDNAME gains forestwalk until end of turn.
 SVar:TrigPump11:AB$Pump | Cost$ 0 | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
 SVar:TrigPumpKW:AB$Pump | Cost$ 0 | KW$ Forestwalk | Defined$ Self
 SVar:BuffedBy:Card.Red,Card.Green

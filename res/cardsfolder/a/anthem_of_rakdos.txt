@@ -1,0 +1,18 @@
+Name:Anthem of Rakdos
+ManaCost:2 B R R
+Types:Enchantment
+Text:no text
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ AnthemPump | TriggerDescription$ Whenever a creature you control attacks, it gets +2/+0 until end of turn and CARDNAME deals 1 damage to you.
+SVar:AnthemPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ +2 | SubAbility$ RakdosBurn
+SVar:RakdosBurn:DB$ DealDamage | Defined$ You | NumDmg$ 1
+R:Event$ DamageDone | ValidSource$ Card.YouCtrl | ValidTarget$ Creature,Player | Hellbent$ True | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ Hellbent - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+R:Event$ DamageDone | ValidSource$ Card.YouCtrl | ValidTarget$ Creature,Player | Hellbent$ True | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ Hellbent - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
+SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/anthem_of_rakdos.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/102.jpg
+Oracle:Whenever a creature you control attacks, it gets +2/+0 until end of turn and Anthem of Rakdos deals 1 damage to you.\nHellbent - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+End

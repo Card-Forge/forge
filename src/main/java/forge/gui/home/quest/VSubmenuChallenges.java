@@ -43,36 +43,36 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet {
     private final JCheckBox cbPlant = new FCheckBox("Summon Plant");
     private final JLabel lblZep   = new FLabel.Builder().text("<html>Launch<br>Zeppelin</html>")
             .hoverable(true).icon(FSkin.getIcon(FSkin.QuestIcons.ICO_ZEP))
-            .fontScaleAuto(false).fontSize(16).build();
+            .fontSize(16).build();
 
     private final FLabel lblLife      = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_LIFE))
-        .fontScaleAuto(false).fontSize(15).build();
+        .fontSize(15).build();
     private final FLabel lblCredits   = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COINSTACK))
-        .fontScaleAuto(false).fontSize(15).build();
+        .fontSize(15).build();
     private final FLabel lblWins      = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_PLUS))
-        .fontScaleAuto(false).fontSize(15).build();
+        .fontSize(15).build();
     private final FLabel lblLosses    = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_MINUS))
-        .fontScaleAuto(false).fontSize(15).build();
+        .fontSize(15).build();
     private final FLabel lblWinStreak = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_PLUSPLUS))
-        .fontScaleAuto(false).fontSize(15).build();
+        .fontSize(15).build();
     private final FLabel lblTitle     = new FLabel.Builder()
         .text("Title Hasn't Been Set Yet").fontAlign(SwingConstants.CENTER)
-        .fontScaleAuto(false).fontSize(16).build();
+        .fontSize(16).build();
     private final FLabel lblNextChallengeInWins = new FLabel.Builder()
-        .fontScaleAuto(false).fontSize(15).build();
+        .fontSize(15).build();
     private final FLabel btnCurrentDeck = new FLabel.Builder()
-        .fontScaleAuto(false).fontSize(15).opaque(true).hoverable(true).build();
+        .fontSize(15).opaque(true).hoverable(true).build();
     private final FLabel btnBazaar = new FLabel.Builder()
         .opaque(true).hoverable(true).text("Bazaar")
-        .fontScaleAuto(false).fontSize(14).tooltip("Peruse the Bazaar").build();
+        .fontSize(14).tooltip("Peruse the Bazaar").build();
     private final FLabel btnSpellShop = new FLabel.Builder()
         .opaque(true).hoverable(true).text("Spell Shop")
-        .fontScaleAuto(false).fontSize(14).tooltip("Travel to the Spell Shop").build();
+        .fontSize(14).tooltip("Travel to the Spell Shop").build();
 
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#getPanel()
@@ -144,14 +144,14 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet {
     @Override
     public void updateCurrentDeckStatus() {
         final JLabel btnCurrentDeck = VSubmenuChallenges.SINGLETON_INSTANCE.getBtnCurrentDeck();
-        if (SubmenuQuestUtil.getCurrentDeck() == null) {
+        if (SSubmenuQuestUtil.getCurrentDeck() == null) {
             btnCurrentDeck.setBackground(Color.red.darker());
             btnCurrentDeck.setText("  Build, then select a deck in the \"Decks\" submenu.  ");
         }
         else {
             btnCurrentDeck.setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
             btnCurrentDeck.setText("Current deck: "
-                    + SubmenuQuestUtil.getCurrentDeck().getName());
+                    + SSubmenuQuestUtil.getCurrentDeck().getName());
         }
     }
 

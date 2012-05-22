@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Legendary Creature Goblin Warrior
 Text:no text
 PT:1/1
-T:Mode$ SpellCast | ValidCard$ Spirit.YouDontCtrl,Arcane.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent casts a Spirit or Arcane spell, CARDNAME deals 2 damage to that player.
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent casts a Spirit or Arcane spell, CARDNAME deals 2 damage to that player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 2
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

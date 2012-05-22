@@ -4,7 +4,7 @@ Types:Creature Elf Shaman
 Text:no text
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
-T:Mode$ SpellCast | ValidCard$ Creature.YouCtrl | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a creature spell, you may pay G G. If you do, return CARDNAME from your graveyard to your hand.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a creature spell, you may pay G G. If you do, return CARDNAME from your graveyard to your hand.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:TrigReturn:AB$ChangeZone | Cost$ G G | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:Rarity:Rare

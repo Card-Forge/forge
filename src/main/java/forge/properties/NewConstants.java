@@ -43,8 +43,15 @@ public final class NewConstants {
     /** Constant <code>CARDFORGE_URL = "program/cardforgeURL"</code>. */
     public static final String CARDFORGE_URL = "program/cardforgeURL";
 
-    /** Constant <code>CARDFORGE_URL = "program/cardforgeURL"</code>. */
-    public static final String PREFERENCE_FILE = "forge.preferences";
+    /** Constant <code>PREFS_GLOBAL_FILE = "forge.preferences"</code>. */
+    public static final String PREFS_GLOBAL_FILE = "res/preferences/forge.preferences";
+    /** Constant <code>PREFS_GLOBAL_FILE = "editor.preferences"</code>. */
+    public static final String PREFS_EDITOR_FILE = "res/preferences/editor.preferences";
+    /** */
+    public static final String PREFS_MAIN_PROPERTIES_FILE = "res/preferences/main.properties";
+
+    /** Constant <code>LAYOUT_DIR = "res/layouts/"</code>. */
+    public static final String LAYOUT_DIR = "res/layouts/";
 
     /** Constant <code>DECKS="decks"</code>. */
     public static final String DECKS = "decks";
@@ -60,6 +67,7 @@ public final class NewConstants {
     /** Constant <code>CARD_PICTURES_A="card-pictures_a"</code>. */
 
     public static final class CardPicturesByLetter {
+        /** */
         public static final String CARD_PICTURES_A = "card-pictures_a";
         /** Constant <code>CARD_PICTURES_B="card-pictures_b"</code>. */
         public static final String CARD_PICTURES_B = "card-pictures_b";
@@ -112,22 +120,15 @@ public final class NewConstants {
         /** Constant <code>CARD_PICTURES_Z="card-pictures_z"</code>. */
         public static final String CARD_PICTURES_Z = "card-pictures_z";
     }
-    /** Constant <code>CARD_PICTURES_OTHER="card-pictures_other"</code>. */
-    public static final String CARD_PICTURES_OTHER = "card-pictures_other";
-    /** Constant <code>CARD_PICTURES_TOKEN_HQ="card-pictures_token_hq"</code>. */
-    public static final String CARD_PICTURES_TOKEN_HQ = "card-pictures_token_hq";
+
     /** Constant <code>TOKEN_IMAGES="token-images"</code>. */
     public static final String TOKEN_IMAGES = "token-images";
-    /** Constant <code>CARDS="cards"</code>. */
-    public static final String CARDS = "cards";
     /** Constant <code>CARDSFOLDER="cardsfolder"</code>. */
     public static final String CARDSFOLDER = "cardsfolder";
     /** Constant <code>REMOVED="removed-cards"</code>. */
     public static final String REMOVED = "removed-cards";
     /** Constant <code>NAME_MUTATOR="name-mutator"</code>. */
     public static final String NAME_MUTATOR = "name-mutator";
-    /** Constant <code>BOOSTERDATA="boosterdata"</code>. */
-    public static final String BOOSTERDATA = "boosterdata";
     /** The file name of the image for face down cards on the battlefield. */
     public static final String MORPH_IMAGE_FILE_NAME = "morph";
 
@@ -143,12 +144,10 @@ public final class NewConstants {
     public static final String IMAGE_TOKEN = "image/token";
     /** Constant <code>IMAGE_ICON="image/icon"</code>. */
     public static final String IMAGE_ICON = "image/icon";
+    /** Constant <code>IMAGE_SEALED_PRODUCT="image/product"</code>. */
     public static final String IMAGE_SEALED_PRODUCT = "image/product";
     /** Constant <code>PICS_BOOSTER_IMAGES="pics/booster/images"</code>. */
     public static final String PICS_BOOSTER_IMAGES = "pics/booster/images";
-    /** Constant <code>SOUND_BASE="sound/base"</code>. */
-    public static final String SOUND_BASE = "sound/base";
-
 
     /**
      * These properties are for a regular game.
@@ -199,6 +198,7 @@ public final class NewConstants {
 
         /** The DECKS. */
         public static final String DUELS = "quest/duels-dir";
+        /** */
         public static final String CHALLENGES = "quest/challenges-dir";
 
         /** The XMLDATA. */
@@ -222,36 +222,10 @@ public final class NewConstants {
         /** */
         public static final String PRECONS = "quest/precons-dir";
 
+        /** */
         public static final String BAZAAR = "quest/bazaar";
+        /** */
         public static final String BAZAAR_DIR = "quest/bazaar-dir";
-    }
-
-    /**
-     * These are GUI-related properties.
-     */
-    public static class Gui {
-
-        /**
-         * The Interface GuiDisplay.
-         */
-        public static class GuiDisplay {
-
-            /** The LAYOUT. */
-            public static final String LAYOUT = "gui/Display";
-
-            /** The LAYOUT_NEW. */
-            public static final String LAYOUT_NEW = "gui/Display/new";
-        }
-
-        /**
-         * The Interface GuiDeckEditor.
-         */
-        public static class GuiDeckEditor {
-
-            /** The LAYOUT. */
-            public static final String LAYOUT = "gui/DeckEditor";
-
-        }
     }
 
     /**

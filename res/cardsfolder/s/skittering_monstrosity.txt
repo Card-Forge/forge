@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Creature Horror
 Text:no text
 PT:5/5
-T:Mode$ SpellCast | ValidCard$ Creature.YouCtrl | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you cast a creature spell, sacrifice CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you cast a creature spell, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

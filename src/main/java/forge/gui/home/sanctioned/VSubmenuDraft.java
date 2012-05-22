@@ -46,10 +46,10 @@ public enum VSubmenuDraft implements IVSubmenu {
     private final DeckLister lstHumanDecks = new DeckLister(GameType.Draft);
     private final JList lstAI           = new FList();
     private final JLabel btnBuildDeck   = new FLabel.Builder()
-        .fontScaleAuto(false).fontSize(16)
+        .fontSize(16)
         .opaque(true).hoverable(true).text("Start A New Draft").build();
     private final JLabel btnDirections = new FLabel.Builder()
-        .fontScaleAuto(false).fontSize(16)
+        .fontSize(16)
         .text("Click For Directions").fontAlign(SwingConstants.CENTER).build();
 
     /* (non-Javadoc)

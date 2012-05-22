@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Human Artificer
 Text:no text
 PT:2/1
-T:Mode$ SpellCast | ValidCard$ Artifact.YouCtrl | Execute$ TrigDamage | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, you may pay 1. If you do, CARDNAME deals 1 damage to target creature or player.
+T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, you may pay 1. If you do, CARDNAME deals 1 damage to target creature or player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 1 | Tgt$ TgtCP | NumDmg$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/embersmith.jpg

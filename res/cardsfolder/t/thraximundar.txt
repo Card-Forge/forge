@@ -8,6 +8,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ 
 T:Mode$ Sacrificed | ValidCard$ Creature | Execute$ TrigPutCounter | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a player sacrifices a creature, you may put a +1/+1 counter on CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Opponent | SacValid$ Creature
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:HasAttackEffect:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraximundar.jpg
 SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/113.jpg

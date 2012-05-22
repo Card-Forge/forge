@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Creature Surrakar
 Text:no text
 PT:2/1
-T:Mode$ SpellCast | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a instant or sorcery spell, you may put a charge counter on CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a instant or sorcery spell, you may put a charge counter on CARDNAME.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw X cards, where X is the number of charge counters on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X

@@ -2,8 +2,8 @@ Name:Forced Fruition
 ManaCost:4 U U
 Types:Enchantment
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Card | ValidControllingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts a spell, that player draws seven cards.
-SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredPlayer | NumCards$ 7
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts a spell, that player draws seven cards.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredActivator | NumCards$ 7
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Forced_Fruition.jpg

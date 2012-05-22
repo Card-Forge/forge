@@ -2,7 +2,7 @@ Name:Entreat the Angels
 ManaCost:X X W W W
 Types:Sorcery
 Text:no text
-A:SP$ Token | Cost$ X X W W W | TokenAmount$ X | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | SpellDescription$ Put X 4/4 white Angel creature tokens with flying onto the battlefield.
+A:SP$ Token | Cost$ X X W W W | TokenAmount$ X | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | TokenImage$ w 4 4 angel avr | SpellDescription$ Put X 4/4 white Angel creature tokens with flying onto the battlefield.
 K:Miracle:X W W
 SVar:X:Count$xPaid
 SVar:Rarity:Rare

@@ -41,9 +41,11 @@ import net.slightlymagic.braids.GeneratorFunctions;
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
 
+import forge.card.CardManaCost;
 import forge.card.CardRules;
 import forge.card.CardRulesReader;
 import forge.card.EditionInfo;
+import forge.card.mana.ManaCostParser;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
@@ -423,7 +425,7 @@ public class CardReader implements Runnable {
                 final String value = line.substring(9);
                 // System.out.println(s);
                 if (!"no cost".equals(value)) {
-                    card.setManaCost(value);
+                    card.setManaCost(new CardManaCost(new ManaCostParser(value)));
                 }
             } else if (line.startsWith("Types:")) {
                 CardReader.addTypes(card, line.substring("Types:".length()));

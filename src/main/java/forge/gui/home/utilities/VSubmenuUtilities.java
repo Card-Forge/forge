@@ -45,21 +45,21 @@ public enum VSubmenuUtilities implements IVSubmenu {
     private final JPanel pnl = new JPanel();
 
     private final FLabel btnDownloadSetPics = new FLabel.Builder().opaque(true).hoverable(true)
-            .text("Download LQ Set Pictures").fontScaleFactor(0.5).build();
+            .text("Download LQ Set Pictures").fontSize(14).build();
     private final FLabel btnDownloadPics = new FLabel.Builder().opaque(true).hoverable(true)
-            .text("Download LQ Card Pictures").fontScaleFactor(0.5).build();
+            .text("Download LQ Card Pictures").fontSize(14).build();
     private final FLabel btnDownloadQuestImages = new FLabel.Builder().opaque(true).hoverable(true)
-            .text("Download Quest Images").fontScaleFactor(0.5).build();
+            .text("Download Quest Images").fontSize(14).build();
     private final FLabel btnReportBug = new FLabel.Builder().opaque(true).hoverable(true)
-            .text("Report a Bug").fontScaleFactor(0.5).build();
+            .text("Report a Bug").fontSize(14).build();
     private final FLabel btnImportPictures = new FLabel.Builder().opaque(true).hoverable(true)
-            .text("Import Pictures").fontScaleFactor(0.5).build();
+            .text("Import Pictures").fontSize(14).build();
     private final FLabel btnHowToPlay = new FLabel.Builder().opaque(true)
-            .hoverable(true).fontScaleFactor(0.5).text("How To Play").build();
+            .hoverable(true).fontSize(14).text("How To Play").build();
     private final FLabel btnDownloadPrices = new FLabel.Builder().opaque(true).hoverable(true)
-            .text("Download Card Prices").fontScaleFactor(0.5).build();
+            .text("Download Card Prices").fontSize(14).build();
     private final FLabel btnLicensing = new FLabel.Builder().opaque(true)
-            .hoverable(true).fontScaleFactor(0.5).text("License Details").build();
+            .hoverable(true).fontSize(14).text("License Details").build();
 
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#populate()

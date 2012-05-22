@@ -44,7 +44,7 @@ public class ForgeProps {
     static {
         TreeProperties p;
         try {
-            p = new TreeProperties("forge.properties");
+            p = new TreeProperties(NewConstants.PREFS_MAIN_PROPERTIES_FILE);
             p.rethrow();
         } catch (final IOException ex) {
             ErrorViewer.showError(ex);
