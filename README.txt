@@ -20,7 +20,7 @@ You can place your deck files from an earlier version of Forge into the /res/dec
 
 5) The /res/quest/data folder contains your questData files. These files include all of the information for your current quests. You will not be able to continue your quests in a newer version of Forge unless you copy over the your quest data files. These files have a ".dat" extension. You can now have multiple ongoing quests at the same time.
 
-6) The Forge root folder contains a preference file named "forge.preferences" and you should also move a copy of this file over to the newer version.
+6) The Forge /res/preferences/ folder contains the preference files named "forge.preferences" and "editor.preferences". You should also move a copy of these files over to the newer version. The /res/preferences/ folder was added to version 1.2.8.
 
 7) The /res/layouts/ folder contains a file named "match_preferred.xml". This file contains information that forge uses when setting the layout for the battlefield display.
 
