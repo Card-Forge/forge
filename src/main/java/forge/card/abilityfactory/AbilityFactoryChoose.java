@@ -2003,15 +2003,20 @@ public final class AbilityFactoryChoose {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                String choice = (String) GuiUtils.chooseOne("Choose one", choices.values().toArray());
-                AbilityFactory afChoice = new AbilityFactory();
-                final SpellAbility chosenSA = afChoice.getAbility(host.getSVar(choices.inverse().get(choice)), host);
-
-                chosenSA.setActivatingPlayer(sa.getSourceCard().getController());
-                ((AbilitySub) chosenSA).setParent(sa);
-                AbilityFactory.resolve(chosenSA, false);
+            if (tgt != null && !p.canBeTargetedBy(sa)) {
+                continue;
             }
+            SpellAbility chosenSA = null;
+            AbilityFactory afChoice = new AbilityFactory();
+            if (p.isHuman()) {
+                String choice = (String) GuiUtils.chooseOne("Choose one", choices.values().toArray());
+                chosenSA = afChoice.getAbility(host.getSVar(choices.inverse().get(choice)), host);
+            } else { //Computer AI
+                chosenSA = afChoice.getAbility(host.getSVar(params.get("Choices").split(",")[0]), host);
+            }
+            chosenSA.setActivatingPlayer(sa.getSourceCard().getController());
+            ((AbilitySub) chosenSA).setParent(sa);
+            AbilityFactory.resolve(chosenSA, false);
         }
     }
 
