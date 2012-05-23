@@ -914,6 +914,7 @@ res/cardsfolder/b/blisterstick_shaman.txt svneol=native#text/plain
 res/cardsfolder/b/blitz_hellion.txt svneol=native#text/plain
 res/cardsfolder/b/blizzard.txt svneol=native#text/plain
 res/cardsfolder/b/blizzard_elemental.txt svneol=native#text/plain
+res/cardsfolder/b/blizzard_specter.txt -text
 res/cardsfolder/b/bloated_toad.txt svneol=native#text/plain
 res/cardsfolder/b/blockade_runner.txt svneol=native#text/plain
 res/cardsfolder/b/blockbuster.txt svneol=native#text/plain
