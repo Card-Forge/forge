@@ -159,6 +159,7 @@ public final class AbilityFactoryCharm {
         for (int i = 0; i < num; i++) {
             AbilitySub chosen = null;
             for (SpellAbility sub : choices) {
+                sub.setActivatingPlayer(AllZone.getComputerPlayer());
                 if (!timingRight && sub.canPlayAI()) {
                     chosen = (AbilitySub) sub;
                     choices.remove(sub);
