@@ -176,11 +176,12 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean isColor(final String color) {
-        if ( "1".equals(color) ) return getColorlessManaAmount() > 0;
+        //if ( "1".equals(color) ) return getColorlessManaAmount() > 0;
+        if ( color.matches("^\\d+$") ) return getColorlessManaAmount() > 0;
         
         for(ManaCostShard shard : unpaidShards.keySet())
         {
-            String ss = shard.toString(); 
+            String ss = shard.toString();
             if (ss.contains(color))
                 return true;
         }

@@ -1,0 +1,10 @@
+Name:Soldevi Machinist
+ManaCost:1 U
+Types:Creature Human Wizard Artificer
+Text:no text
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | RestrictValid$ Activated.Artifact | SpellDescription$ Add 2 to your mana pool. Spend this mana only to activate abilities of artifacts.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_machinist.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/102.jpg
+Oracle:{T}: Add {2} to your mana pool. Spend this mana only to activate abilities of artifacts.
+End

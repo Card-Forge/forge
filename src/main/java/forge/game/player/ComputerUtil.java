@@ -769,7 +769,7 @@ public class ComputerUtil {
                 }
 
                 // Check for mana restrictions
-                if (!m.meetsManaRestrictions(sa, costPart)) {
+                if (!m.meetsManaRestrictions(sa)) {
                     continue;
                 }
 

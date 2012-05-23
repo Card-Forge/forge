@@ -236,7 +236,7 @@ public class ManaPool {
         for (final Mana mana : pool) {
             // check mana restrictions first
             if (mana.isRestricted()) {
-                if (!mana.getSourceAbility().meetsManaRestrictions(sa, null)) {
+                if (!mana.getSourceAbility().meetsManaRestrictions(sa)) {
                     continue;
                 }
             }

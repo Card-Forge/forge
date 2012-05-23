@@ -53,7 +53,7 @@ public class Mana {
         this.color = col;
         if (manaAbility != null) {
           this.sourceAbility = manaAbility;
-          if (manaAbility.getManaRestrictions() != null) {
+          if (!manaAbility.getManaRestrictions().isEmpty()) {
               this.hasRestrictions = true;
           }
           if (manaAbility.cannotCounterPaidWith()) {

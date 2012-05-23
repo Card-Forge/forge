@@ -26,7 +26,6 @@ import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
-import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostUtil;
@@ -46,6 +45,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
 
     private String origProduced;
     private String lastExpressChoice = "";
+    private String manaRestrictions = "";
     private ArrayList<Mana> lastProduced = new ArrayList<Mana>();;
     private int amount = 1;
 
@@ -89,7 +89,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      *            a int.
      */
     public AbilityMana(final Card sourceCard, final String parse, final String produced, final int num) {
-        this(sourceCard, new Cost(sourceCard, parse, true), produced, num);
+        this(sourceCard, new Cost(sourceCard, parse, true), produced, num, "");
     }
 
     /**
@@ -105,7 +105,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      *            a {@link java.lang.String} object.
      */
     public AbilityMana(final Card sourceCard, final Cost cost, final String produced) {
-        this(sourceCard, cost, produced, 1);
+        this(sourceCard, cost, produced, 1, "");
     }
 
     /**
@@ -119,14 +119,38 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      *            a {@link forge.card.cost.Cost} object.
      * @param produced
      *            a {@link java.lang.String} object.
+     * @param restrictions
+     *            a {@link java.lang.String} object.
+     */
+    public AbilityMana(final Card sourceCard, final Cost cost, final String produced, final String restrictions) {
+        this(sourceCard, cost, produced, 1, restrictions);
+    }
+
+    /**
+     * <p>
+     * Constructor for AbilityMana.
+     * </p>
+     * 
+     * @param sourceCard
+     *            a {@link forge.Card} object.
+     * @param cost
+     *            a {@link forge.card.cost.Cost} object.
+     * @param produced
+     *            a {@link java.lang.String} object.
+     * @param restrictions
+     *            a {@link java.lang.String} object.
      * @param num
      *            a int.
      */
-    public AbilityMana(final Card sourceCard, final Cost cost, final String produced, final int num) {
+    public AbilityMana(final Card sourceCard, final Cost cost, final String produced, final int num, final String restrictions) {
         super(sourceCard, cost, null);
 
         this.origProduced = produced;
         this.amount = num;
+        if (restrictions != null) {
+            this.manaRestrictions = restrictions;
+        }
+
     }
 
     /** {@inheritDoc} */
@@ -267,15 +291,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      * @return a {@link java.lang.String} object.
      */
     public String getManaRestrictions() {
-        final AbilityFactory manaAF = this.getAbilityFactory();
-        if (manaAF == null) {
-            return null;
-        }
-        HashMap<String, String> mapParams = this.getAbilityFactory().getMapParams();
-        if (mapParams.containsKey("RestrictValid")) {
-            return mapParams.get("RestrictValid");
-        }
-        return null;
+        return this.manaRestrictions;
     }
 
     /**
@@ -285,23 +301,28 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param manaCost
-     *            a {@link forge.card.mana.ManaCost} object.
      * @return a boolean.
      */
-    public boolean meetsManaRestrictions(final SpellAbility sa, final ManaCost manaCost) {
-        String manaRestrictions = this.getManaRestrictions();
+    public boolean meetsManaRestrictions(final SpellAbility sa) {
         // No restrictions
-        if (manaRestrictions == null) {
+        if (this.manaRestrictions.isEmpty()) {
             return true;
         }
 
         // Loop over restrictions
-        for (final String restriction : manaRestrictions.split(",")) {
-            // add withXCost to Card.hasProperty for Rosheen Meanderer
+        for (String restriction : this.manaRestrictions.split(",")) {
+            if (restriction.startsWith("CostContainsX")) {
+                if (sa.isXCost()) {
+                    return true;
+                }
+                else {
+                    continue;
+                }
+            }
+
             if (sa.isAbility()) {
                 if (restriction.startsWith("Activated")) {
-                    restriction.replace("Activated", "Card");
+                    restriction = restriction.replace("Activated", "Card");
                 }
                 else {
                     continue;
@@ -315,7 +336,6 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
             }
 
         }
-
 
         return false;
     }
