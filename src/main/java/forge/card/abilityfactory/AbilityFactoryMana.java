@@ -66,7 +66,8 @@ public class AbilityFactoryMana {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityMana(final AbilityFactory abilityFactory, final String produced) {
-        final AbilityMana abMana = new AbilityMana(abilityFactory.getHostCard(), abilityFactory.getAbCost(), produced) {
+        final String restrictions = abilityFactory.getMapParams().get("RestrictValid");
+        final AbilityMana abMana = new AbilityMana(abilityFactory.getHostCard(), abilityFactory.getAbCost(), produced, restrictions) {
             private static final long serialVersionUID = -1933592438783630254L;
 
             private final AbilityFactory af = abilityFactory;
@@ -107,6 +108,7 @@ public class AbilityFactoryMana {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellMana(final AbilityFactory abilityFactory, final String produced) {
+        final String restrictions = abilityFactory.getMapParams().get("RestrictValid");
         final SpellAbility spMana = new Spell(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
                 abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -5141246507533353605L;
@@ -114,7 +116,7 @@ public class AbilityFactoryMana {
             private final AbilityFactory af = abilityFactory;
             // To get the mana to resolve properly, we need the spell to contain an AbilityMana
             private final Cost tmp = new Cost(abilityFactory.getHostCard(), "0", false);
-            private final AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced) {
+            private final AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced, restrictions) {
                 private static final long serialVersionUID = 1454043766057140491L;
 
                 @Override
@@ -159,13 +161,14 @@ public class AbilityFactoryMana {
      * @return a {@link forge.card.spellability.AbilitySub} object.
      */
     public static AbilitySub createDrawbackMana(final AbilityFactory abilityFactory, final String produced) {
+        final String restrictions = abilityFactory.getMapParams().get("RestrictValid");
         final AbilitySub dbMana = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -5141246507533353605L;
 
             private final AbilityFactory af = abilityFactory;
             // To get the mana to resolve properly, we need the spell to contain an AbilityMana
             private final Cost tmp = new Cost(abilityFactory.getHostCard(), "0", false);
-            private final AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced) {
+            private final AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced, restrictions) {
                 private static final long serialVersionUID = 1454043766057140491L;
 
                 @Override

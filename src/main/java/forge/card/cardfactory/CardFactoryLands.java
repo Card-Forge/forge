@@ -427,29 +427,32 @@ class CardFactoryLands {
         else if (cardName.equals("Ancient Amphitheater") || cardName.equals("Auntie's Hovel")
                 || cardName.equals("Gilt-Leaf Palace") || cardName.equals("Secluded Glen")
                 || cardName.equals("Wanderwine Hub") || cardName.equals("Rustic Clachan")
-                || cardName.equals("Murmuring Bosk")) {
+                || cardName.equals("Murmuring Bosk") || cardName.equals("Primal Beyond")) {
 
             String shortTemp = "";
             if (cardName.equals("Ancient Amphitheater")) {
                 shortTemp = "Giant";
             }
-            if (cardName.equals("Auntie's Hovel")) {
+            else if (cardName.equals("Auntie's Hovel")) {
                 shortTemp = "Goblin";
             }
-            if (cardName.equals("Gilt-Leaf Palace")) {
+            else if (cardName.equals("Gilt-Leaf Palace")) {
                 shortTemp = "Elf";
             }
-            if (cardName.equals("Secluded Glen")) {
+            else if (cardName.equals("Secluded Glen")) {
                 shortTemp = "Faerie";
             }
-            if (cardName.equals("Wanderwine Hub")) {
+            else if (cardName.equals("Wanderwine Hub")) {
                 shortTemp = "Merfolk";
             }
-            if (cardName.equals("Rustic Clachan")) {
+            else if (cardName.equals("Rustic Clachan")) {
                 shortTemp = "Kithkin";
             }
-            if (cardName.equals("Murmuring Bosk")) {
+            else if (cardName.equals("Murmuring Bosk")) {
                 shortTemp = "Treefolk";
+            }
+            else if (cardName.equals("Primal Beyond")) {
+                shortTemp = "Elemental";
             }
 
             final String type = shortTemp;

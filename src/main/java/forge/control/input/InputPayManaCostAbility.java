@@ -164,7 +164,7 @@ public class InputPayManaCostAbility extends InputMana {
         if (this.manaCost.isPaid()) {
             this.paidCommand.execute();
             this.resetManaCost();
-            AllZone.getHumanPlayer().getManaPool().clearPay(this.fakeAbility, false);
+            AllZone.getHumanPlayer().getManaPool().clearManaPaid(this.fakeAbility, false);
             this.stop();
         } else {
             this.showMessage();
@@ -176,7 +176,7 @@ public class InputPayManaCostAbility extends InputMana {
     public final void selectButtonCancel() {
         this.unpaidCommand.execute();
         this.resetManaCost();
-        AllZone.getHumanPlayer().getManaPool().unpaid(this.fakeAbility, true);
+        AllZone.getHumanPlayer().getManaPool().refundManaPaid(this.fakeAbility, true);
         this.stop();
     }
 
@@ -208,7 +208,7 @@ public class InputPayManaCostAbility extends InputMana {
 
         if (this.manaCost.isPaid()) {
             this.resetManaCost();
-            AllZone.getHumanPlayer().getManaPool().clearPay(this.fakeAbility, false);
+            AllZone.getHumanPlayer().getManaPool().clearManaPaid(this.fakeAbility, false);
             this.stop();
             this.paidCommand.execute();
         } else {

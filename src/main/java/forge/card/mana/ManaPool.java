@@ -22,8 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import forge.AllZoneUtil;
-import forge.Card;
-import forge.CardUtil;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.spellability.AbilityMana;
@@ -78,56 +76,11 @@ public class ManaPool {
 
     /**
      * <p>
-     * getManaList.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    @Deprecated
-    public final String getManaList() {
-        calculateManaTotals();
-        final StringBuilder sbNormal = new StringBuilder("");
-        final StringBuilder sbSnow = new StringBuilder("");
-        if (!this.isEmpty()) {
-            for (int i = 0; i < 6; i++) {
-                if (i == 5) {
-                    if (floatingTotals[i] > 0) {
-                        sbNormal.append(floatingTotals[i] + " ");
-                    }
-                    if (floatingSnowTotals[i] > 0) {
-                        sbSnow.append(floatingSnowTotals[i] + " ");
-                    }
-                } else {
-                    if (floatingTotals[i] > 0) {
-                        for (int j = 0; j < floatingTotals[i]; j++) {
-                            sbNormal.append(CardUtil.getShortColor(Constant.Color.COLORS[i])).append(" ");
-                        }
-                    }
-                    if (floatingSnowTotals[i] > 0) {
-                        for (int j = 0; j < floatingSnowTotals[i]; j++) {
-                            sbSnow.append(CardUtil.getShortColor(Constant.Color.COLORS[i])).append(" ");
-                        }
-                    }
-                }
-
-                sbNormal.append("|");
-                sbSnow.append("|");
-            }
-        } else {
-            return ("|||||||||||");
-        }
-
-        return sbNormal.append(sbSnow).toString();
-
-    }
-
-    /**
-     * <p>
      * calculatManaTotals for the Player panel.
      * </p>
      * 
      */
-    public void calculateManaTotals() {
+    private void calculateManaTotals() {
         for (int i = 0; i < floatingTotals.length; i++) {
             floatingTotals[i] = 0;
             floatingSnowTotals[i] = 0;
@@ -135,9 +88,9 @@ public class ManaPool {
 
         for (final Mana m : this.floatingMana) {
             if (m.isSnow()) {
-                floatingSnowTotals[ManaPool.MAP.get(m.getColor())] += m.getAmount();
+                floatingSnowTotals[ManaPool.MAP.get(m.getColor())]++;
             } else {
-                floatingTotals[ManaPool.MAP.get(m.getColor())] += m.getAmount();
+                floatingTotals[ManaPool.MAP.get(m.getColor())]++;
             }
         }
     }
@@ -168,57 +121,13 @@ public class ManaPool {
 
     /**
      * <p>
-     * getAmountOfColor.
-     * </p>
-     * 
-     * @param color
-     *            a char.
-     * @return a int.
-     */
-    public final int getAmountOfColor(final char color) {
-        return this.getAmountOfColor(Character.toString(color));
-    }
-
-    /**
-     * <p>
      * isEmpty.
      * </p>
      * 
      * @return a boolean.
      */
-    public final boolean isEmpty() {
+    private boolean isEmpty() {
         return this.floatingMana.size() == 0;
-    }
-
-    /**
-     * <p>
-     * oraclize.
-     * </p>
-     * 
-     * @param manaCost
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String oraclize(final String manaCost) {
-        // converts RB to (R/B)
-        final String[] parts = manaCost.split(" ");
-        final StringBuilder res = new StringBuilder();
-        for (String s : parts) {
-            if ((s.length() == 2) && ManaPool.COLORS.contains(s.charAt(1) + "")) {
-                s = s.charAt(0) + "/" + s.charAt(1);
-            }
-            if (s.length() == 3) {
-                s = "(" + s + ")";
-            }
-            if (s.equals("S")) {
-                s = "(S)"; // for if/when we implement snow mana
-            }
-            if (s.equals("X")) {
-                s = "(X)"; // X costs?
-            }
-            res.append(s);
-        }
-        return res.toString();
     }
 
     /**
@@ -231,15 +140,15 @@ public class ManaPool {
      * @param mana
      *            a {@link forge.card.mana.Mana} object.
      */
-    public final void addManaToPool(final ArrayList<Mana> pool, final Mana mana) {
+    private void addManaToPool(final ArrayList<Mana> pool, final Mana mana) {
         pool.add(mana);
         if (pool.equals(this.floatingMana)) {
             int i = ManaPool.MAP.get(mana.getColor());
             if (mana.isSnow()) {
-                this.floatingSnowTotals[i] += mana.getAmount();
+                this.floatingSnowTotals[i]++;
             }
             else {
-                this.floatingTotals[i] += mana.getAmount();
+                this.floatingTotals[i]++;
             }
         }
         owner.updateObservers();
@@ -250,65 +159,15 @@ public class ManaPool {
      * addManaToFloating.
      * </p>
      * 
-     * @param manaStr
-     *            a {@link java.lang.String} object.
-     * @param card
-     *            a {@link forge.Card} object.
+     * @param manaList
+     *           a {@link java.util.ArrayList} object.
      */
-    public final void addManaToFloating(final String manaStr, final Card card) {
-        final ArrayList<Mana> manaList = ManaPool.convertStringToMana(manaStr, card);
+    public final void addManaToFloating(final ArrayList<Mana> manaList) {
         for (final Mana m : manaList) {
             this.addManaToPool(this.floatingMana, m);
         }
         Singletons.getModel().getGameAction().checkStateEffects();
         owner.updateObservers();
-    }
-
-    /**
-     * <p>
-     * convertStringToMana.
-     * </p>
-     * 
-     * @param manaStr
-     *            a {@link java.lang.String} object.
-     * @param card
-     *            a {@link forge.Card} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public static ArrayList<Mana> convertStringToMana(String manaStr, final Card card) {
-        final ArrayList<Mana> manaList = new ArrayList<Mana>();
-        manaStr = manaStr.trim();
-        final String[] manaArr = manaStr.split(" ");
-
-        String color = "";
-        int total = 0;
-        int genericTotal = 0;
-
-        for (final String c : manaArr) {
-            final String longStr = InputPayManaCostUtil.getLongColorString(c);
-            if (longStr.equals(Constant.Color.COLORLESS)) {
-                genericTotal += Integer.parseInt(c);
-            } else if (color.equals("")) {
-                color = longStr;
-                total = 1;
-            } else if (color.equals(longStr)) {
-                total++;
-            } else { // more than one color generated
-                // add aggregate color
-                manaList.add(new Mana(color, total, card));
-
-                color = longStr;
-                total = 1;
-            }
-        }
-        if (total > 0) {
-            manaList.add(new Mana(color, total, card));
-        }
-        if (genericTotal > 0) {
-            manaList.add(new Mana(Constant.Color.COLORLESS, genericTotal, card));
-        }
-
-        return manaList;
     }
 
     /**
@@ -357,9 +216,11 @@ public class ManaPool {
      *            a {@link java.util.ArrayList} object.
      * @param manaStr
      *            a {@link java.lang.String} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.card.mana.Mana} object.
      */
-    public final Mana getManaFrom(final ArrayList<Mana> pool, final String manaStr) {
+    private Mana getManaFrom(final ArrayList<Mana> pool, final String manaStr, final SpellAbility sa) {
         final String[] colors = manaStr.split("/");
         boolean wantSnow = false;
         for (int i = 0; i < colors.length; i++) {
@@ -373,8 +234,16 @@ public class ManaPool {
         final ArrayList<Mana> manaChoices = new ArrayList<Mana>();
 
         for (final Mana mana : pool) {
+            // check mana restrictions first
+            if (mana.isRestricted()) {
+                if (!mana.getSourceAbility().meetsManaRestrictions(sa)) {
+                    continue;
+                }
+            }
             if (mana.isColor(colors)) {
                 if (choice == null) {
+                    choice = mana;
+                } else if (!choice.isRestricted() && mana.isRestricted()) {
                     choice = mana;
                 } else if (choice.isSnow() && !mana.isSnow()) {
                     choice = mana;
@@ -401,6 +270,8 @@ public class ManaPool {
                     choice = mana; // Colorless fits the bill nicely
                 } else if (choice == null) {
                     manaChoices.add(mana);
+                } else if (!choice.isRestricted() && mana.isRestricted()) {
+                    choice = mana;
                 } else if (choice.isSnow() && !mana.isSnow()) {
                     // nonSnow colorless is better to spend than Snow colorless
                     choice = mana;
@@ -424,9 +295,9 @@ public class ManaPool {
                 // loop through manaChoices adding
                 for (final Mana m : manaChoices) {
                     if (m.isSnow()) {
-                        snowMana[ManaPool.MAP.get(m.getColor())] += m.getAmount();
+                        snowMana[ManaPool.MAP.get(m.getColor())]++;
                     } else {
-                        normalMana[ManaPool.MAP.get(m.getColor())] += m.getAmount();
+                        normalMana[ManaPool.MAP.get(m.getColor())]++;
                     }
                 }
 
@@ -490,27 +361,6 @@ public class ManaPool {
 
     /**
      * <p>
-     * findAndRemoveFrom.
-     * </p>
-     * 
-     * @param pool
-     *            a {@link java.util.ArrayList} object.
-     * @param mana
-     *            a {@link forge.card.mana.Mana} object.
-     */
-    public final void findAndRemoveFrom(final ArrayList<Mana> pool, final Mana mana) {
-        Mana set = null;
-        for (final Mana m : pool) {
-            if (m.getSourceCard().equals(mana.getSourceCard()) && m.getColor().equals(mana.getColor())) {
-                set = m;
-                break;
-            }
-        }
-        this.removeManaFrom(pool, set, mana.getAmount());
-    }
-
-    /**
-     * <p>
      * removeManaFrom.
      * </p>
      * 
@@ -518,23 +368,17 @@ public class ManaPool {
      *            a {@link java.util.ArrayList} object.
      * @param choice
      *            a {@link forge.card.mana.Mana} object.
-     * @param amount
-     *            an int .
      */
-    public final void removeManaFrom(final ArrayList<Mana> pool, final Mana choice, final int amount) {
-        if (choice != null) {
-            if (choice.getAmount() == amount) {
-                pool.remove(choice);
-            } else {
-                choice.decrementAmount(amount);
-            }
+    private void removeManaFrom(final ArrayList<Mana> pool, final Mana choice) {
+        if (choice != null && pool.contains(choice)) {
+            pool.remove(choice);
             if (pool.equals(this.floatingMana)) {
                 int i = ManaPool.MAP.get(choice.getColor());
                 if (choice.isSnow()) {
-                    this.floatingSnowTotals[i] -= amount;
+                    this.floatingSnowTotals[i]--;
                 }
                 else {
-                    this.floatingTotals[i] -= amount;
+                    this.floatingTotals[i]--;
                 }
             }
             owner.updateObservers();
@@ -543,192 +387,51 @@ public class ManaPool {
 
     /**
      * <p>
-     * formatMana.
-     * </p>
-     * 
-     * @param manaAbility
-     *            a {@link forge.card.spellability.AbilityMana} object.
-     * @return an array of {@link java.lang.String} objects.
-     */
-    public static String[] formatMana(final AbilityMana manaAbility) {
-        return ManaPool.formatMana(manaAbility.mana(), true);
-    } // wrapper
-
-    /**
-     * <p>
-     * formatMana.
-     * </p>
-     * 
-     * @param mana2
-     *            a {@link java.lang.String} object.
-     * @return an array of {@link java.lang.String} objects.
-     */
-    public static String[] formatMana(final String mana2) {
-        // turns "G G" -> {"G","G"}, "2 UG"->"{"2","U/G"}, "B W U R
-        // G" -> {"B","W","U","R","G"}, etc.
-        return ManaPool.formatMana(mana2, false);
-    }
-
-    /**
-     * <p>
-     * formatMana.
-     * </p>
-     * 
-     * @param mana2
-     *            a {@link java.lang.String} object.
-     * @param parsed
-     *            a boolean.
-     * @return an array of {@link java.lang.String} objects.
-     */
-    public static String[] formatMana(final String mana2, final boolean parsed) {
-        String mana = mana2;
-        // if (Mana.isEmpty()) return null;
-        if (mana.trim().equals("")) {
-            return null;
-        }
-        if (!parsed) {
-            mana = ManaPool.oraclize(mana);
-        }
-        try {
-            final String[] colorless = { Integer.toString(Integer.parseInt(mana)) };
-            return colorless;
-        } catch (final NumberFormatException ex) {
-        }
-
-        final ArrayList<String> res = new ArrayList<String>();
-        int colorless = 0;
-        String clessString = "";
-        boolean parentheses = false;
-        String current = "";
-
-        for (int i = 0; i < mana.length(); i++) {
-            final char c = mana.charAt(i);
-            if (c == '(') {
-                parentheses = true;
-                continue;
-            } // Split cost handling ("(" +<W/U/B/R/G/2> + "/" + <W/U/B/R/G> +
-              // ")")
-            else if (parentheses) {
-                if (c != ')') {
-                    current += c;
-                    continue;
-                } else {
-                    parentheses = false;
-                    res.add(current);
-                    current = "";
-                    continue;
-                }
-            }
-            final String s = c + "";
-            if (ManaPool.COLORS.contains(s)) {
-                res.add(s);
-                if (clessString.trim().equals("")) {
-                    continue;
-                }
-                try {
-                    colorless += Integer.parseInt(clessString.trim());
-                } catch (final NumberFormatException ex) {
-                    throw new RuntimeException(
-                            "Mana_Pool.getManaParts : Error, sum of noncolor mana parts is not a number - "
-                                    + clessString);
-                }
-                clessString = "";
-            } else {
-                clessString += s;
-            }
-        }
-        for (int i = 0; i < colorless; i++) {
-            res.add("1");
-        }
-
-        return res.toArray(new String[0]);
-    }
-
-    /**
-     * <p>
-     * subtractMultiple.
+     * payManaFromPool.
      * </p>
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param cost
-     *            an array of {@link java.lang.String} objects.
-     * @param m
+     * @param manaCost
      *            a {@link forge.card.mana.ManaCost} object.
      * @return a {@link forge.card.mana.ManaCost} object.
      */
-    private ManaCost subtractMultiple(final SpellAbility sa, final String[] cost, ManaCost m) {
-        for (final String s : cost) {
-            if (this.isEmpty()) {
-                break;
-            }
+    public final ManaCost payManaFromPool(final SpellAbility sa, ManaCost manaCost) {
 
-            int num = 1;
-            try {
-                num = Integer.parseInt(s);
-            } catch (final NumberFormatException e) {
-                // Not an integer, that's fine
-            }
-
-            for (int i = 0; i < num; i++) {
-                if (this.isEmpty()) {
-                    break;
-                }
-
-                m = this.subtractOne(sa, m, s);
-            }
-        }
-        return m;
-    }
-
-    /**
-     * <p>
-     * subtractMana.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param m
-     *            a {@link forge.card.mana.ManaCost} object.
-     * @param mAbilities
-     *            a {@link forge.card.spellability.AbilityMana} object.
-     * @return a {@link forge.card.mana.ManaCost} object.
-     */
-    public final ManaCost subtractMana(final SpellAbility sa, ManaCost m, final AbilityMana... mAbilities) {
-        final ArrayList<AbilityMana> paidAbs = sa.getPayingManaAbilities();  // why???
-
-        if (mAbilities.length == 0) {
-            // paying from Mana Pool
-            if (m.isPaid() || this.isEmpty()) {
-                return m;
-            }
-
-            final String[] cost = ManaPool.formatMana(m.toString());
-            return this.subtractMultiple(sa, cost, m);
+        // paying from Mana Pool
+        if (manaCost.isPaid() || this.isEmpty()) {
+            return manaCost;
         }
 
-        // paying via Mana Abilities
-        for (final AbilityMana mability : mAbilities) {
-            paidAbs.add(mability); // why???
-            //String[] cost = formatMana(mability);
-            String[] cost = null;
-            if (mability.isAnyMana()) {
-               //TODO: (ArsenalNut) Look at using new getManaProduced() method of Ability_Mana
-               //      for all mana sources not just "any" mana sources
-                cost = mability.getManaProduced().split(" ");
+        boolean keepPayingFromPool = true;
+        final ArrayList<Mana> manaPaid = sa.getPayingMana();
+
+        while (keepPayingFromPool) {
+            final String costStr = manaCost.toString().replace("X ", "").replace("P", "").replace(" ", "/");
+            // get a mana of this type from floating, bail if none available
+            final Mana mana = this.getManaFrom(this.floatingMana, costStr, sa);
+            if (mana == null) {
+                keepPayingFromPool = false; // no matching mana in the pool
             }
             else {
-                cost = formatMana(mability);
+                manaCost.payMana(mana);
+                manaPaid.add(mana);
+                this.removeManaFrom(this.floatingMana, mana);
+                if (mana.addsNoCounterMagic() && sa.getSourceCard() != null) {
+                    sa.getSourceCard().setCanCounter(false);
+                }
+                if (manaCost.isPaid()) {
+                    keepPayingFromPool = false;
+                }
             }
-            m = this.subtractMultiple(sa, cost, m);
         }
 
-        return m;
+        return manaCost;
     }
 
     /**
      * <p>
-     * subtractOne.
+     * payManaFromPool.
      * </p>
      * 
      * @param sa
@@ -739,28 +442,61 @@ public class ManaPool {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.mana.ManaCost} object.
      */
-    public final ManaCost subtractOne(final SpellAbility sa, final ManaCost manaCost, final String manaStr) {
+    public final ManaCost payManaFromPool(final SpellAbility sa, final ManaCost manaCost, final String manaStr) {
         if (manaStr.trim().equals("") || manaCost.isPaid()) {
             return manaCost;
         }
 
-        final ArrayList<Mana> payMana = sa.getPayingMana();
+        final ArrayList<Mana> manaPaid = sa.getPayingMana();
 
         // get a mana of this type from floating, bail if none available
-        final Mana mana = this.getManaFrom(this.floatingMana, manaStr);
+        final Mana mana = this.getManaFrom(this.floatingMana, manaStr, sa);
         if (mana == null) {
             return manaCost; // no matching mana in the pool
         }
+        else if (manaCost.isNeeded(mana)) {
+                manaCost.payMana(mana);
+                manaPaid.add(mana);
+                this.removeManaFrom(this.floatingMana, mana);
+                if (mana.addsNoCounterMagic() && sa.getSourceCard() != null) {
+                    sa.getSourceCard().setCanCounter(false);
+                }
+        }
+        return manaCost;
+    }
 
-        final Mana[] manaArray = mana.toSingleArray();
+    /**
+     * <p>
+     * subtractManaFromAbility.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param manaCost
+     *            a {@link forge.card.mana.ManaCost} object.
+     * @param ma
+     *            a {@link forge.card.spellability.AbilityMana} object.
+     * @return a {@link forge.card.mana.ManaCost} object.
+     */
+    public final ManaCost payManaFromAbility(final SpellAbility sa, ManaCost manaCost, final AbilityMana ma) {
+        if (manaCost.isPaid() || this.isEmpty()) {
+            return manaCost;
+        }
 
-        for (final Mana m : manaArray) {
-            if (manaCost.isNeeded(m)) {
-                manaCost.payMana(m);
-                payMana.add(m);  // what is this used for? anything
-                this.findAndRemoveFrom(this.floatingMana, m);
-            } else {
-                break;
+        // Mana restriction must be checked before this method is called
+
+        final ArrayList<AbilityMana> paidAbs = sa.getPayingManaAbilities();
+        final ArrayList<Mana> manaPaid = sa.getPayingMana();
+
+        paidAbs.add(ma); // assumes some part on the mana produced by the ability will get used
+        for (final Mana mana : ma.getLastProduced()) {
+            if (manaCost.isNeeded(mana)) {
+                manaCost.payMana(mana);
+                manaPaid.add(mana);
+                this.removeManaFrom(this.floatingMana, mana);
+                if (mana.addsNoCounterMagic() && sa.getSourceCard() != null) {
+                    sa.getSourceCard().setCanCounter(false);
+                }
             }
         }
         return manaCost;
@@ -774,11 +510,7 @@ public class ManaPool {
      * @return a int.
      */
     public final int totalMana() {
-        int total = 0;
-        for (final Mana c : this.floatingMana) {
-            total += c.getAmount();
-        }
-        return total;
+        return this.floatingMana.size();
     }
 
     /**
@@ -791,19 +523,22 @@ public class ManaPool {
      * @param refund
      *            a boolean.
      */
-    public final void clearPay(final SpellAbility ability, final boolean refund) {
-        final ArrayList<AbilityMana> payAbs = ability.getPayingManaAbilities();
-        final ArrayList<Mana> payMana = ability.getPayingMana();
+    public final void clearManaPaid(final SpellAbility ability, final boolean refund) {
+        final ArrayList<AbilityMana> abilitiesUsedToPay = ability.getPayingManaAbilities();
+        final ArrayList<Mana> manaPaid = ability.getPayingMana();
 
-        payAbs.clear();
+        abilitiesUsedToPay.clear();
         // move non-undoable paying mana back to floating
         if (refund) {
-            for (final Mana m : payMana) {
+            if (ability.getSourceCard() != null) {
+                ability.getSourceCard().setCanCounter(true);
+            }
+            for (final Mana m : manaPaid) {
                 this.addManaToPool(this.floatingMana, m);
             }
         }
 
-        payMana.clear();
+        manaPaid.clear();
         this.calculateManaTotals();
         this.owner.updateObservers();
     }
@@ -815,94 +550,53 @@ public class ManaPool {
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mana
-     *            an array of {@link java.lang.String} objects.
-     * @param c
-     *            a {@link forge.Card} object.
+     * @param ma
+     *            a {@link forge.card.spellability.AbilityMana} object.
      * @return a boolean.
      */
-    public final boolean accountFor(final SpellAbility sa, final String[] mana, final Card c) {
-        // TODO account for unpaying mana in payMana and floatingPool
-        final ArrayList<Mana> payMana = sa.getPayingMana();
+    private boolean accountFor(final SpellAbility sa, final AbilityMana ma) {
+        final ArrayList<Mana> manaPaid = sa.getPayingMana();
 
-        if ((payMana.size() == 0) && (this.floatingMana.size() == 0)) {
+        if ((manaPaid.size() == 0) && (this.floatingMana.size() == 0)) {
           return false;
         }
 
         final ArrayList<Mana> removePaying = new ArrayList<Mana>();
         final ArrayList<Mana> removeFloating = new ArrayList<Mana>();
 
-        int manaAccounted = 0;
-        // loop over mana paid
-        for (Mana manaPaid : payMana) {
-            if (manaPaid.fromSourceCard(c)) {
-                for (int i = 0; i < mana.length; i++) {
-                    if  (manaPaid.getColor().equals(InputPayManaCostUtil.getLongColorString(mana[i]))) {
-                        final int amt = manaPaid.getColorlessAmount();
-                        if (amt > 0) {
-                            final int difference = Integer.parseInt(mana[i]) - amt;
-                            if (difference > 0) {
-                                mana[i] = Integer.toString(difference);
-                            } else {
-                                manaAccounted += amt;
-                            }
-                        } else {
-                            manaAccounted += manaPaid.getAmount();
-                        }
-                        removePaying.add(manaPaid);
-                        break;
-                    }
-                }
+        boolean manaNotAccountedFor = false;
+        // loop over mana produced by mana ability
+        for (Mana mana : ma.getLastProduced()) {
+            if (manaPaid.contains(mana)) {
+                removePaying.add(mana);
             }
-            if (manaAccounted == mana.length) {
+            else if (this.floatingMana.contains(mana)) {
+                removeFloating.add(mana);
+            }
+            else {
+                manaNotAccountedFor = true;
                 break;
             }
         }
-        // loop over mana pool if not all of the generated mana is accounted for
-        if (manaAccounted < mana.length) {
-            for (Mana manaFloat : this.floatingMana) {
-                if (manaFloat.fromSourceCard(c)) {
-                    for (int i = 0; i < mana.length; i++) {
-                        if  (manaFloat.getColor().equals(InputPayManaCostUtil.getLongColorString(mana[i]))) {
-                            final int amt = manaFloat.getColorlessAmount();
-                            if (amt > 0) {
-                                final int difference = Integer.parseInt(mana[i]) - amt;
-                                if (difference > 0) {
-                                    mana[i] = Integer.toString(difference);
-                                } else {
-                                    manaAccounted += amt;
-                                }
-                            } else {
-                                manaAccounted += manaFloat.getAmount();
-                            }
-                            removeFloating.add(manaFloat);
-                            break;
-                        }
-                    }
-                }
-                if (manaAccounted == mana.length) {
-                    break;
-                }
-            }
-        }
+
         // When is it legitimate for all the mana not to be accountable?
         // Does this condition really indicate an bug in Forge?
-        if (manaAccounted < mana.length) {
+        if (manaNotAccountedFor) {
             return false;
         }
 
         for (int k = 0; k < removePaying.size(); k++) {
-            this.removeManaFrom(payMana, removePaying.get(k), removePaying.get(k).getAmount());
+            this.removeManaFrom(manaPaid, removePaying.get(k));
         }
         for (int k = 0; k < removeFloating.size(); k++) {
-            this.removeManaFrom(this.floatingMana, removeFloating.get(k), removeFloating.get(k).getAmount());
+            this.removeManaFrom(this.floatingMana, removeFloating.get(k));
         }
         return true;
     }
 
     /**
      * <p>
-     * unpaid.
+     * refundManaPaid.
      * </p>
      * 
      * @param sa
@@ -910,7 +604,7 @@ public class ManaPool {
      * @param untap
      *            a boolean.
      */
-    public final void unpaid(final SpellAbility sa, final boolean untap) {
+    public final void refundManaPaid(final SpellAbility sa, final boolean untap) {
         // TODO having some crash in here related to undo and not tracking
         // abilities properly
         final ArrayList<AbilityMana> payAbs = sa.getPayingManaAbilities();
@@ -918,17 +612,7 @@ public class ManaPool {
         // go through paidAbilities if they are undoable
         for (final AbilityMana am : payAbs) {
             if (am.isUndoable()) {
-                //final String[] formattedMana = ManaPool.formatMana(am);
-                /*String[] formattedMana = null;
-                if (am.isAnyMana()) {
-                    formattedMana = new String[1];
-                    formattedMana[0] = am.getAnyChoice();
-                }
-                else {
-                    formattedMana = formatMana(am);
-                }*/
-                final String[] formattedMana = am.getLastProduced().split(" ");
-                if (this.accountFor(sa, formattedMana, am.getSourceCard())) {
+                if (this.accountFor(sa, am)) {
                     am.undo();
                 }
                 // else can't account let clearPay move paying back to floating
@@ -936,6 +620,6 @@ public class ManaPool {
         }
 
         // move leftover pay back to floating
-        this.clearPay(sa, true);
+        this.clearManaPaid(sa, true);
     }
 }

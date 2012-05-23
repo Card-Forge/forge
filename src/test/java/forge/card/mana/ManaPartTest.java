@@ -426,11 +426,11 @@ public class ManaPartTest {
 
         final Card c = new Card();
 
-        p29.addMana(new Mana(Constant.Color.BLACK, 1, c));
-        p29.addMana(new Mana(Constant.Color.RED, 1, c));
-        p29.addMana(new Mana(Constant.Color.GREEN, 1, c));
-        p29.addMana(new Mana(Constant.Color.WHITE, 1, c));
-        p29.addMana(new Mana(Constant.Color.BLUE, 1, c));
+        p29.addMana(new Mana(Constant.Color.BLACK, c, null));
+        p29.addMana(new Mana(Constant.Color.RED, c, null));
+        p29.addMana(new Mana(Constant.Color.GREEN, c, null));
+        p29.addMana(new Mana(Constant.Color.WHITE, c,  null));
+        p29.addMana(new Mana(Constant.Color.BLUE, c, null));
 
         this.check(46.1, p29.isPaid(), p29);
 

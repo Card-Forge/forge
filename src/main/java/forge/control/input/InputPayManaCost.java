@@ -206,7 +206,7 @@ public class InputPayManaCost extends InputMana {
                 AllZone.getInputControl().resetInput();
             }
         } else {
-            AllZone.getHumanPlayer().getManaPool().clearPay(this.spell, false);
+            AllZone.getHumanPlayer().getManaPool().clearManaPaid(this.spell, false);
             this.resetManaCost();
 
             // if tap ability, tap card
@@ -268,7 +268,7 @@ public class InputPayManaCost extends InputMana {
         }
 
         this.resetManaCost();
-        AllZone.getHumanPlayer().getManaPool().unpaid(this.spell, true);
+        AllZone.getHumanPlayer().getManaPool().refundManaPaid(this.spell, true);
         AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers(); // DO
 
         this.stop();

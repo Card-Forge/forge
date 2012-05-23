@@ -1,0 +1,11 @@
+Name:Pillar of the Paruns
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Card.MultiColor | SpellDescription$ Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pillar_of_the_paruns.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/176.jpg
+Oracle:{T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+End
