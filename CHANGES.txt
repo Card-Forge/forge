@@ -231,6 +231,21 @@ Fixes/Features:
 - Darn dev mode toggle still causing problems. Rolling back.
 - Start of conversion of home menu to drag layout. No effect on working project files.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed (non-) AI of AF SetState.
+- Converted Primal Clay and Primal Plasma to script.
+- Edited the readme.txt file.
+- Fixed Auntie's Hovel and friends causing "becomes tapped" triggers to fire.
+- fixed a logic bug in mana restrictions
+- merged r15648-r15660 from the Trunk into mana_restrictions branch
+- add support for Primal Beyond
+- refactored meetsManaRestrictions. added most of the remaining restricted mana sources.
+- added RemRandomDeck and RemAIDeck to restricted mana cards
+- Fixed destroyDoTriggerAINoCost ignoring Indestructible.
+- merged r15665 from the Trunk into mana_restrictions branch
+- edited merge properties
+- edited merge properties some more
+- Added the static ability "CostChange".
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -240,8 +255,26 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 AbilityWork branch:
 
+Altar of the Lost
+Ancient Ziggurat
+Cavern of Souls
 Dark Impostor
+Eldrazi Temple
+Food Chain
+Geosurge
+Grand Architect
+Metamorphosis
+Mishra's Workshop
+Myr Reservoir
 Myr Welder
+Pillar of the Paruns
+Primal Beyond
+Rosheen Meanderer
+Smokebraider
+Soldevi Machinist
+Somberwald Sage
+Untaidake, the Cloud Keeper
+Vedalken Engineer
 
 
 Added many cards, including:
@@ -279,6 +312,10 @@ Spinerock Knoll
 Desertion
 Avizoa
 Acidic Dagger
+Aquamorph Entity
+Angel of Salvation
+Antagonism
+Hunter Sliver
 
 
 end
