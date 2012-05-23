@@ -75,7 +75,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
             .tooltip("Print Proxies")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
-            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS))
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PRINT))
             .text(" ").hoverable(true).build();
 
     private final JPanel pnlRemoveButtons =
@@ -146,8 +146,8 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
         pnlHeader.add(btnNew, "w 26px!, h 26px!, gap 0 5px 0 0");
 
         pnlHeader.add(btnImport, "w 26px!, h 26px!, gap 0 5px 0 0");
-        pnlHeader.add(btnExport, "w 26px!, h 26px!, gap 0 20px 0 0");
-        //pnlHeader.add(btnPrintProxies, "w 26px!, h 26px!, gap 0 20px 0 0");
+        pnlHeader.add(btnExport, "w 26px!, h 26px!, gap 0 5px 0 0");
+        pnlHeader.add(btnPrintProxies, "w 26px!, h 26px!, gap 0 20px 0 0");
 
         pnlRemove.setOpaque(false);
         pnlRemove.setLayout(new MigLayout("insets 0, gap 0, ax center"));
