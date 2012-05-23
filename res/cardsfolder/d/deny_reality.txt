@@ -1,6 +1,6 @@
 Name:Deny Reality
 ManaCost:3 U B
-Types:Instant
+Types:Sorcery
 Text:no text
 K:Cascade
 A:SP$ ChangeZone | Cost$ 3 U B | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
