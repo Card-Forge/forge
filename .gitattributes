@@ -11766,6 +11766,7 @@ src/main/java/forge/card/staticability/StaticAbility.java svneol=native#text/pla
 src/main/java/forge/card/staticability/StaticAbilityCantBeCast.java svneol=native#text/plain
 src/main/java/forge/card/staticability/StaticAbilityCantTarget.java -text
 src/main/java/forge/card/staticability/StaticAbilityContinuous.java svneol=native#text/plain
+src/main/java/forge/card/staticability/StaticAbilityCostChange.java -text
 src/main/java/forge/card/staticability/StaticAbilityETBTapped.java -text
 src/main/java/forge/card/staticability/StaticAbilityPreventDamage.java svneol=native#text/plain
 src/main/java/forge/card/staticability/package-info.java svneol=native#text/plain

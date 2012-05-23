@@ -27,6 +27,7 @@ import forge.Card;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -339,6 +340,35 @@ public class StaticAbility {
         }
 
         return false;
+    }
+
+    /**
+     * Apply ability.
+     * 
+     * @param mode
+     *            the mode
+     * @param sa
+     *            the SpellAbility
+     * @param originalCost
+     *            the originalCost
+     * @return the modified ManaCost
+     */
+    public final ManaCost applyAbility(final String mode, final SpellAbility sa, final ManaCost originalCost) {
+
+        // don't apply the ability if it hasn't got the right mode
+        if (!this.mapParams.get("Mode").equals(mode)) {
+            return originalCost;
+        }
+
+        if (this.isSuppressed() || !this.checkConditions()) {
+            return originalCost;
+        }
+
+        if (mode.equals("CostChange")) {
+            return StaticAbilityCostChange.applyCostChangeAbility(this, sa, originalCost);
+        }
+
+        return originalCost;
     }
 
     /**

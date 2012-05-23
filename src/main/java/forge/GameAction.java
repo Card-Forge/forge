@@ -2408,6 +2408,13 @@ public class GameAction {
                 manaCost = new ManaCost(manaC);
             }
         } // Khalni Hydra
+
+        for (Card c : cardsInPlay) {
+            final ArrayList<StaticAbility> staticAbilities = c.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                manaCost = stAb.applyAbility("CostChange", spell, manaCost);
+            }
+        }
         return manaCost;
     } // GetSpellCostChange
 
