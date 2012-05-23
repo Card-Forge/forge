@@ -349,7 +349,7 @@ public class AbilityFactoryDestroy {
             tgt.resetTargets();
 
             CardList preferred = list.getNotKeyword("Indestructible");
-            preferred = list.getController(AllZone.getHumanPlayer());
+            preferred = preferred.getController(AllZone.getHumanPlayer());
 
             // If NoRegen is not set, filter out creatures that have a
             // regeneration shield
