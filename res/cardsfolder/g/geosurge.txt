@@ -3,6 +3,7 @@ ManaCost:R R R R
 Types:Sorcery
 Text:no text
 A:SP$ Mana | Cost$ R R R R | Produced$ R | Amount$ 7 | RestrictValid$ Card.Artifact,Card.Creature | SpellDescription$ Add R R R R R R R to your mana pool. Spend this mana only to cast artifact or creature spells.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geosurge.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/85.jpg

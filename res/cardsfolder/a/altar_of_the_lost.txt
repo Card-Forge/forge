@@ -6,6 +6,7 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Card.wasCastFromGraveyard+withFlashback | SubAbility$ DBMana | SpellDescription$ Add two mana in any combination of colors to your mana pool.  Spend this mana only to cast spells with flashback from a graveyard.
 SVar:DBMana:DB$ Mana | Cost$ 0 | Produced$ Any | Amount$ 1 | RestrictValid$ Card.wasCastFromGraveyard+withFlashback | AILogic$ MostProminentInComputerHand
 SVar:Rarity:Uncommon
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/altar_of_the_lost.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/144.jpg
 Oracle:Altar of the Lost enters the battlefield tapped.\n{T}: Add two mana in any combination of colors to your mana pool. Spend this mana only to cast spells with flashback from a graveyard.

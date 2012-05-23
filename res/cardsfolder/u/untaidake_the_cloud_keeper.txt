@@ -4,6 +4,7 @@ Types:Legendary Land
 Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T PayLife<2> | Produced$ 1 | Amount$ 2 | RestrictValid$ Card.Legendary | SpellDescription$ Add 2 to your mana pool. Spend this mana only to cast legendary spells.
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/untaidake_the_cloud_keeper.jpg
 Oracle:Untaidake, the Cloud Keeper enters the battlefield tapped.\n{T}, Pay 2 life: Add {2} to your mana pool. Spend this mana only to cast legendary spells.

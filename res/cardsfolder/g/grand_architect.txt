@@ -6,6 +6,7 @@ PT:1/3
 S:Mode$ Continuous | Affected$ Creature.Blue+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other blue creatures you control get +1/+1.
 A:AB$ Animate | Cost$ U | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | Colors$ Blue | OverwriteColors$ True | SpellDescription$ Target artifact creature becomes blue until end of turn.
 A:AB$ Mana | Cost$ tapXType<1/Creature.Blue> | Produced$ 1 | Amount$ 2 | RestrictValid$ Card.Artifact,Activated.Artifact | SpellDescription$ Add 2 to your mana pool. Spend this mana only to cast artifact spells or activate abilities of artifacts.
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_architect.jpg
 Oracle:Other blue creatures you control get +1/+1.\n{U}: Target artifact creature becomes blue until end of turn.\nTap an untapped blue creature you control: Add {2} to your mana pool. Spend this mana only to cast artifact spells or activate abilities of artifacts.

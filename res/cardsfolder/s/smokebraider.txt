@@ -6,6 +6,7 @@ PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Card.Elemental,Activated.Elemental | SubAbility$ DBMana | SpellDescription$ Add two mana in any combination of colors to your mana pool. Spend this mana only to cast Elemental spells or activate abilities of Elementals.
 SVar:DBMana:DB$ Mana | Cost$ 0 | Produced$ Any | Amount$ 1 | RestrictValid$ Card.Elemental,Activated.Elemental | AILogic$ MostProminentInComputerHand
 SVar:Rarity:Common
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smokebraider.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/189.jpg
 Oracle:{T}: Add two mana in any combination of colors to your mana pool. Spend this mana only to cast Elemental spells or activate abilities of Elementals.
