@@ -30,7 +30,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.control.input.Input;
-import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 
 //only SpellAbility can go on the stack
@@ -160,29 +159,6 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public abstract boolean canPlay();
-
-    /**
-     * Can afford.
-     * 
-     * @return boolean
-     */
-    public boolean canAfford() {
-        Player activator = this.getActivatingPlayer();
-        if (activator == null) {
-            activator = this.getSourceCard().getController();
-        }
-
-        return ComputerUtil.canPayCost(this, activator);
-    }
-
-    /**
-     * Can play and afford.
-     * 
-     * @return true, if successful
-     */
-    public final boolean canPlayAndAfford() {
-        return this.canPlay() && this.canAfford();
-    }
 
     // all Spell's and Abilities must override this method
     /**

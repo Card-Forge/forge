@@ -19,8 +19,6 @@ package forge.card.spellability;
 
 import java.util.ArrayList;
 
-import forge.game.player.ComputerUtil;
-
 /**
  * <p>
  * SpellAbilityList class.
@@ -135,7 +133,7 @@ public class SpellAbilityList {
      * execute.
      * </p>
      */
-    public final void execute() {
+    /*public final void execute() {
         for (int i = 0; i < this.size(); i++) {
             if (!ComputerUtil.canPayCost(this.get(i))) {
                 throw new RuntimeException("SpellAbilityList : execute() error, cannot pay for the spell "
@@ -144,7 +142,7 @@ public class SpellAbilityList {
 
             ComputerUtil.playNoStack(this.get(i));
         }
-    } // execute()
+    }*/ // execute()
 
     /** {@inheritDoc} */
     @Override

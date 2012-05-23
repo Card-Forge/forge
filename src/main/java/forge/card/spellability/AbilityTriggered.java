@@ -109,12 +109,6 @@ public class AbilityTriggered extends Ability implements Command {
 
     /** {@inheritDoc} */
     @Override
-    public final boolean canAfford() {
-        return false;
-    } // this is a triggered ability: it cannot be "afforded"
-
-    /** {@inheritDoc} */
-    @Override
     public final void resolve() {
         this.todo.execute();
     }
