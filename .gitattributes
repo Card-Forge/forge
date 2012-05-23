@@ -641,6 +641,7 @@ res/cardsfolder/b/ballyrush_banneret.txt svneol=native#text/plain
 res/cardsfolder/b/balm_of_restoration.txt -text
 res/cardsfolder/b/baloth_cage_trap.txt svneol=native#text/plain
 res/cardsfolder/b/baloth_woodcrasher.txt svneol=native#text/plain
+res/cardsfolder/b/balshan_beguiler.txt -text
 res/cardsfolder/b/balshan_collaborator.txt svneol=native#text/plain
 res/cardsfolder/b/balshan_griffin.txt svneol=native#text/plain
 res/cardsfolder/b/balthor_the_defiled.txt svneol=native#text/plain
@@ -806,6 +807,7 @@ res/cardsfolder/b/betrayal.txt svneol=native#text/plain
 res/cardsfolder/b/betrayal_of_flesh.txt svneol=native#text/plain
 res/cardsfolder/b/betrothed_of_fire.txt svneol=native#text/plain
 res/cardsfolder/b/bewilder.txt svneol=native#text/plain
+res/cardsfolder/b/bifurcate.txt -text
 res/cardsfolder/b/big_game_hunter.txt svneol=native#text/plain
 res/cardsfolder/b/bile_urchin.txt svneol=native#text/plain
 res/cardsfolder/b/bind.txt svneol=native#text/plain
