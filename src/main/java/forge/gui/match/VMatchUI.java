@@ -4,15 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
 import forge.AllZone;
+import forge.Singletons;
+import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
+import forge.gui.framework.SRearrangingUtil;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
+import forge.gui.match.views.VDev;
 import forge.gui.match.views.VMessage;
+import forge.properties.ForgePreferences.FPref;
+import forge.view.FView;
 
 /** 
  * Top level view class for match UI drag layout.<br>
@@ -46,21 +53,27 @@ public enum VMatchUI implements IVTopLevelUI {
     public void populate() {
         SLayoutIO.loadLayout(null);
 
-        /*System.out.println(SwingUtilities.isEventDispatchThread());
-        final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
-            @Override
-            public Void doInBackground() {
-                SLayoutIO.loadLayout(null);
-                return null;
-            }
-        };
-        w.execute();
-
-        // Pull dev mode if necessary, remove parent cell if required.
+        // Dev mode disabled? Remove from parent cell if exists.
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)) {
-            VDev.SINGLETON_INSTANCE.getParentCell().removeDoc(VDev.SINGLETON_INSTANCE);
+            if (VDev.SINGLETON_INSTANCE.getParentCell() != null) {
+                final DragCell parent = VDev.SINGLETON_INSTANCE.getParentCell();
+                parent.removeDoc(VDev.SINGLETON_INSTANCE);
+                VDev.SINGLETON_INSTANCE.setParentCell(null);
+
+                // If dev mode was first tab, the new first tab needs re-selecting.
+                if (parent.getDocs().size() > 0) {
+                    parent.setSelected(parent.getDocs().get(0));
+                }
+            }
+        }
+        // Dev mode enabled? May already by added, or put in message cell by default.
+        else {
+            if (VDev.SINGLETON_INSTANCE.getParentCell() == null) {
+                VMessage.SINGLETON_INSTANCE.getParentCell().addDoc(VDev.SINGLETON_INSTANCE);
+            }
         }
 
+        // Fill in gaps
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -71,7 +84,7 @@ public enum VMatchUI implements IVTopLevelUI {
                     }
                 }
             }
-        });*/
+        });
     }
 
     //========== Retrieval methods
