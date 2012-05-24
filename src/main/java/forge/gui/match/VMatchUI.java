@@ -35,7 +35,6 @@ public enum VMatchUI implements IVTopLevelUI {
 
     // Other instantiations
     private final CMatchUI control = null;
-    private boolean isPopulated = false;
 
     /** */
     @Override
@@ -45,8 +44,6 @@ public enum VMatchUI implements IVTopLevelUI {
     /** */
     @Override
     public void populate() {
-        if (isPopulated) { return; }
-        else { isPopulated = true; }
         SLayoutIO.loadLayout(null);
 
         /*System.out.println(SwingUtilities.isEventDispatchThread());
