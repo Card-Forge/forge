@@ -246,35 +246,23 @@ Fixes/Features:
 - edited merge properties some more
 - Added the static ability "CostChange".
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Deny Reality, it now is a Sorcery.
+- merged mana_restrictions branch into Trunk
+- Added basic AI to AF GenericChoice.
+- Removed some unused functions.
+- Little tweak in charmCanPlayAI.
+- Add print proxy functionality back into GUI
+- fixed static effect on Grand Architect
+- Home screen converted to drag cell layout (minor visual change; mainly structural).
+- Bugfix: panels not clearing properly
+- Fixed odd "unknown" skin icon in quest mode.
+- Updated print icon in sprite.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
 
-
-
-AbilityWork branch:
-
-Altar of the Lost
-Ancient Ziggurat
-Cavern of Souls
-Dark Impostor
-Eldrazi Temple
-Food Chain
-Geosurge
-Grand Architect
-Metamorphosis
-Mishra's Workshop
-Myr Reservoir
-Myr Welder
-Pillar of the Paruns
-Primal Beyond
-Rosheen Meanderer
-Smokebraider
-Soldevi Machinist
-Somberwald Sage
-Untaidake, the Cloud Keeper
-Vedalken Engineer
 
 
 Added many cards, including:
@@ -316,6 +304,30 @@ Aquamorph Entity
 Angel of Salvation
 Antagonism
 Hunter Sliver
+Altar of the Lost
+Ancient Ziggurat
+Cavern of Souls
+Dark Impostor
+Eldrazi Temple
+Food Chain
+Geosurge
+Grand Architect
+Metamorphosis
+Mishra's Workshop
+Myr Reservoir
+Myr Welder
+Pillar of the Paruns
+Primal Beyond
+Rosheen Meanderer
+Smokebraider
+Soldevi Machinist
+Somberwald Sage
+Untaidake, the Cloud Keeper
+Vedalken Engineer
+Balshan Beguiler
+Bifurcate
+Blizzard Specter
+Blood Oath
 
 
 end
