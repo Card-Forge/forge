@@ -452,13 +452,21 @@ public class ComputerUtilAttack {
         CardList attackersLeft = new CardList(this.attackers);
         // Attackers that don't really have a choice
         for (final Card attacker : this.attackers) {
-            if ((attacker.hasKeyword("CARDNAME attacks each turn if able.")
-                    || !attacker.getSVar("MustAttack").equals("")
-                    || attacker.hasKeyword("At the beginning of the end step, destroy CARDNAME.")
-                    || attacker.hasKeyword("At the beginning of the end step, exile CARDNAME.")
-                    || attacker.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
-                    || attacker.getSacrificeAtEOT() || attacker.getSirenAttackOrDestroy() || (attacker.getController()
-                    .getMustAttackEntity() != null)) && CombatUtil.canAttack(attacker, combat)) {
+            if (!CombatUtil.canAttack(attacker, combat)) {
+                continue;
+            }
+            boolean mustAttack = false;
+            for (String s : attacker.getKeyword()) {
+                if (s.equals("CARDNAME attacks each turn if able.")
+                        || s.equals("At the beginning of the end step, destroy CARDNAME.")
+                        || s.equals("At the beginning of the end step, exile CARDNAME.")
+                        || s.equals("At the beginning of the end step, sacrifice CARDNAME.")) {
+                    mustAttack = true;
+                    break;
+                }
+            }
+            if (mustAttack || attacker.getSacrificeAtEOT() || attacker.getSirenAttackOrDestroy() 
+                    || (attacker.getController().getMustAttackEntity() != null)) {
                 combat.addAttacker(attacker);
                 attackersLeft.remove(attacker);
             }
@@ -478,25 +486,35 @@ public class ComputerUtilAttack {
         }
 
         // Exalted
-        if ((combat.getAttackers().isEmpty())
-                && ((this.countExaltedBonus(AllZone.getComputerPlayer()) >= 3)
-                        || AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getComputerPlayer())
-                        || (AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Battlegrace Angel").size() >= 2)
-                        || ((AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Finest Hour").size() >= 1)
-                                && Singletons.getModel().getGameState().getPhaseHandler().isFirstCombat()))) {
-            int biggest = 0;
-            Card att = null;
-            for (int i = 0; i < attackersLeft.size(); i++) {
-                if (this.getAttack(attackersLeft.get(i)) > biggest) {
-                    biggest = this.getAttack(attackersLeft.get(i));
-                    att = attackersLeft.get(i);
+        if (combat.getAttackers().isEmpty()) {
+            boolean exalted = false;
+            int exaltedCount = 0;
+            for (Card c : AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield)) {
+                if (c.getName().equals("Rafiq of the Many") || c.getName().equals("Battlegrace Angel")) {
+                    exalted = true;
+                    break;
+                }
+                if (c.getName().equals("Finest Hour")
+                        && Singletons.getModel().getGameState().getPhaseHandler().isFirstCombat()) {
+                    exalted = true;
+                    break;
+                }
+                if (c.hasKeyword("Exalted")) {
+                    exaltedCount++;
+                    if (exaltedCount > 2) {
+                        exalted = true;
+                        break;
+                    }
                 }
             }
-            if ((att != null) && CombatUtil.canAttack(att, combat)) {
-                combat.addAttacker(att);
+            if (exalted) {
+                Card att = CardFactoryUtil.getBestCreatureAI(attackersLeft);
+                if ((att != null) && CombatUtil.canAttack(att, combat)) {
+                    combat.addAttacker(att);
+                    System.out.println("Exalted");
+                    return combat;
+                }
             }
-            System.out.println("Exalted");
-            return combat;
         }
 
         // *******************
