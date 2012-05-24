@@ -271,7 +271,7 @@ public enum FSkin {
         ICO_PRINT           (new int[] {660, 640, 20, 20}), /** */
         ICO_SAVE            (new int[] {660, 560, 20, 20}), /** */
         ICO_SAVEAS          (new int[] {660, 580, 20, 20}), /** */
-        ICO_UNKNOWN         (new int[] {80, 720, 80, 80}), /** */
+        ICO_UNKNOWN         (new int[] {0, 720, 80, 80}), /** */
         ICO_LOGO            (new int[] {480, 0, 200, 200}), /** */
         ICO_FAVICON         (new int[] {0, 640, 80, 80});
 
