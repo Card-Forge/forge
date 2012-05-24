@@ -202,6 +202,7 @@ public enum FControl {
 
             case QUEST_BAZAAR:
                 display.add(Singletons.getView().getViewBazaar(), JLayeredPane.DEFAULT_LAYER);
+                FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(false);
                 sizeChildren();
                 Singletons.getView().getFrame().addWindowListener(waLeaveBazaar);
                 break;
