@@ -88,9 +88,10 @@ public class SSubmenuQuestUtil {
             }
             if (iSlot == 1) {
                 view.getCbxPet().removeAllItems();
+
                 // Pet list visibility
                 if (petList.size() > 0) {
-                    view.getCbxPet().setEnabled(true);
+                    view.getCbxPet().setVisible(true);
                     view.getCbxPet().addItem("Don't summon a pet");
 
                     for (final QuestPetController pet : petList) {
@@ -125,10 +126,9 @@ public class SSubmenuQuestUtil {
         if (qA == null) { return; }
 
         final IStatsAndPet[] viewsToUpdate = new IStatsAndPet[] {
-                VSubmenuDuels.SINGLETON_INSTANCE,
-                VSubmenuChallenges.SINGLETON_INSTANCE
+            VSubmenuDuels.SINGLETON_INSTANCE,
+            VSubmenuChallenges.SINGLETON_INSTANCE
         };
-
 
         for (final IStatsAndPet view : viewsToUpdate) {
             // Fantasy UI display
