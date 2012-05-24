@@ -450,17 +450,6 @@ public class ComputerUtilAttack {
         // Determine who will be attacked
         this.chooseDefender(combat, bAssault);
         CardList attackersLeft = new CardList(this.attackers);
-        if (bAssault) {
-            System.out.println("Assault");
-            CardListUtil.sortAttack(attackersLeft);
-            for (int i = 0; i < attackersLeft.size(); i++) {
-                if (CombatUtil.canAttack(attackersLeft.get(i), combat)) {
-                    combat.addAttacker(attackersLeft.get(i));
-                }
-            }
-            return combat;
-        }
-
         // Attackers that don't really have a choice
         for (final Card attacker : this.attackers) {
             if ((attacker.hasKeyword("CARDNAME attacks each turn if able.")
@@ -477,6 +466,17 @@ public class ComputerUtilAttack {
         if (attackersLeft.isEmpty()) {
             return combat;
         }
+        if (bAssault) {
+            System.out.println("Assault");
+            CardListUtil.sortAttack(attackersLeft);
+            for (Card attacker : attackersLeft) {
+                if (CombatUtil.canAttack(attacker, combat) && this.isEffectiveAttacker(attacker, combat)) {
+                    combat.addAttacker(attacker);
+                }
+            }
+            return combat;
+        }
+
         // Exalted
         if ((combat.getAttackers().isEmpty())
                 && ((this.countExaltedBonus(AllZone.getComputerPlayer()) >= 3)
