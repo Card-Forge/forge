@@ -10888,21 +10888,15 @@ res/lang/howTo/de.properties svneol=native#text/plain
 res/lang/howTo/en.properties svneol=native#text/plain
 res/lang/lang.properties svneol=native#text/plain
 res/layouts/editor_default.xml -text
+res/layouts/home_default.xml -text
 res/layouts/match_default.xml -text
 res/licenses/java-yield-license.txt svneol=native#text/plain
 res/licenses/log4j-license.txt svneol=native#text/plain
 res/licenses/multiline-label-license.txt svneol=native#text/plain
 res/licenses/xpp3-license.txt svneol=native#text/plain
 res/licenses/xstream-license.txt svneol=native#text/plain
-res/main.properties svneol=native#text/plain
 res/mtg-data.txt svneol=native#text/plain
 res/oracleScript.py -text svneol=unset#text/x-python
-res/pics/tokens/g_0_1_plant_wall.jpg -text
-res/pics/tokens/g_0_2_plant_wall.jpg -text
-res/pics/tokens/g_0_3_plant_wall.jpg -text
-res/pics/tokens/g_1_3_plant_wall.jpg -text
-res/pics/tokens/g_1_3_plant_wall_deathtouch.jpg -text
-res/pics/tokens/g_1_4_plant_wall.jpg -text
 res/pics_link/card-pictures_a.txt svneol=native#text/plain
 res/pics_link/card-pictures_b.txt svneol=native#text/plain
 res/pics_link/card-pictures_c.txt svneol=native#text/plain
@@ -12002,12 +11996,14 @@ src/main/java/forge/gui/framework/SOverflowUtil.java -text
 src/main/java/forge/gui/framework/SRearrangingUtil.java -text
 src/main/java/forge/gui/framework/SResizingUtil.java -text
 src/main/java/forge/gui/framework/package-info.java -text svneol=native#text/plain
+src/main/java/forge/gui/home/CMainMenu.java -text
 src/main/java/forge/gui/home/EMenuGroup.java -text
 src/main/java/forge/gui/home/EMenuItem.java -text
 src/main/java/forge/gui/home/ICSubmenu.java -text
 src/main/java/forge/gui/home/IVSubmenu.java -text
 src/main/java/forge/gui/home/StartButton.java -text
 src/main/java/forge/gui/home/VHomeUI.java -text
+src/main/java/forge/gui/home/VMainMenu.java -text
 src/main/java/forge/gui/home/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/quest/CSubmenuChallenges.java -text
 src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text

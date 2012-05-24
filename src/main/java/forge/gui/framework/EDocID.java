@@ -11,6 +11,7 @@ import forge.gui.deckeditor.views.VEditorPreferences;
 import forge.gui.deckeditor.views.VFilters;
 import forge.gui.deckeditor.views.VProbabilities;
 import forge.gui.deckeditor.views.VStatistics;
+import forge.gui.home.VMainMenu;
 import forge.gui.home.quest.VSubmenuChallenges;
 import forge.gui.home.quest.VSubmenuDuels;
 import forge.gui.home.quest.VSubmenuQuestData;
@@ -54,18 +55,19 @@ public enum EDocID { /** */
     EDITOR_CURRENTDECK (VCurrentDeck.SINGLETON_INSTANCE), /** */
     EDITOR_DECKGEN (VDeckgen.SINGLETON_INSTANCE), /** */
 
-    HOME_QUESTCHALLENGES(VSubmenuChallenges.SINGLETON_INSTANCE), /** */
-    HOME_QUESTDUELS(VSubmenuDuels.SINGLETON_INSTANCE), /** */
-    HOME_QUESTDATA(VSubmenuQuestData.SINGLETON_INSTANCE), /** */
-    HOME_QUESTDECKS(VSubmenuQuestDecks.SINGLETON_INSTANCE), /** */
-    HOME_QUESTPREFS(VSubmenuQuestPrefs.SINGLETON_INSTANCE), /** */
-    HOME_PREFERENCES(VSubmenuPreferences.SINGLETON_INSTANCE), /** */
-    HOME_AVATARS(VSubmenuAvatars.SINGLETON_INSTANCE), /** */
-    HOME_DECKEDITOR(VSubmenuDeckEditor.SINGLETON_INSTANCE), /** */
-    HOME_UTILITIES(VSubmenuUtilities.SINGLETON_INSTANCE), /** */
-    HOME_CONSTRUCTED(VSubmenuConstructed.SINGLETON_INSTANCE), /** */
-    HOME_DRAFT(VSubmenuDraft.SINGLETON_INSTANCE), /** */
-    HOME_SEALED(VSubmenuSealed.SINGLETON_INSTANCE), /** */
+    HOME_QUESTCHALLENGES (VSubmenuChallenges.SINGLETON_INSTANCE), /** */
+    HOME_QUESTDUELS (VSubmenuDuels.SINGLETON_INSTANCE), /** */
+    HOME_QUESTDATA (VSubmenuQuestData.SINGLETON_INSTANCE), /** */
+    HOME_QUESTDECKS (VSubmenuQuestDecks.SINGLETON_INSTANCE), /** */
+    HOME_QUESTPREFS (VSubmenuQuestPrefs.SINGLETON_INSTANCE), /** */
+    HOME_PREFERENCES (VSubmenuPreferences.SINGLETON_INSTANCE), /** */
+    HOME_AVATARS (VSubmenuAvatars.SINGLETON_INSTANCE), /** */
+    HOME_DECKEDITOR (VSubmenuDeckEditor.SINGLETON_INSTANCE), /** */
+    HOME_UTILITIES (VSubmenuUtilities.SINGLETON_INSTANCE), /** */
+    HOME_CONSTRUCTED (VSubmenuConstructed.SINGLETON_INSTANCE), /** */
+    HOME_DRAFT (VSubmenuDraft.SINGLETON_INSTANCE), /** */
+    HOME_SEALED (VSubmenuSealed.SINGLETON_INSTANCE), /** */
+    HOME_MAINMENU (VMainMenu.SINGLETON_INSTANCE), /** */
 
     REPORT_MESSAGE (VMessage.SINGLETON_INSTANCE), /** */
     REPORT_STACK (VStack.SINGLETON_INSTANCE), /** */

@@ -332,6 +332,46 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     }
 
     /**
+     * Removes all components in this cell and
+     * rebuilds it without a header bar.
+     */
+    public void hideHead() {
+        this.removeAll();
+        this.add(pnlBorderRight, "w " + SLayoutConstants.BORDER_T + "px!, "
+                + "h 100% - " + SLayoutConstants.BORDER_T + "px!, span 1 2");
+        this.add(pnlBody, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
+                + "h 100% - " + SLayoutConstants.BORDER_T + "px!");
+        this.add(pnlBorderBottom, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
+                + "h " + SLayoutConstants.BORDER_T + "px!");
+    }
+
+    /**
+     * Enable/disable resize on the X axis for this cell.
+     * 
+     * @param enable0 &emsp; boolean
+     */
+    public void toggleResizeX(final boolean enable0) {
+        this.removeMouseListener(SResizingUtil.getResizeXListener());
+
+        if (enable0) {
+            this.addMouseListener(SResizingUtil.getResizeXListener());
+        }
+    }
+
+    /**
+     * Enable/disable resize on the Y axis for this cell.
+     * 
+     * @param enable0 &emsp; boolean
+     */
+    public void toggleResizeY(final boolean enable0) {
+        this.removeMouseListener(SResizingUtil.getResizeYListener());
+
+        if (enable0) {
+            this.addMouseListener(SResizingUtil.getResizeYListener());
+        }
+    }
+
+    /**
      * Refreshes visual display of head bar.
      */
     public void refresh() {

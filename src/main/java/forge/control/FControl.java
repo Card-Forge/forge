@@ -179,11 +179,9 @@ public enum FControl {
         // Fire up new state
         switch (i0) {
             case HOME_SCREEN:
-                Singletons.getView().getFrame().addWindowListener(waDefault);
                 VHomeUI.SINGLETON_INSTANCE.populate();
-                FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(false);
-                VHomeUI.SINGLETON_INSTANCE.updateLayout();
-                sizeChildren();
+                FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
+                Singletons.getView().getFrame().addWindowListener(waDefault);
                 break;
 
             case MATCH_SCREEN:

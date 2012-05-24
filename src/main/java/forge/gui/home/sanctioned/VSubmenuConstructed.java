@@ -18,7 +18,6 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
-import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
@@ -126,8 +125,8 @@ public enum VSubmenuConstructed implements IVSubmenu, IVDoc {
      * @see forge.gui.home.IVSubmenu#getItemEnum()
      */
     @Override
-    public String getItemEnum() {
-        return EMenuItem.CONSTRUCTED.toString();
+    public EDocID getItemEnum() {
+        return EDocID.HOME_CONSTRUCTED;
     }
 
     /* (non-Javadoc)
@@ -194,6 +193,9 @@ public enum VSubmenuConstructed implements IVSubmenu, IVDoc {
         pnl.add(pnlDecksHuman, strRightConstraints);
 
         pnl.add(pnlStart, "w 220px + 30%, span 2 1, gap 0 0 0 50px");
+
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
+        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
     }
 
     /** @return {@link javax.swing.JList} */

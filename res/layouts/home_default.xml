@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<layout>
+	<cell x="0.0" y="0.0" w="0.2" h="1.0">
+		<doc>HOME_MAINMENU</doc>
+	</cell>
+	<cell x="0.2" y="0.0" w="0.8" h="1.0">
+		<doc>HOME_QUESTCHALLENGES</doc>
+	    <doc>HOME_QUESTDUELS</doc>
+	    <doc>HOME_QUESTDATA</doc>
+	    <doc>HOME_QUESTDECKS</doc>
+	    <doc>HOME_QUESTPREFS</doc>
+	    <doc>HOME_PREFERENCES</doc>
+	    <doc>HOME_AVATARS</doc>
+	    <doc>HOME_DECKEDITOR</doc>
+	    <doc>HOME_UTILITIES</doc>
+	    <doc>HOME_CONSTRUCTED</doc>
+	    <doc>HOME_DRAFT</doc>
+	    <doc>HOME_SEALED</doc>
+	</cell>
+</layout>

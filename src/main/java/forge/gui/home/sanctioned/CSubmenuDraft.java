@@ -94,9 +94,6 @@ public enum CSubmenuDraft implements ICSubmenu, ICDoc {
     public void initialize() {
         final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
 
-        view.populate();
-        CSubmenuDraft.SINGLETON_INSTANCE.update();
-
         view.getLstHumanDecks().setSelectCommand(cmdDeckSelect);
 
         view.getBtnBuildDeck().addMouseListener(

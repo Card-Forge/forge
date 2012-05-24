@@ -22,7 +22,6 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
-import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
@@ -79,6 +78,9 @@ public enum VSubmenuSealed implements IVSubmenu, IVDoc {
         pnl.add(new FScrollPane(lstDecks), "w 90%!, h 35%!, gap 5% 0 2% 2%");
         pnl.add(btnBuildDeck, "w 50%!, h 5%!, gap 25% 0 0 0");
         pnl.add(btnStart, "ax center, gaptop 5%");
+
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
+        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
     }
 
     /* (non-Javadoc)
@@ -98,11 +100,11 @@ public enum VSubmenuSealed implements IVSubmenu, IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.home.IVSubmenu#getMenuName()
+     * @see forge.gui.home.IVSubmenu#getItemEnum()
      */
     @Override
-    public String getItemEnum() {
-        return EMenuItem.LIMITED_SEALED.toString();
+    public EDocID getItemEnum() {
+        return EDocID.HOME_SEALED;
     }
 
     /* (non-Javadoc)

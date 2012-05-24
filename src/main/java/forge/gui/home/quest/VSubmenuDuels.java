@@ -17,7 +17,6 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
-import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
@@ -110,8 +109,8 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
      * @see forge.gui.home.IVSubmenu#getMenuName()
      */
     @Override
-    public String getItemEnum() {
-        return EMenuItem.QUEST_DUELS.toString();
+    public EDocID getItemEnum() {
+        return EDocID.HOME_QUESTDUELS;
     }
 
     /* (non-Javadoc)
@@ -141,12 +140,16 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
         pnlDuels.setOpaque(false);
         pnlDuels.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
+        pnl.removeAll();
         pnl.setOpaque(false);
         pnl.setLayout(new MigLayout("insets 0, gap 0, wrap"));
         pnl.add(pnlTitle, "w 94%!, h 30px!, gap 3% 0 15px 15px");
         pnl.add(pnlStats, "w 94%!, gap 3% 0 0 20px");
         pnl.add(scrDuels, "w 94%!, pushy, growy, gap 3% 0 0 0");
         pnl.add(pnlStart, "w 94%, gap 3% 0 15px 5%");
+
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
+        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
     }
 
     /** */

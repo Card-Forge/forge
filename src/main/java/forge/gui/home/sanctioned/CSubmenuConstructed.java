@@ -111,9 +111,6 @@ public enum CSubmenuConstructed implements ICSubmenu, ICDoc {
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
         final VSubmenuConstructed view = VSubmenuConstructed.SINGLETON_INSTANCE;
 
-        VSubmenuConstructed.SINGLETON_INSTANCE.populate();
-        CSubmenuConstructed.SINGLETON_INSTANCE.update();
-
         // Radio button event handling
         view.getRadColorsAI().addActionListener(new ActionListener() { @Override
             public void actionPerformed(final ActionEvent arg0) {

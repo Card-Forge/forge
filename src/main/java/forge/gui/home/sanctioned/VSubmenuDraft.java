@@ -24,7 +24,6 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
-import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
@@ -86,11 +85,11 @@ public enum VSubmenuDraft implements IVSubmenu, IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.home.IVSubmenu#getMenuName()
+     * @see forge.gui.home.IVSubmenu#getItemEnum()
      */
     @Override
-    public String getItemEnum() {
-        return EMenuItem.LIMITED_DRAFT.toString();
+    public EDocID getItemEnum() {
+        return EDocID.HOME_DRAFT;
     }
 
     /** @return {@link javax.swing.JLabel} */
@@ -210,6 +209,9 @@ public enum VSubmenuDraft implements IVSubmenu, IVDoc {
         pnl.add(btnDirections, "alignx center, span 2 1, gap 5% 5% 5% 2%, wrap");
 
         pnl.add(btnStart, "gap 5% 5% 0 0, ax center, span 2 1, wrap");
+
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
+        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
     }
 
     /* (non-Javadoc)

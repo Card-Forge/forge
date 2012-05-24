@@ -9,10 +9,10 @@ import forge.control.FControl;
 import forge.deck.Deck;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorQuest;
+import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.EMenuItem;
+import forge.gui.home.CMainMenu;
 import forge.gui.home.ICSubmenu;
-import forge.gui.home.VHomeUI;
 import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
 
@@ -52,7 +52,7 @@ public enum CSubmenuQuestDecks implements ICSubmenu, ICDoc {
             @Override
             public void execute() {
                 if (qc.getAchievements() == null) {
-                    VHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
+                    CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
                 }
             }
         };
@@ -63,9 +63,6 @@ public enum CSubmenuQuestDecks implements ICSubmenu, ICDoc {
      */
     @Override
     public void initialize() {
-        VSubmenuQuestDecks.SINGLETON_INSTANCE.populate();
-        CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
-
         VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new Command() {
             @Override
             public void execute() {

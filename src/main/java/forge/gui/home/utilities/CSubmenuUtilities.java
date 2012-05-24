@@ -60,9 +60,6 @@ public enum CSubmenuUtilities implements ICSubmenu, ICDoc {
      */
     @Override
     public void initialize() {
-        VSubmenuUtilities.SINGLETON_INSTANCE.populate();
-        CSubmenuUtilities.SINGLETON_INSTANCE.update();
-
         final VSubmenuUtilities view = VSubmenuUtilities.SINGLETON_INSTANCE;
         view.getBtnDownloadPics().setCommand(cmdPicDownload);
         view.getBtnDownloadSetPics().setCommand(cmdSetDownload);

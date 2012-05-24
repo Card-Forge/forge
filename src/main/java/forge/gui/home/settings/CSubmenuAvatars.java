@@ -19,8 +19,6 @@ public enum CSubmenuAvatars implements ICSubmenu, ICDoc {
      */
     @Override
     public void initialize() {
-        VSubmenuAvatars.SINGLETON_INSTANCE.populate();
-        CSubmenuAvatars.SINGLETON_INSTANCE.update();
     }
 
     /* (non-Javadoc)

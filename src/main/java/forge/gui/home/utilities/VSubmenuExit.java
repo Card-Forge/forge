@@ -3,8 +3,8 @@ package forge.gui.home.utilities;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
+import forge.gui.framework.EDocID;
 import forge.gui.home.EMenuGroup;
-import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.toolbox.FLabel;
@@ -60,11 +60,11 @@ public enum VSubmenuExit implements IVSubmenu {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.home.IVSubmenu#getMenuName()
+     * @see forge.gui.home.IVSubmenu#getItemEnum()
      */
     @Override
-    public String getItemEnum() {
-        return EMenuItem.UTILITIES_EXIT.toString();
+    public EDocID getItemEnum() {
+        return null;
     }
 
     /* (non-Javadoc)

@@ -33,9 +33,6 @@ public enum CSubmenuPreferences implements ICSubmenu, ICDoc {
     @SuppressWarnings("serial")
     @Override
     public void initialize() {
-        VSubmenuPreferences.SINGLETON_INSTANCE.populate();
-        CSubmenuPreferences.SINGLETON_INSTANCE.update();
-
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
 

@@ -6,10 +6,10 @@ import java.util.List;
 
 import forge.AllZone;
 import forge.Command;
+import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.EMenuItem;
+import forge.gui.home.CMainMenu;
 import forge.gui.home.ICSubmenu;
-import forge.gui.home.VHomeUI;
 import forge.gui.home.quest.SSubmenuQuestUtil.SelectablePanel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventDuel;
@@ -35,7 +35,7 @@ public enum CSubmenuDuels implements ICSubmenu, ICDoc {
         return new Command() {
             public void execute() {
                 if (qc.getAchievements() == null) {
-                    VHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
+                    CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
                 }
             }
         };
@@ -48,8 +48,6 @@ public enum CSubmenuDuels implements ICSubmenu, ICDoc {
     @Override
     public void initialize() {
         final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
-        view.populate();
-        CSubmenuDuels.SINGLETON_INSTANCE.update();
 
         view.getBtnSpellShop().setCommand(
                 new Command() { @Override
@@ -66,7 +64,7 @@ public enum CSubmenuDuels implements ICSubmenu, ICDoc {
         view.getBtnCurrentDeck().setCommand(
                 new Command() { @Override
                     public void execute() {
-                        VHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DECKS);
+                        CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDECKS);
                     }
                 });
 

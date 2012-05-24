@@ -61,11 +61,6 @@ public enum CSubmenuSealed implements ICSubmenu, ICDoc {
      */
     @Override
     public void initialize() {
-        final VSubmenuSealed view = VSubmenuSealed.SINGLETON_INSTANCE;
-
-        view.populate();
-        CSubmenuSealed.SINGLETON_INSTANCE.update();
-
         VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().setSelectCommand(cmdDeckSelect);
 
         VSubmenuSealed.SINGLETON_INSTANCE.getBtnBuildDeck().addMouseListener(

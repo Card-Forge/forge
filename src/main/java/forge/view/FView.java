@@ -22,6 +22,7 @@ import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SLayoutConstants;
+import forge.gui.home.CMainMenu;
 import forge.gui.home.VHomeUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.toolbox.FOverlay;
@@ -92,6 +93,7 @@ public enum FView {
 
         // All is ready to go - fire up home screen and discard splash frame.
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
+        CMainMenu.SINGLETON_INSTANCE.selectPrevious();
 
         FView.this.splash.dispose();
         FView.this.splash = null;

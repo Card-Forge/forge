@@ -10,10 +10,10 @@ import javax.swing.border.EmptyBorder;
 
 import forge.AllZone;
 import forge.Command;
+import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.EMenuItem;
+import forge.gui.home.CMainMenu;
 import forge.gui.home.ICSubmenu;
-import forge.gui.home.VHomeUI;
 import forge.gui.home.quest.SSubmenuQuestUtil.SelectablePanel;
 import forge.gui.toolbox.FLabel;
 import forge.quest.QuestController;
@@ -42,7 +42,7 @@ public enum CSubmenuChallenges implements ICSubmenu, ICDoc {
             @Override
             public void execute() {
                 if (qc.getAchievements() == null) {
-                    VHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
+                    CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
                 }
             }
         };
@@ -55,8 +55,6 @@ public enum CSubmenuChallenges implements ICSubmenu, ICDoc {
     @Override
     public void initialize() {
         final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
-        view.populate();
-        CSubmenuChallenges.SINGLETON_INSTANCE.update();
 
         view.getBtnSpellShop().setCommand(
                 new Command() { @Override
@@ -83,7 +81,7 @@ public enum CSubmenuChallenges implements ICSubmenu, ICDoc {
         view.getBtnCurrentDeck().setCommand(
                 new Command() { @Override
                     public void execute() {
-                        VHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DECKS);
+                        CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDECKS);
                     }
                 });
 

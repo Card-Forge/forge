@@ -24,7 +24,6 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
-import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.toolbox.FLabel;
@@ -189,6 +188,9 @@ public enum VSubmenuQuestData implements IVSubmenu, IVDoc {
         pnlViewport.add(pnlOptions, "w 96%!, h 250px!, gap 2% 0 0 20px");
 
         pnl.add(new FScrollPane(pnlViewport), "w 100%!, h 100%!");
+
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
+        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
     }
 
     /* (non-Javadoc)
@@ -220,8 +222,8 @@ public enum VSubmenuQuestData implements IVSubmenu, IVDoc {
      * @see forge.gui.home.IVSubmenu#getMenuName()
      */
     @Override
-    public String getItemEnum() {
-        return EMenuItem.QUEST_DATA.toString();
+    public EDocID getItemEnum() {
+        return EDocID.HOME_QUESTDATA;
     }
 
     /* (non-Javadoc)
@@ -274,28 +276,27 @@ public enum VSubmenuQuestData implements IVSubmenu, IVDoc {
         return radFantasy;
     }
 
-    /**
-     * @return {@link javax.swing.JRadioButton}
-     */
+    /** @return {@link javax.swing.JRadioButton} */
     public JRadioButton getRadClassic() {
         return radClassic;
     }
 
+    /** @return {@link javax.swing.JRadioButton} */
     public JRadioButton getRadCompleteStart() {
         return radCompleteStart;
     }
 
-    /**
-     * @return {@link javax.swing.JCheckBox}
-     */
+    /** @return {@link javax.swing.JCheckBox} */
     public JRadioButton getRadStandardStart() {
         return radStandardStart;
     }
 
+    /** @return {@link javax.swing.JRadioButton} */
     public JRadioButton getRadPreconStart() {
         return radPreconStart;
     }
 
+    /** @return {@link java.lang.String} */
     public String getPrecon() {
         return (String) cbxPrecon.getSelectedItem();
     }
@@ -308,7 +309,7 @@ public enum VSubmenuQuestData implements IVSubmenu, IVDoc {
     }
 
     //========== Overridden from IVDoc
-    
+
     /* (non-Javadoc)
      * @see forge.gui.framework.IVDoc#getDocumentID()
      */

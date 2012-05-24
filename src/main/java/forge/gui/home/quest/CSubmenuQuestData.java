@@ -51,9 +51,6 @@ public enum CSubmenuQuestData implements ICSubmenu, ICDoc {
      */
     @Override
     public void initialize() {
-        VSubmenuQuestData.SINGLETON_INSTANCE.populate();
-        CSubmenuQuestData.SINGLETON_INSTANCE.update();
-
         VSubmenuQuestData.SINGLETON_INSTANCE.getBtnEmbark().setCommand(
                 new Command() { @Override public void execute() { newQuest(); } });
     }

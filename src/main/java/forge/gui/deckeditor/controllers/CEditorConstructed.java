@@ -30,10 +30,12 @@ import forge.gui.deckeditor.tables.TableColumnInfo;
 import forge.gui.deckeditor.tables.TableView;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
+import forge.gui.framework.EDocID;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.closures.Lambda0;
 
 /**
@@ -153,6 +155,9 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
      */
     @Override
     public boolean exit() {
+        // Override the submenu save choice - tell it to go to "constructed".
+        Singletons.getModel().getPreferences().setPref(FPref.SUBMENU_CURRENTMENU, EDocID.HOME_CONSTRUCTED.toString());
+
         return SEditorIO.confirmSaveChanges();
     }
 }

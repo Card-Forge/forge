@@ -22,8 +22,6 @@ public enum CSubmenuDeckEditor implements ICSubmenu, ICDoc {
      */
     @Override
     public void initialize() {
-        VSubmenuDeckEditor.SINGLETON_INSTANCE.populate();
-
     }
 
     /* (non-Javadoc)

@@ -21,7 +21,6 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
-import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.toolbox.FLabel;
@@ -136,6 +135,9 @@ public enum VSubmenuQuestPrefs implements IVSubmenu, IVDoc {
         pnl.add(scrContent, "w 100%!, growy, pushy, gap 0 0 10px 10px");
 
         CSubmenuQuestPrefs.resetErrors();
+
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
+        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
     }
 
     /* (non-Javadoc)
@@ -166,8 +168,8 @@ public enum VSubmenuQuestPrefs implements IVSubmenu, IVDoc {
      * @see forge.gui.home.IVSubmenu#getMenuName()
      */
     @Override
-    public String getItemEnum() {
-        return EMenuItem.QUEST_PREFS.toString();
+    public EDocID getItemEnum() {
+        return EDocID.HOME_QUESTPREFS;
     }
 
     /* (non-Javadoc)

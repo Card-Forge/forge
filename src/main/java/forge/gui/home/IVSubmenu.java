@@ -2,6 +2,8 @@ package forge.gui.home;
 
 import javax.swing.JPanel;
 
+import forge.gui.framework.EDocID;
+
 /**
  * Dictates methods required for a submenu view.
  * 
@@ -29,8 +31,8 @@ public interface IVSubmenu {
     String getMenuTitle();
 
     /** Enum registration for this menu item, in EMenuItem.
-     * @return {@link java.lang.String} */
-    String getItemEnum();
+     * @return {@link forge.gui.framework.EDocID} */
+    EDocID getItemEnum();
 
     /** Removes all children and (re)populates panel components, independent of constructor.*/
     void populate();

@@ -23,8 +23,6 @@ public enum CSubmenuQuestPrefs implements ICSubmenu, ICDoc {
      */
     @Override
     public void initialize() {
-        VSubmenuQuestPrefs.SINGLETON_INSTANCE.populate();
-        CSubmenuQuestPrefs.SINGLETON_INSTANCE.update();
     }
 
     /* (non-Javadoc)
