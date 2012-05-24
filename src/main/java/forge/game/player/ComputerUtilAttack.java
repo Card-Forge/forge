@@ -184,22 +184,37 @@ public class ComputerUtilAttack {
      */
     public final CardList getPossibleBlockers(final CardList blockers, final CardList attackers) {
         CardList possibleBlockers = new CardList(blockers);
-        final CardList attackerList = new CardList(attackers);
         possibleBlockers = possibleBlockers.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                if (!c.isCreature()) {
-                    return false;
-                }
-                for (final Card attacker : attackerList) {
-                    if (CombatUtil.canBlock(attacker, c)) {
-                        return true;
-                    }
-                }
-                return false;
+                return canBlockAnAttacker(c, attackers);
             }
         });
         return possibleBlockers;
+    } // getPossibleBlockers()
+
+    /**
+     * <p>
+     * canBlockAnAttacker.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param attackers
+     *            a {@link forge.CardList} object.
+     * @return a boolean.
+     */
+    public final boolean canBlockAnAttacker(final Card c, final CardList attackers) {
+        final CardList attackerList = new CardList(attackers);
+        if (!c.isCreature()) {
+            return false;
+        }
+        for (final Card attacker : attackerList) {
+            if (CombatUtil.canBlock(attacker, c)) {
+                return true;
+            }
+        }
+        return false;
     } // getPossibleBlockers()
 
     // this checks to make sure that the computer player
@@ -218,30 +233,50 @@ public class ComputerUtilAttack {
      */
     public final CardList notNeededAsBlockers(final CardList attackers, final Combat combat) {
         final CardList notNeededAsBlockers = new CardList(attackers);
+        int fixedBlockers = 0;
+        final CardList vigilantes = new CardList();
+        for (final Card c : this.computerList) {
+            if (c.getName().equals("Masako the Humorless")) {
+                // "Tapped creatures you control can block as though they were untapped."
+                return notNeededAsBlockers;
+            }
+            if (!attackers.contains(c)) { // this creature can't attack anyway
+                if (canBlockAnAttacker(c, this.humanList)) {
+                    fixedBlockers++;
+                }
+                continue;
+            }
+            if (c.hasKeyword("Vigilance")) {
+                vigilantes.add(c);
+                notNeededAsBlockers.remove(c); // they will be re-added later
+                if (canBlockAnAttacker(c, this.humanList)) {
+                    fixedBlockers++;
+                }
+            }
+        }
         CardListUtil.sortAttackLowFirst(attackers);
-        int blockersNeeded = attackers.size();
+        int blockersNeeded = this.humanList.size();
 
         // don't hold back creatures that can't block any of the human creatures
         final CardList list = this.getPossibleBlockers(attackers, this.humanList);
 
+        //Calculate the amount of creatures necessary
         for (int i = 0; i < list.size(); i++) {
             if (!this.doesHumanAttackAndWin(i)) {
                 blockersNeeded = i;
                 break;
-            } else {
-                notNeededAsBlockers.remove(list.get(i));
             }
+        }
+        int blockersStillNeeded = blockersNeeded - fixedBlockers;
+        blockersStillNeeded = Math.min(blockersNeeded, list.size());
+        for (int i = 0; i < blockersStillNeeded; i++) {
+            notNeededAsBlockers.remove(list.get(i));
         }
 
         // re-add creatures with vigilance
-        for (final Card c : attackers) {
-            if (c.hasKeyword("Vigilance")) {
-                notNeededAsBlockers.add(c);
-            }
-        }
+        notNeededAsBlockers.addAll(vigilantes);
 
-        if (blockersNeeded == list.size()) {
-            // Human will win unless everything is kept back to block
+        if (blockersNeeded > 1) {
             return notNeededAsBlockers;
         }
 
@@ -465,7 +500,7 @@ public class ComputerUtilAttack {
                     break;
                 }
             }
-            if (mustAttack || attacker.getSacrificeAtEOT() || attacker.getSirenAttackOrDestroy() 
+            if (mustAttack || attacker.getSacrificeAtEOT() || attacker.getSirenAttackOrDestroy()
                     || (attacker.getController().getMustAttackEntity() != null)) {
                 combat.addAttacker(attacker);
                 attackersLeft.remove(attacker);
