@@ -41,6 +41,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.match.views.VDock;
+import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.SaveOpenDialog;
 import forge.gui.toolbox.SaveOpenDialog.Filetypes;
 import forge.item.CardPrinted;
@@ -58,6 +59,10 @@ public enum CDock implements ICDoc {
 
     /** Concede game, bring up WinLose UI. */
     public void concede() {
+        if (FOverlay.SINGLETON_INSTANCE.getPanel().isShowing()) {
+            return;
+        }
+
         AllZone.getHumanPlayer().concede();
         Singletons.getModel().getGameAction().checkStateEffects();
     }

@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JButton;
+
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
@@ -55,6 +57,7 @@ public class ControlWinLose {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 actionOnQuit();
+                ((JButton) e.getSource()).setEnabled(false);
             }
         });
     }
