@@ -309,6 +309,10 @@ public class SFilterUtil {
         final String strContains = VFilters.SINGLETON_INSTANCE.getTxfContains().getText();
         final String strWithout = VFilters.SINGLETON_INSTANCE.getTxfWithout().getText();
 
+        final boolean useName = VFilters.SINGLETON_INSTANCE.getChbTextName().isSelected();
+        final boolean useType = VFilters.SINGLETON_INSTANCE.getChbTextType().isSelected();
+        final boolean useText = VFilters.SINGLETON_INSTANCE.getChbTextText().isSelected();
+
         if (!strContains.isEmpty()) {
             final String[] splitContains = strContains
                     .replaceAll(",", "")
@@ -319,12 +323,13 @@ public class SFilterUtil {
 
             for (final String s : splitContains) {
                 final List<Predicate<CardPrinted>> subands = new ArrayList<Predicate<CardPrinted>>();
-                subands.add(Predicate.brigde(CardRules.Predicates.name(
-                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES));
-                subands.add(Predicate.brigde(CardRules.Predicates.joinedType(
-                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES));
-                subands.add(Predicate.brigde(CardRules.Predicates.rules(
-                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES));
+
+                if (useName) { subands.add(Predicate.brigde(CardRules.Predicates.name(
+                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
+                if (useType) { subands.add(Predicate.brigde(CardRules.Predicates.joinedType(
+                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
+                if (useText) { subands.add(Predicate.brigde(CardRules.Predicates.rules(
+                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
 
                 ands.add(Predicate.or(subands));
             }
@@ -343,12 +348,12 @@ public class SFilterUtil {
             for (final String s : splitWithout) {
                 final List<Predicate<CardPrinted>> subnots = new ArrayList<Predicate<CardPrinted>>();
 
-                subnots.add(Predicate.brigde(CardRules.Predicates.name(
-                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES));
-                subnots.add(Predicate.brigde(CardRules.Predicates.joinedType(
-                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES));
-                subnots.add(Predicate.brigde(CardRules.Predicates.rules(
-                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES));
+                if (useName) { subnots.add(Predicate.brigde(CardRules.Predicates.name(
+                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
+                if (useType) { subnots.add(Predicate.brigde(CardRules.Predicates.joinedType(
+                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
+                if (useText) { subnots.add(Predicate.brigde(CardRules.Predicates.rules(
+                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
 
                 nots.add(Predicate.or(subnots));
             }

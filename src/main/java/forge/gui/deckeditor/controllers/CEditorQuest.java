@@ -79,6 +79,7 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
                 return new Deck();
             }
         };
+
         this.controller = new DeckController<Deck>(questData0.getMyDecks(), this, newCreator);
     }
 

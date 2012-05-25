@@ -2,6 +2,7 @@ package forge.gui.deckeditor.views;
 
 import java.awt.Insets;
 
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +21,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
+import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
@@ -44,6 +46,10 @@ public enum VFilters implements IVDoc {
         .text("Contains:").fontSize(14).build();
     private final JLabel lblWithout = new FLabel.Builder()
         .text("Without:").fontSize(14).build();
+
+    private final JCheckBox chbName = new FCheckBox("Name");
+    private final JCheckBox chbType = new FCheckBox("Type");
+    private final JCheckBox chbText = new FCheckBox("Text");
 
     // Interval filter components
     private final JComboBox cbxSets = new JComboBox();
@@ -78,7 +84,7 @@ public enum VFilters implements IVDoc {
 
     // Container components
     private final JPanel pnlText = new JPanel(new MigLayout(
-            "insets 0, gap 0, wrap 2, ax center"));
+            "insets 0, gap 0, wrap 3, ax center"));
     private final JPanel pnlIntervals = new JPanel(new MigLayout(
             "insets 0, gap 0, wrap 3, ax center"));
 
@@ -124,11 +130,18 @@ public enum VFilters implements IVDoc {
         txfWithout.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         pnlText.setOpaque(false);
-        pnlText.add(lblText, "w 210px!, span 2 1, h 25px!");
+        pnlText.add(lblText, "w 210px!, h 25px!");
         pnlText.add(lblContains, "w 80px!, h 30px!");
-        pnlText.add(txfContains, "pushx, growx, gap 5px 5px 2px 2px, h 30px!");
+        pnlText.add(txfContains, "pushx, growx, span 2 1, gap 5px 5px 2px 2px, h 30px!");
         pnlText.add(lblWithout, "w 80px!, h 30px!");
-        pnlText.add(txfWithout, "pushx, growx, gap 5px 5px 2px 2px, h 30px!");
+        pnlText.add(txfWithout, "pushx, growx, span 2 1, gap 5px 5px 2px 2px, h 30px!");
+        pnlText.add(chbName, "w 70px!, h 25px!, gap 5px 5px 2px 2px");
+        pnlText.add(chbType, "w 60px!, h 25px!, gap 0 5px 2px 2px");
+        pnlText.add(chbText, "w 60px!, h 25px!, gap 0 5px 2px 2px");
+
+        chbName.setSelected(true);
+        chbType.setSelected(true);
+        chbText.setSelected(true);
 
         cbxPLow.addItem("*");
         cbxTLow.addItem("*");
@@ -300,6 +313,21 @@ public enum VFilters implements IVDoc {
     /** @return {javax.swing.JComboBox} */
     public JComboBox getCbxCMCHigh() {
         return cbxCMCHigh;
+    }
+
+    /** @return {javax.swing.JCheckBox} */
+    public JCheckBox getChbTextName() {
+        return chbName;
+    }
+
+    /** @return {javax.swing.JCheckBox} */
+    public JCheckBox getChbTextType() {
+        return chbType;
+    }
+
+    /** @return {javax.swing.JCheckBox} */
+    public JCheckBox getChbTextText() {
+        return chbText;
     }
     //========== Custom class handling
 
