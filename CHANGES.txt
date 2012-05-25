@@ -258,6 +258,23 @@ Fixes/Features:
 - Fixed odd "unknown" skin icon in quest mode.
 - Updated print icon in sprite.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Further bug fixes, to home and bazaar screens.
+- Fixed pet combo box not reappearing in quest mode.
+- Possible fix for strange behaviors in closing win/lose screen.
+- Merged changes from trunk to AbilityWork: r15523-r15685
+- removed main.properties from res/ directory
+- Tweaked Assault code in ComputerUtilAttack.
+- Cleanup and performance update in ComputerUtilAttack.
+- update plugin
+- Improved notNeededAsBlockers in ComputerUtilAttack.
+- AbilityWork branch: Let code outside of abilities use calculateAmount without crashing.
+- AbilityWork: Added References$ parameter to scripted abilities of 'A' cards where necessary.
+- AbilityWork: Added References$ parameter to scripted abilities of 'B' cards where necessary.
+- Attempt #3 on dev mode toggle fix.
+- AbilityWork: Added References$ parameter to scripted abilities of 'X-Z' cards where necessary.
+- Fixed Brood Sliver
+- update testng
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
