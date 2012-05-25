@@ -364,8 +364,11 @@ public class StaticAbility {
             return originalCost;
         }
 
-        if (mode.equals("CostChange")) {
-            return StaticAbilityCostChange.applyCostChangeAbility(this, sa, originalCost);
+        if (mode.equals("RaiseCost")) {
+            return StaticAbilityCostChange.applyRaiseCostAbility(this, sa, originalCost);
+        }
+        if (mode.equals("ReduceCost")) {
+            return StaticAbilityCostChange.applyReduceCostAbility(this, sa, originalCost);
         }
 
         return originalCost;

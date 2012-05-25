@@ -30,7 +30,7 @@ import forge.game.player.Player;
 public class StaticAbilityCostChange {
 
     /**
-     * Applies CostChange ability.
+     * Applies applyRaiseCostAbility ability.
      * 
      * @param staticAbility
      *            a StaticAbility
@@ -39,7 +39,45 @@ public class StaticAbilityCostChange {
      * @param originalCost
      *            a ManaCost
      */
-    public static ManaCost applyCostChangeAbility(final StaticAbility staticAbility, final SpellAbility sa
+    public static ManaCost applyRaiseCostAbility(final StaticAbility staticAbility, final SpellAbility sa
+            , final ManaCost originalCost) {
+        final HashMap<String, String> params = staticAbility.getMapParams();
+        final Card hostCard = staticAbility.getHostCard();
+        final Player activator = sa.getActivatingPlayer();
+        final Card card = sa.getSourceCard();
+
+        if (params.containsKey("ValidCard")
+                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+            return originalCost;
+        }
+
+        if (params.containsKey("Activator") && ((activator == null)
+                || !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard))) {
+            return originalCost;
+        }
+
+        if (params.containsKey("Type") && params.get("Type").equals("Spell") && !sa.isSpell()) {
+            return originalCost;
+        }
+        if (params.containsKey("Type") && params.get("Type").equals("Ability") && !sa.isAbility()) {
+            return originalCost;
+        }
+
+        //modify the cost here
+        return originalCost;
+    }
+    
+    /**
+     * Applies applyReduceCostAbility ability.
+     * 
+     * @param staticAbility
+     *            a StaticAbility
+     * @param sa
+     *            the SpellAbility
+     * @param originalCost
+     *            a ManaCost
+     */
+    public static ManaCost applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa
             , final ManaCost originalCost) {
         final HashMap<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
