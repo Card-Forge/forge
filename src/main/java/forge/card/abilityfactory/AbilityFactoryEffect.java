@@ -17,6 +17,7 @@
  */
 package forge.card.abilityfactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -376,6 +377,7 @@ public class AbilityFactoryEffect {
         String[] effectReplacementEffects = null;
         String effectRemembered = null;
         String effectImprinted = null;
+        Player ownerEff = null;
 
         if (params.containsKey("Abilities")) {
             effectAbilities = params.get("Abilities").split(",");
@@ -420,7 +422,13 @@ public class AbilityFactoryEffect {
             return;
         }
 
-        final Player controller = sa.getActivatingPlayer();
+        if (params.containsKey("EffectOwner")) {
+            ArrayList<Player> effectOwner;
+            effectOwner = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("EffectOwner"), sa);
+            ownerEff = effectOwner.get(0);
+        }
+
+        final Player controller = params.containsKey("EffectOwner") ? ownerEff : sa.getActivatingPlayer();
         final Card eff = new Card();
         eff.setName(name);
         eff.addType("Effect"); // Or Emblem
@@ -513,6 +521,11 @@ public class AbilityFactoryEffect {
             eff.setChosenColor(card.getChosenColor());
         }
 
+        // Remember created effect
+        if (params.containsKey("RememberEffect")) {
+            AllZoneUtil.getCardState(card).addRemembered(eff);
+        }
+
         // Duration
         final String duration = params.get("Duration");
         if ((duration == null) || !duration.equals("Permanent")) {
@@ -527,6 +540,10 @@ public class AbilityFactoryEffect {
 
             if ((duration == null) || duration.equals("EndOfTurn")) {
                 AllZone.getEndOfTurn().addUntil(endEffect);
+            }
+
+            if (duration.equals("UntilHostLeavesPlay")) {
+                card.addLeavesPlayCommand(endEffect);
             }
         }
 

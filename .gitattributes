@@ -397,6 +397,7 @@ res/cardsfolder/a/arcbound_wanderer.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_worker.txt svneol=native#text/plain
 res/cardsfolder/a/archaeological_dig.txt svneol=native#text/plain
 res/cardsfolder/a/archangel.txt svneol=native#text/plain
+res/cardsfolder/a/archangel_of_strife.txt -text
 res/cardsfolder/a/archangels_light.txt -text
 res/cardsfolder/a/archdemon_of_unx.txt svneol=native#text/plain
 res/cardsfolder/a/architects_of_will.txt svneol=native#text/plain
