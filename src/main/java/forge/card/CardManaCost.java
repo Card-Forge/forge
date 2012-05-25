@@ -137,15 +137,17 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     public List<ManaCostShard> getShards() {
         return this.shards;
     }
-    
+
     public int getShardCount(ManaCostShard which) {
-        if ( which == ManaCostShard.COLORLESS ) 
+        if (which == ManaCostShard.COLORLESS) {
             return genericCost;
+        }
 
         int res = 0;
-        for(ManaCostShard shard : shards)
-        {
-            if ( shard == which ) res++;
+        for (ManaCostShard shard : shards) {
+            if (shard == which) {
+                res++;
+            }
         }
         return res;
     }
