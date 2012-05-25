@@ -3,7 +3,11 @@ package forge.gui.home.utilities;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
@@ -15,9 +19,13 @@ import forge.gui.toolbox.FLabel;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
-public enum VSubmenuExit implements IVSubmenu {
+public enum VSubmenuExit implements IVSubmenu, IVDoc {
     /** */
     SINGLETON_INSTANCE;
+
+    // Fields used with interface IVDoc
+    private DragCell parentCell;
+    private final DragTab tab = new DragTab("Exit");
 
     /** */
     private final JPanel pnl = new JPanel();
@@ -64,7 +72,7 @@ public enum VSubmenuExit implements IVSubmenu {
      */
     @Override
     public EDocID getItemEnum() {
-        return null;
+        return EDocID.HOME_EXIT;
     }
 
     /* (non-Javadoc)
@@ -73,5 +81,45 @@ public enum VSubmenuExit implements IVSubmenu {
     @Override
     public ICSubmenu getSubmenuControl() {
         return CSubmenuExit.SINGLETON_INSTANCE;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getDocumentID()
+     */
+    @Override
+    public EDocID getDocumentID() {
+        return EDocID.HOME_EXIT;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getTabLabel()
+     */
+    @Override
+    public DragTab getTabLabel() {
+        return tab;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getLayoutControl()
+     */
+    @Override
+    public ICDoc getLayoutControl() {
+        return CSubmenuExit.SINGLETON_INSTANCE;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#setParentCell(forge.gui.framework.DragCell)
+     */
+    @Override
+    public void setParentCell(DragCell cell0) {
+        parentCell = cell0;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVDoc#getParentCell()
+     */
+    @Override
+    public DragCell getParentCell() {
+        return parentCell;
     }
 }

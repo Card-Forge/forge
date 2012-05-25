@@ -214,11 +214,10 @@ public enum VMainMenu implements IVDoc {
             public void execute() {
                 if (lblPreviousSelected != null) { lblPreviousSelected.setSelected(false); }
 
-                item.getItemEnum().getDoc().getParentCell().setSelected(item.getItemEnum().getDoc());
-                lblPreviousSelected = lbl;
+                if (!item.getItemEnum().equals(EDocID.HOME_EXIT)) {
+                    item.getItemEnum().getDoc().getParentCell().setSelected(item.getItemEnum().getDoc());
+                    lblPreviousSelected = lbl;
 
-                // Save for next time Forge is opened (unless it's exit ;) )
-                if (!item.getItemEnum().equals(EDocID.HOME_UTILITIES) && !item.getItemEnum().equals(EDocID.HOME_UTILITIES)) {
                     prefs.setPref(FPref.SUBMENU_CURRENTMENU, item.getItemEnum().toString());
                     Singletons.getModel().getPreferences().save();
                 }

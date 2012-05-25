@@ -1,6 +1,7 @@
 package forge.gui.home.utilities;
 
 import forge.Command;
+import forge.gui.framework.ICDoc;
 import forge.gui.home.ICSubmenu;
 
 /** 
@@ -9,7 +10,7 @@ import forge.gui.home.ICSubmenu;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CSubmenuExit implements ICSubmenu {
+public enum CSubmenuExit implements ICSubmenu, ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -34,5 +35,13 @@ public enum CSubmenuExit implements ICSubmenu {
      */
     @Override
     public void initialize() {
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
+     */
+    @Override
+    public Command getCommandOnSelect() {
+        return getMenuCommand();
     }
 }
