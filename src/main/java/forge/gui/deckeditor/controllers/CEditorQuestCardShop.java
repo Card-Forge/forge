@@ -31,7 +31,6 @@ import forge.AllZone;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.gui.CardListViewer;
-import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.SColumnUtil;
@@ -357,12 +356,10 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     @Override
     public boolean exit() {
-        final boolean okToExit = SEditorIO.confirmSaveChanges();
-        if (okToExit) {
-            SSubmenuQuestUtil.updateStatsAndPet();
-            AllZone.getQuest().save();
-            CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
-        }
-        return okToExit;
+        SSubmenuQuestUtil.updateStatsAndPet();
+        AllZone.getQuest().save();
+        CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
+
+        return true;
     }
 }
