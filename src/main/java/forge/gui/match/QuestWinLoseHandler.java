@@ -398,7 +398,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             }
 
             // Early turn bonus
-            final int winTurn = game.getTurnGameEnded();
+            final int winTurn = game.getLastTurnNumber();
             final int turnCredits = this.getCreditsRewardForWinByTurn(winTurn);
 
             if (winTurn == 0) {

@@ -115,7 +115,7 @@ public class GameNew {
         forge.card.trigger.Trigger.resetIDs();
         AllZone.getTriggerHandler().clearTriggerSettings();
         AllZone.getTriggerHandler().clearDelayedTrigger();
-        CMessage.SINGLETON_INSTANCE.updateGameCount();
+        CMessage.SINGLETON_INSTANCE.updateGameInfo();
 
         // friendliness
         Card.resetUniqueNumber();

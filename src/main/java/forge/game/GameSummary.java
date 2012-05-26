@@ -134,7 +134,7 @@ public final class GameSummary {
      * 
      * @return the turn game ended
      */
-    public int getTurnGameEnded() {
+    public int getLastTurnNumber() {
         return this.lastTurnNumber;
     }
 

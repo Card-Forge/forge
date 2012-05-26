@@ -29,6 +29,7 @@ import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
+import forge.gui.match.controllers.CMessage;
 import forge.gui.match.nonsingleton.VField.PhaseLabel;
 
 /**
@@ -82,6 +83,7 @@ public class PhaseUtil {
 
         Singletons.getModel().getGameState().getPhaseHandler().turnReset();
         Singletons.getModel().getGameSummary().notifyNextTurn();
+        CMessage.SINGLETON_INSTANCE.updateGameInfo();
 
         AllZone.getCombat().reset();
         AllZone.getCombat().setAttackingPlayer(turn);

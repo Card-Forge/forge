@@ -83,12 +83,13 @@ public enum CMessage implements ICDoc {
         VMessage.SINGLETON_INSTANCE.getTarMessage().setText(s0);
     }
 
-    /** Updates count label in input area. */
-    public void updateGameCount() {
-        VMessage.SINGLETON_INSTANCE.getLblGames().setText("<html>Game #"
+    /** Updates counter label in message area. */
+    public void updateGameInfo() {
+        VMessage.SINGLETON_INSTANCE.getLblGames().setText(
+                Constant.Runtime.getGameType().toString() + ": Game #"
                 + (Singletons.getModel().getMatchState().getGamesPlayedCount() + 1)
                 + " of " + Singletons.getModel().getMatchState().getGamesPerMatch()
-                + "<br>" + Constant.Runtime.getGameType().toString() + " mode</html>");
+                + ", turn " + Singletons.getModel().getGameSummary().getLastTurnNumber());
     }
 
     /** Flashes animation on input panel if play is currently waiting on input. */
