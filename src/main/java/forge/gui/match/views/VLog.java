@@ -17,12 +17,16 @@
  */
 package forge.gui.match.views;
 
+import java.util.List;
+
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.GameLog;
+import forge.GameLog.LogEntry;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -43,6 +47,19 @@ public enum VLog implements IVDoc {
     // Fields used with interface IVDoc
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Log");
+
+    // Other fields
+    private final JPanel pnl = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
+    private final JScrollPane scroller = new JScrollPane(pnl);
+
+    //========== Constructor
+    private VLog() {
+        scroller.setOpaque(false);
+        scroller.setBorder(null);
+        scroller.getViewport().setOpaque(false);
+
+        pnl.setOpaque(false);
+    }
 
     //========== Overridden methods
     /* (non-Javadoc)
@@ -99,29 +116,30 @@ public enum VLog implements IVDoc {
         // No need to update this unless it's showing
         if (!parentCell.getSelected().equals(this)) { return; }
 
-        final GameLog gl = AllZone.getGameLog();
-
-        parentCell.getBody().setLayout(new MigLayout("insets 1%, gap 1%, wrap"));
-        parentCell.getBody().removeAll();
-
-        // by default, grab everything logging level 3 or less
         // TODO - some option to make this configurable is probably desirable
-        // TODO - add these components to resize adapter in constructor
-        JTextArea tar = new JTextArea(gl.getLogText(3));
-        tar.setOpaque(false);
-        tar.setBorder(null);
-        tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        // By default, grab everything log level 3 or less.
+        final List<LogEntry> data = AllZone.getGameLog().getLogEntries(3);
+        final int size = data.size();
 
-        tar.setFocusable(false);
-        tar.setEditable(false);
-        tar.setLineWrap(true);
-        tar.setWrapStyleWord(true);
+        pnl.removeAll();
 
-        JScrollPane jsp = new JScrollPane(tar);
-        jsp.setOpaque(false);
-        jsp.setBorder(null);
-        jsp.getViewport().setOpaque(false);
+        for (int i = 0; i < size; i++) {
+            JTextArea tar = new JTextArea(data.get(i).getMessage());
 
-        parentCell.getBody().add(jsp, "w 98%!");
+            if (i % 2 == 1) { tar.setOpaque(false); }
+            else { tar.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA)); }
+            tar.setBorder(new EmptyBorder(2, 2, 2, 2));
+            tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+
+            tar.setFocusable(false);
+            tar.setEditable(false);
+            tar.setLineWrap(true);
+            tar.setWrapStyleWord(true);
+
+            pnl.add(tar, "w 98%!, gap 1% 0 0 0");
+        }
+
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        parentCell.getBody().add(scroller, "w 98%!, pushy, growy, gap 1% 0 5px 5px");
     }
 }

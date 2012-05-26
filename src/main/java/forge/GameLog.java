@@ -19,6 +19,7 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.util.MyObservable;
 
@@ -108,7 +109,35 @@ public class GameLog extends MyObservable {
         return log.get(index);
     }
 
-    private class LogEntry {
+    /**
+     * Gets the log entries as a list.
+     * @return List<LogEntry>
+     */
+    public List<LogEntry> getLogEntries() {
+        return log;
+    }
+    
+    /**
+     * Gets the log entries below a certain level as a list.
+     *
+     * @param logLevel the log level
+     * @return the log text
+     */
+    public List<LogEntry> getLogEntries(final int logLevel) {
+        final List<LogEntry> entries = new ArrayList<LogEntry>();
+
+        for (int i = log.size() - 1; i >= 0; i--) {
+            LogEntry le = log.get(i);
+            if (le.getLevel() > logLevel) {
+                continue;
+            }
+
+            entries.add(le);
+        }
+        return entries;
+    }
+
+    public class LogEntry {
         private String type;
         private String message;
         private int level;
