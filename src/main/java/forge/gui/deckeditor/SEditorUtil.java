@@ -129,7 +129,7 @@ public final class SEditorUtil  {
     } // getStats()
 
     /**
-     * Set all components visible that may have been hidden
+     * Resets components that may have been changed
      * by various configurations of the deck editor.
      */
     public static void resetUI() {
@@ -145,5 +145,8 @@ public final class SEditorUtil  {
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
         VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
+
+        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Card Catalog");
+        VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Current Deck");
     }
 }

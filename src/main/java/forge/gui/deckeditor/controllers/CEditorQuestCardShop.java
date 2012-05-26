@@ -127,8 +127,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
 
         SEditorUtil.resetUI();
-        VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
-        VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
+
+        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Cards for sale");
+        VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Your Cards");
     }
 
     // fills number of decks using each card
