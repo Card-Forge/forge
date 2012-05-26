@@ -72,7 +72,6 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
      */
     public final void showGui(final IBoosterDraft inBoosterDraft) {
         this.boosterDraft = inBoosterDraft;
-        this.init();
     }
 
     /**
