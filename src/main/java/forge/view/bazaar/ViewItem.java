@@ -89,7 +89,7 @@ public class ViewItem extends FPanel {
                 ViewItem.this.btnPurchase.setEnabled(!(qA.getCredits() < bazaarItem.getBuyingPrice(qA)));
 
                 ViewItem.this.revalidate();
-                ViewItem.this.repaint();
+                ViewItem.this.repaintSelf();
             }
         });
     }

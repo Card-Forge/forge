@@ -39,7 +39,7 @@ public final class DragTab extends JLabel implements ILocalRepaint {
     /** @param isSelected0 &emsp; boolean */
     public void setSelected(final boolean isSelected0) {
         selected = isSelected0;
-        repaintThis();
+        repaintSelf();
     }
 
     /** Decreases display priority of this tab in relation to its siblings in an overflow case. */
@@ -67,7 +67,7 @@ public final class DragTab extends JLabel implements ILocalRepaint {
     }
 
     @Override
-    public void repaintThis() {
+    public void repaintSelf() {
         final Dimension d = DragTab.this.getSize();
         repaint(0, 0, d.width, d.height);
     }

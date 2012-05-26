@@ -177,12 +177,12 @@ public enum VSubmenuAvatars implements IVSubmenu, IVDoc {
 
                 if (lblAvatarAI.isSelected()) {
                     lblAvatarAI.setIcon(new ImageIcon(FSkin.getAvatars().get(index0)));
-                    lblAvatarAI.repaintOnlyThisLabel();
+                    lblAvatarAI.repaintSelf();
                     indices[0] = String.valueOf(index0);
                 }
                 else {
                     lblAvatarHuman.setIcon(new ImageIcon(FSkin.getAvatars().get(index0)));
-                    lblAvatarHuman.repaintOnlyThisLabel();
+                    lblAvatarHuman.repaintSelf();
                     indices[1] = String.valueOf(index0);
                 }
 

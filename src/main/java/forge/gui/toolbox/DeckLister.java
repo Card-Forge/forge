@@ -179,7 +179,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
 
     /** Prevent panel from repainting the whole screen. */
     @Override
-    public void repaintThis() {
+    public void repaintSelf() {
         final Dimension d = DeckLister.this.getSize();
         this.repaint(0, 0, d.width, d.height);
     }
@@ -481,7 +481,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         }
 
         this.remove(r0);
-        this.repaintThis();
+        this.repaintSelf();
         this.revalidate();
 
         if (this.cmdDelete != null) {

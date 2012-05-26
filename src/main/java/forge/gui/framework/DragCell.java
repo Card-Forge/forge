@@ -127,7 +127,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     }
 
     @Override
-    public void repaintThis() {
+    public void repaintSelf() {
         final Dimension d = DragCell.this.getSize();
         repaint(0, 0, d.width, d.height);
     }
@@ -455,12 +455,12 @@ public final class DragCell extends JPanel implements ILocalRepaint {
             this.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    hovered = true; repaintThis();
+                    hovered = true; repaintSelf();
                 }
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
-                    hovered = false; repaintThis();
+                    hovered = false; repaintSelf();
                 }
             });
         }

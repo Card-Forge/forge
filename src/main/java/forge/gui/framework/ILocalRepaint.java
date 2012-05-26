@@ -9,5 +9,5 @@ package forge.gui.framework;
  */
 public interface ILocalRepaint {
     /** */
-    void repaintThis();
+    void repaintSelf();
 }

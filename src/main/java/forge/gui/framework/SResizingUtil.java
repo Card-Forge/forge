@@ -193,13 +193,13 @@ public final class SResizingUtil {
         for (final DragCell t : TOP_PANELS) {
             t.setBounds(t.getX(), t.getY(), t.getW(), t.getH() + dY);
             t.revalidate();
-            t.repaintThis();
+            t.repaintSelf();
         }
 
         for (final DragCell t : BOTTOM_PANELS) {
             t.setBounds(t.getX(), t.getY() + dY, t.getW(), t.getH() - dY);
             t.revalidate();
-            t.repaintThis();
+            t.repaintSelf();
         }
     }
 

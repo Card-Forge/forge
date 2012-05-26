@@ -94,13 +94,13 @@ public final class SOverflowUtil {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
                     setBackground(Color.ORANGE);
-                    repaintThis();
+                    repaintSelf();
                 }
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
                     setBackground(Color.LIGHT_GRAY);
-                    repaintThis();
+                    repaintSelf();
                 }
 
                 @Override
@@ -112,7 +112,7 @@ public final class SOverflowUtil {
             });
         }
 
-        public void repaintThis() {
+        public void repaintSelf() {
             final Dimension d = OverflowLabel.this.getSize();
             repaint(0, 0, d.width, d.height);
         }

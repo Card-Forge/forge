@@ -22,6 +22,7 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import forge.Command;
+import forge.gui.framework.ILocalRepaint;
 
 /** 
  * Uses the Builder pattern to facilitate/encourage inline styling.
@@ -39,7 +40,7 @@ import forge.Command;
  * - Can execute command when clicked
  */
 @SuppressWarnings("serial")
-public class FLabel extends JLabel {
+public class FLabel extends JLabel implements ILocalRepaint {
     /** 
      * Uses the Builder pattern to facilitate/encourage inline styling.
      * Credit to Effective Java 2 (Joshua Bloch).
@@ -222,12 +223,12 @@ public class FLabel extends JLabel {
     private final MouseAdapter madEvents = new MouseAdapter() {
         @Override
         public void mouseEntered(final MouseEvent e) {
-            hovered = true; repaintOnlyThisLabel();
+            hovered = true; repaintSelf();
         }
 
         @Override
         public void mouseExited(final MouseEvent e) {
-            hovered = false; repaintOnlyThisLabel();
+            hovered = false; repaintSelf();
         }
         @Override
         public void mouseClicked(final MouseEvent e) {
@@ -251,7 +252,7 @@ public class FLabel extends JLabel {
     // Must be public.
     public void setSelected(final boolean b0) {
         this.selected = b0;
-        repaintOnlyThisLabel();
+        repaintSelf();
     }
 
     /** Sets alpha if icon is in background.
@@ -343,7 +344,7 @@ public class FLabel extends JLabel {
     }
 
     /** Major performance kicker - won't repaint whole screen! */
-    public void repaintOnlyThisLabel() {
+    public void repaintSelf() {
         final Dimension d = FLabel.this.getSize();
         repaint(0, 0, d.width, d.height);
     }

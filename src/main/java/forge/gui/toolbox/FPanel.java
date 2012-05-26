@@ -18,6 +18,7 @@
 package forge.gui.toolbox;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -34,6 +35,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import forge.Command;
+import forge.gui.framework.ILocalRepaint;
 
 /** 
  * Core panel used in UI.
@@ -47,7 +49,7 @@ import forge.Command;
  * - Border toggle<br>
  */
 @SuppressWarnings("serial")
-public class FPanel extends JPanel {
+public class FPanel extends JPanel implements ILocalRepaint {
     //========== Variable initialization
     // Defaults for adjustable values
     private boolean selectable          = false;
@@ -89,9 +91,9 @@ public class FPanel extends JPanel {
     // Mouse event handler
     private final MouseAdapter madEvents = new MouseAdapter() {
         @Override
-        public void mouseEntered(final MouseEvent evt) { hovered = true; repaint(); }
+        public void mouseEntered(final MouseEvent evt) { hovered = true; repaintSelf(); }
         @Override
-        public void mouseExited(final MouseEvent evt) { hovered = false; repaint(); }
+        public void mouseExited(final MouseEvent evt) { hovered = false; repaintSelf(); }
 
         @Override
         public void mouseClicked(final MouseEvent evt) {
@@ -138,7 +140,7 @@ public class FPanel extends JPanel {
         selected = bool0;
         if (bool0) { this.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
         else    { this.setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
-        repaint();
+        repaintSelf();
     }
 
     /** @param img0 &emsp; {@link java.awt.Image} */
@@ -206,6 +208,12 @@ public class FPanel extends JPanel {
     /** @param b0 &emsp; boolean */
     public void setHovered(final boolean b0) {
         this.hovered = b0;
+    }
+
+    @Override
+    public void repaintSelf() {
+        final Dimension d = FPanel.this.getSize();
+        repaint(0, 0, d.width, d.height);
     }
 
     /*
