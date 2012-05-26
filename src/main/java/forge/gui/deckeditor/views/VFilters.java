@@ -168,7 +168,7 @@ public enum VFilters implements IVDoc {
         cbxTHigh.setSelectedItem("10+");
         cbxCMCHigh.setSelectedItem("10+");
 
-        constraints = "w 60px!, h 25px!, gap 0 0 0 0";
+        constraints = "w 80px!, h 25px!, gap 0 0 0 0";
         pnlIntervals.add(cbxPLow, constraints);
         pnlIntervals.add(lblP, "w 100px!, h 25px!");
         pnlIntervals.add(cbxPHigh, constraints);
