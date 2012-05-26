@@ -18,11 +18,13 @@
 package forge.gui.deckeditor.tables;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import javax.swing.JTable;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import forge.Singletons;
@@ -179,14 +181,14 @@ public final class SColumnUtil {
                 SColumnUtil.FN_AI_STATUS_COMPARE, SColumnUtil.FN_AI_STATUS_GET);
 
         SColumnUtil.getColumn(ColumnName.CAT_COST).setCellRenderer(new ManaCostRenderer());
-        //SColumnUtil.getColumn(ColumnName.CAT_POWER).setCellRenderer(new IntegerRenderer());
-        //SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS).setCellRenderer(new IntegerRenderer());
-        //SColumnUtil.getColumn(ColumnName.CAT_CMC).setCellRenderer(new IntegerRenderer());
+        SColumnUtil.getColumn(ColumnName.CAT_POWER).setCellRenderer(new IntegerRenderer());
+        SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS).setCellRenderer(new IntegerRenderer());
+        SColumnUtil.getColumn(ColumnName.CAT_CMC).setCellRenderer(new IntegerRenderer());
 
         SColumnUtil.getColumn(ColumnName.DECK_COST).setCellRenderer(new ManaCostRenderer());
-        //SColumnUtil.getColumn(ColumnName.DECK_POWER).setCellRenderer(new IntegerRenderer());
-        //SColumnUtil.getColumn(ColumnName.DECK_TOUGHNESS).setCellRenderer(new IntegerRenderer());
-        //SColumnUtil.getColumn(ColumnName.DECK_CMC).setCellRenderer(new IntegerRenderer());
+        SColumnUtil.getColumn(ColumnName.DECK_POWER).setCellRenderer(new IntegerRenderer());
+        SColumnUtil.getColumn(ColumnName.DECK_TOUGHNESS).setCellRenderer(new IntegerRenderer());
+        SColumnUtil.getColumn(ColumnName.DECK_CMC).setCellRenderer(new IntegerRenderer());
     }
 
     /**
@@ -216,8 +218,19 @@ public final class SColumnUtil {
         else {
             col0.setShowing(true);
             colmodel.addColumn(col0);
+
             if (col0.getModelIndex() < colmodel.getColumnCount()) {
                 colmodel.moveColumn(colmodel.getColumnIndex(col0.getIdentifier()), col0.getModelIndex());
+                Enumeration<TableColumn> cols = colmodel.getColumns();
+                int index = 0;
+                // If you're getting renderer "can't cast T to U" errors, that's
+                // a sign that the model index needs updating.
+                while (cols.hasMoreElements()) {
+                   cols.nextElement().setModelIndex(index++);
+                }
+            }
+            else {
+                col0.setModelIndex(colmodel.getColumnCount());
             }
         }
     }

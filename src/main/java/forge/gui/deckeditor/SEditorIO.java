@@ -40,7 +40,6 @@ public class SEditorIO {
     private enum ColumnProperty { /** */
         enumval, /** */
         identifier, /** */
-        index, /** */
         show, /** */
         sortpriority, /** */
         sortstate, /** */
@@ -90,24 +89,6 @@ public class SEditorIO {
      * @return TableColumnInfo<InventoryItem>
      */
     public static TableColumnInfo<InventoryItem> getColumn(final ColumnName name0) {
-       /* final ColumnName[] vals = ColumnName.values();
-        boolean exists = false;
-        for (int i = 0; i < vals.length; i++) {
-            if (vals.equals(name0)) { exists = true; break; }
-        }
-
-        // Columns that are not in the enum must be created.
-        if (!exists) {
-            final TableColumnInfo<InventoryItem> col;
-            col = new TableColumnInfo<InventoryItem>();
-            col.setIdentifier(name0.toString());
-            col.setShowing(true);
-            col.setSortPriority(0);
-            col.setSortState(SortState.NONE);
-            col.setPreferredWidth(100);
-            COLS.put(name0, col);
-        }*/
-
         return COLS.get(name0);
     }
 
@@ -234,8 +215,6 @@ public class SEditorIO {
             writer.add(EVENT_FACTORY.createAttribute(
                     ColumnProperty.identifier.toString(), COLS.get(c).getIdentifier().toString()));
             writer.add(EVENT_FACTORY.createAttribute(
-                    ColumnProperty.index.toString(), String.valueOf(index)));
-            writer.add(EVENT_FACTORY.createAttribute(
                     ColumnProperty.show.toString(), String.valueOf(COLS.get(c).isShowing())));
             writer.add(EVENT_FACTORY.createAttribute(
                     ColumnProperty.sortpriority.toString(), String.valueOf(COLS.get(c).getSortPriority())));
@@ -332,9 +311,6 @@ public class SEditorIO {
                         }
                         else if (attribute.getName().toString().equals(ColumnProperty.sortstate.toString())) {
                             tempcol.setSortState(SortState.valueOf(attribute.getValue().toString()));
-                        }
-                        else if (attribute.getName().toString().equals(ColumnProperty.index.toString())) {
-                            tempcol.setModelIndex(Integer.valueOf(attribute.getValue()));
                         }
                     }
                 }

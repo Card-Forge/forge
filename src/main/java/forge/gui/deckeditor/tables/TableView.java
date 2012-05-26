@@ -18,14 +18,12 @@
 package forge.gui.deckeditor.tables;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.TableColumn;
 
 import forge.card.CardRules;
 import forge.gui.deckeditor.SEditorUtil;
@@ -99,38 +97,9 @@ public final class TableView<T extends InventoryItem> {
     public void setup(final ITableContainer view0, final List<TableColumnInfo<InventoryItem>> cols0) {
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
 
-        // Add columns whose indices are inside the view indices, as long as there's not one there already.
-        final TableColumn[] knownCols = new TableColumn[cols0.size()];
-        final List<TableColumn> unknownCols = new ArrayList<TableColumn>();
-
-        for (final TableColumn c : cols0) {
-            if (!((TableColumnInfo<InventoryItem>) c).isShowing()) { continue; }
-            if (c.getModelIndex() < knownCols.length && knownCols[c.getModelIndex()] == null) {
-                knownCols[c.getModelIndex()] = c;
-            }
-            else {
-                unknownCols.add(c);
-            }
-        }
-
-        // Columns outside the bounds of the view indices must be
-        // resolved by inserting into empty slots.
-        for (final TableColumn c : unknownCols) {
-            for (int i = 0; i < knownCols.length; i++) {
-                if (knownCols[i] == null) {
-                    knownCols[i] = c;
-                    break;
-                }
-            }
-        }
-
-        // Put columns into model in preferred order (much easier than moving dynamically).
-        for (final TableColumn c : knownCols) {
-            if (c == null) { continue; }
-            c.setMinWidth(15);
-            c.setPreferredWidth(c.getPreferredWidth());
-            c.setMaxWidth(350);
-            colmodel.addColumn(c);
+        for (TableColumnInfo<InventoryItem> item : cols0) {
+            item.setModelIndex(colmodel.getColumnCount());
+            if (item.isShowing()) { colmodel.addColumn(item); }
         }
 
         this.model = new TableModel<T>(this.table, this.genericType);
