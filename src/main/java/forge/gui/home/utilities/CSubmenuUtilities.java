@@ -29,16 +29,10 @@ public enum CSubmenuUtilities implements ICSubmenu, ICDoc {
         public void execute() { new GuiDownloadSetPicturesLQ(null); } };
     private final Command cmdQuestImages = new Command() { @Override
         public void execute() { new GuiDownloadQuestImages(null); } };
+    private final Command cmdDownloadPrices = new Command() { @Override
+        public void execute() { new GuiDownloadPrices(null); } };
     private final Command cmdHowToPlay = new Command() { @Override
         public void execute() { VSubmenuUtilities.SINGLETON_INSTANCE.showHowToPlay(); } };
-
-    private final Command cmdDownloadPrices = new Command() {
-        @Override
-        public void execute() {
-            final GuiDownloadPrices gdp = new GuiDownloadPrices();
-            gdp.setVisible(true);
-        }
-    };
 
     private final Command cmdImportPictures = new Command() {
         @Override
