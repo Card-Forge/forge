@@ -275,6 +275,31 @@ Fixes/Features:
 - Fixed Brood Sliver
 - update testng
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- AbilityWork: Added References$ parameter to scripted abilities of 'W' cards where necessary.
+- Added to AbilityFactoryEffect: EffectOwner, Duration$UntilHostLeavesPlay, and RememberEffect.
+- Added exception to Card.java so that Effect cards can be counted when remembered
+- Fixed Magebane Armor.
+- CheckStyle.
+- AbilityWork: Added References$ parameter to scripted abilities of 'V' cards where necessary.
+- Split CostChange static ability into RaiseCost and ReduceCost.
+- AbilityWork: Added References$ parameter to scripted abilities of 'C' cards where necessary.
+- Updated 3 decks.
+- AbilityWork: Added References$ parameter to scripted abilities of 'D' cards where necessary.
+- AbilityWork: Added References$ parameter to scripted abilities of 'E' cards where necessary.
+- Fixed "Exit Forge" button in main menu.
+- Added name, type, text filters to text-based search in editor.
+- Fixed card shop close crash.
+- Stack tab is now shown each time the stack updates.
+- Converted card price download dialog into standard GuiDownloader type, which at the same time prevents the UI freeze after prices are downloaded.
+- Added turn counter to message info.
+- Game log should now be easier to read.
+- Updated tab text in quest card shop.
+- Small typo fix (Solar Tide)
+- Fixed "Decks" column in Card Shop. Added "Decks" column to Quest deck editor.
+- AbilityWork: Added References$ parameter to scripted abilities of 'F' cards where necessary.
+- Indexing fixes in editor. Issues related to indexing should be solved now.
+- Fixed drafting mode bug.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -345,6 +370,7 @@ Balshan Beguiler
 Bifurcate
 Blizzard Specter
 Blood Oath
+Archangel of Strife
 
 
 end
