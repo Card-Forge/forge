@@ -16,6 +16,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
+import forge.item.ItemPredicate;
 import forge.util.closures.Predicate;
 
 /** 
@@ -170,7 +171,14 @@ public enum CFilters implements ICDoc {
         lstFilters.add(SFilterUtil.buildTextFilter());
         lstFilters.add(SFilterUtil.buildIntervalFilter());
 
+        // Until this is filterable, always show packs and decks in the card shop.
+        Predicate<InventoryItem> itemFilter = Predicate.instanceOf(
+                Predicate.and(lstFilters), CardPrinted.class);
+
+        itemFilter = Predicate.or(itemFilter, ItemPredicate.Presets.IS_PACK);
+        itemFilter = Predicate.or(itemFilter, ItemPredicate.Presets.IS_DECK);
+
         // Apply to table
-        ed.getTableCatalog().setFilter((Predicate<TItem>) Predicate.and(lstFilters));
+        ed.getTableCatalog().setFilter((Predicate<TItem>) itemFilter);
     }
 }
