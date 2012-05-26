@@ -106,10 +106,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
                 this.fnPriceCompare, this.fnPriceGet);
 
-        columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_DECKS));
-        columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
-                this.fnDeckCompare, this.fnDeckGet);
-
         columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_NEW));
         columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
                 this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
@@ -121,6 +117,10 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_NEW));
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
                 this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
+
+        columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_DECKS));
+        columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
+                this.fnDeckCompare, this.fnDeckGet);
 
         // Setup with current column set
         this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);

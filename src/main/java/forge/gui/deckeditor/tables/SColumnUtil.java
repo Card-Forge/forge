@@ -69,7 +69,6 @@ public final class SColumnUtil {
         CAT_AI, /** */
         CAT_NEW, /** */
         CAT_PURCHASE_PRICE, /** */
-        CAT_DECKS, /** */
         DECK_QUANTITY, /** */
         DECK_NAME, /** */
         DECK_COST, /** */
@@ -82,7 +81,8 @@ public final class SColumnUtil {
         DECK_SET, /** */
         DECK_AI, /** */
         DECK_NEW, /** */
-        DECK_SALE_PRICE;
+        DECK_SALE_PRICE, /** */
+        DECK_DECKS;
     }
 
     /** Possible states of data sorting in a column: none, ascending, or descending. */
@@ -179,14 +179,14 @@ public final class SColumnUtil {
                 SColumnUtil.FN_AI_STATUS_COMPARE, SColumnUtil.FN_AI_STATUS_GET);
 
         SColumnUtil.getColumn(ColumnName.CAT_COST).setCellRenderer(new ManaCostRenderer());
-        SColumnUtil.getColumn(ColumnName.CAT_POWER).setCellRenderer(new IntegerRenderer());
-        SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS).setCellRenderer(new IntegerRenderer());
-        SColumnUtil.getColumn(ColumnName.CAT_CMC).setCellRenderer(new IntegerRenderer());
+        //SColumnUtil.getColumn(ColumnName.CAT_POWER).setCellRenderer(new IntegerRenderer());
+        //SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS).setCellRenderer(new IntegerRenderer());
+        //SColumnUtil.getColumn(ColumnName.CAT_CMC).setCellRenderer(new IntegerRenderer());
 
         SColumnUtil.getColumn(ColumnName.DECK_COST).setCellRenderer(new ManaCostRenderer());
-        SColumnUtil.getColumn(ColumnName.DECK_POWER).setCellRenderer(new IntegerRenderer());
-        SColumnUtil.getColumn(ColumnName.DECK_TOUGHNESS).setCellRenderer(new IntegerRenderer());
-        SColumnUtil.getColumn(ColumnName.DECK_CMC).setCellRenderer(new IntegerRenderer());
+        //SColumnUtil.getColumn(ColumnName.DECK_POWER).setCellRenderer(new IntegerRenderer());
+        //SColumnUtil.getColumn(ColumnName.DECK_TOUGHNESS).setCellRenderer(new IntegerRenderer());
+        //SColumnUtil.getColumn(ColumnName.DECK_CMC).setCellRenderer(new IntegerRenderer());
     }
 
     /**

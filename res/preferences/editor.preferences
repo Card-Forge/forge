@@ -2,31 +2,31 @@
 <preferences type="editor">
 	<pref name="stats_catalog" value="true"></pref>
 	<pref name="stats_deck" value="true"></pref>
-	<col enumval="CAT_QUANTITY" identifier="Quantity" index="0" show="true" sortpriority="0" sortstate="NONE" width="75"></col>
-	<col enumval="CAT_NAME" identifier="Name" index="0" show="true" sortpriority="2" sortstate="ASC" width="79"></col>
-	<col enumval="CAT_COST" identifier="Cost" index="4" show="true" sortpriority="0" sortstate="NONE" width="71"></col>
-	<col enumval="CAT_COLOR" identifier="Color" index="1" show="true" sortpriority="0" sortstate="NONE" width="81"></col>
-	<col enumval="CAT_TYPE" identifier="Type" index="2" show="true" sortpriority="0" sortstate="ASC" width="88"></col>
-	<col enumval="CAT_POWER" identifier="Power" index="3" show="true" sortpriority="0" sortstate="NONE" width="58"></col>
-	<col enumval="CAT_TOUGHNESS" identifier="Toughness" index="5" show="true" sortpriority="1" sortstate="ASC" width="59"></col>
-	<col enumval="CAT_CMC" identifier="CMC" index="6" show="true" sortpriority="0" sortstate="NONE" width="58"></col>
+	<col enumval="CAT_QUANTITY" identifier="Quantity" index="0" show="true" sortpriority="1" sortstate="ASC" width="49"></col>
+	<col enumval="CAT_NAME" identifier="Name" index="7" show="true" sortpriority="3" sortstate="ASC" width="52"></col>
+	<col enumval="CAT_COST" identifier="Cost" index="4" show="true" sortpriority="0" sortstate="NONE" width="48"></col>
+	<col enumval="CAT_COLOR" identifier="Color" index="1" show="true" sortpriority="0" sortstate="NONE" width="54"></col>
+	<col enumval="CAT_TYPE" identifier="Type" index="2" show="true" sortpriority="0" sortstate="ASC" width="57"></col>
+	<col enumval="CAT_POWER" identifier="Power" index="3" show="true" sortpriority="0" sortstate="NONE" width="40"></col>
+	<col enumval="CAT_TOUGHNESS" identifier="Toughness" index="5" show="true" sortpriority="2" sortstate="ASC" width="40"></col>
+	<col enumval="CAT_CMC" identifier="CMC" index="6" show="true" sortpriority="0" sortstate="NONE" width="40"></col>
 	<col enumval="CAT_RARITY" identifier="Rarity" index="7" show="false" sortpriority="0" sortstate="ASC" width="75"></col>
 	<col enumval="CAT_SET" identifier="Set" index="9" show="false" sortpriority="0" sortstate="NONE" width="75"></col>
 	<col enumval="CAT_AI" identifier="AI" index="10" show="false" sortpriority="0" sortstate="NONE" width="75"></col>
-	<col enumval="CAT_NEW" identifier="New" index="8" show="true" sortpriority="0" sortstate="NONE" width="75"></col>
-	<col enumval="CAT_PURCHASE_PRICE" identifier="Purchase Price" index="10" show="true" sortpriority="0" sortstate="NONE" width="75"></col>
-	<col enumval="CAT_DECKS" identifier="Decks" index="9" show="true" sortpriority="0" sortstate="NONE" width="75"></col>
-	<col enumval="DECK_QUANTITY" identifier="Quantity" index="0" show="true" sortpriority="0" sortstate="NONE" width="47"></col>
-	<col enumval="DECK_NAME" identifier="Name" index="1" show="true" sortpriority="1" sortstate="ASC" width="107"></col>
-	<col enumval="DECK_COST" identifier="Cost" index="2" show="true" sortpriority="0" sortstate="NONE" width="42"></col>
-	<col enumval="DECK_COLOR" identifier="Color" index="5" show="true" sortpriority="0" sortstate="NONE" width="41"></col>
-	<col enumval="DECK_TYPE" identifier="Type" index="4" show="true" sortpriority="0" sortstate="NONE" width="41"></col>
-	<col enumval="DECK_POWER" identifier="Power" index="6" show="true" sortpriority="0" sortstate="NONE" width="40"></col>
-	<col enumval="DECK_TOUGHNESS" identifier="Toughness" index="7" show="true" sortpriority="0" sortstate="NONE" width="37"></col>
-	<col enumval="DECK_CMC" identifier="CMC" index="8" show="true" sortpriority="0" sortstate="NONE" width="40"></col>
-	<col enumval="DECK_RARITY" identifier="Rarity" index="9" show="true" sortpriority="0" sortstate="NONE" width="36"></col>
-	<col enumval="DECK_SET" identifier="Set" index="10" show="true" sortpriority="0" sortstate="NONE" width="35"></col>
-	<col enumval="DECK_AI" identifier="AI" index="3" show="true" sortpriority="0" sortstate="NONE" width="43"></col>
-	<col enumval="DECK_NEW" identifier="New" index="11" show="true" sortpriority="0" sortstate="NONE" width="75"></col>
-	<col enumval="DECK_SALE_PRICE" identifier="Sale Price" index="12" show="true" sortpriority="1" sortstate="ASC" width="75"></col>
+	<col enumval="CAT_NEW" identifier="New" index="8" show="true" sortpriority="0" sortstate="NONE" width="50"></col>
+	<col enumval="CAT_PURCHASE_PRICE" identifier="Purchase Price" index="9" show="true" sortpriority="0" sortstate="NONE" width="64"></col>
+	<col enumval="DECK_QUANTITY" identifier="Quantity" index="0" show="true" sortpriority="0" sortstate="NONE" width="32"></col>
+	<col enumval="DECK_NAME" identifier="Name" index="1" show="true" sortpriority="1" sortstate="ASC" width="62"></col>
+	<col enumval="DECK_COST" identifier="Cost" index="2" show="true" sortpriority="0" sortstate="NONE" width="29"></col>
+	<col enumval="DECK_COLOR" identifier="Color" index="5" show="true" sortpriority="0" sortstate="NONE" width="29"></col>
+	<col enumval="DECK_TYPE" identifier="Type" index="4" show="true" sortpriority="0" sortstate="NONE" width="29"></col>
+	<col enumval="DECK_POWER" identifier="Power" index="6" show="true" sortpriority="0" sortstate="NONE" width="28"></col>
+	<col enumval="DECK_TOUGHNESS" identifier="Toughness" index="7" show="true" sortpriority="0" sortstate="NONE" width="26"></col>
+	<col enumval="DECK_CMC" identifier="CMC" index="8" show="true" sortpriority="0" sortstate="NONE" width="28"></col>
+	<col enumval="DECK_RARITY" identifier="Rarity" index="9" show="true" sortpriority="0" sortstate="NONE" width="26"></col>
+	<col enumval="DECK_SET" identifier="Set" index="10" show="true" sortpriority="0" sortstate="NONE" width="25"></col>
+	<col enumval="DECK_AI" identifier="AI" index="3" show="true" sortpriority="0" sortstate="NONE" width="29"></col>
+	<col enumval="DECK_NEW" identifier="New" index="11" show="true" sortpriority="0" sortstate="NONE" width="46"></col>
+	<col enumval="DECK_SALE_PRICE" identifier="Sale Price" index="12" show="true" sortpriority="2" sortstate="ASC" width="60"></col>
+	<col enumval="DECK_DECKS" identifier="Decks" index="13" show="true" sortpriority="1" sortstate="DESC" width="45"></col>
 </preferences>

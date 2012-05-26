@@ -18,7 +18,10 @@
 package forge.gui.deckeditor.controllers;
 
 // import java.awt.Font;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import forge.AllZone;
 import forge.Constant;
@@ -37,6 +40,7 @@ import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.quest.QuestController;
 import forge.util.closures.Lambda0;
+import forge.util.closures.Lambda1;
 
 //import forge.quest.data.QuestBoosterPack;
 
@@ -53,6 +57,25 @@ import forge.util.closures.Lambda0;
 public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     private final QuestController questData;
     private final DeckController<Deck> controller;
+
+    private Map<CardPrinted, Integer> decksUsingMyCards;
+
+    @SuppressWarnings("rawtypes")
+    private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnDeckCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+        @Override
+        public Comparable apply(final Entry<InventoryItem, Integer> from) {
+            final Integer iValue = CEditorQuest.this.decksUsingMyCards.get(from.getKey());
+            return iValue == null ? Integer.valueOf(0) : iValue;
+        }
+    };
+
+    private final Lambda1<Object, Entry<InventoryItem, Integer>> fnDeckGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+        @Override
+        public Object apply(final Entry<InventoryItem, Integer> from) {
+            final Integer iValue = CEditorQuest.this.decksUsingMyCards.get(from.getKey());
+            return iValue == null ? "" : iValue.toString();
+        }
+    };
 
     /**
      * Child controller for quest deck editor UI.
@@ -91,6 +114,19 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     public void addCheatCard(final CardPrinted card) {
         this.getTableCatalog().addCard(card);
         this.questData.getCards().getCardpool().add(card);
+    }
+
+    // fills number of decks using each card
+    private Map<CardPrinted, Integer> countDecksForEachCard() {
+        final Map<CardPrinted, Integer> result = new HashMap<CardPrinted, Integer>();
+        for (final Deck deck : this.questData.getMyDecks()) {
+            for (final Entry<CardPrinted, Integer> e : deck.getMain()) {
+                final CardPrinted card = e.getKey();
+                final Integer amount = result.get(card);
+                result.put(card, Integer.valueOf(amount == null ? 1 : 1 + amount.intValue()));
+            }
+        }
+        return result;
     }
 
     //=========== Overridden from ACEditorBase
@@ -164,18 +200,22 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         final List<TableColumnInfo<InventoryItem>> columnsCatalog = SColumnUtil.getCatalogDefaultColumns();
         final List<TableColumnInfo<InventoryItem>> columnsDeck = SColumnUtil.getDeckDefaultColumns();
 
+        this.decksUsingMyCards = this.countDecksForEachCard();
+
         // Add "new" column in catalog and deck
         columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_NEW));
-
         columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
                 this.questData.getCards().getFnNewCompare(),
                 this.questData.getCards().getFnNewGet());
 
         columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_NEW));
-
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
                 this.questData.getCards().getFnNewCompare(),
                 this.questData.getCards().getFnNewGet());
+
+        columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_DECKS));
+        columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
+                this.fnDeckCompare, this.fnDeckGet);
 
         this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
         this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);

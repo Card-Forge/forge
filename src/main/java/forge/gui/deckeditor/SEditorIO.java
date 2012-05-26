@@ -90,6 +90,24 @@ public class SEditorIO {
      * @return TableColumnInfo<InventoryItem>
      */
     public static TableColumnInfo<InventoryItem> getColumn(final ColumnName name0) {
+       /* final ColumnName[] vals = ColumnName.values();
+        boolean exists = false;
+        for (int i = 0; i < vals.length; i++) {
+            if (vals.equals(name0)) { exists = true; break; }
+        }
+
+        // Columns that are not in the enum must be created.
+        if (!exists) {
+            final TableColumnInfo<InventoryItem> col;
+            col = new TableColumnInfo<InventoryItem>();
+            col.setIdentifier(name0.toString());
+            col.setShowing(true);
+            col.setSortPriority(0);
+            col.setSortState(SortState.NONE);
+            col.setPreferredWidth(100);
+            COLS.put(name0, col);
+        }*/
+
         return COLS.get(name0);
     }
 
@@ -294,7 +312,9 @@ public class SEditorIO {
                     while (attributes.hasNext()) {
                         attribute = (Attribute) attributes.next();
                         if (attribute.getName().toString().equals(ColumnProperty.enumval.toString())) {
-                            COLS.put(ColumnName.valueOf(attribute.getValue()), tempcol);
+                            try { COLS.put(ColumnName.valueOf(attribute.getValue()), tempcol); }
+                            catch (final Exception e) { }
+
                             tempcol.setEnumValue(attribute.getValue());
                         }
                         else if (attribute.getName().toString().equals(ColumnProperty.identifier.toString())) {
