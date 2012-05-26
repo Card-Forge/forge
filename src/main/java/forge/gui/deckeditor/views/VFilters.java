@@ -136,7 +136,7 @@ public enum VFilters implements IVDoc {
         pnlText.add(lblWithout, "w 80px!, h 30px!");
         pnlText.add(txfWithout, "pushx, growx, span 2 1, gap 5px 5px 2px 2px, h 30px!");
         pnlText.add(chbName, "w 70px!, h 25px!, gap 5px 5px 2px 2px");
-        pnlText.add(chbType, "w 60px!, h 25px!, gap 0 5px 2px 2px");
+        pnlText.add(chbType, "w 70px!, h 25px!, gap 0 5px 2px 2px");
         pnlText.add(chbText, "w 60px!, h 25px!, gap 0 5px 2px 2px");
 
         chbName.setSelected(true);
