@@ -5,7 +5,9 @@ import java.util.Observer;
 
 import forge.AllZone;
 import forge.Command;
+import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
+import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.views.VStack;
 
 /** 
@@ -47,6 +49,7 @@ public enum CStack implements ICDoc, Observer {
      */
     @Override
     public void update(Observable arg0, Object arg1) {
+        SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
         update();
     }
 }
