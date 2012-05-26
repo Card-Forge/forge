@@ -299,6 +299,8 @@ Fixes/Features:
 - AbilityWork: Added References$ parameter to scripted abilities of 'F' cards where necessary.
 - Indexing fixes in editor. Issues related to indexing should be solved now.
 - Fixed drafting mode bug.
+- AbilityWork:Corrected References$ for Avalanche.
+- Added the recent commit logs to changes.txt.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
