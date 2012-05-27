@@ -47,6 +47,11 @@ public enum VDetail implements IVDoc {
     private final JLabel lblFlipcard = new JLabel(
             FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
 
+    //========= Constructor
+    private VDetail() {
+        lblFlipcard.setVisible(false);
+    }
+
     //========= Overridden methods
     /* (non-Javadoc)
      * @see forge.gui.framework.IVDoc#populate()

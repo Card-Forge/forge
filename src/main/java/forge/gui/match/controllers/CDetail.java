@@ -74,6 +74,8 @@ public enum CDetail implements ICDoc {
         VDetail.SINGLETON_INSTANCE.getPnlDetail().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
+                if (VDetail.SINGLETON_INSTANCE.getPnlDetail().getCard() == null) { return; }
+
                 if (VDetail.SINGLETON_INSTANCE.getPnlDetail().getCard().isDoubleFaced()) {
                     CPicture.SINGLETON_INSTANCE.flipCard();
                 }
