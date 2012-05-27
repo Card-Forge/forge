@@ -25,6 +25,8 @@ import javax.swing.JFrame;
 
 import forge.AllZone;
 import forge.Card;
+import forge.CardCharactersticName;
+import forge.card.CardCharacteristics;
 import forge.gui.GuiDisplayUtil;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -93,22 +95,19 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
     private List<DownloadObject> createDLObjects(final Card c, final String base) {
         final ArrayList<DownloadObject> ret = new ArrayList<DownloadObject>();
 
-        for (final String sVar : c.getSVars().keySet()) {
+        for (final CardCharactersticName state : c.getStates()) {
+            CardCharacteristics stateCharacteristics = c.getState(state);
+            final String url = stateCharacteristics.getSVar("Picture");
+            if (!url.isEmpty()) {
+                final String[] urls = url.split("\\\\");
 
-            if (!sVar.startsWith("Picture")) {
-                continue;
+                final String iName = GuiDisplayUtil.cleanString(stateCharacteristics.getImageName());
+                ret.add(new DownloadObject(urls[0], new File(base, iName + ".jpg")));
+
+                for (int j = 1; j < urls.length; j++) {
+                    ret.add(new DownloadObject(urls[j], new File(base, iName + j + ".jpg")));
+                }
             }
-
-            final String url = c.getSVar(sVar);
-            final String[] urls = url.split("\\\\");
-
-            final String iName = GuiDisplayUtil.cleanString(c.getImageName());
-            ret.add(new DownloadObject(urls[0], new File(base, iName + ".jpg")));
-
-            for (int j = 1; j < urls.length; j++) {
-                ret.add(new DownloadObject(urls[j], new File(base, iName + j + ".jpg")));
-            }
-
         }
 
         return ret;
