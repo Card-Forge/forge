@@ -16,7 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.gui.match.controllers;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import forge.Card;
+import forge.CardCharactersticName;
 import forge.Command;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;
@@ -31,6 +35,7 @@ public enum CPicture implements ICDoc {
     SINGLETON_INSTANCE;
 
     private Card currentCard = null;
+    private boolean flipped = false;
 
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
@@ -40,6 +45,7 @@ public enum CPicture implements ICDoc {
      */
     public void showCard(final Card c) {
         this.currentCard = c;
+        VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(c.isDoubleFaced() ? true : false);
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(c);
     }
 
@@ -65,6 +71,14 @@ public enum CPicture implements ICDoc {
      */
     @Override
     public void initialize() {
+        VPicture.SINGLETON_INSTANCE.getPnlPicture().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(final MouseEvent e) {
+                if (VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard().isDoubleFaced()) {
+                    flipCard();
+                }
+            }
+        });
     }
 
     /* (non-Javadoc)
@@ -72,5 +86,20 @@ public enum CPicture implements ICDoc {
      */
     @Override
     public void update() {
+    }
+
+    /** */
+    public void flipCard() {
+        if (flipped) {
+            flipped = false;
+            VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard().setState(CardCharactersticName.Original);
+            CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
+        }
+        else {
+            flipped = true;
+            VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard().setState(CardCharactersticName.Transformed);
+            CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
+        }
+        VPicture.SINGLETON_INSTANCE.getPnlPicture().setImage();
     }
 }
