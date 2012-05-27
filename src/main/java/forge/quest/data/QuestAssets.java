@@ -33,10 +33,7 @@ import forge.quest.QuestUtilCards;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences.QPref;
 
-/**
- * TODO: Write javadoc for this type.
- * 
- */
+/** */
 public class QuestAssets {
 
     // Cards associated with quest
@@ -125,8 +122,6 @@ public class QuestAssets {
             try { // care to set appropriate state class here
                 cond = itemType.getModelClass().newInstance();
             } catch (final Exception e) {
-                // TODO Auto-generated catch block ignores the exception, but
-                // sends it to System.err and probably forge.log.
                 e.printStackTrace();
                 cond = new QuestItemCondition();
             }
@@ -136,8 +131,6 @@ public class QuestAssets {
     }
 
     /**
-     * 
-     * TODO: Write javadoc for this method.
      * @param name String
      * @return int
      */
@@ -147,8 +140,6 @@ public class QuestAssets {
     }
 
     /**
-     * 
-     * TODO: Write javadoc for this method.
      * @param name &emsp; String
      * @param <T> extends QuestItemCondition
      * @return <T>
@@ -159,8 +150,6 @@ public class QuestAssets {
     }
 
     /**
-     * 
-     * TODO: Write javadoc for this method.
      * @param name String
      * @param level int
      */
@@ -265,8 +254,6 @@ public class QuestAssets {
     }
 
     /**
-     * TODO: Write javadoc for this method.
-     *
      * @return the deck storage
      */
     public QuestDeckMap getDeckStorage() {

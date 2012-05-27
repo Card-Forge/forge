@@ -6,22 +6,31 @@ package forge.quest.data;
  */
 public class QuestItemCondition {
     private int level;
+    private boolean selected = false;
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
+    /** @return int */
     public int getLevel() {
         return level;
     }
 
+    /** @param level int */
     public void setLevel(int level) {
         this.level = level;
     }
 
+    /** @return boolean */
+    public boolean isSelected() {
+        return selected;
+    }
+
+    /** @param selected0 &emsp; boolean */
+    public void setSelected(boolean selected0) {
+        this.selected = selected0;
+    }
+
     /**
      * Copy data from the parameter instance to 'this' instance.
-     * @param current
+     * @param source QuestItemCondition
      */
     public void takeDataFrom(QuestItemCondition source) {
         this.level = source.level;
