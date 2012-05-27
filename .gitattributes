@@ -11684,6 +11684,7 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryCharm.java svneol=native#t
 src/main/java/forge/card/abilityfactory/AbilityFactoryChoose.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryClash.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCleanup.java svneol=native#text/plain
+src/main/java/forge/card/abilityfactory/AbilityFactoryClone.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryCombat.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCopy.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCounterMagic.java svneol=native#text/plain

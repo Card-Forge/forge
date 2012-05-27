@@ -19,6 +19,8 @@ package forge.card;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import forge.CardColor;
 import forge.card.replacement.ReplacementEffect;
@@ -50,6 +52,7 @@ public class CardCharacteristics {
     private String imageFilename = "";
     private String imageName = "";
     private ArrayList<EditionInfo> sets = new ArrayList<EditionInfo>();
+    private Map<String, String> sVars = new TreeMap<String, String>();
 
     /**
      * Gets the name.
@@ -387,5 +390,63 @@ public class CardCharacteristics {
      */
     public void setReplacementEffects(ArrayList<ReplacementEffect> replacementEffects0) {
         this.replacementEffects = replacementEffects0;
+    }
+    
+    /**
+     * <p>
+     * getSVar.
+     * </p>
+     * 
+     * @param var
+     *            a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
+    public final String getSVar(final String var) {
+        if (this.sVars.containsKey(var)) {
+            return this.sVars.get(var);
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * <p>
+     * setSVar.
+     * </p>
+     * 
+     * @param var
+     *            a {@link java.lang.String} object.
+     * @param str
+     *            a {@link java.lang.String} object.
+     */
+    public final void setSVar(final String var, final String str) {
+        if (this.sVars.containsKey(var)) {
+            this.sVars.remove(var);
+        }
+
+        this.sVars.put(var, str);
+    }
+
+    /**
+     * <p>
+     * getSVars.
+     * </p>
+     * 
+     * @return a Map object.
+     */
+    public final Map<String, String> getSVars() {
+        return this.sVars;
+    }
+
+    /**
+     * <p>
+     * setSVars.
+     * </p>
+     * 
+     * @param newSVars
+     *            a Map object.
+     */
+    public final void setSVars(final Map<String, String> newSVars) {
+        this.sVars = newSVars;
     }
 }

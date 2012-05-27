@@ -562,6 +562,12 @@ public class AbilityFactory {
             }
         }
 
+        else if (this.api.equals("Clone")) {
+            if (this.isDb) {
+                spellAbility = AbilityFactoryClone.createDrawbackClone(this);
+            }
+        }
+
         else if (this.api.equals("CopyPermanent")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryCopy.createAbilityCopyPermanent(this);

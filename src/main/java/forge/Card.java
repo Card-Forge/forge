@@ -221,7 +221,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final ArrayList<Card> hauntedBy = new ArrayList<Card>();
     private Card haunting = null;
 
-    private Map<String, String> sVars = new TreeMap<String, String>();
+    //private Map<String, String> sVars = new TreeMap<String, String>();
 
     // hacky code below, used to limit the number of times an ability
     // can be used per turn like Vampire Bats
@@ -1458,11 +1458,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getSVar(final String var) {
-        if (this.sVars.containsKey(var)) {
-            return this.sVars.get(var);
-        } else {
-            return "";
-        }
+        return this.getCharacteristics().getSVar(var);
     }
 
     /**
@@ -1476,11 +1472,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link java.lang.String} object.
      */
     public final void setSVar(final String var, final String str) {
-        if (this.sVars.containsKey(var)) {
-            this.sVars.remove(var);
-        }
-
-        this.sVars.put(var, str);
+        this.getCharacteristics().setSVar(var, str);
     }
 
     /**
@@ -1491,7 +1483,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a Map object.
      */
     public final Map<String, String> getSVars() {
-        return this.sVars;
+        return this.getCharacteristics().getSVars();
     }
 
     /**
@@ -1503,7 +1495,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a Map object.
      */
     public final void setSVars(final Map<String, String> newSVars) {
-        this.sVars = newSVars;
+        this.getCharacteristics().setSVars(newSVars);
     }
 
     /**
@@ -8403,8 +8395,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return an int
      */
     public final int getFoil() {
-        if (this.sVars.containsKey("Foil")) {
-            return Integer.parseInt(this.sVars.get("Foil"));
+        final String foil = this.getCharacteristics().getSVar("Foil");
+        if (!foil.isEmpty()) {
+            return Integer.parseInt(foil);
         }
         return 0;
     }
@@ -8417,7 +8410,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            an int
      */
     public final void setFoil(final int f) {
-        this.sVars.put("Foil", Integer.toString(f));
+        this.getCharacteristics().setSVar("Foil", Integer.toString(f));
     }
 
     /**
