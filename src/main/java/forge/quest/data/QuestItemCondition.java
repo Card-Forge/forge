@@ -6,7 +6,6 @@ package forge.quest.data;
  */
 public class QuestItemCondition {
     private int level;
-    private boolean selected = false;
 
     /** @return int */
     public int getLevel() {
@@ -16,16 +15,6 @@ public class QuestItemCondition {
     /** @param level int */
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    /** @return boolean */
-    public boolean isSelected() {
-        return selected;
-    }
-
-    /** @param selected0 &emsp; boolean */
-    public void setSelected(boolean selected0) {
-        this.selected = selected0;
     }
 
     /**
