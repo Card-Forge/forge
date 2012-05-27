@@ -18,7 +18,6 @@ import forge.gui.home.quest.SSubmenuQuestUtil.SelectablePanel;
 import forge.gui.toolbox.FLabel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventChallenge;
-import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetController;
 
 /** 
@@ -72,9 +71,10 @@ public enum CSubmenuChallenges implements ICSubmenu, ICDoc {
                 new Command() {
                     @Override
                     public void execute() {
-                        AllZone.getQuest().setAvailableChallenges(null);
-                        AllZone.getQuest().getAssets().setItemLevel(QuestItemType.ZEPPELIN, 2);
-                        update();
+                        int todo = 5;
+                        //AllZone.getQuest().getAchievements().setCurrentChallenges(null);
+                        //AllZone.getQuest().getAssets().setItemLevel(QuestItemType.ZEPPELIN, 2);
+                        //update();
                     }
                 });
 
@@ -114,6 +114,7 @@ public enum CSubmenuChallenges implements ICSubmenu, ICDoc {
 
         final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
         final QuestController qCtrl = AllZone.getQuest();
+
         if (qCtrl.getAchievements() != null) {
             view.getLblTitle().setText("Challenges: " + qCtrl.getRank());
 

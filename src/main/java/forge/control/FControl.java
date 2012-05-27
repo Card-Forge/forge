@@ -23,6 +23,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
 import java.util.List;
 
 import javax.swing.JLayeredPane;
@@ -41,6 +42,10 @@ import forge.gui.match.VMatchUI;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.gui.toolbox.FSkin;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+import forge.quest.data.QuestPreferences.QPref;
+import forge.quest.io.QuestDataIO;
 import forge.view.FView;
 
 /**
@@ -148,6 +153,14 @@ public enum FControl {
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
+
+        // Preload quest data if present
+        final File dirQuests = ForgeProps.getFile(NewConstants.Quest.DATA_DIR);
+        final String questname = Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_QUEST);
+        final File data = new File(dirQuests.getPath(), questname);
+        if (data.exists()) {
+            AllZone.getQuest().load(QuestDataIO.loadData(data));
+        }
 
         // Handles resizing in null layouts of layers in JLayeredPane.
         Singletons.getView().getFrame().addComponentListener(new ComponentAdapter() {

@@ -18,7 +18,6 @@
 package forge.gui.home;
 
 import java.awt.Component;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +35,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.DragCell;
@@ -62,10 +60,6 @@ import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.io.QuestDataIO;
 
 /**
  * Assembles Swing components of main menu panel in home screen.
@@ -95,12 +89,6 @@ public enum VMainMenu implements IVDoc {
         .iconInBackground(true).iconScaleFactor(1.0).build();
 
     private VMainMenu() {
-        // There'd a better home for this (model?)
-        final File dirQuests = ForgeProps.getFile(NewConstants.Quest.DATA_DIR);
-        final String questname = Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_QUEST);
-        final File data = new File(dirQuests.getPath(), questname);
-        if (data.exists()) { AllZone.getQuest().load(QuestDataIO.loadData(data)); }
-
         // Add new menu items here (order doesn't matter).
         allSubmenus.add(VSubmenuConstructed.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuDraft.SINGLETON_INSTANCE);

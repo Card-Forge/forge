@@ -54,8 +54,6 @@ public enum FView {
 
     /** */
     public void initialize() {
-        SplashFrame.PROGRESS_BAR.setDescription("Creating display components.");
-
         // Frame styling
         frmDocument.setMinimumSize(new Dimension(800, 600));
         frmDocument.setLocationRelativeTo(null);

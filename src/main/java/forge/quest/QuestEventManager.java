@@ -159,27 +159,27 @@ public class QuestEventManager {
     }
 
     /** Generates an array of new challenge opponents based on current win conditions.
-     *
+     * 
+     * @param qCtrl &emsp; QuestController
      * @return a {@link java.util.List} object.
      */
     public final List<QuestEventChallenge> generateChallenges(final QuestController qCtrl) {
+        final QuestAchievements achievements = qCtrl.getAchievements();
         final List<QuestEventChallenge> challengeOpponents = new ArrayList<QuestEventChallenge>();
-        final QuestAchievements qData = qCtrl.getAchievements();
+        final List<Integer> unlockedChallengeIds = new ArrayList<Integer>();
+        final List<Integer> availableChallengeIds = achievements.getCurrentChallenges();
 
-        int maxChallenges = qData.getWin() / 10;
+        int maxChallenges = achievements.getWin() / 10;
         if (maxChallenges > 5) {
             maxChallenges = 5;
         }
 
         // Generate IDs as needed.
-        if ((qCtrl.getAvailableChallenges() == null) || (qCtrl.getAvailableChallenges().size() < maxChallenges)) {
-
-            final List<Integer> unlockedChallengeIds = new ArrayList<Integer>();
-            final List<Integer> availableChallengeIds = new ArrayList<Integer>();
-
+        if (achievements.getCurrentChallenges().size() < maxChallenges) {
             for (final QuestEventChallenge qc : allChallenges) {
-                if ((qc.getWinsReqd() <= qData.getWin())
-                        && !qData.getCompletedChallenges().contains(qc.getId())) {
+                if ((qc.getWinsReqd() <= achievements.getWin())
+                        && !achievements.getLockedChallenges().contains(qc.getId())
+                        && !availableChallengeIds.contains(qc.getId())) {
                     unlockedChallengeIds.add(qc.getId());
                 }
             }
@@ -188,16 +188,16 @@ public class QuestEventManager {
 
             maxChallenges = Math.min(maxChallenges, unlockedChallengeIds.size());
 
-            for (int i = 0; i < maxChallenges; i++) {
+            for (int i = availableChallengeIds.size(); i < maxChallenges; i++) {
                 availableChallengeIds.add(unlockedChallengeIds.get(i));
             }
 
-            qCtrl.setAvailableChallenges(availableChallengeIds);
+            achievements.setCurrentChallenges(availableChallengeIds);
             qCtrl.save();
         }
 
         // Finally, pull challenge events from available IDs and return.
-        for (final int i : qCtrl.getAvailableChallenges()) {
+        for (final int i : achievements.getCurrentChallenges()) {
             challengeOpponents.add(getChallengeEventByNumber(i));
         }
 

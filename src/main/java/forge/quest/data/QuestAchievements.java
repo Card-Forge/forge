@@ -14,22 +14,23 @@ public class QuestAchievements {
 
     // Challenge history
     /** The challenges played. */
-    int challengesPlayed = 0;
-    /** The completed challenges. */
-    List<Integer> completedChallenges = new ArrayList<Integer>();
-    /** The win. */
-    int win; // number of wins
-    int winstreakBest = 0;
-    int winstreakCurrent = 0;
+    private int challengesPlayed = 0;
+    /** */
+    private List<Integer> completedChallenges = new ArrayList<Integer>();
+    /** */
+    private List<Integer> currentChallenges = new ArrayList<Integer>();
 
-    /** The lost. */
-    int lost;
+    private int win;
+    private int winstreakBest = 0;
+    private int winstreakCurrent = 0;
+    private int lost;
 
     // Difficulty - will store only index from now.
     private int difficulty;
+
     /**
      * TODO: Write javadoc for Constructor.
-     * @param diff
+     * @param diff &emsp; int
      */
     public QuestAchievements(int diff) {
         difficulty = diff;
@@ -61,23 +62,23 @@ public class QuestAchievements {
     public int getChallengesPlayed() {
         return this.challengesPlayed;
     }
-    /**
-     * <p>
-     * getCompletedChallenges.
-     * </p>
-     * Returns stored list of non-repeatable challenge IDs.
-     * 
-     * @return List<Integer>
-     */
-    public List<Integer> getCompletedChallenges() {
-        return this.completedChallenges;
-    }
+
     /**
      * Adds the challenges played.
      */
     public void addChallengesPlayed() {
         this.challengesPlayed++;
     }
+
+    /**
+     * Returns stored list of non-repeatable challenge IDs.
+     * 
+     * @return List<Integer>
+     */
+    public List<Integer> getLockedChallenges() {
+        return this.completedChallenges;
+    }
+
     /**
      * <p>
      * addCompletedChallenge.
@@ -87,11 +88,32 @@ public class QuestAchievements {
      * @param i
      *            the i
      */
-
-    // Poorly named - this should be "setLockedChalleneges" or similar.
-    public void addCompletedChallenge(final int i) {
+    public void addLockedChallenge(final int i) {
         this.completedChallenges.add(i);
     }
+
+    /**
+     * Stores a list of current challenges.
+     * 
+     * @return List<Integer>
+     */
+    public List<Integer> getCurrentChallenges() {
+        if (this.currentChallenges == null) {
+            this.currentChallenges = new ArrayList<Integer>();
+        }
+
+        return this.currentChallenges;
+    }
+
+    /**
+     * Returns the stored list of current challenges.
+     * 
+     * @param lst0 List<Integer>
+     */
+    public void setCurrentChallenges(final List<Integer> lst0) {
+        this.currentChallenges = lst0;
+    }
+
     /**
      * Adds the lost.
      */

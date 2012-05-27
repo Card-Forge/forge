@@ -288,12 +288,19 @@ public class QuestWinLoseHandler extends ControlWinLose {
         qData.getCards().clearShopList();
         qData.getAssets().setItemLevel(QuestItemType.ZEPPELIN, 1);
 
-        if (qEvent instanceof QuestEventChallenge && !((QuestEventChallenge) qEvent).isRepeatable()) {
-            qData.getAchievements().addCompletedChallenge(((QuestEventChallenge) qEvent).getId());
-        }
+        if (qEvent instanceof QuestEventChallenge) {
+            final int id = ((QuestEventChallenge) qEvent).getId();
+            final int size = qData.getAchievements().getCurrentChallenges().size();
+            for (int i = 0; i < size; i++) {
+                if (qData.getAchievements().getCurrentChallenges().get(i) == id) {
+                    qData.getAchievements().getCurrentChallenges().remove(i);
+                    break;
+                }
+            }
 
-        if (qData.getAvailableChallenges() != null) {
-            qData.clearAvailableChallenges();
+            if (!((QuestEventChallenge) qEvent).isRepeatable()) {
+                qData.getAchievements().addLockedChallenge(((QuestEventChallenge) qEvent).getId());
+            }
         }
 
         matchState.reset();

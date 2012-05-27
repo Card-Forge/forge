@@ -17,9 +17,7 @@
  */
 package forge.quest;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import forge.Singletons;
@@ -57,18 +55,7 @@ public class QuestController {
     private QuestEvent currentEvent;
 
     /** The decks. */
-    transient IStorage<Deck> decks;
-
-    // acquired
-    // since
-    // last
-    // game-win/loss
-
-    /** The available challenges. */
-    private List<Integer> availableChallenges = new ArrayList<Integer>();
-
-    /** The available quests. */
-    private List<Integer> availableQuests = null;
+    private transient IStorage<Deck> decks;
 
     private QuestEventManager duelManager = null;
     private QuestEventManager challengesManager = null;
@@ -93,14 +80,26 @@ public class QuestController {
             "What Do You Do With The Other Hand?", "Freelance Sorcerer, Works Weekends",
             "Should We Hire Commentators?", "Saltblasted For Your Talent", "Serra Angel Is Your Girlfriend", };
 
+    /** */
     public static final int MAX_PET_SLOTS = 2;
 
     private Map<Integer, String> selectedPets = new HashMap<Integer, String>();
 
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @param slot &emsp; int
+     * @param name &emsp; String
+     */
     public void selectPet(Integer slot, String name) {
         selectedPets.put(slot, name);
     }
 
+    /**
+     * 
+     * @param slot &emsp; int
+     * @return String
+     */
     public String getSelectedPet(Integer slot) {
         return selectedPets.get(slot);
     }
@@ -183,39 +182,6 @@ public class QuestController {
      */
     public boolean isLoaded() {
         return false;
-    }
-
-    /**
-     * Clear available challenges.
-     */
-    public void clearAvailableChallenges() {
-        this.availableChallenges.clear();
-    }
-
-    /**
-     * Gets the available challenges.
-     * 
-     * @return the available challenges
-     */
-    public List<Integer> getAvailableChallenges() {
-        // This should be phased out after a while, when
-        // old quest decks have been updated. (changes made 19-9-11)
-        if (this.availableQuests != null) {
-            this.availableChallenges = this.availableQuests;
-            this.availableQuests = null;
-        }
-
-        return this.availableChallenges != null ? new ArrayList<Integer>(this.availableChallenges) : null;
-    }
-
-    /**
-     * Sets the available challenges.
-     * 
-     * @param list
-     *            the new available challenges
-     */
-    public void setAvailableChallenges(final List<Integer> list) {
-        this.availableChallenges = list;
     }
 
     /**
@@ -325,6 +291,11 @@ public class QuestController {
         return this.duelManager;
     }
 
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @return QuestEventManager
+     */
     public QuestEventManager getChallengesManager() {
         if (this.challengesManager == null) {
             this.challengesManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.CHALLENGES));
@@ -332,6 +303,11 @@ public class QuestController {
         return this.challengesManager;
     }
 
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @return QuestPetStorage
+     */
     public QuestPetStorage getPetsStorage() {
         if (this.pets == null) {
             this.pets = new QuestPetStorage(ForgeProps.getFile(NewConstants.Quest.BAZAAR));
