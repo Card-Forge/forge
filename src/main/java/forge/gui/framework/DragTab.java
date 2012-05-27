@@ -31,6 +31,7 @@ public final class DragTab extends JLabel implements ILocalRepaint {
         setOpaque(false);
         setSelected(false);
         setBorder(new EmptyBorder(2, 5, 2, 5));
+        setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(SRearrangingUtil.getRearrangeClickEvent());
         this.addMouseMotionListener(SRearrangingUtil.getRearrangeDragEvent());
