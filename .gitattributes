@@ -12001,7 +12001,6 @@ src/main/java/forge/gui/framework/package-info.java -text svneol=native#text/pla
 src/main/java/forge/gui/home/CMainMenu.java -text
 src/main/java/forge/gui/home/EMenuGroup.java -text
 src/main/java/forge/gui/home/EMenuItem.java -text
-src/main/java/forge/gui/home/ICSubmenu.java -text
 src/main/java/forge/gui/home/IVSubmenu.java -text
 src/main/java/forge/gui/home/StartButton.java -text
 src/main/java/forge/gui/home/VHomeUI.java -text
@@ -12192,7 +12191,6 @@ src/main/java/forge/view/FView.java -text
 src/main/java/forge/view/Main.java -text
 src/main/java/forge/view/SplashFrame.java -text
 src/main/java/forge/view/ViewBazaarUI.java -text
-src/main/java/forge/view/ViewEditorUI.java -text
 src/main/java/forge/view/arcane/CardArea.java svneol=native#text/plain
 src/main/java/forge/view/arcane/CardPanel.java svneol=native#text/plain
 src/main/java/forge/view/arcane/CardPanelContainer.java svneol=native#text/plain

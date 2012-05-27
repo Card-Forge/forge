@@ -9,7 +9,6 @@ import forge.Command;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.CMainMenu;
-import forge.gui.home.ICSubmenu;
 import forge.gui.home.quest.SSubmenuQuestUtil.SelectablePanel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventDuel;
@@ -21,25 +20,9 @@ import forge.quest.bazaar.QuestPetController;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CSubmenuDuels implements ICSubmenu, ICDoc {
+public enum CSubmenuDuels implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
-
-    /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#getCommand()
-     */
-    @SuppressWarnings("serial")
-    @Override
-    public Command getMenuCommand() {
-        final QuestController qc = AllZone.getQuest();
-        return new Command() {
-            public void execute() {
-                if (qc.getAchievements() == null) {
-                    CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
-                }
-            }
-        };
-    }
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#initialize()
@@ -113,8 +96,16 @@ public enum CSubmenuDuels implements ICSubmenu, ICDoc {
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
+    @SuppressWarnings("serial")
     @Override
     public Command getCommandOnSelect() {
-        return null;
+        final QuestController qc = AllZone.getQuest();
+        return new Command() {
+            public void execute() {
+                if (qc.getAchievements() == null) {
+                    CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
+                }
+            }
+        };
     }
 }

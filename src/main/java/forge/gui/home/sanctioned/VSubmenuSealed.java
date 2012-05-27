@@ -20,9 +20,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
-import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
-import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
 import forge.gui.toolbox.DeckLister;
@@ -37,7 +35,7 @@ import forge.gui.toolbox.FSkin;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VSubmenuSealed implements IVSubmenu, IVDoc {
+public enum VSubmenuSealed implements IVSubmenu {
     /** */
     SINGLETON_INSTANCE;
 
@@ -105,22 +103,6 @@ public enum VSubmenuSealed implements IVSubmenu, IVDoc {
     @Override
     public EDocID getItemEnum() {
         return EDocID.HOME_SEALED;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.home.IVSubmenu#getSubmenuControl()
-     */
-    @Override
-    public ICSubmenu getSubmenuControl() {
-        return CSubmenuSealed.SINGLETON_INSTANCE;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.view.home.IViewSubmenu#getPanel()
-     */
-    @Override
-    public JPanel getPanel() {
-        return pnl;
     }
 
     /** @return {@link javax.swing.JLabel} */

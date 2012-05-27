@@ -214,8 +214,8 @@ public enum VMainMenu implements IVDoc {
                 // with the selection display process.
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        if (item.getSubmenuControl().getMenuCommand() != null) {
-                            item.getSubmenuControl().getMenuCommand().execute();
+                        if (item.getLayoutControl().getCommandOnSelect() != null) {
+                            item.getLayoutControl().getCommandOnSelect().execute();
                         }
                     }
                 });

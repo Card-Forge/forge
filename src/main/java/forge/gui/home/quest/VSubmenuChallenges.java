@@ -17,7 +17,6 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
-import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
 import forge.gui.toolbox.FCheckBox;
@@ -83,14 +82,6 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet, IVDoc {
         .fontSize(14).tooltip("Travel to the Spell Shop").build();
 
     /* (non-Javadoc)
-     * @see forge.view.home.IViewSubmenu#getPanel()
-     */
-    @Override
-    public JPanel getPanel() {
-        return pnl;
-    }
-
-    /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#getGroup()
      */
     @Override
@@ -112,14 +103,6 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet, IVDoc {
     @Override
     public EDocID getItemEnum() {
         return EDocID.HOME_QUESTCHALLENGES;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.home.IVSubmenu#getSubmenuControl()
-     */
-    @Override
-    public ICSubmenu getSubmenuControl() {
-        return CSubmenuChallenges.SINGLETON_INSTANCE;
     }
 
     /* (non-Javadoc)

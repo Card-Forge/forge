@@ -36,7 +36,6 @@ import forge.game.GameNew;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
@@ -53,7 +52,7 @@ import forge.util.IStorage;
  *
  */
 @SuppressWarnings("serial")
-public enum CSubmenuConstructed implements ICSubmenu, ICDoc {
+public enum CSubmenuConstructed implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -86,13 +85,6 @@ public enum CSubmenuConstructed implements ICSubmenu, ICDoc {
         COLOR_VALS.put("Green", "green");
         COLOR_VALS.put("Red", "red");
         COLOR_VALS.put("White", "white");
-    }
-    /* (non-Javadoc)
-     * @see forge.gui.home.ICSubmenu#getMenuCommand()
-     */
-    @Override
-    public Command getMenuCommand() {
-        return null;
     }
 
     /* (non-Javadoc)

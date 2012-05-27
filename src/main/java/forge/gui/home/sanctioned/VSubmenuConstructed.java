@@ -16,9 +16,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
-import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
-import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
 import forge.gui.toolbox.FCheckBox;
@@ -33,7 +31,7 @@ import forge.gui.toolbox.FScrollPane;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
-public enum VSubmenuConstructed implements IVSubmenu, IVDoc {
+public enum VSubmenuConstructed implements IVSubmenu {
     /** */
     SINGLETON_INSTANCE;
 
@@ -87,22 +85,6 @@ public enum VSubmenuConstructed implements IVSubmenu, IVDoc {
         grpRadiosAI.add(radThemesAI);
         grpRadiosAI.add(radCustomAI);
         grpRadiosAI.add(radQuestsAI);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.home.IVSubmenu#getPanel()
-     */
-    @Override
-    public JPanel getPanel() {
-        return pnl;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.home.IVSubmenu#getSubmenuControl()
-     */
-    @Override
-    public ICSubmenu getSubmenuControl() {
-        return CSubmenuConstructed.SINGLETON_INSTANCE;
     }
 
     /* (non-Javadoc)

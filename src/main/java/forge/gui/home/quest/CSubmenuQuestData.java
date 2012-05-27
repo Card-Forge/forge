@@ -17,7 +17,6 @@ import forge.Command;
 import forge.Singletons;
 import forge.gui.GuiUtils;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.ICSubmenu;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
@@ -34,7 +33,7 @@ import forge.quest.io.QuestDataIO;
  *
  */
 @SuppressWarnings("serial")
-public enum CSubmenuQuestData implements ICSubmenu, ICDoc {
+public enum CSubmenuQuestData implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -53,14 +52,6 @@ public enum CSubmenuQuestData implements ICSubmenu, ICDoc {
     public void initialize() {
         VSubmenuQuestData.SINGLETON_INSTANCE.getBtnEmbark().setCommand(
                 new Command() { @Override public void execute() { newQuest(); } });
-    }
-
-    /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#getCommand()
-     */
-    @Override
-    public Command getMenuCommand() {
-        return null;
     }
 
     /* (non-Javadoc)

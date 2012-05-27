@@ -28,7 +28,6 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
@@ -43,7 +42,7 @@ import forge.util.TextUtil;
  *
  */
 @SuppressWarnings("serial")
-public enum CSubmenuSealed implements ICSubmenu, ICDoc {
+public enum CSubmenuSealed implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -94,14 +93,6 @@ public enum CSubmenuSealed implements ICSubmenu, ICDoc {
                 VSubmenuSealed.SINGLETON_INSTANCE.getBtnDirections().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             }
         });
-    }
-
-    /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#getCommand()
-     */
-    @Override
-    public Command getMenuCommand() {
-        return null;
     }
 
     /* (non-Javadoc)
