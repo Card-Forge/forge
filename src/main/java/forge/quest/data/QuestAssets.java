@@ -41,31 +41,31 @@ public class QuestAssets {
 
     // Cards associated with quest
     /** The card pool. */
-    final ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>(CardPrinted.class); // player's
+    private final ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>(CardPrinted.class); // player's
     /** The credits. */
-    long credits; // this money is good for all modes
+    private long credits; // this money is good for all modes
     // game
     // with
 
     // Decks collected by player
     /** The my decks. */
-    final HashMap<String, Deck> myDecks = new HashMap<String, Deck>();
+    private final HashMap<String, Deck> myDecks = new HashMap<String, Deck>();
     // current
     // shop
     // list
     /** The new card list. */
-    final ItemPool<InventoryItem> newCardList = new ItemPool<InventoryItem>(InventoryItem.class); // cards
+    private final ItemPool<InventoryItem> newCardList = new ItemPool<InventoryItem>(InventoryItem.class); // cards
     // belonging
     /** The shop list. */
-    final ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class); // the
+    private final ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class); // the
     // gadgets
 
     /** The inventory items. */
-    final Map<QuestItemType, QuestItemCondition> inventoryItems = new EnumMap<QuestItemType, QuestItemCondition>(
+    private final Map<QuestItemType, QuestItemCondition> inventoryItems = new EnumMap<QuestItemType, QuestItemCondition>(
             QuestItemType.class);
 
     // Much the same like other map, but keyed by string (to support a lot of custom pets)
-    final Map<String, QuestItemCondition> combatPets = new HashMap<String, QuestItemCondition>();
+    private final Map<String, QuestItemCondition> combatPets = new HashMap<String, QuestItemCondition>();
     /**
      * Checks for item.
      *
@@ -91,7 +91,8 @@ public class QuestAssets {
      * Gets the item condition.
      *
      * @param itemType the item type
-     * @return the item condition
+     * @param <T> extends QuestItemCondition
+     * @return T the item condition
      */
     @SuppressWarnings("unchecked")
     public final <T extends QuestItemCondition> T getItemCondition(final QuestItemType itemType) {
@@ -134,16 +135,35 @@ public class QuestAssets {
         cond.setLevel(level);
     }
 
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @param name String
+     * @return int
+     */
     public final int getPetLevel(final String name) {
         final QuestItemCondition state = this.combatPets.get(name);
         return state == null ? 0 : state.getLevel();
     }
 
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @param name &emsp; String
+     * @param <T> extends QuestItemCondition
+     * @return <T>
+     */
     @SuppressWarnings("unchecked")
     public final <T extends QuestItemCondition> T getPetCondition(final String name) {
         return (T) this.combatPets.get(name);
     }
 
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @param name String
+     * @param level int
+     */
     public final void setPetLevel(final String name, final int level) {
         QuestItemCondition cond = this.combatPets.get(name);
         if (null == cond) {
