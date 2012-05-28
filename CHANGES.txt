@@ -325,6 +325,10 @@ Fixes/Features:
 - Cleanup: Tightened up interface contracts in home submenus.
 - Merged changes from trunk to AbilityWork: 15691-15747
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- This will center the Type checkbox between the Name and Text checkboxes.
+- Reverted the changes made to the main.properties file, these were probably pushed unintentionally to the SVN.
+- CheckStyle.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
