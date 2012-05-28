@@ -6,7 +6,7 @@ Once the Forge archive has been decompressed you should then be able to launch F
 
 After downloading and installing a newer version of Forge you may want to move certain files from the older version over to the newer version of Forge. You should maintain your older version of Forge as a back up in case you make a mistake while installing the newer version.
 
-1) The /res/pics/ folder contains the card pictures, icons and token pictures (mtg card tokens and quest pet/plant tokens). Please note that the /res/images/icons/ folder was moved back to the /res/pics/icons/ folder. The forge /res/images/ folder no longer is used as of version 1.2.8.
+1) The /res/pics/ folder contains the card pictures, icons and token pictures (mtg card tokens and quest pet/plant tokens). Please note that the /res/images/icons/ folder was moved back to the /res/pics/ folder. The forge /res/images/ folder no longer is used as of version 1.2.8.
 
 The /res/pics/icons/ folder contains the quest opponent icons, small quest pet/plant icons (non-tokens) and some icons that are used by forge's quest mode. While several of these pictures ship with the forge archive most of them have to be downloaded using the Home screen -> Utilities -> Download Quest Images command.
 
@@ -20,9 +20,11 @@ You can place your deck files from an earlier version of Forge into the /res/dec
 
 5) The /res/quest/data folder contains your questData files. These files include all of the information for your current quests. You will not be able to continue your quests in a newer version of Forge unless you copy over the your quest data files. These files have a ".dat" extension. You can now have multiple ongoing quests at the same time.
 
-6) The Forge /res/preferences/ folder contains the preference files named "forge.preferences" and "editor.preferences". You should also move a copy of these files over to the newer version. The /res/preferences/ folder was added to version 1.2.8.
+6) The Forge /res/preferences/ folder contains the preference files named "forge.preferences" and "editor.preferences". You should also move a copy of these files over to the newer version. The /res/preferences/ folder was added to version 1.2.8. The main.properties file was also moved to the /res/preferences/ folder.
 
-7) The /res/layouts/ folder contains a file named "match_preferred.xml". This file contains information that forge uses when setting the layout for the battlefield display.
+7) The /res/layouts/ folder contains a file named "match_preferred.xml". This file contains information that forge uses when setting the layout for the battlefield display. The match_default.xml file contains the default layout for the battlefield.
+
+The editor_preferred.xml file contains information that forge uses when setting the layout for the deck editor display. The editor_default.xml file contains the default layout for the deck editor display.
 
 
 Advanced Updating to a newer version Instructions:
