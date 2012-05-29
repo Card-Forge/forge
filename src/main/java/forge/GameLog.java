@@ -116,7 +116,7 @@ public class GameLog extends MyObservable {
     public List<LogEntry> getLogEntries() {
         return log;
     }
-    
+
     /**
      * Gets the log entries below a certain level as a list.
      *

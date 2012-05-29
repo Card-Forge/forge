@@ -51,7 +51,7 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
     // private JLabel label;
     // private ImageIcon icon;
     private final ScaledImagePanel panel;
-    private Image currentImange;
+    private Image currentImage;
 
     /**
      * <p>
@@ -81,6 +81,8 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
                 CardPicturePanel.this.update();
             }
         });
+
+
 
         this.setCard(c);
     }
@@ -118,7 +120,8 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
         this.setImage();
     }
 
-    private void setImage() {
+    /** */
+    public void setImage() {
         final Insets i = this.getInsets();
         Image image = null;
         if (this.inventoryItem != null) {
@@ -130,8 +133,8 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
                     - i.bottom - 2);
         }
 
-        if (image != this.currentImange) {
-            this.currentImange = image;
+        if (image != this.currentImage) {
+            this.currentImage = image;
             this.panel.setImage(image, null);
             this.panel.repaint();
         }

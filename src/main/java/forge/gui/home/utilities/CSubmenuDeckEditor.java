@@ -5,7 +5,6 @@ import forge.control.FControl;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.ICSubmenu;
 
 /** 
  * Controls the deck editor submenu option in the home UI.
@@ -13,7 +12,7 @@ import forge.gui.home.ICSubmenu;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CSubmenuDeckEditor implements ICSubmenu, ICDoc {
+public enum CSubmenuDeckEditor implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -22,16 +21,6 @@ public enum CSubmenuDeckEditor implements ICSubmenu, ICDoc {
      */
     @Override
     public void initialize() {
-    }
-
-    /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#getCommand()
-     */
-    @SuppressWarnings("serial")
-    @Override
-    public Command getMenuCommand() {
-        return new Command() { @Override
-            public void execute() { showDeckEditor(); } };
     }
 
     /* (non-Javadoc)
@@ -51,8 +40,10 @@ public enum CSubmenuDeckEditor implements ICSubmenu, ICDoc {
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
+    @SuppressWarnings("serial")
     @Override
     public Command getCommandOnSelect() {
-        return null;
+        return new Command() { @Override
+            public void execute() { showDeckEditor(); } };
     }
 }

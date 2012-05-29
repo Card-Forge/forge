@@ -1,8 +1,7 @@
 package forge.gui.home;
 
-import javax.swing.JPanel;
-
 import forge.gui.framework.EDocID;
+import forge.gui.framework.IVDoc;
 
 /**
  * Dictates methods required for a submenu view.
@@ -10,16 +9,7 @@ import forge.gui.framework.EDocID;
  * <br><br><i>(I at beginning of class name denotes an interface.)</i>
  * <br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public interface IVSubmenu {
-    /** Allows static factory creation by decoupling UI components.
-     * @return {@link javax.swing.JPanel} */
-    JPanel getPanel();
-
-    /** Retrives control object associated with this instance.
-     * @return {@link forge.gui.home.ICSubmenu}
-     */
-    ICSubmenu getSubmenuControl();
-
+public interface IVSubmenu extends IVDoc {
     /** Returns parent menu grouping of this submenu, useful for
      * functions such as expanding and collapsing in the menu area.
      * 

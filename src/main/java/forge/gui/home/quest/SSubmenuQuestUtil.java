@@ -282,11 +282,11 @@ public class SSubmenuQuestUtil {
                         selectedOpponent.setSelected(false);
                     }
 
-                    if (VSubmenuDuels.SINGLETON_INSTANCE.getPanel().isShowing() && getCurrentDeck() != null) {
+                    if (VSubmenuDuels.SINGLETON_INSTANCE.getPnlDuels().isShowing() && getCurrentDeck() != null) {
                         VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
                         VSubmenuChallenges.SINGLETON_INSTANCE.getBtnStart().setEnabled(false);
                     }
-                    else if (VSubmenuChallenges.SINGLETON_INSTANCE.getPanel().isShowing() &&  getCurrentDeck() != null) {
+                    else if (VSubmenuChallenges.SINGLETON_INSTANCE.getPnlChallenges().isShowing() &&  getCurrentDeck() != null) {
                         VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().setEnabled(false);
                         VSubmenuChallenges.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
                     }

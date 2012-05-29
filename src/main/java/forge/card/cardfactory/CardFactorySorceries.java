@@ -285,7 +285,7 @@ public class CardFactorySorceries {
                         Card biggest = exiled.get(0);
 
                         for (final Card c : exiled) {
-                            if (biggest.getManaCost().getCMC() < c.getManaCost().getCMC() ) {
+                            if (biggest.getManaCost().getCMC() < c.getManaCost().getCMC()) {
                                 biggest = c;
                             }
                         }

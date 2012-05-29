@@ -17,6 +17,8 @@
  */
 package forge.gui.match.views;
 
+import javax.swing.JLabel;
+
 import net.miginfocom.swing.MigLayout;
 import forge.gui.CardPicturePanel;
 import forge.gui.framework.DragCell;
@@ -25,6 +27,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CPicture;
+import forge.gui.toolbox.FSkin;
 
 /** 
  * Assembles Swing components of card picture area.
@@ -41,10 +44,13 @@ public enum VPicture implements IVDoc {
 
     // Top-level containers
     private final CardPicturePanel pnlPicture = new CardPicturePanel(null);
+    private final JLabel lblFlipcard = new JLabel(
+            FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
 
     //========= Constructor
     private VPicture() {
         pnlPicture.setOpaque(false);
+        lblFlipcard.setVisible(false);
     }
 
     //========== Overridden methods
@@ -55,6 +61,7 @@ public enum VPicture implements IVDoc {
     @Override
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, center"));
+        parentCell.getBody().add(lblFlipcard, "pos (50% - 40px) (50% - 60px)");
         parentCell.getBody().add(pnlPicture, "w 100%!, h 100%!");
     }
 
@@ -103,5 +110,10 @@ public enum VPicture implements IVDoc {
     /** @return {@link forge.gui.CardPicturePanel} */
     public CardPicturePanel getPnlPicture() {
         return pnlPicture;
+    }
+
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblFlipcard() {
+        return lblFlipcard;
     }
 }

@@ -162,21 +162,21 @@ class CardFactoryEquipment {
             sbTrig.append("ValidCard$ Card.Self | Execute$ TrigGerm | TriggerDescription$ ");
             sbTrig.append("Living Weapon (When this Equipment enters the battlefield, ");
             sbTrig.append("put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)");
-            
+
             final StringBuilder sbGerm = new StringBuilder();
             sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenName$ Germ | TokenTypes$ Creature,Germ | RememberTokens$ True | ");
             sbGerm.append("TokenOwner$ You | TokenColors$ Black | TokenPower$ 0 | TokenToughness$ 0 | TokenImage$ B 0 0 Germ | SubAbility$ DBGermAttach");
-            
+
             final StringBuilder sbAttach = new StringBuilder();
             sbAttach.append("DB$ Attach | Defined$ Remembered | SubAbility$ DBGermClear");
-            
+
             final StringBuilder sbClear = new StringBuilder();
             sbClear.append("DB$ Cleanup | ClearRemembered$ True");
-            
+
             card.setSVar("TrigGerm", sbGerm.toString());
             card.setSVar("DBGermAttach", sbAttach.toString());
             card.setSVar("DBGermClear", sbClear.toString());
-            
+
             final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
             card.addTrigger(etbTrigger);
         }

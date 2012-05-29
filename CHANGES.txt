@@ -302,6 +302,38 @@ Fixes/Features:
 - AbilityWork:Corrected References$ for Avalanche.
 - Added the recent commit logs to changes.txt.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- AbilityWork: Made sure SpellPermanent's with X-cost get their X-SVar set. (*Fixes Balduvian Hydra among others.)
+- Increased the width of the checkbox with label for chbType. The test "Type" is no longer truncated under Mac OS.
+- Fixed filter problems in Card Shop.
+- Standardization: Implemented ILocalRepaint#repaintSelf() on FLabel and FPanel.
+- Increased the width of the Selectors in the deck editor filter section.
+- AbilityWork:Fixed a problem with subabilities operating on the wrong host card. (Enables Necrotic Ooze+Bloodline Keeper+Grimgrin, Corpse-Born infinite combo ^^ )
+- AbilityWork:Added a "Trigger Breakpoint" dev mode button. Set a breakpoint at the indicated row in GuiDisplayUtil.devModeBreakpoint(), click this button while running in debug mode and enjoy a nice overview of the internals of the game.
+- AbilityWork:Made calculateAmount fall back on card SVars if the wanted one isn't found on the spellability. Better fix for Balduvian Hydra and similar.
+- AbilityWork: Added References$ parameter to scripted abilities of 'G' cards where necessary.
+- AbilityWork: Console printout warning when calculateAmount falls back to using Card Svars. Helps when debugging if an ability is not stolen properly, for instance.
+- Bugfix: Quest challenges now persist across restarts. Also some checkstyle.
+- Checkstyle.
+- Checkstyle.
+- Minor correction.
+- creating branch for fixing clone cards
+- added Clone AF and first steps in moving SVars to CardCharacteristics class
+- updated LQ picture downloader to handle flip/DFC states
+- Added "transform on click" capability to card picture and detail.
+- A few tweaks to card flip code.
+- Changed tab text to match skin color swatch.
+- Cleanup: Tightened up interface contracts in home submenus.
+- Merged changes from trunk to AbilityWork: 15691-15747
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- This will center the Type checkbox between the Name and Text checkboxes.
+- Reverted the changes made to the main.properties file, these were probably pushed unintentionally to the SVN.
+- CheckStyle.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Edited the README.txt file and included more info about the layout files.
+- fixed bug in Effect AB that was causing a NPE
+- AbilityWork: Added References$ parameter to scripted abilities of 'M' cards where necessary.
+- AbilityWork: Added some missing References$ params
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):

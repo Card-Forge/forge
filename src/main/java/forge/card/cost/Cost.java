@@ -145,11 +145,10 @@ public class Cost {
     private static final String RETURN_STR = "Return<";
     private static final String REVEAL_STR = "Reveal<";
 
-    
     public Cost(final Card card, CardManaCost cost, final boolean bAbility) {
         this(card, cost.toString(), bAbility);
     }
-    
+
     /**
      * <p>
      * Constructor for Cost.

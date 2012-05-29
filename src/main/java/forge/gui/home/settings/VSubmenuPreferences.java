@@ -32,9 +32,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
-import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
-import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
@@ -48,7 +46,7 @@ import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VSubmenuPreferences implements IVSubmenu, IVDoc {
+public enum VSubmenuPreferences implements IVSubmenu {
     /** */
     SINGLETON_INSTANCE;
 
@@ -179,14 +177,6 @@ public enum VSubmenuPreferences implements IVSubmenu, IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.view.home.IViewSubmenu#getPanel()
-     */
-    @Override
-    public JPanel getPanel() {
-        return pnl;
-    }
-
-    /* (non-Javadoc)
      * @see forge.gui.home.IVSubmenu#getMenuTitle()
      */
     @Override
@@ -200,14 +190,6 @@ public enum VSubmenuPreferences implements IVSubmenu, IVDoc {
     @Override
     public EDocID getItemEnum() {
         return EDocID.HOME_PREFERENCES;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.home.IVSubmenu#getSubmenuControl()
-     */
-    @Override
-    public ICSubmenu getSubmenuControl() {
-        return CSubmenuPreferences.SINGLETON_INSTANCE;
     }
 
     /** Consolidates checkbox styling in one place. */

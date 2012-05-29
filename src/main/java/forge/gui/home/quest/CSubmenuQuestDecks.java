@@ -12,7 +12,6 @@ import forge.gui.deckeditor.controllers.CEditorQuest;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.CMainMenu;
-import forge.gui.home.ICSubmenu;
 import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
 
@@ -22,7 +21,7 @@ import forge.quest.data.QuestPreferences.QPref;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 @SuppressWarnings("serial")
-public enum CSubmenuQuestDecks implements ICSubmenu, ICDoc {
+public enum CSubmenuQuestDecks implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -41,22 +40,6 @@ public enum CSubmenuQuestDecks implements ICSubmenu, ICDoc {
 
     private final Command cmdDeckDelete = new Command() { @Override
         public void execute() { update(); } };
-
-    /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#getCommand()
-     */
-    @Override
-    public Command getMenuCommand() {
-        final QuestController qc = AllZone.getQuest();
-        return new Command() {
-            @Override
-            public void execute() {
-                if (qc.getAchievements() == null) {
-                    CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
-                }
-            }
-        };
-    }
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -125,6 +108,14 @@ public enum CSubmenuQuestDecks implements ICSubmenu, ICDoc {
      */
     @Override
     public Command getCommandOnSelect() {
-        return null;
+        final QuestController qc = AllZone.getQuest();
+        return new Command() {
+            @Override
+            public void execute() {
+                if (qc.getAchievements() == null) {
+                    CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
+                }
+            }
+        };
     }
 }

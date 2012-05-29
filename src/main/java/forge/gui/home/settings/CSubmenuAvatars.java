@@ -2,7 +2,6 @@ package forge.gui.home.settings;
 
 import forge.Command;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.ICSubmenu;
 
 /** 
  * Controls the avatars submenu in the home UI.
@@ -10,7 +9,7 @@ import forge.gui.home.ICSubmenu;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CSubmenuAvatars implements ICSubmenu, ICDoc {
+public enum CSubmenuAvatars implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -19,14 +18,6 @@ public enum CSubmenuAvatars implements ICSubmenu, ICDoc {
      */
     @Override
     public void initialize() {
-    }
-
-    /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#getCommand()
-     */
-    @Override
-    public Command getMenuCommand() {
-        return null;
     }
 
     /* (non-Javadoc)

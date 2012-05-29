@@ -2,7 +2,6 @@ package forge.gui.home.utilities;
 
 import forge.Command;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.ICSubmenu;
 
 /** 
  * Controls the exit submenu option in the home UI.
@@ -10,19 +9,9 @@ import forge.gui.home.ICSubmenu;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CSubmenuExit implements ICSubmenu, ICDoc {
+public enum CSubmenuExit implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
-
-    /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#getCommand()
-     */
-    @SuppressWarnings("serial")
-    @Override
-    public Command getMenuCommand() {
-        return new Command() { @Override
-            public void execute() { System.exit(0); } };
-    }
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -40,8 +29,10 @@ public enum CSubmenuExit implements ICSubmenu, ICDoc {
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
+    @SuppressWarnings("serial")
     @Override
     public Command getCommandOnSelect() {
-        return getMenuCommand();
+        return new Command() { @Override
+            public void execute() { System.exit(0); } };
     }
 }

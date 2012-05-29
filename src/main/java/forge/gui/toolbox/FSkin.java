@@ -273,6 +273,7 @@ public enum FSkin {
         ICO_SAVEAS          (new int[] {660, 580, 20, 20}), /** */
         ICO_UNKNOWN         (new int[] {0, 720, 80, 80}), /** */
         ICO_LOGO            (new int[] {480, 0, 200, 200}), /** */
+        ICO_FLIPCARD        (new int[] {400, 0, 80, 120}), /** */
         ICO_FAVICON         (new int[] {0, 640, 80, 80});
 
         private int[] coords;

@@ -17,6 +17,9 @@
  */
 package forge.gui.match.controllers;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import forge.Card;
 import forge.Command;
 import forge.gui.framework.ICDoc;
@@ -41,7 +44,9 @@ public enum CDetail implements ICDoc {
      */
     public void showCard(final Card c) {
         this.currentCard = c;
+        VDetail.SINGLETON_INSTANCE.getLblFlipcard().setVisible(c.isDoubleFaced() ? true : false);
         VDetail.SINGLETON_INSTANCE.getPnlDetail().setCard(c);
+        VDetail.SINGLETON_INSTANCE.getParentCell().repaintSelf();
     }
 
     /**
@@ -66,6 +71,16 @@ public enum CDetail implements ICDoc {
      */
     @Override
     public void initialize() {
+        VDetail.SINGLETON_INSTANCE.getPnlDetail().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(final MouseEvent e) {
+                if (VDetail.SINGLETON_INSTANCE.getPnlDetail().getCard() == null) { return; }
+
+                if (VDetail.SINGLETON_INSTANCE.getPnlDetail().getCard().isDoubleFaced()) {
+                    CPicture.SINGLETON_INSTANCE.flipCard();
+                }
+            }
+        });
     }
 
     /* (non-Javadoc)

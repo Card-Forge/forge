@@ -16,9 +16,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
-import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
-import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
@@ -30,7 +28,7 @@ import forge.properties.ForgePreferences.FPref;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VSubmenuAvatars implements IVSubmenu, IVDoc {
+public enum VSubmenuAvatars implements IVSubmenu {
     /** */
     SINGLETON_INSTANCE;
 
@@ -74,14 +72,6 @@ public enum VSubmenuAvatars implements IVSubmenu, IVDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.view.home.IViewSubmenu#getPanel()
-     */
-    @Override
-    public JPanel getPanel() {
-        return pnl;
-    }
-
-    /* (non-Javadoc)
      * @see forge.gui.home.IVSubmenu#getMenuTitle()
      */
     @Override
@@ -95,14 +85,6 @@ public enum VSubmenuAvatars implements IVSubmenu, IVDoc {
     @Override
     public EDocID getItemEnum() {
         return EDocID.HOME_AVATARS;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.gui.home.IVSubmenu#getSubmenuControl()
-     */
-    @Override
-    public ICSubmenu getSubmenuControl() {
-        return CSubmenuAvatars.SINGLETON_INSTANCE;
     }
 
     @SuppressWarnings("serial")
