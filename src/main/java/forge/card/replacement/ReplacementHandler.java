@@ -157,11 +157,13 @@ public class ReplacementHandler {
                 buildQuestion.append(replacementEffect.toString());
                 buildQuestion.append(")");
                 if (!GameActionUtil.showYesNoDialog(replacementEffect.getHostCard(), buildQuestion.toString())) {
+                    replacementEffect.setHasRun(false);
                     return false;
                 }
             } else {
                 // AI-logic
                 if (!replacementEffect.aiShouldRun(effectSA)) {
+                    replacementEffect.setHasRun(false);
                     return false;
                 }
             }
