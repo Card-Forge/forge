@@ -20,7 +20,7 @@ Types:Creature Human Soldier
 Text:no text
 PT:5/4
 K:Trample
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/thraben_militia.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_militia.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/38b.jpg
 Oracle:Trample
 End

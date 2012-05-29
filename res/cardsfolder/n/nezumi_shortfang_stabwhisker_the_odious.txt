@@ -24,7 +24,7 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$
 SVar:X:SVar$Z/Minus.Y
 SVar:Y:Count$InOppHand
 SVar:Z:Number$3
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/stabwhisker_the_odious.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stabwhisker_the_odious.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/312.jpg
 Oracle:At the beginning of each opponent's upkeep, that player loses 1 life for each card fewer than three in his or her hand.
 End

@@ -25,7 +25,7 @@ SVar:DBTap:DB$ Tap | Cost$ 0 | Defined$ Self | ConditionCheckSVar$ X | Condition
 SVar:DBDamage:DB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 9 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/archdemon_of_greed.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/archdemon_of_greed.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/71b.jpg
 Oracle:At the beginning of your upkeep, sacrifice a Human. If you can't, tap Archdemon of Greed and it deals 9 damage to you.
 End

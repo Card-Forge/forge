@@ -5,12 +5,10 @@ Text:no text
 PT:3/2
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/afflicted_deserter.jpg
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/81a.jpg
 Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Afflicted Deserter.
-
-#Shared
-SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 
 ALTERNATE
 
@@ -26,7 +24,8 @@ SVar:DBDamage:DB$DealDamage | Cost$ 0 | Defined$ TargetedController | NumDmg$ 3 
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:IsDestroyed:Count$ThisTurnEntered_Graveyard_from_Battlefield_Artifact.IsRemembered
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/werewolf_ransacker.jpg
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:Picture:http://www.wizards.com/global/images/magic/general/werewolf_ransacker.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/81b.jpg
 Oracle:Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf Ransacker.
 End

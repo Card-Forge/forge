@@ -4,13 +4,11 @@ Types:Creature Human Werewolf
 Text:no text
 PT:2/1
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hinterland_hermit.jpg
 AlternateMode:DoubleFaced
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/94a.jpg
 Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Hinterland Hermit.
-
-#Shared
-SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 
 ALTERNATE
 
@@ -22,7 +20,8 @@ Text:no text
 PT:3/2
 K:CARDNAME must be blocked if able.
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/hinterland_scourge.jpg
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hinterland_scourge.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/94b.jpg
 Oracle:Hinterland Scourge must be blocked if able.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Hinterland Scourge.
 End

@@ -22,7 +22,7 @@ Text:You control enchanted creature.
 K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ GainControl
 SVar:RemAIDeck:True
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/ghastly_haunting.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastly_haunting.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/50b.jpg
 Oracle:Enchant creature\nYou control enchanted creature.
 End

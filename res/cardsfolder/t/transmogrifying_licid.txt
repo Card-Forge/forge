@@ -7,8 +7,6 @@ A:AB$ SetState | Cost$ 1 T | Defined$ Self | NewState$ Alternate | SubAbility$ D
 SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 #If the value of AlternateMode isn't Flip or DoubleFaced, it will be the name of the state defined below, so you can switch to it with SetState+NewState$.The name of the first state defined is always "Original".
 AlternateMode:Alternate
-
-#Shared
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transmogrifying_licid.jpg
@@ -25,5 +23,9 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddType$ Artifact | Description$ Enchanted creature gets +1/+1 and is an artifact in addition to its other types.
 A:AB$ SetState | Cost$ 1 | Defined$ Self | NewState$ Original | SpellDescription$ End this effect.
-
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/transmogrifying_licid.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/141.jpg
+Oracle:{1}, {T}: Transmogrifying Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {1} to end this effect.\nEnchanted creature gets +1/+1 and is an artifact in addition to its other types.
 End

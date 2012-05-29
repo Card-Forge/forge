@@ -22,7 +22,7 @@ Text:no text
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a creature.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredPlayer | SacValid$ Creature
 SVar:Rarity:Rare
-SVar:Picture1:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/kuons_essence.jpg
+SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/kuons_essence.jpg
 # This link may be a temporary solution and could change in the near future.
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/168.jpg
 Oracle:At the beginning of each player's upkeep, that player sacrifices a creature.

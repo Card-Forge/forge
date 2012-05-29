@@ -17,7 +17,7 @@ Colors:black
 Types:Creature Vampire
 Text:no text
 PT:4/4
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/markovs_servant.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/markovs_servant.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/55b.jpg
 Oracle:
 End

@@ -19,7 +19,7 @@ Types:Legendary Creature Human Wizard
 Text:no text
 PT:3/3
 S:Mode$Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/tobita_master_of_winds.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tobita_master_of_winds.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/310.jpg
 Oracle:Creatures you control have flying.
 

@@ -25,7 +25,7 @@ PT:5/1
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | IsPresent$ Card.notAttackedThisTurn+Self | TriggerDescription$ At the beginning of your end step, if CARDNAME didn't attack this turn, tap CARDNAME, then transform it.
 SVar:TrigTap:AB$ Tap | Cost$ 0 | Defined$ Self | SubAbility$ DBTransform2
 SVar:DBTransform2:DB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/homicidal_brute.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/homicidal_brute.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/47b.jpg
 Oracle:At the beginning of your end step, if Homicidal Brute didn't attack this turn, tap Homicidal Brute, then transform it.
 End
