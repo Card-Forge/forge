@@ -1,0 +1,13 @@
+Name:Bloodline Shaman
+ManaCost:1 G
+Types:Creature Elf Wizard Shaman
+Text:no text
+PT:1/1
+A:AB$ ChooseType | Cost$ T | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck | SubAbility$ ShamanDig | SpellDescription$ Choose a creature type. Reveal the top card of your library. If that card is a creature card of the chosen type, put it into your hand. Otherwise, put it into your graveyard.
+SVar:ShamanDig:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature.ChosenType | DestinationZone$ Hand | DestinationZone2$ Graveyard
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodline_shaman.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/249.jpg
+Oracle:{T}: Choose a creature type. Reveal the top card of your library. If that card is a creature card of the chosen type, put it into your hand. Otherwise, put it into your graveyard.
+End
