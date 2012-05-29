@@ -329,6 +329,11 @@ Fixes/Features:
 - Reverted the changes made to the main.properties file, these were probably pushed unintentionally to the SVN.
 - CheckStyle.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Edited the README.txt file and included more info about the layout files.
+- fixed bug in Effect AB that was causing a NPE
+- AbilityWork: Added References$ parameter to scripted abilities of 'M' cards where necessary.
+- AbilityWork: Added some missing References$ params
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
