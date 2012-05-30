@@ -1,0 +1,21 @@
+Name:Karona's Zealot
+ManaCost:4 W
+Types:Creature Human Cleric
+Text:no text
+PT:2/5
+K:Morph:3 W W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ KaronaEffect | TriggerDescription$ When CARDNAME is turned face up, all damage that would be dealt to it this turn is dealt to target creature instead.
+SVar:KaronaEffect:DB$ Effect | Name$ Karona's Zealot Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage to | ReplacementEffects$ ZealotCombat,ZealotNonCombat | Triggers$ OutOfSight | SVars$ ExileEffect,CombatDmg,NonCombatDmg,X | Duration$ HostLeavesOrEOT | RememberObjects$ Self | ImprintCards$ Targeted
+SVar:ZealotCombat:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ All damage that would be dealt to Karona's Zealot this turn is dealt to target creature instead.
+SVar:ZealotNonCombat:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | IsCombat$ False | ReplaceWith$ NonCombatDmg | Secondary$ True | Description$ All damage that would be dealt to Karona's Zealot this turn is dealt to target creature instead.
+SVar:CombatDmg:AB$DealDamage | Cost$ 0 | Defined$ Imprinted | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ X
+SVar:NonCombatDmg:AB$DealDamage | Cost$ 0 | Defined$ Imprinted | DamageSource$ ReplacedSource | NumDmg$ X
+SVar:OutOfSight:Mode$ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ Imprinted | Execute$ ExileEffect | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:X:ReplaceCount$DamageAmount
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/karonas_zealot.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/18.jpg
+Oracle:Morph {3}{W}{W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Karona's Zealot is turned face up, all damage that would be dealt to it this turn is dealt to target creature instead.
+End
