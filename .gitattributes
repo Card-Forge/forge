@@ -891,6 +891,7 @@ res/cardsfolder/b/blightspeaker.txt svneol=native#text/plain
 res/cardsfolder/b/blightsteel_colossus.txt svneol=native#text/plain
 res/cardsfolder/b/blightwidow.txt svneol=native#text/plain
 res/cardsfolder/b/blind_creeper.txt svneol=native#text/plain
+res/cardsfolder/b/blind_fury.txt -text
 res/cardsfolder/b/blind_hunter.txt -text
 res/cardsfolder/b/blind_phantasm.txt svneol=native#text/plain
 res/cardsfolder/b/blind_spot_giant.txt svneol=native#text/plain
