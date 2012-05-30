@@ -76,9 +76,9 @@ public final class DragTab extends JLabel implements ILocalRepaint {
     @Override
     public void paintComponent(final Graphics g) {
         if (!selected) {
-            g.setColor(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
-            g.fillRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
             g.setColor(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+            g.fillRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
+            g.setColor(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             g.drawRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
         }
         else {
