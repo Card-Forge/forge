@@ -544,6 +544,10 @@ public class AbilityFactoryEffect {
             else if (duration.equals("UntilHostLeavesPlay")) {
                 card.addLeavesPlayCommand(endEffect);
             }
+            else if (duration.equals("HostLeavesOrEOT")) {
+                AllZone.getEndOfTurn().addUntil(endEffect);
+                card.addLeavesPlayCommand(endEffect);
+            }
         }
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
