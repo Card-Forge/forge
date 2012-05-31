@@ -344,6 +344,12 @@ Fixes/Features:
 - Fixed Kabira Evangel, should not trigger for Allies that etb under opponent's control.
 - Added a missing xPaid svar to Squall Line.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed the inactive tabs in deckeditor being unreadable in the default
+- Added Effect duration HostLeavesOrEOT (won't cause NPE's for other durations this time)
+- update plugins
+- AbilityWork: Added References$ parameter to scripted abilities of 'H' cards where necessary.
+- Terrarion should now enter the battlefield tapped.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -416,6 +422,9 @@ Blizzard Specter
 Blood Oath
 Archangel of Strife
 Bloodline Shaman
+Blind Fury
+Bloodcurdler
+Karona's Zealot
 
 
 end
