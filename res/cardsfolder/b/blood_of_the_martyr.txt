@@ -1,0 +1,17 @@
+Name:Blood of the Martyr
+ManaCost:W W W
+Types:Instant
+Text:no text
+A:SP$ Effect | Cost$ W W W | Name$ Blood of the Martyr Effect | ReplacementEffects$ MartyrCombat,MartyrNonCombat | SVars$ CombatDmgToYou,NonCombatDmgToYou,X | SpellDescription$ Until end of turn, if damage would be dealt to any creature, you may have that damage dealt to you instead.
+SVar:MartyrCombat:Event$ DamageDone | ValidTarget$ Creature | Optional$ True | OptionalDecider$ You | IsCombat$ True | ReplaceWith$ CombatDmgToYou | Description$ Until end of turn, if damage would be dealt to any creature, you may have that damage dealt to you instead.
+SVar:MartyrNonCombat:Event$ DamageDone | ValidTarget$ Creature | Optional$ True | OptionalDecider$ You | IsCombat$ False | ReplaceWith$ NonCombatDmgToYou | Secondary$ True | Description$ Until end of turn, if damage would be dealt to any creature, you may have that damage dealt to you instead.
+SVar:CombatDmgToYou:AB$DealDamage | Cost$ 0 | Defined$ You | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ X
+SVar:NonCombatDmgToYou:AB$DealDamage | Cost$ 0 | Defined$ You | DamageSource$ ReplacedSource | NumDmg$ X
+SVar:X:ReplaceCount$DamageAmount
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_of_the_martyr.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/75.jpg
+SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/60.jpg
+Oracle:Until end of turn, if damage would be dealt to any creature, you may have that damage dealt to you instead.
+End
