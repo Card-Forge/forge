@@ -648,7 +648,14 @@ public final class AbilityFactoryChangeZone {
         sb.append(" ");
 
         if (params.containsKey("StackDescription")) {
-            sb.append(params.get("StackDescription"));
+            String stackDesc = params.get("StackDescription");
+            if (stackDesc.equals("None")) {
+                // Intentionally blank to avoid double spaces, otherwise: sb.append("");
+            } else if (stackDesc.equals("SpellDescription")) {
+                sb.append(params.get("SpellDescription"));
+            } else {
+                sb.append(stackDesc);
+            }
         } else {
             String origin = "";
             if (params.containsKey("Origin")) {
