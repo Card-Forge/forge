@@ -350,6 +350,12 @@ Fixes/Features:
 - AbilityWork: Added References$ parameter to scripted abilities of 'H' cards where necessary.
 - Terrarion should now enter the battlefield tapped.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Small fix (renamed Blind Fury effect)
+- Small addition in ReplacementHandler's OptionalDecider block so that DefinedPlayers needing an ActivatingPlayer have a reference point.
+- Updated Animate AF to handle cards with multiple states.
+- merged r15764-r15782 from the Trunk into CloneFix branch
+- Tidied up the stack descriptions for Nissa Rivane.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -425,6 +431,13 @@ Bloodline Shaman
 Blind Fury
 Bloodcurdler
 Karona's Zealot
+Blood of the Martyr
+Lancers en-Kor
+Nomads en-Kor
+Outrider en-Kor
+Spirit en-Kor
+Warrior en-Kor
+Bend or Break
 
 
 end
