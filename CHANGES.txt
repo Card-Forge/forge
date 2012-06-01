@@ -334,6 +334,22 @@ Fixes/Features:
 - AbilityWork: Added References$ parameter to scripted abilities of 'M' cards where necessary.
 - AbilityWork: Added some missing References$ params
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- AbilityWork: Added References$ parameter to scripted abilities of 'N' cards where necessary.
+- AbilityWork: Added References$ parameter to scripted abilities of 'O' cards where necessary.
+- AbilityWork: Added References$ parameter to Archangel of Strife.
+- Hopefully fixed replacement effects getting stuck as "currently running" and thus never being run again.
+- added SpellDescription to added ability so it shows up in the menus clearly
+- CLoneFIx: updated SVars on flip/DFC/licid cards
+- merged r15740-r15764 from the Trunk into CloneFix branch
+- Fixed Kabira Evangel, should not trigger for Allies that etb under opponent's control.
+- Added a missing xPaid svar to Squall Line.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed the inactive tabs in deckeditor being unreadable in the default
+- Added Effect duration HostLeavesOrEOT (won't cause NPE's for other durations this time)
+- update plugins
+- AbilityWork: Added References$ parameter to scripted abilities of 'H' cards where necessary.
+- Terrarion should now enter the battlefield tapped.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -405,6 +421,10 @@ Bifurcate
 Blizzard Specter
 Blood Oath
 Archangel of Strife
+Bloodline Shaman
+Blind Fury
+Bloodcurdler
+Karona's Zealot
 
 
 end

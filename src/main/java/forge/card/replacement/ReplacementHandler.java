@@ -146,6 +146,7 @@ public class ReplacementHandler {
         if (replacementEffect.getMapParams().containsKey("Optional")) {
             Player optDecider = decider;
             if (mapParams.containsKey("OptionalDecider") && (effectSA != null)) {
+                effectSA.setActivatingPlayer(replacementEffect.getHostCard().getController());
                 optDecider = AbilityFactory.getDefinedPlayers(replacementEffect.getHostCard(),
                         mapParams.get("OptionalDecider"), effectSA).get(0);
             }

@@ -891,6 +891,7 @@ res/cardsfolder/b/blightspeaker.txt svneol=native#text/plain
 res/cardsfolder/b/blightsteel_colossus.txt svneol=native#text/plain
 res/cardsfolder/b/blightwidow.txt svneol=native#text/plain
 res/cardsfolder/b/blind_creeper.txt svneol=native#text/plain
+res/cardsfolder/b/blind_fury.txt -text
 res/cardsfolder/b/blind_hunter.txt -text
 res/cardsfolder/b/blind_phantasm.txt svneol=native#text/plain
 res/cardsfolder/b/blind_spot_giant.txt svneol=native#text/plain
@@ -930,6 +931,7 @@ res/cardsfolder/b/blood_knight.txt svneol=native#text/plain
 res/cardsfolder/b/blood_lust.txt -text
 res/cardsfolder/b/blood_moon.txt svneol=native#text/plain
 res/cardsfolder/b/blood_oath.txt -text
+res/cardsfolder/b/blood_of_the_martyr.txt -text
 res/cardsfolder/b/blood_ogre.txt svneol=native#text/plain
 res/cardsfolder/b/blood_pet.txt svneol=native#text/plain
 res/cardsfolder/b/blood_rites.txt svneol=native#text/plain
@@ -943,6 +945,7 @@ res/cardsfolder/b/bloodbraid_elf.txt svneol=native#text/plain
 res/cardsfolder/b/bloodchief_ascension.txt -text
 res/cardsfolder/b/bloodcrazed_goblin.txt -text
 res/cardsfolder/b/bloodcrazed_neonate.txt -text
+res/cardsfolder/b/bloodcurdler.txt -text
 res/cardsfolder/b/bloodcurdling_scream.txt svneol=native#text/plain
 res/cardsfolder/b/bloodfire_colossus.txt svneol=native#text/plain
 res/cardsfolder/b/bloodfire_dwarf.txt svneol=native#text/plain
@@ -4839,6 +4842,7 @@ res/cardsfolder/k/karmic_guide.txt svneol=native#text/plain
 res/cardsfolder/k/karn_silver_golem.txt svneol=native#text/plain
 res/cardsfolder/k/karns_touch.txt svneol=native#text/plain
 res/cardsfolder/k/karona_false_god.txt -text
+res/cardsfolder/k/karonas_zealot.txt -text
 res/cardsfolder/k/karoo.txt svneol=native#text/plain
 res/cardsfolder/k/karoo_meerkat.txt svneol=native#text/plain
 res/cardsfolder/k/karplusan_forest.txt svneol=native#text/plain
@@ -5115,6 +5119,7 @@ res/cardsfolder/l/lair_delve.txt -text
 res/cardsfolder/l/lake_of_the_dead.txt svneol=native#text/plain
 res/cardsfolder/l/lambholt_elder_silverpelt_werewolf.txt -text
 res/cardsfolder/l/lance.txt svneol=native#text/plain
+res/cardsfolder/l/lancers_en_kor.txt -text
 res/cardsfolder/l/land_cap.txt svneol=native#text/plain
 res/cardsfolder/l/land_equilibrium.txt svneol=native#text/plain
 res/cardsfolder/l/land_leeches.txt svneol=native#text/plain
@@ -6321,6 +6326,7 @@ res/cardsfolder/n/nomad_decoy.txt -text svneol=unset#text/plain
 res/cardsfolder/n/nomad_stadium.txt svneol=native#text/plain
 res/cardsfolder/n/nomadic_elf.txt svneol=native#text/plain
 res/cardsfolder/n/nomads_assembly.txt -text
+res/cardsfolder/n/nomads_en_kor.txt -text
 res/cardsfolder/n/norin_the_wary.txt svneol=native#text/plain
 res/cardsfolder/n/northern_paladin.txt svneol=native#text/plain
 res/cardsfolder/n/norwood_archers.txt svneol=native#text/plain
@@ -6538,6 +6544,7 @@ res/cardsfolder/o/oust.txt svneol=native#text/plain
 res/cardsfolder/o/outbreak.txt svneol=native#text/plain
 res/cardsfolder/o/outmaneuver.txt -text
 res/cardsfolder/o/outrage_shaman.txt svneol=native#text/plain
+res/cardsfolder/o/outrider_en_kor.txt -text
 res/cardsfolder/o/outrider_of_jhess.txt svneol=native#text/plain
 res/cardsfolder/o/outwit.txt -text
 res/cardsfolder/o/overbeing_of_myth.txt svneol=native#text/plain
@@ -8775,6 +8782,7 @@ res/cardsfolder/s/spire_serpent.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_away.txt -text
 res/cardsfolder/s/spirit_cairn.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_en_dal.txt svneol=native#text/plain
+res/cardsfolder/s/spirit_en_kor.txt -text
 res/cardsfolder/s/spirit_flare.txt -text
 res/cardsfolder/s/spirit_link.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_loop.txt svneol=native#text/plain
@@ -10439,6 +10447,7 @@ res/cardsfolder/w/warren_instigator.txt svneol=native#text/plain
 res/cardsfolder/w/warren_pilferers.txt -text
 res/cardsfolder/w/warren_scourge_elf.txt svneol=native#text/plain
 res/cardsfolder/w/warrior_angel.txt svneol=native#text/plain
+res/cardsfolder/w/warrior_en_kor.txt -text
 res/cardsfolder/w/warriors_charge.txt svneol=native#text/plain
 res/cardsfolder/w/warriors_honor.txt svneol=native#text/plain
 res/cardsfolder/w/warriors_oath.txt -text
