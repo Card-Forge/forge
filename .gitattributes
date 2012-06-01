@@ -708,6 +708,7 @@ res/cardsfolder/b/baru_fist_of_krosa.txt svneol=native#text/plain
 res/cardsfolder/b/basal_sliver.txt svneol=native#text/plain
 res/cardsfolder/b/basal_thrull.txt svneol=native#text/plain
 res/cardsfolder/b/basalt_gargoyle.txt svneol=native#text/plain
+res/cardsfolder/b/basalt_golem.txt -text
 res/cardsfolder/b/basalt_monolith.txt svneol=native#text/plain
 res/cardsfolder/b/basandra_battle_seraph.txt -text
 res/cardsfolder/b/bash_to_bits.txt svneol=native#text/plain
