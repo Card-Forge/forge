@@ -665,6 +665,27 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
+     * <p>
+     * addTrigger.
+     * </p>
+     * 
+     * @param t
+     *            a {@link forge.card.trigger.Trigger} object.
+     *
+     * @param state
+     *            a {@link forge.CardCharactersticName} object.
+     *
+     * @return a {@link forge.card.trigger.Trigger} object.
+     */
+    public final Trigger addTrigger(final Trigger t, final CardCharactersticName state) {
+        final Trigger newtrig = t.getCopy();
+        newtrig.setHostCard(this);
+        CardCharacteristics stateCharacteristics = this.getState(state);
+        stateCharacteristics.getTriggers().add(newtrig);
+        return newtrig;
+    }
+
+    /**
      * 
      * moveTrigger.
      * 
@@ -688,6 +709,22 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void removeTrigger(final Trigger t) {
         this.getCharacteristics().getTriggers().remove(t);
+    }
+
+    /**
+     * <p>
+     * removeTrigger.
+     * </p>
+     * 
+     * @param t
+     *            a {@link forge.card.trigger.Trigger} object.
+     *
+     * @param state
+     *            a {@link forge.CardCharactersticName} object.
+     */
+    public final void removeTrigger(final Trigger t, final CardCharactersticName state) {
+        CardCharacteristics stateCharacteristics = this.getState(state);
+        stateCharacteristics.getTriggers().remove(t);
     }
 
     /**
@@ -2756,6 +2793,27 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
+     * addSpellAbility.
+     * </p>
+     * 
+     * @param a
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     *
+     * @param state
+     *            a {@link forge.CardCharactersticName} object.
+     */
+    public final void addSpellAbility(final SpellAbility a, final CardCharactersticName state) {
+        a.setSourceCard(this);
+        CardCharacteristics stateCharacteristics = this.getState(state);
+        if (a instanceof AbilityMana) {
+            stateCharacteristics.getManaAbility().add((AbilityMana) a);
+        } else {
+            stateCharacteristics.getSpellAbility().add(a);
+        }
+    }
+
+    /**
+     * <p>
      * removeSpellAbility.
      * </p>
      * 
@@ -2769,6 +2827,28 @@ public class Card extends GameEntity implements Comparable<Card> {
             this.getCharacteristics().getManaAbility().remove(a);
         } else {
             this.getCharacteristics().getSpellAbility().remove(a);
+        }
+    }
+
+    /**
+     * <p>
+     * removeSpellAbility.
+     * </p>
+     * 
+     * @param a
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     *
+     * @param state
+     *            a {@link forge.CardCharactersticName} object.
+     */
+    public final void removeSpellAbility(final SpellAbility a, final CardCharactersticName state) {
+        CardCharacteristics stateCharacteristics = this.getState(state);
+        if (a instanceof AbilityMana) {
+            // if (a.isExtrinsic()) //never remove intrinsic mana abilities, is
+            // this the way to go??
+            stateCharacteristics.getManaAbility().remove(a);
+        } else {
+            stateCharacteristics.getSpellAbility().remove(a);
         }
     }
 
