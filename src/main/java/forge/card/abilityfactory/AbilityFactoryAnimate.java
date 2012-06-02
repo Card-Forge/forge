@@ -20,7 +20,6 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import forge.AllZone;
@@ -31,6 +30,7 @@ import forge.CardList;
 import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
+import forge.card.CardCharacteristics;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -708,22 +708,29 @@ public final class AbilityFactoryAnimate {
 
             // give static abilities (should only be used by cards to give
             // itself a static ability)
-            // TODO loop over states
+            final Map<CardCharactersticName, ArrayList<StaticAbility>> addedStatics =
+                    new HashMap<CardCharactersticName, ArrayList<StaticAbility>>();
             if (stAbs.size() > 0) {
-                for (final String s : stAbs) {
-                    final String actualAbility = source.getSVar(s);
-                    c.addStaticAbility(actualAbility);
+                for (final CardCharactersticName state : c.getStates()) {
+                    ArrayList<StaticAbility> added = new ArrayList<StaticAbility>();
+                    for (final String s : stAbs) {
+                        final String actualAbility = source.getSVar(s);
+                        added.add(c.addStaticAbility(actualAbility, state));
+                    }
+                    addedStatics.put(state, added);
                 }
             }
 
             // give sVars
-            // TODO loop over states and keep a list
+            // This could potentially overwrite an existing SVar!!!
+            final ArrayList<String> addedSVars = new ArrayList<String>();
             if (sVars.size() > 0) {
                 for (final String s : sVars) {
                     final String actualsVar = source.getSVar(s);
                     for (final CardCharactersticName state : c.getStates()) {
                       c.getState(state).setSVar(s, actualsVar);
                     }
+                    addedSVars.add(s);
                 }
             }
 
@@ -734,15 +741,13 @@ public final class AbilityFactoryAnimate {
                 }
             }
 
-            final boolean givesStAbs = (stAbs.size() > 0);
-
             final Command unanimate = new Command() {
                 private static final long serialVersionUID = -5861759814760561373L;
 
                 @Override
                 public void execute() {
                     AbilityFactoryAnimate.doUnanimate(c, af, finalDesc, hiddenKeywords, addedAbilities, addedTriggers,
-                            colorTimestamp, givesStAbs, removedAbilities, timestamp);
+                            colorTimestamp, addedStatics, addedSVars, removedAbilities, timestamp);
 
                     // give back suppressed triggers
                     for (final Trigger t : removedTriggers) {
@@ -885,7 +890,8 @@ public final class AbilityFactoryAnimate {
      */
     private static void doUnanimate(final Card c, final AbilityFactory af, final String colorDesc,
             final ArrayList<String> addedKeywords, final ArrayList<SpellAbility> addedAbilities,
-            final Map<CardCharactersticName, ArrayList<Trigger>> addedTriggers, final long colorTimestamp, final boolean givesStAbs,
+            final Map<CardCharactersticName, ArrayList<Trigger>> addedTriggers, final long colorTimestamp,
+            final Map<CardCharactersticName, ArrayList<StaticAbility>> addedStatics, final ArrayList<String> addedSVars,
             final Map<CardCharactersticName, ArrayList<SpellAbility>> removedAbilities, final long timestamp) {
         final HashMap<String, String> params = af.getMapParams();
 
@@ -893,13 +899,7 @@ public final class AbilityFactoryAnimate {
 
         c.removeChangedCardKeywords(timestamp);
 
-        // remove all static abilities
-        // TODO what if the card has static abilities already???
-        if (givesStAbs) {
-            c.setStaticAbilities(new ArrayList<StaticAbility>());
-        }
-
-        if (params.containsKey("Types") || params.containsKey("RemoveTypes")
+         if (params.containsKey("Types") || params.containsKey("RemoveTypes")
                 || params.containsKey("RemoveCreatureTypes")) {
             c.removeChangedCardTypes(timestamp);
         }
@@ -910,21 +910,37 @@ public final class AbilityFactoryAnimate {
             c.removeExtrinsicKeyword(k);
         }
 
-        for (final SpellAbility sa : addedAbilities) {
-            for (final CardCharactersticName state : c.getStates()) {
+        for (final CardCharactersticName state : c.getStates()) {
+            final CardCharacteristics stateCharacteristics = c.getState(state);
+            // removed added SVars
+            for (final String s : addedSVars) {
+                stateCharacteristics.getSVars().remove(s);
+            }
+            // removed added abilities
+            for (final SpellAbility sa : addedAbilities) {
                 c.removeSpellAbility(sa, state);
             }
         }
 
+        // add back removed abilities
         for (final CardCharactersticName state : removedAbilities.keySet()) {
             for (final SpellAbility sa : removedAbilities.get(state)) {
                 c.addSpellAbility(sa, state);
             }
         }
 
+        // remove added triggers
         for (final CardCharactersticName state : addedTriggers.keySet()) {
             for (final Trigger t : addedTriggers.get(state)) {
                 c.removeTrigger(t, state);
+            }
+        }
+
+        // remove added static abilities
+        for (final CardCharactersticName state : addedStatics.keySet()) {
+            CardCharacteristics stateCharacteristics = c.getState(state);
+            for (final StaticAbility stAb : addedStatics.get(state)) {
+                stateCharacteristics.getStaticAbilities().remove(stAb);
             }
         }
 

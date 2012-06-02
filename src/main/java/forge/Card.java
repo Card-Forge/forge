@@ -5585,6 +5585,30 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
+     * Adds the static ability.
+     * 
+     * @param s
+     *            the s
+     *
+     * @param state
+     *            a {@link forge.CardCharactersticName} object.
+     *
+     * @return a {@link forge.card.staticability.StaticAbility} object.
+     */
+    public final StaticAbility addStaticAbility(final String s, final CardCharactersticName state) {
+
+        if (s.trim().length() != 0) {
+            final StaticAbility stAb = new StaticAbility(s, this);
+            CardCharacteristics stateCharacteristics = this.getState(state);
+            stateCharacteristics.getStaticAbilities().add(stAb);
+            return stAb;
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
      * <p>
      * isPermanent.
      * </p>
