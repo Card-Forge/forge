@@ -21,6 +21,8 @@ java.lang.NullPointerException
 at forge.gui.deckeditor.controllers.CEditorPreferences.initialize(CEditorPreferences.java:45)
 at forge.view.FView.initialize(FView.java:97)
 
+A recent submission prevents the Card Shop crash report when you select a Pack, but the Packs still aren't displayed.
+
 
 The res/images/icons/ folder has been moved to res/pics/icons/. This folder holds the quest opponent icons, bazaar pets, and bazaar plants. If you have downloaded this content, it will still work, but the folder must be moved on your computer.
 
