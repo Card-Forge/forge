@@ -362,6 +362,15 @@ Fixes/Features:
 - AbilityWork: Added References$ parameter to scripted abilities of 'I' cards where necessary.
 - Removed some unnecessary bits from Homing Sliver script
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- AbilityWork: Added References$ parameter to scripted abilities of 'J' cards where necessary.
+- Fixing Card Shop crash for Packs, but the Packs still aren't displayed.
+- Change to download all-prices.txt from cardforge.org. PHP Script running on cardforge.org uses tcgplayer, providing live pricing data. (MOTL still is missing Dark Ascension and Avacyn Restored)
+- Spell Shop uses Name|SET to lookup price data. Alpha Bird of Paradise will be worth more than Ravnica, etc...
+- Fixed PerSetTracking python script to handle new mtgdata format.
+- Added a fluff piece to the changes.txt file.
+- Updated setdata.txt, mtg-data.txt and setInfoScript.py with Planechase 2012 info.
+- Fixed a bug in AF Reveal.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -446,6 +455,13 @@ Warrior en-Kor
 Bend or Break
 Basalt Golem
 Homing Sliver
+Baleful Strix
+Illusory Angel
+Vela the Night-Clad
+Etherium-Horn Sorcerer
+Maelstrom Wanderer
+Mass Mutiny
+Shardless Agent
 
 
 end
