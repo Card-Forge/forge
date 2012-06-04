@@ -446,11 +446,11 @@ public final class AbilityFactoryReveal {
                 if (!noMove) {
                     CardList movedCards = new CardList();
                     CardList andOrCards = new CardList();
+                    for (final Card c : top) {
+                        rest.add(c);
+                    }
                     if (mitosis) {
                         valid = AbilityFactoryReveal.sharesNameWithCardOnBattlefield(top);
-                        for (final Card c : top) {
-                            rest.add(c);
-                        }
                     } else if (!changeValid.equals("")) {
                         if (changeValid.contains("ChosenType")) {
                             changeValid = changeValid.replace("ChosenType", host.getChosenType());
@@ -460,9 +460,6 @@ public final class AbilityFactoryReveal {
                             andOrCards = top.getValidCards(andOrValid.split(","), host.getController(), host);
                             andOrCards.removeAll(valid);
                             valid.addAll(andOrCards);
-                        }
-                        for (final Card c : top) {
-                            rest.add(c);
                         }
                         if (valid.isEmpty() && choser.isHuman()) {
                             valid.add(dummy);
