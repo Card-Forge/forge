@@ -2882,6 +2882,7 @@ res/cardsfolder/e/ethereal_usher.txt svneol=native#text/plain
 res/cardsfolder/e/ethereal_whiskergill.txt svneol=native#text/plain
 res/cardsfolder/e/etherium_abomination.txt svneol=native#text/plain
 res/cardsfolder/e/etherium_astrolabe.txt svneol=native#text/plain
+res/cardsfolder/e/etherium_horn_sorcerer.txt -text
 res/cardsfolder/e/etherium_sculptor.txt svneol=native#text/plain
 res/cardsfolder/e/ethersworn_adjudicator.txt svneol=native#text/plain
 res/cardsfolder/e/ethersworn_canonist.txt -text
@@ -5468,6 +5469,7 @@ res/cardsfolder/m/maelstrom_archangel.txt -text
 res/cardsfolder/m/maelstrom_djinn.txt svneol=native#text/plain
 res/cardsfolder/m/maelstrom_nexus.txt svneol=native#text/plain
 res/cardsfolder/m/maelstrom_pulse.txt svneol=native#text/plain
+res/cardsfolder/m/maelstrom_wanderer.txt -text
 res/cardsfolder/m/maga_traitor_to_mortals.txt svneol=native#text/plain
 res/cardsfolder/m/mage_il_vec.txt svneol=native#text/plain
 res/cardsfolder/m/mage_slayer.txt svneol=native#text/plain
@@ -5630,6 +5632,7 @@ res/cardsfolder/m/masked_gorgon.txt svneol=native#text/plain
 res/cardsfolder/m/mass_appeal.txt -text
 res/cardsfolder/m/mass_calcify.txt svneol=native#text/plain
 res/cardsfolder/m/mass_hysteria.txt svneol=native#text/plain
+res/cardsfolder/m/mass_mutiny.txt -text
 res/cardsfolder/m/mass_of_ghouls.txt svneol=native#text/plain
 res/cardsfolder/m/mass_polymorph.txt -text svneol=unset#text/plain
 res/cardsfolder/m/massacre.txt -text
@@ -8137,6 +8140,7 @@ res/cardsfolder/s/shard_convergence.txt svneol=native#text/plain
 res/cardsfolder/s/shard_phoenix.txt svneol=native#text/plain
 res/cardsfolder/s/shard_volley.txt svneol=native#text/plain
 res/cardsfolder/s/sharding_sphinx.txt svneol=native#text/plain
+res/cardsfolder/s/shardless_agent.txt -text
 res/cardsfolder/s/shared_discovery.txt svneol=native#text/plain
 res/cardsfolder/s/shared_triumph.txt svneol=native#text/plain
 res/cardsfolder/s/sharpened_pitchfork.txt -text
