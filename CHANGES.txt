@@ -27,6 +27,8 @@ at forge.view.FView.initialize(FView.java:97)
 
 A recent submission to the code base on the SVN prevents the Card Shop crash report when you select a package of cards, but the packages still aren't displayed in the card picture and card detail panels.
 
+Draft mode will cause a crash report when you start a new draft. We are aware of this proble and we hope to be able to fix it at some point in the future.
+
 
 The res/images/icons/ folder has been moved to res/pics/icons/. This folder holds the quest opponent icons, bazaar pets, and bazaar plants. If you have downloaded this content, it will still work, but the folder must be moved on your computer.
 
