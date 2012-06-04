@@ -5,7 +5,11 @@ Forge Beta: 0#-##-2012 ver 1.2.8
 10### cards in total.
 
 
-The deck editors now use the new UI. The new deck editors include:
+The work on the new UI is now finished and this version adds the new UI to the deck editors. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
+
+We all would like to thank Doublestrike for his contributions to the new UI.
+
+The new deck editors include:
 
 * a better text search (can search for multiple terms, and "not" terms
 * interval filters for P/T and CMC
@@ -14,14 +18,14 @@ The deck editors now use the new UI. The new deck editors include:
 * Toggle-able, sort-able, resize-able, move-able columns
 * and of course uses the drag cell layout.
 
-With the update to the new deck editors several people have noticed an error when they run the snapshot build. We hope to have this fixed in the near future. This start up error states:
+With the update to the new deck editors several people noticed an error when they run the snapshot build. We hope to have this fixed in the near future. This start up error states:
 
 Detailed error trace:
 java.lang.NullPointerException
 at forge.gui.deckeditor.controllers.CEditorPreferences.initialize(CEditorPreferences.java:45)
 at forge.view.FView.initialize(FView.java:97)
 
-A recent submission prevents the Card Shop crash report when you select a Pack, but the Packs still aren't displayed.
+A recent submission to the code base on the SVN prevents the Card Shop crash report when you select a package of cards, but the packages still aren't displayed in the card picture and card detail panels.
 
 
 The res/images/icons/ folder has been moved to res/pics/icons/. This folder holds the quest opponent icons, bazaar pets, and bazaar plants. If you have downloaded this content, it will still work, but the folder must be moved on your computer.
