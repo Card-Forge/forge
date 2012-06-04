@@ -1,0 +1,13 @@
+Name:Illusory Angel
+ManaCost:2 U
+Types:Creature Angel Illusion
+Text:no text
+PT:4/4
+K:Flying
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LE0 | Description$ Cast CARDNAME only if you've cast another spell this turn.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/illusory_angel.jpg
+SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/19.jpg
+Oracle:Flying\nCast Illusory Angel only if you've cast another spell this turn.
+End

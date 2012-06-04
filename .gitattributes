@@ -635,6 +635,7 @@ res/cardsfolder/b/balduvian_war_makers.txt svneol=native#text/plain
 res/cardsfolder/b/balefire_dragon.txt -text
 res/cardsfolder/b/balefire_liege.txt svneol=native#text/plain
 res/cardsfolder/b/baleful_stare.txt svneol=native#text/plain
+res/cardsfolder/b/baleful_strix.txt -text
 res/cardsfolder/b/ball_lightning.txt svneol=native#text/plain
 res/cardsfolder/b/ballista_squad.txt svneol=native#text/plain
 res/cardsfolder/b/balloon_peddler.txt svneol=native#text/plain
@@ -4478,6 +4479,7 @@ res/cardsfolder/i/illusionary_forces.txt svneol=native#text/plain
 res/cardsfolder/i/illusionary_servant.txt svneol=native#text/plain
 res/cardsfolder/i/illusionary_wall.txt svneol=native#text/plain
 res/cardsfolder/i/illusions_of_grandeur.txt svneol=native#text/plain
+res/cardsfolder/i/illusory_angel.txt -text
 res/cardsfolder/i/illusory_demon.txt svneol=native#text/plain
 res/cardsfolder/i/imagecrafter.txt -text
 res/cardsfolder/i/imaginary_pet.txt svneol=native#text/plain
@@ -10092,6 +10094,7 @@ res/cardsfolder/v/veiling_oddity.txt -text
 res/cardsfolder/v/veilstone_amulet.txt -text
 res/cardsfolder/v/vein_drinker.txt svneol=native#text/plain
 res/cardsfolder/v/veinfire_borderpost.txt svneol=native#text/plain
+res/cardsfolder/v/vela_the_night_clad.txt -text
 res/cardsfolder/v/veldrane_of_sengir.txt svneol=native#text/plain
 res/cardsfolder/v/veldt.txt svneol=native#text/plain
 res/cardsfolder/v/venarian_glimmer.txt -text

@@ -43,6 +43,7 @@ def initSets():
 	
 	# Multiplayer Sets
 	allSets['Commander'] = 'COM'
+	allSets['Planechase 2012 Edition'] = 'PC2'
 	
 	# Portal
 	allSets['Portal'] = 'POR'
