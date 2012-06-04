@@ -330,9 +330,8 @@ public class AbilityFactoryPump {
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
-        final boolean evasive = (keyword.endsWith("Flying") || keyword.endsWith("Horsemanship")
-                || keyword.endsWith("Unblockable") || keyword.endsWith("Fear") || keyword.endsWith("Intimidate")
-                || keyword.endsWith("Shadow"));
+        final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Fear")
+                || keyword.endsWith("Intimidate") || keyword.endsWith("Shadow"));
         final boolean combatRelevant = (keyword.endsWith("First Strike")
                 || keyword.contains("Bushido") || keyword.endsWith("Deathtouch"));
         // give evasive keywords to creatures that can or do attack
@@ -341,6 +340,37 @@ public class AbilityFactoryPump {
                     || !CombatUtil.canBeBlocked(card)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || (card.getNetCombatDamage() <= 0) || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
+                return false;
+            }
+        } else if (keyword.endsWith("Flying")) {
+            if (ph.isPlayerTurn(human)
+                    && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    && !AllZone.getCombat().getAttackerList().getKeyword("Flying").isEmpty()
+                    && !card.hasKeyword("Reach")
+                    && CombatUtil.canBlock(card)
+                    && CombatUtil.lifeInDanger(AllZone.getCombat())) {
+                return true;
+            }
+            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || !CombatUtil.canBeBlocked(card)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || card.getNetCombatDamage() <= 0
+                    || AllZoneUtil.getCreaturesInPlay(human).getNotKeyword("Flying").isEmpty()) {
+                return false;
+            }
+        } else if (keyword.endsWith("Horsemanship")) {
+            if (ph.isPlayerTurn(human)
+                    && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    && !AllZone.getCombat().getAttackerList().getKeyword("Horsemanship").isEmpty()
+                    && CombatUtil.canBlock(card)
+                    && CombatUtil.lifeInDanger(AllZone.getCombat())) {
+                return true;
+            }
+            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || !CombatUtil.canBeBlocked(card)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || card.getNetCombatDamage() <= 0
+                    || AllZoneUtil.getCreaturesInPlay(human).getNotKeyword("Horsemanship").isEmpty()) {
                 return false;
             }
         } else if (keyword.endsWith("Haste")) {
@@ -423,9 +453,10 @@ public class AbilityFactoryPump {
             }
         } else if (keyword.equals("Reach")) {
             if (ph.isPlayerTurn(computer)
-                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                    || !AllZone.getCombat().getAttackerList().getKeyword("Flying").isEmpty()
-                    || !card.hasKeyword("Flying")) {
+                    || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || AllZone.getCombat().getAttackerList().getKeyword("Flying").isEmpty()
+                    || card.hasKeyword("Flying")
+                    || !CombatUtil.canBlock(card)) {
                 return false;
             }
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
@@ -484,14 +515,13 @@ public class AbilityFactoryPump {
             return true;
         }
 
-        // if the life of the computer is in danger, try to pump
-        // potential blockers before declaring blocks
-        if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                && phase.getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
+        // if the life of the computer is in danger, try to pump blockers blocking Tramplers
+        if (phase.getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && phase.isPlayerTurn(AllZone.getHumanPlayer())
-                && !AllZone.getCombat().getAttackers().isEmpty()
-                && CombatUtil.canBlock(c, AllZone.getCombat())
-                && CombatUtil.lifeInDanger(AllZone.getCombat())) {
+                && c.isBlocking()
+                && defense > 0
+                && AllZone.getCombat().getAttackerBlockedBy(c).hasKeyword("Trample")
+                && (sa.isAbility() || CombatUtil.lifeInDanger(AllZone.getCombat()))) {
             return true;
         }
 
