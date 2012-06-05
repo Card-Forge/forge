@@ -1,0 +1,11 @@
+Name:Shardless Agent
+ManaCost:1 G U
+Types:Artifact Creature Human Rogue
+Text:no text
+PT:2/2
+K:Cascade
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shardless_agent.jpg
+SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/104.jpg
+Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
+End

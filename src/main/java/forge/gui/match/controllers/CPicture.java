@@ -45,7 +45,7 @@ public enum CPicture implements ICDoc {
      */
     public void showCard(final Card c) {
         this.currentCard = c;
-        VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(c.isDoubleFaced() ? true : false);
+        VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(c != null && c.isDoubleFaced() ? true : false);
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(c);
     }
 

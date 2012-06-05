@@ -21,6 +21,9 @@ import java.io.File;
 
 import javax.swing.JFrame;
 
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+
 /**
  * <p>
  * Gui_DownloadPrices class.
@@ -45,8 +48,8 @@ public class GuiDownloadPrices extends GuiDownloader {
      */
     @Override
     protected DownloadObject[] getNeededImages() {
-        final File f = new File(".//res//tmppl.txt");
-        final String url = "http://www.magictraders.com/pricelists/current-magic-excel.txt";
+        final File f = ForgeProps.getFile(NewConstants.Quest.PRICE);
+        final String url = "http://www.cardforge.org/MagicInfo/pricegen.php";
         final DownloadObject[] objects = {new DownloadObject(url, f)};
         return objects;
     }

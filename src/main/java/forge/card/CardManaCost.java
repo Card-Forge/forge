@@ -82,6 +82,9 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     }
 
     private String getSimpleString() {
+        if (this.hasNoCost) {
+            return "";
+        }
         if (this.shards.isEmpty()) {
             return Integer.toString(this.genericCost);
         }

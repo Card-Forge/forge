@@ -5,7 +5,11 @@ Forge Beta: 0#-##-2012 ver 1.2.8
 10### cards in total.
 
 
-The deck editors now use the new UI. The new deck editors include:
+The work on the new UI is now finished and this version adds the new UI to the deck editors. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
+
+We all would like to thank Doublestrike for his contributions to the new UI.
+
+The new deck editors include:
 
 * a better text search (can search for multiple terms, and "not" terms
 * interval filters for P/T and CMC
@@ -14,12 +18,16 @@ The deck editors now use the new UI. The new deck editors include:
 * Toggle-able, sort-able, resize-able, move-able columns
 * and of course uses the drag cell layout.
 
-With the update to the new deck editors several people have noticed an error when they run the snapshot build. We hope to have this fixed in the near future. This start up error states:
+With the update to the new deck editors several people noticed an error when they run the snapshot build. We hope to have this fixed in the near future. This start up error states:
 
 Detailed error trace:
 java.lang.NullPointerException
 at forge.gui.deckeditor.controllers.CEditorPreferences.initialize(CEditorPreferences.java:45)
 at forge.view.FView.initialize(FView.java:97)
+
+A recent submission to the code base on the SVN prevents the Card Shop crash report when you select a package of cards, but the packages still aren't displayed in the card picture and card detail panels.
+
+Draft mode will cause a crash report when you start a new draft. We are aware of this proble and we hope to be able to fix it at some point in the future.
 
 
 The res/images/icons/ folder has been moved to res/pics/icons/. This folder holds the quest opponent icons, bazaar pets, and bazaar plants. If you have downloaded this content, it will still work, but the folder must be moved on your computer.
@@ -350,6 +358,25 @@ Fixes/Features:
 - AbilityWork: Added References$ parameter to scripted abilities of 'H' cards where necessary.
 - Terrarion should now enter the battlefield tapped.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Small fix (renamed Blind Fury effect)
+- Small addition in ReplacementHandler's OptionalDecider block so that DefinedPlayers needing an ActivatingPlayer have a reference point.
+- Updated Animate AF to handle cards with multiple states.
+- merged r15764-r15782 from the Trunk into CloneFix branch
+- Tidied up the stack descriptions for Nissa Rivane.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated Animate AF to cleanup added SVars and static abilities.
+- AbilityWork: Added References$ parameter to scripted abilities of 'I' cards where necessary.
+- Removed some unnecessary bits from Homing Sliver script
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- AbilityWork: Added References$ parameter to scripted abilities of 'J' cards where necessary.
+- Fixing Card Shop crash for Packs, but the Packs still aren't displayed.
+- Change to download all-prices.txt from cardforge.org. PHP Script running on cardforge.org uses tcgplayer, providing live pricing data. (MOTL still is missing Dark Ascension and Avacyn Restored)
+- Spell Shop uses Name|SET to lookup price data. Alpha Bird of Paradise will be worth more than Ravnica, etc...
+- Fixed PerSetTracking python script to handle new mtgdata format.
+- Added a fluff piece to the changes.txt file.
+- Updated setdata.txt, mtg-data.txt and setInfoScript.py with Planechase 2012 info.
+- Fixed a bug in AF Reveal.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -425,6 +452,22 @@ Bloodline Shaman
 Blind Fury
 Bloodcurdler
 Karona's Zealot
+Blood of the Martyr
+Lancers en-Kor
+Nomads en-Kor
+Outrider en-Kor
+Spirit en-Kor
+Warrior en-Kor
+Bend or Break
+Basalt Golem
+Homing Sliver
+Baleful Strix
+Illusory Angel
+Vela the Night-Clad
+Etherium-Horn Sorcerer
+Maelstrom Wanderer
+Mass Mutiny
+Shardless Agent
 
 
 end

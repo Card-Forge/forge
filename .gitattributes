@@ -635,6 +635,7 @@ res/cardsfolder/b/balduvian_war_makers.txt svneol=native#text/plain
 res/cardsfolder/b/balefire_dragon.txt -text
 res/cardsfolder/b/balefire_liege.txt svneol=native#text/plain
 res/cardsfolder/b/baleful_stare.txt svneol=native#text/plain
+res/cardsfolder/b/baleful_strix.txt -text
 res/cardsfolder/b/ball_lightning.txt svneol=native#text/plain
 res/cardsfolder/b/ballista_squad.txt svneol=native#text/plain
 res/cardsfolder/b/balloon_peddler.txt svneol=native#text/plain
@@ -708,6 +709,7 @@ res/cardsfolder/b/baru_fist_of_krosa.txt svneol=native#text/plain
 res/cardsfolder/b/basal_sliver.txt svneol=native#text/plain
 res/cardsfolder/b/basal_thrull.txt svneol=native#text/plain
 res/cardsfolder/b/basalt_gargoyle.txt svneol=native#text/plain
+res/cardsfolder/b/basalt_golem.txt -text
 res/cardsfolder/b/basalt_monolith.txt svneol=native#text/plain
 res/cardsfolder/b/basandra_battle_seraph.txt -text
 res/cardsfolder/b/bash_to_bits.txt svneol=native#text/plain
@@ -791,6 +793,7 @@ res/cardsfolder/b/benalish_lancer.txt -text
 res/cardsfolder/b/benalish_missionary.txt svneol=native#text/plain
 res/cardsfolder/b/benalish_trapper.txt svneol=native#text/plain
 res/cardsfolder/b/benalish_veteran.txt svneol=native#text/plain
+res/cardsfolder/b/bend_or_break.txt -text
 res/cardsfolder/b/benediction_of_moons.txt -text
 res/cardsfolder/b/benevolent_ancestor.txt svneol=native#text/plain
 res/cardsfolder/b/benevolent_bodyguard.txt svneol=native#text/plain
@@ -2879,6 +2882,7 @@ res/cardsfolder/e/ethereal_usher.txt svneol=native#text/plain
 res/cardsfolder/e/ethereal_whiskergill.txt svneol=native#text/plain
 res/cardsfolder/e/etherium_abomination.txt svneol=native#text/plain
 res/cardsfolder/e/etherium_astrolabe.txt svneol=native#text/plain
+res/cardsfolder/e/etherium_horn_sorcerer.txt -text
 res/cardsfolder/e/etherium_sculptor.txt svneol=native#text/plain
 res/cardsfolder/e/ethersworn_adjudicator.txt svneol=native#text/plain
 res/cardsfolder/e/ethersworn_canonist.txt -text
@@ -4314,6 +4318,7 @@ res/cardsfolder/h/homarid_spawning_bed.txt svneol=native#text/plain
 res/cardsfolder/h/homarid_warrior.txt svneol=native#text/plain
 res/cardsfolder/h/homeward_path.txt -text
 res/cardsfolder/h/homicidal_seclusion.txt -text
+res/cardsfolder/h/homing_sliver.txt -text
 res/cardsfolder/h/homura_human_ascendant_homuras_essence.txt -text
 res/cardsfolder/h/honden_of_cleansing_fire.txt svneol=native#text/plain
 res/cardsfolder/h/honden_of_infinite_rage.txt svneol=native#text/plain
@@ -4475,6 +4480,7 @@ res/cardsfolder/i/illusionary_forces.txt svneol=native#text/plain
 res/cardsfolder/i/illusionary_servant.txt svneol=native#text/plain
 res/cardsfolder/i/illusionary_wall.txt svneol=native#text/plain
 res/cardsfolder/i/illusions_of_grandeur.txt svneol=native#text/plain
+res/cardsfolder/i/illusory_angel.txt -text
 res/cardsfolder/i/illusory_demon.txt svneol=native#text/plain
 res/cardsfolder/i/imagecrafter.txt -text
 res/cardsfolder/i/imaginary_pet.txt svneol=native#text/plain
@@ -5463,6 +5469,7 @@ res/cardsfolder/m/maelstrom_archangel.txt -text
 res/cardsfolder/m/maelstrom_djinn.txt svneol=native#text/plain
 res/cardsfolder/m/maelstrom_nexus.txt svneol=native#text/plain
 res/cardsfolder/m/maelstrom_pulse.txt svneol=native#text/plain
+res/cardsfolder/m/maelstrom_wanderer.txt -text
 res/cardsfolder/m/maga_traitor_to_mortals.txt svneol=native#text/plain
 res/cardsfolder/m/mage_il_vec.txt svneol=native#text/plain
 res/cardsfolder/m/mage_slayer.txt svneol=native#text/plain
@@ -5625,6 +5632,7 @@ res/cardsfolder/m/masked_gorgon.txt svneol=native#text/plain
 res/cardsfolder/m/mass_appeal.txt -text
 res/cardsfolder/m/mass_calcify.txt svneol=native#text/plain
 res/cardsfolder/m/mass_hysteria.txt svneol=native#text/plain
+res/cardsfolder/m/mass_mutiny.txt -text
 res/cardsfolder/m/mass_of_ghouls.txt svneol=native#text/plain
 res/cardsfolder/m/mass_polymorph.txt -text svneol=unset#text/plain
 res/cardsfolder/m/massacre.txt -text
@@ -8132,6 +8140,7 @@ res/cardsfolder/s/shard_convergence.txt svneol=native#text/plain
 res/cardsfolder/s/shard_phoenix.txt svneol=native#text/plain
 res/cardsfolder/s/shard_volley.txt svneol=native#text/plain
 res/cardsfolder/s/sharding_sphinx.txt svneol=native#text/plain
+res/cardsfolder/s/shardless_agent.txt -text
 res/cardsfolder/s/shared_discovery.txt svneol=native#text/plain
 res/cardsfolder/s/shared_triumph.txt svneol=native#text/plain
 res/cardsfolder/s/sharpened_pitchfork.txt -text
@@ -10089,6 +10098,7 @@ res/cardsfolder/v/veiling_oddity.txt -text
 res/cardsfolder/v/veilstone_amulet.txt -text
 res/cardsfolder/v/vein_drinker.txt svneol=native#text/plain
 res/cardsfolder/v/veinfire_borderpost.txt svneol=native#text/plain
+res/cardsfolder/v/vela_the_night_clad.txt -text
 res/cardsfolder/v/veldrane_of_sengir.txt svneol=native#text/plain
 res/cardsfolder/v/veldt.txt svneol=native#text/plain
 res/cardsfolder/v/venarian_glimmer.txt -text

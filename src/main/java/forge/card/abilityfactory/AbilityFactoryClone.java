@@ -170,6 +170,7 @@ public final class AbilityFactoryClone {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
+    // TODO update this method
     private static String cloneStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card host = sa.getSourceCard();
