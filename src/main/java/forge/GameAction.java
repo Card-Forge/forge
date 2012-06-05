@@ -667,18 +667,18 @@ public class GameAction {
         }
 
         Card lastKnownInfo = c;
-        if ((p != null) && p.is(ZoneType.Battlefield)) {
+        if (p != null && p.is(ZoneType.Battlefield)) {
             lastKnownInfo = CardUtil.getLKICopy(c);
-            c = AllZone.getCardFactory().copyCard(c);
+            c.clearCounters(); // remove all counters
+            library.add(AllZone.getCardFactory().copyCard(c), libPosition);
+        } else {
+            c.clearCounters(); // remove all counters
+            library.add(c, libPosition);
         }
-
-        c.clearCounters(); // remove all counters
 
         if ((libPosition == -1) || (libPosition > library.size())) {
             libPosition = library.size();
         }
-
-        library.add(c, libPosition);
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", lastKnownInfo);
@@ -693,6 +693,12 @@ public class GameAction {
         Player owner = p.getPlayer();
         if (owner != null) {
             owner.updateLabelObservers();
+        }
+
+        // Soulbond unpairing
+        if (c.isPaired()) {
+            c.getPairedWith().setPairedWith(null);
+            c.setPairedWith(null);
         }
 
         return c;
