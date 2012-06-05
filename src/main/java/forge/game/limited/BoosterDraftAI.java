@@ -522,17 +522,22 @@ public class BoosterDraftAI {
             // count each mana symbol in the mana cost
             for (ManaCostShard shard : mc.getShards()) {
                 byte mask = shard.getColorMask();
-                
-                if ((mask & CardColor.WHITE) > 0 ) 
+
+                if ((mask & CardColor.WHITE) > 0) {
                     clrCnts[0].setCount(clrCnts[0].getCount() + 1);
-                if ((mask & CardColor.BLUE) > 0 ) 
+                }
+                if ((mask & CardColor.BLUE) > 0) {
                     clrCnts[1].setCount(clrCnts[1].getCount() + 1);
-                if ((mask & CardColor.BLACK) > 0 ) 
+                }
+                if ((mask & CardColor.BLACK) > 0) {
                     clrCnts[2].setCount(clrCnts[2].getCount() + 1);
-                if ((mask & CardColor.RED) > 0 ) 
+                }
+                if ((mask & CardColor.RED) > 0) {
                     clrCnts[3].setCount(clrCnts[3].getCount() + 1);
-                if ((mask & CardColor.GREEN) > 0 )
+                }
+                if ((mask & CardColor.GREEN) > 0) {
                     clrCnts[4].setCount(clrCnts[4].getCount() + 1);
+                }
             }
         }
 

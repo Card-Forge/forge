@@ -32,20 +32,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 @SuppressWarnings("serial")
 public class SaveOpenDialog extends JPanel {
-    
+
     private JFileChooser fc;
-    
-    
+
     /**
      *  Enum to contain information for filetype filtering in the open/save dialog.
      *  Add more entries to enum as needed.
-     *  
-     *  
+     * 
+     * 
      */
     public enum Filetypes {
         LAYOUT  ("Layout File", "xml"),
         DECK    ("Deck File",   "dck");
-    
+
         private final String TypeName;
         private final String TypeExtension;
         Filetypes(String Name, String Extension) {
@@ -53,16 +52,15 @@ public class SaveOpenDialog extends JPanel {
             this.TypeExtension = Extension;
         }
     }
-    
+
     /**
      * 
-     * constructor for a save or open dialog
+     * constructor for a save or open dialog.
      */
     public SaveOpenDialog() {
         fc = new JFileChooser();
     }
-    
-    
+
     /**
      * Shows the open dialog for files. If no file selected, returns null. Pass null
      * to Type to allow all files to be viewed/opened.
@@ -73,14 +71,13 @@ public class SaveOpenDialog extends JPanel {
      */
     public File OpenDialog(final File defFileName, final Filetypes type) {
         fc.setCurrentDirectory(defFileName);
-        
-        if (type!=null) {
+
+        if (type != null) {
             fc.setAcceptAllFileFilterUsed(false);
             final FileFilter filter = new FileNameExtensionFilter(type.TypeName, type.TypeExtension);
             fc.addChoosableFileFilter(filter);
         }
-        
-         
+
         int RetValue = fc.showOpenDialog(getParent());
         if (RetValue == JFileChooser.APPROVE_OPTION) {
             final File RetFile = fc.getSelectedFile();
@@ -88,7 +85,7 @@ public class SaveOpenDialog extends JPanel {
         }
         return null;
     }
-    
+
     /**
      * Shows the save dialog.
      * 
@@ -100,31 +97,30 @@ public class SaveOpenDialog extends JPanel {
     public File SaveDialog(final File defFileName, final Filetypes type) {
         File RetFile = defFileName;
         fc.setCurrentDirectory(defFileName);
-        
+
         /* set the file filter if desired */
-        if (type!=null) {
+        if (type != null) {
             fc.setAcceptAllFileFilterUsed(false);
             final FileFilter filter = new FileNameExtensionFilter(type.TypeName, type.TypeExtension);
             fc.addChoosableFileFilter(filter);
         }
-        
+
         int RetValue = fc.showSaveDialog(getParent());
-        
+
         /* user picked save */
         if (RetValue == JFileChooser.APPROVE_OPTION) {
             RetFile = fc.getSelectedFile();
-            
+
             /* Adds extension if it is known and not given */
-            if (type!=null & !(RetFile.getAbsolutePath().endsWith(type.TypeExtension))) {
-                RetFile = new File(RetFile.getAbsolutePath()+"."+type.TypeExtension);
+            if (type != null & !(RetFile.getAbsolutePath().endsWith(type.TypeExtension))) {
+                RetFile = new File(RetFile.getAbsolutePath() + "." + type.TypeExtension);
             }
-            
-            
+
             return RetFile;
         }
-        
+
         /* user picked cancel */
         return null;
     }
-    
+
 }

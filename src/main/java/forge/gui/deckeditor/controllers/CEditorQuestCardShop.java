@@ -148,7 +148,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private Integer getCardValue(final InventoryItem card) {
         if (card instanceof CardPrinted) {
             String ns = card.getName() + "|" + ((CardPrinted) card).getEdition();
-            
+
             if (this.mapPrices.containsKey(ns)) {
                 return this.mapPrices.get(ns);
             } else if (card instanceof CardPrinted) {

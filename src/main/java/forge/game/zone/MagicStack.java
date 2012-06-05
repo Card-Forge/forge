@@ -1376,7 +1376,7 @@ public class MagicStack extends MyObservable {
     public final void clearSimultaneousStack() {
         this.simultaneousStackEntryList.clear();
     }
-    
+
     /**
      * <p>
      * addSimultaneousStackEntry.

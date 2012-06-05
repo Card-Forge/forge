@@ -156,7 +156,7 @@ interface IPlayerZone {
      * @return position
      */
     Integer getPosition(Card c);
-    
+
     /**
      * isEmpty returns true if given zone contains no cards.
      * 
