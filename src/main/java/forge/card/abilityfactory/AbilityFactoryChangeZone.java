@@ -167,6 +167,11 @@ public final class AbilityFactoryChangeZone {
             }
 
             @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryChangeZone.changeZoneCanPlayAI(af, this);
+            }
+
+            @Override
             public boolean chkAIDrawback() {
                 return AbilityFactoryChangeZone.changeZonePlayDrawbackAI(af, this);
             }
@@ -2247,6 +2252,11 @@ public final class AbilityFactoryChangeZone {
             @Override
             public void resolve() {
                 AbilityFactoryChangeZone.changeZoneAllResolve(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryChangeZone.changeZoneAllCanPlayAI(af, this);
             }
 
             @Override

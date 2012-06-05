@@ -161,6 +161,11 @@ public final class AbilityFactoryReveal {
             }
 
             @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryReveal.digCanPlayAI(af, this);
+            }
+
+            @Override
             public boolean chkAIDrawback() {
                 return true;
             }

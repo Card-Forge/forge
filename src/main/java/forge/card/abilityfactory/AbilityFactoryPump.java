@@ -1386,6 +1386,11 @@ public class AbilityFactoryPump {
             } // resolve
 
             @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryPump.this.pumpAllCanPlayAI(this);
+            }
+
+            @Override
             public boolean chkAIDrawback() {
                 return AbilityFactoryPump.this.pumpAllChkDrawbackAI(this);
             }

@@ -151,6 +151,11 @@ public class AbilityFactoryPermanentState {
             }
 
             @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryPermanentState.untapCanPlayAI(af, this);
+            }
+
+            @Override
             public boolean chkAIDrawback() {
                 return AbilityFactoryPermanentState.untapPlayDrawbackAI(af, this);
             }
@@ -712,6 +717,11 @@ public class AbilityFactoryPermanentState {
             @Override
             public void resolve() {
                 AbilityFactoryPermanentState.tapResolve(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryPermanentState.tapCanPlayAI(af, this);
             }
 
             @Override
@@ -1483,6 +1493,11 @@ public class AbilityFactoryPermanentState {
             @Override
             public void resolve() {
                 AbilityFactoryPermanentState.tapAllResolve(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryPermanentState.tapAllCanPlayAI(af, this);
             }
 
             @Override

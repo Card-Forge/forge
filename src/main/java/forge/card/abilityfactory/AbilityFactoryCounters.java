@@ -172,6 +172,11 @@ public class AbilityFactoryCounters {
             }
 
             @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryCounters.putCanPlayAI(af, this);
+            }
+
+            @Override
             public boolean chkAIDrawback() {
                 return AbilityFactoryCounters.putPlayDrawbackAI(af, this);
             }
