@@ -6289,15 +6289,15 @@ public class Card extends GameEntity implements Comparable<Card> {
      * isType.
      * </p>
      * 
-     * @param cardType
+     * @param type
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public final boolean isType(String cardType) {
-        cardType = this.toMixedCase(cardType);
+    public final boolean isType(String type) {
+        type = this.toMixedCase(type);
 
-        if (this.typeContains(cardType)
-                || ((this.isCreature() || this.isTribal()) && CardUtil.isACreatureType(cardType) && this
+        if (this.typeContains(type)
+                || ((this.isCreature() || this.isTribal()) && CardUtil.isACreatureType(type) && this
                         .typeContains("AllCreatureTypes"))) {
             return true;
         }
