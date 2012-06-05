@@ -377,6 +377,21 @@ Fixes/Features:
 - Updated setdata.txt, mtg-data.txt and setInfoScript.py with Planechase 2012 info.
 - Fixed a bug in AF Reveal.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a fluff piece to the changes.txt file.
+- Updated AF Pump AI.
+- Fixed Dream Thief.
+- Fixed Rats' Feast (was referencing the incorrect svar)
+- AbilityWork: Added References$ parameter to scripted abilities of 'P-R' cards where necessary.
+- Added a fluff piece to the changes.txt file.
+- update plugins
+- Fixed Lotus Bloom.
+- merged r15782-r15810 from the Trunk into CloneFix branch
+- Improved AI handling some HIDDEN keywords with AF Pump.
+- Performance update in staticDamagePrevention.
+- Little Performance update in hasSickness().
+- Graft will no longer trigger if the card has no more +1/+1 counters.
+- The AI will now be more careful when fetching legendary permanents.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -468,6 +483,10 @@ Etherium-Horn Sorcerer
 Maelstrom Wanderer
 Mass Mutiny
 Shardless Agent
+Beetleback Chief
+Brindle Shoat
+Thing from the Deep
+Bog Elemental
 
 
 end
