@@ -771,6 +771,7 @@ res/cardsfolder/b/beasts_of_bogardan.txt svneol=native#text/plain
 res/cardsfolder/b/beckon_apparition.txt svneol=native#text/plain
 res/cardsfolder/b/bedlam.txt svneol=native#text/plain
 res/cardsfolder/b/bee_sting.txt svneol=native#text/plain
+res/cardsfolder/b/beetleback_chief.txt -text
 res/cardsfolder/b/befoul.txt svneol=native#text/plain
 res/cardsfolder/b/beguiler_of_wills.txt -text
 res/cardsfolder/b/behemoth_sledge.txt svneol=native#text/plain
@@ -1150,6 +1151,7 @@ res/cardsfolder/b/brimstone_dragon.txt svneol=native#text/plain
 res/cardsfolder/b/brimstone_mage.txt svneol=native#text/plain
 res/cardsfolder/b/brimstone_volley.txt -text
 res/cardsfolder/b/brindle_boar.txt svneol=native#text/plain
+res/cardsfolder/b/brindle_shoat.txt -text
 res/cardsfolder/b/brine_elemental.txt -text
 res/cardsfolder/b/brine_shaman.txt svneol=native#text/plain
 res/cardsfolder/b/bringer_of_the_black_dawn.txt svneol=native#text/plain
