@@ -4541,6 +4541,7 @@ res/cardsfolder/i/indomitable_ancients.txt svneol=native#text/plain
 res/cardsfolder/i/indomitable_archangel.txt svneol=native#text/plain
 res/cardsfolder/i/indomitable_will.txt svneol=native#text/plain
 res/cardsfolder/i/indrik_stomphowler.txt svneol=native#text/plain
+res/cardsfolder/i/indrik_umbra.txt -text
 res/cardsfolder/i/induce_despair.txt -text
 res/cardsfolder/i/induce_paranoia.txt -text svneol=unset#text/plain
 res/cardsfolder/i/inertia_bubble.txt svneol=native#text/plain
