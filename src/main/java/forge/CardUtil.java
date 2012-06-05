@@ -620,7 +620,11 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isNonStackingKeyword(final String keyword) {
-        return Constant.Keywords.NON_STACKING_LIST.contains(keyword);
+        String kw = new String(keyword);
+        if (kw.startsWith("HIDDEN")) {
+            kw = kw.substring(7);
+        }
+        return Constant.Keywords.NON_STACKING_LIST.contains(kw);
     }
 
     /**
