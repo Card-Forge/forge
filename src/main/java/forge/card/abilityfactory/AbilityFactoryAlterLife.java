@@ -388,10 +388,10 @@ public class AbilityFactoryAlterLife {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (sa.canTarget(AllZone.getHumanPlayer())) {
-                tgt.addTarget(AllZone.getHumanPlayer());
-            } else if (mandatory && sa.canTarget(AllZone.getComputerPlayer())) {
+            if (sa.canTarget(AllZone.getComputerPlayer())) {
                 tgt.addTarget(AllZone.getComputerPlayer());
+            } else if (mandatory && sa.canTarget(AllZone.getHumanPlayer())) {
+                tgt.addTarget(AllZone.getHumanPlayer());
             } else {
                 return false;
             }
