@@ -3581,7 +3581,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean hasSickness() {
-        return !this.hasKeyword("Haste") && this.sickness;
+        return this.sickness && !this.hasKeyword("Haste");
     }
 
     /**
@@ -3591,7 +3591,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return boolean
      */
     public final boolean isSick() {
-        return !this.hasKeyword("Haste") && this.sickness && this.isCreature();
+        return this.sickness && this.isCreature() && !this.hasKeyword("Haste");
     }
 
     /**

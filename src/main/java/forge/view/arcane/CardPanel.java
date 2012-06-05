@@ -406,7 +406,7 @@ public class CardPanel extends JPanel implements CardContainer {
                     (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
         }
 
-        if (this.getCard().isCreature() && this.getCard().hasSickness() && AllZoneUtil.isCardInPlay(this.getCard())) {
+        if (this.getCard().isSick() && AllZoneUtil.isCardInPlay(this.getCard())) {
             CardFaceSymbols.drawSymbol("summonsick", g, (this.cardXOffset + (this.cardWidth / 2)) - 16,
                     (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
         }
