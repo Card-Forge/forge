@@ -401,6 +401,7 @@ Fixes/Features:
 - Creating branch for M13 Cards
 - Changed delayed triggers of Pacts to abilities rather than spells; Summoner's Pact no longer shuffles into library
 - Fixed Riders of Gavony.
+- Added the recent commit logs to changes.txt.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
@@ -501,6 +502,7 @@ Krond the Dawn-Clad
 Preyseizer Dragon
 Indrik Umbra
 Dragonlair Spider
+Dreampod Druid
 
 
 end
