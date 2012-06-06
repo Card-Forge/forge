@@ -2437,6 +2437,7 @@ res/cardsfolder/d/dragon_shadow.txt -text
 res/cardsfolder/d/dragon_tyrant.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_whelp.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_wings.txt -text
+res/cardsfolder/d/dragonlair_spider.txt -text
 res/cardsfolder/d/dragonmaster_outcast.txt svneol=native#text/plain
 res/cardsfolder/d/dragons_claw.txt svneol=native#text/plain
 res/cardsfolder/d/dragons_herald.txt -text
