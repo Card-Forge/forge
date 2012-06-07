@@ -119,9 +119,10 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
                 this.fnPriceCompare, this.fnPriceGet);
 
-        columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_NEW));
-        columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
-                this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
+        // card shop doesn't need "New" column
+        //columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_NEW));
+        //columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
+        //        this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
 
         columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_SALE_PRICE));
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
@@ -135,6 +136,10 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
                 this.fnDeckCompare, this.fnDeckGet);
 
+        // don't need AI column for eaither table
+        columnsCatalog.remove(SColumnUtil.getColumn(ColumnName.CAT_AI));
+        columnsDeck.remove(SColumnUtil.getColumn(ColumnName.DECK_AI));
+        
         // Setup with current column set
         this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
         this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
