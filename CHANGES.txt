@@ -403,6 +403,15 @@ Fixes/Features:
 - Fixed Riders of Gavony.
 - Added the recent commit logs to changes.txt.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Merged changes from trunk to AbilityWork: r15686-r15836
+- Somehow missed some scripts in the merge...
+- Cardshop UI tweaks:
+* Removed Add/Remove 4-of.
+* Relabeled As Buy/Sell.
+* Added credits counter.
+* Added Max Selling Percentage and Price.
+* Fixed labels and buttons to return to normal for regular deck editor.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
