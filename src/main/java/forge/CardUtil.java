@@ -624,6 +624,9 @@ public final class CardUtil {
         if (kw.startsWith("HIDDEN")) {
             kw = kw.substring(7);
         }
+        if (kw.startsWith("Protection")) {
+            return true;
+        }
         return Constant.Keywords.NON_STACKING_LIST.contains(kw);
     }
 
