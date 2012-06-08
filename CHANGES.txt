@@ -412,6 +412,10 @@ Fixes/Features:
 * Added Max Selling Percentage and Price.
 * Fixed labels and buttons to return to normal for regular deck editor.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Removed AI column from card shop.
+- Removed New Column from Cards for Sale.
+- Fixed moveToLibrary bug.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
