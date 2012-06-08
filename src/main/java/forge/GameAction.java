@@ -666,6 +666,10 @@ public class GameAction {
             AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
         }
 
+        if ((libPosition == -1) || (libPosition > library.size())) {
+            libPosition = library.size();
+        }
+
         Card lastKnownInfo = c;
         if (p != null && p.is(ZoneType.Battlefield)) {
             lastKnownInfo = CardUtil.getLKICopy(c);
@@ -674,10 +678,6 @@ public class GameAction {
         } else {
             c.clearCounters(); // remove all counters
             library.add(c, libPosition);
-        }
-
-        if ((libPosition == -1) || (libPosition > library.size())) {
-            libPosition = library.size();
         }
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
