@@ -411,7 +411,11 @@ public class AbilityFactoryGainControl {
         GameEntity newController;
 
         if (controllers.size() == 0) {
-            newController = this.hostCard;
+            if (sa.isSpell()) {
+                newController = sa.getActivatingPlayer();
+            } else {
+                newController = this.hostCard;
+            }
         } else {
             newController = controllers.get(0);
         }
