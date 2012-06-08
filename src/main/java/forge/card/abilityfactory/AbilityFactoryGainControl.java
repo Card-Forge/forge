@@ -450,16 +450,16 @@ public class AbilityFactoryGainControl {
 
             if (this.lose != null) {
                 if (this.lose.contains("LeavesPlay")) {
-                    this.hostCard.addLeavesPlayCommand(this.getLoseControlCommand(tgtC, originalController));
+                    this.hostCard.addLeavesPlayCommand(this.getLoseControlCommand(tgtC, originalController, newController));
                 }
                 if (this.lose.contains("Untap")) {
-                    this.hostCard.addUntapCommand(this.getLoseControlCommand(tgtC, originalController));
+                    this.hostCard.addUntapCommand(this.getLoseControlCommand(tgtC, originalController, newController));
                 }
                 if (this.lose.contains("LoseControl")) {
-                    this.hostCard.addChangeControllerCommand(this.getLoseControlCommand(tgtC, originalController));
+                    this.hostCard.addChangeControllerCommand(this.getLoseControlCommand(tgtC, originalController, newController));
                 }
                 if (this.lose.contains("EOT")) {
-                    AllZone.getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, originalController));
+                    AllZone.getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, originalController, newController));
                 }
             }
 
@@ -476,7 +476,7 @@ public class AbilityFactoryGainControl {
             }
 
             this.hostCard.clearGainControlReleaseCommands();
-            this.hostCard.addGainControlReleaseCommand(this.getLoseControlCommand(tgtC, originalController));
+            this.hostCard.addGainControlReleaseCommand(this.getLoseControlCommand(tgtC, originalController, newController));
 
         } // end foreach target
     }
@@ -590,14 +590,15 @@ public class AbilityFactoryGainControl {
      *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.Command} object.
      */
-    private Command getLoseControlCommand(final Card c, final Player originalController) {
+    private Command getLoseControlCommand(final Card c, final Player originalController, final GameEntity newController) {
         final Command loseControl = new Command() {
             private static final long serialVersionUID = 878543373519872418L;
 
             @Override
             public void execute() {
                 AbilityFactoryGainControl.doLoseControl(c, AbilityFactoryGainControl.this.hostCard,
-                        AbilityFactoryGainControl.this.bTapOnLose, AbilityFactoryGainControl.this.kws);
+                        AbilityFactoryGainControl.this.bTapOnLose, AbilityFactoryGainControl.this.kws,
+                        newController);
             } // execute()
         };
 
@@ -605,12 +606,12 @@ public class AbilityFactoryGainControl {
     }
 
     private static void doLoseControl(final Card c, final Card host, final boolean tapOnLose,
-            final ArrayList<String> addedKeywords) {
+            final ArrayList<String> addedKeywords, final GameEntity newController) {
         if (null == c) {
             return;
         }
         if (AllZoneUtil.isCardInPlay(c)) {
-            c.removeController(host);
+            c.removeController(newController);
             // Singletons.getModel().getGameAction().changeController(new CardList(c),
             // c.getController(), originalController);
 
