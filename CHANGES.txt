@@ -416,6 +416,12 @@ Fixes/Features:
 - Removed New Column from Cards for Sale.
 - Fixed moveToLibrary bug.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Improved AI handling the keyword "You may have CARDNAME assign its combat damage as though it weren't blocked.".
+- Fixed AF GainControl not setting the right controller for spells.
+- Added Protection keywords to isNonStackingKeyword.
+- Fixed LoseControlCommand in AF GainControl.
+- merged r15810-r15847 from the Trunk into CloneFix branch
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
