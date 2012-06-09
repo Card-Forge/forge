@@ -70,7 +70,7 @@ public class ManaCostShard {
     /** A bitmask to represent any mana symbol as an integer. */
     public abstract static class Atom {
         public static final int COLORLESS = 1 << 0;
-                
+
         /** The Constant WHITE. */
         public static final int WHITE = 1 << 1;
 
@@ -109,9 +109,9 @@ public class ManaCostShard {
      * I choose the latter, because memory for boxed objects will be taken from
      * heap, while unboxed values will lay on stack, which is faster
      */
-    
+
     public static final ManaCostShard COLORLESS = new ManaCostShard(Atom.COLORLESS, "1");
-    
+
     /** The Constant X. */
     public static final ManaCostShard X = new ManaCostShard(Atom.IS_X, "X");
 
@@ -340,11 +340,11 @@ public class ManaCostShard {
     public boolean isSnow() {
         return (this.shard & Atom.IS_SNOW) != 0;
     }
-    
+
     public boolean isMonoColor() {
         int colormask = this.shard & (Atom.WHITE | Atom.BLUE | Atom.BLACK | Atom.RED | Atom.GREEN);
         return BinaryUtil.bitCount(colormask) == 1;
-        
+
     }
 
     /**

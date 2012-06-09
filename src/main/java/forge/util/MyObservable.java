@@ -41,8 +41,8 @@ public class MyObservable extends Observable {
         this.notifyObservers();
 
         if (Singletons.getModel() == null) { return; }
-        PhaseHandler phases = Singletons.getModel().getGameState().getPhaseHandler(); 
-        
+        PhaseHandler phases = Singletons.getModel().getGameState().getPhaseHandler();
+
         if ((phases != null) && phases.isNeedToNextPhase()) {
             if (phases.isNeedToNextPhaseInit()) {
                 // this is used.

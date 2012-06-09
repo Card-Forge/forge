@@ -377,6 +377,45 @@ Fixes/Features:
 - Updated setdata.txt, mtg-data.txt and setInfoScript.py with Planechase 2012 info.
 - Fixed a bug in AF Reveal.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a fluff piece to the changes.txt file.
+- Updated AF Pump AI.
+- Fixed Dream Thief.
+- Fixed Rats' Feast (was referencing the incorrect svar)
+- AbilityWork: Added References$ parameter to scripted abilities of 'P-R' cards where necessary.
+- Added a fluff piece to the changes.txt file.
+- update plugins
+- Fixed Lotus Bloom.
+- merged r15782-r15810 from the Trunk into CloneFix branch
+- Improved AI handling some HIDDEN keywords with AF Pump.
+- Performance update in staticDamagePrevention.
+- Little Performance update in hasSickness().
+- Graft will no longer trigger if the card has no more +1/+1 counters.
+- The AI will now be more careful when fetching legendary permanents.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Sever the Bloodline.
+- Updated text of Hunting Grounds.
+- Added unpairing to moveToLibrary.
+- Fixed targeting in gainLifeDoTriggerAINoCost.
+- CheckStyle.
+- Improved AI of some cards using AF Charm.
+- Creating branch for M13 Cards
+- Changed delayed triggers of Pacts to abilities rather than spells; Summoner's Pact no longer shuffles into library
+- Fixed Riders of Gavony.
+- Added the recent commit logs to changes.txt.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Merged changes from trunk to AbilityWork: r15686-r15836
+- Somehow missed some scripts in the merge...
+- Cardshop UI tweaks:
+* Removed Add/Remove 4-of.
+* Relabeled As Buy/Sell.
+* Added credits counter.
+* Added Max Selling Percentage and Price.
+* Fixed labels and buttons to return to normal for regular deck editor.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Removed AI column from card shop.
+- Removed New Column from Cards for Sale.
+- Fixed moveToLibrary bug.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -468,6 +507,15 @@ Etherium-Horn Sorcerer
 Maelstrom Wanderer
 Mass Mutiny
 Shardless Agent
+Beetleback Chief
+Brindle Shoat
+Thing from the Deep
+Bog Elemental
+Krond the Dawn-Clad
+Preyseizer Dragon
+Indrik Umbra
+Dragonlair Spider
+Dreampod Druid
 
 
 end

@@ -41,6 +41,8 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.home.quest.SSubmenuQuestUtil;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FSkin;
 import forge.item.BoosterPack;
 import forge.item.CardPrinted;
 import forge.item.FatPack;
@@ -63,8 +65,13 @@ import forge.util.closures.Lambda1;
  * @version $Id: CEditorQuestCardShop.java 15088 2012-04-07 11:34:05Z Max mtg $
  */
 public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, DeckBase> {
-    private final JLabel creditsLabel = new JLabel();
-    private final JLabel sellPercentageLabel = new JLabel();
+    private final JLabel creditsLabel = new FLabel.Builder()
+        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COINSTACK))
+        .fontSize(15).build();
+    private final JLabel sellPercentageLabel = new FLabel.Builder().text("0")
+            .fontSize(11)
+            .build();
+    
     private double multiplier;
     private final QuestController questData;
 
@@ -73,6 +80,12 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private final Map<String, Integer> mapPrices = this.r.getPriceList();
     private Map<CardPrinted, Integer> decksUsingMyCards;
 
+    // remember changed gui elements
+    private String CCTabLabel = new String();
+    private String CCAddLabel = new String();
+    private String CDTabLabel = new String();
+    private String CDRemLabel = new String();
+    
     /**
      * Child controller for quest card shop UI.
      * 
@@ -106,9 +119,10 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
                 this.fnPriceCompare, this.fnPriceGet);
 
-        columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_NEW));
-        columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
-                this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
+        // card shop doesn't need "New" column
+        //columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_NEW));
+        //columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
+        //        this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
 
         columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_SALE_PRICE));
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
@@ -122,14 +136,27 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
                 this.fnDeckCompare, this.fnDeckGet);
 
+        // don't need AI column for eaither table
+        columnsCatalog.remove(SColumnUtil.getColumn(ColumnName.CAT_AI));
+        columnsDeck.remove(SColumnUtil.getColumn(ColumnName.DECK_AI));
+        
         // Setup with current column set
         this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
         this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
 
         SEditorUtil.resetUI();
 
+        CCTabLabel = VCardCatalog.SINGLETON_INSTANCE.getTabLabel().getText();
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Cards for sale");
+        
+        CCAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
+        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Buy Card");
+        
+        CDTabLabel = VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().getText();
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Your Cards");
+        
+        CDRemLabel = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().getText();
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText("Sell Card");
     }
 
     // fills number of decks using each card
@@ -148,7 +175,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private Integer getCardValue(final InventoryItem card) {
         if (card instanceof CardPrinted) {
             String ns = card.getName() + "|" + ((CardPrinted) card).getEdition();
-            
+
             if (this.mapPrices.containsKey(ns)) {
                 return this.mapPrices.get(ns);
             } else if (card instanceof CardPrinted) {
@@ -342,6 +369,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getTableCatalog().setDeck(forSale);
         this.getTableDeck().setDeck(ownedItems);
 
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4());
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(creditsLabel);
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
 
         final double multiPercent = this.multiplier * 100;
@@ -352,6 +381,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         if (maxSellPrice < Integer.MAX_VALUE) {
             maxSellingPrice = String.format("Maximum selling price is %d credits.", maxSellPrice);
         }
+        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
+        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(sellPercentageLabel);
         this.sellPercentageLabel.setText("<html>Selling cards at " + formatter.format(multiPercent)
                 + "% of their value.<br>" + maxSellingPrice + "</html>");
     }
@@ -364,7 +395,20 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         SSubmenuQuestUtil.updateStatsAndPet();
         AllZone.getQuest().save();
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
-
+        
+        // undo Card Shop Specifics
+        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(sellPercentageLabel);
+        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
+        
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(creditsLabel);
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4());
+        
+        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(CCTabLabel);
+        VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(CDTabLabel);
+        
+        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(CCAddLabel);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText(CDRemLabel);
+        
         return true;
     }
 }

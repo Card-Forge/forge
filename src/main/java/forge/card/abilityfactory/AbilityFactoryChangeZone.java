@@ -167,6 +167,11 @@ public final class AbilityFactoryChangeZone {
             }
 
             @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryChangeZone.changeZoneCanPlayAI(af, this);
+            }
+
+            @Override
             public boolean chkAIDrawback() {
                 return AbilityFactoryChangeZone.changeZonePlayDrawbackAI(af, this);
             }
@@ -1069,33 +1074,49 @@ public final class AbilityFactoryChangeZone {
                 c = CardUtil.getRandom(fetchList.toArray());
             } else if (defined) {
                 c = fetchList.get(0);
-            } else if (type.contains("Basic")) {
-                c = AbilityFactoryChangeZone.basicManaFixing(fetchList);
-            } else if (AbilityFactoryChangeZone.areAllBasics(type)) {
-                c = AbilityFactoryChangeZone.basicManaFixing(fetchList, type);
-            } else if (fetchList.getNotType("Creature").size() == 0) {
-                c = CardFactoryUtil.getBestCreatureAI(fetchList); // if only
-                                                                  // creatures
-                                                                  // take the
-                                                                  // best
-            } else if (ZoneType.Battlefield.equals(destination) || ZoneType.Graveyard.equals(destination)) {
-                c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, sa, false);
-            } else if (ZoneType.Exile.equals(destination)) {
-                // Exiling your own stuff, if Exiling opponents stuff choose
-                // best
-                if (destZone.getPlayer().isHuman()) {
-                    c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, sa, false);
-                } else {
-                    c = CardFactoryUtil.getCheapestPermanentAI(fetchList, sa, false);
-                }
             } else {
-                // Don't fetch another tutor with the same name
-                if (origin.contains(ZoneType.Library) && !fetchList.getNotName(card.getName()).isEmpty()) {
-                    fetchList = fetchList.getNotName(card.getName());
+                Card first = fetchList.get(0);
+                fetchList = fetchList.filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        if (c.isType("Legendary")) {
+                            if (!AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, c.getName()).isEmpty()) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                });
+                if (type.contains("Basic")) {
+                c = AbilityFactoryChangeZone.basicManaFixing(fetchList);
+                } else if (AbilityFactoryChangeZone.areAllBasics(type)) {
+                    c = AbilityFactoryChangeZone.basicManaFixing(fetchList, type);
+                } else if (fetchList.getNotType("Creature").size() == 0) {
+                    c = CardFactoryUtil.getBestCreatureAI(fetchList); // if only
+                                                                      // creatures
+                                                                      // take the
+                                                                      // best
+                } else if (ZoneType.Battlefield.equals(destination) || ZoneType.Graveyard.equals(destination)) {
+                    c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, sa, false);
+                } else if (ZoneType.Exile.equals(destination)) {
+                    // Exiling your own stuff, if Exiling opponents stuff choose
+                    // best
+                    if (destZone.getPlayer().isHuman()) {
+                        c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, sa, false);
+                    } else {
+                        c = CardFactoryUtil.getCheapestPermanentAI(fetchList, sa, false);
+                    }
+                } else {
+                    // Don't fetch another tutor with the same name
+                    if (origin.contains(ZoneType.Library) && !fetchList.getNotName(card.getName()).isEmpty()) {
+                        fetchList = fetchList.getNotName(card.getName());
+                    }
+                    fetchList.shuffle();
+                    c = fetchList.get(0);
                 }
-
-                fetchList.shuffle();
-                c = fetchList.get(0);
+                if (c == null) {
+                    c = first;
+                }
             }
 
             fetched.add(c);
@@ -2231,6 +2252,11 @@ public final class AbilityFactoryChangeZone {
             @Override
             public void resolve() {
                 AbilityFactoryChangeZone.changeZoneAllResolve(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryChangeZone.changeZoneAllCanPlayAI(af, this);
             }
 
             @Override

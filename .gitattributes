@@ -771,6 +771,7 @@ res/cardsfolder/b/beasts_of_bogardan.txt svneol=native#text/plain
 res/cardsfolder/b/beckon_apparition.txt svneol=native#text/plain
 res/cardsfolder/b/bedlam.txt svneol=native#text/plain
 res/cardsfolder/b/bee_sting.txt svneol=native#text/plain
+res/cardsfolder/b/beetleback_chief.txt -text
 res/cardsfolder/b/befoul.txt svneol=native#text/plain
 res/cardsfolder/b/beguiler_of_wills.txt -text
 res/cardsfolder/b/behemoth_sledge.txt svneol=native#text/plain
@@ -994,6 +995,7 @@ res/cardsfolder/b/boartusk_liege.txt svneol=native#text/plain
 res/cardsfolder/b/body_double.txt -text
 res/cardsfolder/b/body_of_jukai.txt svneol=native#text/plain
 res/cardsfolder/b/body_snatcher.txt -text svneol=unset#text/plain
+res/cardsfolder/b/bog_elemental.txt -text
 res/cardsfolder/b/bog_glider.txt svneol=native#text/plain
 res/cardsfolder/b/bog_gnarr.txt svneol=native#text/plain
 res/cardsfolder/b/bog_hoodlums.txt svneol=native#text/plain
@@ -1150,6 +1152,7 @@ res/cardsfolder/b/brimstone_dragon.txt svneol=native#text/plain
 res/cardsfolder/b/brimstone_mage.txt svneol=native#text/plain
 res/cardsfolder/b/brimstone_volley.txt -text
 res/cardsfolder/b/brindle_boar.txt svneol=native#text/plain
+res/cardsfolder/b/brindle_shoat.txt -text
 res/cardsfolder/b/brine_elemental.txt -text
 res/cardsfolder/b/brine_shaman.txt svneol=native#text/plain
 res/cardsfolder/b/bringer_of_the_black_dawn.txt svneol=native#text/plain
@@ -2434,6 +2437,7 @@ res/cardsfolder/d/dragon_shadow.txt -text
 res/cardsfolder/d/dragon_tyrant.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_whelp.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_wings.txt -text
+res/cardsfolder/d/dragonlair_spider.txt -text
 res/cardsfolder/d/dragonmaster_outcast.txt svneol=native#text/plain
 res/cardsfolder/d/dragons_claw.txt svneol=native#text/plain
 res/cardsfolder/d/dragons_herald.txt -text
@@ -2479,6 +2483,7 @@ res/cardsfolder/d/dream_thrush.txt -text
 res/cardsfolder/d/dream_twist.txt -text
 res/cardsfolder/d/dreamborn_muse.txt svneol=native#text/plain
 res/cardsfolder/d/dreamcatcher.txt svneol=native#text/plain
+res/cardsfolder/d/dreampod_druid.txt -text
 res/cardsfolder/d/dreams_grip.txt svneol=native#text/plain
 res/cardsfolder/d/dreams_of_the_dead.txt -text
 res/cardsfolder/d/dreamscape_artist.txt svneol=native#text/plain
@@ -4538,6 +4543,7 @@ res/cardsfolder/i/indomitable_ancients.txt svneol=native#text/plain
 res/cardsfolder/i/indomitable_archangel.txt svneol=native#text/plain
 res/cardsfolder/i/indomitable_will.txt svneol=native#text/plain
 res/cardsfolder/i/indrik_stomphowler.txt svneol=native#text/plain
+res/cardsfolder/i/indrik_umbra.txt -text
 res/cardsfolder/i/induce_despair.txt -text
 res/cardsfolder/i/induce_paranoia.txt -text svneol=unset#text/plain
 res/cardsfolder/i/inertia_bubble.txt svneol=native#text/plain
@@ -5061,6 +5067,7 @@ res/cardsfolder/k/krark_clan_shaman.txt svneol=native#text/plain
 res/cardsfolder/k/krark_clan_stoker.txt svneol=native#text/plain
 res/cardsfolder/k/kresh_the_bloodbraided.txt svneol=native#text/plain
 res/cardsfolder/k/kris_mage.txt svneol=native#text/plain
+res/cardsfolder/k/krond_the_dawn_clad.txt -text
 res/cardsfolder/k/krosan_archer.txt svneol=native#text/plain
 res/cardsfolder/k/krosan_avenger.txt svneol=native#text/plain
 res/cardsfolder/k/krosan_beast.txt svneol=native#text/plain
@@ -6954,6 +6961,7 @@ res/cardsfolder/p/presence_of_the_wise.txt svneol=native#text/plain
 res/cardsfolder/p/pretenders_claim.txt svneol=native#text/plain
 res/cardsfolder/p/prey_upon.txt -text
 res/cardsfolder/p/preys_vengeance.txt -text
+res/cardsfolder/p/preyseizer_dragon.txt -text
 res/cardsfolder/p/price_of_progress.txt svneol=native#text/plain
 res/cardsfolder/p/prickly_boggart.txt svneol=native#text/plain
 res/cardsfolder/p/pride_guardian.txt svneol=native#text/plain
@@ -9482,6 +9490,7 @@ res/cardsfolder/t/thief_of_hope.txt svneol=native#text/plain
 res/cardsfolder/t/thieves_fortune.txt -text
 res/cardsfolder/t/thieving_magpie.txt svneol=native#text/plain
 res/cardsfolder/t/thieving_sprite.txt -text
+res/cardsfolder/t/thing_from_the_deep.txt -text
 res/cardsfolder/t/think_tank.txt svneol=native#text/plain
 res/cardsfolder/t/think_twice.txt svneol=native#text/plain
 res/cardsfolder/t/thirst.txt svneol=native#text/plain

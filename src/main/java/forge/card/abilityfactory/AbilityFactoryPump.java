@@ -302,6 +302,18 @@ public class AbilityFactoryPump {
             if (ph.getPhase().isBefore(PhaseType.MAIN2) || card.isUntapped() || ph.isPlayerTurn(human)) {
                 return false;
             }
+        } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")) {
+            if (ph.isPlayerTurn(computer) && (!CombatUtil.canBlock(card)
+                    || card.getNetCombatDamage() <= 0
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                    || ph.getPhase().isBefore(PhaseType.MAIN1)
+                    || AllZoneUtil.getCreaturesInPlay(computer).isEmpty())) {
+                return false;
+            }
+            if (ph.isPlayerTurn(human) && (!card.isAttacking()
+                    || card.getNetCombatDamage() <= 0)) {
+                return false;
+            }
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
@@ -1372,6 +1384,11 @@ public class AbilityFactoryPump {
             public void resolve() {
                 AbilityFactoryPump.this.pumpAllResolve(this);
             } // resolve
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryPump.this.pumpAllCanPlayAI(this);
+            }
 
             @Override
             public boolean chkAIDrawback() {

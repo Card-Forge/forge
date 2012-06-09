@@ -153,6 +153,11 @@ public class AbilityFactoryZoneAffecting {
             }
 
             @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryZoneAffecting.drawCanPlayAI(af, this);
+            }
+
+            @Override
             public void resolve() {
                 AbilityFactoryZoneAffecting.drawResolve(af, this);
             }
@@ -1119,6 +1124,11 @@ public class AbilityFactoryZoneAffecting {
             @Override
             public void resolve() {
                 AbilityFactoryZoneAffecting.discardResolve(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryZoneAffecting.discardCanPlayAI(af, this);
             }
 
             @Override

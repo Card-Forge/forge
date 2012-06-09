@@ -3653,7 +3653,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean hasSickness() {
-        return !this.hasKeyword("Haste") && this.sickness;
+        return this.sickness && !this.hasKeyword("Haste");
     }
 
     /**
@@ -3663,7 +3663,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return boolean
      */
     public final boolean isSick() {
-        return !this.hasKeyword("Haste") && this.sickness && this.isCreature();
+        return this.sickness && this.isCreature() && !this.hasKeyword("Haste");
     }
 
     /**
@@ -6385,15 +6385,15 @@ public class Card extends GameEntity implements Comparable<Card> {
      * isType.
      * </p>
      * 
-     * @param cardType
+     * @param type
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public final boolean isType(String cardType) {
-        cardType = this.toMixedCase(cardType);
+    public final boolean isType(String type) {
+        type = this.toMixedCase(type);
 
-        if (this.typeContains(cardType)
-                || ((this.isCreature() || this.isTribal()) && CardUtil.isACreatureType(cardType) && this
+        if (this.typeContains(type)
+                || ((this.isCreature() || this.isTribal()) && CardUtil.isACreatureType(type) && this
                         .typeContains("AllCreatureTypes"))) {
             return true;
         }
@@ -7943,47 +7943,51 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
-        if (isCombat) {
-            if (this.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
+        for (String kw : source.getKeyword()) {
+            if (isCombat) {
+                if (kw.equals("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
+                    return 0;
+                }
+                if (kw.equals("Prevent all combat damage that would be dealt by CARDNAME.")) {
+                    return 0;
+                }
+            }
+            if (kw.equals("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
                 return 0;
             }
-            if (this.hasKeyword("Prevent all combat damage that would be dealt to CARDNAME.")) {
-                return 0;
-            }
-            if (source.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
-                return 0;
-            }
-            if (source.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")) {
-                return 0;
-            }
-        }
-        if (this.hasKeyword("Prevent all damage that would be dealt to CARDNAME.")) {
-            return 0;
-        }
-        if (this.hasKeyword("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
-            return 0;
-        }
-        if (source.hasKeyword("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
-            return 0;
-        }
-        if (source.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")) {
-            return 0;
-        }
-
-        if (this.hasStartOfKeyword("Absorb")) {
-            final int absorbed = this.getKeywordMagnitude("Absorb");
-            if (restDamage > absorbed) {
-                restDamage = restDamage - absorbed;
-            } else {
+            if (kw.equals("Prevent all damage that would be dealt by CARDNAME.")) {
                 return 0;
             }
         }
-
-        if (this.hasStartOfKeyword("PreventAllDamageBy")) {
-            String valid = this.getKeyword().get(this.getKeywordPosition("PreventAllDamageBy"));
-            valid = valid.split(" ", 2)[1];
-            if (source.isValid(valid, this.getController(), this)) {
+        for (String kw : this.getKeyword()) {
+            if (isCombat) {
+                if (kw.equals("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
+                    return 0;
+                }
+                if (kw.equals("Prevent all combat damage that would be dealt to CARDNAME.")) {
+                    return 0;
+                }
+            }
+            if (kw.equals("Prevent all damage that would be dealt to CARDNAME.")) {
                 return 0;
+            }
+            if (kw.equals("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
+                return 0;
+            }
+            if (kw.equals("Absorb")) {
+                final int absorbed = this.getKeywordMagnitude("Absorb");
+                if (restDamage > absorbed) {
+                    restDamage = restDamage - absorbed;
+                } else {
+                    return 0;
+                }
+            }
+            if (kw.startsWith("PreventAllDamageBy")) {
+                String valid = this.getKeyword().get(this.getKeywordPosition("PreventAllDamageBy"));
+                valid = valid.split(" ", 2)[1];
+                if (source.isValid(valid, this.getController(), this)) {
+                    return 0;
+                }
             }
         }
 

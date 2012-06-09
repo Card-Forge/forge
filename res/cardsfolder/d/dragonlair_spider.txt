@@ -1,0 +1,13 @@
+Name:Dragonlair Spider
+ManaCost:2 R R G G
+Types:Creature Spider
+Text:no text
+PT:5/6
+K:Reach
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent casts a spell, put a 1/1 green Insect creature token onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonlair_spider.jpg
+SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/87.jpg
+Oracle:Reach\nWhenever an opponent casts a spell, put a 1/1 green Insect creature token onto the battlefield.
+End

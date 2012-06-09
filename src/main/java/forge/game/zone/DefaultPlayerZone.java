@@ -180,7 +180,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     public final boolean contains(final Card c) {
         return this.getCardList().contains(c);
     }
-    
+
     /*
      * (non-Javadoc)
      * 
@@ -194,7 +194,6 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         }
         return index;
     }
-    
 
     /**
      * Removes the.

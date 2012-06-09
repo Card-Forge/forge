@@ -137,8 +137,7 @@ public class CardFaceSymbols {
         if (manaCost.isEmpty()) {
             return;
         }
-        
-        
+
         final int genericManaCost = manaCost.getGenericCost();
         final boolean hasGeneric = (genericManaCost > 0) || manaCost.isPureGeneric();
         final List<ManaCostShard> shards = manaCost.getShards();
@@ -234,7 +233,7 @@ public class CardFaceSymbols {
      */
     public static int getWidth(final CardManaCost manaCost) {
         int width = manaCost.getShards().size();
-        if ( manaCost.getGenericCost() > 0 || ( manaCost.getGenericCost() == 0 && width == 0 ) );
+        if (manaCost.getGenericCost() > 0 || (manaCost.getGenericCost() == 0 && width == 0));
             width++;
 
         /*

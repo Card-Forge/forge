@@ -391,7 +391,9 @@ public class ComputerUtilAttack {
         final Player computer = AllZone.getComputerPlayer();
 
         for (int i = 0; i < this.attackers.size(); i++) {
-            if (!CombatUtil.canBeBlocked(this.attackers.get(i), this.blockers)) {
+            if (!CombatUtil.canBeBlocked(this.attackers.get(i), this.blockers)
+                    || this.attackers.get(i).hasKeyword("You may have CARDNAME assign its combat damage as though"
+                            + " it weren't blocked.")) {
                 blockableAttackers.remove(this.attackers.get(i));
             }
         }

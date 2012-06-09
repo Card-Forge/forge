@@ -128,6 +128,10 @@ public class StaticAbilityContinuous {
                     addKeywords[w] = addKeywords[w].replaceAll("ChosenColor", color.substring(0, 1).toUpperCase().concat(color.substring(1, color.length())));
                 }
             }
+            final String chosenType = hostCard.getChosenType();
+            for (int w = 0; w < addKeywords.length; w++) {
+                addKeywords[w] = addKeywords[w].replaceAll("ChosenType", chosenType);
+            }
         }
 
         if (params.containsKey("AddHiddenKeyword")) {

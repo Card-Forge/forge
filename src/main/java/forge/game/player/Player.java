@@ -620,19 +620,21 @@ public abstract class Player extends GameEntity {
 
         int restDamage = damage;
 
-        if (isCombat) {
-            if (source.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
+        for (String kw : source.getKeyword()) {
+            if (isCombat) {
+                if (kw.equals("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
+                    return 0;
+                }
+                if (kw.equals("Prevent all combat damage that would be dealt by CARDNAME.")) {
+                    return 0;
+                }
+            }
+            if (kw.equals("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
                 return 0;
             }
-            if (source.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")) {
+            if (kw.equals("Prevent all damage that would be dealt by CARDNAME.")) {
                 return 0;
             }
-        }
-        if (source.hasKeyword("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
-            return 0;
-        }
-        if (source.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")) {
-            return 0;
         }
 
         // Prevent Damage static abilities

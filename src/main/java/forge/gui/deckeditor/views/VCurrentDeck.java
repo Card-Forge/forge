@@ -406,6 +406,11 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
     public JPanel getPnlStats() {
         return pnlStats;
     }
+    
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlRemButtons() {
+        return pnlRemoveButtons;
+    }
 
     //========== Other methods
 

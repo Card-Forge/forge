@@ -1,0 +1,13 @@
+Name:Brindle Shoat
+ManaCost:1 G
+Types:Creature Boar
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put a 3/3 green Boar creature token onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Boar | TokenTypes$ Creature,Boar | TokenOwner$ TriggeredCardController | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3
+SVar:SacMe:4
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brindle_shoat.jpg
+SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/60.jpg
+Oracle:When Brindle Shoat dies, put a 3/3 green Boar creature token onto the battlefield.
+End

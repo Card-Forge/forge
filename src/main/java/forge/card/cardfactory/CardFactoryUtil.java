@@ -4862,11 +4862,12 @@ public class CardFactoryUtil {
             card.setSVar("GraftTrig", abStr);
 
             String trigStr = "Mode$ ChangesZone | ValidCard$ Creature.Other | "
-                    + "Origin$ Any | Destination$ Battlefield";
-            trigStr += " | TriggerZones$ Battlefield | OptionalDecider$ You | "
-                    + "Execute$ GraftTrig | TriggerDescription$ ";
-            trigStr += "Whenever another creature enters the battlefield, you "
-                    + "may move a +1/+1 counter from this creature onto it.";
+                + "Origin$ Any | Destination$ Battlefield"
+                + " | TriggerZones$ Battlefield | OptionalDecider$ You | "
+                + "IsPresent$ Card.Self+counters_GE1_P1P1 | "
+                + "Execute$ GraftTrig | TriggerDescription$ "
+                + "Whenever another creature enters the battlefield, you "
+                + "may move a +1/+1 counter from this creature onto it.";
             final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
             card.addTrigger(myTrigger);
 

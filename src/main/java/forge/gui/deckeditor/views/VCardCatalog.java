@@ -302,6 +302,11 @@ public enum VCardCatalog implements IVDoc, ITableContainer {
         return pnlStats;
     }
 
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlAddButtons() {
+        return pnlAddButtons;
+    }
+    
     //========== Other methods
 
     private JLabel buildLabel(final ImageIcon icon0) {

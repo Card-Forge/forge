@@ -1,0 +1,17 @@
+Name:Thing from the Deep
+ManaCost:6 U U U
+Types:Creature Leviathan
+Text:no text
+PT:9/9
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DeepDooDoo | TriggerDescription$ Whenever CARDNAME attacks, sacrifice it unless you sacrifice an Island.
+SVar:DeepDooDoo:AB$ Sacrifice | Cost$ 0 | Amount$ 1 | SacValid$ Island | RememberSacrificed$ True | Optional$ True | SubAbility$ DeepSink
+SVar:DeepSink:DB$ Sacrifice | Defined$ Self | SubAbility$ DeepClean | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1
+SVar:DeepClean:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:NeedsToPlay:Island.YouCtrl
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thing_from_the_deep.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/74.jpg
+Oracle:Whenever Thing from the Deep attacks, sacrifice it unless you sacrifice an Island.
+End

@@ -689,6 +689,11 @@ public class AbilityFactoryDestroy {
             }
 
             @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryDestroy.destroyAllCanPlayAI(af, this, this.noRegen);
+            }
+
+            @Override
             public void resolve() {
                 AbilityFactoryDestroy.destroyAllResolve(af, this, this.noRegen);
             }

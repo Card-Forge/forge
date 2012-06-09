@@ -1,0 +1,17 @@
+Name:Bog Elemental
+ManaCost:3 B B
+Types:Creature Elemental
+Text:no text
+PT:5/4
+K:Protection from white
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you sacrifice a land.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Amount$ 1 | SacValid$ Land | RememberSacrificed$ True | Optional$ True | SubAbility$ DBSacSelf
+SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_elemental.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/57.jpg
+Oracle:Protection from white\nAt the beginning of your upkeep, sacrifice Bog Elemental unless you sacrifice a land.
+End

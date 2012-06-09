@@ -11,10 +11,13 @@ Flying
 Haste
 Hexproof
 Horsemanship
+Indestructible
 Infect
 Intimidate
 Lifelink
+Persist
 Phasing
+Prevent all combat damage that would be dealt by CARDNAME.
 Reach
 Rebound
 Shadow
@@ -22,5 +25,6 @@ Shroud
 Split Second 
 Trample
 Unblockable
+Undying
 Vigilance
 Wither

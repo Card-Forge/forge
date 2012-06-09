@@ -66,7 +66,7 @@ public class StaticAbilityCostChange {
         //modify the cost here
         return originalCost;
     }
-    
+
     /**
      * Applies applyReduceCostAbility ability.
      * 
