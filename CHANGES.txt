@@ -46,6 +46,8 @@ We are now using a different system for our snapshot and beta releases and this 
 
 We apologize for this inconvenience.
 
+Forge is not fully java 7 compatible at this time. Several people have reported that they have noticed a crash report while running forge while using java 7. We recommend that people downgrade to java 6.
+
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove useful. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
 
