@@ -18,7 +18,7 @@ The new deck editors include:
 * Toggle-able, sort-able, resize-able, move-able columns
 * and of course uses the drag cell layout.
 
-With the update to the new deck editors several people noticed an error when they run the snapshot build. We hope to have this fixed in the near future. This start up error states:
+With the update to the new deck editors several people noticed an error when they run they visit the quest mode card shop. We hope to have this fixed in the near future. This error states:
 
 Detailed error trace:
 java.lang.NullPointerException
@@ -27,7 +27,7 @@ at forge.view.FView.initialize(FView.java:97)
 
 A recent submission to the code base on the SVN prevents the Card Shop crash report when you select a package of cards, but the packages still aren't displayed in the card picture and card detail panels.
 
-Draft mode will cause a crash report when you start a new draft. We are aware of this proble and we hope to be able to fix it at some point in the future.
+Draft mode will cause a crash report when you start a new draft. We are aware of this problem and we hope to be able to fix it at some point in the future. You can use version 1.2.7 to play draft mode games in the mean time.
 
 
 The res/images/icons/ folder has been moved to res/pics/icons/. This folder holds the quest opponent icons, bazaar pets, and bazaar plants. If you have downloaded this content, it will still work, but the folder must be moved on your computer.
@@ -35,7 +35,7 @@ The res/images/icons/ folder has been moved to res/pics/icons/. This folder hold
 
 Some people have noticed special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries.
 
-A possible fix was submitted to the SVN for forge version 1.2.7. We have received several reports that the above bugs are still occuring. We hope to have this problem fixed at some point in the future.
+A possible fix was submitted to the SVN for forge version 1.2.7. We have received several reports that the above bugs are still occurring. We hope to have this problem fixed at some point in the future.
 
 The dock now has a new button labeled "Open Layout" along with old button with original function "Revert Layout". Modifying the battlefield layout will result in your changes being saved to a file named  "match_preferred.xml". You can copy and rename that file to share your layouts with other people.
 
@@ -47,7 +47,7 @@ We are now using a different system for our snapshot and beta releases and this 
 We apologize for this inconvenience.
 
 
-The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
+The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove useful. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
 
 We have changed the archival format used for the Forge distributions from ".zip" to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these ".tar.bz2" archives. We recommend that you decompress the Forge archive into a new and unused folder.
 
