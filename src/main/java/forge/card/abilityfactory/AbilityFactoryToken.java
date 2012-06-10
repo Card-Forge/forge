@@ -504,15 +504,15 @@ public class AbilityFactoryToken extends AbilityFactory {
         String colorDesc = "";
         for (final String col : substitutedColors) {
             if (col.equalsIgnoreCase("White")) {
-                colorDesc += "W";
+                colorDesc += "W ";
             } else if (col.equalsIgnoreCase("Blue")) {
-                colorDesc += "U";
+                colorDesc += "U ";
             } else if (col.equalsIgnoreCase("Black")) {
-                colorDesc += "B";
+                colorDesc += "B ";
             } else if (col.equalsIgnoreCase("Red")) {
-                colorDesc += "R";
+                colorDesc += "R ";
             } else if (col.equalsIgnoreCase("Green")) {
-                colorDesc += "G";
+                colorDesc += "G ";
             } else if (col.equalsIgnoreCase("Colorless")) {
                 colorDesc = "C";
             }
