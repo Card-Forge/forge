@@ -233,17 +233,10 @@ public class CardFaceSymbols {
      */
     public static int getWidth(final CardManaCost manaCost) {
         int width = manaCost.getShards().size();
-        if (manaCost.getGenericCost() > 0 || (manaCost.getGenericCost() == 0 && width == 0));
+        if (manaCost.getGenericCost() > 0 || (manaCost.getGenericCost() == 0 && width == 0))
             width++;
 
-        /*
-        StringTokenizer tok = new StringTokenizer(manaCost, " ");
-        while (tok.hasMoreTokens()) {
-            String symbol = tok.nextToken();
-            width += symbol.length() > 2 ? 10 : 14; // slash.png is only 10
-                                                    // pixels wide.
-        }
-        */
+        //System.out.println(String.format("%d for %s", width, manaCost.toString()));
         return width * 14;
     }
 }
