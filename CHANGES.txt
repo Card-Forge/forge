@@ -1,8 +1,8 @@
-Forge Beta: 0#-##-2012 ver 1.2.8
+Forge Beta: 06-11-2012 ver 1.2.8
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-10### cards in total.
+10882 cards in total.
 
 
 The work on the new UI is now finished and this version adds the new UI to the deck editors. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
@@ -448,109 +448,125 @@ Fixes/Features:
 - Commented out the hooks for the cost change static ability in getSpellCostChange (until the ability is used).
 - Adding braces.
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Dave
+Doublestrike
+Durandal
+FabioFLX
+Friar Sol
+Hellfish
+Marc
+Max mtg
+Rob Cashwalker
+Sloth
+Slowe
+Squee1968
+Zirbert
+ZzzzSleep
+Chris H
 
 
 Added many cards, including:
 
-Words of Waste
-Words of Wilding
-Words of Wind
-Words of Worship
-Words of War
-Return of the Nightstalkers
-Eunuchs' Intrigues
-Goblin War Cry
-Advice from the Fae
-Consign to Dream
-Prismwake Merrow
-Ad Nauseam
-Primal Surge
-Tyrant of Discord
-Impelled Giant
-Merrow Bonegnawer
-Stigma Lasher
-Shaper Parasite
-Clear the Land
-Enslaved Horror
-Gift of the Gargantuan
 Abundance
-Acorn Catapult
-Howltooth Hollow
-Shelldock Isle
-Sedge Sliver
-Withering Wisps
-Anthem of Rakdos
-Apocalypse Chime
-Spinerock Knoll
-Desertion
-Avizoa
 Acidic Dagger
-Aquamorph Entity
-Angel of Salvation
-Antagonism
-Hunter Sliver
+Acorn Catapult
+Ad Nauseam
+Advice from the Fae
 Altar of the Lost
 Ancient Ziggurat
+Angel of Salvation
+Antagonism
+Anthem of Rakdos
+Apocalypse Chime
+Aquamorph Entity
+Archangel of Strife
+Avizoa
+Baleful Strix
+Balshan Beguiler
+Basalt Golem
+Beetleback Chief
+Bend or Break
+Bifurcate
+Blind Fury
+Blizzard Specter
+Blood Oath
+Blood of the Martyr
+Bloodcurdler
+Bloodline Shaman
+Bog Elemental
+Bone Shaman
+Brace for Impact
+Brindle Shoat
 Cavern of Souls
+Clear the Land
+Consign to Dream
 Dark Impostor
+Desertion
+Dragonlair Spider
+Dreampod Druid
 Eldrazi Temple
+Enslaved Horror
+Etherium-Horn Sorcerer
+Eunuchs' Intrigues
 Food Chain
 Geosurge
+Gift of the Gargantuan
+Goblin War Cry
 Grand Architect
+Homing Sliver
+Howltooth Hollow
+Hunter Sliver
+Illusory Angel
+Impelled Giant
+Indrik Umbra
+Karona's Zealot
+Krond the Dawn-Clad
+Lancers en-Kor
+Maelstrom Wanderer
+Mass Mutiny
+Merrow Bonegnawer
 Metamorphosis
 Mishra's Workshop
 Myr Reservoir
 Myr Welder
+Nomads en-Kor
+Outrider en-Kor
 Pillar of the Paruns
+Preyseizer Dragon
 Primal Beyond
+Primal Surge
+Prismwake Merrow
+Return of the Nightstalkers
 Rosheen Meanderer
+Sai of the Shinobi
+Sedge Sliver
+Shaper Parasite
+Shardless Agent
+Shelldock Isle
 Smokebraider
 Soldevi Machinist
 Somberwald Sage
+Spinerock Knoll
+Spirit en-Kor
+Stigma Lasher
+Thing from the Deep
+Tyrant of Discord
 Untaidake, the Cloud Keeper
 Vedalken Engineer
-Balshan Beguiler
-Bifurcate
-Blizzard Specter
-Blood Oath
-Archangel of Strife
-Bloodline Shaman
-Blind Fury
-Bloodcurdler
-Karona's Zealot
-Blood of the Martyr
-Lancers en-Kor
-Nomads en-Kor
-Outrider en-Kor
-Spirit en-Kor
-Warrior en-Kor
-Bend or Break
-Basalt Golem
-Homing Sliver
-Baleful Strix
-Illusory Angel
 Vela the Night-Clad
-Etherium-Horn Sorcerer
-Maelstrom Wanderer
-Mass Mutiny
-Shardless Agent
-Beetleback Chief
-Brindle Shoat
-Thing from the Deep
-Bog Elemental
-Krond the Dawn-Clad
-Preyseizer Dragon
-Indrik Umbra
-Dragonlair Spider
-Dreampod Druid
-Sai of the Shinobi
-Brace for Impact
-Bone Shaman
+Warrior en-Kor
+Withering Wisps
+Words of War
+Words of Waste
+Words of Wilding
+Words of Wind
+Words of Worship
 
 
 end
