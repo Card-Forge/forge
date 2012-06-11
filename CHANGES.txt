@@ -424,6 +424,30 @@ Fixes/Features:
 - Fixed LoseControlCommand in AF GainControl.
 - merged r15810-r15847 from the Trunk into CloneFix branch
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- AbilityWork: Added References$ parameter to scripted abilities of 'K' cards where necessary.
+- AbilityWork: Added References$ parameter to scripted abilities of 'T-U' cards where necessary.
+- AbilityWork: Added References$ parameter to scripted abilities of 'L' cards where necessary.
+- AbilityWork: Added References$ parameter to scripted abilities of 'Sa' cards where necessary. (Separating by second letter because damn, 'S' cards make up almost 15% of the card pool.1545 flippin' cards!)
+- AbilityWork: Added References$ parameter to scripted abilities of 'Sc' cards where necessary. (Separating by second letter because damn, 'S' cards make up almost 15% of the card pool.1545 flippin' cards!)
+- AbilityWork: Added References$ parameter to scripted abilities of 'Se' cards where necessary. (Separating by second letter because damn, 'S' cards make up almost 15% of the card pool.1545 flippin' cards!)
+- AbilityWork: Added References$ parameter to scripted abilities of 'Sh' cards where necessary. (Separating by second letter because damn, 'S' cards make up almost 15% of the card pool.1545 flippin' cards!)
+- AbilityWork: Added References$ parameter to scripted abilities of 'Si' cards where necessary. (Separating by second letter because damn, 'S' cards make up almost 15% of the card pool.1545 flippin' cards!)
+- AbilityWork: Added References$ parameter to scripted abilities of 'Sp-Sz' cards where necessary.
+- AbilityWork: Added References$ parameter to scripted abilities of 'Sk' cards where necessary. (Separating by second letter because damn, 'S' cards make up almost 15% of the card pool.1545 flippin' cards!)
+- AbilityWork: Added References$ parameter to scripted abilities of 'Sl-So' cards where necessary.
+- AbilityWork: Added References$ parameter to en-Kor cards.
+- AbilityWork: Added References$ parameter to some Effect and Token generator cards.
+- Minor edits.
+- Fixing AF_Tokens interaction with ManaShards
+- Added a fluff piece to the changes.txt file.
+- CheckStyle.
+- fixed misalignment of mana icons
+- Fixed Level 4 Hound pet's ability.
+- Fixed a RuntimeException error message typo
+- Verdant Force tokens weren't displaying their image. Fixed.
+- Commented out the hooks for the cost change static ability in getSpellCostChange (until the ability is used).
+- Adding braces.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -524,6 +548,9 @@ Preyseizer Dragon
 Indrik Umbra
 Dragonlair Spider
 Dreampod Druid
+Sai of the Shinobi
+Brace for Impact
+Bone Shaman
 
 
 end
