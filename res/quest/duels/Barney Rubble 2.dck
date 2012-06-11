@@ -7,26 +7,27 @@ Description=WU Sovereigns of Lost Alara deck with walls and auras
 Icon=Barney Rubble.jpg
 Deck Type=constructed
 [main]
-4 Ghostly Prison
-1 Angelic Wall
-1 Guardians of Akrasa
+4 Coastal Tower
 4 Sejiri Refuge
+3 Glacial Fortress
+3 Seachrome Coast
+4 Plains|M11
+4 Island|M11
+3 Ghostly Prison
+1 Angelic Wall
+3 Guardians of Akrasa
 1 Mythic Proportions
 1 Elder Mastery
 1 Drake Umbra
-4 Coastal Tower
-4 Plains|M11
 2 Concentrate
 1 Whispersilk Cloak
 1 Stinging Barrier
 4 Absorb
-4 Island|M11
 4 Sovereigns of Lost Alara
 4 Wall of Omens
 1 Plumeveil
-4 Tundra
-3 Wall of Denial
-3 Wall of Reverence
-4 Propaganda
+2 Wall of Denial
+2 Wall of Reverence
+3 Propaganda
 4 Perimeter Captain
 [sideboard]
