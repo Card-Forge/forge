@@ -220,73 +220,79 @@ public final class AbilityFactoryAnimate {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         }
 
-        final Target tgt = sa.getTarget();
-        ArrayList<Card> tgts;
-        if (tgt != null) {
-            tgts = tgt.getTargetCards();
-        } else {
-            tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        if (params.containsKey("StackDescription")) {
+            sb.append(params.get("StackDescription").replaceAll("CARDNAME", host.getName()));
         }
+        else {
 
-        for (final Card c : tgts) {
-            sb.append(c).append(" ");
-        }
-        sb.append("become");
-        if (tgts.size() == 1) {
-            sb.append("s a");
-        }
-        // if power is -1, we'll assume it's not just setting toughness
-        if (power != -1) {
-            sb.append(" ").append(power).append("/").append(toughness);
-        }
+            final Target tgt = sa.getTarget();
+            ArrayList<Card> tgts;
+            if (tgt != null) {
+                tgts = tgt.getTargetCards();
+            } else {
+                tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+            }
 
-        if (colors.size() > 0) {
+            for (final Card c : tgts) {
+                sb.append(c).append(" ");
+            }
+            sb.append("become");
+            if (tgts.size() == 1) {
+                sb.append("s a");
+            }
+            // if power is -1, we'll assume it's not just setting toughness
+            if (power != -1) {
+                sb.append(" ").append(power).append("/").append(toughness);
+            }
+
+            if (colors.size() > 0) {
+                sb.append(" ");
+            }
+            if (colors.contains("ChosenColor")) {
+                sb.append("color of that player's choice");
+            } else {
+                for (int i = 0; i < colors.size(); i++) {
+                    sb.append(colors.get(i));
+                    if (i < (colors.size() - 1)) {
+                        sb.append(" and ");
+                    }
+                }
+            }
             sb.append(" ");
-        }
-        if (colors.contains("ChosenColor")) {
-            sb.append("color of that player's choice");
-        } else {
-            for (int i = 0; i < colors.size(); i++) {
-                sb.append(colors.get(i));
-                if (i < (colors.size() - 1)) {
+            if (types.contains("ChosenType")) {
+                sb.append("type of player's choice ");
+            } else {
+                for (int i = types.size() - 1; i >= 0; i--) {
+                    sb.append(types.get(i));
+                    sb.append(" ");
+                }
+            }
+            if (keywords.size() > 0) {
+                sb.append("with ");
+            }
+            for (int i = 0; i < keywords.size(); i++) {
+                sb.append(keywords.get(i));
+                if (i < (keywords.size() - 1)) {
                     sb.append(" and ");
                 }
             }
-        }
-        sb.append(" ");
-        if (types.contains("ChosenType")) {
-            sb.append("type of player's choice ");
-        } else {
-            for (int i = types.size() - 1; i >= 0; i--) {
-                sb.append(types.get(i));
-                sb.append(" ");
-            }
-        }
-        if (keywords.size() > 0) {
-            sb.append("with ");
-        }
-        for (int i = 0; i < keywords.size(); i++) {
-            sb.append(keywords.get(i));
-            if (i < (keywords.size() - 1)) {
-                sb.append(" and ");
-            }
-        }
-        // sb.append(abilities)
-        // sb.append(triggers)
-        if (!permanent) {
-            if (params.containsKey("UntilEndOfCombat")) {
-                sb.append(" until end of combat.");
-            } else if (params.containsKey("UntilHostLeavesPlay")) {
-                sb.append(" until ").append(host).append(" leaves the battlefield.");
-            } else if (params.containsKey("UntilYourNextUpkeep")) {
-                sb.append(" until your next upkeep.");
-            } else if (params.containsKey("UntilControllerNextUntap")) {
-                sb.append(" until its controller's next untap step.");
+            // sb.append(abilities)
+            // sb.append(triggers)
+            if (!permanent) {
+                if (params.containsKey("UntilEndOfCombat")) {
+                    sb.append(" until end of combat.");
+                } else if (params.containsKey("UntilHostLeavesPlay")) {
+                    sb.append(" until ").append(host).append(" leaves the battlefield.");
+                } else if (params.containsKey("UntilYourNextUpkeep")) {
+                    sb.append(" until your next upkeep.");
+                } else if (params.containsKey("UntilControllerNextUntap")) {
+                    sb.append(" until its controller's next untap step.");
+                } else {
+                    sb.append(" until end of turn.");
+                }
             } else {
-                sb.append(" until end of turn.");
+                sb.append(".");
             }
-        } else {
-            sb.append(".");
         }
 
         final AbilitySub abSub = sa.getSubAbility();
