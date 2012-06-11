@@ -233,8 +233,9 @@ public class CardFaceSymbols {
      */
     public static int getWidth(final CardManaCost manaCost) {
         int width = manaCost.getShards().size();
-        if (manaCost.getGenericCost() > 0 || (manaCost.getGenericCost() == 0 && width == 0))
+        if (manaCost.getGenericCost() > 0 || (manaCost.getGenericCost() == 0 && width == 0)) {
             width++;
+        }
 
         //System.out.println(String.format("%d for %s", width, manaCost.toString()));
         return width * 14;
