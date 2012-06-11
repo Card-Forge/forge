@@ -2190,12 +2190,12 @@ public class GameAction {
         }
 
         // Raise cost
-        for (Card c : cardsInPlay) {
+        /*for (Card c : cardsInPlay) {
             final ArrayList<StaticAbility> staticAbilities = c.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 manaCost = stAb.applyAbility("RaiseCost", spell, manaCost);
             }
-        }
+        }*/
 
         if (mana.equals("0") && spell.isAbility()) {
         } else {
@@ -2424,12 +2424,12 @@ public class GameAction {
         } // Khalni Hydra
 
         // Reduce cost
-        for (Card c : cardsInPlay) {
+        /*for (Card c : cardsInPlay) {
             final ArrayList<StaticAbility> staticAbilities = c.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 manaCost = stAb.applyAbility("ReduceCost", spell, manaCost);
             }
-        }
+        }*/
         return manaCost;
     } // GetSpellCostChange
 
