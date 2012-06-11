@@ -124,7 +124,7 @@ class CardFactoryEnchantments {
                                 Singletons.getModel().getGameAction().exile(c2);
                                 this.once = true;
 
-                                AllZone.getStack().addSimultaneousStackEntry(nightSoil);
+                                AllZone.getStack().addAndUnfreeze(nightSoil);
 
                             }
                         }

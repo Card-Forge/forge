@@ -2,7 +2,7 @@ Name:Ebony Horse
 ManaCost:3
 Types:Artifact
 Text:no text
-A:AB$ Untap | Cost$ 2 T | ValidTgts$ Creature.attacking+YouCtrl | TgtPrompt$ Select target attacking creature you control | SubAbility$ DB | SpellDescription$ Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
+A:AB$ Untap | Cost$ 2 T | ValidTgts$ Creature.attacking+YouCtrl | TgtPrompt$ Select target attacking creature you control | SubAbility$ DB | SpellDescription$ Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 SVar:DB:DB$Pump | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME. | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

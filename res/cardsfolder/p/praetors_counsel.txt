@@ -4,7 +4,7 @@ Types:Sorcery
 Text:no text
 A:SP$ ChangeZoneAll | Cost$ 5 G G G | Origin$ Graveyard | Destination$ Hand | ChangeType$ Card.YouOwn | SubAbility$ DBChange | SpellDescription$ Return all cards from your graveyard to your hand. Exile CARDNAME. You have no maximum hand size for the rest of the game.
 SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Name$ Praetor's Counsel Effect | StaticAbilities$ STHandSize | Permanent$ True
+SVar:DBEffect:DB$ Effect | Name$ Praetor's Counsel Effect | StaticAbilities$ STHandSize | Duration$ Permanent
 SVar:STHandSize:Mode$ Continuous | Affected$ You | SetMaxHandSize$ -1 | Description$ You have no maximum hand size.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/praetors_counsel.jpg
