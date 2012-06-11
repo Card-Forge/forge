@@ -4,5 +4,6 @@ Colors:red
 Types:Creature Hound Pet
 PT:2/1
 K:Haste
-A:AB$ Pump | Cost$ 1 X | ValidCards$ Card.Self | NumAtt$ +X | KW$ HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ CARDNAME gets +X/+0 until end of turn. Sacrifice it at the beginning of the next end step.
+A:AB$ Pump | Cost$ X 1 | ValidCards$ Card.Self | NumAtt$ +X | KW$ HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ CARDNAME gets +X/+0 until end of turn. Sacrifice it at the beginning of the next end step.
+SVar:X:Count$xPaid
 End
