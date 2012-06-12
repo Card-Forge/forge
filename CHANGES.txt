@@ -5,7 +5,7 @@ Forge Beta: 0#-##-2012 ver 1.2.9
 10### cards in total.
 
 
-
+There was a bug in the previous version which prevented the token pics of many cards from displaying on the battlefield. This should now be fixed.
 
 --
 
@@ -32,7 +32,16 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-
+- Cleared out the changes.txt file, now ready for new material.
+- Updated three decks.
+- Updated 4 decks.
+- Merged changes from trunk to AbilityWork: r15839-r15884
+- Fixed Ebony Horse, Keeper of the Dead, Night Soil, Praetor's Counsel and Secretkeeper.
+- Fixed the token image bug.
+- Fixed Stigma Lasher's effect duration
+- Added some missing PC2 reprints' set info
+- Fixed Arctic Nishoba no lifegain bug
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
