@@ -3,8 +3,8 @@ ManaCost:2 U
 Types:Enchantment
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | SubAbility$ DBDiscard
+SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBDraw | References$ X,Y,Z
+SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | SubAbility$ DBDiscard | References$ X,Y,Z
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Y:Count$Valid Permanent.Red+YouCtrl/LimitMax.1
 SVar:Z:Count$Valid Permanent.Green+YouCtrl/LimitMax.1

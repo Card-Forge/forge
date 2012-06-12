@@ -3,7 +3,7 @@ ManaCost:U
 Types:Sorcery
 Text:no text
 A:SP$ Pump | Cost$ U | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBChangeZone | IsCurse$ True | SpellDescription$ Return any number of target artifact cards from target player's graveyard to the top of his or her library in any order.
-SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | TargetsWithDefinedController$ Targeted | Origin$ Graveyard | Destination$ Library | TgtPrompt$ Choose target artifact card | ValidTgts$ Artifact
+SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | TargetsWithDefinedController$ Targeted | Origin$ Graveyard | Destination$ Library | TgtPrompt$ Choose target artifact card | ValidTgts$ Artifact | References$ X
 SVar:X:Count$InAllYards
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
-A:AB$ Mana | Cost$ 2 T | Produced$ B | Amount$ X | SpellDescription$ Add B to your mana pool for each black creature card in your graveyard.
+A:AB$ Mana | Cost$ 2 T | Produced$ B | Amount$ X | References$ X | SpellDescription$ Add B to your mana pool for each black creature card in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature.Black
 #gotta test that
 SVar:RemAIDeck:True

@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Goblin
 Text:no text
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. & CARDNAME can't block. | CheckSVar$ X | SVarCompare$ LEY | Description$ CARDNAME can't attack unless you control more creatures than defending player.CARDNAME can't block unless you control more creatures than attacking player.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. & CARDNAME can't block. | CheckSVar$ X | SVarCompare$ LEY | References$ X,Y | Description$ CARDNAME can't attack unless you control more creatures than defending player.CARDNAME can't block unless you control more creatures than attacking player.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Y:Count$Valid Creature.YouDontCtrl
 SVar:BuffedBy:Creature

@@ -2,8 +2,8 @@ Name:Invoke the Firemind
 ManaCost:X U U R
 Types:Sorcery
 Text:no text
-A:SP$ Draw | Cost$ X U U R | NumCards$ X | SpellDescription$ Choose one - Draw X cards;
-A:SP$ DealDamage | Cost$ X U U R | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ or CARDNAME deals X damage to target creature or player.
+A:SP$ Draw | Cost$ X U U R | NumCards$ X | References$ X | SpellDescription$ Choose one - Draw X cards;
+A:SP$ DealDamage | Cost$ X U U R | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ or CARDNAME deals X damage to target creature or player.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Legendary Creature Elemental
 Text:Green mana doesn't empty from your mana pool as steps and phases end.
 PT:1/1
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each green mana in your mana pool.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +1/+1 for each green mana in your mana pool.
 SVar:X:Count$ManaPool:green
 #AI doesn't have a mana pool
 SVar:RemAIDeck:True

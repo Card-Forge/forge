@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 Text:no text
 A:AB$ Pump | Cost$ 2 T | KW$ Islandwalk | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ AbdallahsSandalsEffect | SpellDescription$ Target creature gains islandwalk until end of turn. When that creature dies this turn, destroy CARDNAME.
-SVar:AbdallahsSandalsEffect:DB$ Effect | Name$ Sandals of Abdallah Effect | Triggers$ SandalWearerDied | SVars$ ExileEffect,SandalsDestroyed | RememberObjects$ Targeted | ImprintCards$ Self
+SVar:AbdallahsSandalsEffect:DB$ Effect | Name$ Sandals of Abdallah Effect | Triggers$ SandalWearerDied | SVars$ ExileEffect,SandalsDestroyed | References$ SandalWearerDied,ExileEffect,SandalsDestroyed  | RememberObjects$ Targeted | ImprintCards$ Self
 SVar:SandalWearerDied:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ SandalsDestroyed | TriggerDescription$ When the targeted creature dies this turn, destroy Sandals of Abdallah.
 SVar:SandalsDestroyed:DB$ Destroy | Defined$ Imprinted | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile

@@ -2,7 +2,7 @@ Name:Keep Watch
 ManaCost:2 U
 Types:Instant
 Text:no text
-A:SP$ Draw | Cost$ 2 U | NumCards$ X | SpellDescription$ Draw a card for each attacking creature.
+A:SP$ Draw | Cost$ 2 U | NumCards$ X | References$ X | SpellDescription$ Draw a card for each attacking creature.
 SVar:X:Count$Valid Creature.attacking
 SVar:RemAIDeck:True
 SVar:Rarity:Common

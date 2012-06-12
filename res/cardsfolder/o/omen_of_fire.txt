@@ -3,8 +3,8 @@ ManaCost:3 R R
 Types:Instant
 Text:no text
 A:SP$ ChangeZoneAll | Cost$ 3 R R | ChangeType$ Island | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all Islands to their owners' hands. | SubAbility$ DBSacYou
-SVar:DBSacYou:DB$Sacrifice | Amount$ YouX | SacValid$ Plains,Permanent.White | Defined$ You | SubAbility$ DBSacOpp | SpellDescription$ Each player sacrifices a Plains or a white permanent for each white permanent he or she controls.
-SVar:DBSacOpp:DB$Sacrifice | Amount$ OppX | SacValid$ Plains,Permanent.White | Defined$ Opponent
+SVar:DBSacYou:DB$Sacrifice | Amount$ YouX | SacValid$ Plains,Permanent.White | Defined$ You | References$ YouX | SubAbility$ DBSacOpp | SpellDescription$ Each player sacrifices a Plains or a white permanent for each white permanent he or she controls.
+SVar:DBSacOpp:DB$Sacrifice | Amount$ OppX | SacValid$ Plains,Permanent.White | Defined$ Opponent | References$ OppX
 SVar:YouX:Count$Valid Permanent.White+YouCtrl
 SVar:OppX:Count$Valid Permanent.White+YouDontCtrl
 SVar:RemRandomDeck:True

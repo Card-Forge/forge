@@ -4,8 +4,8 @@ Types:Artifact
 Text:no text
 T:Mode$ DamageDone | ValidTarget$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you're dealt damage, put that many charge counters on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | IsPresent$ Card.Self+counters_GE1_CHARGE | Execute$ TrigGainLife | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of each upkeep, you may remove a charge counter from CARDNAME. If you do, you gain 1 life.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ X | Defined$ Self
-SVar:TrigGainLife:AB$GainLife | Cost$ SubCounter<1/CHARGE> | LifeAmount$ 1 | Defined$ You
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ X | References$ X | Defined$ Self
+SVar:TrigGainLife:AB$ GainLife | Cost$ SubCounter<1/CHARGE> | LifeAmount$ 1 | Defined$ You
 SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_droplet.jpg

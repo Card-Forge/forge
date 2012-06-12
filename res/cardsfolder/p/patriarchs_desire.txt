@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ Y | Description$ Enchanted creature gets +2/-2. Threshold - Enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ Y | References$ X,Y | Description$ Enchanted creature gets +2/-2. Threshold - Enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard.
 SVar:X:Count$Threshold.4.2
 SVar:Y:Count$Threshold.4.2/Negative
 SVar:RemAIDeck:True

@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top card of your library. If it's a creature card, CARDNAME gets +X/+Y until end of turn, where X is the exiled creature card's power and Y is its toughness.
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | NumAtt$ X | NumDef$ Y | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | NumAtt$ X | NumDef$ Y | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup | References$ X,Y,Z
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 SVar:Y:Remembered$CardToughness

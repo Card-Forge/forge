@@ -2,7 +2,7 @@ Name:Nostalgic Dreams
 ManaCost:G G
 Types:Sorcery
 Text:no text
-A:SP$ ChangeZone | Cost$ G G Discard<X/Card> | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ MaxTgts | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SubAbility$ DBChange | SpellDescription$ Return X target cards from your graveyard to your hand. Exile CARDNAME.
+A:SP$ ChangeZone | Cost$ G G Discard<X/Card> | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SubAbility$ DBChange | SpellDescription$ Return X target cards from your graveyard to your hand. Exile CARDNAME.
 SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:MaxTgts:Count$InYourYard
 SVar:X:Targeted$Amount

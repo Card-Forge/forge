@@ -5,8 +5,8 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ DamageTgt | AddSVar$ DamageThis & PredatoryX & PredatoryY | Description$ Enchanted creature has "Tap: This creature deals damage equal to its power to target creature. That creature deals damage equal to its power to this creature."
-SVar:DamageTgt:AB$DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ PredatoryX | SubAbility$ DamageThis | SpellDescription$ CARDNAME deals damage equal to its power to target creature. That creature deals damage equal to its power to CARDNAME.
-SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ PredatoryY
+SVar:DamageTgt:AB$DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ PredatoryX | References$ PredatoryX | SubAbility$ DamageThis | SpellDescription$ CARDNAME deals damage equal to its power to target creature. That creature deals damage equal to its power to CARDNAME.
+SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ PredatoryY | References$ PredatoryY
 SVar:PredatoryX:Count$CardPower
 SVar:PredatoryY:Targeted$CardPower
 SVar:Rarity:Rare

@@ -2,7 +2,7 @@ Name:Cauldron of Souls
 ManaCost:5
 Types:Artifact
 Text:no text
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select target creature | KW$ Persist | SpellDescription$ Choose any number of target creatures. Each of those creatures gains persist until end of turn.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select target creature | KW$ Persist | References$ X | SpellDescription$ Choose any number of target creatures. Each of those creatures gains persist until end of turn.
 SVar:X:Count$Valid Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cauldron_of_souls.jpg

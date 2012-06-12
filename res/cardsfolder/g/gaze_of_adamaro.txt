@@ -2,7 +2,7 @@ Name:Gaze of Adamaro
 ManaCost:2 R R
 Types:Instant Arcane
 Text:no text
-A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of cards in target player's hand to that player.
+A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of cards in target player's hand to that player.
 SVar:X:TargetedPlayer$CardsInHand
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

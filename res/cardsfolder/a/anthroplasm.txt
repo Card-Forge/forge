@@ -5,7 +5,7 @@ Text:no text
 PT:0/0
 K:etbCounter:P1P1:2
 A:AB$ RemoveCounter | Cost$ X T | CounterType$ P1P1 | CounterNum$ All | SpellDescription$ Remove all +1/+1 counters from CARDNAME and put X +1/+1 counters on it. | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ X
+SVar:DBPutCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ X | References$ X
 SVar:X:Count$xPaid
 SVar:All:Count$CardCounters.P1P1
 SVar:RemAIDeck:True

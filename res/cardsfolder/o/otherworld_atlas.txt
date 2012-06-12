@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 Text:no text
 A:AB$ PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
-A:AB$ Draw | Cost$ T | Defined$ Each | NumCards$ X | SpellDescription$ Each player draws a card for each charge counter on CARDNAME.
+A:AB$ Draw | Cost$ T | Defined$ Each | NumCards$ X | References$ X | SpellDescription$ Each player draws a card for each charge counter on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

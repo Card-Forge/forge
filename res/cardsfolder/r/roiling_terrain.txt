@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Sorcery
 Text:no text
 A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDamage | SpellDescription$ Destroy target land, then CARDNAME deals damage to that land's controller equal to the number of land cards in that player's graveyard.
-SVar:DBDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ X
+SVar:DBDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ X | References$ X
 SVar:X:TargetedController$LandsInGraveyard
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

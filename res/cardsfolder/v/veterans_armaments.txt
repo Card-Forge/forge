@@ -6,7 +6,7 @@ K:eqPump 2:+0/+0
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddTrigger$ HeroAttack & HeroBlock | AddSVar$ HeroPump & ArmamentsX
 SVar:HeroAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ HeroPump | TriggerDescription$ Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."
 SVar:HeroBlock:Mode$ Blocks | ValidCard$ Card.Self | Execute$ HeroPump | Secondary$ True | TriggerDescription$ Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."
-SVar:HeroPump:DB$ Pump | NumAtt$ ArmamentsX | NumDef$ ArmamentsX
+SVar:HeroPump:DB$ Pump | NumAtt$ ArmamentsX | NumDef$ ArmamentsX | References$ ArmamentsX
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Soldier | TriggerZones$ Battlefield | Execute$ HeroAttach | OptionalDecider$ You | TriggerDescription$ Whenever a Soldier creature enters the battlefield, you may attach CARDNAME to it.
 SVar:HeroAttach:DB$ Attach | Defined$ TriggeredCard
 SVar:ArmamentsX:Count$Valid Creature.attacking

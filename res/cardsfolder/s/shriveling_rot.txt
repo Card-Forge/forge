@@ -8,7 +8,7 @@ A:SP$ Effect | Cost$ 4 B B B | Name$ Shriveling Rot Effect | Triggers$ Trig1,Tri
 SVar:Trig1:Mode$ DamageDone | ValidTarget$ Creature | Execute$ SVar1 | TriggerDescription$ Whenever a creature is dealt damage, destroy it.
 SVar:SVar1:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget
 SVar:Trig2:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ SVar2 | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, that creature's controller loses life equal to its toughness.
-SVar:SVar2:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ X
+SVar:SVar2:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardToughness
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

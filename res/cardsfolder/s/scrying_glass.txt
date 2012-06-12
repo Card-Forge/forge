@@ -5,7 +5,7 @@ Text:no text
 A:AB$ ChooseNumber | Cost$ 3 T | Min$ 1 | SubAbility$ DBScryingGlassChooseColor | SpellDescription$ Choose a number greater than 0 and a color. Target opponent reveals his or her hand. If that opponent reveals exactly the chosen number of cards of the chosen color, you draw a card.
 SVar:DBScryingGlassChooseColor:DB$ ChooseColor | SubAbility$ DBScryingGlassRevealHand
 SVar:DBScryingGlassRevealHand:DB$ RevealHand | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBScryingGlassDraw
-SVar:DBScryingGlassDraw:DB$ Draw | ConditionCheckSVar$ ScryingGlassX | ConditionSVarCompare$ EQScryingGlassY | SubAbility$ DBScryingGlassCleanup
+SVar:DBScryingGlassDraw:DB$ Draw | ConditionCheckSVar$ ScryingGlassX | ConditionSVarCompare$ EQScryingGlassY | SubAbility$ DBScryingGlassCleanup | References$ ScryingGlassX,ScryingGlassY 
 SVar:DBScryingGlassCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:ScryingGlassX:Remembered$Valid Card.ChosenColor
 SVar:ScryingGlassY:Count$ChosenNumber

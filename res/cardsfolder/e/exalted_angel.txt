@@ -5,7 +5,7 @@ Text:no text
 PT:4/5
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
-SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 K:Morph:2 W W
 SVar:Rarity:Rare

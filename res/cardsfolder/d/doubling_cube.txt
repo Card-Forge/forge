@@ -2,11 +2,11 @@ Name:Doubling Cube
 ManaCost:2
 Types:Artifact
 Text:no text
-A:AB$ Mana | Cost$ 3 T | Produced$ W | Amount$ A | SubAbility$ ManaBlue | SpellDescription$ Double the amount of each type of mana in your mana pool.
-SVar:ManaBlue:DB$Mana | Produced$ U | Amount$ B | SubAbility$ ManaBlack
-SVar:ManaBlack:DB$Mana | Produced$ B | Amount$ C | SubAbility$ ManaRed
-SVar:ManaRed:DB$Mana | Produced$ R | Amount$ D | SubAbility$ ManaGreen
-SVar:ManaGreen:DB$Mana | Produced$ G | Amount$ E
+A:AB$ Mana | Cost$ 3 T | Produced$ W | Amount$ A | SubAbility$ ManaBlue | References$ A | SpellDescription$ Double the amount of each type of mana in your mana pool.
+SVar:ManaBlue:DB$Mana | Produced$ U | Amount$ B | SubAbility$ ManaBlack | References$ B 
+SVar:ManaBlack:DB$Mana | Produced$ B | Amount$ C | SubAbility$ ManaRed | References$ C 
+SVar:ManaRed:DB$Mana | Produced$ R | Amount$ D | SubAbility$ ManaGreen | References$ D 
+SVar:ManaGreen:DB$Mana | Produced$ G | Amount$ E | References$ E
 SVar:A:Count$ManaPool:white
 SVar:B:Count$ManaPool:blue
 SVar:C:Count$ManaPool:black

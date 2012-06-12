@@ -4,7 +4,7 @@ Types:Sorcery
 Text:no text
 K:Storm
 A:SP$ Reveal | Cost$ 4 R | Random$ True | RememberRevealed$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDamage | SpellDescription$ Target player reveals a card at random from his or her hand. CARDNAME deals damage to that player equal to that card's converted mana cost.
-SVar:DBDamage:DB$ DealDamage | NumDmg$ X | Defined$ Targeted | SubAbility$ DBCleanup
+SVar:DBDamage:DB$ DealDamage | NumDmg$ X | Defined$ Targeted | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Rarity:Uncommon

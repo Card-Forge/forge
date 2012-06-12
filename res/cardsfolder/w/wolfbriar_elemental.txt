@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:Multikicker G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 2/2 green Wolf creature token onto the battlefield for each time it was kicked.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2
 SVar:X:Count$TimesKicked
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfbriar_elemental.jpg

@@ -5,7 +5,7 @@ Text:no text
 PT:3/2
 K:First Strike
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, you gain life equal to that creature's toughness.
-SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardToughness
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abattoir_ghoul.jpg

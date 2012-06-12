@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:First Strike
 A:AB$ Pump | Cost$ T | NumAtt$ +2 | KW$ First Strike | ValidTgts$ Creature.Dwarf | TgtPrompt$ Select target dwarf creature | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ EliteGuardEffect | SpellDescription$ Target Dwarf creature gets +2/+0 and gains first strike until end of turn. When that creature leaves the battlefield this turn, sacrifice CARDNAME. Activate this ability only during combat.
-SVar:EliteGuardEffect:DB$ Effect | Name$ Heart Wolf Effect | Triggers$ LostTheGuarded | SVars$ ExileEffect,EliteDefence | RememberObjects$ Targeted | ImprintCards$ Self
+SVar:EliteGuardEffect:DB$ Effect | Name$ Heart Wolf Effect | Triggers$ LostTheGuarded | SVars$ ExileEffect,EliteDefence | References$ LostTheGuarded,ExileEffect,EliteDefence | RememberObjects$ Targeted | ImprintCards$ Self
 SVar:LostTheGuarded:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ EliteDefence | TriggerDescription$ When the targeted creature leaves the battlefield this turn, sacrifice Heart Wolf.
 SVar:EliteDefence:DB$ SacrificeAll | Defined$ Imprinted | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile

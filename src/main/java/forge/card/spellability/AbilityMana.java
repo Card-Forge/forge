@@ -24,6 +24,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaPool;
@@ -39,7 +40,7 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id$
  */
-public abstract class AbilityMana extends AbilityActivated implements java.io.Serializable {
+public class AbilityMana extends AbilityActivated implements java.io.Serializable {
     /** Constant <code>serialVersionUID=-6816356991224950520L</code>. */
     private static final long serialVersionUID = -6816356991224950520L;
 
@@ -72,6 +73,13 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      */
     public AbilityMana(final Card sourceCard, final String parse, final String produced) {
         this(sourceCard, parse, produced, 1);
+    }
+    
+    @Override
+    public AbilityActivated getCopy() {
+        AbilityActivated res = new AbilityMana(getSourceCard(),getPayCosts(),getManaProduced());
+        CardFactoryUtil.copySpellAbility(this, res);
+        return res;
     }
 
     /**

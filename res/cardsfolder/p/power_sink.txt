@@ -2,7 +2,7 @@ Name:Power Sink
 ManaCost:X U
 Types:Instant
 Text:no text
-A:SP$ Counter | Cost$ X U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | PowerSink$ True | SpellDescription$ Counter target spell unless its controller pays X. If he or she doesn't, that player taps all lands with mana abilities he or she controls and empties his or her mana pool.
+A:SP$ Counter | Cost$ X U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | References$ X | PowerSink$ True | SpellDescription$ Counter target spell unless its controller pays X. If he or she doesn't, that player taps all lands with mana abilities he or she controls and empties his or her mana pool.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Common

@@ -7,7 +7,7 @@ K:Flying
 K:Undying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, exile it unless you sacrifice another creature.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Amount$ 1 | SacValid$ Creature.Other | RememberSacrificed$ True | Optional$ True | SubAbility$ DBExileMe
-SVar:DBExileMe:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
+SVar:DBExileMe:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlay:Creature.cmcLE2+YouCtrl

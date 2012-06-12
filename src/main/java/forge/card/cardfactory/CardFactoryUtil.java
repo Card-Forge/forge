@@ -843,7 +843,21 @@ public class CardFactoryUtil {
     public static AbilityActivated abilityUnearth(final Card sourceCard, final String manaCost) {
 
         final Cost cost = new Cost(sourceCard, manaCost, true);
-        final AbilityActivated unearth = new AbilityActivated(sourceCard, cost, null) {
+        class AbilityUnearth extends AbilityActivated {
+            public AbilityUnearth(final Card ca, final Cost co, final Target t) {
+                super(ca,co,t);
+            }
+            
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityUnearth(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                final SpellAbilityRestriction restrict = new SpellAbilityRestriction();
+                restrict.setZone(ZoneType.Graveyard);
+                restrict.setSorcerySpeed(true);
+                res.setRestrictions(restrict);
+                return res;
+            }
+            
             private static final long serialVersionUID = -5633945565395478009L;
 
             @Override
@@ -863,7 +877,9 @@ public class CardFactoryUtil {
                 }
                 return ComputerUtil.canPayCost(this);
             }
-        };
+        }
+        final AbilityActivated unearth = new AbilityUnearth(sourceCard, cost, null);
+        
         final SpellAbilityRestriction restrict = new SpellAbilityRestriction();
         restrict.setZone(ZoneType.Graveyard);
         restrict.setSorcerySpeed(true);
@@ -1040,8 +1056,18 @@ public class CardFactoryUtil {
     public static SpellAbility abilityTransmute(final Card sourceCard, String transmuteCost) {
         transmuteCost += " Discard<1/CARDNAME>";
         final Cost abCost = new Cost(sourceCard, transmuteCost, true);
-
-        final SpellAbility transmute = new AbilityActivated(sourceCard, abCost, null) {
+        class AbilityTransmute extends AbilityActivated {
+            public AbilityTransmute(final Card ca, final Cost co, final Target t) {
+                super(ca,co,t);
+            }
+            
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityTransmute(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                res.getRestrictions().setZone(ZoneType.Hand);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4960704261761785512L;
 
             @Override
@@ -1081,8 +1107,9 @@ public class CardFactoryUtil {
                 }
                 sourceCard.getController().shuffle();
             }
-
-        };
+        }
+        final SpellAbility transmute = new AbilityTransmute(sourceCard, abCost, null);
+        
         final StringBuilder sbDesc = new StringBuilder();
         sbDesc.append("Transmute (").append(abCost.toString());
         sbDesc.append("Search your library for a card with the same converted mana cost as this card, reveal it, ");
@@ -1174,7 +1201,17 @@ public class CardFactoryUtil {
             final String[] extrinsicKeywords, final Cost abCost) {
         final Target target = new Target(sourceCard, "Select target creature you control",
                 "Creature.YouCtrl".split(","));
-        final SpellAbility equip = new AbilityActivated(sourceCard, abCost, target) {
+        class AbilityEquip extends AbilityActivated {
+            public AbilityEquip(final Card ca, final Cost co, final Target t) {
+                super(ca,co,t);
+            }
+            
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityEquip(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4960704261761785512L;
 
             @Override
@@ -1255,8 +1292,9 @@ public class CardFactoryUtil {
 
                 return list;
             } // getCreature()
-        }; // equip ability
-
+        }
+        final SpellAbility equip = new AbilityEquip(sourceCard, abCost, target); // equip ability
+        
         String costDesc = abCost.toString();
         // get rid of the ": " at the end
         costDesc = costDesc.substring(0, costDesc.length() - 2);
@@ -3880,6 +3918,40 @@ public class CardFactoryUtil {
         to.setReplacementEffects(from.getReplacementEffects());
         to.setStaticAbilityStrings(from.getStaticAbilityStrings());
 
+    }
+    
+    public static void copySpellAbility(SpellAbility from,SpellAbility to) {
+        to.setDescription(from.getDescription());
+        to.setStackDescription(from.getDescription());
+        if(from.getAbilityFactory() != null) {
+            to.setAbilityFactory(new AbilityFactory(from.getAbilityFactory()));
+        }
+        if(from.getSubAbility() != null) {
+            to.setSubAbility(from.getSubAbility().getCopy());
+        }
+        if(from.getRestrictions() != null) {
+            to.setRestrictions(from.getRestrictions());
+        }
+        if(from.getConditions() != null) {
+            to.setConditions(from.getConditions());
+        }
+        
+        for(String sVar : from.getSVars()) {
+            to.setSVar(sVar, from.getSVar(sVar));
+        }
+    }
+    
+    public static void correctAbilityChainSourceCard(final SpellAbility sa, final Card card)
+    {
+        sa.setSourceCard(card);
+        if(sa.getAbilityFactory() != null)
+        {
+            sa.getAbilityFactory().setHostCard(card);
+        }
+        if(sa.getSubAbility() != null)
+        {
+            correctAbilityChainSourceCard(sa.getSubAbility(), card);
+        }
     }
 
     /**

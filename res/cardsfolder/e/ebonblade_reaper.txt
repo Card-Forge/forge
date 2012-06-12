@@ -5,9 +5,9 @@ Text:no text
 PT:1/1
 K:Morph:3 B B
 T:Mode$ Attacks | ValidCard$ Card.Self+faceUp | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks, you lose half your life, rounded up.
-SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ EbonXYou
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ EbonXYou | References$ EbonXYou
 T:Mode$ DamageDone | ValidSource$ Card.Self+faceUp | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigLoseLifeOpp | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player loses half his or her life, rounded up.
-SVar:TrigLoseLifeOpp:AB$ LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ EbonXOpp
+SVar:TrigLoseLifeOpp:AB$ LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ EbonXOpp | References$ EbonXOpp
 SVar:EbonXYou:Count$YourLifeTotal/HalfUp
 SVar:EbonXOpp:Count$OppLifeTotal/HalfUp
 SVar:RemAIDeck:True

@@ -2,7 +2,7 @@ Name:Repeal
 ManaCost:X U
 Types:Instant
 Text:no text
-A:SP$ ChangeZone | Cost$ X U | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target nonland permanent | ValidTgts$ Permanent.nonLand | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent with converted mana cost X to its owner's hand. Draw a card.
+A:SP$ ChangeZone | Cost$ X U | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target nonland permanent | ValidTgts$ Permanent.nonLand | SubAbility$ DBDraw | References$ X | SpellDescription$ Return target nonland permanent with converted mana cost X to its owner's hand. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True

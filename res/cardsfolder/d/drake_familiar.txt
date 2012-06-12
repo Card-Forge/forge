@@ -6,7 +6,7 @@ PT:2/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return an enchantment to its owner's hand.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Enchantment | RememberChanged$ True | SubAbility$ DBSac
-SVar:DBSac:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1
+SVar:DBSac:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlay:Enchantment

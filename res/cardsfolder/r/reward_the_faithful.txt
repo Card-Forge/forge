@@ -2,7 +2,7 @@ Name:Reward the Faithful
 ManaCost:W
 Types:Instant
 Text:no text
-A:SP$ GainLife | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player | TargetMin$ 0 | TargetMax$ 2 | LifeAmount$ X | SpellDescription$ Any number of target players each gain life equal to the highest converted mana cost among permanents you control.
+A:SP$ GainLife | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player | TargetMin$ 0 | TargetMax$ 2 | LifeAmount$ X | References$ X | SpellDescription$ Any number of target players each gain life equal to the highest converted mana cost among permanents you control.
 SVar:X:Count$MaxCMCYouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reward_the_faithful.jpg

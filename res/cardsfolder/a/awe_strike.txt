@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature to entrance | Name$ Awe Struck | ReplacementEffects$ StrikeWithAwe | Triggers$ OutOfSight | SVars$ ExileEffect,GainLifeInstead,X | RememberObjects$ Targeted | AILogic$ Fog | SpellDescription$ The next time target creature would deal damage this turn, prevent that damage. You gain life equal to the damage prevented this way.
 SVar:StrikeWithAwe:Event$ DamageDone | ValidSource$ Card.IsRemembered | ReplaceWith$ GainLifeInstead | PreventionEffect$ True | Description$ The next time the targeted creature would deal damage this turn, prevent that damage. You gain life equal to the damage prevented this way.
-SVar:GainLifeInstead:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | SubAbility$ ExileEffect
+SVar:GainLifeInstead:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | SubAbility$ ExileEffect | References$ X
 SVar:X:ReplaceCount$DamageAmount
 SVar:OutOfSight:Mode$ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile

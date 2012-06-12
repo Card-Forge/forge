@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Rebel Cleric
 Text:no text
 PT:1/1
-A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | SpellDescription$ You gain life equal to the life you've lost this turn. (Damage causes loss of life.)
+A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the life you've lost this turn. (Damage causes loss of life.)
 SVar:X:Count$LifeYouLostThisTurn
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/children_of_korlis.jpg

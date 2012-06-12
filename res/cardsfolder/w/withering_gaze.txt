@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Sorcery
 Text:no text
 A:SP$ RevealHand | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDraw | SpellDescription$ Target opponent reveals his or her hand. You draw a card for each Forest and green card in it.
-SVar:DBDraw:DB$Draw | NumCards$ X
+SVar:DBDraw:DB$Draw | NumCards$ X | References$ X,Y
 SVar:X:Count$TypeInOppHand.Forest/Plus.Y
 SVar:Y:Count$GreenInOppHand
 SVar:RemRandomDeck:True

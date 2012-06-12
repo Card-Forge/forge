@@ -7,7 +7,7 @@ K:Flying
 K:etbCounter:WISH:3
 A:AB$ Dig | Cost$ 2 U U SubCounter<1/WISH> | DigNum$ 1 | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBPlayIT | SpellDescription$ Reveal the top card of your library. You may play that card without paying its mana cost. If you don't, exile it.
 SVar:DBPlayIT:DB$ Play | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | RememberPlayed$ True | SubAbility$ DBExileIfNotPlayed
-SVar:DBExileIfNotPlayed:DB$ ChangeZone | Origin$ Library | Destination$ Exile | Defined$ Remembered | DefinedPlayer$ You | ConditionCheckSVar$ DjinnX | ConditionSVarCompare$ EQ1 | SubAbility$ DBDjinnCleanup
+SVar:DBExileIfNotPlayed:DB$ ChangeZone | Origin$ Library | Destination$ Exile | Defined$ Remembered | DefinedPlayer$ You | ConditionCheckSVar$ DjinnX | ConditionSVarCompare$ EQ1 | SubAbility$ DBDjinnCleanup | References$ DjinnX
 SVar:DBDjinnCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DjinnX:Remembered$Valid Card.IsRemembered
 SVar:RemAIDeck:True

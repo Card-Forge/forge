@@ -2,8 +2,8 @@ Name:Devouring Greed
 ManaCost:2 B B
 Types:Sorcery Arcane
 Text:no text
-A:SP$ LoseLife | Cost$ 2 B B Sac<X/Spirit> | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ C | SubAbility$ DBGainLife | SpellDescription$ Target player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ C
+A:SP$ LoseLife | Cost$ 2 B B Sac<X/Spirit> | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ C | SubAbility$ DBGainLife | References$ X,A,B,C | SpellDescription$ Target player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ C | References$ X,A,B,C 
 SVar:X:XChoice
 SVar:A:Sacrificed$Amount
 SVar:B:SVar$A/Times.2

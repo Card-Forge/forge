@@ -25,6 +25,8 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.card.cost.Cost;
+import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
 
 /**
@@ -46,10 +48,18 @@ public class AbilityFactoryStoreSVar {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityStoreSVar(final AbilityFactory abilityFactory) {
-
-        final SpellAbility abStoreSVar = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
-                abilityFactory.getAbTgt()) {
-
+        class AbilityStoreSVar extends AbilityActivated {
+            public AbilityStoreSVar(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityStoreSVar(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -7299561150243337080L;
             private final AbilityFactory af = abilityFactory;
 
@@ -72,8 +82,9 @@ public class AbilityFactoryStoreSVar {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryStoreSVar.storeSVarDoTriggerAI(this.af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abStoreSVar = new AbilityStoreSVar(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt());
         return abStoreSVar;
     }
 
@@ -124,7 +135,18 @@ public class AbilityFactoryStoreSVar {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackStoreSVar(final AbilityFactory abilityFactory) {
-        final SpellAbility dbStoreSVar = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+        class DrawbackStoreSVar extends AbilitySub {
+            public DrawbackStoreSVar(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackStoreSVar(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 6631124959690157874L;
 
             private final AbilityFactory af = abilityFactory;
@@ -161,8 +183,9 @@ public class AbilityFactoryStoreSVar {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryStoreSVar.storeSVarDoTriggerAI(this.af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbStoreSVar = new DrawbackStoreSVar(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
+        
         return dbStoreSVar;
     }
 

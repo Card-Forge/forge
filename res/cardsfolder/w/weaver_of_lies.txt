@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:Morph:4 U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ DBWeaverofLiesSetState | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, turn any number of target creatures with morph other than CARDNAME face down.
-SVar:DBWeaverofLiesSetState:DB$ SetState | ValidTgts$ Creature.withMorph+Other | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ WeaverofLiesX | Mode$ TurnFace | SpellDescription$ Turn CARDNAME face down.
+SVar:DBWeaverofLiesSetState:DB$ SetState | ValidTgts$ Creature.withMorph+Other | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ WeaverofLiesX | Mode$ TurnFace | References$ WeaverofLiesX | SpellDescription$ Turn CARDNAME face down.
 SVar:WeaverofLiesX:Count$Valid Creature.withMorph+Other
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

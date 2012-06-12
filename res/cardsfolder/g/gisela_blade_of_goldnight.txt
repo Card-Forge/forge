@@ -7,8 +7,8 @@ K:Flying
 K:First Strike
 R:Event$ DamageDone | ValidSource$ Card | ValidTarget$ Opponent,Permanent.YouDontCtrl | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ If a source would deal damage to an opponent or a permanent an opponent controls, that source deals double that damage to that player or permanent instead.
 R:Event$ DamageDone | ValidSource$ Card | ValidTarget$ Opponent,Permanent.YouDontCtrl | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to an opponent or a permanent an opponent controls, that source deals double that damage to that player or permanent instead.
-SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
-SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
+SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 S:Mode$ PreventDamage | Target$ You,Permanent.YouCtrl | Amount$ HalfUp | Description$ If a source would deal damage to you or a permanent you control, prevent half that damage, rounded up.
 SVar:PlayMain1:TRUE

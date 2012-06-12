@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ T | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ EliteGuardEffect | SpellDescription$ Target creature gets +2/+2 until end of turn. When that creature leaves the battlefield this turn, sacrifice CARDNAME. Activate this ability only during combat.
-SVar:EliteGuardEffect:DB$ Effect | Name$ Elite Guard Escort | Triggers$ LostTheGuarded | SVars$ ExileEffect,EliteDefence | RememberObjects$ Targeted | ImprintCards$ Self
+SVar:EliteGuardEffect:DB$ Effect | Name$ Elite Guard Escort | Triggers$ LostTheGuarded | SVars$ ExileEffect,EliteDefence | References$ LostTheGuarded,ExileEffect,EliteDefence | RememberObjects$ Targeted | ImprintCards$ Self
 SVar:LostTheGuarded:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ EliteDefence | TriggerDescription$ When the targeted creature leaves the battlefield this turn, sacrifice Kjeldoran Elite Guard.
 SVar:EliteDefence:DB$ SacrificeAll | Defined$ Imprinted | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile

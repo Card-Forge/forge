@@ -8,7 +8,7 @@ SVar:DBChandraDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt
 SVar:DBChandraCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Discard | Cost$ SubCounter<2/LOYALTY> | Mode$ Hand | Defined$ Each | Planeswalker$ True | SubAbility$ DBChandraDraw | SpellDescription$ Each player discards his or her hand, then draws three cards.
 SVar:DBChandraDraw:DB$ Draw | Defined$ Each | NumCards$ 3
-A:AB$ Play | Cost$ SubCounter<7/LOYALTY> | Valid$ Instant.Red+YouCtrl,Sorcery.Red+YouCtrl | ValidZone$ Graveyard | WithoutManaCost$ True | Planeswalker$ True | Ultimate$ True | Amount$ ChandraZ | Controller$ You | Optional$ True | SpellDescription$ Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.
+A:AB$ Play | Cost$ SubCounter<7/LOYALTY> | Valid$ Instant.Red+YouCtrl,Sorcery.Red+YouCtrl | ValidZone$ Graveyard | WithoutManaCost$ True | Planeswalker$ True | Ultimate$ True | Amount$ ChandraZ | Controller$ You | Optional$ True | References$ ChandraX,ChandraY,ChandraZ | SpellDescription$ Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.
 SVar:ChandraX:Count$TypeInYourYard.Instant.Red
 SVar:ChandraY:Count$TypeInYourYard.Sorcery.Red
 SVar:ChandraZ:SVar$ChandraX/Plus.ChandraY

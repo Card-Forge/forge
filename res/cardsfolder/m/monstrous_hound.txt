@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Hound
 Text:no text
 PT:4/4
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. & CARDNAME can't block. | CheckSVar$ X | SVarCompare$ LEY | Description$ CARDNAME can't attack unless you control more lands than defending player. CARDNAME can't block unless you control more lands than attacking player.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. & CARDNAME can't block. | CheckSVar$ X | SVarCompare$ LEY | References$ X,Y | Description$ CARDNAME can't attack unless you control more lands than defending player. CARDNAME can't block unless you control more lands than attacking player.
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Y:Count$Valid Land.YouDontCtrl
 SVar:Rarity:Rare

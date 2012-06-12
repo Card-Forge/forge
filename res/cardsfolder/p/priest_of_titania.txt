@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Elf Druid
 Text:no text
 PT:1/1
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add G to your mana pool for each Elf on the battlefield.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add G to your mana pool for each Elf on the battlefield.
 SVar:X:Count$Valid Elf
 SVar:RemAIDeck:True
 SVar:Rarity:Common

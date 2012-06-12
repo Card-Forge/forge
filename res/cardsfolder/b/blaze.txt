@@ -2,7 +2,7 @@ Name:Blaze
 ManaCost:X R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
+A:SP$ DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blaze.jpg

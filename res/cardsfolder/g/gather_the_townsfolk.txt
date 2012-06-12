@@ -2,7 +2,7 @@ Name:Gather the Townsfolk
 ManaCost:1 W
 Types:Sorcery
 Text:no text
-A:SP$ Token | Cost$ 1 W | TokenImage$ W 1 1 Human dka | TokenAmount$ X | TokenName$ Human | TokenTypes$ Creature,Human | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 white Human creature tokens onto the battlefield.  Fateful Hour - If you have 5 or less life, put 5 of those tokens onto the battlefield instead.
+A:SP$ Token | Cost$ 1 W | TokenImage$ W 1 1 Human dka | TokenAmount$ X | TokenName$ Human | TokenTypes$ Creature,Human | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | References$ X | SpellDescription$ Put two 1/1 white Human creature tokens onto the battlefield.  Fateful Hour - If you have 5 or less life, put 5 of those tokens onto the battlefield instead.
 SVar:X:Count$FatefulHour.5.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gather_the_townsfolk.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/8.jpg

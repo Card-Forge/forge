@@ -4,7 +4,7 @@ Types:Artifact Creature Angel
 Text:no text
 PT:2/2
 K:Flying
-A:AB$PutCounter | Cost$ T Sac<X/Land> | Defined$ Self | CounterType$ P1P1 | CounterNum$ ChosenX | SpellDescription$ Put X +1/+1 counters on CARDNAME.
+A:AB$PutCounter | Cost$ T Sac<X/Land> | Defined$ Self | CounterType$ P1P1 | CounterNum$ ChosenX | References$ X | SpellDescription$ Put X +1/+1 counters on CARDNAME.
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True

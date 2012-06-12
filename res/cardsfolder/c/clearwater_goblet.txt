@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 K:Sunburst
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you may gain life equal to the number of charge counters on CARDNAME.
-SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

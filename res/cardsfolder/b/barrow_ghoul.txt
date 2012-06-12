@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you exile the top creature card of your graveyard.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | Hidden$ True | ChangeType$ Creature.YouOwn+TopGraveyardCreature | RememberChanged$ True | SubAbility$ DBSac
-SVar:DBSac:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1
+SVar:DBSac:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE2

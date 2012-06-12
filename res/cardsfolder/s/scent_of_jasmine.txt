@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant
 Text:no text
 A:SP$ Reveal | Cost$ W | Defined$ You | RevealValid$ Card.White | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBScentOfJasmineLife | SpellDescription$ Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.
-SVar:DBScentOfJasmineLife:DB$ GainLife | LifeAmount$ ScentOfJasmineX | SubAbility$ DBScentOfJasmineCleanup
+SVar:DBScentOfJasmineLife:DB$ GainLife | LifeAmount$ ScentOfJasmineX | SubAbility$ DBScentOfJasmineCleanup | References$ ScentOfJasmineX
 SVar:ScentOfJasmineX:Remembered$Amount.Twice
 SVar:DBScentOfJasmineCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True

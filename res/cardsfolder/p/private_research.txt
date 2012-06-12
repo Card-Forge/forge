@@ -7,7 +7,7 @@ A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPrivateResearchPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a page counter on CARDNAME.
 SVar:TrigPrivateResearchPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPrivateResearchDraw | TriggerDescription$ When enchanted creature dies, draw a card for each page counter on CARDNAME.
-SVar:TrigPrivateResearchDraw:AB$Draw | Cost$ 0 | NumCards$ PrivateResearchX
+SVar:TrigPrivateResearchDraw:AB$Draw | Cost$ 0 | NumCards$ PrivateResearchX | References$ PrivateResearchX
 SVar:PrivateResearchX:Count$CardCounters.PAGE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/private_research.jpg

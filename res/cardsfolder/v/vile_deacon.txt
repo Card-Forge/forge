@@ -4,7 +4,7 @@ Types:Creature Human Cleric
 Text:no text
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+X until end of turn, where X is the number of Clerics on the battlefield.
-SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | NumDef$ X
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | NumDef$ X | References$ X
 SVar:X:Count$Valid Cleric
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vile_deacon.jpg

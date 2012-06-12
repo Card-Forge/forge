@@ -4,9 +4,10 @@ Types:Creature Zombie
 Text:no text
 PT:0/1
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | References$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
-SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:X GE2
+SVar:RemRandomDeck:True
 SVar:BuffedBy:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_shrieker.jpg

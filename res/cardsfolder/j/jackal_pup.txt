@@ -4,7 +4,7 @@ Types:Creature Hound
 Text:no text
 PT:2/1
 T:Mode$ DamageDone | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to you.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | NumDmg$ X | Defined$ You
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | NumDmg$ X | Defined$ You | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jackal_pup.jpg

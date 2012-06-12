@@ -2,8 +2,8 @@ Name:Searing Blaze
 ManaCost:R R
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ R R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ SearingX | SubAbility$ SearingDamage | SpellDescription$ CARDNAME deals 1 damage to target player and 1 damage to target creature that player controls. Landfall - If you had a land enter the battlefield under your control this turn, CARDNAME deals 3 damage to that player and 3 damage to that creature instead.
-SVar:SearingDamage:DB$ DealDamage | ValidTgts$ Creature.TargetedPlayerCtrl | TgtPrompt$ Select target creature that player controls | NumDmg$ SearingX
+A:SP$ DealDamage | Cost$ R R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ SearingX | SubAbility$ SearingDamage | References$ SearingX | SpellDescription$ CARDNAME deals 1 damage to target player and 1 damage to target creature that player controls. Landfall - If you had a land enter the battlefield under your control this turn, CARDNAME deals 3 damage to that player and 3 damage to that creature instead.
+SVar:SearingDamage:DB$ DealDamage | ValidTgts$ Creature.TargetedPlayerCtrl | TgtPrompt$ Select target creature that player controls | NumDmg$ SearingX | References$ SearingX
 SVar:SearingX:Count$Landfall.3.1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_blaze.jpg

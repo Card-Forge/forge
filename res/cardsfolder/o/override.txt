@@ -2,7 +2,7 @@ Name:Override
 ManaCost:2 U
 Types:Instant
 Text:no text
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays 1 for each artifact you control.
+A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | References$ X | SpellDescription$ Counter target spell unless its controller pays 1 for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

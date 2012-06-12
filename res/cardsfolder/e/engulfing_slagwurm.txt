@@ -7,10 +7,10 @@ T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | Execute$ TrigDe
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigDestroyBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, destroy that creature. You gain life equal to that creature's toughness.
 SVar:TrigDestroyBlocked:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker | SubAbility$ DBGainLifeBlocked
 SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker | SubAbility$ DBGainLifeBlocker
-SVar:DBGainLifeBlocked:DB$GainLife | Defined$ You | LifeAmount$ X
-SVar:DBGainLifeBlocker:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:DBGainLifeBlocked:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X 
+SVar:DBGainLifeBlocker:DB$GainLife | Defined$ You | LifeAmount$ Y | References$ Y
 SVar:X:TriggeredAttacker$CardToughness
-SVar:X:TriggeredBlocker$CardToughness
+SVar:Y:TriggeredBlocker$CardToughness
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/engulfing_slagwurm.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/118.jpg

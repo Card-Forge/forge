@@ -2,7 +2,7 @@ Name:Ribbons of the Reikai
 ManaCost:4 U
 Types:Sorcery Arcane
 Text:no text
-A:SP$ Draw | Cost$ 4 U | NumCards$ X | SpellDescription$ Draw a card for each Spirit you control.
+A:SP$ Draw | Cost$ 4 U | NumCards$ X | References$ X | SpellDescription$ Draw a card for each Spirit you control.
 SVar:X:Count$TypeYouCtrl.Spirit
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

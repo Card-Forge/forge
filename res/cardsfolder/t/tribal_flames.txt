@@ -2,7 +2,7 @@ Name:Tribal Flames
 ManaCost:1 R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ 1 R | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ Domain - Tribal Flames deals X damage to target creature or player, where X is the number of basic land types among lands you control.
+A:SP$ DealDamage | Cost$ 1 R | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ Domain - Tribal Flames deals X damage to target creature or player, where X is the number of basic land types among lands you control.
 SVar:X:Count$Domain
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108916.jpg

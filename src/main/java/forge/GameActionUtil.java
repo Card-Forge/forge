@@ -859,8 +859,6 @@ public final class GameActionUtil {
             GameActionUtil.playerCombatDamageScalpelexis(c);
         } else if (c.getName().equals("Spawnwrithe")) {
             GameActionUtil.playerCombatDamageSpawnwrithe(c);
-        } else if (c.getName().equals("Treva, the Renewer")) {
-            GameActionUtil.playerCombatDamageTreva(c);
         } else if (c.isEnchantedBy("Celestial Mantle")) {
             GameActionUtil.executeCelestialMantle(c);
         }
@@ -900,24 +898,6 @@ public final class GameActionUtil {
 
             }
         }
-    }
-
-    /**
-     * <p>
-     * playerCombatDamageTreva.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    private static void playerCombatDamageTreva(final Card c) {
-        final SpellAbility[] sa = c.getSpellAbility();
-        if (c.getController().isHuman()) {
-            Singletons.getModel().getGameAction().playSpellAbility(sa[1]);
-        } else {
-            ComputerUtil.playNoStack(sa[1]);
-        }
-
     }
 
     /**

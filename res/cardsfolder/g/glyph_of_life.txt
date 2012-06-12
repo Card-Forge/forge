@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ W | Name$ Glyph of Life Effect | ValidTgts$ Creature.Wall | TgtPrompt$ Select target Wall creature | Triggers$ TrigDamage | SVars$ TrigGainLife,X | RememberObjects$ Targeted | SpellDescription$ Until end of turn, whenever an attacking creature deals damage to target Wall creature, you gain that much life.
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.attacking | ValidTarget$ Creature.IsRemembered | Execute$ TrigGainLife | TriggerDescription$ Whenever an attacking creature deals damage to target Wall creature, you gain that much life.
-SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | Defined$ You
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | Defined$ You | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

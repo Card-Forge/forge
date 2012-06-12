@@ -2,7 +2,7 @@ Name:Greater Good
 ManaCost:2 G G
 Types:Enchantment
 Text:no text
-A:AB$ Draw | Cost$ Sac<1/Creature> | NumCards$ X | SubAbility$ DB | SpellDescription$ Draw cards equal to the sacrificed creature's power, then discard three cards.
+A:AB$ Draw | Cost$ Sac<1/Creature> | NumCards$ X | SubAbility$ DB | References$ X | SpellDescription$ Draw cards equal to the sacrificed creature's power, then discard three cards.
 SVar:DB:DB$Discard | NumCards$ 3 | Mode$ TgtChoose
 SVar:X:Sacrificed$CardPower
 SVar:Rarity:Rare

@@ -3,8 +3,8 @@ ManaCost:3 R R
 Types:Legendary Creature Spirit
 Text:no text
 PT:3/3
-A:AB$ DealDamage | Cost$ X R T | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying. | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature without flying.
-A:AB$ DamageAll | PrecostDesc$ Channel - | Cost$ X R R R Discard<1/CARDNAME> | ActivationZone$ Hand | ValidCards$ Creature.withoutFlying | NumDmg$ X | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals X damage to each creature without flying.
+A:AB$ DealDamage | Cost$ X R T | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying. | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature without flying.
+A:AB$ DamageAll | PrecostDesc$ Channel - | Cost$ X R R R Discard<1/CARDNAME> | ActivationZone$ Hand | ValidCards$ Creature.withoutFlying | NumDmg$ X | ValidDescription$ each creature without flying. | References$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

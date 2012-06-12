@@ -4,7 +4,7 @@ Types:Legendary Creature Vedalken Wizard
 Text:no text
 PT:1/1
 A:AB$ DealDamage | Cost$ X U R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals X damage to target creature. That creature's controller draws X cards.
-SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ X
+SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ X | References$ X
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

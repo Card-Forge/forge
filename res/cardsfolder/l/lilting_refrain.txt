@@ -2,7 +2,7 @@ Name:Lilting Refrain
 ManaCost:1 U
 Types:Enchantment
 Text:no text
-A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SpellDescription$ Sacrifice CARDNAME: Counter target spell unless its controller pays X, where X is the number of verse counters on CARDNAME.
+A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | References$ X | SpellDescription$ Sacrifice CARDNAME: Counter target spell unless its controller pays X, where X is the number of verse counters on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a verse counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
 SVar:X:Count$CardCounters.VERSE

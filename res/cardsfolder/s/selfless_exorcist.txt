@@ -4,7 +4,7 @@ Types:Creature Human Cleric
 Text:no text
 PT:3/4
 A:AB$ ChangeZone | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBDealDamage | SpellDescription$ Exile target creature card from a graveyard. That card deals damage equal to its power to CARDNAME.
-SVar:DBDealDamage:DB$DealDamage | Defined$ Self | NumDmg$ X
+SVar:DBDealDamage:DB$DealDamage | Defined$ Self | NumDmg$ X | References$ X
 SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

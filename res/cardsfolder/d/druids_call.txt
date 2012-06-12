@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ DamageDone | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever enchanted creature is dealt damage, its controller puts that many 1/1 green Squirrel creature tokens onto the battlefield.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenOwner$ TriggeredTargetController | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenOwner$ TriggeredTargetController | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druids_call.jpg

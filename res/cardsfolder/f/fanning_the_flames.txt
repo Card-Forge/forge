@@ -2,7 +2,7 @@ Name:Fanning the Flames
 ManaCost:X R R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ X R R | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
+A:SP$ DealDamage | Cost$ X R R | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
 SVar:Buyback:3
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon

@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Creature Merfolk Wizard Ally
 Text:no text
 PT:1/3
-A:AB$ Draw | Cost$ T | NumCards$ X | SpellDescription$ Draw a card for each Ally you control.
+A:AB$ Draw | Cost$ T | NumCards$ X | References$ X | SpellDescription$ Draw a card for each Ally you control.
 SVar:X:Count$TypeYouCtrl.Ally
 SVar:BuffedBy:Ally
 SVar:Rarity:Rare

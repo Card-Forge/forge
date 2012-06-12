@@ -4,8 +4,8 @@ Types:Artifact
 Text:no text
 A:AB$ ChangeZone | Cost$ 2 T | Defined$ TopOfLibrary | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SpellDescription$ Exile the top card of your library face down.
 A:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DBDiscardHand | SpellDescription$ Sacrifice CARDNAME. If you do, discard your hand, then put all cards exiled with CARDNAME into their owner's hand.
-SVar:DBDiscardHand:DB$ Discard | Mode$ Hand | SubAbility$ DBChangeZoneAll | ConditionCheckSVar$ VaultX | ConditionSVarCompare$ GT0
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered | Origin$ Exile | Destination$ Hand | ConditionCheckSVar$ VaultX | ConditionSVarCompare$ GT0
+SVar:DBDiscardHand:DB$ Discard | Mode$ Hand | SubAbility$ DBChangeZoneAll | ConditionCheckSVar$ VaultX | ConditionSVarCompare$ GT0 | References$ VaultX
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered | Origin$ Exile | Destination$ Hand | ConditionCheckSVar$ VaultX | ConditionSVarCompare$ GT0 | References$ VaultX 
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Hidden$ True | Execute$ TrigGraveyard | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, put all cards exiled with CARDNAME into their owner's graveyard.
 SVar:TrigGraveyard:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Remembered | Origin$ Exile | Destination$ Graveyard
 SVar:VaultX:Remembered$Valid Card.Self

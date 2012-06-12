@@ -2,7 +2,7 @@ Name:Throne of Empires
 ManaCost:4
 Types:Artifact
 Text:no text
-A:AB$ Token | Cost$ 1 T | TokenAmount$ X | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white Soldier creature token onto the battlefield. Put five of those tokens onto the battlefield instead if you control artifacts named Crown of Empires and Scepter of Empires.
+A:AB$ Token | Cost$ 1 T | TokenAmount$ X | References$ X | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white Soldier creature token onto the battlefield. Put five of those tokens onto the battlefield instead if you control artifacts named Crown of Empires and Scepter of Empires.
 SVar:X:Count$AllM12Empires.5.1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/throne_of_empires.jpg

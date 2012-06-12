@@ -48,6 +48,12 @@ public class Cost {
     public final ArrayList<CostPart> getCostParts() {
         return this.costParts;
     }
+    
+    private SpellAbility assocSA = null;
+    
+    public void setSpellAbility(final SpellAbility sa) {
+        assocSA = sa;
+    }
 
     private boolean sacCost = false;
 

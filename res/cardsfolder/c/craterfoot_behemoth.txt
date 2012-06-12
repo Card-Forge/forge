@@ -5,7 +5,7 @@ Text:no text
 PT:5/5
 K:Haste
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ BehemothPump | TriggerDescription$ When CARDNAME enters the battlefield, creatures you control gain trample and get +X/+X until end of turn, where X is the number of creatures you control.
-SVar:BehemothPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ X | NumDef$ X
+SVar:BehemothPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ X | NumDef$ X | References$ X
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic

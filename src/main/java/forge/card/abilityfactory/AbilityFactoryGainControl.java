@@ -37,6 +37,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -149,8 +150,18 @@ public class AbilityFactoryGainControl {
      * @since 1.0.15
      */
     public final SpellAbility getAbilityGainControl() {
-
-        final SpellAbility abControl = new AbilityActivated(this.hostCard, this.af.getAbCost(), this.af.getAbTgt()) {
+        class AbilityGainControl extends AbilityActivated {
+            public AbilityGainControl(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityGainControl(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4384705198674678831L;
 
             @Override
@@ -172,7 +183,8 @@ public class AbilityFactoryGainControl {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryGainControl.this.gainControlTgtAI(this);
             }
-        }; // Ability_Activated
+        }
+        final SpellAbility abControl = new AbilityGainControl(this.hostCard, this.af.getAbCost(), this.af.getAbTgt());
 
         return abControl;
     }
@@ -186,7 +198,18 @@ public class AbilityFactoryGainControl {
      * @since 1.0.15
      */
     public final SpellAbility getDrawbackGainControl() {
-        final SpellAbility dbControl = new AbilitySub(this.hostCard, this.af.getAbTgt()) {
+        class DrawbackGainControl extends AbilitySub {
+            public DrawbackGainControl(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackGainControl(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -5577742598032345880L;
 
             @Override
@@ -213,7 +236,8 @@ public class AbilityFactoryGainControl {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryGainControl.this.gainControlTriggerAI(this, mandatory);
             }
-        }; // SpellAbility
+        }
+        final SpellAbility dbControl = new DrawbackGainControl(this.hostCard, this.af.getAbTgt()); // SpellAbility
 
         return dbControl;
     }

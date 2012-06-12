@@ -6,7 +6,7 @@ PT:0/0
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.
-SVar:TrigDrain:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ Y
+SVar:TrigDrain:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ Y | References$ Y
 SVar:Y:Count$CardCounters.P1P1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maga_traitor_to_mortals.jpg

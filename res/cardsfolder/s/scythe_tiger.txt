@@ -6,7 +6,7 @@ PT:3/2
 K:Shroud
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice a Land.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Amount$ 1 | SacValid$ Land | RememberSacrificed$ True | Optional$ True | SubAbility$ DBSacSelf
-SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1
+SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlay:Land.YouCtrl

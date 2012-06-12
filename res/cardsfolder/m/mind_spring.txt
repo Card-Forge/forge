@@ -2,7 +2,7 @@ Name:Mind Spring
 ManaCost:X U U
 Types:Sorcery
 Text:no text
-A:SP$ Draw | Cost$ X U U | NumCards$ X | SpellDescription$ Draw X cards.
+A:SP$ Draw | Cost$ X U U | NumCards$ X | References$ X | SpellDescription$ Draw X cards.
 SVar:X:Count$xPaid
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_spring.jpg

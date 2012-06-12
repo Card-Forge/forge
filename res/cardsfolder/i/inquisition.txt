@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Sorcery
 Text:no text
 A:SP$ RevealHand | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Select target player | RememberRevealed$ True | SubAbility$ Damage | SpellDescription$ Target player reveals his or her hand. CARDNAME deals damage to that player equal to the number of white cards in his or her hand.
-SVar:Damage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X
+SVar:Damage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | References$ X
 SVar:X:Remembered$Valid Card.White
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

@@ -4,7 +4,7 @@ Types:Creature Sliver
 Text:no text
 PT:3/3
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Pump | AddSVar$ SliversOnBattlefield | Description$ All Slivers have "T: Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield."
-SVar:Pump:AB$Pump | Cost$ T | ValidTgts$ Creature.Sliver | TgtPrompt$ Select target Sliver creature | NumAtt$ SliversOnBattlefield | SpellDescription$ Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield.
+SVar:Pump:AB$Pump | Cost$ T | ValidTgts$ Creature.Sliver | TgtPrompt$ Select target Sliver creature | NumAtt$ SliversOnBattlefield | References$ SliversOnBattlefield | SpellDescription$ Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield.
 SVar:SliversOnBattlefield:Count$Valid Sliver
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver

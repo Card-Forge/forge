@@ -3,9 +3,9 @@ ManaCost:2
 Types:Artifact Equipment
 Text:no text
 A:AB$ Attach | Cost$ 2 | ValidTgts$ Creature.YouCtrl | AILogic$ Pump | IsPresent$ Card.Self+nonCreature | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | PrecostDesc$ Equip | SpellDescription$ Attach CARDNAME to target creature you control.
-S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddAbility$ RitualSac | Description$ Equipped creature gets +1/+0 for each blood counter on CARDNAME and has "T, Sacrifice a creature: Put a blood counter on CARDNAME."
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | References$ X | AddAbility$ RitualSac | Description$ Equipped creature gets +1/+0 for each blood counter on CARDNAME and has "T, Sacrifice a creature: Put a blood counter on CARDNAME."
 SVar:RitualSac:AB$ PutCounter | Cost$ T Sac<1/Creature> | Defined$ OriginalHost | CounterType$ BLOOD | CounterNum$ 1 | SpellDescription$ Put a blood counter on Rakdos Riteknife.
-A:AB$ Sacrifice | Cost$ B R Sac<1/CARDNAME> | ValidTgts$ Player | SacValid$ Permanent | SacMessage$ Permanent | Amount$ X | SpellDescription$ Target player sacrifices a permanent for each blood counter on CARDNAME.
+A:AB$ Sacrifice | Cost$ B R Sac<1/CARDNAME> | ValidTgts$ Player | SacValid$ Permanent | SacMessage$ Permanent | Amount$ X | References$ X | SpellDescription$ Target player sacrifices a permanent for each blood counter on CARDNAME.
 SVar:X:Count$CardCounters.BLOOD
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

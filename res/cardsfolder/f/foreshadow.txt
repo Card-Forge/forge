@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ NameCard | Cost$ 1 U | Defined$ You | SubAbility$ DBMill | SpellDescription$ Name a card, then put the top card of target opponent's library into his or her graveyard. If that card is the named card, you draw a card. Draw a card at the beginning of the next turn's upkeep.
 SVar:DBMill:DB$ Mill | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBSlowDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBSlowDraw | References$ X
 SVar:DBSlowDraw:DB$ Draw | Defined$ You | NextUpkeep$ True | NumCards$ 1
 SVar:X:Remembered$Valid Card.NamedCard
 SVar:RemAIDeck:True

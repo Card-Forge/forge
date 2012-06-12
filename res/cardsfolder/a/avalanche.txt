@@ -2,7 +2,7 @@ Name:Avalanche
 ManaCost:X 2 R R
 Types:Sorcery
 Text:no text
-A:SP$ Destroy | Cost$ X 2 R R | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Land.Snow | TgtPrompt$ Select target snow land | SpellDescription$ Destroy X target snow lands.
+A:SP$ Destroy | Cost$ X 2 R R | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Land.Snow | TgtPrompt$ Select target snow land | References$ X,MaxTgts | SpellDescription$ Destroy X target snow lands.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Land.Snow

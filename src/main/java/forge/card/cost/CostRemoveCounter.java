@@ -213,10 +213,10 @@ public class CostRemoveCounter extends CostPartWithList {
             c = maxCounters;
         } else {
             if (c == null) {
-                final String sVar = source.getSVar(amount);
+                final String sVar = ability.getSVar(amount);
                 // Generalize this
                 if (sVar.equals("XChoice")) {
-                    c = CostUtil.chooseXValue(source, maxCounters);
+                    c = CostUtil.chooseXValue(source, ability, maxCounters);
                 } else {
                     c = AbilityFactory.calculateAmount(source, amount, ability);
                 }
@@ -255,7 +255,7 @@ public class CostRemoveCounter extends CostPartWithList {
         }
 
         if (c == null) {
-            final String sVar = source.getSVar(amount);
+            final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 return false;
             }

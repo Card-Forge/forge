@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard hand
-SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ TriggeredTarget | SubAbility$ DBCleanup | SpellDescription$ Draw that many cards
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ TriggeredTarget | SubAbility$ DBCleanup | References$ X | SpellDescription$ Draw that many cards
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Rarity:Rare

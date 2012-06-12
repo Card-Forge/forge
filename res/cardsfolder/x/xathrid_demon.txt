@@ -7,9 +7,9 @@ K:Flying
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature other than CARDNAME, then each opponent loses life equal to the sacrificed creature's power. If you can't sacrifice a creature, tap CARDNAME and you lose 7 life.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature.Other | RememberSacrificed$ True | SubAbility$ DBLoseLifeOpp
-SVar:DBLoseLifeOpp:DB$LoseLife | Defined$ Opponent | LifeAmount$ X | SubAbility$ DBLoseLifeYou
-SVar:DBLoseLifeYou:DB$LoseLife | Defined$ You | LifeAmount$ 7 | ConditionCheckSVar$ Y | ConditionSVarCompare$ LT1 | SubAbility$ DBTap
-SVar:DBTap:DB$Tap | Defined$ Self | ConditionCheckSVar$ Y | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
+SVar:DBLoseLifeOpp:DB$LoseLife | Defined$ Opponent | LifeAmount$ X | References$ X | SubAbility$ DBLoseLifeYou
+SVar:DBLoseLifeYou:DB$LoseLife | Defined$ You | LifeAmount$ 7 | ConditionCheckSVar$ Y | References$ Y | ConditionSVarCompare$ LT1 | SubAbility$ DBTap
+SVar:DBTap:DB$Tap | Defined$ Self | ConditionCheckSVar$ Y | References$ Y | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 SVar:Y:Remembered$Amount

@@ -4,7 +4,7 @@ Types:Creature Goblin Warrior
 Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target creature an opponent controls to its owner's hand.
-SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Hand
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Hand
 K:Echo:3 R
 SVar:NeedsToPlayVar:Y GE4
 SVar:Y:Count$Valid Land.YouCtrl

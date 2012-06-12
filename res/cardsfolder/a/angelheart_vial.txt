@@ -5,7 +5,7 @@ Text:no text
 A:AB$ GainLife | Cost$ 2 T SubCounter<4/CHARGE> | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw a card.
 T:Mode$ DamageDone | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever you're dealt damage, you may put that many charge counters on CARDNAME.
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARGE | CounterNum$ X
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARGE | CounterNum$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelheart_vial.jpg

@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature you control
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
-SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:TrigGain:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand

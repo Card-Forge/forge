@@ -5,8 +5,8 @@ Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMillYou | TriggerDescription$ At the beginning of each player's upkeep, that player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in his or her hand.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigMillOpp | Secondary$ True | TriggerDescription$ At the beginning of each player's upkeep, that player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in his or her hand.
-SVar:TrigMillYou:AB$Mill | Cost$ 0 | Defined$ You | NumCards$ X
-SVar:TrigMillOpp:AB$Mill | Cost$ 0 | Defined$ Opponent | NumCards$ Y
+SVar:TrigMillYou:AB$Mill | Cost$ 0 | Defined$ You | NumCards$ X | References$ X
+SVar:TrigMillOpp:AB$Mill | Cost$ 0 | Defined$ Opponent | NumCards$ Y | References$ Y
 SVar:X:Count$InYourHand
 SVar:Y:Count$InOppHand
 SVar:RemRandomDeck:True

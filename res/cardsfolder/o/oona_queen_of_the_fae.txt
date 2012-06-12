@@ -5,8 +5,8 @@ Text:no text
 PT:5/5
 K:Flying
 A:AB$ ChooseColor | Cost$ X UB | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBMill | SpellDescription$ Choose a color. Target opponent exiles the top X cards of his or her library. For each card of the chosen color exiled this way, put a 1/1 blue and black Faerie Rogue creature token with flying onto the battlefield.
-SVar:DBMill:DB$ Mill | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ X | Destination$ Exile | RememberMilled$ True | SubAbility$ DBToken
-SVar:DBToken:DB$Token | TokenAmount$ Y | TokenName$ Faerie Rogue | TokenTypes$ Creature,Faerie,Rogue | TokenOwner$ You | TokenColors$ Blue,Black | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SubAbility$ Clear
+SVar:DBMill:DB$ Mill | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ X | References$ X | Destination$ Exile | RememberMilled$ True | SubAbility$ DBToken
+SVar:DBToken:DB$Token | TokenAmount$ Y | References$ Y | TokenName$ Faerie Rogue | TokenTypes$ Creature,Faerie,Rogue | TokenOwner$ You | TokenColors$ Blue,Black | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SubAbility$ Clear
 SVar:Clear:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:Y:Remembered$Valid Card.ChosenColor

@@ -4,7 +4,7 @@ Types:Creature Goblin Avatar
 Text:no text
 PT:*/*
 K:Haste
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Goblins on the battlefield.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of Goblins on the battlefield.
 SVar:X:Count$Valid Goblin
 SVar:BuffedBy:Goblin
 SVar:RemRandomDeck:True

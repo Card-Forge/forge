@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Enchantment
 Text:no text
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, target opponent loses that much life.
-SVar:TrigDrain:AB$LoseLife | Cost$ 0 | ValidTgts$ Opponent | TgtPromp$ Select target opponent | LifeAmount$ X
+SVar:TrigDrain:AB$LoseLife | Cost$ 0 | ValidTgts$ Opponent | TgtPromp$ Select target opponent | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$LifeAmount
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

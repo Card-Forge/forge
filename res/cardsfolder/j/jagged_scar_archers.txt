@@ -5,7 +5,7 @@ Text:no text
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to the number of Elves you control.
 SVar:Y:Count$Valid Elf.YouCtrl
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature with flying.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature with flying.
 SVar:X:Count$CardPower
 SVar:BuffedBy:Permanent.Elf
 SVar:RemRandomDeck:True

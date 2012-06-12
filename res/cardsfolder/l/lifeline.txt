@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact
 Text:no text
 T:Mode$ ChangesZone | ValidCard$ Card.Creature | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigLifelineEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature dies, if another creature is on the battlefield, return the first card to the battlefield under its owner's control at the beginning of the next end step.
-SVar:TrigLifelineEffect:AB$ Effect | Cost$ 0 | Name$ Lifeline Effect | ConditionCheckSVar$ LifelineX | ConditionSVarCompare$ GE1 | Triggers$ TrigLifelineDelay | SVars$ TrigLifelineReturn | RememberObjects$ TriggeredCard
+SVar:TrigLifelineEffect:AB$ Effect | Cost$ 0 | Name$ Lifeline Effect | ConditionCheckSVar$ LifelineX | ConditionSVarCompare$ GE1 | Triggers$ TrigLifelineDelay | SVars$ TrigLifelineReturn | RememberObjects$ TriggeredCard | References$ LifelineX
 SVar:TrigLifelineDelay:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigLifelineReturn | TriggerDescription$ Return that creature to the battlefield.
 SVar:TrigLifelineReturn:DB$ ChangeZoneAll | ChangeType$ Creature.IsRemembered | Origin$ Graveyard | Destination$ Battlefield
 SVar:LifelineX:Count$Valid Creature

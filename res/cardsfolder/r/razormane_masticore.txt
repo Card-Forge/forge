@@ -6,7 +6,7 @@ PT:5/5
 K:First Strike
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you discard a card.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | NumCards$ 1 | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBSacrifice
-SVar:DBSacrifice:DB$ Sacrifice | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBSacrifice:DB$ Sacrifice | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your draw step, you may have CARDNAME deal 3 damage to target creature.

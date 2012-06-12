@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Instant
 Text:no text
 K:Flashback 1 W
-A:SP$ GainLife | Cost$ 2 G | LifeAmount$ X | SpellDescription$ You gain 1 life for each creature you control.
+A:SP$ GainLife | Cost$ 2 G | LifeAmount$ X | References$ X | SpellDescription$ You gain 1 life for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/folk_medicine.jpg

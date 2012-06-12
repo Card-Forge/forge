@@ -4,7 +4,7 @@ Types:Creature Giant Shaman
 Text:no text
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage equal to the number of Giants you control to each non-Giant creature.
-SVar:TrigDamageAll:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.nonGiant | NumDmg$ X | ValidDescription$ each non-Giant creature.
+SVar:TrigDamageAll:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.nonGiant | NumDmg$ X | References$ X | ValidDescription$ each non-Giant creature.
 SVar:X:Count$TypeYouCtrl.Giant
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True

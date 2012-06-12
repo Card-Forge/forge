@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Zubera Spirit
 Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a 1/1 colorless Spirit creature token onto the battlefield for each Zubera put into a graveyard from the battlefield this turn.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ Colorless | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenAmount$ X
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ Colorless | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenAmount$ X | References$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
 PT:1/2
 SVar:Rarity:Common

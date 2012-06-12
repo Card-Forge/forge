@@ -6,7 +6,7 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSrcy | TriggerDescription$ When CARDNAME enters the battlefield, scry 1, then reveal the top card of your library. Putrid Cyclops gets -X/-X until end of turn, where X is that card's converted mana cost. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)| Static$ True
 SVar:TrigSrcy:AB$ Scry | Cost$ 0 | ScryNum$ 1 | SubAbility$ DBReveal
 SVar:DBReveal:DB$ Dig | Cost$ 0 | DigNum$ 1 | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ TriggeredCard | NumAtt$ -X | NumDef$ -X
+SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ TriggeredCard | NumAtt$ -X | NumDef$ -X | References$ X
 SVar:X:Count$TopOfLibraryCMC
 SVar:RemAIDeck:True
 SVar:Rarity:Common

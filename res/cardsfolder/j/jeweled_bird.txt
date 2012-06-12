@@ -5,7 +5,7 @@ Text:no text
 K:Remove CARDNAME from your deck before playing if you're not playing for ante.
 A:AB$ ChangeZone | Cost$ T | Defined$ Self | Origin$ Battlefield | Destination$ Ante | RememberChanged$ True | SubAbility$ DBUnAnte | SpellDescription$ Put CARDNAME into the ante. If you do, put all other cards you own from the ante into your graveyard, then draw a card.
 SVar:DBUnAnte:DB$ ChangeZoneAll | ConditionCheckSVar$ Y | ConditionSVarCompare$ GT0 | Origin$ Ante | Destination$ Graveyard | ChangeType$ Card.YouOwn+Other | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ Y | ConditionSVarCompare$ GT0 | Defined$ You | NumCards$ 1 | SubAbility$ DBCleanup
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ Y | ConditionSVarCompare$ GT0 | Defined$ You | NumCards$ 1 | SubAbility$ DBCleanup | References$ Y
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True

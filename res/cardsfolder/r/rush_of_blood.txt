@@ -2,7 +2,7 @@ Name:Rush of Blood
 ManaCost:2 R
 Types:Instant
 Text:no text
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is its power.
+A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is its power.
 SVar:X:Targeted$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rush_of_blood.jpg

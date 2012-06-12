@@ -6,7 +6,7 @@ S:Mode$ Continuous | Affected$ You | AddKeyword$ You don't lose the game for hav
 T:Mode$ Always | LifeTotal$ You | LifeAmount$ GE20 | TriggerZones$ Battlefield | Execute$ TrigLoseGame | TriggerDescription$ When you have 20 or more life, you lose the game.
 T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLifeGain | TriggerDescription$ Whenever you lose life, you gain 2 life for each 1 life you lost. (Damage dealt to you causes you to lose life.)
 SVar:TrigLoseGame:AB$ LosesGame | Cost$ 0 | Defined$ You
-SVar:TrigLifeGain:AB$ GainLife | Cost$ 0 | LifeAmount$ X
+SVar:TrigLifeGain:AB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$LifeAmount/Times.2
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

@@ -4,7 +4,7 @@ Types:Creature Ooze
 Text:no text
 PT:1+*/1+*
 K:Cumulative upkeep:2
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to 1 plus twice the number of age counters on it.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | References$ X,Y | Description$ CARDNAME's power and toughness are each equal to 1 plus twice the number of age counters on it.
 SVar:Y:Number$1/Plus.X
 SVar:X:Count$CardCounters.AGE/Times.2
 SVar:Rarity:Rare

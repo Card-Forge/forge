@@ -8,8 +8,8 @@ SVar:DBPumpPermanent:DB$ Pump | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select
 SVar:DBGainControl:DB$ GainControl | Defined$ Targeted | NewController$ Remembered | SubAbility$ DBForgetRemembered
 SVar:DBForgetRemembered:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ GainLife | TriggerDescription$ At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.
-SVar:GainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:GainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X
 SVar:X:Count$Valid Permanent.YouOwn+OwnerDoesntControl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

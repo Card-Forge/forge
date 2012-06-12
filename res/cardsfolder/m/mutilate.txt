@@ -2,7 +2,7 @@ Name:Mutilate
 ManaCost:2 B B
 Types:Sorcery
 Text:no text
-A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ All creatures get -1/-1 until end of turn for each Swamp you control.
+A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | References$ X | IsCurse$ True | SpellDescription$ All creatures get -1/-1 until end of turn for each Swamp you control.
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

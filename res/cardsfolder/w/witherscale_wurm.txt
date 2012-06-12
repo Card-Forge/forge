@@ -9,7 +9,7 @@ Whenever CARDNAME deals damage to an opponent, remove all -1/-1 counters from it
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, remove all -1/-1 counters from it.
 SVar:TrigWitherBlocked:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ Wither
 SVar:TrigWitherBlocker:AB$ Pump | Cost$ 0 | Defined$ TriggeredBlocker | KW$ Wither
-SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | CounterType$ M1M1 | CounterNum$ All
+SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | CounterType$ M1M1 | CounterNum$ All | References$ All
 SVar:All:Count$CardCounters.M1M1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witherscale_wurm.jpg

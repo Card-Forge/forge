@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Instant
 Text:no text
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ DBGainLife | SpellDescription$ Destroy target enchantment. You gain life equal to its converted mana cost.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardManaCost
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon

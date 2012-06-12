@@ -3,7 +3,7 @@ ManaCost:G G
 Types:Legendary Creature Elf Druid
 Text:no text
 PT:2/1
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add G to your mana pool for each Forest you control.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add G to your mana pool for each Forest you control.
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

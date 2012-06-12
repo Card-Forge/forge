@@ -5,7 +5,7 @@ Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
 T:Mode$ ChangesZone | ValidCard$ Creature.YouDontCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature is put into an opponent's graveyard from the battlefield, you gain life equal to its toughness.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
-SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardToughness
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

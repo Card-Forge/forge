@@ -7,7 +7,7 @@ K:etbCounter:P1P0:4
 K:CantBeBlockedBy Artifact.Creature
 T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | IsPresent$ Card.attacking+Self,Card.blocking+Self | TriggerZones$ Battlefield | Execute$ TrigSubCounter | TriggerDescription$ At end of combat, if CARDNAME attacked or blocked this combat, remove a +1/+0 counter from it.
 SVar:TrigSubCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P0 | CounterNum$ 1
-A:AB$ PutCounter | Cost$ X T | Defined$ Self | UpTo$ True | MaxFromEffect$ 4 | CounterType$ P1P0 | CounterNum$ X | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Put up to X +1/+0 counters on CARDNAME. This ability can't cause the total number of +1/+0 counters on CARDNAME to be greater than four. Activate this ability only during your upkeep.
+A:AB$ PutCounter | Cost$ X T | Defined$ Self | UpTo$ True | MaxFromEffect$ 4 | CounterType$ P1P0 | CounterNum$ X | ActivationPhases$ Upkeep | PlayerTurn$ True | References$ X | SpellDescription$ Put up to X +1/+0 counters on CARDNAME. This ability can't cause the total number of +1/+0 counters on CARDNAME to be greater than four. Activate this ability only during your upkeep.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

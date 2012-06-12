@@ -30,6 +30,7 @@ import forge.StaticEffect;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplacementEffect;
+import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
@@ -214,6 +215,36 @@ public class StaticAbilityContinuous {
                 sVars[i] = hostCard.getSVar(sVars[i]);
             }
             addTriggers = sVars;
+        }
+        
+        if (params.containsKey("GainsAbilitiesOf")) {
+            final String[] valids = params.get("GainsAbilitiesOf").split(",");
+            ArrayList<ZoneType> validZones = new ArrayList<ZoneType>();
+            validZones.add(ZoneType.Battlefield);
+            if(params.containsKey("GainsAbilitiesOfZones")) {
+                validZones.clear();
+                for(String s : params.get("GainsAbilitiesOfZones").split(",")) {
+                    validZones.add(ZoneType.smartValueOf(s));
+                }
+            }
+            
+            CardList cardsIGainedAbilitiesFrom = AllZoneUtil.getCardsIn(validZones);
+            cardsIGainedAbilitiesFrom = cardsIGainedAbilitiesFrom.getValidCards(valids, hostCard.getController(), hostCard);
+            
+            for(Card c : cardsIGainedAbilitiesFrom) {
+                for(SpellAbility sa : c.getSpellAbilities()) {
+                    if(sa instanceof AbilityActivated) {
+                        SpellAbility newSA = ((AbilityActivated)sa).getCopy();
+                        if(newSA == null) {
+                            System.out.println("Uh-oh...");
+                        }
+                        newSA.setType("Temporary");
+                        CardFactoryUtil.correctAbilityChainSourceCard(newSA, hostCard);
+                        hostCard.addSpellAbility(newSA);
+                    }
+                }
+            }
+            
         }
 
         // modify players

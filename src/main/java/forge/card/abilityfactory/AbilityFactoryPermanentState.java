@@ -68,7 +68,18 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityUntap(final AbilityFactory af) {
-        final SpellAbility abUntap = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityUntap extends AbilityActivated {
+            public AbilityUntap(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityUntap(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -90,8 +101,9 @@ public class AbilityFactoryPermanentState {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPermanentState.untapTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abUntap = new AbilityUntap(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abUntap;
     }
 
@@ -137,7 +149,18 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackUntap(final AbilityFactory af) {
-        final SpellAbility dbUntap = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackUntap extends AbilitySub {
+            public DrawbackUntap(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackUntap(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -164,8 +187,9 @@ public class AbilityFactoryPermanentState {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPermanentState.untapTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbUntap = new DrawbackUntap(af.getHostCard(), af.getAbTgt());
+        
         return dbUntap;
     }
 
@@ -637,7 +661,18 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityTap(final AbilityFactory af) {
-        final SpellAbility abTap = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityTap extends AbilityActivated {
+            public AbilityTap(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityTap(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -659,8 +694,9 @@ public class AbilityFactoryPermanentState {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPermanentState.tapTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abTap = new AbilityTap(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abTap;
     }
 
@@ -706,7 +742,18 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackTap(final AbilityFactory af) {
-        final SpellAbility dbTap = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackTap extends AbilitySub {
+            public DrawbackTap(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackTap(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -733,8 +780,9 @@ public class AbilityFactoryPermanentState {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPermanentState.tapTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbTap = new DrawbackTap(af.getHostCard(), af.getAbTgt());
+        
         return dbTap;
     }
 
@@ -1170,7 +1218,18 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityUntapAll(final AbilityFactory af) {
-        final SpellAbility abUntap = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityUntapAll extends AbilityActivated {
+            public AbilityUntapAll(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityUntapAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res; 
+            }
+            
             private static final long serialVersionUID = 8914852730903389831L;
 
             @Override
@@ -1192,8 +1251,9 @@ public class AbilityFactoryPermanentState {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPermanentState.untapAllTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abUntap = new AbilityUntapAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abUntap;
     }
 
@@ -1239,7 +1299,18 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackUntapAll(final AbilityFactory af) {
-        final SpellAbility dbUntapAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackUntapAll extends AbilitySub {
+            public DrawbackUntapAll(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackUntapAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -5187900994680626766L;
 
             @Override
@@ -1261,8 +1332,9 @@ public class AbilityFactoryPermanentState {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPermanentState.untapAllPlayDrawbackAI(af, this);
             }
-
-        };
+        }
+        final SpellAbility dbUntapAll = new DrawbackUntapAll(af.getHostCard(), af.getAbTgt());
+        
         return dbUntapAll;
     }
 
@@ -1413,7 +1485,18 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityTapAll(final AbilityFactory af) {
-        final SpellAbility abUntap = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityTapAll extends AbilityActivated {
+            public AbilityTapAll(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityTapAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -2095140656782946737L;
 
             @Override
@@ -1435,8 +1518,9 @@ public class AbilityFactoryPermanentState {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPermanentState.tapAllTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abUntap = new AbilityTapAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abUntap;
     }
 
@@ -1482,7 +1566,18 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackTapAll(final AbilityFactory af) {
-        final SpellAbility dbTap = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackTapAll extends AbilitySub {
+            public DrawbackTapAll(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackTapAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -1509,8 +1604,9 @@ public class AbilityFactoryPermanentState {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPermanentState.tapAllPlayDrawbackAI(af, this);
             }
-
-        };
+        }
+        final SpellAbility dbTap = new DrawbackTapAll(af.getHostCard(), af.getAbTgt());
+        
         return dbTap;
     }
 
@@ -1772,7 +1868,18 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityTapOrUntap(final AbilityFactory af) {
-        final SpellAbility abTapOrUntap = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityTapOrUntap extends AbilityActivated {
+            public AbilityTapOrUntap(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityTapOrUntap(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4713183763302932079L;
 
             @Override
@@ -1794,8 +1901,9 @@ public class AbilityFactoryPermanentState {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPermanentState.tapOrUntapTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abTapOrUntap = new AbilityTapOrUntap(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abTapOrUntap;
     }
 
@@ -1841,7 +1949,18 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackTapOrUntap(final AbilityFactory af) {
-        final SpellAbility dbTapOrUntap = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackTapOrUntap extends AbilitySub {
+            public DrawbackTapOrUntap(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackTapOrUntap(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -8282868583712773337L;
 
             @Override
@@ -1863,8 +1982,9 @@ public class AbilityFactoryPermanentState {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPermanentState.tapOrUntapTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbTapOrUntap = new DrawbackTapOrUntap(af.getHostCard(), af.getAbTgt());
+        
         return dbTapOrUntap;
     }
 
@@ -2107,7 +2227,18 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityPhases(final AbilityFactory af) {
-        final SpellAbility abPhases = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityPhases extends AbilityActivated {
+            public AbilityPhases(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityPhases(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -2129,8 +2260,9 @@ public class AbilityFactoryPermanentState {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPermanentState.phasesTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abPhases = new AbilityPhases(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abPhases;
     }
 
@@ -2176,7 +2308,18 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackPhases(final AbilityFactory af) {
-        final SpellAbility dbPhases = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackPhases extends AbilitySub {
+            public DrawbackPhases(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackPhases(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -2198,8 +2341,9 @@ public class AbilityFactoryPermanentState {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPermanentState.phasesTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbPhases = new DrawbackPhases(af.getHostCard(), af.getAbTgt());
+        
         return dbPhases;
     }
 

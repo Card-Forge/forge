@@ -147,7 +147,7 @@ public class StaticAbility {
             return 5;
         }
 
-        if (this.mapParams.containsKey("RemoveAllAbilities")) {
+        if (this.mapParams.containsKey("RemoveAllAbilities") || this.mapParams.containsKey("GainsAbilitiesOf")) {
             return 6; // Layer 6
         }
 
@@ -396,6 +396,10 @@ public class StaticAbility {
 
         if (mode.equals("ETBTapped")) {
             return StaticAbilityETBTapped.applyETBTappedAbility(this, card);
+        }
+        
+        if (mode.equals("GainAbilitiesOf")) {
+            
         }
 
         return false;

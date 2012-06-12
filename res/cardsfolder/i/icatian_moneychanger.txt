@@ -8,7 +8,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a credit counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CREDIT | CounterNum$ 1 | SpellDescription$ Put a credit counter on CARDNAME.
-A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ You gain life equal to the number of credit counters on CARDNAME.
+A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | References$ X | SpellDescription$ You gain life equal to the number of credit counters on CARDNAME.
 SVar:X:Count$CardCounters.CREDIT
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

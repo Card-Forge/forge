@@ -2,7 +2,7 @@ Name:Disembowel
 ManaCost:X B
 Types:Instant
 Text:no text
-A:SP$ Destroy | Cost$ X B | ValidTgts$ Creature | SpellDescription$ Destroy target creature with converted mana cost X.
+A:SP$ Destroy | Cost$ X B | ValidTgts$ Creature | References$ X | SpellDescription$ Destroy target creature with converted mana cost X.
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Common

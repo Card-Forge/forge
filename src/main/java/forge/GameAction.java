@@ -530,6 +530,11 @@ public class GameAction {
 
                             return sd.toString();
                         }
+                        
+                        @Override
+                        public AbilityActivated getCopy() {
+                            return null;
+                        }
                     };
 
                     final StringBuilder sb = new StringBuilder();
@@ -1163,6 +1168,40 @@ public class GameAction {
             }
 
         } // for q=0;q<2
+        /*
+        //Experiment Kraj experiment
+        CardList krajs = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(new CardListFilter() {
+            @Override
+            public boolean addCard(Card c) {
+                return c.getName().equals("Experiment Kraj");
+            }
+        });
+        CardList P1P1s = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(new CardListFilter() {
+            @Override
+            public boolean addCard(Card c) {
+                return c.getCounters(Counters.P1P1) > 0;
+            }
+        });
+        for(final Card kraj : krajs)
+        {
+            kraj.clearAllButFirstSpellAbility();
+            CardFactoryUtil.addAbilityFactoryAbilities(kraj);
+            for(final Card P1P1 : P1P1s) 
+            {
+                if(!P1P1.equals(kraj)) {
+                    for(SpellAbility sa : P1P1.getSpellAbilities()) 
+                    {
+                        if(sa instanceof AbilityActivated) 
+                        {
+                            AbilityActivated newSA = ((AbilityActivated)sa).getCopy();
+                            newSA.setSourceCard(kraj);
+                            kraj.addSpellAbility(newSA);
+                        }
+                    }
+                }
+            }
+        }
+        */
 
         this.destroyLegendaryCreatures();
         this.destroyPlaneswalkers();

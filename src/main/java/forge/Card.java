@@ -2754,6 +2754,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void addSpellAbility(final SpellAbility a) {
+        if(a.getAbilityFactory() != null) {
+            a.getAbilityFactory().setHostCard(this);
+        }
         a.setSourceCard(this);
         if (a instanceof AbilityMana) {
             this.getCharacteristics().getManaAbility().add((AbilityMana) a);

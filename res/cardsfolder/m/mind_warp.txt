@@ -2,7 +2,7 @@ Name:Mind Warp
 ManaCost:X 3 B
 Types:Sorcery
 Text:no text
-A:SP$ Discard | Cost$ X 3 B | ValidTgts$ Player | Mode$ RevealYouChoose | NumCards$ X | SpellDescription$ Target player reveals his or her hand. You choose X cards from it. That player discards those cards.
+A:SP$ Discard | Cost$ X 3 B | ValidTgts$ Player | Mode$ RevealYouChoose | NumCards$ X | References$ X | SpellDescription$ Target player reveals his or her hand. You choose X cards from it. That player discards those cards.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

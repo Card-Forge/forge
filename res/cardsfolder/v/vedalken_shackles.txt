@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 Text:no text
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ GainControl | Cost$ 2 T | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power less than or equal to the number of Islands you control. | LoseControl$ Untap,LeavesPlay | SpellDescription$ Gain control of target creature with power less than or equal to the number of Islands you control for as long as CARDNAME remains tapped.
+A:AB$ GainControl | Cost$ 2 T | ValidTgts$ Creature.powerLEX | References$ X | TgtPrompt$ Select target creature with power less than or equal to the number of Islands you control. | LoseControl$ Untap,LeavesPlay | SpellDescription$ Gain control of target creature with power less than or equal to the number of Islands you control for as long as CARDNAME remains tapped.
 SVar:X:Count$TypeYouCtrl.Island
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

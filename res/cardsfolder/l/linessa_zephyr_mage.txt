@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Legendary Creature Human Wizard
 Text:no text
 PT:3/3
-A:AB$ ChangeZone | Cost$ X U U T | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | ChangeNum$ 1 | SpellDescription$ Return target creature with converted mana cost X to its owner's hand.
+A:AB$ ChangeZone | Cost$ X U U T | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | ChangeNum$ 1 | References$ X | SpellDescription$ Return target creature with converted mana cost X to its owner's hand.
 SVar:X:Targeted$CardManaCost
 A:AB$ ChangeZone | Cost$ Discard<1/Card.namedLinessa, Zephyr Mage> | CostDesc$ Grandeur - Discard another card named CARDNAME:| ValidTgts$ Player | TgtPrompt$ Select target player | RememberTargets$ True | ForgetOtherTargets$ True | Chooser$ Targeted | Mandatory$ True | Hidden$ True | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature | SubAbility$ DBArtifact | SpellDescription$ Target player returns a creature he or she controls to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.
 SVar:DBArtifact:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True | SubAbility$ DBEnchant

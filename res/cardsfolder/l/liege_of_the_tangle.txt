@@ -6,7 +6,7 @@ PT:8/8
 K:Trample
 S:Mode$ Continuous | Affected$ Card.counters_GE1_AWAKENING | AddType$ Creature & Elemental | SetColor$ Green | SetPower$ 8 | SetToughness$ 8
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may choose any number of target lands you control and put an awakening counter on each of them. Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Land.YouCtrl | OptionalDecider$ You | TargetMax$ X | TgtPrompt$ Select lands you control | CounterType$ AWAKENING | CounterNum$ 1 | SubAbility$ DBEffect
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Land.YouCtrl | OptionalDecider$ You | TargetMax$ X | TgtPrompt$ Select lands you control | CounterType$ AWAKENING | CounterNum$ 1 | SubAbility$ DBEffect | References$ X
 SVar:X:Count$Valid Land.YouCtrl
 SVar:DBEffect:DB$ Effect | Cost$ 0 | Name$ Awakening Effect | StaticAbilities$ KWAnimateAll | Unique$ True | Duration$ Permanent
 SVar:KWAnimateAll:Mode$ Continuous | Affected$ Card.counters_GE1_AWAKENING | SetPower$ 8 | SetToughness$ 8 | AddType$ Creature & Elemental | SetColor$ Green | Description$ Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.

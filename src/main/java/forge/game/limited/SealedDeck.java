@@ -432,7 +432,6 @@ public class SealedDeck {
             if (deck.get(i).getName().equals("Plains") || deck.get(i).getName().equals("Island")
                     || deck.get(i).getName().equals("Swamp") || deck.get(i).getName().equals("Mountain")
                     || deck.get(i).getName().equals("Forest")) {
-                //System.out.println("Heyo!");
             }
             aiDeck.getMain().add(deck.get(i));
         }

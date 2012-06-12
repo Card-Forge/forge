@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 Text:no text
 A:AB$ PutCounter | Cost$ 1 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
-A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ 1 | Amount$ Y | SpellDescription$ Add X 1 to your mana pool.
+A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ 1 | Amount$ Y | References$ X,Y | SpellDescription$ Add X 1 to your mana pool.
 SVar:Y:Number$1/Plus.ChosenX
 SVar:X:XChoice
 SVar:RemAIDeck:True

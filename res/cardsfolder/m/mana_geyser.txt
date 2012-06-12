@@ -2,7 +2,7 @@ Name:Mana Geyser
 ManaCost:3 R R
 Types:Sorcery
 Text:no text
-A:SP$ Mana | Cost$ 3 R R | Produced$ R | Amount$ X | SpellDescription$ Add R to your mana pool for each tapped land your opponents control.
+A:SP$ Mana | Cost$ 3 R R | Produced$ R | Amount$ X | References$ X | SpellDescription$ Add R to your mana pool for each tapped land your opponents control.
 SVar:X:Count$Valid Land.tapped+YouDontCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Common

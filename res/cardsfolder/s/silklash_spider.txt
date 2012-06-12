@@ -4,7 +4,7 @@ Types:Creature Spider
 Text:no text
 PT:2/7
 K:Reach
-A:AB$ DamageAll | Cost$ X G G | ValidCards$ Creature.withFlying | NumDmg$ X | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals X damage to each creature with flying.
+A:AB$ DamageAll | Cost$ X G G | ValidCards$ Creature.withFlying | NumDmg$ X | ValidDescription$ each creature with flying. | References$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

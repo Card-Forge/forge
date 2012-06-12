@@ -3,8 +3,8 @@ ManaCost:3
 Types:Artifact
 Text:no text
 A:AB$ FlipACoin | Cost$ Sac<1/CARDNAME> | WinSubAbility$ DBDamageOpp | LoseSubAbility$ DBDamageYou | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent | SpellDescription$ Flip a coin. If you win the flip, Goblin Lyre deals damage to target opponent equal to the number of creatures you control. If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent controls.
-SVar:DBDamageOpp:DB$ DealDamage | Cost$ 0 | Defined$ Targeted | NumDmg$ X
-SVar:DBDamageYou:DB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ Y
+SVar:DBDamageOpp:DB$ DealDamage | Cost$ 0 | Defined$ Targeted | NumDmg$ X | References$ X
+SVar:DBDamageYou:DB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ Y | References$ Y
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Y:Count$Valid Creature.YouDontCtrl
 SVar:RemAIDeck:True

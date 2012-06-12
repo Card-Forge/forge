@@ -2,7 +2,7 @@ Name:Sylvan Paradise
 ManaCost:G
 Types:Instant
 Text:no text
-A:SP$ Animate | Cost$ G | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | TgtPrompt$ Select target creatures | Colors$ Green | OverwriteColors$ True | SpellDescription$ Any number of target creatures become green until end of turn.
+A:SP$ Animate | Cost$ G | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | TgtPrompt$ Select target creatures | Colors$ Green | OverwriteColors$ True | SpellDescription$ Any number of target creatures become green until end of turn.
 SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

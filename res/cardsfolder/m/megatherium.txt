@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you pay 1 for each card in your hand.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ X | UnlessPayer$ You
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ X | UnlessPayer$ You | References$ X
 SVar:X:Count$InYourHand
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

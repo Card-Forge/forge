@@ -4,9 +4,9 @@ Types:Artifact
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a pain counter on CARDNAME.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals damage to you equal to the number of pain counters on it.
-A:AB$ DealDamage | Cost$ 1 T SubCounter<All/PAIN> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ Y | SpellDescription$ CARDNAME deals damage to target creature equal to the number of pain counters removed this way.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ PAIN | CounterNum$ 1
-SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ X
+A:AB$ DealDamage | Cost$ 1 T SubCounter<All/PAIN> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ Y | References$ Y | SpellDescription$ CARDNAME deals damage to target creature equal to the number of pain counters removed this way.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ PAIN | CounterNum$ 1
+SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ X | References$ X
 SVar:X:Count$CardCounters.PAIN
 SVar:Y:SVar$CostCountersRemoved
 SVar:RemAIDeck:True

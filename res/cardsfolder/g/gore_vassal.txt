@@ -4,7 +4,7 @@ Types:Creature Hound
 Text:no text
 PT:2/1
 A:AB$ PutCounter | Cost$ Sac<1/CARDNAME> | CounterType$ M1M1 | CounterNum$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | SubAbility$ DBRegenerate | SpellDescription$ Put a -1/-1 counter on target creature. Then if that creature's toughness is 1 or greater, regenerate it.
-SVar:DBRegenerate:DB$ Regenerate | Defined$ Remembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBRegenerate:DB$ Regenerate | Defined$ Remembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardToughness
 SVar:RemAIDeck:True

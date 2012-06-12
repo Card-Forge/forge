@@ -5,7 +5,7 @@ Text:no text
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have CARDNAME deal damage to target creature equal to the number of Allies you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have CARDNAME deal damage to target creature equal to the number of Allies you control.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ NumAllies
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ NumAllies | References$ NumAllies
 SVar:NumAllies:Count$Valid Ally.YouCtrl
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally

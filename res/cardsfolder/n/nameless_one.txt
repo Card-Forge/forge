@@ -4,7 +4,7 @@ Types:Creature Wizard Avatar
 Text:no text
 PT:*/*
 K:Morph:2 U
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ CARDNAME's power and toughness are each equal to the number of Wizards on the battlefield.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | CheckSVar$ Y | SVarCompare$ EQ1 | References$ X,Y | Description$ CARDNAME's power and toughness are each equal to the number of Wizards on the battlefield.
 SVar:X:Count$Valid Wizard
 SVar:Y:Count$Valid Card.Self+faceUp
 SVar:BuffedBy:Wizard

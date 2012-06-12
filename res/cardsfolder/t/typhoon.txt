@@ -2,7 +2,7 @@ Name:Typhoon
 ManaCost:2 G
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ 2 G | Defined$ Opponent | NumDmg$ X | SpellDescription$ Typhoon deals damage to each opponent equal to the number of Islands that player controls.
+A:SP$ DealDamage | Cost$ 2 G | Defined$ Opponent | NumDmg$ X | References$ X | SpellDescription$ Typhoon deals damage to each opponent equal to the number of Islands that player controls.
 SVar:X:Count$Valid Island.YouDontCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

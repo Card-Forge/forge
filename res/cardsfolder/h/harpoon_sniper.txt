@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Merfolk Archer
 Text:no text
 PT:2/2
-A:AB$ DealDamage | Cost$ W T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target attacking or blocking creature, where X is the number of Merfolk you control.
+A:AB$ DealDamage | Cost$ W T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target attacking or blocking creature, where X is the number of Merfolk you control.
 SVar:X:Count$TypeYouCtrl.Merfolk
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harpoon_sniper.jpg

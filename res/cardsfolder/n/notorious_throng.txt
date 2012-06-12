@@ -2,9 +2,9 @@ Name:Notorious Throng
 ManaCost:3 U
 Types:Tribal Sorcery Rogue
 Text:no text
-A:SP$ Token | Cost$ 5 U | Activation$ Prowl | PrecostDesc$ Prowl 5 U | TokenAmount$ X | TokenColors$ Black | TokenTypes$ Faerie,Rogue,Creature | TokenName$ Faerie Rogue | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SubAbility$ DBTakeTurn | SpellDescription$ (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.)
+A:SP$ Token | Cost$ 5 U | Activation$ Prowl | PrecostDesc$ Prowl 5 U | TokenAmount$ X | References$ X | TokenColors$ Black | TokenTypes$ Faerie,Rogue,Creature | TokenName$ Faerie Rogue | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SubAbility$ DBTakeTurn | SpellDescription$ (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.)
 SVar:DBTakeTurn:DB$ AddTurn | NumTurns$ 1
-A:SP$ Token | Cost$ 3 U | TokenAmount$ X | TokenColors$ Black | TokenTypes$ Faerie,Rogue,Creature | TokenName$ Faerie Rogue | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put X 1/1 black Faerie Rogue creature tokens with flying onto the battlefield, where X is the damage dealt to your opponents this turn. If CARDNAME prowl cost was paid, take an extra turn after this one.
+A:SP$ Token | Cost$ 3 U | TokenAmount$ X | References$ X | TokenColors$ Black | TokenTypes$ Faerie,Rogue,Creature | TokenName$ Faerie Rogue | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put X 1/1 black Faerie Rogue creature tokens with flying onto the battlefield, where X is the damage dealt to your opponents this turn. If CARDNAME prowl cost was paid, take an extra turn after this one.
 SVar:X:Count$OppDamageThisTurn
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

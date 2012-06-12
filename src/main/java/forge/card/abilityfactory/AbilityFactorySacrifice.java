@@ -64,7 +64,18 @@ public class AbilityFactorySacrifice {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilitySacrifice(final AbilityFactory af) {
-        final SpellAbility abSacrifice = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilitySacrifice extends AbilityActivated {
+            public AbilitySacrifice(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilitySacrifice(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -1933592438783630254L;
 
             @Override
@@ -86,7 +97,9 @@ public class AbilityFactorySacrifice {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactorySacrifice.sacrificeTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility abSacrifice = new AbilitySacrifice(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abSacrifice;
     }
 
@@ -131,7 +144,18 @@ public class AbilityFactorySacrifice {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackSacrifice(final AbilityFactory af) {
-        final SpellAbility dbSacrifice = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackSacrifice extends AbilitySub {
+            public DrawbackSacrifice(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackSacrifice(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -5141246507533353605L;
 
             @Override
@@ -153,7 +177,9 @@ public class AbilityFactorySacrifice {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactorySacrifice.sacrificeTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility dbSacrifice = new DrawbackSacrifice(af.getHostCard(), af.getAbTgt());
+        
         return dbSacrifice;
     }
 
@@ -610,7 +636,18 @@ public class AbilityFactorySacrifice {
      * @since 1.0.15
      */
     public static SpellAbility createAbilitySacrificeAll(final AbilityFactory af) {
-        final SpellAbility abSacrifice = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilitySacrificeAll extends AbilityActivated {
+            public AbilitySacrificeAll(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilitySacrificeAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -1933592438783630254L;
 
             @Override
@@ -632,7 +669,9 @@ public class AbilityFactorySacrifice {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactorySacrifice.sacrificeAllCanPlayAI(af, this);
             }
-        };
+        }
+        final SpellAbility abSacrifice = new AbilitySacrificeAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abSacrifice;
     }
 
@@ -679,7 +718,18 @@ public class AbilityFactorySacrifice {
      * @since 1.0.15
      */
     public static SpellAbility createDrawbackSacrificeAll(final AbilityFactory af) {
-        final SpellAbility dbSacrifice = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackSacrificeAll extends AbilitySub {
+            public DrawbackSacrificeAll(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackSacrificeAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -5141246507533353605L;
 
             @Override
@@ -701,7 +751,9 @@ public class AbilityFactorySacrifice {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactorySacrifice.sacrificeAllCanPlayAI(af, this);
             }
-        };
+        }
+        final SpellAbility dbSacrifice = new DrawbackSacrificeAll(af.getHostCard(), af.getAbTgt());
+        
         return dbSacrifice;
     }
 

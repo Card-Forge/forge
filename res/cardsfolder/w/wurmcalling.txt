@@ -2,8 +2,8 @@ Name:Wurmcalling
 ManaCost:X G
 Types:Sorcery
 Text:no text
-A:SP$ Token | Cost$ X G | TokenAmount$ 1 | TokenName$ Wurm | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | TokenTypes$ Creature,Wurm | TokenColors$ Green | SpellDescription$ Put an X/X green Wurm creature token onto the battlefield.
-A:SP$ Token | Cost$ X 2 G G | TokenAmount$ 1 | TokenName$ Wurm | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | TokenTypes$ Creature,Wurm | TokenColors$ Green | CostDesc$ Buyback | SubAbility$ DBBuyback | SpellDescription$ - 2 G
+A:SP$ Token | Cost$ X G | TokenAmount$ 1 | TokenName$ Wurm | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | References$ X | TokenTypes$ Creature,Wurm | TokenColors$ Green | SpellDescription$ Put an X/X green Wurm creature token onto the battlefield.
+A:SP$ Token | Cost$ X 2 G G | TokenAmount$ 1 | TokenName$ Wurm | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | References$ X | TokenTypes$ Creature,Wurm | TokenColors$ Green | CostDesc$ Buyback | SubAbility$ DBBuyback | SpellDescription$ - 2 G
 SVar:DBBuyback:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | Defined$ Self
 SVar:X:Count$xPaid
 SVar:Rarity:Rare

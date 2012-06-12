@@ -4,7 +4,7 @@ Types:Creature Human Warrior
 Text:no text
 PT:3/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TroubleMaking | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage to target player equal to the number of Humans you control.
-SVar:TroubleMaking:DB$DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X
+SVar:TroubleMaking:DB$DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | References$ X
 SVar:X:Count$Valid Human.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig_malcontents.jpg

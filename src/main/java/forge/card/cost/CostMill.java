@@ -61,7 +61,7 @@ public class CostMill extends CostPartWithList {
         Integer i = this.convertAmount();
 
         if (i == null) {
-            final String sVar = source.getSVar(this.getAmount());
+            final String sVar = ability.getSVar(this.getAmount());
             if (sVar.equals("XChoice")) {
                 return true;
             }
@@ -85,7 +85,7 @@ public class CostMill extends CostPartWithList {
 
         Integer c = this.convertAmount();
         if (c == null) {
-            final String sVar = source.getSVar(this.getAmount());
+            final String sVar = ability.getSVar(this.getAmount());
             // Generalize this
             if (sVar.equals("XChoice")) {
                 return false;
@@ -130,10 +130,10 @@ public class CostMill extends CostPartWithList {
         final Player activator = ability.getActivatingPlayer();
 
         if (c == null) {
-            final String sVar = source.getSVar(amount);
+            final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = CostUtil.chooseXValue(source, this.getList().size());
+                c = CostUtil.chooseXValue(source, ability, this.getList().size());
             } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }

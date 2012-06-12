@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Sorcery
 Text:no text
 A:SP$ Destroy | Cost$ 2 B B Sac<1/Creature> | ValidTgts$ Creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature. Its controller loses life equal to the number of creatures put into all graveyards from the battlefield this turn.
-SVar:DBLoseLife:DB$LoseLife | Defined$ TargetedController | LifeAmount$ X
+SVar:DBLoseLife:DB$LoseLife | Defined$ TargetedController | LifeAmount$ X | References$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_allergy.jpg

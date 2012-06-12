@@ -25,6 +25,9 @@ import forge.CardList;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
+import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.game.player.ComputerUtil;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
@@ -57,7 +60,18 @@ public final class AbilityFactoryBond {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityBond(final AbilityFactory af) {
-        final SpellAbility abBond = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityBond extends AbilityActivated {
+            public AbilityBond(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityBond(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 1938171749867735256L;
 
             @Override
@@ -79,7 +93,9 @@ public final class AbilityFactoryBond {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryBond.bondTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility abBond = new AbilityBond(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abBond;
     }
 

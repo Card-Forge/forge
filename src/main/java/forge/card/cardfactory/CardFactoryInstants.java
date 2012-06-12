@@ -498,7 +498,18 @@ public class CardFactoryInstants {
         else if (cardName.equals("Wing Puncture")) {
 
             final Target t2 = new Target(card, "Select target creature with flying", "Creature.withFlying".split(","));
-            final AbilitySub sub = new AbilitySub(card, t2) {
+            class DrawbackWingPuncture extends AbilitySub {
+                public DrawbackWingPuncture(final Card ca,final Target t) {
+                    super(ca,t);
+                }
+                
+                @Override
+                public AbilitySub getCopy() {
+                    AbilitySub res = new DrawbackWingPuncture(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                    CardFactoryUtil.copySpellAbility(this,res);
+                    return res;
+                }
+                
                 private static final long serialVersionUID = 4618047889975691050L;
 
                 @Override
@@ -521,7 +532,8 @@ public class CardFactoryInstants {
                 public boolean doTrigger(final boolean b) {
                     return false;
                 }
-            };
+            }
+            final AbilitySub sub = new DrawbackWingPuncture(card, t2);
 
             final Cost abCost = new Cost(card, "G", false);
             final Target t1 = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));

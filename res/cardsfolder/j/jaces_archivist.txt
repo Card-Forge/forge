@@ -4,11 +4,11 @@ Types:Creature Vedalken Wizard
 Text:no text
 PT:2/2
 A:AB$ Discard | Cost$ U T | Defined$ You | RememberDiscarded$ True | Mode$ Hand | SubAbility$ DBTestHand | SpellDescription$ Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
-SVar:DBTestHand:DB$ Cleanup | ClearRemembered$ True | ConditionCheckSVar$ HandSizeTest | ConditionSVarCompare$ GE1 | SubAbility$ DBOppDiscard1
-SVar:DBOppDiscard1:DB$ Discard | Cost$ 0 | Defined$ Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | Mode$ Hand | SubAbility$ DBOppDiscard2
-SVar:DBOppDiscard2:DB$ Discard | Cost$ 0 | Defined$ Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | RememberDiscarded$ True | Mode$ Hand | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBOppDraw
-SVar:DBOppDraw:DB$ Draw | Defined$ Opponent | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBTestHand:DB$ Cleanup | ClearRemembered$ True | ConditionCheckSVar$ HandSizeTest | ConditionSVarCompare$ GE1 | SubAbility$ DBOppDiscard1 | References$ HandSizeTest,X
+SVar:DBOppDiscard1:DB$ Discard | Cost$ 0 | Defined$ Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | Mode$ Hand | SubAbility$ DBOppDiscard2 | References$ X
+SVar:DBOppDiscard2:DB$ Discard | Cost$ 0 | Defined$ Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | RememberDiscarded$ True | Mode$ Hand | SubAbility$ DBDraw | References$ X
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBOppDraw | References$ X
+SVar:DBOppDraw:DB$ Draw | Defined$ Opponent | NumCards$ X | SubAbility$ DBCleanup | References$ X 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 SVar:HandSizeTest:Count$CardsInOppHand/Minus.X

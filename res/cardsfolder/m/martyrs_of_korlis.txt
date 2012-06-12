@@ -5,8 +5,8 @@ Text:no text
 PT:1/6
 R:Event$ DamageDone | ValidSource$ Artifact | ValidTarget$ You | ReplaceWith$ DmgMartyrsofKorlisSelf | IsCombat$ False | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by artifacts is dealt to CARDNAME instead.
 R:Event$ DamageDone | ValidSource$ Artifact | ValidTarget$ You | ReplaceWith$ DmgMartyrsofKorlisSelfCombat | IsCombat$ True | IsPresent$ Card.Self+untapped | Secondary$ True | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by artifacts is dealt to CARDNAME instead.
-SVar:DmgMartyrsofKorlisSelf:AB$DealDamage | Cost$ 0 | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ MartyrsofKorlisX
-SVar:DmgMartyrsofKorlisSelfCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ MartyrsofKorlisX
+SVar:DmgMartyrsofKorlisSelf:AB$DealDamage | Cost$ 0 | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ MartyrsofKorlisX | References$ MartyrsofKorlisX
+SVar:DmgMartyrsofKorlisSelfCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ MartyrsofKorlisX | References$ MartyrsofKorlisX
 SVar:MartyrsofKorlisX:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_of_korlis.jpg
 Oracle:As long as Martyrs of Korlis is untapped, all damage that would be dealt to you by artifacts is dealt to Martyrs of Korlis instead.

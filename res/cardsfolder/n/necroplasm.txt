@@ -7,7 +7,7 @@ K:Dredge 2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on CARDNAME.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of your end step, destroy each creature with converted mana cost equal to the number of +1/+1 counters on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-SVar:TrigDestroy:AB$DestroyAll | Cost$ 0 | ValidCards$ Creature.cmcEQX
+SVar:TrigDestroy:AB$DestroyAll | Cost$ 0 | ValidCards$ Creature.cmcEQX | References$ X
 SVar:X:Count$CardCounters.P1P1
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

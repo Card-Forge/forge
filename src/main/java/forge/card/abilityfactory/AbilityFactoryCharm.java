@@ -27,6 +27,9 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
+import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
@@ -56,7 +59,18 @@ public final class AbilityFactoryCharm {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityCharm(final AbilityFactory af) {
-        final SpellAbility abCharm = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityCharm extends AbilityActivated {
+            public AbilityCharm(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityCharm(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4038591081733095021L;
 
             @Override
@@ -78,7 +92,8 @@ public final class AbilityFactoryCharm {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryCharm.charmCanPlayAI(af, this, mandatory);
             }
-        }; // Ability_Activated
+        }
+        final SpellAbility abCharm = new AbilityCharm(af.getHostCard(), af.getAbCost(), af.getAbTgt());
 
         return abCharm;
     }

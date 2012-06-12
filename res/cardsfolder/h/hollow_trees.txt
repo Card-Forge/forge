@@ -6,7 +6,7 @@ K:CARDNAME enters the battlefield tapped.
 K:You may choose not to untap CARDNAME during your untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+tapped | Execute$ TrigStore | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is tapped, put a storage counter on it.
 SVar:TrigStore:DB$PutCounter | Defined$ Self | CounterType$ STORAGE | CounterNum$ 1
-A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ G | Amount$ ChosenX | CostDesc$ Tap, Remove any number of storage counters from CARDNAME: | SpellDescription$ Add G to your mana pool for each storage counter removed this way.
+A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ G | Amount$ ChosenX | CostDesc$ Tap, Remove any number of storage counters from CARDNAME: | References$ X | SpellDescription$ Add G to your mana pool for each storage counter removed this way.
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True

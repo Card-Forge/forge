@@ -2,7 +2,7 @@ Name:Enshrined Memories
 ManaCost:X G
 Types:Sorcery
 Text:no text
-A:SP$ Dig | Cost$ X G | DigNum$ X | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | SpellDescription$ Reveal the top X cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
+A:SP$ Dig | Cost$ X G | DigNum$ X | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | References$ X | SpellDescription$ Reveal the top X cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

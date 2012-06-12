@@ -6,7 +6,7 @@ PT:7/6
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you sacrifice two lands.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Amount$ 2 | SacValid$ Land | RememberSacrificed$ True | Optional$ True | SubAbility$ DBSacSelf
-SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2
+SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2 | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True

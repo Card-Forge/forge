@@ -2,9 +2,9 @@ Name:Raka Sanctuary
 ManaCost:2 R
 Types:Enchantment
 Text:no text
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDmg | TriggerDescription$ At the beginning of your upkeep, if you control a white or blue permanent, CARDNAME deals 1 damage to target creature. If you control a white permanent and a blue permanent, CARDNAME deals 3 damage to that creature instead.
-SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage to | NumDmg$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBDmg
-SVar:DBDmg:DB$ DealDamage | Defined$ Targeted | NumDmg$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | References$ X,Y,Z | Execute$ TrigDmg | TriggerDescription$ At the beginning of your upkeep, if you control a white or blue permanent, CARDNAME deals 1 damage to target creature. If you control a white permanent and a blue permanent, CARDNAME deals 3 damage to that creature instead.
+SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage to | NumDmg$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBDmg | References$ X,Y,Z
+SVar:DBDmg:DB$ DealDamage | Defined$ Targeted | NumDmg$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ X,Y,Z
 SVar:Y:Count$Valid Permanent.White+YouCtrl/LimitMax.1
 SVar:Z:Count$Valid Permanent.Blue+YouCtrl/LimitMax.1
 SVar:X:SVar$Y/Plus.Z

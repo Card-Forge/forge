@@ -1,7 +1,7 @@
 Name:Treva, the Renewer
 ManaCost:3 G W U
 Types:Legendary Creature Dragon
-Text:Whenever Treva, the Renewer deals combat damage to a player, you may pay 2 W. If you do, choose a color. You gain 1 life for each permanent of that color.
+Text:no text
 PT:6/6
 K:Flying
 SVar:Rarity:Rare

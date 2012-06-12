@@ -3,7 +3,7 @@ ManaCost:B B
 Types:Legendary Creature Human Assassin
 Text:no text
 PT:1/1
-A:AB$ DealDamage | Cost$ 2 B B T | Tgt$ TgtC | NumDmg$ X | DamageSource$ Targeted | SpellDescription$ Target creature deals damage to itself equal to its power.
+A:AB$ DealDamage | Cost$ 2 B B T | Tgt$ TgtC | NumDmg$ X | DamageSource$ Targeted | References$ X | SpellDescription$ Target creature deals damage to itself equal to its power.
 SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

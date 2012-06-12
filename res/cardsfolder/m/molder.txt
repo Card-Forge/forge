@@ -3,7 +3,7 @@ ManaCost:X G
 Types:Instant
 Text:no text
 A:SP$ Destroy | Cost$ X G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact | NoRegen$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact or enchantment with converted mana cost X. It can't be regenerated. You gain X life.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Common

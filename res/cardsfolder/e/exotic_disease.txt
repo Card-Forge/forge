@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Sorcery
 Text:no text
 A:SP$ LoseLife | Cost$ 4 B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ X | SubAbility$ DBGainLife | PrecostDesc$ Domain - | SpellDescription$ Target player loses X life and you gain X life, where X is the number of basic land types among lands you control.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$Domain
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

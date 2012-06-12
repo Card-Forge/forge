@@ -2,7 +2,7 @@ Name:Prosperity
 ManaCost:X U
 Types:Sorcery
 Text:no text
-A:SP$ Draw | Cost$ X U | Defined$ Each | NumCards$ X | SpellDescription$ Each player draws X cards.
+A:SP$ Draw | Cost$ X U | Defined$ Each | NumCards$ X | References$ X | SpellDescription$ Each player draws X cards.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

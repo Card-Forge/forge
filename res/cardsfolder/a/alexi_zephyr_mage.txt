@@ -3,7 +3,7 @@ ManaCost:3 U U
 Types:Legendary Creature Human Spellshaper
 Text:no text
 PT:3/3
-A:AB$ ChangeZone | Cost$ X U T Discard<2/Card> | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Return X target creatures to their owners' hands.
+A:AB$ ChangeZone | Cost$ X U T Discard<2/Card> | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature | TgtPrompt$ Select target creature | References$ X,MaxTgts | SpellDescription$ Return X target creatures to their owners' hands.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature

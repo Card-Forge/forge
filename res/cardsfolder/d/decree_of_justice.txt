@@ -3,9 +3,9 @@ ManaCost:X X 2 W W
 Types:Sorcery
 Text:no text
 K:Cycling:2 W
-A:SP$ Token | Cost$ X X 2 W W | TokenAmount$ X | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | SpellDescription$ Put X 4/4 white Angel creature tokens with flying onto the battlefield.
+A:SP$ Token | Cost$ X X 2 W W | TokenAmount$ X | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | References$ X | SpellDescription$ Put X 4/4 white Angel creature tokens with flying onto the battlefield.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may pay X. If you do, put X 1/1 white Soldier creature tokens onto the battlefield.
-SVar:TrigToken:AB$ Token | Cost$ X | TokenAmount$ X | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigToken:AB$ Token | Cost$ X | TokenAmount$ X | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | References$ X
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

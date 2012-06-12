@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell's converted mana cost.
 SVar:TrigCounter:AB$Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | SubAbility$ DBToken
-SVar:DBToken:DB$Token | TokenAmount$ X | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ TriggeredActivator | TokenColors$ White,Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
+SVar:DBToken:DB$Token | TokenAmount$ X | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ TriggeredActivator | TokenColors$ White,Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | References$ X
 SVar:X:TriggeredCard$CardManaCost
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dovescape.jpg

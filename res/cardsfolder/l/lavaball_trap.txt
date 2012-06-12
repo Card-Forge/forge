@@ -3,7 +3,7 @@ ManaCost:6 R R
 Types:Instant Trap
 Text:no text
 A:SP$Destroy | Cost$ 6 R R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land. | SubAbility$ DBDamageAll | SpellDescription$ Destroy two target lands. CARDNAME deals 4 damage to each creature.
-A:SP$Destroy | Cost$ 3 R R | CheckSVar$ LandsEntered | SVarCompare$ GE2 | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land. | SubAbility$ DBDamageAll | SpellDescription$ If an opponent had two or more lands enter the battlefield under his or her control this turn, you may pay 3 R R rather than pay CARDNAME's mana cost.
+A:SP$Destroy | Cost$ 3 R R | CheckSVar$ LandsEntered | SVarCompare$ GE2 | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land. | SubAbility$ DBDamageAll | References$ LandsEntered | SpellDescription$ If an opponent had two or more lands enter the battlefield under his or her control this turn, you may pay 3 R R rather than pay CARDNAME's mana cost.
 SVar:DBDamageAll:DB$DamageAll | ValidCards$ Creature | NumDmg$ 4 | ValidDescription$ each creature.
 SVar:LandsEntered:Count$ThisTurnEntered_Battlefield_Land.YouDontCtrl
 SVar:Rarity:Rare

@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for any number of Plains cards and exile them. Then shuffle your library.
-SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Exile | ChangeType$ Plains | ChangeNum$ X | RememberChanged$ True
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Exile | ChangeType$ Plains | ChangeNum$ X | RememberChanged$ True | References$ X
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigRetrieve | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may put a card you own exiled with CARDNAME into your hand.
 SVar:TrigRetrieve:AB$ ChangeZone | Cost$ 0 | ChangeType$ Card.IsRemembered+YouOwn | ChangeNum$ 1 | Origin$ Exile | Destination$ Hand | Hidden$ True
 SVar:X:Count$TypeInYourLibrary.Plains

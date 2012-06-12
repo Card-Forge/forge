@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:World Enchantment
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Instant | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts an instant spell, counter it unless that player pays X, where X is its converted mana cost.
-SVar:TrigCounter:AB$Counter | Cost$ 0 | Defined$ TriggerSpellAbility | UnlessCost$ X | UnlessPayer$ TriggeredActivator
+SVar:TrigCounter:AB$Counter | Cost$ 0 | Defined$ TriggerSpellAbility | UnlessCost$ X | UnlessPayer$ TriggeredActivator | References$ X
 SVar:X:TriggeredCard$CardManaCost
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

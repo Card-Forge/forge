@@ -3,7 +3,7 @@ ManaCost:GU GU GU GU GU
 Types:Creature Spirit Avatar
 Text:no text
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
 SVar:X:Count$InYourHand
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | Defined$ You

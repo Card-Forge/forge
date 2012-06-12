@@ -2,7 +2,7 @@ Name:AEther Tide
 ManaCost:X U
 Types:Sorcery
 Text:no text
-A:SP$ ChangeZone | Cost$ X U Discard<X/Creature> | TargetMin$ 0 | TargetMax$ MaxTgts | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Return X target creatures to their owners' hands.
+A:SP$ ChangeZone | Cost$ X U Discard<X/Creature> | TargetMin$ 0 | TargetMax$ MaxTgts | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | References$ X,MaxTgts | SpellDescription$ Return X target creatures to their owners' hands.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature

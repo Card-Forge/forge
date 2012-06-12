@@ -70,6 +70,10 @@ public enum CDev implements ICDoc {
     private final MouseListener madLife = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeSetLife(); } };
+            
+    private final MouseListener madBreakpoint = new MouseAdapter() { @Override
+        public void mousePressed(final MouseEvent e) {
+            GuiDisplayUtil.devModeBreakpoint(); } };
 
     //========== End mouse listener inits
 
@@ -96,6 +100,7 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblTapPermanent().addMouseListener(madTap);
         VDev.SINGLETON_INSTANCE.getLblUntapPermanent().addMouseListener(madUntap);
         VDev.SINGLETON_INSTANCE.getLblSetLife().addMouseListener(madLife);
+        VDev.SINGLETON_INSTANCE.getLblBreakpoint().addMouseListener(madBreakpoint);
 
         VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(Constant.Runtime.MILL[0]);
     }

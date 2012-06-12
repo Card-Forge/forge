@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 until end of turn for each other attacking Kavu.
-SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | NumDef$ X
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | NumDef$ X | References$ X
 SVar:X:Count$Valid Kavu.attacking+Other
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_mauler.jpg

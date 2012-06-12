@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You don't lose the game for having 0 or less life. | Description$ You don't lose the game for having 0 or less life.
 T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever you lose life, sacrifice a permanent for each 1 life you lost. (Damage causes loss of life.)
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Amount$ X | SacValid$ Permanent
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Amount$ X | SacValid$ Permanent | References$ X
 SVar:X:TriggerCount$LifeAmount
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

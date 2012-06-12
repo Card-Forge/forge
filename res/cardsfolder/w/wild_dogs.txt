@@ -5,7 +5,7 @@ Text:no text
 PT:2/1
 K:Cycling:2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGainControl | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of CARDNAME.
-SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LTY | NewController$ Opponent
+SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | Defined$ Self | ConditionCheckSVar$ X | References$ X,Y | ConditionSVarCompare$ LTY | NewController$ Opponent
 SVar:X:Count$YourLifeTotal
 SVar:Y:Count$OppLifeTotal
 SVar:RemAIDeck:True

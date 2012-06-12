@@ -5,7 +5,7 @@ Text:no text
 PT:5/5
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, you may pay X R. If you do, Flameblast Dragon deals X damage to target creature or player.
-SVar:TrigDamage:AB$ DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X
+SVar:TrigDamage:AB$ DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X | References$ X
 SVar:X:Count$xPaid
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flameblast_dragon.jpg

@@ -4,8 +4,8 @@ Types:Enchantment
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGainLifeYou | TriggerZones$ Battlefield | TriggerDescription$ Domain - At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands he or she controls. Then CARDNAME deals 3 damage to him or her.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigGainLifeOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Domain - At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands he or she controls. Then CARDNAME deals 3 damage to him or her.
-SVar:TrigGainLifeYou:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ Y | SubAbility$ DBDamageYou
-SVar:TrigGainLifeOpp:AB$ GainLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ X | SubAbility$ DBDamageOpp
+SVar:TrigGainLifeYou:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ Y | SubAbility$ DBDamageYou | References$ Y
+SVar:TrigGainLifeOpp:AB$ GainLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ X | SubAbility$ DBDamageOpp | References$ X
 SVar:DBDamageYou:DB$ DealDamage | Defined$ You | NumDmg$ 3
 SVar:DBDamageOpp:DB$ DealDamage | Defined$ Opponent | NumDmg$ 3
 SVar:Y:Count$Domain

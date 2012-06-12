@@ -4,12 +4,12 @@ Types:Creature Rat Rogue
 Text:no text
 PT:2/1
 A:AB$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.YouDontCtrl | SubAbility$ DBFlip | SpellDescription$ Exile target card from an opponent's graveyard. If no cards are in that graveyard, flip CARDNAME.
-SVar:DBFlip:DB$SetState | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | Mode$ Flip
+SVar:DBFlip:DB$SetState | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | Mode$ Flip
 SVar:X:Count$InOppYard
 AlternateMode:Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_graverobber.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/129.jpg
-#SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/92.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/129a.jpg
+#SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/92a.jpg
 Oracle:{1}{B}: Exile target card from an opponent's graveyard. If no cards are in that graveyard, flip Nezumi Graverobber.
 #I removed the Commander SetInfo because magiccards doesn't have a properly flipped image for COM Nighteyes.
 
@@ -23,7 +23,7 @@ Text:no text
 PT:4/2
 A:AB$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature. | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control.
 SVar:Picture1:http://www.wizards.com/global/images/magic/general/nighteyes_the_desecrator.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/311.jpg
-#SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/92.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/129b.jpg
+#SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/92b.jpg
 Oracle:{4}{B}: Put target creature card from a graveyard onto the battlefield under your control.
 End

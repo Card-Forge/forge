@@ -5,7 +5,7 @@ Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay W W.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Card.Self | UnlessCost$ W W | UnlessPayer$ You
 T:Mode$ DamageDone | ValidSource$ Card.Red | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a red creature or spell deals damage, CARDNAME deals that much damage to that creature's or spell's controller.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredSourceController | NumDmg$ X
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredSourceController | NumDmg$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

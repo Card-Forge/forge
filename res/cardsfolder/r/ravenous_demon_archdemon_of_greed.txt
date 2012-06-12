@@ -21,8 +21,8 @@ K:Flying
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a Human. If you can't, tap CARDNAME and it deals 9 damage to you.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature.Human | SubAbility$ DBTap | RememberSacrificed$ True
-SVar:DBTap:DB$ Tap | Cost$ 0 | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 9 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
+SVar:DBTap:DB$ Tap | Cost$ 0 | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBDamage | References$ X
+SVar:DBDamage:DB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 9 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture1:http://www.wizards.com/global/images/magic/general/archdemon_of_greed.jpg

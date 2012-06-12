@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ DamageDone | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever enchanted creature is dealt damage, CARDNAME deals that much damage to that creature's controller.
-SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredTargetController | NumDmg$ X
+SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredTargetController | NumDmg$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/binding_agony.jpg

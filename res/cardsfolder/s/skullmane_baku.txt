@@ -6,7 +6,7 @@ PT:2/1
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | CounterNum$ 1
 #ChosenX SVar created by Cost payment
-A:AB$ Pump | Cost$ 1 SubCounter<X/KI> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -ChosenX | NumDef$ -ChosenX | SpellDescription$ Target creature gets -X/-X until end of turn.
+A:AB$ Pump | Cost$ 1 SubCounter<X/KI> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -ChosenX | NumDef$ -ChosenX | References$ X | SpellDescription$ Target creature gets -X/-X until end of turn.
 SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Rarity:Common

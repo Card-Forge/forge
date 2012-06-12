@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Enchantment
 Text:no text
 A:AB$ Mill | Cost$ 3 R | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBHereticDamage | SpellDescription$ Choose target creature or player, then put the top three cards of your library into your graveyard. CARDNAME deals damage to that creature or player equal to the highest converted mana cost among those cards.
-SVar:DBHereticDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ HereticX | SubAbility$ DBHereticCleanup
+SVar:DBHereticDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ HereticX | SubAbility$ DBHereticCleanup | References$ HereticX
 SVar:DBHereticCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HereticX:Count$HighestCMCRemembered
 SVar:RemAIDeck:True

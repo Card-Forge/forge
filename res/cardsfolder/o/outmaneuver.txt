@@ -2,7 +2,7 @@ Name:Outmaneuver
 ManaCost:X R
 Types:Instant
 Text:no text
-A:SP$ Pump | Cost$ X R | KW$ HIDDEN CARDNAME assigns its combat damage as though it weren't blocked. | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature.blocked | TgtPrompt$ Select target blocked creature | SpellDescription$ X target blocked creatures assign their combat damage this turn as though they weren't blocked.
+A:SP$ Pump | Cost$ X R | KW$ HIDDEN CARDNAME assigns its combat damage as though it weren't blocked. | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | ValidTgts$ Creature.blocked | TgtPrompt$ Select target blocked creature | SpellDescription$ X target blocked creatures assign their combat damage this turn as though they weren't blocked.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature

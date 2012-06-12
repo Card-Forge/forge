@@ -4,10 +4,10 @@ Types:Legendary Creature Human Knight
 Text:no text
 PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAttack | TriggerDescription$ Whenever CARDNAME attacks, other attacking creatures get +1/+1 until end of turn for each attacking creature other than CARDNAME.
-SVar:TrigPumpAttack:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other | NumAtt$ X | NumDef$ X
+SVar:TrigPumpAttack:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other | NumAtt$ X | NumDef$ X | References$ X
 SVar:X:Count$Valid Creature.attacking+Other
 T:Mode$ Blocks | ValidCard$ Card.Self | Triggerzones$ Battlefield | Execute$ TrigPumpBlock | TriggerDescription$ Whenever CARDNAME blocks, other blocking creatures get +1/+1 until end of turn for each blocking creature other than CARDNAME.
-SVar:TrigPumpBlock:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.blocking+Other | NumAtt$ Y | NumDef$ Y
+SVar:TrigPumpBlock:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.blocking+Other | NumAtt$ Y | NumDef$ Y | References$ Y
 SVar:Y:Count$Valid Creature.blocking+Other
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marton_stromgald.jpg

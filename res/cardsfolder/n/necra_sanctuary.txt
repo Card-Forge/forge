@@ -2,9 +2,9 @@ Name:Necra Sanctuary
 ManaCost:2 B
 Types:Enchantment
 Text:no text
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, if you control a green or white permanent, target player loses 1 life. If you control a green permanent and a white permanent, that player loses 3 life instead.
-SVar:TrigLoseLife:DB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player to lose life | LifeAmount$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$LoseLife | Cost$ 0 | Defined$ Targeted | LifeAmount$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, if you control a green or white permanent, target player loses 1 life. If you control a green permanent and a white permanent, that player loses 3 life instead.
+SVar:TrigLoseLife:DB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player to lose life | LifeAmount$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X,Y,Z | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$LoseLife | Cost$ 0 | Defined$ Targeted | LifeAmount$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ X,Y,Z
 SVar:Y:Count$Valid Permanent.Green+YouCtrl/LimitMax.1
 SVar:Z:Count$Valid Permanent.White+YouCtrl/LimitMax.1
 SVar:X:SVar$Y/Plus.Z

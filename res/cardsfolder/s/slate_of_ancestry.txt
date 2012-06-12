@@ -2,7 +2,7 @@ Name:Slate of Ancestry
 ManaCost:4
 Types:Artifact
 Text:no text
-A:AB$ Draw | Cost$ 4 T Discard<1/Hand> | NumCards$ X | SpellDescription$ Draw a card for each creature you control.
+A:AB$ Draw | Cost$ 4 T Discard<1/Hand> | NumCards$ X | References$ X | SpellDescription$ Draw a card for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

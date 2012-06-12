@@ -152,9 +152,18 @@ public class AbilityFactoryToken extends AbilityFactory {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbility() {
-
-        final SpellAbility abToken = new AbilityActivated(this.abilityFactory.getHostCard(),
-                this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
+        class AbilityToken extends AbilityActivated {
+            public AbilityToken(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityToken(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 8460074843405764620L;
 
             @Override
@@ -176,7 +185,9 @@ public class AbilityFactoryToken extends AbilityFactory {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryToken.this.tokenDoTriggerAI(this, mandatory);
             }
-        };
+        }
+        final SpellAbility abToken = new AbilityToken(this.abilityFactory.getHostCard(),
+                this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt());
 
         return abToken;
     }
@@ -228,8 +239,18 @@ public class AbilityFactoryToken extends AbilityFactory {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawback() {
-        final SpellAbility dbDealDamage = new AbilitySub(this.abilityFactory.getHostCard(),
-                this.abilityFactory.getAbTgt()) {
+        class DrawbackToken extends AbilitySub {
+            public DrawbackToken(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackToken(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 7239608350643325111L;
 
             @Override
@@ -251,10 +272,11 @@ public class AbilityFactoryToken extends AbilityFactory {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryToken.this.tokenDoTriggerAI(this, mandatory);
             }
+        }
+        final SpellAbility dbToken = new DrawbackToken(this.abilityFactory.getHostCard(),
+                this.abilityFactory.getAbTgt()); // Spell
 
-        }; // Spell
-
-        return dbDealDamage;
+        return dbToken;
     }
 
     /**

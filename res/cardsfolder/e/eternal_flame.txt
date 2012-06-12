@@ -2,8 +2,8 @@ Name:Eternal Flame
 ManaCost:2 R R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Opponent| NumDmg$ X | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals X damage to target opponent where X is the number of mountains you control. It deals half X damage, rounded up, to you.
-SVar:DBDealDamage:DB$DealDamage | NumDmg$ Y | Defined$ You
+A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Opponent| NumDmg$ X | SubAbility$ DBDealDamage | References$ X | SpellDescription$ CARDNAME deals X damage to target opponent where X is the number of mountains you control. It deals half X damage, rounded up, to you.
+SVar:DBDealDamage:DB$DealDamage | NumDmg$ Y | Defined$ You | References$ Y
 SVar:X:Count$NumTypeYouCtrl.Mountain
 SVar:Y:Count$NumTypeYouCtrl.Mountain/HalfUp
 SVar:Rarity:Rare

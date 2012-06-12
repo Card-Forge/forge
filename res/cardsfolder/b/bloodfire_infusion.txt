@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature you control
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
-A:AB$ DamageAll | Cost$ R Sac<1/Card.AttachedBy/enchanted creature> | ActivationZone$ Battlefield | ValidCards$ Creature | NumDmg$ X | ValidDescription$ each creature | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to each creature.
+A:AB$ DamageAll | Cost$ R Sac<1/Card.AttachedBy/enchanted creature> | ActivationZone$ Battlefield | ValidCards$ Creature | NumDmg$ X | ValidDescription$ each creature | References$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to each creature.
 SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Common

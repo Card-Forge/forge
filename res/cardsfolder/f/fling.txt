@@ -2,7 +2,7 @@ Name:Fling
 ManaCost:1 R
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ 1 R Sac<1/Creature> | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to target creature or player.
+A:SP$ DealDamage | Cost$ 1 R Sac<1/Creature> | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to target creature or player.
 SVar:X:Sacrificed$CardPower
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

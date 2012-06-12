@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Sorcery
 Text:no text
 A:SP$ ChangeZoneAll | Cost$ 3 B B | ValidTgts$ Opponent | Origin$ Hand | Destination$ Library | ChangeType$ Card | RememberChanged$ True | IsCurse$ True | SubAbility$ HeadChange | SpellDescription$ Target opponent puts the cards from his or her hand on top of his or her library. Search that player's library for that many cards. The player puts those cards into his or her hand, then shuffles his or her library.
-SVar:HeadChange:DB$ ChangeZone | DefinedPlayer$ Targeted | Origin$ Library | Destination$ Hand | ChangeNum$ X | ChangeType$ Card | Chooser$ You | SubAbility$ DBCleanup
+SVar:HeadChange:DB$ ChangeZone | DefinedPlayer$ Targeted | Origin$ Library | Destination$ Hand | ChangeNum$ X | ChangeType$ Card | Chooser$ You | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True

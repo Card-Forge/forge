@@ -29,6 +29,7 @@ import forge.CardListFilter;
 import forge.Command;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.AbilityActivated;
@@ -66,9 +67,18 @@ public class AbilityFactoryEffect {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityEffect(final AbilityFactory abilityFactory) {
-
-        final SpellAbility abEffect = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
-                abilityFactory.getAbTgt()) {
+        class AbilityEffect extends AbilityActivated {
+            public AbilityEffect(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityEffect(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 8869422603616247307L;
 
             private final AbilityFactory af = abilityFactory;
@@ -94,8 +104,10 @@ public class AbilityFactoryEffect {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryEffect.effectDoTriggerAI(this.af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abEffect = new AbilityEffect(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt());
+        
         return abEffect;
     }
 
@@ -146,7 +158,18 @@ public class AbilityFactoryEffect {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackEffect(final AbilityFactory abilityFactory) {
-        final SpellAbility dbEffect = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+        class DrawbackEffect extends AbilitySub {
+            public DrawbackEffect(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackEffect(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 6631124959690157874L;
 
             private final AbilityFactory af = abilityFactory;
@@ -177,8 +200,9 @@ public class AbilityFactoryEffect {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryEffect.effectDoTriggerAI(this.af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbEffect = new DrawbackEffect(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
+        
         return dbEffect;
     }
 

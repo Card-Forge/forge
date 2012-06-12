@@ -5,7 +5,7 @@ Text:no text
 PT:4/3
 K:Cycling:B B
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigLoseLife | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may have target player lose life equal to the number of Zombies on the battlefield.
-SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | References$ X
 SVar:X:Count$Valid Zombie
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gempalm_polluter.jpg
 SVar:Rarity:Common

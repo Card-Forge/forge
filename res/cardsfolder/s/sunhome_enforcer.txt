@@ -4,7 +4,7 @@ Types:Creature Giant Soldier
 Text:no text
 PT:2/4
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage, you gain that much life.
-SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:TrigGain:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon

@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Equipment
 Text:no text
 K:eqPump 3:+0/+0
-S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Domain - Equipped creature gets +1/+1 for each basic land type among lands you control.
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Domain - Equipped creature gets +1/+1 for each basic land type among lands you control.
 SVar:X:Count$Domain
 SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 SVar:Rarity:Uncommon

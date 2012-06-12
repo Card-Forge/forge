@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 Text:no text
 PT:1/2
 K:Cumulative upkeep:1
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of age counters on it to target attacking or blocking creature.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of age counters on it to target attacking or blocking creature.
 SVar:X:Count$CardCounters.AGE
 SVar:RemAIDeck:True
 SVar:Rarity:Common

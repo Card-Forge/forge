@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Flying
 A:AB$Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Vampire | TokenColors$ Black | TokenImage$ B 2 2 Vampire | TokenTypes$ Creature,Vampire | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | SpellDescription$ Put a 2/2 black Vampire creature token with flying onto the battlefield.
-A:AB$SetState | Cost$ B | Defined$ Self | CheckSVar$ X | SVarCompare$ GE5 | Mode$ Transform | SpellDescription$ Transform CARDNAME.Activate this ability only if you control five or more Vampires.
+A:AB$SetState | Cost$ B | Defined$ Self | CheckSVar$ X | SVarCompare$ GE5 | Mode$ Transform | References$ X | SpellDescription$ Transform CARDNAME.Activate this ability only if you control five or more Vampires.
 SVar:X:Count$Valid Card.Vampire+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodline_keeper.jpg
 AlternateMode:DoubleFaced

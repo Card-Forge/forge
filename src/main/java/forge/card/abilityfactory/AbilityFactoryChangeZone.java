@@ -80,7 +80,19 @@ public final class AbilityFactoryChangeZone {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityChangeZone(final AbilityFactory af) {
-        final SpellAbility abChangeZone = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityChangeZone extends AbilityActivated {
+            public AbilityChangeZone(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityChangeZone(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                AbilityFactoryChangeZone.setMiscellaneous(af, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 3728332812890211671L;
 
             @Override
@@ -102,8 +114,9 @@ public final class AbilityFactoryChangeZone {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryChangeZone.changeZoneTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abChangeZone = new AbilityChangeZone(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         AbilityFactoryChangeZone.setMiscellaneous(af, abChangeZone);
         return abChangeZone;
     }
@@ -158,7 +171,18 @@ public final class AbilityFactoryChangeZone {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackChangeZone(final AbilityFactory af) {
-        final SpellAbility dbChangeZone = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackChangeZone extends AbilitySub {
+            public DrawbackChangeZone(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackChangeZone(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                AbilityFactoryChangeZone.setMiscellaneous(af, res);
+                return res;
+            }
             private static final long serialVersionUID = 3270484211099902059L;
 
             @Override
@@ -185,7 +209,9 @@ public final class AbilityFactoryChangeZone {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryChangeZone.changeZoneTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility dbChangeZone = new DrawbackChangeZone(af.getHostCard(), af.getAbTgt());
+        
         AbilityFactoryChangeZone.setMiscellaneous(af, dbChangeZone);
         return dbChangeZone;
     }
@@ -2170,7 +2196,19 @@ public final class AbilityFactoryChangeZone {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityChangeZoneAll(final AbilityFactory af) {
-        final SpellAbility abChangeZone = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityChangeZoneAll extends AbilityActivated {
+            public AbilityChangeZoneAll(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityChangeZoneAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                AbilityFactoryChangeZone.setMiscellaneous(af, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 3728332812890211671L;
 
             @Override
@@ -2192,8 +2230,9 @@ public final class AbilityFactoryChangeZone {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryChangeZone.changeZoneAllDoTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abChangeZone = new AbilityChangeZoneAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         AbilityFactoryChangeZone.setMiscellaneous(af, abChangeZone);
         return abChangeZone;
     }
@@ -2248,7 +2287,19 @@ public final class AbilityFactoryChangeZone {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackChangeZoneAll(final AbilityFactory af) {
-        final SpellAbility dbChangeZone = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackChangeZoneAll extends AbilitySub {
+            public DrawbackChangeZoneAll(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackChangeZoneAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                AbilityFactoryChangeZone.setMiscellaneous(af, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 3270484211099902059L;
 
             @Override
@@ -2275,7 +2326,9 @@ public final class AbilityFactoryChangeZone {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryChangeZone.changeZoneAllDoTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility dbChangeZone = new DrawbackChangeZoneAll(af.getHostCard(), af.getAbTgt());
+        
         AbilityFactoryChangeZone.setMiscellaneous(af, dbChangeZone);
         return dbChangeZone;
     }

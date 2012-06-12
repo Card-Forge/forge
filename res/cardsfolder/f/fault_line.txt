@@ -2,7 +2,7 @@ Name:Fault Line
 ManaCost:X R R
 Types:Instant
 Text:no text
-A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature.withoutFlying | ValidPlayers$ Each | NumDmg$ X | ValidDescription$ each creature without flying and each player. | SpellDescription$ CARDNAME deals X damage to each creature without flying and each player.
+A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature.withoutFlying | ValidPlayers$ Each | NumDmg$ X | ValidDescription$ each creature without flying and each player. | References$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying and each player.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

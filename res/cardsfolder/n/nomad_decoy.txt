@@ -4,7 +4,7 @@ Types:Creature Human Nomad
 Text:no text
 PT:1/2
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
-A:AB$ Tap | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | CheckSVar$ X | SVarCompare$ GE7 | SpellDescription$ Threshold - Tap two target creatures. Activate this ability only if seven or more cards are in your graveyard.
+A:AB$ Tap | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | CheckSVar$ X | SVarCompare$ GE7 | References$ X | SpellDescription$ Threshold - Tap two target creatures. Activate this ability only if seven or more cards are in your graveyard.
 SVar:X:Count$InYourYard
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nomad_decoy.jpg

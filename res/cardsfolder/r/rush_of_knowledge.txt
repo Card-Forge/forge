@@ -2,7 +2,7 @@ Name:Rush of Knowledge
 ManaCost:4 U
 Types:Sorcery
 Text:no text
-A:SP$ Draw | Cost$ 4 U | Defined$ You | NumCards$ X | SpellDescription$ Draw cards equal to the highest converted mana cost among permanents you control.
+A:SP$ Draw | Cost$ 4 U | Defined$ You | NumCards$ X | References$ X | SpellDescription$ Draw cards equal to the highest converted mana cost among permanents you control.
 SVar:X:Count$MaxCMCYouCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

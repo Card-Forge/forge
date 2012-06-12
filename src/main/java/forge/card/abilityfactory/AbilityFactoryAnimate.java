@@ -36,6 +36,8 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
@@ -72,7 +74,18 @@ public final class AbilityFactoryAnimate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityAnimate(final AbilityFactory af) {
-        final SpellAbility abAnimate = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityAnimate extends AbilityActivated {
+            public AbilityAnimate(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityAnimate(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 1938171749867735155L;
 
             @Override
@@ -94,7 +107,9 @@ public final class AbilityFactoryAnimate {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryAnimate.animateTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility abAnimate = new AbilityAnimate(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abAnimate;
     }
 
@@ -139,7 +154,18 @@ public final class AbilityFactoryAnimate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackAnimate(final AbilityFactory af) {
-        final SpellAbility dbAnimate = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackAnimate extends AbilitySub {
+            public DrawbackAnimate(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackAnimate(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -8659938411460952874L;
 
             @Override
@@ -161,7 +187,8 @@ public final class AbilityFactoryAnimate {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryAnimate.animateTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility dbAnimate = new DrawbackAnimate(af.getHostCard(), af.getAbTgt());
         return dbAnimate;
     }
 
@@ -903,7 +930,18 @@ public final class AbilityFactoryAnimate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityAnimateAll(final AbilityFactory af) {
-        final SpellAbility abAnimateAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityAnimateAll extends AbilityActivated {
+            public AbilityAnimateAll(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityAnimateAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4969632476557290609L;
 
             @Override
@@ -925,7 +963,9 @@ public final class AbilityFactoryAnimate {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryAnimate.animateAllTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility abAnimateAll = new AbilityAnimateAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abAnimateAll;
     }
 
@@ -970,7 +1010,18 @@ public final class AbilityFactoryAnimate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackAnimateAll(final AbilityFactory af) {
-        final SpellAbility dbAnimateAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackAnimateAll extends AbilitySub {
+            public DrawbackAnimateAll(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackAnimateAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 2056843302051205632L;
 
             @Override
@@ -992,7 +1043,9 @@ public final class AbilityFactoryAnimate {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryAnimate.animateAllTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility dbAnimateAll = new DrawbackAnimateAll(af.getHostCard(), af.getAbTgt());
+        
         return dbAnimateAll;
     }
 

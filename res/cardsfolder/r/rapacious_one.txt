@@ -5,7 +5,7 @@ Text:no text
 PT:5/4
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put that many 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana
 SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon

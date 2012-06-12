@@ -2,7 +2,7 @@ Name:Fatal Frenzy
 ManaCost:2 R
 Types:Instant
 Text:no text
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | KW$ Trample & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ Until end of turn, target creature you control gains trample and gets +X/+0, where X is its power. Sacrifice it at the beginning of the next end step.
+A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | KW$ Trample & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | References$ X | SpellDescription$ Until end of turn, target creature you control gains trample and gets +X/+0, where X is its power. Sacrifice it at the beginning of the next end step.
 SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

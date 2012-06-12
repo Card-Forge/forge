@@ -5,7 +5,7 @@ Text:no text
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target player shuffles any number of target cards from his or her graveyard into his or her library.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBChangeZone | IsCurse$ True
-SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | TargetsWithDefinedController$ Targeted | Origin$ Graveyard | Destination$ Library | Shuffle$ True | TgtPrompt$ Choose target card | ValidTgts$ Card
+SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | TargetsWithDefinedController$ Targeted | Origin$ Graveyard | Destination$ Library | Shuffle$ True | TgtPrompt$ Choose target card | ValidTgts$ Card | References$ X
 SVar:X:Count$InAllYards
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loaming_shaman.jpg

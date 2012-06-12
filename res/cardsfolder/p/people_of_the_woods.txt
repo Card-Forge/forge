@@ -3,7 +3,7 @@ ManaCost:G G
 Types:Creature Human
 Text:no text
 PT:1/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to the number of Forests you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | References$ X | Description$ CARDNAME's toughness is equal to the number of Forests you control.
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:BuffedBy:Forest
 SVar:Rarity:Uncommon
