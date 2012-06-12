@@ -5,7 +5,7 @@ Text:no text
 PT:6/6
 K:Trample
 K:Cumulative upkeep:GW
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGain | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you gain 2 life for each age counter on it.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGain | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you gain 2 life for each age counter on it.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ X
 SVar:X:TriggeredCard$CardCounters.AGE/Times.2
 SVar:Rarity:Uncommon
