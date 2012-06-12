@@ -5,7 +5,7 @@ Text:no text
 K:Enchant player
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of enchanted player's upkeep, that player exiles two cards from his or her graveyard.
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | DefinedPlayer$ Player.EnchantedBy | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.YouCtrl | ChangeNum$ 2 | Hidden$ True | Mandatory$ True
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | DefinedPlayer$ Player.EnchantedBy | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Hidden$ True | Mandatory$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_oblivion.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/95.jpg

@@ -866,7 +866,8 @@ public final class AbilityFactoryChangeZone {
             if (!params.containsKey("ChangeNum")) {
                 changeNum = fetchList.size();
             }
-        } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)) {
+        } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
+                && !params.containsKey("DefinedPlayer")) {
             fetchList = AllZoneUtil.getCardsIn(origin);
         } else {
             fetchList = player.getCardsIn(origin);
@@ -1042,7 +1043,8 @@ public final class AbilityFactoryChangeZone {
             if (!params.containsKey("ChangeNum")) {
                 changeNum = fetchList.size();
             }
-        } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)) {
+        } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
+                && !params.containsKey("DefinedPlayer")) {
             fetchList = AllZoneUtil.getCardsIn(origin);
             fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
         } else {
