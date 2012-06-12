@@ -51,7 +51,7 @@ public class CostTap extends CostPart {
      */
     @Override
     public final void refund(final Card source) {
-        source.untap();
+        source.setTapped(false);
     }
 
     /*

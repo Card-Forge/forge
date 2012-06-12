@@ -97,7 +97,7 @@ public class CostTapType extends CostPartWithList {
     @Override
     public final void refund(final Card source) {
         for (final Card c : this.getList()) {
-            c.untap();
+            c.setTapped(false);
         }
 
         this.getList().clear();
