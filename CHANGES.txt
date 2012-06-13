@@ -42,6 +42,15 @@ Fixes/Features:
 - Added some missing PC2 reprints' set info
 - Fixed Arctic Nishoba no lifegain bug
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the updated JuzamjediCube file which now contains some AVR cards.
+- Pushed WompWomp's new sprite sheet for the firebloom skin.
+- Refunding Tap and Untap costs will no longer trigger anything.
+- Fixed Curse of Oblivion.
+- Fixed Oni of Wild Places and friends.
+- DefinedPlayer used in AF ChangeZone (Hidden) will now define the controller of cards on the battlefield/in the graveyard.
+- *Crosses fingers* Reintegration of AbilityWork branch.
+- Enabling Rotating formats (Extended, Modern) to be used for Starting Quest Pools.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
