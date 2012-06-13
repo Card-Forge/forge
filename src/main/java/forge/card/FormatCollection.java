@@ -66,6 +66,14 @@ public final class FormatCollection extends StorageView<GameFormat> {
         return getMap().get("Modern");
     }
 
+    /** 
+     * Get a specified format
+     * @return the requested format
+     */
+    public GameFormat getFormat(String format) {
+        return getMap().get(format);
+    }
+    
     /**
      * Instantiates a new format utils.
      */

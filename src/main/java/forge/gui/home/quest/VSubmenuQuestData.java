@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -24,6 +25,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
+import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
@@ -56,11 +58,12 @@ public enum VSubmenuQuestData implements IVSubmenu {
     private final JRadioButton radHard = new FRadioButton("Hard");
     private final JRadioButton radExpert = new FRadioButton("Expert");
 
-    private final JRadioButton radFantasy = new FRadioButton("Fantasy");
-    private final JRadioButton radClassic = new FRadioButton("Classic");
+    private final JCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
 
     private final JRadioButton radCompleteStart = new FRadioButton("Unrestricted Starting Pool");
-    private final JRadioButton radStandardStart = new FRadioButton("Standard (Type 2) Starting Pool");
+    private final JRadioButton radRotatingStart = new FRadioButton("Format: ");
+    private final JComboBox cbxFormat = new JComboBox();
+
     private final JRadioButton radPreconStart = new FRadioButton("Preconstructed Deck: ");
     private final JComboBox cbxPrecon = new JComboBox();
 
@@ -101,14 +104,24 @@ public enum VSubmenuQuestData implements IVSubmenu {
         radEasy.setSelected(true);
 
         final ButtonGroup group2 = new ButtonGroup();
+        group2.add(boxFantasy);
+        /*
         group2.add(radFantasy);
         group2.add(radClassic);
         radClassic.setSelected(true);
-
+        */
+        
+        // TODO: Convert this to non-hardcoded info
+        cbxFormat.removeAllItems();
+        cbxFormat.addItem("Standard");
+        cbxFormat.addItem("Extended");
+        cbxFormat.addItem("Modern");
+        
         final ActionListener preconListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 cbxPrecon.setEnabled(radPreconStart.isSelected());
+                cbxFormat.setEnabled(radRotatingStart.isSelected());
             }
         };
 
@@ -144,25 +157,32 @@ public enum VSubmenuQuestData implements IVSubmenu {
         final ButtonGroup group3 = new ButtonGroup();
         group3.add(radCompleteStart);
         radCompleteStart.addActionListener(preconListener);
-        group3.add(radStandardStart);
-        radStandardStart.addActionListener(preconListener);
+        group3.add(radRotatingStart);
+        radRotatingStart.addActionListener(preconListener);
         group3.add(radPreconStart);
+        cbxFormat.setEnabled(false);
         radPreconStart.addActionListener(preconListener);
         radCompleteStart.setSelected(true);
         cbxPrecon.setEnabled(false);
+        
+        radMedium.setEnabled(true);
+        // Fantasy box is Enabled by Default
+        boxFantasy.setSelected(true);
+        boxFantasy.setEnabled(true);
+        
         final JPanel pnlOptions = new JPanel();
         pnlOptions.setOpaque(false);
         pnlOptions.setLayout(new MigLayout("insets 0, gap 0"));
 
         final String constraints = "w 40%!, h 30px!";
         pnlOptions.add(radEasy, constraints + ", gap 7.5% 2.5% 0 0");
-        pnlOptions.add(radFantasy, constraints + ", wrap");
+        pnlOptions.add(boxFantasy, constraints + ", wrap");
         pnlOptions.add(radMedium, constraints + ", gap 7.5% 2.5% 0 0");
-        pnlOptions.add(radClassic, constraints + ", wrap");
-        pnlOptions.add(radHard, constraints + ", gap 7.5% 2.5% 0 0");
         pnlOptions.add(radCompleteStart, constraints + ", wrap");
+        pnlOptions.add(radHard, constraints + ", gap 7.5% 2.5% 0 0");
+        pnlOptions.add(radRotatingStart, constraints + ", wrap");
         pnlOptions.add(radExpert, constraints + ", gap 7.5% 2.5% 0 0 ");
-        pnlOptions.add(radStandardStart, constraints + ", wrap");
+        pnlOptions.add(cbxFormat, constraints + ", gap 20 0, w 30%!, wrap");
         pnlOptions.add(radPreconStart, constraints + ", wrap, skip");
         pnlOptions.add(cbxPrecon, "gap 20 0, w 30%!, h 35px!, wrap, skip");
 
@@ -250,26 +270,17 @@ public enum VSubmenuQuestData implements IVSubmenu {
         return radExpert;
     }
 
-    /**
-     * @return {@link javax.swing.JRadioButton}
-     */
-    public JRadioButton getRadFantasy() {
-        return radFantasy;
+    public JCheckBox getBoxFantasy() {
+        return boxFantasy;
     }
 
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadClassic() {
-        return radClassic;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
     public JRadioButton getRadCompleteStart() {
         return radCompleteStart;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JRadioButton getRadStandardStart() {
-        return radStandardStart;
+    public JRadioButton getRadRotatingStart() {
+        return radRotatingStart;
     }
 
     /** @return {@link javax.swing.JRadioButton} */
@@ -280,6 +291,11 @@ public enum VSubmenuQuestData implements IVSubmenu {
     /** @return {@link java.lang.String} */
     public String getPrecon() {
         return (String) cbxPrecon.getSelectedItem();
+    }
+    
+    /** @return {@link java.lang.String} */
+    public String getFormat() {
+        return (String) cbxFormat.getSelectedItem();
     }
 
     /**
