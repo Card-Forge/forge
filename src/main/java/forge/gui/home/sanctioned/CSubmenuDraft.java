@@ -225,8 +225,8 @@ public enum CSubmenuDraft implements ICDoc {
             draft.showGui(new BoosterDraft(CardPoolLimitation.Custom));
         }
 
-        CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(draft);
         FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_LIMITED);
+        CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(draft);
     }
 
     private String[] generateNames() {
