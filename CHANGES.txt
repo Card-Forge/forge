@@ -7,6 +7,10 @@ Forge Beta: 0#-##-2012 ver 1.2.9
 
 There was a bug in the previous version which prevented the token pics of many cards from displaying on the battlefield. This should now be fixed.
 
+Draft mode should no longer cause a crash when you start the draft.
+
+People using java 7 should be able to play forge without getting the crash reports that stated "Comparison method violates it's general contract!".
+
 --
 
 The work on the new UI is now finished. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
@@ -50,6 +54,12 @@ Fixes/Features:
 - DefinedPlayer used in AF ChangeZone (Hidden) will now define the controller of cards on the battlefield/in the graveyard.
 - *Crosses fingers* Reintegration of AbilityWork branch.
 - Enabling Rotating formats (Extended, Modern) to be used for Starting Quest Pools.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated the Spock 2 deck.
+- Possible fix for "Comparison method violates it's general contract!" crash.
+- Fixed drafting crash, though the UI for it needs tweaking (remove "Add 4 of" button, remove "remove" buttons, rename "add" button etc)
+- Fixed Oona's Prowler ability cost description.
+- Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
