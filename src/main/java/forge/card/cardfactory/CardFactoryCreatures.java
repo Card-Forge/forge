@@ -1962,10 +1962,14 @@ public class CardFactoryCreatures {
             getCard_YoseiTheMorningStar(card, cardName);
         } else if (cardName.equals("Phyrexian Dreadnought")) {
             getCard_PhyrexianDreadnought(card, cardName);
-        } else if (cardName.equals("Clone") || cardName.equals("Vesuvan Doppelganger")
-                || cardName.equals("Quicksilver Gargantuan") || cardName.equals("Jwari Shapeshifter")
-                || cardName.equals("Phyrexian Metamorph") || cardName.equals("Phantasmal Image")
-                || cardName.equals("Body Double") || cardName.equals("Evil Twin")
+//        } else if (cardName.equals("Clone") || cardName.equals("Vesuvan Doppelganger")
+//                || cardName.equals("Quicksilver Gargantuan") || cardName.equals("Jwari Shapeshifter")
+//                || cardName.equals("Phyrexian Metamorph") || cardName.equals("Phantasmal Image")
+//                || cardName.equals("Body Double") || cardName.equals("Evil Twin")
+//                || cardName.equals("Sakashima the Impostor")) {
+        } else if (cardName.equals("Vesuvan Doppelganger")
+                || cardName.equals("Jwari Shapeshifter")
+                || cardName.equals("Body Double")
                 || cardName.equals("Sakashima the Impostor")) {
             getCard_ClonesSeries(card, cardName);
         } else if (cardName.equals("Nebuchadnezzar")) {

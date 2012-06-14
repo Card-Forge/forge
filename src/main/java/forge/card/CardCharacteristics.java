@@ -391,7 +391,7 @@ public class CardCharacteristics {
     public void setReplacementEffects(ArrayList<ReplacementEffect> replacementEffects0) {
         this.replacementEffects = replacementEffects0;
     }
-    
+
     /**
      * <p>
      * getSVar.

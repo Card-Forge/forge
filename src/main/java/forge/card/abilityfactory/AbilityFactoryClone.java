@@ -34,6 +34,8 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -484,6 +486,7 @@ public final class AbilityFactoryClone {
         final HashMap<String, String> params = af.getMapParams();
         Card tgtCard;
         final Card host = sa.getSourceCard();
+        Map<String, String> origSVars = host.getSVars();
 
 
         // find target of cloning
@@ -499,8 +502,12 @@ public final class AbilityFactoryClone {
         }
 
         // find cloning source i.e. thing to be copied
-        Card cardToCopy = AbilityFactory.getDefinedCards(host, params.get("CloneSource"), sa).get(0);
-        if (cardToCopy == null) {
+        ArrayList<Card> cloneSources = AbilityFactory.getDefinedCards(host, params.get("CloneSource"), sa);
+        Card cardToCopy;
+        if (!cloneSources.isEmpty()) {
+            cardToCopy = cloneSources.get(0);
+        }
+        else {
             return;
         }
 
@@ -508,6 +515,7 @@ public final class AbilityFactoryClone {
 
         Card cloned;
 
+        //boolean keepName = params.containsKey("KeepName");
         AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
 
         if (cardToCopy.isToken()) {
@@ -548,6 +556,7 @@ public final class AbilityFactoryClone {
             tgtCard.addStaticAbility(tgtCard.getStaticAbilityStrings().get(i));
         }
 
+        addExtraCharacteristics(tgtCard, params, origSVars);
         // If target is a flipped card, also copy the flipped
         // state.
         if (cardToCopy.isFlip()) {
@@ -560,7 +569,7 @@ public final class AbilityFactoryClone {
             for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {
                 tgtCard.addStaticAbility(tgtCard.getStaticAbilityStrings().get(i));
             }
-
+            addExtraCharacteristics(tgtCard, params, origSVars);
             tgtCard.setFlip(true);
 
             tgtCard.setState(CardCharactersticName.Original);
@@ -573,5 +582,73 @@ public final class AbilityFactoryClone {
         //keep the Clone card image for the cloned card
         tgtCard.setImageFilename(imageFileName);
     } // cloneResolve
+
+    private static void addExtraCharacteristics(final Card tgtCard, final HashMap<String, String> params, final Map<String, String> origSVars) {
+        // additional types to clone
+        if (params.containsKey("AddTypes")) {
+           for (final String type : Arrays.asList(params.get("AddTypes").split(","))) {
+               tgtCard.addType(type);
+           }
+        }
+
+        // triggers to add to clone
+        final ArrayList<String> triggers = new ArrayList<String>();
+        if (params.containsKey("AddTriggers")) {
+            triggers.addAll(Arrays.asList(params.get("AddTriggers").split(",")));
+            for (final String s : triggers) {
+                if (origSVars.containsKey(s)) {
+                    final String actualTrigger = origSVars.get(s);
+                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, tgtCard, true);
+                    tgtCard.addTrigger(parsedTrigger);
+                }
+            }
+        }
+
+        // SVars to add to clone
+        if (params.containsKey("AddSVars")) {
+            for (final String s : Arrays.asList(params.get("AddSVars").split(","))) {
+                if (origSVars.containsKey(s)) {
+                    final String actualsVar = origSVars.get(s);
+                    tgtCard.setSVar(s, actualsVar);
+                }
+            }
+        }
+
+        // abilities to add to clone
+        if (params.containsKey("AddAbilities")) {
+            for (final String s : Arrays.asList(params.get("AddAbilities").split(","))) {
+                if (origSVars.containsKey(s)) {
+                    final AbilityFactory newAF = new AbilityFactory();
+                    final String actualAbility = origSVars.get(s);
+                    final SpellAbility grantedAbility = newAF.getAbility(actualAbility, tgtCard);
+                    tgtCard.addSpellAbility(grantedAbility);
+                }
+            }
+        }
+
+        // set power of clone
+        if (params.containsKey("SetPower")) {
+            String rhs = params.get("SetPower");
+            int power = -1;
+            try {
+                power = Integer.parseInt(rhs);
+            } catch (final NumberFormatException e) {
+                power = CardFactoryUtil.xCount(tgtCard, tgtCard.getSVar(rhs));
+            }
+            tgtCard.setBaseAttack(power);
+        }
+
+        // set toughness of clone
+        if (params.containsKey("SetToughness")) {
+            String rhs = params.get("SetToughness");
+            int toughness = -1;
+            try {
+                toughness = Integer.parseInt(rhs);
+            } catch (final NumberFormatException e) {
+                toughness = CardFactoryUtil.xCount(tgtCard, tgtCard.getSVar(rhs));
+            }
+            tgtCard.setBaseDefense(toughness);
+        }
+    }
 
  } // end class AbilityFactoryClone

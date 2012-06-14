@@ -1,8 +1,14 @@
 Name:Phantasmal Image
 ManaCost:1 U
 Types:Creature Illusion
-Text:You may have Phantasmal Image enter the battlefield as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains "When this creature becomes the target of a spell or ability, sacrifice it."
+Text:no text
 PT:0/0
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseCreature | Static$ True | TriggerDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains "When this creature becomes the target of a spell or ability, sacrifice it."
+SVar:ChooseCreature:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other | SubAbility$ DBCopy | RememberChosen$ True
+SVar:DBCopy:DB$ Clone | Defined$ Self | CloneSource$ Remembered | AddTypes$ Illusion | AddTriggers$ TgtTrig | AddSVars$ TrigSac | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TgtTrig:Mode$ BecomesTarget | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerDescription$ When this creature becomes the target of a spell or ability, sacrifice it.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_image.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/72.jpg
