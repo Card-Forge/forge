@@ -75,17 +75,18 @@ public final class AbilityFactoryAnimate {
      */
     public static SpellAbility createAbilityAnimate(final AbilityFactory af) {
         class AbilityAnimate extends AbilityActivated {
-            public AbilityAnimate(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityAnimate(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityAnimate(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityAnimate(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 1938171749867735155L;
 
             @Override
@@ -109,7 +110,7 @@ public final class AbilityFactoryAnimate {
             }
         }
         final SpellAbility abAnimate = new AbilityAnimate(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abAnimate;
     }
 
@@ -155,17 +156,18 @@ public final class AbilityFactoryAnimate {
      */
     public static SpellAbility createDrawbackAnimate(final AbilityFactory af) {
         class DrawbackAnimate extends AbilitySub {
-            public DrawbackAnimate(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackAnimate(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackAnimate(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackAnimate(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -8659938411460952874L;
 
             @Override
@@ -931,17 +933,18 @@ public final class AbilityFactoryAnimate {
      */
     public static SpellAbility createAbilityAnimateAll(final AbilityFactory af) {
         class AbilityAnimateAll extends AbilityActivated {
-            public AbilityAnimateAll(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityAnimateAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityAnimateAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityAnimateAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4969632476557290609L;
 
             @Override
@@ -965,7 +968,7 @@ public final class AbilityFactoryAnimate {
             }
         }
         final SpellAbility abAnimateAll = new AbilityAnimateAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abAnimateAll;
     }
 
@@ -1011,17 +1014,18 @@ public final class AbilityFactoryAnimate {
      */
     public static SpellAbility createDrawbackAnimateAll(final AbilityFactory af) {
         class DrawbackAnimateAll extends AbilitySub {
-            public DrawbackAnimateAll(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackAnimateAll(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackAnimateAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackAnimateAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 2056843302051205632L;
 
             @Override
@@ -1045,7 +1049,7 @@ public final class AbilityFactoryAnimate {
             }
         }
         final SpellAbility dbAnimateAll = new DrawbackAnimateAll(af.getHostCard(), af.getAbTgt());
-        
+
         return dbAnimateAll;
     }
 

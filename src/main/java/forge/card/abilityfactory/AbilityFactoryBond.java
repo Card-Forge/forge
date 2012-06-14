@@ -61,17 +61,18 @@ public final class AbilityFactoryBond {
      */
     public static SpellAbility createAbilityBond(final AbilityFactory af) {
         class AbilityBond extends AbilityActivated {
-            public AbilityBond(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityBond(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityBond(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityBond(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 1938171749867735256L;
 
             @Override
@@ -95,7 +96,7 @@ public final class AbilityFactoryBond {
             }
         }
         final SpellAbility abBond = new AbilityBond(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abBond;
     }
 
