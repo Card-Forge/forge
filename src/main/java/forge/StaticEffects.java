@@ -166,7 +166,7 @@ public class StaticEffects {
                     }
                 }
             }
-            
+
             if (addHiddenKeywords != null) {
                 for (final String k : addHiddenKeywords) {
                     affectedCard.removeExtrinsicKeyword(k);

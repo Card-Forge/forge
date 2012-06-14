@@ -66,17 +66,18 @@ public class AbilityFactoryAlterLife {
      */
     public static SpellAbility createAbilityGainLife(final AbilityFactory abilityFactory) {
         class AbilityGainLife extends AbilityActivated {
-            public AbilityGainLife(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityGainLife(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityGainLife(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityGainLife(getSourceCard(), getPayCosts(),
+                        getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 8869422603616247307L;
 
             private final AbilityFactory af = abilityFactory;
@@ -157,7 +158,7 @@ public class AbilityFactoryAlterLife {
             }
 
         };
-        
+
         return spGainLife;
     }
 
@@ -172,17 +173,18 @@ public class AbilityFactoryAlterLife {
      */
     public static SpellAbility createDrawbackGainLife(final AbilityFactory abilityFactory) {
         class DrawbackGainLife extends AbilitySub {
-            public DrawbackGainLife(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackGainLife(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackGainLife(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackGainLife(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 6631124959690157874L;
 
             private final AbilityFactory af = abilityFactory;
@@ -220,7 +222,7 @@ public class AbilityFactoryAlterLife {
             }
         }
         final SpellAbility dbGainLife = new DrawbackGainLife(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
-        
+
         return dbGainLife;
     }
 
@@ -485,17 +487,18 @@ public class AbilityFactoryAlterLife {
      */
     public static SpellAbility createAbilityLoseLife(final AbilityFactory abilityFactory) {
         class AbilityLoseLife extends AbilityActivated {
-            public AbilityLoseLife(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityLoseLife(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityLoseLife(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityLoseLife(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 1129762905315395160L;
 
             private final AbilityFactory af = abilityFactory;
@@ -529,7 +532,7 @@ public class AbilityFactoryAlterLife {
         }
         final SpellAbility abLoseLife = new AbilityLoseLife(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
                 abilityFactory.getAbTgt());
-        
+
         return abLoseLife;
     }
 
@@ -579,7 +582,7 @@ public class AbilityFactoryAlterLife {
                 return AbilityFactoryAlterLife.loseLifeDoTriggerAI(af, this, mandatory);
             }
         };
-        
+
         return spLoseLife;
     }
 
@@ -594,17 +597,18 @@ public class AbilityFactoryAlterLife {
      */
     public static SpellAbility createDrawbackLoseLife(final AbilityFactory abilityFactory) {
         class DrawbackLoseLife extends AbilitySub {
-            public DrawbackLoseLife(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackLoseLife(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackLoseLife(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackLoseLife(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -2966932725306192437L;
 
             private final AbilityFactory af = abilityFactory;
@@ -642,7 +646,7 @@ public class AbilityFactoryAlterLife {
             }
         }
         final SpellAbility dbLoseLife = new DrawbackLoseLife(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
-        
+
         return dbLoseLife;
     }
 
@@ -920,17 +924,18 @@ public class AbilityFactoryAlterLife {
      */
     public static SpellAbility createAbilityPoison(final AbilityFactory af) {
         class AbilityPoison extends AbilityActivated {
-            public AbilityPoison(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityPoison(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityPoison(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityPoison(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 6598936088284756268L;
 
             @Override
@@ -956,7 +961,7 @@ public class AbilityFactoryAlterLife {
             }
         }
         final SpellAbility abPoison = new AbilityPoison(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abPoison;
     }
 
@@ -994,7 +999,7 @@ public class AbilityFactoryAlterLife {
             }
 
         };
-        
+
         return spPoison;
     }
 
@@ -1009,17 +1014,18 @@ public class AbilityFactoryAlterLife {
      */
     public static SpellAbility createDrawbackPoison(final AbilityFactory af) {
         class DrawbackPoison extends AbilitySub {
-            public DrawbackPoison(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackPoison(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackPoison(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackPoison(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -1173479041548558016L;
 
             @Override
@@ -1053,7 +1059,7 @@ public class AbilityFactoryAlterLife {
             }
         }
         final SpellAbility dbPoison = new DrawbackPoison(af.getHostCard(), af.getAbTgt());
-        
+
         return dbPoison;
     }
 
@@ -1269,17 +1275,18 @@ public class AbilityFactoryAlterLife {
      */
     public static SpellAbility createAbilitySetLife(final AbilityFactory af) {
         class AbilitySetLife extends AbilityActivated {
-            public AbilitySetLife(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilitySetLife(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilitySetLife(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilitySetLife(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -7375434097541097668L;
 
             @Override
@@ -1303,7 +1310,7 @@ public class AbilityFactoryAlterLife {
             }
         }
         final SpellAbility abSetLife = new AbilitySetLife(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abSetLife;
     }
 
@@ -1341,7 +1348,7 @@ public class AbilityFactoryAlterLife {
             }
 
         };
-        
+
         return spSetLife;
     }
 
@@ -1356,17 +1363,18 @@ public class AbilityFactoryAlterLife {
      */
     public static SpellAbility createDrawbackSetLife(final AbilityFactory af) {
         class DrawbackSetLife extends AbilitySub {
-            public DrawbackSetLife(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackSetLife(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackSetLife(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackSetLife(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -7634729949893534023L;
 
             @Override
@@ -1400,7 +1408,7 @@ public class AbilityFactoryAlterLife {
             }
         }
         final SpellAbility dbSetLife = new DrawbackSetLife(af.getHostCard(), af.getAbTgt());
-        
+
         return dbSetLife;
     }
 
@@ -1661,17 +1669,18 @@ public class AbilityFactoryAlterLife {
      */
     public static SpellAbility createAbilityExchangeLife(final AbilityFactory af) {
         class AbilityExchangeLife extends AbilityActivated {
-            public AbilityExchangeLife(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityExchangeLife(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityExchangeLife(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityExchangeLife(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 212548821691286311L;
 
             @Override
@@ -1695,7 +1704,7 @@ public class AbilityFactoryAlterLife {
             }
         }
         final SpellAbility abExLife = new AbilityExchangeLife(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abExLife;
     }
 
@@ -1742,17 +1751,18 @@ public class AbilityFactoryAlterLife {
      */
     public static SpellAbility createDrawbackExchangeLife(final AbilityFactory af) {
         class DrawbackExchangeLife extends AbilitySub {
-            public DrawbackExchangeLife(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackExchangeLife(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackExchangeLife(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackExchangeLife(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 6951913863491173483L;
 
             @Override
@@ -1781,7 +1791,7 @@ public class AbilityFactoryAlterLife {
             }
         }
         final SpellAbility dbExLife = new DrawbackExchangeLife(af.getHostCard(), af.getAbTgt());
-        
+
         return dbExLife;
     }
 

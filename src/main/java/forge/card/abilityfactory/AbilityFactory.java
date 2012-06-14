@@ -352,7 +352,7 @@ public class AbilityFactory {
                 throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + hostCard.getName());
             }
             this.abCost = new Cost(hostCard, this.mapParams.get("Cost"), this.isAb);
-            
+
         }
 
         if (this.mapParams.containsKey("ValidTgts")) {
@@ -1335,16 +1335,16 @@ public class AbilityFactory {
 
         spellAbility.setAbilityFactory(this);
 
-        if(this.mapParams.containsKey("References")) {
-            for(String svar : this.mapParams.get("References").split(",")) {
+        if (this.mapParams.containsKey("References")) {
+            for (String svar : this.mapParams.get("References").split(",")) {
                 spellAbility.setSVar(svar, this.hostC.getSVar(svar));
             }
         }
-        
+
         if (this.hasSubAbility()) {
             spellAbility.setSubAbility(this.getSubAbility());
         }
-        
+
         if (spellAbility instanceof SpellPermanent) {
             spellAbility.setDescription(spellAbility.getSourceCard().getName());
         } else if (this.hasSpDesc) {
@@ -1548,7 +1548,7 @@ public class AbilityFactory {
      */
     public static int calculateAmount(final Card card, String amount, final SpellAbility ability) {
         // amount can be anything, not just 'X' as long as sVar exists
-        
+
         if (amount == null) {
             return 0;
         }
@@ -1560,25 +1560,23 @@ public class AbilityFactory {
             multiplier = -1;
             amount = amount.substring(1);
         }
-        
+
         String svarval;
-        if(ability != null)
-        {
+        if (ability != null) {
+
             svarval = ability.getSVar(amount);
-            if(svarval.equals(""))
-            {
+            if (svarval.equals("")) {
+
                 //Print a warning to console to help debug if an ability is not stolen properly.
                 System.out.println("WARNING:SVar fallback to card with ability present!");
                 System.out.println("Card:" + card.getName());
                 System.out.println("Ability:" + ability.toString());
                 svarval = card.getSVar(amount);
             }
-        }
-        else
-        {
+        } else {
             svarval = card.getSVar(amount);
         }
-        
+
         if (!svarval.equals("")) {
             final String[] calcX = svarval.split("\\$");
             if ((calcX.length == 1) || calcX[1].equals("none")) {
@@ -2657,7 +2655,7 @@ public class AbilityFactory {
             public void resolve() {
                 // nothing to do here
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
                 return null;
@@ -2673,7 +2671,7 @@ public class AbilityFactory {
                 if (usedStack) {
                     AllZone.getStack().finishResolving(sa, false);
                 }
-            }            
+            }
         };
 
         final Command unpaidCommand = new Command() {
@@ -2777,5 +2775,5 @@ public class AbilityFactory {
         }
         AbilityFactory.resolveSubAbilities(abSub);
     }
- 
+
 } // end class AbilityFactory
