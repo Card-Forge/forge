@@ -22,7 +22,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.CardListUtil;
 import forge.Counters;
 import forge.Singletons;
 import forge.card.spellability.Ability;
@@ -30,7 +29,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameLossReason;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
 
 /**
  * <p>

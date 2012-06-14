@@ -26,6 +26,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
+import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
 import forge.GameEntity;
@@ -791,8 +792,19 @@ public class AbilityFactoryPump {
 
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
-        CardList list;
-        if (this.abilityFactory.isCurse()) {
+        CardList list = new CardList();
+        if (this.abilityFactory.getMapParams().containsKey("AILogic")) {
+            if (this.abilityFactory.getMapParams().get("AILogic").equals("HighestPower")) {
+                list = AllZoneUtil.getCreaturesInPlay().getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+                list = list.getTargetableCards(sa);
+                CardListUtil.sortAttack(list);
+                if (!list.isEmpty()) {
+                    tgt.addTarget(list.get(0));
+                } else {
+                    return false;
+                }
+            }
+        } else if (this.abilityFactory.isCurse()) {
             list = this.getCurseCreatures(sa, defense, attack);
             if (sa.canTarget(AllZone.getHumanPlayer())) {
                 tgt.addTarget(AllZone.getHumanPlayer());
