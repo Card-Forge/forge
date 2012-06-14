@@ -5,6 +5,7 @@ Text:no text
 A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ You gain life equal to target creature's power.
 SVar:DBGainLife:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardPower
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_grace.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/28.jpg
