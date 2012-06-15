@@ -61,6 +61,14 @@ Fixes/Features:
 - Fixed Oona's Prowler ability cost description.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Converted Wall of Reverence to script.
+- Added AILogic to Wall of Reverence.
+- Fixed pic of Junkyo Bell.
+- CheckStyle.
+- added support for adding additional characteristics. started converting clones to scripts.
+- merged r15847-r15910 from the Trunk into CloneFix branch
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
