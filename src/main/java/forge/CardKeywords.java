@@ -25,7 +25,7 @@ import java.util.ArrayList;
  * </p>
  * 
  * @author Forge
- * @version $Id: Card_Keywords.java 10217 2011-09-04 10:14:19Z Sloth $
+ * @version $Id$
  */
 public class CardKeywords implements Comparable<CardKeywords> {
     // takes care of individual card types

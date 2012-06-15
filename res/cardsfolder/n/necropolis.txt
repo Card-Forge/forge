@@ -4,7 +4,7 @@ Types:Artifact Creature Wall
 Text:no text
 PT:0/1
 K:Defender
-A:AB$ PutCounter | Cost$ ExileFromGrave<1/Creature> | CounterType$ P0P1 | CounterNum$ X | SpellDescription$ Put X +0/+1 counters on CARDNAME, where X is the exiled card's converted mana cost.
+A:AB$ PutCounter | Cost$ ExileFromGrave<1/Creature> | CounterType$ P0P1 | CounterNum$ X | References$ X | SpellDescription$ Put X +0/+1 counters on CARDNAME, where X is the exiled card's converted mana cost.
 SVar:X:Exiled$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necropolis.jpg

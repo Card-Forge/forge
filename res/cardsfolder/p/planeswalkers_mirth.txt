@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Enchantment
 Text:no text
 A:AB$ Reveal | Cost$ 3 W | Random$ True | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGain | SpellDescription$ Target opponent reveals a card at random from his or her hand. You gain life equal to that card's converted mana cost.
-SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Rarity:Rare

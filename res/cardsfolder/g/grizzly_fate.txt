@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Sorcery
 Text:no text
 K:Flashback 5 G G
-A:SP$ Token | Cost$ 3 G G | TokenAmount$ X | TokenName$ Bear | TokenTypes$ Creature,Bear | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put two 2/2 green Bear creature tokens onto the battlefield. Threshold - Put four 2/2 green Bear creature tokens onto the battlefield instead if seven or more cards are in your graveyard.
+A:SP$ Token | Cost$ 3 G G | TokenAmount$ X | TokenName$ Bear | TokenTypes$ Creature,Bear | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | References$ X | SpellDescription$ Put two 2/2 green Bear creature tokens onto the battlefield. Threshold - Put four 2/2 green Bear creature tokens onto the battlefield instead if seven or more cards are in your graveyard.
 SVar:X:Count$Threshold.4.2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grizzly_fate.jpg

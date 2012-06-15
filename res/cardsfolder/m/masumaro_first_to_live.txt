@@ -3,7 +3,7 @@ ManaCost:3 G G G
 Types:Legendary Creature Spirit
 Text:no text
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to twice the number of cards in your hand.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to twice the number of cards in your hand.
 SVar:X:Count$InYourHand/Times.2
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

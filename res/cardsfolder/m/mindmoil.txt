@@ -3,8 +3,8 @@ ManaCost:4 R
 Types:Enchantment
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, put the cards in your hand on the bottom of your library in any order, then draw that many cards.
-SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ Tossed | RememberChanged$ True | LibraryPosition$ -1 | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ RemTossed | SubAbility$ DBCleanup
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ Tossed | References$ Tossed | RememberChanged$ True | LibraryPosition$ -1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ RemTossed | References$ RemTossed | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Tossed:Count$InYourHand
 SVar:RemTossed:Remembered$Amount

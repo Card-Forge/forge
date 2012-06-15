@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 Text:no text
 K:Morph:3
-A:AB$ Mill | Cost$ X X T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard.
+A:AB$ Mill | Cost$ X X T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | References$ X | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

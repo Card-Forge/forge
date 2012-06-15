@@ -2,7 +2,7 @@ Name:Death Denied
 ManaCost:X B B
 Types:Instant Arcane
 Text:no text
-A:SP$ ChangeZone | Cost$ X B B | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature in your graveyard | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return X target creature cards from your graveyard to your hand.
+A:SP$ ChangeZone | Cost$ X B B | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature in your graveyard | Origin$ Graveyard | Destination$ Hand | References$ X,MaxTgts | SpellDescription$ Return X target creature cards from your graveyard to your hand.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$TypeInYourYard.Creature

@@ -7,7 +7,7 @@ K:Flying
 K:Trample
 K:CARDNAME attacks each turn if able.
 T:Mode$ DamageDone | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals damage, you lose that much life.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

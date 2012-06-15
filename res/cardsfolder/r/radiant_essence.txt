@@ -3,7 +3,7 @@ ManaCost:1 W G
 Types:Creature Spirit
 Text:no text
 PT:2/3
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+2 as long as an opponent controls a black permanent.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ CARDNAME gets +1/+2 as long as an opponent controls a black permanent.
 SVar:X:Count$Valid Creature.YouDontCtrl+Black
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

@@ -352,6 +352,7 @@ public class AbilityFactory {
                 throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + hostCard.getName());
             }
             this.abCost = new Cost(hostCard, this.mapParams.get("Cost"), this.isAb);
+
         }
 
         if (this.mapParams.containsKey("ValidTgts")) {
@@ -548,11 +549,11 @@ public class AbilityFactory {
 
         else if (this.api.equals("Clash")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryClash.getAbilityClash(this);
+                spellAbility = AbilityFactoryClash.createAbilityClash(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryClash.getSpellClash(this);
+                spellAbility = AbilityFactoryClash.createSpellClash(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryClash.getDrawbackClash(this);
+                spellAbility = AbilityFactoryClash.createDrawbackClash(this);
             }
         }
 
@@ -1061,11 +1062,11 @@ public class AbilityFactory {
 
         else if (this.api.equals("RearrangeTopOfLibrary")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createRearrangeTopOfLibraryAbility(this);
+                spellAbility = AbilityFactoryReveal.createAbilityRearrangeTopOfLibrary(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createRearrangeTopOfLibrarySpell(this);
+                spellAbility = AbilityFactoryReveal.createSpellRearrangeTopOfLibrary(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createRearrangeTopOfLibraryDrawback(this);
+                spellAbility = AbilityFactoryReveal.createDrawbackRearrangeTopOfLibrary(this);
             }
         }
 
@@ -1075,7 +1076,7 @@ public class AbilityFactory {
             } else if (this.isSp) {
                 spellAbility = AbilityFactoryRegenerate.getSpellRegenerate(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryRegenerate.createDrawbackRegenerate(this);
+                spellAbility = AbilityFactoryRegenerate.getDrawbackRegenerate(this);
             }
         }
 
@@ -1085,7 +1086,7 @@ public class AbilityFactory {
             } else if (this.isSp) {
                 spellAbility = AbilityFactoryRegenerate.getSpellRegenerateAll(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryRegenerate.createDrawbackRegenerateAll(this);
+                spellAbility = AbilityFactoryRegenerate.getDrawbackRegenerateAll(this);
             }
         }
 
@@ -1340,6 +1341,12 @@ public class AbilityFactory {
 
         spellAbility.setAbilityFactory(this);
 
+        if (this.mapParams.containsKey("References")) {
+            for (String svar : this.mapParams.get("References").split(",")) {
+                spellAbility.setSVar(svar, this.hostC.getSVar(svar));
+            }
+        }
+
         if (this.hasSubAbility()) {
             spellAbility.setSubAbility(this.getSubAbility());
         }
@@ -1560,8 +1567,24 @@ public class AbilityFactory {
             amount = amount.substring(1);
         }
 
-        if (!card.getSVar(amount).equals("")) {
-            final String[] calcX = card.getSVar(amount).split("\\$");
+        String svarval;
+        if (ability != null) {
+
+            svarval = ability.getSVar(amount);
+            if (svarval.equals("")) {
+
+                //Print a warning to console to help debug if an ability is not stolen properly.
+                System.out.println("WARNING:SVar fallback to card with ability present!");
+                System.out.println("Card:" + card.getName());
+                System.out.println("Ability:" + ability.toString());
+                svarval = card.getSVar(amount);
+            }
+        } else {
+            svarval = card.getSVar(amount);
+        }
+
+        if (!svarval.equals("")) {
+            final String[] calcX = svarval.split("\\$");
             if ((calcX.length == 1) || calcX[1].equals("none")) {
                 return 0;
             }
@@ -1571,7 +1594,7 @@ public class AbilityFactory {
             }
 
             if (calcX[0].startsWith("Number")) {
-                return CardFactoryUtil.xCount(card, card.getSVar(amount)) * multiplier;
+                return CardFactoryUtil.xCount(card, svarval) * multiplier;
             } else if (calcX[0].startsWith("SVar")) {
                 final String[] l = calcX[1].split("/");
                 final String[] m = CardFactoryUtil.parseMath(l);
@@ -2636,7 +2659,12 @@ public class AbilityFactory {
 
             @Override
             public void resolve() {
-                // nothing to do
+                // nothing to do here
+            }
+
+            @Override
+            public AbilityActivated getCopy() {
+                return null;
             }
         };
 

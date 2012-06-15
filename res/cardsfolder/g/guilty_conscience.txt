@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature Curse
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, CARDNAME deals that much damage to that creature.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredSource | NumDmg$ X
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredSource | NumDmg$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guilty_conscience.jpg

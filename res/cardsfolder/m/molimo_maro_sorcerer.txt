@@ -4,7 +4,7 @@ Types:Legendary Creature Elemental
 Text:no text
 PT:*/*
 K:Trample
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl
 SVar:BuffedBy:Land
 SVar:Rarity:Rare

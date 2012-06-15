@@ -4,7 +4,7 @@ Types:Creature Elemental
 Text:no text
 PT:*/*
 K:Trample
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ Chroma - CARDNAME's power and toughness are each equal to the number of green mana symbols in the mana costs of permanents you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ Chroma - CARDNAME's power and toughness are each equal to the number of green mana symbols in the mana costs of permanents you control.
 SVar:X:Count$Chroma.G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primalcrux.jpg

@@ -2,7 +2,7 @@ Name:Battle Hymn
 ManaCost:1 R
 Types:Instant
 Text:no text
-A:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ X | SpellDescription$ Add R to your mana pool for each creature you control.
+A:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ X | References$ X | SpellDescription$ Add R to your mana pool for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Common

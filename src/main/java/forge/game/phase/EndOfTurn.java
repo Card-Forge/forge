@@ -22,7 +22,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.CardListUtil;
 import forge.Counters;
 import forge.Singletons;
 import forge.card.spellability.Ability;
@@ -30,7 +29,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameLossReason;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
 
 /**
  * <p>
@@ -56,7 +54,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
         final CardList all = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
-        EndOfTurn.endOfTurnWallOfReverence();
+        //EndOfTurn.endOfTurnWallOfReverence();
         EndOfTurn.endOfTurnLighthouseChronologist();
 
         // reset mustAttackEntity for me
@@ -229,7 +227,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
     } // executeAt()
 
-    private static void endOfTurnWallOfReverence() {
+    /*private static void endOfTurnWallOfReverence() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final CardList list = player.getCardsIn(ZoneType.Battlefield, "Wall of Reverence");
 
@@ -272,7 +270,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         }
-    } // endOfTurnWallOfReverence()
+    } // endOfTurnWallOfReverence()*/
 
     private static void endOfTurnLighthouseChronologist() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();

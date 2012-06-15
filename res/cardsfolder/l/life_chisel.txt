@@ -2,7 +2,7 @@ Name:Life Chisel
 ManaCost:4
 Types:Artifact
 Text:no text
-A:AB$ GainLife | Cost$ Sac<1/Creature> | LifeAmount$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ You gain life equal to the sacrificed creature's toughness. Activate this ability only during your upkeep.
+A:AB$ GainLife | Cost$ Sac<1/Creature> | LifeAmount$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | References$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness. Activate this ability only during your upkeep.
 SVar:X:Sacrificed$CardToughness
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

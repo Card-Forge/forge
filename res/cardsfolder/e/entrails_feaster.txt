@@ -5,8 +5,8 @@ Text:no text
 PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may exile a creature card from a graveyard. If you do, put a +1/+1 counter on CARDNAME. If you don't, tap CARDNAME.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ChangeType$ Creature | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Exile | Optional$ True | IsCurse$ True | RememberChanged$ True | Hidden$ True | Chooser$ You | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBTap
-SVar:DBTap:DB$ Tap | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | SubAbility$ DBCleanup
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBTap | References$ X
+SVar:DBTap:DB$ Tap | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Rarity:Rare

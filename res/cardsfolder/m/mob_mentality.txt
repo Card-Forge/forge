@@ -5,8 +5,8 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Trample | Description$ Enchanted creature has trample.
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | IsPresent$ Creature.YouCtrl+attacking+nonWall | PresentCompare$ EQX | TriggerDescription$ Whenever all non-Wall creatures you control attack, enchanted creature gets +X/+0 until end of turn, where X is the number of attacking creatures.
-SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Enchanted | NumAtt$ X
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | IsPresent$ Creature.YouCtrl+attacking+nonWall | PresentCompare$ EQX | References$ X | TriggerDescription$ Whenever all non-Wall creatures you control attack, enchanted creature gets +X/+0 until end of turn, where X is the number of attacking creatures.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Enchanted | NumAtt$ X | References$ X
 SVar:X:Count$Valid Creature.YouCtrl+nonWall
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mob_mentality.jpg

@@ -3,7 +3,7 @@ ManaCost:RW RW
 Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may pay X. If you do, put X 1/1 red and white Goblin Soldier creature tokens onto the battlefield.
-SVar:TrigToken:AB$Token | Cost$ X | TokenAmount$ X | TokenName$ Goblin Soldier | TokenTypes$ Creature,Goblin,Soldier | TokenOwner$ You | TokenColors$ Red,White | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigToken:AB$Token | Cost$ X | TokenAmount$ X | References$ X | TokenName$ Goblin Soldier | TokenTypes$ Creature,Goblin,Soldier | TokenOwner$ You | TokenColors$ Red,White | TokenPower$ 1 | TokenToughness$ 1
 SVar:X:Count$xPaid
 A:AB$ PumpAll | Cost$ RW | ValidCards$ Creature.Red+YouCtrl,Creature.White+YouCtrl | KW$ First Strike | SpellDescription$ Red creatures and white creatures you control gain first strike until end of turn.
 SVar:RemAIDeck:True

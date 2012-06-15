@@ -2,7 +2,7 @@ Name:Ghoul's Feast
 ManaCost:1 B
 Types:Instant
 Text:no text
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
+A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghouls_feast.jpg

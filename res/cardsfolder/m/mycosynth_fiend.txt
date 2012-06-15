@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Horror
 Text:no text
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each poison counter your opponents have.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +1/+1 for each poison counter your opponents have.
 SVar:X:Count$OppPoisonCounters
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

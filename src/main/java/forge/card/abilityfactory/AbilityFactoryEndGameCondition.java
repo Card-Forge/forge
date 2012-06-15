@@ -26,6 +26,8 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.game.GameLossReason;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -58,8 +60,18 @@ public final class AbilityFactoryEndGameCondition {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityWinsGame(final AbilityFactory af) {
-
-        final SpellAbility abWinsGame = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityWinsGame extends AbilityActivated {
+            public AbilityWinsGame(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityWinsGame(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 8869422603616247307L;
 
             @Override
@@ -83,8 +95,9 @@ public final class AbilityFactoryEndGameCondition {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryEndGameCondition.winsGameDoTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abWinsGame = new AbilityWinsGame(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abWinsGame;
     }
 
@@ -137,7 +150,18 @@ public final class AbilityFactoryEndGameCondition {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackWinsGame(final AbilityFactory af) {
-        final SpellAbility dbWinsGame = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackWinsGame extends AbilitySub {
+            public DrawbackWinsGame(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackWinsGame(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 6631124959690157874L;
 
             @Override
@@ -171,8 +195,9 @@ public final class AbilityFactoryEndGameCondition {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryEndGameCondition.winsGameDoTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbWinsGame = new DrawbackWinsGame(af.getHostCard(), af.getAbTgt());
+        
         return dbWinsGame;
     }
 
@@ -297,8 +322,18 @@ public final class AbilityFactoryEndGameCondition {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityLosesGame(final AbilityFactory af) {
-
-        final SpellAbility abLosesGame = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityLosesGame extends AbilityActivated {
+            public AbilityLosesGame(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityLosesGame(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 8869422603616247307L;
 
             @Override
@@ -322,8 +357,9 @@ public final class AbilityFactoryEndGameCondition {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryEndGameCondition.losesGameDoTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abLosesGame = new AbilityLosesGame(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abLosesGame;
     }
 
@@ -376,7 +412,18 @@ public final class AbilityFactoryEndGameCondition {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackLosesGame(final AbilityFactory af) {
-        final SpellAbility dbLosesGame = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackLosesGame extends AbilitySub {
+            public DrawbackLosesGame(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackLosesGame(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 6631124959690157874L;
 
             @Override
@@ -410,8 +457,9 @@ public final class AbilityFactoryEndGameCondition {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryEndGameCondition.losesGameDoTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbLosesGame = new DrawbackLosesGame(af.getHostCard(), af.getAbTgt());
+        
         return dbLosesGame;
     }
 

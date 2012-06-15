@@ -124,10 +124,10 @@ public class CostGainLife extends CostPart {
 
         Integer c = this.convertAmount();
         if (c == null) {
-            final String sVar = source.getSVar(amount);
+            final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = CostUtil.chooseXValue(source, life);
+                c = CostUtil.chooseXValue(source, ability,  life);
             } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
@@ -161,7 +161,7 @@ public class CostGainLife extends CostPart {
 
         Integer c = this.convertAmount();
         if (c == null) {
-            final String sVar = source.getSVar(this.getAmount());
+            final String sVar = ability.getSVar(this.getAmount());
             // Generalize this
             if (sVar.equals("XChoice")) {
                 return false;

@@ -206,7 +206,7 @@ public class CostMana extends CostPart {
         int manaToAdd = 0;
         if (!this.hasNoXManaCost()) {
             // if X cost is a defined value, other than xPaid
-            if (!source.getSVar("X").equals("Count$xPaid")) {
+            if (!ability.getSVar("X").equals("Count$xPaid")) {
                 // this currently only works for things about Targeted object
                 manaToAdd = AbilityFactory.calculateAmount(source, "X", ability) * this.getXMana();
             }

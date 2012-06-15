@@ -3,7 +3,7 @@ ManaCost:4 W W
 Types:Sorcery
 Text:no text
 A:SP$ DestroyAll | Cost$ 4 W W | ValidCards$ Creature.tapped | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all tapped creatures. You gain 2 life for each creature destroyed this way.
-SVar:DBGainLife:DB$GainLife | LifeAmount$ X
+SVar:DBGainLife:DB$GainLife | LifeAmount$ X | References$ X
 SVar:X:Remembered$Amount.Twice
 SVar:Rarity:Rare
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/righteous_fury.jpg

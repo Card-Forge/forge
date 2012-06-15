@@ -6,7 +6,7 @@ PT:5/5
 K:Flying
 A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may have it deal that much damage to target creature that player controls.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | NumDmg$ X | TgtPrompt$ Select target creature.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | NumDmg$ X | References$ X | TgtPrompt$ Select target creature.
 SVar:X:Count$CardPower
 SVar:MustBeBlocked:True
 SVar:Rarity:Rare

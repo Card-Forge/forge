@@ -4,7 +4,7 @@ Types:Legendary Creature Elemental
 Text:no text
 PT:*/*
 K:Shroud
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the total number of cards in all players' hands.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the total number of cards in all players' hands.
 SVar:X:Count$NumInAllHands
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/multani_maro_sorcerer.jpg

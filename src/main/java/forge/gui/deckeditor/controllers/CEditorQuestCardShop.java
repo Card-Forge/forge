@@ -71,7 +71,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private final JLabel sellPercentageLabel = new FLabel.Builder().text("0")
             .fontSize(11)
             .build();
-    
+
     private double multiplier;
     private final QuestController questData;
 
@@ -85,7 +85,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private String CCAddLabel = new String();
     private String CDTabLabel = new String();
     private String CDRemLabel = new String();
-    
+
     /**
      * Child controller for quest card shop UI.
      * 
@@ -139,7 +139,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         // don't need AI column for eaither table
         columnsCatalog.remove(SColumnUtil.getColumn(ColumnName.CAT_AI));
         columnsDeck.remove(SColumnUtil.getColumn(ColumnName.DECK_AI));
-        
+
         // Setup with current column set
         this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
         this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
@@ -148,13 +148,13 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         CCTabLabel = VCardCatalog.SINGLETON_INSTANCE.getTabLabel().getText();
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Cards for sale");
-        
+
         CCAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Buy Card");
-        
+
         CDTabLabel = VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().getText();
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Your Cards");
-        
+
         CDRemLabel = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().getText();
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText("Sell Card");
     }
@@ -395,20 +395,20 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         SSubmenuQuestUtil.updateStatsAndPet();
         AllZone.getQuest().save();
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
-        
+
         // undo Card Shop Specifics
         VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(sellPercentageLabel);
         VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
-        
+
         VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(creditsLabel);
         VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4());
-        
+
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(CCTabLabel);
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(CDTabLabel);
-        
+
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(CCAddLabel);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText(CDRemLabel);
-        
+
         return true;
     }
 }

@@ -2,7 +2,7 @@ Name:Food Chain
 ManaCost:2 G
 Types:Enchantment
 Text:no text
-A:AB$ Mana | Cost$ Exile<1/Creature> | Produced$ Any | Amount$ X | RestrictValid$ Card.Creature | SpellDescription$ Add X mana of any one color to your mana pool, where X is the exiled creature's converted mana cost plus one. Spend this mana only to cast creature spells.
+A:AB$ Mana | Cost$ Exile<1/Creature> | Produced$ Any | Amount$ X | RestrictValid$ Card.Creature | References$ X | SpellDescription$ Add X mana of any one color to your mana pool, where X is the exiled creature's converted mana cost plus one. Spend this mana only to cast creature spells.
 SVar:X:Exiled$CardManaCost/Plus.1
 SVar:RemAIDeck:True
 SVar:Rarity:Common

@@ -7,10 +7,10 @@ SVar:DBDamageP:DB$ DealDamage | Tgt$ TgtP | NumDmg$ 4 | SpellDescription$ CARDNA
 SVar:DBDamageC:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each creature.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
 SVar:DBDiscard:DB$ Discard | Defined$ You | RememberDiscarded$ True | Mode$ Hand | SubAbility$ YouDraw | SpellDescription$ Each player discards all the cards in his or her hand, then draws that many cards.
-SVar:YouDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ YourCleanup
+SVar:YouDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ YourCleanup | References$ X
 SVar:YourCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ OppDiscard
 SVar:OppDiscard:DB$ Discard | Defined$ Opponent | RememberDiscarded$ True | Mode$ Hand | SubAbility$ OppDraw
-SVar:OppDraw:DB$ Draw | Defined$ Opponent | NumCards$ Y | SubAbility$ OppCleanup
+SVar:OppDraw:DB$ Draw | Defined$ Opponent | NumCards$ Y | SubAbility$ OppCleanup | References$ Y
 SVar:OppCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Y:Remembered$Amount

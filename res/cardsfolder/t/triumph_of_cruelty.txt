@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Enchantment
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCruelDiscard | TriggerDescription$ At the beginning of your upkeep, target opponent discards a card if you control the creature with the greatest power or tied for the greatest power.
-SVar:TrigCruelDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | ConditionPresent$ Creature | ConditionCompare$ GE1 | ConditionCheckSVar$ YourCruelty | ConditionSVarCompare$ GEOppsCruelty
+SVar:TrigCruelDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | ConditionPresent$ Creature | ConditionCompare$ GE1 | ConditionCheckSVar$ YourCruelty | ConditionSVarCompare$ GEOppsCruelty | References$ YourCruelty,OppsCruelty
 SVar:YourCruelty:Count$GreatestPowerYouControl
 SVar:OppsCruelty:Count$GreatestPowerYouDontControl
 SVar:Rarity:Uncommon

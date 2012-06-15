@@ -191,10 +191,11 @@ public class QuestController {
      * @param diff the diff
      * @param mode the mode
      * @param startPool the start type
+     * @param startFormat the format of starting pool
      * @param preconName the precon name
      */
     public void newGame(final String name, final int diff, final QuestMode mode, final QuestStartPool startPool,
-            final String preconName) {
+            final String startFormat, final String preconName) {
 
         this.load(new QuestData(name, diff, mode));
 
@@ -204,8 +205,8 @@ public class QuestController {
             this.myCards.addPreconDeck(QuestController.preconManager.get(preconName));
             return;
 
-        case Standard:
-            filter = Singletons.getModel().getFormats().getStandard().getFilterPrinted();
+        case Rotating:
+            filter = Singletons.getModel().getFormats().getFormat(startFormat).getFilterPrinted();
             break;
 
         default: // Unrestricted

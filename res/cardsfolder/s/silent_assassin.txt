@@ -3,7 +3,7 @@ ManaCost:B B
 Types:Creature Human Mercenary Assassin
 Text:no text
 PT:2/1
-A:AB$ Effect | Cost$ 3 B | ValidTgts$ Creature.blocking | Name$ Assassin Tracking Effect | TgtPrompt$ Select target blocking creature | IsCurse$ True | RememberObjects$ Targeted | Triggers$ DelTrig | SVars$ TrigDestroy | SpellDescription$ Destroy target blocking creature at end of combat.
+A:AB$ Effect | Cost$ 3 B | ValidTgts$ Creature.blocking | Name$ Assassin Tracking Effect | TgtPrompt$ Select target blocking creature | IsCurse$ True | RememberObjects$ Targeted | Triggers$ DelTrig | SVars$ TrigDestroy | References$ DelTrig,TrigDestroy  | SpellDescription$ Destroy target blocking creature at end of combat.
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | Execute$ TrigDestroy | TriggerDescription$ Destroy the blocking creature at end of combat.
 SVar:TrigDestroy:DB$ Destroy | Defined$ Remembered | SpellDescription$ Destroy the blocking creature.
 SVar:RemAIDeck:True

@@ -269,12 +269,12 @@ public class CostUtil {
         final String amount = part.getAmount();
         Integer c = part.convertAmount();
         if (c == null) {
-            final String sVar = source.getSVar(amount);
+            final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = CostUtil.chooseXValue(source, maxChoice);
+                c = CostUtil.chooseXValue(source, ability, maxChoice);
             } if (sVar.equals("YChoice")) {
-                c = CostUtil.chooseYValue(source, maxChoice);
+                c = CostUtil.chooseYValue(source, ability, maxChoice);
             } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
@@ -291,8 +291,8 @@ public class CostUtil {
      *            the max value
      * @return the int
      */
-    public static int chooseXValue(final Card card, final int maxValue) {
-        final String chosen = card.getSVar("ChosenX");
+    public static int chooseXValue(final Card card, final SpellAbility sa, final int maxValue) {
+        final String chosen = sa.getSVar("ChosenX");
         if (chosen.length() > 0) {
             return AbilityFactory.calculateAmount(card, "ChosenX", null);
         }
@@ -303,7 +303,7 @@ public class CostUtil {
         }
         final Object o = GuiUtils.chooseOne(card.toString() + " - Choose a Value for X", choiceArray);
         final int chosenX = (Integer) o;
-        card.setSVar("ChosenX", "Number$" + Integer.toString(chosenX));
+        sa.setSVar("ChosenX", "Number$" + Integer.toString(chosenX));
 
         return chosenX;
     }
@@ -317,8 +317,8 @@ public class CostUtil {
      *            the max value
      * @return the int
      */
-    public static int chooseYValue(final Card card, final int maxValue) {
-        final String chosen = card.getSVar("ChosenY");
+    public static int chooseYValue(final Card card, final SpellAbility sa, final int maxValue) {
+        final String chosen = sa.getSVar("ChosenY");
         if (chosen.length() > 0) {
             return AbilityFactory.calculateAmount(card, "ChosenY", null);
         }

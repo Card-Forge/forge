@@ -3,7 +3,7 @@ ManaCost:W W
 Types:Instant
 Text:no text
 A:SP$ Counter | Cost$ W W | TargetType$ Spell | TgtPrompt$ Select target Artifact or Enchantment spell | ValidTgts$ Artifact,Enchantment | SubAbility$ DBGainLife | SpellDescription$ Counter target artifact or enchantment spell. Its controller gains life equal to its converted mana cost.
-SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X
+SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illumination.jpg

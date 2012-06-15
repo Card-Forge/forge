@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Legendary Enchantment Shrine
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your upkeep, target opponent discards a card for each Shrine you control.
-SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | NumCards$ X | Mode$ TgtChoose
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | NumCards$ X | Mode$ TgtChoose | References$ X
 SVar:X:Count$TypeYouCtrl.Shrine
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_nights_reach.jpg

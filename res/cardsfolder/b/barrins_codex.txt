@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may put a page counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
-A:AB$ Draw | Cost$ 4 T Sac<1/CARDNAME> | NumCards$ X | SpellDescription$ Draw X cards, where X is the number of page counters on CARDNAME.
+A:AB$ Draw | Cost$ 4 T Sac<1/CARDNAME> | NumCards$ X | References$ X | SpellDescription$ Draw X cards, where X is the number of page counters on CARDNAME.
 SVar:X:Count$CardCounters.PAGE
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

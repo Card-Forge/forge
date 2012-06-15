@@ -2,7 +2,7 @@ Name:Cabal Coffers
 ManaCost:no cost
 Types:Land
 Text:no text
-A:AB$ Mana | Cost$ 2 T | Produced$ B | Amount$ X | SpellDescription$ Add B to your mana pool for each Swamp you control.
+A:AB$ Mana | Cost$ 2 T | Produced$ B | Amount$ X | References$ X | SpellDescription$ Add B to your mana pool for each Swamp you control.
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

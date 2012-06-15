@@ -4,8 +4,8 @@ Types:Enchantment
 Text:no text
 R:Event$ DamageDone | ValidSource$ Card | ValidTarget$ Creature,Player | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
 R:Event$ DamageDone | ValidSource$ Card | ValidTarget$ Creature,Player | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
-SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
-SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
+SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True

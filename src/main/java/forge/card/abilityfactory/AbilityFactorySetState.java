@@ -31,6 +31,8 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -48,8 +50,18 @@ public class AbilityFactorySetState {
      * @return the change state ability
      */
     public static SpellAbility getSetStateAbility(final AbilityFactory abilityFactory) {
-        final SpellAbility ret = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
-                abilityFactory.getAbTgt()) {
+        class AbilitySetState extends AbilityActivated {
+            public AbilitySetState(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilitySetState(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -1083427558368639457L;
 
             @Override
@@ -75,7 +87,9 @@ public class AbilityFactorySetState {
 
                 return true;
             }
-        };
+        }
+        final SpellAbility ret = new AbilitySetState(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt());
 
         return ret;
     }
@@ -118,8 +132,18 @@ public class AbilityFactorySetState {
      * @return the change state drawback
      */
     public static SpellAbility getSetStateDrawback(final AbilityFactory abilityFactory) {
-        final AbilitySub ret = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
-
+        class DrawbackSetState extends AbilitySub {
+            public DrawbackSetState(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackSetState(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -3793247725721587468L;
 
             @Override
@@ -153,8 +177,9 @@ public class AbilityFactorySetState {
                 AbilityFactorySetState.setStateResolve(abilityFactory, this);
             }
 
-        };
-
+        }
+        final AbilitySub ret = new DrawbackSetState(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
+        
         return ret;
     }
 
@@ -299,9 +324,18 @@ public class AbilityFactorySetState {
      * @return the change state all ability
      */
     public static SpellAbility getSetStateAllAbility(final AbilityFactory abilityFactory) {
-        final SpellAbility ret = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
-                abilityFactory.getAbTgt()) {
-
+        class AbilitySetStateAll extends AbilityActivated {
+            public AbilitySetStateAll(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilitySetStateAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 7841029107610111992L;
 
             @Override
@@ -313,8 +347,9 @@ public class AbilityFactorySetState {
             public void resolve() {
                 AbilityFactorySetState.setStateAllResolve(abilityFactory, this);
             }
-
-        };
+        }
+        final SpellAbility ret = new AbilitySetStateAll(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt()) ;
 
         return ret;
     }
@@ -353,8 +388,18 @@ public class AbilityFactorySetState {
      * @return the change state all drawback
      */
     public static SpellAbility getSetStateAllDrawback(final AbilityFactory abilityFactory) {
-        final AbilitySub ret = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
-
+        class DrawbackSetStateAll extends AbilitySub {
+            public DrawbackSetStateAll(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackSetStateAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 4047514893482113436L;
 
             @Override
@@ -383,8 +428,8 @@ public class AbilityFactorySetState {
             public void resolve() {
                 AbilityFactorySetState.setStateAllResolve(abilityFactory, this);
             }
-
-        };
+        }
+        final AbilitySub ret = new DrawbackSetStateAll(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
 
         return ret;
     }

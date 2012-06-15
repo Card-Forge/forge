@@ -4,7 +4,7 @@ Types:Legendary Creature Vampire Warrior
 Text:no text
 PT:5/5
 A:AB$ Destroy | Cost$ B B B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberDestroyed$ True | SubAbility$ DBToken | SpellDescription$ Destroy target creature. If that creature dies this way, put a black Vampire creature token onto the battlefield. Its power is equal to that creature's power and its toughness is equal to that creature's toughness.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenImage$ B X X Vampire | TokenName$ Vampire | TokenTypes$ Creature,Vampire | TokenColors$ Black | TokenOwner$ You | TokenPower$ dX | TokenToughness$ dY | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenImage$ B X X Vampire | TokenName$ Vampire | TokenTypes$ Creature,Vampire | TokenColors$ Black | TokenOwner$ You | TokenPower$ dX | TokenToughness$ dY | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X,dX,dY
 SVar:X:Remembered$Amount
 SVar:dX:Targeted$CardPower
 SVar:dY:Targeted$CardToughness

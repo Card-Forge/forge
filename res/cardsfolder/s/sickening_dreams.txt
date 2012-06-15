@@ -2,7 +2,7 @@ Name:Sickening Dreams
 ManaCost:1 B
 Types:Sorcery
 Text:no text
-A:SP$ DamageAll | Cost$ 1 B Discard<X/Card> | NumDmg$ ChosenX | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals X damage to each creature and each player.
+A:SP$ DamageAll | Cost$ 1 B Discard<X/Card> | NumDmg$ ChosenX | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | References$ X | SpellDescription$ CARDNAME deals X damage to each creature and each player.
 SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

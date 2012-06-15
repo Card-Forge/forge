@@ -3,8 +3,8 @@ ManaCost:2 G
 Types:Creature Human
 Text:no text
 PT:2/2
-A:AB$ DealDamage | Cost$ G G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DamageThis | SpellDescription$ CARDNAME deals damage equal to its power to target creature. That creature deals damage equal to its power to CARDNAME.
-SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
+A:AB$ DealDamage | Cost$ G G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SubAbility$ DamageThis | SpellDescription$ CARDNAME deals damage equal to its power to target creature. That creature deals damage equal to its power to CARDNAME.
+SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y | References$ Y
 SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
 SVar:Rarity:Uncommon

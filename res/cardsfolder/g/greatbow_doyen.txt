@@ -5,7 +5,7 @@ Text:no text
 PT:2/4
 S:Mode$ Continuous | Affected$ Creature.Archer+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Archer creatures you control get +1/+1.
 T:Mode$ DamageDone | ValidSource$ Archer.YouCtrl | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever an Archer you control deals damage to a creature, that Archer deals that much damage to that creature's controller.
-SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredTargetController | DamageSource$ TriggeredSource | NumDmg$ X
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredTargetController | DamageSource$ TriggeredSource | NumDmg$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greatbow_doyen.jpg

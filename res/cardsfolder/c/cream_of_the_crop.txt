@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDig | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may look at the top X cards of your library, where X is that creature's power. If you do, put one of those cards on top of your library and the rest on the bottom of your library in any order.
-SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ X | ChangeNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0
+SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ X | ChangeNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | References$ X
 SVar:X:TriggeredCard$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

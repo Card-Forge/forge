@@ -4,7 +4,7 @@ Types:Creature Human Spellshaper
 Text:no text
 PT:1/1
 A:AB$ ChangeZone | Cost$ 2 W T Discard<1/Card> | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking creature. Its controller gains life equal to its toughness. | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$GainLife | Defined$ TargetedController | LifeAmount$ X
+SVar:DBGainLife:DB$GainLife | Defined$ TargetedController | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardToughness
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

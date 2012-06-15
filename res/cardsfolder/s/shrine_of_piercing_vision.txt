@@ -5,7 +5,7 @@ Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | TriggerDescription$ At the beginning of your upkeep or whenever you cast a blue spell, put a charge counter on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | Secondary$ True | TriggerDescription$ At the beginning of your upkeep or whenever you cast a blue spell, put a charge counter on CARDNAME.
 SVar:TrigAddCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
-A:AB$ Dig | Cost$ T Sac<1/CARDNAME> | DigNum$ X | SpellDescription$ Look at the top X cards of your library, where X is the number of charge counters on CARDNAME. Put one of those cards into your hand and the rest on the bottom of your library in any order.
+A:AB$ Dig | Cost$ T Sac<1/CARDNAME> | DigNum$ X | References$ X | SpellDescription$ Look at the top X cards of your library, where X is the number of charge counters on CARDNAME. Put one of those cards into your hand and the rest on the bottom of your library in any order.
 SVar:X:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

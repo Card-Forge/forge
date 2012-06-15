@@ -2,7 +2,7 @@ package forge.gui.home.quest;
 
 import static forge.quest.QuestStartPool.Complete;
 import static forge.quest.QuestStartPool.Precon;
-import static forge.quest.QuestStartPool.Standard;
+import static forge.quest.QuestStartPool.Rotating;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -121,7 +121,7 @@ public enum CSubmenuQuestData implements ICDoc {
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
         int difficulty = 0;
 
-        final QuestMode mode = view.getRadFantasy().isSelected() ? QuestMode.Fantasy : QuestMode.Classic;
+        final QuestMode mode = view.getBoxFantasy().isSelected() ? QuestMode.Fantasy : QuestMode.Classic;
 
         if (view.getRadEasy().isSelected()) {
             difficulty = 0;
@@ -138,10 +138,11 @@ public enum CSubmenuQuestData implements ICDoc {
 
         final QuestStartPool startPool;
         final String startPrecon  = view.getPrecon();
+        final String rotatingFormat = view.getFormat();
         if (view.getRadCompleteStart().isSelected()) {
             startPool = Complete;
-        } else if (view.getRadStandardStart().isSelected()) {
-            startPool = Standard;
+        } else if (view.getRadRotatingStart().isSelected()) {
+            startPool = Rotating;
         } else {
             startPool = Precon;
         }
@@ -158,7 +159,7 @@ public enum CSubmenuQuestData implements ICDoc {
         }
 
         // Give the user a few cards to build a deck
-        AllZone.getQuest().newGame(questName, difficulty, mode, startPool, startPrecon);
+        AllZone.getQuest().newGame(questName, difficulty, mode, startPool, rotatingFormat, startPrecon);
         AllZone.getQuest().save();
 
         // Save in preferences.

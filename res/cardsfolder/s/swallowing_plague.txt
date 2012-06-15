@@ -2,8 +2,8 @@ Name:Swallowing Plague
 ManaCost:X B B
 Types:Sorcery Arcane
 Text:no text
-A:SP$ DealDamage | Cost$ X B B | Tgt$ TgtC | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to target creature and you gain X life.
-SVar:DBGainLife:DB$GainLife | LifeAmount$ X
+A:SP$ DealDamage | Cost$ X B B | Tgt$ TgtC | NumDmg$ X | References$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to target creature and you gain X life.
+SVar:DBGainLife:DB$GainLife | LifeAmount$ X | References$ X
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swallowing_plague.jpg

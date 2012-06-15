@@ -2,8 +2,8 @@ Name:Devastating Dreams
 ManaCost:R R
 Types:Sorcery
 Text:no text
-A:SP$ Sacrifice | Cost$ R R Discard<X/Random> | Defined$ Each | SacValid$ Land | Amount$ ChosenX | SubAbility$ DBDamage | SpellDescription$ Each player sacrifices X lands. CARDNAME deals X damage to each creature.
-SVar:DBDamage:DB$ DamageAll | NumDmg$ ChosenX | ValidCards$ Creature
+A:SP$ Sacrifice | Cost$ R R Discard<X/Random> | Defined$ Each | SacValid$ Land | Amount$ ChosenX | SubAbility$ DBDamage | References$ X | SpellDescription$ Each player sacrifices X lands. CARDNAME deals X damage to each creature.
+SVar:DBDamage:DB$ DamageAll | NumDmg$ ChosenX | ValidCards$ Creature | References$ X
 SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

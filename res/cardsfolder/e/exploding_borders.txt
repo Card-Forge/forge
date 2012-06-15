@@ -3,7 +3,7 @@ ManaCost:2 R G
 Types:Sorcery
 Text:no text
 A:SP$ ChangeZone | Cost$ 2 R G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SubAbility$ DBDealDamage | SpellDescription$ Domain - Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
-SVar:DBDealDamage:DB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target player, where X is the number of basic land types among lands you control.
+SVar:DBDealDamage:DB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target player, where X is the number of basic land types among lands you control.
 SVar:X:Count$Domain
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exploding_borders.jpg

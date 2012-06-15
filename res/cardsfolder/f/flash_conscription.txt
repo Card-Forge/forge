@@ -5,7 +5,7 @@ Text:no text
 A:SP$ GainControl | Cost$ 5 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | AddKWs$ Haste | LoseControl$ EOT | Untap$ True | SubAbility$ DBAnimate | SpellDescription$ Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn. If W was spent to cast CARDNAME, the creature gains "Whenever this creature deals combat damage, you gain that much life" until end of turn.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ TrigDamage | sVars$ GainLife,X | ConditionManaSpent$ W
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ True | Execute$ GainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage, you gain that much life.
-SVar:GainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X
+SVar:GainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

@@ -2,7 +2,7 @@ Name:Bonfire of the Damned
 ManaCost:X X R
 Types:Sorcery
 Text:no text
-A:SP$ DamageAll | Cost$ X X R | NumDmg$ X | ValidTgts$ Player | TgtPrompt$ Select a player | ValidCards$ Creature | ValidPlayers$ Targeted | ValidDescription$ target player and each creature he or she controls. | SpellDescription$ CARDNAME deals X damage to target player and each creature he or she controls.
+A:SP$ DamageAll | Cost$ X X R | NumDmg$ X | ValidTgts$ Player | TgtPrompt$ Select a player | ValidCards$ Creature | ValidPlayers$ Targeted | ValidDescription$ target player and each creature he or she controls. | References$ X | SpellDescription$ CARDNAME deals X damage to target player and each creature he or she controls.
 K:Miracle:X R
 SVar:X:Count$xPaid
 SVar:Rarity:Mythic

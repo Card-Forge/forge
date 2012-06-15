@@ -2,7 +2,7 @@ Name:Scrapyard Salvo
 ManaCost:1 R R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ 1 R R | Tgt$ TgtP | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of artifact cards in your graveyard.
+A:SP$ DealDamage | Cost$ 1 R R | Tgt$ TgtP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of artifact cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Artifact
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

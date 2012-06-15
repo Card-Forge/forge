@@ -2,7 +2,7 @@ Name:Guided Passage
 ManaCost:U R G
 Types:Sorcery
 Text:no text
-A:SP$ Dig | Cost$ U R G | NumCards$ X | Reveal$ True | NoMove$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SubAbility$ DBCreature | SpellDescription$ Reveal the cards in your library. An opponent chooses from among them a creature card, a land card, and a noncreature, nonland card. You put the chosen cards into your hand. Then shuffle your library.
+A:SP$ Dig | Cost$ U R G | NumCards$ X | Reveal$ True | NoMove$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SubAbility$ DBCreature | References$ X | SpellDescription$ Reveal the cards in your library. An opponent chooses from among them a creature card, a land card, and a noncreature, nonland card. You put the chosen cards into your hand. Then shuffle your library.
 SVar:DBCreature:DB$ ChangeZone | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Chooser$ Opponent | Origin$ Library | Destination$ Hand | SubAbility$ DBLand
 SVar:DBLand:DB$ ChangeZone | ChangeType$ Land.YouOwn | ChangeNum$ 1 | Chooser$ Opponent | Origin$ Library | Destination$ Hand | SubAbility$ DBNonCreatureNonLand
 SVar:DBNonCreatureNonLand:DB$ ChangeZone | ChangeType$ Card.nonCreature+nonLand+YouOwn | ChangeNum$ 1 | Chooser$ Opponent | Origin$ Library | Destination$ Hand | Shuffle$ True

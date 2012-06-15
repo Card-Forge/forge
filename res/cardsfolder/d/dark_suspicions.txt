@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Enchantment
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, that player loses X life, where X is the number of cards in that player's hand minus the number of cards in your hand.
-SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | LifeAmount$ X | Defined$ Opponent
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | LifeAmount$ X | Defined$ Opponent | References$ A,B,X 
 SVar:A:Count$InYourHand
 SVar:B:Count$InOppHand
 SVar:X:SVar$B/Minus.A

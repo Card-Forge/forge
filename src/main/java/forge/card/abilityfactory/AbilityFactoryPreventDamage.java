@@ -66,8 +66,18 @@ public class AbilityFactoryPreventDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityPreventDamage(final AbilityFactory af) {
-
-        final SpellAbility abPrevent = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityPreventDamage extends AbilityActivated {
+            public AbilityPreventDamage(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityPreventDamage(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -6581723619801399347L;
 
             @Override
@@ -89,8 +99,8 @@ public class AbilityFactoryPreventDamage {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPreventDamage.preventDamageDoTriggerAI(af, this, mandatory);
             }
-
-        }; // Ability_Activated
+        }
+        final SpellAbility abPrevent = new AbilityPreventDamage(af.getHostCard(), af.getAbCost(), af.getAbTgt());
 
         return abPrevent;
     }
@@ -139,7 +149,18 @@ public class AbilityFactoryPreventDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackPreventDamage(final AbilityFactory af) {
-        final SpellAbility dbPrevent = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackPreventDamage extends AbilitySub {
+            public DrawbackPreventDamage(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackPreventDamage(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -2295483806708528744L;
 
             @Override
@@ -161,8 +182,9 @@ public class AbilityFactoryPreventDamage {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPreventDamage.preventDamageDoTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbPrevent = new DrawbackPreventDamage(af.getHostCard(), af.getAbTgt());
+        
         return dbPrevent;
     }
 
@@ -542,7 +564,18 @@ public class AbilityFactoryPreventDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityPreventDamageAll(final AbilityFactory af) {
-        final SpellAbility abPreventAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityPreventDamageAll extends AbilityActivated {
+            public AbilityPreventDamageAll(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityPreventDamageAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 5750726631110311462L;
 
             @Override
@@ -564,8 +597,8 @@ public class AbilityFactoryPreventDamage {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPreventDamage.preventDamageAllDoTriggerAI(af, this, mandatory);
             }
-
-        }; // Ability_Activated
+        }
+        final SpellAbility abPreventAll = new AbilityPreventDamageAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
 
         return abPreventAll;
     }
@@ -613,7 +646,18 @@ public class AbilityFactoryPreventDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackPreventDamageAll(final AbilityFactory af) {
-        final SpellAbility dbPreventAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackPreventDamageAll extends AbilitySub {
+            public DrawbackPreventDamageAll(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackPreventDamageAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -655573137457133314L;
 
             @Override
@@ -635,8 +679,9 @@ public class AbilityFactoryPreventDamage {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPreventDamage.preventDamageAllDoTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbPreventAll = new DrawbackPreventDamageAll(af.getHostCard(), af.getAbTgt());
+        
         return dbPreventAll;
     }
 

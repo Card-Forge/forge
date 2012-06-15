@@ -2,7 +2,7 @@ Name:Storm Herd
 ManaCost:8 W W
 Types:Sorcery
 Text:no text
-A:SP$ Token | Cost$ 8 W W | TokenAmount$ X | TokenName$ Pegasus | TokenTypes$ Creature,Pegasus | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put X 1/1 white Pegasus creature tokens with flying onto the battlefield, where X is your life total.
+A:SP$ Token | Cost$ 8 W W | TokenAmount$ X | References$ X | TokenName$ Pegasus | TokenTypes$ Creature,Pegasus | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put X 1/1 white Pegasus creature tokens with flying onto the battlefield, where X is your life total.
 SVar:X:Count$YourLifeTotal
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96968.jpg

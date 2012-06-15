@@ -37,6 +37,8 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
@@ -73,7 +75,19 @@ public final class AbilityFactoryAnimate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityAnimate(final AbilityFactory af) {
-        final SpellAbility abAnimate = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityAnimate extends AbilityActivated {
+            public AbilityAnimate(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
+            }
+
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityAnimate(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+
             private static final long serialVersionUID = 1938171749867735155L;
 
             @Override
@@ -95,7 +109,9 @@ public final class AbilityFactoryAnimate {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryAnimate.animateTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility abAnimate = new AbilityAnimate(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+
         return abAnimate;
     }
 
@@ -140,7 +156,19 @@ public final class AbilityFactoryAnimate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackAnimate(final AbilityFactory af) {
-        final SpellAbility dbAnimate = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackAnimate extends AbilitySub {
+            public DrawbackAnimate(final Card ca, final Target t) {
+                super(ca, t);
+            }
+
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackAnimate(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+
             private static final long serialVersionUID = -8659938411460952874L;
 
             @Override
@@ -162,7 +190,8 @@ public final class AbilityFactoryAnimate {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryAnimate.animateTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility dbAnimate = new DrawbackAnimate(af.getHostCard(), af.getAbTgt());
         return dbAnimate;
     }
 
@@ -221,73 +250,79 @@ public final class AbilityFactoryAnimate {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         }
 
-        final Target tgt = sa.getTarget();
-        ArrayList<Card> tgts;
-        if (tgt != null) {
-            tgts = tgt.getTargetCards();
-        } else {
-            tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        if (params.containsKey("StackDescription")) {
+            sb.append(params.get("StackDescription").replaceAll("CARDNAME", host.getName()));
         }
+        else {
 
-        for (final Card c : tgts) {
-            sb.append(c).append(" ");
-        }
-        sb.append("become");
-        if (tgts.size() == 1) {
-            sb.append("s a");
-        }
-        // if power is -1, we'll assume it's not just setting toughness
-        if (power != -1) {
-            sb.append(" ").append(power).append("/").append(toughness);
-        }
+            final Target tgt = sa.getTarget();
+            ArrayList<Card> tgts;
+            if (tgt != null) {
+                tgts = tgt.getTargetCards();
+            } else {
+                tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+            }
 
-        if (colors.size() > 0) {
+            for (final Card c : tgts) {
+                sb.append(c).append(" ");
+            }
+            sb.append("become");
+            if (tgts.size() == 1) {
+                sb.append("s a");
+            }
+            // if power is -1, we'll assume it's not just setting toughness
+            if (power != -1) {
+                sb.append(" ").append(power).append("/").append(toughness);
+            }
+
+            if (colors.size() > 0) {
+                sb.append(" ");
+            }
+            if (colors.contains("ChosenColor")) {
+                sb.append("color of that player's choice");
+            } else {
+                for (int i = 0; i < colors.size(); i++) {
+                    sb.append(colors.get(i));
+                    if (i < (colors.size() - 1)) {
+                        sb.append(" and ");
+                    }
+                }
+            }
             sb.append(" ");
-        }
-        if (colors.contains("ChosenColor")) {
-            sb.append("color of that player's choice");
-        } else {
-            for (int i = 0; i < colors.size(); i++) {
-                sb.append(colors.get(i));
-                if (i < (colors.size() - 1)) {
+            if (types.contains("ChosenType")) {
+                sb.append("type of player's choice ");
+            } else {
+                for (int i = types.size() - 1; i >= 0; i--) {
+                    sb.append(types.get(i));
+                    sb.append(" ");
+                }
+            }
+            if (keywords.size() > 0) {
+                sb.append("with ");
+            }
+            for (int i = 0; i < keywords.size(); i++) {
+                sb.append(keywords.get(i));
+                if (i < (keywords.size() - 1)) {
                     sb.append(" and ");
                 }
             }
-        }
-        sb.append(" ");
-        if (types.contains("ChosenType")) {
-            sb.append("type of player's choice ");
-        } else {
-            for (int i = types.size() - 1; i >= 0; i--) {
-                sb.append(types.get(i));
-                sb.append(" ");
-            }
-        }
-        if (keywords.size() > 0) {
-            sb.append("with ");
-        }
-        for (int i = 0; i < keywords.size(); i++) {
-            sb.append(keywords.get(i));
-            if (i < (keywords.size() - 1)) {
-                sb.append(" and ");
-            }
-        }
-        // sb.append(abilities)
-        // sb.append(triggers)
-        if (!permanent) {
-            if (params.containsKey("UntilEndOfCombat")) {
-                sb.append(" until end of combat.");
-            } else if (params.containsKey("UntilHostLeavesPlay")) {
-                sb.append(" until ").append(host).append(" leaves the battlefield.");
-            } else if (params.containsKey("UntilYourNextUpkeep")) {
-                sb.append(" until your next upkeep.");
-            } else if (params.containsKey("UntilControllerNextUntap")) {
-                sb.append(" until its controller's next untap step.");
+            // sb.append(abilities)
+            // sb.append(triggers)
+            if (!permanent) {
+                if (params.containsKey("UntilEndOfCombat")) {
+                    sb.append(" until end of combat.");
+                } else if (params.containsKey("UntilHostLeavesPlay")) {
+                    sb.append(" until ").append(host).append(" leaves the battlefield.");
+                } else if (params.containsKey("UntilYourNextUpkeep")) {
+                    sb.append(" until your next upkeep.");
+                } else if (params.containsKey("UntilControllerNextUntap")) {
+                    sb.append(" until its controller's next untap step.");
+                } else {
+                    sb.append(" until end of turn.");
+                }
             } else {
-                sb.append(" until end of turn.");
+                sb.append(".");
             }
-        } else {
-            sb.append(".");
         }
 
         final AbilitySub abSub = sa.getSubAbility();
@@ -964,7 +999,19 @@ public final class AbilityFactoryAnimate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityAnimateAll(final AbilityFactory af) {
-        final SpellAbility abAnimateAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityAnimateAll extends AbilityActivated {
+            public AbilityAnimateAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
+            }
+
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityAnimateAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+
             private static final long serialVersionUID = -4969632476557290609L;
 
             @Override
@@ -986,7 +1033,9 @@ public final class AbilityFactoryAnimate {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryAnimate.animateAllTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility abAnimateAll = new AbilityAnimateAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+
         return abAnimateAll;
     }
 
@@ -1031,7 +1080,19 @@ public final class AbilityFactoryAnimate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackAnimateAll(final AbilityFactory af) {
-        final SpellAbility dbAnimateAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackAnimateAll extends AbilitySub {
+            public DrawbackAnimateAll(final Card ca, final Target t) {
+                super(ca, t);
+            }
+
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackAnimateAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+
             private static final long serialVersionUID = 2056843302051205632L;
 
             @Override
@@ -1053,7 +1114,9 @@ public final class AbilityFactoryAnimate {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryAnimate.animateAllTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility dbAnimateAll = new DrawbackAnimateAll(af.getHostCard(), af.getAbTgt());
+
         return dbAnimateAll;
     }
 

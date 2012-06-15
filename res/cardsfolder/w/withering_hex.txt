@@ -6,7 +6,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Cycled | ValidCard$ Card | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player cycles a card, put a plague counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ PLAGUE | CounterNum$ 1
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets -1/-1 for each plague counter on CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Enchanted creature gets -1/-1 for each plague counter on CARDNAME.
 SVar:X:Count$CardCounters.PLAGUE/Times.-1
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

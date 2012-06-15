@@ -6,7 +6,7 @@ PT:10/10
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature. You gain life equal to that creature's toughness.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature | SacMessage$ Creature | RememberSacrificed$ True | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$GainLife | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBGainLife:DB$GainLife | LifeAmount$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardToughness
 SVar:RemAIDeck:True

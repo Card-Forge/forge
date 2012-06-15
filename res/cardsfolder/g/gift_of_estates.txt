@@ -2,7 +2,7 @@ Name:Gift of Estates
 ManaCost:1 W
 Types:Sorcery
 Text:no text
-A:SP$ ChangeZone | Cost$ 1 W | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LTX | Origin$ Library | Destination$ Hand | ChangeType$ Plains | ChangeNum$ 3 | SpellDescription$ If an opponent controls more lands than you, search your library for up to three Plains cards and put them into your hand.
+A:SP$ ChangeZone | Cost$ 1 W | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LTX | Origin$ Library | Destination$ Hand | ChangeType$ Plains | ChangeNum$ 3 | References$ X | SpellDescription$ If an opponent controls more lands than you, search your library for up to three Plains cards and put them into your hand.
 SVar:X:Count$Valid Land.YouDontCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84504.jpg

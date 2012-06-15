@@ -4,8 +4,8 @@ Types:Creature Human Cleric
 Text:no text
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, exile CARDNAME, then return another target creature card from your graveyard to your hand.
-SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | SubAbility$ HierophantChange
-SVar:HierophantChange:DB$ChangeZone | DefinedPlayer$ TriggeredCardController | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.Other+YouCtrl
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | SubAbility$ HierophantChange
+SVar:HierophantChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.Other+YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_hierophant.jpg

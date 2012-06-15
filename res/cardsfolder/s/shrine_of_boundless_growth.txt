@@ -5,7 +5,7 @@ Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | TriggerDescription$ At the beginning of your upkeep or whenever you cast a green spell, put a charge counter on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | Secondary$ True | TriggerDescription$ At the beginning of your upkeep or whenever you cast a green spell, put a charge counter on CARDNAME.
 SVar:TrigAddCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
-A:AB$Mana | Cost$ T Sac<1/CARDNAME> | Produced$ 1 | Amount$ X | SpellDescription$ Add 1 to your mana pool for each charge counter on CARDNAME.
+A:AB$Mana | Cost$ T Sac<1/CARDNAME> | Produced$ 1 | Amount$ X | References$ X | SpellDescription$ Add 1 to your mana pool for each charge counter on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

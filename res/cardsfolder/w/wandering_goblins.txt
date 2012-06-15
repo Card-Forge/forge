@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Goblin Warrior
 Text:no text
 PT:0/3
-A:AB$ Pump | Cost$ 3 | NumAtt$ +X | PrecostDesc$ Domain - | SpellDescription$ Wandering Goblins gets +1/+0 until end of turn for each basic land type among lands you control.
+A:AB$ Pump | Cost$ 3 | NumAtt$ +X | References$ X | PrecostDesc$ Domain - | SpellDescription$ Wandering Goblins gets +1/+0 until end of turn for each basic land type among lands you control.
 SVar:X:Count$Domain
 SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 SVar:RemRandomDeck:True

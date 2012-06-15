@@ -3,8 +3,8 @@ ManaCost:3 G G
 Types:Legendary Creature Spirit
 Text:no text
 PT:5/5
-A:AB$ DealDamage | Cost$ X G T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target flying creature. | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature with flying.
-A:AB$ DamageAll | PrecostDesc$ Channel - | Cost$ X G G Discard<1/CARDNAME> | ActivationZone$ Hand | ValidCards$ Creature.withFlying | NumDmg$ X | ValidDescription$ each creature with flying. | SpellDescription$CARDNAME deals X damage to each creature with flying.
+A:AB$ DealDamage | Cost$ X G T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target flying creature. | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature with flying.
+A:AB$ DamageAll | PrecostDesc$ Channel - | Cost$ X G G Discard<1/CARDNAME> | ActivationZone$ Hand | ValidCards$ Creature.withFlying | NumDmg$ X | ValidDescription$ each creature with flying. | References$ X | SpellDescription$CARDNAME deals X damage to each creature with flying.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

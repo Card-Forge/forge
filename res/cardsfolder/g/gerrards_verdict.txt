@@ -3,7 +3,7 @@ ManaCost:W B
 Types:Sorcery
 Text:no text
 A:SP$ Discard | Cost$ W B | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | NumCards$ 2 | RememberDiscarded$ True | SubAbility$ DBGainLife1 | SpellDescription$ Target player discards two cards. You gain 3 life for each land card discarded this way.
-SVar:DBGainLife1:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBGainLife1:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup | References$ X
 SVar:X:Remembered$Valid Land/Times.3
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon

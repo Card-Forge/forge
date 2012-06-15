@@ -5,7 +5,7 @@ Text:no text
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Spirits you control.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ CARDNAME has soulshift X, where X is the number of Spirits you control. (When this is put into a graveyard from the battlefield, you may return target Spirit card with converted mana cost X or less from your graveyard to your hand.)
-SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Spirit.YouCtrl+cmcLEX
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Spirit.YouCtrl+cmcLEX | References$ X
 SVar:X:Count$Valid Spirit.YouCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

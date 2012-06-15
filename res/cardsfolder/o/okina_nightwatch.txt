@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Creature Human Monk
 Text:no text
 PT:4/3
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | CheckSVar$ X | SVarCompare$ GTY | Description$ As long as you have more cards in hand than each opponent, CARDNAME gets +3/+3.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | CheckSVar$ X | SVarCompare$ GTY | References$ X,Y | Description$ As long as you have more cards in hand than each opponent, CARDNAME gets +3/+3.
 SVar:X:Count$InYourHand
 SVar:Y:Count$InOppHand
 SVar:Rarity:Common

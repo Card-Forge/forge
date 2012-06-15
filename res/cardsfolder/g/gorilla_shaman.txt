@@ -3,7 +3,7 @@ ManaCost:R
 Types:Creature Ape Shaman
 Text:no text
 PT:1/1
-A:AB$ Destroy | Cost$ X X 1 | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Destroy target noncreature artifact with converted mana cost X.
+A:AB$ Destroy | Cost$ X X 1 | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | References$ X | SpellDescription$ Destroy target noncreature artifact with converted mana cost X.
 # It may seem wrong to not use X in the target, but since the Target is what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True

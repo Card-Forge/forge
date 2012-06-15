@@ -6,7 +6,7 @@ K:Hideaway
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.
 SVar:TrigDig:AB$ Dig | Cost$ 0  | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
-A:AB$ Play | Cost$ R T | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | ForgetRemembered$ True | SpellDescription$ You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.
+A:AB$ Play | Cost$ R T | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | References$ X | ForgetRemembered$ True | SpellDescription$ You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.
 SVar:X:Count$OppDamageThisTurn
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

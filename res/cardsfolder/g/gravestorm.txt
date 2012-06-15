@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, target opponent may exile a card from his or her graveyard. If that player doesn't, you may draw a card.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.YouDontCtrl | ChangeNum$ 1 | Hidden$ True | Chooser$ Targeted | RememberChanged$ True | OptionalDecider$ Targeted | IsCurse$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You | OptionalDecider$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You | OptionalDecider$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Rarity:Rare

@@ -2,7 +2,7 @@ Name:Return to Dust
 ManaCost:2 W W
 Types:Instant
 Text:no text
-A:SP$ ChangeZone | Cost$ 2 W W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | TargetMin$ 1 | TargetMax$ X | SpellDescription$ Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment.
+A:SP$ ChangeZone | Cost$ 2 W W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | TargetMin$ 1 | TargetMax$ X | References$ X | SpellDescription$ Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment.
 SVar:X:Count$IfMainPhase.2.1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/return_to_dust.jpg

@@ -4,7 +4,7 @@ Types:Creature Elemental
 Text:no text
 PT:4/3
 R:Event$ DamageDone | ValidSource$ Instant.YouCtrl,Sorcery.YouCtrl | ReplaceWith$ DmgTwice | Description$ If a red instant or sorcery spell you control would deal damage, it deals double that damage instead.
-SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
+SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_servant.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/137.jpg

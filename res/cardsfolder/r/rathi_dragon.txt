@@ -6,7 +6,7 @@ PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacMtn | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice two Mountains.
 SVar:TrigSacMtn:AB$ Sacrifice | Cost$ 0 | Amount$ 2 | SacValid$ Mountain | RememberSacrificed$ True | Optional$ True | SubAbility$ DBSacSelf
-SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2
+SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2 | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE2

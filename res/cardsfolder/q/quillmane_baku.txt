@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | CounterNum$ 1
-A:AB$ ChangeZone | Cost$ 1 T SubCounter<X/KI> | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | ChangeNum$ 1 | SpellDescription$ Return target creature with converted mana cost X or less to its owner's hand.
+A:AB$ ChangeZone | Cost$ 1 T SubCounter<X/KI> | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | ChangeNum$ 1 | References$ X | SpellDescription$ Return target creature with converted mana cost X or less to its owner's hand.
 SVar:X:Targeted$CardManaCost
 # We'll need to improve the script at some stage, especially if we add Hunter of Eyeblights or Razorfin Abolisher.
 SVar:RemAIDeck:True

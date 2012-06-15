@@ -33,6 +33,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -142,9 +143,19 @@ class CardFactoryLands {
                             && (c.getTurnInZone() == Singletons.getModel().getGameState().getPhaseHandler().getTurn());
                 }
             };
-
-            final Cost abCost = new Cost(card, "G U T", true);
-            final AbilityActivated ability = new AbilityActivated(card, abCost, null) {
+            
+            class AbilityNovijenHeartOfProgress extends AbilityActivated {
+                public AbilityNovijenHeartOfProgress(final Card ca,final Cost co,final Target t) {
+                    super(ca,co,t);
+                }
+                
+                @Override
+                public AbilityActivated getCopy() {
+                    AbilityActivated res = new AbilityNovijenHeartOfProgress(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                    CardFactoryUtil.copySpellAbility(this, res);
+                    return res;
+                }
+                
                 private static final long serialVersionUID = 1416258136308898492L;
 
                 private final CardList inPlay = new CardList();
@@ -168,7 +179,11 @@ class CardFactoryLands {
                         targ.addCounter(Counters.P1P1, 1);
                     }
                 }
-            };
+            }
+
+            final Cost abCost = new Cost(card, "G U T", true);
+            final AbilityActivated ability = new AbilityNovijenHeartOfProgress(card, abCost, null);
+            
             final StringBuilder sbDesc = new StringBuilder();
             sbDesc.append(abCost);
             sbDesc.append("Put a +1/+1 counter on each creature that entered the battlefield this turn.");
@@ -568,6 +583,11 @@ class CardFactoryLands {
                 @Override
                 public boolean canPlay() {
                     return false;
+                }
+                
+                @Override
+                public AbilityActivated getCopy() {
+                    return null;
                 }
             };
             abMana.setUndoable(false);

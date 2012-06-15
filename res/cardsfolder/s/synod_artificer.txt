@@ -3,8 +3,8 @@ ManaCost:2 U
 Types:Creature Vedalken Artificer
 Text:no text
 PT:1/2
-A:AB$ Tap | Cost$ X T | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Tap X target noncreature artifacts.
-A:AB$ Untap | Cost$ X T | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Untap X target noncreature artifacts.
+A:AB$ Tap | Cost$ X T | References$ X,MaxTgts | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Tap X target noncreature artifacts.
+A:AB$ Untap | Cost$ X T | References$ X,MaxTgts | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Untap X target noncreature artifacts.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Artifact.nonCreature

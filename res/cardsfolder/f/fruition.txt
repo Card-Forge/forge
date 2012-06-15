@@ -2,7 +2,7 @@ Name:Fruition
 ManaCost:G
 Types:Sorcery
 Text:no text
-A:SP$ GainLife | Cost$ G | LifeAmount$ X | SpellDescription$ You gain 1 life for each Forest on the battlefield.
+A:SP$ GainLife | Cost$ G | LifeAmount$ X | References$ X | SpellDescription$ You gain 1 life for each Forest on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Forest
 SVar:Rarity:Common
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/fruition.jpg

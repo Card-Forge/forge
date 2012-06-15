@@ -4,7 +4,7 @@ Types:Creature Bird
 Text:no text
 PT:2/2
 K:Flying
-A:AB$ DealDamage | Cost$ 1 R Sac<1/Creature.Goblin/Goblin creature> | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to target creature or player.
+A:AB$ DealDamage | Cost$ 1 R Sac<1/Creature.Goblin/Goblin creature> | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to target creature or player.
 SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

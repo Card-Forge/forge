@@ -2,7 +2,7 @@ Name:Gaea's Cradle
 ManaCost:no cost
 Types:Legendary Land
 Text:no text
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add G to your mana pool for each Creature you control.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add G to your mana pool for each Creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

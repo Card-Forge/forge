@@ -4,7 +4,7 @@ Types:Creature Ogre Warrior Shaman
 Text:no text
 PT:3/1
 A:AB$ PutCounter | Cost$ T | CounterType$ DEVOTION | CounterNum$ 1 | SpellDescription$ Put a devotion counter on CARDNAME.
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsPresent$ Demon.YouCtrl | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of devotion counters on CARDNAME. Activate this ability only if you control a Demon.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsPresent$ Demon.YouCtrl | References$ X | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of devotion counters on CARDNAME. Activate this ability only if you control a Demon.
 SVar:X:Count$CardCounters.DEVOTION
 SVar:BuffedBy:Demon
 SVar:Rarity:Uncommon

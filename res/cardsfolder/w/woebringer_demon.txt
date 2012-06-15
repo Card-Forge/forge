@@ -6,7 +6,7 @@ PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a creature. If the player can't, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredPlayer | SacValid$ Creature | SubAbility$ DBSacSelf | RememberSacrificed$ True
-SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
+SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE5

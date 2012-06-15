@@ -3,8 +3,8 @@ ManaCost:2 W
 Types:Sorcery
 Text:no text
 K:Rebound
-A:SP$GainLife | Cost$ 2 W | Defined$ You | LifeAmount$ 2 | SubAbility$ DoDraw | SpellDescription$ You gain 2 life. Then if you have more life than an opponent, draw a card.
-SVar:DoDraw:DB$ Draw | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY | NumCards$ 1
+A:SP$ GainLife | Cost$ 2 W | Defined$ You | LifeAmount$ 2 | SubAbility$ DoDraw | SpellDescription$ You gain 2 life. Then if you have more life than an opponent, draw a card.
+SVar:DoDraw:DB$ Draw | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY | References$ X,Y | NumCards$ 1
 SVar:X:Count$YourLifeTotal
 SVar:Y:Count$OppLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/survival_cache.jpg

@@ -7,7 +7,7 @@ K:Defender
 T:Mode$ Always | IsPresent$ Card.Self+withFlying | Execute$ Sacrifice | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME has flying, sacrifice it.
 SVar:Sacrifice:AB$ Sacrifice | Cost$ 0
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, it deals damage equal to half the number of Islands you control, rounded down, to each nonblue creature without flying.
-SVar:TrigDamage:AB$ DamageAll | Cost$ 0 | ValidCards$ Creature.nonBlue+withoutFlying | NumDmg$ X
+SVar:TrigDamage:AB$ DamageAll | Cost$ 0 | ValidCards$ Creature.nonBlue+withoutFlying | NumDmg$ X | References$ X
 SVar:X:Count$Valid Island.YouCtrl/HalfDown
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/floodgate.jpg

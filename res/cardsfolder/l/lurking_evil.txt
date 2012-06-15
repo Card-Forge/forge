@@ -2,7 +2,7 @@ Name:Lurking Evil
 ManaCost:B B B
 Types:Enchantment
 Text:no text
-A:AB$ Animate | Cost$ PayLife<X> | Types$ Creature,Horror | Power$ 4 | Toughness$ 4 | Keywords$ Flying | OverwriteTypes$ True | Permanent$ True |CostDesc$ Pay half your life, rounded up: | SpellDescription$ CARDNAME becomes a 4/4 Horror creature with flying.
+A:AB$ Animate | Cost$ PayLife<X> | Types$ Creature,Horror | Power$ 4 | Toughness$ 4 | Keywords$ Flying | OverwriteTypes$ True | Permanent$ True | CostDesc$ Pay half your life, rounded up: | References$ X | SpellDescription$ CARDNAME becomes a 4/4 Horror creature with flying.
 SVar:X:Count$YourLifeTotal/HalfUp
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

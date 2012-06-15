@@ -3,8 +3,8 @@ ManaCost:6
 Types:Artifact Creature Scarecrow
 Text:no text
 PT:5/3
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Persist | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has persist as long as you control a black creature.
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ Y | SVarCompare$ GE1 | Description$ CARDNAME has haste as long as you control a red creature.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Persist | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ CARDNAME has persist as long as you control a black creature.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ Y | SVarCompare$ GE1 | References$ Y | Description$ CARDNAME has haste as long as you control a red creature.
 SVar:X:Count$Valid Creature.YouCtrl+Black
 SVar:Y:Count$Valid Creature.YouCtrl+Red
 SVar:BuffedBy:Creature.Black,Creature.Red

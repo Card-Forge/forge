@@ -2,8 +2,8 @@ Name:Biorhythm
 ManaCost:6 G G
 Types:Sorcery
 Text:no text
-A:SP$ SetLife | Cost$ 6 G G | Defined$ You | LifeAmount$ X | SubAbility$ DBSetLifeOpp | SpellDescription$ Each player's life total becomes the number of creatures he or she controls.
-SVar:DBSetLifeOpp:DB$SetLife | Defined$ Opponent | LifeAmount$ Y
+A:SP$ SetLife | Cost$ 6 G G | Defined$ You | LifeAmount$ X | SubAbility$ DBSetLifeOpp | References$ X | SpellDescription$ Each player's life total becomes the number of creatures he or she controls.
+SVar:DBSetLifeOpp:DB$SetLife | Defined$ Opponent | LifeAmount$ Y | References$ Y 
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Y:Count$Valid Creature.YouDontCtrl
 SVar:Rarity:Rare

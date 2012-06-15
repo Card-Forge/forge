@@ -185,12 +185,12 @@ public class CostExile extends CostPartWithList {
         CardList list = activator.getCardsIn(this.getFrom());
         list = list.getValidCards(this.getType().split(";"), activator, source);
         if (c == null) {
-            final String sVar = source.getSVar(amount);
+            final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = CostUtil.chooseXValue(source, list.size());
+                c = CostUtil.chooseXValue(source, ability, list.size());
             } else if (sVar.equals("YChoice")) {
-                c = CostUtil.chooseYValue(source, list.size());
+                c = CostUtil.chooseYValue(source, ability, list.size());
             } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
@@ -222,7 +222,7 @@ public class CostExile extends CostPartWithList {
         } else {
             Integer c = this.convertAmount();
             if (c == null) {
-                final String sVar = source.getSVar(this.getAmount());
+                final String sVar = ability.getSVar(this.getAmount());
                 // Generalize this
                 if (sVar.equals("XChoice")) {
                     return false;

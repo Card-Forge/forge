@@ -5,7 +5,7 @@ Text:no text
 PT:2/5
 K:Morph:3 W
 R:Event$ DamageDone | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelf | IsCombat$ True | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, all combat damage that would be dealt to you by unblocked creatures is dealt to CARDNAME instead.
-SVar:DmgSelf:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X
+SVar:DmgSelf:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weathered_bodyguards.jpg

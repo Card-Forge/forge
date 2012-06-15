@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Zombie
 Text:no text
 PT:1/1
-A:AB$ Destroy | Cost$ X X B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature with converted mana cost X.
+A:AB$ Destroy | Cost$ X X B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | References$ X | SpellDescription$ Destroy target nonblack creature with converted mana cost X.
 # It may seem wrong to not use X in the target, but since the Target is what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True

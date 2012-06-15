@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Sorcery
 Text:no text
 A:SP$ RevealHand | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDraw | SpellDescription$ Target opponent reveals his or her hand. You draw a card for each Mountain and red card in it.
-SVar:DBDraw:DB$Draw | NumCards$ X
+SVar:DBDraw:DB$Draw | NumCards$ X | References$ X,Y
 SVar:X:Count$TypeInOppHand.Mountain/Plus.Y
 SVar:Y:Count$RedInOppHand
 SVar:RemRandomDeck:True

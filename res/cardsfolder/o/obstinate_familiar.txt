@@ -3,7 +3,7 @@ ManaCost:R
 Types:Creature Lizard
 Text:no text
 PT:1/1
-R:Event$ Draw | ValidPlayer$ You | Optional$ True | Prevent$ True | AICheckSVar$ AIHandling | AISVarCompare$ EQ0 | Description$ If you would draw a card, you may skip that draw instead.
+R:Event$ Draw | ValidPlayer$ You | Optional$ True | Prevent$ True | AICheckSVar$ AIHandling | AISVarCompare$ EQ0 | References$ AIHandling | Description$ If you would draw a card, you may skip that draw instead.
 SVar:AIHandling:Count$InYourLibrary
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obstinate_familiar.jpg

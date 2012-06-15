@@ -2,7 +2,7 @@ Name:Wargate
 ManaCost:X G W U
 Types:Sorcery
 Text:no text
-A:SP$ ChangeZone | Cost$ X G W U | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.cmcLEX | ChangeNum$ 1 | SpellDescription$ Search your library for a permanent card with converted mana cost X or less, put it onto the battlefield, then shuffle your library.
+A:SP$ ChangeZone | Cost$ X G W U | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.cmcLEX | References$ X | ChangeNum$ 1 | SpellDescription$ Search your library for a permanent card with converted mana cost X or less, put it onto the battlefield, then shuffle your library.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Human Spellshaper
 Text:no text
 PT:1/1
-A:AB$ DestroyAll | Cost$ X R T Discard<1/Card> | ValidCards$ Artifact.cmcLEX | SpellDescription$ Destroy all artifacts with converted mana cost X or less.
+A:AB$ DestroyAll | Cost$ X R T Discard<1/Card> | ValidCards$ Artifact.cmcLEX | References$ X | SpellDescription$ Destroy all artifacts with converted mana cost X or less.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

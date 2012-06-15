@@ -3,11 +3,11 @@ ManaCost:2 W W
 Types:Enchantment
 Text:no text
 R:Event$ DamageDone | ValidTarget$ You | ReplaceWith$ Counters | Description$ If damage would be dealt to you, put that many depletion counters on CARDNAME instead.
-SVar:Counters:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DEPLETION | CounterNum$ X
+SVar:Counters:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DEPLETION | CounterNum$ X | References$ X
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE4_DEPLETION | Execute$ TrigSac | TriggerDescription$ When there are four or more depletion counters on CARDNAME, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ At the beginning of each end step, remove all depletion counters from CARDNAME.
-SVar:TrigRemoveCounter: AB$ RemoveCounter | Cost$ 0 | CounterType$ DEPLETION | CounterNum$ All
+SVar:TrigRemoveCounter: AB$ RemoveCounter | Cost$ 0 | CounterType$ DEPLETION | CounterNum$ All | References$ All
 SVar:X:ReplaceCount$DamageAmount
 SVar:All:Count$CardCounters.DEPLETION
 SVar:Rarity:Rare

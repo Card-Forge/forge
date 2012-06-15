@@ -4,8 +4,8 @@ Types:Creature Elemental
 Text:no text
 PT:2/8
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigJaddiLifestriderTap | TriggerDescription$ When CARDNAME enters the battlefield, you may tap any number of untapped creatures you control. You gain 2 life for each creature tapped this way.
-SVar:TrigJaddiLifestriderTap:AB$ Tap | Cost$ 0 | TargetMin$ 0 | TargetMax$ JaddiLifestriderX | ValidTgts$ Creature.untapped+YouCtrl | ValidDesc$ untapped creature you control | RememberTapped$ True | SubAbility$ DBJaddiLifestriderGainLife
-SVar:DBJaddiLifestriderGainLife:DB$ GainLife | LifeAmount$ JaddiLifestriderZ | SubAbility$ DBJaddiLifestriderCleanup
+SVar:TrigJaddiLifestriderTap:AB$ Tap | Cost$ 0 | TargetMin$ 0 | TargetMax$ JaddiLifestriderX | ValidTgts$ Creature.untapped+YouCtrl | ValidDesc$ untapped creature you control | RememberTapped$ True | SubAbility$ DBJaddiLifestriderGainLife | References$ JaddiLifestriderX
+SVar:DBJaddiLifestriderGainLife:DB$ GainLife | LifeAmount$ JaddiLifestriderZ | SubAbility$ DBJaddiLifestriderCleanup | References$ JaddiLifestriderY,JaddiLifestriderZ
 SVar:DBJaddiLifestriderCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:JaddiLifestriderX:Count$Valid Creature.YouCtrl
 SVar:JaddiLifestriderY:Remembered$Amount

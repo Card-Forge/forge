@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Sorcery
 Text:no text
 A:SP$ Tap | Cost$ 3 R | ValidTgts$ Creature |TgtPrompt$ Select target creature | SubAbility$ DBDamage | SpellDescription$ Tap target creature. It deals damage equal to its power to another target creature.
-SVar:DBDamage:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select another target creature | NumDmg$ X |TargetUnique$ True
+SVar:DBDamage:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select another target creature | NumDmg$ X |TargetUnique$ True | References$ X
 # Which targeted does it pick
 SVar:X:Targeted$CardPower
 SVar:Rarity:Rare

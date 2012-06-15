@@ -4,7 +4,7 @@ Types:Sorcery
 Text:no text
 K:Rebound
 A:SP$ Pump | Cost$ 4 U U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDraw | StackDescription$ None | SpellDescription$ Draw cards equal to the number of cards in target opponent's hand.
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
 SVar:X:TargetedPlayer$CardsInHand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recurring_insight.jpg

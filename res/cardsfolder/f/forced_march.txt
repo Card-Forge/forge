@@ -2,7 +2,7 @@ Name:Forced March
 ManaCost:X B B B
 Types:Sorcery
 Text:no text
-A:SP$ DestroyAll | Cost$ X B B B | ValidCards$ Creature.cmcLEX | SpellDescription$ Destroy all creatures with converted mana cost X or less.
+A:SP$ DestroyAll | Cost$ X B B B | ValidCards$ Creature.cmcLEX | References$ X | SpellDescription$ Destroy all creatures with converted mana cost X or less.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

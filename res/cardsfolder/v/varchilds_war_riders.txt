@@ -8,7 +8,7 @@ K:Rampage 1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCumUpkeep | TriggerDescription$ Cumulative Upkeep - Put a 1/1 red Survivor creature token onto the battlefield under an opponent's control.
 SVar:TrigCumUpkeep:AB$ Charm | Cost$ 0 | Choices$ TrigAgeSurvivor,TrigAgeSacrifice | CharmNum$ 1
 SVar:TrigAgeSurvivor:DB$PutCounter | Defined$ Self | CounterType$ AGE | CounterNum$ 1 | SubAbility$ Survivor
-SVar:Survivor:DB$Token | TokenAmount$ X | TokenName$ Survivor | TokenTypes$ Creature,Survivor | TokenOwner$ Opponent | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 red Survivor creature token onto the battlefield under an opponent's control.
+SVar:Survivor:DB$Token | TokenAmount$ X | References$ X | TokenName$ Survivor | TokenTypes$ Creature,Survivor | TokenOwner$ Opponent | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 red Survivor creature token onto the battlefield under an opponent's control.
 SVar:X:Count$CardCounters.AGE
 SVar:TrigAgeSacrifice:DB$PutCounter | Defined$ Self | CounterType$ AGE | CounterNum$ 1 | SubAbility$ Sacrifice
 SVar:Sacrifice:DB$ Sacrifice | Defined$ Self | SpellDescription$ Sacrifice CARDNAME.

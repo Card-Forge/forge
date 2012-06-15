@@ -4,7 +4,7 @@ Types:Creature Elemental
 Text:no text
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card for each green creature you control.
-SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X | References$ X
 SVar:X:Count$GreenTypeYouCtrl.Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/regal_force.jpg

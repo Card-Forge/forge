@@ -4,7 +4,7 @@ Types:Creature Elemental Cat
 Text:no text
 PT:1/1
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each other creature with flying on the battlefield.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +1/+1 for each other creature with flying on the battlefield.
 A:AB$ Token | Cost$ 2 W U | ActivationZone$ Hand | TokenAmount$ 1 | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ You | TokenColors$ White,Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | ActivationLimit$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep | PrecostDesc$ Forecast - | SpellDescription$ Put a 1/1 white and blue Bird creature token with flying onto the battlefield. (Activate this ability only during your upkeep and only once each turn.)
 SVar:X:Count$Valid Creature.withFlying+Other
 SVar:BuffedBy:Creature.withFlying

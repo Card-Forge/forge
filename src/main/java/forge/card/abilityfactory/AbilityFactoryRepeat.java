@@ -22,6 +22,7 @@ import java.util.HashMap;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.card.cost.Cost;
 import forge.CardList;
 import forge.GameActionUtil;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -57,7 +58,17 @@ public final class AbilityFactoryRepeat {
      * @since 1.0.15
      */
     public static SpellAbility createAbilityRepeat(final AbilityFactory af) {
-        final SpellAbility abRepeat = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityRepeat extends AbilityActivated {
+            public AbilityRepeat(final Card ca, final Cost co, final Target t) {
+                super(ca,co,t);
+            }
+            
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityRepeat(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -8019637116128196482L;
 
             @Override
@@ -79,7 +90,8 @@ public final class AbilityFactoryRepeat {
             public void resolve() {
                 AbilityFactoryRepeat.repeatResolve(af, this);
             }
-        };
+        }
+        final SpellAbility abRepeat = new AbilityRepeat(af.getHostCard(), af.getAbCost(), af.getAbTgt());
 
         return abRepeat;
     }
@@ -133,7 +145,18 @@ public final class AbilityFactoryRepeat {
      * @since 1.0.15
      */
     public static SpellAbility createDrawbackRepeat(final AbilityFactory af) {
-        final SpellAbility dbRepeat = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackRepeat extends AbilitySub {
+            public DrawbackRepeat(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackRepeat(getSourceCard(),new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -3850086157052881036L;
 
             @Override
@@ -160,7 +183,8 @@ public final class AbilityFactoryRepeat {
             public void resolve() {
                 AbilityFactoryRepeat.repeatResolve(af, this);
             }
-        };
+        }
+        final SpellAbility dbRepeat = new DrawbackRepeat(af.getHostCard(), af.getAbTgt());
 
         return dbRepeat;
     }

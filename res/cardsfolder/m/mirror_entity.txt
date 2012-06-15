@@ -4,7 +4,7 @@ Types:Creature Shapeshifter
 Text:no text
 PT:1/1
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
-A:AB$ AnimateAll | Cost$ X | Power$ X | Toughness$ X | Types$ AllCreatureTypes | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control become X/X and gain all creature types until end of turn.
+A:AB$ AnimateAll | Cost$ X | Power$ X | Toughness$ X | References$ X | Types$ AllCreatureTypes | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control become X/X and gain all creature types until end of turn.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

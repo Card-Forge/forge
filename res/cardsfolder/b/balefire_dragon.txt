@@ -5,7 +5,7 @@ Text:no text
 PT:6/6
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, it deals that much damage to each creature that player controls.
-SVar:TrigDamage:AB$ DamageAll | Cost$ 0 | NumDmg$ X | ValidCards$ Creature.YouDontCtrl
+SVar:TrigDamage:AB$ DamageAll | Cost$ 0 | NumDmg$ X | ValidCards$ Creature.YouDontCtrl | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:MustBeBlocked:True
 SVar:Rarity:Mythic

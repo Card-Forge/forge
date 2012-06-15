@@ -47,7 +47,10 @@ class CardFactoryArtifacts {
 
             final String[] choices = { "Citizen", "Camarid", "Thrull", "Goblin", "Saproling" };
             final Player player = card.getController();
-            final SpellAbility ability = new Ability(card, "0") {
+            class SarpadianEmpiresVolVIIETB extends Ability {
+                public SarpadianEmpiresVolVIIETB(final Card c, final String s) {
+                    super(c,s);
+                }
                 @Override
                 public void resolve() {
                     String type = "";
@@ -84,25 +87,36 @@ class CardFactoryArtifacts {
                             }
                         }
                     }
-                    card.setChosenType(type);
+                    getSourceCard().setChosenType(type);
 
                     final String t = type;
                     final String in = imageName;
                     final String col = color;
                     // card.setChosenType(input[0]);
 
-                    final Cost a1Cost = new Cost(card, "3 T", true);
-                    final AbilityActivated a1 = new AbilityActivated(card, a1Cost, null) {
-
+                    class AbilitySarpadianEmpiresVolVII extends AbilityActivated {
+                        
                         private static final long serialVersionUID = -2114111483117171609L;
-
+                        
+                        public AbilitySarpadianEmpiresVolVII(Card ca, Cost co, Target t) {
+                            super(ca,co,t);
+                        }
+                        
+                        @Override
+                        public AbilityActivated getCopy() {
+                            AbilityActivated res = new AbilitySarpadianEmpiresVolVII(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                            CardFactoryUtil.copySpellAbility(this, res);
+                            return res;
+                        }
+                        
                         @Override
                         public void resolve() {
-                            CardFactoryUtil.makeToken(t, in, card.getController(), col, new String[] { "Creature", t },
+                            CardFactoryUtil.makeToken(t, in, getSourceCard().getController(), col, new String[] { "Creature", t },
                                     1, 1, new String[] { "" });
                         }
-
-                    };
+                    }
+                    final Cost a1Cost = new Cost(getSourceCard(), "3 T", true);
+                    final AbilityActivated a1 = new AbilitySarpadianEmpiresVolVII(card, a1Cost, null);
                     final StringBuilder sb = new StringBuilder();
                     sb.append(card.getName()).append(" - ").append(card.getController());
                     sb.append(" puts a 1/1 ").append(t).append(" token onto the battlefield");
@@ -111,6 +125,7 @@ class CardFactoryArtifacts {
                     card.addSpellAbility(a1);
                 }
             }; // ability
+            final SpellAbility ability = new SarpadianEmpiresVolVIIETB(card,"0");
             final Command intoPlay = new Command() {
                 private static final long serialVersionUID = 7202704600935499188L;
 
@@ -226,7 +241,18 @@ class CardFactoryArtifacts {
         // *************** START *********** START **************************
         else if (cardName.equals("Goblin Charbelcher")) {
             final Cost abCost = new Cost(card, "3 T", true);
-            final AbilityActivated ability = new AbilityActivated(card, abCost, new Target(card, "TgtCP")) {
+            class AbilityGoblinCharbelcher extends AbilityActivated {
+                public AbilityGoblinCharbelcher(final Card ca,final Cost co,final Target t) {
+                    super(ca,co,t);
+                }
+                
+                @Override
+                public AbilityActivated getCopy() {
+                    AbilityActivated res = new AbilityGoblinCharbelcher(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                    CardFactoryUtil.copySpellAbility(this, res);
+                    return res;
+                }
+                
                 private static final long serialVersionUID = -840041589720758423L;
 
                 @Override
@@ -271,7 +297,9 @@ class CardFactoryArtifacts {
                         this.getTargetPlayer().addDamage(damage, card);
                     }
                 }
-            };
+            }
+
+            final AbilityActivated ability = new AbilityGoblinCharbelcher(card, abCost, new Target(card, "TgtCP"));
 
             final StringBuilder sb = new StringBuilder();
             sb.append(abCost);
@@ -295,9 +323,18 @@ class CardFactoryArtifacts {
              * next turn's upkeep.
              */
 
-            final Cost abCost = new Cost(card, "1 T Sac<1/CARDNAME>", true);
-            final Target target = new Target(card, "Select target player", new String[] { "Player" });
-            final AbilityActivated ability = new AbilityActivated(card, abCost, target) {
+            class AbilityLodestoneBauble extends AbilityActivated {
+                public AbilityLodestoneBauble(final Card ca,final Cost co,final Target t) {
+                    super(ca,co,t);
+                }
+                
+                @Override
+                public AbilityActivated getCopy() {
+                    AbilityActivated res = new AbilityLodestoneBauble(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                    CardFactoryUtil.copySpellAbility(this, res);
+                    return res;
+                }
+                
                 private static final long serialVersionUID = -6711849408085138636L;
 
                 @Override
@@ -363,7 +400,10 @@ class CardFactoryArtifacts {
                     final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
                     return list.getType("Basic");
                 }
-            }; // ability
+            }
+            final Cost abCost = new Cost(card, "1 T Sac<1/CARDNAME>", true);
+            final Target target = new Target(card, "Select target player", new String[] { "Player" });
+            final AbilityActivated ability = new AbilityLodestoneBauble(card, abCost, target);
 
             final StringBuilder sb = new StringBuilder();
             sb.append(abCost);
@@ -376,9 +416,20 @@ class CardFactoryArtifacts {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Grindstone")) {
-            final Target target = new Target(card, "Select target player", new String[] { "Player" });
-            final Cost abCost = new Cost(card, "3 T", true);
-            final AbilityActivated ab1 = new AbilityActivated(card, abCost, target) {
+            
+            class AbilityGrindstone extends AbilityActivated {
+                public AbilityGrindstone(final Card ca,final Cost co,final Target t) {
+                    super(ca,co,t);
+                }
+                
+                @Override
+                public AbilityActivated getCopy() {
+                    AbilityActivated res = new AbilityGrindstone(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                    CardFactoryUtil.copySpellAbility(this, res);
+                    res.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
+                    return res;
+                }
+                
                 private static final long serialVersionUID = -6281219446216L;
 
                 @Override
@@ -418,7 +469,12 @@ class CardFactoryArtifacts {
                         target.mill(grinding.size());
                     } while (loop);
                 }
-            };
+            }
+            
+            final Target target = new Target(card, "Select target player", new String[] { "Player" });
+            final Cost abCost = new Cost(card, "3 T", true);
+            final AbilityActivated ab1 = new AbilityGrindstone(card, abCost, target);
+            
             ab1.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
             final StringBuilder sb = new StringBuilder();
             sb.append(abCost);
@@ -475,8 +531,18 @@ class CardFactoryArtifacts {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Scroll Rack")) {
-            final Cost abCost = new Cost(card, "1 T", true);
-            final AbilityActivated ability = new AbilityActivated(card, abCost, null) {
+            class AbilityScrollRack extends AbilityActivated {
+                public AbilityScrollRack(final Card ca,final Cost co,final Target t) {
+                    super(ca,co,t);
+                }
+                
+                @Override
+                public AbilityActivated getCopy() {
+                    AbilityActivated res = new AbilityScrollRack(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                    CardFactoryUtil.copySpellAbility(this, res);
+                    return res;
+                }
+                
                 private static final long serialVersionUID = -5588587187720068547L;
 
                 @Override
@@ -549,7 +615,10 @@ class CardFactoryArtifacts {
                 public boolean canPlayAI() {
                     return false;
                 }
-            }; // ability
+            }
+            final Cost abCost = new Cost(card, "1 T", true);
+            final AbilityActivated ability = new AbilityScrollRack(card, abCost, null);
+            
             final StringBuilder sbDesc = new StringBuilder();
             sbDesc.append(abCost);
             sbDesc.append("Exile any number of cards from your hand face down. Put that many cards ");
@@ -616,8 +685,18 @@ class CardFactoryArtifacts {
             sb.append(cardName).append(" - play card without paying its mana cost.");
             freeCast.setStackDescription(sb.toString());
 
-            final Cost abCost = new Cost(card, "5 T", true);
-            final AbilityActivated ability = new AbilityActivated(card, abCost, null) {
+            class AbilityTemporalAperture extends AbilityActivated {
+                public AbilityTemporalAperture(final Card ca,final Cost co,final Target t) {
+                    super(ca,co,t);
+                }
+                
+                @Override
+                public AbilityActivated getCopy() {
+                    AbilityActivated res = new AbilityTemporalAperture(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                    CardFactoryUtil.copySpellAbility(this, res);
+                    return res;
+                }
+                
                 private static final long serialVersionUID = -7328518969488588777L;
 
                 @Override
@@ -652,7 +731,10 @@ class CardFactoryArtifacts {
                 public boolean canPlayAI() {
                     return false;
                 }
-            };
+            }
+            
+            final Cost abCost = new Cost(card, "5 T", true);
+            final AbilityActivated ability = new AbilityTemporalAperture(card, abCost, null);
 
             final StringBuilder sbStack = new StringBuilder();
             sbStack.append(card).append(" - Shuffle your library, then reveal the top card.");

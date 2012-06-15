@@ -5,7 +5,7 @@ Text:no text
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters the battlefield, target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.
 SVar:TrigReveal:AB$ Reveal | Cost$ 0 | Random$ True | RememberRevealed$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBLose
-SVar:DBLose:DB$LoseLife | LifeAmount$ X | Defined$ Targeted | SubAbility$ DBCleanup
+SVar:DBLose:DB$LoseLife | LifeAmount$ X | Defined$ Targeted | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Rarity:Common

@@ -7,8 +7,8 @@ SVar:AnthemPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ +2 | Su
 SVar:RakdosBurn:DB$ DealDamage | Defined$ You | NumDmg$ 1
 R:Event$ DamageDone | ValidSource$ Card.YouCtrl | ValidTarget$ Creature,Player | Hellbent$ True | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ Hellbent - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
 R:Event$ DamageDone | ValidSource$ Card.YouCtrl | ValidTarget$ Creature,Player | Hellbent$ True | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ Hellbent - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
-SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
-SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
+SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare

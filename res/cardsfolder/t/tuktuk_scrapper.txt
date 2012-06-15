@@ -6,7 +6,7 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TuktukDestroy | OptionalDecider$ You | TriggerDescription$ Whenever Tuktuk Scrapper or another Ally enters the battlefield under your control, you may destroy target artifact. If that artifact is put into a graveyard this way, Tuktuk Scrapper deals damage to that artifact's controller equal to the number of Allies you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TuktukDestroy | Secondary$ True | OptionalDecider$ You | TriggerDescription$ Whenever Tuktuk Scrapper or another Ally enters the battlefield under your control, you may destroy target artifact. If that artifact is put into a graveyard this way, Tuktuk Scrapper deals damage to that artifact's controller equal to the number of Allies you control.
 SVar:TuktukDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | RememberDestroyed$ True | SubAbility$ TuktukDamage | SpellDescription$ If that artifact is put into a graveyard this way,
-SVar:TuktukDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:TuktukDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X | References$ X,Y | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$TypeYouCtrl.Ally
 SVar:Y:Remembered$Amount

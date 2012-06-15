@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:*/*
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in your graveyard.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

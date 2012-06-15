@@ -3,10 +3,10 @@ ManaCost:B B
 Types:Creature Human Wizard
 Text:no text
 PT:1/2
-A:AB$ Pump | Cost$ B T | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent with at least two fewer creature cards in his or her graveyard than you | CheckSVar$ X | SVarCompare$ GEY | SubAbility$ DeadKeepersDestroy | StackDescription$ None | SpellDescription$ Choose target opponent who had at least two fewer creature cards in his or her graveyard than you did as you activated this ability. Destroy target nonblack creature he or she controls.
+A:AB$ Pump | Cost$ B T | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent with at least two fewer creature cards in his or her graveyard than you | CheckSVar$ X | SVarCompare$ GEY | SubAbility$ DeadKeepersDestroy | StackDescription$ None | References$ X,Y | SpellDescription$ Choose target opponent who had at least two fewer creature cards in his or her graveyard than you did as you activated this ability. Destroy target nonblack creature he or she controls.
 SVar:DeadKeepersDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack+TargetedPlayerCtrl | TgtPrompt$ Select target nonblack creature targeted player controls
-SVar:X:Count$InYourYard/Minus.2
-SVar:Y:Count$InOppYard
+SVar:X:Count$TypeInYourYard.Creature/Minus.2
+SVar:Y:Count$TypeInOppYard.Creature
 SVar:Z:Remembered$Amount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_dead.jpg

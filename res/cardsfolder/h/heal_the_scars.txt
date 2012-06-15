@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Instant
 Text:no text
 A:SP$ Regenerate | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Regenerate target creature. You gain life equal to that creature's toughness.
-SVar:DBGainLife:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:DBGainLife:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardToughness
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heal_the_scars.jpg

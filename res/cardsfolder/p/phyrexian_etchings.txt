@@ -4,9 +4,9 @@ Types:Enchantment
 Text:no text
 K:Cumulative upkeep:B
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, draw a card for each age counter on CARDNAME.
-SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ X
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ X | References$ X
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigLoseLife | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you lose 2 life for each age counter on it.
-SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | LifeAmount$ Y
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | LifeAmount$ Y | References$ Y
 SVar:X:Count$CardCounters.AGE
 SVar:Y:TriggeredCard$CardCounters.AGE/Times.2
 SVar:RemAIDeck:True

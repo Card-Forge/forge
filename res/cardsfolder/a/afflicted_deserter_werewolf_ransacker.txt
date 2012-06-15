@@ -20,7 +20,7 @@ Text:no text
 PT:5/4
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ Whenever this creature transforms into CARDNAME, you may destroy target artifact. If that artifact is put into a graveyard this way, CARDNAME deals 3 damage to that artifact's controller
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBDamage
-SVar:DBDamage:DB$DealDamage | Cost$ 0 | Defined$ TargetedController | NumDmg$ 3 | SubAbility$ DBCleanup | ConditionCheckSVar$ IsDestroyed | ConditionSVarCompare$ GE1
+SVar:DBDamage:DB$DealDamage | Cost$ 0 | Defined$ TargetedController | NumDmg$ 3 | SubAbility$ DBCleanup | ConditionCheckSVar$ IsDestroyed | ConditionSVarCompare$ GE1 | References$ IsDestroyed
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:IsDestroyed:Count$ThisTurnEntered_Graveyard_from_Battlefield_Artifact.IsRemembered
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.

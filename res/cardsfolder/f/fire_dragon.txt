@@ -5,7 +5,7 @@ Text:no text
 PT:6/6
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage equal to the number of Mountains you control to target creature.
-SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X
 SVar:X:Count$TypeYouCtrl.Mountain
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare

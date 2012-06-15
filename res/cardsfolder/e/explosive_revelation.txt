@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Sorcery
 Text:no text
 A:SP$ DigUntil | Cost$ 3 R R | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Hand | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RememberFound$ True | SubAbility$ Damage | SpellDescription$ Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. CARDNAME deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.
-SVar:Damage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | SubAbility$ DBCleanup
+SVar:Damage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Rarity:Uncommon

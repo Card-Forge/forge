@@ -3,9 +3,9 @@ ManaCost:2 W
 Types:Creature Human Rebel
 Text:no text
 PT:1/3
-A:AB$ Effect | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Name$ Shield Dancing | IsCurse$ True | ReplacementEffects$ DamageShielded | Triggers$ OutOfSight | SVars$ ExileEffect,ReflectDmg,X | RememberObjects$ Targeted | ImprintCards$ Self | AILogic$ Fog | SpellDescription$ The next time target attacking creature would deal combat damage to CARDNAME this turn, that creature deals that damage to itself instead.
+A:AB$ Effect | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Name$ Shield Dancing | IsCurse$ True | ReplacementEffects$ DamageShielded | Triggers$ OutOfSight | SVars$ ExileEffect,ReflectDmg,X | References$ DamageShielded,OutOfSight,ExileEffect,ReflectDmg,X  | RememberObjects$ Targeted | ImprintCards$ Self | AILogic$ Fog | SpellDescription$ The next time target attacking creature would deal combat damage to CARDNAME this turn, that creature deals that damage to itself instead.
 SVar:DamageShielded:Event$ DamageDone | CombatDamage$ True | ValidSource$ Card.IsRemembered | ValidTarget$ Card.IsImprinted | ReplaceWith$ ReflectDmg | Description$ The next time the targeted attacking creature would deal combat damage to Shield Dancer this turn, that creature deals that damage to itself instead.
-SVar:ReflectDmg:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ X | SubAbility$ ExileEffect
+SVar:ReflectDmg:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ X | SubAbility$ ExileEffect | References$ X
 SVar:X:ReplaceCount$DamageAmount
 SVar:OutOfSight:Mode$ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile

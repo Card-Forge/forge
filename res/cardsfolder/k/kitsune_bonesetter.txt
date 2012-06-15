@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Fox Cleric
 Text:no text
 PT:0/1
-A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature | Amount$ 3 | TgtPrompt$ Select target creature | CheckSVar$ X | SVarCompare$ GTY | SpellDescription$ Prevent the next 3 damage that would be dealt to target creature this turn. Activate this ability only if you have more cards in hand than each opponent.
+A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature | Amount$ 3 | TgtPrompt$ Select target creature | CheckSVar$ X | SVarCompare$ GTY | References$ X,Y | SpellDescription$ Prevent the next 3 damage that would be dealt to target creature this turn. Activate this ability only if you have more cards in hand than each opponent.
 SVar:X:Count$InYourHand
 SVar:Y:Count$InOppHand
 SVar:Rarity:Common

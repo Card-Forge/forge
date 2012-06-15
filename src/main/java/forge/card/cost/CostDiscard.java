@@ -188,10 +188,10 @@ public class CostDiscard extends CostPartWithList {
 
             if (discType.equals("Random")) {
                 if (c == null) {
-                    final String sVar = source.getSVar(amount);
+                    final String sVar = ability.getSVar(amount);
                     // Generalize this
                     if (sVar.equals("XChoice")) {
-                        c = CostUtil.chooseXValue(source, handList.size());
+                        c = CostUtil.chooseXValue(source, ability,  handList.size());
                     } else {
                         c = AbilityFactory.calculateAmount(source, amount, ability);
                     }
@@ -205,10 +205,10 @@ public class CostDiscard extends CostPartWithList {
                 handList = handList.getValidCards(validType, activator, ability.getSourceCard());
 
                 if (c == null) {
-                    final String sVar = source.getSVar(amount);
+                    final String sVar = ability.getSVar(amount);
                     // Generalize this
                     if (sVar.equals("XChoice")) {
-                        c = CostUtil.chooseXValue(source, handList.size());
+                        c = CostUtil.chooseXValue(source, ability, handList.size());
                     } else {
                         c = AbilityFactory.calculateAmount(source, amount, ability);
                     }
@@ -257,7 +257,7 @@ public class CostDiscard extends CostPartWithList {
         else {
             Integer c = this.convertAmount();
             if (c == null) {
-                final String sVar = source.getSVar(this.getAmount());
+                final String sVar = ability.getSVar(this.getAmount());
                 if (sVar.equals("XChoice")) {
                     return false;
                 }

@@ -2,7 +2,7 @@ Name:Rumbling Crescendo
 ManaCost:3 R R
 Types:Enchantment
 Text:no text
-A:AB$ Destroy | Cost$ R Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy up to X target lands, where X is the number of verse counters on CARDNAME.
+A:AB$ Destroy | Cost$ R Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ X | References$ X | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy up to X target lands, where X is the number of verse counters on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a verse counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
 SVar:X:Count$CardCounters.VERSE

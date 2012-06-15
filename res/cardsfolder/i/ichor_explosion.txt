@@ -2,7 +2,7 @@ Name:Ichor Explosion
 ManaCost:5 B B
 Types:Sorcery
 Text:no text
-A:SP$ PumpAll | Cost$ 5 B B Sac<1/Creature> | ValidCards$ Creature | IsCurse$ True | NumAtt$ -X | NumDef$ -X | SpellDescription$ All creatures get -X/-X until end of turn, where X is the sacrificed creature's power.
+A:SP$ PumpAll | Cost$ 5 B B Sac<1/Creature> | ValidCards$ Creature | IsCurse$ True | NumAtt$ -X | NumDef$ -X | References$ X | SpellDescription$ All creatures get -X/-X until end of turn, where X is the sacrificed creature's power.
 SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

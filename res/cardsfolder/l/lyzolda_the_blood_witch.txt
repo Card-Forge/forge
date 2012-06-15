@@ -3,8 +3,8 @@ ManaCost:1 B R
 Types:Legendary Creature Human Cleric
 Text:no text
 PT:3/1
-A:AB$DealDamage | Cost$ 2 Sac<1/Creature> | Tgt$TgtCP | NumDmg$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 2 damage to target creature or player if the sacrificed creature was red. Draw a card if the sacrificed creature was black.
-SVar:DBDraw:DB$Draw | NumCards$ 1 | Defined$ You | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
+A:AB$DealDamage | Cost$ 2 Sac<1/Creature> | Tgt$TgtCP | NumDmg$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBDraw | References$ X | SpellDescription$ CARDNAME deals 2 damage to target creature or player if the sacrificed creature was red. Draw a card if the sacrificed creature was black.
+SVar:DBDraw:DB$Draw | NumCards$ 1 | Defined$ You | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | References$ Y
 SVar:X:Sacrificed$Valid Creature.Red
 SVar:Y:Sacrificed$Valid Creature.Black
 SVar:RemAIDeck:True

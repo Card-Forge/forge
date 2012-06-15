@@ -4,7 +4,7 @@ Types:Creature Wombat
 Text:no text
 PT:0/1
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each Aura attached to it.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +2/+2 for each Aura attached to it.
 SVar:X:Count$Valid Aura.Attached/Times.2
 SVar:EnchantMe:Multiple
 SVar:Rarity:Uncommon

@@ -95,8 +95,18 @@ public class AbilityFactoryCounterMagic {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbilityCounter(final AbilityFactory abilityFactory) {
-        final SpellAbility abCounter = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
-                abilityFactory.getAbTgt()) {
+        class AbilityCounter extends AbilityActivated {
+            public AbilityCounter(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityCounter(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -3895990436431818899L;
 
             @Override
@@ -121,8 +131,9 @@ public class AbilityFactoryCounterMagic {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryCounterMagic.this.counterCanPlayAI(AbilityFactoryCounterMagic.this.af, this);
             }
-
-        };
+        }
+        final SpellAbility abCounter = new AbilityCounter(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt());
         return abCounter;
     }
 
@@ -171,7 +182,18 @@ public class AbilityFactoryCounterMagic {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawbackCounter(final AbilityFactory abilityFactory) {
-        final SpellAbility dbCounter = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+        class DrawbackCounter extends AbilitySub {
+            public DrawbackCounter(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackCounter(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4272851734871573693L;
 
             @Override
@@ -201,8 +223,9 @@ public class AbilityFactoryCounterMagic {
                 return AbilityFactoryCounterMagic.this.counterDoTriggerAI(AbilityFactoryCounterMagic.this.af, this,
                         mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbCounter = new DrawbackCounter(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
+        
         return dbCounter;
     }
 

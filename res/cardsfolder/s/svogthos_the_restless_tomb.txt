@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
-A:AB$ Animate | Cost$ 3 B G | Defined$ Self | Types$ Creature,Zombie,Plant | Colors$ Black,Green | staticAbilities$ Static | SpellDescription$ Until end of turn, CARDNAME becomes a black and green Plant Zombie creature with "This creature's power and toughness are each equal to the number of creature cards in your graveyard." It's still a land.
+A:AB$ Animate | Cost$ 3 B G | Defined$ Self | Types$ Creature,Zombie,Plant | Colors$ Black,Green | staticAbilities$ Static | References$ X | SpellDescription$ Until end of turn, CARDNAME becomes a black and green Plant Zombie creature with "This creature's power and toughness are each equal to the number of creature cards in your graveyard." It's still a land.
 SVar:Static:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to the number of creature cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True

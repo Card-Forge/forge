@@ -4,7 +4,7 @@ Types:Creature Wurm
 Text:no text
 PT:6/6
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.
-SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ -X | NumDef$ -Y
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ -X | NumDef$ -Y | References$ X,Y
 SVar:X:SVar$Y/Twice
 SVar:Y:TriggerCount$NumBlockers/Minus.1
 SVar:Rarity:Uncommon

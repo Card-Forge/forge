@@ -4,7 +4,7 @@ Types:Creature Boar Beast
 Text:no text
 PT:2/2
 K:Bloodthirst 1
-A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | SpellDescription$ You gain life equal to CARDNAME's power.
+A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to CARDNAME's power.
 SVar:X:Sacrificed$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gristleback.jpg

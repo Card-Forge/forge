@@ -97,7 +97,7 @@ public class CostTapType extends CostPartWithList {
     @Override
     public final void refund(final Card source) {
         for (final Card c : this.getList()) {
-            c.untap();
+            c.setTapped(false);
         }
 
         this.getList().clear();
@@ -158,10 +158,10 @@ public class CostTapType extends CostPartWithList {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {
-            final String sVar = source.getSVar(amount);
+            final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = CostUtil.chooseXValue(source, typeList.size());
+                c = CostUtil.chooseXValue(source, ability, typeList.size());
             } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
@@ -184,7 +184,7 @@ public class CostTapType extends CostPartWithList {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {
-            final String sVar = source.getSVar(amount);
+            final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 CardList typeList = ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
                 typeList = typeList.getValidCards(this.getType().split(";"), ability.getActivatingPlayer(),

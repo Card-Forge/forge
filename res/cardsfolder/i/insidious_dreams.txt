@@ -2,7 +2,7 @@ Name:Insidious Dreams
 ManaCost:3 B
 Types:Instant
 Text:no text
-A:SP$ ChangeZone | Cost$ 3 B Discard<X/Card> | Origin$ Library | Destination$ Library | ChangeType$ Card | ChangeNum$ ChosenX | LibraryPosition$ 0 | SpellDescription$ Search your library for X cards. Then shuffle your library and put those cards on top of it in any order.
+A:SP$ ChangeZone | Cost$ 3 B Discard<X/Card> | Origin$ Library | Destination$ Library | ChangeType$ Card | ChangeNum$ ChosenX | LibraryPosition$ 0 | References$ X | SpellDescription$ Search your library for X cards. Then shuffle your library and put those cards on top of it in any order.
 SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

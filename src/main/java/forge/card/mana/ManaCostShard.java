@@ -285,7 +285,7 @@ public class ManaCostShard {
                 return element;
             }
         }
-        throw new RuntimeException(String.format("Not fount: mana shard with profile = %x", atoms));
+        throw new RuntimeException(String.format("Not found: mana shard with profile = %x", atoms));
     }
 
     /*

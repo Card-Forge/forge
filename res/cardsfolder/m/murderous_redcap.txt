@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Persist
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage equal to its power to target creature or player.
-SVar:TrigDealDamage:DB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ X
+SVar:TrigDealDamage:DB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ X | References$ X
 SVar:X:Count$CardPower
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon

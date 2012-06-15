@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant
 Text:no text
 A:SP$ ChooseType | Cost$ W | Defined$ You | Type$ Creature | SubAbility$ DBDealDamage | SpellDescription$ Choose a creature type. CARDNAME deals damage to target attacking or blocking creature equal to the number of permanents you control of the chosen type.
-SVar:DBDealDamage:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X
+SVar:DBDealDamage:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | References$ X
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Common

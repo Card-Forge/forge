@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Sorcery
 Text:no text
 #for this AF, the DefinedCards$ Self is the target for Each damaging.  They EachDamage themselves.
-A:SP$ EachDamage | Cost$ 4 W | ValidCards$ Creature | NumDmg$ X | DamageDesc$ damage equal to its power | DefinedCards$ Self | SpellDescription$ Each creature deals damage to itself equal to its power.
+A:SP$ EachDamage | Cost$ 4 W | ValidCards$ Creature | NumDmg$ X | References$ X | DamageDesc$ damage equal to its power | DefinedCards$ Self | SpellDescription$ Each creature deals damage to itself equal to its power.
 #NumDmg isn't really used here.  It is left for clarity.  The AF pulls Damage straight from "X" hardcoded.
 SVar:X:Count$CardPower
 SVar:RemAIDeck:True

@@ -3,7 +3,7 @@ ManaCost:3 U U
 Types:Sorcery Arcane
 Text:no text
 A:SP$ Mill | Cost$ 3 U U | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ TrigDraw | SpellDescription$ Put the top card of your library into your graveyard, then draw cards equal to that card's converted mana cost.
-SVar:TrigDraw:DB$Draw | NumCards$ X | SubAbility$ DBCleanup
+SVar:TrigDraw:DB$Draw | NumCards$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Rarity:Uncommon

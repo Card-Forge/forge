@@ -2,7 +2,7 @@ Name:Gerrard's Wisdom
 ManaCost:2 W W
 Types:Sorcery
 Text:no text
-A:SP$ GainLife | Cost$ 2 W W | LifeAmount$ X | SpellDescription$ You gain 2 life for each card in your hand.
+A:SP$ GainLife | Cost$ 2 W W | LifeAmount$ X | References$ X | SpellDescription$ You gain 2 life for each card in your hand.
 SVar:X:Count$CardsInYourHand/Times.2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrards_wisdom.jpg

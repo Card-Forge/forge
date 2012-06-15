@@ -2,7 +2,7 @@ Name:Ire of Kaminari
 ManaCost:3 R
 Types:Instant Arcane
 Text:no text
-A:SP$ DealDamage | Cost$ 3 R | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ Ire of Kaminari deals damage to target creature or player equal to the number of Arcane cards in your graveyard.
+A:SP$ DealDamage | Cost$ 3 R | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ Ire of Kaminari deals damage to target creature or player equal to the number of Arcane cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Arcane
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Spirit
 Text:no text
 PT:2/1
-A:AB$ Destroy | Cost$ X Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact with converted mana cost X.
+A:AB$ Destroy | Cost$ X Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | References$ X | SpellDescription$ Destroy target artifact with converted mana cost X.
 # It may seem wrong to not use X in the target, but since the Target is what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True

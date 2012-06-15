@@ -4,7 +4,7 @@ Types:Artifact Creature Construct
 Text:no text
 PT:1/2
 A:AB$ Reveal | Cost$ T | RevealValid$ Card.Artifact+YouCtrl | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBMetalWorkerMana | SpellDescription$ Reveal any number of artifact cards in your hand. Add 2 to your mana pool for each card revealed this way.
-SVar:DBMetalWorkerMana:DB$ Mana | Produced$ 1 | Amount$ MetalWorkerX | SubAbility$ DBMetalWorkerCleanup
+SVar:DBMetalWorkerMana:DB$ Mana | Produced$ 1 | Amount$ MetalWorkerX | References$ X | SubAbility$ DBMetalWorkerCleanup
 SVar:DBMetalWorkerCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MetalWorkerX:Remembered$Amount.Twice
 SVar:RemAIDeck:True

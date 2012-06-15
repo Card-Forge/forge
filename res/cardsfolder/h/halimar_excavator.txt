@@ -5,7 +5,7 @@ Text:no text
 PT:1/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, target player puts the top X cards of his or her library into his or her graveyard, where X is the number of Allies you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, target player puts the top X cards of his or her library into his or her graveyard, where X is the number of Allies you control.
-SVar:TrigMill:AB$Mill | Cost$ 0 | ValidTgts$ Player | NumCards$ X | TgtPrompt$ Select a target player. | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of Allies you control.
+SVar:TrigMill:AB$Mill | Cost$ 0 | ValidTgts$ Player | NumCards$ X | TgtPrompt$ Select a target player. | References$ X | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of Allies you control.
 SVar:X:Count$Valid Ally.YouCtrl
 SVar:BuffedBy:Ally
 SVar:Rarity:Uncommon

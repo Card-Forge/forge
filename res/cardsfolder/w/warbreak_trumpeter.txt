@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 K:Morph:X X R
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME is turned face up, put X 1/1 red Goblin creature tokens onto the battlefield.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

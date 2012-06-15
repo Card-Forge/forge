@@ -19,6 +19,7 @@ package forge.card.spellability;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import forge.Card;
 import forge.CardList;
@@ -126,6 +127,20 @@ public abstract class SpellAbility {
     };
 
     private CardList tappedForConvoke = new CardList();
+    
+    private HashMap<String,String> sVars = new HashMap<String,String>();
+    
+    public final String getSVar(final String name) {
+        return sVars.get(name) != null ? sVars.get(name) : "";
+    }
+    
+    public final void setSVar(final String name, final String value) {
+        sVars.put(name,value);
+    }
+    
+    public Set<String> getSVars() {
+        return sVars.keySet();
+    }
 
     /**
      * <p>

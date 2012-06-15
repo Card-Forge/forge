@@ -2,7 +2,7 @@ Name:Dreadwaters
 ManaCost:3 U
 Types:Sorcery
 Text:no text
-A:SP$ Mill | Cost$ 3 U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of lands you control.
+A:SP$ Mill | Cost$ 3 U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreadwaters.jpg

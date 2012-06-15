@@ -2,7 +2,7 @@ Name:Venarian Glimmer
 ManaCost:X U
 Types:Instant
 Text:no text
-A:SP$ Discard | Cost$ X U | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand+cmcLEX | NumCards$ 1 | SpellDescription$ Target player reveals his or her hand. You choose a nonland card with converted mana cost X or less from it. That player discards that card.
+A:SP$ Discard | Cost$ X U | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand+cmcLEX | References$ X | NumCards$ 1 | SpellDescription$ Target player reveals his or her hand. You choose a nonland card with converted mana cost X or less from it. That player discards that card.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

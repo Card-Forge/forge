@@ -4,7 +4,7 @@ Types:Artifact Creature Golem
 Text:no text
 PT:*/*
 K:Fading:5
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of fade counters on CARDNAME.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of fade counters on CARDNAME.
 SVar:X:Count$CardCounters.FADE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rusting_golem.jpg

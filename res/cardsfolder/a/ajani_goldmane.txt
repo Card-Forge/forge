@@ -6,7 +6,7 @@ Loyalty:4
 A:AB$ GainLife | Cost$ AddCounter<1/LOYALTY> | LifeAmount$ 2 | Planeswalker$ True | SpellDescription$ You gain 2 life.
 A:AB$ PutCounterAll | Cost$ SubCounter<1/LOYALTY> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | Planeswalker$ True | SubAbility$ DBPumpAll | SpellDescription$ Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance
-A:AB$ Token | Cost$ SubCounter<6/LOYALTY> | TokenAmount$ 1 | TokenName$ Avatar | TokenTypes$ Creature,Avatar | TokenOwner$ You | TokenColors$ White | TokenPower$ X | TokenToughness$ X | TokenStaticAbilities$ Static | TokenSVars$ X | Planeswalker$ True | Ultimate$ True | SpellDescription$ Put a white Avatar creature token onto the battlefield. It has "This creature's power and toughness are each equal to your life total."
+A:AB$ Token | Cost$ SubCounter<6/LOYALTY> | TokenAmount$ 1 | TokenName$ Avatar | TokenTypes$ Creature,Avatar | TokenOwner$ You | TokenColors$ White | TokenPower$ X | TokenToughness$ X | TokenStaticAbilities$ Static | TokenSVars$ X | Planeswalker$ True | Ultimate$ True | References$ X | SpellDescription$ Put a white Avatar creature token onto the battlefield. It has "This creature's power and toughness are each equal to your life total."
 SVar:Static:Mode$ Continuous | SetPower$ X | SetToughness$ X | CharacteristicDefining$ True | Description$ This creature's power and toughness are each equal to your life total.
 SVar:X:Count$YourLifeTotal
 SVar:Rarity:Mythic

@@ -2,7 +2,7 @@ Name:Oppressive Will
 ManaCost:2 U
 Types:Instant
 Text:no text
-A:SP$ Counter | Cost$ 2 U | Type $ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays 1 for each card in your hand.
+A:SP$ Counter | Cost$ 2 U | Type $ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | References$ X | SpellDescription$ Counter target spell unless its controller pays 1 for each card in your hand.
 SVar:X:Count$InYourHand
 SVar:RemAIDeck:True
 SVar:Rarity:Common

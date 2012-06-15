@@ -7,7 +7,7 @@ K:Defender
 K:Flying
 A:AB$ ChangeZoneAll | Cost$ T | ChangeType$ Creature.blockedBySource | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ JellyBounceSelf | SpellDescription$ Put CARDNAME and each creature it's blocking on top of their owners' libraries, then those players shuffle their libraries.
 SVar:JellyBounceSelf:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SubAbility$ WobbleOppJelly
-SVar:WobbleOppJelly:DB$ Shuffle | Defined$ Opponent | SubAbility$ WobbleYourJelly | ConditionCheckSVar$ X
+SVar:WobbleOppJelly:DB$ Shuffle | Defined$ Opponent | SubAbility$ WobbleYourJelly | ConditionCheckSVar$ X | References$ X
 SVar:WobbleYourJelly:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

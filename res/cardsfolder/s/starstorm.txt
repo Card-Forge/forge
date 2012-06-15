@@ -3,7 +3,7 @@ ManaCost:X R R
 Types:Instant
 Text:no text
 K:Cycling:3
-A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature.
+A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to each creature.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

@@ -2,8 +2,8 @@ Name:Banefire
 ManaCost:X R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X | ConditionCheckSVar$ X | ConditionSVarCompare$ LT5 | SubAbility$ BanefulDmg | SpellDescription$ CARDNAME deals X damage to target creature or player.
-SVar:BanefulDmg:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | NoPrevention$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5
+A:SP$ DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X | ConditionCheckSVar$ X | ConditionSVarCompare$ LT5 | SubAbility$ BanefulDmg | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
+SVar:BanefulDmg:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | NoPrevention$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | References$ X
 S:Mode$ Continuous | Affected$ Self | AffectedZone$ Stack | EffectZone$ All | CharacteristicDefining$ True | AddHiddenKeyword$ HIDDEN CARDNAME can't be countered. | CheckSVar$ X | SVarCompare$ GE5 | Description$ If X is 5 or more, CARDNAME can't be countered by spells or abilities and the damage can't be prevented.
 SVar:X:Count$xPaid
 Var:PayX:5

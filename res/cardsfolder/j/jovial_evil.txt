@@ -2,7 +2,7 @@ Name:Jovial Evil
 ManaCost:2 B
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ 2 B | ValidTgts$ Opponent | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target opponent, where X is twice the number of white creatures that player controls.
+A:SP$ DealDamage | Cost$ 2 B | ValidTgts$ Opponent | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target opponent, where X is twice the number of white creatures that player controls.
 SVar:X:Count$NumTypeWhiteOppCtrl.Creature/Twice
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

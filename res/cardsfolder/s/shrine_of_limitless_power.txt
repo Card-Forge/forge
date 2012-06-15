@@ -5,7 +5,7 @@ Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | TriggerDescription$ At the beginning of your upkeep or whenever you cast a black spell, put a charge counter on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | Secondary$ True | TriggerDescription$ At the beginning of your upkeep or whenever you cast a black spell, put a charge counter on CARDNAME.
 SVar:TrigAddCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
-A:AB$ Discard | Cost$ 4 T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Target player discards a card for each charge counter on CARDNAME.
+A:AB$ Discard | Cost$ 4 T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | Mode$ TgtChoose | References$ X | SpellDescription$ Target player discards a card for each charge counter on CARDNAME.
 SVar:X:Sacrificed$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

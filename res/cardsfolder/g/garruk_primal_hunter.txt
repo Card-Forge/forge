@@ -4,7 +4,7 @@ Types:Planeswalker Garruk
 Text:no text
 Loyalty:3
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put a 3/3 green Beast creature token onto the battlefield.
-A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ X | SpellDescription$ Draw cards equal to the greatest power among creatures you control.
+A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ X | References$ X | SpellDescription$ Draw cards equal to the greatest power among creatures you control.
 SVar:X:Count$GreatestPowerYouControl
 A:AB$ Token | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | TokenAmount$ Y | TokenName$ Wurm | TokenTypes$ Creature,Wurm | TokenOwner$ You | TokenColors$ Green | TokenPower$ 6 | TokenToughness$ 6 | SpellDescription$ Put a 6/6 green Wurm creature token onto the battlefield for each land you control.
 SVar:Y:Count$Valid Land.YouCtrl

@@ -1041,6 +1041,7 @@ res/cardsfolder/b/bone_dancer.txt -text
 res/cardsfolder/b/bone_flute.txt svneol=native#text/plain
 res/cardsfolder/b/bone_harvest.txt svneol=native#text/plain
 res/cardsfolder/b/bone_saw.txt svneol=native#text/plain
+res/cardsfolder/b/bone_shaman.txt -text
 res/cardsfolder/b/bone_shredder.txt svneol=native#text/plain
 res/cardsfolder/b/bone_splinters.txt svneol=native#text/plain
 res/cardsfolder/b/bone_to_ash.txt -text
@@ -1087,6 +1088,7 @@ res/cardsfolder/b/bounteous_kirin.txt svneol=native#text/plain
 res/cardsfolder/b/bountiful_harvest.txt svneol=native#text/plain
 res/cardsfolder/b/bounty_hunter.txt svneol=native#text/plain
 res/cardsfolder/b/bower_passage.txt -text
+res/cardsfolder/b/brace_for_impact.txt -text
 res/cardsfolder/b/brackwater_elemental.txt svneol=native#text/plain
 res/cardsfolder/b/braid_of_fire.txt svneol=native#text/plain
 res/cardsfolder/b/braids_cabal_minion.txt svneol=native#text/plain
@@ -7756,6 +7758,7 @@ res/cardsfolder/s/sage_owl.txt svneol=native#text/plain
 res/cardsfolder/s/sages_dousing.txt svneol=native#text/plain
 res/cardsfolder/s/sages_knowledge.txt svneol=native#text/plain
 res/cardsfolder/s/sages_of_the_anima.txt -text
+res/cardsfolder/s/sai_of_the_shinobi.txt -text
 res/cardsfolder/s/sailmonger.txt svneol=native#text/plain
 res/cardsfolder/s/sakashima_the_impostor.txt -text
 res/cardsfolder/s/sakura_tribe_elder.txt svneol=native#text/plain
@@ -11654,7 +11657,7 @@ src/main/java/forge/Card.java svneol=native#text/plain
 src/main/java/forge/CardCharactersticName.java -text
 src/main/java/forge/CardColor.java svneol=native#text/plain
 src/main/java/forge/CardDamageHistory.java -text
-src/main/java/forge/CardKeywords.java -text svneol=native#text/plain
+src/main/java/forge/CardKeywords.java svneol=native#text/plain
 src/main/java/forge/CardList.java svneol=native#text/plain
 src/main/java/forge/CardListFilter.java svneol=native#text/plain
 src/main/java/forge/CardListUtil.java svneol=native#text/plain
@@ -11858,7 +11861,7 @@ src/main/java/forge/control/FControl.java -text
 src/main/java/forge/control/KeyboardShortcuts.java -text
 src/main/java/forge/control/RestartUtil.java -text
 src/main/java/forge/control/bazaar/ControlStall.java -text
-src/main/java/forge/control/bazaar/package-info.java -text svneol=native#text/plain
+src/main/java/forge/control/bazaar/package-info.java svneol=native#text/plain
 src/main/java/forge/control/input/Input.java svneol=native#text/plain
 src/main/java/forge/control/input/InputAttack.java svneol=native#text/plain
 src/main/java/forge/control/input/InputBlock.java svneol=native#text/plain
@@ -11927,7 +11930,7 @@ src/main/java/forge/game/phase/PhaseType.java -text
 src/main/java/forge/game/phase/PhaseUtil.java svneol=native#text/plain
 src/main/java/forge/game/phase/Untap.java -text
 src/main/java/forge/game/phase/Upkeep.java svneol=native#text/plain
-src/main/java/forge/game/phase/package-info.java -text svneol=native#text/plain
+src/main/java/forge/game/phase/package-info.java svneol=native#text/plain
 src/main/java/forge/game/player/AIPlayer.java svneol=native#text/plain
 src/main/java/forge/game/player/Computer.java svneol=native#text/plain
 src/main/java/forge/game/player/ComputerAIGeneral.java svneol=native#text/plain
@@ -11939,14 +11942,14 @@ src/main/java/forge/game/player/HumanPlayer.java svneol=native#text/plain
 src/main/java/forge/game/player/Player.java svneol=native#text/plain
 src/main/java/forge/game/player/PlayerType.java svneol=native#text/plain
 src/main/java/forge/game/player/PlayerUtil.java svneol=native#text/plain
-src/main/java/forge/game/player/package-info.java -text svneol=native#text/plain
+src/main/java/forge/game/player/package-info.java svneol=native#text/plain
 src/main/java/forge/game/zone/DefaultPlayerZone.java svneol=native#text/plain
 src/main/java/forge/game/zone/IPlayerZone.java svneol=native#text/plain
 src/main/java/forge/game/zone/MagicStack.java svneol=native#text/plain
 src/main/java/forge/game/zone/PlayerZone.java svneol=native#text/plain
 src/main/java/forge/game/zone/PlayerZoneComesIntoPlay.java svneol=native#text/plain
 src/main/java/forge/game/zone/ZoneType.java -text
-src/main/java/forge/game/zone/package-info.java -text svneol=native#text/plain
+src/main/java/forge/game/zone/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/CardContainer.java svneol=native#text/plain
 src/main/java/forge/gui/CardDetailPanel.java svneol=native#text/plain
 src/main/java/forge/gui/CardListViewer.java -text
@@ -12027,7 +12030,7 @@ src/main/java/forge/gui/framework/SLayoutIO.java -text
 src/main/java/forge/gui/framework/SOverflowUtil.java -text
 src/main/java/forge/gui/framework/SRearrangingUtil.java -text
 src/main/java/forge/gui/framework/SResizingUtil.java -text
-src/main/java/forge/gui/framework/package-info.java -text svneol=native#text/plain
+src/main/java/forge/gui/framework/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/CMainMenu.java -text
 src/main/java/forge/gui/home/EMenuGroup.java -text
 src/main/java/forge/gui/home/EMenuItem.java -text
@@ -12086,13 +12089,13 @@ src/main/java/forge/gui/match/controllers/CMessage.java -text
 src/main/java/forge/gui/match/controllers/CPicture.java -text
 src/main/java/forge/gui/match/controllers/CPlayers.java -text
 src/main/java/forge/gui/match/controllers/CStack.java -text
-src/main/java/forge/gui/match/controllers/package-info.java -text svneol=native#text/plain
+src/main/java/forge/gui/match/controllers/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/match/nonsingleton/CField.java -text
 src/main/java/forge/gui/match/nonsingleton/CHand.java -text
 src/main/java/forge/gui/match/nonsingleton/VField.java -text
 src/main/java/forge/gui/match/nonsingleton/VHand.java -text
-src/main/java/forge/gui/match/nonsingleton/package-info.java -text svneol=native#text/plain
-src/main/java/forge/gui/match/package-info.java -text svneol=native#text/plain
+src/main/java/forge/gui/match/nonsingleton/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/match/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/match/views/VAntes.java -text
 src/main/java/forge/gui/match/views/VCombat.java -text
 src/main/java/forge/gui/match/views/VDetail.java -text
@@ -12103,7 +12106,7 @@ src/main/java/forge/gui/match/views/VMessage.java -text
 src/main/java/forge/gui/match/views/VPicture.java -text
 src/main/java/forge/gui/match/views/VPlayers.java -text
 src/main/java/forge/gui/match/views/VStack.java -text
-src/main/java/forge/gui/match/views/package-info.java -text svneol=native#text/plain
+src/main/java/forge/gui/match/views/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/CardFaceSymbols.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/CardViewer.java -text
@@ -12214,7 +12217,7 @@ src/main/java/forge/util/closures/Lambda1.java svneol=native#text/plain
 src/main/java/forge/util/closures/Predicate.java -text
 src/main/java/forge/util/closures/PredicateInteger.java -text
 src/main/java/forge/util/closures/PredicateString.java -text
-src/main/java/forge/util/closures/package-info.java -text svneol=native#text/plain
+src/main/java/forge/util/closures/package-info.java svneol=native#text/plain
 src/main/java/forge/util/package-info.java -text
 src/main/java/forge/view/ButtonUtil.java svneol=native#text/plain
 src/main/java/forge/view/FView.java -text
@@ -12244,7 +12247,7 @@ src/main/java/net/slightlymagic/braids/BraidsProgressMonitor.java svneol=native#
 src/main/java/net/slightlymagic/braids/FindNonDirectoriesSkipDotDirectoriesGenerator.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/GeneratorFunctions.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain
-src/main/java/net/slightlymagic/braids/package-info.java -text svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/package-info.java svneol=native#text/plain
 src/main/java/tree/properties/PropertyElement.java svneol=native#text/plain
 src/main/java/tree/properties/PropertyType.java svneol=native#text/plain
 src/main/java/tree/properties/TreeProperties.java svneol=native#text/plain

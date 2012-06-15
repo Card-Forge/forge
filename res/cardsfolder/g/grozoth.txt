@@ -5,7 +5,7 @@ Text:no text
 PT:9/9
 K:Defender
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for any number of cards that have converted mana cost 9, reveal them, and put them into your hand. If you do, shuffle your library.
-SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcEQ9 | ChangeNum$ X
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcEQ9 | ChangeNum$ X | References$ X
 A:AB$ Debuff | Cost$ 4 | Keywords$ Defender | Defined$ Self | SpellDescription$ CARDNAME loses defender until end of turn.
 K:Transmute:1 U U
 SVar:X:Count$InYourLibrary

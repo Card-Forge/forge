@@ -2,7 +2,7 @@ Name:Serpent Generator
 ManaCost:6
 Types:Artifact
 Text:no text
-A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Snake | TokenTypes$ Artifact,Creature,Snake | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenTriggers$ TrigTokenPoison | SpellDescription$ Put a 1/1 colorless Snake artifact creature token onto the battlefield. This creature has "Whenever this creature deals damage to a player, that player gets a poison counter." (A player with ten or more poison counters loses the game.)
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Snake | TokenTypes$ Artifact,Creature,Snake | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenTriggers$ TrigTokenPoison,TrigPoison | References$ TrigTokenPoison | SpellDescription$ Put a 1/1 colorless Snake artifact creature token onto the battlefield. This creature has "Whenever this creature deals damage to a player, that player gets a poison counter." (A player with ten or more poison counters loses the game.)
 SVar:TrigTokenPoison:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigPoison | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals damage to a player, that player gets a poison counter.
 SVar:TrigPoison:AB$ Poison | Cost$ 0 | Defined$ TriggeredTarget | Num$ 1
 SVar:Rarity:Rare

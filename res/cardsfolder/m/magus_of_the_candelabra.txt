@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Human Wizard
 Text:no text
 PT:1/2
-A:AB$ Untap | Cost$ X T | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Land | TgtPrompt$ Select target Land | SpellDescription$ Untap X target lands.
+A:AB$ Untap | Cost$ X T | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | ValidTgts$ Land | TgtPrompt$ Select target Land | SpellDescription$ Untap X target lands.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Land

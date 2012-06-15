@@ -22,8 +22,10 @@ import java.util.HashMap;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 
 // Cleanup is not the same as other AFs, it is only used as a Drawback, and only used to Cleanup particular card states
 // That need to be reset. I'm creating this to clear Remembered Cards at the
@@ -53,7 +55,18 @@ public final class AbilityFactoryCleanup {
      * @return a {@link forge.card.spellability.AbilitySub} object.
      */
     public static AbilitySub getDrawback(final AbilityFactory af) {
-        final AbilitySub drawback = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackCleanup extends AbilitySub {
+            public DrawbackCleanup(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackCleanup(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 6192972525033429820L;
 
             @Override
@@ -70,7 +83,8 @@ public final class AbilityFactoryCleanup {
             public void resolve() {
                 AbilityFactoryCleanup.doResolve(af, this);
             }
-        };
+        }
+        final AbilitySub drawback = new DrawbackCleanup(af.getHostCard(), af.getAbTgt());
 
         return drawback;
     }

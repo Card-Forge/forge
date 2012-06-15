@@ -4,7 +4,7 @@ Types:Creature Sliver
 Text:no text
 PT:3/3
 T:Mode$ DamageDone | ValidSource$ Sliver | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Sliver deals damage, its controller gains that much life.
-SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ TriggeredSourceController | LifeAmount$ X
+SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ TriggeredSourceController | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare

@@ -2,7 +2,7 @@ Name:Tainted Sigil
 ManaCost:1 W B
 Types:Artifact
 Text:no text
-A:AB$ GainLife | Cost$ T Sac<1/CARDNAME> | LifeAmount$ X | SpellDescription$ You gain life equal to the total life lost by all players this turn. (Damage causes loss of life.)
+A:AB$ GainLife | Cost$ T Sac<1/CARDNAME> | LifeAmount$ X | References$ X,Y | SpellDescription$ You gain life equal to the total life lost by all players this turn. (Damage causes loss of life.)
 SVar:X:Count$LifeYouLostThisTurn/Plus.Y
 SVar:Y:Count$LifeOppLostThisTurn
 SVar:Rarity:Uncommon

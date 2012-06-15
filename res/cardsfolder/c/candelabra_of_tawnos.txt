@@ -2,7 +2,7 @@ Name:Candelabra of Tawnos
 ManaCost:1
 Types:Artifact
 Text:no text
-A:AB$ Untap | Cost$ X T | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Land | TgtPrompt$ Select target Land | SpellDescription$ Untap X target lands.
+A:AB$ Untap | Cost$ X T | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Land | TgtPrompt$ Select target Land | References$ X,MaxTgts | SpellDescription$ Untap X target lands.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Land

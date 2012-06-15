@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. If CARDNAME was kicked, it deals damage equal to that creature's power to the creature's controller.
 A:SP$ Destroy | Cost$ 4 B R | SetAsKicked$ True | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SubAbility$ DBDamage | SpellDescription$ Kicker 1 R (You may pay an additional 1 R as you cast this spell.)
-SVar:DBDamage:DB$DealDamage | Cost$ 0 | Defined$ TargetedController | NumDmg$ X
+SVar:DBDamage:DB$DealDamage | Cost$ 0 | Defined$ TargetedController | NumDmg$ X | References$ X
 SVar:X:Targeted$CardPower
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agonizing_demise.jpg

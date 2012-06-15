@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SubAbility$ DBDraw | SpellDescription$ Counter target spell unless its controller pays 2. Draw a card for each time CARDNAME was kicked.
 K:Multikicker 1 U
-SVar:DBDraw:DB$Draw | NumCards$ X
+SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X
 SVar:X:Count$TimesKicked
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

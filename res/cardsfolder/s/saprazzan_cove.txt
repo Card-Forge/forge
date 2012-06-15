@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ PutCounter | Cost$ T | Defined$ Self | CounterType$ STORAGE | CounterNum$ 1 | SpellDescription$ Put a storage counter on CARDNAME.
-A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ U | Amount$ ChosenX | CostDesc$ Tap, Remove any number of storage counters from CARDNAME: | SpellDescription$ Add U to your mana pool for each storage counter removed this way.
+A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ U | Amount$ ChosenX | CostDesc$ Tap, Remove any number of storage counters from CARDNAME: | References$ X | SpellDescription$ Add U to your mana pool for each storage counter removed this way.
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True

@@ -6,7 +6,7 @@ A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one man
 A:AB$ PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGetMana | TriggerDescription$ At the beginning of your precombat main phase, remove all charge counters from CARDNAME. Add one mana of any color to your mana pool for each charge counter removed this way.
 SVar:TrigGetMana:AB$ Mana | Cost$ 0 | Produced$ Any | Amount$ X | SubAbility$ TrigRemove | SpellDescription$ Add one mana of any color to your mana pool for each charge counter removed this way.
-SVar:TrigRemove:DB$ RemoveCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ X
+SVar:TrigRemove:DB$ RemoveCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ X | References$ X
 SVar:X:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

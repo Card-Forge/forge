@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Instant
 Text:no text
 A:SP$ Reveal | Cost$ 1 U | Defined$ You | RevealValid$ Card.Blue | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBScentOfBrineCounter | SpellDescription$ Reveal any number of blue cards in your hand. Counter target spell unless its controller pays 1 for each card revealed this way.
-SVar:DBScentOfBrineCounter:DB$ Counter | Cost$ 0 | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ ScentOfBrineX | SubAbility$ DBScentOfBrineCleanup
+SVar:DBScentOfBrineCounter:DB$ Counter | Cost$ 0 | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ ScentOfBrineX | SubAbility$ DBScentOfBrineCleanup | References$ ScentOfBrineX
 SVar:DBScentOfBrineCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:ScentOfBrineX:Remembered$Amount
 SVar:RemAIDeck:True

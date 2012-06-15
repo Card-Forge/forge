@@ -26,6 +26,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
+import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
 import forge.GameEntity;
@@ -152,8 +153,18 @@ public class AbilityFactoryPump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbilityPump() {
-        final SpellAbility abPump = new AbilityActivated(this.hostCard, this.abilityFactory.getAbCost(),
-                this.abilityFactory.getAbTgt()) {
+        class AbilityPump extends AbilityActivated {
+            public AbilityPump(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityPump(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -1118592153328758083L;
 
             @Override
@@ -175,8 +186,9 @@ public class AbilityFactoryPump {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPump.this.pumpTriggerAI(AbilityFactoryPump.this.abilityFactory, this, mandatory);
             }
-
-        }; // SpellAbility
+        }
+        final SpellAbility abPump = new AbilityPump(this.hostCard, this.abilityFactory.getAbCost(),
+                this.abilityFactory.getAbTgt());
 
         return abPump;
     }
@@ -189,7 +201,18 @@ public class AbilityFactoryPump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawbackPump() {
-        final SpellAbility dbPump = new AbilitySub(this.hostCard, this.abilityFactory.getAbTgt()) {
+        class DrawbackPump extends AbilitySub {
+            public DrawbackPump(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackPump(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 42244224L;
 
             @Override
@@ -216,7 +239,8 @@ public class AbilityFactoryPump {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPump.this.pumpTriggerAI(AbilityFactoryPump.this.abilityFactory, this, mandatory);
             }
-        }; // SpellAbility
+        }
+        final SpellAbility dbPump = new DrawbackPump(this.hostCard, this.abilityFactory.getAbTgt()); // SpellAbility
 
         return dbPump;
     }
@@ -768,8 +792,19 @@ public class AbilityFactoryPump {
 
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
-        CardList list;
-        if (this.abilityFactory.isCurse()) {
+        CardList list = new CardList();
+        if (this.abilityFactory.getMapParams().containsKey("AILogic")) {
+            if (this.abilityFactory.getMapParams().get("AILogic").equals("HighestPower")) {
+                list = AllZoneUtil.getCreaturesInPlay().getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+                list = list.getTargetableCards(sa);
+                CardListUtil.sortAttack(list);
+                if (!list.isEmpty()) {
+                    tgt.addTarget(list.get(0));
+                } else {
+                    return false;
+                }
+            }
+        } else if (this.abilityFactory.isCurse()) {
             list = this.getCurseCreatures(sa, defense, attack);
             if (sa.canTarget(AllZone.getHumanPlayer())) {
                 tgt.addTarget(AllZone.getHumanPlayer());
@@ -1303,8 +1338,18 @@ public class AbilityFactoryPump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbilityPumpAll() {
-        final SpellAbility abPumpAll = new AbilityActivated(this.hostCard, this.abilityFactory.getAbCost(),
-                this.abilityFactory.getAbTgt()) {
+        class AbilityPumpAll extends AbilityActivated {
+            public AbilityPumpAll(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityPumpAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -8299417521903307630L;
 
             @Override
@@ -1327,8 +1372,9 @@ public class AbilityFactoryPump {
                 return AbilityFactoryPump.this
                         .pumpAllTriggerAI(AbilityFactoryPump.this.abilityFactory, this, mandatory);
             }
-
-        }; // SpellAbility
+        }
+        final SpellAbility abPumpAll = new AbilityPumpAll(this.hostCard, this.abilityFactory.getAbCost(),
+                this.abilityFactory.getAbTgt());
 
         return abPumpAll;
     }
@@ -1372,7 +1418,18 @@ public class AbilityFactoryPump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawbackPumpAll() {
-        final SpellAbility dbPumpAll = new AbilitySub(this.hostCard, this.abilityFactory.getAbTgt()) {
+        class DrawbackPumpAll extends AbilitySub {
+            public DrawbackPumpAll(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackPumpAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 6411531984691660342L;
 
             @Override
@@ -1400,7 +1457,8 @@ public class AbilityFactoryPump {
                 return AbilityFactoryPump.this
                         .pumpAllTriggerAI(AbilityFactoryPump.this.abilityFactory, this, mandatory);
             }
-        }; // SpellAbility
+        }
+        final SpellAbility dbPumpAll = new DrawbackPumpAll(this.hostCard, this.abilityFactory.getAbTgt()); // SpellAbility
 
         return dbPumpAll;
     }

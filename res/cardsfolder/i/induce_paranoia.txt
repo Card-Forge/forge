@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Instant
 Text:no text
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | ValidTgts$ Card | SubAbility$ DBMill | SpellDescription$ Counter target spell. If B was spent to cast CARDNAME, that spell's controller puts the top X cards of his or her library into his or her graveyard, where X is the spell's converted mana cost.
-SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedController | ConditionManaSpent$ B
+SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedController | ConditionManaSpent$ B | References$ X
 SVar:X:Targeted$CardManaCost
 SVar:ManaNeededToAvoidNegativeEffect:black
 SVar:RemRandomDeck:True

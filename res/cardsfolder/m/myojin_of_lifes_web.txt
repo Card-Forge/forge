@@ -6,7 +6,7 @@ PT:8/8
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Static$ True | Execute$ ETBCounter | TriggerDescription$ CARDNAME enters the battlefield with a divinity counter on it if you cast it from your hand.
 SVar:ETBCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DIVINITY | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_DIVINITY | AddKeyword$ Indestructible | Description$ CARDNAME is indestructible as long as it has a divinity counter on it.
-A:AB$ ChangeZone | Cost$ SubCounter<1/DIVINITY> | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ X | SpellDescription$ Put any number of creature cards from your hand onto the battlefield.
+A:AB$ ChangeZone | Cost$ SubCounter<1/DIVINITY> | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ X | References$ X | SpellDescription$ Put any number of creature cards from your hand onto the battlefield.
 SVar:X:Count$InYourHand.Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

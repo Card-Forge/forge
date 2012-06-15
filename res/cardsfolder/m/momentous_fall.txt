@@ -2,8 +2,8 @@ Name:Momentous Fall
 ManaCost:2 G G
 Types:Instant
 Text:no text
-A:SP$ Draw | Cost$ 2 G G Sac<1/Creature> | NumCards$ XPower | SubAbility$ DBGainLife | SpellDescription$ You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
-SVar:DBGainLife:DB$GainLife | LifeAmount$ XToughness
+A:SP$ Draw | Cost$ 2 G G Sac<1/Creature> | NumCards$ XPower | References$ XPower | SubAbility$ DBGainLife | SpellDescription$ You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
+SVar:DBGainLife:DB$GainLife | LifeAmount$ XToughness | References$ XToughness
 SVar:XPower:Sacrificed$CardPower
 SVar:XToughness:Sacrificed$CardToughness
 SVar:RemAIDeck:True

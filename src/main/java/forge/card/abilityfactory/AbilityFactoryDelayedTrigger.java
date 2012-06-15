@@ -20,10 +20,14 @@ package forge.card.abilityfactory;
 import java.util.HashMap;
 
 import forge.AllZone;
+import forge.Card;
+import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 
@@ -49,7 +53,18 @@ public class AbilityFactoryDelayedTrigger {
      * @since 1.0.15
      */
     public static SpellAbility getAbility(final AbilityFactory af) {
-        final SpellAbility ability = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityDelayedTrigger extends AbilityActivated {
+            public AbilityDelayedTrigger(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityDelayedTrigger(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -7502962478028160305L;
 
             @Override
@@ -71,7 +86,9 @@ public class AbilityFactoryDelayedTrigger {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryDelayedTrigger.doTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility ability = new AbilityDelayedTrigger(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return ability;
     }
 
@@ -117,7 +134,18 @@ public class AbilityFactoryDelayedTrigger {
      * @return a {@link forge.card.spellability.AbilitySub} object.
      */
     public static AbilitySub getDrawback(final AbilityFactory abilityFactory) {
-        final AbilitySub drawback = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+        class DrawbackDelayedTrigger extends AbilitySub {
+            public DrawbackDelayedTrigger(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackDelayedTrigger(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 6192972525033429820L;
 
             @Override
@@ -134,7 +162,8 @@ public class AbilityFactoryDelayedTrigger {
             public void resolve() {
                 AbilityFactoryDelayedTrigger.doResolve(abilityFactory, this);
             }
-        };
+        }
+        final AbilitySub drawback = new DrawbackDelayedTrigger(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
 
         return drawback;
     }

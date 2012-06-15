@@ -3,7 +3,7 @@ ManaCost:0
 Types:Artifact
 Text:Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.
 K:Multikicker 2
-A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ X | SpellDescription$ Add 1 to your mana pool for each charge counter on CARDNAME.
+A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ X | References$ X | SpellDescription$ Add 1 to your mana pool for each charge counter on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

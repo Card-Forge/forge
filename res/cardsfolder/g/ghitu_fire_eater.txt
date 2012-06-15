@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Human Nomad
 Text:no text
 PT:2/2
-A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature or player.
+A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature or player.
 SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_fire_eater.jpg

@@ -3,7 +3,7 @@ ManaCost:5 B
 Types:Enchantment
 Text:no text
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of each end step, each opponent loses life equal to the life he or she lost this turn. (Damage causes loss of life.)
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ X
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ X | References$ X
 SVar:X:Count$LifeOppLostThisTurn
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wound_reflection.jpg

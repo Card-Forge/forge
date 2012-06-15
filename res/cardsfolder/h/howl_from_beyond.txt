@@ -2,7 +2,7 @@ Name:Howl from Beyond
 ManaCost:X B
 Types:Instant
 Text:no text
-A:SP$ Pump | Cost$ X B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn.
+A:SP$ Pump | Cost$ X B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Common

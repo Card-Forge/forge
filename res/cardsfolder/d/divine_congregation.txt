@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Sorcery
 Text:no text
 K:Suspend:5:1 W
-A:SP$ GainLife | Cost$ 3 W | LifeAmount$ X | ValidTgts$ Player | TgtPrompt$ Select target player | Defined$ You | SpellDescription$ You gain 2 life for each creature target player controls.
+A:SP$ GainLife | Cost$ 3 W | LifeAmount$ X | ValidTgts$ Player | TgtPrompt$ Select target player | Defined$ You | References$ X | SpellDescription$ You gain 2 life for each creature target player controls.
 SVar:X:TargetedPlayer$CreaturesInPlay/Times.2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_congregation.jpg

@@ -2,7 +2,7 @@ Name:Squall Line
 ManaCost:X G G
 Types:Instant
 Text:no text
-A:SP$ DamageAll | Cost$ X G G | ValidCards$ Creature.withFlying | ValidPlayers$ Each | NumDmg$ X | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals X damage to each creature with flying and each player.
+A:SP$ DamageAll | Cost$ X G G | References$ X | ValidCards$ Creature.withFlying | ValidPlayers$ Each | NumDmg$ X | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals X damage to each creature with flying and each player.
 SVar:X:Count$xPaid
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

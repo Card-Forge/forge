@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Human Shaman Ally
 Text:no text
 PT:0/2
-A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in your opponent's graveyard | ValidTgts$ Creature.YouDontCtrl | ConditionCheckSVar$ Y | ConditionSVarCompare$ LEX | ChangeNum$ 1 | SpellDescription$ Put target creature card from an opponent's graveyard onto the battlefield under your control if its converted mana cost is less than or equal to the number of Allies you control.
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in your opponent's graveyard | ValidTgts$ Creature.YouDontCtrl | ConditionCheckSVar$ Y | ConditionSVarCompare$ LEX | ChangeNum$ 1 | References$ X,Y | SpellDescription$ Put target creature card from an opponent's graveyard onto the battlefield under your control if its converted mana cost is less than or equal to the number of Allies you control.
 SVar:X:Count$Valid Ally.YouCtrl
 SVar:Y:Targeted$CardManaCost
 SVar:BuffedBy:Ally

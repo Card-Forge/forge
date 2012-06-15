@@ -4,7 +4,7 @@ Types:Creature Human Knight
 Text:no text
 PT:3/4
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
-SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 A:AB$ Effect | Cost$ 1 W | Name$ Paladin of Prahv Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ TrigDamage | SVars$ TrigGain,X | RememberObjects$ Targeted | ActivationZone$ Hand | ActivationLimit$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep | PrecostDesc$ Forecast - | CostDesc$ 1 W, Reveal CARDNAME from your hand: | SpellDescription$ Whenever target creature deals damage this turn, you gain that much life. (Activate this ability only during your upkeep and only once each turn.)
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | Execute$ TrigGain | TriggerDescription$ Whenever the targeted creature deals damage, you gain that much life.

@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ CARDNAME can't be blocked by red creatures. | Description$ Enchanted creature can't be blocked by red creatures.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ Enchanted creature gets +2/+2 as long as an opponent controls a red permanent.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ Enchanted creature gets +2/+2 as long as an opponent controls a red permanent.
 SVar:X:Count$Valid Permanent.Red+YouDontCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

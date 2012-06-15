@@ -2,8 +2,8 @@ Name:Brood Birthing
 ManaCost:1 R
 Types:Sorcery
 Text:no text
-A:SP$ Token | Cost$ 1 R | TokenAmount$ 3 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenOwner$ You | TokenAbilities$ ABMana | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBToken | SpellDescription$ If you control an Eldrazi Spawn, put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool." Otherwise, put one of those tokens onto the battlefield.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenOwner$ You | TokenAbilities$ ABMana | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+A:SP$ Token | Cost$ 1 R | TokenAmount$ 3 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenOwner$ You | TokenAbilities$ ABMana | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBToken | References$ X | SpellDescription$ If you control an Eldrazi Spawn, put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool." Otherwise, put one of those tokens onto the battlefield.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenOwner$ You | TokenAbilities$ ABMana | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Amount$ 1 | Produced$ 1 | SpellDescription$ Add 1 to your mana pool
 SVar:Rarity:Common
 SVar:X:Count$Valid Card.YouCtrl+namedEldrazi Spawn

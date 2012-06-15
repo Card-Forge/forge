@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 K:Cumulative upkeep:1
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ At the beginning of your draw step, destroy each creature with converted mana cost equal to the number of age counters on CARDNAME. They can't be regenerated.
-SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Creature.cmcEQX | NoRegen$ True
+SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Creature.cmcEQX | NoRegen$ True | References$ X
 SVar:X:Count$CardCounters.AGE
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

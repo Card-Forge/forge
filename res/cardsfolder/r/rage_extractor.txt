@@ -3,7 +3,7 @@ ManaCost:4 PR
 Types:Artifact
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.CostsPhyrexianMana | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a spell with P in its mana cost, CARDNAME deals damage equal to that spell's converted mana cost to target creature or player.
-SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ X
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ X | References$ X
 SVar:X:TriggeredCard$CardManaCost
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

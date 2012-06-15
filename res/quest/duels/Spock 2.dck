@@ -3,11 +3,11 @@
 Name=Spock 2
 Title=Spock
 Difficulty=medium
-Description=Mono G Elf Kinship deck with Winnower Patrol and Wolf-Skull Shaman
+Description=BG Elf Kinship deck with Winnower Patrol and Wolf-Skull Shaman
 Icon=Spock.jpg
 Deck Type=constructed
 [main]
-11 Forest|ISD
+9 Forest|ISD
 1 Swamp|ISD
 4 Gilt-Leaf Palace
 4 Woodland Cemetery
@@ -15,19 +15,25 @@ Deck Type=constructed
 2 Verdant Catacombs
 4 Wolf-Skull Shaman
 4 Winnower Patrol
+3 Sylvan Messenger
+1 Cylian Elf
 1 Norwood Archers
 1 Stonewood Invoker
 1 Immaculate Magistrate
-1 Fyndhorn Elves
+2 Llanowar Elves
+2 Fyndhorn Elves
 1 Caller of the Claw
+1 Lys Alana Bowmaster
+1 Imperious Perfect
 1 Elvish Archers
 1 Viridian Shaman
-1 Thelonite Hermit
 1 Essence Warden
 1 Elvish Ranger
 1 Moonglove Winnower
 1 Llanowar Dead
 1 Prowess of the Fair
+1 Lys Alana Huntmaster
+1 Nath of the Gilt-Leaf
 4 Eyeblight's Ending
-2 Nameless Inversion
+4 Nameless Inversion
 [sideboard]

@@ -74,6 +74,7 @@ public enum VDev implements IVDoc {
     private final DevLabel lblUntapPermanent = new DevLabel("Untap Permanent");
     private final DevLabel lblSetLife = new DevLabel("Set Player Life");
     private final DevLabel lblAddCard = new DevLabel("Add any card");
+    private final DevLabel lblBreakpoint = new DevLabel("Trigger breakpoint");
 
     //========= Constructor
 
@@ -88,6 +89,7 @@ public enum VDev implements IVDoc {
         devLBLs.add(lblTapPermanent);
         devLBLs.add(lblUntapPermanent);
         devLBLs.add(lblSetLife);
+        devLBLs.add(lblBreakpoint);
 
         scroller.setBorder(null);
         scroller.setOpaque(false);
@@ -105,6 +107,7 @@ public enum VDev implements IVDoc {
         viewport.add(this.lblTapPermanent, constraints);
         viewport.add(this.lblUntapPermanent, constraints);
         viewport.add(this.lblSetLife, constraints);
+        viewport.add(this.lblBreakpoint, constraints);
     }
 
     //========= Overridden methods
@@ -208,6 +211,10 @@ public enum VDev implements IVDoc {
     /** @return {@link forge.gui.match.views.VDev.DevLabel} */
     public DevLabel getLblSetLife() {
         return this.lblSetLife;
+    }
+    
+    public DevLabel getLblBreakpoint() {
+        return this.lblBreakpoint;
     }
 
     /**

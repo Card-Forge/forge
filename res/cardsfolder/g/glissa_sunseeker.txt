@@ -4,7 +4,7 @@ Types:Legendary Creature Elf
 Text:no text
 PT:3/2
 K:First Strike
-A:AB$ Destroy | Cost$ T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQX | SpellDescription$ Destroy target artifact if its converted mana cost is equal to the amount of mana in your mana pool.
+A:AB$ Destroy | Cost$ T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQX | References$ X,Y | SpellDescription$ Destroy target artifact if its converted mana cost is equal to the amount of mana in your mana pool.
 SVar:X:Count$ManaPool:All
 SVar:Y:Targeted$CardManaCost
 #AI doesn't have a mana pool

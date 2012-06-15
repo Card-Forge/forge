@@ -3,7 +3,7 @@ ManaCost:5 G G G
 Types:Sorcery
 Text:no text
 K:Epic
-A:SP$ Token | Cost$ 5 G G G | TokenAmount$ X | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Snake creature token onto the battlefield for each card in your hand.
+A:SP$ Token | Cost$ 5 G G G | TokenAmount$ X | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | References$ X | SpellDescription$ Put a 1/1 green Snake creature token onto the battlefield for each card in your hand.
 SVar:X:Count$InYourHand
 SVar:Rarity:Rare
 SVar:RemAIDeck:True

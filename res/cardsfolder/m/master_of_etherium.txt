@@ -4,7 +4,7 @@ Types:Artifact Creature Vedalken Wizard
 Text:no text
 PT:*/*
 S:Mode$ Continuous | Affected$ Creature.Artifact+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other artifact creatures you control get +1/+1.
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of artifacts you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of artifacts you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Artifact

@@ -9,13 +9,16 @@ Deck Type=constructed
 [main]
 8 Mountain|M11
 8 Forest|M11
-4 Stomping Ground
+1 Taiga
+1 Copperline Gorge
+2 Rootbound Crag
 4 Wooded Foothills
 1 Dragon Broodmother
 1 Predator Dragon
 2 Thunder-Thrash Elder
 1 Skullmulcher
-2 Mycoloth
+1 Mycoloth
+1 Preyseizer Dragon
 1 Gorger Wurm
 1 Thorn-Thrash Viashino
 2 Doubling Season
@@ -24,15 +27,15 @@ Deck Type=constructed
 1 Squirrel Nest
 1 Chatter of the Squirrel
 1 Hunting Triad
-2 Awakening Zone
+3 Awakening Zone
 2 Growth Spasm
 1 Kozilek's Predator
 2 Nest Invader
 1 Ambassador Oak
 1 Leyline of Vitality
 1 Dragon Fodder
-1 Empty the Warrens
 4 Goblin Assault
-3 Mogg War Marshal
+2 Mogg War Marshal
 2 Rukh Egg
+1 Brindle Shoat
 [sideboard]

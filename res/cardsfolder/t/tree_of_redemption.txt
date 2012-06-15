@@ -5,8 +5,8 @@ Text:no text
 PT:0/13
 K:Defender
 A:AB$ StoreSVar | Cost$ T | SVar$ OldToughness | Type$ Count | Expression$ CardToughness | SubAbility$ TreeRedemption | SpellDescription$ Exchange your life total with CARDNAME's toughness. | StackDescription$ Exchange your life total with CARDNAME's toughness.
-SVar:TreeRedemption:DB$ Animate | Toughness$ X | Permanent$ True | SubAbility$ SetLife
-SVar:SetLife:DB$ SetLife | Defined$ You | LifeAmount$ OldToughness 
+SVar:TreeRedemption:DB$ Animate | Toughness$ X | References$ X | Permanent$ True | SubAbility$ SetLife
+SVar:SetLife:DB$ SetLife | Defined$ You | LifeAmount$ OldToughness | References$ OldToughness
 SVar:OldToughness:Number$13
 SVar:X:Count$YourLifeTotal
 SVar:RemAIDeck:True

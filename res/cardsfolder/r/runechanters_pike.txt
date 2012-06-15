@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Equipment
 Text:no text
 K:eqPump 2:+0/+0/First Strike
-S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | Description$ Equipped creature has first strike and gets +X/+0 where X is the number of instant and sorcery cards in your graveyard.
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | References$ X,Y | Description$ Equipped creature has first strike and gets +X/+0 where X is the number of instant and sorcery cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Instant/Plus.Y
 SVar:Y:Count$TypeInYourYard.sorcery
 SVar:Rarity:Rare

@@ -4,7 +4,7 @@ Types:Creature Bird
 Text:no text
 PT:1/1
 K:Flying
-T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, if a creature died this turn, put a carrion counter on CARDNAME.
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | References$ X | TriggerDescription$ At the beginning of each end step, if a creature died this turn, put a carrion counter on CARDNAME.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CARRION | CounterNum$ 1 | Defined$ Self
 A:AB$ Pump | Cost$ SubCounter<2/CARRION> | NumAtt$ 1 | NumDef$ 1 | Defined$ Self | CostDesc$ Remove two carrion counters from Osai Vultures: | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature

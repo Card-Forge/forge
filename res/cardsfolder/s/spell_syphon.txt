@@ -2,7 +2,7 @@ Name:Spell Syphon
 ManaCost:1 U
 Types:Instant
 Text:no text
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays 1 for each blue permanent you control.
+A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | References$ X | SpellDescription$ Counter target spell unless its controller pays 1 for each blue permanent you control.
 SVar:X:Count$BlueYouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Common

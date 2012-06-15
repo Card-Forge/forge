@@ -4,7 +4,7 @@ Types:Artifact Creature Construct
 PT:0/0
 Text:no text
 K:Sunburst
-A:AB$PutCounter | Cost$ T | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Double the number of +1/+1 counters on CARDNAME.
+A:AB$ PutCounter | Cost$ T | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X | SpellDescription$ Double the number of +1/+1 counters on CARDNAME.
 SVar:X:Count$CardCounters.P1P1
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

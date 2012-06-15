@@ -2,7 +2,7 @@ Name:Murderous Betrayal
 ManaCost:B B B
 Types:Enchantment
 Text:no text
-A:AB$ Destroy | Cost$ B B PayLife<X> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target non black creature | NoRegen$ True | CostDesc$ B B, Pay half your life, rounded up: | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
+A:AB$ Destroy | Cost$ B B PayLife<X> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target non black creature | NoRegen$ True | CostDesc$ B B, Pay half your life, rounded up: | References$ X | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
 SVar:X:Count$YourLifeTotal/HalfUp
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

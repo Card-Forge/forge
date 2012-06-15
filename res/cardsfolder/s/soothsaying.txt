@@ -3,7 +3,7 @@ ManaCost:U
 Types:Enchantment
 Text:no text
 A:AB$ Shuffle | Cost$ 3 U U | Defined$ You | SpellDescription$ Shuffle your library.
-A:AB$ RearrangeTopOfLibrary | Cost$ X | Defined$ You | NumCards$ X | SpellDescription$ Look at the top X cards of your library, then put them back in any order.
+A:AB$ RearrangeTopOfLibrary | Cost$ X | Defined$ You | NumCards$ X | References$ X | SpellDescription$ Look at the top X cards of your library, then put them back in any order.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

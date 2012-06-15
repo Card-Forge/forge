@@ -4,7 +4,7 @@ Types:Creature Dwarf
 Text:no text
 PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may have it deal damage equal to its power to target creature. If you do, CARDNAME assigns no combat damage this turn.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBNoCombatDamage
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBNoCombatDamage | References$ X
 SVar:DBNoCombatDamage:DB$Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:X:Count$CardPower
 SVar:Rarity:Common

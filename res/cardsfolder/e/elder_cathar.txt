@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put a +1/+1 counter on target creature you control. If that creature is a Human, put two +1/+1 counters on it instead.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ X
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ X | References$ X
 SVar:X:Targeted$Valid Creature.Human/Plus.1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_cathar.jpg

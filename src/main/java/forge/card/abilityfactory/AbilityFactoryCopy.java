@@ -31,6 +31,7 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
 import forge.Singletons;
+import forge.card.cost.Cost;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
@@ -74,8 +75,18 @@ public final class AbilityFactoryCopy {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityCopyPermanent(final AbilityFactory af) {
-
-        final SpellAbility abCopyPermanent = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityCopyPermanent extends AbilityActivated {
+            public AbilityCopyPermanent(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityCopyPermanent(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 4557071554433108024L;
 
             @Override
@@ -97,8 +108,8 @@ public final class AbilityFactoryCopy {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryCopy.copyPermanentTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abCopyPermanent = new AbilityCopyPermanent(af.getHostCard(), af.getAbCost(), af.getAbTgt());
         return abCopyPermanent;
     }
 
@@ -144,7 +155,18 @@ public final class AbilityFactoryCopy {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackCopyPermanent(final AbilityFactory af) {
-        final SpellAbility dbCopyPermanent = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackCopyPermanent extends AbilitySub {
+            public DrawbackCopyPermanent(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackCopyPermanent(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -7725564505830285184L;
 
             @Override
@@ -166,8 +188,9 @@ public final class AbilityFactoryCopy {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryCopy.copyPermanentTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbCopyPermanent = new DrawbackCopyPermanent(af.getHostCard(), af.getAbTgt());
+        
         return dbCopyPermanent;
     }
 
@@ -501,8 +524,18 @@ public final class AbilityFactoryCopy {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityCopySpell(final AbilityFactory af) {
-
-        final SpellAbility abCopySpell = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityCopySpell extends AbilityActivated {
+            public AbilityCopySpell(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityCopySpell(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 5232548517225345052L;
 
             @Override
@@ -524,8 +557,9 @@ public final class AbilityFactoryCopy {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryCopy.copySpellTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abCopySpell = new AbilityCopySpell(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abCopySpell;
     }
 
@@ -579,7 +613,18 @@ public final class AbilityFactoryCopy {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackCopySpell(final AbilityFactory af) {
-        final SpellAbility dbCopySpell = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackCopySpell extends AbilitySub {
+            public DrawbackCopySpell(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackCopySpell(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 1927508119173644632L;
 
             @Override
@@ -601,8 +646,9 @@ public final class AbilityFactoryCopy {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryCopy.copySpellTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbCopySpell = new DrawbackCopySpell(af.getHostCard(), af.getAbTgt());
+        
         return dbCopySpell;
     }
 

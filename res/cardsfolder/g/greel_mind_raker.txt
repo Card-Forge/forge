@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Legendary Creature Horror Spellshaper
 Text:no text
 PT:3/3
-A:AB$ Discard | Cost$ X B T Discard<2/Card> | ValidTgts$ Player | NumCards$ X | Mode$ Random | SpellDescription$ Target player discards X cards at random.
+A:AB$ Discard | Cost$ X B T Discard<2/Card> | ValidTgts$ Player | NumCards$ X | Mode$ Random | References$ X | SpellDescription$ Target player discards X cards at random.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

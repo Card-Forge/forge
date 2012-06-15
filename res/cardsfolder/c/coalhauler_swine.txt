@@ -4,7 +4,7 @@ Types:Creature Boar Beast
 Text:no text
 PT:4/4
 T:Mode$ DamageDone | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to each player.
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ X | Defined$ Each
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ X | Defined$ Each | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Rarity:Common

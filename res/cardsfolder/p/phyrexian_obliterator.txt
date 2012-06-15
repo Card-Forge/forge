@@ -5,7 +5,7 @@ Text:no text
 PT:5/5
 K:Trample
 T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever a source deals damage to CARDNAME, that source's controller sacrifices that many permanents.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Amount$ X | SacValid$ Permanent | Defined$ TriggeredSourceController
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Amount$ X | References$ X | SacValid$ Permanent | Defined$ TriggeredSourceController
 SVar:X:TriggerCount$DamageAmount
 SVar:RemRandomDeck:True
 SVar:Rarity:Mythic

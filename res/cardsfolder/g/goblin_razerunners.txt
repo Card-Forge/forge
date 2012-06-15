@@ -5,7 +5,7 @@ Text:no text
 PT:3/4
 A:AB$ PutCounter | Cost$ 1 R Sac<1/Land> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step, you may have CARDNAME deal damage equal to the number of +1/+1 counters on it to target player.
-SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ X
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ X | References$ X
 SVar:X:Count$CardCounters.P1P1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_razerunners.jpg
 SVar:Rarity:Rare

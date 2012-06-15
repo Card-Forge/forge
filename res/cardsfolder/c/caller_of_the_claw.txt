@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Flash
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 2/2 green Bear creature token onto the battlefield for each nontoken creature put into your graveyard from the battlefield this turn.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenOwner$ You | TokenName$ Bear | TokenTypes$ Creature,Bear | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenOwner$ You | TokenName$ Bear | TokenTypes$ Creature,Bear | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | References$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.nonToken+YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card42187.jpg

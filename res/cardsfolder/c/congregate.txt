@@ -2,7 +2,7 @@ Name:Congregate
 ManaCost:3 W
 Types:Instant
 Text:no text
-A:SP$ GainLife | Cost$ 3 W | LifeAmount$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player gains 2 life for each creature on the battlefield.
+A:SP$ GainLife | Cost$ 3 W | LifeAmount$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SpellDescription$ Target player gains 2 life for each creature on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Creature/Times.2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/congregate.jpg

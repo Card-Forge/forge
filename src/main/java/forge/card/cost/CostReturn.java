@@ -147,10 +147,10 @@ public class CostReturn extends CostPartWithList {
         final Player activator = ability.getActivatingPlayer();
         final CardList list = activator.getCardsIn(ZoneType.Battlefield);
         if (c == null) {
-            final String sVar = source.getSVar(amount);
+            final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = CostUtil.chooseXValue(source, list.size());
+                c = CostUtil.chooseXValue(source, ability, list.size());
             } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }

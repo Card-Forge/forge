@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ ChooseType | Cost$ 3 R | Defined$ You | Type$ Card | SubAbility$ DBReveal | SpellDescription$ Choose a card type. Target opponent reveals his or her hand. Blood Oath deals 3 damage to that player for each card of the chosen type revealed this way.
 SVar:DBReveal:DB$ RevealHand | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ X
+SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ X | References$ X,Y 
 SVar:X:SVar$Y/Times.3
 SVar:Y:Remembered$Valid Card.ChosenType
 SVar:RemAIDeck:True

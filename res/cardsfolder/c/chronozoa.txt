@@ -6,7 +6,7 @@ PT:3/3
 K:Flying
 K:Vanishing:3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigCopyPermanent | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, if it had no time counters on it, put two tokens that are copies of it onto the battlefield.
-SVar:TrigCopyPermanent:AB$ CopyPermanent | Cost$ 0 | Defined$ TriggeredCard | NumCopies$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+SVar:TrigCopyPermanent:AB$ CopyPermanent | Cost$ 0 | Defined$ TriggeredCard | NumCopies$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X
 SVar:X:TriggeredCard$CardCounters.TIME
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chronozoa.jpg

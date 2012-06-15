@@ -5,8 +5,8 @@ Text:no text
 PT:6/6
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for any number of land cards, exile them, then shuffle your library. If you do, Trench Gorger's power and toughness each become equal to the number of cards exiled this way.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Land | ChangeNum$ X | RememberChanged$ True | SubAbility$ TrenchAnimate
-SVar:TrenchAnimate:DB$Animate | Power$ Y | Toughness$ Y | Permanent$ True | SubAbility$ DBCleanUp
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Land | ChangeNum$ X | References$ X | RememberChanged$ True | SubAbility$ TrenchAnimate
+SVar:TrenchAnimate:DB$Animate | Power$ Y | Toughness$ Y | References$ Y | Permanent$ True | SubAbility$ DBCleanUp
 SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$TypeInYourLibrary.Land
 SVar:Y:Remembered$Amount

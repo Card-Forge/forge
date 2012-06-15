@@ -2,8 +2,8 @@ Name:Energy Bolt
 ManaCost:X R W
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ X R W | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | SpellDescription$ Choose one - CARDNAME deals X damage to target player;
-A:SP$ GainLife | Cost$ X R W | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SpellDescription$ or target player gains X life.
+A:SP$ DealDamage | Cost$ X R W | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | References$ X | SpellDescription$ Choose one - CARDNAME deals X damage to target player;
+A:SP$ GainLife | Cost$ X R W | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | References$ X | SpellDescription$ or target player gains X life.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

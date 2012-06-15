@@ -4,8 +4,8 @@ Types:Snow Creature Yeti
 Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, if it's on the battlefield, it deals damage equal to its power to target creature an opponent controls and that creature deals damage equal to its power to CARDNAME.
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | IsPresent$ Card.Self | PresentZone$ Battlefield | ValidTgts$ Creature.YouDontCtrl| TgtPrompt$ Select target creature you don't control | NumDmg$ X | SubAbility$ DBDamage
-SVar:DBDamage:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | IsPresent$ Card.Self | PresentZone$ Battlefield | ValidTgts$ Creature.YouDontCtrl| TgtPrompt$ Select target creature you don't control | NumDmg$ X | References$ X | SubAbility$ DBDamage
+SVar:DBDamage:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y | References$ Y
 A:AB$ ChangeZone | Cost$ 2 S | Origin$ Battlefield | Destination$ Hand | SorcerySpeed$ True | SpellDescription$ Return CARDNAME to its owner's hand. Activate this ability only any time you could cast a sorcery.
 SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower

@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 Text:no text
 A:AB$ PutCounter | Cost$ T Sac<1/Creature> | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
-A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ X | SpellDescription$ Draw a card for each charge counter on Culling Dais.
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ X | References$ X | SpellDescription$ Draw a card for each charge counter on Culling Dais.
 SVar:X:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

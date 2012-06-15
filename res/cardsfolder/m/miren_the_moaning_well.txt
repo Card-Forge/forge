@@ -2,7 +2,7 @@ Name:Miren, the Moaning Well
 ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
-A:AB$ GainLife | Cost$ 3 T Sac<1/Creature> | LifeAmount$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
+A:AB$ GainLife | Cost$ 3 T Sac<1/Creature> | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

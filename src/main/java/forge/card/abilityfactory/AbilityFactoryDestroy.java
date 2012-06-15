@@ -67,7 +67,18 @@ public class AbilityFactoryDestroy {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityDestroy(final AbilityFactory af) {
-        final SpellAbility abDestroy = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityDestroy extends AbilityActivated {
+            public AbilityDestroy(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityDestroy(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4153613567150919283L;
 
             @Override
@@ -89,8 +100,9 @@ public class AbilityFactoryDestroy {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryDestroy.destroyDoTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abDestroy = new AbilityDestroy(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abDestroy;
     }
 
@@ -144,7 +156,18 @@ public class AbilityFactoryDestroy {
      * @return a {@link forge.card.spellability.AbilitySub} object.
      */
     public static AbilitySub createDrawbackDestroy(final AbilityFactory af) {
-        final AbilitySub dbDestroy = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackDestroy extends AbilitySub {
+            public DrawbackDestroy(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackDestroy(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4153613567150919283L;
 
             @Override
@@ -166,7 +189,9 @@ public class AbilityFactoryDestroy {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryDestroy.destroyDoTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final AbilitySub dbDestroy = new DrawbackDestroy(af.getHostCard(), af.getAbTgt());
+        
         return dbDestroy;
     }
 
@@ -597,8 +622,18 @@ public class AbilityFactoryDestroy {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityDestroyAll(final AbilityFactory af) {
-
-        final SpellAbility abDestroyAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityDestroyAll extends AbilityActivated {
+            public AbilityDestroyAll(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityDestroyAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -1376444173137861437L;
 
             private final HashMap<String, String> params = af.getMapParams();
@@ -623,8 +658,9 @@ public class AbilityFactoryDestroy {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryDestroy.destroyAllCanPlayAI(af, this, this.noRegen);
             }
-
-        };
+        }
+        final SpellAbility abDestroyAll = new AbilityDestroyAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abDestroyAll;
     }
 
@@ -677,7 +713,18 @@ public class AbilityFactoryDestroy {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackDestroyAll(final AbilityFactory af) {
-        final SpellAbility dbDestroyAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackDestroyAll extends AbilitySub {
+            public DrawbackDestroyAll(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackDestroyAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -242160421677518351L;
 
             private final HashMap<String, String> params = af.getMapParams();
@@ -707,8 +754,9 @@ public class AbilityFactoryDestroy {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryDestroy.destroyAllTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbDestroyAll = new DrawbackDestroyAll(af.getHostCard(), af.getAbTgt());
+        
         return dbDestroyAll;
     }
 

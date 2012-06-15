@@ -1059,7 +1059,7 @@ public class MagicStack extends MyObservable {
             //Setup a Rebound-trigger
             final Trigger reboundTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | TriggerDescription$ At the beginning of your next upkeep, you may cast " + source.toString() + " without paying it's manacost.", source, true);
 
-            final AbilityActivated trigAb = new AbilityActivated(source, "0") {
+            final Ability trigAb = new Ability(source, "0") {
 
                 private static final long serialVersionUID = 7497175394128633122L;
 

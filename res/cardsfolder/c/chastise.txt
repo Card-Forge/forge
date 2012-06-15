@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Instant
 Text:no text
 A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target attacking creature. You gain life equal to its power.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chastise.jpg

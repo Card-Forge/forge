@@ -77,8 +77,18 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityDig(final AbilityFactory af) {
-
-        final SpellAbility abDig = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityDig extends AbilityActivated {
+            public AbilityDig(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityDig(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 4239474096624403497L;
 
             @Override
@@ -101,7 +111,8 @@ public final class AbilityFactoryReveal {
                 return AbilityFactoryReveal.digTriggerAI(af, this, mandatory);
             }
 
-        };
+        }
+        final SpellAbility abDig = new AbilityDig(af.getHostCard(), af.getAbCost(), af.getAbTgt());
         return abDig;
     }
 
@@ -147,7 +158,18 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackDig(final AbilityFactory af) {
-        final SpellAbility dbDig = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackDig extends AbilitySub {
+            public DrawbackDig(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackDig(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -3372788479421357024L;
 
             @Override
@@ -174,8 +196,9 @@ public final class AbilityFactoryReveal {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryReveal.digTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbDig = new DrawbackDig(af.getHostCard(), af.getAbTgt());
+        
         return dbDig;
     }
 
@@ -664,7 +687,18 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createAbilityDigUntil(final AbilityFactory af) {
 
-        final SpellAbility abDig = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityDigUntil extends AbilityActivated {
+            public AbilityDigUntil(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityDigUntil(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 4239474096624403497L;
 
             @Override
@@ -687,7 +721,8 @@ public final class AbilityFactoryReveal {
                 return AbilityFactoryReveal.digUntilTriggerAI(af, this, mandatory);
             }
 
-        };
+        }
+        final SpellAbility abDig = new AbilityDigUntil(af.getHostCard(), af.getAbCost(), af.getAbTgt());
         return abDig;
     }
 
@@ -733,7 +768,18 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackDigUntil(final AbilityFactory af) {
-        final SpellAbility dbDig = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackDigUntil extends AbilitySub {
+            public DrawbackDigUntil(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackDigUntil(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -3372788479421357024L;
 
             @Override
@@ -755,8 +801,9 @@ public final class AbilityFactoryReveal {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryReveal.digUntilTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbDig = new DrawbackDigUntil(af.getHostCard(), af.getAbTgt());
+        
         return dbDig;
     }
 
@@ -1040,7 +1087,18 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityRevealHand(final AbilityFactory af) {
-        final SpellAbility abRevealHand = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityRevealHand extends AbilityActivated {
+            public AbilityRevealHand(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityRevealHand(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 2785654059206102004L;
 
             @Override
@@ -1062,8 +1120,9 @@ public final class AbilityFactoryReveal {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryReveal.revealHandTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abRevealHand = new AbilityRevealHand(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abRevealHand;
     }
 
@@ -1109,7 +1168,18 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackRevealHand(final AbilityFactory af) {
-        final SpellAbility dbRevealHand = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackRevealHand extends AbilitySub {
+            public DrawbackRevealHand(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackRevealHand(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -6079668770576878801L;
 
             @Override
@@ -1133,8 +1203,9 @@ public final class AbilityFactoryReveal {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryReveal.revealHandTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbRevealHand = new DrawbackRevealHand(af.getHostCard(), af.getAbTgt());
+        
         return dbRevealHand;
     }
 
@@ -1375,7 +1446,18 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityScry(final AbilityFactory af) {
-        final SpellAbility abScry = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityScry extends AbilityActivated {
+            public AbilityScry(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityScry(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 2631175859655699419L;
 
             @Override
@@ -1397,8 +1479,9 @@ public final class AbilityFactoryReveal {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryReveal.scryTriggerAI(af, this);
             }
-
-        };
+        }
+        final SpellAbility abScry = new AbilityScry(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abScry;
     }
 
@@ -1444,7 +1527,18 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackScry(final AbilityFactory af) {
-        final SpellAbility dbScry = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackScry extends AbilitySub {
+            public DrawbackScry(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackScry(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 7763043327497404630L;
 
             @Override
@@ -1468,8 +1562,9 @@ public final class AbilityFactoryReveal {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryReveal.scryTriggerAI(af, this);
             }
-
-        };
+        }
+        final SpellAbility dbScry = new DrawbackScry(af.getHostCard(), af.getAbTgt());
+        
         return dbScry;
     }
 
@@ -1648,8 +1743,19 @@ public final class AbilityFactoryReveal {
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createRearrangeTopOfLibraryAbility(final AbilityFactory af) {
-        final SpellAbility rtolAbility = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+    public static SpellAbility createAbilityRearrangeTopOfLibrary(final AbilityFactory af) {
+        class AbilityRearrangeTopOfLibrary extends AbilityActivated {
+            public AbilityRearrangeTopOfLibrary(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityRearrangeTopOfLibrary(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -548494891203983219L;
 
             @Override
@@ -1671,8 +1777,8 @@ public final class AbilityFactoryReveal {
             public void resolve() {
                 AbilityFactoryReveal.rearrangeTopOfLibraryResolve(af, this);
             }
-
-        };
+        }
+        final SpellAbility rtolAbility = new AbilityRearrangeTopOfLibrary(af.getHostCard(), af.getAbCost(), af.getAbTgt());
 
         return rtolAbility;
     }
@@ -1686,7 +1792,7 @@ public final class AbilityFactoryReveal {
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createRearrangeTopOfLibrarySpell(final AbilityFactory af) {
+    public static SpellAbility createSpellRearrangeTopOfLibrary(final AbilityFactory af) {
         final SpellAbility rtolSpell = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 6977502611509431864L;
 
@@ -1724,8 +1830,19 @@ public final class AbilityFactoryReveal {
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createRearrangeTopOfLibraryDrawback(final AbilityFactory af) {
-        final SpellAbility dbDraw = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+    public static SpellAbility createDrawbackRearrangeTopOfLibrary(final AbilityFactory af) {
+        class DrawbackRearrangeTopOfLibrary extends AbilitySub {
+            public DrawbackRearrangeTopOfLibrary(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackRearrangeTopOfLibrary(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -777856059960750319L;
 
             @Override
@@ -1749,8 +1866,9 @@ public final class AbilityFactoryReveal {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryReveal.rearrangeTopOfLibraryTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbDraw = new DrawbackRearrangeTopOfLibrary(af.getHostCard(), af.getAbTgt());
+        
         return dbDraw;
     }
 
@@ -1959,7 +2077,18 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityReveal(final AbilityFactory af) {
-        final SpellAbility abReveal = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityReveal extends AbilityActivated {
+            public AbilityReveal(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityReveal(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -4417404703197532765L;
 
             @Override
@@ -1981,8 +2110,9 @@ public final class AbilityFactoryReveal {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryReveal.revealTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abReveal = new AbilityReveal(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abReveal;
     }
 
@@ -2028,7 +2158,18 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackReveal(final AbilityFactory af) {
-        final SpellAbility dbReveal = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackReveal extends AbilitySub {
+            public DrawbackReveal(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackReveal(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -8059731932417441449L;
 
             @Override
@@ -2053,8 +2194,9 @@ public final class AbilityFactoryReveal {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryReveal.revealTrigger(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbReveal = new DrawbackReveal(af.getHostCard(), af.getAbTgt());
+        
         return dbReveal;
     }
 

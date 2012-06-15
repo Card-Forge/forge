@@ -3,7 +3,7 @@ ManaCost:X B B
 Types:Sorcery
 Text:no text
 A:SP$ LoseLife | Cost$ X B B | Defined$ Opponent | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses X life. You gain life equal to the life lost this way.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exsanguinate.jpg

@@ -3,7 +3,7 @@ ManaCost:X U
 Types:Sorcery
 Text:no text
 K:Flashback X U
-A:SP$ Mill | Cost$ X U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard. If CARDNAME was cast from a graveyard, that player puts twice as many cards into his or her graveyard instead.
+A:SP$ Mill | Cost$ X U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X,Y | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard. If CARDNAME was cast from a graveyard, that player puts twice as many cards into his or her graveyard instead.
 SVar:X:Count$xPaid/Times.Y
 SVar:Y:wasCastFromGraveyard.2.1
 SVar:Rarity:Rare

@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a shred counter on CARDNAME. Then put the top card of your library into your graveyard for each shred counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SHRED | CounterNum$ 1 | SubAbility$ DBMill
-SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ X
+SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ X | References$ X
 SVar:X:Count$CardCounters.SHRED
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

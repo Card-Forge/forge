@@ -4,7 +4,7 @@ Types:Legendary Creature Human Soldier
 Text:no text
 PT:3/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you gain 1 life for each card in target opponent's hand.
-SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defined$ You
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defined$ You | References$ X
 A:AB$ Tap | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsPresent$ Card.Self+attacking | SpellDescription$ Tap target creature. Activate this ability only if CARDNAME is attacking.
 SVar:X:TargetedPlayer$CardsInHand
 SVar:Rarity:Rare

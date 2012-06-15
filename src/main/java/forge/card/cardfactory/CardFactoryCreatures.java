@@ -87,7 +87,11 @@ public class CardFactoryCreatures {
     private static void getCard_GilderBairn(final Card card, final String cardName) {
         final Cost abCost = new Cost(card, "2 GU Untap", true);
         final Target tgt = new Target(card, "Select target permanent.", new String[] { "Permanent" });
-        final AbilityActivated a1 = new AbilityActivated(card, abCost, tgt) {
+        class GilderBairnAbility extends AbilityActivated {
+            public GilderBairnAbility(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
             private static final long serialVersionUID = -1847685865277129366L;
 
             @Override
@@ -104,6 +108,11 @@ public class CardFactoryCreatures {
                         }
                     }
                 }
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                return new GilderBairnAbility(getSourceCard(),getPayCosts(),new Target(getTarget()));
             }
 
             @Override
@@ -130,14 +139,19 @@ public class CardFactoryCreatures {
                 });
                 return perms.size() > 0;
             }
-        }; // SpellAbility
+            
+            @Override
+            public String getDescription() {
+                final StringBuilder sb = new StringBuilder();
+                sb.append(getPayCosts());
+                sb.append("For each counter on target permanent, ");
+                sb.append("put another of those counters on that permanent.");
+                return sb.toString();
+            }
+        }
+        final AbilityActivated a1 = new GilderBairnAbility(card, abCost, tgt);
 
         card.addSpellAbility(a1);
-        final StringBuilder sb = new StringBuilder();
-        sb.append(abCost);
-        sb.append("For each counter on target permanent, ");
-        sb.append("put another of those counters on that permanent.");
-        a1.setDescription(sb.toString());
     }
 
     private static void getCard_MinotaurExplorer(final Card card, final String cardName) {
@@ -539,7 +553,16 @@ public class CardFactoryCreatures {
 
     private static void getCard_RhysTheRedeemed(final Card card, final String cardName) {
         final Cost abCost = new Cost(card, "4 GW GW T", true);
-        final AbilityActivated copyTokens1 = new AbilityActivated(card, abCost, null) {
+        class RhysTheRedeemedAbility extends AbilityActivated {
+            public RhysTheRedeemedAbility(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                return new RhysTheRedeemedAbility(getSourceCard(),getPayCosts(),new Target(getTarget()));
+            }
+            
             private static final long serialVersionUID = 6297992502069547478L;
 
             @Override
@@ -557,13 +580,19 @@ public class CardFactoryCreatures {
 
                 return allTokens.size() >= 2;
             }
-        };
+            
+            @Override
+            public String getDescription() {
+                final StringBuilder sbDesc = new StringBuilder();
+                sbDesc.append(abCost).append("For each creature token you control, ");
+                sbDesc.append("put a token that's a copy of that creature onto the battlefield.");
+                return sbDesc.toString();
+            }
+        }
+        final AbilityActivated copyTokens1 = new RhysTheRedeemedAbility(card, abCost, null);
 
         card.addSpellAbility(copyTokens1);
-        final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append(abCost).append("For each creature token you control, ");
-        sbDesc.append("put a token that's a copy of that creature onto the battlefield.");
-        copyTokens1.setDescription(sbDesc.toString());
+        
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(card.getName());
@@ -600,13 +629,15 @@ public class CardFactoryCreatures {
                 return false;
             }
         }; // ability2
-           // card.clearSpellAbility();
-        card.addSpellAbility(ability2);
-
         final StringBuilder sb2 = new StringBuilder();
         sb2.append(card.getName()).append(" - ").append(player);
         sb2.append(" gains life equal to permanents of the chosen color.");
         ability2.setStackDescription(sb2.toString());
+        
+        Trigger dmgTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2 W. If you do, choose a color. You gain 1 life for each permanent of that color.", card, true);
+        dmgTrigger.setOverridingAbility(ability2);
+        
+        card.addTrigger(dmgTrigger);
     }
 
     private static void getCard_SphinxJwar(final Card card, final String cardName) {
@@ -643,7 +674,16 @@ public class CardFactoryCreatures {
     private static void getCard_MasterOfTheWildHunt(final Card card, final String cardName) {
         final Cost abCost = new Cost(card, "T", true);
         final Target abTgt = new Target(card, "Target a creature to Hunt", "Creature".split(","));
-        final AbilityActivated ability = new AbilityActivated(card, abCost, abTgt) {
+        class MasterOfTheWildHuntAbility extends AbilityActivated {
+            public MasterOfTheWildHuntAbility(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                return new MasterOfTheWildHuntAbility(getSourceCard(),getPayCosts(),new Target(getTarget()));
+            }
+            
             private static final long serialVersionUID = 35050145102566898L;
 
             @Override
@@ -789,15 +829,21 @@ public class CardFactoryCreatures {
                     }
                 }
             } // resolve()
-        }; // SpellAbility
+            
+            @Override
+            public String getDescription() {
+                final StringBuilder sb = new StringBuilder();
+                sb.append("Tap: Tap all untapped Wolf creatures you control. ");
+                sb.append("Each Wolf tapped this way deals damage equal to its ");
+                sb.append("power to target creature. That creature deals damage ");
+                sb.append("equal to its power divided as its controller ");
+                sb.append("chooses among any number of those Wolves.");
+                return sb.toString();
+            }
+        }
+        final AbilityActivated ability = new MasterOfTheWildHuntAbility(card, abCost, abTgt);
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Tap: Tap all untapped Wolf creatures you control. ");
-        sb.append("Each Wolf tapped this way deals damage equal to its ");
-        sb.append("power to target creature. That creature deals damage ");
-        sb.append("equal to its power divided as its controller ");
-        sb.append("chooses among any number of those Wolves.");
-        ability.setDescription(sb.toString());
+        
 
         card.addSpellAbility(ability);
     }
@@ -831,7 +877,16 @@ public class CardFactoryCreatures {
     private static void getCard_MoltenHydra(final Card card, final String cardName) {
         final Target target = new Target(card, "TgtCP");
         final Cost abCost = new Cost(card, "T", true);
-        final AbilityActivated ability2 = new AbilityActivated(card, abCost, target) {
+        class MoltenHydraAbility extends AbilityActivated {
+            public MoltenHydraAbility(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                return new MoltenHydraAbility(getSourceCard(),getPayCosts(),new Target(getTarget()));
+            }
+            
             private static final long serialVersionUID = 2626619319289064289L;
 
             @Override
@@ -882,16 +937,20 @@ public class CardFactoryCreatures {
                 }
                 card.subtractCounter(Counters.P1P1, total);
             } // resolve()
-        }; // SpellAbility
+            
+            @Override
+            public String getDescription() {
+                final StringBuilder sbDesc = new StringBuilder();
+                sbDesc.append(abCost).append("Remove all +1/+1 counters from ");
+                sbDesc.append(cardName).append(":  ").append(cardName);
+                sbDesc.append(" deals damage to target creature or player equal to the ");
+                sbDesc.append("number of +1/+1 counters removed this way.");
+                return sbDesc.toString();
+            }
+        }
+        final AbilityActivated ability2 = new MoltenHydraAbility(card, abCost, target);
 
-        card.addSpellAbility(ability2);
-
-        final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append(abCost).append("Remove all +1/+1 counters from ");
-        sbDesc.append(cardName).append(":  ").append(cardName);
-        sbDesc.append(" deals damage to target creature or player equal to the ");
-        sbDesc.append("number of +1/+1 counters removed this way.");
-        ability2.setDescription(sbDesc.toString());
+        card.addSpellAbility(ability2);        
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append("Molten Hydra deals damage to number of +1/+1 ");
@@ -1184,7 +1243,16 @@ public class CardFactoryCreatures {
 
         final Cost cost = new Cost(card, "Sac<1/CARDNAME>", true);
         final Target tgt = new Target(card, "Select a permanent", "Permanent".split(","));
-        final SpellAbility ability = new AbilityActivated(card, cost, tgt) {
+        class VampireHexmageAbility extends AbilityActivated {
+            public VampireHexmageAbility(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                return new VampireHexmageAbility(getSourceCard(),getPayCosts(),new Target(getTarget()));
+            }
+            
             private static final long serialVersionUID = -5084369399105353155L;
 
             @Override
@@ -1230,7 +1298,9 @@ public class CardFactoryCreatures {
                     }
                 }
             }
-        };
+        }
+        final SpellAbility ability = new VampireHexmageAbility(card, cost, tgt);
+        
         card.addSpellAbility(ability);
     }
 
@@ -1803,7 +1873,7 @@ public class CardFactoryCreatures {
         }
     }
 
-    private static void getCard_Nebuhadnezzar(final Card card, final String cardName) {
+    private static void getCard_Nebuchadnezzar(final Card card, final String cardName) {
         /*
          * X, T: Name a card. Target opponent reveals X cards at random from
          * his or her hand. Then that player discards all cards with that
@@ -1812,7 +1882,18 @@ public class CardFactoryCreatures {
          */
         final Cost abCost = new Cost(card, "X T", true);
         final Target target = new Target(card, "Select target opponent", "Opponent".split(","));
-        final AbilityActivated discard = new AbilityActivated(card, abCost, target) {
+        class NebuchadnezzarAbility extends AbilityActivated {
+            public NebuchadnezzarAbility(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated discard = new NebuchadnezzarAbility(getSourceCard(),getPayCosts(),new Target(getTarget()));
+                discard.getRestrictions().setPlayerTurn(true);
+                return discard;
+            }
+            
             private static final long serialVersionUID = 4839778470534392198L;
 
             @Override
@@ -1847,17 +1928,21 @@ public class CardFactoryCreatures {
             public boolean canPlayAI() {
                 return false;
             }
-        };
+            
+            @Override
+            public String getDescription() {
+                final StringBuilder sbDesc = new StringBuilder();
+                sbDesc.append(abCost).append("Name a card. ");
+                sbDesc.append("Target opponent reveals X cards at random from his or her hand. ");
+                sbDesc.append("Then that player discards all cards with that name revealed this way. ");
+                sbDesc.append("Activate this ability only during your turn.");
+                return sbDesc.toString();
+            }
+        }
+        final AbilityActivated discard = new NebuchadnezzarAbility(card, abCost, target);
 
         discard.getRestrictions().setPlayerTurn(true);
-
-        final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append(abCost).append("Name a card. ");
-        sbDesc.append("Target opponent reveals X cards at random from his or her hand. ");
-        sbDesc.append("Then that player discards all cards with that name revealed this way. ");
-        sbDesc.append("Activate this ability only during your turn.");
-        discard.setDescription(sbDesc.toString());
-
+        
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(cardName).append(" - name a card.");
         discard.setStackDescription(sbStack.toString());
@@ -1876,10 +1961,18 @@ public class CardFactoryCreatures {
             theCost = "R";
         }
 
-        final SpellAbility finalAb = new AbilityActivated(card, new Cost(card, theCost, true), new Target(card,
-                "Select target creature.", "Creature")) {
-            private static final long serialVersionUID = 2391351140880148283L;
+        class DuctCrawlerAbility extends AbilityActivated {
+            private static final long serialVersionUID = 7914250202245863157L;
 
+            public DuctCrawlerAbility(final Card ca, final Cost co, Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                return new DuctCrawlerAbility(getSourceCard(),getPayCosts(),new Target(getTarget()));
+            }
+            
             @Override
             public void resolve() {
                 final StringBuilder keywordBuilder = new StringBuilder("HIDDEN CARDNAME can't block ");
@@ -1902,8 +1995,14 @@ public class CardFactoryCreatures {
                 return this.getSourceCard().toString() + " - Target creature can't block "
                         + this.getSourceCard().getName() + " this turn.";
             }
-        };
-        finalAb.setDescription(theCost + ": Target creature can't block CARDNAME this turn.");
+            
+            @Override
+            public String getDescription() {
+                return theCost + ": Target creature can't block CARDNAME this turn.";
+            }
+        } 
+        final SpellAbility finalAb = new DuctCrawlerAbility(card, new Cost(card, theCost, true), new Target(card,
+                "Select target creature.", "Creature"));
 
         card.addSpellAbility(finalAb);
     }
@@ -1973,7 +2072,7 @@ public class CardFactoryCreatures {
                 || cardName.equals("Sakashima the Impostor")) {
             getCard_ClonesSeries(card, cardName);
         } else if (cardName.equals("Nebuchadnezzar")) {
-            getCard_Nebuhadnezzar(card, cardName);
+            getCard_Nebuchadnezzar(card, cardName);
         } else if (cardName.equals("Duct Crawler") || cardName.equals("Shrewd Hatchling")
                 || cardName.equals("Spin Engine") || cardName.equals("Screeching Griffin")) {
             getCard_DuctCrawler(card, cardName);
@@ -2000,7 +2099,18 @@ public class CardFactoryCreatures {
                 final String[] l = parseMax.split(":");
                 final int maxLevel = Integer.parseInt(l[1]);
 
-                final SpellAbility levelUp = new AbilityActivated(card, manacost) {
+                class LevelUpAbility extends AbilityActivated {
+                    public LevelUpAbility(final Card ca,final String s) {
+                        super(ca,new Cost(ca, manacost, true),null);
+                    }
+                    
+                    @Override
+                    public AbilityActivated getCopy() {
+                        AbilityActivated levelUp = new LevelUpAbility(getSourceCard(),getPayCosts().toString());
+                        levelUp.getRestrictions().setSorcerySpeed(true);
+                        return levelUp;
+                    }
+                    
                     private static final long serialVersionUID = 3998280279949548652L;
 
                     @Override
@@ -2013,15 +2123,18 @@ public class CardFactoryCreatures {
                         // Todo: Improve Level up code
                         return card.getCounters(Counters.LEVEL) < maxLevel;
                     }
-
-                };
+                    
+                    @Override
+                    public String getDescription() {
+                        final StringBuilder sbDesc = new StringBuilder();
+                        sbDesc.append("Level up ").append(manacost).append(" (").append(manacost);
+                        sbDesc.append(": Put a level counter on this. Level up only as a sorcery.)");
+                        return sbDesc.toString();
+                    }
+                }
+                final SpellAbility levelUp = new LevelUpAbility(card, manacost);
                 levelUp.getRestrictions().setSorcerySpeed(true);
                 card.addSpellAbility(levelUp);
-
-                final StringBuilder sbDesc = new StringBuilder();
-                sbDesc.append("Level up ").append(manacost).append(" (").append(manacost);
-                sbDesc.append(": Put a level counter on this. Level up only as a sorcery.)");
-                levelUp.setDescription(sbDesc.toString());
 
                 final StringBuilder sbStack = new StringBuilder();
                 sbStack.append(card).append(" - put a level counter on this.");

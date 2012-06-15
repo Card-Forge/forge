@@ -3,9 +3,9 @@ ManaCost:W W
 Types:Sorcery
 Text:no text
 A:SP$ ChangeZoneAll | Cost$ W W | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | ChangeType$ Creature.White+YouCtrl | SubAbility$ DBDrawYou | SpellDescription$ Exile all white creatures. For each creature exiled this way, its controller draws a card.
-SVar:DBDrawYou:DB$Draw | NumCards$ X | SubAbility$ DBExileOpp
+SVar:DBDrawYou:DB$Draw | NumCards$ X | References$ X | SubAbility$ DBExileOpp
 SVar:DBExileOpp:DB$ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | ChangeType$ Creature.White+YouDontCtrl | SubAbility$ DBDrawOpp
-SVar:DBDrawOpp:DB$Draw | Defined$ Opponent | NumCards$ Y | SubAbility$ DBCleanup
+SVar:DBDrawOpp:DB$Draw | Defined$ Opponent | NumCards$ Y | References$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Y:Remembered$Amount

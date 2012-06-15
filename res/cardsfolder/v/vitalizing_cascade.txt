@@ -2,7 +2,7 @@ Name:Vitalizing Cascade
 ManaCost:X G W
 Types:Instant
 Text:no text
-A:SP$ GainLife | Cost$ X G W | Defined$ You | LifeAmount$ X | SubAbility$ DBGain3 | SpellDescription$ You gain X plus 3 life.
+A:SP$ GainLife | Cost$ X G W | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBGain3 | SpellDescription$ You gain X plus 3 life.
 SVar:DBGain3:DB$GainLife | LifeAmount$ 3 | Defined$ You
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon

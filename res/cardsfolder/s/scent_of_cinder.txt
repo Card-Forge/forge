@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Sorcery
 Text:no text
 A:SP$ Reveal | Cost$ 1 R | Defined$ You | RevealValid$ Card.Red | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBScentOfCinderDamage | SpellDescription$ Reveal any number of red cards in your hand. CARDNAME deals X damage to target creature or player, where X is the number of cards revealed this way.
-SVar:DBScentOfCinderDamage:DB$ DealDamage | Tgt$ TgtCP | NumDmg$ ScentOfCinderX | SubAbility$ DBScentOfCinderCleanup
+SVar:DBScentOfCinderDamage:DB$ DealDamage | Tgt$ TgtCP | NumDmg$ ScentOfCinderX | SubAbility$ DBScentOfCinderCleanup | References$ ScentOfCinderX
 SVar:ScentOfCinderX:Remembered$Amount
 SVar:DBScentOfCinderCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True

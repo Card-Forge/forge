@@ -4,8 +4,8 @@ Types:Creature Minotaur
 Text:no text
 PT:1/1
 K:Haste
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a white creature.
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ Y | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a blue creature.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ CARDNAME gets +1/+1 as long as you control a white creature.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ Y | SVarCompare$ GE1 | References$ Y | Description$ CARDNAME gets +1/+1 as long as you control a blue creature.
 SVar:X:Count$Valid Creature.YouCtrl+White
 SVar:Y:Count$Valid Creature.YouCtrl+Blue
 SVar:RemAIDeck:True

@@ -140,8 +140,19 @@ public class AbilityFactoryAttach {
      * @return the spell ability
      */
     public static SpellAbility createAbilityAttach(final AbilityFactory abilityFactory) {
-        final SpellAbility abAttach = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
-                abilityFactory.getAbTgt()) {
+        class AbilityAttach extends AbilityActivated {
+            public AbilityAttach(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
+            }
+
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityAttach(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+
             private static final long serialVersionUID = 2116313811316915141L;
 
             @Override
@@ -163,8 +174,9 @@ public class AbilityFactoryAttach {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryAttach.attachDoTriggerAI(abilityFactory, this, mandatory);
             }
-
-        }; // SpellAbility
+        }
+        final SpellAbility abAttach = new AbilityAttach(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt());
 
         return abAttach;
     }
@@ -178,7 +190,19 @@ public class AbilityFactoryAttach {
      * @return the spell ability
      */
     public static SpellAbility createDrawbackAttach(final AbilityFactory abilityFactory) {
-        final SpellAbility dbAttach = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+        class DrawbackAttach extends AbilitySub {
+            public DrawbackAttach(final Card ca, final Target t) {
+                super(ca, t);
+            }
+
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackAttach(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+
             private static final long serialVersionUID = 7211414518191821125L;
 
             private final AbilityFactory af = abilityFactory;
@@ -210,8 +234,9 @@ public class AbilityFactoryAttach {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryAttach.attachDoTriggerAI(this.af, this, mandatory);
             }
+        }
+        final SpellAbility dbAttach = new DrawbackAttach(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
 
-        };
         return dbAttach;
     }
 
@@ -1266,7 +1291,19 @@ public class AbilityFactoryAttach {
      * @return the spell ability
      */
     public static SpellAbility createAbilityUnattachAll(final AbilityFactory af) {
-        final SpellAbility abUnattachAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityUnattachAll extends AbilityActivated {
+            public AbilityUnattachAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
+            }
+
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityUnattachAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+
             private static final long serialVersionUID = 5946312226232487294L;
 
             @Override
@@ -1288,7 +1325,9 @@ public class AbilityFactoryAttach {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryAttach.unattachAllDoTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility abUnattachAll = new AbilityUnattachAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+
         return abUnattachAll;
     }
 
@@ -1330,7 +1369,19 @@ public class AbilityFactoryAttach {
      * @return the spell ability
      */
     public static SpellAbility createDrawbackUnattachAll(final AbilityFactory af) {
-        final SpellAbility dbUnattachAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackUnattachAll extends AbilitySub {
+            public DrawbackUnattachAll(final Card ca, final Target t) {
+                super(ca, t);
+            }
+
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackUnattachAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+
             private static final long serialVersionUID = 9007743612927046143L;
 
             @Override
@@ -1352,7 +1403,9 @@ public class AbilityFactoryAttach {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryAttach.unattachAllDoTriggerAI(af, this, mandatory);
             }
-        };
+        }
+        final SpellAbility dbUnattachAll = new DrawbackUnattachAll(af.getHostCard(), af.getAbTgt());
+
         return dbUnattachAll;
     }
 

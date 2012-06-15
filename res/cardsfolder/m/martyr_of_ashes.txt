@@ -3,7 +3,7 @@ ManaCost:R
 Types:Creature Human Shaman
 Text:no text
 PT:1/1
-A:AB$ DamageAll | Cost$ 2 Reveal<X/Card.Red> Sac<1/CARDNAME> | CostDesc$ 2, Reveal X red cards from your hand, Sacrifice Martyr of Ashes: | ValidCards$ Creature.withoutFlying | NumDmg$ ChosenX | ValidDescription$ each creature without flying | SpellDescription$ CARDNAME deals X damage to each creature without flying.
+A:AB$ DamageAll | Cost$ 2 Reveal<X/Card.Red> Sac<1/CARDNAME> | CostDesc$ 2, Reveal X red cards from your hand, Sacrifice Martyr of Ashes: | ValidCards$ Creature.withoutFlying | NumDmg$ ChosenX | References$ X | ValidDescription$ each creature without flying | SpellDescription$ CARDNAME deals X damage to each creature without flying.
 SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Rarity:Common

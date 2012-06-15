@@ -6,7 +6,7 @@ PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target artifact card from your graveyard to your hand. You gain life equal to that card's converted mana cost.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razor_hippogriff.jpg

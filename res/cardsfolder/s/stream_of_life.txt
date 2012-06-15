@@ -2,7 +2,7 @@ Name:Stream of Life
 ManaCost:X G
 Types:Sorcery
 Text:no text
-A:SP$ GainLife | Cost$ X G | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SpellDescription$ Target player gains X life.
+A:SP$ GainLife | Cost$ X G | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | References$ X | SpellDescription$ Target player gains X life.
 SVar:X:Count$xPaid
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_of_life.jpg

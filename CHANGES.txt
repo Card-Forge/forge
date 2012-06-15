@@ -1,53 +1,33 @@
-Forge Beta: 0#-##-2012 ver 1.2.8
+Forge Beta: 0#-##-2012 ver 1.2.9
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
 10### cards in total.
 
 
-The work on the new UI is now finished and this version adds the new UI to the deck editors. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
+There was a bug in the previous version which prevented the token pics of many cards from displaying on the battlefield. This should now be fixed.
 
-We all would like to thank Doublestrike for his contributions to the new UI.
+Draft mode should no longer cause a crash when you start the draft.
 
-The new deck editors include:
+People using java 7 should be able to play forge without getting the crash reports that stated "Comparison method violates it's general contract!".
 
-* a better text search (can search for multiple terms, and "not" terms
-* interval filters for P/T and CMC
-* add/remove 4
-* better statistics and draw probabilities
-* Toggle-able, sort-able, resize-able, move-able columns
-* and of course uses the drag cell layout.
+--
 
-With the update to the new deck editors several people noticed an error when they run the snapshot build. We hope to have this fixed in the near future. This start up error states:
+The work on the new UI is now finished. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
 
-Detailed error trace:
-java.lang.NullPointerException
-at forge.gui.deckeditor.controllers.CEditorPreferences.initialize(CEditorPreferences.java:45)
-at forge.view.FView.initialize(FView.java:97)
+Selecting a package of cards in the quest mode card shop will not display the packages in the card picture and card detail panels.
 
-A recent submission to the code base on the SVN prevents the Card Shop crash report when you select a package of cards, but the packages still aren't displayed in the card picture and card detail panels.
+Draft mode will cause a crash report when you start a new draft. We are aware of this problem and we hope to be able to fix it at some point in the future. You can use version 1.2.7 to play draft mode games in the mean time.
 
-Draft mode will cause a crash report when you start a new draft. We are aware of this proble and we hope to be able to fix it at some point in the future.
+Some people have noticed special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries. We hope to have this problem fixed at some point in the future.
 
+We are now using a different system for our snapshot and beta releases. Unfortunately, this new system builds a jar file which does not accurately display the SVN revision number.
 
-The res/images/icons/ folder has been moved to res/pics/icons/. This folder holds the quest opponent icons, bazaar pets, and bazaar plants. If you have downloaded this content, it will still work, but the folder must be moved on your computer.
+Forge is not fully java 7 compatible at this time. We recommend that people downgrade to java 6.
 
+--
 
-Some people have noticed special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries.
-
-A possible fix was submitted to the SVN for forge version 1.2.7. We have received several reports that the above bugs are still occuring. We hope to have this problem fixed at some point in the future.
-
-The dock now has a new button labeled "Open Layout" along with old button with original function "Revert Layout". Modifying the battlefield layout will result in your changes being saved to a file named  "match_preferred.xml". You can copy and rename that file to share your layouts with other people.
-
-
-The hard drive which was used for the Maven based build and release system has become unstable and can no longer be used for this purpose.
-
-We are now using a different system for our snapshot and beta releases and this system uses an up to date OS. Unfortunately, this new system builds a jar file which does not accurately display the SVN revision number.
-
-We apologize for this inconvenience.
-
-
-The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
+The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove useful. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
 
 We have changed the archival format used for the Forge distributions from ".zip" to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these ".tar.bz2" archives. We recommend that you decompress the Forge archive into a new and unused folder.
 
@@ -57,364 +37,29 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Fixes/Features:
 
 - Cleared out the changes.txt file, now ready for new material.
-- Minor edit to Seachrome Coast to remove the extra copy of the etb text.
-- Update site and buildnumber plugin
-- Prophetic Prism now using Any
-- Fixed tokenDoTriggerAINoCost not setting targets and XCosts.
-- Added SVar:BuffedBy:Creature to Cathars' Crusade.
-- Added Shadow to isUsefulPumpKeyword.
-- Removed the second "SVar:BuffedBy:Creature" from Kruin Striker.
-- Added targeting to AF Effect with Fog AILogic.
+- Updated three decks.
+- Updated 4 decks.
+- Merged changes from trunk to AbilityWork: r15839-r15884
+- Fixed Ebony Horse, Keeper of the Dead, Night Soil, Praetor's Counsel and Secretkeeper.
+- Fixed the token image bug.
+- Fixed Stigma Lasher's effect duration
+- Added some missing PC2 reprints' set info
+- Fixed Arctic Nishoba no lifegain bug
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the updated JuzamjediCube file which now contains some AVR cards.
+- Pushed WompWomp's new sprite sheet for the firebloom skin.
+- Refunding Tap and Untap costs will no longer trigger anything.
+- Fixed Curse of Oblivion.
+- Fixed Oni of Wild Places and friends.
+- DefinedPlayer used in AF ChangeZone (Hidden) will now define the controller of cards on the battlefield/in the graveyard.
+- *Crosses fingers* Reintegration of AbilityWork branch.
+- Enabling Rotating formats (Extended, Modern) to be used for Starting Quest Pools.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated the Spock 2 deck.
+- Possible fix for "Comparison method violates it's general contract!" crash.
+- Fixed drafting crash, though the UI for it needs tweaking (remove "Add 4 of" button, remove "remove" buttons, rename "add" button etc)
+- Fixed Oona's Prowler ability cost description.
 - Added a fluff piece to the changes.txt file.
-- Fixed a possible IndexOutOfBoundsException in dealDamageResolve.
-- Fixed SuspendCast never being set to false;
-- Fixed a little bug in decideAIPayment of CostSacrifice.
-- Fixed a little bug in chooseSacrificeType.
-- Added a little more safety code to prevent AI freezing.
-- A little AI tweak to support Awe Strike.
-- Removed Words of War (it was not completely right).
-- Improved changeZoneAllTriggerAINoCost.
-- Improved the AILogic "MostProminentHumanControls".
-- Fixed AF Fight not checking for fighters on battlefield.
-- Fixed AI payment of non-mana costs of static abilities (for example morph).
-- Fixed isCardInPlay.
-- Converted Academy Rector and Lost Auramancers to script.
-- Cleanup.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added the precon Angelic Might.
-- Added the precon Solitary Fiends.
-- Added 7ED setinfo to Infernal Contract.
-- added support for random sacrifice choice
-- added support for ForgetOtherRemembered and Optional to changeKnownOriginResolve
-- Adding Repeat AF.
-- added default value for RepeatSVarCompare
-- Fixed Drake Familiar.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed Curse of Thirst.
-- Converted Spectral Bears and Spectral Force to script.
-- The AI can now use Tyrant of Discord.
-- Fixed changeKnownOriginResolve.
-- Removed SVar:RemAIDeck:True from Primal Surge.
-- Fixed Slithermuse.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed Dawnfluke.
-- Fixed an issue with the phase labels not updating completely, especially in custom layouts.
-- Fixed a bug with the stack not repainting after changes are made.
-- Tweaked AF DealDamage AI.
-- Added the AILogic "Always" to AF Effect.
-- Changed "Revert Layout" to "Open Layout" To revert to factory layout, open "match_default.xml"
-- Improved AI of Glint Hawk Idol.
-- Added AILogic parameter to AF Protection.
-- adding *.jpg to ignore list for res/pics/tokens
-- adding branch for mana restrictions
-- Refactored some of the new code for a general open dialog. Dock now has new button "Open Layout" along with old button with original function "Revert Layout"
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed Aggravate.
-- Fixed initiatePossibleDefenders being called in the wrong phases (which made it possible to attack planeswalkers which weren't on the battlefield anymore).
-- Removed a superfluous function.
-- Improved functionality of "Load Layout" dock button.
-- Fixed AI of Graveyard Shovel and an ability description of Relic of Progenitus.
-- Added the player keyword "You can't gain life.".
-- Reduce the likelihood of upgrading Rares to Mythics for new quests.
-- Added "Save Layout" feature. Save dialog function in forge.gui.toolbox improved. Save layout functions in SIOUtil slightly modified to accept these changes.
-- Convert Living Weapon to script
-- Converted parts of Forsaken Wastes and Leyline of Punishment to script.
-- Converted Platinum Emperion to script.
-- Added the player keyword "You can't draw cards.".
-- Converted Maralen of the Mornsong and Omen Machine to script.
-- Created Ability Borrowing branch
-- Fixed Painbringer.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- copying activated abilities will now also copy conditions and restrictions (AbilityWork branch).
-- fixed type of Phyrexian Devourer.
-- Made Gomazoa playable by the AI.
-- strip out spaces in filenames
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed a problem with TargetUnique.
-- Cleanup of CardFactoryUtil.
-- A Morphed card on the stack will no longer reveal its colors.
-- Added a fluff piece to the changes.txt file.
-- Clear Simultaneous triggers at the end of the game
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed AI of Increasing Confusion.
-- Replaced some instances of af.getHostCard() with sa.getSourceCard().
-- merge updates from Trunk 15508-15541
-- costmanaparser
-- made it buildable (there were missing refs to VDock and FSkin)
-- removed some obvious warnings
-- Switched mana to ManaCostShards, removed special classes for each mana kind
-- Fixed the ability costs for Ghave, Guru of Spores.
-- Fixed Iceberg.
-- Improved AI for Soulbond.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Reorganized some parts of digResolve (some more parameters now work together or without certain others).
-- add check for empty cost string
-- Fixed Endless Wurm.
-- Fixed Inquisitor's Flail.
-- ManaPaid back to Mana
-- Merged ManaCost upgrade from branch into trunk (r15546-15556)
-- remove warnings, removed manaparser
-- adding RestrictValid parameter support to AbilityMana and InputPayMAnaCostUtil
-- Fixed Trusted Advisor and similar cards.
-- adding RestrictValid parameter support to ComputerUtil to check restriction for AI
-- MyObservable - moved frequent calls to a variable, moved the very class to utils package
-- Added the AI SVar "HasAttackEffect".
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added "SVar:HasAttackEffect:TRUE" to some cards.
-- Added "SVar:HasAttackEffect:TRUE" to two more cards.
-- Updated some decks with new cards.
-- Fixed a bug with initiatePossibleDefenders.
-- More Cleanup in Combat class.
-- Added a medium version of the Radiant deck.
-- Updated three decks with new cards.
-- Improved AI of AF Dig.
-- Cleanup in AF Dig.
-- Checkstyle fixes to CDock.
-- CardCharacteristics stores manacost as CardManaCost instead of String
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed Sludge Strider's 'leaves the battlefield' trigger.
-- Quick fix for unless costs of zero mana.
-- A triggered ability that fails targeting will no longer clear the whole frozen stack (only its own stack instance).
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Uploaded the Avacyn Restored set and token images. Updated scripts for token generators in the set to use set specific tokens. Updated token links.
-- Added the optional parameter "ForgetRemembered" to AF Play.
-- ActivationLimit can calculate values from svars now.
-- Fixed typo in recently added cards (my commit comment was misspelled)
-- Updated card prices.
-- Updated two AI SVars.
-- Replaced some instances of af.getHostCard() with sa.getSourceCard().
-- Fixed a lot of sloppily scripted SpellCast triggers (A-E).
-- Fixed a lot of sloppily scripted SpellCast triggers (F-H).
-- Fixed a lot of sloppily scripted SpellCast triggers (I-M).
-- Fixed a lot of sloppily scripted SpellCast triggers (N-Z).
-- Reordered trigger condition checks for better performance.
-- Updated two AI SVars.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- The AI will now cast Equipments in Main1 if a possible attacker is present.
-- Deck editor UI integration.
-- Default layout file for editor added.
-- Removed font scaling from FLabel.
-- Updated Firebloom skin with improved icons and compressed background images (thanks WompWomp).
-- Updated load/save layout icons.
-- Removed some legacy accessors from VMatchUI.
-- Updated document ID enum with more descriptive names.
-- Rolling back last commit; unforeseen problems.
-- Renamed "ForgeIcons" enum in FSkin to more accurate "InterfaceIcons".
-- Fixed "Tapped" parameter in AF ChangeZone.
-- Fixed and simplified Deadeye Navigator.
-- Fixed a tooltip typo.
-- Added the recent commit logs to changes.txt.
-- Replaced two tooltips.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Some preparations for better planeswalker attacking AI.
-- Replaced finalizer method in main(), attempting to fix race condition at startup.
-- Fixed dev mode toggle in preferences submenu/match UI.
-- Updated card detail text area to always scroll to top.
-- Fixed unlimited lands bug.
-- Fixed a two more copies of the tooltip typo.
-- reworked Mana object paradigm and ManaPool
-- Fixed Tamiyo's (and Venser's) emblem image download link
-- Check for null spellAbility source card in mana restrictions. Makes multikicker not payable with restricted mana.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Bugfix: Race condition at startup, resulting in "Cannot instantiate SplashFrame" error.
-- Rollback (temporary): Remove second-game-constructed load layout bug.
-- Removed images/ directory reference in main.properties. Card pics, tokens, and icons (that is, downloadable content) all reside in the pics/ directory.
-- Fixed overlay resizing to correspond with window resize.
-- Removed legacy "layout params" from preferences.
-- Consolidated preference files and main.properties under res/preferences/.
-- Updated methods to make change smoothly without losing old preferences.
-- Added a fluff piece to the changes.txt file.
-- Edited the readme.txt file.
-- Added a fluff piece to the changes.txt file.
-- added support for mana adding counter magic protection
-- Updated plant pet images to use same template as the other new pets. Updated token image download links etc.
-- Updated two AI SVars.
-- KO'd a few insignificant compiler warnings.
-- Returned dev mode toggle functionality.
-- updated for new Mana constructor
-- merged r15541-r15645 from the Trunk into mana_restrictions branch
-- Fixed an AI error concerning Indestructible in combination with Double Strike.
-- Adding proxy printing back (work in progress)
-- Darn dev mode toggle still causing problems. Rolling back.
-- Start of conversion of home menu to drag layout. No effect on working project files.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed (non-) AI of AF SetState.
-- Converted Primal Clay and Primal Plasma to script.
-- Edited the readme.txt file.
-- Fixed Auntie's Hovel and friends causing "becomes tapped" triggers to fire.
-- fixed a logic bug in mana restrictions
-- merged r15648-r15660 from the Trunk into mana_restrictions branch
-- add support for Primal Beyond
-- refactored meetsManaRestrictions. added most of the remaining restricted mana sources.
-- added RemRandomDeck and RemAIDeck to restricted mana cards
-- Fixed destroyDoTriggerAINoCost ignoring Indestructible.
-- merged r15665 from the Trunk into mana_restrictions branch
-- edited merge properties
-- edited merge properties some more
-- Added the static ability "CostChange".
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed Deny Reality, it now is a Sorcery.
-- merged mana_restrictions branch into Trunk
-- Added basic AI to AF GenericChoice.
-- Removed some unused functions.
-- Little tweak in charmCanPlayAI.
-- Add print proxy functionality back into GUI
-- fixed static effect on Grand Architect
-- Home screen converted to drag cell layout (minor visual change; mainly structural).
-- Bugfix: panels not clearing properly
-- Fixed odd "unknown" skin icon in quest mode.
-- Updated print icon in sprite.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Further bug fixes, to home and bazaar screens.
-- Fixed pet combo box not reappearing in quest mode.
-- Possible fix for strange behaviors in closing win/lose screen.
-- Merged changes from trunk to AbilityWork: r15523-r15685
-- removed main.properties from res/ directory
-- Tweaked Assault code in ComputerUtilAttack.
-- Cleanup and performance update in ComputerUtilAttack.
-- update plugin
-- Improved notNeededAsBlockers in ComputerUtilAttack.
-- AbilityWork branch: Let code outside of abilities use calculateAmount without crashing.
-- AbilityWork: Added References$ parameter to scripted abilities of 'A' cards where necessary.
-- AbilityWork: Added References$ parameter to scripted abilities of 'B' cards where necessary.
-- Attempt #3 on dev mode toggle fix.
-- AbilityWork: Added References$ parameter to scripted abilities of 'X-Z' cards where necessary.
-- Fixed Brood Sliver
-- update testng
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- AbilityWork: Added References$ parameter to scripted abilities of 'W' cards where necessary.
-- Added to AbilityFactoryEffect: EffectOwner, Duration$UntilHostLeavesPlay, and RememberEffect.
-- Added exception to Card.java so that Effect cards can be counted when remembered
-- Fixed Magebane Armor.
-- CheckStyle.
-- AbilityWork: Added References$ parameter to scripted abilities of 'V' cards where necessary.
-- Split CostChange static ability into RaiseCost and ReduceCost.
-- AbilityWork: Added References$ parameter to scripted abilities of 'C' cards where necessary.
-- Updated 3 decks.
-- AbilityWork: Added References$ parameter to scripted abilities of 'D' cards where necessary.
-- AbilityWork: Added References$ parameter to scripted abilities of 'E' cards where necessary.
-- Fixed "Exit Forge" button in main menu.
-- Added name, type, text filters to text-based search in editor.
-- Fixed card shop close crash.
-- Stack tab is now shown each time the stack updates.
-- Converted card price download dialog into standard GuiDownloader type, which at the same time prevents the UI freeze after prices are downloaded.
-- Added turn counter to message info.
-- Game log should now be easier to read.
-- Updated tab text in quest card shop.
-- Small typo fix (Solar Tide)
-- Fixed "Decks" column in Card Shop. Added "Decks" column to Quest deck editor.
-- AbilityWork: Added References$ parameter to scripted abilities of 'F' cards where necessary.
-- Indexing fixes in editor. Issues related to indexing should be solved now.
-- Fixed drafting mode bug.
-- AbilityWork:Corrected References$ for Avalanche.
-- Added the recent commit logs to changes.txt.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- AbilityWork: Made sure SpellPermanent's with X-cost get their X-SVar set. (*Fixes Balduvian Hydra among others.)
-- Increased the width of the checkbox with label for chbType. The test "Type" is no longer truncated under Mac OS.
-- Fixed filter problems in Card Shop.
-- Standardization: Implemented ILocalRepaint#repaintSelf() on FLabel and FPanel.
-- Increased the width of the Selectors in the deck editor filter section.
-- AbilityWork:Fixed a problem with subabilities operating on the wrong host card. (Enables Necrotic Ooze+Bloodline Keeper+Grimgrin, Corpse-Born infinite combo ^^ )
-- AbilityWork:Added a "Trigger Breakpoint" dev mode button. Set a breakpoint at the indicated row in GuiDisplayUtil.devModeBreakpoint(), click this button while running in debug mode and enjoy a nice overview of the internals of the game.
-- AbilityWork:Made calculateAmount fall back on card SVars if the wanted one isn't found on the spellability. Better fix for Balduvian Hydra and similar.
-- AbilityWork: Added References$ parameter to scripted abilities of 'G' cards where necessary.
-- AbilityWork: Console printout warning when calculateAmount falls back to using Card Svars. Helps when debugging if an ability is not stolen properly, for instance.
-- Bugfix: Quest challenges now persist across restarts. Also some checkstyle.
-- Checkstyle.
-- Checkstyle.
-- Minor correction.
-- creating branch for fixing clone cards
-- added Clone AF and first steps in moving SVars to CardCharacteristics class
-- updated LQ picture downloader to handle flip/DFC states
-- Added "transform on click" capability to card picture and detail.
-- A few tweaks to card flip code.
-- Changed tab text to match skin color swatch.
-- Cleanup: Tightened up interface contracts in home submenus.
-- Merged changes from trunk to AbilityWork: 15691-15747
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- This will center the Type checkbox between the Name and Text checkboxes.
-- Reverted the changes made to the main.properties file, these were probably pushed unintentionally to the SVN.
-- CheckStyle.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Edited the README.txt file and included more info about the layout files.
-- fixed bug in Effect AB that was causing a NPE
-- AbilityWork: Added References$ parameter to scripted abilities of 'M' cards where necessary.
-- AbilityWork: Added some missing References$ params
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- AbilityWork: Added References$ parameter to scripted abilities of 'N' cards where necessary.
-- AbilityWork: Added References$ parameter to scripted abilities of 'O' cards where necessary.
-- AbilityWork: Added References$ parameter to Archangel of Strife.
-- Hopefully fixed replacement effects getting stuck as "currently running" and thus never being run again.
-- added SpellDescription to added ability so it shows up in the menus clearly
-- CLoneFIx: updated SVars on flip/DFC/licid cards
-- merged r15740-r15764 from the Trunk into CloneFix branch
-- Fixed Kabira Evangel, should not trigger for Allies that etb under opponent's control.
-- Added a missing xPaid svar to Squall Line.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed the inactive tabs in deckeditor being unreadable in the default
-- Added Effect duration HostLeavesOrEOT (won't cause NPE's for other durations this time)
-- update plugins
-- AbilityWork: Added References$ parameter to scripted abilities of 'H' cards where necessary.
-- Terrarion should now enter the battlefield tapped.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Small fix (renamed Blind Fury effect)
-- Small addition in ReplacementHandler's OptionalDecider block so that DefinedPlayers needing an ActivatingPlayer have a reference point.
-- Updated Animate AF to handle cards with multiple states.
-- merged r15764-r15782 from the Trunk into CloneFix branch
-- Tidied up the stack descriptions for Nissa Rivane.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Updated Animate AF to cleanup added SVars and static abilities.
-- AbilityWork: Added References$ parameter to scripted abilities of 'I' cards where necessary.
-- Removed some unnecessary bits from Homing Sliver script
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- AbilityWork: Added References$ parameter to scripted abilities of 'J' cards where necessary.
-- Fixing Card Shop crash for Packs, but the Packs still aren't displayed.
-- Change to download all-prices.txt from cardforge.org. PHP Script running on cardforge.org uses tcgplayer, providing live pricing data. (MOTL still is missing Dark Ascension and Avacyn Restored)
-- Spell Shop uses Name|SET to lookup price data. Alpha Bird of Paradise will be worth more than Ravnica, etc...
-- Fixed PerSetTracking python script to handle new mtgdata format.
-- Added a fluff piece to the changes.txt file.
-- Updated setdata.txt, mtg-data.txt and setInfoScript.py with Planechase 2012 info.
-- Fixed a bug in AF Reveal.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added a fluff piece to the changes.txt file.
-- Updated AF Pump AI.
-- Fixed Dream Thief.
-- Fixed Rats' Feast (was referencing the incorrect svar)
-- AbilityWork: Added References$ parameter to scripted abilities of 'P-R' cards where necessary.
-- Added a fluff piece to the changes.txt file.
-- update plugins
-- Fixed Lotus Bloom.
-- merged r15782-r15810 from the Trunk into CloneFix branch
-- Improved AI handling some HIDDEN keywords with AF Pump.
-- Performance update in staticDamagePrevention.
-- Little Performance update in hasSickness().
-- Graft will no longer trigger if the card has no more +1/+1 counters.
-- The AI will now be more careful when fetching legendary permanents.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed Sever the Bloodline.
-- Updated text of Hunting Grounds.
-- Added unpairing to moveToLibrary.
-- Fixed targeting in gainLifeDoTriggerAINoCost.
-- CheckStyle.
-- Improved AI of some cards using AF Charm.
-- Creating branch for M13 Cards
-- Changed delayed triggers of Pacts to abilities rather than spells; Summoner's Pact no longer shuffles into library
-- Fixed Riders of Gavony.
-- Added the recent commit logs to changes.txt.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Merged changes from trunk to AbilityWork: r15686-r15836
-- Somehow missed some scripts in the merge...
-- Cardshop UI tweaks:
-* Removed Add/Remove 4-of.
-* Relabeled As Buy/Sell.
-* Added credits counter.
-* Added Max Selling Percentage and Price.
-* Fixed labels and buttons to return to normal for regular deck editor.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Removed AI column from card shop.
-- Removed New Column from Cards for Sale.
-- Fixed moveToLibrary bug.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
@@ -425,97 +70,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-Words of Waste
-Words of Wilding
-Words of Wind
-Words of Worship
-Words of War
-Return of the Nightstalkers
-Eunuchs' Intrigues
-Goblin War Cry
-Advice from the Fae
-Consign to Dream
-Prismwake Merrow
-Ad Nauseam
-Primal Surge
-Tyrant of Discord
-Impelled Giant
-Merrow Bonegnawer
-Stigma Lasher
-Shaper Parasite
-Clear the Land
-Enslaved Horror
-Gift of the Gargantuan
-Abundance
-Acorn Catapult
-Howltooth Hollow
-Shelldock Isle
-Sedge Sliver
-Withering Wisps
-Anthem of Rakdos
-Apocalypse Chime
-Spinerock Knoll
-Desertion
-Avizoa
-Acidic Dagger
-Aquamorph Entity
-Angel of Salvation
-Antagonism
-Hunter Sliver
-Altar of the Lost
-Ancient Ziggurat
-Cavern of Souls
-Dark Impostor
-Eldrazi Temple
-Food Chain
-Geosurge
-Grand Architect
-Metamorphosis
-Mishra's Workshop
-Myr Reservoir
-Myr Welder
-Pillar of the Paruns
-Primal Beyond
-Rosheen Meanderer
-Smokebraider
-Soldevi Machinist
-Somberwald Sage
-Untaidake, the Cloud Keeper
-Vedalken Engineer
-Balshan Beguiler
-Bifurcate
-Blizzard Specter
-Blood Oath
-Archangel of Strife
-Bloodline Shaman
-Blind Fury
-Bloodcurdler
-Karona's Zealot
-Blood of the Martyr
-Lancers en-Kor
-Nomads en-Kor
-Outrider en-Kor
-Spirit en-Kor
-Warrior en-Kor
-Bend or Break
-Basalt Golem
-Homing Sliver
-Baleful Strix
-Illusory Angel
-Vela the Night-Clad
-Etherium-Horn Sorcerer
-Maelstrom Wanderer
-Mass Mutiny
-Shardless Agent
-Beetleback Chief
-Brindle Shoat
-Thing from the Deep
-Bog Elemental
-Krond the Dawn-Clad
-Preyseizer Dragon
-Indrik Umbra
-Dragonlair Spider
-Dreampod Druid
+
 
 
 end

@@ -677,7 +677,18 @@ public class CardFactorySorceries {
         // *************** START *********** START **************************
         else if (cardName.equals("Donate")) {
             final Target t2 = new Target(card, "Select target Player", "Player".split(","));
-            final AbilitySub sub = new AbilitySub(card, t2) {
+            class DrawbackDonate extends AbilitySub {
+                public DrawbackDonate(final Card ca,final Target t) {
+                    super(ca,t);
+                }
+                
+                @Override
+                public AbilitySub getCopy() {
+                    AbilitySub res = new DrawbackDonate(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                    CardFactoryUtil.copySpellAbility(this,res);
+                    return res;
+                }
+                
                 private static final long serialVersionUID = 4618047889933691050L;
 
                 @Override
@@ -696,7 +707,8 @@ public class CardFactorySorceries {
                 public boolean doTrigger(final boolean b) {
                     return false;
                 }
-            };
+            }
+            final AbilitySub sub = new DrawbackDonate(card, t2);
 
             final Cost abCost = new Cost(card, "2 U", false);
             final Target t1 = new Target(card, "Select target permanent", "Permanent".split(","));

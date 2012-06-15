@@ -4,7 +4,7 @@ Types:Creature Cat Warrior
 Text:no text
 PT:2/3
 K:Reach
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | CheckSVar$ X | CheckSecondSVar2$ Y | CheckThirdSVar$ Z | AddHiddenKeyword$ HIDDEN May be played without paying its mana cost and as though it has flash | Description$ If a creature is attacking you and you control a Forest and a Plains, you may cast CARDNAME without paying its mana cost and as though it had flash.
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | CheckSVar$ X | CheckSecondSVar2$ Y | CheckThirdSVar$ Z | References$ X,Y,Z | AddHiddenKeyword$ HIDDEN May be played without paying its mana cost and as though it has flash | Description$ If a creature is attacking you and you control a Forest and a Plains, you may cast CARDNAME without paying its mana cost and as though it had flash.
 SVar:X:Count$Valid Creature.YouDontCtrl+attacking
 SVar:Y:Count$Valid Forest.YouCtrl
 SVar:Z:Count$Valid Plains.YouCtrl

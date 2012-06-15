@@ -4,7 +4,7 @@ Types:Creature Lhurgoyf
 Text:no text
 PT:*/*
 K:Haste
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of sorcery cards in all graveyards.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of sorcery cards in all graveyards.
 SVar:X:Count$TypeInAllYards.Sorcery
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

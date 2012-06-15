@@ -2,7 +2,7 @@ Name:Tolarian Academy
 ManaCost:no cost
 Types:Legendary Land
 Text:no text
-A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | SpellDescription$ Add U to your mana pool for each artifact you control.
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | References$ X | SpellDescription$ Add U to your mana pool for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

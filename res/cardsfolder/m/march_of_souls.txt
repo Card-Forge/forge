@@ -3,9 +3,9 @@ ManaCost:4 W
 Types:Sorcery
 Text:no text
 A:SP$ DestroyAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | RememberDestroyed$ True | NoRegen$ True | SubAbility$ DBTokenYou | SpellDescription$ Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.
-SVar:DBTokenYou:DB$Token | TokenAmount$ X | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SubAbility$ DBDestroyOpp
+SVar:DBTokenYou:DB$Token | TokenAmount$ X | References$ X | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SubAbility$ DBDestroyOpp
 SVar:DBDestroyOpp:DB$DestroyAll | ValidCards$ Creature.YouDontCtrl | RememberDestroyed$ True | NoRegen$ True | SubAbility$ DBTokenOpp
-SVar:DBTokenOpp:DB$Token | TokenAmount$ Y | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ Opponent | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
+SVar:DBTokenOpp:DB$Token | TokenAmount$ Y | References$ Y | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ Opponent | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:X:Remembered$Amount
 SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True

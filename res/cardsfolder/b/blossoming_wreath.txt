@@ -2,7 +2,7 @@ Name:Blossoming Wreath
 ManaCost:G
 Types:Instant
 Text:no text
-A:SP$ GainLife | Cost$ G | LifeAmount$ X | SpellDescription$ You gain life equal to the number of creature cards in your graveyard.
+A:SP$ GainLife | Cost$ G | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the number of creature cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blossoming_wreath.jpg

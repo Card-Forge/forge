@@ -3,7 +3,7 @@ ManaCost:4 B B
 Types:Sorcery
 Text:no text
 K:Epic
-A:SP$ ChangeZone | Cost$ 4 B B | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ X | IsCurse$ True | SpellDescription$ Search target player's library for X cards, where X is the number of cards in your hand, and exile it. Then that player shuffles his or her library.
+A:SP$ ChangeZone | Cost$ 4 B B | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ X | References$ X | IsCurse$ True | SpellDescription$ Search target player's library for X cards, where X is the number of cards in your hand, and exile it. Then that player shuffles his or her library.
 SVar:X:Count$InYourHand
 SVar:Rarity:Rare
 SVar:RemAIDeck:True

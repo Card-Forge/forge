@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant
 Text:no text
 A:SP$ ChangeZone | Cost$ W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SubAbility$ DBGainLife | SpellDescription$ Put target attacking creature on the bottom of its owner's library. Its controller gains life equal to its toughness.
-SVar:DBGainLife:DB$GainLife | Defined$ TargetedController | LifeAmount$ X
+SVar:DBGainLife:DB$GainLife | Defined$ TargetedController | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardToughness
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/condemn.jpg

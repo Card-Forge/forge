@@ -2,7 +2,7 @@ Name:Heliophial
 ManaCost:5
 Types:Artifact
 Text:no text
-A:AB$ DealDamage | Cost$ 2 Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of charge counters on it to target creature or player.
+A:AB$ DealDamage | Cost$ 2 Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of charge counters on it to target creature or player.
 K:Sunburst
 SVar:X:Count$CardCounters.CHARGE
 SVar:Rarity:Common

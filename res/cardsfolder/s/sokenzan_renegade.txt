@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Bushido 1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGainControl | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of CARDNAME.
-SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | Defined$ Self | NewController$ Opponent | ConditionCheckSVar$ SokenzanX | ConditionSVarCompare$ LTSokenzanY
+SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | Defined$ Self | NewController$ Opponent | ConditionCheckSVar$ SokenzanX | References$ SokenzanX,SokenzanY | ConditionSVarCompare$ LTSokenzanY
 SVar:SokenzanX:Count$InYourHand
 SVar:SokenzanY:Count$InOppHand
 SVar:RemAIDeck:True

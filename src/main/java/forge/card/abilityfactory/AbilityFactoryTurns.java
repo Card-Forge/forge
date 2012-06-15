@@ -28,6 +28,8 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.game.phase.ExtraTurn;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -57,8 +59,18 @@ public class AbilityFactoryTurns {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityAddTurn(final AbilityFactory af) {
-
-        final SpellAbility abAddTurn = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityAddTurn extends AbilityActivated {
+            public AbilityAddTurn(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityAddTurn(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -3526200766738015688L;
 
             @Override
@@ -80,8 +92,9 @@ public class AbilityFactoryTurns {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryTurns.addTurnTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility abAddTurn = new AbilityAddTurn(af.getHostCard(), af.getAbCost(), af.getAbTgt());
+        
         return abAddTurn;
     }
 
@@ -135,7 +148,18 @@ public class AbilityFactoryTurns {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackAddTurn(final AbilityFactory af) {
-        final SpellAbility dbAddTurn = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackAddTurn extends AbilitySub {
+            public DrawbackAddTurn(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackAddTurn(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -562517287448810951L;
 
             @Override
@@ -157,8 +181,9 @@ public class AbilityFactoryTurns {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryTurns.addTurnTriggerAI(af, this, mandatory);
             }
-
-        };
+        }
+        final SpellAbility dbAddTurn = new DrawbackAddTurn(af.getHostCard(), af.getAbTgt());
+        
         return dbAddTurn;
     }
 
@@ -343,8 +368,18 @@ public class AbilityFactoryTurns {
      * @return the spell ability
      */
     public static SpellAbility createAbilityEndTurn(final AbilityFactory af) {
-        final SpellAbility ret = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
-
+        class AbilityEndTurn extends AbilityActivated {
+            public AbilityEndTurn(final Card ca,final Cost co,final Target t) {
+                super(ca,co,t);
+            }
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityEndTurn(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+            
             private static final long serialVersionUID = 72570867940224012L;
 
             @Override
@@ -370,8 +405,8 @@ public class AbilityFactoryTurns {
             public void resolve() {
                 AbilityFactoryTurns.endTurnResolve(af, this);
             }
-
-        };
+        }
+        final SpellAbility ret = new AbilityEndTurn(af.getHostCard(), af.getAbCost(), af.getAbTgt());
 
         return ret;
     }
@@ -414,7 +449,18 @@ public class AbilityFactoryTurns {
      * @return the spell ability
      */
     public static SpellAbility createDrawbackEndTurn(final AbilityFactory af) {
-        final SpellAbility dbEndTurn = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackEndTurn extends AbilitySub {
+            public DrawbackEndTurn(final Card ca,final Target t) {
+                super(ca,t);
+            }
+            
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackEndTurn(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this,res);
+                return res;
+            }
+            
             private static final long serialVersionUID = -562517287448810951L;
 
             @Override
@@ -440,8 +486,9 @@ public class AbilityFactoryTurns {
 
                 return false;
             }
-
-        };
+        }
+        final SpellAbility dbEndTurn = new DrawbackEndTurn(af.getHostCard(), af.getAbTgt());
+        
         return dbEndTurn;
     }
 

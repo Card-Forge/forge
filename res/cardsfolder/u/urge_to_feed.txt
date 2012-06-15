@@ -3,7 +3,7 @@ ManaCost:B B
 Types:Instant
 Text:no text
 A:SP$ Pump | Cost$ B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SubAbility$ VampiricUrge | SpellDescription$ Target creature gets -3/-3 until end of turn. You may tap any number of untapped Vampire creatures you control. If you do, put a +1/+1 counter on each of those Vampires.
-SVar:VampiricUrge:DB$ Tap | TargetMin$ 0 | TargetMax$ AbleToFeedX | ValidTgts$ Creature.Vampire+untapped+YouCtrl | ValidDesc$ untapped Vampire creature you control | RememberTapped$ True | SubAbility$ VampiricFeed
+SVar:VampiricUrge:DB$ Tap | TargetMin$ 0 | TargetMax$ AbleToFeedX | References$ AbleToFeedX | ValidTgts$ Creature.Vampire+untapped+YouCtrl | ValidDesc$ untapped Vampire creature you control | RememberTapped$ True | SubAbility$ VampiricFeed
 SVar:VampiricFeed:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:AbleToFeedX:Count$Valid Creature.Vampire+YouCtrl

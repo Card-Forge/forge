@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature.Self+powerGE7 | PresentCompare$ GE1 | Execute$ TrigSac | TriggerDescription$ When CARDNAME's power is 7 or greater, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
-A:AB$ PutCounter | Cost$ ExileFromTop<1/Card> | Defined$ Self | CounterNum$ X | CounterType$ P1P1 | SpellDescription$ Put X +1/+1 counters on CARDNAME, where X is the exiled card's converted mana cost.
+A:AB$ PutCounter | Cost$ ExileFromTop<1/Card> | Defined$ Self | CounterNum$ X | References$ X | CounterType$ P1P1 | SpellDescription$ Put X +1/+1 counters on CARDNAME, where X is the exiled card's converted mana cost.
 SVar:X:Exiled$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

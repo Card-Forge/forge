@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Instant
 Text:no text
 A:SP$ DestroyAll | Cost$ 3 W | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
-A:SP$ DestroyAll | Cost$ 0 | ValidCards$ Enchantment | CheckSVar$ X | SVarCompare$ GE1 | SpellDescription$ If you've cast another white spell this turn, you may cast CARDNAME without paying its mana cost. Destroy all enchantments.
+A:SP$ DestroyAll | Cost$ 0 | ValidCards$ Enchantment | CheckSVar$ X | SVarCompare$ GE1 | References$ X | SpellDescription$ If you've cast another white spell this turn, you may cast CARDNAME without paying its mana cost. Destroy all enchantments.
 SVar:X:Count$ThisTurnCast_Card.White+Other+YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patricians_scorn.jpg

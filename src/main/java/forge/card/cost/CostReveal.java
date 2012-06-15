@@ -103,7 +103,7 @@ public class CostReveal extends CostPartWithList {
             hand = hand.getValidCards(type.split(";"), activator, source);
             Integer c = this.convertAmount();
             if (c == null) {
-                final String sVar = source.getSVar(this.getAmount());
+                final String sVar = ability.getSVar(this.getAmount());
                 if (sVar.equals("XChoice")) {
                     c = hand.size();
                 } else {
@@ -150,9 +150,9 @@ public class CostReveal extends CostPartWithList {
             handList = handList.getValidCards(this.getType().split(";"), activator, ability.getSourceCard());
 
             if (c == null) {
-                final String sVar = source.getSVar(amount);
+                final String sVar = ability.getSVar(amount);
                 if (sVar.equals("XChoice")) {
-                    c = CostUtil.chooseXValue(source, handList.size());
+                    c = CostUtil.chooseXValue(source, ability, handList.size());
                 } else {
                     c = AbilityFactory.calculateAmount(source, amount, ability);
                 }

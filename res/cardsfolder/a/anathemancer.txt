@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Unearth:5 B R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage to target player equal to the number of nonbasic lands that player controls.
-SVar:TrigDamage:DB$DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | RememberTargets$ True | SubAbility$ DBCleanup
+SVar:TrigDamage:DB$DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | RememberTargets$ True | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Land.nonBasic+RememberedPlayerCtrl
 SVar:Rarity:Uncommon

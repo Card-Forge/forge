@@ -2,7 +2,7 @@ Name:Flurry of Wings
 ManaCost:G W U
 Types:Instant
 Text:no text
-A:SP$ Token | Cost$ G W U | TokenAmount$ X | TokenName$ Bird Soldier | TokenTypes$ Creature,Bird,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put X 1/1 white Bird Soldier creature tokens with flying onto the battlefield, where X is the number of attacking creatures.
+A:SP$ Token | Cost$ G W U | TokenAmount$ X | TokenName$ Bird Soldier | TokenTypes$ Creature,Bird,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | References$ X | SpellDescription$ Put X 1/1 white Bird Soldier creature tokens with flying onto the battlefield, where X is the number of attacking creatures.
 SVar:X:Count$Valid Creature.attacking
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

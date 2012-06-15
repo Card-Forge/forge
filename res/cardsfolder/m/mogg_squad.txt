@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Goblin
 Text:no text
 PT:3/3
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets -1/-1 for each other creature on the battlefield.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets -1/-1 for each other creature on the battlefield.
 SVar:X:Count$Valid Creature.Other/Negative
 SVar:AntiBuffedBy:Creature
 SVar:RemAIDeck:True

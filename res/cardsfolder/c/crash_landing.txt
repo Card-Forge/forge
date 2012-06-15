@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Instant
 Text:no text
 A:SP$ Debuff | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | Keywords$ Flying | SubAbility$ DBDamage | SpellDescription$ Target creature with flying loses flying until end of turn. CARDNAME deals damage to that creature equal to the number of Forests you control.
-SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X
+SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | References$ X
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crash_landing.jpg

@@ -4,7 +4,7 @@ Types:Creature Ooze
 Text:no text
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a spell, CARDNAME gets +X/+X until end of turn, where X is that spell's converted mana cost.
-SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +X | NumDef$ +X
+SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +X | NumDef$ +X | References$ X
 SVar:X:TriggeredCard$CardManaCost
 SVar:BuffedBy:Card
 SVar:Rarity:Rare

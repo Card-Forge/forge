@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature |TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When a creature enters the battlefield, sacrifice Monkey Cage and put X 2/2 green Ape creature tokens onto the battlefield, where X is that creature's converted mana cost.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBToken | RememberSacrificed$ True
-SVar:DBToken:DB$Token | Cost$ 0 | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | TokenAmount$ X | TokenName$ Ape | TokenTypes$ Creature,Ape | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2
+SVar:DBToken:DB$Token | Cost$ 0 | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | TokenAmount$ X | References$ X | TokenName$ Ape | TokenTypes$ Creature,Ape | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2
 SVar:X:TriggeredCard$CardManaCost
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monkey_cage.jpg

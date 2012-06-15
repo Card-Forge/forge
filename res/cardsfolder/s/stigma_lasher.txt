@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Wither
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player can't gain life for the rest of the game.
-SVar:TrigEffect:AB$Effect | Cost$ 0 | Name$ Stigma Lasher Effect | StaticAbilities$ CantGainLife | Permanent$ True | RememberObjects$ TriggeredAffected
+SVar:TrigEffect:AB$Effect | Cost$ 0 | Name$ Stigma Lasher Effect | StaticAbilities$ CantGainLife | Duration$ Permanent | RememberObjects$ TriggeredAffected
 SVar:CantGainLife:Mode$ Continuous | Affected$ Player.isRemembered | AddKeyword$ You can't gain life. | Description$ The damaged player can't gain life for the rest of the game.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stigma_lasher.jpg

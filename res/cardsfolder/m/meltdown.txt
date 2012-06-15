@@ -2,7 +2,7 @@ Name:Meltdown
 ManaCost:X R
 Types:Sorcery
 Text:no text
-A:SP$ DestroyAll | Cost$ X R | ValidCards$ Artifact.cmcLEX | SpellDescription$ Destroy each artifact with converted mana cost X or less.
+A:SP$ DestroyAll | Cost$ X R | ValidCards$ Artifact.cmcLEX | References$ X | SpellDescription$ Destroy each artifact with converted mana cost X or less.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
