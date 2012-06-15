@@ -60,17 +60,18 @@ public final class AbilityFactoryCharm {
      */
     public static SpellAbility createAbilityCharm(final AbilityFactory af) {
         class AbilityCharm extends AbilityActivated {
-            public AbilityCharm(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityCharm(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityCharm(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityCharm(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4038591081733095021L;
 
             @Override

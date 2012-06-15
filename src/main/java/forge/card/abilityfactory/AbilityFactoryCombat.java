@@ -67,17 +67,18 @@ public final class AbilityFactoryCombat {
      */
     public static SpellAbility createAbilityFog(final AbilityFactory af) {
         class AbilityFog extends AbilityActivated {
-            public AbilityFog(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityFog(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityFog(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityFog(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -1933592438783630254L;
 
             @Override
@@ -103,7 +104,7 @@ public final class AbilityFactoryCombat {
             }
         }
         final SpellAbility abFog = new AbilityFog(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abFog;
     }
 
@@ -152,17 +153,18 @@ public final class AbilityFactoryCombat {
      */
     public static SpellAbility createDrawbackFog(final AbilityFactory af) {
         class DrawbackFog extends AbilitySub {
-            public DrawbackFog(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackFog(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackFog(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackFog(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -5141246507533353605L;
 
             @Override
@@ -181,7 +183,7 @@ public final class AbilityFactoryCombat {
             }
         }
         final SpellAbility dbFog = new DrawbackFog(af.getHostCard(), af.getAbTgt());
-        
+
         return dbFog;
     }
 
@@ -356,17 +358,18 @@ public final class AbilityFactoryCombat {
      */
     public static SpellAbility createAbilityMustAttack(final AbilityFactory af) {
         class AbilityMustAttack extends AbilityActivated {
-            public AbilityMustAttack(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityMustAttack(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityMustAttack(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityMustAttack(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 4559154732470225755L;
 
             @Override
@@ -390,7 +393,7 @@ public final class AbilityFactoryCombat {
             }
         }
         final SpellAbility abMustAttack = new AbilityMustAttack(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abMustAttack;
     }
 
@@ -437,17 +440,18 @@ public final class AbilityFactoryCombat {
      */
     public static SpellAbility createDrawbackMustAttack(final AbilityFactory af) {
         class DrawbackMustAttack extends AbilitySub {
-            public DrawbackMustAttack(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackMustAttack(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackMustAttack(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackMustAttack(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 1294949210616598158L;
 
             @Override
@@ -466,7 +470,7 @@ public final class AbilityFactoryCombat {
             }
         }
         final SpellAbility dbMustAttack = new DrawbackMustAttack(af.getHostCard(), af.getAbTgt());
-        
+
         return dbMustAttack;
     }
 
@@ -597,17 +601,18 @@ public final class AbilityFactoryCombat {
      */
     public static SpellAbility createAbilityRemoveFromCombat(final AbilityFactory af) {
         class AbilityRemoveFromCombat extends AbilityActivated {
-            public AbilityRemoveFromCombat(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityRemoveFromCombat(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityRemoveFromCombat(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityRemoveFromCombat(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -2472319390656924874L;
 
             @Override
@@ -631,7 +636,7 @@ public final class AbilityFactoryCombat {
             }
         }
         final SpellAbility abRemCombat = new AbilityRemoveFromCombat(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abRemCombat;
     }
 
@@ -678,17 +683,18 @@ public final class AbilityFactoryCombat {
      */
     public static SpellAbility createDrawbackRemoveFromCombat(final AbilityFactory af) {
         class DrawbackRemoveFromCombat extends AbilitySub {
-            public DrawbackRemoveFromCombat(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackRemoveFromCombat(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackRemoveFromCombat(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackRemoveFromCombat(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5080737903616292224L;
 
             @Override
@@ -707,7 +713,7 @@ public final class AbilityFactoryCombat {
             }
         }
         final SpellAbility dbRemCombat = new DrawbackRemoveFromCombat(af.getHostCard(), af.getAbTgt());
-        
+
         return dbRemCombat;
     }
 
@@ -831,17 +837,18 @@ public final class AbilityFactoryCombat {
      */
     public static SpellAbility createAbilityMustBlock(final AbilityFactory af) {
         class AbilityMustBlock extends AbilityActivated {
-            public AbilityMustBlock(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityMustBlock(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityMustBlock(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityMustBlock(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 4237190949098526123L;
 
             @Override
@@ -865,7 +872,7 @@ public final class AbilityFactoryCombat {
             }
         }
         final SpellAbility abMustBlock = new AbilityMustBlock(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abMustBlock;
     }
 
@@ -916,17 +923,18 @@ public final class AbilityFactoryCombat {
      */
     public static SpellAbility createDrawbackMustBlock(final AbilityFactory af) {
         class DrawbackMustBlock extends AbilitySub {
-            public DrawbackMustBlock(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackMustBlock(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackMustBlock(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackMustBlock(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -815813765448972775L;
 
             @Override
@@ -945,7 +953,7 @@ public final class AbilityFactoryCombat {
             }
         }
         final SpellAbility dbMustBlock = new DrawbackMustBlock(af.getHostCard(), af.getAbTgt());
-        
+
         return dbMustBlock;
     }
 

@@ -80,17 +80,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createAbilityChooseType(final AbilityFactory af) {
         class AbilityChooseType extends AbilityActivated {
-            public AbilityChooseType(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityChooseType(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityChooseType(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityChooseType(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -7734286034988741837L;
 
             @Override
@@ -114,7 +115,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility abChooseType = new AbilityChooseType(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abChooseType;
     }
 
@@ -161,17 +162,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createDrawbackChooseType(final AbilityFactory af) {
         class DrawbackChooseType extends AbilitySub {
-            public DrawbackChooseType(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackChooseType(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackChooseType(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackChooseType(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5555184803257696143L;
 
             @Override
@@ -195,7 +197,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility dbChooseType = new DrawbackChooseType(af.getHostCard(), af.getAbTgt());
-        
+
         return dbChooseType;
     }
 
@@ -467,17 +469,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createAbilityChooseColor(final AbilityFactory af) {
         class AbilityChooseColor extends AbilityActivated {
-            public AbilityChooseColor(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityChooseColor(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityChooseColor(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityChooseColor(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 7069068165774633355L;
 
             @Override
@@ -501,7 +504,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility abChooseColor = new AbilityChooseColor(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abChooseColor;
     }
 
@@ -550,17 +553,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createDrawbackChooseColor(final AbilityFactory af) {
         class DrawbackChooseColor extends AbilitySub {
-            public DrawbackChooseColor(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackChooseColor(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackChooseColor(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackChooseColor(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 6969618586164278998L;
 
             @Override
@@ -584,7 +588,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility dbChooseColor = new DrawbackChooseColor(af.getHostCard(), af.getAbTgt());
-        
+
         return dbChooseColor;
     }
 
@@ -777,17 +781,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createAbilityChooseNumber(final AbilityFactory af) {
         class AbilityChooseNumber extends AbilityActivated {
-            public AbilityChooseNumber(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityChooseNumber(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityChooseNumber(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityChooseNumber(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -8268155210011368749L;
 
             @Override
@@ -811,7 +816,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility abChooseNumber = new AbilityChooseNumber(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abChooseNumber;
     }
 
@@ -860,17 +865,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createDrawbackChooseNumber(final AbilityFactory af) {
         class DrawbackChooseNumber extends AbilitySub {
-            public DrawbackChooseNumber(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackChooseNumber(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackChooseNumber(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackChooseNumber(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -1339609900364066904L;
 
             @Override
@@ -894,7 +900,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility dbChooseNumber = new DrawbackChooseNumber(af.getHostCard(), af.getAbTgt());
-        
+
         return dbChooseNumber;
     }
 
@@ -1071,17 +1077,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createAbilityChoosePlayer(final AbilityFactory af) {
         class AbilityChoosePlayer extends AbilityActivated {
-            public AbilityChoosePlayer(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityChoosePlayer(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityChoosePlayer(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityChoosePlayer(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 7502903475594562552L;
 
             @Override
@@ -1105,7 +1112,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility abChoosePlayer = new AbilityChoosePlayer(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abChoosePlayer;
     }
 
@@ -1155,17 +1162,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createDrawbackChoosePlayer(final AbilityFactory af) {
         class DrawbackChoosePlayer extends AbilitySub {
-            public DrawbackChoosePlayer(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackChoosePlayer(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackChoosePlayer(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackChoosePlayer(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -766158106632103029L;
 
             @Override
@@ -1189,7 +1197,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility dbChoosePlayer = new DrawbackChoosePlayer(af.getHostCard(), af.getAbTgt());
-        
+
         return dbChoosePlayer;
     }
 
@@ -1334,17 +1342,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createAbilityNameCard(final AbilityFactory af) {
         class AbilityNameCard extends AbilityActivated {
-            public AbilityNameCard(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityNameCard(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityNameCard(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityNameCard(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 1748714246609515354L;
 
             @Override
@@ -1368,7 +1377,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility abNameCard = new AbilityNameCard(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abNameCard;
     }
 
@@ -1417,17 +1426,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createDrawbackNameCard(final AbilityFactory af) {
         class DrawbackNameCard extends AbilitySub {
-            public DrawbackNameCard(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackNameCard(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackNameCard(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackNameCard(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -7647726271751061495L;
 
             @Override
@@ -1451,7 +1461,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility dbNameCard = new DrawbackNameCard(af.getHostCard(), af.getAbTgt());
-        
+
         return dbNameCard;
     }
 
@@ -1664,17 +1674,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createAbilityChooseCard(final AbilityFactory af) {
         class AbilityChooseCard extends AbilityActivated {
-            public AbilityChooseCard(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityChooseCard(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityChooseCard(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityChooseCard(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 2399435577106102311L;
 
             @Override
@@ -1698,7 +1709,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility abChooseCard = new AbilityChooseCard(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abChooseCard;
     }
 
@@ -1746,17 +1757,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createDrawbackChooseCard(final AbilityFactory af) {
         class DrawbackChooseCard extends AbilitySub {
-            public DrawbackChooseCard(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackChooseCard(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackChooseCard(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackChooseCard(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -3255569671897226555L;
 
             @Override
@@ -1780,7 +1792,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility dbChooseCard = new DrawbackChooseCard(af.getHostCard(), af.getAbTgt());
-        
+
         return dbChooseCard;
     }
 
@@ -1957,17 +1969,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createAbilityChooseGeneric(final AbilityFactory af) {
         class AbilityChooseGeneric extends AbilityActivated {
-            public AbilityChooseGeneric(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityChooseGeneric(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityChooseGeneric(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityChooseGeneric(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -459173435583208151L;
 
             @Override
@@ -1991,7 +2004,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility abChooseGeneric = new AbilityChooseGeneric(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abChooseGeneric;
     }
 
@@ -2042,17 +2055,18 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createDrawbackChooseGeneric(final AbilityFactory af) {
         class DrawbackChooseGeneric extends AbilitySub {
-            public DrawbackChooseGeneric(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackChooseGeneric(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackChooseGeneric(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackChooseGeneric(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 1586980855969921641L;
 
             @Override
@@ -2076,7 +2090,7 @@ public final class AbilityFactoryChoose {
             }
         }
         final SpellAbility dbChooseGeneric = new DrawbackChooseGeneric(af.getHostCard(), af.getAbTgt());
-        
+
         return dbChooseGeneric;
     }
 

@@ -65,17 +65,18 @@ public final class AbilityFactoryClash {
      */
     public static SpellAbility createAbilityClash(final AbilityFactory af) {
         class AbilityClash extends AbilityActivated {
-            public AbilityClash(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityClash(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityClash(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityClash(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -8019637116128196248L;
 
             @Override
@@ -153,17 +154,18 @@ public final class AbilityFactoryClash {
      */
     public static SpellAbility createDrawbackClash(final AbilityFactory af) {
         class DrawbackClash extends AbilitySub {
-            public DrawbackClash(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackClash(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackClash(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackClash(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -3850086157052881360L;
 
             @Override
@@ -192,7 +194,7 @@ public final class AbilityFactoryClash {
             }
         }
         final SpellAbility dbClash = new DrawbackClash(af.getHostCard(), af.getAbTgt());
-        
+
         return dbClash;
     }
 
@@ -267,17 +269,18 @@ public final class AbilityFactoryClash {
      */
     public static SpellAbility createAbilityFlip(final AbilityFactory af) {
         class AbilityFlip extends AbilityActivated {
-            public AbilityFlip(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityFlip(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityFlip(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityFlip(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -8293336773930687488L;
 
             @Override
@@ -355,17 +358,18 @@ public final class AbilityFactoryClash {
      */
     public static SpellAbility createDrawbackFlip(final AbilityFactory af) {
         class DrawbackFlip extends AbilitySub {
-            public DrawbackFlip(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackFlip(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackFlip(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackFlip(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 8581978154811461324L;
 
             @Override
@@ -508,17 +512,18 @@ public final class AbilityFactoryClash {
      */
     public static SpellAbility createAbilityTwoPiles(final AbilityFactory af) {
         class AbilityTwoPiles extends AbilityActivated {
-            public AbilityTwoPiles(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityTwoPiles(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityTwoPiles(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityTwoPiles(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -2700390539969188516L;
 
             @Override
@@ -542,7 +547,7 @@ public final class AbilityFactoryClash {
             }
         }
         final SpellAbility abTwoPiles = new AbilityTwoPiles(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abTwoPiles;
     }
 
@@ -591,17 +596,18 @@ public final class AbilityFactoryClash {
      */
     public static SpellAbility createDrawbackTwoPiles(final AbilityFactory af) {
         class DrawbackTwoPiles extends AbilitySub {
-            public DrawbackTwoPiles(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackTwoPiles(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackTwoPiles(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackTwoPiles(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 7486255949274716808L;
 
             @Override
@@ -625,7 +631,7 @@ public final class AbilityFactoryClash {
             }
         }
         final SpellAbility dbTwoPiles = new DrawbackTwoPiles(af.getHostCard(), af.getAbTgt());
-        
+
         return dbTwoPiles;
     }
 
