@@ -76,17 +76,18 @@ public final class AbilityFactoryCopy {
      */
     public static SpellAbility createAbilityCopyPermanent(final AbilityFactory af) {
         class AbilityCopyPermanent extends AbilityActivated {
-            public AbilityCopyPermanent(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityCopyPermanent(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityCopyPermanent(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityCopyPermanent(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 4557071554433108024L;
 
             @Override
@@ -156,17 +157,18 @@ public final class AbilityFactoryCopy {
      */
     public static SpellAbility createDrawbackCopyPermanent(final AbilityFactory af) {
         class DrawbackCopyPermanent extends AbilitySub {
-            public DrawbackCopyPermanent(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackCopyPermanent(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackCopyPermanent(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackCopyPermanent(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -7725564505830285184L;
 
             @Override
@@ -190,7 +192,7 @@ public final class AbilityFactoryCopy {
             }
         }
         final SpellAbility dbCopyPermanent = new DrawbackCopyPermanent(af.getHostCard(), af.getAbTgt());
-        
+
         return dbCopyPermanent;
     }
 
@@ -525,17 +527,18 @@ public final class AbilityFactoryCopy {
      */
     public static SpellAbility createAbilityCopySpell(final AbilityFactory af) {
         class AbilityCopySpell extends AbilityActivated {
-            public AbilityCopySpell(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityCopySpell(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityCopySpell(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityCopySpell(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5232548517225345052L;
 
             @Override
@@ -559,7 +562,7 @@ public final class AbilityFactoryCopy {
             }
         }
         final SpellAbility abCopySpell = new AbilityCopySpell(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abCopySpell;
     }
 
@@ -614,17 +617,18 @@ public final class AbilityFactoryCopy {
      */
     public static SpellAbility createDrawbackCopySpell(final AbilityFactory af) {
         class DrawbackCopySpell extends AbilitySub {
-            public DrawbackCopySpell(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackCopySpell(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackCopySpell(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackCopySpell(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 1927508119173644632L;
 
             @Override
@@ -648,7 +652,7 @@ public final class AbilityFactoryCopy {
             }
         }
         final SpellAbility dbCopySpell = new DrawbackCopySpell(af.getHostCard(), af.getAbTgt());
-        
+
         return dbCopySpell;
     }
 

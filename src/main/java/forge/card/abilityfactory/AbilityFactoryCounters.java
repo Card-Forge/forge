@@ -76,17 +76,18 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createAbilityPutCounters(final AbilityFactory af) {
         class AbilityPutCounters extends AbilityActivated {
-            public AbilityPutCounters(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityPutCounters(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityPutCounters(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityPutCounters(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -1259638699008542484L;
 
             @Override
@@ -110,7 +111,7 @@ public class AbilityFactoryCounters {
             }
         }
         final SpellAbility abPutCounter = new AbilityPutCounters(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abPutCounter;
     }
 
@@ -170,17 +171,18 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createDrawbackPutCounters(final AbilityFactory af) {
         class DrawbackPutCounters extends AbilitySub {
-            public DrawbackPutCounters(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackPutCounters(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackPutCounters(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackPutCounters(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -323471693082498224L;
 
             @Override
@@ -209,7 +211,7 @@ public class AbilityFactoryCounters {
             }
         }
         final SpellAbility dbPutCounter = new DrawbackPutCounters(af.getHostCard(), af.getAbTgt());
-        
+
         return dbPutCounter;
     }
 
@@ -777,17 +779,18 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createAbilityRemoveCounters(final AbilityFactory af) {
         class AbilityRemoveCounters extends AbilityActivated {
-            public AbilityRemoveCounters(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityRemoveCounters(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityRemoveCounters(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityRemoveCounters(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 8581011868395954121L;
 
             @Override
@@ -811,7 +814,7 @@ public class AbilityFactoryCounters {
             }
         }
         final SpellAbility abRemCounter = new AbilityRemoveCounters(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abRemCounter;
     }
 
@@ -863,17 +866,18 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createDrawbackRemoveCounters(final AbilityFactory af) {
         class DrawbackRemoveCounters extends AbilitySub {
-            public DrawbackRemoveCounters(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackRemoveCounters(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackRemoveCounters(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackRemoveCounters(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -5065591869141835456L;
 
             @Override
@@ -897,7 +901,7 @@ public class AbilityFactoryCounters {
             }
         }
         final SpellAbility spRemoveCounter = new DrawbackRemoveCounters(af.getHostCard(), af.getAbTgt());
-        
+
         return spRemoveCounter;
     }
 
@@ -1260,17 +1264,18 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createAbilityProliferate(final AbilityFactory af) {
         class AbilityProliferate extends AbilityActivated {
-            public AbilityProliferate(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityProliferate(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityProliferate(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityProliferate(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -6617234927365102930L;
 
             @Override
@@ -1341,17 +1346,18 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createDrawbackProliferate(final AbilityFactory af) {
         class DrawbackProliferate extends AbilitySub {
-            public DrawbackProliferate(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackProliferate(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackProliferate(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackProliferate(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 1265466498444897146L;
 
             @Override
@@ -1380,7 +1386,7 @@ public class AbilityFactoryCounters {
             }
         }
         final SpellAbility dbProliferate = new DrawbackProliferate(af.getHostCard(), af.getAbTgt());
-        
+
         return dbProliferate;
     }
 
@@ -1657,17 +1663,18 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createAbilityPutCounterAll(final AbilityFactory af) {
         class AbilityPutCounterAll extends AbilityActivated {
-            public AbilityPutCounterAll(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityPutCounterAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityPutCounterAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityPutCounterAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -712473347429870385L;
 
             @Override
@@ -1691,7 +1698,7 @@ public class AbilityFactoryCounters {
             }
         }
         final SpellAbility abPutCounterAll = new AbilityPutCounterAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abPutCounterAll;
     }
 
@@ -1738,17 +1745,18 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createDrawbackPutCounterAll(final AbilityFactory af) {
         class DrawbackPutCounterAll extends AbilitySub {
-            public DrawbackPutCounterAll(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackPutCounterAll(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackPutCounterAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackPutCounterAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -3101160929130043022L;
 
             @Override
@@ -1772,7 +1780,7 @@ public class AbilityFactoryCounters {
             }
         }
         final SpellAbility dbPutCounterAll = new DrawbackPutCounterAll(af.getHostCard(), af.getAbTgt());
-        
+
         return dbPutCounterAll;
     }
 
@@ -2011,17 +2019,18 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createAbilityRemoveCounterAll(final AbilityFactory af) {
         class AbilityRemoveCounterAll extends AbilityActivated {
-            public AbilityRemoveCounterAll(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityRemoveCounterAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityRemoveCounterAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityRemoveCounterAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 1189198508841846311L;
 
             @Override
@@ -2045,7 +2054,7 @@ public class AbilityFactoryCounters {
             }
         }
         final SpellAbility abRemoveCounterAll = new AbilityRemoveCounterAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abRemoveCounterAll;
     }
 
@@ -2092,17 +2101,18 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createDrawbackRemoveCounterAll(final AbilityFactory af) {
         class DrawbackRemoveCounterAll extends AbilitySub {
-            public DrawbackRemoveCounterAll(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackRemoveCounterAll(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackRemoveCounterAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackRemoveCounterAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 9210702927696563686L;
 
             @Override
@@ -2126,7 +2136,7 @@ public class AbilityFactoryCounters {
             }
         }
         final SpellAbility dbRemoveCounterAll = new DrawbackRemoveCounterAll(af.getHostCard(), af.getAbTgt());
-        
+
         return dbRemoveCounterAll;
     }
 
@@ -2256,17 +2266,18 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createAbilityMoveCounters(final AbilityFactory af) {
         class AbilityMoveCounters extends AbilityActivated {
-            public AbilityMoveCounters(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityMoveCounters(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityMoveCounters(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityMoveCounters(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 4602375375570571305L;
 
             @Override
@@ -2290,7 +2301,7 @@ public class AbilityFactoryCounters {
             }
         }
         final SpellAbility abMoveCounter = new AbilityMoveCounters(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abMoveCounter;
     }
 
@@ -2337,17 +2348,18 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createDrawbackMoveCounters(final AbilityFactory af) {
         class DrawbackMoveCounters extends AbilitySub {
-            public DrawbackMoveCounters(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackMoveCounters(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackMoveCounters(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackMoveCounters(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -9185934729634278014L;
 
             @Override
@@ -2371,7 +2383,7 @@ public class AbilityFactoryCounters {
             }
         }
         final SpellAbility dbMoveCounter = new DrawbackMoveCounters(af.getHostCard(), af.getAbTgt());
-        
+
         return dbMoveCounter;
     }
 

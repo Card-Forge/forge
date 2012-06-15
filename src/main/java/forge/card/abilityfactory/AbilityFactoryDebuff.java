@@ -74,17 +74,18 @@ public final class AbilityFactoryDebuff {
      */
     public static SpellAbility createAbilityDebuff(final AbilityFactory af) {
         class AbilityDebuff extends AbilityActivated {
-            public AbilityDebuff(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityDebuff(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDebuff(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityDebuff(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
-                return res;                        
+                return res;
             }
-            
+
             private static final long serialVersionUID = 3536198601841771383L;
 
             @Override
@@ -108,7 +109,7 @@ public final class AbilityFactoryDebuff {
             }
         }
         final SpellAbility abDebuff = new AbilityDebuff(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abDebuff;
     }
 
@@ -155,17 +156,18 @@ public final class AbilityFactoryDebuff {
      */
     public static SpellAbility createDrawbackDebuff(final AbilityFactory af) {
         class DrawbackDebuff extends AbilitySub {
-            public DrawbackDebuff(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackDebuff(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDebuff(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackDebuff(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4728590185604233229L;
 
             @Override
@@ -189,7 +191,7 @@ public final class AbilityFactoryDebuff {
             }
         }
         final SpellAbility dbDebuff = new DrawbackDebuff(af.getHostCard(), af.getAbTgt());
-        
+
         return dbDebuff;
     }
 
@@ -636,17 +638,18 @@ public final class AbilityFactoryDebuff {
      */
     public static SpellAbility createAbilityDebuffAll(final AbilityFactory af) {
         class AbilityDebuffAll extends AbilityActivated {
-            public AbilityDebuffAll(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityDebuffAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDebuffAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityDebuffAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -1977027530713097149L;
 
             @Override
@@ -719,17 +722,18 @@ public final class AbilityFactoryDebuff {
      */
     public static SpellAbility createDrawbackDebuffAll(final AbilityFactory af) {
         class DrawbackDebuffAll extends AbilitySub {
-            public DrawbackDebuffAll(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackDebuffAll(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDebuffAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackDebuffAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 3262199296469706708L;
 
             @Override
@@ -752,9 +756,9 @@ public final class AbilityFactoryDebuff {
                 return AbilityFactoryDebuff.debuffAllTriggerAI(af, this, mandatory);
             }
         }
-        
+
         final SpellAbility dbDebuffAll = new DrawbackDebuffAll(af.getHostCard(), af.getAbTgt()); // SpellAbility
-        
+
         return dbDebuffAll;
     }
 
