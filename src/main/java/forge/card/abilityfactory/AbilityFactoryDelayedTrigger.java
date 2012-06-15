@@ -54,17 +54,18 @@ public class AbilityFactoryDelayedTrigger {
      */
     public static SpellAbility getAbility(final AbilityFactory af) {
         class AbilityDelayedTrigger extends AbilityActivated {
-            public AbilityDelayedTrigger(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityDelayedTrigger(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDelayedTrigger(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityDelayedTrigger(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -7502962478028160305L;
 
             @Override
@@ -88,7 +89,7 @@ public class AbilityFactoryDelayedTrigger {
             }
         }
         final SpellAbility ability = new AbilityDelayedTrigger(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return ability;
     }
 
@@ -135,17 +136,18 @@ public class AbilityFactoryDelayedTrigger {
      */
     public static AbilitySub getDrawback(final AbilityFactory abilityFactory) {
         class DrawbackDelayedTrigger extends AbilitySub {
-            public DrawbackDelayedTrigger(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackDelayedTrigger(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDelayedTrigger(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackDelayedTrigger(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 6192972525033429820L;
 
             @Override

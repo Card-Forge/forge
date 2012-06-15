@@ -151,17 +151,18 @@ public class AbilityFactoryGainControl {
      */
     public final SpellAbility getAbilityGainControl() {
         class AbilityGainControl extends AbilityActivated {
-            public AbilityGainControl(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityGainControl(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityGainControl(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityGainControl(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4384705198674678831L;
 
             @Override
@@ -199,17 +200,18 @@ public class AbilityFactoryGainControl {
      */
     public final SpellAbility getDrawbackGainControl() {
         class DrawbackGainControl extends AbilitySub {
-            public DrawbackGainControl(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackGainControl(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackGainControl(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackGainControl(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -5577742598032345880L;
 
             @Override

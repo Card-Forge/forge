@@ -68,17 +68,18 @@ public class AbilityFactoryEffect {
      */
     public static SpellAbility createAbilityEffect(final AbilityFactory abilityFactory) {
         class AbilityEffect extends AbilityActivated {
-            public AbilityEffect(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityEffect(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityEffect(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityEffect(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 8869422603616247307L;
 
             private final AbilityFactory af = abilityFactory;
@@ -107,7 +108,7 @@ public class AbilityFactoryEffect {
         }
         final SpellAbility abEffect = new AbilityEffect(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
                 abilityFactory.getAbTgt());
-        
+
         return abEffect;
     }
 
@@ -159,17 +160,18 @@ public class AbilityFactoryEffect {
      */
     public static SpellAbility createDrawbackEffect(final AbilityFactory abilityFactory) {
         class DrawbackEffect extends AbilitySub {
-            public DrawbackEffect(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackEffect(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackEffect(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackEffect(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 6631124959690157874L;
 
             private final AbilityFactory af = abilityFactory;
@@ -202,7 +204,7 @@ public class AbilityFactoryEffect {
             }
         }
         final SpellAbility dbEffect = new DrawbackEffect(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
-        
+
         return dbEffect;
     }
 

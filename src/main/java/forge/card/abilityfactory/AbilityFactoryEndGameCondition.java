@@ -61,17 +61,18 @@ public final class AbilityFactoryEndGameCondition {
      */
     public static SpellAbility createAbilityWinsGame(final AbilityFactory af) {
         class AbilityWinsGame extends AbilityActivated {
-            public AbilityWinsGame(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityWinsGame(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityWinsGame(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityWinsGame(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 8869422603616247307L;
 
             @Override
@@ -97,7 +98,7 @@ public final class AbilityFactoryEndGameCondition {
             }
         }
         final SpellAbility abWinsGame = new AbilityWinsGame(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abWinsGame;
     }
 
@@ -151,17 +152,18 @@ public final class AbilityFactoryEndGameCondition {
      */
     public static SpellAbility createDrawbackWinsGame(final AbilityFactory af) {
         class DrawbackWinsGame extends AbilitySub {
-            public DrawbackWinsGame(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackWinsGame(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackWinsGame(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackWinsGame(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 6631124959690157874L;
 
             @Override
@@ -197,7 +199,7 @@ public final class AbilityFactoryEndGameCondition {
             }
         }
         final SpellAbility dbWinsGame = new DrawbackWinsGame(af.getHostCard(), af.getAbTgt());
-        
+
         return dbWinsGame;
     }
 
@@ -323,17 +325,18 @@ public final class AbilityFactoryEndGameCondition {
      */
     public static SpellAbility createAbilityLosesGame(final AbilityFactory af) {
         class AbilityLosesGame extends AbilityActivated {
-            public AbilityLosesGame(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityLosesGame(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityLosesGame(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityLosesGame(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 8869422603616247307L;
 
             @Override
@@ -359,7 +362,7 @@ public final class AbilityFactoryEndGameCondition {
             }
         }
         final SpellAbility abLosesGame = new AbilityLosesGame(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abLosesGame;
     }
 
@@ -413,17 +416,18 @@ public final class AbilityFactoryEndGameCondition {
      */
     public static SpellAbility createDrawbackLosesGame(final AbilityFactory af) {
         class DrawbackLosesGame extends AbilitySub {
-            public DrawbackLosesGame(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackLosesGame(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackLosesGame(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackLosesGame(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 6631124959690157874L;
 
             @Override
@@ -459,7 +463,7 @@ public final class AbilityFactoryEndGameCondition {
             }
         }
         final SpellAbility dbLosesGame = new DrawbackLosesGame(af.getHostCard(), af.getAbTgt());
-        
+
         return dbLosesGame;
     }
 
