@@ -1,5 +1,5 @@
 /*
- 
+
 * Forge: Play Magic: the Gathering.
  * Copyright (C) 2011  Forge Team
  *
@@ -69,17 +69,18 @@ public class AbilityFactoryZoneAffecting {
      */
     public static SpellAbility createAbilityDraw(final AbilityFactory af) {
         class AbilityDraw extends AbilityActivated {
-            public AbilityDraw(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityDraw(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDraw(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityDraw(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -103,7 +104,7 @@ public class AbilityFactoryZoneAffecting {
             }
         }
         final SpellAbility abDraw = new AbilityDraw(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abDraw;
     }
 
@@ -158,17 +159,18 @@ public class AbilityFactoryZoneAffecting {
      */
     public static SpellAbility createDrawbackDraw(final AbilityFactory af) {
         class DrawbackDraw extends AbilitySub {
-            public DrawbackDraw(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackDraw(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDraw(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackDraw(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -197,7 +199,7 @@ public class AbilityFactoryZoneAffecting {
             }
         }
         final SpellAbility dbDraw = new DrawbackDraw(af.getHostCard(), af.getAbTgt());
-        
+
         return dbDraw;
     }
 
@@ -629,17 +631,18 @@ public class AbilityFactoryZoneAffecting {
      */
     public static SpellAbility createAbilityMill(final AbilityFactory af) {
         class AbilityMill extends AbilityActivated {
-            public AbilityMill(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityMill(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityMill(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityMill(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -663,7 +666,7 @@ public class AbilityFactoryZoneAffecting {
             }
         }
         final SpellAbility abMill = new AbilityMill(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abMill;
     }
 
@@ -710,17 +713,18 @@ public class AbilityFactoryZoneAffecting {
      */
     public static SpellAbility createDrawbackMill(final AbilityFactory af) {
         class DrawbackMill extends AbilitySub {
-            public DrawbackMill(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackMill(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackMill(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackMill(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -744,7 +748,7 @@ public class AbilityFactoryZoneAffecting {
             }
         }
         final SpellAbility dbMill = new DrawbackMill(af.getHostCard(), af.getAbTgt());
-        
+
         return dbMill;
     }
 
@@ -1086,17 +1090,18 @@ public class AbilityFactoryZoneAffecting {
      */
     public static SpellAbility createAbilityDiscard(final AbilityFactory af) {
         class AbilityDiscard extends AbilityActivated {
-            public AbilityDiscard(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityDiscard(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDiscard(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityDiscard(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 4348585353456736817L;
 
             @Override
@@ -1121,7 +1126,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         final SpellAbility abDiscard = new AbilityDiscard(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abDiscard;
     }
 
@@ -1176,17 +1181,18 @@ public class AbilityFactoryZoneAffecting {
      */
     public static SpellAbility createDrawbackDiscard(final AbilityFactory af) {
         class DrawbackDiscard extends AbilitySub {
-            public DrawbackDiscard(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackDiscard(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDiscard(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackDiscard(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 4348585353456736817L;
 
             @Override
@@ -1215,7 +1221,7 @@ public class AbilityFactoryZoneAffecting {
             }
         }
         final SpellAbility dbDiscard = new DrawbackDiscard(af.getHostCard(), af.getAbTgt());
-        
+
         return dbDiscard;
     }
 
@@ -1719,17 +1725,18 @@ public class AbilityFactoryZoneAffecting {
      */
     public static SpellAbility createAbilityShuffle(final AbilityFactory af) {
         class AbilityShuffle extends AbilityActivated {
-            public AbilityShuffle(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityShuffle(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityShuffle(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityShuffle(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -1245185178904838198L;
 
             @Override
@@ -1753,7 +1760,7 @@ public class AbilityFactoryZoneAffecting {
             }
         }
         final SpellAbility abShuffle = new AbilityShuffle(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abShuffle;
     }
 
@@ -1800,17 +1807,18 @@ public class AbilityFactoryZoneAffecting {
      */
     public static SpellAbility createDrawbackShuffle(final AbilityFactory af) {
         class DrawbackShuffle extends AbilitySub {
-            public DrawbackShuffle(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackShuffle(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackShuffle(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackShuffle(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5974307947494280639L;
 
             @Override
@@ -1834,7 +1842,7 @@ public class AbilityFactoryZoneAffecting {
             }
         }
         final SpellAbility dbShuffle = new DrawbackShuffle(af.getHostCard(), af.getAbTgt());
-        
+
         return dbShuffle;
     }
 

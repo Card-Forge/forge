@@ -153,17 +153,18 @@ public class AbilityFactoryToken extends AbilityFactory {
      */
     public final SpellAbility getAbility() {
         class AbilityToken extends AbilityActivated {
-            public AbilityToken(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityToken(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityToken(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityToken(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 8460074843405764620L;
 
             @Override
@@ -240,17 +241,18 @@ public class AbilityFactoryToken extends AbilityFactory {
      */
     public final SpellAbility getDrawback() {
         class DrawbackToken extends AbilitySub {
-            public DrawbackToken(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackToken(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackToken(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackToken(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 7239608350643325111L;
 
             @Override

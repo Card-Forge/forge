@@ -49,17 +49,18 @@ public class AbilityFactoryStoreSVar {
      */
     public static SpellAbility createAbilityStoreSVar(final AbilityFactory abilityFactory) {
         class AbilityStoreSVar extends AbilityActivated {
-            public AbilityStoreSVar(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityStoreSVar(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityStoreSVar(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityStoreSVar(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -7299561150243337080L;
             private final AbilityFactory af = abilityFactory;
 
@@ -136,17 +137,18 @@ public class AbilityFactoryStoreSVar {
      */
     public static SpellAbility createDrawbackStoreSVar(final AbilityFactory abilityFactory) {
         class DrawbackStoreSVar extends AbilitySub {
-            public DrawbackStoreSVar(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackStoreSVar(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackStoreSVar(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackStoreSVar(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 6631124959690157874L;
 
             private final AbilityFactory af = abilityFactory;
@@ -185,7 +187,7 @@ public class AbilityFactoryStoreSVar {
             }
         }
         final SpellAbility dbStoreSVar = new DrawbackStoreSVar(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
-        
+
         return dbStoreSVar;
     }
 
