@@ -69,17 +69,18 @@ public class AbilityFactoryPermanentState {
      */
     public static SpellAbility createAbilityUntap(final AbilityFactory af) {
         class AbilityUntap extends AbilityActivated {
-            public AbilityUntap(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityUntap(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityUntap(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityUntap(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -103,7 +104,7 @@ public class AbilityFactoryPermanentState {
             }
         }
         final SpellAbility abUntap = new AbilityUntap(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abUntap;
     }
 
@@ -150,17 +151,18 @@ public class AbilityFactoryPermanentState {
      */
     public static SpellAbility createDrawbackUntap(final AbilityFactory af) {
         class DrawbackUntap extends AbilitySub {
-            public DrawbackUntap(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackUntap(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackUntap(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackUntap(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -189,7 +191,7 @@ public class AbilityFactoryPermanentState {
             }
         }
         final SpellAbility dbUntap = new DrawbackUntap(af.getHostCard(), af.getAbTgt());
-        
+
         return dbUntap;
     }
 
@@ -662,17 +664,18 @@ public class AbilityFactoryPermanentState {
      */
     public static SpellAbility createAbilityTap(final AbilityFactory af) {
         class AbilityTap extends AbilityActivated {
-            public AbilityTap(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityTap(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityTap(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityTap(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -696,7 +699,7 @@ public class AbilityFactoryPermanentState {
             }
         }
         final SpellAbility abTap = new AbilityTap(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abTap;
     }
 
@@ -743,17 +746,18 @@ public class AbilityFactoryPermanentState {
      */
     public static SpellAbility createDrawbackTap(final AbilityFactory af) {
         class DrawbackTap extends AbilitySub {
-            public DrawbackTap(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackTap(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackTap(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackTap(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -782,7 +786,7 @@ public class AbilityFactoryPermanentState {
             }
         }
         final SpellAbility dbTap = new DrawbackTap(af.getHostCard(), af.getAbTgt());
-        
+
         return dbTap;
     }
 
@@ -1219,17 +1223,18 @@ public class AbilityFactoryPermanentState {
      */
     public static SpellAbility createAbilityUntapAll(final AbilityFactory af) {
         class AbilityUntapAll extends AbilityActivated {
-            public AbilityUntapAll(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityUntapAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityUntapAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityUntapAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
-                return res; 
+                return res;
             }
-            
+
             private static final long serialVersionUID = 8914852730903389831L;
 
             @Override
@@ -1253,7 +1258,7 @@ public class AbilityFactoryPermanentState {
             }
         }
         final SpellAbility abUntap = new AbilityUntapAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abUntap;
     }
 
@@ -1300,17 +1305,18 @@ public class AbilityFactoryPermanentState {
      */
     public static SpellAbility createDrawbackUntapAll(final AbilityFactory af) {
         class DrawbackUntapAll extends AbilitySub {
-            public DrawbackUntapAll(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackUntapAll(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackUntapAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackUntapAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -5187900994680626766L;
 
             @Override
@@ -1334,7 +1340,7 @@ public class AbilityFactoryPermanentState {
             }
         }
         final SpellAbility dbUntapAll = new DrawbackUntapAll(af.getHostCard(), af.getAbTgt());
-        
+
         return dbUntapAll;
     }
 
@@ -1486,17 +1492,18 @@ public class AbilityFactoryPermanentState {
      */
     public static SpellAbility createAbilityTapAll(final AbilityFactory af) {
         class AbilityTapAll extends AbilityActivated {
-            public AbilityTapAll(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityTapAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityTapAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityTapAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -2095140656782946737L;
 
             @Override
@@ -1520,7 +1527,7 @@ public class AbilityFactoryPermanentState {
             }
         }
         final SpellAbility abUntap = new AbilityTapAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abUntap;
     }
 
@@ -1567,17 +1574,18 @@ public class AbilityFactoryPermanentState {
      */
     public static SpellAbility createDrawbackTapAll(final AbilityFactory af) {
         class DrawbackTapAll extends AbilitySub {
-            public DrawbackTapAll(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackTapAll(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackTapAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackTapAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -1606,7 +1614,7 @@ public class AbilityFactoryPermanentState {
             }
         }
         final SpellAbility dbTap = new DrawbackTapAll(af.getHostCard(), af.getAbTgt());
-        
+
         return dbTap;
     }
 
@@ -1869,17 +1877,18 @@ public class AbilityFactoryPermanentState {
      */
     public static SpellAbility createAbilityTapOrUntap(final AbilityFactory af) {
         class AbilityTapOrUntap extends AbilityActivated {
-            public AbilityTapOrUntap(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityTapOrUntap(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityTapOrUntap(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityTapOrUntap(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4713183763302932079L;
 
             @Override
@@ -1903,7 +1912,7 @@ public class AbilityFactoryPermanentState {
             }
         }
         final SpellAbility abTapOrUntap = new AbilityTapOrUntap(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abTapOrUntap;
     }
 
@@ -1950,17 +1959,18 @@ public class AbilityFactoryPermanentState {
      */
     public static SpellAbility createDrawbackTapOrUntap(final AbilityFactory af) {
         class DrawbackTapOrUntap extends AbilitySub {
-            public DrawbackTapOrUntap(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackTapOrUntap(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackTapOrUntap(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackTapOrUntap(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -8282868583712773337L;
 
             @Override
@@ -1984,7 +1994,7 @@ public class AbilityFactoryPermanentState {
             }
         }
         final SpellAbility dbTapOrUntap = new DrawbackTapOrUntap(af.getHostCard(), af.getAbTgt());
-        
+
         return dbTapOrUntap;
     }
 
@@ -2228,17 +2238,18 @@ public class AbilityFactoryPermanentState {
      */
     public static SpellAbility createAbilityPhases(final AbilityFactory af) {
         class AbilityPhases extends AbilityActivated {
-            public AbilityPhases(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityPhases(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityPhases(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityPhases(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -2262,7 +2273,7 @@ public class AbilityFactoryPermanentState {
             }
         }
         final SpellAbility abPhases = new AbilityPhases(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abPhases;
     }
 
@@ -2309,17 +2320,18 @@ public class AbilityFactoryPermanentState {
      */
     public static SpellAbility createDrawbackPhases(final AbilityFactory af) {
         class DrawbackPhases extends AbilitySub {
-            public DrawbackPhases(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackPhases(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackPhases(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackPhases(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -2343,7 +2355,7 @@ public class AbilityFactoryPermanentState {
             }
         }
         final SpellAbility dbPhases = new DrawbackPhases(af.getHostCard(), af.getAbTgt());
-        
+
         return dbPhases;
     }
 
