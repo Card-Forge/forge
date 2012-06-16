@@ -105,17 +105,18 @@ public final class AbilityFactoryProtection {
      */
     public static SpellAbility createAbilityProtection(final AbilityFactory af) {
         class AbilityProtection extends AbilityActivated {
-            public AbilityProtection(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityProtection(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityProtection(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityProtection(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -5295298887428747473L;
 
             @Override
@@ -154,17 +155,18 @@ public final class AbilityFactoryProtection {
      */
     public static SpellAbility createDrawbackProtection(final AbilityFactory af) {
         class DrawbackProtection extends AbilitySub {
-            public DrawbackProtection(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackProtection(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackProtection(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackProtection(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 8342800124705819366L;
 
             @Override
@@ -910,17 +912,18 @@ public final class AbilityFactoryProtection {
      */
     public static SpellAbility createAbilityProtectionAll(final AbilityFactory af) {
         class AbilityProtectionAll extends AbilityActivated {
-            public AbilityProtectionAll(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityProtectionAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityProtectionAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityProtectionAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -8491026929105907288L;
 
             @Override
@@ -959,17 +962,18 @@ public final class AbilityFactoryProtection {
      */
     public static SpellAbility createDrawbackProtectionAll(final AbilityFactory af) {
         class DrawbackProtectionAll extends AbilitySub {
-            public DrawbackProtectionAll(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackProtectionAll(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackProtectionAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackProtectionAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5096939345199247701L;
 
             @Override

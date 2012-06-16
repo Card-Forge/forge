@@ -60,15 +60,16 @@ public final class AbilityFactoryRepeat {
     public static SpellAbility createAbilityRepeat(final AbilityFactory af) {
         class AbilityRepeat extends AbilityActivated {
             public AbilityRepeat(final Card ca, final Cost co, final Target t) {
-                super(ca,co,t);
+                super(ca, co, t);
             }
-            
+
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityRepeat(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityRepeat(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -8019637116128196482L;
 
             @Override
@@ -146,17 +147,17 @@ public final class AbilityFactoryRepeat {
      */
     public static SpellAbility createDrawbackRepeat(final AbilityFactory af) {
         class DrawbackRepeat extends AbilitySub {
-            public DrawbackRepeat(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackRepeat(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackRepeat(getSourceCard(),new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackRepeat(getSourceCard(), new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -3850086157052881036L;
 
             @Override

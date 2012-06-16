@@ -154,17 +154,18 @@ public class AbilityFactoryPump {
      */
     public final SpellAbility getAbilityPump() {
         class AbilityPump extends AbilityActivated {
-            public AbilityPump(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityPump(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityPump(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityPump(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -1118592153328758083L;
 
             @Override
@@ -202,17 +203,18 @@ public class AbilityFactoryPump {
      */
     public final SpellAbility getDrawbackPump() {
         class DrawbackPump extends AbilitySub {
-            public DrawbackPump(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackPump(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackPump(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackPump(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 42244224L;
 
             @Override
@@ -1339,17 +1341,18 @@ public class AbilityFactoryPump {
      */
     public final SpellAbility getAbilityPumpAll() {
         class AbilityPumpAll extends AbilityActivated {
-            public AbilityPumpAll(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityPumpAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityPumpAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityPumpAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -8299417521903307630L;
 
             @Override
@@ -1419,17 +1422,18 @@ public class AbilityFactoryPump {
      */
     public final SpellAbility getDrawbackPumpAll() {
         class DrawbackPumpAll extends AbilitySub {
-            public DrawbackPumpAll(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackPumpAll(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackPumpAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackPumpAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 6411531984691660342L;
 
             @Override
