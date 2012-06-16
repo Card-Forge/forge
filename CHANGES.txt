@@ -69,6 +69,16 @@ Fixes/Features:
 - added support for adding additional characteristics. started converting clones to scripts.
 - merged r15847-r15910 from the Trunk into CloneFix branch
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- CheckStyle.
+- Added Abilitystealers that were lost in the shuffle
+- Fixed Zoetic Cavern
+- merged -r15916 from the Trunk into M13 branch (cardsfolder only).
+- M13 branch: Added Archaeomancer, Captain's Call, Murder and Warclamp Mastiff.
+- CheckStyle.
+- Fixed the ability cost for Prophetic Prism.
+- Fixed Sylvan Library.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -76,9 +86,20 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 
 
+Added cards to the M13 branch and these are not yet available in the snapshot builds:
+
+Archaeomancer
+Captain's Call
+Murder
+Warclamp Mastiff
+
+
 Added many cards, including:
 
-
+Dark Impostor
+Experiment Kraj
+Myr Welder
+Necrotic Ooze
 
 
 end
