@@ -10,7 +10,7 @@ SVar:StealAbs:DB$Effect | Name$ Havengul Lich effect | RememberObjects$ Triggere
 SVar:STSteal:Mode$ Continuous | Affected$ EffectSource | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.IsRemembered | GainsAbilitiesOfZones$ Library,Hand,Stack,Battlefield,Graveyard,Exile,Command
 T:Mode$ Phase | Phase$ Cleanup | Static$ True | Execute$ Cleanup | Secondary$ True | TriggerDescription$ A little behind the scenes.
 SVar:Cleanup:DB$Cleanup | ClearRemembered$ True
-SVar:CleanupDT:DB$ChangeZone | Defined$ Self | Destination$ Exile
+SVar:CleanupDT:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havengul_lich.jpg
 SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/139.jpg
 Oracle:{1}: You may cast target creature card in a graveyard this turn. When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.
