@@ -392,7 +392,9 @@ public final class AbilityFactoryCopy {
 
                 AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
                 boolean wasInAlt = false;
+                CardCharactersticName stateName = CardCharactersticName.Original;
                 if (c.isInAlternateState()) {
+                    stateName = c.getCurState();
                     wasInAlt = true;
                     c.setState(CardCharactersticName.Original);
                 }
@@ -464,9 +466,12 @@ public final class AbilityFactoryCopy {
                     copy.setCloneOrigin(hostCard);
                     sa.getSourceCard().addClone(copy);
                     crds[i] = copy;
-
-                    AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
                 }
+
+                if (wasInAlt) {
+                    c.setState(stateName);
+                }
+                AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
 
                 // have to do this since getTargetCard() might change
                 // if Kiki-Jiki somehow gets untapped again
