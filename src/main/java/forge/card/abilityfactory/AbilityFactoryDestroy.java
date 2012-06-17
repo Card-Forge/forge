@@ -217,12 +217,30 @@ public class AbilityFactoryDestroy {
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
         final boolean noRegen = params.containsKey("NoRegen");
-
         CardList list;
-        list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        list = list.getTargetableCards(sa);
 
+        if (abCost != null) {
+            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+                return false;
+            }
+
+            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
+                return false;
+            }
+
+            if (!CostUtil.checkDiscardCost(abCost, source)) {
+                return false;
+            }
+        }
+
+        // prevent run-away activations - first time will always return true
+        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+
+        // Targeting
         if (abTgt != null) {
+            abTgt.resetTargets();
+            list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+            list = list.getTargetableCards(sa);
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             if (params.containsKey("AITgts")) {
                 list = list.getValidCards(params.get("AITgts"), sa.getActivatingPlayer(), source);
@@ -252,28 +270,6 @@ public class AbilityFactoryDestroy {
             if (list.size() == 0) {
                 return false;
             }
-        }
-
-        if (abCost != null) {
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
-                return false;
-            }
-
-            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
-                return false;
-            }
-
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
-                return false;
-            }
-        }
-
-        // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-
-        // Targeting
-        if (abTgt != null) {
-            abTgt.resetTargets();
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (list.size() == 0) {
@@ -312,6 +308,15 @@ public class AbilityFactoryDestroy {
             }
 
         } else {
+            if (params.containsKey("Defined")) {
+                list = new CardList(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
+                if (list.isEmpty()
+                        || !list.getController(AllZone.getComputerPlayer()).isEmpty()
+                        || list.getNotKeyword("Indestructible").isEmpty()) {
+                    return false;
+                }
+                return true;
+            }
             return false;
         }
 
