@@ -220,6 +220,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private final ArrayList<Card> hauntedBy = new ArrayList<Card>();
     private Card haunting = null;
+    private Card effectSource = null;
 
     private Map<String, String> sVars = new TreeMap<String, String>();
 
@@ -8817,6 +8818,20 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public CardDamageHistory getDamageHistory() {
         return damageHistory;
+    }
+
+    /**
+     * @return the effectSource
+     */
+    public Card getEffectSource() {
+        return effectSource;
+    }
+
+    /**
+     * @param effectSource0 the effectSource to set
+     */
+    public void setEffectSource(Card src) {
+        this.effectSource = src;
     }
 
 } // end Card class

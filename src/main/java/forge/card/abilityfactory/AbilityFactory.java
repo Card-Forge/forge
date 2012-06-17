@@ -1745,6 +1745,21 @@ public class AbilityFactory {
 
         return Integer.parseInt(amount) * multiplier;
     }
+    
+    private static Card findEffectRoot(Card startCard)
+    {
+        Card cc = startCard.getEffectSource();
+        if(cc != null)
+        {
+            if(cc.isType("Effect"))
+            {
+                return findEffectRoot(cc);
+            }
+            return cc;
+        }
+        
+        return null; //If this happens there is a card in the game that is not in any zone
+    }
 
     // should the three getDefined functions be merged into one? Or better to
     // have separate?
@@ -1778,6 +1793,12 @@ public class AbilityFactory {
 
         else if (defined.equals("OriginalHost")) {
             c = sa.getOriginalHost();
+        }
+        
+        else if (defined.equals("EffectSource")) {
+            if(hostCard.isType("Effect")) {
+                c = findEffectRoot(hostCard);
+            }
         }
 
         else if (defined.equals("Equipped")) {

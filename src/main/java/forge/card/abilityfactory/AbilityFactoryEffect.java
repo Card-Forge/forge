@@ -465,6 +465,7 @@ public class AbilityFactoryEffect {
         eff.setImageName(card.getImageName());
         eff.setColor(card.getColor());
         eff.setImmutable(true);
+        eff.setEffectSource(card);
         if (params.containsKey("Image")) {
             eff.setImageName(params.get("Image"));
         }

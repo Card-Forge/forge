@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Vampire Assassin
 Text:no text
 PT:2/2
-S:Mode$ Continuous | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.IsRemembered | GainsAbilitiesOfZones$ Exile | Description$ CARDNAME has all activated abilities of all creature cards exiled with it.
+S:Mode$ Continuous | Affected$ Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.IsRemembered | GainsAbilitiesOfZones$ Exile | Description$ CARDNAME has all activated abilities of all creature cards exiled with it.
 A:AB$ ChangeZone | Cost$ 4 B B | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature | SubAbility$ DBCounter | RememberChanged$ True | SpellDescription$ Exile target creature and put a +1/+1 counter on CARDNAME.
 SVar:DBCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self
 SVar:Rarity:Rare

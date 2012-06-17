@@ -79,6 +79,7 @@ public class StaticAbilityContinuous {
         String[] removeTypes = null;
         String addColors = null;
         String[] addTriggers = null;
+        ArrayList<SpellAbility> addFullAbs = null; 
         boolean removeAllAbilities = false;
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
@@ -231,20 +232,24 @@ public class StaticAbilityContinuous {
             CardList cardsIGainedAbilitiesFrom = AllZoneUtil.getCardsIn(validZones);
             cardsIGainedAbilitiesFrom = cardsIGainedAbilitiesFrom.getValidCards(valids, hostCard.getController(), hostCard);
             
-            for(Card c : cardsIGainedAbilitiesFrom) {
-                for(SpellAbility sa : c.getSpellAbilities()) {
-                    if(sa instanceof AbilityActivated) {
-                        SpellAbility newSA = ((AbilityActivated)sa).getCopy();
-                        if(newSA == null) {
-                            System.out.println("Uh-oh...");
+            if(cardsIGainedAbilitiesFrom.size() > 0)
+            {
+                addFullAbs = new ArrayList<SpellAbility>();
+            
+                for(Card c : cardsIGainedAbilitiesFrom) {
+                    for(SpellAbility sa : c.getSpellAbilities()) {
+                        if(sa instanceof AbilityActivated) {
+                            SpellAbility newSA = ((AbilityActivated)sa).getCopy();
+                            if(newSA == null) {
+                                System.out.println("Uh-oh...");
+                            }
+                            newSA.setType("Temporary");
+                            CardFactoryUtil.correctAbilityChainSourceCard(newSA, hostCard);
+                            addFullAbs.add(newSA);
                         }
-                        newSA.setType("Temporary");
-                        CardFactoryUtil.correctAbilityChainSourceCard(newSA, hostCard);
-                        hostCard.addSpellAbility(newSA);
                     }
                 }
             }
-            
         }
 
         // modify players
@@ -323,6 +328,12 @@ public class StaticAbilityContinuous {
                         actualSVar = actualSVar.split(":")[1];
                     }
                     affectedCard.setSVar(name, actualSVar);
+                }
+            }
+            
+            if(addFullAbs != null) {
+                for(final SpellAbility ab : addFullAbs) {
+                    affectedCard.addSpellAbility(ab);
                 }
             }
 
@@ -433,6 +444,9 @@ public class StaticAbilityContinuous {
                 affectedCards = new CardList(hostCard.getEnchantingCard());
             } else if (params.get("Affected").contains("EquippedBy")) {
                 affectedCards = new CardList(hostCard.getEquippingCard());
+            } else {
+                affectedCards = new CardList(AbilityFactory.getDefinedCards(hostCard, params.get("Affected"), null));
+                return affectedCards;
             }
         }
 
