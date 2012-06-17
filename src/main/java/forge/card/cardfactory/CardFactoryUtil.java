@@ -845,11 +845,12 @@ public class CardFactoryUtil {
         final Cost cost = new Cost(sourceCard, manaCost, true);
         class AbilityUnearth extends AbilityActivated {
             public AbilityUnearth(final Card ca, final Cost co, final Target t) {
-                super(ca,co,t);
+                super(ca, co, t);
             }
-            
+
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityUnearth(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityUnearth(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 final SpellAbilityRestriction restrict = new SpellAbilityRestriction();
                 restrict.setZone(ZoneType.Graveyard);
@@ -857,7 +858,7 @@ public class CardFactoryUtil {
                 res.setRestrictions(restrict);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -5633945565395478009L;
 
             @Override
@@ -879,7 +880,7 @@ public class CardFactoryUtil {
             }
         }
         final AbilityActivated unearth = new AbilityUnearth(sourceCard, cost, null);
-        
+
         final SpellAbilityRestriction restrict = new SpellAbilityRestriction();
         restrict.setZone(ZoneType.Graveyard);
         restrict.setSorcerySpeed(true);
@@ -917,8 +918,9 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlay() {
                 //Lands do not have SpellPermanents.
-                if(sourceCard.isLand()) {
-                    return (AllZone.getZoneOf(sourceCard).is(ZoneType.Hand) || sourceCard.hasKeyword("May be played") ) && PhaseHandler.canCastSorcery(sourceCard.getController());
+                if (sourceCard.isLand()) {
+                    return (AllZone.getZoneOf(sourceCard).is(ZoneType.Hand) || sourceCard.hasKeyword("May be played"))
+                            && PhaseHandler.canCastSorcery(sourceCard.getController());
                 }
                 else {
                     return sourceCard.getSpellPermanent().canPlay();
@@ -1064,16 +1066,17 @@ public class CardFactoryUtil {
         final Cost abCost = new Cost(sourceCard, transmuteCost, true);
         class AbilityTransmute extends AbilityActivated {
             public AbilityTransmute(final Card ca, final Cost co, final Target t) {
-                super(ca,co,t);
+                super(ca, co, t);
             }
-            
+
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityTransmute(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityTransmute(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 res.getRestrictions().setZone(ZoneType.Hand);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4960704261761785512L;
 
             @Override
@@ -1115,7 +1118,7 @@ public class CardFactoryUtil {
             }
         }
         final SpellAbility transmute = new AbilityTransmute(sourceCard, abCost, null);
-        
+
         final StringBuilder sbDesc = new StringBuilder();
         sbDesc.append("Transmute (").append(abCost.toString());
         sbDesc.append("Search your library for a card with the same converted mana cost as this card, reveal it, ");
@@ -1209,15 +1212,16 @@ public class CardFactoryUtil {
                 "Creature.YouCtrl".split(","));
         class AbilityEquip extends AbilityActivated {
             public AbilityEquip(final Card ca, final Cost co, final Target t) {
-                super(ca,co,t);
+                super(ca, co, t);
             }
-            
+
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityEquip(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityEquip(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4960704261761785512L;
 
             @Override
@@ -1300,7 +1304,7 @@ public class CardFactoryUtil {
             } // getCreature()
         }
         final SpellAbility equip = new AbilityEquip(sourceCard, abCost, target); // equip ability
-        
+
         String costDesc = abCost.toString();
         // get rid of the ": " at the end
         costDesc = costDesc.substring(0, costDesc.length() - 2);
@@ -3925,37 +3929,37 @@ public class CardFactoryUtil {
         to.setStaticAbilityStrings(from.getStaticAbilityStrings());
 
     }
-    
-    public static void copySpellAbility(SpellAbility from,SpellAbility to) {
+
+    public static void copySpellAbility(SpellAbility from, SpellAbility to) {
         to.setDescription(from.getDescription());
         to.setStackDescription(from.getDescription());
-        if(from.getAbilityFactory() != null) {
+        if (from.getAbilityFactory() != null) {
             to.setAbilityFactory(new AbilityFactory(from.getAbilityFactory()));
         }
-        if(from.getSubAbility() != null) {
+        if (from.getSubAbility() != null) {
             to.setSubAbility(from.getSubAbility().getCopy());
         }
-        if(from.getRestrictions() != null) {
+        if (from.getRestrictions() != null) {
             to.setRestrictions(from.getRestrictions());
         }
-        if(from.getConditions() != null) {
+        if (from.getConditions() != null) {
             to.setConditions(from.getConditions());
         }
-        
-        for(String sVar : from.getSVars()) {
+
+        for (String sVar : from.getSVars()) {
             to.setSVar(sVar, from.getSVar(sVar));
         }
     }
-    
-    public static void correctAbilityChainSourceCard(final SpellAbility sa, final Card card)
-    {
+
+    public static void correctAbilityChainSourceCard(final SpellAbility sa, final Card card) {
+
         sa.setSourceCard(card);
-        if(sa.getAbilityFactory() != null)
-        {
+        if (sa.getAbilityFactory() != null) {
+
             sa.getAbilityFactory().setHostCard(card);
         }
-        if(sa.getSubAbility() != null)
-        {
+        if (sa.getSubAbility() != null) {
+
             correctAbilityChainSourceCard(sa.getSubAbility(), card);
         }
     }

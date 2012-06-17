@@ -79,7 +79,7 @@ public class StaticAbilityContinuous {
         String[] removeTypes = null;
         String addColors = null;
         String[] addTriggers = null;
-        ArrayList<SpellAbility> addFullAbs = null; 
+        ArrayList<SpellAbility> addFullAbs = null;
         boolean removeAllAbilities = false;
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
@@ -217,30 +217,30 @@ public class StaticAbilityContinuous {
             }
             addTriggers = sVars;
         }
-        
+
         if (params.containsKey("GainsAbilitiesOf")) {
             final String[] valids = params.get("GainsAbilitiesOf").split(",");
             ArrayList<ZoneType> validZones = new ArrayList<ZoneType>();
             validZones.add(ZoneType.Battlefield);
-            if(params.containsKey("GainsAbilitiesOfZones")) {
+            if (params.containsKey("GainsAbilitiesOfZones")) {
                 validZones.clear();
-                for(String s : params.get("GainsAbilitiesOfZones").split(",")) {
+                for (String s : params.get("GainsAbilitiesOfZones").split(",")) {
                     validZones.add(ZoneType.smartValueOf(s));
                 }
             }
-            
+
             CardList cardsIGainedAbilitiesFrom = AllZoneUtil.getCardsIn(validZones);
             cardsIGainedAbilitiesFrom = cardsIGainedAbilitiesFrom.getValidCards(valids, hostCard.getController(), hostCard);
-            
-            if(cardsIGainedAbilitiesFrom.size() > 0)
-            {
+
+            if (cardsIGainedAbilitiesFrom.size() > 0) {
+
                 addFullAbs = new ArrayList<SpellAbility>();
-            
-                for(Card c : cardsIGainedAbilitiesFrom) {
-                    for(SpellAbility sa : c.getSpellAbilities()) {
-                        if(sa instanceof AbilityActivated) {
-                            SpellAbility newSA = ((AbilityActivated)sa).getCopy();
-                            if(newSA == null) {
+
+                for (Card c : cardsIGainedAbilitiesFrom) {
+                    for (SpellAbility sa : c.getSpellAbilities()) {
+                        if (sa instanceof AbilityActivated) {
+                            SpellAbility newSA = ((AbilityActivated) sa).getCopy();
+                            if (newSA == null) {
                                 System.out.println("Uh-oh...");
                             }
                             newSA.setType("Temporary");
@@ -330,9 +330,9 @@ public class StaticAbilityContinuous {
                     affectedCard.setSVar(name, actualSVar);
                 }
             }
-            
-            if(addFullAbs != null) {
-                for(final SpellAbility ab : addFullAbs) {
+
+            if (addFullAbs != null) {
+                for (final SpellAbility ab : addFullAbs) {
                     affectedCard.addSpellAbility(ab);
                 }
             }
