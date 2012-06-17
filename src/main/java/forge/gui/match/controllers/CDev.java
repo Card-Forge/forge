@@ -70,7 +70,7 @@ public enum CDev implements ICDoc {
     private final MouseListener madLife = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeSetLife(); } };
-            
+
     private final MouseListener madBreakpoint = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeBreakpoint(); } };
