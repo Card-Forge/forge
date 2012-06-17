@@ -18,6 +18,7 @@
 package forge.gui.deckeditor.controllers;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import forge.Constant;
 import forge.Singletons;
@@ -29,13 +30,23 @@ import forge.game.limited.IBoosterDraft;
 import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.TableView;
+import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
+import forge.gui.deckeditor.views.VDeckgen;
+import forge.gui.deckeditor.views.VFilters;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.SRearrangingUtil;
 import forge.gui.home.sanctioned.CSubmenuDraft;
+import forge.gui.match.views.VDetail;
+import forge.gui.match.views.VDev;
+import forge.gui.match.views.VMessage;
+import forge.gui.match.views.VPicture;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
+import forge.view.FView;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.
@@ -47,6 +58,11 @@ import forge.item.ItemPoolView;
  */
 public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup> {
     private IBoosterDraft boosterDraft;
+    
+    private String CCAddLabel = new String();
+    private DragCell filtersParent = null;
+    private DragCell allDecksParent = null;
+    private DragCell deckGenParent = null;
 
     //========== Constructor
 
@@ -94,6 +110,9 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
             }
         });
         */
+        
+        CCAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
+        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Choose Card");
 
     }
 
@@ -235,6 +254,59 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
         this.setup();
         this.showChoices(this.boosterDraft.nextChoice());
         this.getTableDeck().setDeck((Iterable<InventoryItem>) null);
+        
+        //Remove buttons
+        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
+        
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove());
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4());
+
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
+        
+        if (VDeckgen.SINGLETON_INSTANCE.getParentCell() != null) {
+            deckGenParent = VDeckgen.SINGLETON_INSTANCE.getParentCell();
+            deckGenParent.removeDoc(VDeckgen.SINGLETON_INSTANCE);
+            VDeckgen.SINGLETON_INSTANCE.setParentCell(null);
+
+            // If Deck Gen was first tab, the new first tab needs re-selecting.
+            if (deckGenParent.getDocs().size() > 0) {
+                deckGenParent.setSelected(deckGenParent.getDocs().get(0));
+            }
+        }
+        if (VAllDecks.SINGLETON_INSTANCE.getParentCell() != null) {
+            allDecksParent = VAllDecks.SINGLETON_INSTANCE.getParentCell();
+            allDecksParent.removeDoc(VAllDecks.SINGLETON_INSTANCE);
+            VAllDecks.SINGLETON_INSTANCE.setParentCell(null);
+
+            // If All Decks was first tab, the new first tab needs re-selecting.
+            if (allDecksParent.getDocs().size() > 0) {
+                allDecksParent.setSelected(allDecksParent.getDocs().get(0));
+            }
+        }
+        
+        if (VFilters.SINGLETON_INSTANCE.getParentCell() != null) {
+            filtersParent = VFilters.SINGLETON_INSTANCE.getParentCell();
+            filtersParent.removeDoc(VFilters.SINGLETON_INSTANCE);
+            VFilters.SINGLETON_INSTANCE.setParentCell(null);
+
+            // If filters was first tab, the new first tab needs re-selecting.
+            if (filtersParent.getDocs().size() > 0) {
+                filtersParent.setSelected(filtersParent.getDocs().get(0));
+            }
+        }
+        
+     // Fill in gaps
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                for (final DragCell c : FView.SINGLETON_INSTANCE.getDragCells()) {
+                    if (c.getDocs().size() == 0) {
+                        SRearrangingUtil.fillGap(c);
+                        FView.SINGLETON_INSTANCE.removeDragCell(c);
+                    }
+                }
+            }
+        });
     }
 
     /* (non-Javadoc)
@@ -243,6 +315,32 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
     @Override
     public boolean exit() {
         CSubmenuDraft.SINGLETON_INSTANCE.update();
+        
+        //Re-add buttons
+        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
+        
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove());
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4());
+        
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
+
+        //Re-rename buttons
+        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(CCAddLabel);
+        
+        //Re-add tabs
+        if(filtersParent != null)
+        {
+            filtersParent.addDoc(VFilters.SINGLETON_INSTANCE);
+        }
+        if(deckGenParent != null)
+        {
+        deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
+        }
+        if(allDecksParent != null)
+        {
+        allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+        }
+        
         return true;
     }
 }
