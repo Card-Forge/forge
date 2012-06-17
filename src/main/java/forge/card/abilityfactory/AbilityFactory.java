@@ -1745,19 +1745,18 @@ public class AbilityFactory {
 
         return Integer.parseInt(amount) * multiplier;
     }
-    
-    private static Card findEffectRoot(Card startCard)
-    {
+
+    private static Card findEffectRoot(Card startCard) {
+
         Card cc = startCard.getEffectSource();
-        if(cc != null)
-        {
-            if(cc.isType("Effect"))
-            {
+        if (cc != null) {
+
+            if (cc.isType("Effect")) {
                 return findEffectRoot(cc);
             }
             return cc;
         }
-        
+
         return null; //If this happens there is a card in the game that is not in any zone
     }
 
@@ -1794,9 +1793,9 @@ public class AbilityFactory {
         else if (defined.equals("OriginalHost")) {
             c = sa.getOriginalHost();
         }
-        
+
         else if (defined.equals("EffectSource")) {
-            if(hostCard.isType("Effect")) {
+            if (hostCard.isType("Effect")) {
                 c = findEffectRoot(hostCard);
             }
         }

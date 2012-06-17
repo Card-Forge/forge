@@ -499,17 +499,18 @@ public class CardFactoryInstants {
 
             final Target t2 = new Target(card, "Select target creature with flying", "Creature.withFlying".split(","));
             class DrawbackWingPuncture extends AbilitySub {
-                public DrawbackWingPuncture(final Card ca,final Target t) {
-                    super(ca,t);
+                public DrawbackWingPuncture(final Card ca, final Target t) {
+                    super(ca, t);
                 }
-                
+
                 @Override
                 public AbilitySub getCopy() {
-                    AbilitySub res = new DrawbackWingPuncture(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                    CardFactoryUtil.copySpellAbility(this,res);
+                    AbilitySub res = new DrawbackWingPuncture(getSourceCard(),
+                            getTarget() == null ? null : new Target(getTarget()));
+                    CardFactoryUtil.copySpellAbility(this, res);
                     return res;
                 }
-                
+
                 private static final long serialVersionUID = 4618047889975691050L;
 
                 @Override
