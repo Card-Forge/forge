@@ -444,7 +444,7 @@ public class StaticAbilityContinuous {
                 affectedCards = new CardList(hostCard.getEnchantingCard());
             } else if (params.get("Affected").contains("EquippedBy")) {
                 affectedCards = new CardList(hostCard.getEquippingCard());
-            } else {
+            } else if (params.get("Affected").equals("EffectSource")) {
                 affectedCards = new CardList(AbilityFactory.getDefinedCards(hostCard, params.get("Affected"), null));
                 return affectedCards;
             }
