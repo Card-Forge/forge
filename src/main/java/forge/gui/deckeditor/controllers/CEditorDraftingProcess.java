@@ -58,7 +58,7 @@ import forge.view.FView;
  */
 public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup> {
     private IBoosterDraft boosterDraft;
-    
+
     private String CCAddLabel = new String();
     private DragCell filtersParent = null;
     private DragCell allDecksParent = null;
@@ -110,7 +110,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
             }
         });
         */
-        
+
         CCAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Choose Card");
 
@@ -254,15 +254,15 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
         this.setup();
         this.showChoices(this.boosterDraft.nextChoice());
         this.getTableDeck().setDeck((Iterable<InventoryItem>) null);
-        
+
         //Remove buttons
         VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
-        
+
         VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove());
         VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4());
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
-        
+
         if (VDeckgen.SINGLETON_INSTANCE.getParentCell() != null) {
             deckGenParent = VDeckgen.SINGLETON_INSTANCE.getParentCell();
             deckGenParent.removeDoc(VDeckgen.SINGLETON_INSTANCE);
@@ -283,7 +283,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
                 allDecksParent.setSelected(allDecksParent.getDocs().get(0));
             }
         }
-        
+
         if (VFilters.SINGLETON_INSTANCE.getParentCell() != null) {
             filtersParent = VFilters.SINGLETON_INSTANCE.getParentCell();
             filtersParent.removeDoc(VFilters.SINGLETON_INSTANCE);
@@ -294,8 +294,8 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
                 filtersParent.setSelected(filtersParent.getDocs().get(0));
             }
         }
-        
-     // Fill in gaps
+
+        // Fill in gaps
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -315,32 +315,32 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
     @Override
     public boolean exit() {
         CSubmenuDraft.SINGLETON_INSTANCE.update();
-        
+
         //Re-add buttons
         VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
-        
+
         VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove());
         VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4());
-        
+
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
 
         //Re-rename buttons
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(CCAddLabel);
-        
+
         //Re-add tabs
-        if(filtersParent != null)
-        {
+        if (filtersParent != null) {
+
             filtersParent.addDoc(VFilters.SINGLETON_INSTANCE);
         }
-        if(deckGenParent != null)
-        {
-        deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
+        if (deckGenParent != null) {
+
+            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
         }
-        if(allDecksParent != null)
-        {
-        allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+        if (allDecksParent != null) {
+
+            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
         }
-        
+
         return true;
     }
 }
