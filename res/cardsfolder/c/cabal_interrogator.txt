@@ -1,0 +1,13 @@
+Name:Cabal Interrogator
+ManaCost:1 B
+Types:Creature Zombie Wizard
+Text:no text
+PT:1/1
+A:AB$ Discard | Cost$ X B T | ValidTgts$ Player | NumCards$ 1 | RevealNumber$ X | Mode$ RevealYouChoose | DiscardValid$ Card | SorcerySpeed$ True | SpellDescription$ Target player reveals X cards from his or her hand and you choose one of them. That player discards that card. Activate this ability only any time you could cast a sorcery.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_interrogator.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/57.jpg
+Oracle:{X}{B}, {T}: Target player reveals X cards from his or her hand and you choose one of them. That player discards that card. Activate this ability only any time you could cast a sorcery.
+End

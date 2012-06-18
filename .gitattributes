@@ -1202,6 +1202,7 @@ res/cardsfolder/b/bull_elephant.txt -text
 res/cardsfolder/b/bull_hippo.txt svneol=native#text/plain
 res/cardsfolder/b/bull_rush.txt svneol=native#text/plain
 res/cardsfolder/b/bullwhip.txt svneol=native#text/plain
+res/cardsfolder/b/bulwark.txt -text
 res/cardsfolder/b/bump_in_the_night.txt -text
 res/cardsfolder/b/buoyancy.txt svneol=native#text/plain
 res/cardsfolder/b/burden_of_greed.txt svneol=native#text/plain
@@ -1237,6 +1238,7 @@ res/cardsfolder/c/cabal_coffers.txt svneol=native#text/plain
 res/cardsfolder/c/cabal_conditioning.txt svneol=native#text/plain
 res/cardsfolder/c/cabal_executioner.txt svneol=native#text/plain
 res/cardsfolder/c/cabal_inquisitor.txt svneol=native#text/plain
+res/cardsfolder/c/cabal_interrogator.txt -text
 res/cardsfolder/c/cabal_patriarch.txt svneol=native#text/plain
 res/cardsfolder/c/cabal_pit.txt svneol=native#text/plain
 res/cardsfolder/c/cabal_ritual.txt svneol=native#text/plain
