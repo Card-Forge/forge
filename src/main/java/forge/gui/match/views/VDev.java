@@ -212,7 +212,7 @@ public enum VDev implements IVDoc {
     public DevLabel getLblSetLife() {
         return this.lblSetLife;
     }
-    
+
     public DevLabel getLblBreakpoint() {
         return this.lblBreakpoint;
     }

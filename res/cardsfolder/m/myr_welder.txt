@@ -1,0 +1,12 @@
+Name:Myr Welder
+ManaCost:3
+Types:Artifact Creature Myr
+Text:no text
+PT:1/4
+S:Mode$ Continuous | Affected$ Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Card.IsRemembered | GainsAbilitiesOfZones$ Exile | Description$ CARDNAME has all activated abilities of all cards exiled with it.
+A:AB$ ChangeZone | Cost$ T | ValidTgts$ Artifact | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target artifact | RememberChanged$ True | PrecostDesc$ Imprint - | SpellDescription$ Exile target artifact card from a graveyard.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_welder.jpg
+SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/118.jpg
+Oracle:Imprint - {T}: Exile target artifact card from a graveyard.\nMyr Welder has all activated abilities of all cards exiled with it.
+End

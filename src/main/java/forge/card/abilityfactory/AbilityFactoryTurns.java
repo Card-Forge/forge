@@ -60,17 +60,18 @@ public class AbilityFactoryTurns {
      */
     public static SpellAbility createAbilityAddTurn(final AbilityFactory af) {
         class AbilityAddTurn extends AbilityActivated {
-            public AbilityAddTurn(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityAddTurn(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityAddTurn(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityAddTurn(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -3526200766738015688L;
 
             @Override
@@ -94,7 +95,7 @@ public class AbilityFactoryTurns {
             }
         }
         final SpellAbility abAddTurn = new AbilityAddTurn(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abAddTurn;
     }
 
@@ -149,17 +150,18 @@ public class AbilityFactoryTurns {
      */
     public static SpellAbility createDrawbackAddTurn(final AbilityFactory af) {
         class DrawbackAddTurn extends AbilitySub {
-            public DrawbackAddTurn(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackAddTurn(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackAddTurn(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackAddTurn(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -562517287448810951L;
 
             @Override
@@ -183,7 +185,7 @@ public class AbilityFactoryTurns {
             }
         }
         final SpellAbility dbAddTurn = new DrawbackAddTurn(af.getHostCard(), af.getAbTgt());
-        
+
         return dbAddTurn;
     }
 
@@ -369,17 +371,18 @@ public class AbilityFactoryTurns {
      */
     public static SpellAbility createAbilityEndTurn(final AbilityFactory af) {
         class AbilityEndTurn extends AbilityActivated {
-            public AbilityEndTurn(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityEndTurn(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityEndTurn(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityEndTurn(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 72570867940224012L;
 
             @Override
@@ -450,17 +453,18 @@ public class AbilityFactoryTurns {
      */
     public static SpellAbility createDrawbackEndTurn(final AbilityFactory af) {
         class DrawbackEndTurn extends AbilitySub {
-            public DrawbackEndTurn(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackEndTurn(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackEndTurn(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackEndTurn(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -562517287448810951L;
 
             @Override
@@ -488,7 +492,7 @@ public class AbilityFactoryTurns {
             }
         }
         final SpellAbility dbEndTurn = new DrawbackEndTurn(af.getHostCard(), af.getAbTgt());
-        
+
         return dbEndTurn;
     }
 

@@ -83,17 +83,18 @@ public class AbilityFactoryDealDamage {
      */
     public final SpellAbility getAbilityDealDamage() {
         class AbilityDealDamage extends AbilityActivated {
-            public AbilityDealDamage(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityDealDamage(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDealDamage(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityDealDamage(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -7560349014757367722L;
 
             @Override
@@ -164,7 +165,7 @@ public class AbilityFactoryDealDamage {
                         AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
         }; // Spell
-        
+
         return spDealDamage;
     }
 
@@ -177,17 +178,18 @@ public class AbilityFactoryDealDamage {
      */
     public final SpellAbility getDrawbackDealDamage() {
         class DrawbackDealDamage extends AbilitySub {
-            public DrawbackDealDamage(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackDealDamage(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDealDamage(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackDealDamage(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 7239608350643325111L;
 
             @Override
@@ -902,17 +904,18 @@ public class AbilityFactoryDealDamage {
      */
     public final SpellAbility getAbilityDamageAll() {
         class AbilityDamageAll extends AbilityActivated {
-            public AbilityDamageAll(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityDamageAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDamageAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityDamageAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -1831356710492849854L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
 
@@ -939,7 +942,7 @@ public class AbilityFactoryDealDamage {
         }
         final SpellAbility abDamageAll = new AbilityDamageAll(this.abilityFactory.getHostCard(),
                 this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt());
-        
+
         return abDamageAll;
     }
 
@@ -978,7 +981,7 @@ public class AbilityFactoryDealDamage {
             }
 
         };
-        
+
         return spDamageAll;
     }
 
@@ -991,17 +994,18 @@ public class AbilityFactoryDealDamage {
      */
     public final SpellAbility getDrawbackDamageAll() {
         class DrawbackDamageAll extends AbilitySub {
-            public DrawbackDamageAll(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackDamageAll(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDamageAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackDamageAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -6169562107675964474L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
 
@@ -1034,7 +1038,7 @@ public class AbilityFactoryDealDamage {
         }
         final SpellAbility dbDamageAll = new DrawbackDamageAll(this.abilityFactory.getHostCard(),
                 this.abilityFactory.getAbTgt());
-        
+
         return dbDamageAll;
     }
 
@@ -1366,17 +1370,18 @@ public class AbilityFactoryDealDamage {
      */
     public final SpellAbility getAbilityEachDamage() {
         class AbilityEachDamage extends AbilityActivated {
-            public AbilityEachDamage(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityEachDamage(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityEachDamage(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityEachDamage(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -1831356710492849854L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
 
@@ -1404,7 +1409,7 @@ public class AbilityFactoryDealDamage {
 
         final SpellAbility abEachDamage = new AbilityEachDamage(this.abilityFactory.getHostCard(),
                 this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt());
-        
+
         return abEachDamage;
     }
 
@@ -1456,17 +1461,18 @@ public class AbilityFactoryDealDamage {
      */
     public final SpellAbility getDrawbackEachDamage() {
         class DrawbackEachDamage extends AbilitySub {
-            public DrawbackEachDamage(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackEachDamage(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackEachDamage(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackEachDamage(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -6169562107675964474L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
 
@@ -1494,7 +1500,7 @@ public class AbilityFactoryDealDamage {
         }
         final SpellAbility dbEachDamage = new DrawbackEachDamage(this.abilityFactory.getHostCard(),
                 this.abilityFactory.getAbTgt());
-        
+
         return dbEachDamage;
     }
 
@@ -1659,17 +1665,18 @@ public class AbilityFactoryDealDamage {
      */
     public final SpellAbility getAbilityFight() {
         class AbilityFight extends AbilityActivated {
-            public AbilityFight(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityFight(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityFight(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityFight(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -1831356710492849854L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
 
@@ -1697,7 +1704,7 @@ public class AbilityFactoryDealDamage {
 
         final SpellAbility abFight = new AbilityFight(this.abilityFactory.getHostCard(),
                 this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt());
-        
+
         return abFight;
     }
 
@@ -1748,17 +1755,18 @@ public class AbilityFactoryDealDamage {
      */
     public final SpellAbility getDrawbackFight() {
         class DrawbackFight extends AbilitySub {
-            public DrawbackFight(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackFight(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackFight(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackFight(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -6169562107675964474L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
 
@@ -1786,7 +1794,7 @@ public class AbilityFactoryDealDamage {
         }
         final SpellAbility dbFight = new DrawbackFight(this.abilityFactory.getHostCard(),
                 this.abilityFactory.getAbTgt());
-        
+
         return dbFight;
     }
 

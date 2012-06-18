@@ -78,17 +78,18 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createAbilityDig(final AbilityFactory af) {
         class AbilityDig extends AbilityActivated {
-            public AbilityDig(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityDig(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDig(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityDig(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 4239474096624403497L;
 
             @Override
@@ -159,17 +160,18 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createDrawbackDig(final AbilityFactory af) {
         class DrawbackDig extends AbilitySub {
-            public DrawbackDig(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackDig(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDig(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackDig(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -3372788479421357024L;
 
             @Override
@@ -198,7 +200,7 @@ public final class AbilityFactoryReveal {
             }
         }
         final SpellAbility dbDig = new DrawbackDig(af.getHostCard(), af.getAbTgt());
-        
+
         return dbDig;
     }
 
@@ -688,17 +690,18 @@ public final class AbilityFactoryReveal {
     public static SpellAbility createAbilityDigUntil(final AbilityFactory af) {
 
         class AbilityDigUntil extends AbilityActivated {
-            public AbilityDigUntil(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityDigUntil(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDigUntil(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityDigUntil(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 4239474096624403497L;
 
             @Override
@@ -769,17 +772,18 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createDrawbackDigUntil(final AbilityFactory af) {
         class DrawbackDigUntil extends AbilitySub {
-            public DrawbackDigUntil(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackDigUntil(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDigUntil(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackDigUntil(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -3372788479421357024L;
 
             @Override
@@ -803,7 +807,7 @@ public final class AbilityFactoryReveal {
             }
         }
         final SpellAbility dbDig = new DrawbackDigUntil(af.getHostCard(), af.getAbTgt());
-        
+
         return dbDig;
     }
 
@@ -1088,17 +1092,18 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createAbilityRevealHand(final AbilityFactory af) {
         class AbilityRevealHand extends AbilityActivated {
-            public AbilityRevealHand(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityRevealHand(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityRevealHand(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityRevealHand(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 2785654059206102004L;
 
             @Override
@@ -1122,7 +1127,7 @@ public final class AbilityFactoryReveal {
             }
         }
         final SpellAbility abRevealHand = new AbilityRevealHand(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abRevealHand;
     }
 
@@ -1169,17 +1174,18 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createDrawbackRevealHand(final AbilityFactory af) {
         class DrawbackRevealHand extends AbilitySub {
-            public DrawbackRevealHand(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackRevealHand(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackRevealHand(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackRevealHand(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -6079668770576878801L;
 
             @Override
@@ -1205,7 +1211,7 @@ public final class AbilityFactoryReveal {
             }
         }
         final SpellAbility dbRevealHand = new DrawbackRevealHand(af.getHostCard(), af.getAbTgt());
-        
+
         return dbRevealHand;
     }
 
@@ -1447,17 +1453,18 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createAbilityScry(final AbilityFactory af) {
         class AbilityScry extends AbilityActivated {
-            public AbilityScry(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityScry(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityScry(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityScry(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 2631175859655699419L;
 
             @Override
@@ -1481,7 +1488,7 @@ public final class AbilityFactoryReveal {
             }
         }
         final SpellAbility abScry = new AbilityScry(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abScry;
     }
 
@@ -1528,17 +1535,18 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createDrawbackScry(final AbilityFactory af) {
         class DrawbackScry extends AbilitySub {
-            public DrawbackScry(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackScry(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackScry(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackScry(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 7763043327497404630L;
 
             @Override
@@ -1564,7 +1572,7 @@ public final class AbilityFactoryReveal {
             }
         }
         final SpellAbility dbScry = new DrawbackScry(af.getHostCard(), af.getAbTgt());
-        
+
         return dbScry;
     }
 
@@ -1745,17 +1753,18 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createAbilityRearrangeTopOfLibrary(final AbilityFactory af) {
         class AbilityRearrangeTopOfLibrary extends AbilityActivated {
-            public AbilityRearrangeTopOfLibrary(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityRearrangeTopOfLibrary(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityRearrangeTopOfLibrary(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityRearrangeTopOfLibrary(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -548494891203983219L;
 
             @Override
@@ -1832,17 +1841,18 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createDrawbackRearrangeTopOfLibrary(final AbilityFactory af) {
         class DrawbackRearrangeTopOfLibrary extends AbilitySub {
-            public DrawbackRearrangeTopOfLibrary(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackRearrangeTopOfLibrary(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackRearrangeTopOfLibrary(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackRearrangeTopOfLibrary(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -777856059960750319L;
 
             @Override
@@ -1868,7 +1878,7 @@ public final class AbilityFactoryReveal {
             }
         }
         final SpellAbility dbDraw = new DrawbackRearrangeTopOfLibrary(af.getHostCard(), af.getAbTgt());
-        
+
         return dbDraw;
     }
 
@@ -2078,17 +2088,18 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createAbilityReveal(final AbilityFactory af) {
         class AbilityReveal extends AbilityActivated {
-            public AbilityReveal(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityReveal(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityReveal(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityReveal(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4417404703197532765L;
 
             @Override
@@ -2112,7 +2123,7 @@ public final class AbilityFactoryReveal {
             }
         }
         final SpellAbility abReveal = new AbilityReveal(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abReveal;
     }
 
@@ -2159,17 +2170,18 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createDrawbackReveal(final AbilityFactory af) {
         class DrawbackReveal extends AbilitySub {
-            public DrawbackReveal(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackReveal(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackReveal(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackReveal(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -8059731932417441449L;
 
             @Override
@@ -2196,7 +2208,7 @@ public final class AbilityFactoryReveal {
             }
         }
         final SpellAbility dbReveal = new DrawbackReveal(af.getHostCard(), af.getAbTgt());
-        
+
         return dbReveal;
     }
 

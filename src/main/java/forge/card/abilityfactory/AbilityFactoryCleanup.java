@@ -56,17 +56,18 @@ public final class AbilityFactoryCleanup {
      */
     public static AbilitySub getDrawback(final AbilityFactory af) {
         class DrawbackCleanup extends AbilitySub {
-            public DrawbackCleanup(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackCleanup(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackCleanup(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackCleanup(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 6192972525033429820L;
 
             @Override

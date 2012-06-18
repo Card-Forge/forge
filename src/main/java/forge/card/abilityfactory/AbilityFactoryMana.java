@@ -163,17 +163,18 @@ public class AbilityFactoryMana {
     public static AbilitySub createDrawbackMana(final AbilityFactory abilityFactory, final String produced) {
         final String restrictions = abilityFactory.getMapParams().get("RestrictValid");
         class DrawbackMana extends AbilitySub {
-            public DrawbackMana(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackMana(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackMana(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackMana(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -5141246507533353605L;
 
             private final AbilityFactory af = abilityFactory;
@@ -214,7 +215,7 @@ public class AbilityFactoryMana {
             }
         }
         final AbilitySub dbMana = new DrawbackMana(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
-        
+
         return dbMana;
     }
 
@@ -912,17 +913,18 @@ public class AbilityFactoryMana {
      */
     public static SpellAbility createAbilityDrainMana(final AbilityFactory af) {
         class AbilityDrainMana extends AbilityActivated {
-            public AbilityDrainMana(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityDrainMana(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDrainMana(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityDrainMana(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5669367387381350104L;
 
             @Override
@@ -947,7 +949,7 @@ public class AbilityFactoryMana {
         }
 
         final SpellAbility abDrainMana = new AbilityDrainMana(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abDrainMana;
     }
 
@@ -996,17 +998,18 @@ public class AbilityFactoryMana {
      */
     public static SpellAbility createDrawbackDrainMana(final AbilityFactory af) {
         class DrawbackDrainMana extends AbilitySub {
-            public DrawbackDrainMana(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackDrainMana(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDrainMana(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackDrainMana(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 1458568386420831420L;
 
             @Override
@@ -1030,7 +1033,7 @@ public class AbilityFactoryMana {
             }
         }
         final SpellAbility dbDrainMana = new DrawbackDrainMana(af.getHostCard(), af.getAbTgt());
-        
+
         return dbDrainMana;
     }
 

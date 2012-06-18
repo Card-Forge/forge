@@ -2009,6 +2009,7 @@ res/cardsfolder/d/dark_depths.txt svneol=native#text/plain
 res/cardsfolder/d/dark_favor.txt svneol=native#text/plain
 res/cardsfolder/d/dark_hatchling.txt svneol=native#text/plain
 res/cardsfolder/d/dark_heart_of_the_wood.txt svneol=native#text/plain
+res/cardsfolder/d/dark_impostor.txt -text
 res/cardsfolder/d/dark_maze.txt svneol=native#text/plain
 res/cardsfolder/d/dark_offering.txt svneol=native#text/plain
 res/cardsfolder/d/dark_privilege.txt svneol=native#text/plain
@@ -2937,6 +2938,7 @@ res/cardsfolder/e/exotic_disease.txt svneol=native#text/plain
 res/cardsfolder/e/exotic_orchard.txt svneol=native#text/plain
 res/cardsfolder/e/expedition_map.txt svneol=native#text/plain
 res/cardsfolder/e/expendable_troops.txt svneol=native#text/plain
+res/cardsfolder/e/experiment_kraj.txt -text
 res/cardsfolder/e/exploding_borders.txt svneol=native#text/plain
 res/cardsfolder/e/exploration.txt svneol=native#text/plain
 res/cardsfolder/e/explore.txt svneol=native#text/plain
@@ -4146,6 +4148,7 @@ res/cardsfolder/h/haunting_echoes.txt svneol=native#text/plain
 res/cardsfolder/h/haunting_hymn.txt svneol=native#text/plain
 res/cardsfolder/h/haunting_misery.txt svneol=native#text/plain
 res/cardsfolder/h/haunting_wind.txt svneol=native#text/plain
+res/cardsfolder/h/havengul_lich.txt -text
 res/cardsfolder/h/havengul_runebinder.txt -text
 res/cardsfolder/h/havengul_skaab.txt -text
 res/cardsfolder/h/havengul_vampire.txt -text
@@ -6109,6 +6112,7 @@ res/cardsfolder/m/myr_retriever.txt svneol=native#text/plain
 res/cardsfolder/m/myr_servitor.txt -text
 res/cardsfolder/m/myr_sire.txt svneol=native#text/plain
 res/cardsfolder/m/myr_turbine.txt svneol=native#text/plain
+res/cardsfolder/m/myr_welder.txt -text
 res/cardsfolder/m/myrsmith.txt svneol=native#text/plain
 res/cardsfolder/m/mysteries_of_the_deep.txt svneol=native#text/plain
 res/cardsfolder/m/mystic_compass.txt -text
@@ -6210,6 +6214,7 @@ res/cardsfolder/n/necropotence.txt svneol=native#text/plain
 res/cardsfolder/n/necropouncer.txt svneol=native#text/plain
 res/cardsfolder/n/necrosavant.txt svneol=native#text/plain
 res/cardsfolder/n/necroskitter.txt svneol=native#text/plain
+res/cardsfolder/n/necrotic_ooze.txt -text
 res/cardsfolder/n/necrotic_sliver.txt svneol=native#text/plain
 res/cardsfolder/n/nectar_faerie.txt -text
 res/cardsfolder/n/need_for_speed.txt svneol=native#text/plain

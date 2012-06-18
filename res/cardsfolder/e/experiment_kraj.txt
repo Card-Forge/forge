@@ -1,0 +1,11 @@
+Name:Experiment Kraj
+ManaCost:2 G G U U
+Types:Legendary Creature Ooze Mutant
+Text:no text
+PT:4/6
+S:Mode$ Continuous | Affected$ Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.Other+counters_GE1_P1P1 | Description$ CARDNAME has all activated abilities of each other creature with a +1/+1 counter on it.
+A:AB$PutCounter | Cost$ T | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:RemAIDeck:True
+Oracle:Experiment Kraj has all activated abilities of each other creature with a +1/+1 counter on it.\n{T}: Put a +1/+1 counter on target creature.
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/110.jpg
+End

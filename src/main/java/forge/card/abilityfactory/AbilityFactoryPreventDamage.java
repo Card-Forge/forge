@@ -67,17 +67,18 @@ public class AbilityFactoryPreventDamage {
      */
     public static SpellAbility createAbilityPreventDamage(final AbilityFactory af) {
         class AbilityPreventDamage extends AbilityActivated {
-            public AbilityPreventDamage(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityPreventDamage(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityPreventDamage(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityPreventDamage(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -6581723619801399347L;
 
             @Override
@@ -150,17 +151,18 @@ public class AbilityFactoryPreventDamage {
      */
     public static SpellAbility createDrawbackPreventDamage(final AbilityFactory af) {
         class DrawbackPreventDamage extends AbilitySub {
-            public DrawbackPreventDamage(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackPreventDamage(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackPreventDamage(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackPreventDamage(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -2295483806708528744L;
 
             @Override
@@ -184,7 +186,7 @@ public class AbilityFactoryPreventDamage {
             }
         }
         final SpellAbility dbPrevent = new DrawbackPreventDamage(af.getHostCard(), af.getAbTgt());
-        
+
         return dbPrevent;
     }
 
@@ -565,17 +567,18 @@ public class AbilityFactoryPreventDamage {
      */
     public static SpellAbility createAbilityPreventDamageAll(final AbilityFactory af) {
         class AbilityPreventDamageAll extends AbilityActivated {
-            public AbilityPreventDamageAll(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityPreventDamageAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityPreventDamageAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityPreventDamageAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5750726631110311462L;
 
             @Override
@@ -647,17 +650,18 @@ public class AbilityFactoryPreventDamage {
      */
     public static SpellAbility createDrawbackPreventDamageAll(final AbilityFactory af) {
         class DrawbackPreventDamageAll extends AbilitySub {
-            public DrawbackPreventDamageAll(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackPreventDamageAll(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackPreventDamageAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackPreventDamageAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -655573137457133314L;
 
             @Override
@@ -681,7 +685,7 @@ public class AbilityFactoryPreventDamage {
             }
         }
         final SpellAbility dbPreventAll = new DrawbackPreventDamageAll(af.getHostCard(), af.getAbTgt());
-        
+
         return dbPreventAll;
     }
 

@@ -5,6 +5,8 @@ Forge Beta: 0#-##-2012 ver 1.2.9
 10### cards in total.
 
 
+With the addition of Havengul Lich we now have our first 100% implemented expert level expansion, Dark Ascension.
+
 There was a bug in the previous version which prevented the token pics of many cards from displaying on the battlefield. This should now be fixed.
 
 Draft mode should no longer cause a crash when you start the draft.
@@ -61,6 +63,40 @@ Fixes/Features:
 - Fixed Oona's Prowler ability cost description.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Converted Wall of Reverence to script.
+- Added AILogic to Wall of Reverence.
+- Fixed pic of Junkyo Bell.
+- CheckStyle.
+- added support for adding additional characteristics. started converting clones to scripts.
+- merged r15847-r15910 from the Trunk into CloneFix branch
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- CheckStyle.
+- Added Abilitystealers that were lost in the shuffle
+- Fixed Zoetic Cavern
+- merged -r15916 from the Trunk into M13 branch (cardsfolder only).
+- M13 branch: Added Archaeomancer, Captain's Call, Murder and Warclamp Mastiff.
+- CheckStyle.
+- Fixed the ability cost for Prophetic Prism.
+- Fixed Sylvan Library.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- CheckStyle.
+- CheckStyle.
+- Added EffectSource as a defined for Effects to use, gets the card that created the effect (or chain of effects).
+- Let GainsAbilitiesOf work with Affected.
+- AGAIN with the missed script ... Added Havengul Lich proper.
+- Fixed effect exile on Havengul Lich
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed AI of untargeted AF Destroy.
+- Fixed AF CopyPermanent messing with DFC's.
+- CheckStyle.
+- Customized the Draft UI. (Removed "Remove" buttons, removed "Add 4" button, renamed "Add" button, removed "Filters","Deck Gen" and "All Decks" tabs)
+- CheckStyle.
+- CheckStyle.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -68,9 +104,30 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 
 
+Added cards to the M13 branch and these are not yet available in the snapshot builds:
+
+Archaeomancer
+Captain's Call
+Murder
+Warclamp Mastiff
+Ajani's Sunstriker
+Attended Knight
+Bond Beetle
+Crusader of Odric
+Faerie Invaders
+Guardian Lions
+Knight of Glory
+Rhox Faithmender
+Sublime Archangel
+
+
 Added many cards, including:
 
-
+Dark Impostor
+Experiment Kraj
+Myr Welder
+Necrotic Ooze
+Havengul Lich
 
 
 end

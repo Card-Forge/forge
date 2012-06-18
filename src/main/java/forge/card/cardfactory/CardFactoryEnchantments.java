@@ -336,9 +336,17 @@ class CardFactoryEnchantments {
                     if (player.isHuman()) {
                         final String cardQuestion = "Pay 4 life and keep in hand?";
                         player.drawCards(2);
-                        for (int i = 0; i < 2; i++) {
+                        int numPutBack = 0;
+                        for (Card c : AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand)) {
+                            if (c.getDrawnThisTurn()) {
+                                numPutBack++;
+                            }
+                        }
+                        numPutBack = Math.min(2, numPutBack);
+                        for (int i = 0; i < numPutBack; i++) {
                             final StringBuilder sb = new StringBuilder();
-                            sb.append(card).append(" - Select a card drawn this turn: ").append(2 - i).append(" of 2");
+                            sb.append(card).append(" - Select a card drawn this turn: ").append(numPutBack - i)
+                                .append(" of " + numPutBack);
                             final String prompt = sb.toString();
                             AllZone.getInputControl().setInput(new Input() {
                                 private static final long serialVersionUID = -3389565833121544797L;

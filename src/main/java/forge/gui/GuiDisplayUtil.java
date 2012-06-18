@@ -768,23 +768,23 @@ public final class GuiDisplayUtil {
             }
         }
     }
-    
+
     public static void devModeBreakpoint() {
         List<Player> Players = AllZone.getPlayersInGame();
-        
+
         Combat CombatHandler = AllZone.getCombat();
-        
+
         TriggerHandler Triggers = AllZone.getTriggerHandler();
-        
+
         InputControl InputHandler = AllZone.getInputControl();
-        
+
         ReplacementHandler Replacements = AllZone.getReplacementHandler();
-        
+
         StaticEffects StaticHandler = AllZone.getStaticEffects();
-        
+
         List<PlayerZone> Zones = new ArrayList<PlayerZone>();
-        for(Player p : Players)
-        {
+        for (Player p : Players) {
+
             Zones.add(p.getZone(ZoneType.Ante));
             Zones.add(p.getZone(ZoneType.Battlefield));
             Zones.add(p.getZone(ZoneType.Command));
@@ -795,7 +795,7 @@ public final class GuiDisplayUtil {
             Zones.add(p.getZone(ZoneType.Sideboard));
             Zones.add(p.getZone(ZoneType.Stack));
         }
-        
+
         //Set a breakpoint on the following statement
         System.out.println("Manual Breakpoint");
     }

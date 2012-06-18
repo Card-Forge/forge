@@ -68,17 +68,18 @@ public class AbilityFactoryDestroy {
      */
     public static SpellAbility createAbilityDestroy(final AbilityFactory af) {
         class AbilityDestroy extends AbilityActivated {
-            public AbilityDestroy(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityDestroy(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDestroy(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityDestroy(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4153613567150919283L;
 
             @Override
@@ -102,7 +103,7 @@ public class AbilityFactoryDestroy {
             }
         }
         final SpellAbility abDestroy = new AbilityDestroy(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abDestroy;
     }
 
@@ -157,17 +158,18 @@ public class AbilityFactoryDestroy {
      */
     public static AbilitySub createDrawbackDestroy(final AbilityFactory af) {
         class DrawbackDestroy extends AbilitySub {
-            public DrawbackDestroy(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackDestroy(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDestroy(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackDestroy(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4153613567150919283L;
 
             @Override
@@ -191,7 +193,7 @@ public class AbilityFactoryDestroy {
             }
         }
         final AbilitySub dbDestroy = new DrawbackDestroy(af.getHostCard(), af.getAbTgt());
-        
+
         return dbDestroy;
     }
 
@@ -215,12 +217,30 @@ public class AbilityFactoryDestroy {
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
         final boolean noRegen = params.containsKey("NoRegen");
-
         CardList list;
-        list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        list = list.getTargetableCards(sa);
 
+        if (abCost != null) {
+            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+                return false;
+            }
+
+            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
+                return false;
+            }
+
+            if (!CostUtil.checkDiscardCost(abCost, source)) {
+                return false;
+            }
+        }
+
+        // prevent run-away activations - first time will always return true
+        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+
+        // Targeting
         if (abTgt != null) {
+            abTgt.resetTargets();
+            list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+            list = list.getTargetableCards(sa);
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             if (params.containsKey("AITgts")) {
                 list = list.getValidCards(params.get("AITgts"), sa.getActivatingPlayer(), source);
@@ -250,28 +270,6 @@ public class AbilityFactoryDestroy {
             if (list.size() == 0) {
                 return false;
             }
-        }
-
-        if (abCost != null) {
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
-                return false;
-            }
-
-            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
-                return false;
-            }
-
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
-                return false;
-            }
-        }
-
-        // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-
-        // Targeting
-        if (abTgt != null) {
-            abTgt.resetTargets();
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (list.size() == 0) {
@@ -310,6 +308,15 @@ public class AbilityFactoryDestroy {
             }
 
         } else {
+            if (params.containsKey("Defined")) {
+                list = new CardList(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
+                if (list.isEmpty()
+                        || !list.getController(AllZone.getComputerPlayer()).isEmpty()
+                        || list.getNotKeyword("Indestructible").isEmpty()) {
+                    return false;
+                }
+                return true;
+            }
             return false;
         }
 
@@ -623,17 +630,18 @@ public class AbilityFactoryDestroy {
      */
     public static SpellAbility createAbilityDestroyAll(final AbilityFactory af) {
         class AbilityDestroyAll extends AbilityActivated {
-            public AbilityDestroyAll(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityDestroyAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDestroyAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityDestroyAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -1376444173137861437L;
 
             private final HashMap<String, String> params = af.getMapParams();
@@ -660,7 +668,7 @@ public class AbilityFactoryDestroy {
             }
         }
         final SpellAbility abDestroyAll = new AbilityDestroyAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abDestroyAll;
     }
 
@@ -714,17 +722,18 @@ public class AbilityFactoryDestroy {
      */
     public static SpellAbility createDrawbackDestroyAll(final AbilityFactory af) {
         class DrawbackDestroyAll extends AbilitySub {
-            public DrawbackDestroyAll(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackDestroyAll(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDestroyAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackDestroyAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -242160421677518351L;
 
             private final HashMap<String, String> params = af.getMapParams();
@@ -756,7 +765,7 @@ public class AbilityFactoryDestroy {
             }
         }
         final SpellAbility dbDestroyAll = new DrawbackDestroyAll(af.getHostCard(), af.getAbTgt());
-        
+
         return dbDestroyAll;
     }
 

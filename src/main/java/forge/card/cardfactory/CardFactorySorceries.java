@@ -678,17 +678,18 @@ public class CardFactorySorceries {
         else if (cardName.equals("Donate")) {
             final Target t2 = new Target(card, "Select target Player", "Player".split(","));
             class DrawbackDonate extends AbilitySub {
-                public DrawbackDonate(final Card ca,final Target t) {
-                    super(ca,t);
+                public DrawbackDonate(final Card ca, final Target t) {
+                    super(ca, t);
                 }
-                
+
                 @Override
                 public AbilitySub getCopy() {
-                    AbilitySub res = new DrawbackDonate(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                    CardFactoryUtil.copySpellAbility(this,res);
+                    AbilitySub res = new DrawbackDonate(getSourceCard(),
+                            getTarget() == null ? null : new Target(getTarget()));
+                    CardFactoryUtil.copySpellAbility(this, res);
                     return res;
                 }
-                
+
                 private static final long serialVersionUID = 4618047889933691050L;
 
                 @Override

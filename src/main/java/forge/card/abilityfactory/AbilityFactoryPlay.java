@@ -71,17 +71,18 @@ public final class AbilityFactoryPlay {
      */
     public static SpellAbility createAbilityPlay(final AbilityFactory af) {
         class AbilityPlay extends AbilityActivated {
-            public AbilityPlay(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityPlay(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityPlay(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityPlay(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 5232548517225345052L;
 
             @Override
@@ -105,7 +106,7 @@ public final class AbilityFactoryPlay {
             }
         }
         final SpellAbility abCopySpell = new AbilityPlay(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-        
+
         return abCopySpell;
     }
 
@@ -157,17 +158,18 @@ public final class AbilityFactoryPlay {
      */
     public static SpellAbility createDrawbackPlay(final AbilityFactory af) {
         class DrawbackPlay extends AbilitySub {
-            public DrawbackPlay(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackPlay(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackPlay(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackPlay(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 1927508119173644632L;
 
             @Override
@@ -191,7 +193,7 @@ public final class AbilityFactoryPlay {
             }
         }
         final SpellAbility dbCopySpell = new DrawbackPlay(af.getHostCard(), af.getAbTgt());
-        
+
         return dbCopySpell;
     }
 

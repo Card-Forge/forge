@@ -143,19 +143,20 @@ class CardFactoryLands {
                             && (c.getTurnInZone() == Singletons.getModel().getGameState().getPhaseHandler().getTurn());
                 }
             };
-            
+
             class AbilityNovijenHeartOfProgress extends AbilityActivated {
-                public AbilityNovijenHeartOfProgress(final Card ca,final Cost co,final Target t) {
-                    super(ca,co,t);
+                public AbilityNovijenHeartOfProgress(final Card ca, final Cost co, final Target t) {
+                    super(ca, co, t);
                 }
-                
+
                 @Override
                 public AbilityActivated getCopy() {
-                    AbilityActivated res = new AbilityNovijenHeartOfProgress(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                    AbilityActivated res = new AbilityNovijenHeartOfProgress(getSourceCard(),
+                            getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                     CardFactoryUtil.copySpellAbility(this, res);
                     return res;
                 }
-                
+
                 private static final long serialVersionUID = 1416258136308898492L;
 
                 private final CardList inPlay = new CardList();
@@ -183,7 +184,7 @@ class CardFactoryLands {
 
             final Cost abCost = new Cost(card, "G U T", true);
             final AbilityActivated ability = new AbilityNovijenHeartOfProgress(card, abCost, null);
-            
+
             final StringBuilder sbDesc = new StringBuilder();
             sbDesc.append(abCost);
             sbDesc.append("Put a +1/+1 counter on each creature that entered the battlefield this turn.");
@@ -584,7 +585,7 @@ class CardFactoryLands {
                 public boolean canPlay() {
                     return false;
                 }
-                
+
                 @Override
                 public AbilityActivated getCopy() {
                     return null;

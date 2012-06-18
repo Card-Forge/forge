@@ -110,13 +110,13 @@ public enum VSubmenuQuestData implements IVSubmenu {
         group2.add(radClassic);
         radClassic.setSelected(true);
         */
-        
+
         // TODO: Convert this to non-hardcoded info
         cbxFormat.removeAllItems();
         cbxFormat.addItem("Standard");
         cbxFormat.addItem("Extended");
         cbxFormat.addItem("Modern");
-        
+
         final ActionListener preconListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -164,12 +164,12 @@ public enum VSubmenuQuestData implements IVSubmenu {
         radPreconStart.addActionListener(preconListener);
         radCompleteStart.setSelected(true);
         cbxPrecon.setEnabled(false);
-        
+
         radMedium.setEnabled(true);
         // Fantasy box is Enabled by Default
         boxFantasy.setSelected(true);
         boxFantasy.setEnabled(true);
-        
+
         final JPanel pnlOptions = new JPanel();
         pnlOptions.setOpaque(false);
         pnlOptions.setLayout(new MigLayout("insets 0, gap 0"));
@@ -292,7 +292,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
     public String getPrecon() {
         return (String) cbxPrecon.getSelectedItem();
     }
-    
+
     /** @return {@link java.lang.String} */
     public String getFormat() {
         return (String) cbxFormat.getSelectedItem();

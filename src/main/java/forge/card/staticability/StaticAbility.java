@@ -397,9 +397,9 @@ public class StaticAbility {
         if (mode.equals("ETBTapped")) {
             return StaticAbilityETBTapped.applyETBTappedAbility(this, card);
         }
-        
+
         if (mode.equals("GainAbilitiesOf")) {
-            
+
         }
 
         return false;

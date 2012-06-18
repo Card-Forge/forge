@@ -74,10 +74,10 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
     public AbilityMana(final Card sourceCard, final String parse, final String produced) {
         this(sourceCard, parse, produced, 1);
     }
-    
+
     @Override
     public AbilityActivated getCopy() {
-        AbilityActivated res = new AbilityMana(getSourceCard(),getPayCosts(),getManaProduced());
+        AbilityActivated res = new AbilityMana(getSourceCard(), getPayCosts(), getManaProduced());
         CardFactoryUtil.copySpellAbility(this, res);
         return res;
     }

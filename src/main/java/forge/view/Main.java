@@ -45,7 +45,7 @@ public final class Main {
     public static void main(final String[] args) {
         //Possible solution to "Comparison method violates it's general contract!" crash
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        
+
         ExceptionHandler.registerErrorHandling();
 
         Singletons.setModel(FModel.SINGLETON_INSTANCE);

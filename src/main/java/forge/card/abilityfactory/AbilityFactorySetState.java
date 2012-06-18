@@ -51,17 +51,18 @@ public class AbilityFactorySetState {
      */
     public static SpellAbility getSetStateAbility(final AbilityFactory abilityFactory) {
         class AbilitySetState extends AbilityActivated {
-            public AbilitySetState(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilitySetState(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilitySetState(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilitySetState(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -1083427558368639457L;
 
             @Override
@@ -133,17 +134,18 @@ public class AbilityFactorySetState {
      */
     public static SpellAbility getSetStateDrawback(final AbilityFactory abilityFactory) {
         class DrawbackSetState extends AbilitySub {
-            public DrawbackSetState(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackSetState(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackSetState(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackSetState(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -3793247725721587468L;
 
             @Override
@@ -179,7 +181,7 @@ public class AbilityFactorySetState {
 
         }
         final AbilitySub ret = new DrawbackSetState(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
-        
+
         return ret;
     }
 
@@ -325,17 +327,18 @@ public class AbilityFactorySetState {
      */
     public static SpellAbility getSetStateAllAbility(final AbilityFactory abilityFactory) {
         class AbilitySetStateAll extends AbilityActivated {
-            public AbilitySetStateAll(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilitySetStateAll(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilitySetStateAll(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilitySetStateAll(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 7841029107610111992L;
 
             @Override
@@ -349,7 +352,7 @@ public class AbilityFactorySetState {
             }
         }
         final SpellAbility ret = new AbilitySetStateAll(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
-                abilityFactory.getAbTgt()) ;
+                abilityFactory.getAbTgt());
 
         return ret;
     }
@@ -389,17 +392,18 @@ public class AbilityFactorySetState {
      */
     public static SpellAbility getSetStateAllDrawback(final AbilityFactory abilityFactory) {
         class DrawbackSetStateAll extends AbilitySub {
-            public DrawbackSetStateAll(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackSetStateAll(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackSetStateAll(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackSetStateAll(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = 4047514893482113436L;
 
             @Override

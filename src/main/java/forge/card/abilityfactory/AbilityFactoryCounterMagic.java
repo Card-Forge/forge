@@ -96,17 +96,18 @@ public class AbilityFactoryCounterMagic {
      */
     public final SpellAbility getAbilityCounter(final AbilityFactory abilityFactory) {
         class AbilityCounter extends AbilityActivated {
-            public AbilityCounter(final Card ca,final Cost co,final Target t) {
-                super(ca,co,t);
+            public AbilityCounter(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityCounter(getSourceCard(),getPayCosts(),getTarget() == null ? null : new Target(getTarget()));
+                AbilityActivated res = new AbilityCounter(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -3895990436431818899L;
 
             @Override
@@ -183,17 +184,18 @@ public class AbilityFactoryCounterMagic {
      */
     public final SpellAbility getDrawbackCounter(final AbilityFactory abilityFactory) {
         class DrawbackCounter extends AbilitySub {
-            public DrawbackCounter(final Card ca,final Target t) {
-                super(ca,t);
+            public DrawbackCounter(final Card ca, final Target t) {
+                super(ca, t);
             }
-            
+
             @Override
             public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackCounter(getSourceCard(),getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this,res);
+                AbilitySub res = new DrawbackCounter(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
                 return res;
             }
-            
+
             private static final long serialVersionUID = -4272851734871573693L;
 
             @Override
@@ -225,7 +227,7 @@ public class AbilityFactoryCounterMagic {
             }
         }
         final SpellAbility dbCounter = new DrawbackCounter(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
-        
+
         return dbCounter;
     }
 

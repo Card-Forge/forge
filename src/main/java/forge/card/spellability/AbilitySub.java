@@ -63,7 +63,7 @@ public abstract class AbilitySub extends SpellAbility implements java.io.Seriali
      * @return a boolean.
      */
     public abstract boolean chkAIDrawback();
-    
+
     public abstract AbilitySub getCopy();
 
     /** {@inheritDoc} */
