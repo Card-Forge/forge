@@ -97,6 +97,12 @@ Fixes/Features:
 - CheckStyle.
 - CheckStyle.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed continuous static abilities.
+- merged r15910-r15940 from the Trunk into CloneFix branch
+- CheckStyle.
+- Abilitystealers besides Havengul Lich had the wrong "Affected" parameter.
+- merged r15940-r15946 from the Trunk into CloneFix branch
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -128,6 +134,8 @@ Experiment Kraj
 Myr Welder
 Necrotic Ooze
 Havengul Lich
+Bulwark
+Cabal Interrogator
 
 
 end
