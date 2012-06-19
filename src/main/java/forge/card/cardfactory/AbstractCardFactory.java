@@ -229,10 +229,10 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
     public final void copySpellontoStack(final Card source, final Card original, final SpellAbility sa,
             final boolean bCopyDetails) {
         Player controller = sa.getActivatingPlayer();
-        if (sa.getPayCosts() == null) {
-            this.copySpellontoStack(source, source, bCopyDetails);
+        /*if (sa.getPayCosts() == null) {
+            this.copySpellontoStack(source, original, bCopyDetails);
             return;
-        }
+        }*/
         final Card c = AllZone.getCardFactory().copyCard(original);
         c.addController(controller);
         c.setCopiedSpell(true);

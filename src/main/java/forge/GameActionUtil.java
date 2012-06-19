@@ -62,14 +62,10 @@ public final class GameActionUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public static void executePlayCardEffects(final SpellAbility sa) {
-        // experimental:
-        // this method check for cards that have triggered abilities whenever a
-        // card gets played
         // (called in MagicStack.java)
-        final Card c = sa.getSourceCard();
 
-        GameActionUtil.playCardCascade(c);
-        GameActionUtil.playCardRipple(c);
+        GameActionUtil.playCardCascade(sa);
+        GameActionUtil.playCardRipple(sa);
     }
 
     /**
@@ -77,10 +73,12 @@ public final class GameActionUtil {
      * playCardCascade.
      * </p>
      * 
-     * @param c
-     *            a {@link forge.Card} object.
+     * @param sa
+     *            a SpellAbility object.
      */
-    public static void playCardCascade(final Card c) {
+    public static void playCardCascade(final SpellAbility sa) {
+        final Card c = sa.getSourceCard();
+        final Player controller = sa.getActivatingPlayer();
         final Command cascade = new Command() {
             private static final long serialVersionUID = -845154812215847505L;
 
@@ -99,20 +97,19 @@ public final class GameActionUtil {
 
                     for (final Card nexus : maelstromNexii) {
                         if (CardUtil.getThisTurnCast("Card.YouCtrl", nexus).size() == 1) {
-                            this.doCascade(c);
+                            this.doCascade(c, controller);
                         }
                     }
                 }
 
                 for (String keyword : c.getKeyword()) {
                     if (keyword.equals("Cascade")) {
-                        this.doCascade(c);
+                        this.doCascade(c, controller);
                     }
                 }
             } // execute()
 
-            void doCascade(final Card c) {
-                final Player controller = c.getController();
+            void doCascade(final Card c, final Player controller) {
                 final Card cascCard = c;
 
                 final Ability ability = new Ability(c, "0") {
@@ -202,10 +199,12 @@ public final class GameActionUtil {
      * playCardRipple.
      * </p>
      * 
-     * @param c
-     *            a {@link forge.Card} object.
+     * @param sa
+     *            a SpellAbility object.
      */
-    public static void playCardRipple(final Card c) {
+    public static void playCardRipple(final SpellAbility sa) {
+        final Card c = sa.getSourceCard();
+        final Player controller = sa.getActivatingPlayer();
         final Command ripple = new Command() {
             private static final long serialVersionUID = -845154812215847505L;
 
@@ -232,13 +231,12 @@ public final class GameActionUtil {
                     if (a.get(x).toString().startsWith("Ripple")) {
                         final String parse = c.getKeyword().get(x).toString();
                         final String[] k = parse.split(":");
-                        this.doRipple(c, Integer.valueOf(k[1]));
+                        this.doRipple(c, Integer.valueOf(k[1]), controller);
                     }
                 }
             } // execute()
 
-            void doRipple(final Card c, final int rippleCount) {
-                final Player controller = c.getController();
+            void doRipple(final Card c, final int rippleCount, final Player controller) {
                 final Card rippleCard = c;
                 boolean activateRipple = false;
                 if (controller.isComputer() || GameActionUtil.showYesNoDialog(c, "Activate Ripple for " + c + "?")) {
