@@ -282,7 +282,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
      * @param bCopyDetails
      *            a boolean.
      */
-    @Override
+    /*@Override
     public final void copySpellontoStack(final Card source, final Card original, final boolean bCopyDetails) {
         final SpellAbility[] sas = original.getSpellAbility();
         SpellAbility sa = null;
@@ -360,7 +360,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         } else if (copySA.canPlayAI()) {
             ComputerUtil.playStackFree(copySA);
         }
-    }
+    }*/
 
     /**
      * <p>

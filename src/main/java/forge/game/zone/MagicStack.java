@@ -665,7 +665,7 @@ public class MagicStack extends MyObservable {
                     @Override
                     public void execute() {
                         for (int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
-                            AllZone.getCardFactory().copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), false);
+                            AllZone.getCardFactory().copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false);
                         }
                     }
                 };
