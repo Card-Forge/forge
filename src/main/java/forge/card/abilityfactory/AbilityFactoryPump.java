@@ -888,6 +888,7 @@ public class AbilityFactoryPump {
         CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = list.getTargetableCards(sa);
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             tgt.resetTargets();
