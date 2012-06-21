@@ -927,7 +927,7 @@ public class CardFactorySorceries {
                     this.printCardTargets();
                     Log.debug("Fireball", "Fireball - player targets: ");
                     this.printPlayerTargets();
-                    if (card.getController().isComputer()) {
+                    if (this.getActivatingPlayer().isComputer()) {
                         final StringBuilder sb = new StringBuilder();
                         sb.append(cardName).append(" - Computer causes ");
                         sb.append(damage).append(" to:\n\n");
