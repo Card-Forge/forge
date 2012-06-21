@@ -2383,11 +2383,11 @@ public final class AbilityFactoryChangeZone {
         humanType = AbilityFactory.filterListByType(humanType, params.get("ChangeType"), sa);
         CardList computerType = AllZone.getComputerPlayer().getCardsIn(origin);
         computerType = AbilityFactory.filterListByType(computerType, params.get("ChangeType"), sa);
+        final Target tgt = sa.getTarget();
 
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.
         if (origin.equals(ZoneType.Hand) || origin.equals(ZoneType.Library)) {
-            final Target tgt = sa.getTarget();
             if (tgt != null) {
                 if (AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).isEmpty()
                         || !AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
@@ -2403,6 +2403,15 @@ public final class AbilityFactoryChangeZone {
             // occur
             // if only creatures are affected evaluate both lists and pass only
             // if human creatures are more valuable
+            if (tgt != null) {
+                if (AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).isEmpty()
+                        || !AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+                    return false;
+                }
+                tgt.resetTargets();
+                tgt.addTarget(AllZone.getHumanPlayer());
+                computerType.clear();
+            }
             if ((humanType.getNotType("Creature").size() == 0) && (computerType.getNotType("Creature").size() == 0)) {
                 if ((CardFactoryUtil.evaluateCreatureList(computerType) + 200) >= CardFactoryUtil
                         .evaluateCreatureList(humanType)) {
@@ -2420,7 +2429,6 @@ public final class AbilityFactoryChangeZone {
                 return false;
             }
         } else if (origin.equals(ZoneType.Graveyard)) {
-            final Target tgt = sa.getTarget();
             if (tgt != null) {
                 if (AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard).isEmpty()
                         || !AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
