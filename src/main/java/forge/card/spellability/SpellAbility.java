@@ -1636,9 +1636,14 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public final boolean canTarget(final GameEntity entity) {
+        if (this.getTarget() == null) {
+            if (entity.canBeTargetedBy(this)) {
+                return true;
+            }
+            return false;
+        }
         if (entity.isValid(this.getTarget().getValidTgts(), this.getActivatingPlayer(), this.getSourceCard())
-                && (this.getTarget() == null || !this.getTarget().isUniqueTargets()
-                    || !TargetSelection.getUniqueTargets(this).contains(entity))
+                && (!this.getTarget().isUniqueTargets() || !TargetSelection.getUniqueTargets(this).contains(entity))
                 && entity.canBeTargetedBy(this)) {
             return true;
         }
