@@ -153,7 +153,7 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
     public AbilityMana(final Card sourceCard, final Cost cost, final String produced, final int num, final String restrictions) {
         super(sourceCard, cost, null);
 
-        this.origProduced = produced;
+        origProduced = produced;
         this.amount = num;
         if (restrictions != null) {
             this.manaRestrictions = restrictions;
@@ -258,7 +258,7 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
         else {
             try {
                 // if baseMana is an integer(colorless), just multiply amount and baseMana
-                int base = Integer.parseInt(this.origProduced);
+                int base = Integer.parseInt(this.getOrigProduced());
                 sb.append(base * this.amount);
             } catch (NumberFormatException e) {
                 for (int i = 0; i < this.amount; i++) {
@@ -356,13 +356,13 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
      * @return a {@link java.lang.String} object.
      */
     public final String mana() {
-        if (this.origProduced.contains("Chosen")) {
+        if (this.getOrigProduced().contains("Chosen")) {
             if (this.getSourceCard() != null && !this.getSourceCard().getChosenColor().isEmpty()) {
                 return InputPayManaCostUtil.getShortColorString(this.getSourceCard()
                         .getChosenColor().get(0));
             }
         }
-        return this.origProduced;
+        return this.getOrigProduced();
     }
 
     /**
@@ -374,7 +374,7 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
      *            a {@link java.lang.String} object.
      */
     public final void setMana(final String s) {
-        this.origProduced = s;
+        origProduced = s;
     }
 
     /**
@@ -473,7 +473,7 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
      * @return a boolean.
      */
     public boolean isAnyMana() {
-        return this.origProduced.contains("Any");
+        return this.getOrigProduced().contains("Any");
     }
 
     /**
@@ -490,14 +490,14 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
             return true;
         }
 
-        if (this.origProduced.contains("Chosen")) {
+        if (this.getOrigProduced().contains("Chosen")) {
             if (this.getSourceCard() != null && !this.getSourceCard().getChosenColor().isEmpty()
                     && InputPayManaCostUtil.getShortColorString(this.getSourceCard().getChosenColor().get(0))
                     .contains(s)) {
                 return true;
             }
         }
-        return this.origProduced.contains(s);
+        return this.getOrigProduced().contains(s);
     }
 
     /**
@@ -508,8 +508,8 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
      * @return a boolean.
      */
     public final boolean isBasic() {
-        if (this.origProduced.length() != 1 && !this.origProduced.contains("Any")
-                && !this.origProduced.contains("Chosen")) {
+        if (this.getOrigProduced().length() != 1 && !this.getOrigProduced().contains("Any")
+                && !this.getOrigProduced().contains("Chosen")) {
             return false;
         }
 
@@ -598,6 +598,13 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
     @Override
     public int hashCode() {
         return (41 * (41 + this.getType().hashCode()));
+    }
+
+    /**
+     * @return the origProduced
+     */
+    public String getOrigProduced() {
+        return origProduced;
     }
 
 } // end class AbilityMana
