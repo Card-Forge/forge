@@ -87,7 +87,7 @@ public interface CardFactoryInterface extends Iterable<Card> {
      * @param bCopyDetails
      *            a boolean.
      */
-    void copySpellontoStack(Card source, Card original, boolean bCopyDetails);
+    //void copySpellontoStack(Card source, Card original, boolean bCopyDetails);
 
     /**
      * <p>

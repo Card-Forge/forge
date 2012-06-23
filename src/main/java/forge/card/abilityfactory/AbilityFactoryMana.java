@@ -67,8 +67,12 @@ public class AbilityFactoryMana {
      */
     public static SpellAbility createAbilityMana(final AbilityFactory abilityFactory, final String produced) {
         final String restrictions = abilityFactory.getMapParams().get("RestrictValid");
-        final AbilityMana abMana = new AbilityMana(abilityFactory.getHostCard(), abilityFactory.getAbCost(), produced, restrictions) {
+        class abFactoryMana extends AbilityMana {
             private static final long serialVersionUID = -1933592438783630254L;
+            
+            public abFactoryMana(Card ca,Cost co, String s, String s2) {
+                super(ca,co,s,s2);
+            }
 
             private final AbilityFactory af = abilityFactory;
 
@@ -92,7 +96,15 @@ public class AbilityFactoryMana {
             public String getManaProduced() {
                 return manaGenerated(this, this.af, this);
             }
-        };
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new abFactoryMana(getSourceCard(), getPayCosts(), this.getOrigProduced(), getManaRestrictions());
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+        }
+        final AbilityMana abMana = new abFactoryMana(abilityFactory.getHostCard(), abilityFactory.getAbCost(), produced, restrictions);
         return abMana;
     }
 
@@ -172,6 +184,7 @@ public class AbilityFactoryMana {
                 AbilitySub res = new DrawbackMana(getSourceCard(),
                         getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
+                ((DrawbackMana)res).setTmp((AbilityMana)tmpMana.getCopy());
                 return res;
             }
 
@@ -180,7 +193,7 @@ public class AbilityFactoryMana {
             private final AbilityFactory af = abilityFactory;
             // To get the mana to resolve properly, we need the spell to contain an AbilityMana
             private final Cost tmp = new Cost(abilityFactory.getHostCard(), "0", false);
-            private final AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced, restrictions) {
+            private AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced, restrictions) {
                 private static final long serialVersionUID = 1454043766057140491L;
 
                 @Override
@@ -190,6 +203,10 @@ public class AbilityFactoryMana {
                 }
 
             };
+            
+            public void setTmp(AbilityMana newTmp) {
+                tmpMana = newTmp;
+            }
 
             @Override
             public String getStackDescription() {
@@ -477,9 +494,13 @@ public class AbilityFactoryMana {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityManaReflected(final AbilityFactory abilityFactory, final String produced) {
-        final AbilityMana abMana = new AbilityMana(abilityFactory.getHostCard(), abilityFactory.getAbCost(), produced) {
+        class abFactoryReflectedMana extends AbilityMana {
             private static final long serialVersionUID = -1933592438783630254L;
 
+            public abFactoryReflectedMana(Card ca,Cost co,String s) {
+                super(ca,co,s);
+            }
+            
             private final AbilityFactory af = abilityFactory;
 
             @Override
@@ -497,8 +518,16 @@ public class AbilityFactoryMana {
                 // TODO Auto-generated method stub
                 return false;
             }
-
-        };
+            
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new abFactoryReflectedMana(getSourceCard(), getPayCosts(), getManaProduced() );
+                CardFactoryUtil.copySpellAbility(this, res);
+                ((AbilityMana)res).setReflectedMana(true);
+                return res;
+            }
+        }
+        final AbilityMana abMana = new abFactoryReflectedMana(abilityFactory.getHostCard(), abilityFactory.getAbCost(), produced);
         abMana.setReflectedMana(true);
         return abMana;
     }

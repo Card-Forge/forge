@@ -3,8 +3,8 @@ ManaCost:1 G G
 Types:Creature Treefolk
 Text:no text
 PT:2/3
-T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Spell.nonCreature | ValidActivatingPlayer$ Opponent | Execute$ TrigDrawYou | OptionalDecider$ You |TriggerDescription$ Whenever a player casts a noncreature spell, each of that player's opponents may draw a card.
-T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Spell.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigDrawOpp | OptionalDecider$ Opponent |TriggerDescription$ Whenever a player casts a noncreature spell, each of that player's opponents may draw a card. | Secondary$ True
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | Execute$ TrigDrawYou | OptionalDecider$ You |TriggerDescription$ Whenever a player casts a noncreature spell, each of that player's opponents may draw a card.
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigDrawOpp | OptionalDecider$ Opponent |TriggerDescription$ Whenever a player casts a noncreature spell, each of that player's opponents may draw a card. | Secondary$ True
 SVar:TrigDrawYou:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:TrigDrawOpp:AB$ Draw | Cost$ 0 | Defined$ Opponent | NumCards$ 1
 SVar:Rarity:Rare

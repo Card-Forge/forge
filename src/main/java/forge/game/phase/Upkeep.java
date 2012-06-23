@@ -80,7 +80,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
         Upkeep.upkeepEcho();
 
         Upkeep.upkeepTheAbyss();
-        Upkeep.upkeepYawgmothDemon();
+        //Upkeep.upkeepYawgmothDemon();
         Upkeep.upkeepDropOfHoney();
         Upkeep.upkeepDemonicHordes();
         Upkeep.upkeepTangleWire();
@@ -533,8 +533,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final StringBuilder sb = new StringBuilder();
             sb.append(abyss.getName()).append(" - destroy a nonartifact creature of your choice.");
             sacrificeCreature.setStackDescription(sb.toString());
-            AllZone.getStack().addSimultaneousStackEntry(sacrificeCreature);
-
+            AllZone.getStack().addAndUnfreeze(sacrificeCreature);
         } // end for
     } // The Abyss
 
@@ -543,12 +542,12 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * upkeepYawgmothDemon.
      * </p>
      */
-    private static void upkeepYawgmothDemon() {
+    /*private static void upkeepYawgmothDemon() {
         /*
          * At the beginning of your upkeep, you may sacrifice an artifact. If
          * you don't, tap Yawgmoth Demon and it deals 2 damage to you.
          */
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        /*final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final CardList cards = player.getCardsIn(ZoneType.Battlefield, "Yawgmoth Demon");
 
         for (int i = 0; i < cards.size(); i++) {
@@ -611,7 +610,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(sacrificeArtifact);
 
         } // end for
-    }
+    }*/
 
     /**
      * <p>

@@ -97,6 +97,25 @@ Fixes/Features:
 - CheckStyle.
 - CheckStyle.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed continuous static abilities.
+- merged r15910-r15940 from the Trunk into CloneFix branch
+- CheckStyle.
+- Abilitystealers besides Havengul Lich had the wrong "Affected" parameter.
+- merged r15940-r15946 from the Trunk into CloneFix branch
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Commented out one redundant version of copySpellontoStack.
+- Fixed pumpMandatoryTarget not checking shroud, etc.
+- Updated all-prices.txt.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Prevented some SpellCast triggers from crashing when Fireball (and similar hardcoded cards) is cast (they still won't trigger correctly because of missing info).
+- Fixed The Abyss and similar cards.
+- Fixed Targeting for Sudden Disappearance.
+- Fixed Heartwood Storyteller.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Fixed stolen Doubling Cube ability only doubling white mana.
+- Fixed Doubling Cube not doubling colorless mana.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -106,19 +125,31 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added cards to the M13 branch and these are not yet available in the snapshot builds:
 
-Archaeomancer
-Captain's Call
-Murder
-Warclamp Mastiff
 Ajani's Sunstriker
+Archaeomancer
 Attended Knight
 Bond Beetle
+Captain's Call
+Cathedral of War
+Cower in Fear
+Crippling Blight
 Crusader of Odric
+Duskmantle Prowler
+Duty-Bound Dead
 Faerie Invaders
 Guardian Lions
+Harbor Bandit
+Hydrosurge
 Knight of Glory
+Liliana of the Dark Realms
+Mind Sculpt
+Murder
 Rhox Faithmender
 Sublime Archangel
+Talrand's Invocation
+Tricks of the Trade
+Warclamp Mastiff
+Watercourser
 
 
 Added many cards, including:
@@ -128,6 +159,9 @@ Experiment Kraj
 Myr Welder
 Necrotic Ooze
 Havengul Lich
+Bulwark
+Cabal Interrogator
+Brawl
 
 
 end
