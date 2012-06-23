@@ -40,6 +40,7 @@ import forge.CommandArgs;
 import forge.Counters;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.card.CardCharacteristics;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -3927,6 +3928,70 @@ public class CardFactoryUtil {
         to.setTriggers(from.getTriggers());
         to.setReplacementEffects(from.getReplacementEffects());
         to.setStaticAbilityStrings(from.getStaticAbilityStrings());
+
+    }
+
+    /**
+     * Copy characteristics.
+     * 
+     * @param from
+     *            the from
+     * @param to
+     *            the to
+     */
+    public static void copyState(final Card from, final CardCharactersticName stateToCopy, final Card to, final String type) {
+
+        // copy characteristics not associated with a state
+        to.setCurSetCode(from.getCurSetCode());
+        to.setBaseLoyalty(from.getBaseLoyalty());
+        to.setBaseAttackString(from.getBaseAttackString());
+        to.setBaseDefenseString(from.getBaseDefenseString());
+        to.setText(from.getSpellText());
+
+        // get CardCharacteristics for desired state
+        CardCharacteristics characteristics = from.getState(stateToCopy);
+        to.setBaseAttack(characteristics.getBaseAttack());
+        to.setBaseDefense(characteristics.getBaseDefense());
+        to.setIntrinsicKeyword(characteristics.getIntrinsicKeyword());
+        to.setName(characteristics.getName());
+        to.setType(characteristics.getType());
+        to.setManaCost(characteristics.getManaCost());
+        to.setColor(characteristics.getCardColor());
+        to.setCardColorsOverridden(characteristics.isCardColorsOverridden());
+        to.setSVars(characteristics.getSVars());
+        to.setSets(characteristics.getSets());
+        to.setIntrinsicAbilities(characteristics.getIntrinsicAbility());
+        to.setImageName(characteristics.getImageName());
+        to.setImageFilename(characteristics.getImageFilename());
+        to.setTriggers(characteristics.getTriggers());
+        to.setReplacementEffects(characteristics.getReplacementEffects());
+        to.setStaticAbilityStrings(characteristics.getStaticAbilityStrings());
+
+        // copy activated abilities
+        for (SpellAbility sa : characteristics.getSpellAbility()) {
+            if (sa instanceof AbilityActivated) {
+                SpellAbility newSA = ((AbilityActivated) sa).getCopy();
+                if (newSA == null) {
+                    System.out.println("Uh-oh...");
+                }
+                newSA.setType(type);
+                CardFactoryUtil.correctAbilityChainSourceCard(newSA, to);
+                to.addSpellAbility(newSA);
+            }
+        }
+
+        // copy activated mana abilities
+        for (SpellAbility sa : characteristics.getManaAbility()) {
+            if (sa instanceof AbilityActivated) {
+                SpellAbility newSA = ((AbilityActivated) sa).getCopy();
+                if (newSA == null) {
+                    System.out.println("Uh-oh...");
+                }
+                newSA.setType(type);
+                CardFactoryUtil.correctAbilityChainSourceCard(newSA, to);
+                to.addSpellAbility(newSA);
+            }
+        }
 
     }
 

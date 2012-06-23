@@ -23,12 +23,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import forge.AllZone;
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharactersticName;
+import forge.CardList;
 import forge.CardUtil;
 import forge.Singletons;
+import forge.card.CardCharacteristics;
 import forge.card.cardfactory.AbstractCardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
@@ -39,6 +43,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -68,7 +73,19 @@ public final class AbilityFactoryClone {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityClone(final AbilityFactory af) {
-        final SpellAbility abClone = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        class AbilityClone extends AbilityActivated {
+            public AbilityClone(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
+            }
+
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityClone(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+
             private static final long serialVersionUID = 1938171749867734123L;
 
             @Override
@@ -90,7 +107,9 @@ public final class AbilityFactoryClone {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryClone.cloneTriggerAI(af, this, mandatory);
             }
-        };
+        }
+
+        final SpellAbility abClone = new AbilityClone(af.getHostCard(), af.getAbCost(), af.getAbTgt());
         return abClone;
     }
 
@@ -135,7 +154,19 @@ public final class AbilityFactoryClone {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackClone(final AbilityFactory af) {
-        final SpellAbility dbClone = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        class DrawbackClone extends AbilitySub {
+            public DrawbackClone(final Card ca, final Target t) {
+                super(ca, t);
+            }
+
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackClone(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+
             private static final long serialVersionUID = -8659938411435528741L;
 
             @Override
@@ -157,7 +188,9 @@ public final class AbilityFactoryClone {
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryClone.cloneTriggerAI(af, this, mandatory);
             }
-        };
+        }
+
+        final SpellAbility dbClone = new DrawbackClone(af.getHostCard(), af.getAbTgt());
         return dbClone;
     }
 
@@ -518,40 +551,20 @@ public final class AbilityFactoryClone {
         //boolean keepName = params.containsKey("KeepName");
         AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
 
-        if (cardToCopy.isToken()) {
-            cloned = CardFactoryUtil.copyStats(cardToCopy);
-
-            cloned.setName(cardToCopy.getName());
-            cloned.setImageName(cardToCopy.getImageName());
-
-            cloned.setOwner(sa.getActivatingPlayer());
-            cloned.addController(sa.getActivatingPlayer());
-
-            cloned.setManaCost(cardToCopy.getManaCost());
-            cloned.setColor(cardToCopy.getColor());
-            cloned.setToken(true);
-
-            cloned.setType(cardToCopy.getType());
-
-            cloned.setBaseAttack(cardToCopy.getBaseAttack());
-            cloned.setBaseDefense(cardToCopy.getBaseDefense());
-        }
-        else {
-            Card origin = cardToCopy;
-            // TODO: transform back before copying
-            cloned = AbstractCardFactory.getCard2(origin, tgtCard.getOwner());
-            // TODO: transform origin back to how it was (if needed)
-        }
+        // add "Cloner" state to clone
         tgtCard.addAlternateState(CardCharactersticName.Cloner);
         tgtCard.switchStates(CardCharactersticName.Original, CardCharactersticName.Cloner);
         tgtCard.setState(CardCharactersticName.Original);
 
-        if (cardToCopy.getCurState() == CardCharactersticName.Transformed && cardToCopy.isDoubleFaced()) {
-            cloned.setState(CardCharactersticName.Transformed);
+        CardCharactersticName stateToCopy = null;
+        if (cardToCopy.isFlip()) {
+            stateToCopy = CardCharactersticName.Original;
+        }
+        else {
+            stateToCopy = cardToCopy.getCurState();
         }
 
-        CardFactoryUtil.copyCharacteristics(cloned, tgtCard);
-        CardFactoryUtil.addAbilityFactoryAbilities(tgtCard);
+        CardFactoryUtil.copyState(cardToCopy, stateToCopy, tgtCard, "Cloned");
         for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {
             tgtCard.addStaticAbility(tgtCard.getStaticAbilityStrings().get(i));
         }
@@ -560,12 +573,9 @@ public final class AbilityFactoryClone {
         // If target is a flipped card, also copy the flipped
         // state.
         if (cardToCopy.isFlip()) {
-            cloned.setState(CardCharactersticName.Flipped);
-            cloned.setImageFilename(CardUtil.buildFilename(cloned));
             tgtCard.addAlternateState(CardCharactersticName.Flipped);
             tgtCard.setState(CardCharactersticName.Flipped);
-            CardFactoryUtil.copyCharacteristics(cloned, tgtCard);
-            CardFactoryUtil.addAbilityFactoryAbilities(tgtCard);
+            CardFactoryUtil.copyState(cardToCopy, CardCharactersticName.Flipped, tgtCard, "Cloned");
             for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {
                 tgtCard.addStaticAbility(tgtCard.getStaticAbilityStrings().get(i));
             }
