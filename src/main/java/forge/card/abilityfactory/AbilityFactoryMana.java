@@ -69,9 +69,9 @@ public class AbilityFactoryMana {
         final String restrictions = abilityFactory.getMapParams().get("RestrictValid");
         class abFactoryMana extends AbilityMana {
             private static final long serialVersionUID = -1933592438783630254L;
-            
-            public abFactoryMana(Card ca,Cost co, String s, String s2) {
-                super(ca,co,s,s2);
+
+            public abFactoryMana(Card ca, Cost co, String s, String s2) {
+                super(ca, co, s, s2);
             }
 
             private final AbilityFactory af = abilityFactory;
@@ -96,7 +96,7 @@ public class AbilityFactoryMana {
             public String getManaProduced() {
                 return manaGenerated(this, this.af, this);
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
                 AbilityActivated res = new abFactoryMana(getSourceCard(), getPayCosts(), this.getOrigProduced(), getManaRestrictions());
@@ -184,7 +184,7 @@ public class AbilityFactoryMana {
                 AbilitySub res = new DrawbackMana(getSourceCard(),
                         getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
-                ((DrawbackMana)res).setTmp((AbilityMana)tmpMana.getCopy());
+                ((DrawbackMana) res).setTmp((AbilityMana) tmpMana.getCopy());
                 return res;
             }
 
@@ -203,7 +203,7 @@ public class AbilityFactoryMana {
                 }
 
             };
-            
+
             public void setTmp(AbilityMana newTmp) {
                 tmpMana = newTmp;
             }
@@ -497,10 +497,10 @@ public class AbilityFactoryMana {
         class abFactoryReflectedMana extends AbilityMana {
             private static final long serialVersionUID = -1933592438783630254L;
 
-            public abFactoryReflectedMana(Card ca,Cost co,String s) {
-                super(ca,co,s);
+            public abFactoryReflectedMana(Card ca, Cost co, String s) {
+                super(ca, co, s);
             }
-            
+
             private final AbilityFactory af = abilityFactory;
 
             @Override
@@ -518,12 +518,12 @@ public class AbilityFactoryMana {
                 // TODO Auto-generated method stub
                 return false;
             }
-            
+
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new abFactoryReflectedMana(getSourceCard(), getPayCosts(), getManaProduced() );
+                AbilityActivated res = new abFactoryReflectedMana(getSourceCard(), getPayCosts(), getManaProduced());
                 CardFactoryUtil.copySpellAbility(this, res);
-                ((AbilityMana)res).setReflectedMana(true);
+                ((AbilityMana) res).setReflectedMana(true);
                 return res;
             }
         }
