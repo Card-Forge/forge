@@ -4,7 +4,7 @@ Types:Creature Lizard
 Text:no text
 PT:6/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to target creature you control.
-SVar:TrigDamage:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature.YouCtrl | NumDmg$ 3 | TgtPrompt$ Select target creature you control
+SVar:TrigDamage:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.YouCtrl | NumDmg$ 3 | TgtPrompt$ Select target creature you control
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whiptail_moloch.jpg

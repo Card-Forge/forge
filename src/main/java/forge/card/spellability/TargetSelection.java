@@ -353,7 +353,7 @@ public class TargetSelection {
                     ButtonUtil.enableAll();
                 }
 
-                if (mandatory) {
+                if (mandatory && tgt.hasCandidates(sa, true)) {
                     ButtonUtil.disableCancel();
                 }
             }
