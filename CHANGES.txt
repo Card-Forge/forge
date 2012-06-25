@@ -1,15 +1,15 @@
-Forge Beta: 0#-##-2012 ver 1.2.9
+Forge Beta: 06-25-2012 ver 1.2.9
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-10### cards in total.
+10890 cards in total.
 
 
 With the addition of Havengul Lich we now have our first 100% implemented expert level expansion, Dark Ascension.
 
 There was a bug in the previous version which prevented the token pics of many cards from displaying on the battlefield. This should now be fixed.
 
-Draft mode should no longer cause a crash when you start the draft.
+Draft mode should no longer cause a crash when you start a new draft.
 
 People using java 7 should be able to play forge without getting the crash reports that stated "Comparison method violates it's general contract!".
 
@@ -25,7 +25,7 @@ Some people have noticed special quests do not have the start in play cards appe
 
 We are now using a different system for our snapshot and beta releases. Unfortunately, this new system builds a jar file which does not accurately display the SVN revision number.
 
-Forge is not fully java 7 compatible at this time. We recommend that people downgrade to java 6.
+Forge may not be fully java 7 compatible at this time. We recommend that people downgrade to java 6.
 
 --
 
@@ -126,11 +126,21 @@ Fixes/Features:
 - Fixed NPE with EnchantedControllerCreatures.
 - Fixed last fix.
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Hellfish
+Marc
+Sagephoenix
+Scerkor
+Sloth
+Sol
+Squee1968
+ZzzzSleep
+Chris H
 
 
 Added cards to the M13 branch and these are not yet available in the snapshot builds:
@@ -164,14 +174,14 @@ Watercourser
 
 Added many cards, including:
 
-Dark Impostor
-Experiment Kraj
-Myr Welder
-Necrotic Ooze
-Havengul Lich
+Brawl
 Bulwark
 Cabal Interrogator
-Brawl
+Dark Impostor
+Experiment Kraj
+Havengul Lich
+Myr Welder
+Necrotic Ooze
 
 
 end
