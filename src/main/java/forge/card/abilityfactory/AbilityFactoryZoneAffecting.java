@@ -481,7 +481,8 @@ public class AbilityFactoryZoneAffecting {
             }
 
             if (((computerHandSize + numCards) > computerMaxHandSize)
-                    && Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
+                    && Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()
+                    && !sa.isTrigger()) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT
                 if (!(params.containsKey("NextUpkeep") || (sa instanceof AbilitySub)) && !mandatory) {
