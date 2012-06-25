@@ -116,6 +116,16 @@ Fixes/Features:
 - Fixed stolen Doubling Cube ability only doubling white mana.
 - Fixed Doubling Cube not doubling colorless mana.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CloneFix: add getCopy method the Clone AF. Created new method to copy state
+- CloneFix: merged r15946-r15965 from the Trunk into CloneFix branch
+- CheckStyle.
+- Fixed Scrabbling Claws.
+- Fixed possibility to get stuck in target selection.
+- Updated Cable 2 deck.
+- Text fix for Initiate of Blood.
+- Fixed NPE with EnchantedControllerCreatures.
+- Fixed last fix.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
