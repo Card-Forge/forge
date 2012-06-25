@@ -144,22 +144,25 @@ public class CostReveal extends CostPartWithList {
             this.addToList(source);
             payment.setPaidManaPart(this, true);
         } else {
-            Integer c = this.convertAmount();
+            Integer num = this.convertAmount();
 
             CardList handList = activator.getCardsIn(ZoneType.Hand);
             handList = handList.getValidCards(this.getType().split(";"), activator, ability.getSourceCard());
 
-            if (c == null) {
+            if (num == null) {
                 final String sVar = ability.getSVar(amount);
                 if (sVar.equals("XChoice")) {
-                    c = CostUtil.chooseXValue(source, ability, handList.size());
+                    num = CostUtil.chooseXValue(source, ability, handList.size());
                 } else {
-                    c = AbilityFactory.calculateAmount(source, amount, ability);
+                    num = AbilityFactory.calculateAmount(source, amount, ability);
                 }
             }
-
-            CostUtil.setInput(CostReveal.inputRevealCost(this.getType(), handList, payment, this, ability, c));
-            return false;
+            if (num > 0) {
+                CostUtil.setInput(CostReveal.inputRevealCost(this.getType(), handList, payment, this, ability, num));
+                return false;
+            } else {
+                payment.setPaidManaPart(this, true);
+            }
         }
         this.addListToHash(ability, "Revealed");
         return true;
@@ -240,7 +243,7 @@ public class CostReveal extends CostPartWithList {
                     this.done();
                 }
 
-                if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() < nNeeded) {
+                if (handList.size() + this.nReveal < nNeeded) {
                     this.stop();
                 }
                 final StringBuilder type = new StringBuilder("");
