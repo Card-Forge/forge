@@ -5,6 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Mountainwalk | Description$ Enchanted creature has mountainwalk.
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burrowing.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/139.jpg

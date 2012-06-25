@@ -1,0 +1,15 @@
+Name:Captivating Glance
+ManaCost:2 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Curse
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ CaptiveClash | TriggerDescription$ At the beginning of your end step, clash with an opponent. If you win, gain control of enchanted creature. Otherwise, that player gains control of enchanted creature.
+SVar:CaptiveClash:DB$ Clash | WinSubAbility$ YouControl | OtherwiseSubAbility$ OppControl
+SVar:YouControl:DB$ GainControl | Defined$ Enchanted | NewController$ You
+SVar:OppControl:DB$ GainControl | Defined$ Enchanted | NewController$ Opponent
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/captivating_glance.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/55.jpg
+Oracle:Enchant creature\nAt the beginning of your end step, clash with an opponent. If you win, gain control of enchanted creature. Otherwise, that player gains control of enchanted creature. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
+End
