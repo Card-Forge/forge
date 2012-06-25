@@ -2736,7 +2736,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("EnchantedControllerCreatures")) {
             CardList enchantedControllerInPlay = new CardList();
             if (c.getEnchantingCard() != null) {
-                CardList enchantedControllerInPlay = c.getEnchantingCard().getController().getCardsIn(ZoneType.Battlefield);
+                enchantedControllerInPlay = c.getEnchantingCard().getController().getCardsIn(ZoneType.Battlefield);
                 enchantedControllerInPlay = enchantedControllerInPlay.getType("Creature");
             }
             return enchantedControllerInPlay.size();
