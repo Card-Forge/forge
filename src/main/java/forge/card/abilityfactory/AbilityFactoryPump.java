@@ -845,6 +845,17 @@ public class AbilityFactoryPump {
             return mandatory && this.pumpMandatoryTarget(this.abilityFactory, sa, mandatory);
         }
 
+        if (!this.abilityFactory.isCurse()) {
+            // Don't target cards that will die.
+            list = list.filter(new CardListFilter() {
+                @Override
+                public boolean addCard(final Card c) {
+                    System.out.println("Not Pumping");
+                    return !c.getSVar("Targeting").equals("Dies");
+                }
+            });
+        }
+
         while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
             Card t = null;
             // boolean goodt = false;
@@ -864,7 +875,6 @@ public class AbilityFactoryPump {
             }
 
             t = CardFactoryUtil.getBestAI(list);
-            tgt.addTarget(t);
             list.remove(t);
         }
 
