@@ -414,6 +414,15 @@ public final class AbilityFactoryProtection {
             return mandatory && AbilityFactoryProtection.protectMandatoryTarget(af, sa, mandatory);
         }
 
+        // Don't target cards that will die.
+        list = list.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                System.out.println("Not Protecting");
+                return !c.getSVar("Targeting").equals("Dies");
+            }
+        });
+
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card t = null;
             // boolean goodt = false;

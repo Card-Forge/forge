@@ -118,6 +118,14 @@ public class BuildInfo {
             result = manifestResult;
         }
 
+        // The code above will always return the SVN rev as "r15897" even with builds
+        // that are using a later revision for some unknown reason. This happens on
+        // Chris' dev system but not on Dave's dev system. We should note that many
+        // users are refering to the snapshot build by only using the SVS rev number
+        // and the code below may convince them to instead use the date of the archive.
+        if (result.endsWith("-r15897")) {
+            result = result.replace("-r15897", "");
+        }
         return result;
     }
 

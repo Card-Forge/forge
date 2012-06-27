@@ -1308,6 +1308,7 @@ res/cardsfolder/c/capsize.txt svneol=native#text/plain
 res/cardsfolder/c/captain_of_the_mists.txt -text
 res/cardsfolder/c/captain_of_the_watch.txt svneol=native#text/plain
 res/cardsfolder/c/captain_sisay.txt svneol=native#text/plain
+res/cardsfolder/c/captivating_glance.txt -text
 res/cardsfolder/c/captivating_vampire.txt svneol=native#text/plain
 res/cardsfolder/c/captive_flame.txt svneol=native#text/plain
 res/cardsfolder/c/capture_of_jingzhou.txt svneol=native#text/plain
@@ -7013,6 +7014,7 @@ res/cardsfolder/p/prismatic_omen.txt svneol=native#text/plain
 res/cardsfolder/p/prismatic_strands.txt -text
 res/cardsfolder/p/prismatic_ward.txt -text
 res/cardsfolder/p/prismwake_merrow.txt -text
+res/cardsfolder/p/prison_term.txt -text
 res/cardsfolder/p/pristine_angel.txt svneol=native#text/plain
 res/cardsfolder/p/pristine_talisman.txt svneol=native#text/plain
 res/cardsfolder/p/private_research.txt -text svneol=unset#text/plain
@@ -11267,6 +11269,7 @@ res/quest/duels/Doc[!!-~]Holiday[!!-~]2.dck -text
 res/quest/duels/Doc[!!-~]Holiday[!!-~]3.dck -text
 res/quest/duels/Dogbert[!!-~]2.dck -text
 res/quest/duels/Doran[!!-~]3.dck -text
+res/quest/duels/Dr[!!-~]Doom[!!-~]3.dck -text
 res/quest/duels/Dr[!!-~]Fate[!!-~]3.dck -text
 res/quest/duels/Dr[!!-~]No[!!-~]3.dck -text
 res/quest/duels/Dr[!!-~]Strangelove[!!-~]3.dck -text

@@ -1507,6 +1507,15 @@ public final class AbilityFactoryChangeZone {
             list = list.getTargetableCards(sa);
             CardList aiPermanents = list.getController(AllZone.getComputerPlayer());
 
+            // Don't blink cards that will die.
+            aiPermanents = aiPermanents.filter(new CardListFilter() {
+                @Override
+                public boolean addCard(final Card c) {
+                    System.out.println("Not Changing Zone");
+                    return !c.getSVar("Targeting").equals("Dies");
+                }
+            });
+
             // if it's blink or bounce, try to save my about to die stuff
             if ((destination.equals(ZoneType.Hand) || (destination.equals(ZoneType.Exile) && (subAPI.equals("DelayedTrigger") || (subAPI
                     .equals("ChangeZone") && subAffected.equals("Remembered")))))

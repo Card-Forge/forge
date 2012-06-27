@@ -1778,6 +1778,7 @@ public class CardFactoryCreatures {
                                     card, true);
                     card.addTrigger(t);
                     card.setSVar("TrigSac", "AB$Sacrifice | Cost$ 0 | Defined$ Self");
+                    card.setSVar("Targeting", "Dies");
                     card.addType("Illusion");
                 } else if (cardName.equals("Evil Twin")) {
                     final AbilityFactory af = new AbilityFactory();

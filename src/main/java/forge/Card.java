@@ -8660,37 +8660,46 @@ public class Card extends GameEntity implements Comparable<Card> {
             String kw = "";
             for (int i = 0; i < list.size(); i++) {
                 kw = list.get(i);
-
-                if (kw.equals("Protection from white") && source.isWhite() && !source.getName().contains("White Ward")) {
-                    return true;
+                if (!kw.startsWith("Protection")) {
+                    continue;
                 }
-                if (kw.equals("Protection from blue") && source.isBlue() && !source.getName().contains("Blue Ward")) {
-                    return true;
-                }
-                if (kw.equals("Protection from black") && source.isBlack() && !source.getName().contains("Black Ward")) {
-                    return true;
-                }
-                if (kw.equals("Protection from red") && source.isRed() && !source.getName().contains("Red Ward")) {
-                    return true;
-                }
-                if (kw.equals("Protection from green") && source.isGreen() && !source.getName().contains("Green Ward")) {
-                    return true;
-                }
-
-                if (kw.equals("Protection from creatures") && source.isCreature()) {
-                    return true;
-                }
-
-                if (kw.equals("Protection from artifacts") && source.isArtifact()) {
-                    return true;
-                }
-
-                if (kw.equals("Protection from enchantments") && source.isEnchantment()
-                        && !source.getName().contains("Tattoo Ward")) {
-                    return true;
-                }
-
-                if (kw.equals("Protection from everything")) {
+                if (kw.equals("Protection from white")) {
+                    if (source.isWhite() && !source.getName().equals("White Ward")) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from blue")) {
+                    if (source.isBlue() && !source.getName().equals("Blue Ward")) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from black")) {
+                    if (source.isBlack() && !source.getName().equals("Black Ward")) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from red")) {
+                    if (source.isRed() && !source.getName().equals("Red Ward")) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from green")) {
+                    if (source.isGreen() && !source.getName().equals("Green Ward")) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from green")) {
+                    if (source.isGreen() && !source.getName().equals("Green Ward")) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from creatures")) {
+                    if (source.isCreature()) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from artifacts")) {
+                    if (source.isArtifact()) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from enchantments")) {
+                    if (source.isEnchantment() && !source.getName().contains("Tattoo Ward")) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from everything")) {
                     return true;
                 }
 

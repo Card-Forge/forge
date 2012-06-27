@@ -1,17 +1,11 @@
-Forge Beta: 0#-##-2012 ver 1.2.9
+Forge Beta: 0#-##-2012 ver 1.2.10
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
 10### cards in total.
 
 
-With the addition of Havengul Lich we now have our first 100% implemented expert level expansion, Dark Ascension.
 
-There was a bug in the previous version which prevented the token pics of many cards from displaying on the battlefield. This should now be fixed.
-
-Draft mode should no longer cause a crash when you start the draft.
-
-People using java 7 should be able to play forge without getting the crash reports that stated "Comparison method violates it's general contract!".
 
 --
 
@@ -19,13 +13,11 @@ The work on the new UI is now finished. We should not expect major changes or ma
 
 Selecting a package of cards in the quest mode card shop will not display the packages in the card picture and card detail panels.
 
-Draft mode will cause a crash report when you start a new draft. We are aware of this problem and we hope to be able to fix it at some point in the future. You can use version 1.2.7 to play draft mode games in the mean time.
-
 Some people have noticed special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries. We hope to have this problem fixed at some point in the future.
 
 We are now using a different system for our snapshot and beta releases. Unfortunately, this new system builds a jar file which does not accurately display the SVN revision number.
 
-Forge is not fully java 7 compatible at this time. We recommend that people downgrade to java 6.
+Forge may not be fully java 7 compatible at this time. We recommend that people downgrade to java 6.
 
 --
 
@@ -39,82 +31,14 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Fixes/Features:
 
 - Cleared out the changes.txt file, now ready for new material.
-- Updated three decks.
-- Updated 4 decks.
-- Merged changes from trunk to AbilityWork: r15839-r15884
-- Fixed Ebony Horse, Keeper of the Dead, Night Soil, Praetor's Counsel and Secretkeeper.
-- Fixed the token image bug.
-- Fixed Stigma Lasher's effect duration
-- Added some missing PC2 reprints' set info
-- Fixed Arctic Nishoba no lifegain bug
+- Remove the string "-r15897" from the title bar but not other SVN rev numbers.
+- Fixed Martyr of Sands.
+- Little AI tweak in AF Draw.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added the updated JuzamjediCube file which now contains some AVR cards.
-- Pushed WompWomp's new sprite sheet for the firebloom skin.
-- Refunding Tap and Untap costs will no longer trigger anything.
-- Fixed Curse of Oblivion.
-- Fixed Oni of Wild Places and friends.
-- DefinedPlayer used in AF ChangeZone (Hidden) will now define the controller of cards on the battlefield/in the graveyard.
-- *Crosses fingers* Reintegration of AbilityWork branch.
-- Enabling Rotating formats (Extended, Modern) to be used for Starting Quest Pools.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Updated the Spock 2 deck.
-- Possible fix for "Comparison method violates it's general contract!" crash.
-- Fixed drafting crash, though the UI for it needs tweaking (remove "Add 4 of" button, remove "remove" buttons, rename "add" button etc)
-- Fixed Oona's Prowler ability cost description.
-- Added a fluff piece to the changes.txt file.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- CheckStyle.
-- Converted Wall of Reverence to script.
-- Added AILogic to Wall of Reverence.
-- Fixed pic of Junkyo Bell.
-- CheckStyle.
-- added support for adding additional characteristics. started converting clones to scripts.
-- merged r15847-r15910 from the Trunk into CloneFix branch
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- CheckStyle.
-- CheckStyle.
-- Added Abilitystealers that were lost in the shuffle
-- Fixed Zoetic Cavern
-- merged -r15916 from the Trunk into M13 branch (cardsfolder only).
-- M13 branch: Added Archaeomancer, Captain's Call, Murder and Warclamp Mastiff.
-- CheckStyle.
-- Fixed the ability cost for Prophetic Prism.
-- Fixed Sylvan Library.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- CheckStyle.
-- CheckStyle.
-- CheckStyle.
-- Added EffectSource as a defined for Effects to use, gets the card that created the effect (or chain of effects).
-- Let GainsAbilitiesOf work with Affected.
-- AGAIN with the missed script ... Added Havengul Lich proper.
-- Fixed effect exile on Havengul Lich
-- Added a fluff piece to the changes.txt file.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed AI of untargeted AF Destroy.
-- Fixed AF CopyPermanent messing with DFC's.
-- CheckStyle.
-- Customized the Draft UI. (Removed "Remove" buttons, removed "Add 4" button, renamed "Add" button, removed "Filters","Deck Gen" and "All Decks" tabs)
-- CheckStyle.
-- CheckStyle.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed continuous static abilities.
-- merged r15910-r15940 from the Trunk into CloneFix branch
-- CheckStyle.
-- Abilitystealers besides Havengul Lich had the wrong "Affected" parameter.
-- merged r15940-r15946 from the Trunk into CloneFix branch
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Commented out one redundant version of copySpellontoStack.
-- Fixed pumpMandatoryTarget not checking shroud, etc.
-- Updated all-prices.txt.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Prevented some SpellCast triggers from crashing when Fireball (and similar hardcoded cards) is cast (they still won't trigger correctly because of missing info).
-- Fixed The Abyss and similar cards.
-- Fixed Targeting for Sudden Disappearance.
-- Fixed Heartwood Storyteller.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- CheckStyle.
-- Fixed stolen Doubling Cube ability only doubling white mana.
-- Fixed Doubling Cube not doubling colorless mana.
+- Fixed cost of Brain Pry.
+- Added AI checks so it doesn't pump creatures that will die when targeted.
+- Added SVar:Targeting:Dies to relevant creatures.
+- Added SVar to Clone and Phantasmal Image so AI will not cast these spells when there are no creatures to copy.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
@@ -150,18 +74,23 @@ Talrand's Invocation
 Tricks of the Trade
 Warclamp Mastiff
 Watercourser
+Diabolic Revelation
+Knight of Infamy
+Liliana's Shade
+Mark of the Vampire
+Reckless Brute
+Servant of Nefarox
+Downpour
+Griffin Protector
+Healer of the Pride
+Staff of Nin
+Omniscience
 
 
 Added many cards, including:
 
-Dark Impostor
-Experiment Kraj
-Myr Welder
-Necrotic Ooze
-Havengul Lich
-Bulwark
-Cabal Interrogator
-Brawl
+Captivating Glance
+Prison Term
 
 
 end

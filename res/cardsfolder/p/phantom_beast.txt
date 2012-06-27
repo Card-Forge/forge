@@ -5,8 +5,7 @@ Text:no text
 PT:4/5
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
-# The AI will target this card with buffs.
-SVar:RemAIDeck:True
+SVar:Targeting:Dies
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_beast.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/69.jpg

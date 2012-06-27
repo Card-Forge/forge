@@ -628,6 +628,15 @@ public class AbilityFactoryAttach {
             }
         }
 
+        // Don't pump cards that will die.
+        prefList = prefList.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                System.out.println("Not Attaching");
+                return !c.getSVar("Targeting").equals("Dies");
+            }
+        });
+
         if (attachSource.isAura()) {
             // TODO For Auras like Rancor, that aren't as likely to lead to
             // card disadvantage, this check should be skipped
