@@ -1757,7 +1757,7 @@ public class CombatUtil {
             if (att.startsWith("+")) {
                 att = att.substring(1);
             }
-            if (att.matches("[0-9][0-9]?")) {
+            if (att.matches("[0-9][0-9]?") || att.matches("-" + "[0-9][0-9]?")) {
                 power += Integer.parseInt(att);
             } else {
                 String bonus = new String(source.getSVar(att));
@@ -1894,7 +1894,7 @@ public class CombatUtil {
             if (def.startsWith("+")) {
                 def = def.substring(1);
             }
-            if (def.matches("[0-9][0-9]?")) {
+            if (def.matches("[0-9][0-9]?") || def.matches("-" + "[0-9][0-9]?")) {
                 toughness += Integer.parseInt(def);
             } else {
                 String bonus = new String(source.getSVar(def));
