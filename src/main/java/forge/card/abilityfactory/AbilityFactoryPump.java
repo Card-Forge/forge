@@ -501,7 +501,39 @@ public class AbilityFactoryPump {
             if (!AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(card)) {
                 return false;
             }
-        }
+        } else if (keyword.equals("Islandwalk")) {
+            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || !CombatUtil.canBeBlocked(card)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || card.getNetCombatDamage() <= 0
+                    || AllZoneUtil.getPlayerLandsInPlay(human).getType("Island").isEmpty()) {
+                return false;
+            }
+        } else if (keyword.equals("Swampwalk")) {
+            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || !CombatUtil.canBeBlocked(card)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || card.getNetCombatDamage() <= 0
+                    || AllZoneUtil.getPlayerLandsInPlay(human).getType("Swamp").isEmpty()) {
+                return false;
+            }
+        } else if (keyword.equals("Mountainwalk")) {
+            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || !CombatUtil.canBeBlocked(card)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || card.getNetCombatDamage() <= 0
+                    || AllZoneUtil.getPlayerLandsInPlay(human).getType("Mountain").isEmpty()) {
+                return false;
+            }
+        } else if (keyword.equals("Forestwalk")) {
+            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || !CombatUtil.canBeBlocked(card)
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || card.getNetCombatDamage() <= 0
+                    || AllZoneUtil.getPlayerLandsInPlay(human).getType("Forestwalk").isEmpty()) {
+                return false;
+            }
+        } 
         return true;
     }
 
