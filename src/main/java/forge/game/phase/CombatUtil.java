@@ -1423,7 +1423,7 @@ public class CombatUtil {
                     return false;
                 }
             }
-        } else if (mode == TriggerType.AttackerBlocked && (defender != null)) {
+        } else if (mode == TriggerType.AttackerBlocked) {
             willTrigger = true;
             if (trigParams.containsKey("ValidBlocker")) {
                 if (!TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidBlocker").split(","), source)) {
@@ -1435,6 +1435,21 @@ public class CombatUtil {
                     return false;
                 }
             }
+        } else if (mode == TriggerType.DamageDone) {
+            willTrigger = true;
+            if (trigParams.containsKey("ValidSource")) {
+                if (TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidSource").split(","), source)
+                        && defender.getNetCombatDamage() > 0
+                        && TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidTarget").split(","), source)) {
+                    return true;
+                }
+                if (TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), source)
+                        && attacker.getNetCombatDamage() > 0
+                        && TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidTarget").split(","), source)) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         return willTrigger;
@@ -1955,6 +1970,9 @@ public class CombatUtil {
                 if (abilityParams.get("Defined").equals("Self") && source.equals(defender)) {
                     return true;
                 }
+                if (abilityParams.get("Defined").equals("TriggeredTarget") && source.equals(attacker)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -2005,6 +2023,9 @@ public class CombatUtil {
                     return true;
                 }
                 if (abilityParams.get("Defined").equals("Self") && source.equals(attacker)) {
+                    return true;
+                }
+                if (abilityParams.get("Defined").equals("TriggeredTarget") && source.equals(defender)) {
                     return true;
                 }
             }
