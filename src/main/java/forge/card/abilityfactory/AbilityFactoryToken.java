@@ -325,8 +325,8 @@ public class AbilityFactoryToken extends AbilityFactory {
         if ((Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
                 || Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(
                         PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
-                && !mapParams.containsKey("ActivationPhases") && !AbilityFactory.isSorcerySpeed(sa)
-                && !haste) {
+                && !mapParams.containsKey("ActivationPhases") && !mapParams.containsKey("PlayerTurn")
+                && !AbilityFactory.isSorcerySpeed(sa) && !haste) {
             return false;
         }
         if ((Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN) || Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(
