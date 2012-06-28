@@ -665,11 +665,11 @@ public class ComputerUtil {
                 // Test for:
                 // 1) Colorless
                 // 2) Split e.g. 2/G
-                // 3) Hybrid e.g. UG
+                // 3) Hybrid e.g. U/G
                 // defaults to single short color
                 if (costParts[nPart].matches("[0-9]+")) { // Colorless
                     srcFound.addAll(manaAbilityMap.get("1"));
-                } else if (costParts[nPart].contains("/")) { // Split
+                } else if (costParts[nPart].contains("2/")) { // Split
                     final String colorKey = costParts[nPart].replace("2/", "");
                     // add specified color sources first
                     if (manaAbilityMap.containsKey(colorKey)) {
@@ -686,7 +686,7 @@ public class ComputerUtil {
                     }
                 } else if (costParts[nPart].length() > 1) { // Hybrid
                     final String firstColor = costParts[nPart].substring(0, 1);
-                    final String secondColor = costParts[nPart].substring(1);
+                    final String secondColor = costParts[nPart].substring(2);
                     final Boolean foundFirst = manaAbilityMap.containsKey(firstColor);
                     final Boolean foundSecond = manaAbilityMap.containsKey(secondColor);
                     if (foundFirst || foundSecond) {
