@@ -137,7 +137,6 @@ public class CardList implements Iterable<Card> {
                 list.add(c);
             }
         }
-
         return list;
     } // getColor()
 

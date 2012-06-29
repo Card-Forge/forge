@@ -7118,6 +7118,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!((this.getAbilityText().trim().equals("") || this.isFaceDown()) && (this.getUnhiddenKeyword().size() == 0))) {
                 return false;
             }
+        } else if (property.equals("HasCounters")) {
+            if (!this.hasCounters()) {
+                return false;
+            }
         } else if (property.equals("SameNameAsImprinted")) {
             boolean b = false;
             for (final Card card : source.getImprinted()) {
