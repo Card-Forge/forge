@@ -1121,6 +1121,10 @@ public class ComputerUtil {
 
             // Loop over all mana abilities for a source
             for (final AbilityMana m : manaAbilities) {
+                m.setActivatingPlayer(AllZone.getComputerPlayer());
+                if (!m.canPlay()) {
+                    continue;
+                }
 
                 // don't use abilities with dangerous drawbacks
                 if (m.getSubAbility() != null) {
