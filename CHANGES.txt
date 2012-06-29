@@ -50,6 +50,17 @@ Fixes/Features:
 - Improved AI handling of Goblin Elite Infantry.
 - Added Landwalk keywords to NonStackingKWList.txt.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed AI not being able to use Hybrid mana.
+- Fixed AI of Hoofprints of the Stag.
+- Added AI checks to LoseLife drawbacks.
+- Added Landwalk checks to isUsefulPumpKeyword.
+- Cleanup in EndOfTurn class.
+- AI is now aware of destroy damaged triggers (Stinkweed Imp and friends).
+- Fixed Snow mana bug ("Not found: mana shard with profile = 0").
+- Experimental fix for XManaCostPaid not being reset properly.
+- Added a medium version of the Dream quest deck.
+- Added missing spell description to Quest for Pure Flame effect
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -103,6 +114,8 @@ Added many cards, including:
 
 Captivating Glance
 Prison Term
+Nemesis Trap
+Quest for Pure Flame
 
 
 end
