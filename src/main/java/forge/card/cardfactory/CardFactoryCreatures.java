@@ -2072,8 +2072,7 @@ public class CardFactoryCreatures {
 //                || cardName.equals("Sakashima the Impostor")) {
         } else if (cardName.equals("Vesuvan Doppelganger")
                 || cardName.equals("Jwari Shapeshifter")
-                || cardName.equals("Body Double")
-                || cardName.equals("Sakashima the Impostor")) {
+                || cardName.equals("Body Double")) {
             getCard_ClonesSeries(card, cardName);
         } else if (cardName.equals("Nebuchadnezzar")) {
             getCard_Nebuchadnezzar(card, cardName);

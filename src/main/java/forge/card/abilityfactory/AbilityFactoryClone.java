@@ -548,7 +548,8 @@ public final class AbilityFactoryClone {
 
         Card cloned;
 
-        //boolean keepName = params.containsKey("KeepName");
+        boolean keepName = params.containsKey("KeepName");
+        String originalName = tgtCard.getName();
         AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
 
         // add "Cloner" state to clone
@@ -568,6 +569,9 @@ public final class AbilityFactoryClone {
         for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {
             tgtCard.addStaticAbility(tgtCard.getStaticAbilityStrings().get(i));
         }
+        if (keepName) {
+            tgtCard.setName(originalName);
+        }
 
         addExtraCharacteristics(tgtCard, params, origSVars);
         // If target is a flipped card, also copy the flipped
@@ -578,6 +582,9 @@ public final class AbilityFactoryClone {
             CardFactoryUtil.copyState(cardToCopy, CardCharactersticName.Flipped, tgtCard, "Cloned");
             for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {
                 tgtCard.addStaticAbility(tgtCard.getStaticAbilityStrings().get(i));
+            }
+            if (keepName) {
+                tgtCard.setName(originalName);
             }
             addExtraCharacteristics(tgtCard, params, origSVars);
             tgtCard.setFlip(true);
