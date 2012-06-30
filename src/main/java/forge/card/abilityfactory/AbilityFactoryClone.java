@@ -522,31 +522,34 @@ public final class AbilityFactoryClone {
         Map<String, String> origSVars = host.getSVars();
 
 
-        // find target of cloning
+        // find cloning source i.e. thing to be copied
+        Card cardToCopy = null;
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            tgtCard = tgt.getTargetCards().get(0);
+            cardToCopy = tgt.getTargetCards().get(0);
         }
         else if (params.containsKey("Defined")) {
-                tgtCard = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa).get(0);
+            ArrayList<Card> cloneSources = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
+            if (!cloneSources.isEmpty()) {
+                cardToCopy = cloneSources.get(0);
+            }
+        }
+        if (cardToCopy == null) {
+            return;
+        }
+
+        // find target of cloning i.e. card becoming a clone
+        ArrayList<Card> cloneTargets = AbilityFactory.getDefinedCards(host, params.get("CloneTarget"), sa);
+        if (!cloneTargets.isEmpty()) {
+            tgtCard = cloneTargets.get(0);
         }
         else {
             tgtCard = host;
         }
 
-        // find cloning source i.e. thing to be copied
-        ArrayList<Card> cloneSources = AbilityFactory.getDefinedCards(host, params.get("CloneSource"), sa);
-        Card cardToCopy;
-        if (!cloneSources.isEmpty()) {
-            cardToCopy = cloneSources.get(0);
-        }
-        else {
-            return;
-        }
-
         String imageFileName = host.getImageFilename();
 
-        Card cloned;
+        //Card cloned;
 
         boolean keepName = params.containsKey("KeepName");
         String originalName = tgtCard.getName();
