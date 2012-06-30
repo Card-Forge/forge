@@ -8312,6 +8312,7 @@ res/cardsfolder/s/silence.txt -text
 res/cardsfolder/s/silent_arbiter.txt svneol=native#text/plain
 res/cardsfolder/s/silent_assassin.txt -text
 res/cardsfolder/s/silent_attendant.txt svneol=native#text/plain
+res/cardsfolder/s/silent_blade_oni.txt -text
 res/cardsfolder/s/silent_chant_zubera.txt svneol=native#text/plain
 res/cardsfolder/s/silent_departure.txt -text
 res/cardsfolder/s/silent_specter.txt svneol=native#text/plain
