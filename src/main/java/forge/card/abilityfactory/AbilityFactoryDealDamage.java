@@ -37,6 +37,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -592,6 +593,7 @@ public class AbilityFactoryDealDamage {
     private boolean damageChoosingTargets(final SpellAbility saMe, final Target tgt, final int dmg,
             final boolean isTrigger, final boolean mandatory) {
         final boolean noPrevention = this.abilityFactory.getMapParams().containsKey("NoPrevention");
+        final PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
 
         // target loop
         tgt.resetTargets();
@@ -620,10 +622,8 @@ public class AbilityFactoryDealDamage {
                 // on the stack
                 // or from taking combat damage
                 final boolean freePing = isTrigger || saMe.getPayCosts() == null || tgt.getNumTargeted() > 0
-                        || (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN) && saMe.isAbility()
-                                && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()))
-                            || (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN2)
-                                && saMe.getRestrictions().getPlaneswalker());
+                        || (phase.is(PhaseType.END_OF_TURN) && saMe.isAbility()&& phase.isNextTurn(AllZone.getComputerPlayer()))
+                            || (phase.is(PhaseType.MAIN2) && saMe.getRestrictions().getPlaneswalker());
 
                 if (freePing && saMe.canTarget(AllZone.getHumanPlayer()) && tgt.addTarget(AllZone.getHumanPlayer())) {
                     continue;
@@ -638,11 +638,11 @@ public class AbilityFactoryDealDamage {
 
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (saMe.canTarget(AllZone.getHumanPlayer()) && ((Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN)
-                    && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()))
-                    || saMe.getPayCosts() == null || isTrigger)) {
+            else if (saMe.canTarget(AllZone.getHumanPlayer()) 
+                    && ((phase.is(PhaseType.END_OF_TURN) && phase.isNextTurn(AllZone.getComputerPlayer()))
+                        || (AbilityFactory.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2)) 
+                        || saMe.getPayCosts() == null || isTrigger)) {
                 if (tgt.addTarget(AllZone.getHumanPlayer())) {
-                    System.out.println(saMe.getSourceCard() + " - damageChoosingTargets");
                     continue;
                 }
             }
