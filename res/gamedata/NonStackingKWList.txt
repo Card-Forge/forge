@@ -8,21 +8,26 @@ Fear
 First Strike
 Flash
 Flying
+Forestwalk
 Haste
 Hexproof
 Horsemanship
 Indestructible
 Infect
 Intimidate
+Islandwalk
 Lifelink
+Mountainwalk
 Persist
 Phasing
+Plainswalk
 Prevent all combat damage that would be dealt by CARDNAME.
 Reach
 Rebound
 Shadow
 Shroud
 Split Second 
+Swampwalk
 Trample
 Unblockable
 Undying

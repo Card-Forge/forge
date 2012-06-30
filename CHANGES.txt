@@ -40,6 +40,27 @@ Fixes/Features:
 - Added SVar:Targeting:Dies to relevant creatures.
 - Added SVar to Clone and Phantasmal Image so AI will not cast these spells when there are no creatures to copy.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a new quest deck by Nordos called Dr Doom 3.
+- Updated the deck Ned Flanders 4.
+- Fixed the LQ pic URL for Krond the Dawn-Clad.
+- merged r15965-r15996 from the Trunk into CloneFix branch
+- AI fix for Timely Reinforcements; new SVar AIPlayForSub.
+- Fixed AI of Spectral Prison.
+- Fix: Dragon Broodmother tokens will now display an image
+- Improved AI handling of Goblin Elite Infantry.
+- Added Landwalk keywords to NonStackingKWList.txt.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed AI not being able to use Hybrid mana.
+- Fixed AI of Hoofprints of the Stag.
+- Added AI checks to LoseLife drawbacks.
+- Added Landwalk checks to isUsefulPumpKeyword.
+- Cleanup in EndOfTurn class.
+- AI is now aware of destroy damaged triggers (Stinkweed Imp and friends).
+- Fixed Snow mana bug ("Not found: mana shard with profile = 0").
+- Experimental fix for XManaCostPaid not being reset properly.
+- Added a medium version of the Dream quest deck.
+- Added missing spell description to Quest for Pure Flame effect
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -85,12 +106,16 @@ Griffin Protector
 Healer of the Pride
 Staff of Nin
 Omniscience
+Augur of Bolas
+Master of the Pearl Trident
 
 
 Added many cards, including:
 
 Captivating Glance
 Prison Term
+Nemesis Trap
+Quest for Pure Flame
 
 
 end

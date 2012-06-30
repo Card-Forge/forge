@@ -60,8 +60,6 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
         // reset mustAttackEntity for me
         Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().setMustAttackEntity(null);
 
-        EndOfTurn.removeAttackedBlockedThisTurn();
-
         AllZone.getStaticEffects().rePopulateStateBasedList();
 
         for (final Card c : all) {
@@ -227,51 +225,6 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
     } // executeAt()
 
-    /*private static void endOfTurnWallOfReverence() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList list = player.getCardsIn(ZoneType.Battlefield, "Wall of Reverence");
-
-        Ability ability;
-        for (int i = 0; i < list.size(); i++) {
-            final Card card = list.get(i);
-            ability = new Ability(list.get(i), "0") {
-                @Override
-                public void resolve() {
-                    CardList creats = AllZoneUtil.getCreaturesInPlay(player);
-                    creats = creats.getTargetableCards(this);
-                    if (creats.size() == 0) {
-                        return;
-                    }
-
-                    if (player.isHuman()) {
-                        final Object o = GuiUtils.chooseOneOrNone(
-                                "Select target creature for Wall of Reverence life gain", creats.toArray());
-                        if (o != null) {
-                            final Card c = (Card) o;
-                            final int power = c.getNetAttack();
-                            player.gainLife(power, card);
-                        }
-                    } else { // computer
-                        CardListUtil.sortAttack(creats);
-                        final Card c = creats.get(0);
-                        if (c != null) {
-                            final int power = c.getNetAttack();
-                            player.gainLife(power, card);
-                        }
-                    }
-                } // resolve
-            }; // ability
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - ").append(player).append(" gains life equal to target creature's power.");
-            ability.setStackDescription(sb.toString());
-            ability.setDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        }
-    } // endOfTurnWallOfReverence()*/
-
     private static void endOfTurnLighthouseChronologist() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final Player opponent = player.getOpponent();
@@ -301,18 +254,6 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
-        }
-    }
-
-    private static void removeAttackedBlockedThisTurn() {
-        // resets the status of attacked/blocked this turn
-        final CardList list = AllZoneUtil.getCreaturesInPlay();
-
-        for (int i = 0; i < list.size(); i++) {
-            final Card c = list.get(i);
-            c.getDamageHistory().setCreatureAttackedThisCombat(false);
-            c.getDamageHistory().setCreatureBlockedThisCombat(false);
-            c.getDamageHistory().setCreatureGotBlockedThisCombat(false);
         }
     }
 

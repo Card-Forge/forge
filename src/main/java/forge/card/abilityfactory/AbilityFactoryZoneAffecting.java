@@ -328,7 +328,8 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
+                && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -342,8 +343,8 @@ public class AbilityFactoryZoneAffecting {
         if (AbilityFactory.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed
         }
-        if ((Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN) && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(
-                AllZone.getComputerPlayer()))) {
+        if ((Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN) 
+                && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()))) {
             chance = .9; // 90% for end of opponents turn
         }
         final Random r = MyRandom.getRandom();

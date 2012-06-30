@@ -86,6 +86,9 @@ public class ManaCostParser implements IParserManaCost {
             case 'P':
                 atoms |= ManaCostShard.Atom.OR_2_LIFE;
                 break;
+            case 'S':
+                atoms |= ManaCostShard.Atom.IS_SNOW;
+                break;
             case 'X':
                 atoms |= ManaCostShard.Atom.IS_X;
                 break;

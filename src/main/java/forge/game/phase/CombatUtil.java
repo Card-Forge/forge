@@ -32,6 +32,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
+import forge.CardListUtil;
 import forge.Command;
 import forge.Constant;
 import forge.Counters;
@@ -128,18 +129,6 @@ public class CombatUtil {
         if (blocker.hasKeyword("CARDNAME can't block.") || blocker.hasKeyword("CARDNAME can't attack or block.")
                 || blocker.isPhasedOut()) {
             return false;
-        }
-
-        final CardList kulrath = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Kulrath Knight");
-        if (kulrath.size() > 0) {
-            for (int i = 0; i < kulrath.size(); i++) {
-                final Card cKK = kulrath.get(i);
-                final Player oppKK = cKK.getController().getOpponent();
-
-                if (blocker.getController().equals(oppKK) && blocker.hasCounters()) {
-                    return false;
-                }
-            }
         }
 
         return true;
@@ -768,49 +757,46 @@ public class CombatUtil {
 
         final CardList list = c.getController().getOpponent().getCardsIn(ZoneType.Battlefield);
         CardList temp;
-
-        if (c.hasKeyword("CARDNAME can't attack unless defending player controls an Island.")) {
-            temp = list.getType("Island");
-            if (temp.isEmpty()) {
+        for (String keyword : c.getKeyword()) {
+            if (keyword.equals("CARDNAME can't attack.") || keyword.equals("CARDNAME can't attack or block.")) {
                 return false;
-            }
-        }
-
-        if (c.hasKeyword("CARDNAME can't attack unless defending player controls a Forest.")) {
-            temp = list.getType("Forest");
-            if (temp.isEmpty()) {
+            } else if (keyword.equals("Defender") && !c.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
                 return false;
-            }
-        }
-
-        if (c.hasKeyword("CARDNAME can't attack unless defending player controls a Swamp.")) {
-            temp = list.getType("Swamp");
-            if (temp.isEmpty()) {
-                return false;
-            }
-        }
-        if (c.hasKeyword("CARDNAME can't attack unless defending player controls a Mountain.")) {
-            temp = list.getType("Montain");
-            if (temp.isEmpty()) {
-                return false;
-            }
-        }
-        if (c.hasKeyword("CARDNAME can't attack unless defending player controls a snow land.")) {
-            temp = list.filter(new CardListFilter() {
-                @Override
-                public boolean addCard(final Card c) {
-                    return c.isLand() && c.isSnow();
+            } else if (keyword.equals("CARDNAME can't attack unless defending player controls an Island.")) {
+                temp = list.getType("Island");
+                if (temp.isEmpty()) {
+                    return false;
                 }
-            });
-            if (temp.isEmpty()) {
-                return false;
-            }
-        }
-
-        if (c.hasKeyword("CARDNAME can't attack unless defending player controls a blue permanent.")) {
-            temp = list.getColor(Constant.Color.BLUE);
-            if (temp.isEmpty()) {
-                return false;
+            } else if (keyword.equals("CARDNAME can't attack unless defending player controls a Forest.")) {
+                temp = list.getType("Forest");
+                if (temp.isEmpty()) {
+                    return false;
+                }
+            } else if (keyword.equals("CARDNAME can't attack unless defending player controls a Swamp.")) {
+                temp = list.getType("Swamp");
+                if (temp.isEmpty()) {
+                    return false;
+                }
+            } else if (keyword.equals("CARDNAME can't attack unless defending player controls a Mountain.")) {
+                temp = list.getType("Mountain");
+                if (temp.isEmpty()) {
+                    return false;
+                }
+            } else if (keyword.equals("CARDNAME can't attack unless defending player controls a snow land.")) {
+                temp = list.filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return c.isLand() && c.isSnow();
+                    }
+                });
+                if (temp.isEmpty()) {
+                    return false;
+                }
+            } else if (keyword.equals("CARDNAME can't attack unless defending player controls a blue permanent.")) {
+                temp = CardListUtil.getColor(list, Constant.Color.BLUE);
+                if (temp.isEmpty()) {
+                    return false;
+                }
             }
         }
 
@@ -824,26 +810,6 @@ public class CombatUtil {
         // The creature won't untap next turn
         if (c.isTapped() && !Untap.canUntap(c)) {
             return false;
-        }
-
-        if (c.hasKeyword("CARDNAME can't attack.") || c.hasKeyword("CARDNAME can't attack or block.")) {
-            return false;
-        }
-
-        if (c.hasKeyword("Defender") && !c.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
-            return false;
-        }
-
-        if (AllZoneUtil.isCardInPlay("Kulrath Knight")) {
-            final CardList all = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Kulrath Knight");
-            for (int i = 0; i < all.size(); i++) {
-                final Card cKK = all.get(i);
-                final Player oppKK = cKK.getController().getOpponent();
-
-                if (c.getController().equals(oppKK) && c.hasCounters()) {
-                    return false;
-                }
-            }
         }
 
         return true;
@@ -1423,7 +1389,7 @@ public class CombatUtil {
                     return false;
                 }
             }
-        } else if (mode == TriggerType.AttackerBlocked && (defender != null)) {
+        } else if (mode == TriggerType.AttackerBlocked) {
             willTrigger = true;
             if (trigParams.containsKey("ValidBlocker")) {
                 if (!TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidBlocker").split(","), source)) {
@@ -1435,6 +1401,21 @@ public class CombatUtil {
                     return false;
                 }
             }
+        } else if (mode == TriggerType.DamageDone) {
+            willTrigger = true;
+            if (trigParams.containsKey("ValidSource")) {
+                if (TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidSource").split(","), source)
+                        && defender.getNetCombatDamage() > 0
+                        && TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidTarget").split(","), source)) {
+                    return true;
+                }
+                if (TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), source)
+                        && attacker.getNetCombatDamage() > 0
+                        && TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidTarget").split(","), source)) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         return willTrigger;
@@ -1757,7 +1738,7 @@ public class CombatUtil {
             if (att.startsWith("+")) {
                 att = att.substring(1);
             }
-            if (att.matches("[0-9][0-9]?")) {
+            if (att.matches("[0-9][0-9]?") || att.matches("-" + "[0-9][0-9]?")) {
                 power += Integer.parseInt(att);
             } else {
                 String bonus = new String(source.getSVar(att));
@@ -1894,7 +1875,7 @@ public class CombatUtil {
             if (def.startsWith("+")) {
                 def = def.substring(1);
             }
-            if (def.matches("[0-9][0-9]?")) {
+            if (def.matches("[0-9][0-9]?") || def.matches("-" + "[0-9][0-9]?")) {
                 toughness += Integer.parseInt(def);
             } else {
                 String bonus = new String(source.getSVar(def));
@@ -1955,6 +1936,9 @@ public class CombatUtil {
                 if (abilityParams.get("Defined").equals("Self") && source.equals(defender)) {
                     return true;
                 }
+                if (abilityParams.get("Defined").equals("TriggeredTarget") && source.equals(attacker)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -2005,6 +1989,9 @@ public class CombatUtil {
                     return true;
                 }
                 if (abilityParams.get("Defined").equals("Self") && source.equals(attacker)) {
+                    return true;
+                }
+                if (abilityParams.get("Defined").equals("TriggeredTarget") && source.equals(defender)) {
                     return true;
                 }
             }

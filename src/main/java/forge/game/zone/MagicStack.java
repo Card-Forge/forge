@@ -963,6 +963,7 @@ public class MagicStack extends MyObservable {
             sa.resolve();
             this.finishResolving(sa, false);
         }
+        sa.getSourceCard().setXManaCostPaid(0);
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
                 && AllZone.getZoneOf(source).is(ZoneType.Graveyard)) {

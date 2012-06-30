@@ -529,7 +529,7 @@ public final class AbilityFactoryReveal {
                                 if (!andOrValid.equals("")) {
                                     andOrCards.remove(chosen);
                                     if (!chosen.isValid(andOrValid.split(","), host.getController(), host)) {
-                                        valid = andOrCards;
+                                        valid = new CardList(andOrCards);
                                     } else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
                                         valid.removeAll(andOrCards);
                                     }

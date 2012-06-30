@@ -313,6 +313,17 @@ public class AbilityFactoryAlterLife {
         if (lifeAmount <= 0) {
             return false;
         }
+        // don't play if the conditions aren't met, unless it would trigger a beneficial sub-condition
+        if (!AbilityFactory.checkConditional(sa)) {
+            final AbilitySub abSub = sa.getSubAbility();
+            if (abSub != null && !sa.isWrapper() && "True".equals(source.getSVar("AIPlayForSub"))) {
+                if (!AbilityFactory.checkConditional(abSub)) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
 
         if (abCost != null && life > 5) {
             if (!CostUtil.checkSacrificeCost(abCost, source)) {
@@ -637,7 +648,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean chkAIDrawback() {
-                return true;
+                return loseLifeDoTriggerAINoCost(this.af, this, false);
             }
 
             @Override
@@ -761,7 +772,8 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't use loselife before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases") && !priority) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
+                && !params.containsKey("ActivationPhases") && !priority) {
             return false;
         }
 
