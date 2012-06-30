@@ -410,7 +410,7 @@ public class AbilityFactoryDealDamage {
         if (this.damage.equals("X") && source.getSVar(this.damage).equals("Count$xPaid")) {
             // If I can kill my target by paying less mana, do it
             final Target tgt = saMe.getTarget();
-            if (tgt != null) {
+            if (tgt != null && tgt.getTargetPlayers().isEmpty()) {
                 int actualPay = 0;
                 final boolean noPrevention = this.abilityFactory.getMapParams().containsKey("NoPrevention");
                 final ArrayList<Card> cards = tgt.getTargetCards();
