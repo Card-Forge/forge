@@ -373,6 +373,10 @@ public final class CardUtil {
      */
     public static String addManaCosts(final String mc1, final String mc2) {
         String tMC = "";
+        String xCost = "";
+        if (mc1.startsWith("X")) {
+            xCost = "X ";
+        }
 
         Integer cl1, cl2, tCL;
         String c1, c2, cc1, cc2;
@@ -394,12 +398,12 @@ public final class CardUtil {
 
         tCL = cl1 + cl2;
 
-        cc1 = mc1.replaceAll("[0-9]", "").trim();
+        cc1 = mc1.replaceAll("[0-9]", "").replaceAll("X", "").trim();
         cc2 = mc2.replaceAll("[0-9]", "").trim();
 
-        tMC = tCL.toString() + " " + cc1 + " " + cc2;
+        tMC = xCost + tCL.toString() + " " + cc1 + " " + cc2;
 
-        // System.out.println("TMC:" + tMC);
+        //System.out.println("mc1:" + mc1 + "; TMC:" + tMC);
         return tMC.trim();
     }
 
