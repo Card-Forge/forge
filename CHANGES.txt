@@ -61,6 +61,30 @@ Fixes/Features:
 - Added a medium version of the Dream quest deck.
 - Added missing spell description to Quest for Pure Flame effect
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed possible ConcurrentModificationException caused by Gift of the Gargantuan.
+- Fixed Whimwader.
+- Converted Kulrath Knight to script.
+- Performance update in canAttackNextTurn.
+- Deleted AbilityWork branch folder
+- Fixed AI not checking canPlay() restrictions of mana sources.
+- merged r15997-16020 from the Trunk into CloneFix branch
+- converted Sakashima The Imposter to script
+- converted Jwari Shapeshifter to script
+- Improved AI for Barl's Cage.
+- Fixed sorcery speed AI bug in AF DealDamage.
+- Fixed Blaze AI targeting human.
+- ChosenX will now also be stored on the card and not only the spellAbility.
+- Fixed Tezzeret the Seeker.
+- Made "Open Deck" dialog default to res/decks folder.
+- Cleanup in CardFactoryCreatures.
+- changed targeting for Clone AF
+- converted Copy Artifact and Sculpting Steel to scripts
+- Converted Vesuvan Doppelganger to script
+- merged r16020-r16032 from the Trunk into CloneFix branch
+- Fixed an issue with non-copyable abilities. Scripted Vesuva
+- Little AI fix in isUsefulCurseKeyword.
+- Improved AI choosing lands to play.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -108,6 +132,7 @@ Staff of Nin
 Omniscience
 Augur of Bolas
 Master of the Pearl Trident
+Goblin Battle Jester
 
 
 Added many cards, including:
@@ -116,6 +141,8 @@ Captivating Glance
 Prison Term
 Nemesis Trap
 Quest for Pure Flame
+Silent-Blade Oni
+Felidar Umbra
 
 
 end
