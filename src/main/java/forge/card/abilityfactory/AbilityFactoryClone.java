@@ -580,7 +580,10 @@ public final class AbilityFactoryClone {
             stateToCopy = cardToCopy.getCurState();
         }
 
-        CardFactoryUtil.copyState(cardToCopy, stateToCopy, tgtCard, "Cloned");
+        CardFactoryUtil.copyState(cardToCopy, stateToCopy, tgtCard);
+        // must call this before addAbilityFactoryAbilities so cloned added abilities are handled correctly
+        addExtraCharacteristics(tgtCard, params, origSVars);
+        CardFactoryUtil.addAbilityFactoryAbilities(tgtCard);
         for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {
             tgtCard.addStaticAbility(tgtCard.getStaticAbilityStrings().get(i));
         }
@@ -588,21 +591,20 @@ public final class AbilityFactoryClone {
             tgtCard.setName(originalName);
         }
 
-        addExtraCharacteristics(tgtCard, params, origSVars);
         // If target is a flipped card, also copy the flipped
         // state.
         if (cardToCopy.isFlip()) {
             tgtCard.addAlternateState(CardCharactersticName.Flipped);
             tgtCard.setState(CardCharactersticName.Flipped);
-            CardFactoryUtil.copyState(cardToCopy, CardCharactersticName.Flipped, tgtCard, "Cloned");
+            CardFactoryUtil.copyState(cardToCopy, CardCharactersticName.Flipped, tgtCard);
+            addExtraCharacteristics(tgtCard, params, origSVars);
+            CardFactoryUtil.addAbilityFactoryAbilities(tgtCard);
             for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {
                 tgtCard.addStaticAbility(tgtCard.getStaticAbilityStrings().get(i));
             }
             if (keepName) {
                 tgtCard.setName(originalName);
             }
-
-            addExtraCharacteristics(tgtCard, params, origSVars);
             tgtCard.setFlip(true);
 
             tgtCard.setState(CardCharactersticName.Original);
@@ -651,12 +653,38 @@ public final class AbilityFactoryClone {
         if (params.containsKey("AddAbilities")) {
             for (final String s : Arrays.asList(params.get("AddAbilities").split(","))) {
                 if (origSVars.containsKey(s)) {
-                    final AbilityFactory newAF = new AbilityFactory();
+                    //final AbilityFactory newAF = new AbilityFactory();
                     final String actualAbility = origSVars.get(s);
-                    final SpellAbility grantedAbility = newAF.getAbility(actualAbility, tgtCard);
-                    tgtCard.addSpellAbility(grantedAbility);
+                    // final SpellAbility grantedAbility = newAF.getAbility(actualAbility, tgtCard);
+                    // tgtCard.addSpellAbility(grantedAbility);
+                    tgtCard.getIntrinsicAbilities().add(actualAbility);
                 }
             }
+        }
+
+        // keywords to add to clone
+        final ArrayList<String> keywords = new ArrayList<String>();
+        if (params.containsKey("AddKeywords")) {
+            keywords.addAll(Arrays.asList(params.get("AddKeywords").split(" & ")));
+            // allow SVar substitution for keywords
+            for (int i = 0; i < keywords.size(); i++) {
+                final String k = keywords.get(i);
+                if (origSVars.containsKey(k)) {
+                    keywords.add("\"" + k + "\"");
+                    keywords.remove(k);
+                }
+                if (keywords.get(i).startsWith("HIDDEN")) {
+                    tgtCard.addExtrinsicKeyword(keywords.get(i));
+                }
+                else {
+                    tgtCard.addIntrinsicKeyword(keywords.get(i));
+                }
+            }
+        }
+
+        // set power of clone
+        if (params.containsKey("IntoPlayTapped")) {
+            tgtCard.setTapped(true);
         }
 
         // set power of clone

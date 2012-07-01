@@ -3942,7 +3942,7 @@ public class CardFactoryUtil {
      * @param to
      *            the to
      */
-    public static void copyState(final Card from, final CardCharactersticName stateToCopy, final Card to, final String type) {
+    public static void copyState(final Card from, final CardCharactersticName stateToCopy, final Card to) {
 
         // copy characteristics not associated with a state
         to.setCurSetCode(from.getCurSetCode());
@@ -3969,33 +3969,6 @@ public class CardFactoryUtil {
         to.setTriggers(characteristics.getTriggers());
         to.setReplacementEffects(characteristics.getReplacementEffects());
         to.setStaticAbilityStrings(characteristics.getStaticAbilityStrings());
-
-        // copy activated abilities
-        for (SpellAbility sa : characteristics.getSpellAbility()) {
-            if (sa instanceof AbilityActivated) {
-                SpellAbility newSA = ((AbilityActivated) sa).getCopy();
-                if (newSA == null) {
-                    System.out.println("Uh-oh...");
-                }
-                newSA.setType(type);
-                CardFactoryUtil.correctAbilityChainSourceCard(newSA, to);
-                to.addSpellAbility(newSA);
-            }
-        }
-
-        // copy activated mana abilities
-        for (SpellAbility sa : characteristics.getManaAbility()) {
-            if (sa instanceof AbilityActivated) {
-                SpellAbility newSA = ((AbilityActivated) sa).getCopy();
-                if (newSA == null) {
-                    System.out.println("Uh-oh...");
-                }
-                newSA.setType(type);
-                CardFactoryUtil.correctAbilityChainSourceCard(newSA, to);
-                to.addSpellAbility(newSA);
-            }
-        }
-
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to) {
