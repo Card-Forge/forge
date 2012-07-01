@@ -564,7 +564,9 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Clone")) {
-            if (this.isDb) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryClone.createAbilityClone(this);
+            } else if (this.isDb) {
                 spellAbility = AbilityFactoryClone.createDrawbackClone(this);
             }
         }

@@ -26,8 +26,10 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharactersticName;
+import forge.CardColor;
 import forge.CardList;
 import forge.CardUtil;
+import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.CardCharacteristics;
 import forge.card.cardfactory.AbstractCardFactory;
@@ -538,6 +540,14 @@ public final class AbilityFactoryClone {
             return;
         }
 
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Do you want to copy " + cardToCopy + "?");
+        boolean optional = params.containsKey("Optional");
+        if (host.getController().isHuman() && optional
+                && !GameActionUtil.showYesNoDialog(host, sb.toString())) {
+            return;
+        }
+
         // find target of cloning i.e. card becoming a clone
         ArrayList<Card> cloneTargets = AbilityFactory.getDefinedCards(host, params.get("CloneTarget"), sa);
         if (!cloneTargets.isEmpty()) {
@@ -549,16 +559,18 @@ public final class AbilityFactoryClone {
 
         String imageFileName = host.getImageFilename();
 
-        //Card cloned;
-
         boolean keepName = params.containsKey("KeepName");
         String originalName = tgtCard.getName();
+        boolean copyingSelf = (tgtCard == cardToCopy);
+
         AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
 
         // add "Cloner" state to clone
-        tgtCard.addAlternateState(CardCharactersticName.Cloner);
-        tgtCard.switchStates(CardCharactersticName.Original, CardCharactersticName.Cloner);
-        tgtCard.setState(CardCharactersticName.Original);
+        if (!(copyingSelf && tgtCard.isCloned())) {
+            tgtCard.addAlternateState(CardCharactersticName.Cloner);
+            tgtCard.switchStates(CardCharactersticName.Original, CardCharactersticName.Cloner);
+            tgtCard.setState(CardCharactersticName.Original);
+        }
 
         CardCharactersticName stateToCopy = null;
         if (cardToCopy.isFlip()) {
@@ -589,6 +601,7 @@ public final class AbilityFactoryClone {
             if (keepName) {
                 tgtCard.setName(originalName);
             }
+
             addExtraCharacteristics(tgtCard, params, origSVars);
             tgtCard.setFlip(true);
 
@@ -669,6 +682,19 @@ public final class AbilityFactoryClone {
             }
             tgtCard.setBaseDefense(toughness);
         }
+
+        // colors to be added or changed to
+        String shortColors = "";
+        if (params.containsKey("Colors")) {
+            final String colors = params.get("Colors");
+            if (colors.equals("ChosenColor")) {
+                shortColors = CardUtil.getShortColorsString(tgtCard.getChosenColor());
+            } else {
+                shortColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(","))));
+            }
+        }
+        tgtCard.addColor(shortColors, tgtCard, !params.containsKey("OverwriteColors"), true);
+
     }
 
  } // end class AbilityFactoryClone

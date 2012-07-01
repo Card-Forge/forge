@@ -2070,8 +2070,7 @@ public class CardFactoryCreatures {
 //                || cardName.equals("Phyrexian Metamorph") || cardName.equals("Phantasmal Image")
 //                || cardName.equals("Body Double") || cardName.equals("Evil Twin")
 //                || cardName.equals("Sakashima the Impostor")) {
-        } else if (cardName.equals("Vesuvan Doppelganger")
-                || cardName.equals("Body Double")) {
+        } else if (cardName.equals("Body Double")) {
             getCard_ClonesSeries(card, cardName);
         } else if (cardName.equals("Nebuchadnezzar")) {
             getCard_Nebuchadnezzar(card, cardName);
