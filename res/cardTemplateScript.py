@@ -216,8 +216,6 @@ while line:
         # store Card object in hash table
         mtgDataCards[cardName] = card
         
-print 'WARNING: Card template contains bogus SetInfo for testing only!!!'
-print '         Please remove the SetInfo before committing to repository\n'
 inputName = raw_input("Enter Card Name: ")
 inputName = inputName.rstrip()
 while inputName != 'quit' :
@@ -257,7 +255,6 @@ while inputName != 'quit' :
                                 setInfo.append(setInfoStr)
                 print 'SVar:Rarity:'+rarity
                 print 'SVar:Picture:http://www.wizards.com/global/images/magic/general/'+cleanName+'.jpg'
-                for edition in setInfo : print edition
                 print 'End\n'
         else :
                 print inputName+' not found\n'
