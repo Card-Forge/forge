@@ -43,6 +43,7 @@ import forge.card.spellability.Target;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.phase.Untap;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -325,7 +326,8 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
-            if (ph.getPhase().isBefore(PhaseType.MAIN2) || card.isUntapped() || ph.isPlayerTurn(human)) {
+            if (ph.getPhase().isBefore(PhaseType.MAIN2) || card.isUntapped() || ph.isPlayerTurn(human)
+                    || !Untap.canUntap(card)) {
                 return false;
             }
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")) {

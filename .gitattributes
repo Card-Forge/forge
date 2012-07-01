@@ -3073,6 +3073,7 @@ res/cardsfolder/f/feeding_frenzy.txt svneol=native#text/plain
 res/cardsfolder/f/feeling_of_dread.txt -text
 res/cardsfolder/f/feldons_cane.txt svneol=native#text/plain
 res/cardsfolder/f/felidar_sovereign.txt svneol=native#text/plain
+res/cardsfolder/f/felidar_umbra.txt -text
 res/cardsfolder/f/fellwar_stone.txt svneol=native#text/plain
 res/cardsfolder/f/femeref_archers.txt svneol=native#text/plain
 res/cardsfolder/f/femeref_enchantress.txt svneol=native#text/plain
@@ -8312,6 +8313,7 @@ res/cardsfolder/s/silence.txt -text
 res/cardsfolder/s/silent_arbiter.txt svneol=native#text/plain
 res/cardsfolder/s/silent_assassin.txt -text
 res/cardsfolder/s/silent_attendant.txt svneol=native#text/plain
+res/cardsfolder/s/silent_blade_oni.txt -text
 res/cardsfolder/s/silent_chant_zubera.txt svneol=native#text/plain
 res/cardsfolder/s/silent_departure.txt -text
 res/cardsfolder/s/silent_specter.txt svneol=native#text/plain
