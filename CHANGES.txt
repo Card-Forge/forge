@@ -84,6 +84,7 @@ Fixes/Features:
 - Fixed an issue with non-copyable abilities. Scripted Vesuva
 - Little AI fix in isUsefulCurseKeyword.
 - Improved AI choosing lands to play.
+- Added the recent commit logs to changes.txt.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
@@ -133,6 +134,7 @@ Omniscience
 Augur of Bolas
 Master of the Pearl Trident
 Goblin Battle Jester
+Mindclaw Shaman
 
 
 Added many cards, including:
