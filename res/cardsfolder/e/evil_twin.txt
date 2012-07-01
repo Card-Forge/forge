@@ -3,10 +3,10 @@ ManaCost:2 U B
 Types:Creature Shapeshifter
 Text:no text
 PT:0/0
+# Make Svars for granting abilities and triggers on clones distinct to avoid SVars getting overwritten when cloning a clone
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseCreature | Static$ True | TriggerDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield except it gains "U B, T: Destroy target creature with the same name as this creature."
 SVar:ChooseCreature:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other | SubAbility$ DBCopy | RememberChosen$ True
-SVar:DBCopy:DB$ Clone | Defined$ Remembered | AddAbilities$ EvilTwin | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCopy:DB$ Clone | Defined$ Remembered | AddAbilities$ EvilTwin 
 SVar:EvilTwin:AB$Destroy | Cost$ U B T | ValidTgts$ Creature.sameName | TgtPrompt$ Select target creature with the same name. | SpellDescription$ Destroy target creature with the same name as this creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evil_twin.jpg

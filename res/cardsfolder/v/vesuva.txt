@@ -4,8 +4,7 @@ Types:Land
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseLand | Static$ True | TriggerDescription$ You may have CARDNAME enter the battlefield tapped as a copy of any land on the battlefield.
 SVar:ChooseLand:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Land.Other | SubAbility$ DBCopy | RememberChosen$ True
-SVar:DBCopy:DB$ Clone | Defined$ Remembered | IntoPlayTapped$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCopy:DB$ Clone | Defined$ Remembered | IntoPlayTapped$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vesuva.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/281.jpg
