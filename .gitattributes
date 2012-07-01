@@ -7776,6 +7776,7 @@ res/cardsfolder/s/sages_of_the_anima.txt -text
 res/cardsfolder/s/sai_of_the_shinobi.txt -text
 res/cardsfolder/s/sailmonger.txt svneol=native#text/plain
 res/cardsfolder/s/sakashima_the_impostor.txt -text
+res/cardsfolder/s/sakashimas_student.txt -text
 res/cardsfolder/s/sakura_tribe_elder.txt svneol=native#text/plain
 res/cardsfolder/s/sakura_tribe_scout.txt svneol=native#text/plain
 res/cardsfolder/s/salt_flats.txt svneol=native#text/plain
@@ -8162,6 +8163,7 @@ res/cardsfolder/s/shape_stealer.txt -text svneol=unset#text/plain
 res/cardsfolder/s/shaper_guildmage.txt svneol=native#text/plain
 res/cardsfolder/s/shaper_parasite.txt -text
 res/cardsfolder/s/shapeshifter.txt svneol=native#text/plain
+res/cardsfolder/s/shapeshifters_marrow.txt -text
 res/cardsfolder/s/shard_convergence.txt svneol=native#text/plain
 res/cardsfolder/s/shard_phoenix.txt svneol=native#text/plain
 res/cardsfolder/s/shard_volley.txt svneol=native#text/plain
