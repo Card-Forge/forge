@@ -1403,6 +1403,7 @@ res/cardsfolder/c/celestial_purge.txt svneol=native#text/plain
 res/cardsfolder/c/celestial_sword.txt svneol=native#text/plain
 res/cardsfolder/c/cellar_door.txt -text
 res/cardsfolder/c/cemetery_gate.txt svneol=native#text/plain
+res/cardsfolder/c/cemetery_puca.txt -text
 res/cardsfolder/c/cemetery_reaper.txt svneol=native#text/plain
 res/cardsfolder/c/cenns_enlistment.txt svneol=native#text/plain
 res/cardsfolder/c/cenns_heir.txt svneol=native#text/plain
@@ -2302,6 +2303,7 @@ res/cardsfolder/d/diminish.txt svneol=native#text/plain
 res/cardsfolder/d/diminishing_returns.txt svneol=native#text/plain
 res/cardsfolder/d/dimir_aqueduct.txt svneol=native#text/plain
 res/cardsfolder/d/dimir_cutpurse.txt svneol=native#text/plain
+res/cardsfolder/d/dimir_doppelganger.txt -text
 res/cardsfolder/d/dimir_guildmage.txt svneol=native#text/plain
 res/cardsfolder/d/dimir_house_guard.txt svneol=native#text/plain
 res/cardsfolder/d/dimir_infiltrator.txt svneol=native#text/plain
