@@ -343,7 +343,7 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+            if (ph.isPlayerTurn(computer) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
