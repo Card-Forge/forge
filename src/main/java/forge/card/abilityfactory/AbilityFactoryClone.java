@@ -565,15 +565,31 @@ public final class AbilityFactoryClone {
 
         AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
 
-        // add "Cloner" state to clone
-        if (!(copyingSelf && tgtCard.isCloned())) {
+        if (!copyingSelf) {
+            if (tgtCard.isCloned()) { // cloning again
+                tgtCard.switchStates(CardCharactersticName.Cloner, CardCharactersticName.Original);
+                tgtCard.setState(CardCharactersticName.Original);
+                tgtCard.clearStates(CardCharactersticName.Cloner);
+            }
+            // add "Cloner" state to clone
             tgtCard.addAlternateState(CardCharactersticName.Cloner);
             tgtCard.switchStates(CardCharactersticName.Original, CardCharactersticName.Cloner);
             tgtCard.setState(CardCharactersticName.Original);
         }
+        else {
+            //copy Original state to Cloned
+            tgtCard.addAlternateState(CardCharactersticName.Cloned);
+            tgtCard.switchStates(CardCharactersticName.Original, CardCharactersticName.Cloned);
+            if (tgtCard.isFlip()) {
+                tgtCard.setState(CardCharactersticName.Original);
+            }
+        }
 
         CardCharactersticName stateToCopy = null;
-        if (cardToCopy.isFlip()) {
+        if (copyingSelf) {
+            stateToCopy = CardCharactersticName.Cloned;
+        }
+        else if (cardToCopy.isFlip()) {
             stateToCopy = CardCharactersticName.Original;
         }
         else {
@@ -612,7 +628,16 @@ public final class AbilityFactoryClone {
             tgtCard.setFlip(false);
         }
 
+        //Clean up copy of cloned state
+        if (copyingSelf) {
+            tgtCard.clearStates(CardCharactersticName.Cloned);
+        }
+
         AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
+
+        //Clear Remembered and Imprint lists
+        tgtCard.clearRemembered();
+        tgtCard.clearImprinted();
 
         //keep the Clone card image for the cloned card
         tgtCard.setImageFilename(imageFileName);
