@@ -86,6 +86,12 @@ Fixes/Features:
 - Improved AI choosing lands to play.
 - Added the recent commit logs to changes.txt.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Fanning the Flames and Spell Burst.
+- Fixed Quest for Pure Flame trigger's ValidTarget param (thanks Squee for pointing it out)
+- CLoneFix branch: fixed some issues with overwriting SVars and cloning clones
+- CLoneFix branch: more fixes some issues with overwriting SVars and cloning clones
+- CLoneFix branch: changed card template script to omit setInfo
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -93,7 +99,15 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 
 
-Added cards to the M13 branch and these are not yet available in the snapshot builds:
+Added cards to the CloneFix branch and these are not yet available in the snapshot or beta builds:
+
+Cemetery Puca
+Dimir Doppelganger
+Sakashima's Student
+Shapeshifter's Marrow
+
+
+Added cards to the M13 branch and these are not yet available in the snapshot or beta builds:
 
 Ajani's Sunstriker
 Archaeomancer
@@ -135,6 +149,7 @@ Augur of Bolas
 Master of the Pearl Trident
 Goblin Battle Jester
 Mindclaw Shaman
+War Falcon
 
 
 Added many cards, including:
