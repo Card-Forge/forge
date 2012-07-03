@@ -4,7 +4,6 @@ Types:Instant
 Text:no text
 A:SP$ Tap | Cost$ 2 U | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ TrigPump | SpellDescription$ Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
 SVar:TrigPump:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_breath.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/54.jpg
