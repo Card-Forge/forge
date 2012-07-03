@@ -92,6 +92,12 @@ Fixes/Features:
 - CLoneFix branch: more fixes some issues with overwriting SVars and cloning clones
 - CLoneFix branch: changed card template script to omit setInfo
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Simplify dependency management
+- Fixed Graveyard Shovel.
+- CLoneFix branch: added support for TriggeredCardLKICopy
+- CLoneFix branch: merged r16032-r16054 from the Trunk into CloneFix branch
+- CLoneFix branch: reverting to Trunk version of Animate AF
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -105,6 +111,7 @@ Cemetery Puca
 Dimir Doppelganger
 Sakashima's Student
 Shapeshifter's Marrow
+Unstable Shapeshifter
 
 
 Added cards to the M13 branch and these are not yet available in the snapshot or beta builds:
@@ -150,6 +157,11 @@ Master of the Pearl Trident
 Goblin Battle Jester
 Mindclaw Shaman
 War Falcon
+Battleflight Eagle
+Blood Reckoning
+Chronomaton
+Veilborn Ghoul
+Vile Rebirth
 
 
 Added many cards, including:
