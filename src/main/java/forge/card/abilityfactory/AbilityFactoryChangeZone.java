@@ -477,6 +477,18 @@ public final class AbilityFactoryChangeZone {
                 return false;
             }
         }
+        
+        // don't play if the conditions aren't met, unless it would trigger a beneficial sub-condition
+        if (!AbilityFactory.checkConditional(sa)) {
+            final AbilitySub abSub = sa.getSubAbility();
+            if (abSub != null && !sa.isWrapper() && "True".equals(source.getSVar("AIPlayForSub"))) {
+                if (!AbilityFactory.checkConditional(abSub)) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
 
         final Random r = MyRandom.getRandom();
         // prevent run-away activations - first time will always return true
