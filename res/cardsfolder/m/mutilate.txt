@@ -4,7 +4,6 @@ Types:Sorcery
 Text:no text
 A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | References$ X | IsCurse$ True | SpellDescription$ All creatures get -1/-1 until end of turn for each Swamp you control.
 SVar:X:Count$Valid Swamp.YouCtrl
-SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mutilate.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/73.jpg

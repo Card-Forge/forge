@@ -4,7 +4,6 @@ Types:Instant
 Text:no text
 A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.attacking | NumAtt$ 2 | SpellDescription$ Attacking creatures get +2/+0 until end of turn
 SVar:Rarity:Common
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trumpet_blast.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/98.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/160.jpg
