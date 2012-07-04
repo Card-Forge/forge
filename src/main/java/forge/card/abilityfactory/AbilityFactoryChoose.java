@@ -1893,8 +1893,11 @@ public final class AbilityFactoryChoose {
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
-
-        CardList choices = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        ZoneType choiceZone = ZoneType.Battlefield;
+        if (params.containsKey("ChoiceZone")) {
+            choiceZone = ZoneType.smartValueOf(params.get("ChoiceZone"));
+        }
+        CardList choices = AllZoneUtil.getCardsIn(choiceZone);
         if (params.containsKey("Choices")) {
             choices = choices.getValidCards(params.get("Choices"), host.getController(), host);
         }
