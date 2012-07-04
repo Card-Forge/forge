@@ -9,7 +9,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
-import forge.Constant;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.io.DeckSerializer;
@@ -21,7 +20,6 @@ import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
 import forge.item.InventoryItem;
-import forge.model.FModel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
