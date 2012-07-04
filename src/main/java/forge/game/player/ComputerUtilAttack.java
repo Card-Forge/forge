@@ -503,7 +503,8 @@ public class ComputerUtilAttack {
                 }
             }
             if (mustAttack || attacker.getSacrificeAtEOT() || attacker.getSirenAttackOrDestroy()
-                    || (attacker.getController().getMustAttackEntity() != null)) {
+                    || attacker.getController().getMustAttackEntity() != null
+                    || attacker.getName().equals("Erg Raiders")) {
                 combat.addAttacker(attacker);
                 attackersLeft.remove(attacker);
             }
