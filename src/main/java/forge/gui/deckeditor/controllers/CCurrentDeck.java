@@ -36,7 +36,7 @@ public enum CCurrentDeck implements ICDoc {
     SINGLETON_INSTANCE;
 
     private static File previousDirectory = null;
-    
+
     private File openStartDir = ForgeProps.getFile(NewConstants.NEW_DECKS);
 
     //========== Overridden methods

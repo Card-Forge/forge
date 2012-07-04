@@ -535,7 +535,7 @@ public class AbilityFactoryPump {
                     || AllZoneUtil.getPlayerLandsInPlay(human).getType("Forestwalk").isEmpty()) {
                 return false;
             }
-        } 
+        }
         return true;
     }
 
