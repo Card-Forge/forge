@@ -1526,7 +1526,9 @@ public class AbilityFactoryPump {
         final Random r = MyRandom.getRandom();
         // final Card source = sa.getSourceCard();
         this.params = this.abilityFactory.getMapParams();
+        final int power = this.getNumAttack(sa);
         final int defense = this.getNumDefense(sa);
+        final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
 
         // prevent runaway activations
         final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn()); // to
@@ -1546,14 +1548,6 @@ public class AbilityFactoryPump {
             sa.getTarget().addTarget(AllZone.getHumanPlayer());
             comp = new CardList();
         }
-
-        // only count creatures that can attack
-        comp = comp.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card c) {
-                return CombatUtil.canAttack(c) && !AbilityFactoryPump.this.abilityFactory.isCurse();
-            }
-        });
 
         if (this.abilityFactory.isCurse()) {
             if (defense < 0) { // try to destroy creatures
@@ -1582,20 +1576,36 @@ public class AbilityFactoryPump {
             if ((CardFactoryUtil.evaluateCreatureList(comp) + 200) >= CardFactoryUtil.evaluateCreatureList(human)) {
                 return false;
             }
-
             return chance;
         } // end Curse
 
         // don't use non curse PumpAll after Combat_Begin until AI is improved
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
+        if (phase.isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
             return false;
         }
+
+        // only count creatures that can attack
+        comp = comp.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                if (power <= 0 && !containsUsefulKeyword(keywords, c, sa)) {
+                    return false;
+                }
+                if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) && c.isAttacking()) {
+                    return true;
+                }
+                if (phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && CombatUtil.canAttack(c)) {
+                    return true;
+                }
+                return false;
+            }
+        });
 
         if ((comp.size() <= human.size()) || (comp.size() <= 1)) {
             return false;
         }
 
-        return (r.nextFloat() < .6667) && chance;
+        return chance;
     } // pumpAllCanPlayAI()
 
     /**
