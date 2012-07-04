@@ -98,6 +98,10 @@ Fixes/Features:
 - CLoneFix branch: merged r16032-r16054 from the Trunk into CloneFix branch
 - CLoneFix branch: reverting to Trunk version of Animate AF
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed cards similar to Graveyard Shovel: Graveyard Shovel; Merrow Bonegnawer; Relic of Progenitus and Scrabbling Claws.
+- AI fix for Tap abilities that target multiple cards.
+- CLoneFix branch: converted Body Double to script
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -162,6 +166,15 @@ Blood Reckoning
 Chronomaton
 Veilborn Ghoul
 Vile Rebirth
+Thragtusk
+Arctic Aven
+Crimson Muckwader
+Flinthoof Boar
+Prized Elephant
+Show of Valor
+Touch of the Eternal
+Craterize
+Serpent's Gift
 
 
 Added many cards, including:
