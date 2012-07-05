@@ -449,4 +449,46 @@ public class CardCharacteristics {
     public final void setSVars(final Map<String, String> newSVars) {
         this.sVars = newSVars;
     }
+
+    /**
+     * <p>
+     * copy.
+     * </p>
+     * 
+     * @param source
+     *            a Map object.
+     */
+    public final void copy(final CardCharacteristics source) {
+        // Makes a "deeper" copy of a CardCharacteristics object
+
+        // String name : just copy reference
+        this.name = source.getName();
+        // ArrayList<String> type : list of String objects so use copy constructor
+        this.type = new ArrayList<String>(source.getType());
+        // CardManaCost manaCost : not sure if a deep copy is needed
+        this.manaCost = source.getManaCost();
+        // ArrayList<CardColor> cardColor : not sure if a deep copy is needed
+        this.cardColor = new ArrayList<CardColor>(source.getCardColor());
+        // boolean cardColorsOverridden : set value
+        this.cardColorsOverridden = source.isCardColorsOverridden();
+        // int baseAttack : set value
+        this.baseAttack = source.getBaseAttack();
+        // int baseDefense : set value
+        this.baseDefense = source.getBaseDefense();
+        // ArrayList<String> intrinsicKeyword : list of String objects so use copy constructor
+        this.intrinsicKeyword =  new ArrayList<String>(source.getIntrinsicKeyword());
+        // ArrayList<String> intrinsicAbility : list of String objects so use copy constructor
+        this.intrinsicAbility = new ArrayList<String>(source.getIntrinsicAbility());
+        // ArrayList<String> staticAbilityStrings : list of String objects so use copy constructor
+        this.staticAbilityStrings = new ArrayList<String>(source.getStaticAbilityStrings());
+        // String imageFilename = copy reference
+        this.imageFilename = source.getImageFilename();
+        // String imageName = "";
+        this.imageName = source.getImageName();
+        // ArrayList<EditionInfo> sets : deep copy not needed, just copy reference
+        this.sets = source.getSets();
+        // Map<String, String> sVars
+        this.sVars = new TreeMap<String, String>(source.getSVars());
+
+    }
 }
