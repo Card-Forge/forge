@@ -210,41 +210,8 @@ public final class AbilityFactoryClone {
     // TODO update this method
     private static String cloneStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card host = sa.getSourceCard();
-        final Map<String, String> svars = host.getSVars();
-
-        int power = -1;
-        if (params.containsKey("Power")) {
-            power = AbilityFactory.calculateAmount(host, params.get("Power"), sa);
-        }
-        int toughness = -1;
-        if (params.containsKey("Toughness")) {
-            toughness = AbilityFactory.calculateAmount(host, params.get("Toughness"), sa);
-        }
-
-        final boolean permanent = params.containsKey("Permanent");
-        final ArrayList<String> types = new ArrayList<String>();
-        if (params.containsKey("Types")) {
-            types.addAll(Arrays.asList(params.get("Types").split(",")));
-        }
-        final ArrayList<String> keywords = new ArrayList<String>();
-        if (params.containsKey("Keywords")) {
-            keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
-        }
-        // allow SVar substitution for keywords
-        for (int i = 0; i < keywords.size(); i++) {
-            final String k = keywords.get(i);
-            if (svars.containsKey(k)) {
-                keywords.add("\"" + k + "\"");
-                keywords.remove(k);
-            }
-        }
-        final ArrayList<String> colors = new ArrayList<String>();
-        if (params.containsKey("Colors")) {
-            colors.addAll(Arrays.asList(params.get("Colors").split(",")));
-        }
-
-        final StringBuilder sb = new StringBuilder();
+  
+         final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof AbilitySub) {
             sb.append(" ");
@@ -260,65 +227,13 @@ public final class AbilityFactoryClone {
             tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (final Card c : tgts) {
-            sb.append(c).append(" ");
+        sb.append(sa.getSourceCard());
+        sb.append(" becomes a copy of ");
+        if (!tgts.isEmpty()) {
+          sb.append(tgts.get(0)).append(".");
         }
-        sb.append("become");
-        if (tgts.size() == 1) {
-            sb.append("s a");
-        }
-        // if power is -1, we'll assume it's not just setting toughness
-        if (power != -1) {
-            sb.append(" ").append(power).append("/").append(toughness);
-        }
-
-        if (colors.size() > 0) {
-            sb.append(" ");
-        }
-        if (colors.contains("ChosenColor")) {
-            sb.append("color of that player's choice");
-        } else {
-            for (int i = 0; i < colors.size(); i++) {
-                sb.append(colors.get(i));
-                if (i < (colors.size() - 1)) {
-                    sb.append(" and ");
-                }
-            }
-        }
-        sb.append(" ");
-        if (types.contains("ChosenType")) {
-            sb.append("type of player's choice ");
-        } else {
-            for (int i = types.size() - 1; i >= 0; i--) {
-                sb.append(types.get(i));
-                sb.append(" ");
-            }
-        }
-        if (keywords.size() > 0) {
-            sb.append("with ");
-        }
-        for (int i = 0; i < keywords.size(); i++) {
-            sb.append(keywords.get(i));
-            if (i < (keywords.size() - 1)) {
-                sb.append(" and ");
-            }
-        }
-        // sb.append(abilities)
-        // sb.append(triggers)
-        if (!permanent) {
-            if (params.containsKey("UntilEndOfCombat")) {
-                sb.append(" until end of combat.");
-            } else if (params.containsKey("UntilHostLeavesPlay")) {
-                sb.append(" until ").append(host).append(" leaves the battlefield.");
-            } else if (params.containsKey("UntilYourNextUpkeep")) {
-                sb.append(" until your next upkeep.");
-            } else if (params.containsKey("UntilControllerNextUntap")) {
-                sb.append(" until its controller's next untap step.");
-            } else {
-                sb.append(" until end of turn.");
-            }
-        } else {
-            sb.append(".");
+        else {
+          sb.append("target creature.");
         }
 
         final AbilitySub abSub = sa.getSubAbility();
