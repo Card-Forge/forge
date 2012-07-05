@@ -103,14 +103,6 @@ public enum VSubmenuQuestData implements IVSubmenu {
         group1.add(radExpert);
         radEasy.setSelected(true);
 
-        final ButtonGroup group2 = new ButtonGroup();
-        group2.add(boxFantasy);
-        /*
-        group2.add(radFantasy);
-        group2.add(radClassic);
-        radClassic.setSelected(true);
-        */
-
         // TODO: Convert this to non-hardcoded info
         cbxFormat.removeAllItems();
         cbxFormat.addItem("Standard");
