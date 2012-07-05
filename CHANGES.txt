@@ -102,6 +102,24 @@ Fixes/Features:
 - AI fix for Tap abilities that target multiple cards.
 - CLoneFix branch: converted Body Double to script
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed AI of Gift of Estates.
+- CheckStyle.
+- The AI will now always attack with Erg Raiders.
+- Improved pumpAllCanPlayAI (the AI wouldn't cast Trumpet Blast for example).
+- Updated some AI SVars.
+- Added the precon Slaughterhouse.
+- Removed a few unused imports.
+- CLoneFix branch: fixed SVar name for Akki Lavarunner
+- CLoneFix branch: added a copy method to CardCharacteristics class that makes a deep copy of another instance of CardCharacteristics
+- CLoneFix branch: add a flip status to Card class to support proper handling of flipped status for clones and copies.
+- CLoneFix branch: change Clone AF stack description method
+- CLoneFix branch: marking clones with choices as RemAIDeck:True until logic is added to appropriate AFs
+- CLoneFix branch: merged r16054-r16079 from the Trunk into CloneFix branch
+- CLoneFix branch: removed RemAIDeck as Choose AF has some basic logic already
+- Better AI for fetching cards.
+- reintegrating CloneFix branch into Trunk
+- add some AI SVars to clones
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -122,59 +140,59 @@ Added cards to the M13 branch and these are not yet available in the snapshot or
 
 Ajani's Sunstriker
 Archaeomancer
+Arctic Aven
 Attended Knight
+Augur of Bolas
+Battleflight Eagle
+Blood Reckoning
 Bond Beetle
 Captain's Call
 Cathedral of War
+Chronomaton
 Cower in Fear
+Craterize
+Crimson Muckwader
 Crippling Blight
 Crusader of Odric
+Diabolic Revelation
+Downpour
 Duskmantle Prowler
 Duty-Bound Dead
 Faerie Invaders
+Flinthoof Boar
+Goblin Battle Jester
+Griffin Protector
 Guardian Lions
 Harbor Bandit
+Healer of the Pride
 Hydrosurge
 Knight of Glory
-Liliana of the Dark Realms
-Mind Sculpt
-Murder
-Rhox Faithmender
-Sublime Archangel
-Talrand's Invocation
-Tricks of the Trade
-Warclamp Mastiff
-Watercourser
-Diabolic Revelation
 Knight of Infamy
+Liliana of the Dark Realms
 Liliana's Shade
 Mark of the Vampire
-Reckless Brute
-Servant of Nefarox
-Downpour
-Griffin Protector
-Healer of the Pride
-Staff of Nin
-Omniscience
-Augur of Bolas
 Master of the Pearl Trident
-Goblin Battle Jester
+Mind Sculpt
 Mindclaw Shaman
-War Falcon
-Battleflight Eagle
-Blood Reckoning
-Chronomaton
+Murder
+Omniscience
+Prized Elephant
+Reckless Brute
+Rhox Faithmender
+Serpent's Gift
+Servant of Nefarox
+Show of Valor
+Staff of Nin
+Sublime Archangel
+Talrand's Invocation
+Thragtusk
+Touch of the Eternal
+Tricks of the Trade
 Veilborn Ghoul
 Vile Rebirth
-Thragtusk
-Arctic Aven
-Crimson Muckwader
-Flinthoof Boar
-Prized Elephant
-Show of Valor
-Touch of the Eternal
-Craterize
-Serpent's Gift
+War Falcon
+Warclamp Mastiff
+Watercourser
 
 
 Added many cards, including:
