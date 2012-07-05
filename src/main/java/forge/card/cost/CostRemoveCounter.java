@@ -137,7 +137,6 @@ public class CostRemoveCounter extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         final Counters cntrs = this.getCounter();
 
-        boolean payable = false;
         final Integer amount = this.convertAmount();
         if (this.getThis()) {
             if ((amount != null) && ((source.getCounters(cntrs) - amount) < 0)) {
@@ -147,14 +146,15 @@ public class CostRemoveCounter extends CostPartWithList {
         else {
             final CardList typeList = activator.getCardsIn(ZoneType.Battlefield).getValidCards(this.getType().split(";"),
                     activator, source);
-
             if (amount != null) {
+                boolean payable = false;
                 for (Card c : typeList) {
                     if (c.getCounters(cntrs) - amount < 0) {
                         payable = true;
                         break;
                     }
                 }
+                return payable;
             }
         }
 
