@@ -2050,7 +2050,9 @@ public class ComputerUtil {
             combat.initiatePossibleDefenders(AllZone.getComputerPlayer());
             CardList attackers = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
             for (Card att : attackers) {
-                combat.addAttacker(att);
+                if (CombatUtil.canAttackNextTurn(att)) {
+                    combat.addAttacker(att);
+                }
             }
             combat = ComputerUtilBlock.getBlockers(combat, AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()));
             if (!CombatUtil.lifeInDanger(combat)) {
