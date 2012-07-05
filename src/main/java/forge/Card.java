@@ -80,7 +80,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private CardCharactersticName preTFDCharacteristic = CardCharactersticName.Original;
 
     private boolean isDoubleFaced = false;
-    private boolean isFlip = false;
+    private boolean isFlipCard = false;
+    private boolean isFlipped = false;
     private CardCharactersticName otherTransformable = null;
 
     private ZoneType castFrom = null;
@@ -455,22 +456,42 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * Checks if is flip.
+     * Checks if is flip card.
      * 
-     * @return the isFlip
+     * @return the isFlipCard
      */
-    public final boolean isFlip() {
-        return this.isFlip;
+    public final boolean isFlipCard() {
+        return this.isFlipCard;
     }
 
     /**
-     * Sets the flip.
+     * Sets the flip card.
      * 
      * @param isFlip0
      *            the isFlip to set
      */
-    public final void setFlip(final boolean isFlip0) {
-        this.isFlip = isFlip0;
+    public final void setFlipCard(final boolean isFlip0) {
+        this.isFlipCard = isFlip0;
+    }
+
+    /**
+     * 
+     * Checks if card status is flipped.
+     * 
+     * @return the flipped
+     */
+    public final boolean isFlipped() {
+        return this.isFlipped;
+    }
+
+    /**
+     * Sets a cards flipped status.
+     * 
+     * @param newStatus
+     *      boolean with new flipped status
+     */
+    public final void setFlipStaus(final boolean newStatus) {
+        this.isFlipped = newStatus;
     }
 
     /**
@@ -6531,7 +6552,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.equals("Flip")) {
-            if (!this.isFlip) {
+            if (!this.isFlipCard) {
                 return false;
             }
         } else if (property.startsWith("YouCtrl")) {

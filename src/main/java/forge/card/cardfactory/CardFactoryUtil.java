@@ -3881,7 +3881,7 @@ public class CardFactoryUtil {
     public static Card copyStats(final Card sim) {
         final Card c = new Card();
 
-        c.setFlip(sim.isFlip());
+        c.setFlipCard(sim.isFlipCard());
         c.setDoubleFaced(sim.isDoubleFaced());
         c.setCurSetCode(sim.getCurSetCode());
 
@@ -3953,22 +3953,10 @@ public class CardFactoryUtil {
 
         // get CardCharacteristics for desired state
         CardCharacteristics characteristics = from.getState(stateToCopy);
-        to.setBaseAttack(characteristics.getBaseAttack());
-        to.setBaseDefense(characteristics.getBaseDefense());
-        to.setIntrinsicKeyword(characteristics.getIntrinsicKeyword());
-        to.setName(characteristics.getName());
-        to.setType(characteristics.getType());
-        to.setManaCost(characteristics.getManaCost());
-        to.setColor(characteristics.getCardColor());
-        to.setCardColorsOverridden(characteristics.isCardColorsOverridden());
-        to.setSVars(characteristics.getSVars());
-        to.setSets(characteristics.getSets());
-        to.setIntrinsicAbilities(characteristics.getIntrinsicAbility());
-        to.setImageName(characteristics.getImageName());
-        to.setImageFilename(characteristics.getImageFilename());
+        to.getCharacteristics().copy(characteristics);
+        // handle triggers and replacement effect through Card class interface
         to.setTriggers(characteristics.getTriggers());
         to.setReplacementEffects(characteristics.getReplacementEffects());
-        to.setStaticAbilityStrings(characteristics.getStaticAbilityStrings());
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to) {

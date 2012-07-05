@@ -447,7 +447,7 @@ public final class AbilityFactoryCopy {
                             copy.setState(CardCharactersticName.Transformed);
                         }
                     }
-                    if (c.isFlip()) { // Cloned Flips CAN flip.
+                    if (c.isFlipCard()) { // Cloned Flips CAN flip.
                         copy.setState(CardCharactersticName.Original);
                         c.setState(CardCharactersticName.Original);
                         copy.setImageFilename(c.getImageFilename());

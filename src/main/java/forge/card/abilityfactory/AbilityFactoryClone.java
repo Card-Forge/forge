@@ -580,7 +580,7 @@ public final class AbilityFactoryClone {
             //copy Original state to Cloned
             tgtCard.addAlternateState(CardCharactersticName.Cloned);
             tgtCard.switchStates(CardCharactersticName.Original, CardCharactersticName.Cloned);
-            if (tgtCard.isFlip()) {
+            if (tgtCard.isFlipCard()) {
                 tgtCard.setState(CardCharactersticName.Original);
             }
         }
@@ -589,7 +589,7 @@ public final class AbilityFactoryClone {
         if (copyingSelf) {
             stateToCopy = CardCharactersticName.Cloned;
         }
-        else if (cardToCopy.isFlip()) {
+        else if (cardToCopy.isFlipCard()) {
             stateToCopy = CardCharactersticName.Original;
         }
         else {
@@ -609,9 +609,11 @@ public final class AbilityFactoryClone {
 
         // If target is a flipped card, also copy the flipped
         // state.
-        if (cardToCopy.isFlip()) {
-            tgtCard.addAlternateState(CardCharactersticName.Flipped);
-            tgtCard.setState(CardCharactersticName.Flipped);
+        if (cardToCopy.isFlipCard()) {
+            if (!copyingSelf) {
+                tgtCard.addAlternateState(CardCharactersticName.Flipped);
+                tgtCard.setState(CardCharactersticName.Flipped);
+            }
             CardFactoryUtil.copyState(cardToCopy, CardCharactersticName.Flipped, tgtCard);
             addExtraCharacteristics(tgtCard, params, origSVars);
             CardFactoryUtil.addAbilityFactoryAbilities(tgtCard);
@@ -621,11 +623,15 @@ public final class AbilityFactoryClone {
             if (keepName) {
                 tgtCard.setName(originalName);
             }
-            tgtCard.setFlip(true);
+            tgtCard.setFlipCard(true);
+            //keep the Clone card image for the cloned card
+            tgtCard.setImageFilename(imageFileName);
 
-            tgtCard.setState(CardCharactersticName.Original);
+            if (!tgtCard.isFlipped()) {
+              tgtCard.setState(CardCharactersticName.Original);
+            }
         } else {
-            tgtCard.setFlip(false);
+            tgtCard.setFlipCard(false);
         }
 
         //Clean up copy of cloned state

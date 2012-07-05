@@ -298,7 +298,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             c.setImageFilename(this.getImageFilename());
 
             if (c.hasAlternateState()) {
-                if (c.isFlip()) {
+                if (c.isFlipCard()) {
                     c.setState(CardCharactersticName.Flipped);
                 }
                 if (c.isDoubleFaced()) {

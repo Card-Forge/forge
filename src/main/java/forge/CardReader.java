@@ -481,7 +481,7 @@ public class CardReader implements Runnable {
                 // 8/18/11 11:08 PM
             } else if (line.equals("ALTERNATE")) {
                 CardCharactersticName mode;
-                if (card.isFlip()) {
+                if (card.isFlipCard()) {
                     mode = CardCharactersticName.Flipped;
                 } else if (card.isDoubleFaced()) {
                     mode = CardCharactersticName.Transformed;
@@ -494,7 +494,7 @@ public class CardReader implements Runnable {
                 //System.out.println(card.getName());
                 final CardCharactersticName value = CardCharactersticName.smartValueOf(line.substring("AlternateMode:".length()));
                 if (value == CardCharactersticName.Flipped) {
-                    card.setFlip(true);
+                    card.setFlipCard(true);
                 } else if (value == CardCharactersticName.Transformed) {
                     card.setDoubleFaced(true);
                 } else {
