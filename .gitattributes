@@ -1352,6 +1352,7 @@ res/cardsfolder/c/castle_raptors.txt svneol=native#text/plain
 res/cardsfolder/c/castle_sengir.txt svneol=native#text/plain
 res/cardsfolder/c/cat_burglar.txt svneol=native#text/plain
 res/cardsfolder/c/cat_warriors.txt svneol=native#text/plain
+res/cardsfolder/c/cataclysm.txt -text
 res/cardsfolder/c/catacomb_dragon.txt -text
 res/cardsfolder/c/catalog.txt svneol=native#text/plain
 res/cardsfolder/c/catapult_master.txt svneol=native#text/plain

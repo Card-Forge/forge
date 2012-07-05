@@ -3,12 +3,10 @@ ManaCost:2 W W
 Types:Sorcery
 Text:no text
 K:Flashback 5 W W
-# You can not clear a remembered object from a card on the stack, so this card is cleaned beforehand.
-A:SP$ Pump | Cost$ 2 W W | SubAbility$ DBCleanup | Static$ True | StackDescription$ None | SpellDescription$ Each player chooses a creature he or she controls. Destroy the rest.
-SVar:DBChooseCardYou:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl | SubAbility$ DBChooseOpp | RememberChosen$ True
+A:SP$ ChooseCard | Cost$ 2 W W | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature | SubAbility$ DBChooseOpp | RememberChosen$ True | SpellDescription$ Each player chooses a creature he or she controls. Destroy the rest.
 SVar:DBChooseOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Creature.YouDontCtrl | SubAbility$ DBDestroyAll | RememberChosen$ True
-SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChooseCardYou
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_reckoning.jpg

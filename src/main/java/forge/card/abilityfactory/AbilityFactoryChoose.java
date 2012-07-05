@@ -1928,7 +1928,8 @@ public final class AbilityFactoryChoose {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < validAmount; i++) {
                     if (p.isHuman()) {
-                        final Object o = GuiUtils.chooseOneOrNone("Choose a card ", choices.toArray());
+                        final String choiceTitle = params.containsKey("ChoiceTitle") ? params.get("ChoiceTitle") : "Choose a card ";
+                        final Object o = GuiUtils.chooseOneOrNone(choiceTitle, choices.toArray());
                         if (o != null) {
                             chosen.add((Card) o);
                             choices.remove((Card) o);

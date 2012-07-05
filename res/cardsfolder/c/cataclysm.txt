@@ -1,0 +1,20 @@
+Name:Cataclysm
+ManaCost:2 W W
+Types:Sorcery
+Text:no text
+A:SP$ ChooseCard | Cost$ 2 W W | Defined$ You | Amount$ 1 | Choices$ Artifact.YouCtrl | ChoiceTitle$ Choose an artifact | SubAbility$ ChooseCrtrYou | RememberChosen$ True | SpellDescription$ Each player chooses from the permanents he or she controls an artifact, a creature, an enchantment, and a land, then sacrifices the rest.
+SVar:ChooseCrtrYou:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature | SubAbility$ ChooseEnchYou | RememberChosen$ True
+SVar:ChooseEnchYou:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Enchantment.YouCtrl | ChoiceTitle$ Choose an enchantment | SubAbility$ ChooseLandYou | RememberChosen$ True
+SVar:ChooseLandYou:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Land.YouCtrl | ChoiceTitle$ Choose a land | SubAbility$ ChooseArtfOpp | RememberChosen$ True
+SVar:ChooseArtfOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Artifact.YouDontCtrl | SubAbility$ ChooseCrtrOpp | RememberChosen$ True
+SVar:ChooseCrtrOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Creature.YouDontCtrl | SubAbility$ ChooseEnchOpp | RememberChosen$ True
+SVar:ChooseEnchOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Enchantment.YouDontCtrl | SubAbility$ ChooseLandOpp | RememberChosen$ True
+SVar:ChooseLandOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Land.YouDontCtrl | SubAbility$ SacAllArtf | RememberChosen$ True
+SVar:SacAllArtf:DB$SacrificeAll | ValidCards$ Artifact.IsNotRemembered,Creature.IsNotRemembered,Enchantment.IsNotRemembered,Land.IsNotRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cataclysm.jpg
+SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/3.jpg
+Oracle:Each player chooses from the permanents he or she controls an artifact, a creature, an enchantment, and a land, then sacrifices the rest.
+End
