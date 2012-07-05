@@ -80,7 +80,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private CardCharactersticName preTFDCharacteristic = CardCharactersticName.Original;
 
     private boolean isDoubleFaced = false;
-    private boolean isFlip = false;
+    private boolean isFlipCard = false;
+    private boolean isFlipped = false;
     private CardCharactersticName otherTransformable = null;
 
     private ZoneType castFrom = null;
@@ -222,7 +223,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Card haunting = null;
     private Card effectSource = null;
 
-    private Map<String, String> sVars = new TreeMap<String, String>();
+    //private Map<String, String> sVars = new TreeMap<String, String>();
 
     // hacky code below, used to limit the number of times an ability
     // can be used per turn like Vampire Bats
@@ -455,22 +456,42 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * Checks if is flip.
+     * Checks if is flip card.
      * 
-     * @return the isFlip
+     * @return the isFlipCard
      */
-    public final boolean isFlip() {
-        return this.isFlip;
+    public final boolean isFlipCard() {
+        return this.isFlipCard;
     }
 
     /**
-     * Sets the flip.
+     * Sets the flip card.
      * 
      * @param isFlip0
      *            the isFlip to set
      */
-    public final void setFlip(final boolean isFlip0) {
-        this.isFlip = isFlip0;
+    public final void setFlipCard(final boolean isFlip0) {
+        this.isFlipCard = isFlip0;
+    }
+
+    /**
+     * 
+     * Checks if card status is flipped.
+     * 
+     * @return the flipped
+     */
+    public final boolean isFlipped() {
+        return this.isFlipped;
+    }
+
+    /**
+     * Sets a cards flipped status.
+     * 
+     * @param newStatus
+     *      boolean with new flipped status
+     */
+    public final void setFlipStaus(final boolean newStatus) {
+        this.isFlipped = newStatus;
     }
 
     /**
@@ -666,6 +687,27 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
+     * <p>
+     * addTrigger.
+     * </p>
+     * 
+     * @param t
+     *            a {@link forge.card.trigger.Trigger} object.
+     *
+     * @param state
+     *            a {@link forge.CardCharactersticName} object.
+     *
+     * @return a {@link forge.card.trigger.Trigger} object.
+     */
+    public final Trigger addTrigger(final Trigger t, final CardCharactersticName state) {
+        final Trigger newtrig = t.getCopy();
+        newtrig.setHostCard(this);
+        CardCharacteristics stateCharacteristics = this.getState(state);
+        stateCharacteristics.getTriggers().add(newtrig);
+        return newtrig;
+    }
+
+    /**
      * 
      * moveTrigger.
      * 
@@ -689,6 +731,22 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void removeTrigger(final Trigger t) {
         this.getCharacteristics().getTriggers().remove(t);
+    }
+
+    /**
+     * <p>
+     * removeTrigger.
+     * </p>
+     * 
+     * @param t
+     *            a {@link forge.card.trigger.Trigger} object.
+     *
+     * @param state
+     *            a {@link forge.CardCharactersticName} object.
+     */
+    public final void removeTrigger(final Trigger t, final CardCharactersticName state) {
+        CardCharacteristics stateCharacteristics = this.getState(state);
+        stateCharacteristics.getTriggers().remove(t);
     }
 
     /**
@@ -1459,11 +1517,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getSVar(final String var) {
-        if (this.sVars.containsKey(var)) {
-            return this.sVars.get(var);
-        } else {
-            return "";
-        }
+        return this.getCharacteristics().getSVar(var);
     }
 
     /**
@@ -1477,11 +1531,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link java.lang.String} object.
      */
     public final void setSVar(final String var, final String str) {
-        if (this.sVars.containsKey(var)) {
-            this.sVars.remove(var);
-        }
-
-        this.sVars.put(var, str);
+        this.getCharacteristics().setSVar(var, str);
     }
 
     /**
@@ -1492,7 +1542,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a Map object.
      */
     public final Map<String, String> getSVars() {
-        return this.sVars;
+        return this.getCharacteristics().getSVars();
     }
 
     /**
@@ -1504,7 +1554,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a Map object.
      */
     public final void setSVars(final Map<String, String> newSVars) {
-        this.sVars = newSVars;
+        this.getCharacteristics().setSVars(newSVars);
     }
 
     /**
@@ -2768,6 +2818,27 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
+     * addSpellAbility.
+     * </p>
+     * 
+     * @param a
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     *
+     * @param state
+     *            a {@link forge.CardCharactersticName} object.
+     */
+    public final void addSpellAbility(final SpellAbility a, final CardCharactersticName state) {
+        a.setSourceCard(this);
+        CardCharacteristics stateCharacteristics = this.getState(state);
+        if (a instanceof AbilityMana) {
+            stateCharacteristics.getManaAbility().add((AbilityMana) a);
+        } else {
+            stateCharacteristics.getSpellAbility().add(a);
+        }
+    }
+
+    /**
+     * <p>
      * removeSpellAbility.
      * </p>
      * 
@@ -2781,6 +2852,28 @@ public class Card extends GameEntity implements Comparable<Card> {
             this.getCharacteristics().getManaAbility().remove(a);
         } else {
             this.getCharacteristics().getSpellAbility().remove(a);
+        }
+    }
+
+    /**
+     * <p>
+     * removeSpellAbility.
+     * </p>
+     * 
+     * @param a
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     *
+     * @param state
+     *            a {@link forge.CardCharactersticName} object.
+     */
+    public final void removeSpellAbility(final SpellAbility a, final CardCharactersticName state) {
+        CardCharacteristics stateCharacteristics = this.getState(state);
+        if (a instanceof AbilityMana) {
+            // if (a.isExtrinsic()) //never remove intrinsic mana abilities, is
+            // this the way to go??
+            stateCharacteristics.getManaAbility().remove(a);
+        } else {
+            stateCharacteristics.getSpellAbility().remove(a);
         }
     }
 
@@ -5517,6 +5610,30 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
+     * Adds the static ability.
+     * 
+     * @param s
+     *            the s
+     *
+     * @param state
+     *            a {@link forge.CardCharactersticName} object.
+     *
+     * @return a {@link forge.card.staticability.StaticAbility} object.
+     */
+    public final StaticAbility addStaticAbility(final String s, final CardCharactersticName state) {
+
+        if (s.trim().length() != 0) {
+            final StaticAbility stAb = new StaticAbility(s, this);
+            CardCharacteristics stateCharacteristics = this.getState(state);
+            stateCharacteristics.getStaticAbilities().add(stAb);
+            return stAb;
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
      * <p>
      * isPermanent.
      * </p>
@@ -6435,7 +6552,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.equals("Flip")) {
-            if (!this.isFlip) {
+            if (!this.isFlipCard) {
                 return false;
             }
         } else if (property.startsWith("YouCtrl")) {
@@ -8415,8 +8532,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return an int
      */
     public final int getFoil() {
-        if (this.sVars.containsKey("Foil")) {
-            return Integer.parseInt(this.sVars.get("Foil"));
+        final String foil = this.getCharacteristics().getSVar("Foil");
+        if (!foil.isEmpty()) {
+            return Integer.parseInt(foil);
         }
         return 0;
     }
@@ -8429,7 +8547,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            an int
      */
     public final void setFoil(final int f) {
-        this.sVars.put("Foil", Integer.toString(f));
+        this.getCharacteristics().setSVar("Foil", Integer.toString(f));
     }
 
     /**

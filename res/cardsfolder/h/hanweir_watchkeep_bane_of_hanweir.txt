@@ -5,13 +5,11 @@ Text:no text
 PT:1/5
 K:Defender
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hanweir_watchkeep.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/145a.jpg
 Oracle:Defender\nAt the beginning of each upkeep, if no spells were cast last turn, transform Hanweir Watchkeep.
-
-#Shared
-SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 
 ALTERNATE
 
@@ -23,7 +21,8 @@ Text:no text
 PT:5/5
 K:CARDNAME attacks each turn if able.
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/bane_of_hanweir.jpg
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bane_of_hanweir.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/145b.jpg
 Oracle:Bane of Hanweir attacks each turn if able.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Bane of Hanweir.
 End

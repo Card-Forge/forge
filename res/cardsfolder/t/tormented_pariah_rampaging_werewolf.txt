@@ -4,13 +4,11 @@ Types:Creature Human Warrior Werewolf
 Text:no text
 PT:3/2
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tormented_pariah.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/165a.jpg
 Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Tormented Pariah.
-
-#Shared
-SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 
 ALTERNATE
 
@@ -21,7 +19,8 @@ Types:Creature Werewolf
 Text:no text
 PT:6/4
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/rampaging_werewolf.jpg
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rampaging_werewolf.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/165b.jpg
 Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Rampaging Werewolf.
 End

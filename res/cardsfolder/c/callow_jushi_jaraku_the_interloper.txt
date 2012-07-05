@@ -21,7 +21,7 @@ Types:Legendary Creature Spirit
 Text:no text
 PT:3/4
 A:AB$ Counter | Cost$ SubCounter<1/KI> | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell. | Destination$ Graveyard | UnlessCost$ 2 | UnlessPayer$ TargetedController | SpellDescription$ Counter target spell unless its controller pays 2.
-SVar:Picture1:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/jaraku_the_interloper.jpg
+SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/jaraku_the_interloper.jpg
 # This link may be a temporary solution and could change in the near future.
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/167.jpg
 Oracle:Remove a ki counter from Jaraku the Interloper: Counter target spell unless its controller pays {2}.

@@ -22,7 +22,7 @@ Types:Creature Zombie Soldier
 Text:no text
 PT:2/1
 K:CARDNAME can't block.
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/unhallowed_cathar.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unhallowed_cathar.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/13b.jpg
 Oracle:Unhallowed Cathar can't block.
 End

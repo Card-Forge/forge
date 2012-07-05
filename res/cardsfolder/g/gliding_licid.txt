@@ -7,8 +7,6 @@ A:AB$ SetState | Cost$ U T | Defined$ Self | NewState$ Alternate | SubAbility$ D
 SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 #If the value of AlternateMode isn't Flip or DoubleFaced, it will be the name of the state defined below, so you can switch to it with SetState+NewState$.The name of the first state defined is always "Original".
 AlternateMode:Alternate
-
-#Shared
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gliding_licid.jpg
@@ -26,5 +24,9 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 A:AB$ SetState | Cost$ U | Defined$ Self | NewState$ Original | SpellDescription$ End this effect.
-
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gliding_licid.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/31.jpg
+Oracle:{U}, {T}: Glidinging Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {U} to end this effect.\nEnchanted creature has flying.
 End

@@ -563,6 +563,14 @@ public class AbilityFactory {
             }
         }
 
+        else if (this.api.equals("Clone")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryClone.createAbilityClone(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryClone.createDrawbackClone(this);
+            }
+        }
+
         else if (this.api.equals("CopyPermanent")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryCopy.createAbilityCopyPermanent(this);
@@ -1832,12 +1840,21 @@ public class AbilityFactory {
             }
         } else if (defined.startsWith("Triggered") && (sa != null)) {
             final SpellAbility root = sa.getRootSpellAbility();
-            final Object crd = root.getTriggeringObject(defined.substring(9));
-            if (crd instanceof Card) {
-                c = AllZoneUtil.getCardState((Card) crd);
-            } else if (crd instanceof CardList) {
-                for (final Card cardItem : (CardList) crd) {
-                    cards.add(cardItem);
+            if (defined.contains("LKICopy")) { //TriggeredCardLKICopy
+                final Object crd = root.getTriggeringObject(defined.substring(9, 13));
+                if (crd instanceof Card) {
+                    c = (Card) crd;
+                }
+            }
+            else {
+                final Object crd = root.getTriggeringObject(defined.substring(9));
+                if (crd instanceof Card) {
+                    c = AllZoneUtil.getCardState((Card) crd);
+                    c = (Card) crd;
+                } else if (crd instanceof CardList) {
+                    for (final Card cardItem : (CardList) crd) {
+                        cards.add(cardItem);
+                    }
                 }
             }
         } else if (defined.startsWith("Replaced") && (sa != null)) {

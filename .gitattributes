@@ -1403,6 +1403,7 @@ res/cardsfolder/c/celestial_purge.txt svneol=native#text/plain
 res/cardsfolder/c/celestial_sword.txt svneol=native#text/plain
 res/cardsfolder/c/cellar_door.txt -text
 res/cardsfolder/c/cemetery_gate.txt svneol=native#text/plain
+res/cardsfolder/c/cemetery_puca.txt -text
 res/cardsfolder/c/cemetery_reaper.txt svneol=native#text/plain
 res/cardsfolder/c/cenns_enlistment.txt svneol=native#text/plain
 res/cardsfolder/c/cenns_heir.txt svneol=native#text/plain
@@ -2302,6 +2303,7 @@ res/cardsfolder/d/diminish.txt svneol=native#text/plain
 res/cardsfolder/d/diminishing_returns.txt svneol=native#text/plain
 res/cardsfolder/d/dimir_aqueduct.txt svneol=native#text/plain
 res/cardsfolder/d/dimir_cutpurse.txt svneol=native#text/plain
+res/cardsfolder/d/dimir_doppelganger.txt -text
 res/cardsfolder/d/dimir_guildmage.txt svneol=native#text/plain
 res/cardsfolder/d/dimir_house_guard.txt svneol=native#text/plain
 res/cardsfolder/d/dimir_infiltrator.txt svneol=native#text/plain
@@ -7774,6 +7776,7 @@ res/cardsfolder/s/sages_of_the_anima.txt -text
 res/cardsfolder/s/sai_of_the_shinobi.txt -text
 res/cardsfolder/s/sailmonger.txt svneol=native#text/plain
 res/cardsfolder/s/sakashima_the_impostor.txt -text
+res/cardsfolder/s/sakashimas_student.txt -text
 res/cardsfolder/s/sakura_tribe_elder.txt svneol=native#text/plain
 res/cardsfolder/s/sakura_tribe_scout.txt svneol=native#text/plain
 res/cardsfolder/s/salt_flats.txt svneol=native#text/plain
@@ -8160,6 +8163,7 @@ res/cardsfolder/s/shape_stealer.txt -text svneol=unset#text/plain
 res/cardsfolder/s/shaper_guildmage.txt svneol=native#text/plain
 res/cardsfolder/s/shaper_parasite.txt -text
 res/cardsfolder/s/shapeshifter.txt svneol=native#text/plain
+res/cardsfolder/s/shapeshifters_marrow.txt -text
 res/cardsfolder/s/shard_convergence.txt svneol=native#text/plain
 res/cardsfolder/s/shard_phoenix.txt svneol=native#text/plain
 res/cardsfolder/s/shard_volley.txt svneol=native#text/plain
@@ -9992,6 +9996,7 @@ res/cardsfolder/u/unspeakable_symbol.txt svneol=native#text/plain
 res/cardsfolder/u/unstable_frontier.txt -text
 res/cardsfolder/u/unstable_hulk.txt svneol=native#text/plain
 res/cardsfolder/u/unstable_mutation.txt svneol=native#text/plain
+res/cardsfolder/u/unstable_shapeshifter.txt -text
 res/cardsfolder/u/unstoppable_ash.txt svneol=native#text/plain
 res/cardsfolder/u/unsummon.txt svneol=native#text/plain
 res/cardsfolder/u/untaidake_the_cloud_keeper.txt -text
@@ -10171,6 +10176,7 @@ res/cardsfolder/v/vertigo.txt svneol=native#text/plain
 res/cardsfolder/v/vertigo_spawn.txt svneol=native#text/plain
 res/cardsfolder/v/vesper_ghoul.txt svneol=native#text/plain
 res/cardsfolder/v/vessel_of_endless_rest.txt -text
+res/cardsfolder/v/vesuva.txt -text
 res/cardsfolder/v/vesuvan_doppelganger.txt svneol=native#text/plain
 res/cardsfolder/v/veteran_armorer.txt svneol=native#text/plain
 res/cardsfolder/v/veteran_armorsmith.txt svneol=native#text/plain
@@ -11734,6 +11740,7 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryCharm.java svneol=native#t
 src/main/java/forge/card/abilityfactory/AbilityFactoryChoose.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryClash.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCleanup.java svneol=native#text/plain
+src/main/java/forge/card/abilityfactory/AbilityFactoryClone.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryCombat.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCopy.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCounterMagic.java svneol=native#text/plain

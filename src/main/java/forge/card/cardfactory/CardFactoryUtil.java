@@ -40,6 +40,7 @@ import forge.CommandArgs;
 import forge.Counters;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.card.CardCharacteristics;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -3880,7 +3881,7 @@ public class CardFactoryUtil {
     public static Card copyStats(final Card sim) {
         final Card c = new Card();
 
-        c.setFlip(sim.isFlip());
+        c.setFlipCard(sim.isFlipCard());
         c.setDoubleFaced(sim.isDoubleFaced());
         c.setCurSetCode(sim.getCurSetCode());
 
@@ -3931,6 +3932,31 @@ public class CardFactoryUtil {
         to.setReplacementEffects(from.getReplacementEffects());
         to.setStaticAbilityStrings(from.getStaticAbilityStrings());
 
+    }
+
+    /**
+     * Copy characteristics.
+     * 
+     * @param from
+     *            the from
+     * @param to
+     *            the to
+     */
+    public static void copyState(final Card from, final CardCharactersticName stateToCopy, final Card to) {
+
+        // copy characteristics not associated with a state
+        to.setCurSetCode(from.getCurSetCode());
+        to.setBaseLoyalty(from.getBaseLoyalty());
+        to.setBaseAttackString(from.getBaseAttackString());
+        to.setBaseDefenseString(from.getBaseDefenseString());
+        to.setText(from.getSpellText());
+
+        // get CardCharacteristics for desired state
+        CardCharacteristics characteristics = from.getState(stateToCopy);
+        to.getCharacteristics().copy(characteristics);
+        // handle triggers and replacement effect through Card class interface
+        to.setTriggers(characteristics.getTriggers());
+        to.setReplacementEffects(characteristics.getReplacementEffects());
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to) {

@@ -21,7 +21,7 @@ Text:no text
 PT:2/3
 A:AB$Draw | Cost$ 3 U U T | ValidTgts$ Player | NumCards$ X | References$ X | SpellDescription$ Target player draws X cards, where X is the number of cards in your hand.
 SVar:X:Count$InYourHand
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/tomoya_the_revealer.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tomoya_the_revealer.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/309.jpg
 Oracle:{3}{U}{U}, {T}: Target player draws X cards, where X is the number of cards in your hand.
 End

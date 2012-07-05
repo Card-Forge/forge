@@ -4,13 +4,11 @@ Types:Creature Human Werewolf Shaman
 Text:no text
 PT:3/2
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mondronen_shaman.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/98a.jpg
 Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Mondronen Shaman.
-
-#Shared
-SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 
 ALTERNATE
 
@@ -23,7 +21,8 @@ PT:5/5
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever an opponent casts a spell, CARDNAME deals 2 damage to that player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 2
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/tovolars_magehunter.jpg
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tovolars_magehunter.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/98b.jpg
 Oracle:Whenever an opponent casts a spell, Tovolar's Magehunter deals 2 damage to that player.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Tovolar's Magehunter.
 End

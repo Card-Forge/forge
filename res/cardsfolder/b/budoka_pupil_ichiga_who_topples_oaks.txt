@@ -22,7 +22,7 @@ Text:no text
 PT:4/3
 K:Trample
 A:AB$ Pump | Cost$ SubCounter<1/KI> | Tgt$ TgtC | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
-SVar:Picture1:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/ichiga_who_topples_oaks.jpg
+SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/ichiga_who_topples_oaks.jpg
 # This link may be a temporary solution and could change in the near future.
 Oracle:Trample\nRemove a ki counter from Ichiga, Who Topples Oaks: Target creature gets +2/+2 until end of turn.
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/170.jpg

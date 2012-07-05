@@ -23,9 +23,9 @@ K:Protection from red
 R:Event$ DamageDone | ValidSource$ Card.Red | ValidTarget$ Player | ReplaceWith$ DmgPlus1 | IsCombat$ False | Description$ If a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.
 R:Event$ DamageDone | ValidSource$ Card.Red | ValidTarget$ Player | ReplaceWith$ DmgPlus1Combat | IsCombat$ True | Secondary$ True | Description$ If a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.
 SVar:DmgPlus1:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
-SVar:DmgPlus1:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:DmgPlus1Combat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Plus.1
-SVar:Picture1:http://www.wizards.com/global/images/magic/general/tok_tok_volcano_born.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tok_tok_volcano_born.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/313.jpg
 Oracle:Protection from red\nIf a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.
 End

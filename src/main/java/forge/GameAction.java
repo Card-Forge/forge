@@ -157,6 +157,13 @@ public class GameAction {
                 c.switchStates(CardCharactersticName.Cloner, CardCharactersticName.Original);
                 c.setState(CardCharactersticName.Original);
                 c.clearStates(CardCharactersticName.Cloner);
+                if (c.isFlipCard()) {
+                    c.clearStates(CardCharactersticName.Flipped);
+                }
+            }
+            // reset flip status when card leaves battlefield
+            if (zoneFrom.is(ZoneType.Battlefield)) {
+                c.setFlipStaus(false);
             }
             AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
             copied = AllZone.getCardFactory().copyCard(c);
