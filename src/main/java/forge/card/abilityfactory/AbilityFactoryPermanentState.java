@@ -36,12 +36,9 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.phase.Combat;
-import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
-import forge.game.player.ComputerUtilBlock;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
@@ -1018,7 +1015,7 @@ public class AbilityFactoryPermanentState {
                     }
                     return false;
                 } else {
-                    if (!tapCastLessThanMax(source)) {
+                    if (!ComputerUtil.shouldCastLessThanMax(source)) {
                         return false;
                     }
                     break;
@@ -1044,7 +1041,7 @@ public class AbilityFactoryPermanentState {
                     }
                     return false;
                 } else {
-                    if (!tapCastLessThanMax(source)) {
+                    if (!ComputerUtil.shouldCastLessThanMax(source)) {
                         return false;
                     }
                     break;
@@ -1056,31 +1053,6 @@ public class AbilityFactoryPermanentState {
         }
 
         return true;
-    }
-
-    /**
-     * Is it OK to cast this for less than the Max Targets?
-     * @param source
-     */
-    private static boolean tapCastLessThanMax(final Card source) {
-        boolean ret = true;
-        if (source.getManaCost().countX() > 0) {
-            // If TargetMax is MaxTgts (i.e., an "X" cost), this is fine because AI is limited by mana available.
-        } else {
-            // Otherwise, if life is possibly in danger, then this is fine.
-            Combat combat = new Combat();
-            combat.initiatePossibleDefenders(AllZone.getComputerPlayer());
-            CardList attackers = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-            for (Card att : attackers) {
-                combat.addAttacker(att);
-            }
-            combat = ComputerUtilBlock.getBlockers(combat, AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()));
-            if (!CombatUtil.lifeInDanger(combat)) {
-                // Otherwise, return false. Do not play now.
-                ret = false;
-            }
-        }
-        return ret;
     }
 
     /**
@@ -1168,7 +1140,7 @@ public class AbilityFactoryPermanentState {
                     }
                     return false;
                 } else {
-                    if (!tapCastLessThanMax(source)) {
+                    if (!ComputerUtil.shouldCastLessThanMax(source)) {
                         return false;
                     }
                     break;
@@ -1189,7 +1161,7 @@ public class AbilityFactoryPermanentState {
                     }
                     return false;
                 } else {
-                    if (!tapCastLessThanMax(source)) {
+                    if (!ComputerUtil.shouldCastLessThanMax(source)) {
                         return false;
                     }
                     break;

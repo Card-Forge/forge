@@ -266,7 +266,7 @@ public class CardFactoryInstants {
                 public boolean canPlayAI() {
                     final CardList graveList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
 
-                    final int maxX = ComputerUtil.getAvailableMana().size() - 1;
+                    final int maxX = ComputerUtil.getAvailableMana(true).size() - 1;
                     return (maxX >= 3) && (graveList.size() > 0);
                 }
             };

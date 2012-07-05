@@ -393,7 +393,7 @@ public class CardFactorySorceries {
 
                     // the computer will at least destroy 2 more human creatures
                     return ((computer.size() < (human.size() - 1)) || ((AllZone.getComputerPlayer().getLife() < 7) && !human
-                            .isEmpty())) && (ComputerUtil.getAvailableMana().size() >= 7);
+                            .isEmpty())) && (ComputerUtil.getAvailableMana(true).size() >= 7);
                 }
             }; // SpellAbility
 
@@ -905,7 +905,7 @@ public class CardFactorySorceries {
 
                 @Override
                 public boolean canPlayAI() {
-                    final int maxX = ComputerUtil.getAvailableMana().size() - 1;
+                    final int maxX = ComputerUtil.getAvailableMana(true).size() - 1;
                     final int humanLife = AllZone.getHumanPlayer().getLife();
                     if (maxX >= humanLife) {
                         targetPlayers.add(AllZone.getHumanPlayer());

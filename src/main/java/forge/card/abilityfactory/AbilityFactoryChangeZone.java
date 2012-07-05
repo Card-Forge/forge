@@ -43,9 +43,11 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
+import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
+import forge.game.player.ComputerUtilBlock;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -1111,12 +1113,14 @@ public final class AbilityFactoryChangeZone {
             }
 
             // Improve the AI for fetching.
-            Card c;
+            Card c = null;
             if (params.containsKey("AtRandom")) {
                 c = CardUtil.getRandom(fetchList.toArray());
             } else if (defined) {
                 c = fetchList.get(0);
             } else {
+                fetchList.shuffle();
+                // Save a card as a default, in case we can't find anything suitable.
                 Card first = fetchList.get(0);
                 fetchList = fetchList.filter(new CardListFilter() {
                     @Override
@@ -1130,19 +1134,15 @@ public final class AbilityFactoryChangeZone {
                     }
                 });
                 if (type.contains("Basic")) {
-                c = AbilityFactoryChangeZone.basicManaFixing(fetchList);
+                    c = AbilityFactoryChangeZone.basicManaFixing(fetchList);
                 } else if (AbilityFactoryChangeZone.areAllBasics(type)) {
                     c = AbilityFactoryChangeZone.basicManaFixing(fetchList, type);
                 } else if (fetchList.getNotType("Creature").size() == 0) {
-                    c = CardFactoryUtil.getBestCreatureAI(fetchList); // if only
-                                                                      // creatures
-                                                                      // take the
-                                                                      // best
+                    c = AbilityFactoryChangeZone.chooseCreature(fetchList);
                 } else if (ZoneType.Battlefield.equals(destination) || ZoneType.Graveyard.equals(destination)) {
                     c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, sa, false);
                 } else if (ZoneType.Exile.equals(destination)) {
-                    // Exiling your own stuff, if Exiling opponents stuff choose
-                    // best
+                    // Exiling your own stuff, if Exiling opponents stuff choose best
                     if (destZone.getPlayer().isHuman()) {
                         c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, sa, false);
                     } else {
@@ -1153,13 +1153,49 @@ public final class AbilityFactoryChangeZone {
                     if (origin.contains(ZoneType.Library) && !fetchList.getNotName(card.getName()).isEmpty()) {
                         fetchList = fetchList.getNotName(card.getName());
                     }
-                    fetchList.shuffle();
-                    c = fetchList.get(0);
+                    Player ai = AllZone.getComputerPlayer();
+                    // Does AI need a land?
+                    CardList hand = ai.getCardsIn(ZoneType.Hand);
+                    System.out.println("Lands in hand = " + hand.filter(CardListFilter.LANDS).size() + ", on battlefield = " + ai.getCardsIn(ZoneType.Battlefield).filter(CardListFilter.LANDS).size());
+                    if (hand.filter(CardListFilter.LANDS).size() == 0 && ai.getCardsIn(ZoneType.Battlefield).filter(CardListFilter.LANDS).size() < 4) {
+                        boolean canCastSomething = false;
+                        for (Card cardInHand : hand) {
+                            canCastSomething |= ComputerUtil.payManaCost(cardInHand.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false);
+                        }
+                        if (!canCastSomething) {
+                            System.out.println("Pulling a land as there are none in hand, less than 4 on the board, and nothing in hand is castable.");
+                            c = basicManaFixing(fetchList);
+                        }
+                    }
+                    if (c == null) {
+                        System.out.println("Don't need a land or none available; trying for a creature.");
+                        fetchList = fetchList.getNotType("Land");
+                        // Prefer to pull a creature, generally more useful for AI.
+                        c = chooseCreature(fetchList.getType("Creature"));
+                    }
+                    if (c == null) { // Could not find a creature.
+                        if (ai.getLife() <= 5) { // Desperate?
+                            // Get something AI can cast soon.
+                            System.out.println("5 Life or less, trying to find something castable.");
+                            CardListUtil.sortByMostExpensive(fetchList);
+                            for (Card potentialCard : fetchList) {
+                               if (ComputerUtil.payManaCost(potentialCard.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false)) {
+                                   c = potentialCard;
+                                   break;
+                               }
+                            }
+                        } else {
+                            // Get the best card in there.
+                            System.out.println("No creature and lots of life, finding something good.");
+                            c = CardFactoryUtil.getBestAI(fetchList);
+                        }
+                    }
                 }
                 if (c == null) {
                     c = first;
                 }
             }
+            System.out.println("Chose " + c.toString());
 
             fetched.add(c);
             fetchList.remove(c);
@@ -1336,6 +1372,38 @@ public final class AbilityFactoryChangeZone {
 
         return true;
     }
+    
+    /**
+     * Some logic for picking a creature card from a list.
+     * @param list
+     * @return Card
+     */
+    private static Card chooseCreature(CardList list) {
+        Card card = null;
+        Combat combat = new Combat();
+        combat.initiatePossibleDefenders(AllZone.getComputerPlayer());
+        CardList attackers = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+        for (Card att : attackers) {
+            combat.addAttacker(att);
+        }
+        combat = ComputerUtilBlock.getBlockers(combat, AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()));
+
+        System.out.println("Life would remain = " + CombatUtil.lifeThatWouldRemain(combat));
+        if (CombatUtil.lifeInDanger(combat)) {
+            // need something AI can cast now
+            CardListUtil.sortByEvaluateCreature(list);
+            for (Card c : list) {
+               if (ComputerUtil.payManaCost(c.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false)) {
+                   card = c;
+                   break;
+               }
+            }
+        } else {
+            // not urgent, get the largest creature possible
+            card = CardFactoryUtil.getBestCreatureAI(list);
+        }
+        return card;
+    }
 
     // *************************************************************************************
     // **************** Known Origin (Battlefield/Graveyard/Exile)
@@ -1508,6 +1576,7 @@ public final class AbilityFactoryChangeZone {
 
         CardList list = AllZoneUtil.getCardsIn(origin);
         list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
+        list = list.getNotName(source.getName()); // Don't get the same card back.
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             return false;
@@ -1523,7 +1592,6 @@ public final class AbilityFactoryChangeZone {
             aiPermanents = aiPermanents.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
-                    System.out.println("Not Changing Zone");
                     return !c.getSVar("Targeting").equals("Dies");
                 }
             });
@@ -1574,15 +1642,8 @@ public final class AbilityFactoryChangeZone {
                             }
                             // counters TODO check good and
                             // bad counters
-                            return SpellPermanent.checkETBEffects(c, null, null); // checks
-                                                                                  // only
-                                                                                  // if
-                                                                                  // there
-                                                                                  // is
-                                                                                  // a
-                                                                                  // dangerous
-                                                                                  // ETB
-                                                                                  // effect
+                            // checks only if there is a dangerous ETB effect
+                            return SpellPermanent.checkETBEffects(c, null, null); 
                         }
                     });
                     if (!aiPermanents.isEmpty()) {
@@ -1666,11 +1727,34 @@ public final class AbilityFactoryChangeZone {
                     } else {
                         choice = mostExpensive;
                     }
+                } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
+                    CardList nonLands = list.getNotType("Land");
+                    // Prefer to pull a creature, generally more useful for AI.
+                    choice = chooseCreature(nonLands.getType("Creature"));
+                    if (choice == null) { // Could not find a creature.
+                        if (AllZone.getComputerPlayer().getLife() <= 5) { // Desperate?
+                            // Get something AI can cast soon.
+                            System.out.println("5 Life or less, trying to find something castable.");
+                            CardListUtil.sortByMostExpensive(nonLands);
+                            for (Card potentialCard : nonLands) {
+                               if (ComputerUtil.payManaCost(potentialCard.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false)) {
+                                   choice = potentialCard;
+                                   break;
+                               }
+                            }
+                        } else {
+                            // Get the best card in there.
+                            System.out.println("No creature and lots of life, finding something good.");
+                            choice = CardFactoryUtil.getBestAI(nonLands);
+                        }
+                    }
+                    if (choice == null) {
+                        // No creatures or spells?
+                        list.shuffle();
+                        choice = list.get(0);
+                    }
                 } else {
-                    // TODO AI needs more improvement to it's retrieval (reuse
-                    // some code from spReturn here)
-                    list.shuffle();
-                    choice = list.get(0);
+                    choice = CardFactoryUtil.getBestAI(list);
                 }
             }
             if (choice == null) { // can't find anything left
@@ -1680,7 +1764,9 @@ public final class AbilityFactoryChangeZone {
                     }
                     return false;
                 } else {
-                    // TODO is this good enough? for up to amounts?
+                    if (!ComputerUtil.shouldCastLessThanMax(source)) {
+                        return false;
+                    }
                     break;
                 }
             }
@@ -1691,7 +1777,7 @@ public final class AbilityFactoryChangeZone {
 
         return true;
     }
-
+    
     /**
      * <p>
      * changeKnownUnpreferredTarget.
@@ -1754,11 +1840,34 @@ public final class AbilityFactoryChangeZone {
                     choice = CardFactoryUtil.getBestCreatureToBounceAI(list);
                 } else if (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield)) {
                     choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, false);
+                } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
+                    CardList nonLands = list.getNotType("Land");
+                    // Prefer to pull a creature, generally more useful for AI.
+                    choice = chooseCreature(nonLands.getType("Creature"));
+                    if (choice == null) { // Could not find a creature.
+                        if (AllZone.getComputerPlayer().getLife() <= 5) { // Desperate?
+                            // Get something AI can cast soon.
+                            System.out.println("5 Life or less, trying to find something castable.");
+                            CardListUtil.sortByMostExpensive(nonLands);
+                            for (Card potentialCard : nonLands) {
+                               if (ComputerUtil.payManaCost(potentialCard.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false)) {
+                                   choice = potentialCard;
+                                   break;
+                               }
+                            }
+                        } else {
+                            // Get the best card in there.
+                            System.out.println("No creature and lots of life, finding something good.");
+                            choice = CardFactoryUtil.getBestAI(nonLands);
+                        }
+                    }
+                    if (choice == null) {
+                        // No creatures or spells?
+                        list.shuffle();
+                        choice = list.get(0);
+                    }
                 } else {
-                    // TODO AI needs more improvement to it's retrieval (reuse
-                    // some code from spReturn here)
-                    list.shuffle();
-                    choice = list.get(0);
+                    choice = CardFactoryUtil.getBestAI(list);
                 }
             }
             if (choice == null) { // can't find anything left
@@ -1766,7 +1875,9 @@ public final class AbilityFactoryChangeZone {
                     tgt.resetTargets();
                     return false;
                 } else {
-                    // TODO is this good enough? for up to amounts?
+                    if (!ComputerUtil.shouldCastLessThanMax(source)) {
+                        return false;
+                    }
                     break;
                 }
             }
