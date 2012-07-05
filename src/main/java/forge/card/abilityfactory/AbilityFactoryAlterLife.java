@@ -772,7 +772,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't use loselife before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !params.containsKey("ActivationPhases") && !priority) {
             return false;
         }

@@ -622,7 +622,7 @@ public class AbilityFactoryDealDamage {
                 // on the stack
                 // or from taking combat damage
                 final boolean freePing = isTrigger || saMe.getPayCosts() == null || tgt.getNumTargeted() > 0
-                        || (phase.is(PhaseType.END_OF_TURN) && saMe.isAbility()&& phase.isNextTurn(AllZone.getComputerPlayer()))
+                        || (phase.is(PhaseType.END_OF_TURN) && saMe.isAbility() && phase.isNextTurn(AllZone.getComputerPlayer()))
                             || (phase.is(PhaseType.MAIN2) && saMe.getRestrictions().getPlaneswalker());
 
                 if (freePing && saMe.canTarget(AllZone.getHumanPlayer()) && tgt.addTarget(AllZone.getHumanPlayer())) {
@@ -638,9 +638,9 @@ public class AbilityFactoryDealDamage {
 
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (saMe.canTarget(AllZone.getHumanPlayer()) 
+            else if (saMe.canTarget(AllZone.getHumanPlayer())
                     && ((phase.is(PhaseType.END_OF_TURN) && phase.isNextTurn(AllZone.getComputerPlayer()))
-                        || (AbilityFactory.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2)) 
+                        || (AbilityFactory.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2))
                         || saMe.getPayCosts() == null || isTrigger)) {
                 if (tgt.addTarget(AllZone.getHumanPlayer())) {
                     continue;

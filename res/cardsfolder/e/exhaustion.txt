@@ -2,7 +2,7 @@ Name:Exhaustion
 ManaCost:2 U
 Types:Sorcery
 Text:no text
-A:SP$ PumpAll | Cost$ 2 U | ValidCards$ Creature.YouDontCtrl,Land.YouDontCtrl | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | SpellDescription$ Creatures and lands target opponent controls don't untap during his or her next untap step.
+A:SP$ PumpAll | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Creature.YouDontCtrl,Land.YouDontCtrl | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True | SpellDescription$ Creatures and lands target opponent controls don't untap during his or her next untap step.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exhaustion.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/74.jpg

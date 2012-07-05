@@ -1255,22 +1255,22 @@ public class ComputerUtil {
             //play basic lands that are needed the most
             if (landList.getNotType("Basic").isEmpty()) {
                 final CardList combined = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-    
+
                 final String[] names = "Plains,Island,Swamp,Mountain,Forest".split(",");
                 final ArrayList<String> basics = new ArrayList<String>();
-    
+
                 // what types can I go get?
                 for (final String name : names) {
                     if (landList.getType(name).size() != 0) {
                         basics.add(name);
                     }
                 }
-    
+
                 // Which basic land is least available from hand and play, that I still
                 // have in my deck
                 int minSize = Integer.MAX_VALUE;
                 String minType = null;
-    
+
                 for (int i = 0; i < basics.size(); i++) {
                     final String b = basics.get(i);
                     final int num = combined.getType(names[i]).size();
@@ -1279,11 +1279,11 @@ public class ComputerUtil {
                         minSize = num;
                     }
                 }
-    
+
                 if (minType != null) {
                     landList = landList.getType(minType);
                 }
-    
+
                 land = landList.get(0);
             }
             landList.remove(land);

@@ -4,7 +4,6 @@ Types:Instant
 Text:no text
 A:SP$ Tap | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | SubAbility$ DBUnattach | SpellDescription$ Choose two target creatures. Tap those creatures, then unattach all Equipment from them.
 SVar:DBUnattach:DB$ UnattachAll | Defined$ Targeted | UnattachValid$ Equipment
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fulgent_distraction.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/7.jpg
 Oracle:Choose two target creatures. Tap those creatures, then unattach all Equipment from them.

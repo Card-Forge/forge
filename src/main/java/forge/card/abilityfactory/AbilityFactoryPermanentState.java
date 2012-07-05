@@ -36,9 +36,12 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.phase.Combat;
+import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
+import forge.game.player.ComputerUtilBlock;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
@@ -352,7 +355,6 @@ public class AbilityFactoryPermanentState {
      * @return a boolean.
      */
     private static boolean untapPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI cannot use this properly until he can use SAs during Humans turn
         final Target tgt = sa.getTarget();
 
         boolean randomReturn = true;
@@ -852,8 +854,6 @@ public class AbilityFactoryPermanentState {
      * @return a boolean.
      */
     private static boolean tapCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI cannot use this properly until he can use SAs during Humans turn
-
         final HashMap<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -867,10 +867,11 @@ public class AbilityFactoryPermanentState {
         if (turn.isHuman()) {
             // Tap things down if it's Human's turn
         } else if (phase.inCombat() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-            // TODO Tap creatures down if in combat
+            // Tap creatures down if in combat -- handled in tapPrefTargeting().
+        } else if (source.isSorcery()) {
+            // Cast it if it's a sorcery.
         } else {
-            // Generally don't want to tap things during AI turn outside of
-            // combat
+            // Generally don't want to tap things with an Instant during AI turn outside of combat
             return false;
         }
 
@@ -953,7 +954,6 @@ public class AbilityFactoryPermanentState {
      * @return a boolean.
      */
     private static boolean tapPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI cannot use this properly until he can use SAs during Humans turn
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
@@ -999,8 +999,7 @@ public class AbilityFactoryPermanentState {
         CardList tapList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         tapList = tapList.filter(CardListFilter.UNTAPPED);
         tapList = tapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
-        // filter out enchantments and planeswalkers, their tapped state doesn't
-        // matter.
+        // filter out enchantments and planeswalkers, their tapped state doesn't matter.
         final String[] tappablePermanents = { "Creature", "Land", "Artifact" };
         tapList = tapList.getValidCards(tappablePermanents, source.getController(), source);
         tapList = tapList.getTargetableCards(sa);
@@ -1019,17 +1018,21 @@ public class AbilityFactoryPermanentState {
                     }
                     return false;
                 } else {
-                    // TODO is this good enough? for up to amounts?
+                    if (!tapCastLessThanMax(source)) {
+                        return false;
+                    }
                     break;
                 }
             }
 
-            if (tapList.getNotType("Creature").size() == 0) {
-                choice = CardFactoryUtil.getBestCreatureAI(tapList); // if only
-                                                                     // creatures
-                                                                     // take
-                                                                     // the
-                                                                     // best
+            PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
+            if (phase.inCombat() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                // Tap creatures if in combat during AI's turn.
+                CardList creatureList = tapList.filter(CardListFilter.CREATURES);
+                choice = CardFactoryUtil.getBestCreatureAI(creatureList);
+            } else if (tapList.getNotType("Creature").size() == 0) {
+                // if only creatures take the best
+                choice = CardFactoryUtil.getBestCreatureAI(tapList);
             } else {
                 choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
             }
@@ -1041,7 +1044,9 @@ public class AbilityFactoryPermanentState {
                     }
                     return false;
                 } else {
-                    // TODO is this good enough? for up to amounts?
+                    if (!tapCastLessThanMax(source)) {
+                        return false;
+                    }
                     break;
                 }
             }
@@ -1051,6 +1056,31 @@ public class AbilityFactoryPermanentState {
         }
 
         return true;
+    }
+
+    /**
+     * Is it OK to cast this for less than the Max Targets?
+     * @param source
+     */
+    private static boolean tapCastLessThanMax(final Card source) {
+        boolean ret = true;
+        if (source.getManaCost().countX() > 0) {
+            // If TargetMax is MaxTgts (i.e., an "X" cost), this is fine because AI is limited by mana available.
+        } else {
+            // Otherwise, if life is possibly in danger, then this is fine.
+            Combat combat = new Combat();
+            combat.initiatePossibleDefenders(AllZone.getComputerPlayer());
+            CardList attackers = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+            for (Card att : attackers) {
+                combat.addAttacker(att);
+            }
+            combat = ComputerUtilBlock.getBlockers(combat, AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()));
+            if (!CombatUtil.lifeInDanger(combat)) {
+                // Otherwise, return false. Do not play now.
+                ret = false;
+            }
+        }
+        return ret;
     }
 
     /**
@@ -1075,8 +1105,7 @@ public class AbilityFactoryPermanentState {
         list = list.getValidCards(tgt.getValidTgts(), source.getController(), source);
         list = list.getTargetableCards(sa);
 
-        // filter by enchantments and planeswalkers, their tapped state doesn't
-        // matter.
+        // filter by enchantments and planeswalkers, their tapped state doesn't matter.
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
         CardList tapList = list.getValidCards(tappablePermanents, source.getController(), source);
 
@@ -1139,17 +1168,16 @@ public class AbilityFactoryPermanentState {
                     }
                     return false;
                 } else {
-                    // TODO is this good enough? for up to amounts?
+                    if (!tapCastLessThanMax(source)) {
+                        return false;
+                    }
                     break;
                 }
             }
 
             if (tapList.getNotType("Creature").size() == 0) {
-                choice = CardFactoryUtil.getBestCreatureAI(tapList); // if only
-                                                                     // creatures
-                                                                     // take
-                                                                     // the
-                                                                     // best
+                // if only creatures take the best
+                choice = CardFactoryUtil.getBestCreatureAI(tapList);
             } else {
                 choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
             }
@@ -1161,7 +1189,9 @@ public class AbilityFactoryPermanentState {
                     }
                     return false;
                 } else {
-                    // TODO is this good enough? for up to amounts?
+                    if (!tapCastLessThanMax(source)) {
+                        return false;
+                    }
                     break;
                 }
             }
@@ -2061,8 +2091,6 @@ public class AbilityFactoryPermanentState {
      * @return a boolean.
      */
     private static boolean tapOrUntapCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI cannot use this properly until he can use SAs during Humans turn
-
         final HashMap<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -2152,7 +2180,6 @@ public class AbilityFactoryPermanentState {
      * @return a boolean.
      */
     private static boolean tapOrUntapPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI cannot use this properly until he can use SAs during Humans turn
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
@@ -2499,7 +2526,6 @@ public class AbilityFactoryPermanentState {
      * @return a boolean.
      */
     private static boolean phasesPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI cannot use this properly until he can use SAs during Humans turn
         final Target tgt = sa.getTarget();
 
         boolean randomReturn = true;

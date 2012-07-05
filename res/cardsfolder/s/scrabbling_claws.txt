@@ -2,7 +2,7 @@ Name:Scrabbling Claws
 ManaCost:1
 Types:Artifact
 Text:no text
-A:AB$ ChangeZone | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | Chooser$ Targeted | Mandatory$ True | IsCurse$ True | SpellDescription$ Target player exiles a card from his or her graveyard.
+A:AB$ ChangeZone | Cost$ T | ValidTgts$ Player | DefinedPlayer$ Targeted | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | Chooser$ Targeted | Mandatory$ True | IsCurse$ True | SpellDescription$ Target player exiles a card from his or her graveyard.
 A:AB$ ChangeZone | Cost$ 1 Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Exile target card from a graveyard. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Rarity:Uncommon
