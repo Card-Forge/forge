@@ -2680,9 +2680,18 @@ public class AbilityFactory {
 
         // The cost
         String unlessCost = params.get("UnlessCost").trim();
-        if (unlessCost.equals("X")) {
+
+        try {
+            String unlessVar = Integer.toString(AbilityFactory.calculateAmount(source, params.get("UnlessCost").replace(" ", ""), sa));
+            unlessCost = unlessVar;
+        } catch (final NumberFormatException n) {
+        } //This try/catch method enables UnlessCost to parse any svar name
+          //instead of just X for cards like Draco. If there's a better way
+          //feel free to change it. Old code follows:
+
+        /*if (unlessCost.equals("X")) {
             unlessCost = Integer.toString(AbilityFactory.calculateAmount(source, params.get("UnlessCost"), sa));
-        }
+        }*/
         final Cost cost = new Cost(source, unlessCost, true);
 
         final SpellAbility ability = new AbilityActivated(source, cost, null) {
