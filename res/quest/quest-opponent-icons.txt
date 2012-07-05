@@ -49,6 +49,7 @@ http://www.cardforge.org/fpics/questAvatars/Doc%20Holiday.jpg
 http://www.cardforge.org/fpics/questAvatars/Dogbert.jpg
 http://www.cardforge.org/fpics/questAvatars/Dont%20Play%20With%20Matches.jpg
 http://www.cardforge.org/fpics/questAvatars/Doran.jpg
+http://www.cardforge.org/fpics/questAvatars/Dr%20Doom.jpg
 http://www.cardforge.org/fpics/questAvatars/Dr%20Fate.jpg
 http://www.cardforge.org/fpics/questAvatars/Dr%20No.jpg
 http://www.cardforge.org/fpics/questAvatars/Dr%20Strangelove.jpg
