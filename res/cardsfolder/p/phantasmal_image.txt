@@ -6,9 +6,12 @@ PT:0/0
 # Make Svars for granting abilities and triggers on clones distinct to avoid SVars getting overwritten when cloning a clone
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseCreature | Static$ True | TriggerDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains "When this creature becomes the target of a spell or ability, sacrifice it."
 SVar:ChooseCreature:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other | SubAbility$ DBCopy | RememberChosen$ True
-SVar:DBCopy:DB$ Clone | Defined$ Remembered | AddTypes$ Illusion | AddTriggers$ PhantasmalImageTgtTrig | AddSVars$ PhantasmalImageSac 
+SVar:DBCopy:DB$ Clone | Defined$ Remembered | AddTypes$ Illusion | AddTriggers$ PhantasmalImageTgtTrig | AddSVars$ PhantasmalImageSac,Targeting
 SVar:PhantasmalImageTgtTrig:Mode$ BecomesTarget | ValidTarget$ Card.Self | Execute$ PhantasmalImageSac | TriggerDescription$ When this creature becomes the target of a spell or ability, sacrifice it.
 SVar:PhantasmalImageSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:NeedsToPlayVar:Y GE1
+SVar:Y:Count$Valid Creature
+SVar:Targeting:Dies
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_image.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/72.jpg

@@ -7,6 +7,7 @@ A:AB$ ChangeZone | Cost$ 1 U Return<1/Creature.attacking+unblocked> | CostDesc$ 
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseCreature | Static$ True | TriggerDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types.
 SVar:ChooseCreature:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other | SubAbility$ DBCopy | RememberChosen$ True
 SVar:DBCopy:DB$ Clone | Defined$ Remembered | AddTypes$ Ninja
+SVar:NeedsToPlayVar:Y GE2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sakashimas_student.jpg
 SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/24.jpg
