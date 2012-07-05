@@ -9,7 +9,6 @@ SVar:ChooseCreature:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choice
 SVar:DBCopy:DB$ Clone | Defined$ Remembered | AddTypes$ Illusion | AddTriggers$ PhantasmalImageTgtTrig | AddSVars$ PhantasmalImageSac 
 SVar:PhantasmalImageTgtTrig:Mode$ BecomesTarget | ValidTarget$ Card.Self | Execute$ PhantasmalImageSac | TriggerDescription$ When this creature becomes the target of a spell or ability, sacrifice it.
 SVar:PhantasmalImageSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_image.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/72.jpg
