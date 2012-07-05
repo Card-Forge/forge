@@ -36,6 +36,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -861,9 +862,9 @@ public class AbilityFactoryPermanentState {
         final PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
         final Player turn = phase.getPlayerTurn();
 
-        if (turn.isHuman()) {
+        if (turn.isHuman() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             // Tap things down if it's Human's turn
-        } else if (phase.inCombat() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+        } else if (turn.isComputer() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             // Tap creatures down if in combat -- handled in tapPrefTargeting().
         } else if (source.isSorcery()) {
             // Cast it if it's a sorcery.
@@ -1023,13 +1024,28 @@ public class AbilityFactoryPermanentState {
             }
 
             PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
-            if (phase.inCombat() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                // Tap creatures if in combat during AI's turn.
-                CardList creatureList = tapList.filter(CardListFilter.CREATURES);
+            if (phase.isPlayerTurn(AllZone.getComputerPlayer())
+                    && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                // Tap creatures possible blockers before combat during AI's turn.
+                CardList creatureList = tapList.filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return CombatUtil.canBlock(c);
+                    }
+                });
+                if (!AllZone.getCombat().getAttackers().isEmpty() || !ComputerUtil.getPossibleAttackers().isEmpty()) {
+                    choice = CardFactoryUtil.getBestCreatureAI(creatureList);
+                }
+            } else if (phase.isPlayerTurn(AllZone.getHumanPlayer())
+                    && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                // Tap creatures possible blockers before combat during AI's turn.
+                CardList creatureList = tapList.filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return CombatUtil.canAttack(c);
+                    }
+                });
                 choice = CardFactoryUtil.getBestCreatureAI(creatureList);
-            } else if (tapList.getNotType("Creature").size() == 0) {
-                // if only creatures take the best
-                choice = CardFactoryUtil.getBestCreatureAI(tapList);
             } else {
                 choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
             }
