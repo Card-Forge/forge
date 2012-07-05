@@ -866,6 +866,7 @@ public class CardFactoryCreatures {
                 c.addCounter(Counters.P1P1, xCounters);
             }
         };
+        spell.setIsXCost(true);
         // Do not remove SpellAbilities created by AbilityFactory or
         // Keywords.
         card.clearFirstSpell();
