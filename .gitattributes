@@ -8055,6 +8055,7 @@ res/cardsfolder/s/searchlight_geist.txt -text
 res/cardsfolder/s/searing_blaze.txt -text
 res/cardsfolder/s/searing_flesh.txt svneol=native#text/plain
 res/cardsfolder/s/searing_meditation.txt svneol=native#text/plain
+res/cardsfolder/s/searing_spear.txt -text
 res/cardsfolder/s/searing_spear_askari.txt -text
 res/cardsfolder/s/searing_touch.txt svneol=native#text/plain
 res/cardsfolder/s/searing_wind.txt svneol=native#text/plain
@@ -8591,6 +8592,7 @@ res/cardsfolder/s/slumbering_tora.txt svneol=native#text/plain
 res/cardsfolder/s/smallpox.txt svneol=native#text/plain
 res/cardsfolder/s/smash.txt svneol=native#text/plain
 res/cardsfolder/s/smash_to_smithereens.txt svneol=native#text/plain
+res/cardsfolder/s/smelt.txt -text
 res/cardsfolder/s/smite.txt svneol=native#text/plain
 res/cardsfolder/s/smite_the_monstrous.txt -text
 res/cardsfolder/s/smogsteed_rider.txt svneol=native#text/plain
