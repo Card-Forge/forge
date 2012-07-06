@@ -398,40 +398,45 @@ public class AbilityFactorySacrifice {
             tgt.resetTargets();
             if (AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
                 tgt.addTarget(AllZone.getHumanPlayer());
+                return true;
             } else {
                 return false;
             }
-        } else {
-            final String defined = params.get("Defined");
-            if (defined == null) {
-                // Self Sacrifice.
-            } else if (defined.equals("Each")) {
-                // If Sacrifice hits both players:
-                // Only cast it if Human has the full amount of valid
-                // Only cast it if AI doesn't have the full amount of Valid
-                // TODO: Cast if the type is favorable: my "worst" valid is
-                // worse than his "worst" valid
-                final String valid = params.get("SacValid");
-                final String num = params.containsKey("Amount") ? params.get("Amount") : "1";
-                int amount = AbilityFactory.calculateAmount(card, num, sa);
+        }
 
-                final Card source = sa.getSourceCard();
-                if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
-                    // Set PayX here to maximum value.
-                    amount = Math.min(ComputerUtil.determineLeftoverMana(sa), amount);
-                }
+        final String defined = params.get("Defined");
+        if (defined == null) {
+            // Self Sacrifice.
+        } else if (defined.equals("Each") 
+                || (defined.equals("Opponent") && !sa.isTrigger())) {
+            // If Sacrifice hits both players:
+            // Only cast it if Human has the full amount of valid
+            // Only cast it if AI doesn't have the full amount of Valid
+            // TODO: Cast if the type is favorable: my "worst" valid is
+            // worse than his "worst" valid
+            final String valid = params.get("SacValid");
+            final String num = params.containsKey("Amount") ? params.get("Amount") : "1";
+            int amount = AbilityFactory.calculateAmount(card, num, sa);
 
-                CardList humanList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-                humanList = humanList.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-                CardList computerList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                computerList = computerList.getValidCards(valid.split(","), sa.getActivatingPlayer(),
-                        sa.getSourceCard());
+            final Card source = sa.getSourceCard();
+            if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
+                // Set PayX here to maximum value.
+                amount = Math.min(ComputerUtil.determineLeftoverMana(sa), amount);
+            }
 
-                // Since all of the cards have remAIDeck:True, I enabled 1 for 1
-                // (or X for X) trades for special decks
-                if (humanList.size() < amount) {
-                    return false;
-                }
+            CardList humanList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+            humanList = humanList.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            CardList computerList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            if (defined.equals("Opponent")) {
+                computerList = new CardList();
+            }
+            computerList = computerList.getValidCards(valid.split(","), sa.getActivatingPlayer(),
+                    sa.getSourceCard());
+
+            // Since all of the cards have remAIDeck:True, I enabled 1 for 1
+            // (or X for X) trades for special decks
+            if (humanList.size() < amount) {
+                return false;
             }
         }
 
