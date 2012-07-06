@@ -33,6 +33,7 @@ import forge.CardListUtil;
 import forge.Constant;
 import forge.card.CardColor;
 import forge.card.CardManaCost;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCostShard;
 import forge.card.spellability.AbilityMana;
 import forge.deck.Deck;
@@ -106,20 +107,28 @@ public class BoosterDraftAI {
 
         if (this.playerColors.get(player).getColor1().equals("none")
                 && this.playerColors.get(player).getColor2().equals("none")) {
-            //
-            final CardList creatures = aiPlayables.getType("Creature").getColored();
-            creatures.sort(this.bestCreature);
-            // for (int i=0; i<creatures.size(); i++)
-            // System.out.println("creature[" + i + "]: " +
-            // creatures.get(i).getName());
 
-            if (creatures.size() > 0) {
-                pickedCard = creatures.get(creatures.size() - 1);
+            CardList walkers = aiPlayables.getType("Planeswalker");
+            if (walkers.size() > 0) {
+                pickedCard = walkers.get(0);
+                hasPicked = true;
+            }
+
+            if (!hasPicked) {
+                final CardList creatures = aiPlayables.getType("Creature");
+                creatures.sort(this.bestCreature);
+                debugCreatures(creatures);
+
+                if (creatures.size() > 0) {
+                    pickedCard = creatures.get(0);
+                    hasPicked = true;
+                }
+            }
+            if (hasPicked && !pickedCard.isColorless()) {
                 this.playerColors.get(player).setColor1(pickedCard.getColor().get(0).toStringArray().get(0));
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println("Player[" + player + "] Color1: " + this.playerColors.get(player).getColor1());
                 }
-
                 this.playerColors.get(player).setMana1(
                         this.playerColors.get(player).colorToMana(this.playerColors.get(player).getColor1()));
 
@@ -135,19 +144,27 @@ public class BoosterDraftAI {
                     this.playerColors.get(player).setMana2(
                             this.playerColors.get(player).colorToMana(this.playerColors.get(player).getColor2()));
                 }
-
-                hasPicked = true;
             }
         } else if (!this.playerColors.get(player).getColor1().equals("none")
                 && this.playerColors.get(player).getColor2().equals("none")) {
-            final CardList creatures = aiPlayables.getType("Creature").getMonoColored();
-            creatures.sort(this.bestCreature);
-            // for (int i=0; i<creatures.size(); i++)
-            // System.out.println("creature[" + i + "]: " +
-            // creatures.get(i).getName());
 
-            if (creatures.size() > 0) {
-                pickedCard = creatures.get(creatures.size() - 1);
+            CardList walkers = aiPlayables.getType("Planeswalker");
+            if (walkers.size() > 0) {
+                pickedCard = walkers.get(0);
+                hasPicked = true;
+            }
+
+            if (!hasPicked) {
+                final CardList creatures = aiPlayables.getType("Creature").getMonoColored(true);
+                creatures.sort(this.bestCreature);
+                debugCreatures(creatures);
+
+                if (creatures.size() > 0) {
+                    pickedCard = creatures.get(0);
+                    hasPicked = true;
+                }
+            }
+            if (hasPicked && !pickedCard.isColorless()) {
                 this.playerColors.get(player).setColor2(pickedCard.getColor().get(0).toStringArray().get(0));
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).getColor2());
@@ -155,7 +172,6 @@ public class BoosterDraftAI {
 
                 this.playerColors.get(player).setMana2(
                         this.playerColors.get(player).colorToMana(this.playerColors.get(player).getColor2()));
-                hasPicked = true;
             }
         } else {
             CardList typeList;
@@ -165,10 +181,12 @@ public class BoosterDraftAI {
                     this.playerColors.get(player).getColor2());
 
             if (colorList.size() > 0) {
+                // Since we want about 15 creatures and 7 non-creatures in our deck, we want to pick
+                // about 2 creatures for every 1 non-creature. So put 2 creatures in our wouldPick
+                // list, and 1 non-creature.
                 typeList = colorList.getType("Creature");
                 if (typeList.size() > 0) {
                     typeList.sort(this.bestCreature);
-                    typeList.reverse();
                     wouldPick.add(typeList.get(0));
                     if (typeList.size() > 1) {
                         wouldPick.add(typeList.get(1));
@@ -177,12 +195,8 @@ public class BoosterDraftAI {
 
                 typeList = colorList.getType("Instant");
                 typeList.addAll(colorList.getType("Sorcery"));
-                if (typeList.size() > 0) {
-                    CardListUtil.sortCMC(typeList);
-                    wouldPick.add(typeList.get(typeList.size() / 2));
-                }
-
-                typeList = colorList.getType("Enchantment");
+                typeList.addAll(colorList.getType("Enchantment"));
+                typeList.addAll(colorList.getType("Artifact"));
                 if (typeList.size() > 0) {
                     CardListUtil.sortCMC(typeList);
                     wouldPick.add(typeList.get(0));
@@ -190,13 +204,9 @@ public class BoosterDraftAI {
 
                 typeList = colorList.getType("Planeswalker");
                 if (typeList.size() > 0) {
-                    wouldPick.add(typeList.get(0));
-                }
-
-                typeList = colorList.getType("Artifact");
-                if (typeList.size() > 0) {
-                    CardListUtil.sortCMC(typeList);
-                    wouldPick.add(typeList.get(0));
+                    // just take it...
+                    pickedCard = typeList.get(0);
+                    hasPicked = true;
                 }
 
             } else {
@@ -240,16 +250,14 @@ public class BoosterDraftAI {
                     }
                 }
             }
-
         }
+
         if (!hasPicked) {
             final Random r = new Random();
 
             if (wouldPick.size() > 0) {
-                wouldPick.shuffle();
                 pickedCard = wouldPick.get(r.nextInt(wouldPick.size()));
             } else {
-                chooseFrom.shuffle();
                 pickedCard = chooseFrom.get(r.nextInt(chooseFrom.size()));
             }
 
@@ -382,7 +390,6 @@ public class BoosterDraftAI {
         int nCreatures = 15;
 
         creatures.sort(this.bestCreature);
-        creatures.reverse();
 
         // 1.Add up to 15 on-color creatures
         int i = 0;
@@ -402,20 +409,19 @@ public class BoosterDraftAI {
             i++;
         }
 
-        /*CardList otherCreatures = aiPlayables.getType("Creature");
-        while ((nCreatures > 1) && (otherCreatures.size() > 1)) {
-            final Card c = otherCreatures.get(MyRandom.getRandom().nextInt(otherCreatures.size() - 1));
-            outList.add(c);
-            cardsNeeded--;
-            nCreatures--;
-            aiPlayables.remove(c);
-
-            otherCreatures = aiPlayables.getType("Creature");
-
-            if (Constant.Runtime.DEV_MODE[0]) {
-                System.out.println("AddCreature: " + c.getName() + " (" + c.getManaCost() + ")");
-            }
-        }*/
+        /*
+         * CardList otherCreatures = aiPlayables.getType("Creature"); while
+         * ((nCreatures > 1) && (otherCreatures.size() > 1)) { final Card c =
+         * otherCreatures.get(MyRandom.getRandom().nextInt(otherCreatures.size()
+         * - 1)); outList.add(c); cardsNeeded--; nCreatures--;
+         * aiPlayables.remove(c);
+         * 
+         * otherCreatures = aiPlayables.getType("Creature");
+         * 
+         * if (Constant.Runtime.DEV_MODE[0]) {
+         * System.out.println("AddCreature: " + c.getName() + " (" +
+         * c.getManaCost() + ")"); } }
+         */
 
         CardList others = aiPlayables.getNotType("Creature").getNotType("Land")
                 .getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
@@ -443,7 +449,8 @@ public class BoosterDraftAI {
         }
 
         i = 0;
-        // 3.Try to fill up to 22 with on-color creatures cards (if more than 15 are present)
+        // 3.Try to fill up to 22 with on-color creatures cards (if more than 15
+        // are present)
         while (cardsNeeded > 0 && (0 < creatures.size())) {
             final Card c = creatures.get(0);
 
@@ -459,10 +466,10 @@ public class BoosterDraftAI {
             i++;
         }
 
-        CardList nonLands = aiPlayables.getNotType("Land")
-                .getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
+        CardList nonLands = aiPlayables.getNotType("Land").getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
 
-        // 4. If there are still on-color cards and the average cmc is low add a 23rd card.
+        // 4. If there are still on-color cards and the average cmc is low add a
+        // 23rd card.
         if (cardsNeeded == 0 && CardListUtil.getAverageCMC(outList) < 3 && !nonLands.isEmpty()) {
             Card c = nonLands.get(0);
             outList.add(c);
@@ -470,7 +477,8 @@ public class BoosterDraftAI {
             landsNeeded--;
         }
 
-        // 5. If there are still less than 22 non-land cards add off-color cards.
+        // 5. If there are still less than 22 non-land cards add off-color
+        // cards.
         ii = 0;
         CardList z = aiPlayables.getNotType("Land");
         while ((cardsNeeded > 0) && (z.size() > 1)) {
@@ -610,7 +618,7 @@ public class BoosterDraftAI {
                 outList.add(c);
                 aiPlayables.remove(c);
             } else {
-                //if no playable cards remain fill up with basic lands
+                // if no playable cards remain fill up with basic lands
                 for (i = 0; i < 5; i++) {
                     if (clrCnts[i].getCount() > 0) {
                         final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(),
@@ -754,31 +762,13 @@ public class BoosterDraftAI {
         @Override
         public int compare(final Card a, final Card b) {
             int cmcA = a.getCMC();
-            if (cmcA == 0) {
-                cmcA = 1;
-            }
-            cmcA *= 10;
+            cmcA *= 30; // average creature from evaluateCreature comes out to 30 * CMC
 
             int cmcB = b.getCMC();
-            if (cmcB == 0) {
-                cmcB = 1;
-            }
-            cmcB *= 10;
+            cmcB *= 30;
 
-            final int attA = a.getBaseAttack() * 10;
-            final int attB = b.getBaseAttack() * 10;
-
-            final int defA = a.getBaseDefense() * 10;
-            final int defB = b.getBaseDefense() * 10;
-
-            final int keyA = a.getKeyword().size() * 10;
-            final int keyB = b.getKeyword().size() * 10;
-
-            final int abA = a.getSpellAbility().length * 10;
-            final int abB = b.getSpellAbility().length * 10;
-
-            final int trgA = a.getTriggers().size() * 10;
-            final int trgB = b.getTriggers().size() * 10;
+            int evalA = CardFactoryUtil.evaluateCreature(a) - 100; // evaluateCreature starts at 100
+            int evalB = CardFactoryUtil.evaluateCreature(b) - 100;
 
             int rarA = 0;
             int rarB = 0;
@@ -803,11 +793,19 @@ public class BoosterDraftAI {
                 rarB = 8;
             }
 
-            final int scoreA = ((attA + defA) / cmcA) + keyA + abA + trgA + rarA;
-            final int scoreB = ((attB + defB) / cmcB) + keyB + abB + trgB + rarB;
+            final int scoreA = evalA - cmcA + rarA;
+            final int scoreB = evalB - cmcB + rarB;
 
-            return scoreA - scoreB;
+            return scoreB - scoreA;
         }
     };
+
+    private static void debugCreatures(CardList creatures) {
+        if (Constant.Runtime.DEV_MODE[0]) {
+            for (Card c : creatures) {
+                System.out.println(c.toString() + ": Cost " + c.getCMC() + ", Eval " + CardFactoryUtil.evaluateCreature(c));
+            }
+        }
+    }
 } // BoosterDraftAI()
 

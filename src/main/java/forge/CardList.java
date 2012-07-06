@@ -938,14 +938,15 @@ public class CardList implements Iterable<Card> {
      * <p>
      * getMonoColored.
      * </p>
+     * @param includeColorless should colorless cards be included?
      * 
      * @return a {@link forge.CardList} object.
      */
-    public final CardList getMonoColored() {
+    public final CardList getMonoColored(final boolean includeColorless) {
         return this.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                return (CardUtil.getColors(c).size() == 1 && !c.isColorless());
+                return (CardUtil.getColors(c).size() == 1 && (includeColorless || !c.isColorless()));
             }
         });
     }

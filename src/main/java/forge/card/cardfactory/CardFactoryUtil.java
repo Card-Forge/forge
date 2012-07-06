@@ -592,6 +592,9 @@ public class CardFactoryUtil {
         if (c.hasStartOfKeyword("Vanishing")) {
             value -= 20; // not used atm
         }
+        if (c.getSVar("Targeting").equals("Dies")) {
+            value -= 25;
+        }
 
         for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.isAbility()) {
