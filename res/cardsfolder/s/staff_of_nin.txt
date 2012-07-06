@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_nin.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/217.jpg
+Oracle:At the beginning of your upkeep, draw a card.\n{T}: Staff of Nin deals 1 damage to target creature or player.
 End

@@ -8,4 +8,5 @@ SVar:TrigPut:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select t
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bond_beetle.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/161.jpg
+Oracle:When Bond Beetle enters the battlefield, put a +1/+1 counter on target creature.
 End

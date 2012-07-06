@@ -9,4 +9,5 @@ SVar:BuffedBy:Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crusader_of_odric.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/10.jpg
+Oracle:Crusader of Odric's power and toughness are each equal to the number of creatures you control.
 End

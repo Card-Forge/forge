@@ -10,4 +10,5 @@ SVar:X:Count$Valid Plains.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_aven.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/42.jpg
+Oracle:Flying\nArctic Aven gets +1/+1 as long as you control a Plains.\n{W}: Arctic Aven gains lifelink until end of turn. (Damage dealt by this creature also causes you to gain that much life.)
 End

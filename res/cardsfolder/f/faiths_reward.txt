@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 3 W | Origin$ Graveyard | Destination$ Battlefield | De
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faiths_reward.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/14.jpg
+Oracle:Return to the battlefield all permanent cards in your graveyard that were put there from the battlefield this turn.
 End

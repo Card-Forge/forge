@@ -8,4 +8,5 @@ SVar:TrigPumpCurse:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_battle_jester.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/135.jpg
+Oracle:Whenever you cast a red spell, target creature can't block this turn.
 End

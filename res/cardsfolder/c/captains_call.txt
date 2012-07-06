@@ -6,4 +6,5 @@ A:SP$ Token | Cost$ 3 W | TokenAmount$ 3 | TokenName$ Soldier | TokenTypes$ Crea
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/captains_call.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/9.jpg
+Oracle:Put three 1/1 white Soldier creature tokens onto the battlefield.
 End

@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Tgt$ TgtC | NumAtt$ 2 | NumDef$ 2 | KW$ Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battleflight_eagle.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/7.jpg
+Oracle:Flying\nWhen Battleflight Eagle enters the battlefield, target creature gets +2/+2 and gains flying until end of turn.
 End

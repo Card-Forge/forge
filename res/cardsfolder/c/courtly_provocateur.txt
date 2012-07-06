@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/courtly_provocateur.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/46.jpg
+Oracle:{T}: Target creature attacks this turn if able.\n{T}: Target creature blocks this turn if able.
 End

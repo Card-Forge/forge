@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serpents_gift.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/190.jpg
+Oracle:Target creature gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)
 End

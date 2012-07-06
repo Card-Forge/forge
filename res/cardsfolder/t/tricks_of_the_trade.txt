@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddHiddenKey
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tricks_of_the_trade.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/74.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+0 and is unblockable.
 End

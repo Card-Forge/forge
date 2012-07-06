@@ -9,4 +9,5 @@ SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_shade.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/98.jpg
+Oracle:When Liliana's Shade enters the battlefield, you may search your library for a Swamp card, reveal it, put it into your hand, then shuffle your library.\n{B}: Liliana's Shade gets +1/+1 until end of turn.
 End

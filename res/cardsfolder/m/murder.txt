@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murder.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/101.jpg
+Oracle:Destroy target creature.
 End

@@ -7,4 +7,5 @@ K:Lifelink
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_sunstriker.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/2.jpg
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)
 End

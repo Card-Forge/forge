@@ -8,4 +8,5 @@ SVar:SelfBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destinati
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/void_stalker.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/77.jpg
+Oracle:{2}{U}, {T}: Put Void Stalker and target creature on top of their owners' libraries, then those players shuffle their libraries.
 End

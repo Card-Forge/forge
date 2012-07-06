@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/omniscience.jpg
 SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/63.jpg
+Oracle:You may cast nonland cards from your hand without paying their mana costs.
 End

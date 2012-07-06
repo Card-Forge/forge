@@ -9,4 +9,5 @@ A:AB$ Pump | Cost$ 1 U | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME is 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbor_bandit.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/95.jpg
+Oracle:Harbor Bandit gets +1/+1 as long as you control an Island.\n{1}{U}: Harbor Bandit is unblockable this turn.
 End

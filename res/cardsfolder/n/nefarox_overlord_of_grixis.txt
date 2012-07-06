@@ -11,4 +11,5 @@ SVar:HasAttackEffect:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nefarox_overlord_of_grixis.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/103.jpg
+Oracle:Flying\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nWhenever Nefarox, Overlord of Grixis attacks alone, defending player sacrifices a creature.
 End

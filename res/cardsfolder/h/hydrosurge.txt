@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hydrosurge.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/54.jpg
+Oracle:Target creature gets -5/-0 until end of turn.
 End

@@ -7,4 +7,5 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creatur
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vile_rebirth.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/115.jpg
+Oracle:Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.
 End

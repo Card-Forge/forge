@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_revelation.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/87.jpg
+Oracle:Search your library for up to X cards and put those cards into your hand. Then shuffle your library.
 End

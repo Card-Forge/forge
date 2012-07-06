@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/downpour.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/48.jpg
+Oracle:Tap up to three target creatures.
 End

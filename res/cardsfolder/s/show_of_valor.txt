@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/show_of_valor.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/34.jpg
+Oracle:Target creature gets +2/+4 until end of turn.
 End
