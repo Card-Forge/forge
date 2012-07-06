@@ -30,6 +30,7 @@ def initSets():
 	forgeSets.append('M10')
 	forgeSets.append('M11')
 	forgeSets.append('M12')
+	forgeSets.append('M13')
 
 	# Multiplayer Sets
 	forgeSets.append('COM')
