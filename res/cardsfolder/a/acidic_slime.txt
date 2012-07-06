@@ -10,6 +10,7 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_slime.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/161.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/165.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/159.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/161.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/140.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen Acidic Slime enters the battlefield, destroy target artifact, enchantment, or land.

@@ -7,6 +7,7 @@ K:Defender
 K:Exalted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardians_of_akrasa.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/18.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/12.jpg
 Oracle:Defender\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
 End

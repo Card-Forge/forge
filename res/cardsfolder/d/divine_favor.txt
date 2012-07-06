@@ -9,6 +9,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_favor.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/11.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/14.jpg
 Oracle:Enchant creature\nWhen Divine Favor enters the battlefield, you gain 3 life.\nEnchanted creature gets +1/+3.
 End

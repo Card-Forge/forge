@@ -7,6 +7,7 @@ SVar:X:Count$TypeYouCtrl.Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bountiful_harvest.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/170.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/163.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/166.jpg
 Oracle:You gain 1 life for each land you control.
 End

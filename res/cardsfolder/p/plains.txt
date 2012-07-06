@@ -37,12 +37,14 @@ SetInfo:SHM|Land|http://magiccards.info/scans/en/shm/282.jpg|4
 SetInfo:LEA|Land|http://magiccards.info/scans/en/al/285.jpg|2
 SetInfo:LEB|Land|http://magiccards.info/scans/en/be/289.jpg|3
 SetInfo:NPH|Land|http://magiccards.info/scans/en/nph/166.jpg|2
+SetInfo:PC2|Land|http://magiccards.info/scans/en/pc2/132.jpg|5
 SetInfo:INV|Land|http://magiccards.info/scans/en/in/331.jpg|4
 SetInfo:MMQ|Land|http://magiccards.info/scans/en/mm/331.jpg|4
 SetInfo:AVR|Land|http://magiccards.info/scans/en/avr/230.jpg|3
 SetInfo:ALA|Land|http://magiccards.info/scans/en/ala/230.jpg|4
 SetInfo:M11|Land|http://magiccards.info/scans/en/m11/230.jpg|4
 SetInfo:M10|Land|http://magiccards.info/scans/en/m10/230.jpg|4
+SetInfo:M13|Land|http://magiccards.info/scans/en/m13/230.jpg|4
 SetInfo:M12|Land|http://magiccards.info/scans/en/m12/230.jpg|4
 SetInfo:LRW|Land|http://magiccards.info/scans/en/lw/282.jpg|4
 SetInfo:2ED|Land|http://magiccards.info/scans/en/un/289.jpg|3

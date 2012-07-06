@@ -7,6 +7,7 @@ K:Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duskdale_wurm.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/170.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/166.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/67.jpg
 Oracle:Trample (If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)
 End

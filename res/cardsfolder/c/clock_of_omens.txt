@@ -6,6 +6,7 @@ A:AB$ Untap | Cost$ tapXType<2/Artifact> | ValidTgts$ Artifact | TgtPrompt$ Sele
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clock_of_omens.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/202.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/110.jpg
 Oracle:Tap two untapped artifacts you control: Untap target artifact.
 End

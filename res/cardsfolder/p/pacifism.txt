@@ -15,9 +15,10 @@ SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/246.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/31.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/23.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/22.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/33.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/24.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/28.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/47.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/236.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/33.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block.
 End

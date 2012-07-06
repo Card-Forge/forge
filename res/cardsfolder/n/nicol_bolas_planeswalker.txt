@@ -10,6 +10,7 @@ SVar:DBDiscard:DB$Discard | Defined$ Targeted | NumCards$ 7 | Mode$ TgtChoose | 
 SVar:DBSac:DB$Sacrifice | Defined$ Targeted | SacValid$ Permanent | Amount$ 7
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nicol_bolas_planeswalker.jpg
+SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/199.jpg
 SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/120.jpg
 Oracle:[+3] Destroy target noncreature permanent.\n[-2] Gain control of target creature.\n[-9] Nicol Bolas, Planeswalker deals 7 damage to target player. That player discards seven cards, then sacrifices seven permanents.
 End

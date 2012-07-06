@@ -8,6 +8,7 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_of_wits.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/69.jpg
+SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/44.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/65.jpg
 Oracle:At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.
 End

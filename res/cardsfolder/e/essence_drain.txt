@@ -6,6 +6,7 @@ A:SP$ DealDamage | Cost$ 4 B | Tgt$ TgtCP | NumDmg$ 3 | SubAbility$ DBGainLife |
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_drain.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/93.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/43.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/141.jpg
 Oracle:Essence Drain deals 3 damage to target creature or player and you gain 3 life.

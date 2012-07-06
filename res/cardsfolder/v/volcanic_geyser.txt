@@ -6,7 +6,8 @@ A:SP$ DealDamage | Cost$ X R R | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellD
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_geyser.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/215.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/154.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/202.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/215.jpg
 Oracle:Volcanic Geyser deals X damage to target creature or player.
 End

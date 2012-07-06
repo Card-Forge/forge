@@ -10,6 +10,8 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:SacMe:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rancor.jpg
+SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/76.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/185.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/110.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+0 and has trample.\nWhen Rancor is put into a graveyard from the battlefield, return Rancor to its owner's hand.
 End

@@ -6,5 +6,6 @@ PT:3/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_courser.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/172.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/164.jpg
 Oracle:
 End

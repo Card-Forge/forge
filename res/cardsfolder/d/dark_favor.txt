@@ -9,6 +9,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_favor.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/86.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/89.jpg
 Oracle:Enchant creature\nWhen Dark Favor enters the battlefield, you lose 1 life.\nEnchanted creature gets +3/+1.
 End

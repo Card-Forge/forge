@@ -9,6 +9,7 @@ SVar:TrigReturn:DB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | 
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139414.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/22.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/27.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/23.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/34.jpg

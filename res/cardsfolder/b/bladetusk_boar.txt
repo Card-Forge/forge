@@ -6,6 +6,7 @@ PT:3/2
 K:Intimidate
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladetusk_boar.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/121.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/118.jpg
 Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)
 End
