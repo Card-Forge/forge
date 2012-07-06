@@ -122,6 +122,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private CardList blockedThisTurn = new CardList();
     private CardList blockedByThisTurn = new CardList();
 
+    private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
     private boolean tapped = false;
     private boolean sickness = true; // summoning sickness
@@ -8963,6 +8964,20 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public void setEffectSource(Card src) {
         this.effectSource = src;
+    }
+
+    /**
+     * @return the startsGameInPlay
+     */
+    public boolean isStartsGameInPlay() {
+        return startsGameInPlay;
+    }
+
+    /**
+     * @param startsGameInPlay0 the startsGameInPlay to set
+     */
+    public void setStartsGameInPlay(boolean startsGameInPlay) {
+        this.startsGameInPlay = startsGameInPlay;
     }
 
 } // end Card class

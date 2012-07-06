@@ -73,11 +73,13 @@ public class GameNew {
         for (final Card c : human) {
             AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).add(c);
             c.setSickness(true);
+            c.setStartsGameInPlay(true);
         }
 
         for (final Card c : computer) {
             AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).add(c);
             c.setSickness(true);
+            c.setStartsGameInPlay(true);
         }
 
         GameNew.actuateGame(humanDeck, computerDeck);

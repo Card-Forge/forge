@@ -79,9 +79,10 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleUntap() {
-        final Player turn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
+        final Player turn = ph.getPlayerTurn();
 
-        Singletons.getModel().getGameState().getPhaseHandler().turnReset();
+        ph.turnReset();
         Singletons.getModel().getGameSummary().notifyNextTurn();
         CMessage.SINGLETON_INSTANCE.updateGameInfo();
 
@@ -89,11 +90,10 @@ public class PhaseUtil {
         AllZone.getCombat().setAttackingPlayer(turn);
         AllZone.getCombat().setDefendingPlayer(turn.getOpponent());
 
-        // For tokens a player starts the game with they don't recover from Sum.
-        // Sickness on first turn
-        if (Singletons.getModel().getGameState().getPhaseHandler().getTurn() > 0) {
-            final CardList list = turn.getCardsIncludePhasingIn(ZoneType.Battlefield);
-            for (final Card c : list) {
+        // Tokens starting game in play now actually suffer from Sum. Sickness again
+        final CardList list = turn.getCardsIncludePhasingIn(ZoneType.Battlefield);
+        for (final Card c : list) {
+            if (turn.getTurn() > 0 || !c.isStartsGameInPlay()) {
                 c.setSickness(false);
             }
         }
