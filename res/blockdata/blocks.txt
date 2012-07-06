@@ -46,3 +46,4 @@ Index:40|Set0:SOM|Set1:MBS|Set2:NPH|Name:Scars of Mirrodin|DraftPacks:3|LandSetC
 Index:41|Set0:M12|Name:Magic 2012|DraftPacks:3|LandSetCode:M12|SealedPacks:6
 Index:42|Set0:ISD|Set1:DKA|Name:Innistrad|DraftPacks:3|LandSetCode:ISD|SealedPacks:6
 Index:43|Set0:AVR|Name:Avacyn Restored|DraftPacks:3|LandSetCode:AVR|SealedPacks:6
+Index:44|Set0:M13|Name:Magic 2013|DraftPacks:3|LandSetCode:M13|SealedPacks:6

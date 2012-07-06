@@ -44,3 +44,4 @@ Set:M12|LandSet:M12|Boosters:9|BasicLands:80
 Set:ISD|LandSet:ISD|Boosters:9|BasicLands:60
 Set:DKA|LandSet:ISD|Boosters:9|BasicLands:60
 Set:AVR|LandSet:AVR|Boosters:9|BasicLands:60
+Set:M12|LandSet:M13|Boosters:9|BasicLands:80
