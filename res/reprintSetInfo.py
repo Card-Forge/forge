@@ -63,6 +63,7 @@ setAbbr = sys.argv[1]
 
 cardDict = {}
 setStr = 'SetInfo:'
+oracleStr = 'Oracle:'
 nameList = []
 getCardsInSet()
 
@@ -100,7 +101,7 @@ for fileName in nameList:
             break
 
         # Skip SetInfo lines
-        if line.find(setStr) == -1:
+        if line.find(setStr) == -1 and line.find(oracleStr) == -1:
             card.lines += line +'\n'
 
         line = file.readline().strip()
