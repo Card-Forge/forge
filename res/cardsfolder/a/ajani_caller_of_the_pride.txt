@@ -1,0 +1,14 @@
+Name:Ajani, Caller of the Pride
+ManaCost:1 W W
+Types:Planeswalker Ajani
+Text:no text
+Loyalty:4
+A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Put a +1/+1 counter on up to one target creature.
+A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying & Double Strike | SpellDescription$ Target creature gains flying and double strike until end of turn.
+A:AB$ Token | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | TokenAmount$ X | References$ X | TokenName$ Cat | TokenTypes$ Creature,Cat | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put X 2/2 white Cat creature tokens onto the battlefield, where X is your life total.
+SVar:X:Count$YourLifeTotal
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ajani_caller_of_the_pride.jpg
+SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/1.jpg
+Oracle:[+1] Put a +1/+1 counter on up to one target creature.\n[-3] Target creature gains flying and double strike until end of turn.\n[-8] Put X 2/2 white Cat creature tokens onto the battlefield, where X is your life total.
+End
