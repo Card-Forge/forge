@@ -1,0 +1,10 @@
+Name:Downpour
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$ Tap | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select up to three target creatures | TargetMin$ 0 | TargetMax$ 3 | SpellDescription$ Tap up to three target creatures.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/downpour.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/48.jpg
+End

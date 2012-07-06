@@ -1,0 +1,12 @@
+Name:Prized Elephant
+ManaCost:3 W
+Types:Creature Elephant
+Text:no text
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a Forest.
+A:AB$ Pump | Cost$ G | KW$ Trample | SpellDescription$ CARDNAME gets trample until end of turn.
+SVar:X:Count$Valid Forest.YouCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prized_elephant.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/27.jpg
+End

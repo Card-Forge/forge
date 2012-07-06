@@ -1,0 +1,9 @@
+Name:Serpent's Gift
+ManaCost:2 G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | SpellDescription$ Target creature gains deathtouch until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serpents_gift.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/190.jpg
+End

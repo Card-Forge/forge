@@ -1,0 +1,9 @@
+Name:Mind Sculpt
+ManaCost:1 U
+Types:Sorcery
+Text:no text
+A:SP$ Mill | Cost$ 1 U | NumCards$ 7 | ValidTgts$ Opponent | SpellDescription$ Target opponent puts the top seven cards of his or her library into his or her graveyard.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_sculpt.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/61.jpg
+End

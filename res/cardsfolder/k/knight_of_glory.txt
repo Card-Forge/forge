@@ -1,0 +1,11 @@
+Name:Knight of Glory
+ManaCost:1 W
+Types:Creature Human Knight
+Text:no text
+PT:2/1
+K:Exalted
+K:Protection from black
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_glory.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/21.jpg
+End

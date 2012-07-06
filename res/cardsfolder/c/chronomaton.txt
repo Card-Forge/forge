@@ -1,0 +1,10 @@
+Name:Chronomaton
+ManaCost:1
+Types:Artifact Creature Golem
+Text:no text
+PT:1/1
+A:AB$ PutCounter | Cost$ 1 T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chronomaton.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/201.jpg
+End

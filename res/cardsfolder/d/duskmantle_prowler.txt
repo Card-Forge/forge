@@ -1,0 +1,11 @@
+Name:Duskmantle Prowler
+ManaCost:3 B
+Types:Creature Vampire Rogue
+Text:no text
+PT:2/2
+K:Exalted
+K:Haste
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/duskmantle_prowler.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/91.jpg
+End

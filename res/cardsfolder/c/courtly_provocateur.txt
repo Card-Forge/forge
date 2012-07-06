@@ -1,0 +1,12 @@
+Name:Courtly Provocateur
+ManaCost:2 U
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME attacks each turn if able. | IsCurse$ True | SpellDescription$ Target creature attacks this turn if able.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME blocks each turn if able. | SpellDescription$ Target creature blocks this turn if able.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/courtly_provocateur.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/46.jpg
+End

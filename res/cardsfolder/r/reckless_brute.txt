@@ -1,0 +1,11 @@
+Name:Reckless Brute
+ManaCost:2 R
+Types:Creature Ogre Warrior
+Text:no text
+PT:3/1
+K:Haste
+K:CARDNAME attacks each turn if able.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_brute.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/144.jpg
+End

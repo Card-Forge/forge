@@ -1,0 +1,12 @@
+Name:Jace's Phantasm
+ManaCost:U
+Types:Creature Illusion
+Text:no text
+PT:1/1
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 4 | CheckSVar$ X | SVarCompare$ GE10 | References$ X | Description$ CARDNAME gets +4/+4 as long as an opponent has ten or more cards in his or her graveyard.
+SVar:X:Count$InOppYard
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_phantasm.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/57.jpg
+End

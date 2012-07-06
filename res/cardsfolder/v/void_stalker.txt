@@ -1,0 +1,11 @@
+Name:Void Stalker
+ManaCost:1 U
+Types:Creature Elemental
+Text:no text
+PT:2/1
+A:AB$ ChangeZone | Cost$ 2 U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Shuffle$ True | SubAbility$ SelfBounce | SpellDescription$ Put CARDNAME and target creature on top of their owner's libraries, then those players shuffle their libraries.
+SVar:SelfBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Shuffle$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/void_stalker.jpg
+SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/77.jpg
+End

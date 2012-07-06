@@ -1,0 +1,12 @@
+Name:Crimson Muckwader
+ManaCost:1 R
+Types:Creature Lizard
+Text:no text
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a Swamp.
+A:AB$ Pump | Cost$ 2 B | KW$ Regenerate | SpellDescription$ Regenerate CARDNAME.
+SVar:X:Count$Valid Swamp.YouCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_muckwader.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/127.jpg
+End

@@ -1,0 +1,9 @@
+Name:Murder
+ManaCost:1 B B
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/murder.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/101.jpg
+End

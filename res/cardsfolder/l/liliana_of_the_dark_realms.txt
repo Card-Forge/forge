@@ -1,0 +1,18 @@
+Name:Liliana of the Dark Realms
+ManaCost:2 B B
+Types:Planeswalker Liliana
+Text:no text
+Loyalty:3
+A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Origin$ Library | Destination$ Hand | Planeswalker$ True | NumCards$ 1 | ChangeType$ Swamp | Mandatory$ True | SpellDescription$ Search your library for a swamp card, reveal it, and put it into your hand. Then shuffle your library.
+A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ ABChoice |  SpellDescription$ Target creature gets +X/+X or -X/-X until end of turn, where X is the number of swamps you control. | StackDescription$ Target creature gets +X/+X or -X/-X until end of turn, where X is the number of swamps you control.
+A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Liliana Of The Dark Realms Emblem | Image$ liliana_of_the_dark_realms_emblem | StaticAbilities$ SwampBoost | SVars$ BlackTap | Stackable$ False | Duration$ Permanent | SpellDescription$ You get an emblem with "Swamps you control have 'T:Add BBBB to your mana pool.'".
+SVar:X:Count$Valid Swamp.YouCtrl
+SVar:ABChoice:DB$ GenericChoice | Defined$ You | Cost$ 0 | Choices$ ABPump1,ABPump2
+SVar:ABPump1:DB$ Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ +X | NumDef$ +X | References$ X | ChoiceDescription$ +X/+X
+SVar:ABPump2:DB$ Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ -X | NumDef$ -X | References$ X | ChoiceDescription$ -X/-X
+SVar:SwampBoost:Mode$ Continuous | Affected$ Swamp.YouCtrl | AddAbility$ BlackTap | Description$ Swamps you control have 'T:Add BBBB to your mana pool.'
+SVar:BlackTap:AB$ Mana | Cost$ T | Produced$ B | Amount$ 4 | SpellDescription$ Add B B B B to your mana pool.
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/liliana_of_the_dark_realms.jpg
+SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/97.jpg
+End

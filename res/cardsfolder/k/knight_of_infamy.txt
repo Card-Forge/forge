@@ -1,0 +1,11 @@
+Name:Knight of Infamy
+ManaCost:1 B
+Types:Creature Human Knight
+Text:no text
+PT:2/1
+K:Exalted
+K:Protection from white
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_infamy.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/96.jpg
+End

@@ -1,0 +1,12 @@
+Name:Sublime Archangel
+ManaCost:2 W W
+Types:Creature Angel
+Text:no text
+PT:4/3
+K:Flying
+K:Exalted
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Exalted | Description$ Other creatures you control have Exalted.
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sublime_archangel.jpg
+SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/36.jpg
+End

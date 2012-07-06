@@ -1,0 +1,12 @@
+Name:Harbor Bandit
+ManaCost:2 B
+Types:Creature Human Rogue
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control an Island.
+SVar:X:Count$Valid Island.YouCtrl
+A:AB$ Pump | Cost$ 1 U | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME is unblockable this turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/harbor_bandit.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/95.jpg
+End

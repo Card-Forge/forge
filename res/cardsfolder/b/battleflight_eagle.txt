@@ -1,0 +1,12 @@
+Name:Battleflight Eagle
+ManaCost:4 W
+Types:Creature Bird
+Text:no text
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +2/+2 and gains flying until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Tgt$ TgtC | NumAtt$ 2 | NumDef$ 2 | KW$ Flying
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/battleflight_eagle.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/7.jpg
+End
