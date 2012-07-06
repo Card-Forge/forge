@@ -5115,6 +5115,7 @@ res/cardsfolder/k/krark_clan_ironworks.txt svneol=native#text/plain
 res/cardsfolder/k/krark_clan_ogre.txt svneol=native#text/plain
 res/cardsfolder/k/krark_clan_shaman.txt svneol=native#text/plain
 res/cardsfolder/k/krark_clan_stoker.txt svneol=native#text/plain
+res/cardsfolder/k/krenkos_command.txt -text
 res/cardsfolder/k/kresh_the_bloodbraided.txt svneol=native#text/plain
 res/cardsfolder/k/kris_mage.txt svneol=native#text/plain
 res/cardsfolder/k/krond_the_dawn_clad.txt -text
@@ -7318,6 +7319,7 @@ res/cardsfolder/r/rancor.txt svneol=native#text/plain
 res/cardsfolder/r/ranger_en_vec.txt svneol=native#text/plain
 res/cardsfolder/r/ranger_of_eos.txt svneol=native#text/plain
 res/cardsfolder/r/rangers_guile.txt -text
+res/cardsfolder/r/rangers_path.txt -text
 res/cardsfolder/r/rank_and_file.txt svneol=native#text/plain
 res/cardsfolder/r/ransack.txt svneol=native#text/plain
 res/cardsfolder/r/rapacious_one.txt svneol=native#text/plain
