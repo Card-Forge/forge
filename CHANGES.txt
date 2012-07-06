@@ -5,7 +5,12 @@ Forge Beta: 0#-##-2012 ver 1.2.10
 10### cards in total.
 
 
+A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there are four remaining issues that we hope will be addressed in the near future.
 
+1. Copies of tokens cause a crash when they leave play.
+2. Leave play triggers don't work correct for clones.
+3. Copies of equipment made via Copy Artifact or Phyrexian Metamorph cannot be equipped.
+4. Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
 
 --
 
@@ -120,20 +125,24 @@ Fixes/Features:
 - reintegrating CloneFix branch into Trunk
 - add some AI SVars to clones
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed canPay in CostRemoveCounter.
+- Added a little check to shouldCastLessThanMax.
+- AI improvements in AF Tap.
+- Reverted main.properties.
+- Fantasy Quest Checkbox can now be unchecked
+- Added Dr Doom icon to the quest avatar download list
+- fixed issue with Apocalypse Hydra X cost flag
+- UnlessCost can parse arbitrary svar names instead of just X.
+- Cleaned up Divine Reckoning
+- Added an optional parameter "ChoiceTitle" to ChooseCard to allow more descriptive title prompts for the choice dialogue box.
+- Quest Tokens that start the game in play now don't flush summoning sickness until their controller's second turn
+- Fixed AI for Tribute to the Wild.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
 
-
-
-Added cards to the CloneFix branch and these are not yet available in the snapshot or beta builds:
-
-Cemetery Puca
-Dimir Doppelganger
-Sakashima's Student
-Shapeshifter's Marrow
-Unstable Shapeshifter
 
 
 Added cards to the M13 branch and these are not yet available in the snapshot or beta builds:
@@ -203,6 +212,13 @@ Nemesis Trap
 Quest for Pure Flame
 Silent-Blade Oni
 Felidar Umbra
+Draco
+Cataclysm
+Cemetery Puca
+Dimir Doppelganger
+Sakashima's Student
+Shapeshifter's Marrow
+Unstable Shapeshifter
 
 
 end
