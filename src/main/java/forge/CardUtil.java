@@ -33,7 +33,9 @@ import org.apache.commons.lang3.StringUtils;
 import forge.card.CardCharacteristics;
 import forge.card.CardManaCost;
 import forge.card.EditionInfo;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
+import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityList;
 import forge.card.trigger.TriggerType;
@@ -893,13 +895,13 @@ public final class CardUtil {
     }
 
     /**
-     * getLKICopy.
+     * getLKICopyOld.
      * 
      * @param c
      *            a Card.
      * @return a copy of C with LastKnownInfo stuff retained.
      */
-    public static Card getLKICopy(final Card c) {
+    public static Card getLKICopyOld(final Card c) {
         if (c.isToken()) {
             return c;
         }
@@ -934,6 +936,94 @@ public final class CardUtil {
         }
 
         return res;
+    }
+
+    /**
+     * getLKICopy.
+     * 
+     * @param in
+     *            a Card to copy.
+     * @return a copy of C with LastKnownInfo stuff retained.
+     */
+    public static Card getLKICopy(final Card in) {
+        if (in.isToken()) {
+            return in;
+        }
+
+        final Card newCopy = new Card();
+        newCopy.setUniqueNumber(in.getUniqueNumber());
+        newCopy.setCurSetCode(in.getCurSetCode());
+        newCopy.setOwner(in.getOwner());
+        newCopy.setFlipCard(in.isFlipCard());
+        newCopy.setDoubleFaced(in.isDoubleFaced());
+
+        // Copy all states
+        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
+        for (final CardCharactersticName state : in.getStates()) {
+            newCopy.addAlternateState(state);
+            newCopy.setState(state);
+            CardFactoryUtil.copyState(in, state, newCopy);
+            //CardFactoryUtil.addAbilityFactoryAbilities(newCopy);
+            for (SpellAbility sa : in.getState(state).getManaAbility()) {
+                if (sa instanceof AbilityActivated) {
+                    SpellAbility newSA = ((AbilityActivated) sa).getCopy();
+                    if (newSA == null) {
+                        System.out.println("Uh-oh...");
+                    }
+                    newSA.setType("LKI");
+                    CardFactoryUtil.correctAbilityChainSourceCard(newSA, newCopy);
+                    newCopy.addSpellAbility(newSA);
+                }
+            }
+            for (SpellAbility sa : in.getState(state).getSpellAbility()) {
+                if (sa instanceof AbilityActivated) {
+                    SpellAbility newSA = ((AbilityActivated) sa).getCopy();
+                    if (newSA == null) {
+                        System.out.println("Uh-oh...");
+                    }
+                    newSA.setType("LKI");
+                    CardFactoryUtil.correctAbilityChainSourceCard(newSA, newCopy);
+                    newCopy.addSpellAbility(newSA);
+                }
+            }
+            for (int i = 0; i < newCopy.getStaticAbilityStrings().size(); i++) {
+                newCopy.addStaticAbility(newCopy.getStaticAbilityStrings().get(i));
+            }
+        }
+        newCopy.setState(in.getCurState());
+        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
+
+        // I'm not sure if we really should be copying enchant/equip stuff over.
+
+        newCopy.setControllerObjects(in.getControllerObjects());
+        newCopy.addTempAttackBoost(in.getTempAttackBoost());
+        newCopy.addSemiPermanentAttackBoost(in.getSemiPermanentAttackBoost());
+        newCopy.addTempDefenseBoost(in.getTempDefenseBoost());
+        newCopy.addSemiPermanentDefenseBoost(in.getSemiPermanentDefenseBoost());
+        newCopy.setCounters(in.getCounters());
+        newCopy.setExtrinsicKeyword(in.getExtrinsicKeyword());
+        newCopy.setColor(in.getColor());
+        newCopy.setChangedCardTypes(in.getChangedCardTypes());
+        newCopy.setNewPT(new ArrayList<CardPowerToughness>(in.getNewPT()));
+        newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
+        newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
+        newCopy.setEnchanting(in.getEnchanting());
+        newCopy.setEnchantedBy(in.getEnchantedBy());
+        newCopy.setEquipping(in.getEquipping());
+        newCopy.setEquippedBy(in.getEquippedBy());
+        newCopy.setClones(in.getClones());
+        newCopy.setHaunting(in.getHaunting());
+        for (final Card haunter : in.getHauntedBy()) {
+            newCopy.addHauntedBy(haunter);
+        }
+        for (final Object o : in.getRemembered()) {
+            newCopy.addRemembered(o);
+        }
+        for (final Card o : in.getImprinted()) {
+            newCopy.addImprinted(o);
+        }
+
+        return newCopy;
     }
 
     /**
