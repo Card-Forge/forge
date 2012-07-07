@@ -7625,9 +7625,14 @@ res/cardsfolder/r/rimebound_dead.txt svneol=native#text/plain
 res/cardsfolder/r/rimescale_dragon.txt svneol=native#text/plain
 res/cardsfolder/r/rimewind_cryomancer.txt svneol=native#text/plain
 res/cardsfolder/r/rimewind_taskmage.txt svneol=native#text/plain
+res/cardsfolder/r/ring_of_evos_isle.txt -text
 res/cardsfolder/r/ring_of_gix.txt svneol=native#text/plain
 res/cardsfolder/r/ring_of_immortals.txt svneol=native#text/plain
+res/cardsfolder/r/ring_of_kalonia.txt -text
 res/cardsfolder/r/ring_of_renewal.txt svneol=native#text/plain
+res/cardsfolder/r/ring_of_thune.txt -text
+res/cardsfolder/r/ring_of_valkas.txt -text
+res/cardsfolder/r/ring_of_xathrid.txt -text
 res/cardsfolder/r/ringskipper.txt svneol=native#text/plain
 res/cardsfolder/r/riot_devils.txt -text
 res/cardsfolder/r/riot_ringleader.txt -text
