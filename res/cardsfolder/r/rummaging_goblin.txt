@@ -1,0 +1,11 @@
+Name:Rummaging Goblin
+ManaCost:2 R
+Types:Creature Goblin Rogue
+Text:no text
+PT:1/1
+A:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rummaging_goblin.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/146.jpg
+Oracle:{T}, Discard a card: Draw a card.
+End

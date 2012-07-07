@@ -1,0 +1,12 @@
+Name:Sentinel Spider
+ManaCost:3 G G
+Types:Creature Spider
+Text:no text
+PT:4/4
+K:Vigilance
+K:Reach
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sentinel_spider.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/189.jpg
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nReach (This creature can block creatures with flying.)
+End

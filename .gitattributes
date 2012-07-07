@@ -7765,6 +7765,7 @@ res/cardsfolder/r/rukh_egg.txt svneol=native#text/plain
 res/cardsfolder/r/rule_of_law.txt -text
 res/cardsfolder/r/rumbling_crescendo.txt svneol=native#text/plain
 res/cardsfolder/r/rumbling_slum.txt svneol=native#text/plain
+res/cardsfolder/r/rummaging_goblin.txt -text
 res/cardsfolder/r/rummaging_wizard.txt svneol=native#text/plain
 res/cardsfolder/r/run_wild.txt svneol=native#text/plain
 res/cardsfolder/r/rune_cervin_rider.txt svneol=native#text/plain
@@ -8153,6 +8154,7 @@ res/cardsfolder/s/sensei_golden_tail.txt svneol=native#text/plain
 res/cardsfolder/s/senseis_divining_top.txt svneol=native#text/plain
 res/cardsfolder/s/sensor_splicer.txt svneol=native#text/plain
 res/cardsfolder/s/sensory_deprivation.txt -text
+res/cardsfolder/s/sentinel_spider.txt -text
 res/cardsfolder/s/sentinels_of_glen_elendra.txt svneol=native#text/plain
 res/cardsfolder/s/sentry_oak.txt svneol=native#text/plain
 res/cardsfolder/s/septic_rats.txt svneol=native#text/plain
@@ -8859,6 +8861,7 @@ res/cardsfolder/s/spike_soldier.txt svneol=native#text/plain
 res/cardsfolder/s/spike_tiller.txt svneol=native#text/plain
 res/cardsfolder/s/spike_weaver.txt svneol=native#text/plain
 res/cardsfolder/s/spike_worker.txt svneol=native#text/plain
+res/cardsfolder/s/spiked_baloth.txt -text
 res/cardsfolder/s/spikeshot_elder.txt svneol=native#text/plain
 res/cardsfolder/s/spikeshot_goblin.txt svneol=native#text/plain
 res/cardsfolder/s/spiketail_drake.txt svneol=native#text/plain
@@ -10702,6 +10705,7 @@ res/cardsfolder/w/wild_elephant.txt svneol=native#text/plain
 res/cardsfolder/w/wild_evocation.txt -text
 res/cardsfolder/w/wild_griffin.txt svneol=native#text/plain
 res/cardsfolder/w/wild_growth.txt svneol=native#text/plain
+res/cardsfolder/w/wild_guess.txt -text
 res/cardsfolder/w/wild_hunger.txt -text
 res/cardsfolder/w/wild_jhovall.txt svneol=native#text/plain
 res/cardsfolder/w/wild_leotau.txt svneol=native#text/plain
