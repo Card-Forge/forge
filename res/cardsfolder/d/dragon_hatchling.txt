@@ -1,0 +1,12 @@
+Name:Dragon Hatchling
+ManaCost:1 R
+Types:Creature Dragon
+Text:no text
+PT:0/1
+K:Flying
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ +0 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_hatchling.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/128.jpg
+Oracle:Flying\n{R}: Dragon Hatchling gets +1/+0 until end of turn.
+End

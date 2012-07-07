@@ -1,0 +1,12 @@
+Name:Krenko, Mob Boss
+ManaCost:2 R R
+Types:Legendary Creature Goblin Warrior
+Text:no text
+PT:3/3
+A:AB$ Token | Cost$ T | TokenAmount$ X | References$ X | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put X 1/1 red Goblin creature tokens onto the battlefield, where X is the number of Goblins you control.
+SVar:X:Count$TypeYouCtrl.Goblin
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krenko_mob_boss.jpg
+SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/138.jpg
+Oracle:{T}: Put X 1/1 red Goblin creature tokens onto the battlefield, where X is the number of Goblins you control.
+End

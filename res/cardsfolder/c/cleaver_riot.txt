@@ -1,0 +1,10 @@
+Name:Cleaver Riot
+ManaCost:4 R
+Types:Sorcery
+Text:no text
+A:SP$ PumpAll | Cost$ 4 R | ValidCards$ Creature.YouCtrl | KW$ Double Strike | SpellDescription$ Creatures you control gain double strike until end of turn. (They deal both first-strike and regular combat damage.)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cleaver_riot.jpg
+SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/125.jpg
+Oracle:Creatures you control gain double strike until end of turn. (They deal both first-strike and regular combat damage.)
+End

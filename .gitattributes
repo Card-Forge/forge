@@ -1602,6 +1602,7 @@ res/cardsfolder/c/cleansing_beam.txt svneol=native#text/plain
 res/cardsfolder/c/clear.txt svneol=native#text/plain
 res/cardsfolder/c/clear_the_land.txt -text
 res/cardsfolder/c/clearwater_goblet.txt svneol=native#text/plain
+res/cardsfolder/c/cleaver_riot.txt -text
 res/cardsfolder/c/clergy_en_vec.txt svneol=native#text/plain
 res/cardsfolder/c/clickslither.txt svneol=native#text/plain
 res/cardsfolder/c/cliff_threader.txt svneol=native#text/plain
@@ -2464,6 +2465,7 @@ res/cardsfolder/d/dragon_broodmother.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_engine.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_fangs.txt -text
 res/cardsfolder/d/dragon_fodder.txt svneol=native#text/plain
+res/cardsfolder/d/dragon_hatchling.txt -text
 res/cardsfolder/d/dragon_mage.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_mask.txt -text
 res/cardsfolder/d/dragon_roost.txt svneol=native#text/plain
@@ -3221,6 +3223,7 @@ res/cardsfolder/f/firestorm.txt svneol=native#text/plain
 res/cardsfolder/f/firestorm_hellkite.txt svneol=native#text/plain
 res/cardsfolder/f/firewake_sliver.txt svneol=native#text/plain
 res/cardsfolder/f/firewild_borderpost.txt svneol=native#text/plain
+res/cardsfolder/f/firewing_phoenix.txt -text
 res/cardsfolder/f/first_volley.txt svneol=native#text/plain
 res/cardsfolder/f/fishliver_oil.txt svneol=native#text/plain
 res/cardsfolder/f/fissure.txt svneol=native#text/plain
@@ -3257,6 +3260,7 @@ res/cardsfolder/f/flamekin_brawler.txt svneol=native#text/plain
 res/cardsfolder/f/flamekin_harbinger.txt svneol=native#text/plain
 res/cardsfolder/f/flamekin_spitfire.txt svneol=native#text/plain
 res/cardsfolder/f/flames_of_the_blood_hand.txt -text
+res/cardsfolder/f/flames_of_the_firebrand.txt -text
 res/cardsfolder/f/flameshot.txt svneol=native#text/plain
 res/cardsfolder/f/flamestick_courier.txt svneol=native#text/plain
 res/cardsfolder/f/flametongue_kavu.txt svneol=native#text/plain
@@ -5119,6 +5123,7 @@ res/cardsfolder/k/krark_clan_ironworks.txt svneol=native#text/plain
 res/cardsfolder/k/krark_clan_ogre.txt svneol=native#text/plain
 res/cardsfolder/k/krark_clan_shaman.txt svneol=native#text/plain
 res/cardsfolder/k/krark_clan_stoker.txt svneol=native#text/plain
+res/cardsfolder/k/krenko_mob_boss.txt -text
 res/cardsfolder/k/krenkos_command.txt -text
 res/cardsfolder/k/kresh_the_bloodbraided.txt svneol=native#text/plain
 res/cardsfolder/k/kris_mage.txt svneol=native#text/plain
@@ -7050,6 +7055,7 @@ res/cardsfolder/p/primal_cocoon.txt svneol=native#text/plain
 res/cardsfolder/p/primal_command.txt -text
 res/cardsfolder/p/primal_forcemage.txt svneol=native#text/plain
 res/cardsfolder/p/primal_frenzy.txt svneol=native#text/plain
+res/cardsfolder/p/primal_huntbeast.txt -text
 res/cardsfolder/p/primal_order.txt svneol=native#text/plain
 res/cardsfolder/p/primal_plasma.txt svneol=native#text/plain
 res/cardsfolder/p/primal_rage.txt svneol=native#text/plain
@@ -7671,6 +7677,7 @@ res/cardsfolder/r/roar_of_reclamation.txt svneol=native#text/plain
 res/cardsfolder/r/roar_of_the_crowd.txt svneol=native#text/plain
 res/cardsfolder/r/roar_of_the_kha.txt svneol=native#text/plain
 res/cardsfolder/r/roar_of_the_wurm.txt svneol=native#text/plain
+res/cardsfolder/r/roaring_primadox.txt -text
 res/cardsfolder/r/roaring_slagwurm.txt svneol=native#text/plain
 res/cardsfolder/r/robber_fly.txt svneol=native#text/plain
 res/cardsfolder/r/robe_of_mirrors.txt svneol=native#text/plain
