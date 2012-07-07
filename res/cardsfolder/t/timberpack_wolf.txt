@@ -1,0 +1,14 @@
+Name:Timberpack Wolf
+ManaCost:1 G
+Types:Creature Wolf
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +1/+1 for each other creature you control named CARDNAME.
+SVar:X:Count$Valid Creature.namedTimberpack Wolf+YouCtrl/Minus.1
+SVar:BuffedBy:Creature.namedTimberpack Wolf
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/timberpack_wolf.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/194.jpg
+Oracle:Timberpack Wolf gets +1/+1 for each other creature you control named Timberpack Wolf.
+End
