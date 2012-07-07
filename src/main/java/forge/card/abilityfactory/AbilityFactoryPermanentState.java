@@ -1030,7 +1030,10 @@ public class AbilityFactoryPermanentState {
                 CardList creatureList = tapList.filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
-                        return CombatUtil.canBlock(c);
+                        if (c.isCreature()) {
+                            return CombatUtil.canBlock(c);
+                        }
+                        return false;
                     }
                 });
                 if (!AllZone.getCombat().getAttackers().isEmpty() || !ComputerUtil.getPossibleAttackers().isEmpty()) {
@@ -1039,13 +1042,20 @@ public class AbilityFactoryPermanentState {
             } else if (phase.isPlayerTurn(AllZone.getHumanPlayer())
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
-                CardList creatureList = tapList.filter(new CardListFilter() {
-                    @Override
-                    public boolean addCard(final Card c) {
-                        return CombatUtil.canAttack(c);
-                    }
-                });
-                choice = CardFactoryUtil.getBestCreatureAI(creatureList);
+                if (!tapList.getType("Creature").isEmpty()) {
+                    CardList creatureList = tapList.filter(new CardListFilter() {
+                        @Override
+                        public boolean addCard(final Card c) {
+                            if (c.isCreature()) {
+                                return CombatUtil.canAttack(c);
+                            }
+                            return false;
+                        }
+                    });
+                    choice = CardFactoryUtil.getBestCreatureAI(creatureList);
+                } else { // no creatures available
+                    choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
+                }
             } else {
                 choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
             }

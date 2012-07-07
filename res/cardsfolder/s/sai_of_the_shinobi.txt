@@ -1,6 +1,6 @@
 Name:Sai of the Shinobi
 ManaCost:1
-Types:Tribal Artifact Rogue Equipment
+Types:Artifact Equipment
 Text:Equipped creature gets +1/+1.
 K:eqPump 2:+1/+1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may attach CARDNAME to it.
