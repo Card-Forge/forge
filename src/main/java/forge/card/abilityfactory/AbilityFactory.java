@@ -2605,46 +2605,46 @@ public class AbilityFactory {
                 type = type.replace("Triggered", "Card");
             }
 
-            } else if (type.contains("Targeted")) {
-                source = null;
-                final SpellAbility parent = AbilityFactory.findParentsTargetedCard(sa);
-                if (parent != null) {
-                    if (parent.getTarget() != null) {
-                        if (!parent.getTarget().getTargetCards().isEmpty()) {
-                            source = parent.getTarget().getTargetCards().get(0);
-                        } else if (!parent.getTarget().getTargetSAs().isEmpty()) {
-                            source = parent.getTarget().getTargetSAs().get(0).getSourceCard();
-                        }
+        } else if (type.startsWith("Targeted")) {
+            source = null;
+            final SpellAbility parent = AbilityFactory.findParentsTargetedCard(sa);
+            if (parent != null) {
+                if (parent.getTarget() != null) {
+                    if (!parent.getTarget().getTargetCards().isEmpty()) {
+                        source = parent.getTarget().getTargetCards().get(0);
+                    } else if (!parent.getTarget().getTargetSAs().isEmpty()) {
+                        source = parent.getTarget().getTargetSAs().get(0).getSourceCard();
                     }
                 }
-                if (source == null) {
-                    return new CardList();
-                }
+            }
+            if (source == null) {
+                return new CardList();
+            }
 
-                if (type.startsWith("TargetedCard")) {
-                    type = type.replace("TargetedCard", "Card");
-                } else {
-                    type = type.replace("Targeted", "Card");
-                }
+            if (type.startsWith("TargetedCard")) {
+                type = type.replace("TargetedCard", "Card");
+            } else {
+                type = type.replace("Targeted", "Card");
+            }
 
-            } else if (type.startsWith("Remembered")) {
-                boolean hasRememberedCard = false;
-                for (final Object object : source.getRemembered()) {
-                    if (object instanceof Card) {
-                        hasRememberedCard = true;
-                        source = (Card) object;
-                        type = type.replace("Remembered", "Card");
-                        break;
-                    }
+        } else if (type.startsWith("Remembered")) {
+            boolean hasRememberedCard = false;
+            for (final Object object : source.getRemembered()) {
+                if (object instanceof Card) {
+                    hasRememberedCard = true;
+                    source = (Card) object;
+                    type = type.replace("Remembered", "Card");
+                    break;
                 }
+            }
 
-                if (!hasRememberedCard) {
-                    return new CardList();
-                }
-             } else if (type.equals("Card.AttachedBy")) {
-                 source = source.getEnchantingCard();
-                 type = type.replace("Card.AttachedBy", "Card.Self");
-             }
+            if (!hasRememberedCard) {
+                return new CardList();
+            }
+        } else if (type.equals("Card.AttachedBy")) {
+            source = source.getEnchantingCard();
+            type = type.replace("Card.AttachedBy", "Card.Self");
+        }
 
         String valid = type;
         if (valid.contains("EQX")) {
