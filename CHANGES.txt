@@ -7,10 +7,9 @@ Forge Beta: 0#-##-2012 ver 1.2.10
 
 A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there are four remaining issues that we hope will be addressed in the near future.
 
-1. Copies of tokens cause a crash when they leave play.
-2. Leave play triggers don't work correct for clones.
-3. Copies of equipment made via Copy Artifact or Phyrexian Metamorph cannot be equipped.
-4. Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
+1. Leave play triggers don't work correct for clones.
+2. Copies of equipment made via Copy Artifact or Phyrexian Metamorph cannot be equipped.
+3. Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
 
 --
 
@@ -138,6 +137,18 @@ Fixes/Features:
 - Quest Tokens that start the game in play now don't flush summoning sickness until their controller's second turn
 - Fixed AI for Tribute to the Wild.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Update M13 SetInfo
+- Small fix to scripts
+- Adding reprint info for M13 and PC2 cards
+- M13 branch: Added SetInfo.
+- Updating mtgdata.txt
+- Merged M13 branch into trunk.
+- Added Oracle texts to M13 cards.
+- Updated AI in BoosterDraftAI
+- add M13 to card template script
+- Adding Ultimate flag to new Ajani
+- fixed issue with clones of tokens leaving battlefield
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -145,8 +156,21 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 
 
-Added cards to the M13 branch and these are not yet available in the snapshot or beta builds:
+Added many cards, including:
 
+Captivating Glance
+Prison Term
+Nemesis Trap
+Quest for Pure Flame
+Silent-Blade Oni
+Felidar Umbra
+Draco
+Cataclysm
+Cemetery Puca
+Dimir Doppelganger
+Sakashima's Student
+Shapeshifter's Marrow
+Unstable Shapeshifter
 Ajani's Sunstriker
 Archaeomancer
 Arctic Aven
@@ -202,23 +226,46 @@ Vile Rebirth
 War Falcon
 Warclamp Mastiff
 Watercourser
-
-
-Added many cards, including:
-
-Captivating Glance
-Prison Term
-Nemesis Trap
-Quest for Pure Flame
-Silent-Blade Oni
-Felidar Umbra
-Draco
-Cataclysm
-Cemetery Puca
-Dimir Doppelganger
-Sakashima's Student
-Shapeshifter's Marrow
-Unstable Shapeshifter
+Searing Spear
+Smelt
+Krenko's Command
+Ranger's Path
+Ajani, Caller of the Pride
+Ring of Evos Isle
+Ring of Kalonia
+Ring of Thune
+Ring of Valkas
+Ring of Xathrid
+Bloodhunter Bat
+Courtly Provocateur
+Disciple of Bolas
+Encrust
+Faith's Reward
+Jace's Phantasm
+Nefarox, Overlord of Grixis
+Talrand, Sky Summoner
+Void Stalker
+Boundless Realms
+Chandra's Fury
+Fungal Sprouting
+Magmaquake
+Mwonvuli Beast Tracker
+Predatory Rampage
+Public Execution
+Slumbering Dragon
+Thundermaw Hellkite
+Timberpack Wolf
+Cleaver Riot
+Dragon Hatchling
+Firewing Phoenix
+Flames of the Firebrand
+Krenko, Mob Boss
+Primal Huntbeast
+Roaring Primadox
+Rummaging Goblin
+Sentinel Spider
+Spiked Baloth
+Wild Guess
 
 
 end
