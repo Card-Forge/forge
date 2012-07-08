@@ -8,6 +8,7 @@ K:CARDNAME can't block.
 T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescription$ When CARDNAME attacks, sacrifice it at end of combat.
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigSacrifice | TriggerDescription$ Sacrifice CARDNAME at end of combat.
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:SacrificeEndCombat:True
 A:AB$ Pump | Cost$ tapXType<1/Creature> | NumAtt$ +X | References$ X | SpellDescription$ CARDNAME gets +X/+0 until end of turn, where X is the power of the creature tapped this way.
 SVar:X:Tapped$CardPower
 SVar:RemAIDeck:True

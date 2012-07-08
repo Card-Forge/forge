@@ -18,23 +18,18 @@
 package forge.game.limited;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Constant;
-import forge.card.CardColor;
-import forge.card.CardManaCost;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.mana.ManaCostShard;
 import forge.card.spellability.AbilityMana;
 import forge.deck.Deck;
 import forge.util.MyRandom;
@@ -116,7 +111,7 @@ public class BoosterDraftAI {
 
             if (!hasPicked) {
                 final CardList creatures = aiPlayables.getType("Creature");
-                creatures.sort(this.bestCreature);
+                creatures.sort(new CreatureComparator());
                 debugCreatures(creatures);
 
                 if (creatures.size() > 0) {
@@ -156,7 +151,7 @@ public class BoosterDraftAI {
 
             if (!hasPicked) {
                 final CardList creatures = aiPlayables.getType("Creature").getMonoColored(true);
-                creatures.sort(this.bestCreature);
+                creatures.sort(new CreatureComparator());
                 debugCreatures(creatures);
 
                 if (creatures.size() > 0) {
@@ -186,7 +181,7 @@ public class BoosterDraftAI {
                 // list, and 1 non-creature.
                 typeList = colorList.getType("Creature");
                 if (typeList.size() > 0) {
-                    typeList.sort(this.bestCreature);
+                    typeList.sort(new CreatureComparator());
                     wouldPick.add(typeList.get(0));
                     if (typeList.size() > 1) {
                         wouldPick.add(typeList.get(1));
@@ -353,328 +348,11 @@ public class BoosterDraftAI {
                 System.out.println("Deck[" + i + "]");
             }
 
-            out[i] = this.buildDeck(this.deck[i], this.playerColors.get(i));
+            out[i] = new BoosterDeck(this.deck[i], this.playerColors.get(i));
         }
         return out;
     } // getDecks()
-
-    /**
-     * <p>
-     * buildDeck.
-     * </p>
-     * 
-     * @param dList
-     *            a {@link forge.CardList} object.
-     * @param pClrs
-     *            a {@link forge.game.limited.DeckColors} object.
-     * @return a {@link forge.deck.Deck} object.
-     */
-    private Deck buildDeck(final CardList dList, final DeckColors pClrs) {
-
-        final CardList outList = new CardList();
-        int cardsNeeded = 22;
-        int landsNeeded = 18;
-
-        final CardList aiPlayables = dList.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card c) {
-                return !(c.getSVar("RemAIDeck").equals("True") || c.getSVar("RemRandomDeck").equals("True"));
-            }
-        });
-        for (int i = 0; i < aiPlayables.size(); i++) {
-            dList.remove(aiPlayables.get(i));
-        }
-
-        final CardList creatures = aiPlayables.getType("Creature").getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
-
-        int nCreatures = 15;
-
-        creatures.sort(this.bestCreature);
-
-        // 1.Add up to 15 on-color creatures
-        int i = 0;
-        while (nCreatures > 0 && creatures.size() > 0) {
-            final Card c = creatures.get(0);
-
-            outList.add(c);
-            cardsNeeded--;
-            nCreatures--;
-            aiPlayables.remove(c);
-            creatures.remove(c);
-
-            if (Constant.Runtime.DEV_MODE[0]) {
-                System.out.println("Creature[" + i + "]:" + c.getName() + " (" + c.getManaCost() + ")");
-            }
-
-            i++;
-        }
-
-        /*
-         * CardList otherCreatures = aiPlayables.getType("Creature"); while
-         * ((nCreatures > 1) && (otherCreatures.size() > 1)) { final Card c =
-         * otherCreatures.get(MyRandom.getRandom().nextInt(otherCreatures.size()
-         * - 1)); outList.add(c); cardsNeeded--; nCreatures--;
-         * aiPlayables.remove(c);
-         * 
-         * otherCreatures = aiPlayables.getType("Creature");
-         * 
-         * if (Constant.Runtime.DEV_MODE[0]) {
-         * System.out.println("AddCreature: " + c.getName() + " (" +
-         * c.getManaCost() + ")"); } }
-         */
-
-        CardList others = aiPlayables.getNotType("Creature").getNotType("Land")
-                .getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
-
-        // 2.Try to fill up to 22 with on-color non-creature cards
-        int ii = 0;
-        while (cardsNeeded > 0 && others.size() > 0) {
-            int index = 0;
-            if (others.size() > 1) {
-                index = MyRandom.getRandom().nextInt(others.size() - 1);
-            }
-            final Card c = others.get(index);
-
-            // out.addMain(c.getName());
-            outList.add(c);
-            cardsNeeded--;
-            aiPlayables.remove(c);
-
-            others = aiPlayables.getNotType("Creature").getNotType("Land")
-                    .getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
-
-            if (Constant.Runtime.DEV_MODE[0]) {
-                System.out.println("Others[" + ii++ + "]:" + c.getName() + " (" + c.getManaCost() + ")");
-            }
-        }
-
-        i = 0;
-        // 3.Try to fill up to 22 with on-color creatures cards (if more than 15
-        // are present)
-        while (cardsNeeded > 0 && (0 < creatures.size())) {
-            final Card c = creatures.get(0);
-
-            outList.add(c);
-            cardsNeeded--;
-            aiPlayables.remove(c);
-            creatures.remove(c);
-
-            if (Constant.Runtime.DEV_MODE[0]) {
-                System.out.println("Creature[" + i + "]:" + c.getName() + " (" + c.getManaCost() + ")");
-            }
-
-            i++;
-        }
-
-        CardList nonLands = aiPlayables.getNotType("Land").getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
-
-        // 4. If there are still on-color cards and the average cmc is low add a
-        // 23rd card.
-        if (cardsNeeded == 0 && CardListUtil.getAverageCMC(outList) < 3 && !nonLands.isEmpty()) {
-            Card c = nonLands.get(0);
-            outList.add(c);
-            aiPlayables.remove(0);
-            landsNeeded--;
-        }
-
-        // 5. If there are still less than 22 non-land cards add off-color
-        // cards.
-        ii = 0;
-        CardList z = aiPlayables.getNotType("Land");
-        while ((cardsNeeded > 0) && (z.size() > 1)) {
-
-            // if (z.size() < 1)
-            // throw new
-            // RuntimeException("BoosterDraftAI : buildDeck() error, deck does not have enough non-lands");
-            final Card c = z.get(MyRandom.getRandom().nextInt(z.size() - 1));
-
-            // out.addMain(c.getName());
-            outList.add(c);
-            cardsNeeded--;
-            aiPlayables.remove(c);
-
-            z = aiPlayables.getNotType("Land");
-
-            if (Constant.Runtime.DEV_MODE[0]) {
-                System.out.println("NonLands[" + ii++ + "]:" + c.getName() + "(" + c.getManaCost() + ")");
-            }
-        }
-
-        // 6. If it's not a mono color deck, add non-basic lands.
-        CardList lands = aiPlayables.getType("Land");
-        while (!pClrs.getColor1().equals(pClrs.getColor2()) && landsNeeded > 0 && lands.size() > 0) {
-            final Card c = lands.get(0);
-
-            outList.add(c);
-            landsNeeded--;
-            aiPlayables.remove(c);
-
-            lands = aiPlayables.getType("Land");
-
-            if (Constant.Runtime.DEV_MODE[0]) {
-                System.out.println("Land:" + c.getName());
-            }
-        }
-
-        // attempt to optimize basic land counts according
-        // to color representation
-
-        final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
-                new CCnt("Mountain", 0), new CCnt("Forest", 0) };
-
-        // count each card color using mana costs
-        // TODO: count hybrid mana differently?
-        for (i = 0; i < outList.size(); i++) {
-            final CardManaCost mc = outList.get(i).getManaCost();
-
-            // count each mana symbol in the mana cost
-            for (ManaCostShard shard : mc.getShards()) {
-                byte mask = shard.getColorMask();
-
-                if ((mask & CardColor.WHITE) > 0) {
-                    clrCnts[0].setCount(clrCnts[0].getCount() + 1);
-                }
-                if ((mask & CardColor.BLUE) > 0) {
-                    clrCnts[1].setCount(clrCnts[1].getCount() + 1);
-                }
-                if ((mask & CardColor.BLACK) > 0) {
-                    clrCnts[2].setCount(clrCnts[2].getCount() + 1);
-                }
-                if ((mask & CardColor.RED) > 0) {
-                    clrCnts[3].setCount(clrCnts[3].getCount() + 1);
-                }
-                if ((mask & CardColor.GREEN) > 0) {
-                    clrCnts[4].setCount(clrCnts[4].getCount() + 1);
-                }
-            }
-        }
-
-        if (landsNeeded > 0) {
-            // total of all ClrCnts
-            int totalColor = 0;
-            for (i = 0; i < 5; i++) {
-                totalColor += clrCnts[i].getCount();
-                // tmpDeck += ClrCnts[i].Color + ":" + ClrCnts[i].Count + "\n";
-            }
-
-            // tmpDeck += "totalColor:" + totalColor + "\n";
-
-            for (i = 0; i < 5; i++) {
-                if (clrCnts[i].getCount() > 0) { // calculate number of lands
-                                                 // for
-                    // each color
-                    final float p = (float) clrCnts[i].getCount() / (float) totalColor;
-                    final int nLand = (int) (landsNeeded * p) + 1;
-                    // tmpDeck += "nLand-" + ClrCnts[i].Color + ":" + nLand +
-                    // "\n";
-                    if (Constant.Runtime.DEV_MODE[0]) {
-                        System.out.println("Basics[" + clrCnts[i].getColor() + "]:" + nLand);
-                    }
-
-                    // just to prevent a null exception by the deck size fixing
-                    // code
-                    // CardCounts.put(ClrCnts[i].Color, nLand);
-
-                    for (int j = 0; j <= nLand; j++) {
-                        final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(),
-                                AllZone.getComputerPlayer());
-                        c.setCurSetCode(IBoosterDraft.LAND_SET_CODE[0]);
-                        outList.add(c);
-                        landsNeeded--;
-                    }
-                }
-            }
-            int n = 0;
-            while (landsNeeded > 0) {
-                if (clrCnts[n].getCount() > 0) {
-                    final Card c = AllZone.getCardFactory().getCard(clrCnts[n].getColor(), AllZone.getComputerPlayer());
-                    c.setCurSetCode(IBoosterDraft.LAND_SET_CODE[0]);
-                    outList.add(c);
-                    landsNeeded--;
-
-                    if (Constant.Runtime.DEV_MODE[0]) {
-                        System.out.println("AddBasics: " + c.getName());
-                    }
-                }
-                if (++n > 4) {
-                    n = 0;
-                }
-            }
-        }
-
-        while (outList.size() > 40) {
-            final Card c = outList.get(MyRandom.getRandom().nextInt(outList.size() - 1));
-            outList.remove(c);
-            aiPlayables.add(c);
-        }
-
-        while (outList.size() < 40) {
-            if (aiPlayables.size() > 1) {
-                final Card c = aiPlayables.get(MyRandom.getRandom().nextInt(aiPlayables.size() - 1));
-                outList.add(c);
-                aiPlayables.remove(c);
-            } else if (aiPlayables.size() == 1) {
-                final Card c = aiPlayables.get(0);
-                outList.add(c);
-                aiPlayables.remove(c);
-            } else {
-                // if no playable cards remain fill up with basic lands
-                for (i = 0; i < 5; i++) {
-                    if (clrCnts[i].getCount() > 0) {
-                        final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(),
-                                AllZone.getComputerPlayer());
-                        c.setCurSetCode(IBoosterDraft.LAND_SET_CODE[0]);
-                        outList.add(c);
-                        break;
-                    }
-                }
-            }
-        }
-        if (outList.size() == 40) {
-            final Deck out = new Deck();
-            out.getMain().add(outList);
-            out.getSideboard().add(aiPlayables);
-            out.getSideboard().add(dList);
-            return out;
-        }
-        throw new RuntimeException("BoosterDraftAI : buildDeck() error, decksize not 40");
-    }
-
-    /*
-     * private Deck getDeck(CardList list) { Deck out = new
-     * Deck(GameType.Draft); for(int i = 0; i < list.size(); i++)
-     * out.addMain(list.get(i).getName());
-     * 
-     * return out; }//getDeck()
-     * 
-     * //add Land to list argument private void addLand(CardList list, String[]
-     * color) { Card land; for(int i = 0; i < 9; i++) { land =
-     * AllZone.getCardFactory().getCard(colorToLand.get(color[0]).toString(),
-     * AllZone.getComputerPlayer());
-     * 
-     * land.setCurSetCode(land.getMostRecentSet());
-     * land.setImageFilename(CardUtil.buildFilename(land));
-     * 
-     * list.add(land);
-     * 
-     * land =
-     * AllZone.getCardFactory().getCard(colorToLand.get(color[1]).toString(),
-     * AllZone.getComputerPlayer());
-     * 
-     * land.setCurSetCode(land.getMostRecentSet());
-     * land.setImageFilename(CardUtil.buildFilename(land));
-     * 
-     * list.add(land); }
-     * 
-     * //if(list.getType("Land").size() != 18) //throw new RuntimeException(
-     * "BoosterDraftAI : addLand() error, deck does not have 18 lands - "
-     * +list.getType("Land").size());
-     * 
-     * //if(list.size() != 40) //throw new
-     * RuntimeException("BoosterDraftAI : addLand() error, deck is not 40 cards - "
-     * +list.size()); }//addLand()
-     */
-
+  
     // returns 7 different ints, within the range of 0-9
 
     /**
@@ -757,48 +435,6 @@ public class BoosterDraftAI {
             { Constant.Color.GREEN, Constant.Color.RED }, { Constant.Color.GREEN, Constant.Color.WHITE },
 
             { Constant.Color.RED, Constant.Color.WHITE } };
-
-    private final Comparator<Card> bestCreature = new Comparator<Card>() {
-        @Override
-        public int compare(final Card a, final Card b) {
-            int cmcA = a.getCMC();
-            cmcA *= 30; // average creature from evaluateCreature comes out to 30 * CMC
-
-            int cmcB = b.getCMC();
-            cmcB *= 30;
-
-            int evalA = CardFactoryUtil.evaluateCreature(a) - 100; // evaluateCreature starts at 100
-            int evalB = CardFactoryUtil.evaluateCreature(b) - 100;
-
-            int rarA = 0;
-            int rarB = 0;
-
-            if (a.getCurSetRarity().equals("Common")) {
-                rarA = 1;
-            } else if (a.getCurSetRarity().equals("Uncommon")) {
-                rarA = 2;
-            } else if (a.getCurSetRarity().equals("Rare")) {
-                rarA = 4;
-            } else if (a.getCurSetRarity().equals("Mythic")) {
-                rarA = 8;
-            }
-
-            if (b.getCurSetRarity().equals("Common")) {
-                rarB = 1;
-            } else if (b.getCurSetRarity().equals("Uncommon")) {
-                rarB = 2;
-            } else if (b.getCurSetRarity().equals("Rare")) {
-                rarB = 4;
-            } else if (b.getCurSetRarity().equals("Mythic")) {
-                rarB = 8;
-            }
-
-            final int scoreA = evalA - cmcA + rarA;
-            final int scoreB = evalB - cmcB + rarB;
-
-            return scoreB - scoreA;
-        }
-    };
 
     private static void debugCreatures(CardList creatures) {
         if (Constant.Runtime.DEV_MODE[0]) {

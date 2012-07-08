@@ -7,6 +7,7 @@ K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescription$ When CARDNAME attacks, sacrifice it at end of combat.
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigSacrifice | TriggerDescription$ Sacrifice CARDNAME at end of combat.
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Defined$ Self
+SVar:SacrificeEndCombat:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_colossus.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/204.jpg

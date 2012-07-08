@@ -8,6 +8,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescri
 T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice it at end of combat.
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigSacrifice | TriggerDescription$ Sacrifice CARDNAME at end of combat.
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:SacrificeEndCombat:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fog_elemental.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/40.jpg

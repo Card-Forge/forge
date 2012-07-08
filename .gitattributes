@@ -12037,11 +12037,13 @@ src/main/java/forge/game/GamePlayerRating.java -text
 src/main/java/forge/game/GameState.java -text
 src/main/java/forge/game/GameSummary.java svneol=native#text/plain
 src/main/java/forge/game/GameType.java -text
+src/main/java/forge/game/limited/BoosterDeck.java -text
 src/main/java/forge/game/limited/BoosterDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/BoosterDraftAI.java svneol=native#text/plain
 src/main/java/forge/game/limited/CCnt.java svneol=native#text/plain
 src/main/java/forge/game/limited/CardPoolLimitation.java -text
 src/main/java/forge/game/limited/CardRatings.java -text
+src/main/java/forge/game/limited/CreatureComparator.java -text
 src/main/java/forge/game/limited/CustomLimited.java svneol=native#text/plain
 src/main/java/forge/game/limited/DeckColors.java svneol=native#text/plain
 src/main/java/forge/game/limited/IBoosterDraft.java svneol=native#text/plain

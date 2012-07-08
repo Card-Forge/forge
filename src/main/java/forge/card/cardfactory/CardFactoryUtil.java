@@ -595,6 +595,10 @@ public class CardFactoryUtil {
         if (c.getSVar("Targeting").equals("Dies")) {
             value -= 25;
         }
+        if (c.getSVar("SacrificeEndCombat").equals("True")) {
+            value -= 40;
+        }
+        
 
         for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.isAbility()) {
