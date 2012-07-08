@@ -3577,6 +3577,7 @@ res/cardsfolder/g/geistflame.txt -text
 res/cardsfolder/g/gelatinous_genesis.txt svneol=native#text/plain
 res/cardsfolder/g/gelectrode.txt svneol=native#text/plain
 res/cardsfolder/g/gelid_shackles.txt svneol=native#text/plain
+res/cardsfolder/g/gem_of_becoming.txt -text
 res/cardsfolder/g/gemhide_sliver.txt svneol=native#text/plain
 res/cardsfolder/g/gemini_engine.txt svneol=native#text/plain
 res/cardsfolder/g/gempalm_avenger.txt svneol=native#text/plain
@@ -4277,6 +4278,7 @@ res/cardsfolder/h/helldozer.txt svneol=native#text/plain
 res/cardsfolder/h/hellfire.txt svneol=native#text/plain
 res/cardsfolder/h/hellfire_mongrel.txt svneol=native#text/plain
 res/cardsfolder/h/hellhole_rats.txt svneol=native#text/plain
+res/cardsfolder/h/hellion_crucible.txt -text
 res/cardsfolder/h/hellion_eruption.txt svneol=native#text/plain
 res/cardsfolder/h/hellkite_hatchling.txt svneol=native#text/plain
 res/cardsfolder/h/hellkite_igniter.txt svneol=native#text/plain
@@ -7882,6 +7884,7 @@ res/cardsfolder/s/sandals_of_abdallah.txt -text
 res/cardsfolder/s/sandbar_crocodile.txt -text
 res/cardsfolder/s/sandbar_merfolk.txt svneol=native#text/plain
 res/cardsfolder/s/sandbar_serpent.txt svneol=native#text/plain
+res/cardsfolder/s/sands_of_delirium.txt -text
 res/cardsfolder/s/sandskin.txt svneol=native#text/plain
 res/cardsfolder/s/sandsower.txt svneol=native#text/plain
 res/cardsfolder/s/sandstone_deadfall.txt -text
@@ -9849,6 +9852,7 @@ res/cardsfolder/t/trackers_instincts.txt -text
 res/cardsfolder/t/trade_caravan.txt svneol=native#text/plain
 res/cardsfolder/t/trade_routes.txt svneol=native#text/plain
 res/cardsfolder/t/tradewind_rider.txt svneol=native#text/plain
+res/cardsfolder/t/trading_post.txt -text
 res/cardsfolder/t/tragic_poet.txt svneol=native#text/plain
 res/cardsfolder/t/tragic_slip.txt -text
 res/cardsfolder/t/trailblazer.txt svneol=native#text/plain
@@ -10861,6 +10865,7 @@ res/cardsfolder/w/words_of_wisdom.txt svneol=native#text/plain
 res/cardsfolder/w/words_of_worship.txt -text
 res/cardsfolder/w/workhorse.txt svneol=native#text/plain
 res/cardsfolder/w/world_queller.txt -text
+res/cardsfolder/w/worldfire.txt -text
 res/cardsfolder/w/worldgorger_dragon.txt svneol=native#text/plain
 res/cardsfolder/w/worldly_counsel.txt svneol=native#text/plain
 res/cardsfolder/w/worldly_tutor.txt svneol=native#text/plain
@@ -10913,6 +10918,7 @@ res/cardsfolder/w/wyluli_wolf.txt svneol=native#text/plain
 res/cardsfolder/x/xanthic_statue.txt svneol=native#text/plain
 res/cardsfolder/x/xantid_swarm.txt -text
 res/cardsfolder/x/xathrid_demon.txt -text
+res/cardsfolder/x/xathrid_gorgon.txt -text
 res/cardsfolder/x/xenic_poltergeist.txt -text
 res/cardsfolder/x/xenograft.txt svneol=native#text/plain
 res/cardsfolder/x/xiahou_dun_the_one_eyed.txt svneol=native#text/plain
@@ -10941,6 +10947,8 @@ res/cardsfolder/y/yawning_fissure.txt svneol=native#text/plain
 res/cardsfolder/y/yellow_scarves_cavalry.txt svneol=native#text/plain
 res/cardsfolder/y/yellow_scarves_general.txt svneol=native#text/plain
 res/cardsfolder/y/yellow_scarves_troops.txt svneol=native#text/plain
+res/cardsfolder/y/yeva_natures_herald.txt -text
+res/cardsfolder/y/yevas_forcemage.txt -text
 res/cardsfolder/y/yew_spirit.txt -text
 res/cardsfolder/y/yixlid_jailer.txt -text
 res/cardsfolder/y/yoke_of_the_damned.txt svneol=native#text/plain

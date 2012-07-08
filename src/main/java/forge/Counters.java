@@ -218,6 +218,9 @@ public enum Counters {
     /** The PETAL. */
     PETAL(),
 
+    /** The PETRIFICATION. */
+    PETRIFICATION(),
+
     /** The PIN. */
     PIN(),
 
