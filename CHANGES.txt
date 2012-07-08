@@ -151,6 +151,16 @@ Fixes/Features:
 - Adding Ultimate flag to new Ajani
 - fixed issue with clones of tokens leaving battlefield
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Little improvement in tapPrefTargeting.
+- Fixed types of Sai of the Shinobi.
+- fixed issue with TargetedPlayerCtrl in filterListByType
+- added Petrification counter.
+- Added a fluff piece to the changes.txt file.
+- Refactor Booster Deck building to separate class.
+- SVar for creatures that are sacrificed at end of combat.
+- Fixed multiple instances of Exalted on a single card not working.
+- Cleanup in CombatUtil.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -268,6 +278,16 @@ Rummaging Goblin
 Sentinel Spider
 Spiked Baloth
 Wild Guess
+Worldfire
+Xathrid Gorgon
+Yeva's Forcemage
+Yeva, Nature's Herald
+Gem of Becoming
+Hellion Crucible
+Sands Of Delirium
+Trading Post
+Hostility
+Skarrgan Firebird
 
 
 end
