@@ -309,12 +309,13 @@ public class PhaseUtil {
         // check for exalted:
         if (list.size() == 1) {
             final Player attackingPlayer = AllZone.getCombat().getAttackingPlayer();
+            int exaltedMagnitude = 0;
+            for (Card card : attackingPlayer.getCardsIn(ZoneType.Battlefield)) {
+                exaltedMagnitude += card.getKeywordAmount("Exalted");
+            }
 
-            CardList exalted = attackingPlayer.getCardsIn(ZoneType.Battlefield);
-            exalted = exalted.getKeyword("Exalted");
-
-            if (exalted.size() > 0) {
-                CombatUtil.executeExaltedAbility(list.get(0), exalted.size());
+            if (exaltedMagnitude > 0) {
+                CombatUtil.executeExaltedAbility(list.get(0), exaltedMagnitude);
                 // Make sure exalted effects get applied only once per combat
             }
 
