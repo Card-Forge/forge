@@ -1783,7 +1783,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean chkAIDrawback() {
-                return true;
+                return AbilityFactoryChoose.chooseCardCanPlayAI(af, this);
             }
 
             @Override
@@ -1850,7 +1850,43 @@ public final class AbilityFactoryChoose {
      * @return a boolean.
      */
     private static boolean chooseCardCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        return AbilityFactoryChoose.chooseCardTriggerAI(af, sa, false);
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = sa.getSourceCard();
+
+        final Target tgt = sa.getTarget();
+        if (tgt != null) {
+            tgt.resetTargets();
+            if (sa.canTarget(AllZone.getHumanPlayer())) {
+                tgt.addTarget(AllZone.getHumanPlayer());
+            } else {
+                return false;
+            }
+        }
+        if (params.containsKey("AILogic")) {
+            ZoneType choiceZone = ZoneType.Battlefield;
+            if (params.containsKey("ChoiceZone")) {
+                choiceZone = ZoneType.smartValueOf(params.get("ChoiceZone"));
+            }
+            CardList choices = AllZoneUtil.getCardsIn(choiceZone);
+            if (params.containsKey("Choices")) {
+                choices = choices.getValidCards(params.get("Choices"), host.getController(), host);
+            }
+            if (params.get("AILogic").equals("AtLeast1")) {
+                if (choices.size() < 1) {
+                    return false;
+                }
+            } else if (params.get("AILogic").equals("AtLeast2") || params.get("AILogic").equals("BestBlocker")) {
+                if (choices.size() < 2) {
+                    return false;
+                }
+            }
+        }
+
+        final AbilitySub subAb = sa.getSubAbility();
+        if (subAb != null && !subAb.chkAIDrawback()) {
+            return false;
+        }
+        return true;
     }
 
     /**

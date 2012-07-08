@@ -4,7 +4,7 @@ Types:Sorcery
 Text:no text
 K:Flashback 5 W W
 A:SP$ ChooseCard | Cost$ 2 W W | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature | SubAbility$ DBChooseOpp | RememberChosen$ True | SpellDescription$ Each player chooses a creature he or she controls. Destroy the rest.
-SVar:DBChooseOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Creature.YouDontCtrl | SubAbility$ DBDestroyAll | RememberChosen$ True
+SVar:DBChooseOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Creature.YouDontCtrl | SubAbility$ DBDestroyAll | AILogic$ AtLeast2 | RememberChosen$ True
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
