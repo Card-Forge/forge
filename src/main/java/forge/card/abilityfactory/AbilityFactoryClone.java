@@ -23,16 +23,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharactersticName;
-import forge.CardColor;
-import forge.CardList;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
-import forge.card.CardCharacteristics;
-import forge.card.cardfactory.AbstractCardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
@@ -45,7 +40,6 @@ import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
-import forge.game.zone.ZoneType;
 
 /**
  * <p>
