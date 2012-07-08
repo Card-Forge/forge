@@ -2562,26 +2562,7 @@ public class CombatUtil {
                 c.tap();
             }
         } // Mijae Djinn
-        /*else if (c.getName().equals("Spectral Bears")) {
-            final Player opp = c.getController().getOpponent();
-            CardList list = opp.getCardsIn(ZoneType.Battlefield);
-            list = list.filter(new CardListFilter() {
-                @Override
-                public boolean addCard(final Card crd) {
-                    return crd.isBlack() && !crd.isToken();
-                }
-            });
-            if (list.size() == 0) {
-                c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
-            }
-        } else if (c.getName().equals("Spectral Force")) {
-            final Player opp = c.getController().getOpponent();
-            CardList list = opp.getCardsIn(ZoneType.Battlefield);
-            list = list.filter(CardListFilter.BLACK);
-            if (list.size() == 0) {
-                c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
-            }
-        }*/ else if (c.getName().equals("Witch-Maw Nephilim") && !c.getDamageHistory().getCreatureAttackedThisCombat()
+        else if (c.getName().equals("Witch-Maw Nephilim") && !c.getDamageHistory().getCreatureAttackedThisCombat()
                 && (c.getNetAttack() >= 10)) {
             final Card charger = c;
             final Ability ability2 = new Ability(c, "0") {
@@ -2821,6 +2802,7 @@ public class CombatUtil {
             sb.append(c).append(" - (Exalted) gets +1/+1 until EOT.");
             ability.setStackDescription(sb.toString());
             ability.setDescription(sb.toString());
+            ability.setActivatingPlayer(c.getController());
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
         }
