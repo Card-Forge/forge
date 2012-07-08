@@ -1770,6 +1770,7 @@ res/cardsfolder/c/copper_tablet.txt svneol=native#text/plain
 res/cardsfolder/c/copperhorn_scout.txt svneol=native#text/plain
 res/cardsfolder/c/copperline_gorge.txt svneol=native#text/plain
 res/cardsfolder/c/copy_artifact.txt svneol=native#text/plain
+res/cardsfolder/c/copy_enchantment.txt -text
 res/cardsfolder/c/coral_atoll.txt svneol=native#text/plain
 res/cardsfolder/c/coral_eel.txt svneol=native#text/plain
 res/cardsfolder/c/coral_fighters.txt svneol=native#text/plain

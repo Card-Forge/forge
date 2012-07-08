@@ -562,6 +562,12 @@ public final class AbilityFactoryClone {
 
         //keep the Clone card image for the cloned card
         tgtCard.setImageFilename(imageFileName);
+
+        // check if clone is now an Aura that needs to be attached
+        if (tgtCard.isAura()) {
+            AbilityFactoryAttach.attachAuraOnIndirectEnterBattlefield(tgtCard);
+        }
+
     } // cloneResolve
 
     private static void addExtraCharacteristics(final Card tgtCard, final HashMap<String, String> params, final Map<String, String> origSVars) {

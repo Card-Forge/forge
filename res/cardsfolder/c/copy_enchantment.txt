@@ -1,0 +1,12 @@
+Name:Copy Enchantment
+ManaCost:2 U
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseEnchantment | Static$ True | TriggerDescription$ You may have CARDNAME enter the battlefield as a copy of any enchantment on the battlefield.
+SVar:ChooseEnchantment:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Enchantment.Other | SubAbility$ DBCopy | RememberChosen$ True
+SVar:DBCopy:DB$ Clone | Defined$ Remembered
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/copy_enchantment.jpg
+Oracle:You may have Copy Enchantment enter the battlefield as a copy of any enchantment on the battlefield.
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/42.jpg
+End
