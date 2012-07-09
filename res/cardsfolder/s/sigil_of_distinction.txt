@@ -4,7 +4,7 @@ Types:Artifact Equipment
 Text:no text
 K:etbCounter:CHARGE:X
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddPower$ Y | AddToughness$ Y | Description$ Equipped creature gets +1/+1 for each charge counter on CARDNAME.
-A:AB$ Attach | Cost$ SubCounter<1/CHARGE> | CostDesc$ Remove a charge counter from Sigil of Distinction: | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | PrecostDesc$ Equip - | SpellDescription$ Attach CARDNAME to target creature you control.
+K:Equip SubCounter<1/CHARGE>
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
