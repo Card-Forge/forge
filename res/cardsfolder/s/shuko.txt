@@ -1,8 +1,9 @@
 Name:Shuko
 ManaCost:1
 Types:Artifact Equipment
-Text:Equipped creature gets +1/+0.
-K:eqPump 0:+1/+0
+Text:no text
+K:Equip 0
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shuko.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/159.jpg

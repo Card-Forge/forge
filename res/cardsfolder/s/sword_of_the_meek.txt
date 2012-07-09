@@ -1,8 +1,9 @@
 Name:Sword of the Meek
 ManaCost:2
 Types:Artifact Equipment
-Text:Equipped creature gets +1/+2.
-K:eqPump 2:+1/+2
+Text:no text
+K:Equip 2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | Description$ Equipped creature gets +1/+2.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerEQ1+toughnessEQ1+YouCtrl | Execute$ TrigReturn | TriggerZones$ Graveyard | OptionalDecider$ You | TriggerDescription$ Whenever a 1/1 creature enters the battlefield under your control, you may return CARDNAME from your graveyard to the battlefield, then attach it to that creature.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Cost$ 0 | Defined$ TriggeredCard

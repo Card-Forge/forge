@@ -1,8 +1,9 @@
 Name:Sai of the Shinobi
 ManaCost:1
 Types:Artifact Equipment
-Text:Equipped creature gets +1/+1.
-K:eqPump 2:+1/+1
+Text:no text
+K:Equip 2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may attach CARDNAME to it.
 SVar:TrigAttach:DB$ Attach | Cost$ 0 | Defined$ TriggeredCard
 SVar:Rarity:Uncommon

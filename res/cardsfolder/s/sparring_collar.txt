@@ -1,8 +1,9 @@
 Name:Sparring Collar
 ManaCost:2
 Types:Artifact Equipment
-Text:Equipped creature has first strike.
-K:eqPump 1:+0/+0/First Strike
+Text:no text
+K:Equip 1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First Strike | Description$ Equipped creature has first strike.
 A:AB$ Attach | Cost$ R R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Attach CARDNAME to target creature you control.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sparring_collar.jpg

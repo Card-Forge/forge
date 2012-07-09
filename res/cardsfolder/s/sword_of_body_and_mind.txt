@@ -1,9 +1,10 @@
 Name:Sword of Body and Mind
 ManaCost:3
 Types:Artifact Equipment
-Text:Equipped creature gets +2/+2 and has protection from green and from blue.
-K:eqPump 2:+2/+2/Protection from green & Protection from blue
-T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.
+Text:no text
+K:Equip 2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Protection from green & Protection from blue | Description$ Equipped creature gets +2/+2 and has protection from green and from blue.
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | SubAbility$ DBMill
 SVar:DBMill:DB$Mill | Defined$ TriggeredTarget | NumCards$ 10
 SVar:Rarity:Mythic

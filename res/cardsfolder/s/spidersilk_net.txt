@@ -1,8 +1,9 @@
 Name:Spidersilk Net
 ManaCost:0
 Types:Artifact Equipment
-Text:Equipped creature gets +0/+2 and has reach.
-K:eqPump 2:+0/+2/Reach
+Text:no text
+K:Equip 2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 2 | AddKeyword$ Reach | Description$ Equipped creature gets +0/+2 and has reach.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spidersilk_net.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/206.jpg
