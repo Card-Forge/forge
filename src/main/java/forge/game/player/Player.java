@@ -525,8 +525,6 @@ public abstract class Player extends GameEntity {
             return false;
         }
 
-        boolean changeDmgToLife = this.hasKeyword("Damage that would reduce your life total to less than 7 reduces it to 7 instead.");
-
         boolean infect = source.hasKeyword("Infect")
                 || this.hasKeyword("All damage is dealt to you as though its source had infect.");
 
@@ -535,11 +533,8 @@ public abstract class Player extends GameEntity {
         } else {
             // Worship does not reduce the damage dealt but changes the effect
             // of the damage
-            if (PlayerUtil.worshipFlag(this) && (this.life <= damageToDo) && (!changeDmgToLife)) {
+            if (PlayerUtil.worshipFlag(this) && (this.life <= damageToDo)) {
                 this.loseLife(Math.min(damageToDo, this.life - 1), source);
-            }
-            else if (changeDmgToLife) {
-                this.loseLife(Math.min(damageToDo, this.life - 7), source);
             } else {
                 // rule 118.2. Damage dealt to a player normally causes that
                 // player to lose that much life.
