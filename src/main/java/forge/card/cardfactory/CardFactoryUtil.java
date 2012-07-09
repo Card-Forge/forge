@@ -4630,6 +4630,31 @@ public class CardFactoryUtil {
             card.setSVar("TrigBondSelf", abStringOther);
         }
 
+        if (card.hasStartOfKeyword("Equip")) {
+            // find position of Equip keyword
+            final int equipPos = card.getKeywordPosition("Equip");
+            // Get cost string
+            String equipCost = card.getKeyword().get(equipPos).substring(5).trim();
+           // Creeate attach ability string
+            final StringBuilder abilityStr = new StringBuilder();
+            abilityStr.append("AB$ Attach | Cost$ ");
+            abilityStr.append(equipCost);
+            abilityStr.append(" | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control ");
+            abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump ");
+            if (equipCost.matches(".+<.+>")) { //Something other than a mana cost
+                abilityStr.append("| PrecostDesc$ Equip - | SpellDescription$ (Attach to target creature you control. Equip only as a sorcery.)");
+            }
+            else {
+                abilityStr.append("| PrecostDesc$ Equip | SpellDescription$ (Attach to target creature you control. Equip only as a sorcery.)");
+            }
+            // instantiate attach ability
+            final AbilityFactory af = new AbilityFactory();
+            final SpellAbility sa = af.getAbility(abilityStr.toString(), card);
+            card.addSpellAbility(sa);
+            // add ability to instrinic strings so copies/clones create the ability also
+            card.getIntrinsicAbilities().add(abilityStr.toString());
+        }
+
         return card;
     }
 
