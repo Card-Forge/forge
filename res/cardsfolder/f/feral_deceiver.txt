@@ -6,7 +6,8 @@ PT:3/2
 A:AB$ Dig | Cost$ 1 | DigNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | NoMove$ True | SpellDescription$ Look at the top card of your library.
 A:AB$ Dig | Cost$ 2 | DigNum$ 1 | ActivationLimit$ 1 | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | NoMove$ True | RememberRevealed$ True | SubAbility$ TrigPump | SpellDescription$  Reveal the top card of your library. If it's a land card, CARDNAME gets +2/+2 and gains trample until end of turn. Activate this ability only once each turn.
 SVar:TrigPump:DB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2 | KW$ Trample | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_deceiver.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/208.jpg
