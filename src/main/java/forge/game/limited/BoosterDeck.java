@@ -1,5 +1,8 @@
 package forge.game.limited;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
@@ -55,20 +58,25 @@ public class BoosterDeck extends Deck {
                 return !(c.getSVar("RemAIDeck").equals("True") || c.getSVar("RemRandomDeck").equals("True"));
             }
         });
-        for (int i = 0; i < aiPlayables.size(); i++) {
-            draftedList.remove(aiPlayables.get(i));
+        draftedList.removeAll(aiPlayables);
+
+        // 1. Add any planeswalkers
+        CardList walkers = aiPlayables.getType("Planeswalker");
+        deckList.addAll(walkers);
+        cardsNeeded -= walkers.size();
+        if (walkers.size() > 0) {
+            System.out.println("Added " + walkers.get(0).toString());
         }
 
-
-        // 1. Add best 15 on-color creatures
-        addBestCreatures(15);
+        // 1. Add creatures, trying to follow mana curve
+        addManaCurveCreatures(15);
 
         // 2.Try to fill up to 22 with on-color non-creature cards
-        addNonCreatures(cardsNeeded - deckList.size());
+        addNonCreatures(cardsNeeded);
 
         // 3.Try to fill up to 22 with on-color creatures cards (if more than 15
         // are present)
-        addBestCreatures(cardsNeeded - deckList.size());
+        addBestCreatures(cardsNeeded);
 
         CardList nonLands = aiPlayables.getNotType("Land").getOnly2Colors(colors.getColor1(), colors.getColor2());
 
@@ -83,9 +91,10 @@ public class BoosterDeck extends Deck {
 
         // 5. If there are still less than 22 non-land cards add off-color
         // cards.
-        addRandomCards(cardsNeeded - deckList.size());
+        addRandomCards(cardsNeeded);
 
-        // 6. If it's not a mono color deck, add non-basic lands that were drafted.
+        // 6. If it's not a mono color deck, add non-basic lands that were
+        // drafted.
         addNonBasicLands();
 
         final CCnt[] clrCnts = calculateLandNeeds();
@@ -126,6 +135,23 @@ public class BoosterDeck extends Deck {
             this.getMain().add(deckList);
             this.getSideboard().add(aiPlayables);
             this.getSideboard().add(draftedList);
+            /*
+            int i = 0;
+            for (Card c : deckList) {
+                i++;
+                System.out.println(i + ". " + c.toString() + ": " + c.getManaCost().toString());
+            }
+            i = 0;
+            for (Card c : draftedList) {
+                i++;
+                System.out.println(i + ". " + c.toString() + ": " + c.getManaCost().toString());
+            }
+            i = 0;
+            for (Card c : aiPlayables) {
+                i++;
+                System.out.println(i + ". " + c.toString() + ": " + c.getManaCost().toString());
+            }
+            */
         } else {
             throw new RuntimeException("BoosterDraftAI : buildDeck() error, decksize not 40");
         }
@@ -133,44 +159,37 @@ public class BoosterDeck extends Deck {
 
     /**
      * Add lands to fulfill the given color counts.
+     * 
      * @param clrCnts
      */
     private void addLands(final CCnt[] clrCnts) {
-        
+
         // total of all ClrCnts
         int totalColor = 0;
         for (int i = 0; i < 5; i++) {
             totalColor += clrCnts[i].getCount();
-            // tmpDeck += ClrCnts[i].Color + ":" + ClrCnts[i].Count + "\n";
         }
 
-        // tmpDeck += "totalColor:" + totalColor + "\n";
-
+        int landsAdded = 0;
         for (int i = 0; i < 5; i++) {
-            if (clrCnts[i].getCount() > 0) { // calculate number of lands
-                                             // for
-                // each color
+            if (clrCnts[i].getCount() > 0) { 
+                // calculate number of lands for each color
                 final float p = (float) clrCnts[i].getCount() / (float) totalColor;
                 final int nLand = (int) (landsNeeded * p) + 1;
-                // tmpDeck += "nLand-" + ClrCnts[i].Color + ":" + nLand +
-                // "\n";
                 if (Constant.Runtime.DEV_MODE[0]) {
-                    System.out.println("Basics[" + clrCnts[i].getColor() + "]:" + nLand);
+                    System.out.println("Basics[" + clrCnts[i].getColor() + "]: " + clrCnts[i].getCount() + "/" + totalColor + " = " + p + " = " + nLand);
                 }
 
-                // just to prevent a null exception by the deck size fixing
-                // code
-                // CardCounts.put(ClrCnts[i].Color, nLand);
-
                 for (int j = 0; j <= nLand; j++) {
-                    final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(),
-                            AllZone.getComputerPlayer());
+                    final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(), AllZone.getComputerPlayer());
                     c.setCurSetCode(IBoosterDraft.LAND_SET_CODE[0]);
                     deckList.add(c);
-                    landsNeeded--;
+                    landsAdded++;
                 }
             }
         }
+        
+        landsNeeded = landsNeeded - landsAdded;
         int n = 0;
         while (landsNeeded > 0) {
             if (clrCnts[n].getCount() > 0) {
@@ -191,6 +210,7 @@ public class BoosterDeck extends Deck {
 
     /**
      * attempt to optimize basic land counts according to color representation
+     * 
      * @return CCnt
      */
     private CCnt[] calculateLandNeeds() {
@@ -248,6 +268,7 @@ public class BoosterDeck extends Deck {
 
     /**
      * Add random cards to the deck.
+     * 
      * @param nCards
      */
     private void addRandomCards(int nCards) {
@@ -271,6 +292,7 @@ public class BoosterDeck extends Deck {
 
     /**
      * Add non creatures to the deck.
+     * 
      * @param nCards
      */
     private void addNonCreatures(int nCards) {
@@ -321,6 +343,79 @@ public class BoosterDeck extends Deck {
             }
 
             i++;
+        }
+    }
+
+    /**
+     * Add creatures to the deck, trying to follow some mana curve. Trying to have generous
+     * limits at each cost, but perhaps still too strict. But we're trying to prevent the AI
+     * from adding everything at a single cost.
+     * 
+     * @param nCreatures
+     */
+    private void addManaCurveCreatures(int nCreatures) {
+        CardList creatures = aiPlayables.getType("Creature").getOnly2Colors(colors.getColor1(), colors.getColor2());
+        creatures.sort(new CreatureComparator());
+
+        Map<Integer, Integer> creatureCosts = new HashMap<Integer, Integer>();
+        for (int i = 1; i < 7; i++) {
+            creatureCosts.put(i, 0);
+        }
+        CardList currentCreatures = deckList.getType("Creature");
+        for (Card creature : currentCreatures) {
+            int cmc = creature.getCMC();
+            if (cmc < 1) {
+                cmc = 1;
+            } else if (cmc > 6) {
+                cmc = 6;
+            }
+            creatureCosts.put(cmc, creatureCosts.get(cmc) + 1);
+        }
+        int i = 0;
+        for (Card c : creatures) {
+            int cmc = c.getCMC();
+            if (cmc < 1) {
+                cmc = 1;
+            } else if (cmc > 6) {
+                cmc = 6;
+            }
+            Integer currentAtCmc = creatureCosts.get(cmc);
+            boolean willAddCreature = false;
+            if (cmc <= 1 && currentAtCmc < 2) {
+                willAddCreature = true;
+            } else if (cmc == 2 && currentAtCmc < 4) {
+                willAddCreature = true;
+            } else if (cmc == 3 && currentAtCmc < 6) {
+                willAddCreature = true;
+            } else if (cmc == 4 && currentAtCmc < 7) {
+                willAddCreature = true;
+            } else if (cmc == 5 && currentAtCmc < 3) {
+                willAddCreature = true;
+            } else if (cmc >= 6 && currentAtCmc < 3) {
+                willAddCreature = true;
+            }
+
+            if (willAddCreature) {
+                deckList.add(c);
+                cardsNeeded--;
+                nCreatures--;
+                aiPlayables.remove(c);
+                creatureCosts.put(cmc, creatureCosts.get(cmc) + 1);
+
+                if (Constant.Runtime.DEV_MODE[0]) {
+                    System.out.println("Creature[" + i + "]:" + c.getName() + " (" + c.getManaCost() + ")");
+                }
+                i++;
+            } else {
+                if (Constant.Runtime.DEV_MODE[0]) {
+                    System.out.println(c.getName() + " not added because CMC " + c.getCMC() + " has " + currentAtCmc
+                            + " already.");
+                }
+            }
+            if (nCreatures <= 0) {
+                break;
+            }
+
         }
     }
 
