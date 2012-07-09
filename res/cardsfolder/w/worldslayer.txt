@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Equipment
 Text:no text
 K:Equip 5
-T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Execute$ TrigDestroyAll | TriggerZones$ Battlefield | CombatDamage$ True | TriggerDescription$ Whenever equipped creature deals combat damage to a player, destroy all permanents other than CARDNAME.
+T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | ValidTarget$ Player | Execute$ TrigDestroyAll | TriggerZones$ Battlefield | CombatDamage$ True | TriggerDescription$ Whenever equipped creature deals combat damage to a player, destroy all permanents other than CARDNAME.
 SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Permanent.Other
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
