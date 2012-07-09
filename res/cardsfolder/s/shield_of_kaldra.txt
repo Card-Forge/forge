@@ -4,7 +4,6 @@ Types:Legendary Artifact Equipment
 Text:no text
 K:Equip 4
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ HIDDEN Indestructible | Description$ Equipped creature is indestructible.
-K:eqPump 4:HIDDEN Indestructible
 S:Mode$ Continuous | Affected$ Equipment.namedSword of Kaldra,Equipment.namedShield of Kaldra,Equipment.namedHelm of Kaldra | AddHiddenKeyword$ HIDDEN Indestructible | Description$ Equipment named Sword of Kaldra, Shield of Kaldra, and Helm of Kaldra are indestructible.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_kaldra.jpg

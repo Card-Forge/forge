@@ -1,8 +1,9 @@
 Name:Cloak and Dagger
 ManaCost:2
 Types:Tribal Artifact Rogue Equipment
-Text:Equipped creature gets +2/+0 and has shroud. (It can't be the target of spells or abilities.)
-K:eqPump 3:+2/+0/Shroud
+Text:no text
+K:Equip 3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Shroud | Description$ Equipped creature gets +2/+0 and has shroud. (It can't be the target of spells or abilities.)
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Rogue | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a Rogue creature enters the battlefield, you may attach CARDNAME to it.
 SVar:TrigAttach:DB$ Attach | Cost$ 0 | Defined$ TriggeredCard
 SVar:Rarity:Uncommon

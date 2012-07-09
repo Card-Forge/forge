@@ -2,7 +2,7 @@ Name:Diviner's Wand
 ManaCost:3
 Types:Tribal Artifact Wizard Equipment
 Text:no text
-K:eqPump 3:0/0
+K:Equip 3
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ DivinerDraw | AddTrigger$ TrigDraw | AddSVar$ DivinerTrigPump | Description$ Equipped creature has "Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn" and "4: Draw a card."
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Wizard | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a Wizard creature enters the battlefield, you may attach CARDNAME to it.
 SVar:TrigAttach:DB$ Attach | Cost$ 0 | Defined$ TriggeredCard
