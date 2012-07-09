@@ -5,7 +5,7 @@ Text:no text
 PT:7/7
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigLife | CheckSVar$ ElderscaleCondition | SVarCompare$ LT7 | TriggerDescription$ When CARDNAME enters the battlefield, if your life total is less than 7, your life total becomes 7.
-SVar:TrigLife:AB$ SetLife | Cost$ 0 | Defined$ You | LifeAmount$ 7
+SVar:TrigLife:AB$ SetLife | Cost$ 0 | Defined$ You | LifeAmount$ 7 | ConditionLifeTotal$ You | ConditionLifeAmount$ LT7
 R:Event$ DamageDone | Affected$ You | ValidTarget$ You | ReplaceWith$ DmgLucky7 | CheckSVar$ ElderscaleCondition | SVarCompare$ GE7 | IsCombat$ False | Description$ As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.
 R:Event$ DamageDone | Affected$ You | ValidTarget$ You | ReplaceWith$ DmgLucky7Combat | CheckSVar$ ElderscaleCondition | SVarCompare$ GE7 | IsCombat$ True | Secondary$ True | Description$ As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.
 SVar:DmgLucky7:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ DmgDone | SubAbility$ NoPain
