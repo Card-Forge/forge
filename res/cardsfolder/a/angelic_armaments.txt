@@ -2,8 +2,8 @@ Name:Angelic Armaments
 ManaCost:3
 Types:Artifact Equipment
 Text:no text
-K:eqPump 4:+2/+2/Flying
-S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddType$ Angel | AddColor$ White | Description$ Equipped creature gets +2+2, has flying and is a white Angel in addition to its other colors and types.
+K:Equip 4
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | AddType$ Angel | AddColor$ White | Description$ Equipped creature gets +2+2, has flying and is a white Angel in addition to its other colors and types.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_armaments.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/212.jpg

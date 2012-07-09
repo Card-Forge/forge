@@ -2,7 +2,7 @@ Name:Empyrial Plate
 ManaCost:2
 Types:Artifact Equipment
 Text:no text
-K:eqPump 2:+0/+0
+K:Equip 2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each card in your hand.
 SVar:X:Count$InYourHand
 SVar:Rarity:Rare

@@ -1,8 +1,9 @@
 Name:Copper Carapace
 ManaCost:1
 Types:Artifact Equipment
-Text:Equipped creature gets +2/+2 and can't block.
-K:eqPump 3:+2/+2/HIDDEN CARDNAME can't block.
+Text:no text
+K:Equip 3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddHiddenKeyword$ HIDDEN CARDNAME can't block. | Description$ Equipped creature gets +2/+2 and can't block.
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_carapace.jpg

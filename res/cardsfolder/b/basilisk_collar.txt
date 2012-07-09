@@ -1,8 +1,9 @@
 Name:Basilisk Collar
 ManaCost:1
 Types:Artifact Equipment
-Text:Equipped creature has deathtouch and lifelink.
-K:eqPump 2:Deathtouch & Lifelink
+Text:no text
+K:Equip 2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | AddToughness$ 4 | AddKeyword$ Deathtouch & Lifelink | Description$ Equipped creature has deathtouch and lifelink.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basilisk_collar.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/122.jpg

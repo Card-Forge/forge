@@ -1,8 +1,9 @@
 Name:Bladed Bracers
 ManaCost:1
 Types:Artifact Equipment
-Text:Equipped creature gets +1/+1.
-K:eqPump 2:+1/+1
+Text:no text
+K:Equip 2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
 S:Mode$ Continuous | Affected$ Card.EquippedBy+Human,Card.EquippedBy+Angel | AddKeyword$ Vigilance | Description$ As long as equipped creature is a Human or an Angel, it has vigilance.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladed_bracers.jpg

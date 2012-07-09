@@ -2,7 +2,8 @@ Name:Blade of the Bloodchief
 ManaCost:1
 Types:Artifact Equipment
 Text:no text
-K:eqPump 1:+0/+0
+# TODO - Convert this to scrip
+K:Equip 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blade_of_the_bloodchief.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/196.jpg

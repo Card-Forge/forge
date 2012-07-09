@@ -2,7 +2,7 @@ Name:Cranial Plating
 ManaCost:2
 Types:Artifact Equipment
 Text:no text
-K:eqPump 1:+0/+0
+K:Equip 1
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | Description$ Equipped creature gets +1/+0 for each artifact you control.
 A:AB$ Attach | Cost$ B B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Attach CARDNAME to target creature you control.
 SVar:X:Count$Valid Artifact.YouCtrl
