@@ -2,7 +2,7 @@ Name:Accorder's Shield
 ManaCost:0
 Types:Artifact Equipment
 Text:no text
-K:Equip 3:+0/+3/Vigilance
+K:Equip 3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 0 | AddToughness$ 3 | AddKeyword$ Vigilance | Description$ Equipped creature gets +0/+3 and has vigilance.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/accorders_shield.jpg
