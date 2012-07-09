@@ -847,11 +847,11 @@ public final class GameActionUtil {
             }
         }
 
-        if ((CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike") > 0) && (c.getNetAttack() > 0)) {
+        /*if ((CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike") > 0) && (c.getNetAttack() > 0)) {
             for (int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike"); k++) {
                 GameActionUtil.playerCombatDamageLoseHalfLifeUp(c);
             }
-        }
+        }*/
 
         if (c.getName().equals("Scalpelexis")) {
             GameActionUtil.playerCombatDamageScalpelexis(c);
