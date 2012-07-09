@@ -2,7 +2,7 @@ Name:Mage Slayer
 ManaCost:1 R G
 Types:Artifact Equipment
 Text:no text
-K:eqPump 3:0/0
+K:Equip 3
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDamage | TriggerDescription$ Whenever equipped creature attacks, it deals damage equal to its power to defending player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Opponent,Planeswalker.YouDontCtrl | DamageSource$ Equipped | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ X | References$ X
 SVar:X:TriggeredAttacker$CardPower

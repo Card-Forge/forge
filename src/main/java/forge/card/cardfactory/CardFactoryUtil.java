@@ -4640,7 +4640,7 @@ public class CardFactoryUtil {
             abilityStr.append("AB$ Attach | Cost$ ");
             abilityStr.append(equipCost);
             abilityStr.append(" | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control ");
-            abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump ");
+            abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature ");
             if (equipCost.matches(".+<.+>")) { //Something other than a mana cost
                 abilityStr.append("| PrecostDesc$ Equip - | SpellDescription$ (Attach to target creature you control. Equip only as a sorcery.)");
             }

@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Equipment
 Text:no text
 K:Living Weapon
-K:eqPump PB PB:0/0
+K:Equip PB PB
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each Swamp you control.
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:BuffedBy:Swamp

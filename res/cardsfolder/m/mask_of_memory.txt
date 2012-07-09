@@ -2,7 +2,7 @@ Name:Mask of Memory
 ManaCost:2
 Types:Artifact Equipment
 Text:no text
-K:eqPump 1:+0/+0
+K:Equip 1
 T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you may draw two cards. If you do, discard a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 2 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1

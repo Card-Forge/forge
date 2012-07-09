@@ -3,7 +3,7 @@ ManaCost:0
 Types:Artifact Equipment
 Text:no text
 K:Equip 3
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 0 | AddToughness$ 3 | AddKeyword$ Vigilance | Description$ Equipped creature gets +0/+3 and has vigilance.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 3 | AddKeyword$ Vigilance | Description$ Equipped creature gets +0/+3 and has vigilance.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/accorders_shield.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/136.jpg

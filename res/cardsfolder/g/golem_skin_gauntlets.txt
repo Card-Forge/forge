@@ -2,7 +2,7 @@ Name:Golem-Skin Gauntlets
 ManaCost:1
 Types:Artifact Equipment
 Text:no text
-K:eqPump 2:0/0
+K:Equip 2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | Description$ Equipped creature gets +1/+0 for each Equipment attached to it.
 SVar:X:Count$Valid Equipment.AttachedTo Creature.EquippedBy
 SVar:Rarity:Uncommon

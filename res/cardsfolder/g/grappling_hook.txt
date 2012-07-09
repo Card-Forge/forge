@@ -1,8 +1,9 @@
 Name:Grappling Hook
 ManaCost:4
 Types:Artifact Equipment
-Text:Equipped creature has double strike.
-K:eqPump 4:+0/+0/Double Strike
+Text:no text
+K:Equip 4
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Double Strike| Description$ Equipped creature has double strike.
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigProvoke | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature attacks, you may have target creature block it this turn if able.
 SVar:TrigProvoke:AB$ MustBlock | Cost$ 0 | ValidTgts$ Creature | DefinedAttacker$ Equipped | TgtPrompt$ Select target creature
 SVar:Rarity:Rare

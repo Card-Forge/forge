@@ -2,7 +2,7 @@ Name:Demonmail Hauberk
 ManaCost:4
 Types:Artifact Equipment
 Text:no text
-A:AB$ Attach | Cost$ Sac<1/Creature> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | PrecostDesc$ Equip - | SpellDescription$ Attach CARDNAME to target creature you control.
+K:Equip Sac<1/Creature>
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 4 | AddToughness$ 2 | Description$ Equipped creature gets +4/+2.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonmail_hauberk.jpg

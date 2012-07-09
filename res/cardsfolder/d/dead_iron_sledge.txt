@@ -2,7 +2,7 @@ Name:Dead-Iron Sledge
 ManaCost:1
 Types:Artifact Equipment
 Text:no text
-K:eqPump 2:0/0
+K:Equip 2
 T:Mode$ Blocks | ValidCard$ Creature.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Creature.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDestroy | Secondary$ True | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker | SubAbility$ DBDestroy

@@ -2,7 +2,7 @@ Name:Manriki-Gusari
 ManaCost:2
 Types:Artifact Equipment
 Text:no text
-K:eqPump 1:+0/+0
+K:Equip 1
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 1 | AddToughness$ 2 | AddAbility$ ABDestroy | Description$ Equipped creature gets +1/+2 and has "Tap: Destroy target Equipment."
 SVar:ABDestroy:AB$Destroy | Cost$ T | ValidTgts$ Equipment | TgtPrompt$ Select target Equipment. | SpellDescription$ Destroy target Equipment.
 SVar:Rarity:Uncommon

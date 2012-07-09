@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Equipment
 Text:no text
 K:Equip 2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 0 | AddKeyword$ Wither | Description$ Equipped creature gets +1/+0 and has wither.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Wither | Description$ Equipped creature gets +1/+0 and has wither.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blight_sickle.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/247.jpg

@@ -3,7 +3,7 @@ ManaCost:1
 Types:Artifact Equipment
 Text:no text
 K:Equip 2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 0 | AddKeyword$ Vigilance | Description$ Equipped creature gets +1/+0 and has vigilance.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Vigilance | Description$ Equipped creature gets +1/+0 and has vigilance.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy+Human | Execute$ TrigToken | TriggerDescription$ Whenever equipped creature dies, if it was a Human, put a 1/1 white Spirit creature token with flying onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 1 1 Spirit | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:Rarity:Uncommon

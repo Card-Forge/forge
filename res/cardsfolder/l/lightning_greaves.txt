@@ -1,8 +1,9 @@
 Name:Lightning Greaves
 ManaCost:2
 Types:Artifact Equipment
-Text:Equipped creature has haste and shroud.
+Text:no text
 K:eqPump 0:Haste & Shroud
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste & Shroud | Description$ Equipped creature has haste and shroud.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_greaves.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/199.jpg

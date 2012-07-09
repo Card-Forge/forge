@@ -4,7 +4,7 @@ Types:Artifact Equipment
 Text:no text
 K:Indestructible
 K:Equip 2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 0 | Description$ Equipped creature gets +2/+0.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_axe.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/149.jpg
