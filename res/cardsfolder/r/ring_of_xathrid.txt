@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Equipment
 Text:no text
 A:AB$ Regenerate | Cost$ 2 | Defined$ Equipped | SpellDescription$ Regenerate equipped creature.
-K:eqPump 1:+0/+0
+K:Equip 1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ XathridCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's black.
 SVar:XathridCounter:AB$PutCounter | Cost$ 0 | Defined$ Equipped | ConditionDefined$ Equipped | ConditionPresent$ Creature.Black | ConditionCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ 1
 SVar:Rarity:Uncommon
