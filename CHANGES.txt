@@ -161,6 +161,17 @@ Fixes/Features:
 - Fixed multiple instances of Exalted on a single card not working.
 - Cleanup in CombatUtil.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Started to add some content to chooseCardCanPlayAI.
+- added support for copied Auras.
+- cleaned up used imports in Clone AF
+- added support for Equip as a keyword.
+- Rescripted Elderscale Wurm
+- fixed "intervening if" clause in Elderscale Wurm ETB trigger.
+- Some fixes for AI Booster Deck
+- Small fixes for Elderscale Wurm
+- Removed keyword "Damage that would reduce your life total to less than 7 reduces it to 7 instead."
+- Added References parameter to Draco
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -288,6 +299,9 @@ Sands Of Delirium
 Trading Post
 Hostility
 Skarrgan Firebird
+Copy Enchantment
+Elderscale Wurm
+Snag
 
 
 end
