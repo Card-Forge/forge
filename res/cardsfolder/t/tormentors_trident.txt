@@ -2,7 +2,7 @@ Name:Tormentor's Trident
 ManaCost:2
 Types:Artifact Equipment
 Text:no text
-K:eqPump 3:+0/+0
+K:Equip 3
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 3 | AddHiddenKeyword$ HIDDEN CARDNAME attacks each turn if able. | Description$ Equipped creature gets +3/+0 and attacks each turn if able.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tormentors_trident.jpg
