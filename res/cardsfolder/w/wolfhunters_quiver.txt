@@ -2,7 +2,7 @@ Name:Wolfhunter's Quiver
 ManaCost:1
 Types:Artifact Equipment
 Text:no text
-K:eqPump 5:0/0
+K:Equip 5
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage & DamageWerewolf | Description$ Equipped creature has "Tap: This creature deals 1 damage to target creature or player" and "Tap: This creature deals 3 damage to target Werewolf creature."
 SVar:Damage:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:DamageWerewolf:AB$DealDamage | Cost$ T | ValidTgts$ Creature.Werewolf | TgtPrompt$ Select target Werewolf creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target Werewolf creature.

@@ -2,7 +2,7 @@ Name:Viridian Longbow
 ManaCost:1
 Types:Artifact Equipment
 Text:no text
-K:eqPump 3:0/0
+K:Equip 3
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage | Description$ Equipped creature has "Tap: This creature deals 1 damage to target creature or player."
 SVar:Damage:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Common
