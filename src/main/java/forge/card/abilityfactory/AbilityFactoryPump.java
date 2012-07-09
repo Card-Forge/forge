@@ -420,6 +420,8 @@ public class AbilityFactoryPump {
                     || !CombatUtil.canAttackNextTurn(card)) {
                 return false;
             }
+        } else if (keyword.endsWith("Indestructible")) {
+            return true;
         } else if (combatRelevant) {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || !CombatUtil.canBeBlocked(card)
