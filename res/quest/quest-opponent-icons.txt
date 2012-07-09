@@ -153,6 +153,7 @@ http://www.cardforge.org/fpics/questAvatars/Redwall.jpg
 http://www.cardforge.org/fpics/questAvatars/Repressed%20Magic.jpg
 http://www.cardforge.org/fpics/questAvatars/Reverend%20Lovejoy.jpg
 http://www.cardforge.org/fpics/questAvatars/Riddler.jpg
+http://www.cardforge.org/fpics/questAvatars/Robin.jpg
 http://www.cardforge.org/fpics/questAvatars/Rocky.jpg
 http://www.cardforge.org/fpics/questAvatars/Rogue.jpg
 http://www.cardforge.org/fpics/questAvatars/Sabertooth.jpg
