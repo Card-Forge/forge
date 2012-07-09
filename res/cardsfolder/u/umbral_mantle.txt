@@ -2,7 +2,7 @@ Name:Umbral Mantle
 ManaCost:3
 Types:Artifact Equipment
 Text:no text
-A:AB$ Attach | Cost$ 0 | ValidTgts$ Creature.YouCtrl | AILogic$ Pump | IsPresent$ Card.Self+nonCreature | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | PrecostDesc$ Equip | SpellDescription$ Attach CARDNAME to target creature you control.
+K:Equip 0
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ UmbralPump | Description$ Equipped creature has "3, Untap: This creature gets +2/+2 until end of turn.".
 SVar:UmbralPump:AB$ Pump | Cost$ 3 Q | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Rarity:Uncommon
