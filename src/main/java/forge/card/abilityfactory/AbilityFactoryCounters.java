@@ -325,13 +325,6 @@ public class AbilityFactoryCounters {
             if (list.size() < abTgt.getMinTargets(source, sa)) {
                 return false;
             }
-        } else { // "put counter on this"
-            final PlayerZone pZone = AllZone.getZoneOf(source);
-            // Don't activate Curse abilities on my cards and non-curse abilites
-            // on my opponents
-            if (!pZone.getPlayer().equals(player)) {
-                return false;
-            }
         }
 
         if (abCost != null) {
@@ -410,18 +403,26 @@ public class AbilityFactoryCounters {
                 abTgt.addTarget(choice);
             }
         } else {
-            // Placeholder: No targeting necessary
-            final int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
+            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                    params.get("Defined"), sa);
+            // Don't activate Curse abilities on my cards and non-curse abilites
+            // on my opponents
+            if (cards.isEmpty() || !cards.get(0).getController().isPlayer(player)) {
+                return false;
+            }
+
+            final int currCounters = cards.get(0).getCounters(Counters.valueOf(type));
             // each non +1/+1 counter on the card is a 10% chance of not
             // activating this ability.
 
-            if (!(type.equals("P1P1") || type.equals("ICE")) && (r.nextFloat() < (.1 * currCounters))) {
+            if (!(type.equals("P1P1") || type.equals("M1M1") || type.equals("ICE")) && (r.nextFloat() < (.1 * currCounters))) {
                 return false;
             }
         }
 
         // Don't use non P1P1/M1M1 counters before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
+                && !params.containsKey("ActivationPhases")
                 && !(type.equals("P1P1") || type.equals("M1M1"))) {
             return false;
         }
