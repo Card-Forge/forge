@@ -4,7 +4,8 @@ Types:Creature Ooze
 Text:no text
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the total converted mana cost of other creatures you control.
-SVar:X:Count$YourSumCMC_Creature.Other
+SVar:X:Count$SumCMC_Creature.Other+YouCtrl
+SVar:NeedsToPlayVar:X GE4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_ooze.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/112.jpg

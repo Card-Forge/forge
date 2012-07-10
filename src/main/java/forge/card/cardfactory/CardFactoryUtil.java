@@ -2861,8 +2861,8 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(CardUtil.getConvertedManaCost(c), m, c);
             }
         }
-        // Count$YourSumCMC_valid
-        if (sq[0].contains("YourSumCMC")) {
+        // Count$SumCMC_valid
+        if (sq[0].contains("SumCMC")) {
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
             CardList cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
