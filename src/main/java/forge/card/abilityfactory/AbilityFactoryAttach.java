@@ -1295,7 +1295,7 @@ public class AbilityFactoryAttach {
     /**
      * Creates the ability attach.
      * 
-     * @param abilityFactory
+     * @param af
      *            the aF
      * @return the spell ability
      */
@@ -1373,7 +1373,7 @@ public class AbilityFactoryAttach {
     /**
      * Creates the drawback attach.
      * 
-     * @param abilityFactory
+     * @param af
      *            the aF
      * @return the spell ability
      */
