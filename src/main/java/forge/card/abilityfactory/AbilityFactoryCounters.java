@@ -494,7 +494,7 @@ public class AbilityFactoryCounters {
                 if (af.isCurse()) {
                     choice = AbilityFactoryCounters.chooseCursedTarget(list, type, amount);
                 } else {
-
+                    choice = AbilityFactoryCounters.chooseBoonTarget(list, type);
                 }
 
                 if (choice == null) { // can't find anything left
