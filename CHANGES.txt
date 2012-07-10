@@ -5,13 +5,12 @@ Forge Beta: 0#-##-2012 ver 1.2.10
 10### cards in total.
 
 
-We have added 97.56% (+) of the cards from the new M13 set to forge. With new cards and reprints we now have 228 (+) M13 cards in forge.
+We have added 97.56% (+) of the cards from the new M13 set to forge. With new cards and reprints we now have 229 (+) M13 cards in forge.
 
 A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there are four remaining issues that we hope will be addressed in the near future.
 
 1. Leave play triggers don't work correct for clones.
-2. Copies of equipment made via Copy Artifact or Phyrexian Metamorph cannot be equipped.
-3. Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
+2. Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
 
 --
 
@@ -172,6 +171,27 @@ Fixes/Features:
 - Removed keyword "Damage that would reduce your life total to less than 7 reduces it to 7 instead."
 - Added References parameter to Draco
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Quick fix for Aegis Angel AI.
+- Added "SVar:RemAIDeck:True" to the Deceivers.
+- Added the recent commit logs to changes.txt.
+- convert A-F equipment to new Equip keyword
+- convert U-W equipment to new Equip keyword
+- Accorder's Shield fix
+- Fix: Changed some AttachedBy restrictions on equipment to EquippedBy
+- convert T equipment to new Equip keyword
+- convert G-M equipment to new Equip keyword. added check to attach ability macro to prevent Equip if artifact is creature.
+- convert S equipment to new Equip keyword
+- Fixed equip cost for Sickleslicer
+- Converted Sigil of Distinction to Equip macro
+- Fixed AI for Torture.
+- Converted Umbral Mantle and Unscythe, Killer of Kings to Equip macro
+- convert Q equipment to new Equip keyword (converted Quietus Spike to script)
+- convert R equipment to new Equip keyword
+- Missed a few eqPumps and forgot to take some out
+- Added the deck Robin 3.
+- convert remaining equipment to new Equip keyword
+- Small fix for Ancient Ooze and made it so that AI won't cast it until it would have at least 4 P/T
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -302,6 +322,7 @@ Skarrgan Firebird
 Copy Enchantment
 Elderscale Wurm
 Snag
+Ancient Ooze
 
 
 end
