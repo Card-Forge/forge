@@ -34,6 +34,7 @@ import forge.Card;
 import forge.CardCharactersticName;
 import forge.CardList;
 import forge.CardListFilter;
+import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
 import forge.CommandArgs;
@@ -598,7 +599,6 @@ public class CardFactoryUtil {
         if (c.getSVar("SacrificeEndCombat").equals("True")) {
             value -= 40;
         }
-        
 
         for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.isAbility()) {
@@ -2860,6 +2860,14 @@ public class CardFactoryUtil {
             } else {
                 return CardFactoryUtil.doXMath(CardUtil.getConvertedManaCost(c), m, c);
             }
+        }
+        // Count$YourSumCMC_valid
+        if (sq[0].contains("YourSumCMC")) {
+            final String[] restrictions = l[0].split("_");
+            final String[] rest = restrictions[1].split(",");
+            CardList cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            CardList filteredCards = cardsonbattlefield.getValidCards(rest, cardController, c);
+            return CardListUtil.sumCMC(filteredCards);
         }
         // Count$CardNumColors
         if (sq[0].contains("CardNumColors")) {
