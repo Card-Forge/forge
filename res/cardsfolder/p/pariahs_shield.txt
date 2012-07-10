@@ -2,7 +2,7 @@ Name:Pariah's Shield
 ManaCost:5
 Types:Artifact Equipment
 Text:no text
-K:eqPump 3:+0/+0
+K:Equip 3
 R:Event$ DamageDone | ValidTarget$ You | ReplaceWith$ DmgEquipped | IsCombat$ False | IsEquipping$ True | Description$ All damage that would be dealt to you is dealt to equipped creature instead.
 R:Event$ DamageDone | ValidTarget$ You | ReplaceWith$ DmgEquippedCombat | IsCombat$ True | IsEquipping$ True | Secondary$ True | Description$ All damage that would be dealt to you is dealt to equipped creature instead.
 SVar:DmgEquipped:AB$DealDamage | Cost$ 0 | Defined$ Equipped | DamageSource$ ReplacedSource | NumDmg$ X | References$ X

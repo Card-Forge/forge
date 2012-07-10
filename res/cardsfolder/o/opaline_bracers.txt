@@ -2,7 +2,7 @@ Name:Opaline Bracers
 ManaCost:4
 Types:Artifact Equipment
 Text:no text
-K:eqPump 2:+0/+0
+K:Equip 2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Equipped creature gets +X/+X, where X is the number of charge counters on CARDNAME.
 K:Sunburst
 SVar:X:Count$CardCounters.CHARGE

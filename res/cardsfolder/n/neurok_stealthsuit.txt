@@ -1,8 +1,9 @@
 Name:Neurok Stealthsuit
 ManaCost:2
 Types:Artifact Equipment
-Text:Equipped creature has shroud. (It can't be the target of spells or abilities.)
-K:eqPump 1:+0/+0/Shroud
+Text:no text
+K:Equip 1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Shroud | Description$ Equipped creature has shroud. (It can't be the target of spells or abilities.)
 A:AB$ Attach | Cost$ U U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Attach CARDNAME to target creature you control.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_stealthsuit.jpg

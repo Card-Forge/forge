@@ -1,8 +1,9 @@
 Name:Elbrus, the Binding Blade
 ManaCost:7
 Types:Legendary Artifact Equipment
-Text:Equipped creature gets +1/+0.
-K:eqPump 1:+1/+0
+Text:no text
+K:Equip 1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
 T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, transform CARDNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elbrus_the_binding_blade.jpg

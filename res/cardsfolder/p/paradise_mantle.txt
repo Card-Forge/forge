@@ -2,7 +2,7 @@ Name:Paradise Mantle
 ManaCost:0
 Types:Artifact Equipment
 Text:no text
-K:eqPump 1:+0/+0
+K:Equip 1
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ AnyMana | Description$ Equipped creature has "Tap: Add one mana of any color to your mana pool."
 SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Rarity:Uncommon

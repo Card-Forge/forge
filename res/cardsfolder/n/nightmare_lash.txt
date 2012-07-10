@@ -2,7 +2,7 @@ Name:Nightmare Lash
 ManaCost:4
 Types:Artifact Equipment
 Text:no text
-K:eqPump PayLife<3>:+0/+0
+K:Equip PayLife<3>
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Equipped creature gets +1/+1 for each Swamp you control.
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:BuffedBy:Swamp

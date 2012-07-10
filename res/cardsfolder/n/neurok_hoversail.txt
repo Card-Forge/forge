@@ -1,8 +1,9 @@
 Name:Neurok Hoversail
 ManaCost:1
 Types:Artifact Equipment
-Text:Equipped creature has flying.
-K:eqPump 2:Flying
+Text:no text
+K:Equip 2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Description$ Equipped creature has flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_hoversail.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/218.jpg
