@@ -421,7 +421,7 @@ public class AbilityFactoryCounters {
         }
 
         // Don't use non P1P1/M1M1 counters before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !params.containsKey("ActivationPhases")
                 && !(type.equals("P1P1") || type.equals("M1M1"))) {
             return false;

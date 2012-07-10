@@ -479,7 +479,7 @@ public final class AbilityFactoryChangeZone {
                 return false;
             }
         }
-        
+
         // don't play if the conditions aren't met, unless it would trigger a beneficial sub-condition
         if (!AbilityFactory.checkConditional(sa)) {
             final AbilitySub abSub = sa.getSubAbility();
@@ -1372,7 +1372,7 @@ public final class AbilityFactoryChangeZone {
 
         return true;
     }
-    
+
     /**
      * Some logic for picking a creature card from a list.
      * @param list
@@ -1643,7 +1643,7 @@ public final class AbilityFactoryChangeZone {
                             // counters TODO check good and
                             // bad counters
                             // checks only if there is a dangerous ETB effect
-                            return SpellPermanent.checkETBEffects(c, null, null); 
+                            return SpellPermanent.checkETBEffects(c, null, null);
                         }
                     });
                     if (!aiPermanents.isEmpty()) {
@@ -1777,7 +1777,7 @@ public final class AbilityFactoryChangeZone {
 
         return true;
     }
-    
+
     /**
      * <p>
      * changeKnownUnpreferredTarget.

@@ -204,7 +204,7 @@ public final class AbilityFactoryClone {
     // TODO update this method
     private static String cloneStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-  
+
          final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof AbilitySub) {
