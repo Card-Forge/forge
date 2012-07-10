@@ -1418,9 +1418,7 @@ public final class GameActionUtil {
                         alreadyAdded.clear();
                         for (int x2 = 0; x2 < type.get(x).getType().size(); x2++) {
                             if (!alreadyAdded.contains(type.get(x))) {
-                                if (!type.get(x).getType().get(x2).equals("Creature")
-                                        && !type.get(x).getType().get(x2).equals("Legendary")
-                                        && !type.get(x).getType().get(x2).equals("Artifact")) {
+                                if (CardUtil.isACreatureType(type.get(x).getType().get(x2))) {
                                     if (crd.isType(type.get(x).getType().get(x2))) {
                                         alreadyAdded.add(type.get(x));
                                         crd.addSemiPermanentAttackBoost(1);
