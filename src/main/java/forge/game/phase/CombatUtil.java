@@ -99,6 +99,11 @@ public class CombatUtil {
             }
         }
 
+        final CardList list = AllZoneUtil.getCreaturesInPlay(blocker.getController());
+        if (list.size() < 2 && blocker.hasKeyword("CARDNAME can't attack or block alone.")) {
+            return false;
+        }
+
         if ((combat.getAllBlockers().size() > 0) && AllZoneUtil.isCardInPlay("Dueling Grounds")) {
             return false;
         }
@@ -665,6 +670,11 @@ public class CombatUtil {
                     return false;
                 }
             }
+        }
+
+        final CardList list = AllZoneUtil.getCreaturesInPlay(c.getController());
+        if (list.size() < 2 && c.hasKeyword("CARDNAME can't attack or block alone.")) {
+            return false;
         }
 
         if (cntAttackers > 0 && c.hasKeyword("CARDNAME can only attack alone.")) {

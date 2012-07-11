@@ -1,0 +1,12 @@
+Name:Mogg Flunkies
+ManaCost:1 R
+Types:Creature Goblin
+Text:no text
+PT:3/3
+K:CARDNAME can't attack or block alone.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_flunkies.jpg
+SetInfo:M13|Common|http://magiccards.info/scans/en/m13/143.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/92.jpg
+Oracle:Mogg Flunkies can't attack or block alone.
+End

@@ -2780,6 +2780,7 @@ res/cardsfolder/e/elvish_visionary.txt svneol=native#text/plain
 res/cardsfolder/e/elvish_warrior.txt svneol=native#text/plain
 res/cardsfolder/e/emancipation_angel.txt -text
 res/cardsfolder/e/embargo.txt svneol=native#text/plain
+res/cardsfolder/e/ember_beast.txt -text
 res/cardsfolder/e/ember_fist_zubera.txt svneol=native#text/plain
 res/cardsfolder/e/ember_hauler.txt svneol=native#text/plain
 res/cardsfolder/e/ember_shot.txt svneol=native#text/plain
@@ -4767,6 +4768,7 @@ res/cardsfolder/j/jaces_archivist.txt -text
 res/cardsfolder/j/jaces_erasure.txt svneol=native#text/plain
 res/cardsfolder/j/jaces_ingenuity.txt svneol=native#text/plain
 res/cardsfolder/j/jaces_phantasm.txt -text
+res/cardsfolder/j/jackal_familiar.txt -text
 res/cardsfolder/j/jackal_pup.txt svneol=native#text/plain
 res/cardsfolder/j/jackalope_herd.txt svneol=native#text/plain
 res/cardsfolder/j/jacques_le_vert.txt svneol=native#text/plain
@@ -5992,6 +5994,7 @@ res/cardsfolder/m/mogg_bombers.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_cannon.txt -text
 res/cardsfolder/m/mogg_conscripts.txt -text
 res/cardsfolder/m/mogg_fanatic.txt svneol=native#text/plain
+res/cardsfolder/m/mogg_flunkies.txt -text
 res/cardsfolder/m/mogg_hollows.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_infestation.txt -text
 res/cardsfolder/m/mogg_jailer.txt svneol=native#text/plain

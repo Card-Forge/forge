@@ -284,6 +284,17 @@ public class PhaseUtil {
      */
     public static void handleDeclareAttackers() {
         PhaseUtil.verifyCombat();
+
+        // Handles removing cards like Mogg Flunkies from combat if group attack didn't occur
+        final CardList filterList = AllZone.getCombat().getAttackerList();
+        for (Card c : filterList) {
+            if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isAttacking()) {
+                if (AllZone.getCombat().getAttackers().size() < 2) {
+                    AllZone.getCombat().removeFromCombat(c);
+                }
+            }
+        }
+
         final CardList list = AllZone.getCombat().getAttackerList();
 
         // TODO move propaganda to happen as the Attacker is Declared
@@ -341,6 +352,16 @@ public class PhaseUtil {
      */
     public static void handleDeclareBlockers() {
         PhaseUtil.verifyCombat();
+
+        // Handles removing cards like Mogg Flunkies from combat if group block didn't occur
+        final CardList filterList = AllZone.getCombat().getAllBlockers();
+        for (Card c : filterList) {
+            if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isBlocking()) {
+                if (AllZone.getCombat().getAllBlockers().size() < 2) {
+                    AllZone.getCombat().undoBlockingAssignment(c);
+                }
+            }
+        }
 
         AllZone.getStack().freezeStack();
 

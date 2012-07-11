@@ -590,6 +590,26 @@ public class Combat {
 
     /**
      * <p>
+     * undoBlockingAssignment.
+     * </p>
+     * 
+     * @param blocker
+     *            a {@link forge.Card} object.
+     */
+    public final void undoBlockingAssignment(final Card blocker) {
+        final CardList att = this.getAttackerList();
+        for (final Card attacker : att) {
+            if (this.getBlockers(attacker).contains(blocker)) {
+                this.getBlockerList(attacker).remove(blocker);
+                if (this.getBlockers(attacker).size() == 0) {
+                    this.blocked.remove(attacker);
+                }
+            }
+        }
+    } // undoBlockingAssignment(Card)
+
+    /**
+     * <p>
      * verifyCreaturesInPlay.
      * </p>
      */
