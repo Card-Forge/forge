@@ -2008,6 +2008,12 @@ public class AbilityFactory {
                     players.add((Player) rem);
                 }
             }
+        } else if (defined.equals("RememberedOpponent")) {
+            for (final Object rem : card.getRemembered()) {
+                if (rem instanceof Player) {
+                    players.add(((Player) rem).getOpponent());
+                }
+            }
         } else if (defined.startsWith("Triggered")) {
             final SpellAbility root = sa.getRootSpellAbility();
             Object o = null;

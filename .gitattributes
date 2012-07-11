@@ -3799,6 +3799,7 @@ res/cardsfolder/g/goblin_digging_team.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_dirigible.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_dynamo.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_elite_infantry.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_festival.txt -text
 res/cardsfolder/g/goblin_fire_fiend.txt -text
 res/cardsfolder/g/goblin_firebug.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_fireslinger.txt svneol=native#text/plain
