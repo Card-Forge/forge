@@ -427,6 +427,10 @@ public class AbilityFactoryCounters {
             return false;
         }
 
+        if (AbilityFactory.waitForBlocking(sa)) {
+            return false;
+        }
+
         final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
