@@ -192,6 +192,15 @@ Fixes/Features:
 - convert remaining equipment to new Equip keyword
 - Small fix for Ancient Ooze and made it so that AI won't cast it until it would have at least 4 P/T
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- small fix to changes.txt
+- Checkstyle
+- Checkstyle
+- Fix: Coat of Arms should now filter creature types properly
+- Fixed AI of Blessings of Nature.
+- Added RememberedOpponent to defined players
+- Fixed ActivatingPlayer overwriting the target/defined chooser for ChoosePlayer
+- Improved AI of Chronomaton and Energizer.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -323,6 +332,7 @@ Copy Enchantment
 Elderscale Wurm
 Snag
 Ancient Ooze
+Goblin Festival
 
 
 end
