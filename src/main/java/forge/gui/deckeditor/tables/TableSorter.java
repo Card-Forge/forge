@@ -76,6 +76,12 @@ public class TableSorter<T> implements Comparator<Entry<T, Integer>> {
     public final int compare(final Entry<T, Integer> arg0, final Entry<T, Integer> arg1) {
         final Comparable obj1 = this.field.apply(arg0);
         final Comparable obj2 = this.field.apply(arg1);
+        if (obj1 == null) {
+            return -1;
+        }
+        if (obj2 == null) {
+            return 1;
+        }
         //System.out.println(String.format("%s vs %s _______ %s vs %s", arg0, arg1, obj1, obj2));
         return this.ascending ? obj1.compareTo(obj2) : obj2.compareTo(obj1);
     }
