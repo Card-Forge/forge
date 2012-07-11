@@ -82,7 +82,6 @@ public class PhaseUtil {
         final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
         final Player turn = ph.getPlayerTurn();
 
-        ph.turnReset();
         Singletons.getModel().getGameSummary().notifyNextTurn();
         CMessage.SINGLETON_INSTANCE.updateGameInfo();
 

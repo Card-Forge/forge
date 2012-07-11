@@ -304,15 +304,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
     /**
      * <p>
-     * turnReset.
-     * </p>
-     */
-    public final void turnReset() {
-        this.playerTurn.setNumLandsPlayed(0);
-    }
-
-    /**
-     * <p>
      * handleBeginPhase.
      * </p>
      */
@@ -468,6 +459,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     player.resetPreventNextDamage();
                     player.resetNumDrawnThisTurn();
                     player.setAttackedWithCreatureThisTurn(false);
+                    player.setNumLandsPlayed(0);
                 }
                 this.getPlayerTurn().removeKeyword("Skip all combat phases of this turn.");
                 break;
