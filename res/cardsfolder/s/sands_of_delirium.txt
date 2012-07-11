@@ -1,4 +1,4 @@
-Name:Sands Of Delirium
+Name:Sands of Delirium
 ManaCost:3
 Types:Artifact
 Text:no text
