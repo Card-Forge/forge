@@ -5,7 +5,6 @@ Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ PutCounter | Cost$ 1 R T | CounterType$ PRESSURE | CounterNum$ 1 | SpellDescription$ Put a pressure counter on CARDNAME.
 A:AB$ Token | Cost$ 1 R T SubCounter<2/PRESSURE> Sac<1/CARDNAME> | TokenAmount$ 1 | TokenName$ Hellion | TokenTypes$ Creature,Hellion | TokenOwner$ You | TokenColors$ Red | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Haste | SpellDescription$ Put a 4/4 red Hellion creature token with haste onto the battlefield.
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellion_crucible.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/226.jpg

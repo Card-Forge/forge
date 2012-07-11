@@ -8,7 +8,6 @@ K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ThunderDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to each creature with flying your opponents control. Tap those creatures.
 SVar:ThunderDamage:AB$ DamageAll | Cost$ 0 | NumDmg$ 1 | ValidCards$ Creature.withFlying+YouDontCtrl | ValidDescription$ each creature with flying you don't control | SubAbility$ ThunderTap
 SVar:ThunderTap:DB$ TapAll | Cost$ 0 | ValidCards$ Creature.withFlying+YouDontCtrl | ValidDescription$ each creature with flying you don't control
-SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thundermaw_hellkite.jpg
 SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/150.jpg
