@@ -3276,9 +3276,13 @@ public class CardFactoryUtil {
      */
     public static int handlePaid(final CardList paidList, final String string, final Card source) {
         if (paidList == null) {
-            return 0;
+            if (string.contains(".")) {
+                final String[] splitString = string.split("\\.", 2);
+                return CardFactoryUtil.doXMath(0, splitString[1], source);
+            } else {
+                return 0;
+            }
         }
-
         if (string.startsWith("Amount")) {
             if (string.contains(".")) {
                 final String[] splitString = string.split("\\.", 2);
