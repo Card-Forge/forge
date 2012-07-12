@@ -1812,12 +1812,18 @@ public class AbilityFactoryCounters {
 
         final Counters cType = Counters.valueOf(params.get("CounterType"));
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
+        final String zone = params.containsKey("ValidZone") ? params.get("ValidZone") : "Battlefield";
 
         sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
         if (amount != 1) {
             sb.append("s");
         }
-        sb.append(" on each valid permanent.");
+        sb.append(" on each valid ");
+        if (zone.matches("Battlefield")) {
+            sb.append("permanent.");
+        } else {
+            sb.append("card in ").append(zone).append(".");
+        }
 
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
@@ -1989,8 +1995,9 @@ public class AbilityFactoryCounters {
         final String type = params.get("CounterType");
         final int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
         final String valid = params.get("ValidCards");
+        final ZoneType zone = params.containsKey("ValidZone") ? ZoneType.smartValueOf(params.get("ValidZone")) : ZoneType.Battlefield;
 
-        CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        CardList cards = AllZoneUtil.getCardsIn(zone);
         cards = cards.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();
@@ -2168,6 +2175,7 @@ public class AbilityFactoryCounters {
 
         final Counters cType = Counters.valueOf(params.get("CounterType"));
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
+        final String zone = params.containsKey("ValidZone") ? params.get("ValidZone") : "Battlefield";
         String amountString = Integer.toString(amount);
 
         if (params.containsKey("AllCounters")) {
@@ -2178,7 +2186,12 @@ public class AbilityFactoryCounters {
         if (!amountString.equals("1")) {
             sb.append("s");
         }
-        sb.append(" from each valid permanent.");
+        sb.append(" from each valid ");
+        if (zone.matches("Battlefield")) {
+            sb.append("permanent.");
+        } else {
+            sb.append("card in ").append(zone).append(".");
+        }
 
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
@@ -2237,8 +2250,9 @@ public class AbilityFactoryCounters {
         final String type = params.get("CounterType");
         int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
         final String valid = params.get("ValidCards");
+        final ZoneType zone = params.containsKey("ValidZone") ? ZoneType.smartValueOf(params.get("ValidZone")) : ZoneType.Battlefield;
 
-        CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        CardList cards = AllZoneUtil.getCardsIn(zone);
         cards = cards.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();

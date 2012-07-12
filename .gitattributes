@@ -2614,6 +2614,7 @@ res/cardsfolder/d/duskworker.txt svneol=native#text/plain
 res/cardsfolder/d/dust_bowl.txt svneol=native#text/plain
 res/cardsfolder/d/dust_corona.txt svneol=native#text/plain
 res/cardsfolder/d/dust_elemental.txt svneol=native#text/plain
+res/cardsfolder/d/dust_of_moments.txt -text
 res/cardsfolder/d/dust_to_dust.txt svneol=native#text/plain
 res/cardsfolder/d/duty_bound_dead.txt -text
 res/cardsfolder/d/dwarven_armorer.txt svneol=native#text/plain
