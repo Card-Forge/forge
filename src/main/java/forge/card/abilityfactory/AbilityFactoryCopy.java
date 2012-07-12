@@ -307,6 +307,7 @@ public final class AbilityFactoryCopy {
         if (abTgt != null) {
             CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
+            list = list.getTargetableCards(sa);
             abTgt.resetTargets();
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
