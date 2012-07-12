@@ -7065,6 +7065,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
+        } else if (property.startsWith("suspended")) {
+            if (!this.hasSuspend() || !AllZoneUtil.isCardExiled(this)
+                    || !AllZoneUtil.compare(this.getCounters(Counters.getType("TIME")), "GE", Integer.parseInt("1"))) {
+                return false;
+            }
 
         } else if (property.startsWith("power") || property.startsWith("toughness") || property.startsWith("cmc")) {
             int x = 0;
