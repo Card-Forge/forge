@@ -246,10 +246,6 @@ public class ManaCost {
             if (canBePaidWith(shard, paid)) {
                 return true;
             }
-
-            if (shard.isSnow() && paid.isSnow()) {
-                return true;
-            }
         }
         return false;
     }
@@ -423,6 +419,9 @@ public class ManaCost {
     }
 
     private boolean canBePaidWith(ManaCostShard shard, Mana mana) {
+        if (shard.isSnow() && mana.isSnow()) {
+            return true;
+        }
         //System.err.println(String.format("ManaPaid: paying for %s with %s" , shard, mana));
         // debug here even more;
         return canBePaidWith(shard, InputPayManaCostUtil.getShortColorString(mana.getColor()));
