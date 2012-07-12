@@ -419,8 +419,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 break;
 
             case CLEANUP:
-                this.getPlayerTurn().clearAssignedDamage();
-
                 // Reset Damage received map
                 final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
                 for (final Card c : list) {
@@ -460,6 +458,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     player.resetNumDrawnThisTurn();
                     player.setAttackedWithCreatureThisTurn(false);
                     player.setNumLandsPlayed(0);
+                    player.clearAssignedDamage();
                 }
                 this.getPlayerTurn().removeKeyword("Skip all combat phases of this turn.");
                 break;
