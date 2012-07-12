@@ -201,6 +201,17 @@ Fixes/Features:
 - Fixed ActivatingPlayer overwriting the target/defined chooser for ChoosePlayer
 - Improved AI of Chronomaton and Energizer.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added CARDNAME can't attack or block alone keyword.
+- add is IsCurse to Xathrid Gorgon first ability
+- The AI will now react better when faced with creatures with "CARDNAME can't attack or block alone.".
+- Fixed handlePaid not using xMath on a null list.
+- Fixed NumLandsPlayed not being reset in Cleanup.
+- Fixed name of Sands of Delirium.
+- Added some null checks to TableSorter.
+- Updated some SVars.
+- Fixed possible NPE in combatTriggerWillTrigger.
+- Added oracle and set info to Venser's Diffusion
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -333,6 +344,10 @@ Elderscale Wurm
 Snag
 Ancient Ooze
 Goblin Festival
+Ember Beast
+Jackal Familiar
+Mogg Flunkies
+Venser's Diffusion
 
 
 end
