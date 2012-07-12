@@ -1416,12 +1416,14 @@ public class CombatUtil {
             if (trigParams.containsKey("ValidSource")) {
                 if (TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidSource").split(","), source)
                         && defender.getNetCombatDamage() > 0
-                        && TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidTarget").split(","), source)) {
+                        && (!trigParams.containsKey("ValidTarget")
+                                || TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidTarget").split(","), source))) {
                     return true;
                 }
                 if (TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), source)
                         && attacker.getNetCombatDamage() > 0
-                        && TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidTarget").split(","), source)) {
+                        && (!trigParams.containsKey("ValidTarget")
+                                || TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidTarget").split(","), source))) {
                     return true;
                 }
             }
