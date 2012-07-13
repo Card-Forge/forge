@@ -11237,6 +11237,7 @@ res/pics_product/precons/totem_power.jpg -text
 res/pics_product/precons/unnatural_schemes.jpg -text
 res/pics_product/precons/vampire_onslaught.jpg -text
 res/pics_product/precons/war_of_attrition.jpg -text
+res/pics_product/precons/wild_rush.jpg -text
 res/pics_product/tournamentpacks/2ED.jpg -text
 res/pics_product/tournamentpacks/3ED.jpg -text
 res/pics_product/tournamentpacks/4ED.jpg -text
@@ -11670,6 +11671,7 @@ res/quest/precons/Totem[!!-~]Power.dck -text
 res/quest/precons/Unnatural[!!-~]Schemes.dck -text
 res/quest/precons/Vampire[!!-~]Onslaught.dck -text
 res/quest/precons/War[!!-~]of[!!-~]Attrition.dck -text
+res/quest/precons/Wild[!!-~]Rush.dck -text
 res/quest/price.txt svneol=native#text/plain
 res/quest/quest-opponent-icons.txt -text
 res/quest/quest-pet-shop-icons.txt -text
