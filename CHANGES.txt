@@ -1,18 +1,18 @@
-Forge Beta: 07-13-2012 ver 1.2.10
+Forge Beta: 07-##-2012 ver 1.2.11
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-11019 cards in total.
+11### cards in total.
 
 
-We have added 98.29% of the cards from the new M13 set to forge. With new cards and reprints we now have 230 out of 234 M13 cards in forge.
+
+
+--
 
 A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there are two remaining issues that we hope will be addressed in the near future.
 
 1. Leave play triggers don't work correct for clones.
 2. Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
-
---
 
 The work on the new UI is now finished. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
 
@@ -28,349 +28,25 @@ Forge may not be fully java 7 compatible at this time. We recommend that people 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove useful. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
 
-We have changed the archival format used for the Forge distributions from ".zip" to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these ".tar.bz2" archives. We recommend that you decompress the Forge archive into a new and unused folder.
+The archive format used for the Forge distribution is ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to extract/decompress these ".tar.bz2" archives. We recommend that you extract/decompress the Forge archive into a new and unused folder.
 
 Some people use the Windows application 7zip. This utility can be found at http://www.7-zip.org/download.html. Mac users can double click on the archive and the application Archive Utility will launch and extract the archive. Mac users do not need to download a separate utility.
 
 
 Fixes/Features:
 
-- Cleared out the changes.txt file, now ready for new material.
-- Remove the string "-r15897" from the title bar but not other SVN rev numbers.
-- Fixed Martyr of Sands.
-- Little AI tweak in AF Draw.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed cost of Brain Pry.
-- Added AI checks so it doesn't pump creatures that will die when targeted.
-- Added SVar:Targeting:Dies to relevant creatures.
-- Added SVar to Clone and Phantasmal Image so AI will not cast these spells when there are no creatures to copy.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added a new quest deck by Nordos called Dr Doom 3.
-- Updated the deck Ned Flanders 4.
-- Fixed the LQ pic URL for Krond the Dawn-Clad.
-- merged r15965-r15996 from the Trunk into CloneFix branch
-- AI fix for Timely Reinforcements; new SVar AIPlayForSub.
-- Fixed AI of Spectral Prison.
-- Fix: Dragon Broodmother tokens will now display an image
-- Improved AI handling of Goblin Elite Infantry.
-- Added Landwalk keywords to NonStackingKWList.txt.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed AI not being able to use Hybrid mana.
-- Fixed AI of Hoofprints of the Stag.
-- Added AI checks to LoseLife drawbacks.
-- Added Landwalk checks to isUsefulPumpKeyword.
-- Cleanup in EndOfTurn class.
-- AI is now aware of destroy damaged triggers (Stinkweed Imp and friends).
-- Fixed Snow mana bug ("Not found: mana shard with profile = 0").
-- Experimental fix for XManaCostPaid not being reset properly.
-- Added a medium version of the Dream quest deck.
-- Added missing spell description to Quest for Pure Flame effect
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed possible ConcurrentModificationException caused by Gift of the Gargantuan.
-- Fixed Whimwader.
-- Converted Kulrath Knight to script.
-- Performance update in canAttackNextTurn.
-- Deleted AbilityWork branch folder
-- Fixed AI not checking canPlay() restrictions of mana sources.
-- merged r15997-16020 from the Trunk into CloneFix branch
-- converted Sakashima The Imposter to script
-- converted Jwari Shapeshifter to script
-- Improved AI for Barl's Cage.
-- Fixed sorcery speed AI bug in AF DealDamage.
-- Fixed Blaze AI targeting human.
-- ChosenX will now also be stored on the card and not only the spellAbility.
-- Fixed Tezzeret the Seeker.
-- Made "Open Deck" dialog default to res/decks folder.
-- Cleanup in CardFactoryCreatures.
-- changed targeting for Clone AF
-- converted Copy Artifact and Sculpting Steel to scripts
-- Converted Vesuvan Doppelganger to script
-- merged r16020-r16032 from the Trunk into CloneFix branch
-- Fixed an issue with non-copyable abilities. Scripted Vesuva
-- Little AI fix in isUsefulCurseKeyword.
-- Improved AI choosing lands to play.
-- Added the recent commit logs to changes.txt.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed Fanning the Flames and Spell Burst.
-- Fixed Quest for Pure Flame trigger's ValidTarget param (thanks Squee for pointing it out)
-- CLoneFix branch: fixed some issues with overwriting SVars and cloning clones
-- CLoneFix branch: more fixes some issues with overwriting SVars and cloning clones
-- CLoneFix branch: changed card template script to omit setInfo
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Simplify dependency management
-- Fixed Graveyard Shovel.
-- CLoneFix branch: added support for TriggeredCardLKICopy
-- CLoneFix branch: merged r16032-r16054 from the Trunk into CloneFix branch
-- CLoneFix branch: reverting to Trunk version of Animate AF
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed cards similar to Graveyard Shovel: Graveyard Shovel; Merrow Bonegnawer; Relic of Progenitus and Scrabbling Claws.
-- AI fix for Tap abilities that target multiple cards.
-- CLoneFix branch: converted Body Double to script
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed AI of Gift of Estates.
-- CheckStyle.
-- The AI will now always attack with Erg Raiders.
-- Improved pumpAllCanPlayAI (the AI wouldn't cast Trumpet Blast for example).
-- Updated some AI SVars.
-- Added the precon Slaughterhouse.
-- Removed a few unused imports.
-- CLoneFix branch: fixed SVar name for Akki Lavarunner
-- CLoneFix branch: added a copy method to CardCharacteristics class that makes a deep copy of another instance of CardCharacteristics
-- CLoneFix branch: add a flip status to Card class to support proper handling of flipped status for clones and copies.
-- CLoneFix branch: change Clone AF stack description method
-- CLoneFix branch: marking clones with choices as RemAIDeck:True until logic is added to appropriate AFs
-- CLoneFix branch: merged r16054-r16079 from the Trunk into CloneFix branch
-- CLoneFix branch: removed RemAIDeck as Choose AF has some basic logic already
-- Better AI for fetching cards.
-- reintegrating CloneFix branch into Trunk
-- add some AI SVars to clones
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed canPay in CostRemoveCounter.
-- Added a little check to shouldCastLessThanMax.
-- AI improvements in AF Tap.
-- Reverted main.properties.
-- Fantasy Quest Checkbox can now be unchecked
-- Added Dr Doom icon to the quest avatar download list
-- fixed issue with Apocalypse Hydra X cost flag
-- UnlessCost can parse arbitrary svar names instead of just X.
-- Cleaned up Divine Reckoning
-- Added an optional parameter "ChoiceTitle" to ChooseCard to allow more descriptive title prompts for the choice dialogue box.
-- Quest Tokens that start the game in play now don't flush summoning sickness until their controller's second turn
-- Fixed AI for Tribute to the Wild.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Update M13 SetInfo
-- Small fix to scripts
-- Adding reprint info for M13 and PC2 cards
-- M13 branch: Added SetInfo.
-- Updating mtgdata.txt
-- Merged M13 branch into trunk.
-- Added Oracle texts to M13 cards.
-- Updated AI in BoosterDraftAI
-- add M13 to card template script
-- Adding Ultimate flag to new Ajani
-- fixed issue with clones of tokens leaving battlefield
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Little improvement in tapPrefTargeting.
-- Fixed types of Sai of the Shinobi.
-- fixed issue with TargetedPlayerCtrl in filterListByType
-- added Petrification counter.
-- Added a fluff piece to the changes.txt file.
-- Refactor Booster Deck building to separate class.
-- SVar for creatures that are sacrificed at end of combat.
-- Fixed multiple instances of Exalted on a single card not working.
-- Cleanup in CombatUtil.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Started to add some content to chooseCardCanPlayAI.
-- added support for copied Auras.
-- cleaned up used imports in Clone AF
-- added support for Equip as a keyword.
-- Rescripted Elderscale Wurm
-- fixed "intervening if" clause in Elderscale Wurm ETB trigger.
-- Some fixes for AI Booster Deck
-- Small fixes for Elderscale Wurm
-- Removed keyword "Damage that would reduce your life total to less than 7 reduces it to 7 instead."
-- Added References parameter to Draco
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Quick fix for Aegis Angel AI.
-- Added "SVar:RemAIDeck:True" to the Deceivers.
-- Added the recent commit logs to changes.txt.
-- convert A-F equipment to new Equip keyword
-- convert U-W equipment to new Equip keyword
-- Accorder's Shield fix
-- Fix: Changed some AttachedBy restrictions on equipment to EquippedBy
-- convert T equipment to new Equip keyword
-- convert G-M equipment to new Equip keyword. added check to attach ability macro to prevent Equip if artifact is creature.
-- convert S equipment to new Equip keyword
-- Fixed equip cost for Sickleslicer
-- Converted Sigil of Distinction to Equip macro
-- Fixed AI for Torture.
-- Converted Umbral Mantle and Unscythe, Killer of Kings to Equip macro
-- convert Q equipment to new Equip keyword (converted Quietus Spike to script)
-- convert R equipment to new Equip keyword
-- Missed a few eqPumps and forgot to take some out
-- Added the deck Robin 3.
-- convert remaining equipment to new Equip keyword
-- Small fix for Ancient Ooze and made it so that AI won't cast it until it would have at least 4 P/T
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- small fix to changes.txt
-- Checkstyle
-- Checkstyle
-- Fix: Coat of Arms should now filter creature types properly
-- Fixed AI of Blessings of Nature.
-- Added RememberedOpponent to defined players
-- Fixed ActivatingPlayer overwriting the target/defined chooser for ChoosePlayer
-- Improved AI of Chronomaton and Energizer.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added CARDNAME can't attack or block alone keyword.
-- add is IsCurse to Xathrid Gorgon first ability
-- The AI will now react better when faced with creatures with "CARDNAME can't attack or block alone.".
-- Fixed handlePaid not using xMath on a null list.
-- Fixed NumLandsPlayed not being reset in Cleanup.
-- Fixed name of Sands of Delirium.
-- Added some null checks to TableSorter.
-- Updated some SVars.
-- Fixed possible NPE in combatTriggerWillTrigger.
-- Added oracle and set info to Venser's Diffusion
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added suspended restriction in isValid
-- Added optional param ValidZone to PutCountersAll and RemoveCountersAll
-- Cleaned up suspended restriction
-- Fixed Basilisk Collar.
-- Fixed clearAssignedDamage not being called during both players turns.
-- Fixed CopyPermanent AI not checking for targetability.
-- Fixed another bug with Snow mana used by the AI.
-- Added a fluff piece to the changes.txt file.
-- Remove the string "-r16084" from the title bar but not other SVN rev numbers.
-- Preparing the changes.txt file for the next beta build and release.
+
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-ArsenalNut
-Dave
-Hellfish
-Marc
-mcrawford620
-Nordos
-Sagephoenix
-Sloth
-Sol
-Squee
-Torridus
-ZzzzSleep
-Chris H
+
+
 
 
 Added many cards, including:
 
-Ajani's Sunstriker
-Ajani, Caller of the Pride
-Ancient Ooze
-Archaeomancer
-Arctic Aven
-Attended Knight
-Augur of Bolas
-Battleflight Eagle
-Blood Reckoning
-Bloodhunter Bat
-Bond Beetle
-Boundless Realms
-Captain's Call
-Captivating Glance
-Cataclysm
-Cathedral of War
-Cemetery Puca
-Chandra's Fury
-Chronomaton
-Cleaver Riot
-Copy Enchantment
-Courtly Provocateur
-Cower in Fear
-Craterize
-Crimson Muckwader
-Crippling Blight
-Crusader of Odric
-Diabolic Revelation
-Dimir Doppelganger
-Disciple of Bolas
-Downpour
-Draco
-Dragon Hatchling
-Duskmantle Prowler
-Dust of Moments
-Duty-Bound Dead
-Elderscale Wurm
-Ember Beast
-Encrust
-Faerie Invaders
-Faith's Reward
-Felidar Umbra
-Firewing Phoenix
-Flames of the Firebrand
-Flinthoof Boar
-Fungal Sprouting
-Gem of Becoming
-Goblin Battle Jester
-Goblin Festival
-Griffin Protector
-Guardian Lions
-Harbor Bandit
-Healer of the Pride
-Hellion Crucible
-Hostility
-Hydrosurge
-Jace's Phantasm
-Jackal Familiar
-Knight of Glory
-Knight of Infamy
-Krenko's Command
-Krenko, Mob Boss
-Liliana of the Dark Realms
-Liliana's Shade
-Magmaquake
-Mark of the Vampire
-Master of the Pearl Trident
-Mind Sculpt
-Mindclaw Shaman
-Mogg Flunkies
-Murder
-Mwonvuli Beast Tracker
-Nefarox, Overlord of Grixis
-Nemesis Trap
-Omniscience
-Predatory Rampage
-Primal Huntbeast
-Prison Term
-Prized Elephant
-Public Execution
-Quest for Pure Flame
-Ranger's Path
-Reckless Brute
-Rhox Faithmender
-Ring of Evos Isle
-Ring of Kalonia
-Ring of Thune
-Ring of Valkas
-Ring of Xathrid
-Roaring Primadox
-Rummaging Goblin
-Sakashima's Student
-Sands Of Delirium
-Searing Spear
-Sentinel Spider
-Serpent's Gift
-Servant of Nefarox
-Shapeshifter's Marrow
-Show of Valor
-Silent-Blade Oni
-Skarrgan Firebird
-Slumbering Dragon
-Smelt
-Snag
-Spiked Baloth
-Staff of Nin
-Sublime Archangel
-Talrand's Invocation
-Talrand, Sky Summoner
-Thragtusk
-Thundermaw Hellkite
-Timberpack Wolf
-Touch of the Eternal
-Trading Post
-Tricks of the Trade
-Unstable Shapeshifter
-Veilborn Ghoul
-Venser's Diffusion
-Vile Rebirth
-Void Stalker
-War Falcon
-Warclamp Mastiff
-Watercourser
-Wild Guess
-Worldfire
-Xathrid Gorgon
-Yeva's Forcemage
-Yeva, Nature's Herald
+
 
 
 end
