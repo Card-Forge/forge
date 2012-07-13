@@ -123,8 +123,10 @@ public class BuildInfo {
         // Chris' dev system but not on Dave's dev system. We should note that many
         // users are refering to the snapshot build by only using the SVS rev number
         // and the code below may convince them to instead use the date of the archive.
-        if (result.endsWith("-r15897")) {
-            result = result.replace("-r15897", "");
+        // Note that the number appears to change at some point, now removing:
+        // r16084
+        if (result.endsWith("-r16084")) {
+            result = result.replace("-16084", "");
         }
         return result;
     }
