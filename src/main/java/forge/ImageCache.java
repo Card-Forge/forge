@@ -64,7 +64,7 @@ public class ImageCache {
     /** Constant <code>imageCache</code>. */
     private static final LoadingCache<String, BufferedImage> IMAGE_CACHE;
     /** Constant <code>FULL_SIZE</code>. */
-    private static final Pattern FULL_SIZE = Pattern.compile("(.*)#(\\d+.\\d+)");
+    private static final Pattern FULL_SIZE = Pattern.compile("(.*)#([0-9.]+)");
 
     private static final String NORMAL = "#Normal", TAPPED = "#Tapped";
     public static final String SEALED_PRODUCT = "sealed://";
@@ -106,18 +106,19 @@ public class ImageCache {
                     } else {
                         // original
                         File path;
+                        String filename = key;
                         if (key.startsWith(ImageCache.TOKEN)) {
-                            key = key.substring(ImageCache.TOKEN.length());
+                            filename = key.substring(ImageCache.TOKEN.length());
                             path = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
                         } else if (key.startsWith(SEALED_PRODUCT)) {
-                            key = key.substring(SEALED_PRODUCT.length());
+                            filename = key.substring(SEALED_PRODUCT.length());
                             path = ForgeProps.getFile(NewConstants.IMAGE_SEALED_PRODUCT);
                         } else {
                             path = ForgeProps.getFile(NewConstants.IMAGE_BASE);
                         }
 
                         File file = null;
-                        final String fName = key.endsWith(".png") || key.endsWith(".jpg") ? key : key + ".jpg";
+                        final String fName = filename.endsWith(".png") || filename.endsWith(".jpg") ? filename : filename + ".jpg";
                         file = new File(path, fName);
                         if (!file.exists()) {
                             // DEBUG
@@ -126,6 +127,7 @@ public class ImageCache {
                             return null;
                         }
                         final BufferedImage image = ImageUtil.getImage(file);
+                        IMAGE_CACHE.put(key, image);
                         return image;
                     }
                 } catch (final Exception ex) {
