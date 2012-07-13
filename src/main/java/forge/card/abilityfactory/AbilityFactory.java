@@ -782,6 +782,17 @@ public class AbilityFactory {
             }
         }
 
+        else if (this.api.equals("ExchangeControl")) {
+            final AbilityFactoryGainControl afControl = new AbilityFactoryGainControl(this);
+            if (this.isAb) {
+                spellAbility = afControl.getAbilityExchangeControl();
+            } else if (this.isSp) {
+                spellAbility = afControl.getSpellExchangeControl();
+            } else if (this.isDb) {
+                spellAbility = afControl.getDrawbackExchangeControl();
+            }
+        }
+
         else if (this.api.equals("Fight")) {
             final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
             if (this.isAb) {

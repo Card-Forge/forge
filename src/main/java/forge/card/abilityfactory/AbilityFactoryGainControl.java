@@ -654,5 +654,230 @@ public class AbilityFactoryGainControl {
         host.clearGainControlTargets();
         host.clearGainControlReleaseCommands();
     }
+    
+    // *************************************************************************
+    // ******************************* ExchangeControl ***********************************
+    // *************************************************************************
+    /**
+     * <p>
+     * getAbilityExchangeControl.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public final SpellAbility getAbilityExchangeControl() {
+        class AbilityExchangeControl extends AbilityActivated {
+            public AbilityExchangeControl(final Card ca, final Cost co, final Target t) {
+                super(ca, co, t);
+            }
+
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated res = new AbilityExchangeControl(getSourceCard(),
+                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+
+            private static final long serialVersionUID = -1831356710492849854L;
+            private final AbilityFactory af = AbilityFactoryGainControl.this.af;
+
+            @Override
+            public String getStackDescription() {
+                return exchangeControlStackDescription(this.af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return exchangeControlCanPlayAI(this.af, this);
+            }
+
+            @Override
+            public void resolve() {
+                exchangeControlResolve(this.af, this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return exchangeControlDoTriggerAI(this.af, this, mandatory);
+            }
+        }
+
+        final SpellAbility abExchangeControl = new AbilityExchangeControl(this.af.getHostCard(),
+                this.af.getAbCost(), this.af.getAbTgt());
+
+        return abExchangeControl;
+    }
+
+    /**
+     * <p>
+     * getSpellExchangeControl.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public final SpellAbility getSpellExchangeControl() {
+        final SpellAbility spExchangeControl = new Spell(this.af.getHostCard(), this.af.getAbCost(),
+                this.af.getAbTgt()) {
+            private static final long serialVersionUID = 8004957182752960518L;
+            private final AbilityFactory af = AbilityFactoryGainControl.this.af;
+            private final HashMap<String, String> params = this.af.getMapParams();
+
+            @Override
+            public String getStackDescription() {
+                if (this.params.containsKey("SpellDescription")) {
+                    return af.getHostCard().getName() + " - "
+                            + this.params.get("SpellDescription");
+                } else {
+                    return exchangeControlStackDescription(this.af, this);
+                }
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return exchangeControlCanPlayAI(this.af, this);
+            }
+
+            @Override
+            public void resolve() {
+                exchangeControlResolve(this.af, this);
+            }
+
+        };
+        return spExchangeControl;
+    }
+
+    /**
+     * <p>
+     * getDrawbackExchangeControl.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public final SpellAbility getDrawbackExchangeControl() {
+        class DrawbackExchangeControl extends AbilitySub {
+            public DrawbackExchangeControl(final Card ca, final Target t) {
+                super(ca, t);
+            }
+
+            @Override
+            public AbilitySub getCopy() {
+                AbilitySub res = new DrawbackExchangeControl(getSourceCard(),
+                        getTarget() == null ? null : new Target(getTarget()));
+                CardFactoryUtil.copySpellAbility(this, res);
+                return res;
+            }
+
+            private static final long serialVersionUID = -6169562107675964474L;
+            private final AbilityFactory af = AbilityFactoryGainControl.this.af;
+
+            @Override
+            public String getStackDescription() {
+                return exchangeControlStackDescription(this.af, this);
+            }
+
+            @Override
+            public void resolve() {
+                exchangeControlResolve(this.af, this);
+            }
+
+            @Override
+            public boolean chkAIDrawback() {
+                // check AI life before playing this drawback?
+                return true;
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return exchangeControlDoTriggerAI(this.af, this, mandatory);
+            }
+        }
+        final SpellAbility dbExchangeControl = new DrawbackExchangeControl(this.af.getHostCard(),this.af.getAbTgt());
+
+        return dbExchangeControl;
+    }
+
+    /**
+     * <p>
+     * exchangeControlStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    private String exchangeControlStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        final StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        Card object1 = null;
+        Card object2 = null;
+        final Target tgt = sa.getTarget();
+        ArrayList<Card> tgts = tgt.getTargetCards();
+        if (tgts.size() > 0) {
+            object1 = tgts.get(0);
+        }
+        if (params.containsKey("Defined")) {
+            object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa).get(0);
+        } else if (tgts.size() > 1) {
+            object2 = tgts.get(1);
+        }
+
+        if (sa instanceof AbilitySub) {
+            sb.append(" ");
+        } else {
+            sb.append(sa.getSourceCard()).append(" - ");
+        }
+
+        sb.append(object1 + " exchanges controler with " + object2);
+
+        final AbilitySub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+
+        return sb.toString();
+    }
+
+    private boolean exchangeControlCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+
+        //final Target tgt = sa.getTarget();
+
+        return false;
+    }
+
+    private boolean exchangeControlDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+            return false;
+        }
+
+        return false;
+    }
+
+    private void exchangeControlResolve(final AbilityFactory af, final SpellAbility sa) {
+        final HashMap<String, String> params = af.getMapParams();
+        Card object1 = null;
+        Card object2 = null;
+        final Target tgt = sa.getTarget();
+        ArrayList<Card> tgts = tgt.getTargetCards();
+        if (tgts.size() > 0) {
+            object1 = tgts.get(0);
+        }
+        if (params.containsKey("Defined")) {
+            object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa).get(0);
+        } else if (tgts.size() > 1) {
+            object2 = tgts.get(1);
+        }
+
+        if (object1 == null || object2 == null || !AllZoneUtil.isCardInPlay(object1)
+                || !AllZoneUtil.isCardInPlay(object2)) {
+            return;
+        }
+
+        Player player2 = object2.getController();
+        object2.addController(object1.getController());
+        object1.addController(player2);
+    }
 
 } // end class AbilityFactory_GainControl
