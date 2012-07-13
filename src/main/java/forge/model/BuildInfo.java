@@ -126,7 +126,7 @@ public class BuildInfo {
         // Note that the number appears to change at some point, now removing:
         // r16084
         if (result.endsWith("-r16084")) {
-            result = result.replace("-16084", "");
+            result = result.replace("-r16084", "");
         }
         return result;
     }
