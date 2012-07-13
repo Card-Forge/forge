@@ -42,6 +42,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
 
@@ -721,16 +722,10 @@ public class AbilityFactoryGainControl {
                 this.af.getAbTgt()) {
             private static final long serialVersionUID = 8004957182752960518L;
             private final AbilityFactory af = AbilityFactoryGainControl.this.af;
-            private final HashMap<String, String> params = this.af.getMapParams();
 
             @Override
             public String getStackDescription() {
-                if (this.params.containsKey("SpellDescription")) {
-                    return af.getHostCard().getName() + " - "
-                            + this.params.get("SpellDescription");
-                } else {
-                    return exchangeControlStackDescription(this.af, this);
-                }
+                return exchangeControlStackDescription(this.af, this);
             }
 
             @Override
@@ -841,9 +836,39 @@ public class AbilityFactoryGainControl {
     }
 
     private boolean exchangeControlCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        final HashMap<String, String> params = af.getMapParams();
+        Card object1 = null;
+        Card object2 = null;
+        final Target tgt = sa.getTarget();
+        tgt.resetTargets();
 
-        //final Target tgt = sa.getTarget();
-
+        CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), this.hostCard);
+        // AI won't try to grab cards that are filtered out of AI decks on
+        // purpose
+        list = list.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                final Map<String, String> vars = c.getSVars();
+                return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa);
+            }
+        });
+        object1 = CardFactoryUtil.getBestAI(list);
+        if (params.containsKey("Defined")) {
+            object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa).get(0);
+        } else if (tgt.getMinTargets(sa.getSourceCard(), sa) > 1) {
+            CardList list2 = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            list2 = list2.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), this.hostCard);
+            object2 = CardFactoryUtil.getWorstAI(list2);
+            tgt.addTarget(object2);
+        }
+        if (object1 == null || object2 == null) {
+            return false;
+        }
+        if (CardFactoryUtil.evaluateCreature(object1) > CardFactoryUtil.evaluateCreature(object2) + 40) {
+            tgt.addTarget(object1);
+            return MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        }
         return false;
     }
 
