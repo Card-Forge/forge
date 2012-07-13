@@ -1,8 +1,8 @@
-Forge Beta: 0#-##-2012 ver 1.2.10
+Forge Beta: 07-13-2012 ver 1.2.10
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-10### cards in total.
+11019 cards in total.
 
 
 We have added 98.29% of the cards from the new M13 set to forge. With new cards and reprints we now have 230 out of 234 M13 cards in forge.
@@ -212,142 +212,165 @@ Fixes/Features:
 - Fixed possible NPE in combatTriggerWillTrigger.
 - Added oracle and set info to Venser's Diffusion
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added suspended restriction in isValid
+- Added optional param ValidZone to PutCountersAll and RemoveCountersAll
+- Cleaned up suspended restriction
+- Fixed Basilisk Collar.
+- Fixed clearAssignedDamage not being called during both players turns.
+- Fixed CopyPermanent AI not checking for targetability.
+- Fixed another bug with Snow mana used by the AI.
+- Added a fluff piece to the changes.txt file.
+- Remove the string "-r16084" from the title bar but not other SVN rev numbers.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Dave
+Hellfish
+Marc
+mcrawford620
+Nordos
+Sagephoenix
+Sloth
+Sol
+Squee
+Torridus
+ZzzzSleep
+Chris H
 
 
 Added many cards, including:
 
-Captivating Glance
-Prison Term
-Nemesis Trap
-Quest for Pure Flame
-Silent-Blade Oni
-Felidar Umbra
-Draco
-Cataclysm
-Cemetery Puca
-Dimir Doppelganger
-Sakashima's Student
-Shapeshifter's Marrow
-Unstable Shapeshifter
 Ajani's Sunstriker
+Ajani, Caller of the Pride
+Ancient Ooze
 Archaeomancer
 Arctic Aven
 Attended Knight
 Augur of Bolas
 Battleflight Eagle
 Blood Reckoning
+Bloodhunter Bat
 Bond Beetle
+Boundless Realms
 Captain's Call
+Captivating Glance
+Cataclysm
 Cathedral of War
+Cemetery Puca
+Chandra's Fury
 Chronomaton
+Cleaver Riot
+Copy Enchantment
+Courtly Provocateur
 Cower in Fear
 Craterize
 Crimson Muckwader
 Crippling Blight
 Crusader of Odric
 Diabolic Revelation
+Dimir Doppelganger
+Disciple of Bolas
 Downpour
+Draco
+Dragon Hatchling
 Duskmantle Prowler
+Dust of Moments
 Duty-Bound Dead
+Elderscale Wurm
+Ember Beast
+Encrust
 Faerie Invaders
+Faith's Reward
+Felidar Umbra
+Firewing Phoenix
+Flames of the Firebrand
 Flinthoof Boar
+Fungal Sprouting
+Gem of Becoming
 Goblin Battle Jester
+Goblin Festival
 Griffin Protector
 Guardian Lions
 Harbor Bandit
 Healer of the Pride
+Hellion Crucible
+Hostility
 Hydrosurge
+Jace's Phantasm
+Jackal Familiar
 Knight of Glory
 Knight of Infamy
+Krenko's Command
+Krenko, Mob Boss
 Liliana of the Dark Realms
 Liliana's Shade
+Magmaquake
 Mark of the Vampire
 Master of the Pearl Trident
 Mind Sculpt
 Mindclaw Shaman
+Mogg Flunkies
 Murder
+Mwonvuli Beast Tracker
+Nefarox, Overlord of Grixis
+Nemesis Trap
 Omniscience
+Predatory Rampage
+Primal Huntbeast
+Prison Term
 Prized Elephant
+Public Execution
+Quest for Pure Flame
+Ranger's Path
 Reckless Brute
 Rhox Faithmender
-Serpent's Gift
-Servant of Nefarox
-Show of Valor
-Staff of Nin
-Sublime Archangel
-Talrand's Invocation
-Thragtusk
-Touch of the Eternal
-Tricks of the Trade
-Veilborn Ghoul
-Vile Rebirth
-War Falcon
-Warclamp Mastiff
-Watercourser
-Searing Spear
-Smelt
-Krenko's Command
-Ranger's Path
-Ajani, Caller of the Pride
 Ring of Evos Isle
 Ring of Kalonia
 Ring of Thune
 Ring of Valkas
 Ring of Xathrid
-Bloodhunter Bat
-Courtly Provocateur
-Disciple of Bolas
-Encrust
-Faith's Reward
-Jace's Phantasm
-Nefarox, Overlord of Grixis
-Talrand, Sky Summoner
-Void Stalker
-Boundless Realms
-Chandra's Fury
-Fungal Sprouting
-Magmaquake
-Mwonvuli Beast Tracker
-Predatory Rampage
-Public Execution
-Slumbering Dragon
-Thundermaw Hellkite
-Timberpack Wolf
-Cleaver Riot
-Dragon Hatchling
-Firewing Phoenix
-Flames of the Firebrand
-Krenko, Mob Boss
-Primal Huntbeast
 Roaring Primadox
 Rummaging Goblin
+Sakashima's Student
+Sands Of Delirium
+Searing Spear
 Sentinel Spider
+Serpent's Gift
+Servant of Nefarox
+Shapeshifter's Marrow
+Show of Valor
+Silent-Blade Oni
+Skarrgan Firebird
+Slumbering Dragon
+Smelt
+Snag
 Spiked Baloth
+Staff of Nin
+Sublime Archangel
+Talrand's Invocation
+Talrand, Sky Summoner
+Thragtusk
+Thundermaw Hellkite
+Timberpack Wolf
+Touch of the Eternal
+Trading Post
+Tricks of the Trade
+Unstable Shapeshifter
+Veilborn Ghoul
+Venser's Diffusion
+Vile Rebirth
+Void Stalker
+War Falcon
+Warclamp Mastiff
+Watercourser
 Wild Guess
 Worldfire
 Xathrid Gorgon
 Yeva's Forcemage
 Yeva, Nature's Herald
-Gem of Becoming
-Hellion Crucible
-Sands Of Delirium
-Trading Post
-Hostility
-Skarrgan Firebird
-Copy Enchantment
-Elderscale Wurm
-Snag
-Ancient Ooze
-Goblin Festival
-Ember Beast
-Jackal Familiar
-Mogg Flunkies
-Venser's Diffusion
 
 
 end
