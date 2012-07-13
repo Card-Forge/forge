@@ -5,7 +5,7 @@ Forge Beta: 0#-##-2012 ver 1.2.10
 10### cards in total.
 
 
-We have added 97.86% (+) of the cards from the new M13 set to forge. With new cards and reprints we now have 229 (+) M13 cards in forge.
+We have added 98.29% of the cards from the new M13 set to forge. With new cards and reprints we now have 230 out of 234 M13 cards in forge.
 
 A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there are two remaining issues that we hope will be addressed in the near future.
 
