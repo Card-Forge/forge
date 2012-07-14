@@ -386,6 +386,10 @@ public class ManaCost {
         }
 
         decreaseShard(choice, 1);
+        if (choice.isOr2Colorless() && !this.isColor(mana)) {
+            this.increaseColorlessMana(1);
+        }
+
         if (!mana.equals(Constant.Color.COLORLESS)) {
             if (this.sunburstMap.containsKey(mana)) {
                 this.sunburstMap.put(mana, this.sunburstMap.get(mana) + 1);
@@ -430,7 +434,7 @@ public class ManaCost {
     private boolean canBePaidWith(ManaCostShard shard, String mana) {
         // most debug here!!
         String sShard = shard.toString();
-        boolean res = "1".equals(sShard) || sShard.contains(mana);
+        boolean res = "1".equals(sShard) || sShard.contains(mana) || shard.isOr2Colorless();
         //System.out.println(String.format("Str: paying for %s with %s => %d" , shard, mana, res ? 1 : 0));
         return res;
     }
@@ -466,13 +470,17 @@ public class ManaCost {
             return false;
         }
 
+        String manaColor = mana.getColor();
         decreaseShard(choice, 1);
+        if (choice.isOr2Colorless() && !this.isColor(InputPayManaCostUtil.getShortColorString(manaColor))) {
+            this.increaseColorlessMana(1);
+        }
 
         if (!mana.isColor(Constant.Color.COLORLESS)) {
-            if (this.sunburstMap.containsKey(mana.getColor())) {
-                this.sunburstMap.put(mana.getColor(), this.sunburstMap.get(mana.getColor()) + 1);
+            if (this.sunburstMap.containsKey(manaColor)) {
+                this.sunburstMap.put(manaColor, this.sunburstMap.get(manaColor) + 1);
             } else {
-                this.sunburstMap.put(mana.getColor(), 1);
+                this.sunburstMap.put(manaColor, 1);
             }
         }
         return true;
