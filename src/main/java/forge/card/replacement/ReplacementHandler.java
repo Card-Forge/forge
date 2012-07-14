@@ -102,13 +102,25 @@ public class ReplacementHandler {
                 chosenRE = possibleReplacers.get(0);
             }
         }
+        
+        possibleReplacers.remove(chosenRE);
 
         if (chosenRE != null) {
+            chosenRE.setHasRun(true);
             if (this.executeReplacement(runParams, chosenRE, decider)) {
+                chosenRE.setHasRun(false);
                 AllZone.getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
                 return true;
             } else {
-                return false;
+                if(possibleReplacers.size() == 0)
+                {
+                    return false;
+                }
+                else {
+                    boolean ret = run(runParams);
+                    chosenRE.setHasRun(false);
+                    return ret;
+                }
             }
         } else {
             return false;
@@ -127,8 +139,7 @@ public class ReplacementHandler {
             final ReplacementEffect replacementEffect, final Player decider) {
 
         final HashMap<String, String> mapParams = replacementEffect.getMapParams();
-        replacementEffect.setHasRun(true);
-
+        
         SpellAbility effectSA = null;
 
         if (mapParams.containsKey("ReplaceWith")) {
@@ -158,13 +169,11 @@ public class ReplacementHandler {
                 buildQuestion.append(replacementEffect.toString());
                 buildQuestion.append(")");
                 if (!GameActionUtil.showYesNoDialog(replacementEffect.getHostCard(), buildQuestion.toString())) {
-                    replacementEffect.setHasRun(false);
                     return false;
                 }
             } else {
                 // AI-logic
                 if (!replacementEffect.aiShouldRun(effectSA)) {
-                    replacementEffect.setHasRun(false);
                     return false;
                 }
             }
@@ -172,7 +181,6 @@ public class ReplacementHandler {
 
         if (mapParams.containsKey("Prevent")) {
             if (mapParams.get("Prevent").equals("True")) {
-                replacementEffect.setHasRun(false);
                 return true; // Nothing should replace the event.
             }
         }
@@ -182,8 +190,6 @@ public class ReplacementHandler {
         } else {
             ComputerUtil.playNoStack(effectSA);
         }
-
-        replacementEffect.setHasRun(false);
 
         return true;
     }

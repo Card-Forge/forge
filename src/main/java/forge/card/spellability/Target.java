@@ -506,14 +506,14 @@ public class Target {
         final StringBuilder sb = new StringBuilder();
 
         if (parse.equals("CP")) {
-            valid = "Creature,Planeswalker.YouDontCtrl,Player";
-            prompt = "Select target creature, planeswalker, or player";
+            valid = "Creature,Player";
+            prompt = "Select target creature or player";
         } else if (parse.equals("C")) {
             valid = "Creature";
             prompt = "Select target creature";
         } else if (parse.equals("P")) {
-            valid = "Planeswalker.YouDontCtrl,Player";
-            prompt = "Select target planeswalker or player";
+            valid = "Player";
+            prompt = "Select player";
         } else {
             System.out.println("Bad Parsing in Target(parse, min, max): " + parse);
             return;

@@ -20,6 +20,7 @@ package forge.card.cardfactory;
 import forge.Card;
 import forge.Command;
 import forge.Counters;
+import forge.card.replacement.ReplacementHandler;
 
 /**
  * <p>
@@ -48,6 +49,12 @@ public class CardFactoryPlaneswalkers {
             Command cmd = CardFactoryUtil.entersBattleFieldWithCounters(card, Counters.LOYALTY, card.getBaseLoyalty());
             card.addComesIntoPlayCommand(cmd);
         }
+        
+        //Planeswalker damage redirection
+        card.addReplacementEffect(ReplacementHandler.parseReplacement("Event$ DamageDone | IsCombat$ False | ValidSource$ Card.YouDontCtrl | ValidTarget$ You | Optional$ True | OptionalDecider$ Opponent | ReplaceWith$ DamagePW | Secondary$ True | AICheckSVar$ DamagePWAI | AISVarCompare$ LE4 | Description$ Redirect damage to " + card.toString(), card));
+        card.setSVar("DamagePW", "AB$DealDamage | Cost$ 0 | Defined$ Self | NumDmg$ DamagePWX | DamageSource$ ReplacedSource | References$ DamagePWX,DamagePWAI");
+        card.setSVar("DamagePWX","ReplaceCount$DamageAmount");
+        card.setSVar("DamagePWAI","Count$YourLifeTotal/Minus.DamagePWX");
 
         return card;
     }

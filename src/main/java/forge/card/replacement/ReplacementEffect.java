@@ -88,7 +88,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             if (sa == null) {
                 left = CardFactoryUtil.xCount(this.hostCard, this.hostCard.getSVar(svarToCheck));
             } else {
-                left = AbilityFactory.calculateAmount(this.hostCard, this.hostCard.getSVar(svarToCheck), sa);
+                left = AbilityFactory.calculateAmount(this.hostCard, svarToCheck, sa);
             }
 
             if (AllZoneUtil.compare(left, comparator, compareTo)) {
