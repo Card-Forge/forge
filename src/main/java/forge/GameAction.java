@@ -1840,12 +1840,6 @@ public class GameAction {
                 if ((playerCreatureList.size() + opponentCreatureList.size()) >= 10) {
                     manaCost = new ManaCost("B B");
                 } // Avatar of Woe
-            } else if (originalCard.getName().equals("Avatar of Will")) {
-                final Player opponent = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getOpponent();
-                final CardList opponentHandList = opponent.getCardsIn(ZoneType.Hand);
-                if (opponentHandList.size() == 0) {
-                    manaCost = new ManaCost("U U");
-                } // Avatar of Will
             } else if (originalCard.getName().equals("Avatar of Fury")) {
                 final Player opponent = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getOpponent();
                 final CardList opponentLand = AllZoneUtil.getPlayerLandsInPlay(opponent);
@@ -2468,7 +2462,7 @@ public class GameAction {
         } // Khalni Hydra
 
         // Reduce cost
-        for (Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+        for (Card c : cardsOnBattlefield) {
             final ArrayList<StaticAbility> staticAbilities = c.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 manaCost = stAb.applyAbility("ReduceCost", spell, manaCost);
