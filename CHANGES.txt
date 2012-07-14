@@ -35,7 +35,17 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-
+- Fix: the second ChangeZone in Venser's Diffusion shouldn't have been a Hidden type.
+- redid the wrong version check.
+- Cleared out the changes.txt file, now ready for new material.
+- Fixed Xathrid Gorgon.
+- Fixing ImageCache to use the right names, and forcing a put that I think should have been there the whole time
+- Added AF ExchangeControl.
+- Added AI support to AF ExchangeControl.
+- Added the precon Wild Rush.
+- fixed issue with paying for monocolored hybrid costs
+- Added 9ED setinfo to Index.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -46,7 +56,8 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-
+Switcheroo
+Phyrexian Infiltrator
 
 
 end
