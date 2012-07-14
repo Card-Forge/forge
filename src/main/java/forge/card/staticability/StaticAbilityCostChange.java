@@ -20,6 +20,7 @@ package forge.card.staticability;
 import java.util.HashMap;
 
 import forge.Card;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -83,17 +84,17 @@ public class StaticAbilityCostChange {
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getSourceCard();
+        final String amount = params.get("Amount");
+        final ManaCost manaCost = new ManaCost(originalCost.toString());
 
         if (params.containsKey("ValidCard")
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
             return originalCost;
         }
-
         if (params.containsKey("Activator") && ((activator == null)
                 || !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard))) {
             return originalCost;
         }
-
         if (params.containsKey("Type") && params.get("Type").equals("Spell") && !sa.isSpell()) {
             return originalCost;
         }
@@ -101,7 +102,17 @@ public class StaticAbilityCostChange {
             return originalCost;
         }
 
-        //modify the cost here
-        return originalCost;
+        if (!"WUGRB".contains(amount)) {
+            int value = 0;
+            if ("X".equals(amount)) {
+                value = CardFactoryUtil.xCount(card, card.getSVar("X"));
+            } else {
+                value = Integer.valueOf(amount);
+            }
+
+            manaCost.decreaseColorlessMana(value);
+        }
+
+        return manaCost;
     }
 }
