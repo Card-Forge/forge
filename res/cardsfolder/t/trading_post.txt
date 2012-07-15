@@ -6,6 +6,7 @@ A:AB$ GainLife | Cost$ 1 T Discard<1/Card> | LifeAmount$ 4 | SpellDescription$ Y
 A:AB$ Token | Cost$ 1 T PayLife<1> | TokenAmount$ 1 | TokenName$ Goat | TokenTypes$ Creature,Goat | TokenOwner$ You | TokenColors$ White | TokenPower$ 0 | TokenToughness$ 1 | SpellDescription$ Put a 0/1 white Goat creature token onto the battlefield.
 A:AB$ ChangeZone | Cost$ 1 T Sac<1/Creature> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact card from your graveyard to your hand.
 A:AB$ Draw | Cost$ 1 T Sac<1/Artifact> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trading_post.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/220.jpg

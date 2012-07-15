@@ -2,7 +2,8 @@ Name:Wild Guess
 ManaCost:R R
 Types:Sorcery
 Text:no text
-A:SP$ Draw | Cost$ R R Discard<1/Card> | CostDesc$ As an additional cost to cast CARDNAME, discard a card. | NumCards$ 2 | Defined$ You | SpellDescription$ Draw two cards
+A:SP$ Draw | Cost$ R R Discard<1/Card> | CostDesc$ As an additional cost to cast CARDNAME, discard a card. | NumCards$ 2 | Defined$ You | SpellDescription$ Draw two cards.
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_guess.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/157.jpg

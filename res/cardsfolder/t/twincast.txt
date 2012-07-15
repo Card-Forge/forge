@@ -3,6 +3,7 @@ ManaCost:U U
 Types:Instant
 Text:no text
 A:SP$ CopySpell | Cost$ U U | ValidTgts$ Instant,Sorcery | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twincast.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/78.jpg
