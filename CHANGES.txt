@@ -46,6 +46,17 @@ Fixes/Features:
 - fixed issue with paying for monocolored hybrid costs
 - Added 9ED setinfo to Index.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Implemented Planeswalker Damage Redirection.
+- Added first functionality to ReduceCostAbility.
+- Converted Helm of Awakening.
+- Converted Urza's Filter to StAb ReduceCost.
+- Converted Avatar of Will to script.
+- fixed Slumbering Dragon and Necrotic Ooze
+- New DeckWants SVar and class. Provides a way to give instructions for selecting related combo cards in random and Limited decks.
+- added support for sacrifice UnlessCost
+- Fixed Vile Rebirth.
+- Added SVar:RemAIDeck:True to some cards.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
