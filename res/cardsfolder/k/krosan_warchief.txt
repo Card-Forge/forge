@@ -4,7 +4,7 @@ Types:Creature Beast
 Text:no text
 PT:2/2
 A:AB$ Regenerate | Cost$ 1 G | ValidTgts$ Beast | TgtPrompt$ Select target Beast | SpellDescription$ Regenerate target Beast.
-K:CostChange:Player:Less:1:Spell:All:Beast:NoSpecial:Beast spells you cast cost 1 less to cast.
+S:Mode$ ReduceCost | ValidCard$ Beast | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Beast spells you cast cost 1 less to cast.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_warchief.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/123.jpg

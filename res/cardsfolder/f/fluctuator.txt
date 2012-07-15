@@ -2,7 +2,7 @@ Name:Fluctuator
 ManaCost:2
 Types:Artifact
 Text:no text
-K:CostChange:Player:Less:2:Ability_Cycling:All:All:TargetInHand:Cycling abilities you activate cost you up to 2 less to activate.
+S:Mode$ ReduceCost | ValidCard$ Card | Type$ Cycling | Activator$ You | Amount$ 2 | Description$ Cycling abilities you activate cost you up to 2 less to activate.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fluctuator.jpg

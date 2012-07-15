@@ -100,11 +100,16 @@ public class StaticAbilityCostChange {
                 || !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard))) {
             return originalCost;
         }
-        if (params.containsKey("Type") && params.get("Type").equals("Spell") && !sa.isSpell()) {
-            return originalCost;
-        }
-        if (params.containsKey("Type") && params.get("Type").equals("Ability") && !sa.isAbility()) {
-            return originalCost;
+        if (params.containsKey("Type")) {
+            if (params.get("Type").equals("Spell") && !sa.isSpell()) {
+                return originalCost;
+            }
+            if (params.get("Type").equals("Ability") && !sa.isAbility()) {
+                return originalCost;
+            }
+            if (params.get("Type").equals("Cycling") && !sa.isCycling()) {
+                return originalCost;
+            }
         }
         if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
             return originalCost;

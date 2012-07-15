@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 Text:no text
 S:Mode$ Continuous | Affected$ Creature.Spirit+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Spirit creatures you control get +1/+1.
-K:CostChange:Player:Less:1:Spell:All:Arcane:NoSpecial:Arcane spells you cast cost 1 less to cast.
+S:Mode$ ReduceCost | ValidCard$ Arcane | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Arcane spells you cast cost 1 less to cast.
 SVar:RemRandomDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare

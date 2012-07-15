@@ -2102,17 +2102,11 @@ public class GameAction {
                                 .equals("All"))
                             && ((k[4].equals("Spell") && (sa.isSpell()))
                                     || (k[4].equals("Ability") && (sa.isAbility()))
-                                    || (k[4].startsWith("Ability_Cycling") && sa.isCycling())
                                     || (k[4].equals("Self") && originalCard.equals(card))
                                     || k[4].equals("All"))
                             && (CardUtil.getColors(originalCard).contains(k[5]) || k[5].equals("All"))
                             && (originalCard.isType(k[6])
                                     || (!originalCard.isType(k[6]) && k[7].contains("NonType")) || k[6].equals("All"))) {
-                        if (k[7].contains("TargetInHand")) {
-                            if (!playerHand.contains(originalCard)) {
-                                k[3] = "0";
-                            }
-                        }
                         if (k[7].contains("NonType")) {
                             if (originalCard.isType(k[6])) {
                                 k[3] = "0";
@@ -2285,18 +2279,12 @@ public class GameAction {
                                     .equals("All"))
                                 && ((k[4].equals("Spell") && sa.isSpell())
                                         || (k[4].equals("Ability") && sa.isAbility())
-                                        || (k[4].startsWith("Ability_Cycling") && sa.isCycling())
                                         || (k[4].equals("Self") && originalCard.equals(card))
                                         ||  k[4].equals("All"))
                                 && (CardUtil.getColors(originalCard).contains(k[5]) || k[5].equals("All"))
                                 && (originalCard.isType(k[6])
                                         || (!(originalCard.isType(k[6])) && k[7].contains("NonType")) || k[6]
                                             .equals("All"))) {
-                            if (k[7].contains("TargetInHand")) {
-                                if (!playerHand.contains(originalCard)) {
-                                    k[3] = "0";
-                                }
-                            }
 
                             final String[] numbers = new String[max];
                             if (!"WUGRB".contains(k[3])) {
