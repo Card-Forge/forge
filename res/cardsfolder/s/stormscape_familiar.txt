@@ -4,7 +4,7 @@ Types:Creature Bird
 Text:no text
 PT:1/1
 K:Flying
-K:CostChange:Player:Less:1:Spell:white/black:All:OnlyOneBonus:White spells and black spells you cast cost 1 less to cast.
+S:Mode$ ReduceCost | ValidCard$ Card.White,Card.Black | Type$ Spell | Activator$ You | Amount$ 1 | Description$ White spells and black spells you cast cost 1 less to cast.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormscape_familiar.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/32.jpg

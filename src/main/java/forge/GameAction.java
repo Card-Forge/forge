@@ -2017,7 +2017,7 @@ public class GameAction {
                 return false;
             }
         });
-        final CardList playerHand = controller.getCardsIn(ZoneType.Hand);
+
         int xBonus = 0;
         final int max = 25;
         if (sa.isMultiKicker()) {
@@ -2065,36 +2065,6 @@ public class GameAction {
                                     break;
                                 }
                             }
-                        }
-                    }
-                    if (k[7].contains("All Conditions")) { // Only Works for
-                                                           // Color and Type
-                        for (int stringNo = 5; stringNo < 7; stringNo++) {
-                            final String spilt = k[stringNo];
-                            final String[] colorSpilt = spilt.split("/");
-                            for (final String element : colorSpilt) {
-                                k[stringNo] = element;
-                                if (stringNo == 5) {
-                                    if (CardUtil.getColors(originalCard).contains(k[5]) || k[5].equals("All")) {
-                                    } else {
-                                        k[5] = "Nullified";
-                                        break;
-                                    }
-                                }
-                                if (stringNo == 6) {
-                                    if (originalCard.isType(k[6]) || k[6].equals("All")) {
-                                    } else {
-                                        k[6] = "Nullified";
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        if (!k[5].equals("Nullified")) {
-                            k[5] = "All";
-                        }
-                        if (!k[6].equals("Nullified")) {
-                            k[6] = "All";
                         }
                     }
                     if (((k[1].equals("Player") && card.getController().equals(controller))
@@ -2227,53 +2197,6 @@ public class GameAction {
                         k[6] = card.getChosenType();
                     }
                     if (k[2].equals("Less")) {
-                        if (k[7].equals("OnlyOneBonus")) { // Only Works for
-                                                           // Color and Type
-                            for (int stringNo = 5; stringNo < 7; stringNo++) {
-                                final String spilt = k[stringNo];
-                                final String[] colorSpilt = spilt.split("/");
-
-                                for (final String element : colorSpilt) {
-                                    k[stringNo] = element;
-                                    if ((stringNo == 5) && CardUtil.getColors(originalCard).contains(k[5])) {
-                                        break;
-                                    }
-                                    if ((stringNo == 6) && (originalCard.isType(k[6]))) {
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        if (k[7].contains("All Conditions")) { // Only Works for
-                                                               // Color and Type
-                            for (int stringNo = 5; stringNo < 7; stringNo++) {
-                                final String spilt = k[stringNo];
-                                final String[] colorSpilt = spilt.split("/");
-                                for (final String element : colorSpilt) {
-                                    k[stringNo] = element;
-                                    if (stringNo == 5) {
-                                        if (CardUtil.getColors(originalCard).contains(k[5]) || k[5].equals("All")) {
-                                        } else {
-                                            k[5] = "Nullified";
-                                            break;
-                                        }
-                                    }
-                                    if (stringNo == 6) {
-                                        if (originalCard.isType(k[6]) || k[6].equals("All")) {
-                                        } else {
-                                            k[6] = "Nullified";
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            if (!k[5].equals("Nullified")) {
-                                k[5] = "All";
-                            }
-                            if (!k[6].equals("Nullified")) {
-                                k[6] = "All";
-                            }
-                        }
                         if (((k[1].equals("Player") && card.getController().equals(controller))
                                 || (k[1].equals("Opponent") && card.getController().equals(controller.getOpponent())) || k[1]
                                     .equals("All"))
