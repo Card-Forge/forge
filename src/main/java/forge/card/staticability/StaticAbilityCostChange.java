@@ -24,6 +24,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * The Class StaticAbility_CantBeCast.
@@ -80,6 +81,10 @@ public class StaticAbilityCostChange {
      */
     public static ManaCost applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa
             , final ManaCost originalCost) {
+        //Can't reduce zero cost
+        if (originalCost.toString().equals("0")) {
+            return originalCost;
+        }
         final HashMap<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = sa.getActivatingPlayer();
@@ -101,6 +106,9 @@ public class StaticAbilityCostChange {
         if (params.containsKey("Type") && params.get("Type").equals("Ability") && !sa.isAbility()) {
             return originalCost;
         }
+        if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf("AffectedZone"))) {
+            return originalCost;
+        }
 
         if (!"WUGRB".contains(amount)) {
             int value = 0;
@@ -111,7 +119,11 @@ public class StaticAbilityCostChange {
             }
 
             manaCost.decreaseColorlessMana(value);
+            if (manaCost.toString().equals("0") && params.containsKey("MinMana")) {
+                manaCost.increaseColorlessMana(Integer.valueOf(params.get("MinMana")));
+            }
         }
+
 
         return manaCost;
     }
