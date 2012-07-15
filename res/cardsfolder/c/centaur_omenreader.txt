@@ -3,7 +3,8 @@ ManaCost:3 G
 Types:Snow Creature Centaur Shaman
 Text:no text
 PT:3/3
-K:CostChange:Player:Less:2:Spell:All:Creature:CardIsTapped:As long as Centaur Omenreader is tapped, creature spells you cast cost 2 less to cast.
+S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as CARDNAME is tapped, creature spells you cast cost 2 less to cast.
+SVar:X:Count$Valid Card.Self+tapped
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_omenreader.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/143.jpg

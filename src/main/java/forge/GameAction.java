@@ -1830,23 +1830,7 @@ public class GameAction {
         }
 
         if (spell.isSpell()) {
-            if (originalCard.getName().equals("Avatar of Woe")) {
-                final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-                final Player opponent = player.getOpponent();
-                CardList playerCreatureList = player.getCardsIn(ZoneType.Graveyard);
-                playerCreatureList = playerCreatureList.getType("Creature");
-                CardList opponentCreatureList = opponent.getCardsIn(ZoneType.Graveyard);
-                opponentCreatureList = opponentCreatureList.getType("Creature");
-                if ((playerCreatureList.size() + opponentCreatureList.size()) >= 10) {
-                    manaCost = new ManaCost("B B");
-                } // Avatar of Woe
-            } else if (originalCard.getName().equals("Avatar of Fury")) {
-                final Player opponent = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getOpponent();
-                final CardList opponentLand = AllZoneUtil.getPlayerLandsInPlay(opponent);
-                if (opponentLand.size() >= 7) {
-                    manaCost = new ManaCost("R R");
-                } // Avatar of Fury
-            } else if (originalCard.getName().equals("Avatar of Might")) {
+            if (originalCard.getName().equals("Avatar of Might")) {
                 final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
                 final Player opponent = player.getOpponent();
                 final CardList playerCreature = AllZoneUtil.getCreaturesInPlay(player);
@@ -2121,16 +2105,10 @@ public class GameAction {
                                     || (k[4].equals("Ability") && (sa.isAbility()))
                                     || (k[4].startsWith("Ability_Cycling") && sa.isCycling())
                                     || (k[4].equals("Self") && originalCard.equals(card))
-                                    || (k[4].equals("Enchanted") && originalCard.getEnchantedBy().contains(card)) || k[4]
-                                        .equals("All"))
+                                    || k[4].equals("All"))
                             && (CardUtil.getColors(originalCard).contains(k[5]) || k[5].equals("All"))
                             && (originalCard.isType(k[6])
                                     || (!originalCard.isType(k[6]) && k[7].contains("NonType")) || k[6].equals("All"))) {
-                        if (k[7].contains("CardIsTapped")) {
-                            if (!card.isTapped()) {
-                                k[3] = "0";
-                            }
-                        }
                         if (k[7].contains("TargetInHand")) {
                             if (!playerHand.contains(originalCard)) {
                                 k[3] = "0";
@@ -2310,29 +2288,13 @@ public class GameAction {
                                         || (k[4].equals("Ability") && sa.isAbility())
                                         || (k[4].startsWith("Ability_Cycling") && sa.isCycling())
                                         || (k[4].equals("Self") && originalCard.equals(card))
-                                        || (k[4].equals("Enchanted") && originalCard.getEnchantedBy().contains(card)) || k[4]
-                                            .equals("All"))
+                                        ||  k[4].equals("All"))
                                 && (CardUtil.getColors(originalCard).contains(k[5]) || k[5].equals("All"))
                                 && (originalCard.isType(k[6])
                                         || (!(originalCard.isType(k[6])) && k[7].contains("NonType")) || k[6]
                                             .equals("All"))) {
-                            if (k[7].contains("CardIsTapped")) {
-                                if (!card.isTapped()) {
-                                    k[3] = "0";
-                                }
-                            }
                             if (k[7].contains("TargetInHand")) {
                                 if (!playerHand.contains(originalCard)) {
-                                    k[3] = "0";
-                                }
-                            }
-                            if (k[7].contains("NonType")) {
-                                if (originalCard.isType(k[6])) {
-                                    k[3] = "0";
-                                }
-                            }
-                            if (k[7].contains("OpponentTurn")) {
-                                if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(controller)) {
                                     k[3] = "0";
                                 }
                             }
