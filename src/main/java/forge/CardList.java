@@ -141,6 +141,23 @@ public class CardList implements Iterable<Card> {
     } // getColor()
 
     /**
+     * Get cards that match the given color string. Use the card's ManaCost
+     * to determine color.
+     * @param cardColor desired color
+     * @return CardList
+     */
+    public final CardList getColorByManaCost(final String cardColor) {
+        final CardList ret = new CardList();
+        for (final Card c : this) {
+            ArrayList<String> colors = CardUtil.getOnlyColors(c);
+            if (colors.contains(cardColor)) {
+                ret.add(c);
+            }
+        }
+        return ret;
+    } // getColorByManaCost()
+
+    /**
      * <p>
      * getOnly2Colors.
      * </p>

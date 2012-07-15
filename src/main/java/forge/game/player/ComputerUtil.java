@@ -2038,7 +2038,8 @@ public class ComputerUtil {
 
     /**
      * Is it OK to cast this for less than the Max Targets?
-     * @param source
+     * @param source the source Card
+     * @return true if it's OK to cast this Card for less than the max targets
      */
     public static boolean shouldCastLessThanMax(final Card source) {
         boolean ret = true;

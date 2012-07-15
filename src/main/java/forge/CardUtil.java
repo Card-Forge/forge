@@ -258,22 +258,22 @@ public final class CardUtil {
      */
     public static ArrayList<String> getOnlyColors(final Card c) {
         final CardManaCost m = c.getManaCost();
-        final byte color_profile = m.getColorProfile();
+        final byte colorProfile = m.getColorProfile();
 
         final Set<String> colors = new HashSet<String>();
-        if ((color_profile & forge.card.CardColor.WHITE) > 0) {
+        if ((colorProfile & forge.card.CardColor.WHITE) > 0) {
             colors.add(Constant.Color.WHITE);
         }
-        if ((color_profile & forge.card.CardColor.BLACK) > 0) {
+        if ((colorProfile & forge.card.CardColor.BLACK) > 0) {
             colors.add(Constant.Color.BLACK);
         }
-        if ((color_profile & forge.card.CardColor.BLUE) > 0) {
+        if ((colorProfile & forge.card.CardColor.BLUE) > 0) {
             colors.add(Constant.Color.BLUE);
         }
-        if ((color_profile & forge.card.CardColor.RED) > 0) {
+        if ((colorProfile & forge.card.CardColor.RED) > 0) {
             colors.add(Constant.Color.RED);
         }
-        if ((color_profile & forge.card.CardColor.GREEN) > 0) {
+        if ((colorProfile & forge.card.CardColor.GREEN) > 0) {
             colors.add(Constant.Color.GREEN);
         }
 

@@ -5,6 +5,7 @@ Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.White | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a white spell, you may gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:RemRandomDeck:True
+SVar:DeckWants:Color$white
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angels_feather.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/92.jpg

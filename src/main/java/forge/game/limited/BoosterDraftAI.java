@@ -93,10 +93,9 @@ public class BoosterDraftAI {
         final CardList aiPlayables = chooseFrom.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                if (c.getSVar("RemAIDeck").equals("True") || c.getSVar("RemRandomDeck").equals("True")) {
-                    return false;
-                }
-                return true;
+                boolean unPlayable = c.getSVar("RemAIDeck").equals("True");
+                unPlayable |= c.getSVar("RemRandomDeck").equals("True") && c.getSVar("DeckWants").equals("");
+                return !unPlayable;
             }
         });
 
@@ -159,8 +158,9 @@ public class BoosterDraftAI {
                     hasPicked = true;
                 }
             }
-            if (hasPicked && !pickedCard.isColorless()) {
-                this.playerColors.get(player).setColor2(pickedCard.getColor().get(0).toStringArray().get(0));
+            String pickedCardColor = pickedCard.getColor().get(0).toStringArray().get(0);
+            if (hasPicked && !pickedCard.isColorless() && !pickedCardColor.equals(this.playerColors.get(player).getColor1())) {
+                this.playerColors.get(player).setColor2(pickedCardColor);
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).getColor2());
                 }
@@ -352,7 +352,7 @@ public class BoosterDraftAI {
         }
         return out;
     } // getDecks()
-  
+
     // returns 7 different ints, within the range of 0-9
 
     /**
@@ -388,7 +388,7 @@ public class BoosterDraftAI {
             this.deckColor[i] = this.deckColorChoices[n[i]];
         }
 
-        // initilize color map
+        // initialize color map
         BoosterDraftAI.colorToLand.put(Constant.Color.BLACK, "Swamp");
         BoosterDraftAI.colorToLand.put(Constant.Color.BLUE, "Island");
         BoosterDraftAI.colorToLand.put(Constant.Color.GREEN, "Forest");

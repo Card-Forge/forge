@@ -11,6 +11,7 @@ import forge.CardListUtil;
 import forge.Constant;
 import forge.card.CardColor;
 import forge.card.CardManaCost;
+import forge.card.DeckWants;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.util.MyRandom;
@@ -23,7 +24,7 @@ public class BoosterDeck extends Deck {
 
     private static final long serialVersionUID = -7818685851099321964L;
 
-    private int cardsNeeded = 22;
+    private int numSpellsNeeded = 22;
     private int landsNeeded = 18;
     private DeckColors colors;
     private CardList draftedList;
@@ -32,6 +33,14 @@ public class BoosterDeck extends Deck {
 
     private CardList deckList = new CardList();
 
+    /**
+     * Constructor.
+     * 
+     * @param dList
+     *            list of cards drafted
+     * @param pClrs
+     *            colors
+     */
     public BoosterDeck(CardList dList, DeckColors pClrs) {
         super("");
         this.draftedList = dList;
@@ -55,34 +64,40 @@ public class BoosterDeck extends Deck {
         aiPlayables = draftedList.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                return !(c.getSVar("RemAIDeck").equals("True") || c.getSVar("RemRandomDeck").equals("True"));
+                boolean unPlayable = c.getSVar("RemAIDeck").equals("True");
+                unPlayable |= c.getSVar("RemRandomDeck").equals("True") && c.getSVar("DeckWants").equals("");
+                return !unPlayable;
             }
         });
         draftedList.removeAll(aiPlayables);
 
-        // 1. Add any planeswalkers
-        CardList walkers = aiPlayables.getType("Planeswalker");
+        // 0. Add any planeswalkers
+        CardList walkers = aiPlayables.getOnly2Colors(colors.getColor1(), colors.getColor2()).getType("Planeswalker");
         deckList.addAll(walkers);
-        cardsNeeded -= walkers.size();
+        aiPlayables.removeAll(walkers);
         if (walkers.size() > 0) {
-            System.out.println("Added " + walkers.get(0).toString());
+            System.out.println("Planeswalker: " + walkers.get(0).toString());
         }
+
+        // 0.5. Add combo cards (should this be done later? or perhaps within
+        // each method?)
+        addComboCards();
 
         // 1. Add creatures, trying to follow mana curve
         addManaCurveCreatures(15);
 
         // 2.Try to fill up to 22 with on-color non-creature cards
-        addNonCreatures(cardsNeeded);
+        addNonCreatures(numSpellsNeeded - deckList.size());
 
         // 3.Try to fill up to 22 with on-color creatures cards (if more than 15
         // are present)
-        addBestCreatures(cardsNeeded);
+        addBestCreatures(numSpellsNeeded - deckList.size());
 
         CardList nonLands = aiPlayables.getNotType("Land").getOnly2Colors(colors.getColor1(), colors.getColor2());
 
         // 4. If there are still on-color cards and the average cmc is low add a
         // 23rd card.
-        if (cardsNeeded == 0 && CardListUtil.getAverageCMC(deckList) < 3 && !nonLands.isEmpty()) {
+        if (deckList.size() == numSpellsNeeded && CardListUtil.getAverageCMC(deckList) < 3 && !nonLands.isEmpty()) {
             Card c = nonLands.get(0);
             deckList.add(c);
             aiPlayables.remove(0);
@@ -91,14 +106,14 @@ public class BoosterDeck extends Deck {
 
         // 5. If there are still less than 22 non-land cards add off-color
         // cards.
-        addRandomCards(cardsNeeded);
+        addRandomCards(numSpellsNeeded - deckList.size());
 
         // 6. If it's not a mono color deck, add non-basic lands that were
         // drafted.
         addNonBasicLands();
 
+        // 7. Fill up with basic lands.
         final CCnt[] clrCnts = calculateLandNeeds();
-
         if (landsNeeded > 0) {
             addLands(clrCnts);
         }
@@ -135,23 +150,26 @@ public class BoosterDeck extends Deck {
             this.getMain().add(deckList);
             this.getSideboard().add(aiPlayables);
             this.getSideboard().add(draftedList);
-            /*
+
             int i = 0;
+            System.out.println("DECK");
             for (Card c : deckList) {
                 i++;
                 System.out.println(i + ". " + c.toString() + ": " + c.getManaCost().toString());
             }
             i = 0;
+            System.out.println("NOT PLAYABLE");
             for (Card c : draftedList) {
                 i++;
                 System.out.println(i + ". " + c.toString() + ": " + c.getManaCost().toString());
             }
             i = 0;
+            System.out.println("NOT PICKED");
             for (Card c : aiPlayables) {
                 i++;
                 System.out.println(i + ". " + c.toString() + ": " + c.getManaCost().toString());
             }
-            */
+
         } else {
             throw new RuntimeException("BoosterDraftAI : buildDeck() error, decksize not 40");
         }
@@ -172,12 +190,13 @@ public class BoosterDeck extends Deck {
 
         int landsAdded = 0;
         for (int i = 0; i < 5; i++) {
-            if (clrCnts[i].getCount() > 0) { 
+            if (clrCnts[i].getCount() > 0) {
                 // calculate number of lands for each color
                 final float p = (float) clrCnts[i].getCount() / (float) totalColor;
                 final int nLand = (int) (landsNeeded * p) + 1;
                 if (Constant.Runtime.DEV_MODE[0]) {
-                    System.out.println("Basics[" + clrCnts[i].getColor() + "]: " + clrCnts[i].getCount() + "/" + totalColor + " = " + p + " = " + nLand);
+                    System.out.println("Basics[" + clrCnts[i].getColor() + "]: " + clrCnts[i].getCount() + "/"
+                            + totalColor + " = " + p + " = " + nLand);
                 }
 
                 for (int j = 0; j <= nLand; j++) {
@@ -188,7 +207,7 @@ public class BoosterDeck extends Deck {
                 }
             }
         }
-        
+
         landsNeeded = landsNeeded - landsAdded;
         int n = 0;
         while (landsNeeded > 0) {
@@ -209,7 +228,7 @@ public class BoosterDeck extends Deck {
     }
 
     /**
-     * attempt to optimize basic land counts according to color representation
+     * attempt to optimize basic land counts according to color representation.
      * 
      * @return CCnt
      */
@@ -218,7 +237,6 @@ public class BoosterDeck extends Deck {
                 new CCnt("Mountain", 0), new CCnt("Forest", 0) };
 
         // count each card color using mana costs
-        // TODO: count hybrid mana differently?
         for (int i = 0; i < deckList.size(); i++) {
             final CardManaCost mc = deckList.get(i).getManaCost();
 
@@ -279,7 +297,6 @@ public class BoosterDeck extends Deck {
             final Card c = z.get(MyRandom.getRandom().nextInt(z.size() - 1));
 
             deckList.add(c);
-            cardsNeeded--;
             nCards--;
             aiPlayables.remove(c);
             z.remove(c);
@@ -308,7 +325,6 @@ public class BoosterDeck extends Deck {
             final Card c = others.get(index);
 
             deckList.add(c);
-            cardsNeeded--;
             nCards--;
             aiPlayables.remove(c);
             others.remove(c);
@@ -333,7 +349,6 @@ public class BoosterDeck extends Deck {
             final Card c = creatures.get(0);
 
             deckList.add(c);
-            cardsNeeded--;
             nCreatures--;
             aiPlayables.remove(c);
             creatures.remove(c);
@@ -347,9 +362,9 @@ public class BoosterDeck extends Deck {
     }
 
     /**
-     * Add creatures to the deck, trying to follow some mana curve. Trying to have generous
-     * limits at each cost, but perhaps still too strict. But we're trying to prevent the AI
-     * from adding everything at a single cost.
+     * Add creatures to the deck, trying to follow some mana curve. Trying to
+     * have generous limits at each cost, but perhaps still too strict. But
+     * we're trying to prevent the AI from adding everything at a single cost.
      * 
      * @param nCreatures
      */
@@ -397,7 +412,6 @@ public class BoosterDeck extends Deck {
 
             if (willAddCreature) {
                 deckList.add(c);
-                cardsNeeded--;
                 nCreatures--;
                 aiPlayables.remove(c);
                 creatureCosts.put(cmc, creatureCosts.get(cmc) + 1);
@@ -416,6 +430,38 @@ public class BoosterDeck extends Deck {
                 break;
             }
 
+        }
+    }
+
+    /**
+     * Add cards that need other cards to be in the deck.
+     */
+    public void addComboCards() {
+        CardList onColorPlayables = aiPlayables.getOnly2Colors(colors.getColor1(), colors.getColor2());
+        for (Card c : onColorPlayables) {
+            if (!c.getSVar("DeckWants").equals("")) {
+                DeckWants wants = c.getDeckWants();
+                CardList cards = wants.filter(onColorPlayables);
+                if (cards.size() >= wants.getMinCardsNeeded()) {
+                    if (Constant.Runtime.DEV_MODE[0]) {
+                        System.out.println("Adding " + c.getName() + " with up to " + cards.size() + " combo cards (e.g., "
+                                + cards.get(0).getName() + ").");
+                    }
+                    deckList.add(c);
+                    aiPlayables.remove(c);
+                    if (cards.size() <= 4) {
+                        deckList.addAll(cards);
+                        aiPlayables.removeAll(cards);
+                    } else {
+                        cards.shuffle();
+                        for (int i = 0; i < 4; i++) {
+                            Card theCard = cards.get(i);
+                            deckList.add(theCard);
+                            aiPlayables.remove(theCard);
+                        }
+                    }
+                }
+            }
         }
     }
 

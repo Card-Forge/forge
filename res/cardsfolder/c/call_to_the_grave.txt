@@ -7,6 +7,7 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Creature.nonZombie | Defined$ Tr
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSacSelf | TriggerDescription$ At the beginning of the end step, if no creatures are on the battlefield, sacrifice CARDNAME.
 SVar:TrigSacSelf:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:RemRandomDeck:True
+SVar:DeckWants:Type$Zombie
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_the_grave.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/58.jpg

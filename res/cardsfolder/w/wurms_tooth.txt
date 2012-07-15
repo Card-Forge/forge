@@ -5,6 +5,7 @@ Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.Green | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a green spell, you may gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:RemRandomDeck:True
+SVar:DeckWants:Color$Green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurms_tooth.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/162.jpg

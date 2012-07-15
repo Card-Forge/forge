@@ -35,6 +35,7 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.card.CardCharacteristics;
 import forge.card.CardManaCost;
+import forge.card.DeckWants;
 import forge.card.EditionInfo;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -223,6 +224,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final ArrayList<Card> hauntedBy = new ArrayList<Card>();
     private Card haunting = null;
     private Card effectSource = null;
+
+    private DeckWants deckWants = null;
+    private boolean isDeckWantsConstructed = false;
 
     //private Map<String, String> sVars = new TreeMap<String, String>();
 
@@ -8956,6 +8960,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.castFrom = castFrom0;
     }
 
+    /**
+     * @return CardDamageHistory
+     */
     public CardDamageHistory getDamageHistory() {
         return damageHistory;
     }
@@ -8968,7 +8975,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * @param effectSource0 the effectSource to set
+     * @param src the effectSource to set
      */
     public void setEffectSource(Card src) {
         this.effectSource = src;
@@ -8982,10 +8989,29 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * @param startsGameInPlay0 the startsGameInPlay to set
+     * @param startsGameInPlay the startsGameInPlay to set
      */
     public void setStartsGameInPlay(boolean startsGameInPlay) {
         this.startsGameInPlay = startsGameInPlay;
     }
+
+    /**
+     * @return the deckWants
+     */
+    public DeckWants getDeckWants() {
+        if (!isDeckWantsConstructed) {
+            deckWants = new DeckWants(getSVar("DeckWants"));
+            isDeckWantsConstructed = true;
+        }
+        return deckWants;
+    }
+
+    /**
+     * @param deckWants the deckWants to set
+     */
+    public void setDeckWants(DeckWants deckWants) {
+        this.deckWants = deckWants;
+    }
+
 
 } // end Card class
