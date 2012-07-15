@@ -340,15 +340,15 @@ public class AbilityFactoryZoneAffecting {
 
         double chance = .4; // 40 percent chance of drawing with instant speed
                             // stuff
+        final Random r = MyRandom.getRandom();
+        boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
         if (AbilityFactory.isSorcerySpeed(sa)) {
-            chance = .667; // 66.7% chance for sorcery speed
+            randomReturn = true;
         }
         if ((Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN)
                 && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()))) {
-            chance = .9; // 90% for end of opponents turn
+            randomReturn = true;
         }
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         if (AbilityFactory.playReusable(sa)) {
             randomReturn = true;

@@ -470,7 +470,7 @@ public class AbilityFactoryAttach {
         // TODO If Not Mandatory, make sure the card is "good enough"
         if (c.isCreature()) {
             final int eval = CardFactoryUtil.evaluateCreature(c);
-            if ((eval < 160) && ((eval < 130) || (AllZone.getComputerPlayer().getLife() > 5))) {
+            if (eval < 130) {
                 return null;
             }
         }
