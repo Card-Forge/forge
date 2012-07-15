@@ -810,13 +810,6 @@ public class CombatUtil {
             }
         }
 
-        if (c.getName().equals("Harbor Serpent")) {
-            final CardList allislands = AllZoneUtil.getCardsIn(ZoneType.Battlefield).getType("Island");
-            if (allislands.size() < 5) {
-                return false;
-            }
-        }
-
         // The creature won't untap next turn
         if (c.isTapped() && !Untap.canUntap(c)) {
             return false;
