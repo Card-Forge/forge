@@ -24,10 +24,16 @@ import javax.swing.JOptionPane;
 
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostPart;
+import forge.card.cost.CostPayLife;
+import forge.card.cost.CostMana;
+import forge.card.cost.CostSacrifice;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.Input;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameLossReason;
@@ -38,6 +44,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
+import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -386,12 +393,149 @@ public final class GameActionUtil {
             }
             return;
         }
+
         // temporarily disable the Resolve flag, so the user can payMana for the
         // resolving Ability
         final boolean bResolving = AllZone.getStack().getResolving();
         AllZone.getStack().setResolving(false);
         AllZone.getInputControl().setInput(new InputPayManaCostAbility(message, manaCost, paid, unpaid));
         AllZone.getStack().setResolving(bResolving);
+    }
+
+    /**
+     * <p>
+     * payCostDuringAbilityResolve.
+     * </p>
+     * 
+     * @param ability
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param cost
+     *            a {@link forge.card.cost.Cost} object.
+     * @param paid
+     *            a {@link forge.Command} object.
+     * @param unpaid
+     *            a {@link forge.Command} object.
+     */
+    public static void payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, final Command paid, final Command unpaid) {
+        final Card source = ability.getSourceCard();
+        if (cost.getCostParts().size() > 1) {
+            throw new RuntimeException("GameActionUtil::payCostDuringAbilityResolve - Too many payment types - " + source);
+        }
+        final CostPart unlessCost = cost.getCostParts().get(0);
+        String amountString = unlessCost.getAmount();
+        final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+        if (unlessCost instanceof CostPayLife) {
+            if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(source, "Do you want to pay "
+                    + amount + " life?")) {
+                AllZone.getHumanPlayer().payLife(amount, null);
+                paid.execute();
+            } else {
+                unpaid.execute();
+            }
+            return;
+        }
+
+        else if (unlessCost instanceof CostSacrifice) {
+            final CostSacrifice sacCost = (CostSacrifice) unlessCost;
+            final CardList typeList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getValidCards(unlessCost.getType().split(";"), AllZone.getHumanPlayer(), source);
+
+            final Input paySacCost = new Input() {
+                private static final long serialVersionUID = 2685832214529141991L;
+                private int nSacrifices = 0;
+
+                @Override
+                public void showMessage() {
+                    if (typeList.size() == 0 && this.nSacrifices < amount) {
+                        this.cancel();
+                    }
+
+                    final StringBuilder msg = new StringBuilder("Sacrifice ");
+                    final int nLeft = amount - this.nSacrifices;
+                    msg.append(nLeft).append(" ");
+                    msg.append(sacCost.getDescriptiveType());
+                    if (nLeft > 1) {
+                        msg.append("s");
+                    }
+                    if (!sacCost.getList().isEmpty()) {
+                        msg.append("\r\nSelected:\r\n");
+                        for (Card selected : sacCost.getList()) {
+                            msg.append(selected + "\r\n");
+                        }
+                    }
+
+                    CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+                    if (nLeft > 0) {
+                        ButtonUtil.enableOnlyCancel();
+                    }
+                    else {
+                        ButtonUtil.enableAll();
+                    }
+                }
+
+                @Override
+                public void selectButtonCancel() {
+                    this.cancel();
+                }
+
+                @Override
+                public void selectButtonOK() {
+                    this.done();
+                }
+
+                @Override
+                public void selectCard(final Card card, final PlayerZone zone) {
+                    if (typeList.contains(card)) {
+                        this.nSacrifices++;
+                        sacCost.addToList(card);
+                        //Singletons.getModel().getGameAction().sacrifice(selected, ability);
+                        typeList.remove(card);
+                        this.showMessage();
+                    }
+                    else if (sacCost.getList().contains(card)) {
+                        this.nSacrifices--;
+                        sacCost.getList().remove(card);
+                        typeList.add(card);
+                        this.showMessage();
+                    }
+                }
+
+                public void done() {
+                    this.stop();
+                    // actually sacrifice the cards
+                    for (Card selected : sacCost.getList()) {
+                        Singletons.getModel().getGameAction().sacrifice(selected, ability);
+                    }
+                    sacCost.addListToHash(ability, "Sacrificed");
+                    paid.execute();
+                }
+
+                public void cancel() {
+                    this.stop();
+                    unpaid.execute();
+                }
+            };
+            final boolean bResolving = AllZone.getStack().getResolving();
+            AllZone.getStack().setResolving(false);
+            AllZone.getInputControl().setInput(paySacCost);
+            AllZone.getStack().setResolving(bResolving);
+        }
+        else if (unlessCost instanceof CostMana) {
+            if (unlessCost.getAmount().equals("0")) {
+                if (showYesNoDialog(source, "Do you want to pay 0?")) {
+                    paid.execute();
+                } else {
+                    unpaid.execute();
+                }
+                return;
+            }
+            // temporarily disable the Resolve flag, so the user can payMana for the
+            // resolving Ability
+            final boolean bResolving = AllZone.getStack().getResolving();
+            AllZone.getStack().setResolving(false);
+            AllZone.getInputControl().setInput(new InputPayManaCostAbility(source + "\r\n", ability.getManaCost(), paid, unpaid));
+            AllZone.getStack().setResolving(bResolving);
+        }
     }
 
     /**

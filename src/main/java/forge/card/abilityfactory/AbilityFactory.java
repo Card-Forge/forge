@@ -2754,7 +2754,8 @@ public class AbilityFactory {
         };
 
         if (payer.isHuman()) {
-            GameActionUtil.payCostDuringAbilityResolve(source + "\r\n", source, unlessCost, paidCommand, unpaidCommand);
+            //GameActionUtil.payCostDuringAbilityResolve(source + "\r\n", source, unlessCost, paidCommand, unpaidCommand);
+            GameActionUtil.payCostDuringAbilityResolve(ability, cost, paidCommand, unpaidCommand);
         } else {
             if (ComputerUtil.canPayCost(ability) && CostUtil.checkLifeCost(cost, source, 4)) {
                 ComputerUtil.playNoStack(ability); // Unless cost was payed - no
