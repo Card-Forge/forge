@@ -2017,7 +2017,6 @@ public class GameAction {
                 return false;
             }
         });
-        final CardList playerPlay = controller.getCardsIn(ZoneType.Battlefield);
         final CardList playerHand = controller.getCardsIn(ZoneType.Hand);
         int xBonus = 0;
         final int max = 25;
@@ -2297,14 +2296,6 @@ public class GameAction {
                                 if (!playerHand.contains(originalCard)) {
                                     k[3] = "0";
                                 }
-                            }
-                            if (k[7].contains("Affinity")) {
-                                final String spilt = k[7];
-                                final String[] colorSpilt = spilt.split("/");
-                                k[7] = colorSpilt[1];
-                                CardList playerList = controller.getCardsIn(ZoneType.Battlefield);
-                                playerList = playerList.getType(k[7]);
-                                k[3] = String.valueOf(playerList.size());
                             }
 
                             final String[] numbers = new String[max];

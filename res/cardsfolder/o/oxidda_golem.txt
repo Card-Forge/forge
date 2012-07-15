@@ -4,7 +4,8 @@ Types:Artifact Creature Golem
 Text:no text
 PT:3/2
 K:Haste
-K:CostChange:Player:Less:1:Self:All:All:Affinity/Mountain:Affinity for Mountains (This spell costs 1 less to cast for each Mountain you control.)
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Affinity for Mountains (This spell costs 1 less to cast for each Mountain you control.)
+SVar:X:Count$Valid Mountain.YouCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidda_golem.jpg

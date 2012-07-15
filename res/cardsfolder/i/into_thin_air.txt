@@ -3,7 +3,8 @@ ManaCost:5 U
 Types:Instant
 Text:no text
 A:SP$ ChangeZone | Cost$ 5 U | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target artifact to its owner's hand.
-K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/into_thin_air.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/33.jpg

@@ -4,7 +4,8 @@ Types:Artifact
 Text:no text
 K:Flash
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SpellDescription$ Target creature gets +1/+0 until end of turn.
-K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tooth_of_chiss_goria.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/264.jpg

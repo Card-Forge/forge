@@ -4,9 +4,10 @@ Types:Creature Dragon
 Text:no text
 PT:5/5
 K:Flying
-K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, exile all artifacts.
 SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Exile
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_dragon.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/62.jpg

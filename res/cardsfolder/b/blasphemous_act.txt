@@ -3,8 +3,8 @@ ManaCost:8 R
 Types:Sorcery
 Text:no text
 A:SP$ DamageAll | Cost$ 8 R | NumDmg$ 13 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 13 damage to each creature.
-K:CostChange:Player:Less:X:Self:All:All:NoSpecial:CARDNAME costs 1 less to cast for each creature on the battlefield.
-SVar:X:Count$TypeOnBattlefield.Creature
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs 1 less to cast for each creature on the battlefield.
+SVar:X:Count$Valid Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blasphemous_act.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/130.jpg

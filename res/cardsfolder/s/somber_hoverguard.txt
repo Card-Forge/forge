@@ -4,7 +4,8 @@ Types:Creature Drone
 Text:no text
 PT:3/2
 K:Flying
-K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somber_hoverguard.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/51.jpg
