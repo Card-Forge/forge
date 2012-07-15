@@ -4,7 +4,7 @@ Types:Creature Dragon
 Text:no text
 PT:3/3
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ LE5 | References$ X | Description$ CARDNAME can't attack or block unless it has five or more +1/+1 counters on it.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ LT5 | References$ X | Description$ CARDNAME can't attack or block unless it has five or more +1/+1 counters on it.
 T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl | TriggerZones$ Battlefield | Execute$ DragonWake | TriggerDescription$ Whenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on CARDNAME.
 SVar:DragonWake:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:X:Count$NumCounters.P1P1
