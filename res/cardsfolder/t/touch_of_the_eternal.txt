@@ -2,7 +2,7 @@ Name:Touch of the Eternal
 ManaCost:5 W W
 Types:Enchantment
 Text:no text
-T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigLife | TriggerDescription$ At the beginning of your upkeep, your life total becomes equal to the number of permanents you control.
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigLife | TriggerDescription$ At the beginning of your upkeep, your life total becomes equal to the number of permanents you control.
 SVar:TrigLife:AB$SetLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Permanent.YouCtrl
 SVar:Rarity:Rare
