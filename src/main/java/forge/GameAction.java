@@ -2131,11 +2131,6 @@ public class GameAction {
                                 k[3] = "0";
                             }
                         }
-                        if (k[7].contains("TargetInPlay")) {
-                            if (!playerPlay.contains(originalCard)) {
-                                k[3] = "0";
-                            }
-                        }
                         if (k[7].contains("TargetInHand")) {
                             if (!playerHand.contains(originalCard)) {
                                 k[3] = "0";
@@ -2323,11 +2318,6 @@ public class GameAction {
                                             .equals("All"))) {
                             if (k[7].contains("CardIsTapped")) {
                                 if (!card.isTapped()) {
-                                    k[3] = "0";
-                                }
-                            }
-                            if (k[7].contains("TargetInPlay")) {
-                                if (!playerPlay.contains(originalCard)) {
                                     k[3] = "0";
                                 }
                             }

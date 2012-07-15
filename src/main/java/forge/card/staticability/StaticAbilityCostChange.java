@@ -106,7 +106,7 @@ public class StaticAbilityCostChange {
         if (params.containsKey("Type") && params.get("Type").equals("Ability") && !sa.isAbility()) {
             return originalCost;
         }
-        if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf("AffectedZone"))) {
+        if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
             return originalCost;
         }
 
