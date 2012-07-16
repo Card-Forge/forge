@@ -2,7 +2,7 @@ Name:Heartless Summoning
 ManaCost:1 B
 Types:Enchantment
 Text:no text
-K:CostChange:Player:Less:2:Spell:All:Creature:NoSpecial:Creature spells you cast cost 2 less to cast.
+S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Creature spells you cast cost 2 less to cast.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ -1 | AddToughness$ -1 | Description$ Creatures you control get -1/-1.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
