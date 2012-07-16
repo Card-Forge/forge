@@ -1309,7 +1309,7 @@ public class ComputerUtil {
 
                 for (int i = 0; i < basics.size(); i++) {
                     final String b = basics.get(i);
-                    final int num = combined.getType(names[i]).size();
+                    final int num = combined.getType(b).size();
                     if (num < minSize) {
                         minType = b;
                         minSize = num;
