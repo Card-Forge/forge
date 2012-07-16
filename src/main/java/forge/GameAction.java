@@ -30,8 +30,6 @@ import forge.card.abilityfactory.AbilityFactoryAttach;
 import forge.card.abilityfactory.AbilityFactoryCharm;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostMana;
-import forge.card.cost.CostPart;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -41,7 +39,6 @@ import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRequirements;
-import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
@@ -364,37 +361,6 @@ public class GameAction {
 
         return c;
     }
-
-    /*
-     * public void changeController(CardList list, Player oldController, Player
-     * newController) { if (oldController.equals(newController)) return;
-     * 
-     * // Consolidating this code for now. In the future I want moveTo to handle
-     * this garbage PlayerZone oldBattlefield =
-     * oldController.getZone(Constant.Zone.Battlefield); PlayerZone
-     * newBattlefield = newController.getZone(Constant.Zone.Battlefield);
-     * 
-     * AllZone.getTriggerHandler().suppressMode("ChangesZone");
-     * ((PlayerZone_ComesIntoPlay)
-     * AllZone.getHumanPlayer().getZone(Zone.Battlefield)).setTriggers(false);
-     * ((PlayerZone_ComesIntoPlay)
-     * AllZone.getComputerPlayer().getZone(Zone.Battlefield
-     * )).setTriggers(false); //so "enters the battlefield" abilities don't
-     * trigger
-     * 
-     * for (Card c : list) { int turnInZone = c.getTurnInZone();
-     * oldBattlefield.remove(c); c.setController(newController);
-     * newBattlefield.add(c); //set summoning sickness c.setSickness(true);
-     * c.setTurnInZone(turnInZone); // The number of turns in the zone should
-     * not change if (c.isCreature()) AllZone.getCombat().removeFromCombat(c); }
-     * 
-     * AllZone.getTriggerHandler().clearSuppression("ChangesZone");
-     * ((PlayerZone_ComesIntoPlay)
-     * AllZone.getHumanPlayer().getZone(Zone.Battlefield)).setTriggers(true);
-     * ((PlayerZone_ComesIntoPlay)
-     * AllZone.getComputerPlayer().getZone(Zone.Battlefield)).setTriggers(true);
-     * }
-     */
 
     /**
      * Controller change zone correction.
@@ -1540,118 +1506,7 @@ public class GameAction {
 
     private boolean startCut = false;
 
-    /**
-     * <p>
-     * getAlternativeCosts.
-     * </p>
-     * 
-     * @param sa
-     *            a SpellAbility.
-     * @return an ArrayList<SpellAbility>.
-     * get alternative costs as additional spell abilities
-     */
-    public static final ArrayList<SpellAbility> getAlternativeCosts(SpellAbility sa) {
-        ArrayList<SpellAbility> alternatives = new ArrayList<SpellAbility>();
-        Card source = sa.getSourceCard();
-        if (!sa.isBasicSpell()) {
-            return alternatives;
-        }
-        for (final String keyword : source.getKeyword()) {
-            if (sa.isSpell() && keyword.startsWith("Flashback")) {
-                final SpellAbility flashback = sa.copy();
-                flashback.setFlashBackAbility(true);
-                SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                sar.setVariables(sa.getRestrictions());
-                sar.setZone(ZoneType.Graveyard);
-                flashback.setRestrictions(sar);
 
-                // there is a flashback cost (and not the cards cost)
-                if (!keyword.equals("Flashback")) {
-                    final Cost fbCost = new Cost(source, keyword.substring(10), false);
-                    flashback.setPayCosts(fbCost);
-                }
-                alternatives.add(flashback);
-            }
-            if (sa.isSpell() && keyword.equals("May be played without paying its mana cost")) {
-                final SpellAbility newSA = sa.copy();
-                SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                sar.setVariables(sa.getRestrictions());
-                sar.setZone(null);
-                newSA.setRestrictions(sar);
-                final Cost cost = new Cost(source, "", false);
-                if (newSA.getPayCosts() != null) {
-                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                        if (!(part instanceof CostMana)) {
-                            cost.getCostParts().add(part);
-                        }
-                    }
-                }
-                newSA.setBasicSpell(false);
-                newSA.setPayCosts(cost);
-                newSA.setManaCost("");
-                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
-                alternatives.add(newSA);
-            }
-            if (sa.isSpell() && keyword.equals("May be played by your opponent without paying its mana cost")) {
-                final SpellAbility newSA = sa.copy();
-                SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                sar.setVariables(sa.getRestrictions());
-                sar.setZone(null);
-                sar.setOpponentOnly(true);
-                newSA.setRestrictions(sar);
-                final Cost cost = new Cost(source, "", false);
-                if (newSA.getPayCosts() != null) {
-                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                        if (!(part instanceof CostMana)) {
-                            cost.getCostParts().add(part);
-                        }
-                    }
-                }
-                newSA.setBasicSpell(false);
-                newSA.setPayCosts(cost);
-                newSA.setManaCost("");
-                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
-                alternatives.add(newSA);
-            }
-            if (sa.isSpell() && keyword.startsWith("May be played without paying its mana cost and as though it has flash")) {
-                final SpellAbility newSA = sa.copy();
-                SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                sar.setVariables(sa.getRestrictions());
-                sar.setInstantSpeed(true);
-                newSA.setRestrictions(sar);
-                final Cost cost = new Cost(source, "", false);
-                if (newSA.getPayCosts() != null) {
-                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                        if (!(part instanceof CostMana)) {
-                            cost.getCostParts().add(part);
-                        }
-                    }
-                }
-                newSA.setBasicSpell(false);
-                newSA.setPayCosts(cost);
-                newSA.setManaCost("");
-                newSA.setDescription(sa.getDescription() + " (without paying its mana cost and as though it has flash)");
-                alternatives.add(newSA);
-            }
-            if (sa.isSpell() && keyword.startsWith("Alternative Cost")) {
-                final SpellAbility newSA = sa.copy();
-                final Cost cost = new Cost(source, keyword.substring(17), false);
-                if (newSA.getPayCosts() != null) {
-                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                        if (!(part instanceof CostMana)) {
-                            cost.getCostParts().add(part);
-                        }
-                    }
-                }
-                newSA.setBasicSpell(false);
-                newSA.setPayCosts(cost);
-                newSA.setManaCost("");
-                newSA.setDescription(sa.getDescription() + " (by paying " + keyword.substring(17) + " instead of its mana cost)");
-                alternatives.add(newSA);
-            }
-        }
-        return alternatives;
-    }
 
     /**
      * <p>
@@ -1678,7 +1533,7 @@ public class GameAction {
         }
         for (SpellAbility sa : basicAbilities) {
             //add alternative costs as additional spell abilities
-            abilities.addAll(getAlternativeCosts(sa));
+            abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
         }
         for (final SpellAbility sa : abilities) {
             sa.setActivatingPlayer(human);
@@ -2294,31 +2149,6 @@ public class GameAction {
             }
         }
     }
-
-    /**
-     * <p>
-     * canPlaySpellAbility.
-     * </p>
-     * 
-     * @param sa
-     *            an array of {@link forge.card.spellability.SpellAbility}
-     *            objects.
-     * @return an array of {@link forge.card.spellability.SpellAbility} objects.
-     */
-    public final SpellAbility[] canPlaySpellAbility(final SpellAbility[] sa) {
-        final ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
-
-        for (final SpellAbility element : sa) {
-            element.setActivatingPlayer(AllZone.getHumanPlayer());
-            if (element.canPlay()) {
-                list.add(element);
-            }
-        }
-
-        final SpellAbility[] array = new SpellAbility[list.size()];
-        list.toArray(array);
-        return array;
-    } // canPlaySpellAbility()
 
     /**
      * <p>

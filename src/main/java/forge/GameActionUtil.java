@@ -30,11 +30,10 @@ import forge.card.cost.CostPayLife;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostSacrifice;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.card.spellability.SpellAbilityRestriction;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayManaCostUtil;
 import forge.control.input.InputPaySacCost;
@@ -46,7 +45,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
-import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -649,29 +647,6 @@ public final class GameActionUtil {
 
     }
 
-    // restricted to combat damage and dealing damage to creatures
-    /**
-     * <p>
-     * executeCombatDamageToCreatureEffects.
-     * </p>
-     * 
-     * @param source
-     *            a {@link forge.Card} object.
-     * @param affected
-     *            a {@link forge.Card} object.
-     * @param damage
-     *            a int.
-     */
-    public static void executeCombatDamageToCreatureEffects(final Card source, final Card affected, final int damage) {
-
-        if (damage <= 0) {
-            return;
-        }
-
-        // placeholder for any future needs (everything that was here is
-        // converted to script)
-    }
-
     // not restricted to combat damage, restricted to dealing damage to
     // creatures
     /**
@@ -915,12 +890,6 @@ public final class GameActionUtil {
             }
         }
 
-        /*if ((CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike") > 0) && (c.getNetAttack() > 0)) {
-            for (int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike"); k++) {
-                GameActionUtil.playerCombatDamageLoseHalfLifeUp(c);
-            }
-        }*/
-
         if (c.getName().equals("Scalpelexis")) {
             GameActionUtil.playerCombatDamageScalpelexis(c);
         } else if (c.getName().equals("Spawnwrithe")) {
@@ -935,7 +904,6 @@ public final class GameActionUtil {
         if (player.isPlayer(AllZone.getComputerPlayer())) {
             c.getDamageHistory().setDealtCombatDmgToComputerThisTurn(true);
         }
-
     } // executeCombatDamageToPlayerEffects
 
     /**
@@ -1002,35 +970,6 @@ public final class GameActionUtil {
             AllZone.getEndOfTurn().addAt(dealtDmg);
 
         } // if
-    }
-
-    /**
-     * <p>
-     * playerCombatDamageLoseHalfLifeUp.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    private static void playerCombatDamageLoseHalfLifeUp(final Card c) {
-        final Player player = c.getController().getOpponent();
-        if (c.getNetAttack() > 0) {
-            final Ability ability2 = new Ability(c, "0") {
-                @Override
-                public void resolve() {
-                    int x = (int) Math.ceil(player.getLife() / 2.0);
-                    player.loseLife(x, c);
-                }
-            }; // ability2
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(c.getName()).append(" - ").append(player);
-            sb.append(" loses half his or her life, rounded up.");
-            ability2.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability2);
-
-        }
     }
 
     /**
@@ -1835,4 +1774,116 @@ public final class GameActionUtil {
         GameActionUtil.stLandManaAbilities = stLandManaAbilitiesIn;
     }
 
+    /**
+     * <p>
+     * getAlternativeCosts.
+     * </p>
+     * 
+     * @param sa
+     *            a SpellAbility.
+     * @return an ArrayList<SpellAbility>.
+     * get alternative costs as additional spell abilities
+     */
+    public static final ArrayList<SpellAbility> getAlternativeCosts(SpellAbility sa) {
+        ArrayList<SpellAbility> alternatives = new ArrayList<SpellAbility>();
+        Card source = sa.getSourceCard();
+        if (!sa.isBasicSpell()) {
+            return alternatives;
+        }
+        for (final String keyword : source.getKeyword()) {
+            if (sa.isSpell() && keyword.startsWith("Flashback")) {
+                final SpellAbility flashback = sa.copy();
+                flashback.setFlashBackAbility(true);
+                SpellAbilityRestriction sar = new SpellAbilityRestriction();
+                sar.setVariables(sa.getRestrictions());
+                sar.setZone(ZoneType.Graveyard);
+                flashback.setRestrictions(sar);
+
+                // there is a flashback cost (and not the cards cost)
+                if (!keyword.equals("Flashback")) {
+                    final Cost fbCost = new Cost(source, keyword.substring(10), false);
+                    flashback.setPayCosts(fbCost);
+                }
+                alternatives.add(flashback);
+            }
+            if (sa.isSpell() && keyword.equals("May be played without paying its mana cost")) {
+                final SpellAbility newSA = sa.copy();
+                SpellAbilityRestriction sar = new SpellAbilityRestriction();
+                sar.setVariables(sa.getRestrictions());
+                sar.setZone(null);
+                newSA.setRestrictions(sar);
+                final Cost cost = new Cost(source, "", false);
+                if (newSA.getPayCosts() != null) {
+                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
+                        if (!(part instanceof CostMana)) {
+                            cost.getCostParts().add(part);
+                        }
+                    }
+                }
+                newSA.setBasicSpell(false);
+                newSA.setPayCosts(cost);
+                newSA.setManaCost("");
+                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+                alternatives.add(newSA);
+            }
+            if (sa.isSpell() && keyword.equals("May be played by your opponent without paying its mana cost")) {
+                final SpellAbility newSA = sa.copy();
+                SpellAbilityRestriction sar = new SpellAbilityRestriction();
+                sar.setVariables(sa.getRestrictions());
+                sar.setZone(null);
+                sar.setOpponentOnly(true);
+                newSA.setRestrictions(sar);
+                final Cost cost = new Cost(source, "", false);
+                if (newSA.getPayCosts() != null) {
+                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
+                        if (!(part instanceof CostMana)) {
+                            cost.getCostParts().add(part);
+                        }
+                    }
+                }
+                newSA.setBasicSpell(false);
+                newSA.setPayCosts(cost);
+                newSA.setManaCost("");
+                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+                alternatives.add(newSA);
+            }
+            if (sa.isSpell() && keyword.startsWith("May be played without paying its mana cost and as though it has flash")) {
+                final SpellAbility newSA = sa.copy();
+                SpellAbilityRestriction sar = new SpellAbilityRestriction();
+                sar.setVariables(sa.getRestrictions());
+                sar.setInstantSpeed(true);
+                newSA.setRestrictions(sar);
+                final Cost cost = new Cost(source, "", false);
+                if (newSA.getPayCosts() != null) {
+                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
+                        if (!(part instanceof CostMana)) {
+                            cost.getCostParts().add(part);
+                        }
+                    }
+                }
+                newSA.setBasicSpell(false);
+                newSA.setPayCosts(cost);
+                newSA.setManaCost("");
+                newSA.setDescription(sa.getDescription() + " (without paying its mana cost and as though it has flash)");
+                alternatives.add(newSA);
+            }
+            if (sa.isSpell() && keyword.startsWith("Alternative Cost")) {
+                final SpellAbility newSA = sa.copy();
+                final Cost cost = new Cost(source, keyword.substring(17), false);
+                if (newSA.getPayCosts() != null) {
+                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
+                        if (!(part instanceof CostMana)) {
+                            cost.getCostParts().add(part);
+                        }
+                    }
+                }
+                newSA.setBasicSpell(false);
+                newSA.setPayCosts(cost);
+                newSA.setManaCost("");
+                newSA.setDescription(sa.getDescription() + " (by paying " + keyword.substring(17) + " instead of its mana cost)");
+                alternatives.add(newSA);
+            }
+        }
+        return alternatives;
+    }
 } // end class GameActionUtil

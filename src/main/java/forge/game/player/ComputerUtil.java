@@ -29,7 +29,7 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.CardUtil;
-import forge.GameAction;
+import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -77,7 +77,7 @@ public class ComputerUtil {
         final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : all) {
             //add alternative costs as additional spell abilities
-            abilities.addAll(GameAction.getAlternativeCosts(sa));
+            abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
             abilities.add(sa);
         }
         for (final SpellAbility sa : abilities) {
@@ -256,7 +256,7 @@ public class ComputerUtil {
         final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : possibleCounters) {
             //add alternative costs as additional spell abilities
-            abilities.addAll(GameAction.getAlternativeCosts(sa));
+            abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
             abilities.add(sa);
         }
         for (final SpellAbility sa : abilities) {

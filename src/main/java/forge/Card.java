@@ -7907,9 +7907,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             damageToAdd = this.replaceDamage(damageToAdd, source, true);
             damageToAdd = this.preventDamage(damageToAdd, source, true);
 
-            if ((damageToAdd > 0) && this.isCreature()) {
-                GameActionUtil.executeCombatDamageToCreatureEffects(source, this, damageToAdd);
-            }
             map.put(source, damageToAdd);
         }
 
