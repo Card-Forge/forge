@@ -350,7 +350,15 @@ public class CardPanel extends JPanel implements CardContainer {
         // - White borders for Core sets Unlimited - 9th -
 
         g2d.fillRoundRect(this.cardXOffset, this.cardYOffset, this.cardWidth, this.cardHeight, cornerSize, cornerSize);
-        if (this.isSelected) {
+        if (this.getCard().isUsedToPay()) {
+            g2d.setColor(Color.decode("#FF00FF"));
+            final int offset = this.isTapped() ? 1 : 0;
+            for (int i = 1, n = Math.max(1, Math.round(2 * this.cardWidth * CardPanel.SELECTED_BORDER_SIZE)); i <= n; i++) {
+                g2d.drawRoundRect(this.cardXOffset - i, (this.cardYOffset - i) + offset,
+                        (this.cardWidth + (i * 2)) - 1, (this.cardHeight + (i * 2)) - 1, cornerSize, cornerSize);
+            }
+        }
+        else if (this.isSelected) {
             g2d.setColor(Color.green);
             final int offset = this.isTapped() ? 1 : 0;
             for (int i = 1, n = Math.max(1, Math.round(this.cardWidth * CardPanel.SELECTED_BORDER_SIZE)); i <= n; i++) {
@@ -414,6 +422,11 @@ public class CardPanel extends JPanel implements CardContainer {
         if (this.getCard().isPhasedOut()) {
             CardFaceSymbols.drawSymbol("phasing", g, (this.cardXOffset + (this.cardWidth / 2)) - 16,
                     (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
+        }
+
+        if (this.getCard().isUsedToPay()) {
+            CardFaceSymbols.drawSymbol("sacrifice", g, (this.cardXOffset + (this.cardWidth / 2)) - 20,
+                    (this.cardYOffset + (this.cardHeight / 2)) - 20);
         }
 
         if (this.getCard() != null && this.getGameCard().getFoil() > 0) {

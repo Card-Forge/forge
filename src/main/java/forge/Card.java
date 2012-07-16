@@ -152,6 +152,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private boolean phasedOut = false;
     private boolean directlyPhasedOut = true;
+    
+    private boolean usedToPayCost = false;
 
     // for Vanguard / Manapool / Emblems etc.
     private boolean isImmutable = false;
@@ -7498,6 +7500,29 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         return false;
+    }
+
+    /**
+     * <p>
+     * isUsedToPay.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isUsedToPay() {
+        return this.usedToPayCost;
+    }
+
+    /**
+     * <p>
+     * setUsedToPay.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setUsedToPay(final boolean b) {
+        this.usedToPayCost = b;
     }
 
     /**

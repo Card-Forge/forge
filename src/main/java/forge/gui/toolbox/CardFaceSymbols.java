@@ -102,6 +102,7 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("defend", FSkin.getImage(FSkin.GameplayImages.IMG_DEFEND, 32, 32));
         MANA_IMAGES.put("summonsick", FSkin.getImage(FSkin.GameplayImages.IMG_SUMMONSICK, 32, 32));
         MANA_IMAGES.put("phasing", FSkin.getImage(FSkin.GameplayImages.IMG_PHASING, 32, 32));
+        MANA_IMAGES.put("sacrifice", FSkin.getImage(FSkin.ZoneImages.ICO_GRAVEYARD, 40, 40));
         MANA_IMAGES.put("counters1", FSkin.getImage(FSkin.GameplayImages.IMG_COUNTERS1));
         MANA_IMAGES.put("counters2", FSkin.getImage(FSkin.GameplayImages.IMG_COUNTERS2));
         MANA_IMAGES.put("counters3", FSkin.getImage(FSkin.GameplayImages.IMG_COUNTERS3));

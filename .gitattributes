@@ -12020,6 +12020,7 @@ src/main/java/forge/control/input/InputPassPriority.java svneol=native#text/plai
 src/main/java/forge/control/input/InputPayManaCost.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayManaCostAbility.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayManaCostUtil.java svneol=native#text/plain
+src/main/java/forge/control/input/InputPaySacCost.java -text
 src/main/java/forge/control/input/package-info.java svneol=native#text/plain
 src/main/java/forge/control/package-info.java -text
 src/main/java/forge/deck/CardCollections.java -text

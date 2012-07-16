@@ -30,12 +30,14 @@ import forge.card.cost.CostPayLife;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostSacrifice;
 import forge.card.spellability.Ability;
+import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayManaCostUtil;
+import forge.control.input.InputPaySacCost;
 import forge.game.GameLossReason;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -422,10 +424,10 @@ public final class GameActionUtil {
             throw new RuntimeException("GameActionUtil::payCostDuringAbilityResolve - Too many payment types - " + source);
         }
         final CostPart unlessCost = cost.getCostParts().get(0);
-        String amountString = unlessCost.getAmount();
-        final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
-                : CardFactoryUtil.xCount(source, source.getSVar(amountString));
         if (unlessCost instanceof CostPayLife) {
+            String amountString = unlessCost.getAmount();
+            final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                    : CardFactoryUtil.xCount(source, source.getSVar(amountString));
             if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(source, "Do you want to pay "
                     + amount + " life?")) {
                 AllZone.getHumanPlayer().payLife(amount, null);
@@ -437,87 +439,9 @@ public final class GameActionUtil {
         }
 
         else if (unlessCost instanceof CostSacrifice) {
-            final CostSacrifice sacCost = (CostSacrifice) unlessCost;
-            final CardList typeList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getValidCards(unlessCost.getType().split(";"), AllZone.getHumanPlayer(), source);
-
-            final Input paySacCost = new Input() {
-                private static final long serialVersionUID = 2685832214529141991L;
-                private int nSacrifices = 0;
-
-                @Override
-                public void showMessage() {
-                    if (typeList.size() == 0 && this.nSacrifices < amount) {
-                        this.cancel();
-                    }
-
-                    final StringBuilder msg = new StringBuilder("Sacrifice ");
-                    final int nLeft = amount - this.nSacrifices;
-                    msg.append(nLeft).append(" ");
-                    msg.append(sacCost.getDescriptiveType());
-                    if (nLeft > 1) {
-                        msg.append("s");
-                    }
-                    if (!sacCost.getList().isEmpty()) {
-                        msg.append("\r\nSelected:\r\n");
-                        for (Card selected : sacCost.getList()) {
-                            msg.append(selected + "\r\n");
-                        }
-                    }
-
-                    CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
-                    if (nLeft > 0) {
-                        ButtonUtil.enableOnlyCancel();
-                    }
-                    else {
-                        ButtonUtil.enableAll();
-                    }
-                }
-
-                @Override
-                public void selectButtonCancel() {
-                    this.cancel();
-                }
-
-                @Override
-                public void selectButtonOK() {
-                    this.done();
-                }
-
-                @Override
-                public void selectCard(final Card card, final PlayerZone zone) {
-                    if (typeList.contains(card)) {
-                        this.nSacrifices++;
-                        sacCost.addToList(card);
-                        //Singletons.getModel().getGameAction().sacrifice(selected, ability);
-                        typeList.remove(card);
-                        this.showMessage();
-                    }
-                    else if (sacCost.getList().contains(card)) {
-                        this.nSacrifices--;
-                        sacCost.getList().remove(card);
-                        typeList.add(card);
-                        this.showMessage();
-                    }
-                }
-
-                public void done() {
-                    this.stop();
-                    // actually sacrifice the cards
-                    for (Card selected : sacCost.getList()) {
-                        Singletons.getModel().getGameAction().sacrifice(selected, ability);
-                    }
-                    sacCost.addListToHash(ability, "Sacrificed");
-                    paid.execute();
-                }
-
-                public void cancel() {
-                    this.stop();
-                    unpaid.execute();
-                }
-            };
             final boolean bResolving = AllZone.getStack().getResolving();
             AllZone.getStack().setResolving(false);
-            AllZone.getInputControl().setInput(paySacCost);
+            AllZone.getInputControl().setInput(new InputPaySacCost((CostSacrifice) unlessCost, ability, paid, unpaid));
             AllZone.getStack().setResolving(bResolving);
         }
         else if (unlessCost instanceof CostMana) {

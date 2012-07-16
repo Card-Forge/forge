@@ -43,6 +43,7 @@ import forge.control.input.InputBlock;
 import forge.control.input.InputMana;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostAbility;
+import forge.control.input.InputPaySacCost;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -470,6 +471,9 @@ public class CField implements ICDoc {
                         AllZone.getCombat().removeFromCombat(c);
                     }
                     ((InputBlock) input).removeFromAllBlocking(c);
+                }
+                else if (input instanceof InputPaySacCost) {
+                    ((InputPaySacCost) input).unselectCard(c, AllZone.getHumanPlayer().getZone(ZoneType.Battlefield));
                 }
             } else {
                 //Yosei, the Morning Star required cards to be chosen on computer side
