@@ -1830,15 +1830,7 @@ public class GameAction {
         }
 
         if (spell.isSpell()) {
-            if (originalCard.getName().equals("Avatar of Might")) {
-                final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-                final Player opponent = player.getOpponent();
-                final CardList playerCreature = AllZoneUtil.getCreaturesInPlay(player);
-                final CardList opponentCreature = AllZoneUtil.getCreaturesInPlay(opponent);
-                if ((opponentCreature.size() - playerCreature.size()) >= 4) {
-                    manaCost = new ManaCost("G G");
-                } // Avatar of Might
-            } else if (spell.getIsDelve()) {
+            if (spell.getIsDelve()) {
                 final int cardsInGrave = originalCard.getController().getCardsIn(ZoneType.Graveyard).size();
                 final ArrayList<Integer> choiceList = new ArrayList<Integer>();
                 for (int i = 0; i <= cardsInGrave; i++) {
