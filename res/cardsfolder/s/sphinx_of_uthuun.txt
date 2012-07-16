@@ -2,7 +2,7 @@ Name:Sphinx of Uthuun
 ManaCost:5 U U
 Types:Creature Sphinx
 Text:no text
-PT:5/5
+PT:5/6
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
 SVar:TrigChangeZone:AB$Dig | Cost$ 0 | DigNum$ 5 | Reveal$ True | RememberRevealed$ True | NoMove$ True | SubAbility$ DBTwoPiles | SpellDescription$ Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
