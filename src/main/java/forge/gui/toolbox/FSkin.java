@@ -177,6 +177,7 @@ public enum FSkin {
         IMG_DEFEND          (new int[] {160, 400, 80, 80, 32, 32}), /** */
         IMG_SUMMONSICK      (new int[] {240, 400, 80, 80, 32, 32}), /** */
         IMG_PHASING         (new int[] {240, 320, 80, 80, 32, 32}), /** */
+        IMG_COSTRESERVED    (new int[] {240, 240, 80, 80, 40, 40}), /** */
         IMG_COUNTERS1       (new int[] {0, 320, 80, 80}), /** */
         IMG_COUNTERS2       (new int[] {0, 400, 80, 80}), /** */
         IMG_COUNTERS3       (new int[] {80, 320, 80, 80}), /** */
