@@ -1308,6 +1308,9 @@ public class AbilityFactoryPump {
 
         for (int i = 0; i < this.keywords.size(); i++) {
             applyTo.addExtrinsicKeyword(this.keywords.get(i));
+            if (this.keywords.get(i).equals("Suspend")) {
+                applyTo.setSuspend(true);
+            }
         }
 
         if (!this.params.containsKey("Permanent")) {

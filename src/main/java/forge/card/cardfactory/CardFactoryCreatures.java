@@ -300,55 +300,6 @@ public class CardFactoryCreatures {
         card.addComesIntoPlayCommand(intoPlay);
     }
 
-    private static void getCard_JhoiraOfTheGhitu(final Card card, final String cardName) {
-        final Stack<Card> chosen = new Stack<Card>();
-        final SpellAbility ability = new Ability(card, "2") {
-            @Override
-            public boolean canPlay() {
-                CardList possible = card.getController().getCardsIn(ZoneType.Hand);
-                possible = possible.filter(CardListFilter.NON_LANDS);
-                return !possible.isEmpty() && super.canPlay();
-            }
-
-            @Override
-            public boolean canPlayAI() {
-                return false;
-            }
-
-            @Override
-            public void resolve() {
-                final Card c = chosen.pop();
-                c.addCounter(Counters.TIME, 4);
-                c.setSuspend(true);
-            }
-        };
-
-        ability.setAfterPayMana(new Input() {
-            private static final long serialVersionUID = -1647181037510967127L;
-
-            @Override
-            public void showMessage() {
-                ButtonUtil.disableAll();
-                CMatchUI.SINGLETON_INSTANCE.showMessage("Exile a nonland card from your hand.");
-            }
-
-            @Override
-            public void selectCard(final Card c, final PlayerZone zone) {
-                if (zone.is(ZoneType.Hand) && !c.isLand()) {
-                    Singletons.getModel().getGameAction().exile(c);
-                    chosen.push(c);
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(card.toString()).append(" - Suspending ").append(c.toString());
-                    ability.setStackDescription(sb.toString());
-                    AllZone.getStack().add(ability);
-                    this.stop();
-                }
-            }
-        });
-
-        card.addSpellAbility(ability);
-    }
-
     private static void getCard_VedalkenPlotter(final Card card, final String cardName) {
         final Card[] target = new Card[2];
         final int[] index = new int[1];
@@ -1640,8 +1591,6 @@ public class CardFactoryCreatures {
             getCard_PhylacteryLich(card, cardName);
         } else if (cardName.equals("Sky Swallower")) {
             getCard_SkySwallower(card, cardName);
-        } else if (cardName.equals("Jhoira of the Ghitu")) {
-            getCard_JhoiraOfTheGhitu(card, cardName);
         } else if (cardName.equals("Vedalken Plotter")) {
             getCard_VedalkenPlotter(card, cardName);
         } else if (cardName.equals("Painter's Servant")) {

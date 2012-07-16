@@ -2551,7 +2551,8 @@ public class AbilityFactory {
         final HashMap<String, String> params = af.getMapParams();
         Card host;
 
-        if (!params.containsKey("RememberTargets") && !params.containsKey("RememberToughness")) {
+        if (!params.containsKey("RememberTargets") && !params.containsKey("RememberToughness")
+                && !params.containsKey("RememberCostCards")) {
             return;
         }
 
@@ -2567,6 +2568,15 @@ public class AbilityFactory {
             final ArrayList<Object> tgts = (tgt == null) ? new ArrayList<Object>() : tgt.getTargets();
             for (final Object o : tgts) {
                 host.addRemembered(o);
+            }
+        }
+
+        if (params.containsKey("RememberCostCards")) {
+            if (params.get("Cost").contains("Exile")) {
+                final CardList paidListExiled = sa.getPaidList("Exiled");
+                for (final Card exiledAsCost : paidListExiled) {
+                    host.addRemembered(exiledAsCost);
+                }
             }
         }
     }
