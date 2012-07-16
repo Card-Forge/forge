@@ -300,7 +300,7 @@ public class TargetSelection {
             }
         }
 
-        if (zone.contains(ZoneType.Battlefield)) {
+        if (zone.contains(ZoneType.Battlefield) && zone.size() == 1) {
             AllZone.getInputControl().setInput(this.inputTargetSpecific(choices, true, mandatory, objects));
         } else {
             this.chooseCardFromList(choices, true, mandatory);
