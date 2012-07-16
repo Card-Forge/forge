@@ -2,7 +2,7 @@ Name:Cloud Key
 ManaCost:3
 Types:Artifact
 Text:no text
-K:CostChange:Player:Less:1:Spell:All:ChosenType:NoSpecial:Spells you cast of the chosen type cost 1 less to cast.
+S:Mode$ ReduceCost | ValidCard$ Card.ChosenType | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Spells you cast of the chosen type cost 1 less to cast.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseCT | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose artifact, creature, enchantment, instant, or sorcery.
 SVar:ChooseCT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Card | InvalidTypes$ Land,Planeswalker,Tribal
 SVar:RemAIDeck:True

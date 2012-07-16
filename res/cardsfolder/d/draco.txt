@@ -3,8 +3,8 @@ ManaCost:16
 Types:Artifact Creature Dragon
 Text:no text
 PT:9/9
-K:CostChange:Player:Less:X:Self:All:All:NoSpecial:Domain - CARDNAME costs 2 less to cast for each basic land type among lands you control.
 K:Flying
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Domain - CARDNAME costs 2 less to cast for each basic land type among lands you control.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Domain - At the beginning of your upkeep, sacrifice CARDNAME unless you pay 10. This cost is reduced by 2 for each basic land type among lands you control.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ UpkeepX | UnlessPayer$ You | References$ UpkeepX
 SVar:X:Count$Domain/Twice

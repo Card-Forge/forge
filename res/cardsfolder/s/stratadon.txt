@@ -4,9 +4,8 @@ Types:Artifact Creature Beast
 Text:no text
 PT:5/5
 K:Trample
-K:CostChange:Player:Less:X:Self:All:All:No Condition:Domain - Stratadon costs 1 less to cast for each basic land type among lands you control.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Domain - CARDNAME costs 1 less to cast for each basic land type among lands you control.
 SVar:X:Count$Domain
-SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stratadon.jpg

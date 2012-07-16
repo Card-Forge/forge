@@ -2,7 +2,7 @@ Name:Eye of Ugin
 ManaCost:no cost
 Types:Legendary Land
 Text:no text
-K:CostChange:Player:Less:2:Spell:colorless:Eldrazi:NoSpecial:Colorless Eldrazi spells you cast cost 2 less to cast.
+S:Mode$ ReduceCost | ValidCard$ Eldrazi.Colorless | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Colorless Eldrazi spells you cast cost 2 less to cast.
 A:AB$ ChangeZone | Cost$ 7 T | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Colorless | ChangeNum$ 1 | SpellDescription$ Search your library for a colorless creature card, reveal it, and put it into your hand. Then shuffle your library.
 SVar:RemRandomDeck:True
 SVar:Rarity:Mythic
