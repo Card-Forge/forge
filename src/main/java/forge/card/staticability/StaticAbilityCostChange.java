@@ -22,6 +22,7 @@ import java.util.HashMap;
 import forge.Card;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -114,18 +115,25 @@ public class StaticAbilityCostChange {
         if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
             return originalCost;
         }
+        int value = 0;
+        if ("X".equals(amount)) {
+            value = CardFactoryUtil.xCount(card, card.getSVar("X"));
+        } else {
+            value = Integer.valueOf(amount);
+        }
 
-        if (!"WUGRB".contains(amount)) {
-            int value = 0;
-            if ("X".equals(amount)) {
-                value = CardFactoryUtil.xCount(card, card.getSVar("X"));
-            } else {
-                value = Integer.valueOf(amount);
-            }
-
+        if (!params.containsKey("Color")) {
             manaCost.decreaseColorlessMana(value);
             if (manaCost.toString().equals("0") && params.containsKey("MinMana")) {
                 manaCost.increaseColorlessMana(Integer.valueOf(params.get("MinMana")));
+            }
+        } else {
+            if (params.get("Color").equals("W")) {
+                manaCost.decreaseShard(ManaCostShard.WHITE, value);
+            } else if (params.get("Color").equals("B")) {
+                manaCost.decreaseShard(ManaCostShard.BLACK, value);
+            } else if (params.get("Color").equals("G")) {
+                manaCost.decreaseShard(ManaCostShard.GREEN, value);
             }
         }
 
