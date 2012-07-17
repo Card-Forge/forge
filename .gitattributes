@@ -9760,6 +9760,7 @@ res/cardsfolder/t/time_vault.txt svneol=native#text/plain
 res/cardsfolder/t/time_walk.txt svneol=native#text/plain
 res/cardsfolder/t/time_warp.txt svneol=native#text/plain
 res/cardsfolder/t/timebender.txt -text
+res/cardsfolder/t/timecrafting.txt -text
 res/cardsfolder/t/timely_reinforcements.txt -text
 res/cardsfolder/t/timetwister.txt svneol=native#text/plain
 res/cardsfolder/t/timid_drake.txt svneol=native#text/plain
