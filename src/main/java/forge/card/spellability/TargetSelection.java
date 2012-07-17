@@ -424,20 +424,81 @@ public class TargetSelection {
         final SpellAbility sa = this.ability;
         final String message = this.target.getVTSelection();
 
+        final Card divBattlefield = new Card();
+        divBattlefield.setName("--CARDS ON BATTLEFIELD:--");
+        final Card divExile = new Card();
+        divExile.setName("--CARDS IN EXILE:--");
+        final Card divGrave = new Card();
+        divGrave.setName("--CARDS IN GRAVEYARD:--");
+        final Card divLibrary = new Card();
+        divLibrary.setName("--CARDS IN LIBRARY:--");
+        final Card divStack = new Card();
+        divStack.setName("--CARDS IN LIBRARY:--");
+
+        CardList choicesZoneUnfiltered = choices;
+        final CardList crdsBattle = new CardList();
+        final CardList crdsExile = new CardList();
+        final CardList crdsGrave = new CardList();
+        final CardList crdsLibrary = new CardList();
+        final CardList crdsStack = new CardList();
+        for (final Card inZone : choicesZoneUnfiltered) {
+            if (AllZoneUtil.getCardsIn(ZoneType.Battlefield).contains(inZone)) {
+                crdsBattle.add(inZone);
+            } else if (AllZoneUtil.getCardsIn(ZoneType.Exile).contains(inZone)) {
+                crdsExile.add(inZone);
+            } else if (AllZoneUtil.getCardsIn(ZoneType.Graveyard).contains(inZone)) {
+                crdsGrave.add(inZone);
+            } else if (AllZoneUtil.getCardsIn(ZoneType.Library).contains(inZone)) {
+                crdsLibrary.add(inZone);
+            } else if (AllZoneUtil.getCardsIn(ZoneType.Stack).contains(inZone)) {
+                crdsStack.add(inZone);
+            }
+        }
+        CardList choicesFiltered = new CardList();
+        if (crdsBattle.size() >= 1) {
+            choicesFiltered.add(divBattlefield);
+            choicesFiltered.addAll(crdsBattle);
+            crdsBattle.clear();
+        }
+        if (crdsExile.size() >= 1) {
+            choicesFiltered.add(divExile);
+            choicesFiltered.addAll(crdsExile);
+            crdsExile.clear();
+        }
+        if (crdsGrave.size() >= 1) {
+            choicesFiltered.add(divGrave);
+            choicesFiltered.addAll(crdsGrave);
+            crdsGrave.clear();
+        }
+        if (crdsLibrary.size() >= 1) {
+            choicesFiltered.add(divLibrary);
+            choicesFiltered.addAll(crdsLibrary);
+            crdsLibrary.clear();
+        }
+        if (crdsStack.size() >= 1) {
+            choicesFiltered.add(divStack);
+            choicesFiltered.addAll(crdsStack);
+            crdsStack.clear();
+        }
+
         final Target tgt = this.getTgt();
 
-        final CardList choicesWithDone = choices;
+        final CardList choicesWithDone = choicesFiltered;
         if (tgt.isMinTargetsChosen(sa.getSourceCard(), sa)) {
             // is there a more elegant way of doing this?
             choicesWithDone.add(dummy);
         }
+
         final Object check = GuiUtils.chooseOneOrNone(message, choicesWithDone.toArray());
         if (check != null) {
             final Card c = (Card) check;
-            if (c.equals(dummy)) {
-                this.setDoneTarget(true);
-            } else {
-                tgt.addTarget(c);
+            if (!c.equals(divBattlefield) && !c.equals(divExile) && !c.equals(divGrave)
+                    && !c.equals(divLibrary) && !c.equals(divStack)) {
+                if (c.equals(dummy)) {
+                    this.setDoneTarget(true);
+                } else {
+                    tgt.addTarget(c);
+                }
             }
         } else {
             this.setCancel(true);
