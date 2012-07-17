@@ -1,0 +1,13 @@
+Name:Fury Charm
+ManaCost:1 R
+Types:Instant
+Text:no text
+A:SP$ Charm | Cost$ 1 R | CharmNum$ 1 | Choices$ Bash,Buff,LoseTime | SpellDescription$ Choose one - Destroy target artifact; or target creature gets +1/+1 and gains trample until end of turn; or remove two time counters from target permanent or suspended card.
+SVar:Bash:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+SVar:Buff:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ Trample | SpellDescription$ Target creature gets +1/+1 and gains trample until end of turn.
+SVar:LoseTime:DB$ RemoveCounter | ValidTgts$ Permanent,Card.suspended | AITgts$ Permanent.counters_GE1_TIME+YouDontCtrl,Card.suspended+YouCtrl | TgtPrompt$ Select target permanent or suspended card. | CounterType$ TIME | CounterNum$ 2 | TgtZone$ Battlefield,Exile | SpellDescription$ Remove two time counters from target permanent or suspended card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fury_charm.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/100.jpg
+Oracle:Choose one - Destroy target artifact; or target creature gets +1/+1 and gains trample until end of turn; or remove two time counters from target permanent or suspended card.
+End
