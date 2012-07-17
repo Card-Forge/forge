@@ -92,6 +92,10 @@ public class StaticAbilityCostChange {
                 manaCost.increaseShard(ManaCostShard.WHITE, value);
             } else if (params.get("Color").equals("B")) {
                 manaCost.increaseShard(ManaCostShard.BLACK, value);
+            } else if (params.get("Color").equals("U")) {
+                manaCost.increaseShard(ManaCostShard.BLUE, value);
+            } else if (params.get("Color").equals("R")) {
+                manaCost.increaseShard(ManaCostShard.RED, value);
             } else if (params.get("Color").equals("G")) {
                 manaCost.increaseShard(ManaCostShard.GREEN, value);
             }

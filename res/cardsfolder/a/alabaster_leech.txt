@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Leech
 Text:no text
 PT:1/3
-K:CostChange:Player:More:W:Spell:white:All:NoSpecial:White spells you cast cost W more to cast.
+S:Mode$ RaiseCost | ValidCard$ Card.White | Activator$ You | Type$ Spell | Color$ W | Amount$ 1 | Description$ White spells you cast cost W more to cast.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alabaster_leech.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/1.jpg

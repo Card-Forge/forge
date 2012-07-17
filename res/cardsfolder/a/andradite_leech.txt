@@ -4,7 +4,7 @@ Types:Creature Leech
 Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-K:CostChange:Player:More:B:Spell:black:All:NoSpecial:Black spells you cast cost B more to cast.
+S:Mode$ RaiseCost | ValidCard$ Card.Black | Activator$ You | Type$ Spell | Color$ B | Amount$ 1 | Description$ Black spells you cast cost B more to cast.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/andradite_leech.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/93.jpg

@@ -5,7 +5,7 @@ Text:no text
 PT:2/3
 S:Mode$ ReduceCost | ValidCard$ Card.White | Type$ Spell | Activator$ You | Amount$ 1 | Description$ White spells you cast cost 1 less to cast.
 S:Mode$ ReduceCost | ValidCard$ Card.Blue | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Blue spells you cast cost 1 less to cast.
-K:CostChange:Opponent:More:1:Spell:All:All:NoSpecial:Spells your opponents cast cost 1 more to cast.
+S:Mode$ RaiseCost | Activator$ Opponent | Type$ Spell | Amount$ 1 | Description$ Spells your opponents cast cost 1 more to cast.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_arbiter_augustin_iv.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/112.jpg

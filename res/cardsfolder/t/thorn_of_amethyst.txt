@@ -2,7 +2,7 @@ Name:Thorn of Amethyst
 ManaCost:2
 Types:Artifact
 Text:no text
-K:CostChange:All:More:1:Spell:All:Creature:NonType:Noncreature spells cost 1 more to cast.
+S:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Description$ Noncreature spells cost 1 more to cast.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_of_amethyst.jpg

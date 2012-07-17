@@ -2,8 +2,8 @@ Name:Gloom
 ManaCost:2 B
 Types:Enchantment
 Text:no text
-K:CostChange:All:More:3:Spell:white:All:NoSpecial:White spells cost 3 more to cast.
-K:CostChange:All:More:3:Ability:white:Enchantment:NoSpecial:Activated abilities of white enchantments cost 3 more to activate.
+S:Mode$ RaiseCost | ValidCard$ Card.White | Type$ Spell | Amount$ 3 | Description$ White spells cost 3 more to cast.
+S:Mode$ RaiseCost | ValidCard$ Enchantment.White | Type$ Ability | Amount$ 3 | AffectedZone$ Battlefield | Description$ Activated abilities of white enchantments cost 3 more to activate.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloom.jpg
