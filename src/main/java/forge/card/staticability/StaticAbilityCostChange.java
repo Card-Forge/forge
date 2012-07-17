@@ -77,7 +77,9 @@ public class StaticAbilityCostChange {
         }
         int value = 0;
         if ("X".equals(amount)) {
-            value = CardFactoryUtil.xCount(card, card.getSVar("X"));
+            value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
+        } else if ("Y".equals(amount)){
+            value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y"));
         } else {
             value = Integer.valueOf(amount);
         }
@@ -151,7 +153,7 @@ public class StaticAbilityCostChange {
         }
         int value = 0;
         if ("X".equals(amount)) {
-            value = CardFactoryUtil.xCount(card, card.getSVar("X"));
+            value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
         } else {
             value = Integer.valueOf(amount);
         }
