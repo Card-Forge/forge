@@ -7243,6 +7243,7 @@ res/cardsfolder/q/quicksilver_dagger.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_gargantuan.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_geyser.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_wall.txt svneol=native#text/plain
+res/cardsfolder/q/quiet_disrepair.txt -text
 res/cardsfolder/q/quiet_purity.txt svneol=native#text/plain
 res/cardsfolder/q/quiet_speculation.txt -text
 res/cardsfolder/q/quietus_spike.txt svneol=native#text/plain
