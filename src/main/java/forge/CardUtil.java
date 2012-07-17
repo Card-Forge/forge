@@ -963,7 +963,8 @@ public final class CardUtil {
             newCopy.addAlternateState(state);
             newCopy.setState(state);
             CardFactoryUtil.copyState(in, state, newCopy);
-            //CardFactoryUtil.addAbilityFactoryAbilities(newCopy);
+            //Copies of full abilities not need in LKI copy
+            /*
             for (SpellAbility sa : in.getState(state).getManaAbility()) {
                 if (sa instanceof AbilityActivated) {
                     SpellAbility newSA = ((AbilityActivated) sa).getCopy();
@@ -986,6 +987,7 @@ public final class CardUtil {
                     newCopy.addSpellAbility(newSA);
                 }
             }
+            */
             for (int i = 0; i < newCopy.getStaticAbilityStrings().size(); i++) {
                 newCopy.addStaticAbility(newCopy.getStaticAbilityStrings().get(i));
             }
