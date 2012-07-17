@@ -691,11 +691,6 @@ public class AbilityFactoryPump {
      * @return a boolean.
      */
     private boolean pumpPlayAI(final SpellAbility sa) {
-        // if there is no target and host card isn't in play, don't activate
-        if ((this.abilityFactory.getAbTgt() == null) && !AllZoneUtil.isCardInPlay(this.hostCard)) {
-            return false;
-        }
-
         final Cost cost = sa.getPayCosts();
 
         if (!CostUtil.checkLifeCost(cost, this.hostCard, 4)) {
@@ -838,16 +833,17 @@ public class AbilityFactoryPump {
                 CardListUtil.sortAttack(list);
                 if (!list.isEmpty()) {
                     tgt.addTarget(list.get(0));
+                    return true;
                 } else {
                     return false;
                 }
             }
         } else if (this.abilityFactory.isCurse()) {
-            list = this.getCurseCreatures(sa, defense, attack);
             if (sa.canTarget(AllZone.getHumanPlayer())) {
                 tgt.addTarget(AllZone.getHumanPlayer());
                 return true;
             }
+            list = this.getCurseCreatures(sa, defense, attack);
         } else {
             if (!tgt.canTgtCreature()) {
                 ZoneType zone = tgt.getZone().get(0);
@@ -911,6 +907,7 @@ public class AbilityFactoryPump {
             }
 
             t = CardFactoryUtil.getBestAI(list);
+            tgt.addTarget(t);
             list.remove(t);
         }
 
