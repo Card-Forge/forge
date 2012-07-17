@@ -663,7 +663,7 @@ public abstract class Player extends GameEntity {
         }
     }
 
-    // This should be also usable by the AI to forecast an effect (so it must
+    // This is usable by the AI to forecast an effect (so it must
     // not change the game state)
     // 2012/01/02: No longer used in calculating the finalized damage, but
     // retained for damageprediction. -Hellfish
@@ -684,64 +684,48 @@ public abstract class Player extends GameEntity {
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
 
         int restDamage = damage;
-
-        if (AllZoneUtil.isCardInPlay("Sulfuric Vapors") && source.isSpell() && source.isRed()) {
-            final int amount = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Sulfuric Vapors").size();
-            for (int i = 0; i < amount; i++) {
-                restDamage += 1;
-            }
-        }
-
-        if (AllZoneUtil.isCardInPlay("Pyromancer's Swath", source.getController())
-                && (source.isInstant() || source.isSorcery())) {
-            final int amount = source.getController().getCardsIn(ZoneType.Battlefield, "Pyromancer's Swath").size();
-            for (int i = 0; i < amount; i++) {
-                restDamage += 2;
-            }
-        }
-        //
-        if (AllZoneUtil.isCardInPlay("Furnace of Rath")) {
-            final int amount = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Furnace of Rath").size();
-            for (int i = 0; i < amount; i++) {
+        
+        for (Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+            if (c.getName().equals("Sulfuric Vapors")) {
+                if (source.isSpell() && source.isRed()) {
+                    restDamage += 1;
+                }
+            } else if (c.getName().equals("Pyromancer's Swath")) {
+                if (c.getController().equals(source.getController()) && (source.isInstant() || source.isSorcery())) {
+                    restDamage += 2;
+                }
+            } else if (c.getName().equals("Furnace of Rath")) {
                 restDamage += restDamage;
-            }
-        }
-        //
-        if (AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) && source.isCreature()) {
-            final int amount = source.getController().getCardsIn(ZoneType.Battlefield, "Gratuitous Violence").size();
-            for (int i = 0; i < amount; i++) {
-                restDamage += restDamage;
-            }
-        }
-        //
-        if (AllZoneUtil.isCardInPlay("Fire Servant", source.getController()) && source.isRed()
-                && (source.isInstant() || source.isSorcery())) {
-            final int amount = source.getController().getCardsIn(ZoneType.Battlefield, "Fire Servant").size();
-            for (int i = 0; i < amount; i++) {
-                restDamage *= 2;
-            }
-        }
-
-        //
-        if (AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell()) {
-            final int amount = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Benevolent Unicorn").size();
-            for (int i = 0; i < amount; i++) {
-                if (restDamage > 0) {
-                    restDamage -= 1;
+            } else if (c.getName().equals("Gratuitous Violence")) {
+                if (c.getController().equals(source.getController()) && source.isCreature()) {
+                    restDamage += restDamage;
+                }
+            } else if (c.getName().equals("Fire Servant")) {
+                if (c.getController().equals(source.getController()) && source.isRed()
+                        && (source.isInstant() || source.isSorcery())) {
+                    restDamage *= 2;
+                }
+            } else if (c.getName().equals("Benevolent Unicorn")) {
+                if (source.isSpell()) {
+                   restDamage -= 1;
+                }
+            } else if (c.getName().equals("Divine Presence")) {
+                if (restDamage > 3) {
+                    restDamage = 3;
+                }
+            } else if (c.getName().equals("Forethought Amulet")) {
+                if (c.getController().equals(this) && (source.isInstant() || source.isSorcery())
+                        && restDamage > 2) {
+                    restDamage = 2;
+                }
+            } else if (c.getName().equals("Elderscale Wurm")) {
+                if (c.getController().equals(this) && this.getLife() - restDamage < 7) {
+                    restDamage = this.getLife() - 7;
+                    if (restDamage < 0) {
+                        restDamage = 0;
+                    }
                 }
             }
-        }
-
-        //
-        if (AllZoneUtil.isCardInPlay("Divine Presence") && (restDamage > 3)) {
-
-            restDamage = 3;
-        }
-        //
-        if (AllZoneUtil.isCardInPlay("Forethought Amulet", this) && (source.isInstant() || source.isSorcery())
-                && (restDamage > 2)) {
-
-            restDamage = 2;
         }
 
         return restDamage;
