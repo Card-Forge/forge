@@ -70,6 +70,18 @@ Fixes/Features:
 - Selection for sacrifice UnlessCost are highlighted. Unselecting cards is done with right mouse click.
 - Added card state icon for marking cards reserved for a cost payment
 - Added the recent commit logs to changes.txt.
+- Fixed Griffin Protector, now has flying.
+- Converted Jhoira, of the Ghitu to script
+- Converted more cards to StAb ReduceCost.
+- Converted more cards to StAb ReduceCost.
+- Converted more cards to StAb ReduceCost (all cards with less have been converted).
+- Fixed a logic error in basicManaFixing.
+- Converted Avatar of Might to script.
+- Cleanup in GameAction and GameActionUtil.
+- Fixed PumpTgtAI.
+- Fixed some Time Spiral cards adding permanent cards in exile to target choices
+- Fixed charm choice descriptions for Timecrafting
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -82,6 +94,11 @@ Added many cards, including:
 
 Switcheroo
 Phyrexian Infiltrator
+Timebender
+Greater Gargadon
+Fury Charm
+Jhoira's Timebug
+Timecrafting
 
 
 end
