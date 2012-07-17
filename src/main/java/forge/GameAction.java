@@ -2008,12 +2008,12 @@ public class GameAction {
         }
 
         // Raise cost
-        /*for (Card c : cardsInPlay) {
+        for (Card c : cardsOnBattlefield) {
             final ArrayList<StaticAbility> staticAbilities = c.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 manaCost = stAb.applyAbility("RaiseCost", spell, manaCost);
             }
-        }*/
+        }
 
         // Reduce cost
         for (Card c : cardsOnBattlefield) {

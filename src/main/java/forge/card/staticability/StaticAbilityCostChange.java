@@ -48,6 +48,8 @@ public class StaticAbilityCostChange {
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getSourceCard();
+        final String amount = params.get("Amount");
+        final ManaCost manaCost = new ManaCost(originalCost.toString());
 
         if (params.containsKey("ValidCard")
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
@@ -59,15 +61,43 @@ public class StaticAbilityCostChange {
             return originalCost;
         }
 
-        if (params.containsKey("Type") && params.get("Type").equals("Spell") && !sa.isSpell()) {
+        if (params.containsKey("Type")) {
+            if (params.get("Type").equals("Spell") && !sa.isSpell()) {
+                return originalCost;
+            }
+            if (params.get("Type").equals("Ability") && !sa.isAbility()) {
+                return originalCost;
+            }
+            if (params.get("Type").equals("Cycling") && !sa.isCycling()) {
+                return originalCost;
+            }
+        }
+        if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
             return originalCost;
         }
-        if (params.containsKey("Type") && params.get("Type").equals("Ability") && !sa.isAbility()) {
-            return originalCost;
+        int value = 0;
+        if ("X".equals(amount)) {
+            value = CardFactoryUtil.xCount(card, card.getSVar("X"));
+        } else {
+            value = Integer.valueOf(amount);
         }
 
-        //modify the cost here
-        return originalCost;
+        if (!params.containsKey("Color")) {
+            manaCost.increaseColorlessMana(value);
+            if (manaCost.toString().equals("0") && params.containsKey("MinMana")) {
+                manaCost.increaseColorlessMana(Integer.valueOf(params.get("MinMana")));
+            }
+        } else {
+            if (params.get("Color").equals("W")) {
+                manaCost.increaseShard(ManaCostShard.WHITE, value);
+            } else if (params.get("Color").equals("B")) {
+                manaCost.increaseShard(ManaCostShard.BLACK, value);
+            } else if (params.get("Color").equals("G")) {
+                manaCost.increaseShard(ManaCostShard.GREEN, value);
+            }
+        }
+
+        return manaCost;
     }
 
     /**
