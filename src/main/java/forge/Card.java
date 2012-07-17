@@ -7281,6 +7281,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.getCurSetCode().equals(setCode)) {
                 return false;
             }
+        } else if (property.startsWith("OnBattlefield")) {
+            final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            if (!list.contains(this)) {
+                return false;
+            }
         }
         else {
             if (property.equals("ChosenType")) {
