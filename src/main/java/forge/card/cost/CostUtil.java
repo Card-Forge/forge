@@ -56,6 +56,10 @@ public class CostUtil {
                 final String type = sac.getType();
 
                 if (type.equals("CARDNAME")) {
+                    CardList auras = new CardList(source.getEnchantedBy());
+                    if (!auras.getController(source.getController()).isEmpty()) {
+                        return false;
+                    }
                     continue;
                 }
 

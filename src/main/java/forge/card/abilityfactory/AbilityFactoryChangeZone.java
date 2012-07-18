@@ -467,7 +467,7 @@ public final class AbilityFactoryChangeZone {
         if (abCost != null) {
             // AI currently disabled for these costs
             if (!CostUtil.checkSacrificeCost(abCost, source)
-                    && !destination.equals("Battlefield")) {
+                    && !(destination.equals("Battlefield") && !source.isLand())) {
                 return false;
             }
 
