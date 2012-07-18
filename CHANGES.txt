@@ -82,6 +82,18 @@ Fixes/Features:
 - Fixed some Time Spiral cards adding permanent cards in exile to target choices
 - Fixed charm choice descriptions for Timecrafting
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated staticReplaceDamage in the Player class.
+- commented out ability copying in getLKICopy method
+- Started conversion of cards to StAb RaiseCost.
+- Converted more cards to StAb RaiseCost.
+- Added zone dividers to target selection lists
+- Converted the last cards to StAb RaiseCost.
+- Removed the CostChange keyword.
+- AI for Pump -X/0 cards, targeting Human attackers
+- Two improvements in evaluateCreature.
+- Fixed ChosenX not reseting.
+- Better fix for ChosenX.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -99,6 +111,8 @@ Greater Gargadon
 Fury Charm
 Jhoira's Timebug
 Timecrafting
+Quiet Disrepair
+Trinisphere
 
 
 end
