@@ -650,6 +650,31 @@ public class AbilityFactoryPump {
                 }
             }); // leaves all creatures that will be destroyed
         } // -X/-X end
+        else if ((attack < 0) && !list.isEmpty()) {
+            // spells that give -X/0
+            Player activePlayer = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+            if (activePlayer.isComputer()) {
+                if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+                    // TODO: Curse creatures that will block AI's creatures, if AI is going to attack.
+                    list = new CardList();
+                } else {
+                    list = new CardList();
+                }
+            } else {
+                // Human active, only curse attacking creatures
+                if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                    list = list.filter(new CardListFilter() {
+                        @Override
+                        public boolean addCard(final Card c) {
+                            return c.isAttacking();
+                        }
+                    });
+                } else {
+                    list = new CardList();
+                }
+            }
+            Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
+        } // -X/0 end
         else if (!list.isEmpty()) {
             final ArrayList<String> keywords = this.keywords;
             final boolean addsKeywords = this.keywords.size() > 0;
@@ -662,7 +687,7 @@ public class AbilityFactoryPump {
                     }
                 });
             } else {
-                return new CardList();
+                list = new CardList();
             }
         }
 

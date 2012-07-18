@@ -4,7 +4,6 @@ Types:Creature Human Rebel Cleric
 Text:no text
 PT:1/2
 A:AB$ Pump | Cost$ T | NumAtt$ -2 | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets -2/-0 until end of turn.
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saltfield_recluse.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/16.jpg

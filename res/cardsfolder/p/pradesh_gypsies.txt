@@ -4,7 +4,6 @@ Types:Creature Human Nomad
 Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ 1 G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-0 until end of turn.
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pradesh_gypsies.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/179.jpg

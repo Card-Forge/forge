@@ -4,7 +4,6 @@ Types:Creature Human Rebel
 Text:no text
 PT:1/2
 A:AB$ Pump | Cost$ W W | ValidTgts$ Creature.attacking | IsCurse$ True | NumAtt$ -1 | TgtPrompt$ Select target attacking creature | SpellDescription$ Target attacking creature gets -1/-0 until end of turn.
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_dancer.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/25.jpg
