@@ -5,9 +5,10 @@ Text:no text
 PT:3/1
 K:Flying
 K:Flash
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of his or her library, then draws a card.
-SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Library | ChangeType$ Card.nonLand | ChangeNum$ 1 | LibraryPosition$ -1 | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | Defined$ Targeted | NumCards$ 1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPickCard | TriggerDescription$ When CARDNAME enters the battlefield, look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of his or her library, then draws a card.
+SVar:TrigPickCard:AB$ ChangeZone |Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeType$ Card.nonLand | ChangeNum$ 1 | Hidden$ True | RememberChanged$ True | Chooser$ You | Optional$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Targeted | NumCards$ 1 | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vendilion_clique.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/55.jpg
