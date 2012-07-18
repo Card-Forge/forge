@@ -1,0 +1,14 @@
+Name:Elderwood Scion
+ManaCost:3 G W
+Types:Creature Elemental
+Text:no text
+PT:4/4
+K:Trample
+K:Lifelink
+S:Mode$ ReduceCost | ValidTarget$ Card.Self | Activator$ You | Type$ Spell | Amount$ 2 | Description$ Spells you cast that target CARDNAME cost 2 less to cast.
+S:Mode$ RaiseCost | ValidTarget$ Card.Self | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target CARDNAME cost 2 more to cast.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elderwood_scion.jpg
+SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/88.jpg
+Oracle:Trample, lifelink\nSpells you cast that target Elderwood Scion cost {2} less to cast.\nSpells your opponents cast that target Elderwood Scion cost {2} more to cast.
+End
