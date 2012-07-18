@@ -560,6 +560,13 @@ public class CardFactoryUtil {
         if (c.hasKeyword("CARDNAME can't attack or block.")) {
             value = 50 + (c.getCMC() * 5); // reset everything - useless
         }
+        if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")) {
+            if (c.isTapped()) {
+                value = 50 + (c.getCMC() * 5); // reset everything - useless
+            } else {
+                value -= 50;
+            }
+        }
         if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) {
             value -= 50;
         }
@@ -604,6 +611,9 @@ public class CardFactoryUtil {
             if (sa.isAbility()) {
                 value += 10;
             }
+        }
+        if (!c.getManaAbility().isEmpty()) {
+            value += 10;
         }
 
         if (c.isUntapped()) {
