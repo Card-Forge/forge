@@ -24,6 +24,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -68,9 +69,6 @@ public class StaticAbilityCostChange {
             if (params.get("Type").equals("Ability") && !sa.isAbility()) {
                 return originalCost;
             }
-            if (params.get("Type").equals("Cycling") && !sa.isCycling()) {
-                return originalCost;
-            }
         }
         if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
             return originalCost;
@@ -80,6 +78,11 @@ public class StaticAbilityCostChange {
             value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
         } else if ("Y".equals(amount)){
             value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y"));
+        } else if ("Min3".equals(amount)){
+            int cmc = manaCost.getConvertedManaCost();
+            if (cmc < 3) {
+                value = 3 - cmc;
+            }
         } else {
             value = Integer.valueOf(amount);
         }
@@ -145,6 +148,24 @@ public class StaticAbilityCostChange {
                 return originalCost;
             }
             if (params.get("Type").equals("Cycling") && !sa.isCycling()) {
+                return originalCost;
+            }
+        }
+        if (params.containsKey("ValidTarget")) {
+            Target tgt = sa.getTarget();
+            if (tgt == null) {
+                return originalCost;
+            }
+            boolean targetValid = false;
+            for (Object target : tgt.getTargets()) {
+                if (target instanceof Card) {
+                    Card targetCard = (Card) target;
+                    if (targetCard.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard)) {
+                        targetValid = true;
+                    }
+                }
+            }
+            if (!targetValid) {
                 return originalCost;
             }
         }

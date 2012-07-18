@@ -1853,22 +1853,38 @@ public class GameAction {
 
         CardList cardsOnBattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         cardsOnBattlefield.add(originalCard);
+        final ArrayList<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
+        final ArrayList<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();
+        final ArrayList<StaticAbility> setAbilities = new ArrayList<StaticAbility>();
 
-        // Raise cost
+        // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
             final ArrayList<StaticAbility> staticAbilities = c.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
-                manaCost = stAb.applyAbility("RaiseCost", spell, manaCost);
+                if (stAb.getMapParams().get("Mode").equals("RaiseCost")) {
+                    raiseAbilities.add(stAb);
+                } else if (stAb.getMapParams().get("Mode").equals("ReduceCost")) {
+                    reduceAbilities.add(stAb);
+                } else if (stAb.getMapParams().get("Mode").equals("SetCost")) {
+                    setAbilities.add(stAb);
+                }
             }
+        }
+        // Raise cost
+        for (final StaticAbility stAb : raiseAbilities) {
+            manaCost = stAb.applyAbility("RaiseCost", spell, manaCost);
         }
 
         // Reduce cost
-        for (Card c : cardsOnBattlefield) {
-            final ArrayList<StaticAbility> staticAbilities = c.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
-                manaCost = stAb.applyAbility("ReduceCost", spell, manaCost);
-            }
+        for (final StaticAbility stAb : reduceAbilities) {
+            manaCost = stAb.applyAbility("ReduceCost", spell, manaCost);
         }
+        
+        // Set cost (only used by Trinisphere) is applied last
+        for (final StaticAbility stAb : setAbilities) {
+            manaCost = stAb.applyAbility("SetCost", spell, manaCost);
+        }
+
         return manaCost;
     } // GetSpellCostChange
 
