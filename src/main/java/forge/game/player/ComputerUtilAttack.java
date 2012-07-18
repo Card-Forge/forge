@@ -547,6 +547,13 @@ public class ComputerUtilAttack {
             }
             if (exalted) {
                 Card att = CardFactoryUtil.getBestCreatureAI(attackersLeft);
+                CardListUtil.sortAttack(this.attackers);
+                for (Card attacker : this.attackers) {
+                    if (!CombatUtil.canBeBlocked(attacker, this.blockers)) {
+                        att = attacker;
+                        break;
+                    }
+                }
                 if ((att != null) && CombatUtil.canAttack(att, combat)) {
                     combat.addAttacker(att);
                     System.out.println("Exalted");
