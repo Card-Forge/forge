@@ -175,6 +175,7 @@ public class SpellAbilityRequirements {
      */
     public final void startPaying() {
         this.payment.setRequirements(this);
+        this.payment.changeCost();
         this.payment.payCost();
     }
 

@@ -1679,7 +1679,7 @@ public class GameAction {
             originalCard.setXManaCostPaid(0);
         }
 
-        if (PhaseHandler.getGameBegins() != 1) {
+        if (PhaseHandler.getGameBegins() != 1 || sa.isTrigger()) {
             return manaCost;
         }
 
@@ -1918,10 +1918,6 @@ public class GameAction {
                 payment = new CostPayment(new Cost(sa.getSourceCard(), "0", sa.isAbility()), sa);
             } else {
                 payment = new CostPayment(sa.getPayCosts(), sa);
-            }
-
-            if (!sa.isTrigger()) {
-                payment.changeCost();
             }
 
             final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);

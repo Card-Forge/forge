@@ -8853,6 +8853,7 @@ res/cardsfolder/s/spellgorger_barbarian.txt svneol=native#text/plain
 res/cardsfolder/s/spellshock.txt svneol=native#text/plain
 res/cardsfolder/s/spellstutter_sprite.txt svneol=native#text/plain
 res/cardsfolder/s/spellweaver_helix.txt -text svneol=unset#text/plain
+res/cardsfolder/s/spellwild_ouphe.txt -text
 res/cardsfolder/s/sphere_of_duty.txt svneol=native#text/plain
 res/cardsfolder/s/sphere_of_grace.txt svneol=native#text/plain
 res/cardsfolder/s/sphere_of_law.txt svneol=native#text/plain
