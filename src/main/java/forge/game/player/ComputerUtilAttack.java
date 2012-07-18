@@ -137,9 +137,11 @@ public class ComputerUtilAttack {
         if (CombatUtil.poisonIfUnblocked(attacker, AllZone.getHumanPlayer(), combat) > 0) {
             return true;
         }
+        if (this.attackers.size() == 1 && attacker.hasKeyword("Exalted")) {
+            return true;
+        }
 
         final CardList controlledByCompy = AllZone.getComputerPlayer().getAllCards();
-
         for (final Card c : controlledByCompy) {
             for (final Trigger trigger : c.getTriggers()) {
                 if (CombatUtil.combatTriggerWillTrigger(attacker, null, trigger, combat)) {
