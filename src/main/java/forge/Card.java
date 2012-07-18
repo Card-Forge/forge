@@ -6829,6 +6829,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
             }
+        } else if (property.startsWith("sharesCardTypeWith")) {
+            if (property.equals("sharesCardTypeWith")) {
+                if (!this.sharesCardTypeWith(source)) {
+                    return false;
+                }
+            } else {
+                final String restriction = property.split("sharesCardTypeWith ")[1];
+                if (restriction.equals("Imprinted")) {
+                    if (source.getImprinted().isEmpty() || !this.sharesCardTypeWith(source.getImprinted().get(0))) {
+                        return false;
+                    }
+                }
+            }
         } else if (property.startsWith("sharesNameWith")) {
             final String restriction = property.split("sharesNameWith ")[1];
             if (restriction.equals("YourGraveyard")) {
@@ -6888,11 +6901,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.sharesTypeWith(source)) {
                 return false;
             }
-        } else if (property.startsWith("sharesCardTypeWith")) {
-            if (!this.sharesCardTypeWith(source)) {
-                return false;
-            }
-        }  else if (property.startsWith("withFlashback")) {
+        } else if (property.startsWith("withFlashback")) {
             boolean fb = false;
             if (this.hasStartOfUnHiddenKeyword("Flashback")) {
                 fb = true;
