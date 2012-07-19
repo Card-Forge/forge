@@ -94,6 +94,15 @@ Fixes/Features:
 - Fixed ChosenX not reseting.
 - Better fix for ChosenX.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- The AI will now try to attack with unblockable creatures in exalted mode.
+- Fixed cost of Servant of Nefarox.
+- fixed Vendilion Clique
+- Moved getSpellCostChange after targeting.
+- Improved AI handling exalted creatures with 0 power.
+- The AI will no longer sacrifice enchanted permanents as part of costs.
+- AI for Fight
+- AI for draw/discard
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -113,6 +122,9 @@ Jhoira's Timebug
 Timecrafting
 Quiet Disrepair
 Trinisphere
+Semblance Anvil
+Spellwild Ouphe
+Elderwood Scion
 
 
 end
