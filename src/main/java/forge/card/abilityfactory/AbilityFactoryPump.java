@@ -650,7 +650,8 @@ public class AbilityFactoryPump {
                 }
             }); // leaves all creatures that will be destroyed
         } // -X/-X end
-        else if ((attack < 0) && !list.isEmpty()) {
+        else if ((attack < 0) && !list.isEmpty() 
+                && !Singletons.getModel().getGameState().getPhaseHandler().isPreventCombatDamageThisTurn()) {
             // spells that give -X/0
             Player activePlayer = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
             if (activePlayer.isComputer()) {
@@ -666,7 +667,17 @@ public class AbilityFactoryPump {
                     list = list.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
-                            return c.isAttacking();
+                            if (!c.isAttacking()) {
+                                return false;
+                            }
+                            if (c.getNetAttack() > 0 && AllZone.getComputerPlayer().getLife() < 5) {
+                                return true;
+                            }
+                            //Don't waste a -7/-0 spell on a 1/1 creature
+                            if (c.getNetAttack() + attack > -2 || c.getNetAttack() > 3) {
+                                return true;
+                            }
+                            return false;
                         }
                     });
                 } else {
