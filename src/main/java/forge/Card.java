@@ -8178,66 +8178,55 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
 
         int restDamage = damage;
-
-        if (AllZoneUtil.isCardInPlay("Sulfuric Vapors") && source.isSpell() && source.isRed()) {
-            final int amount = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Sulfuric Vapors").size();
-            for (int i = 0; i < amount; i++) {
-                restDamage += 1;
-            }
-        }
-
-        if (AllZoneUtil.isCardInPlay("Pyromancer's Swath", source.getController())
-                && (source.isInstant() || source.isSorcery()) && this.isCreature()) {
-            final int amount = source.getController().getCardsIn(ZoneType.Battlefield, "Pyromancer's Swath").size();
-            for (int i = 0; i < amount; i++) {
-                restDamage += 2;
-            }
-        }
-
-        if (AllZoneUtil.isCardInPlay("Furnace of Rath") && this.isCreature()) {
-            final int amount = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Furnace of Rath").size();
-            for (int i = 0; i < amount; i++) {
-                restDamage += restDamage;
-            }
-        }
-
-        if (AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) && source.isCreature()
-                && this.isCreature()) {
-            final int amount = source.getController().getCardsIn(ZoneType.Battlefield, "Gratuitous Violence").size();
-            for (int i = 0; i < amount; i++) {
-                restDamage += restDamage;
-            }
-        }
-
-        if (AllZoneUtil.isCardInPlay("Fire Servant", source.getController()) && source.isRed()
-                && (source.isInstant() || source.isSorcery())) {
-            final int amount = source.getController().getCardsIn(ZoneType.Battlefield, "Fire Servant").size();
-            for (int i = 0; i < amount; i++) {
-                restDamage += restDamage;
-            }
-        }
-
-        if (AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell() && this.isCreature()) {
-            final int amount = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Benevolent Unicorn").size();
-            for (int i = 0; i < amount; i++) {
-                if (restDamage > 0) {
+        for (Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+            if (c.getName().equals("Sulfuric Vapors")) {
+                if (source.isSpell() && source.isRed()) {
+                    restDamage += 1;
+                }
+            } else if (c.getName().equals("Pyromancer's Swath")) {
+                if (c.getController().equals(source.getController()) && (source.isInstant() || source.isSorcery())
+                        && this.isCreature()) {
+                    restDamage += 2;
+                }
+            } else if (c.getName().equals("Furnace of Rath")) {
+                if (this.isCreature()) {
+                    restDamage += restDamage;
+                }
+            } else if (c.getName().equals("Gratuitous Violence")) {
+                if (c.getController().equals(source.getController()) && source.isCreature() && this.isCreature()) {
+                    restDamage += restDamage;
+                }
+            } else if (c.getName().equals("Fire Servant")) {
+                if (c.getController().equals(source.getController()) && source.isRed()
+                        && (source.isInstant() || source.isSorcery())) {
+                    restDamage *= 2;
+                }
+            } else if (c.getName().equals("Gisela, Blade of Goldnight")) {
+                if (!c.getController().equals(this.getController())) {
+                    restDamage *= 2;
+                }
+            } else if (c.getName().equals("Inquisitor's Flail")) {
+                if (c.getEquippingCard() != null &&
+                        (c.getEquippingCard().equals(this) || c.getEquippingCard().equals(source))) {
+                    restDamage *= 2;
+                }
+            } else if (c.getName().equals("Ghosts of the Innocent")) {
+                if (this.isCreature()) {
+                    restDamage = restDamage / 2;
+                }
+            } else if (c.getName().equals("Benevolent Unicorn")) {
+                if (source.isSpell() && this.isCreature()) {
+                   restDamage -= 1;
+                }
+            } else if (c.getName().equals("Divine Presence")) {
+                if (restDamage > 3 && this.isCreature()) {
+                    restDamage = 3;
+                }
+            } else if (c.getName().equals("Lashknife Barrier")) {
+                if (c.getController().equals(this.getController()) && this.isCreature()) {
                     restDamage -= 1;
                 }
             }
-        }
-
-        if (AllZoneUtil.isCardInPlay("Lashknife Barrier", this.getController()) && this.isCreature()) {
-            final int amount = this.getController().getCardsIn(ZoneType.Battlefield, "Lashknife Barrier").size();
-            for (int i = 0; i < amount; i++) {
-                if (restDamage > 0) {
-                    restDamage -= 1;
-                }
-            }
-        }
-
-        if (AllZoneUtil.isCardInPlay("Divine Presence") && this.isCreature() && (restDamage > 3)) {
-
-            restDamage = 3;
         }
 
         if (this.getName().equals("Phytohydra")) {

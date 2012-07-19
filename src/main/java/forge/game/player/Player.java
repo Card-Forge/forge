@@ -705,6 +705,20 @@ public abstract class Player extends GameEntity {
                         && (source.isInstant() || source.isSorcery())) {
                     restDamage *= 2;
                 }
+            } else if (c.getName().equals("Curse of Bloodletting")) {
+                if (c.getEnchanting().equals(this)) {
+                    restDamage *= 2;
+                }
+            } else if (c.getName().equals("Gisela, Blade of Goldnight")) {
+                if (!c.getController().equals(this)) {
+                    restDamage *= 2;
+                }
+            } else if (c.getName().equals("Inquisitor's Flail")) {
+                if (c.getEquippingCard() != null && c.getEquippingCard().equals(source)) {
+                    restDamage *= 2;
+                }
+            } else if (c.getName().equals("Ghosts of the Innocent")) {
+                restDamage = restDamage / 2;
             } else if (c.getName().equals("Benevolent Unicorn")) {
                 if (source.isSpell()) {
                    restDamage -= 1;
