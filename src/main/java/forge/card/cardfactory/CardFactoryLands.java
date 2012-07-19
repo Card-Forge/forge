@@ -93,17 +93,7 @@ class CardFactoryLands {
                 }
 
                 public void computerExecute() {
-                    boolean pay = false;
-
-                    if (AllZone.getComputerPlayer().getLife() > 9) {
-                        pay = MyRandom.getRandom().nextBoolean();
-                    }
-
-                    if (pay) {
-                        AllZone.getComputerPlayer().loseLife(2, card);
-                    } else {
-                        this.tapCard();
-                    }
+                    this.tapCard();
                 }
 
                 public void humanExecute() {
