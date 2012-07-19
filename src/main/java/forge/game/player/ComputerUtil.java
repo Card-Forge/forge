@@ -1496,7 +1496,7 @@ public class ComputerUtil {
 
         final int discardsLeft = numDiscard - count;
 
-        // chose rest
+        // choose rest
         for (int i = 0; i < discardsLeft; i++) {
             if (hand.size() <= 0) {
                 continue;

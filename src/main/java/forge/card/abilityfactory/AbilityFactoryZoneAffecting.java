@@ -32,6 +32,8 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.cost.CostDiscard;
+import forge.card.cost.CostPart;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -305,7 +307,18 @@ public class AbilityFactoryZoneAffecting {
             }
 
             if (!CostUtil.checkDiscardCost(abCost, source)) {
-                return false;
+                for (final CostPart part : abCost.getCostParts()) {
+                    if (part instanceof CostDiscard) {
+                        CostDiscard cd = (CostDiscard) part;
+                        cd.decideAIPayment(sa, sa.getSourceCard(), null);
+                        CardList discards = cd.getList();
+                        for (Card discard : discards) {
+                            if (!isWorseThanDraw(discard)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
             }
 
             if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
@@ -359,6 +372,34 @@ public class AbilityFactoryZoneAffecting {
             randomReturn &= subAb.chkAIDrawback();
         }
         return randomReturn;
+    }
+
+    /**
+     * Is this discard probably worse than a random draw?
+     * @param discard Card to discard
+     * @return boolean
+     */
+    private static boolean isWorseThanDraw(Card discard) {
+        System.out.println("Potential discard: " + discard.toString());
+        if (!discard.getSVar("DiscardMe").equals("")) {
+            return true;
+        }
+        final CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land");
+        if (landsInPlay.size() > 5) {
+            if (discard.isLand()) {
+                // Don't need more land.
+                return true;
+            } else if (discard.getCMC() <= 2 && !discard.hasProperty("hasXCost", AllZone.getComputerPlayer(), null)) {
+                // Probably don't need small stuff now.
+                return true;
+            }
+        } else {
+            if (!ComputerUtil.payManaCost(discard.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false)) {
+                // Can't cast this card.
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
