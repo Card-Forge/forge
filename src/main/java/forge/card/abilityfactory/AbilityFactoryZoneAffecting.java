@@ -389,15 +389,12 @@ public class AbilityFactoryZoneAffecting {
             if (discard.isLand()) {
                 // Don't need more land.
                 return true;
-            } else if (discard.getCMC() <= 2 && !discard.hasProperty("hasXCost", AllZone.getComputerPlayer(), null)) {
+            } else if (discard.getCMC() <= 1 && !discard.hasProperty("hasXCost", AllZone.getComputerPlayer(), null)) {
                 // Probably don't need small stuff now.
                 return true;
             }
         } else {
-            if (!ComputerUtil.payManaCost(discard.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false)) {
-                // Can't cast this card.
-                return true;
-            }
+            // Hard to say...maybe OK to discard land if we have lots of lands in hand?
         }
         return false;
     }
