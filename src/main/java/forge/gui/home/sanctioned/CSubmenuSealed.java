@@ -22,6 +22,7 @@ import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
 import forge.game.GameNew;
 import forge.game.limited.SealedDeck;
+import forge.game.limited.SealedDeckFormat;
 import forge.gui.GuiUtils;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -160,18 +161,18 @@ public enum CSubmenuSealed implements ICDoc {
         final String prompt = "Choose Sealed Deck Format:";
         final Object o = GuiUtils.chooseOne(prompt, sealedTypes.toArray());
 
-        SealedDeck sd = null;
+        SealedDeckFormat sd = null;
 
         if (o.toString().equals(sealedTypes.get(0))) {
-            sd = new SealedDeck("Full");
+            sd = new SealedDeckFormat("Full");
         }
 
         else if (o.toString().equals(sealedTypes.get(1))) {
-            sd = new SealedDeck("Block");
+            sd = new SealedDeckFormat("Block");
         }
 
         else if (o.toString().equals(sealedTypes.get(2))) {
-            sd = new SealedDeck("Custom");
+            sd = new SealedDeckFormat("Custom");
         }
         else {
             throw new IllegalStateException("choice <<" + TextUtil.safeToString(o)
@@ -204,8 +205,8 @@ public enum CSubmenuSealed implements ICDoc {
 
         final DeckGroup sealed = new DeckGroup(sDeckName);
         sealed.setHumanDeck(deck);
-        sealed.addAiDeck(sd.buildAIDeck(sDeck.toForgeCardList()));
-            Singletons.getModel().getDecks().getSealed().add(sealed);
+        sealed.addAiDeck(new SealedDeck(sDeck.toForgeCardList()));
+        Singletons.getModel().getDecks().getSealed().add(sealed);
 
         final ACEditorBase<?, T> editor = (ACEditorBase<?, T>) new CEditorLimited(
                 Singletons.getModel().getDecks().getSealed());
