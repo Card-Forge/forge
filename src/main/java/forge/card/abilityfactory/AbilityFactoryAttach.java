@@ -632,7 +632,6 @@ public class AbilityFactoryAttach {
         prefList = prefList.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                System.out.println("Not Attaching");
                 return !c.getSVar("Targeting").equals("Dies");
             }
         });

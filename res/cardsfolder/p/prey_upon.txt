@@ -3,7 +3,6 @@ ManaCost:G
 Types:Sorcery
 Text:no text
 A:SP$ Fight | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetsFromDifferentZone$ True | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prey_upon.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/181.jpg

@@ -1842,9 +1842,42 @@ public class AbilityFactoryDealDamage {
     }
 
     private boolean fightCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        Target tgt = sa.getTarget();
+        tgt.resetTargets();
 
-        //final Target tgt = sa.getTarget();
+        CardList aiCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+        aiCreatures = aiCreatures.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                return !c.getSVar("Targeting").equals("Dies");
+            }
+        });
 
+        CardList humCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+
+        final Random r = MyRandom.getRandom();
+        boolean rr = false;
+        if (r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
+            rr = true;
+        }
+
+        if (humCreatures.size() > 0 && aiCreatures.size() > 0) {
+            for (Card humanCreature : humCreatures) {
+                for (Card aiCreature : aiCreatures) {
+                    if (humanCreature.getNetDefense() <= aiCreature.getNetAttack()
+                            && humanCreature.getNetAttack() < aiCreature.getNetDefense()) {
+                        // todo: check min/max targets; see if we picked the best matchup
+                        tgt.addTarget(humanCreature);
+                        tgt.addTarget(aiCreature);
+                        return rr;
+                    } else if (humanCreature.getSVar("Targeting").equals("Dies")) {
+                        tgt.addTarget(humanCreature);
+                        tgt.addTarget(aiCreature);
+                        return rr;
+                    }
+                }
+            }
+        }
         return false;
     }
 

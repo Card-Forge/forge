@@ -579,7 +579,7 @@ public class ComputerUtil {
      *            (is for canPayCost, if true does not change the game state)
      * @param extraMana
      *            a int.
-     * @param checkPlayable 
+     * @param checkPlayable
      *            should we check if playable? use for hypothetical "can AI play this"
      * @return a boolean.
      * @since 1.0.15
@@ -759,7 +759,7 @@ public class ComputerUtil {
      * @param partPriority
      * @param costParts
      * @param foundAllSources
-     * @return Were all mana sources found? 
+     * @return Were all mana sources found?
      */
     private static Boolean findManaSources(final HashMap<String, ArrayList<AbilityMana>> manaAbilityMap,
             final ArrayList<ArrayList<AbilityMana>> partSources, final ArrayList<Integer> partPriority,
@@ -818,7 +818,7 @@ public class ComputerUtil {
                         srcFound.addAll(manaAbilityMap.get(costParts[nPart]));
                     }
                 }
-    
+
                 // add sources to array lists
                 partSources.add(nPart, srcFound);
                 // add to sorted priority list
