@@ -103,6 +103,13 @@ Fixes/Features:
 - AI for Fight
 - AI for draw/discard
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fix for discard/draw AI
+- Refactor Sealed Deck generation so it works and uses same logic as Booster Decks.
+- Little touch-up for -X/-0 spells.
+- Added some cards to staticReplaceDamage.
+- The AI will now always bring Shocklands into play tapped (I'm sick of people reporting).
+- Fixed Flying WU theme.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
