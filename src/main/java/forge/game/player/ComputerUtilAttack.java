@@ -548,18 +548,14 @@ public class ComputerUtilAttack {
                 }
             }
             if (exalted) {
-                Card att = CardFactoryUtil.getBestCreatureAI(attackersLeft);
                 CardListUtil.sortAttack(this.attackers);
+                System.out.println("Exalted");
+                this.aiAggression = 3;
                 for (Card attacker : this.attackers) {
-                    if (!CombatUtil.canBeBlocked(attacker, this.blockers)) {
-                        att = attacker;
-                        break;
+                    if (CombatUtil.canAttack(attacker, combat) && this.shouldAttack(attacker, this.blockers, combat)) {
+                        combat.addAttacker(attacker);
+                        return combat;
                     }
-                }
-                if ((att != null) && CombatUtil.canAttack(att, combat)) {
-                    combat.addAttacker(att);
-                    System.out.println("Exalted");
-                    return combat;
                 }
             }
         }
@@ -894,7 +890,8 @@ public class ComputerUtilAttack {
                         && numberOfPossibleBlockers == 1)) {
             canBeBlocked = true;
         }
-
+        /*System.out.println(attacker + " canBeKilledByOne: " + canBeKilledByOne + " canKillAll: "
+                + canKillAll + " isWorthLessThanAllKillers: " + isWorthLessThanAllKillers + " canBeBlocked: " + canBeBlocked);*/
         // decide if the creature should attack based on the prevailing strategy
         // choice in aiAggression
         switch (this.aiAggression) {

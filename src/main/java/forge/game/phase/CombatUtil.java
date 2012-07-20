@@ -1649,6 +1649,12 @@ public class CombatUtil {
         int power = 0;
 
         power += attacker.getKeywordMagnitude("Bushido");
+        //check Exalted only for the first attacker
+        if (combat != null && combat.getAttackers().isEmpty()) {
+            for (Card card : attacker.getController().getCardsIn(ZoneType.Battlefield)) {
+                power += card.getKeywordAmount("Exalted");
+            }
+        }
 
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
         for (Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
@@ -1698,7 +1704,7 @@ public class CombatUtil {
             final HashMap<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
-            if (!CombatUtil.combatTriggerWillTrigger(attacker, defender, trigger, null)
+            if (!CombatUtil.combatTriggerWillTrigger(attacker, defender, trigger, combat)
                     || !trigParams.containsKey("Execute")) {
                 continue;
             }
@@ -1757,7 +1763,7 @@ public class CombatUtil {
         return power;
     }
 
-    // Predict the Toughness bonus of the blocker if blocking the attacker
+    // Predict the Toughness bonus of the attacker if blocked by the blocker
     // (Flanking, Bushido and other triggered abilities)
     /**
      * <p>
@@ -1774,6 +1780,13 @@ public class CombatUtil {
      */
     public static int predictToughnessBonusOfAttacker(final Card attacker, final Card defender, final Combat combat) {
         int toughness = 0;
+
+        //check Exalted only for the first attacker
+        if (combat != null && combat.getAttackers().isEmpty()) {
+            for (Card card : attacker.getController().getCardsIn(ZoneType.Battlefield)) {
+                toughness += card.getKeywordAmount("Exalted");
+            }
+        }
 
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
         for (Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
@@ -1816,7 +1829,7 @@ public class CombatUtil {
             final HashMap<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
-            if (!CombatUtil.combatTriggerWillTrigger(attacker, defender, trigger, null)
+            if (!CombatUtil.combatTriggerWillTrigger(attacker, defender, trigger, combat)
                     || !trigParams.containsKey("Execute")) {
                 continue;
             }
@@ -1888,7 +1901,6 @@ public class CombatUtil {
                     bonus = bonus.replace("TriggerCount$NumBlockers", "Number$1");
                 }
                 toughness += CardFactoryUtil.xCount(source, bonus);
-
             }
         }
         return toughness;
