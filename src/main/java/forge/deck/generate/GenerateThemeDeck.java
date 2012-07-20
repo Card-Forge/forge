@@ -118,13 +118,13 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase {
                 s = g.cardnames.get(r.nextInt(cnSize));
 
                 int lc = 0;
-                while ((cardCounts.get(s) >= g.maxCnt) || (lc > size)) {
+                while ((cardCounts.get(s) >= g.maxCnt) || (lc > 999)) {
                     // looping
                     // forever
                     s = g.cardnames.get(r.nextInt(cnSize));
                     lc++;
                 }
-                if (lc > size) {
+                if (lc > 999) {
                     throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- looped too much -- filename is "
                             + tFileName);
                 }
