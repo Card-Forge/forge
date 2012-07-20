@@ -76,9 +76,9 @@ public class StaticAbilityCostChange {
         int value = 0;
         if ("X".equals(amount)) {
             value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
-        } else if ("Y".equals(amount)){
+        } else if ("Y".equals(amount)) {
             value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y"));
-        } else if ("Min3".equals(amount)){
+        } else if ("Min3".equals(amount)) {
             int cmc = manaCost.getConvertedManaCost();
             if (cmc < 3) {
                 value = 3 - cmc;

@@ -407,7 +407,7 @@ public class AbilityFactorySacrifice {
         final String defined = params.get("Defined");
         if (defined == null) {
             // Self Sacrifice.
-        } else if (defined.equals("Each") 
+        } else if (defined.equals("Each")
                 || (defined.equals("Opponent") && !sa.isTrigger())) {
             // If Sacrifice hits both players:
             // Only cast it if Human has the full amount of valid

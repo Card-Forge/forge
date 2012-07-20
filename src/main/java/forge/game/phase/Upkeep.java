@@ -2202,7 +2202,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             }
         } // for
     } // upkeepPowerSurge()
- 
+
     /**
      * <p>
      * upkeepTangleWire.

@@ -655,7 +655,7 @@ public class AbilityFactoryGainControl {
         host.clearGainControlTargets();
         host.clearGainControlReleaseCommands();
     }
-    
+
     // *************************************************************************
     // ******************************* ExchangeControl ***********************************
     // *************************************************************************
@@ -787,7 +787,7 @@ public class AbilityFactoryGainControl {
                 return exchangeControlDoTriggerAI(this.af, this, mandatory);
             }
         }
-        final SpellAbility dbExchangeControl = new DrawbackExchangeControl(this.af.getHostCard(),this.af.getAbTgt());
+        final SpellAbility dbExchangeControl = new DrawbackExchangeControl(this.af.getHostCard(), this.af.getAbTgt());
 
         return dbExchangeControl;
     }

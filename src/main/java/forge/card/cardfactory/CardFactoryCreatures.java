@@ -1437,7 +1437,7 @@ public class CardFactoryCreatures {
 
         card.addComesIntoPlayCommand(comesIntoPlay);
     }
-    
+
     private static void getCard_Nebuchadnezzar(final Card card, final String cardName) {
         /*
          * X, T: Name a card. Target opponent reveals X cards at random from

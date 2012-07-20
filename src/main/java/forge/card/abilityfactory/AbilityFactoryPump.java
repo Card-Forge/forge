@@ -650,7 +650,7 @@ public class AbilityFactoryPump {
                 }
             }); // leaves all creatures that will be destroyed
         } // -X/-X end
-        else if ((attack < 0) && !list.isEmpty() 
+        else if ((attack < 0) && !list.isEmpty()
                 && !Singletons.getModel().getGameState().getPhaseHandler().isPreventCombatDamageThisTurn()) {
             // spells that give -X/0
             Player activePlayer = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();

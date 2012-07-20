@@ -1879,7 +1879,7 @@ public class GameAction {
         for (final StaticAbility stAb : reduceAbilities) {
             manaCost = stAb.applyAbility("ReduceCost", spell, manaCost);
         }
-        
+
         // Set cost (only used by Trinisphere) is applied last
         for (final StaticAbility stAb : setAbilities) {
             manaCost = stAb.applyAbility("SetCost", spell, manaCost);

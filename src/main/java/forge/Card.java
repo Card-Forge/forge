@@ -152,7 +152,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private boolean phasedOut = false;
     private boolean directlyPhasedOut = true;
-    
+
     private boolean usedToPayCost = false;
 
     // for Vanguard / Manapool / Emblems etc.
@@ -8206,8 +8206,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Inquisitor's Flail")) {
-                if (c.getEquippingCard() != null &&
-                        (c.getEquippingCard().equals(this) || c.getEquippingCard().equals(source))) {
+                if (c.getEquippingCard() != null
+                        && (c.getEquippingCard().equals(this) || c.getEquippingCard().equals(source))) {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Ghosts of the Innocent")) {

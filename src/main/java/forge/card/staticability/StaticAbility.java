@@ -370,7 +370,7 @@ public class StaticAbility {
         if (mode.equals("ReduceCost")) {
             return StaticAbilityCostChange.applyReduceCostAbility(this, sa, originalCost);
         }
-        if (mode.equals("SetCost")) {//Set cost is only used by Trinisphere
+        if (mode.equals("SetCost")) { //Set cost is only used by Trinisphere
             return StaticAbilityCostChange.applyRaiseCostAbility(this, sa, originalCost);
         }
 

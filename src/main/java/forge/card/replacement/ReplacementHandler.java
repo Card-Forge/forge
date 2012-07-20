@@ -102,7 +102,7 @@ public class ReplacementHandler {
                 chosenRE = possibleReplacers.get(0);
             }
         }
-        
+
         possibleReplacers.remove(chosenRE);
 
         if (chosenRE != null) {
@@ -112,8 +112,7 @@ public class ReplacementHandler {
                 AllZone.getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
                 return true;
             } else {
-                if(possibleReplacers.size() == 0)
-                {
+                if (possibleReplacers.size() == 0) {
                     return false;
                 }
                 else {
@@ -139,7 +138,7 @@ public class ReplacementHandler {
             final ReplacementEffect replacementEffect, final Player decider) {
 
         final HashMap<String, String> mapParams = replacementEffect.getMapParams();
-        
+
         SpellAbility effectSA = null;
 
         if (mapParams.containsKey("ReplaceWith")) {
