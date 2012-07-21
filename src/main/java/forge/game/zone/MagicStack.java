@@ -463,12 +463,6 @@ public class MagicStack extends MyObservable {
             Singletons.getModel().getGameState().getPhaseHandler().repeatPhase();
         }
 
-        // TODO: triggered abilities need to be fixed
-        if (!((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic))) {
-            // when something is added we need to setPriority
-            Singletons.getModel().getGameState().getPhaseHandler().setPriority(sp.getActivatingPlayer());
-        }
-
         if ((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic)) {
             // TODO: make working triggered ability
             sp.resolve();
@@ -862,6 +856,13 @@ public class MagicStack extends MyObservable {
                     this.add(counter);
                 }
             }
+        }
+
+        // 2012-07-20 Moving set priority down here so triggers go on the stack after the spells that cause them
+        // TODO: triggered abilities need to be fixed
+        if (!((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic))) {
+            // when something is added we need to setPriority
+            Singletons.getModel().getGameState().getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
 
         /*
