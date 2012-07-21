@@ -341,6 +341,10 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void stackNotEmpty() {
+        if (AllZone.getStack().isEmpty()) {
+            Singletons.getModel().getGameState().getPhaseHandler().passPriority();
+            return;
+        }
 
         // if top of stack is owned by me
         if (AllZone.getStack().peekInstance().getActivatingPlayer().isComputer()) {
