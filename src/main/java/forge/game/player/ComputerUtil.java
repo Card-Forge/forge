@@ -1230,6 +1230,9 @@ public class ComputerUtil {
      */
     public static boolean chooseLandsToPlay() {
         final Player computer = AllZone.getComputerPlayer();
+        if (!computer.canPlayLand()) {
+            return false;
+        }
         CardList landList = computer.getCardsIn(ZoneType.Hand);
         landList = landList.filter(CardListFilter.LANDS);
 

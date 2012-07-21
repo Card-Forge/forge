@@ -63,9 +63,8 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void main() {
-        ComputerUtil.chooseLandsToPlay();
-
         if (AllZone.getStack().size() == 0) {
+            ComputerUtil.chooseLandsToPlay();
             this.playCards();
         } else {
             this.stackResponse();
@@ -357,18 +356,12 @@ public class ComputerAIGeneral implements Computer {
      */
     public final void stackResponse() {
         // if top of stack is empty
-        final CardList cards = getAvailableCards();
         if (AllZone.getStack().size() == 0) {
-            final ArrayList<SpellAbility> sas = this.getSpellAbilities(cards);
-            boolean pass = (sas.size() == 0)
-                    || Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN, AllZone.getComputerPlayer());
-            if (!pass) { // Each AF should check the phase individually
-                pass = ComputerUtil.playSpellAbilities(sas);
-            }
-
-            if (pass) {
+            if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN, AllZone.getComputerPlayer())) {
                 Singletons.getModel().getGameState().getPhaseHandler().passPriority();
+                return;
             }
+            this.playCards();
             return;
         }
 
@@ -379,7 +372,7 @@ public class ComputerAIGeneral implements Computer {
             Singletons.getModel().getGameState().getPhaseHandler().passPriority();
             return;
         }
-
+        final CardList cards = getAvailableCards();
         // top of stack is owned by human,
         ArrayList<SpellAbility> possibleCounters = getPlayableCounters(cards);
 
