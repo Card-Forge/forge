@@ -2,6 +2,8 @@ package forge.gui.deckeditor.controllers;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Enumeration;
+import java.util.HashMap;
 
 import javax.swing.JCheckBox;
 
@@ -42,27 +44,44 @@ public enum CEditorPreferences implements ICDoc {
     public void initialize() {
         SEditorIO.loadPreferences();
 
-        VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogColor().setSelected(
-                SColumnUtil.getColumn(ColumnName.CAT_COLOR).isShowing());
-        VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogRarity().setSelected(
-                SColumnUtil.getColumn(ColumnName.CAT_RARITY).isShowing());
-        VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogCMC().setSelected(
-                SColumnUtil.getColumn(ColumnName.CAT_CMC).isShowing());
-        VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogSet().setSelected(
-                SColumnUtil.getColumn(ColumnName.CAT_SET).isShowing());
-        VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogAI().setSelected(
-                SColumnUtil.getColumn(ColumnName.CAT_AI).isShowing());
-        VEditorPreferences.SINGLETON_INSTANCE.getChbDeckColor().setSelected(
-                SColumnUtil.getColumn(ColumnName.DECK_COLOR).isShowing());
-        VEditorPreferences.SINGLETON_INSTANCE.getChbDeckRarity().setSelected(
-                SColumnUtil.getColumn(ColumnName.DECK_RARITY).isShowing());
-        VEditorPreferences.SINGLETON_INSTANCE.getChbDeckCMC().setSelected(
-                SColumnUtil.getColumn(ColumnName.DECK_CMC).isShowing());
-        VEditorPreferences.SINGLETON_INSTANCE.getChbDeckSet().setSelected(
-                SColumnUtil.getColumn(ColumnName.DECK_SET).isShowing());
-        VEditorPreferences.SINGLETON_INSTANCE.getChbDeckAI().setSelected(
-                SColumnUtil.getColumn(ColumnName.DECK_AI).isShowing());
+        HashMap<JCheckBox, ColumnName> prefsDict = new HashMap<JCheckBox, SColumnUtil.ColumnName>();
+        
+        // Simplified Column Preferences
+        VEditorPreferences prefsInstance = VEditorPreferences.SINGLETON_INSTANCE;
+        
+        // Catalog
+        prefsDict.put(prefsInstance.getChbCatalogColor(), ColumnName.CAT_COLOR);
+        prefsDict.put(prefsInstance.getChbCatalogRarity(), ColumnName.CAT_RARITY);
+        prefsDict.put(prefsInstance.getChbCatalogCMC(), ColumnName.CAT_CMC);
+        prefsDict.put(prefsInstance.getChbCatalogSet(), ColumnName.CAT_SET);
+        prefsDict.put(prefsInstance.getChbCatalogAI(), ColumnName.CAT_AI);
+        prefsDict.put(prefsInstance.getChbCatalogPower(), ColumnName.CAT_POWER);
+        prefsDict.put(prefsInstance.getChbCatalogToughness(), ColumnName.CAT_TOUGHNESS);
+        
+        // Deck
+        prefsDict.put(prefsInstance.getChbDeckColor(), ColumnName.DECK_COLOR);
+        prefsDict.put(prefsInstance.getChbDeckRarity(), ColumnName.DECK_RARITY);
+        prefsDict.put(prefsInstance.getChbDeckCMC(), ColumnName.DECK_CMC);
+        prefsDict.put(prefsInstance.getChbDeckSet(), ColumnName.DECK_SET);
+        prefsDict.put(prefsInstance.getChbDeckAI(), ColumnName.DECK_AI);
+        prefsDict.put(prefsInstance.getChbDeckPower(), ColumnName.DECK_POWER);
+        prefsDict.put(prefsInstance.getChbDeckToughness(), ColumnName.DECK_TOUGHNESS);
 
+        // Simplified assignments to be less verbose
+        for (JCheckBox key : prefsDict.keySet()) {
+            final ColumnName name = prefsDict.get(key);
+            key.setSelected(SColumnUtil.getColumn(name).isShowing());
+            key.addItemListener(new ItemListener() {
+                
+                @Override
+                public void itemStateChanged(ItemEvent arg0) {
+                    SColumnUtil.toggleColumn(SColumnUtil.getColumn(name));
+                    SEditorIO.savePreferences();
+                }
+            });
+        }
+
+        // Catalog/Deck Stats
         VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogStats().setSelected(
                 SEditorIO.getPref(EditorPreference.stats_catalog));
         VEditorPreferences.SINGLETON_INSTANCE.getChbDeckStats().setSelected(
@@ -74,56 +93,6 @@ public enum CEditorPreferences implements ICDoc {
         if (!SEditorIO.getPref(EditorPreference.stats_catalog)) {
             VCardCatalog.SINGLETON_INSTANCE.getPnlStats().setVisible(false);
         }
-
-        VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogColor().addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                SColumnUtil.toggleColumn(SColumnUtil.getColumn(ColumnName.CAT_COLOR));
-                SEditorIO.savePreferences(); } });
-
-        VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogRarity().addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                SColumnUtil.toggleColumn(SColumnUtil.getColumn(ColumnName.CAT_RARITY));
-                SEditorIO.savePreferences(); } });
-
-        VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogCMC().addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                SColumnUtil.toggleColumn(SColumnUtil.getColumn(ColumnName.CAT_CMC));
-                SEditorIO.savePreferences(); } });
-
-        VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogSet().addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                SColumnUtil.toggleColumn(SColumnUtil.getColumn(ColumnName.CAT_SET));
-                SEditorIO.savePreferences(); } });
-
-        VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogAI().addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                SColumnUtil.toggleColumn(SColumnUtil.getColumn(ColumnName.CAT_AI));
-                SEditorIO.savePreferences(); } });
-
-        VEditorPreferences.SINGLETON_INSTANCE.getChbDeckColor().addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                SColumnUtil.toggleColumn(SColumnUtil.getColumn(ColumnName.DECK_COLOR));
-                SEditorIO.savePreferences(); } });
-
-        VEditorPreferences.SINGLETON_INSTANCE.getChbDeckRarity().addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                SColumnUtil.toggleColumn(SColumnUtil.getColumn(ColumnName.DECK_RARITY));
-                SEditorIO.savePreferences(); } });
-
-        VEditorPreferences.SINGLETON_INSTANCE.getChbDeckCMC().addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                SColumnUtil.toggleColumn(SColumnUtil.getColumn(ColumnName.DECK_CMC));
-                SEditorIO.savePreferences(); } });
-
-        VEditorPreferences.SINGLETON_INSTANCE.getChbDeckSet().addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                SColumnUtil.toggleColumn(SColumnUtil.getColumn(ColumnName.DECK_SET));
-                SEditorIO.savePreferences(); } });
-
-        VEditorPreferences.SINGLETON_INSTANCE.getChbDeckAI().addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                SColumnUtil.toggleColumn(SColumnUtil.getColumn(ColumnName.DECK_AI));
-                SEditorIO.savePreferences(); } });
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogStats().addItemListener(new ItemListener() {
             @Override public void itemStateChanged(final ItemEvent e) {

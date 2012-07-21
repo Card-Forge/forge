@@ -253,7 +253,9 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
         }
 
         // This will invert if needed
-        TableModel.this.cascadeManager.add((TableColumnInfo<T>) this.table.getColumnModel().getColumn(modelIndex));
+        // 2012/07/21 - Changed from modelIndex to ColumnModelIndex due to a crash
+        // Crash was: Hide 2 columns, then search by last column.
+        TableModel.this.cascadeManager.add((TableColumnInfo<T>) this.table.getColumnModel().getColumn(columnModelIndex));
         TableModel.this.refreshSort();
         TableModel.this.table.tableChanged(new TableModelEvent(TableModel.this));
         TableModel.this.table.repaint();

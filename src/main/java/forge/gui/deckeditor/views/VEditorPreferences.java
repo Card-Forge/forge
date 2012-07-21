@@ -47,12 +47,16 @@ public enum VEditorPreferences implements IVDoc {
     private JCheckBox chbCatalogCMC = new FCheckBox("CMC");
     private JCheckBox chbCatalogSet = new FCheckBox("Set");
     private JCheckBox chbCatalogAI = new FCheckBox("AI");
+    private JCheckBox chbCatalogPower = new FCheckBox("Power");
+    private JCheckBox chbCatalogToughness = new FCheckBox("Toughness");
 
     private JCheckBox chbDeckColor = new FCheckBox("Color");
     private JCheckBox chbDeckRarity = new FCheckBox("Rarity");
     private JCheckBox chbDeckCMC = new FCheckBox("CMC");
     private JCheckBox chbDeckSet = new FCheckBox("Set");
     private JCheckBox chbDeckAI = new FCheckBox("AI");
+    private JCheckBox chbDeckPower = new FCheckBox("Power");
+    private JCheckBox chbDeckToughness = new FCheckBox("Toughness");
 
     private JCheckBox chbDeckStats = new FCheckBox("Show stats in current deck");
     private JCheckBox chbCatalogStats = new FCheckBox("Show stats in card catalog");
@@ -71,12 +75,17 @@ public enum VEditorPreferences implements IVDoc {
         chbCatalogCMC.setFont(FSkin.getFont(12));
         chbCatalogSet.setFont(FSkin.getFont(12));
         chbCatalogAI.setFont(FSkin.getFont(12));
+        chbCatalogPower.setFont(FSkin.getFont(12));
+        chbCatalogToughness.setFont(FSkin.getFont(12));
 
         chbDeckColor.setFont(FSkin.getFont(12));
         chbDeckRarity.setFont(FSkin.getFont(12));
         chbDeckCMC.setFont(FSkin.getFont(12));
         chbDeckSet.setFont(FSkin.getFont(12));
         chbDeckAI.setFont(FSkin.getFont(12));
+        chbDeckPower.setFont(FSkin.getFont(12));
+        chbDeckToughness.setFont(FSkin.getFont(12));
+
 
         chbDeckStats.setFont(FSkin.getFont(12));
         chbCatalogStats.setFont(FSkin.getFont(12));
@@ -93,6 +102,8 @@ public enum VEditorPreferences implements IVDoc {
         pnl.add(chbCatalogRarity, constraints);
         pnl.add(chbCatalogCMC, constraints);
         pnl.add(chbCatalogSet, constraints);
+        pnl.add(chbCatalogPower, constraints);
+        pnl.add(chbCatalogToughness, constraints);
         pnl.add(chbCatalogAI, constraints + ", wrap");
 
         pnl.add(lblDeck, constraints + ", span 2 1");
@@ -100,6 +111,8 @@ public enum VEditorPreferences implements IVDoc {
         pnl.add(chbDeckRarity, constraints);
         pnl.add(chbDeckCMC, constraints);
         pnl.add(chbDeckSet, constraints);
+        pnl.add(chbDeckPower, constraints);
+        pnl.add(chbDeckToughness, constraints);
         pnl.add(chbDeckAI, constraints);
 
         pnl.setOpaque(false);
@@ -185,6 +198,16 @@ public enum VEditorPreferences implements IVDoc {
     public JCheckBox getChbCatalogAI() {
         return chbCatalogAI;
     }
+    
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getChbCatalogPower() {
+        return chbCatalogPower;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getChbCatalogToughness() {
+        return chbCatalogToughness;
+    }
 
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getChbDeckColor() {
@@ -209,6 +232,16 @@ public enum VEditorPreferences implements IVDoc {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getChbDeckAI() {
         return chbDeckAI;
+    }
+    
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getChbDeckPower() {
+        return chbDeckPower;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getChbDeckToughness() {
+        return chbDeckToughness;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
