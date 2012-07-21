@@ -455,14 +455,21 @@ public class MagicStack extends MyObservable {
             sp.setActivatingPlayer(sp.getSourceCard().getController());
             System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
         }
-
+       
+        // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
+        // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
+        if (!((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic))) {
+            // when something is added we need to setPriority
+            Singletons.getModel().getGameState().getPhaseHandler().setPriority(sp.getActivatingPlayer());
+        }
+        
         if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.CLEANUP)) { // If something
                                                              // triggers during
                                                              // Cleanup, need to
                                                              // repeat
             Singletons.getModel().getGameState().getPhaseHandler().repeatPhase();
         }
-
+        
         if ((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic)) {
             // TODO: make working triggered ability
             sp.resolve();
@@ -704,7 +711,7 @@ public class MagicStack extends MyObservable {
             }
 
         }
-
+        
         // Copied spells aren't cast
         // per se so triggers shouldn't
         // run for them.
@@ -858,18 +865,11 @@ public class MagicStack extends MyObservable {
             }
         }
 
-        // 2012-07-20 Moving set priority down here so triggers go on the stack after the spells that cause them
-        // TODO: triggered abilities need to be fixed
-        if (!((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic))) {
-            // when something is added we need to setPriority
-            Singletons.getModel().getGameState().getPhaseHandler().setPriority(sp.getActivatingPlayer());
-        }
-
         /*
          * if (sp.getTargetCard() != null)
          * CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());
          */
-
+        
         if (this.getSimultaneousStackEntryList().size() > 0) {
             Singletons.getModel().getGameState().getPhaseHandler().passPriority();
         }
