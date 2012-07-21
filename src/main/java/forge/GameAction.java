@@ -1225,8 +1225,11 @@ public class GameAction {
      */
     private void destroyLegendaryCreatures() {
         final CardList a = AllZoneUtil.getCardsIn(ZoneType.Battlefield).getType("Legendary");
+        if (a.isEmpty() || !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
+            return;
+        }
 
-        while (!a.isEmpty() && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
+        while (!a.isEmpty()) {
             CardList b = AllZoneUtil.getCardsIn(ZoneType.Battlefield, a.get(0).getName());
             b = b.getType("Legendary");
             b = b.filter(new CardListFilter() {

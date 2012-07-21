@@ -2221,10 +2221,6 @@ public abstract class Player extends GameEntity {
      */
     public final boolean hasLost() {
 
-        if (this.cantLose()) {
-            return false;
-        }
-
         if (this.lossState != GameLossReason.DidNotLoseYet) {
             return this.loseConditionMet(this.lossState, null);
         }
@@ -2233,12 +2229,8 @@ public abstract class Player extends GameEntity {
             return this.loseConditionMet(GameLossReason.Poisoned, null);
         }
 
-        if (this.cantLoseForZeroOrLessLife()) {
-            return false;
-        }
-
         final boolean hasNoLife = this.getLife() <= 0;
-        if (hasNoLife) {
+        if (hasNoLife && !this.cantLoseForZeroOrLessLife()) {
             return this.loseConditionMet(GameLossReason.LifeReachedZero, null);
         }
 
