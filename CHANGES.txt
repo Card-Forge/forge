@@ -110,6 +110,11 @@ Fixes/Features:
 - The AI will now always bring Shocklands into play tapped (I'm sick of people reporting).
 - Fixed Flying WU theme.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Improved AI handling of Exalted (it now uses all the CombatUtil functions).
+- CheckStyle.
+- Potential fix for triggers being placed too early on the stack. If this doesn't work, we'll have to move the passPriority lower in the magicStack.push()
+- PhaseHandler change wasn't quite right since other things use that (such as triggers when you play lands?) Moving pass priority after .push() calls in Magic Stack seem to do the trick though
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
