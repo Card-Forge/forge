@@ -27,6 +27,7 @@ import forge.gui.CardContainer;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
+import forge.item.InventoryItem;
 
 /**
  * Constructs instance of deck editor UI controller, used as a single point of
@@ -58,6 +59,15 @@ public enum CDeckEditorUI implements CardContainer {
         return CDetail.SINGLETON_INSTANCE.getCurrentCard();
     }
 
+    /**
+     * Set Pack, for when Packs can be shown in the CardPicturePanel
+     * @param item
+     */
+    public void setCard(final InventoryItem item) {
+        CDetail.SINGLETON_INSTANCE.showCard(item);
+        CPicture.SINGLETON_INSTANCE.showCard(item);
+    }
+    
     //========= Accessor/mutator methods
     /**
      * @return ACEditorBase<?, ?>

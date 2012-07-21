@@ -187,10 +187,18 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
         final int row = table.getSelectedRow();
         if (row != -1) {
             final T cp = this.rowToCard(row).getKey();
-
-            final Card card2 = cp instanceof CardPrinted ? ((CardPrinted) cp).toForgeCard() : null;
-
-            CDeckEditorUI.SINGLETON_INSTANCE.setCard(card2);
+            final Card card2;
+            if (cp instanceof CardPrinted) {
+                card2 = ((CardPrinted) cp).toForgeCard();
+                CDeckEditorUI.SINGLETON_INSTANCE.setCard(card2);
+            }
+            else if (cp instanceof InventoryItem) {
+                CDeckEditorUI.SINGLETON_INSTANCE.setCard((InventoryItem)cp);
+            }
+            else {
+                card2 = null;
+                CDeckEditorUI.SINGLETON_INSTANCE.setCard(card2);
+            }
         }
     }
 

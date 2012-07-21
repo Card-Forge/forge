@@ -24,6 +24,7 @@ import forge.CardCharactersticName;
 import forge.Command;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;
+import forge.item.InventoryItem;
 
 /**
  * Controls the card picture panel in the match UI.
@@ -34,6 +35,7 @@ public enum CPicture implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
+    private InventoryItem item = null;
     private Card currentCard = null;
     private boolean flipped = false;
 
@@ -44,9 +46,17 @@ public enum CPicture implements ICDoc {
      *            &emsp; Card object
      */
     public void showCard(final Card c) {
+        this.item = null;
         this.currentCard = c;
         VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(c != null && c.isDoubleFaced() ? true : false);
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(c);
+    }
+    
+    public void showCard(final InventoryItem item) {
+        this.item = item;
+        this.currentCard = null;
+        VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(false);
+        VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(item);
     }
 
     /**
