@@ -173,26 +173,29 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     }
 
     private Integer getCardValue(final InventoryItem card) {
+        String ns = null;
         if (card instanceof CardPrinted) {
-            String ns = card.getName() + "|" + ((CardPrinted) card).getEdition();
+            ns = card.getName() + "|" + ((CardPrinted) card).getEdition();
+        } else {
+            ns = card.getName();
+        }
 
-            if (this.mapPrices.containsKey(ns)) {
-                return this.mapPrices.get(ns);
-            } else if (card instanceof CardPrinted) {
-                switch (((CardPrinted) card).getRarity()) {
-                case BasicLand:
-                    return Integer.valueOf(4);
-                case Common:
-                    return Integer.valueOf(6);
-                case Uncommon:
-                    return Integer.valueOf(40);
-                case Rare:
-                    return Integer.valueOf(120);
-                case MythicRare:
-                    return Integer.valueOf(600);
-                default:
-                    return Integer.valueOf(15);
-                }
+        if (this.mapPrices.containsKey(ns)) {
+            return this.mapPrices.get(ns);
+        } else if (card instanceof CardPrinted) {
+            switch (((CardPrinted) card).getRarity()) {
+            case BasicLand:
+                return Integer.valueOf(4);
+            case Common:
+                return Integer.valueOf(6);
+            case Uncommon:
+                return Integer.valueOf(40);
+            case Rare:
+                return Integer.valueOf(120);
+            case MythicRare:
+                return Integer.valueOf(600);
+            default:
+                return Integer.valueOf(15);
             }
         } else if (card instanceof BoosterPack) {
             return 395;
