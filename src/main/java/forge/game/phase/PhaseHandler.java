@@ -167,9 +167,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      *            a {@link forge.game.player.Player} object.
      */
     public final void setPriority(final Player p) {
+        /*
+		2012-07-20 Potential fix for bad trigger stack placements
         if (AllZone.getStack() != null) {
             AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
         }
+        */
 
         this.pFirstPriority = p;
         this.pPlayerPriority = p;
