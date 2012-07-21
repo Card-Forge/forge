@@ -34,7 +34,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
-import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 
 /**
@@ -63,12 +62,8 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void main() {
-        if (AllZone.getStack().size() == 0) {
-            ComputerUtil.chooseLandsToPlay();
-            this.playCards();
-        } else {
-            this.stackResponse();
-        }
+        ComputerUtil.chooseLandsToPlay();
+        this.playCards();
     } // main()
 
 
@@ -252,7 +247,7 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void beginCombat() {
-        this.stackResponse();
+        this.playCards();
     }
 
     /**
@@ -291,7 +286,7 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void declareAttackersAfter() {
-        this.stackResponse();
+        this.playCards();
     }
 
     /**
@@ -315,7 +310,7 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void declareBlockersAfter() {
-        this.stackResponse();
+        this.playCards();
     }
 
     /**
@@ -325,7 +320,7 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void endOfCombat() {
-        this.stackResponse();
+        this.playCards();
     }
 
     // end of Human's turn
@@ -336,7 +331,7 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void endOfTurn() {
-        this.stackResponse();
+        this.playCards();
     }
 
     /**
@@ -346,24 +341,6 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void stackNotEmpty() {
-        this.stackResponse();
-    }
-
-    /**
-     * <p>
-     * stackResponse.
-     * </p>
-     */
-    public final void stackResponse() {
-        // if top of stack is empty
-        if (AllZone.getStack().size() == 0) {
-            if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN, AllZone.getComputerPlayer())) {
-                Singletons.getModel().getGameState().getPhaseHandler().passPriority();
-                return;
-            }
-            this.playCards();
-            return;
-        }
 
         // if top of stack is owned by me
         if (AllZone.getStack().peekInstance().getActivatingPlayer().isComputer()) {
@@ -386,7 +363,7 @@ public class ComputerAIGeneral implements Computer {
         possibleCounters = this.getPossibleETBCounters();
         if ((possibleCounters.size() > 0) && !ComputerUtil.playSpellAbilities(possibleCounters)) {
             // Responding Permanent w/ ETB Counter is on the Stack
-            // Singletons.getModel().getGameState().getPhaseHandler().passPriority();
+            // If playSpellAbilities returns false, a Spell is hitting the Stack
             return;
         }
         final ArrayList<SpellAbility> sas = this.getSpellAbilities(cards);

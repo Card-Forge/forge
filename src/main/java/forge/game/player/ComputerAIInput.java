@@ -102,27 +102,15 @@ public class ComputerAIInput extends Input {
                     Log.debug("Computer main1");
                     this.computer.main();
                     break;
-                case COMBAT_BEGIN:
-                    this.computer.beginCombat();
-                    break;
                 case COMBAT_DECLARE_ATTACKERS:
                     this.computer.declareAttackers();
-                    break;
-                case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
-                    this.computer.declareAttackersAfter();
-                    break;
-                case COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY:
-                    this.computer.declareBlockersAfter();
-                    break;
-                case COMBAT_END:
-                    this.computer.endOfCombat();
                     break;
                 case MAIN2:
                     Log.debug("Computer main2");
                     this.computer.main();
                     break;
                 default:
-                    this.computer.stackNotEmpty();
+                    this.computer.endOfCombat();
                     break;
             }
         }
