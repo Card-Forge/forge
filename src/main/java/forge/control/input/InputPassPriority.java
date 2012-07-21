@@ -74,7 +74,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     @Override
     public final void selectButtonOK() {
         Singletons.getModel().getGameState().getPhaseHandler().passPriority();
-        GuiDisplayUtil.updateGUI();
+        //GuiDisplayUtil.updateGUI();
         final Input in = AllZone.getInputControl().getInput();
         if ((in == this) || (in == null)) {
             AllZone.getInputControl().resetInput();

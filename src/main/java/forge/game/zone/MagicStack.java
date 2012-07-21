@@ -467,7 +467,7 @@ public class MagicStack extends MyObservable {
             // TODO: make working triggered ability
             sp.resolve();
             Singletons.getModel().getGameAction().checkStateEffects();
-            GuiDisplayUtil.updateGUI();
+            //GuiDisplayUtil.updateGUI();
         } else {
             if (sp.isKickerAbility()) {
                 sp.getSourceCard().setKicked(true);
@@ -936,7 +936,7 @@ public class MagicStack extends MyObservable {
         // Resolving the Stack
 
         // TODO: change to use forge.view.FView?
-        GuiDisplayUtil.updateGUI();
+        //GuiDisplayUtil.updateGUI();
 
         this.freezeStack(); // freeze the stack while we're in the middle of
                             // resolving
@@ -1151,7 +1151,7 @@ public class MagicStack extends MyObservable {
         this.curResolvingCard = null;
 
         // TODO: change to use forge.view.FView?
-        GuiDisplayUtil.updateGUI();
+        //GuiDisplayUtil.updateGUI();
         this.updateObservers();
 
         // TODO: this is a huge hack. Why is this necessary?
