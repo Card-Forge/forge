@@ -198,10 +198,10 @@ public class InputMulligan extends Input {
                     && !(c.getName().startsWith("Leyline of Singularity") && (AllZoneUtil.getCardsIn(ZoneType.Battlefield,
                             "Leyline of Singularity").size() > 0))) {
                 ga.moveToPlay(c);
-                ga.checkStateEffects();
+                //ga.checkStateEffects();
             }
         }
-        ga.checkStateEffects();
+        //ga.checkStateEffects();
 
         if (ga.isStartCut() && !(humanOpeningHand.contains(ga.getHumanCut())
                         || aiOpeningHand.contains(ga.getComputerCut()))) {
