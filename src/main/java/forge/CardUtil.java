@@ -340,7 +340,14 @@ public final class CardUtil {
         if (c.isToken() && !c.isCopiedToken()) {
             return 0;
         }
-        return c.getManaCost().getCMC();
+        
+        int xPaid = 0;
+        
+        // 2012-07-22 - If a card is on the stack, count the xManaCost in with it's CMC
+        if (AllZoneUtil.getCardsIn(ZoneType.Stack).contains(c)) {
+            xPaid = c.getXManaCostPaid();
+        }
+        return c.getManaCost().getCMC() + xPaid;
     }
 
     /**
