@@ -10,6 +10,7 @@ import forge.Singletons;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VDev;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
@@ -102,7 +103,11 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblSetLife().addMouseListener(madLife);
         VDev.SINGLETON_INSTANCE.getLblBreakpoint().addMouseListener(madBreakpoint);
 
-        VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(Constant.Runtime.MILL[0]);
+        ForgePreferences prefs = Singletons.getModel().getPreferences();
+        
+        VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(prefs.getPrefBoolean(FPref.DEV_MILLING_LOSS));
+        //VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(Constant.Runtime.MILL[0]);
+        VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setEnabled(prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND));
     }
 
     /* (non-Javadoc)
