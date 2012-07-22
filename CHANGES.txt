@@ -115,6 +115,21 @@ Fixes/Features:
 - Potential fix for triggers being placed too early on the stack. If this doesn't work, we'll have to move the passPriority lower in the magicStack.push()
 - PhaseHandler change wasn't quite right since other things use that (such as triggers when you play lands?) Moving pass priority after .push() calls in Magic Stack seem to do the trick though
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Commented out 4 of the 5 instances of GuiDisplayUtil.updateGUI(). It looks like one is enough.
+- Removed two instances of checkStateEffects() in InputMulligan.
+- Little cleanups in Player and GameAction.
+- Restructuring in ComputerAIGeneral and ComputerUtil.
+- Quest Boosters (and other Openable packs) should now use the right sell value if they are named correctly.
+- Simplifying CEditorPreferences.java
+- Adding Power/Toughness as hideable columns
+- Fix a potential crash when trying to sort a column directly after hiding columns
+- More Cleanup in ComputerAIGeneral.
+- Fix for last commit.
+- Hooking up the new TableModel to display Booster Packs in Quest Card shop
+- Reverting City of Brass fix, since it screws up Priority when AI responds on the Stack.
+- cleaning up a few java import warnings
+- Latest attempt at fixing City of Brass triggers without screwing up Priority.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
