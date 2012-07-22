@@ -35,7 +35,6 @@ import forge.card.CardManaCost;
 import forge.card.EditionInfo;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
-import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityList;
 import forge.card.trigger.TriggerType;

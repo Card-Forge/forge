@@ -53,7 +53,6 @@ import forge.control.input.InputPayManaCostAbility;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.gui.GuiDisplayUtil;
 import forge.gui.GuiUtils;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;

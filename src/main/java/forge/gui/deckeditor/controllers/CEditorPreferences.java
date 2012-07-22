@@ -2,7 +2,6 @@ package forge.gui.deckeditor.controllers;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Enumeration;
 import java.util.HashMap;
 
 import javax.swing.JCheckBox;

@@ -19,7 +19,6 @@ package forge.card.cardfactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import javax.swing.JOptionPane;
 
@@ -28,7 +27,6 @@ import com.esotericsoftware.minlog.Log;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardCharactersticName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
@@ -46,9 +44,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
-import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
-import forge.control.input.InputPayManaCost;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
