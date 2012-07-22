@@ -454,18 +454,9 @@ public class MagicStack extends MyObservable {
             sp.setActivatingPlayer(sp.getSourceCard().getController());
             System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
         }
-       
-        // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
-        // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
-        if (!((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic))) {
-            // when something is added we need to setPriority
-            Singletons.getModel().getGameState().getPhaseHandler().setPriority(sp.getActivatingPlayer());
-        }
         
-        if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.CLEANUP)) { // If something
-                                                             // triggers during
-                                                             // Cleanup, need to
-                                                             // repeat
+        if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.CLEANUP)) { 
+            // If something triggers during Cleanup, need to repeat
             Singletons.getModel().getGameState().getPhaseHandler().repeatPhase();
         }
         
@@ -864,11 +855,6 @@ public class MagicStack extends MyObservable {
             }
         }
 
-        /*
-         * if (sp.getTargetCard() != null)
-         * CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());
-         */
-        
         if (this.getSimultaneousStackEntryList().size() > 0) {
             Singletons.getModel().getGameState().getPhaseHandler().passPriority();
         }
@@ -916,6 +902,13 @@ public class MagicStack extends MyObservable {
         final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
         this.getStack().push(si);
 
+        // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
+        // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
+        if (!((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic))) {
+            // when something is added we need to setPriority
+            Singletons.getModel().getGameState().getPhaseHandler().setPriority(sp.getActivatingPlayer());
+        }
+        
         SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
         this.updateObservers();
 
