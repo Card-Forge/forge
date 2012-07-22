@@ -5,7 +5,15 @@ Forge Beta: 07-##-2012 ver 1.2.11
 11### cards in total.
 
 
+This version is primarily a maintenance release. We have a few new cards, bug fixes, tweaks and some AI improvements. We suggest that everyone should update to this version.
 
+Development efforts continue but have slowed down as a result of the summer months. One of the devs is in the process of moving and this will have an impact on beta and snapshot release for a number of weeks.
+
+The release date for version 1.2.12 will likely be late August or sometime in the month of September. Snapshot builds will likely be unavailable until sometime after the 1.2.12 beta release. We apologize for the inconvenience.
+
+It seems like the front face of double faced cards aren't triggering properly, but the back face and single faced cards are.
+
+Selecting a package of cards in the quest mode card shop will now once again display the packages in the card picture panel. The list of cards in the prebuilt decks are not displayed in the card detail panel at this time.
 
 --
 
@@ -15,8 +23,6 @@ A recent contribution to the code base should fix some of the bugs that people n
 2. Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
 
 The work on the new UI is now finished. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
-
-Selecting a package of cards in the quest mode card shop will not display the packages in the card picture and card detail panels.
 
 Some people have noticed special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries. We hope to have this problem fixed at some point in the future.
 
