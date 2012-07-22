@@ -471,10 +471,11 @@ public class ManaCost {
         }
 
         String manaColor = mana.getColor();
-        decreaseShard(choice, 1);
+        
         if (choice.isOr2Colorless() && !this.isColor(InputPayManaCostUtil.getShortColorString(manaColor))) {
             this.increaseColorlessMana(1);
         }
+        decreaseShard(choice, 1);
 
         if (!mana.isColor(Constant.Color.COLORLESS)) {
             if (this.sunburstMap.containsKey(manaColor)) {
