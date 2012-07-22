@@ -78,6 +78,7 @@ http://www.cardforge.org/fpics/questAvatars/Galahad.jpg
 http://www.cardforge.org/fpics/questAvatars/Gambit.jpg
 http://www.cardforge.org/fpics/questAvatars/Genghis%20Khan.jpg
 http://www.cardforge.org/fpics/questAvatars/George%20of%20the%20Jungle.jpg
+http://www.cardforge.org/fpics/questAvatars/Ghost%20Rider.jpg
 http://www.cardforge.org/fpics/questAvatars/Gimli.jpg
 http://www.cardforge.org/fpics/questAvatars/Gold%20Finger.jpg
 http://www.cardforge.org/fpics/questAvatars/Grampa%20Simpson.jpg
