@@ -538,9 +538,15 @@ public final class AbilityFactoryChangeZone {
         }
 
         // don't use fetching to top of library/graveyard before main2
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")
-                && !destination.equals("Battlefield") && !destination.equals("Hand")) {
-            return false;
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
+                && !params.containsKey("ActivationPhases")) {
+            if (!destination.equals("Battlefield") && !destination.equals("Hand")) {
+                return false;
+            }
+            // Only tutor something in main1 if hand is almost empty
+            if (AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).size() > 1 && destination.equals("Hand")) {
+                return false;
+            }
         }
 
         chance &= (r.nextFloat() < .8);
