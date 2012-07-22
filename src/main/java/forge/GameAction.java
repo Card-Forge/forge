@@ -791,6 +791,7 @@ public class GameAction {
         sbAct.append(card.getName()).append(" - Miracle.");
         activate.setStackDescription(sbAct.toString());
         activate.setActivatingPlayer(card.getOwner());
+        activate.setTrigger(true);
 
         AllZone.getStack().add(activate);
     }

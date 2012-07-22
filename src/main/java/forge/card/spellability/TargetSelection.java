@@ -594,7 +594,7 @@ public class TargetSelection {
 
         if (null == saType) {
             // just take this to mean no restrictions - carry on.
-        } else if (topSA.isSpell()) {
+        } else if (topSA instanceof Spell) {
             if (!saType.contains("Spell")) {
                 return false;
             }
@@ -602,10 +602,12 @@ public class TargetSelection {
             if (!saType.contains("Triggered")) {
                 return false;
             }
-        } else if (topSA.isAbility()) {
+        } else if (topSA instanceof AbilityActivated) {
             if (!saType.contains("Activated")) {
                 return false;
             }
+        } else {
+            return false; //Static ability? Whatever.
         }
 
         final String splitTargetRestrictions = tgt.getSAValidTargeting();
