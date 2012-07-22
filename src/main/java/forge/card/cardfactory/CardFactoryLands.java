@@ -92,7 +92,20 @@ class CardFactoryLands {
                 }
 
                 public void computerExecute() {
-                    this.tapCard();
+                    boolean needsTheMana = false;
+                    if (AllZone.getComputerPlayer().getLife() > 3) {
+                        final int landsize = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer()).size();
+                        for (Card c : AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand)) {
+                            if (landsize == c.getCMC()) {
+                                needsTheMana = true;
+                            }
+                        }
+                    }
+                    if (needsTheMana) {
+                        AllZone.getComputerPlayer().payLife(2, card);
+                    } else {
+                        this.tapCard();
+                    }
                 }
 
                 public void humanExecute() {
@@ -102,7 +115,7 @@ class CardFactoryLands {
                         final String question = String.format("Pay 2 life? If you don't, %s enters the battlefield tapped.", card.getName());
 
                         if (GameActionUtil.showYesNoDialog(card, question.toString())) {
-                            AllZone.getHumanPlayer().loseLife(2, card);
+                            AllZone.getHumanPlayer().payLife(2, card);
                         } else {
                             this.tapCard();
                         }
