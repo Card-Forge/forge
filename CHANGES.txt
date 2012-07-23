@@ -136,6 +136,17 @@ Fixes/Features:
 - cleaning up a few java import warnings
 - Latest attempt at fixing City of Brass triggers without screwing up Priority.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a fluff piece to the changes.txt file.
+- Fixing issue when paying the last 2/B mana shard
+- Dev Mode now loading Milling and Unlmiited Land preferences on init.
+- Fixed Rhox Faithmender.
+- The AI will no longer tutor cards in main1 with more than one card in hand already.
+- If a Card is on the Stack, add the X Mana Cost in the CMC.
+- Added some better AI code to Shocklands.
+- Fixed Miracle not being flagged as a triggered ability.
+- Fixed matchSpellAbility checking wrongly.
+- Added the quest deck Ghost Rider 3.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
