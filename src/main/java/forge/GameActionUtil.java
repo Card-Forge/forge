@@ -1406,37 +1406,18 @@ public final class GameActionUtil {
             // add +1/+1 to cards
             list.clear();
             final int num = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Coat of Arms").size();
+            final CardList creatures = AllZoneUtil.getCardsIn(ZoneType.Battlefield).getType("Creature");
 
-            // for each zone found add +1/+1 to each card
-            for (int j = 0; j < num; j++) {
-                final CardList creature = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-
-                for (int i = 0; i < creature.size(); i++) {
-                    final Card crd = creature.get(i);
-                    CardList type = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-                    type = type.filter(new CardListFilter() {
-                        @Override
-                        public boolean addCard(final Card card) {
-                            return !card.equals(crd) && card.isCreature();
-                        }
-                    });
-                    final CardList alreadyAdded = new CardList();
-                    for (int x = 0; x < type.size(); x++) {
-                        alreadyAdded.clear();
-                        for (int x2 = 0; x2 < type.get(x).getType().size(); x2++) {
-                            if (!alreadyAdded.contains(type.get(x))) {
-                                if (CardUtil.isACreatureType(type.get(x).getType().get(x2))) {
-                                    if (crd.isType(type.get(x).getType().get(x2))) {
-                                        alreadyAdded.add(type.get(x));
-                                        crd.addSemiPermanentAttackBoost(1);
-                                        crd.addSemiPermanentDefenseBoost(1);
-                                        this.gloriousAnthemList.add(crd);
-                                    }
-                                }
-                            }
+            for (Card c : creatures) {
+                for (Card c2 : creatures) {
+                    if (!c.equals(c2) && c.sharesCreatureTypeWith(c2)) {
+                        for (int j = 0; j < num; j++) {
+                            c.addSemiPermanentAttackBoost(1);
+                            c.addSemiPermanentDefenseBoost(1);
+                            this.gloriousAnthemList.add(c);
                         }
                     }
-                } // for inner
+                }
             } // for outer
         } // execute
     }; // coatOfArms
