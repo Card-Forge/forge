@@ -4,7 +4,7 @@ Types:Sorcery
 Text:no text
 A:SP$ DestroyAll | Cost$ 4 B B | ValidCards$ Creature | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberDestroyed$ True | SubAbility$ DBLoseLife | SpellDescription$ Destroy all creatures target opponent controls. You lose 2 life for each creature destroyed this way.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | References$ X
-SVar:X:Remembered$Amount/Twice
+SVar:X:Remembered$Amount.Twice
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_daggers.jpg
