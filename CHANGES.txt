@@ -13,7 +13,7 @@ The release date for version 1.2.12 will likely be late August or sometime in th
 
 It seems like the front face of double faced cards aren't triggering properly, but the back face and single faced cards are.
 
-Selecting a package of cards in the quest mode card shop will now once again display the packages in the card picture panel. The list of cards in the prebuilt decks are not displayed in the card detail panel at this time.
+Selecting a package of cards in the quest mode card shop will now once again display the packages in the card picture panel. The list of card names in the prebuilt decks are not displayed in the card detail panel at this time.
 
 --
 
@@ -147,6 +147,11 @@ Fixes/Features:
 - Fixed matchSpellAbility checking wrongly.
 - Added the quest deck Ghost Rider 3.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Coat of Arms.
+- Fixed Serpent Generator.
+- Fixed Rain of Daggers.
+- Fixed Mirror Gallery.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -155,7 +160,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 
 
-Added many cards, including:
+Added the following cards:
 
 Switcheroo
 Phyrexian Infiltrator
