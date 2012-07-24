@@ -7,35 +7,29 @@ Description=WUG Exalted deck
 Icon=Captain America.jpg
 Deck Type=constructed
 [main]
-4 Seaside Citadel|ALA
-2 Dueling Grounds|INV
-1 Triclopean Sight|LRW
-3 Rafiq of the Many|ALA
-3 Tropical Island|3ED
-1 Swords to Plowshares|LEB
 1 Island|9ED
-1 Forest|USG
-1 Plains|ICE
-1 Tundra|3ED
-3 Sigil of the Nayan Gods|ARB
-2 Qasali Pridemage|ARB
-4 Knotvine Paladin|ARB
-1 Terramorphic Expanse|TSP
-2 Sovereigns of Lost Alara|ARB
+3 Forest|USG
+3 Plains|ICE
+2 Tundra|3ED
+4 Seaside Citadel|ALA
+3 Tropical Island|3ED
+4 Terramorphic Expanse|TSP
 3 Savannah|3ED
-1 Swords to Plowshares|ICE
-4 Grizzled Leotau|ARB
-2 Terramorphic Expanse|M11
-1 Forest|S99
-1 Epic Proportions|LRW
-1 Plains|MRD
-1 Terramorphic Expanse|10E
-1 Forest|10E
-1 Swords to Plowshares|2ED
-4 Stoic Angel|ALA
+1 Cathedral of War
 4 Noble Hierarch|CFX
-1 Battlegrace Angel|ALA
-1 Swords to Plowshares|LEA
-3 Finest Hour|ARB
-1 Plains|LEB
+4 Swords to Plowshares|LEB
+2 Aven Squire
+2 Knight of Glory
+1 Ethercaste Knight
+2 Qasali Pridemage|ARB
+1 Disenchant
+2 Dueling Grounds|INV
+1 Giltspire Avenger
+1 Rhox War Monk
+3 Bant Charm
+2 Rafiq of the Many|ALA
+4 Sublime Archangel
+3 Stoic Angel|ALA
+2 Battlegrace Angel|ALA
+2 Finest Hour|ARB
 [sideboard]
