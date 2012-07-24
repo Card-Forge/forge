@@ -875,7 +875,7 @@ public class ComputerUtil {
 
             cost.increaseColorlessMana(manaToAdd);
             if (!test) {
-                card.setXManaCostPaid(manaToAdd);
+                card.setXManaCostPaid(manaToAdd / cost.getXcounter());
             }
         }
 
