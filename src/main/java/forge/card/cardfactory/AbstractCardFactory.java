@@ -35,7 +35,6 @@ import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
-import forge.card.trigger.TriggerType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.properties.ForgeProps;
@@ -153,7 +152,6 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
     @Override
     public final Card copyCard(final Card in) {
         final CardCharactersticName curState = in.getCurState();
-        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
         if (in.isInAlternateState()) {
             in.setState(CardCharactersticName.Original);
         }
@@ -174,7 +172,6 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             in.setState(curState);
             out.setState(curState);
         }
-        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
 
         // I'm not sure if we really should be copying enchant/equip stuff over.
         out.setEquipping(in.getEquipping());

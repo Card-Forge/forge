@@ -397,7 +397,7 @@ public final class AbilityFactoryCopy {
                 if (c.isInAlternateState()) {
                     stateName = c.getCurState();
                     wasInAlt = true;
-                    c.setState(CardCharactersticName.Original);
+                    c.changeToState(CardCharactersticName.Original);
                 }
 
                 // start copied Kiki code
@@ -445,22 +445,22 @@ public final class AbilityFactoryCopy {
 
                     if (c.isDoubleFaced()) { // Cloned DFC's can't transform
                         if (wasInAlt) {
-                            copy.setState(CardCharactersticName.Transformed);
+                            copy.changeToState(CardCharactersticName.Transformed);
                         }
                     }
                     if (c.isFlipCard()) { // Cloned Flips CAN flip.
-                        copy.setState(CardCharactersticName.Original);
-                        c.setState(CardCharactersticName.Original);
+                        copy.changeToState(CardCharactersticName.Original);
+                        c.changeToState(CardCharactersticName.Original);
                         copy.setImageFilename(c.getImageFilename());
                         if (!c.isInAlternateState()) {
-                            copy.setState(CardCharactersticName.Flipped);
+                            copy.changeToState(CardCharactersticName.Flipped);
                         }
 
-                        c.setState(CardCharactersticName.Flipped);
+                        c.changeToState(CardCharactersticName.Flipped);
                     }
 
                     if (c.isFaceDown()) {
-                        c.setState(CardCharactersticName.FaceDown);
+                        c.changeToState(CardCharactersticName.FaceDown);
                     }
                     copy = Singletons.getModel().getGameAction().moveToPlay(copy);
 
@@ -470,7 +470,7 @@ public final class AbilityFactoryCopy {
                 }
 
                 if (wasInAlt) {
-                    c.setState(stateName);
+                    c.changeToState(stateName);
                 }
                 AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
 

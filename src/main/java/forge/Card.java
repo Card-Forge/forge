@@ -261,6 +261,31 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            the state
      * @return true, if successful
      */
+    public boolean changeToState(final CardCharactersticName state) {
+
+        CardCharactersticName cur = this.curCharacteristics;
+
+        if (!setState(state)) {
+            return false;
+        }
+
+        if ((cur == CardCharactersticName.Original && state == CardCharactersticName.Transformed)
+                || (cur == CardCharactersticName.Transformed && state == CardCharactersticName.Original)) {
+            HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("Transformer", this);
+            AllZone.getTriggerHandler().runTrigger(TriggerType.Transformed, runParams);
+        }
+
+        return true;
+    }
+    
+    /**
+     * Sets the state.
+     * 
+     * @param state
+     *            the state
+     * @return true, if successful
+     */
     public boolean setState(final CardCharactersticName state) {
         if (state == CardCharactersticName.FaceDown && this.isDoubleFaced) {
             return false; // Doublefaced cards can't be turned face-down.
@@ -275,16 +300,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
 
-        CardCharactersticName cur = this.curCharacteristics;
-
         this.curCharacteristics = state;
-
-        if ((cur == CardCharactersticName.Original && state == CardCharactersticName.Transformed)
-                || (cur == CardCharactersticName.Transformed && state == CardCharactersticName.Original)) {
-            HashMap<String, Object> runParams = new HashMap<String, Object>();
-            runParams.put("Transformer", this);
-            AllZone.getTriggerHandler().runTrigger(TriggerType.Transformed, runParams);
-        }
 
         return true;
     }
@@ -339,7 +355,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public boolean turnFaceDown() {
         if (!this.isDoubleFaced) {
             this.preTFDCharacteristic = this.curCharacteristics;
-            return this.setState(CardCharactersticName.FaceDown);
+            return this.changeToState(CardCharactersticName.FaceDown);
         }
 
         return false;
@@ -352,7 +368,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public boolean turnFaceUp() {
         if (this.curCharacteristics == CardCharactersticName.FaceDown) {
-            return this.setState(this.preTFDCharacteristic);
+            return this.changeToState(this.preTFDCharacteristic);
         }
 
         return false;

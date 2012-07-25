@@ -3914,7 +3914,6 @@ public class CardFactoryUtil {
         c.setDoubleFaced(sim.isDoubleFaced());
         c.setCurSetCode(sim.getCurSetCode());
 
-        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
         final CardCharactersticName origState = sim.getCurState();
         for (final CardCharactersticName state : sim.getStates()) {
             c.addAlternateState(state);
@@ -3926,7 +3925,6 @@ public class CardFactoryUtil {
         sim.setState(origState);
         c.setState(origState);
 
-        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
         return c;
     } // copyStats()
 

@@ -16,7 +16,6 @@ import forge.CardUtil;
 import forge.Constant;
 import forge.GameAction;
 import forge.Singletons;
-import forge.card.trigger.TriggerType;
 import forge.control.FControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
@@ -128,7 +127,6 @@ public class GameNew {
         final ArrayList<String> hAnteRemoved = new ArrayList<String>();
         final ArrayList<String> cAnteRemoved = new ArrayList<String>();
 
-        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
         for (final Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {
             final CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
@@ -141,8 +139,8 @@ public class GameNew {
                     card.setFoil(iFoil);
                 }
 
-                if (card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")
-                        && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
+                if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)
+                        && card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
                     hAnteRemoved.add(card.getName());
                 } else {
                     AllZone.getHumanPlayer().getZone(ZoneType.Library).add(card);
@@ -167,8 +165,8 @@ public class GameNew {
                     card.setFoil(iFoil);
                 }
 
-                if (card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")
-                        && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
+                if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)
+                        && card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
                     cAnteRemoved.add(card.getName());
                 } else {
                     AllZone.getComputerPlayer().getZone(ZoneType.Library).add(card);
@@ -182,7 +180,7 @@ public class GameNew {
 
             }
         }
-        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
+
         if (rAICards.size() > 0) {
             final StringBuilder sb = new StringBuilder(
                     "AI deck contains the following cards that it can't play or may be buggy:\n");

@@ -392,6 +392,11 @@ public class CardReader implements Runnable {
 
         for (String line : lines) {
             line = line.trim();
+            if (ignoreTheRest) {
+                continue;
+            } // have to deplete the iterator
+            // otherwise the underlying class would close its stream on finalize
+            // only
 
             if ("End".equals(line)) {
                 // have to deplete the iterator
@@ -399,11 +404,6 @@ public class CardReader implements Runnable {
                 continue;
                 // otherwise the underlying class would close its stream on finalize only
             }
-            if (ignoreTheRest) {
-                continue;
-            } // have to deplete the iterator
-            // otherwise the underlying class would close its stream on finalize
-            // only
 
             if (line.isEmpty() || (line.charAt(0) == '#')) {
                 continue;
@@ -413,7 +413,7 @@ public class CardReader implements Runnable {
                 rulesReader.parseLine(line);
             }
 
-            if (line.startsWith("Name:")) {
+            if (line.startsWith("Name")) {
                 final String value = line.substring(5);
                 // System.out.println(s);
                 if ((mapToFill != null) && mapToFill.containsKey(value)) {
@@ -421,23 +421,23 @@ public class CardReader implements Runnable {
                 } else {
                     card.setName(value);
                 }
-            } else if (line.startsWith("ManaCost:")) {
+            } else if (line.startsWith("ManaCost")) {
                 final String value = line.substring(9);
                 // System.out.println(s);
                 if (!"no cost".equals(value)) {
                     card.setManaCost(new CardManaCost(new ManaCostParser(value)));
                 }
-            } else if (line.startsWith("Types:")) {
-                CardReader.addTypes(card, line.substring("Types:".length()));
-            } else if (line.startsWith("Text:")) {
-                String value = line.substring("Text:".length());
+            } else if (line.startsWith("Types")) {
+                CardReader.addTypes(card, line.substring(6));
+            } else if (line.startsWith("Text")) {
+                String value = line.substring(5);
                 // if (!t.equals("no text"));
                 if ("no text".equals(value)) {
                     value = "";
                 }
                 card.setText(value);
-            } else if (line.startsWith("PT:")) {
-                final String value = line.substring("PT:".length());
+            } else if (line.startsWith("PT")) {
+                final String value = line.substring(3);
                 final String[] powTough = value.split("/");
                 int att;
                 if (powTough[0].contains("*")) {
@@ -457,14 +457,14 @@ public class CardReader implements Runnable {
                 card.setBaseDefenseString(powTough[1]);
                 card.setBaseAttack(att);
                 card.setBaseDefense(def);
-            } else if (line.startsWith("Loyalty:")) {
+            } else if (line.startsWith("Loyalty")) {
                 final String[] splitStr = line.split(":");
                 final int loyal = Integer.parseInt(splitStr[1]);
                 card.setBaseLoyalty(loyal);
             } else if (line.startsWith("K:")) {
                 final String value = line.substring(2);
                 card.addIntrinsicKeyword(value);
-            } else if (line.startsWith("SVar:")) {
+            } else if (line.startsWith("SVar")) {
                 final String[] value = line.split(":", 3);
                 card.setSVar(value[1], value[2]);
             } else if (line.startsWith("A:")) {
@@ -475,8 +475,8 @@ public class CardReader implements Runnable {
                 card.addStaticAbilityString(line.substring(2));
             } else if (line.startsWith("R:")) {
                 card.addReplacementEffect(ReplacementHandler.parseReplacement(line.substring(2), card));
-            } else if (line.startsWith("SetInfo:")) {
-                final String value = line.substring("SetInfo:".length());
+            } else if (line.startsWith("SetInfo")) {
+                final String value = line.substring(8);
                 card.addSet(new EditionInfo(value));
                 // 8/18/11 11:08 PM
             } else if (line.equals("ALTERNATE")) {
@@ -489,8 +489,8 @@ public class CardReader implements Runnable {
                     mode = card.isTransformable();
                 }
                 card.addAlternateState(mode);
-                card.setState(mode);
-            } else if (line.startsWith("AlternateMode:")) {
+                card.changeToState(mode);
+            } else if (line.startsWith("AlternateMode")) {
                 //System.out.println(card.getName());
                 final CardCharactersticName value = CardCharactersticName.smartValueOf(line.substring("AlternateMode:".length()));
                 if (value == CardCharactersticName.Flipped) {
@@ -500,8 +500,8 @@ public class CardReader implements Runnable {
                 } else {
                     card.setTransformable(value);
                 }
-            } else if (line.startsWith("Colors:")) {
-                final String value = line.substring("Colors:".length());
+            } else if (line.startsWith("Colors")) {
+                final String value = line.substring(7);
                 final ArrayList<CardColor> newCols = new ArrayList<CardColor>();
                 final CardColor newCol = new CardColor(card);
                 for (final String col : value.split(",")) {

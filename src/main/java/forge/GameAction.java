@@ -140,16 +140,13 @@ public class GameAction {
         Card copied = null;
         Card lastKnownInfo = null;
 
-        // Don't copy Tokens, Cards staying in same zone, or cards entering
-        // Battlefield
-        if (c.isToken() || suppress || zoneTo.is(ZoneType.Battlefield) || zoneTo.is(ZoneType.Stack)
-                || (zoneFrom.is(ZoneType.Stack) && zoneTo.is(ZoneType.Battlefield))) {
+        // Don't copy Tokens, copy only cards leaving the battlefield
+        if (c.isToken() || suppress || zoneTo.is(ZoneType.Battlefield) || !zoneFrom.is(ZoneType.Battlefield)) {
             lastKnownInfo = c;
             copied = c;
         } else {
             lastKnownInfo = CardUtil.getLKICopy(c);
 
-            AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
             if (c.isCloned()) {
                 c.switchStates(CardCharactersticName.Cloner, CardCharactersticName.Original);
                 c.setState(CardCharactersticName.Original);
@@ -162,18 +159,16 @@ public class GameAction {
             if (zoneFrom.is(ZoneType.Battlefield)) {
                 c.setFlipStaus(false);
             }
-            AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
             copied = AllZone.getCardFactory().copyCard(c);
             copied.setUnearthed(c.isUnearthed());
             copied.setTapped(false);
+            for (final Trigger trigger : c.getTriggers()) {
+                trigger.setHostCard(copied);
+            }
         }
 
         if (c.wasSuspendCast()) {
             copied = GameAction.addSuspendTriggers(c);
-        }
-
-        for (final Trigger trigger : c.getTriggers()) {
-            trigger.setHostCard(copied);
         }
 
         if (suppress) {
@@ -224,17 +219,14 @@ public class GameAction {
         // remove all counters from the card if destination is not the
         // battlefield
         // UNLESS we're dealing with Skullbriar, the Walking Grave
-        if (!zoneTo.is(ZoneType.Battlefield)) {
+        if (zoneFrom.is(ZoneType.Battlefield)) {
             copied.setSuspendCast(false);
             // remove all counters from the card if destination is not the battlefield
             // UNLESS we're dealing with Skullbriar, the Walking Grave
-            if (!(c.getName().equals("Skullbriar, the Walking Grave") && !zoneTo.is(ZoneType.Hand) && !zoneTo
-                    .is(ZoneType.Library))) {
+            if (zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library) || !c.getName().equals("Skullbriar, the Walking Grave")) {
                 copied.clearCounters();
             }
-            AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
             copied.setState(CardCharactersticName.Original);
-            AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
             // Soulbond unpairing
             if (c.isPaired()) {
                 c.getPairedWith().setPairedWith(null);
@@ -276,15 +268,15 @@ public class GameAction {
             if (copied.isEnchanting()) {
                 copied.unEnchantEntity(copied.getEnchanting());
             }
-        }
-
-        copied.setTimestamp(AllZone.getNextTimestamp());
-        for (String s : copied.getKeyword()) {
-            if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
-                    || s.startsWith("May be played by your opponent")
-                    || s.startsWith("Your opponent may look at this card.")) {
-                copied.removeAllExtrinsicKeyword(s);
-                copied.removeHiddenExtrinsicKeyword(s);
+        } else if (zoneTo.is(ZoneType.Battlefield)) {
+            copied.setTimestamp(AllZone.getNextTimestamp());
+            for (String s : copied.getKeyword()) {
+                if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
+                        || s.startsWith("May be played by your opponent")
+                        || s.startsWith("Your opponent may look at this card.")) {
+                    copied.removeAllExtrinsicKeyword(s);
+                    copied.removeHiddenExtrinsicKeyword(s);
+                }
             }
         }
 
@@ -639,9 +631,7 @@ public class GameAction {
         }
 
         if (c.isInAlternateState()) {
-            AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
             c.setState(CardCharactersticName.Original);
-            AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
         }
 
         if ((libPosition == -1) || (libPosition > library.size())) {

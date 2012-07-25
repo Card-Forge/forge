@@ -33,11 +33,9 @@ import org.apache.commons.lang3.StringUtils;
 import forge.card.CardCharacteristics;
 import forge.card.CardManaCost;
 import forge.card.EditionInfo;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityList;
-import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.zone.DefaultPlayerZone;
 import forge.game.zone.ZoneType;
@@ -912,14 +910,12 @@ public final class CardUtil {
             return c;
         }
         final CardCharactersticName state = c.getCurState();
-        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
         if (c.isInAlternateState()) {
             c.setState(CardCharactersticName.Original);
         }
         final Card res = AllZone.getCardFactory().copyCard(c);
         c.setState(state);
         res.setState(state);
-        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
         res.setControllerObjects(c.getControllerObjects());
         res.addTempAttackBoost(c.getTempAttackBoost());
         res.addSemiPermanentAttackBoost(c.getSemiPermanentAttackBoost());
@@ -964,10 +960,11 @@ public final class CardUtil {
         newCopy.setDoubleFaced(in.isDoubleFaced());
 
         // Copy all states
-        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
+        // Commented out by Sloth 2012/07/25
+        /*AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
         for (final CardCharactersticName state : in.getStates()) {
             newCopy.addAlternateState(state);
-            newCopy.setState(state);
+            newCopy.changeToState(state);
             CardFactoryUtil.copyState(in, state, newCopy);
             //Copies of full abilities not need in LKI copy
             /*
@@ -993,13 +990,13 @@ public final class CardUtil {
                     newCopy.addSpellAbility(newSA);
                 }
             }
-            */
+            
             for (int i = 0; i < newCopy.getStaticAbilityStrings().size(); i++) {
                 newCopy.addStaticAbility(newCopy.getStaticAbilityStrings().get(i));
             }
         }
-        newCopy.setState(in.getCurState());
-        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
+        newCopy.changeToState(in.getCurState());
+        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);*/
 
         // I'm not sure if we really should be copying enchant/equip stuff over.
 
