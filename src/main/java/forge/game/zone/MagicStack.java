@@ -454,12 +454,12 @@ public class MagicStack extends MyObservable {
             sp.setActivatingPlayer(sp.getSourceCard().getController());
             System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
         }
-        
-        if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.CLEANUP)) { 
+
+        if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.CLEANUP)) {
             // If something triggers during Cleanup, need to repeat
             Singletons.getModel().getGameState().getPhaseHandler().repeatPhase();
         }
-        
+
         if ((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic)) {
             // TODO: make working triggered ability
             sp.resolve();
@@ -476,8 +476,6 @@ public class MagicStack extends MyObservable {
                         abilityNumber = i;
                     }
                 }
-
-                sp.getSourceCard().setAbilityUsed(abilityNumber);
             }
             if (sp.getSourceCard().isCopiedSpell()) {
                 this.push(sp);

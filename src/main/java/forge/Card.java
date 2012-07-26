@@ -230,19 +230,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private DeckWants deckWants = null;
     private boolean isDeckWantsConstructed = false;
 
-    //private Map<String, String> sVars = new TreeMap<String, String>();
-
-    // hacky code below, used to limit the number of times an ability
-    // can be used per turn like Vampire Bats
-    // should be put in SpellAbility, but it is put here for convenience
-    // this is make public just to make things easy
-    // this code presumes that each card only has one ability that can be
-    // used a limited number of times per turn
-    // CardFactory.SSP_canPlay(Card) uses these variables
-
-    // Only used with Replicate
-    private int abilityUsed;
-
     // Soulbond pairing card
     private Card pairedWith = null;
 
@@ -843,27 +830,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final Object getTriggeringObject(final String typeIn) {
         return this.triggeringObjects.get(typeIn);
-    }
-
-    /**
-     * field <code>abilityUsed</code>.
-     * 
-     * @param i
-     *            a int.
-     */
-    public final void setAbilityUsed(final int i) {
-        this.abilityUsed = i;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>abilityUsed</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getAbilityUsed() {
-        return this.abilityUsed;
     }
 
     /**
