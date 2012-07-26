@@ -355,7 +355,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public boolean turnFaceDown() {
         if (!this.isDoubleFaced) {
             this.preTFDCharacteristic = this.curCharacteristics;
-            return this.changeToState(CardCharactersticName.FaceDown);
+            return this.setState(CardCharactersticName.FaceDown);
         }
 
         return false;
@@ -368,7 +368,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public boolean turnFaceUp() {
         if (this.curCharacteristics == CardCharactersticName.FaceDown) {
-            return this.changeToState(this.preTFDCharacteristic);
+            return this.setState(this.preTFDCharacteristic);
         }
 
         return false;

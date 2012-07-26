@@ -489,7 +489,7 @@ public class CardReader implements Runnable {
                     mode = card.isTransformable();
                 }
                 card.addAlternateState(mode);
-                card.changeToState(mode);
+                card.setState(mode);
             } else if (line.startsWith("AlternateMode")) {
                 //System.out.println(card.getName());
                 final CardCharactersticName value = CardCharactersticName.smartValueOf(line.substring("AlternateMode:".length()));

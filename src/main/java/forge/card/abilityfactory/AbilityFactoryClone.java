@@ -472,25 +472,23 @@ public final class AbilityFactoryClone {
         String originalName = tgtCard.getName();
         boolean copyingSelf = (tgtCard == cardToCopy);
 
-        AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
-
         if (!copyingSelf) {
             if (tgtCard.isCloned()) { // cloning again
                 tgtCard.switchStates(CardCharactersticName.Cloner, CardCharactersticName.Original);
-                tgtCard.changeToState(CardCharactersticName.Original);
+                tgtCard.setState(CardCharactersticName.Original);
                 tgtCard.clearStates(CardCharactersticName.Cloner);
             }
             // add "Cloner" state to clone
             tgtCard.addAlternateState(CardCharactersticName.Cloner);
             tgtCard.switchStates(CardCharactersticName.Original, CardCharactersticName.Cloner);
-            tgtCard.changeToState(CardCharactersticName.Original);
+            tgtCard.setState(CardCharactersticName.Original);
         }
         else {
             //copy Original state to Cloned
             tgtCard.addAlternateState(CardCharactersticName.Cloned);
             tgtCard.switchStates(CardCharactersticName.Original, CardCharactersticName.Cloned);
             if (tgtCard.isFlipCard()) {
-                tgtCard.changeToState(CardCharactersticName.Original);
+                tgtCard.setState(CardCharactersticName.Original);
             }
         }
 
@@ -521,7 +519,7 @@ public final class AbilityFactoryClone {
         if (cardToCopy.isFlipCard()) {
             if (!copyingSelf) {
                 tgtCard.addAlternateState(CardCharactersticName.Flipped);
-                tgtCard.changeToState(CardCharactersticName.Flipped);
+                tgtCard.setState(CardCharactersticName.Flipped);
             }
             CardFactoryUtil.copyState(cardToCopy, CardCharactersticName.Flipped, tgtCard);
             addExtraCharacteristics(tgtCard, params, origSVars);
@@ -537,7 +535,7 @@ public final class AbilityFactoryClone {
             tgtCard.setImageFilename(imageFileName);
 
             if (!tgtCard.isFlipped()) {
-              tgtCard.changeToState(CardCharactersticName.Original);
+              tgtCard.setState(CardCharactersticName.Original);
             }
         } else {
             tgtCard.setFlipCard(false);
@@ -547,8 +545,6 @@ public final class AbilityFactoryClone {
         if (copyingSelf) {
             tgtCard.clearStates(CardCharactersticName.Cloned);
         }
-
-        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
 
         //Clear Remembered and Imprint lists
         tgtCard.clearRemembered();

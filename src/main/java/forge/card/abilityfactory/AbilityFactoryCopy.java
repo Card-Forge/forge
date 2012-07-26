@@ -391,13 +391,12 @@ public final class AbilityFactoryCopy {
         for (final Card c : tgtCards) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
 
-                AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
                 boolean wasInAlt = false;
                 CardCharactersticName stateName = CardCharactersticName.Original;
                 if (c.isInAlternateState()) {
                     stateName = c.getCurState();
                     wasInAlt = true;
-                    c.changeToState(CardCharactersticName.Original);
+                    c.setState(CardCharactersticName.Original);
                 }
 
                 // start copied Kiki code
@@ -445,22 +444,22 @@ public final class AbilityFactoryCopy {
 
                     if (c.isDoubleFaced()) { // Cloned DFC's can't transform
                         if (wasInAlt) {
-                            copy.changeToState(CardCharactersticName.Transformed);
+                            copy.setState(CardCharactersticName.Transformed);
                         }
                     }
                     if (c.isFlipCard()) { // Cloned Flips CAN flip.
-                        copy.changeToState(CardCharactersticName.Original);
-                        c.changeToState(CardCharactersticName.Original);
+                        copy.setState(CardCharactersticName.Original);
+                        c.setState(CardCharactersticName.Original);
                         copy.setImageFilename(c.getImageFilename());
                         if (!c.isInAlternateState()) {
-                            copy.changeToState(CardCharactersticName.Flipped);
+                            copy.setState(CardCharactersticName.Flipped);
                         }
 
-                        c.changeToState(CardCharactersticName.Flipped);
+                        c.setState(CardCharactersticName.Flipped);
                     }
 
                     if (c.isFaceDown()) {
-                        c.changeToState(CardCharactersticName.FaceDown);
+                        c.setState(CardCharactersticName.FaceDown);
                     }
                     copy = Singletons.getModel().getGameAction().moveToPlay(copy);
 
@@ -470,9 +469,8 @@ public final class AbilityFactoryCopy {
                 }
 
                 if (wasInAlt) {
-                    c.changeToState(stateName);
+                    c.setState(stateName);
                 }
-                AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);
 
                 // have to do this since getTargetCard() might change
                 // if Kiki-Jiki somehow gets untapped again

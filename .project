@@ -11,11 +11,6 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>net.sf.eclipsecs.core.CheckstyleBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>org.eclipse.m2e.core.maven2Builder</name>
 			<arguments>
 			</arguments>
@@ -34,7 +29,6 @@
 	<natures>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>net.sf.eclipsecs.core.CheckstyleNature</nature>
 		<nature>org.eclipse.pde.PluginNature</nature>
 	</natures>
 </projectDescription>
