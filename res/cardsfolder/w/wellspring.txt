@@ -3,7 +3,7 @@ ManaCost:1 G W
 Types:Enchantment Aura
 Text:no text
 K:Enchant land
-A:SP$ Attach | Cost$ 1 G W | ValidTgts$ Land | AILogic$ Pump
+A:SP$ Attach | Cost$ 1 G W | ValidTgts$ Land | AILogic$ Curse
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Execute$ TrigGainControl | Origin$ Any | Destination$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, gain control of enchanted land until end of turn. At the beginning of your upkeep, untap enchanted land. You gain control of that land until end of turn.
 SVar:TrigGainControl:AB$GainControl | Cost$ 0 | Defined$ Enchanted | LoseControl$ EOT
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainControl2 | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, untap enchanted land. You gain control of that land until end of turn.
