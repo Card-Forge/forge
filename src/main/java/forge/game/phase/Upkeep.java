@@ -78,7 +78,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
         Upkeep.upkeepEcho();
 
         Upkeep.upkeepTheAbyss();
-        //Upkeep.upkeepYawgmothDemon();
         Upkeep.upkeepDropOfHoney();
         Upkeep.upkeepDemonicHordes();
         Upkeep.upkeepTangleWire();
@@ -532,81 +531,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
             AllZone.getStack().addAndUnfreeze(sacrificeCreature);
         } // end for
     } // The Abyss
-
-    /**
-     * <p>
-     * upkeepYawgmothDemon.
-     * </p>
-     */
-    /*private static void upkeepYawgmothDemon() {
-        /*
-         * At the beginning of your upkeep, you may sacrifice an artifact. If
-         * you don't, tap Yawgmoth Demon and it deals 2 damage to you.
-         */
-        /*final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final CardList cards = player.getCardsIn(ZoneType.Battlefield, "Yawgmoth Demon");
-
-        for (int i = 0; i < cards.size(); i++) {
-            final Card c = cards.get(i);
-
-            final Ability sacrificeArtifact = new Ability(c, "") {
-                @Override
-                public void resolve() {
-                    final CardList artifacts = player.getCardsIn(ZoneType.Battlefield).filter(CardListFilter.ARTIFACTS);
-
-                    if (player.isHuman()) {
-                        AllZone.getInputControl().setInput(new Input() {
-                            private static final long serialVersionUID = -1698502376924356936L;
-
-                            @Override
-                            public void showMessage() {
-                                CMatchUI.SINGLETON_INSTANCE
-                                        .showMessage(
-                                                "Yawgmoth Demon - Select one artifact to sacrifice or be dealt 2 damage");
-                                ButtonUtil.enableOnlyCancel();
-                            }
-
-                            @Override
-                            public void selectButtonCancel() {
-                                tapAndDamage(player);
-                                this.stop();
-                            }
-
-                            @Override
-                            public void selectCard(final Card artifact, final PlayerZone zone) {
-                                // probably need to restrict by controller also
-                                if (artifact.isArtifact() && zone.is(ZoneType.Battlefield)
-                                        && zone.getPlayer().isHuman()) {
-                                    Singletons.getModel().getGameAction().sacrifice(artifact, null);
-                                    this.stop();
-                                }
-                            } // selectCard()
-                        }); // Input
-                    } else { // computer
-                        final Card target = CardFactoryUtil.getCheapestPermanentAI(artifacts, this, false);
-                        if (null == target) {
-                            this.tapAndDamage(player);
-                        } else {
-                            Singletons.getModel().getGameAction().sacrifice(target, null);
-                        }
-                    }
-                } // resolve
-
-                private void tapAndDamage(final Player player) {
-                    c.tap();
-                    player.addDamage(2, c);
-                }
-            };
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(c.getName()).append(" - sacrifice an artifact or ");
-            sb.append(c.getName()).append(" becomes tapped and deals 2 damage to you.");
-            sacrificeArtifact.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(sacrificeArtifact);
-
-        } // end for
-    }*/
 
     /**
      * <p>
@@ -2308,70 +2232,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
         }
     }
-
-    /**
-     * <p>
-     * upkeepCarnophage.
-     * </p>
-     */
-    /*private static void upkeepCarnophage() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-
-        final CardList list = player.getCardsIn(Zone.Battlefield, "Carnophage");
-        if (player.isHuman()) {
-            for (int i = 0; i < list.size(); i++) {
-                final Card c = list.get(i);
-                final String[] choices = { "Yes", "No" };
-                final Object choice = GuiUtils.getChoice("Pay Carnophage's upkeep?", choices);
-                if (choice.equals("Yes")) {
-                    player.loseLife(1, c);
-                } else {
-                    c.tap();
-                }
-            }
-        } else if (player.isComputer()) {
-            for (int i = 0; i < list.size(); i++) {
-                final Card c = list.get(i);
-                if (AllZone.getComputerPlayer().getLife() > 1) {
-                    player.loseLife(1, c);
-                } else {
-                    c.tap();
-                }
-            }
-        }
-    }*/ // upkeepCarnophage
-
-    /**
-     * <p>
-     * upkeepSangrophage.
-     * </p>
-     */
-    /*private static void upkeepSangrophage() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-
-        final CardList list = player.getCardsIn(Zone.Battlefield, "Sangrophage");
-        if (player.isHuman()) {
-            for (int i = 0; i < list.size(); i++) {
-                final Card c = list.get(i);
-                final String[] choices = { "Yes", "No" };
-                final Object choice = GuiUtils.getChoice("Pay Sangrophage's upkeep?", choices);
-                if (choice.equals("Yes")) {
-                    player.loseLife(2, c);
-                } else {
-                    c.tap();
-                }
-            }
-        } else if (player.isComputer()) {
-            for (int i = 0; i < list.size(); i++) {
-                final Card c = list.get(i);
-                if (AllZone.getComputerPlayer().getLife() > 2) {
-                    player.loseLife(2, c);
-                } else {
-                    c.tap();
-                }
-            }
-        }
-    }*/ // upkeepSangrophage
 
     /**
      * <p>
