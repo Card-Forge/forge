@@ -158,6 +158,11 @@ Fixes/Features:
 - Fixed AI paying costs with multiple X parts.
 - Added the quest deck Sideshow Bob 3 by Nordos.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Attempt at reducing code when cards get created/change zone (should be watched).
+- Removed a lot of suppressions of TriggerType.Transformed by adding a new setState function that does not run triggers at all.
+- Fixed AI logic of Wellspring.
+- Converted more instances of changeToState to setState.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
