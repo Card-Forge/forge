@@ -1479,12 +1479,7 @@ public class CardFactorySorceries {
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
                     if (c.isCreature() && zone.is(ZoneType.Battlefield) && c.canBeTargetedBy(spell)) {
-                        if (card.isCopiedSpell()) {
-                            card.getChoiceTargets().remove(0);
-                        }
                         ab2card[0] = c;
-                        // spell.setTargetCard(c);
-                        card.setSpellChoiceTarget(String.valueOf(c.getUniqueNumber()));
                         setStackDescription.execute();
 
                         if (userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) {
@@ -1560,12 +1555,7 @@ public class CardFactorySorceries {
                 @Override
                 public void selectPlayer(final Player player) {
                     if (player.canBeTargetedBy(spell)) {
-                        if (card.isCopiedSpell()) {
-                            card.getChoiceTargets().remove(0);
-                        }
                         ab0player[0] = player;
-                        // spell.setTargetPlayer(player);
-                        card.setSpellChoiceTarget(player.toString());
                         setStackDescription.execute();
 
                         if (userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {
@@ -1657,8 +1647,6 @@ public class CardFactorySorceries {
                         ab1card[0] = null;
                         ab2card[0] = null;
                         ab3cards.clear();
-                        card.getChoices().clear();
-                        card.getChoiceTargets().clear();
                         userChoice.clear();
 
                         final ArrayList<String> display = new ArrayList<String>();
@@ -1701,7 +1689,6 @@ public class CardFactorySorceries {
                     }
 
                     out.add((String) o);
-                    card.addSpellChoice((String) o);
                     choices.remove(out.get(0));
                     o = GuiUtils.chooseOneOrNone("Choose Two", choices.toArray());
                     if (o == null) {
@@ -1709,7 +1696,7 @@ public class CardFactorySorceries {
                     }
 
                     out.add((String) o);
-                    card.addSpellChoice((String) o);
+                    card.setSpellChoice(out);
                     return out;
                 } // chooseTwo()
             }; // Input chooseTwoInput

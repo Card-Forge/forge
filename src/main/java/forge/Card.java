@@ -105,8 +105,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     // if this card is an Aura, what Entity is it enchanting?
     private GameEntity enchanting = null;
     private ArrayList<String> prevType = new ArrayList<String>();
-    private final ArrayList<String> choicesMade = new ArrayList<String>();
-    private final ArrayList<String> targetsForChoices = new ArrayList<String>();
+    private ArrayList<String> choicesMade = null;
 
     // changes by AF animate and continuous static effects
     private ArrayList<CardType> changedCardTypes = new ArrayList<CardType>();
@@ -265,7 +264,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         return true;
     }
-    
+
     /**
      * Sets the state.
      * 
@@ -3167,14 +3166,14 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * addSpellChoice.
+     * setSpellChoice.
      * </p>
      * 
-     * @param string
-     *            a {@link java.lang.String} object.
+     * @param strings
+     *            a ArrayList<String> object.
      */
-    public final void addSpellChoice(final String string) {
-        this.choicesMade.add(string);
+    public final void setSpellChoice(final ArrayList<String> strings) {
+        this.choicesMade = strings;
     }
 
     /**
@@ -3199,42 +3198,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final String getChoice(final int i) {
         return this.choicesMade.get(i);
-    }
-
-    /**
-     * <p>
-     * setSpellChoiceTarget.
-     * </p>
-     * 
-     * @param string
-     *            a {@link java.lang.String} object.
-     */
-    public final void setSpellChoiceTarget(final String string) {
-        this.targetsForChoices.add(string);
-    }
-
-    /**
-     * <p>
-     * getChoiceTargets.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final ArrayList<String> getChoiceTargets() {
-        return this.targetsForChoices;
-    }
-
-    /**
-     * <p>
-     * getChoiceTarget.
-     * </p>
-     * 
-     * @param i
-     *            a int.
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getChoiceTarget(final int i) {
-        return this.targetsForChoices.get(i);
     }
 
     /**
