@@ -219,7 +219,7 @@ public class GameAction {
         // remove all counters from the card if destination is not the
         // battlefield
         // UNLESS we're dealing with Skullbriar, the Walking Grave
-        if (zoneFrom.is(ZoneType.Battlefield)) {
+        if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield)) {
             copied.setSuspendCast(false);
             // remove all counters from the card if destination is not the battlefield
             // UNLESS we're dealing with Skullbriar, the Walking Grave
