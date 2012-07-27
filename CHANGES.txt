@@ -163,6 +163,17 @@ Fixes/Features:
 - Fixed AI logic of Wellspring.
 - Converted more instances of changeToState to setState.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Removed the unused variable abilityUsed from the Card class.
+- Cleanup in Upkeep.
+- Fixed Sadistic Augermage.
+- Updated mana base of the Gimli decks.
+- removed the unnecessary variable targetsForChoices from the Card class.
+- Adding a null check for zoneFrom (not sure if we need more here)
+- Simplified handling of hasFizzled
+- Fizzling will now remove Targets that don't have the same timestamp in their current form as the one that was targeted
+- fix for combo cards in LimitedDeck
+- Fixed Quagmire.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
