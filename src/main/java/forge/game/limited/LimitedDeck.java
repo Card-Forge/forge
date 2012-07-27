@@ -468,6 +468,9 @@ public class LimitedDeck extends Deck {
                             getAiPlayables().remove(theCard);
                         }
                     }
+                } else {
+                    // Could not find combo cards, so don't put this card in the deck.
+                    getAiPlayables().remove(c);
                 }
             }
         }
