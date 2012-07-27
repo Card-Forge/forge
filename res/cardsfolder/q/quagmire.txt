@@ -1,7 +1,7 @@
 Name:Quagmire
 ManaCost:2 B
 Types:Enchantment
-Text:xno text
+Text:no text
 S:Mode$ Continuous | Affected$ Creature.withSwampwalk | AddHiddenKeyword$ May be blocked as though it doesn't have Mountainwalk. | Description$ Creatures with swampwalk can be blocked as though they didn't have swampwalk.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
