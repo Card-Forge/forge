@@ -1808,7 +1808,7 @@ public class GameAction {
                             } else {
                                 String newCostStr = newCost.toString();
                                 newCostStr = newCostStr.replaceFirst(
-                                        InputPayManaCostUtil.getShortColorString(chosenColor), "");
+                                        InputPayManaCostUtil.getShortColorString(chosenColor), "").replaceFirst("  "," ");
                                 newCost = new ManaCost(newCostStr.trim());
                             }
 
