@@ -63,7 +63,7 @@ public class ComputerAIGeneral implements Computer {
     @Override
     public final void main() {
         ComputerUtil.chooseLandsToPlay();
-        this.playCards();
+        this.playSpellAbilitiesStackEmpty();
     } // main()
 
 
@@ -75,7 +75,7 @@ public class ComputerAIGeneral implements Computer {
      * @param phase
      *            a {@link java.lang.String} object.
      */
-    private void playCards() {
+    private void playSpellAbilitiesStackEmpty() {
         final CardList list = getAvailableCards();
 
         final boolean nextPhase = ComputerUtil.playSpellAbilities(getSpellAbilities(list));
@@ -242,16 +242,6 @@ public class ComputerAIGeneral implements Computer {
 
     /**
      * <p>
-     * begin_combat.
-     * </p>
-     */
-    @Override
-    public final void beginCombat() {
-        this.playCards();
-    }
-
-    /**
-     * <p>
      * declare_attackers.
      * </p>
      */
@@ -281,16 +271,6 @@ public class ComputerAIGeneral implements Computer {
 
     /**
      * <p>
-     * declare_attackers_after.
-     * </p>
-     */
-    @Override
-    public final void declareAttackersAfter() {
-        this.playCards();
-    }
-
-    /**
-     * <p>
      * declare_blockers.
      * </p>
      */
@@ -303,26 +283,6 @@ public class ComputerAIGeneral implements Computer {
         Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
     }
 
-    /**
-     * <p>
-     * declare_blockers_after.
-     * </p>
-     */
-    @Override
-    public final void declareBlockersAfter() {
-        this.playCards();
-    }
-
-    /**
-     * <p>
-     * end_of_combat.
-     * </p>
-     */
-    @Override
-    public final void endOfCombat() {
-        this.playCards();
-    }
-
     // end of Human's turn
     /**
      * <p>
@@ -331,7 +291,7 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void endOfTurn() {
-        this.playCards();
+        this.playSpellAbilitiesStackEmpty();
     }
 
     /**
@@ -340,9 +300,9 @@ public class ComputerAIGeneral implements Computer {
      * </p>
      */
     @Override
-    public final void stackNotEmpty() {
+    public final void playSpellAbilities() {
         if (AllZone.getStack().isEmpty()) {
-            Singletons.getModel().getGameState().getPhaseHandler().passPriority();
+            this.playSpellAbilitiesStackEmpty();
             return;
         }
 

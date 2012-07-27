@@ -257,7 +257,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         } else if (playerTurn.isComputer()) {
             return this.aiInput;
         } else {
-            this.aiInput.getComputer().stackNotEmpty();
+            this.aiInput.getComputer().playSpellAbilities();
             return null;
         }
     } // getInput()

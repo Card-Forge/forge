@@ -35,24 +35,10 @@ public interface Computer {
 
     /**
      * <p>
-     * begin_combat.
-     * </p>
-     */
-    void beginCombat();
-
-    /**
-     * <p>
      * declare_attackers.
      * </p>
      */
     void declareAttackers();
-
-    /**
-     * <p>
-     * declare_attackers_after.
-     * </p>
-     */
-    void declareAttackersAfter(); // can play Instants and Abilities
 
     /**
      * <p>
@@ -61,20 +47,6 @@ public interface Computer {
      */
     void declareBlockers(); // this is called after when the Human or Computer
                             // blocks
-
-    /**
-     * <p>
-     * declare_blockers_after.
-     * </p>
-     */
-    void declareBlockersAfter(); // can play Instants and Abilities
-
-    /**
-     * <p>
-     * end_of_combat.
-     * </p>
-     */
-    void endOfCombat();
 
     /**
      * <p>
@@ -88,6 +60,6 @@ public interface Computer {
      * stack_not_empty.
      * </p>
      */
-    void stackNotEmpty();
+    void playSpellAbilities();
 
 }

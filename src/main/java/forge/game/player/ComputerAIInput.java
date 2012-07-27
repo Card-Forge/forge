@@ -57,8 +57,8 @@ public class ComputerAIInput extends Input {
      * stackNotEmpty.
      * </p>
      */
-    public final void stackNotEmpty() {
-        this.computer.stackNotEmpty();
+    public final void playSpellAbilities() {
+        this.computer.playSpellAbilities();
     }
 
     /** {@inheritDoc} */
@@ -95,7 +95,7 @@ public class ComputerAIInput extends Input {
         final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
 
         if (AllZone.getStack().size() > 0) {
-            this.computer.stackNotEmpty();
+            this.computer.playSpellAbilities();
         } else {
             switch(phase) {
                 case MAIN1:
@@ -110,7 +110,7 @@ public class ComputerAIInput extends Input {
                     this.computer.main();
                     break;
                 default:
-                    this.computer.endOfCombat();
+                    this.computer.playSpellAbilities();
                     break;
             }
         }
