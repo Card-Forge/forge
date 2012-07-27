@@ -171,6 +171,8 @@ public final class NewConstants {
         public static final String UNCOMMON = "draft/uncommon";
         /** Property path for a rare card. */
         public static final String RARE = "draft/rare";
+        /** Path for draft rankings. */
+        public static final String RANKINGS = "draft/rankings";
     }
 
     /**

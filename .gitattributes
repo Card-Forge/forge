@@ -11060,6 +11060,7 @@ res/draft/common.txt svneol=native#text/plain
 res/draft/cube_juzamjedi.draft -text
 res/draft/cube_skiera.draft -text
 res/draft/draft.properties svneol=native#text/plain
+res/draft/rankings.txt -text
 res/draft/rare.txt svneol=native#text/plain
 res/draft/uncommon.txt svneol=native#text/plain
 res/gamedata/NonStackingKWList.txt svneol=native#text/plain
@@ -12079,6 +12080,7 @@ src/main/java/forge/game/limited/CustomLimited.java svneol=native#text/plain
 src/main/java/forge/game/limited/DeckColors.java svneol=native#text/plain
 src/main/java/forge/game/limited/IBoosterDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/LimitedDeck.java -text
+src/main/java/forge/game/limited/ReadDraftRankings.java -text
 src/main/java/forge/game/limited/SealedDeck.java svneol=native#text/plain
 src/main/java/forge/game/limited/SealedDeckFormat.java svneol=native#text/plain
 src/main/java/forge/game/limited/package-info.java svneol=native#text/plain
@@ -12431,6 +12433,7 @@ src/test/java/forge/GuiMigrateLocalMWSSetPicturesHQTest.java svneol=native#text/
 src/test/java/forge/GuiMultipleBlockers4Test.java svneol=native#text/plain
 src/test/java/forge/GuiProgressBarWindowTest.java svneol=native#text/plain
 src/test/java/forge/PanelTest.java svneol=native#text/plain
+src/test/java/forge/ReadDraftRankingsTest.java -text
 src/test/java/forge/RunTest.java svneol=native#text/plain
 src/test/java/forge/TinyTest.java svneol=native#text/plain
 src/test/java/forge/card/mana/ManaPartTest.java svneol=native#text/plain

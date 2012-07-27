@@ -1,0 +1,470 @@
+//Rank,Name,Rarity,Set
+#1,Garruk Primal Hunter,M,M13
+#2,Ajani Caller of the Pride,M,M13
+#3,Thundermaw Hellkite,M,M13
+#4,Akromas Memorial,M,M13
+#5,Sublime Archangel,M,M13
+#6,Jace Memory Adept,M,M13
+#7,Liliana of the Dark Realms,M,M13
+#8,Chandra the Firebrand,M,M13
+#9,Nicol Bolas Planeswalker,M,M13
+#10,Elderscale Wurm,M,M13
+#11,Primordial Hydra,M,M13
+#12,Vampire Nocturnus,M,M13
+#13,Serra Avatar,M,M13
+#14,Nefarox Overlord of Grixis,R,M13
+#15,Thragtusk,R,M13
+#16,Odric Master Tactician,R,M13
+#17,Captain of the Watch,R,M13
+#18,Talrand Sky Summoner,R,M13
+#19,Krenko Mob Boss,R,M13
+#20,Yeva Natures Herald,R,M13
+#21,Silklash Spider,R,M13
+#22,Staff of Nin,R,M13
+#23,Xathrid Gorgon,R,M13
+#24,Vampire Nighthawk,U,M13
+#25,Serra Avenger,R,M13
+#26,Sphinx of Uthuun,R,M13
+#27,Mutilate,R,M13
+#28,Firewing Phoenix,R,M13
+#29,Rancor,U,M13
+#30,Oblivion Ring,U,M13
+#31,Serra Angel,U,M13
+#32,Intrepid Hero,R,M13
+#33,Disciple of Bolas,R,M13
+#34,Magmaquake,R,M13
+#35,Shimian Specter,R,M13
+#36,Stuffy Doll,R,M13
+#37,Rhox Faithmender,R,M13
+#38,Clone,R,M13
+#39,Predatory Rampage,R,M13
+#40,Talrands Invocation,U,M13
+#41,Sands of Delirium,R,M13
+#42,Slumbering Dragon,R,M13
+#43,Cathedral of War,R,M13
+#44,Flames of the Firebrand,U,M13
+#45,Quirion Dryad,R,M13
+#46,Volcanic Geyser,U,M13
+#47,Knight of Glory,U,M13
+#48,Stormtide Leviathan,R,M13
+#49,Knight of Infamy,U,M13
+#50,Void Stalker,R,M13
+#51,Planar Cleansing,R,M13
+#52,Garruks Packleader,U,M13
+#53,Gilded Lotus,R,M13
+#54,Acidic Slime,U,M13
+#55,Switcheroo,U,M13
+#56,Hamletback Goliath,R,M13
+#57,Trading Post,R,M13
+#58,Public Execution,U,M13
+#59,Arctic Aven,U,M13
+#60,Roaring Primadox,U,M13
+#61,Arms Dealer,U,M13
+#62,Sleep,U,M13
+#63,Murder,C,M13
+#64,Elvish Archdruid,R,M13
+#65,Master of the Pearl Trident,R,M13
+#66,Crusader of Odric,U,M13
+#67,Healer of the Pride,U,M13
+#68,Duskmantle Prowler,U,M13
+#69,Searing Spear,C,M13
+#70,Pacifism,C,M13
+#71,Rise from the Grave,U,M13
+#72,Fog Bank,U,M13
+#73,Mwonvuli Beast Tracker,U,M13
+#74,Jaces Phantasm,U,M13
+#75,Augur of Bolas,U,M13
+#76,Flinthoof Boar,U,M13
+#77,Furnace Whelp,U,M13
+#78,Harbor Bandit,U,M13
+#79,Prized Elephant,U,M13
+#80,Hellion Crucible,R,M13
+#81,Aven Squire,C,M13
+#82,Attended Knight,C,M13
+#83,Cower in Fear,U,M13
+#84,Drowned Catacomb,R,M13
+#85,Sentinel Spider,C,M13
+#86,Mindclaw Shaman,U,M13
+#87,Dragonskull Summit,R,M13
+#88,Duskdale Wurm,U,M13
+#89,Sunpetal Grove,R,M13
+#90,Glacial Fortress,R,M13
+#91,Faiths Reward,R,M13
+#92,Rootbound Crag,R,M13
+#93,War Priest of Thune,U,M13
+#94,Bloodhunter Bat,C,M13
+#95,Angelic Benediction,U,M13
+#96,Omniscience,M,M13
+#97,Crimson Muckwader,U,M13
+#98,Diabolic Revelation,R,M13
+#99,Divine Verdict,C,M13
+#100,Worldfire,M,M13
+#101,Ring of Kalonia,U,M13
+#102,Chronomaton,U,M13
+#103,Fervor,R,M13
+#104,Phylactery Lich,R,M13
+#105,Mark of Mutiny,U,M13
+#106,Deadly Recluse,C,M13
+#107,Ring of Xathrid,U,M13
+#108,Primal Clay,U,M13
+#109,Servant of Nefarox,C,M13
+#110,Evolving Wilds,C,M13
+#111,Welkin Tern,C,M13
+#112,Essence Drain,C,M13
+#113,Elvish Visionary,C,M13
+#114,Prey Upon,C,M13
+#115,Primal Huntbeast,C,M13
+#116,Griffin Protector,C,M13
+#117,Faerie Invaders,C,M13
+#118,Arbor Elf,C,M13
+#119,Wind Drake,C,M13
+#120,Captains Call,C,M13
+#121,Ajanis Sunstriker,C,M13
+#122,Timberpack Wolf,C,M13
+#123,Duty Bound Dead,C,M13
+#124,Giant Scorpion,C,M13
+#125,Turn to Slag,C,M13
+#126,Ring of Thune,U,M13
+#127,Centaur Courser,C,M13
+#128,Bladetusk Boar,C,M13
+#129,Fungal Sprouting,U,M13
+#130,Ring of Evos Isle,U,M13
+#131,Rewind,U,M13
+#132,Encrust,C,M13
+#133,Yevas Forcemage,C,M13
+#134,Krenkos Command,C,M13
+#135,Archaeomancer,C,M13
+#136,Guardians of Akrasa,C,M13
+#137,Essence Scatter,C,M13
+#138,Ring of Valkas,U,M13
+#139,Unsummon,C,M13
+#140,Ravenous Rats,C,M13
+#141,Tormented Soul,C,M13
+#142,Farseek,C,M13
+#143,Spiked Baloth,C,M13
+#144,Lilianas Shade,C,M13
+#145,Scroll Thief,C,M13
+#146,Titanic Growth,C,M13
+#147,Mogg Flunkies,C,M13
+#148,Spelltwine,R,M13
+#149,Kitesail,U,M13
+#150,Goblin Arsonist,C,M13
+#151,Divination,C,M13
+#152,Sign in Blood,C,M13
+#153,Battleflight Eagle,C,M13
+#154,Veilborn Ghoul,U,M13
+#155,Redirect,R,M13
+#156,War Falcon,C,M13
+#157,Torch Fiend,U,M13
+#158,Mark of the Vampire,C,M13
+#159,Courtly Provocateur,U,M13
+#160,Mind Sculpt,C,M13
+#161,Chandras Fury,C,M13
+#162,Vedalken Entrancer,C,M13
+#163,Crippling Blight,C,M13
+#164,Rummaging Goblin,C,M13
+#165,Reverberate,R,M13
+#166,Elixir of Immortality,U,M13
+#167,Bond Beetle,C,M13
+#168,Silvercoat Lion,C,M13
+#169,Walking Corpse,C,M13
+#170,Watercourser,C,M13
+#171,Dragon Hatchling,C,M13
+#172,Reckless Brute,C,M13
+#173,Tricks of the Trade,C,M13
+#174,Vile Rebirth,C,M13
+#175,Vastwood Gorger,C,M13
+#176,Warclamp Mastiff,C,M13
+#177,Dark Favor,C,M13
+#178,Plummet,C,M13
+#179,Bloodthrone Vampire,C,M13
+#180,Goblin Battle Jester,C,M13
+#181,Mind Rot,C,M13
+#182,Canyon Minotaur,C,M13
+#183,Downpour,C,M13
+#184,Kraken Hatchling,C,M13
+#185,Fire Elemental,C,M13
+#186,Safe Passage,C,M13
+#187,Show of Valor,C,M13
+#188,Jayemdae Tome,U,M13
+#189,Duress,C,M13
+#190,Negate,C,M13
+#191,Rangers Path,C,M13
+#192,Naturalize,C,M13
+#193,Cleaver Riot,U,M13
+#194,Volcanic Strength,C,M13
+#195,Divine Favor,C,M13
+#196,Disentomb,C,M13
+#197,Pillarfield Ox,C,M13
+#198,Zombie Goliath,C,M13
+#199,Blood Reckoning,U,M13
+#200,Glorious Charge,C,M13
+#201,Guardian Lions,C,M13
+#202,Fog,C,M13
+#203,Wild Guess,C,M13
+#204,Harbor Serpent,C,M13
+#205,Kindled Fury,C,M13
+#206,Trumpet Blast,C,M13
+#207,Phyrexian Hulk,U,M13
+#208,Wall of Fire,C,M13
+#209,Gem of Becoming,U,M13
+#210,Index,C,M13
+#211,Revive,U,M13
+#212,Serpents Gift,C,M13
+#213,Merfolk of the Pearl Trident,C,M13
+#214,Rain of Blades,U,M13
+#215,Smelt,C,M13
+#216,Erase,C,M13
+#217,Hydrosurge,C,M13
+#218,Craterize,C,M13
+#219,Angels Mercy,C,M13
+#220,Bountiful Harvest,C,M13
+#221,Boundless Realms,R,M13
+#222,Ground Seal,R,M13
+#223,Touch of the Eternal,R,M13
+#224,Wits End,R,M13
+#225,Reliquary Tower,U,M13
+#226,Tormods Crypt,U,M13
+#227,Door to Nothingness,R,M13
+#228,Battle of Wits,R,M13
+#229,Clock of Omens,U,M13
+#230,Forest,L,M13
+#231,Swamp,L,M13
+#232,Plains,L,M13
+#233,Mountain,L,M13
+#234,Island,L,M13
+//Rank,Name,Rarity,Set
+#1,Tamiyo the Moon Sage,M,AVR
+#2,Bonfire of the Damned,M,AVR
+#3,Entreat the Angels,M,AVR
+#4,Sigarda Host of Herons,M,AVR
+#5,Gisela Blade of Goldnight,M,AVR
+#6,Avacyn Angel of Hope,M,AVR
+#7,Bruna Light of Alabaster,M,AVR
+#8,Griselbrand,M,AVR
+#9,Craterhoof Behemoth,M,AVR
+#10,Temporal Mastery,M,AVR
+#11,Tibalt the Fiend Blooded,M,AVR
+#12,Misthollow Griffin,M,AVR
+#13,Malignus,M,AVR
+#14,Wolfir Silverheart,R,AVR
+#15,Silverblade Paladin,R,AVR
+#16,Restoration Angel,R,AVR
+#17,Moonsilver Spear,R,AVR
+#18,Zealous Conscripts,R,AVR
+#19,Hound of Griselbrand,R,AVR
+#20,Revenge of the Hunted,R,AVR
+#21,Herald of War,R,AVR
+#22,Champion of Lambholt,R,AVR
+#23,Angel of Jubilation,R,AVR
+#24,Terminus,R,AVR
+#25,Harvester of Souls,R,AVR
+#26,Soul of the Harvest,R,AVR
+#27,Ulvenwald Tracker,R,AVR
+#28,Divine Deflection,R,AVR
+#29,Deadeye Navigator,R,AVR
+#30,Riders of Gavony,R,AVR
+#31,Dark Impostor,R,AVR
+#32,Angel of Glorys Rise,R,AVR
+#33,Cathars Crusade,R,AVR
+#34,Demonlord of Ashmouth,R,AVR
+#35,Archwing Dragon,R,AVR
+#36,Druids Familiar,U,AVR
+#37,Spirit Away,R,AVR
+#38,Wolfir Avenger,U,AVR
+#39,Lone Revenant,R,AVR
+#40,Thunderous Wrath,U,AVR
+#41,Captain of the Mists,R,AVR
+#42,Blessings of Nature,U,AVR
+#43,Burn at the Stake,R,AVR
+#44,Somberwald Sage,R,AVR
+#45,Vexing Devil,R,AVR
+#46,Demonic Rising,R,AVR
+#47,Tandem Lookout,U,AVR
+#48,Emancipation Angel,U,AVR
+#49,Dread Slaver,R,AVR
+#50,Cavern of Souls,R,AVR
+#51,Nearheath Pilgrim,U,AVR
+#52,Latch Seeker,U,AVR
+#53,Goldnight Commander,U,AVR
+#54,Devastation Tide,R,AVR
+#55,Killing Wave,R,AVR
+#56,Fettergeist,U,AVR
+#57,Into the Void,U,AVR
+#58,Banishing Stroke,U,AVR
+#59,Lightning Mauler,U,AVR
+#60,Goldnight Redeemer,U,AVR
+#61,Barter in Blood,U,AVR
+#62,Howlgeist,U,AVR
+#63,Falkenrath Exterminator,U,AVR
+#64,Mist Raven,C,AVR
+#65,Blood Artist,U,AVR
+#66,Kessig Malcontents,U,AVR
+#67,Havengul Vampire,U,AVR
+#68,Vanishment,U,AVR
+#69,Seraph of Dawn,C,AVR
+#70,Infinite Reflection,R,AVR
+#71,Stonewright,U,AVR
+#72,Homicidal Seclusion,U,AVR
+#73,Tyrant of Discord,R,AVR
+#74,Demonic Taskmaster,U,AVR
+#75,Gloomwidow,U,AVR
+#76,Trusted Forcemage,C,AVR
+#77,Slayers Stronghold,R,AVR
+#78,Nephalia Smuggler,U,AVR
+#79,Archangel,U,AVR
+#80,Pillar of Flame,C,AVR
+#81,Death Wind,C,AVR
+#82,Borderland Ranger,C,AVR
+#83,Human Frailty,U,AVR
+#84,Defy Death,U,AVR
+#85,Gryff Vanguard,C,AVR
+#86,Lightning Prowess,U,AVR
+#87,Evernight Shade,U,AVR
+#88,Hanweir Lancer,C,AVR
+#89,Gloom Surgeon,R,AVR
+#90,Angelic Armaments,U,AVR
+#91,Wild Defiance,R,AVR
+#92,Angels Tomb,U,AVR
+#93,Maalfeld Twins,U,AVR
+#94,Stern Mentor,U,AVR
+#95,Holy Justiciar,U,AVR
+#96,Wandering Wolf,C,AVR
+#97,Timberland Guide,C,AVR
+#98,Vorstclaw,U,AVR
+#99,Wingcrafter,C,AVR
+#100,Kruin Striker,C,AVR
+#101,Righteous Blow,C,AVR
+#102,Nightshade Peddler,C,AVR
+#103,Riot Ringleader,C,AVR
+#104,Conjurers Closet,R,AVR
+#105,Yew Spirit,U,AVR
+#106,Scrapskin Drake,C,AVR
+#107,Marrow Bats,U,AVR
+#108,Triumph of Ferocity,U,AVR
+#109,Thunderbolt,C,AVR
+#110,Fervent Cathar,C,AVR
+#111,Vigilante Justice,U,AVR
+#112,Thatcher Revolt,C,AVR
+#113,Reforge the Soul,R,AVR
+#114,Moorland Inquisitor,C,AVR
+#115,Gallows at Willow Hill,R,AVR
+#116,Desolate Lighthouse,R,AVR
+#117,Bone Splinters,C,AVR
+#118,Alchemists Refuge,R,AVR
+#119,Vessel of Endless Rest,U,AVR
+#120,Gang of Devils,U,AVR
+#121,Heirs of Stromkirk,C,AVR
+#122,Elgaud Shieldmate,C,AVR
+#123,Tormentors Trident,U,AVR
+#124,Peel from Reality,C,AVR
+#125,Treacherous Pit Dweller,R,AVR
+#126,Butcher Ghoul,C,AVR
+#127,Undead Executioner,C,AVR
+#128,Nettle Swine,C,AVR
+#129,Descendants Path,R,AVR
+#130,Moonlight Geist,C,AVR
+#131,Joint Assault,C,AVR
+#132,Amass the Components,C,AVR
+#133,Mad Prophet,C,AVR
+#134,Stolen Goods,R,AVR
+#135,Thraben Valiant,C,AVR
+#136,Abundant Growth,C,AVR
+#137,Lunar Mystic,R,AVR
+#138,Crippling Chill,C,AVR
+#139,Druids Repository,R,AVR
+#140,Corpse Traders,U,AVR
+#141,Primal Surge,M,AVR
+#142,Pathbreaker Wurm,C,AVR
+#143,Geist Trappers,C,AVR
+#144,Defang,C,AVR
+#145,Alchemists Apprentice,C,AVR
+#146,Devout Chaplain,U,AVR
+#147,Searchlight Geist,C,AVR
+#148,Farbog Explorer,C,AVR
+#149,Voice of the Provinces,C,AVR
+#150,Dual Casting,R,AVR
+#151,Cloudshift,C,AVR
+#152,Galvanic Alchemist,C,AVR
+#153,Eaten by Spiders,U,AVR
+#154,Soulcage Fiend,C,AVR
+#155,Driver of the Dead,C,AVR
+#156,Cathedral Sanctifier,C,AVR
+#157,Exquisite Blood,R,AVR
+#158,Angelic Wall,C,AVR
+#159,Zealous Strike,C,AVR
+#160,Spectral Prison,C,AVR
+#161,Midvast Protector,C,AVR
+#162,Bladed Bracers,C,AVR
+#163,Bloodflow Connoisseur,C,AVR
+#164,Somberwald Vigilante,C,AVR
+#165,Flowering Lumberknot,C,AVR
+#166,Ghostly Flicker,C,AVR
+#167,Wildwood Geist,C,AVR
+#168,Haunted Guardian,U,AVR
+#169,Favorable Winds,U,AVR
+#170,Spectral Gateguards,C,AVR
+#171,Crypt Creeper,C,AVR
+#172,Grave Exchange,C,AVR
+#173,Ghoulflesh,C,AVR
+#174,Scalding Devil,C,AVR
+#175,Geist Snatch,C,AVR
+#176,Guise of Fire,C,AVR
+#177,Call to Serve,C,AVR
+#178,Terrifying Presence,C,AVR
+#179,Scroll of Avacyn,C,AVR
+#180,Fleeting Distraction,C,AVR
+#181,Diregraf Escort,C,AVR
+#182,Renegade Demon,C,AVR
+#183,Midnight Duelist,C,AVR
+#184,Necrobite,C,AVR
+#185,Sheltering Word,C,AVR
+#186,Snare the Skies,C,AVR
+#187,Mass Appeal,U,AVR
+#188,Narstad Scrapper,C,AVR
+#189,Natural End,C,AVR
+#190,Essence Harvest,C,AVR
+#191,Predators Gambit,C,AVR
+#192,Mental Agony,C,AVR
+#193,Lair Delve,C,AVR
+#194,Uncanny Speed,C,AVR
+#195,Havengul Skaab,C,AVR
+#196,Rotcrown Ghoul,C,AVR
+#197,Ghostform,C,AVR
+#198,Polluted Dead,C,AVR
+#199,Aggravate,U,AVR
+#200,Unhallowed Pact,C,AVR
+#201,Dangerous Wager,C,AVR
+#202,Cursebreak,C,AVR
+#203,Leap of Faith,C,AVR
+#204,Hunted Ghoul,C,AVR
+#205,Commanders Authority,U,AVR
+#206,Appetite for Brains,U,AVR
+#207,Raging Poltergeist,C,AVR
+#208,Dreadwaters,C,AVR
+#209,Demolish,C,AVR
+#210,Vanguards Shield,C,AVR
+#211,Banners Raised,C,AVR
+#212,Descent into Madness,M,AVR
+#213,Seraph Sanctuary,C,AVR
+#214,Rush of Blood,U,AVR
+#215,Scroll of Griselbrand,C,AVR
+#216,Ghostly Touch,U,AVR
+#217,Outwit,C,AVR
+#218,Angels Mercy,C,AVR
+#219,Grounded,C,AVR
+#220,Battle Hymn,C,AVR
+#221,Malicious Intent,C,AVR
+#222,Triumph of Cruelty,U,AVR
+#223,Rain of Thorns,U,AVR
+#224,Otherworld Atlas,R,AVR
+#225,Builders Blessing,U,AVR
+#226,Bower Passage,U,AVR
+#227,Rite of Ruin,R,AVR
+#228,Second Guess,U,AVR
+#229,Arcane Melee,R,AVR
+#230,Swamp,L,AVR
+#231,Forest,L,AVR
+#232,Island,L,AVR
+#233,Mountain,L,AVR
+#234,Plains,L,AVR
