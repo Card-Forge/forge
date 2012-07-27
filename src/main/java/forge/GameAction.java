@@ -141,7 +141,8 @@ public class GameAction {
         Card lastKnownInfo = null;
 
         // Don't copy Tokens, copy only cards leaving the battlefield
-        if (c.isToken() || suppress || zoneTo.is(ZoneType.Battlefield) || !zoneFrom.is(ZoneType.Battlefield)) {
+        if (c.isToken() || suppress || zoneTo.is(ZoneType.Battlefield) || zoneFrom == null
+                || !zoneFrom.is(ZoneType.Battlefield)) {
             lastKnownInfo = c;
             copied = c;
         } else {
@@ -215,11 +216,15 @@ public class GameAction {
         if (suppress) {
             AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
+        
+        if (zoneFrom == null) {
+            return copied;
+        }
 
         // remove all counters from the card if destination is not the
         // battlefield
         // UNLESS we're dealing with Skullbriar, the Walking Grave
-        if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield)) {
+        if (zoneFrom.is(ZoneType.Battlefield)) {
             copied.setSuspendCast(false);
             // remove all counters from the card if destination is not the battlefield
             // UNLESS we're dealing with Skullbriar, the Walking Grave
@@ -267,6 +272,11 @@ public class GameAction {
             // unenchant creature if moving aura
             if (copied.isEnchanting()) {
                 copied.unEnchantEntity(copied.getEnchanting());
+            }
+        } else if (zoneFrom.is(ZoneType.Exile) && zoneTo.is(ZoneType.Graveyard)) {
+            // Pull from Eternity used on a suspended card
+            if (!c.getName().equals("Skullbriar, the Walking Grave")) {
+                copied.clearCounters();
             }
         } else if (zoneTo.is(ZoneType.Battlefield)) {
             copied.setTimestamp(AllZone.getNextTimestamp());
