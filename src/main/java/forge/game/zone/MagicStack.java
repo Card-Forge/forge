@@ -1171,61 +1171,68 @@ public class MagicStack extends MyObservable {
      * @return a boolean.
      */
     public final boolean hasFizzled(final SpellAbility sa, final Card source) {
-        // By default this has not fizzled
+		// Can't fizzle unless there are some targets
         boolean fizzle = false;
-
-        boolean firstTarget = true;
-
-        SpellAbility fizzSA = sa;
-
-        while (true) {
-            final Target tgt = fizzSA.getTarget();
-            if ((tgt != null) && (tgt.getMinTargets(source, fizzSA) == 0) && (tgt.getNumTargeted() == 0)) {
-                // Don't assume fizzled for minTargets == 0 and nothing is
-                // targeted
-            } else if (firstTarget
-                    && ((tgt != null) || (fizzSA.getTargetCard() != null) || (fizzSA.getTargetPlayer() != null))) {
-                // If there is at least 1 target, fizzle switches because ALL
-                // targets need to be invalid
-                fizzle = true;
-                firstTarget = false;
+        
+        Target tgt = sa.getTarget();
+        if (tgt != null) {
+            if (tgt.getMinTargets(source, sa) == 0 && tgt.getNumTargeted() == 0) {
+                // Nothing targeted, and nothing needs to be targeted. 
             }
-
-            if (tgt != null) {
+            else {
+                // Some targets were chosen, fizzling for this subability is now possible
+                fizzle = true;
                 // With multi-targets, as long as one target is still legal,
                 // we'll try to go through as much as possible
                 final ArrayList<Object> tgts = tgt.getTargets();
+                final TargetChoices choices = tgt.getTargetChoices();
                 for (final Object o : tgts) {
+                    boolean invalidTarget = false;
                     if (o instanceof Player) {
                         final Player p = (Player) o;
-                        fizzle &= !(p.canBeTargetedBy(fizzSA));
+                        invalidTarget = !(p.canBeTargetedBy(sa));
+                        // TODO Remove target?
+                        if (invalidTarget) {
+                            choices.removeTarget(p);
+                        }
                     }
-                    if (o instanceof Card) {
+                    else if (o instanceof Card) {
                         final Card card = (Card) o;
-                        fizzle &= !(CardFactoryUtil.isTargetStillValid(fizzSA, card));
+                        Card current = AllZoneUtil.getCardState(card);
+                        
+                        invalidTarget = current.getTimestamp() != card.getTimestamp();
+                        
+                        invalidTarget |= !(CardFactoryUtil.isTargetStillValid(sa, card));
+                        
+                        if (invalidTarget) {
+                            choices.removeTarget(card);
+                        }
+                        // Remove targets
                     }
-                    if (o instanceof SpellAbility) {
+                    else if (o instanceof SpellAbility) {
                         final SpellAbility tgtSA = (SpellAbility) o;
-                        fizzle &= !(TargetSelection.matchSpellAbility(fizzSA, tgtSA, tgt));
+                        invalidTarget = !(TargetSelection.matchSpellAbility(sa, tgtSA, tgt));
+                        // TODO Remove target?
+                        if (invalidTarget) {
+                            choices.removeTarget(tgtSA);
+                        }
                     }
-                }
-            } else if (fizzSA.getTargetCard() != null) {
-                // Fizzling will only work for Abilities that use the Target
-                // class,
-                // since the info isn't available otherwise
-                fizzle &= !CardFactoryUtil.isTargetStillValid(fizzSA, fizzSA.getTargetCard());
-            } else if (fizzSA.getTargetPlayer() != null) {
-                fizzle &= !fizzSA.getTargetPlayer().canBeTargetedBy(fizzSA);
-            }
-
-            if (fizzSA.getSubAbility() != null) {
-                fizzSA = fizzSA.getSubAbility();
-            } else {
-                break;
+                    fizzle &= invalidTarget;
+                }              
             }
         }
-
-        return fizzle;
+        else if (sa.getTargetCard() != null) {
+            fizzle = !CardFactoryUtil.isTargetStillValid(sa, sa.getTargetCard());
+        } 
+        else if (sa.getTargetPlayer() != null) {
+            fizzle = !sa.getTargetPlayer().canBeTargetedBy(sa);
+        }
+        
+        if (sa.getSubAbility() == null) {
+            return fizzle;
+        }
+        
+        return hasFizzled(sa.getSubAbility(), source) && fizzle;
     }
 
     /**

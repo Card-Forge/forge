@@ -126,6 +126,63 @@ public class TargetChoices {
 
     /**
      * <p>
+     * removeTarget.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public final boolean removeTarget(final Card card) {
+        // Do I decrement numTargeted for fizzling targets?
+        if (!this.targetCards.contains(card)) {
+            this.targetCards.remove(card);
+            //this.numTargeted--;
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * <p>
+     * removeTarget.
+     * </p>
+     * 
+     * @param pl
+     *            a {@link forge.game.player.Player} object.
+     * @return a boolean.
+     */
+    public final boolean removeTarget(final Player pl) {
+        // Do I decrement numTargeted for fizzling targets?
+        if (!this.targetPlayers.contains(pl)) {
+            this.targetPlayers.remove(pl);
+            //this.numTargeted--;
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * <p>
+     * removeTarget.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    public final boolean removeTarget(final SpellAbility sa) {
+        // Do I decrement numTargeted for fizzling targets?
+        if (!this.targetSAs.contains(sa)) {
+            this.targetSAs.remove(sa);
+            //this.numTargeted--;
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * <p>
      * Getter for the field <code>targetCards</code>.
      * </p>
      * 
