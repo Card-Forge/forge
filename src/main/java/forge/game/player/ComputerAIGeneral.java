@@ -283,7 +283,6 @@ public class ComputerAIGeneral implements Computer {
         Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
     }
 
-    // end of Human's turn
     /**
      * <p>
      * end_of_turn.
@@ -291,7 +290,9 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void endOfTurn() {
-        this.playSpellAbilitiesStackEmpty();
+        //This is only called in the computer turn
+        //this.playSpellAbilitiesStackEmpty();
+        Singletons.getModel().getGameState().getPhaseHandler().passPriority();
     }
 
     /**
