@@ -3,10 +3,10 @@ package forge.game.limited;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+import com.esotericsoftware.minlog.Log;
 
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
@@ -21,7 +21,7 @@ public class ReadDraftRankings {
     /** Constant <code>comment="//"</code>. */
     private static final String COMMENT = "//";
 
-    private Map<String, List<String>> draftRankings;
+    private Map<String, Map<String, Integer>> draftRankings;
 
     /**
      * <p>
@@ -50,9 +50,9 @@ public class ReadDraftRankings {
      *            a {@link java.io.File} object.
      * @return a {@link java.util.Map} object.
      */
-    private Map<String, List<String>> readFile(final File file) {
+    private Map<String, Map<String, Integer>> readFile(final File file) {
         BufferedReader in;
-        final Map<String, List<String>> map = new HashMap<String, List<String>>();
+        final Map<String, Map<String, Integer>> map = new HashMap<String, Map<String, Integer>>();
         try {
 
             in = new BufferedReader(new FileReader(file));
@@ -62,15 +62,20 @@ public class ReadDraftRankings {
             while ((line != null) && (line.trim().length() != 0)) {
                 if (!line.startsWith(ReadDraftRankings.COMMENT)) {
                     final String[] s = line.split(",");
-                    //final String rank = s[0].trim().substring(1);
+                    final String rankStr = s[0].trim().substring(1);
                     final String name = s[1].trim();
-                    //final String rarity = s[2].trim();
+                    // final String rarity = s[2].trim();
                     final String edition = s[3].trim();
 
-                    if (!map.containsKey(edition)) {
-                        map.put(edition, new ArrayList<String>());
+                    try {
+                        final int rank = Integer.parseInt(rankStr);
+                        if (!map.containsKey(edition)) {
+                            map.put(edition, new HashMap<String, Integer>());
+                        }
+                        map.get(edition).put(name, rank);
+                    } catch (NumberFormatException nfe) {
+                        Log.warn("NumberFormatException: " + nfe.getMessage());
                     }
-                    map.get(edition).add(name);
                 }
                 line = in.readLine();
             } // if
@@ -83,14 +88,12 @@ public class ReadDraftRankings {
         return map;
     } // readFile()
 
-    /**
-     * <p>
-     * getDraftRankings.
-     * </p>
-     * 
-     * @return a {@link java.util.Map} object.
-     */
-    public final Map<String, List<String>> getDraftRankings() {
-        return this.draftRankings;
+    public Integer getRanking(String cardName, String edition) {
+        Integer rank = null;
+        if (draftRankings.containsKey(edition)) {
+            String safeName = cardName.replaceAll("[^A-Za-z ]", "");
+            rank = draftRankings.get(edition).get(safeName);
+        }
+        return rank;
     }
 }

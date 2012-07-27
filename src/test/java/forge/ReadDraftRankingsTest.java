@@ -1,13 +1,16 @@
 package forge;
 
+import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 import junit.framework.Assert;
 
 import org.testng.annotations.Test;
 
 import forge.game.limited.ReadDraftRankings;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+import forge.util.FileUtil;
 
 /**
  * Tests for DeckWants.
@@ -23,10 +26,20 @@ public class ReadDraftRankingsTest {
     void test() {
         ReadDraftRankings rdr = new ReadDraftRankings();
         Assert.assertNotNull(rdr);
-        Map<String, List<String>> rankings = rdr.getDraftRankings();
-        Assert.assertNotNull(rankings);
-        Assert.assertEquals("Garruk Primal Hunter", rankings.get("M13").get(0));
-        Assert.assertEquals("Clone", rankings.get("M13").get(37));
-        Assert.assertEquals("Tamiyo the Moon Sage", rankings.get("AVR").get(0));
+
+        List<String> cardLines = FileUtil
+                .readFile(new File(ForgeProps.getFile(NewConstants.CARDSFOLDER) + "/g", "garruk_primal_hunter.txt"));
+        Card c = CardReader.readCard(cardLines);
+        Assert.assertEquals(1, rdr.getRanking(c.getName(), "M13").intValue());
+
+        cardLines = FileUtil
+                .readFile(new File(ForgeProps.getFile(NewConstants.CARDSFOLDER) + "/c", "clone.txt"));
+        c = CardReader.readCard(cardLines);
+        Assert.assertEquals(38, rdr.getRanking(c.getName(), "M13").intValue());
+
+        cardLines = FileUtil
+                .readFile(new File(ForgeProps.getFile(NewConstants.CARDSFOLDER) + "/t", "tamiyo_the_moon_sage.txt"));
+        c = CardReader.readCard(cardLines);
+        Assert.assertEquals(1, rdr.getRanking(c.getName(), "AVR").intValue());
     }
 }
