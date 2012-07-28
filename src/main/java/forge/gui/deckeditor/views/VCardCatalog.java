@@ -102,7 +102,7 @@ public enum VCardCatalog implements IVDoc, ITableContainer {
         pnlStats.setOpaque(false);
         pnlStats.setLayout(new MigLayout("insets 0, gap 5px, ax center, wrap 7"));
 
-        final String constraints = "w 55px!, h 20px!";
+        final String constraints = "w 57px!, h 20px!";
         pnlStats.add(lblTotal, constraints);
         pnlStats.add(lblBlack, constraints);
         pnlStats.add(lblBlue, constraints);
