@@ -273,9 +273,9 @@ public class GameAction {
             if (copied.isEnchanting()) {
                 copied.unEnchantEntity(copied.getEnchanting());
             }
-        } else if (zoneFrom.is(ZoneType.Exile) && zoneTo.is(ZoneType.Graveyard)) {
+        } else if (zoneFrom.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Battlefield)) {
             // Pull from Eternity used on a suspended card
-            if (!c.getName().equals("Skullbriar, the Walking Grave")) {
+            if (!zoneTo.is(ZoneType.Graveyard) || !c.getName().equals("Skullbriar, the Walking Grave")) {
                 copied.clearCounters();
             }
         } else if (zoneTo.is(ZoneType.Battlefield)) {
