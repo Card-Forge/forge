@@ -420,19 +420,21 @@ public class CombatUtil {
             }
         }
 
-        for (final Card attacker : blocker.getMustBlockCards()) {
-            if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
-                boolean canBe = true;
-                if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                    final CardList blockers = combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield)
-                            .getType("Creature");
-                    blockers.remove(blocker);
-                    if (!CombatUtil.canBeBlocked(attacker, blockers)) {
-                        canBe = false;
+        if (blocker.getMustBlockCards() != null) {
+            for (final Card attacker : blocker.getMustBlockCards()) {
+                if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
+                    boolean canBe = true;
+                    if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
+                        final CardList blockers = combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield)
+                                .getType("Creature");
+                        blockers.remove(blocker);
+                        if (!CombatUtil.canBeBlocked(attacker, blockers)) {
+                            canBe = false;
+                        }
                     }
-                }
-                if (canBe) {
-                    return true;
+                    if (canBe) {
+                        return true;
+                    }
                 }
             }
         }
@@ -471,7 +473,8 @@ public class CombatUtil {
         // attacker with lure, the blocker can't block the former
         if (!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
                 && !(attacker.hasKeyword("CARDNAME must be blocked if able.") && combat.getBlockers(attacker).isEmpty())
-                && !blocker.getMustBlockCards().contains(attacker) && CombatUtil.mustBlockAnAttacker(blocker, combat)) {
+                && !(blocker.getMustBlockCards() != null && blocker.getMustBlockCards().contains(attacker))
+                && CombatUtil.mustBlockAnAttacker(blocker, combat)) {
             return false;
         }
 

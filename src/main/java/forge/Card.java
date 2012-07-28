@@ -119,8 +119,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Map<Card, Integer> receivedDamageFromThisTurn = new TreeMap<Card, Integer>();
     private Map<Card, Integer> dealtDamageToThisTurn = new TreeMap<Card, Integer>();
     private final Map<Card, Integer> assignedDamageMap = new TreeMap<Card, Integer>();
-    private CardList blockedThisTurn = new CardList();
-    private CardList blockedByThisTurn = new CardList();
+    private CardList blockedThisTurn = null;
+    private CardList blockedByThisTurn = null;
 
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
@@ -133,7 +133,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean spellCopyingCard = false;
 
     private boolean sirenAttackOrDestroy = false;
-    private final ArrayList<Card> mustBlockCards = new ArrayList<Card>();
+    private ArrayList<Card> mustBlockCards = null;
 
     private boolean canMorph = false;
     private boolean canCounter = true;
@@ -182,7 +182,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int randomPicture = 0;
 
     private int xManaCostPaid = 0;
-
     private int xLifePaid = 0;
 
     private int multiKickerMagnitude = 0;
@@ -946,6 +945,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param attacker the blockedThisTurn to set
      */
     public void addBlockedThisTurn(Card attacker) {
+        if (this.blockedThisTurn == null) {
+            this.blockedThisTurn = new CardList();
+        }
         this.blockedThisTurn.add(attacker);
     }
 
@@ -955,7 +957,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      */
     public void clearBlockedThisTurn() {
-        this.blockedThisTurn.clear();
+        this.blockedThisTurn = null;
     }
 
     /**
@@ -969,6 +971,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param blocker the blockedByThisTurn to set
      */
     public void addBlockedByThisTurn(Card blocker) {
+        if (this.blockedByThisTurn == null) {
+            this.blockedByThisTurn = new CardList();
+        }
         this.blockedByThisTurn.add(blocker);
     }
 
@@ -978,7 +983,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      */
     public void clearBlockedByThisTurn() {
-        this.blockedByThisTurn.clear();
+        this.blockedByThisTurn = null;
     }
 
     /**
@@ -1030,6 +1035,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @since 1.1.6
      */
     public final void addMustBlockCard(final Card c) {
+        if (mustBlockCards == null) {
+            mustBlockCards = new ArrayList<Card>();
+        }
         this.mustBlockCards.add(c);
     }
 
@@ -1050,7 +1058,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @since 1.1.6
      */
     public final void clearMustBlockCards() {
-        this.mustBlockCards.clear();
+        this.mustBlockCards = null;
     }
 
     /**
@@ -7114,7 +7122,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Card) {
                     rememberedcard = (Card) o;
-                    if (!this.getBlockedThisTurn().contains(rememberedcard)) {
+                    if (this.getBlockedThisTurn() == null || !this.getBlockedThisTurn().contains(rememberedcard)) {
                         return false;
                     }
                 }
@@ -7124,7 +7132,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Card) {
                     rememberedcard = (Card) o;
-                    if (!this.getBlockedByThisTurn().contains(rememberedcard)) {
+                    if (this.getBlockedByThisTurn() == null || !this.getBlockedByThisTurn().contains(rememberedcard)) {
                         return false;
                     }
                 }

@@ -461,7 +461,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         // must block
-        if (!card.getMustBlockCards().isEmpty()) {
+        if (card.getMustBlockCards() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
