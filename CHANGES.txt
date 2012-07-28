@@ -174,6 +174,16 @@ Fixes/Features:
 - fix for combo cards in LimitedDeck
 - Fixed Quagmire.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added another null check in changeZone.
+- Cleanup.
+- Fixed Convoking colored mana.
+- Fixed and cleaned the general AI inputs.
+- Framework for reading draft rankings. Currently unused.
+- Changes to reading in draft rankings.
+- Added two to the width for the Card Count labels located in VCardCatalog as the Total Card Count number was truncated for several of the skins that had a larger/bolder font.
+- Fixed Hunter Sliver.
+- Fixed Ghitu Fire-Eater, Oboro Envoy and Rootwater Diver
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
