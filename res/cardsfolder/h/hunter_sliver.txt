@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Provoke | AddTrigger$ TrigHunt | AddSVar$ HunterSliverTrigUntap & HunterSliverTrigSelectPrey | Description$ All Sliver creatures have provoke. (When a Sliver attacks, its controller may have target creature defending player controls untap and block it if able.)
 SVar:TrigHunt:Mode$ Attacks | ValidCard$ Card.Self | Execute$ HunterSliverTrigSelectPrey | TriggerZones$ Battlefield | OptionalDecider$ You | Secondary$ True | TriggerDescription$ When this attacks, you may have target creature defending player controls untap and block it if able.
-SVar:HunterSliverTrigSelectPrey:AB$ MustBlock | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to provoke | SubAbility$ HunterSliverTrigUntap
+SVar:HunterSliverTrigSelectPrey:AB$ MustBlock | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature to provoke | SubAbility$ HunterSliverTrigUntap
 SVar:HunterSliverTrigUntap:DB$ Untap | Defined$ Targeted
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
