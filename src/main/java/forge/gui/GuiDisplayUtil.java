@@ -641,7 +641,7 @@ public final class GuiDisplayUtil {
 
     /**
      * <p>
-     * devModeTutor.
+     * devModeTutorAnyCard.
      * </p>
      * 
      * @since 1.2.7
@@ -659,6 +659,30 @@ public final class GuiDisplayUtil {
         if (c.show()) {
             CardPrinted cp = CardDb.instance().getCard(c.getSelectedValue());
             Card forgeCard = cp.toForgeCard(AllZone.getHumanPlayer());
+            Singletons.getModel().getGameAction().moveToHand(forgeCard);
+        }
+    }
+
+    /**
+     * <p>
+     * devModeGiveAnyCard. (any card to AI hand)
+     * </p>
+     * 
+     * @since 1.2.7
+     */
+    public static void devModeGiveAnyCard() {
+        final Iterable<CardPrinted> uniqueCards = CardDb.instance().getAllUniqueCards();
+        final List<String> cards = new ArrayList<String>();
+        for (final CardPrinted c : uniqueCards) {
+            cards.add(c.getName());
+        }
+        Collections.sort(cards);
+
+        // use standard forge's list selection dialog
+        final ListChooser<String> c = new ListChooser<String>("Name the card", 0, 1, cards);
+        if (c.show()) {
+            CardPrinted cp = CardDb.instance().getCard(c.getSelectedValue());
+            Card forgeCard = cp.toForgeCard(AllZone.getComputerPlayer());
             Singletons.getModel().getGameAction().moveToHand(forgeCard);
         }
     }

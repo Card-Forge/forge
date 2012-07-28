@@ -56,6 +56,10 @@ public enum CDev implements ICDoc {
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeAddAnyCard(); } };
 
+    private final MouseListener madGiveAnyCard = new MouseAdapter() { @Override
+        public void mousePressed(final MouseEvent e) {
+            GuiDisplayUtil.devModeGiveAnyCard(); } };
+
     private final MouseListener madCounter = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeAddCounter(); } };
@@ -97,6 +101,7 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblSetupGame().addMouseListener(madSetup);
         VDev.SINGLETON_INSTANCE.getLblTutor().addMouseListener(madTutor);
         VDev.SINGLETON_INSTANCE.getAnyCard().addMouseListener(madAddAnyCard);
+        VDev.SINGLETON_INSTANCE.getLblGiveCard().addMouseListener(madGiveAnyCard);
         VDev.SINGLETON_INSTANCE.getLblCounterPermanent().addMouseListener(madCounter);
         VDev.SINGLETON_INSTANCE.getLblTapPermanent().addMouseListener(madTap);
         VDev.SINGLETON_INSTANCE.getLblUntapPermanent().addMouseListener(madUntap);

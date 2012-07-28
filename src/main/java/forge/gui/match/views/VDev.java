@@ -74,6 +74,7 @@ public enum VDev implements IVDoc {
     private final DevLabel lblUntapPermanent = new DevLabel("Untap Permanent");
     private final DevLabel lblSetLife = new DevLabel("Set Player Life");
     private final DevLabel lblAddCard = new DevLabel("Add any card");
+    private final DevLabel lblGiveCard = new DevLabel("Give any card to AI");
     private final DevLabel lblBreakpoint = new DevLabel("Trigger breakpoint");
 
     //========= Constructor
@@ -85,6 +86,7 @@ public enum VDev implements IVDoc {
         devLBLs.add(lblSetupGame);
         devLBLs.add(lblTutor);
         devLBLs.add(lblAddCard);
+        devLBLs.add(lblGiveCard);
         devLBLs.add(lblCounterPermanent);
         devLBLs.add(lblTapPermanent);
         devLBLs.add(lblUntapPermanent);
@@ -103,6 +105,7 @@ public enum VDev implements IVDoc {
         viewport.add(this.lblSetupGame, constraints);
         viewport.add(this.lblTutor, constraints);
         viewport.add(this.lblAddCard, constraints);
+        viewport.add(this.lblGiveCard, constraints);
         viewport.add(this.lblCounterPermanent, constraints);
         viewport.add(this.lblTapPermanent, constraints);
         viewport.add(this.lblUntapPermanent, constraints);
@@ -186,6 +189,11 @@ public enum VDev implements IVDoc {
     /** @return {@link forge.gui.match.views.VDev.DevLabel} */
     public DevLabel getAnyCard() {
         return this.lblAddCard;
+    }
+
+    /** @return {@link forge.gui.match.views.VDev.DevLabel} */
+    public DevLabel getLblGiveCard() {
+        return this.lblGiveCard;
     }
 
     /** @return {@link forge.gui.match.views.VDev.DevLabel} */
