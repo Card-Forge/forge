@@ -115,7 +115,7 @@ public class PhaseUtil {
         Singletons.getModel().getGameState().getUntap().executeAt();
 
         // otherwise land seems to stay tapped when it is really untapped
-        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
+        //AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
 
         Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
     }

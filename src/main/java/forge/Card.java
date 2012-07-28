@@ -3802,7 +3802,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setOwner(final Player player) {
         this.owner = player;
-        this.updateObservers();
+        //this.updateObservers();
     }
 
     /**
@@ -5806,7 +5806,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setUniqueNumber(final int n) {
         this.uniqueNumber = n;
-        this.updateObservers();
+        //this.updateObservers();
     }
 
     /**

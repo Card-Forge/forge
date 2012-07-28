@@ -195,7 +195,7 @@ public class InputPayManaCostUtil {
 
         manaCost = AllZone.getHumanPlayer().getManaPool().payManaFromAbility(sa, manaCost, chosen);
 
-        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
+        //AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
         // DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
         return manaCost;
 

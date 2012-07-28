@@ -562,16 +562,11 @@ public final class GuiDisplayUtil {
 
         Singletons.getModel().getGameAction().checkStateEffects();
         Singletons.getModel().getGameState().getPhaseHandler().updateObservers();
-        AllZone.getHumanPlayer().getZone(ZoneType.Exile).updateObservers();
-        AllZone.getComputerPlayer().getZone(ZoneType.Exile).updateObservers();
+        AllZone.getHumanPlayer().updateObservers();
         AllZone.getHumanPlayer().getZone(ZoneType.Hand).updateObservers();
-        AllZone.getComputerPlayer().getZone(ZoneType.Hand).updateObservers();
-        AllZone.getHumanPlayer().getZone(ZoneType.Graveyard).updateObservers();
-        AllZone.getComputerPlayer().getZone(ZoneType.Graveyard).updateObservers();
         AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
+        AllZone.getComputerPlayer().updateObservers();
         AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).updateObservers();
-        AllZone.getHumanPlayer().getZone(ZoneType.Library).updateObservers();
-        AllZone.getComputerPlayer().getZone(ZoneType.Library).updateObservers();
     }
 
     /**
