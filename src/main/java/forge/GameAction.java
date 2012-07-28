@@ -278,6 +278,9 @@ public class GameAction {
             if (!zoneTo.is(ZoneType.Graveyard) || !c.getName().equals("Skullbriar, the Walking Grave")) {
                 copied.clearCounters();
             }
+            if (copied.isFaceDown()) {
+                copied.turnFaceUp();
+            }
         } else if (zoneTo.is(ZoneType.Battlefield)) {
             copied.setTimestamp(AllZone.getNextTimestamp());
             for (String s : copied.getKeyword()) {
