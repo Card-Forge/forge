@@ -310,7 +310,7 @@ public class TriggerHandler {
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             String type = (String) runParams.get("Destination");
             Card card = (Card) runParams.get("Card");
-            if ((type.equals("Hand") || type.equals("Library")) && !allCards.contains(card)) {
+            if (!type.equals("Battlefield") && !allCards.contains(card)) {
                 allCards.add(card);
             }
         }
