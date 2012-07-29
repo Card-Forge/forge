@@ -35,11 +35,6 @@ import java.util.zip.ZipFile;
 
 import javax.swing.SwingUtilities;
 
-import net.slightlymagic.braids.FindNonDirectoriesSkipDotDirectoriesGenerator;
-import net.slightlymagic.braids.GeneratorFunctions;
-
-import com.google.code.jyield.Generator;
-import com.google.code.jyield.YieldUtils;
 
 import forge.card.CardManaCost;
 import forge.card.CardRules;
@@ -119,7 +114,6 @@ public class CardReader implements Runnable {
                                                                 // PM
     UNKNOWN_NUMBER_OF_FILES_REMAINING;
 
-    private transient Iterable<File> findNonDirsIterable;
 
     // 8/18/11 10:56 PM
 
@@ -223,27 +217,6 @@ public class CardReader implements Runnable {
     } // CardReader()
 
     /**
-     * This finalizer helps assure there is no memory or thread leak with
-     * findNonDirsIterable, which was created with YieldUtils.toIterable.
-     * 
-     * @throws Throwable
-     *             indirectly
-     */
-    @Override
-    protected final void finalize() throws Throwable {
-        try {
-            if (this.findNonDirsIterable != null) {
-                for (@SuppressWarnings("unused")
-                final// Do nothing; just exercising the Iterable.
-                File ignored : this.findNonDirsIterable) {
-                }
-            }
-        } finally {
-            super.finalize();
-        }
-    }
-
-    /**
      * Reads the rest of ALL the cards into memory. This is not lazy.
      */
     @Override
@@ -269,11 +242,11 @@ public class CardReader implements Runnable {
         // Iterate through txt files or zip archive.
         // Report relevant numbers to progress monitor model.
         if (this.zip == null) {
+            List<File> allFiles = new ArrayList<File>();
             if (this.estimatedFilesRemaining == CardReader.UNKNOWN_NUMBER_OF_FILES_REMAINING) {
-                final Generator<File> findNonDirsGen = new FindNonDirectoriesSkipDotDirectoriesGenerator(
-                        this.cardsfolder);
-                this.estimatedFilesRemaining = GeneratorFunctions.estimateSize(findNonDirsGen);
-                this.findNonDirsIterable = YieldUtils.toIterable(findNonDirsGen);
+                fillFilesArray(allFiles, this.cardsfolder);
+                this.estimatedFilesRemaining = allFiles.size();
+
             }
 
             if (barProgress != null) {
@@ -286,7 +259,7 @@ public class CardReader implements Runnable {
                 });
             }
 
-            for (final File cardTxtFile : this.findNonDirsIterable) {
+            for (final File cardTxtFile : allFiles) {
                 if (!cardTxtFile.getName().endsWith(CardReader.CARD_FILE_DOT_EXTENSION)) {
                     barProgress.increment();
                     continue;
@@ -325,6 +298,26 @@ public class CardReader implements Runnable {
 
         return result;
     } // loadCardsUntilYouFind(String)
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param allFiles
+     * @param cardsfolder2
+     */
+    private void fillFilesArray(List<File> allFiles, File startDir) {
+        String[] list = startDir.list();
+            for (String filename : list) {
+                File entry = new File(startDir, filename);
+
+                if (!entry.isDirectory()) {
+                    allFiles.add(entry);
+                    continue;
+                }
+                if (filename.startsWith(".")) continue;
+                
+                fillFilesArray(allFiles, entry);
+            }
+    }
 
     /**
      * <p>

@@ -24,10 +24,9 @@ import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-import net.slightlymagic.braids.GeneratorFunctions;
-
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
+import com.google.code.jyield.Yieldable;
 
 import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
@@ -106,8 +105,30 @@ public class NameChanger {
             };
         };
 
-        return GeneratorFunctions.transformGenerator(transform, inputGenerator);
+        return transformGenerator(transform, inputGenerator);
     }
+    
+    public static <T> Generator<T> transformGenerator(final Lambda1<T, T> transform, final Generator<T> inputGenerator)
+    {
+        Generator<T> result = new Generator<T>() {
+
+            @Override
+            public void generate(final Yieldable<T> outputYield) {
+
+                Yieldable<T> inputYield = new Yieldable<T>() {
+                    @Override
+                    public void yield(final T input) {
+                        outputYield.yield(transform.apply(input));
+                    }
+                };
+
+                inputGenerator.generate(inputYield);
+            }
+
+        };
+
+        return result;
+    }    
 
     // changes card name, getText(), and all SpellAbility getStackDescription()
     // and toString()
