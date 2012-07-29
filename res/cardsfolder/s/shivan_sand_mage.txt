@@ -1,0 +1,15 @@
+Name:Shivan Sand-Mage
+ManaCost:2 R R
+Types:Creature Viashino Shaman
+Text:no text
+PT:3/2
+K:Suspend:4:R
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose one - Remove two time counters from target permanent or suspended card; or put two time counters on target permanent with a time counter on it or suspended card.
+SVar:TrigChoose:AB$ Charm | Cost$ 0 | CharmNum$ 1 | Choices$ LoseTime,GainTime | SpellDescription$ Choose one - Remove two time counters from target permanent or suspended card; or put two time counters on target permanent with a time counter on it or suspended card.
+SVar:LoseTime:DB$ RemoveCounter | ValidTgts$ Permanent.OnBattlefield,Card.suspended | AITgts$ Permanent.counters_GE1_TIME+OnBattlefield+YouDontCtrl,Card.suspended+YouCtrl | TgtPrompt$ Select target permanent or suspended card. | CounterType$ TIME | CounterNum$ 2 | TgtZone$ Battlefield,Exile | SpellDescription$ Remove two time counters from target permanent or suspended card.
+SVar:GainTime:DB$ PutCounter | ValidTgts$ Permanent.counters_GE1_TIME+OnBattlefield,Card.suspended | AITgts$ Permanent.counters_GE1_TIME+OnBattlefield+YouCtrl,Card.suspended+YouDontCtrl | TgtPrompt$ Select target permanent with a time counter on it or suspended card. | CounterType$ TIME | CounterNum$ 2 | TgtZone$ Battlefield,Exile | SpellDescription$ Put two time counters target permanent with a time counter on it or suspended card.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_sand_mage.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/108.jpg
+Oracle:When Shivan Sand-Mage enters the battlefield, choose one - Remove two time counters from target permanent or suspended card; or put two time counters on target permanent with a time counter on it or suspended card.\nSuspend 4-{R} (Rather than cast this card from your hand, you may pay {R} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
+End
