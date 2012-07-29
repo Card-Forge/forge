@@ -130,8 +130,7 @@ public class LimitedDeck extends Deck {
                 // if no playable cards remain fill up with basic lands
                 for (int i = 0; i < 5; i++) {
                     if (clrCnts[i].getCount() > 0) {
-                        final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(),
-                                AllZone.getComputerPlayer());
+                        final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(), AllZone.getComputerPlayer());
                         c.setCurSetCode(IBoosterDraft.LAND_SET_CODE[0]);
                         deckList.add(c);
                         break;

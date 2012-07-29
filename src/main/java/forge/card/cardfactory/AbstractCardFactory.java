@@ -19,8 +19,6 @@ package forge.card.cardfactory;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -177,24 +175,6 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
     /**
      * <p>
-     * copyCardintoNew.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
-     */
-    @Override
-    public final Card copyCardintoNew(final Card in) {
-        final Card out = CardFactoryUtil.copyStats(in);
-        out.setOwner(in.getOwner());
-        out.setCopiedSpell(true);
-        this.copiedList.add(out);
-        return out;
-    }
-
-    /**
-     * <p>
      * copySpellontoStack.
      * </p>
      * 
@@ -292,7 +272,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         return buildAbilities(copy);
     }
 
-    public static Card buildAbilities(final Card card) {
+    private static Card buildAbilities(final Card card) {
         final String cardName = card.getName();
 
         if (!card.isCardColorsOverridden()) {

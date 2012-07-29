@@ -17,7 +17,6 @@
  */
 package forge.card.cardfactory;
 
-import java.util.Iterator;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
@@ -42,17 +41,6 @@ public interface CardFactoryInterface {
 
     /**
      * <p>
-     * copyCardintoNew.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
-     */
-    Card copyCardintoNew(Card in);
-
-    /**
-     * <p>
      * copySpellontoStack.
      * </p>
      * 
@@ -68,23 +56,7 @@ public interface CardFactoryInterface {
     void copySpellontoStack(Card source, Card original, SpellAbility sa, boolean bCopyDetails);
 
     /**
-     * <p>
-     * copySpellontoStack.
-     * </p>
-     * 
-     * @param source
-     *            a {@link forge.Card} object.
-     * @param original
-     *            a {@link forge.Card} object.
-     * @param bCopyDetails
-     *            a boolean.
-     */
-    //void copySpellontoStack(Card source, Card original, boolean bCopyDetails);
-
-    /**
-     * <p>
-     * getCard.
-     * </p>
+     * <p>getCard.</p>
      * 
      * @param cardName
      *            a {@link java.lang.String} object.
@@ -94,6 +66,4 @@ public interface CardFactoryInterface {
      *         blankCard
      */
     Card getCard(String cardName, Player owner);
-    //Card getCard2(final String cardName, final Card o, final Player owner);
-
 }
