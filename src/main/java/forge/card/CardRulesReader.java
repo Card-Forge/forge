@@ -81,58 +81,86 @@ public class CardRulesReader {
      *            the line
      */
     public final void parseLine(final String line) {
-        if (line.startsWith("Name:")) {
-            this.characteristics[this.curCharacteristics].setCardName(CardRulesReader.getValueAfterKey(line, "Name:"));
-            if ((this.characteristics[this.curCharacteristics].getCardName() == null)
-                    || this.characteristics[this.curCharacteristics].getCardName().isEmpty()) {
-                throw new RuntimeException("Card name is empty");
-            }
+        switch( line.charAt(0)){
+            case 'A':
+                if (line.startsWith("AlternateMode:")) {
+                    // this.isDoubleFacedCard = "DoubleFaced".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "AlternateMode:"));
+                    // this.isFlipCard = "Flip".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "AlternateMode:"));
+                } else if (line.equals("ALTERNATE")) {
+                    this.characteristics[1] = new CardRuleCharacteristics();
+                    this.curCharacteristics = 1;
+                }
+            break;
+            
+            case 'C':
+                if (line.startsWith("Colors:")) {
+                    // This is forge.card.CardColor not forge.CardColor.
+                    // Why do we have two classes with the same name?
+                    final String value = line.substring("Colors:".length());
+                    CardColor newCol = CardColor.fromNames(value.split(","));
+                    this.characteristics[this.curCharacteristics].setColor(newCol);
+                }
+                break;
 
-        } else if (line.startsWith("ManaCost:")) {
-            final String sCost = CardRulesReader.getValueAfterKey(line, "ManaCost:");
-            this.characteristics[this.curCharacteristics].setManaCost("no cost".equals(sCost) ? CardManaCost.EMPTY
-                    : new CardManaCost(new ParserCardnameTxtManaCost(sCost)));
+            case 'L': 
+                if (line.startsWith("Loyalty:")) {
+                    this.characteristics[this.curCharacteristics].setPtLine(CardRulesReader.getValueAfterKey(line, "Loyalty:"));
 
-        } else if (line.startsWith("Types:")) {
-            this.characteristics[this.curCharacteristics].setCardType(CardType.parse(CardRulesReader.getValueAfterKey(
-                    line, "Types:")));
+                }
+                break;
+                
+            case 'M':
+                if (line.startsWith("ManaCost:")) {
+                    final String sCost = CardRulesReader.getValueAfterKey(line, "ManaCost:");
+                    this.characteristics[this.curCharacteristics].setManaCost("no cost".equals(sCost) ? CardManaCost.EMPTY
+                            : new CardManaCost(new ParserCardnameTxtManaCost(sCost)));
+                }
 
-        } else if (line.startsWith("Oracle:")) {
-            this.characteristics[this.curCharacteristics].setCardRules(CardRulesReader
-                    .getValueAfterKey(line, "Oracle:").split("\\n"));
+            case 'N':
+                if (line.startsWith("Name:")) {
+                    this.characteristics[this.curCharacteristics].setCardName(CardRulesReader.getValueAfterKey(line, "Name:"));
+                    if ((this.characteristics[this.curCharacteristics].getCardName() == null)
+                            || this.characteristics[this.curCharacteristics].getCardName().isEmpty()) {
+                        throw new RuntimeException("Card name is empty");
+                    }
+                }
+                break;
 
-        } else if (line.startsWith("PT:")) {
-            this.characteristics[this.curCharacteristics].setPtLine(CardRulesReader.getValueAfterKey(line, "PT:"));
-        } else if (line.startsWith("Loyalty:")) {
-            this.characteristics[this.curCharacteristics].setPtLine(CardRulesReader.getValueAfterKey(line, "Loyalty:"));
+            case 'O':
+                if (line.startsWith("Oracle:")) {
+                    this.characteristics[this.curCharacteristics].setCardRules(CardRulesReader
+                            .getValueAfterKey(line, "Oracle:").split("\\n"));
 
-        } else if (line.startsWith("SVar:RemAIDeck:")) {
-            this.removedFromAIDecks = "True"
-                    .equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "SVar:RemAIDeck:"));
+                }
+                break;
+                
+            case 'P':
+                if (line.startsWith("PT:")) {
+                    this.characteristics[this.curCharacteristics].setPtLine(CardRulesReader.getValueAfterKey(line, "PT:"));
+                }
+                break;
+                
+            case 'S':
+                if (line.startsWith("SVar:RemAIDeck:")) {
+                    this.removedFromAIDecks = "True"
+                            .equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "SVar:RemAIDeck:"));
 
-        } else if (line.startsWith("SVar:RemRandomDeck:")) {
-            this.removedFromRandomDecks = "True".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line,
-                    "SVar:RemRandomDeck:"));
+                } else if (line.startsWith("SVar:RemRandomDeck:")) {
+                    this.removedFromRandomDecks = "True".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line,
+                            "SVar:RemRandomDeck:"));
 
-        } else if (line.startsWith("SetInfo:")) {
-            CardRulesReader.parseSetInfoLine(line, this.characteristics[this.curCharacteristics].getSetsData());
+                } else if (line.startsWith("SetInfo:")) {
+                    CardRulesReader.parseSetInfoLine(line, this.characteristics[this.curCharacteristics].getSetsData());
 
-        } else if (line.startsWith("AlternateMode:")) {
-            // this.isDoubleFacedCard =
-            // "DoubleFaced".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line,
-            // "AlternateMode:"));
-            // this.isFlipCard =
-            // "Flip".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line,
-            // "AlternateMode:"));
-        } else if (line.equals("ALTERNATE")) {
-            this.characteristics[1] = new CardRuleCharacteristics();
-            this.curCharacteristics = 1;
-        } else if (line.startsWith("Colors:")) {
-            // This is forge.card.CardColor not forge.CardColor.
-            // Why do we have two classes with the same name?
-            final String value = line.substring("Colors:".length());
-            CardColor newCol = CardColor.fromNames(value.split(","));
-            this.characteristics[this.curCharacteristics].setColor(newCol);
+                } 
+                break;
+                
+            case 'T':
+                if (line.startsWith("Types:")) {
+                    this.characteristics[this.curCharacteristics].setCardType(CardType.parse(CardRulesReader.getValueAfterKey(
+                            line, "Types:")));
+                }
+                break;
         }
 
     }
@@ -273,10 +301,12 @@ public class CardRulesReader {
 
             final String unparsed = this.cost[this.nextToken++];
             // System.out.println(unparsed);
-            if (StringUtils.isNumeric(unparsed)) {
-                this.colorlessCost += Integer.parseInt(unparsed);
+            try { 
+                int iVal = Integer.parseInt(unparsed);
+                this.colorlessCost += iVal;
                 return null;
             }
+            catch(NumberFormatException nex) { }
 
             int atoms = 0;
             for (int iChar = 0; iChar < unparsed.length(); iChar++) {

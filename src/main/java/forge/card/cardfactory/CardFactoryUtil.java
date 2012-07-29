@@ -3670,7 +3670,7 @@ public class CardFactoryUtil {
             final String[] tokenTypes = new String[tal.size()];
             tal.toArray(tokenTypes);
 
-            final ArrayList<String> kal = thisToken.getIntrinsicKeyword();
+            final List<String> kal = thisToken.getIntrinsicKeyword();
             final String[] tokenKeywords = new String[kal.size()];
             kal.toArray(tokenKeywords);
             final CardList tokens = CardFactoryUtil.makeToken(thisToken.getName(), thisToken.getImageName(),

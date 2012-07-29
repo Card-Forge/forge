@@ -420,10 +420,6 @@ public class CardCharacteristics {
      *            a {@link java.lang.String} object.
      */
     public final void setSVar(final String var, final String str) {
-        if (this.sVars.containsKey(var)) {
-            this.sVars.remove(var);
-        }
-
         this.sVars.put(var, str);
     }
 

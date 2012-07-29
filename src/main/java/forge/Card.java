@@ -5196,9 +5196,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getUnhiddenKeyword() {
-        final ArrayList<String> keywords = new ArrayList<String>(this.getIntrinsicKeyword());
-        final ArrayList<String> a2 = new ArrayList<String>(this.getExtrinsicKeyword());
-        keywords.addAll(a2);
+        final ArrayList<String> keywords = new ArrayList<String>();
+        keywords.addAll(this.getIntrinsicKeyword());
+        keywords.addAll(this.getExtrinsicKeyword());
 
         // see if keyword changes are in effect
         if (!this.changedCardKeywords.isEmpty()) {
@@ -5217,7 +5217,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (ck.getKeywords() != null) {
                     keywords.addAll(ck.getKeywords());
                 }
-
             }
         }
 
@@ -5242,8 +5241,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<String> getIntrinsicKeyword() {
-        return new ArrayList<String>(this.getCharacteristics().getIntrinsicKeyword());
+    public final List<String> getIntrinsicKeyword() {
+        // will not create a copy here - due to performance reasons.
+        // Most of other code checks for contains, or creates copy by itself 
+        return this.getCharacteristics().getIntrinsicKeyword();
     }
 
     /**
@@ -5263,7 +5264,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param a
      *            a {@link java.util.ArrayList} object.
      */
-    public final void setIntrinsicKeyword(final ArrayList<String> a) {
+    public final void setIntrinsicKeyword(final List<String> a) {
         this.getCharacteristics().setIntrinsicKeyword(new ArrayList<String>(a));
     }
 
@@ -5348,16 +5349,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.getCharacteristics().getIntrinsicKeyword().remove(s);
     }
 
-    /**
-     * <p>
-     * getIntrinsicKeywordSize.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getIntrinsicKeywordSize() {
-        return this.getCharacteristics().getIntrinsicKeyword().size();
-    }
 
     /**
      * <p>
@@ -5367,7 +5358,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public ArrayList<String> getExtrinsicKeyword() {
-        return new ArrayList<String>(this.extrinsicKeyword);
+        return this.extrinsicKeyword;
     }
 
     /**
