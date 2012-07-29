@@ -399,7 +399,7 @@ public class TriggerHandler {
         }
 
         // Torpor Orb check
-        if (mode.equals(TriggerType.ChangesZone)) {
+        if (!regtrig.isStatic() && mode.equals(TriggerType.ChangesZone)) {
             if (runParams.get("Destination") instanceof String) {
                 String dest = (String) runParams.get("Destination");
                 if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
