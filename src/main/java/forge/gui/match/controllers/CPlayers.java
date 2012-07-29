@@ -37,6 +37,7 @@ public enum CPlayers implements ICDoc {
     public void update() {
         VPlayers.SINGLETON_INSTANCE.updatePlayerLabels(AllZone.getComputerPlayer());
         VPlayers.SINGLETON_INSTANCE.updatePlayerLabels(AllZone.getHumanPlayer());
+        VPlayers.SINGLETON_INSTANCE.updateStormLabel();
     }
 
 }

@@ -172,6 +172,12 @@ public enum VPlayers implements IVDoc {
             }
             temp[6].setText(sb.toString());
         }
+    }
+
+    /** */
+    public void updateStormLabel() {
+        // No need to update if this panel isn't showing
+        if (!parentCell.getSelected().equals(this)) { return; }
 
         stormLabel.setText("Storm count: " + AllZone.getStack().getCardsCastThisTurn().size());
     }
