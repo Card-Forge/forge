@@ -54,6 +54,7 @@ public abstract class Lambda1<R, A1> implements Lambda<R> {
      * @param args Object[]
      * @return R
      */
+    @Override
     @SuppressWarnings("unchecked")
     public final R apply(final Object[] args) {
         return apply((A1) args[0]);

@@ -432,6 +432,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
      * 
      * @return a {@link java.util.Iterator} object.
      */
+    @Override
     public final Iterator<PropertyElement> iterator() {
         return iterator("");
     };
@@ -464,6 +465,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
         // After this call, the next element is determined, or the child
         // iterator has next
 
+        @Override
         public boolean hasNext() {
             if (next != null) {
                 return true;
@@ -492,18 +494,22 @@ public class TreeProperties implements Iterable<PropertyElement> {
                 }
                 next = new PropertyElement() {
 
+                    @Override
                     public String getKey() {
                         return prefix + parts[0];
                     }
 
+                    @Override
                     public Class<?> getType() {
                         return cls;
                     }
 
+                    @Override
                     public Object getValue() {
                         return value;
                     }
 
+                    @Override
                     public void setValue(final String value) {
                     }
                 };
@@ -513,6 +519,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
             }
         }
 
+        @Override
         public PropertyElement next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
@@ -525,6 +532,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
             }
         }
 
+        @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }

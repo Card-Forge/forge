@@ -39,7 +39,6 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.card.trigger.TriggerType;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;

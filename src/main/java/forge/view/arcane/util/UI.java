@@ -190,14 +190,17 @@ public class UI {
         editorPane.setEditorKit(new HTMLEditorKit() {
             private static final long serialVersionUID = -562969765076450440L;
 
+            @Override
             public ViewFactory getViewFactory() {
                 return new HTMLFactory() {
+                    @Override
                     public View create(final Element elem) {
                         Object o = elem.getAttributes().getAttribute(StyleConstants.NameAttribute);
                         if (o instanceof HTML.Tag) {
                             HTML.Tag kind = (HTML.Tag) o;
                             if (kind == HTML.Tag.IMG) {
                                 return new ImageView(elem) {
+                                    @Override
                                     public URL getImageURL() {
                                         URL url = super.getImageURL();
                                         // Put an image into the cache to be
@@ -236,6 +239,7 @@ public class UI {
         viewport.setLayout(new ViewportLayout() {
             private static final long serialVersionUID = -4436977380450713628L;
 
+            @Override
             public void layoutContainer(final Container parent) {
                 viewport.setViewPosition(new Point(0, 0));
                 Dimension viewportSize = viewport.getSize();

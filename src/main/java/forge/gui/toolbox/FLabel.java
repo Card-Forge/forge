@@ -344,6 +344,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
     }
 
     /** Major performance kicker - won't repaint whole screen! */
+    @Override
     public void repaintSelf() {
         final Dimension d = FLabel.this.getSize();
         repaint(0, 0, d.width, d.height);

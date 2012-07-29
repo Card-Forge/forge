@@ -66,6 +66,7 @@ public class FatPack extends OpenablePack {
         return "Fat Pack";
     }
 
+    @Override
     protected List<CardPrinted> generate() {
         List<CardPrinted> result = new ArrayList<CardPrinted>();
         for (int i = 0; i < fpData.getCntBoosters(); i++) {

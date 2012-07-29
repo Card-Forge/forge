@@ -866,6 +866,7 @@ public class CardFactoryUtil {
                 super(ca, co, t);
             }
 
+            @Override
             public AbilityActivated getCopy() {
                 AbilityActivated res = new AbilityUnearth(getSourceCard(),
                         getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
@@ -1087,6 +1088,7 @@ public class CardFactoryUtil {
                 super(ca, co, t);
             }
 
+            @Override
             public AbilityActivated getCopy() {
                 AbilityActivated res = new AbilityTransmute(getSourceCard(),
                         getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
@@ -1233,6 +1235,7 @@ public class CardFactoryUtil {
                 super(ca, co, t);
             }
 
+            @Override
             public AbilityActivated getCopy() {
                 AbilityActivated res = new AbilityEquip(getSourceCard(),
                         getPayCosts(), getTarget() == null ? null : new Target(getTarget()));

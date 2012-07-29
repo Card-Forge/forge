@@ -50,6 +50,7 @@ public class QuestItemPoundFlesh extends QuestItemBasic {
     }
 
     /** {@inheritDoc} */
+    @Override
     public final int getSellingPrice(QuestAssets qA) {
         int level = qA.getItemLevel(this.getItemType());
         if (qA.getLife(QuestMode.Fantasy) < 2) {

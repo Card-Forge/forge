@@ -84,6 +84,7 @@ public abstract class Animation {
      */
     public Animation(final long duration, final long delay) {
         timerTask = new TimerTask() {
+            @Override
             public void run() {
                 if (frameTimer == null) {
                     start();
@@ -195,10 +196,12 @@ public abstract class Animation {
      */
     public static void tapCardToggle(final CardPanel panel) {
         new Animation(200) {
+            @Override
             protected void start() {
                 panel.setTapped(!panel.isTapped());
             }
 
+            @Override
             protected void update(final float percentage) {
                 panel.setTappedAngle(CardPanel.TAPPED_ANGLE * percentage);
                 if (!panel.isTapped()) {
@@ -207,6 +210,7 @@ public abstract class Animation {
                 panel.repaint();
             }
 
+            @Override
             protected void end() {
                 panel.setTappedAngle(panel.isTapped() ? CardPanel.TAPPED_ANGLE : 0);
             }
@@ -245,6 +249,7 @@ public abstract class Animation {
             final int endY, final int endWidth, final CardPanel animationPanel, final CardPanel placeholder,
             final JLayeredPane layeredPane, final int speed) {
         UI.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
                 final int endHeight = Math.round(endWidth * CardPanel.ASPECT_RATIO);
@@ -260,6 +265,7 @@ public abstract class Animation {
                 }
 
                 new Animation(700) {
+                    @Override
                     protected void update(float percentage) {
                         if (placeholder != null && !placeholder.isShowing()) {
                             cancel();
@@ -288,8 +294,10 @@ public abstract class Animation {
                         animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
                     }
 
+                    @Override
                     protected void end() {
                         EventQueue.invokeLater(new Runnable() {
+                            @Override
                             public void run() {
                                 if (placeholder != null) {
                                     placeholder.setDisplayEnabled(true);
@@ -336,6 +344,7 @@ public abstract class Animation {
             final int endY, final int endWidth, final CardPanel animationPanel, final CardPanel placeholder,
             final JLayeredPane layeredPane, final int speed) {
         UI.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
                 final int endHeight = Math.round(endWidth * CardPanel.ASPECT_RATIO);
@@ -349,6 +358,7 @@ public abstract class Animation {
                 }
 
                 new Animation(speed) {
+                    @Override
                     protected void update(final float percentage) {
                         int currentX = startX + Math.round((endX - startX) * percentage);
                         int currentY = startY + Math.round((endY - startY) * percentage);
@@ -357,8 +367,10 @@ public abstract class Animation {
                         animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
                     }
 
+                    @Override
                     protected void end() {
                         EventQueue.invokeLater(new Runnable() {
+                            @Override
                             public void run() {
                                 if (placeholder != null) {
                                     placeholder.setDisplayEnabled(true);
@@ -386,8 +398,10 @@ public abstract class Animation {
      */
     public static void moveCard(final CardPanel placeholder) {
         UI.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 EventQueue.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         if (placeholder != null) {
                             placeholder.setDisplayEnabled(true);
@@ -431,6 +445,7 @@ public abstract class Animation {
         final int endHeight = Math.round(endWidth * CardPanel.ASPECT_RATIO);
 
         new Animation(200) {
+            @Override
             protected void update(final float percentage) {
                 int currentWidth = startWidth + Math.round((endWidth - startWidth) * percentage);
                 int currentHeight = startHeight + Math.round((endHeight - startHeight) * percentage);
@@ -446,10 +461,12 @@ public abstract class Animation {
                 animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
             }
 
+            @Override
             protected void end() {
                 animationPanel.setVisible(false);
                 animationPanel.repaint();
                 EventQueue.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         layeredPane.remove(animationPanel);
                     }
@@ -516,6 +533,7 @@ public abstract class Animation {
         animationPanel.setImage(overPanel);
 
         new Animation(200, delay) {
+            @Override
             protected void start() {
                 synchronized (enlargeLock) {
                     // Cancel if the panel is no longer delayed or already
@@ -535,6 +553,7 @@ public abstract class Animation {
                 animationPanel.setTappedAngle(overPanel.getTappedAngle());
                 try {
                     SwingUtilities.invokeAndWait(new Runnable() {
+                        @Override
                         public void run() {
                             layeredPane.add(animationPanel);
                             layeredPane.setLayer(animationPanel, JLayeredPane.DRAG_LAYER);
@@ -545,6 +564,7 @@ public abstract class Animation {
                 }
             }
 
+            @Override
             protected void update(final float percentage) {
                 synchronized (enlargeLock) {
                     if (enlargedAnimationPanel != animationPanel) {

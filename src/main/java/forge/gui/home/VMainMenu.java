@@ -213,6 +213,7 @@ public enum VMainMenu implements IVDoc {
                 // Make sure this is called last, so it doesn't interfere
                 // with the selection display process.
                 SwingUtilities.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         if (item.getLayoutControl().getCommandOnSelect() != null) {
                             item.getLayoutControl().getCommandOnSelect().execute();

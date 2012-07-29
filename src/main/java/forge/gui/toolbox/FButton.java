@@ -145,6 +145,7 @@ public class FButton extends JButton {
 
         // Focus events
         this.addFocusListener(new FocusAdapter() {
+            @Override
             public void focusGained(FocusEvent e) {
                 if (isToggled()) { return; }
 
@@ -157,6 +158,7 @@ public class FButton extends JButton {
                 addKeyListener(klEnter);
             }
 
+            @Override
             public void focusLost(FocusEvent e) {
                 if (isToggled()) { return; }
 

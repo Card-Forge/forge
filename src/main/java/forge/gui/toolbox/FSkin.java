@@ -60,6 +60,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         Backgrounds(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -83,6 +84,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         Colors(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -99,6 +101,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         ZoneImages(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -135,6 +138,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         ManaImages(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -164,6 +168,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         ColorlessManaImages(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -187,6 +192,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         GameplayImages(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -207,6 +213,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         Foils(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -225,6 +232,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         DockIcons(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -256,6 +264,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         QuestIcons(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -281,6 +290,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         InterfaceIcons(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -297,6 +307,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         LayoutImages(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -315,6 +326,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         EditorImages(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -352,6 +364,7 @@ public enum FSkin {
         /** @param xy &emsp; int[] coordinates */
         ButtonImages(final int[] xy) { this.coords = xy; }
         /** @return int[] */
+        @Override
         public int[] getCoords() { return coords; }
     }
 
@@ -746,8 +759,8 @@ public enum FSkin {
         Color c;
 
         // Center
-        x = (int) (x0 + w0 / 2);
-        y = (int) (y0 + h0 / 2);
+        x = (x0 + w0 / 2);
+        y = (y0 + h0 / 2);
         c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
         if (c.getAlpha() != 0) { return bimPreferredSprite; }
 

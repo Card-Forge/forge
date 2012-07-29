@@ -62,6 +62,7 @@ public class FList extends JList {
     private class ComplexCellRenderer implements ListCellRenderer {
         private DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
+        @Override
         public Component getListCellRendererComponent(JList lst0, Object val0, int i0,
             boolean isSelected, boolean cellHasFocus) {
 

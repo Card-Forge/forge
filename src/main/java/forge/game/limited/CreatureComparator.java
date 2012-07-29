@@ -10,6 +10,7 @@ import forge.card.cardfactory.CardFactoryUtil;
  * 
  */
 public class CreatureComparator implements Comparator<Card> {
+    @Override
     public int compare(final Card a, final Card b) {
         int cmcA = a.getCMC();
         cmcA *= 30; // average creature from evaluateCreature is about 30 * CMC

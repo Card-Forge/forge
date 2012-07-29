@@ -71,6 +71,7 @@ public class DeckGroup extends DeckBase {
         this.humanDeck = humanDeck;
     }
 
+    @Override
     protected void cloneFieldsTo(final DeckBase clone) {
         super.cloneFieldsTo(clone);
 

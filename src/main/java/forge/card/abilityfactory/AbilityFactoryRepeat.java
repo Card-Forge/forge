@@ -63,6 +63,7 @@ public final class AbilityFactoryRepeat {
                 super(ca, co, t);
             }
 
+            @Override
             public AbilityActivated getCopy() {
                 AbilityActivated res = new AbilityRepeat(getSourceCard(),
                         getPayCosts(), getTarget() == null ? null : new Target(getTarget()));

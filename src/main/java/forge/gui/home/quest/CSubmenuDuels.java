@@ -101,6 +101,7 @@ public enum CSubmenuDuels implements ICDoc {
     public Command getCommandOnSelect() {
         final QuestController qc = AllZone.getQuest();
         return new Command() {
+            @Override
             public void execute() {
                 if (qc.getAchievements() == null) {
                     CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);

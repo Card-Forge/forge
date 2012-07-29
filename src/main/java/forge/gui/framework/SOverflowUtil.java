@@ -112,6 +112,7 @@ public final class SOverflowUtil {
             });
         }
 
+        @Override
         public void repaintSelf() {
             final Dimension d = OverflowLabel.this.getSize();
             repaint(0, 0, d.width, d.height);

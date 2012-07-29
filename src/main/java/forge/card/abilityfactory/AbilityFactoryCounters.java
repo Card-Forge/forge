@@ -1215,7 +1215,7 @@ public class AbilityFactoryCounters {
                                 }
                             }
                             // subtract all of selected type
-                            chosenAmount = tgtCounters.get((Object) chosenType);
+                            chosenAmount = tgtCounters.get(chosenType);
                             if (chosenAmount > counterAmount) {
                                 chosenAmount = counterAmount;
                             }

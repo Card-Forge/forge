@@ -71,6 +71,7 @@ public final class Main {
     }
 
     /** @throws Throwable  */
+    @Override
     protected void finalize() throws Throwable {
         try { } catch (Exception e) { }
         finally {

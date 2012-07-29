@@ -92,6 +92,7 @@ public class GlowText extends JLabel {
      * 
      * @return a {@link java.awt.Dimension} object.
      */
+    @Override
     public final Dimension getPreferredSize() {
         Dimension size = super.getPreferredSize();
         size.width += glowSize;
@@ -100,11 +101,13 @@ public class GlowText extends JLabel {
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void setText(final String text) {
         super.setText(text);
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void paint(final Graphics g) {
         if (getText().length() == 0) {
             return;

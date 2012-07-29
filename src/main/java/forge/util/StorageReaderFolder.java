@@ -144,6 +144,7 @@ public abstract class StorageReaderFolder<T> implements IItemReader<T> {
      */
     protected abstract FilenameFilter getFileFilter();
 
+    @Override
     public String getItemKey(T item) {
         return keySelector.apply(item);
     }

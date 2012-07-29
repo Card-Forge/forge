@@ -25,5 +25,6 @@ public interface IVSubmenu extends IVDoc {
     EDocID getItemEnum();
 
     /** Removes all children and (re)populates panel components, independent of constructor.*/
+    @Override
     void populate();
 }

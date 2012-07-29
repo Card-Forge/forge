@@ -1252,9 +1252,9 @@ public class AbilityFactoryAttach {
                     }
                 }
 
-                final Object o = GuiUtils.chooseOne(source + " - Select a player to attach to.", players);
-                if (o instanceof Player) {
-                    AbilityFactoryAttach.handleAura(source, (Player) o, false);
+                final Player p = GuiUtils.chooseOne(source + " - Select a player to attach to.", players);
+                if (p != null) {
+                    AbilityFactoryAttach.handleAura(source, p, false);
                     //source.enchantEntity((Player) o);
                     return true;
                 }

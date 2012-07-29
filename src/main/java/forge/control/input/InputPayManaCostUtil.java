@@ -33,7 +33,6 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 
 /**

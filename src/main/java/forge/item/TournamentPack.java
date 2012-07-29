@@ -63,6 +63,7 @@ public class TournamentPack extends OpenablePack {
         return contents.getCommon() >= 30 ? "Tournament Pack" : "Starter Deck";
     }
 
+    @Override
     protected List<CardPrinted> generate() {
         final BoosterGenerator gen = new BoosterGenerator(this.contents.getEditionFilter());
         return gen.getBoosterPack(this.contents);

@@ -75,7 +75,7 @@ public class QuestFileLister extends JPanel {
         Collections.sort(sorted, new Comparator<QuestData>() {
             @Override
             public int compare(final QuestData x, final QuestData y) {
-                return ((QuestData) x).getName().compareTo(((QuestData) y).getName());
+                return x.getName().compareTo(y.getName());
             }
         });
 

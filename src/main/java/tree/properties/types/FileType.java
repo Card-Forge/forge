@@ -44,6 +44,7 @@ public class FileType implements PropertyType<File> {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public final String getSuffix() {
         return SUFFIX;
     }
@@ -55,11 +56,13 @@ public class FileType implements PropertyType<File> {
      * 
      * @return a {@link java.lang.Class} object.
      */
+    @Override
     public final Class<File> getType() {
         return TYPE;
     }
 
     /** {@inheritDoc} */
+    @Override
     public final File toObject(final TreeProperties p, final String s) {
         String path = getPath(s);
         File f = new File(path);

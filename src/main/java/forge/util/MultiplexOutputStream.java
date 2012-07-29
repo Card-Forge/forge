@@ -46,6 +46,7 @@ public class MultiplexOutputStream extends OutputStream {
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void write(final int b) throws IOException {
         for (int i = 0; i < streams.length; i++) {
             streams[i].write(b);
@@ -53,6 +54,7 @@ public class MultiplexOutputStream extends OutputStream {
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void write(final byte[] b, final int off, final int len) throws IOException {
         for (int i = 0; i < streams.length; i++) {
             streams[i].write(b, off, len);
