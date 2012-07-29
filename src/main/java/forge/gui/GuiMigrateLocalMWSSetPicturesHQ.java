@@ -32,7 +32,6 @@ import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.util.ArrayList;
-
 import javax.swing.AbstractButton;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -51,12 +50,11 @@ import javax.swing.event.ChangeListener;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.AllZone;
-import forge.Card;
 import forge.CardUtil;
 import forge.Singletons;
-import forge.card.EditionInfo;
 import forge.error.ErrorViewer;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.Lang.GuiDownloadPictures;
@@ -489,61 +487,25 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
 
         final ArrayList<MCard> cList = new ArrayList<MCard>();
 
-        // File imgBase = ForgeProps.getFile(NewConstants.IMAGE_BASE);
+        File imgBase = ForgeProps.getFile(NewConstants.IMAGE_BASE);
         final String urlBase = "C:\\MTGForge\\HQPICS\\";
         String imgFN = "";
 
-        for (final Card c : AllZone.getCardFactory()) {
+        for (final CardPrinted cp : CardDb.instance().getAllCards()) 
+        {
             // String url = c.getSVar("Picture");
             // String[] URLs = url.split("\\\\");
+            String edCode = cp.getEdition();
+            final String setCode2 = Singletons.getModel().getEditions().getCode2ByCode(edCode);
+            imgFN = CardUtil.buildFilename(cp);
 
-            final ArrayList<EditionInfo> cSetInfo = c.getSets();
-            if (cSetInfo.size() > 0) {
-                for (int j = 0; j < cSetInfo.size(); j++) {
-                    c.setCurSetCode(cSetInfo.get(j).getCode());
-                    final String setCode3 = c.getCurSetCode();
-                    final String setCode2 = Singletons.getModel().getEditions().getCode2ByCode(c.getCurSetCode());
-
-                    int n = 0;
-                    if (cSetInfo.get(j).getPicCount() > 0) {
-                        n = cSetInfo.get(j).getPicCount();
-
-                        for (int k = 1; k <= n; k++) {
-                            c.setRandomPicture(k);
-
-                            imgFN = CardUtil.buildFilename(c);
-
-                            if (imgFN.equals("none") || (!imgFN.contains(setCode3) && !imgFN.contains(setCode2))) {
-                                imgFN += k + ".jpg";
-                                final String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + k + ".full.jpg";
-                                // CList.add(new mCard(SC3 + "/" + fn, URLBase +
-                                // SC2 + "/" + Base64Coder.encodeString(fn,
-                                // true), SC3));
-                                cList.add(new MCard(setCode3 + "\\" + imgFN, urlBase + setCode2 + "\\" + fn, setCode3));
-                            }
-                        }
-                    } else {
-                        c.setRandomPicture(0);
-
-                        imgFN = CardUtil.buildFilename(c);
-
-                        if (imgFN.equals("none") || (!imgFN.contains(setCode3) && !imgFN.contains(setCode2))) {
-                            // imgFN += ".jpg";
-
-                            final String newFileName = GuiDisplayUtil.cleanString(c.getName()) + ".jpg";
-
-                            final String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + ".full.jpg";
-                            // fn = fn.replace(" ", "%20%");
-                            // CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2
-                            // + "/" + Base64Coder.encodeString(fn, true),
-                            // SC3));
-                            cList.add(new MCard(setCode3 + "\\" + newFileName, urlBase + setCode2 + "\\" + fn, setCode3));
-
-                        }
-
-                    }
-                }
-
+            if (imgFN.equals("none") || (!imgFN.contains(edCode) && !imgFN.contains(setCode2))) {
+                imgFN = GuiDisplayUtil.cleanStringMWS(cp.getName());
+                final int maxIndex = cp.getCard().getEditionInfo(cp.getEdition()).getCopiesCount();
+                String k = maxIndex > 1 ? Integer.valueOf(cp.getArtIndex() + 1).toString() : "";
+                final String fn = GuiDisplayUtil.cleanStringMWS(cp.getName()) + k + ".full.jpg";
+                final String destFn = imgBase + File.pathSeparator + edCode + File.pathSeparator + imgFN + k + ".jpg"; 
+                cList.add(new MCard( destFn, urlBase + setCode2 + "\\" + fn, edCode));
             }
 
             // Log.error(iName + ".jpg" + "\t" + URLs[0]);

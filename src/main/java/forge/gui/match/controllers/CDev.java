@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import forge.Command;
-import forge.Constant;
 import forge.Singletons;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.framework.ICDoc;

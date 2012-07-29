@@ -41,13 +41,8 @@ import forge.CardUtil;
 import forge.Constant;
 import forge.Counters;
 import forge.Singletons;
-import forge.StaticEffects;
-import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.AbilityMana;
-import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
-import forge.control.input.InputControl;
-import forge.game.phase.Combat;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -790,17 +785,13 @@ public final class GuiDisplayUtil {
 
     public static void devModeBreakpoint() {
         List<Player> Players = AllZone.getPlayersInGame();
-
+/*
         Combat CombatHandler = AllZone.getCombat();
-
         TriggerHandler Triggers = AllZone.getTriggerHandler();
-
         InputControl InputHandler = AllZone.getInputControl();
-
         ReplacementHandler Replacements = AllZone.getReplacementHandler();
-
         StaticEffects StaticHandler = AllZone.getStaticEffects();
-
+*/
         List<PlayerZone> Zones = new ArrayList<PlayerZone>();
         for (Player p : Players) {
 

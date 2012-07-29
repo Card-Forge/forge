@@ -23,11 +23,12 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardCharactersticName;
 import forge.card.CardCharacteristics;
 import forge.gui.GuiDisplayUtil;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -68,7 +69,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         final ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
 
         final String base = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
-        for (final Card c : AllZone.getCardFactory()) {
+        for (final CardPrinted c : CardDb.instance().getAllCards()) {
             cList.addAll(this.createDLObjects(c, base));
         }
 
@@ -92,11 +93,12 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         return list.toArray(new DownloadObject[list.size()]);
     } // getNeededImages()
 
-    private List<DownloadObject> createDLObjects(final Card c, final String base) {
+    private List<DownloadObject> createDLObjects(final CardPrinted c, final String base) {
         final ArrayList<DownloadObject> ret = new ArrayList<DownloadObject>();
 
-        for (final CardCharactersticName state : c.getStates()) {
-            CardCharacteristics stateCharacteristics = c.getState(state);
+        Card fc = c.toForgeCard();
+        for (final CardCharactersticName state : fc.getStates()) {
+            CardCharacteristics stateCharacteristics = fc.getState(state);
             final String url = stateCharacteristics.getSVar("Picture");
             if (!url.isEmpty()) {
                 final String[] urls = url.split("\\\\");

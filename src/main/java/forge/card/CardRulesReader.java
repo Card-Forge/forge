@@ -19,8 +19,6 @@ package forge.card;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.IParserManaCost;
 
