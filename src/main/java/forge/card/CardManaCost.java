@@ -61,11 +61,12 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      * @param parser
      *            the parser
      */
+    final static List<ManaCostShard> shardsTemp = new ArrayList<ManaCostShard>();
     public CardManaCost(final IParserManaCost parser) {
         if (!parser.hasNext()) {
             throw new RuntimeException("Empty manacost passed to parser (this should have been handled before)");
         }
-        final List<ManaCostShard> shardsTemp = new ArrayList<ManaCostShard>();
+        shardsTemp.clear();
         this.hasNoCost = false;
         while (parser.hasNext()) {
             final ManaCostShard shard = parser.next();

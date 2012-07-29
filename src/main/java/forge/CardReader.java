@@ -22,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -45,7 +46,7 @@ import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
 import forge.gui.toolbox.FProgressBar;
-import forge.util.LineReader;
+import forge.util.FileUtil;
 import forge.view.SplashFrame;
 
 /**
@@ -349,8 +350,10 @@ public class CardReader implements Runnable {
     protected final Card loadCard(final InputStream inputStream) {
         this.rulesReader.reset();
 
-        final Card card = CardReader.readCard(new LineReader(inputStream, this.charset), this.rulesReader,
-                this.mapToFill);
+        InputStreamReader isr = new InputStreamReader(inputStream, this.charset);
+        List<String> allLines = FileUtil.readAllLines(isr);
+        
+        final Card card = CardReader.readCard(allLines, this.rulesReader, this.mapToFill);
 
         if (card.isInAlternateState()) {
             card.setState(CardCharactersticName.Original);
@@ -385,22 +388,24 @@ public class CardReader implements Runnable {
 
         for (String line : lines) {
             line = line.trim();
-            if (ignoreTheRest) {
+            if (ignoreTheRest || line.isEmpty()) {
                 continue;
             } // have to deplete the iterator
             // otherwise the underlying class would close its stream on finalize
             // only
 
-            if ("End".equals(line)) {
-                // have to deplete the iterator
-                ignoreTheRest = true;
-                continue;
+            switch(line.charAt(0)) {
+                case '#':
+                    continue;
+                case 'E':
+                    if ("End".equals(line)) {
+                        ignoreTheRest = true;                 // have to deplete the iterator
+                    continue;
                 // otherwise the underlying class would close its stream on finalize only
+                    }
             }
+            
 
-            if (line.isEmpty() || (line.charAt(0) == '#')) {
-                continue;
-            }
 
             if (null != rulesReader) {
                 rulesReader.parseLine(line);
