@@ -44,7 +44,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        //GuiDisplayUtil.updateGUI();
+        GuiDisplayUtil.updateGUI();
         ButtonUtil.enableOnlyOK();
 
         final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
