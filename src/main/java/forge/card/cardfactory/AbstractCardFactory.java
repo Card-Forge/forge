@@ -126,21 +126,6 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
     }
 
     /**
-     * Iterate over all full-fledged cards in the database; these cards are
-     * owned by the human player by default.
-     * 
-     * @return an Iterator that does NOT support the remove method
-     */
-    @Override
-    public Iterator<Card> iterator() {
-        if (allCardsReadOnly == null) {
-
-            allCardsReadOnly = Collections.unmodifiableList(getAllCards());
-        }
-        return allCardsReadOnly.iterator();
-    }
-
-    /**
      * <p>
      * copyCard.
      * </p>

@@ -26,16 +26,8 @@ import forge.game.player.Player;
 /**
  * The Interface CardFactoryInterface.
  */
-public interface CardFactoryInterface extends Iterable<Card> {
+public interface CardFactoryInterface {
 
-    /**
-     * Iterate over all full-fledged cards in the database; these cards are
-     * owned by the human player by default.
-     * 
-     * @return an Iterator that does NOT support the remove method
-     */
-    @Override
-    Iterator<Card> iterator();
 
     /**
      * <p>
