@@ -89,6 +89,8 @@ public class Cost {
      * @return a boolean.
      */
     public final boolean hasNoManaCost() {
+        // This is only used for AI Mana Abilities, since none of these have optional costs
+        // It's not as necessary for this functional
         for (final CostPart part : this.costParts) {
             if (part instanceof CostMana) {
                 return false;
@@ -181,13 +183,14 @@ public class Cost {
 
         while (parse.contains(Cost.SUB_STR)) {
             // SubCounter<NumCounters/CounterType>
-            final String[] splitStr = this.abCostParse(parse, Cost.SUB_STR, 4);
+            final String[] splitStr = this.abCostParse(parse, Cost.SUB_STR, 5);
             parse = this.abUpdateParse(parse, Cost.SUB_STR);
 
             final String type = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             final String description = splitStr.length > 3 ? splitStr[3] : null;
+            final ZoneType zone = splitStr.length > 4 ? ZoneType.smartValueOf(splitStr[4]) : ZoneType.Battlefield;
 
-            this.costParts.add(new CostRemoveCounter(splitStr[0], Counters.valueOf(splitStr[1]), type, description));
+            this.costParts.add(new CostRemoveCounter(splitStr[0], Counters.valueOf(splitStr[1]), type, description, zone));
         }
 
         while (parse.contains(Cost.ADD_STR)) {

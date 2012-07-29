@@ -7626,6 +7626,7 @@ res/cardsfolder/r/ridgetop_raptor.txt svneol=native#text/plain
 res/cardsfolder/r/riding_red_hare.txt svneol=native#text/plain
 res/cardsfolder/r/riding_the_dilu_horse.txt svneol=native#text/plain
 res/cardsfolder/r/rift_bolt.txt svneol=native#text/plain
+res/cardsfolder/r/rift_elemental.txt -text
 res/cardsfolder/r/riftmarked_knight.txt -text
 res/cardsfolder/r/riftstone_portal.txt svneol=native#text/plain
 res/cardsfolder/r/riftwing_cloudskate.txt svneol=native#text/plain
