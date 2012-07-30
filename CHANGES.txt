@@ -184,6 +184,37 @@ Fixes/Features:
 - Fixed Hunter Sliver.
 - Fixed Ghitu Fire-Eater, Oboro Envoy and Rootwater Diver
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a 'Give any card to AI' button to Dev Mode tools to help test AI use of cards (and for those users that like to try implement some degree of user controlled game state)
+- Fixed more cases of moved suspended cards not losing their counters.
+- Fixed cards exiled faced down changing zone.
+- More work on making preloaded card objects lighter.
+- Removed a lot of copies of "updateObservers()" (please report if you see anything funny).
+- Re-added updateGUI() to InputPassPriority.
+- Removed generators for card loading branch
+- another couple of performance improvements
+- Fixed activation cost of Jhoira's Timebug
+- The stormLabel will no longer be always updated twice.
+- Reducing load times and heap usage - removed excessive arraylist creations, switched lines parsing to a simple state machine
+- CardFactory no longer iterable (luckily noone uses iteration)
+- Fixed Noble Benefactor.
+- c-factory
+- Added the quest decks Severus Snape 2 and 3.
+- Reverted Max' change of CardManaCost, because it messed up some parts of the game.
+- warnings 
+- iterable for cardfactory not needed
+- Cleanup of imports and added lots of "@Override" lines.
+- Fixed Torpor Orb stopping static triggers.
+- Fixed leave battlefield triggers of tokens.
+- Added SVar:RemAIDeck:True to Havengul Lich.
+- Updated two decks with copies of Thundermaw Hellkite.
+- Updated two decks with copies of Master of the Pearl Trident.
+- Added some more M13 cards to quest decks.
+- Fixing a bug in CostRemoveCounter canPlay for Remove from Type costs
+- Added capability to remove type counters from other zones
+- Re-added UpdateObserver calls in ManaPool.
+- Use draft rankings in booster draft.
+- Simple classes do not need getters
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -206,6 +237,8 @@ Trinisphere
 Semblance Anvil
 Spellwild Ouphe
 Elderwood Scion
+Shivan Sand-Mage
+Rift Elemental
 
 
 end
