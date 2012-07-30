@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever you cast a spell, creatures you control can't be the targets of spells or abilities your opponents control this turn.
 SVar:TrigEffect:AB$Effect | Cost$ 0 | Name$ Veilstone Amulet Effect | StaticAbilities$ CantTarget
-SVar:CantBeCast:Mode$ CantTarget | ValidCard$ Creature.YouCtrl | Activator$ Opponent | Description$ Creatures you control can't be the targets of spells or abilities your opponents control
+SVar:CantTarget:Mode$ CantTarget | ValidCard$ Creature.YouCtrl | Activator$ Opponent | Description$ Creatures you control can't be the targets of spells or abilities your opponents control
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veilstone_amulet.jpg
