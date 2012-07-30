@@ -451,6 +451,10 @@ public class AbilityFactoryDealDamage {
         if (!sa.canTarget(human)) {
             return false;
         }
+        // burn Planeswalkers
+        if (!human.getCardsIn(ZoneType.Battlefield).getType("Planeswalker").isEmpty()) {
+            return true;
+        }
 
         if (!noPrevention) {
             restDamage = human.predictDamage(restDamage, this.abilityFactory.getHostCard(), false);

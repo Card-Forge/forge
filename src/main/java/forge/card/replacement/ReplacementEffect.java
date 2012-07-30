@@ -64,6 +64,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     public final boolean aiShouldRun(final SpellAbility sa) {
         if (this.mapParams.containsKey("AICheckSVar")) {
+            System.out.println("aiShouldRun?" + sa);
             final String svarToCheck = this.mapParams.get("AICheckSVar");
             String comparator = "GE";
             int compareTo = 1;
@@ -90,7 +91,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             } else {
                 left = AbilityFactory.calculateAmount(this.hostCard, svarToCheck, sa);
             }
-
+            System.out.println("aiShouldRun?" + left + comparator + compareTo);
             if (AllZoneUtil.compare(left, comparator, compareTo)) {
                 return true;
             }
