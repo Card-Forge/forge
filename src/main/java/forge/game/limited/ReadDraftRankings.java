@@ -3,6 +3,7 @@ package forge.game.limited;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +52,7 @@ public class ReadDraftRankings {
      * @return a {@link java.util.Map} object.
      */
     private Map<String, Map<String, Integer>> readFile(final File file) {
-        BufferedReader in;
+        BufferedReader in = null;
         final Map<String, Map<String, Integer>> map = new HashMap<String, Map<String, Integer>>();
         try {
 
@@ -61,9 +62,9 @@ public class ReadDraftRankings {
             // stop reading if end of file or blank line is read
             while ((line != null) && (line.trim().length() != 0)) {
                 if (!line.startsWith(ReadDraftRankings.COMMENT)) {
-                    final String[] s = line.split(",");
+                    final String[] s = line.split("\\|");
                     final String rankStr = s[0].trim().substring(1);
-                    final String name = s[1].trim();
+                    final String name = s[1].trim().replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");
                     // final String rarity = s[2].trim();
                     final String edition = s[3].trim();
 
@@ -83,6 +84,12 @@ public class ReadDraftRankings {
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("ReadDraftRankings : readFile error, " + ex);
+        } finally {
+            try {
+                if (in != null)in.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
 
         return map;
@@ -91,7 +98,7 @@ public class ReadDraftRankings {
     public Integer getRanking(String cardName, String edition) {
         Integer rank = null;
         if (draftRankings.containsKey(edition)) {
-            String safeName = cardName.replaceAll("[^A-Za-z ]", "");
+            String safeName = cardName.replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");
             rank = draftRankings.get(edition).get(safeName);
         }
         return rank;

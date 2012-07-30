@@ -27,10 +27,8 @@ import java.util.TreeSet;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.CardListUtil;
+import forge.CardUtil;
 import forge.Constant;
-import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilityMana;
 import forge.deck.Deck;
 import forge.util.MyRandom;
 
@@ -46,10 +44,7 @@ public class BoosterDraftAI {
 
     /** The bd. */
     private IBoosterDraft bd = null;
-    // once a deck has this number of creatures the computer randomly
-    // picks a card, so the final computer deck has 12-20 creatures
-    // minimum of creatures per deck
-    // private static final int nCreatures = 16;
+
     /**
      * Constant <code>nDecks=7.</code>
      */
@@ -84,11 +79,10 @@ public class BoosterDraftAI {
 
         if (Constant.Runtime.DEV_MODE[0]) {
             System.out.println("Player[" + player + "] pack: " + chooseFrom.toString());
+            System.out.println("Set Code: " + chooseFrom.get(0).getCurSetCode());
         }
 
-        final CardList wouldPick = new CardList();
-        boolean hasPicked = false;
-        Card pickedCard = new Card();
+        Card pickedCard = null;
 
         final CardList aiPlayables = chooseFrom.filter(new CardListFilter() {
             @Override
@@ -99,26 +93,36 @@ public class BoosterDraftAI {
             }
         });
 
+        // Sort cards by rank.
+        // Note that if pack has cards from different editions, they could have
+        // the same Integer rank.
+        // In that (hopefully rare) case, only one will end up in the Map.
+        TreeMap<Integer, Card> rankedCards = new TreeMap<Integer, Card>();
+        for (Card card : chooseFrom) {
+            Integer rkg = draftRankings.getRanking(card.getName(), card.getCurSetCode());
+            if (rkg != null) {
+                rankedCards.put(rkg, card);
+            } else {
+                System.out.println("Draft Rankings - Card Not Found: " + card.getName());
+            }
+        }
+
         if (this.playerColors.get(player).getColor1().equals("none")
                 && this.playerColors.get(player).getColor2().equals("none")) {
+            // Generally the first pick of the draft, no colors selected yet.
 
-            CardList walkers = aiPlayables.getType("Planeswalker");
-            if (walkers.size() > 0) {
-                pickedCard = walkers.get(0);
-                hasPicked = true;
-            }
-
-            if (!hasPicked) {
-                final CardList creatures = aiPlayables.getType("Creature");
-                creatures.sort(new CreatureComparator());
-                debugCreatures(creatures);
-
-                if (creatures.size() > 0) {
-                    pickedCard = creatures.get(0);
-                    hasPicked = true;
+            // Sort playable cards by rank
+            TreeMap<Integer, Card> rankedPlayableCards = new TreeMap<Integer, Card>();
+            for (Card card : aiPlayables) {
+                Integer rkg = draftRankings.getRanking(card.getName(), card.getCurSetCode());
+                if (rkg != null) {
+                    rankedPlayableCards.put(rkg, card);
                 }
             }
-            if (hasPicked && !pickedCard.isColorless()) {
+
+            pickedCard = pickCard(rankedCards, rankedPlayableCards);
+
+            if (!pickedCard.isColorless()) {
                 this.playerColors.get(player).setColor1(pickedCard.getColor().get(0).toStringArray().get(0));
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println("Player[" + player + "] Color1: " + this.playerColors.get(player).getColor1());
@@ -141,25 +145,24 @@ public class BoosterDraftAI {
             }
         } else if (!this.playerColors.get(player).getColor1().equals("none")
                 && this.playerColors.get(player).getColor2().equals("none")) {
+            // Has already picked one color, but not the second.
 
-            CardList walkers = aiPlayables.getType("Planeswalker");
-            if (walkers.size() > 0) {
-                pickedCard = walkers.get(0);
-                hasPicked = true;
-            }
-
-            if (!hasPicked) {
-                final CardList creatures = aiPlayables.getType("Creature").getMonoColored(true);
-                creatures.sort(new CreatureComparator());
-                debugCreatures(creatures);
-
-                if (creatures.size() > 0) {
-                    pickedCard = creatures.get(0);
-                    hasPicked = true;
+            // Sort playable, on-color, or mono-colored, or colorless cards
+            TreeMap<Integer, Card> rankedPlayableCards = new TreeMap<Integer, Card>();
+            for (Card card : aiPlayables) {
+                if (card.isColorless() || CardUtil.isColor(card, this.playerColors.get(player).getColor1())
+                        || CardUtil.getColors(card).size() == 1) {
+                    Integer rkg = draftRankings.getRanking(card.getName(), card.getCurSetCode());
+                    if (rkg != null) {
+                        rankedPlayableCards.put(rkg, card);
+                    }
                 }
             }
+
+            pickedCard = pickCard(rankedCards, rankedPlayableCards);
+
             String pickedCardColor = pickedCard.getColor().get(0).toStringArray().get(0);
-            if (hasPicked && !pickedCard.isColorless() && !pickedCardColor.equals(this.playerColors.get(player).getColor1())) {
+            if (!pickedCard.isColorless() && !pickedCardColor.equals(this.playerColors.get(player).getColor1())) {
                 this.playerColors.get(player).setColor2(pickedCardColor);
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).getColor2());
@@ -169,135 +172,85 @@ public class BoosterDraftAI {
                         this.playerColors.get(player).colorToMana(this.playerColors.get(player).getColor2()));
             }
         } else {
-            CardList typeList;
+            // Has already picked both colors.
             CardList colorList;
 
             colorList = aiPlayables.getOnly2Colors(this.playerColors.get(player).getColor1(),
                     this.playerColors.get(player).getColor2());
 
-            if (colorList.size() > 0) {
-                // Since we want about 15 creatures and 7 non-creatures in our deck, we want to pick
-                // about 2 creatures for every 1 non-creature. So put 2 creatures in our wouldPick
-                // list, and 1 non-creature.
-                typeList = colorList.getType("Creature");
-                if (typeList.size() > 0) {
-                    typeList.sort(new CreatureComparator());
-                    wouldPick.add(typeList.get(0));
-                    if (typeList.size() > 1) {
-                        wouldPick.add(typeList.get(1));
-                    }
-                }
-
-                typeList = colorList.getType("Instant");
-                typeList.addAll(colorList.getType("Sorcery"));
-                typeList.addAll(colorList.getType("Enchantment"));
-                typeList.addAll(colorList.getType("Artifact"));
-                if (typeList.size() > 0) {
-                    CardListUtil.sortCMC(typeList);
-                    wouldPick.add(typeList.get(0));
-                }
-
-                typeList = colorList.getType("Planeswalker");
-                if (typeList.size() > 0) {
-                    // just take it...
-                    pickedCard = typeList.get(0);
-                    hasPicked = true;
-                }
-
-            } else {
-                /*
-                 * if (!playerColors.get(player).Splash.equals("none")) { //
-                 * pick randomly from splash color colorList =
-                 * AIPlayables.getColor(playerColors.get(player).Splash); if
-                 * (colorList.size() > 0) { Random r = new Random();
-                 * list.add(colorList.get(r.nextInt(colorList.size()))); } }
-                 * else { // pick splash color ArrayList<String> otherColors =
-                 * new ArrayList<String>(); for (int i=0; i<5; i++)
-                 * otherColors.add(Constant.Color.onlyColors[i]);
-                 * otherColors.remove(playerColors.get(player).Color1);
-                 * otherColors.remove(playerColors.get(player).Color2);
-                 * 
-                 * colorList = new CardList(); for (int i=0;
-                 * i<otherColors.size(); i++)
-                 * colorList.add(in_choose.getColor(otherColors.get(i)));
-                 * 
-                 * if (colorList.size() > 0) { Random r = new Random();
-                 * pickedCard = colorList.get(r.nextInt(colorList.size()));
-                 * playerColors.get(player).Splash =
-                 * pickedCard.getColor().get(0).toStringArray().get(0);
-                 * System.out
-                 * .println("Player["+player+"] Splash: "+playerColors.
-                 * get(player).Splash); playerColors.get(player).ManaS =
-                 * playerColors
-                 * .get(player).ColorToMana(playerColors.get(player).Splash);
-                 * hasPicked = true; } }
-                 */
-                typeList = aiPlayables.getType("Land");
-                if (typeList.size() > 0) {
-                    for (int i = 0; i < typeList.size(); i++) {
-                        final ArrayList<AbilityMana> maList = typeList.get(i).getManaAbility();
-                        for (int j = 0; j < maList.size(); j++) {
-                            if (maList.get(j).canProduce(this.playerColors.get(player).getMana1())
-                                    || maList.get(j).canProduce(this.playerColors.get(player).getMana2())) {
-                                wouldPick.add(typeList.get(i));
-                            }
-                        }
-                    }
+            // Sort playable, on-color cards by rank
+            TreeMap<Integer, Card> rankedPlayableCards = new TreeMap<Integer, Card>();
+            for (Card card : colorList) {
+                Integer rkg = draftRankings.getRanking(card.getName(), card.getCurSetCode());
+                if (rkg != null) {
+                    rankedPlayableCards.put(rkg, card);
                 }
             }
+
+            pickedCard = pickCard(rankedCards, rankedPlayableCards);
         }
 
-        if (!hasPicked) {
+        if (pickedCard == null) {
             final Random r = new Random();
-
-            if (wouldPick.size() > 0) {
-                pickedCard = wouldPick.get(r.nextInt(wouldPick.size()));
-            } else {
-                pickedCard = chooseFrom.get(r.nextInt(chooseFrom.size()));
-            }
-
-            hasPicked = true;
+            pickedCard = chooseFrom.get(r.nextInt(chooseFrom.size()));
         }
 
-        if (hasPicked) {
+        if (pickedCard != null) {
             chooseFrom.remove(pickedCard);
             this.deck[player].add(pickedCard);
-
-            if (Constant.Runtime.DEV_MODE[0]) {
-                System.out.println("Player[" + player + "] picked " + pickedCard.getName() + " ("
-                        + pickedCard.getManaCost() + ") " + pickedCard.getType().toString() + "\n");
-            }
         }
 
         return pickedCard;
     }
 
-    /*
-     * I get some wierd error when I have this method, I don't know whats wrong
+    /**
+     * Pick a card.
      * 
-     * private void checkDeckList(CardList[] deck) { if(deck.length != nDecks)
-     * throw new RuntimeException(
-     * "BoosterDraftAI : checkDeckList() error, deck list size is not 7 - "
-     * +deck.length);
-     * 
-     * for(int i = 0; i < nDecks; i++) { if(deck[i].size() != 22) { throw new
-     * RuntimeException
-     * ("BoosterDraftAI : checkDeckList() error, deck list size is not 22 - "
-     * +deck[i].size() +" - " +deck.toString()); } if(countCreatures(deck[i]) <
-     * nCreatures) throw new RuntimeException(
-     * "BoosterDraftAI : checkDeckList() error, deck needs more creatures - "
-     * +countCreatures(deck[i]));
-     * 
-     * for(int inner = 0; inner < 22; inner++) if(!
-     * CardUtil.getColors(deck[i].getCard(inner)).contains(deckColor[i][0]) && !
-     * CardUtil.getColors(deck[i].getCard(inner)).contains(deckColor[i][1]))
-     * throw new RuntimeException(
-     * "BoosterDraftAI : checkDeckList() error, deck has different card colors"
-     * ); }//for }//checkDeckList()
+     * @param rankedCards
+     * @param rankedPlayableCards
+     * @return Card
      */
-
-    // private int countCreatures(CardList list) {return
-    // list.getType("Creature").size();}
+    private Card pickCard(TreeMap<Integer, Card> rankedCards, TreeMap<Integer, Card> rankedPlayableCards) {
+        Card pickedCard = null;
+        Map.Entry<Integer, Card> best = rankedCards.firstEntry();
+        if (best != null) {
+            if (rankedPlayableCards.containsValue(best.getValue())) {
+                // If best card is playable, pick it.
+                pickedCard = best.getValue();
+                System.out.println("Chose Best: " + "[" + best.getKey() + "] " + pickedCard.getName() + " ("
+                        + pickedCard.getManaCost() + ") " + pickedCard.getType().toString());
+            } else {
+                // If not, find the best card that is playable.
+                Map.Entry<Integer, Card> bestPlayable = rankedPlayableCards.firstEntry();
+                if (bestPlayable == null) {
+                    // Nothing is playable, so just take the best card.
+                    pickedCard = best.getValue();
+                    System.out.println("Nothing playable, chose Best: " + "[" + best.getKey() + "] "
+                            + pickedCard.getName() + " (" + pickedCard.getManaCost() + ") "
+                            + pickedCard.getType().toString());
+                } else {
+                    // If the best card is far better than the best playable,
+                    // take the best. Otherwise, take the one that is playable.
+                    if (best.getKey() + TAKE_BEST_THRESHOLD < bestPlayable.getKey()) {
+                        pickedCard = best.getValue();
+                        System.out.println("Best is much better than playable; chose Best: " + "[" + best.getKey()
+                                + "] " + pickedCard.getName() + " (" + pickedCard.getManaCost() + ") "
+                                + pickedCard.getType().toString());
+                        System.out.println("Playable was: " + "[" + bestPlayable.getKey() + "] "
+                                + bestPlayable.getValue().getName());
+                    } else {
+                        pickedCard = bestPlayable.getValue();
+                        System.out.println("Chose Playable: " + "[" + bestPlayable.getKey() + "] "
+                                + pickedCard.getName() + " (" + pickedCard.getManaCost() + ") "
+                                + pickedCard.getType().toString());
+                        System.out.println("Best was: " + "[" + best.getKey() + "] " + best.getValue().getName());
+                    }
+                }
+            }
+        }
+        System.out.println("");
+        return pickedCard;
+    }
 
     /**
      * <p>
@@ -336,9 +289,6 @@ public class BoosterDraftAI {
      * @return an array of {@link forge.deck.Deck} objects.
      */
     public Deck[] getDecks() {
-        // check CardList[] deck for errors
-        // checkDeckList(deck);
-
         final Deck[] out = new Deck[this.deck.length];
 
         for (int i = 0; i < this.deck.length; i++) {
@@ -401,6 +351,9 @@ public class BoosterDraftAI {
             this.playerColors.add(new DeckColors());
         }
 
+        // Initialize card rankings
+        this.draftRankings = new ReadDraftRankings();
+
     } // BoosterDraftAI()
 
     /**
@@ -424,6 +377,9 @@ public class BoosterDraftAI {
 
     private final ArrayList<DeckColors> playerColors = new ArrayList<DeckColors>();
 
+    private ReadDraftRankings draftRankings;
+    private static final int TAKE_BEST_THRESHOLD = 50;
+
     // all 10 two color combinations
     private final String[][] deckColorChoices = { { Constant.Color.BLACK, Constant.Color.BLUE },
             { Constant.Color.BLACK, Constant.Color.GREEN }, { Constant.Color.BLACK, Constant.Color.RED },
@@ -436,12 +392,5 @@ public class BoosterDraftAI {
 
             { Constant.Color.RED, Constant.Color.WHITE } };
 
-    private static void debugCreatures(CardList creatures) {
-        if (Constant.Runtime.DEV_MODE[0]) {
-            for (Card c : creatures) {
-                System.out.println(c.toString() + ": Cost " + c.getCMC() + ", Eval " + CardFactoryUtil.evaluateCreature(c));
-            }
-        }
-    }
 } // BoosterDraftAI()
 
