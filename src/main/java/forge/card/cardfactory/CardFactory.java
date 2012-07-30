@@ -20,24 +20,24 @@ package forge.card.cardfactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
-
 import forge.AllZone;
 import forge.Card;
 import forge.CardCharactersticName;
-import forge.CardList;
+import forge.CardReader;
+import forge.CardUtil;
 import forge.Singletons;
+import forge.card.CardRules;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
+import forge.error.ErrorViewer;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.gui.GuiUtils;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.util.FileUtil;
 
 /**
  * <p>
@@ -57,22 +57,7 @@ import forge.util.FileUtil;
  * @author Forge
  * @version $Id$
  */
-public abstract class AbstractCardFactory implements CardFactoryInterface {
-    /**
-     * This maps card name Strings to Card instances. The Card instances have no
-     * owner, and lack abilities.
-     * 
-     * To get a full-fledged card, see allCards field or the iterator method.
-     */
-    private final Map<String, Card> map = new TreeMap<String, Card>();
-
-    /** This is a special list of cards, with all abilities attached. */
-    protected List<Card> allCardsReadOnly;
-
-    private Set<String> removedCardList;
-    private final Card blankCard = new Card(); // new code
-
-    private final CardList copiedList = new CardList();
+public class CardFactory implements CardFactoryInterface {
 
     /**
      * <p>
@@ -82,45 +67,23 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
      * @param file
      *            a {@link java.io.File} object.
      */
-    protected AbstractCardFactory(final File file) {
-        final SpellAbility spell = new SpellAbility(SpellAbility.getSpell(), this.blankCard) {
-            // neither computer nor human play can play this card
-            @Override
-            public boolean canPlay() {
-                return false;
-            }
+    private final CardReader reader;
+    
+    public CardFactory(final File file) {
 
-            @Override
-            public void resolve() {
-            }
-        };
-        this.blankCard.addSpellAbility(spell);
-        spell.setManaCost("1");
-        this.blankCard.setName("Removed Card");
+        GuiUtils.checkEDT("CardFactory$constructor", false);
+        reader = new CardReader(ForgeProps.getFile(NewConstants.CARDSFOLDER), true);
+        try {
+            // this fills in our map of card names to Card instances.
+            final List<CardRules> listCardRules = reader.loadCards();
+            CardDb.setup(listCardRules.iterator());
 
-        // owner and controller will be wrong sometimes
-        // but I don't think it will matter
-        // theoretically blankCard will go to the wrong graveyard
-        this.blankCard.setOwner(AllZone.getHumanPlayer());
-
-        this.removedCardList = new TreeSet<String>(FileUtil.readFile(ForgeProps.getFile(NewConstants.REMOVED)));
-
+        } catch (final Exception ex) {
+            ErrorViewer.showError(ex);
+        }
+        
     } // constructor
 
-    /**
-     * Getter for allCards.
-     * 
-     * @return allCards
-     */
-
-    /**
-     * Getter for map.
-     * 
-     * @return map
-     */
-    protected final Map<String, Card> getMap() {
-        return this.map;
-    }
 
     /**
      * <p>
@@ -137,9 +100,8 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         if (in.isInAlternateState()) {
             in.setState(CardCharactersticName.Original);
         }
-        final Card out = this.getCard(in.getName(), in.getOwner());
+        final Card out = this.getCard(CardDb.instance().getCard(in), in.getOwner());
         out.setUniqueNumber(in.getUniqueNumber());
-        out.setCurSetCode(in.getCurSetCode());
 
         CardFactoryUtil.copyCharacteristics(in, out);
         if (in.hasAlternateState()) {
@@ -244,25 +206,37 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
      *         blankCard
      */
     @Override
-    public final Card getCard(final String cardName, final Player owner) {
-        if (this.removedCardList.contains(cardName) || cardName.equals(this.blankCard.getName())) {
-            return this.blankCard;
-        }
+    public final Card getCard(final CardPrinted cp, final Player owner) {
 
         //System.out.println(cardName);
-        return this.getCard2(cardName, owner);
+        Card c = this.getCard2(cp.getCard().getCardScript(), owner);
+
+        if (c != null) {
+            c.setCurSetCode(cp.getEdition());
+            c.setRandomPicture(cp.getArtIndex() + 1);
+            c.setImageFilename(cp.getImageFilename());
+
+            if (c.hasAlternateState()) {
+                if (c.isFlipCard()) {
+                    c.setState(CardCharactersticName.Flipped);
+                }
+                if (c.isDoubleFaced()) {
+                    c.setState(CardCharactersticName.Transformed);
+                }
+                c.setImageFilename(CardUtil.buildFilename(c));
+                c.setState(CardCharactersticName.Original);
+            }
+        }
+        // else throw "Unsupported card";
+        return c;        
+        
     }
 
-    protected Card getCard2(final String cardName, final Player owner) {
+    protected Card getCard2(final Iterable<String> script, final Player owner) {
         // o should be Card object
-        final Card o = this.map.get(cardName);
-        if (o == null) {
-            final StringBuilder sb = new StringBuilder();
-            sb.append("CardFactory : getCard() invalid card name - ").append(cardName);
-            throw new RuntimeException(sb.toString());
-        }
-
-        return getCard2(o, owner);
+        final Card o = CardReader.readCard(script);
+        o.setOwner(owner);
+        return buildAbilities(o);
     }
 
     public static Card getCard2(final Card o, final Player owner) {

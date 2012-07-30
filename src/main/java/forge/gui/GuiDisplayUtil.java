@@ -580,7 +580,7 @@ public final class GuiDisplayUtil {
         for (final String element : data) {
             final String[] cardinfo = element.trim().split("\\|");
 
-            final Card c = AllZone.getCardFactory().getCard(cardinfo[0], player);
+            final Card c = AllZone.getCardFactory().getCard(CardDb.instance().getCard(cardinfo[0]), player);
 
             boolean hasSetCurSet = false;
             for (final String info : cardinfo) {

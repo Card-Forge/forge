@@ -25,12 +25,10 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardCharactersticName;
 import forge.CardUtil;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.game.player.Player;
-import forge.util.MyRandom;
 import forge.util.closures.Lambda1;
 import forge.util.closures.Predicate;
 import forge.util.closures.PredicateString;
@@ -291,30 +289,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * @return the card
      */
     public Card toForgeCard(Player owner) {
-        final Card c = AllZone.getCardFactory().getCard(this.name, owner);
-        if (c != null) {
-            c.setCurSetCode(this.getEdition());
-            c.setRandomPicture(this.artIndex + 1);
-            c.setImageFilename(this.getImageFilename());
-
-            if (c.hasAlternateState()) {
-                if (c.isFlipCard()) {
-                    c.setState(CardCharactersticName.Flipped);
-                }
-                if (c.isDoubleFaced()) {
-                    c.setState(CardCharactersticName.Transformed);
-                }
-                c.setImageFilename(CardUtil.buildFilename(c));
-                c.setState(CardCharactersticName.Original);
-            }
-        }
-
-        final int cntVariants = getCard().getEditionInfo(getEdition()).getCopiesCount();
-        if (cntVariants > 1) {
-            c.setRandomPicture(MyRandom.getRandom().nextInt(cntVariants - 1) + 1);
-            c.setImageFilename(CardUtil.buildFilename(c));
-        }
-        // else throw "Unsupported card";
+        final Card c = AllZone.getCardFactory().getCard(this, owner);
         return c;
     }
 

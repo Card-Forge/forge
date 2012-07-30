@@ -21,8 +21,9 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
-import forge.card.cardfactory.AbstractCardFactory;
+import forge.card.cardfactory.CardFactory;
 import forge.game.player.Player;
+import forge.item.CardDb;
 import forge.quest.bazaar.QuestPetController;
 
 import java.util.List;
@@ -96,7 +97,7 @@ public class QuestUtil {
             if (pet != null) {
                 Card c = pet.getPetCard(qc.getAssets());
                 if (c != null) {
-                    Card copy = AbstractCardFactory.getCard2(c, AllZone.getHumanPlayer());
+                    Card copy = CardFactory.getCard2(c, AllZone.getHumanPlayer());
                     copy.setSickness(true);
                     copy.addController(AllZone.getHumanPlayer());
                     copy.setImageName(c.getImageName());
@@ -190,9 +191,7 @@ public class QuestUtil {
         }
         // Standard card creation
         else {
-            tempcard = AllZone.getCardFactory().getCard(name, owner);
-            tempcard.setCurSetCode(tempcard.getMostRecentSet());
-            tempcard.setImageFilename(CardUtil.buildFilename(tempcard));
+            tempcard = CardDb.instance().getCard(name, true).toForgeCard(owner);
         }
         return tempcard;
     }

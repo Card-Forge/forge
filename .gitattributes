@@ -11908,7 +11908,7 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryToken.java svneol=native#t
 src/main/java/forge/card/abilityfactory/AbilityFactoryTurns.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryZoneAffecting.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/package-info.java svneol=native#text/plain
-src/main/java/forge/card/cardfactory/AbstractCardFactory.java svneol=native#text/plain
+src/main/java/forge/card/cardfactory/CardFactory.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryArtifacts.java -text
 src/main/java/forge/card/cardfactory/CardFactoryAuras.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryCreatures.java svneol=native#text/plain
@@ -11920,7 +11920,6 @@ src/main/java/forge/card/cardfactory/CardFactoryLands.java svneol=native#text/pl
 src/main/java/forge/card/cardfactory/CardFactoryPlaneswalkers.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactorySorceries.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryUtil.java svneol=native#text/plain
-src/main/java/forge/card/cardfactory/PreloadingCardFactory.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cost/Cost.java svneol=native#text/plain
 src/main/java/forge/card/cost/CostDiscard.java -text
@@ -12427,12 +12426,10 @@ src/site/apt/index.apt -text
 src/test/java/forge/BoosterDraft1Test.java svneol=native#text/plain
 src/test/java/forge/BoosterDraftTest.java svneol=native#text/plain
 src/test/java/forge/CardColorTest.java svneol=native#text/plain
-src/test/java/forge/CardReaderTest.java svneol=native#text/plain
 src/test/java/forge/DeckWantsTest.java -text
 src/test/java/forge/GuiDownloadPicturesLQTest.java svneol=native#text/plain
 src/test/java/forge/GuiDownloadSetPicturesLQTest.java svneol=native#text/plain
 src/test/java/forge/GuiMigrateLocalMWSSetPicturesHQTest.java svneol=native#text/plain
-src/test/java/forge/GuiMultipleBlockers4Test.java svneol=native#text/plain
 src/test/java/forge/GuiProgressBarWindowTest.java svneol=native#text/plain
 src/test/java/forge/PanelTest.java svneol=native#text/plain
 src/test/java/forge/ReadDraftRankingsTest.java -text

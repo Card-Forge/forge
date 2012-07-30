@@ -44,6 +44,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.item.CardDb;
 import forge.util.MyRandom;
 
 /**
@@ -408,7 +409,8 @@ public final class AbilityFactoryCopy {
                     Card copy;
                     if (!c.isToken()) {
                         // copy creature and put it onto the battlefield
-                        copy = AllZone.getCardFactory().getCard(c.getName(), sa.getActivatingPlayer());
+                        
+                        copy = AllZone.getCardFactory().getCard(CardDb.instance().getCard(c), sa.getActivatingPlayer());
 
                         // when copying something stolen:
                         copy.addController(sa.getActivatingPlayer());

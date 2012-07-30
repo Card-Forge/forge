@@ -21,6 +21,7 @@ package forge.card.cardfactory;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
+import forge.item.CardPrinted;
 
 /**
  * The Interface CardFactoryInterface.
@@ -65,5 +66,5 @@ public interface CardFactoryInterface {
      * @return a {@link forge.Card} instance, owned by owner; or the special
      *         blankCard
      */
-    Card getCard(String cardName, Player owner);
+    Card getCard(CardPrinted card, Player owner);
 }

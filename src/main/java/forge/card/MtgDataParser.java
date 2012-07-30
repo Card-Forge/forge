@@ -149,9 +149,9 @@ public final class MtgDataParser implements Iterator<CardRules> {
             return null;
         }
 
-        final CardRules otherPart = hasOtherPart ? new CardRules(this.chars[1], hasOtherPart, null, false, false)
+        final CardRules otherPart = hasOtherPart ? new CardRules(this.chars[1], null, hasOtherPart, null, false, false)
                 : null;
-        return new CardRules(this.chars[0], hasOtherPart, otherPart, false, false);
+        return new CardRules(this.chars[0], null, hasOtherPart, otherPart, false, false);
     }
 
     private String readSingleCard(final CardRuleCharacteristics ret) {

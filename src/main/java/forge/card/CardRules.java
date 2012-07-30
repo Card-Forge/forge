@@ -59,6 +59,8 @@ public final class CardRules {
 
     private final boolean hasOtherFace;
 
+    private List<String> originalScript;
+
     // Ctor and builders are needed here
     /**
      * Gets the name.
@@ -234,14 +236,14 @@ public final class CardRules {
      * @param removedFromAIDecks
      *            the removed from ai decks
      */
-    public CardRules(final CardRuleCharacteristics chars, final boolean isDoubleFacedCard, final CardRules otherPart,
+    public CardRules(final CardRuleCharacteristics chars, List<String> forgeScript, final boolean isDoubleFacedCard, final CardRules otherPart,
             final boolean removedFromRandomDecks, final boolean removedFromAIDecks) {
         this.characteristics = chars;
         this.slavePart = otherPart;
         this.hasOtherFace = isDoubleFacedCard;
         this.isRemovedFromAIDecks = removedFromAIDecks;
         this.isRemovedFromRandomDecks = removedFromRandomDecks;
-
+        this.originalScript = forgeScript == null ? null : new ArrayList<String>(forgeScript);
         // System.out.println(cardName);
 
         if (this.getType().isCreature()) {
@@ -896,5 +898,13 @@ public final class CardRules {
             public static final Predicate<CardRules> IS_IN_LATEST_SET_SPECIAL = Predicates.rarityInCardsLatestSet(true,
                     CardRarity.Special);
         }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public Iterable<String> getCardScript() {
+        return originalScript;
     }
 }

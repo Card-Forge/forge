@@ -20,8 +20,8 @@ package forge;
 import java.util.Arrays;
 import java.util.List;
 
+import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryInterface;
-import forge.card.cardfactory.PreloadingCardFactory;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.InputControl;
@@ -205,7 +205,7 @@ public final class AllZone {
         if (AllZone.cardFactory == null) {
             // setCardFactory(new
             // LazyCardFactory(ForgeProps.getFile(CARDSFOLDER)));
-            AllZone.setCardFactory(new PreloadingCardFactory(ForgeProps.getFile(NewConstants.CARDSFOLDER)));
+            AllZone.setCardFactory(new CardFactory(ForgeProps.getFile(NewConstants.CARDSFOLDER)));
         }
         return AllZone.cardFactory;
     }

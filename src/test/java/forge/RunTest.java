@@ -1,17 +1,8 @@
 package forge;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.testng.annotations.Test;
 
-import forge.card.CardManaCost;
 import forge.card.cardfactory.CardFactoryInterface;
-import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
-import forge.control.input.InputPayManaCostUtil;
 import forge.game.phase.CombatUtil;
 
 /**
@@ -36,6 +27,7 @@ public class RunTest {
         Card c;
         final CardFactoryInterface cf = AllZone.getCardFactory();
         // ********* test Card
+        /*
         c = cf.getCard("Elvish Warrior", AllZone.getComputerPlayer());
         this.check("1", c.getOwner().isComputer());
         this.check("1.1", c.getName().equals("Elvish Warrior"));
@@ -221,7 +213,7 @@ public class RunTest {
         // test Input_PayManaCostUtil
         this.check("98", InputPayManaCostUtil.getLongColorString("G").equals(Constant.Color.GREEN));
         this.check("99", InputPayManaCostUtil.getLongColorString("1").equals(Constant.Color.COLORLESS));
-
+*/
         /*
          * check("101", Input_PayManaCostUtil.isManaNeeded(Constant.Color.Green,
          * new ManaCost("5")) == true); check("102",
@@ -255,7 +247,7 @@ public class RunTest {
         c2.addIntrinsicKeyword("Flying");
         this.check("109", CombatUtil.canBlock(c, c2));
         this.check("110", !CombatUtil.canBlock(c2, c));
-
+/*
         c = cf.getCard("Fyndhorn Elves", null);
         c2 = cf.getCard("Talas Warrior", null);
         this.check("110a", !CombatUtil.canBlock(c2, c));
@@ -326,6 +318,7 @@ public class RunTest {
         this.check("125", CardUtil.getConvertedManaCost("R R R") == 3);
         this.check("126", CardUtil.getConvertedManaCost("1") == 1);
         this.check("127", CardUtil.getConvertedManaCost("2/R 2/G 2/W 2/B 2/U") == 10);
+        */
     } // test()
 
     /**

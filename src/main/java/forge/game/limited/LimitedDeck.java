@@ -3,7 +3,6 @@ package forge.game.limited;
 import java.util.HashMap;
 import java.util.Map;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
@@ -14,6 +13,8 @@ import forge.card.CardManaCost;
 import forge.card.DeckWants;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 import forge.util.MyRandom;
 
 /**
@@ -130,9 +131,8 @@ public class LimitedDeck extends Deck {
                 // if no playable cards remain fill up with basic lands
                 for (int i = 0; i < 5; i++) {
                     if (clrCnts[i].getCount() > 0) {
-                        final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(), AllZone.getComputerPlayer());
-                        c.setCurSetCode(IBoosterDraft.LAND_SET_CODE[0]);
-                        deckList.add(c);
+                        final CardPrinted cp = CardDb.instance().getCard(clrCnts[i].getColor(), IBoosterDraft.LAND_SET_CODE[0]);
+                        deckList.add(cp.toForgeCard());
                         break;
                     }
                 }
@@ -207,9 +207,8 @@ public class LimitedDeck extends Deck {
                 }
 
                 for (int j = 0; j <= nLand; j++) {
-                    final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(), AllZone.getComputerPlayer());
-                    c.setCurSetCode(IBoosterDraft.LAND_SET_CODE[0]);
-                    deckList.add(c);
+                    final CardPrinted cp = CardDb.instance().getCard(clrCnts[i].getColor(), IBoosterDraft.LAND_SET_CODE[0]);
+                    deckList.add(cp.toForgeCard());
                     landsAdded++;
                 }
             }
@@ -219,13 +218,12 @@ public class LimitedDeck extends Deck {
         int n = 0;
         while (landsNeeded > 0) {
             if (clrCnts[n].getCount() > 0) {
-                final Card c = AllZone.getCardFactory().getCard(clrCnts[n].getColor(), AllZone.getComputerPlayer());
-                c.setCurSetCode(IBoosterDraft.LAND_SET_CODE[0]);
-                deckList.add(c);
+                CardPrinted cp = CardDb.instance().getCard(clrCnts[n].getColor(), IBoosterDraft.LAND_SET_CODE[0]);
+                deckList.add(cp.toForgeCard());
                 landsNeeded--;
 
                 if (Constant.Runtime.DEV_MODE[0]) {
-                    System.out.println("AddBasics: " + c.getName());
+                    System.out.println("AddBasics: " + cp.getName());
                 }
             }
             if (++n > 4) {

@@ -17,6 +17,8 @@
  */
 package forge.card;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import forge.card.mana.ManaCostShard;
@@ -43,6 +45,7 @@ public class CardRulesReader {
 
     private boolean removedFromAIDecks = false;
     private boolean removedFromRandomDecks = false;
+    private List<String> originalScript = new ArrayList<String>();
 
     // Reset all fields to parse next card (to avoid allocating new
     // CardRulesReader N times)
@@ -54,6 +57,7 @@ public class CardRulesReader {
         this.curCharacteristics = 0;
         this.removedFromAIDecks = false;
         this.removedFromRandomDecks = false;
+        originalScript.clear();
         // this.isDoubleFacedCard = false;
         // this.isFlipCard = false;
     }
@@ -65,10 +69,10 @@ public class CardRulesReader {
      */
     public final CardRules getCard() {
         final boolean hasOtherPart = this.characteristics[1] != null;
-        final CardRules otherPart = hasOtherPart ? new CardRules(this.characteristics[1], true, null,
+        final CardRules otherPart = hasOtherPart ? new CardRules(this.characteristics[1], null, true, null,
                 this.removedFromRandomDecks, this.removedFromAIDecks) : null;
 
-        return new CardRules(this.characteristics[0], hasOtherPart, otherPart, this.removedFromRandomDecks,
+        return new CardRules(this.characteristics[0], originalScript, hasOtherPart, otherPart, this.removedFromRandomDecks,
                 this.removedFromAIDecks);
     }
 
@@ -79,6 +83,9 @@ public class CardRulesReader {
      *            the line
      */
     public final void parseLine(final String line) {
+        
+        originalScript.add(line);
+        
         switch( line.charAt(0)){
             case 'A':
                 if (line.startsWith("AlternateMode:")) {
