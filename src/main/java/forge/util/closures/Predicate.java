@@ -1002,17 +1002,14 @@ final class BridgeToInstance<T, U> extends Predicate<U> {
  * 
  * @param <T>
  */
+/* PERFORMANCE CRITICAL - DO NOT GENERATE GETTERS HERE*/ 
 class Node<T> extends Predicate<T> {
+    /* PERFORMANCE CRITICAL - DO NOT GENERATE GETTERS HERE*/ 
     private final PredicatesOp operator;
-    /**
-     * 
-     */
-    private final Predicate<T> filter1;
-    /**
-     * 
-     */
-    private final Predicate<T> filter2;
-
+    protected final Predicate<T> filter1;
+    protected final Predicate<T> filter2;
+    /* PERFORMANCE CRITICAL - DO NOT GENERATE GETTERS HERE*/ 
+    
     /**
      * 
      * Node.
@@ -1031,39 +1028,27 @@ class Node<T> extends Predicate<T> {
     public boolean isTrue(final T card) {
         switch (this.operator) {
         case AND:
-            return this.getFilter1().isTrue(card) && this.getFilter2().isTrue(card);
+            return this.filter1.isTrue(card) && this.filter2.isTrue(card);
         case GT:
-            return this.getFilter1().isTrue(card) && !this.getFilter2().isTrue(card);
+            return this.filter1.isTrue(card) && !this.filter2.isTrue(card);
         case LT:
-            return !this.getFilter1().isTrue(card) && this.getFilter2().isTrue(card);
+            return !this.filter1.isTrue(card) && this.filter2.isTrue(card);
         case NAND:
-            return !(this.getFilter1().isTrue(card) && this.getFilter2().isTrue(card));
+            return !(this.filter1.isTrue(card) && this.filter2.isTrue(card));
         case OR:
-            return this.getFilter1().isTrue(card) || this.getFilter2().isTrue(card);
+            return this.filter1.isTrue(card) || this.filter2.isTrue(card);
         case NOR:
-            return !(this.getFilter1().isTrue(card) || this.getFilter2().isTrue(card));
+            return !(this.filter1.isTrue(card) || this.filter2.isTrue(card));
         case XOR:
-            return this.getFilter1().isTrue(card) ^ this.getFilter2().isTrue(card);
+            return this.filter1.isTrue(card) ^ this.filter2.isTrue(card);
         case EQ:
-            return this.getFilter1().isTrue(card) == this.getFilter2().isTrue(card);
+            return this.filter1.isTrue(card) == this.filter2.isTrue(card);
         default:
             return false;
         }
     }
 
-    /**
-     * @return the filter1
-     */
-    public Predicate<T> getFilter1() {
-        return filter1;
-    }
 
-    /**
-     * @return the filter2
-     */
-    public Predicate<T> getFilter2() {
-        return filter2;
-    }
 }
 
 /**
@@ -1086,7 +1071,7 @@ final class NodeOr<T> extends Node<T> {
 
     @Override
     public boolean isTrue(final T card) {
-        return this.getFilter1().isTrue(card) || this.getFilter2().isTrue(card);
+        return this.filter1.isTrue(card) || this.filter2.isTrue(card);
     }
 }
 
@@ -1110,7 +1095,7 @@ final class NodeAnd<T> extends Node<T> {
 
     @Override
     public boolean isTrue(final T card) {
-        return this.getFilter1().isTrue(card) && this.getFilter2().isTrue(card);
+        return this.filter1.isTrue(card) && this.filter2.isTrue(card);
     }
 }
 
