@@ -222,7 +222,7 @@ public class CardReader implements Runnable {
      */
     @Override
     public final void run() {
-        this.loadCardsUntilYouFind(null);
+        this.loadCards();
     }
 
     /**
@@ -236,7 +236,7 @@ public class CardReader implements Runnable {
      * 
      * @return the Card or null if it was not found.
      */
-    protected final Card loadCardsUntilYouFind(final String cardName) {
+    protected final Card loadCards() {
         Card result = null;
         final FProgressBar barProgress = SplashFrame.PROGRESS_BAR;
 
@@ -269,11 +269,6 @@ public class CardReader implements Runnable {
                 result = this.loadCard(cardTxtFile);
                 barProgress.increment();
 
-                if ((cardName != null) && cardName.equals(result.getName())) {
-                    break; // no thread leak here if entire card DB is loaded,
-                           // or if this object is finalized.
-                }
-
             } // endfor
         } else {
             barProgress.setMaximum((int) this.estimatedFilesRemaining);
@@ -290,10 +285,6 @@ public class CardReader implements Runnable {
 
                 result = this.loadCard(entry);
                 barProgress.increment();
-
-                if ((cardName != null) && cardName.equals(result.getName())) {
-                    break;
-                }
             }
         } // endif
 

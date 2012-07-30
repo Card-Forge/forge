@@ -56,7 +56,6 @@ import forge.view.SplashFrame;
  */
 public class PreloadingCardFactory extends AbstractCardFactory {
 
-    protected final List<Card> allCards = new ArrayList<Card>();
     /**
      * <p>
      * Constructor for CardFactory.
@@ -84,26 +83,6 @@ public class PreloadingCardFactory extends AbstractCardFactory {
         try {
             this.readCards(file);
 
-            final FProgressBar barProgress = SplashFrame.PROGRESS_BAR;
-            if (barProgress != null) {
-                SwingUtilities.invokeAndWait(new Runnable() {
-                    @Override
-                    public void run() {
-                        barProgress.reset();
-                        barProgress.setDescription("Creating card objects: ");
-                    }
-                });
-            }
-
-            // initialize CardList allCards
-            final Iterator<String> it = this.getMap().keySet().iterator();
-            if (barProgress != null) { barProgress.setMaximum(this.getMap().size()); }
-            Card c;
-            while (it.hasNext()) {
-                c = this.getCard(it.next().toString(), AllZone.getHumanPlayer());
-                this.getAllCards().add(c);
-                if (barProgress != null) { barProgress.increment(); }
-            }
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
         }
@@ -130,12 +109,5 @@ public class PreloadingCardFactory extends AbstractCardFactory {
 
     } // readCard()
 
-    /* (non-Javadoc)
-     * @see forge.card.cardfactory.AbstractCardFactory#getAllCards()
-     */
-    @Override
-    protected List<Card> getAllCards() {
-        return allCards;
-    }
 
 } // end class PreloadingCardFactory

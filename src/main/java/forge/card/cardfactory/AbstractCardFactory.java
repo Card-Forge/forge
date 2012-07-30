@@ -112,7 +112,6 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
      * 
      * @return allCards
      */
-    protected abstract List<Card> getAllCards();
 
     /**
      * Getter for map.
