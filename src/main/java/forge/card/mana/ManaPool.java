@@ -182,7 +182,7 @@ public class ManaPool {
 
         if (this.floatingMana.size() == 0) {
             this.calculateManaTotals();
-            this.owner.updateObservers();
+            //this.owner.updateObservers();
             return numRemoved;
         }
 
@@ -202,7 +202,7 @@ public class ManaPool {
             this.floatingMana.clear();
         }
         this.calculateManaTotals();
-        this.owner.updateObservers();
+        //this.owner.updateObservers();
 
         return numRemoved;
     }
