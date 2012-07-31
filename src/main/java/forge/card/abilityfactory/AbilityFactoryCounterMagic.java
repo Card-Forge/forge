@@ -299,7 +299,7 @@ public class AbilityFactoryCounterMagic {
             if (toPay <= usableManaSources) {
                 // If this is a reusable Resource, feel free to play it most of
                 // the time
-                if (!sa.getPayCosts().isReusuableResource() || (MyRandom.getRandom().nextFloat() < .4)) {
+                if (!sa.getPayCosts().isReusuableResource() || sa.isSpell()) {
                     return false;
                 }
             }

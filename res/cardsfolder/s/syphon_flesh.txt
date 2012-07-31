@@ -6,7 +6,6 @@ A:SP$ Sacrifice | Cost$ 4 B | Defined$ Opponent | SacValid$ Creature | SacMessag
 SVar:DBToken:DB$Token | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_flesh.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/103.jpg

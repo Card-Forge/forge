@@ -5,7 +5,6 @@ Text:no text
 A:SP$ Counter | Cost$ X W U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | References$ X | SubAbility$ DBGainLife | SpellDescription$ Counter target spell unless its controller pays X. You gain X life.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ X | References$ X
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overrule.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/120.jpg
