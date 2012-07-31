@@ -215,6 +215,19 @@ Fixes/Features:
 - Use draft rankings in booster draft.
 - Simple classes do not need getters
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Removed two of the UpdateObserver calls in ManaPool again (after testing).
+- Fixed AI logic of Planeswalker redirection.
+- The AI will now use Burn spells to kill Planeswalkers.
+- Fixed Veilstone Amulet.
+- removed "creating card objects step" from loading sequence - and does it still work?
+- Lazy loading of forge.Card instances
+- work on LimitedDeck to use rankings in deckbuilding
+- Tweaked Exalted AI.
+- Added RememberedLKI as an option for calculateAmount.
+- Fixed Disciple of Bolas.
+- Fixed zero mana costs not being affected by costChange.
+- Simplified handling of paidCostParts.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
