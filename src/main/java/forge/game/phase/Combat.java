@@ -136,14 +136,36 @@ public class Combat {
 
     /**
      * <p>
+     * getDefender.
+     * </p>
+     * 
+     * @return a {@link java.lang.Object} object.
+     */
+    public final GameEntity getDefender() {
+        return this.defenders.get(this.currentDefender);
+    }
+
+    /**
+     * <p>
      * Setter for the field <code>currentDefender</code>.
      * </p>
      * 
      * @param def
      *            a int.
      */
-    public final void setCurrentDefender(final int def) {
+    public final void setCurrentDefenderNumber(final int def) {
         this.currentDefender = def;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>currentDefender</code>.
+     * </p>
+     * 
+     *  @return a int.
+     */
+    public final int getCurrentDefenderNumber() {
+        return this.currentDefender;
     }
 
     /**

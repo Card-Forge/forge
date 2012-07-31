@@ -430,13 +430,10 @@ public class ComputerUtilAttack {
      *            a boolean.
      */
     public final void chooseDefender(final Combat c, final boolean bAssault) {
-        // TODO split attackers to different planeswalker/human
-        // AI will only attack one Defender per combat for now
         final List<GameEntity> defs = c.getDefenders();
 
-        // Randomly determine who EVERYONE is attacking
-        // would be better to determine more individually
-        int n = MyRandom.getRandom().nextInt(defs.size());
+        // Start with last planeswalker
+        int n = defs.size() - 1;
 
         final Object entity = AllZone.getComputerPlayer().getMustAttackEntity();
         if (null != entity) {
@@ -444,15 +441,15 @@ public class ComputerUtilAttack {
             n = defenders.indexOf(entity);
             if (-1 == n) {
                 System.out.println("getMustAttackEntity() returned something not in defenders.");
-                c.setCurrentDefender(0);
+                c.setCurrentDefenderNumber(0);
             } else {
-                c.setCurrentDefender(n);
+                c.setCurrentDefenderNumber(n);
             }
         } else {
-            if ((defs.size() == 1) || bAssault) {
-                c.setCurrentDefender(0);
+            if (bAssault) {
+                c.setCurrentDefenderNumber(0);
             } else {
-                c.setCurrentDefender(n);
+                c.setCurrentDefenderNumber(n);
             }
         }
 
@@ -769,6 +766,26 @@ public class ComputerUtilAttack {
             if (this.shouldAttack(attacker, this.blockers, combat)
                     && CombatUtil.canAttack(attacker, combat)) {
                 combat.addAttacker(attacker);
+                // check if attackers are enough to finish the attacked planeswalker 
+                if (combat.getCurrentDefenderNumber() > 0) {
+                    Card pw = (Card) combat.getDefender();
+                    final int blockNum = this.blockers.size();
+                    int attackNum = 0;
+                    int damage = 0;
+                    CardList attacking = combat.sortAttackerByDefender()[combat.getCurrentDefenderNumber()];
+                    CardListUtil.sortAttackLowFirst(attacking);
+                    for (Card atta : attacking) {
+                        if (attackNum >= blockNum || !CombatUtil.canBeBlocked(attacker, this.blockers)) {
+                            damage += CombatUtil.damageIfUnblocked(atta, AllZone.getHumanPlayer(), null);
+                        } else if (CombatUtil.canBeBlocked(attacker, this.blockers)) {
+                            attackNum++;
+                        }
+                    }
+                    // if enough damage: switch to next planeswalker or player
+                    if (damage >= pw.getCounters(Counters.LOYALTY)) {
+                        combat.setCurrentDefenderNumber(combat.getCurrentDefenderNumber() - 1);
+                    }
+                }
             }
         }
 
