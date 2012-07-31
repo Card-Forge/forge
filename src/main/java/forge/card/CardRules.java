@@ -236,8 +236,8 @@ public final class CardRules {
      * @param removedFromAIDecks
      *            the removed from ai decks
      */
-    public CardRules(final CardRuleCharacteristics chars, List<String> forgeScript, final boolean isDoubleFacedCard, final CardRules otherPart,
-            final boolean removedFromRandomDecks, final boolean removedFromAIDecks) {
+    public CardRules(final CardRuleCharacteristics chars, List<String> forgeScript, final boolean isDoubleFacedCard, 
+            final CardRules otherPart, final boolean removedFromRandomDecks, final boolean removedFromAIDecks) {
         this.characteristics = chars;
         this.slavePart = otherPart;
         this.hasOtherFace = isDoubleFacedCard;
@@ -906,5 +906,13 @@ public final class CardRules {
      */
     public Iterable<String> getCardScript() {
         return originalScript;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public String getPictureUrl() {
+        return characteristics.getDlUrl();
     }
 }

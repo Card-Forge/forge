@@ -147,16 +147,13 @@ public class CardRulesReader {
                 
             case 'S':
                 if (line.startsWith("SVar:RemAIDeck:")) {
-                    this.removedFromAIDecks = "True"
-                            .equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "SVar:RemAIDeck:"));
-
+                    this.removedFromAIDecks = "True".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "SVar:RemAIDeck:"));
                 } else if (line.startsWith("SVar:RemRandomDeck:")) {
-                    this.removedFromRandomDecks = "True".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line,
-                            "SVar:RemRandomDeck:"));
-
+                    this.removedFromRandomDecks = "True".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "SVar:RemRandomDeck:"));
+                } else if (line.startsWith("SVar:Picture:")) {
+                    this.characteristics[this.curCharacteristics].setDlUrl(CardRulesReader.getValueAfterKey(line, "SVar:Picture:"));
                 } else if (line.startsWith("SetInfo:")) {
                     CardRulesReader.parseSetInfoLine(line, this.characteristics[this.curCharacteristics].getSetsData());
-
                 } 
                 break;
                 

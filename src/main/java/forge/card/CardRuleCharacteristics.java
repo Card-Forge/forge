@@ -32,6 +32,7 @@ public class CardRuleCharacteristics {
     private String ptLine = null;
     private String[] cardRules = null;
     private Map<String, CardInSet> setsData = new TreeMap<String, CardInSet>();
+    private String dlUrl;
 
     /**
      * Gets the card name.
@@ -165,5 +166,13 @@ public class CardRuleCharacteristics {
      */
     public final void setSetsData(final Map<String, CardInSet> setsData0) {
         this.setsData = setsData0;
+    }
+
+    public String getDlUrl() {
+        return dlUrl;
+    }
+
+    public void setDlUrl(String dlUrl) {
+        this.dlUrl = dlUrl; 
     }
 }
