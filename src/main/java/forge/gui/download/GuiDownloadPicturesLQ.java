@@ -64,7 +64,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         // It is already needed here as initialized variable - that was the best place to initialize
         
         for (final CardPrinted c : CardDb.instance().getAllUniqueCards()) {
-            System.out.println(c.getName());
+            //System.out.println(c.getName());
             CardRules firstSide = c.getCard();
             this.createDLObjects(firstSide);
             
