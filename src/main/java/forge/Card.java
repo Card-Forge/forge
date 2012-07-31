@@ -2941,6 +2941,17 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
+     * <p>
+     * getNonManaSpellAbilities.
+     * </p>
+     * 
+     * @return a {@link java.util.ArrayList} object.
+     */
+    public final ArrayList<SpellAbility> getNonManaSpellAbilities() {
+        return this.getCharacteristics().getSpellAbility();
+    }
+
+    /**
      * 
      * getAllSpellAbilities.
      * 

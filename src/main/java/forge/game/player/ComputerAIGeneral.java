@@ -189,7 +189,7 @@ public class ComputerAIGeneral implements Computer {
 
         final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : all) {
-            for (final SpellAbility sa : c.getSpellAbility()) {
+            for (final SpellAbility sa : c.getNonManaSpellAbilities()) {
                 if (sa instanceof SpellPermanent) {
                     if (SpellPermanent.checkETBEffects(c, sa, "Counter")) {
                         spellAbilities.add(sa);
@@ -210,7 +210,7 @@ public class ComputerAIGeneral implements Computer {
     private ArrayList<SpellAbility> getSpellAbilities(final CardList l) {
         final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : l) {
-            for (final SpellAbility sa : c.getSpellAbility()) {
+            for (final SpellAbility sa : c.getNonManaSpellAbilities()) {
                 spellAbilities.add(sa);
             }
         }
@@ -229,7 +229,7 @@ public class ComputerAIGeneral implements Computer {
     private ArrayList<SpellAbility> getPlayableCounters(final CardList l) {
         final ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
         for (final Card c : l) {
-            for (final SpellAbility sa : c.getSpellAbility()) {
+            for (final SpellAbility sa : c.getNonManaSpellAbilities()) {
                 // Check if this AF is a Counterpsell
                 if ((sa.getAbilityFactory() != null) && sa.getAbilityFactory().getAPI().equals("Counter")) {
                     spellAbility.add(sa);
