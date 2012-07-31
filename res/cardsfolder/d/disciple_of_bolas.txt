@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Amount$ 1 | SacValid$ Creature.Other | RememberSacrificed$ True | Mandatory$ True | SubAbility$ GainLife
 SVar:GainLife:DB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X
-SVar:X:Remembered$CardPower
+SVar:X:RememberedLKI$CardPower
 SVar:NeedsToPlay:Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

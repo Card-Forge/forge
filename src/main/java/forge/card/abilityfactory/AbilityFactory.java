@@ -1625,9 +1625,17 @@ public class AbilityFactory {
                     }
                 }
 
-                for (final Object o : card.getRemembered()) {
-                    if (o instanceof Card) {
-                        list.add(AllZoneUtil.getCardState((Card) o));
+                if (calcX[0].endsWith("LKI")) { // last known information
+                    for (final Object o : card.getRemembered()) {
+                        if (o instanceof Card) {
+                            list.add((Card) o);
+                        }
+                    }
+                } else {
+                    for (final Object o : card.getRemembered()) {
+                        if (o instanceof Card) {
+                            list.add(AllZoneUtil.getCardState((Card) o));
+                        }
                     }
                 }
 
