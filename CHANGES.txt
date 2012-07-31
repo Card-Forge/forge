@@ -7,6 +7,8 @@ Forge Beta: 07-##-2012 ver 1.2.11
 
 This version is primarily a maintenance release. We have a few new cards, bug fixes, tweaks and some AI improvements. We suggest that everyone should update to this version.
 
+Some performance changes were made to Forge and it should now operate more quickly on low end machines. Mid to high level machines are unlikely to notice as much of a performance increase. We tried to hunt down all of the bugs that resulted from these changes but there may still be a bug or two in this beta release.
+
 Development efforts continue but have slowed down as a result of the summer months. One of the devs is in the process of moving and this will have an impact on beta and snapshot release for a number of weeks.
 
 The release date for version 1.2.12 will likely be late August or sometime in the month of September. Snapshot builds will likely be unavailable until sometime after the 1.2.12 beta release. We apologize for the inconvenience.
