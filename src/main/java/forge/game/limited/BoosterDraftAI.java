@@ -122,7 +122,7 @@ public class BoosterDraftAI {
 
             pickedCard = pickCard(rankedCards, rankedPlayableCards);
 
-            if (!pickedCard.isColorless()) {
+            if (!pickedCard.isColorless() && aiPlayables.contains(pickedCard)) {
                 this.playerColors.get(player).setColor1(pickedCard.getColor().get(0).toStringArray().get(0));
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println("Player[" + player + "] Color1: " + this.playerColors.get(player).getColor1());
@@ -162,7 +162,8 @@ public class BoosterDraftAI {
             pickedCard = pickCard(rankedCards, rankedPlayableCards);
 
             String pickedCardColor = pickedCard.getColor().get(0).toStringArray().get(0);
-            if (!pickedCard.isColorless() && !pickedCardColor.equals(this.playerColors.get(player).getColor1())) {
+            if (!pickedCard.isColorless() && !pickedCardColor.equals(this.playerColors.get(player).getColor1())
+                    && aiPlayables.contains(pickedCard)) {
                 this.playerColors.get(player).setColor2(pickedCardColor);
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).getColor2());
@@ -353,7 +354,6 @@ public class BoosterDraftAI {
 
         // Initialize card rankings
         this.draftRankings = new ReadDraftRankings();
-
     } // BoosterDraftAI()
 
     /**

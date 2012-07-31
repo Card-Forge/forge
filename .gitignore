@@ -268,7 +268,9 @@ res/decks/Zack[!!-~]Shaffner's[!!-~]Creatureless[!!-~]Control.dck
 res/decks/Zemox's[!!-~]Mono-Green[!!-~]Infect.dck
 res/decks/Zvi[!!-~]Mowshowitz's[!!-~]Mono-Black[!!-~]Control.dck
 res/decks/constructed/*.dck
+res/decks/draft/*
 res/decks/o1.bdk
+res/decks/sealed/*
 res/images
 res/layouts/*.xml
 res/oracleScript.log
