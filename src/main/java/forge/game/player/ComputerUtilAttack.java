@@ -547,7 +547,7 @@ public class ComputerUtilAttack {
             if (exalted) {
                 CardListUtil.sortAttack(this.attackers);
                 System.out.println("Exalted");
-                this.aiAggression = 2;
+                this.aiAggression = 6;
                 for (Card attacker : this.attackers) {
                     if (CombatUtil.canAttack(attacker, combat) && this.shouldAttack(attacker, this.blockers, combat)) {
                         combat.addAttacker(attacker);
@@ -912,6 +912,12 @@ public class ComputerUtilAttack {
         // decide if the creature should attack based on the prevailing strategy
         // choice in aiAggression
         switch (this.aiAggression) {
+        case 6: // Exalted: expecting to at least kill a creature of equal value or not be blocked
+            if ((canKillAll && isWorthLessThanAllKillers) || !canBeBlocked) {
+                System.out.println(attacker.getName() + " = attacking expecting to kill creature, or is unblockable");
+                return true;
+            }
+            break;
         case 5: // all out attacking
             System.out.println(attacker.getName() + " = all out attacking");
             return true;
@@ -920,6 +926,7 @@ public class ComputerUtilAttack {
                 System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
                 return true;
             }
+            break;
         case 3: // expecting to at least kill a creature of equal value, not be
                 // blocked
             if ((canKillAll && isWorthLessThanAllKillers) || (canKillAllDangerous && !canBeKilledByOne)
@@ -928,17 +935,20 @@ public class ComputerUtilAttack {
                         + " = attacking expecting to kill creature or cause damage, or is unblockable");
                 return true;
             }
+            break;
         case 2: // attack expecting to attract a group block or destroying a
                 // single blocker and surviving
             if (((canKillAll || hasAttackEffect) && !canBeKilledByOne) || !canBeBlocked) {
                 System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
                 return true;
             }
+            break;
         case 1: // unblockable creatures only
             if (!canBeBlocked) {
                 System.out.println(attacker.getName() + " = attacking expecting not to be blocked");
                 return true;
             }
+            break;
         default:
             break;
         }
