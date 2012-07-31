@@ -185,7 +185,7 @@ public class CostPutCounter extends CostPartWithList {
 
         if (this.getThis()) {
             source.addCounterFromNonEffect(this.getCounter(), c);
-            payment.setPaidManaPart(this, true);
+            payment.setPaidManaPart(this);
             this.addToList(source);
             return true;
         } else {

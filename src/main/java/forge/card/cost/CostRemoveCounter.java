@@ -251,7 +251,7 @@ public class CostRemoveCounter extends CostPartWithList {
             source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
             source.subtractCounter(this.counter, c);
             this.setLastPaidAmount(c);
-            payment.setPaidManaPart(this, true);
+            payment.setPaidManaPart(this);
         } else {
             payment.setCancel(true);
             payment.getRequirements().finishPaying();

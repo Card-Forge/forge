@@ -91,7 +91,7 @@ public class CostUntap extends CostPart {
         // return false;
 
         source.untap();
-        payment.setPaidManaPart(this, true);
+        payment.setPaidManaPart(this);
         return true;
     }
 

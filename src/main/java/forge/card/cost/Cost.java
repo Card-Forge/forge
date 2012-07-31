@@ -382,7 +382,7 @@ public class Cost {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void changeCost(final SpellAbility sa) {
-
+        boolean costChanged = false;
         // TODO: Change where ChangeCost happens
         for (final CostPart part : this.costParts) {
             if (part instanceof CostMana) {
@@ -393,7 +393,13 @@ public class Cost {
                 final ManaCost changedCost = Singletons.getModel().getGameAction().getSpellCostChange(sa, new ManaCost(mana));
 
                 costMana.setAdjustedMana(changedCost.toString(false));
+                costChanged = true;
             }
+        }
+        if (!costChanged) {
+            // Spells with a cost of 0 should be affected too
+            final ManaCost changedCost = Singletons.getModel().getGameAction().getSpellCostChange(sa, new ManaCost("0"));
+            this.costParts.add(new CostMana(changedCost.toString(),0));
         }
     }
 

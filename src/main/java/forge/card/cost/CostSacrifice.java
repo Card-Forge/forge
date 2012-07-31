@@ -179,7 +179,7 @@ public class CostSacrifice extends CostPartWithList {
                 }
             }
             if (c != null && 0 == c.intValue()) {
-                payment.setPaidManaPart(this, true);
+                payment.setPaidManaPart(this);
                 return true;
             }
             CostUtil.setInput(CostSacrifice.sacrificeFromList(ability, payment, this, list, c));
@@ -250,7 +250,7 @@ public class CostSacrifice extends CostPartWithList {
             Singletons.getModel().getGameAction().sacrifice(card, sa);
         }
 
-        payment.setPaidManaPart(part, true);
+        payment.setPaidManaPart(part);
     }
 
     /**

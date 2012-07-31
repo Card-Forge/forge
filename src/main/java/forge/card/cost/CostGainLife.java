@@ -139,7 +139,7 @@ public class CostGainLife extends CostPart {
         if (GameActionUtil.showYesNoDialog(source, sb.toString()) && activator.getOpponent().canGainLife()) {
             activator.getOpponent().gainLife(c, null);
             this.setLastPaidAmount(c);
-            payment.setPaidManaPart(this, true);
+            payment.setPaidManaPart(this);
         } else {
             payment.setCancel(true);
             payment.getRequirements().finishPaying();

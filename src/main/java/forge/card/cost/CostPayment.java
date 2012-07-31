@@ -18,8 +18,6 @@
 package forge.card.cost;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import forge.AllZone;
 import forge.Card;
@@ -41,7 +39,7 @@ public class CostPayment {
     private Card card = null;
     private SpellAbilityRequirements req = null;
     private boolean bCancel = false;
-    private final Map<CostPart, Boolean> paidCostParts = new HashMap<CostPart, Boolean>();
+    private final ArrayList<CostPart> paidCostParts = new ArrayList<CostPart>();
 
     /**
      * <p>
@@ -135,10 +133,6 @@ public class CostPayment {
         this.cost = cost;
         this.ability = abil;
         this.card = abil.getSourceCard();
-
-        for (final CostPart part : cost.getCostParts()) {
-            this.paidCostParts.put(part, false);
-        }
     }
 
     /**
@@ -181,8 +175,8 @@ public class CostPayment {
      * @param bPaid
      *            the b paid
      */
-    public final void setPaidManaPart(final CostPart part, final boolean bPaid) {
-        this.paidCostParts.put(part, bPaid);
+    public final void setPaidManaPart(final CostPart part) {
+        this.paidCostParts.add(part);
     }
 
     /**
@@ -192,7 +186,7 @@ public class CostPayment {
      *            the part
      */
     public final void paidCost(final CostPart part) {
-        this.setPaidManaPart(part, true);
+        this.setPaidManaPart(part);
         this.payCost();
     }
 
@@ -220,7 +214,7 @@ public class CostPayment {
 
         for (final CostPart part : this.cost.getCostParts()) {
             // This portion of the cost is already paid for, keep moving
-            if (this.paidCostParts.get(part)) {
+            if (this.paidCostParts.contains(part)) {
                 continue;
             }
 
@@ -242,8 +236,8 @@ public class CostPayment {
      * @return a boolean.
      */
     public final boolean isAllPaid() {
-        for (final CostPart part : this.paidCostParts.keySet()) {
-            if (!this.paidCostParts.get(part)) {
+        for (final CostPart part : this.cost.getCostParts()) {
+            if (!this.paidCostParts.contains(part)) {
                 return false;
             }
         }
@@ -257,7 +251,7 @@ public class CostPayment {
      * </p>
      */
     public final void resetUndoList() {
-        for (final CostPart part : this.paidCostParts.keySet()) {
+        for (final CostPart part : this.paidCostParts) {
             if (part instanceof CostPartWithList) {
                 ((CostPartWithList) part).resetList();
             }
@@ -270,8 +264,8 @@ public class CostPayment {
      * </p>
      */
     public final void cancelPayment() {
-        for (final CostPart part : this.paidCostParts.keySet()) {
-            if (this.paidCostParts.get(part) && part.isUndoable()) {
+        for (final CostPart part : this.paidCostParts) {
+            if (part.isUndoable()) {
                 part.refund(this.card);
             }
         }

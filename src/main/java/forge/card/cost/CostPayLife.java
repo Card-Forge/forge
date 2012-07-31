@@ -144,7 +144,7 @@ public class CostPayLife extends CostPart {
         if (GameActionUtil.showYesNoDialog(source, sb.toString()) && activator.canPayLife(c)) {
             activator.payLife(c, null);
             this.setLastPaidAmount(c);
-            payment.setPaidManaPart(this, true);
+            payment.setPaidManaPart(this);
         } else {
             payment.setCancel(true);
             payment.getRequirements().finishPaying();

@@ -142,7 +142,7 @@ public class CostReveal extends CostPartWithList {
 
         if (this.getThis()) {
             this.addToList(source);
-            payment.setPaidManaPart(this, true);
+            payment.setPaidManaPart(this);
         } else {
             Integer num = this.convertAmount();
 
@@ -161,7 +161,7 @@ public class CostReveal extends CostPartWithList {
                 CostUtil.setInput(CostReveal.inputRevealCost(this.getType(), handList, payment, this, ability, num));
                 return false;
             } else {
-                payment.setPaidManaPart(this, true);
+                payment.setPaidManaPart(this);
             }
         }
         this.addListToHash(ability, "Revealed");

@@ -169,12 +169,12 @@ public class CostDiscard extends CostPartWithList {
                 return false;
             }
             activator.discard(source, ability);
-            payment.setPaidManaPart(this, true);
+            payment.setPaidManaPart(this);
             //this.addToList(source);
         } else if (discType.equals("Hand")) {
             this.setList(handList);
             activator.discardHand(ability);
-            payment.setPaidManaPart(this, true);
+            payment.setPaidManaPart(this);
         } else if (discType.equals("LastDrawn")) {
             final Card lastDrawn = activator.getLastDrawnCard();
             //this.addToList(lastDrawn);
@@ -182,7 +182,7 @@ public class CostDiscard extends CostPartWithList {
                 return false;
             }
             activator.discard(lastDrawn, ability);
-            payment.setPaidManaPart(this, true);
+            payment.setPaidManaPart(this);
         } else {
             Integer c = this.convertAmount();
 
@@ -199,7 +199,7 @@ public class CostDiscard extends CostPartWithList {
 
                 //this.setList(activator.discardRandom(c, ability));
                 activator.discardRandom(c, ability);
-                payment.setPaidManaPart(this, true);
+                payment.setPaidManaPart(this);
             } else {
                 final String[] validType = discType.split(";");
                 handList = handList.getValidCards(validType, activator, ability.getSourceCard());

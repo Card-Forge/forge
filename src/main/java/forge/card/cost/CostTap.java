@@ -91,7 +91,7 @@ public class CostTap extends CostPart {
         // return false;
 
         source.tap();
-        payment.setPaidManaPart(this, true);
+        payment.setPaidManaPart(this);
         return true;
     }
 
