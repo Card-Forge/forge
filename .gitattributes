@@ -12077,6 +12077,7 @@ src/main/java/forge/game/limited/BoosterDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/BoosterDraftAI.java svneol=native#text/plain
 src/main/java/forge/game/limited/CCnt.java svneol=native#text/plain
 src/main/java/forge/game/limited/CardPoolLimitation.java -text
+src/main/java/forge/game/limited/CardRankingComparator.java -text
 src/main/java/forge/game/limited/CardRatings.java -text
 src/main/java/forge/game/limited/CreatureComparator.java -text
 src/main/java/forge/game/limited/CustomLimited.java svneol=native#text/plain

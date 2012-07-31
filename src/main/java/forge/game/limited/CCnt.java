@@ -25,7 +25,7 @@ package forge.game.limited;
  * @author Forge
  * @version $Id$
  */
-class CCnt {
+class CCnt implements Comparable<CCnt> {
 
     /** The Color. */
     private String color;
@@ -95,4 +95,14 @@ class CCnt {
     public void setCount(final int count0) {
         this.count = count0;
     }
+
+    /* (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(CCnt o) {
+        int compareCount = ((CCnt) o).getCount(); 
+        return this.count - compareCount;
+    }
+    
 }
