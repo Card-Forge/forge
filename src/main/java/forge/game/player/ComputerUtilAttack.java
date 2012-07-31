@@ -550,7 +550,7 @@ public class ComputerUtilAttack {
             if (exalted) {
                 CardListUtil.sortAttack(this.attackers);
                 System.out.println("Exalted");
-                this.aiAggression = 3;
+                this.aiAggression = 2;
                 for (Card attacker : this.attackers) {
                     if (CombatUtil.canAttack(attacker, combat) && this.shouldAttack(attacker, this.blockers, combat)) {
                         combat.addAttacker(attacker);
