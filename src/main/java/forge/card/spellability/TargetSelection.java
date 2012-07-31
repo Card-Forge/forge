@@ -634,7 +634,7 @@ public class TargetSelection {
             }
         }
 
-        if (!TargetSelection.matchesValid(topSA, tgt.getValidTgts(), sa)) {
+        if (!TargetSelection.matchesValidSA(topSA, tgt.getValidTgts(), sa)) {
             return false;
         }
 
@@ -663,27 +663,32 @@ public class TargetSelection {
         }
 
         if (o instanceof Player) {
-            for (final String v : valids) {
-                if (v.equalsIgnoreCase("Player")) {
-                    return true;
-                }
-
-                if (v.equalsIgnoreCase("Opponent")) {
-                    if (o.equals(activatingPlayer.getOpponent())) {
-                        return true;
-                    }
-                }
-                if (v.equalsIgnoreCase("You")) {
-                    return o.equals(activatingPlayer);
-                }
+            Player p = (Player) o;
+            if (p.isValid(valids, sa.getActivatingPlayer(), sa.getSourceCard())) {
+                return true;
             }
         }
 
-        if (o instanceof SpellAbility) {
-            final Card c = ((SpellAbility) o).getSourceCard();
-            return c.isValid(valids, activatingPlayer, srcCard);
-        }
-
         return false;
+    }
+    
+    /**
+     * <p>
+     * matchesValidSA.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param valids
+     *            an array of {@link java.lang.String} objects.
+     * @param source
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    private static boolean matchesValidSA(final SpellAbility sa, final String[] valids, final SpellAbility source) {
+        final Card srcCard = source.getSourceCard();
+        final Player activatingPlayer = sa.getActivatingPlayer();
+        final Card c = sa.getSourceCard();
+        return c.isValid(valids, activatingPlayer, srcCard);
     }
 }
