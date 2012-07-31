@@ -52,25 +52,6 @@ public class TriggerPhase extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("Phase")) {
-            if (this.getMapParams().get("Phase").contains(",")) {
-                boolean found = false;
-                for (final String s : this.getMapParams().get("Phase").split(",")) {
-                    if (s.equals(runParams2.get("Phase"))) {
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (!found) {
-                    return false;
-                }
-            } else {
-                if (!this.getMapParams().get("Phase").equals(runParams2.get("Phase"))) {
-                    return false;
-                }
-            }
-        }
         if (this.getMapParams().containsKey("ValidPlayer")) {
             if (!matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
                     this.getHostCard())) {

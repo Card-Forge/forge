@@ -210,7 +210,7 @@ public class TriggerHandler {
             ret.setTriggerZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
         }
 
-        String triggerPhases = mapParams.get("TriggerPhases");
+        String triggerPhases = mapParams.get("Phase");
         if (null != triggerPhases) {
             ret.setTriggerPhases(PhaseType.parseRange(triggerPhases));
         }
@@ -371,10 +371,10 @@ public class TriggerHandler {
             return false; // Not the right mode.
         }
 
-        //System.out.println( "  " + regtrig.getMode().toString() + "@" + regtrig.getHostCard() + "> " + TextUtil.mapToString(params));
         if (!regtrig.phasesCheck()) {
             return false; // It's not the right phase to go off.
         }
+        //System.out.println( "  " + regtrig.getMode().toString() + "@" + regtrig.getHostCard() + "> " + forge.util.TextUtil.mapToString(params));        
         if (!regtrig.requirementsCheck()) {
             return false; // Conditions aren't right.
         }

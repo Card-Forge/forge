@@ -207,7 +207,7 @@ public class CardReader {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        barProgress.setDescription("Preloading card images: ");
+                        barProgress.setDescription("Loading card data: ");
                     }
                 });
             }

@@ -71,7 +71,7 @@ import forge.util.MyRandom;
  */
 public class Card extends GameEntity implements Comparable<Card> {
     private static int nextUniqueNumber = 1;
-    private int uniqueNumber = Card.nextUniqueNumber++;
+    private int uniqueNumber;
 
     private long value;
 
@@ -235,6 +235,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Instantiates a new card.
      */
     public Card() {
+        this.setUniqueNumber(Card.nextUniqueNumber++);
         this.characteristicsMap.put(CardCharactersticName.Original, new CardCharacteristics());
         this.characteristicsMap.put(CardCharactersticName.FaceDown, CardUtil.getFaceDownCharacteristic());
     }
@@ -5807,6 +5808,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a int.
      */
     public final void setUniqueNumber(final int n) {
+        //System.out.println("Card _ " + n);
         this.uniqueNumber = n;
         //this.updateObservers();
     }
