@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 
 import junit.framework.Assert;
 
+import forge.card.CardRules;
+import forge.card.CardRulesReader;
 import forge.card.DeckWants;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -170,21 +172,38 @@ public class DeckWantsTest {
     /**
      * 
      * Test for no wants.
-     *_/
+     */
     @Test(timeOut = 1000, enabled = true)
     void testNoFilter() {
-        List<String> cardLines = FileUtil
-                .readFile(new File(ForgeProps.getFile(NewConstants.CARDSFOLDER) + "/a", "assault_griffin.txt"));
-        Card c = CardReader.readCard(cardLines);
+
+        CardRules c = readCard("assault_griffin.txt");
         Assert.assertEquals("Assault Griffin", c.getName());
         Assert.assertNotNull(c.getDeckWants());
         Assert.assertEquals(DeckWants.Type.NONE, c.getDeckWants().getType());
 
+
+        List<String> cardLines = FileUtil
+                .readFile(new File(ForgeProps.getFile(NewConstants.CARDSFOLDER) + "/a", "assault_griffin.txt"));
+
+        CardRulesReader crr = new CardRulesReader();
+        for(String line: cardLines)
+            crr.parseLine(line);        
         Card assaultGriffin = CardReader.readCard(cardLines);
         CardList cl = new CardList();
         cl.add(assaultGriffin);
         Assert.assertEquals(1, c.getDeckWants().filter(cl).size());
 
     }
-    */
+    
+    protected CardRules readCard(String filename) {
+        String firstLetter = filename.substring(0,1);
+        File dir = new File(ForgeProps.getFile(NewConstants.CARDSFOLDER), firstLetter);
+        File txtFile = new File(dir, filename);
+
+        CardRulesReader crr = new CardRulesReader();
+        for(String line: FileUtil.readFile(txtFile))
+            crr.parseLine(line);
+        return crr.getCard();
+    }
+    
 }
