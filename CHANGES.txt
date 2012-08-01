@@ -230,6 +230,26 @@ Fixes/Features:
 - Fixed zero mana costs not being affected by costChange.
 - Simplified handling of paidCostParts.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- First attempt at AI splitting attackers between Planewalkers and human player.
+- Better tweak for Exalted AI.
+- Fixed "TargetValidTargeting" taking permanent spells as permanents (and similar cases).
+- Fixed Teferi's Response.
+- Updated some SVars.
+- work on limited deck using rankings
+- LQ picture loading
+- remove debug console output
+- AI performance upgrade: The AI will no longer check mana abilities when grabbing SpellAbilities to play.
+- Added a fluff piece to the changes.txt file.
+- Fixed Havengul Lich's interaction with the opponents grave stuffing.
+- fixed phase parsing for triggers
+- A truthful message about loading cards.
+- Refactoring BoosterDraft to use CardPrinted
+- Use CardPrinted for LimitedDeck
+- DeckWants moved from Card to CardCharacteristics, its test unfortunately is no longer functional
+- Fixed Mongrel Pack to trigger only during correct phases (broken with 16391 parameter name change)
+- some ideas for test
+- Added totalPT_<comparison> restriction to IsValid
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -254,6 +274,7 @@ Spellwild Ouphe
 Elderwood Scion
 Shivan Sand-Mage
 Rift Elemental
+Wild Pair
 
 
 end
