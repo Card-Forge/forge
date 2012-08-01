@@ -173,7 +173,7 @@ public class DeckWantsTest {
      * 
      * Test for no wants.
      */
-    @Test(timeOut = 1000, enabled = true)
+    @Test(timeOut = 1000, enabled = false)
     void testNoFilter() {
 
         CardRules c = readCard("assault_griffin.txt");
