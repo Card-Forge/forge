@@ -5251,7 +5251,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final List<String> getIntrinsicKeyword() {
         // will not create a copy here - due to performance reasons.
-        // Most of other code checks for contains, or creates copy by itself 
+        // Most of other code checks for contains, or creates copy by itself
         return this.getCharacteristics().getIntrinsicKeyword();
     }
 
@@ -7039,7 +7039,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
 
-        } else if (property.startsWith("power") || property.startsWith("toughness") || property.startsWith("cmc")) {
+        } else if (property.startsWith("power") || property.startsWith("toughness")
+                || property.startsWith("cmc") || property.startsWith("totalPT")) {
             int x = 0;
             int y = 0;
             String rhs = "";
@@ -7053,6 +7054,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (property.startsWith("cmc")) {
                 rhs = property.substring(5);
                 y = this.getCMC();
+            } else if (property.startsWith("totalPT")) {
+                rhs = property.substring(10);
+                y = this.getNetAttack() + this.getNetDefense();
             }
             try {
                 x = Integer.parseInt(rhs);
