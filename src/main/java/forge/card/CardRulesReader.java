@@ -40,9 +40,7 @@ public class CardRulesReader {
             null };
     private int curCharacteristics = 0;
 
-    // private boolean isFlipCard = false;
-    // private boolean isDoubleFacedCard = false;
-
+    
     private boolean removedFromAIDecks = false;
     private boolean removedFromRandomDecks = false;
     private List<String> originalScript = new ArrayList<String>();
@@ -152,6 +150,9 @@ public class CardRulesReader {
                     this.removedFromRandomDecks = "True".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "SVar:RemRandomDeck:"));
                 } else if (line.startsWith("SVar:Picture:")) {
                     this.characteristics[this.curCharacteristics].setDlUrl(CardRulesReader.getValueAfterKey(line, "SVar:Picture:"));
+                } else if (line.startsWith("SVar:DeckWants:")) {
+                    this.characteristics[this.curCharacteristics].setDeckHints(CardRulesReader.getValueAfterKey(line, "SVar:DeckWants:"));
+
                 } else if (line.startsWith("SetInfo:")) {
                     CardRulesReader.parseSetInfoLine(line, this.characteristics[this.curCharacteristics].getSetsData());
                 } 

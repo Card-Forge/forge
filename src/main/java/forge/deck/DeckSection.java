@@ -17,7 +17,6 @@
  */
 package forge.deck;
 
-import java.util.List;
 import java.util.Map.Entry;
 
 import forge.Card;
@@ -111,7 +110,7 @@ public class DeckSection extends ItemPool<CardPrinted> {
      * @param list
      *            CardPrinteds to add
      */
-    public void add(final List<CardPrinted> list) {
+    public void add(final Iterable<CardPrinted> list) {
         for (CardPrinted cp : list) {
             this.add(cp);
         }

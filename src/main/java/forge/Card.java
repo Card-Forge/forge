@@ -35,7 +35,6 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.card.CardCharacteristics;
 import forge.card.CardManaCost;
-import forge.card.DeckWants;
 import forge.card.EditionInfo;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -224,9 +223,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final ArrayList<Card> hauntedBy = new ArrayList<Card>();
     private Card haunting = null;
     private Card effectSource = null;
-
-    private DeckWants deckWants = null;
-    private boolean isDeckWantsConstructed = false;
 
     // Soulbond pairing card
     private Card pairedWith = null;
@@ -8976,24 +8972,5 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void setStartsGameInPlay(boolean startsGameInPlay) {
         this.startsGameInPlay = startsGameInPlay;
     }
-
-    /**
-     * @return the deckWants
-     */
-    public DeckWants getDeckWants() {
-        if (!isDeckWantsConstructed) {
-            deckWants = new DeckWants(getSVar("DeckWants"));
-            isDeckWantsConstructed = true;
-        }
-        return deckWants;
-    }
-
-    /**
-     * @param deckWants the deckWants to set
-     */
-    public void setDeckWants(DeckWants deckWants) {
-        this.deckWants = deckWants;
-    }
-
 
 } // end Card class

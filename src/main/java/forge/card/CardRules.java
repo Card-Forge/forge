@@ -60,6 +60,7 @@ public final class CardRules {
     private final boolean hasOtherFace;
 
     private List<String> originalScript;
+    
 
     // Ctor and builders are needed here
     /**
@@ -351,6 +352,29 @@ public final class CardRules {
         } else {
             return Integer.valueOf(1);
         }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public Iterable<String> getCardScript() {
+        return originalScript;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public String getPictureUrl() {
+        return characteristics.getDlUrl();
+    }
+
+    /**
+     * @return the deckWants
+     */
+    public DeckWants getDeckWants() {
+        return characteristics.getDeckHints();
     }
 
     /**
@@ -899,20 +923,6 @@ public final class CardRules {
                     CardRarity.Special);
         }
     }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public Iterable<String> getCardScript() {
-        return originalScript;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public String getPictureUrl() {
-        return characteristics.getDlUrl();
-    }
 }
+
+

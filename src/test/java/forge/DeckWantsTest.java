@@ -21,7 +21,7 @@ public class DeckWantsTest {
 
     /**
      * Card test.
-     */
+     *_/
     @Test(timeOut = 1000, enabled = true)
     void test() {
         List<String> cardLines = FileUtil
@@ -48,7 +48,7 @@ public class DeckWantsTest {
 
     /**
      * Filter for cards.
-     */
+     *_/
     @Test(timeOut = 1000, enabled = true)
     void testCards() {
         List<String> cardLines = FileUtil
@@ -78,7 +78,7 @@ public class DeckWantsTest {
 
     /**
      * Filter for keywords.
-     */
+     *_/
     @Test(timeOut = 1000, enabled = true)
     void testKeywords() {
         List<String> cardLines = FileUtil
@@ -104,7 +104,7 @@ public class DeckWantsTest {
 
     /**
      * Filter for color.
-     */
+     *_/
     @Test(timeOut = 1000, enabled = true)
     void testColor() {
         List<String> cardLines = FileUtil
@@ -130,7 +130,7 @@ public class DeckWantsTest {
 
     /**
      * Failing filter for cards.
-     */
+     *_/
     @Test(timeOut = 1000, enabled = true)
     void testFailCards() {
         List<String> cardLines = FileUtil
@@ -156,7 +156,7 @@ public class DeckWantsTest {
 
     /**
      * Card test for junk deck wants.
-     */
+     *_/
     @Test(timeOut = 1000, enabled = true)
     void testJunk() {
         List<String> cardLines = FileUtil
@@ -170,7 +170,7 @@ public class DeckWantsTest {
     /**
      * 
      * Test for no wants.
-     */
+     *_/
     @Test(timeOut = 1000, enabled = true)
     void testNoFilter() {
         List<String> cardLines = FileUtil
@@ -186,4 +186,5 @@ public class DeckWantsTest {
         Assert.assertEquals(1, c.getDeckWants().filter(cl).size());
 
     }
+    */
 }

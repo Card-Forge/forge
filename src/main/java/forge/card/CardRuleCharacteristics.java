@@ -33,6 +33,7 @@ public class CardRuleCharacteristics {
     private String[] cardRules = null;
     private Map<String, CardInSet> setsData = new TreeMap<String, CardInSet>();
     private String dlUrl;
+    private DeckWants deckHints;
 
     /**
      * Gets the card name.
@@ -174,5 +175,17 @@ public class CardRuleCharacteristics {
 
     public void setDlUrl(String dlUrl) {
         this.dlUrl = dlUrl; 
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param valueAfterKey
+     */
+    public void setDeckHints(String valueAfterKey) {
+        deckHints = new DeckWants(valueAfterKey);
+    }
+
+    public DeckWants getDeckHints() {
+        return deckHints;
     }
 }
