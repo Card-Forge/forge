@@ -28,7 +28,6 @@ import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 
-import forge.Card;
 import forge.CardList;
 import forge.Constant;
 import forge.Singletons;

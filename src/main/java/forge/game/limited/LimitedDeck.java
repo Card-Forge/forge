@@ -7,19 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
-import forge.CardList;
-import forge.CardListFilter;
-import forge.CardListUtil;
 import forge.Constant;
 import forge.card.CardColor;
 import forge.card.CardManaCost;
-import forge.card.DeckWants;
+import forge.card.CardRules;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
+import forge.deck.generate.GenerateDeckUtil;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 /**
  * Limited format deck.
@@ -30,10 +28,10 @@ public class LimitedDeck extends Deck {
     private static final long serialVersionUID = -8818599781874958332L;
     private int numSpellsNeeded = 22;
     private int landsNeeded = 18;
-    private DeckColors colors;
-    private CardList availableList;
-    private CardList aiPlayables;
-    private CardList deckList = new CardList();
+    private CardColor colors;
+    private List<CardPrinted> availableList;
+    private List<CardPrinted> aiPlayables;
+    private List<CardPrinted> deckList = new ArrayList<CardPrinted>();
     private static ReadDraftRankings draftRankings = new ReadDraftRankings();
 
     /**
@@ -45,7 +43,7 @@ public class LimitedDeck extends Deck {
      * @param pClrs
      *            Chosen colors.
      */
-    public LimitedDeck(CardList dList, DeckColors pClrs) {
+    public LimitedDeck(List<CardPrinted> dList, CardColor pClrs) {
         super("");
         this.availableList = dList;
         this.colors = pClrs;
@@ -58,7 +56,7 @@ public class LimitedDeck extends Deck {
      * @param list
      *            Cards to build the deck from.
      */
-    public LimitedDeck(CardList list) {
+    public LimitedDeck(List<CardPrinted> list) {
         super("");
         this.availableList = list;
         removeUnplayables();
@@ -71,37 +69,41 @@ public class LimitedDeck extends Deck {
      */
     protected void buildDeck() {
         // 0. Add any planeswalkers
-        CardList walkers = getAiPlayables().getOnly2Colors(getColors().getColor1(), getColors().getColor2()).getType(
-                "Planeswalker");
+        Predicate<CardRules> hasColor = Predicate.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors),
+                GenerateDeckUtil.COLORLESS_CARDS);
+        List<CardPrinted> colorList = hasColor.select(aiPlayables, CardPrinted.FN_GET_RULES);
+        List<CardPrinted> walkers = CardRules.Predicates.Presets.IS_PLANESWALKER.select(colorList,
+                CardPrinted.FN_GET_RULES);
         deckList.addAll(walkers);
-        getAiPlayables().removeAll(walkers);
+        aiPlayables.removeAll(walkers);
         if (walkers.size() > 0) {
-            System.out.println("Planeswalker: " + walkers.get(0).toString());
+            System.out.println("Planeswalker: " + walkers.get(0).getName());
         }
 
         // 1. Add creatures, trying to follow mana curve
-        CardList creatures = getAiPlayables().getType("Creature").getOnly2Colors(getColors().getColor1(),
-                getColors().getColor2());
-        addManaCurveCreatures(rankCards(creatures), 15 - deckList.getType("Creature").size());
+        List<CardPrinted> creatures = CardRules.Predicates.Presets.IS_CREATURE.select(aiPlayables,
+                CardPrinted.FN_GET_RULES);
+        List<CardPrinted> onColorCreatures = hasColor.select(creatures, CardPrinted.FN_GET_RULES);
+        addManaCurveCreatures(rankCards(onColorCreatures), 15);
 
         // 2.Try to fill up to 22 with on-color non-creature cards
-        CardList nonCreatures = getAiPlayables().getNotType("Creature").getNotType("Land")
-                .getOnly2Colors(getColors().getColor1(), getColors().getColor2());
-        addNonCreatures(rankCards(nonCreatures), numSpellsNeeded - deckList.size());
+        List<CardPrinted> nonCreatures = CardRules.Predicates.Presets.IS_NON_CREATURE_SPELL.select(aiPlayables,
+                CardPrinted.FN_GET_RULES);
+        List<CardPrinted> onColorNonCreatures = hasColor.select(nonCreatures, CardPrinted.FN_GET_RULES);
+        addNonCreatures(rankCards(onColorNonCreatures), numSpellsNeeded - deckList.size());
 
-        // 3.Try to fill up to 22 with on-color creatures cards (if more than 15
-        // are present)
-        creatures = getAiPlayables().getType("Creature").getOnly2Colors(getColors().getColor1(),
-                getColors().getColor2());
-        addCreatures(rankCards(creatures), numSpellsNeeded - deckList.size());
+        // 3.If we couldn't get up to 22, try to fill up to 22 with on-color
+        // creature cards
+        creatures = CardRules.Predicates.Presets.IS_CREATURE.select(aiPlayables, CardPrinted.FN_GET_RULES);
+        onColorCreatures = hasColor.select(creatures, CardPrinted.FN_GET_RULES);
+        addCreatures(rankCards(onColorCreatures), numSpellsNeeded - deckList.size());
 
         // 4. If there are still on-color cards and the average cmc is low add a
         // 23rd card.
-        CardList nonLands = getAiPlayables().getNotType("Land").getOnly2Colors(getColors().getColor1(),
-                getColors().getColor2());
-        if (deckList.size() == numSpellsNeeded && CardListUtil.getAverageCMC(deckList) < 3 && !nonLands.isEmpty()) {
+        List<CardPrinted> nonLands = hasColor.select(aiPlayables, CardPrinted.FN_GET_RULES);
+        if (deckList.size() == numSpellsNeeded && getAverageCMC(deckList) < 3 && !nonLands.isEmpty()) {
             List<CardRankingBean> list = rankCards(nonLands);
-            Card c = list.get(0).getCard();
+            CardPrinted c = list.get(0).getCard();
             deckList.add(c);
             getAiPlayables().remove(0);
             landsNeeded--;
@@ -123,60 +125,84 @@ public class LimitedDeck extends Deck {
             addLands(clrCnts);
         }
 
+        fixDeckSize(clrCnts);
+
+        if (deckList.size() == 40) {
+            this.getMain().add(deckList);
+            this.getSideboard().add(aiPlayables);
+            this.getSideboard().add(availableList);
+            if (Constant.Runtime.DEV_MODE[0]) {
+                debugFinalDeck();
+            }
+        } else {
+            throw new RuntimeException("BoosterDraftAI : buildDeck() error, decksize not 40");
+        }
+    }
+
+    /**
+     * Print out listing of all cards for debugging.
+     */
+    private void debugFinalDeck() {
+        int i = 0;
+        System.out.println("DECK");
+        for (CardPrinted c : deckList) {
+            i++;
+            System.out.println(i + ". " + c.toString() + ": " + c.getCard().getManaCost().toString());
+        }
+        i = 0;
+        System.out.println("NOT PLAYABLE");
+        for (CardPrinted c : availableList) {
+            i++;
+            System.out.println(i + ". " + c.toString() + ": " + c.getCard().getManaCost().toString());
+        }
+        i = 0;
+        System.out.println("NOT PICKED");
+        for (CardPrinted c : getAiPlayables()) {
+            i++;
+            System.out.println(i + ". " + c.toString() + ": " + c.getCard().getManaCost().toString());
+        }
+    }
+
+    /**
+     * If the deck does not have 40 cards, fix it. This method should not be
+     * called if the stuff above it is working correctly.
+     * 
+     * @param clrCnts
+     *            color counts needed
+     */
+    private void fixDeckSize(final CCnt[] clrCnts) {
         while (deckList.size() > 40) {
-            final Card c = deckList.get(MyRandom.getRandom().nextInt(deckList.size() - 1));
+            System.out.println("WARNING: Fixing deck size, currently " + deckList.size() + " cards.");
+            final CardPrinted c = deckList.get(MyRandom.getRandom().nextInt(deckList.size() - 1));
             deckList.remove(c);
             getAiPlayables().add(c);
-            System.out.println("Warning: Removed " + c.getName() + " randomly.");
+            System.out.println(" - Removed " + c.getName() + " randomly.");
         }
 
         while (deckList.size() < 40) {
+            System.out.println("WARNING: Fixing deck size, currently " + deckList.size() + " cards.");
             if (getAiPlayables().size() > 1) {
-                final Card c = getAiPlayables().get(MyRandom.getRandom().nextInt(getAiPlayables().size() - 1));
+                final CardPrinted c = getAiPlayables().get(MyRandom.getRandom().nextInt(getAiPlayables().size() - 1));
                 deckList.add(c);
                 getAiPlayables().remove(c);
+                System.out.println(" - Added " + c.getName() + " randomly.");
             } else if (getAiPlayables().size() == 1) {
-                final Card c = getAiPlayables().get(0);
+                final CardPrinted c = getAiPlayables().get(0);
                 deckList.add(c);
                 getAiPlayables().remove(c);
+                System.out.println(" - Added " + c.getName() + " randomly.");
             } else {
                 // if no playable cards remain fill up with basic lands
                 for (int i = 0; i < 5; i++) {
                     if (clrCnts[i].getCount() > 0) {
                         final CardPrinted cp = CardDb.instance().getCard(clrCnts[i].getColor(),
                                 IBoosterDraft.LAND_SET_CODE[0]);
-                        deckList.add(cp.toForgeCard());
+                        deckList.add(cp);
+                        System.out.println(" - Added " + cp.getName() + " as last resort.");
                         break;
                     }
                 }
             }
-        }
-        if (deckList.size() == 40) {
-            this.getMain().add(deckList);
-            this.getSideboard().add(getAiPlayables());
-            this.getSideboard().add(availableList);
-
-            int i = 0;
-            System.out.println("DECK");
-            for (Card c : deckList) {
-                i++;
-                System.out.println(i + ". " + c.toString() + ": " + c.getManaCost().toString());
-            }
-            i = 0;
-            System.out.println("NOT PLAYABLE");
-            for (Card c : availableList) {
-                i++;
-                System.out.println(i + ". " + c.toString() + ": " + c.getManaCost().toString());
-            }
-            i = 0;
-            System.out.println("NOT PICKED");
-            for (Card c : getAiPlayables()) {
-                i++;
-                System.out.println(i + ". " + c.toString() + ": " + c.getManaCost().toString());
-            }
-
-        } else {
-            throw new RuntimeException("BoosterDraftAI : buildDeck() error, decksize not 40");
         }
     }
 
@@ -184,14 +210,7 @@ public class LimitedDeck extends Deck {
      * Remove AI unplayable cards.
      */
     protected void removeUnplayables() {
-        setAiPlayables(availableList.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card c) {
-                boolean unPlayable = c.getSVar("RemAIDeck").equals("True");
-                unPlayable |= c.getSVar("RemRandomDeck").equals("True") && c.getSVar("DeckWants").equals("");
-                return !unPlayable;
-            }
-        }));
+        setAiPlayables(CardRules.Predicates.IS_KEPT_IN_AI_DECKS.select(availableList, CardPrinted.FN_GET_RULES));
         availableList.removeAll(getAiPlayables());
     }
 
@@ -223,9 +242,8 @@ public class LimitedDeck extends Deck {
                 }
 
                 for (int j = 0; j < nLand; j++) {
-                    final CardPrinted cp = CardDb.instance().getCard(clrCnts[i].getColor(),
-                            IBoosterDraft.LAND_SET_CODE[0]);
-                    deckList.add(cp.toForgeCard());
+                    final CardPrinted cp = CardDb.instance().getCard(clrCnts[i].getColor(), aiPlayables.get(0).getEdition());
+                    deckList.add(cp);
                     landsAdded++;
                 }
             }
@@ -238,8 +256,8 @@ public class LimitedDeck extends Deck {
         int n = 0;
         while (landsNeeded > 0) {
             if (clrCnts[n].getCount() > 0) {
-                CardPrinted cp = CardDb.instance().getCard(clrCnts[n].getColor(), IBoosterDraft.LAND_SET_CODE[0]);
-                deckList.add(cp.toForgeCard());
+                CardPrinted cp = CardDb.instance().getCard(clrCnts[n].getColor(), aiPlayables.get(0).getEdition());
+                deckList.add(cp);
                 landsNeeded--;
 
                 if (Constant.Runtime.DEV_MODE[0]) {
@@ -263,7 +281,7 @@ public class LimitedDeck extends Deck {
 
         // count each card color using mana costs
         for (int i = 0; i < deckList.size(); i++) {
-            final CardManaCost mc = deckList.get(i).getManaCost();
+            final CardManaCost mc = deckList.get(i).getCard().getManaCost();
 
             // count each mana symbol in the mana cost
             for (ManaCostShard shard : mc.getShards()) {
@@ -292,22 +310,23 @@ public class LimitedDeck extends Deck {
     /**
      * Add non-basic lands to the deck.
      */
-    private void addNonBasicLands() {
-        CardList lands = getAiPlayables().getType("Land");
-        while (!getColors().getColor1().equals(getColors().getColor2()) && landsNeeded > 0 && lands.size() > 0) {
-            final Card c = lands.get(0);
-
-            deckList.add(c);
-            landsNeeded--;
-            getAiPlayables().remove(c);
-
-            lands = getAiPlayables().getType("Land");
-
-            if (Constant.Runtime.DEV_MODE[0]) {
-                System.out.println("Land:" + c.getName());
-            }
-        }
-    }
+    // private void addNonBasicLands() {
+    // CardList lands = getAiPlayables().getType("Land");
+    // while (!getColors().getColor1().equals(getColors().getColor2()) &&
+    // landsNeeded > 0 && lands.size() > 0) {
+    // final Card c = lands.get(0);
+    //
+    // deckList.add(c);
+    // landsNeeded--;
+    // getAiPlayables().remove(c);
+    //
+    // lands = getAiPlayables().getType("Land");
+    //
+    // if (Constant.Runtime.DEV_MODE[0]) {
+    // System.out.println("Land:" + c.getName());
+    // }
+    // }
+    // }
 
     /**
      * Add random cards to the deck.
@@ -315,19 +334,20 @@ public class LimitedDeck extends Deck {
      * @param nCards
      */
     private void addRandomCards(int nCards) {
-        CardList z = getAiPlayables().getNotType("Land");
-        int ii = 0;
-        while ((nCards > 0) && (z.size() > 1)) {
-
-            final Card c = z.get(MyRandom.getRandom().nextInt(z.size() - 1));
-
-            deckList.add(c);
-            nCards--;
-            getAiPlayables().remove(c);
-            z.remove(c);
-
-            if (Constant.Runtime.DEV_MODE[0]) {
-                System.out.println("NonLands[" + ii++ + "]:" + c.getName() + "(" + c.getManaCost() + ")");
+        List<CardPrinted> others = CardRules.Predicates.Presets.IS_NON_LAND.select(aiPlayables,
+                CardPrinted.FN_GET_RULES);
+        List<CardRankingBean> ranked = rankCards(others);
+        for (CardRankingBean bean : ranked) {
+            if (nCards > 0) {
+                deckList.add(bean.getCard());
+                aiPlayables.remove(bean.getCard());
+                nCards--;
+                if (Constant.Runtime.DEV_MODE[0]) {
+                    System.out.println("Random[" + nCards + "]:" + bean.getCard().getName() + "("
+                            + bean.getCard().getCard().getManaCost() + ")");
+                }
+            } else {
+                break;
             }
         }
     }
@@ -342,15 +362,15 @@ public class LimitedDeck extends Deck {
     private void addNonCreatures(List<CardRankingBean> nonCreatures, int num) {
         for (CardRankingBean bean : nonCreatures) {
             if (num > 0) {
-                Card cardToAdd = bean.getCard();
+                CardPrinted cardToAdd = bean.getCard();
                 deckList.add(cardToAdd);
                 num--;
                 getAiPlayables().remove(cardToAdd);
                 if (Constant.Runtime.DEV_MODE[0]) {
-                    System.out.println("Others[" + num + "]:" + cardToAdd.getName() + " (" + cardToAdd.getManaCost()
-                            + ")");
+                    System.out.println("Others[" + num + "]:" + cardToAdd.getName() + " ("
+                            + cardToAdd.getCard().getManaCost() + ")");
                 }
-                num = addComboCards(cardToAdd, num);
+                // num = addComboCards(cardToAdd, num);
             } else {
                 break;
             }
@@ -366,31 +386,32 @@ public class LimitedDeck extends Deck {
      *            number of cards
      * @return number left after adding
      */
-    private int addComboCards(Card cardToAdd, int num) {
-        if (!cardToAdd.getSVar("DeckWants").equals("")) {
-            DeckWants wants = cardToAdd.getDeckWants();
-            CardList comboCards = wants.filter(getAiPlayables());
-            if (Constant.Runtime.DEV_MODE[0]) {
-                System.out.println("Found " + comboCards.size() + " cards for " + cardToAdd.getName());
-            }
-            List<CardRankingBean> rankedComboCards = rankCards(comboCards);
-            for (CardRankingBean comboBean : rankedComboCards) {
-                if (num > 0) {
-                    // TODO: This is not exactly right, because the
-                    // rankedComboCards could include creatures and
-                    // non-creatures. This code could add too many of one or the
-                    // other.
-                    Card combo = comboBean.getCard();
-                    deckList.add(combo);
-                    num--;
-                    getAiPlayables().remove(combo);
-                } else {
-                    break;
-                }
-            }
-        }
-        return num;
-    }
+    // private int addComboCards(CardPrinted cardToAdd, int num) {
+    // if (!cardToAdd.getCard().getSVar("DeckWants").equals("")) {
+    // DeckWants wants = cardToAdd.getDeckWants();
+    // CardList comboCards = wants.filter(getAiPlayables());
+    // if (Constant.Runtime.DEV_MODE[0]) {
+    // System.out.println("Found " + comboCards.size() + " cards for " +
+    // cardToAdd.getName());
+    // }
+    // List<CardRankingBean> rankedComboCards = rankCards(comboCards);
+    // for (CardRankingBean comboBean : rankedComboCards) {
+    // if (num > 0) {
+    // // TODO: This is not exactly right, because the
+    // // rankedComboCards could include creatures and
+    // // non-creatures. This code could add too many of one or the
+    // // other.
+    // Card combo = comboBean.getCard();
+    // deckList.add(combo);
+    // num--;
+    // getAiPlayables().remove(combo);
+    // } else {
+    // break;
+    // }
+    // }
+    // }
+    // return num;
+    // }
 
     /**
      * Add creatures to the deck.
@@ -402,14 +423,14 @@ public class LimitedDeck extends Deck {
     private void addCreatures(List<CardRankingBean> creatures, int num) {
         for (CardRankingBean bean : creatures) {
             if (num > 0) {
-                Card c = bean.getCard();
+                CardPrinted c = bean.getCard();
                 deckList.add(c);
                 num--;
                 getAiPlayables().remove(c);
                 if (Constant.Runtime.DEV_MODE[0]) {
-                    System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getManaCost() + ")");
+                    System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getCard().getManaCost() + ")");
                 }
-                num = addComboCards(c, num);
+                // num = addComboCards(c, num);
             } else {
                 break;
             }
@@ -430,9 +451,10 @@ public class LimitedDeck extends Deck {
         for (int i = 1; i < 7; i++) {
             creatureCosts.put(i, 0);
         }
-        CardList currentCreatures = deckList.getType("Creature");
-        for (Card creature : currentCreatures) {
-            int cmc = creature.getCMC();
+        List<CardPrinted> currentCreatures = CardRules.Predicates.Presets.IS_CREATURE.select(deckList,
+                CardPrinted.FN_GET_RULES);
+        for (CardPrinted creature : currentCreatures) {
+            int cmc = creature.getCard().getManaCost().getCMC();
             if (cmc < 1) {
                 cmc = 1;
             } else if (cmc > 6) {
@@ -442,8 +464,8 @@ public class LimitedDeck extends Deck {
         }
 
         for (CardRankingBean bean : creatures) {
-            Card c = bean.getCard();
-            int cmc = c.getCMC();
+            CardPrinted c = bean.getCard();
+            int cmc = c.getCard().getManaCost().getCMC();
             if (cmc < 1) {
                 cmc = 1;
             } else if (cmc > 6) {
@@ -471,13 +493,13 @@ public class LimitedDeck extends Deck {
                 getAiPlayables().remove(c);
                 creatureCosts.put(cmc, creatureCosts.get(cmc) + 1);
                 if (Constant.Runtime.DEV_MODE[0]) {
-                    System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getManaCost() + ")");
+                    System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getCard().getManaCost() + ")");
                 }
-                num = addComboCards(c, num);
+                // num = addComboCards(c, num);
             } else {
                 if (Constant.Runtime.DEV_MODE[0]) {
-                    System.out.println(c.getName() + " not added because CMC " + c.getCMC() + " has " + currentAtCmc
-                            + " already.");
+                    System.out.println(c.getName() + " not added because CMC " + c.getCard().getManaCost().getCMC()
+                            + " has " + currentAtCmc + " already.");
                 }
             }
             if (num <= 0) {
@@ -493,10 +515,10 @@ public class LimitedDeck extends Deck {
      * @param cards
      * @return List of beans with card rankings
      */
-    private List<CardRankingBean> rankCards(CardList cards) {
+    protected List<CardRankingBean> rankCards(List<CardPrinted> cards) {
         List<CardRankingBean> ranked = new ArrayList<CardRankingBean>();
-        for (Card card : cards) {
-            Integer rkg = draftRankings.getRanking(card.getName(), card.getCurSetCode());
+        for (CardPrinted card : cards) {
+            Integer rkg = draftRankings.getRanking(card.getName(), card.getEdition());
             if (rkg != null) {
                 ranked.add(new CardRankingBean(rkg, card));
             }
@@ -505,10 +527,18 @@ public class LimitedDeck extends Deck {
         return ranked;
     }
 
+    private double getAverageCMC(List<CardPrinted> cards) {
+        double sum = 0.0;
+        for (CardPrinted cardPrinted : cards) {
+            sum += cardPrinted.getCard().getManaCost().getCMC();
+        }
+        return sum / cards.size();
+    }
+
     /**
      * @return the colors
      */
-    public DeckColors getColors() {
+    public CardColor getColors() {
         return colors;
     }
 
@@ -516,14 +546,14 @@ public class LimitedDeck extends Deck {
      * @param colors
      *            the colors to set
      */
-    public void setColors(DeckColors colors) {
+    public void setColors(CardColor colors) {
         this.colors = colors;
     }
 
     /**
      * @return the aiPlayables
      */
-    public CardList getAiPlayables() {
+    public List<CardPrinted> getAiPlayables() {
         return aiPlayables;
     }
 
@@ -531,15 +561,15 @@ public class LimitedDeck extends Deck {
      * @param aiPlayables
      *            the aiPlayables to set
      */
-    public void setAiPlayables(CardList aiPlayables) {
+    public void setAiPlayables(List<CardPrinted> aiPlayables) {
         this.aiPlayables = aiPlayables;
     }
 
     protected class CardRankingBean {
         private Integer rank;
-        private Card card;
+        private CardPrinted card;
 
-        public CardRankingBean(Integer rank, Card card) {
+        public CardRankingBean(Integer rank, CardPrinted card) {
             this.rank = rank;
             this.card = card;
         }
@@ -554,7 +584,7 @@ public class LimitedDeck extends Deck {
         /**
          * @return the card
          */
-        public Card getCard() {
+        public CardPrinted getCard() {
             return card;
         }
 

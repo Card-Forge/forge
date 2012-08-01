@@ -5,10 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import forge.CardList;
-import forge.CardListUtil;
 import forge.Constant;
 import forge.Constant.Color;
+import forge.card.CardColor;
+import forge.card.CardRules;
+import forge.item.CardPrinted;
 import forge.util.MyRandom;
 
 /**
@@ -25,7 +26,7 @@ public class SealedDeck extends LimitedDeck {
      * @param list
      *            list of cards available
      */
-    public SealedDeck(CardList list) {
+    public SealedDeck(List<CardPrinted> list) {
         super(list);
         this.setColors(chooseColors());
         buildDeck();
@@ -36,23 +37,25 @@ public class SealedDeck extends LimitedDeck {
      * 
      * @return DeckColors
      */
-    private DeckColors chooseColors() {
-        CardList creatures = getAiPlayables().getType("Creature");
-        CardListUtil.sortByEvaluateCreature(creatures);
+    private CardColor chooseColors() {
+        List<CardRankingBean> rankedCards = rankCards(getAiPlayables());
 
-        // choose colors based on top 33% of creatures and planeswalkers
-        final CardList colorChooserList = new CardList();
-        colorChooserList.addAll(getAiPlayables().getType("Planeswalker"));
-        for (int i = 0; i < (creatures.size() * .33); i++) {
-            colorChooserList.add(creatures.get(i));
-            System.out.println(creatures.get(i).toString() + " " + creatures.get(i).getManaCost().toString());
+        // choose colors based on top 33% of cards
+        final List<CardPrinted> colorChooserList = new ArrayList<CardPrinted>();
+        double limit = rankedCards.size() * .33;
+        for (int i = 0; i < limit; i++) {
+            colorChooserList.add(rankedCards.get(i).getCard());
+            System.out.println(rankedCards.get(i).getCard().getName() + " "
+                    + rankedCards.get(i).getCard().getCard().getManaCost().toString());
         }
 
-        final int[] colorCounts = { 0, 0, 0, 0, 0 };
+        int white = CardRules.Predicates.Presets.IS_WHITE.select(colorChooserList, CardPrinted.FN_GET_RULES).size();
+        int blue = CardRules.Predicates.Presets.IS_BLUE.select(colorChooserList, CardPrinted.FN_GET_RULES).size();
+        int black = CardRules.Predicates.Presets.IS_BLACK.select(colorChooserList, CardPrinted.FN_GET_RULES).size();
+        int red = CardRules.Predicates.Presets.IS_RED.select(colorChooserList, CardPrinted.FN_GET_RULES).size();
+        int green = CardRules.Predicates.Presets.IS_GREEN.select(colorChooserList, CardPrinted.FN_GET_RULES).size();
+        final int[] colorCounts = { white, blue, black, red, green };
         final String[] colors = Constant.Color.ONLY_COLORS;
-        for (int i = 0; i < colors.length; i++) {
-            colorCounts[i] = colorChooserList.getColorByManaCost(colors[i]).size();
-        }
         int[] countsCopy = Arrays.copyOf(colorCounts, 5);
         Arrays.sort(countsCopy);
 
@@ -70,7 +73,11 @@ public class SealedDeck extends LimitedDeck {
         String color2 = Color.BLACK;
         final Random r = MyRandom.getRandom();
         if (maxColors.size() > 1) {
-            color1 = maxColors.get(r.nextInt(maxColors.size()));
+            int n = r.nextInt(maxColors.size());
+            color1 = maxColors.get(n);
+            maxColors.remove(n);
+            n = r.nextInt(maxColors.size());
+            color2 = maxColors.get(n);
         } else {
             color1 = maxColors.get(0);
             if (secondColors.size() > 1) {
@@ -82,14 +89,6 @@ public class SealedDeck extends LimitedDeck {
 
         System.out.println("COLOR = " + color1);
         System.out.println("COLOR = " + color2);
-        final DeckColors dcAI = new DeckColors();
-        dcAI.setColor1(color1);
-        dcAI.setColor2(color2);
-        // dcAI.splash = colors[2];
-        dcAI.setMana1(dcAI.colorToMana(color1));
-        dcAI.setMana2(dcAI.colorToMana(color2));
-        // dcAI.manaS = dcAI.colorToMana(colors[2]);
-
-        return dcAI;
+        return CardColor.fromNames(color1, color2);
     }
 }

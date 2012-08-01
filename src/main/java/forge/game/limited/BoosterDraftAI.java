@@ -25,7 +25,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import forge.CardList;
 import forge.Constant;
 import forge.card.CardColor;
 import forge.card.CardRules;
@@ -54,7 +53,7 @@ public class BoosterDraftAI {
     private static final int N_DECKS = 7;
 
     // holds all the cards for each of the computer's decks
-    private final CardList[] deck = new CardList[BoosterDraftAI.N_DECKS];
+    private final List<List<CardPrinted>> deck = new ArrayList<List<CardPrinted>>();
     private final String[][] deckColor = new String[BoosterDraftAI.N_DECKS][];
 
     /**
@@ -250,8 +249,7 @@ public class BoosterDraftAI {
 
         if (pickedCard != null) {
             chooseFrom.remove(pickedCard);
-            // TODO: Write deckbuilding code to work with CardPrinted.
-            this.deck[player].add(pickedCard.toForgeCard());
+            this.deck.get(player).add(pickedCard);
         }
 
         return pickedCard;
@@ -343,16 +341,15 @@ public class BoosterDraftAI {
      * @return an array of {@link forge.deck.Deck} objects.
      */
     public Deck[] getDecks() {
-        final Deck[] out = new Deck[this.deck.length];
+        final Deck[] out = new Deck[this.deck.size()];
 
-        for (int i = 0; i < this.deck.length; i++) {
-            // addLand(deck[i], deckColor[i]);
-            // out[i] = getDeck(deck[i]);
+        for (int i = 0; i < this.deck.size(); i++) {
             if (Constant.Runtime.DEV_MODE[0]) {
                 System.out.println("Deck[" + i + "]");
             }
 
-            out[i] = new BoosterDeck(this.deck[i], this.playerColors.get(i));
+            CardColor cc = CardColor.fromNames(this.playerColors.get(i).getColor1(), this.playerColors.get(i).getColor2());
+            out[i] = new BoosterDeck(this.deck.get(i), cc);
         }
         return out;
     } // getDecks()
@@ -400,8 +397,8 @@ public class BoosterDraftAI {
         BoosterDraftAI.colorToLand.put(Constant.Color.WHITE, "Plains");
 
         // Initialize deck array and playerColors list
-        for (int i = 0; i < this.deck.length; i++) {
-            this.deck[i] = new CardList();
+        for (int i = 0; i < this.deck.size(); i++) {
+            this.deck.add(new ArrayList<CardPrinted>());
             this.playerColors.add(new DeckColors());
         }
 
