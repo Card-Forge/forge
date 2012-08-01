@@ -275,18 +275,9 @@ public final class BoosterDraft implements IBoosterDraft {
             for (final CardPrinted cr : booster) {
                 forAi.add(cr.toForgeCard());
             }
-            // TODO: Please write this drafting code to work without heavy card
-            // objects
-            final Card aiPick = this.draftAI.choose(forAi, iPlayer++);
-            final String pickedName = aiPick.getName();
 
-            for (int pick = booster.size() - 1; pick >= 0; pick--) {
-                final CardPrinted cp = booster.get(pick);
-                if (cp.getName().equalsIgnoreCase(pickedName)) {
-                    booster.remove(pick);
-                    break;
-                }
-            }
+            final CardPrinted aiPick = this.draftAI.choose(booster, iPlayer++);
+            booster.remove(aiPick);
         }
     } // computerChoose()
 
