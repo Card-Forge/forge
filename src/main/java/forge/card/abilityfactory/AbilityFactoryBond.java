@@ -317,7 +317,7 @@ public final class AbilityFactoryBond {
         trigCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 
         // Check that this card hasn't already become paired by an earlier trigger
-        if (trigCards.get(0).isPaired()) {
+        if (trigCards.get(0).isPaired() || !trigCards.get(0).isInZone(ZoneType.Battlefield)) {
             return;
         }
 
