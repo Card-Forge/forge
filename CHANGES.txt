@@ -250,6 +250,12 @@ Fixes/Features:
 - some ideas for test
 - Added totalPT_<comparison> restriction to IsValid
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed LKI copies not having all the characteristics.
+- fixed problems with triggers from cards laying on table before game starts in quest mode
+- Added some more M13 cards to quest decks.
+- Fixed Soulbond pairing with cards not on the battlefield.
+- Disabled the DeckWantsTest.testNoFilter() test and the Maven build and release commands will once again work. This is not a true fix but just a hack in order to do a Maven build and release.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
