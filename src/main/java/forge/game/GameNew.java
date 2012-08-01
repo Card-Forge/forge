@@ -69,16 +69,20 @@ public class GameNew {
         AllZone.getHumanPlayer().setStartingLife(humanLife);
         AllZone.getHumanPlayer().updateObservers();
 
+        Card.resetUniqueNumber();
+        
         for (final Card c : human) {
             AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).add(c);
             c.setSickness(true);
             c.setStartsGameInPlay(true);
+            c.refreshUniqueNumber();
         }
 
         for (final Card c : computer) {
             AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).add(c);
             c.setSickness(true);
             c.setStartsGameInPlay(true);
+            c.refreshUniqueNumber();
         }
 
         GameNew.actuateGame(humanDeck, computerDeck);
@@ -102,6 +106,7 @@ public class GameNew {
         AllZone.getComputerPlayer().setStartingLife(20);
         AllZone.getHumanPlayer().setStartingLife(20);
 
+        Card.resetUniqueNumber();
         GameNew.actuateGame(humanDeck, computerDeck);
     }
 
@@ -119,7 +124,6 @@ public class GameNew {
         CMessage.SINGLETON_INSTANCE.updateGameInfo();
 
         // friendliness
-        Card.resetUniqueNumber();
         final boolean canRandomFoil = Constant.Runtime.RANDOM_FOIL[0]
                 && Constant.Runtime.getGameType().equals(GameType.Constructed);
         final Random generator = MyRandom.getRandom();

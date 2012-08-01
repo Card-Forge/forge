@@ -231,9 +231,16 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Instantiates a new card.
      */
     public Card() {
-        this.setUniqueNumber(Card.nextUniqueNumber++);
+        refreshUniqueNumber();
         this.characteristicsMap.put(CardCharactersticName.Original, new CardCharacteristics());
         this.characteristicsMap.put(CardCharactersticName.FaceDown, CardUtil.getFaceDownCharacteristic());
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void refreshUniqueNumber() {
+        this.setUniqueNumber(Card.nextUniqueNumber++);
     }
 
     /**
