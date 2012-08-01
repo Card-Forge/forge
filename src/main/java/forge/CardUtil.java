@@ -958,13 +958,13 @@ public final class CardUtil {
         newCopy.setOwner(in.getOwner());
         newCopy.setFlipCard(in.isFlipCard());
         newCopy.setDoubleFaced(in.isDoubleFaced());
+        newCopy.getCharacteristics().copy(in.getState(in.getCurState()));
 
         // Copy all states
         // Commented out by Sloth 2012/07/25
-        /*AllZone.getTriggerHandler().suppressMode(TriggerType.Transformed);
-        for (final CardCharactersticName state : in.getStates()) {
+        /*for (final CardCharactersticName state : in.getStates()) {
             newCopy.addAlternateState(state);
-            newCopy.changeToState(state);
+            newCopy.setState(state);
             CardFactoryUtil.copyState(in, state, newCopy);
             //Copies of full abilities not need in LKI copy
             /*
@@ -995,8 +995,7 @@ public final class CardUtil {
                 newCopy.addStaticAbility(newCopy.getStaticAbilityStrings().get(i));
             }
         }
-        newCopy.changeToState(in.getCurState());
-        AllZone.getTriggerHandler().clearSuppression(TriggerType.Transformed);*/
+        newCopy.changeToState(in.getCurState());*/
 
         // I'm not sure if we really should be copying enchant/equip stuff over.
 
