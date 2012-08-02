@@ -18,6 +18,7 @@
 package forge.card;
 
 import forge.Constant;
+import forge.util.BinaryUtil;
 
 /**
  * <p>
@@ -128,12 +129,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return the int
      */
     public int countColors() {
-        byte v = this.myColor;
-        int c = 0;
-        for (; v != 0; c++) {
-            v &= v - 1;
-        }
-        return c;
+        return BinaryUtil.bitCount(this.myColor); 
     } // bit count
 
     // order has to be: W U B R G multi colorless - same as cards numbering
