@@ -218,13 +218,17 @@ public final class CardDb {
         if (nameWithSet.right == null) {
             return this.uniqueCards.containsKey(nameWithSet.left.toLowerCase());
         }
+        return isCardSupported(nameWithSet.left, nameWithSet.right);
+    }
+        
+    public boolean isCardSupported(final String cardName, String setName) {        
         // Set exists?
-        final Map<String, CardPrinted[]> cardsFromset = this.allCardsBySet.get(nameWithSet.right.toUpperCase());
+        final Map<String, CardPrinted[]> cardsFromset = this.allCardsBySet.get(setName.toUpperCase());
         if (cardsFromset == null) {
             return false;
         }
         // Card exists?
-        final CardPrinted[] cardCopies = cardsFromset.get(nameWithSet.left.toLowerCase());
+        final CardPrinted[] cardCopies = cardsFromset.get(cardName.toLowerCase());
         return (cardCopies != null) && (cardCopies.length > 0);
     }
 
