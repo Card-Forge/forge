@@ -61,7 +61,7 @@ public class QuestEventChallenge extends QuestEvent {
     private List<String> aiExtraCards = new ArrayList<String>();
 
     /** The card reward list. */
-    private UnOpenedProduct cardRewardList;
+    private UnOpenedProduct cardRewardList = null;
 
     /**
      * Instantiates a new quest challenge.
@@ -79,17 +79,6 @@ public class QuestEventChallenge extends QuestEvent {
      */
     public final int getAILife() {
         return this.getAiLife();
-    }
-
-    /**
-     * <p>
-     * getCardReward.
-     * </p>
-     * 
-     * @return {@link java.lang.String}.
-     */
-    public final String getCardReward() {
-        return this.cardReward;
     }
 
     /**
@@ -147,17 +136,6 @@ public class QuestEventChallenge extends QuestEvent {
      */
     public final List<String> getHumanExtraCards() {
         return this.humanExtraCards;
-    }
-
-    /**
-     * <p>
-     * getCardRewardList.
-     * </p>
-     * 
-     * @return the card reward list
-     */
-    public final List<CardPrinted> getCardRewardList() {
-        return this.cardRewardList.open();
     }
 
     /**
@@ -248,6 +226,21 @@ public class QuestEventChallenge extends QuestEvent {
     }
 
     /**
+     * <p>
+     * getCardRewardList.
+     * </p>
+     * 
+     * @return the card reward list
+     */
+    public final List<CardPrinted> getCardRewardList() {
+        if ( cardRewardList == null )
+        {
+            this.cardRewardList = BoosterUtils.generateCardRewardList(cardReward);
+        }
+        return this.cardRewardList.open();
+    }
+
+    /**
      * Sets the card reward.
      * 
      * @param cardReward0
@@ -257,15 +250,6 @@ public class QuestEventChallenge extends QuestEvent {
         this.cardReward = cardReward0;
     }
 
-    /**
-     * Sets the card reward list.
-     * 
-     * @param cardRewardList0
-     *            the cardRewardList to set
-     */
-    public void setCardRewardList(final UnOpenedProduct cardRewardList0) {
-        this.cardRewardList = cardRewardList0;
-    }
 
     /**
      * Sets the human extra cards.

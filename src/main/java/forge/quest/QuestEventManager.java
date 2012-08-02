@@ -273,7 +273,6 @@ public class QuestEventManager {
                 qc.setCreditsReward(Integer.parseInt(value));
             } else if (key.equalsIgnoreCase("Card Reward")) {
                 qc.setCardReward(value);
-                qc.setCardRewardList(BoosterUtils.generateCardRewardList(value));
             }
             // Human extra card list assembled here.
             else if (key.equalsIgnoreCase("HumanExtras") && !value.equals("")) {
@@ -300,7 +299,6 @@ public class QuestEventManager {
             // Card reward list assembled here.
             else if (key.equalsIgnoreCase("Card Reward")) {
                 qc.setCardReward(value);
-                qc.setCardRewardList(BoosterUtils.generateCardRewardList(value));
             }
         }
         return qc;

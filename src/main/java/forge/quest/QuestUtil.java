@@ -20,7 +20,6 @@ package forge.quest;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.CardUtil;
 import forge.card.cardfactory.CardFactory;
 import forge.game.player.Player;
 import forge.item.CardDb;
