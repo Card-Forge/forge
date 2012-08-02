@@ -355,6 +355,13 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
         }
 
         public TableSorterCascade<InventoryItem> getSorter() {
+            if ( this.sorter == null )
+                this.sorter = createSorter();
+            return this.sorter;
+        }
+        
+        private TableSorterCascade<InventoryItem> createSorter()
+        {
             final List<TableSorter<InventoryItem>> oneColSorters
                 = new ArrayList<TableSorter<InventoryItem>>(maxSortDepth);
 
@@ -364,8 +371,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
                         col.getSortState().equals(SortState.ASC) ? true : false));
             }
 
-            this.sorter = new TableSorterCascade<InventoryItem>(oneColSorters);
-            return this.sorter;
+            return new TableSorterCascade<InventoryItem>(oneColSorters);
         }
     }
 
