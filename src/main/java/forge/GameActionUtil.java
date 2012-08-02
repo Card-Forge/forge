@@ -686,22 +686,17 @@ public final class GameActionUtil {
             sb.append(affected).append(" - destroy");
             ability.setStackDescription(sb.toString());
             ability2.setStackDescription(sb.toString());
+            final int amount = affected
+                    .getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
 
-            if (affected.hasKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.")) {
-                final int amount = affected
-                        .getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
-
-                for (int i = 0; i < amount; i++) {
-                    AllZone.getStack().addSimultaneousStackEntry(ability2);
-                }
-
+            for (int i = 0; i < amount; i++) {
+                AllZone.getStack().addSimultaneousStackEntry(ability2);
             }
-            final int amount = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it.");
+            final int amount2 = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it.");
 
-            for (int i = 1; i < amount; i++) {
+            for (int i = 0; i < amount2; i++) {
                 AllZone.getStack().addSimultaneousStackEntry(ability);
             }
-            AllZone.getStack().addSimultaneousStackEntry(ability);
         }
     }
 

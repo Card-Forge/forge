@@ -9,7 +9,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ Enchanted creature has protection from the chosen color. This effect doesn't remove CARDNAME.
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pentarch_ward.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/33.jpg
