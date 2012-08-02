@@ -122,7 +122,7 @@ public class CombatUtil {
             return false;
         }
 
-        if (blocker.isTapped() && !AllZoneUtil.isCardInPlay("Masako the Humorless", blocker.getController())) {
+        if (blocker.isTapped() && !blocker.hasKeyword("CARDNAME can block as though it were untapped.")) {
             return false;
         }
 

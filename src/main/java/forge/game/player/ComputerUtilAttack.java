@@ -240,7 +240,7 @@ public class ComputerUtilAttack {
         for (final Card c : this.computerList) {
             if (c.getName().equals("Masako the Humorless")) {
                 // "Tapped creatures you control can block as though they were untapped."
-                return notNeededAsBlockers;
+                return attackers;
             }
             if (!attackers.contains(c)) { // this creature can't attack anyway
                 if (canBlockAnAttacker(c, this.humanList)) {
