@@ -195,15 +195,10 @@ public class CombatUtil {
 
 
     public static boolean isUnblockableFromLandwalk(final Card attacker) {
-        //May be blocked as though it doesn't have landwalk.
-
+        //May be blocked as though it doesn't have landwalk. (Staff of the Ages)
         if (attacker.hasKeyword("May be blocked as though it doesn't have landwalk.")) {
             return false;
         }
-
-        // "Creatures with landwalk abilities can be blocked as though they didn't have those abilities."
-        final Player defendingPlayer = attacker.getController().getOpponent();
-        CardList defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
 
         ArrayList<String> walkTypes = new ArrayList<String>();
 
@@ -218,7 +213,7 @@ public class CombatUtil {
             sbSnow.append(landwalk.toLowerCase());
             String snowwalk = sbSnow.toString();
 
-            sbLand.insert(0, "May be blocked as though it doesn't have ");
+            sbLand.insert(0, "May be blocked as though it doesn't have "); //Deadfall, etc.
             sbLand.append(".");
 
             String mayBeBlocked = sbLand.toString();
@@ -235,20 +230,16 @@ public class CombatUtil {
             }
         }
 
-        if (attacker.hasKeyword("Legendary landwalk")) {
-            walkTypes.add("Land.Legendary");
-        }
-
-        if (attacker.hasKeyword("Desertwalk")) {
-            walkTypes.add("Desert");
-        }
-
-        if (attacker.hasKeyword("Nonbasic landwalk")) {
-            walkTypes.add("Land.nonBasic");
-        }
-
-        if (attacker.hasKeyword("Snow landwalk")) {
-            walkTypes.add("Land.Snow");
+        for (String keyword : attacker.getKeyword()) {
+            if (keyword.equals("Legendary landwalk")) {
+                walkTypes.add("Land.Legendary");
+            } else if (keyword.equals("Desertwalk")) {
+                walkTypes.add("Desert");
+            } else if (keyword.equals("Nonbasic landwalk")) {
+                walkTypes.add("Land.nonBasic");
+            } else if (keyword.equals("Snow landwalk")) {
+                walkTypes.add("Land.Snow");
+            }
         }
 
         if (walkTypes.isEmpty()) {
@@ -256,9 +247,15 @@ public class CombatUtil {
         }
 
         String valid = StringUtils.join(walkTypes, ",");
-        defendingLands = defendingLands.getValidCards(valid, defendingPlayer, attacker);
+        final Player defendingPlayer = attacker.getController().getOpponent();
+        CardList defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
+        for (Card c : defendingLands) {
+            if (c.isValid(valid, defendingPlayer, attacker)) {
+                return true;
+            }
+        }
 
-        return !defendingLands.isEmpty();
+        return false;
     }
 
     /**

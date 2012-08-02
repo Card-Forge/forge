@@ -5099,8 +5099,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final ArrayList<String> getKeyword() {
         final ArrayList<String> keywords = this.getUnhiddenKeyword();
-        final ArrayList<String> a4 = new ArrayList<String>(this.getHiddenExtrinsicKeyword());
-        keywords.addAll(a4);
+        keywords.addAll(this.getHiddenExtrinsicKeyword());
 
         return keywords;
     }
