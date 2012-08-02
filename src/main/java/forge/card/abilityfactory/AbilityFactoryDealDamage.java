@@ -603,7 +603,7 @@ public class AbilityFactoryDealDamage {
         tgt.resetTargets();
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(saMe.getSourceCard(), saMe)) {
-            // TODO: Consider targeting the planeswalker
+
             if (tgt.canTgtCreatureAndPlayer()) {
 
                 if (this.shouldTgtP(saMe, dmg, noPrevention)) {
@@ -642,11 +642,16 @@ public class AbilityFactoryDealDamage {
 
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (saMe.canTarget(AllZone.getHumanPlayer())
-                    && ((phase.is(PhaseType.END_OF_TURN) && phase.isNextTurn(AllZone.getComputerPlayer()))
+            else if (saMe.canTarget(AllZone.getHumanPlayer())) {
+                
+                if ((phase.is(PhaseType.END_OF_TURN) && phase.isNextTurn(AllZone.getComputerPlayer()))
                         || (AbilityFactory.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2))
-                        || saMe.getPayCosts() == null || isTrigger)) {
-                if (tgt.addTarget(AllZone.getHumanPlayer())) {
+                        || saMe.getPayCosts() == null || isTrigger) {
+                    tgt.addTarget(AllZone.getHumanPlayer());
+                    continue;
+                }
+                if (this.shouldTgtP(saMe, dmg, noPrevention)) {
+                    tgt.addTarget(AllZone.getHumanPlayer());
                     continue;
                 }
             }
