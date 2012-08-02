@@ -178,6 +178,11 @@ public class AbilityFactoryDestroy {
             }
 
             @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryDestroy.destroyCanPlayAI(af, this);
+            }
+
+            @Override
             public boolean chkAIDrawback() {
                 return false;
             }

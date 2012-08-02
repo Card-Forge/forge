@@ -4,7 +4,6 @@ Types:Instant
 Text:no text
 A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target Artifact spell | ValidTgts$ Artifact | PrecostDesc$ Choose one - | SpellDescription$ Counter target artifact spell;
 A:SP$ ChangeZone | Cost$ U | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Hand | SpellDescription$ or return target artifact to its owner's hand.
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_sabotage.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/33.jpg

@@ -5,7 +5,6 @@ Text:no text
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target artifact or enchantment to its owner's hand.
 SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Hand
-SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Stern_Proctor.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/99.jpg
