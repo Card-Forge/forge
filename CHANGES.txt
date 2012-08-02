@@ -256,6 +256,17 @@ Fixes/Features:
 - Fixed Soulbond pairing with cards not on the battlefield.
 - Disabled the DeckWantsTest.testNoFilter() test and the Maven build and release commands will once again work. This is not a true fix but just a hack in order to do a Maven build and release.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- work on DeckWantsTest, no longer breaking
+- Byte utils
+- Quest rewards are evaluated on their retrieval - game will start faster
+- accelerating deck editor
+- tables sorting bugfix
+- CardColor is now limited to 33 instances (as many as color combinations + NULL_COLOR)
+- Fixed Elderwood Scion.
+- progressbar optimizate
+- Various little tweaks.
+- Improved AI handling of "When CARDNAME is dealt damage, destroy it.".
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
