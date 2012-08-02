@@ -73,6 +73,24 @@ public class StaticAbilityCostChange {
         if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
             return originalCost;
         }
+        if (params.containsKey("ValidTarget")) {
+            Target tgt = sa.getTarget();
+            if (tgt == null) {
+                return originalCost;
+            }
+            boolean targetValid = false;
+            for (Object target : tgt.getTargets()) {
+                if (target instanceof Card) {
+                    Card targetCard = (Card) target;
+                    if (targetCard.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard)) {
+                        targetValid = true;
+                    }
+                }
+            }
+            if (!targetValid) {
+                return originalCost;
+            }
+        }
         int value = 0;
         if ("X".equals(amount)) {
             value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
