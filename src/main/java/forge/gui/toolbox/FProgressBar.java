@@ -15,11 +15,10 @@ import forge.gui.GuiUtils;
  */
 @SuppressWarnings("serial")
 public class FProgressBar extends JProgressBar {
-    private long startMillis = 0, tempMillis = 0;
-    private float timePerUnit = 0;
-    private int tempVal = 0, etaMillis = 0;
-    private int hours, minutes, seconds;
-    private String desc = "", count = "", eta = "";
+    private long startMillis = 0;
+    private int tempVal = 0, etaSecs = 0;
+    private String desc = "";
+    private String message; 
     private boolean showETA = true;
     private boolean showCount = true;
 
@@ -43,25 +42,27 @@ public class FProgressBar extends JProgressBar {
 
     /** Increments bar, thread safe. Calculations executed on separate thread. */
     public void increment() {
-        final Runnable r = new Runnable() {
+        //GuiUtils.checkEDT("FProgressBar$increment", false);
+        tempVal++;
+
+        // String.format leads to StringBuilder anyway. Direct calls will be faster
+        StringBuilder sb = new StringBuilder(desc);
+        if ( showCount ) sb.append(" ").append(tempVal).append(" of ").append(getMaximum());
+        if ( showETA ) {
+            calculateETA(tempVal);
+            sb.append(", ETA").append(String.format("%02d:%02d:%02d", etaSecs / 3600, (etaSecs % 3600) / 60, etaSecs % 60 + 1));
+        }
+        message = sb.toString();
+
+    
+        // When calculations finished; EDT can be used.
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                tempVal++;
-                count = (showCount ? " " + tempVal + " of " + getMaximum() : "");
-                eta = (showETA ? calculateETA(tempVal) : "");
-
-                // When calculations finished; EDT can be used.
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        FProgressBar.this.setValue(tempVal);
-                        updateString();
-                    }
-                });
+                FProgressBar.this.setValue(tempVal);
+                FProgressBar.this.setString(message);
             }
-        };
-
-        r.run();
+        });
     }
 
     /** Resets the various values required for this class. Must be called from EDT. */
@@ -87,24 +88,10 @@ public class FProgressBar extends JProgressBar {
     }
 
     /** */
-    private String calculateETA(int v0) {
-        GuiUtils.checkEDT("FProgressBar$calculateETA", false);
-        tempMillis = new Date().getTime();
-        timePerUnit = (tempMillis - startMillis) / (float) v0;
-        etaMillis = (int) ((this.getMaximum() - v0) * timePerUnit) / 1000;
-
-        seconds = etaMillis;
-        hours = seconds >= 3600 ? (seconds / 3600) : 0;
-        seconds = etaMillis % 3600;
-        minutes = seconds >= 60 ? (seconds / 60) : 0;
-        seconds = etaMillis % 60 + 1;
-
-        return ", ETA " + String.format("%02d", hours) + ":"
-                + String.format("%02d", minutes) + ":"
-                + String.format("%02d", seconds);
+    private void calculateETA(int v0) {
+        float tempMillis = new Date().getTime();
+        float timePerUnit = (tempMillis - startMillis) / (float) v0;
+        etaSecs = (int)((this.getMaximum() - v0) * timePerUnit) / 1000;
     }
 
-    private void updateString() {
-        this.setString(desc + count + eta);
-    }
 }
