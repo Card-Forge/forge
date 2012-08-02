@@ -27,6 +27,8 @@ import forge.util.BinaryUtil;
  * 
  * @author Forge
  * @version $Id: CardColor.java 9708 2011-08-09 19:34:12Z jendave $
+ * 
+ * This class is immutable. Do not generate any setter here.
  */
 public final class CardColor implements Comparable<CardColor> {
 
@@ -39,6 +41,9 @@ public final class CardColor implements Comparable<CardColor> {
     private final byte myColor;
     private final int orderWeight;
 
+    private static CardColor[] allColors = new CardColor[32];
+    private final static CardColor noColor = new CardColor();
+    
     // TODO: some cards state "CardName is %color%" (e.g. pacts of...) - fix
     // this later
     /**
@@ -47,18 +52,22 @@ public final class CardColor implements Comparable<CardColor> {
      * @param mana
      *            the mana
      */
-    public CardColor(final CardManaCost mana) {
-        this(mana.getColorProfile());
+    private CardColor() {
+        myColor = 0;
+        orderWeight = -1;
     }
-
+    
     private CardColor(final byte mask) {
         this.myColor = mask;
         this.orderWeight = this.getOrderWeight();
 
     }
 
-    public static CardColor fromMask(int mask) {
-        return new CardColor((byte) mask);
+    public static CardColor fromMask(final int mask) {
+        int mask32 = (mask & 0x3E) >> 1;
+        if ( allColors[mask32] == null )
+            allColors[mask32] = new CardColor((byte) mask);
+        return allColors[mask32];
     }
 
     public static CardColor fromNames(String... colors) {
@@ -82,14 +91,10 @@ public final class CardColor implements Comparable<CardColor> {
         }
         return fromMask(mask);
     }
-
-    private CardColor() {
-        this.myColor = 0;
-        this.orderWeight = -1;
+    
+    public static CardColor fromManaCost(final CardManaCost mana) {
+        return fromMask(mana.getColorProfile());
     }
-
-    /** The null color. */
-    private static final CardColor NULL_COLOR = new CardColor();
 
     /**
      * Checks for any color.
@@ -326,7 +331,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return the nullColor
      */
     public static CardColor getNullColor() {
-        return CardColor.NULL_COLOR;
+        return noColor;
     }
 
     /**

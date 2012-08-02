@@ -317,6 +317,8 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
         // Otherwise, sorts in ascending direction.
         @SuppressWarnings("unchecked")
         public void add(final TableColumnInfo<T> col0) {
+            this.sorter = null;
+            
             // Found at top level, should invert
             if (colsToSort.size() > 0 && colsToSort.get(0).equals(col0)) {
                 this.colsToSort.get(0).setSortState(

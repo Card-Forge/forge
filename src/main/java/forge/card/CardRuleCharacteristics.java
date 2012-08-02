@@ -90,7 +90,7 @@ public class CardRuleCharacteristics {
      */
     public final void setManaCost(final CardManaCost manaCost0) {
         this.manaCost = manaCost0;
-        this.color = new CardColor(this.manaCost);
+        this.color = CardColor.fromManaCost(this.manaCost);
     }
 
     /**
