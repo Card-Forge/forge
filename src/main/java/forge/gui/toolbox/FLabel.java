@@ -2,6 +2,7 @@ package forge.gui.toolbox;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,6 +15,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -193,15 +195,16 @@ public class FLabel extends JLabel implements ILocalRepaint {
     // or dynamically (using methods below).
     private double iconScaleFactor;
     private int fontStyle, iconAlignX;
+    private int iw, ih;
     private boolean selectable, selected, hoverable, hovered, opaque,
         iconInBackground, iconScaleAuto;
     private Point iconInsets;
 
     // Various variables used in image rendering.
     private Image img;
-    private Graphics2D g2d;
+    
     private Command cmdClick;
-    private int x, y, w, h, iw, ih, sw, sh;
+
     private double iar;
 
     private AlphaComposite alphaDim, alphaStrong;
@@ -350,50 +353,47 @@ public class FLabel extends JLabel implements ILocalRepaint {
         repaint(0, 0, d.width, d.height);
     }
 
+//    private int cntRepaints = 0;
     @Override
     public void paintComponent(final Graphics g) {
-        g2d = (Graphics2D) g.create();
-        w = getWidth();
-        h = getHeight();
+        Graphics2D g2d = (Graphics2D) g;
+       
+        int w = getWidth();
+        int h = getHeight();
 
-        // Opacity, select
-        if (this.opaque && !selected) {
-            g2d.setColor(getBackground());
-            g2d.fillRect(0, 0, w, h);
-        }
-        else if (selectable && selected) {
-            g2d.setColor(clrActive);
-            g2d.fillRect(0, 0, w, h);
-        }
-
+//        cntRepaints++;
+//        System.err.format("[%d] @ %d - Repaint: %s%n", new Date().getTime(), cntRepaints, this.getText());
+//        if ( cntRepaints > 200 ) {
+//            final Throwable ex = new Exception("Too many repaints");
+//            ex.printStackTrace(System.err);
+//        }
+//        
         // Hover
         if (hoverable && hovered && !selected && isEnabled()) {
             g2d.setColor(clrHover);
             g2d.fillRect(0, 0, w, h);
             g2d.setColor(clrBorders);
             g2d.drawRect(0, 0, w - 1, h - 1);
+        } else if (this.opaque && !selected) {  // Opacity, select
+            g2d.setColor(getBackground());
+            g2d.fillRect(0, 0, w, h);
+        } else if (selectable && selected) {
+            g2d.setColor(clrActive);
+            g2d.fillRect(0, 0, w, h);
         }
 
         // Icon in background
         if (iconInBackground) {
-            sh = (int) (h * iconScaleFactor);
-            sw = (int) (sh * iar);
+            int sh = (int) (h * iconScaleFactor);
+            int sw = (int) (sh * iar);
 
-            if (iconAlignX == SwingConstants.CENTER) {
-                x = (int) ((w - sw) / 2 + iconInsets.getX());
-            }
-            else {
-                x = (int) iconInsets.getX();
-            }
-            y = (int) (((h - sh) / 2) + iconInsets.getY());
+            int x = iconAlignX == SwingConstants.CENTER ? (int) ((w - sw) / 2 + iconInsets.getX()): (int) iconInsets.getX();
+            int y = (int) (((h - sh) / 2) + iconInsets.getY());
 
-            if (hoverable && hovered && !selected) {
-                g2d.setComposite(alphaStrong);
-            }
-            else {
-                g2d.setComposite(alphaDim);
-            }
+            Composite oldComp = g2d.getComposite();
+            g2d.setComposite(hoverable && hovered && !selected ? alphaStrong : alphaDim);
             g2d.drawImage(img, x, y, sw + x, sh + y, 0, 0, iw, ih, null);
+            g2d.setComposite(oldComp);
         }
 
         super.paintComponent(g);
@@ -402,8 +402,8 @@ public class FLabel extends JLabel implements ILocalRepaint {
     private void resize() {
         // Non-background icon
         if (img != null && iconScaleAuto  && !iconInBackground) {
-            h = (int) (getHeight() * iconScaleFactor);
-            w = (int) (h * iar);
+            int h = (int) (getHeight() * iconScaleFactor);
+            int w = (int) (h * iar);
             if (w == 0 || h == 0) { return; }
 
             FLabel.super.setIcon(new ImageIcon(img.getScaledInstance(w, h, Image.SCALE_SMOOTH)));

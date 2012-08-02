@@ -22,8 +22,6 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -62,10 +60,6 @@ public class CHand implements ICDoc {
         public void mousePressed(final MouseEvent e) {
             cardclickAction(e); } };
 
-    private final MouseMotionListener madCardMove = new MouseMotionAdapter() { @Override
-        public void mouseMoved(final MouseEvent me) {
-            cardmoveAction(); } };
-
     private final Observer o1 = new Observer() { @Override
         public void update(final Observable a, final Object b) {
             observerAction(a); } };
@@ -89,7 +83,6 @@ public class CHand implements ICDoc {
         player.getZone(ZoneType.Hand).addObserver(o1);
 
         view.getHandArea().addMouseListener(madCardClick);
-        view.getHandArea().addMouseMotionListener(madCardMove);
     }
 
     /**
@@ -190,7 +183,7 @@ public class CHand implements ICDoc {
     private void cardmoveAction() {
         final Card c = view.getHandArea().getCardFromMouseOverPanel();
         if (c != null) {
-            CMatchUI.SINGLETON_INSTANCE.setCard(c);
+            
         }
     }
 

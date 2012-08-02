@@ -31,6 +31,7 @@ import javax.swing.SwingUtilities;
 
 import forge.Card;
 import forge.Constant;
+import forge.gui.match.CMatchUI;
 import forge.view.arcane.util.CardPanelMouseListener;
 import forge.view.arcane.util.UI;
 
@@ -65,7 +66,7 @@ public abstract class CardPanelContainer extends JPanel {
     /**
      * 
      */
-    private CardPanel mouseOverPanel;
+    private CardPanel hoveredPanel;
     private CardPanel mouseDownPanel;
     private CardPanel mouseDragPanel;
 
@@ -127,17 +128,24 @@ public abstract class CardPanelContainer extends JPanel {
 
             @Override
             public void mouseMoved(final MouseEvent evt) {
-                final CardPanel panel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
-                if ((CardPanelContainer.this.mouseOverPanel != null)
-                        && (CardPanelContainer.this.mouseOverPanel != panel)) {
-                    CardPanelContainer.this.mouseOutPanel(evt);
-                }
-                if (panel == null) {
+                final CardPanel hitPanel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
+
+                if ( CardPanelContainer.this.hoveredPanel == hitPanel ) // no big change
                     return;
+                
+                if (CardPanelContainer.this.hoveredPanel != null ) { 
+                    CardPanelContainer.this.mouseOutPanel(evt); // hovered <= null is inside
                 }
-                CardPanelContainer.this.mouseOverPanel = panel;
-                CardPanelContainer.this.mouseOverPanel.setSelected(true);
-                CardPanelContainer.this.mouseOver(panel, evt);
+                
+                if (hitPanel != null) {
+                    CMatchUI.SINGLETON_INSTANCE.setCard(hitPanel.getCard());
+                    
+                    CardPanelContainer.this.hoveredPanel = hitPanel;
+                    CardPanelContainer.this.hoveredPanel.setSelected(true);
+                    CardPanelContainer.this.mouseOver(hitPanel, evt);
+                }
+                
+                // System.err.format("%d %d over %s%n", evt.getX(), evt.getY(), hitPanel == null ? null : hitPanel.getCard().getName());
             }
         });
 
@@ -216,12 +224,12 @@ public abstract class CardPanelContainer extends JPanel {
      *            a {@link java.awt.event.MouseEvent} object.
      */
     private void mouseOutPanel(final MouseEvent evt) {
-        if (this.mouseOverPanel == null) {
+        if (this.hoveredPanel == null) {
             return;
         }
-        this.mouseOverPanel.setSelected(false);
-        this.mouseOut(this.mouseOverPanel, evt);
-        this.mouseOverPanel = null;
+        this.hoveredPanel.setSelected(false);
+        this.mouseOut(this.hoveredPanel, evt);
+        this.hoveredPanel = null;
     }
 
     /*
@@ -297,7 +305,7 @@ public abstract class CardPanelContainer extends JPanel {
                     CardPanelContainer.this.remove(CardPanel.getDragAnimationPanel());
                     CardPanelContainer.this.setMouseDragPanel(null);
                 }
-                CardPanelContainer.this.mouseOverPanel = null;
+                CardPanelContainer.this.hoveredPanel = null;
                 CardPanelContainer.this.getCardPanels().remove(fromPanel);
                 CardPanelContainer.this.remove(fromPanel);
                 CardPanelContainer.this.invalidate();
@@ -530,7 +538,7 @@ public abstract class CardPanelContainer extends JPanel {
      */
     public final void mouseOut(final CardPanel panel, final MouseEvent evt) {
         for (final CardPanelMouseListener listener : this.listeners) {
-            listener.mouseOut(this.mouseOverPanel, evt);
+            listener.mouseOut(this.hoveredPanel, evt);
         }
     }
 
@@ -558,8 +566,8 @@ public abstract class CardPanelContainer extends JPanel {
      * @return a {@link forge.Card} object.
      */
     public final Card getCardFromMouseOverPanel() {
-        if (this.mouseOverPanel != null) {
-            return this.mouseOverPanel.getGameCard();
+        if (this.hoveredPanel != null) {
+            return this.hoveredPanel.getGameCard();
         } else {
             return null;
         }
