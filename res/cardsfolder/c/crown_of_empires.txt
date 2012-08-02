@@ -5,7 +5,7 @@ Text:no text
 A:AB$ Tap | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionNotAllM12Empires$ True | SubAbility$ DBControl | SpellDescription$ Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires.
 SVar:DBControl:DB$ GainControl | Defined$ Targeted | ConditionAllM12Empires$ True
 SVar:RemRandomDeck:True
-SVar:DeckWants:ListAll$Scepter of Empires|Throne of Empires
+SVar:DeckWants:Name$Scepter of Empires|Throne of Empires
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_empires.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/203.jpg

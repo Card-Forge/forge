@@ -291,6 +291,10 @@ public final class CardColor implements Comparable<CardColor> {
         mask ^= (WHITE | BLUE | BLACK | GREEN | RED);
         return fromMask(mask);
     }
+    
+    public byte getColor() {
+        return myColor;
+    }
 
     /*
      * (non-Javadoc)

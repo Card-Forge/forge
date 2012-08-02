@@ -12428,7 +12428,6 @@ src/site/apt/index.apt -text
 src/test/java/forge/BoosterDraft1Test.java svneol=native#text/plain
 src/test/java/forge/BoosterDraftTest.java svneol=native#text/plain
 src/test/java/forge/CardColorTest.java svneol=native#text/plain
-src/test/java/forge/DeckWantsTest.java -text
 src/test/java/forge/GuiDownloadPicturesLQTest.java svneol=native#text/plain
 src/test/java/forge/GuiDownloadSetPicturesLQTest.java svneol=native#text/plain
 src/test/java/forge/GuiMigrateLocalMWSSetPicturesHQTest.java svneol=native#text/plain
@@ -12443,6 +12442,7 @@ src/test/java/forge/deck/generate/Generate3ColorDeckTest.java svneol=native#text
 src/test/java/forge/deck/generate/Generate5ColorDeckTest.java svneol=native#text/plain
 src/test/java/forge/gui/ListChooserTest.java svneol=native#text/plain
 src/test/java/forge/gui/game/CardDetailPanelTest.java svneol=native#text/plain
+src/test/java/forge/item/DeckWantsTest.java -text
 src/test/java/forge/model/BuildInfoTest.java -text
 src/test/java/forge/model/FModelTest.java -text
 src/test/java/net/slightlymagic/braids/util/testng/BraidsAssertFunctions.java svneol=native#text/plain
