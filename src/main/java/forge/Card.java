@@ -72,8 +72,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private static int nextUniqueNumber = 1;
     private int uniqueNumber;
 
-    private long value;
-
     private final Map<CardCharactersticName, CardCharacteristics> characteristicsMap
     = new EnumMap<CardCharactersticName, CardCharacteristics>(CardCharactersticName.class);
     private CardCharactersticName curCharacteristics = CardCharactersticName.Original;
@@ -5338,21 +5336,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * addNonStackingIntrinsicKeyword.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public final void addNonStackingIntrinsicKeyword(final String s) {
-        if (!this.getIntrinsicKeyword().contains(s) && (s.trim().length() != 0)) {
-            this.getCharacteristics().getIntrinsicKeyword()
-                    .add((this.getName().trim().length() == 0 ? s : s.replaceAll(this.getName(), "CARDNAME")));
-        }
-    }
-
-    /**
-     * <p>
      * removeIntrinsicKeyword.
      * </p>
      * 
@@ -5404,22 +5387,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             // extrinsicKeyword.add((getName().trim().length()==0 ? s
             // :s.replaceAll(getName(), "CARDNAME")));
             // }
-        }
-    }
-
-    /**
-     * <p>
-     * addStackingExtrinsicKeyword.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public final void addStackingExtrinsicKeyword(final String s) {
-        if (s.startsWith("HIDDEN")) {
-            this.addHiddenExtrinsicKeyword(s);
-        } else {
-            this.extrinsicKeyword.add(s);
         }
     }
 
@@ -5620,8 +5587,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isSpell() {
-        return (this.isInstant() || this.isSorcery() || (this.isAura() && !AllZoneUtil.getCardsIn(ZoneType.Battlefield)
-                .contains(this)));
+        return (this.isInstant() || this.isSorcery() || (this.isAura() && !this.isInZone((ZoneType.Battlefield))));
     }
 
     /**
@@ -5824,29 +5790,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final int getUniqueNumber() {
         return this.uniqueNumber;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>value</code>.
-     * </p>
-     * 
-     * @param n
-     *            a long.
-     */
-    public final void setValue(final long n) {
-        this.value = n;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>value</code>.
-     * </p>
-     * 
-     * @return a long.
-     */
-    public final long getValue() {
-        return this.value;
     }
 
     /** {@inheritDoc} */
