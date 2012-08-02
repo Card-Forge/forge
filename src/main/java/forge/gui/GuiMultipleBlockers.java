@@ -187,8 +187,8 @@ public class GuiMultipleBlockers extends JFrame {
 
             boolean assignedLethalDamageToAllBlockers = true;
             for (final Card crd : this.blockers) {
-                if ((crd.getLethalDamage() > 0)
-                        && (!this.att.hasKeyword("Deathtouch") || (crd.getTotalAssignedDamage() < 1))) {
+                if (crd.getLethalDamage() > 0
+                        && (crd.getTotalAssignedDamage() < 1 || !this.att.hasKeyword("Deathtouch"))) {
                     assignedLethalDamageToAllBlockers = false;
                 }
             }
