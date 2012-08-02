@@ -6,7 +6,7 @@ PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ScoutSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a creature card with deathtouch, hexproof, reach or trample and reveal it. Shuffle your library, then put that card on top of it.
 SVar:ScoutSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeNum$ 1 | ChangeType$ Creature.withDeathtouch+YouCtrl,Creature.withHexproof+YouCtrl,Creature.withReach+YouCtrl,Creature.withTrample+YouCtrl
 SVar:RemRandomDeck:True
-SVar:DeckWants:KeywordAny$Deathtouch|Hexproof|Reach|Trample
+DeckHints:Keyword$Deathtouch|Hexproof|Reach|Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mwonvuli_beast_tracker.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/177.jpg

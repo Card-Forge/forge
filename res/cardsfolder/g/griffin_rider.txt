@@ -7,7 +7,7 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | AddKe
 SVar:X:Count$Valid Griffin.YouCtrl
 SVar:BuffedBy:Griffin
 SVar:RemRandomDeck:True
-SVar:DeckWants:Type$Griffin
+DeckHints:Type$Griffin
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_rider.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/20.jpg

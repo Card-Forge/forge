@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import forge.Constant;
 import forge.card.CardColor;
 import forge.card.CardManaCost;
 import forge.card.CardRules;
+import forge.card.DeckHints;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.generate.GenerateDeckUtil;
@@ -32,6 +35,7 @@ public class LimitedDeck extends Deck {
     private List<CardPrinted> availableList;
     private List<CardPrinted> aiPlayables;
     private List<CardPrinted> deckList = new ArrayList<CardPrinted>();
+    private List<String> setsWithBasicLands = new ArrayList<String>();
     private static ReadDraftRankings draftRankings = new ReadDraftRankings();
 
     /**
@@ -48,6 +52,7 @@ public class LimitedDeck extends Deck {
         this.availableList = dList;
         this.colors = pClrs;
         removeUnplayables();
+        findBasicLandSets();
     }
 
     /**
@@ -60,6 +65,7 @@ public class LimitedDeck extends Deck {
         super("");
         this.availableList = list;
         removeUnplayables();
+        findBasicLandSets();
     }
 
     /**
@@ -103,9 +109,9 @@ public class LimitedDeck extends Deck {
         List<CardPrinted> nonLands = hasColor.select(aiPlayables, CardPrinted.FN_GET_RULES);
         if (deckList.size() == numSpellsNeeded && getAverageCMC(deckList) < 3 && !nonLands.isEmpty()) {
             List<CardRankingBean> list = rankCards(nonLands);
-            CardPrinted c = list.get(0).getCard();
+            CardPrinted c = list.get(0).getCardPrinted();
             deckList.add(c);
-            getAiPlayables().remove(0);
+            getAiPlayables().remove(c);
             landsNeeded--;
         }
 
@@ -195,8 +201,7 @@ public class LimitedDeck extends Deck {
                 // if no playable cards remain fill up with basic lands
                 for (int i = 0; i < 5; i++) {
                     if (clrCnts[i].getCount() > 0) {
-                        final CardPrinted cp = CardDb.instance().getCard(clrCnts[i].getColor(),
-                                IBoosterDraft.LAND_SET_CODE[0]);
+                        final CardPrinted cp = getBasicLand(clrCnts[i].getColor());
                         deckList.add(cp);
                         System.out.println(" - Added " + cp.getName() + " as last resort.");
                         break;
@@ -212,6 +217,19 @@ public class LimitedDeck extends Deck {
     protected void removeUnplayables() {
         setAiPlayables(CardRules.Predicates.IS_KEPT_IN_AI_DECKS.select(availableList, CardPrinted.FN_GET_RULES));
         availableList.removeAll(getAiPlayables());
+    }
+
+    private void findBasicLandSets() {
+        Set<String> sets = new HashSet<String>();
+        for (CardPrinted cp : aiPlayables) {
+            if (CardDb.instance().isCardSupported("Plains", cp.getEdition())) {
+                sets.add(cp.getEdition());
+            }
+        }
+        setsWithBasicLands.addAll(sets);
+        if (setsWithBasicLands.isEmpty()) {
+            setsWithBasicLands.add("M13");
+        }
     }
 
     /**
@@ -242,8 +260,7 @@ public class LimitedDeck extends Deck {
                 }
 
                 for (int j = 0; j < nLand; j++) {
-                    final CardPrinted cp = CardDb.instance().getCard(clrCnts[i].getColor(), aiPlayables.get(0).getEdition());
-                    deckList.add(cp);
+                    deckList.add(getBasicLand(clrCnts[i].getColor()));
                     landsAdded++;
                 }
             }
@@ -256,7 +273,7 @@ public class LimitedDeck extends Deck {
         int n = 0;
         while (landsNeeded > 0) {
             if (clrCnts[n].getCount() > 0) {
-                CardPrinted cp = CardDb.instance().getCard(clrCnts[n].getColor(), aiPlayables.get(0).getEdition());
+                final CardPrinted cp = getBasicLand(clrCnts[n].getColor());
                 deckList.add(cp);
                 landsNeeded--;
 
@@ -268,6 +285,22 @@ public class LimitedDeck extends Deck {
                 n = 0;
             }
         }
+    }
+
+    /**
+     * Get basic land.
+     * 
+     * @param basicLand
+     * @return card
+     */
+    private CardPrinted getBasicLand(String basicLand) {
+        String set;
+        if (setsWithBasicLands.size() > 1) {
+            set = setsWithBasicLands.get(MyRandom.getRandom().nextInt(setsWithBasicLands.size() - 1));
+        } else {
+            set = setsWithBasicLands.get(0);
+        }
+        return CardDb.instance().getCard(basicLand, set);
     }
 
     /**
@@ -339,12 +372,12 @@ public class LimitedDeck extends Deck {
         List<CardRankingBean> ranked = rankCards(others);
         for (CardRankingBean bean : ranked) {
             if (nCards > 0) {
-                deckList.add(bean.getCard());
-                aiPlayables.remove(bean.getCard());
+                deckList.add(bean.getCardPrinted());
+                aiPlayables.remove(bean.getCardPrinted());
                 nCards--;
                 if (Constant.Runtime.DEV_MODE[0]) {
-                    System.out.println("Random[" + nCards + "]:" + bean.getCard().getName() + "("
-                            + bean.getCard().getCard().getManaCost() + ")");
+                    System.out.println("Random[" + nCards + "]:" + bean.getCardPrinted().getName() + "("
+                            + bean.getCardPrinted().getCard().getManaCost() + ")");
                 }
             } else {
                 break;
@@ -362,7 +395,7 @@ public class LimitedDeck extends Deck {
     private void addNonCreatures(List<CardRankingBean> nonCreatures, int num) {
         for (CardRankingBean bean : nonCreatures) {
             if (num > 0) {
-                CardPrinted cardToAdd = bean.getCard();
+                CardPrinted cardToAdd = bean.getCardPrinted();
                 deckList.add(cardToAdd);
                 num--;
                 getAiPlayables().remove(cardToAdd);
@@ -370,7 +403,7 @@ public class LimitedDeck extends Deck {
                     System.out.println("Others[" + num + "]:" + cardToAdd.getName() + " ("
                             + cardToAdd.getCard().getManaCost() + ")");
                 }
-                // num = addComboCards(cardToAdd, num);
+                num = addComboCards(cardToAdd, num);
             } else {
                 break;
             }
@@ -386,32 +419,32 @@ public class LimitedDeck extends Deck {
      *            number of cards
      * @return number left after adding
      */
-    // private int addComboCards(CardPrinted cardToAdd, int num) {
-    // if (!cardToAdd.getCard().getSVar("DeckWants").equals("")) {
-    // DeckWants wants = cardToAdd.getDeckWants();
-    // CardList comboCards = wants.filter(getAiPlayables());
-    // if (Constant.Runtime.DEV_MODE[0]) {
-    // System.out.println("Found " + comboCards.size() + " cards for " +
-    // cardToAdd.getName());
-    // }
-    // List<CardRankingBean> rankedComboCards = rankCards(comboCards);
-    // for (CardRankingBean comboBean : rankedComboCards) {
-    // if (num > 0) {
-    // // TODO: This is not exactly right, because the
-    // // rankedComboCards could include creatures and
-    // // non-creatures. This code could add too many of one or the
-    // // other.
-    // Card combo = comboBean.getCard();
-    // deckList.add(combo);
-    // num--;
-    // getAiPlayables().remove(combo);
-    // } else {
-    // break;
-    // }
-    // }
-    // }
-    // return num;
-    // }
+    private int addComboCards(CardPrinted cardToAdd, int num) {
+        if (cardToAdd.getCard().getDeckHints() != null
+                && cardToAdd.getCard().getDeckHints().getType() != DeckHints.Type.NONE) {
+            DeckHints hints = cardToAdd.getCard().getDeckHints();
+            List<CardPrinted> comboCards = hints.filter(getAiPlayables());
+            if (Constant.Runtime.DEV_MODE[0]) {
+                System.out.println("Found " + comboCards.size() + " cards for " + cardToAdd.getName());
+            }
+            List<CardRankingBean> rankedComboCards = rankCards(comboCards);
+            for (CardRankingBean comboBean : rankedComboCards) {
+                if (num > 0) {
+                    // TODO: This is not exactly right, because the
+                    // rankedComboCards could include creatures and
+                    // non-creatures. This code could add too many of one or the
+                    // other.
+                    CardPrinted combo = comboBean.getCardPrinted();
+                    deckList.add(combo);
+                    num--;
+                    getAiPlayables().remove(combo);
+                } else {
+                    break;
+                }
+            }
+        }
+        return num;
+    }
 
     /**
      * Add creatures to the deck.
@@ -423,14 +456,14 @@ public class LimitedDeck extends Deck {
     private void addCreatures(List<CardRankingBean> creatures, int num) {
         for (CardRankingBean bean : creatures) {
             if (num > 0) {
-                CardPrinted c = bean.getCard();
+                CardPrinted c = bean.getCardPrinted();
                 deckList.add(c);
                 num--;
                 getAiPlayables().remove(c);
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getCard().getManaCost() + ")");
                 }
-                // num = addComboCards(c, num);
+                num = addComboCards(c, num);
             } else {
                 break;
             }
@@ -464,7 +497,7 @@ public class LimitedDeck extends Deck {
         }
 
         for (CardRankingBean bean : creatures) {
-            CardPrinted c = bean.getCard();
+            CardPrinted c = bean.getCardPrinted();
             int cmc = c.getCard().getManaCost().getCMC();
             if (cmc < 1) {
                 cmc = 1;
@@ -495,7 +528,7 @@ public class LimitedDeck extends Deck {
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getCard().getManaCost() + ")");
                 }
-                // num = addComboCards(c, num);
+                num = addComboCards(c, num);
             } else {
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println(c.getName() + " not added because CMC " + c.getCard().getManaCost().getCMC()
@@ -527,6 +560,12 @@ public class LimitedDeck extends Deck {
         return ranked;
     }
 
+    /**
+     * Calculate average CMC.
+     * 
+     * @param cards
+     * @return the average
+     */
     private double getAverageCMC(List<CardPrinted> cards) {
         double sum = 0.0;
         for (CardPrinted cardPrinted : cards) {
@@ -584,7 +623,7 @@ public class LimitedDeck extends Deck {
         /**
          * @return the card
          */
-        public CardPrinted getCard() {
+        public CardPrinted getCardPrinted() {
             return card;
         }
 

@@ -371,10 +371,17 @@ public final class CardRules {
     }
 
     /**
-     * @return the deckWants
+     * @return the deckHints
      */
-    public DeckWants getDeckWants() {
+    public DeckHints getDeckHints() {
         return characteristics.getDeckHints();
+    }
+    
+    /**
+     * @return the keywords
+     */
+    public List<String> getKeywords() {
+        return characteristics.getKeywords();
     }
 
     /**
@@ -500,6 +507,22 @@ public final class CardRules {
          */
         public static Predicate<CardRules> joinedType(final PredicateString.StringOp op, final String what) {
             return new LeafString(LeafString.CardField.JOINED_TYPE, op, what);
+        }
+        
+        /**
+         * Has Keyword.
+         * 
+         * @param keyword
+         *            the keyword
+         * @return the predicate
+         */
+        public static Predicate<CardRules> hasKeyword(final String keyword) {
+            return new Predicate<CardRules>() {
+                @Override
+                public boolean isTrue(final CardRules card) {
+                    return card.getKeywords().contains(keyword);
+                }
+            };
         }
 
         /**
@@ -640,18 +663,18 @@ public final class CardRules {
 
             @Override
             public boolean isTrue(final CardRules card) {
-                boolean shouldConatin;
+                boolean shouldContain;
                 switch (this.field) {
                 case NAME:
                     return this.op(card.getName(), this.operand);
                 case SUBTYPE:
-                    shouldConatin = (this.getOperator() == StringOp.CONTAINS)
+                    shouldContain = (this.getOperator() == StringOp.CONTAINS)
                             || (this.getOperator() == StringOp.EQUALS);
-                    return shouldConatin == card.getType().subTypeContains(this.operand);
+                    return shouldContain == card.getType().subTypeContains(this.operand);
                 case RULES:
-                    shouldConatin = (this.getOperator() == StringOp.CONTAINS)
+                    shouldContain = (this.getOperator() == StringOp.CONTAINS)
                             || (this.getOperator() == StringOp.EQUALS);
-                    return shouldConatin == card.rulesContain(this.operand);
+                    return shouldContain == card.rulesContain(this.operand);
                 case JOINED_TYPE:
                     return this.op(card.getType().toString(), this.operand);
                 default:

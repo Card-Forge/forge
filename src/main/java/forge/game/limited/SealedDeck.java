@@ -44,9 +44,9 @@ public class SealedDeck extends LimitedDeck {
         final List<CardPrinted> colorChooserList = new ArrayList<CardPrinted>();
         double limit = rankedCards.size() * .33;
         for (int i = 0; i < limit; i++) {
-            colorChooserList.add(rankedCards.get(i).getCard());
-            System.out.println(rankedCards.get(i).getCard().getName() + " "
-                    + rankedCards.get(i).getCard().getCard().getManaCost().toString());
+            colorChooserList.add(rankedCards.get(i).getCardPrinted());
+            System.out.println(rankedCards.get(i).getCardPrinted().getName() + " "
+                    + rankedCards.get(i).getCardPrinted().getCard().getManaCost().toString());
         }
 
         int white = CardRules.Predicates.Presets.IS_WHITE.select(colorChooserList, CardPrinted.FN_GET_RULES).size();

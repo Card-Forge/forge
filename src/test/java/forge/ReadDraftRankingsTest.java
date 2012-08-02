@@ -13,7 +13,7 @@ import forge.properties.NewConstants;
 import forge.util.FileUtil;
 
 /**
- * Tests for DeckWants.
+ * Tests for ReadDraftRankings.
  * 
  */
 @Test(enabled = true)

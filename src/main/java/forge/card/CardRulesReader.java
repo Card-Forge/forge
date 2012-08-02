@@ -104,7 +104,20 @@ public class CardRulesReader {
                     this.characteristics[this.curCharacteristics].setColor(newCol);
                 }
                 break;
-
+                
+            case 'D':
+                if (line.startsWith("DeckHints:")) {
+                    this.characteristics[this.curCharacteristics].setDeckHints(CardRulesReader.getValueAfterKey(line, "DeckHints:"));
+                }
+                break;
+                
+            case 'K':
+                if (line.startsWith("K:")) {
+                    final String value = line.substring(2);
+                    this.characteristics[this.curCharacteristics].addKeyword(value);
+                }
+                break;
+                
             case 'L': 
                 if (line.startsWith("Loyalty:")) {
                     this.characteristics[this.curCharacteristics].setPtLine(CardRulesReader.getValueAfterKey(line, "Loyalty:"));
@@ -150,9 +163,6 @@ public class CardRulesReader {
                     this.removedFromRandomDecks = "True".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "SVar:RemRandomDeck:"));
                 } else if (line.startsWith("SVar:Picture:")) {
                     this.characteristics[this.curCharacteristics].setDlUrl(CardRulesReader.getValueAfterKey(line, "SVar:Picture:"));
-                } else if (line.startsWith("SVar:DeckWants:")) {
-                    this.characteristics[this.curCharacteristics].setDeckHints(CardRulesReader.getValueAfterKey(line, "SVar:DeckWants:"));
-
                 } else if (line.startsWith("SetInfo:")) {
                     CardRulesReader.parseSetInfoLine(line, this.characteristics[this.curCharacteristics].getSetsData());
                 } 

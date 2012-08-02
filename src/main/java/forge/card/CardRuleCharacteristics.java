@@ -17,6 +17,8 @@
  */
 package forge.card;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -33,7 +35,8 @@ public class CardRuleCharacteristics {
     private String[] cardRules = null;
     private Map<String, CardInSet> setsData = new TreeMap<String, CardInSet>();
     private String dlUrl;
-    private DeckWants deckHints;
+    private DeckHints deckHints;
+    private List<String> keywords = new ArrayList<String>();
 
     /**
      * Gets the card name.
@@ -174,18 +177,44 @@ public class CardRuleCharacteristics {
     }
 
     public void setDlUrl(String dlUrl) {
-        this.dlUrl = dlUrl; 
+        this.dlUrl = dlUrl;
     }
 
     /**
-     * TODO: Write javadoc for this method.
+     * Set the deck hints.
+     * 
      * @param valueAfterKey
      */
     public void setDeckHints(String valueAfterKey) {
-        deckHints = new DeckWants(valueAfterKey);
+        deckHints = new DeckHints(valueAfterKey);
     }
 
-    public DeckWants getDeckHints() {
+    public DeckHints getDeckHints() {
         return deckHints;
     }
+
+    /**
+     * @return the keywords
+     */
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
+    /**
+     * @param keywords0
+     *            the keywords to set
+     */
+    public void setKeywords(List<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    /**
+     * Add keyword.
+     * 
+     * @param keyword
+     */
+    public void addKeyword(String keyword) {
+        this.keywords.add(keyword);
+    }
+
 }

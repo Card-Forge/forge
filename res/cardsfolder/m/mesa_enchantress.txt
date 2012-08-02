@@ -6,7 +6,7 @@ PT:0/2
 T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast an enchantment spell, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
-SVar:DeckWants:Type$Enchantment
+DeckHints:Type$Enchantment
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mesa_enchantress.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/20.jpg
