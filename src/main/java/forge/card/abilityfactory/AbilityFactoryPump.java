@@ -561,8 +561,8 @@ public class AbilityFactoryPump {
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(AllZone.getComputerPlayer())
-                && CardFactoryUtil.doesCreatureAttackAI(c)
-                && attack > 0) {
+                && attack > 0
+                && CardFactoryUtil.doesCreatureAttackAI(c)) {
             return true;
         }
 

@@ -364,13 +364,8 @@ public class CardFactoryUtil {
      */
     public static boolean doesCreatureAttackAI(final Card card) {
         final List<Card> att = ComputerUtil.getAttackers().getAttackers();
-        for (final Card element : att) {
-            if (element.equals(card)) {
-                return true;
-            }
-        }
 
-        return false;
+        return att.contains(card);
     }
 
     /**

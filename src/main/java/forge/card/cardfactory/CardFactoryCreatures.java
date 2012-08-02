@@ -1427,7 +1427,6 @@ public class CardFactoryCreatures {
                 sb.append("any number of creatures with total power 12 or greater.");
                 sacOrSac.setStackDescription(sb.toString());
                 AllZone.getStack().addSimultaneousStackEntry(sacOrSac);
-
             }
         };
 
