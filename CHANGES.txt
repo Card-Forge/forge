@@ -267,6 +267,22 @@ Fixes/Features:
 - Various little tweaks.
 - Improved AI handling of "When CARDNAME is dealt damage, destroy it.".
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated some SVars.
+- Converted Masako the Humorless to script.
+- Performance updates and cleanup of getKeyword and isUnblockableFromLandwalk.
+- removed some unused functions from the card class.
+- Updated some SVars.
+- Fixed some card texts.
+- Fixed AI of Fissure Vent.
+- Improved AI of AF DealDamage.
+- Removed excessive repaints on mouse move over cards
+- Added SVar:RemAIDeck:True to Mortarpod.
+- a function to learn if card is present
+- Fix DeckHints and put back in to LimitedDeck generation.
+- Fixed a bug in BoosterDraftAI.
+- Removed hacky planeswalker targeting from deal damage spells.
+- Added some DeckHints.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
