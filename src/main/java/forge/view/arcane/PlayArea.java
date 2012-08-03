@@ -23,6 +23,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -55,7 +56,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     /** Constant <code>STACK_SPACING_Y=0.07f</code>. */
     private static final float STACK_SPACING_Y = 0.07f;
 
-    private int landStackMax = 5;
+    private final int landStackMax = 5;
+    private final int tokenStackMax = 5;
 
     private boolean stackVertical;
     private final boolean mirror;
@@ -83,17 +85,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.mirror = mirror;
     }
 
-    /**
-     * <p>
-     * doLayout.
-     * </p>
-     * 
-     * @since 1.0.15
-     */
-    @Override
-    public final void doLayout() {
-        final int tokenStackMax = 5;
-        // Collect lands.
+    private final CardStackRow collectAllLands() {
         final CardStackRow allLands = new CardStackRow();
 
         outerLoop:
@@ -137,8 +129,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             stack.add(panel);
             allLands.add(insertIndex == -1 ? allLands.size() : insertIndex, stack);
         }
-
-        // Collect tokens.
+        return allLands;
+    }
+    
+    
+    private final CardStackRow collectAllTokens() {
         final CardStackRow allTokens = new CardStackRow();
         outerLoop:
         //
@@ -184,8 +179,54 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             stack.add(panel);
             allTokens.add(insertIndex == -1 ? allTokens.size() : insertIndex, stack);
         }
+        return allTokens;
+    }
+    
 
-        rowSpacing(allLands, allTokens);
+    @Override
+    public final void doLayout() {
+        final Rectangle rect = this.getScrollPane().getVisibleRect();
+
+        this.playAreaWidth = rect.width;
+        this.playAreaHeight = rect.height;
+
+        final CardStackRow allLands = collectAllLands();
+        final CardStackRow allTokens = collectAllTokens();
+        final CardStackRow allCreatures = new CardStackRow(this.getCardPanels(), RowType.creatureNonToken);
+        final CardStackRow allOthers = new CardStackRow(this.getCardPanels(), RowType.other);
+
+        // should find an appropriate width of card
+        this.cardWidth = this.getCardWidthMax();
+        int step = 256;
+        boolean workedLastTime = false;
+        boolean isFirstRun = true;
+
+        while (step > 0 ) {
+            if (!isFirstRun ) {
+                if ( workedLastTime ) {
+                    cardWidth += step;
+                } else {
+                    cardWidth -= step;
+                }
+                step /= 2;
+            } 
+                
+            
+            final CardStackRow creatures = (CardStackRow) allCreatures.clone();
+            final CardStackRow tokens = (CardStackRow) allTokens.clone();
+            final CardStackRow lands = (CardStackRow) allLands.clone();
+            CardStackRow others = (CardStackRow) allOthers.clone();
+            workedLastTime = canAdjustWidth(lands, tokens, creatures, others);
+
+            if ( workedLastTime && isFirstRun) break;
+            isFirstRun = false;
+            //System.err.format("[%d] @ Attempt to siut at w=%d %s (%s) %n", new Date().getTime(), this.cardWidth, workedLastTime ? "↑" : "↓", mirror ? "MIRROR" : "DIRECT");
+
+            // if it did not fit this time, let it fit with a one-pixel less size
+            if ( !workedLastTime && step == 0 ) {
+                step = 1;
+            }
+        }
 
         // Get size of all the rows.
         int x, y = PlayArea.GUTTER_Y;
@@ -204,9 +245,15 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.setPreferredSize(new Dimension(maxRowWidth - this.cardSpacingX, y - this.cardSpacingY));
         this.revalidate();
 
+        positionAllCards();
+    }
+     
+    private void positionAllCards() 
+    {
         // Position all card panels.
-        x = 0;
-        y = PlayArea.GUTTER_Y;
+        int x = 0;
+        int y = PlayArea.GUTTER_Y;
+        
         for (final CardStackRow row : this.rows) {
             int rowBottom = 0;
             x = PlayArea.GUTTER_X;
@@ -234,81 +281,61 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * 
-     * @param allLands
-     * @param allTokens
-     */
-    private void rowSpacing(final CardStackRow allLands, final CardStackRow allTokens) {
-        final CardStackRow allCreatures = new CardStackRow(this.getCardPanels(), RowType.creatureNonToken);
-        final CardStackRow allOthers = new CardStackRow(this.getCardPanels(), RowType.other);
+    private boolean canAdjustWidth(final CardStackRow lands,  final CardStackRow tokens, final CardStackRow creatures, CardStackRow others) {
+        this.rows.clear();
+        this.cardHeight = Math.round(this.cardWidth * CardPanel.ASPECT_RATIO);
+        this.extraCardSpacingX = Math.round(this.cardWidth * PlayArea.EXTRA_CARD_SPACING_X);
+        this.cardSpacingX = (this.cardHeight - this.cardWidth) + this.extraCardSpacingX;
+        this.cardSpacingY = Math.round(this.cardHeight * PlayArea.CARD_SPACING_Y);
+        this.stackSpacingX = (int) Math.round(this.cardWidth * PlayArea.STACK_SPACING_X);
+        this.stackSpacingY = Math.round(this.cardHeight * PlayArea.STACK_SPACING_Y);
 
-        this.cardWidth = this.getCardWidthMax();
-        final Rectangle rect = this.getScrollPane().getVisibleRect();
-        this.playAreaWidth = rect.width;
-        this.playAreaHeight = rect.height;
-        while (true) {
-            this.rows.clear();
-            this.cardHeight = Math.round(this.cardWidth * CardPanel.ASPECT_RATIO);
-            this.extraCardSpacingX = Math.round(this.cardWidth * PlayArea.EXTRA_CARD_SPACING_X);
-            this.cardSpacingX = (this.cardHeight - this.cardWidth) + this.extraCardSpacingX;
-            this.cardSpacingY = Math.round(this.cardHeight * PlayArea.CARD_SPACING_Y);
-            this.stackSpacingX = this.stackVertical ? 0 : (int) Math.round(this.cardWidth * PlayArea.STACK_SPACING_X);
-            this.stackSpacingY = Math.round(this.cardHeight * PlayArea.STACK_SPACING_Y);
-            final CardStackRow creatures = (CardStackRow) allCreatures.clone();
-            final CardStackRow tokens = (CardStackRow) allTokens.clone();
-            final CardStackRow lands = (CardStackRow) allLands.clone();
-            CardStackRow others = (CardStackRow) allOthers.clone();
-            int afterFirstRow;
-            if (this.mirror) {
-                // Wrap all creatures and lands.
-                this.wrap(lands, this.rows, -1);
-                afterFirstRow = this.rows.size();
-                this.wrap(tokens, this.rows, afterFirstRow);
-                this.wrap(creatures, this.rows, this.rows.size());
-            } else {
-                // Wrap all creatures and lands.
-                this.wrap(creatures, this.rows, -1);
-                afterFirstRow = this.rows.size();
-                this.wrap(tokens, this.rows, afterFirstRow);
-                this.wrap(lands, this.rows, this.rows.size());
-            }
-            // Store the current rows and others.
-            final List<CardStackRow> storedRows = new ArrayList<CardStackRow>(this.rows.size());
-            for (final CardStackRow row : this.rows) {
-                try {
-                    storedRows.add((CardStackRow) row.clone());
-                }
-                catch (NullPointerException e) {
-                    System.out.println("Null pointer exception in Row Spacing. Possibly also part of the issue.");
-                }
-            }
-            final CardStackRow storedOthers = (CardStackRow) others.clone();
-            // Fill in all rows with others.
-            for (final CardStackRow row : this.rows) {
-                this.fillRow(others, this.rows, row);
-            }
-            // Stop if everything fits, otherwise revert back to the stored
-            // values.
-            if (creatures.isEmpty() && tokens.isEmpty() && lands.isEmpty() && others.isEmpty()) {
-                break;
-            }
-            this.rows = storedRows;
-            others = storedOthers;
-            // Try to put others on their own row(s) and fill in the rest.
-            this.wrap(others, this.rows, afterFirstRow);
-            for (final CardStackRow row : this.rows) {
-                this.fillRow(others, this.rows, row);
-            }
-            // If that still doesn't fit, scale down.
-            if (creatures.isEmpty() && tokens.isEmpty() && lands.isEmpty() && others.isEmpty()) {
-                break;
-            }
-            this.cardWidth--;
+        int afterFirstRow;
+        
+        if (this.mirror) {
+            // Wrap all creatures and lands.
+            this.wrap(lands, this.rows, -1);
+            afterFirstRow = this.rows.size();
+            this.wrap(tokens, this.rows, afterFirstRow);
+            this.wrap(creatures, this.rows, this.rows.size());
+        } else {
+            // Wrap all creatures and lands.
+            this.wrap(creatures, this.rows, -1);
+            afterFirstRow = this.rows.size();
+            this.wrap(tokens, this.rows, afterFirstRow);
+            this.wrap(lands, this.rows, this.rows.size());
         }
+        // Store the current rows and others.
+        final List<CardStackRow> storedRows = new ArrayList<CardStackRow>(this.rows.size());
+        for (final CardStackRow row : this.rows) {
+            try {
+                storedRows.add((CardStackRow) row.clone());
+            }
+            catch (NullPointerException e) {
+                System.out.println("Null pointer exception in Row Spacing. Possibly also part of the issue.");
+            }
+        }
+        final CardStackRow storedOthers = (CardStackRow) others.clone();
+        // Fill in all rows with others.
+        for (final CardStackRow row : this.rows) {
+            this.fillRow(others, this.rows, row);
+        }
+        // Stop if everything fits, otherwise revert back to the stored
+        // values.
+        if (creatures.isEmpty() && tokens.isEmpty() && lands.isEmpty() && others.isEmpty()) {
+            return true;
+        }
+        this.rows = storedRows;
+        others = storedOthers;
+        // Try to put others on their own row(s) and fill in the rest.
+        this.wrap(others, this.rows, afterFirstRow);
+        for (final CardStackRow row : this.rows) {
+            this.fillRow(others, this.rows, row);
+        }
+        // If that still doesn't fit, scale down.
+        return creatures.isEmpty() && tokens.isEmpty() && lands.isEmpty() && others.isEmpty();
     }
-
+    
     /**
      * <p>
      * wrap.
@@ -322,10 +349,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      *            a int.
      * @return a int.
      */
+//    private int cntRepaints = 0;
     private int wrap(final CardStackRow sourceRow, final List<CardStackRow> rows, final int insertIndex) {
         // The cards are sure to fit (with vertical scrolling) at the minimum
         // card width.
         final boolean allowHeightOverflow = this.cardWidth == this.getCardWidthMin();
+
+//        System.err.format("[%d] @ %d - Repaint playarea - %s %n", new Date().getTime(), cntRepaints++, mirror ? "MIRROR" : "DIRECT");
 
         CardStackRow currentRow = new CardStackRow();
         for (int i = 0, n = sourceRow.size() - 1; i <= n; i++) {
@@ -377,6 +407,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         return insertIndex;
     }
+
 
     /**
      * <p>
@@ -468,52 +499,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             return;
         }
         super.mouseLeftClicked(panel, evt);
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>landStackMax</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getLandStackMax() {
-        return this.landStackMax;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>landStackMax</code>.
-     * </p>
-     * 
-     * @param landStackMax
-     *            a int.
-     */
-    public final void setLandStackMax(final int landStackMax) {
-        this.landStackMax = landStackMax;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>stackVertical</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getStackVertical() {
-        return this.stackVertical;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>stackVertical</code>.
-     * </p>
-     * 
-     * @param stackVertical
-     *            a boolean.
-     */
-    public final void setStackVertical(final boolean stackVertical) {
-        this.stackVertical = stackVertical;
     }
 
     private static enum RowType {
