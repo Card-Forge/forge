@@ -8,6 +8,7 @@ S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X |
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:BuffedBy:Swamp
 SVar:RemRandomDeck:True
+DeckHints:Color$Black
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lashwrithe.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/143.jpg

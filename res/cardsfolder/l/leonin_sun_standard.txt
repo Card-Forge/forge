@@ -4,6 +4,7 @@ Types:Artifact
 Text:no text
 A:AB$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 SVar:RemRandomDeck:True
+DeckHints:Color$white
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_sun_standard.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/194.jpg
