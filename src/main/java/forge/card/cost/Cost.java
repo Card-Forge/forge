@@ -49,12 +49,6 @@ public class Cost {
         return this.costParts;
     }
 
-    private SpellAbility assocSA = null;
-
-    public void setSpellAbility(final SpellAbility sa) {
-        assocSA = sa;
-    }
-
     private boolean sacCost = false;
 
     /**

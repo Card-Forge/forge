@@ -468,14 +468,6 @@ public class MagicStack extends MyObservable {
         } else {
             if (sp.isKickerAbility()) {
                 sp.getSourceCard().setKicked(true);
-                final SpellAbility[] sa = sp.getSourceCard().getSpellAbility();
-                int abilityNumber = 0;
-
-                for (int i = 0; i < sa.length; i++) {
-                    if (sa[i] == sp) {
-                        abilityNumber = i;
-                    }
-                }
             }
             if (sp.getSourceCard().isCopiedSpell()) {
                 this.push(sp);

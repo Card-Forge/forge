@@ -73,8 +73,6 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         if ((tgt != null) && tgt.doesTarget()) {
             this.setTarget(tgt);
         }
-
-        this.getPayCosts().setSpellAbility(this);
     }
 
     public abstract AbilityActivated getCopy(); /* {

@@ -20,7 +20,6 @@ package forge.game.player;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
