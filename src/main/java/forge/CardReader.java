@@ -188,7 +188,7 @@ public class CardReader {
      * @return the Card or null if it was not found.
      */
     public final List<CardRules> loadCards() {
-        
+
         List<CardRules> result = new ArrayList<CardRules>();
         final FProgressBar barProgress = SplashFrame.PROGRESS_BAR;
 
@@ -257,8 +257,10 @@ public class CardReader {
                     allFiles.add(entry);
                     continue;
                 }
-                if (filename.startsWith(".")) continue;
-                
+                if (filename.startsWith(".")) {
+                    continue;
+                }
+
                 fillFilesArray(allFiles, entry);
             }
     }
@@ -295,14 +297,14 @@ public class CardReader {
 
         InputStreamReader isr = new InputStreamReader(inputStream, this.charset);
         List<String> allLines = FileUtil.readAllLines(isr, true);
-        
+
         CardReader.loadCard(allLines, this.rulesReader);
         return this.rulesReader.getCard();
-        
+
     }
 
     /**
-     * Returns the card lines - read from input stream and trimmed from spaces
+     * Returns the card lines - read from input stream and trimmed from spaces.
      *
      * @param lines are input lines
      * @param rulesReader is used to fill CardPrinted characteristics
@@ -315,36 +317,35 @@ public class CardReader {
             if (line.isEmpty() || line.charAt(0) == '#') {
                 continue;
             }
-            
+
             rulesReader.parseLine(line);
         }
     }
 
-    public static Card readCard(final Iterable<String> lines)
-    {
+    public static Card readCard(final Iterable<String> lines) {
+
         final Card card = new Card();
 
         for (String line : lines) {
-           
+
             if (line.isEmpty() || line.charAt(0) == '#') {
                 continue;
             }
-            
+
             parseCardLine(card, line);
         } // while !End
-        
+
         if (card.isInAlternateState()) {
             card.setState(CardCharactersticName.Original);
         }
-        
+
         return card;
     }
-    
-    
+
     private static void parseCardLine(Card card, String line) {
         char firstCh = line.charAt(0);
-        
-        switch(firstCh) { // this is a simple state machine to gain some performance 
+
+        switch(firstCh) { // this is a simple state machine to gain some performance
         case 'A':
             if (line.equals("ALTERNATE")) {
                 CardCharactersticName mode;
@@ -371,8 +372,8 @@ public class CardReader {
                 }
             }
             break;
-            
-        case 'C': 
+
+        case 'C':
             if (line.startsWith("Colors")) {
                 final String value = line.substring(7);
                 final ArrayList<CardColor> newCols = new ArrayList<CardColor>();
@@ -387,14 +388,14 @@ public class CardReader {
                 card.setCardColorsOverridden(true);
             }
             break;
-            
+
         case 'K':
             if (line.startsWith("K:")) {
                 final String value = line.substring(2);
                 card.addIntrinsicKeyword(value);
             }
             break;
-            
+
         case 'L':
             if (line.startsWith("Loyalty")) {
                 final String[] splitStr = line.split(":");
@@ -411,16 +412,16 @@ public class CardReader {
                     card.setManaCost(new CardManaCost(new ManaCostParser(value)));
                 }
             }
-            break;                    
-            
+            break;
+
         case 'N':
             if (line.startsWith("Name")) {
                 final String value = line.substring(5);
                 card.setName(value);
             }
             break;
-            
-        case 'P': 
+
+        case 'P':
             if (line.startsWith("PT")) {
                 final String value = line.substring(3);
                 final String[] powTough = value.split("/");
@@ -444,14 +445,14 @@ public class CardReader {
                 card.setBaseDefense(def);
             }
             break;
-            
+
         case 'R':
             if (line.startsWith("R:")) {
                 card.addReplacementEffect(ReplacementHandler.parseReplacement(line.substring(2), card));
             }
             break;
-            
-        case 'S': 
+
+        case 'S':
             if (line.startsWith("S:")) {
                 card.addStaticAbilityString(line.substring(2));
             } else if (line.startsWith("SVar")) {
@@ -463,7 +464,7 @@ public class CardReader {
                 // 8/18/11 11:08 PM
             }
             break;
-            
+
         case 'T':
             if (line.startsWith("Types")) {
                 CardReader.addTypes(card, line.substring(6));

@@ -216,7 +216,7 @@ public class GameAction {
         if (suppress) {
             AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
-        
+
         if (zoneFrom == null) {
             return copied;
         }
@@ -1816,7 +1816,7 @@ public class GameAction {
                             } else {
                                 String newCostStr = newCost.toString();
                                 newCostStr = newCostStr.replaceFirst(
-                                        InputPayManaCostUtil.getShortColorString(chosenColor), "").replaceFirst("  "," ");
+                                        InputPayManaCostUtil.getShortColorString(chosenColor), "").replaceFirst("  ", " ");
                                 newCost = new ManaCost(newCostStr.trim());
                             }
 

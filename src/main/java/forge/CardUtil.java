@@ -338,9 +338,9 @@ public final class CardUtil {
         if (c.isToken() && !c.isCopiedToken()) {
             return 0;
         }
-        
+
         int xPaid = 0;
-        
+
         // 2012-07-22 - If a card is on the stack, count the xManaCost in with it's CMC
         if (AllZoneUtil.getCardsIn(ZoneType.Stack).contains(c)) {
             xPaid = c.getXManaCostPaid();
@@ -990,7 +990,7 @@ public final class CardUtil {
                     newCopy.addSpellAbility(newSA);
                 }
             }
-            
+
             for (int i = 0; i < newCopy.getStaticAbilityStrings().size(); i++) {
                 newCopy.addStaticAbility(newCopy.getStaticAbilityStrings().get(i));
             }

@@ -107,7 +107,7 @@ public class NameChanger {
 
         return transformGenerator(transform, inputGenerator);
     }
-    
+
     public static <T> Generator<T> transformGenerator(final Lambda1<T, T> transform, final Generator<T> inputGenerator)
     {
         Generator<T> result = new Generator<T>() {
@@ -128,7 +128,7 @@ public class NameChanger {
         };
 
         return result;
-    }    
+    }
 
     // changes card name, getText(), and all SpellAbility getStackDescription()
     // and toString()

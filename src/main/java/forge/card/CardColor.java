@@ -42,8 +42,8 @@ public final class CardColor implements Comparable<CardColor> {
     private final int orderWeight;
 
     private static CardColor[] allColors = new CardColor[32];
-    private final static CardColor noColor = new CardColor();
-    
+    private static final CardColor noColor = new CardColor();
+
     // TODO: some cards state "CardName is %color%" (e.g. pacts of...) - fix
     // this later
     /**
@@ -56,7 +56,7 @@ public final class CardColor implements Comparable<CardColor> {
         myColor = 0;
         orderWeight = -1;
     }
-    
+
     private CardColor(final byte mask) {
         this.myColor = mask;
         this.orderWeight = this.getOrderWeight();
@@ -65,8 +65,9 @@ public final class CardColor implements Comparable<CardColor> {
 
     public static CardColor fromMask(final int mask) {
         int mask32 = (mask & 0x3E) >> 1;
-        if ( allColors[mask32] == null )
+        if (allColors[mask32] == null) {
             allColors[mask32] = new CardColor((byte) mask);
+        }
         return allColors[mask32];
     }
 
@@ -91,7 +92,7 @@ public final class CardColor implements Comparable<CardColor> {
         }
         return fromMask(mask);
     }
-    
+
     public static CardColor fromManaCost(final CardManaCost mana) {
         return fromMask(mana.getColorProfile());
     }
@@ -134,7 +135,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return the int
      */
     public int countColors() {
-        return BinaryUtil.bitCount(this.myColor); 
+        return BinaryUtil.bitCount(this.myColor);
     } // bit count
 
     // order has to be: W U B R G multi colorless - same as cards numbering
@@ -292,7 +293,7 @@ public final class CardColor implements Comparable<CardColor> {
         mask ^= (WHITE | BLUE | BLACK | GREEN | RED);
         return fromMask(mask);
     }
-    
+
     public byte getColor() {
         return myColor;
     }
