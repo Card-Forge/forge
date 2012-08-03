@@ -1,23 +1,15 @@
-Forge Beta: 08-03-2012 ver 1.2.11
+Forge Beta: 0#-##-2012 ver 1.2.12
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-11034 cards in total.
+11### cards in total.
 
 
-This version is primarily a maintenance release. We have a few new cards, bug fixes, tweaks and some AI improvements. We suggest that everyone should update to this version.
 
-Some performance changes were made to Forge and it should now operate more quickly on low end machines. Mid to high level machines are unlikely to notice as much of a performance increase. We tried to hunt down all of the bugs that resulted from these changes but there may still be a bug or two in this beta release.
-
-Development efforts continue but have slowed down as a result of the summer months. One of the devs is in the process of moving and this will have an impact on beta and snapshot release for a number of weeks.
-
-The release date for version 1.2.12 will likely be late August or sometime in the month of September. Snapshot builds will likely be unavailable until sometime after the 1.2.12 beta release. We apologize for the inconvenience.
-
-It seems like the front face of double faced cards aren't triggering properly, but the back face and single faced cards are.
-
-Selecting a package of cards in the quest mode card shop will now once again display the packages in the card picture panel. The list of card names in the prebuilt decks are not displayed in the card detail panel at this time.
 
 --
+
+It seems like the front face of double faced cards aren't triggering properly, but the back face and single faced cards are.
 
 A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there are two remaining issues that we hope will be addressed in the near future.
 
@@ -43,281 +35,17 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-- Fix: the second ChangeZone in Venser's Diffusion shouldn't have been a Hidden type.
-- redid the wrong version check.
-- Cleared out the changes.txt file, now ready for new material.
-- Fixed Xathrid Gorgon.
-- Fixing ImageCache to use the right names, and forcing a put that I think should have been there the whole time
-- Added AF ExchangeControl.
-- Added AI support to AF ExchangeControl.
-- Added the precon Wild Rush.
-- fixed issue with paying for monocolored hybrid costs
-- Added 9ED setinfo to Index.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Implemented Planeswalker Damage Redirection.
-- Added first functionality to ReduceCostAbility.
-- Converted Helm of Awakening.
-- Converted Urza's Filter to StAb ReduceCost.
-- Converted Avatar of Will to script.
-- fixed Slumbering Dragon and Necrotic Ooze
-- New DeckWants SVar and class. Provides a way to give instructions for selecting related combo cards in random and Limited decks.
-- added support for sacrifice UnlessCost
-- Fixed Vile Rebirth.
-- Added SVar:RemAIDeck:True to some cards.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Converted Heartstone, Power Artifact and Training Grounds to StAb ReduceCost.
-- Converted 6 cards to StAb ReduceCost.
-- Converted 3 cards to StAb ReduceCost.
-- Converted Harbor Serpent to script.
-- Converted Affinity cards to StAb ReduceCost.
-- Removed some randomness relics from CanPlayAI functions.
-- Fixed Touch of the Eternal.
-- Converted more cards to StAb ReduceCost.
-- Converted more cards to StAb ReduceCost.
-- Small Fixes to a few cards
-- Selection for sacrifice UnlessCost are highlighted. Unselecting cards is done with right mouse click.
-- Added card state icon for marking cards reserved for a cost payment
-- Added the recent commit logs to changes.txt.
-- Fixed Griffin Protector, now has flying.
-- Converted Jhoira, of the Ghitu to script
-- Converted more cards to StAb ReduceCost.
-- Converted more cards to StAb ReduceCost.
-- Converted more cards to StAb ReduceCost (all cards with less have been converted).
-- Fixed a logic error in basicManaFixing.
-- Converted Avatar of Might to script.
-- Cleanup in GameAction and GameActionUtil.
-- Fixed PumpTgtAI.
-- Fixed some Time Spiral cards adding permanent cards in exile to target choices
-- Fixed charm choice descriptions for Timecrafting
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Updated staticReplaceDamage in the Player class.
-- commented out ability copying in getLKICopy method
-- Started conversion of cards to StAb RaiseCost.
-- Converted more cards to StAb RaiseCost.
-- Added zone dividers to target selection lists
-- Converted the last cards to StAb RaiseCost.
-- Removed the CostChange keyword.
-- AI for Pump -X/0 cards, targeting Human attackers
-- Two improvements in evaluateCreature.
-- Fixed ChosenX not reseting.
-- Better fix for ChosenX.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- The AI will now try to attack with unblockable creatures in exalted mode.
-- Fixed cost of Servant of Nefarox.
-- fixed Vendilion Clique
-- Moved getSpellCostChange after targeting.
-- Improved AI handling exalted creatures with 0 power.
-- The AI will no longer sacrifice enchanted permanents as part of costs.
-- AI for Fight
-- AI for draw/discard
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fix for discard/draw AI
-- Refactor Sealed Deck generation so it works and uses same logic as Booster Decks.
-- Little touch-up for -X/-0 spells.
-- Added some cards to staticReplaceDamage.
-- The AI will now always bring Shocklands into play tapped (I'm sick of people reporting).
-- Fixed Flying WU theme.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Improved AI handling of Exalted (it now uses all the CombatUtil functions).
-- CheckStyle.
-- Potential fix for triggers being placed too early on the stack. If this doesn't work, we'll have to move the passPriority lower in the magicStack.push()
-- PhaseHandler change wasn't quite right since other things use that (such as triggers when you play lands?) Moving pass priority after .push() calls in Magic Stack seem to do the trick though
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Commented out 4 of the 5 instances of GuiDisplayUtil.updateGUI(). It looks like one is enough.
-- Removed two instances of checkStateEffects() in InputMulligan.
-- Little cleanups in Player and GameAction.
-- Restructuring in ComputerAIGeneral and ComputerUtil.
-- Quest Boosters (and other Openable packs) should now use the right sell value if they are named correctly.
-- Simplifying CEditorPreferences.java
-- Adding Power/Toughness as hideable columns
-- Fix a potential crash when trying to sort a column directly after hiding columns
-- More Cleanup in ComputerAIGeneral.
-- Fix for last commit.
-- Hooking up the new TableModel to display Booster Packs in Quest Card shop
-- Reverting City of Brass fix, since it screws up Priority when AI responds on the Stack.
-- cleaning up a few java import warnings
-- Latest attempt at fixing City of Brass triggers without screwing up Priority.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added a fluff piece to the changes.txt file.
-- Fixing issue when paying the last 2/B mana shard
-- Dev Mode now loading Milling and Unlmiited Land preferences on init.
-- Fixed Rhox Faithmender.
-- The AI will no longer tutor cards in main1 with more than one card in hand already.
-- If a Card is on the Stack, add the X Mana Cost in the CMC.
-- Added some better AI code to Shocklands.
-- Fixed Miracle not being flagged as a triggered ability.
-- Fixed matchSpellAbility checking wrongly.
-- Added the quest deck Ghost Rider 3.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed Coat of Arms.
-- Fixed Serpent Generator.
-- Fixed Rain of Daggers.
-- Fixed Mirror Gallery.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed War Falcon.
-- Fixed Emissary of Hope.
-- Updated the exalted deck Captain America 3 with new M13 cards.
-- Fixed AI paying costs with multiple X parts.
-- Added the quest deck Sideshow Bob 3 by Nordos.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Attempt at reducing code when cards get created/change zone (should be watched).
-- Removed a lot of suppressions of TriggerType.Transformed by adding a new setState function that does not run triggers at all.
-- Fixed AI logic of Wellspring.
-- Converted more instances of changeToState to setState.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Removed the unused variable abilityUsed from the Card class.
-- Cleanup in Upkeep.
-- Fixed Sadistic Augermage.
-- Updated mana base of the Gimli decks.
-- removed the unnecessary variable targetsForChoices from the Card class.
-- Adding a null check for zoneFrom (not sure if we need more here)
-- Simplified handling of hasFizzled
-- Fizzling will now remove Targets that don't have the same timestamp in their current form as the one that was targeted
-- fix for combo cards in LimitedDeck
-- Fixed Quagmire.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added another null check in changeZone.
-- Cleanup.
-- Fixed Convoking colored mana.
-- Fixed and cleaned the general AI inputs.
-- Framework for reading draft rankings. Currently unused.
-- Changes to reading in draft rankings.
-- Added two to the width for the Card Count labels located in VCardCatalog as the Total Card Count number was truncated for several of the skins that had a larger/bolder font.
-- Fixed Hunter Sliver.
-- Fixed Ghitu Fire-Eater, Oboro Envoy and Rootwater Diver
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added a 'Give any card to AI' button to Dev Mode tools to help test AI use of cards (and for those users that like to try implement some degree of user controlled game state)
-- Fixed more cases of moved suspended cards not losing their counters.
-- Fixed cards exiled faced down changing zone.
-- More work on making preloaded card objects lighter.
-- Removed a lot of copies of "updateObservers()" (please report if you see anything funny).
-- Re-added updateGUI() to InputPassPriority.
-- Removed generators for card loading branch
-- another couple of performance improvements
-- Fixed activation cost of Jhoira's Timebug
-- The stormLabel will no longer be always updated twice.
-- Reducing load times and heap usage - removed excessive arraylist creations, switched lines parsing to a simple state machine
-- CardFactory no longer iterable (luckily noone uses iteration)
-- Fixed Noble Benefactor.
-- c-factory
-- Added the quest decks Severus Snape 2 and 3.
-- Reverted Max' change of CardManaCost, because it messed up some parts of the game.
-- warnings 
-- iterable for cardfactory not needed
-- Cleanup of imports and added lots of "@Override" lines.
-- Fixed Torpor Orb stopping static triggers.
-- Fixed leave battlefield triggers of tokens.
-- Added SVar:RemAIDeck:True to Havengul Lich.
-- Updated two decks with copies of Thundermaw Hellkite.
-- Updated two decks with copies of Master of the Pearl Trident.
-- Added some more M13 cards to quest decks.
-- Fixing a bug in CostRemoveCounter canPlay for Remove from Type costs
-- Added capability to remove type counters from other zones
-- Re-added UpdateObserver calls in ManaPool.
-- Use draft rankings in booster draft.
-- Simple classes do not need getters
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Removed two of the UpdateObserver calls in ManaPool again (after testing).
-- Fixed AI logic of Planeswalker redirection.
-- The AI will now use Burn spells to kill Planeswalkers.
-- Fixed Veilstone Amulet.
-- removed "creating card objects step" from loading sequence - and does it still work?
-- Lazy loading of forge.Card instances
-- work on LimitedDeck to use rankings in deckbuilding
-- Tweaked Exalted AI.
-- Added RememberedLKI as an option for calculateAmount.
-- Fixed Disciple of Bolas.
-- Fixed zero mana costs not being affected by costChange.
-- Simplified handling of paidCostParts.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- First attempt at AI splitting attackers between Planewalkers and human player.
-- Better tweak for Exalted AI.
-- Fixed "TargetValidTargeting" taking permanent spells as permanents (and similar cases).
-- Fixed Teferi's Response.
-- Updated some SVars.
-- work on limited deck using rankings
-- LQ picture loading
-- remove debug console output
-- AI performance upgrade: The AI will no longer check mana abilities when grabbing SpellAbilities to play.
-- Added a fluff piece to the changes.txt file.
-- Fixed Havengul Lich's interaction with the opponents grave stuffing.
-- fixed phase parsing for triggers
-- A truthful message about loading cards.
-- Refactoring BoosterDraft to use CardPrinted
-- Use CardPrinted for LimitedDeck
-- DeckWants moved from Card to CardCharacteristics, its test unfortunately is no longer functional
-- Fixed Mongrel Pack to trigger only during correct phases (broken with 16391 parameter name change)
-- some ideas for test
-- Added totalPT_<comparison> restriction to IsValid
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed LKI copies not having all the characteristics.
-- fixed problems with triggers from cards laying on table before game starts in quest mode
-- Added some more M13 cards to quest decks.
-- Fixed Soulbond pairing with cards not on the battlefield.
-- Disabled the DeckWantsTest.testNoFilter() test and the Maven build and release commands will once again work. This is not a true fix but just a hack in order to do a Maven build and release.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- work on DeckWantsTest, no longer breaking
-- Byte utils
-- Quest rewards are evaluated on their retrieval - game will start faster
-- accelerating deck editor
-- tables sorting bugfix
-- CardColor is now limited to 33 instances (as many as color combinations + NULL_COLOR)
-- Fixed Elderwood Scion.
-- progressbar optimizate
-- Various little tweaks.
-- Improved AI handling of "When CARDNAME is dealt damage, destroy it.".
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Updated some SVars.
-- Converted Masako the Humorless to script.
-- Performance updates and cleanup of getKeyword and isUnblockableFromLandwalk.
-- removed some unused functions from the card class.
-- Updated some SVars.
-- Fixed some card texts.
-- Fixed AI of Fissure Vent.
-- Improved AI of AF DealDamage.
-- Removed excessive repaints on mouse move over cards
-- Added SVar:RemAIDeck:True to Mortarpod.
-- a function to learn if card is present
-- Fix DeckHints and put back in to LimitedDeck generation.
-- Fixed a bug in BoosterDraftAI.
-- Removed hacky planeswalker targeting from deal damage spells.
-- Added some DeckHints.
-- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-ArsenalNut
-Doombashar
-Hellfish
-Marc
-Max
-mcrawford
-Nordos
-Slapshot5
-Sloth
-Sol
-Zirbert
-Chris H
+
 
 
 Added the following cards:
 
-Switcheroo
-Phyrexian Infiltrator
-Timebender
-Greater Gargadon
-Fury Charm
-Jhoira's Timebug
-Timecrafting
-Quiet Disrepair
-Trinisphere
-Semblance Anvil
-Spellwild Ouphe
-Elderwood Scion
-Shivan Sand-Mage
-Rift Elemental
-Wild Pair
+
 
 
 end
