@@ -2,8 +2,8 @@ Name:Electrolyze
 ManaCost:1 U R
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ 1 U R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature, player or planeswalker (1) | NumDmg$ 1 | SubAbility$ DBDamage2 | SpellDescription$ CARDNAME deals 2 damage divided as you choose among one or two target creatures and/or players. Draw a card.
-SVar:DBDamage2:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature, player or planeswalker (2) | NumDmg$ 1 | SubAbility$ DBDraw
+A:SP$ DealDamage | Cost$ 1 U R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature, player or planeswalker (1) | NumDmg$ 1 | SubAbility$ DBDamage2 | SpellDescription$ CARDNAME deals 2 damage divided as you choose among one or two target creatures and/or players. Draw a card.
+SVar:DBDamage2:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature, player or planeswalker (2) | NumDmg$ 1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | Cost$ 0 | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/electrolyze.jpg

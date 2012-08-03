@@ -2,10 +2,10 @@ Name:Violent Eruption
 ManaCost:1 R R R
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ 1 R R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature or player (1) | NumDmg$ 1 | SubAbility$ DBDamage2 | SpellDescription$ CARDNAME deals 4 damage divided as you choose among any number of target creatures and/or players.
-SVar:DBDamage2:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature or player (2) | NumDmg$ 1 | SubAbility$ DBDamage3
-SVar:DBDamage3:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature or player (3) | NumDmg$ 1 | SubAbility$ DBDamage4
-SVar:DBDamage4:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature or player (4) | NumDmg$ 1
+A:SP$ DealDamage | Cost$ 1 R R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (1) | NumDmg$ 1 | SubAbility$ DBDamage2 | SpellDescription$ CARDNAME deals 4 damage divided as you choose among any number of target creatures and/or players.
+SVar:DBDamage2:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (2) | NumDmg$ 1 | SubAbility$ DBDamage3
+SVar:DBDamage3:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (3) | NumDmg$ 1 | SubAbility$ DBDamage4
+SVar:DBDamage4:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (4) | NumDmg$ 1
 K:Madness:1 R R
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/violent_eruption.jpg
