@@ -180,13 +180,6 @@ public class CHand implements ICDoc {
         this.addCards(c);
     }
 
-    private void cardmoveAction() {
-        final Card c = view.getHandArea().getCardFromMouseOverPanel();
-        if (c != null) {
-            
-        }
-    }
-
     private void cardclickAction(final MouseEvent e) {
         if (e.getButton() != MouseEvent.BUTTON1) {
             return;
