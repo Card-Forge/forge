@@ -349,7 +349,7 @@ public class BoosterDraftAI {
             }
 
             CardColor cc = CardColor.fromNames(this.playerColors.get(i).getColor1(), this.playerColors.get(i).getColor2());
-            out[i] = new BoosterDeck(this.deck.get(i), cc);
+            out[i] = new BoosterDeck(this.deck.get(i), cc).buildDeck();
         }
         return out;
     } // getDecks()

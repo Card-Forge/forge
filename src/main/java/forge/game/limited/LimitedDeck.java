@@ -26,9 +26,8 @@ import forge.util.closures.Predicate;
  * Limited format deck.
  * 
  */
-public class LimitedDeck extends Deck {
+public class LimitedDeck {
 
-    private static final long serialVersionUID = -8818599781874958332L;
     private int numSpellsNeeded = 22;
     private int landsNeeded = 18;
     private CardColor colors;
@@ -48,7 +47,6 @@ public class LimitedDeck extends Deck {
      *            Chosen colors.
      */
     public LimitedDeck(List<CardPrinted> dList, CardColor pClrs) {
-        super("");
         this.availableList = dList;
         this.colors = pClrs;
         removeUnplayables();
@@ -62,7 +60,6 @@ public class LimitedDeck extends Deck {
      *            Cards to build the deck from.
      */
     public LimitedDeck(List<CardPrinted> list) {
-        super("");
         this.availableList = list;
         removeUnplayables();
         findBasicLandSets();
@@ -73,7 +70,7 @@ public class LimitedDeck extends Deck {
      * buildDeck.
      * </p>
      */
-    protected void buildDeck() {
+    public Deck buildDeck() {
         // 0. Add any planeswalkers
         Predicate<CardRules> hasColor = Predicate.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors),
                 GenerateDeckUtil.COLORLESS_CARDS);
@@ -134,12 +131,14 @@ public class LimitedDeck extends Deck {
         fixDeckSize(clrCnts);
 
         if (deckList.size() == 40) {
-            this.getMain().add(deckList);
-            this.getSideboard().add(aiPlayables);
-            this.getSideboard().add(availableList);
+            Deck result = new Deck();
+            result.getMain().add(deckList);
+            result.getSideboard().add(aiPlayables);
+            result.getSideboard().add(availableList);
             if (Constant.Runtime.DEV_MODE[0]) {
                 debugFinalDeck();
             }
+            return result;
         } else {
             throw new RuntimeException("BoosterDraftAI : buildDeck() error, decksize not 40");
         }

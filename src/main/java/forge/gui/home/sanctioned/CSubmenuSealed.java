@@ -205,7 +205,7 @@ public enum CSubmenuSealed implements ICDoc {
 
         final DeckGroup sealed = new DeckGroup(sDeckName);
         sealed.setHumanDeck(deck);
-        sealed.addAiDeck(new SealedDeck(sDeck.toFlatList()));
+        sealed.addAiDeck(new SealedDeck(sDeck.toFlatList()).buildDeck());
         Singletons.getModel().getDecks().getSealed().add(sealed);
 
         final ACEditorBase<?, T> editor = (ACEditorBase<?, T>) new CEditorLimited(

@@ -18,8 +18,6 @@ import forge.util.MyRandom;
  */
 public class SealedDeck extends LimitedDeck {
 
-    private static final long serialVersionUID = 8707786521610288811L;
-
     /**
      * Constructor.
      * 
@@ -29,7 +27,6 @@ public class SealedDeck extends LimitedDeck {
     public SealedDeck(List<CardPrinted> list) {
         super(list);
         this.setColors(chooseColors());
-        buildDeck();
     }
 
     /**

@@ -12,8 +12,6 @@ import forge.item.CardPrinted;
  */
 public class BoosterDeck extends LimitedDeck {
 
-    private static final long serialVersionUID = -7818685851099321964L;
-
     /**
      * Constructor.
      * 
@@ -24,7 +22,6 @@ public class BoosterDeck extends LimitedDeck {
      */
     public BoosterDeck(List<CardPrinted> dList, CardColor pClrs) {
         super(dList, pClrs);
-        buildDeck();
     }
 
 }
