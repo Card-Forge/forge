@@ -44,16 +44,16 @@ public class SealedDeck extends LimitedDeck {
         final List<CardPrinted> colorChooserList = new ArrayList<CardPrinted>();
         double limit = rankedCards.size() * .33;
         for (int i = 0; i < limit; i++) {
-            colorChooserList.add(rankedCards.get(i).getCardPrinted());
-            System.out.println(rankedCards.get(i).getCardPrinted().getName() + " "
-                    + rankedCards.get(i).getCardPrinted().getCard().getManaCost().toString());
+            CardPrinted cp = rankedCards.get(i).getCardPrinted();
+            colorChooserList.add(cp);
+            System.out.println(cp.getName() + " " + cp.getCard().getManaCost().toString());
         }
 
-        int white = CardRules.Predicates.Presets.IS_WHITE.select(colorChooserList, CardPrinted.FN_GET_RULES).size();
-        int blue = CardRules.Predicates.Presets.IS_BLUE.select(colorChooserList, CardPrinted.FN_GET_RULES).size();
-        int black = CardRules.Predicates.Presets.IS_BLACK.select(colorChooserList, CardPrinted.FN_GET_RULES).size();
-        int red = CardRules.Predicates.Presets.IS_RED.select(colorChooserList, CardPrinted.FN_GET_RULES).size();
-        int green = CardRules.Predicates.Presets.IS_GREEN.select(colorChooserList, CardPrinted.FN_GET_RULES).size();
+        int white = CardRules.Predicates.Presets.IS_WHITE.count(colorChooserList, CardPrinted.FN_GET_RULES);
+        int blue = CardRules.Predicates.Presets.IS_BLUE.count(colorChooserList, CardPrinted.FN_GET_RULES);
+        int black = CardRules.Predicates.Presets.IS_BLACK.count(colorChooserList, CardPrinted.FN_GET_RULES);
+        int red = CardRules.Predicates.Presets.IS_RED.count(colorChooserList, CardPrinted.FN_GET_RULES);
+        int green = CardRules.Predicates.Presets.IS_GREEN.count(colorChooserList, CardPrinted.FN_GET_RULES);
         final int[] colorCounts = { white, blue, black, red, green };
         final String[] colors = Constant.Color.ONLY_COLORS;
         int[] countsCopy = Arrays.copyOf(colorCounts, 5);
