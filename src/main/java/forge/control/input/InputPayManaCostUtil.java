@@ -111,7 +111,7 @@ public class InputPayManaCostUtil {
         String colorsNeeded = colorRequired.toString();
         if ("1".equals(colorsNeeded)) {  // only colorless left
             if (sa.getSourceCard() != null
-                    && sa.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect") != "") {
+                    && !sa.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect").equals("")) {
                 colorsNeeded = "";
                 String[] negEffects = sa.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect").split(",");
                 for (String negColor : negEffects) {

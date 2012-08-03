@@ -109,7 +109,7 @@ public class TableColumnInfo<T> extends TableColumn {
      * @return the fnSort
      */
     public Lambda1<Comparable, Entry<T, Integer>> getFnSort() {
-        if (fnSort.equals(null)) {
+        if (fnSort == null) {
            throw new NullPointerException("A sort function hasn't been set for "
                    + "Column " + TableColumnInfo.this.getIdentifier());
         }
@@ -122,7 +122,7 @@ public class TableColumnInfo<T> extends TableColumn {
      * @return the fnDisplay
      */
     public Lambda1<Object, Entry<T, Integer>> getFnDisplay() {
-        if (fnSort.equals(null)) {
+        if (fnSort == null) {
             throw new NullPointerException("A display function hasn't been set for "
                     + "Column " + TableColumnInfo.this.getIdentifier());
          }

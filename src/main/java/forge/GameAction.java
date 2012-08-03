@@ -376,9 +376,12 @@ public class GameAction {
     public final void controllerChangeZoneCorrection(final Card c) {
         System.out.println("Correcting zone for " + c.toString());
         final PlayerZone oldBattlefield = AllZone.getZoneOf(c);
+        if (oldBattlefield == null) {
+            return;
+        }
         final PlayerZone newBattlefield = c.getController().getZone(oldBattlefield.getZoneType());
 
-        if ((oldBattlefield == null) || (newBattlefield == null) || oldBattlefield.equals(newBattlefield)) {
+        if (newBattlefield == null || oldBattlefield.equals(newBattlefield)) {
             return;
         }
 
@@ -671,9 +674,11 @@ public class GameAction {
         runParams.put("Destination", ZoneType.Library.name());
         AllZone.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
 
-        Player owner = p.getPlayer();
-        if (owner != null) {
-            owner.updateLabelObservers();
+        if (p != null) {
+            Player owner = p.getPlayer();
+            if (owner != null) {
+                owner.updateLabelObservers();
+            }
         }
 
         // Soulbond unpairing

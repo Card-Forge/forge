@@ -122,22 +122,6 @@ public class AIPlayer extends Player {
     // /
     // //////////////////////////////
 
-    /** {@inheritDoc} */
-    @Override
-    public final CardList mayDrawCard() {
-        return this.mayDrawCards(1);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final CardList mayDrawCards(final int n) {
-        if (this.getCardsIn(ZoneType.Library).size() > n) {
-            return this.drawCards(n);
-        } else {
-            return new CardList();
-        }
-    }
-
     /**
      * <p>
      * dredge.

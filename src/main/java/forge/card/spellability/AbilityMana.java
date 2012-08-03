@@ -47,7 +47,7 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
     private String origProduced;
     private String lastExpressChoice = "";
     private String manaRestrictions = "";
-    private ArrayList<Mana> lastProduced = new ArrayList<Mana>();;
+    private ArrayList<Mana> lastProduced = new ArrayList<Mana>();
     private int amount = 1;
 
     /** The reflected. */

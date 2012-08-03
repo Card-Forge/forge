@@ -2491,7 +2491,7 @@ public final class AbilityFactoryChangeZone {
         final Cost abCost = af.getAbCost();
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
-        final String destination = params.get("Destination");
+        final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
         final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
 
         if (abCost != null) {
@@ -2679,7 +2679,7 @@ public final class AbilityFactoryChangeZone {
     public static boolean changeZoneAllTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // Change Zone All, can be any type moving from one zone to another
         final HashMap<String, String> params = af.getMapParams();
-        final String destination = params.get("Destination");
+        final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
         final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
 
         CardList humanType = AllZone.getHumanPlayer().getCardsIn(origin);

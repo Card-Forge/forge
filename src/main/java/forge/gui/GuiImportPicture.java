@@ -290,7 +290,7 @@ public class GuiImportPicture extends JDialog {
                 @Override
                 public void mouseClicked(final java.awt.event.MouseEvent e) {
                     GuiImportPicture.this.jButtonStart.setEnabled(false);
-                    if (GuiImportPicture.this.jLabelSource.getText() != "") {
+                    if (GuiImportPicture.this.jLabelSource.getText().equals("")) {
                         final FileFinder ff = new FileFinder();
                         try {
                             GuiImportPicture.this.listFiles = ff.findFiles(GuiImportPicture.this.jLabelSource.getText()

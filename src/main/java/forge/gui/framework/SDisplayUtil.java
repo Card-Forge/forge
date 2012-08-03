@@ -32,7 +32,7 @@ public class SDisplayUtil {
         final int delay = 80;  // Milliseconds between steps
 
         if (remindIsRunning) { return; }
-        if (pnl.equals(null)) { return; }
+        if (pnl == null) { return; }
 
         remindIsRunning = true;
         final int oldR = pnl.getBackground().getRed();

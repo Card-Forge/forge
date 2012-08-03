@@ -199,7 +199,7 @@ public final class MtgDataParser implements Iterator<CardRules> {
                         "([A-Z0-9][A-Z0-9][A-Z0-9] [CURM], )*[A-Z0-9][A-Z0-9][A-Z0-9] [CURM]", nextline)) {
             rules.add(nextline);
         }
-        ret.setCardRules((String[]) rules.toArray());
+        ret.setCardRules(rules.toArray(new String[rules.size()]));
 
         return nextline;
     }

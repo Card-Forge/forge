@@ -880,7 +880,7 @@ public class ComputerUtil {
         }
 
         // Make mana needed to avoid negative effect a mandatory cost for the AI
-        if (card.getSVar("ManaNeededToAvoidNegativeEffect") != "") {
+        if (!card.getSVar("ManaNeededToAvoidNegativeEffect").equals("")) {
             final String[] negEffects = card.getSVar("ManaNeededToAvoidNegativeEffect").split(",");
             int amountAdded = 0;
             for (int nStr = 0; nStr < negEffects.length; nStr++) {
@@ -1018,7 +1018,9 @@ public class ComputerUtil {
                 }
 
                 final Cost cost = m.getPayCosts();
-                needsLimitedResources |= !cost.isReusuableResource();
+                if (cost != null) {
+                    needsLimitedResources |= !cost.isReusuableResource();
+                }
 
                 // if the AI can't pay the additional costs skip the mana
                 // ability

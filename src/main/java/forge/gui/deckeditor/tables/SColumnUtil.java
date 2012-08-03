@@ -291,7 +291,7 @@ public final class SColumnUtil {
         final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
 
-        final JTable tbl = (id0.toString().substring(0, 4) == "DECK")
+        final JTable tbl = (id0.toString().substring(0, 4).equals("DECK"))
                 ? ed.getTableDeck().getTable()
                 : ed.getTableCatalog().getTable();
 

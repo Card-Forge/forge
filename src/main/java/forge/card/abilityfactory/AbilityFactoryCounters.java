@@ -2665,7 +2665,7 @@ public class AbilityFactoryCounters {
                 if (source.getCounters(cType) >= amount) {
                     if (!dest.hasKeyword("CARDNAME can't have counters placed on it.")
                             && !(dest.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && cType
-                                    .equals("M1M1"))) {
+                                    .equals(Counters.M1M1))) {
                         dest.addCounter(cType, amount);
                         source.subtractCounter(cType, amount);
                     }

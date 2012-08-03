@@ -863,8 +863,8 @@ public final class AbilityFactoryReveal {
         }
         sb.append(". Put ");
 
-        final String found = params.get("FoundDestination");
-        final String revealed = params.get("RevealedDestination");
+        final ZoneType found = ZoneType.smartValueOf(params.get("FoundDestination"));
+        final ZoneType revealed = ZoneType.smartValueOf(params.get("RevealedDestination"));
         if (found != null) {
 
             sb.append(untilAmount > 1 ? "those cards" : "that card");

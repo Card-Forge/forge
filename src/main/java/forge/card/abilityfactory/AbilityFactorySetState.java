@@ -492,10 +492,7 @@ public class AbilityFactorySetState {
                     if (list.get(i).isDoubleFaced()) {
                         if (list.get(i).getCurState() == CardCharactersticName.Original) {
                             if (list.get(i).changeToState(CardCharactersticName.Transformed) && remChanged) {
-                                if (remChanged) {
-                                    abilityFactory.getHostCard().addRemembered(list.get(i));
-                                }
-
+                                abilityFactory.getHostCard().addRemembered(list.get(i));
                             }
                         } else if (list.get(i).getCurState() == CardCharactersticName.Transformed) {
                             if (list.get(i).changeToState(CardCharactersticName.Original)) {

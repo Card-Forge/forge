@@ -166,7 +166,7 @@ public final class SRearrangingUtil {
                 && (cellTarget.getW() / 2) > SResizingUtil.W_MIN) {
             dropzone = Dropzone.RIGHT;
             pnlDocument.setCursor(CUR_R);
-            tempW = Math.round(cellTarget.getW() / 2);
+            tempW = cellTarget.getW() / 2;
 
             pnlPreview.setBounds(
                     cellTarget.getX() + cellTarget.getW() - tempW,
@@ -191,7 +191,7 @@ public final class SRearrangingUtil {
                 && (cellTarget.getH() / 2) > SResizingUtil.H_MIN) {
             dropzone = Dropzone.BOTTOM;
             pnlDocument.setCursor(CUR_B);
-            tempH = Math.round(cellTarget.getH() / 2);
+            tempH = cellTarget.getH() / 2;
 
             pnlPreview.setBounds(
                 cellTarget.getX() + SLayoutConstants.BORDER_T,
@@ -244,7 +244,7 @@ public final class SRearrangingUtil {
             case LEFT:
                 cellNew.setBounds(
                     tempX, tempY,
-                    Math.round(tempW / 2), tempH);
+                    tempW / 2, tempH);
                 cellTarget.setBounds(
                     tempX + cellNew.getW(), tempY,
                     tempW - cellNew.getW(), tempH);
@@ -253,7 +253,7 @@ public final class SRearrangingUtil {
             case RIGHT:
                 cellTarget.setBounds(
                     tempX, tempY,
-                    Math.round(tempW / 2), tempH);
+                    tempW / 2, tempH);
                 cellNew.setBounds(
                     cellTarget.getX() + cellTarget.getW(), tempY ,
                     tempW - cellTarget.getW(), tempH);
@@ -262,7 +262,7 @@ public final class SRearrangingUtil {
             case TOP:
                 cellNew.setBounds(
                     tempX, tempY,
-                    tempW, tempH - Math.round(tempH / 2));
+                    tempW, tempH - (tempH / 2));
                 cellTarget.setBounds(
                     tempX, tempY + cellNew.getH(),
                     tempW, tempH - cellNew.getH());
@@ -271,7 +271,7 @@ public final class SRearrangingUtil {
             case BOTTOM:
                 cellTarget.setBounds(
                     tempX, tempY,
-                    tempW, Math.round(tempH / 2));
+                    tempW, tempH / 2);
 
                 cellNew.setBounds(
                     tempX, cellTarget.getY() + cellTarget.getH(),

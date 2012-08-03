@@ -1147,26 +1147,6 @@ public abstract class Player extends GameEntity {
 
     /**
      * <p>
-     * mayDrawCard.
-     * </p>
-     * 
-     * @return a CardList of cards actually drawn
-     */
-    public abstract CardList mayDrawCard();
-
-    /**
-     * <p>
-     * mayDrawCards.
-     * </p>
-     * 
-     * @param numCards
-     *            a int.
-     * @return a CardList of cards actually drawn
-     */
-    public abstract CardList mayDrawCards(int numCards);
-
-    /**
-     * <p>
      * drawCard.
      * </p>
      * 

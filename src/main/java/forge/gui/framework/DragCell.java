@@ -429,7 +429,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
                 temp.priorityDecrease();
             }
 
-            if (temp.equals(docSelected))                 { continue; }
+            if (d.equals(docSelected))                 { continue; }
             if (temp.getPriority() > lowest)             { continue; }
             if (temp.getPriority() <= currentPriority0)     { continue; }
 

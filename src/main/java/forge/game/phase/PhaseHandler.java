@@ -782,15 +782,16 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     public final void skipTurn(final Player player) {
         // skipping turn without having extras is equivalent to giving your
         // opponent an extra turn
-        if (this.extraTurns.isEmpty()) {
-            this.addExtraTurn(player.getOpponent());
-        } else {
-            final int pos = this.extraTurns.lastIndexOf(player);
-            if (pos == -1) {
-                this.addExtraTurn(player.getOpponent());
-            } else {
-                this.extraTurns.remove(pos);
+        boolean skipped = false;
+        for (ExtraTurn turn : this.extraTurns) {
+            if (turn.getPlayer().equals(player)) {
+                this.extraTurns.remove(turn);
+                skipped = true;
+                break;
             }
+        }
+        if (!skipped) {
+            this.addExtraTurn(player.getOpponent());
         }
     }
 

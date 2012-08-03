@@ -1650,7 +1650,7 @@ public final class AbilityFactoryChoose {
                                 chosen = list.get(0).getName();
                             }
                         }
-                        if (chosen == "") {
+                        if (chosen.equals("")) {
                             chosen = "Morphling";
                         }
                         GuiUtils.chooseOne("Computer picked: ", chosen);

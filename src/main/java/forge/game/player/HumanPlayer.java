@@ -114,22 +114,6 @@ public class HumanPlayer extends Player {
     // /
     // /////////////
 
-    /** {@inheritDoc} */
-    @Override
-    public final CardList mayDrawCards(final int n) {
-        if (this.canDraw() && GameActionUtil.showYesNoDialog(null, "Draw " + n + " cards?")) {
-            return this.drawCards(n);
-        } else {
-            return new CardList();
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final CardList mayDrawCard() {
-        return this.mayDrawCards(1);
-    }
-
     /**
      * <p>
      * dredge.

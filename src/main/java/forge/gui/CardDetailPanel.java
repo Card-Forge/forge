@@ -164,7 +164,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
 
         final boolean faceDown = card.isFaceDown() && (card.getController() != AllZone.getHumanPlayer());
         if (!faceDown) {
-            if (card.getManaCost().equals("") || card.isLand()) {
+            if (card.getManaCost().toString().equals("") || card.isLand()) {
                 this.nameCostLabel.setText(card.getName());
             } else {
                 this.nameCostLabel.setText(card.getName() + " - " + card.getManaCost());
@@ -328,7 +328,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         // chosen type
-        if (card.getChosenType() != "") {
+        if (!card.getChosenType().equals("")) {
             if (area.length() != 0) {
                 area.append("\n");
             }
@@ -348,7 +348,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         // named card
-        if (card.getNamedCard() != "") {
+        if (!card.getNamedCard().equals("")) {
             if (area.length() != 0) {
                 area.append("\n");
             }
