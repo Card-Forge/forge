@@ -1,8 +1,8 @@
-Forge Beta: 07-##-2012 ver 1.2.11
+Forge Beta: 08-03-2012 ver 1.2.11
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-11### cards in total.
+11034 cards in total.
 
 
 This version is primarily a maintenance release. We have a few new cards, bug fixes, tweaks and some AI improvements. We suggest that everyone should update to this version.
@@ -287,8 +287,18 @@ Fixes/Features:
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
-
+ArsenalNut
+Doombashar
+Hellfish
+Marc
+Max
+mcrawford
+Nordos
+Slapshot5
+Sloth
+Sol
+Zirbert
+Chris H
 
 
 Added the following cards:
