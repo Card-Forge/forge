@@ -36,7 +36,7 @@ public class CardRuleCharacteristics {
     private Map<String, CardInSet> setsData = new TreeMap<String, CardInSet>();
     private String dlUrl;
     private DeckHints deckHints;
-    private List<String> keywords = new ArrayList<String>();
+    private final List<String> keywords = new ArrayList<String>();
 
     /**
      * Gets the card name.
@@ -198,14 +198,6 @@ public class CardRuleCharacteristics {
      */
     public List<String> getKeywords() {
         return keywords;
-    }
-
-    /**
-     * @param keywords0
-     *            the keywords to set
-     */
-    public void setKeywords(List<String> keywords) {
-        this.keywords = keywords;
     }
 
     /**
