@@ -21,14 +21,14 @@ import forge.Constant;
 import forge.util.BinaryUtil;
 
 /**
- * <p>
- * CardColor class.
- * </p>
+ * <p>CardColor class.</p>
+ * <p>Represents a set of any number of colors out of 5 possible in the game</p>
+ * <p><i>This class is immutable, do not generate any setters here</i></p>
  * 
- * @author Forge
+ * @author Max mtg
  * @version $Id: CardColor.java 9708 2011-08-09 19:34:12Z jendave $
  * 
- * This class is immutable. Do not generate any setter here.
+ * 
  */
 public final class CardColor implements Comparable<CardColor> {
 
