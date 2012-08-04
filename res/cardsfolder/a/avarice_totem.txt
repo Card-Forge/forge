@@ -2,7 +2,7 @@ Name:Avarice Totem
 ManaCost:1
 Types:Artifact
 Text:no text
-A:AB$ ExchangeControl | Cost$ 5 | Defined$ Self | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target creature | SpellDescription$ Exchange control of CARDNAME and target nonland permanent.
+A:AB$ ExchangeControl | Cost$ 5 | Defined$ Self | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Exchange control of CARDNAME and target nonland permanent.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avarice_totem.jpg

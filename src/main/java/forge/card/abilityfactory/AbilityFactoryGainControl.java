@@ -825,7 +825,7 @@ public class AbilityFactoryGainControl {
             sb.append(sa.getSourceCard()).append(" - ");
         }
 
-        sb.append(object1 + " exchanges controler with " + object2);
+        sb.append(object1 + " exchanges controller with " + object2);
 
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
