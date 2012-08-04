@@ -4,6 +4,7 @@ Forge Beta: 0#-##-2012 ver 1.2.12
 
 11### cards in total.
 
+
 If you update your OS to Apple OSX 10.8 Mountain Lion and try to launch a new version of forge that you will likely get a dialog which states "File is damaged and cannot be opened. Please move to trash." 
 
 Mountain Lion comes with a new Gatekeeper feature and this is probably blocking your ability to launch this newer version of forge. Visit the link below and follow the instructions. They are fairly long and detailed.
@@ -11,7 +12,6 @@ Mountain Lion comes with a new Gatekeeper feature and this is probably blocking 
 http://support.apple.com/kb/HT5290?viewlocale=en_US&locale=en_US
 
 Please note that the issue is most likely caused by Mountain Lion's Gatekeeper feature and it is extremely unlikely that the forge dev team will attempt to get a unique Developer ID from Apple and use it to digitally sign our forge app.
-
 
 --
 
@@ -41,7 +41,18 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-
+- Fixed results of FindBugs.
+- Cleared out the changes.txt file, now ready for new material.
+- some minor optimizations to SealedDeck
+- removed a ghost function
+- Deck builders should not inherit from Deck class
+- CardRules are not supposed to be set a different keywords list
+- Cleanup.
+- Some javadocs for cardcolor
+- doLayout will use binary search (not linear) for determining maximal card size when they still fit into PlayArea
+- CheckStyle.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
