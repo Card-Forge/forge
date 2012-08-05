@@ -53,6 +53,10 @@ Fixes/Features:
 - CheckStyle.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed some small typos
+- CheckStyle.
+- Fix: Removed trample from Demonic Taskmaster
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -62,7 +66,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added the following cards:
 
-
+Avarice Totem
 
 
 end
