@@ -4,7 +4,6 @@ Types:Creature Demon
 Text:no text
 PT:4/3
 K:Flying
-K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature other than CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature.Other
 SVar:RemAIDeck:True
