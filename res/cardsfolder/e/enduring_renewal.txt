@@ -9,7 +9,7 @@ SVar:DBEnduringGraveyard:DB$ ChangeZone | Defined$ Remembered | ConditionDefined
 SVar:DBEnduringDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ DBEnduringCleanup
 SVar:DBEnduringCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | ValidCard$ Creature.YouOwn | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigEnduringBounce | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature is put into your graveyard from the battlefield, return it to your hand.
-SVar:TrigEnduringBounce:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand | Hidden$ True
+SVar:TrigEnduringBounce:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
