@@ -296,98 +296,6 @@ public class CardFactoryCreatures {
         card.addComesIntoPlayCommand(intoPlay);
     }
 
-    private static void getCard_VedalkenPlotter(final Card card, final String cardName) {
-        final Card[] target = new Card[2];
-        final int[] index = new int[1];
-
-        final Ability ability = new Ability(card, "") {
-            @Override
-            public boolean canPlayAI() {
-                return false;
-            }
-
-            @Override
-            public void resolve() {
-                final Card crd0 = target[0];
-                final Card crd1 = target[1];
-
-                if ((crd0 != null) && (crd1 != null)) {
-                    final Player p0 = crd0.getController();
-                    final Player p1 = crd1.getController();
-                    crd0.addController(p1);
-                    crd1.addController(p0);
-                }
-
-            } // resolve()
-        }; // SpellAbility
-
-        final Input input = new Input() {
-
-            private static final long serialVersionUID = -7143706716256752987L;
-
-            @Override
-            public void showMessage() {
-                if (index[0] == 0) {
-                    CMatchUI.SINGLETON_INSTANCE.showMessage("Select target land you control.");
-                } else {
-                    CMatchUI.SINGLETON_INSTANCE.showMessage("Select target land opponent controls.");
-                }
-
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.stop();
-            }
-
-            @Override
-            public void selectCard(final Card c, final PlayerZone zone) {
-                // must target creature you control
-                if ((index[0] == 0) && !c.getController().equals(card.getController())) {
-                    return;
-                }
-
-                // must target creature you don't control
-                if ((index[0] == 1) && c.getController().equals(card.getController())) {
-                    return;
-                }
-
-                if (c.isLand() && zone.is(ZoneType.Battlefield) && c.canBeTargetedBy(ability)) {
-                    // System.out.println("c is: " +c);
-                    target[index[0]] = c;
-                    index[0]++;
-                    this.showMessage();
-
-                    if (index[0] == target.length) {
-                        AllZone.getStack().add(ability);
-                        this.stop();
-                    }
-                }
-            } // selectCard()
-        }; // Input
-
-        final Command comesIntoPlay = new Command() {
-            private static final long serialVersionUID = 6513203926272187582L;
-
-            @Override
-            public void execute() {
-                index[0] = 0;
-                if (card.getController().isHuman()) {
-                    AllZone.getInputControl().setInput(input);
-                }
-            }
-        };
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append(cardName);
-        sb.append(" - Exchange control of target land you control ");
-        sb.append("and target land an opponent controls.");
-        ability.setStackDescription(sb.toString());
-
-        card.addComesIntoPlayCommand(comesIntoPlay);
-    }
-
     private static void getCard_PainterServant(final Card card, final String cardName) {
         final long[] timeStamp = new long[1];
         final String[] color = new String[1];
@@ -1586,8 +1494,6 @@ public class CardFactoryCreatures {
             getCard_PhylacteryLich(card, cardName);
         } else if (cardName.equals("Sky Swallower")) {
             getCard_SkySwallower(card, cardName);
-        } else if (cardName.equals("Vedalken Plotter")) {
-            getCard_VedalkenPlotter(card, cardName);
         } else if (cardName.equals("Painter's Servant")) {
             getCard_PainterServant(card, cardName);
         } else if (cardName.equals("Stangg")) {
