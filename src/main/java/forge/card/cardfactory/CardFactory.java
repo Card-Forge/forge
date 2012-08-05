@@ -68,7 +68,7 @@ public class CardFactory implements CardFactoryInterface {
      *            a {@link java.io.File} object.
      */
     private final CardReader reader;
-    
+
     public CardFactory(final File file) {
 
         GuiUtils.checkEDT("CardFactory$constructor", false);
@@ -81,7 +81,7 @@ public class CardFactory implements CardFactoryInterface {
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
         }
-        
+
     } // constructor
 
 
@@ -228,8 +228,8 @@ public class CardFactory implements CardFactoryInterface {
             }
         }
         // else throw "Unsupported card";
-        return c;        
-        
+        return c;
+
     }
 
     protected Card getCard2(final Iterable<String> script, final Player owner) {

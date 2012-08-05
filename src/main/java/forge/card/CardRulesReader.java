@@ -40,7 +40,6 @@ public class CardRulesReader {
             null };
     private int curCharacteristics = 0;
 
-    
     private boolean removedFromAIDecks = false;
     private boolean removedFromRandomDecks = false;
     private List<String> originalScript = new ArrayList<String>();
@@ -81,10 +80,10 @@ public class CardRulesReader {
      *            the line
      */
     public final void parseLine(final String line) {
-        
+
         originalScript.add(line);
-        
-        switch( line.charAt(0)){
+
+        switch(line.charAt(0)) {
             case 'A':
                 if (line.startsWith("AlternateMode:")) {
                     // this.isDoubleFacedCard = "DoubleFaced".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "AlternateMode:"));
@@ -94,7 +93,7 @@ public class CardRulesReader {
                     this.curCharacteristics = 1;
                 }
             break;
-            
+
             case 'C':
                 if (line.startsWith("Colors:")) {
                     // This is forge.card.CardColor not forge.CardColor.
@@ -104,27 +103,27 @@ public class CardRulesReader {
                     this.characteristics[this.curCharacteristics].setColor(newCol);
                 }
                 break;
-                
+
             case 'D':
                 if (line.startsWith("DeckHints:")) {
                     this.characteristics[this.curCharacteristics].setDeckHints(CardRulesReader.getValueAfterKey(line, "DeckHints:"));
                 }
                 break;
-                
+
             case 'K':
                 if (line.startsWith("K:")) {
                     final String value = line.substring(2);
                     this.characteristics[this.curCharacteristics].addKeyword(value);
                 }
                 break;
-                
-            case 'L': 
+
+            case 'L':
                 if (line.startsWith("Loyalty:")) {
                     this.characteristics[this.curCharacteristics].setPtLine(CardRulesReader.getValueAfterKey(line, "Loyalty:"));
 
                 }
                 break;
-                
+
             case 'M':
                 if (line.startsWith("ManaCost:")) {
                     final String sCost = CardRulesReader.getValueAfterKey(line, "ManaCost:");
@@ -149,13 +148,13 @@ public class CardRulesReader {
 
                 }
                 break;
-                
+
             case 'P':
                 if (line.startsWith("PT:")) {
                     this.characteristics[this.curCharacteristics].setPtLine(CardRulesReader.getValueAfterKey(line, "PT:"));
                 }
                 break;
-                
+
             case 'S':
                 if (line.startsWith("SVar:RemAIDeck:")) {
                     this.removedFromAIDecks = "True".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "SVar:RemAIDeck:"));
@@ -165,9 +164,9 @@ public class CardRulesReader {
                     this.characteristics[this.curCharacteristics].setDlUrl(CardRulesReader.getValueAfterKey(line, "SVar:Picture:"));
                 } else if (line.startsWith("SetInfo:")) {
                     CardRulesReader.parseSetInfoLine(line, this.characteristics[this.curCharacteristics].getSetsData());
-                } 
+                }
                 break;
-                
+
             case 'T':
                 if (line.startsWith("Types:")) {
                     this.characteristics[this.curCharacteristics].setCardType(CardType.parse(CardRulesReader.getValueAfterKey(
@@ -314,12 +313,12 @@ public class CardRulesReader {
 
             final String unparsed = this.cost[this.nextToken++];
             // System.out.println(unparsed);
-            try { 
+            try {
                 int iVal = Integer.parseInt(unparsed);
                 this.colorlessCost += iVal;
                 return null;
             }
-            catch(NumberFormatException nex) { }
+            catch (NumberFormatException nex) { }
 
             int atoms = 0;
             for (int iChar = 0; iChar < unparsed.length(); iChar++) {

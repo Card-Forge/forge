@@ -643,7 +643,7 @@ public class AbilityFactoryDealDamage {
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
             else if (saMe.canTarget(AllZone.getHumanPlayer())) {
-                
+
                 if ((phase.is(PhaseType.END_OF_TURN) && phase.isNextTurn(AllZone.getComputerPlayer()))
                         || (AbilityFactory.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2))
                         || saMe.getPayCosts() == null || isTrigger) {

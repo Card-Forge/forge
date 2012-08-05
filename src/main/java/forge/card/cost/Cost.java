@@ -393,7 +393,7 @@ public class Cost {
         if (!costChanged) {
             // Spells with a cost of 0 should be affected too
             final ManaCost changedCost = Singletons.getModel().getGameAction().getSpellCostChange(sa, new ManaCost("0"));
-            this.costParts.add(new CostMana(changedCost.toString(),0));
+            this.costParts.add(new CostMana(changedCost.toString(), 0));
         }
     }
 

@@ -60,7 +60,6 @@ public final class CardRules {
     private final boolean hasOtherFace;
 
     private List<String> originalScript;
-    
 
     // Ctor and builders are needed here
     /**
@@ -237,7 +236,7 @@ public final class CardRules {
      * @param removedFromAIDecks
      *            the removed from ai decks
      */
-    public CardRules(final CardRuleCharacteristics chars, List<String> forgeScript, final boolean isDoubleFacedCard, 
+    public CardRules(final CardRuleCharacteristics chars, List<String> forgeScript, final boolean isDoubleFacedCard,
             final CardRules otherPart, final boolean removedFromRandomDecks, final boolean removedFromAIDecks) {
         this.characteristics = chars;
         this.slavePart = otherPart;
@@ -376,7 +375,7 @@ public final class CardRules {
     public DeckHints getDeckHints() {
         return characteristics.getDeckHints();
     }
-    
+
     /**
      * @return the keywords
      */
@@ -508,7 +507,7 @@ public final class CardRules {
         public static Predicate<CardRules> joinedType(final PredicateString.StringOp op, final String what) {
             return new LeafString(LeafString.CardField.JOINED_TYPE, op, what);
         }
-        
+
         /**
          * Has Keyword.
          * 

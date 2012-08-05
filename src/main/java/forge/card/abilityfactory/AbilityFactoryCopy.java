@@ -409,7 +409,7 @@ public final class AbilityFactoryCopy {
                     Card copy;
                     if (!c.isToken()) {
                         // copy creature and put it onto the battlefield
-                        
+
                         copy = AllZone.getCardFactory().getCard(CardDb.instance().getCard(c), sa.getActivatingPlayer());
 
                         // when copying something stolen:

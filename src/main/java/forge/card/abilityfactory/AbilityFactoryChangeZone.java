@@ -538,7 +538,7 @@ public final class AbilityFactoryChangeZone {
         }
 
         // don't use fetching to top of library/graveyard before main2
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !params.containsKey("ActivationPhases")) {
             if (!destination.equals("Battlefield") && !destination.equals("Hand")) {
                 return false;
