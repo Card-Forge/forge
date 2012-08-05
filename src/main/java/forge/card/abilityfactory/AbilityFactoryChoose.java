@@ -50,6 +50,7 @@ import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.util.MyRandom;
 
 /**
  * <p>
@@ -651,8 +652,11 @@ public final class AbilityFactoryChoose {
      * @return a boolean.
      */
     private static boolean chooseColorCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // Note: if (AILogic == MostProminentAttackers) return isDuringCombat();
-        boolean chance = true;
+        final HashMap<String, String> params = af.getMapParams();
+        if (!params.containsKey("AILogic")) {
+            return false;
+        }
+        boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
