@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Instant
 Text:no text
 A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | NumAtt$ -2 | NumDef$ -2 | SubAbility$ DBPumpAll | SpellDescription$ Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn.
-SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Remembered.sameName | NumAtt$ -2 | NumDef$ -2 | SubAbility$ DBCleanup
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Remembered.sameName+Other | NumAtt$ -2 | NumDef$ -2 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
