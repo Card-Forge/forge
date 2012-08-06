@@ -6,7 +6,8 @@ PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice another creature. You gain X life and draw X cards, where X is that creature's power.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Amount$ 1 | SacValid$ Creature.Other | RememberSacrificed$ True | Mandatory$ True | SubAbility$ GainLife
 SVar:GainLife:DB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X
+SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
 SVar:NeedsToPlay:Creature.YouCtrl
 SVar:RemAIDeck:True
