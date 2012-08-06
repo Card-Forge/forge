@@ -57,6 +57,12 @@ Fixes/Features:
 - CheckStyle.
 - Fix: Removed trample from Demonic Taskmaster
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Enduring Renewal returned cards not being castable
+- Concerted Vedalken Plotter and Political Trickery to script
+- remove Java code for Political Trickery and Vedalken Plotter (converted to script by moomarc)
+- bug fix for choose color AI
+- Fix: Echoing Decay will no longer deal double curse original target
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -67,6 +73,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 Added the following cards:
 
 Avarice Totem
+Arcum Dagsson
 
 
 end
