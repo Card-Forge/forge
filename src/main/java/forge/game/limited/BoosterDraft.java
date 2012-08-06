@@ -49,7 +49,7 @@ import forge.util.closures.Lambda1;
 
 /**
  * 
- * TODO Write javadoc for this type.
+ * Booster Draft Format.
  * 
  */
 public final class BoosterDraft implements IBoosterDraft {
@@ -282,7 +282,7 @@ public final class BoosterDraft implements IBoosterDraft {
 
     /**
      * 
-     * TODO: Write javadoc for this method.
+     * Get the current booster index.
      * @return int
      */
     public int getCurrentBoosterIndex() {

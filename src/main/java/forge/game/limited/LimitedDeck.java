@@ -31,6 +31,7 @@ public class LimitedDeck {
     private int numSpellsNeeded = 22;
     private int landsNeeded = 18;
     private CardColor colors;
+    private DeckColors deckColors;
     private List<CardPrinted> availableList;
     private List<CardPrinted> aiPlayables;
     private List<CardPrinted> deckList = new ArrayList<CardPrinted>();
@@ -46,9 +47,10 @@ public class LimitedDeck {
      * @param pClrs
      *            Chosen colors.
      */
-    public LimitedDeck(List<CardPrinted> dList, CardColor pClrs) {
+    public LimitedDeck(List<CardPrinted> dList, DeckColors pClrs) {
         this.availableList = dList;
-        this.colors = pClrs;
+        this.deckColors = pClrs;
+        this.colors = pClrs.getCardColors();
         removeUnplayables();
         findBasicLandSets();
     }
@@ -69,6 +71,8 @@ public class LimitedDeck {
      * <p>
      * buildDeck.
      * </p>
+     * 
+     * @return the new Deck.
      */
     public Deck buildDeck() {
         // 0. Add any planeswalkers
@@ -131,7 +135,7 @@ public class LimitedDeck {
         fixDeckSize(clrCnts);
 
         if (deckList.size() == 40) {
-            Deck result = new Deck();
+            Deck result = new Deck(generateName());
             result.getMain().add(deckList);
             result.getSideboard().add(aiPlayables);
             result.getSideboard().add(availableList);
@@ -142,6 +146,15 @@ public class LimitedDeck {
         } else {
             throw new RuntimeException("BoosterDraftAI : buildDeck() error, decksize not 40");
         }
+    }
+
+    /**
+     * Generate a descriptive name.
+     * 
+     * @return name
+     */
+    private String generateName() {
+        return deckColors.toString();
     }
 
     /**
@@ -218,6 +231,9 @@ public class LimitedDeck {
         availableList.removeAll(getAiPlayables());
     }
 
+    /**
+     * Find the sets that have basic lands for the available cards.
+     */
     private void findBasicLandSets() {
         Set<String> sets = new HashSet<String>();
         for (CardPrinted cp : aiPlayables) {
@@ -545,6 +561,7 @@ public class LimitedDeck {
      * Rank cards.
      * 
      * @param cards
+     *            CardPrinteds to rank
      * @return List of beans with card rankings
      */
     protected List<CardRankingBean> rankCards(List<CardPrinted> cards) {
@@ -603,10 +620,22 @@ public class LimitedDeck {
         this.aiPlayables = aiPlayables;
     }
 
+    /**
+     * Bean to hold card ranking info.
+     * 
+     */
     protected class CardRankingBean {
         private Integer rank;
         private CardPrinted card;
 
+        /**
+         * Constructor.
+         * 
+         * @param rank
+         *            the rank
+         * @param card
+         *            the CardPrinted
+         */
         public CardRankingBean(Integer rank, CardPrinted card) {
             this.rank = rank;
             this.card = card;

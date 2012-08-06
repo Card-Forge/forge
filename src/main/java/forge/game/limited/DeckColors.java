@@ -17,7 +17,7 @@
  */
 package forge.game.limited;
 
-import forge.Constant;
+import forge.card.CardColor;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson Date: 6/24/11 Time: 8:42 PM To change
@@ -30,14 +30,8 @@ class DeckColors {
 
     /** The Color2. */
     private String color2 = "none";
+
     // public String Splash = "none";
-    /** The Mana1. */
-    private String mana1 = "";
-
-    /** The Mana2. */
-    private String mana2 = "";
-
-    // public String ManaS = "";
 
     /**
      * <p>
@@ -67,27 +61,6 @@ class DeckColors {
     }
 
     /**
-     * <p>
-     * ColorToMana.
-     * </p>
-     * 
-     * @param color
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public String colorToMana(final String color) {
-        final String[] mana = { "W", "U", "B", "R", "G" };
-
-        for (int i = 0; i < Constant.Color.ONLY_COLORS.length; i++) {
-            if (Constant.Color.ONLY_COLORS[i].equals(color)) {
-                return mana[i];
-            }
-        }
-
-        return "";
-    }
-
-    /**
      * Gets the color1.
      * 
      * @return the color1
@@ -107,44 +80,6 @@ class DeckColors {
     }
 
     /**
-     * Gets the mana1.
-     * 
-     * @return the mana1
-     */
-    public String getMana1() {
-        return this.mana1;
-    }
-
-    /**
-     * Sets the mana1.
-     * 
-     * @param mana1in
-     *            the mana1 to set
-     */
-    public void setMana1(final String mana1in) {
-        this.mana1 = mana1in;
-    }
-
-    /**
-     * Gets the mana2.
-     * 
-     * @return the mana2
-     */
-    public String getMana2() {
-        return this.mana2;
-    }
-
-    /**
-     * Sets the mana2.
-     * 
-     * @param mana2in
-     *            the mana2 to set
-     */
-    public void setMana2(final String mana2in) {
-        this.mana2 = mana2in;
-    }
-
-    /**
      * Gets the color2.
      * 
      * @return the color2
@@ -161,6 +96,24 @@ class DeckColors {
      */
     public void setColor2(final String color2in) {
         this.color2 = color2in;
+    }
+
+    /**
+     * Convert this to CardColor.
+     * 
+     * @return equivalent CardColor
+     */
+    public CardColor getCardColors() {
+        return CardColor.fromNames(color1, color2);
+    }
+
+    /**
+     * toString.
+     * 
+     * @return description.
+     */
+    public String toString() {
+        return color1 + '/' + color2;
     }
 
 }

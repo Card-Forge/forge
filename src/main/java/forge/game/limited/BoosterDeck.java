@@ -3,8 +3,8 @@ package forge.game.limited;
 
 import java.util.List;
 
-import forge.card.CardColor;
 import forge.item.CardPrinted;
+
 
 /**
  * Deck built from a Booster Draft.
@@ -20,7 +20,7 @@ public class BoosterDeck extends LimitedDeck {
      * @param pClrs
      *            colors
      */
-    public BoosterDeck(List<CardPrinted> dList, CardColor pClrs) {
+    public BoosterDeck(List<CardPrinted> dList, DeckColors pClrs) {
         super(dList, pClrs);
     }
 

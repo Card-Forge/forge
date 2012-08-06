@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import forge.Constant;
 import forge.card.CardColor;
@@ -31,7 +29,6 @@ import forge.card.CardRules;
 import forge.deck.Deck;
 import forge.deck.generate.GenerateDeckUtil;
 import forge.item.CardPrinted;
-import forge.util.MyRandom;
 import forge.util.closures.Predicate;
 
 /**
@@ -54,19 +51,14 @@ public class BoosterDraftAI {
 
     // holds all the cards for each of the computer's decks
     private final List<List<CardPrinted>> deck = new ArrayList<List<CardPrinted>>();
-    private final String[][] deckColor = new String[BoosterDraftAI.N_DECKS][];
+    private final ArrayList<DeckColors> playerColors = new ArrayList<DeckColors>();
 
-    /**
-     * Constant <code>colorToLand.</code>
-     */
-    private static Map<String, String> colorToLand = new TreeMap<String, String>();
-
-    // picks one Card from in_choose, removes that card, and returns the list
-    // returns the cards not picked
+    private ReadDraftRankings draftRankings;
+    private static final int TAKE_BEST_THRESHOLD = 50;
 
     /**
      * <p>
-     * choose.
+     * Choose a CardPrinted from the list given.
      * </p>
      * 
      * @param chooseFrom
@@ -159,12 +151,6 @@ public class BoosterDraftAI {
                                 + this.playerColors.get(player).getColor2());
                     }
                 }
-                this.playerColors.get(player).setMana1(
-                        this.playerColors.get(player).colorToMana(this.playerColors.get(player).getColor1()));
-                if (!this.playerColors.get(player).getColor2().equals("none")) {
-                    this.playerColors.get(player).setMana2(
-                            this.playerColors.get(player).colorToMana(this.playerColors.get(player).getColor2()));
-                }
             }
         } else if (!this.playerColors.get(player).getColor1().equals("none")
                 && this.playerColors.get(player).getColor2().equals("none")) {
@@ -216,8 +202,6 @@ public class BoosterDraftAI {
                         }
                     }
                 }
-                this.playerColors.get(player).setMana2(
-                        this.playerColors.get(player).colorToMana(this.playerColors.get(player).getColor2()));
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).getColor2());
                 }
@@ -306,35 +290,6 @@ public class BoosterDraftAI {
 
     /**
      * <p>
-     * testColors.
-     * </p>
-     * 
-     * @param n
-     *            an array of int.
-     */
-    private void testColors(final int[] n) {
-        if (n.length != BoosterDraftAI.N_DECKS) {
-            throw new RuntimeException("BoosterDraftAI : testColors error, numbers array length does not equal 7");
-        }
-
-        final Set<Integer> set = new TreeSet<Integer>();
-        for (int i = 0; i < BoosterDraftAI.N_DECKS; i++) {
-            set.add(Integer.valueOf(n[i]));
-        }
-
-        if (set.size() != BoosterDraftAI.N_DECKS) {
-            throw new RuntimeException("BoosterDraftAI : testColors error, numbers not unique");
-        }
-
-        for (int i = 0; i < BoosterDraftAI.N_DECKS; i++) {
-            if ((n[i] < 0) || (this.deckColorChoices.length <= n[i])) {
-                throw new RuntimeException("BoosterDraftAI : testColors error, index out of range - " + n[i]);
-            }
-        }
-    } // testColors()
-
-    /**
-     * <p>
      * getDecks.
      * </p>
      * 
@@ -348,34 +303,10 @@ public class BoosterDraftAI {
                 System.out.println("Deck[" + i + "]");
             }
 
-            CardColor cc = CardColor.fromNames(this.playerColors.get(i).getColor1(), this.playerColors.get(i).getColor2());
-            out[i] = new BoosterDeck(this.deck.get(i), cc).buildDeck();
+            out[i] = new BoosterDeck(this.deck.get(i), this.playerColors.get(i)).buildDeck();
         }
         return out;
     } // getDecks()
-
-    // returns 7 different ints, within the range of 0-9
-
-    /**
-     * <p>
-     * getDeckColors.
-     * </p>
-     * 
-     * @return an array of int.
-     */
-    private int[] getDeckColors() {
-        final int[] out = new int[BoosterDraftAI.N_DECKS];
-        int start = MyRandom.getRandom().nextInt(10);
-
-        for (int i = 0; i < out.length; i++) {
-            // % to get an index between 0 and deckColorChoices.length
-            out[i] = start % this.deckColorChoices.length;
-            start++;
-        }
-        this.testColors(out);
-
-        return out;
-    } // getDeckColors()
 
     /**
      * <p>
@@ -383,19 +314,6 @@ public class BoosterDraftAI {
      * </p>
      */
     public BoosterDraftAI() {
-        // choose colors for decks
-        final int[] n = this.getDeckColors();
-        for (int i = 0; i < n.length; i++) {
-            this.deckColor[i] = this.deckColorChoices[n[i]];
-        }
-
-        // initialize color map
-        BoosterDraftAI.colorToLand.put(Constant.Color.BLACK, "Swamp");
-        BoosterDraftAI.colorToLand.put(Constant.Color.BLUE, "Island");
-        BoosterDraftAI.colorToLand.put(Constant.Color.GREEN, "Forest");
-        BoosterDraftAI.colorToLand.put(Constant.Color.RED, "Mountain");
-        BoosterDraftAI.colorToLand.put(Constant.Color.WHITE, "Plains");
-
         // Initialize deck array and playerColors list
         for (int i = 0; i < N_DECKS; i++) {
             this.deck.add(new ArrayList<CardPrinted>());
@@ -424,23 +342,6 @@ public class BoosterDraftAI {
     public void setBd(final IBoosterDraft bd0) {
         this.bd = bd0;
     }
-
-    private final ArrayList<DeckColors> playerColors = new ArrayList<DeckColors>();
-
-    private ReadDraftRankings draftRankings;
-    private static final int TAKE_BEST_THRESHOLD = 50;
-
-    // all 10 two color combinations
-    private final String[][] deckColorChoices = { { Constant.Color.BLACK, Constant.Color.BLUE },
-            { Constant.Color.BLACK, Constant.Color.GREEN }, { Constant.Color.BLACK, Constant.Color.RED },
-            { Constant.Color.BLACK, Constant.Color.WHITE },
-
-            { Constant.Color.BLUE, Constant.Color.GREEN }, { Constant.Color.BLUE, Constant.Color.RED },
-            { Constant.Color.BLUE, Constant.Color.WHITE },
-
-            { Constant.Color.GREEN, Constant.Color.RED }, { Constant.Color.GREEN, Constant.Color.WHITE },
-
-            { Constant.Color.RED, Constant.Color.WHITE } };
 
 } // BoosterDraftAI()
 
