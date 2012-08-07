@@ -16,14 +16,14 @@ class Card:
 
 def initSets():
 	# Base Sets
-	forgeSets.append('LEA')
-	forgeSets.append('LEB')
-	forgeSets.append('2ED')
-	forgeSets.append('3ED')
-	forgeSets.append('4ED')
-	forgeSets.append('5ED')
-	forgeSets.append('6ED')
-	forgeSets.append('7ED')
+	forgeSets.append('1E')
+	forgeSets.append('2E')
+	forgeSets.append('2U')
+	forgeSets.append('3E')
+	forgeSets.append('4E')
+	forgeSets.append('5E')
+	forgeSets.append('6E')
+	forgeSets.append('7E')
 	forgeSets.append('8ED')
 	forgeSets.append('9ED')
 	forgeSets.append('10E')
@@ -45,45 +45,45 @@ def initSets():
 	forgeSets.append('S00')
 
 	# Early Sets
-	forgeSets.append('ARN')
-	forgeSets.append('ATQ')
-	forgeSets.append('LEG')
-	forgeSets.append('DRK')
-	forgeSets.append('FEM')
-	forgeSets.append('HML')
+	forgeSets.append('AN')
+	forgeSets.append('AQ')
+	forgeSets.append('LE')
+	forgeSets.append('DK')
+	forgeSets.append('FE')
+	forgeSets.append('HM')
 
 	# Ice Age
-	forgeSets.append('ICE')
-	forgeSets.append('ALL')
+	forgeSets.append('IA')
+	forgeSets.append('AL')
 	forgeSets.append('CSP')
 
 	# Mirage
-	forgeSets.append('MIR')
-	forgeSets.append('VIS')
-	forgeSets.append('WTH')
+	forgeSets.append('MI')
+	forgeSets.append('VI')
+	forgeSets.append('WL')
 
 	# Rath Cycle
-	forgeSets.append('TMP')
-	forgeSets.append('STH')
-	forgeSets.append('EXO')
+	forgeSets.append('TE')
+	forgeSets.append('ST')
+	forgeSets.append('EX')
 
 	# Artifacts Cycle
-	forgeSets.append('USG')
-	forgeSets.append('ULG')
-	forgeSets.append('UDS')
+	forgeSets.append('UZ')
+	forgeSets.append('GU')
+	forgeSets.append('CG')
 
 	# Masques
-	forgeSets.append('MMQ')
-	forgeSets.append('NMS')
-	forgeSets.append('PCY')
+	forgeSets.append('MM')
+	forgeSets.append('NE')
+	forgeSets.append('PR')
 
 	# Invasion
-	forgeSets.append('INV')
-	forgeSets.append('PLS')
-	forgeSets.append('APC')
+	forgeSets.append('IN')
+	forgeSets.append('PS')
+	forgeSets.append('AP')
 
 	# Odyssey
-	forgeSets.append('ODY')
+	forgeSets.append('OD')
 	forgeSets.append('TOR')
 	forgeSets.append('JUD')
 
@@ -123,7 +123,7 @@ def initSets():
 
 	# Alara
 	forgeSets.append('ALA')
-	forgeSets.append('CFX')
+	forgeSets.append('CON')
 	forgeSets.append('ARB')
 
 	# Zendikar
