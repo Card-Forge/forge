@@ -63,6 +63,11 @@ Fixes/Features:
 - bug fix for choose color AI
 - Fix: Echoing Decay will no longer deal double curse original target
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fix: Disciple of Bolas wasn't clearing remembered list
+- some cleaning up in Draft code
+- Fix: Warren Pilferers was missing YouCtrl restriction
+- Revised cardTemplateScript to work with two-character codes for early sets and other small differences compared to Arch's mtgdata.txt
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -74,6 +79,8 @@ Added the following cards:
 
 Avarice Totem
 Arcum Dagsson
+Rimefeather Owl
+Guardian Angel
 
 
 end
