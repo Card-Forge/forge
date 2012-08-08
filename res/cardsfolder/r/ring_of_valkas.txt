@@ -2,7 +2,7 @@ Name:Ring of Valkas
 ManaCost:2
 Types:Artifact Equipment
 Text:no text
-K:Equip 1
+K:Equip 1 | AITgts$ Creature.Red
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste | Description$ Equipped creature has haste.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ValkasCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's red.
 SVar:ValkasCounter:AB$PutCounter | Cost$ 0 | Defined$ Equipped | ConditionDefined$ Equipped | ConditionPresent$ Creature.Red | ConditionCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ 1

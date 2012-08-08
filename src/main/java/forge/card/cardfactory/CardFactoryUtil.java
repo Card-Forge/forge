@@ -4652,14 +4652,25 @@ public class CardFactoryUtil {
         if (card.hasStartOfKeyword("Equip")) {
             // find position of Equip keyword
             final int equipPos = card.getKeywordPosition("Equip");
+            // Check for additional params such as preferred AI targets
+            final String equipString = card.getKeyword().get(equipPos).substring(5);
+            final String[] equipExtras = equipString.contains("\\|") ? equipString.split("\\|", 2) : null;
             // Get cost string
-            String equipCost = card.getKeyword().get(equipPos).substring(5).trim();
-           // Creeate attach ability string
+            String equipCost = "";
+            if (equipExtras != null) {
+                equipCost = equipExtras[0].trim();
+            } else {
+                equipCost = equipString.trim();
+            }
+           // Create attach ability string
             final StringBuilder abilityStr = new StringBuilder();
             abilityStr.append("AB$ Attach | Cost$ ");
             abilityStr.append(equipCost);
             abilityStr.append(" | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control ");
             abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature ");
+            if (equipExtras != null) {
+                abilityStr.append("| ").append(equipExtras[1]).append(" ");
+            }
             if (equipCost.matches(".+<.+>")) { //Something other than a mana cost
                 abilityStr.append("| PrecostDesc$ Equip - | SpellDescription$ (Attach to target creature you control. Equip only as a sorcery.)");
             }

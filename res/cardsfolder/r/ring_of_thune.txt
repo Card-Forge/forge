@@ -2,7 +2,7 @@ Name:Ring of Thune
 ManaCost:2
 Types:Artifact Equipment
 Text:no text
-K:Equip 1
+K:Equip 1 | AITgts$ Creature.White
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Vigilance | Description$ Equipped creature has vigilance.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ThuneCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's white.
 SVar:ThuneCounter:AB$PutCounter | Cost$ 0 | Defined$ Equipped | ConditionDefined$ Equipped | ConditionPresent$ Creature.White | ConditionCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ 1
