@@ -2091,7 +2091,7 @@ public class CombatUtil {
                 + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat);
 
         if (defender.hasKeyword("Double Strike")) {
-            if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch") 
+            if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
                         || attacker.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
                 return true;
             }
@@ -2106,7 +2106,7 @@ public class CombatUtil {
                 if (attackerDamage >= defenderLife) {
                     return false;
                 }
-                if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch") 
+                if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
                         || defender.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
                     return false;
                 }
@@ -2125,13 +2125,13 @@ public class CombatUtil {
                 if (attackerDamage >= defenderLife) {
                     return false;
                 }
-                if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch") 
+                if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
                         || defender.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
                     return false;
                 }
             }
 
-            if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch") 
+            if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
                         || attacker.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
                 return true;
             }

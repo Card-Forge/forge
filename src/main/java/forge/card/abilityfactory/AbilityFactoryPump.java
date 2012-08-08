@@ -19,6 +19,7 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import forge.AllZone;
@@ -40,6 +41,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
+import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -373,7 +375,7 @@ public class AbilityFactoryPump {
         final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Fear")
                 || keyword.endsWith("Intimidate") || keyword.endsWith("Shadow"));
         final boolean combatRelevant = (keyword.endsWith("First Strike")
-                || keyword.contains("Bushido") || keyword.endsWith("Deathtouch"));
+                || keyword.contains("Bushido"));
         // give evasive keywords to creatures that can or do attack
         if (evasive) {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
@@ -422,6 +424,27 @@ public class AbilityFactoryPump {
             }
         } else if (keyword.endsWith("Indestructible")) {
             return true;
+        } else if (keyword.endsWith("Deathtouch")) {
+            Combat combat = AllZone.getCombat();
+            if (ph.isPlayerTurn(human) && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+                List<Card> attackers = combat.getAttackers();
+                for (Card attacker : attackers) {
+                    if (CombatUtil.canBlock(attacker, card, combat)
+                            && !CombatUtil.canDestroyAttacker(attacker, card, combat, false)) {
+                        return true;
+                    }
+                }
+            } else if (ph.isPlayerTurn(computer) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                    && CombatUtil.canAttack(card)) {
+                CardList blockers = AllZoneUtil.getCreaturesInPlay(human);
+                for (Card blocker : blockers) {
+                    if (CombatUtil.canBlock(card, blocker, combat)
+                            && !CombatUtil.canDestroyBlocker(blocker, card, combat, false)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         } else if (combatRelevant) {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || !CombatUtil.canBeBlocked(card)
@@ -918,7 +941,6 @@ public class AbilityFactoryPump {
             list = list.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
-                    System.out.println("Not Pumping");
                     return !c.getSVar("Targeting").equals("Dies");
                 }
             });
