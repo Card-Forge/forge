@@ -20,6 +20,7 @@ import forge.control.FControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
 import forge.game.player.Player;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
@@ -57,35 +58,44 @@ public class GameNew {
      * @param iconEnemy
      *              &emsp; {@link java.lang.String}
      */
-    public static void newGame(final Deck humanDeck, final Deck computerDeck, final CardList human,
-            final CardList computer, final int humanLife, final int computerLife, String iconEnemy) {
+    public static void newGame(final Deck humanDeck, final Deck computerDeck, final CardList humanStart,
+            final CardList computerStart, final int humanLife, final int computerLife, String iconEnemy) {
         Singletons.getControl().changeState(FControl.MATCH_SCREEN);
         CMatchUI.SINGLETON_INSTANCE.initMatch(iconEnemy);
 
         GameNew.newGameCleanup();
         GameNew.newMatchCleanup();
 
-        AllZone.getComputerPlayer().setStartingLife(computerLife);
-        AllZone.getHumanPlayer().setStartingLife(humanLife);
-        AllZone.getHumanPlayer().updateObservers();
+        Player human = AllZone.getHumanPlayer();
+        Player computer = AllZone.getComputerPlayer();
+        
+        computer.setStartingLife(computerLife);
+        human.setStartingLife(humanLife);
+        human.updateObservers();
 
         Card.resetUniqueNumber();
+
+        PlayerZone humanBf = human.getZone(ZoneType.Battlefield);
         
-        for (final Card c : human) {
-            AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).add(c);
+        for (final Card c : humanStart) {
+            humanBf.add(c, false);
             c.setSickness(true);
             c.setStartsGameInPlay(true);
             c.refreshUniqueNumber();
         }
 
-        for (final Card c : computer) {
-            AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).add(c);
+        PlayerZone aiBf = AllZone.getComputerPlayer().getZone(ZoneType.Battlefield);
+        
+        for (final Card c : computerStart) {
+            aiBf.add(c, false);
             c.setSickness(true);
             c.setStartsGameInPlay(true);
             c.refreshUniqueNumber();
         }
 
         GameNew.actuateGame(humanDeck, computerDeck);
+        humanBf.updateObservers();
+        aiBf.updateObservers();
     }
 
     /**

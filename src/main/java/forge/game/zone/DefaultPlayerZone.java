@@ -66,14 +66,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
 
     // ************ BEGIN - these methods fire updateObservers() *************
 
-    /**
-     * Adds the.
-     * 
-     * @param o
-     *            a {@link java.lang.Object} object.
-     */
-    @Override
-    public void add(final Object o) {
+    public void add(final Object o, boolean update) {
         final Card c = (Card) o;
 
         // Immutable cards are usually emblems,effects and the mana pool and we
@@ -115,7 +108,22 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         }
 
         this.getCardList().add(c);
-        this.update();
+        
+        if (update) {
+            this.update();
+        }
+    }
+    
+    
+    /**
+     * Adds the.
+     * 
+     * @param o
+     *            a {@link java.lang.Object} object.
+     */
+    @Override
+    public void add(final Object o) {
+        this.add(o, true);
     }
 
     /**
