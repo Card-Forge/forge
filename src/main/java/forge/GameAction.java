@@ -185,7 +185,7 @@ public class GameAction {
             zoneTo.add(copied, position);
         }
 
-        // Tokens outside the battlefield disappear immideately.
+        // Tokens outside the battlefield disappear immediately.
         if (copied.isToken() && !zoneTo.is(ZoneType.Battlefield)) {
             zoneTo.remove(copied);
         }

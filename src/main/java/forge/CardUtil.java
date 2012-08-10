@@ -959,6 +959,7 @@ public final class CardUtil {
         newCopy.setFlipCard(in.isFlipCard());
         newCopy.setDoubleFaced(in.isDoubleFaced());
         newCopy.getCharacteristics().copy(in.getState(in.getCurState()));
+        newCopy.setTriggers(in.getTriggers());
 
         // Copy all states
         // Commented out by Sloth 2012/07/25
