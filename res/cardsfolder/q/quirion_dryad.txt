@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Dryad
 Text:no text
 PT:1/1
-T:Mode$ SpellCast | ValidCard$ Card.White,Card.Blue,Card.Black,Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a white, blue, black, or red spell, put a +1/+1 counter on CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Card.White,Card.Blue,Card.Black,Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a white, blue, black, or red spell, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Card.White,Card.Blue,Card.Black,Card.Red
 SVar:RemRandomDeck:True
