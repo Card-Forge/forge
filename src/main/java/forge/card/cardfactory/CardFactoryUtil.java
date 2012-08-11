@@ -2862,6 +2862,18 @@ public class CardFactoryUtil {
         if (sq[0].contains("CardSumPT")) {
             return CardFactoryUtil.doXMath((c.getNetAttack() + c.getNetDefense()), m, c);
         }
+        // Count$SumPower_valid
+        if (sq[0].contains("SumPower")) {
+            final String[] restrictions = l[0].split("_");
+            final String[] rest = restrictions[1].split(",");
+            CardList cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            CardList filteredCards = cardsonbattlefield.getValidCards(rest, cardController, c);
+            int sumPower = 0;
+            for (int i = 0; i < filteredCards.size(); i++) {
+                sumPower += filteredCards.get(i).getManaCost().getCMC();
+            }
+            return sumPower;
+        }
         // Count$CardManaCost
         if (sq[0].contains("CardManaCost")) {
             if (sq[0].contains("Equipped") && c.isEquipping()) {
