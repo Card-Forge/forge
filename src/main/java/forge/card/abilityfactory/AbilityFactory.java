@@ -2213,6 +2213,13 @@ public class AbilityFactory {
             if (o instanceof SpellAbility) {
                 s = (SpellAbility) o;
             }
+        } else if (defined.equals("Remembered")) {
+            for (final Object o : card.getRemembered()) {
+                if (o instanceof Card) {
+                    final Card rem = (Card) o;
+                    sas.addAll(AllZoneUtil.getCardState(rem).getSpellAbilities());
+                }
+            }
         } else if (defined.equals("Imprinted")) {
             for (final Card imp : card.getImprinted()) {
                 sas.addAll(imp.getSpellAbilities());

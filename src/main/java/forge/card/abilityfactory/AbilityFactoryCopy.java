@@ -796,18 +796,55 @@ public final class AbilityFactoryCopy {
             return;
         }
 
-        SpellAbility chosenSA = null;
-        if (tgtSpells.size() == 1) {
-            chosenSA = tgtSpells.get(0);
-        } else if (sa.getActivatingPlayer().isHuman()) {
-            chosenSA = (SpellAbility) GuiUtils.chooseOne("Select a spell to copy", tgtSpells.toArray());
-        } else {
-            chosenSA = tgtSpells.get(0);
-        }
+        if (params.containsKey("CopyMultipleSpells")) {
+            final int spellCount = Integer.parseInt(params.get("CopyMultipleSpells"));
+            ArrayList<SpellAbility> chosenSAs = new ArrayList<SpellAbility>();
+            SpellAbility chosenSAtmp = null;
+            for (int multi = 0; multi < spellCount; multi++) {
+                if (tgtSpells.size() == 1) {
+                    chosenSAs.addAll(tgtSpells);
+                } else if (sa.getActivatingPlayer().isHuman()) {
+                    String num = "";
+                    if (multi == 1 - 1) {
+                        num = "first";
+                    }
+                    else if (multi == 2 - 1) {
+                        num = "second";
+                    }
+                    else if (multi == 3 - 1) {
+                        num = "third";
+                    } else {
+                        num = Integer.toString(multi - 1) + "th";
+                    }
+                    chosenSAtmp = (SpellAbility) GuiUtils.chooseOne("Select " + num + " spell to copy to stack", tgtSpells.toArray());
+                    chosenSAs.add(chosenSAtmp);
+                    tgtSpells.remove(chosenSAtmp);
+                } else {
+                    chosenSAs.add(tgtSpells.get(multi));
+                }
+            }
 
-        chosenSA.setActivatingPlayer(controller);
-        for (int i = 0; i < amount; i++) {
-            AllZone.getCardFactory().copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
+            for (final SpellAbility chosenSAcopy : chosenSAs) {
+                chosenSAcopy.setActivatingPlayer(controller);
+                for (int i = 0; i < amount; i++) {
+                    AllZone.getCardFactory().copySpellontoStack(card, chosenSAcopy.getSourceCard(), chosenSAcopy, true);
+                }
+            }
+        }
+        else {
+            SpellAbility chosenSA = null;
+            if (tgtSpells.size() == 1) {
+                chosenSA = tgtSpells.get(0);
+            } else if (sa.getActivatingPlayer().isHuman()) {
+                chosenSA = (SpellAbility) GuiUtils.chooseOne("Select a spell to copy", tgtSpells.toArray());
+            } else {
+                chosenSA = tgtSpells.get(0);
+            }
+
+            chosenSA.setActivatingPlayer(controller);
+            for (int i = 0; i < amount; i++) {
+                AllZone.getCardFactory().copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
+            }
         }
     } // end resolve
 

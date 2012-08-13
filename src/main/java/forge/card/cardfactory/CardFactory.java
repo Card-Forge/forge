@@ -151,6 +151,7 @@ public class CardFactory implements CardFactoryInterface {
     @Override
     public final void copySpellontoStack(final Card source, final Card original, final SpellAbility sa,
             final boolean bCopyDetails) {
+        Player originalController = original.getController();
         Player controller = sa.getActivatingPlayer();
         /*if (sa.getPayCosts() == null) {
             this.copySpellontoStack(source, original, bCopyDetails);
@@ -191,6 +192,8 @@ public class CardFactory implements CardFactoryInterface {
         } else if (copySA.canPlayAI()) {
             ComputerUtil.playStackFree(copySA);
         }
+
+        c.addController(originalController);
     }
 
     /**
