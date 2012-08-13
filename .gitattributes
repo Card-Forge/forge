@@ -3967,6 +3967,7 @@ res/cardsfolder/g/grave_peril.txt svneol=native#text/plain
 res/cardsfolder/g/grave_robbers.txt svneol=native#text/plain
 res/cardsfolder/g/grave_shell_scarab.txt svneol=native#text/plain
 res/cardsfolder/g/grave_titan.txt svneol=native#text/plain
+res/cardsfolder/g/gravebane_zombie.txt -text
 res/cardsfolder/g/gravebind.txt svneol=native#text/plain
 res/cardsfolder/g/graveborn_muse.txt svneol=native#text/plain
 res/cardsfolder/g/gravecrawler.txt -text
