@@ -1,7 +1,7 @@
 Name:Emberstrike Duo
 ManaCost:1 BR
 Types:Creature Elemental Warrior Shaman
-Textno text
+Text:no text
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump11 | TriggerDescription$ Whenever you cast a black spell, CARDNAME gets +1/+1 until end of turn.
 T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpFirstStrike | TriggerDescription$ Whenever you cast a red spell, CARDNAME gains first strike until end of turn.
