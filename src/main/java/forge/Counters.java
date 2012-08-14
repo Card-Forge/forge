@@ -62,6 +62,9 @@ public enum Counters {
     /** The CREDIT. */
     CREDIT(),
 
+    /** The CUBE. */
+    CUBE(),
+
     /** The CURRENCY. */
     CURRENCY(),
 
