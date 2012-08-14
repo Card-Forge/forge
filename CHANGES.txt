@@ -72,6 +72,17 @@ Fixes/Features:
 - Forgot to commit this supplementary code to support Anti-Magic Aura
 - Equip keyword can now take additional params such as AI preferred targets (see M13 rings for examples)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- AI logic for pumping with Deathtouch.
+- Improvements to Quest game trying to update Battlefield Observers before it's finished being setup (not fixed, but seems better)
+- Added the RemAIDeck flag to Fury Charm
+- Fix: Quirion Dryad's triggered ability made mandatory
+- Committed Diogenes's fix for Jace and Dream Cache subabilities not being mandatory.
+- bug fix for triggers in LKICopy()
+- fix Twilight Drover trigger
+- Fixed Emberstrike Duo's Text line
+- Made X svar in Delif's Cone a unique name improved stack description
+- CUBE counters added to counter types
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -87,6 +98,10 @@ Rimefeather Owl
 Guardian Angel
 Anti-Magic Aura
 Delif's Cone
+Mosswort Bridge
+Spelltwine
+Gravebane Zombie
+Delif's Cube
 
 
 end
