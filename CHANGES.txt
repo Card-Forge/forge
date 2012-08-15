@@ -13,6 +13,8 @@ http://support.apple.com/kb/HT5290?viewlocale=en_US&locale=en_US
 
 Please note that the issue is most likely caused by Mountain Lion's Gatekeeper feature and it is extremely unlikely that the forge dev team will attempt to get a unique Developer ID from Apple and use it to digitally sign our forge app.
 
+On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
+
 --
 
 It seems like the front face of double faced cards aren't triggering properly, but the back face and single faced cards are.
