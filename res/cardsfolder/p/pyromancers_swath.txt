@@ -2,7 +2,7 @@ Name:Pyromancer's Swath
 ManaCost:2 R
 Types:Enchantment
 Text:no text
-R:Event$ DamageDone | ValidSource$ Instant.YouCtrl,Sorcery.YouCtrl | ValidTarget$ Card.Permanent,Player | ReplaceWith$ DmgPlus2 | Description$ If an instant or sorcery source you control would deal damage to a creature or player, it deals that much damage plus 2 to that creature or player instead.
+R:Event$ DamageDone | ValidSource$ Instant.YouCtrl,Sorcery.YouCtrl | ValidTarget$ Creature,Player | ReplaceWith$ DmgPlus2 | Description$ If an instant or sorcery source you control would deal damage to a creature or player, it deals that much damage plus 2 to that creature or player instead.
 SVar:DmgPlus2:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Plus.2
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of each end step, discard your hand.
