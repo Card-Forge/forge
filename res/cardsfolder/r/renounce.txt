@@ -1,0 +1,15 @@
+Name:Renounce
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ Sacrifice | Cost$ 1 W | Defined$ You | Amount$ SacX | References$ SacX | SacValid$ Permanent | RememberSacrificed$ True | Optional$ True | SubAbility$ DBGainLife | SpellDescription$ Sacrifice any number of permanents. You gain 2 life for each permanent sacrificed this way.
+SVar:DBGainLife:DB$GainLife | LifeAmount$ LifeX | References$ LifeX | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SacX:Count$Valid Permanent.YouCtrl
+SVar:LifeX:Remembered$Amount.Twice
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/renounce.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/42.jpg
+Oracle:Sacrifice any number of permanents. You gain 2 life for each permanent sacrificed this way.
+End

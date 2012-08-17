@@ -5220,6 +5220,7 @@ res/cardsfolder/l/land_equilibrium.txt svneol=native#text/plain
 res/cardsfolder/l/land_leeches.txt svneol=native#text/plain
 res/cardsfolder/l/land_tax.txt svneol=native#text/plain
 res/cardsfolder/l/landbind_ritual.txt svneol=native#text/plain
+res/cardsfolder/l/landslide.txt -text
 res/cardsfolder/l/lantern_kami.txt svneol=native#text/plain
 res/cardsfolder/l/lantern_lit_graveyard.txt svneol=native#text/plain
 res/cardsfolder/l/lantern_of_insight.txt -text
@@ -5236,6 +5237,7 @@ res/cardsfolder/l/lashwrithe.txt svneol=native#text/plain
 res/cardsfolder/l/last_breath.txt svneol=native#text/plain
 res/cardsfolder/l/last_caress.txt svneol=native#text/plain
 res/cardsfolder/l/last_chance.txt -text
+res/cardsfolder/l/last_ditch_effort.txt -text
 res/cardsfolder/l/last_gasp.txt svneol=native#text/plain
 res/cardsfolder/l/last_kiss.txt svneol=native#text/plain
 res/cardsfolder/l/last_laugh.txt svneol=native#text/plain
@@ -5638,6 +5640,7 @@ res/cardsfolder/m/mana_leak.txt svneol=native#text/plain
 res/cardsfolder/m/mana_leech.txt svneol=native#text/plain
 res/cardsfolder/m/mana_matrix.txt svneol=native#text/plain
 res/cardsfolder/m/mana_prism.txt svneol=native#text/plain
+res/cardsfolder/m/mana_seism.txt -text
 res/cardsfolder/m/mana_severance.txt svneol=native#text/plain
 res/cardsfolder/m/mana_short.txt svneol=native#text/plain
 res/cardsfolder/m/mana_tithe.txt svneol=native#text/plain
@@ -7536,6 +7539,7 @@ res/cardsfolder/r/renewal.txt svneol=native#text/plain
 res/cardsfolder/r/renewed_faith.txt svneol=native#text/plain
 res/cardsfolder/r/renewing_dawn.txt svneol=native#text/plain
 res/cardsfolder/r/renewing_touch.txt svneol=native#text/plain
+res/cardsfolder/r/renounce.txt -text
 res/cardsfolder/r/reparations.txt svneol=native#text/plain
 res/cardsfolder/r/repay_in_kind.txt svneol=native#text/plain
 res/cardsfolder/r/repeal.txt svneol=native#text/plain
@@ -7979,6 +7983,7 @@ res/cardsfolder/s/scaled_wurm.txt svneol=native#text/plain
 res/cardsfolder/s/scalpelexis.txt svneol=native#text/plain
 res/cardsfolder/s/scandalmonger.txt svneol=native#text/plain
 res/cardsfolder/s/scapegoat.txt svneol=native#text/plain
+res/cardsfolder/s/scapeshift.txt -text
 res/cardsfolder/s/scar.txt svneol=native#text/plain
 res/cardsfolder/s/scarblade_elite.txt svneol=native#text/plain
 res/cardsfolder/s/scare_tactics.txt svneol=native#text/plain
