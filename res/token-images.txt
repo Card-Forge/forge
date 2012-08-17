@@ -153,6 +153,7 @@ u_1_1_illusion.jpg                     http://www.cardforge.org/fpics/tokens/u_1
 u_1_1_merfolk_wizard.jpg               http://www.cardforge.org/fpics/tokens/u_1_1_merfolk_wizard.jpg
 u_1_1_thopter.jpg                      http://www.cardforge.org/fpics/tokens/u_1_1_thopter.jpg
 u_1_1_spirit_avr.jpg                   http://www.cardforge.org/fpics/tokens/u_1_1_spirit_avr.jpg
+u_2_2_drake.jpg                        http://www.cardforge.org/fpics/tokens/u_2_2_drake.jpg
 u_2_2_elemental_flying.jpg             http://www.cardforge.org/fpics/tokens/u_2_2_elemental_flying.jpg
 u_2_2_homunculus.jpg                   http://www.cardforge.org/fpics/tokens/u_2_2_homunculus.jpg
 u_2_2_illusion.jpg                     http://www.cardforge.org/fpics/tokens/u_2_2_illusion.jpg
@@ -200,6 +201,7 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 chandra_the_firebrand_effect.jpg       http://www.cardforge.org/fpics/effects/chandra_the_firebrand_effect.jpg
 elspeth_knight_errant_emblem.jpg       http://www.cardforge.org/fpics/effects/elspeth_knight_errant_emblem.jpg
 koth_of_the_hammer_emblem.jpg          http://www.cardforge.org/fpics/effects/koth_of_the_hammer_emblem.jpg
+liliana_of_the_dark_realms_effect.jpg  http://www.cardforge.org/fpics/effects/liliana_of_the_dark_realms_effect.jpg
 sorin_lord_of_innistrad_emblem.jpg     http://www.cardforge.org/fpics/effects/sorin_lord_of_innistrad_effect.jpg
 tamiyo_the_moon_sage_emblem.jpg        http://www.cardforge.org/fpics/effects/tamiyo-the-moon-sage-emblem.jpg
 venser_the_sojourner_emblem.jpg        http://www.cardforge.org/fpics/effects/venser_the_sojourner_emblem.jpg
