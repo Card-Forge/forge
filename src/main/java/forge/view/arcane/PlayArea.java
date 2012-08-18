@@ -219,6 +219,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             workedLastTime = canAdjustWidth(lands, tokens, creatures, others);
 
             if ( workedLastTime && isFirstRun) break;
+            if (cardWidth <= 0) {
+                break;
+            }
             isFirstRun = false;
             //System.err.format("[%d] @ Attempt to siut at w=%d %s (%s) %n", new Date().getTime(), this.cardWidth, workedLastTime ? "↑" : "↓", mirror ? "MIRROR" : "DIRECT");
 
