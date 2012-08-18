@@ -85,6 +85,12 @@ Fixes/Features:
 - Made X svar in Delif's Cone a unique name improved stack description
 - CUBE counters added to counter types
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a fluff piece to the changes.txt file.
+- Fixed Pyromancer's Swath
+- Fixed Sulfuric Vapors
+- Updated token download list for M13
+- Temporary (possible) fix for unplayable game 2
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -104,6 +110,12 @@ Mosswort Bridge
 Spelltwine
 Gravebane Zombie
 Delif's Cube
+Hecatomb
+Land Slide
+Last-Ditch Effort
+Mana Seism
+Renounce
+Scapeshift
 
 
 end
