@@ -855,7 +855,16 @@ public class AbilityFactoryPump {
             return false;
         }
         //Targeted
-        return this.pumpTgtAI(sa, defense, attack, false);
+        if (!this.pumpTgtAI(sa, defense, attack, false)) {
+            return false;
+        }
+        
+        final AbilitySub subAb = sa.getSubAbility();
+        if (subAb != null && !subAb.chkAIDrawback()) {
+            return false;
+        }
+        
+        return true;
     } // pumpPlayAI()
 
     /**
@@ -1164,7 +1173,15 @@ public class AbilityFactoryPump {
                 }
             }
         } else {
-            return this.pumpTgtAI(sa, defense, attack, false);
+            //Targeted
+            if (!this.pumpTgtAI(sa, defense, attack, false)) {
+                return false;
+            }
+            
+            final AbilitySub subAb = sa.getSubAbility();
+            if (subAb != null && !subAb.chkAIDrawback()) {
+                return false;
+            }
         }
 
         return true;
