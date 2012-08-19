@@ -931,7 +931,7 @@ public class MagicStack extends MyObservable {
         final Card source = sa.getSourceCard();
         curResolvingCard = source;
 
-        if (this.hasFizzled(sa, source)) { // Fizzle
+        if (this.hasFizzled(sa, source, false)) { // Fizzle
             // TODO: Spell fizzles, what's the best way to alert player?
             Log.debug(source.getName() + " ability fizzles.");
             AllZone.getGameLog().add("ResolveStack", source.getName() + " ability fizzles.", 2);
@@ -1162,7 +1162,7 @@ public class MagicStack extends MyObservable {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public final boolean hasFizzled(final SpellAbility sa, final Card source) {
+    public final boolean hasFizzled(final SpellAbility sa, final Card source, final boolean parentFizzled) {
 		// Can't fizzle unless there are some targets
         boolean fizzle = false;
         
@@ -1219,12 +1219,16 @@ public class MagicStack extends MyObservable {
         else if (sa.getTargetPlayer() != null) {
             fizzle = !sa.getTargetPlayer().canBeTargetedBy(sa);
         }
+        else {
+            // Set fizzle to the same as the parent if there's no target info
+            fizzle = parentFizzled;
+        }
         
         if (sa.getSubAbility() == null) {
             return fizzle;
         }
         
-        return hasFizzled(sa.getSubAbility(), source) && fizzle;
+        return hasFizzled(sa.getSubAbility(), source, fizzle) && fizzle;
     }
 
     /**

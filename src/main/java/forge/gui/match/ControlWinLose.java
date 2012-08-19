@@ -116,7 +116,7 @@ public class ControlWinLose {
             } else { //compy won
                 CardList humanAntes = AllZone.getHumanPlayer().getCardsIn(ZoneType.Ante);
 
-                //remove compy's ante cards form his deck
+                //remove humans ante cards form his deck
                 for (Card c : humanAntes) {
                     CardPrinted toRemove = CardDb.instance().getCard(c);
                     hDeck.getMain().remove(toRemove);
