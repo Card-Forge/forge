@@ -1910,7 +1910,7 @@ public final class AbilityFactoryChoose {
      * @return a boolean.
      */
     private static boolean chooseCardTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        return false;
+        return chooseCardCanPlayAI(af, sa);
     }
 
     /**

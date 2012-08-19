@@ -334,7 +334,7 @@ public class SpellPermanent extends Spell {
         }
 
         if (card.isCreature() && (card.getNetDefense() <= 0) && !card.hasStartOfKeyword("etbCounter")
-                && !mana.contains("X")) {
+                && !mana.contains("X") && !ComputerAIGeneral.hasETBTrigger(card)) {
             return false;
         }
 

@@ -2116,7 +2116,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("(");
                     sb.append(c.getUniqueNumber());
                     sb.append(")");
-                } else {
+                } else if (o != null){
                     sb.append(o.toString());
                 }
                 sb.append("\r\n");

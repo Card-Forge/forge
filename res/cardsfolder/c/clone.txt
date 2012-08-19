@@ -4,10 +4,8 @@ Types:Creature Shapeshifter
 Text:no text
 PT:0/0
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseCreature | Static$ True | TriggerDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield.
-SVar:ChooseCreature:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other | SubAbility$ DBCopy | RememberChosen$ True
+SVar:ChooseCreature:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other | SubAbility$ DBCopy | RememberChosen$ True
 SVar:DBCopy:DB$ Clone | Defined$ Remembered
-SVar:NeedsToPlayVar:Y GE1
-SVar:Y:Count$Valid Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clone.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/52.jpg
