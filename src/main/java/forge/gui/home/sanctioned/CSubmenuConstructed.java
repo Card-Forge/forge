@@ -33,6 +33,7 @@ import forge.deck.generate.Generate3ColorDeck;
 import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameNew;
+import forge.game.GameType;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
@@ -347,6 +348,8 @@ public enum CSubmenuConstructed implements ICDoc {
                         generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks(), PlayerType.HUMAN);
                 Constant.Runtime.COMPUTER_DECK[0] =
                         generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER);
+                
+                Constant.Runtime.setGameType(GameType.Constructed);
 
                 if (Constant.Runtime.HUMAN_DECK[0] != null && Constant.Runtime.COMPUTER_DECK[0] != null) {
                     GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);

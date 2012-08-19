@@ -21,6 +21,7 @@ import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
 import forge.game.GameNew;
+import forge.game.GameType;
 import forge.game.limited.SealedDeck;
 import forge.game.limited.SealedDeckFormat;
 import forge.gui.GuiUtils;
@@ -138,6 +139,8 @@ public enum CSubmenuSealed implements ICDoc {
                 Constant.Runtime.HUMAN_DECK[0] = human;
                 Constant.Runtime.COMPUTER_DECK[0] = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().get(0);
 
+                Constant.Runtime.setGameType(GameType.Sealed);
+                
                 GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
                 return null;
             }
