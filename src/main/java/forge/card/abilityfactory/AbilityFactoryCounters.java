@@ -434,11 +434,7 @@ public class AbilityFactoryCounters {
             chance &= subAb.chkAIDrawback();
         }
 
-        if (AbilityFactory.playReusable(sa)) {
-            return chance;
-        }
-
-        return ((r.nextFloat() < .6667) && chance);
+        return chance;
     } // putCanPlayAI
 
     /**
@@ -466,12 +462,6 @@ public class AbilityFactoryCounters {
         final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
 
         list = player.getCardsIn(ZoneType.Battlefield);
-        list = list.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card c) {
-                return c.canBeTargetedBy(sa);
-            }
-        });
 
         if (abTgt != null) {
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
@@ -483,6 +473,12 @@ public class AbilityFactoryCounters {
             abTgt.resetTargets();
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
+                list = list.filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return sa.canTarget(c);
+                    }
+                });
                 if (list.size() == 0) {
                     if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
                             || (abTgt.getNumTargeted() == 0)) {
