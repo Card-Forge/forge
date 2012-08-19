@@ -114,6 +114,8 @@ Java Issues:
 
 Some people that are using an early version of Java 7 under the Windows OS have reported errors that state "Split must have > 2 children". Anyone having this sort of problem should de-install java 7 and install java 6 instead.
 
+Forge requires java 6 and will not run if you have an earlier version of java. You will need to update to java 6.
+
 
 Card Picture Issues:
 
