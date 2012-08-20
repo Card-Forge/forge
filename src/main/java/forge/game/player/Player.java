@@ -714,7 +714,7 @@ public abstract class Player extends GameEntity {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Inquisitor's Flail")) {
-                if (c.getEquippingCard() != null && c.getEquippingCard().equals(source)) {
+                if (isCombat && c.getEquippingCard() != null && c.getEquippingCard().equals(source)) {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Ghosts of the Innocent")) {

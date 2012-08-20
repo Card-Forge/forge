@@ -8112,7 +8112,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Inquisitor's Flail")) {
-                if (c.getEquippingCard() != null
+                if (isCombat && c.getEquippingCard() != null
                         && (c.getEquippingCard().equals(this) || c.getEquippingCard().equals(source))) {
                     restDamage *= 2;
                 }
