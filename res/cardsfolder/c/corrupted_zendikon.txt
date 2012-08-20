@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Enchantment Aura
 Text:no text
 K:Enchant land
-A:SP$ Attach | Cost$ 1 B | ValidTgts$ Land | AILogic$ Pump
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Land | AILogic$ Animate
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddType$ Creature & Ooze | SetColor$ Black | SetPower$ 3 | SetToughness$ 3 | Description$ Enchanted land is a 3/3 black Ooze creature. It's still a land.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted land is put into a graveyard, return that card to its owner's hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
