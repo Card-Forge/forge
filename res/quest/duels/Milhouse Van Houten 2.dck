@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Milhouse Van Houten 2
+Title=Milhouse Van Houten
+Difficulty=medium
+Description=WG deck with Spellwild Ouphe, Elderwood Scion and spells that target them
+Icon=Milhouse Van Houten.jpg
+Deck Type=constructed
+[main]
+4 Savannah
+4 Windswept Heath
+4 Sunpetal Grove
+2 Plains|M11
+8 Forest|M11
+1 Safewright Quest
+4 Spellwild Ouphe
+4 Elderwood Scion
+4 Eladamri's Call
+3 Wild Defiance
+1 Unquestioned Authority
+3 Shielding Plax
+1 Pentarch Ward
+3 Wildsize
+4 Riding the Dilu Horse
+4 Riding Red Hare
+1 Angelic Blessing
+1 Might of Oaks
+1 Monstrify
+1 Condemn
+1 Naturalize
+1 Swords to Plowshares
+[sideboard]
