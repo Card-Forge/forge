@@ -391,7 +391,10 @@ public class AbilityFactoryAttach {
      */
     public static Card attachGeneralAI(final SpellAbility sa, final CardList list, final boolean mandatory,
             final Card attachSource, final String logic) {
-        final Player prefPlayer = "Pump".equals(logic) ? AllZone.getComputerPlayer() : AllZone.getHumanPlayer();
+        Player prefPlayer = AllZone.getHumanPlayer();
+        if ("Pump".equals(logic) || "Animate".equals(logic) ) {
+            prefPlayer = AllZone.getComputerPlayer();
+        }
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
         final CardList prefList = list.getController(prefPlayer);
@@ -414,6 +417,8 @@ public class AbilityFactoryAttach {
             c = AbilityFactoryAttach.attachAIChangeTypePreference(sa, prefList, mandatory, attachSource);
         } else if ("KeepTapped".equals(logic)) {
             c = AbilityFactoryAttach.attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
+        } else if ("Animate".equals(logic)) {
+            c = AbilityFactoryAttach.attachAIAnimatePreference(sa, prefList, mandatory, attachSource);
         }
 
         return c;
@@ -473,6 +478,43 @@ public class AbilityFactoryAttach {
             if (eval < 130) {
                 return null;
             }
+        }
+
+        return c;
+    }
+
+    /**
+     * Attach ai control preference.
+     * 
+     * @param sa
+     *            the sa
+     * @param list
+     *            the list
+     * @param mandatory
+     *            the mandatory
+     * @param attachSource
+     *            the attach source
+     * @return the card
+     */
+    public static Card attachAIAnimatePreference(final SpellAbility sa, final CardList list, final boolean mandatory,
+            final Card attachSource) {
+        // AI For choosing a Card to Animate.
+        CardList betterList = list.getNotType("Creature");
+        if (sa.getSourceCard().getName().equals("Animate Artifact")) {
+            betterList = betterList.filter(new CardListFilter() {
+                @Override
+                public boolean addCard(final Card c) {
+                    return c.getCMC() > 0;
+                }
+            });
+        }
+
+        final Card c = CardFactoryUtil.getMostExpensivePermanentAI(betterList);
+
+        // If Mandatory (brought directly into play without casting) gotta
+        // choose something
+        if (c == null && mandatory) {
+            return AbilityFactoryAttach.chooseLessPreferred(mandatory, list);
         }
 
         return c;
