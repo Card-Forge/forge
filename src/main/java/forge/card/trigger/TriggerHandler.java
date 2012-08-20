@@ -310,7 +310,7 @@ public class TriggerHandler {
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             String type = (String) runParams.get("Destination");
             Card card = (Card) runParams.get("Card");
-            if (!type.equals("Battlefield") && !allCards.contains(card)) {
+            if (!type.equals("Battlefield") && playerAP.equals(card.getController()) && !allCards.contains(card)) {
                 allCards.add(card);
             }
         }
@@ -332,6 +332,13 @@ public class TriggerHandler {
         // NAP
         allCards = playerAP.getOpponent().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         allCards.addAll(AllZoneUtil.getCardsIn(ZoneType.Stack).getController(playerAP.getOpponent()));
+        if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
+            String type = (String) runParams.get("Destination");
+            Card card = (Card) runParams.get("Card");
+            if (!type.equals("Battlefield") && !playerAP.equals(card.getController()) && !allCards.contains(card)) {
+                allCards.add(card);
+            }
+        }
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
                 if (!t.isStatic()) {

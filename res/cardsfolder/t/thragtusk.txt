@@ -3,8 +3,8 @@ ManaCost:4 G
 Types:Creature Beast
 Text:no text
 PT:5/3
-T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Life | TriggerDescription$ Whenever this creature enters the battlefield, you gain 5 life.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ Token | TriggerDescription$ Whenever this creature leaves the battlefield, put a 3/3 green Beast creature token onto the battlefield
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Life | TriggerDescription$ When CARDNAME enters the battlefield, you gain 5 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ Token | TriggerDescription$ When CARDNAME leaves the battlefield, put a 3/3 green Beast creature token onto the battlefield
 SVar:Token:AB$ Token | Cost$ 0 | TokenOwner$ You | TokenName$ Beast | TokenColors$ Green | TokenTypes$ Creature,Beast | TokenPower$ 3 | TokenToughness$ 3 | TokenAmount$ 1
 SVar:Life:DB$ GainLife | Defined$ You | LifeAmount$ 5
 SVar:Rarity:Rare
