@@ -91,6 +91,17 @@ Fixes/Features:
 - Updated token download list for M13
 - Temporary (possible) fix for unplayable game 2
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- The AI of AF Pump will now check drawbacks (fixes Seeds of Strength).
+- The AI will no longer cheat with Incremental Growth.
+- Fix targeting SubAbility issue incorrect fizzling
+- The AI can now use Clone and similar cards.
+- Set Sealed and Constructed Game Types when starting a new game of that type.
+- Added a fluff piece to the readme.txt file.
+- Fixed AI not using Cunning Advisor.
+- Added some AI for Animate Artifact.
+- Changed AILogic of the Zendikons to Animate.
+- Fixed AI prediction of Inquisitor's Flail.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -116,6 +127,7 @@ Last-Ditch Effort
 Mana Seism
 Renounce
 Scapeshift
+Reprocess
 
 
 end
