@@ -1616,12 +1616,13 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
+                && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
         // Don't tap creatures that may be able to block
-        if (AbilityFactory.waitForBlocking(sa)) {
+        if (AbilityFactory.waitForBlocking(sa) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
