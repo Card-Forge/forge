@@ -617,7 +617,11 @@ public class CardPanel extends JPanel implements CardContainer {
         } else if (card.isCreature()) {
             this.ptText.setText(card.getNetAttack() + "/" + card.getNetDefense());
         } else if (card.isPlaneswalker()) {
-            this.ptText.setText(String.valueOf(card.getCounters(Counters.LOYALTY)));
+            int loyalty = card.getCounters(Counters.LOYALTY);
+            if (loyalty == 0) {
+                loyalty = card.getBaseLoyalty();
+            }
+            this.ptText.setText(String.valueOf(loyalty));
         } else {
             this.ptText.setText("");
         }
