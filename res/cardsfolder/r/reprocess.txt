@@ -1,0 +1,16 @@
+Name:Reprocess
+ManaCost:2 B B
+Types:Sorcery
+Text:no text
+A:SP$ Sacrifice | Cost$ 2 B B | Defined$ You | Amount$ SacX | References$ SacX | SacValid$ Artifact,Creature,Land | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDraw | SpellDescription$ Sacrifice any number of artifacts, creatures, and/or lands. Draw a card for each permanent sacrificed this way.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ DrawX | References$ DrawX | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SacX:Count$Valid Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl
+SVar:DrawX:Remembered$Amount
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reprocess.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/154.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/159.jpg
+Oracle:Sacrifice any number of artifacts, creatures, and/or lands. Draw a card for each permanent sacrificed this way.
+End
