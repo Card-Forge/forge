@@ -546,7 +546,7 @@ public class AbilityFactoryToken extends AbilityFactory {
         } else {
             imageName = this.tokenImage;
         }
-        System.out.println("AF_Token imageName = " + imageName);
+        // System.out.println("AF_Token imageName = " + imageName);
 
         for (final char c : colorDesc.toCharArray()) {
             cost += c + ' ';
