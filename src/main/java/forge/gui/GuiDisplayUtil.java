@@ -35,7 +35,7 @@ import javax.swing.border.Border;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardCharactersticName;
+import forge.CardCharacteristicName;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Constant;
@@ -597,7 +597,7 @@ public final class GuiDisplayUtil {
                 } else if (info.equalsIgnoreCase("SummonSick:True")) {
                     c.setSickness(true);
                 } else if (info.equalsIgnoreCase("FaceDown:True")) {
-                    c.setState(CardCharactersticName.FaceDown);
+                    c.setState(CardCharacteristicName.FaceDown);
                 }
             }
 

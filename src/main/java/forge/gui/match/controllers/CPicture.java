@@ -20,7 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import forge.Card;
-import forge.CardCharactersticName;
+import forge.CardCharacteristicName;
 import forge.Command;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;
@@ -104,12 +104,12 @@ public enum CPicture implements ICDoc {
     public void flipCard() {
         if (flipped) {
             flipped = false;
-            VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard().setState(CardCharactersticName.Original);
+            VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard().setState(CardCharacteristicName.Original);
             CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
         }
         else {
             flipped = true;
-            VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard().setState(CardCharactersticName.Transformed);
+            VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard().setState(CardCharacteristicName.Transformed);
             CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
         }
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setImage();

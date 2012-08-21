@@ -24,7 +24,7 @@ import java.util.Map;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardCharactersticName;
+import forge.CardCharacteristicName;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -473,30 +473,30 @@ public final class AbilityFactoryClone {
 
         if (!copyingSelf) {
             if (tgtCard.isCloned()) { // cloning again
-                tgtCard.switchStates(CardCharactersticName.Cloner, CardCharactersticName.Original);
-                tgtCard.setState(CardCharactersticName.Original);
-                tgtCard.clearStates(CardCharactersticName.Cloner);
+                tgtCard.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
+                tgtCard.setState(CardCharacteristicName.Original);
+                tgtCard.clearStates(CardCharacteristicName.Cloner);
             }
             // add "Cloner" state to clone
-            tgtCard.addAlternateState(CardCharactersticName.Cloner);
-            tgtCard.switchStates(CardCharactersticName.Original, CardCharactersticName.Cloner);
-            tgtCard.setState(CardCharactersticName.Original);
+            tgtCard.addAlternateState(CardCharacteristicName.Cloner);
+            tgtCard.switchStates(CardCharacteristicName.Original, CardCharacteristicName.Cloner);
+            tgtCard.setState(CardCharacteristicName.Original);
         }
         else {
             //copy Original state to Cloned
-            tgtCard.addAlternateState(CardCharactersticName.Cloned);
-            tgtCard.switchStates(CardCharactersticName.Original, CardCharactersticName.Cloned);
+            tgtCard.addAlternateState(CardCharacteristicName.Cloned);
+            tgtCard.switchStates(CardCharacteristicName.Original, CardCharacteristicName.Cloned);
             if (tgtCard.isFlipCard()) {
-                tgtCard.setState(CardCharactersticName.Original);
+                tgtCard.setState(CardCharacteristicName.Original);
             }
         }
 
-        CardCharactersticName stateToCopy = null;
+        CardCharacteristicName stateToCopy = null;
         if (copyingSelf) {
-            stateToCopy = CardCharactersticName.Cloned;
+            stateToCopy = CardCharacteristicName.Cloned;
         }
         else if (cardToCopy.isFlipCard()) {
-            stateToCopy = CardCharactersticName.Original;
+            stateToCopy = CardCharacteristicName.Original;
         }
         else {
             stateToCopy = cardToCopy.getCurState();
@@ -517,10 +517,10 @@ public final class AbilityFactoryClone {
         // state.
         if (cardToCopy.isFlipCard()) {
             if (!copyingSelf) {
-                tgtCard.addAlternateState(CardCharactersticName.Flipped);
-                tgtCard.setState(CardCharactersticName.Flipped);
+                tgtCard.addAlternateState(CardCharacteristicName.Flipped);
+                tgtCard.setState(CardCharacteristicName.Flipped);
             }
-            CardFactoryUtil.copyState(cardToCopy, CardCharactersticName.Flipped, tgtCard);
+            CardFactoryUtil.copyState(cardToCopy, CardCharacteristicName.Flipped, tgtCard);
             addExtraCharacteristics(tgtCard, params, origSVars);
             CardFactoryUtil.addAbilityFactoryAbilities(tgtCard);
             for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {
@@ -534,7 +534,7 @@ public final class AbilityFactoryClone {
             tgtCard.setImageFilename(imageFileName);
 
             if (!tgtCard.isFlipped()) {
-              tgtCard.setState(CardCharactersticName.Original);
+              tgtCard.setState(CardCharacteristicName.Original);
             }
         } else {
             tgtCard.setFlipCard(false);
@@ -542,7 +542,7 @@ public final class AbilityFactoryClone {
 
         //Clean up copy of cloned state
         if (copyingSelf) {
-            tgtCard.clearStates(CardCharactersticName.Cloned);
+            tgtCard.clearStates(CardCharacteristicName.Cloned);
         }
 
         //Clear Remembered and Imprint lists

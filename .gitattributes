@@ -11836,7 +11836,7 @@ src/main/config/support/template.applescript -text
 src/main/java/forge/AllZone.java svneol=native#text/plain
 src/main/java/forge/AllZoneUtil.java svneol=native#text/plain
 src/main/java/forge/Card.java svneol=native#text/plain
-src/main/java/forge/CardCharactersticName.java -text
+src/main/java/forge/CardCharacteristicName.java -text
 src/main/java/forge/CardColor.java svneol=native#text/plain
 src/main/java/forge/CardDamageHistory.java -text
 src/main/java/forge/CardKeywords.java svneol=native#text/plain

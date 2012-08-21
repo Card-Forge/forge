@@ -20,7 +20,7 @@ package forge.card.spellability;
 import java.util.Arrays;
 
 import forge.Card;
-import forge.CardCharactersticName;
+import forge.CardCharacteristicName;
 import forge.CardList;
 import forge.Command;
 import forge.card.CardCharacteristics;
@@ -95,7 +95,7 @@ public class AbilityTriggered extends Ability implements Command {
                 this.restrictions = new String[] { "named " + sourceCard.getName() };
             }
             else {
-                CardCharacteristics origChar = sourceCard.getState(CardCharactersticName.Original);
+                CardCharacteristics origChar = sourceCard.getState(CardCharacteristicName.Original);
                 this.restrictions = new String[] { "named " + origChar.getName() };
             }
         }

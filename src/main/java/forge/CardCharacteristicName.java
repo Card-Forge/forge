@@ -4,7 +4,7 @@ package forge;
  * TODO: Write javadoc for this type.
  *
  */
-public enum CardCharactersticName {
+public enum CardCharacteristicName {
     Original,
     FaceDown,
     Flipped,
@@ -18,7 +18,7 @@ public enum CardCharactersticName {
      * @param substring
      * @return
      */
-    public static CardCharactersticName smartValueOf(String value) {
+    public static CardCharacteristicName smartValueOf(String value) {
         if (value == null) {
             return null;
         }
@@ -26,16 +26,16 @@ public enum CardCharactersticName {
             return null;
         }
         final String valToCompate = value.trim();
-        for (final CardCharactersticName v : CardCharactersticName.values()) {
+        for (final CardCharacteristicName v : CardCharacteristicName.values()) {
             if (v.name().compareToIgnoreCase(valToCompate) == 0) {
                 return v;
             }
         }
         if ("Flip".equalsIgnoreCase(value)) {
-            return CardCharactersticName.Flipped;
+            return CardCharacteristicName.Flipped;
         }
         if ("DoubleFaced".equalsIgnoreCase(value)) {
-            return CardCharactersticName.Transformed;
+            return CardCharacteristicName.Transformed;
         }
 
         throw new IllegalArgumentException("No element named " + value + " in enum CardCharactersticName");

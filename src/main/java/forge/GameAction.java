@@ -149,11 +149,11 @@ public class GameAction {
             lastKnownInfo = CardUtil.getLKICopy(c);
 
             if (c.isCloned()) {
-                c.switchStates(CardCharactersticName.Cloner, CardCharactersticName.Original);
-                c.setState(CardCharactersticName.Original);
-                c.clearStates(CardCharactersticName.Cloner);
+                c.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
+                c.setState(CardCharacteristicName.Original);
+                c.clearStates(CardCharacteristicName.Cloner);
                 if (c.isFlipCard()) {
-                    c.clearStates(CardCharactersticName.Flipped);
+                    c.clearStates(CardCharacteristicName.Flipped);
                 }
             }
             // reset flip status when card leaves battlefield
@@ -231,7 +231,7 @@ public class GameAction {
             if (zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library) || !c.getName().equals("Skullbriar, the Walking Grave")) {
                 copied.clearCounters();
             }
-            copied.setState(CardCharactersticName.Original);
+            copied.setState(CardCharacteristicName.Original);
             // Soulbond unpairing
             if (c.isPaired()) {
                 c.getPairedWith().setPairedWith(null);
@@ -647,7 +647,7 @@ public class GameAction {
         }
 
         if (c.isInAlternateState()) {
-            c.setState(CardCharactersticName.Original);
+            c.setState(CardCharacteristicName.Original);
         }
 
         if ((libPosition == -1) || (libPosition > library.size())) {

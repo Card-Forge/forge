@@ -72,15 +72,15 @@ public class Card extends GameEntity implements Comparable<Card> {
     private static int nextUniqueNumber = 1;
     private int uniqueNumber;
 
-    private final Map<CardCharactersticName, CardCharacteristics> characteristicsMap
-    = new EnumMap<CardCharactersticName, CardCharacteristics>(CardCharactersticName.class);
-    private CardCharactersticName curCharacteristics = CardCharactersticName.Original;
-    private CardCharactersticName preTFDCharacteristic = CardCharactersticName.Original;
+    private final Map<CardCharacteristicName, CardCharacteristics> characteristicsMap
+    = new EnumMap<CardCharacteristicName, CardCharacteristics>(CardCharacteristicName.class);
+    private CardCharacteristicName curCharacteristics = CardCharacteristicName.Original;
+    private CardCharacteristicName preTFDCharacteristic = CardCharacteristicName.Original;
 
     private boolean isDoubleFaced = false;
     private boolean isFlipCard = false;
     private boolean isFlipped = false;
-    private CardCharactersticName otherTransformable = null;
+    private CardCharacteristicName otherTransformable = null;
 
     private ZoneType castFrom = null;
 
@@ -230,8 +230,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public Card() {
         refreshUniqueNumber();
-        this.characteristicsMap.put(CardCharactersticName.Original, new CardCharacteristics());
-        this.characteristicsMap.put(CardCharactersticName.FaceDown, CardUtil.getFaceDownCharacteristic());
+        this.characteristicsMap.put(CardCharacteristicName.Original, new CardCharacteristics());
+        this.characteristicsMap.put(CardCharacteristicName.FaceDown, CardUtil.getFaceDownCharacteristic());
     }
 
     /**
@@ -248,16 +248,16 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            the state
      * @return true, if successful
      */
-    public boolean changeToState(final CardCharactersticName state) {
+    public boolean changeToState(final CardCharacteristicName state) {
 
-        CardCharactersticName cur = this.curCharacteristics;
+        CardCharacteristicName cur = this.curCharacteristics;
 
         if (!setState(state)) {
             return false;
         }
 
-        if ((cur == CardCharactersticName.Original && state == CardCharactersticName.Transformed)
-                || (cur == CardCharactersticName.Transformed && state == CardCharactersticName.Original)) {
+        if ((cur == CardCharacteristicName.Original && state == CardCharacteristicName.Transformed)
+                || (cur == CardCharacteristicName.Transformed && state == CardCharacteristicName.Original)) {
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Transformer", this);
             AllZone.getTriggerHandler().runTrigger(TriggerType.Transformed, runParams);
@@ -273,8 +273,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            the state
      * @return true, if successful
      */
-    public boolean setState(final CardCharactersticName state) {
-        if (state == CardCharactersticName.FaceDown && this.isDoubleFaced) {
+    public boolean setState(final CardCharacteristicName state) {
+        if (state == CardCharacteristicName.FaceDown && this.isDoubleFaced) {
             return false; // Doublefaced cards can't be turned face-down.
         }
 
@@ -297,7 +297,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return the states
      */
-    public Set<CardCharactersticName> getStates() {
+    public Set<CardCharacteristicName> getStates() {
         return this.characteristicsMap.keySet();
     }
 
@@ -306,7 +306,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return the cur state
      */
-    public CardCharactersticName getCurState() {
+    public CardCharacteristicName getCurState() {
         return this.curCharacteristics;
     }
 
@@ -318,7 +318,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param to
      *            the to
      */
-    public void switchStates(final CardCharactersticName from, final CardCharactersticName to) {
+    public void switchStates(final CardCharacteristicName from, final CardCharacteristicName to) {
         final CardCharacteristics tmp = this.characteristicsMap.get(from);
         this.characteristicsMap.put(from, this.characteristicsMap.get(to));
         this.characteristicsMap.put(to, tmp);
@@ -330,7 +330,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param state
      *            the state
      */
-    public void clearStates(final CardCharactersticName state) {
+    public void clearStates(final CardCharacteristicName state) {
         this.characteristicsMap.remove(state);
     }
 
@@ -342,7 +342,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public boolean turnFaceDown() {
         if (!this.isDoubleFaced) {
             this.preTFDCharacteristic = this.curCharacteristics;
-            return this.setState(CardCharactersticName.FaceDown);
+            return this.setState(CardCharacteristicName.FaceDown);
         }
 
         return false;
@@ -354,7 +354,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return true, if successful
      */
     public boolean turnFaceUp() {
-        if (this.curCharacteristics == CardCharactersticName.FaceDown) {
+        if (this.curCharacteristics == CardCharacteristicName.FaceDown) {
             return this.setState(this.preTFDCharacteristic);
         }
 
@@ -367,8 +367,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return true, if is cloned
      */
     public boolean isCloned() {
-        for (final CardCharactersticName state : this.characteristicsMap.keySet()) {
-            if (state == CardCharactersticName.Cloner) {
+        for (final CardCharacteristicName state : this.characteristicsMap.keySet()) {
+            if (state == CardCharacteristicName.Cloner) {
                 return true;
             }
         }
@@ -382,7 +382,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            the state
      * @return the state
      */
-    public CardCharacteristics getState(final CardCharactersticName state) {
+    public CardCharacteristics getState(final CardCharacteristicName state) {
         return this.characteristicsMap.get(state);
     }
 
@@ -401,7 +401,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param state
      *            the state
      */
-    public final void addAlternateState(final CardCharactersticName state) {
+    public final void addAlternateState(final CardCharacteristicName state) {
         this.characteristicsMap.put(state, new CardCharacteristics());
     }
 
@@ -432,8 +432,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return boolean
      */
     public final boolean isInAlternateState() {
-        return this.curCharacteristics != CardCharactersticName.Original
-            && this.curCharacteristics != CardCharactersticName.Cloned;
+        return this.curCharacteristics != CardCharacteristicName.Original
+            && this.curCharacteristics != CardCharacteristicName.Cloned;
     }
 
     /**
@@ -509,7 +509,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a boolean
      */
-    public final CardCharactersticName isTransformable() {
+    public final CardCharacteristicName isTransformable() {
         return this.otherTransformable;
     }
 
@@ -520,7 +520,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param otherTransformable0
      *            a String
      */
-    public final void setTransformable(final CardCharactersticName otherTransformable0) {
+    public final void setTransformable(final CardCharacteristicName otherTransformable0) {
         this.otherTransformable = otherTransformable0;
     }
 
@@ -705,11 +705,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.card.trigger.Trigger} object.
      *
      * @param state
-     *            a {@link forge.CardCharactersticName} object.
+     *            a {@link forge.CardCharacteristicName} object.
      *
      * @return a {@link forge.card.trigger.Trigger} object.
      */
-    public final Trigger addTrigger(final Trigger t, final CardCharactersticName state) {
+    public final Trigger addTrigger(final Trigger t, final CardCharacteristicName state) {
         final Trigger newtrig = t.getCopy();
         newtrig.setHostCard(this);
         CardCharacteristics stateCharacteristics = this.getState(state);
@@ -752,9 +752,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.card.trigger.Trigger} object.
      *
      * @param state
-     *            a {@link forge.CardCharactersticName} object.
+     *            a {@link forge.CardCharacteristicName} object.
      */
-    public final void removeTrigger(final Trigger t, final CardCharactersticName state) {
+    public final void removeTrigger(final Trigger t, final CardCharacteristicName state) {
         CardCharacteristics stateCharacteristics = this.getState(state);
         stateCharacteristics.getTriggers().remove(t);
     }
@@ -2142,8 +2142,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.append("\r\n");
         }
 
-        if (this.characteristicsMap.get(CardCharactersticName.Cloner) != null) {
-            sb.append("\r\nCloned by: ").append(this.characteristicsMap.get(CardCharactersticName.Cloner).getName()).append(" (")
+        if (this.characteristicsMap.get(CardCharacteristicName.Cloner) != null) {
+            sb.append("\r\nCloned by: ").append(this.characteristicsMap.get(CardCharacteristicName.Cloner).getName()).append(" (")
                     .append(this.getUniqueNumber()).append(")");
         }
 
@@ -2826,9 +2826,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      *
      * @param state
-     *            a {@link forge.CardCharactersticName} object.
+     *            a {@link forge.CardCharacteristicName} object.
      */
-    public final void addSpellAbility(final SpellAbility a, final CardCharactersticName state) {
+    public final void addSpellAbility(final SpellAbility a, final CardCharacteristicName state) {
         a.setSourceCard(this);
         CardCharacteristics stateCharacteristics = this.getState(state);
         if (a instanceof AbilityMana) {
@@ -2865,9 +2865,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      *
      * @param state
-     *            a {@link forge.CardCharactersticName} object.
+     *            a {@link forge.CardCharacteristicName} object.
      */
-    public final void removeSpellAbility(final SpellAbility a, final CardCharactersticName state) {
+    public final void removeSpellAbility(final SpellAbility a, final CardCharacteristicName state) {
         CardCharacteristics stateCharacteristics = this.getState(state);
         if (a instanceof AbilityMana) {
             // if (a.isExtrinsic()) //never remove intrinsic mana abilities, is
@@ -2962,7 +2962,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final ArrayList<SpellAbility> getAllSpellAbilities() {
         final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
 
-        for (final CardCharactersticName key : this.characteristicsMap.keySet()) {
+        for (final CardCharacteristicName key : this.characteristicsMap.keySet()) {
             res.addAll(this.getState(key).getSpellAbility());
             res.addAll(this.getState(key).getManaAbility());
         }
@@ -3275,7 +3275,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isFaceDown() {
-        return this.curCharacteristics == CardCharactersticName.FaceDown;
+        return this.curCharacteristics == CardCharacteristicName.FaceDown;
     }
 
     /**
@@ -5551,11 +5551,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            the s
      *
      * @param state
-     *            a {@link forge.CardCharactersticName} object.
+     *            a {@link forge.CardCharacteristicName} object.
      *
      * @return a {@link forge.card.staticability.StaticAbility} object.
      */
-    public final StaticAbility addStaticAbility(final String s, final CardCharactersticName state) {
+    public final StaticAbility addStaticAbility(final String s, final CardCharacteristicName state) {
 
         if (s.trim().length() != 0) {
             final StaticAbility stAb = new StaticAbility(s, this);
@@ -8257,8 +8257,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return true;
     }
 
-    private String curSetCode = "";
-
     /**
      * <p>
      * addSet.
@@ -8303,7 +8301,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link java.lang.String} object.
      */
     public final void setCurSetCode(final String setCode) {
-        this.curSetCode = setCode;
+        this.getCharacteristics().setCurSetCode(setCode);
     }
 
     /**
@@ -8314,7 +8312,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getCurSetCode() {
-        return this.curSetCode;
+        return this.getCharacteristics().getCurSetCode();
     }
 
     /**
@@ -8331,7 +8329,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final EditionInfo si = this.getCharacteristics().getSets()
                 .get(r.nextInt(this.getCharacteristics().getSets().size()));
 
-        this.curSetCode = si.getCode();
+        this.getCharacteristics().setCurSetCode(si.getCode());
     }
 
     /**
@@ -8355,7 +8353,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getCurSetImage() {
-        return this.getSetImageName(this.curSetCode);
+        return this.getSetImageName(this.getCharacteristics().getCurSetCode());
     }
 
     /**
@@ -8367,7 +8365,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final String getCurSetRarity() {
         for (int i = 0; i < this.getCharacteristics().getSets().size(); i++) {
-            if (this.getCharacteristics().getSets().get(i).getCode().equals(this.curSetCode)) {
+            if (this.getCharacteristics().getSets().get(i).getCode().equals(getCharacteristics().getCurSetCode())) {
                 return this.getCharacteristics().getSets().get(i).getRarity();
             }
         }
@@ -8384,7 +8382,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final String getCurSetURL() {
         for (int i = 0; i < this.getCharacteristics().getSets().size(); i++) {
-            if (this.getCharacteristics().getSets().get(i).getCode().equals(this.curSetCode)) {
+            if (this.getCharacteristics().getSets().get(i).getCode().equals(this.getCharacteristics().getCurSetCode())) {
                 return this.getCharacteristics().getSets().get(i).getUrl();
             }
         }

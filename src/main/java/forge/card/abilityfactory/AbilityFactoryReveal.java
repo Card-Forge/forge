@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardCharactersticName;
+import forge.CardCharacteristicName;
 import forge.CardList;
 import forge.CardUtil;
 import forge.GameActionUtil;
@@ -590,7 +590,7 @@ public final class AbilityFactoryReveal {
                                 }
                             }
                             if (params.containsKey("ExileFaceDown")) {
-                                c.setState(CardCharactersticName.FaceDown);
+                                c.setState(CardCharacteristicName.FaceDown);
                             }
                             if (params.containsKey("Imprint")) {
                                 host.addImprinted(c);

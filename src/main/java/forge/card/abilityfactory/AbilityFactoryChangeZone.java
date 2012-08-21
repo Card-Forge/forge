@@ -25,7 +25,7 @@ import java.util.Random;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardCharactersticName;
+import forge.CardCharacteristicName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
@@ -1014,7 +1014,7 @@ public final class AbilityFactoryChangeZone {
                 } else if (destination.equals(ZoneType.Exile)) {
                     movedCard = Singletons.getModel().getGameAction().exile(c);
                     if (params.containsKey("ExileFaceDown")) {
-                        movedCard.setState(CardCharactersticName.FaceDown);
+                        movedCard.setState(CardCharacteristicName.FaceDown);
                     }
                 } else {
                     movedCard = Singletons.getModel().getGameAction().moveTo(destination, c);
@@ -1260,7 +1260,7 @@ public final class AbilityFactoryChangeZone {
             } else if (destination.equals(ZoneType.Exile)) {
                 newCard = Singletons.getModel().getGameAction().exile(c);
                 if (params.containsKey("ExileFaceDown")) {
-                    newCard.setState(CardCharactersticName.FaceDown);
+                    newCard.setState(CardCharacteristicName.FaceDown);
                 }
             } else {
                 newCard = Singletons.getModel().getGameAction().moveTo(destination, c);
@@ -2226,7 +2226,7 @@ public final class AbilityFactoryChangeZone {
                             }
                         }
                         if (params.containsKey("ExileFaceDown")) {
-                            movedCard.setState(CardCharactersticName.FaceDown);
+                            movedCard.setState(CardCharacteristicName.FaceDown);
                         }
                     }
                 }
@@ -2877,7 +2877,7 @@ public final class AbilityFactoryChangeZone {
             } else {
                 final Card movedCard = Singletons.getModel().getGameAction().moveTo(destination, c, libraryPos);
                 if (params.containsKey("ExileFaceDown")) {
-                    movedCard.setState(CardCharactersticName.FaceDown);
+                    movedCard.setState(CardCharacteristicName.FaceDown);
                 }
                 if (params.containsKey("Tapped")) {
                     movedCard.setTapped(true);

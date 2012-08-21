@@ -53,6 +53,7 @@ public class CardCharacteristics {
     private String imageName = "";
     private ArrayList<EditionInfo> sets = new ArrayList<EditionInfo>();
     private Map<String, String> sVars = new TreeMap<String, String>();
+    private String curSetCode = "";
 
     /**
      * Gets the name.
@@ -485,6 +486,21 @@ public class CardCharacteristics {
         this.sets = source.getSets();
         // Map<String, String> sVars
         this.sVars = new TreeMap<String, String>(source.getSVars());
+        // String curSetCode = "";
+        this.curSetCode = source.getCurSetCode();
+    }
 
+    /**
+     * @return the curSetCode
+     */
+    public String getCurSetCode() {
+        return curSetCode;
+    }
+
+    /**
+     * @param curSetCode0 the curSetCode to set
+     */
+    public void setCurSetCode(String curSetCode0) {
+        this.curSetCode = curSetCode0;
     }
 }

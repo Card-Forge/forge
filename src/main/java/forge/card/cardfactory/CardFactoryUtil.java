@@ -31,7 +31,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardCharactersticName;
+import forge.CardCharacteristicName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
@@ -3925,8 +3925,8 @@ public class CardFactoryUtil {
         c.setDoubleFaced(sim.isDoubleFaced());
         c.setCurSetCode(sim.getCurSetCode());
 
-        final CardCharactersticName origState = sim.getCurState();
-        for (final CardCharactersticName state : sim.getStates()) {
+        final CardCharacteristicName origState = sim.getCurState();
+        for (final CardCharacteristicName state : sim.getStates()) {
             c.addAlternateState(state);
             c.setState(state);
             sim.setState(state);
@@ -3980,10 +3980,9 @@ public class CardFactoryUtil {
      * @param to
      *            the to
      */
-    public static void copyState(final Card from, final CardCharactersticName stateToCopy, final Card to) {
+    public static void copyState(final Card from, final CardCharacteristicName stateToCopy, final Card to) {
 
         // copy characteristics not associated with a state
-        to.setCurSetCode(from.getCurSetCode());
         to.setBaseLoyalty(from.getBaseLoyalty());
         to.setBaseAttackString(from.getBaseAttackString());
         to.setBaseDefenseString(from.getBaseDefenseString());

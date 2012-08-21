@@ -909,9 +909,9 @@ public final class CardUtil {
         if (c.isToken()) {
             return c;
         }
-        final CardCharactersticName state = c.getCurState();
+        final CardCharacteristicName state = c.getCurState();
         if (c.isInAlternateState()) {
-            c.setState(CardCharactersticName.Original);
+            c.setState(CardCharacteristicName.Original);
         }
         final Card res = AllZone.getCardFactory().copyCard(c);
         c.setState(state);

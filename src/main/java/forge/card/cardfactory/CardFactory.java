@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import forge.AllZone;
 import forge.Card;
-import forge.CardCharactersticName;
+import forge.CardCharacteristicName;
 import forge.CardReader;
 import forge.CardUtil;
 import forge.Singletons;
@@ -96,18 +96,18 @@ public class CardFactory implements CardFactoryInterface {
      */
     @Override
     public final Card copyCard(final Card in) {
-        final CardCharactersticName curState = in.getCurState();
+        final CardCharacteristicName curState = in.getCurState();
         if (in.isInAlternateState()) {
-            in.setState(CardCharactersticName.Original);
+            in.setState(CardCharacteristicName.Original);
         }
         final Card out = this.getCard(CardDb.instance().getCard(in), in.getOwner());
         out.setUniqueNumber(in.getUniqueNumber());
 
         CardFactoryUtil.copyCharacteristics(in, out);
         if (in.hasAlternateState()) {
-            for (final CardCharactersticName state : in.getStates()) {
+            for (final CardCharacteristicName state : in.getStates()) {
                 in.setState(state);
-                if (state == CardCharactersticName.Cloner) {
+                if (state == CardCharacteristicName.Cloner) {
                     out.addAlternateState(state);
                 }
                 out.setState(state);
@@ -221,13 +221,13 @@ public class CardFactory implements CardFactoryInterface {
 
             if (c.hasAlternateState()) {
                 if (c.isFlipCard()) {
-                    c.setState(CardCharactersticName.Flipped);
+                    c.setState(CardCharacteristicName.Flipped);
                 }
                 if (c.isDoubleFaced()) {
-                    c.setState(CardCharactersticName.Transformed);
+                    c.setState(CardCharacteristicName.Transformed);
                 }
                 c.setImageFilename(CardUtil.buildFilename(c));
-                c.setState(CardCharactersticName.Original);
+                c.setState(CardCharacteristicName.Original);
             }
         }
         // else throw "Unsupported card";
@@ -264,8 +264,8 @@ public class CardFactory implements CardFactoryInterface {
 
         CardFactoryUtil.parseKeywords(card, cardName);
 
-        for (final CardCharactersticName state : card.getStates()) {
-            if (card.isDoubleFaced() && state == CardCharactersticName.FaceDown) {
+        for (final CardCharacteristicName state : card.getStates()) {
+            if (card.isDoubleFaced() && state == CardCharacteristicName.FaceDown) {
                 continue; // Ignore FaceDown for DFC since they have none.
             }
             card.setState(state);
@@ -278,7 +278,7 @@ public class CardFactory implements CardFactoryInterface {
             }
         }
 
-        card.setState(CardCharactersticName.Original);
+        card.setState(CardCharacteristicName.Original);
 
         // ******************************************************************
         // ************** Link to different CardFactories *******************

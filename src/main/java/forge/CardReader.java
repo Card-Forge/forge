@@ -336,7 +336,7 @@ public class CardReader {
         } // while !End
 
         if (card.isInAlternateState()) {
-            card.setState(CardCharactersticName.Original);
+            card.setState(CardCharacteristicName.Original);
         }
 
         return card;
@@ -348,11 +348,11 @@ public class CardReader {
         switch(firstCh) { // this is a simple state machine to gain some performance
         case 'A':
             if (line.equals("ALTERNATE")) {
-                CardCharactersticName mode;
+                CardCharacteristicName mode;
                 if (card.isFlipCard()) {
-                    mode = CardCharactersticName.Flipped;
+                    mode = CardCharacteristicName.Flipped;
                 } else if (card.isDoubleFaced()) {
-                    mode = CardCharactersticName.Transformed;
+                    mode = CardCharacteristicName.Transformed;
                 } else {
                     mode = card.isTransformable();
                 }
@@ -362,10 +362,10 @@ public class CardReader {
                 card.addIntrinsicAbility(line.substring(2));
             } else if (line.startsWith("AlternateMode")) {
                 //System.out.println(card.getName());
-                final CardCharactersticName value = CardCharactersticName.smartValueOf(line.substring("AlternateMode:".length()));
-                if (value == CardCharactersticName.Flipped) {
+                final CardCharacteristicName value = CardCharacteristicName.smartValueOf(line.substring("AlternateMode:".length()));
+                if (value == CardCharacteristicName.Flipped) {
                     card.setFlipCard(true);
-                } else if (value == CardCharactersticName.Transformed) {
+                } else if (value == CardCharacteristicName.Transformed) {
                     card.setDoubleFaced(true);
                 } else {
                     card.setTransformable(value);

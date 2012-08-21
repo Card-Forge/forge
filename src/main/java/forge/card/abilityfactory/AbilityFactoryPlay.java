@@ -25,7 +25,7 @@ import java.util.Random;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardCharactersticName;
+import forge.CardCharacteristicName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.GameActionUtil;
@@ -420,7 +420,7 @@ public final class AbilityFactoryPlay {
                 }
             }
             if (tgtCard.isFaceDown()) {
-                tgtCard.setState(CardCharactersticName.Original);
+                tgtCard.setState(CardCharacteristicName.Original);
                 wasFaceDown = true;
             }
             final StringBuilder sb = new StringBuilder();
@@ -429,7 +429,7 @@ public final class AbilityFactoryPlay {
                     && !GameActionUtil.showYesNoDialog(source, sb.toString())) {
                 // i--;  // This causes an infinite loop (ArsenalNut)
                 if (wasFaceDown) {
-                    tgtCard.setState(CardCharactersticName.FaceDown);
+                    tgtCard.setState(CardCharacteristicName.FaceDown);
                 }
                 continue;
             }

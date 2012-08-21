@@ -26,7 +26,7 @@ import java.util.Random;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardCharactersticName;
+import forge.CardCharacteristicName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
@@ -392,11 +392,11 @@ public final class AbilityFactoryCopy {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
 
                 boolean wasInAlt = false;
-                CardCharactersticName stateName = CardCharactersticName.Original;
+                CardCharacteristicName stateName = CardCharacteristicName.Original;
                 if (c.isInAlternateState()) {
                     stateName = c.getCurState();
                     wasInAlt = true;
-                    c.setState(CardCharactersticName.Original);
+                    c.setState(CardCharacteristicName.Original);
                 }
 
                 // start copied Kiki code
@@ -445,22 +445,22 @@ public final class AbilityFactoryCopy {
 
                     if (c.isDoubleFaced()) { // Cloned DFC's can't transform
                         if (wasInAlt) {
-                            copy.setState(CardCharactersticName.Transformed);
+                            copy.setState(CardCharacteristicName.Transformed);
                         }
                     }
                     if (c.isFlipCard()) { // Cloned Flips CAN flip.
-                        copy.setState(CardCharactersticName.Original);
-                        c.setState(CardCharactersticName.Original);
+                        copy.setState(CardCharacteristicName.Original);
+                        c.setState(CardCharacteristicName.Original);
                         copy.setImageFilename(c.getImageFilename());
                         if (!c.isInAlternateState()) {
-                            copy.setState(CardCharactersticName.Flipped);
+                            copy.setState(CardCharacteristicName.Flipped);
                         }
 
-                        c.setState(CardCharactersticName.Flipped);
+                        c.setState(CardCharacteristicName.Flipped);
                     }
 
                     if (c.isFaceDown()) {
-                        c.setState(CardCharactersticName.FaceDown);
+                        c.setState(CardCharacteristicName.FaceDown);
                     }
                     copy = Singletons.getModel().getGameAction().moveToPlay(copy);
 

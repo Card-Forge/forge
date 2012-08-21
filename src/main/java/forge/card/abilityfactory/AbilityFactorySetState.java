@@ -24,7 +24,7 @@ import java.util.Map;
 
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardCharactersticName;
+import forge.CardCharacteristicName;
 import forge.CardList;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -268,14 +268,14 @@ public class AbilityFactorySetState {
                         continue;
                     }
                     if (tgt.isDoubleFaced()) {
-                        if (tgt.getCurState() == CardCharactersticName.Original) {
-                            if (tgt.changeToState(CardCharactersticName.Transformed)) {
+                        if (tgt.getCurState() == CardCharacteristicName.Original) {
+                            if (tgt.changeToState(CardCharacteristicName.Transformed)) {
                                 if (remChanged) {
                                     abilityFactory.getHostCard().addRemembered(tgt);
                                 }
                             }
-                        } else if (tgt.getCurState() == CardCharactersticName.Transformed) {
-                            if (tgt.changeToState(CardCharactersticName.Original)) {
+                        } else if (tgt.getCurState() == CardCharacteristicName.Transformed) {
+                            if (tgt.changeToState(CardCharacteristicName.Original)) {
                                 if (remChanged) {
                                     abilityFactory.getHostCard().addRemembered(tgt);
                                 }
@@ -285,16 +285,16 @@ public class AbilityFactorySetState {
                     }
                 } else if (mode.equals("Flip")) {
                     if (tgt.isFlipCard()) {
-                        if (tgt.getCurState() == CardCharactersticName.Original) {
-                            if (tgt.changeToState(CardCharactersticName.Flipped)) {
+                        if (tgt.getCurState() == CardCharacteristicName.Original) {
+                            if (tgt.changeToState(CardCharacteristicName.Flipped)) {
                                 abilityFactory.getHostCard().setFlipStaus(true);
                                 if (remChanged) {
                                     abilityFactory.getHostCard().addRemembered(tgt);
                                 }
                             }
 
-                        } else if (tgt.getCurState() == CardCharactersticName.Flipped) {
-                            if (tgt.changeToState(CardCharactersticName.Original)) {
+                        } else if (tgt.getCurState() == CardCharacteristicName.Flipped) {
+                            if (tgt.changeToState(CardCharacteristicName.Original)) {
                                 abilityFactory.getHostCard().setFlipStaus(false);
                                 if (remChanged) {
                                     abilityFactory.getHostCard().addRemembered(tgt);
@@ -303,18 +303,18 @@ public class AbilityFactorySetState {
                         }
                     }
                 } else if (mode.equals("TurnFace")) {
-                    if (tgt.getCurState() == CardCharactersticName.Original) {
+                    if (tgt.getCurState() == CardCharacteristicName.Original) {
                         if (tgt.turnFaceDown() && remChanged) {
                             abilityFactory.getHostCard().addRemembered(tgt);
                         }
-                    } else if (tgt.getCurState() == CardCharactersticName.FaceDown) {
+                    } else if (tgt.getCurState() == CardCharacteristicName.FaceDown) {
                         if (tgt.turnFaceUp() && remChanged) {
                             abilityFactory.getHostCard().addRemembered(tgt);
                         }
                     }
                 }
             } else {
-                tgt.changeToState(CardCharactersticName.smartValueOf(abilityFactory.getMapParams().get("NewState")));
+                tgt.changeToState(CardCharacteristicName.smartValueOf(abilityFactory.getMapParams().get("NewState")));
             }
 
         }
@@ -490,12 +490,12 @@ public class AbilityFactorySetState {
                         continue;
                     }
                     if (list.get(i).isDoubleFaced()) {
-                        if (list.get(i).getCurState() == CardCharactersticName.Original) {
-                            if (list.get(i).changeToState(CardCharactersticName.Transformed) && remChanged) {
+                        if (list.get(i).getCurState() == CardCharacteristicName.Original) {
+                            if (list.get(i).changeToState(CardCharacteristicName.Transformed) && remChanged) {
                                 abilityFactory.getHostCard().addRemembered(list.get(i));
                             }
-                        } else if (list.get(i).getCurState() == CardCharactersticName.Transformed) {
-                            if (list.get(i).changeToState(CardCharactersticName.Original)) {
+                        } else if (list.get(i).getCurState() == CardCharacteristicName.Transformed) {
+                            if (list.get(i).changeToState(CardCharacteristicName.Original)) {
                                 if (remChanged) {
                                     abilityFactory.getHostCard().addRemembered(list.get(i));
                                 }
@@ -505,15 +505,15 @@ public class AbilityFactorySetState {
                     }
                 } else if (mode.equals("Flip")) {
                     if (list.get(i).isFlipCard()) {
-                        if (list.get(i).getCurState() == CardCharactersticName.Original) {
-                            if (list.get(i).changeToState(CardCharactersticName.Flipped)) {
+                        if (list.get(i).getCurState() == CardCharacteristicName.Original) {
+                            if (list.get(i).changeToState(CardCharacteristicName.Flipped)) {
                                 list.get(i).setFlipStaus(true);
                                 if (remChanged) {
                                     abilityFactory.getHostCard().addRemembered(tgt);
                                 }
                             }
-                        } else if (list.get(i).getCurState() == CardCharactersticName.Flipped) {
-                            if (list.get(i).changeToState(CardCharactersticName.Original)) {
+                        } else if (list.get(i).getCurState() == CardCharacteristicName.Flipped) {
+                            if (list.get(i).changeToState(CardCharacteristicName.Original)) {
                                 list.get(i).setFlipStaus(false);
                                 if (remChanged) {
                                     abilityFactory.getHostCard().addRemembered(tgt);
@@ -522,18 +522,18 @@ public class AbilityFactorySetState {
                         }
                     }
                 } else if (mode.equals("TurnFace")) {
-                    if (list.get(i).getCurState() == CardCharactersticName.Original) {
+                    if (list.get(i).getCurState() == CardCharacteristicName.Original) {
                         if (list.get(i).turnFaceDown() && remChanged) {
                             abilityFactory.getHostCard().addRemembered(tgt);
                         }
-                    } else if (list.get(i).getCurState() == CardCharactersticName.FaceDown) {
+                    } else if (list.get(i).getCurState() == CardCharacteristicName.FaceDown) {
                         if (list.get(i).turnFaceUp() && remChanged) {
                             abilityFactory.getHostCard().addRemembered(tgt);
                         }
                     }
                 }
             } else {
-                list.get(i).changeToState(CardCharactersticName.smartValueOf(abilityFactory.getMapParams().get("NewState")));
+                list.get(i).changeToState(CardCharacteristicName.smartValueOf(abilityFactory.getMapParams().get("NewState")));
             }
 
         }
