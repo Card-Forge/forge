@@ -705,7 +705,7 @@ public class ComputerUtilAttack {
                 && AllZone.getHumanPlayer().canLoseLife()) {
             turnsUntilDeathByUnblockable = AllZone.getHumanPlayer().getLife() / unblockableDamage;
         }
-        if (unblockableDamage > AllZone.getHumanPlayer().getLife()) {
+        if (unblockableDamage > AllZone.getHumanPlayer().getLife() && AllZone.getHumanPlayer().canLoseLife()) {
             doUnblockableAttack = true;
         }
         // *****************
