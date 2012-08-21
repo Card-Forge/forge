@@ -76,21 +76,23 @@ public class GameNew {
         Card.resetUniqueNumber();
 
         PlayerZone humanBf = human.getZone(ZoneType.Battlefield);
-        
-        for (final Card c : humanStart) {
-            humanBf.add(c, false);
-            c.setSickness(true);
-            c.setStartsGameInPlay(true);
-            c.refreshUniqueNumber();
+        if (humanStart != null) {
+            for (final Card c : humanStart) {
+                humanBf.add(c, false);
+                c.setSickness(true);
+                c.setStartsGameInPlay(true);
+                c.refreshUniqueNumber();
+            }
         }
 
         PlayerZone aiBf = AllZone.getComputerPlayer().getZone(ZoneType.Battlefield);
-        
-        for (final Card c : computerStart) {
-            aiBf.add(c, false);
-            c.setSickness(true);
-            c.setStartsGameInPlay(true);
-            c.refreshUniqueNumber();
+        if (computerStart != null) {        
+            for (final Card c : computerStart) {
+                aiBf.add(c, false);
+                c.setSickness(true);
+                c.setStartsGameInPlay(true);
+                c.refreshUniqueNumber();
+            }
         }
 
         GameNew.actuateGame(humanDeck, computerDeck);
@@ -107,17 +109,7 @@ public class GameNew {
      *            &emsp; {@link forge.deck.Deck} object.
      */
     public static void newGame(final Deck humanDeck, final Deck computerDeck) {
-        Singletons.getControl().changeState(FControl.MATCH_SCREEN);
-        CMatchUI.SINGLETON_INSTANCE.initMatch(null);
-
-        GameNew.newGameCleanup();
-        GameNew.newMatchCleanup();
-
-        AllZone.getComputerPlayer().setStartingLife(20);
-        AllZone.getHumanPlayer().setStartingLife(20);
-
-        Card.resetUniqueNumber();
-        GameNew.actuateGame(humanDeck, computerDeck);
+        newGame(humanDeck, computerDeck, null, null, 20, 20, null);
     }
 
     /**
@@ -264,11 +256,13 @@ public class GameNew {
             if (Singletons.getModel().getGameAction().isStartCut()) {
                 GameNew.seeWhoPlaysFirst();
             } else {
-                GameNew.seeWhoPlaysFirstCoinToss();
+                GameNew.seeWhoPlaysFirstDice();
             }
         } else if (Singletons.getModel().getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             // if player won last, AI starts
-            GameNew.computerStartsGame();
+            GameNew.computerPlayOrDraw("Computer lost the last game.");
+        } else {
+            GameNew.humanPlayOrDraw("Human lost the last game.");
         }
 
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
@@ -311,8 +305,6 @@ public class GameNew {
         gs.setGameSummary(
                 new GameSummary(gs.getHumanPlayer().getName(), gs.getComputerPlayer().getName()));
 
-        gs.getHumanPlayer().reset();
-        gs.getComputerPlayer().reset();
         gs.getPhaseHandler().reset();
         gs.getStack().reset();
         gs.getCombat().reset();
@@ -320,6 +312,7 @@ public class GameNew {
         gs.setGameOver(false);
 
         for (final Player p : gs.getPlayers()) {
+            p.reset();
             for (final ZoneType z : Player.ALL_ZONES) {
                 p.getZone(z).reset();
             }
@@ -424,36 +417,22 @@ public class GameNew {
      * seeWhoPlaysFirstCoinToss.
      * </p>
      */
-    private static void seeWhoPlaysFirstCoinToss() {
-        final Object[] possibleValues = { ForgeProps.getLocalized(GameActionText.HEADS),
-                ForgeProps.getLocalized(GameActionText.TAILS) };
-        final Object q = JOptionPane.showOptionDialog(null, ForgeProps.getLocalized(GameActionText.HEADS_OR_TAILS),
-                ForgeProps.getLocalized(GameActionText.COIN_TOSS), JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
-
-        final int flip = MyRandom.getRandom().nextInt(2);
-        String humanFlip = " ";
-        String computerFlip = " ";
-        // JOptionPane.showMessageDialog(null, q, "",
-        // JOptionPane.INFORMATION_MESSAGE);
-        if (q.equals(0)) {
-            humanFlip = ForgeProps.getLocalized(GameActionText.HEADS);
-            computerFlip = ForgeProps.getLocalized(GameActionText.TAILS);
-        } else {
-            humanFlip = ForgeProps.getLocalized(GameActionText.TAILS);
-            computerFlip = ForgeProps.getLocalized(GameActionText.HEADS);
+    private static void seeWhoPlaysFirstDice() {
+        int playerDie = 0;
+        int computerDie = 0;
+        
+        while (playerDie == computerDie) {
+            playerDie = MyRandom.getRandom().nextInt(20);
+            computerDie = MyRandom.getRandom().nextInt(20);
         }
-
-        if (((flip == 0) && q.equals(0)) || ((flip == 1) && q.equals(1))) {
-            JOptionPane.showMessageDialog(null, humanFlip + "\r\n" + ForgeProps.getLocalized(GameActionText.HUMAN_WIN),
-                    "", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            GameNew.computerStartsGame();
-            JOptionPane.showMessageDialog(null,
-                    computerFlip + "\r\n" + ForgeProps.getLocalized(GameActionText.COMPUTER_WIN), "",
-                    JOptionPane.INFORMATION_MESSAGE);
+        
+        if (playerDie > computerDie) {
+            humanPlayOrDraw(dieRollMessage(playerDie, computerDie));
         }
-    } // seeWhoPlaysFirst_CoinToss()
+        else {
+            computerPlayOrDraw(dieRollMessage(playerDie, computerDie));
+        }
+    } // seeWhoPlaysFirstDice()
 
     /**
      * <p>
@@ -541,4 +520,34 @@ public class GameNew {
         Singletons.getModel().getGameState().getPhaseHandler().setPlayerTurn(computer);
         // AllZone.getGameInfo().setPlayerWhoGotFirstTurn(computer.getName());
     }
+    
+    private static String dieRollMessage(int playerDie, int computerDie) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Human has rolled a: ");
+        sb.append(playerDie);
+        sb.append(". ");
+        sb.append("Computer has rolled a: ");
+        sb.append(computerDie);
+        sb.append(".");
+        return sb.toString();
+    }
+    
+    private static void humanPlayOrDraw(String message) {
+        final Object[] possibleValues = { "Play", "Draw" };
+        
+        final Object playDraw = JOptionPane.showOptionDialog(null, message + "\n\nWould you like to play or draw?", 
+                "Play or Draw?", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, 
+                possibleValues, possibleValues[0]);
+        
+        if (playDraw.equals(1)) {
+            computerStartsGame();
+        }
+    }
+    
+    private static void computerPlayOrDraw(String message) {
+        JOptionPane.showMessageDialog(null, message + "\nComputer Going First", 
+                "Play or Draw?", JOptionPane.INFORMATION_MESSAGE);
+        
+        computerStartsGame();
+    }  
 }
