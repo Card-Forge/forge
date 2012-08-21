@@ -631,8 +631,8 @@ public class AbilityFactoryCounters {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            // chance &= subAb.doTrigger(mandatory);
+        if (subAb != null && !subAb.chkAIDrawback()) {
+            return false;
         }
 
         return true;

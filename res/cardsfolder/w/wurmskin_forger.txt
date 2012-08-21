@@ -7,6 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Tgt$ TgtC | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter2
 SVar:PutCounter2:DB$PutCounter | Tgt$ TgtC | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter3
 SVar:PutCounter3:DB$PutCounter | Tgt$ TgtC | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurmskin_forger.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/140.jpg
