@@ -542,11 +542,11 @@ public class AbilityFactoryToken extends AbilityFactory {
             }
         }
         if (this.tokenImage.equals("")) {
-            imageName += colorDesc.trim() + " " + this.tokenPower + " " + this.tokenToughness + " " + this.tokenName;
+            imageName += colorDesc.replace(" ", "") + " " + this.tokenPower + " " + this.tokenToughness + " " + this.tokenName;
         } else {
             imageName = this.tokenImage;
         }
-        // System.out.println("AF_Token imageName = " + imageName);
+        System.out.println("AF_Token imageName = " + imageName);
 
         for (final char c : colorDesc.toCharArray()) {
             cost += c + ' ';
