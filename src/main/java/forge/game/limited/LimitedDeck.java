@@ -63,6 +63,7 @@ public class LimitedDeck {
      */
     public LimitedDeck(List<CardPrinted> list) {
         this.availableList = list;
+        this.deckColors = new DeckColors();
         removeUnplayables();
         findBasicLandSets();
     }
