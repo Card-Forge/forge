@@ -1211,10 +1211,10 @@ public class AbilityFactoryPump {
             tgts.addAll(tgt.getTargetPlayers());
         } else {
             if (params.containsKey("Defined")) {
-                tgts.addAll(AbilityFactory.getDefinedPlayers(this.hostCard, this.params.get("Defined"), sa));
+                tgts.addAll(AbilityFactory.getDefinedPlayers(sa.getSourceCard(), this.params.get("Defined"), sa));
             }
             if (tgts.isEmpty()) {
-                tgts.addAll(AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa));
+                tgts.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), this.params.get("Defined"), sa));
             }
         }
 
@@ -1303,10 +1303,10 @@ public class AbilityFactoryPump {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             if (params.containsKey("Defined")) {
-                tgtPlayers = AbilityFactory.getDefinedPlayers(this.hostCard, this.params.get("Defined"), sa);
+                tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), this.params.get("Defined"), sa);
             }
             if (tgtPlayers.isEmpty()) {
-                tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
+                tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), this.params.get("Defined"), sa);
             }
         }
 
