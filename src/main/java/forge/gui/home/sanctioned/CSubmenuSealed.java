@@ -165,21 +165,17 @@ public enum CSubmenuSealed implements ICDoc {
         final Object o = GuiUtils.chooseOne(prompt, sealedTypes.toArray());
 
         SealedDeckFormat sd = null;
-        SealedDeckFormat sd2 = null;
 
         if (o.toString().equals(sealedTypes.get(0))) {
             sd = new SealedDeckFormat("Full");
-            sd2 = new SealedDeckFormat("Full");
         }
 
         else if (o.toString().equals(sealedTypes.get(1))) {
             sd = new SealedDeckFormat("Block");
-            sd2 = sd;
         }
 
         else if (o.toString().equals(sealedTypes.get(2))) {
             sd = new SealedDeckFormat("Custom");
-            sd2 = sd;
         }
         else {
             throw new IllegalStateException("choice <<" + TextUtil.safeToString(o)
@@ -202,7 +198,7 @@ public enum CSubmenuSealed implements ICDoc {
         // May check for name uniqueness here
 
         final ItemPool<CardPrinted> sDeck = sd.getCardpool();
-        final ItemPool<CardPrinted> sDeck2 = sd2.getCardpool();
+        final ItemPool<CardPrinted> sDeck2 = sd.getCardpool();
 
         final Deck deck = new Deck(sDeckName);
         deck.getSideboard().addAll(sDeck);
