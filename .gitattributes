@@ -11782,7 +11782,7 @@ res/quest/themes/White.thm -text
 res/quest/themes/Wolves[!!-~]WG.thm -text
 res/quest/themes/Zombies[!!-~]B.thm -text
 res/reprintSetInfo.py svneol=native#text/x-python
-res/sealed/juzamjedi.zsealed -text
+res/sealed/juzamjedi.sealed -text
 res/setInfoScript.py svneol=native#text/x-python
 res/skins/dark_ascension/bg_match.jpg -text
 res/skins/dark_ascension/bg_splash.png -text
