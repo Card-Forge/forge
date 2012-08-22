@@ -8,6 +8,7 @@ K:Evoke:3 W
 SVar:TrigPutCounterAll:DB$PutCounterAll | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select a player | ValidCards$ Creature | CounterType$ P1P1 | CounterNum$ 1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meadowboon.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/17.jpg
