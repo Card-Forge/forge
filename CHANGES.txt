@@ -119,6 +119,14 @@ Fixes/Features:
 - For triggers with no Valid Target Candidates, just cancel them instead of asking for targets.
 - Fixed Tetravus
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed sealed format with full cardpool giving both players the same cards.
+- Renamed juzamjedi.zsealed to juzamjedi.sealed.
+- Added SVar:RemAIDeck:True to Pursuit of Knowledge.
+- Fixed AI of Soul Parry.
+- Added SVar:RemAIDeck:True to Ghazban Ogre and Meadowboon.
+- Fixed combination of Necrotic Ooze and Viashino Slasher.
+- Fixed some more instances of using the host card of the AF instead of the source card of the SA.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
