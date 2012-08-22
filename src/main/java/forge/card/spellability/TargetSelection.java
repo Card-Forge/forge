@@ -213,6 +213,13 @@ public class TargetSelection {
                 return this.subSelection.chooseTargets();
             }
         }
+        
+        if (!this.target.hasCandidates(this.ability, true)) {
+            // Cancel ability if there aren't any valid Candidates
+            this.bCancel = true;
+            this.req.finishedTargeting();
+            return false;
+        }
 
         this.chooseValidInput();
 
