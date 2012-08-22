@@ -269,7 +269,7 @@ public class AbilityFactoryGainControl {
         if ((tgt != null) && !this.params.containsKey("Defined")) {
             tgtCards = tgt.getTargetCards();
         } else {
-            tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
+            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), this.params.get("Defined"), sa);
         }
 
         ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
@@ -332,7 +332,7 @@ public class AbilityFactoryGainControl {
         }
 
         CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        list = list.getValidCards(tgt.getValidTgts(), this.hostCard.getController(), this.hostCard);
+        list = list.getValidCards(tgt.getValidTgts(), sa.getSourceCard().getController(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
         list = list.filter(new CardListFilter() {
@@ -424,7 +424,7 @@ public class AbilityFactoryGainControl {
         } else if ((tgt != null) && !this.params.containsKey("Defined")) {
             tgtCards.addAll(tgt.getTargetCards());
         } else {
-            tgtCards.addAll(AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa));
+            tgtCards.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), this.params.get("Defined"), sa));
         }
 
         ArrayList<Player> controllers = new ArrayList<Player>();
@@ -441,7 +441,7 @@ public class AbilityFactoryGainControl {
             if (sa.isSpell()) {
                 newController = sa.getActivatingPlayer();
             } else {
-                newController = this.hostCard;
+                newController = sa.getSourceCard();
             }
         } else {
             newController = controllers.get(0);
@@ -452,8 +452,8 @@ public class AbilityFactoryGainControl {
             final Card tgtC = tgtCards.get(j);
             final Player originalController = tgtC.getController();
 
-            if (!tgtC.equals(this.hostCard) && !this.hostCard.getGainControlTargets().contains(tgtC)) {
-                this.hostCard.addGainControlTarget(tgtC);
+            if (!tgtC.equals(sa.getSourceCard()) && !sa.getSourceCard().getGainControlTargets().contains(tgtC)) {
+                sa.getSourceCard().addGainControlTarget(tgtC);
             }
 
             if (AllZoneUtil.isCardInPlay(tgtC)) {
@@ -477,13 +477,13 @@ public class AbilityFactoryGainControl {
 
             if (this.lose != null) {
                 if (this.lose.contains("LeavesPlay")) {
-                    this.hostCard.addLeavesPlayCommand(this.getLoseControlCommand(tgtC, originalController, newController));
+                    sa.getSourceCard().addLeavesPlayCommand(this.getLoseControlCommand(tgtC, originalController, newController));
                 }
                 if (this.lose.contains("Untap")) {
-                    this.hostCard.addUntapCommand(this.getLoseControlCommand(tgtC, originalController, newController));
+                    sa.getSourceCard().addUntapCommand(this.getLoseControlCommand(tgtC, originalController, newController));
                 }
                 if (this.lose.contains("LoseControl")) {
-                    this.hostCard.addChangeControllerCommand(this.getLoseControlCommand(tgtC, originalController, newController));
+                    sa.getSourceCard().addChangeControllerCommand(this.getLoseControlCommand(tgtC, originalController, newController));
                 }
                 if (this.lose.contains("EOT")) {
                     AllZone.getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, originalController, newController));
@@ -492,18 +492,18 @@ public class AbilityFactoryGainControl {
 
             if (this.destroyOn != null) {
                 if (this.destroyOn.contains("LeavesPlay")) {
-                    this.hostCard.addLeavesPlayCommand(this.getDestroyCommand(tgtC));
+                    sa.getSourceCard().addLeavesPlayCommand(this.getDestroyCommand(tgtC));
                 }
                 if (this.destroyOn.contains("Untap")) {
-                    this.hostCard.addUntapCommand(this.getDestroyCommand(tgtC));
+                    sa.getSourceCard().addUntapCommand(this.getDestroyCommand(tgtC));
                 }
                 if (this.destroyOn.contains("LoseControl")) {
-                    this.hostCard.addChangeControllerCommand(this.getDestroyCommand(tgtC));
+                    sa.getSourceCard().addChangeControllerCommand(this.getDestroyCommand(tgtC));
                 }
             }
 
-            this.hostCard.clearGainControlReleaseCommands();
-            this.hostCard.addGainControlReleaseCommand(this.getLoseControlCommand(tgtC, originalController, newController));
+            sa.getSourceCard().clearGainControlReleaseCommands();
+            sa.getSourceCard().addGainControlReleaseCommand(this.getLoseControlCommand(tgtC, originalController, newController));
 
         } // end foreach target
     }
@@ -843,7 +843,7 @@ public class AbilityFactoryGainControl {
         tgt.resetTargets();
 
         CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), this.hostCard);
+        list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
         list = list.filter(new CardListFilter() {
@@ -858,7 +858,7 @@ public class AbilityFactoryGainControl {
             object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa).get(0);
         } else if (tgt.getMinTargets(sa.getSourceCard(), sa) > 1) {
             CardList list2 = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            list2 = list2.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), this.hostCard);
+            list2 = list2.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), sa.getSourceCard());
             object2 = CardFactoryUtil.getWorstAI(list2);
             tgt.addTarget(object2);
         }

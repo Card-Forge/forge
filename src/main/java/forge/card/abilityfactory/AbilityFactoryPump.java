@@ -260,7 +260,7 @@ public class AbilityFactoryPump {
      * @return a int.
      */
     private int getNumAttack(final SpellAbility sa) {
-        return AbilityFactory.calculateAmount(this.hostCard, this.numAttack, sa);
+        return AbilityFactory.calculateAmount(sa.getSourceCard(), this.numAttack, sa);
     }
 
     /**
@@ -273,7 +273,7 @@ public class AbilityFactoryPump {
      * @return a int.
      */
     private int getNumDefense(final SpellAbility sa) {
-        return AbilityFactory.calculateAmount(this.hostCard, this.numDefense, sa);
+        return AbilityFactory.calculateAmount(sa.getSourceCard(), this.numDefense, sa);
     }
 
     /**
@@ -753,19 +753,19 @@ public class AbilityFactoryPump {
     private boolean pumpPlayAI(final SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
 
-        if (!CostUtil.checkLifeCost(cost, this.hostCard, 4)) {
+        if (!CostUtil.checkLifeCost(cost, sa.getSourceCard(), 4)) {
             return false;
         }
 
-        if (!CostUtil.checkDiscardCost(cost, this.hostCard)) {
+        if (!CostUtil.checkDiscardCost(cost, sa.getSourceCard())) {
             return false;
         }
 
-        if (!CostUtil.checkCreatureSacrificeCost(cost, this.hostCard)) {
+        if (!CostUtil.checkCreatureSacrificeCost(cost, sa.getSourceCard())) {
             return false;
         }
 
-        if (!CostUtil.checkRemoveCounterCost(cost, this.hostCard)) {
+        if (!CostUtil.checkRemoveCounterCost(cost, sa.getSourceCard())) {
             return false;
         }
 
@@ -1164,12 +1164,12 @@ public class AbilityFactoryPump {
         }
 
         if ((this.abilityFactory.getAbTgt() == null) || !this.abilityFactory.getAbTgt().doesTarget()) {
-            if (this.hostCard.isCreature()) {
-                if (!this.hostCard.hasKeyword("Indestructible")
-                        && ((this.hostCard.getNetDefense() + defense) <= this.hostCard.getDamage())) {
+            if (source.isCreature()) {
+                if (!source.hasKeyword("Indestructible")
+                        && ((source.getNetDefense() + defense) <= source.getDamage())) {
                     return false;
                 }
-                if ((this.hostCard.getNetDefense() + defense) <= 0) {
+                if ((source.getNetDefense() + defense) <= 0) {
                     return false;
                 }
             }
@@ -1315,13 +1315,13 @@ public class AbilityFactoryPump {
         }
 
         if (pumpRemembered != null) {
-            for (final Object o : AbilityFactory.getDefinedObjects(this.hostCard, pumpRemembered, sa)) {
-                this.hostCard.addRemembered(o);
+            for (final Object o : AbilityFactory.getDefinedObjects(sa.getSourceCard(), pumpRemembered, sa)) {
+                sa.getSourceCard().addRemembered(o);
             }
         }
 
         if (this.params.containsKey("Radiance")) {
-            for (final Card c : CardUtil.getRadiance(this.hostCard, tgtCards.get(0), this.params.get("ValidTgts")
+            for (final Card c : CardUtil.getRadiance(sa.getSourceCard(), tgtCards.get(0), this.params.get("ValidTgts")
                     .split(","))) {
                 untargetedCards.add(c);
             }
@@ -1602,7 +1602,7 @@ public class AbilityFactoryPump {
     private boolean pumpAllCanPlayAI(final SpellAbility sa) {
         String valid = "";
         final Random r = MyRandom.getRandom();
-        // final Card source = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
         this.params = this.abilityFactory.getMapParams();
         final int power = this.getNumAttack(sa);
         final int defense = this.getNumDefense(sa);
@@ -1616,9 +1616,9 @@ public class AbilityFactoryPump {
         }
 
         CardList comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        comp = comp.getValidCards(valid, this.hostCard.getController(), this.hostCard);
+        comp = comp.getValidCards(valid, source.getController(), source);
         CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        human = human.getValidCards(valid, this.hostCard.getController(), this.hostCard);
+        human = human.getValidCards(valid, source.getController(), source);
 
         final Target tgt = sa.getTarget();
         if (tgt != null && sa.canTarget(AllZone.getHumanPlayer()) && params.containsKey("IsCurse")) {
