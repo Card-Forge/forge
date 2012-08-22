@@ -102,6 +102,23 @@ Fixes/Features:
 - Changed AILogic of the Zendikons to Animate.
 - Fixed AI prediction of Inquisitor's Flail.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the deck Milhouse Van Houten 2.
+- Fixed double triggering of some ChangeZone triggers.
+- When Planeswalkers are in your Hand, display their Base Loyalty
+- Change the Starting coin flip to two die rolls to remove useless choice.
+- Added Play/Draw option for the Human (Computer will always Play first)
+- Added Alpha Strike button (temporarily using the Settings icon)
+- Fixed a possible NPE in hasProperty.
+- Added a new icon for the alpha strike button.
+- Fixed multicolor tokens not generating image names correctly
+- Commented out the console output of generated token names that I used for testing
+- Spellcheck ;P CardCharactersticName -> CardCharacter/i/sticName.
+- Moved curSetCode to CardCharacteristic. Fixes clone Set crash.
+- Little tweak of AI attacking checks.
+- Fixed AI of Wurmskin Forger.
+- For triggers with no Valid Target Candidates, just cancel them instead of asking for targets.
+- Fixed Tetravus
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
