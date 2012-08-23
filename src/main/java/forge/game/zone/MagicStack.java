@@ -755,7 +755,7 @@ public class MagicStack extends MyObservable {
             }
         }
 
-        if ((sp instanceof SpellPermanent) && sp.getSourceCard().getName().equals("Mana Vortex")) {
+        /*if ((sp instanceof SpellPermanent) && sp.getSourceCard().getName().equals("Mana Vortex")) {
             final SpellAbility counter = new Ability(sp.getSourceCard(), "0") {
                 @Override
                 public void resolve() {
@@ -805,7 +805,7 @@ public class MagicStack extends MyObservable {
                     + " - counter Mana Vortex unless you sacrifice a land.");
 
             this.add(counter);
-        }
+        }*/
 
         /*
          * Whenever a player casts a spell, counter it if a card with the same
