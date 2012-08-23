@@ -5,7 +5,7 @@ Text:A deck can have any number of cards named Relentless Rats.
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +1/+1 for each other creature on the battlefield named Relentless Rats.
 SVar:X:Count$Valid Creature.namedRelentless Rats+Other
-SVar:RemRandomDeck:True
+SVar:BuffedBy:Creature.namedRelentless Rats
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73573.jpg

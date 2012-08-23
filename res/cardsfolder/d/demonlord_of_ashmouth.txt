@@ -5,11 +5,8 @@ Text:no text
 PT:5/4
 K:Flying
 K:Undying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, exile it unless you sacrifice another creature.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Amount$ 1 | SacValid$ Creature.Other | RememberSacrificed$ True | Optional$ True | SubAbility$ DBExileMe
-SVar:DBExileMe:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup | References$ X
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExileUnless | TriggerDescription$ When CARDNAME enters the battlefield, exile it unless you sacrifice another creature.
+SVar:TrigExileUnless:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile | UnlessCost$ Sac<1/Creature.Other/other creature> | UnlessPayer$ You
 SVar:NeedsToPlay:Creature.cmcLE2+YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonlord_of_ashmouth.jpg
