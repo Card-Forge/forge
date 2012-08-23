@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Enchantment
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCounter  | TriggerDescription$ When you cast CARDNAME, counter it unless you sacrifice a land.
-SVar:TrigCounter:AB$Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | UnlessCost$ Sac<1/Land> | UnlessPayer$ You 
+SVar:TrigCounter:AB$ Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | UnlessCost$ Sac<1/Land> | UnlessPayer$ You 
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a land.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ TriggeredPlayer | SacMessage$ land
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Land | PresentCompare$ EQ0 | Execute$ TrigSacSelf | TriggerDescription$ When there are no lands on the battlefield, sacrifice CARDNAME.

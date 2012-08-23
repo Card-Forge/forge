@@ -941,6 +941,7 @@ res/cardsfolder/b/blood_crypt.txt svneol=native#text/plain
 res/cardsfolder/b/blood_cultist.txt svneol=native#text/plain
 res/cardsfolder/b/blood_feud.txt -text
 res/cardsfolder/b/blood_frenzy.txt svneol=native#text/plain
+res/cardsfolder/b/blood_funnel.txt -text
 res/cardsfolder/b/blood_hound.txt svneol=native#text/plain
 res/cardsfolder/b/blood_knight.txt svneol=native#text/plain
 res/cardsfolder/b/blood_lust.txt -text
