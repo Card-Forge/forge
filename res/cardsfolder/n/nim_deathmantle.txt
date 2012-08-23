@@ -5,8 +5,9 @@ Text:no text
 K:Equip 4
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Intimidate | AddType$ Zombie | RemoveCreatureTypes$ True | SetColor$ Black | Description$ Equipped creature gets +2/+2, has intimidate, and is a black Zombie. 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouOwn | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay 4. If you do, return that card to the battlefield and attach CARDNAME to it.
-SVar:TrigReturn:AB$ChangeZone | Cost$ 4 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBAttach
-SVar:DBAttach:DB$ Attach | Cost$ 0 | Defined$ TriggeredCard
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 4 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | RememberChanged$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Cost$ 0 | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_deathmantle.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/188.jpg
