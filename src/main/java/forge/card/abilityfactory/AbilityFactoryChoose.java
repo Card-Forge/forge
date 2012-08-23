@@ -1305,13 +1305,15 @@ public final class AbilityFactoryChoose {
         final ArrayList<Player> choices = params.containsKey("Choices") ? AbilityFactory.getDefinedPlayers(
                 sa.getSourceCard(), params.get("Choices"), sa) : new ArrayList<Player>(AllZone.getPlayersInGame());
 
+        final String choiceDesc = params.containsKey("ChoiceTitle") ? params.get("ChoiceTitle") : "Choose a player";
+
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (p.isHuman()) {
                     // Was if (sa.getActivatingPlayer().isHuman()) but defined player was being
                     // overwritten by activatingPlayer (or controller if no activator was set).
                     // Revert if it causes issues and remove Goblin Festival from card database.
-                    final Object o = GuiUtils.chooseOne("Choose a player", choices.toArray());
+                    final Object o = GuiUtils.chooseOne(choiceDesc, choices.toArray());
                     if (null == o) {
                         return;
                     }

@@ -6788,6 +6788,20 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (!shares) {
                     return false;
                 }
+
+            } else if (restriction.equals("Remembered")) {
+                boolean shares = false;
+                for (final Object rem : source.getRemembered()) {
+                    if (rem instanceof Card) {
+                        final Card card = (Card) rem;
+                        if (this.getName().equals(card.getName())) {
+                            shares = true;
+                        }
+                    }
+                }
+                if (!shares) {
+                    return false;
+                }
             }
 
         } else if (property.startsWith("SecondSpellCastThisTurn")) {

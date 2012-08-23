@@ -828,24 +828,32 @@ public class AbilityFactoryZoneAffecting {
             sb.append(conditionDesc).append(" ");
         }
 
-        for (final Player p : tgtPlayers) {
-            sb.append(p.toString()).append(" ");
-        }
+        if (params.containsKey("StackDescription")) {
+            if (params.get("StackDescription").equals("None")) {
+                sb.append("");
+            } else {
+            sb.append(params.get("StackDescription"));
+            }
+        } else {
+            for (final Player p : tgtPlayers) {
+                sb.append(p.toString()).append(" ");
+            }
 
-        final ZoneType dest = ZoneType.smartValueOf(params.get("Destination"));
-        if ((dest == null) || dest.equals(ZoneType.Graveyard)) {
-            sb.append("mills ");
-        } else if (dest.equals(ZoneType.Exile)) {
-            sb.append("exiles ");
-        } else if (dest.equals(ZoneType.Ante)) {
-            sb.append("antes ");
+            final ZoneType dest = ZoneType.smartValueOf(params.get("Destination"));
+            if ((dest == null) || dest.equals(ZoneType.Graveyard)) {
+                sb.append("mills ");
+            } else if (dest.equals(ZoneType.Exile)) {
+                sb.append("exiles ");
+            } else if (dest.equals(ZoneType.Ante)) {
+                sb.append("antes ");
+            }
+            sb.append(numCards);
+            sb.append(" card");
+            if (numCards != 1) {
+                sb.append("s");
+            }
+            sb.append(" from the top of his or her library.");
         }
-        sb.append(numCards);
-        sb.append(" card");
-        if (numCards != 1) {
-            sb.append("s");
-        }
-        sb.append(" from the top of his or her library.");
 
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
