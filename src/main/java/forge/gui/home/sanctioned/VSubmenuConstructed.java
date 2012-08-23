@@ -48,12 +48,12 @@ public enum VSubmenuConstructed implements IVSubmenu {
     private final JRadioButton radColorsHuman = new FRadioButton("Fully random color deck");
     private final JRadioButton radThemesHuman = new FRadioButton("Semi-random theme deck");
     private final JRadioButton radCustomHuman = new FRadioButton("Custom user deck");
-    private final JRadioButton radQuestsHuman = new FRadioButton("Quest event deck");
+    private final JRadioButton radQuestsHuman = new FRadioButton("Quest opponent deck");
 
     private final JRadioButton radColorsAI = new FRadioButton("Fully random color deck");
     private final JRadioButton radThemesAI = new FRadioButton("Semi-random theme deck");
     private final JRadioButton radCustomAI = new FRadioButton("Custom user deck");
-    private final JRadioButton radQuestsAI = new FRadioButton("Quest event deck");
+    private final JRadioButton radQuestsAI = new FRadioButton("Quest opponent deck");
 
     private final JCheckBox cbSingletons = new FCheckBox("Singleton Mode");
     private final JCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
