@@ -14,7 +14,7 @@ ALTERNATE
 
 Name:Tovolar's Magehunter
 ManaCost:no cost
-Colors:Red
+Colors:red
 Types:Creature Werewolf
 Text:no text
 PT:5/5

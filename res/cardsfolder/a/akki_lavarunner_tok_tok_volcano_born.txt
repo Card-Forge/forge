@@ -15,7 +15,7 @@ ALTERNATE
 
 Name:Tok-Tok, Volcano Born
 ManaCost:3 R
-Colors:Red
+Colors:red
 Types:Legendary Creature Goblin Shaman
 Text:no text
 PT:2/2
