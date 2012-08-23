@@ -93,6 +93,16 @@ public class SealedDeckFormat {
                 setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[2], sets[2], sets[2], sets[0], sets[0], sets[0]));
                 setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[2], sets[2], sets[1], sets[1], sets[0], sets[0]));
             }
+            if (sets.length >= 4) {
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[3], sets[2], sets[1], sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[3], sets[2], sets[1], sets[1], sets[0], sets[0]));
+            }
+            if (sets.length >= 5) {
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[4], sets[3], sets[2], sets[1], sets[0], sets[0]));
+            }
+            if (sets.length >= 6) {
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
+            }
 
             if (sets.length > 1) {
                 final Object p = GuiUtils.chooseOne("Choose Set Combination", setCombos.toArray());
