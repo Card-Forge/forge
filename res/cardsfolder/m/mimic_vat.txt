@@ -7,8 +7,8 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Graveyard
 SVar:DBCleanup:DB$Cleanup | ClearImprinted$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ChangeZone | Cost$ 0 | Imprint$ True | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCard | ChangeNum$ 1
 A:AB$CopyPermanent | Cost$ 3 T | Defined$ Imprinted | SubAbility$ DBPump | SpellDescription$ Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
-SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ Clones |  KW$ Haste | Permanent$ True | SubAbility$ DBPump2
-SVar:DBPump2:DB$ Pump | Cost$ 0 | Defined$ Clones |  KW$ HIDDEN At the beginning of the end step, exile CARDNAME.
+SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ Clones | KW$ Haste | Permanent$ True | SubAbility$ DBPump2
+SVar:DBPump2:DB$ Pump | Cost$ 0 | Defined$ Clones | KW$ HIDDEN At the beginning of the end step, exile CARDNAME. | Permanent$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mimic_vat.jpg

@@ -4,7 +4,7 @@ Types:Instant Trap
 Text:no text
 A:SP$ ChangeZone | Cost$ 4 B B | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ NemesisToken | SpellDescription$ Exile target attacking creature. Put a token that's a copy of that creature onto the battlefield. Exile it at the beginning of the next end step.
 A:SP$ ChangeZone | Cost$ B B | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ NemesisToken | IsPresent$ Creature.White+attacking | SpellDescription$ If a white creature is attacking, you may pay B B rather than pay CARDNAME's mana cost.
-SVar:NemesisToken:DB$CopyPermanent | Defined$ Targeted | AtEOT$ Exile
+SVar:NemesisToken:DB$ CopyPermanent | Defined$ Targeted | AtEOT$ Exile
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nemesis_trap.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/91.jpg

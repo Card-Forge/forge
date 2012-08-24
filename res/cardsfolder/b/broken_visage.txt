@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Instant
 Text:no text
 A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Creature.attacking+nonArtifact | TgtPrompt$ Select target nonartifact attacking creature | NoRegen$ True  | SpellDescription$ Destroy target nonartifact attacking creature. It can't be regenerated. Put a black Spirit creature token with that creature's power and toughness onto the battlefield. Sacrifice the token at the beginning of the next end step. | SubAbility$ DBToken
-SVar:DBToken:DB$Token | Defined$Targeted | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ Black | TokenPower$ dX | TokenToughness$ dY | TokenKeywords$ At the beginning of the end step, sacrifice CARDNAME. | References$ dX,dY 
+SVar:DBToken:DB$Token | Defined$Targeted | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ Black | TokenPower$ dX | TokenToughness$ dY | TokenKeywords$ HIDDEN At the beginning of the end step, sacrifice CARDNAME. | References$ dX,dY 
 SVar:dX:Targeted$CardPower
 SVar:dY:Targeted$CardToughness
 SVar:Rarity:Rare
