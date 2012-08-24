@@ -2017,6 +2017,87 @@ public class CardFactoryUtil {
 
     /**
      * <p>
+     * multiplyCost.
+     * </p>
+     * 
+     * @param manacost
+     *            a {@link java.lang.String} object.
+     * @param multiplier
+     *            a int.
+     * @return a {@link java.lang.String} object.
+     */
+    public static String multiplyCost(final String manacost, final int multiplier) {
+        if (multiplier == 0) {
+            return "";
+        }
+        if (multiplier == 1) {
+            return manacost;
+        }
+
+        final String[] tokenized = manacost.split("\\s");
+        final StringBuilder sb = new StringBuilder();
+
+        if (Character.isDigit(tokenized[0].charAt(0))) {
+            // cost starts with "colorless" number cost
+            int cost = Integer.parseInt(tokenized[0]);
+            cost = multiplier * cost;
+            tokenized[0] = "" + cost;
+            sb.append(tokenized[0]);
+        } else {
+            if (tokenized[0].contains("<")) {
+                final String[] advCostPart = tokenized[0].split("<");
+                final String costVariable = advCostPart[1].split(">")[0];
+                final String[] advCostPartValid = costVariable.split("\\/", 2);
+                // multiply the number part of the cost object
+                int num = Integer.parseInt(advCostPartValid[0]);
+                num = multiplier * num;
+                tokenized[0] = advCostPart[0] + "<" + num;
+                if (advCostPartValid.length > 1) {
+                    tokenized[0] = tokenized[0] + "/" + advCostPartValid[1];
+                }
+                tokenized[0] = tokenized[0] + ">";
+                sb.append(tokenized[0]);
+            } else {
+                for (int i = 0; i < multiplier; i++) {
+                    // tokenized[0] = tokenized[0] + " " + tokenized[0];
+                    sb.append((" "));
+                    sb.append(tokenized[0]);
+                }
+            }
+        }
+
+        for (int i = 1; i < tokenized.length; i++) {
+            if (tokenized[i].contains("<")) {
+                final String[] advCostParts = tokenized[i].split("<");
+                final String costVariables = advCostParts[1].split(">")[0];
+                final String[] advCostPartsValid = costVariables.split("\\/", 2);
+                // multiply the number part of the cost object
+                int num = Integer.parseInt(advCostPartsValid[0]);
+                num = multiplier * num;
+                tokenized[i] = advCostParts[0] + "<" + num;
+                if (advCostPartsValid.length > 1) {
+                    tokenized[i] = tokenized[i] + "/" + advCostPartsValid[1];
+                }
+                tokenized[i] = tokenized[i] + ">";
+                sb.append((" "));
+                sb.append(tokenized[i]);
+            } else {
+                for (int j = 0; j < multiplier; j++) {
+                    // tokenized[i] = tokenized[i] + " " + tokenized[i];
+                    sb.append((" "));
+                    sb.append(tokenized[i]);
+                }
+            }
+        }
+
+        String result = sb.toString();
+        System.out.println("result: " + result);
+        result = result.trim();
+        return result;
+    }
+
+    /**
+     * <p>
      * isTargetStillValid.
      * </p>
      * 

@@ -2230,11 +2230,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                     String k = keyword.get(i);
                     k = k.replace("Curse", "");
                     sbLong.append(k).append("\r\n");
-                } else if (keyword.get(i).startsWith("Soulshift") || keyword.get(i).startsWith("Cumulative upkeep")
+                } else if (keyword.get(i).startsWith("Soulshift") || keyword.get(i).startsWith("Devour")
                         || keyword.get(i).startsWith("Echo") || keyword.get(i).startsWith("Fading")
                         || keyword.get(i).startsWith("Ripple") || keyword.get(i).startsWith("Unearth")
-                        || keyword.get(i).startsWith("Vanishing") || keyword.get(i).startsWith("Madness")
-                        || keyword.get(i).startsWith("Devour")) {
+                        || keyword.get(i).startsWith("Vanishing") || keyword.get(i).startsWith("Madness")) {
                     String k = keyword.get(i);
                     k = k.replace(":", " ");
                     sbLong.append(k).append("\r\n");
@@ -2251,6 +2250,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                         sbLong.append("\r\n");
                     }
+                } else if (keyword.get(i).startsWith("Cumulative upkeep")) {
+                    sbLong.append("Cumulative upkeep ");
+                    final String[] upkeepCostParams = keyword.get(i).split(":");
+                    final String cost = upkeepCostParams[1];
+                    final String costDesc = upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : cost;
+                    sbLong.append(costDesc);
+                    sbLong.append("\r\n");
                 } else if (keyword.get(i).startsWith("Champion")) {
                     final String k = this.getKeyword().get(i);
                     final String[] kk = k.split(":");

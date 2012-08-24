@@ -344,7 +344,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     if (ability.startsWith("Cumulative upkeep")) {
                         final String[] k = ability.split(":");
                         c.addCounter(Counters.AGE, 1);
-                        cost = CardFactoryUtil.multiplyManaCost(k[1], c.getCounters(Counters.AGE));
+                        cost = CardFactoryUtil.multiplyCost(k[1], c.getCounters(Counters.AGE));
                         sb.append("Cumulative upkeep for ").append(c).append("\n");
                     }
 
@@ -367,7 +367,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand,
+                                GameActionUtil.payCostDuringAbilityResolve(sb.toString(), c, upkeepCost, paidCommand,
                                         unpaidCommand);
                             } else { // computer
                                 if (ComputerUtil.canPayCost(aiPaid)) {

@@ -385,6 +385,22 @@ public final class GameActionUtil {
             }
             return;
         }
+        else if (manaCost.startsWith("AddCounter")) {
+            String amountString = manaCost.split("<")[1].split("\\/")[0];
+            String counterName = manaCost.split("<")[1].split("\\/")[1].split(">")[0];
+            Counters counterType = Counters.valueOf(counterName);
+            int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                    : CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amountString));
+            String plural = amount > 1 ? "s" : "";
+            if (hostCard.canHaveCountersPlacedOnIt(counterType) && showYesNoDialog(hostCard, "Do you want to put "
+                    + amount + " " + counterType.getName() + " counter" + plural + " on " + hostCard + "?")) {
+                hostCard.addCounterFromNonEffect(counterType, amount);
+                paid.execute();
+            } else {
+                unpaid.execute();
+            }
+            return;
+        }
         if (manaCost.equals("0")) {
             if (showYesNoDialog(hostCard, "Do you want to pay 0?")) {
                 paid.execute();
