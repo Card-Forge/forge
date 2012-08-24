@@ -392,10 +392,16 @@ public final class GameActionUtil {
             int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                     : CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amountString));
             String plural = amount > 1 ? "s" : "";
-            if (hostCard.canHaveCountersPlacedOnIt(counterType) && showYesNoDialog(hostCard, "Do you want to put "
-                    + amount + " " + counterType.getName() + " counter" + plural + " on " + hostCard + "?")) {
-                hostCard.addCounterFromNonEffect(counterType, amount);
-                paid.execute();
+            if (showYesNoDialog(hostCard, "Do you want to put " + amount + " " + counterType.getName()
+                    + " counter" + plural + " on " + hostCard + "?")) {
+                if (hostCard.canHaveCountersPlacedOnIt(counterType)) {
+                    hostCard.addCounterFromNonEffect(counterType, amount);
+                    paid.execute();
+                } else {
+                    unpaid.execute();
+                    AllZone.getGameLog().add("ResolveStack", "Trying to pay upkeep for " + hostCard + " but it can't have "
+                    + counterType.getName() + " counters put on it.", 2);
+                }
             } else {
                 unpaid.execute();
             }
