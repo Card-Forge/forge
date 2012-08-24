@@ -6,7 +6,8 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifa
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Bird | Keywords$ Flying
 A:AB$ Animate | Cost$ W | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Bird | Keywords$ Flying | SpellDescription$ CARDNAME becomes a 2/2 Bird artifact creature with flying until end of turn.
 SVar:BuffedBy:Artifact
-DeckHints:Color$white
+SVar:RemRandomDeck:True
+DeckNeeds:Color$white
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_hawk_idol.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/156.jpg

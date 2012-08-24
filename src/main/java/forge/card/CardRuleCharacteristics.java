@@ -36,6 +36,7 @@ public class CardRuleCharacteristics {
     private Map<String, CardInSet> setsData = new TreeMap<String, CardInSet>();
     private String dlUrl;
     private DeckHints deckHints;
+    private DeckHints deckNeeds;
     private final List<String> keywords = new ArrayList<String>();
 
     /**
@@ -191,6 +192,19 @@ public class CardRuleCharacteristics {
 
     public DeckHints getDeckHints() {
         return deckHints;
+    }
+
+    /**
+     * Set the deck hints.
+     * 
+     * @param valueAfterKey
+     */
+    public void setDeckNeeds(String valueAfterKey) {
+        deckNeeds = new DeckHints(valueAfterKey);
+    }
+
+    public DeckHints getDeckNeeds() {
+        return deckNeeds;
     }
 
     /**

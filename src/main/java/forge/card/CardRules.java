@@ -377,6 +377,13 @@ public final class CardRules {
     }
 
     /**
+     * @return the deckHints
+     */
+    public DeckHints getDeckNeeds() {
+        return characteristics.getDeckNeeds();
+    }
+
+    /**
      * @return the keywords
      */
     public List<String> getKeywords() {

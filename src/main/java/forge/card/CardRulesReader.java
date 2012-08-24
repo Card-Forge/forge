@@ -107,6 +107,8 @@ public class CardRulesReader {
             case 'D':
                 if (line.startsWith("DeckHints:")) {
                     this.characteristics[this.curCharacteristics].setDeckHints(CardRulesReader.getValueAfterKey(line, "DeckHints:"));
+                } else if (line.startsWith("DeckNeeds:")) {
+                    this.characteristics[this.curCharacteristics].setDeckNeeds(CardRulesReader.getValueAfterKey(line, "DeckNeeds:"));
                 }
                 break;
 

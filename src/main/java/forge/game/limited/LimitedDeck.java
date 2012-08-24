@@ -437,6 +437,7 @@ public class LimitedDeck {
      */
     private int addComboCards(CardPrinted cardToAdd, int num) {
         boolean foundOne = false;
+        // cards with DeckHints will try to grab additional cards from the pool 
         if (cardToAdd.getCard().getDeckHints() != null
                 && cardToAdd.getCard().getDeckHints().getType() != DeckHints.Type.NONE) {
             DeckHints hints = cardToAdd.getCard().getDeckHints();
@@ -461,6 +462,16 @@ public class LimitedDeck {
                 }
             }
             foundOne |= !hints.filter(deckList).isEmpty();
+        }
+        // cards with DeckNeeds need the combo cards in the deck already 
+        if (cardToAdd.getCard().getDeckNeeds() != null
+                && cardToAdd.getCard().getDeckNeeds().getType() != DeckHints.Type.NONE) {
+            DeckHints hints = cardToAdd.getCard().getDeckNeeds();
+            List<CardPrinted> comboCards = hints.filter(deckList);
+            if (Constant.Runtime.DEV_MODE[0]) {
+                System.out.println("Found " + comboCards.size() + " cards for " + cardToAdd.getName());
+            }
+            foundOne = !comboCards.isEmpty();
         }
         // remove cards with RemRandomDeck that do not have combo partners
         if (!foundOne && cardToAdd.getCard().getRemRandomDecks()) {
