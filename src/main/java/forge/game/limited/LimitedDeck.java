@@ -436,6 +436,7 @@ public class LimitedDeck {
      * @return number left after adding
      */
     private int addComboCards(CardPrinted cardToAdd, int num) {
+        boolean foundOne = false;
         if (cardToAdd.getCard().getDeckHints() != null
                 && cardToAdd.getCard().getDeckHints().getType() != DeckHints.Type.NONE) {
             DeckHints hints = cardToAdd.getCard().getDeckHints();
@@ -454,11 +455,20 @@ public class LimitedDeck {
                     deckList.add(combo);
                     num--;
                     getAiPlayables().remove(combo);
+                    foundOne = true;
                 } else {
                     break;
                 }
             }
+            foundOne |= !hints.filter(deckList).isEmpty();
         }
+        // remove cards with RemRandomDeck that do not have combo partners
+        if (!foundOne && cardToAdd.getCard().getRemRandomDecks()) {
+            deckList.remove(cardToAdd);
+            availableList.add(cardToAdd);
+            num++;
+        }
+        
         return num;
     }
 
