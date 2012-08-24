@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Dr Watson 1
+Title=Dr Watson
+Difficulty=easy
+Description=Mono G Forest deck with land fetch, People of the Woods and Treefolk Seedlings
+Icon=Dr Watson.jpg
+Deck Type=constructed
+[main]
+24 Forest|M12
+1 Clear the Land
+1 Cultivate
+1 Deep Reconnaissance
+1 Elvish Pioneer
+1 Explosive Vegetation
+1 Far Wanderings
+1 Farhaven Elf
+1 Hunting Cheetah
+1 Khalni Heart Expedition
+1 Quirion Trailblazer
+1 Rampant Growth
+1 Ranger's Path
+1 Seedguide Ash
+1 Silverglade Elemental
+1 Untamed Wilds
+1 Wood Elves
+1 Aspect of Wolf
+1 Beacon of Creation
+1 Bountiful Harvest
+1 Coiling Woodworm
+1 Deadfall
+1 Fruition
+1 Greener Pastures
+1 Joyous Respite
+1 Lost in the Woods
+4 People of the Woods
+1 Timbermaw Larva
+3 Traproot Kami
+3 Treefolk Seedlings
+[sideboard]

@@ -3,33 +3,34 @@
 Name=Sherlock Holmes 3
 Title=Sherlock Holmes
 Difficulty=hard
-Description=Mono G deck with Baru, Fist of Krosa and lots of great green creatures
+Description=Mono G deck with Primalcrux, Bellowing Tanglewurm and lots of green creatures
 Icon=Sherlock Holmes.jpg
 Deck Type=constructed
 [main]
-21 Forest|M12
+22 Forest|M12
 1 Mox Emerald
-1 Emerald Medallion
-3 Three Visits
-4 Baru, Fist of Krosa
-1 Crabapple Cohort
-1 Drove of Elves
-1 Howl of the Night Pack
+2 Bellowing Tanglewurm
+1 Champion of Lambholt
+1 Cloudthresher
+1 Crushing Vines
+1 Fyndhorn Elves
+4 Garruk's Companion
 1 Kaysa
-3 Khalni Hydra
-1 Meng Huo, Barbarian King
-3 Nettle Sentinel
-1 Reach of Branches
-1 Roughshod Mentor
-1 Jugan, the Rising Star
+1 Khalni Hydra
 1 Kodama of the North Tree
+2 Llanowar Elves
 4 Leatherback Baloth
-1 Rushwood Elemental
+1 Meng Huo, Barbarian King
+4 Nettle Sentinel
+1 Obstinate Baloth
+3 Primalcrux
 1 Silvos, Rogue Elemental
 1 Terra Stomper
-1 Weatherseed Treefolk
-4 Garruk's Companion
-1 Bellowing Tanglewurm
-1 Primalcrux
+1 Thrun, the Last Troll
+1 Troll Ascetic
 1 Vorapede
+1 Wickerbough Elder
+1 Wolfir Avenger
+1 Yeva, Nature's Herald
+1 Nature's Claim
 [sideboard]

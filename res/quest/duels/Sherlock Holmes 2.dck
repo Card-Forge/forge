@@ -3,44 +3,46 @@
 Name=Sherlock Holmes 2
 Title=Sherlock Holmes
 Difficulty=medium
-Description=Mono G deck with Baru, Fist of Krosa and lots of good green creatures
+Description=Mono G deck with Primalcrux and lots of green creatures
 Icon=Sherlock Holmes.jpg
 Deck Type=constructed
 [main]
 22 Forest|M12
 1 Emerald Medallion
-1 Three Visits
+1 An-Havva Constable
 1 An-Havva Inn
-4 Baru, Fist of Krosa
+1 Beast Attack
+1 Bellowing Tanglewurm
+1 Blanchwood Armor
+1 Child of Gaea
+1 Cloudthresher
 1 Crabapple Cohort
+1 Craw Giant
 1 Drove of Elves
-1 Howl of the Night Pack
+1 Elvish Warrior
+1 Force of Nature
+1 Garruk's Companion
+1 Jedit Ojanen of Efrava
+1 Juvenile Gloomwidow
 1 Kaysa
 1 Khalni Hydra
-1 Meng Huo, Barbarian King
-1 Nettle Sentinel
-1 Hunting Cheetah
-1 Reach of Branches
-1 Roughshod Mentor
-1 Craw Giant
-1 Force of Nature
-1 Blanchwood Armor
-1 Jedit Ojanen of Efrava
 1 Kodama of the North Tree
 1 Leatherback Baloth
-1 Rushwood Elemental
-1 Garruk's Companion
-1 Juvenile Gloomwidow
-1 People of the Woods
-1 Uktabi Wildcats
-1 Coiling Woodworm
-1 Fruition
-1 Primal Bellow
-1 Timbermaw Larva
-1 Bellowing Tanglewurm
+1 Meng Huo, Barbarian King
+1 Nettle Sentinel
+1 Nissa's Chosen
 1 Norwood Priestess
-1 Primalcrux
+1 People of the Woods
+2 Primalcrux
+1 Reach of Branches
 1 Regal Force
+1 Ring of Kalonia
+1 Roughshod Mentor
+1 Rushwood Elemental
+1 Strangleroot Geist
+1 Talara's Battalion
 1 Titania's Chosen
 1 Trolls of Tel-Jilad
+1 Weatherseed Treefolk
+1 Yeva, Nature's Herald
 [sideboard]

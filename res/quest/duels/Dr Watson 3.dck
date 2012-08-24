@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Dr Watson 3
+Title=Dr Watson
+Difficulty=hard
+Description=Mono G Forest deck with with land fetch and Baru, Fist of Krosa
+Icon=Dr Watson.jpg
+Deck Type=constructed
+[main]
+24 Forest|M12
+4 Cultivate
+2 Khalni Heart Expedition
+4 Kodama's Reach
+1 Oracle of Mul Daya
+3 Primeval Titan
+2 Skyshroud Claim
+1 Boundless Realms
+1 Avenger of Zendikar
+4 Baru, Fist of Krosa
+3 Dauntless Dourbark
+4 Dungrove Elder
+1 Blanchwood Armor
+1 Howl of the Night Pack
+1 Molimo, Maro-Sorcerer
+1 Rampaging Baloths
+1 Timber Protector
+1 Naturalize
+[sideboard]
