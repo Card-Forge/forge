@@ -31,6 +31,7 @@ import forge.GameAction;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
@@ -446,8 +447,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.Ability} object.
      */
-    private static Ability upkeepAIPayment(final Card c, final String cost) {
-        return new AbilityStatic(c, cost) {
+    private static Ability upkeepAIPayment(final Card c, final String costString) {
+        Cost cost = new Cost(c, costString, true);
+        return new AbilityStatic(c, cost, null) {
             @Override
             public void resolve() {
 
