@@ -2424,7 +2424,7 @@ public final class AbilityFactoryReveal {
 
         for (int i = 0; i < validamount; i++) {
             if (player.isHuman()) {
-                final Object o = GuiUtils.chooseOneOrNone("Choose card(s) to reveal", valid.toArray());
+                final Object o = GuiUtils.chooseOne("Choose card(s) to reveal", valid.toArray());
                 if (o != null) {
                     chosen.add((Card) o);
                     valid.remove((Card) o);
