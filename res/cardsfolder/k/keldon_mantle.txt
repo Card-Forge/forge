@@ -7,7 +7,6 @@ A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Regenerate | Cost$ B | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
 A:AB$ Pump | Cost$ G | Defined$ Enchanted | KW$ Trample | SpellDescription$ Enchanted creature gains Trample until end of turn.
-#TODO - check rarity on this
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_mantle.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/65.jpg

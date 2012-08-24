@@ -6,6 +6,7 @@ A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select 
 SVar:MakeToken:DB$ Token | ConditionManaSpent$ G | TokenAmount$ 2 | TokenOwner$ You | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:ManaNeededToAvoidNegativeEffect:green
 SVar:RemRandomDeck:True
+DeckNeeds:Color$Green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seed_spark.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/30.jpg

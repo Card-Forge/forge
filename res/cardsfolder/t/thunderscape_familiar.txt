@@ -5,6 +5,8 @@ Text:no text
 PT:1/1
 K:First Strike
 S:Mode$ ReduceCost | ValidCard$ Card.Black,Card.Green | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Black spells and green spells you cast cost 1 less to cast.
+SVar:RemRandomDeck:True
+DeckNeeds:Color$Green|Black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderscape_familiar.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/76.jpg
