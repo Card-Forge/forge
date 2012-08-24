@@ -350,6 +350,10 @@ public class AbilityFactoryPump {
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
+        } else if (keyword.endsWith("CARDNAME can't be regenerated.")) {
+            if (card.getShield() <= 0) {
+                return false;
+            }
         }
         return true;
     }
