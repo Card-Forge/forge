@@ -7,6 +7,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigDamage:DB$ DealDamage | Cost$ 0 | NumDmg$ 2 | Tgt$ TgtCP | ConditionManaSpent$ R
 SVar:ManaNeededToAvoidNegativeEffect:red
 SVar:RemRandomDeck:True
+DeckNeeds:Color$Red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steamcore_weird.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/35.jpg

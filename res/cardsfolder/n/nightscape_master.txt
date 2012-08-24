@@ -5,7 +5,8 @@ Text:no text
 PT:2/2
 A:AB$ ChangeZone | Cost$ U U T | ValidTgts$ Creature | TgtPrompt$ Select target Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 A:AB$ DealDamage | Cost$ R R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+DeckNeeds:Color$Red|Blue
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightscape_master.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/113.jpg

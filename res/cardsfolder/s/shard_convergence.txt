@@ -6,6 +6,8 @@ A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:DBIsland:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Island | ChangeNum$ 1 | SubAbility$ DBSwamp
 SVar:DBSwamp:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Swamp | ChangeNum$ 1 | SubAbility$ DBMountain
 SVar:DBMountain:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Mountain | ChangeNum$ 1
+SVar:RemRandomDeck:True
+DeckNeeds:Color$White|Blue|Black|Red
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shard_convergence.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/91.jpg
