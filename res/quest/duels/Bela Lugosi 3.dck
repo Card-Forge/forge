@@ -7,16 +7,21 @@ Description=Mono B Vampire Aggro deck
 Icon=Bela Lugosi.jpg
 Deck Type=constructed
 [main]
-4 Vampire Nocturnus
-3 Anowon, the Ruin Sage
-4 Malakir Bloodwitch
-2 Child of Night
 22 Swamp|M12
 1 Mox Jet
+2 Anowon, the Ruin Sage
+1 Ascendant Evincar
+2 Bloodghast
+4 Bloodline Keeper
+1 Child of Night
+3 Gatekeeper of Malakir
+1 Guul Draz Assassin
+1 Guul Draz Vampire
+4 Kalastria Highborn
+4 Malakir Bloodwitch
+1 Mirri the Cursed
+1 Ruthless Cullblade
 4 Vampire Nighthawk
-4 Bloodghast
-4 Ruthless Cullblade
-4 Guul Draz Vampire
-4 Guul Draz Assassin
+4 Vampire Nocturnus
 4 Go for the Throat
 [sideboard]
