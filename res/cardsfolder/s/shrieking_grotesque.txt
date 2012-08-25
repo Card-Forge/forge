@@ -8,6 +8,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose
 SVar:ManaNeededToAvoidNegativeEffect:black
 SVar:RemRandomDeck:True
+DeckNeeds:Color$Black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_grotesque.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/15.jpg

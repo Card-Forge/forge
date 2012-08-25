@@ -7,6 +7,7 @@ SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedController | ConditionMana
 SVar:X:Targeted$CardManaCost
 SVar:ManaNeededToAvoidNegativeEffect:black
 SVar:RemRandomDeck:True
+DeckNeeds:Color$Black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/induce_paranoia.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/56.jpg

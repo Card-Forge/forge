@@ -5,7 +5,6 @@ Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ LosesGame | Cost$ W W U U B B R R G G T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player loses the game.
 SVar:RemRandomDeck:True
-DeckNeeds:Color$white|blue|black|red|green
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/door_to_nothingness.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/203.jpg

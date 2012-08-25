@@ -6,7 +6,6 @@ PT:3/3
 K:First Strike
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ CARDNAME is black. | AddAbility$ Destroy | Threshold$ True | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1, is black, and has "2 B, tap: Destroy target red creature."
 SVar:Destroy:AB$Destroy | Cost$ 2 B T | ValidTgts$ Creature.Red | TgtPrompt$ Select target red creature | SpellDescription$ Destroy target red creature.
-SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_barbarian.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/111.jpg

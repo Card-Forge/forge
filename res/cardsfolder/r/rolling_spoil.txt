@@ -6,6 +6,7 @@ A:SP$ Destroy | Cost$ 2 G G | ValidTgts$ Land| TgtPrompt$ Select target land | S
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | ConditionManaSpent$ B | IsCurse$ True
 SVar:ManaNeededToAvoidNegativeEffect:black
 SVar:RemRandomDeck:True
+DeckNeeds:Color$Black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_spoil.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/179.jpg

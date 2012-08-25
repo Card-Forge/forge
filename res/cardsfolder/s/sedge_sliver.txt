@@ -11,6 +11,7 @@ SVar:X:Count$Valid Swamp.YouCtrl
 SVar:Y:Count$Valid Swamp.YouDontCtrl
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
+DeckNeeds:Color$Black
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sedge_sliver.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/177.jpg

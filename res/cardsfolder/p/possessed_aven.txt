@@ -6,7 +6,6 @@ PT:3/3
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ CARDNAME is black. | AddAbility$ Destroy | Threshold$ True | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1, is black, and has "2 B, tap: Destroy target blue creature."
 SVar:Destroy:AB$Destroy | Cost$ 2 B T | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue creature | SpellDescription$ Destroy target blue creature.
-SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_aven.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/45.jpg
