@@ -6,6 +6,7 @@ A:SP$ GainLife | Cost$ 4 G G | Defined$ You | LifeAmount$ X | SubAbility$ DBUnta
 SVar:DBUntapAll:DB$ UntapAll | ConditionManaSpent$ W | ValidCards$ Creature.YouCtrl
 SVar:X:Count$Valid Creature
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dryads_caress.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/160.jpg

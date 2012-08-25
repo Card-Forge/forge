@@ -4,6 +4,8 @@ Types:Creature Zombie
 Text:no text
 PT:2/1
 A:AB$ GainLife | Cost$ W T | LifeAmount$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player to gain 1 life | SpellDescription$ Target player gains 1 life.
+SVar:RemRandomDeck:True
+DeckNeeds:Color$white
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mournful_zombie.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/43.jpg

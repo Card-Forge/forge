@@ -5,6 +5,8 @@ Text:no text
 K:Flashback 1 W
 A:SP$ GainLife | Cost$ 2 G | LifeAmount$ X | References$ X | SpellDescription$ You gain 1 life for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature
+SVar:RemRandomDeck:True
+DeckNeeds:Color$white
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/folk_medicine.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/115.jpg

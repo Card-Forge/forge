@@ -11,7 +11,6 @@ SVar:Clean:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Land.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no lands, sacrifice CARDNAME.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
-SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serendib_djinn.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/25.jpg

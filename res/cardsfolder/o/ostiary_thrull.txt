@@ -4,6 +4,8 @@ Types:Creature Thrull
 Text:no text
 PT:2/2
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+SVar:RemRandomDeck:True
+DeckNeeds:Color$white
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ostiary_thrull.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/55.jpg

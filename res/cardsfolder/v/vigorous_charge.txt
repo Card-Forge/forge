@@ -10,6 +10,7 @@ SVar:VigorousLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | Referen
 SVar:X:TriggerCount$DamageAmount
 SVar:EndTrackingEffect:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigorous_charge.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/222.jpg

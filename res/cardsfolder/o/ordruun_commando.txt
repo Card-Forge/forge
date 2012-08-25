@@ -5,6 +5,7 @@ Text:no text
 PT:4/1
 A:AB$ PreventDamage | Cost$ W | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
 SVar:RemRandomDeck:True
+DeckNeeds:Color$white
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ordruun_commando.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/137.jpg
