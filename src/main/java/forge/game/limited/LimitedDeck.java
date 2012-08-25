@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -117,13 +116,16 @@ public class LimitedDeck {
             deckList.add(c);
             getAiPlayables().remove(c);
             landsNeeded--;
+            if (Constant.Runtime.DEV_MODE[0]) {
+                System.out.println("Low CMC:" + c.getName());
+            }
         }
 
         // 5. Check for DeckNeeds cards.
-        checkDeckNeeds();
+        checkRemRandomDeckCards();
 
         // 6. If there are still less than 22 non-land cards add off-color
-        // cards.
+        // cards. This should be avoided.
         addRandomCards(numSpellsNeeded - deckList.size());
 
         // 7. If it's not a mono color deck, add non-basic lands that were
@@ -424,7 +426,7 @@ public class LimitedDeck {
                     System.out.println("Others[" + num + "]:" + cardToAdd.getName() + " ("
                             + cardToAdd.getCard().getManaCost() + ")");
                 }
-                num = addComboCards(cardToAdd, num);
+                num = addDeckHintsCards(cardToAdd, num);
             } else {
                 break;
             }
@@ -440,22 +442,23 @@ public class LimitedDeck {
      *            number of cards
      * @return number left after adding
      */
-    private int addComboCards(CardPrinted cardToAdd, int num) {
+    private int addDeckHintsCards(CardPrinted cardToAdd, int num) {
         // cards with DeckHints will try to grab additional cards from the pool
         if (cardToAdd.getCard().getDeckHints() != null
                 && cardToAdd.getCard().getDeckHints().getType() != DeckHints.Type.NONE) {
             DeckHints hints = cardToAdd.getCard().getDeckHints();
-            List<CardPrinted> comboCards = hints.filter(getAiPlayables());
+            List<CardPrinted> onColor = hasColor.select(aiPlayables, CardPrinted.FN_GET_RULES);
+            List<CardPrinted> comboCards = hints.filter(onColor);
             if (Constant.Runtime.DEV_MODE[0]) {
                 System.out.println("Found " + comboCards.size() + " cards for " + cardToAdd.getName());
             }
             List<CardRankingBean> rankedComboCards = rankCards(comboCards);
             for (CardRankingBean comboBean : rankedComboCards) {
                 if (num > 0) {
-                    // TODO: This is not exactly right, because the
+                    // This is not exactly right, because the
                     // rankedComboCards could include creatures and
-                    // non-creatures. This code could add too many of one or the
-                    // other.
+                    // non-creatures.
+                    // This code could add too many of one or the other.
                     CardPrinted combo = comboBean.getCardPrinted();
                     deckList.add(combo);
                     num--;
@@ -470,10 +473,14 @@ public class LimitedDeck {
     }
 
     /**
-     * Check all cards that have DeckNeeds, to make sure they have the requisite
-     * complementary cards present. Throw them out if not.
+     * Check all cards that should be removed from Random Decks. If they have
+     * DeckNeeds or DeckHints, we can check to make sure they have the requisite
+     * complementary cards present. Throw it out if it has no DeckNeeds or
+     * DeckHints (because we have no idea what else should be in here) or if the
+     * DeckNeeds or DeckHints are not met. Replace the removed cards with new
+     * cards.
      */
-    private void checkDeckNeeds() {
+    private void checkRemRandomDeckCards() {
         int numCreatures = 0;
         int numOthers = 0;
         for (ListIterator<CardPrinted> it = deckList.listIterator(); it.hasNext();) {
@@ -482,13 +489,13 @@ public class LimitedDeck {
                 List<CardPrinted> comboCards = new ArrayList<CardPrinted>();
                 if (card.getCard().getDeckNeeds() != null
                         && card.getCard().getDeckNeeds().getType() != DeckHints.Type.NONE) {
-                    DeckHints hints = card.getCard().getDeckNeeds();
-                    comboCards = hints.filter(deckList);
+                    DeckHints needs = card.getCard().getDeckNeeds();
+                    comboCards.addAll(needs.filter(deckList));
                 }
                 if (card.getCard().getDeckHints() != null
                         && card.getCard().getDeckHints().getType() != DeckHints.Type.NONE) {
                     DeckHints hints = card.getCard().getDeckHints();
-                    comboCards = hints.filter(deckList);
+                    comboCards.addAll(hints.filter(deckList));
                 }
                 if (comboCards.isEmpty()) {
                     if (Constant.Runtime.DEV_MODE[0]) {
@@ -520,6 +527,12 @@ public class LimitedDeck {
             List<CardPrinted> onColorNonCreatures = hasColor.select(nonCreatures, CardPrinted.FN_GET_RULES);
             addNonCreatures(rankCards(onColorNonCreatures), numOthers);
         }
+        // If we added some replacement cards, and we still have cards available
+        // in aiPlayables, call this function again in case the replacement
+        // cards are also RemRandomDeck cards.
+        if ((numCreatures > 0 || numOthers > 0) && aiPlayables.size() > 0) {
+            checkRemRandomDeckCards();
+        }
     }
 
     /**
@@ -539,7 +552,7 @@ public class LimitedDeck {
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getCard().getManaCost() + ")");
                 }
-                num = addComboCards(c, num);
+                num = addDeckHintsCards(c, num);
             } else {
                 break;
             }
@@ -604,7 +617,7 @@ public class LimitedDeck {
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getCard().getManaCost() + ")");
                 }
-                num = addComboCards(c, num);
+                num = addDeckHintsCards(c, num);
             } else {
                 if (Constant.Runtime.DEV_MODE[0]) {
                     System.out.println(c.getName() + " not added because CMC " + c.getCard().getManaCost().getCMC()

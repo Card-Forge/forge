@@ -2,10 +2,12 @@ Name:Ring of Xathrid
 ManaCost:2
 Types:Artifact Equipment
 Text:no text
-A:AB$ Regenerate | Cost$ 2 | Defined$ Equipped | SpellDescription$ Regenerate equipped creature.
+A:AB$ Regenerate | Cost$ 2 | Defined$ Equipped | AILogic$ Color:Black | SpellDescription$ Regenerate equipped creature.
 K:Equip 1 | AITgts$ Creature.Black
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ XathridCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's black.
 SVar:XathridCounter:AB$PutCounter | Cost$ 0 | Defined$ Equipped | ConditionDefined$ Equipped | ConditionPresent$ Creature.Black | ConditionCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ 1
+SVar:RemRandomDeck:True
+DeckNeeds:Color$Black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_xathrid.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/215.jpg

@@ -3,9 +3,11 @@ ManaCost:2
 Types:Artifact Equipment
 Text:no text
 K:Equip 1 | AITgts$ Creature.Green
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Trample | Description$ Equipped creature has trample.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Trample | AILogic$ Color:Green | Description$ Equipped creature has trample.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ KaloniaCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's green.
 SVar:KaloniaCounter:AB$PutCounter | Cost$ 0 | Defined$ Equipped | ConditionDefined$ Equipped | ConditionPresent$ Creature.Green | ConditionCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ 1
+SVar:RemRandomDeck:True
+DeckNeeds:Color$Green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_kalonia.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/212.jpg
