@@ -7,6 +7,8 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidCard$ Card.Self | SubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Enchantment.YouOwn | ChangeNum$ 1
 SVar:SacMe:4
+SVar:RemRandomDeck:True
+DeckNeeds:Type$Enchantment
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/academy_rector.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/1.jpg

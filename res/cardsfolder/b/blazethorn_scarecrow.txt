@@ -8,6 +8,8 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Wither | CheckSVar$ Y | S
 SVar:X:Count$Valid Creature.Red+YouCtrl
 SVar:Y:Count$Valid Creature.Green+YouCtrl
 SVar:BuffedBy:Creature.Red,Creature.Green
+SVar:RemRandomDeck:True
+DeckNeeds:Color$Red|Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazethorn_scarecrow.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/246.jpg

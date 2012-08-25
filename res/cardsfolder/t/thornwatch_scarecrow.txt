@@ -8,6 +8,8 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | CheckSVar$ Y 
 SVar:X:Count$Valid Creature.Green+YouCtrl
 SVar:Y:Count$Valid Creature.White+YouCtrl
 SVar:BuffedBy:Creature.White,Creature.Green
+SVar:RemRandomDeck:True
+DeckNeeds:Color$white|green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornwatch_scarecrow.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/265.jpg

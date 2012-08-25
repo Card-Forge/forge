@@ -6,6 +6,8 @@ PT:0/1
 K:Shroud
 T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an enchantment spell, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:RemRandomDeck:True
+DeckNeeds:Type$Enchantment
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_enchantress.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/234.jpg

@@ -8,6 +8,8 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ Y | SV
 SVar:X:Count$Valid Creature.YouCtrl+Black
 SVar:Y:Count$Valid Creature.YouCtrl+Red
 SVar:BuffedBy:Creature.Black,Creature.Red
+SVar:RemRandomDeck:True
+DeckNeeds:Color$Black|Red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rattleblaze_scarecrow.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/259.jpg
