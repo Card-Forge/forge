@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,6 +34,7 @@ public class LimitedDeck {
     private int landsNeeded = 18;
     private CardColor colors;
     private DeckColors deckColors;
+    private Predicate<CardRules> hasColor;
     private List<CardPrinted> availableList;
     private List<CardPrinted> aiPlayables;
     private List<CardPrinted> deckList = new ArrayList<CardPrinted>();
@@ -77,8 +80,7 @@ public class LimitedDeck {
      */
     public Deck buildDeck() {
         // 0. Add any planeswalkers
-        Predicate<CardRules> hasColor = Predicate.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors),
-                GenerateDeckUtil.COLORLESS_CARDS);
+        hasColor = Predicate.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors), GenerateDeckUtil.COLORLESS_CARDS);
         List<CardPrinted> colorList = hasColor.select(aiPlayables, CardPrinted.FN_GET_RULES);
         List<CardPrinted> walkers = CardRules.Predicates.Presets.IS_PLANESWALKER.select(colorList,
                 CardPrinted.FN_GET_RULES);
@@ -117,17 +119,20 @@ public class LimitedDeck {
             landsNeeded--;
         }
 
-        // 5. If there are still less than 22 non-land cards add off-color
+        // 5. Check for DeckNeeds cards.
+        checkDeckNeeds();
+
+        // 6. If there are still less than 22 non-land cards add off-color
         // cards.
         addRandomCards(numSpellsNeeded - deckList.size());
 
-        // 6. If it's not a mono color deck, add non-basic lands that were
+        // 7. If it's not a mono color deck, add non-basic lands that were
         // drafted.
         // Commenting out because it adds worthless lands (e.g., a R/B land
         // to a U/W deck).
         // addNonBasicLands();
 
-        // 7. Fill up with basic lands.
+        // 8. Fill up with basic lands.
         final CCnt[] clrCnts = calculateLandNeeds();
         if (landsNeeded > 0) {
             addLands(clrCnts);
@@ -436,8 +441,7 @@ public class LimitedDeck {
      * @return number left after adding
      */
     private int addComboCards(CardPrinted cardToAdd, int num) {
-        boolean foundOne = false;
-        // cards with DeckHints will try to grab additional cards from the pool 
+        // cards with DeckHints will try to grab additional cards from the pool
         if (cardToAdd.getCard().getDeckHints() != null
                 && cardToAdd.getCard().getDeckHints().getType() != DeckHints.Type.NONE) {
             DeckHints hints = cardToAdd.getCard().getDeckHints();
@@ -456,31 +460,66 @@ public class LimitedDeck {
                     deckList.add(combo);
                     num--;
                     getAiPlayables().remove(combo);
-                    foundOne = true;
                 } else {
                     break;
                 }
             }
-            foundOne |= !hints.filter(deckList).isEmpty();
         }
-        // cards with DeckNeeds need the combo cards in the deck already 
-        if (cardToAdd.getCard().getDeckNeeds() != null
-                && cardToAdd.getCard().getDeckNeeds().getType() != DeckHints.Type.NONE) {
-            DeckHints hints = cardToAdd.getCard().getDeckNeeds();
-            List<CardPrinted> comboCards = hints.filter(deckList);
-            if (Constant.Runtime.DEV_MODE[0]) {
-                System.out.println("Found " + comboCards.size() + " cards for " + cardToAdd.getName());
-            }
-            foundOne = !comboCards.isEmpty();
-        }
-        // remove cards with RemRandomDeck that do not have combo partners
-        if (!foundOne && cardToAdd.getCard().getRemRandomDecks()) {
-            deckList.remove(cardToAdd);
-            availableList.add(cardToAdd);
-            num++;
-        }
-        
+
         return num;
+    }
+
+    /**
+     * Check all cards that have DeckNeeds, to make sure they have the requisite
+     * complementary cards present. Throw them out if not.
+     */
+    private void checkDeckNeeds() {
+        int numCreatures = 0;
+        int numOthers = 0;
+        for (ListIterator<CardPrinted> it = deckList.listIterator(); it.hasNext();) {
+            CardPrinted card = it.next();
+            if (card.getCard().getRemRandomDecks()) {
+                List<CardPrinted> comboCards = new ArrayList<CardPrinted>();
+                if (card.getCard().getDeckNeeds() != null
+                        && card.getCard().getDeckNeeds().getType() != DeckHints.Type.NONE) {
+                    DeckHints hints = card.getCard().getDeckNeeds();
+                    comboCards = hints.filter(deckList);
+                }
+                if (card.getCard().getDeckHints() != null
+                        && card.getCard().getDeckHints().getType() != DeckHints.Type.NONE) {
+                    DeckHints hints = card.getCard().getDeckHints();
+                    comboCards = hints.filter(deckList);
+                }
+                if (comboCards.isEmpty()) {
+                    if (Constant.Runtime.DEV_MODE[0]) {
+                        System.out.println("No combo cards found for " + card.getName() + ", removing it.");
+                    }
+                    it.remove();
+                    availableList.add(card);
+                    if (card.getCard().getType().isCreature()) {
+                        numCreatures++;
+                    } else {
+                        numOthers++;
+                    }
+                } else {
+                    if (Constant.Runtime.DEV_MODE[0]) {
+                        System.out.println("Found " + comboCards.size() + " cards for " + card.getName());
+                    }
+                }
+            }
+        }
+        if (numCreatures > 0) {
+            List<CardPrinted> creatures = CardRules.Predicates.Presets.IS_CREATURE.select(aiPlayables,
+                    CardPrinted.FN_GET_RULES);
+            List<CardPrinted> onColorCreatures = hasColor.select(creatures, CardPrinted.FN_GET_RULES);
+            addCreatures(rankCards(onColorCreatures), numCreatures);
+        }
+        if (numOthers > 0) {
+            List<CardPrinted> nonCreatures = CardRules.Predicates.Presets.IS_NON_CREATURE_SPELL.select(aiPlayables,
+                    CardPrinted.FN_GET_RULES);
+            List<CardPrinted> onColorNonCreatures = hasColor.select(nonCreatures, CardPrinted.FN_GET_RULES);
+            addNonCreatures(rankCards(onColorNonCreatures), numOthers);
+        }
     }
 
     /**

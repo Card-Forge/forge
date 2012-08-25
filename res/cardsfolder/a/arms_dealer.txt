@@ -4,6 +4,8 @@ Types:Creature Goblin
 Text:no text
 PT:1/1
 A:AB$ DealDamage | Cost$ 1 R Sac<1/Goblin> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+SVar:RemRandomDeck:True
+DeckHints:Type$Goblin
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arms_dealer.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/120.jpg

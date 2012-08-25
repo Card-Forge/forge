@@ -54,7 +54,7 @@ public class BoosterDraftAI {
     private final ArrayList<DeckColors> playerColors = new ArrayList<DeckColors>();
 
     private ReadDraftRankings draftRankings;
-    private static final int TAKE_BEST_THRESHOLD = 50;
+    private static final int TAKE_BEST_THRESHOLD = 75;
 
     /**
      * <p>
