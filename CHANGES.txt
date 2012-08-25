@@ -144,6 +144,22 @@ Fixes/Features:
 - Added the Dr Watson decks and updated Sherlock Holmes.
 - expanded cumulative upkeep to include non-mana costs (for cost objects supported in GameActionUtil.payCostDuringAbilityResolve)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed AI not being able to pay non mana costs for cumulative upkeep.
+- Added a log output in GameActionUtil.payCostDuringAbilityResolve for an AddCounter cost failing because the card couldn't have the type of counter placed on it (eg: Aboroth with Melira, Silvok Outcast)
+- Fixed Sedge Sliver description duplicate
+- Fixed AI using cards with SVar:RemRandomDeck:True in limited decks.
+- Split DeckHints into DeckHints and DeckNeeds. Cards with DeckNeeds will only be included if the specified type of cards are in the deck already (for cards like Angel's Feather).
+- Disabled cancel option when hit by Mire's Toll.
+- Added pump AI for the keyword "CARDNAME can't be regenerated.".
+- Added some DeckNeeds (Green).
+- Added some DeckNeeds (Red).
+- Fixed AI of Phyrexian Rager and Phyrexian Gargantua.
+- Added "CARDNAME attacks each turn if able." to NonStackingKWList.txt.
+- Adjustments to how AI handles RemRandomDeck cards in Limited.
+- fixes for LimitedDeck and RemRandomDeck cards
+- Added the exalted deck Kane 3 by Nordos.
+- Updated the decks Apu Nahasapeemapetilon 4 and Bela Lugosi 3.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
