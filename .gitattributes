@@ -5993,6 +5993,7 @@ res/cardsfolder/m/mistform_wall.txt -text svneol=unset#text/plain
 res/cardsfolder/m/misthollow_griffin.txt -text
 res/cardsfolder/m/mistmeadow_skulk.txt svneol=native#text/plain
 res/cardsfolder/m/mistmeadow_witch.txt svneol=native#text/plain
+res/cardsfolder/m/mistmoon_griffin.txt -text
 res/cardsfolder/m/mistral_charger.txt svneol=native#text/plain
 res/cardsfolder/m/mistveil_plains.txt svneol=native#text/plain
 res/cardsfolder/m/mistvein_borderpost.txt svneol=native#text/plain
