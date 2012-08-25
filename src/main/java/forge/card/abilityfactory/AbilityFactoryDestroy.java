@@ -995,7 +995,7 @@ public class AbilityFactoryDestroy {
             chance &= subAb.chkAIDrawback();
         }
 
-        return ((r.nextFloat() < .9667) && chance);
+        return chance;
     }
 
     /**

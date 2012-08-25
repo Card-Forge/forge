@@ -1767,31 +1767,40 @@ public class ComputerUtil {
             public int compare(final SpellAbility a, final SpellAbility b) {
                 int a1 = CardUtil.getConvertedManaCost(a);
                 int b1 = CardUtil.getConvertedManaCost(b);
-
-                // puts creatures in front of spells
-                if (a.getSourceCard().isCreature()) {
-                    a1 += 1;
-                }
-
-                if (b.getSourceCard().isCreature()) {
-                    b1 += 1;
-                }
-
-                // sort planeswalker abilities for ultimate
-                if (a.getRestrictions().getPlaneswalker() && b.getRestrictions().getPlaneswalker()) {
-                    if ((a.getAbilityFactory() != null) && a.getAbilityFactory().getMapParams().containsKey("Ultimate")) {
-                        a1 += 1;
-                    } else if ((b.getAbilityFactory() != null)
-                            && b.getAbilityFactory().getMapParams().containsKey("Ultimate")) {
-                        b1 += 1;
-                    }
-                }
+                
+                a1 += getSpellAbilityPriority(a);
+                b1 += getSpellAbilityPriority(b);
 
                 return b1 - a1;
             }
         }; // Comparator
         Arrays.sort(sa, c);
     } // sortSpellAbilityByCost()
+    
+    public static int getSpellAbilityPriority(SpellAbility sa) {
+        int p = 0;
+        // puts creatures in front of spells
+        if (sa.getSourceCard().isCreature()) {
+            p += 1;
+        }
+        // sort planeswalker abilities for ultimate
+        if (sa.getRestrictions().getPlaneswalker()) {
+            if ((sa.getAbilityFactory() != null) && sa.getAbilityFactory().getMapParams().containsKey("Ultimate")) {
+                p += 9;
+            }
+        }
+        AbilityFactory af = sa.getAbilityFactory();
+        if (af == null) {
+            return p;
+        }
+
+        String mode = af.getAPI();
+        if ("DestroyAll".equals(mode)) {
+            p += 4;
+        }
+        
+        return p;
+    }
 
     /**
      * <p>
