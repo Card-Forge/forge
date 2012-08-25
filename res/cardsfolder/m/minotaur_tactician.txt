@@ -8,8 +8,8 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | Check
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ Y | SVarCompare$ GE1 | References$ Y | Description$ CARDNAME gets +1/+1 as long as you control a blue creature.
 SVar:X:Count$Valid Creature.YouCtrl+White
 SVar:Y:Count$Valid Creature.YouCtrl+Blue
-SVar:RemAIDeck:True
 SVar:BuffedBy:Creature.White,Creature.Blue
+SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minotaur_tactician.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/65.jpg

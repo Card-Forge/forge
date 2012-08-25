@@ -6,7 +6,6 @@ PT:4/4
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.YouCtrl+Blue | PresentCompare$ GE1 | Execute$ TrigCopyPermanent | TriggerDescription$ At the beginning of your upkeep, if you control a blue permanent, you may put a token that's a copy of CARDNAME onto the battlefield.
 SVar:TrigCopyPermanent:AB$CopyPermanent | Cost$ 0 | Defined$ Self
-SVar:RemRandomDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_sigil_sergeant.jpg
 SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/12.jpg

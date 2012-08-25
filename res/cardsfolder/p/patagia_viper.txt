@@ -10,6 +10,7 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ GU 1 1 Snake | TokenAmount$ 2 | 
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:blue
 SVar:RemRandomDeck:True
+DeckNeeds:Color$Blue
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patagia_viper.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/89.jpg

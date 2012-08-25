@@ -7,6 +7,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionManaSpent$ U
 SVar:ManaNeededToAvoidNegativeEffect:blue
 SVar:RemRandomDeck:True
+DeckNeeds:Color$Blue
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_savant.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/70.jpg
