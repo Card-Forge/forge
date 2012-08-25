@@ -3,7 +3,7 @@
 pathToMtgData = "mtg-data.txt"
 
 ############IMPLEMENTATION FOLLOWS############
-import os,sys,fnmatch
+import os,sys,fnmatch,re
 
 if not os.path.exists(pathToMtgData) :
 	print("This script requires the text version of Arch's mtg-data to be present.You can download it from slightlymagic.net's forum and either place the text version next to this script or edit this script and provide the path to the file at the top.")
@@ -18,6 +18,7 @@ forgeFolderFiles = []
 forgeCards = []
 mtgDataCards = {}
 setCodes = []
+setCodeToName = {}
 forgeCardCount = 0
 mtgDataCardCount = 0
 setCodeCount = 0
@@ -34,7 +35,10 @@ with open(pathToMtgData) as mtgdata :
 	for line in mtgdata :
 		if not hasFetchedSets :
 			if line != "\n" :
-				code = line.split(' ')[0]
+				splitLine = line.split('  ') 
+				code = splitLine[0]
+				setCodeToName[code] = splitLine[-1].replace('\n', '')
+				#print splitLine, code, setCodeToName[code]
 				setCodes.append(code)
 			else :
 				hasFetchedSets = True
@@ -72,15 +76,15 @@ total = 0
 percentage = 0
 for currentSet in setCodes :
 	if currentSet == 'UNH' or currentSet == 'UGL' : continue #skip Unhinged and Unglued since they are only counting basic lands anyway
-	#if currentSet == 'VG1' or currentSet == 'VG2' or currentSet == 'VG3' : continue
-	#if currentSet == 'VG4' or currentSet == 'VGO' or currentSet == 'VG ' : continue
-	#if currentSet == 'FVD' or currentSet == 'FVE' or currentSet == 'FVR' : continue
-	#if currentSet == 'SDC' or currentSet == 'AST' or currentSet == 'DKM' : continue
-	#if currentSet == 'BTD' or currentSet == 'ARC' or currentSet == 'COM' : continue
+	if currentSet == 'VG1' or currentSet == 'VG2' or currentSet == 'VG3' : continue
+	if currentSet == 'VG4' or currentSet == 'VGO' or currentSet == 'VG ' : continue
+	if currentSet == 'FVD' or currentSet == 'FVE' or currentSet == 'FVR' : continue
+	if currentSet == 'SDC' or currentSet == 'AST' or currentSet == 'DKM' : continue
+	if currentSet == 'BTD' or currentSet == 'ARC' or currentSet == 'COM' : continue
 	#if currentSet == 'CHR' or currentSet == 'MED' or currentSet == 'H09' : continue
-	#if currentSet == 'ME2' or currentSet == 'ME3' or currentSet == 'ME4' : continue
-	#if currentSet == 'ATH' or currentSet == 'HOP' or currentSet == 'BRB' : continue
-	#if currentSet == 'EVG' or currentSet == 'GVL' or currentSet == 'JVC' : continue
+	if currentSet == 'ME2' or currentSet == 'ME3' or currentSet == 'ME4' : continue
+	if currentSet == 'ATH' or currentSet == 'HOP' or currentSet == 'BRB' : continue
+	if currentSet == 'EVG' or currentSet == 'GVL' or currentSet == 'JVC' : continue
 	for key in mtgDataCards.keys() :
 		setList = mtgDataCards[key]
 		if currentSet in setList:
@@ -123,7 +127,7 @@ with open(sys.path[0] + os.sep + "PerSetTrackingResults" + os.sep + "CompleteSta
 		totalImplemented += dataKey[0]
 		totalMissing += dataKey[1]
 		fullTotal += dataKey[2]
-		statsfile.write(k + ": " + str(dataKey[0]) + " (" + str(dataKey[1]) + ") / " + str(dataKey[2]) + " = " + str(round(dataKey[3], 2)) + "%\n")
+		statsfile.write(setCodeToName[k].lstrip() + ": " + str(dataKey[0]) + " (" + str(dataKey[1]) + ") / " + str(dataKey[2]) + " = " + str(round(dataKey[3], 2)) + "%\n")
 	totalPercentage = totalImplemented / fullTotal
 	statsfile.write("\n")
 	statsfile.write("Total over all sets: " + str(totalImplemented) + " (" + str(totalMissing) + ") / " + str(fullTotal))
