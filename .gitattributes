@@ -3540,6 +3540,7 @@ res/cardsfolder/g/gale_force.txt svneol=native#text/plain
 res/cardsfolder/g/galepowder_mage.txt svneol=native#text/plain
 res/cardsfolder/g/galinas_knight.txt svneol=native#text/plain
 res/cardsfolder/g/gallantry.txt svneol=native#text/plain
+res/cardsfolder/g/gallowbraid.txt -text
 res/cardsfolder/g/gallows_at_willow_hill.txt -text
 res/cardsfolder/g/gallows_warden.txt -text
 res/cardsfolder/g/galvanic_alchemist.txt -text
@@ -6092,6 +6093,7 @@ res/cardsfolder/m/mordant_dragon.txt svneol=native#text/plain
 res/cardsfolder/m/morgue_theft.txt svneol=native#text/plain
 res/cardsfolder/m/morgue_thrull.txt svneol=native#text/plain
 res/cardsfolder/m/morgue_toad.txt svneol=native#text/plain
+res/cardsfolder/m/morinfen.txt -text
 res/cardsfolder/m/moriok_reaver.txt svneol=native#text/plain
 res/cardsfolder/m/moriok_replica.txt svneol=native#text/plain
 res/cardsfolder/m/moriok_rigger.txt svneol=native#text/plain
