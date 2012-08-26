@@ -1,0 +1,13 @@
+Name:Polar Kraken
+ManaCost:8 U U U
+Types:Creature Kraken
+Text:no text
+PT:11/11
+K:Trample
+K:CARDNAME enters the battlefield tapped.
+K:Cumulative upkeep:Sac<1/Land>:Sacrifice a land.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/polar_kraken.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/89.jpg
+Oracle:Trample\nPolar Kraken enters the battlefield tapped.\nCumulative upkeep-Sacrifice a land. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)
+End
