@@ -562,7 +562,7 @@ public class AbilityFactoryPump {
                     || !CombatUtil.canBeBlocked(card)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
-                    || AllZoneUtil.getPlayerLandsInPlay(human).getType("Forestwalk").isEmpty()) {
+                    || AllZoneUtil.getPlayerLandsInPlay(human).getType("Forest").isEmpty()) {
                 return false;
             }
         }
