@@ -454,8 +454,10 @@ public class ComputerUtil {
      * shouldPayCost.
      * </p>
      * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param hostCard
+     *            a {@link forge.Card} object.
+     * @param costString
+     *            a {@link java.lang.String} object.
      * @return a boolean.
      */
     public static boolean shouldPayCost(final Card hostCard, final String costString) {
