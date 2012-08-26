@@ -2195,6 +2195,7 @@ res/cardsfolder/d/deep_sea_kraken.txt svneol=native#text/plain
 res/cardsfolder/d/deep_sea_serpent.txt svneol=native#text/plain
 res/cardsfolder/d/deep_slumber_titan.txt svneol=native#text/plain
 res/cardsfolder/d/deep_wood.txt -text
+res/cardsfolder/d/deepcavern_imp.txt -text
 res/cardsfolder/d/deepchannel_mentor.txt svneol=native#text/plain
 res/cardsfolder/d/deepfire_elemental.txt -text
 res/cardsfolder/d/deeptread_merrow.txt svneol=native#text/plain
@@ -12074,6 +12075,7 @@ src/main/java/forge/control/input/InputControl.java svneol=native#text/plain
 src/main/java/forge/control/input/InputMana.java -text
 src/main/java/forge/control/input/InputMulligan.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPassPriority.java svneol=native#text/plain
+src/main/java/forge/control/input/InputPayDiscardCost.java -text
 src/main/java/forge/control/input/InputPayManaCost.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayManaCostAbility.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayManaCostUtil.java svneol=native#text/plain

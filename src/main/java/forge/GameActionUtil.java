@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPayLife;
 import forge.card.cost.CostMana;
@@ -35,6 +36,7 @@ import forge.card.spellability.AbilityMana;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
+import forge.control.input.InputPayDiscardCost;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayManaCostUtil;
 import forge.control.input.InputPaySacCost;
@@ -485,6 +487,12 @@ public final class GameActionUtil {
             final boolean bResolving = AllZone.getStack().getResolving();
             AllZone.getStack().setResolving(false);
             AllZone.getInputControl().setInput(new InputPaySacCost((CostSacrifice) costPart, ability, paid, unpaid));
+            AllZone.getStack().setResolving(bResolving);
+        }
+        else if (costPart instanceof CostDiscard) {
+            final boolean bResolving = AllZone.getStack().getResolving();
+            AllZone.getStack().setResolving(false);
+            AllZone.getInputControl().setInput(new InputPayDiscardCost((CostDiscard) costPart, ability, paid, unpaid));
             AllZone.getStack().setResolving(bResolving);
         }
         else if (costPart instanceof CostMana) {
