@@ -7,6 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Aura.CanEnchantSource | AttachedTo$ Self | ConditionPresent$ Card.Self | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Aura.CanEnchantSource | ConditionPresent$ Card.Self | ConditionCompare$ LE0
 SVar:RemRandomDeck:True
+DeckNeeds:Type$Aura
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auratouched_mage.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/1.jpg
