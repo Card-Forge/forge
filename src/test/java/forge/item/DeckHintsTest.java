@@ -84,14 +84,13 @@ public class DeckHintsTest {
         Assert.assertEquals(1, hints.filter(list).size());
     }
 
-
     /**
      * Filter for color.
      */
     @Test(timeOut = 1000, enabled = true)
     void testColor() {
         CardPrinted cp = readCard("wurms_tooth.txt");
-        DeckHints hints = cp.getCard().getDeckHints();
+        DeckHints hints = cp.getCard().getDeckNeeds();
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.COLOR, hints.getType());
 
@@ -122,18 +121,25 @@ public class DeckHintsTest {
 
         Assert.assertEquals(1, hints.filter(list).size());
     }
-    
-    
+
+    /**
+     * Create a CardPrinted from the given filename.
+     * 
+     * @param filename
+     *            the filname
+     * @return the CardPrinted
+     */
     protected CardPrinted readCard(String filename) {
-        String firstLetter = filename.substring(0,1);
+        String firstLetter = filename.substring(0, 1);
         File dir = new File(ForgeProps.getFile(NewConstants.CARDSFOLDER), firstLetter);
         File txtFile = new File(dir, filename);
 
         CardRulesReader crr = new CardRulesReader();
-        for(String line: FileUtil.readFile(txtFile))
+        for (String line : FileUtil.readFile(txtFile)) {
             crr.parseLine(line);
+        }
         // Don't care what the actual set or rarity is here.
         return CardPrinted.build(crr.getCard(), "M11", CardRarity.Common, 0);
     }
-    
+
 }
