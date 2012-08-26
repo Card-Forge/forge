@@ -371,7 +371,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 GameActionUtil.payCostDuringAbilityResolve(sb.toString(), c, upkeepCost, paidCommand,
                                         unpaidCommand);
                             } else { // computer
-                                if (ComputerUtil.canPayCost(aiPaid)) {
+                                if (ComputerUtil.shouldPayCost(c, upkeepCost) && ComputerUtil.canPayCost(aiPaid)) {
                                     ComputerUtil.playNoStack(aiPaid);
                                 } else {
                                     Singletons.getModel().getGameAction().sacrifice(c, null);

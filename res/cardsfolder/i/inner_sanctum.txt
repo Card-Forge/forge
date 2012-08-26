@@ -4,7 +4,6 @@ Types:Enchantment
 Text:no text
 K:Cumulative upkeep:PayLife<2>:Pay 2 life.
 S:Mode$ PreventDamage | Target$ Creature.YouCtrl | Amount$ All | Description$ Prevent all damage that would be dealt to creatures you control.
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_sanctum.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/134.jpg

@@ -5,7 +5,6 @@ Text:no text
 PT:5/4
 K:Flying
 K:Cumulative upkeep:PayLife<1>:Pay 1 life.
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morinfen.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/17.jpg

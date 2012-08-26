@@ -1,0 +1,14 @@
+Name:Decomposition
+ManaCost:1 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant black creature
+A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature.Black | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Cumulative upkeep:PayLife<1>:Pay 1 life. | Description$ Enchanted creature has "Cumulative upkeep-Pay 1 life." (At the beginning of its controller's upkeep, that player puts an age counter on it, then sacrifices it unless he or she pays its upkeep cost for each age counter on it.)
+T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigLose | TriggerDescription$ When enchanted creature dies, its controller loses 2 life.
+SVar:TrigLose:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/decomposition.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/110.jpg
+Oracle:Enchant black creature\nEnchanted creature has "Cumulative upkeep-Pay 1 life." (At the beginning of its controller's upkeep, that player puts an age counter on it, then sacrifices it unless he or she pays its upkeep cost for each age counter on it.)\nWhen enchanted creature dies, its controller loses 2 life.
+End

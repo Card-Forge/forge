@@ -36,6 +36,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPart;
+import forge.card.cost.CostPayLife;
 import forge.card.cost.CostPayment;
 import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;
@@ -447,6 +448,33 @@ public class ComputerUtil {
     public static boolean canBePlayedAndPayedByAI(final SpellAbility sa) {
         return sa.canPlay() && sa.canPlayAI() && ComputerUtil.canPayCost(sa);
     }
+
+    /**
+     * <p>
+     * shouldPayCost.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    public static boolean shouldPayCost(final Card hostCard, final String costString) {
+        final Cost cost = new Cost(hostCard, costString, false);
+
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostPayLife) {
+                final int remainingLife = AllZone.getComputerPlayer().getLife();
+                final int lifeCost = ((CostPayLife) part).convertAmount();
+                if ((remainingLife - lifeCost) < 10) {
+                    return false; //Don't pay life if it would put AI under 10 life
+                } else if ((remainingLife / lifeCost) < 4) {
+                    return false; //Don't pay life if it is more than 25% of current life
+                }
+            }
+        }
+
+        return true;
+    } // shouldPayCost()
 
     /**
      * <p>
