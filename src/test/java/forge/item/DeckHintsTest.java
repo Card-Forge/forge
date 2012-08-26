@@ -126,7 +126,7 @@ public class DeckHintsTest {
      * Create a CardPrinted from the given filename.
      * 
      * @param filename
-     *            the filname
+     *            the filename
      * @return the CardPrinted
      */
     protected CardPrinted readCard(String filename) {
