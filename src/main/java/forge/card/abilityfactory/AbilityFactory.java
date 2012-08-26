@@ -411,6 +411,9 @@ public class AbilityFactory {
             if (this.mapParams.containsKey("TargetsFromDifferentZone")) {
                 this.abTgt.setDifferentZone(true);
             }
+            if (this.mapParams.containsKey("TargetsWithoutSameCreatureType")) {
+                this.abTgt.setWithoutSameCreatureType(true);
+            }
             if (this.mapParams.containsKey("TargetsWithDefinedController")) {
                 this.abTgt.setDefinedController(this.mapParams.get("TargetsWithDefinedController"));
             }

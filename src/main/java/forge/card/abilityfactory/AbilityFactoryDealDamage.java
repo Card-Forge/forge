@@ -1873,8 +1873,8 @@ public class AbilityFactoryDealDamage {
         if (humCreatures.size() > 0 && aiCreatures.size() > 0) {
             for (Card humanCreature : humCreatures) {
                 for (Card aiCreature : aiCreatures) {
-                    if (humanCreature.getNetDefense() <= aiCreature.getNetAttack()
-                            && humanCreature.getNetAttack() < aiCreature.getNetDefense()) {
+                    if (humanCreature.getKillDamage() <= aiCreature.getNetAttack()
+                            && humanCreature.getNetAttack() < aiCreature.getKillDamage()) {
                         // todo: check min/max targets; see if we picked the best matchup
                         tgt.addTarget(humanCreature);
                         tgt.addTarget(aiCreature);

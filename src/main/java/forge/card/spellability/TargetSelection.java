@@ -25,6 +25,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListFilter;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.control.input.Input;
 import forge.game.player.Player;
@@ -295,6 +296,16 @@ public class TargetSelection {
         // If all cards must be from different zones
         if (tgt.isDifferentZone() && !targeted.isEmpty()) {
             choices = choices.getController(targeted.get(0).getController().getOpponent());
+        }
+        // If the cards can't share a creature type
+        if (tgt.isWithoutSameCreatureType() && !targeted.isEmpty()) {
+            final Card card = targeted.get(0);
+            choices = choices.filter(new CardListFilter() {
+                @Override
+                public boolean addCard(final Card c) {
+                    return !c.sharesCreatureTypeWith(card);
+                }
+            });
         }
         // If the cards must have a specific controller
         if (tgt.getDefinedController() != null) {
