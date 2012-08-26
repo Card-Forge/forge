@@ -160,6 +160,15 @@ Fixes/Features:
 - Added the exalted deck Kane 3 by Nordos.
 - Updated the decks Apu Nahasapeemapetilon 4 and Bela Lugosi 3.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added and updated some DeckNeeds (Black).
+- Added and updated some DeckNeeds (Blue).
+- Added and updated some DeckNeeds (White).
+- Added and updated some more DeckNeeds.
+- Added a little priority function that gives the AI hints about which SpellAbilities to play first. Lesson 1: Don't play a creature and then Wrath of God.
+- Update PerSetTracking script. Complete stats will now print full Set name, not just Set Code
+- fix DeckHintsTest
+- fix typo
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -189,6 +198,11 @@ Reprocess
 Circu, Dimir Lobotomist
 Blood Funnel
 Aboroth
+Gallowbraid
+Morinfen
+Inner Sanctum
+Mistmoon Griffin
+Phyrexian Furnace
 
 
 end
