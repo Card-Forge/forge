@@ -1729,16 +1729,10 @@ public class AbilityFactoryDealDamage {
                 this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 8004957182752984818L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
-            private final HashMap<String, String> params = this.af.getMapParams();
 
             @Override
             public String getStackDescription() {
-                if (this.params.containsKey("SpellDescription")) {
-                    return AbilityFactoryDealDamage.this.abilityFactory.getHostCard().getName() + " - "
-                            + this.params.get("SpellDescription");
-                } else {
-                    return AbilityFactoryDealDamage.this.fightStackDescription(this.af, this);
-                }
+                return AbilityFactoryDealDamage.this.fightStackDescription(this.af, this);
             }
 
             @Override
@@ -1851,10 +1845,12 @@ public class AbilityFactoryDealDamage {
     }
 
     private boolean fightCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        final HashMap<String, String> params = af.getMapParams();
         Target tgt = sa.getTarget();
         tgt.resetTargets();
 
         CardList aiCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+        aiCreatures = aiCreatures.getTargetableCards(sa);
         aiCreatures = aiCreatures.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -1863,14 +1859,14 @@ public class AbilityFactoryDealDamage {
         });
 
         CardList humCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+        humCreatures = humCreatures.getTargetableCards(sa);
 
         final Random r = MyRandom.getRandom();
-        boolean rr = false;
-        if (r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
-            rr = true;
+        if (r.nextFloat() > Math.pow(.6667, sa.getActivationsThisTurn())) {
+            return false;
         }
 
-        if (humCreatures.size() > 0 && aiCreatures.size() > 0) {
+        if (params.containsKey("TargetsFromDifferentZone") && humCreatures.size() > 0 && aiCreatures.size() > 0) {
             for (Card humanCreature : humCreatures) {
                 for (Card aiCreature : aiCreatures) {
                     if (humanCreature.getKillDamage() <= aiCreature.getNetAttack()
@@ -1878,15 +1874,35 @@ public class AbilityFactoryDealDamage {
                         // todo: check min/max targets; see if we picked the best matchup
                         tgt.addTarget(humanCreature);
                         tgt.addTarget(aiCreature);
-                        return rr;
+                        return true;
                     } else if (humanCreature.getSVar("Targeting").equals("Dies")) {
                         tgt.addTarget(humanCreature);
                         tgt.addTarget(aiCreature);
-                        return rr;
+                        return true;
                     }
                 }
             }
+            return false;
         }
+        for (Card creature1 : humCreatures) {
+            for (Card creature2 : humCreatures) {
+                if (creature1.equals(creature2)) {
+                    continue;
+                }
+                if (params.containsKey("TargetsWithoutSameCreatureType") 
+                        && creature1.sharesCreatureTypeWith(creature2)) {
+                    continue;
+                }
+                if (creature1.getKillDamage() <= creature2.getNetAttack()
+                        && creature1.getNetAttack() >= creature2.getKillDamage()) {
+                    // todo: check min/max targets; see if we picked the best matchup
+                    tgt.addTarget(creature1);
+                    tgt.addTarget(creature2);
+                    return true;
+                }
+            }
+        }
+        
         return false;
     }
 
