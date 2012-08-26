@@ -191,8 +191,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     @Override
                     public void resolve() {
                         if (c.getController().isHuman()) {
-                            GameActionUtil.payManaDuringAbilityResolve(sb.toString(), c.getEchoCost(), paidCommand,
-                                    unpaidCommand);
+                            Cost cost = new Cost(c, c.getEchoCost().trim(), true);
+                            GameActionUtil.payCostDuringAbilityResolve(aiPaid, cost, paidCommand, unpaidCommand);
                         } else { // computer
                             if (ComputerUtil.canPayCost(aiPaid)) {
                                 ComputerUtil.playNoStack(aiPaid);
