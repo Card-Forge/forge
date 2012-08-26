@@ -6653,6 +6653,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (list.isEmpty() || !this.equals(list.get(0))) {
                 return false;
             }
+        } else if (property.startsWith("BottomGraveyard")) {
+            final CardList list = this.getOwner().getCardsIn(ZoneType.Graveyard);
+            if (list.isEmpty() || !this.equals(list.get(0))) {
+                return false;
+            }
         } else if (property.startsWith("TopLibrary")) {
             final CardList list = this.getOwner().getCardsIn(ZoneType.Library);
             if (list.isEmpty() || !this.equals(list.get(0))) {
