@@ -6712,6 +6712,7 @@ res/cardsfolder/p/pain_kami.txt svneol=native#text/plain
 res/cardsfolder/p/pain_magnification.txt svneol=native#text/plain
 res/cardsfolder/p/painbringer.txt -text svneol=unset#text/plain
 res/cardsfolder/p/painful_memories.txt svneol=native#text/plain
+res/cardsfolder/p/painful_quandary.txt -text
 res/cardsfolder/p/painsmith.txt svneol=native#text/plain
 res/cardsfolder/p/painters_servant.txt svneol=native#text/plain
 res/cardsfolder/p/painwracker_oni.txt svneol=native#text/plain
