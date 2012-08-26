@@ -3719,6 +3719,7 @@ res/cardsfolder/g/gitaxian_probe.txt svneol=native#text/plain
 res/cardsfolder/g/glacial_chasm.txt -text
 res/cardsfolder/g/glacial_crevasses.txt svneol=native#text/plain
 res/cardsfolder/g/glacial_fortress.txt svneol=native#text/plain
+res/cardsfolder/g/glacial_plating.txt -text
 res/cardsfolder/g/glacial_wall.txt svneol=native#text/plain
 res/cardsfolder/g/glaciers.txt svneol=native#text/plain
 res/cardsfolder/g/glade_gnarr.txt svneol=native#text/plain

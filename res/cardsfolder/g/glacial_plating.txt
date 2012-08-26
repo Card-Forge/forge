@@ -1,0 +1,15 @@
+Name:Glacial Plating
+ManaCost:2 W W
+Types:Snow Enchantment Aura
+Text:no text
+K:Enchant creature
+K:Cumulative upkeep:S
+A:SP$ Attach | Cost$ 2 W W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Enchanted creature gets +3/+3 for each age counter on CARDNAME.
+SVar:X:Count$CardCounters.AGE/Thrice
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_plating.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/7.jpg
+Oracle:Enchant creature\nCumulative upkeep {S} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it. {S} can be paid with one mana from a snow permanent.)\nEnchanted creature gets +3/+3 for each age counter on Glacial Plating.
+End

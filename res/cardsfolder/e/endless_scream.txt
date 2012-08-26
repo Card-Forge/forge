@@ -6,7 +6,8 @@ K:Enchant creature
 K:etbCounter:SCREAM:X
 SVar:X:Count$xPaid
 A:SP$ Attach | Cost$ X B | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | Description$ Enchanted creature gets +1/+0 for each scream counter on CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ Y | References$ Y | Description$ Enchanted creature gets +1/+0 for each scream counter on CARDNAME.
+SVar:Y:Count$CardCounters.SCREAM
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_scream.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/26.jpg
