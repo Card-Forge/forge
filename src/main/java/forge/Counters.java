@@ -203,6 +203,9 @@ public enum Counters {
     /** The MIRE. */
     MIRE(),
 
+    /** The MUSIC. */
+    MUSIC(),
+
     /** The OMEN. */
     OMEN(),
 
