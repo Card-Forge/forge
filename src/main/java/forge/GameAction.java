@@ -525,7 +525,7 @@ public class GameAction {
                         @Override
                         public void resolve() {
                             if (recoverable.getController().isHuman()) {
-                                GameActionUtil.payCostDuringAbilityResolve(sb.toString(), recoverable, recoverCost,
+                                GameActionUtil.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(),
                                         paidCommand, unpaidCommand);
                             } else { // computer
                                 if (ComputerUtil.canPayCost(abRecover)) {

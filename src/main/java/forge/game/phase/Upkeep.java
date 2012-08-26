@@ -182,7 +182,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     }
                 };
 
-                final Ability aiPaid = Upkeep.upkeepAIPayment(c, c.getEchoCost());
+                final Ability blankAbility = Upkeep.BlankAbility(c, c.getEchoCost());
 
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Echo for ").append(c).append("\n");
@@ -192,10 +192,10 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     public void resolve() {
                         if (c.getController().isHuman()) {
                             Cost cost = new Cost(c, c.getEchoCost().trim(), true);
-                            GameActionUtil.payCostDuringAbilityResolve(aiPaid, cost, paidCommand, unpaidCommand);
+                            GameActionUtil.payCostDuringAbilityResolve(blankAbility, cost, paidCommand, unpaidCommand);
                         } else { // computer
-                            if (ComputerUtil.canPayCost(aiPaid)) {
-                                ComputerUtil.playNoStack(aiPaid);
+                            if (ComputerUtil.canPayCost(blankAbility)) {
+                                ComputerUtil.playNoStack(blankAbility);
                             } else {
                                 Singletons.getModel().getGameAction().sacrifice(c, null);
                             }
@@ -302,7 +302,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                     final Command paidCommand = Command.BLANK;
 
-                    final Ability aiPaid = Upkeep.upkeepAIPayment(c, upkeepCost);
+                    final Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost);
 
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Upkeep for ").append(c).append("\n");
@@ -362,17 +362,17 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                     final Command paidCommand = Command.BLANK;
 
-                    final Ability aiPaid = Upkeep.upkeepAIPayment(c, upkeepCost);
+                    final Ability blankAbility = Upkeep.BlankAbility(c, upkeepCost);
 
                     final Ability upkeepAbility = new Ability(c, "0") {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                                GameActionUtil.payCostDuringAbilityResolve(sb.toString(), c, upkeepCost, paidCommand,
-                                        unpaidCommand);
+                                GameActionUtil.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(),
+                                        paidCommand, unpaidCommand);
                             } else { // computer
-                                if (ComputerUtil.shouldPayCost(c, upkeepCost) && ComputerUtil.canPayCost(aiPaid)) {
-                                    ComputerUtil.playNoStack(aiPaid);
+                                if (ComputerUtil.shouldPayCost(c, upkeepCost) && ComputerUtil.canPayCost(blankAbility)) {
+                                    ComputerUtil.playNoStack(blankAbility);
                                 } else {
                                     Singletons.getModel().getGameAction().sacrifice(c, null);
                                 }
@@ -404,7 +404,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                     final Command paidCommand = Command.BLANK;
 
-                    final Ability aiPaid = Upkeep.upkeepAIPayment(c, upkeepCost);
+                    final Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost);
 
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Damage upkeep for ").append(c).append("\n");
@@ -447,7 +447,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.Ability} object.
      */
-    private static Ability upkeepAIPayment(final Card c, final String costString) {
+    private static Ability BlankAbility(final Card c, final String costString) {
         Cost cost = new Cost(c, costString, true);
         return new AbilityStatic(c, cost, null) {
             @Override

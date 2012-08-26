@@ -28,6 +28,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPayLife;
 import forge.card.cost.CostMana;
+import forge.card.cost.CostPutCounter;
 import forge.card.cost.CostSacrifice;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
@@ -370,7 +371,7 @@ public final class GameActionUtil {
      * @param unpaid
      *            a {@link forge.Command} object.
      */
-    public static void payCostDuringAbilityResolve(final String message, Card hostCard, final String manaCost,
+    /*public static void payCostDuringAbilityResolve(final String message, Card hostCard, final String manaCost,
             final Command paid, final Command unpaid) {
         if (manaCost.startsWith("PayLife")) {
             String amountString = manaCost.split("<")[1].split(">")[0];
@@ -422,7 +423,7 @@ public final class GameActionUtil {
         AllZone.getStack().setResolving(false);
         AllZone.getInputControl().setInput(new InputPayManaCostAbility(message, manaCost, paid, unpaid));
         AllZone.getStack().setResolving(bResolving);
-    }
+    }*/
 
     /**
      * <p>
@@ -443,9 +444,9 @@ public final class GameActionUtil {
         if (cost.getCostParts().size() > 1) {
             throw new RuntimeException("GameActionUtil::payCostDuringAbilityResolve - Too many payment types - " + source);
         }
-        final CostPart unlessCost = cost.getCostParts().get(0);
-        if (unlessCost instanceof CostPayLife) {
-            String amountString = unlessCost.getAmount();
+        final CostPart costPart = cost.getCostParts().get(0);
+        if (costPart instanceof CostPayLife) {
+            String amountString = costPart.getAmount();
             final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                     : CardFactoryUtil.xCount(source, source.getSVar(amountString));
             if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(source, "Do you want to pay "
@@ -458,14 +459,36 @@ public final class GameActionUtil {
             return;
         }
 
-        else if (unlessCost instanceof CostSacrifice) {
+        else if (costPart instanceof CostPutCounter) {
+            String amountString = costPart.getAmount();
+            Counters counterType = ((CostPutCounter) costPart).getCounter();
+            int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                    : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+            String plural = amount > 1 ? "s" : "";
+            if (showYesNoDialog(source, "Do you want to put " + amount + " " + counterType.getName()
+                    + " counter" + plural + " on " + source + "?")) {
+                if (source.canHaveCountersPlacedOnIt(counterType)) {
+                    source.addCounterFromNonEffect(counterType, amount);
+                    paid.execute();
+                } else {
+                    unpaid.execute();
+                    AllZone.getGameLog().add("ResolveStack", "Trying to pay upkeep for " + source + " but it can't have "
+                    + counterType.getName() + " counters put on it.", 2);
+                }
+            } else {
+                unpaid.execute();
+            }
+            return;
+        }
+
+        else if (costPart instanceof CostSacrifice) {
             final boolean bResolving = AllZone.getStack().getResolving();
             AllZone.getStack().setResolving(false);
-            AllZone.getInputControl().setInput(new InputPaySacCost((CostSacrifice) unlessCost, ability, paid, unpaid));
+            AllZone.getInputControl().setInput(new InputPaySacCost((CostSacrifice) costPart, ability, paid, unpaid));
             AllZone.getStack().setResolving(bResolving);
         }
-        else if (unlessCost instanceof CostMana) {
-            if (unlessCost.getAmount().equals("0")) {
+        else if (costPart instanceof CostMana) {
+            if (costPart.getAmount().equals("0")) {
                 if (showYesNoDialog(source, "Do you want to pay 0?")) {
                     paid.execute();
                 } else {
