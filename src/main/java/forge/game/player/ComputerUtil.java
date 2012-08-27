@@ -1536,9 +1536,10 @@ public class ComputerUtil {
             if (hand.size() <= 0) {
                 continue;
             }
-            final CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land");
-            if (landsInPlay.size() > 5) {
-                final CardList landsInHand = hand.getType("Land");
+            final CardList lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land");
+            final CardList landsInHand = hand.getType("Land");
+            lands.addAll(landsInHand);
+            if (lands.size() > 5) {
                 if (landsInHand.size() > 0) { // discard lands
                     discardList.add(landsInHand.get(0));
                     hand.remove(landsInHand.get(0));
