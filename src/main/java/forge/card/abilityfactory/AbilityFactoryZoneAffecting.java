@@ -1373,8 +1373,9 @@ public class AbilityFactoryZoneAffecting {
                             dPHand = AbilityFactoryReveal.getRevealedList(p, dPHand, amount);
                         }
                         CardList dPChHand = new CardList(dPHand);
+                        String[] dValid = null;
                         if (params.containsKey("DiscardValid")) { // Restrict card choices
-                            final String[] dValid = params.get("DiscardValid").split(",");
+                            dValid = params.get("DiscardValid").split(",");
                             dPChHand = dPHand.getValidCards(dValid, source.getController(), source);
                         }
                         Player chooser = p;
@@ -1386,12 +1387,24 @@ public class AbilityFactoryZoneAffecting {
 
                         if (chooser.isComputer()) {
                             // AI
+                            if (p.isComputer()) { // discard AI cards
+                                CardList list = ComputerUtil.discardNumTypeAI(numCards, dValid, sa);
+                                if (mode.startsWith("Reveal")) {
+                                    GuiUtils.chooseOneOrNone("Computer has chosen", list.toArray());
+                                }
+                                discarded.addAll(list);
+                                for (Card card : list) {
+                                    p.discard(card, sa);
+                                }
+                                continue;
+                            }
+                            // discard human cards
                             for (int i = 0; i < numCards; i++) {
                                 if (dPChHand.size() > 0) {
                                     final CardList dChoices = new CardList();
                                     if (params.containsKey("DiscardValid")) {
-                                        final String dValid = params.get("DiscardValid");
-                                        if (dValid.contains("Creature") && !dValid.contains("nonCreature")) {
+                                        final String validString = params.get("DiscardValid");
+                                        if (validString.contains("Creature") && !validString.contains("nonCreature")) {
                                             final Card c = CardFactoryUtil.getBestCreatureAI(dPChHand);
                                             if (c != null) {
                                                 dChoices.add(CardFactoryUtil.getBestCreatureAI(dPChHand));

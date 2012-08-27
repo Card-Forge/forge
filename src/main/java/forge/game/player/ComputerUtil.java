@@ -1536,23 +1536,31 @@ public class ComputerUtil {
             if (hand.size() <= 0) {
                 continue;
             }
-            final CardList lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land");
+            final int numLandsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land").size();
             final CardList landsInHand = hand.getType("Land");
-            lands.addAll(landsInHand);
-            if (lands.size() > 5) {
-                if (landsInHand.size() > 0) { // discard lands
-                    discardList.add(landsInHand.get(0));
-                    hand.remove(landsInHand.get(0));
-                } else { // discard low costed stuff
-                    CardListUtil.sortCMC(hand);
-                    hand.reverse();
+            final int numLandsInHand = landsInHand.size();
+
+            // Discard a land
+            if (numLandsInHand > 3 || (numLandsInHand > 2 && numLandsInPlay > 0)
+                    || (numLandsInHand > 1 && numLandsInPlay > 2)
+                    || (numLandsInHand > 0 && numLandsInPlay > 5)) {
+                discardList.add(landsInHand.get(0));
+                hand.remove(landsInHand.get(0));
+            } else { // Discard other stuff 
+                CardListUtil.sortCMC(hand);
+                int numLandsAvailable = numLandsInPlay;
+                if (numLandsInHand > 0) {
+                    numLandsAvailable++;
+                }
+                //Discard unplayable card
+                if (hand.get(0).getCMC() > numLandsAvailable) {
                     discardList.add(hand.get(0));
                     hand.remove(hand.get(0));
+                } else { //Discard worst card
+                    Card worst = CardFactoryUtil.getWorstAI(hand);
+                    discardList.add(worst);
+                    hand.remove(worst);
                 }
-            } else { // discard high costed stuff
-                CardListUtil.sortCMC(hand);
-                discardList.add(hand.get(0));
-                hand.remove(hand.get(0));
             }
         }
 
