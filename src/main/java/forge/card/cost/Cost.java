@@ -478,6 +478,29 @@ public class Cost {
 
     /**
      * <p>
+     * toSimpleString.
+     * </p>
+     * 
+     * @return a {@link java.lang.String} object.
+     */
+    public final String toSimpleString() {
+        final StringBuilder cost = new StringBuilder();
+        boolean first = true;
+        for (final CostPart part : this.costParts) {
+            if (part instanceof CostMana) {
+                continue;
+            }
+            if (!first) {
+                cost.append(" and ");
+            }
+            cost.append(part.toString());
+            first = false;
+        }
+        return cost.toString();
+    }
+
+    /**
+     * <p>
      * spellToString.
      * </p>
      * 

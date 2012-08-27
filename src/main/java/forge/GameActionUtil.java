@@ -1909,7 +1909,7 @@ public final class GameActionUtil {
                 newSA.setBasicSpell(false);
                 newSA.setPayCosts(cost);
                 newSA.setManaCost("");
-                newSA.setDescription(sa.getDescription() + " (by paying " + keyword.substring(17) + " instead of its mana cost)");
+                newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
                 alternatives.add(newSA);
             }
         }
