@@ -23,6 +23,7 @@ public class ReadDraftRankings {
     private static final String COMMENT = "//";
 
     private Map<String, Map<String, Integer>> draftRankings;
+    private Map<String, Integer> setSizes;
 
     /**
      * <p>
@@ -39,6 +40,7 @@ public class ReadDraftRankings {
      * </p>
      */
     private void setup() {
+        this.setSizes = new HashMap<String, Integer>();
         this.draftRankings = this.readFile(ForgeProps.getFile(NewConstants.Draft.RANKINGS));
     } // setup()
 
@@ -74,6 +76,11 @@ public class ReadDraftRankings {
                             map.put(edition, new HashMap<String, Integer>());
                         }
                         map.get(edition).put(name, rank);
+                        if (setSizes.containsKey(edition)) {
+                            setSizes.put(edition, Math.max(setSizes.get(edition), rank));
+                        } else {
+                            setSizes.put(edition, rank);
+                        }
                     } catch (NumberFormatException nfe) {
                         Log.warn("NumberFormatException: " + nfe.getMessage());
                     }
@@ -86,7 +93,9 @@ public class ReadDraftRankings {
             throw new RuntimeException("ReadDraftRankings : readFile error, " + ex);
         } finally {
             try {
-                if (in != null)in.close();
+                if (in != null) {
+                    in.close();
+                }
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -95,11 +104,20 @@ public class ReadDraftRankings {
         return map;
     } // readFile()
 
-    public Integer getRanking(String cardName, String edition) {
-        Integer rank = null;
+    /**
+     * Get the relative ranking for the given card name in the given edition.
+     * 
+     * @param cardName
+     *            the card name
+     * @param edition
+     *            the card's edition
+     * @return ranking
+     */
+    public Double getRanking(String cardName, String edition) {
+        Double rank = null;
         if (draftRankings.containsKey(edition)) {
             String safeName = cardName.replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");
-            rank = draftRankings.get(edition).get(safeName);
+            rank = (double) draftRankings.get(edition).get(safeName) / (double) setSizes.get(edition);
         }
         return rank;
     }

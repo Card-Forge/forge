@@ -641,7 +641,7 @@ public class LimitedDeck {
     protected List<CardRankingBean> rankCards(List<CardPrinted> cards) {
         List<CardRankingBean> ranked = new ArrayList<CardRankingBean>();
         for (CardPrinted card : cards) {
-            Integer rkg = draftRankings.getRanking(card.getName(), card.getEdition());
+            Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());
             if (rkg != null) {
                 ranked.add(new CardRankingBean(rkg, card));
             }
@@ -699,7 +699,7 @@ public class LimitedDeck {
      * 
      */
     protected class CardRankingBean {
-        private Integer rank;
+        private Double rank;
         private CardPrinted card;
 
         /**
@@ -710,7 +710,7 @@ public class LimitedDeck {
          * @param card
          *            the CardPrinted
          */
-        public CardRankingBean(Integer rank, CardPrinted card) {
+        public CardRankingBean(Double rank, CardPrinted card) {
             this.rank = rank;
             this.card = card;
         }
@@ -718,7 +718,7 @@ public class LimitedDeck {
         /**
          * @return the rank
          */
-        public Integer getRank() {
+        public Double getRank() {
             return rank;
         }
 

@@ -30,22 +30,22 @@ public class ReadDraftRankingsTest {
         List<String> cardLines = FileUtil.readFile(new File(ForgeProps.getFile(NewConstants.CARDSFOLDER) + "/g",
                 "garruk_primal_hunter.txt"));
         Card c = CardReader.readCard(cardLines);
-        Assert.assertEquals(1, rdr.getRanking(c.getName(), "M13").intValue());
+        Assert.assertEquals(1.0 / 234.0, rdr.getRanking(c.getName(), "M13").doubleValue());
 
         cardLines = FileUtil.readFile(new File(ForgeProps.getFile(NewConstants.CARDSFOLDER) + "/c", "clone.txt"));
         c = CardReader.readCard(cardLines);
-        Assert.assertEquals(38, rdr.getRanking(c.getName(), "M13").intValue());
+        Assert.assertEquals(38.0 / 234.0, rdr.getRanking(c.getName(), "M13").doubleValue());
 
         cardLines = FileUtil.readFile(new File(ForgeProps.getFile(NewConstants.CARDSFOLDER) + "/t",
                 "tamiyo_the_moon_sage.txt"));
         c = CardReader.readCard(cardLines);
-        Assert.assertEquals(1, rdr.getRanking(c.getName(), "AVR").intValue());
+        Assert.assertEquals(1.0 / 234.0, rdr.getRanking(c.getName(), "AVR").doubleValue());
 
         // Mikaeus, the Lunarch has a comma in its name in the rankings file
         cardLines = FileUtil.readFile(new File(ForgeProps.getFile(NewConstants.CARDSFOLDER) + "/m",
                 "mikaeus_the_lunarch.txt"));
         c = CardReader.readCard(cardLines);
-        Assert.assertEquals(4, rdr.getRanking(c.getName(), "ISD").intValue());
+        Assert.assertEquals(4.0 / 255.0, rdr.getRanking(c.getName(), "ISD").doubleValue());
 
     }
 }

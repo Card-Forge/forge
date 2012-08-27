@@ -77,32 +77,14 @@ public class BoosterDraftAI {
         List<CardPrinted> aiPlayables = CardRules.Predicates.IS_KEPT_IN_AI_DECKS.select(chooseFrom,
                 CardPrinted.FN_GET_RULES);
 
-        // Sort cards by rank.
-        // Note that if pack has cards from different editions, they could have
-        // the same Integer rank.
-        // In that (hopefully rare) case, only one will end up in the Map.
-        TreeMap<Integer, CardPrinted> rankedCards = new TreeMap<Integer, CardPrinted>();
-        for (CardPrinted card : chooseFrom) {
-            Integer rkg = draftRankings.getRanking(card.getName(), card.getEdition());
-            if (rkg != null) {
-                rankedCards.put(rkg, card);
-            } else {
-                System.out.println("Draft Rankings - Card Not Found: " + card.getName());
-            }
-        }
+        TreeMap<Double, CardPrinted> rankedCards = rankCards(chooseFrom);
 
         if (this.playerColors.get(player).getColor1().equals("none")
                 && this.playerColors.get(player).getColor2().equals("none")) {
             // Generally the first pick of the draft, no colors selected yet.
 
             // Sort playable cards by rank
-            TreeMap<Integer, CardPrinted> rankedPlayableCards = new TreeMap<Integer, CardPrinted>();
-            for (CardPrinted card : aiPlayables) {
-                Integer rkg = draftRankings.getRanking(card.getName(), card.getEdition());
-                if (rkg != null) {
-                    rankedPlayableCards.put(rkg, card);
-                }
-            }
+            TreeMap<Double, CardPrinted> rankedPlayableCards = rankCards(aiPlayables);
 
             pickedCard = pickCard(rankedCards, rankedPlayableCards);
 
@@ -157,12 +139,12 @@ public class BoosterDraftAI {
             // Has already picked one color, but not the second.
 
             // Sort playable, on-color, or mono-colored, or colorless cards
-            TreeMap<Integer, CardPrinted> rankedPlayableCards = new TreeMap<Integer, CardPrinted>();
+            TreeMap<Double, CardPrinted> rankedPlayableCards = new TreeMap<Double, CardPrinted>();
             for (CardPrinted card : aiPlayables) {
                 CardColor currentColor1 = CardColor.fromNames(this.playerColors.get(player).getColor1());
                 CardColor color = card.getCard().getColor();
                 if (color.isColorless() || color.sharesColorWith(currentColor1) || color.isMonoColor()) {
-                    Integer rkg = draftRankings.getRanking(card.getName(), card.getEdition());
+                    Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());
                     if (rkg != null) {
                         rankedPlayableCards.put(rkg, card);
                     }
@@ -215,13 +197,7 @@ public class BoosterDraftAI {
             List<CardPrinted> colorList = hasColor.select(aiPlayables, CardPrinted.FN_GET_RULES);
 
             // Sort playable, on-color cards by rank
-            TreeMap<Integer, CardPrinted> rankedPlayableCards = new TreeMap<Integer, CardPrinted>();
-            for (CardPrinted card : colorList) {
-                Integer rkg = draftRankings.getRanking(card.getName(), card.getEdition());
-                if (rkg != null) {
-                    rankedPlayableCards.put(rkg, card);
-                }
-            }
+            TreeMap<Double, CardPrinted> rankedPlayableCards = rankCards(colorList);
 
             pickedCard = pickCard(rankedCards, rankedPlayableCards);
         }
@@ -240,16 +216,38 @@ public class BoosterDraftAI {
     }
 
     /**
+     * Sort cards by rank. Note that if pack has cards from different editions,
+     * they could have the same rank. In that (hopefully rare) case, only one
+     * will end up in the Map.
+     * 
+     * @param chooseFrom
+     *            List of cards
+     * @return map of rankings
+     */
+    private TreeMap<Double, CardPrinted> rankCards(final List<CardPrinted> chooseFrom) {
+        TreeMap<Double, CardPrinted> rankedCards = new TreeMap<Double, CardPrinted>();
+        for (CardPrinted card : chooseFrom) {
+            Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());
+            if (rkg != null) {
+                rankedCards.put(rkg, card);
+            } else {
+                System.out.println("Draft Rankings - Card Not Found: " + card.getName());
+            }
+        }
+        return rankedCards;
+    }
+
+    /**
      * Pick a card.
      * 
      * @param rankedCards
      * @param rankedPlayableCards
      * @return CardPrinted
      */
-    private CardPrinted pickCard(TreeMap<Integer, CardPrinted> rankedCards,
-            TreeMap<Integer, CardPrinted> rankedPlayableCards) {
+    private CardPrinted pickCard(TreeMap<Double, CardPrinted> rankedCards,
+            TreeMap<Double, CardPrinted> rankedPlayableCards) {
         CardPrinted pickedCard = null;
-        Map.Entry<Integer, CardPrinted> best = rankedCards.firstEntry();
+        Map.Entry<Double, CardPrinted> best = rankedCards.firstEntry();
         if (best != null) {
             if (rankedPlayableCards.containsValue(best.getValue())) {
                 // If best card is playable, pick it.
@@ -258,7 +256,7 @@ public class BoosterDraftAI {
                         + pickedCard.getCard().getManaCost() + ") " + pickedCard.getType().toString());
             } else {
                 // If not, find the best card that is playable.
-                Map.Entry<Integer, CardPrinted> bestPlayable = rankedPlayableCards.firstEntry();
+                Map.Entry<Double, CardPrinted> bestPlayable = rankedPlayableCards.firstEntry();
                 if (bestPlayable == null) {
                     // Nothing is playable, so just take the best card.
                     pickedCard = best.getValue();
