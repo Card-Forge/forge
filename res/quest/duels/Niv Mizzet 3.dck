@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Niv-Mizzet 3
+Title=Niv-Mizzet
+Difficulty=hard
+Description=UR deck with Niv-Mizzet, Curiosity and Tandem Lookout
+Icon=Niv Mizzet.jpg
+Deck Type=constructed
+[main]
+7 Island
+7 Mountain
+4 Volcanic Island
+4 Scalding Tarn
+1 Mox Ruby
+1 Mox Sapphire
+4 Goblin Fireslinger
+1 Cinder Pyromancer
+1 Cunning Sparkmage
+3 Kyren Sniper
+1 Prodigal Pyromancer
+1 Prodigal Sorcerer
+1 Razorfin Hunter
+1 Spikeshot Elder
+4 Niv-Mizzet, the Firemind
+4 Curiosity
+4 Ophidian Eye
+4 Tandem Lookout
+1 Sigil of Sleep
+1 Circle of Flame
+1 Caltrops
+1 Ensnaring Bridge
+1 Dissipation Field
+1 Ancestral Recall
+1 Time Walk
+[sideboard]
