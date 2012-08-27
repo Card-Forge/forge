@@ -5229,6 +5229,7 @@ res/cardsfolder/l/lance.txt svneol=native#text/plain
 res/cardsfolder/l/lancers_en_kor.txt -text
 res/cardsfolder/l/land_cap.txt svneol=native#text/plain
 res/cardsfolder/l/land_equilibrium.txt svneol=native#text/plain
+res/cardsfolder/l/land_grant.txt -text
 res/cardsfolder/l/land_leeches.txt svneol=native#text/plain
 res/cardsfolder/l/land_tax.txt svneol=native#text/plain
 res/cardsfolder/l/landbind_ritual.txt svneol=native#text/plain

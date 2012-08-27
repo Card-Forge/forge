@@ -68,6 +68,8 @@ public class CostReveal extends CostPartWithList {
             if (!source.isInZone(ZoneType.Hand)) {
                 return false;
             }
+        } else if (this.getType().equals("Hand")) {
+            return true;
         } else {
             handList = handList.getValidCards(type.split(";"), activator, source);
             if ((amount != null) && (amount > handList.size())) {
@@ -99,6 +101,9 @@ public class CostReveal extends CostPartWithList {
             }
 
             this.getList().add(source);
+        } else if (this.getType().equals("Hand")) {
+            this.setList(activator.getCardsIn(ZoneType.Hand));
+            return true;
         } else {
             hand = hand.getValidCards(type.split(";"), activator, source);
             Integer c = this.convertAmount();
@@ -143,6 +148,9 @@ public class CostReveal extends CostPartWithList {
         if (this.getThis()) {
             this.addToList(source);
             payment.setPaidManaPart(this);
+        } else if (this.getType().equals("Hand")) {
+            this.setList(activator.getCardsIn(ZoneType.Hand));
+            payment.setPaidManaPart(this);
         } else {
             Integer num = this.convertAmount();
 
@@ -182,6 +190,8 @@ public class CostReveal extends CostPartWithList {
 
         if (this.getThis()) {
             sb.append(this.getType());
+        } else if (this.getType().equals("Hand")) {
+            return ("Reveal you hand");
         } else {
             final StringBuilder desc = new StringBuilder();
 
