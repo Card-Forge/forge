@@ -169,6 +169,16 @@ Fixes/Features:
 - fix DeckHintsTest
 - fix typo
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- added some basic logic for AI cumulative upkeep. Expand as needed.
+- Re-added SVar:RemAIDeck:True to the Cumulative upkeep:PayLife<1> cards. These cards are just too hard to handle.
+- Added AI support to Blood Feud and Rivals' Duel.
+- JavaDoc fix
+- Fixed Endless Scream
+- Fixed a typo in AbilityFactoryPump
+- Added 3 more DeckNeeds.
+- Merged the two payCostDuringAbilityResolve functions into one.
+- Added discard costs to payCostDuringAbilityResolve.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -203,6 +213,18 @@ Morinfen
 Inner Sanctum
 Mistmoon Griffin
 Phyrexian Furnace
+Decomposition
+Rivals' Duel
+Dystopia
+Glacial Chasm
+Glacial Plating
+Krovikan Whispers
+Musician
+Skizzik Surger
+Phyrexian Soulgorger
+Polar Kraken
+Deepcavern Imp
+Painful Quandary
 
 
 end
