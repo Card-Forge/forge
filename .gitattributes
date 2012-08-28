@@ -7178,6 +7178,7 @@ res/cardsfolder/p/psychic_membrane.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_miasma.txt -text svneol=unset#text/plain
 res/cardsfolder/p/psychic_overload.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_possession.txt -text
+res/cardsfolder/p/psychic_puppetry.txt -text
 res/cardsfolder/p/psychic_purge.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_spear.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_surgery.txt svneol=native#text/plain
@@ -8841,6 +8842,7 @@ res/cardsfolder/s/soulcatcher.txt svneol=native#text/plain
 res/cardsfolder/s/soulcatchers_aerie.txt svneol=native#text/plain
 res/cardsfolder/s/souldrinker.txt svneol=native#text/plain
 res/cardsfolder/s/soulless_one.txt svneol=native#text/plain
+res/cardsfolder/s/soulless_revival.txt -text
 res/cardsfolder/s/soulquake.txt svneol=native#text/plain
 res/cardsfolder/s/souls_attendant.txt svneol=native#text/plain
 res/cardsfolder/s/souls_fire.txt -text
@@ -8993,6 +8995,7 @@ res/cardsfolder/s/spiritual_asylum.txt svneol=native#text/plain
 res/cardsfolder/s/spiritual_focus.txt -text
 res/cardsfolder/s/spiritual_guardian.txt svneol=native#text/plain
 res/cardsfolder/s/spiritual_sanctuary.txt svneol=native#text/plain
+res/cardsfolder/s/spiritual_visit.txt -text
 res/cardsfolder/s/spiritualize.txt -text svneol=unset#text/plain
 res/cardsfolder/s/spitebellows.txt svneol=native#text/plain
 res/cardsfolder/s/spiteflame_witch.txt svneol=native#text/plain
@@ -9222,6 +9225,7 @@ res/cardsfolder/s/strafe.txt svneol=native#text/plain
 res/cardsfolder/s/strands_of_night.txt svneol=native#text/plain
 res/cardsfolder/s/strands_of_undeath.txt svneol=native#text/plain
 res/cardsfolder/s/strandwalker.txt svneol=native#text/plain
+res/cardsfolder/s/strange_inversion.txt -text
 res/cardsfolder/s/strangleroot_geist.txt -text
 res/cardsfolder/s/strangling_soot.txt svneol=native#text/plain
 res/cardsfolder/s/strata_scythe.txt -text

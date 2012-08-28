@@ -1,0 +1,12 @@
+Name:Psychic Puppetry
+ManaCost:1 U
+Types:Instant Arcane
+Text:no text
+A:SP$ TapOrUntap | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ You may tap or untap target permanent.
+K:Splice onto Arcane U
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_puppetry.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/80.jpg
+Oracle:You may tap or untap target permanent.\nSplice onto Arcane {U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+End
