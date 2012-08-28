@@ -5,7 +5,6 @@ Text:no text
 PT:9/9
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigWitherBlocked | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigWitherBlocker | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
-Whenever CARDNAME deals damage to an opponent, remove all -1/-1 counters from it.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, remove all -1/-1 counters from it.
 SVar:TrigWitherBlocked:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ Wither
 SVar:TrigWitherBlocker:AB$ Pump | Cost$ 0 | Defined$ TriggeredBlocker | KW$ Wither

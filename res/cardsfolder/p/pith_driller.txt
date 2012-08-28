@@ -4,7 +4,7 @@ Types:Artifact Creature Horror
 Text:no text
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a -1/-1 counter on target creature.
-SVar:TrigPutCounter:DB$PutCounter | Tgt$ TgtC | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
+SVar:TrigPutCounter:DB$ PutCounter | Tgt$ TgtC | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pith_driller.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/69.jpg

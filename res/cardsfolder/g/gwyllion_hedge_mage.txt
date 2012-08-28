@@ -5,8 +5,8 @@ Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Plains.YouCtrl | PresentCompare$ GE2 | OptionalDecider$ You | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Plains, you may put a 1/1 white Kithkin Soldier creature token onto the battlefield.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Swamp.YouCtrl | PresentCompare$ GE2 | OptionalDecider$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Swamps, you may put a -1/-1 counter on target creature.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gwyllion_hedge_mage.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/202.jpg

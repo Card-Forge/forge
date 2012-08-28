@@ -5,7 +5,7 @@ Text:no text
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, put a -1/-1 counter on that creature.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ M1M1 | CounterNum$ 1
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ M1M1 | CounterNum$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unstable_mutation.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/33.jpg
