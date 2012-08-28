@@ -10638,6 +10638,7 @@ res/cardsfolder/w/war_torch_goblin.txt svneol=native#text/plain
 res/cardsfolder/w/warbreak_trumpeter.txt svneol=native#text/plain
 res/cardsfolder/w/warclamp_mastiff.txt -text
 res/cardsfolder/w/ward_of_bones.txt -text
+res/cardsfolder/w/ward_of_piety.txt -text
 res/cardsfolder/w/ward_sliver.txt -text svneol=unset#text/plain
 res/cardsfolder/w/warden_of_the_wall.txt -text
 res/cardsfolder/w/wargate.txt svneol=native#text/plain
@@ -11037,6 +11038,7 @@ res/cardsfolder/z/zealot_il_vec.txt svneol=native#text/plain
 res/cardsfolder/z/zealots_en_dal.txt svneol=native#text/plain
 res/cardsfolder/z/zealous_conscripts.txt -text
 res/cardsfolder/z/zealous_guardian.txt svneol=native#text/plain
+res/cardsfolder/z/zealous_inquisitor.txt -text
 res/cardsfolder/z/zealous_persecution.txt svneol=native#text/plain
 res/cardsfolder/z/zealous_strike.txt -text
 res/cardsfolder/z/zebra_unicorn.txt svneol=native#text/plain
@@ -11052,6 +11054,7 @@ res/cardsfolder/z/zephyr_spirit.txt svneol=native#text/plain
 res/cardsfolder/z/zephyr_sprite.txt svneol=native#text/plain
 res/cardsfolder/z/zerapa_minotaur.txt -text
 res/cardsfolder/z/zhalfirin_commander.txt svneol=native#text/plain
+res/cardsfolder/z/zhalfirin_crusader.txt -text
 res/cardsfolder/z/zhalfirin_knight.txt svneol=native#text/plain
 res/cardsfolder/z/zhang_fei_fierce_warrior.txt svneol=native#text/plain
 res/cardsfolder/z/zhang_he_wei_general.txt svneol=native#text/plain
