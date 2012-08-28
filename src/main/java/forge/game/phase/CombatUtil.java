@@ -1249,10 +1249,6 @@ public class CombatUtil {
      */
     public static int shieldDamage(final Card attacker, final Card defender) {
 
-        if (!CombatUtil.canDestroyBlocker(defender, attacker, null, false)) {
-            return 100;
-        }
-
         int flankingMagnitude = 0;
         if (attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
 
@@ -1270,7 +1266,7 @@ public class CombatUtil {
 
         final int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
 
-        final int defenderDefense = (defender.getNetDefense() - flankingMagnitude) + defBushidoMagnitude;
+        final int defenderDefense = (defender.getLethalDamage() - flankingMagnitude) + defBushidoMagnitude;
 
         return defenderDefense;
     } // shieldDamage
