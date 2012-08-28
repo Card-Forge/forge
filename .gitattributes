@@ -3945,6 +3945,7 @@ res/cardsfolder/g/gorilla_shaman.txt svneol=native#text/plain
 res/cardsfolder/g/gorilla_titan.txt -text
 res/cardsfolder/g/gorilla_war_cry.txt -text
 res/cardsfolder/g/gorilla_warrior.txt svneol=native#text/plain
+res/cardsfolder/g/goryos_vengeance.txt -text
 res/cardsfolder/g/gossamer_chains.txt svneol=native#text/plain
 res/cardsfolder/g/gossamer_phantasm.txt svneol=native#text/plain
 res/cardsfolder/g/gosta_dirk.txt svneol=native#text/plain
@@ -4359,6 +4360,7 @@ res/cardsfolder/h/hidden_predators.txt -text
 res/cardsfolder/h/hidden_spider.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_stag.txt -text svneol=unset#text/plain
 res/cardsfolder/h/hideous_end.txt svneol=native#text/plain
+res/cardsfolder/h/hideous_laughter.txt -text
 res/cardsfolder/h/hideous_visage.txt svneol=native#text/plain
 res/cardsfolder/h/hidetsugus_second_rite.txt svneol=native#text/plain
 res/cardsfolder/h/high_market.txt svneol=native#text/plain
@@ -4714,6 +4716,7 @@ res/cardsfolder/i/intimidation.txt svneol=native#text/plain
 res/cardsfolder/i/intimidation_bolt.txt -text svneol=unset#text/plain
 res/cardsfolder/i/intimidator_initiate.txt svneol=native#text/plain
 res/cardsfolder/i/into_the_core.txt svneol=native#text/plain
+res/cardsfolder/i/into_the_fray.txt -text
 res/cardsfolder/i/into_the_maw_of_hell.txt -text
 res/cardsfolder/i/into_the_north.txt svneol=native#text/plain
 res/cardsfolder/i/into_the_roil.txt svneol=native#text/plain
@@ -5126,6 +5129,7 @@ res/cardsfolder/k/kobolds_of_kher_keep.txt svneol=native#text/plain
 res/cardsfolder/k/kodama_of_the_center_tree.txt svneol=native#text/plain
 res/cardsfolder/k/kodama_of_the_north_tree.txt svneol=native#text/plain
 res/cardsfolder/k/kodama_of_the_south_tree.txt svneol=native#text/plain
+res/cardsfolder/k/kodamas_might.txt -text
 res/cardsfolder/k/kodamas_reach.txt svneol=native#text/plain
 res/cardsfolder/k/kokusho_the_evening_star.txt svneol=native#text/plain
 res/cardsfolder/k/konda_lord_of_eiganjo.txt svneol=native#text/plain
