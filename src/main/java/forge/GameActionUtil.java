@@ -1968,6 +1968,7 @@ public final class GameActionUtil {
                     newSA.setPayCosts(newCost);
                     newSA.setManaCost("");
                     newSA.setDescription(s.getDescription() + " (Splicing " + c + " onto it)");
+                    newSA.addSplicedCards(c);
                     SpellAbility child = newSA;
                     while (child.getSubAbility() != null) {
                         AbilitySub newChild = (AbilitySub) child.getSubAbility().getCopy();
@@ -1977,7 +1978,7 @@ public final class GameActionUtil {
                     }
                     child.setSubAbility(newSubSA);
                     newSubSA.setParent(child);
-                    newSAs.add(newSA);
+                    newSAs.add(0, newSA);
                     addSAs.add(newSA);
                 }
                 allSAs.addAll(addSAs);

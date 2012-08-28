@@ -68,6 +68,7 @@ public abstract class SpellAbility {
     private Card sourceCard;
     private Card originalHost = null;
 
+    private CardList splicedCards = null;
     private CardList targetList;
     // targetList doesn't appear to be used anymore
 
@@ -1769,6 +1770,30 @@ public abstract class SpellAbility {
         if (this.tappedForConvoke != null) {
             this.tappedForConvoke.clear();
         }
+    }
+
+    /**
+     * @return the splicedCards
+     */
+    public CardList getSplicedCards() {
+        return splicedCards;
+    }
+
+    /**
+     * @param splicedCard the splicedCards to set
+     */
+    public void setSplicedCards(CardList splicedCards) {
+        this.splicedCards = splicedCards;
+    }
+
+    /**
+     * @param splicedCard the splicedCard to add
+     */
+    public void addSplicedCards(Card splicedCard) {
+        if (this.splicedCards == null) {
+            this.splicedCards = new CardList();
+        }
+        this.splicedCards.add(splicedCard);
     }
 
 }

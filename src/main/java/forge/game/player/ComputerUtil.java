@@ -50,6 +50,7 @@ import forge.error.ErrorViewer;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiUtils;
 
 /**
  * <p>
@@ -73,21 +74,30 @@ public class ComputerUtil {
      * @return a boolean.
      */
     public static boolean playSpellAbilities(final SpellAbility[] all) {
+        Player computer = AllZone.getComputerPlayer();
         // not sure "playing biggest spell" matters?
         ComputerUtil.sortSpellAbilityByCost(all);
         final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : all) {
+            abilities.add(sa);
+            sa.setActivatingPlayer(computer);
             //add alternative costs as additional spell abilities
             abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
-            abilities.add(sa);
         }
+        for (SpellAbility sa : abilities) {
+            sa.setActivatingPlayer(computer);
+            newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
+        }
+        abilities.addAll(0, newAbilities);
+        ComputerUtil.sortSpellAbilityByCost(all);
         for (final SpellAbility sa : abilities) {
             // Don't add Counterspells to the "normal" playcard lookups
             final AbilityFactory af = sa.getAbilityFactory();
             if ((af != null) && af.getAPI().equals("Counter")) {
                 continue;
             }
-            sa.setActivatingPlayer(AllZone.getComputerPlayer());
+            sa.setActivatingPlayer(computer);
 
             if (ComputerUtil.canBePlayedAndPayedByAI(sa) && ComputerUtil.handlePlayingSpellAbility(sa)) {
                 return false;
@@ -161,6 +171,9 @@ public class ComputerUtil {
             final CostPayment pay = new CostPayment(cost, sa);
             if (pay.payComputerCosts()) {
                 AllZone.getStack().addAndUnfreeze(sa);
+                if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
+                    GuiUtils.chooseOneOrNone("Computer reveals spliced cards:", sa.getSplicedCards().toArray());
+                }
                 return true;
                 // TODO: solve problems with TapsForMana triggers by adding
                 // sources tapped here if possible (ArsenalNut)
@@ -252,17 +265,25 @@ public class ComputerUtil {
      * @return a boolean.
      */
     public static boolean playCounterSpell(final ArrayList<SpellAbility> possibleCounters) {
+        Player computer = AllZone.getComputerPlayer();
         SpellAbility bestSA = null;
         int bestRestriction = Integer.MIN_VALUE;
-        final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : possibleCounters) {
+            sa.setActivatingPlayer(computer);
             //add alternative costs as additional spell abilities
-            abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
-            abilities.add(sa);
+            newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa));
         }
-        for (final SpellAbility sa : abilities) {
+        possibleCounters.addAll(newAbilities);
+        newAbilities.clear();
+        for (SpellAbility sa : possibleCounters) {
+            sa.setActivatingPlayer(computer);
+            newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
+        }
+        possibleCounters.addAll(newAbilities);
+        for (final SpellAbility sa : possibleCounters) {
             SpellAbility currentSA = sa;
-            sa.setActivatingPlayer(AllZone.getComputerPlayer());
+            sa.setActivatingPlayer(computer);
             // check everything necessary
             if (ComputerUtil.canBePlayedAndPayedByAI(currentSA)) {
                 if (bestSA == null) {

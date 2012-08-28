@@ -49,6 +49,7 @@ public class SpellAbilityStackInstance {
     // When going to a SubAbility that SA has a Instance Choice object
     /** The tc. */
     private TargetChoices tc = null;
+    private CardList splicedCards = null;
 
     /** The activating player. */
     private Player activatingPlayer = null;
@@ -93,6 +94,7 @@ public class SpellAbilityStackInstance {
         // Payment info
         this.paidHash = this.ability.getPaidHash();
         this.ability.resetPaidHash();
+        this.splicedCards = sa.getSplicedCards();
 
         // TODO getXManaCostPaid should be on the SA, not the Card
         this.xManaPaid = sa.getSourceCard().getXManaCostPaid();
@@ -148,6 +150,7 @@ public class SpellAbilityStackInstance {
         // Set Cost specific things here
         this.ability.resetPaidHash();
         this.ability.setPaidHash(this.paidHash);
+        this.ability.setSplicedCards(splicedCards);
         this.ability.getSourceCard().setXManaCostPaid(this.xManaPaid);
 
         // Triggered
