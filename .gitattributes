@@ -1746,6 +1746,7 @@ res/cardsfolder/c/consume_strength.txt -text
 res/cardsfolder/c/consume_the_meek.txt svneol=native#text/plain
 res/cardsfolder/c/consuming_bonfire.txt svneol=native#text/plain
 res/cardsfolder/c/consuming_vapors.txt -text
+res/cardsfolder/c/consuming_vortex.txt -text
 res/cardsfolder/c/consumptive_goo.txt svneol=native#text/plain
 res/cardsfolder/c/contagion.txt svneol=native#text/plain
 res/cardsfolder/c/contagion_clasp.txt svneol=native#text/plain
@@ -2023,6 +2024,7 @@ res/cardsfolder/d/dakmor_scorpion.txt svneol=native#text/plain
 res/cardsfolder/d/dakmor_sorceress.txt svneol=native#text/plain
 res/cardsfolder/d/damia_sage_of_stone.txt -text
 res/cardsfolder/d/damnation.txt svneol=native#text/plain
+res/cardsfolder/d/dampen_thought.txt -text
 res/cardsfolder/d/damping_field.txt svneol=native#text/plain
 res/cardsfolder/d/damping_matrix.txt -text
 res/cardsfolder/d/dance_of_many.txt svneol=native#text/plain
@@ -2292,6 +2294,7 @@ res/cardsfolder/d/desolation_angel.txt svneol=native#text/plain
 res/cardsfolder/d/desolation_giant.txt svneol=native#text/plain
 res/cardsfolder/d/desperate_charge.txt svneol=native#text/plain
 res/cardsfolder/d/desperate_ravings.txt -text
+res/cardsfolder/d/desperate_ritual.txt -text
 res/cardsfolder/d/despise.txt svneol=native#text/plain
 res/cardsfolder/d/despoil.txt svneol=native#text/plain
 res/cardsfolder/d/despondency.txt svneol=native#text/plain
@@ -3723,6 +3726,7 @@ res/cardsfolder/g/glacial_chasm.txt -text
 res/cardsfolder/g/glacial_crevasses.txt svneol=native#text/plain
 res/cardsfolder/g/glacial_fortress.txt svneol=native#text/plain
 res/cardsfolder/g/glacial_plating.txt -text
+res/cardsfolder/g/glacial_ray.txt -text
 res/cardsfolder/g/glacial_wall.txt svneol=native#text/plain
 res/cardsfolder/g/glaciers.txt svneol=native#text/plain
 res/cardsfolder/g/glade_gnarr.txt svneol=native#text/plain
