@@ -397,6 +397,16 @@ public class Cost {
         }
     }
 
+    public final CostMana getCostMana () {
+        // TODO: Change where ChangeCost happens
+        for (final CostPart part : this.costParts) {
+            if (part instanceof CostMana) {
+                return (CostMana) part;
+            }
+        }
+        return null;
+    }
+
     /**
      * <p>
      * refundPaidCost.

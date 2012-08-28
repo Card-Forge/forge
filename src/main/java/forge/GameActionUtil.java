@@ -31,8 +31,10 @@ import forge.card.cost.CostPayLife;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPutCounter;
 import forge.card.cost.CostSacrifice;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
@@ -1914,5 +1916,75 @@ public final class GameActionUtil {
             }
         }
         return alternatives;
+    }
+
+    /**
+     * <p>
+     * getSpliceAbilities.
+     * </p>
+     * 
+     * @param sa
+     *            a SpellAbility.
+     * @return an ArrayList<SpellAbility>.
+     * get abilities with all Splice options
+     */
+    public static final ArrayList<SpellAbility> getSpliceAbilities(SpellAbility sa) {
+        ArrayList<SpellAbility> newSAs = new ArrayList<SpellAbility>();
+        ArrayList<SpellAbility> allSAs = new ArrayList<SpellAbility>();
+        allSAs.add(sa);
+        Card source = sa.getSourceCard();
+        
+        if (!sa.isSpell() || !source.isType("Arcane") /*|| sa.getAbilityFactory() == null*/) {
+            return newSAs;
+        }
+        
+        for (Card c : sa.getActivatingPlayer().getCardsIn(ZoneType.Hand)) {
+            for (String keyword : c.getKeyword()) {
+                if (!keyword.startsWith("Splice")) {
+                    continue;
+                }
+                String newSubSAString = c.getCharacteristics().getIntrinsicAbility().get(0);
+                newSubSAString = newSubSAString.replace("SP", "DB");
+                final AbilityFactory af = new AbilityFactory();
+                final AbilitySub newSubSA = (AbilitySub) af.getAbility(newSubSAString, source);
+                ArrayList<SpellAbility> addSAs = new ArrayList<SpellAbility>();
+                // Add the subability to all existing variants
+                for (SpellAbility s : allSAs) {
+                    final Cost newCost = new Cost(source, keyword.substring(19), false);
+                    final SpellAbility newSA = s.copy();
+                    Cost oldCost = newSA.getPayCosts();
+                    if (newSA.getPayCosts() != null) {
+                        for (final CostPart part : oldCost.getCostParts()) {
+                            if (!(part instanceof CostMana)) {
+                                newCost.getCostParts().add(part);
+                            } else {
+                                ManaCost manaCost1 = new ManaCost(part.toString());
+                                manaCost1.combineManaCost(newCost.getCostMana().toString());
+                                newCost.getCostMana().setMana(manaCost1.toString());
+                            }
+                        }
+                    }
+                    newSA.setBasicSpell(false);
+                    newSA.setPayCosts(newCost);
+                    newSA.setManaCost("");
+                    newSA.setDescription(s.getDescription() + " (Splicing " + c + " onto it)");
+                    SpellAbility child = newSA;
+                    while (child.getSubAbility() != null) {
+                        AbilitySub newChild = (AbilitySub) child.getSubAbility().getCopy();
+                        child.setSubAbility(newChild);
+                        newChild.setParent(child);
+                        child = newChild;
+                    }
+                    child.setSubAbility(newSubSA);
+                    newSubSA.setParent(child);
+                    newSAs.add(newSA);
+                    addSAs.add(newSA);
+                }
+                allSAs.addAll(addSAs);
+                break;
+            }
+        }
+
+        return newSAs;
     }
 } // end class GameActionUtil

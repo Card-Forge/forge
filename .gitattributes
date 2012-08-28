@@ -888,6 +888,7 @@ res/cardsfolder/b/blazing_shoal.txt svneol=native#text/plain
 res/cardsfolder/b/blazing_specter.txt svneol=native#text/plain
 res/cardsfolder/b/blazing_torch.txt -text
 res/cardsfolder/b/bleak_coven_vampires.txt svneol=native#text/plain
+res/cardsfolder/b/blessed_breath.txt -text
 res/cardsfolder/b/blessed_orator.txt svneol=native#text/plain
 res/cardsfolder/b/blessed_reversal.txt svneol=native#text/plain
 res/cardsfolder/b/blessed_wind.txt svneol=native#text/plain
@@ -10694,6 +10695,7 @@ res/cardsfolder/w/wayward_angel.txt -text svneol=unset#text/plain
 res/cardsfolder/w/wayward_soul.txt svneol=native#text/plain
 res/cardsfolder/w/weakness.txt svneol=native#text/plain
 res/cardsfolder/w/weakstone.txt svneol=native#text/plain
+res/cardsfolder/w/wear_away.txt -text
 res/cardsfolder/w/weathered_bodyguards.txt -text
 res/cardsfolder/w/weathered_wayfarer.txt svneol=native#text/plain
 res/cardsfolder/w/weatherseed_elf.txt svneol=native#text/plain

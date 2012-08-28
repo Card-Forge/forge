@@ -695,11 +695,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public String getStackDescription() {
-                if (this.params.containsKey("SpellDescription")) {
-                    return af.getHostCard().getName() + " - " + this.params.get("SpellDescription");
-                } else {
-                    return AbilityFactoryDestroy.destroyAllStackDescription(af, this, this.noRegen);
-                }
+                return AbilityFactoryDestroy.destroyAllStackDescription(af, this, this.noRegen);
             }
 
             @Override

@@ -1,0 +1,11 @@
+Name:Wear Away
+ManaCost:G G
+Types:Instant Arcane
+Text:no text
+A:SP$ Destroy | Cost$ G G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+K:Splice onto Arcane 3 G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wear_away.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/250.jpg
+Oracle:Destroy target artifact or enchantment.\nSplice onto Arcane {3}{G} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+End
