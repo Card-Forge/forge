@@ -6911,6 +6911,7 @@ res/cardsfolder/p/phyrexian_monitor.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_negator.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_obliterator.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_plaguelord.txt svneol=native#text/plain
+res/cardsfolder/p/phyrexian_portal.txt -text
 res/cardsfolder/p/phyrexian_processor.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_prowler.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_rager.txt svneol=native#text/plain

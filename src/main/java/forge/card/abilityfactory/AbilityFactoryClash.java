@@ -770,6 +770,7 @@ public final class AbilityFactoryClash {
                     for (final Card c : l) {
                         pile1.add(c);
                     }
+                    
                     for (final Card c : pool) {
                         if (!pile1.contains(c)) {
                             pile2.add(c);
@@ -806,67 +807,8 @@ public final class AbilityFactoryClash {
                 System.out.println("Pile 2:" + pile2);
                 card.clearRemembered();
 
-                // then, the chooser picks a pile
-                if (chooser.isHuman()) {
-                    final Card[] disp = new Card[pile1.size() + pile2.size() + 2];
-                    disp[0] = new Card();
-                    disp[0].setName("Pile 1");
-                    for (int i = 0; i < pile1.size(); i++) {
-                        disp[1 + i] = pile1.get(i);
-                    }
-                    disp[pile1.size() + 1] = new Card();
-                    disp[pile1.size() + 1].setName("Pile 2");
-                    for (int i = 0; i < pile2.size(); i++) {
-                        disp[pile1.size() + i + 2] = pile2.get(i);
-                    }
-
-                    // make sure Pile 1 or Pile 2 is clicked on
-                    boolean chosen = false;
-                    while (!chosen) {
-                        final Object o = GuiUtils.chooseOne("Choose a pile", disp);
-                        final Card c = (Card) o;
-                        if (c.getName().equals("Pile 1")) {
-                            chosen = true;
-                            for (final Card z : pile1) {
-                                card.addRemembered(z);
-                            }
-                        } else if (c.getName().equals("Pile 2")) {
-                            chosen = true;
-                            for (final Card z : pile2) {
-                                card.addRemembered(z);
-                            }
-                            pile1WasChosen = false;
-                        }
-
-                    }
-                } else {
-                    int cmc1 = CardFactoryUtil.evaluatePermanentList(new CardList(pile1));
-                    int cmc2 = CardFactoryUtil.evaluatePermanentList(new CardList(pile2));
-                    if (pool.getNotType("Creature").isEmpty()) {
-                        cmc1 = CardFactoryUtil.evaluateCreatureList(new CardList(pile1));
-                        cmc2 = CardFactoryUtil.evaluateCreatureList(new CardList(pile2));
-                        System.out.println("value:" + cmc1 + " " + cmc2);
-                    }
-
-                    // for now, this assumes that the outcome will be bad
-                    // TODO: This should really have a ChooseLogic param to
-                    // figure this out
-                    if (cmc2 > cmc1) {
-                        JOptionPane.showMessageDialog(null, "Computer chooses the Pile 1", "",
-                                JOptionPane.INFORMATION_MESSAGE);
-                        for (final Card c : pile1) {
-                            card.addRemembered(c);
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Computer chooses the Pile 2", "",
-                                JOptionPane.INFORMATION_MESSAGE);
-                        for (final Card c : pile2) {
-                            card.addRemembered(c);
-                        }
-                        pile1WasChosen = false;
-                    }
-                }
-
+                pile1WasChosen = selectPiles(params, sa, pile1, pile2, chooser, card, pool);
+                
                 // take action on the chosen pile
                 if (params.containsKey("ChosenPile")) {
                     final AbilityFactory afPile = new AbilityFactory();
@@ -901,4 +843,93 @@ public final class AbilityFactoryClash {
         }
     } // end twoPiles resolve
 
+    private static boolean selectPiles(final HashMap<String, String> params, final SpellAbility sa, ArrayList<Card> pile1, ArrayList<Card> pile2, 
+            Player chooser, Card card, CardList pool) {
+        boolean pile1WasChosen = true;
+        // then, the chooser picks a pile
+        
+        if (params.containsKey("FaceDown")) {
+            // Used for Phyrexian Portal, FaceDown Pile choosing
+            if (chooser.isHuman()) {
+                final String p1Str = String.format("Pile 1 (%s cards)", pile1.size());
+                final String p2Str = String.format("Pile 2 (%s cards)", pile2.size());
+                
+                final String message = String.format("Choose a pile\n%s or %s", p1Str, p2Str);
+                
+                final Object[] possibleValues = { p1Str , p2Str };
+                
+                final Object playDraw = JOptionPane.showOptionDialog(null, message, "Choose a Pile", 
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, 
+                        possibleValues, possibleValues[0]);
+                
+                pile1WasChosen = playDraw.equals(0);
+            }
+            else {
+                // AI will choose the first pile if it is larger or the same
+                // TODO Improve this to be slightly more random to not be so predictable
+                pile1WasChosen = pile1.size() >= pile2.size();
+            }
+        }
+        else {     
+            if (chooser.isHuman()) {
+                final Card[] disp = new Card[pile1.size() + pile2.size() + 2];
+                disp[0] = new Card();
+                disp[0].setName("Pile 1");
+                for (int i = 0; i < pile1.size(); i++) {
+                    disp[1 + i] = pile1.get(i);
+                }
+                disp[pile1.size() + 1] = new Card();
+                disp[pile1.size() + 1].setName("Pile 2");
+                for (int i = 0; i < pile2.size(); i++) {
+                    disp[pile1.size() + i + 2] = pile2.get(i);
+                }
+
+                // make sure Pile 1 or Pile 2 is clicked on
+                while (true) {
+                    final Object o = GuiUtils.chooseOne("Choose a pile", disp);
+                    final Card c = (Card) o;
+                    String name = c.getName();
+                    
+                    if (!(name.equals("Pile 1") || name.equals("Pile 2"))) {
+                        continue;
+                    }
+                    
+                    pile1WasChosen = name.equals("Pile 1");
+                    break;   
+                }
+            } else {
+                int cmc1 = CardFactoryUtil.evaluatePermanentList(new CardList(pile1));
+                int cmc2 = CardFactoryUtil.evaluatePermanentList(new CardList(pile2));
+                if (pool.getNotType("Creature").isEmpty()) {
+                    cmc1 = CardFactoryUtil.evaluateCreatureList(new CardList(pile1));
+                    cmc2 = CardFactoryUtil.evaluateCreatureList(new CardList(pile2));
+                    System.out.println("value:" + cmc1 + " " + cmc2);
+                }
+
+                // for now, this assumes that the outcome will be bad
+                // TODO: This should really have a ChooseLogic param to
+                // figure this out
+                pile1WasChosen = cmc1 >= cmc2;
+                if (pile1WasChosen) {
+                    JOptionPane.showMessageDialog(null, "Computer chooses the Pile 1", "",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Computer chooses the Pile 2", "",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+        
+        if (pile1WasChosen) {
+            for (final Card z : pile1) {
+                card.addRemembered(z);
+            }
+        } else {
+            for (final Card z : pile2) {
+                card.addRemembered(z);
+            }
+        }
+        
+        return pile1WasChosen;
+    }
 } // end class AbilityFactory_Clash

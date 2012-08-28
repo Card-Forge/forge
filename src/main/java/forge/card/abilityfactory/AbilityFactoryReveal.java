@@ -226,6 +226,11 @@ public final class AbilityFactoryReveal {
         } else {
             sb.append(" ");
         }
+        
+        if (params.containsKey("StackDescription")) {
+            sb.append(params.get("StackDescription"));
+            return sb.toString();
+        }
 
         ArrayList<Player> tgtPlayers;
 
@@ -467,7 +472,7 @@ public final class AbilityFactoryReveal {
                     cardsRevealed = true;
                 }
 
-                if ((params.containsKey("RememberRevealed")) && cardsRevealed) {
+                if ((params.containsKey("RememberRevealed")) && !params.containsKey("RevealValid")) {
                     for (final Card one : top) {
                         host.addRemembered(one);
                     }
@@ -2232,7 +2237,7 @@ public final class AbilityFactoryReveal {
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
         }
-
+        
         ArrayList<Player> tgtPlayers;
 
         final Target tgt = sa.getTarget();
