@@ -15,6 +15,10 @@ Please note that the issue is most likely caused by Mountain Lion's Gatekeeper f
 
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
 
+A new Alpha Strike button was added to the dock.
+
+Several people have noticed that the cards displayed on the battlefield will fail to be displayed when the number of cards on the battlefield increases. Maximizing the human panel can help to re-display the cards.
+
 --
 
 It seems like the front face of double faced cards aren't triggering properly, but the back face and single faced cards are.
@@ -179,6 +183,16 @@ Fixes/Features:
 - Merged the two payCostDuringAbilityResolve functions into one.
 - Added discard costs to payCostDuringAbilityResolve.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- improve DraftRankings to handle sets with different number of cards
+- Improved discardNumTypeAI handling lands.
+- AF Discard AI will now also use discardNumTypeAI.
+- Improved discardNumTypeAI.
+- Added the deck Niv-Mizzet 3 by Nordos.
+- fix draft constant
+- Added the cost "Reveal your hand".
+- Simplified Two Piles logic allowed for FaceDown piles
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -225,6 +239,10 @@ Phyrexian Soulgorger
 Polar Kraken
 Deepcavern Imp
 Painful Quandary
+Dream Halls
+Land Grant
+Phyrexian Portal
+Posessed Portal
 
 
 end
