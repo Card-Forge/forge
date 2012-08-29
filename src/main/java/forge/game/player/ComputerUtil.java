@@ -747,10 +747,7 @@ public class ComputerUtil {
                 // add source card to used list
                 usedSources.add(sourceCard);
 
-                // TODO: Change this if AI is able use to mana abilities that
-                // produce more than one mana (111230 - ArsenalNut)
-                final String color = InputPayManaCostUtil.getLongColorString(manaProduced.split(" ")[0]);
-                costPart.payMana(color);
+                costPart.payMultipleMana(manaProduced);
 
                 if (!test) {
                     // Pay additional costs
@@ -767,7 +764,7 @@ public class ComputerUtil {
                     // subtract mana from mana pool
                     cost = manapool.payManaFromAbility(sa, cost, m);
                 } else {
-                    cost.payMana(color);
+                    cost.payMultipleMana(manaProduced);
                 }
                 // check if cost part is paid
                 if (costPart.isPaid() || cost.isPaid()) {

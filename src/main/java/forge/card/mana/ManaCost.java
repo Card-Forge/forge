@@ -276,6 +276,29 @@ public class ManaCost {
 
     /**
      * <p>
+     * payMultipleMana.
+     * </p>
+     * 
+     * @param mana
+     *            a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    public final void payMultipleMana(String mana) {
+        String[] manas = mana.split(" ");
+        for (String manaPart : manas) {
+            if (manaPart.matches("[0-9]+")) {
+                final int amount = Integer.parseInt(manaPart);
+                for (int i = 0; i < amount; i++) {
+                    this.payMana(Constant.Color.COLORLESS);
+                }
+            } else {
+                this.payMana(InputPayManaCostUtil.getLongColorString(manaPart));
+            }
+        }
+    }
+
+    /**
+     * <p>
      * payMana.
      * </p>
      * 
