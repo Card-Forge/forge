@@ -80,7 +80,7 @@ public class ComputerUtil {
         final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
         final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : all) {
-            abilities.add(sa);
+            abilities.add(0, sa);
             sa.setActivatingPlayer(computer);
             //add alternative costs as additional spell abilities
             abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
@@ -90,7 +90,6 @@ public class ComputerUtil {
             newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
         }
         abilities.addAll(0, newAbilities);
-        ComputerUtil.sortSpellAbilityByCost(all);
         for (final SpellAbility sa : abilities) {
             // Don't add Counterspells to the "normal" playcard lookups
             final AbilityFactory af = sa.getAbilityFactory();

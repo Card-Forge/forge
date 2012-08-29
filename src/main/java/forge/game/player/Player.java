@@ -31,7 +31,6 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardDamageHistory;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Constant;

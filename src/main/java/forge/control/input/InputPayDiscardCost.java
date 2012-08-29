@@ -21,7 +21,6 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Command;
-import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
 import forge.card.spellability.SpellAbility;
