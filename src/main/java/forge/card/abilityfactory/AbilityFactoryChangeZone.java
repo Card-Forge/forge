@@ -1101,11 +1101,7 @@ public final class AbilityFactoryChangeZone {
         }
 
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
-
-        final PlayerZone destZone = player.getZone(destination);
-
         final CardList fetched = new CardList();
-
         final String remember = params.get("RememberChanged");
         final String imprint = params.get("Imprint");
 
@@ -1128,20 +1124,33 @@ public final class AbilityFactoryChangeZone {
                 fetchList.shuffle();
                 // Save a card as a default, in case we can't find anything suitable.
                 Card first = fetchList.get(0);
-                fetchList = fetchList.filter(new CardListFilter() {
-                    @Override
-                    public boolean addCard(final Card c) {
-                        if (c.isType("Legendary")) {
-                            if (!AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, c.getName()).isEmpty()) {
-                                return false;
+                if (ZoneType.Battlefield.equals(destination)) {
+                    fetchList = fetchList.filter(new CardListFilter() {
+                        @Override
+                        public boolean addCard(final Card c) {
+                            if (c.isType("Legendary")) {
+                                if (!AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, c.getName()).isEmpty()) {
+                                    return false;
+                                }
                             }
+                            return true;
                         }
-                        return true;
+                    });
+                    if (player.isHuman() && params.containsKey("GainControl")) {
+                        fetchList = fetchList.filter(new CardListFilter() {
+                            @Override
+                            public boolean addCard(final Card c) {
+                                if (!c.getSVar("RemAIDeck").equals("") || !c.getSVar("RemRandomDeck").equals("")) {
+                                    return false;
+                                }
+                                return true;
+                            }
+                        });
                     }
-                });
+                }
                 if (ZoneType.Exile.equals(destination) || origin.contains(ZoneType.Battlefield)) {
                     // Exiling or bouncing stuff
-                    if (destZone.getPlayer().isHuman()) {
+                    if (player.isHuman()) {
                         c = CardFactoryUtil.getBestAI(fetchList);
                     } else {
                         c = CardFactoryUtil.getWorstAI(fetchList);
@@ -1149,7 +1158,7 @@ public final class AbilityFactoryChangeZone {
                 } else if (origin.contains(ZoneType.Library)
                         && (type.contains("Basic") || AbilityFactoryChangeZone.areAllBasics(type))) {
                     c = AbilityFactoryChangeZone.basicManaFixing(fetchList);
-                } else if (ZoneType.Battlefield.equals(destination) && fetchList.getNotType("Creature").size() == 0) {
+                } else if (ZoneType.Hand.equals(destination) && fetchList.getNotType("Creature").size() == 0) {
                     c = AbilityFactoryChangeZone.chooseCreature(fetchList);
                 } else if (ZoneType.Battlefield.equals(destination) || ZoneType.Graveyard.equals(destination)) {
                     c = CardFactoryUtil.getBestAI(fetchList);
