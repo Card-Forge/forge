@@ -2638,6 +2638,7 @@ public class CombatUtil {
 
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
         c.getController().setAttackedWithCreatureThisTurn(true);
+        c.getController().incrementAttackersDeclaredThisTurn();
     } // checkDeclareAttackers
 
     /**

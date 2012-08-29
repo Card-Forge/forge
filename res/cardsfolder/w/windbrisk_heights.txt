@@ -1,0 +1,16 @@
+Name:Windbrisk Heights
+ManaCost:no cost
+Types:Land
+Text:no text
+K:Hideaway
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.
+SVar:TrigDig:AB$ Dig | Cost$ 0  | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Play | Cost$ W T | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | ForgetRemembered$ True | PlayerTurn$ True | SpellDescription$ You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn.
+SVar:X:Count$AttackersDeclared
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/windbrisk_heights.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/281.jpg
+Oracle:Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n{T}: Add {W} to your mana pool.\n{W}, {T}: You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn.
+End

@@ -459,6 +459,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     player.setAttackedWithCreatureThisTurn(false);
                     player.setNumLandsPlayed(0);
                     player.clearAssignedDamage();
+                    player.resetAttackersDeclaredThisTurn();
                 }
                 this.getPlayerTurn().removeKeyword("Skip all combat phases of this turn.");
                 break;

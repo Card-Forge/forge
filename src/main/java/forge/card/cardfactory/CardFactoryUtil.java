@@ -2487,6 +2487,12 @@ public class CardFactoryUtil {
             }
         }
 
+        if (sq[0].contains("AttackersDeclared")) {
+            if (players.size() > 0) {
+                return CardFactoryUtil.doXMath(players.get(0).getAttackersDeclaredThisTurn(), m, source);
+            }
+        }
+
         return CardFactoryUtil.doXMath(n, m, source);
     }
 
@@ -3034,6 +3040,11 @@ public class CardFactoryUtil {
             final CardList res = CardUtil.getThisTurnEntered(destination, origin, validFilter, c);
 
             return CardFactoryUtil.doXMath(res.size(), m, c);
+        }
+
+        // Count$AttackersDeclared
+        if (sq[0].contains("AttackersDeclared")) {
+            return CardFactoryUtil.doXMath(cardController.getAttackersDeclaredThisTurn(), m, c);
         }
 
         // Count$ThisTurnCast <Valid>

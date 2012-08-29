@@ -31,6 +31,7 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.CardDamageHistory;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Constant;
@@ -133,6 +134,9 @@ public abstract class Player extends GameEntity {
 
     /** The attackedWithCreatureThisTurn. */
     private boolean attackedWithCreatureThisTurn = false;
+
+    /** The playerAttackCountThisTurn. */
+    private int attackersDeclaredThisTurn = 0;
 
     /** The zones. */
     private final Map<ZoneType, PlayerZone> zones = new EnumMap<ZoneType, PlayerZone>(ZoneType.class);
@@ -2040,6 +2044,37 @@ public abstract class Player extends GameEntity {
      */
     public final void setAttackedWithCreatureThisTurn(final boolean b) {
         this.attackedWithCreatureThisTurn = b;
+    }
+
+    /**
+     * <p>
+     * Gets the number of attackers declared by Player this turn.
+     * </p>
+     *
+     * @return a boolean.
+     */
+    public final int getAttackersDeclaredThisTurn() {
+        return this.attackersDeclaredThisTurn;
+    }
+
+    /**
+     * <p>
+     * Increase number of attackers declared by Player this turn.
+     * </p>
+     *
+     */
+    public final void incrementAttackersDeclaredThisTurn() {
+        this.attackersDeclaredThisTurn++;
+    }
+
+    /**
+     * <p>
+     * Resets number of attackers declared by Player this turn.
+     * </p>
+     *
+     */
+    public final void resetAttackersDeclaredThisTurn() {
+        this.attackersDeclaredThisTurn = 0;
     }
 
     // //////////////////////////////
