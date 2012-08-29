@@ -447,6 +447,7 @@ public class AbilityFactoryZoneAffecting {
             }
             xPaid = true;
         }
+        //if (n)
 
         // TODO: if xPaid and one of the below reasons would fail, instead of
         // bailing
@@ -517,6 +518,10 @@ public class AbilityFactoryZoneAffecting {
                 if (!mandatory) {
                     return false;
                 }
+            }
+
+            if (numCards == 0 && !mandatory) {
+                return false;
             }
 
             if (((computerHandSize + numCards) > computerMaxHandSize)
