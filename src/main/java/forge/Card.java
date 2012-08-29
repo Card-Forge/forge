@@ -2570,7 +2570,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 sb.append("\r\n");
             } else if (keyword.startsWith("Splice")) {
-                sb.append(keyword + "\r\n");
+                final Cost cost = new Cost(this, keyword.substring(19), false);
+                sb.append("Splice onto Arcane " + cost.toSimpleString() + "\r\n");
             }
             if (keyword.startsWith("Storm")) {
                 if (sb.toString().contains("Target") || sb.toString().contains("target")) {

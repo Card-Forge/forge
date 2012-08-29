@@ -1934,11 +1934,14 @@ public final class GameActionUtil {
         allSAs.add(sa);
         Card source = sa.getSourceCard();
         
-        if (!sa.isSpell() || !source.isType("Arcane") /*|| sa.getAbilityFactory() == null*/) {
+        if (!sa.isSpell() || !source.isType("Arcane") || sa.getAbilityFactory() == null) {
             return newSAs;
         }
         
         for (Card c : sa.getActivatingPlayer().getCardsIn(ZoneType.Hand)) {
+            if (c.equals(source)) {
+                continue;
+            }
             for (String keyword : c.getKeyword()) {
                 if (!keyword.startsWith("Splice")) {
                     continue;
@@ -1958,9 +1961,13 @@ public final class GameActionUtil {
                             if (!(part instanceof CostMana)) {
                                 newCost.getCostParts().add(part);
                             } else {
-                                ManaCost manaCost1 = new ManaCost(part.toString());
-                                manaCost1.combineManaCost(newCost.getCostMana().toString());
-                                newCost.getCostMana().setMana(manaCost1.toString());
+                                if (newCost.getCostMana() != null) {
+                                    ManaCost oldManaCost = new ManaCost(part.toString());
+                                    oldManaCost.combineManaCost(newCost.getCostMana().toString());
+                                    newCost.getCostMana().setMana(oldManaCost.toString());
+                                } else {
+                                    newCost.getCostParts().add(part); 
+                                }
                             }
                         }
                     }
