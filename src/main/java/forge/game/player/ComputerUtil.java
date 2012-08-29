@@ -80,7 +80,7 @@ public class ComputerUtil {
         final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
         final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : all) {
-            abilities.add(0, sa);
+            abilities.add(abilities.size(), sa);
             sa.setActivatingPlayer(computer);
             //add alternative costs as additional spell abilities
             abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
