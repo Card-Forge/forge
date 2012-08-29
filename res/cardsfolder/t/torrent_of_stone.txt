@@ -1,0 +1,11 @@
+Name:Torrent of Stone
+ManaCost:3 R
+Types:Instant Arcane
+Text:no text
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+K:Splice onto Arcane Sac<2/Mountain>
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/torrent_of_stone.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/119.jpg
+Oracle:Torrent of Stone deals 4 damage to target creature.\nSplice onto Arcane-Sacrifice two Mountains. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+End

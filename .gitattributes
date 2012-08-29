@@ -9894,6 +9894,7 @@ res/cardsfolder/t/torpid_moloch.txt -text svneol=unset#text/plain
 res/cardsfolder/t/torpor_dust.txt svneol=native#text/plain
 res/cardsfolder/t/torpor_orb.txt -text
 res/cardsfolder/t/torrent_of_fire.txt svneol=native#text/plain
+res/cardsfolder/t/torrent_of_stone.txt -text
 res/cardsfolder/t/torsten_von_ursus.txt svneol=native#text/plain
 res/cardsfolder/t/tortoise_formation.txt svneol=native#text/plain
 res/cardsfolder/t/torture.txt svneol=native#text/plain
@@ -10298,6 +10299,7 @@ res/cardsfolder/v/vedalken_outlander.txt svneol=native#text/plain
 res/cardsfolder/v/vedalken_plotter.txt svneol=native#text/plain
 res/cardsfolder/v/vedalken_shackles.txt svneol=native#text/plain
 res/cardsfolder/v/veil_of_birds.txt svneol=native#text/plain
+res/cardsfolder/v/veil_of_secrecy.txt -text
 res/cardsfolder/v/veilborn_ghoul.txt -text
 res/cardsfolder/v/veiled_apparition.txt svneol=native#text/plain
 res/cardsfolder/v/veiled_sentry.txt -text svneol=unset#text/plain
