@@ -1139,21 +1139,20 @@ public final class AbilityFactoryChangeZone {
                         return true;
                     }
                 });
-                if (type.contains("Basic")) {
+                if (ZoneType.Exile.equals(destination) || origin.contains(ZoneType.Battlefield)) {
+                    // Exiling or bouncing stuff
+                    if (destZone.getPlayer().isHuman()) {
+                        c = CardFactoryUtil.getBestAI(fetchList);
+                    } else {
+                        c = CardFactoryUtil.getWorstAI(fetchList);
+                    }
+                } else if (origin.contains(ZoneType.Library)
+                        && (type.contains("Basic") || AbilityFactoryChangeZone.areAllBasics(type))) {
                     c = AbilityFactoryChangeZone.basicManaFixing(fetchList);
-                } else if (AbilityFactoryChangeZone.areAllBasics(type)) {
-                    c = AbilityFactoryChangeZone.basicManaFixing(fetchList, type);
-                } else if (fetchList.getNotType("Creature").size() == 0) {
+                } else if (ZoneType.Battlefield.equals(destination) && fetchList.getNotType("Creature").size() == 0) {
                     c = AbilityFactoryChangeZone.chooseCreature(fetchList);
                 } else if (ZoneType.Battlefield.equals(destination) || ZoneType.Graveyard.equals(destination)) {
-                    c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, sa, false);
-                } else if (ZoneType.Exile.equals(destination)) {
-                    // Exiling your own stuff, if Exiling opponents stuff choose best
-                    if (destZone.getPlayer().isHuman()) {
-                        c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, sa, false);
-                    } else {
-                        c = CardFactoryUtil.getCheapestPermanentAI(fetchList, sa, false);
-                    }
+                    c = CardFactoryUtil.getBestAI(fetchList);
                 } else {
                     // Don't fetch another tutor with the same name
                     if (origin.contains(ZoneType.Library) && !fetchList.getNotName(card.getName()).isEmpty()) {

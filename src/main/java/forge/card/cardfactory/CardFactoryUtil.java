@@ -717,7 +717,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getWorstAI(final CardList list) {
-        return CardFactoryUtil.getWorstPermanentAI(list, false, false, false, true);
+        return CardFactoryUtil.getWorstPermanentAI(list, false, false, false, false);
     }
 
     // returns null if list.size() == 0
@@ -770,6 +770,7 @@ public class CardFactoryUtil {
         if (list.size() == 0) {
             return null;
         }
+        System.out.println("getWorstPermanentAI: " + list);
 
         if (biasEnch && (list.getType("Enchantment").size() > 0)) {
             return CardFactoryUtil.getCheapestPermanentAI(list.getType("Enchantment"), null, false);
