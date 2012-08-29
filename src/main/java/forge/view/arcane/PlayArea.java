@@ -197,39 +197,38 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         // should find an appropriate width of card
         this.cardWidth = this.getCardWidthMax();
-        int step = 256;
+        int maxCardWidth = this.getCardWidthMax();
+        int minCardWidth = this.getCardWidthMin();
+        int lastGoodCardWidth = minCardWidth;
+        int deltaCardWidth = (maxCardWidth - minCardWidth) / 2;
         boolean workedLastTime = false;
-        boolean isFirstRun = true;
+        //boolean isFirstRun = true;
 
-        while (step > 0 ) {
-            if (!isFirstRun ) {
-                if ( workedLastTime ) {
-                    cardWidth += step;
-                } else {
-                    cardWidth -= step;
-                }
-                step /= 2;
-            } 
-                
-            
+        while (deltaCardWidth > 0) {
             final CardStackRow creatures = (CardStackRow) allCreatures.clone();
             final CardStackRow tokens = (CardStackRow) allTokens.clone();
             final CardStackRow lands = (CardStackRow) allLands.clone();
             CardStackRow others = (CardStackRow) allOthers.clone();
             workedLastTime = canAdjustWidth(lands, tokens, creatures, others);
 
-            if ( workedLastTime && isFirstRun) break;
-            if (cardWidth <= 0) {
-                break;
+            deltaCardWidth = (cardWidth - lastGoodCardWidth) / 2;
+            if (workedLastTime) {
+                lastGoodCardWidth = cardWidth;
+                cardWidth += deltaCardWidth;
+                if (lastGoodCardWidth == maxCardWidth) {
+                    break;
+                }
             }
-            isFirstRun = false;
-            //System.err.format("[%d] @ Attempt to siut at w=%d %s (%s) %n", new Date().getTime(), this.cardWidth, workedLastTime ? "↑" : "↓", mirror ? "MIRROR" : "DIRECT");
-
-            // if it did not fit this time, let it fit with a one-pixel less size
-            if ( !workedLastTime && step == 0 ) {
-                step = 1;
+            else {
+                cardWidth -= deltaCardWidth;
             }
         }
+        cardWidth = lastGoodCardWidth;
+        final CardStackRow creatures = (CardStackRow) allCreatures.clone();
+        final CardStackRow tokens = (CardStackRow) allTokens.clone();
+        final CardStackRow lands = (CardStackRow) allLands.clone();
+        CardStackRow others = (CardStackRow) allOthers.clone();
+        workedLastTime = canAdjustWidth(lands, tokens, creatures, others);
 
         // Get size of all the rows.
         int x, y = PlayArea.GUTTER_Y;
