@@ -193,6 +193,14 @@ Fixes/Features:
 - Simplified Two Piles logic allowed for FaceDown piles
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed a typo from my earlier commit
+- Added "Splice onto Arcane" ability.
+- Added AI support to Splice onto Arcane.
+- Added Splice onto Arcane to Vital Surge.
+- Fixed AI of Grief Tyrant and Incremental Blight.
+- Fixed the AI function shieldDamage to better handle Trample.
+- Fixed Worldgorger Dragon
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -243,6 +251,25 @@ Dream Halls
 Land Grant
 Phyrexian Portal
 Possessed Portal
+Ward of Piety
+Zealous Inquisitor
+Zhalfirin Crusader
+Blessed Breath
+Wear Away
+Consuming Vortex
+Dampen Thought
+Desperate Ritual
+Glacial Ray
+Goryo's Vengeance
+Hideous Laughter
+Into the Fray
+Kodama's Might
+Lifted by Clouds
+Psychic Puppetry
+Soulless Revival
+Spiritual Visit
+Strange Inversion
+Through the Breach
 
 
 end
