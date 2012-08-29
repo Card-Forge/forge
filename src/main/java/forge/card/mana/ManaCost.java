@@ -376,7 +376,7 @@ public class ManaCost {
                     choice = toPay;
                     continue;
                 }
-                if (isFisrtChoiceBetter(toPay, choice)) {
+                if (isFirstChoiceBetter(toPay, choice)) {
                     choice = toPay;
                 }
             }
@@ -400,7 +400,7 @@ public class ManaCost {
         return true;
     }
 
-    private boolean isFisrtChoiceBetter(ManaCostShard s1, ManaCostShard s2) {
+    private boolean isFirstChoiceBetter(ManaCostShard s1, ManaCostShard s2) {
         return getPayPriority(s1) > getPayPriority(s2);
     }
 
@@ -461,7 +461,7 @@ public class ManaCost {
                     choice = toPay;
                     continue;
                 }
-                if (isFisrtChoiceBetter(toPay, choice)) {
+                if (isFirstChoiceBetter(toPay, choice)) {
                     choice = toPay;
                 }
             }

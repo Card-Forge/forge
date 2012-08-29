@@ -770,7 +770,7 @@ public class ComputerUtil {
                     cost.payMana(color);
                 }
                 // check if cost part is paid
-                if (costPart.isPaid()) {
+                if (costPart.isPaid() || cost.isPaid()) {
                     break;
                 }
             } // end of mana ability loop
