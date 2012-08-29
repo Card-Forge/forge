@@ -1918,6 +1918,7 @@ res/cardsfolder/c/crucible_of_fire.txt svneol=native#text/plain
 res/cardsfolder/c/crucible_of_worlds.txt svneol=native#text/plain
 res/cardsfolder/c/crude_rampart.txt svneol=native#text/plain
 res/cardsfolder/c/cruel_bargain.txt svneol=native#text/plain
+res/cardsfolder/c/cruel_deceiver.txt -text
 res/cardsfolder/c/cruel_edict.txt svneol=native#text/plain
 res/cardsfolder/c/cruel_fate.txt svneol=native#text/plain
 res/cardsfolder/c/cruel_revival.txt svneol=native#text/plain
@@ -4206,6 +4207,7 @@ res/cardsfolder/h/harpoon_sniper.txt svneol=native#text/plain
 res/cardsfolder/h/harrier_griffin.txt svneol=native#text/plain
 res/cardsfolder/h/harrow.txt svneol=native#text/plain
 res/cardsfolder/h/harrowing_journey.txt -text
+res/cardsfolder/h/harsh_deceiver.txt -text
 res/cardsfolder/h/harsh_justice.txt -text
 res/cardsfolder/h/haru_onna.txt svneol=native#text/plain
 res/cardsfolder/h/harvest_gwyllion.txt svneol=native#text/plain

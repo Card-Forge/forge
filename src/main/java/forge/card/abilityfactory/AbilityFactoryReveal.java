@@ -226,7 +226,7 @@ public final class AbilityFactoryReveal {
         } else {
             sb.append(" ");
         }
-        
+
         if (params.containsKey("StackDescription")) {
             sb.append(params.get("StackDescription"));
             return sb.toString();
