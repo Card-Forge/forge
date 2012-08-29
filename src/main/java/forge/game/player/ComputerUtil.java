@@ -653,13 +653,12 @@ public class ComputerUtil {
         // initialize ArrayList list for mana needed
         final ArrayList<ArrayList<AbilityMana>> partSources = new ArrayList<ArrayList<AbilityMana>>();
         final ArrayList<Integer> partPriority = new ArrayList<Integer>();
-        final String[] costParts = cost.toString().replace("X ", "").replace("P", "").split(" ");
+        final String[] costParts = cost.toString().replace("X ", "").split(" ");
         Boolean foundAllSources = findManaSources(manaAbilityMap, partSources, partPriority, costParts);
         if (!foundAllSources) {
             if (!test) {
                 // real payment should not arrive here
-                throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for "
-                        + sa.getSourceCard().getName());
+                throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard());
             }
             manapool.clearManaPaid(sa, test); // refund any mana taken from mana pool
             return false;
@@ -771,13 +770,21 @@ public class ComputerUtil {
                     break;
                 }
             } // end of mana ability loop
+
             if (!costPart.isPaid() || cost.isPaid()) {
                 break;
             } else {
                 nPriority++;
             }
-
         } // end of cost parts loop
+
+        //check for phyrexian mana
+        if (!cost.isPaid() && cost.containsPhyrexianMana() && AllZone.getComputerPlayer().getLife() > 8) {
+            cost.payPhyrexian();
+            if (!test) {
+                AllZone.getComputerPlayer().payLife(2, sa.getSourceCard());
+            }
+        }
 
         manapool.clearManaPaid(sa, test);
         // check if paid
@@ -841,6 +848,14 @@ public class ComputerUtil {
                                 srcFound.addAll(manaAbilityMap.get(color));
                             }
                         }
+                    }
+                } else if (costParts[nPart].contains("P")) { // Phyrexian
+                    String newPart = costParts[nPart].replace("/P", "");
+                    if (manaAbilityMap.containsKey(newPart)) {
+                        srcFound.addAll(manaAbilityMap.get(newPart));
+                    } else if (AllZone.getComputerPlayer().getLife() > 8) { //Pay with life
+                        partSources.add(nPart, srcFound);
+                        continue;
                     }
                 } else if (costParts[nPart].length() > 1) { // Hybrid
                     final String firstColor = costParts[nPart].substring(0, 1);
