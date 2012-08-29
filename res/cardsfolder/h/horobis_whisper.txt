@@ -1,0 +1,12 @@
+Name:Horobi's Whisper
+ManaCost:1 B B
+Types:Instant Arcane
+Text:no text
+A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | ConditionPresent$ Swamp.YouCtrl | ConditionCompare$ GE1 | SpellDescription$ If you control a Swamp, destroy target nonblack creature.
+K:Splice onto Arcane ExileFromGrave<4/Card>
+SVar:NeedsToPlay:Swamp.YouCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/horobis_whisper.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/70.jpg
+Oracle:If you control a Swamp, destroy target nonblack creature.\nSplice onto Arcane-Exile four cards from your graveyard. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+End
