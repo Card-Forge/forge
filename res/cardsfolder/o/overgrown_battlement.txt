@@ -6,7 +6,6 @@ PT:0/4
 K:Defender
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add G to your mana pool for each Creature with defender you control.
 SVar:X:Count$Valid Creature.withDefender+YouCtrl
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overgrown_battlement.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/203.jpg
