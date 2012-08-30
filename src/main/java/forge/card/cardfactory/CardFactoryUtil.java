@@ -615,6 +615,11 @@ public class CardFactoryUtil {
             value += 1;
         }
 
+        // paired creatures are more valuable because they grant a bonus to the other creature
+        if (c.isPaired()) {
+            value += 14;
+        }
+
         return value;
 
     } // evaluateCreature

@@ -338,7 +338,7 @@ public class AbilityFactoryPump {
                     || card.getNetCombatDamage() <= 0
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                     || ph.getPhase().isBefore(PhaseType.MAIN1)
-                    || AllZoneUtil.getCreaturesInPlay(computer).isEmpty())) {
+                    || AllZoneUtil.getCreaturesInPlay(computer).getNotKeyword("Defender").isEmpty())) {
                 return false;
             }
             if (ph.isPlayerTurn(human) && (!card.isAttacking()

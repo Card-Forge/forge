@@ -770,22 +770,12 @@ public class ComputerUtilBlock {
             return combat;
         }
 
-        ComputerUtilBlock.setAttackersLeft(new CardList(ComputerUtilBlock.getAttackers())); // keeps
-                                                                                                      // track
-        // of all
-        // currently
-        // unblocked
-        // attackers
-        ComputerUtilBlock.setBlockersLeft(new CardList(possibleBlockers)); // keeps
-        // track of
-        // all
-        // unassigned
-        // blockers
-        ComputerUtilBlock.setBlockedButUnkilled(new CardList()); // keeps track
-                                                                 // of all
-                                                                 // blocked
-        // attackers that currently
-        // wouldn't be destroyed
+        // keeps track of all currently unblocked attackers
+        ComputerUtilBlock.setAttackersLeft(new CardList(ComputerUtilBlock.getAttackers())); 
+        // keeps track of all unassigned blockers
+        ComputerUtilBlock.setBlockersLeft(new CardList(possibleBlockers)); 
+        // keeps track of all blocked attackers that currently wouldn't be destroyed
+        ComputerUtilBlock.setBlockedButUnkilled(new CardList());
         CardList blockers;
         CardList chumpBlockers;
 
