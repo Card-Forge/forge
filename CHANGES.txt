@@ -201,6 +201,23 @@ Fixes/Features:
 - Fixed the AI function shieldDamage to better handle Trample.
 - Fixed Worldgorger Dragon
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Enabled non-mana costs for "Splice onto Arcane".
+- fixed Regeneration for Crimson Muckwader
+- reworked binary search to find size between min and max card size
+- creating branch for RTR card development
+- Improved changeHiddenOriginResolveAI dealing with unwanted moves.
+- Cleanup.
+- More Improvements of changeHiddenOriginResolveAI (cards with SVar:RemAIDeck:True and SVar:RemRandomDeck:True will now be filtered out).
+- The AI will now stop paying mana when the mana cost of a SpellAbility is paid (this improves handling of multi mana sources a little).
+- The AI can now properly use mana sources that produce more than one colorless mana.
+- Removed SVar:RemAIDeck:True from some cards.
+- Fixed AI ordering of SpellAbilities (high cost to low cost).
+- The AI will now pay Phyrexian mana with life if it can't be payed otherwise and life is above 8.
+- Fixed AI playing Grim Flowering for zero cards.
+- Fixed Chimeric Coils.
+- Little tweaks of AI functions.
+- Improved AI of Tangle Wire.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -270,6 +287,13 @@ Soulless Revival
 Spiritual Visit
 Strange Inversion
 Through the Breach
+Hundred-Talon Strike
+Horobi's Whisper
+Windbrisk Heights
+Harsh Deceiver
+Cruel Deceiver
+Torrent of Stone
+Veil of Secrecy
 
 
 end
