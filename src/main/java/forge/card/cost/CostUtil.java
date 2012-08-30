@@ -254,6 +254,27 @@ public class CostUtil {
         }
         return false;
     }
+    
+    /**
+     * hasTapCost.
+     * 
+     * @param cost
+     *            the cost
+     * @param source
+     *            the source
+     * @return true, if successful
+     */
+    public static boolean hasTapCost(final Cost cost, final Card source) {
+        if (cost == null) {
+            return true;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostTapType) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Determine amount.

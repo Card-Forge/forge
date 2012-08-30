@@ -756,6 +756,7 @@ public class AbilityFactoryPump {
      */
     private boolean pumpPlayAI(final SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
+        final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
 
         if (!CostUtil.checkLifeCost(cost, sa.getSourceCard(), 4)) {
             return false;
@@ -772,11 +773,20 @@ public class AbilityFactoryPump {
         if (!CostUtil.checkRemoveCounterCost(cost, sa.getSourceCard())) {
             return false;
         }
+        
+        if (AllZone.getStack().isEmpty() && CostUtil.hasTapCost(cost, sa.getSourceCard())) {
+                if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(AllZone.getComputerPlayer())) {
+                    return false;
+                }
+                if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && ph.isPlayerTurn(AllZone.getHumanPlayer())) {
+                    return false;
+                }
+        }
 
         final SpellAbilityRestriction restrict = sa.getRestrictions();
 
         // Phase Restrictions
-        if ((AllZone.getStack().size() == 0) && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+        if ((AllZone.getStack().size() == 0) && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!this.abilityFactory.isCurse() && !AbilityFactory.isSorcerySpeed(sa)) {
