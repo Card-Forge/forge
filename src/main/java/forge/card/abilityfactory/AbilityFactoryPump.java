@@ -334,7 +334,7 @@ public class AbilityFactoryPump {
             }
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")
                 || keyword.endsWith("Prevent all damage that would be dealt by CARDNAME.")) {
-            if (ph.isPlayerTurn(computer) && (!CombatUtil.canBlock(card)
+            if (ph.isPlayerTurn(computer) && (!(CombatUtil.canBlock(card) || card.isBlocking())
                     || card.getNetCombatDamage() <= 0
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                     || ph.getPhase().isBefore(PhaseType.MAIN1)

@@ -2152,7 +2152,27 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                     for (int i = 0; i < num; i++) {
                         if (player.isComputer()) {
-                            final Card toTap = CardFactoryUtil.getWorstPermanentAI(list, false, false, false, false);
+                            Card toTap = CardFactoryUtil.getWorstPermanentAI(list, false, false, false, false);
+                            // try to find non creature cards without tap abilities 
+                            CardList betterList = list.filter(new CardListFilter() {
+                                @Override
+                                public boolean addCard(final Card c) {
+                                    if (c.isCreature()) {
+                                        return false;
+                                    }
+                                    for (SpellAbility sa : c.getAllSpellAbilities()) {
+                                        if (sa.isTapAbility()
+                                                || sa.getPayCosts() != null && sa.getPayCosts().getTap()) {
+                                            return false;
+                                        }
+                                    }
+                                    return true;
+                                }
+                            });
+                            System.out.println("Tangle Wire" + list + " - " + betterList);
+                            if (!betterList.isEmpty()) {
+                                toTap = betterList.get(0);
+                            }
                             if (null != toTap) {
                                 toTap.tap();
                                 list.remove(toTap);
