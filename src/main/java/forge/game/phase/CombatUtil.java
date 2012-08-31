@@ -386,7 +386,7 @@ public class CombatUtil {
      */
     public static boolean mustBlockAnAttacker(final Card blocker, final Combat combat) {
 
-        if (blocker == null) {
+        if (blocker == null || combat == null) {
             return false;
         }
 
