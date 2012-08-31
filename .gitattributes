@@ -2932,6 +2932,7 @@ res/cardsfolder/e/essence_filter.txt svneol=native#text/plain
 res/cardsfolder/e/essence_flare.txt svneol=native#text/plain
 res/cardsfolder/e/essence_fracture.txt svneol=native#text/plain
 res/cardsfolder/e/essence_harvest.txt -text
+res/cardsfolder/e/essence_of_the_wild.txt -text
 res/cardsfolder/e/essence_scatter.txt svneol=native#text/plain
 res/cardsfolder/e/essence_sliver.txt svneol=native#text/plain
 res/cardsfolder/e/essence_warden.txt svneol=native#text/plain
@@ -12034,6 +12035,8 @@ src/main/java/forge/card/replacement/ReplaceGameLoss.java -text
 src/main/java/forge/card/replacement/ReplaceMoved.java -text
 src/main/java/forge/card/replacement/ReplacementEffect.java -text
 src/main/java/forge/card/replacement/ReplacementHandler.java -text
+src/main/java/forge/card/replacement/ReplacementLayer.java -text
+src/main/java/forge/card/replacement/ReplacementResult.java -text
 src/main/java/forge/card/replacement/package-info.java svneol=native#text/plain
 src/main/java/forge/card/spellability/Ability.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilityActivated.java svneol=native#text/plain

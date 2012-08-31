@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Zombie
 Text:no text
 PT:3/2
-R:Event$ Moved | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ ToLibrary | Description$ If CARDNAME would die, put CARDNAME on top of its owner's library instead.
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ ToLibrary | Description$ If CARDNAME would die, put CARDNAME on top of its owner's library instead.
 SVar:ToLibrary:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Defined$ ReplacedCard
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravebane_zombie.jpg

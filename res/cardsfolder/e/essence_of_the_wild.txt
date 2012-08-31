@@ -1,0 +1,7 @@
+Name:Essence of the Wild
+ManaCost:3 G G G
+Types:Creature Avatar
+Text:no text
+PT:6/6
+SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/178.jpg
+End

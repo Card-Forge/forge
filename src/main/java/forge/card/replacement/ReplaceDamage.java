@@ -100,7 +100,11 @@ public class ReplaceDamage extends ReplacementEffect {
      */
     @Override
     public ReplacementEffect getCopy() {
-        return new ReplaceDamage(this.getMapParams(), this.getHostCard());
+        ReplacementEffect res = new ReplaceDamage(this.getMapParams(), this.getHostCard());
+        res.setOverridingAbility(this.getOverridingAbility());
+        res.setActiveZone(validHostZones);
+        res.setLayer(getLayer());
+        return res;
     }
 
     /* (non-Javadoc)

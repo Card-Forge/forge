@@ -2,7 +2,7 @@ Name:Pursuit of Knowledge
 ManaCost:3 W
 Types:Enchantment
 Text:no text
-R:Event$ Draw | ValidPlayer$ You | Optional$ True | ReplaceWith$ Counter | Description$ If you would draw a card, you may put a study counter on CARDNAME instead.
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | Optional$ True | ReplaceWith$ Counter | Description$ If you would draw a card, you may put a study counter on CARDNAME instead.
 A:AB$Draw | Cost$ SubCounter<3/STUDY> Sac<1/CARDNAME> | NumCards$ 7 | SpellDescription$ Draw seven cards.
 SVar:Counter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | CounterType$ STUDY
 SVar:RemAIDeck:True

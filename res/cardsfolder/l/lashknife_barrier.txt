@@ -2,8 +2,8 @@ Name:Lashknife Barrier
 ManaCost:2 W
 Types:Enchantment
 Text:no text
-R:Event$ DamageDone | ValidTarget$ Creature.YouCtrl | ReplaceWith$ DmgMinus1 | IsCombat$ False | Description$ If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.
-R:Event$ DamageDone | ValidTarget$ Creature.YouCtrl | ReplaceWith$ DmgMinus1Combat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.YouCtrl | ReplaceWith$ DmgMinus1 | IsCombat$ False | Description$ If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.YouCtrl | ReplaceWith$ DmgMinus1Combat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.
 SVar:DmgMinus1:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:DmgMinus1Combat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Minus.1

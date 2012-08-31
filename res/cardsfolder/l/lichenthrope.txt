@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Creature Plant Fungus
 Text:no text
 PT:5/5
-R:Event$ DamageDone | ValidTarget$ Card.Self | ReplaceWith$ Counters | Description$ If damage would be dealt to CARDNAME, put that many -1/-1 counters on it instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ Counters | Description$ If damage would be dealt to CARDNAME, put that many -1/-1 counters on it instead.
 SVar:Counters:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ M1M1 | CounterNum$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRem | TriggerDescription$ At the beginning of your upkeep, remove a -1/-1 counter from CARDNAME.

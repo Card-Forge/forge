@@ -207,7 +207,7 @@ public class TriggerHandler {
 
         String triggerZones = mapParams.get("TriggerZones");
         if (null != triggerZones) {
-            ret.setTriggerZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
+            ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
         }
 
         String triggerPhases = mapParams.get("Phase");

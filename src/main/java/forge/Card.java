@@ -41,6 +41,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementEffect;
+import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityTriggered;
 import forge.card.spellability.Spell;
@@ -2321,6 +2322,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbLong.append(" (When this attacks, you may have target creature ");
                     sbLong.append("defending player controls untap and block it if able.)");
                 } else if (keyword.get(i).startsWith("MayEffectFromOpeningHand")) {
+                    continue;
+                } else if (keyword.get(i).startsWith("ETBReplacement")) {
                     continue;
                 } else if (keyword.get(i).contains("Haunt")) {
                     sb.append("\r\nHaunt (");
@@ -5079,6 +5082,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      */
     public final void untap() {
+        if(getName().equals("Remote Farm")) {
+            System.out.println("HE TOUCHED ME");
+        }
         if (this.isTapped()) {
             // Run triggers
             final Map<String, Object> runParams = new TreeMap<String, Object>();
@@ -8065,7 +8071,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         repParams.put("IsCombat", isCombat);
         repParams.put("Prevention", true);
 
-        if (AllZone.getReplacementHandler().run(repParams)) {
+        if (AllZone.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return 0;
         }
 
@@ -8192,7 +8198,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         repParams.put("DamageAmount", damageIn);
         repParams.put("IsCombat", isCombat);
 
-        if (AllZone.getReplacementHandler().run(repParams)) {
+        if (AllZone.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return 0;
         }
 

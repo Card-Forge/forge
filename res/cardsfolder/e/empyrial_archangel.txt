@@ -5,8 +5,8 @@ Text:no text
 PT:5/8
 K:Flying
 K:Shroud
-R:Event$ DamageDone | ValidTarget$ You | ReplaceWith$ DmgSelf | IsCombat$ False | Description$ All damage that would be dealt to you is dealt to CARDNAME instead.
-R:Event$ DamageDone | ValidTarget$ You | ReplaceWith$ DmgSelfCombat | IsCombat$ True | Secondary$ True | Description$ All damage that would be dealt to you is dealt to CARDNAME instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgSelf | IsCombat$ False | Description$ All damage that would be dealt to you is dealt to CARDNAME instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgSelfCombat | IsCombat$ True | Secondary$ True | Description$ All damage that would be dealt to you is dealt to CARDNAME instead.
 SVar:DmgSelf:AB$DealDamage | Cost$ 0 | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:DmgSelfCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount

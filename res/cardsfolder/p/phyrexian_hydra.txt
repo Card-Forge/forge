@@ -4,7 +4,7 @@ Types:Creature Hydra
 Text:no text
 PT:7/7
 K:Infect
-R:Event$ DamageDone | ValidTarget$ Card.Self | ReplaceWith$ Counters | PreventionEffect$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage. Put a -1/-1 counter on CARDNAME for each 1 damage prevented this way.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ Counters | PreventionEffect$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage. Put a -1/-1 counter on CARDNAME for each 1 damage prevented this way.
 SVar:Counters:AB$ PutCounter | Cost$ 0 | Defined$ ReplacedTarget | CounterType$ M1M1 | CounterNum$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount
 SVar:Rarity:Rare

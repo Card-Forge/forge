@@ -60,7 +60,11 @@ public class ReplaceGainLife extends ReplacementEffect {
      */
     @Override
     public ReplacementEffect getCopy() {
-        return new ReplaceGainLife(this.getMapParams(), getHostCard());
+        ReplacementEffect res = new ReplaceGainLife(this.getMapParams(), this.getHostCard());
+        res.setOverridingAbility(this.getOverridingAbility());
+        res.setActiveZone(validHostZones);
+        res.setLayer(getLayer());
+        return res;
     }
 
     /* (non-Javadoc)

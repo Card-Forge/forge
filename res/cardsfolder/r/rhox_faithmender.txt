@@ -4,7 +4,7 @@ Types:Creature Rhino Monk
 Text:no text
 PT:1/5
 K:Lifelink
-R:Event$ GainLife | ValidPlayer$ You | ReplaceWith$ GainDouble | Description$ If you would gain life, you gain twice that much life instead.
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainDouble | Description$ If you would gain life, you gain twice that much life instead.
 SVar:GainDouble:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:ReplaceCount$LifeGained/Twice
 SVar:PlayMain1:True

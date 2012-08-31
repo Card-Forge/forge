@@ -46,10 +46,14 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.card.replacement.ReplacementEffect;
+import forge.card.replacement.ReplacementHandler;
+import forge.card.replacement.ReplacementLayer;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
@@ -4807,8 +4811,88 @@ public class CardFactoryUtil {
             // add ability to instrinic strings so copies/clones create the ability also
             card.getIntrinsicAbilities().add(abilityStr.toString());
         }
+        
+        final int etbrep = CardFactoryUtil.hasKeyword(card, "ETBReplacement");
+        if (etbrep != -1) 
+        {
+            String fullkw = card.getKeyword().get(etbrep);
+            card.getKeyword().remove(etbrep);
+            String[] splitkw = fullkw.split(":");
+            ReplacementLayer layer = ReplacementLayer.smartValueOf(splitkw[1]);
+            AbilityFactory af = new AbilityFactory();
+            SpellAbility repAb = af.getAbility(card.getSVar(splitkw[2]), card);
+            String desc = repAb.getDescription();
+            setupETBReplacementAbility(repAb);            
+            
+            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Description$ " + desc;
+            if(splitkw.length == 4) {
+                if(splitkw[3].contains("Optional")) {
+                    repeffstr += " | OptionalDecider$ You";
+                }
+            }
+            
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
+            re.setLayer(layer);
+            re.setOverridingAbility(repAb);            
+            
+            card.addReplacementEffect(re);
+        }
 
         return card;
+    }
+    
+    public static void setupETBReplacementAbility(SpellAbility sa) {
+        SpellAbility tailend = sa;
+        while(tailend.getSubAbility() != null) {
+            tailend = tailend.getSubAbility();
+        }
+        
+        class ETBReplacementMove extends AbilitySub {
+            private static final long serialVersionUID = 704771599662730112L;
+
+            /**
+             * TODO: Write javadoc for Constructor.
+             * @param sourceCard
+             * @param tgt
+             */
+            public ETBReplacementMove(Card sourceCard, Target tgt) {
+                super(sourceCard, tgt);
+            }
+
+            @Override
+            public void resolve() {
+                forge.Singletons.getModel().getGameAction().moveToPlay(((Card)this.getReplacingObject("Card")));
+            }
+
+            /* (non-Javadoc)
+             * @see forge.card.spellability.AbilitySub#chkAIDrawback()
+             */
+            @Override
+            public boolean chkAIDrawback() {
+                return false;
+            }
+
+            /* (non-Javadoc)
+             * @see forge.card.spellability.AbilitySub#getCopy()
+             */
+            @Override
+            public AbilitySub getCopy() {
+                // TODO Auto-generated method stub
+                return new ETBReplacementMove(getSourceCard(),null);
+            }
+
+            /* (non-Javadoc)
+             * @see forge.card.spellability.AbilitySub#doTrigger(boolean)
+             */
+            @Override
+            public boolean doTrigger(boolean mandatory) {
+                // TODO Auto-generated method stub
+                return false;
+            }
+            
+        }
+        
+        tailend.setSubAbility(new ETBReplacementMove(sa.getSourceCard(),null));
     }
 
     /**

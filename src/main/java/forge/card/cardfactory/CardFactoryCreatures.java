@@ -27,6 +27,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.CardCharacteristicName;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
@@ -36,6 +37,9 @@ import forge.Counters;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
+import forge.card.replacement.ReplacementEffect;
+import forge.card.replacement.ReplacementHandler;
+import forge.card.replacement.ReplacementLayer;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityStatic;
@@ -1476,6 +1480,47 @@ public class CardFactoryCreatures {
 
         card.addSpellAbility(finalAb);
     }
+    
+    private static void getCard_EssenceOfTheWild(final Card card,final String cardName) {
+        class EOTWReplacement extends Ability {
+
+            /**
+             * TODO: Write javadoc for Constructor.
+             * @param sourceCard
+             * @param manaCost
+             */
+            public EOTWReplacement(Card sourceCard, String manaCost) {
+                super(sourceCard, manaCost);
+            }
+
+            /* (non-Javadoc)
+             * @see forge.card.spellability.SpellAbility#resolve()
+             */
+            @Override
+            public void resolve() {
+                Card movedCard = (Card)this.getReplacingObject("Card");
+                if (movedCard.isCloned()) { // cloning again
+                    movedCard.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
+                    movedCard.setState(CardCharacteristicName.Original);
+                    movedCard.clearStates(CardCharacteristicName.Cloner);
+                }
+                movedCard.addAlternateState(CardCharacteristicName.Cloner);
+                movedCard.switchStates(CardCharacteristicName.Original, CardCharacteristicName.Cloner);
+                movedCard.setState(CardCharacteristicName.Original);
+                movedCard.getCharacteristics().copy(this.getSourceCard().getCharacteristics());
+            }
+            
+        }
+        
+        SpellAbility repAb = new EOTWReplacement(card,"0");
+        CardFactoryUtil.setupETBReplacementAbility(repAb);            
+        
+        ReplacementEffect re = ReplacementHandler.parseReplacement("Event$ Moved | ValidCard$ Creature.Other+YouCtrl | Destination$ Battlefield | ActiveZones$ Battlefield | Description$ Creatures you control enter the battlefield as copies of CARDNAME.", card);
+        re.setLayer(ReplacementLayer.Copy);
+        re.setOverridingAbility(repAb);            
+        
+        card.addReplacementEffect(re);
+    }
 
 //    // This is a hardcoded card template
 //
@@ -1532,7 +1577,10 @@ public class CardFactoryCreatures {
         } else if (cardName.equals("Duct Crawler") || cardName.equals("Shrewd Hatchling")
                 || cardName.equals("Spin Engine") || cardName.equals("Screeching Griffin")) {
             getCard_DuctCrawler(card, cardName);
+        } else if (cardName.equals("Essence of the Wild")) {
+            getCard_EssenceOfTheWild(card, cardName);
         }
+        
 
         // ***************************************************
         // end of card specific code

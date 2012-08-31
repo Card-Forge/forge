@@ -3,7 +3,7 @@ ManaCost:5 U
 Types:Legendary Creature Spirit
 Text:no text
 PT:1/5
-R:Event$ Draw | ValidPlayer$ You | ReplaceWith$ Dig | Description$ If you would draw a card, look at the top three cards of your library instead. Put one of those cards into your hand and the rest on the bottom of your library in any order.
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Dig | Description$ If you would draw a card, look at the top three cards of your library instead. Put one of those cards into your hand and the rest on the bottom of your library in any order.
 SVar:Dig:AB$Dig | Cost$ 0 | DigNum$ 3
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

@@ -42,7 +42,11 @@ public class ReplaceGameLoss extends ReplacementEffect {
      */
     @Override
     public ReplacementEffect getCopy() {
-        return new ReplaceGameLoss(this.getMapParams(), getHostCard());
+        ReplacementEffect res = new ReplaceGameLoss(this.getMapParams(), this.getHostCard());
+        res.setOverridingAbility(this.getOverridingAbility());
+        res.setActiveZone(validHostZones);
+        res.setLayer(getLayer());
+        return res;
     }
 
 }

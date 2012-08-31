@@ -2823,6 +2823,10 @@ public class AbilityFactory {
         final AbilityFactory af = sa.getAbilityFactory();
         if (af == null) {
             sa.resolve();
+            if(sa.getSubAbility() != null)
+            {
+                resolve(sa.getSubAbility(),usedStack);
+            }
             return;
         }
         final HashMap<String, String> params = af.getMapParams();

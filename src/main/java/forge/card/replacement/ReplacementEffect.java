@@ -35,6 +35,8 @@ import forge.game.zone.ZoneType;
  */
 public abstract class ReplacementEffect extends TriggerReplacementBase {
 
+    private ReplacementLayer layer = ReplacementLayer.None;
+    
     /** The has run. */
     private boolean hasRun = false;
 
@@ -133,32 +135,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     public final void setMapParams(final HashMap<String, String> mapParams) {
         this.mapParams = mapParams;
-    }
-
-    /** The host card. */
-    private Card hostCard;
-
-    /**
-     * <p>
-     * Getter for the field <code>hostCard</code>.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     */
-    public final Card getHostCard() {
-        return this.hostCard;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>hostCard</code>.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void setHostCard(final Card c) {
-        this.hostCard = c;
     }
 
     /**
@@ -414,5 +390,19 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     public ReplacementEffect(final HashMap<String, String> map, final Card host) {
         this.setMapParams(map);
         this.setHostCard(host);
+    }
+
+    /**
+     * @return the layer
+     */
+    public ReplacementLayer getLayer() {
+        return layer;
+    }
+
+    /**
+     * @param layer0 the layer to set
+     */
+    public void setLayer(ReplacementLayer layer0) {
+        this.layer = layer0;
     }
 }

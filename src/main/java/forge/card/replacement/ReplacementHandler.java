@@ -18,6 +18,7 @@
 package forge.card.replacement;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,17 +41,8 @@ public class ReplacementHandler {
 
     private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
 
-    /**
-     * 
-     * Runs any applicable replacement effects.
-     * 
-     * @param runParams
-     *            the run params,same as for triggers.
-     * @return true if the event was replaced.
-     */
-    public boolean run(final HashMap<String, Object> runParams) {
+    public ReplacementResult run(final HashMap<String, Object> runParams) {
         final Object affected = runParams.get("Affected");
-        final List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
         Player decider = null;
 
         // Figure out who decides which of multiple replacements to apply
@@ -60,21 +52,66 @@ public class ReplacementHandler {
         } else {
             decider = ((Card) affected).getController();
         }
+        
+        
+        if(runParams.get("Event").equals("Moved")) {
+            ReplacementResult res = run(runParams,ReplacementLayer.Control,decider);
+            if(res != ReplacementResult.NotReplaced) {
+                return res;
+            }
+            res = run(runParams,ReplacementLayer.Copy,decider);
+            if(res != ReplacementResult.NotReplaced) {
+                return res;
+            }
+            res = run(runParams,ReplacementLayer.Other,decider);
+            if(res != ReplacementResult.NotReplaced) {
+                return res;
+            }
+            res = run(runParams,ReplacementLayer.None,decider);
+            if(res != ReplacementResult.NotReplaced) {
+                return res;
+            }
+        }
+        else {
+            ReplacementResult res = run(runParams,ReplacementLayer.None,decider);
+            if(res != ReplacementResult.NotReplaced) {
+                return res;
+            }
+        }
+        
+        return ReplacementResult.NotReplaced;
+        
+    }
+    
+    /**
+     * 
+     * Runs any applicable replacement effects.
+     * 
+     * @param runParams
+     *            the run params,same as for triggers.
+     * @return true if the event was replaced.
+     */
+    public ReplacementResult run(final HashMap<String, Object> runParams, final ReplacementLayer layer,final Player decider) {
+        
+        final List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
+        if(layer == ReplacementLayer.Other && ((String)runParams.get("Event")).equals("Moved")) {
+            System.out.println("Shdf");
+        }
 
         // Round up Non-static replacement effects ("Until EOT," or
         // "The next time you would..." etc)
         for (final ReplacementEffect replacementEffect : this.tmpEffects) {
-            if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams)) {
+            if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams) && replacementEffect.getLayer() == layer) {
                 possibleReplacers.add(replacementEffect);
             }
         }
 
         // Round up Static replacement effects
         for (final Player p : AllZone.getPlayersInGame()) {
-            for (final Card crd : p.getCardsIn(ZoneType.Battlefield)) {
+            for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (replacementEffect.requirementsCheck()) {
-                        if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams)) {
+                        if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams) && replacementEffect.getLayer() == layer && replacementEffect.zonesCheck(AllZone.getZoneOf(crd))) {
                             possibleReplacers.add(replacementEffect);
                         }
                     }
@@ -83,7 +120,7 @@ public class ReplacementHandler {
         }
 
         if (possibleReplacers.isEmpty()) {
-            return false;
+            return ReplacementResult.NotReplaced;
         }
 
         ReplacementEffect chosenRE = null;
@@ -107,22 +144,23 @@ public class ReplacementHandler {
 
         if (chosenRE != null) {
             chosenRE.setHasRun(true);
-            if (this.executeReplacement(runParams, chosenRE, decider)) {
+            ReplacementResult res = this.executeReplacement(runParams, chosenRE, decider);
+            if (res != ReplacementResult.NotReplaced) {
                 chosenRE.setHasRun(false);
                 AllZone.getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
-                return true;
+                return res;
             } else {
                 if (possibleReplacers.size() == 0) {
-                    return false;
+                    return res;
                 }
                 else {
-                    boolean ret = run(runParams);
+                    ReplacementResult ret = run(runParams);
                     chosenRE.setHasRun(false);
                     return ret;
                 }
             }
         } else {
-            return false;
+            return ReplacementResult.NotReplaced;
         }
 
     }
@@ -134,9 +172,11 @@ public class ReplacementHandler {
      * @param replacementEffect
      *            the replacement effect to run
      */
-    private boolean executeReplacement(final HashMap<String, Object> runParams,
+    private ReplacementResult executeReplacement(final HashMap<String, Object> runParams,
             final ReplacementEffect replacementEffect, final Player decider) {
-
+        if(replacementEffect.getHostCard().getName().equals("Clone")) {
+            System.out.println("And here we go.");
+        }
         final HashMap<String, String> mapParams = replacementEffect.getMapParams();
 
         SpellAbility effectSA = null;
@@ -149,7 +189,21 @@ public class ReplacementHandler {
 
             effectSA = abilityFactory.getAbility(effectAbString, replacementEffect.getHostCard());
 
-            replacementEffect.setReplacingObjects(runParams, effectSA);
+            SpellAbility tailend = effectSA;
+            do
+            {
+                replacementEffect.setReplacingObjects(runParams, tailend);
+                tailend = tailend.getSubAbility();
+            } while(tailend != null);
+        }
+        else if (replacementEffect.getOverridingAbility() != null) {
+            effectSA = replacementEffect.getOverridingAbility();
+            SpellAbility tailend = effectSA;
+            do
+            {
+                replacementEffect.setReplacingObjects(runParams, tailend);
+                tailend = tailend.getSubAbility();
+            } while(tailend != null);
         }
 
         // Decider gets to choose wether or not to apply the replacement.
@@ -168,19 +222,19 @@ public class ReplacementHandler {
                 buildQuestion.append(replacementEffect.toString());
                 buildQuestion.append(")");
                 if (!GameActionUtil.showYesNoDialog(replacementEffect.getHostCard(), buildQuestion.toString())) {
-                    return false;
+                    return ReplacementResult.NotReplaced;
                 }
             } else {
                 // AI-logic
                 if (!replacementEffect.aiShouldRun(effectSA)) {
-                    return false;
+                    return ReplacementResult.NotReplaced;
                 }
             }
         }
 
         if (mapParams.containsKey("Prevent")) {
             if (mapParams.get("Prevent").equals("True")) {
-                return true; // Nothing should replace the event.
+                return ReplacementResult.Prevented; // Nothing should replace the event.
             }
         }
 
@@ -190,7 +244,7 @@ public class ReplacementHandler {
             ComputerUtil.playNoStack(effectSA);
         }
 
-        return true;
+        return ReplacementResult.Replaced;
     }
 
     /**
@@ -234,6 +288,11 @@ public class ReplacementHandler {
             ret = new ReplaceGameLoss(mapParams, host);
         } else if (eventToReplace.equals("Moved")) {
             ret = new ReplaceMoved(mapParams, host);
+        }
+        
+        String activeZones = mapParams.get("ActiveZones");
+        if (null != activeZones) {
+            ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(activeZones)));
         }
 
         return ret;

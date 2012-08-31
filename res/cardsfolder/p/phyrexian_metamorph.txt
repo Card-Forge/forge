@@ -3,8 +3,8 @@ ManaCost:3 PU
 Types:Artifact Creature Shapeshifter
 Text:no text
 PT:0/0
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseCreature | Static$ True | TriggerDescription$ You may have CARDNAME enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
-SVar:ChooseCreature:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other,Artifact.Other | SubAbility$ DBCopy | RememberChosen$ True
+K:ETBReplacement:Copy:ChooseCreature
+SVar:ChooseCreature:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other,Artifact.Other | SubAbility$ DBCopy | RememberChosen$ True | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
 SVar:DBCopy:DB$ Clone | Defined$ Remembered | AddTypes$ Artifact
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_metamorph.jpg

@@ -33,6 +33,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityStatic;
@@ -128,8 +129,9 @@ public class GameAction {
             repParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType() : null);
             repParams.put("Destination", zoneTo.getZoneType());
 
-            if (AllZone.getReplacementHandler().run(repParams)) {
-                if (AllZone.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard)) {
+            ReplacementResult repres = AllZone.getReplacementHandler().run(repParams);
+            if (repres != ReplacementResult.NotReplaced) {
+                if (AllZone.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard) && repres == ReplacementResult.Prevented) {
                     return Singletons.getModel().getGameAction().moveToGraveyard(c);
                 }
                 return c;

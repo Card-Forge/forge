@@ -4,7 +4,7 @@ Types:Legendary Creature Spirit
 Text:no text
 PT:0/0
 K:etbCounters:P1P1:8
-R:Event$ DamageDone | ValidTarget$ Card.Self | ReplaceWith$ SekkiCounters | PreventionEffect$ True | Description$ If damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and put that many 1/1 colorless Spirit creature tokens onto the battlefield.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ SekkiCounters | PreventionEffect$ True | Description$ If damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and put that many 1/1 colorless Spirit creature tokens onto the battlefield.
 SVar:SekkiCounters:AB$ RemoveCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ SekkiX | SubAbility$ DBSekkiToken | References$ X
 SVar:DBSekkiToken:DB$ Token | Cost$ 0 | TokenAmount$ SekkiX | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | References$ SekkiX
 A:AB$ ChangeZone | Cost$ Sac<8/Spirit> | Defined$ Self | ActivationZone$ Graveyard | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return Sekki from your graveyard to the battlefield.

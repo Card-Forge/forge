@@ -3,8 +3,8 @@ ManaCost:1 U
 Types:Creature Shapeshifter Ally
 Text:no text
 PT:0/0
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseCreature | Static$ True | TriggerDescription$ You may have CARDNAME enter the battlefield as a copy of any Ally creature on the battlefield.
-SVar:ChooseCreature:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Ally+Other | SubAbility$ DBCopy | RememberChosen$ True
+K:ETBReplacement:Copy:ChooseCreature:Optional
+SVar:ChooseCreature:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Ally+Other | SubAbility$ DBCopy | RememberChosen$ True | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any Ally creature on the battlefield.
 SVar:DBCopy:DB$ Clone | Defined$ Remembered
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

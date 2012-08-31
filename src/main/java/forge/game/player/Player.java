@@ -39,6 +39,7 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
+import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
@@ -142,7 +143,7 @@ public abstract class Player extends GameEntity {
 
     /** The Constant ALL_ZONES. */
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
-            ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante));
+            ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante, ZoneType.Stack));
 
     /**
      * <p>
@@ -349,7 +350,7 @@ public abstract class Player extends GameEntity {
         repParams.put("Event", "GainLife");
         repParams.put("Affected", this);
         repParams.put("LifeGained", toGain);
-        if (AllZone.getReplacementHandler().run(repParams)) {
+        if (AllZone.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return false;
         }
 
@@ -772,7 +773,7 @@ public abstract class Player extends GameEntity {
         repParams.put("DamageAmount", damage);
         repParams.put("IsCombat", isCombat);
 
-        if (AllZone.getReplacementHandler().run(repParams)) {
+        if (AllZone.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return 0;
         }
 
@@ -822,7 +823,7 @@ public abstract class Player extends GameEntity {
         repParams.put("IsCombat", isCombat);
         repParams.put("Prevention", true);
 
-        if (AllZone.getReplacementHandler().run(repParams)) {
+        if (AllZone.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return 0;
         }
 
@@ -1255,7 +1256,7 @@ public abstract class Player extends GameEntity {
         repRunParams.put("Event", "Draw");
         repRunParams.put("Affected", this);
 
-        if (AllZone.getReplacementHandler().run(repRunParams)) {
+        if (AllZone.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
             return drawn;
         }
 
@@ -1378,10 +1379,19 @@ public abstract class Player extends GameEntity {
     public final CardList getCardsIn(final List<ZoneType> zones) {
         final CardList result = new CardList();
         for (final ZoneType z : zones) {
+            if(z == ZoneType.Stack) {
+                for(Card c : AllZone.getStackZone().getCards())
+                {
+                    if(c.getOwner().equals(this)) {
+                        result.add(c);
+                    }
+                } 
+            }
             if (this.getZone(z) != null) {
                 result.addAll(this.getZone(z).getCards());
             }
         }
+        
         return result;
     }
 
@@ -2172,7 +2182,7 @@ public abstract class Player extends GameEntity {
         runParams.put("Affected", this);
         runParams.put("Event", "GameLoss");
 
-        if (AllZone.getReplacementHandler().run(runParams)) {
+        if (AllZone.getReplacementHandler().run(runParams) != ReplacementResult.NotReplaced) {
             return false;
         }
 

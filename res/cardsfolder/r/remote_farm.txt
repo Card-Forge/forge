@@ -2,8 +2,9 @@ Name:Remote Farm
 ManaCost:no cost
 Types:Land
 Text:no text
-K:CARDNAME enters the battlefield tapped.
-K:etbCounter:DEPLETION:2
+K:ETBReplacement:Other:ETBTap
+SVar:ETBTap:DB$ Tap | Defined$ Self | SubAbility$ ETBCounters | SpellDescription$ CARDNAME enters the battlefield tapped. CARDNAME enters the battlefield with 2 depletion counters on it.
+SVar:ETBCounters:DB$ PutCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 2  
 A:AB$ Mana | Cost$ T SubCounter<1/DEPLETION> | Produced$ W | Deplete$ DEPLETION | Amount$ 2 | SpellDescription$ Add W W to your mana pool. If there are no depletion counters on CARDNAME, sacrifice it.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

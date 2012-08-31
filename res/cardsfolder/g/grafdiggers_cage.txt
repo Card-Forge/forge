@@ -2,8 +2,8 @@ Name:Grafdigger's Cage
 ManaCost:1
 Types:Artifact
 Text:no text
-R:Event$Moved | Origin$ Graveyard | Destination$ Battlefield | ValidCard$ Creature | Prevent$ True | Description$ Creature cards can't enter the battlefield from graveyards or libraries.
-R:Event$Moved | Origin$ Library | Destination$ Battlefield | ValidCard$ Creature | Prevent$ True
+R:Event$Moved | ActiveZones$ Battlefield | Origin$ Graveyard | Destination$ Battlefield | ValidCard$ Creature | Prevent$ True | Description$ Creature cards can't enter the battlefield from graveyards or libraries.
+R:Event$Moved | ActiveZones$ Battlefield | Origin$ Library | Destination$ Battlefield | ValidCard$ Creature | Prevent$ True
 S:Mode$ CantBeCast | Origin$ Graveyard | Description$ Players can't cast cards in graveyards or libraries.
 S:Mode$ CantBeCast | Origin$ Library
 SVar:RemRandomDeck:True

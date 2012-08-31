@@ -1,7 +1,12 @@
 package forge.card;
 
+import java.util.EnumSet;
+
 import forge.Card;
 import forge.GameEntity;
+import forge.card.spellability.SpellAbility;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 
 /** 
  * Base class for Triggers and ReplacementEffects.
@@ -9,6 +14,75 @@ import forge.GameEntity;
  * 
  */
 public abstract class TriggerReplacementBase {
+    
+    /** The host card. */
+    protected Card hostCard;
+    
+    /**
+     * <p>
+     * Getter for the field <code>hostCard</code>.
+     * </p>
+     * 
+     * @return a {@link forge.Card} object.
+     */
+    public final Card getHostCard() {
+        return this.hostCard;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>hostCard</code>.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     */
+    public final void setHostCard(final Card c) {
+        this.hostCard = c;
+    }
+    
+    protected EnumSet<ZoneType> validHostZones;
+    
+    public void setActiveZone(EnumSet<ZoneType> zones) {
+        validHostZones = zones;
+    }
+    
+    /**
+     * <p>
+     * zonesCheck.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean zonesCheck(PlayerZone hostCardZone) {
+        return !this.hostCard.isPhasedOut()
+                && (validHostZones == null || validHostZones.isEmpty()
+                || (hostCardZone != null && validHostZones.contains(hostCardZone.getZoneType()))
+              );
+    }
+    
+    /** The overriding ability. */
+    private SpellAbility overridingAbility = null;
+    
+    /**
+     * Gets the overriding ability.
+     * 
+     * @return the overridingAbility
+     */
+    public SpellAbility getOverridingAbility() {
+        return this.overridingAbility;
+    }
+
+    /**
+     * Sets the overriding ability.
+     * 
+     * @param overridingAbility0
+     *            the overridingAbility to set
+     */
+    public void setOverridingAbility(final SpellAbility overridingAbility0) {
+        this.overridingAbility = overridingAbility0;
+    }
+    
     /**
      * <p>
      * matchesValid.

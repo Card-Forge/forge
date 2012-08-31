@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Zombie
 Text:no text
 PT:4/2
-R:Event$ DamageDone | ValidSource$ Creature.Zombie+YouCtrl | ValidTarget$ Opponent | ReplaceWith$ Mill | IsCombat$ True | Description$ If a Zombie you control would deal combat damage to a player, instead that player puts that many cards from the top of his or her library into his or her graveyard.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.Zombie+YouCtrl | ValidTarget$ Opponent | ReplaceWith$ Mill | IsCombat$ True | Description$ If a Zombie you control would deal combat damage to a player, instead that player puts that many cards from the top of his or her library into his or her graveyard.
 SVar:Mill:AB$Mill | Cost$ 0 | Defined$ ReplacedTarget | NumCards$ X | References$ X 
 SVar:X:ReplaceCount$DamageAmount
 T:Mode$ ChangesZone | ValidCard$ Creature.YouDontOwn | Origin$ Library | Destination$ Graveyard | Execute$ ExileAndToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature card is put into an opponent's graveyard from his or her library, exile that card and put a 2/2 black Zombie creature token onto the battlefield.

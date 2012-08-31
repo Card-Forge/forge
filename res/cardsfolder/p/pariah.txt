@@ -4,8 +4,8 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Curse
-R:Event$ DamageDone | ValidTarget$ You | ReplaceWith$ DmgEnchanted | IsCombat$ False | Description$ All damage that would be dealt to you is dealt to enchanted creature instead.
-R:Event$ DamageDone | ValidTarget$ You | ReplaceWith$ DmgEnchantedCombat | IsCombat$ True | Secondary$ True | Description$ All damage that would be dealt to you is dealt to enchanted creature instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgEnchanted | IsCombat$ False | Description$ All damage that would be dealt to you is dealt to enchanted creature instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgEnchantedCombat | IsCombat$ True | Secondary$ True | Description$ All damage that would be dealt to you is dealt to enchanted creature instead.
 SVar:DmgEnchanted:AB$DealDamage | Cost$ 0 | Defined$ Enchanted | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:DmgEnchantedCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Enchanted | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount

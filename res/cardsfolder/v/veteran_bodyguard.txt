@@ -3,8 +3,8 @@ ManaCost:3 W W
 Types:Creature Human
 Text:no text
 PT:2/5
-R:Event$ DamageDone | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelf | IsCombat$ False | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by unblocked creatures is dealt to CARDNAME instead.
-R:Event$ DamageDone | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelfCombat | IsCombat$ True | IsPresent$ Card.Self+untapped | Secondary$ True | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by unblocked creatures is dealt to CARDNAME instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelf | IsCombat$ False | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by unblocked creatures is dealt to CARDNAME instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelfCombat | IsCombat$ True | IsPresent$ Card.Self+untapped | Secondary$ True | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by unblocked creatures is dealt to CARDNAME instead.
 SVar:DmgSelf:AB$DealDamage | Cost$ 0 | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:DmgSelfCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount

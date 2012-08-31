@@ -127,8 +127,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     private TriggerType mode;
 
-    /** The overriding ability. */
-    private SpellAbility overridingAbility = null;
+    
 
     private HashMap<String, Object> storedTriggeredObjects = null;
 
@@ -155,32 +154,6 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     public final HashMap<String, Object> getStoredTriggeredObjects() {
         return this.storedTriggeredObjects;
-    }
-
-    /** The host card. */
-    private Card hostCard;
-
-    /**
-     * <p>
-     * Getter for the field <code>hostCard</code>.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     */
-    public final Card getHostCard() {
-        return this.hostCard;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>hostCard</code>.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void setHostCard(final Card c) {
-        this.hostCard = c;
     }
 
     /** The is intrinsic. */
@@ -249,20 +222,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         } else {
             return "";
         }
-    }
-
-    /**
-     * <p>
-     * zonesCheck.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean zonesCheck(PlayerZone hostCardZone) {
-        return !this.getHostCard().isPhasedOut()
-                && (validHostZones == null || validHostZones.isEmpty()
-                || (hostCardZone != null && validHostZones.contains(hostCardZone.getZoneType()))
-              );
     }
 
     /**
@@ -560,7 +519,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     /** The temporary. */
     private boolean temporary = false;
-    private EnumSet<ZoneType> validHostZones;
+    
 
     /**
      * Sets the temporary.
@@ -620,25 +579,6 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     /**
-     * Gets the overriding ability.
-     * 
-     * @return the overridingAbility
-     */
-    public SpellAbility getOverridingAbility() {
-        return this.overridingAbility;
-    }
-
-    /**
-     * Sets the overriding ability.
-     * 
-     * @param overridingAbility0
-     *            the overridingAbility to set
-     */
-    public void setOverridingAbility(final SpellAbility overridingAbility0) {
-        this.overridingAbility = overridingAbility0;
-    }
-
-    /**
      * Gets the id.
      * 
      * @return the id
@@ -683,16 +623,11 @@ public abstract class Trigger extends TriggerReplacementBase {
         copy.setID(this.getId());
         copy.setMode(this.getMode());
         copy.setTriggerPhases(this.validPhases);
-        copy.setTriggerZone(validHostZones);
+        copy.setActiveZone(validHostZones);
     }
 
     public boolean isStatic() {
         return getMapParams().containsKey("Static"); // && params.get("Static").equals("True") [always true if present]
-    }
-
-
-    public void setTriggerZone(EnumSet<ZoneType> zones) {
-        validHostZones = zones;
     }
 
     public void setTriggerPhases(List<PhaseType> phases) {
