@@ -3,8 +3,9 @@ ManaCost:4 G
 Types:Creature Elemental
 Text:no text
 PT:2/8
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigJaddiLifestriderTap | TriggerDescription$ When CARDNAME enters the battlefield, you may tap any number of untapped creatures you control. You gain 2 life for each creature tapped this way.
-SVar:TrigJaddiLifestriderTap:AB$ Tap | Cost$ 0 | TargetMin$ 0 | TargetMax$ JaddiLifestriderX | ValidTgts$ Creature.untapped+YouCtrl | ValidDesc$ untapped creature you control | RememberTapped$ True | SubAbility$ DBJaddiLifestriderGainLife | References$ JaddiLifestriderX
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ GuestList | TriggerDescription$ When CARDNAME enters the battlefield, you may tap any number of untapped creatures you control. You gain 2 life for each creature tapped this way.
+SVar:GuestList:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ JaddiLifestriderX | References$ JaddiLifestriderX | Choices$ Creature.untapped+YouCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ TrigJaddiLifestriderTap
+SVar:TrigJaddiLifestriderTap:DB$ Tap | Defined$ Remembered | SubAbility$ DBJaddiLifestriderGainLife
 SVar:DBJaddiLifestriderGainLife:DB$ GainLife | LifeAmount$ JaddiLifestriderZ | SubAbility$ DBJaddiLifestriderCleanup | References$ JaddiLifestriderY,JaddiLifestriderZ
 SVar:DBJaddiLifestriderCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:JaddiLifestriderX:Count$Valid Creature.YouCtrl

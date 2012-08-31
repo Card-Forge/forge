@@ -1334,7 +1334,7 @@ public class AbilityFactoryAttach {
     // **************************************************************
 
     /**
-     * Creates the ability attach.
+     * Creates the ability unattachAll.
      * 
      * @param af
      *            the aF
@@ -1412,7 +1412,7 @@ public class AbilityFactoryAttach {
 
     // Attach Drawback
     /**
-     * Creates the drawback attach.
+     * Creates the drawback unattachAll.
      * 
      * @param af
      *            the aF

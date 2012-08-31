@@ -4087,6 +4087,8 @@ public class CardFactoryUtil {
      * 
      * @param from
      *            the from
+     * @param stateToCopy
+     *            the state to copy
      * @param to
      *            the to
      */

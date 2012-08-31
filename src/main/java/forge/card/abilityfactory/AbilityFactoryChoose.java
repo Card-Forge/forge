@@ -1947,8 +1947,9 @@ public final class AbilityFactoryChoose {
             choices = choices.getValidCards(params.get("Choices"), host.getController(), host);
         }
 
-        final String amount = params.containsKey("Amount") ? params.get("Amount") : "1";
-        final int validAmount = Integer.parseInt(amount);
+        final String numericAmount = params.containsKey("Amount") ? params.get("Amount") : "1";
+        final int validAmount = !params.get("Amount").matches("[0-9][0-9]?")
+                ? CardFactoryUtil.xCount(host, host.getSVar(params.get("Amount"))) : Integer.parseInt(numericAmount);
 
         if (params.containsKey("SunderingTitan")) {
             final CardList land = AllZoneUtil.getLandsInPlay();
