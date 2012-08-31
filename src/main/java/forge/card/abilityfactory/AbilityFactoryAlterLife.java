@@ -260,7 +260,7 @@ public class AbilityFactoryAlterLife {
             ArrayList<Player> tgtPlayers;
 
             final Target tgt = sa.getTarget();
-            if (tgt != null) {
+            if (tgt != null && !params.containsKey("Defined")) {
                 tgtPlayers = tgt.getTargetPlayers();
             } else {
                 tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);

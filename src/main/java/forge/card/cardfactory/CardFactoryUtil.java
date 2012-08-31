@@ -2571,6 +2571,18 @@ public class CardFactoryUtil {
             }
         }
 
+        // count valid cards in the garveyard
+        if (l[0].contains("ValidGrave")) {
+            String restrictions = l[0].replace("ValidGrave ", "");
+            restrictions = restrictions.replace("Count$", "");
+            final String[] rest = restrictions.split(",");
+            CardList cards = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
+            cards = cards.getValidCards(rest, cardController, c);
+
+            n = cards.size();
+
+            return CardFactoryUtil.doXMath(n, m, c);
+        }
         // count valid cards on the battlefield
         if (l[0].contains("Valid")) {
             String restrictions = l[0].replace("Valid ", "");
