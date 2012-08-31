@@ -1330,7 +1330,9 @@ public class AbilityFactoryPump {
 
         if (pumpRemembered != null) {
             for (final Object o : AbilityFactory.getDefinedObjects(sa.getSourceCard(), pumpRemembered, sa)) {
-                sa.getSourceCard().addRemembered(o);
+                if (!sa.getSourceCard().getRemembered().contains(o)) {
+                    sa.getSourceCard().addRemembered(o);
+                }
             }
         }
 
