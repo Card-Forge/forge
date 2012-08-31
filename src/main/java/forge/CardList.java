@@ -899,7 +899,7 @@ public class CardList implements Iterable<Card> {
         return this.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                return (c.isCreature() && CombatUtil.canBlock(attacker, c, null));
+                return (c.isCreature() && CombatUtil.canBlock(attacker, c));
             }
         });
     }
