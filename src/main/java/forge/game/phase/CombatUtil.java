@@ -86,6 +86,10 @@ public class CombatUtil {
         if (blocker == null) {
             return false;
         }
+        if (combat == null) {
+            return CombatUtil.canBlock(blocker);
+        }
+
         for (final Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
             for (final String keyword : c.getKeyword()) {
                 if (keyword.equals("No more than one creature can block each combat.")
@@ -99,7 +103,7 @@ public class CombatUtil {
             }
         }
 
-        if ((combat.getAllBlockers().size() > 0) && AllZoneUtil.isCardInPlay("Dueling Grounds")) {
+        if (combat.getAllBlockers().size() > 0 && AllZoneUtil.isCardInPlay("Dueling Grounds")) {
             return false;
         }
 
@@ -700,10 +704,11 @@ public class CombatUtil {
      */
     public static boolean canAttack(final Card c) {
         if (c.isTapped() || c.isPhasedOut()
-                || (c.hasSickness() && !c.hasKeyword("CARDNAME can attack as though it had haste."))) {
+                || (c.hasSickness() && !c.hasKeyword("CARDNAME can attack as though it had haste."))
+                || Singletons.getModel().getGameState().getPhaseHandler().getPhase()
+                    .isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             return false;
         }
-
         return CombatUtil.canAttackNextTurn(c);
     }
 

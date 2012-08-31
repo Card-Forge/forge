@@ -25,6 +25,7 @@ import com.google.code.jyield.Generator;
 import com.google.code.jyield.Yieldable;
 
 import forge.card.spellability.SpellAbility;
+import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
@@ -883,6 +884,22 @@ public class CardList implements Iterable<Card> {
             public boolean addCard(final Card c) {
                 return (c.isCreature() && (c.getSVar("EnchantMe").equals("Multiple") || (c.getSVar("EnchantMe").equals(
                         "Once") && !c.isEnchanted())));
+            }
+        });
+    }
+
+    /**
+     * <p>
+     * getPossibleBlockers.
+     * </p>
+     * 
+     * @return a {@link forge.CardList} object.
+     */
+    public final CardList getPossibleBlockers(final Card attacker) {
+        return this.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                return (c.isCreature() && CombatUtil.canBlock(attacker, c, null));
             }
         });
     }
