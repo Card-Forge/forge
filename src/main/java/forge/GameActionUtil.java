@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.cost.CostDamage;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPayLife;
@@ -456,6 +457,20 @@ public final class GameActionUtil {
             if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(source, "Do you want to pay "
                     + amount + " life?")) {
                 AllZone.getHumanPlayer().payLife(amount, null);
+                paid.execute();
+            } else {
+                unpaid.execute();
+            }
+            return;
+        }
+
+        if (costPart instanceof CostDamage) {
+            String amountString = costPart.getAmount();
+            final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                    : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+            if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(source, "Do you want " + source +
+                    " to deal "+ amount + " damage to you?")) {
+                AllZone.getHumanPlayer().addDamage(amount, source);
                 paid.execute();
             } else {
                 unpaid.execute();

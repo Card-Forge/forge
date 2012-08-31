@@ -27,6 +27,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 
@@ -127,6 +128,36 @@ public class CostUtil {
             if (part instanceof CostPayLife) {
                 final CostPayLife payLife = (CostPayLife) part;
                 if ((AllZone.getComputerPlayer().getLife() - payLife.convertAmount()) < remainingLife) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Check life cost.
+     * 
+     * @param cost
+     *            the cost
+     * @param source
+     *            the source
+     * @param remainingLife
+     *            the remaining life
+     * @return true, if successful
+     */
+    public static boolean checkDamageCost(final Cost cost, final Card source, final int remainingLife) {
+        if (cost == null) {
+            return true;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostDamage) {
+                final CostDamage pay = (CostDamage) part;
+                Player computer = AllZone.getComputerPlayer();
+                int realDamage = computer.predictDamage(pay.convertAmount(), source, false);
+                if (computer.getLife() - realDamage < remainingLife
+                        && realDamage > 0 && !computer.cantLoseForZeroOrLessLife()
+                        && computer.canLoseLife()) {
                     return false;
                 }
             }

@@ -2640,6 +2640,7 @@ res/cardsfolder/d/dwarven_berserker.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_blastminer.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_bloodboiler.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_demolition_team.txt svneol=native#text/plain
+res/cardsfolder/d/dwarven_driller.txt -text
 res/cardsfolder/d/dwarven_grunt.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_hold.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_landslide.txt -text
@@ -11998,6 +11999,7 @@ src/main/java/forge/card/cardfactory/CardFactorySorceries.java svneol=native#tex
 src/main/java/forge/card/cardfactory/CardFactoryUtil.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cost/Cost.java svneol=native#text/plain
+src/main/java/forge/card/cost/CostDamage.java -text
 src/main/java/forge/card/cost/CostDiscard.java -text
 src/main/java/forge/card/cost/CostExile.java -text
 src/main/java/forge/card/cost/CostGainLife.java -text
