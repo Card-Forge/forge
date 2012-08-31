@@ -30,6 +30,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.GameEntity;
@@ -842,6 +843,8 @@ public class Combat {
         else {
             boolean killsAllBlockers = true; // Does the attacker deal lethal
                                              // damage to all blockers
+            CardListUtil.sortByEvaluateCreature(block);
+            CardListUtil.sortAttack(block);
             for (final Card b : block) {
                 final int enoughDamageToKill = b.getEnoughDamageToKill(damage, attacker, true);
                 if (enoughDamageToKill <= damage) {
