@@ -967,42 +967,6 @@ public class ComputerUtil {
 
     /**
      * <p>
-     * getProduceableColors.
-     * </p>
-     * 
-     * @param m
-     *            a {@link forge.card.spellability.AbilityMana} object.
-     * @param player
-     *            a {@link forge.Player} object.
-     * @return a {@link java.util.ArrayList} object.
-     * @since 1.0.15
-     */
-    /*
-     * public static ArrayList<String> getProduceableColors(final AbilityMana m,
-     * final Player player) { final ArrayList<String> colors = new
-     * ArrayList<String>();
-     * 
-     * // if the mana ability is not avaiable move to the next one
-     * m.setActivatingPlayer(player); if (!m.canPlay()) { return colors; }
-     * 
-     * if (!colors.contains(Constant.Color.BLACK) && m.isBasic() &&
-     * m.mana().equals("B")) { colors.add(Constant.Color.BLACK); } if
-     * (!colors.contains(Constant.Color.WHITE) && m.isBasic() &&
-     * m.mana().equals("W")) { colors.add(Constant.Color.WHITE); } if
-     * (!colors.contains(Constant.Color.GREEN) && m.isBasic() &&
-     * m.mana().equals("G")) { colors.add(Constant.Color.GREEN); } if
-     * (!colors.contains(Constant.Color.RED) && m.isBasic() &&
-     * m.mana().equals("R")) { colors.add(Constant.Color.RED); } if
-     * (!colors.contains(Constant.Color.BLUE) && m.isBasic() &&
-     * m.mana().equals("U")) { colors.add(Constant.Color.BLUE); } if
-     * (!colors.contains(Constant.Color.COLORLESS) && m.isBasic() &&
-     * m.mana().equals("1")) { colors.add(Constant.Color.COLORLESS); }
-     * 
-     * return colors; }
-     */
-
-    /**
-     * <p>
      * getAvailableMana.
      * </p>
      * @param checkPlayable
@@ -1094,7 +1058,7 @@ public class ComputerUtil {
                 }
 
                 // don't use abilities with dangerous drawbacks
-                if (m.getSubAbility() != null) {
+                if (m.getSubAbility() != null && !card.getName().equals("Pristine Talisman")) {
                     if (!m.getSubAbility().chkAIDrawback()) {
                         continue;
                     }
@@ -1132,63 +1096,12 @@ public class ComputerUtil {
         sortedManaSources.addAll(fourManaSources);
         sortedManaSources.addAll(fiveManaSources);
         sortedManaSources.addAll(anyColorManaSources);
+        //use better creatures later
+        CardListUtil.sortByEvaluateCreature(otherManaSources);
+        otherManaSources.reverse();
         sortedManaSources.addAll(otherManaSources);
-
         return sortedManaSources;
     } // getAvailableMana()
-
-    // sorts the most needed mana abilities to come first
-    /**
-     * <p>
-     * sortForNeeded.
-     * </p>
-     * 
-     * @param cost
-     *            a {@link forge.card.mana.ManaCost} object.
-     * @param manaAbilities
-     *            a {@link java.util.ArrayList} object.
-     * @param player
-     *            a {@link forge.Player} object.
-     * @return a {@link java.util.ArrayList} object.
-     * @since 1.0.15
-     */
-    /*
-     * public static ArrayList<AbilityMana> sortForNeeded(final ManaCost cost,
-     * final ArrayList<AbilityMana> manaAbilities, final Player player) {
-     * 
-     * ArrayList<String> colors;
-     * 
-     * final ArrayList<String> colorsNeededToAvoidNegativeEffect =
-     * cost.getManaNeededToAvoidNegativeEffect();
-     * 
-     * final ArrayList<AbilityMana> res = new ArrayList<AbilityMana>();
-     * 
-     * final ManaCost onlyColored = new ManaCost(cost.toString());
-     * 
-     * onlyColored.removeColorlessMana();
-     * 
-     * for (final AbilityMana am : manaAbilities) { colors =
-     * ComputerUtil.getProduceableColors(am, player); for (int j = 0; j <
-     * colors.size(); j++) { if (onlyColored.isNeeded(colors.get(j))) {
-     * res.add(am); break; } for (final String col :
-     * colorsNeededToAvoidNegativeEffect) { if
-     * (col.equalsIgnoreCase(colors.get(j)) ||
-     * CardUtil.getShortColor(col).equalsIgnoreCase(colors.get(j))) {
-     * res.add(am); } } } }
-     * 
-     * for (final AbilityMana am : manaAbilities) {
-     * 
-     * if (res.contains(am)) { break; }
-     * 
-     * colors = ComputerUtil.getProduceableColors(am, player); for (int j = 0; j
-     * < colors.size(); j++) { if (cost.isNeeded(colors.get(j))) { res.add(am);
-     * break; } for (final String col : colorsNeededToAvoidNegativeEffect) { if
-     * (col.equalsIgnoreCase(colors.get(j)) ||
-     * CardUtil.getShortColor(col).equalsIgnoreCase(colors.get(j))) {
-     * res.add(am); } } } }
-     * 
-     * return res; }
-     */
 
     /**
      * <p>

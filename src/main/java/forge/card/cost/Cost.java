@@ -83,6 +83,9 @@ public class Cost {
      * @return a boolean.
      */
     public final boolean hasNoManaCost() {
+        if (this.getTotalMana().equals("")) {
+            return true;
+        }
         // This is only used for AI Mana Abilities, since none of these have optional costs
         // It's not as necessary for this functional
         for (final CostPart part : this.costParts) {
