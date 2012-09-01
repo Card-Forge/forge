@@ -218,6 +218,34 @@ Fixes/Features:
 - Little tweaks of AI functions.
 - Improved AI of Tangle Wire.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Removed SVar:RemAIDeck:True from some more cards (it looks like the AI can also use mana sources that produce more than one mana of a single color).
+- The AI will no longer use Pump abilities with a TapType cost before declareAttackers/declareBlockers, so it will no longer tap a creature to pump itself.
+- Small tweaks to Diseased Vermin
+- Pump RememberObjects will not remember objects already remembered
+- More improvements of AF Pump AI.
+- Fixed Urge to Feed and Jaddi Lifestrider
+- some javadoc fixes
+- Fixing Spoils of Evil
+- Fixed NPE in mustBlockAnAttacker.
+- Better fix for the NPE.
+- Little tweak of distributeAIDamage (this function could be improved a lot).
+- Added the cost "DamageYou".
+- Added ETBReplacement:<Mode>:<SVar>[:Optional] keyword.
+- Added ActiveZones parameter to replacement effects to let replacement effects function wherever.
+- Converted clones to ETBReplacement
+- CardCharacteristics now copy ReplacementEffects
+- ReplacementEffects now copy alot more stuff.
+- Divvied up Replacement Effect running into layers
+- Moved stuff common between Trigger and ReplacementEffect to TriggerReplacementBase
+- Let AF_Tap tap cards on the stack in order to work with ETBReplacement.
+- Converted Remote Farm to ETBReplacement.
+- Fixed optionalness of ETBReplacements
+- Allowed multiple ETBReplacements
+- Removed a bunch of debug output
+- Added "ETB" parameter to AF_Tap, letting it tap stuff no matter where it is if it certifies that it's an etb replacement.
+- Fixed Remote Farm
+- Fixed the dragon auras.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -294,6 +322,15 @@ Harsh Deceiver
 Cruel Deceiver
 Torrent of Stone
 Veil of Secrecy
+Diseased Vermin
+Spoils of Evil
+Dwarven Driller
+Essence of the Wild
+Skullscorch
+Blazing Salvo
+Dwarven Scorcher
+Lava Blister
+Molten Influence
 
 
 end
