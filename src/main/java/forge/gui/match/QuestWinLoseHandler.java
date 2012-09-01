@@ -185,6 +185,9 @@ public class QuestWinLoseHandler extends ControlWinLose {
             }
         }
 
+        // TODO: We don't have a enum for difficulty?
+        int difficulty = qData.getAchievements().getDifficulty();
+
         // Win case
         if (this.wonMatch) {
             // Standard event reward credits
@@ -194,15 +197,14 @@ public class QuestWinLoseHandler extends ControlWinLose {
             if (qEvent instanceof QuestEventChallenge) {
                 this.awardChallengeWin();
             }
+            // Random rare for winning against a very hard deck
+            else if (qEvent.getDifficulty().toLowerCase().equals("very hard")) {
+                this.awardRandomRare("You've won a random rare for winning against a very hard deck.");
+            }
 
             // Random rare given at 50% chance (65% with luck upgrade)
             if (this.getLuckyCoinResult()) {
                 this.awardRandomRare("You've won a random rare.");
-            }
-
-            // Random rare for winning against a very hard deck
-            if (qData.getAchievements().getDifficulty() == 4) {
-                this.awardRandomRare("You've won a random rare for winning against a very hard deck.");
             }
 
             // Award jackpot every 80 games won (currently 10 rares)
@@ -216,11 +218,12 @@ public class QuestWinLoseHandler extends ControlWinLose {
             this.penalizeLoss();
         }
 
-        // Win or lose, still a chance to win a booster, frequency set in
-        // preferences
-        final int outcome = this.wonMatch ? qData.getAchievements().getWin() : qData.getAchievements().getLost();
-        if ((outcome % Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.WINS_BOOSTER, qData.getAchievements().getDifficulty())) == 0) {
-            this.awardBooster();
+        // Grant booster on a win, or on a loss in easy mode
+        if (this.wonMatch || difficulty == 0) {
+            final int outcome = this.wonMatch ? qData.getAchievements().getWin() : qData.getAchievements().getLost();
+            if ((outcome % Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.WINS_BOOSTER, qData.getAchievements().getDifficulty())) == 0) {
+                this.awardBooster();
+            }
         }
 
         // Add any antes won this match (regardless of Match Win/Lose to Card Pool
@@ -351,9 +354,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
             multiplier = 3;
         }
 
-        credBase += (int) ((base * multiplier)
-                + (Double.parseDouble(Singletons.getModel().getQuestPreferences().getPreference(QPref.REWARDS_WINS_MULTIPLIER))
-                        * qData.getAchievements().getWin()));
+        credBase += (int) ((base * multiplier) + (Double.parseDouble(Singletons.getModel().getQuestPreferences()
+                .getPreference(QPref.REWARDS_WINS_MULTIPLIER)) * qData.getAchievements().getWin()));
 
         sb.append(diff + " opponent: " + credBase + " credits.<br>");
         // Gameplay bonuses (for each game win)
@@ -396,7 +398,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
             }
             // Mulligan to zero
             final int cntCardsHumanStartedWith = humanRating.getOpeningHandSize();
-            final int mulliganReward = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_MULLIGAN0);
+            final int mulliganReward = Singletons.getModel().getQuestPreferences()
+                    .getPreferenceInt(QPref.REWARDS_MULLIGAN0);
 
             if (0 == cntCardsHumanStartedWith) {
                 credGameplay += mulliganReward;
@@ -409,7 +412,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
             final int turnCredits = this.getCreditsRewardForWinByTurn(winTurn);
 
             if (winTurn == 0) {
-                throw new UnsupportedOperationException("QuestWinLoseHandler > " + "turn calculation error: Zero turn win");
+                throw new UnsupportedOperationException("QuestWinLoseHandler > "
+                        + "turn calculation error: Zero turn win");
             } else if (winTurn == 1) {
                 sb.append("Won in one turn!");
             } else if (winTurn <= 5) {
@@ -575,8 +579,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * 
      */
     private void awardChallengeWin() {
-        // This method should perhaps be called addChallengesWon() since it's actually
-        // used for "wins before next challenge"
+        // This method should perhaps be called addChallengesWon() since it's
+        // actually used for "wins before next challenge"
         qData.getAchievements().addChallengesPlayed();
 
         final List<CardPrinted> cardsWon = ((QuestEventChallenge) qEvent).getCardRewardList();
@@ -590,8 +594,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         // Generate Swing components and attach.
         this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
-        this.lblTemp1 = new TitleLabel("Challenge Rewards for \"" + ((QuestEventChallenge) qEvent).getTitle()
-                + "\"");
+        this.lblTemp1 = new TitleLabel("Challenge Rewards for \"" + ((QuestEventChallenge) qEvent).getTitle() + "\"");
 
         this.lblTemp2 = new JLabel(sb.toString());
         this.lblTemp2.setFont(FSkin.getFont(14));
