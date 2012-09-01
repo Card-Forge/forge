@@ -293,7 +293,7 @@ public class CostPayment {
         final ArrayList<CostPart> parts = this.cost.getCostParts();
 
         if (this.getCost().getCostMana() == null) {
-            parts.add(new CostMana("0", 1));
+            parts.add(new CostMana("0", 0));
         }
 
         // Set all of the decisions before attempting to pay anything
