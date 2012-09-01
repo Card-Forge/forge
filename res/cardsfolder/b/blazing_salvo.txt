@@ -1,0 +1,10 @@
+Name:Blazing Salvo
+ManaCost:R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | UnlessCost$ DamageYou<5> | UnlessPayer$ TargetedController | SpellDescription$ CARDNAME deals 3 damage to target creature unless that creature's controller has CARDNAME deal 5 damage to him or her.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_salvo.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/178.jpg
+Oracle:Blazing Salvo deals 3 damage to target creature unless that creature's controller has Blazing Salvo deal 5 damage to him or her.
+End
