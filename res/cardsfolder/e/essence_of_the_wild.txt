@@ -4,4 +4,5 @@ Types:Creature Avatar
 Text:no text
 PT:6/6
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/178.jpg
+Oracle:Creatures you control enter the battlefield as a copy of Essence of the Wild.
 End

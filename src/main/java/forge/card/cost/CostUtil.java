@@ -160,6 +160,9 @@ public class CostUtil {
                         && computer.canLoseLife()) {
                     return false;
                 }
+                if (source.getName().equals("Skullscorch") && computer.getCardsIn(ZoneType.Hand).size() < 2) {
+                    return false;
+                }
             }
         }
         return true;
