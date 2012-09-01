@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Bounce | Description$ All Slivers have "Pay 2 life, Return this permanent to its owner's hand."
 SVar:Bounce:AB$ChangeZone | Cost$ PayLife<2> | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return this permanent to its owner's hand
-SVar:BuffedBy:Sliver
+SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hibernation_sliver.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/140.jpg

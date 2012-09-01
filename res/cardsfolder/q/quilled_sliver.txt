@@ -5,6 +5,7 @@ Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Damage | Description$ All Slivers have "Tap: This permanent deals 1 damage to target attacking or blocking creature."
 SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Choose target attacking or blocking creature. | NumDmg$ 1 | SpellDescription$ This permanent deals 1 damage to target attacking or blocking creature.
+SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quilled_sliver.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/37.jpg
