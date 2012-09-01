@@ -1412,15 +1412,17 @@ public class MagicStack extends MyObservable {
 
         final ArrayList<SpellAbility> activePlayerSAs = new ArrayList<SpellAbility>();
         for (int i = 0; i < this.getSimultaneousStackEntryList().size(); i++) {
-            if (this.getSimultaneousStackEntryList().get(i).getActivatingPlayer() == null) {
-                if (this.getSimultaneousStackEntryList().get(i).getSourceCard().getController().equals(activePlayer)) {
-                    activePlayerSAs.add(this.getSimultaneousStackEntryList().get(i));
+            SpellAbility sa = this.getSimultaneousStackEntryList().get(i);
+            Player activator = sa.getActivatingPlayer();
+            if (activator == null) {
+                if (sa.getSourceCard().getController().equals(activePlayer)) {
+                    activePlayerSAs.add(sa);
                     this.getSimultaneousStackEntryList().remove(i);
                     i--;
                 }
             } else {
-                if (this.getSimultaneousStackEntryList().get(i).getActivatingPlayer().equals(activePlayer)) {
-                    activePlayerSAs.add(this.getSimultaneousStackEntryList().get(i));
+                if (activator.equals(activePlayer)) {
+                    activePlayerSAs.add(sa);
                     this.getSimultaneousStackEntryList().remove(i);
                     i--;
                 }
@@ -1436,27 +1438,30 @@ public class MagicStack extends MyObservable {
                 ComputerUtil.playStack(sa);
             }
         } else {
-            while (activePlayerSAs.size() > 1) {
-
-                final SpellAbility next = (SpellAbility) GuiUtils.chooseOne(
-                        "Choose which spell or ability to put on the stack next.", activePlayerSAs.toArray());
-
-                activePlayerSAs.remove(next);
-
+            // If only one, just add as necessary
+            if (activePlayerSAs.size() == 1) {
+                SpellAbility next = activePlayerSAs.get(0);
                 if (next.isTrigger()) {
                     Singletons.getModel().getGameAction().playSpellAbility(next);
                 } else {
                     this.add(next);
                 }
             }
-
-            if (activePlayerSAs.get(0).isTrigger()) {
-                Singletons.getModel().getGameAction().playSpellAbility(activePlayerSAs.get(0));
-            } else {
-                this.add(activePlayerSAs.get(0));
+            else{
+                // Otherwise, gave a dual list form to create instead of needing to do it one at a time
+                List<Object> orderedSAs = GuiUtils.getOrderChoices("Select order for Simultaneous Spell Abilities", "Resolve first", activePlayerSAs.toArray());
+                int size = orderedSAs.size();
+                for(int i = size-1; i >= 0; i--){
+                    SpellAbility next = (SpellAbility)orderedSAs.get(i);
+                    if (next.isTrigger()) {
+                        Singletons.getModel().getGameAction().playSpellAbility(next);
+                    } else {
+                        this.add(next);
+                    }
+                }
             }
-            // Singletons.getModel().getGameAction().playSpellAbility(activePlayerSAs.get(0));
         }
+        
     }
 
     /**

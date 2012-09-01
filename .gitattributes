@@ -12214,6 +12214,7 @@ src/main/java/forge/gui/CardDetailPanel.java svneol=native#text/plain
 src/main/java/forge/gui/CardListViewer.java -text
 src/main/java/forge/gui/CardPanel.java svneol=native#text/plain
 src/main/java/forge/gui/CardPicturePanel.java svneol=native#text/plain
+src/main/java/forge/gui/DualListBox.java -text
 src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain
 src/main/java/forge/gui/GuiDisplayUtil.java svneol=native#text/plain
 src/main/java/forge/gui/GuiImportPicture.java svneol=native#text/plain

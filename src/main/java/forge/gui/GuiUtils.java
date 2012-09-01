@@ -17,7 +17,9 @@
  */
 package forge.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -27,11 +29,15 @@ import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -350,6 +356,31 @@ public final class GuiUtils {
         c.show();
         return c.getSelectedValues();
     } // getChoice()
+
+    public static List<Object> getOrderChoices(final String title, final String top, final Object... choices) {
+        // An input box for handling the order of choices.
+        final JFrame frame = new JFrame();
+        DualListBox dual = new DualListBox(true);
+        dual.addSourceElements(choices);
+
+        frame.setLayout(new BorderLayout());
+        frame.setSize(dual.getPreferredSize());
+        frame.add(dual);
+        frame.setTitle(title);
+        frame.setVisible(false);
+
+        final JDialog dialog = new JDialog(frame, true);
+        dialog.setTitle(title);
+        dialog.setContentPane(dual);
+        dialog.setSize(dual.getPreferredSize());
+        dialog.pack();
+        dialog.setVisible(true);
+
+        List<Object> objects = dual.getOrderedList();
+
+        dialog.dispose();
+        return objects;
+    }
 
     /**
      * Centers a frame on the screen based on its current size.
