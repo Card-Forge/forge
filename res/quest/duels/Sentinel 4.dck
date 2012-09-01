@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sentinel 4
+Title=Sentinel
+Difficulty=very hard
+Description=Mono brown Aggro Workshop deck with Sphere effects
+Icon=Sentinel.jpg
+Deck Type=constructed
+[main]
+4 Mishra's Workshop
+4 Mishra's Factory
+4 Wasteland
+2 Ancient Tomb
+3 Darksteel Citadel
+1 Great Furnace
+1 Strip Mine
+1 Tolarian Academy
+1 Mox Emerald
+1 Mox Pearl
+1 Mox Jet
+1 Mox Ruby
+1 Mox Sapphire
+1 Mox Opal
+1 Sol Ring
+4 Lodestone Golem
+4 Sphere of Resistance
+4 Thorn of Amethyst
+4 Tangle Wire
+1 Trinisphere
+2 Crucible of Worlds
+4 Wurmcoil Engine
+4 Juggernaut
+3 Slash Panther
+2 Batterskull
+1 Staff of Nin
+[sideboard]
