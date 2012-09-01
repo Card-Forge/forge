@@ -1063,6 +1063,8 @@ public final class AbilityFactoryCombat {
             list = list.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
+                    boolean tapped = c.isTapped();
+                    c.setTapped(false);
                     if (!CombatUtil.canBlock(definedAttacker, c)) {
                         return false;
                     }
@@ -1072,6 +1074,7 @@ public final class AbilityFactoryCombat {
                     if (!CombatUtil.canDestroyBlocker(c, definedAttacker, null, false)) {
                         return false;
                     }
+                    c.setTapped(tapped);
                     return true;
                 }
             });
