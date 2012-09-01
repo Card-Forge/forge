@@ -5280,6 +5280,7 @@ res/cardsfolder/l/latulla_keldon_overseer.txt svneol=native#text/plain
 res/cardsfolder/l/latullas_orders.txt svneol=native#text/plain
 res/cardsfolder/l/launch.txt svneol=native#text/plain
 res/cardsfolder/l/lava_axe.txt svneol=native#text/plain
+res/cardsfolder/l/lava_blister.txt -text
 res/cardsfolder/l/lava_dart.txt svneol=native#text/plain
 res/cardsfolder/l/lava_flow.txt svneol=native#text/plain
 res/cardsfolder/l/lava_hounds.txt svneol=native#text/plain
@@ -6068,6 +6069,7 @@ res/cardsfolder/m/molimo_maro_sorcerer.txt svneol=native#text/plain
 res/cardsfolder/m/molten_firebird.txt -text
 res/cardsfolder/m/molten_frame.txt svneol=native#text/plain
 res/cardsfolder/m/molten_hydra.txt svneol=native#text/plain
+res/cardsfolder/m/molten_influence.txt -text
 res/cardsfolder/m/molten_psyche.txt svneol=native#text/plain
 res/cardsfolder/m/molten_rain.txt svneol=native#text/plain
 res/cardsfolder/m/molten_ravager.txt svneol=native#text/plain
