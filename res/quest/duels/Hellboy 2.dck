@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Hellboy 2
+Title=Hellboy
+Difficulty=medium
+Description=BR direct damage deck
+Icon=Hellboy.jpg
+Deck Type=constructed
+[main]
+5 Swamp
+7 Mountain 
+3 Blackcleave Cliffs
+3 Dragonskull Summit
+1 Blood Crypt
+4 Bloodstained Mire
+1 Stensia Bloodhall
+4 Bump in the Night
+4 Lava Spike
+3 Flame Jet
+1 Lava Blister
+1 Molten Influence
+1 Smash to Smithereens
+2 Blightning
+2 Flames of the Blood Hand
+2 Pulse of the Forge
+1 Sizzle
+2 Poison the Well
+3 Scorching Missile
+3 Breath of Malfegor
+1 Burning Fields
+1 Lava Axe
+1 Kiss of Death
+1 Stolen Grain
+2 Curse of Bloodletting
+1 Fire Servant
+[sideboard]
