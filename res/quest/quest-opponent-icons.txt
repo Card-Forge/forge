@@ -166,6 +166,7 @@ http://www.cardforge.org/fpics/questAvatars/Scooby%20Doo.jpg
 http://www.cardforge.org/fpics/questAvatars/Scotty.jpg
 http://www.cardforge.org/fpics/questAvatars/Seabiscuit.jpg
 http://www.cardforge.org/fpics/questAvatars/Secret%20Squirrel.jpg
+http://www.cardforge.org/fpics/questAvatars/Sentinel.jpg
 http://www.cardforge.org/fpics/questAvatars/Sherlock%20Holmes.jpg
 http://www.cardforge.org/fpics/questAvatars/Shrek.jpg
 http://www.cardforge.org/fpics/questAvatars/Silver%20Samurai.jpg
