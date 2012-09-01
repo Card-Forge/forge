@@ -68,10 +68,6 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
 
     public void add(final Object o, boolean update) {
         final Card c = (Card) o;
-        
-        if(zoneName == ZoneType.Graveyard && c.getName().equals("Clone")) {
-            System.out.println("I'm not a freak.");
-        }
 
         // Immutable cards are usually emblems,effects and the mana pool and we
         // don't want to log those.

@@ -79,9 +79,6 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
         final String imgFN = CardUtil.buildFilename(c, cardName);
         final boolean foundSetImage = imgFN.contains(setCode3) || imgFN.contains(setCode2);
 
-        if (this.picturesPath == null) {
-            System.out.println("Oh snap!");
-        }
         if (!foundSetImage) {
             final int artsCnt = c.getCard().getEditionInfo(setCode3).getCopiesCount();
             final String filename = CardUtil.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);

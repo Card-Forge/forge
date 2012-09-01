@@ -46,6 +46,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.replacement.ReplacementLayer;
@@ -4812,32 +4813,32 @@ public class CardFactoryUtil {
             card.getIntrinsicAbilities().add(abilityStr.toString());
         }
         
-        final int etbrep = CardFactoryUtil.hasKeyword(card, "ETBReplacement");
-        if (etbrep != -1) 
-        {
-            String fullkw = card.getKeyword().get(etbrep);
-            card.getKeyword().remove(etbrep);
-            String[] splitkw = fullkw.split(":");
-            ReplacementLayer layer = ReplacementLayer.smartValueOf(splitkw[1]);
-            AbilityFactory af = new AbilityFactory();
-            SpellAbility repAb = af.getAbility(card.getSVar(splitkw[2]), card);
-            String desc = repAb.getDescription();
-            setupETBReplacementAbility(repAb);            
-            
-            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Description$ " + desc;
-            if(splitkw.length == 4) {
-                if(splitkw[3].contains("Optional")) {
-                    repeffstr += " | OptionalDecider$ You";
+        for(String kw : card.getKeyword()) {
+           
+            if (kw.startsWith("ETBReplacement")) 
+            {
+                String[] splitkw = kw.split(":");
+                ReplacementLayer layer = ReplacementLayer.smartValueOf(splitkw[1]);
+                AbilityFactory af = new AbilityFactory();
+                SpellAbility repAb = af.getAbility(card.getSVar(splitkw[2]), card);
+                String desc = repAb.getDescription();
+                setupETBReplacementAbility(repAb);            
+                
+                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Description$ " + desc;
+                if(splitkw.length == 4) {
+                    if(splitkw[3].contains("Optional")) {
+                        repeffstr += " | Optional$ True";
+                    }
                 }
+                
+                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
+                re.setLayer(layer);
+                re.setOverridingAbility(repAb);            
+                
+                card.addReplacementEffect(re);
             }
-            
-            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
-            re.setLayer(layer);
-            re.setOverridingAbility(repAb);            
-            
-            card.addReplacementEffect(re);
         }
-
+       
         return card;
     }
     

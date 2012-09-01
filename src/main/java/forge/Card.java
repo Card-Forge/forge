@@ -5082,9 +5082,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      */
     public final void untap() {
-        if(getName().equals("Remote Farm")) {
-            System.out.println("HE TOUCHED ME");
-        }
         if (this.isTapped()) {
             // Run triggers
             final Map<String, Object> runParams = new TreeMap<String, Object>();

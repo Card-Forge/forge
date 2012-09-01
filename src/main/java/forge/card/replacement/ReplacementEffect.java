@@ -167,7 +167,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * 
      * @return a boolean.
      */
-    public final boolean requirementsCheck() {
+    public boolean requirementsCheck() {
 
         if (this.isSuppressed()) {
             return false; // Effect removed by effect

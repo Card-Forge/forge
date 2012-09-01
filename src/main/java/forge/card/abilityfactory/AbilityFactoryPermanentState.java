@@ -1228,7 +1228,7 @@ public class AbilityFactoryPermanentState {
         }
 
         for (final Card tgtC : tgtCards) {
-            if ((AllZoneUtil.isCardInPlay(tgtC) || AllZone.getZoneOf(tgtC).is(ZoneType.Stack)) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
+            if ((AllZoneUtil.isCardInPlay(tgtC) || params.containsKey("ETB")) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 if (tgtC.isUntapped() && (remTapped)) {
                     card.addRemembered(tgtC);
                 }

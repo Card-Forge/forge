@@ -94,10 +94,6 @@ public class ReplacementHandler {
     public ReplacementResult run(final HashMap<String, Object> runParams, final ReplacementLayer layer,final Player decider) {
         
         final List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
-        if(layer == ReplacementLayer.Other && ((String)runParams.get("Event")).equals("Moved")) {
-            System.out.println("Shdf");
-        }
-
         // Round up Non-static replacement effects ("Until EOT," or
         // "The next time you would..." etc)
         for (final ReplacementEffect replacementEffect : this.tmpEffects) {
@@ -173,10 +169,7 @@ public class ReplacementHandler {
      *            the replacement effect to run
      */
     private ReplacementResult executeReplacement(final HashMap<String, Object> runParams,
-            final ReplacementEffect replacementEffect, final Player decider) {
-        if(replacementEffect.getHostCard().getName().equals("Clone")) {
-            System.out.println("And here we go.");
-        }
+        final ReplacementEffect replacementEffect, final Player decider) {
         final HashMap<String, String> mapParams = replacementEffect.getMapParams();
 
         SpellAbility effectSA = null;

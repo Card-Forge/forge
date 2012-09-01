@@ -240,9 +240,6 @@ public class StaticAbilityContinuous {
                     for (SpellAbility sa : c.getSpellAbilities()) {
                         if (sa instanceof AbilityActivated) {
                             SpellAbility newSA = ((AbilityActivated) sa).getCopy();
-                            if (newSA == null) {
-                                System.out.println("Uh-oh...");
-                            }
                             newSA.setType("Temporary");
                             CardFactoryUtil.correctAbilityChainSourceCard(newSA, hostCard);
                             addFullAbs.add(newSA);
