@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -2038,6 +2039,7 @@ public final class AbilityFactoryReveal {
             final boolean mayshuffle) {
         final PlayerZone lib = player.getZone(ZoneType.Library);
         int maxCards = lib.size();
+        // If library is smaller than N, only show that many cards
         maxCards = Math.min(maxCards, numCards);
         if (maxCards == 0) {
             return;
@@ -2047,29 +2049,11 @@ public final class AbilityFactoryReveal {
         for (int j = 0; j < maxCards; j++) {
             topCards.add(lib.get(j));
         }
-        for (int i = 1; i <= maxCards; i++) {
-            String suffix = "";
-            switch (i) {
-            case 1:
-                suffix = "st";
-                break;
-            case 2:
-                suffix = "nd";
-                break;
-            case 3:
-                suffix = "rd";
-                break;
-            default:
-                suffix = "th";
-            }
-            final String title = "Put " + i + suffix + " from the top: ";
-            final Object o = GuiUtils.chooseOneOrNone(title, topCards.toArray());
-            if (o == null) {
-                break;
-            }
-            final Card c1 = (Card) o;
-            topCards.remove(c1);
-            Singletons.getModel().getGameAction().moveToLibrary(c1, i - 1);
+        
+        List<Object> orderedCards = GuiUtils.getOrderChoices("Select order to Rearrange", "Top of Library", true, (Object[])topCards.toArray());
+        for(int i = maxCards-1; i >= 0; i--){
+            Card next = (Card)orderedCards.get(i);
+            Singletons.getModel().getGameAction().moveToLibrary(next, 0);
         }
         if (mayshuffle) {
             if (GameActionUtil.showYesNoDialog(src, "Do you want to shuffle the library?")) {
