@@ -957,8 +957,6 @@ public final class GameActionUtil {
 
         if (c.getName().equals("Scalpelexis")) {
             GameActionUtil.playerCombatDamageScalpelexis(c);
-        } else if (c.getName().equals("Spawnwrithe")) {
-            GameActionUtil.playerCombatDamageSpawnwrithe(c);
         } else if (c.isEnchantedBy("Celestial Mantle")) {
             GameActionUtil.executeCelestialMantle(c);
         }
@@ -1115,40 +1113,6 @@ public final class GameActionUtil {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         }
-    }
-
-    /**
-     * <p>
-     * playerCombatDamageSpawnwrithe.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    private static void playerCombatDamageSpawnwrithe(final Card c) {
-        final Player player = c.getController();
-        final Card crd = c;
-
-        final Ability ability2 = new Ability(c, "0") {
-            @Override
-            public void resolve() {
-                final CardList cl = CardFactoryUtil.makeToken("Spawnwrithe", "", crd.getController(), "2 G",
-                        new String[] { "Creature", "Elemental" }, 2, 2, new String[] { "Trample" });
-
-                for (final Card c : cl) {
-                    c.setText("Whenever Spawnwrithe deals combat damage to a player, "
-                            + "put a token that's a copy of Spawnwrithe onto the battlefield.");
-                    c.setCopiedToken(true);
-                }
-            }
-        }; // ability2
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append(c.getName()).append(" - ").append(player).append(" puts copy onto the battlefield.");
-        ability2.setStackDescription(sb.toString());
-
-        AllZone.getStack().addSimultaneousStackEntry(ability2);
-
     }
 
     // Special Conditions
