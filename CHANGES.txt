@@ -19,6 +19,8 @@ A new Alpha Strike button was added to the dock.
 
 Several people have noticed that the cards displayed on the battlefield will fail to be displayed when the number of cards on the battlefield increases. Maximizing the human panel can help to re-display the cards.
 
+If you win a quest mode match, you get a booster pack for every 1 or 2 (default) Wins, depending on difficulty. If you lose and you are playing on easy mode, you get a booster pack every 1 (default) Loss.
+
 --
 
 It seems like the front face of double faced cards aren't triggering properly, but the back face and single faced cards are.
@@ -245,6 +247,24 @@ Fixes/Features:
 - Added "ETB" parameter to AF_Tap, letting it tap stuff no matter where it is if it certifies that it's an etb replacement.
 - Fixed Remote Farm
 - Fixed the dragon auras.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the quest opponent Sentinel 4.
+- Added the quest opponent Sentinel 4 (now really).
+- Fixed a possible NPE with Molten Influence.
+- Updated the deck Hellboy 3 and added a medium version.
+- Fixed Quest Mode handing out Boosters like hotcakes
+- Fixed the random rare reward that should be given when beating a Very Hard deck
+- added ActiveZones$ Battlefield to planeswalker damage replacement effect
+- Fixed costChanges not applying to AI spells with a cost of 0.
+- Updated the Cyclops 3 deck.
+- Updated some SVars of slivers.
+- Little fix for 0 mana cost AI spells.
+- Improved AI of Provoke.
+- Improved and fixed mana source choosing of the AI.
+- Updated the descriptions of three decks.
+- Added DualListBox UI element for improving ordered choices such as simultaneous triggers
+- Switched Simultaneous triggers over to use DualListBox
+- Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
