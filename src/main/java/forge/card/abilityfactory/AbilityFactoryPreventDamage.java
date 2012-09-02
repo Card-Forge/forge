@@ -367,7 +367,8 @@ public class AbilityFactoryPreventDamage {
         } // Protect combatants
         else if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             if (sa.canTarget(AllZone.getComputerPlayer()) && CombatUtil.wouldLoseLife(AllZone.getCombat())
-                    && (CombatUtil.lifeInDanger(AllZone.getCombat()) || sa.isAbility())) {
+                    && (CombatUtil.lifeInDanger(AllZone.getCombat()) || sa.isAbility())
+                    && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
                 tgt.addTarget(AllZone.getComputerPlayer());
                 chance = true;
             } else {
