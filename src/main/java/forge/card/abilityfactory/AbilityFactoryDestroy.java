@@ -184,7 +184,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public boolean chkAIDrawback() {
-                return false;
+                return AbilityFactoryDestroy.destroyCanPlayAI(af, this);
             }
 
             @Override
@@ -271,6 +271,7 @@ public class AbilityFactoryDestroy {
                     }
                 });
             }
+            System.out.println("destroy" + sa + list);
 
             if (list.size() == 0) {
                 return false;
@@ -290,7 +291,7 @@ public class AbilityFactoryDestroy {
 
                 Card choice = null;
                 // If the targets are only of one type, take the best
-                if (list.getNotType("Creature").size() == 0) {
+                if (list.getNotType("Creature").isEmpty()) {
                     choice = CardFactoryUtil.getBestCreatureAI(list);
                 } else if (list.getNotType("Land").isEmpty()) {
                     choice = CardFactoryUtil.getBestLandAI(list);
@@ -311,7 +312,6 @@ public class AbilityFactoryDestroy {
                 list.remove(choice);
                 abTgt.addTarget(choice);
             }
-
         } else {
             if (params.containsKey("Defined")) {
                 list = new CardList(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
@@ -320,13 +320,12 @@ public class AbilityFactoryDestroy {
                         || list.getNotKeyword("Indestructible").isEmpty()) {
                     return false;
                 }
-                return true;
             }
-            return false;
         }
-
+        System.out.println("destroy2");
         final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
+            System.out.println("destroy3");
             chance &= subAb.chkAIDrawback();
         }
 
