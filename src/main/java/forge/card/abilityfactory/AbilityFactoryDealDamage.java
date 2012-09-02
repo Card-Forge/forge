@@ -812,6 +812,10 @@ public class AbilityFactoryDealDamage {
                 int actualPay = 0;
                 final boolean noPrevention = this.abilityFactory.getMapParams().containsKey("NoPrevention");
                 final ArrayList<Card> cards = tgt.getTargetCards();
+                //target is a player
+                if (cards.isEmpty()) {
+                    actualPay = dmg;
+                }
                 for (final Card c : cards) {
                     final int adjDamage = c.getEnoughDamageToKill(dmg, source, false, noPrevention);
                     if (adjDamage > actualPay) {
