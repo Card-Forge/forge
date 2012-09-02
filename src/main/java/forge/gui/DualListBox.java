@@ -104,11 +104,13 @@ public class DualListBox extends JPanel {
     private JButton okButton;
     private JButton autoButton;
     
-    private boolean waiting = false;
+    private JLabel orderedLabel;
+
     private boolean selectAll = true;
     
-    public DualListBox(boolean selectAll) {
+    public DualListBox(boolean selectAll, String label) {
         initScreen();
+        orderedLabel.setText(label);
         this.selectAll = selectAll;
     }
 
@@ -217,9 +219,11 @@ public class DualListBox extends JPanel {
         centerPanel.add(removeButton);
         centerPanel.add(removeAllButton);
         
+        orderedLabel = new JLabel("Selected Elements:");
+        
         JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.setSize(300, 300);
-        rightPanel.add(new JLabel("Selected Elements:"), BorderLayout.NORTH);
+        rightPanel.add(orderedLabel, BorderLayout.NORTH);
         rightPanel.add(new JScrollPane(destList), BorderLayout.CENTER);
         rightPanel.add(autoButton, BorderLayout.SOUTH);
         

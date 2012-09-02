@@ -360,7 +360,7 @@ public final class GuiUtils {
     public static List<Object> getOrderChoices(final String title, final String top, final Object... choices) {
         // An input box for handling the order of choices.
         final JFrame frame = new JFrame();
-        DualListBox dual = new DualListBox(true);
+        DualListBox dual = new DualListBox(true, top);
         dual.addSourceElements(choices);
 
         frame.setLayout(new BorderLayout());
