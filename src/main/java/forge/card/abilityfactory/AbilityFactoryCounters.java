@@ -1931,6 +1931,7 @@ public class AbilityFactoryCounters {
             PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
             if (type.equals("P1P1") && sa.isAbility() && source.isCreature()
                     && sa.getPayCosts() != null && sa.getPayCosts().getTap()
+                    && sa instanceof AbilitySub
                     && (phase.isNextTurn(AllZone.getHumanPlayer())
                     || phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY))) {
                 boolean combatants = false;
@@ -1951,7 +1952,7 @@ public class AbilityFactoryCounters {
             chance &= subAb.chkAIDrawback();
         }
 
-        if (AbilityFactory.playReusable(sa)) {
+        if (sa.isTrigger() || sa instanceof AbilitySub || AbilityFactory.playReusable(sa)) {
             return chance;
         }
 
