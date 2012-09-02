@@ -306,7 +306,7 @@ public class SpellPermanent extends Spell {
         final Card card = this.getSourceCard();
         String mana = this.getPayCosts().getTotalMana();
         // check on legendary
-        if (card.isType("Legendary")) {
+        if (card.isType("Legendary") && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
             final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             if (list.containsName(card.getName())) {
                 return false;
