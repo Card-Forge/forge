@@ -110,6 +110,7 @@ public abstract class GenerateColoredDeckBase {
             final int n = this.cardCounts.get(s);
             this.cardCounts.put(s, n + 1);
             tmpDeck.append(s + "\n");
+            res++;
         }
         return res;
     }

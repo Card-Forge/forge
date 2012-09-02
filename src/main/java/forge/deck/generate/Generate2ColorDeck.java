@@ -37,9 +37,9 @@ import forge.properties.ForgeProps;
  * @version $Id$
  */
 public class Generate2ColorDeck extends GenerateColoredDeckBase {
-    final float landsPercentage = 0.42f;
-    final float creatPercentage = 0.34f;
-    final float spellPercentage = 0.24f;
+    final float landsPercentage = 0.39f;
+    final float creatPercentage = 0.36f;
+    final float spellPercentage = 0.25f;
 
     final List<FilterCMC> cmcLevels = Arrays.asList(
             new GenerateDeckUtil.FilterCMC(0, 2),
