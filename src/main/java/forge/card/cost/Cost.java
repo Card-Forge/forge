@@ -509,9 +509,6 @@ public class Cost {
         final StringBuilder cost = new StringBuilder();
         boolean first = true;
         for (final CostPart part : this.costParts) {
-            if (part instanceof CostMana) {
-                continue;
-            }
             if (!first) {
                 cost.append(" and ");
             }
