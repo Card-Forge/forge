@@ -1446,8 +1446,6 @@ public final class AbilityFactoryChangeZone {
         final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
 
-        float pct = origin.equals(ZoneType.Battlefield) ? .8f : .667f;
-
         final Random r = MyRandom.getRandom();
 
         if (abCost != null) {
@@ -1512,15 +1510,30 @@ public final class AbilityFactoryChangeZone {
                 }
 
                 final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
-
+                boolean contains = false;
                 for (final Card c : retrieval) {
                     if (objects.contains(c)) {
-                        pct = 1;
+                        contains = true;
                     }
                 }
-                if (pct < 1) {
+                if (!contains) {
                     return false;
                 }
+            }
+        }
+        // don't return something to your hand if your hand is full of good stuff
+        if (destination.equals(ZoneType.Hand) && origin.equals(ZoneType.Graveyard)) {
+            int handSize = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).size();
+            if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
+                return false;
+            }
+            if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+                    && handSize > 1) {
+                return false;
+            }
+            if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
+                    && handSize >= AllZone.getComputerPlayer().getMaxHandSize()) {
+                return false;
             }
         }
 
@@ -1529,7 +1542,7 @@ public final class AbilityFactoryChangeZone {
             chance &= subAb.chkAIDrawback();
         }
 
-        return ((r.nextFloat() < pct) && chance);
+        return (chance);
     }
 
     /**
@@ -1583,6 +1596,7 @@ public final class AbilityFactoryChangeZone {
                 subAffected = subParams.get("Defined");
             }
         }
+        System.out.println("changeZone: " + origin + destination + source);
 
         if (tgt != null) {
             tgt.resetTargets();
@@ -1590,7 +1604,9 @@ public final class AbilityFactoryChangeZone {
 
         CardList list = AllZoneUtil.getCardsIn(origin);
         list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
-        list = list.getNotName(source.getName()); // Don't get the same card back.
+        if (source.isInZone(ZoneType.Hand)) {
+            list = list.getNotName(source.getName()); // Don't get the same card back.
+        }
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             return false;
@@ -1672,6 +1688,7 @@ public final class AbilityFactoryChangeZone {
             if (destination.equals(ZoneType.Hand)) {
                 // only retrieve cards from computer graveyard
                 list = list.getController(AllZone.getComputerPlayer());
+                System.out.println("changeZone:" + list);
             }
 
         }
