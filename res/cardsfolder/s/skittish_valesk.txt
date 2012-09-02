@@ -3,7 +3,7 @@ ManaCost:6 R
 Types:Creature Beast
 Text:no text
 PT:5/5
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFlipACoin | TriggerDescription$ At the beginning of your upkeep, flip a coin. If you lose the flip, return CARDNAME to its owner's hand.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFlipACoin | TriggerDescription$ At the beginning of your upkeep, flip a coin. If you lose the flip, turn CARDNAME face down.
 SVar:TrigFlipACoin:AB$FlipACoin | Cost$ 0 | LoseSubAbility$ DBChange
 SVar:DBChange:DB$SetState | NewState$ FaceDown
 K:Morph:5 R
