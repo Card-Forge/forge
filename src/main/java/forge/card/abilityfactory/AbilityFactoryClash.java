@@ -766,9 +766,9 @@ public final class AbilityFactoryClash {
 
                 // first, separate the cards into piles
                 if (separator.isHuman()) {
-                    final List<Card> l = GuiUtils.chooseNoneOrMany("Put into pile 1 (multi-select)", pool.toArray());
-                    for (final Card c : l) {
-                        pile1.add(c);
+                    final List<Object> firstPile = GuiUtils.getOrderChoices("Place into two piles", "Pile 1", false, (Object[])pool.toArray());
+                    for (final Object o : firstPile) {
+                        pile1.add((Card)o);
                     }
                     
                     for (final Card c : pool) {

@@ -22,6 +22,12 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import forge.Card;
+import forge.card.spellability.SpellAbility;
+import forge.gui.match.CMatchUI;
 
 @SuppressWarnings("serial")
 class UnsortedListModel extends AbstractListModel {
@@ -109,9 +115,9 @@ public class DualListBox extends JPanel {
     private boolean selectAll = true;
     
     public DualListBox(boolean selectAll, String label) {
+        this.selectAll = selectAll;
         initScreen();
         orderedLabel.setText(label);
-        this.selectAll = selectAll;
     }
 
     public void clearSourceListModel() {
@@ -180,6 +186,26 @@ public class DualListBox extends JPanel {
         return destListModel.model;
     }
     
+    private static void addCardViewListener(final JList list) {
+        list.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(final ListSelectionEvent ev) {
+                Card card = null;
+                Object obj = list.getSelectedValue();
+                if (obj instanceof Card) {
+                    card = (Card) obj;
+                }
+                else if (obj instanceof SpellAbility) {
+                    card = ((SpellAbility)obj).getSourceCard();
+                }
+                
+                if (card != null) {
+                    CMatchUI.SINGLETON_INSTANCE.setCard(card);
+                }
+            }
+        });  
+    }
+    
     private void initScreen() {
         setPreferredSize(new Dimension(650, 300));
         setLayout(new GridLayout(0, 3));
@@ -230,6 +256,9 @@ public class DualListBox extends JPanel {
         add(leftPanel);
         add(centerPanel);
         add(rightPanel);
+        
+        addCardViewListener(sourceList);
+        addCardViewListener(destList);
     }
 
     private class AddListener implements ActionListener {

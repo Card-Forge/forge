@@ -357,10 +357,10 @@ public final class GuiUtils {
         return c.getSelectedValues();
     } // getChoice()
 
-    public static List<Object> getOrderChoices(final String title, final String top, final Object... choices) {
+    public static List<Object> getOrderChoices(final String title, final String top, boolean selectAll, final Object... choices) {
         // An input box for handling the order of choices.
         final JFrame frame = new JFrame();
-        DualListBox dual = new DualListBox(true, top);
+        DualListBox dual = new DualListBox(selectAll, top);
         dual.addSourceElements(choices);
 
         frame.setLayout(new BorderLayout());
