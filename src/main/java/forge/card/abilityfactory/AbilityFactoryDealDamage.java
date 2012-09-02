@@ -344,7 +344,15 @@ public class AbilityFactoryDealDamage {
         } else {
             dmg = this.getNumDamage(sa);
         }
-        return this.damageTargetAI(sa, dmg);
+        if(!this.damageTargetAI(sa, dmg)) {
+            return false;
+        }
+        
+        final AbilitySub subAb = sa.getSubAbility();
+        if (subAb != null && !subAb.chkAIDrawback()) {
+            return false;
+        }
+        return true;
     }
 
     /**
