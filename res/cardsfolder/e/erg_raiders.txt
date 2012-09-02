@@ -3,6 +3,7 @@ ManaCost:1 B
 Types:Creature Human Warrior
 Text:At the beginning of your end step, if CARDNAME didn't attack this turn, CARDNAME deals 2 damage to you unless it came under your control this turn.
 PT:2/3
+SVar:MustAttack:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erg_raiders.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/20.jpg
