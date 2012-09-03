@@ -266,6 +266,31 @@ Fixes/Features:
 - Switched Simultaneous triggers over to use DualListBox
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Skittish Valesk.
+- Fixed Lurking Predators.
+- Fixed AI for Havengul Runebinder.
+- Improved changeKnownOriginCanPlayAI.
+- Added a NeedsToPlayVar to Unbreathing Horde.
+- Readded the etbCounter handling I accidentally deleted.
+- Improving labeling for Dual List Box. Top of the list will resolve first for Triggers.
+- Convert Spawnwrithe to script
+- Fixed AI for Cone of Flame.
+- Added the AI SVar MustAttack.
+- AF_TwoPiles will now use DualListBox
+- DualListBox now will display Source Cards when selected
+- Fixed AI of Flameblast Dragon.
+- Fixed a bug in preventDamageCanPlayAI.
+- Fixed AI of Stomp and Howl.
+- Added an AI check for Mirror Gallery.
+- RearrangeTopOfLibrary now using DualListBox
+- Fixed a bug in the random deck generator that caused decks to have 28 lands.
+- Fixed toSimpleString() in cost.
+- Fixed Null Pointer Exception when the AI is trying to rank cards which have no draft ranking available. --BBU
+- Added the option to pick up to two Starter Packs, if available, instead of Boosters in Sealed Deck games. --BBU
+- Added support for varying number of sets in the starter pack code. (So you could play a sealed game with, say, one starter pack and one booster by modifying blocks.txt.) --BBU
+- Fixed Emrakul, the Aeons Torn shaking of auras like Dragon Breath.
+- Fixed an AI bug with attacksAlone triggers.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
