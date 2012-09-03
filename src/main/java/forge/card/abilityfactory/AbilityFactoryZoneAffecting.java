@@ -1334,6 +1334,11 @@ public class AbilityFactoryZoneAffecting {
                 int numCards = 1;
                 if (params.containsKey("NumCards")) {
                     numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+                    if (p.getCardsIn(ZoneType.Hand).size() > 0
+                            && p.getCardsIn(ZoneType.Hand).size() < numCards) {
+                        // System.out.println("Scale down discard from " + numCards + " to " + p.getCardsIn(ZoneType.Hand).size());
+                        numCards = p.getCardsIn(ZoneType.Hand).size();
+                    }
                 }
 
                 if (mode.equals("Random")) {
