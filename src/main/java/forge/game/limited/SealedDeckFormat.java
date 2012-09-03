@@ -108,8 +108,91 @@ public class SealedDeckFormat {
                 final Object p = GuiUtils.chooseOne("Choose Set Combination", setCombos.toArray());
 
                 final String[] pp = p.toString().split("/");
+
+                // Consider up to two starter packs --BBU
+                boolean starter1 = false;
+                boolean starter2 = false;
+                int starter1idx = -1;
+                int starter2idx = -2;
+
+                if  (nPacks > 5) {  // paranoia...
+
+                    for (int j = 5; j >= 0 && !starter2; j--) {
+
+                            if (Singletons.getModel().getTournamentPacks().contains(pp[j])) {
+                                    if (starter1) {
+                                        starter2 = true;
+                                        starter2idx = j;
+
+                                        // Prefer a different second set
+                                        if (j > 0 && pp[starter1idx].equals(pp[starter2idx])) {
+                                            for (int k = j; k >= 0; k--) {
+                                                if (Singletons.getModel().getTournamentPacks().contains(pp[k])
+                                                 && !(pp[k].equals(pp[j]))) {
+                                                    starter2idx = k;
+                                                    break; // Found, don't look any further.
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        starter1 = true;
+                                        starter1idx = j;
+                                    }
+                            }
+                    }
+                }
+                if (starter1 || starter2) {
+                    final List<String> starterPacks = new ArrayList<String>();
+
+                    // The option to use booster packs only, no starter packs
+                    starterPacks.add("(None)");
+
+                    // Add option for the first starter pack
+                    if (starter1) {
+                        starterPacks.add(String.format("%s", pp[starter1idx]));
+                    }
+
+                    // Add a separate option for the second starter pack if different from the first
+                    if (starter2 && !(pp[starter2idx].equals(pp[starter1idx]))) {
+                        starterPacks.add(String.format("%s", pp[starter2idx]));
+                    }
+
+                    // If both can have starter packs, add option for both
+                    if (starter1 && starter2) {
+                        starterPacks.add(String.format("Two packs (%s, %s)", pp[starter1idx], pp[starter2idx]));
+                    }
+
+                    final Object starterResult = GuiUtils.chooseOne("Choose starter pack(s):", starterPacks.toArray());
+
+                    // Analyze the choice
+                    final String starters = starterResult.toString();
+
+                    if (starters.equals("(None)")) {
+                        starter1 = false;
+                        starter2 = false;
+                    }
+                    else if (starters.equals(pp[starter1idx])) {
+                        starter1 = true;
+                        starter2 = false;
+                    }
+                    else if (starters.equals(pp[starter2idx])) {
+                        starter1 = false;
+                        starter2 = true;
+                    }
+                    // NOTE: No code needed for the last option (both) since if we selected it,
+                    // both are already true...
+                }
+
+                // End starter pack selection
+
                 for (int i = 0; i < nPacks; i++) {
-                    this.product.add(new UnOpenedProduct(Singletons.getModel().getBoosters().get(pp[i])));
+                    if ((i == starter1idx && starter1) || (i == starter2idx && starter2)) {
+                        this.product.add(new UnOpenedProduct(Singletons.getModel().getTournamentPacks().get(pp[i])));
+                    }
+                    else {
+                        this.product.add(new UnOpenedProduct(Singletons.getModel().getBoosters().get(pp[i])));
+                    }
                 }
             } else {
                 final UnOpenedProduct product1 = new UnOpenedProduct(Singletons.getModel().getBoosters().get(sets[0]));
