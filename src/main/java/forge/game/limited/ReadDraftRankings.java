@@ -115,8 +115,21 @@ public class ReadDraftRankings {
      */
     public Double getRanking(String cardName, String edition) {
         Double rank = null;
+
+        // Basic lands should be excluded from the evaluation --BBU
+        if (cardName.equals("Island") || cardName.equals("Forest") || cardName.equals("Swamp")
+                || cardName.equals("Plains") || cardName.equals("Mountain")) {
+                return null;
+                }
+
         if (draftRankings.containsKey(edition)) {
             String safeName = cardName.replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");
+
+            // If a card has no ranking, don't try to look it up --BBU
+            if (draftRankings.get(edition).get(safeName) == null) {
+                // System.out.println("WARNING! " + safeName + " NOT found in " + edition);
+                return null;
+            }
             rank = (double) draftRankings.get(edition).get(safeName) / (double) setSizes.get(edition);
         }
         return rank;
