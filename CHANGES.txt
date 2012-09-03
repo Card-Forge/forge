@@ -21,6 +21,8 @@ Several people have noticed that the cards displayed on the battlefield will fai
 
 If you win a quest mode match, you get a booster pack for every 1 or 2 (default) Wins, depending on difficulty. If you lose and you are playing on easy mode, you get a booster pack every 1 (default) Loss.
 
+In the past some people noticed that special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries. This problem should now be fixed.
+
 --
 
 It seems like the front face of double faced cards aren't triggering properly, but the back face and single faced cards are.
@@ -31,8 +33,6 @@ A recent contribution to the code base should fix some of the bugs that people n
 2. Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
 
 The work on the new UI is now finished. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
-
-Some people have noticed special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries. We hope to have this problem fixed at some point in the future.
 
 We are now using a different system for our snapshot and beta releases. Unfortunately, this new system builds a jar file which does not accurately display the SVN revision number.
 
