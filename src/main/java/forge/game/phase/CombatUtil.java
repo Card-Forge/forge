@@ -1361,7 +1361,8 @@ public class CombatUtil {
             if (trigParams.containsKey("ValidCard")) {
                 if (!TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)
                         && !(combat.isAttacking(source) && TriggerReplacementBase.matchesValid(source,
-                                trigParams.get("ValidCard").split(","), source))) {
+                                trigParams.get("ValidCard").split(","), source)
+                            && !trigParams.containsKey("Alone"))) {
                     return false;
                 }
             }
