@@ -115,33 +115,31 @@ public class SealedDeckFormat {
                 int starter1idx = -1;
                 int starter2idx = -2;
 
-                if  (nPacks > 5) {  // paranoia...
+                for (int j = nPacks - 1; j >= 0 && !starter2; j--) {
 
-                    for (int j = 5; j >= 0 && !starter2; j--) {
+                    if (Singletons.getModel().getTournamentPacks().contains(pp[j])) {
+                        if (starter1) {
+                            starter2 = true;
+                            starter2idx = j;
 
-                            if (Singletons.getModel().getTournamentPacks().contains(pp[j])) {
-                                    if (starter1) {
-                                        starter2 = true;
-                                        starter2idx = j;
-
-                                        // Prefer a different second set
-                                        if (j > 0 && pp[starter1idx].equals(pp[starter2idx])) {
-                                            for (int k = j; k >= 0; k--) {
-                                                if (Singletons.getModel().getTournamentPacks().contains(pp[k])
-                                                 && !(pp[k].equals(pp[j]))) {
-                                                    starter2idx = k;
-                                                    break; // Found, don't look any further.
+                            // Prefer a different second set
+                            if (j > 0 && pp[starter1idx].equals(pp[starter2idx])) {
+                                for (int k = j; k >= 0; k--) {
+                                    if (Singletons.getModel().getTournamentPacks().contains(pp[k])
+                                            && !(pp[k].equals(pp[j]))) {
+                                                starter2idx = k;
+                                                break; // Found, don't look any further.
                                                 }
-                                            }
                                         }
                                     }
-                                    else {
-                                        starter1 = true;
-                                        starter1idx = j;
-                                    }
-                            }
+                                }
+                            else {
+                                starter1 = true;
+                                starter1idx = j;
+                                }
+                        }
                     }
-                }
+
                 if (starter1 || starter2) {
                     final List<String> starterPacks = new ArrayList<String>();
 
