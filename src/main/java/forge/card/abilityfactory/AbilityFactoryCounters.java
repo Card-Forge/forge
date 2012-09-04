@@ -989,7 +989,7 @@ public class AbilityFactoryCounters {
         // the expected targets could be
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
-        // Target abTgt = sa.getTarget();
+        Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         // CardList list;
         // Card choice = null;
@@ -1029,13 +1029,19 @@ public class AbilityFactoryCounters {
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         // currently, not targeted
+        if (abTgt != null) {
+            return false;
+        }
+
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+                && !params.containsKey("ActivationPhases")
+                && !type.equals("M1M1")) {
+            return false;
+        }
 
         if (!type.matches("Any")) {
-            // Placeholder: No targeting necessary
             final int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
-            // each counter on the card is a 10% chance of not activating this
-            // ability.
-            if (r.nextFloat() < (.1 * currCounters)) {
+            if (currCounters < 1) {
                 return false;
             }
         }
