@@ -5,6 +5,7 @@ Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpCurse | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets -2/-2 until end of turn.
 SVar:TrigPumpCurse:DB$Pump| ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | NumAtt$ -2 | NumDef$ -2
+SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/farbog_boneflinger.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/61.jpg

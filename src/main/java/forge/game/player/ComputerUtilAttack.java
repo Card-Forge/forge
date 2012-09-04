@@ -739,13 +739,10 @@ public class ComputerUtilAttack {
         } else if ((humanLifeToDamageRatio < 2 && ratioDiff >= 0) || ratioDiff > 3
                 || (ratioDiff > 0 && outNumber > 0)) {
             this.aiAggression = 3; // attack expecting to make good trades or damage player.
-        } else if (ratioDiff >= 0 || ratioDiff + outNumber >= -1) {
+        } else if (ratioDiff >= 0 || ratioDiff + outNumber >= -1 || aiLifeToPlayerDamageRatio > 1) {
             // at 0 ratio expect to potentially gain an advantage by attacking first
             // if the ai has a slight advantage
             // or the ai has a significant advantage numerically but only a slight disadvantage damage/life
-            this.aiAggression = 2; // attack expecting to destroy creatures/be unblockable
-        } else if (aiLifeToPlayerDamageRatio > 1) {
-            // the player is overmatched but there are a few turns before death
             this.aiAggression = 2; // attack expecting to destroy creatures/be unblockable
         } else if (doUnblockableAttack || (ratioDiff * -1 < turnsUntilDeathByUnblockable)) {
             this.aiAggression = 1;
@@ -941,7 +938,8 @@ public class ComputerUtilAttack {
             break;
         case 3: // expecting to at least kill a creature of equal value, not be
                 // blocked
-            if ((canKillAll && isWorthLessThanAllKillers) || (canKillAllDangerous && !canBeKilledByOne)
+            if ((canKillAll && isWorthLessThanAllKillers) 
+                    || ((canKillAllDangerous || hasAttackEffect) && !canBeKilledByOne)
                     || !canBeBlocked) {
                 System.out.println(attacker.getName()
                         + " = attacking expecting to kill creature or cause damage, or is unblockable");
