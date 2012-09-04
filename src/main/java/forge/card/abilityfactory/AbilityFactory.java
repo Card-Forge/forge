@@ -31,7 +31,8 @@ import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.Ability;
+import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityCondition;
@@ -2739,17 +2740,11 @@ public class AbilityFactory {
         }*/
         final Cost cost = new Cost(source, unlessCost, true);
 
-        final SpellAbility ability = new AbilityActivated(source, cost, null) {
-            private static final long serialVersionUID = 2502577469482777440L;
+        final Ability ability = new AbilityStatic(source, cost, null) {
 
             @Override
             public void resolve() {
                 // nothing to do here
-            }
-
-            @Override
-            public AbilityActivated getCopy() {
-                return null;
             }
         };
 

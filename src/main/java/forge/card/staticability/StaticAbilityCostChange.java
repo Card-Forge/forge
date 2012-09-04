@@ -23,6 +23,7 @@ import forge.Card;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -66,7 +67,7 @@ public class StaticAbilityCostChange {
             if (params.get("Type").equals("Spell") && !sa.isSpell()) {
                 return originalCost;
             }
-            if (params.get("Type").equals("Ability") && !sa.isAbility()) {
+            if (params.get("Type").equals("Ability") && !(sa instanceof AbilityActivated)) {
                 return originalCost;
             }
         }
@@ -162,7 +163,7 @@ public class StaticAbilityCostChange {
             if (params.get("Type").equals("Spell") && !sa.isSpell()) {
                 return originalCost;
             }
-            if (params.get("Type").equals("Ability") && !sa.isAbility()) {
+            if (params.get("Type").equals("Ability") && !(sa instanceof AbilityActivated)) {
                 return originalCost;
             }
             if (params.get("Type").equals("Cycling") && !sa.isCycling()) {
