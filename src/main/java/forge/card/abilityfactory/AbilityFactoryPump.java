@@ -838,6 +838,11 @@ public class AbilityFactoryPump {
             attack = this.getNumAttack(sa);
         }
 
+        if ((this.numDefense.contains("X") && defense == 0)
+                || (this.numAttack.contains("X") && attack == 0)) {
+            return false;
+        }
+
         //Untargeted
         if ((this.abilityFactory.getAbTgt() == null) || !this.abilityFactory.getAbTgt().doesTarget()) {
             final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
