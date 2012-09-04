@@ -291,11 +291,32 @@ Fixes/Features:
 - Fixed Emrakul, the Aeons Torn shaking of auras like Dragon Breath.
 - Fixed an AI bug with attacksAlone triggers.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed a null pointer problem with multi-discard cards (e.g. Mindstab Thrull) when there are some but not enough cards in hand.
+- Updated RtR branch to head revision.
+- Added a fluff piece to the changes.txt file.
+- fix ETBReplacement for Vesuvan Doppelganger. Also changed AB$ ChooseCard to DB$ ChooseCard so mana cost isn't shown. (Now, it should be just like Clone)
+- Fixed Wild Pair.
+- Added the quest opponents The Zombie 2 and 3.
+- Added the quest opponent Robin Hood 3.
+- improved removeCanPlayAI.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
 
+
+
+Added the following cards to the Return to Ravnica branch (These cards are not yet available in this shapshot build):
+
+Goblin Electromancer
+Niv-Mizzet, Dracogenius
+Grim Roustabout
+Ogre Jailbreaker
+Auger Spree
+Hypersonic Dragon
+Transguild Promenade
 
 
 Added the following cards:
@@ -376,6 +397,7 @@ Blazing Salvo
 Dwarven Scorcher
 Lava Blister
 Molten Influence
+Evermind
 
 
 end
