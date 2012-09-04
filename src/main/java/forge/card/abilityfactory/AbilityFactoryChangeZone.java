@@ -995,6 +995,7 @@ public final class AbilityFactoryChangeZone {
                                 // Need to unenchant it, then clear out the
                                 // commands
                                 final GameEntity oldEnchanted = c.getEnchanting();
+                                oldEnchanted.removeEnchantedBy(c);
                                 c.removeEnchanting(oldEnchanted);
                                 c.clearEnchantCommand();
                                 c.clearUnEnchantCommand();

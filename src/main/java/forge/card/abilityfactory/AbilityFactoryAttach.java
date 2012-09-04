@@ -1154,6 +1154,7 @@ public class AbilityFactoryAttach {
             // If this Card is already Enchanting something
             // Need to unenchant it, then clear out the commands
             final GameEntity oldEnchanted = card.getEnchanting();
+            oldEnchanted.removeEnchantedBy(card);
             card.removeEnchanting(oldEnchanted);
             card.clearEnchantCommand();
             card.clearUnEnchantCommand();
