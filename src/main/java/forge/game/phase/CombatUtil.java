@@ -121,12 +121,26 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canBlock(final Card blocker) {
+        return canBlock(blocker, false);
+    }
+
+    // can the creature block at all?
+    /**
+     * <p>
+     * canBlock.
+     * </p>
+     * 
+     * @param blocker
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public static boolean canBlock(final Card blocker, final boolean nextTurn) {
 
         if (blocker == null) {
             return false;
         }
 
-        if (blocker.isTapped() && !blocker.hasKeyword("CARDNAME can block as though it were untapped.")) {
+        if (!nextTurn && blocker.isTapped() && !blocker.hasKeyword("CARDNAME can block as though it were untapped.")) {
             return false;
         }
 
@@ -481,6 +495,22 @@ public class CombatUtil {
 
         return CombatUtil.canBlock(attacker, blocker);
     }
+    
+ // can the blocker block the attacker?
+    /**
+     * <p>
+     * canBlock.
+     * </p>
+     * 
+     * @param attacker
+     *            a {@link forge.Card} object.
+     * @param blocker
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public static boolean canBlock(final Card attacker, final Card blocker) {
+        return canBlock(attacker, blocker, false);
+    }
 
     // can the blocker block the attacker?
     /**
@@ -494,12 +524,12 @@ public class CombatUtil {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean canBlock(final Card attacker, final Card blocker) {
+    public static boolean canBlock(final Card attacker, final Card blocker, final boolean nextTurn) {
         if ((attacker == null) || (blocker == null)) {
             return false;
         }
 
-        if (!CombatUtil.canBlock(blocker)) {
+        if (!CombatUtil.canBlock(blocker, nextTurn)) {
             return false;
         }
         if (!CombatUtil.canBeBlocked(attacker)) {

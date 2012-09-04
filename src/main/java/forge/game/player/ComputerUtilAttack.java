@@ -562,8 +562,8 @@ public class ComputerUtilAttack {
         // *******************
 
         int computerForces = 0;
-        int playerForces = 0;
-        int playerForcesForAttritionalAttack = 0;
+        int humanForces = 0;
+        int humanForcesForAttritionalAttack = 0;
 
         // examine the potential forces
         final CardList nextTurnAttackers = new CardList();
@@ -578,13 +578,13 @@ public class ComputerUtilAttack {
                 if (pCard.getNetCombatDamage() > 0) {
                     candidateCounterAttackDamage += pCard.getNetCombatDamage();
                     // candidateTotalBlockDamage += pCard.getNetCombatDamage();
-                    playerForces += 1; // player forces they might use to attack
+                    humanForces += 1; // player forces they might use to attack
                 }
             }
             // increment player forces that are relevant to an attritional
             // attack - includes walls
-            if (CombatUtil.canBlock(pCard)) {
-                playerForcesForAttritionalAttack += 1;
+            if (CombatUtil.canBlock(pCard, true)) {
+                humanForcesForAttritionalAttack += 1;
             }
         }
 
@@ -601,10 +601,9 @@ public class ComputerUtilAttack {
             // if the creature can attack then it's a potential attacker this
             // turn, assume summoning sickness creatures will be able to
             if (CombatUtil.canAttackNextTurn(pCard)) {
-
                 candidateAttackers.add(pCard);
                 if (pCard.getNetCombatDamage() > 0) {
-                    candidateUnblockedDamage += CombatUtil.damageIfUnblocked(pCard, AllZone.getHumanPlayer(), combat);
+                    candidateUnblockedDamage += CombatUtil.damageIfUnblocked(pCard, AllZone.getHumanPlayer(), null);
                     computerForces += 1;
                 }
 
@@ -612,9 +611,9 @@ public class ComputerUtilAttack {
         }
 
         // find the potential damage ratio the AI can cause
-        double playerLifeToDamageRatio = 1000000;
+        double humanLifeToDamageRatio = 1000000;
         if (candidateUnblockedDamage > 0) {
-            playerLifeToDamageRatio = (double) AllZone.getHumanPlayer().getLife() / candidateUnblockedDamage;
+            humanLifeToDamageRatio = (double) AllZone.getHumanPlayer().getLife() / candidateUnblockedDamage;
         }
 
         /*
@@ -625,10 +624,10 @@ public class ComputerUtilAttack {
          */
 
         // determine if the ai outnumbers the player
-        final int outNumber = computerForces - playerForces;
+        final int outNumber = computerForces - humanForces;
 
         // compare the ratios, higher = better for ai
-        final double ratioDiff = aiLifeToPlayerDamageRatio - playerLifeToDamageRatio;
+        final double ratioDiff = aiLifeToPlayerDamageRatio - humanLifeToDamageRatio;
         /*
          * System.out.println(String.valueOf(ratioDiff) +
          * " = ratio difference, higher = better for ai");
@@ -649,31 +648,31 @@ public class ComputerUtilAttack {
         // get list of attackers ordered from low power to high
         CardListUtil.sortAttackLowFirst(this.attackers);
         // get player life total
-        int playerLife = AllZone.getHumanPlayer().getLife();
+        int humanLife = AllZone.getHumanPlayer().getLife();
         // get the list of attackers up to the first blocked one
         final CardList attritionalAttackers = new CardList();
-        for (int x = 0; x < (this.attackers.size() - playerForces); x++) {
+        for (int x = 0; x < (this.attackers.size() - humanForces); x++) {
             attritionalAttackers.add(this.attackers.getCard(x));
         }
         // until the attackers are used up or the player would run out of life
         int attackRounds = 1;
-        while ((attritionalAttackers.size() > 0) && (playerLife > 0) && (attackRounds < 99)) {
+        while (attritionalAttackers.size() > 0 && humanLife > 0 && attackRounds < 99) {
             // sum attacker damage
             int damageThisRound = 0;
             for (int y = 0; y < attritionalAttackers.size(); y++) {
                 damageThisRound += attritionalAttackers.getCard(y).getNetCombatDamage();
             }
             // remove from player life
-            playerLife -= damageThisRound;
+            humanLife -= damageThisRound;
             // shorten attacker list by the length of the blockers - assuming
             // all blocked are killed for convenience
-            for (int z = 0; z < playerForcesForAttritionalAttack; z++) {
+            for (int z = 0; z < humanForcesForAttritionalAttack; z++) {
                 if (attritionalAttackers.size() > 0) {
                     attritionalAttackers.remove(attritionalAttackers.size() - 1);
                 }
             }
             attackRounds += 1;
-            if (playerLife <= 0) {
+            if (humanLife <= 0) {
                 doAttritionalAttack = true;
             }
         }
@@ -686,6 +685,7 @@ public class ComputerUtilAttack {
         // see how long until unblockable attackers will be fatal
         // *********************
         double unblockableDamage = 0;
+        double nextUnblockableDamage = 0;
         double turnsUntilDeathByUnblockable = 0;
         boolean doUnblockableAttack = false;
         for (final Card attacker : this.attackers) {
@@ -695,15 +695,31 @@ public class ComputerUtilAttack {
             for (final Card blocker : this.blockers) {
                 if (CombatUtil.canBlock(attacker, blocker)) {
                     isUnblockableCreature = false;
+                    break;
                 }
             }
             if (isUnblockableCreature) {
                 unblockableDamage += CombatUtil.damageIfUnblocked(attacker, AllZone.getHumanPlayer(), combat);
             }
         }
+        for (final Card attacker : nextTurnAttackers) {
+            boolean isUnblockableCreature = true;
+            // check blockers individually, as the bulk canBeBlocked doesn't
+            // check all circumstances
+            for (final Card blocker : this.computerList) {
+                if (CombatUtil.canBlock(attacker, blocker, true)) {
+                    isUnblockableCreature = false;
+                    break;
+                }
+            }
+            if (isUnblockableCreature) {
+                nextUnblockableDamage += CombatUtil.damageIfUnblocked(attacker, AllZone.getHumanPlayer(), null);
+            }
+        }
         if (unblockableDamage > 0 && !AllZone.getHumanPlayer().cantLoseForZeroOrLessLife()
                 && AllZone.getHumanPlayer().canLoseLife()) {
-            turnsUntilDeathByUnblockable = AllZone.getHumanPlayer().getLife() / unblockableDamage;
+            turnsUntilDeathByUnblockable = 1+ (AllZone.getHumanPlayer().getLife() - unblockableDamage)
+                    / nextUnblockableDamage;
         }
         if (unblockableDamage > AllZone.getHumanPlayer().getLife() && AllZone.getHumanPlayer().canLoseLife()) {
             doUnblockableAttack = true;
@@ -716,30 +732,26 @@ public class ComputerUtilAttack {
         // totals and other considerations
         // some bad "magic numbers" here, TODO replace with nice descriptive
         // variable names
-        if (((ratioDiff > 0) && doAttritionalAttack)) { // (playerLifeToDamageRatio
-                                                        // <= 1 && ratioDiff >=
-                                                        // 1
-                                                        // && outNumber > 0) ||
+        if (doAttritionalAttack) { 
             this.aiAggression = 5; // attack at all costs
-        } else if (((playerLifeToDamageRatio < 2) && (ratioDiff >= 0)) || (ratioDiff > 3)
-                || ((ratioDiff > 0) && (outNumber > 0))) {
-            this.aiAggression = 3; // attack expecting to kill creatures or
-                                   // damage
-            // player.
-        } else if ((ratioDiff >= 0) || ((ratioDiff + outNumber) >= -1)) {
-            // at 0 ratio expect to potentially gain an advantage by attacking
-            // first
+        } else if (ratioDiff >= 1 && (humanLifeToDamageRatio < 2 || outNumber > 0)) {
+            this.aiAggression = 4; // attack expecting to trade or damage player.
+        } else if ((humanLifeToDamageRatio < 2 && ratioDiff >= 0) || ratioDiff > 3
+                || (ratioDiff > 0 && outNumber > 0)) {
+            this.aiAggression = 3; // attack expecting to make good trades or damage player.
+        } else if (ratioDiff >= 0 || ratioDiff + outNumber >= -1) {
+            // at 0 ratio expect to potentially gain an advantage by attacking first
             // if the ai has a slight advantage
             // or the ai has a significant advantage numerically but only a slight disadvantage damage/life
             this.aiAggression = 2; // attack expecting to destroy creatures/be unblockable
-        } else if ((ratioDiff < 0) && (aiLifeToPlayerDamageRatio > 1)) {
+        } else if (aiLifeToPlayerDamageRatio > 1) {
             // the player is overmatched but there are a few turns before death
             this.aiAggression = 2; // attack expecting to destroy creatures/be unblockable
-        } else if (doUnblockableAttack || ((ratioDiff * -1) < turnsUntilDeathByUnblockable)) {
+        } else if (doUnblockableAttack || (ratioDiff * -1 < turnsUntilDeathByUnblockable)) {
             this.aiAggression = 1;
             // look for unblockable creatures that might be
             // able to attack for a bit of fatal damage even if the player is significantly better
-        } else if (ratioDiff < 0) {
+        } else {
             this.aiAggression = 0;
         } // stay at home to block
         System.out.println(String.valueOf(this.aiAggression) + " = ai aggression");
@@ -757,7 +769,7 @@ public class ComputerUtilAttack {
 
         for (int i = 0; i < attackersLeft.size(); i++) {
             final Card attacker = attackersLeft.get(i);
-            if ((this.aiAggression < 3) && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
+            if (this.aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
                     && CombatUtil.getTotalFirstStrikeBlockPower(attacker, AllZone.getHumanPlayer())
                     >= attacker.getKillDamage()) {
                 continue;

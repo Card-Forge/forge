@@ -1596,7 +1596,6 @@ public final class AbilityFactoryChangeZone {
                 subAffected = subParams.get("Defined");
             }
         }
-        System.out.println("changeZone: " + origin + destination + source);
 
         if (tgt != null) {
             tgt.resetTargets();
