@@ -242,7 +242,7 @@ public class CardFactorySorceries {
                                             JOptionPane.INFORMATION_MESSAGE);
                                 }
                             } else {
-                                Singletons.getModel().getGameAction().playCardNoCost(playing);
+                                Singletons.getModel().getGameAction().playCardWithoutManaCost(playing);
                             }
                             chosen.remove(playing);
                         }

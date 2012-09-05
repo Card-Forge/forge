@@ -1073,7 +1073,7 @@ public class MagicStack extends MyObservable {
                         return;
                     }
                     if (source.getOwner().isHuman()) {
-                        Singletons.getModel().getGameAction().playCardNoCost(source);
+                        Singletons.getModel().getGameAction().playCardWithoutManaCost(source);
                     } else {
                         System.out.println("rebound: " + source);
                         for (SpellAbility s : source.getSpells()) {

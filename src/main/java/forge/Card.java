@@ -1345,7 +1345,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     // Any trigger should cause the phase not to skip
                     Singletons.getModel().getGameState().getPhaseHandler().setSkipPhase(false);
                     if (c.getOwner().isHuman()) {
-                        Singletons.getModel().getGameAction().playCardNoCost(c);
+                        Singletons.getModel().getGameAction().playCardWithoutManaCost(c);
                     } else {
                         final ArrayList<SpellAbility> choices = this.getBasicSpells();
 

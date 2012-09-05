@@ -956,7 +956,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     if (wantToPlayCard) {
                         if (player.isHuman()) {
                             final Card c = library.get(0);
-                            Singletons.getModel().getGameAction().playCardNoCost(c);
+                            Singletons.getModel().getGameAction().playCardWithoutManaCost(c);
                         }
                         // player isComputer()
                         else {

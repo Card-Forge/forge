@@ -1599,7 +1599,7 @@ public class GameAction {
      * @param c
      *            a {@link forge.Card} object.
      */
-    public final void playCardNoCost(final Card c) {
+    public final void playCardWithoutManaCost(final Card c) {
         final ArrayList<SpellAbility> choices = c.getBasicSpells();
         SpellAbility sa;
 

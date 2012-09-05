@@ -165,7 +165,7 @@ public final class GameActionUtil {
                                         title.toString(), JOptionPane.YES_NO_OPTION);
 
                                 if (answer == JOptionPane.YES_OPTION) {
-                                    Singletons.getModel().getGameAction().playCardNoCost(cascadedCard);
+                                    Singletons.getModel().getGameAction().playCardWithoutManaCost(cascadedCard);
                                     revealed.remove(cascadedCard);
                                 }
                             } else {
@@ -293,7 +293,7 @@ public final class GameActionUtil {
                                                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
                                                 possibleValues, possibleValues[0]);
                                         if (q.equals(0)) {
-                                            Singletons.getModel().getGameAction().playCardNoCost(rippledCards[i]);
+                                            Singletons.getModel().getGameAction().playCardWithoutManaCost(rippledCards[i]);
                                             revealed.remove(rippledCards[i]);
                                         }
                                     } else {
