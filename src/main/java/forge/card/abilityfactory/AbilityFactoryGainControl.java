@@ -416,6 +416,7 @@ public class AbilityFactoryGainControl {
      */
     private void gainControlResolve(final SpellAbility sa) {
         CardList tgtCards = new CardList();
+        Card source = sa.getSourceCard();
 
         final Target tgt = sa.getTarget();
         if (this.params.containsKey("AllValid")) {
@@ -441,10 +442,17 @@ public class AbilityFactoryGainControl {
             if (sa.isSpell()) {
                 newController = sa.getActivatingPlayer();
             } else {
-                newController = sa.getSourceCard();
+                newController = source;
             }
         } else {
             newController = controllers.get(0);
+        }
+        // check for lose control criteria right away
+        if (this.lose.contains("LeavesPlay") && !source.isInZone(ZoneType.Battlefield)) {
+            return;
+        }
+        if (this.lose.contains("Untap") && !source.isTapped()) {
+            return;
         }
 
         final int size = tgtCards.size();
