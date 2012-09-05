@@ -7988,7 +7988,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (kw.equals("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
                 return 0;
             }
-            if (kw.equals("Absorb")) {
+            if (kw.startsWith("Absorb")) {
                 final int absorbed = this.getKeywordMagnitude("Absorb");
                 if (restDamage > absorbed) {
                     restDamage = restDamage - absorbed;
