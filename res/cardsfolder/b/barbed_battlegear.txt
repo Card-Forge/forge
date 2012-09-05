@@ -1,7 +1,7 @@
 Name:Barbed Battlegear
 ManaCost:3
 Types:Artifact Equipment
-Text:Equipped creature gets +4/-1.
+Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | AddToughness$ -1 | Description$ Equipped creature gets +4/-1.
 SVar:Rarity:Uncommon
