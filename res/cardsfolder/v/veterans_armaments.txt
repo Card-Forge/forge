@@ -3,7 +3,7 @@ ManaCost:2
 Types:Tribal Artifact Soldier Equipment
 Text:no text
 K:Equip 2
-S:Mode$ Continuous | Affected$ Card.EquippedBy | AddTrigger$ HeroAttack & HeroBlock | AddSVar$ HeroPump & ArmamentsX
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddTrigger$ HeroAttack & HeroBlock | AddSVar$ HeroPump & ArmamentsX | Description$ Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."
 SVar:HeroAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ HeroPump | TriggerDescription$ Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."
 SVar:HeroBlock:Mode$ Blocks | ValidCard$ Card.Self | Execute$ HeroPump | Secondary$ True | TriggerDescription$ Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."
 SVar:HeroPump:DB$ Pump | NumAtt$ ArmamentsX | NumDef$ ArmamentsX | References$ ArmamentsX
