@@ -4,7 +4,6 @@ Types:Creature Elf Druid
 Text:no text
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fyndhorn_elder.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/251.jpg
