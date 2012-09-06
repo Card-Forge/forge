@@ -313,7 +313,7 @@ public class AbilityFactoryZoneAffecting {
                         cd.decideAIPayment(sa, sa.getSourceCard(), null);
                         CardList discards = cd.getList();
                         for (Card discard : discards) {
-                            if (!isWorseThanDraw(discard)) {
+                            if (!ComputerUtil.isWorseThanDraw(discard)) {
                                 return false;
                             }
                         }
@@ -372,39 +372,6 @@ public class AbilityFactoryZoneAffecting {
             randomReturn &= subAb.chkAIDrawback();
         }
         return randomReturn;
-    }
-
-    /**
-     * Is this discard probably worse than a random draw?
-     * @param discard Card to discard
-     * @return boolean
-     */
-    private static boolean isWorseThanDraw(Card discard) {
-        if (!discard.getSVar("DiscardMe").equals("")) {
-            return true;
-        }
-        final CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land");
-        final CardList landsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getType("Land");
-        final CardList nonLandsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getNotType("Land");
-        final int highestCMC = Math.max(6, nonLandsInHand.getHighestConvertedManaCost());
-        if (discard.isLand()) {
-            if (landsInPlay.size() >= highestCMC 
-                    || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)
-                    || (landsInPlay.size() > 3 && nonLandsInHand.size() == 0)) {
-                // Don't need more land.
-                return true;
-            }
-        } else { //non-land
-            if (discard.getCMC() > landsInPlay.size() + landsInHand.size() + 2) {
-                // not castable for some time.
-                return true;
-            } else if (landsInPlay.size() > 5 && discard.getCMC() <= 1
-                    && !discard.hasProperty("hasXCost", AllZone.getComputerPlayer(), null)) {
-                // Probably don't need small stuff now.
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

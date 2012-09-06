@@ -35,6 +35,8 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.cost.CostDiscard;
+import forge.card.cost.CostPart;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -476,7 +478,15 @@ public final class AbilityFactoryChangeZone {
             }
 
             if (!CostUtil.checkDiscardCost(abCost, source)) {
-                return false;
+                for (final CostPart part : abCost.getCostParts()) {
+                    if (part instanceof CostDiscard) {
+                        CostDiscard cd = (CostDiscard) part;
+                        // this is mainly for typecycling
+                        if (!cd.getThis() || !ComputerUtil.isWorseThanDraw(source)) {
+                            return false;
+                        }
+                    }
+                }
             }
         }
 
