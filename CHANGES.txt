@@ -308,6 +308,15 @@ Fixes/Features:
 - AF Attach will now properly unenchant when moving auras.
 - Fixed Absorb.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- AF GainControl will no longer resolve when the loseControl criteria are already met.
+- Renamed playCardNoCost to playCardWithoutManaCost (which is what it should be. Now if it only would be).
+- Fixed Harmonic Sliver.
+- Improved AI using Cycling abilities.
+- text fix for Barbed Battlegear
+- Fixed description for Veteran's Armaments
+- Improved Veteran's Armaments descriptions
+- Added AI support for typecycling.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -324,6 +333,12 @@ Ogre Jailbreaker
 Auger Spree
 Hypersonic Dragon
 Transguild Promenade
+Chromatic Lantern
+Fencing Ace
+Guttersnipe
+Judge's Familiar
+Lotleth Troll
+Selesnya Guildgate
 
 
 Added the following cards:
