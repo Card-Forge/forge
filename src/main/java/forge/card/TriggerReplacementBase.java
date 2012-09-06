@@ -4,6 +4,7 @@ import java.util.EnumSet;
 
 import forge.Card;
 import forge.GameEntity;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -39,6 +40,10 @@ public abstract class TriggerReplacementBase {
      */
     public final void setHostCard(final Card c) {
         this.hostCard = c;
+        
+        if(overridingAbility != null) {
+            CardFactoryUtil.correctAbilityChainSourceCard(overridingAbility, c);
+        }
     }
     
     protected EnumSet<ZoneType> validHostZones;

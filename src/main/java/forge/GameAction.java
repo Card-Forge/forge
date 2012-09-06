@@ -33,6 +33,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
@@ -122,23 +123,6 @@ public class GameAction {
             suppress = zoneFrom.equals(zoneTo);
         }
 
-        if (!suppress) {
-            HashMap<String, Object> repParams = new HashMap<String, Object>();
-            repParams.put("Event", "Moved");
-            repParams.put("Affected", c);
-            repParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType() : null);
-            repParams.put("Destination", zoneTo.getZoneType());
-
-            ReplacementResult repres = AllZone.getReplacementHandler().run(repParams);
-            if (repres != ReplacementResult.NotReplaced) {
-                if (AllZone.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard) && repres == ReplacementResult.Prevented) {
-                    return Singletons.getModel().getGameAction().moveToGraveyard(c);
-                }
-                return c;
-            }
-        }
-
-
         Card copied = null;
         Card lastKnownInfo = null;
 
@@ -165,8 +149,27 @@ public class GameAction {
             copied = AllZone.getCardFactory().copyCard(c);
             copied.setUnearthed(c.isUnearthed());
             copied.setTapped(false);
-            for (final Trigger trigger : c.getTriggers()) {
+            for (final Trigger trigger : copied.getTriggers()) {
                 trigger.setHostCard(copied);
+            }
+            for (final ReplacementEffect repl : copied.getReplacementEffects()) {
+                repl.setHostCard(copied);
+            }
+        }
+        
+        if (!suppress) {
+            HashMap<String, Object> repParams = new HashMap<String, Object>();
+            repParams.put("Event", "Moved");
+            repParams.put("Affected", copied);
+            repParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType() : null);
+            repParams.put("Destination", zoneTo.getZoneType());
+
+            ReplacementResult repres = AllZone.getReplacementHandler().run(repParams);
+            if (repres != ReplacementResult.NotReplaced) {
+                if (AllZone.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard) && repres == ReplacementResult.Prevented) {
+                    return Singletons.getModel().getGameAction().moveToGraveyard(c);
+                }
+                return c;
             }
         }
 
