@@ -448,10 +448,10 @@ public class AbilityFactoryGainControl {
             newController = controllers.get(0);
         }
         // check for lose control criteria right away
-        if (this.lose.contains("LeavesPlay") && !source.isInZone(ZoneType.Battlefield)) {
+        if (this.lose != null && this.lose.contains("LeavesPlay") && !source.isInZone(ZoneType.Battlefield)) {
             return;
         }
-        if (this.lose.contains("Untap") && !source.isTapped()) {
+        if (this.lose != null && this.lose.contains("Untap") && !source.isTapped()) {
             return;
         }
 
