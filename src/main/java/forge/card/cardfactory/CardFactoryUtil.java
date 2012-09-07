@@ -4822,49 +4822,50 @@ public class CardFactoryUtil {
             // add ability to instrinic strings so copies/clones create the ability also
             card.getIntrinsicAbilities().add(abilityStr.toString());
         }
-        
-        for(String kw : card.getKeyword()) {
-           
-            if (kw.startsWith("ETBReplacement")) 
-            {
+
+        for (String kw : card.getKeyword()) {
+
+            if (kw.startsWith("ETBReplacement")) {
                 String[] splitkw = kw.split(":");
                 ReplacementLayer layer = ReplacementLayer.smartValueOf(splitkw[1]);
                 AbilityFactory af = new AbilityFactory();
                 SpellAbility repAb = af.getAbility(card.getSVar(splitkw[2]), card);
                 String desc = repAb.getDescription();
-                setupETBReplacementAbility(repAb);            
-                
+                setupETBReplacementAbility(repAb);
+
                 String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Description$ " + desc;
-                if(splitkw.length == 4) {
-                    if(splitkw[3].contains("Optional")) {
+                if (splitkw.length == 4) {
+                    if (splitkw[3].contains("Optional")) {
                         repeffstr += " | Optional$ True";
                     }
                 }
-                
+
                 ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
                 re.setLayer(layer);
-                re.setOverridingAbility(repAb);            
-                
+                re.setOverridingAbility(repAb);
+
                 card.addReplacementEffect(re);
             }
         }
-       
+
         return card;
     }
-    
+
     public static void setupETBReplacementAbility(SpellAbility sa) {
         SpellAbility tailend = sa;
-        while(tailend.getSubAbility() != null) {
+        while (tailend.getSubAbility() != null) {
             tailend = tailend.getSubAbility();
         }
-        
+
         class ETBReplacementMove extends AbilitySub {
             private static final long serialVersionUID = 704771599662730112L;
 
             /**
              * TODO: Write javadoc for Constructor.
              * @param sourceCard
+             *         the source card
              * @param tgt
+             *         the target
              */
             public ETBReplacementMove(Card sourceCard, Target tgt) {
                 super(sourceCard, tgt);
@@ -4872,7 +4873,7 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                forge.Singletons.getModel().getGameAction().moveToPlay(((Card)this.getReplacingObject("Card")));
+                forge.Singletons.getModel().getGameAction().moveToPlay(((Card) this.getReplacingObject("Card")));
             }
 
             /* (non-Javadoc)
@@ -4889,7 +4890,7 @@ public class CardFactoryUtil {
             @Override
             public AbilitySub getCopy() {
                 // TODO Auto-generated method stub
-                return new ETBReplacementMove(getSourceCard(),null);
+                return new ETBReplacementMove(getSourceCard(), null);
             }
 
             /* (non-Javadoc)
@@ -4900,10 +4901,10 @@ public class CardFactoryUtil {
                 // TODO Auto-generated method stub
                 return false;
             }
-            
+
         }
-        
-        tailend.setSubAbility(new ETBReplacementMove(sa.getSourceCard(),null));
+
+        tailend.setSubAbility(new ETBReplacementMove(sa.getSourceCard(), null));
     }
 
     /**
@@ -5155,11 +5156,11 @@ public class CardFactoryUtil {
                         card.clearDevoured();
                         if (card.getController().isHuman()) {
                             if (creats.size() > 0) {
-                                final List<Object> selection = GuiUtils.getOrderChoices("Devour", "Devouring", false, (Object[])creats.toArray());
+                                final List<Object> selection = GuiUtils.getOrderChoices("Devour", "Devouring", false, (Object[]) creats.toArray());
                                 numCreatures[0] = selection.size();
-                                
-                                for(Object o : selection) {
-                                    Card dinner = (Card)o;
+
+                                for (Object o : selection) {
+                                    Card dinner = (Card) o;
                                     card.addDevoured(dinner);
                                     Singletons.getModel().getGameAction().sacrifice(dinner, null);
                                 }
