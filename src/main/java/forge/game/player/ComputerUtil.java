@@ -49,6 +49,7 @@ import forge.control.input.InputPayManaCostUtil;
 import forge.error.ErrorViewer;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
+import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 
@@ -2075,6 +2076,7 @@ public class ComputerUtil {
         final CardList landsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getType("Land");
         final CardList nonLandsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getNotType("Land");
         final int highestCMC = Math.max(6, nonLandsInHand.getHighestConvertedManaCost());
+        final int discardCMC = discard.getCMC();
         if (discard.isLand()) {
             if (landsInPlay.size() >= highestCMC 
                     || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)
@@ -2083,8 +2085,15 @@ public class ComputerUtil {
                 return true;
             }
         } else { //non-land
-            if (discard.getCMC() > landsInPlay.size() + landsInHand.size() + 2) {
+            if (discardCMC > landsInPlay.size() + landsInHand.size() + 2) {
                 // not castable for some time.
+                return true;
+            } else if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())
+                    && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.MAIN2)
+                    && discardCMC > landsInPlay.size() + landsInHand.size()
+                    && discardCMC > landsInPlay.size() + 1
+                    && nonLandsInHand.size() > 1) {
+                // not castable for at least one other turn.
                 return true;
             } else if (landsInPlay.size() > 5 && discard.getCMC() <= 1
                     && !discard.hasProperty("hasXCost", AllZone.getComputerPlayer(), null)) {
