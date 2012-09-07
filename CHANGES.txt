@@ -23,6 +23,8 @@ If you win a quest mode match, you get a booster pack for every 1 or 2 (default)
 
 In the past some people noticed that special quests do not have the start in play cards appearing. And some people have noticed that a match can start without any cards appearing in the players hands or in their libraries. This problem should now be fixed.
 
+Some time was spent turning the static ETB triggers into the proper ETB replacement effects they should be, mainly to interact correctly with eachother. This work is not yet finished. As a result there is currently some inconsistencies with "Enters the battlefield with counters" (Not incredibly noticeable).
+
 --
 
 It seems like the front face of double faced cards aren't triggering properly, but the back face and single faced cards are.
