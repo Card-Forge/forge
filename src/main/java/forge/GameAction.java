@@ -1554,12 +1554,7 @@ public class GameAction {
             newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa));
         }
         abilities.addAll(newAbilities);
-        newAbilities.clear();
-        for (SpellAbility sa : abilities) {
-            sa.setActivatingPlayer(human);
-            newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
-        }
-        abilities.addAll(newAbilities);
+
         for (final SpellAbility sa : abilities) {
             sa.setActivatingPlayer(human);
             if (sa.canPlay()) {
@@ -1914,6 +1909,42 @@ public class GameAction {
     } // GetSpellCostChange
 
     /**
+     * choose optional additional costs. For HUMAN only
+     * 
+     * @param sa
+     *            the new up charm s as
+     */
+    public static SpellAbility chooseOptionalAdditionalCosts(final SpellAbility original) {
+        final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
+        final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        final ArrayList<String> choices = new ArrayList<String>();
+        final Player human = AllZone.getHumanPlayer();
+        if (!original.isSpell()) {
+            return original;
+        }
+
+        abilities.add(original);
+        abilities.addAll(GameActionUtil.getSpliceAbilities(original));
+        for (final SpellAbility sa : abilities) {
+            sa.setActivatingPlayer(human);
+            choices.add(sa.toString());
+            map.put(sa.toString(), sa);
+        }
+
+        String choice;
+        if (choices.size() == 0) {
+            return null;
+        } else if (choices.size() == 1) {
+            choice = choices.get(0);
+        } else {
+            choice = (String) GuiUtils.chooseOneOrNone("Choose", choices.toArray());
+        }
+        final SpellAbility ability = map.get(choice);
+
+        return ability;
+    }
+
+    /**
      * <p>
      * playSpellAbility.
      * </p>
@@ -1925,6 +1956,7 @@ public class GameAction {
         sa.setActivatingPlayer(AllZone.getHumanPlayer());
 
         sa = AbilityFactoryCharm.setupCharmSAs(sa);
+        sa = GameAction.chooseOptionalAdditionalCosts(sa);
 
         // Need to check PayCosts, and Ability + All SubAbilities for Target
         boolean newAbility = sa.getPayCosts() != null;

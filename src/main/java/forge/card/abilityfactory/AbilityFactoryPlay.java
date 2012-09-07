@@ -488,7 +488,7 @@ public final class AbilityFactoryPlay {
                     }
                     newSA.setPayCosts(cost);
                     newSA.setManaCost("");
-                    newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+                    newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
                     Singletons.getModel().getGameAction().playSpellAbility(newSA);
                     if (remember) {
                         source.addRemembered(tgtSA.getSourceCard());

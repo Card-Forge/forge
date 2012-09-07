@@ -39,7 +39,6 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilityTriggered;
-import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
