@@ -5145,16 +5145,15 @@ public class CardFactoryUtil {
                         card.clearDevoured();
                         if (card.getController().isHuman()) {
                             if (creats.size() > 0) {
-                                final List<Card> selection = GuiUtils.chooseNoneOrMany(
-                                        "Select creatures to sacrifice", creats.toArray());
-
+                                final List<Object> selection = GuiUtils.getOrderChoices("Devour", "Devouring", false, (Object[])creats.toArray());
                                 numCreatures[0] = selection.size();
-                                for (int m = 0; m < selection.size(); m++) {
-                                    card.addDevoured(selection.get(m));
-                                    Singletons.getModel().getGameAction().sacrifice(selection.get(m), null);
+                                
+                                for(Object o : selection) {
+                                    Card dinner = (Card)o;
+                                    card.addDevoured(dinner);
+                                    Singletons.getModel().getGameAction().sacrifice(dinner, null);
                                 }
                             }
-
                         } // human
                         else {
                             int count = 0;
