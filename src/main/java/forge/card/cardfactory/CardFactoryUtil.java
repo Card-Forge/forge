@@ -2504,6 +2504,12 @@ public class CardFactoryUtil {
             }
         }
 
+        if (sq[0].equals("DamageDoneToPlayerBy")) {
+            if (players.size() > 0) {
+                return CardFactoryUtil.doXMath(source.getDamageDoneToPlayerBy(players.get(0).getName()), m, source);
+            }
+        }
+
         return CardFactoryUtil.doXMath(n, m, source);
     }
 
@@ -2803,6 +2809,10 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("LifeOppLostThisTurn")) {
             return CardFactoryUtil.doXMath(cardController.getOpponent().getLifeLostThisTurn(), m, c);
+        }
+
+        if (sq[0].equals("TotalDamageDoneByThisTurn")) {
+            return CardFactoryUtil.doXMath(c.getTotalDamageDoneBy(), m, c);
         }
 
         // Count$YourPoisonCounters

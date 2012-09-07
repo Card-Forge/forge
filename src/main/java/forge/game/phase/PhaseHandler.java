@@ -425,6 +425,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     c.resetPreventNextDamage();
                     c.resetReceivedDamageFromThisTurn();
                     c.resetDealtDamageToThisTurn();
+                    c.resetDealtDamageToPlayerThisTurn();
                     c.getDamageHistory().setDealtDmgToHumanThisTurn(false);
                     c.getDamageHistory().setDealtDmgToComputerThisTurn(false);
                     c.getDamageHistory().setDealtCombatDmgToHumanThisTurn(false);

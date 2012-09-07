@@ -3,7 +3,8 @@ ManaCost:2 B
 Types:Sorcery
 Text:no text
 A:SP$ DealDamage | Cost$ 2 B | Defined$ Opponent | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 2 damage to each other player. You gain life equal to the damage dealt this way.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X | StackDescription$ You gain life equal to the damage dealt this way.
+SVar:X:Count$TotalDamageDoneByThisTurn
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_soul.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/176.jpg

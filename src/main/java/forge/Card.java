@@ -116,6 +116,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private Map<Card, Integer> receivedDamageFromThisTurn = new TreeMap<Card, Integer>();
     private Map<Card, Integer> dealtDamageToThisTurn = new TreeMap<Card, Integer>();
+    private Map<String, Integer> dealtDamageToPlayerThisTurn = new TreeMap<String, Integer>();
     private final Map<Card, Integer> assignedDamageMap = new TreeMap<Card, Integer>();
     private CardList blockedThisTurn = null;
     private CardList blockedByThisTurn = null;
@@ -2117,7 +2118,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("(");
                     sb.append(c.getUniqueNumber());
                     sb.append(")");
-                } else if (o != null){
+                } else if (o != null) {
                     sb.append(o.toString());
                 }
                 sb.append("\r\n");
@@ -7635,6 +7636,52 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.dealtDamageToThisTurn.clear();
     }
 
+    /**
+     * <p>
+     * addDealtDamageToPlayerThisTurn.
+     * </p>
+     * 
+     * @param player
+     *            player as name String.
+     * @param damage
+     *            a int.
+     */
+    public final void addDealtDamageToPlayerThisTurn(final String player, final int damage) {
+        this.dealtDamageToPlayerThisTurn.put(player, damage);
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>dealtDamageToPlayerThisTurn</code>.
+     * </p>
+     * 
+     * @param dealtDamageList
+     *            a {@link java.util.Map} object.
+     */
+    public final void setDealtDamageToPlayerThisTurn(final Map<String, Integer> dealtDamageList) {
+        this.dealtDamageToPlayerThisTurn = dealtDamageList;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>dealtDamageToPlayerThisTurn</code>.
+     * </p>
+     * 
+     * @return a {@link java.util.Map} object.
+     */
+    public final Map<String, Integer> getDealtDamageToPlayerThisTurn() {
+        return this.dealtDamageToPlayerThisTurn;
+    }
+
+    /**
+     * <p>
+     * resetDealtDamageToPlayerThisTurn.
+     * </p>
+     */
+    public final void resetDealtDamageToPlayerThisTurn() {
+        this.dealtDamageToPlayerThisTurn.clear();
+    }
+
     // how much damage is enough to kill the creature (for AI)
     /**
      * <p>
@@ -8612,6 +8659,41 @@ public class Card extends GameEntity implements Comparable<Card> {
         int sum = 0;
         for (final Card c : this.dealtDamageToThisTurn.keySet()) {
             sum += this.dealtDamageToThisTurn.get(c);
+        }
+
+        return sum;
+    }
+
+    /**
+     * Gets the damage done to a player by card this turn.
+     * 
+     * @param player
+     *            the player name
+     * @return the damage done to player p this turn
+     */
+    public final int getDamageDoneToPlayerBy(final String player) {
+        int sum = 0;
+        for (final String p : this.dealtDamageToPlayerThisTurn.keySet()) {
+            if (p.equals(player)) {
+                sum += this.dealtDamageToPlayerThisTurn.get(p);
+            }
+        }
+
+        return sum;
+    }
+
+    /**
+     * Gets the total damage done by card this turn (after prevention and redirects).
+     * 
+     * @return the damage done to player p this turn
+     */
+    public final int getTotalDamageDoneBy() {
+        int sum = 0;
+        for (final Card c : this.dealtDamageToThisTurn.keySet()) {
+            sum += this.dealtDamageToThisTurn.get(c);
+        }
+        for (final String p : this.dealtDamageToPlayerThisTurn.keySet()) {
+            sum += this.dealtDamageToPlayerThisTurn.get(p);
         }
 
         return sum;

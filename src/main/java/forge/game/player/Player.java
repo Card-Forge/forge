@@ -529,6 +529,8 @@ public abstract class Player extends GameEntity {
             return false;
         }
 
+        source.addDealtDamageToPlayerThisTurn(this.getName(), damageToDo);
+
         boolean infect = source.hasKeyword("Infect")
                 || this.hasKeyword("All damage is dealt to you as though its source had infect.");
 
@@ -1379,19 +1381,18 @@ public abstract class Player extends GameEntity {
     public final CardList getCardsIn(final List<ZoneType> zones) {
         final CardList result = new CardList();
         for (final ZoneType z : zones) {
-            if(z == ZoneType.Stack) {
-                for(Card c : AllZone.getStackZone().getCards())
-                {
-                    if(c.getOwner().equals(this)) {
+            if (z == ZoneType.Stack) {
+                for (Card c : AllZone.getStackZone().getCards()) {
+                    if (c.getOwner().equals(this)) {
                         result.add(c);
                     }
-                } 
+                }
             }
             if (this.getZone(z) != null) {
                 result.addAll(this.getZone(z).getCards());
             }
         }
-        
+
         return result;
     }
 
