@@ -319,6 +319,17 @@ Fixes/Features:
 - Improved Veteran's Armaments descriptions
 - Added AI support for typecycling.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Clones that ETB several times.
+- Updated some AI SVars.
+- Added a fluff piece to the changes.txt file.
+- Converted Devour to DualListBox
+- Fixed Corrupt and Syphon Soul (now only gain life equal to damage actually dealt after prevention)
+- Fixed some minor checkstyle errors (mostly trailing linespaces)
+- Improved cycling AI some more.
+- Cleanup.
+- Fixed theme decks being affected by Singleton mode.
+- Fixed Sundering Titan crash.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -326,7 +337,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 
 
-Added the following cards to the Return to Ravnica branch (These cards are not yet available in this shapshot build):
+Added the following cards to the Return to Ravnica branch (These cards are not yet available in this shapshot/beta build):
 
 Goblin Electromancer
 Niv-Mizzet, Dracogenius
@@ -341,6 +352,21 @@ Guttersnipe
 Judge's Familiar
 Lotleth Troll
 Selesnya Guildgate
+Abrupt Decay
+Collective Blessing
+Deadbridge Goliath
+Dreadbore
+Dreg Mangler
+Golgari Guildgate
+Grisly Salvage
+Izzet Guildgate
+Rakdos Guildgate
+Rakdos Shred-Freak
+Slitherhead
+Sluiceway Scorpion
+Supreme Verdict
+Worldspine Wurm
+Dryad Militant
 
 
 Added the following cards:
@@ -422,6 +448,7 @@ Dwarven Scorcher
 Lava Blister
 Molten Influence
 Evermind
+Rite of Consumption
 
 
 end
