@@ -221,7 +221,7 @@ public final class CardBlock implements Comparable<CardBlock> {
 
             String name = null;
             int index = -1;
-            final List<CardEdition> sets = new ArrayList<CardEdition>(6);
+            final List<CardEdition> sets = new ArrayList<CardEdition>(9); // add support for up to 9 different sets in a block!
             CardEdition landSet = null;
             int draftBoosters = 3;
             int sealedBoosters = 6;
@@ -234,7 +234,8 @@ public final class CardBlock implements Comparable<CardBlock> {
                 } else if ("index".equals(key)) {
                     index = Integer.parseInt(kv[1]);
                 } else if ("set0".equals(key) || "set1".equals(key) || "set2".equals(key) || "set3".equals(key)
-                        || "set4".equals(key) || "set5".equals(key))  {
+                        || "set4".equals(key) || "set5".equals(key) || "set6".equals(key) || "set7".equals(key)
+                        || "set8".equals(key)) {
                     sets.add(editions.getEditionByCodeOrThrow(kv[1]));
                 } else if ("landsetcode".equals(key)) {
                     landSet = editions.getEditionByCodeOrThrow(kv[1]);
