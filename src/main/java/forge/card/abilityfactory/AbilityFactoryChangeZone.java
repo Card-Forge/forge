@@ -1220,7 +1220,6 @@ public final class AbilityFactoryChangeZone {
                     c = first;
                 }
             }
-            System.out.println("Chose " + c.toString());
 
             fetched.add(c);
             fetchList.remove(c);

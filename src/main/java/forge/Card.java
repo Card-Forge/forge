@@ -8294,8 +8294,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (damageToAdd == 0) {
             return false; // Rule 119.8
         }
-
-        System.out.println("Adding " + damageToAdd + " damage to " + this.getName());
         Log.debug("Adding " + damageToAdd + " damage to " + this.getName());
 
         this.addReceivedDamageFromThisTurn(source, damageToAdd);
