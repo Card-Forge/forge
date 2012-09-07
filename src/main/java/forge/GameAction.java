@@ -1596,7 +1596,7 @@ public class GameAction {
 
     /**
      * <p>
-     * playCardNoCost.
+     * playCardWithoutManaCost.
      * </p>
      * 
      * @param c

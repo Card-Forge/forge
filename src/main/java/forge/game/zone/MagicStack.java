@@ -1017,7 +1017,7 @@ public class MagicStack extends MyObservable {
      * @since 1.0.15
      */
     public final void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
-        final Card source = sa.getSourceCard();
+        Card source = sa.getSourceCard();
 
         // do nothing
         if (sa.getSourceCard().isCopiedSpell() || sa.isAbility()) {
@@ -1031,67 +1031,20 @@ public class MagicStack extends MyObservable {
         } else if (source.hasKeyword("Rebound")
                 && source.getCastFrom() == ZoneType.Hand
                 && AllZone.getZoneOf(source).is(ZoneType.Stack)
-                && source.getOwner().isPlayer(source.getController())) //This may look odd, but it's a provision for when we add Commandeer
+                && source.getOwner().isPlayer(source.getController())) //"If you cast this spell from your hand"
         {
-
+            
             //Move rebounding card to exile
-            Singletons.getModel().getGameAction().exile(source);
-            System.out.println("rebound1: " + source);
+            source = Singletons.getModel().getGameAction().exile(source);
+
+            source.setSVar("ReboundAbilityTrigger", "DB$ Play | Defined$ Self " +
+            		"| WithoutManaCost$ True | Optional$ True");
 
             //Setup a Rebound-trigger
-            final Trigger reboundTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | TriggerDescription$ At the beginning of your next upkeep, you may cast " + source.toString() + " without paying it's manacost.", source, true);
-
-            final Ability trigAb = new Ability(source, "0") {
-
-                private static final long serialVersionUID = 7497175394128633122L;
-
-                @Override
-                public boolean doTrigger(final boolean mandatory) {
-                    return true;
-                }
-
-                @Override
-                public void resolve() {
-                    System.out.println("rebound2: " + source);
-
-                    //If the card can't be cast because of lack of targets, it remains in exile.
-                    //Provision for Cast Through Time
-                    boolean hasFoundPossibleSA = false;
-                    for (SpellAbility sa : source.getSpells()) {
-                        if (sa.getTarget() == null) {
-                            hasFoundPossibleSA = true;
-                            break; //Untargeted, it can definitely be cast.
-                        }
-                        else {
-                            if (sa.getTarget().hasCandidates(sa, true)) {
-                               hasFoundPossibleSA = true;
-                               break; //Targeted, and has candidates.
-                            }
-                        }
-                    }
-                    if (!hasFoundPossibleSA) {
-                        return;
-                    }
-                    if (source.getOwner().isHuman()) {
-                        Singletons.getModel().getGameAction().playCardWithoutManaCost(source);
-                    } else {
-                        System.out.println("rebound: " + source);
-                        for (SpellAbility s : source.getSpells()) {
-                            if (s instanceof Spell) {
-                                Spell spell = (Spell) s;
-                                if (spell.canPlayFromEffectAI(false, true)) {
-                                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(s);
-                                    break;
-                                }
-                            }
-                        }
-
-                    }
-                    Singletons.getModel().getGameAction().moveToGraveyard(source);
-                }
-            };
-
-            reboundTrigger.setOverridingAbility(trigAb);
+            final Trigger reboundTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ Phase " +
+            		"| Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ ReboundAbilityTrigger " +
+            		"| TriggerDescription$ At the beginning of your next upkeep, you may cast " + source.toString() 
+            		+ " without paying it's manacost.", source, true);
 
             AllZone.getTriggerHandler().registerDelayedTrigger(reboundTrigger);
         }
