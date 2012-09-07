@@ -1948,7 +1948,7 @@ public final class AbilityFactoryChoose {
         }
 
         final String numericAmount = params.containsKey("Amount") ? params.get("Amount") : "1";
-        final int validAmount = !params.get("Amount").matches("[0-9][0-9]?")
+        final int validAmount = !numericAmount.matches("[0-9][0-9]?")
                 ? CardFactoryUtil.xCount(host, host.getSVar(params.get("Amount"))) : Integer.parseInt(numericAmount);
 
         if (params.containsKey("SunderingTitan")) {
