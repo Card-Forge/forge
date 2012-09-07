@@ -48,7 +48,7 @@ import forge.util.closures.Predicate;
 public abstract class GenerateColoredDeckBase {
     protected final Random r = MyRandom.getRandom();
     protected final Map<String, Integer> cardCounts = new HashMap<String, Integer>();
-    protected final int maxDuplicates;
+    protected int maxDuplicates;
 
     protected CardColor colors;
     protected final ItemPool<CardPrinted> tDeck;

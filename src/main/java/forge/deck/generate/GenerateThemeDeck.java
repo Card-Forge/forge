@@ -47,7 +47,7 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase {
      * </p>
      */
     public GenerateThemeDeck() {
-
+        this.maxDuplicates = 4;
     }
 
     /**
