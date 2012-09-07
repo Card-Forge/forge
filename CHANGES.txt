@@ -1,8 +1,8 @@
-Forge Beta: 0#-##-2012 ver 1.2.12
+Forge Beta: 09-07-2012 ver 1.2.12
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-11### cards in total.
+11112 cards in total.
 
 
 If you update your OS to Apple OSX 10.8 Mountain Lion and try to launch a new version of forge that you will likely get a dialog which states "File is damaged and cannot be opened. Please move to trash." 
@@ -330,125 +330,139 @@ Fixes/Features:
 - Fixed theme decks being affected by Singleton mode.
 - Fixed Sundering Titan crash.
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Diogenes
+Hellfish
+Marc
+Max
+mcrawford
+Nordos
+RumbleBBU
+Slapshot
+Sloth
+Sol
+Torridus
+ZzzzSleep
+Chris H
 
 
 Added the following cards to the Return to Ravnica branch (These cards are not yet available in this shapshot/beta build):
 
-Goblin Electromancer
-Niv-Mizzet, Dracogenius
-Grim Roustabout
-Ogre Jailbreaker
-Auger Spree
-Hypersonic Dragon
-Transguild Promenade
-Chromatic Lantern
-Fencing Ace
-Guttersnipe
-Judge's Familiar
-Lotleth Troll
-Selesnya Guildgate
 Abrupt Decay
+Auger Spree
+Chromatic Lantern
 Collective Blessing
 Deadbridge Goliath
 Dreadbore
 Dreg Mangler
+Dryad Militant
+Fencing Ace
+Goblin Electromancer
 Golgari Guildgate
+Grim Roustabout
 Grisly Salvage
+Guttersnipe
+Hypersonic Dragon
 Izzet Guildgate
+Judge's Familiar
+Lotleth Troll
+Niv-Mizzet, Dracogenius
+Ogre Jailbreaker
 Rakdos Guildgate
 Rakdos Shred-Freak
+Selesnya Guildgate
 Slitherhead
 Sluiceway Scorpion
 Supreme Verdict
+Transguild Promenade
 Worldspine Wurm
-Dryad Militant
 
 
 Added the following cards:
 
-Avarice Totem
-Arcum Dagsson
-Rimefeather Owl
-Guardian Angel
-Anti-Magic Aura
-Delif's Cone
-Mosswort Bridge
-Spelltwine
-Gravebane Zombie
-Delif's Cube
-Hecatomb
-Land Slide
-Last-Ditch Effort
-Mana Seism
-Renounce
-Scapeshift
-Reprocess
-Circu, Dimir Lobotomist
-Blood Funnel
 Aboroth
-Gallowbraid
-Morinfen
-Inner Sanctum
-Mistmoon Griffin
-Phyrexian Furnace
+Anti-Magic Aura
+Arcum Dagsson
+Avarice Totem
+Blazing Salvo
+Blessed Breath
+Blood Funnel
+Circu, Dimir Lobotomist
+Consuming Vortex
+Cruel Deceiver
+Dampen Thought
 Decomposition
-Rivals' Duel
+Deepcavern Imp
+Delif's Cone
+Delif's Cube
+Desperate Ritual
+Diseased Vermin
+Dream Halls
+Dwarven Driller
+Dwarven Scorcher
 Dystopia
+Essence of the Wild
+Evermind
+Gallowbraid
 Glacial Chasm
 Glacial Plating
-Krovikan Whispers
-Musician
-Skizzik Surger
-Phyrexian Soulgorger
-Polar Kraken
-Deepcavern Imp
-Painful Quandary
-Dream Halls
-Land Grant
-Phyrexian Portal
-Possessed Portal
-Ward of Piety
-Zealous Inquisitor
-Zhalfirin Crusader
-Blessed Breath
-Wear Away
-Consuming Vortex
-Dampen Thought
-Desperate Ritual
 Glacial Ray
 Goryo's Vengeance
+Gravebane Zombie
+Guardian Angel
+Harsh Deceiver
+Hecatomb
 Hideous Laughter
+Horobi's Whisper
+Hundred-Talon Strike
+Inner Sanctum
 Into the Fray
 Kodama's Might
+Krovikan Whispers
+Land Grant
+Land Slide
+Last-Ditch Effort
+Lava Blister
 Lifted by Clouds
+Mana Seism
+Mistmoon Griffin
+Molten Influence
+Morinfen
+Mosswort Bridge
+Musician
+Painful Quandary
+Phyrexian Furnace
+Phyrexian Portal
+Phyrexian Soulgorger
+Polar Kraken
+Possessed Portal
 Psychic Puppetry
+Renounce
+Reprocess
+Rimefeather Owl
+Rite of Consumption
+Rivals' Duel
+Scapeshift
+Skizzik Surger
+Skullscorch
 Soulless Revival
+Spelltwine
 Spiritual Visit
+Spoils of Evil
 Strange Inversion
 Through the Breach
-Hundred-Talon Strike
-Horobi's Whisper
-Windbrisk Heights
-Harsh Deceiver
-Cruel Deceiver
 Torrent of Stone
 Veil of Secrecy
-Diseased Vermin
-Spoils of Evil
-Dwarven Driller
-Essence of the Wild
-Skullscorch
-Blazing Salvo
-Dwarven Scorcher
-Lava Blister
-Molten Influence
-Evermind
-Rite of Consumption
+Ward of Piety
+Wear Away
+Windbrisk Heights
+Zealous Inquisitor
+Zhalfirin Crusader
 
 
 end
