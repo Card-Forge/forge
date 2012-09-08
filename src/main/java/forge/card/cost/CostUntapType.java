@@ -17,6 +17,7 @@
  */
 package forge.card.cost;
 
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
@@ -74,7 +75,11 @@ public class CostUntapType extends CostPartWithList {
 
         sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), " tapped " + desc));
 
-        sb.append(" you control");
+        if (this.getType().contains("YouDontCtrl")) {
+            sb.append(" an opponent controls");
+        } else if (this.getType().contains("YouCtrl")) {
+            sb.append(" you control");
+        }
 
         return sb.toString();
     }
@@ -112,7 +117,7 @@ public class CostUntapType extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
+        CardList typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         typeList = typeList.getValidCards(this.getType().split(";"), activator, source);
 
@@ -151,10 +156,14 @@ public class CostUntapType extends CostPartWithList {
      */
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
-        CardList typeList = ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
+        final boolean untap = payment.getCost().getUntap();
+        CardList typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         typeList = typeList.getValidCards(this.getType().split(";"), ability.getActivatingPlayer(),
                 ability.getSourceCard());
         typeList = typeList.filter(CardListFilter.TAPPED);
+        if (untap) {
+            typeList.remove(source);
+        }
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {
@@ -167,7 +176,7 @@ public class CostUntapType extends CostPartWithList {
             }
         }
 
-        CostUtil.setInput(CostUntapType.inputUntapXCost(this, typeList, ability, payment, c));
+        CostUtil.setInput(CostUntapType.inputUntapYCost(this, typeList, ability, payment, c));
         return false;
     }
 
@@ -186,7 +195,7 @@ public class CostUntapType extends CostPartWithList {
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
-                CardList typeList = ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
+                CardList typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
                 typeList = typeList.getValidCards(this.getType().split(";"), ability.getActivatingPlayer(),
                         ability.getSourceCard());
                 if (untap) {
@@ -212,7 +221,7 @@ public class CostUntapType extends CostPartWithList {
 
     /**
      * <p>
-     * input_untapXCost.
+     * input_untapYCost.
      * </p>
      * 
      * @param untapType
@@ -227,7 +236,7 @@ public class CostUntapType extends CostPartWithList {
      *            a int.
      * @return a {@link forge.control.input.Input} object.
      */
-    public static Input inputUntapXCost(final CostUntapType untapType, final CardList cardList, final SpellAbility sa,
+    public static Input inputUntapYCost(final CostUntapType untapType, final CardList cardList, final SpellAbility sa,
             final CostPayment payment, final int nCards) {
         final Input target = new Input() {
 
@@ -288,5 +297,5 @@ public class CostUntapType extends CostPartWithList {
         };
 
         return target;
-    } // input_untapXCost()
+    } // input_untapYCost()
 }

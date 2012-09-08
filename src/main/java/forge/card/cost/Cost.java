@@ -333,6 +333,7 @@ public class Cost {
         }
 
         if (parse.contains("Q")) {
+            this.untapCost = true;
             parse = parse.replace("Q", "").trim();
             this.costParts.add(0, new CostUntap());
             manaLocation++;

@@ -367,6 +367,8 @@ public class CostUtil {
      * 
      * @param card
      *            the card
+     * @param sa
+     *            the SpellAbility
      * @param maxValue
      *            the max value
      * @return the int
@@ -394,6 +396,8 @@ public class CostUtil {
      * 
      * @param card
      *            the card
+     * @param sa
+     *            the SpellAbility
      * @param maxValue
      *            the max value
      * @return the int

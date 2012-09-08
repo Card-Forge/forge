@@ -4,7 +4,7 @@ Types:Creature Elemental
 Text:no text
 PT:2/2
 A:AB$ DealDamage | Cost$ UR UR T tapXType<2/Creature.Red/red creature> | Tgt$ TgtCP | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
-A:AB$ ChangeZone | Cost$ UR UR Q untapYType<2/Creature.Blue/blue creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+A:AB$ ChangeZone | Cost$ UR UR Q untapYType<2/Creature.Blue+YouCtrl/blue creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crackleburr.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/100.jpg
