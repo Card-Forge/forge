@@ -34,6 +34,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
+import forge.game.phase.CombatUtil;
 import forge.game.zone.ZoneType;
 
 /**
@@ -279,6 +280,8 @@ public class ComputerAIGeneral implements Computer {
         final CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
 
         AllZone.setCombat(ComputerUtilBlock.getBlockers(AllZone.getCombat(), blockers));
+        
+        CombatUtil.orderMultipleBlockers(AllZone.getCombat());
 
         Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
     }

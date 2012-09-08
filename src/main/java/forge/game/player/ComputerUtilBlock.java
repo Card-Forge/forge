@@ -24,6 +24,7 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
+import forge.CardUtil;
 import forge.Counters;
 import forge.GameEntity;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -915,5 +916,17 @@ public class ComputerUtilBlock {
         }
 
         return combat;
+    }
+    
+    public static CardList orderBlockers(Card attacker, CardList blockers) {
+        // very very simple ordering of blockers, sort by evaluate, then sort by attack
+        //final int damage = attacker.getNetCombatDamage();
+        CardListUtil.sortByEvaluateCreature(blockers);
+        CardListUtil.sortAttack(blockers);
+        
+        // TODO: Take total damage, and attempt to maximize killing the greatest evaluation of creatures
+        // It's probably generally better to kill the largest creature, but sometimes its better to kill a few smaller ones
+        
+        return blockers;
     }
 }

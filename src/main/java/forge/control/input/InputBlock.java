@@ -87,6 +87,8 @@ public class InputBlock extends Input {
         if (CombatUtil.finishedMandatoryBlocks(AllZone.getCombat())) {
             // Done blocking
             ButtonUtil.reset();
+            
+            CombatUtil.orderMultipleBlockers(AllZone.getCombat());
 
             Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
         }

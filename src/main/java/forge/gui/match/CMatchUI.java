@@ -34,7 +34,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.CardContainer;
-import forge.gui.GuiMultipleBlockers;
+import forge.gui.GuiAssignDamageFrame;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.controllers.CDetail;
@@ -157,7 +157,14 @@ public enum CMatchUI implements CardContainer {
             return;
         }
 
-        new GuiMultipleBlockers(attacker, blockers, damage);
+        // If the first blocker can absorb all of the damage, don't show the Assign Damage Frame
+        Card firstBlocker = blockers.get(0);
+        if (!attacker.hasKeyword("Deathtouch") && firstBlocker.getLethalDamage() >= damage) {
+            firstBlocker.addAssignedDamage(damage, attacker);
+            return;
+        }
+        
+        new GuiAssignDamageFrame(attacker, blockers, damage);
     }
 
     /**

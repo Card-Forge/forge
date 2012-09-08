@@ -51,6 +51,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostAbility;
 import forge.game.player.ComputerUtil;
+import forge.game.player.ComputerUtilBlock;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -385,6 +386,35 @@ public class CombatUtil {
 
         return true;
     }
+    
+    public static void orderMultipleBlockers(final Combat combat) {
+        // If there are multiple blockers, the Attacker declares the Assignment Order
+        final Player player = combat.getAttackingPlayer();
+        final CardList attackers = combat.getAttackerList();
+        for (final Card attacker : attackers) {
+            CardList blockers = combat.getBlockers(attacker);
+            if (blockers.size() <= 1) {
+                continue;
+            }
+         
+            CardList orderedBlockers = null;
+            if (player.isHuman()) {
+                List<Object> ordered = GuiUtils.getOrderChoices("Choose Blocking Order", "Damaged First", true, (Object[])blockers.toArray());
+                
+                orderedBlockers = new CardList();
+                for(Object o : ordered) {
+                    orderedBlockers.add((Card)o);
+                }
+            }
+            else {
+                orderedBlockers = ComputerUtilBlock.orderBlockers(attacker, blockers);
+            }
+            combat.setBlockerList(attacker,  orderedBlockers);
+        }
+        CombatUtil.showCombat();
+        // Refresh Combat Panel
+    }
+    
 
     // can the blocker block an attacker with a lure effect?
     /**
@@ -2406,7 +2436,6 @@ public class CombatUtil {
      * </p>
      */
     public static void showCombat() {
-        Card[] defend = null;
         final StringBuilder display = new StringBuilder();
 
         // Loop through Defenders
@@ -2435,10 +2464,10 @@ public class CombatUtil {
                 display.append("-> ");
                 display.append(CombatUtil.combatantToString(c)).append("\n");
 
-                defend = AllZone.getCombat().getBlockers(c).toArray();
+                CardList blockers = AllZone.getCombat().getBlockers(c);
 
                 // loop through blockers
-                for (final Card element : defend) {
+                for (final Card element : blockers) {
                     display.append(" [ ");
                     display.append(CombatUtil.combatantToString(element)).append("\n");
                 }

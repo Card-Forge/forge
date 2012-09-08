@@ -268,8 +268,7 @@ public final class AbilityFactoryProtection {
                 // is the creature blocking and unable to destroy the attacker
                 // or would be destroyed itself?
                 if (c.isBlocking()
-                        && (CombatUtil.blockerWouldBeDestroyed(c) || CombatUtil.attackerWouldBeDestroyed(AllZone
-                                .getCombat().getAttackerBlockedBy(c)))) {
+                        && (CombatUtil.blockerWouldBeDestroyed(c))) {
                     return true;
                 }
 

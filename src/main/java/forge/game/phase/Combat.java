@@ -289,64 +289,6 @@ public class Combat {
 
     /**
      * <p>
-     * setDefendingDamage.
-     * </p>
-     */
-    public final void setDefendingDamage() {
-        this.defendingDamageMap.clear();
-        final CardList att = this.getAttackerList();
-        // sum unblocked attackers' power
-        for (int i = 0; i < att.size(); i++) {
-            if (!this.isBlocked(att.get(i))
-                    || ((this.getBlockers(att.get(i)).size() == 0) && att.get(i).hasKeyword("Trample"))) {
-
-                final int damageDealt = att.get(i).getNetCombatDamage();
-
-                if (damageDealt > 0) {
-                    // if the creature has first strike do not do damage in the
-                    // normal combat phase
-                    if (!att.get(i).hasFirstStrike() || att.get(i).hasDoubleStrike()) {
-                        this.addDefendingDamage(damageDealt, att.get(i));
-                    }
-                }
-            } // ! isBlocked...
-        } // for
-    }
-
-    /**
-     * <p>
-     * setDefendingFirstStrikeDamage.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean setDefendingFirstStrikeDamage() {
-        boolean needsFirstStrike = false;
-        this.defendingDamageMap.clear();
-        final CardList att = this.getAttackerList();
-        // sum unblocked attackers' power
-        for (int i = 0; i < att.size(); i++) {
-            if (!this.isBlocked(att.get(i))
-                    || ((this.getBlockers(att.get(i)).size() == 0) && att.get(i).hasKeyword("Trample"))) {
-
-                final int damageDealt = att.get(i).getNetCombatDamage();
-
-                if (damageDealt > 0) {
-                    // if the creature has first strike or double strike do
-                    // damage in the first strike combat phase
-                    if (att.get(i).hasFirstStrike() || att.get(i).hasDoubleStrike()) {
-                        this.addDefendingDamage(damageDealt, att.get(i));
-                        needsFirstStrike = true;
-                    }
-                }
-            }
-        } // for
-
-        return needsFirstStrike;
-    }
-
-    /**
-     * <p>
      * addDefendingDamage.
      * </p>
      * 
@@ -451,6 +393,10 @@ public class Combat {
      */
     public final Integer getDefenderByAttacker(final Card c) {
         return this.attackerToDefender.get(c);
+    }
+    
+    public final GameEntity getDefendingEntity(final Card c) {
+        return this.getDefenders().get(this.attackerToDefender.get(c));
     }
 
     /**
@@ -558,6 +504,7 @@ public class Combat {
      * @return a {@link forge.Card} object.
      */
     public final Card getAttackerBlockedBy(final Card blocker) {
+        // TODO(sol) Return CardList instead of a card
         final CardList att = this.getAttackerList();
 
         for (int i = 0; i < att.size(); i++) {
@@ -582,6 +529,19 @@ public class Combat {
         return this.map.get(attacker);
     }
 
+    /**
+     * <p>
+     * setBlockerList.
+     * </p>
+     * 
+     * @param attacker
+     *            a {@link forge.Card} object.
+     * @return a {@link forge.CardList} object.
+     */
+    public void setBlockerList(final Card attacker, final CardList blockers) {
+        this.map.put(attacker, blockers);
+    }
+    
     /**
      * <p>
      * removeFromCombat.
@@ -672,120 +632,97 @@ public class Combat {
         }
     }
 
-    // set Card.setAssignedDamage() for all creatures in combat
-    // also assigns player damage by setPlayerDamage()
-    /**
-     * <p>
-     * setAssignedFirstStrikeDamage.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean setAssignedFirstStrikeDamage() {
+    private final boolean assignBlockersDamage(boolean firstStrikeDamage) {
+        final CardList blockers = this.getAllBlockers();
+        boolean assignedDamage = false;
+        
+        for (final Card blocker : blockers) {
+            if (blocker.hasDoubleStrike() || blocker.hasFirstStrike() == firstStrikeDamage) {
+                // TODO Switch comment lines when Blockers can block more than one creature
+                final Card attacker = this.getAttackerBlockedBy(blocker);
+                CardList attackers = new CardList(attacker);
+                //CardList attackers = this.getAttackersBlockedBy(b);
+                
+                final int damage = blocker.getNetCombatDamage();
 
-        boolean needFirstStrike = this.setDefendingFirstStrikeDamage();
-
-        CardList block;
-        final CardList attacking = this.getAttackerList();
-
-        for (int i = 0; i < attacking.size(); i++) {
-
-            final Card attacker = attacking.get(i);
-            block = this.getBlockers(attacker);
-
-            final int damageDealt = attacker.getNetCombatDamage();
-
-            // attacker always gets all blockers' attack
-
-            for (final Card b : block) {
-                if (b.hasFirstStrike() || b.hasDoubleStrike()) {
-                    needFirstStrike = true;
-                    final int attack = b.getNetCombatDamage();
-                    attacker.addAssignedDamage(attack, b);
+                if (attackers.size() == 0) {
+                    // Just in case it was removed or something
+                } else {
+                    assignedDamage = true;
+                    if (this.getAttackingPlayer().isHuman()) { // human attacks
+                        if (attackers.size() > 1) {
+                            CMatchUI.SINGLETON_INSTANCE.assignDamage(blocker, attackers, damage);
+                        } else {
+                            attackers.get(0).addAssignedDamage(damage, blocker);
+                        }
+                    } else { // computer attacks
+                        this.distributeAIDamage(blocker, attackers, damage);
+                    }
                 }
             }
-
-            if (block.size() == 0) {
-                // this damage is assigned to a player by
-                // setDefendingFirstStrikeDamage()
-            } else if (attacker.hasFirstStrike() || attacker.hasDoubleStrike()) {
-                needFirstStrike = true;
+        }
+        
+        return assignedDamage;
+    }
+    
+    private final boolean assignDamageAsIfNotBlocked(Card attacker) {
+        return attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.") || 
+                (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+                && GameActionUtil.showYesNoDialog(attacker, "Do you want to assign its combat damage as though it weren't blocked?"));
+    }
+    
+    private final boolean assignAttackersDamage(boolean firstStrikeDamage) {
+        this.defendingDamageMap.clear(); // this should really happen in deal damage
+        CardList blockers = null;
+        final CardList attackers = this.getAttackerList();
+        boolean assignedDamage = false;
+        for(final Card attacker : attackers) {
+            // If attacker isn't in the right first/regular strike section, continue along
+            if (!(attacker.hasDoubleStrike() || attacker.hasFirstStrike() == firstStrikeDamage)) {
+                continue;
+            }
+            
+            // If potential damage is 0, continue along
+            final int damageDealt = attacker.getNetCombatDamage();
+            if (damageDealt <= 0) {
+                continue;
+            }
+            
+            boolean trampler = attacker.hasKeyword("Trample");
+            blockers = this.getBlockers(attacker);
+            assignedDamage = true;
+            // If the Attacker is unblocked, or it's a trampler and has 0 blockers, deal damage to defender
+            if (blockers.size() == 0) {
+                if (trampler || this.isUnblocked(attacker)) {
+                    this.addDefendingDamage(damageDealt, attacker);
+                }
+                // Else no damage can be dealt anywhere
+            } else {
                 if (this.getAttackingPlayer().isHuman()) { // human attacks
-                    if ((attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                            && GameActionUtil.showYesNoDialog(attacker, "Do you want to assign its combat damage as"
-                                    + " though it weren't blocked?"))
-                                    || attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")) {
+                    if (assignDamageAsIfNotBlocked(attacker)) {
                         this.addDefendingDamage(damageDealt, attacker);
                     } else {
-                        if (attacker.hasKeyword("Trample") || (block.size() > 1)) {
-                            CMatchUI.SINGLETON_INSTANCE.assignDamage(attacker, block, damageDealt);
+                        if (trampler || (blockers.size() > 1)) {
+                            CMatchUI.SINGLETON_INSTANCE.assignDamage(attacker, blockers, damageDealt);
                         } else {
-                            block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
+                            blockers.get(0).addAssignedDamage(damageDealt, attacker);
                         }
                     }
                 } else { // computer attacks
-                    this.distributeAIDamage(attacker, block, damageDealt);
-                }
-            } // if(hasFirstStrike || doubleStrike)
-        } // for
-        return needFirstStrike;
-    } // setAssignedFirstStrikeDamage()
-
-    // set Card.setAssignedDamage() for all creatures in combat
-    // also assigns player damage by setPlayerDamage()
-    /**
-     * <p>
-     * setAssignedDamage.
-     * </p>
-     */
-    public final void setAssignedDamage() {
-        this.setDefendingDamage();
-
-        CardList block;
-        final CardList attacking = this.getAttackerList();
-        for (int i = 0; i < attacking.size(); i++) {
-
-            final Card attacker = attacking.get(i);
-            block = this.getBlockers(attacker);
-
-            final int damageDealt = attacker.getNetCombatDamage();
-
-            // attacker always gets all blockers' attack
-            for (final Card b : block) {
-                if (!b.hasFirstStrike() || b.hasDoubleStrike()) {
-                    final int attack = b.getNetCombatDamage();
-                    attacker.addAssignedDamage(attack, b);
-                }
-            }
-
-            if (block.size() == 0) {
-                // this damage is assigned to a player by setDefendingDamage()
-            } else if (!attacker.hasFirstStrike() || attacker.hasDoubleStrike()) {
-
-                if (this.getAttackingPlayer().isHuman()) { // human attacks
-
-                    if ((attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                        && GameActionUtil.showYesNoDialog(attacker, "Do you want to assign its combat damage as"
-                                + " though it weren't blocked?"))
-                                || attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")) {
-                        this.addDefendingDamage(damageDealt, attacker);
-                    } else {
-                        if (attacker.hasKeyword("Trample") || (block.size() > 1)) {
-                            CMatchUI.SINGLETON_INSTANCE.assignDamage(attacker, block, damageDealt);
-                        } else {
-                            block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
-                        }
-                    }
-                } else { // computer attacks
-                    this.distributeAIDamage(attacker, block, damageDealt);
+                    this.distributeAIDamage(attacker, blockers, damageDealt);
                 }
             } // if !hasFirstStrike ...
         } // for
-
-        // should first strike affect the following?
-
-    } // assignDamage()
-
+        return assignedDamage;
+    }
+    
+    public final boolean assignCombatDamage(boolean firstStrikeDamage) {
+        boolean assignedDamage = assignAttackersDamage(firstStrikeDamage);
+        assignedDamage |= assignBlockersDamage(firstStrikeDamage);
+        return assignedDamage;
+    }
+    
+    
     /**
      * <p>
      * distributeAIDamage.
@@ -806,13 +743,15 @@ public class Combat {
             this.addDefendingDamage(damage, attacker);
             return;
         }
+        
+        final boolean hasTrample = attacker.hasKeyword("Trample");
 
         if (block.size() == 1) {
 
             final Card blocker = block.get(0);
 
             // trample
-            if (attacker.hasKeyword("Trample")) {
+            if (hasTrample) {
 
                 int damageNeeded = 0;
 
@@ -841,10 +780,10 @@ public class Combat {
             }
         } // 1 blocker
         else {
-            boolean killsAllBlockers = true; // Does the attacker deal lethal
-                                             // damage to all blockers
-            CardListUtil.sortByEvaluateCreature(block);
-            CardListUtil.sortAttack(block);
+            boolean killsAllBlockers = true; 
+            // Does the attacker deal lethal damage to all blockers
+            //Blocking Order now determined after declare blockers
+            Card lastBlocker = null;
             for (final Card b : block) {
                 final int enoughDamageToKill = b.getEnoughDamageToKill(damage, attacker, true);
                 if (enoughDamageToKill <= damage) {
@@ -856,15 +795,17 @@ public class Combat {
                 } else {
                     killsAllBlockers = false;
                 }
+                lastBlocker = b;
             } // for
 
-            // if attacker has no trample, and there's damage left, assign the rest to a random blocker
-            if ((damage > 0) && !(c.hasKeyword("Trample") && killsAllBlockers)) {
-                final int index = CardUtil.getRandomIndex(block);
-                block.get(index).addAssignedDamage(damage, c);
-                damage = 0;
-            } else if (c.hasKeyword("Trample") && killsAllBlockers) {
-                this.addDefendingDamage(damage, c);
+            if (killsAllBlockers && damage > 0) {
+            // if attacker has no trample, and there's damage left, assign the rest to the last blocker
+                if (!hasTrample && lastBlocker != null) {
+                    lastBlocker.addAssignedDamage(damage, c);
+                    damage = 0;
+                } else if (hasTrample) {
+                    this.addDefendingDamage(damage, c);
+                }
             }
         }
     } // setAssignedDamage()

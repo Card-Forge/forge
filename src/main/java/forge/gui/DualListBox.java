@@ -7,16 +7,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.AbstractListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -28,56 +23,7 @@ import javax.swing.event.ListSelectionListener;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.gui.match.CMatchUI;
-
-@SuppressWarnings("serial")
-class UnsortedListModel extends AbstractListModel {
-    List<Object> model;
-
-    public UnsortedListModel() {
-        model = new LinkedList<Object>();
-    }
-
-    public int getSize() {
-        return model.size();
-    }
-
-    public Object getElementAt(int index) {
-        return model.toArray()[index];
-    }
-
-    public void add(Object element) {
-        if (model.add(element)) {
-            fireContentsChanged(this, 0, getSize());
-        }
-    }
-
-    public void addAll(Object elements[]) {
-        Collection<Object> c = Arrays.asList(elements);
-        model.addAll(c);
-        fireContentsChanged(this, 0, getSize());
-    }
-
-    public void clear() {
-        model.clear();
-        fireContentsChanged(this, 0, getSize());
-    }
-
-    public boolean contains(Object element) {
-        return model.contains(element);
-    }
-
-    public Iterator iterator() {
-        return model.iterator();
-    }
-
-    public boolean removeElement(Object element) {
-        boolean removed = model.remove(element);
-        if (removed) {
-            fireContentsChanged(this, 0, getSize());
-        }
-        return removed;
-    }
-}
+import forge.gui.UnsortedListModel;
 
 // An input box for handling the order of choices. 
 // Left box has the original choices
@@ -91,8 +37,6 @@ class UnsortedListModel extends AbstractListModel {
 
 @SuppressWarnings("serial")
 public class DualListBox extends JPanel {
-    private static Object lock = new Object();
-    
     private JList sourceList;
 
     private UnsortedListModel sourceListModel;
