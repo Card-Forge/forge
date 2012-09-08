@@ -1,9 +1,15 @@
-Forge Beta: 09-07-2012 ver 1.2.12
+Forge Beta: 09-08-2012 ver 1.2.13
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-11112 cards in total.
+11113 cards in total.
 
+
+NOTE:
+
+We found a serious bug in version 1.2.12 a few hours after it was released. This bug was quickly fixed and people should update to this version and not use version 1.2.12. We apologize for the inconvenience.
+
+--
 
 If you update your OS to Apple OSX 10.8 Mountain Lion and try to launch a new version of forge that you will likely get a dialog which states "File is damaged and cannot be opened. Please move to trash." 
 
@@ -331,6 +337,14 @@ Fixes/Features:
 - Fixed Sundering Titan crash.
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 - Preparing the changes.txt file for the next beta build and release.
+- Converted Rebound to use AF Play.
+- Allow 4-9 set formations in blocks for extra flexibility in Sealed Deck, 3rd attempt
+- Allow 4-9 set formations in blocks for extra flexibility in Sealed Deck, 3rd attempt
+- Splice onto Arcane now also works with cards cast with AF Play.
+- Fixed AF GainControl resolve (ouch).
+- Slightly better error handling for the 4-9 sets/sealed deck block patch
+- Added untapYType<amount/valid/description> cost type
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -361,6 +375,7 @@ Deadbridge Goliath
 Dreadbore
 Dreg Mangler
 Dryad Militant
+Eyes in the Skies
 Fencing Ace
 Goblin Electromancer
 Golgari Guildgate
@@ -371,6 +386,7 @@ Hypersonic Dragon
 Izzet Guildgate
 Judge's Familiar
 Lotleth Troll
+Loxodon Smiter
 Niv-Mizzet, Dracogenius
 Ogre Jailbreaker
 Rakdos Guildgate
@@ -394,6 +410,7 @@ Blessed Breath
 Blood Funnel
 Circu, Dimir Lobotomist
 Consuming Vortex
+Crackleburr
 Cruel Deceiver
 Dampen Thought
 Decomposition
