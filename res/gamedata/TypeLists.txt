@@ -20,6 +20,7 @@ Mountain
 Forest
 [LandTypes]
 Desert
+Gate
 Lair
 Locus
 Mine
