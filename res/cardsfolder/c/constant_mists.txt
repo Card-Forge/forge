@@ -3,8 +3,7 @@ ManaCost:1 G
 Types:Instant
 Text:no text
 A:SP$ Fog | Cost$ 1 G | SpellDescription$ Prevent all combat damage that would be dealt this turn.
-A:SP$ Fog | Cost$ 1 G Sac<1/Land> | CostDesc$ Buyback | SubAbility$ DBBuyback | SpellDescription$ - sacrifice a land
-SVar:DBBuyback:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | Defined$ Self
+K:Buyback Sac<1/Land>
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/constant_mists.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/54.jpg

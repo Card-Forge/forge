@@ -82,7 +82,6 @@ public abstract class SpellAbility {
 
     private boolean tapAbility;
     private boolean untapAbility;
-    private boolean buyBackAbility = false; // false by default
     private boolean flashBackAbility = false;
     private boolean multiKicker = false;
     private boolean replicate = false;
@@ -109,6 +108,7 @@ public abstract class SpellAbility {
 
     private final ArrayList<Mana> payingMana = new ArrayList<Mana>();
     private final ArrayList<AbilityMana> paidAbilities = new ArrayList<AbilityMana>();
+    private ArrayList<String> optionalAdditionalCosts = new ArrayList<String>();
 
     private HashMap<String, CardList> paidLists = new HashMap<String, CardList>();
 
@@ -443,25 +443,13 @@ public abstract class SpellAbility {
 
     /**
      * <p>
-     * setIsBuyBackAbility.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public void setIsBuyBackAbility(final boolean b) {
-        this.buyBackAbility = b;
-    }
-
-    /**
-     * <p>
      * isBuyBackAbility.
      * </p>
      * 
      * @return a boolean.
      */
     public boolean isBuyBackAbility() {
-        return this.buyBackAbility;
+        return this.optionalAdditionalCosts.contains("Buyback");
     }
 
     /**
@@ -901,6 +889,27 @@ public abstract class SpellAbility {
      */
     public void resetPaidHash() {
         this.paidLists = new HashMap<String, CardList>();
+    }
+
+    /**
+     * @return the optionalAdditionalCosts
+     */
+    public ArrayList<String> getOptionalAdditionalCosts() {
+        return optionalAdditionalCosts;
+    }
+
+    /**
+     * @param costs the optionalAdditionalCosts to set
+     */
+    public void setOptionalAdditionalCosts(ArrayList<String> costs) {
+        this.optionalAdditionalCosts = costs;
+    }
+
+    /**
+     * @param cost the optionalAdditionalCost to add
+     */
+    public void addOptionalAdditionalCosts(String cost) {
+        this.optionalAdditionalCosts.add(cost);
     }
 
     /**

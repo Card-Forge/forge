@@ -4177,7 +4177,7 @@ public class CardFactoryUtil {
                 }
                 card.addSpellAbility(sa);
 
-                final String bbCost = card.getSVar("Buyback");
+                /*final String bbCost = card.getSVar("Buyback");
                 if (!bbCost.equals("")) {
                     final SpellAbility bbSA = sa.copy();
                     final String newCost = CardUtil.addManaCosts(card.getManaCost().toString(), bbCost);
@@ -4192,7 +4192,7 @@ public class CardFactoryUtil {
                     bbSA.setIsBuyBackAbility(true);
 
                     card.addSpellAbility(bbSA);
-                }
+                }*/
             }
 
         }

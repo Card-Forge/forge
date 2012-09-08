@@ -2,7 +2,7 @@ Name:Corpse Dance
 ManaCost:2 B
 Types:Instant
 Text:no text
-SVar:Buyback:2
+K:Buyback 2
 A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.TopGraveyardCreature+YouCtrl | Hidden$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step.
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste & HIDDEN At the beginning of the end step, exile CARDNAME. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True

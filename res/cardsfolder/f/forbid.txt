@@ -2,9 +2,8 @@ Name:Forbid
 ManaCost:1 U U
 Types:Instant
 Text:no text
+K:Buyback Discard<2/Card>
 A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | SpellDescription$ Counter target spell.
-A:SP$ Counter | Cost$ 1 U U Discard<2/Card> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | CostDesc$ Buyback | SpellDescription$ - Discard two cards. (You may discard two cards in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.) | SubAbility$ DBChange
-SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://magiccards.info/scans/en/fnmp/27.jpg

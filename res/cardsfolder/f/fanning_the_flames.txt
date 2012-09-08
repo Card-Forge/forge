@@ -3,7 +3,7 @@ ManaCost:X R R
 Types:Sorcery
 Text:no text
 A:SP$ DealDamage | Cost$ X R R | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
-SVar:Buyback:3
+K:Buyback 3
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fanning_the_flames.jpg

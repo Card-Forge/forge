@@ -2576,6 +2576,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Splice")) {
                 final Cost cost = new Cost(this, keyword.substring(19), false);
                 sb.append("Splice onto Arcane " + cost.toSimpleString() + "\r\n");
+            } else if (keyword.startsWith("Buyback")) {
+                final Cost cost = new Cost(this, keyword.substring(8), false);
+                sb.append("Buyback " + cost.toSimpleString() + "\r\n");
             }
             if (keyword.startsWith("Storm")) {
                 if (sb.toString().contains("Target") || sb.toString().contains("target")) {

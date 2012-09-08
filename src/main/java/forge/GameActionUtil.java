@@ -1896,6 +1896,27 @@ public final class GameActionUtil {
         }
         return alternatives;
     }
+    
+    public static Cost combineCosts(SpellAbility sa, String additionalCost) {
+        final Cost newCost = new Cost(sa.getSourceCard(), additionalCost, false);
+        Cost oldCost = sa.getPayCosts();
+        if (sa.getPayCosts() != null) {
+            for (final CostPart part : oldCost.getCostParts()) {
+                if (!(part instanceof CostMana)) {
+                    newCost.getCostParts().add(part);
+                } else {
+                    if (newCost.getCostMana() != null) {
+                        ManaCost oldManaCost = new ManaCost(part.toString());
+                        oldManaCost.combineManaCost(newCost.getCostMana().toString());
+                        newCost.getCostMana().setMana(oldManaCost.toString());
+                    } else {
+                        newCost.getCostParts().add(part); 
+                    }
+                }
+            }
+        }
+        return newCost;
+    }
 
     /**
      * <p>
@@ -1932,26 +1953,9 @@ public final class GameActionUtil {
                 ArrayList<SpellAbility> addSAs = new ArrayList<SpellAbility>();
                 // Add the subability to all existing variants
                 for (SpellAbility s : allSAs) {
-                    final Cost newCost = new Cost(source, keyword.substring(19), false);
                     final SpellAbility newSA = s.copy();
-                    Cost oldCost = newSA.getPayCosts();
-                    if (newSA.getPayCosts() != null) {
-                        for (final CostPart part : oldCost.getCostParts()) {
-                            if (!(part instanceof CostMana)) {
-                                newCost.getCostParts().add(part);
-                            } else {
-                                if (newCost.getCostMana() != null) {
-                                    ManaCost oldManaCost = new ManaCost(part.toString());
-                                    oldManaCost.combineManaCost(newCost.getCostMana().toString());
-                                    newCost.getCostMana().setMana(oldManaCost.toString());
-                                } else {
-                                    newCost.getCostParts().add(part); 
-                                }
-                            }
-                        }
-                    }
                     newSA.setBasicSpell(false);
-                    newSA.setPayCosts(newCost);
+                    newSA.setPayCosts(combineCosts(newSA, keyword.substring(19)));
                     newSA.setManaCost("");
                     newSA.setDescription(s.getDescription() + " (Splicing " + c + " onto it)");
                     newSA.addSplicedCards(c);

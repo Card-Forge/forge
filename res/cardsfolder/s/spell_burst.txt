@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$Counter | Cost$ X U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell with converted mana cost X.
 SVar:X:Targeted$CardManaCost
-SVar:Buyback:3
+K:Buyback 3
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_burst.jpg

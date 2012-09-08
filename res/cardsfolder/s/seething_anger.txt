@@ -3,7 +3,7 @@ ManaCost:R
 Types:Sorcery
 Text:no text
 A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | SpellDescription$ Target creature gets +3/+0 until end of turn.
-SVar:Buyback:3
+K:Buyback 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seething_anger.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/96.jpg

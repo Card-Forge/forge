@@ -2,7 +2,7 @@ Name:Reiterate
 ManaCost:1 R R
 Types:Instant
 Text:no text
-SVar:Buyback:3
+K:Buyback 3
 A:SP$ CopySpell | Cost$ 1 R R | ValidTgts$ Instant,Sorcery | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

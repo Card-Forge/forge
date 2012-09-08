@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Instant
 Text:no text
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
-SVar:Buyback:3
+K:Buyback 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/allay.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/1.jpg
