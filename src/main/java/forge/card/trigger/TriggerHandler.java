@@ -995,9 +995,6 @@ public class TriggerHandler {
                 }
 
                 if (controller[0].isHuman()) {
-                    // Card src =
-                    // (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
-                    // System.out.println("Trigger resolving for "+mode+".  Card = "+src);
                     Singletons.getModel().getGameAction().playSpellAbilityNoStack(sa[0], true);
                 } else {
                     // commented out because i don't think this should be called
@@ -1030,6 +1027,12 @@ public class TriggerHandler {
         // System.out.println("Trigger going on stack for "+mode+".  Card = "+src);
 
         if (regtrig.isStatic()) {
+            if (controller[0].isHuman()) {
+                Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
+            } else {
+                wrapperAbility.doTrigger(isMandatory);
+                ComputerUtil.playNoStack(wrapperAbility);
+            }
             Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
         } else {
             AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);
