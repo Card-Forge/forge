@@ -285,31 +285,7 @@ public class SealedDeckFormat {
                 setCombos.add(String.format("%s/%s/%s/%s/%s", sets[4], sets[3], sets[2], sets[1], sets[0]));
             }
         }
-        else if (nPacks == 6) {
-            if (sets.length >= 2) {
-                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[0], sets[0], sets[0], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[1], sets[1], sets[1], sets[0], sets[0], sets[0]));
-            }
-            if (sets.length >= 3) {
-                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[2], sets[2], sets[2], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[2], sets[2], sets[1], sets[1], sets[0], sets[0]));
-            }
-            if (sets.length >= 4) {
-                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[3], sets[2], sets[1], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[3], sets[2], sets[1], sets[1], sets[0], sets[0]));
-            }
-            if (sets.length >= 5) {
-                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[4], sets[3], sets[2], sets[1], sets[0], sets[0]));
-            }
-            if (sets.length >= 6) {
-                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
-            }
-        } // NOTE: To save space, we make the assumption that no-one selects 7-9 packs unless they also want to use that many sets
-        else if (nPacks == 7) {
-            if (sets.length < 7) {
-                return null;
-            }
+        else if (nPacks == 7 && sets.length >= 7) {
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s", sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s", sets[5], sets[4], sets[3], sets[2], sets[1], sets[0], sets[0]));
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s", sets[4], sets[3], sets[2], sets[1], sets[1], sets[0], sets[0]));
@@ -323,10 +299,7 @@ public class SealedDeckFormat {
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s", sets[1], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s", sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0]));
         }
-        else if (nPacks == 8) {
-            if (sets.length < 8) {
-                return null;
-            }
+        else if (nPacks == 8 && sets.length >= 8) {
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s/%s", sets[7], sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s/%s", sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0], sets[0]));
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s/%s", sets[5], sets[4], sets[3], sets[2], sets[1], sets[1], sets[0], sets[0]));
@@ -344,10 +317,7 @@ public class SealedDeckFormat {
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s/%s", sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0]));
 
         }
-        else if (nPacks == 9) {
-            if (sets.length < 9) {
-                return null;
-            }
+        else if (nPacks == 9 && sets.length >= 9) {
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s/%s/%s", sets[8], sets[7], sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s/%s/%s", sets[7], sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0], sets[0]));
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s/%s/%s", sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[1], sets[0], sets[0]));
@@ -368,10 +338,27 @@ public class SealedDeckFormat {
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s/%s/%s", sets[1], sets[1], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0], sets[0]));
             setCombos.add(String.format("%s/%s/%s/%s/%s/%s/%s/%s/%s", sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0]));
         }
-        else {
-            return null;
+        else { // Default to 6 packs
+            if (sets.length >= 2) {
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[0], sets[0], sets[0], sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[1], sets[1], sets[1], sets[0], sets[0], sets[0]));
+            }
+            if (sets.length >= 3) {
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[2], sets[2], sets[2], sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[2], sets[2], sets[1], sets[1], sets[0], sets[0]));
+            }
+            if (sets.length >= 4) {
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[3], sets[2], sets[1], sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[3], sets[2], sets[1], sets[1], sets[0], sets[0]));
+            }
+            if (sets.length >= 5) {
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[4], sets[3], sets[2], sets[1], sets[0], sets[0]));
+            }
+            if (sets.length >= 6) {
+                setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
+            }
         }
-
         return setCombos;
     }
     /**
