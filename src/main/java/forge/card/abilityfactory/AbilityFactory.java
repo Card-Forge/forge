@@ -2228,6 +2228,10 @@ public class AbilityFactory {
             for (final Card imp : card.getImprinted()) {
                 sas.addAll(imp.getSpellAbilities());
             }
+        } else if (defined.equals("EffectSource") ) {
+            if (card.getEffectSource() != null) {
+                sas.addAll(card.getEffectSource().getSpellAbilities());
+            }
         } else if (defined.equals("Imprinted.doesNotShareNameWith+TriggeredCard+Exiled")) {
             //get Imprinted list
             ArrayList<SpellAbility> imprintedCards = new ArrayList<SpellAbility>();

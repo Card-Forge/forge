@@ -4720,33 +4720,37 @@ public class CardFactoryUtil {
                 @Override
                 public void resolve() {
 
-                    // Create Epic emblem
-                    final Card eff = new Card();
-                    eff.setName(card.toString() + " Epic");
-                    eff.addType("Effect"); // Or Emblem
-                    eff.setToken(true); // Set token to true, so when leaving
-                                        // play it gets nuked
-                    eff.addController(card.getController());
-                    eff.setOwner(card.getController());
-                    eff.setImageName(card.getImageName());
-                    eff.setColor(card.getColor());
-                    eff.setImmutable(true);
-
-                    eff.addStaticAbility("Mode$ CantBeCast | ValidCard$ Card | Caster$ You "
-                            + "| Description$ For the rest of the game, you can't cast spells.");
-
-                    final Trigger copyTrigger = forge.card.trigger.TriggerHandler.parseTrigger(
-                            "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerDescription$ "
-                                    + "At the beginning of each of your upkeeps, copy " + card.toString()
-                                    + " except for its epic ability.", card, false);
-
-                    copyTrigger.setOverridingAbility(origSA);
-
-                    eff.addTrigger(copyTrigger);
-
-                    AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                    Singletons.getModel().getGameAction().moveToPlay(eff);
-                    AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+                    String name = card.toString() + " Epic";
+                    if (card.getController().getCardsIn(ZoneType.Battlefield, name).isEmpty()) {
+                        // Create Epic emblem
+                        final Card eff = new Card();
+                        eff.setName(card.toString() + " Epic");
+                        eff.addType("Effect"); // Or Emblem
+                        eff.setToken(true); // Set token to true, so when leaving
+                                            // play it gets nuked
+                        eff.addController(card.getController());
+                        eff.setOwner(card.getController());
+                        eff.setImageName(card.getImageName());
+                        eff.setColor(card.getColor());
+                        eff.setImmutable(true);
+                        eff.setEffectSource(card);
+    
+                        eff.addStaticAbility("Mode$ CantBeCast | ValidCard$ Card | Caster$ You "
+                                + "| Description$ For the rest of the game, you can't cast spells.");
+                        
+                        eff.setSVar("EpicCopy", "AB$ CopySpell | Cost$ 0 | Defined$ EffectSource");
+    
+                        final Trigger copyTrigger = forge.card.trigger.TriggerHandler.parseTrigger(
+                                "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
+                                        + "At the beginning of each of your upkeeps, copy " + card.toString()
+                                        + " except for its epic ability.", eff, false);
+    
+                        eff.addTrigger(copyTrigger);
+    
+                        AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+                        Singletons.getModel().getGameAction().moveToPlay(eff);
+                        AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+                    }
 
                     if (card.getController().isHuman()) {
                         Singletons.getModel().getGameAction().playSpellAbilityNoStack(origSA, false);
