@@ -1652,6 +1652,46 @@ public class ComputerUtil {
 
     /**
      * <p>
+     * chooseUntapType.
+     * </p>
+     * 
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param activate
+     *            a {@link forge.Card} object.
+     * @param untap
+     *            a boolean.
+     * @param amount
+     *            a int.
+     * @return a {@link forge.CardList} object.
+     */
+    public static CardList chooseUntapType(final String type, final Card activate, final boolean untap, final int amount) {
+        CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
+
+        // is this needed?
+        typeList = typeList.filter(CardListFilter.TAPPED);
+
+        if (untap) {
+            typeList.remove(activate);
+        }
+
+        if (typeList.size() < amount) {
+            return null;
+        }
+
+        CardListUtil.sortAttack(typeList);
+
+        final CardList untapList = new CardList();
+
+        for (int i = 0; i < amount; i++) {
+            untapList.add(typeList.get(i));
+        }
+        return untapList;
+    }
+
+    /**
+     * <p>
      * chooseReturnType.
      * </p>
      * 
@@ -1752,7 +1792,7 @@ public class ComputerUtil {
             public int compare(final SpellAbility a, final SpellAbility b) {
                 int a1 = CardUtil.getConvertedManaCost(a);
                 int b1 = CardUtil.getConvertedManaCost(b);
-                
+
                 a1 += getSpellAbilityPriority(a);
                 b1 += getSpellAbilityPriority(b);
 
@@ -1761,7 +1801,7 @@ public class ComputerUtil {
         }; // Comparator
         Arrays.sort(sa, c);
     } // sortSpellAbilityByCost()
-    
+
     public static int getSpellAbilityPriority(SpellAbility sa) {
         int p = 0;
         // puts creatures in front of spells
@@ -1783,7 +1823,7 @@ public class ComputerUtil {
         if ("DestroyAll".equals(mode)) {
             p += 4;
         }
-        
+
         return p;
     }
 
@@ -2062,7 +2102,7 @@ public class ComputerUtil {
         }
         return ret;
     }
-    
+
     /**
      * Is this discard probably worse than a random draw?
      * @param discard Card to discard
@@ -2078,7 +2118,7 @@ public class ComputerUtil {
         final int highestCMC = Math.max(6, nonLandsInHand.getHighestConvertedManaCost());
         final int discardCMC = discard.getCMC();
         if (discard.isLand()) {
-            if (landsInPlay.size() >= highestCMC 
+            if (landsInPlay.size() >= highestCMC
                     || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)
                     || (landsInPlay.size() > 3 && nonLandsInHand.size() == 0)) {
                 // Don't need more land.

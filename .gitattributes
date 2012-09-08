@@ -1840,6 +1840,7 @@ res/cardsfolder/c/crab_umbra.txt svneol=native#text/plain
 res/cardsfolder/c/crabapple_cohort.txt svneol=native#text/plain
 res/cardsfolder/c/crack_the_earth.txt svneol=native#text/plain
 res/cardsfolder/c/crackdown.txt svneol=native#text/plain
+res/cardsfolder/c/crackleburr.txt -text
 res/cardsfolder/c/crackling_club.txt svneol=native#text/plain
 res/cardsfolder/c/cradle_guard.txt svneol=native#text/plain
 res/cardsfolder/c/cradle_of_vitality.txt svneol=native#text/plain
@@ -12030,6 +12031,7 @@ src/main/java/forge/card/cost/CostSacrifice.java -text
 src/main/java/forge/card/cost/CostTap.java -text
 src/main/java/forge/card/cost/CostTapType.java -text
 src/main/java/forge/card/cost/CostUntap.java -text
+src/main/java/forge/card/cost/CostUntapType.java -text
 src/main/java/forge/card/cost/CostUtil.java -text
 src/main/java/forge/card/cost/package-info.java svneol=native#text/plain
 src/main/java/forge/card/mana/IParserManaCost.java -text

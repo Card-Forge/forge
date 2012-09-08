@@ -288,7 +288,7 @@ public class CostUtil {
         }
         return false;
     }
-    
+
     /**
      * hasTapCost.
      * 
@@ -304,6 +304,27 @@ public class CostUtil {
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostTapType) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * hasUntapCost.
+     * 
+     * @param cost
+     *            the cost
+     * @param source
+     *            the source
+     * @return true, if successful
+     */
+    public static boolean hasUntapCost(final Cost cost, final Card source) {
+        if (cost == null) {
+            return true;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostUntapType) {
                 return true;
             }
         }

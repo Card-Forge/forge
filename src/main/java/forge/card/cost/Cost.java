@@ -75,6 +75,19 @@ public class Cost {
         return this.tapCost;
     }
 
+    private boolean untapCost = false;
+
+    /**
+     * <p>
+     * getUntap.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean getUntap() {
+        return this.untapCost;
+    }
+
     /**
      * <p>
      * hasNoManaCost.
@@ -136,6 +149,7 @@ public class Cost {
 
     // Parsing Strings
     private static final String TAP_X_STR = "tapXType<";
+    private static final String UNTAP_Y_STR = "untapYType<";
     private static final String SUB_STR = "SubCounter<";
     private static final String ADD_STR = "AddCounter<";
     private static final String LIFE_STR = "PayLife<";
@@ -177,6 +191,14 @@ public class Cost {
 
             final String description = splitStr.length > 2 ? splitStr[2] : null;
             this.costParts.add(new CostTapType(splitStr[0], splitStr[1], description));
+        }
+
+        while (parse.contains(Cost.UNTAP_Y_STR)) {
+            final String[] splitStr = this.abCostParse(parse, Cost.UNTAP_Y_STR, 3);
+            parse = this.abUpdateParse(parse, Cost.UNTAP_Y_STR);
+
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            this.costParts.add(new CostUntapType(splitStr[0], splitStr[1], description));
         }
 
         while (parse.contains(Cost.SUB_STR)) {
