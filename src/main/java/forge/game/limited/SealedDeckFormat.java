@@ -61,8 +61,19 @@ public class SealedDeckFormat {
     public SealedDeckFormat(final String sealedType) {
 
         if (sealedType.equals("Full")) {
+
             final BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getAllUniqueCards());
-            for (int i = 0; i < 6; i++) {
+
+            // Choose number of boosters
+            final Integer[] integers = new Integer[10];
+
+            for (int i = 0; i < 10; i++) {
+                integers[i] = Integer.valueOf(i + 3);
+            }
+
+            Integer nrBoosters = GuiUtils.chooseOne("How many booster packs?", integers);
+
+            for (int i = 0; i < nrBoosters; i++) {
                 this.product.add(new UnOpenedProduct(BoosterGenerator.IDENTITY_PICK, bpFull));
             }
 
