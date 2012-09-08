@@ -19,6 +19,8 @@ package forge.card.cardfactory;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import forge.AllZone;
 import forge.Card;
@@ -158,6 +160,23 @@ public class CardFactory implements CardFactoryInterface {
             return;
         }*/
         final Card c = AllZone.getCardFactory().copyCard(original);
+
+        // change the color of the copy (eg: Fork)
+        final SpellAbility sourceSA = source.getFirstSpellAbility();
+        if (sourceSA.getAbilityFactory().getMapParams().containsKey("CopyIsColor")) {
+            String tmp = "";
+            final HashMap<String, String> params = sourceSA.getAbilityFactory().getMapParams();
+            final String newColor = params.get("CopyIsColor");
+            if (newColor.equals("ChosenColor")) {
+                tmp = CardUtil.getShortColorsString(source.getChosenColor());
+            } else {
+                tmp = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(newColor.split(","))));
+            }
+            final String finalColors = tmp;
+
+            c.addColor(finalColors, c, !params.containsKey("OverwriteColors"), true);
+        }
+
         c.addController(controller);
         c.setCopiedSpell(true);
 
