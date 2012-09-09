@@ -44,7 +44,6 @@ import forge.Singletons;
 import forge.card.CardCharacteristics;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
-import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
@@ -4218,7 +4217,7 @@ public class CardFactoryUtil {
         // TODO - kicker costs can only be mana right now i think?
         // TODO - this kicker only works for pemanents. maybe we can create an
         // optional cost class for buyback, kicker, that type of thing
-        final int kicker = CardFactoryUtil.hasKeyword(card, "Kicker");
+        /*final int kicker = CardFactoryUtil.hasKeyword(card, "Kicker");
         if (kicker != -1) {
             final SpellAbility kickedSpell = new Spell(card) {
                 private static final long serialVersionUID = -1598664196463358630L;
@@ -4253,7 +4252,7 @@ public class CardFactoryUtil {
             kickedSpell.setStackDescription(sb.toString());
 
             card.addSpellAbility(kickedSpell);
-        }
+        }*/
 
         if (CardFactoryUtil.hasKeyword(card, "Multikicker") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Multikicker");

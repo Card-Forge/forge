@@ -2268,6 +2268,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbLong.append("\r\n");
                 }  else if (keyword.get(i).startsWith("Alternative Cost")) {
                     sbLong.append("Has alternative cost.");
+                } else if (keyword.get(i).startsWith("Kicker")) {
+                    final Cost cost = new Cost(this, keyword.get(i).substring(7), false);
+                    sbLong.append("Kicker " + cost.toSimpleString() + "\r\n");
                 } else if (keyword.get(i).startsWith("Champion")) {
                     final String k = this.getKeyword().get(i);
                     final String[] kk = k.split(":");

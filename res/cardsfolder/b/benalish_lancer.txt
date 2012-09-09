@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Human Knight
 Text:no text
 PT:2/2
-K:Kicker:2 W
+K:Kicker 2 W
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigPut | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it and with first strike.
 SVar:TrigPut:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ First Strike | Permanent$ True

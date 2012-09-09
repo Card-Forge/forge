@@ -1996,18 +1996,38 @@ public final class GameActionUtil {
             return abilities;
         }
 
-        // Buyback
+        // Buyback, Kicker
         for (String keyword : source.getKeyword()) {
             if (keyword.startsWith("Buyback")) {
-                final SpellAbility newSA = original.copy();
+                for (SpellAbility sa : abilities) {
+                final SpellAbility newSA = sa.copy();
                 newSA.setBasicSpell(false);
                 newSA.setPayCosts(GameActionUtil.combineCosts(newSA, keyword.substring(8)));
                 newSA.setManaCost("");
-                newSA.setDescription(original.getDescription() + " (with Buyback)");
-                newSA.setOptionalAdditionalCosts(new ArrayList<String>());
+                newSA.setDescription(sa.getDescription() + " (with Buyback)");
+                ArrayList<String> newoacs = new ArrayList<String>();
+                newoacs.addAll(sa.getOptionalAdditionalCosts());
+                newSA.setOptionalAdditionalCosts(newoacs);
                 newSA.addOptionalAdditionalCosts("Buyback");
-                abilities.add(abilities.size(), newSA);
-                break;
+                newAbilities.add(newAbilities.size(), newSA);
+                }
+                abilities.addAll(0, newAbilities);
+                newAbilities.clear();
+            } else if (keyword.startsWith("Kicker")) {
+                for (SpellAbility sa : abilities) {
+                    final SpellAbility newSA = sa.copy();
+                    newSA.setBasicSpell(false);
+                    newSA.setPayCosts(GameActionUtil.combineCosts(newSA, keyword.substring(7)));
+                    newSA.setManaCost("");
+                    newSA.setDescription(sa.getDescription() + " (Kicked)");
+                    ArrayList<String> newoacs = new ArrayList<String>();
+                    newoacs.addAll(sa.getOptionalAdditionalCosts());
+                    newSA.setOptionalAdditionalCosts(newoacs);
+                    newSA.addOptionalAdditionalCosts("Kicked");
+                    newAbilities.add(newAbilities.size(), newSA);
+                }
+                abilities.addAll(0, newAbilities);
+                newAbilities.clear();
             }
         }
 

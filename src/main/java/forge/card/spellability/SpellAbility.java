@@ -451,6 +451,17 @@ public abstract class SpellAbility {
     public boolean isBuyBackAbility() {
         return this.optionalAdditionalCosts.contains("Buyback");
     }
+    
+    /**
+     * <p>
+     * isKicked.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public boolean isKicked() {
+        return this.optionalAdditionalCosts.contains("Kicked");
+    }
 
     /**
      * <p>

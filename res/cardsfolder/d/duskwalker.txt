@@ -3,7 +3,7 @@ ManaCost:B
 Types:Creature Human Minion
 Text:no text
 PT:1/1
-K:Kicker:3 B
+K:Kicker 3 B
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ GatherDust | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it and with fear. (It can't be blocked except by artifact creatures and/or black creatures.)
 SVar:GatherDust:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ Dustwalk
 SVar:Dustwalk:DB$ Pump | Defined$ Self | KW$ Fear | Permanent$ True

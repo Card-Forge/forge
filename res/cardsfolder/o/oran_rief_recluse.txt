@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Spider
 Text:no text
 PT:1/3
-K:Kicker:2 G
+K:Kicker 2 G
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target creature with flying.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying.

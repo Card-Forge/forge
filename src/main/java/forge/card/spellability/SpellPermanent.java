@@ -439,8 +439,11 @@ public class SpellPermanent extends Spell {
     /** {@inheritDoc} */
     @Override
     public void resolve() {
-        final Card c = this.getSourceCard();
+        Card c = this.getSourceCard();
         c.addController(this.getActivatingPlayer());
+        if (this.isKicked()) {
+            c.setKicked(true);
+        }
         Singletons.getModel().getGameAction().moveTo(this.getActivatingPlayer().getZone(ZoneType.Battlefield), c);
     }
 }

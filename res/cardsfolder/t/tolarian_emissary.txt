@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 Text:no text
 PT:1/2
 K:Flying
-K:Kicker:1 W
+K:Kicker 1 W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target enchantment.
 SVar:TrigKicker:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
 SVar:Rarity:Uncommon

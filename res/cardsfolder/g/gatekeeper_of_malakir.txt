@@ -3,7 +3,7 @@ ManaCost:B B
 Types:Creature Vampire Warrior
 Text:no text
 PT:2/2
-K:Kicker:B
+K:Kicker B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, target player sacrifices a creature.
 SVar:TrigKicker:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature
 SVar:NeedsToPlay:Creature.YouDontCtrl

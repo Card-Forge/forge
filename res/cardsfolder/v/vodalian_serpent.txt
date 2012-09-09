@@ -4,7 +4,7 @@ Types:Creature Serpent
 Text:no text
 PT:2/2
 K:CARDNAME can't attack unless defending player controls an Island.
-K:Kicker:2
+K:Kicker 2
 K:etbCounter:P1P1:4:isValid Card.kicked:If CARDNAME was kicked, it enters the battlefield with four +1/+1 counters on it.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_serpent.jpg

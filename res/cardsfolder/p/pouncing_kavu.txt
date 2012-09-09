@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Kavu
 Text:no text
 PT:1/1
-K:Kicker:2 R
+K:Kicker 2 R
 K:First Strike
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ PounceAdvantage | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it and with haste.
 SVar:PounceAdvantage:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ PounceAmbush

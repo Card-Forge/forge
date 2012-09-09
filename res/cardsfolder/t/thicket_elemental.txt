@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Creature Elemental
 Text:no text
 PT:4/4
-K:Kicker:1 G
+K:Kicker 1 G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ ThicketKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, you may reveal cards from the top of your library until you reveal a creature card. If you do, put that card onto the battlefield and shuffle all other cards revealed this way into your library.
 SVar:ThicketKicker:DB$ DigUntil | Valid$ Creature | ValidDescription$ creature card | FoundDestination$ Battlefield | OptionalDecider$ You | RevealedDestination$ Library | Shuffle$ True
 SVar:Rarity:Rare

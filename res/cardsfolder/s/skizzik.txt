@@ -5,7 +5,7 @@ Text:no text
 PT:5/3
 K:Haste
 K:Trample
-K:Kicker:R
+K:Kicker R
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Card.Self+notkicked | Execute$ TrigNotKicked | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME unless it was kicked.
 SVar:TrigNotKicked:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:PlayMain1:TRUE

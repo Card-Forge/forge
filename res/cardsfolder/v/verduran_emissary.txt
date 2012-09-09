@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Human Wizard
 Text:no text
 PT:2/3
-K:Kicker:1 R
+K:Kicker 1 R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target artifact. It can't be regenerated.
 SVar:TrigKicker:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact | NoRegen$ True | TgtPrompt$ Select target artifact
 SVar:Rarity:Uncommon

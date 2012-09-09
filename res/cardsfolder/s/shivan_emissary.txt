@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Human Wizard
 Text:no text
 PT:1/1
-K:Kicker:1 B
+K:Kicker 1 B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target nonblack creature. It can't be regenerated.
 SVar:TrigKicker:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack | NoRegen$ True | TgtPrompt$ Select target nonblack creature
 SVar:RemRandomDeck:True

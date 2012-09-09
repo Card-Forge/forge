@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Human Druid
 Text:no text
 PT:1/4
-K:Kicker:2 G
+K:Kicker 2 G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, draw two cards.
 SVar:TrigKicker:AB$Draw | Cost$ 0 | NumCards$ 2
 SVar:Rarity:Common
