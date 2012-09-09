@@ -825,11 +825,6 @@ public class TriggerHandler {
             }
 
             @Override
-            public void setIsBuyBackAbility(final boolean b) {
-                sa[0].setIsBuyBackAbility(b);
-            }
-
-            @Override
             public void setIsCycling(final boolean b) {
                 sa[0].setIsCycling(b);
             }
