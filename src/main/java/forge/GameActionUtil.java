@@ -1905,10 +1905,12 @@ public final class GameActionUtil {
                 if (!(part instanceof CostMana)) {
                     newCost.getCostParts().add(part);
                 } else {
-                    if (newCost.getCostMana() != null) {
+                    CostMana newCostMana = newCost.getCostMana();
+                    if (newCostMana != null) {
                         ManaCost oldManaCost = new ManaCost(part.toString());
-                        oldManaCost.combineManaCost(newCost.getCostMana().toString());
-                        newCost.getCostMana().setMana(oldManaCost.toString());
+                        oldManaCost.combineManaCost(newCostMana.toString());
+                        newCostMana.setMana(oldManaCost.toString());
+                        newCostMana.setXMana(oldManaCost.getXcounter());
                     } else {
                         newCost.getCostParts().add(part); 
                     }

@@ -2,9 +2,8 @@ Name:Walk the Aeons
 ManaCost:4 U U
 Types:Sorcery
 Text:no text
+K:Buyback Sac<3/Island> 
 A:SP$ AddTurn | Cost$ 4 U U | ValidTgts$ Player | TgtPrompt$ Select target player | NumTurns$ 1 | SpellDescription$ Target player takes an extra turn after this one.
-A:SP$ AddTurn | Cost$ 4 U U Sac<3/Island> | CostDesc$ Buyback | SubAbility$ DBBuyback | ValidTgts$ Player | TgtPrompt$ Select target player | NumTurns$ 1 | SpellDescription$ - sacrifice 3 Islands
-SVar:DBBuyback:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walk_the_aeons.jpg
