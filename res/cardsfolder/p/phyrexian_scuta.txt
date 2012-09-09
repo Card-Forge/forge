@@ -1,9 +1,10 @@
 Name:Phyrexian Scuta
 ManaCost:3 B
 Types:Creature Zombie
-Text:If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it.
+Text:no text
 PT:3/3
-SVar:RemRandomDeck:True
+K:Kicker PayLife<3>
+K:etbCounter:P1P1:2:isValid Card.kicked:If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_scuta.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/51.jpg

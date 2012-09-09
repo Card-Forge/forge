@@ -29,6 +29,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
@@ -305,6 +306,27 @@ public class SpellPermanent extends Spell {
         }
         final Card card = this.getSourceCard();
         String mana = this.getPayCosts().getTotalMana();
+        final Cost cost = this.getPayCosts();
+        
+        if (cost != null) {
+            // AI currently disabled for these costs
+            if (!CostUtil.checkLifeCost(cost, card, 4)) {
+                return false;
+            }
+
+            if (!CostUtil.checkDiscardCost(cost, card)) {
+                return false;
+            }
+
+            if (!CostUtil.checkSacrificeCost(cost, card)) {
+                return false;
+            }
+
+            if (!CostUtil.checkRemoveCounterCost(cost, card)) {
+                return false;
+            }
+        }
+        
         // check on legendary
         if (card.isType("Legendary") && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
             final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);

@@ -43,7 +43,6 @@ import forge.card.replacement.ReplacementLayer;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityStatic;
-import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
@@ -1122,7 +1121,7 @@ public class CardFactoryCreatures {
         card.addComesIntoPlayCommand(intoPlay);
     }
 
-    private static void getCard_PhyrexianScuta(final Card card, final String cardName) {
+    /*private static void getCard_PhyrexianScuta(final Card card, final String cardName) {
         final Cost abCost = new Cost(card, "3 B PayLife<3>", false);
         final SpellAbility kicker = new Spell(card, abCost, null) {
             private static final long serialVersionUID = -6420757044982294960L;
@@ -1149,7 +1148,7 @@ public class CardFactoryCreatures {
         kicker.setStackDescription(sb.toString());
 
         card.addSpellAbility(kicker);
-    }
+    }*/
 
     private static void getCard_YoseiTheMorningStar(final Card card, final String cardName) {
         final CardList targetPerms = new CardList();
@@ -1566,8 +1565,6 @@ public class CardFactoryCreatures {
             getCard_SurturedGhoul(card, cardName);
         } else if (cardName.equals("Nameless Race")) {
             getCard_NamelessRace(card, cardName);
-        } else if (cardName.equals("Phyrexian Scuta")) {
-            getCard_PhyrexianScuta(card, cardName);
         } else if (cardName.equals("Yosei, the Morning Star")) {
             getCard_YoseiTheMorningStar(card, cardName);
         } else if (cardName.equals("Phyrexian Dreadnought")) {
