@@ -371,6 +371,7 @@ public final class GuiUtils {
         dialog.setTitle(title);
         dialog.setContentPane(dual);
         dialog.setSize(dual.getPreferredSize());
+        dialog.setLocationRelativeTo(null);
         dialog.pack();
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         dialog.setVisible(true);

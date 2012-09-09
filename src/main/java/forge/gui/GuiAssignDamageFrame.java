@@ -124,6 +124,7 @@ public class GuiAssignDamageFrame extends JFrame {
         dialog.setContentPane(this.mainPanel);
         dialog.setSize(470, 410);
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true); 
     }
 
