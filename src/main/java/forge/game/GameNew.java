@@ -308,6 +308,10 @@ public class GameNew {
         gs.getPhaseHandler().reset();
         gs.getStack().reset();
         gs.getCombat().reset();
+        gs.getEndOfTurn().reset();
+        gs.getEndOfCombat().reset();
+        gs.getUntap().reset();
+        gs.getUpkeep().reset();
         gs.getGameLog().reset();
         gs.setGameOver(false);
 

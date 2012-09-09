@@ -166,5 +166,16 @@ public abstract class Phase implements java.io.Serializable {
             c.remove(0).execute();
         }
     }
+    
+    /**
+     * <p>
+     * reset.
+     * </p>
+     */
+    public void reset() {
+        at.clear();
+        until.clear();
+        untilMap.clear();
+    }
 
 } //end class Phase
