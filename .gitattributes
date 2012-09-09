@@ -12235,6 +12235,7 @@ src/main/java/forge/gui/MultiLineLabel.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
 src/main/java/forge/gui/MultiPhaseProgressMonitorWithETA.java svneol=native#text/plain
 src/main/java/forge/gui/SOverlayUtils.java -text
+src/main/java/forge/gui/UnsortedListModel.java -text
 src/main/java/forge/gui/WrapLayout.java -text
 src/main/java/forge/gui/deckeditor/CDeckEditorUI.java -text
 src/main/java/forge/gui/deckeditor/DeckImport.java -text
