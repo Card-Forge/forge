@@ -1,6 +1,5 @@
 package forge.card.replacement;
 
-import forge.CardCharacteristicName;
 
 /** 
  * TODO: Write javadoc for this type.

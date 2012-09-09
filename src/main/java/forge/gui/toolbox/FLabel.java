@@ -15,7 +15,6 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Date;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;

@@ -24,7 +24,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
-import forge.CardUtil;
 import forge.Counters;
 import forge.GameEntity;
 import forge.card.cardfactory.CardFactoryUtil;

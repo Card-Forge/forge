@@ -17,7 +17,6 @@
  */
 package forge.card.trigger;
 
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 
 /**

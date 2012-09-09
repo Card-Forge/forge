@@ -216,7 +216,7 @@ public class DualListBox extends JPanel {
     }
     
     private void addAll() {
-        Iterator itr = sourceListModel.iterator();
+        Iterator<Object> itr = sourceListModel.iterator();
         
         ArrayList<Object> objects = new ArrayList<Object>();
         
@@ -248,7 +248,7 @@ public class DualListBox extends JPanel {
     
     private class RemoveAllListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {   
-            Iterator itr = destListModel.iterator();
+            Iterator<Object> itr = destListModel.iterator();
             
             ArrayList<Object> objects = new ArrayList<Object>();
             

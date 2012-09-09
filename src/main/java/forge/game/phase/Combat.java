@@ -30,8 +30,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListUtil;
-import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;

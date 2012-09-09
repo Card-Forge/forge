@@ -46,7 +46,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.replacement.ReplacementLayer;

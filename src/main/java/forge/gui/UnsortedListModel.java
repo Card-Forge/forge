@@ -45,7 +45,7 @@ class UnsortedListModel extends AbstractListModel {
         return model.contains(element);
     }
 
-    public Iterator iterator() {
+    public Iterator<Object> iterator() {
         return model.iterator();
     }
 
