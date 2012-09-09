@@ -1980,4 +1980,44 @@ public final class GameActionUtil {
 
         return newSAs;
     }
+    
+    /**
+     * get optional additional costs.
+     * 
+     * @param sa
+     *            the new up charm s as
+     */
+    public static ArrayList<SpellAbility> getOptionalAdditionalCosts(final SpellAbility original) {
+        final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
+        final Card source = original.getSourceCard();
+        abilities.add(original);
+        if (!original.isSpell()) {
+            return abilities;
+        }
+
+        // Buyback
+        for (String keyword : source.getKeyword()) {
+            if (keyword.startsWith("Buyback")) {
+                final SpellAbility newSA = original.copy();
+                newSA.setBasicSpell(false);
+                newSA.setPayCosts(GameActionUtil.combineCosts(newSA, keyword.substring(8)));
+                newSA.setManaCost("");
+                newSA.setDescription(original.getDescription() + " (with Buyback)");
+                newSA.setOptionalAdditionalCosts(new ArrayList<String>());
+                newSA.addOptionalAdditionalCosts("Buyback");
+                abilities.add(abilities.size(), newSA);
+                break;
+            }
+        }
+
+        // Splice
+        for (SpellAbility sa : abilities) {
+            newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
+        }
+        abilities.addAll(newAbilities);
+        newAbilities.clear();
+
+        return abilities;
+    }
 } // end class GameActionUtil

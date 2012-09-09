@@ -1916,36 +1916,13 @@ public class GameAction {
      */
     public static SpellAbility chooseOptionalAdditionalCosts(final SpellAbility original) {
         final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-        final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
-        final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
+        final ArrayList<SpellAbility> abilities = GameActionUtil.getOptionalAdditionalCosts(original);
         final ArrayList<String> choices = new ArrayList<String>();
-        final Card source = original.getSourceCard();
         final Player human = AllZone.getHumanPlayer();
         if (!original.isSpell()) {
             return original;
         }
 
-        abilities.add(original);
-        // Buyback
-        for (String keyword : source.getKeyword()) {
-            if (keyword.startsWith("Buyback")) {
-                final SpellAbility newSA = original.copy();
-                newSA.setBasicSpell(false);
-                newSA.setPayCosts(GameActionUtil.combineCosts(newSA, keyword.substring(8)));
-                newSA.setManaCost("");
-                newSA.setDescription(original.getDescription() + " (with Buyback)");
-                newSA.addOptionalAdditionalCosts("Buyback");
-                abilities.add(newSA);
-                break;
-            }
-        }
-
-        // Splice
-        for (SpellAbility sa : abilities) {
-            newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
-        }
-        abilities.addAll(newAbilities);
-        newAbilities.clear();
         for (final SpellAbility sa : abilities) {
             sa.setActivatingPlayer(human);
             choices.add(sa.toString());

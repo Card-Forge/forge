@@ -78,7 +78,7 @@ public class ComputerUtil {
         Player computer = AllZone.getComputerPlayer();
         // not sure "playing biggest spell" matters?
         ComputerUtil.sortSpellAbilityByCost(all);
-        final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
         final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : all) {
             abilities.add(abilities.size(), sa);
@@ -88,9 +88,9 @@ public class ComputerUtil {
         }
         for (SpellAbility sa : abilities) {
             sa.setActivatingPlayer(computer);
-            newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
+            newAbilities.addAll(GameActionUtil.getOptionalAdditionalCosts(sa));
         }
-        abilities.addAll(0, newAbilities);
+        abilities = newAbilities;
         for (final SpellAbility sa : abilities) {
             // Don't add Counterspells to the "normal" playcard lookups
             final AbilityFactory af = sa.getAbilityFactory();
@@ -278,7 +278,7 @@ public class ComputerUtil {
         newAbilities.clear();
         for (SpellAbility sa : possibleCounters) {
             sa.setActivatingPlayer(computer);
-            newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
+            newAbilities.addAll(GameActionUtil.getOptionalAdditionalCosts(sa));
         }
         possibleCounters.addAll(newAbilities);
         for (final SpellAbility sa : possibleCounters) {
