@@ -48,6 +48,14 @@ You can move a copy of your pictures and decks over to the "Forge.app" applicati
 
 Your decks can be placed in the decks folder, your pics can be placed in the pics folder, etc.
 
+If you update your OS to Apple OSX 10.8 Mountain Lion and try to launch a new version of forge that you will likely get a dialog which states "File is damaged and cannot be opened. Please move to trash." 
+
+Mountain Lion comes with a new Gatekeeper feature and this is probably blocking your ability to launch this newer version of forge. Visit the link below and follow the instructions. They are fairly long and detailed.
+
+http://support.apple.com/kb/HT5290?viewlocale=en_US&locale=en_US
+
+Please note that the issue is most likely caused by Mountain Lion's Gatekeeper feature and it is extremely unlikely that the forge dev team will attempt to get a unique Developer ID from Apple and use it to digitally sign our forge app.
+
 
 Picture location info:
 
