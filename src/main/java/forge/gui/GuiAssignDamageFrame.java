@@ -32,6 +32,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import forge.AllZone;
 import forge.Card;
@@ -122,6 +123,7 @@ public class GuiAssignDamageFrame extends JFrame {
         dialog.setTitle("Assign Damage Panel");
         dialog.setContentPane(this.mainPanel);
         dialog.setSize(470, 410);
+        dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         dialog.setVisible(true); 
     }
 

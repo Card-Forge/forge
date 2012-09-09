@@ -41,6 +41,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -374,6 +375,7 @@ public final class GuiUtils {
         dialog.setContentPane(dual);
         dialog.setSize(dual.getPreferredSize());
         dialog.pack();
+        dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         dialog.setVisible(true);
 
         List<Object> objects = dual.getOrderedList();
