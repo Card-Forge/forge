@@ -5,7 +5,25 @@ Forge Beta: 0#-0#-2012 ver 1.2.14
 11### cards in total.
 
 
-
+- Expanded UntapYType cost for Benthic Explorers
+- Upgraded Combat Blockers/Assignment to adhere to latest rules.
+- Upgraded MultipleBlockers/AssignDamage UI Element to automate a lot of the monotonous process
+- Simplify some Combat Damage functions
+- Added Gate to land types
+- Fixed Fork. It now correctly changes the color of the copied spell to red.
+- fix cost of Talons of Falkenrath
+- Full Cardpool sealed deck games now allow you to choose 3-12 booster packs instead of the default 6.
+- Fixed the Epic keyword.
+- Fixed AI not checking doTrigger before a static trigger resolves.
+- Converted Buyback to a keyword that creates an optional additional cost.
+- UnsortedListModel that was moved from DualListBox actually added.
+- Ignore close action for DualListBox Dialog and Assign Damage Dialog
+- Cleared out the changes.txt file, now ready for new material.
+- Removed compile error.
+- clean up some Java warnings
+- Fixed Buyback on spells with X costs.
+- Converted the rest of the Buyback spells to the new keyword.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 --
 
@@ -74,10 +92,12 @@ Ogre Jailbreaker
 Rakdos Guildgate
 Rakdos Shred-Freak
 Selesnya Guildgate
+Skyline Predator
 Slitherhead
 Sluiceway Scorpion
 Supreme Verdict
 Transguild Promenade
+Wayfaring Temple
 Worldspine Wurm
 
 
