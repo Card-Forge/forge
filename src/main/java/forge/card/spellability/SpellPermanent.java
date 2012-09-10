@@ -413,6 +413,10 @@ public class SpellPermanent extends Spell {
                 continue;
             }
 
+            if (params.containsKey("ValidCard") && params.get("ValidCard").contains("kicked") && !sa.isKicked()) {
+                continue;
+            }
+
             if (!tr.requirementsCheck()) {
                 continue;
             }

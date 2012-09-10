@@ -6,6 +6,7 @@ PT:2/2
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact, enchantment, or land.
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact,Enchantment,Land | TgtPrompt$ Select an artifact, enchantment, or land.
+SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_slime.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/161.jpg
