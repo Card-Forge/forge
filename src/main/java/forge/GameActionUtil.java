@@ -1908,9 +1908,9 @@ public final class GameActionUtil {
                     CostMana newCostMana = newCost.getCostMana();
                     if (newCostMana != null) {
                         ManaCost oldManaCost = new ManaCost(part.toString());
+                        newCostMana.setXMana(oldManaCost.getXcounter() + newCostMana.getXMana());
                         oldManaCost.combineManaCost(newCostMana.toString());
-                        newCostMana.setMana(oldManaCost.toString());
-                        newCostMana.setXMana(oldManaCost.getXcounter());
+                        newCostMana.setMana(oldManaCost.toString(false));
                     } else {
                         newCost.getCostParts().add(part); 
                     }
