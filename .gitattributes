@@ -10364,6 +10364,7 @@ res/cardsfolder/v/verdant_field.txt svneol=native#text/plain
 res/cardsfolder/v/verdant_force.txt svneol=native#text/plain
 res/cardsfolder/v/verdant_succession.txt -text svneol=unset#text/plain
 res/cardsfolder/v/verdant_touch.txt svneol=native#text/plain
+res/cardsfolder/v/verdeloth_the_ancient.txt -text
 res/cardsfolder/v/verdigris.txt svneol=native#text/plain
 res/cardsfolder/v/verduran_emissary.txt svneol=native#text/plain
 res/cardsfolder/v/verduran_enchantress.txt svneol=native#text/plain
