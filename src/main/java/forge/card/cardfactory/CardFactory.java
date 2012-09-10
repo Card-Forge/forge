@@ -162,20 +162,23 @@ public class CardFactory implements CardFactoryInterface {
         final Card c = AllZone.getCardFactory().copyCard(original);
 
         // change the color of the copy (eg: Fork)
-        /*final SpellAbility sourceSA = source.getFirstSpellAbility();
-        if (sourceSA.getAbilityFactory().getMapParams().containsKey("CopyIsColor")) {
-            String tmp = "";
-            final HashMap<String, String> params = sourceSA.getAbilityFactory().getMapParams();
-            final String newColor = params.get("CopyIsColor");
-            if (newColor.equals("ChosenColor")) {
-                tmp = CardUtil.getShortColorsString(source.getChosenColor());
-            } else {
-                tmp = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(newColor.split(","))));
-            }
-            final String finalColors = tmp;
+        // Currently won't work for abilities, only for spells
+        if (null != source.getFirstSpellAbility().getAbilityFactory()) {
+            final SpellAbility sourceSA = source.getFirstSpellAbility();
+            if (sourceSA.getAbilityFactory().getMapParams().containsKey("CopyIsColor")) {
+                String tmp = "";
+                final HashMap<String, String> params = sourceSA.getAbilityFactory().getMapParams();
+                final String newColor = params.get("CopyIsColor");
+                if (newColor.equals("ChosenColor")) {
+                    tmp = CardUtil.getShortColorsString(source.getChosenColor());
+                } else {
+                    tmp = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(newColor.split(","))));
+                }
+                final String finalColors = tmp;
 
-            c.addColor(finalColors, c, !params.containsKey("OverwriteColors"), true);
-        }*/
+                c.addColor(finalColors, c, !params.containsKey("OverwriteColors"), true);
+            }
+        }
 
         c.addController(controller);
         c.setCopiedSpell(true);
