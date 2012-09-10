@@ -6,9 +6,11 @@ PT:5/4
 K:Flying
 K:Kicker W W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notkicked | Execute$ TrigDestroyYourLand | TriggerDescription$ When CARDNAME enters the battlefield, destroy all lands you control. If it was kicked, destroy all lands instead.
-SVar:TrigDestroyYourLand:AB$DestroyAll | Cost$ 0 | ValidCards$ Land.YouCtrl | SpellDescription$ CARDNAME destroys all land you control.
+SVar:TrigDestroyYourLand:DB$DestroyAll | Cost$ 0 | ValidCards$ Land.YouCtrl | SpellDescription$ CARDNAME destroys all land you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Secondary$ True | Execute$ TrigKicker | TriggerDescription$ Kicker: If you paid the kicker cost, destroy all lands instead.
-SVar:TrigKicker:AB$DestroyAll | Cost$ 0 | ValidCards$ Land | SpellDescription$ CARDNAME destroys all land.
+SVar:TrigKicker:DB$DestroyAll | Cost$ 0 | ValidCards$ Land | SpellDescription$ CARDNAME destroys all land.
+SVar:RemRandomDeck:True
+DeckNeeds:Color$white
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desolation_angel.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/38.jpg

@@ -866,19 +866,21 @@ public class AbilityFactoryDestroy {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
             }
         });
-        if (humanlist.isEmpty()) {
-            return false;
-        }
         computerlist = computerlist.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
             }
         });
+        if (humanlist.isEmpty() && !computerlist.isEmpty()) {
+            return false;
+        }
+
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
         if ((humanlist.getNotType("Creature").size() == 0) && (computerlist.getNotType("Creature").size() == 0)) {
-            if (CardFactoryUtil.evaluateCreatureList(computerlist) >= CardFactoryUtil.evaluateCreatureList(humanlist)) {
+            if (CardFactoryUtil.evaluateCreatureList(computerlist) >= CardFactoryUtil.evaluateCreatureList(humanlist)
+                    && !computerlist.isEmpty()) {
                 return false;
             }
         } // otherwise evaluate both lists by CMC and pass only if human

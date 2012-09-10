@@ -409,12 +409,19 @@ public class SpellPermanent extends Spell {
                 continue;
             }
 
-            if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self")) {
-                continue;
-            }
-
-            if (params.containsKey("ValidCard") && params.get("ValidCard").contains("kicked") && !sa.isKicked()) {
-                continue;
+            if (params.containsKey("ValidCard")) {
+                if(!params.get("ValidCard").contains("Self")) {
+                    continue;
+                }
+                if (params.get("ValidCard").contains("notkicked")) {
+                    if(sa.isKicked()) {
+                        continue;
+                    }
+                } else if (params.get("ValidCard").contains("kicked")) {
+                    if(!sa.isKicked()) {
+                        continue;
+                    }
+                }
             }
 
             if (!tr.requirementsCheck()) {
