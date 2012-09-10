@@ -162,7 +162,7 @@ public class CardFactory implements CardFactoryInterface {
         final Card c = AllZone.getCardFactory().copyCard(original);
 
         // change the color of the copy (eg: Fork)
-        final SpellAbility sourceSA = source.getFirstSpellAbility();
+        /*final SpellAbility sourceSA = source.getFirstSpellAbility();
         if (sourceSA.getAbilityFactory().getMapParams().containsKey("CopyIsColor")) {
             String tmp = "";
             final HashMap<String, String> params = sourceSA.getAbilityFactory().getMapParams();
@@ -175,7 +175,7 @@ public class CardFactory implements CardFactoryInterface {
             final String finalColors = tmp;
 
             c.addColor(finalColors, c, !params.containsKey("OverwriteColors"), true);
-        }
+        }*/
 
         c.addController(controller);
         c.setCopiedSpell(true);
