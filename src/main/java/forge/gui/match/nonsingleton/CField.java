@@ -44,6 +44,7 @@ import forge.control.input.InputMana;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPaySacCost;
+import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -466,11 +467,13 @@ public class CField implements ICDoc {
                         && !c.hasKeyword("CARDNAME attacks each turn if able.")) {
                     c.untap();
                     AllZone.getCombat().removeFromCombat(c);
+                    CombatUtil.showCombat();
                 } else if (input instanceof InputBlock) {
                     if (c.getController().isHuman()) {
                         AllZone.getCombat().removeFromCombat(c);
                     }
                     ((InputBlock) input).removeFromAllBlocking(c);
+                    CombatUtil.showCombat();
                 }
                 else if (input instanceof InputPaySacCost) {
                     ((InputPaySacCost) input).unselectCard(c, AllZone.getHumanPlayer().getZone(ZoneType.Battlefield));
