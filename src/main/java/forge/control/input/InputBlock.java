@@ -17,10 +17,11 @@
  */
 package forge.control.input;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import forge.AllZone;
 import forge.Card;
+import forge.CardList;
 import forge.Singletons;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.PlayerZone;
@@ -43,7 +44,7 @@ public class InputBlock extends Input {
     private static final long serialVersionUID = 6120743598368928128L;
 
     private Card currentAttacker = null;
-    private final ArrayList<Card> allBlocking = new ArrayList<Card>();
+    private final HashMap<Card,CardList> allBlocking = new HashMap<Card, CardList>();
 
     /**
      * <p>
@@ -88,7 +89,7 @@ public class InputBlock extends Input {
             // Done blocking
             ButtonUtil.reset();
             
-            CombatUtil.orderMultipleBlockers(AllZone.getCombat());
+            CombatUtil.orderMultipleCombatants(AllZone.getCombat());
 
             Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
         }
@@ -98,17 +99,35 @@ public class InputBlock extends Input {
     @Override
     public final void selectCard(final Card card, final PlayerZone zone) {
         // is attacking?
+        boolean reminder = true;
+        
         if (AllZone.getCombat().getAttackers().contains(card)) {
             this.currentAttacker = card;
-        } else if (zone.is(ZoneType.Battlefield, AllZone.getHumanPlayer()) && card.isCreature()
-                && CombatUtil.canBlock(this.currentAttacker, card, AllZone.getCombat())
-                && this.currentAttacker != null && !this.allBlocking.contains(card)
-                && card.getController().isHuman()) {
-                this.allBlocking.add(card);
-                AllZone.getCombat().addBlocker(this.currentAttacker, card);
+            reminder = false;
         } else {
+            // Make sure this card is valid to even be a blocker
+            if (this.currentAttacker != null && card.isCreature() && card.getController().isHuman() 
+                    && zone.is(ZoneType.Battlefield, AllZone.getHumanPlayer())) {
+                // Create a new blockedBy list if it doesn't exist
+                if (!this.allBlocking.containsKey(card)) {
+                    this.allBlocking.put(card, new CardList());
+                }
+                
+                CardList attackersBlocked = this.allBlocking.get(card);
+                if (!attackersBlocked.contains(this.currentAttacker) && 
+                        CombatUtil.canBlock(this.currentAttacker, card, AllZone.getCombat()) &&
+                        CombatUtil.canBlockMoreCreatures(card, attackersBlocked)) {
+                    attackersBlocked.add(this.currentAttacker);
+                    AllZone.getCombat().addBlocker(this.currentAttacker, card);
+                    reminder = false;
+                }
+            } 
+        }
+        
+        if (reminder) {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
+        
         this.showMessage();
     } // selectCard()
 }

@@ -595,10 +595,16 @@ public class AbilityFactoryPump {
 
         // is the creature blocking and unable to destroy the attacker
         // or would be destroyed itself?
-        if (c.isBlocking()
-                && (CombatUtil.blockerWouldBeDestroyed(c) || !CombatUtil.attackerWouldBeDestroyed(AllZone
-                        .getCombat().getAttackerBlockedBy(c)))) {
-            return true;
+        if (c.isBlocking()) {
+            if (CombatUtil.blockerWouldBeDestroyed(c)) {
+                return true;
+            }
+            CardList blockedBy = AllZone.getCombat().getAttackersBlockedBy(c);
+            // For now, Only care the first creature blocked by a card. 
+            // TODO Add in better BlockAdditional support
+            if (blockedBy.size() != 0 && !CombatUtil.attackerWouldBeDestroyed(blockedBy.get(0))) {
+                return true;
+            }
         }
 
         // is the creature unblocked and the spell will pump its power?
@@ -617,11 +623,17 @@ public class AbilityFactoryPump {
         }
 
         // if the life of the computer is in danger, try to pump blockers blocking Tramplers
+        CardList blockedBy = AllZone.getCombat().getAttackersBlockedBy(c);
+        boolean attackerHasTrample = false;
+        for(Card b : blockedBy) {
+            attackerHasTrample |= b.hasKeyword("Trample");
+        }
+        
         if (phase.getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && phase.isPlayerTurn(AllZone.getHumanPlayer())
                 && c.isBlocking()
                 && defense > 0
-                && AllZone.getCombat().getAttackerBlockedBy(c).hasKeyword("Trample")
+                && attackerHasTrample
                 && (sa.isAbility() || CombatUtil.lifeInDanger(AllZone.getCombat()))) {
             return true;
         }

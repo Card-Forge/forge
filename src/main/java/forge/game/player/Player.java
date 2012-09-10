@@ -61,8 +61,7 @@ import forge.util.MyRandom;
  * @author Forge
  * @version $Id$
  */
-public abstract class Player extends GameEntity {
-
+public abstract class Player extends GameEntity  implements Comparable<Player> {
     /** The poison counters. */
     private int poisonCounters;
 
@@ -2681,6 +2680,19 @@ public abstract class Player extends GameEntity {
         }
     }
 
+    @Override
+    public int compareTo(Player o) {
+        if (o == null) {
+            return +1;
+        }
+        int subtractedHash = o.hashCode() - this.hashCode();
+        if (subtractedHash == 0) {
+            return 0;
+        }
+        
+        return Math.abs(subtractedHash)/subtractedHash;
+    }
+    
     /** {@inheritDoc} */
     @Override
     public int hashCode() {

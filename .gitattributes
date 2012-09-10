@@ -3431,6 +3431,7 @@ res/cardsfolder/f/forget.txt -text
 res/cardsfolder/f/forgotten_ancient.txt svneol=native#text/plain
 res/cardsfolder/f/forgotten_cave.txt svneol=native#text/plain
 res/cardsfolder/f/forgotten_harvest.txt svneol=native#text/plain
+res/cardsfolder/f/foriysian_brigade.txt -text
 res/cardsfolder/f/fork.txt svneol=native#text/plain
 res/cardsfolder/f/forked_bolt.txt svneol=native#text/plain
 res/cardsfolder/f/forked_branch_garami.txt svneol=native#text/plain
@@ -10612,6 +10613,7 @@ res/cardsfolder/w/wall_of_essence.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_faith.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_fire.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_frost.txt svneol=native#text/plain
+res/cardsfolder/w/wall_of_glare.txt -text
 res/cardsfolder/w/wall_of_granite.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_heat.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_hope.txt svneol=native#text/plain

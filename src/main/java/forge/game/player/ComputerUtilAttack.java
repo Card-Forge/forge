@@ -781,7 +781,7 @@ public class ComputerUtilAttack {
                     final int blockNum = this.blockers.size();
                     int attackNum = 0;
                     int damage = 0;
-                    CardList attacking = combat.sortAttackerByDefender()[combat.getCurrentDefenderNumber()];
+                    CardList attacking = combat.getAttackersByDefenderSlot(combat.getCurrentDefenderNumber());
                     CardListUtil.sortAttackLowFirst(attacking);
                     for (Card atta : attacking) {
                         if (attackNum >= blockNum || !CombatUtil.canBeBlocked(attacker, this.blockers)) {

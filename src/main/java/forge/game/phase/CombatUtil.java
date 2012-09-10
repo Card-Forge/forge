@@ -157,6 +157,17 @@ public class CombatUtil {
 
         return true;
     }
+    
+    public static boolean canBlockMoreCreatures(final Card blocker, final CardList blockedBy) {
+        // TODO(sol) expand this for the additional blocking keyword
+        int size = blockedBy.size();
+        
+        if (size == 0 || blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
+            return true;
+        }
+        
+        return blocker.getKeywordAmount("CARDNAME can block an additional creature.") >= size;
+    }
 
     // can the attacker be blocked at all?
     /**
@@ -387,7 +398,12 @@ public class CombatUtil {
         return true;
     }
     
-    public static void orderMultipleBlockers(final Combat combat) {
+    public static void orderMultipleCombatants(final Combat combat) {
+        CombatUtil.orderMultipleBlockers(combat);
+        CombatUtil.orderBlockingMultipleAttackers(combat);
+    }
+    
+    private static void orderMultipleBlockers(final Combat combat) {
         // If there are multiple blockers, the Attacker declares the Assignment Order
         final Player player = combat.getAttackingPlayer();
         final CardList attackers = combat.getAttackerList();
@@ -410,6 +426,34 @@ public class CombatUtil {
                 orderedBlockers = ComputerUtilBlock.orderBlockers(attacker, blockers);
             }
             combat.setBlockerList(attacker,  orderedBlockers);
+        }
+        CombatUtil.showCombat();
+        // Refresh Combat Panel
+    }
+    
+    private static void orderBlockingMultipleAttackers(final Combat combat) {
+        // If there are multiple blockers, the Attacker declares the Assignment Order
+        final Player player = combat.getDefendingPlayer();
+        final CardList blockers = combat.getAllBlockers();
+        for (final Card blocker : blockers) {
+            CardList attackers = combat.getAttackersBlockedBy(blocker);
+            if (attackers.size() <= 1) {
+                continue;
+            }
+         
+            CardList orderedAttacker = null;
+            if (player.isHuman()) {
+                List<Object> ordered = GuiUtils.getOrderChoices("Choose Blocking Order", "Damaged First", true, (Object[])attackers.toArray());
+                
+                orderedAttacker = new CardList();
+                for(Object o : ordered) {
+                    orderedAttacker.add((Card)o);
+                }
+            }
+            else {
+                orderedAttacker = ComputerUtilBlock.orderAttackers(blocker, attackers);
+            }
+            combat.setAttackersBlockedByList(blocker,  orderedAttacker);
         }
         CombatUtil.showCombat();
         // Refresh Combat Panel
@@ -1040,7 +1084,7 @@ public class CombatUtil {
 
         int damage = 0;
 
-        final CardList attackers = combat.sortAttackerByDefender()[0];
+        final CardList attackers = combat.getAttackersByDefenderSlot(0);
         final CardList unblocked = new CardList();
 
         for (final Card attacker : attackers) {
@@ -1082,7 +1126,7 @@ public class CombatUtil {
 
         int poison = 0;
 
-        final CardList attackers = combat.sortAttackerByDefender()[0];
+        final CardList attackers = combat.getAttackersByDefenderSlot(0);
         final CardList unblocked = new CardList();
 
         for (final Card attacker : attackers) {
@@ -1127,7 +1171,7 @@ public class CombatUtil {
         }
 
         // check for creatures that must be blocked
-        final CardList attackers = combat.sortAttackerByDefender()[0];
+        final CardList attackers = combat.getAttackersByDefenderSlot(0);
 
         for (final Card attacker : attackers) {
 
@@ -1181,7 +1225,7 @@ public class CombatUtil {
         }
 
         // check for creatures that must be blocked
-        final CardList attackers = combat.sortAttackerByDefender()[0];
+        final CardList attackers = combat.getAttackersByDefenderSlot(0);
 
         for (final Card attacker : attackers) {
 
@@ -2215,11 +2259,15 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean blockerWouldBeDestroyed(final Card blocker) {
-        final Card attacker = AllZone.getCombat().getAttackerBlockedBy(blocker);
+        // TODO THis function only checks if a single attacker at a time would destroy a blocker
+        // This needs to expand to tally up damage
+        final CardList attackers = AllZone.getCombat().getAttackersBlockedBy(blocker);
 
-        if (CombatUtil.canDestroyBlocker(blocker, attacker, AllZone.getCombat(), true)
-                && !(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))) {
-            return true;
+        for(Card attacker : attackers) {
+            if (CombatUtil.canDestroyBlocker(blocker, attacker, AllZone.getCombat(), true)
+                    && !(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))) {
+                return true;
+            }
         }
         return false;
     }
@@ -2436,7 +2484,13 @@ public class CombatUtil {
      * </p>
      */
     public static void showCombat() {
+        // TODO(sol) ShowCombat seems to be resetting itself when switching away and switching back?
         final StringBuilder display = new StringBuilder();
+        
+        if (!Singletons.getModel().getGameState().getPhaseHandler().inCombat()) {
+            VCombat.SINGLETON_INSTANCE.updateCombat(display.toString().trim());
+            return;
+        }
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker

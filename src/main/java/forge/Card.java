@@ -7526,7 +7526,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isBlocking(final Card attacker) {
-        return attacker.equals(AllZone.getCombat().getAttackerBlockedBy(this));
+        return AllZone.getCombat().getAttackersBlockedBy(this).contains(attacker);
     }
 
     /**
@@ -7539,7 +7539,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isBlockedBy(final Card blocker) {
-        return this.equals(AllZone.getCombat().getAttackerBlockedBy(blocker));
+        return AllZone.getCombat().getAttackersBlockedBy(blocker).contains(this);
     }
 
     // /////////////////////////

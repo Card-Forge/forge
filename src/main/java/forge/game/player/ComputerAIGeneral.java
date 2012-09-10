@@ -281,7 +281,7 @@ public class ComputerAIGeneral implements Computer {
 
         AllZone.setCombat(ComputerUtilBlock.getBlockers(AllZone.getCombat(), blockers));
         
-        CombatUtil.orderMultipleBlockers(AllZone.getCombat());
+        CombatUtil.orderMultipleCombatants(AllZone.getCombat());
 
         Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
     }

@@ -928,4 +928,17 @@ public class ComputerUtilBlock {
         
         return blockers;
     }
+    
+    public static CardList orderAttackers(Card attacker, CardList blockers) {
+        // This shouldn't really take trample into account, but otherwise should be pretty similar to orderBlockers
+        // very very simple ordering of attackers, sort by evaluate, then sort by attack
+        //final int damage = attacker.getNetCombatDamage();
+        CardListUtil.sortByEvaluateCreature(blockers);
+        CardListUtil.sortAttack(blockers);
+        
+        // TODO: Take total damage, and attempt to maximize killing the greatest evaluation of creatures
+        // It's probably generally better to kill the largest creature, but sometimes its better to kill a few smaller ones
+        
+        return blockers;
+    }
 }
