@@ -24,6 +24,19 @@ Forge Beta: 0#-0#-2012 ver 1.2.14
 - Fixed Buyback on spells with X costs.
 - Converted the rest of the Buyback spells to the new keyword.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added AI support to the new Buyback keyword.
+- Fixed command lists of phases not being reset when the game ends.
+- Converted the old Kicker keyword to a proper optional additional cost.
+- Converted Phyrexian Scuta to the new Kicker keyword.
+- Center AssignDamage and DualListBox containers
+- Refresh combat panel when unassigning attacker or blocker
+- Lots of Combat simplification. Including maps of Attackers Block By a Blocker, and Attackers attacking a Defender for simpler access.
+- Adding support for Block Any Creatures and Block Additional Creatures
+- The AI will now check for kicked conditions when checking ETB Triggers of permanents.
+- More improvements of kicker AI.
+- Commented out the color replacement fix for Fork. Caused NPE for CopySpell Abilities.
+- Re-added the color fix for Fork (without the NPEs this time)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 --
 
@@ -103,7 +116,10 @@ Worldspine Wurm
 
 Added the following cards:
 
-
+Arctic Merfolk
+Two-Headed Giant of Foriys
+Verdeloth the Ancient
+Mirror Sheen
 
 
 end
