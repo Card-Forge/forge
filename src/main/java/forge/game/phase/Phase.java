@@ -111,6 +111,42 @@ public abstract class Phase implements java.io.Serializable {
 
     /**
      * <p>
+     * Add a Command that will terminate an effect with "until <Player's> next turn".
+     * </p>
+     * 
+     * @param p
+     *            a {@link forge.game.player.Player} object
+     * @param command
+     *            a {@link forge.Command} object.
+     */
+    public final void addUntilYourNextTurn(Player p, final Command command) {
+        if (null == p) {
+            p = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        }
+
+        if (this.untilMap.containsKey(p)) {
+            this.untilMap.get(p).add(command);
+        } else {
+            this.untilMap.put(p, new CommandList(command));
+        }
+    }
+
+    /**
+     * <p>
+     * Executes the termination of effects that apply "until <Player's> next turn".
+     * </p>
+     * 
+     * @param pNext
+     *            the next active player
+     */
+    public final void executeUntilTurn(final Player pNext) {
+        if (this.untilMap.containsKey(pNext)) {
+            this.execute(this.untilMap.get(pNext));
+        }
+    }
+
+    /**
+     * <p>
      * Add a hardcoded trigger that will execute "at <phase>".
      * </p>
      * 
@@ -166,7 +202,7 @@ public abstract class Phase implements java.io.Serializable {
             c.remove(0).execute();
         }
     }
-    
+
     /**
      * <p>
      * reset.

@@ -575,6 +575,9 @@ public class AbilityFactoryEffect {
                 AllZone.getEndOfTurn().addUntil(endEffect);
                 card.addLeavesPlayCommand(endEffect);
             }
+            else if (duration.equals("UntilYourNextTurn")) {
+                Singletons.getModel().getGameState().getCleanup().addUntilYourNextTurn(controller, endEffect);
+            }
         }
 
         // TODO: Add targeting to the effect so it knows who it's dealing with

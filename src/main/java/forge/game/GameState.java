@@ -21,6 +21,7 @@ import forge.GameLog;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
+import forge.game.phase.Cleanup;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfCombat;
 import forge.game.phase.EndOfTurn;
@@ -49,6 +50,7 @@ public class GameState {
 
     private Player humanPlayer = new HumanPlayer(GameState.HUMAN_PLAYER_NAME);
     private Player computerPlayer = new AIPlayer(GameState.AI_PLAYER_NAME);
+    private final Cleanup cleanup = new Cleanup();
     private final EndOfTurn endOfTurn = new EndOfTurn();
     private final EndOfCombat endOfCombat = new EndOfCombat();
     private final Untap untap = new Untap();
@@ -118,6 +120,15 @@ public class GameState {
      */
     public final Player[] getPlayers() {
         return new Player[] { this.humanPlayer, this.computerPlayer };
+    }
+
+    /**
+     * Gets the cleanup step.
+     * 
+     * @return the cleanup step
+     */
+    public final Cleanup getCleanup() {
+        return this.cleanup;
     }
 
     /**

@@ -12197,6 +12197,7 @@ src/main/java/forge/game/limited/SealedDeck.java svneol=native#text/plain
 src/main/java/forge/game/limited/SealedDeckFormat.java svneol=native#text/plain
 src/main/java/forge/game/limited/package-info.java svneol=native#text/plain
 src/main/java/forge/game/package-info.java -text
+src/main/java/forge/game/phase/Cleanup.java -text
 src/main/java/forge/game/phase/Combat.java svneol=native#text/plain
 src/main/java/forge/game/phase/CombatUtil.java svneol=native#text/plain
 src/main/java/forge/game/phase/EndOfCombat.java svneol=native#text/plain

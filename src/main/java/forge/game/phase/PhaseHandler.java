@@ -466,6 +466,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     player.resetAttackersDeclaredThisTurn();
                 }
                 this.getPlayerTurn().removeKeyword("Skip all combat phases of this turn.");
+                Singletons.getModel().getGameState().getCleanup().executeUntilTurn(this.getNextTurn());
                 break;
 
             default:
