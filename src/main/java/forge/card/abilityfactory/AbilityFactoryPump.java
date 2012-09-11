@@ -30,6 +30,7 @@ import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
+import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -600,7 +601,7 @@ public class AbilityFactoryPump {
                 return true;
             }
             CardList blockedBy = AllZone.getCombat().getAttackersBlockedBy(c);
-            // For now, Only care the first creature blocked by a card. 
+            // For now, Only care the first creature blocked by a card.
             // TODO Add in better BlockAdditional support
             if (blockedBy.size() != 0 && !CombatUtil.attackerWouldBeDestroyed(blockedBy.get(0))) {
                 return true;
@@ -625,10 +626,10 @@ public class AbilityFactoryPump {
         // if the life of the computer is in danger, try to pump blockers blocking Tramplers
         CardList blockedBy = AllZone.getCombat().getAttackersBlockedBy(c);
         boolean attackerHasTrample = false;
-        for(Card b : blockedBy) {
+        for (Card b : blockedBy) {
             attackerHasTrample |= b.hasKeyword("Trample");
         }
-        
+
         if (phase.getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && phase.isPlayerTurn(AllZone.getHumanPlayer())
                 && c.isBlocking()
@@ -784,7 +785,7 @@ public class AbilityFactoryPump {
         if (!CostUtil.checkRemoveCounterCost(cost, sa.getSourceCard())) {
             return false;
         }
-        
+
         if (AllZone.getStack().isEmpty() && CostUtil.hasTapCost(cost, sa.getSourceCard())) {
                 if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(AllZone.getComputerPlayer())) {
                     return false;
@@ -889,12 +890,12 @@ public class AbilityFactoryPump {
         if (!this.pumpTgtAI(sa, defense, attack, false)) {
             return false;
         }
-        
+
         final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null && !subAb.chkAIDrawback()) {
             return false;
         }
-        
+
         return true;
     } // pumpPlayAI()
 
@@ -1208,7 +1209,7 @@ public class AbilityFactoryPump {
             if (!this.pumpTgtAI(sa, defense, attack, false)) {
                 return false;
             }
-            
+
             final AbilitySub subAb = sa.getSubAbility();
             if (subAb != null && !subAb.chkAIDrawback()) {
                 return false;
@@ -1328,6 +1329,7 @@ public class AbilityFactoryPump {
         final Target tgt = sa.getTarget();
         ArrayList<Player> tgtPlayers = new ArrayList<Player>();
         String pumpRemembered = null;
+
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
             tgtPlayers = tgt.getTargetPlayers();
@@ -1337,6 +1339,27 @@ public class AbilityFactoryPump {
             }
             if (tgtPlayers.isEmpty()) {
                 tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), this.params.get("Defined"), sa);
+            }
+        }
+
+        if (this.params.containsKey("Optional")) {
+            if (sa.getActivatingPlayer().isHuman()) {
+                final StringBuilder targets = new StringBuilder();
+                for (final Card tc : tgtCards) {
+                    targets.append(tc);
+                }
+                final StringBuilder sb = new StringBuilder();
+                final String descBasic = "Apply pump to " + targets + "?";
+                final String pumpDesc = params.containsKey("OptionQuestion")
+                        ? params.get("OptionQuestion").replace("TARGETS", targets) : descBasic;
+                sb.append(pumpDesc);
+                if (!GameActionUtil.showYesNoDialog(sa.getSourceCard(), sb.toString())) {
+                   return;
+                }
+            } else { //Computer player
+                //TODO Add logic here if necessary but I think the AI won't cast
+                //the spell in the first place if it would curse its own creature
+                //and the pump isn't mandatory
             }
         }
 
