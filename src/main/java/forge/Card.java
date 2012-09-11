@@ -7061,7 +7061,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 y = this.getNetDefense();
             } else if (property.startsWith("cmc")) {
                 rhs = property.substring(5);
-                y = this.getCMC();
+                y = CardUtil.getConvertedManaCost(this);
             } else if (property.startsWith("totalPT")) {
                 rhs = property.substring(10);
                 y = this.getNetAttack() + this.getNetDefense();
