@@ -761,6 +761,8 @@ public final class AbilityFactoryAnimate {
                     Singletons.getModel().getGameState().getUpkeep().addUntil(host.getController(), unanimate);
                 } else if (params.containsKey("UntilControllerNextUntap")) {
                     Singletons.getModel().getGameState().getUntap().addUntil(c.getController(), unanimate);
+                } else if (params.containsKey("UntilYourNextTurn")) {
+                    Singletons.getModel().getGameState().getCleanup().addUntilYourNextTurn(host.getController(), unanimate);
                 } else {
                     AllZone.getEndOfTurn().addUntil(unanimate);
                 }
