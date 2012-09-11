@@ -59,8 +59,7 @@ public class ViewWinLose {
             control = new QuestWinLoseHandler(this);
         }
         else if (Constant.Runtime.getGameType() == GameType.Sealed) {
-            System.out.println("Sealed game over!");
-            control = new ControlWinLose(this);
+            control = new GauntletWinLose(this);
         }
         else {
             control = new ControlWinLose(this);
