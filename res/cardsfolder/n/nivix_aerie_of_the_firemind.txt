@@ -1,0 +1,12 @@
+Name:Nivix, Aerie of the Firemind
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Dig | Cost$ T 2 U R | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery.
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played | PumpZone$ Exile | SubAbility$ DBCleanup | UntilYourNextTurn$ True | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | ConditionCompare$ EQ1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nivix_aerie_of_the_firemind.jpg
+End

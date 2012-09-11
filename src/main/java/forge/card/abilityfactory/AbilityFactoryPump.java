@@ -1467,6 +1467,8 @@ public class AbilityFactoryPump {
             } else if (this.params.containsKey("UntilLoseControlOfHost")) {
                 sa.getSourceCard().addLeavesPlayCommand(untilEOT);
                 sa.getSourceCard().addChangeControllerCommand(untilEOT);
+            } else if (this.params.containsKey("UntilYourNextTurn")) {
+                Singletons.getModel().getGameState().getCleanup().addUntilYourNextTurn(sa.getActivatingPlayer(), untilEOT);
             } else {
                 AllZone.getEndOfTurn().addUntil(untilEOT);
             }
