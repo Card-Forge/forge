@@ -567,12 +567,17 @@ public class Combat {
         // todo(sol) add some more solid error checking in here
         // is card an attacker?
         if (this.attackerMap.containsKey(c)) {
+            // Keep track of all of the different maps
             CardList blockers = this.attackerMap.get(c);
             this.attackerMap.remove(c);
             for(Card b : blockers) {
                 this.blockerMap.get(b).remove(c);
             }
+            
+            // Keep track of all of the different maps
+            GameEntity entity = this.attackerToDefender.get(c);
             this.attackerToDefender.remove(c);
+            this.defenderMap.get(entity).remove(c);
         } else if (this.blockerMap.containsKey(c)){ // card is a blocker
             CardList attackers = this.blockerMap.get(c);
             
