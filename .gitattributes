@@ -6110,6 +6110,7 @@ res/cardsfolder/m/moonbow_illusionist.txt -text
 res/cardsfolder/m/moonglove_changeling.txt svneol=native#text/plain
 res/cardsfolder/m/moonglove_extract.txt svneol=native#text/plain
 res/cardsfolder/m/moonglove_winnower.txt svneol=native#text/plain
+res/cardsfolder/m/moonhold.txt -text
 res/cardsfolder/m/moonlight_geist.txt -text
 res/cardsfolder/m/moonlit_strider.txt svneol=native#text/plain
 res/cardsfolder/m/moonlit_wake.txt svneol=native#text/plain
@@ -10187,6 +10188,7 @@ res/cardsfolder/u/unnatural_predation.txt svneol=native#text/plain
 res/cardsfolder/u/unnatural_selection.txt -text
 res/cardsfolder/u/unnatural_speed.txt svneol=native#text/plain
 res/cardsfolder/u/unnerve.txt svneol=native#text/plain
+res/cardsfolder/u/unnerving_assault.txt -text
 res/cardsfolder/u/unquestioned_authority.txt svneol=native#text/plain
 res/cardsfolder/u/unruly_mob.txt -text
 res/cardsfolder/u/unscythe_killer_of_kings.txt -text svneol=unset#text/plain
