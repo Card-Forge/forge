@@ -154,8 +154,9 @@ public enum CDock implements ICDoc {
                     AllZone.getCombat().addAttacker(c);
                 }
             }
-            human.updateObservers();
+            //human.updateObservers();
             // TODO Is this redrawing immediately?
+            FView.SINGLETON_INSTANCE.getFrame().repaint();
         }
     }
 
