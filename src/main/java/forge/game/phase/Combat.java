@@ -51,14 +51,14 @@ public class Combat {
     // value is CardList of blockers
     private final Map<Card, CardList> attackerMap = new TreeMap<Card, CardList>();
     private final Map<Card, CardList> blockerMap = new TreeMap<Card, CardList>();
-    
+
     private final Set<Card> blocked = new HashSet<Card>();
     private final HashMap<Card, CardList> unblockedMap = new HashMap<Card, CardList>();
     private final HashMap<Card, Integer> defendingDamageMap = new HashMap<Card, Integer>();
 
     // Defenders are the Defending Player + Each controlled Planeswalker
     private List<GameEntity> defenders = new ArrayList<GameEntity>();
-    private Map<GameEntity, CardList> defenderMap = new TreeMap<GameEntity, CardList>();
+    private Map<GameEntity, CardList> defenderMap = new HashMap<GameEntity, CardList>();
     private int currentDefender = 0;
     private int nextDefender = 0;
 
@@ -108,13 +108,13 @@ public class Combat {
     public final void initiatePossibleDefenders(final Player defender) {
         this.defenders.clear();
         this.defenderMap.clear();
-        this.defenders.add((GameEntity)defender);
-        this.defenderMap.put((GameEntity)defender, new CardList());
+        this.defenders.add((GameEntity) defender);
+        this.defenderMap.put((GameEntity) defender, new CardList());
         CardList planeswalkers = defender.getCardsIn(ZoneType.Battlefield);
         planeswalkers = planeswalkers.getType("Planeswalker");
         for (final Card pw : planeswalkers) {
-            this.defenders.add((GameEntity)pw);
-            this.defenderMap.put((GameEntity)pw, new CardList());
+            this.defenders.add((GameEntity) pw);
+            this.defenderMap.put((GameEntity) pw, new CardList());
         }
     }
 
@@ -202,7 +202,7 @@ public class Combat {
      */
     public final void setDefenders(final List<GameEntity> newDef) {
         this.defenders = newDef;
-        for(GameEntity entity : this.defenders) {
+        for (GameEntity entity : this.defenders) {
             this.defenderMap.put(entity, new CardList());
         }
     }
@@ -334,7 +334,7 @@ public class Combat {
 
         return attackers;
     }
-    
+
     public final CardList getAttackersByDefenderSlot(int slot) {
         GameEntity entity = this.defenders.get(slot);
         return this.defenderMap.get(entity);
@@ -398,16 +398,16 @@ public class Combat {
     public final GameEntity getDefenderByAttacker(final Card c) {
         return this.attackerToDefender.get(c);
     }
-    
+
     public final GameEntity getDefendingEntity(final Card c) {
         GameEntity defender = this.attackerToDefender.get(c);
-        
+
         if (this.defenders.contains(defender)) {
             return defender;
         }
-        
-        System.out.println("Attacker " + c + "  missing defender " + defender);
-        
+
+        System.out.println("Attacker " + c + " missing defender " + defender);
+
         return null;
     }
 
@@ -545,16 +545,17 @@ public class Combat {
      * 
      * @param attacker
      *            a {@link forge.Card} object.
-     * @return a {@link forge.CardList} object.
+     * @param blockers
+     *            a {@link forge.CardList} object.
      */
     public void setBlockerList(final Card attacker, final CardList blockers) {
         this.attackerMap.put(attacker, blockers);
     }
-    
+
     public void setAttackersBlockedByList(final Card blocker, final CardList attackers) {
         this.blockerMap.put(blocker, attackers);
     }
-    
+
     /**
      * <p>
      * removeFromCombat.
@@ -570,20 +571,20 @@ public class Combat {
             // Keep track of all of the different maps
             CardList blockers = this.attackerMap.get(c);
             this.attackerMap.remove(c);
-            for(Card b : blockers) {
+            for (Card b : blockers) {
                 this.blockerMap.get(b).remove(c);
             }
-            
+
             // Keep track of all of the different maps
             GameEntity entity = this.attackerToDefender.get(c);
             this.attackerToDefender.remove(c);
             this.defenderMap.get(entity).remove(c);
-        } else if (this.blockerMap.containsKey(c)){ // card is a blocker
+        } else if (this.blockerMap.containsKey(c)) { // card is a blocker
             CardList attackers = this.blockerMap.get(c);
-            
+
             boolean stillDeclaring = Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
             this.blockerMap.remove(c);
-            for(Card a : attackers) {
+            for (Card a : attackers) {
                 this.attackerMap.get(a).remove(c);
                 if (stillDeclaring && this.attackerMap.get(a).size() == 0) {
                     this.blocked.remove(a);
@@ -656,11 +657,11 @@ public class Combat {
     private final boolean assignBlockersDamage(boolean firstStrikeDamage) {
         final CardList blockers = this.getAllBlockers();
         boolean assignedDamage = false;
-        
+
         for (final Card blocker : blockers) {
             if (blocker.hasDoubleStrike() || blocker.hasFirstStrike() == firstStrikeDamage) {
                 CardList attackers = this.getAttackersBlockedBy(blocker);
-                
+
                 final int damage = blocker.getNetCombatDamage();
 
                 if (attackers.size() == 0) {
@@ -679,33 +680,33 @@ public class Combat {
                 }
             }
         }
-        
+
         return assignedDamage;
     }
-    
+
     private final boolean assignDamageAsIfNotBlocked(Card attacker) {
-        return attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.") || 
-                (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+        return attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")
+                || (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
                 && GameActionUtil.showYesNoDialog(attacker, "Do you want to assign its combat damage as though it weren't blocked?"));
     }
-    
+
     private final boolean assignAttackersDamage(boolean firstStrikeDamage) {
         this.defendingDamageMap.clear(); // this should really happen in deal damage
         CardList blockers = null;
         final CardList attackers = this.getAttackerList();
         boolean assignedDamage = false;
-        for(final Card attacker : attackers) {
+        for (final Card attacker : attackers) {
             // If attacker isn't in the right first/regular strike section, continue along
             if (!(attacker.hasDoubleStrike() || attacker.hasFirstStrike() == firstStrikeDamage)) {
                 continue;
             }
-            
+
             // If potential damage is 0, continue along
             final int damageDealt = attacker.getNetCombatDamage();
             if (damageDealt <= 0) {
                 continue;
             }
-            
+
             boolean trampler = attacker.hasKeyword("Trample");
             blockers = this.getBlockers(attacker);
             assignedDamage = true;
@@ -733,14 +734,13 @@ public class Combat {
         } // for
         return assignedDamage;
     }
-    
+
     public final boolean assignCombatDamage(boolean firstStrikeDamage) {
         boolean assignedDamage = assignAttackersDamage(firstStrikeDamage);
         assignedDamage |= assignBlockersDamage(firstStrikeDamage);
         return assignedDamage;
     }
-    
-    
+
     /**
      * <p>
      * distributeAIDamage.
@@ -761,7 +761,7 @@ public class Combat {
             this.addDefendingDamage(damage, attacker);
             return;
         }
-        
+
         final boolean hasTrample = attacker.hasKeyword("Trample");
 
         if (block.size() == 1) {
@@ -798,7 +798,7 @@ public class Combat {
             }
         } // 1 blocker
         else {
-            boolean killsAllBlockers = true; 
+            boolean killsAllBlockers = true;
             // Does the attacker deal lethal damage to all blockers
             //Blocking Order now determined after declare blockers
             Card lastBlocker = null;
