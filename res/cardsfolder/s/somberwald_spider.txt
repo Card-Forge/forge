@@ -4,7 +4,8 @@ Types:Creature Spider
 Text:no text
 PT:2/4
 K:Reach
-K:etbCounter:P1P1:2:Morbid:Morbid - CARDNAME enters the battlefield with two +1/+1 counters on it if a creature died this turn.
+K:etbCounter:P1P1:2:CheckSVar$ Morbid:Morbid - CARDNAME enters the battlefield with two +1/+1 counters on it if a creature died this turn.
+SVar:Morbid:Count$Morbid.1.0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somberwald_spider.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/202.jpg

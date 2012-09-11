@@ -5,7 +5,8 @@ Text:no text
 PT:3/2
 K:CARDNAME can't block.
 K:Kicker 4
-K:etbCounter:P1P1:1:isValid Card.kicked:If CARDNAME was kicked, it enters the battlefield with a +1/+1 counter on it.
+K:etbCounter:P1P1:1:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with a +1/+1 counter on it.
+SVar:WasKicked:Count$Kicked.1.0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_aggressor.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/148.jpg

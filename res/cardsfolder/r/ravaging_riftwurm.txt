@@ -5,7 +5,8 @@ Text:no text
 PT:6/6
 K:Kicker 4
 K:Vanishing:2
-K:etbCounter:TIME:3:isValid Card.kicked:If CARDNAME was kicked, it enters the battlefield with three additional time counters on it.
+K:etbCounter:TIME:3:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with three additional time counters on it.
+SVar:WasKicked:Count$Kicked.1.0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravaging_riftwurm.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/135.jpg

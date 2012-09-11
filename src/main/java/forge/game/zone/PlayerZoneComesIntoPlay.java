@@ -140,26 +140,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         if (this.trigger) {
             c.setSickness(true); // summoning sickness
             c.comesIntoPlay();
-            
-            for (String keyword : c.getKeyword()) {
-                if (keyword.startsWith("etbCounter")) {
-                    final String[] p = keyword.split(":");
-                    final Counters counter = Counters.valueOf(p[1]);
-                    final String numCounters = p[2];
-                    final String condition = p.length > 3 ? p[3] : "";
-                    if (GameActionUtil.specialConditionsMet(c, condition)) {
-                        int toAdd = 0;
-                        if (numCounters.equals("X")) {
-                            toAdd = CardFactoryUtil.xCount(c, c.getSVar("X"));
-                        } else {
-                            toAdd = Integer.parseInt(numCounters);
-                        }
-
-                        c.addCounter(counter, toAdd);
-                    }
-                }
-            }
-
 
             if (c.isLand()) {
                 CardList list = player.getCardsIn(ZoneType.Battlefield);

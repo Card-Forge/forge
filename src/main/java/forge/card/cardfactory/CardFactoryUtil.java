@@ -2943,6 +2943,13 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
             }
         }
+        if (sq[0].contains("Kicked")) {
+            if(c.isOptionalAdditionalCostsPaid("Kicker")) {
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
+            } else {
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
+            }
+        }
 
         if (sq[0].contains("GraveyardWithGE20Cards")) {
             if (Math.max(AllZone.getHumanPlayer().getZone(ZoneType.Graveyard).size(),
@@ -4253,7 +4260,7 @@ public class CardFactoryUtil {
 
             card.addSpellAbility(kickedSpell);
         }*/
-
+        
         if (CardFactoryUtil.hasKeyword(card, "Multikicker") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Multikicker");
             if (n != -1) {
@@ -4848,6 +4855,44 @@ public class CardFactoryUtil {
 
                 card.addReplacementEffect(re);
             }
+        }
+        
+        int etbcounter = CardFactoryUtil.hasKeyword(card, "etbCounter");
+        if (etbcounter != -1) {
+            String parse = card.getKeyword().get(etbcounter);
+            card.removeIntrinsicKeyword(parse);
+            
+            String[] splitkw = parse.split(":");
+
+            AbilityFactory af = new AbilityFactory();
+            String desc = "CARDNAME enters the battlefield with " + splitkw[2] + " " + splitkw[1] + " counters on it.";
+            String extraparams = "";
+            String amount = splitkw[2];
+            if(splitkw.length > 3) {
+                if(!splitkw[3].equals("no Condition")) {
+                    extraparams = splitkw[3];
+                }
+            }
+            if(splitkw.length > 4) {
+                desc = splitkw[4];
+            }
+            String repStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1] + " | CounterNum$ " + amount;
+            try {
+                Integer.parseInt(amount);
+            }
+            catch(Exception ignored) {
+                repStr += " | References$ " + amount;
+            }
+            SpellAbility repAb = af.getAbility(repStr, card);
+            setupETBReplacementAbility(repAb);
+
+            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
+            re.setLayer(ReplacementLayer.Other);
+            re.setOverridingAbility(repAb);
+
+            card.addReplacementEffect(re);
         }
 
         return card;
