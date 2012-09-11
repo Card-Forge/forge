@@ -156,7 +156,7 @@ public class GameAction {
                 repl.setHostCard(copied);
             }
         }
-        
+
         if (!suppress) {
             HashMap<String, Object> repParams = new HashMap<String, Object>();
             repParams.put("Event", "Moved");
@@ -287,6 +287,16 @@ public class GameAction {
                 copied.turnFaceUp();
             }
         } else if (zoneTo.is(ZoneType.Battlefield)) {
+            copied.setTimestamp(AllZone.getNextTimestamp());
+            for (String s : copied.getKeyword()) {
+                if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
+                        || s.startsWith("May be played by your opponent")
+                        || s.startsWith("Your opponent may look at this card.")) {
+                    copied.removeAllExtrinsicKeyword(s);
+                    copied.removeHiddenExtrinsicKeyword(s);
+                }
+            }
+        } else if (zoneTo.is(ZoneType.Graveyard)) {
             copied.setTimestamp(AllZone.getNextTimestamp());
             for (String s : copied.getKeyword()) {
                 if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
