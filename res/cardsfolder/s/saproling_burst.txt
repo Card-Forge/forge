@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 K:Fading:7
 A:AB$ Token | Cost$ SubCounter<1/FADE> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenImage$ G X X Saproling | TokenColors$ Green | TokenPower$ 0 | TokenToughness$ 0 |  RememberTokens$ True | TokenKeywords$ This creature's power and toughness are each equal to the number of fade counters on CARDNAME. | SpellDescription$ Put a green Saproling creature token onto the battlefield. It has "This creature's power and toughness are each equal to the number of fade counters on CARDNAME."
-S:Mode$ Continuous | Affected$ Creature.IsRemembered | SetPower$ X | SetToughness$ X | Description$ HIDDEN It has "This creature's power and toughness are each equal to the number of fade counters on Saproling Burst."
+S:Mode$ Continuous | Affected$ Creature.IsRemembered | SetPower$ X | SetToughness$ X
 SVar:X:Count$CardCounters.FADE
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DestroyRemembered | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, destroy all tokens put onto the battlefield with CARDNAME. They can't be regenerated.
 SVar:DestroyRemembered:DB$DestroyAll | Cost$ 0 | ValidCards$ Card.IsRemembered | NoRegen$ True | SubAbility$ DBCleanUp
