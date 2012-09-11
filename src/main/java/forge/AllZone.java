@@ -35,6 +35,8 @@ import forge.game.zone.ZoneType;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
+import forge.game.limited.GauntletMini;
+
 
 /**
  * Please use public getters and setters instead of direct field access.
@@ -57,6 +59,9 @@ public final class AllZone {
 
     /** Global <code>questData</code>. */
     private static forge.quest.QuestController quest = null;
+
+    /** Global <code>gauntletData</code>. */
+    private static forge.game.limited.GauntletMini gauntlet = null;
 
     /** Constant <code>NAME_CHANGER</code>. */
     private static final NameChanger NAME_CHANGER = new NameChanger();
@@ -132,7 +137,21 @@ public final class AllZone {
         return AllZone.quest;
     }
 
+    /**
+     * <p>
+     * getGauntletData.
+     * </p>
+     * 
+     * @return a {@link forge.quest.data.QuestData} object.
+     * @since 1.0.15
+     */
+    public static forge.game.limited.GauntletMini getGauntlet() {
 
+        if (gauntlet == null) {
+            gauntlet = new GauntletMini();
+        }
+        return AllZone.gauntlet;
+    }
 
     /**
      * <p>

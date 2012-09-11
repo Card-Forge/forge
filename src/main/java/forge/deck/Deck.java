@@ -36,6 +36,7 @@ import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
+import forge.game.limited.ReadDraftRankings;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.closures.Lambda1;
@@ -270,6 +271,49 @@ public class Deck extends DeckBase implements Serializable {
         out.addAll(Deck.writeCardPool(this.getSideboard()));
         return out;
     }
+
+    /**
+     * <p>
+     * getDraftValue.
+     * </p>
+     *
+     * @return the combined draft values of cards in the main deck
+     */
+    public double getDraftValue() {
+
+        double value = 0;
+        double divider = 0;
+
+        ReadDraftRankings ranker = new ReadDraftRankings();
+
+        if (this.getMain().isEmpty()) {
+            return 0;
+        }
+
+        double best = 1.0;
+
+        for (int i = 0; i < this.getMain().toForgeCardList().size(); i++) {
+            CardPrinted evalCard = this.getMain().toFlatList().get(i);
+            if (ranker.getRanking(evalCard.getName(), evalCard.getEdition()) != null) {
+                    double add = ranker.getRanking(evalCard.getName(), evalCard.getEdition());
+                // System.out.println(this.getMain().toFlatList().get(i).getName() + " is worth " + add);
+                value += add;
+                divider += 1.0;
+                if (best > add) {
+                    best = add;
+                }
+            }
+        }
+
+        if (divider == 0 || value == 0) {
+            return 0;
+        }
+
+        value /= divider;
+
+        return (20.0 / (best + (2 * value)));
+    }
+
 
     public static final Lambda1<String, Deck> FN_NAME_SELECTOR = new Lambda1<String, Deck>() {
         @Override

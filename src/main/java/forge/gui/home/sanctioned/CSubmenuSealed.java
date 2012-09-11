@@ -13,6 +13,7 @@ import javax.swing.SwingWorker;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
@@ -24,6 +25,7 @@ import forge.game.GameNew;
 import forge.game.GameType;
 import forge.game.limited.SealedDeck;
 import forge.game.limited.SealedDeckFormat;
+import forge.game.limited.GauntletMini;
 import forge.gui.GuiUtils;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -125,37 +127,19 @@ public enum CSubmenuSealed implements ICDoc {
             return;
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
-        });
+        int rounds = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().size();
+        // System.out.println("There are " + rounds + " rounds in this game.");
 
-        final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
-            @Override
-            public Object doInBackground() {
-                Constant.Runtime.HUMAN_DECK[0] = human;
-                Constant.Runtime.COMPUTER_DECK[0] = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().get(0);
-
-                Constant.Runtime.setGameType(GameType.Sealed);
-                
-                GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
-                return null;
-            }
-
-            @Override
-            public void done() {
-                SOverlayUtils.hideOverlay();
-            }
-        };
-        worker.execute();
+        AllZone.getGauntlet().setRounds(rounds);
+        AllZone.getGauntlet().setHumanDeck(human);
+        AllZone.getGauntlet().resetCurrentRound();
+        AllZone.getGauntlet().launch();
     }
 
     /** */
     @SuppressWarnings("unchecked")
     private <T extends DeckBase> void setupSealed() {
+
         final ArrayList<String> sealedTypes = new ArrayList<String>();
         sealedTypes.add("Full Cardpool");
         sealedTypes.add("Block / Set");
@@ -186,6 +170,16 @@ public enum CSubmenuSealed implements ICDoc {
             return;
         }
 
+        final Integer[] integers = new Integer[5];
+
+        for (int i = 0; i <= 4; i++) {
+            integers[i] = Integer.valueOf(i + 1);
+        }
+
+        Integer rounds = GuiUtils.chooseOne("How many rounds?", integers);
+
+        // System.out.println("You selected " + rounds + " rounds.");
+
         final String sDeckName = JOptionPane.showInputDialog(null,
                 ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_MSG),
                 ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_TTL),
@@ -195,10 +189,12 @@ public enum CSubmenuSealed implements ICDoc {
             return;
         }
 
-        // May check for name uniqueness here
+        // NOTE: Here we should check if a similarly-named tournament already exists,
+        // and if it does, delete it first! -BBU
+
 
         final ItemPool<CardPrinted> sDeck = sd.getCardpool();
-        final ItemPool<CardPrinted> sDeck2 = sd.getCardpool();
+        ItemPool<CardPrinted> aiDecks = sd.getCardpool();
 
         final Deck deck = new Deck(sDeckName);
         deck.getSideboard().addAll(sDeck);
@@ -209,7 +205,17 @@ public enum CSubmenuSealed implements ICDoc {
 
         final DeckGroup sealed = new DeckGroup(sDeckName);
         sealed.setHumanDeck(deck);
-        sealed.addAiDeck(new SealedDeck(sDeck2.toFlatList()).buildDeck());
+        for (int i = 0; i < rounds; i++) {
+            if (i > 0) {
+                // Re-randomize for AI decks beyond the first...
+                aiDecks = sd.getCardpool();
+            }
+            sealed.addAiDeck(new SealedDeck(aiDecks.toFlatList()).buildDeck());
+        }
+
+        // Rank the AI decks
+        sealed.rankAiDecks();
+
         Singletons.getModel().getDecks().getSealed().add(sealed);
 
         final ACEditorBase<?, T> editor = (ACEditorBase<?, T>) new CEditorLimited(

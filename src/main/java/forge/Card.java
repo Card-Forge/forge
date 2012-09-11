@@ -8787,8 +8787,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
 
                 if (kw.equals("Protection from colored spells")
-                        && (source.isInstant() || source.isSorcery()
-                                || (source.isAura() && !source.isInZone(ZoneType.Battlefield)))
+                        && (source.isInstant() || source.isSorcery() || source.isAura())
                         && CardFactoryUtil.isColored(source)) {
                     return true;
                 }

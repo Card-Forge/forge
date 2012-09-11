@@ -49,7 +49,7 @@ public enum VSubmenuSealed implements IVSubmenu {
     private final DeckLister lstDecks   = new DeckLister(GameType.Sealed);
     private final JLabel btnBuildDeck   = new FLabel.Builder()
         .fontSize(16)
-        .opaque(true).hoverable(true).text("Build a Sealed Deck").build();
+        .opaque(true).hoverable(true).text("Build a Sealed Deck Game").build();
     private final JLabel btnDirections = new FLabel.Builder()
         .fontSize(16)
         .text("Click For Directions").fontAlign(SwingConstants.CENTER).build();

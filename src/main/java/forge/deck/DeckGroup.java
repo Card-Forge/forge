@@ -18,6 +18,8 @@
 package forge.deck;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
+// import java.lang.Double;
 import java.util.List;
 
 
@@ -42,7 +44,7 @@ public class DeckGroup extends DeckBase {
 
     private static final long serialVersionUID = -1628725522049635829L;
     private Deck humanDeck;
-    private final List<Deck> aiDecks = new ArrayList<Deck>();
+    private List<Deck> aiDecks = new ArrayList<Deck>();
 
     /**
      * Gets the human deck.
@@ -69,6 +71,35 @@ public class DeckGroup extends DeckBase {
      */
     public final void setHumanDeck(final Deck humanDeck) {
         this.humanDeck = humanDeck;
+    }
+
+    /**
+     * Evaluate and 'rank' the ai decks.
+     *
+     * 
+     */
+    public final void rankAiDecks() {
+        if (this.aiDecks.size() < 2) {
+            return;
+        }
+
+        // double [] draftValues = new double [this.aiDecks.size()];
+        TreeMap<Double, Deck> draftData = new TreeMap<Double, Deck>();
+
+        for (int i = 0; i < this.aiDecks.size(); i++) {
+            // draftValues[i] = this.aiDecks.get(i).getDraftValue();
+            draftData.put(new Double(this.aiDecks.get(i).getDraftValue()), this.aiDecks.get(i));
+            // System.out.println("\nAI Deck " + i  + "(" + this.aiDecks.get(i) + ") has draft value:" + this.aiDecks.get(i).getDraftValue() + "\n\n");
+        }
+
+        List<Deck> sortedData = new ArrayList<Deck>(draftData.values());
+
+        for (int j = 0; j < sortedData.size(); j++) {
+            Deck getDeck = sortedData.get(j);
+        }
+
+        this.aiDecks = sortedData;
+
     }
 
     @Override
