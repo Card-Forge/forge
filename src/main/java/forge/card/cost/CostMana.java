@@ -259,7 +259,7 @@ public class CostMana extends CostPart {
         final Input payX = new InputMana() {
             private static final long serialVersionUID = -6900234444347364050L;
             private int xPaid = 0;
-            private String colorsPaid = "";
+            private String colorsPaid = sa.getSourceCard().getColorsPaid();
             private ManaCost manaCost = new ManaCost(Integer.toString(numX));
 
             @Override
