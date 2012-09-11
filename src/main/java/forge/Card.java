@@ -104,6 +104,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private GameEntity enchanting = null;
     private ArrayList<String> prevType = new ArrayList<String>();
     private ArrayList<String> choicesMade = null;
+    private ArrayList<String> optionalAdditionalCostsPaid = null;
 
     // changes by AF animate and continuous static effects
     private ArrayList<CardType> changedCardTypes = new ArrayList<CardType>();
@@ -136,7 +137,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private boolean canMorph = false;
     private boolean canCounter = true;
-    private boolean kicked = false;
     private boolean evoked = false;
 
     private boolean levelUp = false;
@@ -5998,25 +5998,47 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * Setter for the field <code>kicked</code>.
+     * optionalAdditionalCostsPaid.
      * </p>
      * 
-     * @param b
-     *            a boolean.
+     * @param cost
+     *            a String.
      */
-    public final void setKicked(final boolean b) {
-        this.kicked = b;
+    public final void addOptionalAdditionalCostsPaid(final String cost) {
+        if (optionalAdditionalCostsPaid == null) {
+            optionalAdditionalCostsPaid = new ArrayList<String>();
+        }
+        this.optionalAdditionalCostsPaid.add(cost);
     }
 
     /**
      * <p>
-     * isKicked.
+     * isOptionalAdditionalCostsPaid.
      * </p>
      * 
      * @return a boolean.
      */
-    public final boolean isKicked() {
-        return this.kicked;
+    public final boolean isOptionalAdditionalCostsPaid(final String cost) {
+        if (optionalAdditionalCostsPaid == null) {
+            return false;
+        }
+        for (String s : optionalAdditionalCostsPaid) {
+            if (s.startsWith(cost)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * <p>
+     * isOptionalAdditionalCostsPaid.
+     * </p>
+     * @return 
+     * 
+     */
+    public final ArrayList<String> getOptionalAdditionalCostsPaid() {
+        return this.optionalAdditionalCostsPaid;
     }
 
     /**
@@ -7144,11 +7166,18 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("kicked")) {
-            if (!this.isKicked()) {
-                return false;
+            if (property.equals("kicked")) {
+                if (!this.isOptionalAdditionalCostsPaid("Kicker")) {
+                    return false;
+                }
+            } else {
+                String s = "Kicker " + property.split("kicked ")[1];
+                if (!this.isOptionalAdditionalCostsPaid(s)) {
+                    return false;
+                }
             }
         } else if (property.startsWith("notkicked")) {
-            if (this.isKicked()) {
+            if (this.isOptionalAdditionalCostsPaid("Kicker")) {
                 return false;
             }
         } else if (property.startsWith("evoked")) {

@@ -2019,11 +2019,11 @@ public final class GameActionUtil {
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(GameActionUtil.combineCosts(newSA, keyword.substring(7)));
                     newSA.setManaCost("");
-                    newSA.setDescription(sa.getDescription() + " (Kicked)");
+                    newSA.setDescription(sa.getDescription() + " (" + keyword + ")");
                     ArrayList<String> newoacs = new ArrayList<String>();
                     newoacs.addAll(sa.getOptionalAdditionalCosts());
                     newSA.setOptionalAdditionalCosts(newoacs);
-                    newSA.addOptionalAdditionalCosts("Kicked");
+                    newSA.addOptionalAdditionalCosts(keyword);
                     newAbilities.add(newAbilities.size(), newSA);
                 }
                 abilities.addAll(0, newAbilities);

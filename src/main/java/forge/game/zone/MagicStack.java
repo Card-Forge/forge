@@ -464,9 +464,9 @@ public class MagicStack extends MyObservable {
             Singletons.getModel().getGameAction().checkStateEffects();
             //GuiDisplayUtil.updateGUI();
         } else {
-            if (sp.isKickerAbility()) {
+            /*if (sp.isKickerAbility()) {
                 sp.getSourceCard().setKicked(true);
-            }
+            }*/
             if (sp.getSourceCard().isCopiedSpell()) {
                 this.push(sp);
             } else if (!sp.isMultiKicker() && !sp.isReplicate() && !sp.isXCost()) {

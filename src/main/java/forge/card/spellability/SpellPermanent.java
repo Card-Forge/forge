@@ -418,9 +418,25 @@ public class SpellPermanent extends Spell {
                         continue;
                     }
                 } else if (params.get("ValidCard").contains("kicked")) {
-                    if(!sa.isKicked()) {
-                        continue;
+                    if (params.get("ValidCard").equals("kicked")) {
+                        if(!sa.isKicked()) {
+                            continue;
+                        }
+                    } else {
+                        String s = "Kicker " + params.get("ValidCard").split("kicked ")[1];
+                        boolean rightKicker = false;
+                        if (sa.getOptionalAdditionalCosts() != null) {
+                            for (String string : sa.getOptionalAdditionalCosts()) {
+                                if (string.startsWith(s)) {
+                                    rightKicker = true;
+                                }
+                            }
+                        }
+                        if (!rightKicker) {
+                            continue;
+                        }
                     }
+                    
                 }
             }
 
@@ -474,8 +490,9 @@ public class SpellPermanent extends Spell {
     public void resolve() {
         Card c = this.getSourceCard();
         c.addController(this.getActivatingPlayer());
-        if (this.isKicked()) {
-            c.setKicked(true);
+        if (this.getOptionalAdditionalCosts() != null) {
+            for (String s : this.getOptionalAdditionalCosts())
+            c.addOptionalAdditionalCostsPaid(s);
         }
         Singletons.getModel().getGameAction().moveTo(this.getActivatingPlayer().getZone(ZoneType.Battlefield), c);
     }

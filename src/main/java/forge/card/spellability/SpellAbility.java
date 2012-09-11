@@ -460,7 +460,23 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isKicked() {
-        return this.optionalAdditionalCosts.contains("Kicked");
+        return isOptionalAdditionalCostPaid("Kicker");
+    }
+    
+    /**
+     * <p>
+     * isOptionalAdditionalCostPaid.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public boolean isOptionalAdditionalCostPaid(String cost) {
+        for (String s : this.optionalAdditionalCosts) {
+            if (s.startsWith(cost)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

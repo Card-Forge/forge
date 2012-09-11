@@ -200,8 +200,10 @@ public class CardFactory implements CardFactoryInterface {
         if (bCopyDetails) {
             c.addXManaCostPaid(original.getXManaCostPaid());
             c.addMultiKickerMagnitude(original.getMultiKickerMagnitude());
-            if (original.isKicked()) {
-                c.setKicked(true);
+            if (original.getOptionalAdditionalCostsPaid() != null) {
+                for (String cost : original.getOptionalAdditionalCostsPaid()) {
+                    c.addOptionalAdditionalCostsPaid(cost);
+                }
             }
             c.addReplicateMagnitude(original.getReplicateMagnitude());
             if (sa.isReplicate()) {
