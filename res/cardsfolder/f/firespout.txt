@@ -1,0 +1,13 @@
+Name:Firespout
+ManaCost:2 RG
+Types:Sorcery
+Text:no text
+A:SP$ DamageAll | Cost$ 2 RG | ValidCards$ Creature.withoutFlying | NumDmg$ 3 | ConditionManaSpent$ R | SubAbility$ GPaid | SpellDescription$ CARDNAME deals 3 damage to each creature without flying if R was spent to cast CARDNAME and 3 damage to each creature with flying if G was spent to cast it. (Do both if R G was spent.)
+SVar:GPaid:DB$ DamageAll | ValidCards$ Creature.withFlying | NumDmg$ 3 | ConditionManaSpent$ G
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/firespout.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/199.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/205.jpg
+Oracle:Firespout deals 3 damage to each creature without flying if {R} was spent to cast Firespout and 3 damage to each creature with flying if {G} was spent to cast it. (Do both if {R}{G} was spent.)
+End

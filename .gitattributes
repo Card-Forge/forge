@@ -3251,6 +3251,7 @@ res/cardsfolder/f/fires_of_yavimaya.txt svneol=native#text/plain
 res/cardsfolder/f/firescreamer.txt svneol=native#text/plain
 res/cardsfolder/f/fireshrieker.txt svneol=native#text/plain
 res/cardsfolder/f/fireslinger.txt svneol=native#text/plain
+res/cardsfolder/f/firespout.txt -text
 res/cardsfolder/f/firestorm.txt svneol=native#text/plain
 res/cardsfolder/f/firestorm_hellkite.txt svneol=native#text/plain
 res/cardsfolder/f/firewake_sliver.txt svneol=native#text/plain
@@ -4741,6 +4742,7 @@ res/cardsfolder/i/intruder_alarm.txt svneol=native#text/plain
 res/cardsfolder/i/intuition.txt svneol=native#text/plain
 res/cardsfolder/i/inundate.txt svneol=native#text/plain
 res/cardsfolder/i/invader_parasite.txt -text
+res/cardsfolder/i/invert_the_skies.txt -text
 res/cardsfolder/i/invigorate.txt -text
 res/cardsfolder/i/invigorating_boon.txt svneol=native#text/plain
 res/cardsfolder/i/invigorating_falls.txt svneol=native#text/plain
