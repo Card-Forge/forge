@@ -59,6 +59,8 @@ public class ComputerUtilBlock {
                                                            // blockers
     /** Constant <code>diff=0</code>. */
     private static int diff = 0;
+    
+    private static boolean lifeInDanger = false;
 
     /**
      * <p>
@@ -462,7 +464,7 @@ public class ComputerUtilBlock {
                             && !(c.hasKeyword("First Strike") || c.hasKeyword("Double Strike"))) {
                         return false;
                     }
-                    return (CardFactoryUtil.evaluateCreature(c) + ComputerUtilBlock.getDiff()) < CardFactoryUtil
+                    return lifeInDanger || (CardFactoryUtil.evaluateCreature(c) + ComputerUtilBlock.getDiff()) < CardFactoryUtil
                             .evaluateCreature(attacker);
                 }
             });
@@ -487,12 +489,13 @@ public class ComputerUtilBlock {
                 final int damageNeeded = attacker.getKillDamage()
                         + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
                 if ((damageNeeded > currentDamage || CombatUtil.needsBlockers(attacker) > blockGang.size())
-                        && !(damageNeeded > (currentDamage + additionalDamage))
+                        && (!(damageNeeded > currentDamage + additionalDamage)
                         // The attacker will be killed
-                        && (((absorbedDamage2 + absorbedDamage) > attacker.getNetCombatDamage())
+                        && (absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage()
                         // only one blocker can be killed
-                        || (((currentValue + addedValue) - 50) <= CardFactoryUtil.evaluateCreature(attacker)))
-                        // attacker is worth more
+                        || currentValue + addedValue - 50 <= CardFactoryUtil.evaluateCreature(attacker)))
+                        // or attacker is worth more
+                        || (lifeInDanger && CombatUtil.lifeInDanger(combat))
                         && CombatUtil.canBlock(attacker, blocker, combat)) {
                     // this is needed for attackers that can't be blocked by
                     // more than 1
@@ -837,6 +840,7 @@ public class ComputerUtilBlock {
         // == 2. If the AI life would still be in danger make a safer approach
         // ==
         if (CombatUtil.lifeInDanger(combat)) {
+            lifeInDanger = true;
             combat = ComputerUtilBlock.resetBlockers(combat, possibleBlockers); // reset
                                                                                 // every
             // block
