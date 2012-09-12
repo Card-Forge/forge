@@ -115,8 +115,7 @@ public class InputBlock extends Input {
                 
                 CardList attackersBlocked = this.allBlocking.get(card);
                 if (!attackersBlocked.contains(this.currentAttacker) && 
-                        CombatUtil.canBlock(this.currentAttacker, card, AllZone.getCombat()) &&
-                        CombatUtil.canBlockMoreCreatures(card, attackersBlocked)) {
+                        CombatUtil.canBlock(this.currentAttacker, card, AllZone.getCombat())) {
                     attackersBlocked.add(this.currentAttacker);
                     AllZone.getCombat().addBlocker(this.currentAttacker, card);
                     reminder = false;

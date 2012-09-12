@@ -377,7 +377,6 @@ public class ComputerUtilBlock {
             }
             if (blocker != null) {
                 currentAttackers.remove(attacker);
-                ComputerUtilBlock.getBlockersLeft().remove(blocker);
                 combat.addBlocker(attacker, blocker);
             }
         }
@@ -430,7 +429,6 @@ public class ComputerUtilBlock {
                                 currentAttackers.remove(attacker);
                                 for (final Card b : blockGang) {
                                     if (CombatUtil.canBlock(attacker, blocker, combat)) {
-                                        ComputerUtilBlock.getBlockersLeft().remove(b);
                                         combat.addBlocker(attacker, b);
                                     }
                                 }
@@ -501,10 +499,8 @@ public class ComputerUtilBlock {
                     // more than 1
                     currentAttackers.remove(attacker);
                     combat.addBlocker(attacker, blocker);
-                    ComputerUtilBlock.getBlockersLeft().remove(blocker);
                     if (CombatUtil.canBlock(attacker, leader, combat)) {
                         combat.addBlocker(attacker, leader);
-                        ComputerUtilBlock.getBlockersLeft().remove(leader);
                     }
                     break;
                 }
@@ -543,7 +539,6 @@ public class ComputerUtilBlock {
                 final Card blocker = CardFactoryUtil.getWorstCreatureAI(killingBlockers);
                 combat.addBlocker(attacker, blocker);
                 currentAttackers.remove(attacker);
-                ComputerUtilBlock.getBlockersLeft().remove(blocker);
             }
         }
         ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers));
@@ -579,7 +574,6 @@ public class ComputerUtilBlock {
                 combat.addBlocker(attacker, blocker);
                 currentAttackers.remove(attacker);
                 ComputerUtilBlock.getBlockedButUnkilled().add(attacker);
-                ComputerUtilBlock.getBlockersLeft().remove(blocker);
             }
         }
         ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers));
@@ -602,10 +596,7 @@ public class ComputerUtilBlock {
         CardList chumpBlockers;
 
         CardList tramplingAttackers = ComputerUtilBlock.getAttackers().getKeyword("Trample");
-        tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); // Don't
-                                                                                   // make
-                                                                                   // it
-                                                                                   // worse
+        tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); // Don't make it worse
         tramplingAttackers = tramplingAttackers
                 .getKeywordsDontContain("CARDNAME can't be blocked by more than one creature.");
         // TODO - should check here for a "rampage-like" trigger that replaced
@@ -622,15 +613,14 @@ public class ComputerUtilBlock {
 
             chumpBlockers = ComputerUtilBlock
                     .getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat);
+            chumpBlockers.removeAll(combat.getBlockers(attacker));
             for (final Card blocker : chumpBlockers) {
                 // Add an additional blocker if the current blockers are not
                 // enough and the new one would suck some of the damage
-                if ((CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,
-                        combat.getBlockers(attacker)))
-                        && (CombatUtil.shieldDamage(attacker, blocker) > 0)
+                if (CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker, combat.getBlockers(attacker))
+                        && CombatUtil.shieldDamage(attacker, blocker) > 0
                         && CombatUtil.canBlock(attacker, blocker, combat) && CombatUtil.lifeInDanger(combat)) {
                     combat.addBlocker(attacker, blocker);
-                    ComputerUtilBlock.getBlockersLeft().remove(blocker);
                 }
             }
         }
@@ -665,6 +655,7 @@ public class ComputerUtilBlock {
 
         for (final Card attacker : targetAttackers) {
             blockers = ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat);
+            blockers.removeAll(combat.getBlockers(attacker));
 
             // Try to use safe blockers first
             safeBlockers = ComputerUtilBlock.getSafeBlockers(attacker, blockers, combat);
@@ -677,7 +668,6 @@ public class ComputerUtilBlock {
                         && (CombatUtil.dealsDamageAsBlocker(attacker, blocker) > 0)
                         && CombatUtil.canBlock(attacker, blocker, combat)) {
                     combat.addBlocker(attacker, blocker);
-                    ComputerUtilBlock.getBlockersLeft().remove(blocker);
                 }
                 blockers.remove(blocker); // Don't check them again next
             }
@@ -880,13 +870,13 @@ public class ComputerUtilBlock {
                                                                     // necessary
                                                                     // trade
             }
-            // blocks if life is in danger
+            
             if (!CombatUtil.lifeInDanger(combat)) {
                 combat = ComputerUtilBlock.makeGoodBlocks(combat);
             }
             // Reinforce blockers blocking attackers with trample if life is
             // still in danger
-            if (CombatUtil.lifeInDanger(combat)) {
+            else {
                 combat = ComputerUtilBlock.reinforceBlockersAgainstTrample(combat);
             }
             combat = ComputerUtilBlock.makeGangBlocks(combat);

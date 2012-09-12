@@ -90,6 +90,10 @@ public class CombatUtil {
         if (combat == null) {
             return CombatUtil.canBlock(blocker);
         }
+        
+        if (!CombatUtil.canBlockMoreCreatures(blocker, combat.getAttackersBlockedBy(blocker))) {
+            return false;
+        }
 
         for (final Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
             for (final String keyword : c.getKeyword()) {
@@ -2336,6 +2340,14 @@ public class CombatUtil {
         // consider Damage Prevention/Replacement
         defenderDamage = attacker.predictDamage(defenderDamage, possibleAttackerPrevention, defender, true);
         attackerDamage = defender.predictDamage(attackerDamage, possibleDefenderPrevention, attacker, true);
+
+        if (combat != null) {
+            for (Card atkr : combat.getAttackersBlockedBy(defender)) {
+                if (!atkr.equals(attacker)) {
+                    attackerDamage += defender.predictDamage(atkr.getNetCombatDamage(), 0, atkr, true);
+                }
+            }
+        }
 
         final int defenderLife = defender.getKillDamage()
                 + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender);
