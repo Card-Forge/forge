@@ -106,14 +106,17 @@ Added the following cards to the Return to Ravnica branch (These cards are not y
 Abrupt Decay
 Archon of the Triumvirate
 Auger Spree
+Azorius Guildgate
 Azorius Justiciar
 Chromatic Lantern
 Collective Blessing
+Cyclonic Rift
 Deadbridge Goliath
 Dreadbore
 Dreg Mangler
 Dryad Militant
 Eyes in the Skies
+Faerie Imposter
 Fencing Ace
 Goblin Electromancer
 Golgari Guildgate
@@ -136,6 +139,7 @@ Slitherhead
 Sluiceway Scorpion
 Supreme Verdict
 Transguild Promenade
+Vraska the Unseen
 Wayfaring Temple
 Worldspine Wurm
 
@@ -154,7 +158,10 @@ Moonhold
 Cankerous Thirst
 Nivix, Aerie of the Firemind
 Sunscape Battlemage
-Vraska the Unseen
+Foriysian Brigade
+Rite of Consumption
+Wall of Glare
+
 
 
 end
