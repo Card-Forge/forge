@@ -387,8 +387,9 @@ public class ComputerUtilAttack {
 
         CardListUtil.sortAttack(this.attackers);
 
+        final CardList unblockedAttackers = new CardList();
         final CardList remainingAttackers = new CardList(this.attackers);
-        final CardList blockableAttackers = new CardList(this.attackers);
+        final CardList remainingBlockers = new CardList(this.blockers);
         final Player human = AllZone.getHumanPlayer();
         final Player computer = AllZone.getComputerPlayer();
 
@@ -396,14 +397,35 @@ public class ComputerUtilAttack {
             if (!CombatUtil.canBeBlocked(this.attackers.get(i), this.blockers)
                     || this.attackers.get(i).hasKeyword("You may have CARDNAME assign its combat damage as though"
                             + " it weren't blocked.")) {
-                blockableAttackers.remove(this.attackers.get(i));
+                unblockedAttackers.add(this.attackers.get(i));
+            }
+        }
+
+        for (Card blocker : this.blockers) {
+            if (blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
+                for (Card attacker : this.attackers) {
+                    if (CombatUtil.canBlock(attacker, blocker)) {
+                        remainingAttackers.remove(attacker);
+                    }
+                }
+                remainingBlockers.remove(blocker);
             }
         }
 
         // presumes the Human will block
-        for (int i = 0; (i < this.blockers.size()) && (i < blockableAttackers.size()); i++) {
-            remainingAttackers.remove(blockableAttackers.get(i));
+        for (Card blocker : remainingBlockers) {
+            if (remainingAttackers.isEmpty()) {
+                break;
+            }
+            if (blocker.hasKeyword("CARDNAME can block an additional creature.")) {
+                remainingAttackers.remove(0);
+                if (remainingAttackers.isEmpty()) {
+                    break;
+                }
+            }
+            remainingAttackers.remove(0);
         }
+        unblockedAttackers.addAll(remainingAttackers);
 
         if ((CombatUtil.sumDamageIfUnblocked(remainingAttackers, human) >= human.getLife())
                 && AllZone.getHumanPlayer().canLoseLife()
@@ -626,8 +648,15 @@ public class ComputerUtilAttack {
         // determine if the ai outnumbers the player
         final int outNumber = computerForces - humanForces;
 
+        for (Card blocker : this.blockers) {
+            if (blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
+                aiLifeToPlayerDamageRatio--;
+            }
+        }
+
         // compare the ratios, higher = better for ai
         final double ratioDiff = aiLifeToPlayerDamageRatio - humanLifeToDamageRatio;
+
         /*
          * System.out.println(String.valueOf(ratioDiff) +
          * " = ratio difference, higher = better for ai");
@@ -732,7 +761,7 @@ public class ComputerUtilAttack {
         // totals and other considerations
         // some bad "magic numbers" here, TODO replace with nice descriptive
         // variable names
-        if (doAttritionalAttack) { 
+        if (ratioDiff > 0 && doAttritionalAttack) { 
             this.aiAggression = 5; // attack at all costs
         } else if (ratioDiff >= 1 && (humanLifeToDamageRatio < 2 || outNumber > 0)) {
             this.aiAggression = 4; // attack expecting to trade or damage player.
