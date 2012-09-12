@@ -5,6 +5,40 @@ Forge Beta: 0#-0#-2012 ver 1.2.14
 11### cards in total.
 
 
+
+
+--
+
+On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
+
+Several people have noticed that the cards displayed on the battlefield will fail to be displayed when the number of cards on the battlefield increases. Maximizing the human panel can help to re-display the cards.
+
+Some time was spent turning the static ETB triggers into the proper ETB replacement effects they should be, mainly to interact correctly with eachother. This work is not yet finished. As a result there is currently some inconsistencies with "Enters the battlefield with counters" (Not incredibly noticeable).
+
+It seems like the front face of double faced cards aren't triggering properly, but the back face and single faced cards are.
+
+A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there are two remaining issues that we hope will be addressed in the near future.
+
+1. Leave play triggers don't work correct for clones.
+2. Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
+
+The work on the new UI is now finished. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
+
+We are now using a different system for our snapshot and beta releases. Unfortunately, this new system builds a jar file which does not accurately display the SVN revision number.
+
+Forge may not be fully java 7 compatible at this time. We recommend that people downgrade to java 6.
+
+--
+
+The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove useful. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
+
+The archive format used for the Forge distribution is ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to extract/decompress these ".tar.bz2" archives. We recommend that you extract/decompress the Forge archive into a new and unused folder.
+
+Some people use the Windows application 7zip. This utility can be found at http://www.7-zip.org/download.html. Mac users can double click on the archive and the application Archive Utility will launch and extract the archive. Mac users do not need to download a separate utility.
+
+
+Fixes/Features:
+
 - Expanded UntapYType cost for Benthic Explorers
 - Upgraded Combat Blockers/Assignment to adhere to latest rules.
 - Upgraded MultipleBlockers/AssignDamage UI Element to automate a lot of the monotonous process
@@ -41,41 +75,25 @@ Forge Beta: 0#-0#-2012 ver 1.2.14
 - Fix potential combat panel display issue by not removing attackers properly
 - Removing static ability description of Saproling Burst, since it made its DisplayPanel read weird
 - Fixed X costs resetting colors paid
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.- Updated the quest deck Radioactive Man 3.
+- Added duration "UntilYourNextTurn" to Effect AF
+- Fix cleanup crash with planeswalkers in play
+- RtR Branch - removed extraeneous ststic ability reference from Jace's first ability
+- Added duration "UntilYourNextTurn" to Pump AF
+- SetInfo and Oracle for Nivix, Aerie of the Firemind
+- fix for sorceries and instants with pumped "May be Played" keyword not clearing these keywords when they're cast.
+- Sealed Deck mini tournaments, stage 1 (no sideboarding yet).
+- Fix for the ViewWinLose / Sealed Deck.
+- Made Phyrexian Metamorph's clone etb effect optional
+- Added support for multiple Kicker abilities to permanents.
+- Added duration "UntilYourNextTurn" to Animate AF
+- Fixed cmc in hasProperty not treating X spells on the stack correctly.
+- Converted etbCounter keyword to act like ETBReplacement. (Slight syntax change.)
+- Improved SVar usage warning.
+- Removed unused method GameActionUtil.specialConditionsMet()
+- Fixed Rimescale Dragon
+- Added Vraska to Planeswalker types
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-
---
-
-On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
-
-Several people have noticed that the cards displayed on the battlefield will fail to be displayed when the number of cards on the battlefield increases. Maximizing the human panel can help to re-display the cards.
-
-Some time was spent turning the static ETB triggers into the proper ETB replacement effects they should be, mainly to interact correctly with eachother. This work is not yet finished. As a result there is currently some inconsistencies with "Enters the battlefield with counters" (Not incredibly noticeable).
-
-It seems like the front face of double faced cards aren't triggering properly, but the back face and single faced cards are.
-
-A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there are two remaining issues that we hope will be addressed in the near future.
-
-1. Leave play triggers don't work correct for clones.
-2. Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
-
-The work on the new UI is now finished. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
-
-We are now using a different system for our snapshot and beta releases. Unfortunately, this new system builds a jar file which does not accurately display the SVN revision number.
-
-Forge may not be fully java 7 compatible at this time. We recommend that people downgrade to java 6.
-
---
-
-The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove useful. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
-
-The archive format used for the Forge distribution is ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to extract/decompress these ".tar.bz2" archives. We recommend that you extract/decompress the Forge archive into a new and unused folder.
-
-Some people use the Windows application 7zip. This utility can be found at http://www.7-zip.org/download.html. Mac users can double click on the archive and the application Archive Utility will launch and extract the archive. Mac users do not need to download a separate utility.
-
-
-Fixes/Features:
-
-
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -86,7 +104,9 @@ Many people helped with this version. A special thank you goes out to them. (Att
 Added the following cards to the Return to Ravnica branch (These cards are not yet available in this shapshot/beta build):
 
 Abrupt Decay
+Archon of the Triumvirate
 Auger Spree
+Azorius Justiciar
 Chromatic Lantern
 Collective Blessing
 Deadbridge Goliath
@@ -102,6 +122,7 @@ Grisly Salvage
 Guttersnipe
 Hypersonic Dragon
 Izzet Guildgate
+Jace, Architect of Thought
 Judge's Familiar
 Lotleth Troll
 Loxodon Smiter
@@ -131,6 +152,9 @@ Invert the Skies
 Unnerving Assault
 Moonhold
 Cankerous Thirst
+Nivix, Aerie of the Firemind
+Sunscape Battlemage
+Vraska the Unseen
 
 
 end
