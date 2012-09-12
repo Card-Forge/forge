@@ -241,6 +241,13 @@ public class SpellPermanent extends Spell {
             sourceCard.addComesIntoPlayCommand(this.championCommandComes);
             sourceCard.addLeavesPlayCommand(this.championCommandLeavesPlay);
         }
+        
+        if(this.getManaCost().contains("X"))
+        {
+            if(!this.getSourceCard().getSVar("X").equals("")) {
+                this.setSVar("X", this.getSourceCard().getSVar("X"));
+            }
+        }
 
     } // Spell_Permanent()
 

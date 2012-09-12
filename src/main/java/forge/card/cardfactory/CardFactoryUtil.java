@@ -4859,6 +4859,9 @@ public class CardFactoryUtil {
         
         int etbcounter = CardFactoryUtil.hasKeyword(card, "etbCounter");
         if (etbcounter != -1) {
+            if(card.getName().equals("Primordial Hydra")) {
+                System.out.println("Apoc");
+            }
             String parse = card.getKeyword().get(etbcounter);
             card.removeIntrinsicKeyword(parse);
             
@@ -4880,7 +4883,7 @@ public class CardFactoryUtil {
             try {
                 Integer.parseInt(amount);
             }
-            catch(Exception ignored) {
+            catch(NumberFormatException ignored) {
                 repStr += " | References$ " + amount;
             }
             SpellAbility repAb = af.getAbility(repStr, card);

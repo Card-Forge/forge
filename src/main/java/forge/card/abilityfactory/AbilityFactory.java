@@ -1599,7 +1599,7 @@ public class AbilityFactory {
                     System.out.println("Ability:" + ability.toString());
                     svarval = card.getSVar(amount);
                 }
-                catch(Exception ignored) {}
+                catch(NumberFormatException ignored) {}
 
                 
             }
