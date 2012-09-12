@@ -3436,6 +3436,7 @@ res/cardsfolder/f/forgotten_ancient.txt svneol=native#text/plain
 res/cardsfolder/f/forgotten_cave.txt svneol=native#text/plain
 res/cardsfolder/f/forgotten_harvest.txt svneol=native#text/plain
 res/cardsfolder/f/foriysian_brigade.txt -text
+res/cardsfolder/f/foriysian_interceptor.txt -text
 res/cardsfolder/f/fork.txt svneol=native#text/plain
 res/cardsfolder/f/forked_bolt.txt svneol=native#text/plain
 res/cardsfolder/f/forked_branch_garami.txt svneol=native#text/plain
@@ -8237,6 +8238,7 @@ res/cardsfolder/s/selective_memory.txt -text
 res/cardsfolder/s/selenia_dark_angel.txt svneol=native#text/plain
 res/cardsfolder/s/selesnya_evangel.txt svneol=native#text/plain
 res/cardsfolder/s/selesnya_guildmage.txt svneol=native#text/plain
+res/cardsfolder/s/selesnya_sagittars.txt -text
 res/cardsfolder/s/selesnya_sanctuary.txt svneol=native#text/plain
 res/cardsfolder/s/selesnya_signet.txt svneol=native#text/plain
 res/cardsfolder/s/selfless_cathar.txt -text
