@@ -87,6 +87,7 @@ public enum FModel {
     private final IStorageView<BoosterData> tournaments;
     private final IStorageView<FatPackData> fatPacks;
     private final IStorageView<CardBlock> blocks;
+    private final IStorageView<CardBlock> fantasyBlocks;
 
     // have to implement lazy initialization - at the moment of FModel.ctor()
     // CardDb is not ready yet.
@@ -137,6 +138,7 @@ public enum FModel {
         this.tournaments = new StorageView<BoosterData>(new BoosterData.Reader("res/blockdata/starters.txt"));
         this.fatPacks = new StorageView<FatPackData>(new FatPackData.Reader("res/blockdata/fatpacks.txt"));
         this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
+        this.fantasyBlocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
 
         // TODO this single setting from preferences should not be here, or,
         // it should be here with all the other settings at the same time.
@@ -495,6 +497,11 @@ public enum FModel {
     /** @return {@link forge.util.IStorageView}<{@link forge.card.CardBlock}> */
     public IStorageView<CardBlock> getBlocks() {
         return blocks;
+    }
+
+    /** @return {@link forge.util.IStorageView}<{@link forge.card.CardBlock}> */
+    public IStorageView<CardBlock> getFantasyBlocks() {
+        return fantasyBlocks;
     }
 
     /** @return {@link forge.util.IStorageView}<{@link forge.card.FatPackData}> */

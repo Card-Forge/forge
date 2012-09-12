@@ -143,6 +143,7 @@ public enum CSubmenuSealed implements ICDoc {
         final ArrayList<String> sealedTypes = new ArrayList<String>();
         sealedTypes.add("Full Cardpool");
         sealedTypes.add("Block / Set");
+        sealedTypes.add("Fantasy Block");
         sealedTypes.add("Custom");
 
         final String prompt = "Choose Sealed Deck Format:";
@@ -159,6 +160,10 @@ public enum CSubmenuSealed implements ICDoc {
         }
 
         else if (o.toString().equals(sealedTypes.get(2))) {
+            sd = new SealedDeckFormat("FBlock");
+        }
+
+        else if (o.toString().equals(sealedTypes.get(3))) {
             sd = new SealedDeckFormat("Custom");
         }
         else {

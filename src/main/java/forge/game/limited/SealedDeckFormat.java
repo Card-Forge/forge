@@ -78,12 +78,21 @@ public class SealedDeckFormat {
             }
 
             this.getLandSetCode()[0] = CardDb.instance().getCard("Plains").getEdition();
-        } else if (sealedType.equals("Block")) {
+        } else if (sealedType.equals("Block") || sealedType.equals("FBlock")) {
 
             List<CardBlock> blocks = new ArrayList<CardBlock>();
-            for (CardBlock b : Singletons.getModel().getBlocks()) {
-                blocks.add(b);
+            
+            if (sealedType.equals("Block")) {
+                for (CardBlock b : Singletons.getModel().getBlocks()) {
+                    blocks.add(b);
+                }
             }
+            else {
+                for (CardBlock b : Singletons.getModel().getFantasyBlocks()) {
+                    blocks.add(b);
+                }
+            }
+            
             final CardBlock block = GuiUtils.chooseOne("Choose Block", blocks);
 
             final CardEdition[] cardSets = block.getSets();
