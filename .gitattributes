@@ -4772,6 +4772,7 @@ res/cardsfolder/i/iron_will.txt svneol=native#text/plain
 res/cardsfolder/i/ironclaw_buzzardiers.txt svneol=native#text/plain
 res/cardsfolder/i/ironclaw_curse.txt svneol=native#text/plain
 res/cardsfolder/i/ironclaw_orcs.txt svneol=native#text/plain
+res/cardsfolder/i/ironfist_crusher.txt -text
 res/cardsfolder/i/ironhoof_ox.txt svneol=native#text/plain
 res/cardsfolder/i/ironroot_treefolk.txt svneol=native#text/plain
 res/cardsfolder/i/ironshell_beetle.txt svneol=native#text/plain
@@ -10272,6 +10273,7 @@ res/cardsfolder/v/valiant_guard.txt svneol=native#text/plain
 res/cardsfolder/v/valley_rannet.txt svneol=native#text/plain
 res/cardsfolder/v/valleymaker.txt -text
 res/cardsfolder/v/valor.txt svneol=native#text/plain
+res/cardsfolder/v/valor_made_real.txt -text
 res/cardsfolder/v/valorous_charge.txt svneol=native#text/plain
 res/cardsfolder/v/vampire_aristocrat.txt svneol=native#text/plain
 res/cardsfolder/v/vampire_bats.txt svneol=native#text/plain
