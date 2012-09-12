@@ -2702,6 +2702,7 @@ res/cardsfolder/e/ebony_horse.txt svneol=native#text/plain
 res/cardsfolder/e/ebony_owl_netsuke.txt svneol=native#text/plain
 res/cardsfolder/e/ebony_rhino.txt svneol=native#text/plain
 res/cardsfolder/e/ebony_treefolk.txt svneol=native#text/plain
+res/cardsfolder/e/echo_circlet.txt -text
 res/cardsfolder/e/echo_mage.txt svneol=native#text/plain
 res/cardsfolder/e/echo_tracer.txt svneol=native#text/plain
 res/cardsfolder/e/echoing_calm.txt svneol=native#text/plain
@@ -10296,6 +10297,7 @@ res/cardsfolder/v/vampiric_spirit.txt svneol=native#text/plain
 res/cardsfolder/v/vampiric_touch.txt svneol=native#text/plain
 res/cardsfolder/v/vampiric_tutor.txt svneol=native#text/plain
 res/cardsfolder/v/vampirism.txt svneol=native#text/plain
+res/cardsfolder/v/vanguards_shield.txt -text
 res/cardsfolder/v/vanish_into_memory.txt -text
 res/cardsfolder/v/vanishing.txt -text
 res/cardsfolder/v/vanishment.txt -text
