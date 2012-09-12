@@ -23,7 +23,6 @@ import javax.swing.JLabel;
 
 import forge.gui.toolbox.FSkin;
 import forge.model.FMatchState;
-import forge.properties.ForgePreferences.FPref;
 import forge.game.limited.GauntletMini;
 
 import java.awt.Color;
@@ -32,9 +31,9 @@ import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.SwingConstants;
 
-/** 
- * TODO: Write javadoc for this type.
- *
+/**
+ * The Win/Lose handler for 'gauntlet' type tournament
+ * games.
  */
 public class GauntletWinLose extends ControlWinLose {
 
@@ -69,7 +68,7 @@ public class GauntletWinLose extends ControlWinLose {
      * <p>
      * populateCustomPanel.
      * </p>
-     * @return true, if successful
+     * @return true
      */
     @Override
     public final boolean populateCustomPanel() {
@@ -81,12 +80,17 @@ public class GauntletWinLose extends ControlWinLose {
 
         resetView();
         nextRound = false;
+
+
+
         if (Singletons.getModel().getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             gauntlet.addWin();
         }
         else {
             gauntlet.addLoss();
         }
+
+        view.getBtnRestart().setText("Restart Round");
 
         if (!matchState.isMatchOver()) {
             showTournamentInfo("Tournament Info");
@@ -116,6 +120,12 @@ public class GauntletWinLose extends ControlWinLose {
         return true;
     }
 
+    /**
+     * <p>
+     * Shows some tournament info in the custom panel.
+     * </p>
+     * @param String - the title to be displayed
+     */
     private void showTournamentInfo(final String newTitle) {
 
         this.lblTemp1 = new TitleLabel(newTitle);
@@ -123,7 +133,7 @@ public class GauntletWinLose extends ControlWinLose {
                 + "      Total Wins: " + gauntlet.getWins()
                 + "      Total Losses: " + gauntlet.getLosses());
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-        this.lblTemp2.setFont(FSkin.getFont(14));
+        this.lblTemp2.setFont(FSkin.getFont(17));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setIconTextGap(50);
         this.getView().getPnlCustom().add(this.lblTemp1, GauntletWinLose.CONSTRAINTS_TITLE);
@@ -134,13 +144,13 @@ public class GauntletWinLose extends ControlWinLose {
      * <p>
      * actionOnRestart.
      * </p>
-     * When "quit" button is pressed, this method restarts the whole tournament.
+     * When "restart" button is pressed, this method restarts the current round.
      * 
      */
     @Override
     public final void actionOnRestart() {
         resetView();
-        gauntlet.resetCurrentRound();
+        // gauntlet.resetCurrentRound();
         super.actionOnRestart();
     }
 
@@ -190,6 +200,7 @@ public class GauntletWinLose extends ControlWinLose {
     private void resetView() {
         view.getBtnQuit().setText("Quit");
         view.getBtnContinue().setText("Continue");
+        view.getBtnRestart().setText("Restart");
     }
 
     /**
@@ -200,7 +211,7 @@ public class GauntletWinLose extends ControlWinLose {
     private class TitleLabel extends JLabel {
         TitleLabel(final String msg) {
             super(msg);
-            this.setFont(FSkin.getFont(16));
+            this.setFont(FSkin.getFont(18));
             this.setPreferredSize(new Dimension(200, 40));
             this.setHorizontalAlignment(SwingConstants.CENTER);
             this.setForeground(Color.white);
