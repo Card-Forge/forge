@@ -960,6 +960,7 @@ res/cardsfolder/b/blood_rites.txt svneol=native#text/plain
 res/cardsfolder/b/blood_seeker.txt svneol=native#text/plain
 res/cardsfolder/b/blood_speaker.txt svneol=native#text/plain
 res/cardsfolder/b/blood_tithe.txt svneol=native#text/plain
+res/cardsfolder/b/blood_tribute.txt -text
 res/cardsfolder/b/blood_tyrant.txt svneol=native#text/plain
 res/cardsfolder/b/blood_vassal.txt svneol=native#text/plain
 res/cardsfolder/b/bloodbond_march.txt -text

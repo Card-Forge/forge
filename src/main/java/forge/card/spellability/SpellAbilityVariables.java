@@ -133,6 +133,9 @@ public class SpellAbilityVariables {
     /** The hellbent. */
     private boolean hellbent = false;
 
+    /** The Kicked. */
+    private boolean kicked = false;
+
     /** The prowl. */
     private ArrayList<String> prowl = new ArrayList<String>();
 
@@ -496,6 +499,21 @@ public class SpellAbilityVariables {
     public final void setMetalcraft(final boolean bMetalcraft) {
         this.metalcraft = bMetalcraft;
     }
+
+    /**
+     * @return the kicked
+     */
+    public boolean isKicked() {
+        return kicked;
+    }
+
+    /**
+     * @param kicked0 the kicked to set
+     */
+    public void setKicked(boolean kicked) {
+        this.kicked = kicked;
+    }
+    
 
     /**
      * <p>

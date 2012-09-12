@@ -894,7 +894,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * Setter for the field <code>xManaCostPaid</code>.
+     * Setter or the field <code>xManaCostPaid</code>.
      * </p>
      * 
      * @param n
@@ -2582,6 +2582,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Buyback")) {
                 final Cost cost = new Cost(this, keyword.substring(8), false);
                 sb.append("Buyback " + cost.toSimpleString() + "\r\n");
+            } else if (keyword.startsWith("Kicker")) {
+                final Cost cost = new Cost(this, keyword.substring(7), false);
+                sb.append("Kicker " + cost.toSimpleString() + "\r\n");
             }
             if (keyword.startsWith("Storm")) {
                 if (sb.toString().contains("Target") || sb.toString().contains("target")) {

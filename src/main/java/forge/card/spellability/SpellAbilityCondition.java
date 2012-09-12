@@ -75,6 +75,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Hellbent")) {
                 this.setHellbent(true);
             }
+            if (value.equals("Kicked")) {
+                this.setKicked(true);
+            }
         }
 
         if (params.containsKey("ConditionZone")) {
@@ -177,6 +180,11 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
         if (this.isMetalcraft()) {
             if (!activator.hasMetalcraft()) {
+                return false;
+            }
+        }
+        if (this.isKicked()) {
+            if (!sa.isKicked()) {
                 return false;
             }
         }

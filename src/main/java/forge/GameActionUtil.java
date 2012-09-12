@@ -1805,7 +1805,8 @@ public final class GameActionUtil {
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(GameActionUtil.combineCosts(newSA, keyword.substring(7)));
                     newSA.setManaCost("");
-                    newSA.setDescription(sa.getDescription() + " (" + keyword + ")");
+                    final Cost cost = new Cost(source, keyword.substring(7), false);
+                    newSA.setDescription(sa.getDescription() + " (Kicker " + cost.toSimpleString() + ")");
                     ArrayList<String> newoacs = new ArrayList<String>();
                     newoacs.addAll(sa.getOptionalAdditionalCosts());
                     newSA.setOptionalAdditionalCosts(newoacs);
