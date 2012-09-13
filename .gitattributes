@@ -1433,6 +1433,7 @@ res/cardsfolder/c/cemetery_puca.txt -text
 res/cardsfolder/c/cemetery_reaper.txt svneol=native#text/plain
 res/cardsfolder/c/cenns_enlistment.txt svneol=native#text/plain
 res/cardsfolder/c/cenns_heir.txt svneol=native#text/plain
+res/cardsfolder/c/cenns_tactician.txt -text
 res/cardsfolder/c/centaur_archer.txt svneol=native#text/plain
 res/cardsfolder/c/centaur_chieftain.txt svneol=native#text/plain
 res/cardsfolder/c/centaur_courser.txt svneol=native#text/plain
@@ -4381,6 +4382,7 @@ res/cardsfolder/h/hideous_end.txt svneol=native#text/plain
 res/cardsfolder/h/hideous_laughter.txt -text
 res/cardsfolder/h/hideous_visage.txt svneol=native#text/plain
 res/cardsfolder/h/hidetsugus_second_rite.txt svneol=native#text/plain
+res/cardsfolder/h/high_ground.txt -text
 res/cardsfolder/h/high_market.txt svneol=native#text/plain
 res/cardsfolder/h/high_seas.txt svneol=native#text/plain
 res/cardsfolder/h/high_tide.txt svneol=native#text/plain
