@@ -292,13 +292,14 @@ public class Deck extends DeckBase implements Serializable {
 
         double best = 1.0;
 
-        for (int i = 0; i < this.getMain().toForgeCardList().size(); i++) {
-            CardPrinted evalCard = this.getMain().toFlatList().get(i);
+        for( Entry<CardPrinted, Integer> kv : this.getMain()) {
+            CardPrinted evalCard = kv.getKey();
+            int count = kv.getValue();
             if (ranker.getRanking(evalCard.getName(), evalCard.getEdition()) != null) {
-                    double add = ranker.getRanking(evalCard.getName(), evalCard.getEdition());
-                // System.out.println(this.getMain().toFlatList().get(i).getName() + " is worth " + add);
-                value += add;
-                divider += 1.0;
+                double add = ranker.getRanking(evalCard.getName(), evalCard.getEdition());
+                // System.out.println(evalCard.getName() + " is worth " + add);
+                value += add * count;
+                divider += count;
                 if (best > add) {
                     best = add;
                 }
