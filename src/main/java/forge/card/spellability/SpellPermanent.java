@@ -425,7 +425,7 @@ public class SpellPermanent extends Spell {
                         continue;
                     }
                 } else if (params.get("ValidCard").contains("kicked")) {
-                    if (params.get("ValidCard").equals("kicked")) {
+                    if (!params.get("ValidCard").contains("kicked ")) {
                         if(!sa.isKicked()) {
                             continue;
                         }

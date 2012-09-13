@@ -4,6 +4,7 @@ Types:Instant Arcane
 Text:no text
 A:SP$ PumpAll | Cost$ 2 G | ValidCards$ Creature.blocked | NumAtt$ +2 | NumDef$ +2 | ConditionPresent$ Forest.YouCtrl | ConditionCompare$ GE1 | SpellDescription$ If you control a Forest, each blocked creature gets +2/+2 until end of turn.
 K:Splice onto Arcane OppGainLife<5>
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roar_of_jukai.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/140.jpg
