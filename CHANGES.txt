@@ -94,6 +94,25 @@ Fixes/Features:
 - Fixed Rimescale Dragon
 - Added Vraska to Planeswalker types
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added support for separate 'fantasy blocks' in Sealed Deck games, plus a definition file containing some sample fantasy blocks.
+- RtR: Updated to HEAD revision.
+- Added some checks for the new keywords "CARDNAME can block any number of creatures." and "CARDNAME can block an additional creature." to AI attack code.
+- Added Return costs to payCostDuringAbilityResolve.
+- Moved Vraska to RtR new cards in CHANGES.txt. Also added a few cards that were missing from newly added cards.
+- In gauntlet mode, Restart button now restarts the current round (not the whole tournament) + general improvements to GauntletWinLose.java
+- Minor cleanup of GauntletMini.java
+- Improved AI blocking creatures with "CARDNAME can't be blocked except by two or more creatures.".
+- Added missing java file.
+- Fixed Hydras and friends. (X-costed spells in general?)
+- Fixed exception handling in etbCounter and calculateAmounnt.
+- The AI will now make use of the keywords "CARDNAME can block any number of creatures." and "CARDNAME can block an additional creature." when blocking.
+- Added support for Kicker on Instant/Sorceries.
+- Added a fluff piece to the changes.txt file.
+- Some small checkstyle fixes
+- Fixed cmc calculation of cards with multiple X in their costs.
+- Fixed Trepanation Blade
+- Fixed Coalition Relic
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -161,6 +180,20 @@ Sunscape Battlemage
 Foriysian Brigade
 Rite of Consumption
 Wall of Glare
+Palace Guard
+Foriysian Interceptor
+Selesnya Sagittars
+Ironfist Crusher
+Valor Made Real
+Blood Tribute
+Echo Circlet
+Vanguard's Shield
+Two-Headed Dragon
+Cenn's Tactician
+High Ground
+Entangler
+Thoughtweft Trio
+Roar of Jukai
 
 
 
