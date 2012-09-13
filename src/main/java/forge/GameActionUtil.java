@@ -48,7 +48,6 @@ import forge.control.input.InputPaySacCost;
 import forge.game.GameLossReason;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
@@ -470,8 +469,8 @@ public final class GameActionUtil {
             String amountString = costPart.getAmount();
             final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                     : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-            if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(source, "Do you want " + source +
-                    " to deal "+ amount + " damage to you?")) {
+            if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(source, "Do you want " + source
+                    + " to deal " + amount + " damage to you?")) {
                 AllZone.getHumanPlayer().addDamage(amount, source);
                 paid.execute();
             } else {
@@ -1682,7 +1681,7 @@ public final class GameActionUtil {
         }
         return alternatives;
     }
-    
+
     public static Cost combineCosts(SpellAbility sa, String additionalCost) {
         final Cost newCost = new Cost(sa.getSourceCard(), additionalCost, false);
         Cost oldCost = sa.getPayCosts();
@@ -1698,7 +1697,7 @@ public final class GameActionUtil {
                         oldManaCost.combineManaCost(newCostMana.toString());
                         newCostMana.setMana(oldManaCost.toString(false));
                     } else {
-                        newCost.getCostParts().add(part); 
+                        newCost.getCostParts().add(part);
                     }
                 }
             }
@@ -1721,11 +1720,11 @@ public final class GameActionUtil {
         ArrayList<SpellAbility> allSAs = new ArrayList<SpellAbility>();
         allSAs.add(sa);
         Card source = sa.getSourceCard();
-        
+
         if (!sa.isSpell() || !source.isType("Arcane") || sa.getAbilityFactory() == null) {
             return newSAs;
         }
-        
+
         for (Card c : sa.getActivatingPlayer().getCardsIn(ZoneType.Hand)) {
             if (c.equals(source)) {
                 continue;
@@ -1766,12 +1765,13 @@ public final class GameActionUtil {
 
         return newSAs;
     }
-    
+
     /**
      * get optional additional costs.
      * 
-     * @param sa
-     *            the new up charm s as
+     * @param original
+     *            the original sa
+     * @return an ArrayList<SpellAbility>.
      */
     public static ArrayList<SpellAbility> getOptionalAdditionalCosts(final SpellAbility original) {
         final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();

@@ -1921,8 +1921,9 @@ public class GameAction {
     /**
      * choose optional additional costs. For HUMAN only
      * 
-     * @param sa
-     *            the new up charm s as
+     * @param original
+     *            the original sa
+     * @return an ArrayList<SpellAbility>.
      */
     public static SpellAbility chooseOptionalAdditionalCosts(final SpellAbility original) {
         final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
