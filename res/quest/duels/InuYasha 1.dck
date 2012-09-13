@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=InuYasha 1
+Title=InuYasha
+Difficulty=easy
+Description=WUBRG Honden deck
+Icon=InuYasha.jpg
+Deck Type=constructed
+[main]
+1 Plains
+1 Island
+1 Swamp
+1 Mountain
+1 Forest
+4 Terramorphic Expanse
+2 Vivid Crag
+2 Vivid Creek
+2 Vivid Grove
+2 Vivid Marsh
+2 Vivid Meadow
+2 Tendo Ice Bridge
+2 Reliquary Tower
+1 Serra's Sanctum
+1 Manalith
+4 Argothian Enchantress
+2 Fabricate
+2 Greater Auramancy
+4 Honden of Cleansing Fire
+4 Honden of Infinite Rage
+4 Honden of Life's Web
+4 Honden of Night's Reach
+4 Honden of Seeing Winds
+3 Humility
+4 Mirror Gallery
+[sideboard]
