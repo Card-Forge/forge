@@ -342,8 +342,8 @@ public final class CardUtil {
         int xPaid = 0;
 
         // 2012-07-22 - If a card is on the stack, count the xManaCost in with it's CMC
-        if (AllZoneUtil.getCardsIn(ZoneType.Stack).contains(c)) {
-            xPaid = c.getXManaCostPaid();
+        if (AllZoneUtil.getCardsIn(ZoneType.Stack).contains(c) && c.getManaCost() != null) {
+            xPaid = c.getXManaCostPaid() * c.getManaCost().countX();
         }
         return c.getManaCost().getCMC() + xPaid;
     }
