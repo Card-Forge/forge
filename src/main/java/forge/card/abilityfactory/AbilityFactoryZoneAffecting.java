@@ -832,7 +832,8 @@ public class AbilityFactoryZoneAffecting {
             if (numCards != 1) {
                 sb.append("s");
             }
-            sb.append(" from the top of his or her library.");
+            final String millPosition = params.containsKey("FromBottom") ? "bottom" : "top";
+            sb.append(" from the " + millPosition + " of his or her library.");
         }
 
         final AbilitySub abSub = sa.getSubAbility();
@@ -1622,7 +1623,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !params.containsKey("ActivationPhases")) {
             return false;
         }

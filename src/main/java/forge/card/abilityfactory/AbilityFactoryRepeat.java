@@ -332,7 +332,10 @@ public final class AbilityFactoryRepeat {
         sb.append(" ");
 
         if (params.containsKey("StackDescription")) {
-            sb.append(params.get("StackDescription"));
+            final String desc = params.get("StackDescription");
+            if (!desc.equals("None")) {
+                sb.append(params.get("StackDescription"));
+            }
         } else {
             sb.append("Repeat something. Somebody should really write a better StackDescription!");
         }
