@@ -2439,7 +2439,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
                 return false;
             }
         } else if (property.startsWith("Chosen")) {
-            if (!source.getChosenPlayer().equals(this)) {
+            if (source.getChosenPlayer() == null || !source.getChosenPlayer().equals(this)) {
                 return false;
             }
         }
