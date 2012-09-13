@@ -2895,6 +2895,7 @@ res/cardsfolder/e/enslaved_scout.txt svneol=native#text/plain
 res/cardsfolder/e/ensnare.txt svneol=native#text/plain
 res/cardsfolder/e/ensnaring_bridge.txt svneol=native#text/plain
 res/cardsfolder/e/ensouled_scimitar.txt -text svneol=unset#text/plain
+res/cardsfolder/e/entangler.txt -text
 res/cardsfolder/e/entangling_trap.txt svneol=native#text/plain
 res/cardsfolder/e/entangling_vines.txt svneol=native#text/plain
 res/cardsfolder/e/entomb.txt svneol=native#text/plain
@@ -9750,6 +9751,7 @@ res/cardsfolder/t/thoughtpicker_witch.txt svneol=native#text/plain
 res/cardsfolder/t/thoughts_of_ruin.txt -text
 res/cardsfolder/t/thoughtseize.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtweft_gambit.txt svneol=native#text/plain
+res/cardsfolder/t/thoughtweft_trio.txt -text
 res/cardsfolder/t/thousand_legged_kami.txt svneol=native#text/plain
 res/cardsfolder/t/thraben_doomsayer.txt -text
 res/cardsfolder/t/thraben_heretic.txt -text

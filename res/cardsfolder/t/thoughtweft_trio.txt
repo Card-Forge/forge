@@ -1,0 +1,14 @@
+Name:Thoughtweft Trio
+ManaCost:2 W W
+Types:Creature Kithkin Soldier
+Text:no text
+PT:5/5
+K:First Strike
+K:Vigilance
+K:Champion:Kithkin
+K:CARDNAME can block any number of creatures.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtweft_trio.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/44.jpg
+Oracle:First strike, vigilance\nChampion a Kithkin (When this enters the battlefield, sacrifice it unless you exile another Kithkin you control. When this leaves the battlefield, that card returns to the battlefield.)\nThoughtweft Trio can block any number of creatures.
+End

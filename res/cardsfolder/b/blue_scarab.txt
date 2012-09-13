@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ CARDNAME can't be blocked by blue creatures. | Description$ Enchanted creature can't be blocked by blue creatures.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN CARDNAME can't be blocked by blue creatures. | Description$ Enchanted creature can't be blocked by blue creatures.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ Enchanted creature gets +2/+2 as long as an opponent controls a blue permanent.
 SVar:X:Count$Valid Permanent.Blue+YouDontCtrl
 SVar:RemRandomDeck:True
