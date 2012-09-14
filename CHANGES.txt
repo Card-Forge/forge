@@ -113,6 +113,18 @@ Fixes/Features:
 - Fixed Trepanation Blade
 - Fixed Coalition Relic
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Cellar Door's stack description
+- Improved Coalition Relic so that you can choose a color for each counter removed
+- Removed Rite of Consumption from new cards list again (made it into the previous beta afterall)
+- Fixed AI bug with Kicker.
+- Added the quest deck InuYasha 1 by Nordos.
+- Fixed a possible NPE in hasProperty in the Player class.
+- DeckSection iteration - making it right
+- Expanded Target selection for 'up to' amounts on the stack
+- Allowed for spells with TargetMin$0 to still be played if it has CanPlayNoTgt$True
+- Fixed Lava Spike (missing Arcane type)
+- Removed some unused imports from CSubmenuSealed.java
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -143,6 +155,7 @@ Grim Roustabout
 Grisly Salvage
 Guttersnipe
 Hypersonic Dragon
+Isperia, Supreme Judge
 Izzet Guildgate
 Jace, Architect of Thought
 Judge's Familiar
@@ -152,10 +165,13 @@ Niv-Mizzet, Dracogenius
 Ogre Jailbreaker
 Rakdos Guildgate
 Rakdos Shred-Freak
+Rakdos's Return
 Selesnya Guildgate
 Skyline Predator
+Slime Molding
 Slitherhead
 Sluiceway Scorpion
+Sphinx's Revelation
 Supreme Verdict
 Transguild Promenade
 Vraska the Unseen
@@ -193,7 +209,11 @@ High Ground
 Entangler
 Thoughtweft Trio
 Roar of Jukai
-
+Double Negative
+Repel Intruders
+River's Grasp
+Torrent of Souls
+Revenant Patriarch
 
 
 end
