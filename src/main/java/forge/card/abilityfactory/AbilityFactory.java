@@ -2346,11 +2346,11 @@ public class AbilityFactory {
         SpellAbility parent = sa;
 
         do {
-            if (!(parent instanceof AbilitySub)) {
+            if (!(parent instanceof AbilitySub) || ((AbilitySub) parent).getParent() == null) {
                 return parent;
             }
             parent = ((AbilitySub) parent).getParent();
-        } while ((parent.getTarget() == null) || (parent.getTarget().getTargetSAs().size() == 0));
+        } while (parent.getTarget() == null || parent.getTarget().getTargetSAs().size() == 0);
 
         return parent;
     }
