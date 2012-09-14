@@ -4854,14 +4854,47 @@ public class CardFactoryUtil {
                 re.setOverridingAbility(repAb);
 
                 card.addReplacementEffect(re);
+            } else if (kw.startsWith("etbCounter")) {
+                String parse = kw;
+                card.removeIntrinsicKeyword(parse);
+                
+                String[] splitkw = parse.split(":");
+
+                AbilityFactory af = new AbilityFactory();
+                String desc = "CARDNAME enters the battlefield with " + splitkw[2] + " " 
+                        + Counters.valueOf(splitkw[1]).getName() + " counters on it.";
+                String extraparams = "";
+                String amount = splitkw[2];
+                if(splitkw.length > 3) {
+                    if(!splitkw[3].equals("no Condition")) {
+                        extraparams = splitkw[3];
+                    }
+                }
+                if(splitkw.length > 4) {
+                    desc = splitkw[4];
+                }
+                String repStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1] + " | CounterNum$ " + amount;
+                try {
+                    Integer.parseInt(amount);
+                }
+                catch(NumberFormatException ignored) {
+                    repStr += " | References$ " + amount;
+                }
+                SpellAbility repAb = af.getAbility(repStr, card);
+                setupETBReplacementAbility(repAb);
+
+                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
+
+                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
+                re.setLayer(ReplacementLayer.Other);
+                re.setOverridingAbility(repAb);
+
+                card.addReplacementEffect(re);
             }
         }
         
         int etbcounter = CardFactoryUtil.hasKeyword(card, "etbCounter");
         if (etbcounter != -1) {
-            if(card.getName().equals("Primordial Hydra")) {
-                System.out.println("Apoc");
-            }
             String parse = card.getKeyword().get(etbcounter);
             card.removeIntrinsicKeyword(parse);
             
