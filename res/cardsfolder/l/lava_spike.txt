@@ -1,6 +1,6 @@
 Name:Lava Spike
 ManaCost:R
-Types:Sorcery
+Types:Sorcery Arcane
 Text:no text
 A:SP$ DealDamage | Cost$ R | Tgt$ TgtP | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player.
 SVar:Rarity:Common
