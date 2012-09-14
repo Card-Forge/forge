@@ -45,7 +45,7 @@ public class Target {
     private boolean uniqueTargets = false;
     private boolean singleZone = false;
     private boolean differentZone = false;
-    private boolean withoutSameCreatureType = false;    
+    private boolean withoutSameCreatureType = false;
     private String definedController = null;
     private TargetChoices choice = null;
 
@@ -766,7 +766,7 @@ public class Target {
     }
 
     /**
-     * @param withoutSameCreatureType0 the withoutSameCreatureType to set
+     * @param b the withoutSameCreatureType to set
      */
     public void setWithoutSameCreatureType(boolean b) {
         this.withoutSameCreatureType = b;

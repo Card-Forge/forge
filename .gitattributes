@@ -2469,6 +2469,7 @@ res/cardsfolder/d/dormant_volcano.txt svneol=native#text/plain
 res/cardsfolder/d/dosan_the_falling_leaf.txt -text
 res/cardsfolder/d/dosans_oldest_chant.txt svneol=native#text/plain
 res/cardsfolder/d/double_cleave.txt svneol=native#text/plain
+res/cardsfolder/d/double_negative.txt -text
 res/cardsfolder/d/doubling_cube.txt -text
 res/cardsfolder/d/doubling_season.txt svneol=native#text/plain
 res/cardsfolder/d/doubtless_one.txt svneol=native#text/plain
@@ -7608,6 +7609,7 @@ res/cardsfolder/r/reparations.txt svneol=native#text/plain
 res/cardsfolder/r/repay_in_kind.txt svneol=native#text/plain
 res/cardsfolder/r/repeal.txt svneol=native#text/plain
 res/cardsfolder/r/repel.txt svneol=native#text/plain
+res/cardsfolder/r/repel_intruders.txt -text
 res/cardsfolder/r/repel_the_darkness.txt svneol=native#text/plain
 res/cardsfolder/r/repentance.txt svneol=native#text/plain
 res/cardsfolder/r/repentant_blacksmith.txt svneol=native#text/plain
@@ -7776,6 +7778,7 @@ res/cardsfolder/r/river_kelpie.txt -text
 res/cardsfolder/r/river_merfolk.txt svneol=native#text/plain
 res/cardsfolder/r/river_of_tears.txt -text
 res/cardsfolder/r/riverfall_mimic.txt svneol=native#text/plain
+res/cardsfolder/r/rivers_grasp.txt -text
 res/cardsfolder/r/rix_maadi_dungeon_palace.txt svneol=native#text/plain
 res/cardsfolder/r/roar_of_jukai.txt -text
 res/cardsfolder/r/roar_of_reclamation.txt svneol=native#text/plain
@@ -9931,6 +9934,7 @@ res/cardsfolder/t/torpid_moloch.txt -text svneol=unset#text/plain
 res/cardsfolder/t/torpor_dust.txt svneol=native#text/plain
 res/cardsfolder/t/torpor_orb.txt -text
 res/cardsfolder/t/torrent_of_fire.txt svneol=native#text/plain
+res/cardsfolder/t/torrent_of_souls.txt -text
 res/cardsfolder/t/torrent_of_stone.txt -text
 res/cardsfolder/t/torsten_von_ursus.txt svneol=native#text/plain
 res/cardsfolder/t/tortoise_formation.txt svneol=native#text/plain

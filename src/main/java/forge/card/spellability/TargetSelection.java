@@ -214,12 +214,32 @@ public class TargetSelection {
                 return this.subSelection.chooseTargets();
             }
         }
-        
+
         if (!this.target.hasCandidates(this.ability, true)) {
             // Cancel ability if there aren't any valid Candidates
-            this.bCancel = true;
-            this.req.finishedTargeting();
-            return false;
+            if (this.target.getMinTargets().equals("0")
+                    && this.ability.getAbilityFactory().getMapParams().get("CanPlayNoTgt") != null
+                    && this.ability.getAbilityFactory().getMapParams().get("CanPlayNoTgt").equals("True")) {
+                // unless (for cards like Torrent of Souls), if there are no valid candidates but has min targets = 0
+                // and is flagged as optional, the spell will still be playable - finish targeting
+                final AbilitySub abSub = this.ability.getSubAbility();
+
+                if (abSub == null) {
+                    // if no more SubAbilities finish targeting
+                    this.req.finishedTargeting();
+                    return true;
+                } else {
+                    // Has Sub Ability
+                    this.subSelection = new TargetSelection(abSub.getTarget(), abSub);
+                    this.subSelection.setRequirements(this.req);
+                    this.subSelection.resetTargets();
+                    return this.subSelection.chooseTargets();
+                }
+            } else {
+                this.bCancel = true;
+                this.req.finishedTargeting();
+                return false;
+            }
         }
 
         this.chooseValidInput();
@@ -537,6 +557,7 @@ public class TargetSelection {
         final Target tgt = this.target;
         final String message = tgt.getVTSelection();
         final TargetSelection select = this;
+        final String doneDummy = "[FINISH TARGETING]";
 
         // Find what's targetable, then allow human to choose
         final ArrayList<SpellAbility> choosables = TargetSelection.getTargetableOnStack(this.ability, select.getTgt());
@@ -544,19 +565,41 @@ public class TargetSelection {
         final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
 
         for (final SpellAbility sa : choosables) {
-            map.put(sa.getStackDescription(), sa);
+            if (!tgt.getTargetSAs().contains(sa)) {
+                map.put(sa.getStackDescription(), sa);
+            }
+        }
+
+        if (tgt.isMinTargetsChosen(this.ability.getSourceCard(), this.ability)) {
+            map.put(doneDummy, null);
         }
 
         String[] choices = new String[map.keySet().size()];
         choices = map.keySet().toArray(choices);
 
         if (choices.length == 0) {
-            select.setCancel(true);
+            if (tgt.getTargetSAs().size() >= 1) {
+                select.setDoneTarget(true);
+            } else {
+                select.setCancel(true);
+            }
+        } else if (choices.length == 1 && choices.toString().contains(doneDummy)) {
+            if (tgt.getMinTargets().equals("0")
+                    && this.ability.getAbilityFactory().getMapParams().get("CanPlayNoTgt") != null
+                    && this.ability.getAbilityFactory().getMapParams().get("CanPlayNoTgt").equals("True")) {
+                select.setDoneTarget(true);
+            } else {
+                select.setCancel(true);
+            }
         } else {
             final String madeChoice = GuiUtils.chooseOneOrNone(message, choices);
 
             if (madeChoice != null) {
-                tgt.addTarget(map.get(madeChoice));
+                if (madeChoice.equals(doneDummy)) {
+                    this.setDoneTarget(true);
+                } else {
+                    tgt.addTarget(map.get(madeChoice));
+                }
             } else {
                 select.setCancel(true);
             }
