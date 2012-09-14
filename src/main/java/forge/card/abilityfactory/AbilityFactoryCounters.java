@@ -1151,7 +1151,10 @@ public class AbilityFactoryCounters {
 
         final Card card = sa.getSourceCard();
         final String type = params.get("CounterType");
-        int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
+        int counterAmount = 0;
+        if (!params.get("CounterNum").equals("All")) {
+            counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
+        }
 
         ArrayList<Card> tgtCards;
 
@@ -1169,6 +1172,9 @@ public class AbilityFactoryCounters {
         for (final Card tgtCard : tgtCards) {
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
                 final PlayerZone zone = AllZone.getZoneOf(tgtCard);
+                if (params.get("CounterNum").equals("All")) {
+                    counterAmount = tgtCard.getCounters(Counters.valueOf(type));
+                }
 
                 if (type.matches("Any")) {
                     while (counterAmount > 0 && tgtCard.getNumberOfCounters() > 0) {
