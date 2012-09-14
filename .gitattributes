@@ -6440,6 +6440,7 @@ res/cardsfolder/n/nightmare_lash.txt svneol=native#text/plain
 res/cardsfolder/n/nightmare_void.txt svneol=native#text/plain
 res/cardsfolder/n/nights_whisper.txt svneol=native#text/plain
 res/cardsfolder/n/nightscape_apprentice.txt svneol=native#text/plain
+res/cardsfolder/n/nightscape_battlemage.txt -text
 res/cardsfolder/n/nightscape_familiar.txt svneol=native#text/plain
 res/cardsfolder/n/nightscape_master.txt svneol=native#text/plain
 res/cardsfolder/n/nightshade_peddler.txt -text
@@ -9735,6 +9736,7 @@ res/cardsfolder/t/thorn_thrash_viashino.txt svneol=native#text/plain
 res/cardsfolder/t/thornbite_staff.txt -text
 res/cardsfolder/t/thornling.txt svneol=native#text/plain
 res/cardsfolder/t/thornscape_apprentice.txt svneol=native#text/plain
+res/cardsfolder/t/thornscape_battlemage.txt -text
 res/cardsfolder/t/thornscape_familiar.txt svneol=native#text/plain
 res/cardsfolder/t/thornscape_master.txt svneol=native#text/plain
 res/cardsfolder/t/thorntooth_witch.txt svneol=native#text/plain
