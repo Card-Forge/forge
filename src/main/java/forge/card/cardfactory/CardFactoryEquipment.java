@@ -17,11 +17,8 @@
  */
 package forge.card.cardfactory;
 
-import java.util.ArrayList;
-
 import forge.Card;
 import forge.Counters;
-import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
@@ -35,27 +32,6 @@ import forge.card.trigger.TriggerHandler;
  * @version $Id$
  */
 class CardFactoryEquipment {
-
-    /**
-     * <p>
-     * shouldEquip.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a int.
-     */
-    public static int shouldEquip(final Card c) {
-        final ArrayList<String> a = c.getKeyword();
-        for (int i = 0; i < a.size(); i++) {
-
-            // Keyword renamed to eqPump, was VanillaEquipment
-            if (a.get(i).toString().startsWith("eqPump")) {
-                return i;
-            }
-        }
-        return -1;
-    }
 
     /**
      * <p>
@@ -97,62 +73,6 @@ class CardFactoryEquipment {
 
             card.addTrigger(myTrigger);
         } // *************** END ************ END **************************
-
-        if (CardFactoryEquipment.shouldEquip(card) != -1) {
-            final int n = CardFactoryEquipment.shouldEquip(card);
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-
-                final String[] k = parse.split(":");
-                String tmpCost;
-                tmpCost = k[0].substring(6);
-                String keywordsUnsplit = "";
-                String[] extrinsicKeywords = { "none" }; // for equips with no
-                                                         // keywords to add
-
-                // final String manaCost = tmpCost.trim();
-                final Cost abCost = new Cost(card, tmpCost.trim(), true);
-                int power = 0;
-                int tough = 0;
-
-                final String[] ptk = k[1].split("/");
-                // keywords in first cell
-                if (ptk.length == 1) {
-                    keywordsUnsplit = ptk[0];
-                } else {
-                    // parse the power/toughness boosts in first two cells
-                    for (int i = 0; i < 2; i++) {
-                        if (ptk[i].matches("[\\+\\-][0-9]")) {
-                            ptk[i] = ptk[i].replace("+", "");
-                        }
-                    }
-
-                    power = Integer.parseInt(ptk[0].trim());
-                    tough = Integer.parseInt(ptk[1].trim());
-
-                    if (ptk.length > 2) { // keywords in third cell
-                        keywordsUnsplit = ptk[2];
-                    }
-                }
-
-                if (keywordsUnsplit.length() > 0) // then there is at least one
-                                                  // extrinsic keyword to assign
-                {
-                    final String[] tempKwds = keywordsUnsplit.split("&");
-                    extrinsicKeywords = new String[tempKwds.length];
-
-                    for (int i = 0; i < tempKwds.length; i++) {
-                        extrinsicKeywords[i] = tempKwds[i].trim();
-                    }
-                }
-
-                card.addSpellAbility(CardFactoryUtil.eqPumpEquip(card, power, tough, extrinsicKeywords, abCost));
-                card.addEquipCommand(CardFactoryUtil.eqPumpOnEquip(card, power, tough, extrinsicKeywords, abCost));
-                card.addUnEquipCommand(CardFactoryUtil.eqPumpUnEquip(card, power, tough, extrinsicKeywords, abCost));
-
-            }
-        } // eqPump (was VanillaEquipment)
 
         if (card.hasKeyword("Living Weapon")) {
             card.removeIntrinsicKeyword("Living Weapon");
