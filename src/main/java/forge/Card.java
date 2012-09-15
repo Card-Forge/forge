@@ -2315,12 +2315,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         sbLong.append(" on it.)").append("\r\n");
                     }
                 } else if (keyword.get(i).startsWith("Modular")) {
-                    final String numCounters = keyword.get(i).split(" ")[1];
-                    sbLong.append(keyword.get(i));
-                    sbLong.append(" (This enters the battlefield with ");
-                    sbLong.append(numCounters);
-                    sbLong.append(" +1/+1 counters on it. When it's put into a graveyard, ");
-                    sbLong.append("you may put its +1/+1 counters on target artifact creature.)");
+                    continue;
                 } else if (keyword.get(i).startsWith("Provoke")) {
                     sbLong.append(keyword.get(i));
                     sbLong.append(" (When this attacks, you may have target creature ");

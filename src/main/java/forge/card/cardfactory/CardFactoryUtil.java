@@ -5062,10 +5062,12 @@ public class CardFactoryUtil {
             final int n = CardFactoryUtil.hasKeyword(card, "Modular");
             if (n != -1) {
                 final String parse = card.getKeyword().get(n).toString();
+                card.getKeyword().remove(parse);
 
                 final int m = Integer.parseInt(parse.substring(8));
 
-                card.addIntrinsicKeyword("etbCounter:P1P1:" + m + ":no Condition: ");
+                card.addIntrinsicKeyword("etbCounter:P1P1:" + m + ":no Condition:"
+                        + "Modular " + m + " (This enters the battlefield with " + m + " +1/+1 counters on it. When it's put into a graveyard, you may put its +1/+1 counters on target artifact creature.)");
 
                 final SpellAbility ability = new Ability(card, "0") {
                     @Override
