@@ -125,6 +125,9 @@ Fixes/Features:
 - Fixed Lava Spike (missing Arcane type)
 - Removed some unused imports from CSubmenuSealed.java
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Homarid.
+- Improved description of the new ETBCounter keyword.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -139,6 +142,7 @@ Archon of the Triumvirate
 Auger Spree
 Azorius Guildgate
 Azorius Justiciar
+Centaur Healer
 Chromatic Lantern
 Collective Blessing
 Cyclonic Rift
@@ -158,11 +162,16 @@ Hypersonic Dragon
 Isperia, Supreme Judge
 Izzet Guildgate
 Jace, Architect of Thought
+Jarad, Golgari Lich Lord
 Judge's Familiar
 Lotleth Troll
 Loxodon Smiter
+Mizzium Mortars
+Necropolis Regent
 Niv-Mizzet, Dracogenius
 Ogre Jailbreaker
+Precinct Captain
+Pyroconvergence
 Rakdos Guildgate
 Rakdos Shred-Freak
 Rakdos's Return
@@ -172,8 +181,10 @@ Slime Molding
 Slitherhead
 Sluiceway Scorpion
 Sphinx's Revelation
+Stealer of Secrets
 Supreme Verdict
 Transguild Promenade
+Ultimate Price
 Vraska the Unseen
 Wayfaring Temple
 Worldspine Wurm
@@ -214,6 +225,9 @@ Repel Intruders
 River's Grasp
 Torrent of Souls
 Revenant Patriarch
+Ana Battlemage
+Nightscape Battlemage
+Thornscape Battlemage
 
 
 end
