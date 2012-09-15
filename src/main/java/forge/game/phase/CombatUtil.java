@@ -2973,7 +2973,8 @@ public class CombatUtil {
             };
 
             final StringBuilder sbUntap = new StringBuilder();
-            sbUntap.append(c).append(" - (Exalted) untap.");
+            sbUntap.append(c).append(" - (Finest Hour) untap.");
+            fhUntap.setDescription(sbUntap.toString());
             fhUntap.setStackDescription(sbUntap.toString());
 
             AllZone.getStack().addSimultaneousStackEntry(fhUntap);
@@ -2988,7 +2989,8 @@ public class CombatUtil {
                 };
 
                 final StringBuilder sbACom = new StringBuilder();
-                sbACom.append(c).append(" - (Exalted) ").append(phasingPlayer).append(" gets Extra Combat Phase.");
+                sbACom.append(c).append(" - (Finest Hour) ").append(phasingPlayer).append(" gets Extra Combat Phase.");
+                fhAddCombat.setDescription(sbACom.toString());
                 fhAddCombat.setStackDescription(sbACom.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(fhAddCombat);
