@@ -464,9 +464,9 @@ public class MagicStack extends MyObservable {
             Singletons.getModel().getGameAction().checkStateEffects();
             //GuiDisplayUtil.updateGUI();
         } else {
-            /*if (sp.isKickerAbility()) {
-                sp.getSourceCard().setKicked(true);
-            }*/
+            if (sp.isKickerAbility()) {
+                sp.getSourceCard().addOptionalAdditionalCostsPaid("Kicker");
+            }
             if (sp.getSourceCard().isCopiedSpell()) {
                 this.push(sp);
             } else if (!sp.isMultiKicker() && !sp.isReplicate() && !sp.isXCost()) {
@@ -752,58 +752,6 @@ public class MagicStack extends MyObservable {
                 AllZone.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
             }
         }
-
-        /*if ((sp instanceof SpellPermanent) && sp.getSourceCard().getName().equals("Mana Vortex")) {
-            final SpellAbility counter = new Ability(sp.getSourceCard(), "0") {
-                @Override
-                public void resolve() {
-                    final Input in = new Input() {
-                        private static final long serialVersionUID = -2042489457719935420L;
-
-                        @Override
-                        public void showMessage() {
-                            CMatchUI.SINGLETON_INSTANCE.showMessage("Mana Vortex - select a land to sacrifice");
-                            ButtonUtil.enableOnlyCancel();
-                        }
-
-                        @Override
-                        public void selectButtonCancel() {
-                            AllZone.getStack().pop();
-                            Singletons.getModel().getGameAction().moveToGraveyard(sp.getSourceCard());
-                            this.stop();
-                        }
-
-                        @Override
-                        public void selectCard(final Card c, final PlayerZone zone) {
-                            if (zone.is(ZoneType.Battlefield) && c.getController().isHuman() && c.isLand()) {
-                                Singletons.getModel().getGameAction().sacrifice(c, null);
-                                this.stop();
-                            }
-                        }
-                    };
-                    final SpellAbilityStackInstance prev = MagicStack.this.peekInstance();
-                    if (prev.isSpell() && prev.getSourceCard().getName().equals("Mana Vortex")) {
-                        if (sp.getSourceCard().getController().isHuman()) {
-                            AllZone.getInputControl().setInput(in);
-                        } else { // Computer
-                            final CardList lands = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
-                            if (!lands.isEmpty()) {
-                                AllZone.getComputerPlayer().sacrificePermanent("prompt", lands);
-                            } else {
-                                AllZone.getStack().pop();
-                                Singletons.getModel().getGameAction().moveToGraveyard(sp.getSourceCard());
-                            }
-                        }
-                    }
-
-                } // resolve()
-            }; // SpellAbility
-
-            counter.setStackDescription(sp.getSourceCard().getName()
-                    + " - counter Mana Vortex unless you sacrifice a land.");
-
-            this.add(counter);
-        }*/
 
         /*
          * Whenever a player casts a spell, counter it if a card with the same
