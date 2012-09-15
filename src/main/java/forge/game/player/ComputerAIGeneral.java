@@ -30,6 +30,8 @@ import forge.CardList;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.replacement.ReplaceMoved;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.trigger.Trigger;
@@ -155,6 +157,34 @@ public class ComputerAIGeneral implements Computer {
         for (final Trigger tr : card.getTriggers()) {
             final HashMap<String, String> params = tr.getMapParams();
             if (tr.getMode() != TriggerType.ChangesZone) {
+                continue;
+            }
+
+            if (!params.get("Destination").equals(ZoneType.Battlefield.toString())) {
+                continue;
+            }
+
+            if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self")) {
+                continue;
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * <p>
+     * hasETBTrigger.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public static boolean hasETBReplacement(final Card card) {
+        for (final ReplacementEffect re : card.getReplacementEffects()) {
+            final HashMap<String, String> params = re.getMapParams();
+            if (!(re instanceof ReplaceMoved)) {
                 continue;
             }
 

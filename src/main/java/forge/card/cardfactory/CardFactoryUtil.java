@@ -4749,7 +4749,7 @@ public class CardFactoryUtil {
              */
             @Override
             public boolean chkAIDrawback() {
-                return false;
+                return true;
             }
 
             /* (non-Javadoc)

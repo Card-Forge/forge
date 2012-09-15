@@ -30,6 +30,8 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
+import forge.card.replacement.ReplaceMoved;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
@@ -363,7 +365,8 @@ public class SpellPermanent extends Spell {
         }
 
         if (card.isCreature() && (card.getNetDefense() <= 0) && !card.hasStartOfKeyword("etbCounter")
-                && !mana.contains("X") && !ComputerAIGeneral.hasETBTrigger(card)) {
+                && !mana.contains("X") && !ComputerAIGeneral.hasETBTrigger(card)
+                && !ComputerAIGeneral.hasETBReplacement(card)) {
             return false;
         }
 
@@ -486,6 +489,63 @@ public class SpellPermanent extends Spell {
                 }
                 // else
                 // otherwise, return false 50% of the time?
+            }
+        }
+        
+        // Replacement effects
+        for (final ReplacementEffect re : card.getReplacementEffects()) {
+            // These Replacements all care for ETB effects
+
+            final HashMap<String, String> params = re.getMapParams();
+            if (!(re instanceof ReplaceMoved)) {
+                continue;
+            }
+
+            if (!params.get("Destination").equals(ZoneType.Battlefield.toString())) {
+                continue;
+            }
+
+            if (params.containsKey("ValidCard")) {
+                if(!params.get("ValidCard").contains("Self")) {
+                    continue;
+                }
+                if (params.get("ValidCard").contains("notkicked")) {
+                    if(sa.isKicked()) {
+                        continue;
+                    }
+                } else if (params.get("ValidCard").contains("kicked")) {
+                    if (!params.get("ValidCard").contains("kicked ")) {
+                        if(!sa.isKicked()) {
+                            continue;
+                        }
+                    } else {
+                        String s = "Kicker " + params.get("ValidCard").split("kicked ")[1];
+                        boolean rightKicker = false;
+                        if (sa.getOptionalAdditionalCosts() != null) {
+                            for (String string : sa.getOptionalAdditionalCosts()) {
+                                if (string.startsWith(s)) {
+                                    rightKicker = true;
+                                }
+                            }
+                        }
+                        if (!rightKicker) {
+                            continue;
+                        }
+                    }
+                    
+                }
+            }
+
+            if (!re.requirementsCheck()) {
+                continue;
+            }
+            final SpellAbility exSA = re.getOverridingAbility();
+
+            // ETBReplacement uses overriding abilities.
+            // These checks only work if the Executing SpellAbility is an
+            // Ability_Sub.
+            if (exSA != null && (exSA instanceof AbilitySub) && !exSA.doTrigger(false)) {
+                return false;
             }
         }
 

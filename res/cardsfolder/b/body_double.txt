@@ -4,7 +4,7 @@ Types:Creature Shapeshifter
 Text:no text
 PT:0/0
 K:ETBReplacement:Copy:ChooseCreature:Optional
-SVar:ChooseCreature:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature | ChoiceZone$ Graveyard | SubAbility$ DBCopy | RememberChosen$ True | SpellDescription$ You may have Body Double enter the battlefield as a copy of any creature card in a graveyard.
+SVar:ChooseCreature:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature | ChoiceZone$ Graveyard | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ AtLeast1 | SpellDescription$ You may have Body Double enter the battlefield as a copy of any creature card in a graveyard.
 SVar:DBCopy:DB$ Clone | Defined$ Remembered
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/body_double.jpg

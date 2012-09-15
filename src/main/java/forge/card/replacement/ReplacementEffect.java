@@ -97,7 +97,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             if (AllZoneUtil.compare(left, comparator, compareTo)) {
                 return true;
             }
-
+        } else if (sa != null && sa.doTrigger(false)){
+            return true;
         }
 
         return false;

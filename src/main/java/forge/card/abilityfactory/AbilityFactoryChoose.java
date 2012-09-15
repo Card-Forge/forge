@@ -1988,8 +1988,9 @@ public final class AbilityFactoryChoose {
                                 choices = choices.filter(CardListFilter.UNTAPPED);
                             }
                             chosen.add(CardFactoryUtil.getBestCreatureAI(choices));
+                        } else {
+                            chosen.add(CardFactoryUtil.getBestAI(choices));
                         }
-                        chosen.add(CardFactoryUtil.getBestAI(choices));
                     }
                 }
                 host.setChosenCard(chosen);
