@@ -1198,6 +1198,12 @@ public class CardFactoryUtil {
             public void resolve() {
                 final Card c = Singletons.getModel().getGameAction().exile(sourceCard);
                 c.addCounter(Counters.TIME, suspendCounters);
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append(this.getActivatingPlayer()).append(" has suspended ");
+                sb.append(c.getName()).append("with ");
+                sb.append(suspendCounters).append(" time counters on it.");
+                AllZone.getGameLog().add("AddToStack", sb.toString(), 2);
             }
         };
         final StringBuilder sbDesc = new StringBuilder();
