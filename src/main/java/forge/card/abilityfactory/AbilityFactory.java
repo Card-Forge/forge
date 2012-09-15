@@ -18,6 +18,7 @@
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import forge.AllZone;
@@ -2432,9 +2433,18 @@ public class AbilityFactory {
         // Can only Predict things from AFs
         if (topAf != null) {
             final Target tgt = topStack.getTarget();
+            final HashMap<String, String> threatParams = topAf.getMapParams();
 
             if (tgt == null) {
-                objects = AbilityFactory.getDefinedObjects(source, topAf.getMapParams().get("Defined"), topStack);
+                if (threatParams.containsKey("Defined")) {
+                    objects = AbilityFactory.getDefinedObjects(source, threatParams.get("Defined"), topStack);
+                } else if (threatParams.containsKey("ValidCards")) {
+                    CardList cards = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield)
+                            .getValidCards(threatParams.get("ValidCards").split(","), source.getController(), source);
+                    for (Card card : cards) {
+                        objects.add(card);
+                    }
+                }
             } else {
                 objects = tgt.getTargets();
             }
@@ -2443,7 +2453,6 @@ public class AbilityFactory {
             // due to this SA
 
             final String threatApi = topAf.getAPI();
-            final HashMap<String, String> threatParams = topAf.getMapParams();
 
             // Lethal Damage => prevent damage/regeneration/bounce/shroud
             if (threatApi.equals("DealDamage") || threatApi.equals("DamageAll")) {
