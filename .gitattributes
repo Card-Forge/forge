@@ -1016,6 +1016,7 @@ res/cardsfolder/b/boartusk_liege.txt svneol=native#text/plain
 res/cardsfolder/b/body_double.txt -text
 res/cardsfolder/b/body_of_jukai.txt svneol=native#text/plain
 res/cardsfolder/b/body_snatcher.txt -text svneol=unset#text/plain
+res/cardsfolder/b/bog_down.txt -text
 res/cardsfolder/b/bog_elemental.txt -text
 res/cardsfolder/b/bog_glider.txt svneol=native#text/plain
 res/cardsfolder/b/bog_gnarr.txt svneol=native#text/plain
