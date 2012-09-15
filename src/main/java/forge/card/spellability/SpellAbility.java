@@ -56,7 +56,6 @@ public abstract class SpellAbility {
     private Player targetPlayer = null;
     private String stackDescription = "";
     private String manaCost = "";
-    private String additionalManaCost = "";
     private String multiKickerManaCost = "";
     private String replicateManaCost = "";
     private String xManaCost = "";
@@ -86,7 +85,6 @@ public abstract class SpellAbility {
     private boolean multiKicker = false;
     private boolean replicate = false;
     private boolean xCost = false;
-    private boolean kickerAbility = false;
     private boolean cycling = false;
     private boolean isDelve = false;
 
@@ -266,29 +264,6 @@ public abstract class SpellAbility {
 
     public void setManaCost(final String cost) {
         this.manaCost = cost;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>additionalManaCost</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public String getAdditionalManaCost() {
-        return this.additionalManaCost;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>additionalManaCost</code>.
-     * </p>
-     * 
-     * @param cost
-     *            a {@link java.lang.String} object.
-     */
-    public void setAdditionalManaCost(final String cost) {
-        this.additionalManaCost = cost;
     }
 
     /**
@@ -1473,29 +1448,6 @@ public abstract class SpellAbility {
      */
     public boolean isFlashBackAbility() {
         return this.flashBackAbility;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>kickerAbility</code>.
-     * </p>
-     * 
-     * @param kab
-     *            a boolean.
-     */
-    public void setKickerAbility(final boolean kab) {
-        this.kickerAbility = kab;
-    }
-
-    /**
-     * <p>
-     * isKickerAbility.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isKickerAbility() {
-        return this.kickerAbility;
     }
 
     // Only used by Ability_Reflected_Mana, because the user has an option to

@@ -497,10 +497,6 @@ public class SpellPermanent extends Spell {
     public void resolve() {
         Card c = this.getSourceCard();
         c.addController(this.getActivatingPlayer());
-        if (this.getOptionalAdditionalCosts() != null) {
-            for (String s : this.getOptionalAdditionalCosts())
-            c.addOptionalAdditionalCostsPaid(s);
-        }
         Singletons.getModel().getGameAction().moveTo(this.getActivatingPlayer().getZone(ZoneType.Battlefield), c);
     }
 }

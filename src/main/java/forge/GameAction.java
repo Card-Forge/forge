@@ -47,7 +47,6 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCost;
-import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameEndReason;
 import forge.game.GameSummary;
@@ -1657,27 +1656,10 @@ public class GameAction {
             }
             boolean x = sa.getSourceCard().getManaCost().getShardCount(ManaCostShard.X) > 0;
 
-            if (sa.isKickerAbility()) {
-                final Command paid1 = new Command() {
-                    private static final long serialVersionUID = -6531785460264284794L;
-
-                    @Override
-                    public void execute() {
-                        AllZone.getStack().add(sa);
-                    }
-                };
-                AllZone.getInputControl().setInput(new InputPayManaCostAbility(sa.getAdditionalManaCost(), paid1));
-            } else {
-                AllZone.getStack().add(sa, x);
-            }
+            AllZone.getStack().add(sa, x);
         } else {
             sa.setManaCost("0"); // Beached As
-            if (sa.isKickerAbility()) {
-                sa.getBeforePayMana().setFree(false);
-                sa.setManaCost(sa.getAdditionalManaCost());
-            } else {
-                sa.getBeforePayMana().setFree(true);
-            }
+            sa.getBeforePayMana().setFree(true);
             AllZone.getInputControl().setInput(sa.getBeforePayMana());
         }
     }

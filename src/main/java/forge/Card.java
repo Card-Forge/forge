@@ -3028,25 +3028,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return res;
     }
 
-    /**
-     * <p>
-     * getAdditionalCostSpells.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final ArrayList<SpellAbility> getAdditionalCostSpells() {
-        final ArrayList<SpellAbility> s = new ArrayList<SpellAbility>(this.getCharacteristics().getSpellAbility());
-        final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
-
-        for (final SpellAbility sa : s) {
-            if (sa.isSpell() && !sa.getAdditionalManaCost().equals("")) {
-                res.add(sa);
-            }
-        }
-        return res;
-    }
-
     // shield = regeneration
     /**
      * <p>

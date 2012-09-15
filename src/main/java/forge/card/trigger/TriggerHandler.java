@@ -734,11 +734,6 @@ public class TriggerHandler {
             }
 
             @Override
-            public boolean isKickerAbility() {
-                return sa[0].isKickerAbility();
-            }
-
-            @Override
             public boolean isMultiKicker() {
                 return sa[0].isMultiKicker();
             }
@@ -782,11 +777,6 @@ public class TriggerHandler {
             @Override
             public void setActivatingPlayer(final Player player) {
                 sa[0].setActivatingPlayer(player);
-            }
-
-            @Override
-            public void setAdditionalManaCost(final String cost) {
-                sa[0].setAdditionalManaCost(cost);
             }
 
             @Override
@@ -842,11 +832,6 @@ public class TriggerHandler {
             @Override
             public void setIsXCost(final boolean b) {
                 sa[0].setIsXCost(b);
-            }
-
-            @Override
-            public void setKickerAbility(final boolean kab) {
-                sa[0].setKickerAbility(kab);
             }
 
             @Override

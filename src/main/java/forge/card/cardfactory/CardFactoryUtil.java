@@ -4178,7 +4178,7 @@ public class CardFactoryUtil {
                 // System.out.println(cardName);
                 final SpellAbility sa = af.getAbility(ia.get(i), card);
                 if (sa.getAbilityFactory().getMapParams().containsKey("SetAsKicked")) {
-                    sa.setKickerAbility(true);
+                    sa.addOptionalAdditionalCosts("Kicker");
                 }
                 card.addSpellAbility(sa);
 
