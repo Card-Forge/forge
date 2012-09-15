@@ -984,6 +984,11 @@ public class CardFactoryUtil {
                     final Map<String, Object> runParams = new TreeMap<String, Object>();
                     runParams.put("Card", sourceCard);
                     AllZone.getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams);
+                    
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(this.getActivatingPlayer()).append(" has unmorphed ");
+                    sb.append(sourceCard.getName());
+                    AllZone.getGameLog().add("ResolveStack", sb.toString(), 2);
                 }
             }
 
@@ -1203,7 +1208,7 @@ public class CardFactoryUtil {
                 sb.append(this.getActivatingPlayer()).append(" has suspended ");
                 sb.append(c.getName()).append("with ");
                 sb.append(suspendCounters).append(" time counters on it.");
-                AllZone.getGameLog().add("AddToStack", sb.toString(), 2);
+                AllZone.getGameLog().add("ResolveStack", sb.toString(), 2);
             }
         };
         final StringBuilder sbDesc = new StringBuilder();
