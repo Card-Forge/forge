@@ -293,6 +293,24 @@ public class CombatUtil {
     }
 
     /**
+     * canBlockAtLeastOne.
+     * 
+     * @param blocker
+     *            the blocker
+     * @param attackers
+     *            the attackers
+     * @return true, if one can be blocked
+     */
+    public static boolean canBlockAtLeastOne(final Card blocker, final CardList attackers) {
+        for (Card attacker : attackers) {
+            if (CombatUtil.canBlock(attacker, blocker)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
      * Can be blocked.
      * 
      * @param attacker

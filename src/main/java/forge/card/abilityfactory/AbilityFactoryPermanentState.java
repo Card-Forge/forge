@@ -1027,17 +1027,37 @@ public class AbilityFactoryPermanentState {
             if (phase.isPlayerTurn(AllZone.getComputerPlayer())
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
-                CardList creatureList = tapList.filter(new CardListFilter() {
-                    @Override
-                    public boolean addCard(final Card c) {
-                        if (c.isCreature()) {
-                            return CombatUtil.canBlock(c);
+
+                if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                    //Combat has already started
+                    final CardList attackers = AllZone.getCombat().getAttackerList();
+                    CardList creatureList = tapList.filter(new CardListFilter() {
+                        @Override
+                        public boolean addCard(final Card c) {
+                            if (c.isCreature()) {
+                                return CombatUtil.canBlockAtLeastOne(c, attackers);
+                            }
+                            return false;
                         }
-                        return false;
+                    });
+                    if (!attackers.isEmpty() && !creatureList.isEmpty()) {
+                        choice = CardFactoryUtil.getBestCreatureAI(creatureList);
                     }
-                });
-                if (!AllZone.getCombat().getAttackers().isEmpty() || !ComputerUtil.getPossibleAttackers().isEmpty()) {
-                    choice = CardFactoryUtil.getBestCreatureAI(creatureList);
+                } else {
+                    final CardList attackers = ComputerUtil.getPossibleAttackers();
+                    attackers.remove(sa.getSourceCard());
+                    CardList creatureList = tapList.filter(new CardListFilter() {
+                        @Override
+                        public boolean addCard(final Card c) {
+                            if (c.isCreature()) {
+                                return CombatUtil.canBlockAtLeastOne(c, attackers);
+                            }
+                            return false;
+                        }
+                    });
+                    if (!attackers.isEmpty() && creatureList.size() == 1) {
+                        choice = CardFactoryUtil.getBestCreatureAI(creatureList);
+                    }
                 }
             } else if (phase.isPlayerTurn(AllZone.getHumanPlayer())
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
