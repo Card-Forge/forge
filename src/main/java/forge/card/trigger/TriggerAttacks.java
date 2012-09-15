@@ -22,6 +22,7 @@ import java.util.Map;
 
 import forge.Card;
 import forge.CardList;
+import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
 
 /**
@@ -61,7 +62,8 @@ public class TriggerAttacks extends Trigger {
         }
 
         if (this.getMapParams().containsKey("Attacked")) {
-            if (this.getMapParams().get("Attacked").equals("Player") && (Integer) runParams2.get("Attacked") > 0) {
+            if (this.getMapParams().get("Attacked").equals("Player") 
+                    && ((GameEntity) runParams2.get("Attacked") instanceof Card)) {
                 return false;
             }
         }
