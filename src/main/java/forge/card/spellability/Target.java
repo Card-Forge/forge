@@ -710,10 +710,14 @@ public class Target {
             }
         }
 
-        for (final Card c : AllZoneUtil.getCardsIn(this.tgtZone)) {
-            if (c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard)
-                    && (!isTargeted || c.canBeTargetedBy(sa))) {
-                return true;
+        if (this.tgtZone.contains(ZoneType.Stack)) {
+            return true;
+        } else {
+            for (final Card c : AllZoneUtil.getCardsIn(this.tgtZone)) {
+                if (c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard)
+                        && (!isTargeted || c.canBeTargetedBy(sa))) {
+                    return true;
+                }
             }
         }
 
