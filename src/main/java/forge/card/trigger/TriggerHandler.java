@@ -302,6 +302,12 @@ public class TriggerHandler {
 
         if (checkStatics) {
             Singletons.getModel().getGameAction().checkStaticAbilities();
+        } else if (runParams.containsKey("Destination")){
+            // Check static abilities when a card enters the battlefield
+            String type = (String) runParams.get("Destination");
+            if (type.equals("Battlefield")) {
+                Singletons.getModel().getGameAction().checkStaticAbilities();
+            }
         }
 
         // AP
