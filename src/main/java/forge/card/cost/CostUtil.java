@@ -36,7 +36,7 @@ import forge.gui.GuiUtils;
  */
 public class CostUtil {
     private static Random r = new Random();
-
+    
     /**
      * Check sacrifice cost.
      * 
@@ -47,6 +47,21 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkSacrificeCost(final Cost cost, final Card source) {
+        return checkSacrificeCost(cost, source, true);
+    }
+
+    /**
+     * Check sacrifice cost.
+     * 
+     * @param cost
+     *            the cost
+     * @param source
+     *            the source
+     * @param important
+     *            is the gain important enough?
+     * @return true, if successful
+     */
+    public static boolean checkSacrificeCost(final Cost cost, final Card source, final boolean important) {
         if (cost == null) {
             return true;
         }
@@ -57,6 +72,9 @@ public class CostUtil {
                 final String type = sac.getType();
 
                 if (type.equals("CARDNAME")) {
+                    if (!important) {
+                        return false;
+                    }
                     CardList auras = new CardList(source.getEnchantedBy());
                     if (!auras.getController(source.getController()).isEmpty()) {
                         return false;

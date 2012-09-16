@@ -326,7 +326,7 @@ public class AbilityFactoryAlterLife {
         }
 
         if (abCost != null && life > 5) {
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkSacrificeCost(abCost, source, false)) {
                 return false;
             }
 
@@ -348,7 +348,8 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't use lifegain before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
+                && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
