@@ -2,9 +2,9 @@ Name:Dwarven Landslide
 ManaCost:3 R
 Types:Sorcery
 Text:no text
-A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land. If CARDNAME was kicked, destroy another target land.
-A:SP$ Destroy | Cost$ 5 R R Sac<1/Land> | SetAsKicked$ True | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBKicker | CostDesc$ Kicker - 2 R, Sacrifice a land. | SpellDescription$ (You may pay 2 R  and sacrifice a land in addition to any other costs as you cast this spell.)
-SVar:DBKicker:DB$ Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select another target land | TargetUnique$ True
+K:Kicker 2 R Sac<1/Land>
+A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TargetMin$ X | TargetMax$ X | References$ X | TgtPrompt$ Select target land | SpellDescription$ Destroy target land. If CARDNAME was kicked, destroy another target land.
+SVar:X:Count$KickerSelected:2:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_landslide.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/60.jpg

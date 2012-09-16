@@ -1,0 +1,20 @@
+Name:Anavolver
+ManaCost:3 G
+Types:Creature Volver
+Text:no text
+PT:3/3
+K:Kicker 1 U
+K:Kicker B
+T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked 1 U | Origin$ Any | Destination$ Battlefield | Execute$ VolverStrength | Static$ True | TriggerDescription$ If CARDNAME was kicked with its 1 U kicker, it enters the battlefield with two +1/+1 counters on it and with flying.
+SVar:VolverStrength:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ VolverLaunch
+SVar:VolverLaunch:DB$ Pump | Defined$ Self | KW$ Flying | Permanent$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked B | Origin$ Any | Destination$ Battlefield | Execute$ VolverPumped | Static$ True | TriggerDescription$ If CARDNAME was kicked with its B kicker, it enters the battlefield with a +1/+1 counter on it and with "Pay 3 life: Regenerate CARDNAME."
+SVar:VolverPumped:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ VolverResilience
+SVar:VolverResilience:DB$ Animate | Defined$ Self | Abilities$ ABRegen | Permanent$ True
+SVar:ABRegen:AB$Regenerate | Cost$ PayLife<3> | SpellDescription$ Regenerate CARDNAME.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/anavolver.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/75.jpg
+Oracle:Kicker {1}{U} and/or {B} (You may pay an additional {1}{U} and/or {B} as you cast this spell.)\nIf Anavolver was kicked with its {1}{U} kicker, it enters the battlefield with two +1/+1 counters on it and with flying.\nIf Anavolver was kicked with its {B} kicker, it enters the battlefield with a +1/+1 counter on it and with "Pay 3 life: Regenerate Anavolver."
+End

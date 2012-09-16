@@ -262,6 +262,7 @@ res/cardsfolder/a/anaconda.txt svneol=native#text/plain
 res/cardsfolder/a/anarchist.txt svneol=native#text/plain
 res/cardsfolder/a/anarchy.txt svneol=native#text/plain
 res/cardsfolder/a/anathemancer.txt -text
+res/cardsfolder/a/anavolver.txt -text
 res/cardsfolder/a/ancestors_chosen.txt svneol=native#text/plain
 res/cardsfolder/a/ancestors_prophet.txt svneol=native#text/plain
 res/cardsfolder/a/ancestral_knowledge.txt -text
@@ -1468,6 +1469,7 @@ res/cardsfolder/c/cerulean_wyvern.txt svneol=native#text/plain
 res/cardsfolder/c/cessation.txt svneol=native#text/plain
 res/cardsfolder/c/ceta_disciple.txt svneol=native#text/plain
 res/cardsfolder/c/ceta_sanctuary.txt svneol=native#text/plain
+res/cardsfolder/c/cetavolver.txt -text
 res/cardsfolder/c/chain_reaction.txt svneol=native#text/plain
 res/cardsfolder/c/chainbreaker.txt svneol=native#text/plain
 res/cardsfolder/c/chained_throatseeker.txt svneol=native#text/plain
@@ -2239,6 +2241,7 @@ res/cardsfolder/d/defy_death.txt -text
 res/cardsfolder/d/defy_gravity.txt svneol=native#text/plain
 res/cardsfolder/d/dega_disciple.txt svneol=native#text/plain
 res/cardsfolder/d/dega_sanctuary.txt svneol=native#text/plain
+res/cardsfolder/d/degavolver.txt -text
 res/cardsfolder/d/deglamer.txt svneol=native#text/plain
 res/cardsfolder/d/dehydration.txt svneol=native#text/plain
 res/cardsfolder/d/deity_of_scars.txt svneol=native#text/plain

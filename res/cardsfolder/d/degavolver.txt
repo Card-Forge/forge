@@ -1,0 +1,20 @@
+Name:Degavolver
+ManaCost:1 W
+Types:Creature Volver
+Text:no text
+PT:1/1
+K:Kicker 1 B
+K:Kicker R
+T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked 1 B | Origin$ Any | Destination$ Battlefield | Execute$ VolverStrength | Static$ True | TriggerDescription$ If CARDNAME was kicked with its 1 B kicker, it enters the battlefield with two +1/+1 counters on it and with "Pay 3 life: Regenerate CARDNAME."
+SVar:VolverStrength:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ VolverResilience
+SVar:VolverResilience:DB$ Animate | Defined$ Self | Abilities$ ABRegen | Permanent$ True
+SVar:ABRegen:AB$Regenerate | Cost$ PayLife<3> | SpellDescription$ Regenerate CARDNAME.
+T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked R | Origin$ Any | Destination$ Battlefield | Execute$ VolverPumped | Static$ True | TriggerDescription$ If CARDNAME was kicked with its R kicker, it enters the battlefield with a +1/+1 counter on it and with first strike.
+SVar:VolverPumped:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ VolverSpeed
+SVar:VolverSpeed:DB$ Pump | Defined$ Self | KW$ First Strike | Permanent$ True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/degavolver.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/6.jpg
+Oracle:Kicker {1}{B} and/or {R} (You may pay an additional {1}{B} and/or {R} as you cast this spell.)\nIf Degavolver was kicked with its {1}{B} kicker, it enters the battlefield with two +1/+1 counters on it and with "Pay 3 life: Regenerate Degavolver."\nIf Degavolver was kicked with its {R} kicker, it enters the battlefield with a +1/+1 counter on it and with first strike.
+End
