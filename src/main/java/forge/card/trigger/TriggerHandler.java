@@ -1013,7 +1013,7 @@ public class TriggerHandler {
                 wrapperAbility.doTrigger(isMandatory);
                 ComputerUtil.playNoStack(wrapperAbility);
             }
-            Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
+            //Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
         } else {
             AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
