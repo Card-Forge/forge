@@ -1553,9 +1553,9 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      */
     protected final void doDiscard(final Card c, final SpellAbility sa) {
         // TODO: This line should be moved inside CostPayment somehow
-        if (sa != null) {
+        /*if (sa != null) {
             sa.addCostToHashList(c, "Discarded");
-        }
+        }*/
 
         Singletons.getModel().getGameAction().discardMadness(c);
 

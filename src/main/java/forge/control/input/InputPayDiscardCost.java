@@ -160,7 +160,6 @@ public class InputPayDiscardCost extends Input {
      */
     public void done() {
         this.stop();
-        // actually sacrifice the cards
         for (Card selected : this.discardCost.getList()) {
             selected.setUsedToPay(false);
             AllZone.getHumanPlayer().discard(selected, this.ability);
