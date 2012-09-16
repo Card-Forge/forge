@@ -2050,7 +2050,7 @@ public final class AbilityFactoryReveal {
             topCards.add(lib.get(j));
         }
         
-        List<Object> orderedCards = GuiUtils.getOrderChoices("Select order to Rearrange", "Top of Library", true, (Object[])topCards.toArray());
+        List<Object> orderedCards = GuiUtils.getOrderChoices("Select order to Rearrange", "Top of Library", 0, (Object[])topCards.toArray(), null);
         for(int i = maxCards-1; i >= 0; i--){
             Card next = (Card)orderedCards.get(i);
             Singletons.getModel().getGameAction().moveToLibrary(next, 0);

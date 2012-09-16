@@ -56,12 +56,19 @@ public class DualListBox extends JPanel {
     
     private JLabel orderedLabel;
 
-    private boolean selectAll = true;
+    private int remainingObjects = 0;
     
-    public DualListBox(boolean selectAll, String label) {
-        this.selectAll = selectAll;
+    public DualListBox(int remainingObjects, String label, Object[] sourceElements, Object[] destElements) {
+        this.remainingObjects = remainingObjects;
         initScreen();
         orderedLabel.setText(label);
+        if (sourceElements != null) {
+            addSourceElements(sourceElements);
+        }
+        if (destElements != null) {
+            addDestinationElements(destElements);
+        }
+        this.setButtonState();
     }
 
     public void clearSourceListModel() {
@@ -169,7 +176,7 @@ public class DualListBox extends JPanel {
         // Dual List Complete Buttons
         okButton = new JButton("OK");
         okButton.addActionListener(new OkListener());
-        okButton.setEnabled(!selectAll);
+
         autoButton = new JButton("Auto");
         autoButton.addActionListener(new AutoListener());
 
@@ -264,14 +271,17 @@ public class DualListBox extends JPanel {
     }
     
     public void setButtonState() {
-        if (this.selectAll) {
-            okButton.setEnabled(sourceListModel.getSize() == 0);
+        if (remainingObjects != -1) {
+            okButton.setEnabled(sourceListModel.getSize() == remainingObjects);
         }
+		if (remainingObjects < 1) {
+            autoButton.setEnabled(sourceListModel.getSize() != remainingObjects);
+        }
+
         removeButton.setEnabled(destListModel.getSize() != 0);
         removeAllButton.setEnabled(destListModel.getSize() != 0);
         addButton.setEnabled(sourceListModel.getSize() != 0);
         addAllButton.setEnabled(sourceListModel.getSize() != 0);
-        autoButton.setEnabled(sourceListModel.getSize() != 0);
     }
     
     private void finishOrdering() {

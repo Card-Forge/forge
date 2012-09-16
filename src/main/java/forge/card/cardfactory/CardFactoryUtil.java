@@ -5024,7 +5024,7 @@ public class CardFactoryUtil {
                         card.clearDevoured();
                         if (card.getController().isHuman()) {
                             if (creats.size() > 0) {
-                                final List<Object> selection = GuiUtils.getOrderChoices("Devour", "Devouring", false, (Object[]) creats.toArray());
+                                final List<Object> selection = GuiUtils.getOrderChoices("Devour", "Devouring", -1, (Object[]) creats.toArray(), null);
                                 numCreatures[0] = selection.size();
 
                                 for (Object o : selection) {
