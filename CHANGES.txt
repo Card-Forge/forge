@@ -128,6 +128,29 @@ Fixes/Features:
 - Fixed Homarid.
 - Improved description of the new ETBCounter keyword.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fix for Ertai's Trickery.
+- Fixed Death Wind
+- Better fix for Ertai's Trickery.
+- Fixed Blood Reckoning and Hissing Miasma.
+- Converted Breath of Darigaaz and Burst Lightning to proper kicker spells
+- Fixed Nihilith trigger
+- Added a specific Suspend message to the GameLog
+- Converted Conqueror's Pledge
+- Add specific Game Log for unmorphing
+- Cleanup references to eqPump
+- Cleanup unused imports
+- Fixed hasCandidates failing to look for SpellAbilities on the stack.
+- Fixed AI of Spore Cloud.
+- Improved description of Finest Hour.
+- Added SVar:RemAIDeck:True to Darkheart Sliver and Soldevi Golem.
+- The AI will now regenerate permanents threatened by AD DestroyAll.
+- merged changes from Trunk up to r16875
+- Fixed Modular description crashing.
+- The AI will now check ETB Replacement effects when casting permanent spells.
+- The AI will now use AF Tap very conservatively during its own turn.
+- Fixed static triggers triggering twice.
+- Fixed "Condition$ Kicked".
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -228,6 +251,7 @@ Revenant Patriarch
 Ana Battlemage
 Nightscape Battlemage
 Thornscape Battlemage
+Bog Down
 
 
 end
