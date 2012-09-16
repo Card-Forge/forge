@@ -2435,15 +2435,19 @@ public class AbilityFactoryCounters {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         }
 
-        final ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
         Card source = null;
+        ArrayList<Card> srcCards;
+        final Target tgt = sa.getTarget();
+        if (!params.containsKey("Source") && tgt != null) {
+            srcCards = tgt.getTargetCards();
+        } else {
+            srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
+        }
         if (srcCards.size() > 0) {
             source = srcCards.get(0);
         }
-
         ArrayList<Card> tgtCards;
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
+        if (!params.containsKey("Defined") && tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
@@ -2655,15 +2659,19 @@ public class AbilityFactoryCounters {
         final Counters cType = Counters.valueOf(params.get("CounterType"));
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
 
-        final ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
         Card source = null;
+        ArrayList<Card> srcCards;
+        final Target tgt = sa.getTarget();
+        if (!params.containsKey("Source") && tgt != null) {
+            srcCards = tgt.getTargetCards();
+        } else {
+            srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
+        }
         if (srcCards.size() > 0) {
             source = srcCards.get(0);
         }
-
         ArrayList<Card> tgtCards;
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
+        if (!params.containsKey("Defined") && tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
