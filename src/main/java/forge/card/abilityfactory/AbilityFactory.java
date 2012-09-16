@@ -1612,7 +1612,7 @@ public class AbilityFactory {
             }
 
             if (calcX[0].startsWith("Count")) {
-                return CardFactoryUtil.xCount(card, calcX[1]) * multiplier;
+                return CardFactoryUtil.xCount(card, calcX[1], ability) * multiplier;
             }
 
             if (calcX[0].startsWith("Number")) {

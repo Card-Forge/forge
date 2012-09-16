@@ -2319,6 +2319,36 @@ public class CardFactoryUtil {
 
         return num;
     }
+    
+    /**
+     * <p>
+     * Parse non-mana X variables.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param s
+     *            a {@link java.lang.String} object.
+     * @return a int.
+     */
+    public static int xCount(final Card c, final String s, final SpellAbility sa) {
+
+        final String[] l = s.split("/");
+        final String[] m = CardFactoryUtil.parseMath(l);
+        
+        final String[] sq;
+        sq = l[0].split("\\.");
+
+        // Count$Kicked.<numHB>.<numNotHB>
+        if (sq[0].contains("Kicked")) {
+            if (sa.isKicked()) {
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c); // Kicked
+            } else {
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not Kicked
+            }
+        }
+        return xCount(c, s);
+    }
 
     /**
      * <p>
