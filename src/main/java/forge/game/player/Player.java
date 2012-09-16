@@ -273,7 +273,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
         boolean change = false;
         // rule 118.5
         if (this.life > newLife) {
-            change = this.loseLife(this.life - newLife, source);
+            change = (this.loseLife(this.life - newLife, source) > 0);
         } else if (newLife > this.life) {
             change = this.gainLife(newLife - this.life, source);
         } else {
@@ -399,16 +399,16 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            a int.
      * @param c
      *            a {@link forge.Card} object.
-     * @return a boolean.
+     * @return an int.
      */
-    public final boolean loseLife(final int toLose, final Card c) {
-        boolean newLifeSet = false;
+    public final int loseLife(final int toLose, final Card c) {
+        int lifeLost = 0;
         if (!this.canLoseLife()) {
-            return false;
+            return 0;
         }
         if (toLose > 0) {
             this.subtractLife(toLose);
-            newLifeSet = true;
+            lifeLost = toLose;
             this.updateObservers();
         } else if (toLose == 0) {
             // Rule 118.4
@@ -416,7 +416,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
             // nothing to do
         } else {
             System.out.println("Player - trying to lose negative life");
-            return false;
+            return 0;
         }
 
         this.lifeLostThisTurn += toLose;
@@ -427,7 +427,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
         runParams.put("LifeAmount", toLose);
         AllZone.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams);
 
-        return newLifeSet;
+        return lifeLost;
     }
 
     /**
@@ -493,7 +493,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
         }
         // rule 118.8
         if (this.life >= lifePayment) {
-            return this.loseLife(lifePayment, source);
+            return (this.loseLife(lifePayment, source) > 0);
         }
 
         return false;

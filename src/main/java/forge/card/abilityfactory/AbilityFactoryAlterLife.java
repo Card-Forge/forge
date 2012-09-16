@@ -899,6 +899,7 @@ public class AbilityFactoryAlterLife {
      */
     public static void loseLifeResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
+        int lifeLost = 0;
 
         final int lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("LifeAmount"), sa);
 
@@ -913,9 +914,10 @@ public class AbilityFactoryAlterLife {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                p.loseLife(lifeAmount, sa.getSourceCard());
+                lifeLost += p.loseLife(lifeAmount, sa.getSourceCard());
             }
         }
+        sa.getSourceCard().setSVar("AFLifeLost", "Number$" + Integer.toString(lifeLost));
     }
 
     // *************************************************************************

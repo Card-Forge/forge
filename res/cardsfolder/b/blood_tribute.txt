@@ -4,8 +4,10 @@ Types:Sorcery
 Text:no text
 K:Kicker tapXType<1/Vampire>
 A:SP$ LoseLife | Cost$ 4 B B | ValidTgts$ Opponent | LifeAmount$ X | References$ X | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses half his or her life, rounded up. If CARDNAME was kicked, you gain life equal to the life lost this way.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X | Condition$ Kicked
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ AFLifeLost | Condition$ Kicked | ConditionDescription$ If it was kicked,
 SVar:X:Count$OppLifeTotal/HalfUp
+#This SVar will be overridden by AF LoseLife
+SVar:AFLifeLost:Count$OppLifeTotal/HalfUp
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_tribute.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/81.jpg
