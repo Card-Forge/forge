@@ -1792,6 +1792,13 @@ public class ComputerUtil {
             public int compare(final SpellAbility a, final SpellAbility b) {
                 int a1 = CardUtil.getConvertedManaCost(a);
                 int b1 = CardUtil.getConvertedManaCost(b);
+                
+                // cast 0 mana cost spells first (might be a Mox)
+                if (a1 == 0) {
+                    b1 = -2;
+                } else if (b1 == 0) {
+                    a1 = -2;
+                }
 
                 a1 += getSpellAbilityPriority(a);
                 b1 += getSpellAbilityPriority(b);
