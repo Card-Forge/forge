@@ -32,6 +32,7 @@ import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.IStorage;
 import forge.util.TextUtil;
 
 /** 
@@ -189,9 +190,19 @@ public enum CSubmenuSealed implements ICDoc {
             return;
         }
 
-        // NOTE: Here we should check if a similarly-named tournament already exists,
-        // and if it does, delete it first! -BBU
+        final IStorage<DeckGroup> sealedDecks = Singletons.getModel().getDecks().getSealed();
+        
+        if (!(sealedDecks.isUnique(sDeckName))){
 
+            final int deleteDeck = JOptionPane.showConfirmDialog(null, "\"" + sDeckName 
+                    + "\" already exists! Do you want to replace it?",
+                    "Sealed Deck Game Exists", JOptionPane.YES_NO_OPTION);
+
+            if (deleteDeck == JOptionPane.NO_OPTION) {
+                return;
+            }
+            sealedDecks.delete(sDeckName);            
+        } 
 
         final ItemPool<CardPrinted> sDeck = sd.getCardpool();
         ItemPool<CardPrinted> aiDecks = sd.getCardpool();
