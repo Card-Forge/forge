@@ -271,7 +271,7 @@ public class AbilityFactoryDestroy {
                     }
                 });
             }
-            System.out.println("destroy" + sa + list);
+
 
             if (list.size() == 0) {
                 return false;

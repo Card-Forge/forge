@@ -1121,35 +1121,6 @@ public class CardFactoryCreatures {
         card.addComesIntoPlayCommand(intoPlay);
     }
 
-    /*private static void getCard_PhyrexianScuta(final Card card, final String cardName) {
-        final Cost abCost = new Cost(card, "3 B PayLife<3>", false);
-        final SpellAbility kicker = new Spell(card, abCost, null) {
-            private static final long serialVersionUID = -6420757044982294960L;
-
-            @Override
-            public void resolve() {
-                card.setKicked(true);
-                Singletons.getModel().getGameAction().moveToPlay(card);
-                card.addCounterFromNonEffect(Counters.P1P1, 2);
-            }
-
-            @Override
-            public boolean canPlay() {
-                return super.canPlay() && (card.getController().getLife() >= 3);
-            }
-
-        };
-        kicker.setKickerAbility(true);
-        kicker.setManaCost("3 B");
-        kicker.setDescription("Kicker - Pay 3 life.");
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append(card.getName()).append(" - Creature 3/3 (Kicked)");
-        kicker.setStackDescription(sb.toString());
-
-        card.addSpellAbility(kicker);
-    }*/
-
     private static void getCard_YoseiTheMorningStar(final Card card, final String cardName) {
         final CardList targetPerms = new CardList();
         final SpellAbility ability = new Ability(card, "0") {
