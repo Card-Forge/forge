@@ -9272,6 +9272,7 @@ res/cardsfolder/s/stormfront_pegasus.txt svneol=native#text/plain
 res/cardsfolder/s/stormfront_riders.txt svneol=native#text/plain
 res/cardsfolder/s/stormscale_anarch.txt svneol=native#text/plain
 res/cardsfolder/s/stormscape_apprentice.txt svneol=native#text/plain
+res/cardsfolder/s/stormscape_battlemage.txt -text
 res/cardsfolder/s/stormscape_familiar.txt svneol=native#text/plain
 res/cardsfolder/s/stormscape_master.txt svneol=native#text/plain
 res/cardsfolder/s/stormtide_leviathan.txt svneol=native#text/plain
