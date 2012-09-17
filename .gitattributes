@@ -7159,6 +7159,7 @@ res/cardsfolder/p/primal_cocoon.txt svneol=native#text/plain
 res/cardsfolder/p/primal_command.txt -text
 res/cardsfolder/p/primal_forcemage.txt svneol=native#text/plain
 res/cardsfolder/p/primal_frenzy.txt svneol=native#text/plain
+res/cardsfolder/p/primal_growth.txt -text
 res/cardsfolder/p/primal_huntbeast.txt -text
 res/cardsfolder/p/primal_order.txt svneol=native#text/plain
 res/cardsfolder/p/primal_plasma.txt svneol=native#text/plain
@@ -7183,6 +7184,7 @@ res/cardsfolder/p/prismatic_omen.txt svneol=native#text/plain
 res/cardsfolder/p/prismatic_strands.txt -text
 res/cardsfolder/p/prismatic_ward.txt -text
 res/cardsfolder/p/prismwake_merrow.txt -text
+res/cardsfolder/p/prison_barricade.txt -text
 res/cardsfolder/p/prison_term.txt -text
 res/cardsfolder/p/pristine_angel.txt svneol=native#text/plain
 res/cardsfolder/p/pristine_talisman.txt svneol=native#text/plain
@@ -7197,6 +7199,7 @@ res/cardsfolder/p/prodigal_sorcerer.txt svneol=native#text/plain
 res/cardsfolder/p/profane_command.txt svneol=native#text/plain
 res/cardsfolder/p/profane_prayers.txt svneol=native#text/plain
 res/cardsfolder/p/progenitus.txt svneol=native#text/plain
+res/cardsfolder/p/prohibit.txt -text
 res/cardsfolder/p/promise_of_bunrei.txt -text
 res/cardsfolder/p/promise_of_power.txt svneol=native#text/plain
 res/cardsfolder/p/promised_kannushi.txt svneol=native#text/plain

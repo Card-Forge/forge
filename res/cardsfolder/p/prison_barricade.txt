@@ -1,0 +1,15 @@
+Name:Prison Barricade
+ManaCost:1 W
+Types:Creature Wall
+Text:no text
+PT:1/3
+K:Defender
+K:Kicker 1 W
+T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ BarricadePumped | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with a +1/+1 counter on it and with "CARDNAME can attack as though it didn't have defender."
+SVar:BarricadePumped:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PrisonAttack
+SVar:PrisonAttack:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | Permanent$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prison_barricade.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/25.jpg
+Oracle:Defender (This creature can't attack.)\nKicker {1}{W} (You may pay an additional {1}{W} as you cast this spell.)\nIf Prison Barricade was kicked, it enters the battlefield with a +1/+1 counter on it and with "Prison Barricade can attack as though it didn't have defender."
+End
