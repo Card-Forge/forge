@@ -5,6 +5,8 @@ Forge Beta: 0#-0#-2012 ver 1.2.14
 11### cards in total.
 
 
+All modern legal sets are now at least 85% complete.
+
 We recieved several reports of a bug which caused a crash report with the following content "java.lang.NumberFormatException: For input string: "X"". This should now be fixed.
 
 --
