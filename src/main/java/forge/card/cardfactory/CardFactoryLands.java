@@ -663,7 +663,7 @@ class CardFactoryLands {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Crosis's Catacombs") || cardName.equals("Darigaaz's Caldera")
+        /*else if (cardName.equals("Crosis's Catacombs") || cardName.equals("Darigaaz's Caldera")
                 || cardName.equals("Dromar's Cavern") || cardName.equals("Rith's Grove")
                 || cardName.equals("Treva's Ruins")) {
             final Command comesIntoPlay = new Command() {
@@ -721,7 +721,7 @@ class CardFactoryLands {
             };
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        } // *************** END ************ END **************************
+        } */// *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Coral Atoll") || cardName.equals("Dormant Volcano") || cardName.equals("Everglades")
