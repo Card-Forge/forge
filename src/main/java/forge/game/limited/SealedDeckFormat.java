@@ -81,7 +81,7 @@ public class SealedDeckFormat {
         } else if (sealedType.equals("Block") || sealedType.equals("FBlock")) {
 
             List<CardBlock> blocks = new ArrayList<CardBlock>();
-            
+
             if (sealedType.equals("Block")) {
                 for (CardBlock b : Singletons.getModel().getBlocks()) {
                     blocks.add(b);
@@ -92,7 +92,7 @@ public class SealedDeckFormat {
                     blocks.add(b);
                 }
             }
-            
+
             final CardBlock block = GuiUtils.chooseOne("Choose Block", blocks);
 
             final CardEdition[] cardSets = block.getSets();
@@ -254,7 +254,16 @@ public class SealedDeckFormat {
                     }
                 };
 
-                for (int i = 0; i < draft.getNumPacks(); i++) {
+                // Choose number of boosters
+                final Integer[] integers = new Integer[10];
+
+                for (int i = 0; i < 10; i++) {
+                    integers[i] = Integer.valueOf(i + 3);
+                }
+
+                Integer nrBoosters = GuiUtils.chooseOne("How many booster packs?", integers);
+
+                for (int i = 0; i < nrBoosters; i++) {
                     this.product.add(new UnOpenedProduct(fnPick, bpCustom));
                 }
 
