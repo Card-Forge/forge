@@ -5,7 +5,8 @@ Text:no text
 K:Kicker 3 G
 A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | ChangeNum$ 2 | Tapped$ True | RememberChanged$ True | SubAbility$ DBUntap | SpellDescription$ Search your library for up to two Forest cards and put them onto the battlefield tapped. Then shuffle your library. If CARDNAME was kicked, untap all Forests put onto the battlefield this way. They become 3/3 green creatures with haste that are still lands.
 SVar:DBUntap:DB$ Untap | Defined$ Remembered | KW$ May be played | PumpZone$ Exile | SubAbility$ DBAnimate | Condition$ Kicked | ConditionDescription$ If it was kicked,
-SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Power$ 3 | Toughness$ 3 | Types$ Creature | Keywords$ Haste| Condition$ Kicked
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Power$ 3 | Toughness$ 3 | Types$ Creature | Keywords$ Haste| Condition$ Kicked | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_wilds.jpg
