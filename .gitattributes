@@ -4541,6 +4541,7 @@ res/cardsfolder/h/hunting_kavu.txt -text
 res/cardsfolder/h/hunting_moa.txt svneol=native#text/plain
 res/cardsfolder/h/hunting_pack.txt svneol=native#text/plain
 res/cardsfolder/h/hunting_triad.txt svneol=native#text/plain
+res/cardsfolder/h/hunting_wilds.txt -text
 res/cardsfolder/h/huntmaster_of_the_fells_ravager_of_the_fells.txt -text
 res/cardsfolder/h/hurkyls_recall.txt svneol=native#text/plain
 res/cardsfolder/h/hurloon_minotaur.txt svneol=native#text/plain

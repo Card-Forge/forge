@@ -6,7 +6,7 @@ PT:0/0
 K:Graft 4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each other creature you control that has a +1/+1 counter on it.
 SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.Other+YouCtrl+counters_GE1_P1P1 | CounterType$ P1P1 | CounterNum$ 1
-A:AB$ MoveCounter | Cost$ 1 | Defined$ Self | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Move a +1/+1 counter from target creature you control onto CARDNAME.
+A:AB$ MoveCounter | Cost$ 2 | Defined$ Self | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Move a +1/+1 counter from target creature you control onto CARDNAME.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cytoplast_root_kin.jpg
