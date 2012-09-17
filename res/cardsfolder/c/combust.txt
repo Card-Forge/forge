@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Instant
 Text:no text
 K:CARDNAME can't be countered.
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.White,Creature.Blue | NumDmg$ 5 | NoPrevention$ True | TgtPrompt$ Select target white or blue creature. | SpellDescription$ CARDNAME deals 5 damage to target white or blue creature.
+A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.White,Creature.Blue | NumDmg$ 5 | NoPrevention$ True | TgtPrompt$ Select target white or blue creature. | SpellDescription$ CARDNAME deals 5 damage to target white or blue creature. The damage can't be prevented.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/combust.jpg
