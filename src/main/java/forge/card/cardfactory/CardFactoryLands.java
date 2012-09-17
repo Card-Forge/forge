@@ -721,7 +721,7 @@ class CardFactoryLands {
             };
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        } */// *************** END ************ END **************************
+        } /// *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Coral Atoll") || cardName.equals("Dormant Volcano") || cardName.equals("Everglades")
@@ -803,7 +803,7 @@ class CardFactoryLands {
             };
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         return card;
     }
