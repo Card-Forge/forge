@@ -94,10 +94,6 @@ public class DeckGroup extends DeckBase {
 
         List<Deck> sortedData = new ArrayList<Deck>(draftData.values());
 
-        for (int j = 0; j < sortedData.size(); j++) {
-            Deck getDeck = sortedData.get(j);
-        }
-
         this.aiDecks = sortedData;
 
     }
