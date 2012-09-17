@@ -5,7 +5,7 @@ Forge Beta: 0#-0#-2012 ver 1.2.14
 11### cards in total.
 
 
-
+We recieved several reports of a bug which caused a crash report with the following content "java.lang.NumberFormatException: For input string: "X"". This should now be fixed.
 
 --
 
@@ -151,6 +151,29 @@ Fixes/Features:
 - Fixed static triggers triggering twice.
 - Fixed "Condition$ Kicked".
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Blood Tribute will now gain life equal to the life really lost by it.
+- Fixed description of Boreal Centaur.
+- The AI will no longer sacrifice the sourcecard of a GainLife ability unless it has 5 or less life.
+- Changed Select All Param in DualListBox to an integer to allow for compatibility with Sideboarding
+- Converted some non-permanent kicker spells.
+- Added a new xCount that also has the SpellAbility as parameter.
+- Added Kicked option.
+- Converted Dwarven Landslide.
+- Little AI tweak in sortSpellAbilityByCost.
+- Experimental: Run checkStaticAbilities before ETB triggers are checked.
+- Moved all code related to the discarded list to the CostDiscard class.
+- Converted Explosive Growth to new Kicker
+- Removed redundant References param from Birthing Pod
+- Sealed deck game creation now checks for name uniqueness and asks whether you want to replace the previous game.
+- Style fix for SCubmenuSealed.java.
+- Removed some unused code from Deckgroup.rankAiDecks().
+- Converted the Lair lands to script.
+- Converted the Karoo lands to script.
+- converted a few more kicker spells
+- The player can now choose 3-12 booster packs instead of the default 6 in Custom (Cube) Sealed Deck games too.
+- Converted some more kicker spells
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -183,18 +206,21 @@ Grisly Salvage
 Guttersnipe
 Hypersonic Dragon
 Isperia, Supreme Judge
+Izzet Charm
 Izzet Guildgate
 Jace, Architect of Thought
 Jarad, Golgari Lich Lord
 Judge's Familiar
 Lotleth Troll
 Loxodon Smiter
+Mercurial Chemister
 Mizzium Mortars
 Necropolis Regent
 Niv-Mizzet, Dracogenius
 Ogre Jailbreaker
 Precinct Captain
 Pyroconvergence
+Rakdos, Lord of Riots
 Rakdos Guildgate
 Rakdos Shred-Freak
 Rakdos's Return
@@ -252,6 +278,14 @@ Ana Battlemage
 Nightscape Battlemage
 Thornscape Battlemage
 Bog Down
+Anavolver
+Cetavolver
+Degavolver
+Hisoka, Minamo Sensei
+Cytoplast Root-Kin
+Gigantiform
+Hunting Wilds
+Kangee, Aerie Keeper
 
 
 end
