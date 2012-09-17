@@ -20,6 +20,7 @@ package forge.card.trigger;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -293,7 +294,9 @@ public class TriggerHandler {
 
         // Static triggers
         for (final Card c : allCards) {
-            for (final Trigger t : c.getTriggers()) {
+            ArrayList<Trigger> triggers = new ArrayList<Trigger>();
+            triggers.addAll(c.getTriggers());
+            for (final Trigger t : triggers) {
                 if (t.isStatic()) {
                     checkStatics |= this.runSingleTrigger(t, mode, runParams);
                 }

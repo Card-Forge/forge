@@ -6355,6 +6355,7 @@ res/cardsfolder/n/neck_snap.txt svneol=native#text/plain
 res/cardsfolder/n/necra_disciple.txt svneol=native#text/plain
 res/cardsfolder/n/necra_sanctuary.txt -text
 res/cardsfolder/n/necratog.txt svneol=native#text/plain
+res/cardsfolder/n/necravolver.txt -text
 res/cardsfolder/n/necrite.txt svneol=native#text/plain
 res/cardsfolder/n/necrobite.txt -text
 res/cardsfolder/n/necrogen_censer.txt svneol=native#text/plain
@@ -7406,6 +7407,7 @@ res/cardsfolder/r/raise_the_alarm.txt svneol=native#text/plain
 res/cardsfolder/r/raka_disciple.txt svneol=native#text/plain
 res/cardsfolder/r/raka_sanctuary.txt -text
 res/cardsfolder/r/rakalite.txt -text
+res/cardsfolder/r/rakavolver.txt -text
 res/cardsfolder/r/rakdos_augermage.txt svneol=native#text/plain
 res/cardsfolder/r/rakdos_carnarium.txt svneol=native#text/plain
 res/cardsfolder/r/rakdos_guildmage.txt svneol=native#text/plain

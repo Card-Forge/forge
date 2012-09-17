@@ -1,0 +1,22 @@
+Name:Rakavolver
+ManaCost:2 R
+Types:Creature Volver
+Text:no text
+PT:2/2
+K:Kicker 1 W
+K:Kicker U
+T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked 1 W | Origin$ Any | Destination$ Battlefield | Execute$ VolverStrength | Static$ True | TriggerDescription$ If CARDNAME was kicked with its 1 W kicker, it enters the battlefield with two +1/+1 counters on it and with "Whenever CARDNAME deals damage, you gain that much life."
+SVar:VolverStrength:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ VolverLife
+SVar:VolverLife:DB$ Animate | Defined$ Self | Triggers$ PseudoLifelink | sVars$ VolverTrigGain,VolverX | Permanent$ True
+SVar:PseudoLifelink:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ VolverTrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
+SVar:VolverTrigGain:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ VolverX | References$ VolverX
+SVar:VolverX:TriggerCount$DamageAmount
+T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked U | Origin$ Any | Destination$ Battlefield | Execute$ VolverPumped | Static$ True | TriggerDescription$ If CARDNAME was kicked with its U kicker, it enters the battlefield with a +1/+1 counter on it and with flying.
+SVar:VolverPumped:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ VolverLaunch
+SVar:VolverLaunch:DB$ Pump | Defined$ Self | KW$ Flying | Permanent$ True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rakavolver.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/68.jpg
+Oracle:Kicker {1}{W} and/or {U} (You may pay an additional {1}{W} and/or {U} as you cast this spell.)\nIf Rakavolver was kicked with its {1}{W} kicker, it enters the battlefield with two +1/+1 counters on it and with "Whenever Rakavolver deals damage, you gain that much life."\nIf Rakavolver was kicked with its {U} kicker, it enters the battlefield with a +1/+1 counter on it and with flying.
+End
