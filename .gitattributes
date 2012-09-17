@@ -9832,6 +9832,7 @@ res/cardsfolder/t/thundermare.txt svneol=native#text/plain
 res/cardsfolder/t/thundermaw_hellkite.txt -text
 res/cardsfolder/t/thunderous_wrath.txt -text
 res/cardsfolder/t/thunderscape_apprentice.txt svneol=native#text/plain
+res/cardsfolder/t/thunderscape_battlemage.txt -text
 res/cardsfolder/t/thunderscape_familiar.txt svneol=native#text/plain
 res/cardsfolder/t/thunderscape_master.txt svneol=native#text/plain
 res/cardsfolder/t/thundersong_trumpeter.txt svneol=native#text/plain
