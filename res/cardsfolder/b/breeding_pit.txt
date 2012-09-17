@@ -1,5 +1,5 @@
 Name:Breeding Pit
-ManaCost:2 B B
+ManaCost:3 B
 Types:Enchantment
 Text:no text
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay B B
