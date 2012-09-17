@@ -191,18 +191,17 @@ public enum CSubmenuSealed implements ICDoc {
         }
 
         final IStorage<DeckGroup> sealedDecks = Singletons.getModel().getDecks().getSealed();
-        
-        if (!(sealedDecks.isUnique(sDeckName))){
 
-            final int deleteDeck = JOptionPane.showConfirmDialog(null, "\"" + sDeckName 
+        if (!(sealedDecks.isUnique(sDeckName))) {
+            final int deleteDeck = JOptionPane.showConfirmDialog(null, "\"" + sDeckName
                     + "\" already exists! Do you want to replace it?",
                     "Sealed Deck Game Exists", JOptionPane.YES_NO_OPTION);
 
             if (deleteDeck == JOptionPane.NO_OPTION) {
                 return;
             }
-            sealedDecks.delete(sDeckName);            
-        } 
+            sealedDecks.delete(sDeckName);
+        }
 
         final ItemPool<CardPrinted> sDeck = sd.getCardpool();
         ItemPool<CardPrinted> aiDecks = sd.getCardpool();
