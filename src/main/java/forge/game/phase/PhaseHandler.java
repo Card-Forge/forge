@@ -641,6 +641,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             return nextTurn;
         }
         if (skipTurnTimeVault(nextTurn)) {
+            this.setPlayerTurn(nextTurn);
             return getNextActivePlayer();
         }
         return nextTurn;
