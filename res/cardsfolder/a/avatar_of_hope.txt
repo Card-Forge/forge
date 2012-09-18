@@ -1,0 +1,15 @@
+Name:Avatar of Hope
+ManaCost:6 W W
+Types:Creature Avatar
+Text:no text
+PT:4/9
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 6 | EffectZone$ All | CheckSVar$ NeedHope | SVarCompare$ LE3 | Description$ If you have 3 or less life, CARDNAME costs 6 less to cast.
+K:Flying
+K:CARDNAME can block any number of creatures.
+SVar:NeedHope:Count$YourLifeTotal
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_hope.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/4.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/3.jpg
+Oracle:If you have 3 or less life, Avatar of Hope costs {6} less to cast.\nFlying\nAvatar of Hope can block any number of creatures.
+End
