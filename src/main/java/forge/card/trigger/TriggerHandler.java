@@ -20,7 +20,6 @@ package forge.card.trigger;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import forge.AllZone;
 import forge.AllZoneUtil;
