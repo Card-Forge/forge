@@ -59,7 +59,7 @@ public class ViewBazaarUI extends FPanel {
 
             final FLabel lbl = new FLabel.Builder().text(s + "  ")
                     .fontAlign(SwingConstants.RIGHT).iconInBackground(true)
-                    .fontSize(10).opaque(true).hoverable(true)
+                    .fontSize(16).opaque(true).hoverable(true)
                     .icon(FSkin.getIcon(bazaar.getStall(s).getIcon())).selectable(true).build();
 
             pnlAllStalls.add(lbl, "h 80px!, w 90%!, gap 0 0 10px 10px");
