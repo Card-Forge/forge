@@ -2,9 +2,9 @@ Name:Lash Out
 ManaCost:1 R
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ 1 R | Tgt$ TgtC | NumDmg$ 3 | SubAbility$ DBClash | SpellDescription$ CARDNAME deals 3 damage to target creature. Clash with an opponent. If you win, CARDNAME deals 3 damage ot that creature's controller.
-SVar:DBClash:DB$Clash | WinSubAbility$ DBDamageController
-SVar:DBDamageController:DB$DealDamage | Defined$ TargetedController | NumDmg$ 3
+A:SP$ DealDamage | Cost$ 1 R | Tgt$ TgtC | NumDmg$ 3 | SubAbility$ DBClash | SpellDescription$ CARDNAME deals 3 damage to target creature. Clash with an opponent. If you win, CARDNAME deals 3 damage to that creature's controller.
+SVar:DBClash:DB$ Clash | WinSubAbility$ DBDamageController
+SVar:DBDamageController:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lash_out.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/127.jpg
