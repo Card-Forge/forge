@@ -72,6 +72,7 @@ public enum FView {
         pnlInsets.add(pnlContent, BorderLayout.CENTER);
         pnlInsets.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
         pnlInsets.setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));
+        pnlInsets.setCornerDiameter(0);
         pnlInsets.setBorder(new EmptyBorder(
                 SLayoutConstants.BORDER_T, SLayoutConstants.BORDER_T, 0, 0));
 
