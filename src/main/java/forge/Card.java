@@ -2098,7 +2098,17 @@ public class Card extends GameEntity implements Comparable<Card> {
     public String getText() {
         final StringBuilder sb = new StringBuilder();
         sb.append(this.getAbilityText());
-        final String nonAbilityText = this.getNonAbilityText();
+
+        String nonAbilityText = this.getNonAbilityText();
+        if (this.getAmountOfKeyword("CARDNAME can block an additional creature.") > 1) {
+            final StringBuilder ab = new StringBuilder();
+            ab.append("CARDNAME can block an additional ");
+            ab.append(this.getAmountOfKeyword("CARDNAME can block an additional creature."));
+            ab.append(" creatures.");
+            nonAbilityText = nonAbilityText.replaceFirst("CARDNAME can block an additional creature.", ab.toString());
+            nonAbilityText = nonAbilityText.replaceAll("CARDNAME can block an additional creature.", "");
+            nonAbilityText = nonAbilityText.replaceAll("\r\n\r\n\r\n", "");
+        }
         if (nonAbilityText.length() > 0) {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", this.getName()));
@@ -2367,6 +2377,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         sb.append(sbLong);
         sb.append(sbMana);
+
         return sb.toString();
     }
 

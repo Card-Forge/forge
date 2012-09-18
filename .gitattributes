@@ -347,6 +347,7 @@ res/cardsfolder/a/anurid_barkripper.txt svneol=native#text/plain
 res/cardsfolder/a/anurid_brushhopper.txt svneol=native#text/plain
 res/cardsfolder/a/anurid_murkdiver.txt svneol=native#text/plain
 res/cardsfolder/a/anurid_scavenger.txt -text
+res/cardsfolder/a/anurid_swarmsnapper.txt -text
 res/cardsfolder/a/anvil_of_bogardan.txt svneol=native#text/plain
 res/cardsfolder/a/apathy.txt -text
 res/cardsfolder/a/apes_of_rath.txt svneol=native#text/plain
@@ -3449,6 +3450,7 @@ res/cardsfolder/f/forgotten_cave.txt svneol=native#text/plain
 res/cardsfolder/f/forgotten_harvest.txt svneol=native#text/plain
 res/cardsfolder/f/foriysian_brigade.txt -text
 res/cardsfolder/f/foriysian_interceptor.txt -text
+res/cardsfolder/f/foriysian_totem.txt -text
 res/cardsfolder/f/fork.txt svneol=native#text/plain
 res/cardsfolder/f/forked_bolt.txt svneol=native#text/plain
 res/cardsfolder/f/forked_branch_garami.txt svneol=native#text/plain
@@ -5582,6 +5584,7 @@ res/cardsfolder/l/lumengrid_warden.txt svneol=native#text/plain
 res/cardsfolder/l/luminarch_ascension.txt -text
 res/cardsfolder/l/luminesce.txt -text
 res/cardsfolder/l/luminous_angel.txt svneol=native#text/plain
+res/cardsfolder/l/luminous_guardian.txt -text
 res/cardsfolder/l/luminous_wake.txt svneol=native#text/plain
 res/cardsfolder/l/lumithread_field.txt svneol=native#text/plain
 res/cardsfolder/l/lunar_avenger.txt svneol=native#text/plain
@@ -6194,6 +6197,7 @@ res/cardsfolder/m/mountain_goat.txt svneol=native#text/plain
 res/cardsfolder/m/mountain_titan.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mountain_valley.txt svneol=native#text/plain
 res/cardsfolder/m/mountain_yeti.txt svneol=native#text/plain
+res/cardsfolder/m/mounted_archers.txt -text
 res/cardsfolder/m/mournful_zombie.txt svneol=native#text/plain
 res/cardsfolder/m/mourning.txt svneol=native#text/plain
 res/cardsfolder/m/mourning_thrull.txt svneol=native#text/plain
