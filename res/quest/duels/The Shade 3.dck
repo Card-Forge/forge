@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=The Shade 3
+Title=The Shade
+Difficulty=hard
+Description=Mono B Shadow deck
+Icon=The Shade.jpg
+Deck Type=constructed
+[main]
+2 Dauthi Cutthroat
+2 Dauthi Ghoul
+3 Dauthi Horror
+4 Dauthi Marauder
+1 Dauthi Mindripper
+4 Dauthi Slayer
+4 Dauthi Warlord
+1 Mox Jet
+1 Necromantic Thirst
+4 Nether Traitor
+1 No Mercy
+4 Shade's Form
+23 Snow-Covered Swamp
+4 Stronghold Overseer
+2 Wall of Souls
+[sideboard]
