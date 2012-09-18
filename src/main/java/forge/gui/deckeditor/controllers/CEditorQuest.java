@@ -27,6 +27,7 @@ import forge.AllZone;
 import forge.Constant;
 import forge.deck.Deck;
 import forge.gui.deckeditor.SEditorIO;
+import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
@@ -226,6 +227,8 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         if (deck == null) {
             deck = new Deck();
         }
+
+        SEditorUtil.resetUI();
 
         this.getDeckController().setModel(deck);
     }

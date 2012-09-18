@@ -157,6 +157,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         CDRemLabel = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().getText();
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText("Sell Card");
+
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
     }
 
     // fills number of decks using each card
