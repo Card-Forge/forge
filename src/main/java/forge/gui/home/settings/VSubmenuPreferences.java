@@ -160,9 +160,11 @@ public enum VSubmenuPreferences implements IVSubmenu {
         pnlPrefs.add(new SectionLabel(" "), sectionConstraints);
         pnlPrefs.add(btnReset, sectionConstraints);
 
-        pnl.add(new FScrollPane(pnlPrefs,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED), "w 100%!, h 100%!");
+        final FScrollPane scrContent = new FScrollPane(pnlPrefs,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrContent.setBorder(null);
+
+        pnl.add(scrContent, "w 100%!, h 100%!");
 
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
         parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");

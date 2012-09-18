@@ -52,12 +52,15 @@ public enum VSubmenuAvatars implements IVSubmenu {
     public void populate() {
         populateAvatars();
 
+        final FScrollPane scrContent = new FScrollPane(pnlAvatars,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrContent.setBorder(null);
+
         pnl.removeAll();
         pnl.setOpaque(false);
         pnl.setLayout(new MigLayout("insets 0, gap 0"));
-        pnl.add(new FScrollPane(pnlAvatars,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER), " w 100%!, h 100%!");
+        pnl.add(scrContent, " w 100%!, h 100%!");
 
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
         parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");

@@ -197,7 +197,9 @@ public enum VSubmenuQuestData implements IVSubmenu {
         pnlViewport.add(pnlTitleNew, "w 96%, h 36px!, gap 2% 0 0 10px");
         pnlViewport.add(pnlOptions, "w 96%!, h 250px!, gap 2% 0 0 20px");
 
-        pnl.add(new FScrollPane(pnlViewport), "w 100%!, h 100%!");
+        final FScrollPane scrContent = new FScrollPane(pnlViewport);
+        scrContent.setBorder(null);
+        pnl.add(scrContent, "w 100%!, h 100%!");
 
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
         parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
