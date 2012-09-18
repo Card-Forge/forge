@@ -56,7 +56,7 @@ public enum CCardCatalog implements ICDoc {
                         .getCurrentEditorController().getTableCatalog().getSelectedCard();
 
                 for (int i = 0; i < 4; i++) {
-                    if (item.equals(CDeckEditorUI.SINGLETON_INSTANCE
+                    if (item != null && item.equals(CDeckEditorUI.SINGLETON_INSTANCE
                             .getCurrentEditorController().getTableCatalog().getSelectedCard())) {
                         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().addCard();
                     }
