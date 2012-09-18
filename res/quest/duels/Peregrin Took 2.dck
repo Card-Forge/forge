@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Peregrin Took 2
+Title=Peregrin Took
+Difficulty=medium
+Description=RG Cycling deck
+Icon=Peregrin Took.jpg
+Deck Type=constructed
+[main]
+5 Mountain|ONS
+5 Forest|ONS
+4 Rootbound Crag
+3 Wooded Foothills
+1 Smoldering Crater
+1 Slippery Karst
+4 Blasted Landscape
+4 Lightning Rift
+4 Fluctuator
+4 Spark Spray
+1 Chartooth Cougar
+1 Fiery Fall
+3 Hundroog
+3 Jungle Weaver
+3 Krosan Tusker
+3 Macetail Hystrodon
+3 Ridge Rannet
+2 Slice and Dice
+1 Sylvan Bounty
+2 Valley Rannet
+3 Wirewood Guardian
+[sideboard]
