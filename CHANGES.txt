@@ -176,6 +176,33 @@ Fixes/Features:
 - Converted some more kicker spells
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed "SharesColorWith TopCardOfLibrary".
+- Fixed Breeding Pit's mana cost
+- converted Orim's Touch and Overload to proper kicker (Overload also conditional destroy now instead of restricted targeting)
+- converted some more kicker spells
+- Converted Urza's Rage and fixed description of Combust
+- Added a fluff piece to the changes.txt file.
+- Last few kicker conversions that can be done at the moment
+- Converted Vampire's Bite
+- Sorry, committed wrong file. Reverted and here's the actual Vampire's Bite
+- Reverted the accidental Venser's Diffusion commit
+- Cleanup.
+- Disable Auto Button for a set non-zero DLB size
+- Improve the AssignDamage blockers dialog for Deathtouch
+- Added SVar:PlayMain1:TRUE to Larceny.
+- Cleanup.
+- Fixed NPE of the "Add 4 cards" button.
+- Made the trigger of Cryptoplasm optional.
+- Fixed Time Vault.
+- Added the quest deck The Shade 3 by Nordos.
+- Added the quest deck Peregrin Took 2.
+- Lurking aesthetic update #1: removed border from outer edges of lowest FPanel.
+- Lurking aesthetic update #2: Fixed offset/overlap problem on home screen drag cells.
+- Lurking aesthetic update #3: Fixed bazaar merchant font size.
+- Lurking update #4: Removed "current deck" file controls from quest spell shop.
+- Lurking aesthetic update #5: Removed unnecessary borders from a few home screen top-level scroll panes.
+- Stacked "CARDNAME can block an additional creature" keywords will only display 1 description with the number of additional creatures it can block (eg CARDNAME can block an additional 3 creatures.)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -186,22 +213,31 @@ Many people helped with this version. A special thank you goes out to them. (Att
 Added the following cards to the Return to Ravnica branch (These cards are not yet available in this shapshot/beta build):
 
 Abrupt Decay
+Aerial Predation
 Archon of the Triumvirate
+Armory Guard
 Auger Spree
 Azorius Guildgate
 Azorius Justiciar
+Batterhorn
 Centaur Healer
 Chromatic Lantern
 Collective Blessing
+Crosstown Courier
 Cyclonic Rift
+Dark Revenant
 Deadbridge Goliath
 Dreadbore
 Dreg Mangler
 Dryad Militant
+Ethereal Armor
+Explosive Impact
 Eyes in the Skies
 Faerie Imposter
+Fall of the Gavel
 Fencing Ace
 Goblin Electromancer
+Goblin Rally
 Golgari Guildgate
 Grim Roustabout
 Grisly Salvage
@@ -213,29 +249,41 @@ Izzet Guildgate
 Jace, Architect of Thought
 Jarad, Golgari Lich Lord
 Judge's Familiar
+Keening Apparition
+Launch Party
 Lotleth Troll
 Loxodon Smiter
+Martial Law
 Mercurial Chemister
 Mizzium Mortars
 Necropolis Regent
 Niv-Mizzet, Dracogenius
 Ogre Jailbreaker
+Phantom General
 Precinct Captain
 Pyroconvergence
-Rakdos, Lord of Riots
 Rakdos Guildgate
 Rakdos Shred-Freak
 Rakdos's Return
+Rakdos, Lord of Riots
+Rest in Peace
+Runewing
+Savage Surge
 Selesnya Guildgate
+Skull Rend
 Skyline Predator
 Slime Molding
 Slitherhead
 Sluiceway Scorpion
+Slum Reaper
 Sphinx's Revelation
 Stealer of Secrets
+Sunspire Griffin
 Supreme Verdict
+Thoughtflare
 Transguild Promenade
 Ultimate Price
+Voidwielder
 Vraska the Unseen
 Wayfaring Temple
 Worldspine Wurm
@@ -288,6 +336,18 @@ Cytoplast Root-Kin
 Gigantiform
 Hunting Wilds
 Kangee, Aerie Keeper
+Molten Disaster
+Prohibit
+Prison Barricade
+Primal Growth
+Stormscape Battlemage
+Necravolver
+Rakavolver
+Avatar of Hope
+Anurid Swarmsnapper
+Foriysian Totem
+Luminous Guardian
+Mounted Archers
 
 
 end
