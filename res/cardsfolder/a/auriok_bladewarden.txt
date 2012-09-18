@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Human Soldier
 Text:no text
 PT:1/1
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | References$ X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is CARDNAME's power.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is CARDNAME's power.
 SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_bladewarden.jpg

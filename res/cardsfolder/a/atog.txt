@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Atog
 Text:no text
 PT:1/2
-A:AB$ Pump | Cost$ Sac<1/Artifact> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Artifact> | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/atog.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/86.jpg

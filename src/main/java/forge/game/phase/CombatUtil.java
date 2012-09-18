@@ -45,6 +45,8 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactorySacrifice;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
@@ -1326,9 +1328,9 @@ public class CombatUtil {
             return 0;
         }
 
-        int defenderDamage = defender.getNetAttack() + CombatUtil.predictPowerBonusOfBlocker(attacker, defender);
+        int defenderDamage = defender.getNetAttack() + CombatUtil.predictPowerBonusOfBlocker(attacker, defender, true);
         if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
-            defenderDamage = defender.getNetDefense() + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender);
+            defenderDamage = defender.getNetDefense() + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, true);
         }
 
         // consider static Damage Prevention
@@ -1567,7 +1569,7 @@ public class CombatUtil {
      *            a {@link forge.Card} object.
      * @return a int.
      */
-    public static int predictPowerBonusOfBlocker(final Card attacker, final Card defender) {
+    public static int predictPowerBonusOfBlocker(final Card attacker, final Card defender, boolean withoutAbilities) {
         int power = 0;
 
         if (attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
@@ -1662,6 +1664,28 @@ public class CombatUtil {
                 power += 0;
             }
         }
+        if (withoutAbilities) {
+            return power;
+        }
+        for (SpellAbility ability : defender.getAllSpellAbilities()) {
+            if (!(ability instanceof AbilityActivated) || ability.getAbilityFactory() == null
+                    || ability.getPayCosts() == null) {
+                continue;
+            }
+            AbilityFactory af = ability.getAbilityFactory();
+
+            if (!af.getAPI().equals("Pump")) {
+                continue;
+            }
+            HashMap<String, String> params = af.getMapParams();
+            if (!params.containsKey("NumAtt")) {
+                continue;
+            }
+
+            if (ComputerUtil.canPayCost(ability, defender.getController())) {
+                power += AbilityFactory.calculateAmount(ability.getSourceCard(), params.get("NumAtt"), ability);
+            }
+        }
         return power;
     }
 
@@ -1678,7 +1702,7 @@ public class CombatUtil {
      *            a {@link forge.Card} object.
      * @return a int.
      */
-    public static int predictToughnessBonusOfBlocker(final Card attacker, final Card defender) {
+    public static int predictToughnessBonusOfBlocker(final Card attacker, final Card defender, boolean withoutAbilities) {
         int toughness = 0;
 
         if (attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
@@ -1752,7 +1776,29 @@ public class CombatUtil {
                 toughness += Integer.parseInt(def);
             } catch (final NumberFormatException nfe) {
                 // can't parse the number (X for example)
-                toughness += 0;
+
+            }
+        }
+        if (withoutAbilities) {
+            return toughness;
+        }
+        for (SpellAbility ability : defender.getAllSpellAbilities()) {
+            if (!(ability instanceof AbilityActivated) || ability.getAbilityFactory() == null
+                    || ability.getPayCosts() == null) {
+                continue;
+            }
+            AbilityFactory af = ability.getAbilityFactory();
+
+            if (!af.getAPI().equals("Pump")) {
+                continue;
+            }
+            HashMap<String, String> params = af.getMapParams();
+            if (!params.containsKey("NumDef")) {
+                continue;
+            }
+
+            if (ComputerUtil.canPayCost(ability, defender.getController())) {
+                toughness += AbilityFactory.calculateAmount(ability.getSourceCard(), params.get("NumDef"), ability);
             }
         }
         return toughness;
@@ -2193,11 +2239,13 @@ public class CombatUtil {
             return true;
         }
 
-        int defenderDamage = defender.getNetAttack() + CombatUtil.predictPowerBonusOfBlocker(attacker, defender);
+        int defenderDamage = defender.getNetAttack()
+                + CombatUtil.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
         int attackerDamage = attacker.getNetAttack()
                 + CombatUtil.predictPowerBonusOfAttacker(attacker, defender, combat);
         if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
-            defenderDamage = defender.getNetDefense() + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender);
+            defenderDamage = defender.getNetDefense()
+                    + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
             attackerDamage = attacker.getNetDefense()
                     + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat);
         }
@@ -2214,7 +2262,7 @@ public class CombatUtil {
         attackerDamage = defender.predictDamage(attackerDamage, possibleDefenderPrevention, attacker, true);
 
         final int defenderLife = defender.getKillDamage()
-                + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender);
+                + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
         final int attackerLife = attacker.getKillDamage()
                 + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat);
 
@@ -2339,11 +2387,13 @@ public class CombatUtil {
             return true;
         }
 
-        int defenderDamage = defender.getNetAttack() + CombatUtil.predictPowerBonusOfBlocker(attacker, defender);
+        int defenderDamage = defender.getNetAttack()
+                + CombatUtil.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
         int attackerDamage = attacker.getNetAttack()
                 + CombatUtil.predictPowerBonusOfAttacker(attacker, defender, combat);
         if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
-            defenderDamage = defender.getNetDefense() + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender);
+            defenderDamage = defender.getNetDefense()
+                    + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
             attackerDamage = attacker.getNetDefense()
                     + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat);
         }
@@ -2368,7 +2418,7 @@ public class CombatUtil {
         }
 
         final int defenderLife = defender.getKillDamage()
-                + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender);
+                + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
         final int attackerLife = attacker.getKillDamage()
                 + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat);
 

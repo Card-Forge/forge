@@ -1582,6 +1582,8 @@ public class AbilityFactory {
         if (amount.startsWith("-")) {
             multiplier = -1;
             amount = amount.substring(1);
+        } else if (amount.startsWith("+")) {
+            amount = amount.substring(1);
         }
 
         String svarval;

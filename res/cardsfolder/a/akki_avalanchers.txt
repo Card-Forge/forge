@@ -3,7 +3,7 @@ ManaCost:R
 Types:Creature Goblin Warrior
 Text:no text
 PT:1/1
-A:AB$ Pump | Cost$ Sac<1/Land> | NumAtt$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+0 until end of turn. Activate this ability only once each turn.
+A:AB$ Pump | Cost$ Sac<1/Land> | NumAtt$ 2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+0 until end of turn. Activate this ability only once each turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_avalanchers.jpg

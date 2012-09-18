@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Human Soldier Knight
 Text:no text
 PT:2/3
-A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ R | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card21253.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/1.jpg

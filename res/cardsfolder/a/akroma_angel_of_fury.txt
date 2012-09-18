@@ -7,7 +7,7 @@ K:Flying
 K:Trample
 K:Protection from white
 K:Protection from blue
-A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ R | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 K:Morph:3 R R R
 K:CARDNAME can't be countered.
 SVar:Rarity:Rare
