@@ -24,6 +24,7 @@ import forge.item.CardPrinted;
 import forge.util.StorageReaderFile;
 import forge.util.closures.Lambda1;
 import forge.util.closures.Predicate;
+// import forge.deck.Deck;
 
 /**
  * This is a CardBlock class.
@@ -34,6 +35,7 @@ public final class CardBlock implements Comparable<CardBlock> {
     private final int orderNum;
     private final String name;
     private final CardEdition[] sets;
+    private final ArrayList<MetaSet> metaSets;
     private final CardEdition landSet;
     private final int cntBoostersDraft;
     private final int cntBoostersSealed;
@@ -48,6 +50,8 @@ public final class CardBlock implements Comparable<CardBlock> {
      *            the name
      * @param sets
      *            the sets
+     * @param metas
+     *            the included meta-sets
      * @param landSet
      *            the land set
      * @param cntBoostersDraft
@@ -55,11 +59,12 @@ public final class CardBlock implements Comparable<CardBlock> {
      * @param cntBoostersSealed
      *            the cnt boosters sealed
      */
-    public CardBlock(final int index, final String name, final List<CardEdition> sets, final CardEdition landSet,
-            final int cntBoostersDraft, final int cntBoostersSealed) {
+    public CardBlock(final int index, final String name, final List<CardEdition> sets, final ArrayList<MetaSet> metas,
+            final CardEdition landSet, final int cntBoostersDraft, final int cntBoostersSealed) {
         this.orderNum = index;
         this.name = name;
         this.sets = sets.toArray(CardBlock.EMPTY_SET_ARRAY);
+        this.metaSets = metas;
         this.landSet = landSet;
         this.cntBoostersDraft = cntBoostersDraft;
         this.cntBoostersSealed = cntBoostersSealed;
@@ -222,6 +227,7 @@ public final class CardBlock implements Comparable<CardBlock> {
             String name = null;
             int index = -1;
             final List<CardEdition> sets = new ArrayList<CardEdition>(9); // add support for up to 9 different sets in a block!
+            final ArrayList<MetaSet> metas = new ArrayList<MetaSet>();
             CardEdition landSet = null;
             int draftBoosters = 3;
             int sealedBoosters = 6;
@@ -237,6 +243,10 @@ public final class CardBlock implements Comparable<CardBlock> {
                         || "set4".equals(key) || "set5".equals(key) || "set6".equals(key) || "set7".equals(key)
                         || "set8".equals(key)) {
                     sets.add(editions.getEditionByCodeOrThrow(kv[1]));
+                } else if ("meta0".equals(key) || "meta1".equals(key) || "meta2".equals(key) || "meta3".equals(key)
+                        || "meta4".equals(key) || "meta5".equals(key) || "meta6".equals(key) || "meta7".equals(key)
+                        || "meta8".equals(key)) {
+                    metas.add(new MetaSet(kv[1]));
                 } else if ("landsetcode".equals(key)) {
                     landSet = editions.getEditionByCodeOrThrow(kv[1]);
                 } else if ("draftpacks".equals(key)) {
@@ -246,8 +256,62 @@ public final class CardBlock implements Comparable<CardBlock> {
                 }
 
             }
-            return new CardBlock(index, name, sets, landSet, draftBoosters, sealedBoosters);
+            return new CardBlock(index, name, sets, metas, landSet, draftBoosters, sealedBoosters);
         }
 
+    }
+
+    /**
+     * The number of meta-sets in the block.
+     *
+     * @return int, number of meta-sets.
+     */
+    public int getNumberMetaSets() {
+        if (metaSets == null || metaSets.size() < 1) {
+            return 0;
+        }
+        else {
+            return metaSets.size();
+        }
+    }
+
+    /**
+     * Returns the requested meta-set.
+     *
+     * @param index
+     *      int, the requested index
+     * @return MetaSet, the requested meta-set.
+     */
+    public MetaSet getMetaSet(final int index) {
+            if (index < 0 || index > this.getNumberMetaSets() - 1) {
+                throw new RuntimeException("Illegal MetaSet requested: " + index);
+            }
+            else {
+                return metaSets.get(index);
+            }
+    }
+
+    /**
+     * Tries to create a booster for the selected meta-set code.
+     *
+     * @param code
+     *      String, the MetaSet code
+     * @return UnOpenedProduct, the created booster.
+     */
+    public UnOpenedProduct getBooster(final String code) {
+
+        System.out.println("Booster called...");
+
+        if (this.getNumberMetaSets() < 1) {
+            throw new RuntimeException("Attempted to get a booster pack for empty metasets.");
+        }
+        else {
+            for (int i = 0; i < this.getNumberMetaSets(); i++) {
+                if (code.equals(metaSets.get(i).getCode())) {
+                    return metaSets.get(i).getBooster();
+                }
+            }
+            throw new RuntimeException("Could not find metaset " + code + " for booster generation.");
+        }
     }
 }

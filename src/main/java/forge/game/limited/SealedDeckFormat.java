@@ -96,17 +96,27 @@ public class SealedDeckFormat {
             final CardBlock block = GuiUtils.chooseOne("Choose Block", blocks);
 
             final CardEdition[] cardSets = block.getSets();
-            final String[] sets = new String[cardSets.length];
+            final String[] sets = new String[cardSets.length + block.getNumberMetaSets()];
             for (int k = cardSets.length - 1; k >= 0; --k) {
                 sets[k] = cardSets[k].getCode();
             }
 
             final int nPacks = block.getCntBoostersSealed();
 
+            if (block.getNumberMetaSets() > 0) {
+                System.out.println("Metasets found ");
+
+                int j = cardSets.length;
+
+                for (int k = 0; k < block.getNumberMetaSets(); k++) {
+                    sets[j + k] = block.getMetaSet(k).getCode();
+                }
+            }
+
             final List<String> setCombos = getSetCombos(sets, nPacks);
 
             while (setCombos == null) {
-                System.out.println("WARNING: unsupported amount of packs in a Sealed Deck block:" + nPacks);
+                throw new RuntimeException("Unsupported amount of packs (" + nPacks + ") in a Sealed Deck block!");
             }
 
             if (sets.length > 1) {
@@ -190,7 +200,10 @@ public class SealedDeckFormat {
                 // End starter pack selection
 
                 for (int i = 0; i < nPacks; i++) {
-                    if ((i == starter1idx && starter1) || (i == starter2idx && starter2)) {
+                    if (pp[i].charAt(0) == '*') {
+                        this.product.add(block.getBooster(pp[i]));
+                    }
+                    else if ((i == starter1idx && starter1) || (i == starter2idx && starter2)) {
                         this.product.add(new UnOpenedProduct(Singletons.getModel().getTournamentPacks().get(pp[i])));
                     }
                     else {
