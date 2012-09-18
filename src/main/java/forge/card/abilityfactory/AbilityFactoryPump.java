@@ -529,6 +529,24 @@ public class AbilityFactoryPump {
                     || !CombatUtil.canBlock(card)) {
                 return false;
             }
+        } else if (keyword.endsWith("CARDNAME can block an additional creature.")) {
+            if (ph.isPlayerTurn(computer)
+                    || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+                return false;
+            }
+            int canBlockNum = 1 + card.getKeywordAmount("CARDNAME can block an additional creature.");
+            int possibleBlockNum = 0;
+            for (Card attacker : AllZone.getCombat().getAttackerList()) {
+                if (CombatUtil.canBlock(attacker, card)) {
+                    possibleBlockNum++;
+                    if (possibleBlockNum > canBlockNum) {
+                        break;
+                    }
+                }
+            }
+            if (possibleBlockNum <= canBlockNum) {
+                return false;
+            }
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
             if (!AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(card)) {
                 return false;
@@ -597,13 +615,13 @@ public class AbilityFactoryPump {
         // is the creature blocking and unable to destroy the attacker
         // or would be destroyed itself?
         if (c.isBlocking()) {
-            if (CombatUtil.blockerWouldBeDestroyed(c)) {
+            if (defense > 0 && CombatUtil.blockerWouldBeDestroyed(c)) {
                 return true;
             }
             CardList blockedBy = AllZone.getCombat().getAttackersBlockedBy(c);
             // For now, Only care the first creature blocked by a card.
             // TODO Add in better BlockAdditional support
-            if (blockedBy.size() != 0 && !CombatUtil.attackerWouldBeDestroyed(blockedBy.get(0))) {
+            if (!blockedBy.isEmpty() && attack > 0 && !CombatUtil.attackerWouldBeDestroyed(blockedBy.get(0))) {
                 return true;
             }
         }

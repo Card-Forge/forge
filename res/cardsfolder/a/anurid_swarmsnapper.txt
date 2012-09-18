@@ -5,7 +5,6 @@ Text:no text
 PT:1/4
 K:Reach
 A:AB$ Pump | Cost$ 1 G | Defined$ Self | KW$ HIDDEN CARDNAME can block an additional creature. | SpellDescription$ CARDNAME can block an additional creature this turn.
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anurid_swarmsnapper.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/105.jpg
