@@ -1683,7 +1683,10 @@ public class CombatUtil {
             }
 
             if (ComputerUtil.canPayCost(ability, defender.getController())) {
-                power += AbilityFactory.calculateAmount(ability.getSourceCard(), params.get("NumAtt"), ability);
+                int pBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), params.get("NumAtt"), ability);
+                if (pBonus > 0) {
+                    power += pBonus;
+                }
             }
         }
         return power;
@@ -1798,7 +1801,10 @@ public class CombatUtil {
             }
 
             if (ComputerUtil.canPayCost(ability, defender.getController())) {
-                toughness += AbilityFactory.calculateAmount(ability.getSourceCard(), params.get("NumDef"), ability);
+                int tBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), params.get("NumDef"), ability);
+                if (tBonus > 0) {
+                    toughness += tBonus;
+                }
             }
         }
         return toughness;
