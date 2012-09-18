@@ -35,6 +35,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -324,8 +325,15 @@ public class AbilityFactoryAlterLife {
                 return false;
             }
         }
+        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                && !params.containsKey("ActivationPhases")) {
+            return false;
+        }
+        boolean lifeCritical = life <= 5;
+        lifeCritical |= (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
+                && CombatUtil.lifeInDanger(AllZone.getCombat()));
 
-        if (abCost != null && life > 5) {
+        if (abCost != null && !lifeCritical) {
             if (!CostUtil.checkSacrificeCost(abCost, source, false)) {
                 return false;
             }
@@ -348,7 +356,8 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't use lifegain before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
+        if (!lifeCritical
+                && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
                 && !params.containsKey("ActivationPhases")) {
             return false;
         }
@@ -376,7 +385,7 @@ public class AbilityFactoryAlterLife {
         }
 
         boolean randomReturn = r.nextFloat() <= .6667;
-        if (AbilityFactory.playReusable(sa)) {
+        if (lifeCritical || AbilityFactory.playReusable(sa)) {
             randomReturn = true;
         }
 
