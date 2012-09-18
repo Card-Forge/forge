@@ -295,7 +295,7 @@ public class GuiAssignDamageFrame extends JFrame {
         }
 
         this.remainingDamageButton.setText("Remaining("+String.valueOf(this.assignDamage)+")");
-        this.nextButton.setEnabled(lethal == 0);
+        this.nextButton.setEnabled(this.assignedToActive >= lethal);
     }
     
     /**

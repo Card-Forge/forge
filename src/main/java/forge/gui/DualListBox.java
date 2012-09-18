@@ -277,6 +277,9 @@ public class DualListBox extends JPanel {
 		if (remainingObjects < 1) {
             autoButton.setEnabled(sourceListModel.getSize() != remainingObjects);
         }
+		else {
+		    autoButton.setEnabled(false);
+		}
 
         removeButton.setEnabled(destListModel.getSize() != 0);
         removeAllButton.setEnabled(destListModel.getSize() != 0);
