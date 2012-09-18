@@ -337,12 +337,14 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      */
     public void hideHead() {
         this.removeAll();
-        this.add(pnlBorderRight, "w " + SLayoutConstants.BORDER_T + "px!, "
-                + "h 100% - " + SLayoutConstants.BORDER_T + "px!, span 1 2");
+        // These cause the cell to be "bumped" over...hopefully can
+        // just slice out?  Doublestrike 18-09-12
+       // this.add(pnlBorderRight, "w " + SLayoutConstants.BORDER_T + "px!, "
+       //         + "h 100% - " + SLayoutConstants.BORDER_T + "px!, span 1 2");
         this.add(pnlBody, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
                 + "h 100% - " + SLayoutConstants.BORDER_T + "px!");
-        this.add(pnlBorderBottom, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
-                + "h " + SLayoutConstants.BORDER_T + "px!");
+       // this.add(pnlBorderBottom, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
+       //         + "h " + SLayoutConstants.BORDER_T + "px!");
     }
 
     /**
