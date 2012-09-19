@@ -370,6 +370,7 @@ Prohibit
 Prison Barricade
 Primal Growth
 Stormscape Battlemage
+Thunderscape Battlemage
 Necravolver
 Rakavolver
 Avatar of Hope
