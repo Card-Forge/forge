@@ -63,14 +63,12 @@ public class SSubmenuQuestUtil {
         final int turnsToUnlock = AllZone.getQuest().getChallengesManager().getTurnsToUnlockChallenge();
         final int delta;
 
+        // First challenge unlocks after minimum wins reached.
         if (wins < 2 * turnsToUnlock) {
             delta = 2 * turnsToUnlock - wins;
         }
         else {
-            // When zepp and map are working properly, this line needs to
-            // be updated to reflect "challenges available more often" promise.
-            // Also, generateChallenges in QuestEventManager needs to be
-            // updated with a similar change.
+            // More than enough wins
             if (wins / turnsToUnlock > challengesPlayed) {
                 delta = 0;
             }
@@ -80,7 +78,7 @@ public class SSubmenuQuestUtil {
             else if (wins < challengesPlayed * turnsToUnlock) {
                 delta = (challengesPlayed * turnsToUnlock - wins) + turnsToUnlock;
             }
-            // Default case.
+            // Data OK, but not enough wins yet (default).
             else {
                 delta = turnsToUnlock - wins % turnsToUnlock;
             }
