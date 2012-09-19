@@ -7,8 +7,8 @@ T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature.Green,Creature.Wh
 T:Mode$ Blocks | ValidCard$ Creature.Green,Creature.White | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a green or white creature, destroy that creature at end of combat.
 SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocked | TriggerDescription$ Destroy blocked creature at end of combat.
 SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | TriggerDescription$ Destroy blocking creature at end of combat.
-SVar:TrigDestroyBlocked:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker
-SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
+SVar:TrigDestroyBlocked:AB$ Destroy | Cost$ 0 | Defined$ TriggeredAttacker
+SVar:TrigDestroyBlocker:AB$ Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abomination.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/1.jpg

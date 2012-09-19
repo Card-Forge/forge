@@ -1,0 +1,16 @@
+Name:Mammoth Harness
+ManaCost:3 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AITgts$ Creature.withFlying | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
+T:Mode$ Blocks | ValidCard$ Card.EnchantedBy | ValidBlocked$ Creature | Execute$ TrigPump | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.
+T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.EnchantedBy | Execute$ TrigPump2 | Secondary$ True | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ First Strike
+SVar:TrigPump2:AB$ Pump | Cost$ 0 | Defined$ TriggeredBlocker | KW$ First Strike
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mammoth_harness.jpg
+SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/64.jpg
+Oracle:Enchant creature\nEnchanted creature loses flying.\nWhenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.
+End
