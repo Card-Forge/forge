@@ -4,7 +4,7 @@ Types:Creature Bird
 Text:no text
 PT:0/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | DelayedTrigger$ DelTrigLeaves | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a 4/4 red Bird creature token with flying onto the battlefield at the beginning of the next end step.
-SVar:DelTrigLeaves:Mode$ Phase | Phase$ End of Turn | Execute$ TrigToken | TriggerDescription$ Put a 4/4 red Bird creature token with flying onto the battlefield at the beginning of the next end step.
+SVar:DelTrigLeaves:Mode$ Phase | Phase$ End of Turn | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ Put a 4/4 red Bird creature token with flying onto the battlefield at the beginning of the next end step.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenOwner$ You | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenColors$ Red | TokenKeywords$ Flying | TokenPower$ 4 | TokenToughness$ 4 | TokenAmount$ 1
 SVar:SacMe:4
 SVar:Rarity:Rare
