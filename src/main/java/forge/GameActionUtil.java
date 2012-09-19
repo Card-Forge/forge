@@ -447,10 +447,23 @@ public final class GameActionUtil {
      */
     public static void payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, final Command paid, final Command unpaid) {
         final Card source = ability.getSourceCard();
-        if (cost.getCostParts().size() > 1) {
+        final ArrayList<CostPart> parts =  cost.getCostParts();
+        if (parts.size() > 1) {
             throw new RuntimeException("GameActionUtil::payCostDuringAbilityResolve - Too many payment types - " + source);
         }
-        final CostPart costPart = cost.getCostParts().get(0);
+        CostPart costPart = null;
+        if (!parts.isEmpty()) {
+            costPart = parts.get(0);
+        }
+        if (parts.isEmpty() || costPart.getAmount().equals("0")) {
+            if (showYesNoDialog(source, "Do you want to pay 0?")) {
+                paid.execute();
+            } else {
+                unpaid.execute();
+            }
+            return;
+        }
+        
         if (costPart instanceof CostPayLife) {
             String amountString = costPart.getAmount();
             final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
@@ -520,14 +533,6 @@ public final class GameActionUtil {
             AllZone.getStack().setResolving(bResolving);
         }
         else if (costPart instanceof CostMana) {
-            if (costPart.getAmount().equals("0")) {
-                if (showYesNoDialog(source, "Do you want to pay 0?")) {
-                    paid.execute();
-                } else {
-                    unpaid.execute();
-                }
-                return;
-            }
             // temporarily disable the Resolve flag, so the user can payMana for the
             // resolving Ability
             final boolean bResolving = AllZone.getStack().getResolving();
