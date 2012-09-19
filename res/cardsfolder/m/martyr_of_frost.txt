@@ -1,0 +1,13 @@
+Name:Martyr of Frost
+ManaCost:U
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+A:AB$ Counter | Cost$ 2 Reveal<X/Card.Blue> Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card  | UnlessCost$ ChosenX | References$ X | SpellDescription$ Counter target spell unless its controller pays X.
+SVar:X:XChoice
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/martyr_of_frost.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/40.jpg
+Oracle:{2}, Reveal X blue cards from your hand, Sacrifice Martyr of Frost: Counter target spell unless its controller pays {X}.
+End

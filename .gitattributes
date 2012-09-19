@@ -5781,6 +5781,7 @@ res/cardsfolder/m/marshdrinker_giant.txt svneol=native#text/plain
 res/cardsfolder/m/martial_coup.txt svneol=native#text/plain
 res/cardsfolder/m/marton_stromgald.txt svneol=native#text/plain
 res/cardsfolder/m/martyr_of_ashes.txt -text svneol=unset#text/plain
+res/cardsfolder/m/martyr_of_frost.txt -text
 res/cardsfolder/m/martyr_of_sands.txt -text
 res/cardsfolder/m/martyr_of_spores.txt -text
 res/cardsfolder/m/martyred_rusalka.txt svneol=native#text/plain
