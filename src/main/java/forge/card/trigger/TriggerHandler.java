@@ -315,10 +315,12 @@ public class TriggerHandler {
         // AP
         allCards = playerAP.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         allCards.addAll(AllZoneUtil.getCardsIn(ZoneType.Stack).getController(playerAP));
+        // add cards that change zones
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             String type = (String) runParams.get("Destination");
             Card card = (Card) runParams.get("Card");
-            if (!type.equals("Battlefield") && playerAP.equals(card.getController()) && !allCards.contains(card)) {
+            if (playerAP.equals(card.getController()) && !allCards.contains(card) 
+                    && AllZone.getZoneOf(card).getZoneType().isHidden()) {
                 allCards.add(card);
             }
         }
@@ -340,10 +342,12 @@ public class TriggerHandler {
         // NAP
         allCards = playerAP.getOpponent().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         allCards.addAll(AllZoneUtil.getCardsIn(ZoneType.Stack).getController(playerAP.getOpponent()));
+        // add cards that change zones
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             String type = (String) runParams.get("Destination");
             Card card = (Card) runParams.get("Card");
-            if (!type.equals("Battlefield") && !playerAP.equals(card.getController()) && !allCards.contains(card)) {
+            if (!playerAP.equals(card.getController()) && !allCards.contains(card)
+                    && AllZone.getZoneOf(card).getZoneType().isHidden()) {
                 allCards.add(card);
             }
         }

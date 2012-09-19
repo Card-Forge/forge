@@ -297,7 +297,7 @@ public class AbilityFactoryDelayedTrigger {
             mapParams.remove("SpellDescription");
         }
 
-        final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, abilityFactory.getHostCard(), true);
+        final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, spellAbility.getSourceCard(), true);
 
         AllZone.getTriggerHandler().registerDelayedTrigger(delTrig);
     }
