@@ -31,6 +31,7 @@ import forge.AllZone;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
+import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
@@ -160,16 +161,16 @@ public class QuestEventManager {
 
     /** Generates an array of new challenge opponents based on current win conditions.
      * 
-     * @param qCtrl &emsp; QuestController
      * @return a {@link java.util.List} object.
      */
-    public final List<QuestEventChallenge> generateChallenges(final QuestController qCtrl) {
+    public final List<QuestEventChallenge> generateChallenges() {
+        final QuestController qCtrl = AllZone.getQuest();
         final QuestAchievements achievements = qCtrl.getAchievements();
         final List<QuestEventChallenge> challengeOpponents = new ArrayList<QuestEventChallenge>();
         final List<Integer> unlockedChallengeIds = new ArrayList<Integer>();
         final List<Integer> availableChallengeIds = achievements.getCurrentChallenges();
 
-        int maxChallenges = ((achievements.getWin() / 10) - achievements.getChallengesPlayed());
+        int maxChallenges = ((achievements.getWin() / this.getTurnsToUnlockChallenge()) - achievements.getChallengesPlayed());
         if (maxChallenges > 5) {
             maxChallenges = 5;
         }
@@ -202,6 +203,24 @@ public class QuestEventManager {
         }
 
         return challengeOpponents;
+    }
+
+    /**
+     * Returns the current number of turns required to unlock a new challenge.
+     * Varies depending on map or zeppelin purchase.
+     * 
+     * @return int
+     */
+    public int getTurnsToUnlockChallenge() {
+        if (AllZone.getQuest().getAssets().hasItem(QuestItemType.ZEPPELIN)) {
+            return 8;
+        }
+        // User may have MAP and ZEPPELIN, so MAP must be tested second.
+        else if (AllZone.getQuest().getAssets().hasItem(QuestItemType.MAP)) {
+            return 9;
+        }
+
+        return 10;
     }
 
     /**

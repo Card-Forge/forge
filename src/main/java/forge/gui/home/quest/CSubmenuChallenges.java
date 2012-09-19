@@ -101,7 +101,7 @@ public enum CSubmenuChallenges implements ICDoc {
             view.getLblTitle().setText("Challenges: " + qCtrl.getRank());
 
             view.getPnlChallenges().removeAll();
-            final List<QuestEventChallenge> challenges = qCtrl.getChallengesManager().generateChallenges(qCtrl);
+            final List<QuestEventChallenge> challenges = qCtrl.getChallengesManager().generateChallenges();
 
             for (final QuestEventChallenge c : challenges) {
                 final SelectablePanel temp = new SelectablePanel(c);

@@ -57,7 +57,7 @@ Effect: Your first mulligan is free.</description>
     <item name="Map" purchaseName="Adventurer&apos;s Map" maxLevel="1" basePrice="2000" itemType="MAP" icon="ICO_MAP">
       <description>These ancient charts should facilitate navigation during your travels significantly.
 
-Effect: Quest assignments become available more frequently</description>
+Effect: Quest challenges become available more frequently</description>
     </item>
     <item name="Lucky Coin" maxLevel="1" basePrice="2000" itemType="LUCKY_COIN" icon="ICO_COIN">
       <description>This coin is believed to give good luck to its owner.

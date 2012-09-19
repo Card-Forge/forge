@@ -59,38 +59,30 @@ public class SSubmenuQuestUtil {
         final QuestController qData = AllZone.getQuest();
         final int challengesPlayed = qData.getAchievements().getChallengesPlayed();
 
-        /*
-        int mul = 5;
-        if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)) {
-            mul = 3;
-        } else if (qData.getAssets().hasItem(QuestItemType.MAP)) {
-            mul = 4;
-        }
-        */
-
         final int wins = qData.getAchievements().getWin();
+        final int turnsToUnlock = AllZone.getQuest().getChallengesManager().getTurnsToUnlockChallenge();
         final int delta;
 
-        if (wins < 20) {
-            delta = 20 - wins;
+        if (wins < 2 * turnsToUnlock) {
+            delta = 2 * turnsToUnlock - wins;
         }
         else {
             // When zepp and map are working properly, this line needs to
             // be updated to reflect "challenges available more often" promise.
             // Also, generateChallenges in QuestEventManager needs to be
             // updated with a similar change.
-            if (wins / 10 > challengesPlayed) {
+            if (wins / turnsToUnlock > challengesPlayed) {
                 delta = 0;
             }
             // This part takes the "unlimited challenge" bug into account;
             // a player could have an inflated challengesPlayed value.
             // Added 09-2012, can be removed after a while.
-            else if (wins < challengesPlayed * 10) {
-                delta = (challengesPlayed * 10 - wins) + 10;
+            else if (wins < challengesPlayed * turnsToUnlock) {
+                delta = (challengesPlayed * turnsToUnlock - wins) + turnsToUnlock;
             }
             // Default case.
             else {
-                delta = 10 - wins % 10;
+                delta = turnsToUnlock - wins % turnsToUnlock;
             }
         }
 
