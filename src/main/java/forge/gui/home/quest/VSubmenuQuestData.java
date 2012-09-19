@@ -119,6 +119,9 @@ public enum VSubmenuQuestData implements IVSubmenu {
 
         final Map<String, String> preconDescriptions = new HashMap<String, String>();
         IStorageView<PreconDeck> preconDecks = QuestController.getPrecons();
+
+        cbxPrecon.removeAllItems();
+
         for (PreconDeck preconDeck : preconDecks) {
             if (preconDeck.getRecommendedDeals().getMinWins() > 0) {
                 continue;
@@ -264,10 +267,16 @@ public enum VSubmenuQuestData implements IVSubmenu {
         return radExpert;
     }
 
+    /**
+     * @return {@link javax.swing.JCheckBox}
+     */
     public JCheckBox getBoxFantasy() {
         return boxFantasy;
     }
 
+    /**
+     * @return {@link javax.swing.JRadioButton}
+     */
     public JRadioButton getRadCompleteStart() {
         return radCompleteStart;
     }
