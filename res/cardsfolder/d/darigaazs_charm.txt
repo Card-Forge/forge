@@ -2,7 +2,7 @@ Name:Darigaaz's Charm
 ManaCost:B R G
 Types:Instant
 Text:no text
-A:SP$ ChangeZone | Cost$ B R G | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature | Origin$ Graveyard | Destination$ Hand | PrecostDesc$ Choose one - | SpellDescription$ Return target creature card from your graveyard to your hand;
+A:SP$ ChangeZone | Cost$ B R G | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Hand | PrecostDesc$ Choose one - | SpellDescription$ Return target creature card from your graveyard to your hand;
 A:SP$ DealDamage | Cost$ B R G | Tgt$ TgtCP | NumDmg$ 3 | SpellDescription$ or CARDNAME deals 3 damage to target creature or player;
 A:SP$ Pump | Cost$ B R G | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +3 | TgtPrompt$ Select target creature | SpellDescription$ or target creature gets +3/+3 until end of turn.
 SVar:RemAIDeck:True
