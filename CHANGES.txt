@@ -203,6 +203,28 @@ Fixes/Features:
 - Lurking aesthetic update #5: Removed unnecessary borders from a few home screen top-level scroll panes.
 - Stacked "CARDNAME can block an additional creature" keywords will only display 1 description with the number of additional creatures it can block (eg CARDNAME can block an additional 3 creatures.)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Support (plus a sample) added for metasets in sealed deck blocks. They can be used to build boosters that are based on a selection of sets, a custom cube or the full cardpool.
+- Added AI support for pump abilities with "CARDNAME can block an additional creature.".
+- The AI will now predict P/T pumping abilities of blockers (but not multiple activations).
+- Improved gainLifeCanPlayAI.
+- Little tweak for pump prediction.
+- Fixed "unlimited challenge" bug in quest mode.
+- Bugfix: zeppelin button sometimes visible although zeppelin hadn't been purchased.
+- Bugfix: Restored "challenges become available more frequently" functionality for MAP and ZEPPELIN bazaar items.
+- Small commenting update.
+- Fixed Mosswort Bridge
+- fixed a possible NPE related to xCount with SAs
+- Small tweak to sharesNameWith
+- Bugfix: double listing of precon decks in new quest UI.
+- Fixed variable name for AI ForgetChanged
+- Small comment added, didn't want to forget.
+- SetInfo and Oracle for Victimize
+- Fixed AI not playing Voice of All.
+- Improved canTgtCreature().
+- Fixed Darigaaz's Charm.
+- Fixed Fettergeist.
+- Reduced the number of copies of The Tabernacle at Pendrell Vale in the Alice in Wonderland 3 deck to 1.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -222,6 +244,7 @@ Azorius Justiciar
 Batterhorn
 Centaur Healer
 Chromatic Lantern
+Civic Saber
 Collective Blessing
 Crosstown Courier
 Cyclonic Rift
@@ -261,14 +284,17 @@ Niv-Mizzet, Dracogenius
 Ogre Jailbreaker
 Phantom General
 Precinct Captain
+Psychic Spiral
 Pyroconvergence
 Rakdos Guildgate
 Rakdos Shred-Freak
 Rakdos's Return
 Rakdos, Lord of Riots
 Rest in Peace
+Rites of Reaping
 Runewing
 Savage Surge
+Search the City
 Selesnya Guildgate
 Skull Rend
 Skyline Predator
@@ -282,6 +308,7 @@ Sunspire Griffin
 Supreme Verdict
 Thoughtflare
 Transguild Promenade
+Treasured Find
 Ultimate Price
 Voidwielder
 Vraska the Unseen
@@ -348,6 +375,7 @@ Anurid Swarmsnapper
 Foriysian Totem
 Luminous Guardian
 Mounted Archers
+Victimize
 
 
 end
