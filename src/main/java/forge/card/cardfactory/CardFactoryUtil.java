@@ -982,7 +982,7 @@ public class CardFactoryUtil {
                     final Map<String, Object> runParams = new TreeMap<String, Object>();
                     runParams.put("Card", sourceCard);
                     AllZone.getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams);
-                    
+
                     StringBuilder sb = new StringBuilder();
                     sb.append(this.getActivatingPlayer()).append(" has unmorphed ");
                     sb.append(sourceCard.getName());
@@ -1201,7 +1201,7 @@ public class CardFactoryUtil {
             public void resolve() {
                 final Card c = Singletons.getModel().getGameAction().exile(sourceCard);
                 c.addCounter(Counters.TIME, suspendCounters);
-                
+
                 StringBuilder sb = new StringBuilder();
                 sb.append(this.getActivatingPlayer()).append(" has suspended ");
                 sb.append(c.getName()).append("with ");
@@ -1221,7 +1221,7 @@ public class CardFactoryUtil {
         suspend.getRestrictions().setZone(ZoneType.Hand);
         return suspend;
     } // abilitySuspend()
-    
+
     /**
      * <p>
      * entersBattleFieldWithCounters.
@@ -2319,7 +2319,7 @@ public class CardFactoryUtil {
 
         return num;
     }
-    
+
     /**
      * <p>
      * Parse non-mana X variables.
@@ -2329,22 +2329,26 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @param s
      *            a {@link java.lang.String} object.
+     * @param sa
+     *            a {@link forge.SpellAbility} object.
      * @return a int.
      */
     public static int xCount(final Card c, final String s, final SpellAbility sa) {
 
         final String[] l = s.split("/");
         final String[] m = CardFactoryUtil.parseMath(l);
-        
+
         final String[] sq;
         sq = l[0].split("\\.");
 
-        // Count$Kicked.<numHB>.<numNotHB>
-        if (sq[0].contains("Kicked")) {
-            if (sa.isKicked()) {
-                return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c); // Kicked
-            } else {
-                return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not Kicked
+        if (sa != null) {
+            // Count$Kicked.<numHB>.<numNotHB>
+            if (sq[0].contains("Kicked")) {
+                if (sa.isKicked()) {
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c); // Kicked
+                } else {
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not Kicked
+                }
             }
         }
         return xCount(c, s);
@@ -2812,7 +2816,7 @@ public class CardFactoryUtil {
             for (int i = 0; i < filteredCards.size(); i++) {
                 sumPower += filteredCards.get(i).getManaCost().getCMC();
             }
-            return sumPower;
+            return CardFactoryUtil.doXMath(sumPower, m, c);
         }
         // Count$CardManaCost
         if (sq[0].contains("CardManaCost")) {
@@ -4075,7 +4079,7 @@ public class CardFactoryUtil {
 
             card.addSpellAbility(kickedSpell);
         }*/
-        
+
         if (CardFactoryUtil.hasKeyword(card, "Multikicker") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Multikicker");
             if (n != -1) {
@@ -4554,19 +4558,19 @@ public class CardFactoryUtil {
                         eff.setColor(card.getColor());
                         eff.setImmutable(true);
                         eff.setEffectSource(card);
-    
+
                         eff.addStaticAbility("Mode$ CantBeCast | ValidCard$ Card | Caster$ You "
                                 + "| Description$ For the rest of the game, you can't cast spells.");
-                        
+
                         eff.setSVar("EpicCopy", "AB$ CopySpell | Cost$ 0 | Defined$ EffectSource");
-    
+
                         final Trigger copyTrigger = forge.card.trigger.TriggerHandler.parseTrigger(
                                 "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
                                         + "At the beginning of each of your upkeeps, copy " + card.toString()
                                         + " except for its epic ability.", eff, false);
-    
+
                         eff.addTrigger(copyTrigger);
-    
+
                         AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
                         Singletons.getModel().getGameAction().moveToPlay(eff);
                         AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
@@ -4672,27 +4676,27 @@ public class CardFactoryUtil {
             } else if (kw.startsWith("etbCounter")) {
                 String parse = kw;
                 card.removeIntrinsicKeyword(parse);
-                
+
                 String[] splitkw = parse.split(":");
 
                 AbilityFactory af = new AbilityFactory();
-                String desc = "CARDNAME enters the battlefield with " + splitkw[2] + " " 
+                String desc = "CARDNAME enters the battlefield with " + splitkw[2] + " "
                         + Counters.valueOf(splitkw[1]).getName() + " counters on it.";
                 String extraparams = "";
                 String amount = splitkw[2];
-                if(splitkw.length > 3) {
-                    if(!splitkw[3].equals("no Condition")) {
+                if (splitkw.length > 3) {
+                    if (!splitkw[3].equals("no Condition")) {
                         extraparams = splitkw[3];
                     }
                 }
-                if(splitkw.length > 4) {
+                if (splitkw.length > 4) {
                     desc = splitkw[4];
                 }
                 String repStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1] + " | CounterNum$ " + amount;
                 try {
                     Integer.parseInt(amount);
                 }
-                catch(NumberFormatException ignored) {
+                catch (NumberFormatException ignored) {
                     repStr += " | References$ " + amount;
                 }
                 SpellAbility repAb = af.getAbility(repStr, card);
@@ -4707,31 +4711,31 @@ public class CardFactoryUtil {
                 card.addReplacementEffect(re);
             }
         }
-        
+
         int etbcounter = CardFactoryUtil.hasKeyword(card, "etbCounter");
         if (etbcounter != -1) {
             String parse = card.getKeyword().get(etbcounter);
             card.removeIntrinsicKeyword(parse);
-            
+
             String[] splitkw = parse.split(":");
 
             AbilityFactory af = new AbilityFactory();
             String desc = "CARDNAME enters the battlefield with " + splitkw[2] + " " + splitkw[1] + " counters on it.";
             String extraparams = "";
             String amount = splitkw[2];
-            if(splitkw.length > 3) {
-                if(!splitkw[3].equals("no Condition")) {
+            if (splitkw.length > 3) {
+                if (!splitkw[3].equals("no Condition")) {
                     extraparams = splitkw[3];
                 }
             }
-            if(splitkw.length > 4) {
+            if (splitkw.length > 4) {
                 desc = splitkw[4];
             }
             String repStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1] + " | CounterNum$ " + amount;
             try {
                 Integer.parseInt(amount);
             }
-            catch(NumberFormatException ignored) {
+            catch (NumberFormatException ignored) {
                 repStr += " | References$ " + amount;
             }
             SpellAbility repAb = af.getAbility(repStr, card);
