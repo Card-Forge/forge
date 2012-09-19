@@ -1053,6 +1053,10 @@ public class AbilityFactoryZoneAffecting {
         final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
         final boolean bottom = params.containsKey("FromBottom");
 
+        if (params.containsKey("ForgetOtherRemembered")) {
+            source.clearRemembered();
+        }
+
         ArrayList<Player> tgtPlayers;
 
         final Target tgt = sa.getTarget();

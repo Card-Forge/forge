@@ -950,6 +950,7 @@ public final class AbilityFactoryChangeZone {
         }
 
         final String remember = params.get("RememberChanged");
+        final String forget = params.get("ForgetChanged");
         final String imprint = params.get("Imprint");
 
         if (params.containsKey("Unimprint")) {
@@ -1034,6 +1035,9 @@ public final class AbilityFactoryChangeZone {
                 if (remember != null) {
                     card.addRemembered(movedCard);
                 }
+                if (forget != null) {
+                    sa.getSourceCard().getRemembered().remove(movedCard);
+                }
                 // for imprinted since this doesn't use Target
                 if (imprint != null) {
                     card.addImprinted(movedCard);
@@ -1114,6 +1118,7 @@ public final class AbilityFactoryChangeZone {
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
         final CardList fetched = new CardList();
         final String remember = params.get("RememberChanged");
+        final String forget = params.get("ForgetChanged");
         final String imprint = params.get("Imprint");
 
         if (params.containsKey("Unimprint")) {
@@ -1286,6 +1291,9 @@ public final class AbilityFactoryChangeZone {
 
             if (remember != null) {
                 card.addRemembered(newCard);
+            }
+            if (forget != null) {
+                sa.getSourceCard().getRemembered().remove(movedCard);
             }
             // for imprinted since this doesn't use Target
             if (imprint != null) {
