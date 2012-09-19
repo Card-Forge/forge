@@ -488,6 +488,30 @@ public final class AbilityFactoryChangeZone {
                     }
                 }
             }
+            
+            //Ninjutsu
+            if (params.containsKey("Ninjutsu")) {
+                if (source.isType("Legendary") && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
+                    final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                    if (list.containsName(source.getName())) {
+                        return false;
+                    }
+                }
+                if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE)) {
+                    return false;
+                }
+                CardList attackers = new CardList();
+                attackers.addAll(AllZone.getCombat().getUnblockedAttackers());
+                boolean lowerCMC = false;
+                for (Card attacker : attackers) {
+                    if (attacker.getCMC() < source.getCMC()) {
+                        lowerCMC = true;
+                    }
+                }
+                if (!lowerCMC) {
+                    return false;
+                }
+            }
         }
 
         // don't play if the conditions aren't met, unless it would trigger a beneficial sub-condition
@@ -1420,7 +1444,6 @@ public final class AbilityFactoryChangeZone {
         }
         combat = ComputerUtilBlock.getBlockers(combat, AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()));
 
-        System.out.println("Life would remain = " + CombatUtil.lifeThatWouldRemain(combat));
         if (CombatUtil.lifeInDanger(combat)) {
             // need something AI can cast now
             CardListUtil.sortByEvaluateCreature(list);
