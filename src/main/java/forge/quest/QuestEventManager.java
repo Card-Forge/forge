@@ -169,7 +169,7 @@ public class QuestEventManager {
         final List<Integer> unlockedChallengeIds = new ArrayList<Integer>();
         final List<Integer> availableChallengeIds = achievements.getCurrentChallenges();
 
-        int maxChallenges = achievements.getWin() / 10;
+        int maxChallenges = ((achievements.getWin() / 10) - achievements.getChallengesPlayed());
         if (maxChallenges > 5) {
             maxChallenges = 5;
         }

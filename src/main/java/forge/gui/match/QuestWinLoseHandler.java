@@ -304,6 +304,9 @@ public class QuestWinLoseHandler extends ControlWinLose {
             if (!((QuestEventChallenge) qEvent).isRepeatable()) {
                 qData.getAchievements().addLockedChallenge(((QuestEventChallenge) qEvent).getId());
             }
+
+            // Increment challenge counter to limit challenges available
+            qData.getAchievements().addChallengesPlayed();
         }
 
         matchState.reset();
@@ -579,10 +582,6 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * 
      */
     private void awardChallengeWin() {
-        // This method should perhaps be called addChallengesWon() since it's
-        // actually used for "wins before next challenge"
-        qData.getAchievements().addChallengesPlayed();
-
         final List<CardPrinted> cardsWon = ((QuestEventChallenge) qEvent).getCardRewardList();
         final long questRewardCredits = ((QuestEventChallenge) qEvent).getCreditsReward();
 
