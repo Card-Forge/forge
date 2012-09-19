@@ -289,7 +289,9 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         // Reset cards and zeppelin use
         qData.getCards().clearShopList();
-        qData.getAssets().setItemLevel(QuestItemType.ZEPPELIN, 1);
+        if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)) {
+            qData.getAssets().setItemLevel(QuestItemType.ZEPPELIN, 1);
+        }
 
         if (qEvent instanceof QuestEventChallenge) {
             final int id = ((QuestEventChallenge) qEvent).getId();
