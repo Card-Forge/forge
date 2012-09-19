@@ -1293,7 +1293,7 @@ public final class AbilityFactoryChangeZone {
                 card.addRemembered(newCard);
             }
             if (forget != null) {
-                sa.getSourceCard().getRemembered().remove(movedCard);
+                sa.getSourceCard().getRemembered().remove(newCard);
             }
             // for imprinted since this doesn't use Target
             if (imprint != null) {
