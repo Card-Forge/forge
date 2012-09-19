@@ -4615,6 +4615,40 @@ public class CardFactoryUtil {
             card.setSVar("TrigBondSelf", abStringOther);
         }
 
+        if (card.hasStartOfKeyword("Amplify")) {
+            // find position of Equip keyword
+            final int equipPos = card.getKeywordPosition("Amplify");
+            final String[] ampString = card.getKeyword().get(equipPos).split(":");
+            final String amplifyMagnitude = ampString[1];
+            final String suffix = !amplifyMagnitude.equals("1") ? "s" : "";
+            final String ampTypes = ampString[2];
+            String[] refinedTypes = ampTypes.split(",");
+            final StringBuilder types = new StringBuilder();
+            for (int i = 0; i < refinedTypes.length; i++) {
+                types.append("Card.").append(refinedTypes[i]).append("+YouCtrl");
+                if (i + 1 != refinedTypes.length) {
+                    types.append(",");
+                }
+            }
+            // Setup ETB trigger for card with Amplify keyword
+            final String actualTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+                    + "ValidCard$ Card.Self | Execute$ AmplifyReveal | Static$ True | Secondary$ True | "
+                    + "TriggerDescription$ As this creature enters the battlefield, put "
+                    + amplifyMagnitude + " +1/+1 counter" + suffix + " on it for each "
+                    + ampTypes.replace(",", " and/or ") + " card you reveal in your hand.)";
+            final String abString = "AB$ Reveal | Cost$ 0 | AnyNumber$ True | RevealValid$ "
+                    + types.toString() + " | RememberRevealed$ True | SubAbility$ Amplify";
+            final String dbString = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | "
+                    + "CounterNum$ AmpMagnitude | References$ Revealed,AmpMagnitude | SubAbility$ DBCleanup";
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
+            card.addTrigger(parsedTrigger);
+            card.setSVar("AmplifyReveal", abString);
+            card.setSVar("Amplify", dbString);
+            card.setSVar("DBCleanup", "DB$ Cleanup | ClearRemembered$ True");
+            card.setSVar("AmpMagnitude", "SVar$Revealed/Times." + amplifyMagnitude);
+            card.setSVar("Revealed", "Remembered$Amount");
+        }
+
         if (card.hasStartOfKeyword("Equip")) {
             // find position of Equip keyword
             final int equipPos = card.getKeywordPosition("Equip");

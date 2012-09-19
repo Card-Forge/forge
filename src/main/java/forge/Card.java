@@ -2276,6 +2276,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                     final String costDesc = upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : cost;
                     sbLong.append(costDesc);
                     sbLong.append("\r\n");
+                } else if (keyword.get(i).startsWith("Amplify")) {
+                    sbLong.append("Amplify ");
+                    final String[] ampParams = keyword.get(i).split(":");
+                    final String magnitude = ampParams[1];
+                    sbLong.append(magnitude);
+                    sbLong.append("(As this creature enters the battlefield, put a +1/+1 counter on it for each ");
+                    sbLong.append(ampParams[2].replace(",", " and/or ")).append(" card you reveal in your hand.)");
+                    sbLong.append("\r\n");
                 }  else if (keyword.get(i).startsWith("Alternative Cost")) {
                     sbLong.append("Has alternative cost.");
                 } else if (keyword.get(i).startsWith("Kicker")) {

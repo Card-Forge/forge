@@ -595,6 +595,7 @@ res/cardsfolder/a/aven_squire.txt svneol=native#text/plain
 res/cardsfolder/a/aven_trailblazer.txt svneol=native#text/plain
 res/cardsfolder/a/aven_trooper.txt svneol=native#text/plain
 res/cardsfolder/a/aven_warcraft.txt svneol=native#text/plain
+res/cardsfolder/a/aven_warhawk.txt -text
 res/cardsfolder/a/aven_windreader.txt -text
 res/cardsfolder/a/avenger_en_dal.txt svneol=native#text/plain
 res/cardsfolder/a/avenger_of_zendikar.txt svneol=native#text/plain
@@ -1318,6 +1319,7 @@ res/cardsfolder/c/canker_abomination.txt svneol=native#text/plain
 res/cardsfolder/c/cankerous_thirst.txt -text
 res/cardsfolder/c/canopy_claws.txt svneol=native#text/plain
 res/cardsfolder/c/canopy_cover.txt svneol=native#text/plain
+res/cardsfolder/c/canopy_crawler.txt -text
 res/cardsfolder/c/canopy_dragon.txt svneol=native#text/plain
 res/cardsfolder/c/canopy_spider.txt svneol=native#text/plain
 res/cardsfolder/c/canopy_surge.txt -text svneol=unset#text/plain
@@ -2107,6 +2109,7 @@ res/cardsfolder/d/daru_healer.txt svneol=native#text/plain
 res/cardsfolder/d/daru_lancer.txt svneol=native#text/plain
 res/cardsfolder/d/daru_mender.txt svneol=native#text/plain
 res/cardsfolder/d/daru_sanctifier.txt svneol=native#text/plain
+res/cardsfolder/d/daru_stinger.txt -text
 res/cardsfolder/d/daru_warchief.txt svneol=native#text/plain
 res/cardsfolder/d/daunting_defender.txt svneol=native#text/plain
 res/cardsfolder/d/dauntless_dourbark.txt svneol=native#text/plain
@@ -2819,6 +2822,7 @@ res/cardsfolder/e/elvish_vanguard.txt svneol=native#text/plain
 res/cardsfolder/e/elvish_visionary.txt svneol=native#text/plain
 res/cardsfolder/e/elvish_warrior.txt svneol=native#text/plain
 res/cardsfolder/e/emancipation_angel.txt -text
+res/cardsfolder/e/embalmed_brawler.txt -text
 res/cardsfolder/e/embargo.txt svneol=native#text/plain
 res/cardsfolder/e/ember_beast.txt -text
 res/cardsfolder/e/ember_fist_zubera.txt svneol=native#text/plain
@@ -3175,6 +3179,7 @@ res/cardsfolder/f/feral_lightning.txt svneol=native#text/plain
 res/cardsfolder/f/feral_ridgewolf.txt -text
 res/cardsfolder/f/feral_shadow.txt svneol=native#text/plain
 res/cardsfolder/f/feral_thallid.txt svneol=native#text/plain
+res/cardsfolder/f/feral_throwback.txt -text
 res/cardsfolder/f/ferocious_charge.txt svneol=native#text/plain
 res/cardsfolder/f/ferocity.txt svneol=native#text/plain
 res/cardsfolder/f/ferozs_ban.txt svneol=native#text/plain
@@ -3667,6 +3672,7 @@ res/cardsfolder/g/geyser_glider.txt svneol=native#text/plain
 res/cardsfolder/g/ghalmas_warden.txt svneol=native#text/plain
 res/cardsfolder/g/ghastlord_of_fugue.txt svneol=native#text/plain
 res/cardsfolder/g/ghastly_demise.txt svneol=native#text/plain
+res/cardsfolder/g/ghastly_remains.txt -text
 res/cardsfolder/g/ghave_guru_of_spores.txt -text
 res/cardsfolder/g/ghazban_ogre.txt -text
 res/cardsfolder/g/ghitu_encampment.txt svneol=native#text/plain
@@ -3805,6 +3811,7 @@ res/cardsfolder/g/glory.txt svneol=native#text/plain
 res/cardsfolder/g/glory_of_warfare.txt svneol=native#text/plain
 res/cardsfolder/g/glory_seeker.txt svneol=native#text/plain
 res/cardsfolder/g/gloryscale_viashino.txt svneol=native#text/plain
+res/cardsfolder/g/glowering_rogon.txt -text
 res/cardsfolder/g/glowing_anemone.txt svneol=native#text/plain
 res/cardsfolder/g/glowrider.txt svneol=native#text/plain
 res/cardsfolder/g/gluttonous_slime.txt svneol=native#text/plain
@@ -5086,6 +5093,7 @@ res/cardsfolder/k/killer_instinct.txt -text
 res/cardsfolder/k/killer_whale.txt svneol=native#text/plain
 res/cardsfolder/k/kiln_fiend.txt svneol=native#text/plain
 res/cardsfolder/k/kiln_walker.txt svneol=native#text/plain
+res/cardsfolder/k/kilnmouth_dragon.txt -text
 res/cardsfolder/k/kindercatch.txt -text
 res/cardsfolder/k/kindle.txt svneol=native#text/plain
 res/cardsfolder/k/kindled_fury.txt svneol=native#text/plain
@@ -11176,6 +11184,7 @@ res/cardsfolder/z/zof_shade.txt svneol=native#text/plain
 res/cardsfolder/z/zombie_apocalypse.txt -text
 res/cardsfolder/z/zombie_assassin.txt -text
 res/cardsfolder/z/zombie_boa.txt -text
+res/cardsfolder/z/zombie_brute.txt -text
 res/cardsfolder/z/zombie_cannibal.txt svneol=native#text/plain
 res/cardsfolder/z/zombie_cutthroat.txt svneol=native#text/plain
 res/cardsfolder/z/zombie_goliath.txt svneol=native#text/plain

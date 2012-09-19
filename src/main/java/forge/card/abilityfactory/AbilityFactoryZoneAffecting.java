@@ -1360,7 +1360,7 @@ public class AbilityFactoryZoneAffecting {
                             String amountString = params.get("RevealNumber");
                             int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                                     : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-                            dPHand = AbilityFactoryReveal.getRevealedList(p, dPHand, amount);
+                            dPHand = AbilityFactoryReveal.getRevealedList(p, dPHand, amount, false);
                         }
                         CardList dPChHand = new CardList(dPHand);
                         String[] dValid = null;

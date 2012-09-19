@@ -1,0 +1,12 @@
+Name:Feral Throwback
+ManaCost:4 G G
+Types:Creature Beast
+Text:no text
+PT:3/3
+K:Amplify:2:Beast
+K:Provoke
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_throwback.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/126.jpg
+Oracle:Amplify 2 (As this creature enters the battlefield, put two +1/+1 counters on it for each Beast card you reveal in your hand.)\nProvoke (When this attacks, you may have target creature defending player controls untap and block it if able.)
+End

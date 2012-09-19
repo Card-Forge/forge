@@ -2049,10 +2049,10 @@ public final class AbilityFactoryReveal {
         for (int j = 0; j < maxCards; j++) {
             topCards.add(lib.get(j));
         }
-        
-        List<Object> orderedCards = GuiUtils.getOrderChoices("Select order to Rearrange", "Top of Library", 0, (Object[])topCards.toArray(), null);
-        for(int i = maxCards-1; i >= 0; i--){
-            Card next = (Card)orderedCards.get(i);
+
+        List<Object> orderedCards = GuiUtils.getOrderChoices("Select order to Rearrange", "Top of Library", 0, (Object[]) topCards.toArray(), null);
+        for (int i = maxCards - 1; i >= 0; i--) {
+            Card next = (Card) orderedCards.get(i);
             Singletons.getModel().getGameAction().moveToLibrary(next, 0);
         }
         if (mayshuffle) {
@@ -2221,7 +2221,7 @@ public final class AbilityFactoryReveal {
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
         }
-        
+
         ArrayList<Player> tgtPlayers;
 
         final Target tgt = sa.getTarget();
@@ -2355,6 +2355,7 @@ public final class AbilityFactoryReveal {
     private static void revealResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card host = af.getHostCard();
+        final boolean anyNumber = params.containsKey("AnyNumber");
 
         ArrayList<Player> tgtPlayers;
 
@@ -2382,7 +2383,7 @@ public final class AbilityFactoryReveal {
                         if (params.containsKey("AnyNumber")) {
                             max = valid.size();
                         }
-                        revealed.addAll(AbilityFactoryReveal.getRevealedList(sa.getActivatingPlayer(), valid, max));
+                        revealed.addAll(AbilityFactoryReveal.getRevealedList(sa.getActivatingPlayer(), valid, max, anyNumber));
                         if (sa.getActivatingPlayer().isComputer()) {
                             GuiUtils.chooseOneOrNone("Revealed card(s)", revealed.toArray());
                         }
@@ -2405,24 +2406,30 @@ public final class AbilityFactoryReveal {
      * @param player the player
      * @param valid the valid
      * @param max the max
+     * @param anyNumber a boolean
      * @return the revealed list
      */
-    public static CardList getRevealedList(final Player player, final CardList valid, final int max) {
+    public static CardList getRevealedList(final Player player, final CardList valid, final int max, boolean anyNumber) {
         final CardList chosen = new CardList();
         final int validamount = Math.min(valid.size(), max);
 
-        for (int i = 0; i < validamount; i++) {
-            if (player.isHuman()) {
-                final Object o = GuiUtils.chooseOne("Choose card(s) to reveal", valid.toArray());
-                if (o != null) {
-                    chosen.add((Card) o);
-                    valid.remove((Card) o);
-                } else {
-                    break;
+        if (anyNumber && player.isHuman() && validamount > 0) {
+            final List<Card> selection = GuiUtils.chooseNoneOrMany("Choose which cards to reveal (Multiselect)", valid.toArray());
+            chosen.addAll(selection);
+        } else {
+            for (int i = 0; i < validamount; i++) {
+                if (player.isHuman()) {
+                    final Object o = GuiUtils.chooseOne("Choose card(s) to reveal", valid.toArray());
+                    if (o != null) {
+                        chosen.add((Card) o);
+                        valid.remove((Card) o);
+                    } else {
+                        break;
+                    }
+                } else { // Computer
+                    chosen.add(valid.get(0));
+                    valid.remove(valid.get(0));
                 }
-            } else { // Computer
-                chosen.add(valid.get(0));
-                valid.remove(valid.get(0));
             }
         }
         return chosen;
