@@ -8,6 +8,8 @@ package forge.gui.framework;
  * <br><br><i>(I at beginning of class name denotes an interface.)</i>
  */
 public interface ILocalRepaint {
-    /** */
+    /** Boosts performance on repaints by locally repainting a component,
+     * rather than repainting the entire screen.
+     */
     void repaintSelf();
 }
