@@ -6006,6 +6006,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * isOptionalAdditionalCostsPaid.
      * </p>
      * 
+     * @param cost
+     *            a String.
      * @return a boolean.
      */
     public final boolean isOptionalAdditionalCostsPaid(final String cost) {
@@ -6019,12 +6021,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return false;
     }
-    
+
     /**
      * <p>
      * isOptionalAdditionalCostsPaid.
      * </p>
-     * @return 
+     * @return an ArrayList<String>.
      * 
      */
     public final ArrayList<String> getOptionalAdditionalCostsPaid() {
@@ -6779,62 +6781,68 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.startsWith("sharesNameWith")) {
-            final String restriction = property.split("sharesNameWith ")[1];
-            if (restriction.equals("YourGraveyard")) {
-                final CardList list = sourceController.getCardsIn(ZoneType.Graveyard);
-                if (list.isEmpty())  {
+            if (property.equals("sharesNameWith")) {
+                if (!this.getName().equals(source.getName())) {
                     return false;
                 }
-                boolean shares = false;
-                for (final Card card : sourceController.getCardsIn(ZoneType.Graveyard)) {
-                    if (this.getName().equals(card.getName())) {
-                        shares = true;
+            } else {
+                final String restriction = property.split("sharesNameWith ")[1];
+                if (restriction.equals("YourGraveyard")) {
+                    final CardList list = sourceController.getCardsIn(ZoneType.Graveyard);
+                    if (list.isEmpty())  {
+                        return false;
                     }
-                }
-                if (!shares) {
-                    return false;
-               }
-            } else if (restriction.equals(ZoneType.Battlefield.toString())) {
-                final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-                if (list.isEmpty()) {
-                    return false;
-                }
-                boolean shares = false;
-                for (final Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
-                    if (this.getName().equals(card.getName())) {
-                        shares = true;
-                    }
-                }
-                if (!shares) {
-                    return false;
-                }
-            } else if (restriction.equals("ThisTurnCast")) {
-                final CardList list = CardUtil.getThisTurnCast("Card", source);
-                if (list.isEmpty())  {
-                    return false;
-                }
-                boolean shares = false;
-                for (final Card card : list) {
-                    if (this.getName().equals(card.getName())) {
-                        shares = true;
-                    }
-                }
-                if (!shares) {
-                    return false;
-                }
-
-            } else if (restriction.equals("Remembered")) {
-                boolean shares = false;
-                for (final Object rem : source.getRemembered()) {
-                    if (rem instanceof Card) {
-                        final Card card = (Card) rem;
+                    boolean shares = false;
+                    for (final Card card : sourceController.getCardsIn(ZoneType.Graveyard)) {
                         if (this.getName().equals(card.getName())) {
                             shares = true;
                         }
                     }
-                }
-                if (!shares) {
-                    return false;
+                    if (!shares) {
+                        return false;
+                    }
+                } else if (restriction.equals(ZoneType.Battlefield.toString())) {
+                    final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                    if (list.isEmpty()) {
+                        return false;
+                    }
+                    boolean shares = false;
+                    for (final Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+                        if (this.getName().equals(card.getName())) {
+                            shares = true;
+                        }
+                    }
+                    if (!shares) {
+                        return false;
+                    }
+                } else if (restriction.equals("ThisTurnCast")) {
+                    final CardList list = CardUtil.getThisTurnCast("Card", source);
+                    if (list.isEmpty())  {
+                        return false;
+                    }
+                    boolean shares = false;
+                    for (final Card card : list) {
+                        if (this.getName().equals(card.getName())) {
+                            shares = true;
+                        }
+                    }
+                    if (!shares) {
+                        return false;
+                    }
+
+                } else if (restriction.equals("Remembered")) {
+                    boolean shares = false;
+                    for (final Object rem : source.getRemembered()) {
+                        if (rem instanceof Card) {
+                            final Card card = (Card) rem;
+                            if (this.getName().equals(card.getName())) {
+                                shares = true;
+                            }
+                        }
+                    }
+                    if (!shares) {
+                        return false;
+                    }
                 }
             }
 
