@@ -679,7 +679,7 @@ public final class AbilityFactoryChoose {
      * @return a boolean.
      */
     private static boolean chooseColorTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        return false;
+        return mandatory || chooseColorCanPlayAI(af, sa);
     }
 
     /**
