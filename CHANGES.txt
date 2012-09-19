@@ -5,6 +5,8 @@ Forge Beta: 0#-0#-2012 ver 1.2.14
 11### cards in total.
 
 
+After taking a well needed break our UI dev has fixed and tweaked a few UI issues that people noticed and reported in the past. The long-standing Map/Zeppelin bug should be OK now. Just one problem, when the Zeppelin is launched, the panel doesn't refresh automatically. This is probably related to the problem where the images don't draw "the first time around". Anyway, the back-end works as it should.
+
 All modern legal sets are now at least 85% complete.
 
 We recieved several reports of a bug which caused a crash report with the following content "java.lang.NumberFormatException: For input string: "X"". This should now be fixed.
