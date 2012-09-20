@@ -2720,6 +2720,9 @@ public class CombatUtil {
                         // during Declare_Attackers
                         AllZone.getCombat().removeFromCombat(crd);
                     }
+                    if (bLast) {
+                        PhaseUtil.handleAttackingTriggers();
+                    }
                 }
             }
         }
