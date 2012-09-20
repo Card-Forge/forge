@@ -227,6 +227,27 @@ Fixes/Features:
 - Fixed Fettergeist.
 - Reduced the number of copies of The Tabernacle at Pendrell Vale in the Alice in Wonderland 3 deck to 1.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Removed Savage Surge from wrong direction.
+- Added AI support to Ninjutsu.
+- merged changes from Trunk up to r16974
+- Added a fluff piece to the changes.txt file.
+- Added Amplify keyword
+- Added a hard version of the Sun Quan deck.
+- Fixed some ChangeZone triggers triggering twice.
+- Fixed Rukh Egg giving the wrong player the token when it dies under opposing control.
+- Changed part of Reveal to use DualListBox (thanks Sol)
+- Slotted Thunderscape Battlemage into recently added card (was missed in commit logs it seems)
+- Documentation: some brief helpful comments FView.
+- Bugfix: challenge opponents not repainting after zeppelin launched.
+- Fixed Propaganda suppressing "Attacks" trigger of the AI.
+- Bugfix: JLabels not showing icon if they were on the first screen.
+- Added a checkbox for not automatically choosing the latest card version when importing decks (useful in some cases).
+- Aesthetic: Smallified (ensmallened?) alpha strike button to allow mouseover effect responsiveness.
+- Fixed Springjack Pasture.
+- Removed broken probabilities calculation from hand statistics in deck editor.
+- Debug: Keyboard shortcuts now back in action (single keys only for now)
+- Added keyboard shortcut for End Turn. (you still have to pass priority as though you pushed the button)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -252,6 +273,7 @@ Crosstown Courier
 Cyclonic Rift
 Dark Revenant
 Deadbridge Goliath
+Dramatic Rescue
 Dreadbore
 Dreg Mangler
 Dryad Militant
@@ -289,10 +311,12 @@ Precinct Captain
 Psychic Spiral
 Pyroconvergence
 Rakdos Guildgate
+Rakdos Ragemutt
 Rakdos Shred-Freak
 Rakdos's Return
 Rakdos, Lord of Riots
 Rest in Peace
+Risen Sanctuary
 Rites of Reaping
 Runewing
 Savage Surge
@@ -311,7 +335,11 @@ Supreme Verdict
 Thoughtflare
 Transguild Promenade
 Treasured Find
+Trestle Troll
+Trostani, Selesnya's Voice
 Ultimate Price
+Utvara Hellkite
+Vitu-Ghazi Guildmage
 Voidwielder
 Vraska the Unseen
 Wayfaring Temple
@@ -379,6 +407,19 @@ Foriysian Totem
 Luminous Guardian
 Mounted Archers
 Victimize
+Aven Warhawk
+Canopy Crawler
+Daru Stinger
+Embalmed Brawler
+Feral Throwback
+Ghastly Remains
+Glowering Rogon
+Kilnmouth Dragon
+Zombie Brute
+Martyr of Frost
+Hollow Specter
+Mammoth Harness
+Prophecy
 
 
 end
