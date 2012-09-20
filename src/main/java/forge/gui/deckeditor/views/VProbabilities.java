@@ -41,14 +41,14 @@ public enum VProbabilities implements IVDoc {
 
     // Title labels
     private final JLabel lblReshuffle = new FLabel.Builder()
-            .hoverable(true).text("RE-SHUFFLE").tooltip("See a new sample shuffle")
-            .fontSize(12).build();
+            .hoverable(true).text("CLICK HERE TO RE-SHUFFLE").tooltip("See a new sample shuffle")
+            .fontSize(16).build();
     private final JLabel lblSampleHand = new FLabel.Builder().fontStyle(Font.BOLD)
-            .fontSize(14).text("SAMPLE HAND").build();
+            .fontSize(12).text("SAMPLE HAND").opaque(true).build();
     private final JLabel lblRemainingDraws = new FLabel.Builder().fontStyle(Font.BOLD)
-            .fontSize(14).text("REMAINING DRAWS").build();
-    private final JLabel lblExplanation = new FLabel.Builder()
-            .fontSize(11).text("XX % = frequency that card will appear at that position").build();
+            .fontSize(12).text("REMAINING DRAWS").opaque(true).build();
+   // private final JLabel lblExplanation = new FLabel.Builder()
+     //       .fontSize(11).text("XX % = frequency that card will appear at that position").build();
 
     // Layout containers
     private final JPanel pnlContent = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
@@ -67,19 +67,18 @@ public enum VProbabilities implements IVDoc {
         scroller.getViewport().setBorder(null);
         scroller.getVerticalScrollBar().setUnitIncrement(16);
 
-        // Sample hand
-        lblExplanation.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        lblSampleHand.setBorder(new MatteBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        lblSampleHand.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         lblRemainingDraws.setBorder(new MatteBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        lblRemainingDraws.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // Core layout
-        final String constraints = "w 96%!, h 25px!, gap 2% 0 0 0";
-
-        pnlContent.add(lblReshuffle, constraints);
-        pnlContent.add(lblSampleHand, constraints);
-        pnlContent.add(lblExplanation, constraints);
-        pnlContent.add(pnlHand, "w 96%!, gap 2% 0 0 0");
-        pnlContent.add(lblRemainingDraws, constraints);
-        pnlContent.add(pnlLibrary, "w 96%!, gap 2% 0 0 0");
+        pnlContent.add(lblReshuffle, "w 96%!, h 29px!, gap 2% 0 5px 5px");
+        pnlContent.add(lblSampleHand, "w 96%!, h 25px!, gap 2% 0 0 0");
+       // pnlContent.add(lblExplanation, "w 96%!, h 25px!, gap 2% 0 0 0");
+        pnlContent.add(pnlHand, "w 96%!, gap 2% 0 0 5px");
+        pnlContent.add(lblRemainingDraws, "w 96%!, h 25px!, gap 2% 0 0 0");
+        pnlContent.add(pnlLibrary, "w 96%!, gap 2% 0 5px 0");
     }
 
     //========== Overridden methods
@@ -190,7 +189,7 @@ public enum VProbabilities implements IVDoc {
 
         if (zebra) {
             lbl.setOpaque(true);
-            lbl.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+            lbl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         }
 
         return lbl;

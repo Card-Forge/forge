@@ -10,7 +10,6 @@ import java.util.Map;
 import forge.Command;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.views.VProbabilities;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
@@ -83,15 +82,15 @@ public enum CProbabilities implements ICDoc {
         // Formulas is (remaining instances of this card / total cards remaining)
         final Iterator<CardPrinted> itr = shuffled.iterator();
         CardPrinted tmp;
-        int prob;
+       // int prob;
         while (itr.hasNext()) {
             tmp = itr.next();
 
-            prob = SEditorUtil.calculatePercentage(
-                    cardTotals.get(tmp), shuffled.size());
+           // prob = SEditorUtil.calculatePercentage(
+             //       cardTotals.get(tmp), shuffled.size());
 
             cardTotals.put(tmp, cardTotals.get(tmp) - 1);
-            cardProbabilities.add(tmp.getName() + " (" + prob + "%)");
+            cardProbabilities.add(tmp.getName()); // + " (" + prob + "%)");
             itr.remove();
         }
 
