@@ -41,13 +41,18 @@ public enum FView {
 
     // Top-level UI components; all have getters.
     private final JFrame frmDocument = new JFrame();
-    private final JPanel pnlContent = new JPanel();
-    private final FPanel pnlInsets = new FPanel(new BorderLayout());
-    private final JPanel pnlPreview = new PreviewPanel();
-    private final JPanel pnlTabOverflow = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
+    // A layered pane is the frame's viewport, allowing overlay effects.
     private final JLayeredPane lpnDocument = new JLayeredPane();
+    // The content panel is placed in the layered pane.
+    private final JPanel pnlContent = new JPanel();
+    // An insets panel neatly maintains a space from the edges of the window and
+    // whatever layout is happening, without having to explicitly define a margin each time.
+    private final FPanel pnlInsets = new FPanel(new BorderLayout());
+    // Preview panel is what is shown when a drag cell is being moved around
+    private final JPanel pnlPreview = new PreviewPanel();
+    // Tab overflow is for the +X display for extra tabs.
+    private final JPanel pnlTabOverflow = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
 
-    //
     private FView() {
         splash = new SplashFrame();
     }
