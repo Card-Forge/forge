@@ -164,9 +164,12 @@ public class DeckRecognizer {
      * 
      * @param rawLine
      *            the raw_line
+     * @param newestEdition
+     *            get the newest available edition?
+     *
      * @return the token
      */
-    public static Token recognizeLine(final String rawLine) {
+    public static Token recognizeLine(final String rawLine, final boolean newestEdition) {
         if (StringUtils.isBlank(rawLine)) {
             return new Token(TokenType.Comment, 0, rawLine);
         }
@@ -178,7 +181,7 @@ public class DeckRecognizer {
         if (foundNumbersInFront.matches()) {
             final String cardName = foundNumbersInFront.group(2);
             final int amount = Integer.parseInt(foundNumbersInFront.group(1));
-            result = DeckRecognizer.recognizePossibleNameAndNumber(cardName, amount);
+            result = DeckRecognizer.recognizePossibleNameAndNumber(cardName, amount, newestEdition);
         } /*
            * else if (foundNumbersInBack.matches()) { String cardName =
            * foundNumbersInBack.group(1); int amount =
@@ -187,16 +190,16 @@ public class DeckRecognizer {
            */
         else {
             if (CardDb.instance().isCardSupported(line)) {
-                return Token.knownCard(CardDb.instance().getCard(line, true), 1);
+                return Token.knownCard(CardDb.instance().getCard(line, newestEdition), 1);
             }
             result = DeckRecognizer.recognizeNonCard(line, 1);
         }
         return result != null ? result : new Token(TokenType.UnknownText, 0, line);
     }
 
-    private static Token recognizePossibleNameAndNumber(final String name, final int n) {
+    private static Token recognizePossibleNameAndNumber(final String name, final int n, final boolean newestEdition) {
         if (CardDb.instance().isCardSupported(name)) {
-            return Token.knownCard(CardDb.instance().getCard(name, true), n);
+            return Token.knownCard(CardDb.instance().getCard(name, newestEdition), n);
         }
 
         // TODO: recognize format: http://topdeck.ru/forum/index.php?showtopic=12711

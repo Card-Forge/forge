@@ -32,6 +32,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JCheckBox;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -86,7 +87,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final JLabel summarySide = new JLabel("This is second line");
     private final JButton cmdAccept = new JButton("Import Deck");
     private final JButton cmdCancel = new JButton("Cancel");
-
+    private final JCheckBox newEditionCheck = new JCheckBox("Import latest version of card", true);
+    
     /** The tokens. */
     private final List<DeckRecognizer.Token> tokens = new ArrayList<DeckRecognizer.Token>();
 
@@ -126,14 +128,15 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
 
         this.getContentPane().setLayout(new MigLayout("fill"));
-        this.getContentPane().add(this.scrollInput, "cell 0 0, w 50%, sy 4, growy, pushy");
+        this.getContentPane().add(this.scrollInput, "cell 0 0, w 50%, growy, pushy");
+        this.getContentPane().add(this.newEditionCheck, "cell 0 1, w 50%, align c");
         this.getContentPane().add(this.scrollOutput, "cell 1 0, w 50%, growy, pushy");
-
         this.getContentPane().add(this.summaryMain, "cell 1 1, label");
         this.getContentPane().add(this.summarySide, "cell 1 2, label");
 
         this.getContentPane().add(this.cmdAccept, "cell 1 3, split 2, w 100, align c");
         this.getContentPane().add(this.cmdCancel, "w 100");
+
 
         this.cmdCancel.addActionListener(new ActionListener() {
             @Override
@@ -174,7 +177,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             final int rangeEnd = e.getEndOffset();
             try {
                 final String line = this.txtInput.getText(rangeStart, rangeEnd - rangeStart);
-                this.tokens.add(DeckRecognizer.recognizeLine(line));
+                this.tokens.add(DeckRecognizer.recognizeLine(line, newEditionCheck.isSelected()));
             } catch (final BadLocationException ex) {
             }
         }
