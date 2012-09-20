@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import forge.AllZone;
 import forge.Command;
+import forge.Singletons;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.CMainMenu;
@@ -118,6 +119,8 @@ public enum CSubmenuChallenges implements ICDoc {
                 lbl.setOpaque(true);
                 view.getPnlChallenges().add(lbl, "w 50%!, h 30px!, gap 25% 0 50px 0");
             }
+
+            Singletons.getView().getFrame().validate();
         }
     }
 
