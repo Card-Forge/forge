@@ -6,6 +6,8 @@ PT:0/0
 K:Amplify:1:Zombie
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self | PresentZone$ Graveyard | PresentPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard, you may pay B B B. If you do, return CARDNAME to your hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ B B B | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+SVar:NeedsToPlayVar:X GE2
+SVar:X:Count$TypeInYourHand.Zombie
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastly_remains.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/71.jpg
