@@ -113,7 +113,8 @@ public class ForgePreferences {
         SHORTCUT_SHOWCONSOLE ("76"), /** */
         SHORTCUT_SHOWPLAYERS ("80"), /** */
         SHORTCUT_SHOWDEV ("68"), /** */
-        SHORTCUT_CONCEDE ("17");
+        SHORTCUT_CONCEDE ("17"), /** */
+        SHORTCUT_ENDTURN ("69");
 
         private final String strDefaultVal;
 

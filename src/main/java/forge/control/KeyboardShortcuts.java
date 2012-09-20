@@ -104,6 +104,15 @@ public class KeyboardShortcuts {
             }
         };
 
+        /** End turn. */
+        final Action actEndTurn = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (Singletons.getControl().getState() != 1) { return; }
+                CDock.SINGLETON_INSTANCE.endTurn();
+            }
+        };
+
         //========== Instantiate shortcut objects and add to list.
         list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, "Match: show stack panel", actShowStack, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWCOMBAT, "Match: show combat panel", actShowCombat, am, im));
@@ -111,6 +120,7 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_SHOWPLAYERS, "Match: show players panel", actShowPlayers, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWDEV, "Match: show dev panel", actShowDev, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CONCEDE, "Match: concede game", actConcede, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_ENDTURN, "Match: pass priority until EOT or next stack event", actEndTurn, am, im));
         return list;
     } // End initMatchShortcuts()
 
