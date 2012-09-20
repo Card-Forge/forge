@@ -38,7 +38,7 @@ public class KeyboardShortcuts {
      */
     @SuppressWarnings("serial")
     public static List<Shortcut> attachKeyboardShortcuts() {
-        final JComponent c = (JComponent) Singletons.getView().getFrame().getContentPane();
+        final JComponent c = Singletons.getView().getFrame().getLayeredPane();
         final InputMap im = c.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         final ActionMap am = c.getActionMap();
 
@@ -78,6 +78,7 @@ public class KeyboardShortcuts {
         final Action actShowPlayers = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
+                System.out.println("SHOWING PLAYERS");
                 if (Singletons.getControl().getState() != 1) { return; }
                 SDisplayUtil.showTab(EDocID.REPORT_PLAYERS.getDoc());
             }
@@ -88,7 +89,9 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                SDisplayUtil.showTab(EDocID.DEV_MODE.getDoc());
+                if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)) {
+                    SDisplayUtil.showTab(EDocID.DEV_MODE.getDoc());
+                }
             }
         };
 
@@ -112,47 +115,6 @@ public class KeyboardShortcuts {
     } // End initMatchShortcuts()
 
     /**
-     * Converts a string of key codes (space delimited) into their respective
-     * key texts. This helps juggling between input maps, display text, save
-     * values, and input data.
-     * 
-     * @param s0
-     *            &emsp; A string of keycodes
-     * @return String
-     */
-    public static String codes2Chars(final String s0) {
-        final List<String> codes = new ArrayList<String>(Arrays.asList(s0.split(" ")));
-        final List<String> displayText = new ArrayList<String>();
-        String temp;
-
-        for (final String s : codes) {
-            temp = KeyEvent.getKeyText(Integer.valueOf(s));
-
-            if (!s.isEmpty()) {
-                // Probably a better way to do this; but I couldn't find it
-                // after a decent look around. The main problem is that
-                // KeyEvent.getKeyText() will return "Ctrl", but the input
-                // map expects "control". Similar case problems with Shift and
-                // Alt.
-                // Doublestrike 21-11-11
-                if (temp.equalsIgnoreCase("ctrl")) {
-                    temp = "control";
-                } else if (temp.equalsIgnoreCase("shift")) {
-                    temp = "shift";
-                } else if (temp.equalsIgnoreCase("alt")) {
-                    temp = "alt";
-                } else if (temp.equalsIgnoreCase("escape")) {
-                    temp = "escape";
-                }
-
-                displayText.add(temp);
-            }
-        }
-
-        return StringUtils.join(displayText, ' ');
-    } // End codes2chars
-
-    /**
      * 
      * Instantiates a shortcut key instance with various properties for use
      * throughout the project.
@@ -160,15 +122,15 @@ public class KeyboardShortcuts {
      */
     public static class Shortcut {
         /** */
-        private FPref prefkey;
+        private final FPref prefkey;
         /** */
-        private String description;
+        private final String description;
         /** */
-        private Action handler;
+        private final Action handler;
         /** */
-        private ActionMap actionMap;
+        private final ActionMap actionMap;
         /** */
-        private InputMap inputMap;
+        private final InputMap inputMap;
         /** */
         private KeyStroke key;
         /** */
@@ -213,7 +175,8 @@ public class KeyboardShortcuts {
         public void attach() {
             detach();
             str = Singletons.getModel().getPreferences().getPref(prefkey);
-            key = KeyStroke.getKeyStroke(KeyboardShortcuts.codes2Chars(str));
+            key = KeyStroke.getKeyStroke(Integer.valueOf(str), 0);
+
             inputMap.put(key, str);
             actionMap.put(str, handler);
         }
