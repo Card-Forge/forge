@@ -319,7 +319,7 @@ public class TriggerHandler {
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
             if (playerAP.equals(card.getController()) && !allCards.contains(card) 
-                    && AllZone.getZoneOf(card).getZoneType().isHidden()) {
+                    && (AllZone.getZoneOf(card) == null || AllZone.getZoneOf(card).getZoneType().isHidden())) {
                 allCards.add(card);
             }
         }
@@ -345,7 +345,7 @@ public class TriggerHandler {
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
             if (!playerAP.equals(card.getController()) && !allCards.contains(card)
-                    && AllZone.getZoneOf(card).getZoneType().isHidden()) {
+                    && (AllZone.getZoneOf(card) == null || AllZone.getZoneOf(card).getZoneType().isHidden())) {
                 allCards.add(card);
             }
         }

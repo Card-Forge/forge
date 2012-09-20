@@ -4,9 +4,9 @@ Types:Land
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Goat | TokenTypes$ Creature,Goat | TokenOwner$ You | TokenColors$ White | TokenPower$ 0 | TokenToughness$ 1 | SpellDescription$ Put a 0/1 white Goat creature token onto the battlefield.
-A:AB$Mana | Cost$ T Sac<X/Goat> | CostDesc$ Tap, Sacrifice X Goats: | Produced$ Any | Amount$ ChosenX | Defined$ You | SubAbility$ DBGainLife | SpellDescription$ Add X mana of any one color to your mana pool. You gain X life.
+A:AB$Mana | Cost$ T Sac<X/Goat> | CostDesc$ Tap, Sacrifice X Goats: | Produced$ Any | Amount$ ChosenX | References$ X | Defined$ You | SubAbility$ DBGainLife | SpellDescription$ Add X mana of any one color to your mana pool. You gain X life.
 SVar:X:XChoice
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ ChosenX | SpellDescription$ You gain X life.
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ ChosenX
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_pasture.jpg
