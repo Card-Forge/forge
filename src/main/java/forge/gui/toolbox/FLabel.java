@@ -21,6 +21,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 import forge.Command;
 import forge.gui.framework.ILocalRepaint;
@@ -180,6 +182,10 @@ public class FLabel extends JLabel implements ILocalRepaint {
         // Resize adapter
         this.removeComponentListener(cadResize);
         this.addComponentListener(cadResize);
+
+        // First-time-shown adapter (required to size icons properly
+        // if icon is set while the label is still 0 x 0)
+        this.addAncestorListener(showFirstTime);
     }
 
     //========== Variable initialization
@@ -201,7 +207,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     // Various variables used in image rendering.
     private Image img;
-    
+
     private Command cmdClick;
 
     private double iar;
@@ -210,7 +216,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     private final ActionListener fireResize = new ActionListener() {
         @Override
-        public void actionPerformed(final ActionEvent evt) { resize(); resizeTimer.stop(); }
+        public void actionPerformed(final ActionEvent evt) { resetIcon(); resizeTimer.stop(); }
     };
 
     private final Timer resizeTimer = new Timer(10, fireResize);
@@ -219,6 +225,21 @@ public class FLabel extends JLabel implements ILocalRepaint {
     private final ComponentAdapter cadResize = new ComponentAdapter() {
         @Override
         public void componentResized(final ComponentEvent e) { resizeTimer.restart(); }
+    };
+
+    private final AncestorListener showFirstTime = new AncestorListener() {
+        @Override
+        public void ancestorAdded(final AncestorEvent e) {
+            resetIcon();
+        }
+
+        @Override
+        public void ancestorMoved(AncestorEvent arg0) {
+        }
+
+        @Override
+        public void ancestorRemoved(AncestorEvent arg0) {
+        }
     };
 
     // Mouse event handler
@@ -356,7 +377,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
     @Override
     public void paintComponent(final Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-       
+
         int w = getWidth();
         int h = getHeight();
 
@@ -366,7 +387,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
 //            final Throwable ex = new Exception("Too many repaints");
 //            ex.printStackTrace(System.err);
 //        }
-//        
+
         // Hover
         if (hoverable && hovered && !selected && isEnabled()) {
             g2d.setColor(clrHover);
@@ -386,7 +407,10 @@ public class FLabel extends JLabel implements ILocalRepaint {
             int sh = (int) (h * iconScaleFactor);
             int sw = (int) (sh * iar);
 
-            int x = iconAlignX == SwingConstants.CENTER ? (int) ((w - sw) / 2 + iconInsets.getX()): (int) iconInsets.getX();
+            int x = iconAlignX == SwingConstants.CENTER
+                        ? (int) ((w - sw) / 2 + iconInsets.getX())
+                        : (int) iconInsets.getX();
+
             int y = (int) (((h - sh) / 2) + iconInsets.getY());
 
             Composite oldComp = g2d.getComposite();
@@ -398,7 +422,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
         super.paintComponent(g);
     }
 
-    private void resize() {
+    private void resetIcon() {
         // Non-background icon
         if (img != null && iconScaleAuto  && !iconInBackground) {
             int h = (int) (getHeight() * iconScaleFactor);
