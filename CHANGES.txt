@@ -5,6 +5,10 @@ Forge Beta: 0#-0#-2012 ver 1.2.14
 11### cards in total.
 
 
+The Forge sealed deck mode has undergone significant changes. You can find these in the 1.2.14 beta and later versions. Instead of a single sealed deck match, you can now choose a 1-5 round gauntlet-style tournament where you will face increasingly difficult (probably) opponent decks. You can also choose to use starter packs instead of boosters in the block mode, choose to use 3-12 boosters instead of the default 6 in the full cardpool and custom (cube) modes, and so on.
+
+Perhaps the most notable changes to the sealed deck mode are related to "fantasy blocks" and the greatly increased flexibility you have when you are building your own blocks.
+
 After taking a well needed break our UI dev has fixed and tweaked a few UI issues that people noticed and reported in the past. The long-standing Map/Zeppelin bug should be OK now. Just one problem, when the Zeppelin is launched, the panel doesn't refresh automatically. This is probably related to the problem where the images don't draw "the first time around". Anyway, the back-end works as it should.
 
 All modern legal sets are now at least 85% complete.
