@@ -116,6 +116,12 @@ public enum VSubmenuConstructed implements IVSubmenu {
      */
     @Override
     public void populate() {
+        // TODO: This will be done each time the panel is shown.
+        // Most of the prep work can be done once in the constructor,
+        // should speed things up a little bit.  This should be
+        // checked in all populate() methods; it probably happens other places.
+        // Not complicated; easy to do if have time. Doublestrike 21-9-12
+
         // Deck panels: Human and AI
         final JPanel pnlDecksHuman = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
         final JPanel pnlDecksAI = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
