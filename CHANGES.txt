@@ -252,6 +252,14 @@ Fixes/Features:
 - Debug: Keyboard shortcuts now back in action (single keys only for now)
 - Added keyboard shortcut for End Turn. (you still have to pass priority as though you pushed the button)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a copy of Kilnmouth Dragon to the Sabertooth 3 deck.
+- Merging r16975 through r16999 from Trunk
+- Added an easy version of the Colossus deck.
+- Added a NeedsToPlayVar to Ghastly Remains.
+- Added a fluff piece to the changes.txt file.
+- Minor todo comment added.
+- Added string-capable constructor to FTextArea.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -264,11 +272,14 @@ Added the following cards to the Return to Ravnica branch (These cards are not y
 Abrupt Decay
 Aerial Predation
 Archon of the Triumvirate
+Archweaver
 Armory Guard
 Auger Spree
+Axebane Stag
 Azorius Guildgate
 Azorius Justiciar
 Batterhorn
+Brushstrider
 Centaur Healer
 Chromatic Lantern
 Civic Saber
@@ -280,6 +291,7 @@ Deadbridge Goliath
 Dramatic Rescue
 Dreadbore
 Dreg Mangler
+Drudge Beetle
 Dryad Militant
 Ethereal Armor
 Explosive Impact
@@ -287,8 +299,10 @@ Eyes in the Skies
 Faerie Imposter
 Fall of the Gavel
 Fencing Ace
+Gobbling Ooze
 Goblin Electromancer
 Goblin Rally
+Golgari Decoy
 Golgari Guildgate
 Grim Roustabout
 Grisly Salvage
@@ -310,6 +324,7 @@ Mizzium Mortars
 Necropolis Regent
 Niv-Mizzet, Dracogenius
 Ogre Jailbreaker
+Palisade Giant
 Phantom General
 Precinct Captain
 Psychic Spiral
@@ -332,6 +347,7 @@ Slime Molding
 Slitherhead
 Sluiceway Scorpion
 Slum Reaper
+Soulsworn Spirit
 Sphinx's Revelation
 Stealer of Secrets
 Sunspire Griffin
