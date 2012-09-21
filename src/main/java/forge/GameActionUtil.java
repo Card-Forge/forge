@@ -1791,16 +1791,18 @@ public final class GameActionUtil {
         for (String keyword : source.getKeyword()) {
             if (keyword.startsWith("Buyback")) {
                 for (SpellAbility sa : abilities) {
-                final SpellAbility newSA = sa.copy();
-                newSA.setBasicSpell(false);
-                newSA.setPayCosts(GameActionUtil.combineCosts(newSA, keyword.substring(8)));
-                newSA.setManaCost("");
-                newSA.setDescription(sa.getDescription() + " (with Buyback)");
-                ArrayList<String> newoacs = new ArrayList<String>();
-                newoacs.addAll(sa.getOptionalAdditionalCosts());
-                newSA.setOptionalAdditionalCosts(newoacs);
-                newSA.addOptionalAdditionalCosts("Buyback");
-                newAbilities.add(newAbilities.size(), newSA);
+                    final SpellAbility newSA = sa.copy();
+                    newSA.setBasicSpell(false);
+                    newSA.setPayCosts(GameActionUtil.combineCosts(newSA, keyword.substring(8)));
+                    newSA.setManaCost("");
+                    newSA.setDescription(sa.getDescription() + " (with Buyback)");
+                    ArrayList<String> newoacs = new ArrayList<String>();
+                    newoacs.addAll(sa.getOptionalAdditionalCosts());
+                    newSA.setOptionalAdditionalCosts(newoacs);
+                    newSA.addOptionalAdditionalCosts("Buyback");
+                    if (newSA.canPlay()) {
+                        newAbilities.add(newAbilities.size(), newSA);
+                    }
                 }
                 abilities.addAll(0, newAbilities);
                 newAbilities.clear();
@@ -1816,7 +1818,9 @@ public final class GameActionUtil {
                     newoacs.addAll(sa.getOptionalAdditionalCosts());
                     newSA.setOptionalAdditionalCosts(newoacs);
                     newSA.addOptionalAdditionalCosts(keyword);
-                    newAbilities.add(newAbilities.size(), newSA);
+                    if (newSA.canPlay()) {
+                        newAbilities.add(newAbilities.size(), newSA);
+                    }
                 }
                 abilities.addAll(0, newAbilities);
                 newAbilities.clear();

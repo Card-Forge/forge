@@ -237,9 +237,9 @@ public class CostTapType extends CostPartWithList {
                     this.done();
                 }
 
-                if (cardList.size() == 0) {
-                    this.stop();
-                }
+                /*if (cardList.size() == 0) {
+                    this.cancel();
+                }*/
 
                 final int left = nCards - this.nTapped;
                 CMatchUI.SINGLETON_INSTANCE

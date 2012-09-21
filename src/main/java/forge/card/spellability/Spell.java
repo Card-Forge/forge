@@ -163,7 +163,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             } catch (final NumberFormatException e) {
                 y = CardFactoryUtil.xCount(card, card.getSVar(compareTo));
             }
-            System.out.println("NeedsToPlayVar: " + sVar + "(" + x + ")" + comparator + "(" + y + ")");
             if (!AllZoneUtil.compare(x, comparator, y)) {
                 return false;
             }
