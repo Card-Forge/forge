@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain control of | LoseControl$ EOT | AddKWs$ Haste | SpellDescription$ Choose one - Until end of turn, you gain control of target creature and it gains haste;
 A:SP$ Sacrifice | Cost$ 3 R | Amount$ 1 | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ GrabDmg | SpellDescription$ or sacrifice a creature, then CARDNAME deals damage equal to that creature's power to target creature or player.
-A:SP$ GainControl | Cost$ 5 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain control of | LoseControl$ EOT | AddKWs$ Haste | SubAbility$ GrabASacrifice | PrecostDesc$ Entwine | CostDesc$ 2 R | SpellDescription$ (Choose both if you pay the entwine cost.)
+A:SP$ GainControl | Cost$ 5 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain control of | LoseControl$ EOT | AddKWs$ Haste | NonBasicSpell$ True | SubAbility$ GrabASacrifice | PrecostDesc$ Entwine | CostDesc$ 2 R | SpellDescription$ (Choose both if you pay the entwine cost.)
 SVar:GrabASacrifice:DB$ Sacrifice | Amount$ 1 | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ GrabDmg
 SVar:GrabDmg:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to deal the damage to | NumDmg$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

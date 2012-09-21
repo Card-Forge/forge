@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ RegenerateAll | Cost$ 2 B | ValidCards$ Creature.YouCtrl | PrecostDesc$ Choose one - | SpellDescription$ Regenerate each creature you control;
 A:SP$ DamageAll | Cost$ 2 B | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 1 | SpellDescription$ or CARDNAME deals 1 damage to each creature and each player.
-A:SP$ RegenerateAll | Cost$ 2 B B | ValidCards$ Creature.YouCtrl | SubAbility$ DBDamageAll | PrecostDesc$ Entwine B | SpellDescription$ (Choose both if you pay the entwine cost.)
+A:SP$ RegenerateAll | Cost$ 2 B B | ValidCards$ Creature.YouCtrl | SubAbility$ DBDamageAll | PrecostDesc$ Entwine B | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
 SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Common

@@ -4,7 +4,7 @@ Types:Sorcery
 Text:no text
 A:SP$ UntapAll | Cost$ 4 G | ValidCards$ Land.YouCtrl | PreCostDesc$ Choose one : | SpellDescription$ Untap all lands you control;
 A:SP$ AnimateAll | Cost$ 4 G | ValidCards$ Land.YouCtrl | Power$ 2 | Toughness$ 2 | Types$ Creature | SpellDescription$ or until end of turn, lands you control become 2/2 creatures that are still lands.
-A:SP$ UntapAll | Cost$ 6 G G | ValidCards$ Land.YouCtrl | PrecostDesc$ Entwine | CostDesc$ 2 G | SubAbility$ DBAnimate | SpellDescription$ (Choose both if you pay the entwine cost.)
+A:SP$ UntapAll | Cost$ 6 G G | ValidCards$ Land.YouCtrl | PrecostDesc$ Entwine | CostDesc$ 2 G | SubAbility$ DBAnimate | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
 SVar:DBAnimate:DB$AnimateAll | ValidCards$ Land.YouCtrl | Power$ 2 | Toughness$ 2 | Types$ Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

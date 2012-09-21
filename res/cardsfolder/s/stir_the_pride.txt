@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ PumpAll | Cost$ 4 W | NumAtt$ 2 | NumDef$ 2 | ValidCards$ Creature.YouCtrl | PreCostDesc$ Choose one - | SpellDescription$ Creatures you control get +2/+2 until end of turn;
 A:SP$ AnimateAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | Triggers$ TrigPrideDamage | sVars$ GainLife,X | References$ GainLife,X | SpellDescription$ or until end of turn, creatures you control gain "Whenever this creature deals damage, you gain that much life."
-A:SP$ AnimateAll | Cost$ 5 W W | ValidCards$ Creature.YouCtrl | Triggers$ TrigPrideDamage | sVars$ GainLife,X | References$ GainLife,X | SubAbility$ DBPump | PrecostDesc$ Entwine 1 W | SpellDescription$ (Choose both if you pay the entwine cost.)
+A:SP$ AnimateAll | Cost$ 5 W W | ValidCards$ Creature.YouCtrl | Triggers$ TrigPrideDamage | sVars$ GainLife,X | References$ GainLife,X | SubAbility$ DBPump | NonBasicSpell$ True | PrecostDesc$ Entwine 1 W | SpellDescription$ (Choose both if you pay the entwine cost.)
 SVar:DBPump:DB$PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 2 | NumDef$ 2
 SVar:TrigPrideDamage:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ GainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
 SVar:GainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X

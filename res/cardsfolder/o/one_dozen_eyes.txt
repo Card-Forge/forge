@@ -4,7 +4,7 @@ Types:Sorcery
 Text:no text
 A:SP$ Token | Cost$ 5 G | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 5 | TokenToughness$ 5 | SpellDescription$ Choose one - Put a 5/5 green Beast creature token onto the battlefield;
 A:SP$ Token | Cost$ 5 G | TokenAmount$ 5 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ or put five 1/1 green Insect creature tokens onto the battlefield.
-A:SP$ Token | Cost$ 5 G G G G | PrecostDesc$ Entwine | CostDesc$ G G G | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 5 | TokenToughness$ 5 | SpellDescription$ (Choose both if you pay the entwine cost.) | SubAbility$ DBToken2
+A:SP$ Token | Cost$ 5 G G G G | PrecostDesc$ Entwine | CostDesc$ G G G | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 5 | TokenToughness$ 5 | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.) | SubAbility$ DBToken2
 SVar:DBToken2:DB$Token | TokenAmount$ 5 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/one_dozen_eyes.jpg
