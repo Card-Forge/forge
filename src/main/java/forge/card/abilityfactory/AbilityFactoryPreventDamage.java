@@ -221,7 +221,7 @@ public class AbilityFactoryPreventDamage {
 
         sb.append("Prevent the next ");
         sb.append(params.get("Amount"));
-        sb.append(" that would be dealt to ");
+        sb.append(" damage that would be dealt to ");
         for (int i = 0; i < tgts.size(); i++) {
             if (i != 0) {
                 sb.append(" ");
