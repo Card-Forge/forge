@@ -19,4 +19,9 @@ public class FTextArea extends JTextArea {
         this.setFocusable(false);
         this.setEditable(false);
     }
+    /** @param str {@java.lang.String} */
+    public FTextArea(final String str) {
+        this();
+        this.setText(str);
+    }
 }
