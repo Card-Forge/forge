@@ -1,0 +1,18 @@
+Name:Armor of Thorns
+ManaCost:1 G
+Types:Enchantment Aura
+Text:no text
+K:You may cast CARDNAME as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
+K:Enchant nonblack creature
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDelayedSac | Static$ True | Secondary$ True | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
+SVar:TrigDelayedSac:AB$ Animate | Cost$ 0 | Defined$ Self | Triggers$ CleanupTrig | sVars$ Sac | Permanent$ True
+SVar:CleanupTrig:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Execute$ Sac | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.
+SVar:Sac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
+A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/armor_of_thorns.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/104.jpg
+Oracle:You may cast Armor of Thorns as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nEnchant nonblack creature\nEnchanted creature gets +2/+2.
+End
