@@ -30,6 +30,7 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -979,6 +980,31 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     public static boolean canCastSorcery(final Player player) {
         PhaseHandler now = Singletons.getModel().getGameState().getPhaseHandler();
         return now.isPlayerTurn(player) && now.getPhase().isMain() && AllZone.getStack().size() == 0;
+    }
+
+    /**
+     * <p>
+     * couldCastSorcery.
+     * for conditions the stack must only have the sa being checked
+     * </p>
+     * 
+     * @param player
+     *            a {@link forge.game.player.Player} object.
+     * @param sa
+     *            a {@link forge.game.player.SpellAbility} object.
+     * @return a boolean .
+     */
+    public static boolean couldCastSorcery(final Player player, final SpellAbility sa) {
+        PhaseHandler now = Singletons.getModel().getGameState().getPhaseHandler();
+        final Card source = sa.getRootSpellAbility().getSourceCard();
+        if (AllZone.getStack().size() != 0) {
+            for (final Card card : AllZoneUtil.getCardsIn(ZoneType.Stack)) {
+                if (card != source) {
+                    return false;
+                }
+            }
+        }
+        return now.isPlayerTurn(player) && now.getPhase().isMain();
     }
 
 

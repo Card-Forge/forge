@@ -25,6 +25,7 @@ import forge.Card;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
+import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 
 /**
@@ -160,6 +161,21 @@ public class TriggerSpellAbilityCast extends Trigger {
         if (this.getMapParams().containsKey("NonTapCost")) {
             final Cost cost = (Cost) (runParams2.get("Cost"));
             if (cost.getTap()) {
+                return false;
+            }
+        }
+
+        if (this.getMapParams().containsKey("SpellSpeed")) {
+            if (this.getHostCard().hasKeyword("You may cast CARDNAME as though it had flash. If you cast it any time "
+                    + "a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it "
+                    + "at the beginning of the next cleanup step.")
+                    && (this.getHostCard().hasKeyword("Flash") || this.getHostCard().hasKeyword("HIDDEN Flash")
+                    || this.getHostCard().getController().hasKeyword("You may cast nonland cards as though they had flash."))) {
+                    // for these cards the trigger must only fire if using their own ability to cast at instant speed
+                return false;
+            }
+            else if (this.getMapParams().get("SpellSpeed").equals("NotSorcerySpeed")
+                    && PhaseHandler.couldCastSorcery(this.getHostCard().getController(), spellAbility)) {
                 return false;
             }
         }
