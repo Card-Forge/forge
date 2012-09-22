@@ -289,6 +289,7 @@ public class TriggerHandler {
         // triggers are running.
         final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
         CardList allCards = AllZoneUtil.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+        allCards.addAll(AllZoneUtil.getCardsIn(ZoneType.Stack));
         boolean checkStatics = false;
 
         // Static triggers
