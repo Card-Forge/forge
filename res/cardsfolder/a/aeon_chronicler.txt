@@ -1,0 +1,16 @@
+Name:Aeon Chronicler
+ManaCost:3 U U
+Types:Creature Avatar
+Text:X can't be 0.
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | References$ Y | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
+K:Suspend:X:XCantBe0 X 3 U
+T:Mode$ CounterRemoved | ValidCard$ Card.Self  | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigDraw | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:X:Count$xPaid
+SVar:Y:Count$InYourHand
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/32.jpg
+Oracle:Aeon Chronicler's power and toughness are each equal to the number of cards in your hand.\nSuspend X-{X}{3}{U}. X can't be 0. (Rather than cast this card from your hand, you may pay {X}{3}{U} and exile it with X time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nWhenever a time counter is removed from Aeon Chronicler while it's exiled, draw a card.
+End

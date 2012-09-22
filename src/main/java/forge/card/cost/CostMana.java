@@ -44,6 +44,7 @@ public class CostMana extends CostPart {
     private String mana = "";
     private int amountX = 0;
     private String adjustedMana = "";
+    private boolean xCantBe0 = false;
 
     /**
      * Gets the mana.
@@ -113,6 +114,20 @@ public class CostMana extends CostPart {
     }
 
     /**
+     * @return the xCantBe0
+     */
+    public boolean isxCantBe0() {
+        return xCantBe0;
+    }
+
+    /**
+     * @param xCantBe00 the xCantBe0 to set
+     */
+    public void setxCantBe0(boolean xCantBe0) {
+        this.xCantBe0 = xCantBe0; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
      * Gets the mana to pay.
      * 
      * @return the mana to pay
@@ -133,12 +148,14 @@ public class CostMana extends CostPart {
      *            the mana
      * @param amount
      *            the amount
+     * @param xCantBe0 TODO
      */
-    public CostMana(final String mana, final int amount) {
+    public CostMana(final String mana, final int amount, boolean xCantBe0) {
         this.mana = mana.trim();
         this.amountX = amount;
         this.setUndoable(true);
         this.setReusable(true);
+        this.setxCantBe0(xCantBe0);
     }
 
     /*
@@ -154,7 +171,7 @@ public class CostMana extends CostPart {
         if (!this.mana.equals("0")) {
             sb.append(this.mana);
         }
-
+        
         return sb.toString().trim();
     }
 
@@ -264,21 +281,23 @@ public class CostMana extends CostPart {
 
             @Override
             public void showMessage() {
-                if (this.manaCost.toString().equals(Integer.toString(numX))) {
-                    // only
-                    // cancel
-                    // if
-                    // partially
-                    // paid
-                    // an X
-                    // value
-                    ButtonUtil.enableAll();
-                } else {
+                if ((xPaid == 0 && costMana.isxCantBe0()) || 
+                        !this.manaCost.toString().equals(Integer.toString(numX))) {
                     ButtonUtil.enableOnlyCancel();
+                    // only cancel if partially paid an X value
+                    // or X is 0, and x can't be 0
+                } else {
+                    ButtonUtil.enableAll();
                 }
-
-                CMatchUI.SINGLETON_INSTANCE.showMessage(
-                        "Pay X Mana Cost for " + sa.getSourceCard().getName() + "\n" + this.xPaid + " Paid so far.");
+                
+                StringBuilder msg = new StringBuilder("Pay X Mana Cost for ");
+                msg.append(sa.getSourceCard().getName()).append("\n").append(this.xPaid);
+                msg.append(" Paid so far.");
+                if (costMana.isxCantBe0()) {
+                    msg.append(" X Can't be 0.");
+                }
+                
+                CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
             }
 
             // selectCard

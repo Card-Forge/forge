@@ -164,6 +164,7 @@ public class Cost {
     private static final String EXILE_FROM_TOP_STR = "ExileFromTop<";
     private static final String RETURN_STR = "Return<";
     private static final String REVEAL_STR = "Reveal<";
+    private static final String XCANTBE0_STR = "XCantBe0";
 
     public Cost(final Card card, CardManaCost cost, final boolean bAbility) {
         this(card, cost.toString(), bAbility);
@@ -346,6 +347,11 @@ public class Cost {
             manaLocation++;
         }
 
+        boolean xCantBe0 = parse.contains(XCANTBE0_STR);
+        if (xCantBe0) {
+            parse = parse.replaceAll(XCANTBE0_STR, "");
+        }
+        
         final String stripXCost = parse.replaceAll("X", "");
 
         final int amountX = parse.length() - stripXCost.length();
@@ -356,7 +362,7 @@ public class Cost {
         }
 
         if ((amountX > 0) || !mana.equals("0")) {
-            this.costParts.add(manaLocation, new CostMana(mana, amountX));
+            this.costParts.add(manaLocation, new CostMana(mana, amountX, xCantBe0));
         }
     }
 
@@ -428,7 +434,7 @@ public class Cost {
         if (!costChanged) {
             // Spells with a cost of 0 should be affected too
             final ManaCost changedCost = Singletons.getModel().getGameAction().getSpellCostChange(sa, new ManaCost("0"));
-            this.costParts.add(new CostMana(changedCost.toString(), 0));
+            this.costParts.add(new CostMana(changedCost.toString(), 0, false));
         }
     }
 

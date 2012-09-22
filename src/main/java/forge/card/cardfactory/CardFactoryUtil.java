@@ -1170,13 +1170,14 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @param suspendCost
      *            a {@link java.lang.String} object.
-     * @param suspendCounters
+     * @param timeCounters
      *            a int.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility abilitySuspend(final Card sourceCard, final String suspendCost, final int suspendCounters) {
+    public static SpellAbility abilitySuspend(final Card sourceCard, final String suspendCost, final String timeCounters) {
         // be careful with Suspend ability, it will not hit the stack
-        final SpellAbility suspend = new AbilityStatic(sourceCard, suspendCost) {
+        Cost cost = new Cost(sourceCard, suspendCost, true);
+        final SpellAbility suspend = new AbilityStatic(sourceCard, cost, null) {
             @Override
             public boolean canPlay() {
                 if (!(this.getRestrictions().canPlay(sourceCard, this))) {
@@ -1200,22 +1201,24 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 final Card c = Singletons.getModel().getGameAction().exile(sourceCard);
-                c.addCounter(Counters.TIME, suspendCounters);
+                
+                int counters = AbilityFactory.calculateAmount(c, timeCounters, this);
+                c.addCounter(Counters.TIME, counters);
 
                 StringBuilder sb = new StringBuilder();
                 sb.append(this.getActivatingPlayer()).append(" has suspended ");
                 sb.append(c.getName()).append("with ");
-                sb.append(suspendCounters).append(" time counters on it.");
+                sb.append(counters).append(" time counters on it.");
                 AllZone.getGameLog().add("ResolveStack", sb.toString(), 2);
             }
         };
         final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Suspend ").append(suspendCounters).append(" - ").append(suspendCost);
+        sbDesc.append("Suspend ").append(timeCounters).append(" - ").append(cost.toSimpleString());
         suspend.setDescription(sbDesc.toString());
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" suspending for ");
-        sbStack.append(suspendCounters).append(" turns.)");
+        sbStack.append(timeCounters).append(" turns.)");
         suspend.setStackDescription(sbStack.toString());
 
         suspend.getRestrictions().setZone(ZoneType.Hand);
@@ -4232,7 +4235,7 @@ public class CardFactoryUtil {
                 card.setSuspend(true);
                 final String[] k = parse.split(":");
 
-                final int timeCounters = Integer.parseInt(k[1]);
+                final String timeCounters = k[1];
                 final String cost = k[2];
                 card.addSpellAbility(CardFactoryUtil.abilitySuspend(card, cost, timeCounters));
             }
