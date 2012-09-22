@@ -35,7 +35,6 @@ import forge.card.CardManaCost;
 import forge.card.EditionInfo;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbilityList;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.zone.DefaultPlayerZone;
 import forge.game.zone.ZoneType;
@@ -84,23 +83,6 @@ public final class CardUtil {
             case 1: return o[0];
             default: return o[CardUtil.RANDOM.nextInt(len)];
         }
-    }
-
-    /**
-     * <p>
-     * getRandomIndex.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.card.spellability.SpellAbilityList} object.
-     * @return a int.
-     */
-    public static int getRandomIndex(final SpellAbilityList list) {
-        if ((list == null) || (list.size() == 0)) {
-            throw new RuntimeException("CardUtil : getRandomIndex(SpellAbilityList) argument is null or length is 0");
-        }
-
-        return CardUtil.RANDOM.nextInt(list.size());
     }
 
     /**
@@ -368,77 +350,6 @@ public final class CardUtil {
 
     /**
      * <p>
-     * addManaCosts.
-     * </p>
-     * 
-     * @param mc1
-     *            a {@link java.lang.String} object.
-     * @param mc2
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String addManaCosts(final String mc1, final String mc2) {
-        String tMC = "";
-        String xCost = "";
-        if (mc1.startsWith("X")) {
-            xCost = "X ";
-        }
-
-        Integer cl1, cl2, tCL;
-        String c1, c2, cc1, cc2;
-
-        c1 = mc1.replaceAll("[WUBRGSX]", "").trim();
-        c2 = mc2.replaceAll("[WUBRGSX]", "").trim();
-
-        if (c1.length() > 0) {
-            cl1 = Integer.valueOf(c1);
-        } else {
-            cl1 = 0;
-        }
-
-        if (c2.length() > 0) {
-            cl2 = Integer.valueOf(c2);
-        } else {
-            cl2 = 0;
-        }
-
-        tCL = cl1 + cl2;
-
-        cc1 = mc1.replaceAll("[0-9]", "").replaceAll("X", "").trim();
-        cc2 = mc2.replaceAll("[0-9]", "").trim();
-
-        tMC = xCost + tCL.toString() + " " + cc1 + " " + cc2;
-
-        //System.out.println("mc1:" + mc1 + "; TMC:" + tMC);
-        return tMC.trim();
-    }
-
-    /**
-     * <p>
-     * getRelative.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param relation
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.Card} object.
-     */
-    public static Card getRelative(final Card c, final String relation) {
-        if (relation.equals("CARDNAME")) {
-            return c;
-        } else if (relation.startsWith("enchanted ")) {
-            return c.getEnchantingCard();
-        } else if (relation.startsWith("equipped ")) {
-            return c.getEquipping().get(0);
-            // else if(relation.startsWith("target ")) return c.getTargetCard();
-        } else {
-            throw new IllegalArgumentException("Error at CardUtil.getRelative: " + relation + "is not a valid relation");
-        }
-    }
-
-    /**
-     * <p>
      * isACardType.
      * </p>
      * 
@@ -471,29 +382,6 @@ public final class CardUtil {
         return types;
     }
 
-    /**
-     * <p>
-     * getCardTypes.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public static ArrayList<String> getCardTypes() {
-        final ArrayList<String> types = new ArrayList<String>();
-
-        // types.add("Artifact");
-        // types.add("Creature");
-        // types.add("Enchantment");
-        // types.add("Instant");
-        // types.add("Land");
-        // types.add("Planeswalker");
-        // types.add("Sorcery");
-        // types.add("Tribal");
-
-        types.addAll(Constant.CardTypes.CARD_TYPES);
-
-        return types;
-    }
 
     /**
      * <p>

@@ -816,7 +816,7 @@ public final class AbilityFactoryCopy {
                     } else {
                         num = Integer.toString(multi - 1) + "th";
                     }
-                    chosenSAtmp = (SpellAbility) GuiUtils.chooseOne("Select " + num + " spell to copy to stack", tgtSpells.toArray());
+                    chosenSAtmp = GuiUtils.chooseOne("Select " + num + " spell to copy to stack", tgtSpells);
                     chosenSAs.add(chosenSAtmp);
                     tgtSpells.remove(chosenSAtmp);
                 } else {
@@ -836,7 +836,7 @@ public final class AbilityFactoryCopy {
             if (tgtSpells.size() == 1) {
                 chosenSA = tgtSpells.get(0);
             } else if (sa.getActivatingPlayer().isHuman()) {
-                chosenSA = (SpellAbility) GuiUtils.chooseOne("Select a spell to copy", tgtSpells.toArray());
+                chosenSA = (SpellAbility) GuiUtils.chooseOne("Select a spell to copy", tgtSpells);
             } else {
                 chosenSA = tgtSpells.get(0);
             }

@@ -20,6 +20,7 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -1182,35 +1183,33 @@ public class AbilityFactoryCounters {
                         Counters chosenType = null;
                         int chosenAmount;
                         if (sa.getActivatingPlayer().isHuman()) {
-                            final ArrayList<String> choices = new ArrayList<String>();
-                            final ArrayList<Object> typeChoices = new ArrayList<Object>();
+                            final ArrayList<Counters> typeChoices = new ArrayList<Counters>();
                             // get types of counters
-                            Object o;
-                            for (Object key : tgtCounters.keySet().toArray()) {
+                            for (Counters key : tgtCounters.keySet()) {
                                 if (tgtCounters.get(key) > 0) {
                                     typeChoices.add(key);
                                 }
                             }
                             if (typeChoices.size() > 1) {
                                 String prompt = "Select type counters to remove";
-                                o = GuiUtils.chooseOne(prompt, typeChoices.toArray());
+                                chosenType = GuiUtils.chooseOne(prompt, typeChoices);
                             }
                             else {
-                                o = typeChoices.get(0);
+                                chosenType = typeChoices.get(0);
                             }
-                            chosenType = (Counters) o;
                             chosenAmount = tgtCounters.get(chosenType);
                             if (chosenAmount > counterAmount) {
                                 chosenAmount = counterAmount;
                             }
                             // make list of amount choices
+                            
                             if (chosenAmount > 1) {
+                                final List<Integer> choices = new ArrayList<Integer>();
                                 for (int i = 1; i <= chosenAmount; i++) {
-                                    choices.add("" + i);
+                                    choices.add(Integer.valueOf(i));
                                 }
                                 String prompt = "Select the number of " + chosenType.getName() + " counters to remove";
-                                o = GuiUtils.chooseOne(prompt, choices.toArray());
-                                chosenAmount = Integer.parseInt((String) o);
+                                chosenAmount = GuiUtils.chooseOne(prompt, choices);
                             }
                         }
                         else {
@@ -1550,7 +1549,7 @@ public class AbilityFactoryCounters {
                     if (choices.size() > 0) {
                         card.addCounter(
                                 Counters.getType((choices.size() == 1 ? choices.get(0) : GuiUtils.chooseOne(
-                                        "Select counter type", choices.toArray()).toString())), 1);
+                                        "Select counter type", choices).toString())), 1);
                     }
                 }
 

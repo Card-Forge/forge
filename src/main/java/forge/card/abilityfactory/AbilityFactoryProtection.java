@@ -729,12 +729,10 @@ public final class AbilityFactoryProtection {
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
             if (sa.getActivatingPlayer().isHuman()) {
-                final Object o = GuiUtils.chooseOne("Choose a protection", choices.toArray());
-
-                if (null == o) {
+                final String choice = GuiUtils.chooseOne("Choose a protection", choices);
+                if (null == choice) {
                     return;
                 }
-                final String choice = (String) o;
                 gains.add(choice);
             } else {
                 String choice = choices.get(0);
@@ -1161,12 +1159,10 @@ public final class AbilityFactoryProtection {
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
             if (sa.getActivatingPlayer().isHuman()) {
-                final Object o = GuiUtils.chooseOne("Choose a protection", choices.toArray());
-
-                if (null == o) {
+                final String choice = GuiUtils.chooseOne("Choose a protection", choices);
+                if (null == choice) {
                     return;
                 }
-                final String choice = (String) o;
                 gains.add(choice);
             } else {
                 // TODO - needs improvement

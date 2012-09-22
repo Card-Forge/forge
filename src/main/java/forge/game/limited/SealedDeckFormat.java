@@ -120,7 +120,7 @@ public class SealedDeckFormat {
             }
 
             if (sets.length > 1) {
-                final Object p = GuiUtils.chooseOne("Choose Set Combination", setCombos.toArray());
+                final Object p = GuiUtils.chooseOne("Choose Set Combination", setCombos);
 
                 final String[] pp = p.toString().split("/");
 
@@ -176,7 +176,7 @@ public class SealedDeckFormat {
                         starterPacks.add(String.format("Two packs (%s, %s)", pp[starter1idx], pp[starter2idx]));
                     }
 
-                    final Object starterResult = GuiUtils.chooseOne("Choose starter pack(s):", starterPacks.toArray());
+                    final Object starterResult = GuiUtils.chooseOne("Choose starter pack(s):", starterPacks);
 
                     // Analyze the choice
                     final String starters = starterResult.toString();
@@ -250,7 +250,7 @@ public class SealedDeckFormat {
                         JOptionPane.INFORMATION_MESSAGE);
             } else {
                 final CustomLimited draft = (CustomLimited) GuiUtils.chooseOne("Choose Custom Sealed Pool",
-                        customs.toArray());
+                        customs);
 
                 final BoosterGenerator bpCustom = new BoosterGenerator(draft.getCardPool());
                 final Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {

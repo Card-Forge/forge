@@ -598,9 +598,7 @@ class CardFactoryArtifacts {
                                 // Then look at the exiled cards and put them on
                                 // top of your library in any order.
                                 while (this.exiled.size() > 0) {
-                                    final Object o = GuiUtils.chooseOne("Put a card on top of your library.",
-                                            this.exiled.toArray());
-                                    final Card c1 = (Card) o;
+                                    final Card c1 = GuiUtils.chooseOne("Put a card on top of your library.", this.exiled);
                                     Singletons.getModel().getGameAction().moveToLibrary(c1);
                                     this.exiled.remove(c1);
                                 }

@@ -98,7 +98,7 @@ class CardFactoryEnchantments {
                             chooseGrave.addAll(grave);
                         }
 
-                        final Object o = GuiUtils.chooseOne("Choose first creature to exile", chooseGrave.toArray());
+                        final Object o = GuiUtils.chooseOne("Choose first creature to exile", chooseGrave);
                         if (o != null) {
                             CardList newGrave;
                             final Card c = (Card) o;
@@ -111,7 +111,7 @@ class CardFactoryEnchantments {
                             newGrave = newGrave.getType("Creature");
                             newGrave.remove(c);
 
-                            final Object o2 = GuiUtils.chooseOne("Choose second creature to exile", newGrave.toArray());
+                            final Object o2 = GuiUtils.chooseOne("Choose second creature to exile", newGrave);
                             if (o2 != null) {
                                 final Card c2 = (Card) o2;
                                 newGrave.remove(c2);

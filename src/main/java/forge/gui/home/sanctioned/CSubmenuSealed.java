@@ -136,14 +136,14 @@ public enum CSubmenuSealed implements ICDoc {
     @SuppressWarnings("unchecked")
     private <T extends DeckBase> void setupSealed() {
 
-        final ArrayList<String> sealedTypes = new ArrayList<String>();
+        final List<String> sealedTypes = new ArrayList<String>();
         sealedTypes.add("Full Cardpool");
         sealedTypes.add("Block / Set");
         sealedTypes.add("Fantasy Block");
         sealedTypes.add("Custom");
 
         final String prompt = "Choose Sealed Deck Format:";
-        final Object o = GuiUtils.chooseOne(prompt, sealedTypes.toArray());
+        final Object o = GuiUtils.chooseOne(prompt, sealedTypes);
 
         SealedDeckFormat sd = null;
 

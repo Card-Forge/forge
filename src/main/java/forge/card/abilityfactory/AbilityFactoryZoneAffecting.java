@@ -622,7 +622,7 @@ public class AbilityFactoryZoneAffecting {
                 } else {
                     final CardList drawn = p.drawCards(numCards);
                     if (params.containsKey("Reveal")) {
-                        GuiUtils.chooseOne("Revealing drawn cards", drawn.toArray());
+                        GuiUtils.chooseOne("Revealing drawn cards", drawn);
                     }
                     if (params.containsKey("RememberDrawn")) {
                         for (final Card c : drawn) {
@@ -1430,11 +1430,9 @@ public class AbilityFactoryZoneAffecting {
                                 if (dPChHand.size() > 0) {
                                     Card dC = null;
                                     if (params.containsKey("Optional")) {
-                                        dC = GuiUtils.chooseOneOrNone("Choose a card to be discarded",
-                                                dPChHand.toArray());
+                                        dC = GuiUtils.chooseOneOrNone("Choose a card to be discarded", dPChHand);
                                     } else {
-                                    dC = GuiUtils.chooseOne("Choose a card to be discarded",
-                                            dPChHand.toArray());
+                                        dC = GuiUtils.chooseOne("Choose a card to be discarded", dPChHand);
                                     } if (dC != null) {
                                         dPChHand.remove(dC);
                                         discarded.add(dC);

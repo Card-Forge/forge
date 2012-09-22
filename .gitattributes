@@ -12147,7 +12147,6 @@ src/main/java/forge/card/spellability/AbilityTriggered.java svneol=native#text/p
 src/main/java/forge/card/spellability/Spell.java svneol=native#text/plain
 src/main/java/forge/card/spellability/SpellAbility.java svneol=native#text/plain
 src/main/java/forge/card/spellability/SpellAbilityCondition.java svneol=native#text/plain
-src/main/java/forge/card/spellability/SpellAbilityList.java svneol=native#text/plain
 src/main/java/forge/card/spellability/SpellAbilityRequirements.java svneol=native#text/plain
 src/main/java/forge/card/spellability/SpellAbilityRestriction.java svneol=native#text/plain
 src/main/java/forge/card/spellability/SpellAbilityStackInstance.java svneol=native#text/plain

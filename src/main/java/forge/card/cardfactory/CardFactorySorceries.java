@@ -113,13 +113,13 @@ public class CardFactorySorceries {
 
                     final StringBuilder msg = new StringBuilder();
                     msg.append("Revealing top ").append(count).append(" cards of library: ");
-                    GuiUtils.chooseOne(msg.toString(), cards.toArray());
+                    GuiUtils.chooseOne(msg.toString(), cards);
                     // Human chooses
                     if (card.getController().isComputer()) {
                         for (int i = 0; i < count; i++) {
                             if (!stop) {
                                 choice = GuiUtils.chooseOneOrNone("Choose cards to put into the first pile: ",
-                                        cards.toArray());
+                                        cards);
                                 if (choice != null) {
                                     pile1.add(choice);
                                     cards.remove(choice);
@@ -1492,20 +1492,18 @@ public class CardFactorySorceries {
                                     "Something in if(isCopiedSpell()) in Profane Command selection is FUBAR.");
                         }
                     } else {
-                        final ArrayList<String> choices = new ArrayList<String>();
-                        for (int i = 0; i <= card.getController().getLife(); i++) {
-                            choices.add("" + i);
+                        final int max = card.getController().getLife();
+                        final Integer[] choices = new Integer[max+1];
+                        for (int i = 0; i <= max; i++) {
+                            choices[i] = Integer.valueOf(i);
                         }
-                        final Object o = GuiUtils.chooseOne("Choose X", choices.toArray());
+                        final Integer answer = GuiUtils.chooseOne("Choose X", choices);
                         // everything stops here if user cancelled
-                        if (o == null) {
+                        if (answer == null) {
                             this.stop();
                             return;
                         }
-
-                        final String answer = (String) o;
-
-                        x[0] = Integer.parseInt(answer);
+                        x[0] = answer;
                         spell.setManaCost(x[0] + " B B");
                         spell.setIsXCost(false);
 

@@ -214,10 +214,8 @@ public class CardFactoryCreatures {
                             .getType("Artifact");
 
                     if (artifacts.size() != 0) {
-                        Object o;
-                        o = GuiUtils.chooseOne("Select an artifact put a phylactery counter on", artifacts.toArray());
-                        if (o != null) {
-                            final Card c = (Card) o;
+                        final Card c = GuiUtils.chooseOne("Select an artifact put a phylactery counter on", artifacts);
+                        if (c != null) {
                             c.addCounter(Counters.PHYLACTERY, 1);
                         }
                     }
@@ -1355,7 +1353,7 @@ public class CardFactoryCreatures {
                     hand.remove(random);
                 }
                 if (!revealed.isEmpty()) {
-                    GuiUtils.chooseOne("Revealed at random", revealed.toArray());
+                    GuiUtils.chooseOne("Revealed at random", revealed);
                 } else {
                     GuiUtils.chooseOne("Revealed at random", new String[] { "Nothing to reveal" });
                 }

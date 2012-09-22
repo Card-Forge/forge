@@ -681,8 +681,8 @@ public final class GameActionUtil {
             public void resolve() {
                 String color = "";
 
-                final Object o = GuiUtils.chooseOne("Choose mana color", Constant.Color.ONLY_COLORS);
-                color = InputPayManaCostUtil.getShortColorString((String) o);
+                final String o = GuiUtils.chooseOne("Choose mana color", Constant.Color.ONLY_COLORS);
+                color = InputPayManaCostUtil.getShortColorString(o);
 
                 final AbilityMana abMana = new AbilityMana(c, "0", color) {
                     private static final long serialVersionUID = -2182129023960978132L;

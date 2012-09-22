@@ -1698,20 +1698,19 @@ public class GameAction {
         if (spell.isSpell()) {
             if (spell.getIsDelve()) {
                 final int cardsInGrave = originalCard.getController().getCardsIn(ZoneType.Graveyard).size();
-                final ArrayList<Integer> choiceList = new ArrayList<Integer>();
-                for (int i = 0; i <= cardsInGrave; i++) {
-                    choiceList.add(i);
-                }
 
                 if (originalCard.getController().isHuman()) {
-
-                    final int chosenAmount = (Integer) GuiUtils
-                            .chooseOne("Exile how many cards?", choiceList.toArray());
+                    final Integer[] cntChoice = new Integer[cardsInGrave+1];
+                    for (int i = 0; i <= cardsInGrave; i++) {
+                        cntChoice[i] = Integer.valueOf(i);
+                    }
+                    
+                    final Integer chosenAmount = (Integer) GuiUtils.chooseOne("Exile how many cards?", cntChoice);
                     System.out.println("Delve for " + chosenAmount);
                     final CardList choices = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
                     final CardList chosen = new CardList();
                     for (int i = 0; i < chosenAmount; i++) {
-                        final Card nowChosen = GuiUtils.chooseOneOrNone("Exile which card?", choices.toArray());
+                        final Card nowChosen = GuiUtils.chooseOneOrNone("Exile which card?", choices);
 
                         if (nowChosen == null) {
                             // User canceled,abort delving.

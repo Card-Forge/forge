@@ -211,7 +211,7 @@ public enum CSubmenuDraft implements ICDoc {
         draftTypes.add("Custom");
 
         final String prompt = "Choose Draft Format:";
-        final Object o = GuiUtils.chooseOne(prompt, draftTypes.toArray());
+        final Object o = GuiUtils.chooseOne(prompt, draftTypes);
 
         if (o.toString().equals(draftTypes.get(0))) {
             draft.showGui(new BoosterDraft(CardPoolLimitation.Full));

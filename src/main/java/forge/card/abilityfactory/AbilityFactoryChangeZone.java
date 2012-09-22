@@ -990,11 +990,11 @@ public final class AbilityFactoryChangeZone {
             if (params.containsKey("AtRandom")) {
                 o = CardUtil.getRandom(fetchList.toArray());
             } else if (params.containsKey("Mandatory")) {
-                o = GuiUtils.chooseOne("Select a card", fetchList.toArray());
+                o = GuiUtils.chooseOne("Select a card", fetchList);
             } else if (params.containsKey("Defined")) {
                 o = fetchList.get(0);
             } else {
-                o = GuiUtils.chooseOneOrNone("Select a card", fetchList.toArray());
+                o = GuiUtils.chooseOneOrNone("Select a card", fetchList);
             }
 
             if (o != null) {
@@ -1328,7 +1328,7 @@ public final class AbilityFactoryChangeZone {
         if (!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined) {
             final String picked = sa.getSourceCard().getName() + " - Computer picked:";
             if (fetched.size() > 0) {
-                GuiUtils.chooseOne(picked, fetched.toArray());
+                GuiUtils.chooseOne(picked, fetched);
             } else {
                 GuiUtils.chooseOne(picked, new String[] { "<Nothing>" });
             }

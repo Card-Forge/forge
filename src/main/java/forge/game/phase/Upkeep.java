@@ -1982,7 +1982,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     }
                                 } // for loop
                                 if (cardsToReveal.size() > 0) {
-                                    GuiUtils.chooseOne("Revealed cards", cardsToReveal.toArray());
+                                    GuiUtils.chooseOne("Revealed cards", cardsToReveal);
                                 }
                             }
                         }

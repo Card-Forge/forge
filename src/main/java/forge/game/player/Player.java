@@ -1277,7 +1277,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
                     }
                 }
                 if (reveal) {
-                    GuiUtils.chooseOne("Revealing the first card drawn", drawn.toArray());
+                    GuiUtils.chooseOne("Revealing the first card drawn", drawn);
                 }
             }
 

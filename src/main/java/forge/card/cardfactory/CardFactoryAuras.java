@@ -124,8 +124,7 @@ class CardFactoryAuras {
                 public void resolve() {
                     // Only query player, AI will have decided already.
                     if (card.getController().isHuman()) {
-                        newType[0] = GuiUtils.chooseOne("Select land type.", "Plains", "Island", "Swamp", "Mountain",
-                                "Forest");
+                        newType[0] = GuiUtils.chooseOne("Select land type.", CardUtil.getLandTypes());
                     }
                     Singletons.getModel().getGameAction().moveToPlay(card);
 

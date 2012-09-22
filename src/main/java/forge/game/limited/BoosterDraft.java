@@ -120,7 +120,7 @@ public final class BoosterDraft implements IBoosterDraft {
             }
 
             if (sets.length > 1) {
-                final Object p = GuiUtils.chooseOne("Choose Set Combination", setCombos.toArray());
+                final Object p = GuiUtils.chooseOne("Choose Set Combination", setCombos);
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
                     this.product.add(new UnOpenedProduct(Singletons.getModel().getBoosters().get(pp[i])));

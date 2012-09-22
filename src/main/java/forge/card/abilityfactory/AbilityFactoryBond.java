@@ -333,7 +333,7 @@ public final class AbilityFactoryBond {
         if (cards.size() == 1) {
             partner = cards.get(0);
         } else if (sa.getActivatingPlayer().isHuman()) {
-            Object o = GuiUtils.chooseOne("Select a card to pair with", cards.toArray());
+            Object o = GuiUtils.chooseOne("Select a card to pair with", cards);
 
             if (o != null) {
                 partner = (Card) o;

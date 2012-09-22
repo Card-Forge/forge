@@ -390,7 +390,7 @@ public final class AbilityFactoryPlay {
             Card tgtCard = tgtCards.get(0);
             if (tgtCards.size() > 1) {
                 if (controller.isHuman()) {
-                    tgtCard = GuiUtils.chooseOne("Select a card to play", tgtCards.toArray());
+                    tgtCard = GuiUtils.chooseOne("Select a card to play", tgtCards);
                 } else {
                     // AI
                     tgtCards = tgtCards.filter(new CardListFilter() {

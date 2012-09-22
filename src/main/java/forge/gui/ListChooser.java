@@ -24,8 +24,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -92,7 +93,7 @@ public class ListChooser<T> {
      * @param list
      *            a T object.
      */
-    public ListChooser(final String title, final T... list) {
+    public ListChooser(final String title, final T[] list) {
         this(title, 1, list);
     }
 
@@ -108,7 +109,7 @@ public class ListChooser<T> {
      * @param list
      *            a T object.
      */
-    public ListChooser(final String title, final int numChoices, final T... list) {
+    public ListChooser(final String title, final int numChoices, final T[] list) {
         this(title, numChoices, numChoices, list);
     }
 
@@ -126,7 +127,7 @@ public class ListChooser<T> {
      * @param list
      *            a T object.
      */
-    public ListChooser(final String title, final int minChoices, final int maxChoices, final T... list) {
+    public ListChooser(final String title, final int minChoices, final int maxChoices, final T[] list) {
         this(title, null, minChoices, maxChoices, list);
     }
 
@@ -142,7 +143,7 @@ public class ListChooser<T> {
      * @param list
      *            a T object.
      */
-    public ListChooser(final String title, final String message, final T... list) {
+    public ListChooser(final String title, final String message, final T[] list) {
         this(title, message, 1, list);
     }
 
@@ -160,7 +161,7 @@ public class ListChooser<T> {
      * @param list
      *            a T object.
      */
-    public ListChooser(final String title, final String message, final int numChoices, final T... list) {
+    public ListChooser(final String title, final String message, final int numChoices, final T[] list) {
         this(title, message, numChoices, numChoices, list);
     }
 
@@ -181,7 +182,7 @@ public class ListChooser<T> {
      *            a T object.
      */
     public ListChooser(final String title, final String message, final int minChoices, final int maxChoices,
-            final T... list) {
+            final T[] list) {
         this(title, message, minChoices, maxChoices, Arrays.asList(list));
     }
 
@@ -211,7 +212,7 @@ public class ListChooser<T> {
      * @param list
      *            a {@link java.util.List} object.
      */
-    public ListChooser(final String title, final int numChoices, final List<T> list) {
+    public ListChooser(final String title, final int numChoices, final Collection<T> list) {
         this(title, numChoices, numChoices, list);
     }
 
@@ -229,7 +230,7 @@ public class ListChooser<T> {
      * @param list
      *            a {@link java.util.List} object.
      */
-    public ListChooser(final String title, final int minChoices, final int maxChoices, final List<T> list) {
+    public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list) {
         this(title, null, minChoices, maxChoices, list);
     }
 
@@ -245,7 +246,7 @@ public class ListChooser<T> {
      * @param list
      *            a {@link java.util.List} object.
      */
-    public ListChooser(final String title, final String message, final List<T> list) {
+    public ListChooser(final String title, final String message, final Collection<T> list) {
         this(title, message, 1, list);
     }
 
@@ -263,7 +264,7 @@ public class ListChooser<T> {
      * @param list
      *            a {@link java.util.List} object.
      */
-    public ListChooser(final String title, final String message, final int numChoices, final List<T> list) {
+    public ListChooser(final String title, final String message, final int numChoices, final Collection<T> list) {
         this(title, message, numChoices, numChoices, list);
     }
 
@@ -284,11 +285,11 @@ public class ListChooser<T> {
      *            a {@link java.util.List} object.
      */
     public ListChooser(final String title, final String message, final int minChoices, final int maxChoices,
-            final List<T> list) {
+            final Collection<T> list) {
         this.title = title;
         this.minChoices = minChoices;
         this.maxChoices = maxChoices;
-        this.list = Collections.unmodifiableList(list);
+        this.list = new ArrayList<T>(list);
         this.jList = new JList(new ChooserListModel());
         this.ok = new CloseAction(JOptionPane.OK_OPTION, "OK");
         this.ok.setEnabled(minChoices == 0);

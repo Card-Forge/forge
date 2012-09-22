@@ -1305,7 +1305,7 @@ public class AbilityFactoryAttach {
                 CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
                 list = list.getValidCards(tgt.getValidTgts(), aura.getActivatingPlayer(), source);
 
-                final Object o = GuiUtils.chooseOne(source + " - Select a card to attach to.", list.toArray());
+                final Object o = GuiUtils.chooseOne(source + " - Select a card to attach to.", list);
                 if (o instanceof Card) {
                     AbilityFactoryAttach.handleAura(source, (Card) o, gainControl);
                     //source.enchantEntity((Card) o);

@@ -246,9 +246,9 @@ public final class AbilityFactoryCharm {
         for (int i = 0; i < num; i++) {
             Object o;
             if (i < min) {
-                o = GuiUtils.chooseOne("Choose a mode", choices.toArray());
+                o = GuiUtils.chooseOne("Choose a mode", choices);
             } else {
-                o = GuiUtils.chooseOneOrNone("Choose a mode", choices.toArray());
+                o = GuiUtils.chooseOneOrNone("Choose a mode", choices);
             }
             if (null == o) {
                 return sa;

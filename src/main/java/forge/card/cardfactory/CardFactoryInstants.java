@@ -188,9 +188,7 @@ public class CardFactoryInstants {
 
                     // NOTE: Using getChoiceOptional() results in a null error
                     // when you click on Cancel.
-                    final Object o = GuiUtils.chooseOne("Select card to give to computer", selectedCards.toArray());
-
-                    final Card choice = (Card) o;
+                    final Card choice = GuiUtils.chooseOne("Select card to give to computer", selectedCards);
 
                     selectedCards.remove(choice);
                     Singletons.getModel().getGameAction().moveToHand(choice);
@@ -235,7 +233,7 @@ public class CardFactoryInstants {
 
                     if (player.isHuman()) {
                         for (int i = 0; i < x; i++) {
-                            final Object o = GuiUtils.chooseOne("Remove from game", graveList.toArray());
+                            final Object o = GuiUtils.chooseOne("Remove from game", graveList);
                             if (o == null) {
                                 break;
                             }
@@ -387,7 +385,7 @@ public class CardFactoryInstants {
                     }
 
                     for (int i = 0; (i < 3) && !choices.isEmpty(); i++) {
-                        final Object o = GuiUtils.chooseOne(this.prompt[i], choices.toArray());
+                        final Object o = GuiUtils.chooseOne(this.prompt[i], choices);
                         final Card c1 = (Card) o;
                         if (i == 0) {
                             Singletons.getModel().getGameAction().moveToHand(c1);

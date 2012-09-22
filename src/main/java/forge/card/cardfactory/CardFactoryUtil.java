@@ -3352,11 +3352,8 @@ public class CardFactoryUtil {
 
         for (final Card c : list) {
             final String name = c.getName();
-            if (!map.containsKey(name)) {
-                map.put(name, 1);
-            } else {
-                map.put(name, map.get(name) + 1);
-            }
+            Integer currentCnt = map.get(name);
+            map.put(name, currentCnt == null ? Integer.valueOf(1) : Integer.valueOf(1 + currentCnt));
         } // for
 
         int max = 0;

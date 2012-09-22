@@ -126,7 +126,7 @@ public class HumanPlayer extends Player {
         final String[] choices = { "Yes", "No" };
         final Object o = GuiUtils.chooseOne("Do you want to dredge?", choices);
         if (o.equals("Yes")) {
-            final Card c = GuiUtils.chooseOne("Select card to dredge", this.getDredge().toArray());
+            final Card c = GuiUtils.chooseOne("Select card to dredge", this.getDredge());
             // rule 702.49a
             if (this.getDredgeNumber(c) <= AllZone.getHumanPlayer().getZone(ZoneType.Library).size()) {
 
@@ -181,9 +181,8 @@ public class HumanPlayer extends Player {
     protected final void doScry(final CardList topN, final int n) {
         int num = n;
         for (int i = 0; i < num; i++) {
-            final Object o = GuiUtils.chooseOneOrNone("Put on bottom of library.", topN.toArray());
-            if (o != null) {
-                final Card c = (Card) o;
+            final Card c = GuiUtils.chooseOneOrNone("Put on bottom of library.", topN.toArray());
+            if (c != null) {
                 topN.remove(c);
                 Singletons.getModel().getGameAction().moveToBottomOfLibrary(c);
             } else {
@@ -193,10 +192,8 @@ public class HumanPlayer extends Player {
         }
         num = topN.size();
         for (int i = 0; i < num; i++) {
-            Object o;
-            o = GuiUtils.chooseOne("Put on top of library.", topN.toArray());
-            if (o != null) {
-                final Card c = (Card) o;
+            final Card c = GuiUtils.chooseOne("Put on top of library.", topN);
+            if (c != null) {
                 topN.remove(c);
                 Singletons.getModel().getGameAction().moveToLibrary(c);
             }
