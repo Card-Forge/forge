@@ -260,6 +260,15 @@ Fixes/Features:
 - Minor todo comment added.
 - Added string-capable constructor to FTextArea.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed tapXType costs not canceling properly.
+- Added the quest deck Owlman 3 by Nordos.
+- Added the quest deck Master Splinter 3 by Nordos.
+- Added "NonBasicSpell$ True" to the Entwine SpellsAbilities.
+- Little fix for stack description of AF PreventDamage.
+- Suspend can now use Cost objects
+- X Can't be 0 added for human (although we need a better way to display it)
+- Apparently missed picture for Aeon Chronicler
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -271,18 +280,22 @@ Added the following cards to the Return to Ravnica branch (These cards are not y
 
 Abrupt Decay
 Aerial Predation
+Annihilating Fire
 Archon of the Triumvirate
 Archweaver
+Armada Wurm
 Armory Guard
 Auger Spree
 Axebane Stag
 Azorius Guildgate
 Azorius Justiciar
 Batterhorn
+Bellows Lizard
 Brushstrider
 Centaur Healer
 Chromatic Lantern
 Civic Saber
+Cobblebrute
 Collective Blessing
 Crosstown Courier
 Cyclonic Rift
@@ -302,10 +315,12 @@ Fencing Ace
 Gobbling Ooze
 Goblin Electromancer
 Goblin Rally
+Golgari Charm
 Golgari Decoy
 Golgari Guildgate
 Grim Roustabout
 Grisly Salvage
+Grove of the Guardian
 Guttersnipe
 Hypersonic Dragon
 Isperia, Supreme Judge
@@ -320,6 +335,7 @@ Lotleth Troll
 Loxodon Smiter
 Martial Law
 Mercurial Chemister
+Minotaur Aggressor
 Mizzium Mortars
 Necropolis Regent
 Niv-Mizzet, Dracogenius
@@ -352,6 +368,7 @@ Sphinx's Revelation
 Stealer of Secrets
 Sunspire Griffin
 Supreme Verdict
+Tenement Crasher
 Thoughtflare
 Transguild Promenade
 Treasured Find
@@ -440,6 +457,7 @@ Martyr of Frost
 Hollow Specter
 Mammoth Harness
 Prophecy
+Aeon Chronicler
 
 
 end
