@@ -6,6 +6,7 @@ PT:2/2
 K:First Strike
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Graveyard | AddKeyword$ First Strike | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as CARDNAME is in your graveyard and you control a Plains, creatures you control have First Strike.
 SVar:X:Count$Valid Plains.YouCtrl
+SVar:DiscardMe:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valor.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/16.jpg
