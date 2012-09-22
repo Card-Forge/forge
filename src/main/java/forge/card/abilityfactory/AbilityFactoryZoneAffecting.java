@@ -1183,7 +1183,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryZoneAffecting.discardCanPlayAI(af, this);
+                return AbilityFactoryZoneAffecting.discardCanPlayAI(af, this) && super.canPlayAI();
             }
 
             @Override
