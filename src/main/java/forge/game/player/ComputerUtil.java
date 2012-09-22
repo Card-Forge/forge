@@ -1790,8 +1790,8 @@ public class ComputerUtil {
         final Comparator<SpellAbility> c = new Comparator<SpellAbility>() {
             @Override
             public int compare(final SpellAbility a, final SpellAbility b) {
-                int a1 = CardUtil.getConvertedManaCost(a);
-                int b1 = CardUtil.getConvertedManaCost(b);
+                int a1 = CardUtil.getConvertedManaCost(a.getManaCost());
+                int b1 = CardUtil.getConvertedManaCost(b.getManaCost());
                 
                 // cast 0 mana cost spells first (might be a Mox)
                 if (a1 == 0) {

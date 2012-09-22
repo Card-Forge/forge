@@ -7,7 +7,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 import forge.Card;
-import forge.CardReader;
+import forge.card.cardfactory.CardReader;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;

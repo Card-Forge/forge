@@ -12001,7 +12001,6 @@ src/main/java/forge/CardList.java svneol=native#text/plain
 src/main/java/forge/CardListFilter.java svneol=native#text/plain
 src/main/java/forge/CardListUtil.java svneol=native#text/plain
 src/main/java/forge/CardPowerToughness.java svneol=native#text/plain
-src/main/java/forge/CardReader.java svneol=native#text/plain
 src/main/java/forge/CardType.java svneol=native#text/plain
 src/main/java/forge/CardUtil.java svneol=native#text/plain
 src/main/java/forge/Color.java svneol=native#text/plain
@@ -12016,13 +12015,11 @@ src/main/java/forge/GameAction.java svneol=native#text/plain
 src/main/java/forge/GameActionUtil.java svneol=native#text/plain
 src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GameLog.java -text
-src/main/java/forge/HandSizeOp.java svneol=native#text/plain
 src/main/java/forge/ImageCache.java svneol=native#text/plain
 src/main/java/forge/NameChanger.java svneol=native#text/plain
 src/main/java/forge/Singletons.java svneol=native#text/plain
 src/main/java/forge/StaticEffect.java svneol=native#text/plain
 src/main/java/forge/StaticEffects.java svneol=native#text/plain
-src/main/java/forge/UndoCommand.java svneol=native#text/plain
 src/main/java/forge/card/BoosterData.java -text
 src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
 src/main/java/forge/card/CardBlock.java -text
@@ -12097,6 +12094,7 @@ src/main/java/forge/card/cardfactory/CardFactoryLands.java svneol=native#text/pl
 src/main/java/forge/card/cardfactory/CardFactoryPlaneswalkers.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactorySorceries.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryUtil.java svneol=native#text/plain
+src/main/java/forge/card/cardfactory/CardReader.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cost/Cost.java svneol=native#text/plain
 src/main/java/forge/card/cost/CostDamage.java -text

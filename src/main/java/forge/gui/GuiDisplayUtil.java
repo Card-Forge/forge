@@ -80,7 +80,7 @@ public final class GuiDisplayUtil {
             return BorderFactory.createEmptyBorder(2, 2, 2, 2);
         }
         java.awt.Color color;
-        final ArrayList<String> list = CardUtil.getColors(card);
+        final List<String> list = CardUtil.getColors(card);
 
         if (card.isFaceDown()) {
             color = Color.gray;

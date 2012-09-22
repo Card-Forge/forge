@@ -25,7 +25,6 @@ import java.util.List;
 import forge.AllZone;
 import forge.Card;
 import forge.CardCharacteristicName;
-import forge.CardReader;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.CardRules;

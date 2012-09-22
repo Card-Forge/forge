@@ -19,9 +19,10 @@ package forge;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -34,7 +35,6 @@ import forge.card.CardCharacteristics;
 import forge.card.CardManaCost;
 import forge.card.EditionInfo;
 import forge.card.mana.ManaCost;
-import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.zone.DefaultPlayerZone;
 import forge.game.zone.ZoneType;
@@ -98,79 +98,6 @@ public final class CardUtil {
         return CardUtil.RANDOM.nextInt(c.size());
     }
 
-    // returns Card Name (unique number) attack/defense
-    // example: Big Elf (12) 2/3
-    /**
-     * <p>
-     * toText.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String toText(final Card c) {
-        return c.getName() + " (" + c.getUniqueNumber() + ") " + c.getNetAttack() + "/" + c.getNetDefense();
-    }
-
-    /**
-     * <p>
-     * toCard.
-     * </p>
-     * 
-     * @param col
-     *            a {@link java.util.Collection} object.
-     * @return an array of {@link forge.Card} objects.
-     */
-    public static Card[] toCard(final Collection<Card> col) {
-        final Object[] o = col.toArray();
-        final Card[] c = new Card[o.length];
-
-        for (int i = 0; i < c.length; i++) {
-            final Object swap = o[i];
-            if (swap instanceof Card) {
-                c[i] = (Card) o[i];
-            } else {
-                throw new RuntimeException("CardUtil : toCard() invalid class, should be Card - " + o[i].getClass()
-                        + " - toString() - " + o[i].toString());
-            }
-        }
-
-        return c;
-    }
-
-    /**
-     * <p>
-     * toCard.
-     * </p>
-     * 
-     * @param list
-     *            a {@link java.util.ArrayList} object.
-     * @return an array of {@link forge.Card} objects.
-     */
-    public static Card[] toCard(final ArrayList<Card> list) {
-        final Card[] c = new Card[list.size()];
-        list.toArray(c);
-        return c;
-    }
-
-    /**
-     * <p>
-     * toList.
-     * </p>
-     * 
-     * @param c
-     *            an array of {@link forge.Card} objects.
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public static ArrayList<Card> toList(final Card[] c) {
-        final ArrayList<Card> a = new ArrayList<Card>();
-        for (final Card element : c) {
-            a.add(element);
-        }
-        return a;
-    }
-
     // returns "G", longColor is Constant.Color.Green and the like
     /**
      * <p>
@@ -199,22 +126,6 @@ public final class CardUtil {
 
     /**
      * <p>
-     * isColor.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param col
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public static boolean isColor(final Card c, final String col) {
-        final ArrayList<String> list = CardUtil.getColors(c);
-        return list.contains(col);
-    }
-
-    /**
-     * <p>
      * getColors.
      * </p>
      * 
@@ -222,8 +133,8 @@ public final class CardUtil {
      *            a {@link forge.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<String> getColors(final Card c) {
-        return c.determineColor().toStringArray();
+    public static List<String> getColors(final Card c) {
+        return Arrays.asList(c.determineColor().toStringArray());
     }
 
     /**
@@ -268,45 +179,7 @@ public final class CardUtil {
         return new ArrayList<String>(colors);
     }
 
-    /**
-     * <p>
-     * hasCardName.
-     * </p>
-     * 
-     * @param cardName
-     *            a {@link java.lang.String} object.
-     * @param list
-     *            a {@link java.util.ArrayList} object.
-     * @return a boolean.
-     */
-    public static boolean hasCardName(final String cardName, final ArrayList<Card> list) {
-        Card c;
-        boolean b = false;
-
-        for (int i = 0; i < list.size(); i++) {
-            c = list.get(i);
-            if (c.getName().equals(cardName)) {
-                b = true;
-                break;
-            }
-        }
-        return b;
-    } // hasCardName()
-
     // probably should put this somewhere else, but not sure where
-    /**
-     * <p>
-     * getConvertedManaCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a int.
-     */
-    public static int getConvertedManaCost(final SpellAbility sa) {
-        return CardUtil.getConvertedManaCost(sa.getManaCost());
-    }
-
     /**
      * <p>
      * getConvertedManaCost.

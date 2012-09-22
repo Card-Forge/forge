@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.card.cardfactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,6 +36,10 @@ import java.util.zip.ZipFile;
 import javax.swing.SwingUtilities;
 
 
+import forge.Card;
+import forge.CardCharacteristicName;
+import forge.CardColor;
+import forge.CardUtil;
 import forge.card.CardManaCost;
 import forge.card.CardRules;
 import forge.card.CardRulesReader;
@@ -378,9 +382,7 @@ public class CardReader {
                 final String value = line.substring(7);
                 final ArrayList<CardColor> newCols = new ArrayList<CardColor>();
                 final CardColor newCol = new CardColor(card);
-                for (final String col : value.split(",")) {
-                    newCol.addToCardColor(col);
-                }
+                newCol.addToCardColor(value.split(","));
                 newCol.fixColorless();
                 newCols.add(newCol);
 

@@ -3432,9 +3432,7 @@ public class CardFactoryUtil {
         final Map<String, Integer> map = new HashMap<String, Integer>();
 
         for (final Card c : list) {
-            final ArrayList<String> colorList = CardUtil.getColors(c);
-
-            for (final String color : colorList) {
+            for (final String color : CardUtil.getColors(c)) {
                 if (color.equals("colorless")) {
                     // nothing to do
                 } else if (!map.containsKey(color)) {

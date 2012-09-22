@@ -17,7 +17,6 @@
  */
 package forge;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 
 import forge.card.mana.ManaCost;
@@ -126,13 +125,13 @@ public class CardColor {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    final boolean addToCardColor(final String s) {
-        final Color c = Color.convertFromString(s);
-        if (!this.col.contains(c)) {
-            this.col.add(c);
-            return true;
+    public final void addToCardColor(final String[] ss) {
+        for( String s : ss ) { 
+            final Color c = Color.convertFromString(s);
+            if (!this.col.contains(c)) {
+                this.col.add(c);
+            }
         }
-        return false;
     }
 
     /**
@@ -140,7 +139,7 @@ public class CardColor {
      * fixColorless.
      * </p>
      */
-    final void fixColorless() {
+    public final void fixColorless() {
         if ((this.col.size() > 1) && this.col.contains(Color.Colorless)) {
             this.col.remove(Color.Colorless);
         }
@@ -181,10 +180,11 @@ public class CardColor {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<String> toStringArray() {
-        final ArrayList<String> list = new ArrayList<String>();
+    public final String[] toStringArray() {
+        final String[] list = new String[this.col.size()];
+        int i  = 0;
         for (final Color c : this.col) {
-            list.add(c.toString());
+            list[i++] = c.toString();
         }
         return list;
     }

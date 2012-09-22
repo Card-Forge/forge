@@ -7,6 +7,7 @@ import junit.framework.Assert;
 
 import org.testng.annotations.Test;
 
+import forge.card.cardfactory.CardReader;
 import forge.game.limited.ReadDraftRankings;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;

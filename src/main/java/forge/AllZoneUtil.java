@@ -18,6 +18,8 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -232,7 +234,7 @@ public abstract class AllZoneUtil {
         cards = cards.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                final ArrayList<String> colorList = CardUtil.getColors(c);
+                final List<String> colorList = CardUtil.getColors(c);
                 return colorList.contains(color);
             }
         });
