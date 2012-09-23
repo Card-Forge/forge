@@ -6,6 +6,7 @@ PT:2/1
 K:CARDNAME can't block.
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | AddHiddenKeyword$ HIDDEN May be played | CheckSVar$ X | SVarCompare$ GE1 | Description$ You may cast CARDNAME from you graveyard as long as you control a Zombie.
 SVar:X:Count$Valid Zombie.YouCtrl
+SVar:SacMe:3
 SVar:DiscardMe:3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravecrawler.jpg
