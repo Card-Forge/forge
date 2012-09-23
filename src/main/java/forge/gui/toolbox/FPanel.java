@@ -145,7 +145,10 @@ public class FPanel extends JPanel implements ILocalRepaint {
 
     /** @param img0 &emsp; {@link java.awt.Image} */
     public void setForegroundImage(final Image img0) {
-        if (img0 == null) { return; }
+        if (img0 == null) {
+            this.foregroundImage = null;
+            return;
+        }
 
         this.foregroundImage = img0;
         this.imgW = img0.getWidth(null);

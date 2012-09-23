@@ -26,6 +26,7 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
 import javax.swing.WindowConstants;
 
@@ -194,12 +195,14 @@ public enum FControl {
             case HOME_SCREEN:
                 VHomeUI.SINGLETON_INSTANCE.populate();
                 FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
+                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
                 Singletons.getView().getFrame().addWindowListener(waDefault);
                 break;
 
             case MATCH_SCREEN:
                 VMatchUI.SINGLETON_INSTANCE.populate();
                 FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
+                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));
                 Singletons.getView().getFrame().addWindowListener(waConcede);
                 break;
 
@@ -210,6 +213,7 @@ public enum FControl {
             case DRAFTING_PROCESS:
                 VDeckEditorUI.SINGLETON_INSTANCE.populate();
                 FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
+                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
                 Singletons.getView().getFrame().addWindowListener(waLeaveEditor);
                 break;
 
