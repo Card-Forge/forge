@@ -359,15 +359,24 @@ public final class AbilityFactoryAnimate {
         // don't use instant speed animate abilities outside computers
         // Combat_Begin step
         if (!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_BEGIN)
-                && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && !AbilityFactory.isSorcerySpeed(sa)
+                && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) 
+                && !AbilityFactory.isSorcerySpeed(sa)
                 && !params.containsKey("ActivationPhases") && !params.containsKey("Permanent")) {
+            return false;
+        }
+
+        // don't animate if the AI won't attack anyway
+        if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
+                && AllZone.getComputerPlayer().getLife() < 6 && AllZone.getHumanPlayer().getLife() > 6
+                && !AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature").isEmpty()) {
             return false;
         }
 
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if ((!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || (AllZone.getCombat()
-                .getAttackers().isEmpty())) && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+        if ((!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) 
+                || (AllZone.getCombat().getAttackers().isEmpty())) 
+                && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
             return false;
         }
 

@@ -6,8 +6,8 @@ PT:3/3
 K:Flying
 A:AB$ ChangeZone | Cost$ 3 R R | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the hand.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, it deals 3 damage to each creature and each player.
-SVar:TrigDamage:AB$DamageAll | Cost$ 0 | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 3 | ValidDescription$ each creature and each player.
-SVar:RemAIDeck:True
+SVar:TrigDamage:AB$ DamageAll | Cost$ 0 | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 3 | ValidDescription$ each creature and each player.
+SVar:DiscardMe:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_phoenix.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/150.jpg
