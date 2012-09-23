@@ -507,6 +507,22 @@ public class CardList implements Iterable<Card> {
 
     /**
      * <p>
+     * getPossibleAttackers.
+     * </p>
+     * 
+     * @return a {@link forge.CardList} object.
+     */
+    public final CardList getPossibleAttackers() {
+        return this.filter(new Predicate<Card>() {
+            @Override
+            public boolean isTrue(final Card c) {
+                return (c.isCreature() && CombatUtil.canAttack(c));
+            }
+        });
+    }
+
+    /**
+     * <p>
      * getTotalConvertedManaCost.
      * </p>
      * 

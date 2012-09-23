@@ -324,8 +324,12 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME can't block.")) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canBlock(card)
-                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            if (ph.isPlayerTurn(human) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                    || ph.getPhase().isBefore(PhaseType.MAIN1)) {
+                return false;
+            }
+            CardList attackers = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getPossibleAttackers();
+            if(!CombatUtil.canBlockAtLeastOne(card, attackers)) {
                 return false;
             }
         } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
@@ -614,7 +618,7 @@ public class AbilityFactoryPump {
 
         // is the creature blocking and unable to destroy the attacker
         // or would be destroyed itself?
-        if (c.isBlocking()) {
+        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) && c.isBlocking()) {
             if (defense > 0 && CombatUtil.blockerWouldBeDestroyed(c)) {
                 return true;
             }
@@ -896,10 +900,10 @@ public class AbilityFactoryPump {
                         continue;
                     }
 
-                    return r.nextFloat() <= Math.pow(.6667, activations);
+                    return r.nextFloat() <= Math.pow(.9, activations);
                 }
                 if (shouldPumpCard(sa, card)) {
-                    return r.nextFloat() <= Math.pow(.6667, activations);
+                    return r.nextFloat() <= Math.pow(.9, activations);
                 }
             }
             return false;
