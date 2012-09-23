@@ -292,7 +292,7 @@ public final class GuiUtils {
     }
 
     public static Card chooseOne(final String message, final CardList cardList) {
-        return chooseOne(message, cardList);
+        return chooseOne(message, cardList.toArray());
     }    
     
     public static <T> T chooseOne(final String message, final Collection<T> choices) {
