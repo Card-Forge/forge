@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Darkseid 2
+Title=Darkseid
+Difficulty=hard
+Description=BR Recursion deck with Innocent Blood and Strongarm Tactics
+Icon=Darkseid.jpg
+Deck Type=constructed
+[main]
+4 Badlands
+2 Polluted Delta
+2 Dragonskull Summit
+12 Swamp|ONS
+1 Tainted Peak
+1 Rix Maadi, Dungeon Palace
+1 Urborg, Tomb of Yawgmoth
+4 Strongarm Tactics
+1 Liliana of the Veil
+1 Necrogen Mists
+4 Innocent Blood
+4 Barter in Blood
+1 Grave Pact
+4 Bloodghast
+4 Reassembling Skeleton
+1 Squee, Goblin Nabob
+4 Pyre Zombie
+1 Ashen Ghoul
+1 Ghastly Remains
+2 Nether Traitor
+2 Gravecrawler
+1 Haakon, Stromgald Scourge
+1 Necrosavant
+1 Veilborn Ghoul
+[sideboard]
