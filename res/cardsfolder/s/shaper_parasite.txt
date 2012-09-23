@@ -8,6 +8,7 @@ T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChoice | TriggerDescrip
 SVar:TrigChoice:AB$ GenericChoice | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ 0 | Defined$ You | Choices$ TrigPump1,TrigPump2
 SVar:TrigPump1:DB$Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ +2 | NumDef$ -2 | IsCurse$ True | ChoiceDescription$ +2/-2
 SVar:TrigPump2:DB$Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ -2 | NumDef$ +2 | IsCurse$ True | ChoiceDescription$ -2/+2
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaper_parasite.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/46.jpg

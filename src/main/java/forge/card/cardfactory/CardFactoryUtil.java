@@ -423,14 +423,15 @@ public class CardFactoryUtil {
         }
         int power = c.getNetCombatDamage();
         final int toughness = c.getNetDefense();
-
-        if (c.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")
-                || c.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")
-                || c.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
-                || c.hasKeyword("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
-            power = 0;
+        for (String keyword : c.getKeyword()) {
+            if (keyword.equals("Prevent all combat damage that would be dealt by CARDNAME.")
+                    || keyword.equals("Prevent all damage that would be dealt by CARDNAME.")
+                    || keyword.equals("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
+                    || keyword.equals("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
+                power = 0;
+                break;
+            }
         }
-
         value += power * 15;
         value += toughness * 10;
         value += c.getCMC() * 5;
@@ -444,68 +445,68 @@ public class CardFactoryUtil {
         }
         if (c.hasKeyword("Unblockable")) {
             value += power * 10;
+        } else {
+            if (c.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+                value += power * 6;
+            }
+            if (c.hasKeyword("Fear")) {
+                value += power * 6;
+            }
+            if (c.hasKeyword("Intimidate")) {
+                value += power * 6;
+            }
+            if (c.hasStartOfKeyword("CARDNAME can't be blocked except by")) {
+                value += power * 5;
+            }
+            if (c.hasStartOfKeyword("CARDNAME can't be blocked by")) {
+                value += power * 2;
+            }
         }
-        if (c.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
-            value += power * 6;
-        }
-        if (c.hasKeyword("Fear")) {
-            value += power * 6;
-        }
-        if (c.hasKeyword("Intimidate")) {
-            value += power * 6;
-        }
-        if (c.hasStartOfKeyword("CARDNAME can't be blocked except by")) {
-            value += power * 5;
-        }
-        if (c.hasStartOfKeyword("CARDNAME can't be blocked by")) {
-            value += power * 2;
-        }
-
-        // Battle stats increasing keywords
-        if (c.hasKeyword("Double Strike")) {
-            value += 10 + (power * 15);
-        }
-        value += c.getKeywordMagnitude("Bushido") * 16;
-        value += c.getAmountOfKeyword("Flanking") * 15;
 
         // Other good keywords
-        if (c.hasKeyword("Deathtouch") && (power > 0)) {
-            value += 25;
+        if (power > 0) {
+            if (c.hasKeyword("Double Strike")) {
+                value += 10 + (power * 15);
+            } else if (c.hasKeyword("First Strike")) {
+                value += 10 + (power * 5);
+            }
+            if (c.hasKeyword("Deathtouch")) {
+                value += 25;
+            }
+            if (c.hasKeyword("Lifelink")) {
+                value += power * 10;
+            }
+            if (power > 1 && c.hasKeyword("Trample")) {
+                value += (power -1) * 5;
+            }
+            if (c.hasKeyword("Vigilance")) {
+                value += (power * 5) + (toughness * 5);
+            }
+            if (c.hasKeyword("Wither")) {
+                value += power * 10;
+            }
+            if (c.hasKeyword("Infect")) {
+                value += power * 15;
+            }
+            value += c.getKeywordMagnitude("Rampage");
+            if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is "
+                    + "put into a graveyard, put a +1/+1 counter on CARDNAME.")) {
+                value += 2;
+            }
+            if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is "
+                    + "put into a graveyard, put a +2/+2 counter on CARDNAME.")) {
+                value += 3;
+            }
         }
+        
+        value += c.getKeywordMagnitude("Bushido") * 16;
+        value += c.getAmountOfKeyword("Flanking") * 15;
         value += c.getAmountOfKeyword("Exalted") * 15;
-        if (c.hasKeyword("First Strike") && !c.hasKeyword("Double Strike") && (power > 0)) {
-            value += 10 + (power * 5);
-        }
-        if (c.hasKeyword("Lifelink")) {
-            value += power * 10;
-        }
-        if (c.hasKeyword("Trample") && (power > 1)) {
-            value += power * 3;
-        }
-        if (c.hasKeyword("Vigilance")) {
-            value += (power * 5) + (toughness * 5);
-        }
-        if (c.hasKeyword("Wither")) {
-            value += power * 10;
-        }
-        if (c.hasKeyword("Infect")) {
-            value += power * 15;
-        }
-        value += c.getKeywordMagnitude("Rampage");
         value += c.getKeywordMagnitude("Annihilator") * 50;
-        if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is "
-                + "put into a graveyard, put a +1/+1 counter on CARDNAME.")
-                && (power > 0)) {
-            value += 2;
-        }
-        if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is "
-                + "put into a graveyard, put a +2/+2 counter on CARDNAME.")
-                && (power > 0)) {
-            value += 4;
-        }
+
 
         // Defensive Keywords
-        if (c.hasKeyword("Reach")) {
+        if (c.hasKeyword("Reach") && !c.hasKeyword("Flying")) {
             value += 5;
         }
         if (c.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
@@ -518,15 +519,13 @@ public class CardFactoryUtil {
         }
         if (c.hasKeyword("Prevent all damage that would be dealt to CARDNAME.")) {
             value += 60;
-        }
-        if (c.hasKeyword("Prevent all combat damage that would be dealt to CARDNAME.")) {
+        } else if (c.hasKeyword("Prevent all combat damage that would be dealt to CARDNAME.")) {
             value += 50;
-        }
-        if (c.hasKeyword("Shroud")) {
-            value += 30;
         }
         if (c.hasKeyword("Hexproof")) {
             value += 35;
+        } else if (c.hasKeyword("Shroud")) {
+            value += 30;
         }
         if (c.hasStartOfKeyword("Protection")) {
             value += 20;
@@ -539,14 +538,14 @@ public class CardFactoryUtil {
         // Bad keywords
         if (c.hasKeyword("Defender") || c.hasKeyword("CARDNAME can't attack.")) {
             value -= (power * 9) + 40;
+        } else if (c.getSVar("SacrificeEndCombat").equals("True")) {
+            value -= 40;
         }
         if (c.hasKeyword("CARDNAME can't block.")) {
             value -= 10;
-        }
-        if (c.hasKeyword("CARDNAME attacks each turn if able.")) {
+        } else if (c.hasKeyword("CARDNAME attacks each turn if able.")) {
             value -= 10;
-        }
-        if (c.hasKeyword("CARDNAME can block only creatures with flying.")) {
+        } else if (c.hasKeyword("CARDNAME can block only creatures with flying.")) {
             value -= toughness * 5;
         }
 
@@ -564,44 +563,31 @@ public class CardFactoryUtil {
                 value -= 50;
             }
         }
-        if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) {
+        if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")
+               || c.hasKeyword("At the beginning of the end step, exile CARDNAME.")
+               || c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
             value -= 50;
+        } else if (c.hasStartOfKeyword("Cumulative upkeep")) {
+            value -= 30;
+        } else if (c.hasStartOfKeyword("At the beginning of your upkeep, destroy CARDNAME unless you pay")
+                || c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")
+                || c.hasStartOfKeyword("Upkeep:")) {
+            value -= 20;
+        } else if (c.hasStartOfKeyword("(Echo unpaid)")) {
+            value -= 10;
         }
-        if (c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) {
-            value -= 50;
-        }
-        if (c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
-            value -= 50;
-        }
+            
         if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) {
             value -= 20;
         }
-        if (c.hasStartOfKeyword("At the beginning of your upkeep, destroy CARDNAME unless you pay")) {
-            value -= 20;
-        }
-        if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) {
-            value -= 20;
-        }
-        if (c.hasStartOfKeyword("Upkeep:")) {
-            value -= 20;
-        }
-        if (c.hasStartOfKeyword("Cumulative upkeep")) {
-            value -= 30;
-        }
-        if (c.hasStartOfKeyword("(Echo unpaid)")) {
-            value -= 10;
-        }
         if (c.hasStartOfKeyword("Fading")) {
-            value -= 20; // not used atm
+            value -= 20;
         }
         if (c.hasStartOfKeyword("Vanishing")) {
-            value -= 20; // not used atm
+            value -= 20;
         }
         if (c.getSVar("Targeting").equals("Dies")) {
             value -= 25;
-        }
-        if (c.getSVar("SacrificeEndCombat").equals("True")) {
-            value -= 40;
         }
 
         for (final SpellAbility sa : c.getSpellAbilities()) {
