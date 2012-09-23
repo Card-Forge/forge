@@ -27,7 +27,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
 import forge.GameActionUtil;
@@ -579,10 +579,24 @@ public class AbilityFactoryAttach {
         String stCheck = null;
         if (attachSource.isAura()) {
             stCheck = "EnchantedBy";
-            magnetList = list.getEnchantMagnets();
+            magnetList = list.filter(new Predicate<Card>() {
+                @Override
+                public boolean isTrue(final Card c) {
+                    if ( !c.isCreature() ) return false;
+                    String sVar = c.getSVar("EnchantMe");
+                    return sVar.equals("Multiple") || (sVar.equals("Once") && !c.isEnchanted());
+                }
+            });
         } else if (attachSource.isEquipment()) {
             stCheck = "EquippedBy";
-            magnetList = list.getEquipMagnets();
+            magnetList = list.filter(new Predicate<Card>() {
+                @Override
+                public boolean isTrue(final Card c) {
+                    if ( !c.isCreature() ) return false;
+                    String sVar = c.getSVar("EquipMe");
+                    return sVar.equals("Multiple") || (sVar.equals("Once") && !c.isEquipped());
+                }
+            });
         }
 
         if ((magnetList != null) && !magnetList.isEmpty()) {
@@ -682,7 +696,7 @@ public class AbilityFactoryAttach {
         if (attachSource.isAura()) {
             // TODO For Auras like Rancor, that aren't as likely to lead to
             // card disadvantage, this check should be skipped
-            prefList = prefList.filter(Predicate.not(CardPredicates.ENCHANTED));
+            prefList = prefList.filter(Predicate.not(Presets.ENCHANTED));
         }
 
         if (!grantingAbilities) {

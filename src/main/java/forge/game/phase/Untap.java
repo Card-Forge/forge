@@ -23,7 +23,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.Counters;
 import forge.GameActionUtil;
 import forge.GameEntity;
@@ -195,7 +195,7 @@ public class Untap extends Phase implements java.io.Serializable {
             if (Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
                 // search for lands the computer has and only untap 1
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
-                landList = landList.filter(CardPredicates.TAPPED).filter(new Predicate<Card>() {
+                landList = landList.filter(Presets.TAPPED).filter(new Predicate<Card>() {
                     @Override
                     public boolean isTrue(final Card c) {
                         return Untap.canUntap(c);
@@ -228,7 +228,7 @@ public class Untap extends Phase implements java.io.Serializable {
                     } // selectCard()
                 }; // Input
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
-                landList = landList.filter(CardPredicates.TAPPED).filter(new Predicate<Card>() {
+                landList = landList.filter(Presets.TAPPED).filter(new Predicate<Card>() {
                     @Override
                     public boolean isTrue(final Card c) {
                         return Untap.canUntap(c);
@@ -242,8 +242,8 @@ public class Untap extends Phase implements java.io.Serializable {
         if (AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue")) {
             if (Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
                 CardList artList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                artList = artList.filter(CardPredicates.ARTIFACTS);
-                artList = artList.filter(CardPredicates.TAPPED).filter(new Predicate<Card>() {
+                artList = artList.filter(Presets.ARTIFACTS);
+                artList = artList.filter(Presets.TAPPED).filter(new Predicate<Card>() {
                     @Override
                     public boolean isTrue(final Card c) {
                         return Untap.canUntap(c);
@@ -277,8 +277,8 @@ public class Untap extends Phase implements java.io.Serializable {
                     } // selectCard()
                 }; // Input
                 CardList artList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-                artList = artList.filter(CardPredicates.ARTIFACTS);
-                artList = artList.filter(CardPredicates.TAPPED).filter(new Predicate<Card>() {
+                artList = artList.filter(Presets.ARTIFACTS);
+                artList = artList.filter(Presets.TAPPED).filter(new Predicate<Card>() {
                     @Override
                     public boolean isTrue(final Card c) {
                         return Untap.canUntap(c);
@@ -292,7 +292,7 @@ public class Untap extends Phase implements java.io.Serializable {
         if ((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel"))) {
             if (Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                creatures = creatures.filter(CardPredicates.TAPPED).filter(new Predicate<Card>() {
+                creatures = creatures.filter(Presets.TAPPED).filter(new Predicate<Card>() {
                     @Override
                     public boolean isTrue(final Card c) {
                         return Untap.canUntap(c);
@@ -326,7 +326,7 @@ public class Untap extends Phase implements java.io.Serializable {
                     } // selectCard()
                 }; // Input
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                creatures = creatures.filter(CardPredicates.TAPPED).filter(new Predicate<Card>() {
+                creatures = creatures.filter(Presets.TAPPED).filter(new Predicate<Card>() {
                     @Override
                     public boolean isTrue(final Card c) {
                         return Untap.canUntap(c);

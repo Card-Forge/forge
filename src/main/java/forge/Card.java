@@ -57,6 +57,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
 import forge.util.MyRandom;
+import forge.util.closures.PredicateString;
 
 /**
  * <p>
@@ -6230,25 +6231,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * keywordsContain.
-     * </p>
-     * 
-     * @param keyword
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public final boolean keywordsContain(final String keyword) {
-        final ArrayList<String> a = this.getKeyword();
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i).toString().contains(keyword)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * <p>
      * hasAnyKeyword.
      * </p>
      * 
@@ -6658,13 +6640,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("Above")) { // "Are Above" Source
             final CardList list = this.getOwner().getCardsIn(ZoneType.Graveyard);
-            if (!list.getAbove(source, this)) {
+            if (list.indexOf(source) >= list.indexOf(this)) {
                 return false;
             }
         } else if (property.startsWith("DirectlyAbove")) { // "Are Directly Above"
                                                            // Source
             final CardList list = this.getOwner().getCardsIn(ZoneType.Graveyard);
-            if (!list.getDirectlyAbove(source, this)) {
+            if (list.indexOf(this) - list.indexOf(source) != 1) {
                 return false;
             }
         } else if (property.startsWith("TopGraveyardCreature")) {

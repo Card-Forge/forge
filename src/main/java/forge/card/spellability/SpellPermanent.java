@@ -23,6 +23,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.Command;
 import forge.CommandReturn;
 import forge.Singletons;
@@ -339,7 +340,7 @@ public class SpellPermanent extends Spell {
         // check on legendary
         if (card.isType("Legendary") && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
             final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            if (list.containsName(card.getName())) {
+            if (CardPredicates.nameEquals(card.getName()).any(list)) {
                 return false;
             }
         }

@@ -23,8 +23,9 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardPredicates;
 import forge.CardListUtil;
+import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Counters;
 import forge.GameAction;
@@ -481,7 +482,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final Card abyss = c;
 
             final CardList abyssGetTargets = AllZoneUtil.getCreaturesInPlay(player)
-                    .filter(CardPredicates.NON_ARTIFACTS);
+                    .filter(Presets.NON_ARTIFACTS);
 
             final Ability sacrificeCreature = new Ability(abyss, "") {
                 @Override
@@ -2277,9 +2278,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     enchantmentsInLibrary = enchantmentsInLibrary.filter(new Predicate<Card>() {
                         @Override
                         public boolean isTrue(final Card c) {
-                            return (c.isEnchantment() && c.hasKeyword("Enchant player")
+                            return c.isEnchantment() && c.hasKeyword("Enchant player")
                                     && !source.getEnchantingPlayer().hasProtectionFrom(c)
-                                    && !enchantmentsAttached.containsName(c));
+                                    && !CardPredicates.nameEquals(c.getName()).any(enchantmentsAttached);
                         }
                     });
                     final Player player = source.getController();

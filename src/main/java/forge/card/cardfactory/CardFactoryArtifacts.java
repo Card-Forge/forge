@@ -6,7 +6,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Counters;
 import forge.Singletons;
@@ -352,7 +352,7 @@ class CardFactoryArtifacts {
                     final Player player = this.getTargetPlayer();
 
                     CardList lands = player.getCardsIn(ZoneType.Graveyard);
-                    lands = lands.filter(CardPredicates.BASIC_LANDS);
+                    lands = lands.filter(Presets.BASIC_LANDS);
                     if (card.getController().isHuman()) {
                         // now, select up to four lands
                         int end = -1;

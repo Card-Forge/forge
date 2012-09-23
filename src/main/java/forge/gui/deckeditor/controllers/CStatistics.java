@@ -70,81 +70,81 @@ public enum CStatistics implements ICDoc {
         if (total == 0) { total = 1; }
 
         tmp = CardRules.Predicates.Presets.IS_MULTICOLOR
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblMulti().setText(String.valueOf(tmp));
 
         tmp = CardRules.Predicates.Presets.IS_CREATURE
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblCreature().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
         tmp = CardRules.Predicates.Presets.IS_LAND
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblLand().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
         tmp = CardRules.Predicates.Presets.IS_ENCHANTMENT
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblEnchantment().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
         tmp = CardRules.Predicates.Presets.IS_ARTIFACT
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblArtifact().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
         tmp = CardRules.Predicates.Presets.IS_INSTANT
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblInstant().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
         tmp = CardRules.Predicates.Presets.IS_SORCERY
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblSorcery().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
         tmp = CardRules.Predicates.Presets.IS_PLANESWALKER
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblPlaneswalker().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
         tmp = CardRules.Predicates.Presets.IS_COLORLESS
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblColorless().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
         tmp = Predicate.and(
                 Predicates.isColor(CardColor.BLACK),
                 Predicates.hasCntColors((byte) 1))
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblBlack().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
         tmp = Predicate.and(
                 Predicates.isColor(CardColor.BLUE),
                 Predicates.hasCntColors((byte) 1))
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblBlue().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
         tmp = Predicate.and(
                 Predicates.isColor(CardColor.GREEN),
                 Predicates.hasCntColors((byte) 1))
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblGreen().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
         tmp = Predicate.and(
                 Predicates.isColor(CardColor.RED),
                 Predicates.hasCntColors((byte) 1))
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblRed().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
         tmp = Predicate.and(
                 Predicates.isColor(CardColor.WHITE),
                 Predicates.hasCntColors((byte) 1))
-                .aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
         VStatistics.SINGLETON_INSTANCE.getLblWhite().setText(
                 tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 

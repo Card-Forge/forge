@@ -20,7 +20,7 @@ package forge.card.cost;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -124,7 +124,7 @@ public class CostUntapType extends CostPartWithList {
         if (cost.getUntap()) {
             typeList.remove(source);
         }
-        typeList = typeList.filter(CardPredicates.TAPPED);
+        typeList = typeList.filter(Presets.TAPPED);
 
         final Integer amount = this.convertAmount();
         if ((typeList.size() == 0) || ((amount != null) && (typeList.size() < amount))) {
@@ -160,7 +160,7 @@ public class CostUntapType extends CostPartWithList {
         CardList typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         typeList = typeList.getValidCards(this.getType().split(";"), ability.getActivatingPlayer(),
                 ability.getSourceCard());
-        typeList = typeList.filter(CardPredicates.TAPPED);
+        typeList = typeList.filter(Presets.TAPPED);
         if (untap) {
             typeList.remove(source);
         }
@@ -201,7 +201,7 @@ public class CostUntapType extends CostPartWithList {
                 if (untap) {
                     typeList.remove(source);
                 }
-                typeList = typeList.filter(CardPredicates.TAPPED);
+                typeList = typeList.filter(Presets.TAPPED);
                 c = typeList.size();
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));
             }

@@ -539,7 +539,7 @@ public abstract class Predicate<T> {
      *            the value accessor
      * @return the int
      */
-    public final <U> int aggregate(final Iterable<U> source, final Lambda1<T, U> accessor,
+    public final <U> int sum(final Iterable<U> source, final Lambda1<T, U> accessor,
             final Lambda1<Integer, U> valueAccessor) {
         int result = 0;
         if (source != null) {
@@ -552,6 +552,38 @@ public abstract class Predicate<T> {
         return result;
     }
 
+    public final int sum(final Iterable<T> source, final Lambda1<Integer, T> valueAccessor) {
+        int result = 0;
+        if (source != null) {
+            for (final T c : source) {
+                if (this.isTrue(c)) {
+                    result += valueAccessor.apply(c);
+                }
+            }
+        }
+        return result;
+    }    
+
+    // Returns the element matching predicate conditions with the maximum value of whatever valueAccessor returns. 
+    public final T max(final Iterable<T> source, final Lambda1<Integer, T> valueAccessor) {
+        if (source == null) { return null; }  
+
+        T result = null;
+        int max = Integer.MIN_VALUE;
+
+        for (final T c : source) {
+            if (!this.isTrue(c)) { continue; }
+            
+            int value = valueAccessor.apply(c);
+            if ( value > max ) {
+                result = c;
+                max = value;
+            }
+        }
+        return result;
+    }
+
+    
     // Random - algorithm adapted from Braid's GeneratorFunctions
     /**
      * Random.

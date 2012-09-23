@@ -28,15 +28,14 @@ import org.apache.commons.lang3.StringUtils;
 public abstract class PredicateString<T> extends Predicate<T> {
     /** Possible operators for string operands. */
     public enum StringOp {
-
         /** The CONTAINS. */
         CONTAINS,
-        /** The NO t_ contains. */
-        NOT_CONTAINS,
+        /** The CONTAINS ignore case. */
+        CONTAINS_IC,
         /** The EQUALS. */
         EQUALS,
-        /** The NO t_ equals. */
-        NOT_EQUALS
+        /** The EQUALS. */
+        EQUALS_IC
     }
 
     /** The operator. */
@@ -53,13 +52,13 @@ public abstract class PredicateString<T> extends Predicate<T> {
      */
     protected final boolean op(final String op1, final String op2) {
         switch (this.getOperator()) {
-        case CONTAINS:
+        case CONTAINS_IC:
             return StringUtils.containsIgnoreCase(op1, op2);
-        case NOT_CONTAINS:
-            return !StringUtils.containsIgnoreCase(op1, op2);
+        case CONTAINS:
+            return StringUtils.contains(op1, op2);
         case EQUALS:
-            return op1.equalsIgnoreCase(op2);
-        case NOT_EQUALS:
+            return op1.equals(op2);
+        case EQUALS_IC:
             return op1.equalsIgnoreCase(op2);
         default:
             return false;
@@ -82,4 +81,38 @@ public abstract class PredicateString<T> extends Predicate<T> {
     public StringOp getOperator() {
         return operator;
     }
+    
+    public static PredicateString<String> contains(final String what) { 
+        return new PredicateString<String>(StringOp.CONTAINS) {
+            @Override
+            public boolean isTrue(String subject) {
+                return op(subject, what);
+            } 
+        };
+    }
+    public static PredicateString<String> containsIgnoreCase(final String what) { 
+        return new PredicateString<String>(StringOp.CONTAINS_IC) {
+            @Override
+            public boolean isTrue(String subject) {
+                return op(subject, what);
+            } 
+        };
+    }
+    public static PredicateString<String> equals(final String what) { 
+        return new PredicateString<String>(StringOp.EQUALS) {
+            @Override
+            public boolean isTrue(String subject) {
+                return op(subject, what);
+            } 
+        };
+    }
+    public static PredicateString<String> equalsIgnoreCase(final String what) { 
+        return new PredicateString<String>(StringOp.EQUALS_IC) {
+            @Override
+            public boolean isTrue(String subject) {
+                return op(subject, what);
+            } 
+        };
+    }
+    
 }

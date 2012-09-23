@@ -89,43 +89,43 @@ public final class SEditorUtil  {
         view.getLblTotal().setText(String.valueOf(deck.countAll()));
 
         view.getLblCreature().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_CREATURE.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_CREATURE.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
 
         view.getLblLand().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_LAND.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_LAND.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
 
         view.getLblEnchantment().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_ENCHANTMENT.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_ENCHANTMENT.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
 
         view.getLblArtifact().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_ARTIFACT.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_ARTIFACT.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
 
         view.getLblInstant().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_INSTANT.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_INSTANT.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
 
         view.getLblSorcery().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_SORCERY.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_SORCERY.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
 
         view.getLblPlaneswalker().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_PLANESWALKER.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_PLANESWALKER.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
 
         view.getLblColorless().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_COLORLESS.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_COLORLESS.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
 
         view.getLblBlack().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_BLACK.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_BLACK.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
 
         view.getLblBlue().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_BLUE.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_BLUE.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
 
         view.getLblGreen().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_GREEN.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_GREEN.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
 
         view.getLblRed().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_RED.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_RED.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
 
         view.getLblWhite().setText(String.valueOf(CardRules.Predicates.Presets
-                .IS_WHITE.aggregate(deck, deck.getFnToCard(), deck.getFnToCount())));
+                .IS_WHITE.sum(deck, deck.getFnToCard(), deck.getFnToCount())));
     } // getStats()
 
     /**

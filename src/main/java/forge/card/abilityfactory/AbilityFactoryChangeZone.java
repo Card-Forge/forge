@@ -27,8 +27,9 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardList;
-import forge.CardPredicates;
 import forge.CardListUtil;
+import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.GameEntity;
@@ -494,7 +495,7 @@ public final class AbilityFactoryChangeZone {
             if (params.containsKey("Ninjutsu")) {
                 if (source.isType("Legendary") && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
                     final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                    if (list.containsName(source.getName())) {
+                    if (CardPredicates.nameEquals(source.getName()).any(list)) {
                         return false;
                     }
                 }
@@ -1205,14 +1206,15 @@ public final class AbilityFactoryChangeZone {
                     c = CardFactoryUtil.getBestAI(fetchList);
                 } else {
                     // Don't fetch another tutor with the same name
-                    if (origin.contains(ZoneType.Library) && !fetchList.getNotName(card.getName()).isEmpty()) {
-                        fetchList = fetchList.getNotName(card.getName());
+                    CardList sameNamed = fetchList.filter(Predicate.not(CardPredicates.nameEquals(card.getName())));
+                    if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
+                        fetchList = sameNamed;
                     }
                     Player ai = AllZone.getComputerPlayer();
                     // Does AI need a land?
                     CardList hand = ai.getCardsIn(ZoneType.Hand);
-                    System.out.println("Lands in hand = " + hand.filter(CardPredicates.LANDS).size() + ", on battlefield = " + ai.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.LANDS).size());
-                    if (hand.filter(CardPredicates.LANDS).size() == 0 && ai.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.LANDS).size() < 4) {
+                    System.out.println("Lands in hand = " + hand.filter(Presets.LANDS).size() + ", on battlefield = " + ai.getCardsIn(ZoneType.Battlefield).filter(Presets.LANDS).size());
+                    if (hand.filter(Presets.LANDS).size() == 0 && ai.getCardsIn(ZoneType.Battlefield).filter(Presets.LANDS).size() < 4) {
                         boolean canCastSomething = false;
                         for (Card cardInHand : hand) {
                             canCastSomething |= ComputerUtil.payManaCost(cardInHand.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false);
@@ -1646,7 +1648,7 @@ public final class AbilityFactoryChangeZone {
         CardList list = AllZoneUtil.getCardsIn(origin);
         list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
         if (source.isInZone(ZoneType.Hand)) {
-            list = list.getNotName(source.getName()); // Don't get the same card back.
+            list = list.filter(Predicate.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
         }
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
@@ -2958,10 +2960,10 @@ public final class AbilityFactoryChangeZone {
         // if Shuffle parameter exists, and any amount of cards were owned by
         // that player, then shuffle that library
         if (params.containsKey("Shuffle")) {
-            if (cards.getOwner(AllZone.getHumanPlayer()).size() > 0) {
+            if (cards.filter(CardPredicates.isOwner(AllZone.getHumanPlayer())).size() > 0) {
                 AllZone.getHumanPlayer().shuffle();
             }
-            if (cards.getOwner(AllZone.getComputerPlayer()).size() > 0) {
+            if (cards.filter(CardPredicates.isOwner(AllZone.getComputerPlayer())).size() > 0) {
                 AllZone.getComputerPlayer().shuffle();
             }
         }

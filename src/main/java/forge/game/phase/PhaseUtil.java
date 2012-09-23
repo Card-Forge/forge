@@ -23,7 +23,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
@@ -101,7 +101,7 @@ public class PhaseUtil {
 
         Singletons.getModel().getGameAction().resetActivationsPerTurn();
 
-        final CardList lands = AllZoneUtil.getPlayerLandsInPlay(turn).filter(CardPredicates.UNTAPPED);
+        final CardList lands = AllZoneUtil.getPlayerLandsInPlay(turn).filter(Presets.UNTAPPED);
         turn.setNumPowerSurgeLands(lands.size());
 
         // anything before this point happens regardless of whether the Untap

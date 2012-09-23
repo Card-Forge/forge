@@ -22,8 +22,9 @@ import java.util.Random;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.CardPredicates;
 import forge.CardListUtil;
+import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -201,13 +202,13 @@ public class AIPlayer extends Player {
             boolean bottom = false;
             if (topN.get(i).isBasicLand()) {
                 CardList bl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                bl = bl.filter(CardPredicates.BASIC_LANDS);
+                bl = bl.filter(CardPredicates.Presets.BASIC_LANDS);
 
                 bottom = bl.size() > 5; // if control more than 5 Basic land,
                                         // probably don't need more
             } else if (topN.get(i).isCreature()) {
                 CardList cl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                cl = cl.filter(CardPredicates.CREATURES);
+                cl = cl.filter(CardPredicates.Presets.CREATURES);
                 bottom = cl.size() > 5; // if control more than 5 Creatures,
                                         // probably don't need more
             }

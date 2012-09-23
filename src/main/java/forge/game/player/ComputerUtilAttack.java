@@ -373,8 +373,7 @@ public class ComputerUtilAttack {
         // Beastmaster Ascension
         if (AllZoneUtil.isCardInPlay("Beastmaster Ascension", AllZone.getComputerPlayer())
                 && (this.attackers.size() > 1)) {
-            final CardList beastions = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield)
-                    .getName("Beastmaster Ascension");
+            final CardList beastions = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;
             for (final Card beastion : beastions) {
                 final int counters = beastion.getCounters(Counters.QUEST);
@@ -681,7 +680,7 @@ public class ComputerUtilAttack {
         // get the list of attackers up to the first blocked one
         final CardList attritionalAttackers = new CardList();
         for (int x = 0; x < (this.attackers.size() - humanForces); x++) {
-            attritionalAttackers.add(this.attackers.getCard(x));
+            attritionalAttackers.add(this.attackers.get(x));
         }
         // until the attackers are used up or the player would run out of life
         int attackRounds = 1;
@@ -689,7 +688,7 @@ public class ComputerUtilAttack {
             // sum attacker damage
             int damageThisRound = 0;
             for (int y = 0; y < attritionalAttackers.size(); y++) {
-                damageThisRound += attritionalAttackers.getCard(y).getNetCombatDamage();
+                damageThisRound += attritionalAttackers.get(y).getNetCombatDamage();
             }
             // remove from player life
             humanLife -= damageThisRound;

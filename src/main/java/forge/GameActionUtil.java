@@ -22,6 +22,7 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
+import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -849,36 +850,33 @@ public final class GameActionUtil {
             return;
         }
 
-        final CardList playerPerms = player.getCardsIn(ZoneType.Battlefield);
+        final CardList playerLiches = player.getCardsIn(ZoneType.Battlefield, "Lich");
 
-        if (AllZoneUtil.isCardInPlay("Lich", player)) {
-            final CardList lichs = playerPerms.getName("Lich");
-            for (final Card crd : lichs) {
-                final Card lich = crd;
-                final SpellAbility ability = new Ability(lich, "0") {
-                    @Override
-                    public void resolve() {
-                        for (int i = 0; i < damage; i++) {
-                            CardList nonTokens = player.getCardsIn(ZoneType.Battlefield);
-                            nonTokens = nonTokens.filter(CardPredicates.NON_TOKEN);
-                            if (nonTokens.size() == 0) {
-                                player.loseConditionMet(GameLossReason.SpellEffect, lich.getName());
-                            } else {
-                                player.sacrificePermanent("Select a permanent to sacrifice", nonTokens);
-                            }
+        for (final Card lich : playerLiches) {
+            final SpellAbility ability = new Ability(lich, "0") {
+                @Override
+                public void resolve() {
+                    for (int i = 0; i < damage; i++) {
+                        CardList nonTokens = player.getCardsIn(ZoneType.Battlefield);
+                        nonTokens = nonTokens.filter(Presets.NON_TOKEN);
+                        if (nonTokens.size() == 0) {
+                            player.loseConditionMet(GameLossReason.SpellEffect, lich.getName());
+                        } else {
+                            player.sacrificePermanent("Select a permanent to sacrifice", nonTokens);
                         }
                     }
-                };
+                }
+            };
 
-                final StringBuilder sb = new StringBuilder();
-                sb.append(lich.getName()).append(" - ").append(lich.getController());
-                sb.append(" sacrifices ").append(damage).append(" nontoken permanents.");
-                ability.setStackDescription(sb.toString());
+            final StringBuilder sb = new StringBuilder();
+            sb.append(lich.getName()).append(" - ").append(lich.getController());
+            sb.append(" sacrifices ").append(damage).append(" nontoken permanents.");
+            ability.setStackDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+            AllZone.getStack().addSimultaneousStackEntry(ability);
 
-            }
         }
+
 
         if (c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) {
             GameActionUtil.playerCombatDamageWhirlingDervish(c);
@@ -1155,7 +1153,7 @@ public final class GameActionUtil {
             produces.put("Swamp", "B");
 
             CardList lands = AllZoneUtil.getCardsInGame();
-            lands = lands.filter(CardPredicates.LANDS);
+            lands = lands.filter(Presets.LANDS);
 
             // remove all abilities granted by this Command
             for (final Card land : lands) {
@@ -1250,12 +1248,9 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            final CardList alphaStatuses = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield)
-                    .getName("Alpha Status");
-            alphaStatuses.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getName("Alpha Status"));
+            final CardList alphaStatuses = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Alpha Status");
 
-            final CardList allCreatures = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
-            allCreatures.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature"));
+            final CardList allCreatures = AllZoneUtil.getCreaturesInPlay();
 
             for (int i = 0; i < this.previouslyPumped.size(); i++) {
                 this.previouslyPumped.get(i).addSemiPermanentAttackBoost(0 - this.previouslyPumpedValue.get(i));
@@ -1408,8 +1403,7 @@ public final class GameActionUtil {
         }
 
         private int countSoundTheCalls() {
-            CardList list = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
-            list = list.getName("Sound the Call");
+            CardList list = AllZoneUtil.getCardsIn(ZoneType.Graveyard, "Sound the Call");
             return list.size();
         }
 

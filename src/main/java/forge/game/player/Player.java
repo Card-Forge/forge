@@ -32,6 +32,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Constant;
 import forge.GameActionUtil;
@@ -1415,7 +1416,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a CardList with all the cards currently in that player's library
      */
     public final CardList getCardsIn(final ZoneType zone, final String cardName) {
-        return this.getCardsIn(zone).getName(cardName);
+        return this.getCardsIn(zone).filter(CardPredicates.nameEquals(cardName));
     }
 
     /**

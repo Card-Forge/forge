@@ -32,8 +32,8 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardList;
-import forge.CardPredicates;
 import forge.CardListUtil;
+import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
 import forge.CommandArgs;
@@ -2576,7 +2576,7 @@ public class CardFactoryUtil {
         // Count$ColoredCreatures *a DOMAIN for creatures*
         if (sq[0].contains("ColoredCreatures")) {
             someCards.addAll(cardController.getCardsIn(ZoneType.Battlefield));
-            someCards = someCards.filter(CardPredicates.CREATURES);
+            someCards = someCards.filter(Presets.CREATURES);
 
             final String[] colors = { "green", "white", "red", "blue", "black" };
 
@@ -3082,11 +3082,11 @@ public class CardFactoryUtil {
 
         // "Untapped Lands" - Count$UntappedTypeYouCtrl.Land
         if (sq[0].contains("Untapped")) {
-            someCards = someCards.filter(CardPredicates.UNTAPPED);
+            someCards = someCards.filter(Presets.UNTAPPED);
         }
 
         if (sq[0].contains("Tapped")) {
-            someCards = someCards.filter(CardPredicates.TAPPED);
+            someCards = someCards.filter(Presets.TAPPED);
         }
 
 //        String sq0 = sq[0].toLowerCase();
@@ -3096,23 +3096,23 @@ public class CardFactoryUtil {
 //        }
         // "White Creatures" - Count$WhiteTypeYouCtrl.Creature
         if (sq[0].contains("White")) {
-            someCards = someCards.filter(CardPredicates.WHITE);
+            someCards = someCards.filter(Presets.WHITE);
         }
 
         if (sq[0].contains("Blue")) {
-            someCards = someCards.filter(CardPredicates.BLUE);
+            someCards = someCards.filter(Presets.BLUE);
         }
 
         if (sq[0].contains("Black")) {
-            someCards = someCards.filter(CardPredicates.BLACK);
+            someCards = someCards.filter(Presets.BLACK);
         }
 
         if (sq[0].contains("Red")) {
-            someCards = someCards.filter(CardPredicates.RED);
+            someCards = someCards.filter(Presets.RED);
         }
 
         if (sq[0].contains("Green")) {
-            someCards = someCards.filter(CardPredicates.GREEN);
+            someCards = someCards.filter(Presets.GREEN);
         }
 
         if (sq[0].contains("Multicolor")) {
@@ -3147,7 +3147,7 @@ public class CardFactoryUtil {
             int mmc = 0;
             int cmc = 0;
             for (int i = 0; i < someCards.size(); i++) {
-                cmc = someCards.getCard(i).getManaCost().getCMC();
+                cmc = someCards.get(i).getManaCost().getCMC();
                 if (cmc > mmc) {
                     mmc = cmc;
                 }
@@ -3628,7 +3628,7 @@ public class CardFactoryUtil {
         final CardList list = new CardList();
 
         for (int tokenAdd = 0; tokenAdd < tokenList.size(); tokenAdd++) {
-            final Card thisToken = tokenList.getCard(tokenAdd);
+            final Card thisToken = tokenList.get(tokenAdd);
 
             final ArrayList<String> tal = thisToken.getType();
             final String[] tokenTypes = new String[tal.size()];

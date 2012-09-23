@@ -26,8 +26,8 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardPredicates;
 import forge.CardListUtil;
+import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
@@ -422,7 +422,7 @@ class CardFactoryAuras {
                     // This includes creatures Animate Dead can't enchant once
                     // in play.
                     // The human may try to Animate them, the AI will not.
-                    return AllZoneUtil.getCardsIn(ZoneType.Graveyard).filter(CardPredicates.CREATURES);
+                    return AllZoneUtil.getCardsIn(ZoneType.Graveyard).filter(Presets.CREATURES);
                 }
 
                 @Override

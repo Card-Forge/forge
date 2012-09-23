@@ -852,7 +852,7 @@ public class Combat {
             if (bFirstStrike) {
                 CombatUtil.checkUnblockedAttackers(unblocked.get(j));
             } else {
-                if (!unblocked.getCard(j).hasFirstStrike() && !unblocked.getCard(j).hasDoubleStrike()) {
+                if (!unblocked.get(j).hasFirstStrike() && !unblocked.get(j).hasDoubleStrike()) {
                     CombatUtil.checkUnblockedAttackers(unblocked.get(j));
                 }
             }

@@ -30,8 +30,9 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardPredicates;
 import forge.CardListUtil;
+import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
@@ -310,10 +311,10 @@ public class CardFactorySorceries {
                 @Override
                 public boolean canPlayAI() {
                     CardList humTokenCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                    humTokenCreats = humTokenCreats.filter(CardPredicates.TOKEN);
+                    humTokenCreats = humTokenCreats.filter(Presets.TOKEN);
 
                     CardList compTokenCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                    compTokenCreats = compTokenCreats.filter(CardPredicates.TOKEN);
+                    compTokenCreats = compTokenCreats.filter(Presets.TOKEN);
 
                     return compTokenCreats.size() > humTokenCreats.size();
                 } // canPlayAI()
@@ -321,7 +322,7 @@ public class CardFactorySorceries {
                 @Override
                 public void resolve() {
                     CardList tokens = AllZoneUtil.getCreaturesInPlay();
-                    tokens = tokens.filter(CardPredicates.TOKEN);
+                    tokens = tokens.filter(Presets.TOKEN);
 
                     CardFactoryUtil.copyTokens(tokens);
 
@@ -564,7 +565,7 @@ public class CardFactorySorceries {
                     final CardList lib = player.getCardsIn(ZoneType.Library);
 
                     for (final Card c : grave) {
-                        final CardList remLib = lib.getName(c.getName());
+                        final CardList remLib = lib.filter(CardPredicates.nameEquals(c.getName()));
                         for (final Card rem : remLib) {
                             Singletons.getModel().getGameAction().exile(rem);
                             lib.remove(rem);
@@ -1404,7 +1405,7 @@ public class CardFactorySorceries {
                 @Override
                 public void showMessage() {
                     CardList grave = card.getController().getCardsIn(ZoneType.Graveyard);
-                    grave = grave.filter(CardPredicates.CREATURES);
+                    grave = grave.filter(Presets.CREATURES);
                     grave = grave.filter(new Predicate<Card>() {
                         @Override
                         public boolean isTrue(final Card c) {
@@ -1554,7 +1555,7 @@ public class CardFactorySorceries {
                         // get all
                         final CardList creatures = AllZoneUtil.getCreaturesInPlay();
                         CardList grave = card.getController().getCardsIn(ZoneType.Graveyard);
-                        grave = grave.filter(CardPredicates.CREATURES);
+                        grave = grave.filter(Presets.CREATURES);
 
                         if (AllZone.getHumanPlayer().canBeTargetedBy(spell)
                                 || AllZone.getComputerPlayer().canBeTargetedBy(spell)) {
@@ -1635,7 +1636,7 @@ public class CardFactorySorceries {
 
                     // Sacrifice an artifact
                     CardList arts = p.getCardsIn(ZoneType.Battlefield);
-                    arts = arts.filter(CardPredicates.ARTIFACTS);
+                    arts = arts.filter(Presets.ARTIFACTS);
                     final Object toSac = GuiUtils.chooseOneOrNone("Sacrifice an artifact", arts.toArray());
                     if (toSac != null) {
                         final Card c = (Card) toSac;
@@ -1648,7 +1649,7 @@ public class CardFactorySorceries {
                     // Search your library for an artifact
                     final CardList lib = p.getCardsIn(ZoneType.Library);
                     GuiUtils.chooseOneOrNone("Looking at Library", lib.toArray());
-                    final CardList libArts = lib.filter(CardPredicates.ARTIFACTS);
+                    final CardList libArts = lib.filter(Presets.ARTIFACTS);
                     final Object o = GuiUtils.chooseOneOrNone("Search for artifact", libArts.toArray());
                     if (o != null) {
                         newArtifact[0] = (Card) o;

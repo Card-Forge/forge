@@ -23,6 +23,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
+import forge.CardPredicates;
 import forge.Counters;
 import forge.GameEntity;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -397,9 +398,9 @@ public class ComputerUtilBlock {
     private static Combat makeGangBlocks(final Combat combat) {
 
         CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft());
-        currentAttackers = currentAttackers.getKeywordsDontContain("Rampage");
         currentAttackers = currentAttackers
-                .getKeywordsDontContain("CARDNAME can't be blocked by more than one creature.");
+                .filter(Predicate.not(CardPredicates.containsKeyword("Rampage")))
+                .filter(Predicate.not(CardPredicates.containsKeyword("CARDNAME can't be blocked by more than one creature.")));
         CardList blockers;
 
         // Try to block an attacker without first strike with a gang of first strikers
@@ -596,9 +597,10 @@ public class ComputerUtilBlock {
         CardList chumpBlockers;
 
         CardList tramplingAttackers = ComputerUtilBlock.getAttackers().getKeyword("Trample");
-        tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); // Don't make it worse
         tramplingAttackers = tramplingAttackers
-                .getKeywordsDontContain("CARDNAME can't be blocked by more than one creature.");
+                .filter(Predicate.not(CardPredicates.containsKeyword("Rampage")))
+                .filter(Predicate.not(CardPredicates.containsKeyword("CARDNAME can't be blocked by more than one creature.")));
+        
         // TODO - should check here for a "rampage-like" trigger that replaced
         // the keyword:
         // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
@@ -643,12 +645,11 @@ public class ComputerUtilBlock {
 
         CardList safeBlockers;
         CardList blockers;
-        CardList targetAttackers = ComputerUtilBlock.getBlockedButUnkilled().getKeywordsDontContain("Rampage"); // Don't
-        // make
-        // it
-        // worse
-        targetAttackers = targetAttackers
-                .getKeywordsDontContain("CARDNAME can't be blocked by more than one creature.");
+        
+        CardList targetAttackers = ComputerUtilBlock.getBlockedButUnkilled()
+                .filter(Predicate.not(CardPredicates.containsKeyword("Rampage")))
+                .filter(Predicate.not(CardPredicates.containsKeyword("CARDNAME can't be blocked by more than one creature.")));
+        
         // TODO - should check here for a "rampage-like" trigger that replaced
         // the keyword:
         // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."

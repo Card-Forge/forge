@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Constant;
 import forge.GameAction;
@@ -446,9 +446,9 @@ public class GameNew {
     private static void seeWhoPlaysFirst() {
         final GameAction ga = Singletons.getModel().getGameAction();
         CardList hLibrary = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
-        hLibrary = hLibrary.filter(CardPredicates.NON_LANDS);
+        hLibrary = hLibrary.filter(Presets.NON_LANDS);
         CardList cLibrary = AllZone.getComputerPlayer().getCardsIn(ZoneType.Library);
-        cLibrary = cLibrary.filter(CardPredicates.NON_LANDS);
+        cLibrary = cLibrary.filter(Presets.NON_LANDS);
 
         final boolean starterDetermined = false;
         int cutCount = 0;

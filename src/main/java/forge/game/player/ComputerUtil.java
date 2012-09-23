@@ -26,8 +26,8 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardPredicates;
 import forge.CardListUtil;
+import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -1213,7 +1213,7 @@ public class ComputerUtil {
             return false;
         }
         CardList landList = computer.getCardsIn(ZoneType.Hand);
-        landList = landList.filter(CardPredicates.LANDS);
+        landList = landList.filter(Presets.LANDS);
 
         final CardList lands = computer.getCardsIn(ZoneType.Graveyard);
         for (final Card crd : lands) {
@@ -1631,7 +1631,7 @@ public class ComputerUtil {
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
 
         // is this needed?
-        typeList = typeList.filter(CardPredicates.UNTAPPED);
+        typeList = typeList.filter(Presets.UNTAPPED);
 
         if (tap) {
             typeList.remove(activate);
@@ -1671,7 +1671,7 @@ public class ComputerUtil {
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
 
         // is this needed?
-        typeList = typeList.filter(CardPredicates.TAPPED);
+        typeList = typeList.filter(Presets.TAPPED);
 
         if (untap) {
             typeList.remove(activate);

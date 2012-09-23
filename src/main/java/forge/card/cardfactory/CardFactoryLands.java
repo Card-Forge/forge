@@ -23,7 +23,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Counters;
 import forge.GameActionUtil;
@@ -250,7 +250,7 @@ class CardFactoryLands {
                                 }
                             } // selectCard()
                         }; // Input
-                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardPredicates.UNTAPPED)
+                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(Presets.UNTAPPED)
                                 .size() < 2)) {
                             Singletons.getModel().getGameAction().sacrifice(card, null);
                             return;
@@ -297,7 +297,7 @@ class CardFactoryLands {
                     if (this.player.isComputer()) {
                         if (land.size() > 0) {
                             CardList tappedLand = new CardList(land);
-                            tappedLand = tappedLand.filter(CardPredicates.TAPPED);
+                            tappedLand = tappedLand.filter(Presets.TAPPED);
                             // if any are tapped, sacrifice it
                             // else sacrifice random
                             if (tappedLand.size() > 0) {
@@ -378,7 +378,7 @@ class CardFactoryLands {
                 @Override
                 public void execute() {
                     CardList plains = AllZoneUtil.getPlayerLandsInPlay(card.getController());
-                    plains = plains.filter(CardPredicates.UNTAPPED);
+                    plains = plains.filter(Presets.UNTAPPED);
 
                     if (this.player.isComputer()) {
                         if (plains.size() > 1) {
@@ -397,7 +397,7 @@ class CardFactoryLands {
                         }
                     } else { // this is the human resolution
                         final int[] paid = { 0 };
-                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardPredicates.UNTAPPED)
+                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(Presets.UNTAPPED)
                                 .size() < 2)) {
                             Singletons.getModel().getGameAction().sacrifice(card, null);
                             return;

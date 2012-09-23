@@ -23,6 +23,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Predicates;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -30,6 +31,7 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardList;
 import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
@@ -73,8 +75,8 @@ public class CardFactoryCreatures {
             @Override
             public boolean canPlayAI() {
                 final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                return Predicate.or(CardPredicates.nameEquals("Glorious Anthem"), CardPredicates.nameEquals("Gaea's Anthem")).any(list);
 
-                return list.containsName("Glorious Anthem") || list.containsName("Gaea's Anthem");
             }
         };
         // Do not remove SpellAbilities created by AbilityFactory or
@@ -223,7 +225,7 @@ public class CardFactoryCreatures {
 
                 } else { // computer
                     CardList art = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                    art = art.filter(CardPredicates.ARTIFACTS);
+                    art = art.filter(Presets.ARTIFACTS);
 
                     CardList list = new CardList(art);
                     list = list.filter(new Predicate<Card>() {
@@ -316,12 +318,11 @@ public class CardFactoryCreatures {
                     list.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield));
 
                     color[0] = Constant.Color.WHITE;
-                    int max = list.getKeywordsContain(color[0]).size();
+                    int max = 0;
+                    list.filter(CardPredicates.containsKeyword(color[0])).size();
 
-                    final String[] colors = { Constant.Color.BLUE, Constant.Color.BLACK, Constant.Color.RED,
-                            Constant.Color.GREEN };
-                    for (final String c : colors) {
-                        final int cmp = list.getKeywordsContain(c).size();
+                    for (final String c : Constant.Color.ONLY_COLORS) {
+                        final int cmp = list.filter(CardPredicates.containsKeyword(c)).size();
                         if (cmp > max) {
                             max = cmp;
                             color[0] = c;
@@ -420,7 +421,7 @@ public class CardFactoryCreatures {
             @Override
             public void resolve() {
                 CardList allTokens = AllZoneUtil.getCreaturesInPlay(card.getController());
-                allTokens = allTokens.filter(CardPredicates.TOKEN);
+                allTokens = allTokens.filter(Presets.TOKEN);
 
                 CardFactoryUtil.copyTokens(allTokens);
             }
@@ -428,7 +429,7 @@ public class CardFactoryCreatures {
             @Override
             public boolean canPlayAI() {
                 CardList allTokens = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                allTokens = allTokens.filter(CardPredicates.TOKEN);
+                allTokens = allTokens.filter(Presets.TOKEN);
 
                 return allTokens.size() >= 2;
             }
@@ -1043,7 +1044,7 @@ public class CardFactoryCreatures {
             public boolean canPlayAI() {
                 // get all creatures
                 CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                list = list.filter(CardPredicates.CREATURES);
+                list = list.filter(Presets.CREATURES);
                 return 0 < list.size();
             }
         });
@@ -1065,12 +1066,12 @@ public class CardFactoryCreatures {
                 final Player opp = player.getOpponent();
                 int max = 0;
                 CardList play = opp.getCardsIn(ZoneType.Battlefield);
-                play = play.filter(CardPredicates.NON_TOKEN);
-                play = play.filter(CardPredicates.WHITE);
+                play = play.filter(Presets.NON_TOKEN);
+                play = play.filter(Presets.WHITE);
                 max += play.size();
 
                 CardList grave = opp.getCardsIn(ZoneType.Graveyard);
-                grave = grave.filter(CardPredicates.WHITE);
+                grave = grave.filter(Presets.WHITE);
                 max += grave.size();
 
                 final String[] life = new String[max + 1];

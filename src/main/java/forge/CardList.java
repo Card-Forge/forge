@@ -121,90 +121,6 @@ public class CardList implements Iterable<Card> {
         this.list = new ArrayList<Card>(size);
     }
 
-    /**
-     * <p>
-     * getColor.
-     * </p>
-     * 
-     * @param cardColor
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getColor(final String cardColor) {
-        final CardList list = new CardList();
-        for (final Card c : this) {
-            if (cardColor.equals("Multicolor") && (c.getColor().size() > 1)) {
-                list.add(c);
-            } else if (c.isColor(cardColor) && (c.getColor().size() == 1)) {
-                list.add(c);
-            }
-        }
-        return list;
-    } // getColor()
-
-    /**
-     * Get cards that match the given color string. Use the card's ManaCost
-     * to determine color.
-     * @param cardColor desired color
-     * @return CardList
-     */
-    public final CardList getColorByManaCost(final String cardColor) {
-        final CardList ret = new CardList();
-        for (final Card c : this) {
-            ArrayList<String> colors = CardUtil.getOnlyColors(c);
-            if (colors.contains(cardColor)) {
-                ret.add(c);
-            }
-        }
-        return ret;
-    } // getColorByManaCost()
-
-    /**
-     * <p>
-     * getOnly2Colors.
-     * </p>
-     * 
-     * @param clr1
-     *            a {@link java.lang.String} object.
-     * @param clr2
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getOnly2Colors(final String clr1, final String clr2) {
-        final CardList list = new CardList();
-        list.addAll(this);
-
-        final Predicate<Card> clrF = new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                if (c.isColorless()) {
-                    return true;
-                }
-                final ArrayList<CardColor> cClrs = c.getColor();
-                for (int i = 0; i < cClrs.size(); i++) {
-                    CardColor cc = cClrs.get(i);
-                    for (final String s : cc.toStringArray()) {
-                        if (!s.equals(clr1) && !s.equals(clr2)) {
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            }
-        };
-
-        return list.filter(clrF);
-    }
-
-    /**
-     * <p>
-     * reverse.
-     * </p>
-     */
-    public final void reverse() {
-        Collections.reverse(this.list);
-    }
-
     /** {@inheritDoc} */
     @Override
     public final boolean equals(final Object a) {
@@ -213,13 +129,13 @@ public class CardList implements Iterable<Card> {
             if (this.list.size() != b.size()) {
                 return false;
             }
-
+    
             for (int i = 0; i < this.list.size(); i++) {
                 if (!this.list.get(i).equals(b.get(i))) {
                     return false;
                 }
             }
-
+    
             return true;
         } else {
             return false;
@@ -234,43 +150,6 @@ public class CardList implements Iterable<Card> {
     @Override
     public int hashCode() {
         return (41 * (41 + this.list.size() + this.list.hashCode()));
-    }
-
-    // removes one copy of that card
-    /**
-     * <p>
-     * remove.
-     * </p>
-     * 
-     * @param cardName
-     *            a {@link java.lang.String} object.
-     */
-    public final void remove(final String cardName) {
-        final CardList find = this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return c.getName().equals(cardName);
-            }
-        });
-
-        if (0 < find.size()) {
-            this.remove(find.get(0));
-        } else {
-            throw new RuntimeException("CardList : remove(String cardname), error - card name not found: " + cardName
-                    + " - contents of Arraylist:" + this.list);
-        }
-
-    } // remove(String cardName)
-
-    /**
-     * <p>
-     * size.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int size() {
-        return this.list.size();
     }
 
     /**
@@ -323,374 +202,6 @@ public class CardList implements Iterable<Card> {
         for (final Object element : c) {
             this.list.add((Card) element);
         }
-    }
-
-    /**
-     * <p>
-     * contains.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public final boolean contains(final Card c) {
-        return this.list.contains(c);
-    }
-
-    // probably remove getCard() in the future
-    /**
-     * <p>
-     * getCard.
-     * </p>
-     * 
-     * @param index
-     *            a int.
-     * @return a {@link forge.Card} object.
-     */
-    public final Card getCard(final int index) {
-        return this.list.get(index);
-    }
-
-    /**
-     * <p>
-     * get.
-     * </p>
-     * 
-     * @param i
-     *            a int.
-     * @return a {@link forge.Card} object.
-     */
-    public final Card get(final int i) {
-        return this.getCard(i);
-    }
-
-    /**
-     * <p>
-     * containsName.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public final boolean containsName(final Card c) {
-        return this.containsName(c.getName());
-    }
-
-    /**
-     * <p>
-     * containsName.
-     * </p>
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public final boolean containsName(final String name) {
-        for (int i = 0; i < this.size(); i++) {
-            if (this.getCard(i).getName().equals(name)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    // returns new subset of all the cards with the same name
-    /**
-     * <p>
-     * getName.
-     * </p>
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getName(final String name) {
-        final CardList c = new CardList();
-
-        for (int i = 0; i < this.size(); i++) {
-            if (this.getCard(i).getName().equals(name)) {
-                c.add(this.getCard(i));
-            }
-        }
-
-        return c;
-    }
-
-    // returns new subset of all the cards that have a different name
-    /**
-     * <p>
-     * getNotName.
-     * </p>
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getNotName(final String name) {
-        final CardList c = new CardList();
-
-        for (int i = 0; i < this.size(); i++) {
-            if (!this.getCard(i).getName().equals(name)) {
-                c.add(this.getCard(i));
-            }
-        }
-
-        return c;
-    }
-
-    /**
-     * <p>
-     * getImageName.
-     * </p>
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getImageName(final String name) {
-        final CardList c = new CardList();
-
-        for (int i = 0; i < this.size(); i++) {
-            if (this.getCard(i).getImageName().equals(name)) {
-                c.add(this.getCard(i));
-            }
-        }
-
-        return c;
-    }
-
-    /**
-     * <p>
-     * getController.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getController(final Player player) {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return c.getController().isPlayer(player);
-            }
-        });
-    }
-
-    /**
-     * <p>
-     * getOwner.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getOwner(final Player player) {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return c.getOwner().isPlayer(player);
-            }
-        });
-    }
-
-    // cardType is like "Land" or "Goblin", returns a new CardList that is a
-    // subset of current CardList
-    /**
-     * <p>
-     * getType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getType(final String cardType) {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return c.isType(cardType);
-            }
-        });
-    }
-
-    // cardType is like "Land" or "Goblin", returns a new CardList with cards
-    // that do not have this type
-    /**
-     * <p>
-     * getNotType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getNotType(final String cardType) {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return !c.isType(cardType);
-            }
-        });
-    }
-
-    /**
-     * <p>
-     * getPermanents.
-     * </p>
-     * 
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getPermanents() {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return c.isPermanent();
-            }
-        });
-    }
-
-    /**
-     * <p>
-     * getKeyword.
-     * </p>
-     * 
-     * @param keyword
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getKeyword(final String keyword) {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return c.hasKeyword(keyword);
-            }
-        });
-    }
-
-    /**
-     * <p>
-     * getNotKeyword.
-     * </p>
-     * 
-     * @param keyword
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getNotKeyword(final String keyword) {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return !c.hasKeyword(keyword);
-            }
-        });
-    }
-
-    // get all cards that have this string in their keywords
-    /**
-     * <p>
-     * getKeywordsContain.
-     * </p>
-     * 
-     * @param keyword
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getKeywordsContain(final String keyword) {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return c.keywordsContain(keyword);
-            }
-        });
-    }
-
-    // get all cards that don't have this string in their keywords
-    /**
-     * <p>
-     * getKeywordsDontContain.
-     * </p>
-     * 
-     * @param keyword
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getKeywordsDontContain(final String keyword) {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return !c.keywordsContain(keyword);
-            }
-        });
-    }
-
-    /**
-     * <p>
-     * getTokens.
-     * </p>
-     * 
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getTokens() {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return c.isToken();
-            }
-        });
-    }
-
-    /**
-     * Create a new list of cards by applying a filter to this one.
-     * 
-     * @param filt
-     *            determines which cards are present in the resulting list
-     * 
-     * @return a subset of this CardList whose items meet the filtering
-     *         criteria; may be empty, but never null.
-     */
-    public final CardList filter(final Predicate<Card> filt) {
-        final CardList result = new CardList();
-        for (final Card card : this) {
-            if (filt.isTrue(card)) {
-                result.add(card);
-            }
-        }
-        return result;
-    }    
-    
-    /**
-     * <p>
-     * toArray.
-     * </p>
-     * 
-     * @return an array of {@link forge.Card} objects.
-     */
-    public final Card[] toArray() {
-        final Card[] c = new Card[this.list.size()];
-        this.list.toArray(c);
-        return c;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final String toString() {
-        return this.list.toString();
-    }
-
-    /**
-     * <p>
-     * isEmpty.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isEmpty() {
-        return this.list.isEmpty();
     }
 
     /**
@@ -748,6 +259,45 @@ public class CardList implements Iterable<Card> {
 
     /**
      * <p>
+     * isEmpty.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isEmpty() {
+        return this.list.isEmpty();
+    }
+
+    /**
+     * <p>
+     * size.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int size() {
+        return this.list.size();
+    }
+    
+    public final int indexOf(Card obj) {
+        return list.indexOf(obj);
+    }
+
+    /**
+     * <p>
+     * get.
+     * </p>
+     * 
+     * @param i
+     *            a int.
+     * @return a {@link forge.Card} object.
+     */
+    public final Card get(final int i) {
+        return this.list.get(i);
+    }
+
+    /**
+     * <p>
      * clear.
      * </p>
      */
@@ -770,6 +320,28 @@ public class CardList implements Iterable<Card> {
 
     /**
      * <p>
+     * reverse.
+     * </p>
+     */
+    public final void reverse() {
+        Collections.reverse(this.list);
+    }
+    
+    /**
+     * <p>
+     * toArray.
+     * </p>
+     * 
+     * @return an array of {@link forge.Card} objects.
+     */
+    public final Card[] toArray() {
+        final Card[] c = new Card[this.list.size()];
+        this.list.toArray(c);
+        return c;
+    }
+
+    /**
+     * <p>
      * sort.
      * </p>
      * 
@@ -780,22 +352,84 @@ public class CardList implements Iterable<Card> {
         Collections.sort(this.list, c);
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final String toString() {
+        return this.list.toString();
+    }
+
+    /**
+     * Create a new list of cards by applying a filter to this one.
+     * 
+     * @param filt
+     *            determines which cards are present in the resulting list
+     * 
+     * @return a subset of this CardList whose items meet the filtering
+     *         criteria; may be empty, but never null.
+     */
+    public final CardList filter(final Predicate<Card> filt) {
+        return new CardList(filt.select(this));
+    }
+
     /**
      * <p>
-     * getTargetableCards.
+     * getColor.
      * </p>
      * 
-     * @param source
-     *            a {@link forge.Card} object.
+     * @param cardColor
+     *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList getTargetableCards(final SpellAbility source) {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return source.canTarget(c);
+    public final CardList getColor(final String cardColor) {
+        final CardList list = new CardList();
+        for (final Card c : this) {
+            if (cardColor.equals("Multicolor") && (c.getColor().size() > 1)) {
+                list.add(c);
+            } else if (c.isColor(cardColor) && (c.getColor().size() == 1)) {
+                list.add(c);
             }
-        });
+        }
+        return list;
+    } // getColor()
+
+
+
+
+    public final boolean contains(final Card c) {
+        return this.list.contains(c);
+    }
+
+    public final boolean containsName(final String name) {
+        return CardPredicates.nameEquals(name).any(list);
+    }
+
+    public final CardList getController(final Player player) {
+        return this.filter(CardPredicates.isController(player));
+    }
+
+
+    // cardType is like "Land" or "Goblin", returns a new CardList that is a
+    // subset of current CardList
+    public final CardList getType(final String cardType) {
+        return this.filter(CardPredicates.isType(cardType));
+    }
+
+    // cardType is like "Land" or "Goblin", returns a new CardList with cards
+    // that do not have this type
+    public final CardList getNotType(final String cardType) {
+        return this.filter(Predicate.not(CardPredicates.isType(cardType)));
+    }
+
+    public final CardList getKeyword(final String keyword) {
+        return this.filter(CardPredicates.hasKeyword(keyword));
+    }
+
+    public final CardList getNotKeyword(final String keyword) {
+        return this.filter(Predicate.not(CardPredicates.hasKeyword(keyword)));
+    }
+
+    public final CardList getTargetableCards(final SpellAbility source) {
+        return this.filter(CardPredicates.isTargetableBy(source));
     }
 
     /**
@@ -851,40 +485,6 @@ public class CardList implements Iterable<Card> {
             @Override
             public boolean isTrue(final Card c) {
                 return (c != null) && c.isValid(restrictions, sourceController, source);
-            }
-        });
-    }
-
-    /**
-     * <p>
-     * getEquipMagnets.
-     * </p>
-     * 
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getEquipMagnets() {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return (c.isCreature() && (c.getSVar("EquipMe").equals("Multiple") || (c.getSVar("EquipMe").equals(
-                        "Once") && !c.isEquipped())));
-            }
-        });
-    }
-
-    /**
-     * <p>
-     * getEnchantMagnets.
-     * </p>
-     * 
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getEnchantMagnets() {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return (c.isCreature() && (c.getSVar("EnchantMe").equals("Multiple") || (c.getSVar("EnchantMe").equals(
-                        "Once") && !c.isEnchanted())));
             }
         });
     }
@@ -986,58 +586,5 @@ public class CardList implements Iterable<Card> {
         });
     }
 
-    /**
-     * getAbove.
-     * 
-     * @param source
-     *            a Card object
-     * @param compared
-     *            a Card object
-     * @return a boolean
-     */
-    public final boolean getAbove(final Card source, final Card compared) {
-        if (source.equals(compared)) {
-            return false;
-        }
-
-        for (final Card itr : this) {
-            if (itr.equals(source)) {
-                return true;
-            } else if (itr.equals(compared)) {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * getDirectlyAbove.
-     * 
-     * @param source
-     *            a Card object
-     * @param compared
-     *            a Card object
-     * @return a boolean
-     */
-    public final boolean getDirectlyAbove(final Card source, final Card compared) {
-        if (source.equals(compared)) {
-            return false;
-        }
-
-        boolean checkNext = false;
-        for (final Card itr : this) {
-            if (checkNext) {
-                if (itr.equals(compared)) {
-                    return true;
-                }
-                return false;
-            } else if (itr.equals(source)) {
-                checkNext = true;
-            } else if (itr.equals(compared)) {
-                return false;
-            }
-        }
-        return false;
-    }
 
 } // end class CardList

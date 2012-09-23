@@ -20,6 +20,7 @@ package forge;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.closures.Predicate;
@@ -86,7 +87,7 @@ public abstract class AllZoneUtil {
      * @return a CardList with all cards currently in a graveyard
      */
     public static CardList getCardsIn(final ZoneType zone, final String cardName) {
-        return AllZoneUtil.getCardsIn(zone).getName(cardName);
+        return AllZoneUtil.getCardsIn(zone).filter(CardPredicates.nameEquals(cardName));
     }
 
     // ////////// Creatures
@@ -99,7 +100,7 @@ public abstract class AllZoneUtil {
      */
     public static CardList getCreaturesInPlay() {
         final CardList creats = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        return creats.filter(CardPredicates.CREATURES);
+        return creats.filter(Presets.CREATURES);
     }
 
     /**
@@ -111,7 +112,7 @@ public abstract class AllZoneUtil {
      */
     public static CardList getCreaturesInPlay(final Player player) {
         final CardList creats = player.getCardsIn(ZoneType.Battlefield);
-        return creats.filter(CardPredicates.CREATURES);
+        return creats.filter(Presets.CREATURES);
     }
 
     // /////////////// Lands
@@ -124,7 +125,7 @@ public abstract class AllZoneUtil {
      * @return a CardList containing all lands the given player has in play
      */
     public static CardList getPlayerLandsInPlay(final Player player) {
-        return player.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.LANDS);
+        return player.getCardsIn(ZoneType.Battlefield).filter(Presets.LANDS);
     }
 
     /**
@@ -133,7 +134,7 @@ public abstract class AllZoneUtil {
      * @return a CardList of all lands on the battlefield
      */
     public static CardList getLandsInPlay() {
-        return AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.LANDS);
+        return AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(Presets.LANDS);
     }
 
     // =============================================================================
