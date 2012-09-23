@@ -46,16 +46,36 @@ public class CardListUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList filterToughness(final CardList in, final int atLeastToughness) {
-        final CardList out = new CardList();
-        for (int i = 0; i < in.size(); i++) {
-            if (in.get(i).getNetDefense() <= atLeastToughness) {
-                out.add(in.get(i));
+        return in.filter(
+            new Predicate<Card>() {
+                @Override
+                public boolean isTrue(Card c) {
+                    return c.getNetDefense() <= atLeastToughness;
+                }
             }
-        }
-
-        return out;
+        );
     }
 
+    public static final Comparator<Card> DefenseComparator = new Comparator<Card>() {
+        @Override
+        public int compare(final Card a, final Card b) {
+            return b.getNetDefense() - a.getNetDefense();
+        }
+    };    
+    public static final Comparator<Card> AttackComparator = new Comparator<Card>() {
+        @Override
+        public int compare(final Card a, final Card b) {
+            return b.getNetCombatDamage() - a.getNetCombatDamage();
+        }
+    };    
+    public static final Comparator<Card> EvaluateCreatureComparator = new Comparator<Card>() {
+        @Override
+        public int compare(final Card a, final Card b) {
+            return CardFactoryUtil.evaluateCreature(b) - CardFactoryUtil.evaluateCreature(a);
+        }
+    };
+    
+    
     /**
      * <p>
      * Sorts a CardList by toughness, putting highest toughness first.
@@ -65,13 +85,7 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortDefense(final CardList list) {
-        final Comparator<Card> com = new Comparator<Card>() {
-            @Override
-            public int compare(final Card a, final Card b) {
-                return b.getNetDefense() - a.getNetDefense();
-            }
-        };
-        list.sort(com);
+        list.sort(DefenseComparator);
     } // sortDefense()
 
     // the higher the attack the better
@@ -84,13 +98,8 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortAttack(final CardList list) {
-        final Comparator<Card> com = new Comparator<Card>() {
-            @Override
-            public int compare(final Card a, final Card b) {
-                return b.getNetCombatDamage() - a.getNetCombatDamage();
-            }
-        };
-        list.sort(com);
+
+        list.sort(AttackComparator);
     } // sortAttack()
 
     /**
@@ -103,13 +112,7 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortByEvaluateCreature(final CardList list) {
-        final Comparator<Card> com = new Comparator<Card>() {
-            @Override
-            public int compare(final Card a, final Card b) {
-                return CardFactoryUtil.evaluateCreature(b) - CardFactoryUtil.evaluateCreature(a);
-            }
-        };
-        list.sort(com);
+        list.sort(EvaluateCreatureComparator);
     } // sortByEvaluateCreature()
 
     /**
@@ -171,21 +174,7 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortFlying(final CardList list) {
-        final Comparator<Card> com = new Comparator<Card>() {
-            @Override
-            public int compare(final Card a, final Card b) {
-                if (a.hasKeyword("Flying") && b.hasKeyword("Flying")) {
-                    return 0;
-                } else if (a.hasKeyword("Flying")) {
-                    return -1;
-                } else if (b.hasKeyword("Flying")) {
-                    return 1;
-                }
-
-                return 0;
-            }
-        };
-        list.sort(com);
+        sortByKeyword(list, "Flying");
     } // sortFlying()
 
     /**
@@ -262,114 +251,8 @@ public class CardListUtil {
         list.sort(com);
     }
 
-    /**
-     * <p>
-     * sortByIndestructible.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     */
-    public static void sortByIndestructible(final CardList list) {
-        final ArrayList<String> arrList = new ArrayList<String>();
-        arrList.add("Timber Protector");
-        arrList.add("Eldrazi Monument");
 
-        final Comparator<Card> com = new Comparator<Card>() {
-            @Override
-            public int compare(final Card a, final Card b) {
-                if (arrList.contains(a.getName()) && arrList.contains(b.getName())) {
-                    return 0;
-                } else if (arrList.contains(a.getName())) {
-                    return 1;
-                } else if (arrList.contains(b.getName())) {
-                    return -1;
-                }
-
-                return 0;
-            }
-        };
-        list.sort(com);
-    }
-
-    /**
-     * <p>
-     * sortByTapped.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     */
-    public static void sortByTapped(final CardList list) {
-        final Comparator<Card> com = new Comparator<Card>() {
-            @Override
-            public int compare(final Card a, final Card b) {
-
-                if (a.isTapped() && b.isTapped()) {
-                    return 0;
-                } else if (a.isTapped()) {
-                    return 1;
-                } else if (b.isTapped()) {
-                    return -1;
-                }
-
-                return 0;
-            }
-        };
-        list.sort(com);
-    }
-
-    /**
-     * <p>
-     * sortByName.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     */
-    public static void sortByName(final CardList list) {
-        final Comparator<Card> com = new Comparator<Card>() {
-            @Override
-            public int compare(final Card a, final Card b) {
-                final String aName = a.getName();
-                final String bName = b.getName();
-
-                return aName.compareTo(bName);
-            }
-
-        };
-        list.sort(com);
-    }
-
-    /**
-     * <p>
-     * sortBySelectable.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @param type
-     *            a {@link java.lang.String} object.
-     */
-    public static void sortBySelectable(final CardList list, final String type) {
-        final String t = type;
-        final Comparator<Card> com = new Comparator<Card>() {
-            @Override
-            public int compare(final Card a, final Card b) {
-                if (a.isType(t) && b.isType(t)) {
-                    return 0;
-                } else if (a.hasKeyword(t)) {
-                    return 1;
-                } else if (b.hasKeyword(t)) {
-                    return -1;
-                }
-
-                return 0;
-            }
-        };
-        list.sort(com);
-    }
-
+ 
     /**
      * <p>
      * sortByTextLen.
