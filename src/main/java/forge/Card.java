@@ -57,7 +57,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
 import forge.util.MyRandom;
-import forge.util.closures.PredicateString;
 
 /**
  * <p>

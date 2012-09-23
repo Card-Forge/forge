@@ -23,8 +23,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import com.esotericsoftware.minlog.Log;
-import com.google.common.base.Predicates;
-
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -822,7 +820,7 @@ public class CardFactoryCreatures {
 
             public int countKithkin() {
                 CardList kithkin = card.getController().getCardsIn(ZoneType.Battlefield);
-                kithkin = kithkin.filter(new Predicate<Card>() {
+                kithkin = kithkin.filter( new Predicate<Card>() {
 
                     @Override
                     public boolean isTrue(final Card c) {
