@@ -1,24 +1,24 @@
 /*
- * The files in the directory "net/slightlymagic/braids" and in all subdirectories of it (the "Files") are
- * Copyright 2011 Braids Cabal-Conjurer. They are available under either Forge's
- * main license (the GNU Public License; see LICENSE.txt in Forge's top directory)
- * or under the Apache License, as explained below.
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
  *
- * The Files are additionally licensed under the Apache License, Version 2.0 (the
- * "Apache License"); you may not use the files in this directory except in
- * compliance with one of its two licenses.  You may obtain a copy of the Apache
- * License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the Apache License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the Apache License for the specific language governing permissions and
- * limitations under the Apache License.
- *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.util.closures;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -40,6 +40,14 @@ public abstract class Lambda1<R, A1> implements Lambda<R> {
      */
     public abstract R apply(A1 arg1);
 
+    public List<R> applyToIterable(Iterable<A1> arg1) {
+        List<R> result = new ArrayList<R>();
+        for(A1 a : arg1) {
+            result.add(this.apply(a));
+        }
+        return result;
+    }
+    
     /*
      * (non-Javadoc)
      * 
