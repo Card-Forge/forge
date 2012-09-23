@@ -269,6 +269,21 @@ Fixes/Features:
 - X Can't be 0 added for human (although we need a better way to display it)
 - Apparently missed picture for Aeon Chronicler
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the restrictions part of the code for "Can be played as though it has flash. If you do sac at next cleanup."
+- Fixed static triggers not working on the stack.
+- Added a copy of Ronom Serpent to the Snow White 1 deck.
+- Added a few AI SVars.
+- cleanup for CardUtil
+- Removed T... syntax from GuiUtils chooseNNN functions (cause one might be called with cardlist parameter as a single choice option)
+- Rmeoved SpellAbilityList.java - noone used it, and no special code in that class seen.
+- cardReader moved to same package as all the cardfactory code
+- handsizeop, undocommand - do not seem to be used any longer
+- Removed background image from non-match UI states.
+- fix bug with chooseOne recursion
+- CardListFilter replaced with Predicate<Card>
+- refactor CardList to use Predicates and have less methods (to replace it later with pure List<Card>) and perform any special actions (filtering, cmc calculation, max creture power, etc) with predicates
+- cleanup
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -285,6 +300,7 @@ Archon of the Triumvirate
 Archweaver
 Armada Wurm
 Armory Guard
+Assassin's Strike
 Auger Spree
 Axebane Stag
 Azorius Guildgate
@@ -292,6 +308,7 @@ Azorius Justiciar
 Batterhorn
 Bellows Lizard
 Brushstrider
+Catacomb Slug
 Centaur Healer
 Chromatic Lantern
 Civic Saber
@@ -299,8 +316,10 @@ Cobblebrute
 Collective Blessing
 Crosstown Courier
 Cyclonic Rift
+Daggerdrome Imp
 Dark Revenant
 Deadbridge Goliath
+Dead Reveler
 Dramatic Rescue
 Dreadbore
 Dreg Mangler
@@ -458,6 +477,8 @@ Hollow Specter
 Mammoth Harness
 Prophecy
 Aeon Chronicler
+Armor of Thorns
+Strongarm Tactics
 
 
 end
