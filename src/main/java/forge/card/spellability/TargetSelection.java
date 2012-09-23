@@ -583,7 +583,7 @@ public class TargetSelection {
             } else {
                 select.setCancel(true);
             }
-        } else if (choices.length == 1 && choices.toString().contains(doneDummy)) {
+        } else if (choices.length == 1 && choices[0].equals(doneDummy)) {
             if (tgt.getMinTargets().equals("0")
                     && this.ability.getAbilityFactory().getMapParams().get("CanPlayNoTgt") != null
                     && this.ability.getAbilityFactory().getMapParams().get("CanPlayNoTgt").equals("True")) {

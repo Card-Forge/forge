@@ -76,18 +76,16 @@ public class AbilityFactoryAttach {
                     abilityFactory.getAbTgt(), false) {
                 private static final long serialVersionUID = 6631124959690157874L;
 
-                private final AbilityFactory af = abilityFactory;
-
                 @Override
                 public String getStackDescription() {
                     // when getStackDesc is called, just build exactly what is
                     // happening
-                    return AbilityFactoryAttach.attachStackDescription(this.af, this);
+                    return AbilityFactoryAttach.attachStackDescription(abilityFactory, this);
                 }
 
                 @Override
                 public boolean canPlayAI() {
-                    return AbilityFactoryAttach.attachCanPlayAI(this.af, this);
+                    return AbilityFactoryAttach.attachCanPlayAI(abilityFactory, this);
                 }
 
                 @Override
@@ -98,7 +96,7 @@ public class AbilityFactoryAttach {
                     final Card c = Singletons.getModel().getGameAction()
                             .moveTo(this.getActivatingPlayer().getZone(ZoneType.Battlefield), this.getSourceCard());
                     this.setSourceCard(c);
-                    AbilityFactoryAttach.attachResolve(this.af, this);
+                    AbilityFactoryAttach.attachResolve(abilityFactory, this);
                 }
             };
         } else {
@@ -109,23 +107,21 @@ public class AbilityFactoryAttach {
             spAttach = new Spell(abilityFactory.getHostCard(), abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
                 private static final long serialVersionUID = 6631124959690157874L;
 
-                private final AbilityFactory af = abilityFactory;
-
                 @Override
                 public String getStackDescription() {
                     // when getStackDesc is called, just build exactly what is
                     // happening
-                    return AbilityFactoryAttach.attachStackDescription(this.af, this);
+                    return AbilityFactoryAttach.attachStackDescription(abilityFactory, this);
                 }
 
                 @Override
                 public boolean canPlayAI() {
-                    return AbilityFactoryAttach.attachCanPlayAI(this.af, this);
+                    return AbilityFactoryAttach.attachCanPlayAI(abilityFactory, this);
                 }
 
                 @Override
                 public void resolve() {
-                    AbilityFactoryAttach.attachResolve(this.af, this);
+                    AbilityFactoryAttach.attachResolve(abilityFactory, this);
                 }
             };
         }

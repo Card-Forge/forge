@@ -192,6 +192,8 @@ public class CostTapType extends CostPartWithList {
                 typeList = typeList.filter(Presets.UNTAPPED);
                 c = typeList.size();
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));
+            } else {
+                c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
 

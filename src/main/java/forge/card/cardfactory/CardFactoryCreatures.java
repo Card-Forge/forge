@@ -239,7 +239,9 @@ public class CardFactoryCreatures {
                     } else if (!art.isEmpty()) {
                         chosen = art.get(0);
                     }
-                    chosen.addCounter(Counters.PHYLACTERY, 1);
+                    if (chosen != null) {
+                        chosen.addCounter(Counters.PHYLACTERY, 1);
+                    }
                 } // else
             } // execute()
         };
