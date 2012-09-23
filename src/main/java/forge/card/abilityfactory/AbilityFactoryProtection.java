@@ -28,7 +28,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
@@ -47,6 +46,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -246,9 +246,9 @@ public final class AbilityFactoryProtection {
         final ArrayList<String> gains = AbilityFactoryProtection.getProtectionList(hostCard, af.getMapParams());
 
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-        list = list.filter(new CardListFilter() {
+        list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 if (!c.canBeTargetedBy(sa)) {
                     return false;
                 }
@@ -414,9 +414,9 @@ public final class AbilityFactoryProtection {
         }
 
         // Don't target cards that will die.
-        list = list.filter(new CardListFilter() {
+        list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 System.out.println("Not Protecting");
                 return !c.getSVar("Targeting").equals("Dies");
             }
@@ -481,17 +481,17 @@ public final class AbilityFactoryProtection {
         }
 
         CardList pref = list.getController(AllZone.getComputerPlayer());
-        pref = pref.filter(new CardListFilter() {
+        pref = pref.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !AbilityFactoryProtection.hasProtectionFromAll(c,
                         AbilityFactoryProtection.getProtectionList(host, params));
             }
         });
         final CardList pref2 = list.getController(AllZone.getComputerPlayer());
-        pref = pref.filter(new CardListFilter() {
+        pref = pref.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !AbilityFactoryProtection.hasProtectionFromAny(c,
                         AbilityFactoryProtection.getProtectionList(host, params));
             }

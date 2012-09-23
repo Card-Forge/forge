@@ -21,7 +21,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.Command;
 import forge.Singletons;
 import forge.card.cost.Cost;
@@ -37,6 +37,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -416,10 +417,10 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     final Player you = card.getController();
-                    final CardList ens = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(CardListFilter.ENCHANTMENTS);
-                    final CardList toReturn = ens.filter(new CardListFilter() {
+                    final CardList ens = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.ENCHANTMENTS);
+                    final CardList toReturn = ens.filter(new Predicate<Card>() {
                         @Override
-                        public boolean addCard(final Card c) {
+                        public boolean isTrue(final Card c) {
                             final Card enchanting = c.getEnchantingCard();
 
                             if (enchanting != null) {

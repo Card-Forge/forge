@@ -27,7 +27,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
@@ -36,6 +35,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyObservable;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -660,9 +660,9 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     private boolean skipTurnTimeVault(Player turn) {
         // time vault:
         CardList vaults = turn.getCardsIn(ZoneType.Battlefield, "Time Vault");
-        vaults = vaults.filter(new CardListFilter() {
+        vaults = vaults.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.isTapped();
             }
         });

@@ -52,6 +52,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -859,7 +860,7 @@ public final class GameActionUtil {
                     public void resolve() {
                         for (int i = 0; i < damage; i++) {
                             CardList nonTokens = player.getCardsIn(ZoneType.Battlefield);
-                            nonTokens = nonTokens.filter(CardListFilter.NON_TOKEN);
+                            nonTokens = nonTokens.filter(CardPredicates.NON_TOKEN);
                             if (nonTokens.size() == 0) {
                                 player.loseConditionMet(GameLossReason.SpellEffect, lich.getName());
                             } else {
@@ -1154,7 +1155,7 @@ public final class GameActionUtil {
             produces.put("Swamp", "B");
 
             CardList lands = AllZoneUtil.getCardsInGame();
-            lands = lands.filter(CardListFilter.LANDS);
+            lands = lands.filter(CardPredicates.LANDS);
 
             // remove all abilities granted by this Command
             for (final Card land : lands) {
@@ -1308,9 +1309,9 @@ public final class GameActionUtil {
         public void execute() {
             CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
-            list = list.filter(new CardListFilter() {
+            list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return c.getName().equals("Avatar") && c.getImageName().equals("W N N Avatar");
                 }
             });
@@ -1370,9 +1371,9 @@ public final class GameActionUtil {
 
         private boolean getsBonus(final Card c) {
             CardList list = c.getController().getCardsIn(ZoneType.Battlefield);
-            list = list.filter(new CardListFilter() {
+            list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return c.getName().equals("Guan Yu, Sainted Warrior")
                             || c.getName().equals("Zhang Fei, Fierce Warrior");
                 }
@@ -1390,9 +1391,9 @@ public final class GameActionUtil {
         @Override
         public void execute() {
             CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            list = list.filter(new CardListFilter() {
+            list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return c.getName().equals("Wolf")
                             && c.hasKeyword("This creature gets +1/+1 for each card "
                                     + "named Sound the Call in each graveyard.");
@@ -1521,9 +1522,9 @@ public final class GameActionUtil {
     public static void doPowerSink(final Player p) {
         // get all lands with mana abilities
         CardList lands = AllZoneUtil.getPlayerLandsInPlay(p);
-        lands = lands.filter(new CardListFilter() {
+        lands = lands.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.getManaAbility().size() > 0;
             }
         });

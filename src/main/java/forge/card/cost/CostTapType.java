@@ -19,7 +19,7 @@ package forge.card.cost;
 
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -119,7 +119,7 @@ public class CostTapType extends CostPartWithList {
         if (cost.getTap()) {
             typeList.remove(source);
         }
-        typeList = typeList.filter(CardListFilter.UNTAPPED);
+        typeList = typeList.filter(CardPredicates.UNTAPPED);
 
         final Integer amount = this.convertAmount();
         if ((typeList.size() == 0) || ((amount != null) && (typeList.size() < amount))) {
@@ -154,7 +154,7 @@ public class CostTapType extends CostPartWithList {
         CardList typeList = ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
         typeList = typeList.getValidCards(this.getType().split(";"), ability.getActivatingPlayer(),
                 ability.getSourceCard());
-        typeList = typeList.filter(CardListFilter.UNTAPPED);
+        typeList = typeList.filter(CardPredicates.UNTAPPED);
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {
@@ -189,7 +189,7 @@ public class CostTapType extends CostPartWithList {
                 CardList typeList = ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
                 typeList = typeList.getValidCards(this.getType().split(";"), ability.getActivatingPlayer(),
                         ability.getSourceCard());
-                typeList = typeList.filter(CardListFilter.UNTAPPED);
+                typeList = typeList.filter(CardPredicates.UNTAPPED);
                 c = typeList.size();
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));
             }

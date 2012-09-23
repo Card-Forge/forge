@@ -28,7 +28,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.Command;
 import forge.Singletons;
 import forge.card.cost.Cost;
@@ -323,7 +323,7 @@ public final class AbilityFactoryCopy {
                 }
 
                 Card choice;
-                if (list.filter(CardListFilter.CREATURES).size() > 0) {
+                if (list.filter(CardPredicates.CREATURES).size() > 0) {
                     choice = CardFactoryUtil.getBestCreatureAI(list);
                 } else {
                     choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, true);

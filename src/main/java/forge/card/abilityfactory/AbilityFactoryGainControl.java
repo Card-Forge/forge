@@ -26,7 +26,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.Command;
 import forge.GameEntity;
 import forge.Singletons;
@@ -43,6 +42,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
 
@@ -335,9 +335,9 @@ public class AbilityFactoryGainControl {
         list = list.getValidCards(tgt.getValidTgts(), sa.getSourceCard().getController(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
-        list = list.filter(new CardListFilter() {
+        list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 final Map<String, String> vars = c.getSVars();
                 return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa);
             }
@@ -854,9 +854,9 @@ public class AbilityFactoryGainControl {
         list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
-        list = list.filter(new CardListFilter() {
+        list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 final Map<String, String> vars = c.getSVars();
                 return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa);
             }

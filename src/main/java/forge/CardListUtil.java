@@ -23,6 +23,7 @@ import java.util.Comparator;
 import com.esotericsoftware.minlog.Log;
 
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -441,9 +442,9 @@ public class CardListUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList getColor(final CardList list, final String color) {
-        return list.filter(new CardListFilter() {
+        return list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return CardUtil.getColors(c).contains(color);
             }
         });
@@ -459,9 +460,9 @@ public class CardListUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList getGoldCards(final CardList list) {
-        return list.filter(new CardListFilter() {
+        return list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return CardUtil.getColors(c).size() >= 2;
             }
         });

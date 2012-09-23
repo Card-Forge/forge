@@ -58,6 +58,7 @@ import forge.game.zone.PlayerZoneComesIntoPlay;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.ViewWinLose;
+import forge.util.closures.Predicate;
 
 /**
  * Methods for common actions performed during a game.
@@ -1166,13 +1167,13 @@ public class GameAction {
         } // for q=0;q<2
         /*
         //Experiment Kraj experiment
-        CardList krajs = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(new CardListFilter() {
+        CardList krajs = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(new Predicate<Card>() {
             @Override
             public boolean addCard(Card c) {
                 return c.getName().equals("Experiment Kraj");
             }
         });
-        CardList P1P1s = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(new CardListFilter() {
+        CardList P1P1s = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(new Predicate<Card>() {
             @Override
             public boolean addCard(Card c) {
                 return c.getCounters(Counters.P1P1) > 0;
@@ -1255,9 +1256,9 @@ public class GameAction {
         while (!a.isEmpty()) {
             CardList b = AllZoneUtil.getCardsIn(ZoneType.Battlefield, a.get(0).getName());
             b = b.getType("Legendary");
-            b = b.filter(new CardListFilter() {
+            b = b.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return !c.isFaceDown();
                 }
             });
@@ -1317,9 +1318,9 @@ public class GameAction {
 
         if (c.isEnchanted()) {
             CardList list = new CardList(c.getEnchantedBy());
-            list = list.filter(new CardListFilter() {
+            list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card crd) {
+                public boolean isTrue(final Card crd) {
                     return crd.hasKeyword("Totem armor");
                 }
             });
@@ -1500,9 +1501,9 @@ public class GameAction {
 
         if (c.isEnchanted()) {
             CardList list = new CardList(c.getEnchantedBy());
-            list = list.filter(new CardListFilter() {
+            list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card crd) {
+                public boolean isTrue(final Card crd) {
                     return crd.hasKeyword("Totem armor");
                 }
             });
@@ -1770,9 +1771,9 @@ public class GameAction {
                 }
             } else if (spell.getSourceCard().hasKeyword("Convoke")) {
                 CardList untappedCreats = spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
-                untappedCreats = untappedCreats.filter(new CardListFilter() {
+                untappedCreats = untappedCreats.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return !c.isTapped();
                     }
                 });

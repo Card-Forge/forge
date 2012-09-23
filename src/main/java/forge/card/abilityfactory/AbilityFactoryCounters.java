@@ -28,7 +28,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.Counters;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -49,6 +48,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 import forge.view.ButtonUtil;
 
 /**
@@ -310,9 +310,9 @@ public class AbilityFactoryCounters {
         final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
 
         list = player.getCardsIn(ZoneType.Battlefield);
-        list = list.filter(new CardListFilter() {
+        list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.canBeTargetedBy(sa) && !c.hasKeyword("CARDNAME can't have counters placed on it.")
                         && !(c.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && type.equals("M1M1"));
             }
@@ -474,9 +474,9 @@ public class AbilityFactoryCounters {
             abTgt.resetTargets();
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
-                list = list.filter(new CardListFilter() {
+                list = list.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return sa.canTarget(c);
                     }
                 });
@@ -656,9 +656,9 @@ public class AbilityFactoryCounters {
         Card choice;
         if (type.equals("M1M1")) {
             // try to kill the best killable creature, or reduce the best one
-            final CardList killable = list.filter(new CardListFilter() {
+            final CardList killable = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return c.getNetDefense() <= amount;
                 }
             });
@@ -690,9 +690,9 @@ public class AbilityFactoryCounters {
         if (type.equals("P1P1")) {
             choice = CardFactoryUtil.getBestCreatureAI(list);
         } else if (type.equals("DIVINITY")) {
-            final CardList boon = list.filter(new CardListFilter() {
+            final CardList boon = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return c.getCounters(Counters.DIVINITY) == 0;
                 }
             });
@@ -1445,9 +1445,9 @@ public class AbilityFactoryCounters {
         }
         CardList hperms = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         CardList cperms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        cperms = cperms.filter(new CardListFilter() {
+        cperms = cperms.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card crd) {
+            public boolean isTrue(final Card crd) {
                 for (final Counters c1 : Counters.values()) {
                     if (crd.getCounters(c1) != 0 && !CardFactoryUtil.isNegativeCounter(c1)) {
                         return true;
@@ -1457,9 +1457,9 @@ public class AbilityFactoryCounters {
             }
         });
 
-        hperms = hperms.filter(new CardListFilter() {
+        hperms = hperms.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card crd) {
+            public boolean isTrue(final Card crd) {
                 for (final Counters c1 : Counters.values()) {
                     if (crd.getCounters(c1) != 0 && CardFactoryUtil.isNegativeCounter(c1)) {
                         return true;
@@ -1573,9 +1573,9 @@ public class AbilityFactoryCounters {
                 }
             });
         } else { // Compy
-            cperms = cperms.filter(new CardListFilter() {
+            cperms = cperms.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card crd) {
+                public boolean isTrue(final Card crd) {
                     for (final Counters c1 : Counters.values()) {
                         if (crd.getCounters(c1) != 0) {
                             if (!CardFactoryUtil.isNegativeCounter(c1)) {
@@ -1587,9 +1587,9 @@ public class AbilityFactoryCounters {
                 }
             });
 
-            hperms = hperms.filter(new CardListFilter() {
+            hperms = hperms.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card crd) {
+                public boolean isTrue(final Card crd) {
                     for (final Counters c1 : Counters.values()) {
                         if (crd.getCounters(c1) != 0) {
                             if (CardFactoryUtil.isNegativeCounter(c1)) {
@@ -1916,9 +1916,9 @@ public class AbilityFactoryCounters {
 
         if (curse) {
             if (type.equals("M1M1")) {
-                final CardList killable = hList.filter(new CardListFilter() {
+                final CardList killable = hList.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return c.getNetDefense() <= amount;
                     }
                 });

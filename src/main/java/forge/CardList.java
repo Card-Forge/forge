@@ -28,6 +28,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -173,9 +174,9 @@ public class CardList implements Iterable<Card> {
         final CardList list = new CardList();
         list.addAll(this);
 
-        final CardListFilter clrF = new CardListFilter() {
+        final Predicate<Card> clrF = new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 if (c.isColorless()) {
                     return true;
                 }
@@ -245,9 +246,9 @@ public class CardList implements Iterable<Card> {
      *            a {@link java.lang.String} object.
      */
     public final void remove(final String cardName) {
-        final CardList find = this.filter(new CardListFilter() {
+        final CardList find = this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.getName().equals(cardName);
             }
         });
@@ -471,9 +472,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getController(final Player player) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.getController().isPlayer(player);
             }
         });
@@ -489,9 +490,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getOwner(final Player player) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.getOwner().isPlayer(player);
             }
         });
@@ -509,9 +510,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getType(final String cardType) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.isType(cardType);
             }
         });
@@ -529,9 +530,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getNotType(final String cardType) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !c.isType(cardType);
             }
         });
@@ -545,9 +546,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getPermanents() {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.isPermanent();
             }
         });
@@ -563,9 +564,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getKeyword(final String keyword) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.hasKeyword(keyword);
             }
         });
@@ -581,9 +582,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getNotKeyword(final String keyword) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !c.hasKeyword(keyword);
             }
         });
@@ -600,9 +601,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getKeywordsContain(final String keyword) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.keywordsContain(keyword);
             }
         });
@@ -619,9 +620,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getKeywordsDontContain(final String keyword) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !c.keywordsContain(keyword);
             }
         });
@@ -635,9 +636,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getTokens() {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.isToken();
             }
         });
@@ -652,16 +653,16 @@ public class CardList implements Iterable<Card> {
      * @return a subset of this CardList whose items meet the filtering
      *         criteria; may be empty, but never null.
      */
-    public final CardList filter(final CardListFilter filt) {
+    public final CardList filter(final Predicate<Card> filt) {
         final CardList result = new CardList();
         for (final Card card : this) {
-            if (filt.addCard(card)) {
+            if (filt.isTrue(card)) {
                 result.add(card);
             }
         }
         return result;
-    }
-
+    }    
+    
     /**
      * <p>
      * toArray.
@@ -789,9 +790,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getTargetableCards(final SpellAbility source) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return source.canTarget(c);
             }
         });
@@ -807,9 +808,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getUnprotectedCards(final Card source) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !c.hasProtectionFrom(source);
             }
         });
@@ -846,9 +847,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getValidCards(final String[] restrictions, final Player sourceController, final Card source) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return (c != null) && c.isValid(restrictions, sourceController, source);
             }
         });
@@ -862,9 +863,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getEquipMagnets() {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return (c.isCreature() && (c.getSVar("EquipMe").equals("Multiple") || (c.getSVar("EquipMe").equals(
                         "Once") && !c.isEquipped())));
             }
@@ -879,9 +880,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getEnchantMagnets() {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return (c.isCreature() && (c.getSVar("EnchantMe").equals("Multiple") || (c.getSVar("EnchantMe").equals(
                         "Once") && !c.isEnchanted())));
             }
@@ -896,9 +897,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getPossibleBlockers(final Card attacker) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return (c.isCreature() && CombatUtil.canBlock(attacker, c));
             }
         });
@@ -960,9 +961,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getColored() {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return (!c.isColorless());
             }
         });
@@ -977,9 +978,9 @@ public class CardList implements Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getMonoColored(final boolean includeColorless) {
-        return this.filter(new CardListFilter() {
+        return this.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return (CardUtil.getColors(c).size() == 1 && (includeColorless || !c.isColorless()));
             }
         });

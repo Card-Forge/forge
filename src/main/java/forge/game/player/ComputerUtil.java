@@ -26,7 +26,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.GameActionUtil;
@@ -52,6 +52,7 @@ import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -991,9 +992,9 @@ public class ComputerUtil {
      */
     public static CardList getAvailableMana(final Player player, final boolean checkPlayable) {
         final CardList list = player.getCardsIn(ZoneType.Battlefield);
-        final CardList manaSources = list.filter(new CardListFilter() {
+        final CardList manaSources = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 if (checkPlayable) {
                     for (final AbilityMana am : c.getAIPlayableMana()) {
                         am.setActivatingPlayer(player);
@@ -1212,7 +1213,7 @@ public class ComputerUtil {
             return false;
         }
         CardList landList = computer.getCardsIn(ZoneType.Hand);
-        landList = landList.filter(CardListFilter.LANDS);
+        landList = landList.filter(CardPredicates.LANDS);
 
         final CardList lands = computer.getCardsIn(ZoneType.Graveyard);
         for (final Card crd : lands) {
@@ -1221,9 +1222,9 @@ public class ComputerUtil {
             }
         }
 
-        landList = landList.filter(new CardListFilter() {
+        landList = landList.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 if (c.getSVar("NeedsToPlay").length() > 0) {
                     final String needsToPlay = c.getSVar("NeedsToPlay");
                     CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
@@ -1343,9 +1344,9 @@ public class ComputerUtil {
             for (int ip = 0; ip < 9; ip++) { // priority 0 is the lowest,
                                              // priority 5 the highest
                 final int priority = 9 - ip;
-                final CardList sacMeList = typeList.filter(new CardListFilter() {
+                final CardList sacMeList = typeList.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return (!c.getSVar("SacMe").equals("") && (Integer.parseInt(c.getSVar("SacMe")) == priority));
                     }
                 });
@@ -1361,9 +1362,9 @@ public class ComputerUtil {
             for (int ip = 0; ip < 9; ip++) { // priority 0 is the lowest,
                                              // priority 5 the highest
                 final int priority = 9 - ip;
-                final CardList sacMeList = typeList.filter(new CardListFilter() {
+                final CardList sacMeList = typeList.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return (!c.getSVar("DiscardMe").equals("") && (Integer.parseInt(c.getSVar("DiscardMe")) == priority));
                     }
                 });
@@ -1630,7 +1631,7 @@ public class ComputerUtil {
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
 
         // is this needed?
-        typeList = typeList.filter(CardListFilter.UNTAPPED);
+        typeList = typeList.filter(CardPredicates.UNTAPPED);
 
         if (tap) {
             typeList.remove(activate);
@@ -1670,7 +1671,7 @@ public class ComputerUtil {
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
 
         // is this needed?
-        typeList = typeList.filter(CardListFilter.TAPPED);
+        typeList = typeList.filter(CardPredicates.TAPPED);
 
         if (untap) {
             typeList.remove(activate);
@@ -1739,9 +1740,9 @@ public class ComputerUtil {
      */
     public static CardList getPossibleAttackers() {
         CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        list = list.filter(new CardListFilter() {
+        list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return CombatUtil.canAttack(c);
             }
         });

@@ -8795,10 +8795,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (source.isGreen() && !source.getName().equals("Green Ward")) {
                         return true;
                     }
-                } else if (kw.equals("Protection from green")) {
-                    if (source.isGreen() && !source.getName().equals("Green Ward")) {
-                        return true;
-                    }
                 } else if (kw.equals("Protection from creatures")) {
                     if (source.isCreature()) {
                         return true;

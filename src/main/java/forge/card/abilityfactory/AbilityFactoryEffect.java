@@ -25,7 +25,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.Command;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -47,6 +46,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -299,15 +299,15 @@ public class AbilityFactoryEffect {
                 CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
 
                 // only count creatures that can attack or block
-                comp = comp.filter(new CardListFilter() {
+                comp = comp.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return CombatUtil.canAttack(c);
                     }
                 });
-                human = human.filter(new CardListFilter() {
+                human = human.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return CombatUtil.canBlock(c);
                     }
                 });

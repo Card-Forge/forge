@@ -280,27 +280,27 @@ public class RunTest {
         c1.add(cf1.getCard("Royal Assassin", null));
         c1.add(cf1.getCard("Hymn to Tourach", null));
 
-        CardList c3 = c1.filter(new CardListFilter() {
+        CardList c3 = c1.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.isCreature();
             }
         });
         this.check("119", c3.containsName("Royal Assassin"));
         this.check("119", c3.size() == 1);
 
-        c3 = c1.filter(new CardListFilter() {
+        c3 = c1.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.isInstant();
             }
         });
         this.check("120", c3.containsName("Shock"));
         this.check("121", c3.size() == 1);
 
-        c3 = c1.filter(new CardListFilter() {
+        c3 = c1.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.getName().equals("Hymn to Tourach");
             }
         });

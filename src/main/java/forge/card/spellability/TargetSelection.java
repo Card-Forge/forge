@@ -25,7 +25,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.control.input.Input;
 import forge.game.player.Player;
@@ -33,6 +32,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
+import forge.util.closures.Predicate;
 import forge.view.ButtonUtil;
 
 /**
@@ -320,9 +320,9 @@ public class TargetSelection {
         // If the cards can't share a creature type
         if (tgt.isWithoutSameCreatureType() && !targeted.isEmpty()) {
             final Card card = targeted.get(0);
-            choices = choices.filter(new CardListFilter() {
+            choices = choices.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return !c.sharesCreatureTypeWith(card);
                 }
             });

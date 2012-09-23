@@ -6,7 +6,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.Command;
 import forge.Counters;
 import forge.Singletons;
@@ -22,6 +22,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
+import forge.util.closures.Predicate;
 import forge.view.ButtonUtil;
 
 /** 
@@ -182,9 +183,9 @@ class CardFactoryArtifacts {
                         }
                     } else {
                         CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                        list = list.filter(new CardListFilter() {
+                        list = list.filter(new Predicate<Card>() {
                             @Override
-                            public boolean addCard(final Card c) {
+                            public boolean isTrue(final Card c) {
                                 return (c.isLand());
                             }
                         });
@@ -220,9 +221,9 @@ class CardFactoryArtifacts {
                 public boolean canPlay() {
                     CardList list = card.getController().getCardsIn(ZoneType.Hand);
                     list.remove(card);
-                    list = list.filter(new CardListFilter() {
+                    list = list.filter(new Predicate<Card>() {
                         @Override
-                        public boolean addCard(final Card c) {
+                        public boolean isTrue(final Card c) {
                             return (c.isLand());
                         }
                     });
@@ -351,7 +352,7 @@ class CardFactoryArtifacts {
                     final Player player = this.getTargetPlayer();
 
                     CardList lands = player.getCardsIn(ZoneType.Graveyard);
-                    lands = lands.filter(CardListFilter.BASIC_LANDS);
+                    lands = lands.filter(CardPredicates.BASIC_LANDS);
                     if (card.getController().isHuman()) {
                         // now, select up to four lands
                         int end = -1;

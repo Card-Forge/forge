@@ -33,7 +33,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Constant;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -51,6 +51,7 @@ import forge.gui.ListChooser;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -1642,12 +1643,7 @@ public final class AbilityFactoryChoose {
                             }
                         } else {
                             CardList list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer());
-                            list = list.filter(new CardListFilter() {
-                                @Override
-                                public boolean addCard(final Card c) {
-                                    return !c.isLand();
-                                }
-                            });
+                            list = list.filter(Predicate.not(CardPredicates.LANDS));
                             if (!list.isEmpty()) {
                                 chosen = list.get(0).getName();
                             }
@@ -1980,8 +1976,8 @@ public final class AbilityFactoryChoose {
                         }
                     } else { // Computer
                         if (params.containsKey("AILogic") && params.get("AILogic").equals("BestBlocker")) {
-                            if (choices.filter(CardListFilter.UNTAPPED).isEmpty()) {
-                                choices = choices.filter(CardListFilter.UNTAPPED);
+                            if (choices.filter(CardPredicates.UNTAPPED).isEmpty()) {
+                                choices = choices.filter(CardPredicates.UNTAPPED);
                             }
                             chosen.add(CardFactoryUtil.getBestCreatureAI(choices));
                         } else {

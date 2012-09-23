@@ -26,7 +26,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
@@ -51,6 +50,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -670,9 +670,9 @@ public class AbilityFactoryPump {
     private CardList getPumpCreatures(final SpellAbility sa) {
 
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-        list = list.filter(new CardListFilter() {
+        list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return shouldPumpCard(sa, c);
             }
         });
@@ -698,9 +698,9 @@ public class AbilityFactoryPump {
         if ((defense < 0) && !list.isEmpty()) { // with spells that give -X/-X,
                                                 // compi will try to destroy a
                                                 // creature
-            list = list.filter(new CardListFilter() {
+            list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     if (c.getNetDefense() <= -defense) {
                         return true; // can kill indestructible creatures
                     }
@@ -722,9 +722,9 @@ public class AbilityFactoryPump {
             } else {
                 // Human active, only curse attacking creatures
                 if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                    list = list.filter(new CardListFilter() {
+                    list = list.filter(new Predicate<Card>() {
                         @Override
-                        public boolean addCard(final Card c) {
+                        public boolean isTrue(final Card c) {
                             if (!c.isAttacking()) {
                                 return false;
                             }
@@ -749,9 +749,9 @@ public class AbilityFactoryPump {
             final boolean addsKeywords = this.keywords.size() > 0;
 
             if (addsKeywords) {
-                list = list.filter(new CardListFilter() {
+                list = list.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return containsUsefulKeyword(keywords, c, sa);
                     }
                 });
@@ -997,9 +997,9 @@ public class AbilityFactoryPump {
 
         if (!this.abilityFactory.isCurse()) {
             // Don't target cards that will die.
-            list = list.filter(new CardListFilter() {
+            list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return !c.getSVar("Targeting").equals("Dies");
                 }
             });
@@ -1704,18 +1704,18 @@ public class AbilityFactoryPump {
 
         if (this.abilityFactory.isCurse()) {
             if (defense < 0) { // try to destroy creatures
-                comp = comp.filter(new CardListFilter() {
+                comp = comp.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         if (c.getNetDefense() <= -defense) {
                             return true; // can kill indestructible creatures
                         }
                         return ((c.getKillDamage() <= -defense) && !c.hasKeyword("Indestructible"));
                     }
                 }); // leaves all creatures that will be destroyed
-                human = human.filter(new CardListFilter() {
+                human = human.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         if (c.getNetDefense() <= -defense) {
                             return true; // can kill indestructible creatures
                         }
@@ -1738,9 +1738,9 @@ public class AbilityFactoryPump {
         }
 
         // only count creatures that can attack
-        comp = comp.filter(new CardListFilter() {
+        comp = comp.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 if (power <= 0 && !containsUsefulKeyword(keywords, c, sa)) {
                     return false;
                 }

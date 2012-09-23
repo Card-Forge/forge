@@ -22,6 +22,7 @@ import java.util.List;
 
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.closures.Predicate;
 
 /**
  * AllZoneUtil contains static functions used to get CardLists of various cards
@@ -98,7 +99,7 @@ public abstract class AllZoneUtil {
      */
     public static CardList getCreaturesInPlay() {
         final CardList creats = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        return creats.filter(CardListFilter.CREATURES);
+        return creats.filter(CardPredicates.CREATURES);
     }
 
     /**
@@ -110,7 +111,7 @@ public abstract class AllZoneUtil {
      */
     public static CardList getCreaturesInPlay(final Player player) {
         final CardList creats = player.getCardsIn(ZoneType.Battlefield);
-        return creats.filter(CardListFilter.CREATURES);
+        return creats.filter(CardPredicates.CREATURES);
     }
 
     // /////////////// Lands
@@ -123,7 +124,7 @@ public abstract class AllZoneUtil {
      * @return a CardList containing all lands the given player has in play
      */
     public static CardList getPlayerLandsInPlay(final Player player) {
-        return player.getCardsIn(ZoneType.Battlefield).filter(CardListFilter.LANDS);
+        return player.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.LANDS);
     }
 
     /**
@@ -132,7 +133,7 @@ public abstract class AllZoneUtil {
      * @return a CardList of all lands on the battlefield
      */
     public static CardList getLandsInPlay() {
-        return AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(CardListFilter.LANDS);
+        return AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.LANDS);
     }
 
     // =============================================================================
@@ -231,9 +232,9 @@ public abstract class AllZoneUtil {
      */
     public static CardList getPlayerColorInPlay(final Player player, final String color) {
         CardList cards = player.getCardsIn(ZoneType.Battlefield);
-        cards = cards.filter(new CardListFilter() {
+        cards = cards.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 final List<String> colorList = CardUtil.getColors(c);
                 return colorList.contains(color);
             }

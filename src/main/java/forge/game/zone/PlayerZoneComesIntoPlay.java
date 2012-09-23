@@ -24,13 +24,14 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.Command;
 import forge.GameActionUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.game.player.Player;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -142,9 +143,9 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             if (c.isLand()) {
                 CardList list = player.getCardsIn(ZoneType.Battlefield);
 
-                list = list.filter(new CardListFilter() {
+                list = list.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return c.hasKeyword("Landfall");
                     }
                 });
@@ -162,7 +163,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                         @Override
                         public void resolve() {
                             CardList lands = tisLand.getController().getCardsIn(ZoneType.Battlefield);
-                            lands = lands.filter(CardListFilter.LANDS);
+                            lands = lands.filter(CardPredicates.LANDS);
                             for (final Card land : lands) {
                                 land.tap();
                             }

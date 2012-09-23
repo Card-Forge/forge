@@ -21,7 +21,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.Counters;
 import forge.Singletons;
 import forge.card.spellability.Ability;
@@ -29,6 +28,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameLossReason;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -230,9 +230,9 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
         final Player opponent = player.getOpponent();
         CardList list = opponent.getCardsIn(ZoneType.Battlefield);
 
-        list = list.filter(new CardListFilter() {
+        list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.getName().equals("Lighthouse Chronologist") && (c.getCounters(Counters.LEVEL) >= 7);
             }
         });

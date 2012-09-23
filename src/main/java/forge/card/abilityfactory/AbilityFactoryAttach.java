@@ -27,7 +27,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Command;
 import forge.GameActionUtil;
@@ -49,6 +49,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 /**
  * The Class AbilityFactory_Attach.
@@ -501,9 +502,9 @@ public class AbilityFactoryAttach {
         // AI For choosing a Card to Animate.
         CardList betterList = list.getNotType("Creature");
         if (sa.getSourceCard().getName().equals("Animate Artifact")) {
-            betterList = betterList.filter(new CardListFilter() {
+            betterList = betterList.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return c.getCMC() > 0;
                 }
             });
@@ -589,9 +590,9 @@ public class AbilityFactoryAttach {
             // Probably want to "weight" the list by amount of Enchantments and
             // choose the "lightest"
 
-            magnetList = magnetList.filter(new CardListFilter() {
+            magnetList = magnetList.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return CombatUtil.canAttack(c);
                 }
             });
@@ -635,9 +636,9 @@ public class AbilityFactoryAttach {
         if (totToughness < 0) {
             // Don't kill my own stuff with Negative toughness Auras
             final int tgh = totToughness;
-            prefList = prefList.filter(new CardListFilter() {
+            prefList = prefList.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return c.getLethalDamage() > Math.abs(tgh);
                 }
             });
@@ -654,11 +655,11 @@ public class AbilityFactoryAttach {
             }
             if (!keywords.isEmpty()) {
                 final ArrayList<String> finalKWs = keywords;
-                prefList = prefList.filter(new CardListFilter() {
+                prefList = prefList.filter(new Predicate<Card>() {
                     // If Aura grants only Keywords, don't Stack unstackable
                     // keywords
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         for (final String kw : finalKWs) {
                             if (c.hasKeyword(kw)) {
                                 return false;
@@ -671,9 +672,9 @@ public class AbilityFactoryAttach {
         }
 
         // Don't pump cards that will die.
-        prefList = prefList.filter(new CardListFilter() {
+        prefList = prefList.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !c.getSVar("Targeting").equals("Dies");
             }
         });
@@ -681,21 +682,15 @@ public class AbilityFactoryAttach {
         if (attachSource.isAura()) {
             // TODO For Auras like Rancor, that aren't as likely to lead to
             // card disadvantage, this check should be skipped
-            prefList = prefList.filter(new CardListFilter() {
-
-                @Override
-                public boolean addCard(final Card c) {
-                    return !c.isEnchanted();
-                }
-            });
+            prefList = prefList.filter(Predicate.not(CardPredicates.ENCHANTED));
         }
 
         if (!grantingAbilities) {
             // Probably prefer to Enchant Creatures that Can Attack
             // Filter out creatures that can't Attack or have Defender
-            prefList = prefList.filter(new CardListFilter() {
+            prefList = prefList.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return !c.isCreature() || CombatUtil.canAttack(c);
                 }
             });
@@ -776,9 +771,9 @@ public class AbilityFactoryAttach {
         if (totToughness < 0) {
             // Kill a creature if we can
             final int tgh = totToughness;
-            prefList = list.filter(new CardListFilter() {
+            prefList = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     if (!c.hasKeyword("Indestructible") && (c.getLethalDamage() <= Math.abs(tgh))) {
                         return true;
                     }
@@ -802,9 +797,9 @@ public class AbilityFactoryAttach {
             // things to begin with
             if (keywords.contains("CARDNAME can't attack.") || keywords.contains("Defender")
                     || keywords.contains("CARDNAME attacks each turn if able.")) {
-                prefList = prefList.filter(new CardListFilter() {
+                prefList = prefList.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return !(c.hasKeyword("CARDNAME can't attack.") || c.hasKeyword("Defender"));
                     }
                 });
@@ -880,9 +875,9 @@ public class AbilityFactoryAttach {
     public static Card attachAIKeepTappedPreference(final SpellAbility sa, final CardList list,
             final boolean mandatory, final Card attachSource) {
         // AI For Cards like Paralyzing Grasp and Glimmerdust Nap
-        final CardList prefList = list.filter(new CardListFilter() {
+        final CardList prefList = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 // Don't do Untapped Vigilance cards
                 if (c.isCreature() && c.hasKeyword("Vigilance") && c.isUntapped()) {
                     return false;

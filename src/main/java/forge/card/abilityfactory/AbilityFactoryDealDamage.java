@@ -25,7 +25,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -43,6 +42,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -534,9 +534,9 @@ public class AbilityFactoryDealDamage {
         }
         hPlay = hPlay.getTargetableCards(saMe);
 
-        final CardList killables = hPlay.filter(new CardListFilter() {
+        final CardList killables = hPlay.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return (c.getEnoughDamageToKill(d, source, false, noPrevention) <= d) && !ComputerUtil.canRegenerate(c)
                         && !(c.getSVar("SacMe").length() > 0);
             }
@@ -1231,9 +1231,9 @@ public class AbilityFactoryDealDamage {
         CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.getValidCards(validC.split(","), source.getController(), source);
 
-        final CardListFilter filterKillable = new CardListFilter() {
+        final Predicate<Card> filterKillable = new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return (c.predictDamage(dmg, source, false) >= c.getKillDamage());
             }
         };
@@ -1863,9 +1863,9 @@ public class AbilityFactoryDealDamage {
 
         CardList aiCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
         aiCreatures = aiCreatures.getTargetableCards(sa);
-        aiCreatures = aiCreatures.filter(new CardListFilter() {
+        aiCreatures = aiCreatures.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !c.getSVar("Targeting").equals("Dies");
             }
         });

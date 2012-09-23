@@ -23,7 +23,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
@@ -31,6 +31,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.nonsingleton.VField.PhaseLabel;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -100,7 +101,7 @@ public class PhaseUtil {
 
         Singletons.getModel().getGameAction().resetActivationsPerTurn();
 
-        final CardList lands = AllZoneUtil.getPlayerLandsInPlay(turn).filter(CardListFilter.UNTAPPED);
+        final CardList lands = AllZoneUtil.getPlayerLandsInPlay(turn).filter(CardPredicates.UNTAPPED);
         turn.setNumPowerSurgeLands(lands.size());
 
         // anything before this point happens regardless of whether the Untap
@@ -369,9 +370,9 @@ public class PhaseUtil {
         CardList list = new CardList();
         list.addAll(AllZone.getCombat().getAllBlockers());
 
-        list = list.filter(new CardListFilter() {
+        list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !c.getDamageHistory().getCreatureBlockedThisCombat();
             }
         });

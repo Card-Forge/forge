@@ -28,7 +28,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.Command;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -762,7 +762,7 @@ public class MagicStack extends MyObservable {
         if (sp.isSpell() && AllZoneUtil.isCardInPlay("Bazaar of Wonders")) {
             boolean found = false;
             CardList all = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            all = all.filter(CardListFilter.NON_TOKEN);
+            all = all.filter(CardPredicates.NON_TOKEN);
             final CardList graves = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
             all.addAll(graves);
 

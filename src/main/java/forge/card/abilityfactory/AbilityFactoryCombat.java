@@ -23,7 +23,6 @@ import java.util.HashMap;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
@@ -37,6 +36,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -1060,9 +1060,9 @@ public final class AbilityFactoryCombat {
             CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
             list = list.getTargetableCards(sa);
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
-            list = list.filter(new CardListFilter() {
+            list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     boolean tapped = c.isTapped();
                     c.setTapped(false);
                     if (!CombatUtil.canBlock(definedAttacker, c)) {

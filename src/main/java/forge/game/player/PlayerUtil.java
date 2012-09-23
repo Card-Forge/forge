@@ -20,13 +20,13 @@ package forge.game.player;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
+import forge.util.closures.Predicate;
 import forge.view.ButtonUtil;
 
 /**
@@ -56,9 +56,9 @@ public final class PlayerUtil {
         // Instead of hardcoded Ali from Cairo like cards, it is now a Keyword
         CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.getKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.");
-        list = list.filter(new CardListFilter() {
+        list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !c.isFaceDown();
             }
         });

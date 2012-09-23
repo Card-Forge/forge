@@ -27,7 +27,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.GameActionUtil;
@@ -55,6 +55,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -1165,9 +1166,9 @@ public final class AbilityFactoryChangeZone {
                 // Save a card as a default, in case we can't find anything suitable.
                 Card first = fetchList.get(0);
                 if (ZoneType.Battlefield.equals(destination)) {
-                    fetchList = fetchList.filter(new CardListFilter() {
+                    fetchList = fetchList.filter(new Predicate<Card>() {
                         @Override
-                        public boolean addCard(final Card c) {
+                        public boolean isTrue(final Card c) {
                             if (c.isType("Legendary")) {
                                 if (!AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, c.getName()).isEmpty()) {
                                     return false;
@@ -1177,9 +1178,9 @@ public final class AbilityFactoryChangeZone {
                         }
                     });
                     if (player.isHuman() && params.containsKey("GainControl")) {
-                        fetchList = fetchList.filter(new CardListFilter() {
+                        fetchList = fetchList.filter(new Predicate<Card>() {
                             @Override
-                            public boolean addCard(final Card c) {
+                            public boolean isTrue(final Card c) {
                                 if (!c.getSVar("RemAIDeck").equals("") || !c.getSVar("RemRandomDeck").equals("")) {
                                     return false;
                                 }
@@ -1210,8 +1211,8 @@ public final class AbilityFactoryChangeZone {
                     Player ai = AllZone.getComputerPlayer();
                     // Does AI need a land?
                     CardList hand = ai.getCardsIn(ZoneType.Hand);
-                    System.out.println("Lands in hand = " + hand.filter(CardListFilter.LANDS).size() + ", on battlefield = " + ai.getCardsIn(ZoneType.Battlefield).filter(CardListFilter.LANDS).size());
-                    if (hand.filter(CardListFilter.LANDS).size() == 0 && ai.getCardsIn(ZoneType.Battlefield).filter(CardListFilter.LANDS).size() < 4) {
+                    System.out.println("Lands in hand = " + hand.filter(CardPredicates.LANDS).size() + ", on battlefield = " + ai.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.LANDS).size());
+                    if (hand.filter(CardPredicates.LANDS).size() == 0 && ai.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.LANDS).size() < 4) {
                         boolean canCastSomething = false;
                         for (Card cardInHand : hand) {
                             canCastSomething |= ComputerUtil.payManaCost(cardInHand.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false);
@@ -1659,9 +1660,9 @@ public final class AbilityFactoryChangeZone {
             CardList aiPermanents = list.getController(AllZone.getComputerPlayer());
 
             // Don't blink cards that will die.
-            aiPermanents = aiPermanents.filter(new CardListFilter() {
+            aiPermanents = aiPermanents.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return !c.getSVar("Targeting").equals("Dies");
                 }
             });
@@ -1704,9 +1705,9 @@ public final class AbilityFactoryChangeZone {
                 }
                 // Blink permanents with ETB triggers
                 else if (sa.isAbility() && (sa.getPayCosts() != null) && AbilityFactory.playReusable(sa)) {
-                    aiPermanents = aiPermanents.filter(new CardListFilter() {
+                    aiPermanents = aiPermanents.filter(new Predicate<Card>() {
                         @Override
-                        public boolean addCard(final Card c) {
+                        public boolean isTrue(final Card c) {
                             if (c.getNumberOfCounters() > 0) {
                                 return false; // don't blink something with
                             }
@@ -1753,9 +1754,9 @@ public final class AbilityFactoryChangeZone {
                 return false;
             }
             list = list.getController(AllZone.getHumanPlayer());
-            list = list.filter(new CardListFilter() {
+            list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     for (Card aura : c.getEnchantedBy()) {
                         if (c.getOwner().isHuman() && aura.getController().isComputer()) {
                             return false;

@@ -23,7 +23,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.Command;
 import forge.Counters;
 import forge.GameActionUtil;
@@ -40,6 +40,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
+import forge.util.closures.Predicate;
 import forge.view.ButtonUtil;
 
 /**
@@ -136,10 +137,10 @@ class CardFactoryLands {
         else if (cardName.equals("Novijen, Heart of Progress")) {
             card.clearSpellKeepManaAbility();
 
-            final CardListFilter targets = new CardListFilter() {
+            final Predicate<Card> targets = new Predicate<Card>() {
 
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return AllZoneUtil.isCardInPlay(c) && c.isCreature()
                             && (c.getTurnInZone() == Singletons.getModel().getGameState().getPhaseHandler().getTurn());
                 }
@@ -249,7 +250,7 @@ class CardFactoryLands {
                                 }
                             } // selectCard()
                         }; // Input
-                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardListFilter.UNTAPPED)
+                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardPredicates.UNTAPPED)
                                 .size() < 2)) {
                             Singletons.getModel().getGameAction().sacrifice(card, null);
                             return;
@@ -296,7 +297,7 @@ class CardFactoryLands {
                     if (this.player.isComputer()) {
                         if (land.size() > 0) {
                             CardList tappedLand = new CardList(land);
-                            tappedLand = tappedLand.filter(CardListFilter.TAPPED);
+                            tappedLand = tappedLand.filter(CardPredicates.TAPPED);
                             // if any are tapped, sacrifice it
                             // else sacrifice random
                             if (tappedLand.size() > 0) {
@@ -377,7 +378,7 @@ class CardFactoryLands {
                 @Override
                 public void execute() {
                     CardList plains = AllZoneUtil.getPlayerLandsInPlay(card.getController());
-                    plains = plains.filter(CardListFilter.UNTAPPED);
+                    plains = plains.filter(CardPredicates.UNTAPPED);
 
                     if (this.player.isComputer()) {
                         if (plains.size() > 1) {
@@ -396,7 +397,7 @@ class CardFactoryLands {
                         }
                     } else { // this is the human resolution
                         final int[] paid = { 0 };
-                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardListFilter.UNTAPPED)
+                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardPredicates.UNTAPPED)
                                 .size() < 2)) {
                             Singletons.getModel().getGameAction().sacrifice(card, null);
                             return;

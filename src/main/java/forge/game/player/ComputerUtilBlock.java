@@ -22,13 +22,13 @@ import java.util.List;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Counters;
 import forge.GameEntity;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -455,9 +455,9 @@ public class ComputerUtilBlock {
             // than the attacker
             // Don't use blockers without First Strike or Double Strike if
             // attacker has it
-            usableBlockers = blockers.filter(new CardListFilter() {
+            usableBlockers = blockers.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     if ((attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike"))
                             && !(c.hasKeyword("First Strike") || c.hasKeyword("Double Strike"))) {
                         return false;

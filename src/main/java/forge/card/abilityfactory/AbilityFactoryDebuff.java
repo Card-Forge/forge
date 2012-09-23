@@ -27,7 +27,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.Command;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -44,6 +43,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -448,9 +448,9 @@ public final class AbilityFactoryDebuff {
         list = list.getTargetableCards(sa);
 
         if (!list.isEmpty()) {
-            list = list.filter(new CardListFilter() {
+            list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean addCard(final Card c) {
+                public boolean isTrue(final Card c) {
                     return c.hasAnyKeyword(kws); // don't add duplicate negative
                                                  // keywords
                 }
@@ -797,9 +797,9 @@ public final class AbilityFactoryDebuff {
         // TODO - add blocking situations here also
 
         // only count creatures that can attack
-        human = human.filter(new CardListFilter() {
+        human = human.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return CombatUtil.canAttack(c);
             }
         });

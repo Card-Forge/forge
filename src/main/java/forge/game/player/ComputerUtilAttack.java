@@ -24,7 +24,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Counters;
 import forge.GameEntity;
@@ -36,6 +35,7 @@ import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
 /**
@@ -164,9 +164,9 @@ public class ComputerUtilAttack {
      */
     public final CardList getPossibleAttackers(final CardList in) {
         CardList list = new CardList(in);
-        list = list.filter(new CardListFilter() {
+        list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return CombatUtil.canAttack(c);
             }
         });
@@ -186,9 +186,9 @@ public class ComputerUtilAttack {
      */
     public final CardList getPossibleBlockers(final CardList blockers, final CardList attackers) {
         CardList possibleBlockers = new CardList(blockers);
-        possibleBlockers = possibleBlockers.filter(new CardListFilter() {
+        possibleBlockers = possibleBlockers.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return canBlockAnAttacker(c, attackers);
             }
         });
@@ -841,9 +841,9 @@ public class ComputerUtilAttack {
      */
     public final int countExaltedBonus(final Player player) {
         CardList list = player.getCardsIn(ZoneType.Battlefield);
-        list = list.filter(new CardListFilter() {
+        list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return c.hasKeyword("Exalted");
             }
         });

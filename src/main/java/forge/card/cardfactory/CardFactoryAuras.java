@@ -26,7 +26,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
+import forge.CardPredicates;
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
@@ -41,6 +41,7 @@ import forge.control.input.Input;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -268,9 +269,9 @@ class CardFactoryAuras {
                         return false;
                     }
 
-                    final CardListFilter f = new CardListFilter() {
+                    final Predicate<Card> f = new Predicate<Card>() {
                         @Override
-                        public final boolean addCard(final Card c) {
+                        public final boolean isTrue(final Card c) {
                             return (c.getNetDefense() - c.getDamage()) <= 2;
                         }
                     };
@@ -421,7 +422,7 @@ class CardFactoryAuras {
                     // This includes creatures Animate Dead can't enchant once
                     // in play.
                     // The human may try to Animate them, the AI will not.
-                    return AllZoneUtil.getCardsIn(ZoneType.Graveyard).filter(CardListFilter.CREATURES);
+                    return AllZoneUtil.getCardsIn(ZoneType.Graveyard).filter(CardPredicates.CREATURES);
                 }
 
                 @Override

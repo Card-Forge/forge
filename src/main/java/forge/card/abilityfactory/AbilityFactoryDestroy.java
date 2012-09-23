@@ -26,7 +26,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Counters;
 import forge.Singletons;
@@ -42,6 +41,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -252,9 +252,9 @@ public class AbilityFactoryDestroy {
             }
             list = list.getNotKeyword("Indestructible");
             if (!AbilityFactory.playReusable(sa)) {
-                list = list.filter(new CardListFilter() {
+                list = list.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return (!c.hasKeyword("Undying") || c.getCounters(Counters.P1P1) > 0);
                     }
                 });
@@ -264,9 +264,9 @@ public class AbilityFactoryDestroy {
             // regeneration shield
             if (!noRegen) {
                 // TODO filter out things that might be tougher?
-                list = list.filter(new CardListFilter() {
+                list = list.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return ((c.getShield() == 0) && !ComputerUtil.canRegenerate(c));
                     }
                 });
@@ -392,9 +392,9 @@ public class AbilityFactoryDestroy {
             if (!noRegen) {
                 // TODO filter out things that could regenerate in response?
                 // might be tougher?
-                preferred = preferred.filter(new CardListFilter() {
+                preferred = preferred.filter(new Predicate<Card>() {
                     @Override
-                    public boolean addCard(final Card c) {
+                    public boolean isTrue(final Card c) {
                         return c.getShield() == 0;
                     }
                 });
@@ -860,15 +860,15 @@ public class AbilityFactoryDestroy {
         }
         humanlist = humanlist.getValidCards(valid.split(","), source.getController(), source);
         computerlist = computerlist.getValidCards(valid.split(","), source.getController(), source);
-        humanlist = humanlist.filter(new CardListFilter() {
+        humanlist = humanlist.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
             }
         });
-        computerlist = computerlist.filter(new CardListFilter() {
+        computerlist = computerlist.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
             }
         });
@@ -943,15 +943,15 @@ public class AbilityFactoryDestroy {
         humanlist = humanlist.getValidCards(valid.split(","), source.getController(), source);
         computerlist = computerlist.getValidCards(valid.split(","), source.getController(), source);
 
-        humanlist = humanlist.filter(new CardListFilter() {
+        humanlist = humanlist.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
             }
         });
-        computerlist = computerlist.filter(new CardListFilter() {
+        computerlist = computerlist.filter(new Predicate<Card>() {
             @Override
-            public boolean addCard(final Card c) {
+            public boolean isTrue(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
             }
         });

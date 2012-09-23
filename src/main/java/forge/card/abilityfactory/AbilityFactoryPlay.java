@@ -27,7 +27,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -46,6 +45,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
+import forge.util.closures.Predicate;
 /**
  * <p>
  * AbilityFactory_Copy class.
@@ -393,9 +393,9 @@ public final class AbilityFactoryPlay {
                     tgtCard = GuiUtils.chooseOne("Select a card to play", tgtCards);
                 } else {
                     // AI
-                    tgtCards = tgtCards.filter(new CardListFilter() {
+                    tgtCards = tgtCards.filter(new Predicate<Card>() {
                         @Override
-                        public boolean addCard(final Card c) {
+                        public boolean isTrue(final Card c) {
                             ArrayList<SpellAbility> spellAbilities = c.getBasicSpells();
                             ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
                             for (SpellAbility s : spellAbilities) {
