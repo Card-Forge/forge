@@ -248,6 +248,7 @@ public class CardFactory implements CardFactoryInterface {
                 }
                 if (c.isDoubleFaced()) {
                     c.setState(CardCharacteristicName.Transformed);
+                    c.setCurSetCode(cp.getEdition());
                 }
                 c.setImageFilename(CardUtil.buildFilename(c));
                 c.setState(CardCharacteristicName.Original);
