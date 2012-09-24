@@ -33,7 +33,7 @@ class CardFactoryEnchantments {
      * @param cardName
      * @return
      */
-    public static Card getCard(final Card card, final String cardName) {
+    public static void buildCard(final Card card, final String cardName) {
 
         if (cardName.equals("Bridge from Below")) {
             final SpellAbility spell = new SpellPermanent(card) {
@@ -290,8 +290,6 @@ class CardFactoryEnchantments {
             drawStepTrigger.setOverridingAbility(ability);
             card.addTrigger(drawStepTrigger);
         } // *************** END ************ END **************************
-
-        return card;
     }
 
 }

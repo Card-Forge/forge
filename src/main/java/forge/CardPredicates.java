@@ -18,6 +18,7 @@
 package forge;
 
 import forge.card.spellability.SpellAbility;
+import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.util.closures.Predicate;
 import forge.util.closures.PredicateString;
@@ -94,6 +95,16 @@ public final class CardPredicates {
         };
     }
     
+
+    public static Predicate<Card> possibleBlockers(final Card attacker) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean isTrue(final Card c) {
+                return (c.isCreature() && CombatUtil.canBlock(attacker, c));
+            }
+        };
+    }
+
     public static class Presets {
 
         /**

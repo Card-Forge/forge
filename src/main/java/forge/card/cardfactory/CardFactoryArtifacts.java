@@ -37,7 +37,7 @@ class CardFactoryArtifacts {
      * @param cardName
      * @return
      */
-    public static Card getCard(final Card card, final String cardName) {
+    public static void buildCard(final Card card, final String cardName) {
 
         if (cardName.equals("Sarpadian Empires, Vol. VII")) {
 
@@ -750,8 +750,6 @@ class CardFactoryArtifacts {
 
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
-
-         return card;
     }
 
 }

@@ -24,7 +24,7 @@ import forge.gui.deckeditor.controllers.CFilters;
 import forge.gui.deckeditor.views.VFilters;
 import forge.item.CardPrinted;
 import forge.util.closures.Predicate;
-import forge.util.closures.Predicate.ComparableOp;
+import forge.util.closures.PredicateInteger.ComparableOp;
 import forge.util.closures.PredicateString.StringOp;
 
 /** 

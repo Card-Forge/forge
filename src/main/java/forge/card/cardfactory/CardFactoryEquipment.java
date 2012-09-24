@@ -44,7 +44,7 @@ class CardFactoryEquipment {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCard(final Card card, final String cardName) {
+    public static void buildCard(final Card card, final String cardName) {
 
         // *************** START *********** START **************************
         if (cardName.equals("Blade of the Bloodchief")) {
@@ -100,7 +100,5 @@ class CardFactoryEquipment {
             final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
             card.addTrigger(etbTrigger);
         }
-
-        return card;
     }
 }

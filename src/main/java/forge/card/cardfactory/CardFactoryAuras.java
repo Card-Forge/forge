@@ -64,7 +64,7 @@ class CardFactoryAuras {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCard(final Card card, final String cardName) {
+    public static void buildCard(final Card card, final String cardName) {
 
         // *************** START *********** START **************************
         if (cardName.equals("Convincing Mirage") || cardName.equals("Phantasmal Terrain")) {
@@ -580,8 +580,6 @@ class CardFactoryAuras {
                 sa.setMultiKickerManaCost(k[1]);
             }
         }
-
-        return card;
     }
 
 }

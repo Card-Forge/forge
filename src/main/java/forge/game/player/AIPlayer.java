@@ -24,7 +24,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
 import forge.CardPredicates;
-import forge.CardPredicates.Presets;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;

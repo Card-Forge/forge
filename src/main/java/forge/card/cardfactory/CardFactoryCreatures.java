@@ -1492,7 +1492,7 @@ public class CardFactoryCreatures {
 //    private static void getCard_(final Card card, final String cardName) {
 //    }
 
-    public static Card getCard(final Card card, final String cardName) {
+    public static void buildCard(final Card card, final String cardName) {
 
         if (cardName.equals("Force of Savagery")) {
             getCard_ForceOfSavagery(card, cardName);
@@ -1611,8 +1611,6 @@ public class CardFactoryCreatures {
 
             }
         } // level up
-
-        return card;
     }
 
     /**

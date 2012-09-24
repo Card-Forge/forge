@@ -75,7 +75,7 @@ public class CardFactorySorceries {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCard(final Card card, final String cardName) {
+    public static void buildCard(final Card card, final String cardName) {
 
         // *************** START *********** START **************************
         if (cardName.equals("Brilliant Ultimatum")) {
@@ -1689,7 +1689,5 @@ public class CardFactorySorceries {
 
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
-
-        return card;
     } // getCard
 }

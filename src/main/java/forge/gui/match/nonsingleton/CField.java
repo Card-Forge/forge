@@ -24,11 +24,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
-import com.google.code.jyield.Generator;
-import com.google.code.jyield.YieldUtils;
 
 import forge.AllZone;
 import forge.Card;
@@ -281,14 +279,8 @@ public class CField implements ICDoc {
          */
         @Override
         public void actionPerformed(final ActionEvent e) {
-            Generator<Card> c = YieldUtils.toGenerator(this.getCardsAsIterable());
-
-            if (AllZone.getNameChanger().shouldChangeCardName()) {
-                c = AllZone.getNameChanger().changeCard(c);
-            }
-
-            final Iterable<Card> myIterable = YieldUtils.toIterable(c);
-            final ArrayList<Card> choices = YieldUtils.toArrayList(myIterable);
+            final List<Card> src = this.getCardsAsIterable();
+            final List<Card> choices = AllZone.getNameChanger().shouldChangeCardName() ? AllZone.getNameChanger().fnTransformCard.applyToIterable(src) : getCardsAsIterable();
 
             final ArrayList<Card> choices2 = new ArrayList<Card>();
 
@@ -319,7 +311,7 @@ public class CField implements ICDoc {
             }
         }
 
-        protected Iterable<Card> getCardsAsIterable() {
+        protected List<Card> getCardsAsIterable() {
             return this.zone.getCards();
         }
 
@@ -348,7 +340,7 @@ public class CField implements ICDoc {
                 private static final long serialVersionUID = 8120331222693706164L;
 
                 @Override
-                protected Iterable<Card> getCardsAsIterable() {
+                protected List<Card> getCardsAsIterable() {
                     return CardFactoryUtil.getExternalZoneActivationCards(AllZone.getHumanPlayer());
                 }
 
@@ -365,7 +357,7 @@ public class CField implements ICDoc {
                 private static final long serialVersionUID = 8120331222693706164L;
 
                 @Override
-                protected Iterable<Card> getCardsAsIterable() {
+                protected List<Card> getCardsAsIterable() {
                     return CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer());
                 }
 

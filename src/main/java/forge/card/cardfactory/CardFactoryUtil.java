@@ -135,7 +135,7 @@ public class CardFactoryUtil {
             // Add all cost of all auras with the same controller
             final CardList auras = new CardList(card.getEnchantedBy());
             auras.getController(card.getController());
-            curCMC += auras.getTotalConvertedManaCost() + auras.size();
+            curCMC += CardListUtil.sumCMC(auras) + auras.size();
 
             if (curCMC >= bigCMC) {
                 bigCMC = curCMC;
@@ -2254,7 +2254,7 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("TopOfLibraryCMC")) {
             if (players.size() > 0) {
-                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(ZoneType.Library, 1).getTotalConvertedManaCost(),
+                return CardFactoryUtil.doXMath(CardListUtil.sumCMC(players.get(0).getCardsIn(ZoneType.Library, 1)),
                         m, source);
             }
         }
@@ -2477,7 +2477,7 @@ public class CardFactoryUtil {
                     list.add(AllZoneUtil.getCardState((Card) o));
                 }
             }
-            return list.getTotalCreaturePower();
+            return CardListUtil.sumAttack(list);
         }
 
         if (l[0].contains("RememberedSize")) {
@@ -2673,7 +2673,7 @@ public class CardFactoryUtil {
         // Count$TopOfLibraryCMC
         if (sq[0].contains("TopOfLibraryCMC")) {
             final CardList topcard = cardController.getCardsIn(ZoneType.Library, 1);
-            return CardFactoryUtil.doXMath(topcard.getTotalConvertedManaCost(), m, c);
+            return CardFactoryUtil.doXMath(CardListUtil.sumCMC(topcard), m, c);
         }
 
         // Count$EnchantedControllerCreatures
@@ -3594,7 +3594,7 @@ public class CardFactoryUtil {
             temp.setOwner(controller);
             temp.setToken(true);
             CardFactoryUtil.parseKeywords(temp, temp.getName());
-            temp = CardFactoryUtil.postFactoryKeywords(temp);
+            CardFactoryUtil.postFactoryKeywords(temp);
             Singletons.getModel().getGameAction().moveToPlay(temp);
             list.add(temp);
         }
@@ -4021,7 +4021,7 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card postFactoryKeywords(final Card card) {
+    public static void postFactoryKeywords(final Card card) {
         // this function should handle any keywords that need to be added after
         // a spell goes through the factory
         // Cards with Cycling abilities
@@ -4774,7 +4774,6 @@ public class CardFactoryUtil {
             card.addReplacementEffect(re);
         }
 
-        return card;
     }
 
     public static void setupETBReplacementAbility(SpellAbility sa) {

@@ -27,6 +27,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
+import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Command;
 import forge.GameActionUtil;
@@ -382,6 +383,10 @@ public class AbilityFactoryPump {
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
+        
+        Predicate<Card> opBlockers = CardPredicates.possibleBlockers(card);
+        CardList cardsCanBlock = AllZoneUtil.getCreaturesInPlay(human).filter(opBlockers);
+        
         final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Fear")
                 || keyword.endsWith("Intimidate") || keyword.endsWith("Shadow"));
         final boolean combatRelevant = (keyword.endsWith("First Strike")
@@ -391,7 +396,7 @@ public class AbilityFactoryPump {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
-                    || AllZoneUtil.getCreaturesInPlay(human).getPossibleBlockers(card).isEmpty()) {
+                    || cardsCanBlock.isEmpty()) {
                 return false;
             }
         } else if (keyword.endsWith("Flying")) {
@@ -406,8 +411,7 @@ public class AbilityFactoryPump {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
-                    || AllZoneUtil.getCreaturesInPlay(human).getNotKeyword("Flying").getNotKeyword("Reach")
-                        .getPossibleBlockers(card).isEmpty()) {
+                    || cardsCanBlock.getNotKeyword("Flying").getNotKeyword("Reach").isEmpty()) {
                 return false;
             }
         } else if (keyword.endsWith("Horsemanship")) {
@@ -421,8 +425,7 @@ public class AbilityFactoryPump {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
-                    || AllZoneUtil.getCreaturesInPlay(human).getNotKeyword("Horsemanship")
-                        .getPossibleBlockers(card).isEmpty()) {
+                    || cardsCanBlock.getNotKeyword("Horsemanship").isEmpty()) {
                 return false;
             }
         } else if (keyword.endsWith("Haste")) {
@@ -460,7 +463,7 @@ public class AbilityFactoryPump {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)
-                    || AllZoneUtil.getCreaturesInPlay(human).getPossibleBlockers(card).isEmpty()) {
+                    || cardsCanBlock.isEmpty()) {
                 return false;
             }
         } else if (keyword.equals("Double Strike")) {
@@ -472,21 +475,20 @@ public class AbilityFactoryPump {
         } else if (keyword.startsWith("Rampage")) {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                    || (AllZoneUtil.getCreaturesInPlay(human).getPossibleBlockers(card).size() < 2)) {
+                    || cardsCanBlock.size() < 2) {
                 return false;
             }
         } else if (keyword.startsWith("Flanking")) {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                    || AllZoneUtil.getCreaturesInPlay(human).getPossibleBlockers(card)
-                        .getNotKeyword("Flanking").isEmpty()) {
+                    || cardsCanBlock.getNotKeyword("Flanking").isEmpty()) {
                 return false;
             }
         } else if (keyword.startsWith("Trample")) {
             if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || !CombatUtil.canBeBlocked(card)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                    || AllZoneUtil.getCreaturesInPlay(human).getPossibleBlockers(card).isEmpty()
+                    || cardsCanBlock.isEmpty()
                     || card.getNetCombatDamage() + attack <= 1) {
                 return false;
             }
@@ -561,7 +563,7 @@ public class AbilityFactoryPump {
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
                     || AllZoneUtil.getPlayerLandsInPlay(human).getType("Island").isEmpty()
-                    || AllZoneUtil.getCreaturesInPlay(human).getPossibleBlockers(card).isEmpty()) {
+                    || cardsCanBlock.isEmpty()) {
                 return false;
             }
         } else if (keyword.equals("Swampwalk")) {
@@ -569,7 +571,7 @@ public class AbilityFactoryPump {
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
                     || AllZoneUtil.getPlayerLandsInPlay(human).getType("Swamp").isEmpty()
-                    || AllZoneUtil.getCreaturesInPlay(human).getPossibleBlockers(card).isEmpty()) {
+                    || cardsCanBlock.isEmpty()) {
                 return false;
             }
         } else if (keyword.equals("Mountainwalk")) {
@@ -577,7 +579,7 @@ public class AbilityFactoryPump {
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
                     || AllZoneUtil.getPlayerLandsInPlay(human).getType("Mountain").isEmpty()
-                    || AllZoneUtil.getCreaturesInPlay(human).getPossibleBlockers(card).isEmpty()) {
+                    || cardsCanBlock.isEmpty()) {
                 return false;
             }
         } else if (keyword.equals("Forestwalk")) {
@@ -585,7 +587,7 @@ public class AbilityFactoryPump {
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
                     || AllZoneUtil.getPlayerLandsInPlay(human).getType("Forest").isEmpty()
-                    || AllZoneUtil.getCreaturesInPlay(human).getPossibleBlockers(card).isEmpty()) {
+                    || cardsCanBlock.isEmpty()) {
                 return false;
             }
         }

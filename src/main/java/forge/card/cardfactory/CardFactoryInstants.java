@@ -60,7 +60,7 @@ public class CardFactoryInstants {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCard(final Card card, final String cardName) {
+    public static void buildCard(final Card card, final String cardName) {
 
         //*************** START *********** START **************************
         if (cardName.equals("Hurkyl's Recall")) {
@@ -564,8 +564,6 @@ public class CardFactoryInstants {
 
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
-
-        return card;
     } // getCard
 
 } // end class CardFactory_Instants

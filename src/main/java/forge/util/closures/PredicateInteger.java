@@ -25,6 +25,28 @@ package forge.util.closures;
  */
 public abstract class PredicateInteger<T> extends Predicate<T> {
 
+    /**
+     * Possible operators for comparables.
+     * 
+     * @author Max
+     * 
+     */
+    public enum ComparableOp {
+    
+        /** The EQUALS. */
+        EQUALS,
+        /** The NO t_ equals. */
+        NOT_EQUALS,
+        /** The GREATE r_ than. */
+        GREATER_THAN,
+        /** The LES s_ than. */
+        LESS_THAN,
+        /** The G t_ o r_ equal. */
+        GT_OR_EQUAL,
+        /** The L t_ o r_ equal. */
+        LT_OR_EQUAL
+    }
+
     /** The operator. */
     private final ComparableOp operator;
 

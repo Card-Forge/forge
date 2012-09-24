@@ -65,28 +65,6 @@ public abstract class Predicate<T> {
     }
 
     /**
-     * Possible operators for comparables.
-     * 
-     * @author Max
-     * 
-     */
-    public enum ComparableOp {
-
-        /** The EQUALS. */
-        EQUALS,
-        /** The NO t_ equals. */
-        NOT_EQUALS,
-        /** The GREATE r_ than. */
-        GREATER_THAN,
-        /** The LES s_ than. */
-        LESS_THAN,
-        /** The G t_ o r_ equal. */
-        GT_OR_EQUAL,
-        /** The L t_ o r_ equal. */
-        LT_OR_EQUAL
-    }
-
-    /**
      * This is the main method, predicates were made for.
      * 
      * @param subject
@@ -158,34 +136,6 @@ public abstract class Predicate<T> {
             for (final U c : source) {
                 if (this.isTrue(accessor.apply(c))) {
                     result.add(c);
-                }
-            }
-        }
-        return result;
-    }
-
-    /**
-     * Select.
-     * 
-     * @param <U>
-     *            the generic type
-     * @param <V>
-     *            the value type
-     * @param source
-     *            the source
-     * @param cardAccessor
-     *            the card accessor
-     * @param transformer
-     *            the transformer
-     * @return the list
-     */
-    public final <U, V> List<V> select(final Iterable<U> source, final Lambda1<T, U> cardAccessor,
-            final Lambda1<V, U> transformer) {
-        final ArrayList<V> result = new ArrayList<V>();
-        if (source != null) {
-            for (final U c : source) {
-                if (this.isTrue(cardAccessor.apply(c))) {
-                    result.add(transformer.apply(c));
                 }
             }
         }
@@ -349,38 +299,6 @@ public abstract class Predicate<T> {
                 trueList.add(c);
             } else {
                 falseList.add(c);
-            }
-        }
-    }
-
-    /**
-     * Split.
-     * 
-     * @param <U>
-     *            the generic type
-     * @param <V>
-     *            the value type
-     * @param source
-     *            the source
-     * @param cardAccessor
-     *            the card accessor
-     * @param transformer
-     *            the transformer
-     * @param trueList
-     *            the true list
-     * @param falseList
-     *            the false list
-     */
-    public final <U, V> void split(final Iterable<U> source, final Lambda1<T, U> cardAccessor,
-            final Lambda1<V, U> transformer, final List<V> trueList, final List<V> falseList) {
-        if (source == null) {
-            return;
-        }
-        for (final U c : source) {
-            if (this.isTrue(cardAccessor.apply(c))) {
-                trueList.add(transformer.apply(c));
-            } else {
-                falseList.add(transformer.apply(c));
             }
         }
     }

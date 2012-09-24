@@ -43,7 +43,7 @@ public class CardFactoryPlaneswalkers {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCard(final Card card, final String cardName) {
+    public static void buildCard(final Card card, final String cardName) {
         // All Planeswalkers set their loyality in the beginning
         if (card.getBaseLoyalty() > 0) {
             Command cmd = CardFactoryUtil.entersBattleFieldWithCounters(card, Counters.LOYALTY, card.getBaseLoyalty());
@@ -58,8 +58,6 @@ public class CardFactoryPlaneswalkers {
         card.setSVar("DamagePWX", "ReplaceCount$DamageAmount");
         card.setSVar("DamagePWAI", "ReplaceCount$DamageAmount/NMinus.DamagePWY");
         card.setSVar("DamagePWY", "Count$YourLifeTotal");
-
-        return card;
     }
 
 } // end class CardFactoryPlaneswalkers

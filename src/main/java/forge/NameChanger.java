@@ -24,10 +24,6 @@ import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-import com.google.code.jyield.Generator;
-import com.google.code.jyield.YieldUtils;
-import com.google.code.jyield.Yieldable;
-
 import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
@@ -82,54 +78,13 @@ public class NameChanger {
         this.changeCardName = b;
     }
 
-    /**
-     * This change's the inputGenerator's Card instances in place, and returns a
-     * generator of those same changed instances.
-     * 
-     * TODO Should this method return void, because it side effects the contents
-     * of its inputGenerator?
-     * 
-     * @param inputGenerator
-     *            a Generator of Card objects
-     * @return a Generator of side-effected Card objects
-     */
-    public final Generator<Card> changeCard(final Generator<Card> inputGenerator) {
-
-        // Create a new Generator by applying a transform to the
-        // inputGenerator.
-
-        final Lambda1<Card, Card> transform = new Lambda1<Card, Card>() {
-            @Override
-            public Card apply(final Card toChange) {
-                return NameChanger.this.changeCard(toChange);
-            };
+    public final Lambda1<Card, Card> fnTransformCard = new Lambda1<Card, Card>() {
+        @Override
+        public Card apply(final Card toChange) {
+            return NameChanger.this.changeCard(toChange);
         };
-
-        return transformGenerator(transform, inputGenerator);
-    }
-
-    public static <T> Generator<T> transformGenerator(final Lambda1<T, T> transform, final Generator<T> inputGenerator)
-    {
-        Generator<T> result = new Generator<T>() {
-
-            @Override
-            public void generate(final Yieldable<T> outputYield) {
-
-                Yieldable<T> inputYield = new Yieldable<T>() {
-                    @Override
-                    public void yield(final T input) {
-                        outputYield.yield(transform.apply(input));
-                    }
-                };
-
-                inputGenerator.generate(inputYield);
-            }
-
-        };
-
-        return result;
-    }
-
+    };    
+    
     // changes card name, getText(), and all SpellAbility getStackDescription()
     // and toString()
     /**
@@ -199,7 +154,7 @@ public class NameChanger {
      */
     public final CardList changeCardsIfNeeded(CardList list) {
         if (this.shouldChangeCardName()) {
-            list = new CardList(this.changeCard(YieldUtils.toGenerator(list)));
+            list = new CardList(fnTransformCard.applyToIterable(list));
         }
         return list;
     }
