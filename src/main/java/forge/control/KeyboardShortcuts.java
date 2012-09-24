@@ -1,6 +1,7 @@
 package forge.control;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,8 +42,6 @@ public class KeyboardShortcuts {
         final JComponent c = Singletons.getView().getFrame().getLayeredPane();
         final InputMap im = c.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         final ActionMap am = c.getActionMap();
-
-        //final ForgePreferences fp = Singletons.getModel().getPreferences();
 
         List<Shortcut> list = new ArrayList<Shortcut>();
 
@@ -132,7 +131,7 @@ public class KeyboardShortcuts {
      */
     public static class Shortcut {
         /** */
-        private final FPref prefkey;
+        private final FPref prefkeys;
         /** */
         private final String description;
         /** */
@@ -160,7 +159,7 @@ public class KeyboardShortcuts {
         public Shortcut(final FPref prefkey0, final String description0,
                 final Action handler0, final ActionMap am0, final InputMap im0) {
 
-            prefkey = prefkey0;
+            prefkeys = prefkey0;
             description = description0;
             handler = handler0;
             actionMap = am0;
@@ -178,16 +177,18 @@ public class KeyboardShortcuts {
          * @return {@link java.lang.String}
          */
         public FPref getPrefKey() {
-            return prefkey;
+            return prefkeys;
         }
 
         /** */
         public void attach() {
             detach();
-            str = Singletons.getModel().getPreferences().getPref(prefkey);
-            key = KeyStroke.getKeyStroke(Integer.valueOf(str), 0);
+            str = Singletons.getModel().getPreferences().getPref(prefkeys);
+            key = assembleKeystrokes(str.split(" "));
 
+            // Attach key stroke to input map...
             inputMap.put(key, str);
+            // ...then attach actionListener to action map
             actionMap.put(str, handler);
         }
 
@@ -198,13 +199,43 @@ public class KeyboardShortcuts {
         }
     } // End class Shortcut
 
+    private static KeyStroke assembleKeystrokes(final String[] keys0) {
+        int[] inputEvents = new int[2];
+        int modifier = 0;
+        int keyEvent = 0;
+
+        // If CTRL or SHIFT is pressed, it must be passed as a modifier,
+        // in the form of an input event object. So, first test if these were pressed.
+        // ALT shortcuts will be ignored.
+        for (final String s : keys0) {
+            if (s.equals("16")) { inputEvents[0] = 16; }
+            else if (s.equals("17")) { inputEvents[1] = 17; }
+            else { keyEvent = Integer.valueOf(s); }
+        }
+
+        // Then, convert to InputEvent.
+        if (inputEvents[0] == 16 && inputEvents[0] != 17) {
+            System.out.println("SHIFT_DOWN_MASK modifier added.");
+            modifier = InputEvent.SHIFT_DOWN_MASK;
+        }
+        else if (inputEvents[0] != 16 && inputEvents[1] == 17) {
+            System.out.println("CTRL_DOWN_MASK modifier added.");
+            modifier = InputEvent.CTRL_DOWN_MASK;
+        }
+        else if (inputEvents[0] == 16 && inputEvents[1] == 17) {
+            modifier = InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK;
+        }
+
+        return KeyStroke.getKeyStroke(keyEvent, modifier);
+    }
+
     /**
-     * - Adds keycode to list stored in name of a text field. - Code is not
-     * added if already in list. - Backspace removes last code in list. - Sets
-     * text of text field with character equivalent of keycodes.
+     * - Adds keycode to list stored in name of a text field.
+     * - Code is not added if already in list.
+     * - Backspace removes last code in list.
+     * - Sets text of text field with character equivalent of keycodes.
      * 
-     * @param e
-     *            &emsp; KeyEvent
+     * @param e &emsp; KeyEvent
      */
     public static void addKeyCode(final KeyEvent e) {
         final KeyboardShortcutField ksf = (KeyboardShortcutField) e.getSource();
