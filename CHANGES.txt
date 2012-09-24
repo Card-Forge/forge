@@ -1,9 +1,11 @@
-Forge Beta: 0#-0#-2012 ver 1.2.14
+Forge Beta: 09-24-2012 ver 1.2.14
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-11### cards in total.
+11188 cards in total.
 
+
+Multiple keyboard shortcut support added for CTRL and SHIFT keys. Shortcuts using ALT will not work and won't be supported. Keyboard shortcut system should be complete.
 
 The Forge sealed deck mode has undergone significant changes. You can find these in the 1.2.14 beta and later versions. Instead of a single sealed deck match, you can now choose a 1-5 round gauntlet-style tournament where you will face increasingly difficult (probably) opponent decks. You can also choose to use starter packs instead of boosters in the block mode, choose to use 3-12 boosters instead of the default 6 in the full cardpool and custom (cube) modes, and so on.
 
@@ -284,11 +286,42 @@ Fixes/Features:
 - refactor CardList to use Predicates and have less methods (to replace it later with pure List<Card>) and perform any special actions (filtering, cmc calculation, max creture power, etc) with predicates
 - cleanup
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated a few AI SVars.
+- Little AI tweak in AF Animate.
+- Added a medium version of the Darkseid deck.
+- Improvements of AF Pump AI.
+- Fixed Szadek, Lord of Secrets.
+- remove unused imports
+- RtR: Fixed MustBeBlocked SVar of Vraska the Unseen.
+- RtR: Merged revision(s) 17000-17040 from trunk/res/cardsfolder
+- Fixed some FindBugs results.
+- fix for missing image of double-faced cards
+- Cleanup of EvaluateCreature.
+- Lambdas: added applyToIterable (mass coversion), removed old copyright mentioning Braids (no reasons to copyright 3 trivial files)
+- Fixed extra text on Twinblade Slasher
+- Multiple keyboard shortcut support added for CTRL and SHIFT keys.
+- Shortcuts using ALT will not work and won't be supported.
+- Keyboard shortcut system should be complete.
+- Minor updates to finalize keyboard shortcut class.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Doublestrike
+Hellfish
+Marc
+Max
+Nordos
+RumbleBBU
+Slapshot5
+Sloth
+Sol
+Torridus
+ZzzzSleep
+Chris H
 
 
 Added the following cards to the Return to Ravnica branch (These cards are not yet available in this shapshot/beta build):
@@ -318,8 +351,8 @@ Crosstown Courier
 Cyclonic Rift
 Daggerdrome Imp
 Dark Revenant
-Deadbridge Goliath
 Dead Reveler
+Deadbridge Goliath
 Dramatic Rescue
 Dreadbore
 Dreg Mangler
@@ -360,6 +393,7 @@ Necropolis Regent
 Niv-Mizzet, Dracogenius
 Ogre Jailbreaker
 Palisade Giant
+Perilous Shadow
 Phantom General
 Precinct Captain
 Psychic Spiral
@@ -376,6 +410,7 @@ Runewing
 Savage Surge
 Search the City
 Selesnya Guildgate
+Sewer Shambler
 Skull Rend
 Skyline Predator
 Slime Molding
@@ -384,6 +419,7 @@ Sluiceway Scorpion
 Slum Reaper
 Soulsworn Spirit
 Sphinx's Revelation
+Stab Wound
 Stealer of Secrets
 Sunspire Griffin
 Supreme Verdict
