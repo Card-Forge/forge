@@ -248,8 +248,8 @@ public class CardFactory implements CardFactoryInterface {
                 }
                 if (c.isDoubleFaced()) {
                     c.setState(CardCharacteristicName.Transformed);
-                    c.setCurSetCode(cp.getEdition());
                 }
+                c.setCurSetCode(cp.getEdition());
                 c.setImageFilename(CardUtil.buildFilename(c));
                 c.setState(CardCharacteristicName.Original);
             }
@@ -260,19 +260,20 @@ public class CardFactory implements CardFactoryInterface {
     }
 
     protected Card getCard2(final Iterable<String> script, final Player owner) {
-        // o should be Card object
-        final Card o = CardReader.readCard(script);
-        o.setOwner(owner);
-        return buildAbilities(o);
+        final Card card = CardReader.readCard(script);
+        card.setOwner(owner);
+        buildAbilities(card);
+        return card;
     }
 
     public static Card getCard2(final Card o, final Player owner) {
         final Card copy = CardFactoryUtil.copyStats(o);
         copy.setOwner(owner);
-        return buildAbilities(copy);
+        buildAbilities(copy);
+        return copy;
     }
 
-    private static Card buildAbilities(final Card card) {
+    private static void buildAbilities(final Card card) {
         final String cardName = card.getName();
 
         if (!card.isCardColorsOverridden()) {
@@ -306,27 +307,27 @@ public class CardFactory implements CardFactoryInterface {
 
         // ******************************************************************
         // ************** Link to different CardFactories *******************
-        Card card2 = null;
+
         if (card.isCreature()) {
-            card2 = CardFactoryCreatures.getCard(card, cardName);
+            CardFactoryCreatures.buildCard(card, cardName);
         } else if (card.isAura()) {
-            card2 = CardFactoryAuras.getCard(card, cardName);
+            CardFactoryAuras.buildCard(card, cardName);
         } else if (card.isEquipment()) {
-            card2 = CardFactoryEquipment.getCard(card, cardName);
+            CardFactoryEquipment.buildCard(card, cardName);
         } else if (card.isPlaneswalker()) {
-            card2 = CardFactoryPlaneswalkers.getCard(card, cardName);
+            CardFactoryPlaneswalkers.buildCard(card, cardName);
         } else if (card.isLand()) {
-            card2 = CardFactoryLands.getCard(card, cardName);
+            CardFactoryLands.buildCard(card, cardName);
         } else if (card.isInstant()) {
-            card2 = CardFactoryInstants.getCard(card, cardName);
+            CardFactoryInstants.buildCard(card, cardName);
         } else if (card.isSorcery()) {
-            card2 = CardFactorySorceries.getCard(card, cardName);
+            CardFactorySorceries.buildCard(card, cardName);
         } else if (card.isEnchantment()) {
-            card2 = CardFactoryEnchantments.getCard(card, cardName);
+            CardFactoryEnchantments.buildCard(card, cardName);
         } else if (card.isArtifact()) {
-            card2 = CardFactoryArtifacts.getCard(card, cardName);
+            CardFactoryArtifacts.buildCard(card, cardName);
         }
 
-        return CardFactoryUtil.postFactoryKeywords(card2 != null ? card2 : card);
+        CardFactoryUtil.postFactoryKeywords(card);
     } // getCard2
 } // end class AbstractCardFactory
