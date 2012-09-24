@@ -427,6 +427,7 @@ public class AbilityFactoryPump {
             }
         } else if (keyword.endsWith("Haste")) {
             if (!card.hasSickness() || ph.isPlayerTurn(human) || card.isTapped()
+                    || card.getNetCombatDamage() <= 0
                     || card.hasKeyword("CARDNAME can attack as though it had haste.")
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || !CombatUtil.canAttackNextTurn(card)) {

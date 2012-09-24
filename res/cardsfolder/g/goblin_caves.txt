@@ -3,10 +3,10 @@ ManaCost:1 R R
 Types:Enchantment Aura
 Text:no text
 K:Enchant land
-A:SP$ Attach | Cost$ 1 R R | ValidTgts$ Land | AILogic$ Pump
+A:SP$ Attach | Cost$ 1 R R | ValidTgts$ Land | AITgts$ Mountain.Basic | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.Goblin | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ If enchanted land is a basic Mountain, Goblin creatures get +0/+2.
 SVar:X:Count$Valid Land.AttachedBy+Basic+Mountain
-SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_caves.jpg

@@ -3,10 +3,9 @@ ManaCost:1 GU
 Types:Enchantment Aura
 Text:no text
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 GU | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | Cost$ 1 GU | ValidTgts$ Creature | AITgts$ Card.Blue,Card.Green | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Green | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ As long as enchanted creature is green, it gets +1/+1 and has vigilance.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Blue | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | Description$ As long as enchanted creature is blue, it gets +1/+1 and has flying.
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/favor_of_the_overbeing.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/151.jpg

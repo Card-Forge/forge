@@ -43,6 +43,7 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.game.phase.CombatUtil;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -553,6 +554,121 @@ public class AbilityFactoryAttach {
 
         return AbilityFactoryAttach.acceptableChoice(c, mandatory);
     }
+    
+    /**
+     * Contains useful keyword.
+     * 
+     * @param keywords
+     *            the keywords
+     * @param card
+     *            the card
+     * @param sa SpellAbility
+     * @return true, if successful
+     */
+    public static boolean containsUsefulKeyword(final ArrayList<String> keywords, final Card card, final SpellAbility sa) {
+        for (final String keyword : keywords) {
+            if (isUsefulAttachKeyword(keyword, card, sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Checks if is useful keyword.
+     * 
+     * @param keyword
+     *            the keyword
+     * @param card
+     *            the card
+     * @param sa SpellAbility
+     * @return true, if is useful keyword
+     */
+    public static boolean isUsefulAttachKeyword(final String keyword, final Card card, final SpellAbility sa) {
+        final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
+        final Player human = AllZone.getHumanPlayer();
+        if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
+            return false;
+        }
+        final boolean evasive = (keyword.endsWith("Unblockable") || keyword.equals("Fear")
+                || keyword.equals("Intimidate") || keyword.equals("Shadow")
+                || keyword.equals("Flying") || keyword.equals("Horsemanship")
+                || keyword.endsWith("walk"));
+        // give evasive keywords to creatures that can or do attack
+        if (evasive) {
+            if (card.getNetCombatDamage() <= 0
+                    || !CombatUtil.canAttackNextTurn(card)
+                    || !CombatUtil.canBeBlocked(card)) {
+                return false;
+            }
+        } else if (keyword.equals("Haste")) {
+            if (!card.hasSickness() || ph.isPlayerTurn(human) || card.isTapped()
+                    || card.getNetCombatDamage() <= 0
+                    || card.hasKeyword("CARDNAME can attack as though it had haste.")
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                    || !CombatUtil.canAttackNextTurn(card)) {
+                return false;
+            }
+        } else if (keyword.endsWith("Indestructible")) {
+            return true;
+        } else if (keyword.endsWith("Deathtouch") || keyword.endsWith("Wither")) {
+            if (card.getNetCombatDamage() <= 0
+                    || ((!CombatUtil.canBeBlocked(card) || !CombatUtil.canAttackNextTurn(card)) 
+                            && !CombatUtil.canBlock(card, true))) {
+                return false;
+            }
+        } else if (keyword.equals("Double Strike") || keyword.equals("Lifelink")) {
+            if (card.getNetCombatDamage() <= 0
+                    || (!CombatUtil.canAttackNextTurn(card) && !CombatUtil.canBlock(card, true))) {
+                return false;
+            }
+        } else if (keyword.equals("First Strike")) {
+            if (card.getNetCombatDamage() <= 0 || card.hasKeyword("Double Strike")) {
+                return false;
+            }
+        } else if (keyword.startsWith("Flanking")) {
+            if (card.getNetCombatDamage() <= 0
+                    || !CombatUtil.canAttackNextTurn(card)
+                    || !CombatUtil.canBeBlocked(card)) {
+                return false;
+            }
+        } else if (keyword.startsWith("Bushido")) {
+            if ((!CombatUtil.canBeBlocked(card) || !CombatUtil.canAttackNextTurn(card))
+                    && !CombatUtil.canBlock(card, true)) {
+                return false;
+            }
+        } else if (keyword.equals("Trample")) {
+            if (card.getNetCombatDamage() <= 1
+                    || !CombatUtil.canBeBlocked(card) 
+                    || !CombatUtil.canAttackNextTurn(card)) {
+                return false;
+            }
+        } else if (keyword.equals("Infect")) {
+            if (card.getNetCombatDamage() <= 0
+                    || !CombatUtil.canAttackNextTurn(card)) {
+                return false;
+            }
+        } else if (keyword.equals("Vigilance")) {
+            if (card.getNetCombatDamage() <= 0
+                    || !CombatUtil.canAttackNextTurn(card)
+                    || !CombatUtil.canBlock(card, true)) {
+                return false;
+            }
+        } else if (keyword.equals("Reach")) {
+            if (card.hasKeyword("Flying") || !CombatUtil.canBlock(card, true)) {
+                return false;
+            }
+        } else if (keyword.endsWith("CARDNAME can block an additional creature.")) {
+            if (!CombatUtil.canBlock(card, true)) {
+                return false;
+            }
+        } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
+            if (card.hasKeyword("Shroud") || card.hasKeyword("Hexproof")) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * Attach ai pump preference.
@@ -633,7 +749,13 @@ public class AbilityFactoryAttach {
 
                 grantingAbilities |= params.containsKey("AddAbility");
 
-                final String kws = params.get("AddKeyword");
+                String kws = params.get("AddKeyword");
+                if (kws != null) {
+                    for (final String kw : kws.split(" & ")) {
+                        keywords.add(kw);
+                    }
+                }
+                kws = params.get("AddHiddenKeyword");
                 if (kws != null) {
                     for (final String kw : kws.split(" & ")) {
                         keywords.add(kw);
@@ -654,31 +776,14 @@ public class AbilityFactoryAttach {
             });
         }
 
-        else if ((totToughness == 0) && (totPower == 0)) {
-            // Just granting Keywords don't assign stacking Keywords
-            final Iterator<String> it = keywords.iterator();
-            while (it.hasNext()) {
-                final String key = it.next();
-                if (CardUtil.isStackingKeyword(key)) {
-                    it.remove();
+        //only add useful keywords unless P/T bonus is significant
+        if (totToughness + totPower < 4 && !keywords.isEmpty()) {
+            prefList = prefList.filter(new Predicate<Card>() {
+                @Override
+                public boolean isTrue(final Card c) {
+                    return containsUsefulKeyword(keywords, c, sa);
                 }
-            }
-            if (!keywords.isEmpty()) {
-                final ArrayList<String> finalKWs = keywords;
-                prefList = prefList.filter(new Predicate<Card>() {
-                    // If Aura grants only Keywords, don't Stack unstackable
-                    // keywords
-                    @Override
-                    public boolean isTrue(final Card c) {
-                        for (final String kw : finalKWs) {
-                            if (c.hasKeyword(kw)) {
-                                return false;
-                            }
-                        }
-                        return true;
-                    }
-                });
-            }
+            });
         }
 
         // Don't pump cards that will die.
@@ -701,7 +806,7 @@ public class AbilityFactoryAttach {
             prefList = prefList.filter(new Predicate<Card>() {
                 @Override
                 public boolean isTrue(final Card c) {
-                    return !c.isCreature() || CombatUtil.canAttack(c);
+                    return !c.isCreature() || CombatUtil.canAttackNextTurn(c);
                 }
             });
             c = CardFactoryUtil.getBestAI(prefList);
@@ -715,7 +820,7 @@ public class AbilityFactoryAttach {
             return AbilityFactoryAttach.chooseLessPreferred(mandatory, list);
         }
 
-        return AbilityFactoryAttach.acceptableChoice(c, mandatory);
+        return c;
     }
 
     /**
