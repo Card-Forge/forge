@@ -162,7 +162,7 @@ public class CardFactory implements CardFactoryInterface {
 
         // change the color of the copy (eg: Fork)
         // Currently won't work for abilities, only for spells
-        if (null != source.getFirstSpellAbility().getAbilityFactory()) {
+        if (null != source.getFirstSpellAbility() && null != source.getFirstSpellAbility().getAbilityFactory()) {
             final SpellAbility sourceSA = source.getFirstSpellAbility();
             if (sourceSA.getAbilityFactory().getMapParams().containsKey("CopyIsColor")) {
                 String tmp = "";
@@ -248,8 +248,8 @@ public class CardFactory implements CardFactoryInterface {
                 }
                 if (c.isDoubleFaced()) {
                     c.setState(CardCharacteristicName.Transformed);
+                    c.setCurSetCode(cp.getEdition());
                 }
-                c.setCurSetCode(cp.getEdition());
                 c.setImageFilename(CardUtil.buildFilename(c));
                 c.setState(CardCharacteristicName.Original);
             }
@@ -260,20 +260,19 @@ public class CardFactory implements CardFactoryInterface {
     }
 
     protected Card getCard2(final Iterable<String> script, final Player owner) {
-        final Card card = CardReader.readCard(script);
-        card.setOwner(owner);
-        buildAbilities(card);
-        return card;
+        // o should be Card object
+        final Card o = CardReader.readCard(script);
+        o.setOwner(owner);
+        return buildAbilities(o);
     }
 
     public static Card getCard2(final Card o, final Player owner) {
         final Card copy = CardFactoryUtil.copyStats(o);
         copy.setOwner(owner);
-        buildAbilities(copy);
-        return copy;
+        return buildAbilities(copy);
     }
 
-    private static void buildAbilities(final Card card) {
+    private static Card buildAbilities(final Card card) {
         final String cardName = card.getName();
 
         if (!card.isCardColorsOverridden()) {
@@ -307,27 +306,27 @@ public class CardFactory implements CardFactoryInterface {
 
         // ******************************************************************
         // ************** Link to different CardFactories *******************
-
+        Card card2 = null;
         if (card.isCreature()) {
-            CardFactoryCreatures.buildCard(card, cardName);
+            card2 = CardFactoryCreatures.getCard(card, cardName);
         } else if (card.isAura()) {
-            CardFactoryAuras.buildCard(card, cardName);
+            card2 = CardFactoryAuras.getCard(card, cardName);
         } else if (card.isEquipment()) {
-            CardFactoryEquipment.buildCard(card, cardName);
+            card2 = CardFactoryEquipment.getCard(card, cardName);
         } else if (card.isPlaneswalker()) {
-            CardFactoryPlaneswalkers.buildCard(card, cardName);
+            card2 = CardFactoryPlaneswalkers.getCard(card, cardName);
         } else if (card.isLand()) {
-            CardFactoryLands.buildCard(card, cardName);
+            card2 = CardFactoryLands.getCard(card, cardName);
         } else if (card.isInstant()) {
-            CardFactoryInstants.buildCard(card, cardName);
+            card2 = CardFactoryInstants.getCard(card, cardName);
         } else if (card.isSorcery()) {
-            CardFactorySorceries.buildCard(card, cardName);
+            card2 = CardFactorySorceries.getCard(card, cardName);
         } else if (card.isEnchantment()) {
-            CardFactoryEnchantments.buildCard(card, cardName);
+            card2 = CardFactoryEnchantments.getCard(card, cardName);
         } else if (card.isArtifact()) {
-            CardFactoryArtifacts.buildCard(card, cardName);
+            card2 = CardFactoryArtifacts.getCard(card, cardName);
         }
 
-        CardFactoryUtil.postFactoryKeywords(card);
+        return CardFactoryUtil.postFactoryKeywords(card2 != null ? card2 : card);
     } // getCard2
 } // end class AbstractCardFactory
