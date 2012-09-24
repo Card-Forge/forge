@@ -77,7 +77,6 @@ public class KeyboardShortcuts {
         final Action actShowPlayers = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                System.out.println("SHOWING PLAYERS");
                 if (Singletons.getControl().getState() != 1) { return; }
                 SDisplayUtil.showTab(EDocID.REPORT_PLAYERS.getDoc());
             }
@@ -204,25 +203,30 @@ public class KeyboardShortcuts {
         int modifier = 0;
         int keyEvent = 0;
 
+        inputEvents[0] = 0;
+        inputEvents[1] = 0;
+
         // If CTRL or SHIFT is pressed, it must be passed as a modifier,
         // in the form of an input event object. So, first test if these were pressed.
         // ALT shortcuts will be ignored.
         for (final String s : keys0) {
-            if (s.equals("16")) { inputEvents[0] = 16; }
-            else if (s.equals("17")) { inputEvents[1] = 17; }
-            else { keyEvent = Integer.valueOf(s); }
+            if (s.equals("16")) {
+                inputEvents[0] = 16; }
+            if (s.equals("17")) { inputEvents[1] = 17; }
+
+            if (!s.equals("16") && !s.equals("17")) {
+                keyEvent = Integer.valueOf(s);
+            }
         }
 
         // Then, convert to InputEvent.
-        if (inputEvents[0] == 16 && inputEvents[0] != 17) {
-            System.out.println("SHIFT_DOWN_MASK modifier added.");
+        if (inputEvents[0] == 16 && inputEvents[1] != 17) {
             modifier = InputEvent.SHIFT_DOWN_MASK;
         }
         else if (inputEvents[0] != 16 && inputEvents[1] == 17) {
-            System.out.println("CTRL_DOWN_MASK modifier added.");
             modifier = InputEvent.CTRL_DOWN_MASK;
         }
-        else if (inputEvents[0] == 16 && inputEvents[1] == 17) {
+        else if (inputEvents[0] != 0 && inputEvents[1] != 0) {
             modifier = InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK;
         }
 
