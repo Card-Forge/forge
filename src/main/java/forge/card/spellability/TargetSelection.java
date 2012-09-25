@@ -215,31 +215,11 @@ public class TargetSelection {
             }
         }
 
-        if (!this.target.hasCandidates(this.ability, true)) {
+        if (!this.target.hasCandidates(this.ability, true) && !this.target.isMinTargetsChosen(this.card, this.ability)) {
             // Cancel ability if there aren't any valid Candidates
-            if (this.target.getMinTargets().equals("0")
-                    && this.ability.getAbilityFactory().getMapParams().get("CanPlayNoTgt") != null
-                    && this.ability.getAbilityFactory().getMapParams().get("CanPlayNoTgt").equals("True")) {
-                // unless (for cards like Torrent of Souls), if there are no valid candidates but has min targets = 0
-                // and is flagged as optional, the spell will still be playable - finish targeting
-                final AbilitySub abSub = this.ability.getSubAbility();
-
-                if (abSub == null) {
-                    // if no more SubAbilities finish targeting
-                    this.req.finishedTargeting();
-                    return true;
-                } else {
-                    // Has Sub Ability
-                    this.subSelection = new TargetSelection(abSub.getTarget(), abSub);
-                    this.subSelection.setRequirements(this.req);
-                    this.subSelection.resetTargets();
-                    return this.subSelection.chooseTargets();
-                }
-            } else {
-                this.bCancel = true;
-                this.req.finishedTargeting();
-                return false;
-            }
+            this.bCancel = true;
+            this.req.finishedTargeting();
+            return false;
         }
 
         this.chooseValidInput();
