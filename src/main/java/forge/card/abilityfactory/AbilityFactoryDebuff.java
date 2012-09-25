@@ -450,7 +450,7 @@ public final class AbilityFactoryDebuff {
         if (!list.isEmpty()) {
             list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.hasAnyKeyword(kws); // don't add duplicate negative
                                                  // keywords
                 }
@@ -799,7 +799,7 @@ public final class AbilityFactoryDebuff {
         // only count creatures that can attack
         human = human.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return CombatUtil.canAttack(c);
             }
         });

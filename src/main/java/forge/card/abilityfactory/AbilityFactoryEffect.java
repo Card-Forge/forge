@@ -301,13 +301,13 @@ public class AbilityFactoryEffect {
                 // only count creatures that can attack or block
                 comp = comp.filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return CombatUtil.canAttack(c);
                     }
                 });
                 human = human.filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return CombatUtil.canBlock(c);
                     }
                 });

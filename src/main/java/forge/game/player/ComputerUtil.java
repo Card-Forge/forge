@@ -1001,7 +1001,7 @@ public class ComputerUtil {
         final CardList list = player.getCardsIn(ZoneType.Battlefield);
         final CardList manaSources = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 if (checkPlayable) {
                     for (final AbilityMana am : c.getAIPlayableMana()) {
                         am.setActivatingPlayer(player);
@@ -1307,7 +1307,7 @@ public class ComputerUtil {
 
         landList = landList.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 if (c.getSVar("NeedsToPlay").length() > 0) {
                     final String needsToPlay = c.getSVar("NeedsToPlay");
                     CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
@@ -1430,7 +1430,7 @@ public class ComputerUtil {
                 final int priority = 9 - ip;
                 final CardList sacMeList = typeList.filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return (!c.getSVar("SacMe").equals("") && (Integer.parseInt(c.getSVar("SacMe")) == priority));
                     }
                 });
@@ -1448,7 +1448,7 @@ public class ComputerUtil {
                 final int priority = 9 - ip;
                 final CardList sacMeList = typeList.filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return (!c.getSVar("DiscardMe").equals("") && (Integer.parseInt(c.getSVar("DiscardMe")) == priority));
                     }
                 });
@@ -1826,7 +1826,7 @@ public class ComputerUtil {
         CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return CombatUtil.canAttack(c);
             }
         });

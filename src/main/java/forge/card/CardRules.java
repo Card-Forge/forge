@@ -399,7 +399,7 @@ public final class CardRules {
         /** The Constant isKeptInAiDecks. */
         public static final Predicate<CardRules> IS_KEPT_IN_AI_DECKS = new Predicate<CardRules>() {
             @Override
-            public boolean isTrue(final CardRules card) {
+            public boolean apply(final CardRules card) {
                 return !card.isRemovedFromAIDecks;
             }
         };
@@ -407,7 +407,7 @@ public final class CardRules {
         /** The Constant isKeptInRandomDecks. */
         public static final Predicate<CardRules> IS_KEPT_IN_RANDOM_DECKS = new Predicate<CardRules>() {
             @Override
-            public boolean isTrue(final CardRules card) {
+            public boolean apply(final CardRules card) {
                 return !card.isRemovedFromRandomDecks;
             }
         };
@@ -525,7 +525,7 @@ public final class CardRules {
         public static Predicate<CardRules> hasKeyword(final String keyword) {
             return new Predicate<CardRules>() {
                 @Override
-                public boolean isTrue(final CardRules card) {
+                public boolean apply(final CardRules card) {
                     return card.getKeywords().contains(keyword);
                 }
             };
@@ -668,7 +668,7 @@ public final class CardRules {
             private final CardField field;
 
             @Override
-            public boolean isTrue(final CardRules card) {
+            public boolean apply(final CardRules card) {
                 boolean shouldContain;
                 switch (this.field) {
                 case NAME:
@@ -709,7 +709,7 @@ public final class CardRules {
             }
 
             @Override
-            public boolean isTrue(final CardRules subject) {
+            public boolean apply(final CardRules subject) {
                 switch (this.op) {
                     case CountColors:
                         return subject.getColor().countColors() == this.color;
@@ -743,7 +743,7 @@ public final class CardRules {
             }
 
             @Override
-            public boolean isTrue(final CardRules card) {
+            public boolean apply(final CardRules card) {
                 int value;
                 switch (this.field) {
                 case CMC:
@@ -784,7 +784,7 @@ public final class CardRules {
             private final boolean shouldBeEqual;
 
             @Override
-            public boolean isTrue(final CardRules card) {
+            public boolean apply(final CardRules card) {
                 return this.shouldBeEqual == card.getType().typeContains(this.operand);
             }
 
@@ -799,7 +799,7 @@ public final class CardRules {
             private final boolean shouldBeEqual;
 
             @Override
-            public boolean isTrue(final CardRules card) {
+            public boolean apply(final CardRules card) {
                 return this.shouldBeEqual == card.getType().superTypeContains(this.operand);
             }
 
@@ -814,7 +814,7 @@ public final class CardRules {
             private final boolean shouldBeEqual;
 
             @Override
-            public boolean isTrue(final CardRules card) {
+            public boolean apply(final CardRules card) {
                 return card.getRarityFromLatestSet().equals(this.operand) == this.shouldBeEqual;
             }
 
@@ -832,7 +832,7 @@ public final class CardRules {
             }
 
             @Override
-            public boolean isTrue(final CardRules subject) {
+            public boolean apply(final CardRules subject) {
                 for (final String s : this.sets) {
                     if (subject.setsPrinted.containsKey(s)) {
                         return true;
@@ -859,7 +859,7 @@ public final class CardRules {
             /** The Constant isBasicLand. */
             public static final Predicate<CardRules> IS_BASIC_LAND = new Predicate<CardRules>() {
                 @Override
-                public boolean isTrue(final CardRules subject) {
+                public boolean apply(final CardRules subject) {
                     return subject.getType().isBasicLand();
                 }
             };

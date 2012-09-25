@@ -312,7 +312,7 @@ public class AbilityFactoryCounters {
         list = player.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.canBeTargetedBy(sa) && !c.hasKeyword("CARDNAME can't have counters placed on it.")
                         && !(c.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && type.equals("M1M1"));
             }
@@ -476,7 +476,7 @@ public class AbilityFactoryCounters {
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 list = list.filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return sa.canTarget(c);
                     }
                 });
@@ -658,7 +658,7 @@ public class AbilityFactoryCounters {
             // try to kill the best killable creature, or reduce the best one
             final CardList killable = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.getNetDefense() <= amount;
                 }
             });
@@ -692,7 +692,7 @@ public class AbilityFactoryCounters {
         } else if (type.equals("DIVINITY")) {
             final CardList boon = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.getCounters(Counters.DIVINITY) == 0;
                 }
             });
@@ -1447,7 +1447,7 @@ public class AbilityFactoryCounters {
         CardList cperms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         cperms = cperms.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card crd) {
+            public boolean apply(final Card crd) {
                 for (final Counters c1 : Counters.values()) {
                     if (crd.getCounters(c1) != 0 && !CardFactoryUtil.isNegativeCounter(c1)) {
                         return true;
@@ -1459,7 +1459,7 @@ public class AbilityFactoryCounters {
 
         hperms = hperms.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card crd) {
+            public boolean apply(final Card crd) {
                 for (final Counters c1 : Counters.values()) {
                     if (crd.getCounters(c1) != 0 && CardFactoryUtil.isNegativeCounter(c1)) {
                         return true;
@@ -1575,7 +1575,7 @@ public class AbilityFactoryCounters {
         } else { // Compy
             cperms = cperms.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card crd) {
+                public boolean apply(final Card crd) {
                     for (final Counters c1 : Counters.values()) {
                         if (crd.getCounters(c1) != 0) {
                             if (!CardFactoryUtil.isNegativeCounter(c1)) {
@@ -1589,7 +1589,7 @@ public class AbilityFactoryCounters {
 
             hperms = hperms.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card crd) {
+                public boolean apply(final Card crd) {
                     for (final Counters c1 : Counters.values()) {
                         if (crd.getCounters(c1) != 0) {
                             if (CardFactoryUtil.isNegativeCounter(c1)) {
@@ -1918,7 +1918,7 @@ public class AbilityFactoryCounters {
             if (type.equals("M1M1")) {
                 final CardList killable = hList.filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return c.getNetDefense() <= amount;
                     }
                 });

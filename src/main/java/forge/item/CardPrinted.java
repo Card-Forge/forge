@@ -396,7 +396,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             private final boolean shouldBeEqual;
 
             @Override
-            public boolean isTrue(final CardPrinted card) {
+            public boolean apply(final CardPrinted card) {
                 return card.rarity.equals(this.operand) == this.shouldBeEqual;
             }
 
@@ -411,7 +411,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             private final boolean mustContain;
 
             @Override
-            public boolean isTrue(final CardPrinted card) {
+            public boolean apply(final CardPrinted card) {
                 return this.sets.contains(card.edition) == this.mustContain;
             }
 
@@ -425,7 +425,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             private final String operand;
 
             @Override
-            public boolean isTrue(final CardPrinted card) {
+            public boolean apply(final CardPrinted card) {
                 return this.op(card.getName(), this.operand);
             }
 
@@ -439,7 +439,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             private final String[] operand;
 
             @Override
-            public boolean isTrue(final CardPrinted card) {
+            public boolean apply(final CardPrinted card) {
                 final String cardName = card.getName();
                 for (final String element : this.operand) {
                     if (this.op(cardName, element)) {

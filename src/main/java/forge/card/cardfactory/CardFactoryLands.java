@@ -140,7 +140,7 @@ class CardFactoryLands {
             final Predicate<Card> targets = new Predicate<Card>() {
 
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return AllZoneUtil.isCardInPlay(c) && c.isCreature()
                             && (c.getTurnInZone() == Singletons.getModel().getGameState().getPhaseHandler().getTurn());
                 }

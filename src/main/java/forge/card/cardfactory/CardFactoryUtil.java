@@ -105,7 +105,7 @@ public class CardFactoryUtil {
         if (targeted) {
             all = all.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.canBeTargetedBy(spell);
                 }
             });
@@ -164,7 +164,7 @@ public class CardFactoryUtil {
     public static Card getCheapestCreatureAI(CardList list, final SpellAbility spell, final boolean targeted) {
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.isCreature();
             }
         });
@@ -189,7 +189,7 @@ public class CardFactoryUtil {
         if (targeted) {
             all = all.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.canBeTargetedBy(spell);
                 }
             });
@@ -230,7 +230,7 @@ public class CardFactoryUtil {
         // prefer to target non basic lands
         final CardList nbLand = land.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return (!c.isBasicLand());
             }
         });
@@ -296,7 +296,7 @@ public class CardFactoryUtil {
             all = all.filter(new Predicate<Card>() {
 
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.canBeTargetedBy(spell);
                 }
             });
@@ -789,7 +789,7 @@ public class CardFactoryUtil {
         if ((list.getType("Artifact").size() > 0) || (list.getType("Enchantment").size() > 0)) {
             return CardFactoryUtil.getCheapestPermanentAI(list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.isArtifact() || c.isEnchantment();
                 }
             }), null, false);
@@ -1655,7 +1655,7 @@ public class CardFactoryUtil {
         CardList creature = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         creature = creature.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 if (targeted) {
                     return c.isCreature() && (c.getNetDefense() <= toughness) && c.canBeTargetedBy(spell);
                 } else {
@@ -2016,7 +2016,7 @@ public class CardFactoryUtil {
         CardList list = new CardList(card.getEquippedBy());
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.getName().equals(name);
             }
 
@@ -2072,7 +2072,7 @@ public class CardFactoryUtil {
         if (activator.isPlayer(zone.getPlayer())) {
             cl = cl.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     if (zone.is(ZoneType.Graveyard)) {
                         if (c.hasUnearth()) {
                             return true;
@@ -2107,7 +2107,7 @@ public class CardFactoryUtil {
             // the activator is not the owner of the card
             cl = cl.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
 
                     if (c.hasStartOfKeyword("May be played by your opponent")
                             || c.hasKeyword("Your opponent may look at this card.")) {
@@ -2777,7 +2777,7 @@ public class CardFactoryUtil {
 
             cl = cl.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card cdev) {
+                public boolean apply(final Card cdev) {
                     return cdev.isValid(validDevoured.split(","), csource.getController(), csource);
                 }
             });
@@ -3086,7 +3086,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("Multicolor")) {
             someCards = someCards.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return (CardUtil.getColors(c).size() > 1);
                 }
             });
@@ -3095,7 +3095,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("Monocolor")) {
             someCards = someCards.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return (CardUtil.getColors(c).size() == 1);
                 }
             });
@@ -3488,7 +3488,7 @@ public class CardFactoryUtil {
         CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 for (final AbilityMana am : c.getAIPlayableMana()) {
                     if (am.canPlay()) {
                         return true;
@@ -5126,7 +5126,7 @@ public class CardFactoryUtil {
                             CardList choices = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                             choices = choices.filter(new Predicate<Card>() {
                                 @Override
-                                public boolean isTrue(final Card c) {
+                                public boolean apply(final Card c) {
                                     return c.isCreature() && c.isArtifact();
                                 }
                             });

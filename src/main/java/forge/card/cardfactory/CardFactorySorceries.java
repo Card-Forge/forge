@@ -392,7 +392,7 @@ public class CardFactorySorceries {
                     // need to sacrifice the other non-basic land types
                     land = land.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             if (c.getName().contains("Dryad Arbor")) {
                                 return true;
                             } else {
@@ -459,7 +459,7 @@ public class CardFactorySorceries {
                         CardList cl = land.getType(humanBasic.get(this.count));
                         cl = cl.filter(new Predicate<Card>() {
                             @Override
-                            public boolean isTrue(final Card crd) {
+                            public boolean apply(final Card crd) {
                                 return !saveList.contains(crd);
                             }
                         });
@@ -480,7 +480,7 @@ public class CardFactorySorceries {
                         // need to sacrifice the other non-basic land types
                         land = land.filter(new Predicate<Card>() {
                             @Override
-                            public boolean isTrue(final Card c) {
+                            public boolean apply(final Card c) {
                                 if (c.getName().contains("Dryad Arbor")) {
                                     return true;
                                 } else {
@@ -544,7 +544,7 @@ public class CardFactorySorceries {
                     final int graveCount = graveyard.size();
                     graveyard = graveyard.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             return c.isBasicLand();
                         }
                     });
@@ -1407,7 +1407,7 @@ public class CardFactorySorceries {
                     grave = grave.filter(Presets.CREATURES);
                     grave = grave.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             return c.getCMC() <= x[0];
                         }
                     });

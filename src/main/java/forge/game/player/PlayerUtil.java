@@ -58,7 +58,7 @@ public final class PlayerUtil {
         list = list.getKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.");
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return !c.isFaceDown();
             }
         });

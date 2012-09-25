@@ -536,7 +536,7 @@ public class AbilityFactoryDealDamage {
 
         final CardList killables = hPlay.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return (c.getEnoughDamageToKill(d, source, false, noPrevention) <= d) && !ComputerUtil.canRegenerate(c)
                         && !(c.getSVar("SacMe").length() > 0);
             }
@@ -1233,7 +1233,7 @@ public class AbilityFactoryDealDamage {
 
         final Predicate<Card> filterKillable = new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return (c.predictDamage(dmg, source, false) >= c.getKillDamage());
             }
         };
@@ -1865,7 +1865,7 @@ public class AbilityFactoryDealDamage {
         aiCreatures = aiCreatures.getTargetableCards(sa);
         aiCreatures = aiCreatures.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return !c.getSVar("Targeting").equals("Dies");
             }
         });

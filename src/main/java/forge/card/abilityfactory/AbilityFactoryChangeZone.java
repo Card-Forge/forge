@@ -1169,7 +1169,7 @@ public final class AbilityFactoryChangeZone {
                 if (ZoneType.Battlefield.equals(destination)) {
                     fetchList = fetchList.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             if (c.isType("Legendary")) {
                                 if (!AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, c.getName()).isEmpty()) {
                                     return false;
@@ -1181,7 +1181,7 @@ public final class AbilityFactoryChangeZone {
                     if (player.isHuman() && params.containsKey("GainControl")) {
                         fetchList = fetchList.filter(new Predicate<Card>() {
                             @Override
-                            public boolean isTrue(final Card c) {
+                            public boolean apply(final Card c) {
                                 if (!c.getSVar("RemAIDeck").equals("") || !c.getSVar("RemRandomDeck").equals("")) {
                                     return false;
                                 }
@@ -1664,7 +1664,7 @@ public final class AbilityFactoryChangeZone {
             // Don't blink cards that will die.
             aiPermanents = aiPermanents.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return !c.getSVar("Targeting").equals("Dies");
                 }
             });
@@ -1709,7 +1709,7 @@ public final class AbilityFactoryChangeZone {
                 else if (sa.isAbility() && (sa.getPayCosts() != null) && AbilityFactory.playReusable(sa)) {
                     aiPermanents = aiPermanents.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             if (c.getNumberOfCounters() > 0) {
                                 return false; // don't blink something with
                             }
@@ -1758,7 +1758,7 @@ public final class AbilityFactoryChangeZone {
             list = list.getController(AllZone.getHumanPlayer());
             list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     for (Card aura : c.getEnchantedBy()) {
                         if (c.getOwner().isHuman() && aura.getController().isComputer()) {
                             return false;

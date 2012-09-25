@@ -501,7 +501,7 @@ public class AbilityFactoryAttach {
         if (sa.getSourceCard().getName().equals("Animate Artifact")) {
             betterList = betterList.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.getCMC() > 0;
                 }
             });
@@ -693,7 +693,7 @@ public class AbilityFactoryAttach {
             stCheck = "EnchantedBy";
             magnetList = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     if ( !c.isCreature() ) return false;
                     String sVar = c.getSVar("EnchantMe");
                     return sVar.equals("Multiple") || (sVar.equals("Once") && !c.isEnchanted());
@@ -703,7 +703,7 @@ public class AbilityFactoryAttach {
             stCheck = "EquippedBy";
             magnetList = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     if ( !c.isCreature() ) return false;
                     String sVar = c.getSVar("EquipMe");
                     return sVar.equals("Multiple") || (sVar.equals("Once") && !c.isEquipped());
@@ -718,7 +718,7 @@ public class AbilityFactoryAttach {
 
             magnetList = magnetList.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return CombatUtil.canAttack(c);
                 }
             });
@@ -770,7 +770,7 @@ public class AbilityFactoryAttach {
             final int tgh = totToughness;
             prefList = prefList.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.getLethalDamage() > Math.abs(tgh);
                 }
             });
@@ -780,7 +780,7 @@ public class AbilityFactoryAttach {
         if (totToughness + totPower < 4 && !keywords.isEmpty()) {
             prefList = prefList.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return containsUsefulKeyword(keywords, c, sa);
                 }
             });
@@ -789,7 +789,7 @@ public class AbilityFactoryAttach {
         // Don't pump cards that will die.
         prefList = prefList.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return !c.getSVar("Targeting").equals("Dies");
             }
         });
@@ -805,7 +805,7 @@ public class AbilityFactoryAttach {
             // Filter out creatures that can't Attack or have Defender
             prefList = prefList.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return !c.isCreature() || CombatUtil.canAttackNextTurn(c);
                 }
             });
@@ -888,7 +888,7 @@ public class AbilityFactoryAttach {
             final int tgh = totToughness;
             prefList = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     if (!c.hasKeyword("Indestructible") && (c.getLethalDamage() <= Math.abs(tgh))) {
                         return true;
                     }
@@ -914,7 +914,7 @@ public class AbilityFactoryAttach {
                     || keywords.contains("CARDNAME attacks each turn if able.")) {
                 prefList = prefList.filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return !(c.hasKeyword("CARDNAME can't attack.") || c.hasKeyword("Defender"));
                     }
                 });
@@ -992,7 +992,7 @@ public class AbilityFactoryAttach {
         // AI For Cards like Paralyzing Grasp and Glimmerdust Nap
         final CardList prefList = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 // Don't do Untapped Vigilance cards
                 if (c.isCreature() && c.hasKeyword("Vigilance") && c.isUntapped()) {
                     return false;

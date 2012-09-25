@@ -1034,7 +1034,7 @@ public class AbilityFactoryPermanentState {
                     final CardList attackers = AllZone.getCombat().getAttackerList();
                     CardList creatureList = tapList.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             if (c.isCreature()) {
                                 return CombatUtil.canBlockAtLeastOne(c, attackers);
                             }
@@ -1049,7 +1049,7 @@ public class AbilityFactoryPermanentState {
                     attackers.remove(sa.getSourceCard());
                     CardList creatureList = tapList.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             if (c.isCreature()) {
                                 return CombatUtil.canBlockAtLeastOne(c, attackers);
                             }
@@ -1066,7 +1066,7 @@ public class AbilityFactoryPermanentState {
                 if (!tapList.getType("Creature").isEmpty()) {
                     CardList creatureList = tapList.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             if (c.isCreature()) {
                                 return CombatUtil.canAttack(c);
                             }
@@ -1763,13 +1763,13 @@ public class AbilityFactoryPermanentState {
         if (validTappables.size() > 0) {
             final CardList human = validTappables.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.getController().isHuman();
                 }
             });
             final CardList compy = validTappables.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.getController().isComputer();
                 }
             });
@@ -1878,13 +1878,13 @@ public class AbilityFactoryPermanentState {
         if (validTappables.size() > 0) {
             final CardList human = validTappables.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.getController().isHuman();
                 }
             });
             final CardList compy = validTappables.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.getController().isComputer();
                 }
             });

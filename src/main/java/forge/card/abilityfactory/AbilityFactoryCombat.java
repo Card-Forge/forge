@@ -1062,7 +1062,7 @@ public final class AbilityFactoryCombat {
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     boolean tapped = c.isTapped();
                     c.setTapped(false);
                     if (!CombatUtil.canBlock(definedAttacker, c)) {

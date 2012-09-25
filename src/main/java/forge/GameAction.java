@@ -1258,7 +1258,7 @@ public class GameAction {
             b = b.getType("Legendary");
             b = b.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return !c.isFaceDown();
                 }
             });
@@ -1320,7 +1320,7 @@ public class GameAction {
             CardList list = new CardList(c.getEnchantedBy());
             list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card crd) {
+                public boolean apply(final Card crd) {
                     return crd.hasKeyword("Totem armor");
                 }
             });
@@ -1503,7 +1503,7 @@ public class GameAction {
             CardList list = new CardList(c.getEnchantedBy());
             list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card crd) {
+                public boolean apply(final Card crd) {
                     return crd.hasKeyword("Totem armor");
                 }
             });
@@ -1773,7 +1773,7 @@ public class GameAction {
                 CardList untappedCreats = spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
                 untappedCreats = untappedCreats.filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return !c.isTapped();
                     }
                 });

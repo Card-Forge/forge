@@ -40,21 +40,21 @@ public class GenerateDeckUtil {
 
     public static final Predicate<CardRules> AI_CAN_PLAY = new Predicate<CardRules>() {
         @Override
-        public boolean isTrue(CardRules c) {
+        public boolean apply(CardRules c) {
             return !c.getRemAIDecks() && !c.getRemRandomDecks();
         }
     };
 
     public static final Predicate<CardRules> HUMAN_CAN_PLAY = new Predicate<CardRules>() {
         @Override
-        public boolean isTrue(CardRules c) {
+        public boolean apply(CardRules c) {
             return !c.getRemRandomDecks();
         }
     };
 
     public static final Predicate<CardRules> COLORLESS_CARDS = new Predicate<CardRules>() {
         @Override
-        public boolean isTrue(CardRules c) {
+        public boolean apply(CardRules c) {
             CardManaCost mc = c.getManaCost();
             return mc.getColorProfile() == 0 && !mc.isEmpty();
         }
@@ -67,7 +67,7 @@ public class GenerateDeckUtil {
         }
 
         @Override
-        public boolean isTrue(CardRules subject) {
+        public boolean apply(CardRules subject) {
             return allowedColor.containsAllColorsFrom(subject.getManaCost().getColorProfile());
         }
     }
@@ -81,7 +81,7 @@ public class GenerateDeckUtil {
         }
 
         @Override
-        public boolean isTrue(CardRules c) {
+        public boolean apply(CardRules c) {
             CardManaCost mc = c.getManaCost();
             int cmc = mc.getCMC();
             return cmc >= min && cmc <= max && !mc.isEmpty();

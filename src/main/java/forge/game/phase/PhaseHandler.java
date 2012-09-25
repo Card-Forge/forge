@@ -662,7 +662,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         CardList vaults = turn.getCardsIn(ZoneType.Battlefield, "Time Vault");
         vaults = vaults.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.isTapped();
             }
         });

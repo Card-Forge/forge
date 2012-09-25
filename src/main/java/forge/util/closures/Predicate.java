@@ -37,7 +37,7 @@ import java.util.Map;
  * @author Max
  */
 
-public abstract class Predicate<T> {
+public abstract class Predicate<T> implements com.google.common.base.Predicate<T>{
 
     /**
      * Possible operators on two predicates.
@@ -71,7 +71,7 @@ public abstract class Predicate<T> {
      *            the subject
      * @return true, if is true
      */
-    public abstract boolean isTrue(T subject);
+    public abstract boolean apply(T subject);
 
     // Overloaded only in LeafConstant
     /**
@@ -111,7 +111,7 @@ public abstract class Predicate<T> {
         final ArrayList<T> result = new ArrayList<T>();
         if (source != null) {
             for (final T c : source) {
-                if (this.isTrue(c)) {
+                if (this.apply(c)) {
                     result.add(c);
                 }
             }
@@ -134,7 +134,7 @@ public abstract class Predicate<T> {
         final ArrayList<U> result = new ArrayList<U>();
         if (source != null) {
             for (final U c : source) {
-                if (this.isTrue(accessor.apply(c))) {
+                if (this.apply(accessor.apply(c))) {
                     result.add(c);
                 }
             }
@@ -153,7 +153,7 @@ public abstract class Predicate<T> {
     public final boolean any(final Iterable<T> source) {
         if (source != null) {
             for (final T c : source) {
-                if (this.isTrue(c)) {
+                if (this.apply(c)) {
                     return true;
                 }
             }
@@ -175,7 +175,7 @@ public abstract class Predicate<T> {
     public final <U> boolean any(final Iterable<U> source, final Lambda1<T, U> accessor) {
         if (source != null) {
             for (final U c : source) {
-                if (this.isTrue(accessor.apply(c))) {
+                if (this.apply(accessor.apply(c))) {
                     return true;
                 }
             }
@@ -194,7 +194,7 @@ public abstract class Predicate<T> {
     public final T first(final Iterable<T> source) {
         if (source != null) {
             for (final T c : source) {
-                if (this.isTrue(c)) {
+                if (this.apply(c)) {
                     return c;
                 }
             }
@@ -216,7 +216,7 @@ public abstract class Predicate<T> {
     public final <U> U first(final Iterable<U> source, final Lambda1<T, U> accessor) {
         if (source != null) {
             for (final U c : source) {
-                if (this.isTrue(accessor.apply(c))) {
+                if (this.apply(accessor.apply(c))) {
                     return c;
                 }
             }
@@ -243,7 +243,7 @@ public abstract class Predicate<T> {
             final Lambda1<V, U> transformer) {
         if (source != null) {
             for (final U c : source) {
-                if (this.isTrue(cardAccessor.apply(c))) {
+                if (this.apply(cardAccessor.apply(c))) {
                     return transformer.apply(c);
                 }
             }
@@ -267,7 +267,7 @@ public abstract class Predicate<T> {
             return;
         }
         for (final T c : source) {
-            if (this.isTrue(c)) {
+            if (this.apply(c)) {
                 trueList.add(c);
             } else {
                 falseList.add(c);
@@ -295,7 +295,7 @@ public abstract class Predicate<T> {
             return;
         }
         for (final U c : source) {
-            if (this.isTrue(accessor.apply(c))) {
+            if (this.apply(accessor.apply(c))) {
                 trueList.add(c);
             } else {
                 falseList.add(c);
@@ -318,7 +318,7 @@ public abstract class Predicate<T> {
     public final <K> Iterable<T> uniqueByLast(final Iterable<T> source, final Lambda1<K, T> fnUniqueKey) {
         final Map<K, T> uniques = new Hashtable<K, T>();
         for (final T c : source) {
-            if (this.isTrue(c)) {
+            if (this.apply(c)) {
                 uniques.put(fnUniqueKey.apply(c), c);
             }
         }
@@ -344,7 +344,7 @@ public abstract class Predicate<T> {
             final Lambda1<T, U> accessor) { // this might be exotic
         final Map<K, U> uniques = new Hashtable<K, U>();
         for (final U c : source) {
-            if (this.isTrue(accessor.apply(c))) {
+            if (this.apply(accessor.apply(c))) {
                 uniques.put(fnUniqueKey.apply(c), c);
             }
         }
@@ -366,7 +366,7 @@ public abstract class Predicate<T> {
         final Map<K, T> uniques = new Hashtable<K, T>();
         for (final T c : source) {
             final K key = fnUniqueKey.apply(c);
-            if (this.isTrue(c) && !uniques.containsKey(key)) {
+            if (this.apply(c) && !uniques.containsKey(key)) {
                 uniques.put(fnUniqueKey.apply(c), c);
             }
         }
@@ -393,7 +393,7 @@ public abstract class Predicate<T> {
         final Map<K, U> uniques = new Hashtable<K, U>();
         for (final U c : source) {
             final K key = fnUniqueKey.apply(c);
-            if (this.isTrue(accessor.apply(c)) && !uniques.containsKey(key)) {
+            if (this.apply(accessor.apply(c)) && !uniques.containsKey(key)) {
                 uniques.put(fnUniqueKey.apply(c), c);
             }
         }
@@ -412,7 +412,7 @@ public abstract class Predicate<T> {
         int result = 0;
         if (source != null) {
             for (final T c : source) {
-                if (this.isTrue(c)) {
+                if (this.apply(c)) {
                     result++;
                 }
             }
@@ -435,7 +435,7 @@ public abstract class Predicate<T> {
         int result = 0;
         if (source != null) {
             for (final U c : source) {
-                if (this.isTrue(accessor.apply(c))) {
+                if (this.apply(accessor.apply(c))) {
                     result++;
                 }
             }
@@ -462,7 +462,7 @@ public abstract class Predicate<T> {
         int result = 0;
         if (source != null) {
             for (final U c : source) {
-                if (this.isTrue(accessor.apply(c))) {
+                if (this.apply(accessor.apply(c))) {
                     result += valueAccessor.apply(c);
                 }
             }
@@ -474,7 +474,7 @@ public abstract class Predicate<T> {
         int result = 0;
         if (source != null) {
             for (final T c : source) {
-                if (this.isTrue(c)) {
+                if (this.apply(c)) {
                     result += valueAccessor.apply(c);
                 }
             }
@@ -487,7 +487,7 @@ public abstract class Predicate<T> {
         if (source == null) { return null; }  
         int max = Integer.MIN_VALUE;
         for (final T c : source) {
-            if (!this.isTrue(c)) { continue; }
+            if (!this.apply(c)) { continue; }
             
             int value = valueAccessor.apply(c);
             if ( value > max ) {
@@ -505,7 +505,7 @@ public abstract class Predicate<T> {
         int max = Integer.MIN_VALUE;
 
         for (final T c : source) {
-            if (!this.isTrue(c)) { continue; }
+            if (!this.apply(c)) { continue; }
             
             int value = valueAccessor.apply(c);
             if ( value > max ) {
@@ -529,7 +529,7 @@ public abstract class Predicate<T> {
         int n = 0;
         T candidate = null;
         for (final T item : source) {
-            if (!this.isTrue(item)) {
+            if (!this.apply(item)) {
                 continue;
             }
             if ((Math.random() * ++n) < 1) {
@@ -554,7 +554,7 @@ public abstract class Predicate<T> {
         int n = 0;
         U candidate = null;
         for (final U item : source) {
-            if (!this.isTrue(accessor.apply(item))) {
+            if (!this.apply(accessor.apply(item))) {
                 continue;
             }
             if ((Math.random() * ++n) < 1) {
@@ -873,8 +873,8 @@ final class Not<T> extends Predicate<T> {
     }
 
     @Override
-    public boolean isTrue(final T card) {
-        return !this.filter.isTrue(card);
+    public boolean apply(final T card) {
+        return !this.filter.apply(card);
     }
 }
 
@@ -908,8 +908,8 @@ final class Bridge<T, U> extends Predicate<U> {
     }
 
     @Override
-    public boolean isTrue(final U card) {
-        return this.filter.isTrue(this.fnBridge.apply(card));
+    public boolean apply(final U card) {
+        return this.filter.apply(this.fnBridge.apply(card));
     }
 
     @Override
@@ -950,8 +950,8 @@ final class BridgeToInstance<T, U> extends Predicate<U> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean isTrue(final U card) {
-        return this.clsBridge.isInstance(card) && this.filter.isTrue((T) card);
+    public boolean apply(final U card) {
+        return this.clsBridge.isInstance(card) && this.filter.apply((T) card);
     }
 
     @Override
@@ -990,24 +990,24 @@ class Node<T> extends Predicate<T> {
     }
 
     @Override
-    public boolean isTrue(final T card) {
+    public boolean apply(final T card) {
         switch (this.operator) {
         case AND:
-            return this.filter1.isTrue(card) && this.filter2.isTrue(card);
+            return this.filter1.apply(card) && this.filter2.apply(card);
         case GT:
-            return this.filter1.isTrue(card) && !this.filter2.isTrue(card);
+            return this.filter1.apply(card) && !this.filter2.apply(card);
         case LT:
-            return !this.filter1.isTrue(card) && this.filter2.isTrue(card);
+            return !this.filter1.apply(card) && this.filter2.apply(card);
         case NAND:
-            return !(this.filter1.isTrue(card) && this.filter2.isTrue(card));
+            return !(this.filter1.apply(card) && this.filter2.apply(card));
         case OR:
-            return this.filter1.isTrue(card) || this.filter2.isTrue(card);
+            return this.filter1.apply(card) || this.filter2.apply(card);
         case NOR:
-            return !(this.filter1.isTrue(card) || this.filter2.isTrue(card));
+            return !(this.filter1.apply(card) || this.filter2.apply(card));
         case XOR:
-            return this.filter1.isTrue(card) ^ this.filter2.isTrue(card);
+            return this.filter1.apply(card) ^ this.filter2.apply(card);
         case EQ:
-            return this.filter1.isTrue(card) == this.filter2.isTrue(card);
+            return this.filter1.apply(card) == this.filter2.apply(card);
         default:
             return false;
         }
@@ -1035,8 +1035,8 @@ final class NodeOr<T> extends Node<T> {
     }
 
     @Override
-    public boolean isTrue(final T card) {
-        return this.filter1.isTrue(card) || this.filter2.isTrue(card);
+    public boolean apply(final T card) {
+        return this.filter1.apply(card) || this.filter2.apply(card);
     }
 }
 
@@ -1059,8 +1059,8 @@ final class NodeAnd<T> extends Node<T> {
     }
 
     @Override
-    public boolean isTrue(final T card) {
-        return this.filter1.isTrue(card) && this.filter2.isTrue(card);
+    public boolean apply(final T card) {
+        return this.filter1.apply(card) && this.filter2.apply(card);
     }
 }
 
@@ -1092,8 +1092,8 @@ final class NodeOrBridged<T, U> extends Predicate<T> {
     }
 
     @Override
-    public boolean isTrue(final T card) {
-        return this.filter1.isTrue(card) || this.filter2.isTrue(this.bridge.apply(card));
+    public boolean apply(final T card) {
+        return this.filter1.apply(card) || this.filter2.apply(this.bridge.apply(card));
     }
 }
 
@@ -1124,8 +1124,8 @@ final class NodeAndBridged<T, U> extends Predicate<T> {
     }
 
     @Override
-    public boolean isTrue(final T card) {
-        return this.filter1.isTrue(card) && this.filter2.isTrue(this.bridge.apply(card));
+    public boolean apply(final T card) {
+        return this.filter1.apply(card) && this.filter2.apply(this.bridge.apply(card));
     }
 }
 
@@ -1178,9 +1178,9 @@ final class MultiNodeAnd<T> extends MultiNode<T> {
     }
 
     @Override
-    public boolean isTrue(final T subject) {
+    public boolean apply(final T subject) {
         for (final Predicate<T> p : this.getOperands()) {
-            if (!p.isTrue(subject)) {
+            if (!p.apply(subject)) {
                 return false;
             }
         }
@@ -1206,9 +1206,9 @@ final class MultiNodeOr<T> extends MultiNode<T> {
     }
 
     @Override
-    public boolean isTrue(final T subject) {
+    public boolean apply(final T subject) {
         for (final Predicate<T> p : this.getOperands()) {
-            if (p.isTrue(subject)) {
+            if (p.apply(subject)) {
                 return true;
             }
         }
@@ -1234,9 +1234,9 @@ final class MultiNodeNot<T> extends MultiNode<T> {
     }
 
     @Override
-    public boolean isTrue(final T subject) {
+    public boolean apply(final T subject) {
         for (final Predicate<T> p : this.getOperands()) {
-            if (!p.isTrue(subject)) {
+            if (!p.apply(subject)) {
                 return true;
             }
         }
@@ -1265,7 +1265,7 @@ class LeafConstant<T> extends Predicate<T> {
     }
 
     @Override
-    public boolean isTrue(final T card) {
+    public boolean apply(final T card) {
         return this.bValue;
     }
 

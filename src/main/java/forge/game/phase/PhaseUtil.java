@@ -372,7 +372,7 @@ public class PhaseUtil {
 
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return !c.getDamageHistory().getCreatureBlockedThisCombat();
             }
         });

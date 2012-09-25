@@ -235,7 +235,7 @@ public abstract class AllZoneUtil {
         CardList cards = player.getCardsIn(ZoneType.Battlefield);
         cards = cards.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 final List<String> colorList = CardUtil.getColors(c);
                 return colorList.contains(color);
             }

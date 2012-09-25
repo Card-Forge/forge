@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import com.google.common.collect.Iterables;
+
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.util.MyRandom;
@@ -148,7 +150,7 @@ public class CardList extends ArrayList<Card> {
     public final CardList getValidCards(final String[] restrictions, final Player sourceController, final Card source) {
         return this.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return (c != null) && c.isValid(restrictions, sourceController, source);
             }
         });

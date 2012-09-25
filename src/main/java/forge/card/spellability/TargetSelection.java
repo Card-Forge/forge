@@ -302,7 +302,7 @@ public class TargetSelection {
             final Card card = targeted.get(0);
             choices = choices.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return !c.sharesCreatureTypeWith(card);
                 }
             });

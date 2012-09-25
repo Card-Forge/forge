@@ -271,7 +271,7 @@ class CardFactoryAuras {
 
                     final Predicate<Card> f = new Predicate<Card>() {
                         @Override
-                        public final boolean isTrue(final Card c) {
+                        public final boolean apply(final Card c) {
                             return (c.getNetDefense() - c.getDamage()) <= 2;
                         }
                     };

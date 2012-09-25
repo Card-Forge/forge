@@ -185,7 +185,7 @@ class CardFactoryArtifacts {
                         CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
                         list = list.filter(new Predicate<Card>() {
                             @Override
-                            public boolean isTrue(final Card c) {
+                            public boolean apply(final Card c) {
                                 return (c.isLand());
                             }
                         });
@@ -223,7 +223,7 @@ class CardFactoryArtifacts {
                     list.remove(card);
                     list = list.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             return (c.isLand());
                         }
                     });

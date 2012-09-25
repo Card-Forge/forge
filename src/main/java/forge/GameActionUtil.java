@@ -1305,7 +1305,7 @@ public final class GameActionUtil {
 
             list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.getName().equals("Avatar") && c.getImageName().equals("W N N Avatar");
                 }
             });
@@ -1367,7 +1367,7 @@ public final class GameActionUtil {
             CardList list = c.getController().getCardsIn(ZoneType.Battlefield);
             list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.getName().equals("Guan Yu, Sainted Warrior")
                             || c.getName().equals("Zhang Fei, Fierce Warrior");
                 }
@@ -1387,7 +1387,7 @@ public final class GameActionUtil {
             CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             list = list.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     return c.getName().equals("Wolf")
                             && c.hasKeyword("This creature gets +1/+1 for each card "
                                     + "named Sound the Call in each graveyard.");
@@ -1517,7 +1517,7 @@ public final class GameActionUtil {
         CardList lands = AllZoneUtil.getPlayerLandsInPlay(p);
         lands = lands.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.getManaAbility().size() > 0;
             }
         });

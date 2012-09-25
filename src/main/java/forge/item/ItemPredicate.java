@@ -63,7 +63,7 @@ public abstract class ItemPredicate {
     public static class PredicateBoosterPack extends Predicate<InventoryItem> {
 
         @Override
-        public boolean isTrue(final InventoryItem card) {
+        public boolean apply(final InventoryItem card) {
             return card.getType() == "Booster Pack";
         }
     }
@@ -76,7 +76,7 @@ public abstract class ItemPredicate {
     public static class PredicateFatPack extends Predicate<InventoryItem> {
 
         @Override
-        public boolean isTrue(final InventoryItem card) {
+        public boolean apply(final InventoryItem card) {
             return card.getType() == "Fat Pack";
         }
     }
@@ -89,7 +89,7 @@ public abstract class ItemPredicate {
     public static class PredicateTournamentPack extends Predicate<InventoryItem> {
 
         @Override
-        public boolean isTrue(final InventoryItem card) {
+        public boolean apply(final InventoryItem card) {
             return card.getType() == "Tournament Pack";
         }
     }
@@ -102,7 +102,7 @@ public abstract class ItemPredicate {
     public static class PredicateStarterDeck extends Predicate<InventoryItem> {
 
         @Override
-        public boolean isTrue(final InventoryItem card) {
+        public boolean apply(final InventoryItem card) {
             return card.getType() == "Starter Deck";
         }
     }
@@ -115,7 +115,7 @@ public abstract class ItemPredicate {
     public static class PredicatePrebuiltDeck extends Predicate<InventoryItem> {
 
         @Override
-        public boolean isTrue(final InventoryItem card) {
+        public boolean apply(final InventoryItem card) {
             return card.getType() == "Prebuilt Deck";
         }
     }

@@ -458,7 +458,7 @@ public final class CardUtil {
         final String set = card.getCurSetCode();
         final Predicate<EditionInfo> findSetInfo = new Predicate<EditionInfo>() {
             @Override
-            public boolean isTrue(final EditionInfo subject) {
+            public boolean apply(final EditionInfo subject) {
                 return subject.getCode().equals(set);
             }
         };

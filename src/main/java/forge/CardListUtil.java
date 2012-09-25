@@ -47,7 +47,7 @@ public class CardListUtil {
         return in.filter(
             new Predicate<Card>() {
                 @Override
-                public boolean isTrue(Card c) {
+                public boolean apply(Card c) {
                     return c.getNetDefense() <= atLeastToughness;
                 }
             }
@@ -202,7 +202,7 @@ public class CardListUtil {
     public static CardList getColor(final CardList list, final String color) {
         return list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return CardUtil.getColors(c).contains(color);
             }
         });
@@ -220,7 +220,7 @@ public class CardListUtil {
     public static CardList getGoldCards(final CardList list) {
         return list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return CardUtil.getColors(c).size() >= 2;
             }
         });

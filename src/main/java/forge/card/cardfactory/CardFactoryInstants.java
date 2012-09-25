@@ -420,7 +420,7 @@ public class CardFactoryInstants {
                     final CardList ens = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(Presets.ENCHANTMENTS);
                     final CardList toReturn = ens.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             final Card enchanting = c.getEnchantingCard();
 
                             if (enchanting != null) {

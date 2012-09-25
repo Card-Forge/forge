@@ -164,7 +164,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
         CardList list = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.hasStartOfKeyword("(Echo unpaid)");
             }
         });
@@ -588,7 +588,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     final CardList options = this.getLowestPowerList(original);
                     final CardList humanCreatures = options.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             return c.getController().isHuman();
                         }
                     });
@@ -1828,7 +1828,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.hasSuspend();
             }
         });
@@ -1856,7 +1856,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
         CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return CardFactoryUtil.hasKeyword(c, "Vanishing") != -1;
             }
         });
@@ -1893,7 +1893,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
         CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return CardFactoryUtil.hasKeyword(c, "Fading") != -1;
             }
         });
@@ -2146,7 +2146,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     final int num = source.getCounters(Counters.FADE);
                     final CardList list = player.getCardsIn(ZoneType.Battlefield).filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             return (c.isArtifact() || c.isLand() || c.isCreature()) && c.isUntapped();
                         }
                     });
@@ -2157,7 +2157,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             // try to find non creature cards without tap abilities 
                             CardList betterList = list.filter(new Predicate<Card>() {
                                 @Override
-                                public boolean isTrue(final Card c) {
+                                public boolean apply(final Card c) {
                                     if (c.isCreature()) {
                                         return false;
                                     }
@@ -2232,7 +2232,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
         CardList blaze = player.getCardsIn(ZoneType.Battlefield);
         blaze = blaze.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.isLand() && (c.getCounters(Counters.BLAZE) > 0);
             }
         });
@@ -2276,7 +2276,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     final CardList enchantmentsAttached = new CardList(source.getEnchantingPlayer().getEnchantedBy());
                     enchantmentsInLibrary = enchantmentsInLibrary.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             return c.isEnchantment() && c.hasKeyword("Enchant player")
                                     && !source.getEnchantingPlayer().hasProtectionFrom(c)
                                     && !CardPredicates.nameEquals(c.getName()).any(enchantmentsAttached);

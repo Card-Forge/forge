@@ -166,7 +166,7 @@ public class ComputerUtilAttack {
         CardList list = new CardList(in);
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return CombatUtil.canAttack(c);
             }
         });
@@ -188,7 +188,7 @@ public class ComputerUtilAttack {
         CardList possibleBlockers = new CardList(blockers);
         possibleBlockers = possibleBlockers.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return canBlockAnAttacker(c, attackers);
             }
         });
@@ -842,7 +842,7 @@ public class ComputerUtilAttack {
         CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.hasKeyword("Exalted");
             }
         });

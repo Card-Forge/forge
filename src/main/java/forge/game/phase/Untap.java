@@ -118,7 +118,7 @@ public class Untap extends Phase implements java.io.Serializable {
 
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 if (!Untap.canUntap(c)) {
                     return false;
                 }
@@ -197,7 +197,7 @@ public class Untap extends Phase implements java.io.Serializable {
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
                 landList = landList.filter(Presets.TAPPED).filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return Untap.canUntap(c);
                     }
                 });
@@ -230,7 +230,7 @@ public class Untap extends Phase implements java.io.Serializable {
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
                 landList = landList.filter(Presets.TAPPED).filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return Untap.canUntap(c);
                     }
                 });
@@ -245,7 +245,7 @@ public class Untap extends Phase implements java.io.Serializable {
                 artList = artList.filter(Presets.ARTIFACTS);
                 artList = artList.filter(Presets.TAPPED).filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return Untap.canUntap(c);
                     }
                 });
@@ -280,7 +280,7 @@ public class Untap extends Phase implements java.io.Serializable {
                 artList = artList.filter(Presets.ARTIFACTS);
                 artList = artList.filter(Presets.TAPPED).filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return Untap.canUntap(c);
                     }
                 });
@@ -294,7 +294,7 @@ public class Untap extends Phase implements java.io.Serializable {
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
                 creatures = creatures.filter(Presets.TAPPED).filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return Untap.canUntap(c);
                     }
                 });
@@ -328,7 +328,7 @@ public class Untap extends Phase implements java.io.Serializable {
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                 creatures = creatures.filter(Presets.TAPPED).filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return Untap.canUntap(c);
                     }
                 });
@@ -369,7 +369,7 @@ public class Untap extends Phase implements java.io.Serializable {
         final CardList list = turn.getCardsIncludePhasingIn(ZoneType.Battlefield).filter(new Predicate<Card>() {
 
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return ((c.isPhasedOut() && c.isDirectlyPhasedOut()) || c.hasKeyword("Phasing"));
             }
         });

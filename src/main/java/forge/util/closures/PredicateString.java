@@ -85,7 +85,7 @@ public abstract class PredicateString<T> extends Predicate<T> {
     public static PredicateString<String> contains(final String what) { 
         return new PredicateString<String>(StringOp.CONTAINS) {
             @Override
-            public boolean isTrue(String subject) {
+            public boolean apply(String subject) {
                 return op(subject, what);
             } 
         };
@@ -93,7 +93,7 @@ public abstract class PredicateString<T> extends Predicate<T> {
     public static PredicateString<String> containsIgnoreCase(final String what) { 
         return new PredicateString<String>(StringOp.CONTAINS_IC) {
             @Override
-            public boolean isTrue(String subject) {
+            public boolean apply(String subject) {
                 return op(subject, what);
             } 
         };
@@ -101,7 +101,7 @@ public abstract class PredicateString<T> extends Predicate<T> {
     public static PredicateString<String> equals(final String what) { 
         return new PredicateString<String>(StringOp.EQUALS) {
             @Override
-            public boolean isTrue(String subject) {
+            public boolean apply(String subject) {
                 return op(subject, what);
             } 
         };
@@ -109,7 +109,7 @@ public abstract class PredicateString<T> extends Predicate<T> {
     public static PredicateString<String> equalsIgnoreCase(final String what) { 
         return new PredicateString<String>(StringOp.EQUALS_IC) {
             @Override
-            public boolean isTrue(String subject) {
+            public boolean apply(String subject) {
                 return op(subject, what);
             } 
         };

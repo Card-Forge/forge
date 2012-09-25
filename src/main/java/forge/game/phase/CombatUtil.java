@@ -884,7 +884,7 @@ public class CombatUtil {
                     CardList list = AllZoneUtil.getCreaturesInPlay(c.getController().getOpponent());
                     list = list.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card ct) {
+                        public boolean apply(final Card ct) {
                             return ((ct.isUntapped() && (ct.getNetAttack() >= powerLimit[0]) && asSeparateWords[14]
                                     .contains("greater")) || (ct.isUntapped() && (ct.getNetAttack() <= powerLimit[0]) && asSeparateWords[14]
                                     .contains("less")));
@@ -928,7 +928,7 @@ public class CombatUtil {
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls a snow land.")) {
                 temp = list.filter(new Predicate<Card>() {
                     @Override
-                    public boolean isTrue(final Card c) {
+                    public boolean apply(final Card c) {
                         return c.isLand() && c.isSnow();
                     }
                 });
@@ -968,7 +968,7 @@ public class CombatUtil {
         CardList list = AllZoneUtil.getCreaturesInPlay(player);
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return CombatUtil.canBlock(att, c) && (c.hasFirstStrike() || c.hasDoubleStrike());
             }
         });
@@ -3083,7 +3083,7 @@ public class CombatUtil {
                         CardList enchantments = attacker.getController().getCardsIn(ZoneType.Library);
                         enchantments = enchantments.filter(new Predicate<Card>() {
                             @Override
-                            public boolean isTrue(final Card c) {
+                            public boolean apply(final Card c) {
                                 if (attacker.hasKeyword("Protection from enchantments")
                                         || (attacker.hasKeyword("Protection from everything"))) {
                                     return false;

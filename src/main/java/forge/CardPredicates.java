@@ -37,7 +37,7 @@ public final class CardPredicates {
     public static Predicate<Card> isController(final Player p) { 
         return new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.getController().isPlayer(p);
             }
         };
@@ -45,7 +45,7 @@ public final class CardPredicates {
     public static Predicate<Card> isOwner(final Player p) {
         return new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.getOwner().isPlayer(p);
             }
         };
@@ -54,7 +54,7 @@ public final class CardPredicates {
     public static Predicate<Card> isType(final String cardType) {
         return new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.isType(cardType);
             }
         };
@@ -63,7 +63,7 @@ public final class CardPredicates {
     public static Predicate<Card> hasKeyword(final String keyword) {
         return new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.hasKeyword(keyword);
             }
         };
@@ -72,7 +72,7 @@ public final class CardPredicates {
     public static Predicate<Card> containsKeyword(final String keyword) {
         return new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return PredicateString.contains(keyword).any(c.getKeyword());
             }
         };
@@ -81,7 +81,7 @@ public final class CardPredicates {
     public static Predicate<Card> isTargetableBy(final SpellAbility source) {
         return new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return source.canTarget(c);
             }
         };
@@ -90,7 +90,7 @@ public final class CardPredicates {
     public static Predicate<Card> nameEquals(final String name) {
         return new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.getName().equals(name);
             }
         };
@@ -100,7 +100,7 @@ public final class CardPredicates {
     public static Predicate<Card> possibleBlockers(final Card attacker) {
         return new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return (c.isCreature() && CombatUtil.canBlock(attacker, c));
             }
         };
@@ -108,7 +108,7 @@ public final class CardPredicates {
     
     public static final Predicate<Card> possibleAttackers = new Predicate<Card>() {
         @Override
-        public boolean isTrue(final Card c) {
+        public boolean apply(final Card c) {
             return (c.isCreature() && CombatUtil.canAttack(c));
         }
     };
@@ -116,7 +116,7 @@ public final class CardPredicates {
     public static Predicate<Card> isProtectedFrom(final Card source) {
         return new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return !c.hasProtectionFrom(source);
             }
         };
@@ -130,7 +130,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> TAPPED = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isTapped();
             }
         };
@@ -139,7 +139,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> UNTAPPED = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isUntapped();
             }
         };
@@ -148,7 +148,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> CREATURES = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isCreature();
             }
         };
@@ -157,7 +157,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> ENCHANTMENTS = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isEnchantment();
             }
         };
@@ -166,7 +166,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> EQUIPMENT = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isEquipment();
             }
         };
@@ -175,7 +175,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> UNENCHANTED = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return !c.isEnchanted();
             }
         };
@@ -184,7 +184,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> ENCHANTED = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isEnchanted();
             }
         };
@@ -193,7 +193,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> NON_TOKEN = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return !c.isToken();
             }
         };
@@ -202,7 +202,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> TOKEN = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isToken();
             }
         };
@@ -211,7 +211,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> NON_BASIC_LAND = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return !c.isBasicLand();
             }
         };
@@ -220,7 +220,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> BASIC_LANDS = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 // the isBasicLand() check here may be sufficient...
                 return c.isLand() && c.isBasicLand();
             }
@@ -230,7 +230,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> ARTIFACTS = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isArtifact();
             }
         };
@@ -239,7 +239,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> NON_ARTIFACTS = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return !c.isArtifact();
             }
         };
@@ -248,7 +248,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> LANDS = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isLand();
             }
         };
@@ -257,7 +257,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> NON_LANDS = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return !c.isLand();
             }
         };
@@ -266,7 +266,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> BLACK = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isBlack();
             }
         };
@@ -275,7 +275,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> BLUE = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isBlue();
             }
         };
@@ -284,7 +284,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> GREEN = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isGreen();
             }
         };
@@ -293,7 +293,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> RED = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isRed();
             }
         };
@@ -302,7 +302,7 @@ public final class CardPredicates {
          */
         public static final Predicate<Card> WHITE = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isWhite();
             }
         };
@@ -310,13 +310,13 @@ public final class CardPredicates {
 
         public static final Predicate<Card> hasFirstStrike = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isCreature() && (c.hasFirstStrike() || c.hasDoubleStrike());
             }
         };
         public static final Predicate<Card> hasSecondStrike = new Predicate<Card>() {
             @Override
-            public boolean isTrue(Card c) {
+            public boolean apply(Card c) {
                 return c.isCreature() && (!c.hasFirstStrike() || c.hasDoubleStrike());
             }
         };

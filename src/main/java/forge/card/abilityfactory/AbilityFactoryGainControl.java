@@ -337,7 +337,7 @@ public class AbilityFactoryGainControl {
         // purpose
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 final Map<String, String> vars = c.getSVars();
                 return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa);
             }
@@ -856,7 +856,7 @@ public class AbilityFactoryGainControl {
         // purpose
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 final Map<String, String> vars = c.getSVars();
                 return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa);
             }

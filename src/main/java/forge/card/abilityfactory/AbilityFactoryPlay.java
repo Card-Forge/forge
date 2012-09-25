@@ -395,7 +395,7 @@ public final class AbilityFactoryPlay {
                     // AI
                     tgtCards = tgtCards.filter(new Predicate<Card>() {
                         @Override
-                        public boolean isTrue(final Card c) {
+                        public boolean apply(final Card c) {
                             ArrayList<SpellAbility> spellAbilities = c.getBasicSpells();
                             ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
                             for (SpellAbility s : spellAbilities) {

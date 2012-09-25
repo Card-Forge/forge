@@ -232,7 +232,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
         list = list.filter(new Predicate<Card>() {
             @Override
-            public boolean isTrue(final Card c) {
+            public boolean apply(final Card c) {
                 return c.getName().equals("Lighthouse Chronologist") && (c.getCounters(Counters.LEVEL) >= 7);
             }
         });

@@ -458,7 +458,7 @@ public class ComputerUtilBlock {
             // attacker has it
             usableBlockers = blockers.filter(new Predicate<Card>() {
                 @Override
-                public boolean isTrue(final Card c) {
+                public boolean apply(final Card c) {
                     if ((attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike"))
                             && !(c.hasKeyword("First Strike") || c.hasKeyword("Double Strike"))) {
                         return false;
