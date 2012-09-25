@@ -41,7 +41,33 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-
+- Several improvements of Attach AI.
+- pom: removed Generators, added log4j (was dependency of generators)
+- change of card build pipeline, (getCard returned the same instance, so they return void now)
+- CardList: further removal of special methods
+- NameChanger: the change routine never needed the complicated generator.
+- Fixed a possible NPE in copySpellontoStack.
+- Fixed a svn-update issue
+- Fixed text filter of the deck editor being case sensitive.
+- Converted home UI to be completely cached during preload.
+- Repeat now has a MaxRepeat param to break from an infinite loop
+- StoreSVar now can handle a few more forms of storing variables.
+- Removed rounded corners on drag panels (experimental).
+- Renamed forge.view.bazaar to forge.gui.bazaar for consistency.
+- Content downloader UI overhaul:
+1 Updated to skin themes
+2 Incorporated into overlay
+3 Moved card scanning to worker thread
+4 Improved general responsiveness
+- Initial implementation of combination mana
+- more specific methods removed from CardList
+- Again reduced number of own methods of CardList, 
+- removed pointless conversions toArray in GuiUtils.chooseXXX calls
+- removed useless casts to object array of (Object[])someList.toArray() structures
+- Added new MetaSet types and functionality to support guild boosters in RtR Sealed. New types: choose1, random1, and combo, plus auxiliary types booster and pack.
+- Cleared out the changes.txt file, now ready for new material.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -54,12 +80,14 @@ Added the following cards to the Return to Ravnica branch (These cards are not y
 Abrupt Decay
 Aerial Predation
 Annihilating Fire
+Aquus Steed
 Archon of the Triumvirate
 Archweaver
 Armada Wurm
 Armory Guard
 Assassin's Strike
 Auger Spree
+Axebane Guardian
 Axebane Stag
 Azorius Guildgate
 Azorius Justiciar
@@ -72,6 +100,7 @@ Chromatic Lantern
 Civic Saber
 Cobblebrute
 Collective Blessing
+Concordia Pegasus
 Crosstown Courier
 Cyclonic Rift
 Daggerdrome Imp
@@ -99,6 +128,7 @@ Grim Roustabout
 Grisly Salvage
 Grove of the Guardian
 Guttersnipe
+Hover Barrier
 Hypersonic Dragon
 Isperia, Supreme Judge
 Izzet Charm
@@ -110,6 +140,7 @@ Keening Apparition
 Launch Party
 Lotleth Troll
 Loxodon Smiter
+Lyev Skyknight
 Martial Law
 Mercurial Chemister
 Minotaur Aggressor
@@ -135,6 +166,7 @@ Runewing
 Savage Surge
 Search the City
 Selesnya Guildgate
+Selesnya Sentry
 Sewer Shambler
 Skull Rend
 Skyline Predator
@@ -149,7 +181,10 @@ Stealer of Secrets
 Sunspire Griffin
 Supreme Verdict
 Tenement Crasher
+Terrus Wurm
 Thoughtflare
+Thrill-Kill Assassin
+Trained Caracal
 Transguild Promenade
 Treasured Find
 Trestle Troll
@@ -161,6 +196,7 @@ Voidwielder
 Vraska the Unseen
 Wayfaring Temple
 Worldspine Wurm
+Zanikev Locust
 
 
 Added the following cards:
