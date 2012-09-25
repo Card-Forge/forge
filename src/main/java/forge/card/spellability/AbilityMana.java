@@ -478,6 +478,17 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
 
     /**
      * <p>
+     * isComboMana.
+     * </p>
+     *
+     * @return a boolean.
+     */
+    public boolean isComboMana() {
+        return this.getOrigProduced().contains("Combo");
+    }
+
+    /**
+     * <p>
      * canProduce.
      * </p>
      * 
@@ -605,6 +616,20 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
      */
     public String getOrigProduced() {
         return origProduced;
+    }
+
+    /**
+     * @return the color available in combination mana
+     */
+    public String getComboColors() {
+        String retVal = "";
+        if (this.getOrigProduced().contains("Combo")) {
+            retVal = this.getOrigProduced().replace("Combo ", "");
+            if (retVal.contains("Any")) {
+                retVal = "W U B R G";
+            }
+        }
+        return retVal;
     }
 
 } // end class AbilityMana

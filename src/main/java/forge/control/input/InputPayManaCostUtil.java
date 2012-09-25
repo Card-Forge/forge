@@ -158,8 +158,14 @@ public class InputPayManaCostUtil {
                 } else if (am.isAnyMana()) {
                         colorMatches.add(am);
                 } else {
-                    final String[] m = am.getManaProduced().split(" ");
-                    for (final String color : m) {
+                    String[] colorsProduced;
+                    if (am.isComboMana()) {
+                        colorsProduced = am.getComboColors().split(" ");
+                    }
+                    else {
+                        colorsProduced = am.getManaProduced().split(" ");
+                    }
+                    for (final String color : colorsProduced) {
                         if (manaCost.isColor(color)) {
                             // checking if color
                             colorMatches.add(am);
@@ -168,7 +174,6 @@ public class InputPayManaCostUtil {
                 }
             }
 
-            // Why is choice made "false" if colorMatches and abilities have same size
             if ((colorMatches.size() == 0)) {
                 // can only match colorless just grab the first and move on.
                 choice = false;
@@ -265,7 +270,14 @@ public class InputPayManaCostUtil {
                 }
             }
         } else {
-            for (final String color : am.getManaProduced().split(" ")) {
+            String[] colorsProduced;
+            if (am.isComboMana()) {
+                colorsProduced = am.getComboColors().split(" ");
+            }
+            else {
+                colorsProduced = am.getManaProduced().split(" ");
+            }
+            for (final String color : colorsProduced) {
                 if (mana.contains(color)) {
                     return true;
                 }

@@ -27,11 +27,14 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
+import forge.Constant;
+import forge.Counters;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityFactoryMana;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostMana;
@@ -707,8 +710,14 @@ public class ComputerUtil {
                 if ("S".equals(costParts[nPart])) {
                     manaProduced = "S";
                 } else {
+                    if (m.isComboMana()) {
+                        String colorChoice = costParts[nPart];
+                        m.setExpressChoice(colorChoice);
+                        colorChoice = getComboManaChoice(m, sa, cost);
+                        m.setExpressChoice(colorChoice);
+                    }
                     // check if ability produces any color
-                    if (m.isAnyMana()) {
+                    else if (m.isAnyMana()) {
                         String colorChoice = costParts[nPart];
                         final ArrayList<String> negEffect = cost.getManaNeededToAvoidNegativeEffect();
                         final ArrayList<String> negEffectPaid = cost.getManaPaidToAvoidNegativeEffect();
@@ -1197,6 +1206,82 @@ public class ComputerUtil {
         }
 
         return manaMap;
+    }
+
+    /**
+     * <p>
+     * getComboManaChoice.
+     * </p>
+     * 
+     * @param abMana
+     *            a {@link forge.card.spellability.AbilityMana} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param cost
+     *            a {@link forge.card.mana.ManaCost} object.
+     * @return String
+     */
+    public static String getComboManaChoice(final AbilityMana abMana, final SpellAbility sa, final ManaCost cost) {
+
+        final AbilityFactory af = abMana.getAbilityFactory();
+        final HashMap<String, String> params = af.getMapParams();
+        final StringBuilder choiceString = new StringBuilder();
+
+        if (abMana.isComboMana()) {
+            int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(),
+                    params.get("Amount"), sa) : 1;
+            final ManaCost testCost = new ManaCost(cost.toString().replace("X ", ""));
+            final String[] comboColors = abMana.getComboColors().split(" ");
+            for (int nMana = 1; nMana <= amount; nMana++) {
+                String choice = "";
+                // Use expressChoice first
+                if (!abMana.getExpressChoice().isEmpty()) {
+                    choice = abMana.getExpressChoice();
+                    abMana.clearExpressChoice();
+                    if (abMana.canProduce(choice) && testCost.isNeeded(choice)) {
+                        choiceString.append(choice);
+                        testCost.payMultipleMana(choice);
+                        continue;
+                    }
+                }
+                // check colors needed for cost
+                if (!testCost.isPaid()) {
+                    // Loop over combo colors
+                    for (String color :  comboColors) {
+                        if (testCost.isNeeded(color)) {
+                            testCost.payMultipleMana(color);
+                            if (nMana != 1) {
+                                choiceString.append(" ");
+                            }
+                            choiceString.append(color);
+                            choice = color;
+                            break;
+                        }
+                    }
+                    if (!choice.isEmpty()) {
+                        continue;
+                    }
+                }
+                // check if combo mana can produce most common color in hand
+                String commonColor = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
+                        ZoneType.Hand));
+                if (!commonColor.isEmpty() && abMana.getComboColors().contains(InputPayManaCostUtil.getShortColorString(commonColor))) {
+                    choice = InputPayManaCostUtil.getShortColorString(commonColor);
+                }
+                else {
+                    // default to first color
+                    choice = comboColors[0];
+                }
+                if (nMana != 1) {
+                    choiceString.append(" ");
+                }
+                choiceString.append(choice);
+            }
+        }
+        if (choiceString.toString().isEmpty()) {
+            choiceString.append("0");
+        }
+        return choiceString.toString();
     }
 
     // plays a land if one is available

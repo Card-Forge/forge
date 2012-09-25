@@ -328,7 +328,68 @@ public class AbilityFactoryMana {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        if (abMana.isAnyMana()) {
+        if (abMana.isComboMana()) {
+            for (Player p : tgtPlayers) {
+                int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(),
+                        params.get("Amount"), sa) : 1;
+                if (tgt == null || p.canBeTargetedBy(sa)) {
+                    // AI color choice is set in ComputerUtils so only human players need to make a choice
+                    if (sa.getActivatingPlayer().isHuman()) {
+                        //String colorsNeeded = abMana.getExpressChoice();
+                        String[] colorsProduced = abMana.getComboColors().split(" ");
+                        final StringBuilder choiceString = new StringBuilder();
+                        String[] colorMenu = null;
+                        if (!abMana.isAnyMana()) {
+                            colorMenu = new String[colorsProduced.length];
+                            //loop through colors to make menu
+                            for (int nColor = 0; nColor < colorsProduced.length; nColor++) {
+                                colorMenu[nColor] = InputPayManaCostUtil.getLongColorString(colorsProduced[nColor]);
+                            }
+                        }
+                        else {
+                            colorMenu = Constant.Color.ONLY_COLORS;
+                        }
+                        for (int nMana = 1; nMana <= amount; nMana++) {
+                            String choice = "";
+                                Object o = GuiUtils.chooseOne("Select Mana to Produce", colorMenu);
+                                if (o == null) {
+                                    final StringBuilder sb = new StringBuilder();
+                                    sb.append("AbilityFactoryMana::manaResolve() - Human color mana choice is empty for ");
+                                    sb.append(sa.getSourceCard().getName());
+                                    throw new RuntimeException(sb.toString());
+                                } else {
+                                    choice = InputPayManaCostUtil.getShortColorString((String) o);
+                                    if (nMana != 1) {
+                                        choiceString.append(" ");
+                                    }
+                                    choiceString.append(choice);
+                                }
+                        }
+                        abMana.setExpressChoice(choiceString.toString());
+                    }
+                    else {
+                        // TODO: Add some logic for AI choice (ArsenalNut 2012/09/16)
+                        if (params.containsKey("AILogic")) {
+                            final String logic = params.get("AILogic");
+                            String chosen = Constant.Color.BLACK;
+                            if (logic.equals("MostProminentInComputerHand")) {
+                                chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
+                                        ZoneType.Hand));
+                            }
+                            GuiUtils.chooseOne("Computer picked: ", new String[]{chosen});
+                            abMana.setExpressChoice(InputPayManaCostUtil.getShortColorString(chosen));
+                        }
+                        if (abMana.getExpressChoice().isEmpty()) {
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append("AbilityFactoryMana::manaResolve() - combo mana color choice is empty for ");
+                            sb.append(sa.getSourceCard().getName());
+                            throw new RuntimeException(sb.toString());
+                        }
+                    }
+                }
+            }
+        }
+        else if (abMana.isAnyMana()) {
             for (Player p : tgtPlayers) {
                 if (tgt == null || p.canBeTargetedBy(sa)) {
                     // AI color choice is set in ComputerUtils so only human players need to make a choice
@@ -429,12 +490,19 @@ public class AbilityFactoryMana {
                 params.get("Amount"), sa) : 1;
 
         String baseMana;
-        if (abMana.isAnyMana()) {
+        if (abMana.isComboMana()) {
+            baseMana = abMana.getExpressChoice();
+            if (baseMana.isEmpty()) {
+                baseMana = abMana.getOrigProduced();
+            }
+        }
+        else if (abMana.isAnyMana()) {
             baseMana = abMana.getExpressChoice();
             if (baseMana.isEmpty()) {
                 baseMana = "Any";
             }
-        } else {
+        }
+        else {
             baseMana = abMana.mana();
         }
 
@@ -463,7 +531,12 @@ public class AbilityFactoryMana {
         final StringBuilder sb = new StringBuilder();
         if (amount == 0) {
             sb.append("0");
-        } else {
+        }
+        else if (abMana.isComboMana()) {
+            // amount is already taken care of in resolve method for combination mana, just append baseMana
+            sb.append(baseMana);
+        }
+        else {
             try {
                 // if baseMana is an integer(colorless), just multiply amount
                 // and baseMana
