@@ -141,7 +141,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             c.comesIntoPlay();
 
             if (c.isLand()) {
-                CardList list = player.getCardsIn(ZoneType.Battlefield);
+                /*CardList list = player.getCardsIn(ZoneType.Battlefield);
 
                 list = list.filter(new Predicate<Card>() {
                     @Override
@@ -152,7 +152,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
 
                 for (int i = 0; i < list.size(); i++) {
                     GameActionUtil.executeLandfallEffects(list.get(i));
-                }
+                }*/
 
                 // Tectonic Instability
                 final CardList tis = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Tectonic Instability");

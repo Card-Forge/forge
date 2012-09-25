@@ -642,14 +642,14 @@ public final class GameActionUtil {
      * 
      * @param c
      *            a {@link forge.Card} object.
-     */
+     *//*
     public static void executeLandfallEffects(final Card c) {
         if (c.getName().equals("Lotus Cobra")) {
             GameActionUtil.landfallLotusCobra(c);
         }
     }
 
-    /**
+    *//**
      * <p>
      * showLandfallDialog.
      * </p>
@@ -657,7 +657,7 @@ public final class GameActionUtil {
      * @param c
      *            a {@link forge.Card} object.
      * @return a boolean.
-     */
+     *//*
     private static boolean showLandfallDialog(final Card c) {
         CMatchUI.SINGLETON_INSTANCE.setCard(c);
         final String[] choices = { "Yes", "No" };
@@ -669,14 +669,14 @@ public final class GameActionUtil {
         return (q != null) && q.equals("Yes");
     }
 
-    /**
+    *//**
      * <p>
      * landfallLotusCobra.
      * </p>
      * 
      * @param c
      *            a {@link forge.Card} object.
-     */
+     *//*
     private static void landfallLotusCobra(final Card c) {
         final Ability ability = new Ability(c, "0") {
             @Override
@@ -705,7 +705,7 @@ public final class GameActionUtil {
             // TODO once AI has a mana pool he should choose add Ability and
             // choose a mana as appropriate
         }
-    }
+    }*/
 
     // not restricted to combat damage, not restricted to dealing damage to
     // creatures/players
