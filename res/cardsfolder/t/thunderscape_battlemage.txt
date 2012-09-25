@@ -8,7 +8,7 @@ K:Kicker G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked 1 B | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its 1 B kicker, target player discards two cards.
 SVar:TrigKicker:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ 2 | Mode$ TgtChoose
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked G | Execute$ TrigKicker2 | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its G kicker, destroy target enchantment.
-SVar:TrigKicker2:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target artifact
+SVar:TrigKicker2:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderscape_battlemage.jpg
