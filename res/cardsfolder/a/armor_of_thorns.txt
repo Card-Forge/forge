@@ -10,7 +10,6 @@ SVar:CleanupTrig:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Exec
 SVar:Sac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armor_of_thorns.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/104.jpg

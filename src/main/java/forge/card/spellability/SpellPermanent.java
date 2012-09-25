@@ -36,6 +36,7 @@ import forge.card.replacement.ReplacementEffect;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerAIGeneral;
 import forge.game.player.ComputerUtil;
@@ -302,6 +303,12 @@ public class SpellPermanent extends Spell {
         if (card.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
                 && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())
                      || Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
+            return false;
+        }
+
+        // Prevent the computer from summoning Ball Lightning type creatures after attacking
+        if (card.hasStartOfKeyword("You may cast CARDNAME as though it had flash. If")
+                && !PhaseHandler.couldCastSorcery(card.getController(), this)) {
             return false;
         }
 
