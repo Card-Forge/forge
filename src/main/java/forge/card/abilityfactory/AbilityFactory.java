@@ -1597,9 +1597,9 @@ public class AbilityFactory {
                 catch(NumberFormatException ignored) {
                     //If this is reached, amount wasn't an integer
                     //Print a warning to console to help debug if an ability is not stolen properly.
-                    System.out.println("WARNING:SVar fallback to card with ability present!");
-                    System.out.println("Card:" + card.getName());
-                    System.out.println("Ability:" + ability.toString());
+                    StringBuilder sb = new StringBuilder("WARNING:SVar fallback to Card (");
+                    sb.append(card.getName()).append(") and Ability(").append(ability.toString()).append(")");
+                    System.out.println(sb.toString());
                     svarval = card.getSVar(amount);
                 }
             }

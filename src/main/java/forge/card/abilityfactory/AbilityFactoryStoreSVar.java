@@ -319,6 +319,12 @@ public class AbilityFactoryStoreSVar {
         if (type.equals("Count")) {
             value = CardFactoryUtil.xCount(source, expr);
         }
+        else if (type.equals("Number")) {
+            value = Integer.valueOf(expr);
+        }
+        else if (type.equals("CountSVar")) {
+            value = CardFactoryUtil.xCount(source, "SVar$" + expr);
+        }
         //TODO For other types call a different function
 
         StringBuilder numBuilder = new StringBuilder();

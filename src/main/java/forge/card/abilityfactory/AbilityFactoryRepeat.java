@@ -215,16 +215,34 @@ public final class AbilityFactoryRepeat {
      */
     private static void repeatResolve(final AbilityFactory af, final SpellAbility sa) {
         final AbilityFactory afRepeat = new AbilityFactory();
+        final HashMap<String, String> params = af.getMapParams();
 
         // setup subability to repeat
         final SpellAbility repeat = afRepeat.getAbility(
-                af.getHostCard().getSVar(af.getMapParams().get("RepeatSubAbility")), af.getHostCard());
-        repeat.setActivatingPlayer(af.getHostCard().getController());
+                af.getHostCard().getSVar(params.get("RepeatSubAbility")), sa.getSourceCard());
+        repeat.setActivatingPlayer(sa.getActivatingPlayer());
         ((AbilitySub) repeat).setParent(sa);
 
+        Integer maxRepeat = null;
+        if (params.containsKey("MaxRepeat")) {
+            maxRepeat = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("MaxRepeat"), sa);
+        }
+        
         //execute repeat ability at least once
+        int count = 0;
         do {
              AbilityFactory.resolve(repeat, false);
+             count++;
+             if (maxRepeat != null && maxRepeat <= count) {
+                 // TODO Replace Infinite Loop Break with a game draw. Here are the scenarios that can cause this:
+                 // Helm of Obedience vs Graveyard to Library replacement effect
+                 StringBuilder infLoop = new StringBuilder(sa.getSourceCard().toString());
+                 infLoop.append(" - To avoid an infinite loop, this repeat has been broken ");
+                 infLoop.append(" and the game will now continue in the current state, ending the loop early. ");
+                 infLoop.append("Once Draws are available this probably should change to a Draw.");
+                 System.out.println(infLoop.toString());
+                 break;
+             }
        } while (checkRepeatConditions(af, sa));
 
     }
