@@ -3954,6 +3954,7 @@ res/cardsfolder/g/goldenglow_moth.txt svneol=native#text/plain
 res/cardsfolder/g/goldmeadow_dodger.txt svneol=native#text/plain
 res/cardsfolder/g/goldmeadow_harrier.txt svneol=native#text/plain
 res/cardsfolder/g/goldmeadow_lookout.txt svneol=native#text/plain
+res/cardsfolder/g/goldmeadow_stalwart.txt -text
 res/cardsfolder/g/goldnight_commander.txt -text
 res/cardsfolder/g/goldnight_redeemer.txt -text
 res/cardsfolder/g/golem_artisan.txt svneol=native#text/plain
@@ -9141,6 +9142,7 @@ res/cardsfolder/s/squall_line.txt svneol=native#text/plain
 res/cardsfolder/s/squallmonger.txt svneol=native#text/plain
 res/cardsfolder/s/squandered_resources.txt svneol=native#text/plain
 res/cardsfolder/s/squeaking_pie_grubfellows.txt svneol=native#text/plain
+res/cardsfolder/s/squeaking_pie_sneak.txt -text
 res/cardsfolder/s/squealing_devil.txt -text
 res/cardsfolder/s/squee_goblin_nabob.txt svneol=native#text/plain
 res/cardsfolder/s/squees_embrace.txt svneol=native#text/plain
@@ -11084,6 +11086,7 @@ res/cardsfolder/w/wreath_of_geists.txt -text
 res/cardsfolder/w/wrecking_ball.txt svneol=native#text/plain
 res/cardsfolder/w/wrench_mind.txt svneol=native#text/plain
 res/cardsfolder/w/wrens_run_packmaster.txt svneol=native#text/plain
+res/cardsfolder/w/wrens_run_vanquisher.txt -text
 res/cardsfolder/w/wretched_anurid.txt svneol=native#text/plain
 res/cardsfolder/w/wretched_banquet.txt -text
 res/cardsfolder/w/wrexial_the_risen_deep.txt -text

@@ -1,0 +1,12 @@
+Name:Squeaking Pie Sneak
+ManaCost:1 B
+Types:Creature Goblin Rogue
+Text:no text
+PT:2/2
+K:Fear
+K:AlternateAdditionalCost:Reveal<1/Goblin>:3
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/squeaking_pie_sneak.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/142.jpg
+Oracle:As an additional cost to cast Squeaking Pie Sneak, reveal a Goblin card from your hand or pay {3}.\nFear (This creature can't be blocked except by artifact creatures and/or black creatures.)
+End

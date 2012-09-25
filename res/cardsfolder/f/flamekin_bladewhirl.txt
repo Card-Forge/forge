@@ -1,7 +1,7 @@
 Name:Flamekin Bladewhirl
 ManaCost:R
 Types:Creature Elemental Warrior
-Text:As an additional cost to cast Flamekin Bladewhirl, reveal an Elemental card from your hand or pay 3.
+Text:no text
 PT:2/1
 K:AlternateAdditionalCost:Reveal<1/Elemental>:3
 SVar:Rarity:Uncommon

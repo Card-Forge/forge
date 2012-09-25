@@ -2193,22 +2193,21 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (keyword.startsWith("Permanents don't untap during their controllers' untap steps")
                     || keyword.startsWith("PreventAllDamageBy")
                     || keyword.startsWith("CantBlock")
-                    || keyword.startsWith("CantBeBlockedBy")
-                    || keyword.startsWith("AlternateAdditionalCost")) {
+                    || keyword.startsWith("CantBeBlockedBy")) {
                 continue;
             }
             if (keyword.startsWith("CostChange")) {
-                final String[] k = keywords.get(i).split(":");
+                final String[] k = keyword.split(":");
                 if (k.length > 8) {
                     sbLong.append(k[8]).append("\r\n");
                 }
             } else if (keyword.startsWith("AdjustLandPlays")) {
-                final String[] k = keywords.get(i).split(":");
+                final String[] k = keyword.split(":");
                 if (k.length > 3) {
                     sbLong.append(k[3]).append("\r\n");
                 }
             } else if (keyword.startsWith("etbCounter")) {
-                final String[] p = keywords.get(i).split(":");
+                final String[] p = keyword.split(":");
                 final StringBuilder s = new StringBuilder();
                 if (p.length > 4) {
                     s.append(p[4]);
@@ -2283,6 +2282,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append("\r\n");
             }  else if (keyword.startsWith("Alternative Cost")) {
                 sbLong.append("Has alternative cost.");
+            } else if (keyword.startsWith("AlternateAdditionalCost")) {
+                final String costString1 = keyword.split(":")[1];
+                final String costString2 = keyword.split(":")[2];
+                final Cost cost1 = new Cost(this, costString1, false);
+                final Cost cost2 = new Cost(this, costString2, false);
+                sbLong.append("As an additional cost to cast " + this.getName() + ", " + cost1.toSimpleString()
+                        + " or pay " + cost2.toSimpleString() + ".\r\n");
             } else if (keyword.startsWith("Kicker")) {
                 final Cost cost = new Cost(this, keywords.get(i).substring(7), false);
                 sbLong.append("Kicker " + cost.toSimpleString() + "\r\n");
