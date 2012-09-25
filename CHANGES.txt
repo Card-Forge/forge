@@ -5,7 +5,11 @@ Forge Beta: 0#-##-2012 ver 1.2.15
 11### cards in total.
 
 
+Fixed the deck editor text filter and it should now work as expected.
 
+The content downloader window now uses the new UI.
+
+Added new MetaSet types and functionality to support guild boosters in RtR Sealed.
 
 --
 
