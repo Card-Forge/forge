@@ -19,7 +19,6 @@ package forge;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -134,7 +133,7 @@ public final class CardUtil {
      * @return a {@link java.util.ArrayList} object.
      */
     public static List<String> getColors(final Card c) {
-        return Arrays.asList(c.determineColor().toStringArray());
+        return c.determineColor().toStringList();
     }
 
     /**
@@ -807,7 +806,7 @@ public final class CardUtil {
         final CardList res = new CardList();
 
         for (final CardColor col : origin.getColor()) {
-            for (final String strCol : col.toStringArray()) {
+            for (final String strCol : col.toStringList()) {
                 if (strCol.equalsIgnoreCase("Colorless")) {
                     continue;
                 }
@@ -838,7 +837,7 @@ public final class CardUtil {
             usableColors.add("colorless");
         }
         for (final CardColor col : cardToConvoke.getColor()) {
-            for (final String strCol : col.toStringArray()) {
+            for (final String strCol : col.toStringList()) {
                 if (strCol.equals("colorless")) {
                     continue;
                 }

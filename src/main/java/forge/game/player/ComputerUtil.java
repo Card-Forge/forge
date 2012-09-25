@@ -27,14 +27,12 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
-import forge.Constant;
-import forge.Counters;
+import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityFactoryMana;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostMana;
@@ -1329,14 +1327,15 @@ public class ComputerUtil {
                 // don't play the land if it has cycling and enough lands are
                 // available
                 final ArrayList<SpellAbility> spellAbilities = c.getSpellAbilities();
+
+                final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+                CardList lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                lands.addAll(hand);
+                lands = lands.getType("Land");
+                int maxCmcInHand = Predicate.getTrue(Card.class).max(hand, CardPredicates.Accessors.fnGetCmc);
                 for (final SpellAbility sa : spellAbilities) {
                     if (sa.isCycling()) {
-                        final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                        CardList lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                        lands.addAll(hand);
-                        lands = lands.getType("Land");
-
-                        if (lands.size() >= Math.max(hand.getHighestConvertedManaCost(), 6)) {
+                        if (lands.size() >= Math.max(maxCmcInHand, 6)) {
                             return false;
                         }
                     }
@@ -2208,7 +2207,7 @@ public class ComputerUtil {
         final CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land");
         final CardList landsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getType("Land");
         final CardList nonLandsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getNotType("Land");
-        final int highestCMC = Math.max(6, nonLandsInHand.getHighestConvertedManaCost());
+        final int highestCMC = Math.max(6, Predicate.getTrue(Card.class).max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
         final int discardCMC = discard.getCMC();
         if (discard.isLand()) {
             if (landsInPlay.size() >= highestCMC

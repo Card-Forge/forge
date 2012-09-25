@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import forge.card.spellability.SpellAbility;
-import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 import forge.util.closures.Predicate;
@@ -58,9 +57,6 @@ public class CardList extends ArrayList<Card> {
         this.add(c);
     }
     
-    public final void sort(final Comparator<Card> c) {
-        Collections.sort(this, c);
-    }    
     /**
      * <p>
      * toArray.
@@ -68,6 +64,7 @@ public class CardList extends ArrayList<Card> {
      * 
      * @return an array of {@link forge.Card} objects.
      */
+    @Override
     public final Card[] toArray() {
         final Card[] c = new Card[this.size()];
         this.toArray(c);
@@ -230,22 +227,8 @@ public class CardList extends ArrayList<Card> {
         return this.filter(CardPredicates.isTargetableBy(source));
     }
 
-    /**
-     * <p>
-     * getUnprotectedCards.
-     * </p>
-     * 
-     * @param source
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.CardList} object.
-     */
     public final CardList getUnprotectedCards(final Card source) {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return !c.hasProtectionFrom(source);
-            }
-        });
+        return this.filter(Predicate.not(CardPredicates.isProtectedFrom(source)));
     }
 
     /**
@@ -287,91 +270,6 @@ public class CardList extends ArrayList<Card> {
         });
     }
 
-    /**
-     * <p>
-     * getPossibleAttackers.
-     * </p>
-     * 
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getPossibleAttackers() {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return (c.isCreature() && CombatUtil.canAttack(c));
-            }
-        });
-    }
-
-    /**
-     * <p>
-     * getHighestConvertedManaCost.
-     * </p>
-     * 
-     * @return a int.
-     * @since 1.0.15
-     */
-    public final int getHighestConvertedManaCost() {
-        int total = 0;
-        for (int i = 0; i < this.size(); i++) {
-            total = Math.max(total, this.get(i).getCMC());
-        }
-        return total;
-    }
-
-    /**
-     * <p>
-     * getColored.
-     * </p>
-     * 
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getColored() {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return (!c.isColorless());
-            }
-        });
-    }
-
-    /**
-     * <p>
-     * getMonoColored.
-     * </p>
-     * @param includeColorless should colorless cards be included?
-     * 
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getMonoColored(final boolean includeColorless) {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean isTrue(final Card c) {
-                return (CardUtil.getColors(c).size() == 1 && (includeColorless || !c.isColorless()));
-            }
-        });
-    }
-
-    /**
-     * <p>
-     * getColor.
-     * </p>
-     * 
-     * @param cardColor
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getColor(final String cardColor) {
-        final CardList list = new CardList();
-        for (final Card c : this) {
-            if (cardColor.equals("Multicolor") && (c.getColor().size() > 1)) {
-                list.add(c);
-            } else if (c.isColor(cardColor) && (c.getColor().size() == 1)) {
-                list.add(c);
-            }
-        }
-        return list;
-    } // getColor()
 
 
 } // end class CardList

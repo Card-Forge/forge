@@ -19,6 +19,7 @@
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
@@ -1402,8 +1403,7 @@ public class AbilityFactoryZoneAffecting {
                                         }
                                     }
 
-                                    CardListUtil.sortByTextLen(dPChHand);
-                                    dChoices.add(dPChHand.get(0));
+                                    Collections.sort(dPChHand, CardListUtil.TextLenReverseComparator);
 
                                     CardListUtil.sortCMC(dPChHand);
                                     dChoices.add(dPChHand.get(0));

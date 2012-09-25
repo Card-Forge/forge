@@ -1789,7 +1789,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 j--;
             }
 
-            colors.addToCardColor(cc.toStringArray());
+            colors.addToCardColor(cc);
             if (!cc.getAdditional()) {
                 return colors;
             }
@@ -1797,7 +1797,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         while (i >= 0) {
             final CardColor cc = this.getCharacteristics().getCardColor().get(i);
             i--;
-            colors.addToCardColor(cc.toStringArray());
+            colors.addToCardColor(cc);
             if (!cc.getAdditional()) {
                 return colors;
             }
@@ -1805,7 +1805,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         while (j >= 0) {
             final CardColor cc = globalChanges.get(j);
             j--;
-            colors.addToCardColor(cc.toStringArray());
+            colors.addToCardColor(cc);
             if (!cc.getAdditional()) {
                 return colors;
             }

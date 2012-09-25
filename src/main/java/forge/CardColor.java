@@ -17,7 +17,10 @@
  */
 package forge;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.List;
 
 import forge.card.mana.ManaCost;
 
@@ -29,7 +32,15 @@ import forge.card.mana.ManaCost;
  * @author Forge
  * @version $Id$
  */
-public class CardColor {
+public class CardColor implements Iterable<Color>{
+    /* (non-Javadoc)
+     * @see java.lang.Iterable#iterator()
+     */
+    @Override
+    public Iterator<Color> iterator() {
+        return col.iterator();
+    }
+
     // takes care of individual card color, for global color change effects use
     // AllZone.getGameInfo().getColorChanges()
     private final EnumSet<Color> col;
@@ -134,6 +145,14 @@ public class CardColor {
         }
     }
 
+    public final void addToCardColor(final Iterable<Color> cc) {
+        for( Color c : cc ) { 
+            if (!this.col.contains(c)) {
+                this.col.add(c);
+            }
+        }
+    }    
+    
     /**
      * <p>
      * fixColorless.
@@ -188,4 +207,12 @@ public class CardColor {
         }
         return list;
     }
+    
+    public final List<String> toStringList() {
+        final List<String> list = new ArrayList<String>(this.col.size());
+        for (final Color c : this.col) {
+            list.add(c.toString());
+        }
+        return list;
+    }    
 }

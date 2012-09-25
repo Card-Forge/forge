@@ -33,6 +33,7 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardList;
 import forge.CardListUtil;
+import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
@@ -2477,7 +2478,7 @@ public class CardFactoryUtil {
                     list.add(AllZoneUtil.getCardState((Card) o));
                 }
             }
-            return CardListUtil.sumAttack(list);
+            return CardPredicates.Presets.hasSecondStrike.sum(list, CardPredicates.Accessors.fnGetAttack);
         }
 
         if (l[0].contains("RememberedSize")) {
@@ -2567,7 +2568,7 @@ public class CardFactoryUtil {
             final String[] colors = { "green", "white", "red", "blue", "black" };
 
             for (final String color : colors) {
-                if (someCards.getColor(color).size() > 0) {
+                if (!CardListUtil.getColor(someCards, color).isEmpty()) {
                     n++;
                 }
             }
@@ -3033,16 +3034,7 @@ public class CardFactoryUtil {
 
         // "Clerics you control" - Count$TypeYouCtrl.Cleric
         if (sq[0].contains("Type")) {
-            someCards = someCards.filter(new Predicate<Card>() {
-                @Override
-                public boolean isTrue(final Card c) {
-                    if (c.isType(sq[1])) {
-                        return true;
-                    }
-
-                    return false;
-                }
-            });
+            someCards = someCards.filter(CardPredicates.isType(sq[1]));
         }
 
         // "Named <CARDNAME> in all graveyards" - Count$NamedAllYards.<CARDNAME>
@@ -3051,17 +3043,7 @@ public class CardFactoryUtil {
             if (sq[1].equals("CARDNAME")) {
                 sq[1] = c.getName();
             }
-
-            someCards = someCards.filter(new Predicate<Card>() {
-                @Override
-                public boolean isTrue(final Card c) {
-                    if (c.getName().equals(sq[1])) {
-                        return true;
-                    }
-
-                    return false;
-                }
-            });
+            someCards = someCards.filter(CardPredicates.nameEquals(sq[1]));
         }
 
         // Refined qualities

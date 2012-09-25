@@ -482,8 +482,23 @@ public abstract class Predicate<T> {
         return result;
     }    
 
+    // Returns the value matching predicate conditions with the maximum value of whatever valueAccessor returns. 
+    public final Integer max(final Iterable<T> source, final Lambda1<Integer, T> valueAccessor) {
+        if (source == null) { return null; }  
+        int max = Integer.MIN_VALUE;
+        for (final T c : source) {
+            if (!this.isTrue(c)) { continue; }
+            
+            int value = valueAccessor.apply(c);
+            if ( value > max ) {
+                max = value;
+            }
+        }
+        return max;
+    }
+
     // Returns the element matching predicate conditions with the maximum value of whatever valueAccessor returns. 
-    public final T max(final Iterable<T> source, final Lambda1<Integer, T> valueAccessor) {
+    public final T maxItem(final Iterable<T> source, final Lambda1<Integer, T> valueAccessor) {
         if (source == null) { return null; }  
 
         T result = null;

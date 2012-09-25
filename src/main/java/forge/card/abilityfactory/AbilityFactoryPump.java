@@ -329,7 +329,8 @@ public class AbilityFactoryPump {
                     || ph.getPhase().isBefore(PhaseType.MAIN1)) {
                 return false;
             }
-            CardList attackers = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getPossibleAttackers();
+            
+            CardList attackers = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).filter(CardPredicates.possibleAttackers);
             if(!CombatUtil.canBlockAtLeastOne(card, attackers)) {
                 return false;
             }

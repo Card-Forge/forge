@@ -20,6 +20,7 @@ package forge;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
+import forge.util.closures.Lambda1;
 import forge.util.closures.Predicate;
 import forge.util.closures.PredicateString;
 
@@ -104,13 +105,30 @@ public final class CardPredicates {
             }
         };
     }
+    
+    public static final Predicate<Card> possibleAttackers = new Predicate<Card>() {
+        @Override
+        public boolean isTrue(final Card c) {
+            return (c.isCreature() && CombatUtil.canAttack(c));
+        }
+    };
+
+    public static Predicate<Card> isProtectedFrom(final Card source) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean isTrue(final Card c) {
+                return !c.hasProtectionFrom(source);
+            }
+        };
+    }
+
 
     public static class Presets {
 
         /**
          * a Predicate<Card> to get all cards that are tapped.
          */
-        public static Predicate<Card> TAPPED = new Predicate<Card>() {
+        public static final Predicate<Card> TAPPED = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isTapped();
@@ -119,7 +137,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all cards that are untapped.
          */
-        public static Predicate<Card> UNTAPPED = new Predicate<Card>() {
+        public static final Predicate<Card> UNTAPPED = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isUntapped();
@@ -128,7 +146,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all creatures.
          */
-        public static Predicate<Card> CREATURES = new Predicate<Card>() {
+        public static final Predicate<Card> CREATURES = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isCreature();
@@ -137,7 +155,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all enchantments.
          */
-        public static Predicate<Card> ENCHANTMENTS = new Predicate<Card>() {
+        public static final Predicate<Card> ENCHANTMENTS = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isEnchantment();
@@ -146,7 +164,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all equipment.
          */
-        public static Predicate<Card> EQUIPMENT = new Predicate<Card>() {
+        public static final Predicate<Card> EQUIPMENT = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isEquipment();
@@ -155,7 +173,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all unenchanted cards in a list.
          */
-        public static Predicate<Card> UNENCHANTED = new Predicate<Card>() {
+        public static final Predicate<Card> UNENCHANTED = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return !c.isEnchanted();
@@ -164,7 +182,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all enchanted cards in a list.
          */
-        public static Predicate<Card> ENCHANTED = new Predicate<Card>() {
+        public static final Predicate<Card> ENCHANTED = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isEnchanted();
@@ -173,7 +191,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all nontoken cards.
          */
-        public static Predicate<Card> NON_TOKEN = new Predicate<Card>() {
+        public static final Predicate<Card> NON_TOKEN = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return !c.isToken();
@@ -182,7 +200,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all token cards.
          */
-        public static Predicate<Card> TOKEN = new Predicate<Card>() {
+        public static final Predicate<Card> TOKEN = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isToken();
@@ -191,7 +209,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all nonbasic lands.
          */
-        public static Predicate<Card> NON_BASIC_LAND = new Predicate<Card>() {
+        public static final Predicate<Card> NON_BASIC_LAND = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return !c.isBasicLand();
@@ -200,7 +218,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all basicLands.
          */
-        public static Predicate<Card> BASIC_LANDS = new Predicate<Card>() {
+        public static final Predicate<Card> BASIC_LANDS = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 // the isBasicLand() check here may be sufficient...
@@ -210,7 +228,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all artifacts.
          */
-        public static Predicate<Card> ARTIFACTS = new Predicate<Card>() {
+        public static final Predicate<Card> ARTIFACTS = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isArtifact();
@@ -219,7 +237,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all nonartifacts.
          */
-        public static Predicate<Card> NON_ARTIFACTS = new Predicate<Card>() {
+        public static final Predicate<Card> NON_ARTIFACTS = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return !c.isArtifact();
@@ -228,7 +246,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all lands.
          */
-        public static Predicate<Card> LANDS = new Predicate<Card>() {
+        public static final Predicate<Card> LANDS = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isLand();
@@ -237,7 +255,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all nonlands.
          */
-        public static Predicate<Card> NON_LANDS = new Predicate<Card>() {
+        public static final Predicate<Card> NON_LANDS = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return !c.isLand();
@@ -246,7 +264,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all cards that are black.
          */
-        public static Predicate<Card> BLACK = new Predicate<Card>() {
+        public static final Predicate<Card> BLACK = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isBlack();
@@ -255,7 +273,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all cards that are blue.
          */
-        public static Predicate<Card> BLUE = new Predicate<Card>() {
+        public static final Predicate<Card> BLUE = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isBlue();
@@ -264,7 +282,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all cards that are green.
          */
-        public static Predicate<Card> GREEN = new Predicate<Card>() {
+        public static final Predicate<Card> GREEN = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isGreen();
@@ -273,7 +291,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all cards that are red.
          */
-        public static Predicate<Card> RED = new Predicate<Card>() {
+        public static final Predicate<Card> RED = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isRed();
@@ -282,13 +300,51 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all cards that are white.
          */
-        public static Predicate<Card> WHITE = new Predicate<Card>() {
+        public static final Predicate<Card> WHITE = new Predicate<Card>() {
             @Override
             public boolean isTrue(Card c) {
                 return c.isWhite();
             }
         };
         
-    }
 
+        public static final Predicate<Card> hasFirstStrike = new Predicate<Card>() {
+            @Override
+            public boolean isTrue(Card c) {
+                return c.isCreature() && (c.hasFirstStrike() || c.hasDoubleStrike());
+            }
+        };
+        public static final Predicate<Card> hasSecondStrike = new Predicate<Card>() {
+            @Override
+            public boolean isTrue(Card c) {
+                return c.isCreature() && (!c.hasFirstStrike() || c.hasDoubleStrike());
+            }
+        };
+        public static final Predicate<Card> All = Predicate.getTrue(Card.class);
+        
+        
+    }
+    
+    public static class Accessors {
+        public static final Lambda1<Integer, Card> fnGetDefense = new Lambda1<Integer, Card>() {
+            @Override
+            public Integer apply(Card a) {
+                return a.getNetDefense();
+            }
+        };
+        
+        public static final Lambda1<Integer, Card> fnGetAttack = new Lambda1<Integer, Card>() {
+            @Override
+            public Integer apply(Card a) {
+                return a.getNetCombatDamage();
+            }
+        };
+        
+        public static final Lambda1<Integer, Card> fnGetCmc = new Lambda1<Integer, Card>() {
+            @Override
+            public Integer apply(Card a) {
+                return a.getCMC();
+            }
+        };        
+    }
 }
