@@ -4021,6 +4021,7 @@ res/cardsfolder/g/grave_exchange.txt -text
 res/cardsfolder/g/grave_pact.txt svneol=native#text/plain
 res/cardsfolder/g/grave_peril.txt svneol=native#text/plain
 res/cardsfolder/g/grave_robbers.txt svneol=native#text/plain
+res/cardsfolder/g/grave_servitude.txt -text
 res/cardsfolder/g/grave_shell_scarab.txt svneol=native#text/plain
 res/cardsfolder/g/grave_titan.txt svneol=native#text/plain
 res/cardsfolder/g/gravebane_zombie.txt -text
@@ -5448,6 +5449,7 @@ res/cardsfolder/l/lightning_hounds.txt svneol=native#text/plain
 res/cardsfolder/l/lightning_mauler.txt -text
 res/cardsfolder/l/lightning_prowess.txt -text
 res/cardsfolder/l/lightning_reaver.txt svneol=native#text/plain
+res/cardsfolder/l/lightning_reflexes.txt -text
 res/cardsfolder/l/lightning_rift.txt svneol=native#text/plain
 res/cardsfolder/l/lightning_serpent.txt svneol=native#text/plain
 res/cardsfolder/l/lightning_surge.txt svneol=native#text/plain
@@ -8806,6 +8808,7 @@ res/cardsfolder/s/snow_devil.txt svneol=native#text/plain
 res/cardsfolder/s/snow_fortress.txt svneol=native#text/plain
 res/cardsfolder/s/snow_hound.txt svneol=native#text/plain
 res/cardsfolder/s/snuff_out.txt svneol=native#text/plain
+res/cardsfolder/s/soar.txt -text
 res/cardsfolder/s/soaring_hope.txt svneol=native#text/plain
 res/cardsfolder/s/soaring_seacliff.txt svneol=native#text/plain
 res/cardsfolder/s/soilshaper.txt svneol=native#text/plain
@@ -10746,6 +10749,7 @@ res/cardsfolder/w/war_torch_goblin.txt svneol=native#text/plain
 res/cardsfolder/w/warbreak_trumpeter.txt svneol=native#text/plain
 res/cardsfolder/w/warclamp_mastiff.txt -text
 res/cardsfolder/w/ward_of_bones.txt -text
+res/cardsfolder/w/ward_of_lights.txt -text
 res/cardsfolder/w/ward_of_piety.txt -text
 res/cardsfolder/w/ward_sliver.txt -text svneol=unset#text/plain
 res/cardsfolder/w/warden_of_the_wall.txt -text
