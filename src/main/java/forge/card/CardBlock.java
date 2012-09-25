@@ -300,8 +300,6 @@ public final class CardBlock implements Comparable<CardBlock> {
      */
     public UnOpenedProduct getBooster(final String code) {
 
-        System.out.println("Booster called...");
-
         if (this.getNumberMetaSets() < 1) {
             throw new RuntimeException("Attempted to get a booster pack for empty metasets.");
         }

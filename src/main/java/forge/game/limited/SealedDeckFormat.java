@@ -46,6 +46,7 @@ import forge.util.closures.Lambda1;
  */
 public class SealedDeckFormat {
     private final ArrayList<UnOpenedProduct> product = new ArrayList<UnOpenedProduct>();
+    private List<String> partiality;
 
     /** The Land set code. */
     private String[] landSetCode = { "" };
@@ -59,6 +60,8 @@ public class SealedDeckFormat {
      *            a {@link java.lang.String} object.
      */
     public SealedDeckFormat(final String sealedType) {
+
+        partiality = new ArrayList<String>();
 
         if (sealedType.equals("Full")) {
 
@@ -104,7 +107,6 @@ public class SealedDeckFormat {
             final int nPacks = block.getCntBoostersSealed();
 
             if (block.getNumberMetaSets() > 0) {
-                System.out.println("Metasets found ");
 
                 int j = cardSets.length;
 
@@ -211,7 +213,13 @@ public class SealedDeckFormat {
                     }
                 }
             } else {
-                final UnOpenedProduct product1 = new UnOpenedProduct(Singletons.getModel().getBoosters().get(sets[0]));
+                UnOpenedProduct product1;
+                if (sets[0].charAt(0) == '*') {
+                    product1 = block.getBooster(sets[0]);
+                }
+                else {
+                    product1 = new UnOpenedProduct(Singletons.getModel().getBoosters().get(sets[0]));
+                }
                 for (int i = 0; i < nPacks; i++) {
                     this.product.add(product1);
                 }
@@ -411,14 +419,35 @@ public class SealedDeckFormat {
      * @return a {@link forge.CardList} object.
      */
     public ItemPool<CardPrinted> getCardpool() {
+        return getCardpool(true);
+    }
+
+
+    /**
+     * <p>
+     * getCardpool.
+     * </p>
+     * 
+     * @param isHuman
+     *      boolean, get pool for human (possible choices)
+     * @return a {@link forge.CardList} object.
+     */
+    public ItemPool<CardPrinted> getCardpool(final boolean isHuman) {
+
+        if (!isHuman) {
+            if (!partiality.isEmpty()) {
+                partiality.clear();
+            }
+        }
         final ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>(CardPrinted.class);
 
         for (int i = 0; i < this.product.size(); i++) {
-            pool.addAllFlat(this.product.get(i).open());
+            pool.addAllFlat(this.product.get(i).open(isHuman, partiality));
         }
 
         return pool;
     }
+
 
     /**
      * Gets the land set code.

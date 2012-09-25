@@ -12044,6 +12044,7 @@ src/main/java/forge/card/FormatCollection.java -text
 src/main/java/forge/card/MetaSet.java -text
 src/main/java/forge/card/MtgDataParser.java -text
 src/main/java/forge/card/TriggerReplacementBase.java -text
+src/main/java/forge/card/UnOpenedMeta.java -text
 src/main/java/forge/card/UnOpenedProduct.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactory.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryAlterLife.java svneol=native#text/plain

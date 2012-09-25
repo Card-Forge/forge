@@ -167,7 +167,7 @@ public enum CSubmenuSealed implements ICDoc {
                     + ">> does not equal any of the sealedTypes.");
         }
 
-        if (sd.getCardpool().isEmpty()) {
+        if (sd.getCardpool(false).isEmpty()) {
             return;
         }
 
@@ -203,8 +203,8 @@ public enum CSubmenuSealed implements ICDoc {
             sealedDecks.delete(sDeckName);
         }
 
-        final ItemPool<CardPrinted> sDeck = sd.getCardpool();
-        ItemPool<CardPrinted> aiDecks = sd.getCardpool();
+        final ItemPool<CardPrinted> sDeck = sd.getCardpool(true);
+        ItemPool<CardPrinted> aiDecks = sd.getCardpool(false);
 
         final Deck deck = new Deck(sDeckName);
         deck.getSideboard().addAll(sDeck);
@@ -218,7 +218,7 @@ public enum CSubmenuSealed implements ICDoc {
         for (int i = 0; i < rounds; i++) {
             if (i > 0) {
                 // Re-randomize for AI decks beyond the first...
-                aiDecks = sd.getCardpool();
+                aiDecks = sd.getCardpool(false);
             }
             sealed.addAiDeck(new SealedDeck(aiDecks.toFlatList()).buildDeck());
         }

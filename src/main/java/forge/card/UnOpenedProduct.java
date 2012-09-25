@@ -35,4 +35,16 @@ public class UnOpenedProduct {
         return openBooster != null ? openBooster.apply(generator) : generator.getBoosterPack(booster);
     }
 
+    /**
+     * Like open, can define whether is human or not.
+     * @param isHuman
+     *      boolean, is human player?
+     * @param partialities
+     *      known partialities for the AI.
+     * @return List, list of cards.
+     */
+    public List<CardPrinted> open(final boolean isHuman, List<String> partialities) {
+        return open();
+    }
+
 }
