@@ -26,6 +26,7 @@ import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.InputControl;
 import forge.game.GameState;
+import forge.game.limited.GauntletMini;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfTurn;
 import forge.game.player.Player;
@@ -35,7 +36,6 @@ import forge.game.zone.ZoneType;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
-import forge.game.limited.GauntletMini;
 
 
 /**

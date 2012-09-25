@@ -18,7 +18,7 @@ public class FProgressBar extends JProgressBar {
     private long startMillis = 0;
     private int tempVal = 0, etaSecs = 0;
     private String desc = "";
-    private String message; 
+    private String message;
     private boolean showETA = true;
     private boolean showCount = true;
 
@@ -47,14 +47,16 @@ public class FProgressBar extends JProgressBar {
 
         // String.format leads to StringBuilder anyway. Direct calls will be faster
         StringBuilder sb = new StringBuilder(desc);
-        if ( showCount ) sb.append(" ").append(tempVal).append(" of ").append(getMaximum());
-        if ( showETA ) {
+        if (showCount) {
+            sb.append(" ").append(tempVal).append(" of ").append(getMaximum());
+        }
+
+        if (showETA) {
             calculateETA(tempVal);
             sb.append(", ETA").append(String.format("%02d:%02d:%02d", etaSecs / 3600, (etaSecs % 3600) / 60, etaSecs % 60 + 1));
         }
         message = sb.toString();
 
-    
         // When calculations finished; EDT can be used.
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -90,8 +92,8 @@ public class FProgressBar extends JProgressBar {
     /** */
     private void calculateETA(int v0) {
         float tempMillis = new Date().getTime();
-        float timePerUnit = (tempMillis - startMillis) / (float) v0;
-        etaSecs = (int)((this.getMaximum() - v0) * timePerUnit) / 1000;
+        float timePerUnit = (tempMillis - startMillis) / v0;
+        etaSecs = (int) ((this.getMaximum() - v0) * timePerUnit) / 1000;
     }
 
 }

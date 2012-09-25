@@ -19,28 +19,18 @@ package forge.gui.download;
 
 import java.io.File;
 
-import javax.swing.JFrame;
-
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
-/**
- * <p>
- * Gui_DownloadPrices class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
- */
+/** */
 @SuppressWarnings("serial")
 public class GuiDownloadPrices extends GuiDownloader {
 
     /**
-     * TODO: Write javadoc for Constructor.
-     * @param frame {@link javax.swing.JFrame}
+     * Constructor.
      */
-    public GuiDownloadPrices(final JFrame frame) {
-        super(frame);
+    public GuiDownloadPrices() {
+        super();
     }
 
     /* (non-Javadoc)

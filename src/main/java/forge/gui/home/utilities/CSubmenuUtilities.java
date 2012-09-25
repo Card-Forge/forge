@@ -23,13 +23,13 @@ public enum CSubmenuUtilities implements ICDoc {
     private final Command cmdLicensing = new Command() { @Override
         public void execute() { VSubmenuUtilities.SINGLETON_INSTANCE.showLicensing(); } };
     private final Command cmdPicDownload  = new Command() { @Override
-        public void execute() { new GuiDownloadPicturesLQ(null); } };
+        public void execute() { new GuiDownloadPicturesLQ(); } };
     private final Command cmdSetDownload = new Command() { @Override
-        public void execute() { new GuiDownloadSetPicturesLQ(null); } };
+        public void execute() { new GuiDownloadSetPicturesLQ(); } };
     private final Command cmdQuestImages = new Command() { @Override
-        public void execute() { new GuiDownloadQuestImages(null); } };
+        public void execute() { new GuiDownloadQuestImages(); } };
     private final Command cmdDownloadPrices = new Command() { @Override
-        public void execute() { new GuiDownloadPrices(null); } };
+        public void execute() { new GuiDownloadPrices(); } };
     private final Command cmdHowToPlay = new Command() { @Override
         public void execute() { VSubmenuUtilities.SINGLETON_INSTANCE.showHowToPlay(); } };
 

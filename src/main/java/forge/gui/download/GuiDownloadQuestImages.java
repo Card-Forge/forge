@@ -20,32 +20,19 @@ package forge.gui.download;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
-/**
- * <p>
- * GuiDownloadQuestImages class.
- * </p>
- * 
- * @author Forge
- */
+/** */
+@SuppressWarnings("serial")
 public class GuiDownloadQuestImages extends GuiDownloader {
-
-    private static final long serialVersionUID = -8596808503046590349L;
-
     /**
      * <p>
      * Constructor for GuiDownloadQuestImages.
      * </p>
-     * 
-     * @param frame
-     *            a array of {@link javax.swing.JFrame} objects.
      */
-    public GuiDownloadQuestImages(final JFrame frame) {
-        super(frame);
+    public GuiDownloadQuestImages() {
+        super();
     }
 
     /**

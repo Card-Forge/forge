@@ -20,8 +20,6 @@ package forge.gui.download;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
 import org.apache.commons.lang3.StringUtils;
 
 import forge.CardUtil;
@@ -33,30 +31,18 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.Base64Coder;
 
-/**
- * <p>
- * Gui_DownloadSetPictures_LQ class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
- */
+/** */
+@SuppressWarnings("serial")
 public class GuiDownloadSetPicturesLQ extends GuiDownloader {
-
-    private static final long serialVersionUID = -7890794857949935256L;
     private String picturesPath;
 
     /**
      * <p>
      * Constructor for Gui_DownloadSetPictures_LQ.
      * </p>
-     * 
-     * @param frame
-     *            a {@link javax.swing.JFrame} object.
      */
-    public GuiDownloadSetPicturesLQ(final JFrame frame) {
-        super(frame);
-
+    public GuiDownloadSetPicturesLQ() {
+        super();
     }
 
     /**

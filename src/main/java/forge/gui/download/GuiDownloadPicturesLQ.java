@@ -19,7 +19,6 @@ package forge.gui.download;
 
 import java.io.File;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 
 import forge.card.CardRules;
 import forge.gui.GuiDisplayUtil;
@@ -41,10 +40,13 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
     private static final long serialVersionUID = -2839597792999139007L;
     private String baseFolder;
     private ArrayList<DownloadObject> downloads;
-    
-    public GuiDownloadPicturesLQ(final JFrame frame) {
-        super(frame);
 
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     */
+    public GuiDownloadPicturesLQ() {
+        super();
     }
 
     /**
@@ -56,25 +58,22 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
      */
     @Override
     protected final DownloadObject[] getNeededImages() {
-
         // This is called as a virtual method from constructor.
         baseFolder = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
         downloads = new ArrayList<DownloadObject>();
 
-        // It is already needed here as initialized variable - that was the best place to initialize
-        
         for (final CardPrinted c : CardDb.instance().getAllUniqueCards()) {
             //System.out.println(c.getName());
             CardRules firstSide = c.getCard();
             this.createDLObjects(firstSide);
-            
+
             CardRules secondSide = firstSide.getSlavePart();
-            if( secondSide != null )
+            if (secondSide != null) {
                 this.createDLObjects(secondSide);
+            }
         }
 
-
-        // add missing tokens to the list of things to download
+        // Add missing tokens to the list of things to download.
         for (final DownloadObject element : GuiDownloader.readFileWithNames(NewConstants.TOKEN_IMAGES,
                 ForgeProps.getFile(NewConstants.IMAGE_TOKEN))) {
             if (!element.getDestination().exists()) {
@@ -82,7 +81,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
             }
         }
 
-        // return all card names and urls that are needed
+        // Return all card names and URLs that are needed.
         return downloads.toArray(new DownloadObject[downloads.size()]);
     } // getNeededImages()
 
@@ -94,13 +93,13 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
 
             final String sName = GuiDisplayUtil.cleanString(c.getName());
             addDownloadObject(urls[0], new File(baseFolder, sName + ".jpg"));
-            
+
             for (int j = 1; j < urls.length; j++) {
                 addDownloadObject(urls[j], new File(baseFolder, sName + j + ".jpg"));
             }
         }
     }
-    
+
     private void addDownloadObject(String url, File destFile) {
         if (!destFile.exists()) {
             downloads.add(new DownloadObject(url, destFile));
