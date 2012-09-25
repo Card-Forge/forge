@@ -181,7 +181,7 @@ public class HumanPlayer extends Player {
     protected final void doScry(final CardList topN, final int n) {
         int num = n;
         for (int i = 0; i < num; i++) {
-            final Card c = GuiUtils.chooseOneOrNone("Put on bottom of library.", topN.toArray());
+            final Card c = GuiUtils.chooseOneOrNone("Put on bottom of library.", topN);
             if (c != null) {
                 topN.remove(c);
                 Singletons.getModel().getGameAction().moveToBottomOfLibrary(c);

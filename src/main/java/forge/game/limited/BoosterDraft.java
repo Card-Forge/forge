@@ -144,7 +144,7 @@ public final class BoosterDraft implements IBoosterDraft {
                         .showMessageDialog(null, "No custom draft files found.", "", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 final CustomLimited draft = (CustomLimited) GuiUtils.chooseOne("Choose Custom Draft",
-                        myDrafts.toArray());
+                        myDrafts);
                 this.setupCustomDraft(draft);
             }
             break;

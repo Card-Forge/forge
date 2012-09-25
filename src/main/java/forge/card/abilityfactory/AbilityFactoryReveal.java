@@ -625,7 +625,7 @@ public final class AbilityFactoryReveal {
                                     if (libraryPosition2 == -1) {
                                         prompt = "Put the rest on the bottom of the library in any order";
                                     }
-                                    chosen = GuiUtils.chooseOne(prompt, rest.toArray());
+                                    chosen = GuiUtils.chooseOne(prompt, rest);
                                 } else {
                                     chosen = rest.get(0);
                                 }
@@ -1046,7 +1046,7 @@ public final class AbilityFactoryReveal {
                 }
 
                 if (revealed.size() > 0) {
-                    GuiUtils.chooseOne(p + " revealed: ", revealed.toArray());
+                    GuiUtils.chooseOne(p + " revealed: ", revealed);
                 }
 
                 // TODO Allow Human to choose the order
@@ -1424,7 +1424,7 @@ public final class AbilityFactoryReveal {
                 final CardList hand = p.getCardsIn(ZoneType.Hand);
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (hand.size() > 0) {
-                        GuiUtils.chooseOne(p + "'s hand", hand.toArray());
+                        GuiUtils.chooseOne(p + "'s hand", hand);
                     } else {
                         final StringBuilder sb = new StringBuilder();
                         sb.append(p).append("'s hand is empty!");
@@ -2050,7 +2050,7 @@ public final class AbilityFactoryReveal {
             topCards.add(lib.get(j));
         }
 
-        List<Object> orderedCards = GuiUtils.getOrderChoices("Select order to Rearrange", "Top of Library", 0, (Object[]) topCards.toArray(), null);
+        List<Object> orderedCards = GuiUtils.getOrderChoices("Select order to Rearrange", "Top of Library", 0, topCards.toArray(), null);
         for (int i = maxCards - 1; i >= 0; i--) {
             Card next = (Card) orderedCards.get(i);
             Singletons.getModel().getGameAction().moveToLibrary(next, 0);
@@ -2372,8 +2372,8 @@ public final class AbilityFactoryReveal {
                 if (handChoices.size() > 0) {
                     final CardList revealed = new CardList();
                     if (params.containsKey("Random")) {
-                        revealed.add(CardUtil.getRandom(handChoices.toArray()));
-                        GuiUtils.chooseOneOrNone("Revealed card(s)", revealed.toArray());
+                        revealed.add(CardUtil.getRandom(handChoices));
+                        GuiUtils.chooseOneOrNone("Revealed card(s)", revealed);
                     } else {
                         CardList valid = new CardList(handChoices);
                         int max = 1;
@@ -2385,7 +2385,7 @@ public final class AbilityFactoryReveal {
                         }
                         revealed.addAll(AbilityFactoryReveal.getRevealedList(sa.getActivatingPlayer(), valid, max, anyNumber));
                         if (sa.getActivatingPlayer().isComputer()) {
-                            GuiUtils.chooseOneOrNone("Revealed card(s)", revealed.toArray());
+                            GuiUtils.chooseOneOrNone("Revealed card(s)", revealed);
                         }
                     }
 
@@ -2414,7 +2414,7 @@ public final class AbilityFactoryReveal {
         final int validamount = Math.min(valid.size(), max);
 
         if (anyNumber && player.isHuman() && validamount > 0) {
-            final List<Object> selection = GuiUtils.getOrderChoices("Choose Which Cards to Reveal", "Revealed", -1, (Object[]) valid.toArray(), null);
+            final List<Object> selection = GuiUtils.getOrderChoices("Choose Which Cards to Reveal", "Revealed", -1, valid.toArray(), null);
             for (final Object o : selection) {
                 if (o != null && o instanceof Card) {
                     chosen.add((Card) o);

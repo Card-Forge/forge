@@ -1646,7 +1646,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
             CardList list = this.getCardsIn(ZoneType.Hand);
             list = list.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
             if (list.size() != 0) {
-                final Card disc = CardUtil.getRandom(list.toArray());
+                final Card disc = CardUtil.getRandom(list);
                 discarded.add(disc);
                 this.doDiscard(disc, sa);
             }
@@ -1721,13 +1721,12 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      */
     public final void shuffle() {
         final PlayerZone library = this.getZone(ZoneType.Library);
-        final Card[] c = this.getCardsIn(ZoneType.Library).toArray();
+        final List<Card> list = this.getCardsIn(ZoneType.Library);
 
-        if (c.length <= 1) {
+        if (list.size() <= 1) {
             return;
         }
 
-        final ArrayList<Card> list = new ArrayList<Card>(Arrays.asList(c));
         // overdone but wanted to make sure it was really random
         final Random random = MyRandom.getRandom();
         Collections.shuffle(list, random);

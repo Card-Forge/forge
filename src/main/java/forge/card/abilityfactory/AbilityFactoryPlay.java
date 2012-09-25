@@ -466,7 +466,7 @@ public final class AbilityFactoryPlay {
             if (sas.size() == 1) {
                 tgtSA = sas.get(0);
             } else if (sa.getActivatingPlayer().isHuman()) {
-                tgtSA = (SpellAbility) GuiUtils.chooseOne("Select a spell to cast", sas.toArray());
+                tgtSA = GuiUtils.chooseOne("Select a spell to cast", sas);
             } else {
                 tgtSA = sas.get(0);
             }

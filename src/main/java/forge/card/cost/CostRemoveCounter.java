@@ -418,8 +418,8 @@ public class CostRemoveCounter extends CostPartWithList {
                         this.cancel();
                     }
 
-                    final Object o = GuiUtils
-                            .chooseOneOrNone("Remove counter(s) from a card in " + costRemoveCounter.getZone(), this.typeList.toArray());
+                    final Card o = GuiUtils
+                            .chooseOneOrNone("Remove counter(s) from a card in " + costRemoveCounter.getZone(), this.typeList);
 
                     if (o != null) {
                         final Card card = (Card) o;

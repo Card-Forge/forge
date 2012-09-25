@@ -153,7 +153,7 @@ public final class GameActionUtil {
                             }
 
                         } // while
-                        GuiUtils.chooseOneOrNone("Revealed cards:", revealed.toArray());
+                        GuiUtils.chooseOneOrNone("Revealed cards:", revealed);
 
                         if (cascadedCard != null) {
 
@@ -285,7 +285,7 @@ public final class GameActionUtil {
                                     rippledCards[i] = crd;
                                 }
                             } // for
-                            GuiUtils.chooseOneOrNone("Revealed cards:", revealed.toArray());
+                            GuiUtils.chooseOneOrNone("Revealed cards:", revealed);
                             for (int i = 0; i < rippleMax; i++) {
                                 if (rippledCards[i] != null) {
 

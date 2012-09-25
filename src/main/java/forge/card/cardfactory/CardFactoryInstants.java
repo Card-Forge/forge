@@ -125,7 +125,7 @@ public class CardFactoryInstants {
                     final CardList libraryList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
                     final CardList selectedCards = new CardList();
 
-                    Object o = GuiUtils.chooseOneOrNone("Select first card", libraryList.toArray());
+                    Object o = GuiUtils.chooseOneOrNone("Select first card", libraryList);
                     if (o != null) {
                         final Card c1 = (Card) o;
                         libraryList.remove(c1);
@@ -133,7 +133,7 @@ public class CardFactoryInstants {
                     } else {
                         return;
                     }
-                    o = GuiUtils.chooseOneOrNone("Select second card", libraryList.toArray());
+                    o = GuiUtils.chooseOneOrNone("Select second card", libraryList);
                     if (o != null) {
                         final Card c2 = (Card) o;
                         libraryList.remove(c2);
@@ -141,7 +141,7 @@ public class CardFactoryInstants {
                     } else {
                         return;
                     }
-                    o = GuiUtils.chooseOneOrNone("Select third card", libraryList.toArray());
+                    o = GuiUtils.chooseOneOrNone("Select third card", libraryList);
                     if (o != null) {
                         final Card c3 = (Card) o;
                         libraryList.remove(c3);

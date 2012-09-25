@@ -964,13 +964,13 @@ public final class AbilityFactoryChangeZone {
                                                              // choosing
                                                              // a card{
                 GuiUtils.chooseOneOrNone(sa.getSourceCard().getName() + " - Looking at Library",
-                        player.getCardsIn(ZoneType.Library).toArray());
+                        player.getCardsIn(ZoneType.Library));
             }
 
             // Look at opponents hand before moving onto choosing a card
             if (origin.contains(ZoneType.Hand) && player.isComputer()) {
                 GuiUtils.chooseOneOrNone(sa.getSourceCard().getName() + " - Looking at Opponent's Hand", player
-                        .getCardsIn(ZoneType.Hand).toArray());
+                        .getCardsIn(ZoneType.Hand));
             }
             fetchList = AbilityFactory.filterListByType(fetchList, params.get("ChangeType"), sa);
         }
@@ -990,7 +990,7 @@ public final class AbilityFactoryChangeZone {
 
             Object o;
             if (params.containsKey("AtRandom")) {
-                o = CardUtil.getRandom(fetchList.toArray());
+                o = CardUtil.getRandom(fetchList);
             } else if (params.containsKey("Mandatory")) {
                 o = GuiUtils.chooseOne("Select a card", fetchList);
             } else if (params.containsKey("Defined")) {
@@ -1159,7 +1159,7 @@ public final class AbilityFactoryChangeZone {
             // Improve the AI for fetching.
             Card c = null;
             if (params.containsKey("AtRandom")) {
-                c = CardUtil.getRandom(fetchList.toArray());
+                c = CardUtil.getRandom(fetchList);
             } else if (defined) {
                 c = fetchList.get(0);
             } else {

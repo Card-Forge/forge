@@ -620,7 +620,7 @@ public final class GuiDisplayUtil {
      */
     public static void devModeTutor() {
         final CardList lib = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
-        final Object o = GuiUtils.chooseOneOrNone("Choose a card", lib.toArray());
+        final Object o = GuiUtils.chooseOneOrNone("Choose a card", lib);
         if (null == o) {
             return;
         } else {
@@ -685,8 +685,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeAddCounter() {
-        final CardList play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        final Object o = GuiUtils.chooseOneOrNone("Add counters to which card?", play.toArray());
+        final Card o = GuiUtils.chooseOneOrNone("Add counters to which card?", AllZoneUtil.getCardsIn(ZoneType.Battlefield));
         if (null == o) {
             return;
         } else {
@@ -718,7 +717,7 @@ public final class GuiDisplayUtil {
      */
     public static void devModeTapPerm() {
         final CardList play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        final Object o = GuiUtils.chooseOneOrNone("Choose a permanent", play.toArray());
+        final Object o = GuiUtils.chooseOneOrNone("Choose a permanent", play);
         if (null == o) {
             return;
         } else {
@@ -736,7 +735,7 @@ public final class GuiDisplayUtil {
      */
     public static void devModeUntapPerm() {
         final CardList play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        final Object o = GuiUtils.chooseOneOrNone("Choose a permanent", play.toArray());
+        final Object o = GuiUtils.chooseOneOrNone("Choose a permanent", play);
         if (null == o) {
             return;
         } else {
@@ -765,7 +764,7 @@ public final class GuiDisplayUtil {
      */
     public static void devModeSetLife() {
         final List<Player> players = AllZone.getPlayersInGame();
-        final Object o = GuiUtils.chooseOneOrNone("Set life for which player?", players.toArray());
+        final Player o = GuiUtils.chooseOneOrNone("Set life for which player?", players);
         if (null == o) {
             return;
         } else {

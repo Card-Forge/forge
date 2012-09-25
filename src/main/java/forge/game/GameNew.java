@@ -1,7 +1,6 @@
 package forge.game;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -272,9 +271,9 @@ public class GameNew {
                 final CardList lib = p.getCardsIn(ZoneType.Library);
                 Card ante;
                 if ((lib.size() > 0) && (lib.getNotType("Basic").size() > 1)) {
-                    ante = CardUtil.getRandom(lib.toArray());
+                    ante = CardUtil.getRandom(lib);
                     while (ante.isBasicLand()) {
-                        ante = CardUtil.getRandom(lib.toArray());
+                        ante = CardUtil.getRandom(lib);
                     }
                 } else if (lib.size() > 1) {
                     ante = lib.get(0);
@@ -412,7 +411,7 @@ public class GameNew {
             System.out.println(library.get(i));
         }
 
-        return Arrays.asList(library.toArray());
+        return library;
     } // smoothComputerManaCurve()
 
     // decides who goes first when starting another game, used by newGame()

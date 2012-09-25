@@ -21,7 +21,7 @@ class UnsortedListModel extends AbstractListModel {
     }
 
     public Object getElementAt(int index) {
-        return model.toArray()[index];
+        return model.get(index);
     }
 
     public void add(Object element) {

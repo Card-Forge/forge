@@ -1334,7 +1334,7 @@ public class AbilityFactoryZoneAffecting {
                     if (p.isHuman()) {
                         // "reveal to computer" for information gathering
                     } else {
-                        GuiUtils.chooseOneOrNone("Revealed computer hand", dPHand.toArray());
+                        GuiUtils.chooseOneOrNone("Revealed computer hand", dPHand);
                     }
 
                     String valid = params.get("DiscardValid");
@@ -1381,7 +1381,7 @@ public class AbilityFactoryZoneAffecting {
                             if (p.isComputer()) { // discard AI cards
                                 CardList list = ComputerUtil.discardNumTypeAI(numCards, dValid, sa);
                                 if (mode.startsWith("Reveal")) {
-                                    GuiUtils.chooseOneOrNone("Computer has chosen", list.toArray());
+                                    GuiUtils.chooseOneOrNone("Computer has chosen", list);
                                 }
                                 discarded.addAll(list);
                                 for (Card card : list) {
@@ -1414,7 +1414,7 @@ public class AbilityFactoryZoneAffecting {
                                     if (mode.startsWith("Reveal")) {
                                         final CardList dCs = new CardList();
                                         dCs.add(dC);
-                                        GuiUtils.chooseOneOrNone("Computer has chosen", dCs.toArray());
+                                        GuiUtils.chooseOneOrNone("Computer has chosen", dCs);
                                     }
                                     discarded.add(dC);
                                     p.discard(dC, sa);
@@ -1423,7 +1423,7 @@ public class AbilityFactoryZoneAffecting {
                         } else {
                             // human
                             if (mode.startsWith("Reveal")) {
-                                GuiUtils.chooseOneOrNone("Revealed " + p + "  hand", dPHand.toArray());
+                                GuiUtils.chooseOneOrNone("Revealed " + p + "  hand", dPHand);
                             }
 
                             for (int i = 0; i < numCards; i++) {

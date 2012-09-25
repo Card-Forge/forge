@@ -2028,8 +2028,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                         if (AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0) {
                             if (player.isHuman()) {
-                                final Object o = GuiUtils.chooseOneOrNone("Pick a creature to return to hand",
-                                        graveyardCreatures.toArray());
+                                final Card o = GuiUtils.chooseOneOrNone("Pick a creature to return to hand", graveyardCreatures);
                                 if (o != null) {
                                     final Card card = (Card) o;
 

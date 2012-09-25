@@ -566,9 +566,9 @@ public class AbilityFactorySacrifice {
             }
             Object o;
             if (optional) {
-                o = GuiUtils.chooseOneOrNone("Select a card to sacrifice", list.toArray());
+                o = GuiUtils.chooseOneOrNone("Select a card to sacrifice", list);
             } else {
-                o = GuiUtils.chooseOne("Select a card to sacrifice", list.toArray());
+                o = GuiUtils.chooseOne("Select a card to sacrifice", list);
             }
             if (o != null) {
                 final Card c = (Card) o;
@@ -613,7 +613,7 @@ public class AbilityFactorySacrifice {
             CardList battlefield = p.getCardsIn(ZoneType.Battlefield);
             CardList list = AbilityFactory.filterListByType(battlefield, valid, sa);
             if (list.size() != 0) {
-                final Card sac = CardUtil.getRandom(list.toArray());
+                final Card sac = CardUtil.getRandom(list);
                 if (destroy) {
                     if (Singletons.getModel().getGameAction().destroy(sac)) {
                         sacList.add(sac);

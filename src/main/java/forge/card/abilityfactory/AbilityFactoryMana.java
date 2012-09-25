@@ -924,7 +924,7 @@ public class AbilityFactoryMana {
             baseMana = InputPayManaCostUtil.getShortColorString(colors.get(0));
         } else {
             if (player.isHuman()) {
-                final Object o = GuiUtils.chooseOneOrNone("Select Mana to Produce", colors.toArray());
+                final Object o = GuiUtils.chooseOneOrNone("Select Mana to Produce", colors);
                 if (o == null) {
                     // User hit cancel
                     abMana.setCanceled(true);

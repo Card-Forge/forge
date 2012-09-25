@@ -21,7 +21,6 @@ import java.util.Arrays;
 
 import forge.Card;
 import forge.CardCharacteristicName;
-import forge.CardList;
 import forge.Command;
 import forge.card.CardCharacteristics;
 import forge.card.trigger.ZCTrigger;
@@ -133,7 +132,7 @@ public class AbilityTriggered extends Ability implements Command {
      * @return a boolean.
      */
     public final boolean triggerFor(final Card c) {
-        return !(new CardList(c)).getValidCards(this.restrictions, c.getController(), c).isEmpty();
+        return c != null && c.isValid(this.restrictions, c.getController(), c);
     }
 
     /**

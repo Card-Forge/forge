@@ -506,7 +506,7 @@ public class CardFactoryCreatures {
                 final CardList cl = new CardList();
                 cl.add(lib.get(0));
 
-                GuiUtils.chooseOneOrNone("Top card", cl.toArray());
+                GuiUtils.chooseOneOrNone("Top card", cl);
             }
 
             @Override
@@ -1000,8 +1000,7 @@ public class CardFactoryCreatures {
 
                 if (card.getController().isHuman()) {
                     if (creats.size() > 0) {
-                        final List<Card> selection = GuiUtils.chooseNoneOrMany("Select creatures to sacrifice",
-                                creats.toArray());
+                        final List<Card> selection = GuiUtils.chooseNoneOrMany("Select creatures to sacrifice", creats);
 
                         numCreatures[0] = selection.size();
                         for (int m = 0; m < selection.size(); m++) {
@@ -1345,7 +1344,7 @@ public class CardFactoryCreatures {
 
                 final CardList revealed = new CardList();
                 for (int i = 0; i < numCards; i++) {
-                    final Card random = CardUtil.getRandom(hand.toArray());
+                    final Card random = CardUtil.getRandom(hand);
                     revealed.add(random);
                     hand.remove(random);
                 }

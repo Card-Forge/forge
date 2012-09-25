@@ -304,7 +304,7 @@ public class CField implements ICDoc {
                         choices2.add(crd);
                     }
                 }
-                final Card choice = (Card) GuiUtils.chooseOneOrNone(this.title, choices2.toArray());
+                final Card choice = (Card) GuiUtils.chooseOneOrNone(this.title, choices2);
                 if (choice != null) {
                     this.doAction(choice);
                 }

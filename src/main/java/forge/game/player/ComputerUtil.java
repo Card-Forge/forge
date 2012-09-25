@@ -174,7 +174,7 @@ public class ComputerUtil {
             if (pay.payComputerCosts()) {
                 AllZone.getStack().addAndUnfreeze(sa);
                 if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
-                    GuiUtils.chooseOneOrNone("Computer reveals spliced cards:", sa.getSplicedCards().toArray());
+                    GuiUtils.chooseOneOrNone("Computer reveals spliced cards:", sa.getSplicedCards());
                 }
                 return true;
                 // TODO: solve problems with TapsForMana triggers by adding

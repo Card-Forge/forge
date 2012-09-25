@@ -696,7 +696,7 @@ public class ComputerUtilBlock {
                         && ((CardFactoryUtil.evaluateCreature(blocker) + ComputerUtilBlock.getDiff()) < CardFactoryUtil
                                 .evaluateCreature(attacker)) && CombatUtil.canBlock(attacker, blocker, combat)) {
                     combat.addBlocker(attacker, blocker);
-                    ComputerUtilBlock.getBlockersLeft().removeAll(blocker);
+                    ComputerUtilBlock.getBlockersLeft().remove(blocker);
                 }
             }
         }
@@ -903,7 +903,7 @@ public class ComputerUtilBlock {
                             && (CombatUtil.mustBlockAnAttacker(blocker, combat)
                                     || blocker.hasKeyword("CARDNAME blocks each turn if able."))) {
                         combat.addBlocker(attacker, blocker);
-                        ComputerUtilBlock.getBlockersLeft().removeAll(blocker);
+                        ComputerUtilBlock.getBlockersLeft().remove(blocker);
                     }
                 }
             }

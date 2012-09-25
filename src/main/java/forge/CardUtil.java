@@ -84,6 +84,18 @@ public final class CardUtil {
         }
     }
 
+    public static <T> T getRandom(final List<T> o) {
+        if (o == null) {
+            throw new IllegalArgumentException("CardUtil : getRandom(T) recieved null instead of array.");
+        }
+        int len = o.size();
+        switch(len) {
+            case 0: throw new IllegalArgumentException("CardUtil : getRandom(T) recieved an empty array.");
+            case 1: return o.get(0);
+            default: return o.get(CardUtil.RANDOM.nextInt(len));
+        }
+    }    
+    
     /**
      * <p>
      * getRandomIndex.

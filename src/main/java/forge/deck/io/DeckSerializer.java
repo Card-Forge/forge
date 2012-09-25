@@ -141,7 +141,7 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
             final Map<String, Object> root = new HashMap<String, Object>();
             root.put("title", d.getName());
             final List<String> list = new ArrayList<String>();
-            for (final Card card : d.getMain().toForgeCardList().toArray()) {
+            for (final Card card : d.getMain().toForgeCardList()) {
                 // System.out.println(card.getSets().get(card.getSets().size() -
                 // 1).URL);
                 list.add(card.getSets().get(card.getSets().size() - 1).getUrl());

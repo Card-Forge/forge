@@ -281,7 +281,7 @@ class CardFactoryArtifacts {
                             }
                         }
                     } // while
-                    GuiUtils.chooseOneOrNone("Revealed cards:", revealed.toArray());
+                    GuiUtils.chooseOneOrNone("Revealed cards:", revealed);
                     for (final Card revealedCard : revealed) {
                         Singletons.getModel().getGameAction().moveToBottomOfLibrary(revealedCard);
                     }
@@ -370,7 +370,7 @@ class CardFactoryArtifacts {
                             if (i == 4) {
                                 title = "Put fourth from top of library: ";
                             }
-                            final Object o = GuiUtils.chooseOneOrNone(title, lands.toArray());
+                            final Object o = GuiUtils.chooseOneOrNone(title, lands);
                             if (o == null) {
                                 break;
                             }

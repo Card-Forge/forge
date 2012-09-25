@@ -196,7 +196,7 @@ public class CardFactorySorceries {
                         pile1.add(biggest);
                         cards.remove(biggest);
                         if (cards.size() > 2) {
-                            final Card random = CardUtil.getRandom(cards.toArray());
+                            final Card random = CardUtil.getRandom(cards);
                             pile1.add(random);
                         }
                         for (int i = 0; i < count; i++) {
@@ -229,8 +229,7 @@ public class CardFactorySorceries {
 
                         final int numChosen = chosen.size();
                         for (int i = 0; i < numChosen; i++) {
-                            final Object check = GuiUtils.chooseOneOrNone("Select spells to play in reverse order: ",
-                                    chosen.toArray());
+                            final Card check = GuiUtils.chooseOneOrNone("Select spells to play in reverse order: ", chosen);
                             if (check == null) {
                                 break;
                             }
@@ -1161,7 +1160,7 @@ public class CardFactorySorceries {
                     final int num = CardFactoryUtil.getNumberOfManaSymbolsByColor("U", topCards);
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Revealed cards - ").append(num).append(" U mana symbols");
-                    GuiUtils.chooseOneOrNone(sb.toString(), topCards.toArray());
+                    GuiUtils.chooseOneOrNone(sb.toString(), topCards);
 
                     // opponent moves this many cards to graveyard
                     opp.mill(num);
@@ -1413,8 +1412,7 @@ public class CardFactorySorceries {
                         }
                     });
 
-                    final Object check = GuiUtils.chooseOneOrNone("Select target creature with CMC < X",
-                            grave.toArray());
+                    final Card check = GuiUtils.chooseOneOrNone("Select target creature with CMC < X", grave);
                     if (check != null) {
                         final Card c = (Card) check;
                         if (c.canBeTargetedBy(spell)) {
@@ -1584,14 +1582,14 @@ public class CardFactorySorceries {
 
                 private ArrayList<String> chooseTwo(final ArrayList<String> choices) {
                     final ArrayList<String> out = new ArrayList<String>();
-                    Object o = GuiUtils.chooseOneOrNone("Choose Two", choices.toArray());
+                    Object o = GuiUtils.chooseOneOrNone("Choose Two", choices);
                     if (o == null) {
                         return null;
                     }
 
                     out.add((String) o);
                     choices.remove(out.get(0));
-                    o = GuiUtils.chooseOneOrNone("Choose Two", choices.toArray());
+                    o = GuiUtils.chooseOneOrNone("Choose Two", choices);
                     if (o == null) {
                         return null;
                     }
@@ -1637,7 +1635,7 @@ public class CardFactorySorceries {
                     // Sacrifice an artifact
                     CardList arts = p.getCardsIn(ZoneType.Battlefield);
                     arts = arts.filter(Presets.ARTIFACTS);
-                    final Object toSac = GuiUtils.chooseOneOrNone("Sacrifice an artifact", arts.toArray());
+                    final Object toSac = GuiUtils.chooseOneOrNone("Sacrifice an artifact", arts);
                     if (toSac != null) {
                         final Card c = (Card) toSac;
                         baseCMC = CardUtil.getConvertedManaCost(c);
@@ -1648,9 +1646,9 @@ public class CardFactorySorceries {
 
                     // Search your library for an artifact
                     final CardList lib = p.getCardsIn(ZoneType.Library);
-                    GuiUtils.chooseOneOrNone("Looking at Library", lib.toArray());
+                    GuiUtils.chooseOneOrNone("Looking at Library", lib);
                     final CardList libArts = lib.filter(Presets.ARTIFACTS);
-                    final Object o = GuiUtils.chooseOneOrNone("Search for artifact", libArts.toArray());
+                    final Object o = GuiUtils.chooseOneOrNone("Search for artifact", libArts);
                     if (o != null) {
                         newArtifact[0] = (Card) o;
                     } else {

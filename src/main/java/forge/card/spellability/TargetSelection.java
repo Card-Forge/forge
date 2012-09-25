@@ -527,7 +527,7 @@ public class TargetSelection {
             choicesWithDone.add(dummy);
         }
 
-        final Object check = GuiUtils.chooseOneOrNone(message, choicesWithDone.toArray());
+        final Card check = GuiUtils.chooseOneOrNone(message, choicesWithDone);
         if (check != null) {
             final Card c = (Card) check;
             if (!c.equals(divBattlefield) && !c.equals(divExile) && !c.equals(divGrave)

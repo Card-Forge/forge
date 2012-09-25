@@ -44,7 +44,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.Card;
-import forge.CardList;
 import forge.gui.match.CMatchUI;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -260,10 +259,6 @@ public final class GuiUtils {
         return choice.isEmpty() ? null : choice.get(0);
     } // getChoiceOptional(String,T...)    
     
-    public static Card chooseOneOrNone(final String message, final CardList choices) {
-        return chooseOneOrNone(message, choices.toArray());
-    } // getChoiceOptional(String,T...)
-    
     // returned Object will never be null
     /**
      * <p>
@@ -291,10 +286,6 @@ public final class GuiUtils {
         return chooseOne(message, choices);
     }
 
-    public static Card chooseOne(final String message, final CardList cardList) {
-        return chooseOne(message, cardList.toArray());
-    }    
-    
     public static <T> T chooseOne(final String message, final Collection<T> choices) {
         final List<T> choice = GuiUtils.getChoices(message, 1, 1, choices);
         assert choice.size() == 1;
@@ -318,7 +309,9 @@ public final class GuiUtils {
     public static <T> List<T> chooseNoneOrMany(final String message, final T[] choices) {
         return GuiUtils.getChoices(message, 0, choices.length, choices);
     } // getChoice()
-
+    public static <T> List<T> chooseNoneOrMany(final String message, final List<T> choices) {
+        return GuiUtils.getChoices(message, 0, choices.size(), choices);
+    }
     // returned Object will never be null
     /**
      * <p>

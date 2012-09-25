@@ -1215,7 +1215,7 @@ public class AbilityFactoryCounters {
                         else {
                             // TODO: ArsenalNut (06 Feb 12) - computer needs better logic to pick a counter type and probably an initial target
                             // find first nonzero counter on target
-                            for (Object key : tgtCounters.keySet().toArray()) {
+                            for (Object key : tgtCounters.keySet()) {
                                 if (tgtCounters.get(key) > 0) {
                                     chosenType = (Counters) key;
                                     break;
@@ -1244,7 +1244,7 @@ public class AbilityFactoryCounters {
                                 choices.add("" + i);
                             }
                             final String prompt = "Select the number of " + type + " counters to remove";
-                            final Object o = GuiUtils.chooseOne(prompt, choices.toArray());
+                            final String o = GuiUtils.chooseOne(prompt, choices);
                             counterAmount = Integer.parseInt((String) o);
                         }
                     }

@@ -1967,7 +1967,7 @@ public final class AbilityFactoryChoose {
                 for (int i = 0; i < validAmount; i++) {
                     if (p.isHuman()) {
                         final String choiceTitle = params.containsKey("ChoiceTitle") ? params.get("ChoiceTitle") : "Choose a card ";
-                        final Object o = GuiUtils.chooseOneOrNone(choiceTitle, choices.toArray());
+                        final Card o = GuiUtils.chooseOneOrNone(choiceTitle, choices);
                         if (o != null) {
                             chosen.add((Card) o);
                             choices.remove((Card) o);

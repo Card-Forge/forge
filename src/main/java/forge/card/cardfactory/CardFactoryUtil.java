@@ -1119,7 +1119,7 @@ public class CardFactoryUtil {
                     return;
                 }
 
-                final Object o = GuiUtils.chooseOneOrNone("Select a card", sameCost.toArray());
+                final Card o = GuiUtils.chooseOneOrNone("Select a card", sameCost);
                 if (o != null) {
                     // ability.setTargetCard((Card)o);
 
@@ -1327,7 +1327,7 @@ public class CardFactoryUtil {
                     question.append(manacost).append(" or less from your graveyard to your hand?");
 
                     if (GameActionUtil.showYesNoDialog(sourceCard, question.toString())) {
-                        final Object o = GuiUtils.chooseOneOrNone("Select a card", sameCost.toArray());
+                        final Card o = GuiUtils.chooseOneOrNone("Select a card", sameCost);
                         if (o != null) {
 
                             final Card c1 = (Card) o;
@@ -5063,7 +5063,7 @@ public class CardFactoryUtil {
                         card.clearDevoured();
                         if (card.getController().isHuman()) {
                             if (creats.size() > 0) {
-                                final List<Object> selection = GuiUtils.getOrderChoices("Devour", "Devouring", -1, (Object[]) creats.toArray(), null);
+                                final List<Object> selection = GuiUtils.getOrderChoices("Devour", "Devouring", -1, creats.toArray(), null);
                                 numCreatures[0] = selection.size();
 
                                 for (Object o : selection) {

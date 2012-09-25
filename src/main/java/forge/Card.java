@@ -1565,10 +1565,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public final int sumAllCounters() {
-        final Object[] values = this.counters.values().toArray();
         int count = 0;
         int num = 0;
-        for (final Object value2 : values) {
+        for (final Object value2 : this.counters.values()) {
             num = (Integer) value2;
             count += num;
         }

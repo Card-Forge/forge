@@ -127,8 +127,8 @@ public class ReplacementHandler {
 
         if (possibleReplacers.size() > 1) {
             if (decider.isHuman()) {
-                chosenRE = (ReplacementEffect) GuiUtils.chooseOne("Choose which replacement effect to apply.",
-                        possibleReplacers.toArray());
+                chosenRE = GuiUtils.chooseOne("Choose which replacement effect to apply.",
+                        possibleReplacers);
             } else {
                 // AI logic for choosing which replacement effect to apply
                 // happens here.

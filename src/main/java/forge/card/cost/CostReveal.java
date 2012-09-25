@@ -129,7 +129,7 @@ public class CostReveal extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
-        GuiUtils.chooseOneOrNone("Revealed cards:", this.getList().toArray());
+        GuiUtils.chooseOneOrNone("Revealed cards:", this.getList());
     }
 
     /*

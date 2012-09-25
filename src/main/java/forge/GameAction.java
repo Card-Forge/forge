@@ -1332,7 +1332,7 @@ public class GameAction {
                     crd = list.get(0);
                 } else {
                     if (c.getController().isHuman()) {
-                        crd = GuiUtils.chooseOneOrNone("Select totem armor to destroy", list.toArray());
+                        crd = GuiUtils.chooseOneOrNone("Select totem armor to destroy", list);
                     } else {
                         crd = list.get(0);
                     }
@@ -1515,7 +1515,7 @@ public class GameAction {
                     crd = list.get(0);
                 } else {
                     if (c.getController().isHuman()) {
-                        crd = GuiUtils.chooseOneOrNone("Select totem armor to destroy", list.toArray());
+                        crd = GuiUtils.chooseOneOrNone("Select totem armor to destroy", list);
                     } else {
                         crd = list.get(0);
                     }
@@ -1579,7 +1579,7 @@ public class GameAction {
         } else if (choices.size() == 1) {
             choice = choices.get(0);
         } else {
-            choice = (String) GuiUtils.chooseOneOrNone("Choose", choices.toArray());
+            choice = (String) GuiUtils.chooseOneOrNone("Choose", choices);
         }
 
         if (choice == null) {
@@ -1617,7 +1617,7 @@ public class GameAction {
         } else if (choices.size() == 1) {
             sa = choices.get(0);
         } else {
-            sa = (SpellAbility) GuiUtils.chooseOneOrNone("Choose", choices.toArray());
+            sa = (SpellAbility) GuiUtils.chooseOneOrNone("Choose", choices);
         }
 
         if (sa == null) {
@@ -1789,7 +1789,7 @@ public class GameAction {
                     Object tapForConvoke = null;
                     if (sa.getActivatingPlayer().isHuman()) {
                         tapForConvoke = GuiUtils.chooseOneOrNone("Tap for Convoke? " + newCost.toString(),
-                                choices.toArray());
+                                choices);
                     } else {
                         // TODO: AI to choose a creature to tap would go here
                         // Probably along with deciding how many creatures to
@@ -1804,7 +1804,7 @@ public class GameAction {
                             if (usableColors.size() > 1) {
                                 if (sa.getActivatingPlayer().isHuman()) {
                                     chosenColor = (String) GuiUtils.chooseOne("Convoke for which color?",
-                                            usableColors.toArray());
+                                            usableColors);
                                 } else {
                                     // TODO: AI for choosing which color to
                                     // convoke goes here.
@@ -1831,8 +1831,7 @@ public class GameAction {
                         }
 
                         if (sa.getActivatingPlayer().isHuman()) {
-                            tapForConvoke = GuiUtils.chooseOneOrNone("Tap for Convoke? " + newCost.toString(),
-                                    choices.toArray());
+                            tapForConvoke = GuiUtils.chooseOneOrNone("Tap for Convoke? " + newCost.toString(), choices);
                         } else {
                             // TODO: AI to choose a creature to tap would go
                             // here
@@ -1923,12 +1922,12 @@ public class GameAction {
         }
 
         String choice;
-        if (choices.size() == 0) {
+        if (choices.isEmpty()) {
             return null;
         } else if (choices.size() == 1) {
             choice = choices.get(0);
         } else {
-            choice = (String) GuiUtils.chooseOneOrNone("Choose", choices.toArray());
+            choice = (String) GuiUtils.chooseOneOrNone("Choose", choices);
         }
         final SpellAbility ability = map.get(choice);
 

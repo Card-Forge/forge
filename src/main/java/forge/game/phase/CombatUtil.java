@@ -439,7 +439,7 @@ public class CombatUtil {
          
             CardList orderedBlockers = null;
             if (player.isHuman()) {
-                List<Object> ordered = GuiUtils.getOrderChoices("Choose Blocking Order", "Damaged First", 0, (Object[])blockers.toArray(), null);
+                List<Object> ordered = GuiUtils.getOrderChoices("Choose Blocking Order", "Damaged First", 0, blockers.toArray(), null);
                 
                 orderedBlockers = new CardList();
                 for(Object o : ordered) {
@@ -467,7 +467,7 @@ public class CombatUtil {
          
             CardList orderedAttacker = null;
             if (player.isHuman()) {
-                List<Object> ordered = GuiUtils.getOrderChoices("Choose Blocking Order", "Damaged First", 0, (Object[])attackers.toArray(), null);
+                List<Object> ordered = GuiUtils.getOrderChoices("Choose Blocking Order", "Damaged First", 0, attackers.toArray(), null);
                 
                 orderedAttacker = new CardList();
                 for(Object o : ordered) {
@@ -2531,7 +2531,7 @@ public class CombatUtil {
     public static String getCombatBlockForLog() {
         final StringBuilder sb = new StringBuilder();
 
-        Card[] defend = null;
+        CardList defend = null;
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
@@ -2546,9 +2546,9 @@ public class CombatUtil {
             for (final Card attacker : list) {
                 sb.append(combat.getDefendingPlayer()).append(" assigned ");
 
-                defend = AllZone.getCombat().getBlockers(attacker).toArray();
+                defend = AllZone.getCombat().getBlockers(attacker);
 
-                if (defend.length > 0) {
+                if (!defend.isEmpty()) {
                     // loop through blockers
                     for (final Card blocker : defend) {
                         sb.append(blocker).append(" ");
@@ -2833,7 +2833,7 @@ public class CombatUtil {
             if (lib.size() > 0) {
                 final CardList cl = new CardList();
                 cl.add(lib.get(0));
-                GuiUtils.chooseOneOrNone("Top card", cl.toArray());
+                GuiUtils.chooseOneOrNone("Top card", cl);
                 final Card top = lib.get(0);
                 if (top.isCreature()) {
                     player.gainLife(top.getBaseDefense(), c);
