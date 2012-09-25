@@ -12324,6 +12324,9 @@ src/main/java/forge/gui/MultiPhaseProgressMonitorWithETA.java svneol=native#text
 src/main/java/forge/gui/SOverlayUtils.java -text
 src/main/java/forge/gui/UnsortedListModel.java -text
 src/main/java/forge/gui/WrapLayout.java -text
+src/main/java/forge/gui/bazaar/ViewItem.java -text
+src/main/java/forge/gui/bazaar/ViewStall.java svneol=native#text/plain
+src/main/java/forge/gui/bazaar/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/CDeckEditorUI.java -text
 src/main/java/forge/gui/deckeditor/DeckImport.java -text
 src/main/java/forge/gui/deckeditor/MenuCommon.java svneol=native#text/plain
@@ -12594,9 +12597,6 @@ src/main/java/forge/view/arcane/util/GlowText.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/ImageUtil.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/UI.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/package-info.java svneol=native#text/plain
-src/main/java/forge/view/bazaar/ViewItem.java -text
-src/main/java/forge/view/bazaar/ViewStall.java svneol=native#text/plain
-src/main/java/forge/view/bazaar/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/BaseProgressMonitor.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/BraidsProgressMonitor.java svneol=native#text/plain

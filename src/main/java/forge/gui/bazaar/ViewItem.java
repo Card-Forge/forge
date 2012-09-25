@@ -1,4 +1,4 @@
-package forge.view.bazaar;
+package forge.gui.bazaar;
 
 import java.awt.Font;
 

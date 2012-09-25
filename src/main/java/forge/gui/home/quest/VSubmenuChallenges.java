@@ -71,7 +71,7 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet, IVDoc {
         .fontSize(15).build();
     private final FLabel lblTitle     = new FLabel.Builder()
         .text("Title Hasn't Been Set Yet").fontAlign(SwingConstants.CENTER)
-        .fontSize(16).build();
+        .fontSize(18).build();
     private final FLabel lblNextChallengeInWins = new FLabel.Builder()
         .fontSize(15).build();
     private final FLabel btnCurrentDeck = new FLabel.Builder()
@@ -90,6 +90,8 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet, IVDoc {
         pnlTitle.setLayout(new MigLayout("insets 0, gap 0"));
         pnlTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlTitle.add(lblTitle, "w 100%, h 100%, gap 0 0 0 0");
+        pnlTitle.setBorder(null);
+        pnlTitle.setCornerDiameter(0);
 
         populateStats();
         populateStart();
@@ -134,7 +136,7 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet, IVDoc {
         parentCell.getBody().removeAll();
         parentCell.getBody().setOpaque(false);
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        parentCell.getBody().add(pnlTitle, "w 94%!, h 30px!, gap 3% 0 15px 15px");
+        parentCell.getBody().add(pnlTitle, "w 100%!, h 30px!, gap 0 0 0 0");
         parentCell.getBody().add(pnlStats, "w 94%!, gap 3% 0 0 20px");
         parentCell.getBody().add(scrChallenges, "w 94%!, pushy, growy, gap 3% 0 0 0");
         parentCell.getBody().add(pnlStart, "w 94%, gap 3% 0 15px 5%");

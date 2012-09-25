@@ -1,3 +1,3 @@
 /** Views (as in model-view-controller) for Forge. */
-package forge.view.bazaar;
+package forge.gui.bazaar;
 

@@ -7,11 +7,11 @@ import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.control.ControlBazaarUI;
+import forge.gui.bazaar.ViewStall;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.quest.bazaar.QuestBazaarManager;
-import forge.view.bazaar.ViewStall;
 
 
 /** Lays out containers and borders for resizeable layout and
@@ -95,7 +95,7 @@ public class ViewBazaarUI extends FPanel {
 
     /**
      * TODO: Write javadoc for this method.
-     * @return {@link forge.view.bazaar.ViewStall}
+     * @return {@link forge.gui.bazaar.ViewStall}
      */
     public ViewStall getPnlSingleStall() {
         return this.pnlSingleStall;
