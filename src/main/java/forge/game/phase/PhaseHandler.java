@@ -997,14 +997,19 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     public static boolean couldCastSorcery(final Player player, final SpellAbility sa) {
         PhaseHandler now = Singletons.getModel().getGameState().getPhaseHandler();
         final Card source = sa.getRootSpellAbility().getSourceCard();
+        boolean onlyThis = true;
         if (AllZone.getStack().size() != 0) {
             for (final Card card : AllZoneUtil.getCardsIn(ZoneType.Stack)) {
                 if (card != source) {
-                    return false;
+                    onlyThis = false;
+                    //System.out.println("StackCard: " + card + " vs SourceCard: " + source);
                 }
             }
         }
-        return now.isPlayerTurn(player) && now.getPhase().isMain();
+        //System.out.println("now.isPlayerTurn(player) - " + now.isPlayerTurn(player));
+        //System.out.println("now.getPhase().isMain() - " + now.getPhase().isMain());
+        //System.out.println("onlyThis - " + onlyThis);
+        return now.isPlayerTurn(player) && now.getPhase().isMain() && onlyThis;
     }
 
 

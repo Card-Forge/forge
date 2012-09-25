@@ -166,17 +166,22 @@ public class TriggerSpellAbilityCast extends Trigger {
         }
 
         if (this.getMapParams().containsKey("SpellSpeed")) {
-            if (this.getHostCard().hasKeyword("You may cast CARDNAME as though it had flash. If you cast it any time "
-                    + "a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it "
-                    + "at the beginning of the next cleanup step.")
-                    && (this.getHostCard().hasKeyword("Flash") || this.getHostCard().hasKeyword("HIDDEN Flash")
-                    || this.getHostCard().getController().hasKeyword("You may cast nonland cards as though they had flash."))) {
+            if (this.getMapParams().get("SpellSpeed").equals("NotSorcerySpeed")) {
+                boolean notSorcerySpeed = true;
+                if (PhaseHandler.couldCastSorcery(this.getHostCard().getController(), spellAbility)) {
+                    notSorcerySpeed = false;
+                } else if (this.getHostCard().hasKeyword("You may cast CARDNAME as though it had flash. If you cast it any time a "
+                        + "sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning"
+                        + " of the next cleanup step.") && !PhaseHandler.couldCastSorcery(this.getHostCard().getController(), spellAbility)) {
+                    boolean instantmentCast = true;
                     // for these cards the trigger must only fire if using their own ability to cast at instant speed
-                return false;
-            }
-            else if (this.getMapParams().get("SpellSpeed").equals("NotSorcerySpeed")
-                    && PhaseHandler.couldCastSorcery(this.getHostCard().getController(), spellAbility)) {
-                return false;
+                    if (this.getHostCard().hasKeyword("Flash") || this.getHostCard().hasKeyword("HIDDEN Flash")
+                            || this.getHostCard().getController().hasKeyword("You may cast nonland cards as though they had flash.")) {
+                        instantmentCast = false;
+                    }
+                    notSorcerySpeed = instantmentCast;
+                }
+                return notSorcerySpeed;
             }
         }
 
