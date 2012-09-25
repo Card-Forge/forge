@@ -1,0 +1,21 @@
+Name:Necromancy
+ManaCost:2 B
+Types:Enchantment
+Text:no text
+K:You may cast CARDNAME as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDelayedSac | Static$ True | Secondary$ True | SpellSpeed$ NotSorcerySpeed | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
+SVar:TrigDelayedSac:AB$ Animate | Cost$ 0 | Defined$ Self | Triggers$ CleanupTrig | sVars$ Sac | Permanent$ True
+SVar:CleanupTrig:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Execute$ Sac | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.
+SVar:Sac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Aurify | TriggerDescription$ When CARDNAME enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with CARDNAME." Put target creature card from a graveyard onto the battlefield under your control and attach CARDNAME to it
+SVar:Aurify:AB$ Animate | Cost$ 0 | IsPresent$ Card.Self | Types$ Aura | Keywords$ Enchant creature | Permanent$ True | SubAbility$ RaiseDead
+SVar:RaiseDead:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True | TgtPrompt$ Select target creature card in a graveyard | ValidTgts$ Creature | ChangeNum$ 1 | SubAbility$ NecromAttach
+SVar:NecromAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, enchanted permanent's controller sacrifices it.
+SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Triggered.EnchantedBy
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/necromancy.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/14.jpg
+Oracle:You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nWhen Necromancy enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy." Put target creature card from a graveyard onto the battlefield under your control and attach Necromancy to it. When Necromancy leaves the battlefield, that creature's controller sacrifices it.
+End

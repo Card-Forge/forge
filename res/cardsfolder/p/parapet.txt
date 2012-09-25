@@ -1,0 +1,15 @@
+Name:Parapet
+ManaCost:1 W
+Types:Enchantment
+Text:no text
+K:You may cast CARDNAME as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDelayedSac | Static$ True | Secondary$ True | SpellSpeed$ NotSorcerySpeed | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
+SVar:TrigDelayedSac:AB$ Animate | Cost$ 0 | Defined$ Self | Triggers$ CleanupTrig | sVars$ Sac | Permanent$ True
+SVar:CleanupTrig:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Execute$ Sac | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.
+SVar:Sac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddToughness$ 1 | Description$ Creatures you control get +0/+1.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/parapet.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/114.jpg
+Oracle:You may cast Parapet as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nCreatures you control get +0/+1.
+End

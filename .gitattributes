@@ -6308,6 +6308,7 @@ res/cardsfolder/m/mystic_restraints.txt svneol=native#text/plain
 res/cardsfolder/m/mystic_retrieval.txt -text
 res/cardsfolder/m/mystic_snake.txt svneol=native#text/plain
 res/cardsfolder/m/mystic_speculation.txt svneol=native#text/plain
+res/cardsfolder/m/mystic_veil.txt -text
 res/cardsfolder/m/mystic_visionary.txt svneol=native#text/plain
 res/cardsfolder/m/mystic_zealot.txt svneol=native#text/plain
 res/cardsfolder/m/mystical_teachings.txt svneol=native#text/plain
@@ -6385,6 +6386,7 @@ res/cardsfolder/n/necrogen_spellbomb.txt svneol=native#text/plain
 res/cardsfolder/n/necrogenesis.txt svneol=native#text/plain
 res/cardsfolder/n/necrologia.txt -text
 res/cardsfolder/n/necromancers_covenant.txt -text
+res/cardsfolder/n/necromancy.txt -text
 res/cardsfolder/n/necromantic_thirst.txt svneol=native#text/plain
 res/cardsfolder/n/necropede.txt svneol=native#text/plain
 res/cardsfolder/n/necroplasm.txt svneol=native#text/plain
@@ -6825,6 +6827,7 @@ res/cardsfolder/p/parallax_wave.txt svneol=native#text/plain
 res/cardsfolder/p/parallel_evolution.txt svneol=native#text/plain
 res/cardsfolder/p/parallel_lives.txt -text
 res/cardsfolder/p/paralyzing_grasp.txt svneol=native#text/plain
+res/cardsfolder/p/parapet.txt -text
 res/cardsfolder/p/parapet_watchers.txt svneol=native#text/plain
 res/cardsfolder/p/paraselene.txt -text
 res/cardsfolder/p/parasitic_bond.txt svneol=native#text/plain
@@ -7620,6 +7623,7 @@ res/cardsfolder/r/relic_bind.txt -text
 res/cardsfolder/r/relic_crush.txt svneol=native#text/plain
 res/cardsfolder/r/relic_of_progenitus.txt svneol=native#text/plain
 res/cardsfolder/r/relic_putrescence.txt svneol=native#text/plain
+res/cardsfolder/r/relic_ward.txt -text
 res/cardsfolder/r/reliquary_monk.txt svneol=native#text/plain
 res/cardsfolder/r/reliquary_tower.txt svneol=native#text/plain
 res/cardsfolder/r/remand.txt svneol=native#text/plain
@@ -9005,6 +9009,7 @@ res/cardsfolder/s/sphinx_of_uthuun.txt -text
 res/cardsfolder/s/sphinx_sovereign.txt svneol=native#text/plain
 res/cardsfolder/s/sphinx_summoner.txt svneol=native#text/plain
 res/cardsfolder/s/sphinxs_herald.txt -text
+res/cardsfolder/s/spider_climb.txt -text
 res/cardsfolder/s/spider_spawning.txt -text
 res/cardsfolder/s/spider_umbra.txt svneol=native#text/plain
 res/cardsfolder/s/spidersilk_armor.txt svneol=native#text/plain
