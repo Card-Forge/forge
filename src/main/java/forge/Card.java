@@ -2601,15 +2601,20 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Kicker")) {
                 final Cost cost = new Cost(this, keyword.substring(7), false);
                 sb.append("Kicker " + cost.toSimpleString() + "\r\n");
-            }
-            if (keyword.startsWith("Storm")) {
+            } else if (keyword.startsWith("AlternateAdditionalCost")) {
+                final String costString1 = keyword.split(":")[1];
+                final String costString2 = keyword.split(":")[2];
+                final Cost cost1 = new Cost(this, costString1, false);
+                final Cost cost2 = new Cost(this, costString2, false);
+                sb.append("As an additional cost to cast " + this.getName() + ", " + cost1.toSimpleString()
+                        + " or pay " + cost2.toSimpleString() + ".\r\n");
+            } else if (keyword.startsWith("Storm")) {
                 if (sb.toString().contains("Target") || sb.toString().contains("target")) {
                     sb.insert(
                             sb.indexOf("Storm (When you cast this spell, copy it for each spell cast before it this turn.") + 81,
                             " You may choose new targets for the copies.");
                 }
-            }
-            if (keyword.contains("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
+            } else if (keyword.contains("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
@@ -2619,8 +2624,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append(" You may choose new targets for the copies.");
                 }
                 sb.append(")\r\n");
-            }
-            if (keyword.startsWith("Haunt")) {
+            }else if (keyword.startsWith("Haunt")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
@@ -2632,20 +2636,17 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("exile it haunting target creature.");
                 }
                 sb.append(")\r\n");
-            }
-            if (keyword.equals("Convoke")) {
+            } else if (keyword.equals("Convoke")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
                 sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)\r\n");
-            }
-            if (keyword.equals("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
+            } else if (keyword.equals("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
                 sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
-            }
-            if (keyword.equals("Rebound")) {
+            } else if (keyword.equals("Rebound")) {
                 sb.append(keyword)
                         .append(" (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)\r\n");
             }
