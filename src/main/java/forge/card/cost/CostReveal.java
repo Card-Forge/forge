@@ -71,11 +71,15 @@ public class CostReveal extends CostPartWithList {
         } else if (this.getType().equals("Hand")) {
             return true;
         } else {
+            if (ability.isSpell()) {
+                handList.remove(source); // can't pay for itself
+            }
             handList = handList.getValidCards(type.split(";"), activator, source);
             if ((amount != null) && (amount > handList.size())) {
                 // not enough cards in hand to pay
                 return false;
             }
+            System.out.println("revealcost - " + amount + type + handList);
         }
 
         return true;

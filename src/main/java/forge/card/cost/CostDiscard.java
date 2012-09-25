@@ -123,6 +123,9 @@ public class CostDiscard extends CostPartWithList {
             final Card c = activator.getLastDrawnCard();
             return handList.contains(c);
         } else {
+            if (ability.isSpell()) {
+                handList.remove(source);// can't pay for itself
+            }
             if (!type.equals("Random")) {
                 handList = handList.getValidCards(type.split(";"), activator, source);
             }
