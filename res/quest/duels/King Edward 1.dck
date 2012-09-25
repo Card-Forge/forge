@@ -3,7 +3,7 @@
 Name=King Edward 1
 Title=King Edward
 Difficulty=easy
-Description=WUBRG Elementals deck with Tribal Flames
+Description=WUBRG Elementals deck
 Icon=King Edward.jpg
 Deck Type=constructed
 [main]
@@ -15,7 +15,6 @@ Deck Type=constructed
 2 Shriekmaw
 1 Tribal Flames
 2 Harmonize
-1 Beacon of Unrest
 4 Seaside Citadel
 2 Spark Elemental
 2 Inner-Flame Acolyte
@@ -31,6 +30,7 @@ Deck Type=constructed
 1 Bogardan Firefiend
 1 Bramble Creeper
 4 Brighthearth Banneret
+1 Flamekin Bladewhirl
 1 Cultbrand Cinder
 1 Earth Elemental
 1 Lucent Liminid

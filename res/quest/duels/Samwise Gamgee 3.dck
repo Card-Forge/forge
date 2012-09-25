@@ -7,7 +7,7 @@ Description=Mono W Kithkin deck
 Icon=Samwise Gamgee.jpg
 Deck Type=constructed
 [main]
-2 Burrenton Bombardier|MOR
+1 Burrenton Bombardier|MOR
 4 Arid Mesa|ZEN
 4 Wizened Cenn|LRW
 3 Kinsbaile Borderguard|MOR
@@ -15,12 +15,14 @@ Deck Type=constructed
 3 Knight of Meadowgrain|LRW
 3 Ballyrush Banneret|MOR
 3 Kithkin Zephyrnaut|MOR
-2 Mosquito Guard|MOR
-3 Mistmeadow Skulk|SHM
+1 Mosquito Guard|MOR
+2 Mistmeadow Skulk|SHM
 18 Plains|MBS
-3 Ballynock Cohort|SHM
+1 Ballynock Cohort|SHM
 3 Cenn's Heir|LRW
 3 Honor of the Pure|M11
 2 Emeria, the Sky Ruin|ZEN
 3 Surge of Thoughtweft|LRW
+4 Goldmeadow Stalwart
+1 Thoughtweft Trio
 [sideboard]
