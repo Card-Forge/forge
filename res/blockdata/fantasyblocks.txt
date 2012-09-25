@@ -24,4 +24,6 @@ Index:22|Set0:4ED|Set1:ALL|Set2:ICE|Set3:HML|Set4:LEG|Set5:DRK|Set6:FEM|Name:(7)
 Index:23|Set0:4ED|Set1:ALL|Set2:ICE|Set3:HML|Set4:LEG|Set5:DRK|Set6:FEM|Set7:CHR|Name:(8) Sample 8-pack|DraftPacks:3|LandSetCode:4ED|SealedPacks:8
 Index:24|Set0:2ED|Set1:ALL|Set2:ICE|Set3:HML|Set4:LEG|Set5:DRK|Set6:FEM|Set7:ATQ|Set8:ARN|Name:(9) Sample 9-pack|DraftPacks:3|LandSetCode:2ED|SealedPacks:9
 Index:25|Set0:2ED|Set1:ATQ|Set2:ARN|Set3:DRK|Set4:LEG|Set5:FEM|Set6:ICE|Set7:HML|Set8:ALL|Name:(9) MtG Encyclopedia|DraftPacks:3|LandSetCode:2ED|SealedPacks:9
-Index:26|Meta1:CUBE/ArabianExtended/ARAB|Meta2:META/ISD,DKA,AVR,M13/M13-ISD|Meta3:FULL/*/*|Name:(3) Metaset Sample|DraftPacks:3|LandSetCode:2ED|SealedPacks:6
+Index:26|Meta0:CUBE/ArabianExtended/ARAB|Meta1:META/ISD,DKA,AVR,M13/M13-ISD|Meta2:FULL/*/*|Name:(3) Metaset Sample|DraftPacks:3|LandSetCode:2ED|SealedPacks:6
+Index:27|Meta0:CHOOSE1/CUBE/ArabianExtended/ArabianExtended;FULL/*/*;META/ICE,ALL,HML,CSP/IceAgeBlockExtended;BOOSTER/2ED/Unlimited;PACK/4ED/4th Edition /CHOOSE|Meta1:RANDOM1/FULL/*/*;META/CHK,BOK,SOK/KAMI;BOOSTER/8ED/8ED/RANDOM|Meta2:COMBO/CUBE/juzamjedi/JZJEDI;META/USG,ULG,UDS/URZA;PACK/M13/M13;BOOSTER/TSB/TimeShift/COMBO|Name:(3) Metaset Sample 2|DraftPacks:3|LandSetCode:2ED|SealedPacks:6
+
