@@ -2179,192 +2179,195 @@ public class Card extends GameEntity implements Comparable<Card> {
      * keywordsToText.
      * </p>
      * 
-     * @param keyword
+     * @param keywords
      *            a {@link java.util.ArrayList} object.
      * @return a {@link java.lang.String} object.
      */
-    public final String keywordsToText(final ArrayList<String> keyword) {
+    public final String keywordsToText(final ArrayList<String> keywords) {
         final StringBuilder sb = new StringBuilder();
         final StringBuilder sbLong = new StringBuilder();
         final StringBuilder sbMana = new StringBuilder();
 
-        for (int i = 0; i < keyword.size(); i++) {
-            if (!keyword.get(i).toString().startsWith("Permanents don't untap during their controllers' untap steps")
-                    && !keyword.get(i).toString().startsWith("PreventAllDamageBy")
-                    && !keyword.get(i).toString().startsWith("CantBlock")
-                    && !keyword.get(i).toString().startsWith("CantBeBlockedBy")) {
-                if (keyword.get(i).toString().startsWith("CostChange")) {
-                    final String[] k = keyword.get(i).split(":");
-                    if (k.length > 8) {
-                        sbLong.append(k[8]).append("\r\n");
-                    }
-                } else if (keyword.get(i).toString().startsWith("AdjustLandPlays")) {
-                    final String[] k = keyword.get(i).split(":");
-                    if (k.length > 3) {
-                        sbLong.append(k[3]).append("\r\n");
-                    }
-                } else if (keyword.get(i).toString().startsWith("etbCounter")) {
-                    final String[] p = keyword.get(i).split(":");
-                    final StringBuilder s = new StringBuilder();
-                    if (p.length > 4) {
-                        s.append(p[4]);
-                    } else {
-                        final Counters counter = Counters.valueOf(p[1]);
-                        final String numCounters = p[2];
-                        s.append(this.getName());
-                        s.append(" enters the battlefield with ");
-                        s.append(numCounters);
-                        s.append(" ");
-                        s.append(counter.getName());
-                        s.append(" counter");
-                        if ("1" != numCounters) {
-                            s.append("s");
-                        }
-                        s.append(" on it.");
-                    }
-                    sbLong.append(s).append("\r\n");
-                } else if (keyword.get(i).toString().startsWith("Protection:")) {
-                    final String[] k = keyword.get(i).split(":");
-                    sbLong.append(k[2]).append("\r\n");
-                } else if (keyword.get(i).toString().startsWith("Creatures can't attack unless their controller pays")) {
-                    final String[] k = keyword.get(i).split(":");
-                    if (!k[3].equals("no text")) {
-                        sbLong.append(k[3]).append("\r\n");
-                    }
-                } else if (keyword.get(i).startsWith("Enchant")) {
-                    String k = keyword.get(i);
-                    k = k.replace("Curse", "");
-                    sbLong.append(k).append("\r\n");
-                } else if (keyword.get(i).startsWith("Soulshift") || keyword.get(i).startsWith("Devour")
-                        || keyword.get(i).startsWith("Fading")
-                        || keyword.get(i).startsWith("Ripple") || keyword.get(i).startsWith("Unearth")
-                        || keyword.get(i).startsWith("Vanishing") || keyword.get(i).startsWith("Madness")) {
-                    String k = keyword.get(i);
-                    k = k.replace(":", " ");
-                    sbLong.append(k).append("\r\n");
-                } else if (keyword.get(i).startsWith("Morph")) {
-                    sbLong.append("Morph");
-                    if (keyword.get(i).contains(":")) {
-                        final Cost mCost = new Cost(this, keyword.get(i).substring(6), true);
-                        if (!mCost.isOnlyManaCost()) {
-                            sbLong.append(" -");
-                        }
-                        sbLong.append(" ").append(mCost.toString()).delete(sbLong.length() - 2, sbLong.length());
-                        if (!mCost.isOnlyManaCost()) {
-                            sbLong.append(".");
-                        }
-                        sbLong.append("\r\n");
-                    }
-                } else if (keyword.get(i).startsWith("Echo")) {
-                    sbLong.append("Echo ");
-                    final String[] upkeepCostParams = keyword.get(i).split(":");
-                    final String cost = upkeepCostParams[1];
-                    final String costDesc = upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : cost;
-                    sbLong.append(costDesc);
-                    sbLong.append("\r\n");
-                } else if (keyword.get(i).startsWith("Cumulative upkeep")) {
-                    sbLong.append("Cumulative upkeep ");
-                    final String[] upkeepCostParams = keyword.get(i).split(":");
-                    final String cost = upkeepCostParams[1];
-                    final String costDesc = upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : cost;
-                    sbLong.append(costDesc);
-                    sbLong.append("\r\n");
-                } else if (keyword.get(i).startsWith("Amplify")) {
-                    sbLong.append("Amplify ");
-                    final String[] ampParams = keyword.get(i).split(":");
-                    final String magnitude = ampParams[1];
-                    sbLong.append(magnitude);
-                    sbLong.append("(As this creature enters the battlefield, put a +1/+1 counter on it for each ");
-                    sbLong.append(ampParams[2].replace(",", " and/or ")).append(" card you reveal in your hand.)");
-                    sbLong.append("\r\n");
-                }  else if (keyword.get(i).startsWith("Alternative Cost")) {
-                    sbLong.append("Has alternative cost.");
-                } else if (keyword.get(i).startsWith("Kicker")) {
-                    final Cost cost = new Cost(this, keyword.get(i).substring(7), false);
-                    sbLong.append("Kicker " + cost.toSimpleString() + "\r\n");
-                } else if (keyword.get(i).startsWith("Champion")) {
-                    final String k = this.getKeyword().get(i);
-                    final String[] kk = k.split(":");
-                    String types = kk[1];
-                    if (kk.length > 2) {
-                        types = kk[2];
-                    }
-                    if (kk[1].equals("Creature")) {
-                        kk[1] = kk[1].toLowerCase();
-                    }
-                    sbLong.append("Champion a");
-                    if (kk[1].toLowerCase().startsWith("a") || kk[1].toLowerCase().startsWith("e")
-                            || kk[1].toLowerCase().startsWith("i") || kk[1].toLowerCase().startsWith("o")
-                            || kk[1].toLowerCase().startsWith("u")) {
-                        sbLong.append("n");
-                    }
-                    sbLong.append(" ").append(types);
-                    sbLong.append(" (When this enters the battlefield, sacrifice it unless you exile another ");
-                    sbLong.append(types);
-                    sbLong.append(" you control. When this leaves the battlefield, ");
-                    sbLong.append("that card returns to the battlefield.)\r\n");
-                } else if (keyword.get(i).endsWith(".") && !keyword.get(i).startsWith("Haunt")) {
-                    sbLong.append(keyword.get(i).toString()).append("\r\n");
-                } else if (keyword.get(i).contains("At the beginning of your upkeep, ")
-                        && keyword.get(i).contains(" unless you pay")) {
-                    sbLong.append(keyword.get(i).toString()).append("\r\n");
-                } else if (keyword.get(i).toString().contains("tap: add ")) {
-                    sbMana.append(keyword.get(i).toString()).append("\r\n");
-                } else if (keyword.get(i).contains("Bloodthirst")) {
-                    final String k = keyword.get(i);
-                    final String[] kk = k.split(" ");
-                    sbLong.append(keyword.get(i)).append(
-                            " (If an opponent was dealt damage this turn, this creature enters the battlefield with ");
-                    sbLong.append(kk[1]).append(" +1/+1 counter");
-                    if (kk[1].equals("X")) {
-                        sbLong.append("s on it, where X is the damage dealt to your opponents this turn.)");
-                        sbLong.append("\r\n");
-                    } else {
-                        if (Integer.parseInt(kk[1]) > 1) {
-                            sbLong.append("s");
-                        }
-                        sbLong.append(" on it.)").append("\r\n");
-                    }
-                } else if (keyword.get(i).startsWith("Modular")) {
-                    continue;
-                } else if (keyword.get(i).startsWith("Provoke")) {
-                    sbLong.append(keyword.get(i));
-                    sbLong.append(" (When this attacks, you may have target creature ");
-                    sbLong.append("defending player controls untap and block it if able.)");
-                } else if (keyword.get(i).startsWith("MayEffectFromOpeningHand")) {
-                    continue;
-                } else if (keyword.get(i).startsWith("ETBReplacement")) {
-                    continue;
-                } else if (keyword.get(i).contains("Haunt")) {
-                    sb.append("\r\nHaunt (");
-                    if (this.isCreature()) {
-                        sb.append("When this creature dies, exile it haunting target creature.");
-                    } else {
-                        sb.append("When this spell card is put into a graveyard after resolving, ");
-                        sb.append("exile it haunting target creature.");
-                    }
-                    sb.append(")");
-                    continue;
-                } else if (keyword.get(i).equals("Convoke")) {
-                    if (sb.length() != 0) {
-                        sb.append("\r\n");
-                    }
-                    sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)");
-                } else if (keyword.get(i).startsWith("Soulbond")) {
-                    sbLong.append(keyword.get(i));
-                    sbLong.append(" (You may pair this creature ");
-                    sbLong.append("with another unpaired creature when either ");
-                    sbLong.append("enters the battlefield. They remain paired for ");
-                    sbLong.append("as long as you control both of them)");
-                } else if (keyword.get(i).startsWith("Equip")) {
-                    // keyword parsing takes care of adding a proper description
-                    continue;
-                } else {
-                    if ((i != 0) && (sb.length() != 0)) {
-                        sb.append(", ");
-                    }
-                    sb.append(keyword.get(i).toString());
+        for (int i = 0; i < keywords.size(); i++) {
+            String keyword = keywords.get(i).toString();
+            if (keyword.startsWith("Permanents don't untap during their controllers' untap steps")
+                    || keyword.startsWith("PreventAllDamageBy")
+                    || keyword.startsWith("CantBlock")
+                    || keyword.startsWith("CantBeBlockedBy")
+                    || keyword.startsWith("AlternateAdditionalCost")) {
+                continue;
+            }
+            if (keyword.startsWith("CostChange")) {
+                final String[] k = keywords.get(i).split(":");
+                if (k.length > 8) {
+                    sbLong.append(k[8]).append("\r\n");
                 }
+            } else if (keyword.startsWith("AdjustLandPlays")) {
+                final String[] k = keywords.get(i).split(":");
+                if (k.length > 3) {
+                    sbLong.append(k[3]).append("\r\n");
+                }
+            } else if (keyword.startsWith("etbCounter")) {
+                final String[] p = keywords.get(i).split(":");
+                final StringBuilder s = new StringBuilder();
+                if (p.length > 4) {
+                    s.append(p[4]);
+                } else {
+                    final Counters counter = Counters.valueOf(p[1]);
+                    final String numCounters = p[2];
+                    s.append(this.getName());
+                    s.append(" enters the battlefield with ");
+                    s.append(numCounters);
+                    s.append(" ");
+                    s.append(counter.getName());
+                    s.append(" counter");
+                    if ("1" != numCounters) {
+                        s.append("s");
+                    }
+                    s.append(" on it.");
+                }
+                sbLong.append(s).append("\r\n");
+            } else if (keyword.startsWith("Protection:")) {
+                final String[] k = keywords.get(i).split(":");
+                sbLong.append(k[2]).append("\r\n");
+            } else if (keyword.startsWith("Creatures can't attack unless their controller pays")) {
+                final String[] k = keywords.get(i).split(":");
+                if (!k[3].equals("no text")) {
+                    sbLong.append(k[3]).append("\r\n");
+                }
+            } else if (keyword.startsWith("Enchant")) {
+                String k = keywords.get(i);
+                k = k.replace("Curse", "");
+                sbLong.append(k).append("\r\n");
+            } else if (keyword.startsWith("Soulshift") || keywords.get(i).startsWith("Devour")
+                    || keyword.startsWith("Fading")
+                    || keyword.startsWith("Ripple") || keywords.get(i).startsWith("Unearth")
+                    || keyword.startsWith("Vanishing") || keywords.get(i).startsWith("Madness")) {
+                String k = keywords.get(i);
+                k = k.replace(":", " ");
+                sbLong.append(k).append("\r\n");
+            } else if (keyword.startsWith("Morph")) {
+                sbLong.append("Morph");
+                if (keyword.contains(":")) {
+                    final Cost mCost = new Cost(this, keywords.get(i).substring(6), true);
+                    if (!mCost.isOnlyManaCost()) {
+                        sbLong.append(" -");
+                    }
+                    sbLong.append(" ").append(mCost.toString()).delete(sbLong.length() - 2, sbLong.length());
+                    if (!mCost.isOnlyManaCost()) {
+                        sbLong.append(".");
+                    }
+                    sbLong.append("\r\n");
+                }
+            } else if (keyword.startsWith("Echo")) {
+                sbLong.append("Echo ");
+                final String[] upkeepCostParams = keywords.get(i).split(":");
+                final String cost = upkeepCostParams[1];
+                final String costDesc = upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : cost;
+                sbLong.append(costDesc);
+                sbLong.append("\r\n");
+            } else if (keyword.startsWith("Cumulative upkeep")) {
+                sbLong.append("Cumulative upkeep ");
+                final String[] upkeepCostParams = keywords.get(i).split(":");
+                final String cost = upkeepCostParams[1];
+                final String costDesc = upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : cost;
+                sbLong.append(costDesc);
+                sbLong.append("\r\n");
+            } else if (keyword.startsWith("Amplify")) {
+                sbLong.append("Amplify ");
+                final String[] ampParams = keywords.get(i).split(":");
+                final String magnitude = ampParams[1];
+                sbLong.append(magnitude);
+                sbLong.append("(As this creature enters the battlefield, put a +1/+1 counter on it for each ");
+                sbLong.append(ampParams[2].replace(",", " and/or ")).append(" card you reveal in your hand.)");
+                sbLong.append("\r\n");
+            }  else if (keyword.startsWith("Alternative Cost")) {
+                sbLong.append("Has alternative cost.");
+            } else if (keyword.startsWith("Kicker")) {
+                final Cost cost = new Cost(this, keywords.get(i).substring(7), false);
+                sbLong.append("Kicker " + cost.toSimpleString() + "\r\n");
+            } else if (keyword.startsWith("Champion")) {
+                final String k = this.getKeyword().get(i);
+                final String[] kk = k.split(":");
+                String types = kk[1];
+                if (kk.length > 2) {
+                    types = kk[2];
+                }
+                if (kk[1].equals("Creature")) {
+                    kk[1] = kk[1].toLowerCase();
+                }
+                sbLong.append("Champion a");
+                if (kk[1].toLowerCase().startsWith("a") || kk[1].toLowerCase().startsWith("e")
+                        || kk[1].toLowerCase().startsWith("i") || kk[1].toLowerCase().startsWith("o")
+                        || kk[1].toLowerCase().startsWith("u")) {
+                    sbLong.append("n");
+                }
+                sbLong.append(" ").append(types);
+                sbLong.append(" (When this enters the battlefield, sacrifice it unless you exile another ");
+                sbLong.append(types);
+                sbLong.append(" you control. When this leaves the battlefield, ");
+                sbLong.append("that card returns to the battlefield.)\r\n");
+            } else if (keyword.endsWith(".") && !keywords.get(i).startsWith("Haunt")) {
+                sbLong.append(keywords.get(i).toString()).append("\r\n");
+            } else if (keyword.contains("At the beginning of your upkeep, ")
+                    && keyword.contains(" unless you pay")) {
+                sbLong.append(keywords.get(i).toString()).append("\r\n");
+            } else if (keyword.toString().contains("tap: add ")) {
+                sbMana.append(keywords.get(i).toString()).append("\r\n");
+            } else if (keyword.contains("Bloodthirst")) {
+                final String k = keywords.get(i);
+                final String[] kk = k.split(" ");
+                sbLong.append(keywords.get(i)).append(
+                        " (If an opponent was dealt damage this turn, this creature enters the battlefield with ");
+                sbLong.append(kk[1]).append(" +1/+1 counter");
+                if (kk[1].equals("X")) {
+                    sbLong.append("s on it, where X is the damage dealt to your opponents this turn.)");
+                    sbLong.append("\r\n");
+                } else {
+                    if (Integer.parseInt(kk[1]) > 1) {
+                        sbLong.append("s");
+                    }
+                    sbLong.append(" on it.)").append("\r\n");
+                }
+            } else if (keyword.startsWith("Modular")) {
+                continue;
+            } else if (keyword.startsWith("Provoke")) {
+                sbLong.append(keywords.get(i));
+                sbLong.append(" (When this attacks, you may have target creature ");
+                sbLong.append("defending player controls untap and block it if able.)");
+            } else if (keyword.startsWith("MayEffectFromOpeningHand")) {
+                continue;
+            } else if (keyword.startsWith("ETBReplacement")) {
+                continue;
+            } else if (keyword.contains("Haunt")) {
+                sb.append("\r\nHaunt (");
+                if (this.isCreature()) {
+                    sb.append("When this creature dies, exile it haunting target creature.");
+                } else {
+                    sb.append("When this spell card is put into a graveyard after resolving, ");
+                    sb.append("exile it haunting target creature.");
+                }
+                sb.append(")");
+                continue;
+            } else if (keyword.equals("Convoke")) {
+                if (sb.length() != 0) {
+                    sb.append("\r\n");
+                }
+                sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)");
+            } else if (keyword.startsWith("Soulbond")) {
+                sbLong.append(keywords.get(i));
+                sbLong.append(" (You may pair this creature ");
+                sbLong.append("with another unpaired creature when either ");
+                sbLong.append("enters the battlefield. They remain paired for ");
+                sbLong.append("as long as you control both of them)");
+            } else if (keyword.startsWith("Equip")) {
+                // keyword parsing takes care of adding a proper description
+                continue;
+            } else {
+                if ((i != 0) && (sb.length() != 0)) {
+                    sb.append(", ");
+                }
+                sb.append(keyword);
             }
         }
         if (sb.length() > 0) {

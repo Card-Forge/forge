@@ -253,9 +253,9 @@ public class CostReveal extends CostPartWithList {
                     this.done();
                 }
 
-                if (handList.size() + this.nReveal < nNeeded) {
+                /*if (handList.size() + this.nReveal < nNeeded) {
                     this.stop();
-                }
+                }*/
                 final StringBuilder type = new StringBuilder("");
                 if (!discType.equals("Card")) {
                     type.append(" ").append(discType);

@@ -3311,6 +3311,7 @@ res/cardsfolder/f/flameborn_hellion.txt svneol=native#text/plain
 res/cardsfolder/f/flameborn_viron.txt svneol=native#text/plain
 res/cardsfolder/f/flamebreak.txt svneol=native#text/plain
 res/cardsfolder/f/flamecore_elemental.txt svneol=native#text/plain
+res/cardsfolder/f/flamekin_bladewhirl.txt -text
 res/cardsfolder/f/flamekin_brawler.txt svneol=native#text/plain
 res/cardsfolder/f/flamekin_harbinger.txt svneol=native#text/plain
 res/cardsfolder/f/flamekin_spitfire.txt svneol=native#text/plain

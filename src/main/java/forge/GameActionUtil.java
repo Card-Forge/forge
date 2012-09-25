@@ -43,7 +43,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.control.input.InputPayDiscardCost;
 import forge.control.input.InputPayManaCostAbility;
-import forge.control.input.InputPayManaCostUtil;
 import forge.control.input.InputPayReturnCost;
 import forge.control.input.InputPaySacCost;
 import forge.game.GameLossReason;
@@ -1817,6 +1816,39 @@ public final class GameActionUtil {
                         newAbilities.add(newAbilities.size(), newSA);
                     }
                 }
+                abilities.addAll(0, newAbilities);
+                newAbilities.clear();
+            } else if (keyword.startsWith("AlternateAdditionalCost")) {
+                String costString1 = keyword.split(":")[1];
+                String costString2 = keyword.split(":")[2];
+                for (SpellAbility sa : abilities) {
+                    final SpellAbility newSA = sa.copy();
+                    newSA.setBasicSpell(false);
+                    newSA.setPayCosts(GameActionUtil.combineCosts(newSA, costString1));
+                    newSA.setManaCost("");
+                    final Cost cost1 = new Cost(source, costString1, false);
+                    newSA.setDescription(sa.getDescription() + " (Additional cost " + cost1.toSimpleString() + ")");
+                    ArrayList<String> newoacs = new ArrayList<String>();
+                    newoacs.addAll(sa.getOptionalAdditionalCosts());
+                    newSA.setOptionalAdditionalCosts(newoacs);
+                    if (newSA.canPlay()) {
+                        newAbilities.add(newAbilities.size(), newSA);
+                    }
+                    //second option
+                    final SpellAbility newSA2 = sa.copy();
+                    newSA2.setBasicSpell(false);
+                    newSA2.setPayCosts(GameActionUtil.combineCosts(newSA2, costString2));
+                    newSA2.setManaCost("");
+                    final Cost cost2 = new Cost(source, costString2, false);
+                    newSA2.setDescription(sa.getDescription() + " (Additional cost " + cost2.toSimpleString() + ")");
+                    ArrayList<String> newoacs2 = new ArrayList<String>();
+                    newoacs.addAll(sa.getOptionalAdditionalCosts());
+                    newSA2.setOptionalAdditionalCosts(newoacs2);
+                    if (newSA2.canPlay()) {
+                        newAbilities.add(newAbilities.size(), newSA2);
+                    }
+                }
+                abilities.clear();
                 abilities.addAll(0, newAbilities);
                 newAbilities.clear();
             }
