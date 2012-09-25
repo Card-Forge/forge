@@ -40,7 +40,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
 
     // Core layout stuff
     private final JPanel pnlHead = new JPanel(new MigLayout("insets 0, gap 0, hidemode 3"));
-    private final JPanel pnlBody = new FPanel();
+    private final FPanel pnlBody = new FPanel();
     private final JPanel pnlBorderRight = new JPanel();
     private final JPanel pnlBorderBottom = new JPanel();
     private final int tabPaddingPx = 2;
@@ -94,6 +94,8 @@ public final class DragCell extends JPanel implements ILocalRepaint {
 
         pnlHead.add(lblHandle, "pushx, growx, h 100%!, gap " + tabPaddingPx + "px " + tabPaddingPx + "px 0 0", -1);
         pnlHead.add(lblOverflow, "w 20px!, h 100%!, gap " + tabPaddingPx + "px " + tabPaddingPx + "px 0 0", -1);
+
+        pnlBody.setCornerDiameter(0);
     }
 
     /** @return {@link javax.swing.JPanel} */
