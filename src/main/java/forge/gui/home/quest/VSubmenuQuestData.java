@@ -49,8 +49,8 @@ public enum VSubmenuQuestData implements IVSubmenu {
     private final DragTab tab = new DragTab("Quest Data");
 
     /** */
-    private final JPanel pnl = new JPanel();
     private final JPanel pnlViewport = new JPanel();
+    private final FScrollPane scrContent = new FScrollPane(pnlViewport);
     private final QuestFileLister lstQuests = new QuestFileLister();
 
     private final JRadioButton radEasy = new FRadioButton("Easy");
@@ -69,15 +69,10 @@ public enum VSubmenuQuestData implements IVSubmenu {
 
     private final FLabel btnEmbark = new FLabel.Builder().opaque(true).hoverable(true).text("Embark!").build();
 
-    /* (non-Javadoc)
-     * @see forge.view.home.IViewSubmenu#populate()
+    /**
+     * Constructor.
      */
-    @Override
-    public void populate() {
-        pnl.removeAll();
-        pnl.setOpaque(false);
-        pnl.setLayout(new MigLayout("insets 0, gap 0"));
-
+    private VSubmenuQuestData() {
         // Load quest
         final FPanel pnlTitleLoad = new FPanel();
         pnlTitleLoad.setLayout(new MigLayout("insets 0, align center"));
@@ -109,6 +104,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
         cbxFormat.addItem("Extended");
         cbxFormat.addItem("Modern");
 
+        // TODO: Listeners should be in controller, not in view.
         final ActionListener preconListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -159,8 +155,8 @@ public enum VSubmenuQuestData implements IVSubmenu {
         radPreconStart.addActionListener(preconListener);
         radCompleteStart.setSelected(true);
         cbxPrecon.setEnabled(false);
-
         radMedium.setEnabled(true);
+
         // Fantasy box is Enabled by Default
         boxFantasy.setSelected(true);
         boxFantasy.setEnabled(true);
@@ -200,12 +196,16 @@ public enum VSubmenuQuestData implements IVSubmenu {
         pnlViewport.add(pnlTitleNew, "w 96%, h 36px!, gap 2% 0 0 10px");
         pnlViewport.add(pnlOptions, "w 96%!, h 250px!, gap 2% 0 0 20px");
 
-        final FScrollPane scrContent = new FScrollPane(pnlViewport);
         scrContent.setBorder(null);
-        pnl.add(scrContent, "w 100%!, h 100%!");
+    }
 
+    /* (non-Javadoc)
+     * @see forge.view.home.IViewSubmenu#populate()
+     */
+    @Override
+    public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
+        parentCell.getBody().add(scrContent, "w 100%!, h 100%!");
     }
 
     /* (non-Javadoc)

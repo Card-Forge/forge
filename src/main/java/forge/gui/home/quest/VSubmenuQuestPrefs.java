@@ -43,7 +43,10 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
     private final DragTab tab = new DragTab("Quest Preferences");
 
     /** */
-    private final JPanel pnl = new JPanel();
+    private final JPanel pnlContent = new JPanel();
+    private final FScrollPane scrContent = new FScrollPane(pnlContent, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+            JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
     private final JPanel pnlRewards = new JPanel();
     private final JPanel pnlDifficulty = new JPanel();
     private final JPanel pnlBooster = new JPanel();
@@ -64,12 +67,10 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
         SHOP
     }
 
-    /* (non-Javadoc)
-     * @see forge.view.home.IViewSubmenu#populate()
+    /**
+     * Constructor.
      */
-    @Override
-    public void populate() {
-        final JPanel pnlContent = new JPanel();
+    private VSubmenuQuestPrefs() {
         pnlContent.setOpaque(false);
         pnlContent.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
@@ -123,19 +124,19 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
         pnlContent.add(pnlShop, "w 96%!, gap 2% 0 10px 20px");
         populateShop();
 
-        final FScrollPane scrContent = new FScrollPane(pnlContent, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrContent.setBorder(null);
 
-        pnl.removeAll();
-        pnl.setOpaque(false);
-        pnl.setLayout(new MigLayout("insets 0, gap 0"));
-        pnl.add(scrContent, "w 100%!, growy, pushy, gap 0 0 10px 10px");
+    }
 
+    /* (non-Javadoc)
+     * @see forge.view.home.IViewSubmenu#populate()
+     */
+    @Override
+    public void populate() {
         CSubmenuQuestPrefs.resetErrors();
 
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
+        parentCell.getBody().add(scrContent, "w 100%!, growy, pushy, gap 0 0 10px 10px");
     }
 
     /* (non-Javadoc)

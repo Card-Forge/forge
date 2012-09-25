@@ -48,7 +48,8 @@ public enum VSubmenuUtilities implements IVSubmenu {
     private final DragTab tab = new DragTab("Utilities");
 
     /** */
-    private final JPanel pnl = new JPanel();
+    private final JPanel pnlContent = new JPanel();
+    private final FScrollPane scrContent = new FScrollPane(pnlContent);
 
     private final FLabel btnDownloadSetPics = new FLabel.Builder().opaque(true).hoverable(true)
             .text("Download LQ Set Pictures").fontSize(14).build();
@@ -67,15 +68,13 @@ public enum VSubmenuUtilities implements IVSubmenu {
     private final FLabel btnLicensing = new FLabel.Builder().opaque(true)
             .hoverable(true).fontSize(14).text("License Details").build();
 
-    /* (non-Javadoc)
-     * @see forge.view.home.IViewSubmenu#populate()
+    /**
+     * Constructor.
      */
-    @Override
-    public void populate() {
+    private VSubmenuUtilities() {
         final String constraintsLBL = "w 90%!, h 20px!, gap 5% 0 3px 8px";
         final String constraintsBTN = "h 30px!, w 50%!, gap 25% 0 0 0";
 
-        final JPanel pnlContent = new JPanel();
         pnlContent.setOpaque(false);
         pnlContent.setLayout(new MigLayout("insets 0, gap 0, wrap, ay center"));
 
@@ -119,16 +118,16 @@ public enum VSubmenuUtilities implements IVSubmenu {
                 .text("About Forge")
                 .fontStyle(Font.ITALIC).build(), constraintsLBL);
 
-        final FScrollPane scr = new FScrollPane(pnlContent);
-        scr.setBorder(null);
+        scrContent.setBorder(null);
+    }
 
-        pnl.removeAll();
-        pnl.setOpaque(false);
-        pnl.setLayout(new MigLayout("insets 0"));
-        pnl.add(scr, "w 100%!, h 100%!");
-
+    /* (non-Javadoc)
+     * @see forge.view.home.IViewSubmenu#populate()
+     */
+    @Override
+    public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
+        parentCell.getBody().add(scrContent, "w 98%!, h 98%!, gap 1% 0 1% 0");
     }
 
     /* (non-Javadoc)

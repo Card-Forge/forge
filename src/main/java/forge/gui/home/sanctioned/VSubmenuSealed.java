@@ -44,41 +44,39 @@ public enum VSubmenuSealed implements IVSubmenu {
     private final DragTab tab = new DragTab("Sealed Mode");
 
     /** */
-    private final JPanel pnl            = new JPanel();
     private final StartButton btnStart  = new StartButton();
     private final DeckLister lstDecks   = new DeckLister(GameType.Sealed);
+
+    private final JLabel lblTitle = new FLabel.Builder()
+        .text("Select a deck for yourself, or build a new one: ")
+        .fontSize(16).fontAlign(SwingConstants.CENTER).build();
+
     private final JLabel btnBuildDeck   = new FLabel.Builder()
         .fontSize(16)
         .opaque(true).hoverable(true).text("Build a Sealed Deck Game").build();
+
     private final JLabel btnDirections = new FLabel.Builder()
         .fontSize(16)
         .text("Click For Directions").fontAlign(SwingConstants.CENTER).build();
+
+    /**
+     * Constructor.
+     */
+    private VSubmenuSealed() {
+        btnStart.setEnabled(false);
+    }
 
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#populate()
      */
     @Override
     public void populate() {
-        pnl.removeAll();
-        pnl.setOpaque(false);
-        pnl.setLayout(new MigLayout("insets 0, gap 0, hidemode 2, wrap"));
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, hidemode 2, wrap"));
 
-        btnStart.setEnabled(false);
-
-        // Title
-        final JLabel lblTitle = new JLabel("Select a deck for yourself, or build a new one: ");
-        lblTitle.setFont(FSkin.getBoldFont(14));
-        lblTitle.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-
-        // Add components
-        pnl.add(lblTitle, "w 100%!, gap 0 0 2% 2%");
-        pnl.add(new FScrollPane(lstDecks), "w 90%!, h 35%!, gap 5% 0 2% 2%");
-        pnl.add(btnBuildDeck, "w 50%!, h 5%!, gap 25% 0 0 0");
-        pnl.add(btnStart, "ax center, gaptop 5%");
-
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
+        parentCell.getBody().add(lblTitle, "w 100%!, gap 0 0 2% 2%");
+        parentCell.getBody().add(new FScrollPane(lstDecks), "w 90%!, h 35%!, gap 5% 0 2% 2%");
+        parentCell.getBody().add(btnBuildDeck, "w 50%!, h 5%!, gap 25% 0 0 0");
+        parentCell.getBody().add(btnStart, "ax center, gaptop 5%");
     }
 
     /* (non-Javadoc)

@@ -55,7 +55,9 @@ public enum VSubmenuPreferences implements IVSubmenu {
     private final DragTab tab = new DragTab("Preferences");
 
     /** */
-    private final JPanel pnl = new JPanel();
+    private final JPanel pnlPrefs = new JPanel();
+    private final FScrollPane scrContent = new FScrollPane(pnlPrefs,
+            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     private final FLabel btnReset = new FLabel.Builder().opaque(true)
             .hoverable(true).text("Reset to defaults").build();
@@ -81,16 +83,10 @@ public enum VSubmenuPreferences implements IVSubmenu {
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
 
-    /* (non-Javadoc)
-     * @see forge.view.home.IViewSubmenu#populate()
+    /**
+     * Constructor.
      */
-    @Override
-    public void populate() {
-        pnl.removeAll();
-        pnl.setOpaque(false);
-        pnl.setLayout(new MigLayout("insets 0, gap 0"));
-
-        final JPanel pnlPrefs = new JPanel();
+    private VSubmenuPreferences() {
         pnlPrefs.setOpaque(false);
         pnlPrefs.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
@@ -160,14 +156,16 @@ public enum VSubmenuPreferences implements IVSubmenu {
         pnlPrefs.add(new SectionLabel(" "), sectionConstraints);
         pnlPrefs.add(btnReset, sectionConstraints);
 
-        final FScrollPane scrContent = new FScrollPane(pnlPrefs,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrContent.setBorder(null);
+    }
 
-        pnl.add(scrContent, "w 100%!, h 100%!");
-
+    /* (non-Javadoc)
+     * @see forge.view.home.IViewSubmenu#populate()
+     */
+    @Override
+    public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
+        parentCell.getBody().add(scrContent, "w 98%!, h 98%!, gap 1% 0 1% 0");
     }
 
     /* (non-Javadoc)

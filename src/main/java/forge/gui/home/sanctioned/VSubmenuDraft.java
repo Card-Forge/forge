@@ -47,16 +47,32 @@ public enum VSubmenuDraft implements IVSubmenu {
     private final DragTab tab = new DragTab("Draft Mode");
 
     /** */
-    private final JPanel pnl            = new JPanel();
     private final StartButton btnStart  = new StartButton();
     private final DeckLister lstHumanDecks = new DeckLister(GameType.Draft);
     private final JList lstAI           = new FList();
+
+    private final JLabel lblAI = new FLabel.Builder()
+        .text("Who will you play?").fontSize(16)
+        .fontAlign(SwingConstants.CENTER).build();
+
+    private final JLabel lblHuman = new FLabel.Builder()
+        .text("Select your deck:").fontSize(16)
+        .fontAlign(SwingConstants.CENTER).build();
+
     private final JLabel btnBuildDeck   = new FLabel.Builder()
         .fontSize(16)
         .opaque(true).hoverable(true).text("Start A New Draft").build();
     private final JLabel btnDirections = new FLabel.Builder()
         .fontSize(16)
         .text("Click For Directions").fontAlign(SwingConstants.CENTER).build();
+
+    /**
+     * Constructor.
+     */
+    private VSubmenuDraft() {
+        lstAI.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        btnStart.setEnabled(false);
+    }
 
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#getGroup()
@@ -170,38 +186,16 @@ public enum VSubmenuDraft implements IVSubmenu {
      */
     @Override
     public void populate() {
-        pnl.removeAll();
-        pnl.setOpaque(false);
-        pnl.setLayout(new MigLayout("insets 0, gap 0, hidemode 2"));
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2, hidemode 2"));
+        parentCell.getBody().add(lblHuman, "w 60%!, gap 5% 5% 2% 2%");
+        parentCell.getBody().add(lblAI, "w 25%!, gap 0 0 2% 2%");
 
-        lstAI.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        btnStart.setEnabled(false);
+        parentCell.getBody().add(new FScrollPane(lstHumanDecks), "w 60%!, h 30%!, gap 5% 5% 2% 2%");
+        parentCell.getBody().add(new FScrollPane(lstAI), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
 
-        // Layout
-        final JLabel lblHuman = new JLabel("Select your deck: ");
-        lblHuman.setFont(FSkin.getBoldFont(16));
-        lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
-        lblHuman.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        pnl.add(lblHuman, "w 60%!, gap 5% 5% 2% 2%");
-
-        final JLabel lblAI = new JLabel("Who will you play?");
-        lblAI.setFont(FSkin.getBoldFont(16));
-        lblAI.setHorizontalAlignment(SwingConstants.CENTER);
-        lblAI.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        pnl.add(lblAI, "w 25%!, gap 0 0 2% 2%, wrap");
-
-        pnl.add(new FScrollPane(lstHumanDecks), "w 60%!, h 30%!, gap 5% 5% 2% 2%");
-
-        pnl.add(new FScrollPane(lstAI), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
-
-        pnl.add(btnBuildDeck, "w 60%!, h 5%!, gap 5% 5% 0 0, wrap");
-
-        pnl.add(btnDirections, "alignx center, span 2 1, gap 5% 5% 5% 2%, wrap");
-
-        pnl.add(btnStart, "gap 5% 5% 0 0, ax center, span 2 1, wrap");
-
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
+        parentCell.getBody().add(btnBuildDeck, "w 60%!, h 5%!, gap 5% 5% 0 0, wrap");
+        parentCell.getBody().add(btnDirections, "alignx center, span 2 1, gap 5% 5% 5% 2%, wrap");
+        parentCell.getBody().add(btnStart, "gap 5% 5% 0 0, ax center, span 2 1, wrap");
     }
 
     /* (non-Javadoc)

@@ -39,11 +39,13 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet, IVDoc {
     private final DragTab tab = new DragTab("Quest Challenges");
 
     //========== INSTANTIATION
-    private final JPanel pnl        = new JPanel();
     private final JPanel pnlChallenges   = new JPanel();
     private final FPanel pnlTitle   = new FPanel();
     private final JPanel pnlStats   = new JPanel();
     private final JPanel pnlStart   = new JPanel();
+
+    private final FScrollPane scrChallenges = new FScrollPane(pnlChallenges,
+            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final JButton btnStart  = new StartButton();
     private final JComboBox cbxPet  = new JComboBox();
@@ -81,6 +83,23 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet, IVDoc {
         .opaque(true).hoverable(true).text("Spell Shop")
         .fontSize(14).tooltip("Travel to the Spell Shop").build();
 
+    /**
+     * Constructor.
+     */
+    private VSubmenuChallenges() {
+        pnlTitle.setLayout(new MigLayout("insets 0, gap 0"));
+        pnlTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        pnlTitle.add(lblTitle, "w 100%, h 100%, gap 0 0 0 0");
+
+        populateStats();
+        populateStart();
+        btnStart.setEnabled(false);
+
+        scrChallenges.setBorder(null);
+        pnlChallenges.setOpaque(false);
+        pnlChallenges.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+    }
+
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#getGroup()
      */
@@ -110,30 +129,15 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet, IVDoc {
      */
     @Override
     public void populate() {
-        pnlTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        pnlTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        pnlTitle.add(lblTitle, "w 100%, h 100%, gap 0 0 0 0");
-
-        populateStats();
-        populateStart();
-        btnStart.setEnabled(false);
-
-        final FScrollPane scrChallenges = new FScrollPane(pnlChallenges,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrChallenges.setBorder(null);
-        pnlChallenges.setOpaque(false);
-        pnlChallenges.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-
-        pnl.removeAll();
-        pnl.setOpaque(false);
-        pnl.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        pnl.add(pnlTitle, "w 94%!, h 30px!, gap 3% 0 15px 15px");
-        pnl.add(pnlStats, "w 94%!, gap 3% 0 0 20px");
-        pnl.add(scrChallenges, "w 94%!, pushy, growy, gap 3% 0 0 0");
-        pnl.add(pnlStart, "w 94%, gap 3% 0 15px 5%");
-
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
+
+        parentCell.getBody().removeAll();
+        parentCell.getBody().setOpaque(false);
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        parentCell.getBody().add(pnlTitle, "w 94%!, h 30px!, gap 3% 0 15px 15px");
+        parentCell.getBody().add(pnlStats, "w 94%!, gap 3% 0 0 20px");
+        parentCell.getBody().add(scrChallenges, "w 94%!, pushy, growy, gap 3% 0 0 0");
+        parentCell.getBody().add(pnlStart, "w 94%, gap 3% 0 15px 5%");
     }
 
     @Override

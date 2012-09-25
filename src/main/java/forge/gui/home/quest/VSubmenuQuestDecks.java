@@ -29,18 +29,17 @@ public enum VSubmenuQuestDecks implements IVSubmenu {
     private final DragTab tab = new DragTab("Constructed Mode");
 
     /** */
-    private final JPanel pnl = new JPanel();
+    private final JPanel pnlDecks = new JPanel();
     private final DeckLister lstDecks = new DeckLister(GameType.Quest);
     private final FLabel btnNewDeck = new FLabel.Builder().opaque(true)
             .hoverable(true).text("Build a New Deck").fontSize(18).build();
 
-    /* (non-Javadoc)
-     * @see forge.view.home.IViewSubmenu#populate()
+    /**
+     * Constructor.
      */
-    @Override
-    public void populate() {
+    private VSubmenuQuestDecks() {
         final FScrollPane scr = new FScrollPane(lstDecks);
-        final JPanel pnlDecks = new JPanel();
+
         scr.setBorder(null);
         scr.getViewport().setBorder(null);
 
@@ -49,14 +48,15 @@ public enum VSubmenuQuestDecks implements IVSubmenu {
 
         pnlDecks.add(scr, "w 90%!, h 350px!");
         pnlDecks.add(btnNewDeck, "w 40%!, h 35px!, gap 25%! 0 20px 0");
+    }
 
-        pnl.removeAll();
-        pnl.setOpaque(false);
-        pnl.setLayout(new MigLayout("insets 0"));
-        pnl.add(pnlDecks, "w 90%!, gap 5% 0 5% 0");
-
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
+    /* (non-Javadoc)
+     * @see forge.view.home.IViewSubmenu#populate()
+     */
+    @Override
+    public void populate() {
+        parentCell.getBody().setLayout(new MigLayout("insets 0"));
+        parentCell.getBody().add(pnlDecks, "w 90%!, gap 5% 0 5% 0");
     }
 
     /* (non-Javadoc)

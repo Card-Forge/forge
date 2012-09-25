@@ -40,7 +40,12 @@ public enum VSubmenuConstructed implements IVSubmenu {
     private final DragTab tab = new DragTab("Constructed Mode");
 
     /** */
-    private final JPanel pnl            = new JPanel();
+    private final JPanel pnlDecksHuman = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
+    private final JPanel pnlDecksAI = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
+    private final JPanel pnlRadiosHuman = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
+    private final JPanel pnlRadiosAI = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
+    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+
     private final StartButton btnStart  = new StartButton();
     private final JList lstHumanDecks   = new FList();
     private final JList lstAIDecks      = new FList();
@@ -85,6 +90,43 @@ public enum VSubmenuConstructed implements IVSubmenu {
         grpRadiosAI.add(radThemesAI);
         grpRadiosAI.add(radCustomAI);
         grpRadiosAI.add(radQuestsAI);
+
+        // Add deck scrollers and random buttons: Human and AI
+        pnlDecksHuman.setOpaque(false);
+        pnlDecksHuman.add(scrHumanDecks, "w 100%!, pushy, growy");
+        pnlDecksHuman.add(btnHumanRandom, "w 100%!, h 30px!, gap 0 0 10px 10px");
+
+        pnlDecksAI.setOpaque(false);
+        pnlDecksAI.add(scrAIDecks, "w 100%!, pushy, growy");
+        pnlDecksAI.add(btnAIRandom, "w 100%!, h 30px!, gap 0 0 10px 0");
+
+        // Radio button panels: Human and AI
+        final String strRadioConstraints = "w 100%!, h 30px!";
+
+        pnlRadiosHuman.setOpaque(false);
+        pnlRadiosHuman.add(new FLabel.Builder().text("Select your deck:")
+                .fontStyle(Font.BOLD).fontSize(16)
+                .fontAlign(SwingConstants.LEFT).build(), strRadioConstraints);
+        pnlRadiosHuman.add(radColorsHuman, strRadioConstraints);
+        pnlRadiosHuman.add(radThemesHuman, strRadioConstraints);
+        pnlRadiosHuman.add(radCustomHuman, strRadioConstraints);
+        pnlRadiosHuman.add(radQuestsHuman, strRadioConstraints);
+
+        pnlRadiosAI.setOpaque(false);
+        pnlRadiosAI.add(new FLabel.Builder().text("Select an AI deck:")
+                .fontStyle(Font.BOLD).fontSize(16)
+                .fontAlign(SwingConstants.LEFT).build(), strRadioConstraints);
+        pnlRadiosAI.add(radColorsAI, strRadioConstraints);
+        pnlRadiosAI.add(radThemesAI, strRadioConstraints);
+        pnlRadiosAI.add(radCustomAI, strRadioConstraints);
+        pnlRadiosAI.add(radQuestsAI, strRadioConstraints);
+
+        final String strCheckboxConstraints = "w 200px!, h 30px!, gap 0 20px 0 0";
+        pnlStart.setOpaque(false);
+        pnlStart.add(cbSingletons, strCheckboxConstraints);
+        pnlStart.add(btnStart, "span 1 3, growx, pushx, align center");
+        pnlStart.add(cbArtifacts, strCheckboxConstraints);
+        pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
     }
 
     /* (non-Javadoc)
@@ -116,74 +158,15 @@ public enum VSubmenuConstructed implements IVSubmenu {
      */
     @Override
     public void populate() {
-        // TODO: This will be done each time the panel is shown.
-        // Most of the prep work can be done once in the constructor,
-        // should speed things up a little bit.  This should be
-        // checked in all populate() methods; it probably happens other places.
-        // Not complicated; easy to do if have time. Doublestrike 21-9-12
-
-        // Deck panels: Human and AI
-        final JPanel pnlDecksHuman = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
-        final JPanel pnlDecksAI = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
-
-        // Add deck scrollers and random buttons: Human and AI
-        pnlDecksHuman.setOpaque(false);
-        pnlDecksHuman.add(scrHumanDecks, "w 100%!, pushy, growy");
-        pnlDecksHuman.add(btnHumanRandom, "w 100%!, h 30px!, gap 0 0 10px 10px");
-
-        pnlDecksAI.setOpaque(false);
-        pnlDecksAI.add(scrAIDecks, "w 100%!, pushy, growy");
-        pnlDecksAI.add(btnAIRandom, "w 100%!, h 30px!, gap 0 0 10px 0");
-
-        // Radio button panels: Human and AI
-        final JPanel pnlRadiosHuman = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
-        final JPanel pnlRadiosAI = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
-        final String strRadioConstraints = "w 100%!, h 30px!";
-
-        // Add radio buttons: Human
-        pnlRadiosHuman.setOpaque(false);
-        pnlRadiosHuman.add(new FLabel.Builder().text("Select your deck:")
-                .fontStyle(Font.BOLD).fontSize(16)
-                .fontAlign(SwingConstants.LEFT).build(), strRadioConstraints);
-        pnlRadiosHuman.add(radColorsHuman, strRadioConstraints);
-        pnlRadiosHuman.add(radThemesHuman, strRadioConstraints);
-        pnlRadiosHuman.add(radCustomHuman, strRadioConstraints);
-        pnlRadiosHuman.add(radQuestsHuman, strRadioConstraints);
-
-        // Add radio buttons: AI
-        pnlRadiosAI.setOpaque(false);
-        pnlRadiosAI.add(new FLabel.Builder().text("Select an AI deck:")
-                .fontStyle(Font.BOLD).fontSize(16)
-                .fontAlign(SwingConstants.LEFT).build(), strRadioConstraints);
-        pnlRadiosAI.add(radColorsAI, strRadioConstraints);
-        pnlRadiosAI.add(radThemesAI, strRadioConstraints);
-        pnlRadiosAI.add(radCustomAI, strRadioConstraints);
-        pnlRadiosAI.add(radQuestsAI, strRadioConstraints);
-
-        final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
-        final String strCheckboxConstraints = "w 200px!, h 30px!, gap 0 20px 0 0";
-        pnlStart.setOpaque(false);
-        pnlStart.add(cbSingletons, strCheckboxConstraints);
-        pnlStart.add(btnStart, "span 1 3, growx, pushx, align center");
-        pnlStart.add(cbArtifacts, strCheckboxConstraints);
-        pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
-
-        pnl.removeAll();
-        pnl.setOpaque(false);
-        pnl.setLayout(new MigLayout("insets 0, gap 0, wrap 2, align center"));
-
         final String strLeftConstraints = "w 200px, pushy, growy, gap 0 20px 25px 25px";
         final String strRightConstraints = "w 30%!, pushy, growy, gap 0 20px 25px 25px";
 
-        pnl.add(pnlRadiosAI, strLeftConstraints);
-        pnl.add(pnlDecksAI, strRightConstraints);
-        pnl.add(pnlRadiosHuman, strLeftConstraints);
-        pnl.add(pnlDecksHuman, strRightConstraints);
-
-        pnl.add(pnlStart, "w 220px + 30%, span 2 1, gap 0 0 0 50px");
-
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2, align center"));
+        parentCell.getBody().add(pnlRadiosAI, strLeftConstraints);
+        parentCell.getBody().add(pnlDecksAI, strRightConstraints);
+        parentCell.getBody().add(pnlRadiosHuman, strLeftConstraints);
+        parentCell.getBody().add(pnlDecksHuman, strRightConstraints);
+        parentCell.getBody().add(pnlStart, "w 220px + 30%, span 2 1, gap 0 0 0 50px");
     }
 
     /** @return {@link javax.swing.JList} */

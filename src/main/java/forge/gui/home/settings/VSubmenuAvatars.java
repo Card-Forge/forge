@@ -37,33 +37,32 @@ public enum VSubmenuAvatars implements IVSubmenu {
     private final DragTab tab = new DragTab("Avatars");
 
     /** */
-    private final JPanel pnl = new JPanel();
     private final JPanel pnlAvatars = new JPanel();
+    private final FScrollPane scrContent = new FScrollPane(pnlAvatars,
+            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final FLabel lblAvatarHuman = new FLabel.Builder().hoverable(true).selectable(true)
             .iconScaleFactor(0.99f).iconInBackground(true).build();
     private final FLabel lblAvatarAI = new FLabel.Builder().hoverable(true).selectable(true)
             .iconScaleFactor(0.99f).iconInBackground(true).build();
 
+    /**
+     * Constructor.
+     */
+    private VSubmenuAvatars() {
+        populateAvatars();
+        scrContent.setBorder(null);
+
+    }
+
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#populate()
      */
     @Override
     public void populate() {
-        populateAvatars();
-
-        final FScrollPane scrContent = new FScrollPane(pnlAvatars,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrContent.setBorder(null);
-
-        pnl.removeAll();
-        pnl.setOpaque(false);
-        pnl.setLayout(new MigLayout("insets 0, gap 0"));
-        pnl.add(scrContent, " w 100%!, h 100%!");
-
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
+        parentCell.getBody().add(scrContent, "w 98%!, h 98%!, gap 1% 0 1% 0");
     }
 
     /* (non-Javadoc)

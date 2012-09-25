@@ -51,12 +51,12 @@ public interface IVDoc {
      * Populates panel components, independent of constructor.
      * Expected to provide a completely fresh layout to the body panel.
      * <br><br>
-     * Styling and adding of lower-level components for this view
-     * should happen once, in constructor. This method is
-     * only for removing / adding top-level components.
-     * <br><br>
      * The body panel will be empty when this method is called.
      * However, its layout may need to be redefined as required.
+     * <br><br>
+     * This method basically lays out components
+     * that have been previously instantiated (cached) by the constructor.
+     * Non-cached components can be created dynamically if needed.
      */
     void populate();
 }
