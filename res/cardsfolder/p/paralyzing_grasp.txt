@@ -8,5 +8,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN C
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paralyzing_grasp.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/58.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/46.jpg
 Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.
 End

@@ -4,6 +4,7 @@ Types:Land Plains Island
 Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97071.jpg
+SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/241.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/174.jpg
 Oracle:({T}: Add {W} or {U} to your mana pool.)\nAs Hallowed Fountain enters the battlefield, you may pay 2 life. If you don't, Hallowed Fountain enters the battlefield tapped.
 End

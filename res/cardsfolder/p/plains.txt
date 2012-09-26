@@ -23,6 +23,7 @@ SetInfo:ROE|Land|http://magiccards.info/scans/en/roe/229.jpg|4
 SetInfo:10E|Land|http://magiccards.info/scans/en/10e/364.jpg|4
 SetInfo:RAV|Land|http://magiccards.info/scans/en/rav/287.jpg|4
 SetInfo:6ED|Land|http://magiccards.info/scans/en/6e/331.jpg|4
+SetInfo:RTR|Land|http://magiccards.info/scans/en/rtr/253.jpg|5
 SetInfo:5ED|Land|http://magiccards.info/scans/en/5e/434.jpg|4
 SetInfo:ONS|Land|http://magiccards.info/scans/en/on/331.jpg|4
 SetInfo:S99|Land|http://magiccards.info/scans/en/st/154.jpg|4

@@ -10,5 +10,6 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/arrest.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/2.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/2.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/4.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/3.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated.
 End

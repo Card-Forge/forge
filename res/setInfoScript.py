@@ -152,6 +152,11 @@ def initSets():
 	allSets['Innistrad']='ISD'
 	allSets['Dark Ascension']='DKA'
 	allSets['Avacyn Restored']='AVR'
+	
+	# Return to Ravnica
+	allSets['Return to Ravnica']='RTR'
+	#allSets['Gatecrash']='GTC'
+	#allSets['Sinker']='UNK'
 
 def addSets(card):
 	html = getURL('http://magiccards.info/query?q=!'+card.name)

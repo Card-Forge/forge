@@ -6,5 +6,6 @@ A:SP$ GainLife | Cost$ W G | LifeAmount$ 7 | ValidTgts$ Player | TgtPrompt$ Choo
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heroes_reunion.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/250.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/168.jpg
 Oracle:Target player gains 7 life.
 End

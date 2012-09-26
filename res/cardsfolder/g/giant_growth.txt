@@ -18,6 +18,7 @@ SetInfo:M11|Common|http://magiccards.info/scans/en/m11/178.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/184.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/233.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/106.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/125.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/106.jpg
 Oracle:Target creature gets +3/+3 until end of turn.
 End

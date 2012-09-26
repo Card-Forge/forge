@@ -58,6 +58,7 @@ Set:POR|Commons:11|Uncommons:3|Rares:1
 Set:PTK|Commons:5|Uncommons:2|Rares:1
 Set:RAV|Commons:11|Uncommons:3|Rares:1
 Set:ROE|Commons:10|Uncommons:3|Rares:1
+Set:RTR|Commons:10|Uncommons:3|Rares:1
 Set:SCG|Commons:11|Uncommons:3|Rares:1
 Set:SHM|Commons:11|Uncommons:3|Rares:1
 Set:SOK|Commons:11|Uncommons:3|Rares:1

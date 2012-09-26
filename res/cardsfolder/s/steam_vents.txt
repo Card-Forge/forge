@@ -5,5 +5,6 @@ Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDN
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96923.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/164.jpg
+SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/247.jpg
 Oracle:({T}: Add {U} or {R} to your mana pool.)\nAs Steam Vents enters the battlefield, you may pay 2 life. If you don't, Steam Vents enters the battlefield tapped.
 End

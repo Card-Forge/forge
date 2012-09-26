@@ -5,9 +5,10 @@ Text:no text
 A:SP$ Draw | Cost$ 3 U | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inspiration.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/85.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/35.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/76.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/81.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/85.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/42.jpg
 Oracle:Target player draws two cards.
 End

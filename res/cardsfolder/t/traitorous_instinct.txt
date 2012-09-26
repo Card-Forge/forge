@@ -7,5 +7,6 @@ SVar:DBPump:DB$Pump | Defined$ Targeted | NumAtt$ +2 | KW$ Haste
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/traitorous_instinct.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/168.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/109.jpg
 Oracle:Gain control of target creature until end of turn. Untap that creature. Until end of turn, it gets +2/+0 and gains haste.
 End

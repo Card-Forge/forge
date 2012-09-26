@@ -6,5 +6,6 @@ A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seek_the_horizon.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/147.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/134.jpg
 Oracle:Search your library for up to three basic land cards, reveal them, and put them into your hand. Then shuffle your library.
 End
