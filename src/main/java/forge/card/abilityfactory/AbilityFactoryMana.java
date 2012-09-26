@@ -703,6 +703,7 @@ public class AbilityFactoryMana {
 
             if (abMana.getCanceled()) {
                 abMana.undo();
+                abMana.setCanceled(false);
                 return;
             }
 
