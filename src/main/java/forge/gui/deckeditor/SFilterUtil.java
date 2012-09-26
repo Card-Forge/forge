@@ -329,7 +329,7 @@ public class SFilterUtil {
                 if (useType) { subands.add(Predicate.brigde(CardRules.Predicates.joinedType(
                         StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
                 if (useText) { subands.add(Predicate.brigde(CardRules.Predicates.rules(
-                        StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
+                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
 
                 ands.add(Predicate.or(subands));
             }
@@ -349,9 +349,9 @@ public class SFilterUtil {
                 final List<Predicate<CardPrinted>> subnots = new ArrayList<Predicate<CardPrinted>>();
 
                 if (useName) { subnots.add(Predicate.brigde(CardRules.Predicates.name(
-                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
+                        StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
                 if (useType) { subnots.add(Predicate.brigde(CardRules.Predicates.joinedType(
-                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
+                        StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
                 if (useText) { subnots.add(Predicate.brigde(CardRules.Predicates.rules(
                         StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
 
