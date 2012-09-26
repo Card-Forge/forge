@@ -478,7 +478,7 @@ public class CardFactoryUtil {
                 value += power * 10;
             }
             if (power > 1 && c.hasKeyword("Trample")) {
-                value += (power -1) * 5;
+                value += (power - 1) * 5;
             }
             if (c.hasKeyword("Vigilance")) {
                 value += (power * 5) + (toughness * 5);
@@ -499,7 +499,7 @@ public class CardFactoryUtil {
                 value += 3;
             }
         }
-        
+
         value += c.getKeywordMagnitude("Bushido") * 16;
         value += c.getAmountOfKeyword("Flanking") * 15;
         value += c.getAmountOfKeyword("Exalted") * 15;
@@ -577,7 +577,7 @@ public class CardFactoryUtil {
         } else if (c.hasStartOfKeyword("(Echo unpaid)")) {
             value -= 10;
         }
-            
+
         if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) {
             value -= 20;
         }
@@ -1189,7 +1189,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 final Card c = Singletons.getModel().getGameAction().exile(sourceCard);
-                
+
                 int counters = AbilityFactory.calculateAmount(c, timeCounters, this);
                 c.addCounter(Counters.TIME, counters);
 
@@ -2334,7 +2334,7 @@ public class CardFactoryUtil {
 
         if (sa != null) {
             // Count$Kicked.<numHB>.<numNotHB>
-            if (sq[0].contains("Kicked")) {
+            if (sq[0].startsWith("Kicked")) {
                 if (sa.isKicked()) {
                     return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c); // Kicked
                 } else {
@@ -2753,8 +2753,8 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
             }
         }
-        if (sq[0].contains("Kicked")) {
-            if(c.isOptionalAdditionalCostsPaid("Kicker")) {
+        if (sq[0].startsWith("Kicked")) {
+            if (c.isOptionalAdditionalCostsPaid("Kicker")) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
