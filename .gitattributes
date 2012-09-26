@@ -1992,6 +1992,7 @@ res/cardsfolder/c/cunning_lethemancer.txt svneol=native#text/plain
 res/cardsfolder/c/cunning_sparkmage.txt svneol=native#text/plain
 res/cardsfolder/c/curfew.txt svneol=native#text/plain
 res/cardsfolder/c/curiosity.txt svneol=native#text/plain
+res/cardsfolder/c/curse_artifact.txt -text
 res/cardsfolder/c/curse_of_bloodletting.txt -text
 res/cardsfolder/c/curse_of_chains.txt svneol=native#text/plain
 res/cardsfolder/c/curse_of_deaths_hold.txt -text
