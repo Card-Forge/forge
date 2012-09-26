@@ -68,6 +68,25 @@ Fixes/Features:
 - Cleared out the changes.txt file, now ready for new material.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a new fantasy block that shows how to use the new MetaSet types (choose1, random1, combo, booster, pack).
+- Fixed Armor of Thorns' trigger firing even if cast at sorcery speed or given instant speed casting by something like Vedalken Orrey (10/1/2009 Ruling: The sacrifice occur only if you cast it using its own ability. If you cast it using some other effect (for instance, if it gained flash from Vedalken Orrery), then it won't be sacrificed. )
+- Converted Lotus Cobra to script (executeLandfallEffects can probably be removed - Lotus Cobra seemed to be the last one using it)
+- Removed the parameter "CanPlayNoTgt" and made it standard (as it was before).
+- Fixed the targeting prompt for Thunderscape Battlemage.
+- Added the keyword "AlternateAdditionalCost".
+- Converted Lightning Axe to the new AlternateAdditionalCost keyword.
+- Predicate: isTrue renamed to apply, this class now implements com.google.common.base.Predicate (Guava iterables may use them now)
+- Enabled AI for some of the Instantments (the AI will only cast them at sorcery speed).
+- Added Necromancy to two quest decks.
+- Updated some tribal quest decks.
+- Little fix for two canPay functions.
+- Reflecting Pool now clearing Canceled parameter after canceling the dialog.
+- Small fix to StackDescription to show the right card
+- Fixed AI of Corrupted Resolve.
+- Fixed Torrent of Souls returning cards to hand instead of battlefield
+- fixed targeting up-to amounts on the stack
+- Fixed xCount "Kicked" (normal kicker) interfering with "TimesKicked" (multikicker)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -201,7 +220,21 @@ Zanikev Locust
 
 Added the following cards:
 
-
+Grave Servitude
+Lightning Reflexes
+Soar
+Ward of Lights
+Mystic Veil
+Necromancy
+Parapet
+Relic Ward
+Spider Climb
+Flamekin Bladewhirl
+Goldmeadow Stalwart
+Squeaking Pie Sneak
+Wren's Run Vanquisher
+Silvergill Adept
+Helm of Obedience
 
 
 end
