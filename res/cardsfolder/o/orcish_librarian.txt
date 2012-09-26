@@ -1,0 +1,13 @@
+Name:Orcish Librarian
+ManaCost:R
+Types:Creature Orc
+Text:no text
+PT:1/1
+A:AB$ Dig | Cost$ R T | Defined$ You | DigNum$ 8 | ChangeNum$ 4 | RandomChange$ True | DestinationZone$ Exile | LibraryPosition2$ 0 | DestinationZone2$ Library | SpellDescription$ Look at the top eight cards of your library. Exile four of them at random, then put the rest on top of your library in any order.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_librarian.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/66.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/209.jpg
+Oracle:{R}, {T}: Look at the top eight cards of your library. Exile four of them at random, then put the rest on top of your library in any order.
+End

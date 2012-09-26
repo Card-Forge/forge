@@ -31,6 +31,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -506,6 +507,9 @@ public final class AbilityFactoryReveal {
 
                     if (changeAll) {
                         movedCards.addAll(valid);
+                    } else if (params.containsKey("RandomChange")) {
+                        int numChanging = Math.min(destZone1ChangeNum, valid.size());
+                        movedCards = CardListUtil.getRandomSubList(valid, numChanging);
                     } else {
                         int j = 0;
                         if (choser.isHuman()) {

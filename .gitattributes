@@ -6702,6 +6702,7 @@ res/cardsfolder/o/orcish_cannoneers.txt svneol=native#text/plain
 res/cardsfolder/o/orcish_captain.txt svneol=native#text/plain
 res/cardsfolder/o/orcish_farmer.txt -text
 res/cardsfolder/o/orcish_healer.txt svneol=native#text/plain
+res/cardsfolder/o/orcish_librarian.txt -text
 res/cardsfolder/o/orcish_lumberjack.txt svneol=native#text/plain
 res/cardsfolder/o/orcish_mechanics.txt svneol=native#text/plain
 res/cardsfolder/o/orcish_mine.txt svneol=native#text/plain
