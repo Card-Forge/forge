@@ -2964,6 +2964,7 @@ res/cardsfolder/e/essence_harvest.txt -text
 res/cardsfolder/e/essence_of_the_wild.txt -text
 res/cardsfolder/e/essence_scatter.txt svneol=native#text/plain
 res/cardsfolder/e/essence_sliver.txt svneol=native#text/plain
+res/cardsfolder/e/essence_vortex.txt -text
 res/cardsfolder/e/essence_warden.txt svneol=native#text/plain
 res/cardsfolder/e/etched_champion.txt svneol=native#text/plain
 res/cardsfolder/e/etched_monstrosity.txt svneol=native#text/plain
