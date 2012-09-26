@@ -1,3 +1,4 @@
+All creatures able to block CARDNAME do so.
 CARDNAME attacks each turn if able.
 Changeling
 Convoke
