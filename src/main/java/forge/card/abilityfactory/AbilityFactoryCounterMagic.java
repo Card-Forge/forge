@@ -160,7 +160,8 @@ public class AbilityFactoryCounterMagic {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCounterMagic.this.counterCanPlayAI(AbilityFactoryCounterMagic.this.af, this);
+                return AbilityFactoryCounterMagic.this.counterCanPlayAI(AbilityFactoryCounterMagic.this.af, this)
+                        && super.canPlayAI();
             }
 
             @Override

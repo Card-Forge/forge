@@ -8,7 +8,6 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 A:AB$ PutCounter | Cost$ 1 S | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ ICE | CounterNum$ 1 | SpellDescription$ Put an ice counter on target permanent.
 S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Permanent.counters_GE1_ICE | AddType$ Snow | Description$ Permanents with ice counters on them are snow.
 SVar:X:Count$Valid Permanent.Snow
-SVar:NeedsToPlayVar:X GE3
 SVar:BuffedBy:Permanent.Snow
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
