@@ -22,6 +22,7 @@ import forge.Card;
 import forge.Command;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
@@ -49,6 +50,7 @@ public class InputPayManaCostAbility extends InputMana {
     private String message = "";
     private ManaCost manaCost;
     private SpellAbility fakeAbility;
+    private int phyLifeToLose = 0;
 
     private Command paidCommand;
     private Command unpaidCommand;
@@ -134,6 +136,7 @@ public class InputPayManaCostAbility extends InputMana {
             }
         };
         this.originalManaCost = manaCost2;
+        this.phyLifeToLose = 0;
         this.message = m;
 
         this.manaCost = new ManaCost(this.originalManaCost);
@@ -151,6 +154,17 @@ public class InputPayManaCostAbility extends InputMana {
         this.manaCost = new ManaCost(this.originalManaCost);
     }
 
+    @Override
+    public void selectPlayer(final Player player) {
+        if (player.isHuman()) {
+            if (manaCost.payPhyrexian()) {
+                this.phyLifeToLose += 2;
+            }
+
+            this.showMessage();
+        }
+    }
+
     /** {@inheritDoc} */
     @Override
     public final void selectCard(final Card card, final PlayerZone zone) {
@@ -162,13 +176,20 @@ public class InputPayManaCostAbility extends InputMana {
         }
 
         if (this.manaCost.isPaid()) {
-            this.paidCommand.execute();
-            this.resetManaCost();
-            AllZone.getHumanPlayer().getManaPool().clearManaPaid(this.fakeAbility, false);
-            this.stop();
+            this.done();
         } else {
             this.showMessage();
         }
+    }
+    
+    private void done() {
+        if (this.phyLifeToLose > 0) {
+            AllZone.getHumanPlayer().payLife(this.phyLifeToLose, null);
+        }
+        this.paidCommand.execute();
+        this.resetManaCost();
+        AllZone.getHumanPlayer().getManaPool().clearManaPaid(this.fakeAbility, false);
+        this.stop();
     }
 
     /** {@inheritDoc} */
@@ -196,7 +217,21 @@ public class InputPayManaCostAbility extends InputMana {
         if (this.showOnlyOKButton) {
             ButtonUtil.enableOnlyOK();
         }
-        CMatchUI.SINGLETON_INSTANCE.showMessage(this.message + "Pay Mana Cost: \r\n" + this.manaCost.toString());
+        final StringBuilder msg = new StringBuilder(this.message + "Pay Mana Cost: " + this.manaCost);
+        if (this.phyLifeToLose > 0) {
+            msg.append(" (");
+            msg.append(this.phyLifeToLose);
+            msg.append(" life paid for phyrexian mana)");
+        }
+
+        if (this.manaCost.containsPhyrexianMana()) {
+            msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
+        }
+
+        CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+        if (this.manaCost.isPaid()) {
+            this.done();
+        }
     }
 
     /* (non-Javadoc)
@@ -207,10 +242,7 @@ public class InputPayManaCostAbility extends InputMana {
         this.manaCost = InputPayManaCostUtil.activateManaAbility(color, this.fakeAbility, this.manaCost);
 
         if (this.manaCost.isPaid()) {
-            this.resetManaCost();
-            AllZone.getHumanPlayer().getManaPool().clearManaPaid(this.fakeAbility, false);
-            this.stop();
-            this.paidCommand.execute();
+            this.done();
         } else {
             this.showMessage();
         }

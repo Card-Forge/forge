@@ -788,7 +788,7 @@ public class ComputerUtil {
         } // end of cost parts loop
 
         //check for phyrexian mana
-        if (!cost.isPaid() && cost.containsPhyrexianMana() && AllZone.getComputerPlayer().getLife() > 8) {
+        if (!cost.isPaid() && cost.containsPhyrexianMana() && AllZone.getComputerPlayer().getLife() > 5) {
             cost.payPhyrexian();
             if (!test) {
                 AllZone.getComputerPlayer().payLife(2, sa.getSourceCard());
