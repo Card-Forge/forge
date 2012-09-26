@@ -2,8 +2,7 @@ Name:Terrarion
 ManaCost:1
 Types:Artifact
 Text:no text
-A:AB$ Mana | Cost$ 2 T Sac<1/CARDNAME> | Produced$ Any | SubAbility$ DBMana | SpellDescription$ Add two mana in any combination of colors to your mana pool.
-SVar:DBMana:DB$ Mana | Cost$ 0 | Produced$ Any | Amount$ 1 | AILogic$ MostProminentInComputerHand
+A:AB$ Mana | Cost$ 2 T Sac<1/CARDNAME> | Produced$ Combo Any | Amount$ 2 | AILogic$ MostProminentInComputerHand | SpellDescription$ Add two mana in any combination of colors to your mana pool.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 K:CARDNAME enters the battlefield tapped.
