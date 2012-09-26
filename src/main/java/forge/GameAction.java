@@ -541,7 +541,7 @@ public class GameAction {
                         public void resolve() {
                             if (recoverable.getController().isHuman()) {
                                 GameActionUtil.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(),
-                                        paidCommand, unpaidCommand);
+                                        paidCommand, unpaidCommand, null);
                             } else { // computer
                                 if (ComputerUtil.canPayCost(abRecover)) {
                                     ComputerUtil.playNoStack(abRecover);

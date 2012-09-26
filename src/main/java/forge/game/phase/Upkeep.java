@@ -194,7 +194,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     public void resolve() {
                         if (c.getController().isHuman()) {
                             Cost cost = new Cost(c, c.getEchoCost().trim(), true);
-                            GameActionUtil.payCostDuringAbilityResolve(blankAbility, cost, paidCommand, unpaidCommand);
+                            GameActionUtil.payCostDuringAbilityResolve(blankAbility, cost, paidCommand, unpaidCommand, null);
                         } else { // computer
                             if (ComputerUtil.canPayCost(blankAbility)) {
                                 ComputerUtil.playNoStack(blankAbility);
@@ -371,7 +371,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         public void resolve() {
                             if (controller.isHuman()) {
                                 GameActionUtil.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(),
-                                        paidCommand, unpaidCommand);
+                                        paidCommand, unpaidCommand, null);
                             } else { // computer
                                 if (ComputerUtil.shouldPayCost(c, upkeepCost) && ComputerUtil.canPayCost(blankAbility)) {
                                     ComputerUtil.playNoStack(blankAbility);

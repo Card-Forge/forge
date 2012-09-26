@@ -303,7 +303,7 @@ public final class AbilityFactoryDebuff {
             return false;
         }
 
-        if (!CostUtil.checkLifeCost(cost, source, 40)) {
+        if (!CostUtil.checkLifeCost(cost, source, 40, null)) {
             return false;
         }
 

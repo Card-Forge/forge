@@ -1723,16 +1723,18 @@ public class AbilityFactory {
                     } else {
                         final SpellAbility parent = AbilityFactory.findParentsTargetedCard(ability);
 
-                        final ArrayList<Object> all = parent.getTarget().getTargets();
-                        if (!all.isEmpty() && (all.get(0) instanceof SpellAbility)) {
-                            list = new CardList();
-                            final ArrayList<SpellAbility> sas = parent.getTarget().getTargetSAs();
-                            for (final SpellAbility sa : sas) {
-                                list.add(sa.getSourceCard());
+                        if (parent != null) {
+                            final ArrayList<Object> all = parent.getTarget().getTargets();
+                            if (!all.isEmpty() && (all.get(0) instanceof SpellAbility)) {
+                                list = new CardList();
+                                final ArrayList<SpellAbility> sas = parent.getTarget().getTargetSAs();
+                                for (final SpellAbility sa : sas) {
+                                    list.add(sa.getSourceCard());
+                                }
+                            } else {
+                                final SpellAbility saTargeting = AbilityFactory.findParentsTargetedCard(ability);
+                                list = new CardList(saTargeting.getTarget().getTargetCards());
                             }
-                        } else {
-                            final SpellAbility saTargeting = AbilityFactory.findParentsTargetedCard(ability);
-                            list = new CardList(saTargeting.getTarget().getTargetCards());
                         }
                     }
                 } else if (calcX[0].startsWith("Triggered")) {
@@ -2796,10 +2798,13 @@ public class AbilityFactory {
         };
 
         if (payer.isHuman()) {
-            GameActionUtil.payCostDuringAbilityResolve(ability, cost, paidCommand, unpaidCommand);
+            GameActionUtil.payCostDuringAbilityResolve(ability, cost, paidCommand, unpaidCommand, sa);
         } else {
-            if (ComputerUtil.canPayCost(ability) && CostUtil.checkLifeCost(cost, source, 4)
+            if (ComputerUtil.canPayCost(ability) && CostUtil.checkLifeCost(cost, source, 4, sa)
                     && CostUtil.checkDamageCost(cost, source, 4)) {
+                // AI was crashing because the blank ability used to pay costs
+                // Didn't have any of the data on the original SA to pay dependant costs
+                ability.setTarget(sa.getTarget());
                 ComputerUtil.playNoStack(ability); // Unless cost was payed - no
                                                    // resolve
                 AbilityFactory.resolveSubAbilities(sa);

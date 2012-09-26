@@ -229,7 +229,7 @@ public class AbilityFactoryDestroy {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
+            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
                 return false;
             }
 
@@ -959,7 +959,7 @@ public class AbilityFactoryDestroy {
         if (abCost != null) {
             // AI currently disabled for some costs
 
-            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
+            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
                 return false;
             }
         }

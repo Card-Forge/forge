@@ -307,7 +307,7 @@ public final class AbilityFactoryProtection {
         final Cost cost = sa.getPayCosts();
 
         // temporarily disabled until better AI
-        if (!CostUtil.checkLifeCost(cost, hostCard, 4)) {
+        if (!CostUtil.checkLifeCost(cost, hostCard, 4, null)) {
             return false;
         }
 
@@ -1033,7 +1033,7 @@ public final class AbilityFactoryProtection {
         final Cost cost = sa.getPayCosts();
 
         // temporarily disabled until better AI
-        if (!CostUtil.checkLifeCost(cost, hostCard, 4)) {
+        if (!CostUtil.checkLifeCost(cost, hostCard, 4, null)) {
             return false;
         }
 

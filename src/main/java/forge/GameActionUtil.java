@@ -445,8 +445,9 @@ public final class GameActionUtil {
      *            a {@link forge.Command} object.
      * @param unpaid
      *            a {@link forge.Command} object.
+     * @param sourceAbility TODO
      */
-    public static void payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, final Command paid, final Command unpaid) {
+    public static void payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, final Command paid, final Command unpaid, SpellAbility sourceAbility) {
         final Card source = ability.getSourceCard();
         final ArrayList<CostPart> parts =  cost.getCostParts();
         if (parts.size() > 1) {
@@ -464,11 +465,13 @@ public final class GameActionUtil {
             }
             return;
         }
-        
+
         if (costPart instanceof CostPayLife) {
             String amountString = costPart.getAmount();
+            //CardFactoryUtil.xCount(source, source.getSVar(amountString))
+
             final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
-                    : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                    : AbilityFactory.calculateAmount(source, amountString, sourceAbility);
             if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(source, "Do you want to pay "
                     + amount + " life?")) {
                 AllZone.getHumanPlayer().payLife(amount, null);

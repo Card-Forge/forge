@@ -475,7 +475,7 @@ public final class AbilityFactoryChangeZone {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
+            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
                 return false;
             }
 
@@ -1498,7 +1498,7 @@ public final class AbilityFactoryChangeZone {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
+            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
                 return false;
             }
 
@@ -2564,7 +2564,7 @@ public final class AbilityFactoryChangeZone {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
+            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
                 return false;
             }
 

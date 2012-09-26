@@ -351,7 +351,7 @@ public class AbilityFactoryToken extends AbilityFactory {
         }
 
         if (cost != null) {
-            if (!CostUtil.checkLifeCost(cost, source, 4)) {
+            if (!CostUtil.checkLifeCost(cost, source, 4, null)) {
                 return false;
             }
 

@@ -136,16 +136,24 @@ public class CostUtil {
      *            the source
      * @param remainingLife
      *            the remaining life
+     * @param sourceAbility TODO
      * @return true, if successful
      */
-    public static boolean checkLifeCost(final Cost cost, final Card source, final int remainingLife) {
+    public static boolean checkLifeCost(final Cost cost, final Card source, final int remainingLife, SpellAbility sourceAbility) {
+        // TODO - Pass in SA for everything else that calls this function
         if (cost == null) {
             return true;
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPayLife) {
                 final CostPayLife payLife = (CostPayLife) part;
-                if ((AllZone.getComputerPlayer().getLife() - payLife.convertAmount()) < remainingLife) {
+
+                Integer amount = payLife.convertAmount();
+                if (amount == null) {
+                    amount = AbilityFactory.calculateAmount(source, payLife.getAmount(), sourceAbility);
+                }
+
+                if ((AllZone.getComputerPlayer().getLife() - amount) < remainingLife) {
                     return false;
                 }
             }
