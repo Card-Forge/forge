@@ -4,7 +4,7 @@ Types:Artifact Creature Construct
 Text:no text
 PT:0/0
 K:CARDNAME can't block.
-K:Creatures can't attack unless their controller pays:Card.Self:Y:CARDNAME can't attack unless you pay 1 for each +1/+1 counter on it.
+S:Mode$ CantAttackUnless | ValidCard$ Card.Self | Cost$ Y | Description$ CARDNAME can't attack unless you pay 1 for each +1/+1 counter on it.
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 SVar:Y:Count$NumCounters.P1P1

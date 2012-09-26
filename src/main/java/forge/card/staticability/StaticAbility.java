@@ -27,6 +27,7 @@ import forge.Card;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
@@ -406,6 +407,39 @@ public class StaticAbility {
         }
 
         return false;
+    }
+
+    /**
+     * Apply ability.
+     * 
+     * @param mode
+     *            the mode
+     * @param card
+     *            the card
+     * @param target
+     *            the target
+     * @return true, if successful
+     */
+    public final Cost getCostAbility(final String mode, final Card card, final GameEntity target) {
+
+        // don't apply the ability if it hasn't got the right mode
+        if (!this.mapParams.get("Mode").equals(mode)) {
+            return null;
+        }
+
+        if (this.isSuppressed() || !this.checkConditions()) {
+            return null;
+        }
+
+        if (mode.equals("CantAttackUnless")) {
+            return StaticAbilityCantAttackBlock.applyCantAttackUnlessAbility(this, card, target);
+        }
+
+        if (mode.equals("CantBlockUnless")) {
+            return StaticAbilityCantAttackBlock.applyCantBlockUnlessAbility(this, card);
+        }
+
+        return null;
     }
 
     /**

@@ -34,7 +34,7 @@ import forge.card.cost.CostMana;
 import forge.card.cost.CostPutCounter;
 import forge.card.cost.CostReturn;
 import forge.card.cost.CostSacrifice;
-import forge.card.mana.ManaCost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilitySub;
@@ -447,7 +447,8 @@ public final class GameActionUtil {
      *            a {@link forge.Command} object.
      * @param sourceAbility TODO
      */
-    public static void payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, final Command paid, final Command unpaid, SpellAbility sourceAbility) {
+    public static void payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, final Command paid,
+            final Command unpaid, SpellAbility sourceAbility) {
         final Card source = ability.getSourceCard();
         final ArrayList<CostPart> parts =  cost.getCostParts();
         if (parts.size() > 1) {
@@ -1687,24 +1688,7 @@ public final class GameActionUtil {
     public static Cost combineCosts(SpellAbility sa, String additionalCost) {
         final Cost newCost = new Cost(sa.getSourceCard(), additionalCost, false);
         Cost oldCost = sa.getPayCosts();
-        if (sa.getPayCosts() != null) {
-            for (final CostPart part : oldCost.getCostParts()) {
-                if (!(part instanceof CostMana)) {
-                    newCost.getCostParts().add(part);
-                } else {
-                    CostMana newCostMana = newCost.getCostMana();
-                    if (newCostMana != null) {
-                        ManaCost oldManaCost = new ManaCost(part.toString());
-                        newCostMana.setXMana(oldManaCost.getXcounter() + newCostMana.getXMana());
-                        oldManaCost.combineManaCost(newCostMana.toString());
-                        newCostMana.setMana(oldManaCost.toString(false));
-                    } else {
-                        newCost.getCostParts().add(part);
-                    }
-                }
-            }
-        }
-        return newCost;
+        return CostUtil.combineCosts(oldCost, newCost);
     }
 
     /**

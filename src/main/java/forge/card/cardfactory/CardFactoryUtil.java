@@ -3435,48 +3435,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * Get the total cost to pay for an attacker c, due to cards like
-     * Propaganda, Ghostly Prison, Collective Restraint, ...
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String getPropagandaCost(final Card c) {
-        int cost = 0;
-
-        final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        for (final Card card : list) {
-            if (card.hasStartOfKeyword("Creatures can't attack unless their controller pays")) {
-                final int keywordPosition = card
-                        .getKeywordPosition("Creatures can't attack unless their controller pays");
-                final String parse = card.getKeyword().get(keywordPosition).toString();
-                final String[] k = parse.split(":");
-
-                final String[] restrictions = k[1].split(",");
-                if (!c.isValid(restrictions, card.getController(), card)) {
-                    continue;
-                }
-
-                final String costString = k[2];
-                if (costString.equals("X")) {
-                    cost += CardFactoryUtil.xCount(card, card.getSVar("X"));
-                } else if (costString.equals("Y")) {
-                    cost += CardFactoryUtil.xCount(card, card.getSVar("Y"));
-                } else {
-                    cost += Integer.parseInt(k[2]);
-                }
-            }
-        }
-
-        final String s = Integer.toString(cost);
-
-        return s;
-    }
-
-    /**
-     * <p>
      * getUsableManaSources.
      * </p>
      * 

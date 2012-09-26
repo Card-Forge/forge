@@ -43,14 +43,16 @@ import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactorySacrifice;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
-import forge.control.input.InputPayManaCostAbility;
 import forge.game.player.ComputerUtil;
 import forge.game.player.ComputerUtilBlock;
 import forge.game.player.Player;
@@ -2650,8 +2652,16 @@ public class CombatUtil {
      *            a boolean.
      */
     public static void checkPropagandaEffects(final Card c, final boolean bLast) {
-        final String cost = CardFactoryUtil.getPropagandaCost(c);
-        if (cost.equals("0")) {
+        Cost attackCost = new Cost(c, "0", true);
+        // Sort abilities to apply them in proper order
+        for (Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+            final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                Cost additionalCost = stAb.getCostAbility("CantAttackUnless", c, AllZone.getCombat().getDefenderByAttacker(c));
+                attackCost = CostUtil.combineCosts(attackCost, additionalCost);
+            }
+        }
+        if (attackCost.toSimpleString().equals("")) {
             if (!c.hasKeyword("Vigilance")) {
                 c.tap();
             }
@@ -2667,62 +2677,58 @@ public class CombatUtil {
         final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
 
         if (phase == PhaseType.COMBAT_DECLARE_ATTACKERS || phase == PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) {
-            if (!cost.equals("0")) {
-                final Ability ability = new Ability(c, cost) {
-                    @Override
-                    public void resolve() {
+            final Ability ability = new AbilityStatic(c, attackCost, null) {
+                @Override
+                public void resolve() {
 
-                    }
-                };
+                }
+            };
 
-                final Command unpaidCommand = new Command() {
+            final Command unpaidCommand = new Command() {
 
-                    private static final long serialVersionUID = -6483405139208343935L;
+                private static final long serialVersionUID = -6483405139208343935L;
 
-                    @Override
-                    public void execute() {
-                        AllZone.getCombat().removeFromCombat(crd);
+                @Override
+                public void execute() {
+                    AllZone.getCombat().removeFromCombat(crd);
 
-                        if (bLast) {
-                            PhaseUtil.handleAttackingTriggers();
-                        }
-                    }
-                };
-
-                final Command paidCommand = new Command() {
-                    private static final long serialVersionUID = -8303368287601871955L;
-
-                    @Override
-                    public void execute() {
-                        // if Propaganda is paid, tap this card
-                        if (!crd.hasKeyword("Vigilance")) {
-                            crd.tap();
-                        }
-
-                        if (bLast) {
-                            PhaseUtil.handleAttackingTriggers();
-                        }
-                    }
-                };
-
-                if (c.getController().isHuman()) {
-                    AllZone.getInputControl().setInput(
-                            new InputPayManaCostAbility(c + " - Pay to Attack\r\n", ability.getManaCost(), paidCommand,
-                                    unpaidCommand));
-                } else { // computer
-                    if (ComputerUtil.canPayCost(ability)) {
-                        ComputerUtil.playNoStack(ability);
-                        if (!crd.hasKeyword("Vigilance")) {
-                            crd.tap();
-                        }
-                    } else {
-                        // TODO remove the below line after Propaganda occurs
-                        // during Declare_Attackers
-                        AllZone.getCombat().removeFromCombat(crd);
-                    }
                     if (bLast) {
                         PhaseUtil.handleAttackingTriggers();
                     }
+                }
+            };
+
+            final Command paidCommand = new Command() {
+                private static final long serialVersionUID = -8303368287601871955L;
+
+                @Override
+                public void execute() {
+                    // if Propaganda is paid, tap this card
+                    if (!crd.hasKeyword("Vigilance")) {
+                        crd.tap();
+                    }
+
+                    if (bLast) {
+                        PhaseUtil.handleAttackingTriggers();
+                    }
+                }
+            };
+
+            if (c.getController().isHuman()) {
+                GameActionUtil.payCostDuringAbilityResolve(ability, attackCost, paidCommand, unpaidCommand, null);
+            } else { // computer
+                if (ComputerUtil.canPayCost(ability)) {
+                    ComputerUtil.playNoStack(ability);
+                    if (!crd.hasKeyword("Vigilance")) {
+                        crd.tap();
+                    }
+                } else {
+                    // TODO remove the below line after Propaganda occurs
+                    // during Declare_Attackers
+                    AllZone.getCombat().removeFromCombat(crd);
+                }
+                if (bLast) {
+                    PhaseUtil.handleAttackingTriggers();
                 }
             }
         }

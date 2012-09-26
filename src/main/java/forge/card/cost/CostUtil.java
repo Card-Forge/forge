@@ -24,6 +24,7 @@ import forge.Card;
 import forge.CardList;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
@@ -455,5 +456,37 @@ public class CostUtil {
     public static void setInput(final Input in) {
         // Just a shortcut..
         AllZone.getInputControl().setInput(in, true);
+    }
+    
+    
+    public static Cost combineCosts(Cost cost1, Cost cost2) {
+        if (cost1 == null) {
+            if (cost2 == null) {
+                return null;
+            } else {
+                return cost2;
+            }
+        }
+        
+        if (cost2 == null) {
+            return cost1;
+        }
+        
+        for (final CostPart part : cost1.getCostParts()) {
+            if (!(part instanceof CostMana)) {
+                cost2.getCostParts().add(part);
+            } else {
+                CostMana newCostMana = cost2.getCostMana();
+                if (newCostMana != null) {
+                    ManaCost oldManaCost = new ManaCost(part.toString());
+                    newCostMana.setXMana(oldManaCost.getXcounter() + newCostMana.getXMana());
+                    oldManaCost.combineManaCost(newCostMana.toString());
+                    newCostMana.setMana(oldManaCost.toString(false));
+                } else {
+                    cost2.getCostParts().add(part);
+                }
+            }
+        }
+        return cost2;
     }
 }

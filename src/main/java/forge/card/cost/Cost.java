@@ -184,7 +184,11 @@ public class Cost {
     public Cost(final Card card, String parse, final boolean bAbility) {
         this.isAbility = bAbility;
         // when adding new costs for cost string, place them here
-        this.name = card.getName();
+        String name = "";
+        if (card != null) {
+            name = card.getName();
+        }
+        this.name = name;
 
         while (parse.contains(Cost.TAP_X_STR)) {
             final String[] splitStr = this.abCostParse(parse, Cost.TAP_X_STR, 3);
