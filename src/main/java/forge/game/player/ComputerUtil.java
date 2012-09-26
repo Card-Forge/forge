@@ -1955,6 +1955,15 @@ public class ComputerUtil {
                     c = indestructibles.get(0);
                 }
             }
+            for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest, priority 5 the highest
+                final int priority = 6 - ip;
+                for (Card card : list) {
+                    if (!card.getSVar("SacMe").equals("") && Integer.parseInt(card.getSVar("SacMe")) == priority) {
+                        c = card;
+                        break;
+                    }
+                }
+            }
 
             if (c == null) {
                 if (list.getNotType("Creature").size() == 0) {
@@ -1962,7 +1971,7 @@ public class ComputerUtil {
                 } else if (list.getNotType("Land").size() == 0) {
                     c = CardFactoryUtil.getWorstLand(AllZone.getComputerPlayer());
                 } else {
-                    c = CardFactoryUtil.getWorstPermanentAI(list, true, true, true, true);
+                    c = CardFactoryUtil.getWorstPermanentAI(list, false, false, false, false);
                 }
 
                 final ArrayList<Card> auras = c.getEnchantedBy();
@@ -1977,14 +1986,14 @@ public class ComputerUtil {
                         }
                     }
                 }
-                if (destroy) {
-                    if (!Singletons.getModel().getGameAction().destroy(c)) {
-                        continue;
-                    }
-                } else {
-                    if (!Singletons.getModel().getGameAction().sacrifice(c, source)) {
-                        continue;
-                    }
+            }
+            if (destroy) {
+                if (!Singletons.getModel().getGameAction().destroy(c)) {
+                    continue;
+                }
+            } else {
+                if (!Singletons.getModel().getGameAction().sacrifice(c, source)) {
+                    continue;
                 }
             }
             list.remove(c);
