@@ -558,19 +558,7 @@ public class TargetSelection {
         choices = map.keySet().toArray(choices);
 
         if (choices.length == 0) {
-            if (tgt.getTargetSAs().size() >= 1) {
-                select.setDoneTarget(true);
-            } else {
-                select.setCancel(true);
-            }
-        } else if (choices.length == 1 && choices[0].equals(doneDummy)) {
-            if (tgt.getMinTargets().equals("0")
-                    && this.ability.getAbilityFactory().getMapParams().get("CanPlayNoTgt") != null
-                    && this.ability.getAbilityFactory().getMapParams().get("CanPlayNoTgt").equals("True")) {
-                select.setDoneTarget(true);
-            } else {
-                select.setCancel(true);
-            }
+            select.setCancel(true);
         } else {
             final String madeChoice = GuiUtils.chooseOneOrNone(message, choices);
 
