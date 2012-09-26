@@ -3975,42 +3975,6 @@ public class CardFactoryUtil {
         // TODO - kicker costs can only be mana right now i think?
         // TODO - this kicker only works for pemanents. maybe we can create an
         // optional cost class for buyback, kicker, that type of thing
-        /*final int kicker = CardFactoryUtil.hasKeyword(card, "Kicker");
-        if (kicker != -1) {
-            final SpellAbility kickedSpell = new Spell(card) {
-                private static final long serialVersionUID = -1598664196463358630L;
-
-                @Override
-                public void resolve() {
-                    card.setKicked(true);
-                    Singletons.getModel().getGameAction().moveToPlay(card);
-                }
-            };
-            final String parse = card.getKeyword().get(kicker).toString();
-            card.removeIntrinsicKeyword(parse);
-
-            final String[] k = parse.split(":");
-            final String kickerCost = k[1];
-
-            final ManaCost mc = new ManaCost(card.getManaCost().toString());
-            mc.combineManaCost(kickerCost);
-
-            kickedSpell.setKickerAbility(true);
-            kickedSpell.setManaCost(mc.toString());
-            kickedSpell.setAdditionalManaCost(kickerCost);
-
-            final StringBuilder desc = new StringBuilder();
-            desc.append("Kicker ").append(kickerCost).append(" (You may pay an additional ");
-            desc.append(kickerCost).append(" as you cast this spell.)");
-
-            kickedSpell.setDescription(desc.toString());
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" (Kicked)");
-            kickedSpell.setStackDescription(sb.toString());
-
-            card.addSpellAbility(kickedSpell);
-        }*/
 
         if (CardFactoryUtil.hasKeyword(card, "Multikicker") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Multikicker");
