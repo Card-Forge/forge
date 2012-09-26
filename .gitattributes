@@ -3912,6 +3912,7 @@ res/cardsfolder/g/goblin_ringleader.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_rock_sled.txt -text
 res/cardsfolder/g/goblin_roughrider.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_ruinblaster.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_sappers.txt -text
 res/cardsfolder/g/goblin_scouts.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_settler.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_sharpshooter.txt svneol=native#text/plain

@@ -1,0 +1,18 @@
+Name:Goblin Sappers
+ManaCost:1 R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ R R T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ HIDDEN Unblockable | SubAbility$ DelTrigBoth | RememberTargets$ True | SpellDescription$ Target creature you control is unblockable this turn. Destroy it and Goblin Sappers at end of combat.
+A:AB$ Pump | Cost$ R R R R T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ HIDDEN Unblockable | SubAbility$ DelTrigFriend | RememberTargets$ True | SpellDescription$ Target creature you control is unblockable this turn. Destroy it at end of combat.
+SVar:DelTrigFriend:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyFriend | TriggerDescription$ Destroy it at end of combat.
+SVar:TrigDestroyFriend:DB$Destroy | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DelTrigBoth:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroySapper | TriggerDescription$ Destroy it and CARDNAME at end of combat.
+SVar:TrigDestroySapper:DB$Destroy | Defined$ Self | SubAbility$ TrigDestroyFriend
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_sappers.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/189.jpg
+Oracle:{R}{R}, {T}: Target creature you control is unblockable this turn. Destroy it and Goblin Sappers at end of combat.\n{R}{R}{R}{R}, {T}: Target creature you control is unblockable this turn. Destroy it at end of combat.
+End
