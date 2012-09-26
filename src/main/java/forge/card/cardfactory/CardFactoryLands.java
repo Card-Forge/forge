@@ -537,13 +537,13 @@ class CardFactoryLands {
         } // *************** END ************ END **************************
 
         // *************** START ************ START **************************
-        else if (cardName.equals("Calciform Pools") || cardName.equals("Dreadship Reef")
+        /*else if (cardName.equals("Calciform Pools") || cardName.equals("Dreadship Reef")
                 || cardName.equals("Fungal Reaches") || cardName.equals("Molten Slagheap")
                 || cardName.equals("Saltcrusted Steppe")) {
-            /*
+
              * tap, Remove X storage counters from Calciform Pools: Add X mana
              * in any combination of W and/or U to your mana pool.
-             */
+
             final int[] num = new int[1];
             final int[] split = new int[1];
 
@@ -660,7 +660,7 @@ class CardFactoryLands {
             addMana.setAfterPayMana(runtime);
             card.addSpellAbility(addMana);
             card.addSpellAbility(abMana);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         /*else if (cardName.equals("Crosis's Catacombs") || cardName.equals("Darigaaz's Caldera")
