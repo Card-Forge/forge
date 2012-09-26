@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.collect.Iterables;
+
 import forge.Constant;
 import forge.Constant.Color;
 import forge.card.CardColor;
@@ -46,11 +48,14 @@ public class SealedDeck extends LimitedDeck {
             System.out.println(cp.getName() + " " + cp.getCard().getManaCost().toString());
         }
 
-        int white = CardRules.Predicates.Presets.IS_WHITE.count(colorChooserList, CardPrinted.FN_GET_RULES);
-        int blue = CardRules.Predicates.Presets.IS_BLUE.count(colorChooserList, CardPrinted.FN_GET_RULES);
-        int black = CardRules.Predicates.Presets.IS_BLACK.count(colorChooserList, CardPrinted.FN_GET_RULES);
-        int red = CardRules.Predicates.Presets.IS_RED.count(colorChooserList, CardPrinted.FN_GET_RULES);
-        int green = CardRules.Predicates.Presets.IS_GREEN.count(colorChooserList, CardPrinted.FN_GET_RULES);
+        Iterable<CardRules> rules = Iterables.transform(colorChooserList, CardPrinted.FN_GET_RULES);
+        
+        int white = Iterables.size(Iterables.filter(rules, CardRules.Predicates.Presets.IS_WHITE));
+        int blue = Iterables.size(Iterables.filter(rules, CardRules.Predicates.Presets.IS_BLUE));
+        int black = Iterables.size(Iterables.filter(rules, CardRules.Predicates.Presets.IS_BLACK));
+        int red = Iterables.size(Iterables.filter(rules, CardRules.Predicates.Presets.IS_RED));
+        int green = Iterables.size(Iterables.filter(rules, CardRules.Predicates.Presets.IS_GREEN));
+
         final int[] colorCounts = { white, blue, black, red, green };
         final String[] colors = Constant.Color.ONLY_COLORS;
         int[] countsCopy = Arrays.copyOf(colorCounts, 5);

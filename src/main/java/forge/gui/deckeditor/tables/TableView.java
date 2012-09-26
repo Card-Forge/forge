@@ -19,13 +19,16 @@ package forge.gui.deckeditor.tables;
 
 import java.awt.Color;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableColumnModel;
 
-import forge.card.CardRules;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.views.ITableContainer;
 import forge.gui.toolbox.FSkin;
@@ -33,7 +36,8 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
-import forge.util.closures.Predicate;
+import forge.util.Aggregates;
+
 
 /**
  * TableWithCards.
@@ -207,7 +211,7 @@ public final class TableView<T extends InventoryItem> {
     }
 
     private boolean isUnfiltered() {
-        return (this.filter == null) || this.filter.is1();
+        return this.filter == null;
     }
 
     /**
@@ -270,13 +274,15 @@ public final class TableView<T extends InventoryItem> {
         }
 
         if (useFilter && this.wantUnique) {
-            this.model.addCards(this.filter.uniqueByLast(this.pool, this.pool.getFnToCardName(),
-                    this.pool.getFnToPrinted()));
+            Predicate<Entry<T, Integer>> filterForPool = forge.util.closures.Predicate.brigde(this.filter, this.pool.getFnToPrinted());
+            Iterable<Entry<T, Integer>> cards = Aggregates.uniqueByLast(Iterables.filter(this.pool, filterForPool), this.pool.getFnToCardName());
+            this.model.addCards(cards);
         } else if (useFilter) {
-            this.model.addCards(this.filter.select(this.pool, this.pool.getFnToPrinted()));
+            Predicate<Entry<T, Integer>> pred = forge.util.closures.Predicate.brigde(this.filter, this.pool.getFnToPrinted());
+            this.model.addCards(Iterables.filter(this.pool, pred));
         } else if (this.wantUnique) {
-            this.model.addCards(CardRules.Predicates.Presets.CONSTANT_TRUE.uniqueByLast(this.pool,
-                    this.pool.getFnToCardName(), this.pool.getFnToCard()));
+            Iterable<Entry<T, Integer>> cards = Aggregates.uniqueByLast(this.pool, this.pool.getFnToCardName());
+            this.model.addCards(cards);
         } else if (!useFilter && bForceFilter) {
             this.model.addCards(this.pool);
         }

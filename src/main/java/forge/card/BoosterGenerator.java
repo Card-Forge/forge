@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Iterables;
+
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
@@ -120,7 +122,7 @@ public class BoosterGenerator {
     public BoosterGenerator(Predicate<CardPrinted> filter) {
         this();
 
-        for (final CardPrinted c : filter.select(CardDb.instance().getAllCards())) {
+        for (final CardPrinted c : Iterables.filter(CardDb.instance().getAllCards(), filter)) {
             this.addToRarity(c);
             // System.out.println(c);
         }

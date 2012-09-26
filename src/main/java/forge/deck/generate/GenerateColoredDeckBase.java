@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import com.google.common.collect.Iterables;
+
 import forge.Constant;
 import forge.Singletons;
 import forge.card.CardColor;
@@ -34,6 +36,7 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.closures.Predicate;
 
@@ -155,10 +158,11 @@ public abstract class GenerateColoredDeckBase {
             addSome(diff, tDeck.toFlatList());
         } else if (actualSize > targetSize) {
 
-            Predicate<CardRules> exceptBasicLand = Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND);
+            Predicate<CardPrinted> exceptBasicLand = Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND).brigde(CardPrinted.FN_GET_RULES);
 
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
-                List<CardPrinted> toRemove = exceptBasicLand.random(tDeck.toFlatList(), CardPrinted.FN_GET_RULES, actualSize - targetSize);
+                Iterable<CardPrinted> matchingCards = Iterables.filter(tDeck.toFlatList(), exceptBasicLand);
+                List<CardPrinted> toRemove = Aggregates.random(matchingCards,  actualSize - targetSize);
                 tDeck.removeAllFlat(toRemove);
 
                 for (CardPrinted c : toRemove) {
@@ -173,7 +177,8 @@ public abstract class GenerateColoredDeckBase {
         final List<CardPrinted> curved = new ArrayList<CardPrinted>();
 
         for (int i = 0; i < cmcAmounts.length; i++) {
-            curved.addAll(cmcLevels.get(i).random(source, CardPrinted.FN_GET_RULES, cmcAmounts[i]));
+            Iterable<CardPrinted> matchingCards = Iterables.filter(source, cmcLevels.get(i).brigde(CardPrinted.FN_GET_RULES));
+            curved.addAll( Aggregates.random(matchingCards, cmcAmounts[i]));
         }
 
         for (CardPrinted c : curved) {

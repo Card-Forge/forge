@@ -2,10 +2,13 @@ package forge.gui.deckeditor.controllers;
 
 import java.util.Map.Entry;
 
+import javax.swing.JLabel;
+
+import com.google.common.collect.Iterables;
+
 import forge.Command;
 import forge.card.CardColor;
 import forge.card.CardRules;
-import forge.card.CardRules.Predicates;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorUtil;
@@ -15,6 +18,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
+import forge.util.Aggregates;
 import forge.util.closures.Predicate;
 
 /** 
@@ -52,6 +56,12 @@ public enum CStatistics implements ICDoc {
         analyze();
     }
 
+    private void setLabelValue(JLabel label, ItemPoolView<CardPrinted> deck, Predicate<CardRules> predicate, int total) {
+        int tmp = Aggregates.sum(Iterables.filter(deck, predicate.brigde(deck.getFnToCard())), deck.getFnToCount());
+        label.setText( tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
+
+    }
+    
     //========== Other methods
     @SuppressWarnings("unchecked")
     private <T extends InventoryItem, TModel extends DeckBase> void analyze() {
@@ -69,85 +79,23 @@ public enum CStatistics implements ICDoc {
         // Hack-ish: avoid /0 cases, but still populate labels :)
         if (total == 0) { total = 1; }
 
-        tmp = CardRules.Predicates.Presets.IS_MULTICOLOR
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblMulti().setText(String.valueOf(tmp));
-
-        tmp = CardRules.Predicates.Presets.IS_CREATURE
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblCreature().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
-        tmp = CardRules.Predicates.Presets.IS_LAND
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblLand().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
-        tmp = CardRules.Predicates.Presets.IS_ENCHANTMENT
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblEnchantment().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
-        tmp = CardRules.Predicates.Presets.IS_ARTIFACT
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblArtifact().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
-        tmp = CardRules.Predicates.Presets.IS_INSTANT
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblInstant().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
-        tmp = CardRules.Predicates.Presets.IS_SORCERY
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblSorcery().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
-        tmp = CardRules.Predicates.Presets.IS_PLANESWALKER
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblPlaneswalker().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
-        tmp = CardRules.Predicates.Presets.IS_COLORLESS
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblColorless().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
-        tmp = Predicate.and(
-                Predicates.isColor(CardColor.BLACK),
-                Predicates.hasCntColors((byte) 1))
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblBlack().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
-        tmp = Predicate.and(
-                Predicates.isColor(CardColor.BLUE),
-                Predicates.hasCntColors((byte) 1))
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblBlue().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
-        tmp = Predicate.and(
-                Predicates.isColor(CardColor.GREEN),
-                Predicates.hasCntColors((byte) 1))
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblGreen().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
-        tmp = Predicate.and(
-                Predicates.isColor(CardColor.RED),
-                Predicates.hasCntColors((byte) 1))
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblRed().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
-        tmp = Predicate.and(
-                Predicates.isColor(CardColor.WHITE),
-                Predicates.hasCntColors((byte) 1))
-                .sum(deck, deck.getFnToCard(), deck.getFnToCount());
-        VStatistics.SINGLETON_INSTANCE.getLblWhite().setText(
-                tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
-
+ 
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblCreature(), deck, CardRules.Predicates.Presets.IS_CREATURE, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblLand(), deck, CardRules.Predicates.Presets.IS_LAND, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblEnchantment(), deck, CardRules.Predicates.Presets.IS_ENCHANTMENT, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblArtifact(), deck, CardRules.Predicates.Presets.IS_ARTIFACT, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblInstant(), deck, CardRules.Predicates.Presets.IS_INSTANT, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblSorcery(), deck, CardRules.Predicates.Presets.IS_SORCERY, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblPlaneswalker(), deck, CardRules.Predicates.Presets.IS_PLANESWALKER, total );
+        
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblMulti(), deck, CardRules.Predicates.Presets.IS_MULTICOLOR, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblColorless(), deck, CardRules.Predicates.Presets.IS_COLORLESS, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblBlack(), deck, CardRules.Predicates.isMonoColor(CardColor.BLACK), total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblBlue(), deck, CardRules.Predicates.isMonoColor(CardColor.BLUE), total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblGreen(), deck, CardRules.Predicates.isMonoColor(CardColor.GREEN), total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblRed(), deck, CardRules.Predicates.isMonoColor(CardColor.RED), total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblWhite(), deck, CardRules.Predicates.isMonoColor(CardColor.WHITE), total );
+        
         int cmc0 = 0, cmc1 = 0, cmc2 = 0, cmc3 = 0, cmc4 = 0, cmc5 = 0, cmc6 = 0;
         int tmc = 0;
 

@@ -110,14 +110,6 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         }
     };
 
-    /** The Constant fn1. */
-    public static final Lambda1<CardEdition, CardEdition> FN1 = new Lambda1<CardEdition, CardEdition>() {
-        @Override
-        public CardEdition apply(final CardEdition arg1) {
-            return arg1;
-        }
-    };
-
     /*
      * (non-Javadoc)
      * 

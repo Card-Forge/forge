@@ -19,9 +19,12 @@ package forge.item;
 
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
 import forge.card.CardRules;
+import forge.util.Aggregates;
 import forge.util.closures.Predicate;
 
 /**
@@ -168,9 +171,10 @@ public abstract class OpenablePack implements InventoryItemFromSet {
      * @return the random basic lands
      */
     protected List<CardPrinted> getRandomBasicLands(final String setCode, final int count) {
-        return Predicate.and(CardPrinted.Predicates.printedInSets(setCode),
-                CardRules.Predicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES).random(
-                CardDb.instance().getAllCards(), count);
+        Predicate<CardPrinted> cardsRule = Predicate.and(
+                CardPrinted.Predicates.printedInSets(setCode),
+                CardRules.Predicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES);
+        return Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), cardsRule), count);
     }
 
 }

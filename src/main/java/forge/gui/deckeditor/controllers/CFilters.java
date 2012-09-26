@@ -7,6 +7,9 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+
 import forge.Command;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -17,7 +20,6 @@ import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPredicate;
-import forge.util.closures.Predicate;
 
 /** 
  * Controls the "filters" panel in the deck editor UI.
@@ -160,11 +162,12 @@ public enum CFilters implements ICDoc {
     public <TItem extends InventoryItem, TModel extends DeckBase> void buildFilter() {
         // The main trick here is to apply a CardPrinted predicate
         // to the table. CardRules will lead to difficulties.
-        final List<Predicate<CardPrinted>> lstFilters = new ArrayList<Predicate<CardPrinted>>();
+        final List<Predicate<? super CardPrinted>> lstFilters = new ArrayList<Predicate<? super CardPrinted>>();
 
         final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
 
+        lstFilters.add(Predicates.instanceOf(CardPrinted.class));
         lstFilters.add(SFilterUtil.buildColorFilter());
         lstFilters.add(SFilterUtil.buildTypeFilter());
         lstFilters.add(SFilterUtil.buildSetAndFormatFilter());
@@ -172,11 +175,10 @@ public enum CFilters implements ICDoc {
         lstFilters.add(SFilterUtil.buildIntervalFilter());
 
         // Until this is filterable, always show packs and decks in the card shop.
-        Predicate<InventoryItem> itemFilter = Predicate.instanceOf(
-                Predicate.and(lstFilters), CardPrinted.class);
+        com.google.common.base.Predicate<? super CardPrinted> itemFilter = Predicates.and(lstFilters);
 
-        itemFilter = Predicate.or(itemFilter, ItemPredicate.Presets.IS_PACK);
-        itemFilter = Predicate.or(itemFilter, ItemPredicate.Presets.IS_DECK);
+        itemFilter = Predicates.or(itemFilter, ItemPredicate.Presets.IS_PACK);
+        itemFilter = Predicates.or(itemFilter, ItemPredicate.Presets.IS_DECK);
 
         // Apply to table
         ed.getTableCatalog().setFilter((Predicate<TItem>) itemFilter);

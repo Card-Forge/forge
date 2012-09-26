@@ -637,6 +637,10 @@ public final class CardRules {
             return new LeafColor(LeafColor.ColorOperator.HasAnyOf, thatColor);
         }
 
+        public static Predicate<CardRules> isMonoColor(final byte thatColor) {
+            return new LeafColor(LeafColor.ColorOperator.Equals, thatColor);
+        }
+        
         /**
          * Checks for cnt colors.
          * 

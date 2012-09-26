@@ -30,6 +30,8 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Iterables;
+
 import forge.card.CardCharacteristics;
 import forge.card.CardManaCost;
 import forge.card.EditionInfo;
@@ -462,7 +464,7 @@ public final class CardUtil {
                 return subject.getCode().equals(set);
             }
         };
-        final EditionInfo neededSet = findSetInfo.first(card.getSets());
+        final EditionInfo neededSet = Iterables.find(card.getSets(), findSetInfo);
         final int cntPictures = neededSet == null ? 1 : neededSet.getPicCount();
         return CardUtil
                 .buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);

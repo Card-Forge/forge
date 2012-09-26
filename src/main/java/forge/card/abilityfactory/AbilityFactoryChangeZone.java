@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.collect.Iterables;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -495,7 +497,7 @@ public final class AbilityFactoryChangeZone {
             if (params.containsKey("Ninjutsu")) {
                 if (source.isType("Legendary") && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
                     final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                    if (CardPredicates.nameEquals(source.getName()).any(list)) {
+                    if (Iterables.any(list, CardPredicates.nameEquals(source.getName()))) {
                         return false;
                     }
                 }

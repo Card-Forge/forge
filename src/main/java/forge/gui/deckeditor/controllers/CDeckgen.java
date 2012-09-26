@@ -1,5 +1,7 @@
 package forge.gui.deckeditor.controllers;
 
+import com.google.common.collect.Iterables;
+
 import forge.Command;
 import forge.card.CardRules;
 import forge.deck.Deck;
@@ -16,6 +18,7 @@ import forge.gui.toolbox.FLabel;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
+import forge.util.Aggregates;
 import forge.util.closures.Predicate;
 
 /** 
@@ -75,8 +78,10 @@ public enum CDeckgen implements ICDoc {
 
         final Deck randomDeck = new Deck();
 
-        randomDeck.getMain().addAllFlat(Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND)
-                .random(CardDb.instance().getAllUniqueCards(), CardPrinted.FN_GET_RULES, 15 * 5));
+        Predicate<CardPrinted> notBasicLand = Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND).brigde(CardPrinted.FN_GET_RULES);
+        Iterable<CardPrinted> source = Iterables.filter(CardDb.instance().getAllUniqueCards(), notBasicLand);
+        randomDeck.getMain().addAllFlat(Aggregates.random(source, 15*5));
+                
         randomDeck.getMain().add("Plains");
         randomDeck.getMain().add("Island");
         randomDeck.getMain().add("Swamp");

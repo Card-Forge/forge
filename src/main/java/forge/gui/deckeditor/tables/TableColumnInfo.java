@@ -21,8 +21,10 @@ import java.util.Map.Entry;
 
 import javax.swing.table.TableColumn;
 
+import com.google.common.base.Function;
+
 import forge.gui.deckeditor.tables.SColumnUtil.SortState;
-import forge.util.closures.Lambda1;
+import forge.item.InventoryItem;
 
 /**
  * A column object in a TableModel in the card editor.
@@ -39,8 +41,8 @@ public class TableColumnInfo<T> extends TableColumn {
     private boolean show = true;
     private String enumval;
 
-    private Lambda1<Comparable, Entry<T, Integer>> fnSort;
-    private Lambda1<Object, Entry<T, Integer>> fnDisplay;
+    private Function<Entry<T, Integer>, Comparable> fnSort;
+    private Function<Entry<T, Integer>, Object> fnDisplay;
 
     /** */
     public TableColumnInfo() {
@@ -108,7 +110,7 @@ public class TableColumnInfo<T> extends TableColumn {
      * 
      * @return the fnSort
      */
-    public Lambda1<Comparable, Entry<T, Integer>> getFnSort() {
+    public Function<Entry<T, Integer>, Comparable> getFnSort() {
         if (fnSort == null) {
            throw new NullPointerException("A sort function hasn't been set for "
                    + "Column " + TableColumnInfo.this.getIdentifier());
@@ -121,7 +123,7 @@ public class TableColumnInfo<T> extends TableColumn {
      * 
      * @return the fnDisplay
      */
-    public Lambda1<Object, Entry<T, Integer>> getFnDisplay() {
+    public Function<Entry<T, Integer>, Object> getFnDisplay() {
         if (fnSort == null) {
             throw new NullPointerException("A display function hasn't been set for "
                     + "Column " + TableColumnInfo.this.getIdentifier());
@@ -135,7 +137,7 @@ public class TableColumnInfo<T> extends TableColumn {
      * @param lambda0 the fnSort
      * @param lambda1 the fnDisplay
      */
-    public void setSortAndDisplayFunctions(final Lambda1<Comparable, Entry<T, Integer>> lambda0, final Lambda1<Object, Entry<T, Integer>> lambda1) {
+    public void setSortAndDisplayFunctions(final Function<Entry<T, Integer>, Comparable> lambda0, final Function<Entry<T, Integer>, Object> lambda1) {
         this.fnSort = lambda0;
         this.fnDisplay = lambda1;
     }

@@ -27,6 +27,8 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import com.google.common.base.Function;
+
 import forge.Singletons;
 import forge.card.CardColor;
 import forge.card.CardEdition;
@@ -39,7 +41,6 @@ import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
-import forge.util.closures.Lambda1;
 
 /**
  * A collection of methods pertaining to columns in card catalog and
@@ -355,7 +356,7 @@ public final class SColumnUtil {
 
     /** Lamda sort fnQtyCompare. */
     @SuppressWarnings("rawtypes")
-    private static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_QTY_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Comparable> FN_QTY_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return from.getValue();
@@ -363,7 +364,7 @@ public final class SColumnUtil {
     };
 
     /** Lamda sort fnQtyGet. */
-    private static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_QTY_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_QTY_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return from.getValue();
@@ -372,7 +373,7 @@ public final class SColumnUtil {
 
     /** Lamda sort fnNameCompare. */
     @SuppressWarnings("rawtypes")
-    private static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_NAME_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Comparable> FN_NAME_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return from.getKey().getName();
@@ -380,7 +381,7 @@ public final class SColumnUtil {
     };
 
     /** Lamda sort fnNameGet. */
-    private static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_NAME_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_NAME_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             final String name = from.getKey().getName();
@@ -390,7 +391,7 @@ public final class SColumnUtil {
 
     /** Lamda sort fnCostCompare. */
     @SuppressWarnings("rawtypes")
-    private static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_COST_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Comparable> FN_COST_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toManaCost(from.getKey());
@@ -398,7 +399,7 @@ public final class SColumnUtil {
     };
 
     /** Lamda sort fnCostGet. */
-    private static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_COST_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_COST_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toManaCost(from.getKey());
@@ -407,7 +408,7 @@ public final class SColumnUtil {
 
     /** Lamda sort fnColorCompare. */
     @SuppressWarnings("rawtypes")
-    private static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_COLOR_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Comparable> FN_COLOR_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toColor(from.getKey());
@@ -415,7 +416,7 @@ public final class SColumnUtil {
     };
 
     /** Lamda sort fnColorGet. */
-    private static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_COLOR_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_COLOR_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toColor(from.getKey());
@@ -424,7 +425,7 @@ public final class SColumnUtil {
 
     /** Lamda sort fnTypeCompare. */
     @SuppressWarnings("rawtypes")
-    private static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_TYPE_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Comparable> FN_TYPE_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return from.getKey().getType();
@@ -432,7 +433,7 @@ public final class SColumnUtil {
     };
 
     /** Lamda sort fnTypeGet. */
-    private static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_TYPE_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_TYPE_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return from.getKey().getType();
@@ -441,7 +442,7 @@ public final class SColumnUtil {
 
     /** Lamda sort fnPowerCompare. */
     @SuppressWarnings("rawtypes")
-    private static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_POWER_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Comparable> FN_POWER_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toPower(from.getKey());
@@ -449,7 +450,7 @@ public final class SColumnUtil {
     };
 
     /** Lamda sort fnPowerGet. */
-    private static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_POWER_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_POWER_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toPower(from.getKey());
@@ -458,7 +459,7 @@ public final class SColumnUtil {
 
     /** Lamda sort fnToughnessCompare. */
     @SuppressWarnings("rawtypes")
-    private static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_TOUGHNESS_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Comparable> FN_TOUGHNESS_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toToughness(from.getKey());
@@ -466,7 +467,7 @@ public final class SColumnUtil {
     };
 
     /** Lamda sort fnToughnessGet. */
-    private static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_TOUGHNESS_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_TOUGHNESS_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toToughness(from.getKey());
@@ -475,7 +476,7 @@ public final class SColumnUtil {
 
     /** Lamda sort fnCMCCompare. */
     @SuppressWarnings("rawtypes")
-    private static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_CMC_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Comparable> FN_CMC_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toCMC(from.getKey());
@@ -483,7 +484,7 @@ public final class SColumnUtil {
     };
 
     /** Lamda sort fnCMCGet. */
-    private static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_CMC_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_CMC_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toCMC(from.getKey());
@@ -492,7 +493,7 @@ public final class SColumnUtil {
 
     /** Lamda sort fnRarityCompare. */
     @SuppressWarnings("rawtypes")
-    private static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_RARITY_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Comparable> FN_RARITY_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toRarity(from.getKey());
@@ -500,7 +501,7 @@ public final class SColumnUtil {
     };
 
     /** Lamda sort fnRarityGet. */
-    private static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_RARITY_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_RARITY_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toRarity(from.getKey());
@@ -509,7 +510,7 @@ public final class SColumnUtil {
 
     /** Lamda sort fnSetCompare. */
     @SuppressWarnings("rawtypes")
-    private static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_SET_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Comparable> FN_SET_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toSetCmp(from.getKey());
@@ -517,7 +518,7 @@ public final class SColumnUtil {
     };
 
     /** Lamda sort fnSetGet. */
-    private static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_SET_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_SET_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toSetStr(from.getKey());
@@ -526,7 +527,7 @@ public final class SColumnUtil {
 
     /** Lamda sort fnAiStatusCompare. */
     @SuppressWarnings("rawtypes")
-    private static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_AI_STATUS_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Comparable> FN_AI_STATUS_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toAiCmp(from.getKey());
@@ -534,7 +535,7 @@ public final class SColumnUtil {
     };
 
     /** Lamda sort fnAiStatusGet. */
-    private static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_AI_STATUS_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_AI_STATUS_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toAiStr(from.getKey());

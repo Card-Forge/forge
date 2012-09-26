@@ -20,8 +20,9 @@ package forge.gui.deckeditor.tables;
 import java.util.Comparator;
 import java.util.Map.Entry;
 
+import com.google.common.base.Function;
+
 import forge.item.CardPrinted;
-import forge.util.closures.Lambda1;
 
 /**
  * <p>
@@ -38,7 +39,7 @@ import forge.util.closures.Lambda1;
 public class TableSorter<T> implements Comparator<Entry<T, Integer>> {
     private final boolean ascending;
     @SuppressWarnings("rawtypes")
-    private final Lambda1<Comparable, Entry<T, Integer>> field;
+    private final Function<Entry<T, Integer>, Comparable> field;
 
     /**
      * <p>
@@ -51,7 +52,7 @@ public class TableSorter<T> implements Comparator<Entry<T, Integer>> {
      *            a boolean.
      */
     @SuppressWarnings("rawtypes")
-    public TableSorter(final Lambda1<Comparable, Entry<T, Integer>> field, final boolean inAscending) {
+    public TableSorter(final Function<Entry<T, Integer>, Comparable> field, final boolean inAscending) {
         this.field = field;
         this.ascending = inAscending;
     }
@@ -59,7 +60,7 @@ public class TableSorter<T> implements Comparator<Entry<T, Integer>> {
     /** The Constant byNameThenSet. */
     @SuppressWarnings("rawtypes")
     public static final TableSorter<CardPrinted> BY_NAME_THEN_SET = new TableSorter<CardPrinted>(
-            new Lambda1<Comparable, Entry<CardPrinted, Integer>>() {
+            new Function<Entry<CardPrinted, Integer>, Comparable>() {
                 @Override
                 public Comparable apply(final Entry<CardPrinted, Integer> from) {
                     return from.getKey();

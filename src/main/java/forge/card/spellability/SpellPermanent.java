@@ -19,6 +19,8 @@ package forge.card.spellability;
 
 import java.util.HashMap;
 
+import com.google.common.collect.Iterables;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -347,7 +349,7 @@ public class SpellPermanent extends Spell {
         // check on legendary
         if (card.isType("Legendary") && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
             final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            if (CardPredicates.nameEquals(card.getName()).any(list)) {
+            if (Iterables.any(list, CardPredicates.nameEquals(card.getName()))) {
                 return false;
             }
         }

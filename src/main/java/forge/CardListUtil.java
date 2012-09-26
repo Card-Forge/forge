@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.util.Aggregates;
 import forge.util.closures.Predicate;
 
 /**
@@ -237,7 +238,7 @@ public class CardListUtil {
      * @return a int.
      */
     public static int sumCMC(final CardList c) {
-        return CardPredicates.Presets.All.sum(c, CardPredicates.Accessors.fnGetCmc);
+        return Aggregates.sum(c, CardPredicates.Accessors.fnGetCmc);
     } // sumCMC
 
     /**

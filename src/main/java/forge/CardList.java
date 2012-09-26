@@ -19,7 +19,6 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 import com.google.common.collect.Iterables;
 
@@ -77,11 +76,11 @@ public class CardList extends ArrayList<Card> {
      *         criteria; may be empty, but never null.
      */
     public final CardList filter(final Predicate<Card> filt) {
-        return new CardList(filt.select(this));
+        return new CardList(Iterables.filter(this, filt));
     }
 
     public final boolean containsName(final String name) {
-        return CardPredicates.nameEquals(name).any(this);
+        return Iterables.any(this, CardPredicates.nameEquals(name));
     }
 
     public final CardList getController(final Player player) {

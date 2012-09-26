@@ -17,6 +17,8 @@
  */
 package forge;
 
+import com.google.common.collect.Iterables;
+
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
@@ -73,7 +75,7 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return PredicateString.contains(keyword).any(c.getKeyword());
+                return Iterables.any(c.getKeyword(), PredicateString.contains(keyword));
             }
         };
     }

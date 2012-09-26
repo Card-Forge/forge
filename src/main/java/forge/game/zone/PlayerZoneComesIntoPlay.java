@@ -31,7 +31,6 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.game.player.Player;
-import forge.util.closures.Predicate;
 
 /**
  * <p>

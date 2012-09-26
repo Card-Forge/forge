@@ -29,6 +29,9 @@ import java.util.NoSuchElementException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.Singletons;
 import forge.card.CardInSet;
@@ -389,7 +392,7 @@ public final class CardDb {
             } else {
                 // OK, plain name here
                 final Predicate<CardPrinted> predicate = CardPrinted.Predicates.name(nameWithSet.left);
-                final List<CardPrinted> namedCards = predicate.select(this.allCardsFlat);
+                final List<CardPrinted> namedCards = Lists.newArrayList(Iterables.filter(this.allCardsFlat, predicate));
                 if (namedCards.isEmpty()) {
                     throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
                 }

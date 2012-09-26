@@ -27,6 +27,7 @@ import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.closures.Lambda1;
 import forge.util.closures.Predicate;
@@ -34,6 +35,8 @@ import forge.util.closures.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+
+import com.google.common.collect.Iterables;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been
@@ -139,7 +142,7 @@ public final class QuestUtilCards {
      * @return the card printed
      */
     public CardPrinted addRandomRare() {
-        final CardPrinted card = QuestUtilCards.RARE_PREDICATE.random(CardDb.instance().getAllCards());
+        final CardPrinted card = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), QuestUtilCards.RARE_PREDICATE));
         this.addSingleCard(card);
         return card;
     }
@@ -152,7 +155,7 @@ public final class QuestUtilCards {
      * @return the list
      */
     public List<CardPrinted> addRandomRare(final int n) {
-        final List<CardPrinted> newCards = QuestUtilCards.RARE_PREDICATE.random(CardDb.instance().getAllCards(), n);
+        final List<CardPrinted> newCards = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), QuestUtilCards.RARE_PREDICATE), n); 
         this.addAllCards(newCards);
         return newCards;
     }
@@ -343,8 +346,8 @@ public final class QuestUtilCards {
             final int rollD100 = MyRandom.getRandom().nextInt(100);
             final Predicate<CardEdition> filter = rollD100 < 40 ? this.filterT2booster
                     : (rollD100 < 75 ? this.filterExtButT2 : this.filterNotExt);
-            this.qa.getShopList().addAllFlat(
-                    filter.random(Singletons.getModel().getEditions(), 1, BoosterPack.FN_FROM_SET));
+            Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), filter);
+            this.qa.getShopList().add(BoosterPack.FN_FROM_SET.apply(Aggregates.random(rightEditions)));
         }
     }
 
@@ -355,15 +358,13 @@ public final class QuestUtilCards {
      *            the count
      */
     public void generateTournamentsInShop(final int count) {
-        Predicate<CardEdition> hasTournament = CardEdition.Predicates.HAS_TOURNAMENT_PACK;
-        this.qa.getShopList().addAllFlat(hasTournament.random(Singletons.getModel().getEditions(),
-                count,
-                TournamentPack.FN_FROM_SET));
+        Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), CardEdition.Predicates.HAS_TOURNAMENT_PACK);
+        this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, TournamentPack.FN_FROM_SET), count));
     }
 
     public void generateFatPacksInShop(final int count) {
-        Predicate<CardEdition> hasPack = CardEdition.Predicates.HAS_FAT_PACK;
-        this.qa.getShopList().addAllFlat(hasPack.random(Singletons.getModel().getEditions(), count, FatPack.FN_FROM_SET));
+        Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), CardEdition.Predicates.HAS_FAT_PACK);
+        this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack.FN_FROM_SET), count));
     }
 
     /**
@@ -379,7 +380,7 @@ public final class QuestUtilCards {
                 meetRequirements.add(deck);
             }
         }
-        this.qa.getShopList().addAllFlat(Predicate.getTrue(PreconDeck.class).random(meetRequirements, count));
+        this.qa.getShopList().addAllFlat(Aggregates.random(meetRequirements, count));
     }
 
     /**

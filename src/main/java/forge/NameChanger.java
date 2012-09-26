@@ -24,6 +24,8 @@ import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
+import com.google.common.collect.Lists;
+
 import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
@@ -154,7 +156,7 @@ public class NameChanger {
      */
     public final CardList changeCardsIfNeeded(CardList list) {
         if (this.shouldChangeCardName()) {
-            list = new CardList(fnTransformCard.applyToIterable(list));
+            list = new CardList( Lists.transform(list, fnTransformCard) );
         }
         return list;
     }

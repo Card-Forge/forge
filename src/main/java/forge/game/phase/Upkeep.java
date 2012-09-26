@@ -19,6 +19,8 @@ package forge.game.phase;
 
 import java.util.ArrayList;
 
+import com.google.common.collect.Iterables;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -2279,7 +2281,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         public boolean apply(final Card c) {
                             return c.isEnchantment() && c.hasKeyword("Enchant player")
                                     && !source.getEnchantingPlayer().hasProtectionFrom(c)
-                                    && !CardPredicates.nameEquals(c.getName()).any(enchantmentsAttached);
+                                    && !Iterables.any(enchantmentsAttached, CardPredicates.nameEquals(c.getName()));
                         }
                     });
                     final Player player = source.getController();

@@ -22,6 +22,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
+import org.apache.commons.lang3.text.translate.AggregateTranslator;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -53,6 +55,7 @@ import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
+import forge.util.Aggregates;
 import forge.util.closures.Predicate;
 
 /**
@@ -1332,7 +1335,7 @@ public class ComputerUtil {
                 CardList lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 lands.addAll(hand);
                 lands = lands.getType("Land");
-                int maxCmcInHand = Predicate.getTrue(Card.class).max(hand, CardPredicates.Accessors.fnGetCmc);
+                int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
                 for (final SpellAbility sa : spellAbilities) {
                     if (sa.isCycling()) {
                         if (lands.size() >= Math.max(maxCmcInHand, 6)) {
@@ -2216,7 +2219,7 @@ public class ComputerUtil {
         final CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land");
         final CardList landsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getType("Land");
         final CardList nonLandsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getNotType("Land");
-        final int highestCMC = Math.max(6, Predicate.getTrue(Card.class).max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
+        final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
         final int discardCMC = discard.getCMC();
         if (discard.isLand()) {
             if (landsInPlay.size() >= highestCMC

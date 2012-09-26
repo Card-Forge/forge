@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 
 
 import forge.card.BoosterGenerator;
@@ -28,6 +30,7 @@ import forge.card.CardRules;
 import forge.card.UnOpenedProduct;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.closures.Lambda1;
 import forge.util.closures.Predicate;
@@ -89,7 +92,7 @@ public final class BoosterUtils {
         int nRares = numRare, nMythics = 0;
         final Predicate<CardPrinted> filterMythics = Predicate.and(filter,
                 CardPrinted.Predicates.Presets.IS_MYTHIC_RARE);
-        final boolean haveMythics = filterMythics.any(cardpool);
+        final boolean haveMythics = Iterables.any(cardpool, filterMythics);
         for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {
             if (MyRandom.getRandom().nextInt(10) < 1) {
                 // 10% chance of upgrading a Rare into a Mythic
@@ -139,13 +142,13 @@ public final class BoosterUtils {
             if (size > 0) {
                 final Predicate<CardRules> color2 = allowedColors.get(iAttempt % size);
                 if (color2 != null) {
-                    card = Predicate.and(filter, color2, CardPrinted.FN_GET_RULES).random(source);
+                    card = Aggregates.random(Iterables.filter(source, Predicate.and(filter, color2, CardPrinted.FN_GET_RULES)));
                 }
             }
 
             if (card == null) {
                 // We can't decide on a color, so just pick a card.
-                card = filter.random(source);
+                card = Aggregates.random(Iterables.filter(source, filter));
             }
 
             if ((card != null) && !result.contains(card)) {
@@ -194,7 +197,7 @@ public final class BoosterUtils {
                                                  // constant!
 
         while ((cntMade < cntNeeded) && (allowedMisses > 0)) {
-            final CardPrinted card = filter.random(source);
+            final CardPrinted card = Aggregates.random(Iterables.filter(source, filter));
 
             if ((card != null) && !result.contains(card)) {
                 result.add(card);

@@ -17,8 +17,7 @@
  */
 package forge.util.closures;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.base.Function;
 
 
 /**
@@ -29,7 +28,7 @@ import java.util.List;
  * @param <A1>
  *            the generic type
  */
-public abstract class Lambda1<R, A1> implements Lambda<R> {
+public abstract class Lambda1<R, A1> implements Lambda<R>, Function<A1, R> {
 
     /**
      * Apply.
@@ -40,14 +39,6 @@ public abstract class Lambda1<R, A1> implements Lambda<R> {
      */
     public abstract R apply(A1 arg1);
 
-    public List<R> applyToIterable(Iterable<A1> arg1) {
-        List<R> result = new ArrayList<R>();
-        for(A1 a : arg1) {
-            result.add(this.apply(a));
-        }
-        return result;
-    }
-    
     /*
      * (non-Javadoc)
      * 

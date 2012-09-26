@@ -26,6 +26,7 @@ import java.util.Random;
 import java.util.TreeMap;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.collect.Iterables;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -72,6 +73,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.closures.Predicate;
 import forge.view.ButtonUtil;
@@ -2478,7 +2480,7 @@ public class CardFactoryUtil {
                     list.add(AllZoneUtil.getCardState((Card) o));
                 }
             }
-            return CardPredicates.Presets.hasSecondStrike.sum(list, CardPredicates.Accessors.fnGetAttack);
+            return Aggregates.sum(Iterables.filter(list, CardPredicates.Presets.hasSecondStrike), CardPredicates.Accessors.fnGetAttack);
         }
 
         if (l[0].contains("RememberedSize")) {
