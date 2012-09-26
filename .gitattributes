@@ -4364,6 +4364,7 @@ res/cardsfolder/h/hells_caretaker.txt svneol=native#text/plain
 res/cardsfolder/h/hells_thunder.txt svneol=native#text/plain
 res/cardsfolder/h/hellspark_elemental.txt svneol=native#text/plain
 res/cardsfolder/h/helm_of_awakening.txt svneol=native#text/plain
+res/cardsfolder/h/helm_of_obedience.txt -text
 res/cardsfolder/h/helm_of_possession.txt svneol=native#text/plain
 res/cardsfolder/h/helm_of_the_ghastlord.txt svneol=native#text/plain
 res/cardsfolder/h/helvault.txt -text

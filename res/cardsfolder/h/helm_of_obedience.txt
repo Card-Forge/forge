@@ -1,0 +1,27 @@
+Name:Helm of Obedience
+ManaCost:4
+Types:Artifact
+Text:no text
+#Doesn't interact properly with Myr Welder right now
+A:AB$ Repeat | Cost$ XCantBe0 X T | ValidTgts$ Opponent | MaxRepeat$ MaxRepeats | RepeatSubAbility$ DBCleanBeforeRepeat | RepeatCheckSVar$ AccumlatedMilled | RepeatSVarCompare$ LTX | StackDescription$ Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0. | SpellDescription$ Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0. | SubAbility$ DBSacHelm | References$ MaxRepeats,AccumlatedMilled,X
+SVar:DBCleanBeforeRepeat:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBMill
+SVar:DBMill:DB$ Mill | NumCards$ 1 | RememberMilled$ True | Defined$ Targeted | SubAbility$ DBAccumulateX
+SVar:DBAccumulateX:DB$ StoreSVar | SVar$ AccumlatedMilled | Type$ CountSVar | Expression$ AccumlatedMilled/Plus.1 | ConditionCheckSVar$ MilledCard | ConditionSVarCompare$ EQ1 | SubAbility$ DBMilledCreature | References$ MilledCard,AccumlatedMilled
+SVar:DBMilledCreature:DB$ StoreSVar | SVar$ AccumlatedMilled | Type$ CountSVar | Expression$ X |  ConditionCheckSVar$ MilledCreature | ConditionSVarCompare$ EQ1 | SubAbility$ DBEmptyLibrary | References$ MilledCreature,AccumlatedMilled,X
+SVar:DBEmptyLibrary:DB$ StoreSVar | SVar$ AccumlatedMilled | Type$ CountSVar | Expression$ X | ConditionCheckSVar$ TargetedLibrary | ConditionSVarCompare$ EQ0 | References$ TargetedLibrary,AccumlatedMilled,X
+SVar:DBSacHelm:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ MilledCreature | ConditionSVarCompare$ EQ1 | SubAbility$ DBStealCreature | References$ MilledCreature
+SVar:DBStealCreature:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBResetCounter | ConditionCheckSVar$ MilledCreature | ConditionSVarCompare$ EQ1 | References$ MilledCreature
+SVar:DBResetCounter:DB$ StoreSVar | SVar$ AccumlatedMilled | Type$ Number | Expression$ 0 | SubAbility$ DBCleanup | References$ AccumlatedMilled
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TargetedLibrary:TargetedPlayer$CardsInLibrary
+SVar:MaxRepeats:TargetedPlayer$CardsInLibrary/Plus.2
+SVar:MilledCreature:Count$ValidGrave Creature.IsRemembered
+SVar:MilledCard:Count$ValidGrave Card.IsRemembered
+SVar:AccumlatedMilled:Number$0
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_obedience.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/163.jpg
+Oracle:{X}, {T}: Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.
+End

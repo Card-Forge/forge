@@ -216,10 +216,11 @@ public final class AbilityFactoryRepeat {
     private static void repeatResolve(final AbilityFactory af, final SpellAbility sa) {
         final AbilityFactory afRepeat = new AbilityFactory();
         final HashMap<String, String> params = af.getMapParams();
+        Card source = sa.getSourceCard();
 
         // setup subability to repeat
         final SpellAbility repeat = afRepeat.getAbility(
-                af.getHostCard().getSVar(params.get("RepeatSubAbility")), sa.getSourceCard());
+                af.getHostCard().getSVar(params.get("RepeatSubAbility")), source);
         repeat.setActivatingPlayer(sa.getActivatingPlayer());
         ((AbilitySub) repeat).setParent(sa);
 
@@ -341,7 +342,7 @@ public final class AbilityFactoryRepeat {
         final HashMap<String, String> params = af.getMapParams();
 
         final StringBuilder sb = new StringBuilder();
-        final Card host = af.getHostCard();
+        final Card host = sa.getSourceCard();
 
         if (!(sa instanceof AbilitySub)) {
             sb.append(host.getName()).append(" -");
