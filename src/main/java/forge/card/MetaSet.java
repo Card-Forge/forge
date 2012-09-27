@@ -159,6 +159,16 @@ public class MetaSet {
     }
 
     /**
+     * Return the type.
+     * 
+     * @return
+     *  String, type
+     */
+    public final String getType() {
+        return type;
+    }
+
+    /**
      * 
      * Attempt to get a booster.
      * 

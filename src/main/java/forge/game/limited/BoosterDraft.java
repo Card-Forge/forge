@@ -89,45 +89,69 @@ public final class BoosterDraft implements IBoosterDraft {
             IBoosterDraft.LAND_SET_CODE[0] = CardDb.instance().getCard("Plains").getEdition();
             break;
 
-        case Block: // Draft from cards by block or set
+        case Block: case FantasyBlock: // Draft from cards by block or set
 
             List<CardBlock> blocks = new ArrayList<CardBlock>();
-            for (CardBlock b : Singletons.getModel().getBlocks()) {
-                blocks.add(b);
+
+            if (draftType == CardPoolLimitation.Block) {
+                for (CardBlock b : Singletons.getModel().getBlocks()) {
+                    blocks.add(b);
+                }
+
             }
+            else {
+                for (CardBlock b : Singletons.getModel().getFantasyBlocks()) {
+                    if (b.hasMetaSetType("choose1") || b.hasMetaSetType("random1")) {
+                                System.out.println("Ignoring block " + b.getName() + " because its MetaSet types are not supported in Draft.");
+                    } else {
+                        blocks.add(b);
+                    }
+                }
+            }
+
             final CardBlock block = GuiUtils.chooseOne("Choose Block", blocks);
 
             final CardEdition[] cardSets = block.getSets();
-            final String[] sets = new String[cardSets.length];
+            final String[] sets = new String[cardSets.length + block.getNumberMetaSets()];
             for (int k = cardSets.length - 1; k >= 0; --k) {
                 sets[k] = cardSets[k].getCode();
             }
 
-            final int nPacks = block.getCntBoostersDraft();
+            if (block.getNumberMetaSets() > 0) {
 
-            final ArrayList<String> setCombos = new ArrayList<String>();
-            if (sets.length >= 2) {
-                setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s/%s/%s", sets[1], sets[0], sets[0]));
-                setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[0]));
-                setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[1]));
+                int j = cardSets.length;
+
+                for (int k = 0; k < block.getNumberMetaSets(); k++) {
+                    sets[j + k] = block.getMetaSet(k).getCode();
+                }
             }
-            if (sets.length >= 3) {
-                setCombos.add(String.format("%s/%s/%s", sets[2], sets[1], sets[0]));
-                setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[0]));
-                setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[1]));
-                setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[2]));
+
+            final int nPacks = block.getCntBoostersDraft();
+            final List<String> setCombos = getSetCombos(sets);
+
+            while (setCombos == null) {
+                throw new RuntimeException("Unsupported amount of packs (" + nPacks + ") in a Draft block!");
             }
 
             if (sets.length > 1) {
                 final Object p = GuiUtils.chooseOne("Choose Set Combination", setCombos);
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
-                    this.product.add(new UnOpenedProduct(Singletons.getModel().getBoosters().get(pp[i])));
+                    if (pp[i].charAt(0) == '*') {
+                        this.product.add(block.getBooster(pp[i]));
+                    }
+                    else {
+                        this.product.add(new UnOpenedProduct(Singletons.getModel().getBoosters().get(pp[i])));
+                    }
                 }
-
             } else {
-                final UnOpenedProduct product1 = new UnOpenedProduct(Singletons.getModel().getBoosters().get(sets[0]));
+                UnOpenedProduct product1;
+                if (sets[0].charAt(0) == '*') {
+                    product1 = block.getBooster(sets[0]);
+                }
+                else {
+                    product1 = new UnOpenedProduct(Singletons.getModel().getBoosters().get(sets[0]));
+                }
                 for (int i = 0; i < nPacks; i++) {
                     this.product.add(product1);
                 }
@@ -359,5 +383,64 @@ public final class BoosterDraft implements IBoosterDraft {
                 poster.upload(url + this.draftFormat, "res/draft/tmpDraftData.txt");
             }
         }
+    }
+
+    /**
+     * <p>
+     * getSetCombos.
+     * </p>
+     * 
+     * @return an ArrayList of the set choices.
+     */
+    private ArrayList<String> getSetCombos(final String[] sets) {
+        ArrayList<String> setCombos = new ArrayList<String>();
+        if (sets.length >= 2) {
+            setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[0]));
+            setCombos.add(String.format("%s/%s/%s", sets[1], sets[0], sets[0]));
+            setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[0]));
+            setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[1]));
+        }
+        if (sets.length >= 3) {
+            setCombos.add(String.format("%s/%s/%s", sets[2], sets[1], sets[0]));
+            setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[0]));
+            setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[1]));
+            setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[2]));
+        } // Beyond 3, skimp on the choice configurations, or the list will be enormous!
+        if (sets.length >= 4) {
+            setCombos.add(String.format("%s/%s/%s", sets[3], sets[1], sets[0]));
+            setCombos.add(String.format("%s/%s/%s", sets[3], sets[2], sets[1]));
+        }
+        if (sets.length >= 5) {
+            setCombos.add(String.format("%s/%s/%s", sets[4], sets[1], sets[0]));
+            setCombos.add(String.format("%s/%s/%s", sets[4], sets[3], sets[2]));
+            setCombos.add(String.format("%s/%s/%s", sets[4], sets[2], sets[0]));
+        }
+        if (sets.length >= 6) {
+            setCombos.add(String.format("%s/%s/%s", sets[5], sets[1], sets[0]));
+            setCombos.add(String.format("%s/%s/%s", sets[5], sets[3], sets[2]));
+            setCombos.add(String.format("%s/%s/%s", sets[5], sets[4], sets[3]));
+            setCombos.add(String.format("%s/%s/%s", sets[5], sets[2], sets[0]));
+        }
+        if (sets.length >= 7) {
+            setCombos.add(String.format("%s/%s/%s", sets[6], sets[1], sets[0]));
+            setCombos.add(String.format("%s/%s/%s", sets[6], sets[3], sets[2]));
+            setCombos.add(String.format("%s/%s/%s", sets[6], sets[5], sets[4]));
+            setCombos.add(String.format("%s/%s/%s", sets[6], sets[3], sets[0]));
+        }
+        if (sets.length >= 8) {
+            setCombos.add(String.format("%s/%s/%s", sets[7], sets[1], sets[0]));
+            setCombos.add(String.format("%s/%s/%s", sets[7], sets[3], sets[2]));
+            setCombos.add(String.format("%s/%s/%s", sets[7], sets[5], sets[4]));
+            setCombos.add(String.format("%s/%s/%s", sets[7], sets[6], sets[5]));
+            setCombos.add(String.format("%s/%s/%s", sets[7], sets[3], sets[0]));
+        }
+        if (sets.length >= 9) {
+            setCombos.add(String.format("%s/%s/%s", sets[8], sets[1], sets[0]));
+            setCombos.add(String.format("%s/%s/%s", sets[8], sets[3], sets[2]));
+            setCombos.add(String.format("%s/%s/%s", sets[8], sets[5], sets[4]));
+            setCombos.add(String.format("%s/%s/%s", sets[8], sets[7], sets[6]));
+            setCombos.add(String.format("%s/%s/%s", sets[8], sets[4], sets[0]));
+        }
+        return setCombos;
     }
 }

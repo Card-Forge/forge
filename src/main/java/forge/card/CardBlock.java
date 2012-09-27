@@ -292,6 +292,27 @@ public final class CardBlock implements Comparable<CardBlock> {
     }
 
     /**
+     * Returns true if there is a meta-set of the requested type.
+     *
+     * @param compare
+     *      String, the requested the requested type
+     * @return boolean, the requsted type was found
+     */
+    public boolean hasMetaSetType(final String compare) {
+
+        if (this.getNumberMetaSets() < 1) {
+            return false;
+        }
+
+        for (MetaSet mSet : metaSets) {
+            if (mSet.getType().equalsIgnoreCase(compare)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Tries to create a booster for the selected meta-set code.
      *
      * @param code

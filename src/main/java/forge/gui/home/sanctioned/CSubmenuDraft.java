@@ -208,6 +208,7 @@ public enum CSubmenuDraft implements ICDoc {
         final ArrayList<String> draftTypes = new ArrayList<String>();
         draftTypes.add("Full Cardpool");
         draftTypes.add("Block / Set");
+        draftTypes.add("Fantasy Block");
         draftTypes.add("Custom");
 
         final String prompt = "Choose Draft Format:";
@@ -222,6 +223,10 @@ public enum CSubmenuDraft implements ICDoc {
         }
 
         else if (o.toString().equals(draftTypes.get(2))) {
+            draft.showGui(new BoosterDraft(CardPoolLimitation.FantasyBlock));
+        }
+
+        else if (o.toString().equals(draftTypes.get(3))) {
             draft.showGui(new BoosterDraft(CardPoolLimitation.Custom));
         }
 

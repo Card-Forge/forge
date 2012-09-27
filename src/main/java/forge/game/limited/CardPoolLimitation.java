@@ -27,6 +27,8 @@ public enum CardPoolLimitation {
     Full,
     /** The Block. */
     Block,
+    /** The Fantasy Block. */
+    FantasyBlock,
     /** The Custom. */
     Custom
 }
