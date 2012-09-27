@@ -980,14 +980,14 @@ public class TriggerHandler {
                     } else {
                         ArrayList<Object> tgts = null;
                         // make sure the targets won't change
-                        if (sa[0].getTarget() != null) {
+                        if (sa[0].getTarget() != null && sa[0].getTarget().getTargetChoices() != null) {
                             tgts = new ArrayList<Object>(sa[0].getTarget().getTargetChoices().getTargets());
                         }
                         // This isn't quite right, but better than canPlayAI
                         if (!sa[0].doTrigger(isMandatory)) {
                             return;
                         }
-                        if (sa[0].getTarget() != null) {
+                        if (sa[0].getTarget() != null && sa[0].getTarget().getTargetChoices() != null) {
                             for (Object tgt : tgts) {
                                 sa[0].getTarget().getTargetChoices().clear();
                                 sa[0].getTarget().getTargetChoices().addTarget(tgt);
