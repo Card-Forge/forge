@@ -136,7 +136,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         btnStart.setVisible(false);
 
         barProgress.reset();
-        barProgress.setString("Scanning for existing images...");
+        barProgress.setString("Scanning for existing items...");
         pnlDialog.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
 
         // Layout
@@ -174,14 +174,18 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
     private void readyToStart() {
         if (this.cards.length == 0) {
-            barProgress.setString("All images have been downloaded.");
+            barProgress.setString("All items have been downloaded.");
             btnStart.setVisible(true);
             btnStart.setText("OK");
             btnStart.addActionListener(actOK);
         }
         else {
             barProgress.setMaximum(this.cards.length);
-            barProgress.setString(this.cards.length + " images found.");
+            barProgress.setString(
+                    this.cards.length == 1
+                        ? "1 item found."
+                        : this.cards.length + " items found.");
+
             btnStart.setVisible(true);
             btnStart.addActionListener(actStartDownload);
         }
