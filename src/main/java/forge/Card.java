@@ -2238,13 +2238,17 @@ public class Card extends GameEntity implements Comparable<Card> {
                 String k = keywords.get(i);
                 k = k.replace("Curse", "");
                 sbLong.append(k).append("\r\n");
-            } else if (keyword.startsWith("Soulshift") || keywords.get(i).startsWith("Devour")
-                    || keyword.startsWith("Fading")
+            } else if (keyword.startsWith("Soulshift") || keyword.startsWith("Fading")
                     || keyword.startsWith("Ripple") || keywords.get(i).startsWith("Unearth")
                     || keyword.startsWith("Vanishing") || keywords.get(i).startsWith("Madness")) {
                 String k = keywords.get(i);
                 k = k.replace(":", " ");
                 sbLong.append(k).append("\r\n");
+            } else if (keyword.startsWith("Devour")) {
+                final String[] parts = keyword.split(":");
+                final String extra = parts.length > 2 ? parts[2] : "";
+                final String devour = "Devour " + parts[1] + extra;
+                sbLong.append(devour).append("\r\n");
             } else if (keyword.startsWith("Morph")) {
                 sbLong.append("Morph");
                 if (keyword.contains(":")) {
@@ -2624,7 +2628,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append(" You may choose new targets for the copies.");
                 }
                 sb.append(")\r\n");
-            }else if (keyword.startsWith("Haunt")) {
+            } else if (keyword.startsWith("Haunt")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
@@ -6570,7 +6574,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(this.getController())) {
                 return false;
             }
-        }else if (property.startsWith("YouOwn")) {
+        } else if (property.startsWith("YouOwn")) {
             if (!this.getOwner().isPlayer(sourceController)) {
                 return false;
             }

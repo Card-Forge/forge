@@ -4971,7 +4971,6 @@ public class CardFactoryUtil {
                 final String[] k = parse.split(":");
                 final String magnitude = k[1];
 
-                final int multiplier = Integer.parseInt(magnitude);
                 // final String player = card.getController();
                 final int[] numCreatures = new int[1];
 
@@ -5011,6 +5010,8 @@ public class CardFactoryUtil {
                             }
                             numCreatures[0] = count;
                         }
+                        final int multiplier = magnitude.equals("X") ? AbilityFactory.calculateAmount(card, magnitude, null)
+                                : Integer.parseInt(magnitude);
                         final int totalCounters = numCreatures[0] * multiplier;
 
                         card.addCounter(Counters.P1P1, totalCounters);
