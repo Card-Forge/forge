@@ -3664,6 +3664,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.sickness = b;
     }
 
+    public final boolean isFirstTurnControlled() {
+        return this.sickness;
+    }
+    
     /**
      * <p>
      * hasSickness.
@@ -6558,7 +6562,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
             }
-        } else if (property.startsWith("YouOwn")) {
+        } else if (property.startsWith("ActivePlayerCtrl")) {
+            if (!Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(this.getController())) {
+                return false;
+            }
+        } else if (property.startsWith("NonActivePlayerCtrl")) {
+            if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(this.getController())) {
+                return false;
+            }
+        }else if (property.startsWith("YouOwn")) {
             if (!this.getOwner().isPlayer(sourceController)) {
                 return false;
             }
@@ -6898,6 +6910,14 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("notEnteredBattlefieldThisTurn")) {
             if (this.getTurnInZone() == Singletons.getModel().getGameState().getPhaseHandler().getTurn()) {
+                return false;
+            }
+        } else if (property.startsWith("firstTurnControlled")) {
+            if (!this.isFirstTurnControlled()) {
+                return false;
+            }
+        } else if (property.startsWith("notFirstTurnControlled")) {
+            if (this.isFirstTurnControlled()) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToYouThisTurn")) {

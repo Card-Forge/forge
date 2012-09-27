@@ -5,7 +5,7 @@ Text:no text
 K:Enchant non-Wall creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature.nonWall | TgtPrompt$ Select target non-Wall creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike & Trample | Description$ Enchanted creature has first strike and trample.
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDestroy | isPresent$ Card.EnchantedBy+notAttackedThisTurn | TriggerDescription$ At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDestroy | IsPresent$ Card.EnchantedBy+notAttackedThisTurn | TriggerDescription$ At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn.
 SVar:TrigDestroy:DB$Destroy | Defined$ Enchanted
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
