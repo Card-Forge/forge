@@ -3671,7 +3671,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isFirstTurnControlled() {
         return this.sickness;
     }
-    
+
     /**
      * <p>
      * hasSickness.
@@ -6953,6 +6953,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             Card equipee = source.getEquippingCard();
             if (this.getReceivedDamageFromThisTurn().keySet().isEmpty()
                     || !this.getReceivedDamageFromThisTurn().keySet().contains(equipee)) {
+                return false;
+            }
+        } else if (property.startsWith("dealtDamageThisTurn")) {
+            if (this.getTotalDamageDoneBy() == 0) {
                 return false;
             }
         } else if (property.startsWith("attackedThisTurn")) {
