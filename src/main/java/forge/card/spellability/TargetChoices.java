@@ -126,6 +126,17 @@ public class TargetChoices {
 
     /**
      * <p>
+     * clear.
+     * </p>
+     */
+    public final void clear() {
+        this.targetPlayers.clear();
+        this.targetCards.clear();
+        this.targetSAs.clear();
+    }
+
+    /**
+     * <p>
      * removeTarget.
      * </p>
      * 
