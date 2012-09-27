@@ -5988,6 +5988,7 @@ res/cardsfolder/m/mind_twist.txt svneol=native#text/plain
 res/cardsfolder/m/mind_unbound.txt svneol=native#text/plain
 res/cardsfolder/m/mind_warp.txt svneol=native#text/plain
 res/cardsfolder/m/mindblaze.txt -text svneol=unset#text/plain
+res/cardsfolder/m/mindbreak_trap.txt -text
 res/cardsfolder/m/mindclaw_shaman.txt -text
 res/cardsfolder/m/mindcrank.txt svneol=native#text/plain
 res/cardsfolder/m/mindculling.txt svneol=native#text/plain
