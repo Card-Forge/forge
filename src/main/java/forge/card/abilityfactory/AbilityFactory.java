@@ -1659,6 +1659,16 @@ public class AbilityFactory {
                 }
 
                 return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
+            } else if (calcX[0].startsWith("Enchanted")) {
+                // Add whole Imprinted list to handlePaid
+                final CardList list = new CardList();
+                if (card.isEnchanting()) {
+                    Object o = card.getEnchanting();
+                    if (o instanceof Card) {
+                        list.add(AllZoneUtil.getCardState((Card) o));
+                    }
+                }
+                return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
             } else if (ability != null) {
                 // Player attribute counting
                 if (calcX[0].startsWith("TargetedPlayer")) {
