@@ -28,7 +28,7 @@ import forge.item.CardPrinted;
 import forge.util.MyRandom;
 
 /** 
- * This type extends UnOpenedMeta to support booster choice or random boosters
+ * This type extends UnOpenedProduct to support booster choice or random boosters
  * in sealed deck games. See MetaSet.java for further information.
  *
  */
