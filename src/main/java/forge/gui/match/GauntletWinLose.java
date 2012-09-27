@@ -129,9 +129,9 @@ public class GauntletWinLose extends ControlWinLose {
     private void showTournamentInfo(final String newTitle) {
 
         this.lblTemp1 = new TitleLabel(newTitle);
-        this.lblTemp2 = new JLabel("Round: " + gauntlet.getCurrentRound() + "/" + gauntlet.getRounds()
-                + "      Total Wins: " + gauntlet.getWins()
-                + "      Total Losses: " + gauntlet.getLosses());
+        this.lblTemp2 = new JLabel("Round: " + gauntlet.getCurrentRound() + "/" + gauntlet.getRounds());
+                // + "      Total Wins: " + gauntlet.getWins()
+                // + "      Total Losses: " + gauntlet.getLosses());
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblTemp2.setFont(FSkin.getFont(17));
         this.lblTemp2.setForeground(Color.white);
