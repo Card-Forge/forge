@@ -20,6 +20,7 @@ import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
+import forge.game.GameType;
 import forge.game.limited.SealedDeck;
 import forge.game.limited.SealedDeckFormat;
 import forge.gui.GuiUtils;
@@ -124,12 +125,8 @@ public enum CSubmenuSealed implements ICDoc {
         }
 
         int rounds = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().size();
-        // System.out.println("There are " + rounds + " rounds in this game.");
 
-        AllZone.getGauntlet().setRounds(rounds);
-        AllZone.getGauntlet().setHumanDeck(human);
-        AllZone.getGauntlet().resetCurrentRound();
-        AllZone.getGauntlet().launch();
+        AllZone.getGauntlet().launch(rounds, human, GameType.Sealed);
     }
 
     /** */
@@ -171,9 +168,12 @@ public enum CSubmenuSealed implements ICDoc {
             return;
         }
 
-        final Integer[] integers = new Integer[5];
+        // This seems to be limited by the MAX_DRAFT_PLAYERS constant
+        // in DeckGroupSerializer.java. You could create more AI decks
+        // but only the first seven would load. --BBU
+        final Integer[] integers = new Integer[7];
 
-        for (int i = 0; i <= 4; i++) {
+        for (int i = 0; i <= 6; i++) {
             integers[i] = Integer.valueOf(i + 1);
         }
 

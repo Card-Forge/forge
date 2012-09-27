@@ -19,6 +19,7 @@ package forge.game.limited;
 
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import java.util.List;
 
 import forge.Constant;
 import forge.Singletons;
@@ -43,6 +44,8 @@ public class GauntletMini {
     private int currentRound;
     private int wins;
     private int losses;
+    private GameType gauntletType;
+    private List<Deck> aiDecks;
 
     // private final String humanName;
     /**
@@ -52,7 +55,8 @@ public class GauntletMini {
         currentRound = 1;
         wins = 0;
         losses = 0;
-        // humanName = hName;
+        gauntletType = GameType.Sealed; // Assignable in launch();
+        aiDecks = null;
     }
 
     /**
@@ -63,7 +67,7 @@ public class GauntletMini {
      *          the number of rounds in the mini tournament
      */
 
-    public void setRounds(int gameRounds) {
+    private void setRounds(int gameRounds) {
         rounds = gameRounds;
     }
 
@@ -75,7 +79,7 @@ public class GauntletMini {
      * @param hDeck
      *          the human deck for this tournament
      */
-    public void setHumanDeck(Deck hDeck) {
+    private void setHumanDeck(Deck hDeck) {
         humanDeck = hDeck;
     }
 
@@ -86,13 +90,13 @@ public class GauntletMini {
         wins = 0;
         losses = 0;
         Constant.Runtime.HUMAN_DECK[0] = humanDeck;
-        Constant.Runtime.COMPUTER_DECK[0] = Singletons.getModel().getDecks().getSealed().get(humanDeck.getName()).getAiDecks().get(0);
+        Constant.Runtime.COMPUTER_DECK[0] = aiDecks.get(0);
         currentRound = 1;
     }
 
 
     /**
-     * Advances the tournamen to the next round.
+     * Advances the tournament to the next round.
      */
     public void nextRound() {
 
@@ -103,15 +107,44 @@ public class GauntletMini {
         }
 
         Constant.Runtime.HUMAN_DECK[0] = humanDeck;
-        Constant.Runtime.COMPUTER_DECK[0] = Singletons.getModel().getDecks().getSealed().get(humanDeck.getName()).getAiDecks().get(currentRound);
+        Constant.Runtime.COMPUTER_DECK[0] = aiDecks.get(currentRound);
         currentRound += 1;
 
     }
 
     /**
+     * 
+     * Setup and launch the gauntlet.
+     * Note: The AI decks are connected to the human deck.
+     * 
+     * @param gameRounds
+     *          the number of rounds (opponent decks) in this tournament
+     * @param hDeck
+     *          the human deck for this tournament
+     * @param gType
+     *          game type (Sealed, Draft, Constructed...)
+     */
+    public void launch(int gameRounds, Deck hDeck, final GameType gType) {
+        setHumanDeck(hDeck);
+        setRounds(gameRounds);
+        gauntletType = gType;
+        if (gauntletType == GameType.Sealed) {
+            aiDecks = Singletons.getModel().getDecks().getSealed().get(humanDeck.getName()).getAiDecks();
+        }
+        else if (gauntletType == GameType.Draft) {
+            aiDecks = Singletons.getModel().getDecks().getDraft().get(humanDeck.getName()).getAiDecks();
+        }
+        else {
+            throw new IllegalStateException("Cannot launch Gauntlet, game mode not implemented.");
+        }
+        resetCurrentRound();
+        start();
+    }
+
+    /**
      * Starts the tournament.
      */
-    public void launch() {
+    private void start() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -125,7 +158,7 @@ public class GauntletMini {
 
             public Object doInBackground() {
 
-                Constant.Runtime.setGameType(GameType.Sealed);
+                Constant.Runtime.setGameType(gauntletType);
 
                 GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
 
@@ -143,7 +176,7 @@ public class GauntletMini {
 
     /**
      * Returns the total number of rounds in the tournament.
-     * @return int, number of rounds in the Sealed Deck tournament
+     * @return int, number of rounds in the tournament
      */
     public final int getRounds() {
         return rounds;
@@ -151,7 +184,7 @@ public class GauntletMini {
 
     /**
      * Returns the number of the current round in the tournament.
-     * @return int, number of rounds in the Sealed Deck tournament
+     * @return int, number of rounds in the tournament
      */
     public final int getCurrentRound() {
         return currentRound;
