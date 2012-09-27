@@ -87,6 +87,40 @@ Fixes/Features:
 - fixed targeting up-to amounts on the stack
 - Fixed xCount "Kicked" (normal kicker) interfering with "TimesKicked" (multikicker)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Improved AI sacrificing stuff.
+- Temporarily removing references from Helm of Obedience, since apparently StoreSVar doesn't like working with References
+- reverted to old version before merging
+- converted Alter of the Lost and Orcish Lumberjack to combo mana keyword
+- merged changes from Trunk up to r17101
+- (Preparation of Branch merge)
+- Updating Blockdata, setInfoScript, and reprints
+- Another try at fixing the deckeditor filter.
+- Converted Time Spiral starage lands to script
+- Converted Coalition Relic to Combo mana
+- Fixed Zombies of Lim-Dul the Necromancer.
+- Blank Abilities used with Unless Costs will now know the Targets from the Source Ability
+- Check life cost now uses calculateAmount instead of xCount
+- Converted more combo mana cards
+- Fixing Dawn's Reflection trigger description
+- Actually adding Essence Vortex from a few commits ago
+- Added the new static ability CantAttackUnless.
+- Added Norn's Annex (once more with feeling).
+- Added "All creatures able to block CARDNAME do so." to NonStackingKWList.txt.
+- Removal of functions from forge.util.closure.Predicate in favour of Guava routines
+- Changed the quest deck Frankenstein 3 for better use of Brass Herald.
+- Cleanup.
+- Minor grammatical update to UI downloader progress text.
+- Fixed IsPresent in Aggression
+- Nettling Imp can only be activated on Opponent's turns
+- merged changes from Trunk up to r17126
+- Fixed casting cost of Double Negative
+- Fixed a silly typo in a comment in UnOpenedMeta.java.
+- Fixed Hazezon Tamar.
+- Sealed Deck gauntlets can now have up to 7 rounds, Draft support added to GauntletMini.java.
+- Fixed Marrow Chomper's etb trigger
+- Disabled tournament statistics, they are calculated incorrectly.
+- token downloads should work again now
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -235,6 +269,17 @@ Squeaking Pie Sneak
 Wren's Run Vanquisher
 Silvergill Adept
 Helm of Obedience
+Curse Artifact
+Burnt Offering
+Essence Vortex
+Dawn's Reflection
+Orcish Librarian
+Norn's Annex
+Goblin Sappers
+Norritt
+Nettling Imp
+Mindbreak Trap
+Thromok the Insatiable
 
 
 end
