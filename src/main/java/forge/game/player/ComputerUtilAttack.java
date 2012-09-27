@@ -237,6 +237,10 @@ public class ComputerUtilAttack {
         final CardList notNeededAsBlockers = new CardList(attackers);
         int fixedBlockers = 0;
         final CardList vigilantes = new CardList();
+        //check for time walks
+        if (Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(AllZone.getComputerPlayer())) {
+            return attackers;
+        }
         for (final Card c : this.computerList) {
             if (c.getName().equals("Masako the Humorless")) {
                 // "Tapped creatures you control can block as though they were untapped."
