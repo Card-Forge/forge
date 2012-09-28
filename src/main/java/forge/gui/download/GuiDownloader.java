@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.net.ConnectException;
+import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Proxy;
@@ -350,13 +351,26 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                     if (!base.exists() && !base.mkdir()) { // create folder if not found
                         System.out.println("Can't create folder" + base.getAbsolutePath());
                     }
-
-                    in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
+                    // Don't allow redirections here!
+                    
+                    URL imageUrl = new URL(url);
+                    HttpURLConnection conn = (HttpURLConnection)imageUrl.openConnection();
+                    conn.setInstanceFollowRedirects(false);
+                    conn.connect();
+                    
+                    if (conn.getResponseCode() != 200) {
+                        conn.disconnect();
+                        System.out.println("Skipped Download for: " + fileDest.getPath());
+                        continue;
+                    }
+                    
+                    in = new BufferedInputStream(conn.getInputStream());
                     out = new BufferedOutputStream(new FileOutputStream(fileDest));
 
                     while ((len = in.read(buf)) != -1) {
                         // user cancelled
                         if (this.cancel) {
+                            conn.disconnect();
                             in.close();
                             out.flush();
                             out.close();
@@ -369,7 +383,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
                         out.write(buf, 0, len);
                     } // while - read and write file
-
+                    conn.disconnect();
                     in.close();
                     out.flush();
                     out.close();
@@ -386,7 +400,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
                 // throttle -- why?
                 try {
-                    Thread.sleep(r.nextInt(750) + 420);
+                    Thread.sleep(r.nextInt(250) + 250);
                 } catch (final InterruptedException e) {
                     Log.error("GuiDownloader", "Sleep Error", e);
                 }
