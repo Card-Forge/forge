@@ -2536,6 +2536,7 @@ res/cardsfolder/d/dovescape.txt svneol=native#text/plain
 res/cardsfolder/d/downdraft.txt svneol=native#text/plain
 res/cardsfolder/d/downhill_charge.txt svneol=native#text/plain
 res/cardsfolder/d/downpour.txt -text
+res/cardsfolder/d/downsize.txt -text
 res/cardsfolder/d/dowsing_shaman.txt svneol=native#text/plain
 res/cardsfolder/d/draco.txt -text
 res/cardsfolder/d/draconian_cylix.txt svneol=native#text/plain
