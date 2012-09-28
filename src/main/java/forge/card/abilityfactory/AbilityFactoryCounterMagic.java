@@ -31,6 +31,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
+import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.game.player.ComputerUtil;
@@ -546,8 +547,15 @@ public class AbilityFactoryCounterMagic {
         } else if (this.destination.equals("Hand")) {
             Singletons.getModel().getGameAction().moveToHand(tgtSA.getSourceCard());
         } else if (this.destination.equals("Battlefield")) {
-            Card c = Singletons.getModel().getGameAction().moveToPlay(tgtSA.getSourceCard(), srcSA.getActivatingPlayer());
-            c.addController(srcSA.getActivatingPlayer());
+            if (tgtSA instanceof SpellPermanent) {
+                Card c = tgtSA.getSourceCard();
+                System.out.println(c + " is SpellPermanent");
+                c.addController(srcSA.getActivatingPlayer());
+                Singletons.getModel().getGameAction().moveToPlay(c, srcSA.getActivatingPlayer());
+            } else {
+                Card c = Singletons.getModel().getGameAction().moveToPlay(tgtSA.getSourceCard(), srcSA.getActivatingPlayer());
+                c.addController(srcSA.getActivatingPlayer());
+            }
         } else if (this.destination.equals("BottomOfLibrary")) {
             Singletons.getModel().getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
         } else if (this.destination.equals("ShuffleIntoLibrary")) {
