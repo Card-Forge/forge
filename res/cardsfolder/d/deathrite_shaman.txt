@@ -1,0 +1,14 @@
+Name:Deathrite Shaman
+ManaCost:BG
+Types:Creature Elf Shaman
+Text:no text
+PT:1/2
+A:AB$ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Land | TgtPrompt$ Select target land card in a graveyard | SubAbility$ DBMana | SpellDescription$ Exile target land card from a graveyard. Add one mana of any color to your mana pool.
+SVar:DBMana:DB$ Mana | Produced$ Any | Amount$ 1
+A:AB$ChangeZone | Cost$ B T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target instant or sorcery card in a graveyard | SubAbility$ DBLoseLife | SpellDescription$ Exile target instant or sorcery card from a graveyard. Each opponent loses 2 life.
+SVar:DBLoseLife:DB$ LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 2
+A:AB$ChangeZone | Cost$ G T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select target creature card in a graveyard | SubAbility$ DBGainLife | SpellDescription$ Exile target creature card from a graveyard. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathrite_shaman.jpg
+End

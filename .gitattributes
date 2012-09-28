@@ -956,6 +956,7 @@ res/cardsfolder/b/blinkmoth_nexus.txt svneol=native#text/plain
 res/cardsfolder/b/blinkmoth_urn.txt svneol=native#text/plain
 res/cardsfolder/b/blinkmoth_well.txt svneol=native#text/plain
 res/cardsfolder/b/blister_beetle.txt svneol=native#text/plain
+res/cardsfolder/b/blistercoil_weird.txt -text
 res/cardsfolder/b/blistergrub.txt svneol=native#text/plain
 res/cardsfolder/b/blistering_barrier.txt svneol=native#text/plain
 res/cardsfolder/b/blistering_dieflyn.txt svneol=native#text/plain
@@ -2236,6 +2237,7 @@ res/cardsfolder/d/deathmark.txt svneol=native#text/plain
 res/cardsfolder/d/deathmark_prelate.txt svneol=native#text/plain
 res/cardsfolder/d/deathmask_nezumi.txt svneol=native#text/plain
 res/cardsfolder/d/deathrender.txt -text
+res/cardsfolder/d/deathrite_shaman.txt -text
 res/cardsfolder/d/deaths_caress.txt -text
 res/cardsfolder/d/deaths_duet.txt svneol=native#text/plain
 res/cardsfolder/d/deaths_head_buzzard.txt svneol=native#text/plain
@@ -3573,6 +3575,7 @@ res/cardsfolder/f/frost_marsh.txt svneol=native#text/plain
 res/cardsfolder/f/frost_ogre.txt svneol=native#text/plain
 res/cardsfolder/f/frost_raptor.txt svneol=native#text/plain
 res/cardsfolder/f/frost_titan.txt svneol=native#text/plain
+res/cardsfolder/f/frostburn_weird.txt -text
 res/cardsfolder/f/frostling.txt svneol=native#text/plain
 res/cardsfolder/f/frostweb_spider.txt svneol=native#text/plain
 res/cardsfolder/f/frostwind_invoker.txt svneol=native#text/plain
