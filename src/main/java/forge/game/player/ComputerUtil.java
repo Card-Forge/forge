@@ -37,6 +37,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.cost.CostDiscard;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPayLife;
@@ -1298,8 +1299,9 @@ public class ComputerUtil {
         if (!computer.canPlayLand()) {
             return false;
         }
-        CardList landList = computer.getCardsIn(ZoneType.Hand);
-        landList = landList.filter(Presets.LANDS);
+        final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+        CardList landList = hand.filter(Presets.LANDS);
+        CardList nonLandList = hand.filter(Presets.NON_LANDS);
 
         final CardList lands = computer.getCardsIn(ZoneType.Graveyard);
         for (final Card crd : lands) {
@@ -1307,6 +1309,32 @@ public class ComputerUtil {
                 landList.add(crd);
             }
         }
+        if (landList.isEmpty()) {
+            return false;
+        }
+        if (landList.size() == 1 && nonLandList.size() < 3) {
+            CardList cardsInPlay = computer.getCardsIn(ZoneType.Battlefield);
+            CardList landsInPlay = cardsInPlay.filter(Presets.LANDS);
+            CardList allCards = computer.getCardsIn(ZoneType.Graveyard);
+            allCards.addAll(cardsInPlay);
+            int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
+            int max = Math.max(maxCmcInHand, 6);
+            // consider not playing lands if there are enough already and an ability with a discard cost is present
+            if (landsInPlay.size() + landList.size() > max) {
+                for (Card c : allCards) {
+                    for (SpellAbility sa : c.getSpellAbilities()) {
+                        if (sa.getPayCosts() != null) {
+                            for (CostPart part : sa.getPayCosts().getCostParts()) {
+                                if (part instanceof CostDiscard) {
+                                    return false; 
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
 
         landList = landList.filter(new Predicate<Card>() {
             @Override
@@ -1444,20 +1472,33 @@ public class ComputerUtil {
             }
         }
 
-        if (pref.contains("DiscardCost")) { // search for permanents with
+        else if (pref.contains("DiscardCost")) { // search for permanents with
                                             // DiscardMe
-            for (int ip = 0; ip < 9; ip++) { // priority 0 is the lowest,
+            for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest,
                                              // priority 5 the highest
-                final int priority = 9 - ip;
-                final CardList sacMeList = typeList.filter(new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return (!c.getSVar("DiscardMe").equals("") && (Integer.parseInt(c.getSVar("DiscardMe")) == priority));
+                final int priority = 6 - ip;
+                for (Card c : typeList) {
+                    if (priority == 3 && c.isLand() 
+                            && !AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Crucible of Worlds").isEmpty()) {
+                        return c;
                     }
-                });
-                if (sacMeList.size() != 0) {
-                    sacMeList.shuffle();
-                    return sacMeList.get(0);
+                    if (!c.getSVar("DiscardMe").equals("") && (Integer.parseInt(c.getSVar("DiscardMe")) == priority)) {
+                        return c;
+                    }
+                }
+            }
+            System.out.println("DiscardCost" + typeList);
+
+            // Discard lands 
+            final CardList landsInHand = typeList.getType("Land");
+            if (!landsInHand.isEmpty()) {
+                final CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land");
+                final CardList nonLandsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getNotType("Land");
+                final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
+                if (landsInPlay.size() >= highestCMC
+                        || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)) {
+                    // Don't need more land.
+                    return CardFactoryUtil.getWorstLand(landsInHand);
                 }
             }
         }
