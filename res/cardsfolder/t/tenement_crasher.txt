@@ -1,0 +1,11 @@
+Name:Tenement Crasher
+ManaCost:5 R
+Types:Creature Beast
+Text:no text
+PT:5/4
+K:Haste
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tenement_crasher.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/108.jpg
+Oracle:Haste
+End

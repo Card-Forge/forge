@@ -1,0 +1,22 @@
+Name:Jace, Architect of Thought
+ManaCost:2 U U
+Types:Planeswalker Jace
+Text:no text
+Loyalty:4
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Triggers$ TrigAttack | SVars$ JacePump | Duration$ UntilYourNextTurn | Name$ Jace, Architect of Thought Effect | SpellDescription$ Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl | TriggerZones$ Battlefield | Execute$ JacePump | TriggerDescription$ Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
+SVar:JacePump:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ -1
+A:AB$ Dig | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | DigNum$ 3 | Reveal$ True | RememberRevealed$ True | NoMove$ True | SubAbility$ DBTwoPiles | SpellDescription$ Reveal the top three cards of your library. An opponent separates them into two piles. Put one pile into your hand and the other on the bottom of your library in any order.
+SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Opponent | ChosenPile$ DBHand | UnchosenPile$ DBLibraryBottom
+SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand
+SVar:DBLibraryBottom:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | SubAbility$ DBCleanup
+A:AB$ ChangeZone | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Origin$ Library | Destination$ Exile | DefinedPlayer$ Opponent | Chooser$ You | ChangeType$  Card.nonLand | ChangeNum$ 1 | RememberChanged$ True | Shuffle$ True | SubAbility$ JaceYourself | SpellDescription$ For each player, search that player's library for a nonland card and exile it, then that player shuffles his or her library. You may cast those cards without paying their mana costs.
+SVar:JaceYourself:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ You | ChangeType$  Card.nonLand | ChangeNum$ 1 | RememberChanged$ True | Shuffle$ True | SubAbility$ DBPlayIT
+SVar:DBPlayIT:DB$ Play | Defined$ Remembered | Amount$ Thoughts | References$ Thoughts | Controller$ You | WithoutManaCost$ True | Optional$ True | RememberPlayed$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Thoughts:Remembered$Amount
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_architect_of_thought.jpg
+SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/44.jpg
+Oracle:[+1] Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.\n[-2] Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.\n[-8] For each player, search that player's library for a nonland card and exile it, then that player shuffles his or her library. You may cast those cards without paying their mana costs.
+End

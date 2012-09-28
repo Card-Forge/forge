@@ -1,0 +1,12 @@
+Name:Terrus Wurm
+ManaCost:6 B
+Types:Creature Zombie Wurm
+Text:no text
+PT:5/5
+A:AB$ PutCounter | Cost$ 6 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | SorcerySpeed$ True | References$ X | PrecostDesc$ Scavenge | SpellDescription$ Put a number of +1/+1 counter's equal to this card's power on target creature. Scavenge only as a sorcery.
+SVar:X:Count$CardPower
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/terrus_wurm.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/80.jpg
+Oracle:Scavenge {6}{B} ({6}{B}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
+End

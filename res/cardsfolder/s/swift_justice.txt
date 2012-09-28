@@ -1,0 +1,10 @@
+Name:Swift Justice
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ W | ValidTgts$ Creature | AILogic$ Pump | NumAtt$ +1 | KW$ First Strike & Lifelink | SpellDescription$ Until end of turn, target creature gets +1/+0 and gains first strike and lifelink.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swift_justice.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/26.jpg
+Oracle:Until end of turn, target creature gets +1/+0 and gains first strike and lifelink.
+End

@@ -1,0 +1,11 @@
+Name:Rogue's Passage
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Pump | Cost$ 4 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature is unblockable this turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rogues_passage.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/245.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{4}, {T}: Target creature is unblockable this turn.
+End

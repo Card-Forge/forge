@@ -1,0 +1,14 @@
+Name:Palisade Giant
+ManaCost:4 W W
+Types:Creature Giant Soldier
+Text:no text
+PT:2/7
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You,Permanent.Other+YouCtrl | ReplaceWith$ DmgMe | IsCombat$ False | Description$ All damage that would be dealt to you or another permanent you control is dealt to CARDNAME instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You,Permanent.Other+YouCtrl | ReplaceWith$ DmgMeCombat | IsCombat$ True | Secondary$ True | Description$ All damage that would be dealt to you or another permanent you control is dealt to CARDNAME instead.
+SVar:DmgMe:AB$ DealDamage | Cost$ 0 | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:DmgMeCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:X:ReplaceCount$DamageAmount
+SVar:Picture:http://www.wizards.com/global/images/magic/general/palisade_giant.jpg
+SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/15.jpg
+Oracle:All damage that would be dealt to you or another permanent you control is dealt to Palisade Giant instead.
+End

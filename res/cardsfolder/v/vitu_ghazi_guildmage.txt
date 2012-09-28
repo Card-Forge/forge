@@ -1,0 +1,14 @@
+Name:Vitu-Ghazi Guildmage
+ManaCost:G W
+Types:Creature Dryad Shaman
+Text:no text
+PT:2/2
+A:AB$ Token | Cost$ 4 G W | TokenAmount$ 1 | TokenName$ Centaur | TokenTypes$ Creature,Centaur | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put a 3/3 green Centaur creature token onto the battlefield.
+A:AB$ ChooseCard | Cost$ 2 G W | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ AtLeast1 | SpellDescription$ Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | NumCopies$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vitu_ghazi_guildmage.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/207.jpg
+Oracle:{4}{G}{W}: Put a 3/3 green Centaur creature token onto the battlefield.\n{2}{G}{W}: Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+End

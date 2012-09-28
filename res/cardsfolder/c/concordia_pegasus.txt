@@ -1,0 +1,11 @@
+Name:Concordia Pegasus
+ManaCost:1 W
+Types:Creature Pegasus
+Text:no text
+PT:1/3
+K:Flying
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/concordia_pegasus.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/8.jpg
+Oracle:Flying
+End

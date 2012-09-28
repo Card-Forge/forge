@@ -1,0 +1,10 @@
+Name:Cobblebrute
+ManaCost:3 R
+Types:Creature Elemental
+Text:no text
+PT:5/2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cobblebrute.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/91.jpg
+Oracle:
+End

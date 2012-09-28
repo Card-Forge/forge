@@ -1,0 +1,12 @@
+Name:Keening Apparition
+ManaCost:1 W
+Types:Creature Spirit
+Text:no text
+PT:2/2
+A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/keening_apparition.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/12.jpg
+Oracle:Sacrifice Keening Apparition: Destroy target enchantment.
+End

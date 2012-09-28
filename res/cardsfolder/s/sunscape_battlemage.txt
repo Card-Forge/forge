@@ -6,9 +6,9 @@ PT:2/2
 K:Kicker 2 U
 K:Kicker 1 G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked 2 U | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its 2 U kicker, draw two cards.
-SVar:TrigKicker:DB$ Draw | Cost$ 0 | NumCards$ 2
+SVar:TrigKicker:DB$Draw | Cost$ 0 | NumCards$ 2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked 1 G | Execute$ TrigKicker2 | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its 1 G kicker, destroy target creature with flying.
-SVar:TrigKicker2:DB$ Destroy | Cost$ 0 | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying
+SVar:TrigKicker2:DB$Destroy | Cost$ 0 | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunscape_battlemage.jpg

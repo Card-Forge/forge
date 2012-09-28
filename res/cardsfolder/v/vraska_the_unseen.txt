@@ -1,0 +1,18 @@
+Name:Vraska the Unseen
+ManaCost:3 B G
+Types:Planeswalker Vraska
+Text:no text
+Loyalty:5
+A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Self | Triggers$ TrigVraska | sVars$ VraskaGaze | UntilYourNextTurn$ True | SpellDescription$ Until your next turn, whenever a creature deals combat damage to CARDNAME, destroy that creature. | StackDescription$ Until your next turn, whenever a creature deals combat damage to CARDNAME, destroy that creature.
+SVar:TrigVraska:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Card.Self | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ VraskaGaze | TriggerDescription$ Until your next turn, whenever a creature deals combat damage to CARDNAME, destroy that creature.
+SVar:VraskaGaze:AB$ Destroy | Cost$ 0 | Defined$ TriggeredSource
+A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Destroy target nonland permanent.
+A:AB$ Token | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | TokenAmount$ 3 | TokenName$ Assassin | TokenTypes$ Creature,Assassin | TokenOwner$ You | TokenImage$ B 1 1 Assassin | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | TokenTriggers$ TrigAssassin | TokenSVars$ Assassination,MustBeBlocked | SpellDescription$ Put three 1/1 black Assassin creature tokens onto the battlefield with "Whenever this creature deals combat damage to a player, that player loses the game."
+SVar:TrigAssassin:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ Assassination | TriggerDescription$ Whenever this creature deals combat damage to a player, that player loses the game.
+SVar:Assassination:DB$ LosesGame | Defined$ TriggeredTarget
+SVar:MustBeBlocked:True
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vraska_the_unseen.jpg
+SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/208.jpg
+Oracle:[+1] Until your next turn, whenever a creature deals combat damage to Vraska the Unseen, destroy that creature.\n[-3] Destroy target nonland permanent.\n[-7] Put three 1/1 black Assassin creature tokens onto the battlefield with "Whenever this creature deals combat damage to a player, that player loses the game."
+End

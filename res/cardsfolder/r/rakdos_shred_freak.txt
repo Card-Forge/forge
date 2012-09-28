@@ -1,0 +1,11 @@
+Name:Rakdos Shred-Freak
+ManaCost:BR BR
+Types:Creature Human Berserker
+Text:no text
+PT:2/1
+K:Haste
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_shred_freak.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/221.jpg
+Oracle:Haste
+End

@@ -1,0 +1,12 @@
+Name:Hover Barrier
+ManaCost:2 U
+Types:Creature Illusion Wall
+Text:no text
+PT:0/6
+K:Flying
+K:Defender
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hover_barrier.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/40.jpg
+Oracle:Defender, flying
+End

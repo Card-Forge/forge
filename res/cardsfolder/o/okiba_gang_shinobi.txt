@@ -6,7 +6,6 @@ PT:3/2
 A:AB$ ChangeZone | Cost$ 3 B Return<1/Creature.attacking+unblocked> | CostDesc$ Ninjutsu 3 B | ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True | Destination$ Battlefield | Defined$ Self | SpellDescription$ (3 B, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards two cards.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 2 | Mode$ TgtChoose
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/okiba_gang_shinobi.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/76.jpg

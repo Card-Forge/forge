@@ -1,0 +1,12 @@
+Name:Sphinx's Revelation
+ManaCost:X W U U
+Types:Instant
+Text:no text
+A:SP$ GainLife | Cost$ X W U U | LifeAmount$ X | References$ X | SubAbility$ DBDraw | SpellDescription$ You gain X life and draw X cards.
+SVar:DBDraw:DB$Draw | NumCards$ X | References$ X
+SVar:X:Count$xPaid
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinxs_revelation.jpg
+SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/200.jpg
+Oracle:You gain X life and draw X cards.
+End

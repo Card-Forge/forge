@@ -1,0 +1,10 @@
+Name:Auger Spree
+ManaCost:1 U R
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 U R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets +4/-4 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/auger_spree.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/144.jpg
+Oracle:Target creature gets +4/-4 until end of turn.
+End

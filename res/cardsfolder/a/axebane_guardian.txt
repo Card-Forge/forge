@@ -1,0 +1,13 @@
+Name:Axebane Guardian
+ManaCost:2 G
+Types:Creature Human Druid
+Text:no text
+PT:0/3
+K:Defender
+A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ X | References$ X | SpellDescription$ Add X mana in any combination of colors to your mana pool, where X is the number of creatures with defender you control.
+SVar:X:Count$Valid Creature.withDefender+YouCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/axebane_guardian.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/115.jpg
+Oracle:Defender\n{T}: Add X mana in any combination of colors to your mana pool, where X is the number of creatures with defender you control.
+End

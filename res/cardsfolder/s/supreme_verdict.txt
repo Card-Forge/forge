@@ -1,0 +1,11 @@
+Name:Supreme Verdict
+ManaCost:1 W W U
+Types:Sorcery
+Text:no text
+K:CARDNAME can't be countered.
+A:SP$ DestroyAll | Cost$ 1 W W U | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/supreme_verdict.jpg
+SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/201.jpg
+Oracle:Supreme Verdict can't be countered.\nDestroy all creatures.
+End

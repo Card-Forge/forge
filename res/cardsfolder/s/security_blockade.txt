@@ -1,0 +1,15 @@
+Name:Security Blockade
+ManaCost:2 W
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ 2 W | ValidTgts$ Land | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ PreventDamage | Description$ Enchanted land has "Tap: Prevent the next 1 damage that would be dealt to you this turn."
+SVar:PreventDamage:AB$ PreventDamage | Cost$ T | Defined$ You | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to you this turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 2/2 white Knight creature token with vigilance onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Knight | TokenTypes$ Creature,Knight | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Vigilance
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/security_blockade.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/20.jpg
+Oracle:Enchant land\nWhen Security Blockade enters the battlefield, put a 2/2 white Knight creature token with vigilance onto the battlefield.\nEnchanted land has "{T}: Prevent the next 1 damage that would be dealt to you this turn."
+End

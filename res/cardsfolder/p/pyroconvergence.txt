@@ -1,0 +1,12 @@
+Name:Pyroconvergence
+ManaCost:4 R
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a multicolored spell, CARDNAME deals 2 damage to target creature or player.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0| Tgt$ TgtCP | NumDmg$ 2
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pyroconvergence.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/103.jpg
+Oracle:Whenever you cast a multicolored spell, Pyroconvergence deals 2 damage to target creature or player.
+End

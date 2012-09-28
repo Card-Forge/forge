@@ -1,0 +1,11 @@
+Name:Grove of the Guardian
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Token | Cost$ 3 G W T tapXType<2/Creature> Sac<1/CARDNAME> | CostDesc$ 3 G W T, Tap two untapped creatures you control, sacrifice CARDNAME: | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Green,White | TokenPower$ 8 | TokenToughness$ 8 | TokenKeywords$ Vigilance | SpellDescription$ Put an 8/8 green and white Elemental creature token with vigilance onto the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grove_of_the_guardian.jpg
+SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/240.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{3}{G}{W}, {T}, Tap two untapped creatures you control, Sacrifice Grove of the Guardian: Put an 8/8 green and white Elemental creature token with vigilance onto the battlefield.
+End
