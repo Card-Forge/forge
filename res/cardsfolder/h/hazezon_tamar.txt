@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | ValidCard$ Creature.Self | Origin$ Any | Destination$ Batt
 SVar:DelTrig: Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigTokens | TriggerController$ TriggeredCardController | TriggerDescription$ Create a 1/1 GRW Sand Warrior token for each land you control.
 SVar:TrigTokens:AB$ Token | Cost$ 0 | TokenAmount$ X | TokenName$ Sand Warrior | TokenTypes$ Creature,Sand,Warrior | TokenOwner$ TriggeredCardController | TokenColors$ Green,Red,White | TokenPower$ 1 | TokenToughness$ 1 | References$ X
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigExile | TriggerDescription$ When Hazezon leaves the battlefield, exile all Sand Warriors.
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ChangeType$ Sand.Warrior
+SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ChangeType$ Sand.Warrior
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hazezon_tamar.jpg
