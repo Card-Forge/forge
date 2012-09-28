@@ -86,8 +86,7 @@ public enum FModel {
     private final IStorageView<CardBlock> blocks;
     private final IStorageView<CardBlock> fantasyBlocks;
 
-    // have to implement lazy initialization - at the moment of FModel.ctor()
-    // CardDb is not ready yet.
+    // Lazy, since CardDb not ready.
     private CardCollections decks;
 
     /**

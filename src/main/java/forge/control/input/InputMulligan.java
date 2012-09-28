@@ -63,7 +63,11 @@ public class InputMulligan extends Input {
         ButtonUtil.enableAll();
         VMatchUI.SINGLETON_INSTANCE.getBtnOK().setText("No");
         VMatchUI.SINGLETON_INSTANCE.getBtnCancel().setText("Yes");
-        CMatchUI.SINGLETON_INSTANCE.showMessage("Do you want to Mulligan?");
+
+        final String str =
+                (Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().equals(AllZone.getHumanPlayer())
+                        ? "You're going first. " : "The computer is going first. ");
+        CMatchUI.SINGLETON_INSTANCE.showMessage(str + "Do you want to Mulligan?");
     }
 
     /** {@inheritDoc} */
