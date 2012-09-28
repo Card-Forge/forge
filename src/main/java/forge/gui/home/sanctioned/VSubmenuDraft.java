@@ -48,6 +48,7 @@ public enum VSubmenuDraft implements IVSubmenu {
 
     /** */
     private final StartButton btnStart  = new StartButton();
+    private final JButton btnPlayThisOpponent = new JButton("Play this opponent");
     private final DeckLister lstHumanDecks = new DeckLister(GameType.Draft);
     private final JList lstAI           = new FList();
 
@@ -111,6 +112,11 @@ public enum VSubmenuDraft implements IVSubmenu {
     /** @return {@link javax.swing.JButton} */
     public JButton getBtnStart() {
         return this.btnStart;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnPlayThisOpponent() {
+        return this.btnPlayThisOpponent;
     }
 
     /** @return {@link javax.swing.JList} */
@@ -195,7 +201,8 @@ public enum VSubmenuDraft implements IVSubmenu {
 
         parentCell.getBody().add(btnBuildDeck, "w 60%!, h 5%!, gap 5% 5% 0 0, wrap");
         parentCell.getBody().add(btnDirections, "alignx center, span 2 1, gap 5% 5% 5% 2%, wrap");
-        parentCell.getBody().add(btnStart, "gap 5% 5% 0 0, ax center, span 2 1, wrap");
+        parentCell.getBody().add(btnStart, "gap 5% 5% 0 0, ax center, span 2 1");
+        parentCell.getBody().add((btnPlayThisOpponent), "cell 1 3, ax center, wrap");
     }
 
     /* (non-Javadoc)

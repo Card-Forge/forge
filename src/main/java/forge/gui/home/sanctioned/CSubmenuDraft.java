@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
@@ -106,7 +107,20 @@ public enum CSubmenuDraft implements ICDoc {
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run() {
-                                startGame();
+                                startGame(true);
+                            }
+                        });
+                    }
+                });
+
+        view.getBtnPlayThisOpponent().addMouseListener(
+                new MouseAdapter() {
+                    @Override
+                    public void mouseReleased(final MouseEvent e) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                startGame(false);
                             }
                         });
                     }
@@ -149,7 +163,7 @@ public enum CSubmenuDraft implements ICDoc {
         }
     }
 
-    private void startGame() {
+    private void startGame(final boolean gauntlet) {
         final Deck human = VSubmenuDraft.SINGLETON_INSTANCE.getLstHumanDecks().getSelectedDeck();
         final int aiIndex = VSubmenuDraft.SINGLETON_INSTANCE.getLstAIDecks().getSelectedIndex();
 
@@ -164,6 +178,14 @@ public enum CSubmenuDraft implements ICDoc {
                     "The selected deck doesn't have enough cards to play (minimum 40)."
                     + "\r\nUse the deck editor to choose the cards you want before starting.",
                     "No deck", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        AllZone.getGauntlet().resetGauntletDraft();
+
+        if (gauntlet) {
+            int rounds = Singletons.getModel().getDecks().getDraft().get(human.getName()).getAiDecks().size();
+            AllZone.getGauntlet().launch(rounds, human, GameType.Draft);
             return;
         }
 

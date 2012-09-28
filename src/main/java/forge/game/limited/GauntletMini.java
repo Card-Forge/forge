@@ -44,6 +44,7 @@ public class GauntletMini {
     private int currentRound;
     private int wins;
     private int losses;
+    private boolean gauntletDraft; // Means: Draft game is in Gauntlet-mode, not a single match
     private GameType gauntletType;
     private List<Deck> aiDecks;
 
@@ -53,6 +54,7 @@ public class GauntletMini {
      */
     public void gauntletMini() {
         currentRound = 1;
+        gauntletDraft = false;
         wins = 0;
         losses = 0;
         gauntletType = GameType.Sealed; // Assignable in launch();
@@ -132,6 +134,7 @@ public class GauntletMini {
             aiDecks = Singletons.getModel().getDecks().getSealed().get(humanDeck.getName()).getAiDecks();
         }
         else if (gauntletType == GameType.Draft) {
+            gauntletDraft = true;
             aiDecks = Singletons.getModel().getDecks().getDraft().get(humanDeck.getName()).getAiDecks();
         }
         else {
@@ -218,6 +221,21 @@ public class GauntletMini {
      */
     public final int getLosses() {
         return losses;
+    }
+
+    /**
+     * Resets the gauntletDraft value.
+     */
+    public void resetGauntletDraft() {
+        gauntletDraft = false;
+    }
+
+    /**
+     * Draft mode status.
+     * @return boolean, gauntletDraft
+     */
+    public final boolean getGauntletDraft() {
+        return gauntletDraft;
     }
 
 }

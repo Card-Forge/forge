@@ -58,7 +58,9 @@ public class ViewWinLose {
         if (Constant.Runtime.getGameType() == GameType.Quest) {
             control = new QuestWinLoseHandler(this);
         }
-        else if (Constant.Runtime.getGameType() == GameType.Sealed) {
+        else if ((Constant.Runtime.getGameType() == GameType.Sealed)
+                || (Constant.Runtime.getGameType() == GameType.Draft && AllZone.getGauntlet().getGauntletDraft())) {
+
             control = new GauntletWinLose(this);
         }
         else {
