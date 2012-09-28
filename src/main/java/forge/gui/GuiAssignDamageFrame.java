@@ -78,9 +78,9 @@ public class GuiAssignDamageFrame extends JFrame {
     private UnsortedListModel recipientsListModel = new UnsortedListModel();
     private final JList recipientsList = new JList(recipientsListModel);
     
-    private final JButton oneDamageButton = new JButton("1");
-    private final JButton remainingDamageButton = new JButton("Remaining");
-    private final JButton nextButton = new JButton("Next");
+    private final JButton oneDamageButton = new JButton("Assign 1");
+    private final JButton remainingDamageButton = new JButton("Assign Remaining");
+    private final JButton nextButton = new JButton("Next Combatant");
 
     /**
      * <p>
@@ -294,7 +294,7 @@ public class GuiAssignDamageFrame extends JFrame {
             lethal = 1;
         }
 
-        this.remainingDamageButton.setText("Remaining("+String.valueOf(this.assignDamage)+")");
+        this.remainingDamageButton.setText("Assign Remaining("+String.valueOf(this.assignDamage)+")");
         this.nextButton.setEnabled(this.assignedToActive >= lethal);
     }
     
