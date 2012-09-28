@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
@@ -1304,7 +1305,7 @@ public class ComputerUtil {
         }
         final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
         CardList landList = hand.filter(Presets.LANDS);
-        CardList nonLandList = hand.filter(Presets.NON_LANDS);
+        CardList nonLandList = hand.filter(Predicates.not(CardPredicates.Presets.LANDS));
 
         final CardList lands = computer.getCardsIn(ZoneType.Graveyard);
         for (final Card crd : lands) {
