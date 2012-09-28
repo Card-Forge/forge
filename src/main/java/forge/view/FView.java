@@ -24,6 +24,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.SLayoutConstants;
 import forge.gui.home.CMainMenu;
 import forge.gui.home.VHomeUI;
+import forge.gui.match.TargetingOverlay;
 import forge.gui.match.VMatchUI;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
@@ -33,6 +34,9 @@ import forge.gui.toolbox.FSkin;
 public enum FView {
     /** */
     SINGLETON_INSTANCE;
+
+    /** */
+    public static final Integer TARGETING_LAYER = JLayeredPane.MODAL_LAYER - 1;
     private final List<DragCell> allCells = new ArrayList<DragCell>();
     private SplashFrame splash;
 
@@ -73,6 +77,10 @@ public enum FView {
         lpnDocument.add(pnlPreview, (Integer) 2);
         lpnDocument.add(pnlTabOverflow, (Integer) 3);
         lpnDocument.add(FOverlay.SINGLETON_INSTANCE.getPanel(), JLayeredPane.MODAL_LAYER);
+        // Note: when adding new panels here, keep in mind that the layered pane
+        // has a null layout, so new components will be (0,0) - gotcha!
+        // FControl has a method called "sizeComponents" which will fix this.
+        lpnDocument.add(TargetingOverlay.SINGLETON_INSTANCE.getPanel(), TARGETING_LAYER);
 
         pnlInsets.add(pnlContent, BorderLayout.CENTER);
         pnlInsets.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));

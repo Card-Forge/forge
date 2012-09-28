@@ -256,11 +256,12 @@ public enum FControl {
     /** Sizes children of JLayeredPane to fully fit their layers. */
     private void sizeChildren() {
         Component[] children = display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
-        if (children.length == 0) { return; }
-        children[0].setSize(display.getSize());
+        if (children.length != 0) { children[0].setSize(display.getSize()); }
+
+        children = display.getComponentsInLayer(FView.TARGETING_LAYER);
+        if (children.length != 0) { children[0].setSize(display.getSize()); }
 
         children = display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
-        if (children.length == 0) { return; }
-        children[0].setSize(display.getSize());
+        if (children.length != 0) { children[0].setSize(display.getSize()); }
     }
 }

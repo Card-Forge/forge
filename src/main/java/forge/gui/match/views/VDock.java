@@ -67,6 +67,8 @@ public enum VDock implements IVDoc {
             new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_SAVELAYOUT), "Save Layout");
     private final JLabel btnAlphaStrike =
             new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_ALPHASTRIKE), "Alpha Strike");
+    private final JLabel btnTargeting =
+            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_TARGETING), "Show Targeting Arcs");
 
     //========= Overridden methods
 
@@ -88,6 +90,7 @@ public enum VDock implements IVDoc {
         pnl.add(btnOpenLayout);
         pnl.add(btnSaveLayout);
         pnl.add(btnAlphaStrike);
+        pnl.add(btnTargeting);
     }
 
     /* (non-Javadoc)
@@ -170,6 +173,11 @@ public enum VDock implements IVDoc {
     /** @return {@link javax.swing.JLabel} */
     public JLabel getBtnAlphaStrike() {
         return btnAlphaStrike;
+    }
+
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getBtnTargeting() {
+        return btnTargeting;
     }
 
     //========= Custom class handling

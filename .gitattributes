@@ -12465,6 +12465,7 @@ src/main/java/forge/gui/match/ControlWinLose.java -text
 src/main/java/forge/gui/match/GauntletWinLose.java -text
 src/main/java/forge/gui/match/QuestWinLoseCardViewer.java -text
 src/main/java/forge/gui/match/QuestWinLoseHandler.java -text
+src/main/java/forge/gui/match/TargetingOverlay.java -text
 src/main/java/forge/gui/match/VMatchUI.java -text
 src/main/java/forge/gui/match/ViewWinLose.java -text
 src/main/java/forge/gui/match/controllers/CAntes.java -text

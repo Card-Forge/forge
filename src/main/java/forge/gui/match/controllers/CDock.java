@@ -47,11 +47,14 @@ import forge.gui.ForgeAction;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
+import forge.gui.match.TargetingOverlay;
 import forge.gui.match.views.VDock;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.SaveOpenDialog;
 import forge.gui.toolbox.SaveOpenDialog.Filetypes;
 import forge.item.CardPrinted;
+import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.view.FView;
 
@@ -141,23 +144,37 @@ public enum CDock implements ICDoc {
     private void viewDeckList() {
         new DeckListAction(NewConstants.Lang.GuiDisplay.HUMAN_DECKLIST).actionPerformed(null);
     }
-    
-    /** Attack with everyone */
+
+    /** Attack with everyone. */
     public void alphaStrike() {
-        PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
-        
-        Player human = AllZone.getHumanPlayer();
-        
+        final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
+
+        final Player human = AllZone.getHumanPlayer();
+
         if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, human)) {
-            for(Card c : human.getCardsIn(ZoneType.Battlefield).filter(Presets.CREATURES)) {
+            for (Card c : human.getCardsIn(ZoneType.Battlefield).filter(Presets.CREATURES)) {
                 if (!c.isAttacking() && CombatUtil.canAttack(c, AllZone.getCombat())) {
                     AllZone.getCombat().addAttacker(c);
                 }
             }
             //human.updateObservers();
+
             // TODO Is this redrawing immediately?
             FView.SINGLETON_INSTANCE.getFrame().repaint();
         }
+    }
+
+    /** Toggle targeting overlay painting. */
+    public void toggleTargeting() {
+        if (Boolean.valueOf(FModel.SINGLETON_INSTANCE.getPreferences().getPref(FPref.UI_TARGETING_OVERLAY))) {
+            FModel.SINGLETON_INSTANCE.getPreferences().setPref(FPref.UI_TARGETING_OVERLAY, "false");
+        }
+        else {
+            FModel.SINGLETON_INSTANCE.getPreferences().setPref(FPref.UI_TARGETING_OVERLAY, "true");
+        }
+
+        FModel.SINGLETON_INSTANCE.getPreferences().save();
+        TargetingOverlay.SINGLETON_INSTANCE.getPanel().repaint();
     }
 
     /**
@@ -282,11 +299,16 @@ public enum CDock implements ICDoc {
         .addMouseListener(new MouseAdapter() { @Override
             public void mousePressed(final MouseEvent e) {
                 saveLayout(); } });
-        
+
         VDock.SINGLETON_INSTANCE.getBtnAlphaStrike()
         .addMouseListener(new MouseAdapter() { @Override
             public void mousePressed(final MouseEvent e) {
                 alphaStrike(); } });
+
+        VDock.SINGLETON_INSTANCE.getBtnTargeting()
+        .addMouseListener(new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                toggleTargeting(); } });
     }
 
     /* (non-Javadoc)
