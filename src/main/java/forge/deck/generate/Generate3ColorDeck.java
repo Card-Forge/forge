@@ -20,7 +20,6 @@ package forge.deck.generate;
 import java.util.Arrays;
 import java.util.List;
 import forge.card.CardColor;
-import forge.card.CardRules;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.error.ErrorViewer;
 import forge.game.player.PlayerType;
@@ -37,10 +36,6 @@ import forge.properties.ForgeProps;
  * @version $Id$
  */
 public class Generate3ColorDeck extends GenerateColoredDeckBase {
-    private final float landsPercentage = .44f;
-    private final float creatPercentage = .34f;
-    private final float spellPercentage = .22f;
-
     final List<FilterCMC> cmcLevels = Arrays.asList(
         new GenerateDeckUtil.FilterCMC(0, 2),
         new GenerateDeckUtil.FilterCMC(3, 5),
@@ -81,21 +76,10 @@ public class Generate3ColorDeck extends GenerateColoredDeckBase {
      * @return a {@link forge.CardList} object.
      */
     public final ItemPoolView<CardPrinted> get3ColorDeck(final int size, final PlayerType pt) {
-        List<CardPrinted> cards = selectCardsOfMatchingColorForPlayer(pt);
-        // build subsets based on type
-        final List<CardPrinted> creatures = CardRules.Predicates.Presets.IS_CREATURE.select(cards, CardPrinted.FN_GET_RULES);
-        final List<CardPrinted> spells = CardRules.Predicates.Presets.IS_NONCREATURE_SPELL_FOR_GENERATOR.select(cards, CardPrinted.FN_GET_RULES);
-
-        final int creatCnt = (int) (creatPercentage * size);
-        tmpDeck.append("Creature Count:").append(creatCnt).append("\n");
-        addCmcAdjusted(creatures, creatCnt, cmcLevels, cmcAmounts);
-
-        final int spellCnt = (int) (spellPercentage * size);
-        tmpDeck.append("Spell Count:").append(spellCnt).append("\n");
-        addCmcAdjusted(spells, spellCnt, cmcLevels, cmcAmounts);
+        addCreaturesAndSpells(size, cmcLevels, cmcAmounts, pt);
 
         // Add lands
-        int numLands = (int) (landsPercentage * size);
+        int numLands = (int) (getLandsPercentage() * size);
 
         tmpDeck.append("numLands:").append(numLands).append("\n");
 

@@ -57,7 +57,7 @@ public enum CStatistics implements ICDoc {
     }
 
     private void setLabelValue(JLabel label, ItemPoolView<CardPrinted> deck, Predicate<CardRules> predicate, int total) {
-        int tmp = Aggregates.sum(Iterables.filter(deck, predicate.brigde(deck.getFnToCard())), deck.getFnToCount());
+        int tmp = Aggregates.sum(Iterables.filter(deck, predicate.bridge(deck.getFnToCard())), deck.getFnToCount());
         label.setText( tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
     }
@@ -73,7 +73,6 @@ public enum CStatistics implements ICDoc {
         final ItemPoolView<CardPrinted> deck = ItemPool.createFrom(
                 ed.getTableDeck().getCards(), CardPrinted.class);
 
-        int tmp = 0;
         int total = deck.countAll();
 
         // Hack-ish: avoid /0 cases, but still populate labels :)

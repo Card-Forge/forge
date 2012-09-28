@@ -31,6 +31,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Function;
+
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
@@ -39,7 +41,6 @@ import forge.item.ItemPoolView;
 import forge.game.limited.ReadDraftRankings;
 import forge.util.FileSection;
 import forge.util.FileUtil;
-import forge.util.closures.Lambda1;
 
 /**
  * <p>
@@ -316,7 +317,7 @@ public class Deck extends DeckBase implements Serializable {
     }
 
 
-    public static final Lambda1<String, Deck> FN_NAME_SELECTOR = new Lambda1<String, Deck>() {
+    public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {
         @Override
         public String apply(Deck arg1) {
             return arg1.getName();

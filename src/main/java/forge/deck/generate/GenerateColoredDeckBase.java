@@ -56,6 +56,11 @@ public abstract class GenerateColoredDeckBase {
     protected CardColor colors;
     protected final ItemPool<CardPrinted> tDeck;
 
+    // 2-colored deck generator has its own constants. The rest works fine with these ones
+    protected float getLandsPercentage() { return 0.44f; }
+    protected float getCreatPercentage() { return 0.34f; }
+    protected float getSpellPercentage() { return 0.22f; }
+    
     StringBuilder tmpDeck = new StringBuilder();
 
 //    protected final float landsPercentage = 0.42f;
@@ -76,6 +81,20 @@ public abstract class GenerateColoredDeckBase {
         tDeck = new ItemPool<CardPrinted>(CardPrinted.class);
     }
 
+    protected void addCreaturesAndSpells(int size, List<FilterCMC> cmcLevels, int[] cmcAmounts, PlayerType pt) {
+        final Iterable<CardPrinted> cards = selectCardsOfMatchingColorForPlayer(pt);
+        // build subsets based on type
+        
+        final Iterable<CardPrinted> creatures = Iterables.filter(cards, CardRules.Predicates.Presets.IS_CREATURE.bridge(CardPrinted.FN_GET_RULES));
+        final int creatCnt = (int) (getCreatPercentage() * size);
+        tmpDeck.append("Creature Count:").append(creatCnt).append("\n");
+        addCmcAdjusted(creatures, creatCnt, cmcLevels, cmcAmounts);
+
+        final Iterable<CardPrinted> spells = Iterables.filter(cards, CardRules.Predicates.Presets.IS_NONCREATURE_SPELL_FOR_GENERATOR.bridge(CardPrinted.FN_GET_RULES));
+        final int spellCnt = (int) (getSpellPercentage() * size);
+        tmpDeck.append("Spell Count:").append(spellCnt).append("\n");
+        addCmcAdjusted(spells, spellCnt, cmcLevels, cmcAmounts);
+    }
 
 
     protected void addSome(int cnt, List<CardPrinted> source) {
@@ -158,7 +177,7 @@ public abstract class GenerateColoredDeckBase {
             addSome(diff, tDeck.toFlatList());
         } else if (actualSize > targetSize) {
 
-            Predicate<CardPrinted> exceptBasicLand = Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND).brigde(CardPrinted.FN_GET_RULES);
+            Predicate<CardPrinted> exceptBasicLand = Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND).bridge(CardPrinted.FN_GET_RULES);
 
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
                 Iterable<CardPrinted> matchingCards = Iterables.filter(tDeck.toFlatList(), exceptBasicLand);
@@ -173,11 +192,11 @@ public abstract class GenerateColoredDeckBase {
         }
     }
 
-    protected void addCmcAdjusted(List<CardPrinted> source, int cnt, List<FilterCMC> cmcLevels, int[] cmcAmounts) {
+    protected void addCmcAdjusted(Iterable<CardPrinted> source, int cnt, List<FilterCMC> cmcLevels, int[] cmcAmounts) {
         final List<CardPrinted> curved = new ArrayList<CardPrinted>();
 
         for (int i = 0; i < cmcAmounts.length; i++) {
-            Iterable<CardPrinted> matchingCards = Iterables.filter(source, cmcLevels.get(i).brigde(CardPrinted.FN_GET_RULES));
+            Iterable<CardPrinted> matchingCards = Iterables.filter(source, cmcLevels.get(i).bridge(CardPrinted.FN_GET_RULES));
             curved.addAll( Aggregates.random(matchingCards, cmcAmounts[i]));
         }
 
@@ -188,7 +207,7 @@ public abstract class GenerateColoredDeckBase {
         addSome(cnt, curved);
     }
 
-    protected List<CardPrinted> selectCardsOfMatchingColorForPlayer(PlayerType pt) {
+    protected Iterable<CardPrinted> selectCardsOfMatchingColorForPlayer(PlayerType pt) {
 
         // start with all cards
         // remove cards that generated decks don't like
@@ -198,9 +217,7 @@ public abstract class GenerateColoredDeckBase {
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {
             hasColor = Predicate.or(hasColor, GenerateDeckUtil.COLORLESS_CARDS);
         }
-
-        return Predicate.and(canPlay, hasColor).select(CardDb.instance().getAllCards(), CardPrinted.FN_GET_RULES);
-
+        return Iterables.filter(CardDb.instance().getAllCards(), Predicate.and(canPlay, hasColor).bridge(CardPrinted.FN_GET_RULES));
     }
 
     protected static CCnt[] countLands(ItemPool<CardPrinted> outList) {

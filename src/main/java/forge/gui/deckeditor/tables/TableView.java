@@ -274,11 +274,11 @@ public final class TableView<T extends InventoryItem> {
         }
 
         if (useFilter && this.wantUnique) {
-            Predicate<Entry<T, Integer>> filterForPool = forge.util.closures.Predicate.brigde(this.filter, this.pool.getFnToPrinted());
+            Predicate<Entry<T, Integer>> filterForPool = forge.util.closures.Predicate.bridge(this.filter, this.pool.getFnToPrinted());
             Iterable<Entry<T, Integer>> cards = Aggregates.uniqueByLast(Iterables.filter(this.pool, filterForPool), this.pool.getFnToCardName());
             this.model.addCards(cards);
         } else if (useFilter) {
-            Predicate<Entry<T, Integer>> pred = forge.util.closures.Predicate.brigde(this.filter, this.pool.getFnToPrinted());
+            Predicate<Entry<T, Integer>> pred = forge.util.closures.Predicate.bridge(this.filter, this.pool.getFnToPrinted());
             this.model.addCards(Iterables.filter(this.pool, pred));
         } else if (this.wantUnique) {
             Iterable<Entry<T, Integer>> cards = Aggregates.uniqueByLast(this.pool, this.pool.getFnToCardName());

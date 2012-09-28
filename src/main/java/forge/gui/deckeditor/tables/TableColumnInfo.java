@@ -24,7 +24,6 @@ import javax.swing.table.TableColumn;
 import com.google.common.base.Function;
 
 import forge.gui.deckeditor.tables.SColumnUtil.SortState;
-import forge.item.InventoryItem;
 
 /**
  * A column object in a TableModel in the card editor.

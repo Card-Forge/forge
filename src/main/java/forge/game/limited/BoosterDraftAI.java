@@ -23,6 +23,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.Constant;
 import forge.card.CardColor;
 import forge.card.CardRules;
@@ -75,8 +78,9 @@ public class BoosterDraftAI {
 
         CardPrinted pickedCard = null;
 
-        List<CardPrinted> aiPlayables = CardRules.Predicates.IS_KEPT_IN_AI_DECKS.select(chooseFrom,
-                CardPrinted.FN_GET_RULES);
+        Iterable<CardPrinted> aiPlayablesView = Iterables.filter(chooseFrom, CardRules.Predicates.IS_KEPT_IN_AI_DECKS.bridge(CardPrinted.FN_GET_RULES));
+        List<CardPrinted> aiPlayables = Lists.newArrayList(aiPlayablesView); 
+        
 
         TreeMap<Double, CardPrinted> rankedCards = rankCards(chooseFrom);
 
@@ -191,11 +195,12 @@ public class BoosterDraftAI {
             }
         } else {
             // Has already picked both colors.
-            CardColor colors = CardColor.fromNames(this.playerColors.get(player).getColor1(),
-                    this.playerColors.get(player).getColor2());
+            DeckColors dckColors = this.playerColors.get(player);
+            CardColor colors = CardColor.fromNames(dckColors.getColor1(), dckColors.getColor2());
             Predicate<CardRules> hasColor = Predicate.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors),
                     GenerateDeckUtil.COLORLESS_CARDS);
-            List<CardPrinted> colorList = hasColor.select(aiPlayables, CardPrinted.FN_GET_RULES);
+            
+            Iterable<CardPrinted> colorList = Iterables.filter(aiPlayables, hasColor.bridge(CardPrinted.FN_GET_RULES));
 
             // Sort playable, on-color cards by rank
             TreeMap<Double, CardPrinted> rankedPlayableCards = rankCards(colorList);
@@ -225,7 +230,7 @@ public class BoosterDraftAI {
      *            List of cards
      * @return map of rankings
      */
-    private TreeMap<Double, CardPrinted> rankCards(final List<CardPrinted> chooseFrom) {
+    private TreeMap<Double, CardPrinted> rankCards(final Iterable<CardPrinted> chooseFrom) {
         TreeMap<Double, CardPrinted> rankedCards = new TreeMap<Double, CardPrinted>();
         for (CardPrinted card : chooseFrom) {
             Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());

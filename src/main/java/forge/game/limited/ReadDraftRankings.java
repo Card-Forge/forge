@@ -1,17 +1,14 @@
 package forge.game.limited;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.FileUtil;
 
 /**
  * ReadDraftRankings class.
@@ -22,8 +19,8 @@ public class ReadDraftRankings {
     /** Constant <code>comment="//"</code>. */
     private static final String COMMENT = "//";
 
-    private Map<String, Map<String, Integer>> draftRankings;
-    private Map<String, Integer> setSizes;
+    private final Map<String, Map<String, Integer>> draftRankings;
+    private final Map<String, Integer> setSizes;
 
     /**
      * <p>
@@ -31,15 +28,6 @@ public class ReadDraftRankings {
      * </p>
      */
     public ReadDraftRankings() {
-        this.setup();
-    }
-
-    /**
-     * <p>
-     * setup.
-     * </p>
-     */
-    private void setup() {
         this.setSizes = new HashMap<String, Integer>();
         this.draftRankings = this.readFile(ForgeProps.getFile(NewConstants.Draft.RANKINGS));
     } // setup()
@@ -54,12 +42,9 @@ public class ReadDraftRankings {
      * @return a {@link java.util.Map} object.
      */
     private Map<String, Map<String, Integer>> readFile(final File file) {
-        BufferedReader in = null;
-        final Map<String, Map<String, Integer>> map = new HashMap<String, Map<String, Integer>>();
-        try {
 
-            in = new BufferedReader(new FileReader(file));
-            String line = in.readLine();
+        final Map<String, Map<String, Integer>> map = new HashMap<String, Map<String, Integer>>();
+        for( String line : FileUtil.readFile(file)) {
 
             // stop reading if end of file or blank line is read
             while ((line != null) && (line.trim().length() != 0)) {
@@ -85,21 +70,8 @@ public class ReadDraftRankings {
                         Log.warn("NumberFormatException: " + nfe.getMessage());
                     }
                 }
-                line = in.readLine();
             } // if
-
-        } catch (final Exception ex) {
-            ErrorViewer.showError(ex);
-            throw new RuntimeException("ReadDraftRankings : readFile error, " + ex);
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
+        } 
 
         return map;
     } // readFile()

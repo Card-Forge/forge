@@ -31,9 +31,10 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Function;
+
 import forge.deck.io.OldDeckFileFormatException;
 import forge.error.ErrorViewer;
-import forge.util.closures.Lambda1;
 
 /**
  * This class treats every file in the given folder as a source for a named
@@ -45,7 +46,7 @@ import forge.util.closures.Lambda1;
 public abstract class StorageReaderFolder<T> implements IItemReader<T> {
 
     private final File directory;
-    private final Lambda1<String, T> keySelector;
+    private final Function<T, String> keySelector;
 
     /**
      * Gets the directory.
@@ -61,7 +62,7 @@ public abstract class StorageReaderFolder<T> implements IItemReader<T> {
      *
      * @param deckDir0 the deck dir0
      */
-    public StorageReaderFolder(final File deckDir0, Lambda1<String, T> keySelector0) {
+    public StorageReaderFolder(final File deckDir0, Function<T, String> keySelector0) {
 
         this.directory = deckDir0;
         keySelector = keySelector0;

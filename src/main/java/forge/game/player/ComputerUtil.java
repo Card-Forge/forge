@@ -22,8 +22,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
-import org.apache.commons.lang3.text.translate.AggregateTranslator;
-
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;

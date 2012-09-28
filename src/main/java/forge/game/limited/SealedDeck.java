@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.collect.Iterables;
 
 import forge.Constant;
@@ -37,13 +39,13 @@ public class SealedDeck extends LimitedDeck {
      * @return DeckColors
      */
     private CardColor chooseColors() {
-        List<CardRankingBean> rankedCards = rankCards(getAiPlayables());
+        List<Pair<Double, CardPrinted>> rankedCards = rankCards(getAiPlayables());
 
         // choose colors based on top 33% of cards
         final List<CardPrinted> colorChooserList = new ArrayList<CardPrinted>();
         double limit = rankedCards.size() * .33;
         for (int i = 0; i < limit; i++) {
-            CardPrinted cp = rankedCards.get(i).getCardPrinted();
+            CardPrinted cp = rankedCards.get(i).getValue();
             colorChooserList.add(cp);
             System.out.println(cp.getName() + " " + cp.getCard().getManaCost().toString());
         }

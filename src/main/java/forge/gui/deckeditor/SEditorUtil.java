@@ -85,7 +85,7 @@ public final class SEditorUtil  {
     }
 
     public static <T extends InventoryItem> void setLabelTextSum(JLabel label, final ItemPoolView<T> deck, Predicate<CardRules> predicate) {
-        int sum = Aggregates.sum(Iterables.filter(deck, predicate.brigde(deck.getFnToCard())), deck.getFnToCount());
+        int sum = Aggregates.sum(Iterables.filter(deck, predicate.bridge(deck.getFnToCard())), deck.getFnToCount());
         label.setText(String.valueOf(sum));
     }
     

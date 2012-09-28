@@ -5,8 +5,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
-
 import forge.util.closures.Lambda1;
 
 /** 

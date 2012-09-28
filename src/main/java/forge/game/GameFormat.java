@@ -67,7 +67,7 @@ public final class GameFormat {
     private Predicate<CardPrinted> buildFilterRules() {
         final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
         final Predicate<CardPrinted> allowSets = (this.allowedSetCodes == null) || this.allowedSetCodes.isEmpty() ? CardPrinted.Predicates.Presets.IS_TRUE
-                : Predicate.brigde(CardRules.Predicates.wasPrintedInSets(this.allowedSetCodes),
+                : Predicate.bridge(CardRules.Predicates.wasPrintedInSets(this.allowedSetCodes),
                         CardPrinted.FN_GET_RULES);
         return Predicate.and(banNames, allowSets);
     }

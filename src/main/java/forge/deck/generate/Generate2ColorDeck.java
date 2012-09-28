@@ -20,7 +20,6 @@ package forge.deck.generate;
 import java.util.Arrays;
 import java.util.List;
 import forge.card.CardColor;
-import forge.card.CardRules;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.error.ErrorViewer;
 import forge.game.player.PlayerType;
@@ -37,9 +36,9 @@ import forge.properties.ForgeProps;
  * @version $Id$
  */
 public class Generate2ColorDeck extends GenerateColoredDeckBase {
-    final float landsPercentage = 0.39f;
-    final float creatPercentage = 0.36f;
-    final float spellPercentage = 0.25f;
+    @Override protected final float getLandsPercentage() { return 0.39f; }
+    @Override protected final float getCreatPercentage() { return 0.36f; }
+    @Override protected final float getSpellPercentage() { return 0.25f; }
 
     final List<FilterCMC> cmcLevels = Arrays.asList(
             new GenerateDeckUtil.FilterCMC(0, 2),
@@ -78,22 +77,10 @@ public class Generate2ColorDeck extends GenerateColoredDeckBase {
 
 
     public final ItemPoolView<CardPrinted> get2ColorDeck(final int size, final PlayerType pt) {
-        List<CardPrinted> cards = selectCardsOfMatchingColorForPlayer(pt);
-        // build subsets based on type
-        final List<CardPrinted> creatures = CardRules.Predicates.Presets.IS_CREATURE.select(cards, CardPrinted.FN_GET_RULES);
-        final List<CardPrinted> spells = CardRules.Predicates.Presets.IS_NONCREATURE_SPELL_FOR_GENERATOR.select(cards, CardPrinted.FN_GET_RULES);
-
-
-        final int creatCnt = (int) (creatPercentage * size);
-        tmpDeck.append("Creature Count:").append(creatCnt).append("\n");
-        addCmcAdjusted(creatures, creatCnt, cmcLevels, cmcAmounts);
-
-        final int spellCnt = (int) (spellPercentage * size);
-        tmpDeck.append("Spell Count:").append(spellCnt).append("\n");
-        addCmcAdjusted(spells, spellCnt, cmcLevels, cmcAmounts);
-
+        addCreaturesAndSpells(size, cmcLevels, cmcAmounts, pt);
+        
         // Add lands
-        int numLands = (int) (landsPercentage * size);
+        int numLands = (int) (getLandsPercentage() * size);
 
         tmpDeck.append("numLands:").append(numLands).append("\n");
 

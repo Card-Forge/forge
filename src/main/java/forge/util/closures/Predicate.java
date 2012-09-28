@@ -17,8 +17,6 @@
  */
 package forge.util.closures;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.google.common.base.Function;
 
 /**
@@ -89,30 +87,6 @@ public abstract class Predicate<T> implements com.google.common.base.Predicate<T
         return false;
     }
 
-    // 1. operations on pure T ... check(T card), list.add(card)
-    // 2. operations on something U containing CardOracles ...
-    // check(accessor(U)), list.add(U)
-    // 3. gets T from U, saves U transformed into v ... check(accessor(U)),
-    // list.add(transformer(U))
-
-    // selects are fun
-    public final <U> List<U> select(final Iterable<U> source, final Lambda1<T, U> accessor) {
-        final ArrayList<U> result = new ArrayList<U>();
-        if (source != null) {
-            for (final U c : source) {
-                if (this.apply(accessor.apply(c))) {
-                    result.add(c);
-                }
-            }
-        }
-        return result;
-    }
-
-
-
-
-    // Static builder methods - they choose concrete implementation by
-    // themselves
     /**
      * Brigde (transforms a predicate of type T into a predicate
      * of type U, using a bridge function passed as an argument).
@@ -127,11 +101,11 @@ public abstract class Predicate<T> implements com.google.common.base.Predicate<T
      *            the fn bridge
      * @return the predicate
      */
-    public static final <U, T> Predicate<U> brigde(final com.google.common.base.Predicate<T> predicate, final Function<U, T> fnBridge) {
+    public static final <U, T> Predicate<U> bridge(final com.google.common.base.Predicate<T> predicate, final Function<U, T> fnBridge) {
         return new Bridge<T, U>(predicate, fnBridge);
     }
 
-    public final <U> Predicate<U> brigde(final Function<U, T> fnBridge) {
+    public final <U> Predicate<U> bridge(final Function<U, T> fnBridge) {
         return new Bridge<T, U>(this, fnBridge);
     }
     
@@ -207,7 +181,7 @@ public abstract class Predicate<T> implements com.google.common.base.Predicate<T
      */
     public static <T, U> Predicate<T> and(final Predicate<T> operand1, final Predicate<U> operand2,
             final Lambda1<U, T> fnBridge) {
-        return new NodeAnd<T>(operand1, operand2.brigde(fnBridge));
+        return new NodeAnd<T>(operand1, operand2.bridge(fnBridge));
     }
 
     /**
