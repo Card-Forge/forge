@@ -220,7 +220,17 @@ public class SealedDeckFormat {
                 else {
                     product1 = new UnOpenedProduct(Singletons.getModel().getBoosters().get(sets[0]));
                 }
-                for (int i = 0; i < nPacks; i++) {
+
+                // Choose number of boosters
+                final Integer[] integers = new Integer[10];
+
+                for (int i = 0; i < 10; i++) {
+                    integers[i] = Integer.valueOf(i + 3);
+                }
+
+                Integer nrBoosters = GuiUtils.chooseOne("How many booster packs?", integers);
+
+                for (int i = 0; i < nrBoosters; i++) {
                     this.product.add(product1);
                 }
             }
