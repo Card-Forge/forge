@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.base.Supplier;
+
 import forge.AllZone;
 import forge.Constant;
 import forge.deck.Deck;
@@ -40,7 +42,6 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.quest.QuestController;
-import forge.util.closures.Lambda0;
 import forge.util.closures.Lambda1;
 
 //import forge.quest.data.QuestBoosterPack;
@@ -97,9 +98,9 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         this.setTableCatalog(tblCatalog);
         this.setTableDeck(tblDeck);
 
-        final Lambda0<Deck> newCreator = new Lambda0<Deck>() {
+        final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override
-            public Deck apply() {
+            public Deck get() {
                 return new Deck();
             }
         };

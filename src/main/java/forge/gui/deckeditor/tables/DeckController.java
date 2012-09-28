@@ -21,13 +21,14 @@ import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Supplier;
+
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.util.IStorage;
-import forge.util.closures.Lambda0;
 
 /**
  * TODO: Write javadoc for this type.
@@ -41,7 +42,7 @@ public class DeckController<T extends DeckBase> {
     private boolean modelInStore;
     private final IStorage<T> folder;
     private final ACEditorBase<?, T> view;
-    private final Lambda0<T> newModelCreator;
+    private final Supplier<T> newModelCreator;
 
     /**
      * Instantiates a new deck controller.
@@ -51,7 +52,7 @@ public class DeckController<T extends DeckBase> {
      * @param newModelCreator0 the new model creator0
      */
     public DeckController(final IStorage<T> folder0, final ACEditorBase<?, T> view0,
-            final Lambda0<T> newModelCreator0) {
+            final Supplier<T> newModelCreator0) {
         this.folder = folder0;
         this.view = view0;
         this.model = null;
@@ -292,7 +293,7 @@ public class DeckController<T extends DeckBase> {
      * New model.
      */
     public void newModel() {
-        this.model = this.newModelCreator.apply();
+        this.model = this.newModelCreator.get();
         this.saved = true;
         this.view.resetTables();
     }

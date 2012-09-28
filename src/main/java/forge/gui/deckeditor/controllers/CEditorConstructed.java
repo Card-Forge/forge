@@ -19,6 +19,8 @@ package forge.gui.deckeditor.controllers;
 
 import java.util.List;
 
+import com.google.common.base.Supplier;
+
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.gui.deckeditor.SEditorIO;
@@ -36,7 +38,6 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.closures.Lambda0;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -69,9 +70,9 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         this.setTableCatalog(tblCatalog);
         this.setTableDeck(tblDeck);
 
-        final Lambda0<Deck> newCreator = new Lambda0<Deck>() {
+        final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override
-            public Deck apply() {
+            public Deck get() {
                 return new Deck();
             }
         };

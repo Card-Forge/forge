@@ -17,6 +17,8 @@
  */
 package forge.gui.deckeditor.controllers;
 
+import com.google.common.base.Supplier;
+
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.gui.deckeditor.SEditorIO;
@@ -31,7 +33,6 @@ import forge.gui.home.sanctioned.CSubmenuSealed;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.util.IStorage;
-import forge.util.closures.Lambda0;
 
 /**
  * Child controller for limited deck editor UI.
@@ -62,9 +63,9 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
         this.setTableCatalog(tblCatalog);
         this.setTableDeck(tblDeck);
 
-        final Lambda0<DeckGroup> newCreator = new Lambda0<DeckGroup>() {
+        final Supplier<DeckGroup> newCreator = new Supplier<DeckGroup>() {
             @Override
-            public DeckGroup apply() {
+            public DeckGroup get() {
                 return new DeckGroup("");
             }
         };
