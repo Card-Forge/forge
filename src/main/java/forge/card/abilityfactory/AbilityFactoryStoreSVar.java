@@ -332,6 +332,12 @@ public class AbilityFactoryStoreSVar {
         numBuilder.append(value);
 
         source.setSVar(key, numBuilder.toString());
+        
+        SpellAbility root = sa.getRootSpellAbility();
+        while(root != null) {
+            root.setSVar(key, numBuilder.toString());
+            root = root.getSubAbility();
+        }
     }
 
 } // end class AbilityFactorystoreSVar
