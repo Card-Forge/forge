@@ -1,0 +1,19 @@
+Name:Roiling Horror
+ManaCost:3 B B
+Types:Creature Horror
+Text:X can't be 0.
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | References$ Y,Z | Description$ CARDNAME's power and toughness are each equal to your life total minus the life total of an opponent with the most life.
+K:Suspend:X:XCantBe0 X B B B
+T:Mode$ CounterRemoved | ValidCard$ Card.Self  | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigLoseLife | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, target player loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Choose a player | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:X:Count$xPaid
+SVar:Y:Count$YourLifeTotal/Minus.Z
+SVar:Z:Count$OppLifeTotal
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/roiling_horror.jpg
+SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/79.jpg
+Oracle:Roiling Horror's power and toughness are each equal to your life total minus the life total of an opponent with the most life.\nSuspend X-{X}{B}{B}{B}. X can't be 0. (Rather than cast this card from your hand, you may pay {X}{B}{B}{B} and exile it with X time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nWhenever a time counter is removed from Roiling Horror while it's exiled, target player loses 1 life and you gain 1 life.
+End

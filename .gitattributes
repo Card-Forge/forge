@@ -827,6 +827,7 @@ res/cardsfolder/b/belltower_sphinx.txt svneol=native#text/plain
 res/cardsfolder/b/beloved_chaplain.txt svneol=native#text/plain
 res/cardsfolder/b/ben_ben_akki_hermit.txt svneol=native#text/plain
 res/cardsfolder/b/benalish_cavalry.txt svneol=native#text/plain
+res/cardsfolder/b/benalish_commander.txt -text
 res/cardsfolder/b/benalish_emissary.txt svneol=native#text/plain
 res/cardsfolder/b/benalish_heralds.txt svneol=native#text/plain
 res/cardsfolder/b/benalish_knight.txt svneol=native#text/plain
@@ -2365,6 +2366,7 @@ res/cardsfolder/d/destructive_flow.txt svneol=native#text/plain
 res/cardsfolder/d/destructive_force.txt svneol=native#text/plain
 res/cardsfolder/d/destructive_urge.txt svneol=native#text/plain
 res/cardsfolder/d/detonate.txt svneol=native#text/plain
+res/cardsfolder/d/detritivore.txt -text
 res/cardsfolder/d/deus_of_calamity.txt svneol=native#text/plain
 res/cardsfolder/d/devastate.txt svneol=native#text/plain
 res/cardsfolder/d/devastating_dreams.txt -text
@@ -7961,6 +7963,7 @@ res/cardsfolder/r/rogue_elephant.txt -text
 res/cardsfolder/r/rogue_kavu.txt svneol=native#text/plain
 res/cardsfolder/r/rogues_passage.txt -text
 res/cardsfolder/r/roil_elemental.txt svneol=native#text/plain
+res/cardsfolder/r/roiling_horror.txt -text
 res/cardsfolder/r/roiling_terrain.txt svneol=native#text/plain
 res/cardsfolder/r/rolling_earthquake.txt svneol=native#text/plain
 res/cardsfolder/r/rolling_spoil.txt svneol=native#text/plain
