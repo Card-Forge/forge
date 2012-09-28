@@ -7,10 +7,11 @@ Description=GW Deck with Bant Sureblade and Naya Hushblade
 Icon=Hercules.jpg
 Deck Type=constructed
 [main]
-2 Ancient Spider
+1 Ancient Spider
 3 Bant Sureblade
+1 Centaur Healer
 1 Centaur Safeguard
-3 Kitchen Finks
+2 Kitchen Finks
 1 Leonin Armorguard
 1 Messenger Falcons
 3 Naya Hushblade
@@ -33,6 +34,7 @@ Deck Type=constructed
 1 Mystic Enforcer
 1 Oversoul of Dusk
 1 Phantom Nishoba
+1 Risen Sanctuary
 1 Tolsimir Wolfblood
 1 Wilt-Leaf Liege
 1 Watchwolf
