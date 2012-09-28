@@ -2840,6 +2840,19 @@ public class CardFactoryUtil {
         if (sq[0].contains("CardCounters")) {
             return CardFactoryUtil.doXMath(c.getCounters(Counters.getType(sq[1])), m, c);
         }
+        // Count$TotalCounters.<counterType>_<valid>
+        if (sq[0].contains("TotalCounters")) {
+            final String[] restrictions = l[0].split("_");
+            final Counters cType = Counters.getType(restrictions[1]);
+            final String[] validFilter = restrictions[2].split(",");
+            CardList validCards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            validCards = validCards.getValidCards(validFilter, cardController, c);
+            int cCount = 0;
+            for (final Card card : validCards) {
+                cCount += card.getCounters(cType);
+            }
+            return CardFactoryUtil.doXMath(cCount, m, c);
+        }
         // Count$TimesKicked
         if (sq[0].contains("TimesKicked")) {
             return CardFactoryUtil.doXMath(c.getMultiKickerMagnitude(), m, c);
@@ -3962,7 +3975,6 @@ public class CardFactoryUtil {
      * 
      * @param card
      *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
      */
     public static void postFactoryKeywords(final Card card) {
         // this function should handle any keywords that need to be added after
