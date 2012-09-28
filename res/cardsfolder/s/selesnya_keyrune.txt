@@ -1,0 +1,12 @@
+Name:Selesnya Keyrune
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Animate | Cost$ G W | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Artifact,Creature,Wolf | Colors$ Green,White | SpellDescription$ CARDNAME becomes a 3/3 green and white Wolf artifact creature until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_keyrune.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/233.jpg
+Oracle:{T}: Add {G} or {W} to your mana pool.\n{G}{W}: Selesnya Keyrune becomes a 3/3 green and white Wolf artifact creature until end of turn.
+End

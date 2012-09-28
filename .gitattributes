@@ -640,6 +640,7 @@ res/cardsfolder/a/azorius_guildgate.txt -text
 res/cardsfolder/a/azorius_guildmage.txt svneol=native#text/plain
 res/cardsfolder/a/azorius_herald.txt -text
 res/cardsfolder/a/azorius_justiciar.txt -text
+res/cardsfolder/a/azorius_keyrune.txt -text
 res/cardsfolder/a/azorius_ploy.txt svneol=native#text/plain
 res/cardsfolder/a/azorius_signet.txt svneol=native#text/plain
 res/cardsfolder/a/azure_drake.txt svneol=native#text/plain
@@ -4029,6 +4030,7 @@ res/cardsfolder/g/golgari_germination.txt svneol=native#text/plain
 res/cardsfolder/g/golgari_grave_troll.txt svneol=native#text/plain
 res/cardsfolder/g/golgari_guildgate.txt -text
 res/cardsfolder/g/golgari_guildmage.txt svneol=native#text/plain
+res/cardsfolder/g/golgari_keyrune.txt -text
 res/cardsfolder/g/golgari_longlegs.txt -text
 res/cardsfolder/g/golgari_rot_farm.txt svneol=native#text/plain
 res/cardsfolder/g/golgari_rotwurm.txt svneol=native#text/plain
@@ -4917,6 +4919,7 @@ res/cardsfolder/i/izzet_charm.txt -text
 res/cardsfolder/i/izzet_chronarch.txt svneol=native#text/plain
 res/cardsfolder/i/izzet_guildgate.txt -text
 res/cardsfolder/i/izzet_guildmage.txt -text
+res/cardsfolder/i/izzet_keyrune.txt -text
 res/cardsfolder/i/izzet_signet.txt svneol=native#text/plain
 res/cardsfolder/j/jabaris_banner.txt svneol=native#text/plain
 res/cardsfolder/j/jabaris_influence.txt -text
@@ -7545,6 +7548,7 @@ res/cardsfolder/r/rakdos_carnarium.txt svneol=native#text/plain
 res/cardsfolder/r/rakdos_guildgate.txt -text
 res/cardsfolder/r/rakdos_guildmage.txt svneol=native#text/plain
 res/cardsfolder/r/rakdos_ickspitter.txt svneol=native#text/plain
+res/cardsfolder/r/rakdos_keyrune.txt -text
 res/cardsfolder/r/rakdos_lord_of_riots.txt -text
 res/cardsfolder/r/rakdos_pit_dragon.txt svneol=native#text/plain
 res/cardsfolder/r/rakdos_ragemutt.txt -text
@@ -8415,6 +8419,7 @@ res/cardsfolder/s/selenia_dark_angel.txt svneol=native#text/plain
 res/cardsfolder/s/selesnya_evangel.txt svneol=native#text/plain
 res/cardsfolder/s/selesnya_guildgate.txt -text
 res/cardsfolder/s/selesnya_guildmage.txt svneol=native#text/plain
+res/cardsfolder/s/selesnya_keyrune.txt -text
 res/cardsfolder/s/selesnya_sagittars.txt -text
 res/cardsfolder/s/selesnya_sanctuary.txt svneol=native#text/plain
 res/cardsfolder/s/selesnya_sentry.txt -text

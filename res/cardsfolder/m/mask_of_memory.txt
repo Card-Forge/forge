@@ -4,8 +4,10 @@ Types:Artifact Equipment
 Text:no text
 K:Equip 1
 T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you may draw two cards. If you do, discard a card.
-SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 2 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 2 | SubAbility$ DBDiscard | OptionalDecider$ You | RememberDrawn$ True
+SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_memory.jpg
 SVar:Rarity:Uncommon
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/203.jpg
