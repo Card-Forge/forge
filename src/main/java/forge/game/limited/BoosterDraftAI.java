@@ -30,6 +30,7 @@ import com.google.common.collect.Lists;
 
 import forge.Constant;
 import forge.card.CardColor;
+import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.deck.Deck;
 import forge.deck.generate.GenerateDeckUtil;
@@ -79,7 +80,7 @@ public class BoosterDraftAI {
 
         CardPrinted pickedCard = null;
 
-        Predicate<CardPrinted> pred = Predicates.compose(CardRules.Predicates.IS_KEPT_IN_AI_DECKS, CardPrinted.FN_GET_RULES);
+        Predicate<CardPrinted> pred = Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, CardPrinted.FN_GET_RULES);
         Iterable<CardPrinted> aiPlayablesView = Iterables.filter(chooseFrom, pred );
         List<CardPrinted> aiPlayables = Lists.newArrayList(aiPlayablesView); 
         

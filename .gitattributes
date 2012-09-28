@@ -12217,6 +12217,7 @@ src/main/java/forge/card/CardManaCost.java -text
 src/main/java/forge/card/CardRarity.java -text
 src/main/java/forge/card/CardRuleCharacteristics.java -text
 src/main/java/forge/card/CardRules.java -text
+src/main/java/forge/card/CardRulesPredicates.java -text
 src/main/java/forge/card/CardRulesReader.java svneol=native#text/plain
 src/main/java/forge/card/CardSuperType.java -text
 src/main/java/forge/card/CardType.java -text

@@ -77,7 +77,7 @@ public class DeckHints {
             ret = new ArrayList<CardPrinted>();
             String[] types = filterParam.split("\\|");
             for (String type : types) {
-                addMatchingItems(ret, cardList, CardRules.Predicates.subType(type), CardPrinted.FN_GET_RULES);
+                addMatchingItems(ret, cardList, CardRulesPredicates.subType(type), CardPrinted.FN_GET_RULES);
             }
             break;
         case COLOR:
@@ -85,21 +85,21 @@ public class DeckHints {
             String[] colors = filterParam.split("\\|");
             for (String color : colors) {
                 CardColor cc = CardColor.fromNames(color);
-                addMatchingItems(ret, cardList, CardRules.Predicates.isColor(cc.getColor()), CardPrinted.FN_GET_RULES);
+                addMatchingItems(ret, cardList, CardRulesPredicates.isColor(cc.getColor()), CardPrinted.FN_GET_RULES);
             }
             break;
         case KEYWORD:
             ret = new ArrayList<CardPrinted>();
             String[] keywords = filterParam.split("\\|");
             for (String keyword : keywords) {
-                addMatchingItems(ret, cardList, CardRules.Predicates.hasKeyword(keyword), CardPrinted.FN_GET_RULES);
+                addMatchingItems(ret, cardList, CardRulesPredicates.hasKeyword(keyword), CardPrinted.FN_GET_RULES);
             }
             break;
         case NAME:
             ret = new ArrayList<CardPrinted>();
             String[] names = filterParam.split("\\|");
             for (String name : names) {
-                addMatchingItems(ret, cardList, CardRules.Predicates.name(StringOp.EQUALS, name), CardPrinted.FN_GET_RULES);
+                addMatchingItems(ret, cardList, CardRulesPredicates.name(StringOp.EQUALS, name), CardPrinted.FN_GET_RULES);
             }
             break;
         default:

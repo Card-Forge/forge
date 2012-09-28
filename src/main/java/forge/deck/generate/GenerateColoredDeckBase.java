@@ -31,6 +31,7 @@ import com.google.common.collect.Iterables;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.CardColor;
+import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.game.player.PlayerType;
@@ -86,12 +87,12 @@ public abstract class GenerateColoredDeckBase {
         final Iterable<CardPrinted> cards = selectCardsOfMatchingColorForPlayer(pt);
         // build subsets based on type
         
-        final Iterable<CardPrinted> creatures = Iterables.filter(cards, Predicates.compose(CardRules.Predicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
+        final Iterable<CardPrinted> creatures = Iterables.filter(cards, Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
         final int creatCnt = (int) (getCreatPercentage() * size);
         tmpDeck.append("Creature Count:").append(creatCnt).append("\n");
         addCmcAdjusted(creatures, creatCnt, cmcLevels, cmcAmounts);
 
-        Predicate<CardPrinted> preSpells = Predicates.compose(CardRules.Predicates.Presets.IS_NONCREATURE_SPELL_FOR_GENERATOR, CardPrinted.FN_GET_RULES);
+        Predicate<CardPrinted> preSpells = Predicates.compose(CardRulesPredicates.Presets.IS_NONCREATURE_SPELL_FOR_GENERATOR, CardPrinted.FN_GET_RULES);
         final Iterable<CardPrinted> spells = Iterables.filter(cards, preSpells);
         final int spellCnt = (int) (getSpellPercentage() * size);
         tmpDeck.append("Spell Count:").append(spellCnt).append("\n");
@@ -179,7 +180,7 @@ public abstract class GenerateColoredDeckBase {
             addSome(diff, tDeck.toFlatList());
         } else if (actualSize > targetSize) {
 
-            Predicate<CardPrinted> exceptBasicLand = Predicates.not(Predicates.compose(CardRules.Predicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES));
+            Predicate<CardPrinted> exceptBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES));
 
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
                 Iterable<CardPrinted> matchingCards = Iterables.filter(tDeck.toFlatList(), exceptBasicLand);

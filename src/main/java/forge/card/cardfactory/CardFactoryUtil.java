@@ -2709,14 +2709,7 @@ public class CardFactoryUtil {
             final String validDevoured = l[0].split(" ")[1];
             final Card csource = c;
             CardList cl = c.getDevoured();
-
-            cl = cl.filter(new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card cdev) {
-                    return cdev.isValid(validDevoured.split(","), csource.getController(), csource);
-                }
-            });
-
+            cl = cl.getValidCards(validDevoured.split(","), csource.getController(), csource);
             return CardFactoryUtil.doXMath(cl.size(), m, c);
         }
 

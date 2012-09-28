@@ -20,6 +20,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.card.CardEdition;
+import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.game.GameFormat;
 import forge.gui.WrapLayout;
@@ -186,22 +187,22 @@ public class SFilterUtil {
         JCheckBox chbTemp;
 
         chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.BLACK)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_BLACK); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_BLACK); }
 
         chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.BLUE)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_BLUE); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_BLUE); }
 
         chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.GREEN)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_GREEN); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_GREEN); }
 
         chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.RED)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_RED); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_RED); }
 
         chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.WHITE)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_WHITE); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_WHITE); }
 
         chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.COLORLESS)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_COLORLESS); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_COLORLESS); }
 
         // Multi-colored needs special XOR treatment, since "not multi" when OR-ed
         // with any other of its colors except colorless, will return true.
@@ -212,7 +213,7 @@ public class SFilterUtil {
             preMulti = Predicates.alwaysTrue();
         }
         else {
-            preMulti = Predicates.compose(CardRules.Predicates.Presets.IS_MULTICOLOR, CardPrinted.FN_GET_RULES);
+            preMulti = Predicates.compose(CardRulesPredicates.Presets.IS_MULTICOLOR, CardPrinted.FN_GET_RULES);
         }
 
         final Predicate<CardPrinted> preColors = Predicates.compose(Predicates.or(ors), CardPrinted.FN_GET_RULES);
@@ -229,7 +230,7 @@ public class SFilterUtil {
          }
 
         if (allEmptyExceptMulti) {
-            return Predicates.compose(CardRules.Predicates.Presets.IS_MULTICOLOR, CardPrinted.FN_GET_RULES);
+            return Predicates.compose(CardRulesPredicates.Presets.IS_MULTICOLOR, CardPrinted.FN_GET_RULES);
         }
         else {
             return Predicates.and(preColors, preMulti);
@@ -271,25 +272,25 @@ public class SFilterUtil {
         JCheckBox chbTemp;
 
         chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.ARTIFACT)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_ARTIFACT); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_ARTIFACT); }
 
         chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.CREATURE)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_CREATURE); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_CREATURE); }
 
         chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.ENCHANTMENT)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_ENCHANTMENT); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_ENCHANTMENT); }
 
         chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.INSTANT)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_INSTANT); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_INSTANT); }
 
         chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.LAND)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_LAND); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_LAND); }
 
         chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.PLANESWALKER)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_PLANESWALKER); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_PLANESWALKER); }
 
         chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.SORCERY)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_SORCERY); }
+        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_SORCERY); }
 
         return Predicates.compose(Predicates.or(ors), CardPrinted.FN_GET_RULES);
     }
@@ -323,14 +324,15 @@ public class SFilterUtil {
             for (final String s : splitContains) {
                 final List<Predicate<CardPrinted>> subands = new ArrayList<Predicate<CardPrinted>>();
 
-                if (useName) { subands.add(Predicates.compose(CardRules.Predicates.name(
+                if (useName) { subands.add(Predicates.compose(CardRulesPredicates.name(
                         StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
-                if (useType) { subands.add(Predicates.compose(CardRules.Predicates.joinedType(
+                if (useType) { subands.add(Predicates.compose(CardRulesPredicates.joinedType(
                         StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
-                if (useText) { subands.add(Predicates.compose(CardRules.Predicates.rules(
+                if (useText) { subands.add(Predicates.compose(CardRulesPredicates.rules(
                         StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
 
-                ands.add(Predicates.or(subands));
+                Predicate<CardPrinted> mvnMustDie = Predicates.or(subands); 
+                ands.add(mvnMustDie);
             }
 
             filterAnd = Predicates.and(ands);
@@ -347,16 +349,26 @@ public class SFilterUtil {
             for (final String s : splitWithout) {
                 final List<Predicate<CardPrinted>> subnots = new ArrayList<Predicate<CardPrinted>>();
 
-                if (useName) { subnots.add(Predicates.compose(CardRules.Predicates.name(StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
-                if (useType) { subnots.add(Predicates.compose(CardRules.Predicates.joinedType(StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
-                if (useText) { subnots.add(Predicates.compose(CardRules.Predicates.rules(StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
+                if (useName) {
+                    final Predicate<CardPrinted> pName = Predicates.compose(CardRulesPredicates.name(StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES); 
+                    subnots.add(pName); 
+                }
+                if (useType) {
+                    final Predicate<CardPrinted> pType = Predicates.compose(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES); 
+                    subnots.add(pType); 
+                }
+                if (useText) {
+                    final Predicate<CardPrinted> pRules = Predicates.compose(CardRulesPredicates.rules(StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES); 
+                    subnots.add(pRules); 
+                }
 
-                nots.add(Predicates.or(subnots));
+                Predicate<CardPrinted> mavenCompilerIsBugged = Predicates.or(subnots);
+                nots.add(mavenCompilerIsBugged);
             }
 
-            filterNot = Predicates.not(Predicates.or(nots));
+            Predicate<CardPrinted> iWouldNotWriteThisIfMavenProcessedGenericsCorrectly = Predicates.or(nots); 
+            filterNot = Predicates.not(iWouldNotWriteThisIfMavenProcessedGenericsCorrectly);
         }
-
         return Predicates.and(filterAnd, filterNot);
     }
 
@@ -401,7 +413,7 @@ public class SFilterUtil {
             final Predicate<CardPrinted> preNotCreature;
             if (plow == -1) {
                 preNotCreature = Predicates.not(
-                    Predicates.compose(CardRules.Predicates.Presets.IS_CREATURE,
+                    Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE,
                             CardPrinted.FN_GET_RULES));
             }
             // Otherwise, if 0 or higher is selected, cards without power
@@ -411,9 +423,9 @@ public class SFilterUtil {
             }
 
             final Predicate<CardPrinted> prePowerTemp = Predicates.and(
-            Predicates.compose(CardRules.Predicates.power(
+            Predicates.compose(CardRulesPredicates.power(
                     ComparableOp.GT_OR_EQUAL, plow), CardPrinted.FN_GET_RULES),
-            Predicates.compose(CardRules.Predicates.power(
+            Predicates.compose(CardRulesPredicates.power(
                     ComparableOp.LT_OR_EQUAL, phigh), CardPrinted.FN_GET_RULES));
 
             prePower = Predicates.or(preNotCreature, prePowerTemp);
@@ -429,7 +441,7 @@ public class SFilterUtil {
             final Predicate<CardPrinted> preNotCreature;
             if (tlow == -1) {
                 preNotCreature = Predicates.not(
-                    Predicates.compose(CardRules.Predicates.Presets.IS_CREATURE,
+                    Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE,
                             CardPrinted.FN_GET_RULES));
             }
             // Otherwise, if 0 or higher is selected, cards without toughness
@@ -439,9 +451,9 @@ public class SFilterUtil {
             }
 
             final Predicate<CardPrinted> preToughnessTemp = Predicates.and(
-                Predicates.compose(CardRules.Predicates.toughness(
+                Predicates.compose(CardRulesPredicates.toughness(
                         ComparableOp.GT_OR_EQUAL, tlow), CardPrinted.FN_GET_RULES),
-                Predicates.compose(CardRules.Predicates.toughness(
+                Predicates.compose(CardRulesPredicates.toughness(
                         ComparableOp.LT_OR_EQUAL, thigh), CardPrinted.FN_GET_RULES));
 
             preToughness = Predicates.or(preNotCreature, preToughnessTemp);
@@ -453,9 +465,9 @@ public class SFilterUtil {
         if (clow > chigh) { preCMC = Predicates.alwaysFalse(); }
         else {
             preCMC = Predicates.and(
-                Predicates.compose(CardRules.Predicates.cmc(
+                Predicates.compose(CardRulesPredicates.cmc(
                         ComparableOp.GT_OR_EQUAL, clow), CardPrinted.FN_GET_RULES),
-                Predicates.compose(CardRules.Predicates.cmc(
+                Predicates.compose(CardRulesPredicates.cmc(
                     ComparableOp.LT_OR_EQUAL, chigh), CardPrinted.FN_GET_RULES));
         }
 

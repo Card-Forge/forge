@@ -101,9 +101,12 @@ public final class QuestUtilCards {
         final int nRare = this.qpref.getPreferenceInt(QPref.BOOSTER_RARES);
 
         final ArrayList<CardPrinted> newCards = new ArrayList<CardPrinted>();
-        newCards.addAll(BoosterUtils.generateDistinctCards(Predicates.and(fSets, CardPrinted.Predicates.Presets.IS_COMMON), nCommon));
-        newCards.addAll(BoosterUtils.generateDistinctCards(Predicates.and(fSets, CardPrinted.Predicates.Presets.IS_UNCOMMON), nUncommon));
-        newCards.addAll(BoosterUtils.generateDistinctCards(Predicates.and(fSets, CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC), nRare));
+        Predicate<CardPrinted> predCommons = Predicates.and(fSets, CardPrinted.Predicates.Presets.IS_COMMON);
+        newCards.addAll(BoosterUtils.generateDistinctCards(predCommons, nCommon));
+        Predicate<CardPrinted> predUncommons = Predicates.and(fSets, CardPrinted.Predicates.Presets.IS_UNCOMMON);
+        newCards.addAll(BoosterUtils.generateDistinctCards(predUncommons, nUncommon));
+        Predicate<CardPrinted> predRareMythics = Predicates.and(fSets, CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC);
+        newCards.addAll(BoosterUtils.generateDistinctCards(predRareMythics, nRare));
 
         this.addAllCards(newCards);
         return newCards;

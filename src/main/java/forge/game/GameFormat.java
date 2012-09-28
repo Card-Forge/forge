@@ -24,7 +24,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
 import forge.item.CardPrinted;
 
 
@@ -71,7 +71,7 @@ public final class GameFormat {
         final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
         if ( this.allowedSetCodes == null || this.allowedSetCodes.isEmpty() )
             return banNames;
-        return Predicates.and(banNames, Predicates.compose(CardRules.Predicates.wasPrintedInSets(this.allowedSetCodes), CardPrinted.FN_GET_RULES));
+        return Predicates.and(banNames, Predicates.compose(CardRulesPredicates.wasPrintedInSets(this.allowedSetCodes), CardPrinted.FN_GET_RULES));
     }
 
     /**

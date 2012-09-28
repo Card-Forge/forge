@@ -5,7 +5,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.Command;
-import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.generate.Generate2ColorDeck;
@@ -80,7 +80,7 @@ public enum CDeckgen implements ICDoc {
 
         final Deck randomDeck = new Deck();
 
-        Predicate<CardPrinted> notBasicLand = Predicates.not(Predicates.compose(CardRules.Predicates.Presets.IS_BASIC_LAND,CardPrinted.FN_GET_RULES));
+        Predicate<CardPrinted> notBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND,CardPrinted.FN_GET_RULES));
         Iterable<CardPrinted> source = Iterables.filter(CardDb.instance().getAllUniqueCards(), notBasicLand);
         randomDeck.getMain().addAllFlat(Aggregates.random(source, 15*5));
                 

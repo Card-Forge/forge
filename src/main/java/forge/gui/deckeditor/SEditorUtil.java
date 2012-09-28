@@ -8,6 +8,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 
+import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.gui.deckeditor.views.ITableContainer;
 import forge.gui.deckeditor.views.VCardCatalog;
@@ -101,19 +102,19 @@ public final class SEditorUtil  {
     public static <T extends InventoryItem> void setStats(final ItemPoolView<T> deck, final ITableContainer view) {
         view.getLblTotal().setText(String.valueOf(deck.countAll()));
 
-        setLabelTextSum(view.getLblCreature(), deck, CardRules.Predicates.Presets.IS_CREATURE);
-        setLabelTextSum(view.getLblLand(), deck, CardRules.Predicates.Presets.IS_LAND);
-        setLabelTextSum(view.getLblEnchantment(), deck, CardRules.Predicates.Presets.IS_ENCHANTMENT);
-        setLabelTextSum(view.getLblArtifact(), deck, CardRules.Predicates.Presets.IS_ARTIFACT);
-        setLabelTextSum(view.getLblInstant(), deck, CardRules.Predicates.Presets.IS_INSTANT);
-        setLabelTextSum(view.getLblSorcery(), deck, CardRules.Predicates.Presets.IS_SORCERY);
-        setLabelTextSum(view.getLblPlaneswalker(), deck, CardRules.Predicates.Presets.IS_PLANESWALKER);
-        setLabelTextSum(view.getLblColorless(), deck, CardRules.Predicates.Presets.IS_COLORLESS);
-        setLabelTextSum(view.getLblBlack(), deck, CardRules.Predicates.Presets.IS_BLACK);
-        setLabelTextSum(view.getLblBlue(), deck, CardRules.Predicates.Presets.IS_BLUE);
-        setLabelTextSum(view.getLblGreen(), deck, CardRules.Predicates.Presets.IS_GREEN);
-        setLabelTextSum(view.getLblRed(), deck, CardRules.Predicates.Presets.IS_RED);
-        setLabelTextSum(view.getLblWhite(), deck, CardRules.Predicates.Presets.IS_WHITE);
+        setLabelTextSum(view.getLblCreature(), deck, CardRulesPredicates.Presets.IS_CREATURE);
+        setLabelTextSum(view.getLblLand(), deck, CardRulesPredicates.Presets.IS_LAND);
+        setLabelTextSum(view.getLblEnchantment(), deck, CardRulesPredicates.Presets.IS_ENCHANTMENT);
+        setLabelTextSum(view.getLblArtifact(), deck, CardRulesPredicates.Presets.IS_ARTIFACT);
+        setLabelTextSum(view.getLblInstant(), deck, CardRulesPredicates.Presets.IS_INSTANT);
+        setLabelTextSum(view.getLblSorcery(), deck, CardRulesPredicates.Presets.IS_SORCERY);
+        setLabelTextSum(view.getLblPlaneswalker(), deck, CardRulesPredicates.Presets.IS_PLANESWALKER);
+        setLabelTextSum(view.getLblColorless(), deck, CardRulesPredicates.Presets.IS_COLORLESS);
+        setLabelTextSum(view.getLblBlack(), deck, CardRulesPredicates.Presets.IS_BLACK);
+        setLabelTextSum(view.getLblBlue(), deck, CardRulesPredicates.Presets.IS_BLUE);
+        setLabelTextSum(view.getLblGreen(), deck, CardRulesPredicates.Presets.IS_GREEN);
+        setLabelTextSum(view.getLblRed(), deck, CardRulesPredicates.Presets.IS_RED);
+        setLabelTextSum(view.getLblWhite(), deck, CardRulesPredicates.Presets.IS_WHITE);
     } // getStats()
 
     /**

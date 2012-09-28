@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import forge.Constant;
 import forge.Constant.Color;
 import forge.card.CardColor;
+import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.item.CardPrinted;
 import forge.util.MyRandom;
@@ -52,11 +53,11 @@ public class SealedDeck extends LimitedDeck {
 
         Iterable<CardRules> rules = Iterables.transform(colorChooserList, CardPrinted.FN_GET_RULES);
         
-        int white = Iterables.size(Iterables.filter(rules, CardRules.Predicates.Presets.IS_WHITE));
-        int blue = Iterables.size(Iterables.filter(rules, CardRules.Predicates.Presets.IS_BLUE));
-        int black = Iterables.size(Iterables.filter(rules, CardRules.Predicates.Presets.IS_BLACK));
-        int red = Iterables.size(Iterables.filter(rules, CardRules.Predicates.Presets.IS_RED));
-        int green = Iterables.size(Iterables.filter(rules, CardRules.Predicates.Presets.IS_GREEN));
+        int white = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_WHITE));
+        int blue = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_BLUE));
+        int black = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_BLACK));
+        int red = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_RED));
+        int green = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_GREEN));
 
         final int[] colorCounts = { white, blue, black, red, green };
         final String[] colors = Constant.Color.ONLY_COLORS;

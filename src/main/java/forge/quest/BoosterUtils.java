@@ -29,6 +29,7 @@ import com.google.common.collect.Iterables;
 
 
 import forge.card.BoosterGenerator;
+import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.card.UnOpenedProduct;
 import forge.item.CardDb;
@@ -69,30 +70,30 @@ public final class BoosterUtils {
         // There should be 1 Multicolor card for every 4 cards in a single color
 
         final List<Predicate<CardRules>> colorFilters = new ArrayList<Predicate<CardRules>>();
-        colorFilters.add(CardRules.Predicates.Presets.IS_MULTICOLOR);
+        colorFilters.add(CardRulesPredicates.Presets.IS_MULTICOLOR);
 
         for (int i = 0; i < 4; i++) {
             if (i != 2) {
-                colorFilters.add(CardRules.Predicates.Presets.IS_COLORLESS);
+                colorFilters.add(CardRulesPredicates.Presets.IS_COLORLESS);
             }
 
-            colorFilters.add(CardRules.Predicates.Presets.IS_WHITE);
-            colorFilters.add(CardRules.Predicates.Presets.IS_RED);
-            colorFilters.add(CardRules.Predicates.Presets.IS_BLUE);
-            colorFilters.add(CardRules.Predicates.Presets.IS_BLACK);
-            colorFilters.add(CardRules.Predicates.Presets.IS_GREEN);
+            colorFilters.add(CardRulesPredicates.Presets.IS_WHITE);
+            colorFilters.add(CardRulesPredicates.Presets.IS_RED);
+            colorFilters.add(CardRulesPredicates.Presets.IS_BLUE);
+            colorFilters.add(CardRulesPredicates.Presets.IS_BLACK);
+            colorFilters.add(CardRulesPredicates.Presets.IS_GREEN);
         }
 
         final Iterable<CardPrinted> cardpool = CardDb.instance().getAllUniqueCards();
 
-        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool,
-                Predicates.and(filter, CardPrinted.Predicates.Presets.IS_COMMON), numCommon, colorFilters));
-        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool,
-                Predicates.and(filter, CardPrinted.Predicates.Presets.IS_UNCOMMON), numUncommon, colorFilters));
+        final Predicate<CardPrinted> pCommon = Predicates.and(filter, CardPrinted.Predicates.Presets.IS_COMMON); 
+        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pCommon, numCommon, colorFilters));
+        
+        final Predicate<CardPrinted> pUncommon = Predicates.and(filter, CardPrinted.Predicates.Presets.IS_UNCOMMON);
+        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pUncommon, numUncommon, colorFilters));
 
         int nRares = numRare, nMythics = 0;
-        final Predicate<CardPrinted> filterMythics = Predicates.and(filter,
-                CardPrinted.Predicates.Presets.IS_MYTHIC_RARE);
+        final Predicate<CardPrinted> filterMythics = Predicates.and(filter, CardPrinted.Predicates.Presets.IS_MYTHIC_RARE);
         final boolean haveMythics = Iterables.any(cardpool, filterMythics);
         for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {
             if (MyRandom.getRandom().nextInt(10) < 1) {
@@ -102,8 +103,8 @@ public final class BoosterUtils {
             }
         }
 
-        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool,
-                Predicates.and(filter, CardPrinted.Predicates.Presets.IS_RARE), nRares, colorFilters));
+        final Predicate<CardPrinted> pRare = Predicates.and(filter, CardPrinted.Predicates.Presets.IS_RARE);
+        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pRare, nRares, colorFilters));
         if (nMythics > 0) {
             cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, filterMythics, nMythics, colorFilters));
         }
@@ -235,19 +236,19 @@ public final class BoosterUtils {
         // Determine color ("random" defaults to null color)
         Predicate<CardRules> col = Predicates.alwaysTrue();
         if (temp[1].equalsIgnoreCase("black")) {
-            col = CardRules.Predicates.Presets.IS_BLACK;
+            col = CardRulesPredicates.Presets.IS_BLACK;
         } else if (temp[1].equalsIgnoreCase("blue")) {
-            col = CardRules.Predicates.Presets.IS_BLUE;
+            col = CardRulesPredicates.Presets.IS_BLUE;
         } else if (temp[1].equalsIgnoreCase("colorless")) {
-            col = CardRules.Predicates.Presets.IS_COLORLESS;
+            col = CardRulesPredicates.Presets.IS_COLORLESS;
         } else if (temp[1].equalsIgnoreCase("green")) {
-            col = CardRules.Predicates.Presets.IS_GREEN;
+            col = CardRulesPredicates.Presets.IS_GREEN;
         } else if (temp[1].equalsIgnoreCase("multicolor")) {
-            col = CardRules.Predicates.Presets.IS_MULTICOLOR;
+            col = CardRulesPredicates.Presets.IS_MULTICOLOR;
         } else if (temp[1].equalsIgnoreCase("red")) {
-            col = CardRules.Predicates.Presets.IS_RED;
+            col = CardRulesPredicates.Presets.IS_RED;
         } else if (temp[1].equalsIgnoreCase("white")) {
-            col = CardRules.Predicates.Presets.IS_WHITE;
+            col = CardRulesPredicates.Presets.IS_WHITE;
         }
 
         Function<BoosterGenerator, List<CardPrinted>> openWay = new Function<BoosterGenerator, List<CardPrinted>>() {
@@ -257,6 +258,7 @@ public final class BoosterUtils {
             }
         };
         Predicate<CardPrinted> colorPred = Predicates.compose(col, CardPrinted.FN_GET_RULES);
-        return new UnOpenedProduct(openWay, new BoosterGenerator(Predicates.and(rar, colorPred))); // qty))
+        Predicate<CardPrinted> rarAndColor = Predicates.and(rar, colorPred);
+        return new UnOpenedProduct(openWay, new BoosterGenerator(rarAndColor)); // qty))
     }
 }

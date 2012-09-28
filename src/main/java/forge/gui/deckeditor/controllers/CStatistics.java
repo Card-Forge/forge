@@ -10,6 +10,7 @@ import com.google.common.collect.Iterables;
 
 import forge.Command;
 import forge.card.CardColor;
+import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -81,21 +82,21 @@ public enum CStatistics implements ICDoc {
         if (total == 0) { total = 1; }
 
  
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblCreature(), deck, CardRules.Predicates.Presets.IS_CREATURE, total );
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblLand(), deck, CardRules.Predicates.Presets.IS_LAND, total );
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblEnchantment(), deck, CardRules.Predicates.Presets.IS_ENCHANTMENT, total );
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblArtifact(), deck, CardRules.Predicates.Presets.IS_ARTIFACT, total );
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblInstant(), deck, CardRules.Predicates.Presets.IS_INSTANT, total );
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblSorcery(), deck, CardRules.Predicates.Presets.IS_SORCERY, total );
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblPlaneswalker(), deck, CardRules.Predicates.Presets.IS_PLANESWALKER, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblCreature(), deck, CardRulesPredicates.Presets.IS_CREATURE, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblLand(), deck, CardRulesPredicates.Presets.IS_LAND, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblEnchantment(), deck, CardRulesPredicates.Presets.IS_ENCHANTMENT, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblArtifact(), deck, CardRulesPredicates.Presets.IS_ARTIFACT, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblInstant(), deck, CardRulesPredicates.Presets.IS_INSTANT, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblSorcery(), deck, CardRulesPredicates.Presets.IS_SORCERY, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblPlaneswalker(), deck, CardRulesPredicates.Presets.IS_PLANESWALKER, total );
         
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblMulti(), deck, CardRules.Predicates.Presets.IS_MULTICOLOR, total );
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblColorless(), deck, CardRules.Predicates.Presets.IS_COLORLESS, total );
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblBlack(), deck, CardRules.Predicates.isMonoColor(CardColor.BLACK), total );
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblBlue(), deck, CardRules.Predicates.isMonoColor(CardColor.BLUE), total );
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblGreen(), deck, CardRules.Predicates.isMonoColor(CardColor.GREEN), total );
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblRed(), deck, CardRules.Predicates.isMonoColor(CardColor.RED), total );
-        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblWhite(), deck, CardRules.Predicates.isMonoColor(CardColor.WHITE), total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblMulti(), deck, CardRulesPredicates.Presets.IS_MULTICOLOR, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblColorless(), deck, CardRulesPredicates.Presets.IS_COLORLESS, total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblBlack(), deck, CardRulesPredicates.isMonoColor(CardColor.BLACK), total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblBlue(), deck, CardRulesPredicates.isMonoColor(CardColor.BLUE), total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblGreen(), deck, CardRulesPredicates.isMonoColor(CardColor.GREEN), total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblRed(), deck, CardRulesPredicates.isMonoColor(CardColor.RED), total );
+        setLabelValue( VStatistics.SINGLETON_INSTANCE.getLblWhite(), deck, CardRulesPredicates.isMonoColor(CardColor.WHITE), total );
         
         int cmc0 = 0, cmc1 = 0, cmc2 = 0, cmc3 = 0, cmc4 = 0, cmc5 = 0, cmc6 = 0;
         int tmc = 0;

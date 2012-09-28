@@ -20,6 +20,7 @@ import com.google.common.collect.Lists;
 import forge.Constant;
 import forge.card.CardColor;
 import forge.card.CardManaCost;
+import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.card.DeckHints;
 import forge.card.mana.ManaCostShard;
@@ -68,7 +69,7 @@ public class LimitedDeck {
         this.colors = pClrs.getCardColors();
         
         // removeUnplayables();
-        Iterable<CardPrinted> playables = Iterables.filter(availableList, Predicates.compose(CardRules.Predicates.IS_KEPT_IN_AI_DECKS, CardPrinted.FN_GET_RULES));
+        Iterable<CardPrinted> playables = Iterables.filter(availableList, Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, CardPrinted.FN_GET_RULES));
         this.aiPlayables = Lists.newArrayList(playables);
         this.availableList.removeAll(getAiPlayables());
         
@@ -99,14 +100,14 @@ public class LimitedDeck {
         // -1. Prepare
         hasColor = Predicates.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors), GenerateDeckUtil.COLORLESS_CARDS);
         colorList = Iterables.filter(aiPlayables, Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
-        onColorCreatures = Iterables.filter(colorList, Predicates.compose(CardRules.Predicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
-        onColorNonCreatures = Iterables.filter(colorList, Predicates.compose(CardRules.Predicates.Presets.IS_NON_CREATURE_SPELL, CardPrinted.FN_GET_RULES));
+        onColorCreatures = Iterables.filter(colorList, Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
+        onColorNonCreatures = Iterables.filter(colorList, Predicates.compose(CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL, CardPrinted.FN_GET_RULES));
         // Guava iterables do not copy the collection contents, instead they act as filters and 
         // iterate over _source_ collection each time. So even if aiPlayable has changed, 
         // there is no need to create a new iterable. 
 
         // 0. Add any planeswalkers
-        Iterable<CardPrinted> onColorWalkers = Iterables.filter(colorList, Predicates.compose(CardRules.Predicates.Presets.IS_PLANESWALKER, CardPrinted.FN_GET_RULES));
+        Iterable<CardPrinted> onColorWalkers = Iterables.filter(colorList, Predicates.compose(CardRulesPredicates.Presets.IS_PLANESWALKER, CardPrinted.FN_GET_RULES));
         List<CardPrinted> walkers = Lists.newArrayList(onColorWalkers);
         deckList.addAll(walkers);
         aiPlayables.removeAll(walkers);
@@ -402,7 +403,7 @@ public class LimitedDeck {
      * @param nCards
      */
     private void addRandomCards(int nCards) {
-        Iterable<CardPrinted> others = Iterables.filter(aiPlayables, Predicates.compose(CardRules.Predicates.Presets.IS_NON_LAND, CardPrinted.FN_GET_RULES));
+        Iterable<CardPrinted> others = Iterables.filter(aiPlayables, Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, CardPrinted.FN_GET_RULES));
         List<Pair<Double, CardPrinted>> ranked = rankCards(others);
         for (Pair<Double, CardPrinted> bean : ranked) {
             if (nCards > 0) {
@@ -577,7 +578,7 @@ public class LimitedDeck {
         for (int i = 1; i < 7; i++) {
             creatureCosts.put(i, 0);
         }
-        Predicate<CardPrinted> filter = Predicates.compose(CardRules.Predicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES);
+        Predicate<CardPrinted> filter = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES);
         for (CardPrinted creature : Iterables.filter(deckList, filter)) {
             int cmc = creature.getCard().getManaCost().getCMC();
             if (cmc < 1) {
