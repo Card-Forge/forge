@@ -121,6 +121,39 @@ Fixes/Features:
 - Disabled tournament statistics, they are calculated incorrectly.
 - token downloads should work again now
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added Fantasy Blocks to Draft. (Fantasy Blocks that contain "choose1" or "random1" MetaSets are not supported in Draft.)
+- added Enchanted keyword to calculateAmount
+- RtR: Ran setInfo script for RtR cards so far
+- RtR: Fixed Rootborn Defences' pump effect
+- Fixed the AI changing targets of triggers with "OptionalDecider" before resolving.
+- The AI will no longer hold back creatures for blocking when Time Walk will grant another turn.
+- Made the quest deck Grumpy 1 less powerful and added a medium version.
+- Updating mtg-data for RTR
+- Don't attempt to download images that don't have a HTTP 200 Response Code
+- Targeting overlay implemented (experimental, for enchantments only).
+- Dock button and preference toggle also enabled.
+- ran Oracle script on RTR cards
+- merged changes from Trunk up to r17151
+- last merge from Trunk before reintegrating RTR branch
+- Reintegrated RTR branch into Trunk. No more commits to the RTRCards branch please.
+- Branch Maintenance removing CloneFix branch
+- Branch Maintenance removing M13Cards branch
+- Branch Maintenance removing mana_restrictions branch
+- update cardTemplateScript.py for RTR set
+- Fixed Hazezon Tamar
+- Fixed Liliana's emblem's download link
+- Removed filtering functionality from forge.util.closure.Predicate, fixed typo in briGDe method
+- Refactored: LimitedDeck, GenerateNColoredDeck
+- You can now select 3-12 boosters instead of the default 6 in single-set Block-mode Sealed Deck games.
+- Code cleanup - main, FControl, FView, FModel core.
+- Should fix occasional "long wait before splash" bug.
+- Fixed problem with etb triggers of countered permanents that would enter the battlefield under an opponents control instead of the graveyard
+- Mulligan prompt now informs user whose turn it is: "You're going first. Do you want to mulligan?"
+- Removal of forge.util.closures.Predicate in favour of guava implementation
+- Pulled all non-UI operations off of the EDT. Should have a major performance impact.
+- Removed Lambda0 in favour of guava Supplier<T>
+- Draft by default now launches a 7-round gauntlet; separate button added for playing a specific opponent.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -128,7 +161,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 
 
-Added the following cards to the Return to Ravnica branch (These cards are not yet available in this shapshot/beta build):
+Added the following cards to the Return to Ravnica branch (These cards may now be available in this shapshot/beta build):
 
 Abrupt Decay
 Aerial Predation
@@ -140,26 +173,35 @@ Armada Wurm
 Armory Guard
 Assassin's Strike
 Auger Spree
+Avenging Arrow
 Axebane Guardian
 Axebane Stag
+Azorius Arrester
 Azorius Guildgate
 Azorius Justiciar
 Batterhorn
+Bazaar Krovod
 Bellows Lizard
+Blustersquall
 Brushstrider
 Catacomb Slug
 Centaur Healer
 Chromatic Lantern
+Chronic Flooding
 Civic Saber
 Cobblebrute
+Codex Shredder
 Collective Blessing
 Concordia Pegasus
+Conjured Currency
 Crosstown Courier
 Cyclonic Rift
 Daggerdrome Imp
 Dark Revenant
 Dead Reveler
 Deadbridge Goliath
+Doorkeeper
+Downsize
 Dramatic Rescue
 Dreadbore
 Dreg Mangler
@@ -177,12 +219,15 @@ Goblin Rally
 Golgari Charm
 Golgari Decoy
 Golgari Guildgate
+Golgari Longlegs
 Grim Roustabout
 Grisly Salvage
 Grove of the Guardian
 Guttersnipe
 Hover Barrier
 Hypersonic Dragon
+Inaction Injunction
+Isperia's Skywatch
 Isperia, Supreme Judge
 Izzet Charm
 Izzet Guildgate
@@ -190,6 +235,7 @@ Jace, Architect of Thought
 Jarad, Golgari Lich Lord
 Judge's Familiar
 Keening Apparition
+Knightly Valor
 Launch Party
 Lotleth Troll
 Loxodon Smiter
@@ -198,6 +244,7 @@ Martial Law
 Mercurial Chemister
 Minotaur Aggressor
 Mizzium Mortars
+Mizzium Skin
 Necropolis Regent
 Niv-Mizzet, Dracogenius
 Ogre Jailbreaker
@@ -207,6 +254,7 @@ Phantom General
 Precinct Captain
 Psychic Spiral
 Pyroconvergence
+Rakdos Cackler
 Rakdos Guildgate
 Rakdos Ragemutt
 Rakdos Shred-Freak
@@ -215,11 +263,15 @@ Rakdos, Lord of Riots
 Rest in Peace
 Risen Sanctuary
 Rites of Reaping
+Rogue's Passage
+Rootborn Defenses
 Runewing
 Savage Surge
 Search the City
+Security Blockade
 Selesnya Guildgate
 Selesnya Sentry
+Seller of Songbirds
 Sewer Shambler
 Skull Rend
 Skyline Predator
@@ -227,12 +279,15 @@ Slime Molding
 Slitherhead
 Sluiceway Scorpion
 Slum Reaper
+Soul Tithe
 Soulsworn Spirit
+Sphere of Safety
 Sphinx's Revelation
 Stab Wound
 Stealer of Secrets
 Sunspire Griffin
 Supreme Verdict
+Swift Justice
 Tenement Crasher
 Terrus Wurm
 Thoughtflare
@@ -241,9 +296,11 @@ Trained Caracal
 Transguild Promenade
 Treasured Find
 Trestle Troll
+Trostani's Judgment
 Trostani, Selesnya's Voice
 Ultimate Price
 Utvara Hellkite
+Vassal Soul
 Vitu-Ghazi Guildmage
 Voidwielder
 Vraska the Unseen
@@ -280,6 +337,10 @@ Norritt
 Nettling Imp
 Mindbreak Trap
 Thromok the Insatiable
+Benalish Commander
+Detrivore
+Roiling Horror
+Fungal Behemoth
 
 
 end
