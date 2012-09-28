@@ -29,12 +29,11 @@ import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
-import forge.util.closures.Lambda1;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -459,7 +458,7 @@ public final class QuestUtilCards {
      * @return the fnNewCompare
      */
     @SuppressWarnings("rawtypes")
-    public Lambda1<Comparable, Entry<InventoryItem, Integer>> getFnNewCompare() {
+    public Function<Entry<InventoryItem, Integer>, Comparable> getFnNewCompare() {
         return this.fnNewCompare;
     }
 
@@ -468,7 +467,7 @@ public final class QuestUtilCards {
      * 
      * @return the fnNewGet
      */
-    public Lambda1<Object, Entry<InventoryItem, Integer>> getFnNewGet() {
+    public Function<Entry<InventoryItem, Integer>, Object> getFnNewGet() {
         return this.fnNewGet;
     }
 
@@ -479,7 +478,7 @@ public final class QuestUtilCards {
     // Maybe we should consider doing so later
     /** The fn new compare. */
     @SuppressWarnings("rawtypes")
-    private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnNewCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private final Function<Entry<InventoryItem, Integer>, Comparable> fnNewCompare = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return QuestUtilCards.this.qa.getNewCardList().contains(from.getKey()) ? Integer.valueOf(1) : Integer
@@ -488,7 +487,7 @@ public final class QuestUtilCards {
     };
 
     /** The fn new get. */
-    private final Lambda1<Object, Entry<InventoryItem, Integer>> fnNewGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private final Function<Entry<InventoryItem, Integer>, Object> fnNewGet = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return QuestUtilCards.this.qa.getNewCardList().contains(from.getKey()) ? "NEW" : "";

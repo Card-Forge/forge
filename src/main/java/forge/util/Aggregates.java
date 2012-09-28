@@ -5,7 +5,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import forge.util.closures.Lambda1;
+import com.google.common.base.Function;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -14,7 +14,7 @@ import forge.util.closures.Lambda1;
 public class Aggregates {
 
     // Returns the value matching predicate conditions with the maximum value of whatever valueAccessor returns. 
-    public final static <T> Integer max(final Iterable<T> source, final Lambda1<Integer, T> valueAccessor) {
+    public final static <T> Integer max(final Iterable<T> source, final Function<T, Integer> valueAccessor) {
         if (source == null) { return null; }  
         int max = Integer.MIN_VALUE;
         for (final T c : source) {
@@ -26,7 +26,7 @@ public class Aggregates {
         return max;
     }
 
-    public final static <T> int sum(final Iterable<T> source, final Lambda1<Integer, T> valueAccessor) {
+    public final static <T> int sum(final Iterable<T> source, final Function<T, Integer> valueAccessor) {
         int result = 0;
         if (source != null) {
             for (final T c : source) {
@@ -94,7 +94,7 @@ public class Aggregates {
      *            the accessor
      * @return the iterable
      */
-    public static final <K, U> Iterable<U> uniqueByLast(final Iterable<U> source, final Lambda1<K, U> fnUniqueKey) { // this might be exotic
+    public static final <K, U> Iterable<U> uniqueByLast(final Iterable<U> source, final Function<U, K> fnUniqueKey) { // this might be exotic
         final Map<K, U> uniques = new Hashtable<K, U>();
         for (final U c : source) {
              uniques.put(fnUniqueKey.apply(c), c);

@@ -22,13 +22,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Function;
+
 import forge.Singletons;
 import forge.game.limited.CustomLimited;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.util.FileUtil;
-import forge.util.closures.Lambda1;
 
 /** 
  * The class MetaSet. This class is used to define 'special'
@@ -199,7 +200,7 @@ public class MetaSet {
             List<String> dfData = FileUtil.readFile("res/sealed/" + data + ".sealed");
             final CustomLimited myCube = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
             final BoosterGenerator bpCustom = new BoosterGenerator(myCube.getCardPool());
-            final Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
+            final Function<BoosterGenerator, List<CardPrinted>> fnPick = new Function<BoosterGenerator, List<CardPrinted>>() {
               @Override
               public List<CardPrinted> apply(final BoosterGenerator pack) {
                    if (myCube.getIgnoreRarity()) {

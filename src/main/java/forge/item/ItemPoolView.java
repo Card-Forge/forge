@@ -24,9 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.base.Function;
+
 import forge.CardList;
 import forge.card.CardRules;
-import forge.util.closures.Lambda1;
 
 /**
  * <p>
@@ -42,7 +43,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
 
     // Field Accessors for select/aggregate operations with filters.
     /** The fn to card. */
-    private final transient Lambda1<CardRules, Entry<T, Integer>> fnToCard = new Lambda1<CardRules, Entry<T, Integer>>() {
+    private final transient Function<Entry<T, Integer>, CardRules> fnToCard = new Function<Entry<T, Integer>, CardRules>() {
         @Override
         public CardRules apply(final Entry<T, Integer> from) {
             final T item = from.getKey();
@@ -51,7 +52,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     };
 
     /** The fn to printed. */
-    private final transient Lambda1<T, Entry<T, Integer>> fnToPrinted = new Lambda1<T, Entry<T, Integer>>() {
+    private final transient Function<Entry<T, Integer>, T> fnToPrinted = new Function<Entry<T, Integer>, T>() {
         @Override
         public T apply(final Entry<T, Integer> from) {
             return from.getKey();
@@ -59,7 +60,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     };
 
     /** The fn to card name. */
-    private final transient Lambda1<String, Entry<T, Integer>> fnToCardName = new Lambda1<String, Entry<T, Integer>>() {
+    private final transient Function<Entry<T, Integer>, String> fnToCardName = new Function<Entry<T, Integer>, String>() {
         @Override
         public String apply(final Entry<T, Integer> from) {
             return from.getKey().getName();
@@ -67,7 +68,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     };
 
     /** The fn to count. */
-    private final transient Lambda1<Integer, Entry<T, Integer>> fnToCount = new Lambda1<Integer, Entry<T, Integer>>() {
+    private final transient Function<Entry<T, Integer>, Integer> fnToCount = new Function<Entry<T, Integer>, Integer>() {
         @Override
         public Integer apply(final Entry<T, Integer> from) {
             return from.getValue();
@@ -294,7 +295,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      * 
      * @return the fnToCard
      */
-    public Lambda1<CardRules, Entry<T, Integer>> getFnToCard() {
+    public Function<Entry<T, Integer>, CardRules> getFnToCard() {
         return this.fnToCard;
     }
 
@@ -303,7 +304,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      * 
      * @return the fnToCardName
      */
-    public Lambda1<String, Entry<T, Integer>> getFnToCardName() {
+    public Function<Entry<T, Integer>, String> getFnToCardName() {
         return this.fnToCardName;
     }
 
@@ -312,7 +313,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      * 
      * @return the fnToCount
      */
-    public Lambda1<Integer, Entry<T, Integer>> getFnToCount() {
+    public Function<Entry<T, Integer>, Integer> getFnToCount() {
         return this.fnToCount;
     }
 
@@ -321,7 +322,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      * 
      * @return the fnToPrinted
      */
-    public Lambda1<T, Entry<T, Integer>> getFnToPrinted() {
+    public Function<Entry<T, Integer>, T> getFnToPrinted() {
         return this.fnToPrinted;
     }
 

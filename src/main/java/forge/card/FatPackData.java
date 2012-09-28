@@ -1,8 +1,9 @@
 package forge.card;
 
+import com.google.common.base.Function;
+
 import forge.util.FileSection;
 import forge.util.StorageReaderFile;
-import forge.util.closures.Lambda1;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -38,7 +39,7 @@ public class FatPackData {
         landsEdition = landsEdition0;
     }
 
-    public static final Lambda1<String, FatPackData> FN_GET_CODE = new Lambda1<String, FatPackData>() {
+    public static final Function<FatPackData, String> FN_GET_CODE = new Function<FatPackData, String>() {
 
         @Override
         public String apply(FatPackData arg1) {

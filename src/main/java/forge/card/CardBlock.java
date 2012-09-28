@@ -20,11 +20,11 @@ package forge.card;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.item.CardPrinted;
 import forge.util.StorageReaderFile;
-import forge.util.closures.Lambda1;
 
 // import forge.deck.Deck;
 
@@ -198,7 +198,7 @@ public final class CardBlock implements Comparable<CardBlock> {
         return this.name + " (block)";
     }
 
-    public static final Lambda1<String, CardBlock> FN_GET_NAME = new Lambda1<String, CardBlock>() {
+    public static final Function<CardBlock, String> FN_GET_NAME = new Function<CardBlock, String>() {
 
         @Override
         public String apply(CardBlock arg1) {

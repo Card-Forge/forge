@@ -21,6 +21,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+
 
 import forge.ImageCache;
 import forge.Singletons;
@@ -28,7 +30,6 @@ import forge.deck.Deck;
 import forge.quest.SellRules;
 import forge.util.FileSection;
 import forge.util.FileUtil;
-import forge.util.closures.Lambda1;
 
 /**
  * TODO: Write javadoc for this type.
@@ -136,7 +137,7 @@ public class PreconDeck implements InventoryItemFromSet {
         return this.description;
     }
 
-    public static final Lambda1<String, PreconDeck> FN_NAME_SELECTOR = new Lambda1<String, PreconDeck>() {
+    public static final Function<PreconDeck, String> FN_NAME_SELECTOR = new Function<PreconDeck, String>() {
         @Override
         public String apply(PreconDeck arg1) {
             return arg1.getName();

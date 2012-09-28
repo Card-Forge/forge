@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -31,7 +32,6 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.util.MyRandom;
-import forge.util.closures.Lambda1;
 
 /**
  * <p>
@@ -46,7 +46,7 @@ public class BoosterGenerator {
 
     // Function to open a booster as it is.
     /** The Constant IDENTITY_PICK. */
-    public static final Lambda1<List<CardPrinted>, BoosterGenerator> IDENTITY_PICK = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
+    public static final Function<BoosterGenerator, List<CardPrinted>> IDENTITY_PICK = new Function<BoosterGenerator, List<CardPrinted>>() {
         @Override
         public List<CardPrinted> apply(final BoosterGenerator arg1) {
             return arg1.getBoosterPack(10, 3, 1, 0, 0, 0, 0, 0, 1);

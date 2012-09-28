@@ -20,12 +20,12 @@ package forge.game;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.card.CardRules;
 import forge.item.CardPrinted;
-import forge.util.closures.Lambda1;
 
 
 /**
@@ -122,7 +122,7 @@ public final class GameFormat {
         return this.name + " (format)";
     }
 
-    public static final Lambda1<String, GameFormat> FN_GET_NAME = new Lambda1<String, GameFormat>() {
+    public static final Function<GameFormat, String> FN_GET_NAME = new Function<GameFormat, String>() {
         @Override
         public String apply(GameFormat arg1) {
             return arg1.getName();

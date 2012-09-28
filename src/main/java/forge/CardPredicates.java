@@ -17,6 +17,7 @@
  */
 package forge;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -24,7 +25,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.util.PredicateString;
-import forge.util.closures.Lambda1;
 
 
 /**
@@ -326,21 +326,21 @@ public final class CardPredicates {
     }
     
     public static class Accessors {
-        public static final Lambda1<Integer, Card> fnGetDefense = new Lambda1<Integer, Card>() {
+        public static final Function<Card, Integer> fnGetDefense = new Function<Card, Integer>() {
             @Override
             public Integer apply(Card a) {
                 return a.getNetDefense();
             }
         };
         
-        public static final Lambda1<Integer, Card> fnGetAttack = new Lambda1<Integer, Card>() {
+        public static final Function<Card, Integer> fnGetAttack = new Function<Card, Integer>() {
             @Override
             public Integer apply(Card a) {
                 return a.getNetCombatDamage();
             }
         };
         
-        public static final Lambda1<Integer, Card> fnGetCmc = new Lambda1<Integer, Card>() {
+        public static final Function<Card, Integer> fnGetCmc = new Function<Card, Integer>() {
             @Override
             public Integer apply(Card a) {
                 return a.getCMC();

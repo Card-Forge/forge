@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.base.Function;
 import com.google.common.base.Supplier;
 
 import forge.AllZone;
@@ -42,7 +43,6 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.quest.QuestController;
-import forge.util.closures.Lambda1;
 
 //import forge.quest.data.QuestBoosterPack;
 
@@ -63,7 +63,7 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     private Map<CardPrinted, Integer> decksUsingMyCards;
 
     @SuppressWarnings("rawtypes")
-    private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnDeckCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private final Function<Entry<InventoryItem, Integer>, Comparable> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             final Integer iValue = CEditorQuest.this.decksUsingMyCards.get(from.getKey());
@@ -71,7 +71,7 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         }
     };
 
-    private final Lambda1<Object, Entry<InventoryItem, Integer>> fnDeckGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private final Function<Entry<InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             final Integer iValue = CEditorQuest.this.decksUsingMyCards.get(from.getKey());

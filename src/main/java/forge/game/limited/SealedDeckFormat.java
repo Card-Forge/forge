@@ -23,6 +23,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import com.google.common.base.Function;
+
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
@@ -33,7 +35,6 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.util.FileUtil;
-import forge.util.closures.Lambda1;
 
 /**
  * <p>
@@ -271,7 +272,7 @@ public class SealedDeckFormat {
                         customs);
 
                 final BoosterGenerator bpCustom = new BoosterGenerator(draft.getCardPool());
-                final Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
+                final Function<BoosterGenerator, List<CardPrinted>> fnPick = new Function<BoosterGenerator, List<CardPrinted>>() {
                     @Override
                     public List<CardPrinted> apply(final BoosterGenerator pack) {
                         if (draft.getIgnoreRarity()) {

@@ -20,11 +20,12 @@ package forge.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Function;
+
 import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.FatPackData;
-import forge.util.closures.Lambda1;
 
 /**
  * TODO Write javadoc for this type.
@@ -33,7 +34,7 @@ import forge.util.closures.Lambda1;
 public class FatPack extends OpenablePack {
 
     /** The Constant fnFromSet. */
-    public static final Lambda1<FatPack, CardEdition> FN_FROM_SET = new Lambda1<FatPack, CardEdition>() {
+    public static final Function<CardEdition, FatPack> FN_FROM_SET = new Function<CardEdition, FatPack>() {
         @Override
         public FatPack apply(final CardEdition arg1) {
             FatPackData d = Singletons.getModel().getFatPacks().get(arg1.getCode());

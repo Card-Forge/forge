@@ -28,6 +28,8 @@ import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 
+import com.google.common.base.Function;
+
 import forge.CardList;
 import forge.Constant;
 import forge.Singletons;
@@ -45,7 +47,6 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
-import forge.util.closures.Lambda1;
 
 /**
  * 
@@ -186,7 +187,7 @@ public final class BoosterDraft implements IBoosterDraft {
         }
 
         final BoosterGenerator bpCustom = new BoosterGenerator(dPool);
-        final Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
+        final Function<BoosterGenerator, List<CardPrinted>> fnPick = new Function<BoosterGenerator, List<CardPrinted>>() {
             @Override
             public List<CardPrinted> apply(final BoosterGenerator pack) {
                 if (draft.getIgnoreRarity()) {

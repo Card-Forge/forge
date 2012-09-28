@@ -24,13 +24,13 @@ import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.util.closures.Lambda1;
 
 /**
  * <p>
@@ -80,7 +80,7 @@ public class NameChanger {
         this.changeCardName = b;
     }
 
-    public final Lambda1<Card, Card> fnTransformCard = new Lambda1<Card, Card>() {
+    public final Function<Card, Card> fnTransformCard = new Function<Card, Card>() {
         @Override
         public Card apply(final Card toChange) {
             return NameChanger.this.changeCard(toChange);

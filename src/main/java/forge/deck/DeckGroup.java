@@ -22,10 +22,11 @@ import java.util.TreeMap;
 // import java.lang.Double;
 import java.util.List;
 
+import com.google.common.base.Function;
+
 
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
-import forge.util.closures.Lambda1;
 
 /**
  * TODO: Write javadoc for this type.
@@ -152,7 +153,7 @@ public class DeckGroup extends DeckBase {
         return new DeckGroup(name0);
     }
 
-    public static final Lambda1<String, DeckGroup> FN_NAME_SELECTOR = new Lambda1<String, DeckGroup>() {
+    public static final Function<DeckGroup, String> FN_NAME_SELECTOR = new Function<DeckGroup, String>() {
         @Override
         public String apply(DeckGroup arg1) {
             return arg1.getName();

@@ -2,8 +2,9 @@ package forge.card;
 
 import java.util.List;
 
+import com.google.common.base.Function;
+
 import forge.item.CardPrinted;
-import forge.util.closures.Lambda1;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -11,11 +12,11 @@ import forge.util.closures.Lambda1;
  */
 public class UnOpenedProduct {
 
-    private final Lambda1<List<CardPrinted>, BoosterGenerator> openBooster;
+    private final Function<BoosterGenerator, List<CardPrinted>> openBooster;
     private final BoosterGenerator generator;
     private final BoosterData booster;
 
-    public UnOpenedProduct(Lambda1<List<CardPrinted>, BoosterGenerator> identityPick, BoosterGenerator bpFull) {
+    public UnOpenedProduct(Function<BoosterGenerator, List<CardPrinted>> identityPick, BoosterGenerator bpFull) {
         openBooster = identityPick;
         generator = bpFull;
         booster = null;

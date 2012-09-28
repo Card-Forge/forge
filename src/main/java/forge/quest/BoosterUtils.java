@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -34,7 +35,6 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
-import forge.util.closures.Lambda1;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
 /**
@@ -250,7 +250,7 @@ public final class BoosterUtils {
             col = CardRules.Predicates.Presets.IS_WHITE;
         }
 
-        Lambda1<List<CardPrinted>, BoosterGenerator> openWay = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
+        Function<BoosterGenerator, List<CardPrinted>> openWay = new Function<BoosterGenerator, List<CardPrinted>>() {
             @Override
             public List<CardPrinted> apply(BoosterGenerator arg1) {
                 return arg1.getSingletonBoosterPack(qty);

@@ -29,6 +29,7 @@ import java.util.NoSuchElementException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -38,7 +39,6 @@ import forge.Singletons;
 import forge.card.CardInSet;
 import forge.card.CardRules;
 import forge.card.MtgDataParser;
-import forge.util.closures.Lambda1;
 
 
 /**
@@ -99,7 +99,7 @@ public final class CardDb {
 
     // Lambda to get rules for selects from list of printed cards
     /** The Constant fnGetCardPrintedByForgeCard. */
-    public static final Lambda1<CardPrinted, Card> FN_GET_CARD_PRINTED_BY_FORGE_CARD = new Lambda1<CardPrinted, Card>() {
+    public static final Function<Card, CardPrinted> FN_GET_CARD_PRINTED_BY_FORGE_CARD = new Function<Card, CardPrinted>() {
         @Override
         public CardPrinted apply(final Card from) {
             return CardDb.instance().getCard(from.getName());

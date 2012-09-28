@@ -1,11 +1,11 @@
 package forge.card;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.item.CardPrinted;
 import forge.util.FileSection;
 import forge.util.StorageReaderFile;
-import forge.util.closures.Lambda1;
 
 
 /**
@@ -161,7 +161,7 @@ public class BoosterData {
         return this.foilRate;
     }
 
-    public static final Lambda1<String, BoosterData> FN_GET_CODE = new Lambda1<String, BoosterData>() {
+    public static final Function<BoosterData, String> FN_GET_CODE = new Function<BoosterData, String>() {
 
         @Override
         public String apply(BoosterData arg1) {

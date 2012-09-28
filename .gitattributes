@@ -12759,8 +12759,6 @@ src/main/java/forge/util/StorageView.java -text
 src/main/java/forge/util/TextUtil.java -text
 src/main/java/forge/util/ThreadUtil.java svneol=native#text/plain
 src/main/java/forge/util/XmlUtil.java -text
-src/main/java/forge/util/closures/Lambda1.java svneol=native#text/plain
-src/main/java/forge/util/closures/package-info.java svneol=native#text/plain
 src/main/java/forge/util/package-info.java -text
 src/main/java/forge/view/ButtonUtil.java svneol=native#text/plain
 src/main/java/forge/view/FView.java -text

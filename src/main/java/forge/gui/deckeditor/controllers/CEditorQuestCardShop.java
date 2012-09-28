@@ -27,6 +27,8 @@ import java.util.Map.Entry;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import com.google.common.base.Function;
+
 import forge.AllZone;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -54,7 +56,6 @@ import forge.item.PreconDeck;
 import forge.item.TournamentPack;
 import forge.quest.QuestController;
 import forge.quest.io.ReadPriceList;
-import forge.util.closures.Lambda1;
 
 /**
  * Child controller for quest card shop UI.
@@ -212,19 +213,19 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     }
 
     @SuppressWarnings("rawtypes")
-    private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnPriceCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private final Function<Entry<InventoryItem, Integer>, Comparable> fnPriceCompare = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return CEditorQuestCardShop.this.getCardValue(from.getKey());
         }
     };
-    private final Lambda1<Object, Entry<InventoryItem, Integer>> fnPriceGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private final Function<Entry<InventoryItem, Integer>, Object> fnPriceGet = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return CEditorQuestCardShop.this.getCardValue(from.getKey());
         }
     };
-    private final Lambda1<Object, Entry<InventoryItem, Integer>> fnPriceSellGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private final Function<Entry<InventoryItem, Integer>, Object> fnPriceSellGet = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return (int) (CEditorQuestCardShop.this.multiplier * CEditorQuestCardShop.this.getCardValue(from.getKey()));
@@ -232,14 +233,14 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     };
 
     @SuppressWarnings("rawtypes")
-    private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnDeckCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    private final Function<Entry<InventoryItem, Integer>, Comparable> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             final Integer iValue = CEditorQuestCardShop.this.decksUsingMyCards.get(from.getKey());
             return iValue == null ? Integer.valueOf(0) : iValue;
         }
     };
-    private final Lambda1<Object, Entry<InventoryItem, Integer>> fnDeckGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private final Function<Entry<InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             final Integer iValue = CEditorQuestCardShop.this.decksUsingMyCards.get(from.getKey());

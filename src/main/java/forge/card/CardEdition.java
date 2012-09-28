@@ -17,13 +17,13 @@
  */
 package forge.card;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.util.FileSection;
 import forge.util.StorageReaderFile;
-import forge.util.closures.Lambda1;
 
 
 /**
@@ -105,7 +105,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     }
 
     /** The Constant fnGetName. */
-    public static final Lambda1<String, CardEdition> FN_GET_CODE = new Lambda1<String, CardEdition>() {
+    public static final Function<CardEdition, String> FN_GET_CODE = new Function<CardEdition, String>() {
         @Override
         public String apply(final CardEdition arg1) {
             return arg1.getCode();

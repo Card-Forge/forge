@@ -19,12 +19,13 @@ package forge.item;
 
 import java.util.List;
 
+import com.google.common.base.Function;
+
 import forge.ImageCache;
 import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
-import forge.util.closures.Lambda1;
 
 /**
  * TODO Write javadoc for this type.
@@ -33,7 +34,7 @@ import forge.util.closures.Lambda1;
 public class TournamentPack extends OpenablePack {
 
     /** The Constant fnFromSet. */
-    public static final Lambda1<TournamentPack, CardEdition> FN_FROM_SET = new Lambda1<TournamentPack, CardEdition>() {
+    public static final Function<CardEdition, TournamentPack> FN_FROM_SET = new Function<CardEdition, TournamentPack>() {
         @Override
         public TournamentPack apply(final CardEdition arg1) {
             BoosterData d = Singletons.getModel().getTournamentPacks().get(arg1.getCode());

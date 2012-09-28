@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.util.closures.Lambda1;
+import com.google.common.base.Function;
 
 /**
  * This class treats every line of a given file as a source for a named object.
@@ -37,7 +37,7 @@ import forge.util.closures.Lambda1;
 public abstract class StorageReaderFile<T> implements IItemReader<T> {
 
     private final File file;
-    private final Lambda1<String, T> keySelector;
+    private final Function<T, String> keySelector;
 
     /**
      * Instantiates a new storage reader file.
@@ -45,7 +45,7 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
      * @param pathname the pathname
      * @param keySelector0 the key selector0
      */
-    public StorageReaderFile(final String pathname, final Lambda1<String, T> keySelector0) {
+    public StorageReaderFile(final String pathname, final Function<T, String> keySelector0) {
         this(new File(pathname), keySelector0);
     }
 
@@ -55,7 +55,7 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
      * @param file0 the file0
      * @param keySelector0 the key selector0
      */
-    public StorageReaderFile(final File file0, final Lambda1<String, T> keySelector0) {
+    public StorageReaderFile(final File file0, final Function<T, String> keySelector0) {
         this.file = file0;
         this.keySelector = keySelector0;
     }
