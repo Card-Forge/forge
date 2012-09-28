@@ -20,10 +20,12 @@ package forge;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Predicate;
+
 import forge.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.util.closures.Predicate;
+
 
 /**
  * AllZoneUtil contains static functions used to get CardLists of various cards

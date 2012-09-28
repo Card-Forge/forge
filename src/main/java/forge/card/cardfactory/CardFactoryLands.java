@@ -19,6 +19,8 @@ package forge.card.cardfactory;
 
 import javax.swing.JOptionPane;
 
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -37,7 +39,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
-import forge.util.closures.Predicate;
+
 import forge.view.ButtonUtil;
 
 /**

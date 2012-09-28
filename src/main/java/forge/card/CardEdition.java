@@ -17,12 +17,14 @@
  */
 package forge.card;
 
+import com.google.common.base.Predicate;
+
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.util.FileSection;
 import forge.util.StorageReaderFile;
 import forge.util.closures.Lambda1;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>
@@ -176,7 +178,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         /** The Constant canMakeBooster. */
         public static final Predicate<CardEdition> CAN_MAKE_BOOSTER = new CanMakeBooster();
 
-        private static class CanMakeBooster extends Predicate<CardEdition> {
+        private static class CanMakeBooster implements Predicate<CardEdition> {
             @Override
             public boolean apply(final CardEdition subject) {
                 return Singletons.getModel().getBoosters().contains(subject.getCode());
@@ -184,7 +186,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         }
 
         public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = new CanMakeStarter();
-        private static class CanMakeStarter extends Predicate<CardEdition> {
+        private static class CanMakeStarter implements Predicate<CardEdition> {
             @Override
             public boolean apply(final CardEdition subject) {
                 return Singletons.getModel().getTournamentPacks().contains(subject.getCode());
@@ -192,7 +194,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         }
 
         public static final Predicate<CardEdition> HAS_FAT_PACK = new CanMakeFatPack();
-        private static class CanMakeFatPack extends Predicate<CardEdition> {
+        private static class CanMakeFatPack implements Predicate<CardEdition> {
             @Override
             public boolean apply(final CardEdition subject) {
                 return Singletons.getModel().getFatPacks().contains(subject.getCode());
@@ -209,7 +211,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             return new LegalInFormat(format);
         }
 
-        private static class LegalInFormat extends Predicate<CardEdition> {
+        private static class LegalInFormat implements Predicate<CardEdition> {
             private final GameFormat format;
 
             public LegalInFormat(final GameFormat fmt) {

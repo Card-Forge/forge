@@ -20,6 +20,8 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
@@ -36,7 +38,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>

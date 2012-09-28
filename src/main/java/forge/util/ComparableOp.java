@@ -1,6 +1,6 @@
 /*
  * Forge: Play Magic: the Gathering.
- * Copyright (C) 2011  Forge Team
+ * Copyright (C) 2011  MaxMtg
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,19 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.util.closures;
+package forge.util;
 
 /**
- * The Class Lambda1.
- *
- * @param <R> the generic type
+ * Possible operators for comparables.
+ * 
+ * @author Max
+ * 
  */
-public abstract class Lambda0<R> {
+public enum ComparableOp {
 
-    /**
-     * Apply.
-     *
-     * @return the r
-     */
-    public abstract R apply();
+    EQUALS,
+    NOT_EQUALS,
+    GREATER_THAN,
+    LESS_THAN,
+    GT_OR_EQUAL,
+    LT_OR_EQUAL
 }

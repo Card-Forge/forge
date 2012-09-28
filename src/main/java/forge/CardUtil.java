@@ -30,6 +30,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.card.CardCharacteristics;
@@ -44,7 +45,7 @@ import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.MyRandom;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>

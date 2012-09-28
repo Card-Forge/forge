@@ -12723,6 +12723,7 @@ src/main/java/forge/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/util/Aggregates.java -text
 src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 src/main/java/forge/util/BinaryUtil.java -text
+src/main/java/forge/util/ComparableOp.java -text
 src/main/java/forge/util/CopyFiles.java svneol=native#text/plain
 src/main/java/forge/util/FileFinder.java svneol=native#text/plain
 src/main/java/forge/util/FileSection.java -text
@@ -12738,6 +12739,7 @@ src/main/java/forge/util/LineReader.java -text
 src/main/java/forge/util/MultiplexOutputStream.java svneol=native#text/plain
 src/main/java/forge/util/MyObservable.java svneol=native#text/plain
 src/main/java/forge/util/MyRandom.java svneol=native#text/plain
+src/main/java/forge/util/PredicateString.java -text
 src/main/java/forge/util/StorageImmediatelySerialized.java svneol=native#text/plain
 src/main/java/forge/util/StorageReaderFile.java -text
 src/main/java/forge/util/StorageReaderFolder.java -text
@@ -12745,12 +12747,8 @@ src/main/java/forge/util/StorageView.java -text
 src/main/java/forge/util/TextUtil.java -text
 src/main/java/forge/util/ThreadUtil.java svneol=native#text/plain
 src/main/java/forge/util/XmlUtil.java -text
-src/main/java/forge/util/closures/Lambda.java svneol=native#text/plain
 src/main/java/forge/util/closures/Lambda0.java -text
 src/main/java/forge/util/closures/Lambda1.java svneol=native#text/plain
-src/main/java/forge/util/closures/Predicate.java -text
-src/main/java/forge/util/closures/PredicateInteger.java -text
-src/main/java/forge/util/closures/PredicateString.java -text
 src/main/java/forge/util/closures/package-info.java svneol=native#text/plain
 src/main/java/forge/util/package-info.java -text
 src/main/java/forge/view/ButtonUtil.java svneol=native#text/plain

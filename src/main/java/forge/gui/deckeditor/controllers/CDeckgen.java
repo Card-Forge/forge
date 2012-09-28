@@ -1,5 +1,7 @@
 package forge.gui.deckeditor.controllers;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.Command;
@@ -19,7 +21,7 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.util.Aggregates;
-import forge.util.closures.Predicate;
+
 
 /** 
  * Controls the "analysis" panel in the deck editor UI.
@@ -78,7 +80,7 @@ public enum CDeckgen implements ICDoc {
 
         final Deck randomDeck = new Deck();
 
-        Predicate<CardPrinted> notBasicLand = Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND).bridge(CardPrinted.FN_GET_RULES);
+        Predicate<CardPrinted> notBasicLand = Predicates.not(Predicates.compose(CardRules.Predicates.Presets.IS_BASIC_LAND,CardPrinted.FN_GET_RULES));
         Iterable<CardPrinted> source = Iterables.filter(CardDb.instance().getAllUniqueCards(), notBasicLand);
         randomDeck.getMain().addAllFlat(Aggregates.random(source, 15*5));
                 

@@ -20,12 +20,14 @@ package forge;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.util.MyRandom;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>
@@ -97,7 +99,7 @@ public class CardList extends ArrayList<Card> {
     // cardType is like "Land" or "Goblin", returns a new CardList with cards
     // that do not have this type
     public final CardList getNotType(final String cardType) {
-        return this.filter(Predicate.not(CardPredicates.isType(cardType)));
+        return this.filter(Predicates.not(CardPredicates.isType(cardType)));
     }
 
     public final CardList getKeyword(final String keyword) {
@@ -105,7 +107,7 @@ public class CardList extends ArrayList<Card> {
     }
 
     public final CardList getNotKeyword(final String keyword) {
-        return this.filter(Predicate.not(CardPredicates.hasKeyword(keyword)));
+        return this.filter(Predicates.not(CardPredicates.hasKeyword(keyword)));
     }
 
     public final CardList getTargetableCards(final SpellAbility source) {
@@ -113,7 +115,7 @@ public class CardList extends ArrayList<Card> {
     }
 
     public final CardList getUnprotectedCards(final Card source) {
-        return this.filter(Predicate.not(CardPredicates.isProtectedFrom(source)));
+        return this.filter(Predicates.not(CardPredicates.isProtectedFrom(source)));
     }
 
     /**

@@ -23,15 +23,17 @@ import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.Card;
 import forge.CardUtil;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.game.player.Player;
-import forge.util.closures.Lambda1;
-import forge.util.closures.Predicate;
-import forge.util.closures.PredicateString;
+import forge.util.PredicateString;
+
 
 /**
  * A viciously lightweight version of a card, for instances
@@ -167,7 +169,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * Lambda to get rules for selects from list of printed cards.
      * 
      */
-    public static final Lambda1<CardRules, CardPrinted> FN_GET_RULES = new Lambda1<CardRules, CardPrinted>() {
+    public static final Function<CardPrinted, CardRules> FN_GET_RULES = new Function<CardPrinted, CardRules>() {
         @Override
         public CardRules apply(final CardPrinted from) {
             return from.card;
@@ -337,7 +339,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
          */
         public static Predicate<CardPrinted> printedInSets(final List<String> value, final boolean shouldContain) {
             if ((value == null) || value.isEmpty()) {
-                return Predicate.getTrue(CardPrinted.class);
+                return com.google.common.base.Predicates.alwaysTrue();
             }
             return new PredicateSets(value, shouldContain);
         }
@@ -351,7 +353,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
          */
         public static Predicate<CardPrinted> printedInSets(final String value) {
             if ((value == null) || value.isEmpty()) {
-                return Predicate.getTrue(CardPrinted.class);
+                return com.google.common.base.Predicates.alwaysTrue();
             }
             return new PredicateSets(Arrays.asList(new String[] { value }), true);
         }
@@ -391,7 +393,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             return new PredicateNamesExcept(what);
         }
 
-        private static class PredicateRarity extends Predicate<CardPrinted> {
+        private static class PredicateRarity implements Predicate<CardPrinted> {
             private final CardRarity operand;
             private final boolean shouldBeEqual;
 
@@ -406,7 +408,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             }
         }
 
-        private static class PredicateSets extends Predicate<CardPrinted> {
+        private static class PredicateSets implements Predicate<CardPrinted> {
             private final List<String> sets;
             private final boolean mustContain;
 
@@ -475,7 +477,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             public static final Predicate<CardPrinted> IS_MYTHIC_RARE = Predicates.rarity(true, CardRarity.MythicRare);
 
             /** The Constant isRareOrMythic. */
-            public static final Predicate<CardPrinted> IS_RARE_OR_MYTHIC = Predicate.or(Presets.IS_RARE,
+            public static final Predicate<CardPrinted> IS_RARE_OR_MYTHIC = com.google.common.base.Predicates.or(Presets.IS_RARE,
                     Presets.IS_MYTHIC_RARE);
 
             /** The Constant isSpecial. */
@@ -483,10 +485,6 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
 
             /** The Constant exceptLands. */
             public static final Predicate<CardPrinted> EXCEPT_LANDS = Predicates.rarity(false, CardRarity.BasicLand);
-
-            /** The Constant isTrue. */
-            public static final Predicate<CardPrinted> IS_TRUE = Predicate.getTrue(CardPrinted.class);
-
         }
     }
 }

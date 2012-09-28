@@ -18,7 +18,6 @@
 package forge.card;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -26,10 +25,11 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.util.closures.Predicate;
-import forge.util.closures.PredicateInteger.ComparableOp;
-import forge.util.closures.Predicate.PredicatesOp;
-import forge.util.closures.PredicateString;
+import com.google.common.base.Predicate;
+
+
+import forge.util.ComparableOp;
+import forge.util.PredicateString;
 
 
 /**
@@ -555,7 +555,7 @@ public final class CardRules {
             try {
                 return Predicates.coreType(isEqual, Enum.valueOf(CardCoreType.class, what));
             } catch (final Exception e) {
-                return Predicate.getFalse(CardRules.class);
+                return com.google.common.base.Predicates.alwaysFalse();
             }
         }
 
@@ -585,7 +585,7 @@ public final class CardRules {
             try {
                 return Predicates.superType(isEqual, Enum.valueOf(CardSuperType.class, what));
             } catch (final Exception e) {
-                return Predicate.getFalse(CardRules.class);
+                return com.google.common.base.Predicates.alwaysFalse();
             }
         }
 
@@ -699,7 +699,7 @@ public final class CardRules {
             }
         }
 
-        private static class LeafColor extends Predicate<CardRules> {
+        private static class LeafColor implements Predicate<CardRules> {
             public enum ColorOperator {
                 CountColors, CountColorsGreaterOrEqual, HasAnyOf, HasAllOf, Equals
             }
@@ -731,7 +731,7 @@ public final class CardRules {
             }
         }
 
-        private static class LeafNumber extends Predicate<CardRules> {
+        private static class LeafNumber implements Predicate<CardRules> {
             protected enum CardField {
                 CMC, POWER, TOUGHNESS,
             }
@@ -783,7 +783,7 @@ public final class CardRules {
             }
         }
 
-        private static class PredicateCoreType extends Predicate<CardRules> {
+        private static class PredicateCoreType implements Predicate<CardRules> {
             private final CardCoreType operand;
             private final boolean shouldBeEqual;
 
@@ -798,7 +798,7 @@ public final class CardRules {
             }
         }
 
-        private static class PredicateSuperType extends Predicate<CardRules> {
+        private static class PredicateSuperType implements Predicate<CardRules> {
             private final CardSuperType operand;
             private final boolean shouldBeEqual;
 
@@ -813,7 +813,7 @@ public final class CardRules {
             }
         }
 
-        private static class PredicateLastesSetRarity extends Predicate<CardRules> {
+        private static class PredicateLastesSetRarity implements Predicate<CardRules> {
             private final CardRarity operand;
             private final boolean shouldBeEqual;
 
@@ -828,7 +828,7 @@ public final class CardRules {
             }
         }
 
-        private static class PredicateExistsInSets extends Predicate<CardRules> {
+        private static class PredicateExistsInSets implements Predicate<CardRules> {
             private final List<String> sets;
 
             public PredicateExistsInSets(final List<String> wantSets) {
@@ -886,16 +886,14 @@ public final class CardRules {
             public static final Predicate<CardRules> IS_NON_LAND = Predicates.coreType(false, CardCoreType.Land);
 
             /** The Constant isNonCreatureSpell. */
-            public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicate.compose(Presets.IS_CREATURE,
-                    PredicatesOp.NOR, Presets.IS_LAND);
+            public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = 
+                    com.google.common.base.Predicates.not(com.google.common.base.Predicates.or(Presets.IS_CREATURE,Presets.IS_LAND));
 
-            /**
-             * 
-             */
             @SuppressWarnings("unchecked")
-            public static final Predicate<CardRules> IS_NONCREATURE_SPELL_FOR_GENERATOR = Predicate.or(Arrays.asList(
+            public static final Predicate<CardRules> IS_NONCREATURE_SPELL_FOR_GENERATOR = 
+                com.google.common.base.Predicates.or(
                     Presets.IS_SORCERY, Presets.IS_INSTANT, Presets.IS_PLANESWALKER, Presets.IS_ENCHANTMENT,
-                    Predicate.compose(Presets.IS_ARTIFACT, PredicatesOp.GT, Presets.IS_CREATURE))
+                    com.google.common.base.Predicates.and(Presets.IS_ARTIFACT, com.google.common.base.Predicates.not(Presets.IS_CREATURE))
             );
 
             /** The Constant isWhite. */
@@ -929,9 +927,6 @@ public final class CardRules {
                 Presets.COLORS.add(Presets.IS_GREEN);
                 Presets.COLORS.add(Presets.IS_COLORLESS);
             }
-
-            /** The Constant constantTrue. */
-            public static final Predicate<CardRules> CONSTANT_TRUE = Predicate.getTrue(CardRules.class);
 
             // Think twice before using these, since rarity is a prop of printed
             // card.

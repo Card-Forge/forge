@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 
@@ -33,7 +35,6 @@ import forge.item.CardPrinted;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.closures.Lambda1;
-import forge.util.closures.Predicate;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
 /**
@@ -85,12 +86,12 @@ public final class BoosterUtils {
         final Iterable<CardPrinted> cardpool = CardDb.instance().getAllUniqueCards();
 
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool,
-                Predicate.and(filter, CardPrinted.Predicates.Presets.IS_COMMON), numCommon, colorFilters));
+                Predicates.and(filter, CardPrinted.Predicates.Presets.IS_COMMON), numCommon, colorFilters));
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool,
-                Predicate.and(filter, CardPrinted.Predicates.Presets.IS_UNCOMMON), numUncommon, colorFilters));
+                Predicates.and(filter, CardPrinted.Predicates.Presets.IS_UNCOMMON), numUncommon, colorFilters));
 
         int nRares = numRare, nMythics = 0;
-        final Predicate<CardPrinted> filterMythics = Predicate.and(filter,
+        final Predicate<CardPrinted> filterMythics = Predicates.and(filter,
                 CardPrinted.Predicates.Presets.IS_MYTHIC_RARE);
         final boolean haveMythics = Iterables.any(cardpool, filterMythics);
         for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {
@@ -102,7 +103,7 @@ public final class BoosterUtils {
         }
 
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool,
-                Predicate.and(filter, CardPrinted.Predicates.Presets.IS_RARE), nRares, colorFilters));
+                Predicates.and(filter, CardPrinted.Predicates.Presets.IS_RARE), nRares, colorFilters));
         if (nMythics > 0) {
             cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, filterMythics, nMythics, colorFilters));
         }
@@ -142,7 +143,8 @@ public final class BoosterUtils {
             if (size > 0) {
                 final Predicate<CardRules> color2 = allowedColors.get(iAttempt % size);
                 if (color2 != null) {
-                    card = Aggregates.random(Iterables.filter(source, Predicate.and(filter, color2, CardPrinted.FN_GET_RULES)));
+                    Predicate<CardPrinted> color2c = Predicates.compose(color2, CardPrinted.FN_GET_RULES);
+                    card = Aggregates.random(Iterables.filter(source, Predicates.and(filter, color2c)));
                 }
             }
 
@@ -231,7 +233,7 @@ public final class BoosterUtils {
         }
 
         // Determine color ("random" defaults to null color)
-        Predicate<CardRules> col = Predicate.getTrue(CardRules.class);
+        Predicate<CardRules> col = Predicates.alwaysTrue();
         if (temp[1].equalsIgnoreCase("black")) {
             col = CardRules.Predicates.Presets.IS_BLACK;
         } else if (temp[1].equalsIgnoreCase("blue")) {
@@ -254,6 +256,7 @@ public final class BoosterUtils {
                 return arg1.getSingletonBoosterPack(qty);
             }
         };
-        return new UnOpenedProduct(openWay, new BoosterGenerator(Predicate.and(rar, col, CardPrinted.FN_GET_RULES))); // qty))
+        Predicate<CardPrinted> colorPred = Predicates.compose(col, CardPrinted.FN_GET_RULES);
+        return new UnOpenedProduct(openWay, new BoosterGenerator(Predicates.and(rar, colorPred))); // qty))
     }
 }

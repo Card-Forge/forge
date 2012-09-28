@@ -28,7 +28,7 @@ import com.google.common.base.Function;
  * @param <A1>
  *            the generic type
  */
-public abstract class Lambda1<R, A1> implements Lambda<R>, Function<A1, R> {
+public abstract class Lambda1<R, A1> implements Function<A1, R> {
 
     /**
      * Apply.
@@ -38,25 +38,4 @@ public abstract class Lambda1<R, A1> implements Lambda<R>, Function<A1, R> {
      * @return the r
      */
     public abstract R apply(A1 arg1);
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * net.slightlymagic.braids.util.lambda.Lambda#apply(java.lang.Object[])
-     */
-
-    // TODO @Override
-    /**
-     * Apply.
-     *
-     * @param args Object[]
-     * @return R
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public final R apply(final Object[] args) {
-        return apply((A1) args[0]);
-    }
-
 }

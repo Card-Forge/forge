@@ -3,6 +3,8 @@ package forge.gui.deckeditor;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 
@@ -14,7 +16,7 @@ import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
 import forge.util.Aggregates;
-import forge.util.closures.Predicate;
+
 
 /** 
  * Static methods for working with top-level editor methods,
@@ -85,7 +87,7 @@ public final class SEditorUtil  {
     }
 
     public static <T extends InventoryItem> void setLabelTextSum(JLabel label, final ItemPoolView<T> deck, Predicate<CardRules> predicate) {
-        int sum = Aggregates.sum(Iterables.filter(deck, predicate.bridge(deck.getFnToCard())), deck.getFnToCount());
+        int sum = Aggregates.sum(Iterables.filter(deck, Predicates.compose(predicate, deck.getFnToCard())), deck.getFnToCount());
         label.setText(String.valueOf(sum));
     }
     

@@ -4,6 +4,8 @@ import java.util.Map.Entry;
 
 import javax.swing.JLabel;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.Command;
@@ -19,7 +21,7 @@ import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.util.Aggregates;
-import forge.util.closures.Predicate;
+
 
 /** 
  * Controls the "analysis" panel in the deck editor UI.
@@ -57,7 +59,7 @@ public enum CStatistics implements ICDoc {
     }
 
     private void setLabelValue(JLabel label, ItemPoolView<CardPrinted> deck, Predicate<CardRules> predicate, int total) {
-        int tmp = Aggregates.sum(Iterables.filter(deck, predicate.bridge(deck.getFnToCard())), deck.getFnToCount());
+        int tmp = Aggregates.sum(Iterables.filter(deck, Predicates.compose(predicate, deck.getFnToCard())), deck.getFnToCount());
         label.setText( tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
     }

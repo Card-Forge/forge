@@ -24,6 +24,8 @@ import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -46,7 +48,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>

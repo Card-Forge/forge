@@ -22,11 +22,11 @@ import java.util.Observer;
 import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
-
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
@@ -35,7 +35,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyObservable;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>
@@ -660,12 +660,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     private boolean skipTurnTimeVault(Player turn) {
         // time vault:
         CardList vaults = turn.getCardsIn(ZoneType.Battlefield, "Time Vault");
-        vaults = vaults.filter(new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.isTapped();
-            }
-        });
+        vaults = vaults.filter(CardPredicates.Presets.TAPPED);
 
         if (vaults.size() > 0) {
             final Card crd = vaults.get(0);

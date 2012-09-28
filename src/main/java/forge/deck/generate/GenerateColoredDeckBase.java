@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.Constant;
@@ -38,7 +40,6 @@ import forge.item.ItemPool;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
-import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -85,12 +86,13 @@ public abstract class GenerateColoredDeckBase {
         final Iterable<CardPrinted> cards = selectCardsOfMatchingColorForPlayer(pt);
         // build subsets based on type
         
-        final Iterable<CardPrinted> creatures = Iterables.filter(cards, CardRules.Predicates.Presets.IS_CREATURE.bridge(CardPrinted.FN_GET_RULES));
+        final Iterable<CardPrinted> creatures = Iterables.filter(cards, Predicates.compose(CardRules.Predicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
         final int creatCnt = (int) (getCreatPercentage() * size);
         tmpDeck.append("Creature Count:").append(creatCnt).append("\n");
         addCmcAdjusted(creatures, creatCnt, cmcLevels, cmcAmounts);
 
-        final Iterable<CardPrinted> spells = Iterables.filter(cards, CardRules.Predicates.Presets.IS_NONCREATURE_SPELL_FOR_GENERATOR.bridge(CardPrinted.FN_GET_RULES));
+        Predicate<CardPrinted> preSpells = Predicates.compose(CardRules.Predicates.Presets.IS_NONCREATURE_SPELL_FOR_GENERATOR, CardPrinted.FN_GET_RULES);
+        final Iterable<CardPrinted> spells = Iterables.filter(cards, preSpells);
         final int spellCnt = (int) (getSpellPercentage() * size);
         tmpDeck.append("Spell Count:").append(spellCnt).append("\n");
         addCmcAdjusted(spells, spellCnt, cmcLevels, cmcAmounts);
@@ -177,7 +179,7 @@ public abstract class GenerateColoredDeckBase {
             addSome(diff, tDeck.toFlatList());
         } else if (actualSize > targetSize) {
 
-            Predicate<CardPrinted> exceptBasicLand = Predicate.not(CardRules.Predicates.Presets.IS_BASIC_LAND).bridge(CardPrinted.FN_GET_RULES);
+            Predicate<CardPrinted> exceptBasicLand = Predicates.not(Predicates.compose(CardRules.Predicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES));
 
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
                 Iterable<CardPrinted> matchingCards = Iterables.filter(tDeck.toFlatList(), exceptBasicLand);
@@ -196,7 +198,7 @@ public abstract class GenerateColoredDeckBase {
         final List<CardPrinted> curved = new ArrayList<CardPrinted>();
 
         for (int i = 0; i < cmcAmounts.length; i++) {
-            Iterable<CardPrinted> matchingCards = Iterables.filter(source, cmcLevels.get(i).bridge(CardPrinted.FN_GET_RULES));
+            Iterable<CardPrinted> matchingCards = Iterables.filter(source, Predicates.compose(cmcLevels.get(i), CardPrinted.FN_GET_RULES));
             curved.addAll( Aggregates.random(matchingCards, cmcAmounts[i]));
         }
 
@@ -215,9 +217,9 @@ public abstract class GenerateColoredDeckBase {
         Predicate<CardRules> hasColor = new GenerateDeckUtil.ContainsAllColorsFrom(colors);
 
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {
-            hasColor = Predicate.or(hasColor, GenerateDeckUtil.COLORLESS_CARDS);
+            hasColor = Predicates.or(hasColor, GenerateDeckUtil.COLORLESS_CARDS);
         }
-        return Iterables.filter(CardDb.instance().getAllCards(), Predicate.and(canPlay, hasColor).bridge(CardPrinted.FN_GET_RULES));
+        return Iterables.filter(CardDb.instance().getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor), CardPrinted.FN_GET_RULES));
     }
 
     protected static CCnt[] countLands(ItemPool<CardPrinted> outList) {

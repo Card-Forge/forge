@@ -1,7 +1,10 @@
 package forge.item;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
-import forge.util.closures.Predicate;
+
+
 
 /**
  * Filtering conditions for miscellaneous InventoryItems.
@@ -60,7 +63,7 @@ public abstract class ItemPredicate {
      * 
      * @return the predicate
      */
-    public static class PredicateBoosterPack extends Predicate<InventoryItem> {
+    public static class PredicateBoosterPack implements Predicate<InventoryItem> {
 
         @Override
         public boolean apply(final InventoryItem card) {
@@ -73,7 +76,7 @@ public abstract class ItemPredicate {
      * 
      * @return the predicate
      */
-    public static class PredicateFatPack extends Predicate<InventoryItem> {
+    public static class PredicateFatPack implements Predicate<InventoryItem> {
 
         @Override
         public boolean apply(final InventoryItem card) {
@@ -86,7 +89,7 @@ public abstract class ItemPredicate {
      * 
      * @return the predicate
      */
-    public static class PredicateTournamentPack extends Predicate<InventoryItem> {
+    public static class PredicateTournamentPack implements Predicate<InventoryItem> {
 
         @Override
         public boolean apply(final InventoryItem card) {
@@ -99,7 +102,7 @@ public abstract class ItemPredicate {
      * 
      * @return the predicate
      */
-    public static class PredicateStarterDeck extends Predicate<InventoryItem> {
+    public static class PredicateStarterDeck implements Predicate<InventoryItem> {
 
         @Override
         public boolean apply(final InventoryItem card) {
@@ -112,7 +115,7 @@ public abstract class ItemPredicate {
      * 
      * @return the predicate
      */
-    public static class PredicatePrebuiltDeck extends Predicate<InventoryItem> {
+    public static class PredicatePrebuiltDeck implements Predicate<InventoryItem> {
 
         @Override
         public boolean apply(final InventoryItem card) {
@@ -135,7 +138,8 @@ public abstract class ItemPredicate {
         public static final Predicate<InventoryItem> IS_TOURNAMENT_PACK = tournamentPack();
 
         /** The Item IsPack. */
-        public static final Predicate<InventoryItem> IS_PACK = Predicate.or(Predicate.or(IS_BOOSTER_PACK, IS_FAT_PACK), IS_TOURNAMENT_PACK);
+        @SuppressWarnings("unchecked")
+        public static final Predicate<InventoryItem> IS_PACK = Predicates.or(IS_BOOSTER_PACK, IS_FAT_PACK, IS_TOURNAMENT_PACK);
 
         /** The Item IsStarterDeck. */
         public static final Predicate<InventoryItem> IS_STARTER_DECK = starterDeck();
@@ -144,6 +148,6 @@ public abstract class ItemPredicate {
         public static final Predicate<InventoryItem> IS_PREBUILT_DECK = prebuiltDeck();
 
         /** The Item IsDeck. */
-        public static final Predicate<InventoryItem> IS_DECK = Predicate.or(IS_STARTER_DECK, IS_PREBUILT_DECK);
+        public static final Predicate<InventoryItem> IS_DECK = Predicates.or(IS_STARTER_DECK, IS_PREBUILT_DECK);
     }
 }

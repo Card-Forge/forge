@@ -22,6 +22,8 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
+import com.google.common.base.Predicate;
+
 import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -52,7 +54,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>

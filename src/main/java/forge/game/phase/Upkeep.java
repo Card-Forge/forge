@@ -19,6 +19,7 @@ package forge.game.phase;
 
 import java.util.ArrayList;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
@@ -47,7 +48,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
-import forge.util.closures.Predicate;
+
 import forge.view.ButtonUtil;
 
 /**

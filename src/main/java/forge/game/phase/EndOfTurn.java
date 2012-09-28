@@ -17,6 +17,8 @@
  */
 package forge.game.phase;
 
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -28,7 +30,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameLossReason;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>

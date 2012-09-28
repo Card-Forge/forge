@@ -20,6 +20,8 @@ package forge.game.player;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -35,7 +37,7 @@ import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-import forge.util.closures.Predicate;
+
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
 /**

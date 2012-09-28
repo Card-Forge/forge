@@ -20,10 +20,12 @@ package forge.card;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Predicate;
+
 import forge.item.CardPrinted;
 import forge.util.StorageReaderFile;
 import forge.util.closures.Lambda1;
-import forge.util.closures.Predicate;
+
 // import forge.deck.Deck;
 
 /**

@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.item.CardDb;
@@ -31,7 +32,6 @@ import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.util.MyRandom;
 import forge.util.closures.Lambda1;
-import forge.util.closures.Predicate;
 
 /**
  * <p>

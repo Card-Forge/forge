@@ -22,6 +22,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -54,7 +56,7 @@ import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.Aggregates;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>

@@ -26,6 +26,7 @@ import java.util.Random;
 import java.util.TreeMap;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
@@ -75,7 +76,7 @@ import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
-import forge.util.closures.Predicate;
+
 import forge.view.ButtonUtil;
 
 /**

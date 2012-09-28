@@ -30,12 +30,13 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.closures.Lambda1;
-import forge.util.closures.Predicate;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 /**
@@ -101,9 +102,9 @@ public final class QuestUtilCards {
         final int nRare = this.qpref.getPreferenceInt(QPref.BOOSTER_RARES);
 
         final ArrayList<CardPrinted> newCards = new ArrayList<CardPrinted>();
-        newCards.addAll(BoosterUtils.generateDistinctCards(Predicate.and(fSets, CardPrinted.Predicates.Presets.IS_COMMON), nCommon));
-        newCards.addAll(BoosterUtils.generateDistinctCards(Predicate.and(fSets, CardPrinted.Predicates.Presets.IS_UNCOMMON), nUncommon));
-        newCards.addAll(BoosterUtils.generateDistinctCards(Predicate.and(fSets, CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC), nRare));
+        newCards.addAll(BoosterUtils.generateDistinctCards(Predicates.and(fSets, CardPrinted.Predicates.Presets.IS_COMMON), nCommon));
+        newCards.addAll(BoosterUtils.generateDistinctCards(Predicates.and(fSets, CardPrinted.Predicates.Presets.IS_UNCOMMON), nUncommon));
+        newCards.addAll(BoosterUtils.generateDistinctCards(Predicates.and(fSets, CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC), nRare));
 
         this.addAllCards(newCards);
         return newCards;
@@ -322,18 +323,18 @@ public final class QuestUtilCards {
     private final Predicate<CardEdition> filterExt = CardEdition.Predicates.isLegalInFormat(this.formats.getExtended());
 
     /** The filter t2booster. */
-    private final Predicate<CardEdition> filterT2booster = Predicate.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
+    private final Predicate<CardEdition> filterT2booster = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
             CardEdition.Predicates.isLegalInFormat(this.formats.getStandard()));
 
     /** The filter ext but t2. */
-    private final Predicate<CardEdition> filterExtButT2 = Predicate.and(
+    private final Predicate<CardEdition> filterExtButT2 = Predicates.and(
             CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicate.and(this.filterExt,
-                    Predicate.not(CardEdition.Predicates.isLegalInFormat(this.formats.getStandard()))));
+            Predicates.and(this.filterExt,
+                    Predicates.not(CardEdition.Predicates.isLegalInFormat(this.formats.getStandard()))));
 
     /** The filter not ext. */
-    private final Predicate<CardEdition> filterNotExt = Predicate.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicate.not(this.filterExt));
+    private final Predicate<CardEdition> filterNotExt = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
+            Predicates.not(this.filterExt));
 
     /**
      * Generate boosters in shop.

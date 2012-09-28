@@ -17,14 +17,15 @@
  */
 package forge;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
+import forge.util.PredicateString;
 import forge.util.closures.Lambda1;
-import forge.util.closures.Predicate;
-import forge.util.closures.PredicateString;
+
 
 /**
  * <p>
@@ -322,9 +323,6 @@ public final class CardPredicates {
                 return c.isCreature() && (!c.hasFirstStrike() || c.hasDoubleStrike());
             }
         };
-        public static final Predicate<Card> All = Predicate.getTrue(Card.class);
-        
-        
     }
     
     public static class Accessors {

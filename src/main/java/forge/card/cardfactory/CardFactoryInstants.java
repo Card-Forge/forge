@@ -17,6 +17,8 @@
  */
 package forge.card.cardfactory;
 
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -37,7 +39,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>

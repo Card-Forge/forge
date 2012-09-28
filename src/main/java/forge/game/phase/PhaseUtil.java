@@ -19,6 +19,8 @@ package forge.game.phase;
 
 import java.util.HashMap;
 
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -31,7 +33,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.nonsingleton.VField.PhaseLabel;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>

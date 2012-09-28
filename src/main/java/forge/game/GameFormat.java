@@ -20,10 +20,13 @@ package forge.game;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+
 import forge.card.CardRules;
 import forge.item.CardPrinted;
 import forge.util.closures.Lambda1;
-import forge.util.closures.Predicate;
+
 
 /**
  * TODO: Write javadoc for this type.
@@ -59,17 +62,16 @@ public final class GameFormat {
 
     private Predicate<CardPrinted> buildFilterPritned() {
         final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
-        final Predicate<CardPrinted> allowSets = (this.allowedSetCodes == null) || this.allowedSetCodes.isEmpty() ? CardPrinted.Predicates.Presets.IS_TRUE
-                : CardPrinted.Predicates.printedInSets(this.allowedSetCodes, true);
-        return Predicate.and(banNames, allowSets);
+        if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty() )
+            return banNames;
+        return Predicates.and(banNames, CardPrinted.Predicates.printedInSets(this.allowedSetCodes, true));
     }
 
     private Predicate<CardPrinted> buildFilterRules() {
         final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
-        final Predicate<CardPrinted> allowSets = (this.allowedSetCodes == null) || this.allowedSetCodes.isEmpty() ? CardPrinted.Predicates.Presets.IS_TRUE
-                : Predicate.bridge(CardRules.Predicates.wasPrintedInSets(this.allowedSetCodes),
-                        CardPrinted.FN_GET_RULES);
-        return Predicate.and(banNames, allowSets);
+        if ( this.allowedSetCodes == null || this.allowedSetCodes.isEmpty() )
+            return banNames;
+        return Predicates.and(banNames, Predicates.compose(CardRules.Predicates.wasPrintedInSets(this.allowedSetCodes), CardPrinted.FN_GET_RULES));
     }
 
     /**

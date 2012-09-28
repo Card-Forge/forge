@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -48,7 +50,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
-import forge.util.closures.Predicate;
+
 import forge.view.ButtonUtil;
 
 /**

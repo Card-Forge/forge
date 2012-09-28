@@ -29,6 +29,7 @@ import java.util.NoSuchElementException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -38,7 +39,7 @@ import forge.card.CardInSet;
 import forge.card.CardRules;
 import forge.card.MtgDataParser;
 import forge.util.closures.Lambda1;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>

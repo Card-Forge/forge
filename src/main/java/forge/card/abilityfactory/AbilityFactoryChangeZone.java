@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
@@ -58,7 +60,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>
@@ -1208,7 +1210,7 @@ public final class AbilityFactoryChangeZone {
                     c = CardFactoryUtil.getBestAI(fetchList);
                 } else {
                     // Don't fetch another tutor with the same name
-                    CardList sameNamed = fetchList.filter(Predicate.not(CardPredicates.nameEquals(card.getName())));
+                    CardList sameNamed = fetchList.filter(Predicates.not(CardPredicates.nameEquals(card.getName())));
                     if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
                         fetchList = sameNamed;
                     }
@@ -1650,7 +1652,7 @@ public final class AbilityFactoryChangeZone {
         CardList list = AllZoneUtil.getCardsIn(origin);
         list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
         if (source.isInZone(ZoneType.Hand)) {
-            list = list.filter(Predicate.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
+            list = list.filter(Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
         }
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {

@@ -23,6 +23,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
@@ -55,7 +57,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
-import forge.util.closures.Predicate;
+
 import forge.view.ButtonUtil;
 
 /**
@@ -75,7 +77,7 @@ public class CardFactoryCreatures {
             @Override
             public boolean canPlayAI() {
                 final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                return Iterables.any(list, Predicate.or(CardPredicates.nameEquals("Glorious Anthem"), CardPredicates.nameEquals("Gaea's Anthem")));
+                return Iterables.any(list, Predicates.or(CardPredicates.nameEquals("Glorious Anthem"), CardPredicates.nameEquals("Gaea's Anthem")));
             }
         };
         // Do not remove SpellAbilities created by AbilityFactory or

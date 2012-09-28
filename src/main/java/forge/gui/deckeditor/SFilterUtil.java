@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.game.GameFormat;
@@ -23,9 +26,8 @@ import forge.gui.WrapLayout;
 import forge.gui.deckeditor.controllers.CFilters;
 import forge.gui.deckeditor.views.VFilters;
 import forge.item.CardPrinted;
-import forge.util.closures.Predicate;
-import forge.util.closures.PredicateInteger.ComparableOp;
-import forge.util.closures.PredicateString.StringOp;
+import forge.util.ComparableOp;
+import forge.util.PredicateString.StringOp;
 
 /** 
  * Static factory; holds blocks of form elements and predicates
@@ -178,7 +180,7 @@ public class SFilterUtil {
      * @return Predicate<CardPrinted>
      */
     public static Predicate<CardPrinted> buildColorFilter() {
-        if (MAP_COLOR_CHECKBOXES.isEmpty()) { return Predicate.getTrue(CardPrinted.class); }
+        if (MAP_COLOR_CHECKBOXES.isEmpty()) { return Predicates.alwaysTrue(); }
 
         final List<Predicate<CardRules>> ors = new ArrayList<Predicate<CardRules>>();
         JCheckBox chbTemp;
@@ -207,15 +209,13 @@ public class SFilterUtil {
         chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.MULTICOLOR)).getCheckBox();
         final Predicate<CardPrinted> preMulti;
         if (chbTemp.isSelected()) {
-            preMulti = Predicate.getTrue(CardPrinted.class);
+            preMulti = Predicates.alwaysTrue();
         }
         else {
-            preMulti = Predicate.not(Predicate.bridge(
-                    CardRules.Predicates.Presets.IS_MULTICOLOR, CardPrinted.FN_GET_RULES));
+            preMulti = Predicates.compose(CardRules.Predicates.Presets.IS_MULTICOLOR, CardPrinted.FN_GET_RULES);
         }
 
-        final Predicate<CardPrinted> preColors =
-                Predicate.bridge(Predicate.or(ors), CardPrinted.FN_GET_RULES);
+        final Predicate<CardPrinted> preColors = Predicates.compose(Predicates.or(ors), CardPrinted.FN_GET_RULES);
 
         // Corner case: if multi is checked, and the rest are empty, AND won't work.
         // This still doesn't work perfectly :/
@@ -229,11 +229,10 @@ public class SFilterUtil {
          }
 
         if (allEmptyExceptMulti) {
-            return Predicate.bridge(
-                CardRules.Predicates.Presets.IS_MULTICOLOR, CardPrinted.FN_GET_RULES);
+            return Predicates.compose(CardRules.Predicates.Presets.IS_MULTICOLOR, CardPrinted.FN_GET_RULES);
         }
         else {
-            return Predicate.and(preColors, preMulti);
+            return Predicates.and(preColors, preMulti);
         }
     }
 
@@ -245,7 +244,7 @@ public class SFilterUtil {
     public static Predicate<CardPrinted> buildSetAndFormatFilter() {
         // Set/Format filter
         if (VFilters.SINGLETON_INSTANCE.getCbxSets().getSelectedIndex() == 0) {
-            return Predicate.getTrue(CardPrinted.class);
+            return Predicates.alwaysTrue();
         }
 
         final Object selected = VFilters.SINGLETON_INSTANCE.getCbxSets().getSelectedItem();
@@ -266,7 +265,7 @@ public class SFilterUtil {
      * @return Predicate<CardPrinted>
      */
     public static Predicate<CardPrinted> buildTypeFilter() {
-        if (MAP_TYPE_CHECKBOXES.isEmpty()) { return Predicate.getTrue(CardPrinted.class); }
+        if (MAP_TYPE_CHECKBOXES.isEmpty()) { return Predicates.alwaysTrue(); }
 
         final List<Predicate<CardRules>> ors = new ArrayList<Predicate<CardRules>>();
         JCheckBox chbTemp;
@@ -292,7 +291,7 @@ public class SFilterUtil {
         chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.SORCERY)).getCheckBox();
         if (chbTemp.isSelected()) { ors.add(CardRules.Predicates.Presets.IS_SORCERY); }
 
-        return Predicate.bridge(Predicate.or(ors), CardPrinted.FN_GET_RULES);
+        return Predicates.compose(Predicates.or(ors), CardPrinted.FN_GET_RULES);
     }
 
     /**
@@ -303,8 +302,8 @@ public class SFilterUtil {
      * @return Predicate<CardPrinted>
      */
     public static Predicate<CardPrinted> buildTextFilter() {
-        Predicate<CardPrinted> filterAnd = Predicate.getTrue(CardPrinted.class);
-        Predicate<CardPrinted> filterNot = Predicate.getTrue(CardPrinted.class);
+        Predicate<CardPrinted> filterAnd = Predicates.alwaysTrue();
+        Predicate<CardPrinted> filterNot = Predicates.alwaysTrue();
 
         final String strContains = VFilters.SINGLETON_INSTANCE.getTxfContains().getText();
         final String strWithout = VFilters.SINGLETON_INSTANCE.getTxfWithout().getText();
@@ -324,17 +323,17 @@ public class SFilterUtil {
             for (final String s : splitContains) {
                 final List<Predicate<CardPrinted>> subands = new ArrayList<Predicate<CardPrinted>>();
 
-                if (useName) { subands.add(Predicate.bridge(CardRules.Predicates.name(
+                if (useName) { subands.add(Predicates.compose(CardRules.Predicates.name(
                         StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
-                if (useType) { subands.add(Predicate.bridge(CardRules.Predicates.joinedType(
+                if (useType) { subands.add(Predicates.compose(CardRules.Predicates.joinedType(
                         StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
-                if (useText) { subands.add(Predicate.bridge(CardRules.Predicates.rules(
+                if (useText) { subands.add(Predicates.compose(CardRules.Predicates.rules(
                         StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
 
-                ands.add(Predicate.or(subands));
+                ands.add(Predicates.or(subands));
             }
 
-            filterAnd = Predicate.and(ands);
+            filterAnd = Predicates.and(ands);
         }
 
         if (!strWithout.isEmpty()) {
@@ -348,20 +347,17 @@ public class SFilterUtil {
             for (final String s : splitWithout) {
                 final List<Predicate<CardPrinted>> subnots = new ArrayList<Predicate<CardPrinted>>();
 
-                if (useName) { subnots.add(Predicate.bridge(CardRules.Predicates.name(
-                        StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
-                if (useType) { subnots.add(Predicate.bridge(CardRules.Predicates.joinedType(
-                        StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
-                if (useText) { subnots.add(Predicate.bridge(CardRules.Predicates.rules(
-                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
+                if (useName) { subnots.add(Predicates.compose(CardRules.Predicates.name(StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
+                if (useType) { subnots.add(Predicates.compose(CardRules.Predicates.joinedType(StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
+                if (useText) { subnots.add(Predicates.compose(CardRules.Predicates.rules(StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
 
-                nots.add(Predicate.or(subnots));
+                nots.add(Predicates.or(subnots));
             }
 
-            filterNot = Predicate.not(Predicate.or(nots));
+            filterNot = Predicates.not(Predicates.or(nots));
         }
 
-        return Predicate.and(filterAnd, filterNot);
+        return Predicates.and(filterAnd, filterNot);
     }
 
     /**
@@ -372,7 +368,7 @@ public class SFilterUtil {
      */
     public static Predicate<CardPrinted> buildIntervalFilter() {
         final VFilters view = VFilters.SINGLETON_INSTANCE;
-        Predicate<CardPrinted> filter = Predicate.getTrue(CardPrinted.class);
+        Predicate<CardPrinted> filter = Predicates.alwaysTrue();
 
         // Must include -1 so non-creatures are included by default.
         final int plow = view.getCbxPLow().getSelectedItem().toString().equals("*")
@@ -398,73 +394,73 @@ public class SFilterUtil {
         // Power: CardRules returns null if no power, which means extra
         // filtering must be applied to allow all cards to be shown if * is chosen.
         // (Without this, lands and such would be filtered out by default.)
-        if (plow > phigh) { prePower = Predicate.getFalse(CardPrinted.class); }
+        if (plow > phigh) { prePower = Predicates.alwaysFalse(); }
         else {
             // If * is selected in the combo box, cards without power
             // will be included in the filter.
             final Predicate<CardPrinted> preNotCreature;
             if (plow == -1) {
-                preNotCreature = Predicate.not(
-                    Predicate.bridge(CardRules.Predicates.Presets.IS_CREATURE,
+                preNotCreature = Predicates.not(
+                    Predicates.compose(CardRules.Predicates.Presets.IS_CREATURE,
                             CardPrinted.FN_GET_RULES));
             }
             // Otherwise, if 0 or higher is selected, cards without power
             // are excluded.
             else {
-                preNotCreature = Predicate.getFalse(CardPrinted.class);
+                preNotCreature = Predicates.alwaysFalse();
             }
 
-            final Predicate<CardPrinted> prePowerTemp = Predicate.and(
-            Predicate.bridge(CardRules.Predicates.power(
+            final Predicate<CardPrinted> prePowerTemp = Predicates.and(
+            Predicates.compose(CardRules.Predicates.power(
                     ComparableOp.GT_OR_EQUAL, plow), CardPrinted.FN_GET_RULES),
-            Predicate.bridge(CardRules.Predicates.power(
+            Predicates.compose(CardRules.Predicates.power(
                     ComparableOp.LT_OR_EQUAL, phigh), CardPrinted.FN_GET_RULES));
 
-            prePower = Predicate.or(preNotCreature, prePowerTemp);
+            prePower = Predicates.or(preNotCreature, prePowerTemp);
         }
 
         // Toughness: CardRules returns null if no toughness, which means extra
         // filtering must be applied to allow all cards to be shown if * is chosen.
         // (Without this, lands and such would be filtered out by default.)
-        if (tlow > thigh) { preToughness = Predicate.getFalse(CardPrinted.class); }
+        if (tlow > thigh) { preToughness = Predicates.alwaysFalse(); }
         else {
             // If * is selected in the combo box, cards without toughness
             // will be included in the filter.
             final Predicate<CardPrinted> preNotCreature;
             if (tlow == -1) {
-                preNotCreature = Predicate.not(
-                    Predicate.bridge(CardRules.Predicates.Presets.IS_CREATURE,
+                preNotCreature = Predicates.not(
+                    Predicates.compose(CardRules.Predicates.Presets.IS_CREATURE,
                             CardPrinted.FN_GET_RULES));
             }
             // Otherwise, if 0 or higher is selected, cards without toughness
             // are excluded.
             else {
-                preNotCreature = Predicate.getFalse(CardPrinted.class);
+                preNotCreature = Predicates.alwaysFalse();
             }
 
-            final Predicate<CardPrinted> preToughnessTemp = Predicate.and(
-                Predicate.bridge(CardRules.Predicates.toughness(
+            final Predicate<CardPrinted> preToughnessTemp = Predicates.and(
+                Predicates.compose(CardRules.Predicates.toughness(
                         ComparableOp.GT_OR_EQUAL, tlow), CardPrinted.FN_GET_RULES),
-                Predicate.bridge(CardRules.Predicates.toughness(
+                Predicates.compose(CardRules.Predicates.toughness(
                         ComparableOp.LT_OR_EQUAL, thigh), CardPrinted.FN_GET_RULES));
 
-            preToughness = Predicate.or(preNotCreature, preToughnessTemp);
+            preToughness = Predicates.or(preNotCreature, preToughnessTemp);
         }
 
         // CMC, thankfully, will return -1 if the card doesn't have a CMC,
         // so it can be compared directly against the low value, and non-CMC
         // cards will still be included if * is chosen.
-        if (clow > chigh) { preCMC = Predicate.getFalse(CardPrinted.class); }
+        if (clow > chigh) { preCMC = Predicates.alwaysFalse(); }
         else {
-            preCMC = Predicate.and(
-                Predicate.bridge(CardRules.Predicates.cmc(
+            preCMC = Predicates.and(
+                Predicates.compose(CardRules.Predicates.cmc(
                         ComparableOp.GT_OR_EQUAL, clow), CardPrinted.FN_GET_RULES),
-                Predicate.bridge(CardRules.Predicates.cmc(
+                Predicates.compose(CardRules.Predicates.cmc(
                     ComparableOp.LT_OR_EQUAL, chigh), CardPrinted.FN_GET_RULES));
         }
 
         // Stack them all together and return.
-        filter = Predicate.and(preCMC, Predicate.and(prePower, preToughness));
+        filter = Predicates.and(preCMC, Predicates.and(prePower, preToughness));
         return filter;
     }
 

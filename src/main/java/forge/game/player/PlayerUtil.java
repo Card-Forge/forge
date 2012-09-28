@@ -17,6 +17,8 @@
  */
 package forge.game.player;
 
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
@@ -26,7 +28,7 @@ import forge.control.input.Input;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
-import forge.util.closures.Predicate;
+
 import forge.view.ButtonUtil;
 
 /**

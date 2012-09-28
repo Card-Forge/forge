@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Predicate;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -62,7 +63,7 @@ import forge.gui.GuiUtils;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.views.VCombat;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>

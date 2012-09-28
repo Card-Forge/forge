@@ -20,9 +20,11 @@ package forge;
 import java.util.Collections;
 import java.util.Comparator;
 
+import com.google.common.base.Predicate;
+
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.util.Aggregates;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>

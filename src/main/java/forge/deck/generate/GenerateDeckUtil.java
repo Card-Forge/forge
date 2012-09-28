@@ -23,10 +23,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.base.Predicate;
+
 import forge.card.CardColor;
 import forge.card.CardManaCost;
 import forge.card.CardRules;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>
@@ -60,7 +62,7 @@ public class GenerateDeckUtil {
         }
     };
 
-    public static class ContainsAllColorsFrom extends Predicate<CardRules> {
+    public static class ContainsAllColorsFrom implements Predicate<CardRules> {
         private final CardColor allowedColor;
         public ContainsAllColorsFrom(CardColor color) {
             allowedColor = color;
@@ -72,7 +74,7 @@ public class GenerateDeckUtil {
         }
     }
 
-    public static class FilterCMC extends Predicate<CardRules> {
+    public static class FilterCMC implements Predicate<CardRules> {
         private final int min;
         private final int max;
 

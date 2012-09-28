@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -32,7 +34,6 @@ import forge.card.CardRules;
 import forge.deck.Deck;
 import forge.deck.generate.GenerateDeckUtil;
 import forge.item.CardPrinted;
-import forge.util.closures.Predicate;
 
 /**
  * <p>
@@ -78,7 +79,8 @@ public class BoosterDraftAI {
 
         CardPrinted pickedCard = null;
 
-        Iterable<CardPrinted> aiPlayablesView = Iterables.filter(chooseFrom, CardRules.Predicates.IS_KEPT_IN_AI_DECKS.bridge(CardPrinted.FN_GET_RULES));
+        Predicate<CardPrinted> pred = Predicates.compose(CardRules.Predicates.IS_KEPT_IN_AI_DECKS, CardPrinted.FN_GET_RULES);
+        Iterable<CardPrinted> aiPlayablesView = Iterables.filter(chooseFrom, pred );
         List<CardPrinted> aiPlayables = Lists.newArrayList(aiPlayablesView); 
         
 
@@ -197,10 +199,10 @@ public class BoosterDraftAI {
             // Has already picked both colors.
             DeckColors dckColors = this.playerColors.get(player);
             CardColor colors = CardColor.fromNames(dckColors.getColor1(), dckColors.getColor2());
-            Predicate<CardRules> hasColor = Predicate.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors),
+            Predicate<CardRules> hasColor = Predicates.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors),
                     GenerateDeckUtil.COLORLESS_CARDS);
             
-            Iterable<CardPrinted> colorList = Iterables.filter(aiPlayables, hasColor.bridge(CardPrinted.FN_GET_RULES));
+            Iterable<CardPrinted> colorList = Iterables.filter(aiPlayables, Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
 
             // Sort playable, on-color cards by rank
             TreeMap<Double, CardPrinted> rankedPlayableCards = rankCards(colorList);

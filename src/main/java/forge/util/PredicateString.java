@@ -15,9 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.util.closures;
+package forge.util;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Predicate;
 
 /**
  * Special predicate class to perform string operations.
@@ -25,7 +27,7 @@ import org.apache.commons.lang3.StringUtils;
  * @param <T>
  *            the generic type
  */
-public abstract class PredicateString<T> extends Predicate<T> {
+public abstract class PredicateString<T> implements Predicate<T> {
     /** Possible operators for string operands. */
     public enum StringOp {
         /** The CONTAINS. */

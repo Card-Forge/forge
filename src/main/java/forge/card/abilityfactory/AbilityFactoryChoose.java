@@ -26,6 +26,7 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
@@ -51,7 +52,7 @@ import forge.gui.ListChooser;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.util.MyRandom;
-import forge.util.closures.Predicate;
+
 
 /**
  * <p>
@@ -1643,7 +1644,7 @@ public final class AbilityFactoryChoose {
                             }
                         } else {
                             CardList list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer());
-                            list = list.filter(Predicate.not(Presets.LANDS));
+                            list = list.filter(Predicates.not(Presets.LANDS));
                             if (!list.isEmpty()) {
                                 chosen = list.get(0).getName();
                             }

@@ -20,6 +20,9 @@ package forge.quest;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.item.CardPrinted;
@@ -36,7 +39,6 @@ import forge.quest.io.PreconReader;
 import forge.util.IStorage;
 import forge.util.IStorageView;
 import forge.util.StorageView;
-import forge.util.closures.Predicate;
 
 /**
  * TODO: Write javadoc for this type.
@@ -210,7 +212,7 @@ public class QuestController {
             break;
 
         default: // Unrestricted
-            filter = CardPrinted.Predicates.Presets.IS_TRUE;
+            filter = Predicates.alwaysTrue();
             break;
         }
 

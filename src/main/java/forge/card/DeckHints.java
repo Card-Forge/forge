@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.item.CardPrinted;
-import forge.util.closures.PredicateString.StringOp;
+import forge.util.PredicateString.StringOp;
 
 /**
  * DeckHints provides the ability for a Card to "want" another Card or type of
@@ -75,7 +77,7 @@ public class DeckHints {
             ret = new ArrayList<CardPrinted>();
             String[] types = filterParam.split("\\|");
             for (String type : types) {
-                addMatchingItems(ret, CardRules.Predicates.subType(type).bridge(CardPrinted.FN_GET_RULES), cardList);
+                addMatchingItems(ret, cardList, CardRules.Predicates.subType(type), CardPrinted.FN_GET_RULES);
             }
             break;
         case COLOR:
@@ -83,21 +85,21 @@ public class DeckHints {
             String[] colors = filterParam.split("\\|");
             for (String color : colors) {
                 CardColor cc = CardColor.fromNames(color);
-                addMatchingItems(ret, CardRules.Predicates.isColor(cc.getColor()).bridge(CardPrinted.FN_GET_RULES), cardList);
+                addMatchingItems(ret, cardList, CardRules.Predicates.isColor(cc.getColor()), CardPrinted.FN_GET_RULES);
             }
             break;
         case KEYWORD:
             ret = new ArrayList<CardPrinted>();
             String[] keywords = filterParam.split("\\|");
             for (String keyword : keywords) {
-                addMatchingItems(ret, CardRules.Predicates.hasKeyword(keyword).bridge(CardPrinted.FN_GET_RULES), cardList);
+                addMatchingItems(ret, cardList, CardRules.Predicates.hasKeyword(keyword), CardPrinted.FN_GET_RULES);
             }
             break;
         case NAME:
             ret = new ArrayList<CardPrinted>();
             String[] names = filterParam.split("\\|");
             for (String name : names) {
-                addMatchingItems(ret, CardRules.Predicates.name(StringOp.EQUALS, name).bridge(CardPrinted.FN_GET_RULES), cardList);
+                addMatchingItems(ret, cardList, CardRules.Predicates.name(StringOp.EQUALS, name), CardPrinted.FN_GET_RULES);
             }
             break;
         default:
@@ -107,8 +109,8 @@ public class DeckHints {
         return ret;
     }
     
-    private static <T> void addMatchingItems(Collection<? super T> dest, Predicate<T> predicate, Iterable<T> source) {
-        for(T item : Iterables.filter(source, predicate))
+    private static <T, U> void addMatchingItems(Collection<? super T> dest, Iterable<? extends T> source, Predicate<U> predicate, Function<T, U> fn) {
+        for(T item : Iterables.filter(source, Predicates.compose(predicate, fn)))
             dest.add(item);
     }
 

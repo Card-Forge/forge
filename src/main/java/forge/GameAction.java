@@ -25,6 +25,8 @@ import java.util.Iterator;
 
 import javax.swing.JFrame;
 
+import com.google.common.base.Predicate;
+
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryAttach;
 import forge.card.abilityfactory.AbilityFactoryCharm;
@@ -58,7 +60,7 @@ import forge.game.zone.PlayerZoneComesIntoPlay;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.ViewWinLose;
-import forge.util.closures.Predicate;
+
 
 /**
  * Methods for common actions performed during a game.
