@@ -1,0 +1,13 @@
+Name:Chronic Flooding
+ManaCost:1 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ Curse
+T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever enchanted land becomes tapped, its controller puts the top three cards of his or her library into his or her graveyard.
+SVar:TrigMill:AB$Mill | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chronic_flooding.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/32.jpg
+Oracle:Enchant land\nWhenever enchanted land becomes tapped, its controller puts the top three cards of his or her library into his or her graveyard.
+End

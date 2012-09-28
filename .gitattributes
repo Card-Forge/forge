@@ -1035,6 +1035,7 @@ res/cardsfolder/b/blue_suns_zenith.txt svneol=native#text/plain
 res/cardsfolder/b/blue_ward.txt svneol=native#text/plain
 res/cardsfolder/b/blunt_the_assault.txt svneol=native#text/plain
 res/cardsfolder/b/blurred_mongoose.txt svneol=native#text/plain
+res/cardsfolder/b/blustersquall.txt -text
 res/cardsfolder/b/boa_constrictor.txt svneol=native#text/plain
 res/cardsfolder/b/boar_umbra.txt svneol=native#text/plain
 res/cardsfolder/b/boartusk_liege.txt svneol=native#text/plain
@@ -1605,6 +1606,7 @@ res/cardsfolder/c/chromescale_drake.txt svneol=native#text/plain
 res/cardsfolder/c/chromium.txt svneol=native#text/plain
 res/cardsfolder/c/chronatog.txt svneol=native#text/plain
 res/cardsfolder/c/chronatog_totem.txt svneol=native#text/plain
+res/cardsfolder/c/chronic_flooding.txt -text
 res/cardsfolder/c/chronomaton.txt -text
 res/cardsfolder/c/chronosavant.txt svneol=native#text/plain
 res/cardsfolder/c/chronozoa.txt -text
@@ -1775,6 +1777,7 @@ res/cardsfolder/c/conflux.txt svneol=native#text/plain
 res/cardsfolder/c/confound.txt svneol=native#text/plain
 res/cardsfolder/c/congregate.txt svneol=native#text/plain
 res/cardsfolder/c/congregation_at_dawn.txt svneol=native#text/plain
+res/cardsfolder/c/conjured_currency.txt -text
 res/cardsfolder/c/conjurer's_closet.txt -text
 res/cardsfolder/c/conjurers_bauble.txt svneol=native#text/plain
 res/cardsfolder/c/conquer.txt svneol=native#text/plain
@@ -2512,6 +2515,7 @@ res/cardsfolder/d/doomsday.txt svneol=native#text/plain
 res/cardsfolder/d/doomsday_specter.txt svneol=native#text/plain
 res/cardsfolder/d/door_of_destinies.txt svneol=native#text/plain
 res/cardsfolder/d/door_to_nothingness.txt svneol=native#text/plain
+res/cardsfolder/d/doorkeeper.txt -text
 res/cardsfolder/d/doran_the_siege_tower.txt svneol=native#text/plain
 res/cardsfolder/d/dormant_gomazoa.txt svneol=native#text/plain
 res/cardsfolder/d/dormant_sliver.txt svneol=native#text/plain
@@ -2727,6 +2731,7 @@ res/cardsfolder/d/dwarven_weaponsmith.txt svneol=native#text/plain
 res/cardsfolder/d/dwell_on_the_past.txt -text
 res/cardsfolder/d/dying_wail.txt svneol=native#text/plain
 res/cardsfolder/d/dystopia.txt -text
+res/cardsfolder/downsize.txt -text
 res/cardsfolder/e/eager_cadet.txt svneol=native#text/plain
 res/cardsfolder/e/early_frost.txt svneol=native#text/plain
 res/cardsfolder/e/early_harvest.txt -text
@@ -4720,6 +4725,7 @@ res/cardsfolder/i/imps_taunt.txt -text
 res/cardsfolder/i/impulse.txt svneol=native#text/plain
 res/cardsfolder/i/in_the_eye_of_chaos.txt svneol=native#text/plain
 res/cardsfolder/i/in_the_web_of_war.txt svneol=native#text/plain
+res/cardsfolder/i/inaction_injunction.txt -text
 res/cardsfolder/i/iname_as_one.txt svneol=native#text/plain
 res/cardsfolder/i/iname_death_aspect.txt -text
 res/cardsfolder/i/iname_life_aspect.txt -text svneol=unset#text/plain
@@ -4886,6 +4892,7 @@ res/cardsfolder/i/isolated_chapel.txt -text
 res/cardsfolder/i/isolation_cell.txt svneol=native#text/plain
 res/cardsfolder/i/isperia_supreme_judge.txt -text
 res/cardsfolder/i/isperia_the_inscrutable.txt -text svneol=unset#text/plain
+res/cardsfolder/i/isperias_skywatch.txt -text
 res/cardsfolder/i/it_that_betrays.txt svneol=native#text/plain
 res/cardsfolder/i/ith_high_arcanist.txt svneol=native#text/plain
 res/cardsfolder/i/ivory_charm.txt -text
@@ -6158,6 +6165,7 @@ res/cardsfolder/m/misty_rainforest.txt svneol=native#text/plain
 res/cardsfolder/m/mitotic_manipulation.txt svneol=native#text/plain
 res/cardsfolder/m/mitotic_slime.txt svneol=native#text/plain
 res/cardsfolder/m/mizzium_mortars.txt -text
+res/cardsfolder/m/mizzium_skin.txt -text
 res/cardsfolder/m/mnemonic_nexus.txt svneol=native#text/plain
 res/cardsfolder/m/mnemonic_sliver.txt svneol=native#text/plain
 res/cardsfolder/m/mnemonic_wall.txt svneol=native#text/plain

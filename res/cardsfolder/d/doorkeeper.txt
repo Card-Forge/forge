@@ -1,0 +1,13 @@
+Name:Doorkeeper
+ManaCost:1 U
+Types:Creature Homunculus
+Text:no text
+PT:0/4
+K:Defender
+A:AB$ Mill | Cost$ 2 U T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of creatures with defender you control.
+SVar:X:Count$Valid Creature.withDefender+YouCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/doorkeeper.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/37.jpg
+Oracle:Defender\n{2}{U}, {T}: Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of creatures with defender you control.
+End

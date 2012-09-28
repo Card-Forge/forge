@@ -1,0 +1,11 @@
+Name:Downsize
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ U | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | NumAtt$ -4 | SpellDescription$ Target creature you don't control gets -4/-0 until end of turn.
+A:SP$ PumpAll | Cost$ 2 U | ValidCards$ Creature.YouDontCtrl | ValidDescription$ each creature you don't control. | NumAtt$ -4 | PrecostDesc$ Overload | CostDesc$ 2 U | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/downsize.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/38.jpg
+Oracle:Target creature you don't control gets -4/-0 until end of turn.\nOverload {2}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
+End

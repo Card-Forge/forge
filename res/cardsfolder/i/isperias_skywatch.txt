@@ -1,0 +1,13 @@
+Name:Isperia's Skywatch
+ManaCost:5 U
+Types:Creature Vedalken Knight
+Text:no text
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ Detain | TriggerDescription$ When CARDNAME enters the battlefield, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
+SVar:Detain:DB$Pump | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | UntilYourNextTurn$ True | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature your opponent controls to detain.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/isperias_skywatch.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/43.jpg
+Oracle:Flying\nWhen Isperia's Skywatch enters the battlefield, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
+End
