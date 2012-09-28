@@ -25,6 +25,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
@@ -1059,7 +1060,7 @@ public final class AbilityFactoryCombat {
         boolean chance = false;
 
         if (abTgt != null) {
-            CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
+            CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.CREATURES);
             list = list.getTargetableCards(sa);
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             list = list.filter(new Predicate<Card>() {

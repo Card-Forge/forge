@@ -1232,7 +1232,7 @@ public final class AbilityFactoryChangeZone {
                         System.out.println("Don't need a land or none available; trying for a creature.");
                         fetchList = fetchList.getNotType("Land");
                         // Prefer to pull a creature, generally more useful for AI.
-                        c = chooseCreature(fetchList.getType("Creature"));
+                        c = chooseCreature(fetchList.filter(CardPredicates.Presets.CREATURES));
                     }
                     if (c == null) { // Could not find a creature.
                         if (ai.getLife() <= 5) { // Desperate?
@@ -1699,7 +1699,7 @@ public final class AbilityFactoryChangeZone {
                 }
                 // Save combatants
                 else if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                    final CardList combatants = aiPermanents.getType("Creature");
+                    final CardList combatants = aiPermanents.filter(CardPredicates.Presets.CREATURES);
                     CardListUtil.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
@@ -1808,7 +1808,7 @@ public final class AbilityFactoryChangeZone {
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
                     CardList nonLands = list.getNotType("Land");
                     // Prefer to pull a creature, generally more useful for AI.
-                    choice = chooseCreature(nonLands.getType("Creature"));
+                    choice = chooseCreature(nonLands.filter(CardPredicates.Presets.CREATURES));
                     if (choice == null) { // Could not find a creature.
                         if (AllZone.getComputerPlayer().getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
@@ -1921,7 +1921,7 @@ public final class AbilityFactoryChangeZone {
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
                     CardList nonLands = list.getNotType("Land");
                     // Prefer to pull a creature, generally more useful for AI.
-                    choice = chooseCreature(nonLands.getType("Creature"));
+                    choice = chooseCreature(nonLands.filter(CardPredicates.Presets.CREATURES));
                     if (choice == null) { // Could not find a creature.
                         if (AllZone.getComputerPlayer().getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.

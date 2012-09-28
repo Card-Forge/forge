@@ -20,6 +20,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
+import forge.CardPredicates;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -81,8 +82,8 @@ class CardFactoryEnchantments {
                 public void showMessage() {
                     CardList grave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
                     CardList aiGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                    grave = grave.getType("Creature");
-                    aiGrave = aiGrave.getType("Creature");
+                    grave = grave.filter(CardPredicates.Presets.CREATURES);
+                    aiGrave = aiGrave.filter(CardPredicates.Presets.CREATURES);
 
                     if (this.once || ((grave.size() < 2) && (aiGrave.size() < 2))) {
                         this.once = false;

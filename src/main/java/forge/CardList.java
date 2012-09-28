@@ -118,43 +118,12 @@ public class CardList extends ArrayList<Card> {
         return this.filter(Predicates.not(CardPredicates.isProtectedFrom(source)));
     }
 
-    /**
-     * <p>
-     * getValidCards.
-     * </p>
-     * 
-     * @param restrictions
-     *            a {@link java.lang.String} object.
-     * @param sourceController
-     *            a {@link forge.game.player.Player} object.
-     * @param source
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.CardList} object.
-     */
     public final CardList getValidCards(final String restrictions, final Player sourceController, final Card source) {
-        return this.getValidCards(restrictions.split(","), sourceController, source);
+        return this.filter(CardPredicates.restriction(restrictions.split(","), sourceController, source));
     }
 
-    /**
-     * <p>
-     * getValidCards.
-     * </p>
-     * 
-     * @param restrictions
-     *            a {@link java.lang.String} object.
-     * @param sourceController
-     *            a {@link forge.game.player.Player} object.
-     * @param source
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.CardList} object.
-     */
     public final CardList getValidCards(final String[] restrictions, final Player sourceController, final Card source) {
-        return this.filter(new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return (c != null) && c.isValid(restrictions, sourceController, source);
-            }
-        });
+        return this.filter(CardPredicates.restriction(restrictions, sourceController, source));
     }
 
 

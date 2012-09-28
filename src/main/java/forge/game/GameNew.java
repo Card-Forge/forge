@@ -7,10 +7,15 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.CardPredicates.Presets;
+import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Constant;
 import forge.GameAction;
@@ -31,6 +36,7 @@ import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 /** 
@@ -268,17 +274,14 @@ public class GameNew {
             final String nl = System.getProperty("line.separator");
             final StringBuilder msg = new StringBuilder();
             for (final Player p : AllZone.getPlayersInGame()) {
-                final CardList lib = p.getCardsIn(ZoneType.Library);
-                Card ante;
-                if ((lib.size() > 0) && (lib.getNotType("Basic").size() > 1)) {
-                    ante = CardUtil.getRandom(lib);
-                    while (ante.isBasicLand()) {
-                        ante = CardUtil.getRandom(lib);
-                    }
-                } else if (lib.size() > 1) {
-                    ante = lib.get(0);
-                } else {
-                    throw new RuntimeException(p + " library is empty.");
+                final List<Card> lib = p.getCardsIn(ZoneType.Library);
+                Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
+                Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
+                if (ante == null ) {
+                    if (!lib.isEmpty()) 
+                        ante = lib.get(0);
+                    else
+                        throw new RuntimeException(p + " library is empty.");                        
                 }
                 AllZone.getGameLog().add("Ante", p + " anted " + ante, 0);
                 VAntes.SINGLETON_INSTANCE.addAnteCard(p, ante);
@@ -375,10 +378,10 @@ public class GameNew {
         library.shuffle();
 
         // remove all land, keep non-basicland in there, shuffled
-        CardList land = library.getType("Land");
-        for (int i = 0; i < land.size(); i++) {
-            if (land.get(i).isLand()) {
-                library.remove(land.get(i));
+        CardList land = library.filter(CardPredicates.Presets.LANDS);
+        for (Card c : land) {
+            if (c.isLand()) {
+                library.remove(c);
             }
         }
 
@@ -444,10 +447,10 @@ public class GameNew {
      */
     private static void seeWhoPlaysFirst() {
         final GameAction ga = Singletons.getModel().getGameAction();
-        CardList hLibrary = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
-        hLibrary = hLibrary.filter(Presets.NON_LANDS);
-        CardList cLibrary = AllZone.getComputerPlayer().getCardsIn(ZoneType.Library);
-        cLibrary = cLibrary.filter(Presets.NON_LANDS);
+        Predicate<Card> nonLand = Predicates.not(Presets.LANDS);
+        Iterable<Card> hLibrary = Iterables.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Library), nonLand);
+        Iterable<Card> cLibrary = Iterables.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Library), nonLand);
+
 
         final boolean starterDetermined = false;
         int cutCount = 0;
@@ -457,8 +460,9 @@ public class GameNew {
                 break;
             }
 
-            if (hLibrary.size() > 0) {
-                ga.setHumanCut(hLibrary.get(MyRandom.getRandom().nextInt(hLibrary.size())));
+            Card hRandom = Aggregates.random(hLibrary);
+            if ( null != hRandom ) {
+                ga.setHumanCut(hRandom);
             } else {
                 GameNew.computerStartsGame();
                 JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GameActionText.HUMAN_MANA_COST) + "\r\n"
@@ -466,8 +470,9 @@ public class GameNew {
                 return;
             }
 
-            if (cLibrary.size() > 0) {
-                ga.setComputerCut(cLibrary.get(MyRandom.getRandom().nextInt(cLibrary.size())));
+            Card cRandom = Aggregates.random(cLibrary);
+            if (cRandom != null) {
+                ga.setComputerCut(cRandom);
             } else {
                 JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GameActionText.COMPUTER_MANA_COST) + "\r\n"
                         + ForgeProps.getLocalized(GameActionText.HUMAN_STARTS), "", JOptionPane.INFORMATION_MESSAGE);

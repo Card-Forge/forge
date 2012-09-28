@@ -21,11 +21,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Vector;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -36,6 +39,7 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
+import forge.Constant;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
@@ -372,9 +376,8 @@ public class CardFactorySorceries {
 
                     // figure out which basic land types the computer has
                     CardList land = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
-                    final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
 
-                    for (final String element : basic) {
+                    for (final String element : Constant.Color.BASIC_LANDS) {
                         final CardList cl = land.getType(element);
                         if (!cl.isEmpty()) {
                             // remove one land of this basic type from this list
@@ -505,9 +508,8 @@ public class CardFactorySorceries {
                     // figure out which basic land types the human has
                     // put those in an set to use later
                     final CardList land = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-                    final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
 
-                    for (final String element : basic) {
+                    for (final String element : Constant.Color.BASIC_LANDS) {
                         final CardList c = land.getType(element);
                         if (!c.isEmpty()) {
                             humanBasic.add(element);
@@ -531,6 +533,7 @@ public class CardFactorySorceries {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Haunting Echoes")) {
+            final Predicate<Card> nonBasicLands = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
             final Cost cost = new Cost(card, "3 B B", false);
             final Target tgt = new Target(card, "Select a Player", "Player");
             final SpellAbility spell = new Spell(card, cost, tgt) {
@@ -540,33 +543,21 @@ public class CardFactorySorceries {
                 public boolean canPlayAI() {
                     // Haunting Echoes shouldn't be cast if only basic land in
                     // graveyard or library is empty
-                    CardList graveyard = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
-                    final CardList library = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
-                    final int graveCount = graveyard.size();
-                    graveyard = graveyard.filter(new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return c.isBasicLand();
-                        }
-                    });
-
+                    final List<Card> graveyard = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
+                    final List<Card> library = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
+                    
                     this.setTargetPlayer(AllZone.getHumanPlayer());
 
-                    return (((graveCount - graveyard.size()) > 0) && (library.size() > 0));
+                    return Iterables.any(graveyard, nonBasicLands) && !library.isEmpty();
                 }
 
                 @Override
                 public void resolve() {
                     final Player player = this.getTargetPlayer();
-
-                    CardList grave = player.getCardsIn(ZoneType.Graveyard);
-                    grave = grave.getNotType("Basic");
-
                     final CardList lib = player.getCardsIn(ZoneType.Library);
 
-                    for (final Card c : grave) {
-                        final CardList remLib = lib.filter(CardPredicates.nameEquals(c.getName()));
-                        for (final Card rem : remLib) {
+                    for (final Card c : Iterables.filter(player.getCardsIn(ZoneType.Graveyard), nonBasicLands)) {
+                        for (final Card rem : Iterables.filter(lib, CardPredicates.nameEquals(c.getName()))) {
                             Singletons.getModel().getGameAction().exile(rem);
                             lib.remove(rem);
                         }
@@ -697,7 +688,7 @@ public class CardFactorySorceries {
 
                     final CardList humCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                     CardList compCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                    compCreats = compCreats.getType("Creature");
+                    compCreats = compCreats.filter(CardPredicates.Presets.CREATURES);
                     diff += 1.5 * (humCreats.size() - compCreats.size());
 
                     final CardList humHand = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand);
@@ -724,10 +715,7 @@ public class CardFactorySorceries {
                     // turn
                     // is structured, it will already have played land to it's
                     // limit
-
-                    CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                    hand = hand.getType("Land");
-                    return hand.size() > 0;
+                    return Iterables.any(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
                 }
 
                 @Override
@@ -764,10 +752,7 @@ public class CardFactorySorceries {
                     // turn
                     // is structured, it will already have played its first
                     // land.
-                    CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-
-                    list = list.getType("Land");
-                    return list.size() > 0;
+                    return Iterables.any(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
                 }
 
                 @Override
@@ -1047,8 +1032,7 @@ public class CardFactorySorceries {
 
                     final HashMap<String, Integer> countInGraveyard = new HashMap<String, Integer>();
                     final CardList allGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                    allGrave.getType("Creature");
-                    for (final Card c : allGrave) {
+                    for (final Card c : Iterables.filter(allGrave, CardPredicates.Presets.CREATURES)) {
                         for (final String type : c.getType()) {
                             if (CardUtil.isACreatureType(type)) {
                                 if (countInGraveyard.containsKey(type)) {

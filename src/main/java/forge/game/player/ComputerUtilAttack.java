@@ -27,6 +27,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
+import forge.CardPredicates;
 import forge.Counters;
 import forge.GameEntity;
 import forge.Singletons;
@@ -75,10 +76,10 @@ public class ComputerUtilAttack {
      */
     public ComputerUtilAttack(final CardList possibleAttackers, final CardList possibleBlockers) {
         this.humanList = new CardList(possibleBlockers);
-        this.humanList = this.humanList.getType("Creature");
+        this.humanList = this.humanList.filter(CardPredicates.Presets.CREATURES);
 
         this.computerList = new CardList(possibleAttackers);
-        this.computerList = this.computerList.getType("Creature");
+        this.computerList = this.computerList.filter(CardPredicates.Presets.CREATURES);
 
         this.attackers = this.getPossibleAttackers(possibleAttackers);
         this.blockers = this.getPossibleBlockers(possibleBlockers, this.attackers);

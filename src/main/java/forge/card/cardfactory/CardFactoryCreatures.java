@@ -57,7 +57,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
-
+import forge.util.Aggregates;
 import forge.view.ButtonUtil;
 
 /**
@@ -215,7 +215,7 @@ public class CardFactoryCreatures {
 
                 if (card.getController().isHuman()) {
                     final CardList artifacts = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield)
-                            .getType("Artifact");
+                            .filter(CardPredicates.Presets.ARTIFACTS);
 
                     if (artifacts.size() != 0) {
                         final Card c = GuiUtils.chooseOne("Select an artifact put a phylactery counter on", artifacts);
@@ -257,8 +257,8 @@ public class CardFactoryCreatures {
 
             @Override
             public boolean canPlayAI() {
-                return (!AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Artifact").isEmpty() && AllZone
-                        .getZoneOf(this.getSourceCard()).is(ZoneType.Hand));
+                return Iterables.any(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS)
+                     && AllZone.getZoneOf(this.getSourceCard()).is(ZoneType.Hand);
             }
         });
         card.addComesIntoPlayCommand(intoPlay);
@@ -541,28 +541,17 @@ public class CardFactoryCreatures {
             }
 
             private static final long serialVersionUID = 35050145102566898L;
+            private final Predicate<Card> untappedCreature = Predicates.and(CardPredicates.Presets.UNTAPPED, CardPredicates.Presets.CREATURES);
 
             @Override
             public boolean canPlayAI() {
-                CardList wolves = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                wolves = wolves.getType("Wolf");
-
-                wolves = wolves.filter(new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return c.isUntapped() && c.isCreature();
-                    }
-                });
-                int power = 0;
-                for (int i = 0; i < wolves.size(); i++) {
-                    power += wolves.get(i).getNetAttack();
-                }
-
-                if (power == 0) {
+                List<Card> wolves = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Wolf");
+                Iterable<Card> untappedWolves = Iterables.filter(wolves, untappedCreature);
+                
+                final int totalPower = Aggregates.sum(untappedWolves, CardPredicates.Accessors.fnGetNetAttack);
+                if (totalPower == 0) {
                     return false;
                 }
-
-                final int totalPower = power;
 
                 CardList targetables = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
 
@@ -585,15 +574,8 @@ public class CardFactoryCreatures {
 
             @Override
             public void resolve() {
-                CardList wolves = card.getController().getCardsIn(ZoneType.Battlefield);
-                wolves = wolves.getType("Wolf");
-
-                wolves = wolves.filter(new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return c.isUntapped() && c.isCreature();
-                    }
-                });
+                CardList wolves = card.getController().getCardsIn(ZoneType.Battlefield).getType("Wolf");
+                wolves = wolves.filter(untappedCreature);
 
                 final Card target = this.getTargetCard();
 

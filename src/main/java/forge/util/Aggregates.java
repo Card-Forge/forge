@@ -26,6 +26,20 @@ public class Aggregates {
         return max;
     }
 
+    public final static <T> T itemWithMax(final Iterable<T> source, final Function<T, Integer> valueAccessor) {
+        if (source == null) { return null; }  
+        int max = Integer.MIN_VALUE;
+        T result = null;
+        for (final T c : source) {
+            int value = valueAccessor.apply(c);
+            if ( value > max ) {
+                max = value;
+                result = c;
+            }
+        }
+        return result;
+    }
+    
     public final static <T> int sum(final Iterable<T> source, final Function<T, Integer> valueAccessor) {
         int result = 0;
         if (source != null) {
@@ -58,15 +72,6 @@ public class Aggregates {
 
     // Get several random values
     // should improve to make 1 pass over source and track N candidates at once
-    /**
-     * Random.
-     * 
-     * @param source
-     *            the source
-     * @param count
-     *            the count
-     * @return the list
-     */
     public final static <T> List<T> random(final Iterable<T> source, final int count) {
         final List<T> result = new ArrayList<T>();
         for (int i = 0; i < count; ++i) {
@@ -79,27 +84,27 @@ public class Aggregates {
         return result;
     }
     
-    /**
-     * Unique by last.
-     * 
-     * @param <K>
-     *            the key type
-     * @param <U>
-     *            the generic type
-     * @param source
-     *            the source
-     * @param fnUniqueKey
-     *            the fn unique key
-     * @param accessor
-     *            the accessor
-     * @return the iterable
-     */
     public static final <K, U> Iterable<U> uniqueByLast(final Iterable<U> source, final Function<U, K> fnUniqueKey) { // this might be exotic
         final Map<K, U> uniques = new Hashtable<K, U>();
         for (final U c : source) {
              uniques.put(fnUniqueKey.apply(c), c);
         }
         return uniques.values();
+    }
+
+
+    public static <T> T itemWithMin(final Iterable<T> source, final Function<T, Integer> valueAccessor) {
+        if (source == null) { return null; }  
+        int max = Integer.MAX_VALUE;
+        T result = null;
+        for (final T c : source) {
+            int value = valueAccessor.apply(c);
+            if ( value < max ) {
+                max = value;
+                result = c;
+            }
+        }
+        return result;
     }    
 
 }

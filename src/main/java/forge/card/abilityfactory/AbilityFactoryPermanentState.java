@@ -23,11 +23,13 @@ import java.util.Iterator;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -1065,16 +1067,8 @@ public class AbilityFactoryPermanentState {
             } else if (phase.isPlayerTurn(AllZone.getHumanPlayer())
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
-                if (!tapList.getType("Creature").isEmpty()) {
-                    CardList creatureList = tapList.filter(new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            if (c.isCreature()) {
-                                return CombatUtil.canAttack(c);
-                            }
-                            return false;
-                        }
-                    });
+                if (Iterables.any(tapList, CardPredicates.Presets.CREATURES)) {
+                    CardList creatureList = tapList.filter(CardPredicates.Presets.CREATURES_CAN_ATTACK);
                     choice = CardFactoryUtil.getBestCreatureAI(creatureList);
                 } else { // no creatures available
                     choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);

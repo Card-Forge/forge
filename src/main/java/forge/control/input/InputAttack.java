@@ -17,9 +17,12 @@
  */
 package forge.control.input;
 
+import com.google.common.collect.Iterables;
+
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.Singletons;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.PlayerZone;
@@ -62,9 +65,7 @@ public class InputAttack extends Input {
         if (AllZone.getCombat().getRemainingDefenders() == 0) {
             // Nothing left to attack, has to attack this defender
             CardList possibleAttackers = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-            possibleAttackers = possibleAttackers.getType("Creature");
-            for (int i = 0; i < possibleAttackers.size(); i++) {
-                final Card c = possibleAttackers.get(i);
+            for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
                 if (c.hasKeyword("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c, AllZone.getCombat())
                         && !c.isAttacking()) {
                     AllZone.getCombat().addAttacker(c);

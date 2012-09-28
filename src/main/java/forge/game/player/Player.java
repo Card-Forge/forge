@@ -28,6 +28,8 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import com.google.common.collect.Iterables;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -1886,7 +1888,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a {@link forge.Card} object.
      */
     public final Card getPlaneswalker() {
-        final CardList c = this.getCardsIn(ZoneType.Battlefield).getType("Planeswalker");
+        final CardList c = this.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.PLANEWALKERS);
         if ((null != c) && (c.size() > 0)) {
             return c.get(0);
         } else {
@@ -2284,7 +2286,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean hasMetalcraft() {
-        final CardList list = this.getCardsIn(ZoneType.Battlefield).getType("Artifact");
+        final CardList list = this.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.ARTIFACTS);
         return list.size() >= 3;
     }
 
@@ -2318,9 +2320,8 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean hasLandfall() {
-        final CardList list = ((DefaultPlayerZone) this.getZone(ZoneType.Battlefield)).getCardsAddedThisTurn(null).getType(
-                "Land");
-        return !list.isEmpty();
+        final List<Card> list = ((DefaultPlayerZone) this.getZone(ZoneType.Battlefield)).getCardsAddedThisTurn(null);
+        return Iterables.any(list, CardPredicates.Presets.LANDS);
     }
 
     /**

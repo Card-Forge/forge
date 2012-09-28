@@ -2,12 +2,11 @@ package forge.card.cardfactory;
 
 import javax.swing.JOptionPane;
 
-import com.google.common.base.Predicate;
-
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Counters;
@@ -185,12 +184,7 @@ class CardFactoryArtifacts {
                         }
                     } else {
                         CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                        list = list.filter(new Predicate<Card>() {
-                            @Override
-                            public boolean apply(final Card c) {
-                                return (c.isLand());
-                            }
-                        });
+                        list = list.filter(CardPredicates.Presets.LANDS);
                         AllZone.getComputerPlayer().discard(list.get(0), this);
                     } // else
                 } // resolve()
@@ -223,12 +217,7 @@ class CardFactoryArtifacts {
                 public boolean canPlay() {
                     CardList list = card.getController().getCardsIn(ZoneType.Hand);
                     list.remove(card);
-                    list = list.filter(new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return (c.isLand());
-                        }
-                    });
+                    list = list.filter(CardPredicates.Presets.LANDS);
                     return (list.size() != 0) && super.canPlay();
                 } // canPlay()
             };
@@ -399,7 +388,7 @@ class CardFactoryArtifacts {
 
                 private CardList getComputerLands() {
                     final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                    return list.getType("Basic");
+                    return list.filter(CardPredicates.Presets.BASIC_LANDS);
                 }
             }
             final Cost abCost = new Cost(card, "1 T Sac<1/CARDNAME>", true);

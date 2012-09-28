@@ -21,8 +21,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -32,6 +34,7 @@ import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
+import forge.Constant;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -1386,15 +1389,14 @@ public class ComputerUtil {
 
             Card land = landList.get(ix);
             //play basic lands that are needed the most
-            if (landList.getNotType("Basic").isEmpty()) {
+            if (!Iterables.any(landList, CardPredicates.Presets.BASIC_LANDS)) {
                 final CardList combined = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
-                final String[] names = "Plains,Island,Swamp,Mountain,Forest".split(",");
                 final ArrayList<String> basics = new ArrayList<String>();
 
                 // what types can I go get?
-                for (final String name : names) {
-                    if (landList.getType(name).size() != 0) {
+                for (final String name : Constant.CardTypes.BASIC_TYPES) {
+                    if (!landList.getType(name).isEmpty()) {
                         basics.add(name);
                     }
                 }
@@ -1611,8 +1613,9 @@ public class ComputerUtil {
             if (hand.size() <= 0) {
                 continue;
             }
-            final int numLandsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land").size();
-            final CardList landsInHand = hand.getType("Land");
+            List<Card> aiCards = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            final int numLandsInPlay = Iterables.size(Iterables.filter(aiCards, CardPredicates.Presets.LANDS)); 
+            final CardList landsInHand = hand.filter(CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
 
             // Discard a land
@@ -2257,8 +2260,8 @@ public class ComputerUtil {
         if (!discard.getSVar("DiscardMe").equals("")) {
             return true;
         }
-        final CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land");
-        final CardList landsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getType("Land");
+        final CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.LANDS);
+        final CardList landsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).filter(CardPredicates.Presets.LANDS);
         final CardList nonLandsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getNotType("Land");
         final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
         final int discardCMC = discard.getCMC();

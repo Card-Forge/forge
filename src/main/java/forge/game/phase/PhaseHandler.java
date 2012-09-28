@@ -831,7 +831,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         // resets the status of attacked/blocked this phase
         CardList list = player.getCardsIn(ZoneType.Battlefield);
 
-        list = list.getType("Creature");
+        list = list.filter(CardPredicates.Presets.CREATURES);
 
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);

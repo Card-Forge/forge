@@ -18,6 +18,7 @@
 package forge.card.spellability;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.google.common.collect.Iterables;
 
@@ -355,10 +356,11 @@ public class SpellPermanent extends Spell {
         }
         if (card.isPlaneswalker()) {
             CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            list = list.getType("Planeswalker");
+            list = list.filter(CardPredicates.Presets.PLANEWALKERS);
 
             for (int i = 0; i < list.size(); i++) {
-                final String subtype = card.getType().get(card.getType().size() - 1);
+                List<String> type = card.getType();
+                final String subtype = type.get(type.size() - 1);
                 final CardList cl = list.getType(subtype);
 
                 if (cl.size() > 0) {

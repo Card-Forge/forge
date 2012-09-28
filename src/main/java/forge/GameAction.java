@@ -1217,7 +1217,7 @@ public class GameAction {
      */
     private void destroyPlaneswalkers() {
         // get all Planeswalkers
-        final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield).getType("Planeswalker");
+        final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.PLANEWALKERS);
 
         Card c;
         for (int i = 0; i < list.size(); i++) {
@@ -1772,7 +1772,7 @@ public class GameAction {
                     manaCost.decreaseColorlessMana(numToExile);
                 }
             } else if (spell.getSourceCard().hasKeyword("Convoke")) {
-                CardList untappedCreats = spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
+                CardList untappedCreats = spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.CREATURES);
                 untappedCreats = untappedCreats.filter(new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {

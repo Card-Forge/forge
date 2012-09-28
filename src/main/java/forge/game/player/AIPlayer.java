@@ -19,6 +19,8 @@ package forge.game.player;
 
 import java.util.Random;
 
+import com.google.common.collect.Iterables;
+
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
@@ -201,9 +203,9 @@ public class AIPlayer extends Player {
             boolean bottom = false;
             if (topN.get(i).isBasicLand()) {
                 CardList bl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                bl = bl.filter(CardPredicates.Presets.BASIC_LANDS);
+                int nBasicLands = Iterables.size(Iterables.filter(bl, CardPredicates.Presets.BASIC_LANDS));
 
-                bottom = bl.size() > 5; // if control more than 5 Basic land,
+                bottom = nBasicLands > 5; // if control more than 5 Basic land,
                                         // probably don't need more
             } else if (topN.get(i).isCreature()) {
                 CardList cl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);

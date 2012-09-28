@@ -17,12 +17,16 @@
  */
 package forge.card.cardfactory;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Singletons;
@@ -77,9 +81,8 @@ public class CardFactoryInstants {
 
                 @Override
                 public boolean canPlayAI() {
-                    CardList humanArts = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-                    humanArts = humanArts.getType("Artifact");
-                    return humanArts.size() > 0;
+                    List<Card> humanCards = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+                    return Iterables.any(humanCards, CardPredicates.Presets.ARTIFACTS);
                 } //canPlayAI
 
                 @Override
@@ -91,7 +94,7 @@ public class CardFactoryInstants {
                 public void resolve() {
                     Player player = getTargetPlayer();
                     CardList artifacts = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-                    artifacts = artifacts.getType("Artifact");
+                    artifacts = artifacts.filter(CardPredicates.Presets.ARTIFACTS);
 
                     for (int i = 0; i < artifacts.size(); i++) {
                         Card thisArtifact = artifacts.get(i);
@@ -209,9 +212,8 @@ public class CardFactoryInstants {
 
                 @Override
                 public boolean canPlayAI() {
-                    CardList creature = AllZone.getComputerPlayer().getCardsIn(ZoneType.Library);
-                    creature = creature.getType("Creature");
-                    return creature.size() >= 3;
+                    Iterable<Card> creature = Iterables.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES); 
+                    return Iterables.size(creature) >= 3;
                 }
             }; // SpellAbility
 

@@ -19,6 +19,7 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -1229,7 +1230,7 @@ public final class GameActionUtil {
             // add +1/+1 to cards
             list.clear();
             final int num = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Coat of Arms").size();
-            final CardList creatures = AllZoneUtil.getCardsIn(ZoneType.Battlefield).getType("Creature");
+            final List<Card> creatures = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.CREATURES);
 
             for (Card c : creatures) {
                 for (Card c2 : creatures) {

@@ -27,6 +27,7 @@ import java.util.TreeMap;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
@@ -40,6 +41,7 @@ import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
 import forge.CommandArgs;
+import forge.Constant;
 import forge.Counters;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -225,40 +227,32 @@ public class CardFactoryUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getBestLandAI(final CardList list) {
-        final CardList land = list.getType("Land");
+        final CardList land = list.filter(CardPredicates.Presets.LANDS);
         if (!(land.size() > 0)) {
             return null;
         }
 
         // prefer to target non basic lands
-        final CardList nbLand = land.filter(new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return (!c.isBasicLand());
-            }
-        });
+        final CardList nbLand = land.filter(Predicates.not(CardPredicates.Presets.BASIC_LANDS));
 
         if (nbLand.size() > 0) {
             // TODO - Rank non basics?
-
-            final Random r = MyRandom.getRandom();
-            return nbLand.get(r.nextInt(nbLand.size()));
+            return Aggregates.random(nbLand);
         }
 
         // if no non-basic lands, target the least represented basic land type
-        final String[] names = { "Plains", "Island", "Swamp", "Mountain", "Forest" };
         String sminBL = "";
         int iminBL = 20000; // hopefully no one will ever have more than 20000
                             // lands of one type....
         int n = 0;
-        for (int i = 0; i < 5; i++) {
-            n = land.getType(names[i]).size();
+        for (String name : Constant.Color.BASIC_LANDS) {
+            n = land.getType(name).size();
             if ((n < iminBL) && (n > 0)) {
                 // if two or more are tied, only the
                 // first
                 // one checked will be used
                 iminBL = n;
-                sminBL = names[i];
+                sminBL = name;
             }
         }
         if (iminBL == 20000) {
@@ -266,16 +260,14 @@ public class CardFactoryUtil {
         }
 
         final CardList bLand = land.getType(sminBL);
-        for (int i = 0; i < bLand.size(); i++) {
-            if (!bLand.get(i).isTapped()) {
-                // prefer untapped lands
-                return bLand.get(i);
-            }
+        
+        for( Card ut : Iterables.filter(bLand, CardPredicates.Presets.UNTAPPED) )
+        {
+            return ut;
         }
 
-        final Random r = MyRandom.getRandom();
-        return bLand.get(r.nextInt(bLand.size())); // random tapped land of
-                                                   // least represented type
+
+        return Aggregates.random(bLand); // random tapped land of least represented type
     }
 
     // The AI doesn't really pick the best enchantment, just the most expensive.
@@ -293,8 +285,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getBestEnchantmentAI(final CardList list, final SpellAbility spell, final boolean targeted) {
-        CardList all = list;
-        all = all.getType("Enchantment");
+        CardList all = list.filter(CardPredicates.Presets.ENCHANTMENTS);
         if (targeted) {
             all = all.filter(new Predicate<Card>() {
 
@@ -304,25 +295,9 @@ public class CardFactoryUtil {
                 }
             });
         }
-        if (all.size() == 0) {
-            return null;
-        }
-
+        
         // get biggest Enchantment
-        Card biggest = null;
-        biggest = all.get(0);
-
-        int bigCMC = 0;
-        for (int i = 0; i < all.size(); i++) {
-            final int curCMC = all.get(i).getManaCost().getCMC();
-
-            if (curCMC > bigCMC) {
-                bigCMC = curCMC;
-                biggest = all.get(i);
-            }
-        }
-
-        return biggest;
+        return Aggregates.itemWithMax(all, CardPredicates.Accessors.fnGetCmc);
     }
 
     // The AI doesn't really pick the best artifact, just the most expensive.
@@ -336,27 +311,12 @@ public class CardFactoryUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getBestArtifactAI(final CardList list) {
-        CardList all = list;
-        all = all.getType("Artifact");
+        CardList all = list.filter(CardPredicates.Presets.ARTIFACTS);
         if (all.size() == 0) {
             return null;
         }
-
         // get biggest Artifact
-        Card biggest = null;
-        biggest = all.get(0);
-
-        int bigCMC = 0;
-        for (int i = 0; i < all.size(); i++) {
-            final int curCMC = all.get(i).getManaCost().getCMC();
-
-            if (curCMC > bigCMC) {
-                bigCMC = curCMC;
-                biggest = all.get(i);
-            }
-        }
-
-        return biggest;
+        return Aggregates.itemWithMax(all, CardPredicates.Accessors.fnGetCmc);
     }
 
     /**
@@ -650,20 +610,8 @@ public class CardFactoryUtil {
      * @return the card
      */
     public static Card getBestCreatureAI(final CardList list) {
-        CardList all = list;
-        all = all.getType("Creature");
-        Card biggest = null;
-
-        if (all.size() != 0) {
-            biggest = all.get(0);
-
-            for (int i = 0; i < all.size(); i++) {
-                if (CardFactoryUtil.evaluateCreature(biggest) < CardFactoryUtil.evaluateCreature(all.get(i))) {
-                    biggest = all.get(i);
-                }
-            }
-        }
-        return biggest;
+        CardList all = list.filter(CardPredicates.Presets.CREATURES);
+        return Aggregates.itemWithMax(all, CardPredicates.Accessors.fnEvaluateCreature);
     }
 
     // This selection rates tokens higher
@@ -678,8 +626,7 @@ public class CardFactoryUtil {
      */
     public static Card getBestCreatureToBounceAI(final CardList list) {
         final int tokenBonus = 40;
-        CardList all = list;
-        all = all.getType("Creature");
+        CardList all = list.filter(CardPredicates.Presets.CREATURES);
         Card biggest = null; // returns null if list.size() == 0
         int biggestvalue = 0;
         int newvalue = 0;
@@ -728,21 +675,9 @@ public class CardFactoryUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getWorstCreatureAI(final CardList list) {
-        CardList all = list;
-        all = all.getType("Creature");
+        CardList all = list.filter(CardPredicates.Presets.CREATURES);
         // get smallest creature
-        Card smallest = null;
-
-        if (all.size() != 0) {
-            smallest = all.get(0);
-
-            for (int i = 0; i < all.size(); i++) {
-                if (CardFactoryUtil.evaluateCreature(smallest) > CardFactoryUtil.evaluateCreature(all.get(i))) {
-                    smallest = all.get(i);
-                }
-            }
-        }
-        return smallest;
+        return Aggregates.itemWithMin(all, CardPredicates.Accessors.fnEvaluateCreature);
     }
 
     /**
@@ -769,24 +704,25 @@ public class CardFactoryUtil {
         }
         System.out.println("getWorstPermanentAI: " + list);
 
-        if (biasEnch && (list.getType("Enchantment").size() > 0)) {
-            return CardFactoryUtil.getCheapestPermanentAI(list.getType("Enchantment"), null, false);
+        if (biasEnch && Iterables.any(list, CardPredicates.Presets.ENCHANTMENTS)) {
+            return CardFactoryUtil.getCheapestPermanentAI(list.filter(CardPredicates.Presets.ENCHANTMENTS), null, false);
         }
 
-        if (biasArt && (list.getType("Artifact").size() > 0)) {
-            return CardFactoryUtil.getCheapestPermanentAI(list.getType("Artifact"), null, false);
+        if (biasArt && Iterables.any(list, CardPredicates.Presets.ARTIFACTS)) {
+            return CardFactoryUtil.getCheapestPermanentAI(list.filter(CardPredicates.Presets.ARTIFACTS), null, false);
         }
 
-        if (biasLand && (list.getType("Land").size() > 0)) {
-            return CardFactoryUtil.getWorstLand(list.getType("Land"));
+        if (biasLand && Iterables.any(list, CardPredicates.Presets.LANDS)) {
+            return CardFactoryUtil.getWorstLand(list.filter(CardPredicates.Presets.LANDS));
         }
 
-        if (biasCreature && (list.getType("Creature").size() > 0)) {
-            return CardFactoryUtil.getWorstCreatureAI(list.getType("Creature"));
+        if (biasCreature && Iterables.any(list, CardPredicates.Presets.CREATURES)) {
+            return CardFactoryUtil.getWorstCreatureAI(list.filter(CardPredicates.Presets.CREATURES));
         }
 
-        if (list.getType("Land").size() > 6) {
-            return CardFactoryUtil.getWorstLand(list.getType("Land"));
+        CardList lands = list.filter(CardPredicates.Presets.LANDS);
+        if (lands.size() > 6) {
+            return CardFactoryUtil.getWorstLand(lands);
         }
 
         if ((list.getType("Artifact").size() > 0) || (list.getType("Enchantment").size() > 0)) {
@@ -2540,10 +2476,8 @@ public class CardFactoryUtil {
         // Count$Domain
         if (sq[0].contains("Domain")) {
             someCards.addAll(cardController.getCardsIn(ZoneType.Battlefield));
-            final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
-
-            for (int i = 0; i < basic.length; i++) {
-                if (!someCards.getType(basic[i]).isEmpty()) {
+            for (String basic : Constant.Color.BASIC_LANDS) {
+                if (!someCards.getType(basic).isEmpty()) {
                     n++;
                 }
             }
@@ -2553,10 +2487,8 @@ public class CardFactoryUtil {
         // Count$OpponentDom
         if (sq[0].contains("OpponentDom")) {
             someCards.addAll(cardController.getOpponent().getCardsIn(ZoneType.Battlefield));
-            final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
-
-            for (int i = 0; i < basic.length; i++) {
-                if (!someCards.getType(basic[i]).isEmpty()) {
+            for (String basic : Constant.Color.BASIC_LANDS) {
+                if (!someCards.getType(basic).isEmpty()) {
                     n++;
                 }
             }
@@ -3702,38 +3634,14 @@ public class CardFactoryUtil {
      */
     public static Card getWorstLand(final CardList lands) {
         Card worstLand = null;
+        int maxScore = 0;
         // first, check for tapped, basic lands
-        for (int i = 0; i < lands.size(); i++) {
-            final Card tmp = lands.get(i);
-            if (tmp.isTapped() && tmp.isBasicLand()) {
+        for (Card tmp : lands) {
+            int score = tmp.isTapped() ? 2 : 0;
+            score += tmp.isBasicLand() ? 1 : 0;
+            if( score >= maxScore ) {
                 worstLand = tmp;
-            }
-        }
-        // next, check for tapped, non-basic lands
-        if (worstLand == null) {
-            for (int i = 0; i < lands.size(); i++) {
-                final Card tmp = lands.get(i);
-                if (tmp.isTapped()) {
-                    worstLand = tmp;
-                }
-            }
-        }
-        // next, untapped, basic lands
-        if (worstLand == null) {
-            for (int i = 0; i < lands.size(); i++) {
-                final Card tmp = lands.get(i);
-                if (tmp.isUntapped() && tmp.isBasicLand()) {
-                    worstLand = tmp;
-                }
-            }
-        }
-        // next, untapped, non-basic lands
-        if (worstLand == null) {
-            for (int i = 0; i < lands.size(); i++) {
-                final Card tmp = lands.get(i);
-                if (tmp.isUntapped()) {
-                    worstLand = tmp;
-                }
+                maxScore = score;
             }
         }
         return worstLand;

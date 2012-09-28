@@ -34,6 +34,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Constant;
@@ -738,7 +739,7 @@ public final class AbilityFactoryChoose {
                             CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                             if (list.isEmpty()) {
                                 list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer())
-                                        .getType("Creature");
+                                        .filter(CardPredicates.Presets.CREATURES);
                             }
                             chosen = CardFactoryUtil.getMostProminentColor(list);
                         }

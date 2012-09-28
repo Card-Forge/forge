@@ -27,6 +27,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.Command;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -297,8 +298,8 @@ public class AbilityFactoryEffect {
             } else if (logic.equals("Always")) {
                 randomReturn = true;
             } else if (logic.equals("Evasion")) {
-                CardList comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
-                CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature");
+                CardList comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.CREATURES);
+                CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.CREATURES);
 
                 // only count creatures that can attack or block
                 comp = comp.filter(new Predicate<Card>() {

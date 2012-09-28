@@ -33,6 +33,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
+import forge.CardPredicates;
 import forge.Command;
 import forge.Constant;
 import forge.Counters;
@@ -400,7 +401,7 @@ public class CombatUtil {
                         boolean must = true;
                         if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
                             final CardList possibleBlockers = combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield)
-                                    .getType("Creature");
+                                    .filter(CardPredicates.Presets.CREATURES);
                             possibleBlockers.remove(blocker);
                             if (!CombatUtil.canBeBlocked(attacker, possibleBlockers)) {
                                 must = false;
@@ -524,7 +525,7 @@ public class CombatUtil {
                 boolean canBe = true;
                 if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
                     final CardList blockers = combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield)
-                            .getType("Creature");
+                            .filter(CardPredicates.Presets.CREATURES);
                     blockers.remove(blocker);
                     if (!CombatUtil.canBeBlocked(attacker, blockers)) {
                         canBe = false;
@@ -542,7 +543,7 @@ public class CombatUtil {
                     boolean canBe = true;
                     if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
                         final CardList blockers = combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield)
-                                .getType("Creature");
+                                .filter(CardPredicates.Presets.CREATURES);
                         blockers.remove(blocker);
                         if (!CombatUtil.canBeBlocked(attacker, blockers)) {
                             canBe = false;
@@ -929,12 +930,7 @@ public class CombatUtil {
                     return false;
                 }
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls a snow land.")) {
-                temp = list.filter(new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return c.isLand() && c.isSnow();
-                    }
-                });
+                temp = list.filter(CardPredicates.Presets.SNOW_LANDS);
                 if (temp.isEmpty()) {
                     return false;
                 }

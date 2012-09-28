@@ -1959,9 +1959,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     oathFlag = false;
                                 }
                             } else { // if player == Computer
-                                final CardList creaturesInLibrary = player.getCardsIn(ZoneType.Library).getType("Creature");
-                                final CardList creaturesInBattlefield = player.getCardsIn(ZoneType.Battlefield).getType(
-                                        "Creature");
+                                final CardList creaturesInLibrary = player.getCardsIn(ZoneType.Library).filter(CardPredicates.Presets.CREATURES);
+                                final CardList creaturesInBattlefield = player.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.CREATURES);
 
                                 // if there are at least 3 creatures in library,
                                 // or none in play with one in library, oath

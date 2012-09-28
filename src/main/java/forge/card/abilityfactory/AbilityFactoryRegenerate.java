@@ -26,6 +26,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
+import forge.CardPredicates;
 import forge.Command;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -340,7 +341,7 @@ public class AbilityFactoryRegenerate {
                 }
             } else {
                 if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                    final CardList combatants = targetables.getType("Creature");
+                    final CardList combatants = targetables.filter(CardPredicates.Presets.CREATURES);
                     CardListUtil.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
@@ -429,7 +430,7 @@ public class AbilityFactoryRegenerate {
         }
 
         if (compTargetables.size() > 0) {
-            final CardList combatants = compTargetables.getType("Creature");
+            final CardList combatants = compTargetables.filter(CardPredicates.Presets.CREATURES);
             CardListUtil.sortByEvaluateCreature(combatants);
             if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
@@ -739,7 +740,7 @@ public class AbilityFactoryRegenerate {
         } else {
 
             if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                final CardList combatants = list.getType("Creature");
+                final CardList combatants = list.filter(CardPredicates.Presets.CREATURES);
 
                 for (final Card c : combatants) {
                     if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {

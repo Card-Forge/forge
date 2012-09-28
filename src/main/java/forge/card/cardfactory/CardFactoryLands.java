@@ -25,6 +25,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Counters;
@@ -381,8 +382,7 @@ class CardFactoryLands {
 
                     if (this.player.isComputer()) {
                         if (plains.size() > 1) {
-                            CardList tappedPlains = new CardList(plains);
-                            tappedPlains = tappedPlains.getType("Basic");
+                            CardList tappedPlains = plains.filter(CardPredicates.Presets.BASIC_LANDS);
                             for (final Card c : tappedPlains) {
                                 Singletons.getModel().getGameAction().sacrifice(c, null);
                             }

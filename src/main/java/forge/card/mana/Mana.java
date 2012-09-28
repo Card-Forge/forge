@@ -122,17 +122,6 @@ public class Mana {
 
     /**
      * <p>
-     * fromBasicLand.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean fromBasicLand() {
-        return this.sourceCard.isBasicLand();
-    } // for Imperiosaur
-
-    /**
-     * <p>
      * isColor.
      * </p>
      * 
