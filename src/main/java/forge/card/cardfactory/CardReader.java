@@ -35,7 +35,6 @@ import java.util.zip.ZipFile;
 
 import javax.swing.SwingUtilities;
 
-
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardColor;
@@ -50,7 +49,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
 import forge.gui.toolbox.FProgressBar;
 import forge.util.FileUtil;
-import forge.view.SplashFrame;
+import forge.view.FView;
 
 /**
  * <p>
@@ -127,12 +126,6 @@ public class CardReader {
      * 
      * @param theCardsFolder
      *            indicates location of the cardsFolder
-     * 
-     * @param theMapToFill
-     *            maps card names to Card instances; this is where we place the
-     *            cards once read
-     * @param listRules2Fill
-     *            List<CardRules>
      * @param useZip
      *            if true, attempts to load cards from a zip file, if one
      *            exists.
@@ -186,15 +179,12 @@ public class CardReader {
      * After that, we save our place in the list of cards (on disk) in case we
      * need to load more.
      * 
-     * @param cardName
-     *            the name to find; if null, load all cards.
-     * 
      * @return the Card or null if it was not found.
      */
     public final List<CardRules> loadCards() {
 
         List<CardRules> result = new ArrayList<CardRules>();
-        final FProgressBar barProgress = SplashFrame.PROGRESS_BAR;
+        final FProgressBar barProgress = FView.SINGLETON_INSTANCE.getSplash().getProgressBar();
 
         // Iterate through txt files or zip archive.
         // Report relevant numbers to progress monitor model.

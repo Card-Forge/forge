@@ -28,6 +28,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import forge.AllZone;
@@ -136,9 +137,6 @@ public enum FControl {
                  }
              }
          };
-
-         FView.SINGLETON_INSTANCE.getLpnDocument().addMouseListener(SOverflowUtil.getHideOverflowListener());
-         FView.SINGLETON_INSTANCE.getLpnDocument().addComponentListener(SResizingUtil.getWindowResizeListener());
     }
 
     /** After view and model have been initialized, control can start. */
@@ -151,6 +149,7 @@ public enum FControl {
 
         // Does not use progress bar, due to be deprecated with battlefield refactoring.
         CardFaceSymbols.loadImages();
+
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
@@ -170,6 +169,12 @@ public enum FControl {
                sizeChildren();
            }
         });
+
+        FView.SINGLETON_INSTANCE.getLpnDocument().addMouseListener(SOverflowUtil.getHideOverflowListener());
+        FView.SINGLETON_INSTANCE.getLpnDocument().addComponentListener(SResizingUtil.getWindowResizeListener());
+
+        SwingUtilities.invokeLater(new Runnable() { @Override
+            public void run() { Singletons.getView().initialize(); } });
     }
 
     /**

@@ -37,7 +37,6 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
-import forge.view.arcane.PlayArea;
 
 /**
  * Semi-transparent overlay panel. Should be used with layered panes.
@@ -50,21 +49,13 @@ public enum TargetingOverlay {
     SINGLETON_INSTANCE;
 
     private final JPanel pnl = new OverlayPanel();
-    private final List<PlayArea> playAreas;
-    private List<CardPanel> cardPanels;
+    private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
     private final List<Point[]> arcs = new ArrayList<Point[]>();
 
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
      */
     private TargetingOverlay() {
-        playAreas = new ArrayList<PlayArea>();
-        cardPanels = new ArrayList<CardPanel>();
-
-        for (CField f : CMatchUI.SINGLETON_INSTANCE.getFieldControls()) {
-            playAreas.add(f.getView().getTabletop());
-        }
-
         pnl.setOpaque(false);
         pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
     }
@@ -80,8 +71,10 @@ public enum TargetingOverlay {
     private void assembleArcs() {
         arcs.clear();
         cardPanels.clear();
-        cardPanels.addAll(playAreas.get(0).getCardPanels());
-        cardPanels.addAll(playAreas.get(1).getCardPanels());
+
+        for (CField f : CMatchUI.SINGLETON_INSTANCE.getFieldControls()) {
+            cardPanels.addAll(f.getView().getTabletop().getCardPanels());
+        }
 
         final Point docOffsets = FView.SINGLETON_INSTANCE.getLpnDocument().getLocationOnScreen();
         // Locations of arc endpoint, per card, with ID as primary key.

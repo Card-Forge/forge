@@ -17,11 +17,8 @@
  */
 package forge.view;
 
-import javax.swing.SwingUtilities;
-
 import forge.Singletons;
 import forge.control.FControl;
-import forge.error.ExceptionHandler;
 import forge.model.FModel;
 
 /**
@@ -33,7 +30,7 @@ public final class Main {
      * Do not instantiate.
      */
     private Main() {
-        // intentionally blank
+        // Intentionally blank.
     }
 
     /**
@@ -43,31 +40,16 @@ public final class Main {
      *            an array of {@link java.lang.String} objects.
      */
     public static void main(final String[] args) {
-        //Possible solution to "Comparison method violates it's general contract!" crash
+        // HACK - temporary solution to "Comparison method violates it's general contract!" crash
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 
-        ExceptionHandler.registerErrorHandling();
-
+        // Start splash screen first, then data models, then controller.
+        Singletons.setView(FView.SINGLETON_INSTANCE);
         Singletons.setModel(FModel.SINGLETON_INSTANCE);
-
-        try {
-            SwingUtilities.invokeAndWait(new Runnable() {
-                @Override
-                public void run() {
-                    Singletons.setView(FView.SINGLETON_INSTANCE);
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         Singletons.setControl(FControl.SINGLETON_INSTANCE);
 
-        // Use splash frame to initialize everything, then transition to core UI.
+        // Controller can now step in and take over.
         Singletons.getControl().initialize();
-
-        SwingUtilities.invokeLater(new Runnable() { @Override
-            public void run() { Singletons.getView().initialize(); } });
     }
 
     /** @throws Throwable  */

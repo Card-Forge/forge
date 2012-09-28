@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
+
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.FControl;
@@ -38,7 +39,7 @@ public enum FView {
     /** */
     public static final Integer TARGETING_LAYER = JLayeredPane.MODAL_LAYER - 1;
     private final List<DragCell> allCells = new ArrayList<DragCell>();
-    private SplashFrame splash;
+    private SplashFrame frmSplash;
 
     // Non-singleton instances (deprecated, but not updated yet)
     private ViewBazaarUI bazaar = null;
@@ -51,14 +52,18 @@ public enum FView {
     private final JPanel pnlContent = new JPanel();
     // An insets panel neatly maintains a space from the edges of the window and
     // whatever layout is happening, without having to explicitly define a margin each time.
-    private final FPanel pnlInsets = new FPanel(new BorderLayout());
+    private FPanel pnlInsets;
     // Preview panel is what is shown when a drag cell is being moved around
     private final JPanel pnlPreview = new PreviewPanel();
     // Tab overflow is for the +X display for extra tabs.
     private final JPanel pnlTabOverflow = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
 
     private FView() {
-        splash = new SplashFrame();
+        frmSplash = new SplashFrame();
+
+        // Insets panel has background image / texture, which
+        // must be instantiated after the skin is loaded.
+        pnlInsets = new FPanel(new BorderLayout());
     }
 
     /** */
@@ -78,7 +83,7 @@ public enum FView {
         lpnDocument.add(pnlTabOverflow, (Integer) 3);
         lpnDocument.add(FOverlay.SINGLETON_INSTANCE.getPanel(), JLayeredPane.MODAL_LAYER);
         // Note: when adding new panels here, keep in mind that the layered pane
-        // has a null layout, so new components will be (0,0) - gotcha!
+        // has a null layout, so new components will be W0 x H0 pixels - gotcha!
         // FControl has a method called "sizeComponents" which will fix this.
         lpnDocument.add(TargetingOverlay.SINGLETON_INSTANCE.getPanel(), TARGETING_LAYER);
 
@@ -106,10 +111,15 @@ public enum FView {
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
         CMainMenu.SINGLETON_INSTANCE.selectPrevious();
 
-        FView.this.splash.dispose();
-        FView.this.splash = null;
+        FView.this.frmSplash.dispose();
+        FView.this.frmSplash = null;
 
         frmDocument.setVisible(true);
+    }
+
+    /** @return {@link forge.view.SplashFrame} */
+    public SplashFrame getSplash() {
+        return frmSplash;
     }
 
     /** @return {@link javax.swing.JFrame} */

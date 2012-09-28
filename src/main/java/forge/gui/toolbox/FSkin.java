@@ -38,7 +38,7 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
 import forge.gui.GuiUtils;
-import forge.view.SplashFrame;
+import forge.view.FView;
 
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a
@@ -483,7 +483,7 @@ public enum FSkin {
         if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default"); }
 
         // Everything OK?
-        final FProgressBar barProgress = SplashFrame.PROGRESS_BAR;
+        final FProgressBar barProgress = FView.SINGLETON_INSTANCE.getSplash().getProgressBar();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

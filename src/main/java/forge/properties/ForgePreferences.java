@@ -29,9 +29,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import forge.Constant;
 import forge.gui.home.EMenuItem;
+import forge.gui.match.VMatchUI;
+import forge.gui.match.nonsingleton.VField;
+import forge.gui.match.views.VDev;
 
 /**
  * Holds default preference values in an enum.
@@ -190,6 +195,97 @@ public class ForgePreferences {
         } catch (IOException ex) {
             //ex.printStackTrace();
         }
+    }
+
+    /**
+     * TODO: Needs to be reworked for efficiency with rest of prefs saves in
+     * codebase.
+     */
+    public void writeMatchPreferences() {
+        final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
+
+        // AI field is at index [0]
+        this.setPref(FPref.PHASE_AI_UPKEEP, String.valueOf(fieldViews.get(0).getLblUpkeep().getEnabled()));
+        this.setPref(FPref.PHASE_AI_DRAW, String.valueOf(fieldViews.get(0).getLblDraw().getEnabled()));
+        this.setPref(FPref.PHASE_AI_MAIN1, String.valueOf(fieldViews.get(0).getLblMain1().getEnabled()));
+        this.setPref(FPref.PHASE_AI_BEGINCOMBAT, String.valueOf(fieldViews.get(0).getLblBeginCombat().getEnabled()));
+        this.setPref(FPref.PHASE_AI_DECLAREATTACKERS,
+                String.valueOf(fieldViews.get(0).getLblDeclareAttackers().getEnabled()));
+        this.setPref(FPref.PHASE_AI_DECLAREBLOCKERS,
+                String.valueOf(fieldViews.get(0).getLblDeclareBlockers().getEnabled()));
+        this.setPref(FPref.PHASE_AI_FIRSTSTRIKE, String.valueOf(fieldViews.get(0).getLblFirstStrike().getEnabled()));
+        this.setPref(FPref.PHASE_AI_COMBATDAMAGE, String.valueOf(fieldViews.get(0).getLblCombatDamage().getEnabled()));
+        this.setPref(FPref.PHASE_AI_ENDCOMBAT, String.valueOf(fieldViews.get(0).getLblEndCombat().getEnabled()));
+        this.setPref(FPref.PHASE_AI_MAIN2, String.valueOf(fieldViews.get(0).getLblMain2().getEnabled()));
+        this.setPref(FPref.PHASE_AI_EOT, String.valueOf(fieldViews.get(0).getLblEndTurn().getEnabled()));
+        this.setPref(FPref.PHASE_AI_CLEANUP, String.valueOf(fieldViews.get(0).getLblCleanup().getEnabled()));
+
+        // Human field is at index [1]
+        this.setPref(FPref.PHASE_HUMAN_UPKEEP, String.valueOf(fieldViews.get(1).getLblUpkeep().getEnabled()));
+        this.setPref(FPref.PHASE_HUMAN_DRAW, String.valueOf(fieldViews.get(1).getLblDraw().getEnabled()));
+        this.setPref(FPref.PHASE_HUMAN_MAIN1, String.valueOf(fieldViews.get(1).getLblMain1().getEnabled()));
+        this.setPref(FPref.PHASE_HUMAN_BEGINCOMBAT, String.valueOf(fieldViews.get(1).getLblBeginCombat().getEnabled()));
+        this.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS,
+                String.valueOf(fieldViews.get(1).getLblDeclareAttackers().getEnabled()));
+        this.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS,
+                String.valueOf(fieldViews.get(1).getLblDeclareBlockers().getEnabled()));
+        this.setPref(FPref.PHASE_HUMAN_FIRSTSTRIKE, String.valueOf(fieldViews.get(1).getLblFirstStrike().getEnabled()));
+        this.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE, String.valueOf(fieldViews.get(1).getLblCombatDamage().getEnabled()));
+        this.setPref(FPref.PHASE_HUMAN_ENDCOMBAT, String.valueOf(fieldViews.get(1).getLblEndCombat().getEnabled()));
+        this.setPref(FPref.PHASE_HUMAN_MAIN2, String.valueOf(fieldViews.get(1).getLblMain2().getEnabled()));
+        this.setPref(FPref.PHASE_HUMAN_EOT, String.valueOf(fieldViews.get(1).getLblEndTurn().getEnabled()));
+        this.setPref(FPref.PHASE_HUMAN_CLEANUP, String.valueOf(fieldViews.get(1).getLblCleanup().getEnabled()));
+
+        final VDev v = VDev.SINGLETON_INSTANCE;
+        Constant.Runtime.MILL[0] = v.getLblMilling().getEnabled();
+
+        this.setPref(FPref.DEV_MILLING_LOSS, String.valueOf(Constant.Runtime.MILL[0]));
+        this.setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(v.getLblUnlimitedLands().getEnabled()));
+    }
+
+    /**
+     * TODO: Needs to be reworked for efficiency with rest of prefs saves in
+     * codebase.
+     */
+    public void actuateMatchPreferences() {
+        final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
+
+        Constant.Runtime.MILL[0] = this.getPrefBoolean(FPref.DEV_MILLING_LOSS);
+        Constant.Runtime.DEV_MODE[0] = this.getPrefBoolean(FPref.DEV_MODE_ENABLED);
+        Constant.Runtime.UPLOAD_DRAFT[0] = this.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
+        Constant.Runtime.RANDOM_FOIL[0] = this.getPrefBoolean(FPref.UI_RANDOM_FOIL);
+        Constant.Runtime.UPLOAD_DRAFT[0] = (Constant.Runtime.NET_CONN[0] ? this.getPrefBoolean(FPref.UI_UPLOAD_DRAFT)
+                : false);
+
+        // AI field is at index [0]
+        fieldViews.get(0).getLblUpkeep().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
+        fieldViews.get(0).getLblDraw().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_DRAW));
+        fieldViews.get(0).getLblMain1().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_MAIN1));
+        fieldViews.get(0).getLblBeginCombat().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_BEGINCOMBAT));
+        fieldViews.get(0).getLblDeclareAttackers().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_DECLAREATTACKERS));
+        fieldViews.get(0).getLblDeclareBlockers().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_DECLAREBLOCKERS));
+        fieldViews.get(0).getLblFirstStrike().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_FIRSTSTRIKE));
+        fieldViews.get(0).getLblCombatDamage().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_COMBATDAMAGE));
+        fieldViews.get(0).getLblEndCombat().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_ENDCOMBAT));
+        fieldViews.get(0).getLblMain2().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_MAIN2));
+        fieldViews.get(0).getLblEndTurn().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_EOT));
+        fieldViews.get(0).getLblCleanup().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
+
+        // Human field is at index [1]
+        fieldViews.get(1).getLblUpkeep().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
+        fieldViews.get(1).getLblDraw().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
+        fieldViews.get(1).getLblMain1().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));
+        fieldViews.get(1).getLblBeginCombat().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_BEGINCOMBAT));
+        fieldViews.get(1).getLblDeclareAttackers().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREATTACKERS));
+        fieldViews.get(1).getLblDeclareBlockers().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREBLOCKERS));
+        fieldViews.get(1).getLblFirstStrike().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_FIRSTSTRIKE));
+        fieldViews.get(1).getLblCombatDamage().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_COMBATDAMAGE));
+        fieldViews.get(1).getLblEndCombat().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_ENDCOMBAT));
+        fieldViews.get(1).getLblMain2().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_MAIN2));
+        fieldViews.get(1).getLblEndTurn().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
+        fieldViews.get(1).getLblCleanup().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
+
+        //Singletons.getView().getViewMatch().setLayoutParams(this.getPref(FPref.UI_LAYOUT_PARAMS));
     }
 
     /** Saves prefs map to file. */
