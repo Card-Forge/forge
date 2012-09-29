@@ -1601,6 +1601,7 @@ res/cardsfolder/c/choke.txt svneol=native#text/plain
 res/cardsfolder/c/choking_fumes.txt svneol=native#text/plain
 res/cardsfolder/c/choking_sands.txt svneol=native#text/plain
 res/cardsfolder/c/choking_tethers.txt svneol=native#text/plain
+res/cardsfolder/c/chorus_of_might.txt -text
 res/cardsfolder/c/chorus_of_woe.txt svneol=native#text/plain
 res/cardsfolder/c/chosen_of_markov_markovs_servant.txt -text
 res/cardsfolder/c/chromatic_armor.txt -text
@@ -2245,6 +2246,7 @@ res/cardsfolder/d/deathrite_shaman.txt -text
 res/cardsfolder/d/deaths_caress.txt -text
 res/cardsfolder/d/deaths_duet.txt svneol=native#text/plain
 res/cardsfolder/d/deaths_head_buzzard.txt svneol=native#text/plain
+res/cardsfolder/d/deaths_presence.txt -text
 res/cardsfolder/d/deaths_shadow.txt svneol=native#text/plain
 res/cardsfolder/d/deathspore_thallid.txt svneol=native#text/plain
 res/cardsfolder/d/debtors_knell.txt svneol=native#text/plain
@@ -3685,6 +3687,7 @@ res/cardsfolder/g/gaseous_form.txt svneol=native#text/plain
 res/cardsfolder/g/gate_hound.txt svneol=native#text/plain
 res/cardsfolder/g/gate_to_phyrexia.txt svneol=native#text/plain
 res/cardsfolder/g/gate_to_the_aether.txt -text
+res/cardsfolder/g/gatecreeper_vine.txt -text
 res/cardsfolder/g/gatekeeper_of_malakir.txt svneol=native#text/plain
 res/cardsfolder/g/gathan_raiders.txt svneol=native#text/plain
 res/cardsfolder/g/gather_courage.txt -text
@@ -4571,6 +4574,7 @@ res/cardsfolder/h/horizon_spellbomb.txt svneol=native#text/plain
 res/cardsfolder/h/horn_of_deafening.txt svneol=native#text/plain
 res/cardsfolder/h/horn_of_greed.txt svneol=native#text/plain
 res/cardsfolder/h/horn_of_ramos.txt svneol=native#text/plain
+res/cardsfolder/h/horncallers_chant.txt -text
 res/cardsfolder/h/horned_cheetah.txt svneol=native#text/plain
 res/cardsfolder/h/horned_helm.txt -text
 res/cardsfolder/h/horned_kavu.txt svneol=native#text/plain
@@ -6689,6 +6693,7 @@ res/cardsfolder/n/nurturer_initiate.txt svneol=native#text/plain
 res/cardsfolder/n/nurturing_licid.txt -text
 res/cardsfolder/n/nut_collector.txt svneol=native#text/plain
 res/cardsfolder/n/nyxathid.txt svneol=native#text/plain
+res/cardsfolder/o/oak_street_innkeeper.txt -text
 res/cardsfolder/o/oaken_brawler.txt svneol=native#text/plain
 res/cardsfolder/o/oakenform.txt svneol=native#text/plain
 res/cardsfolder/o/oakgnarl_warrior.txt svneol=native#text/plain
@@ -11088,6 +11093,7 @@ res/cardsfolder/w/wicker_warcrawler.txt svneol=native#text/plain
 res/cardsfolder/w/wickerbough_elder.txt svneol=native#text/plain
 res/cardsfolder/w/wielding_the_green_dragon.txt svneol=native#text/plain
 res/cardsfolder/w/wild_aesthir.txt svneol=native#text/plain
+res/cardsfolder/w/wild_beastmaster.txt -text
 res/cardsfolder/w/wild_cantor.txt svneol=native#text/plain
 res/cardsfolder/w/wild_colos.txt svneol=native#text/plain
 res/cardsfolder/w/wild_defiance.txt -text

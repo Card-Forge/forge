@@ -1,0 +1,13 @@
+Name:Gatecreeper Vine
+ManaCost:1 G
+Types:Creature Plant
+Text:no text
+PT:0/2
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card or a Gate card, reveal it, put it into your hand, then shuffle your library.
+SVar:TrigSearch:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic,Card.Gate | ChangeNum$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gatecreeper_vine.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/124.jpg
+Oracle:Defender\nWhen Gatecreeper Vine enters the battlefield, you may search your library for a basic land card or a Gate card, reveal it, put it into your hand, then shuffle your library.
+End
