@@ -1,0 +1,14 @@
+Name:Pack Rat
+ManaCost:1 B
+Types:Creature Rat
+Text:no text
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X |  SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Rats you control.
+A:AB$ CopyPermanent | Cost$ 2 B Discard<1/Card> | Defined$ Self | NumCopies$ 1 | SpellDescription$ Put a token onto the battlefield that's a copy of CARDNAME.
+SVar:X:Count$Valid Rat.YouCtrl
+SVar:BuffedBy:Rat
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pack_rat.jpg
+SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/73.jpg
+Oracle:Pack Rat's power and toughness are each equal to the number of Rats you control.\n{2}{B}, Discard a card: Put a token onto the battlefield that's a copy of Pack Rat.
+End

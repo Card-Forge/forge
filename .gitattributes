@@ -2365,6 +2365,7 @@ res/cardsfolder/d/despise.txt svneol=native#text/plain
 res/cardsfolder/d/despoil.txt svneol=native#text/plain
 res/cardsfolder/d/despondency.txt svneol=native#text/plain
 res/cardsfolder/d/despotic_scepter.txt svneol=native#text/plain
+res/cardsfolder/d/destroy_the_evidence.txt -text
 res/cardsfolder/d/destructive_flow.txt svneol=native#text/plain
 res/cardsfolder/d/destructive_force.txt svneol=native#text/plain
 res/cardsfolder/d/destructive_urge.txt svneol=native#text/plain
@@ -2376,6 +2377,7 @@ res/cardsfolder/d/devastating_dreams.txt -text
 res/cardsfolder/d/devastating_summons.txt svneol=native#text/plain
 res/cardsfolder/d/devastation.txt svneol=native#text/plain
 res/cardsfolder/d/devastation_tide.txt -text
+res/cardsfolder/d/deviant_glee.txt -text
 res/cardsfolder/d/devils_play.txt -text
 res/cardsfolder/d/devoted_caretaker.txt -text svneol=unset#text/plain
 res/cardsfolder/d/devoted_druid.txt svneol=native#text/plain
@@ -2571,6 +2573,7 @@ res/cardsfolder/d/dragonspeaker_shaman.txt svneol=native#text/plain
 res/cardsfolder/d/dragonstalker.txt svneol=native#text/plain
 res/cardsfolder/d/dragonstorm.txt svneol=native#text/plain
 res/cardsfolder/d/drain_the_well.txt svneol=native#text/plain
+res/cardsfolder/d/drainpipe_vermin.txt -text
 res/cardsfolder/d/drake_familiar.txt -text
 res/cardsfolder/d/drake_hatchling.txt svneol=native#text/plain
 res/cardsfolder/d/drake_skull_cameo.txt svneol=native#text/plain
@@ -6890,6 +6893,7 @@ res/cardsfolder/o/oxidda_scrapmelter.txt svneol=native#text/plain
 res/cardsfolder/o/oxidize.txt svneol=native#text/plain
 res/cardsfolder/o/oyobi_who_split_the_heavens.txt svneol=native#text/plain
 res/cardsfolder/p/pacifism.txt svneol=native#text/plain
+res/cardsfolder/p/pack_rat.txt -text
 res/cardsfolder/p/packs_disdain.txt svneol=native#text/plain
 res/cardsfolder/p/pact_of_negation.txt svneol=native#text/plain
 res/cardsfolder/p/pact_of_the_titan.txt svneol=native#text/plain
@@ -8623,6 +8627,7 @@ res/cardsfolder/s/shriek_of_dread.txt svneol=native#text/plain
 res/cardsfolder/s/shriek_raptor.txt svneol=native#text/plain
 res/cardsfolder/s/shriekgeist.txt -text
 res/cardsfolder/s/shriekhorn.txt svneol=native#text/plain
+res/cardsfolder/s/shrieking_affliction.txt -text
 res/cardsfolder/s/shrieking_drake.txt svneol=native#text/plain
 res/cardsfolder/s/shrieking_grotesque.txt -text svneol=unset#text/plain
 res/cardsfolder/s/shrieking_mogg.txt svneol=native#text/plain
@@ -9770,6 +9775,7 @@ res/cardsfolder/t/tattoo_ward.txt -text
 res/cardsfolder/t/taunting_challenge.txt svneol=native#text/plain
 res/cardsfolder/t/taunting_elf.txt svneol=native#text/plain
 res/cardsfolder/t/taurean_mauler.txt svneol=native#text/plain
+res/cardsfolder/t/tavern_swindler.txt -text
 res/cardsfolder/t/tawnoss_wand.txt svneol=native#text/plain
 res/cardsfolder/t/tawnoss_weaponry.txt svneol=native#text/plain
 res/cardsfolder/t/teardrop_kami.txt svneol=native#text/plain
@@ -10396,6 +10402,7 @@ res/cardsfolder/u/undergrowth.txt svneol=native#text/plain
 res/cardsfolder/u/undermine.txt svneol=native#text/plain
 res/cardsfolder/u/undertaker.txt svneol=native#text/plain
 res/cardsfolder/u/undertow.txt svneol=native#text/plain
+res/cardsfolder/u/underworld_connections.txt -text
 res/cardsfolder/u/underworld_dreams.txt svneol=native#text/plain
 res/cardsfolder/u/undiscovered_paradise.txt svneol=native#text/plain
 res/cardsfolder/u/undo.txt svneol=native#text/plain

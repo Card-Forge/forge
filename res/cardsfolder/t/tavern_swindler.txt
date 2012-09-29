@@ -1,0 +1,12 @@
+Name:Tavern Swindler
+ManaCost:1 B
+Types:Creature Human Rogue
+Text:no text
+PT:2/2
+A:AB$ FlipACoin | Cost$ T PayLife<3> | WinSubAbility$ TSGainLife | SpellDescription$ Flip a coin. If you win the flip, you gain 6 life.
+SVar:TSGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 6
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tavern_swindler.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/79.jpg
+Oracle:{T}, Pay 3 life: Flip a coin. If you win the flip, you gain 6 life.
+End

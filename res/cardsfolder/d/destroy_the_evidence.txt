@@ -1,0 +1,11 @@
+Name:Destroy the Evidence
+ManaCost:4 B
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDigUntil | SpellDescription$ Destroy target land. Its controller reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
+SVar:DBDigUntil:DB$DigUntil | Defined$ TargetedController | Cost$ 0 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/destroy_the_evidence.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/64.jpg
+Oracle:Destroy target land. Its controller reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
+End
