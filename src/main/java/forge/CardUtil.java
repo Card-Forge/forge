@@ -465,7 +465,10 @@ public final class CardUtil {
                 return subject.getCode().equals(set);
             }
         };
-        final EditionInfo neededSet = Iterables.find(card.getSets(), findSetInfo);
+        EditionInfo neededSet = null;
+        if (!card.getSets().isEmpty()) {
+            neededSet = Iterables.find(card.getSets(), findSetInfo);
+        }
         final int cntPictures = neededSet == null ? 1 : neededSet.getPicCount();
         return CardUtil
                 .buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);
