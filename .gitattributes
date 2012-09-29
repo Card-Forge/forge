@@ -1767,6 +1767,7 @@ res/cardsfolder/c/commander_eesha.txt svneol=native#text/plain
 res/cardsfolder/c/commander_greven_il_vec.txt svneol=native#text/plain
 res/cardsfolder/c/commanders_authority.txt -text
 res/cardsfolder/c/commando_raid.txt -text svneol=unset#text/plain
+res/cardsfolder/c/common_bond.txt -text
 res/cardsfolder/c/commune_with_nature.txt svneol=native#text/plain
 res/cardsfolder/c/complex_automaton.txt svneol=native#text/plain
 res/cardsfolder/c/composite_golem.txt svneol=native#text/plain
@@ -1887,6 +1888,7 @@ res/cardsfolder/c/countersquall.txt svneol=native#text/plain
 res/cardsfolder/c/countryside_crusher.txt -text
 res/cardsfolder/c/courier_hawk.txt svneol=native#text/plain
 res/cardsfolder/c/couriers_capsule.txt svneol=native#text/plain
+res/cardsfolder/c/coursers_accord.txt -text
 res/cardsfolder/c/court_archers.txt svneol=native#text/plain
 res/cardsfolder/c/court_homunculus.txt svneol=native#text/plain
 res/cardsfolder/c/court_hussar.txt -text
