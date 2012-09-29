@@ -1708,7 +1708,11 @@ public class AbilityFactory {
                 if (calcX[0].startsWith("Sacrificed")) {
                     list = AbilityFactory.findRootAbility(ability).getPaidList("Sacrificed");
                 } else if (calcX[0].startsWith("Discarded")) {
-                    list = AbilityFactory.findRootAbility(ability).getPaidList("Discarded");
+                    final SpellAbility root = AbilityFactory.findRootAbility(ability);
+                    list = root.getPaidList("Discarded");
+                    if ((null == list) && root.isTrigger()) {
+                        list = root.getSourceCard().getSpellPermanent().getPaidList("Discarded");
+                    }
                 } else if (calcX[0].startsWith("Exiled")) {
                     list = AbilityFactory.findRootAbility(ability).getPaidList("Exiled");
                 } else if (calcX[0].startsWith("Tapped")) {
@@ -2247,7 +2251,7 @@ public class AbilityFactory {
             for (final Card imp : card.getImprinted()) {
                 sas.addAll(imp.getSpellAbilities());
             }
-        } else if (defined.equals("EffectSource") ) {
+        } else if (defined.equals("EffectSource")) {
             if (card.getEffectSource() != null) {
                 sas.addAll(card.getEffectSource().getSpellAbilities());
             }

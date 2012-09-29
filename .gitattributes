@@ -2594,6 +2594,7 @@ res/cardsfolder/d/drake_skull_cameo.txt svneol=native#text/plain
 res/cardsfolder/d/drake_umbra.txt svneol=native#text/plain
 res/cardsfolder/d/dralnu_lich_lord.txt -text
 res/cardsfolder/d/dralnus_crusade.txt svneol=native#text/plain
+res/cardsfolder/d/dralnus_pet.txt -text
 res/cardsfolder/d/dramatic_entrance.txt svneol=native#text/plain
 res/cardsfolder/d/dramatic_rescue.txt -text
 res/cardsfolder/d/drana_kalastria_bloodchief.txt svneol=native#text/plain
