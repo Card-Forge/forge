@@ -153,7 +153,31 @@ Fixes/Features:
 - Pulled all non-UI operations off of the EDT. Should have a major performance impact.
 - Removed Lambda0 in favour of guava Supplier<T>
 - Draft by default now launches a 7-round gauntlet; separate button added for playing a specific opponent.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the recent commit logs to changes.txt.
+- Fixed Mask of Memory not being optional
+- Moving downsize into the correct folder structure
+- Updating Formats list for October 5th Rotation
+- Apparently never committed other have of downsize move
+- Improve verbosity of AssignDamage buttons
+- Fixed abilitystealers stealing from Tree of Redemption.
+- Remove Lambda1 in favor of guava Function<>
+- Updated the Hercules quest decks with RtR cards and added a very hard version.
+- The AI will now discard lands for discard costs if it has enough already.
+- The AI will now save lands for discard costs when enough are played already.
+- Trying to use less CardLists and/or hardcoded constants
+- compile error fixed
+- Making mvn build the project
+- added oracle text
+- reverting to previous version that didn't cause freezes
+- Compiler changed to groovy (won't bring error messages with predicate type generics)
+- seems to work under eclipse now
+- Can now access the executed sa created by triggers using getTriggeredSA
+- Corrected spelling of Faerie Impostor
+- Improved AI of Drop of Honey and Porphyry Nodes.
+- Added the quest deck The Nac Mac Feegle 3.
+- Added the quest deck Riptide 2 by Nordos.
+- Improved and fixed various AI discard functions.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -171,6 +195,7 @@ Archon of the Triumvirate
 Archweaver
 Armada Wurm
 Armory Guard
+Ash Zealot
 Assassin's Strike
 Auger Spree
 Avenging Arrow
@@ -179,13 +204,19 @@ Axebane Stag
 Azorius Arrester
 Azorius Guildgate
 Azorius Justiciar
+Azorius Keyrune
 Batterhorn
 Bazaar Krovod
 Bellows Lizard
+Blistercoil Weird
+Bloodfray Giant
 Blustersquall
 Brushstrider
 Catacomb Slug
 Centaur Healer
+Centaur's Herald
+Chaos Imps
+Chorus of Might
 Chromatic Lantern
 Chronic Flooding
 Civic Saber
@@ -200,30 +231,45 @@ Daggerdrome Imp
 Dark Revenant
 Dead Reveler
 Deadbridge Goliath
+Death's Presence
+Deathrite Shaman
+Destroy the Evidence
+Destroy the Evidence
+Deviant Glee
+Deviant Glee
 Doorkeeper
 Downsize
+Drainpipe Vermin
+Drainpipe Vermin
 Dramatic Rescue
 Dreadbore
 Dreg Mangler
 Drudge Beetle
 Dryad Militant
+Dynacharge
+Electrickery
 Ethereal Armor
 Explosive Impact
 Eyes in the Skies
 Faerie Imposter
 Fall of the Gavel
 Fencing Ace
+Frostburn Weird
+Gatecreeper Vine
 Gobbling Ooze
 Goblin Electromancer
 Goblin Rally
 Golgari Charm
 Golgari Decoy
 Golgari Guildgate
+Golgari Keyrune
 Golgari Longlegs
+Gore-House Chainwalker
 Grim Roustabout
 Grisly Salvage
 Grove of the Guardian
 Guttersnipe
+Horncaller's Chant
 Hover Barrier
 Hypersonic Dragon
 Inaction Injunction
@@ -231,12 +277,15 @@ Isperia's Skywatch
 Isperia, Supreme Judge
 Izzet Charm
 Izzet Guildgate
+Izzet Keyrune
 Jace, Architect of Thought
 Jarad, Golgari Lich Lord
 Judge's Familiar
 Keening Apparition
 Knightly Valor
+Korozda Monitor
 Launch Party
+Lobber Crew
 Lotleth Troll
 Loxodon Smiter
 Lyev Skyknight
@@ -247,15 +296,21 @@ Mizzium Mortars
 Mizzium Skin
 Necropolis Regent
 Niv-Mizzet, Dracogenius
+Oak Street Innkeeper
 Ogre Jailbreaker
+Pack Rat
+Pack Rat
 Palisade Giant
 Perilous Shadow
 Phantom General
 Precinct Captain
 Psychic Spiral
+Pursuit of Flight
 Pyroconvergence
+Racecourse Fury
 Rakdos Cackler
 Rakdos Guildgate
+Rakdos Keyrune
 Rakdos Ragemutt
 Rakdos Shred-Freak
 Rakdos's Return
@@ -265,14 +320,18 @@ Risen Sanctuary
 Rites of Reaping
 Rogue's Passage
 Rootborn Defenses
+Rubbleback Rhino
 Runewing
 Savage Surge
 Search the City
 Security Blockade
 Selesnya Guildgate
+Selesnya Keyrune
 Selesnya Sentry
 Seller of Songbirds
 Sewer Shambler
+Shrieking Affliction
+Shrieking Affliction
 Skull Rend
 Skyline Predator
 Slime Molding
@@ -283,15 +342,23 @@ Soul Tithe
 Soulsworn Spirit
 Sphere of Safety
 Sphinx's Revelation
+Splatter Thug
 Stab Wound
 Stealer of Secrets
+Stonefare Crocodile
+Street Spasm
+Street Sweeper
 Sunspire Griffin
 Supreme Verdict
+Survey the Wreckage
 Swift Justice
+Tavern Swindler
+Tavern Swindler
 Tenement Crasher
 Terrus Wurm
 Thoughtflare
 Thrill-Kill Assassin
+Towering Indrik
 Trained Caracal
 Transguild Promenade
 Treasured Find
@@ -299,12 +366,17 @@ Trestle Troll
 Trostani's Judgment
 Trostani, Selesnya's Voice
 Ultimate Price
+Underworld Connections
+Underworld Connections
 Utvara Hellkite
+Vandalblast
 Vassal Soul
+Viashino Racketeer
 Vitu-Ghazi Guildmage
 Voidwielder
 Vraska the Unseen
 Wayfaring Temple
+Wild Beastmaster
 Worldspine Wurm
 Zanikev Locust
 
@@ -341,6 +413,8 @@ Benalish Commander
 Detrivore
 Roiling Horror
 Fungal Behemoth
+Strip Bare
+Ignoble Soldier
 
 
 end
