@@ -110,6 +110,9 @@ public enum Counters {
     /** The FEATHER. */
     FEATHER(),
 
+    /** The FILIBUSTER. */
+    FILIBUSTER(),
+
     /** The FLOOD. */
     FLOOD(),
 

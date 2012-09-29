@@ -1,0 +1,11 @@
+Name:Chemister's Trick
+ManaCost:U R
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ U R | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control. | NumAtt$ -2 | KW$ HIDDEN CARDNAME attacks each turn if able. | SpellDescription$ Target creature you don't control gets -2/-0 until end of turn and attacks this turn if able.
+A:SP$ PumpAll | Cost$ 3 U R | ValidCards$ Creature.YouDontCtrl | ValidDescription$ each creature you don't control. | NumAtt$ -2 | KW$ HIDDEN CARDNAME attacks each turn if able. | PrecostDesc$ Overload | CostDesc$ 3 U R | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chemisters_trick.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/149.jpg
+Oracle:Target creature you don't control gets -2/-0 until end of turn and attacks this turn if able.\nOverload {3}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
+End

@@ -636,6 +636,7 @@ res/cardsfolder/a/azimaet_drake.txt svneol=native#text/plain
 res/cardsfolder/a/azorius_aethermage.txt svneol=native#text/plain
 res/cardsfolder/a/azorius_arrester.txt -text
 res/cardsfolder/a/azorius_chancery.txt svneol=native#text/plain
+res/cardsfolder/a/azorius_charm.txt -text
 res/cardsfolder/a/azorius_first_wing.txt svneol=native#text/plain
 res/cardsfolder/a/azorius_guildgate.txt -text
 res/cardsfolder/a/azorius_guildmage.txt svneol=native#text/plain
@@ -644,6 +645,7 @@ res/cardsfolder/a/azorius_justiciar.txt -text
 res/cardsfolder/a/azorius_keyrune.txt -text
 res/cardsfolder/a/azorius_ploy.txt svneol=native#text/plain
 res/cardsfolder/a/azorius_signet.txt svneol=native#text/plain
+res/cardsfolder/a/azors_elocutors.txt -text
 res/cardsfolder/a/azure_drake.txt svneol=native#text/plain
 res/cardsfolder/a/azure_mage.txt svneol=native#text/plain
 res/cardsfolder/a/azusa_lost_but_seeking.txt svneol=native#text/plain
@@ -1323,6 +1325,7 @@ res/cardsfolder/c/caldera_hellion.txt svneol=native#text/plain
 res/cardsfolder/c/caldera_kavu.txt -text
 res/cardsfolder/c/caldera_lake.txt svneol=native#text/plain
 res/cardsfolder/c/call_for_blood.txt svneol=native#text/plain
+res/cardsfolder/c/call_of_the_conclave.txt -text
 res/cardsfolder/c/call_of_the_herd.txt svneol=native#text/plain
 res/cardsfolder/c/call_of_the_wild.txt svneol=native#text/plain
 res/cardsfolder/c/call_the_skybreaker.txt svneol=native#text/plain
@@ -1388,6 +1391,7 @@ res/cardsfolder/c/carnage_altar.txt svneol=native#text/plain
 res/cardsfolder/c/carnage_wurm.txt svneol=native#text/plain
 res/cardsfolder/c/carnassid.txt svneol=native#text/plain
 res/cardsfolder/c/carnifex_demon.txt svneol=native#text/plain
+res/cardsfolder/c/carnival_hellsteed.txt -text
 res/cardsfolder/c/carnival_of_souls.txt svneol=native#text/plain
 res/cardsfolder/c/carnivorous_plant.txt svneol=native#text/plain
 res/cardsfolder/c/carnophage.txt svneol=native#text/plain
@@ -1571,6 +1575,7 @@ res/cardsfolder/c/chartooth_cougar.txt svneol=native#text/plain
 res/cardsfolder/c/chasm_drake.txt svneol=native#text/plain
 res/cardsfolder/c/chastise.txt svneol=native#text/plain
 res/cardsfolder/c/chatter_of_the_squirrel.txt svneol=native#text/plain
+res/cardsfolder/c/chemisters_trick.txt -text
 res/cardsfolder/c/chieftain_en_dal.txt svneol=native#text/plain
 res/cardsfolder/c/child_of_alara.txt svneol=native#text/plain
 res/cardsfolder/c/child_of_gaea.txt svneol=native#text/plain
@@ -5819,6 +5824,7 @@ res/cardsfolder/m/malignus.txt -text
 res/cardsfolder/m/mammoth_harness.txt -text
 res/cardsfolder/m/mammoth_umbra.txt svneol=native#text/plain
 res/cardsfolder/m/man_o_war.txt svneol=native#text/plain
+res/cardsfolder/m/mana_bloom.txt -text
 res/cardsfolder/m/mana_breach.txt svneol=native#text/plain
 res/cardsfolder/m/mana_chains.txt -text
 res/cardsfolder/m/mana_crypt.txt svneol=native#text/plain
