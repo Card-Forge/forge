@@ -234,12 +234,9 @@ Deadbridge Goliath
 Death's Presence
 Deathrite Shaman
 Destroy the Evidence
-Destroy the Evidence
-Deviant Glee
 Deviant Glee
 Doorkeeper
 Downsize
-Drainpipe Vermin
 Drainpipe Vermin
 Dramatic Rescue
 Dreadbore
@@ -299,7 +296,6 @@ Niv-Mizzet, Dracogenius
 Oak Street Innkeeper
 Ogre Jailbreaker
 Pack Rat
-Pack Rat
 Palisade Giant
 Perilous Shadow
 Phantom General
@@ -331,7 +327,6 @@ Selesnya Sentry
 Seller of Songbirds
 Sewer Shambler
 Shrieking Affliction
-Shrieking Affliction
 Skull Rend
 Skyline Predator
 Slime Molding
@@ -353,7 +348,6 @@ Supreme Verdict
 Survey the Wreckage
 Swift Justice
 Tavern Swindler
-Tavern Swindler
 Tenement Crasher
 Terrus Wurm
 Thoughtflare
@@ -366,7 +360,6 @@ Trestle Troll
 Trostani's Judgment
 Trostani, Selesnya's Voice
 Ultimate Price
-Underworld Connections
 Underworld Connections
 Utvara Hellkite
 Vandalblast
