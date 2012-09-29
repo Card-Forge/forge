@@ -1379,7 +1379,9 @@ public class AbilityFactoryZoneAffecting {
                         if (chooser.isComputer()) {
                             // AI
                             if (p.isComputer()) { // discard AI cards
-                                CardList list = ComputerUtil.discardNumTypeAI(numCards, dValid, sa);
+                                int max = chooser.getCardsIn(ZoneType.Hand).size();
+                                max = Math.min(max, numCards);
+                                CardList list = ComputerUtil.discardNumTypeAI(max, dValid, sa);
                                 if (mode.startsWith("Reveal")) {
                                     GuiUtils.chooseOneOrNone("Computer has chosen", list);
                                 }

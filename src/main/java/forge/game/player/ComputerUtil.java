@@ -1459,9 +1459,9 @@ public class ComputerUtil {
             }
         }
         if (pref.contains("SacCost")) { // search for permanents with SacMe
-            for (int ip = 0; ip < 9; ip++) { // priority 0 is the lowest,
+            for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest,
                                              // priority 5 the highest
-                final int priority = 9 - ip;
+                final int priority = 6 - ip;
                 final CardList sacMeList = typeList.filter(new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
@@ -1490,7 +1490,6 @@ public class ComputerUtil {
                     }
                 }
             }
-            System.out.println("DiscardCost" + typeList);
 
             // Discard lands 
             final CardList landsInHand = typeList.getType("Land");
@@ -1584,9 +1583,6 @@ public class ComputerUtil {
         if ((uTypes != null) && (sa != null)) {
             hand = hand.getValidCards(uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
         }
-        if (sa != null) {
-            sourceCard = sa.getSourceCard();
-        }
 
         if (hand.size() < numDiscard) {
             return null;
@@ -1594,10 +1590,25 @@ public class ComputerUtil {
 
         final CardList discardList = new CardList();
         int count = 0;
+        if (sa != null) {
+            sourceCard = sa.getSourceCard();
+        }
 
         // look for good discards
         while (count < numDiscard) {
-            final Card prefCard = ComputerUtil.getCardPreference(sourceCard, "DiscardCost", hand);
+            Card prefCard = null;
+            if (sa != null && sa.getActivatingPlayer() != null && sa.getActivatingPlayer().isHuman()) {
+                for (Card c : hand) {
+                    if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME," +
+                        " put it onto the battlefield instead of putting it into your graveyard.")) {
+                        prefCard = c;
+                        break;
+                    }
+                }
+            }
+            if (prefCard == null) {
+                prefCard = ComputerUtil.getCardPreference(sourceCard, "DiscardCost", hand);
+            }
             if (prefCard != null) {
                 discardList.add(prefCard);
                 hand.remove(prefCard);
