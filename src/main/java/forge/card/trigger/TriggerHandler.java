@@ -1039,6 +1039,7 @@ public class TriggerHandler {
         } else {
             AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
+        regtrig.setTriggeredSA(wrapperAbility);
         return true;
     }
 

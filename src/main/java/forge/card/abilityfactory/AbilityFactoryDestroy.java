@@ -1017,7 +1017,11 @@ public class AbilityFactoryDestroy {
         final Target tgt = sa.getTarget();
         Player targetPlayer = null;
         if (tgt != null) {
-            targetPlayer = tgt.getTargetPlayers().get(0);
+            for (final Object o : tgt.getTargets()) {
+                if (o instanceof Player) {
+                    targetPlayer = (Player) o;
+                }
+            }
         }
 
         String valid = "";

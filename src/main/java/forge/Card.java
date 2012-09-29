@@ -6615,10 +6615,33 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("AttachedTo")) {
             final String restriction = property.split("AttachedTo ")[1];
-            if (((this.enchanting == null) || !this.enchanting.isValid(restriction, sourceController, source))
-                    && (this.equipping.isEmpty() || !this.equipping.get(0).isValid(restriction, sourceController,
-                            source))) {
-                return false;
+            if (restriction.equals("Targeted")) {
+                if (!source.getCharacteristics().getTriggers().isEmpty()) {
+                    for (final Trigger t : source.getCharacteristics().getTriggers()) {
+                        final SpellAbility sa = t.getTriggeredSA();
+                        final ArrayList<Card> list = AbilityFactory.getDefinedCards(source, "Targeted", sa);
+                        for (final Card c : list) {
+                            if (!this.equipping.contains(c) && !c.equals(this.enchanting)) {
+                                return false;
+                            }
+                        }
+                    }
+                } else {
+                    for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
+                        final ArrayList<Card> list = AbilityFactory.getDefinedCards(source, "Targeted", sa);
+                        for (final Card c : list) {
+                            if (!this.equipping.contains(c) && !c.equals(this.enchanting)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (((this.enchanting == null) || !this.enchanting.isValid(restriction, sourceController, source))
+                        && (this.equipping.isEmpty() || !this.equipping.get(0).isValid(restriction, sourceController,
+                                source))) {
+                    return false;
+                }
             }
         } else if (property.startsWith("EnchantedBy")) {
             if (!this.getEnchantedBy().contains(source) && !this.equals(source.getEnchanting())) {

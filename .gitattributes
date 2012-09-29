@@ -9499,6 +9499,7 @@ res/cardsfolder/s/stream_of_life.txt svneol=native#text/plain
 res/cardsfolder/s/stream_of_unconsciousness.txt svneol=native#text/plain
 res/cardsfolder/s/streambed_aquitects.txt -text
 res/cardsfolder/s/street_spasm.txt -text
+res/cardsfolder/s/street_sweeper.txt -text
 res/cardsfolder/s/street_wraith.txt svneol=native#text/plain
 res/cardsfolder/s/streetbreaker_wurm.txt svneol=native#text/plain
 res/cardsfolder/s/strength_in_numbers.txt svneol=native#text/plain
@@ -9508,6 +9509,7 @@ res/cardsfolder/s/strength_of_lunacy.txt svneol=native#text/plain
 res/cardsfolder/s/strength_of_night.txt svneol=native#text/plain
 res/cardsfolder/s/strength_of_unity.txt svneol=native#text/plain
 res/cardsfolder/s/strider_harness.txt svneol=native#text/plain
+res/cardsfolder/s/strip_bare.txt -text
 res/cardsfolder/s/strip_mine.txt svneol=native#text/plain
 res/cardsfolder/s/striped_bears.txt svneol=native#text/plain
 res/cardsfolder/s/stroke_of_genius.txt svneol=native#text/plain

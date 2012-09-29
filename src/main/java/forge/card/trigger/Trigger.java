@@ -29,6 +29,7 @@ import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
@@ -124,8 +125,6 @@ public abstract class Trigger extends TriggerReplacementBase {
     private Map<String, Object> runParams;
 
     private TriggerType mode;
-
-    
 
     private HashMap<String, Object> storedTriggeredObjects = null;
 
@@ -517,7 +516,6 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     /** The temporary. */
     private boolean temporary = false;
-    
 
     /**
      * Sets the temporary.
@@ -595,16 +593,40 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.id = id0;
     }
 
+    private Ability triggeredSA;
+
+    /**
+     * Gets the triggered sa.
+     * 
+     * @return the triggered sa
+     */
+    public final Ability getTriggeredSA() {
+        System.out.println("TriggeredSA = " + this.triggeredSA);
+        return this.triggeredSA;
+    }
+
+    /**
+     * Sets the triggered sa.
+     * 
+     * @param sa
+     *            the triggered sa to set
+     */
+    public void setTriggeredSA(final Ability sa) {
+        this.triggeredSA = sa;
+    }
+
     /**
      * TODO: Write javadoc for this method.
-     * @return
+     * @return the mode
      */
     public TriggerType getMode() {
         return mode;
     }
 
     /**
-     * TODO: Write javadoc for this method.
+     * 
+     * @param triggerType
+     *            the triggerType to set
      * @param triggerType
      */
     void setMode(TriggerType triggerType) {
