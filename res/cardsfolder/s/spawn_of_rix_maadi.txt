@@ -1,0 +1,13 @@
+Name:Spawn of Rix Maadi
+ManaCost:3 B R
+Types:Creature Horror
+Text:no text
+PT:5/3
+K:ETBReplacement:Other:Unleash:Optional
+SVar:Unleash:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can't block. | CheckSVar$ X | SVarCompare$ GE1 | References$ X
+SVar:X:Count$NumCounters.P1P1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spawn_of_rix_maadi.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/199.jpg
+End

@@ -9131,6 +9131,7 @@ res/cardsfolder/s/sparksmith.txt svneol=native#text/plain
 res/cardsfolder/s/sparkspitter.txt svneol=native#text/plain
 res/cardsfolder/s/sparring_collar.txt -text
 res/cardsfolder/s/sparring_golem.txt svneol=native#text/plain
+res/cardsfolder/s/spawn_of_rix_maadi.txt -text
 res/cardsfolder/s/spawning_breath.txt svneol=native#text/plain
 res/cardsfolder/s/spawning_pit.txt svneol=native#text/plain
 res/cardsfolder/s/spawning_pool.txt svneol=native#text/plain
@@ -9592,6 +9593,7 @@ res/cardsfolder/s/sunblast_angel.txt svneol=native#text/plain
 res/cardsfolder/s/suncrusher.txt svneol=native#text/plain
 res/cardsfolder/s/sunder.txt svneol=native#text/plain
 res/cardsfolder/s/sunder_from_within.txt svneol=native#text/plain
+res/cardsfolder/s/sundering_growth.txt -text
 res/cardsfolder/s/sundering_titan.txt -text
 res/cardsfolder/s/sundering_vitae.txt -text
 res/cardsfolder/s/sundial_of_the_infinite.txt -text
@@ -9849,6 +9851,7 @@ res/cardsfolder/t/telemin_performance.txt -text
 res/cardsfolder/t/telepathic_spies.txt svneol=native#text/plain
 res/cardsfolder/t/telepathy.txt -text
 res/cardsfolder/t/teleport.txt svneol=native#text/plain
+res/cardsfolder/t/teleportal.txt -text
 res/cardsfolder/t/telethopter.txt svneol=native#text/plain
 res/cardsfolder/t/telimtor.txt svneol=native#text/plain
 res/cardsfolder/t/telimtors_darts.txt svneol=native#text/plain

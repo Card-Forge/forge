@@ -1,0 +1,11 @@
+Name:Sundering Growth
+ManaCost:GW GW
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ GW GW | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBChoose | SpellDescription$ Destroy target artifact or enchantment, then populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+SVar:DBChoose:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | RememberChosen$ True
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sundering_growth.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/223.jpg
+End

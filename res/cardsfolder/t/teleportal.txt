@@ -1,0 +1,10 @@
+Name:Teleportal
+ManaCost:U R
+Types:Sorcery
+Text:no text
+A:SP$ Pump | Cost$ U R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control. | NumAtt$ 1 | KW$ HIDDEN Unblockable | SpellDescription$ Target creature you control gets +1/+0 until end of turn and is unblockable this turn.
+A:SP$ PumpAll | Cost$ 3 U R | ValidCards$ Creature.YouCtrl | ValidDescription$ each creature you control. | NumAtt$ 1 | KW$ HIDDEN Unblockable | PrecostDesc$ Overload | CostDesc$ 3 U R | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/teleportal.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/202.jpg
+End
