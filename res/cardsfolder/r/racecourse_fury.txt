@@ -1,0 +1,13 @@
+Name:Racecourse Fury
+ManaCost:R
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ R | ValidTgts$ Land
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ RFPump | Description$ Enchanted land has "T: Target creature gains haste until end of turn."
+SVar:RFPump:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/racecourse_fury.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/104.jpg
+Oracle:Enchant land\nEnchanted land has "{T}: Target creature gains haste until end of turn."
+End

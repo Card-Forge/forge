@@ -495,6 +495,7 @@ res/cardsfolder/a/artisan_of_kozilek.txt svneol=native#text/plain
 res/cardsfolder/a/ascendant_evincar.txt svneol=native#text/plain
 res/cardsfolder/a/ascending_aven.txt svneol=native#text/plain
 res/cardsfolder/a/asceticism.txt svneol=native#text/plain
+res/cardsfolder/a/ash_zealot.txt -text
 res/cardsfolder/a/ashas_favor.txt svneol=native#text/plain
 res/cardsfolder/a/ashcoat_bear.txt svneol=native#text/plain
 res/cardsfolder/a/ashen_firebeast.txt svneol=native#text/plain
@@ -1004,6 +1005,7 @@ res/cardsfolder/b/bloodfire_dwarf.txt svneol=native#text/plain
 res/cardsfolder/b/bloodfire_infusion.txt svneol=native#text/plain
 res/cardsfolder/b/bloodfire_kavu.txt svneol=native#text/plain
 res/cardsfolder/b/bloodflow_connoisseur.txt -text
+res/cardsfolder/b/bloodfray_giant.txt -text
 res/cardsfolder/b/bloodghast.txt svneol=native#text/plain
 res/cardsfolder/b/bloodgift_demon.txt -text
 res/cardsfolder/b/bloodhall_ooze.txt svneol=native#text/plain
@@ -1543,6 +1545,7 @@ res/cardsfolder/c/channel_the_suns.txt svneol=native#text/plain
 res/cardsfolder/c/chant_of_the_skifsang.txt -text
 res/cardsfolder/c/chaos_charm.txt svneol=native#text/plain
 res/cardsfolder/c/chaos_harlequin.txt -text
+res/cardsfolder/c/chaos_imps.txt -text
 res/cardsfolder/c/chaos_lord.txt -text
 res/cardsfolder/c/chaos_warp.txt svneol=native#text/plain
 res/cardsfolder/c/chaosphere.txt svneol=native#text/plain
@@ -2739,6 +2742,7 @@ res/cardsfolder/d/dwarven_warriors.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_weaponsmith.txt svneol=native#text/plain
 res/cardsfolder/d/dwell_on_the_past.txt -text
 res/cardsfolder/d/dying_wail.txt svneol=native#text/plain
+res/cardsfolder/d/dynacharge.txt -text
 res/cardsfolder/d/dystopia.txt -text
 res/cardsfolder/e/eager_cadet.txt svneol=native#text/plain
 res/cardsfolder/e/early_frost.txt svneol=native#text/plain
@@ -2810,6 +2814,7 @@ res/cardsfolder/e/eldrazi_conscription.txt svneol=native#text/plain
 res/cardsfolder/e/eldrazi_monument.txt svneol=native#text/plain
 res/cardsfolder/e/eldrazi_temple.txt -text
 res/cardsfolder/e/electric_eel.txt svneol=native#text/plain
+res/cardsfolder/e/electrickery.txt -text
 res/cardsfolder/e/electrolyze.txt svneol=native#text/plain
 res/cardsfolder/e/electropotence.txt svneol=native#text/plain
 res/cardsfolder/e/electrostatic_bolt.txt -text
@@ -4047,6 +4052,7 @@ res/cardsfolder/g/goliath_beetle.txt svneol=native#text/plain
 res/cardsfolder/g/goliath_sphinx.txt svneol=native#text/plain
 res/cardsfolder/g/goliath_spider.txt svneol=native#text/plain
 res/cardsfolder/g/gomazoa.txt -text
+res/cardsfolder/g/gore_house_chainwalker.txt -text
 res/cardsfolder/g/gore_vassal.txt svneol=native#text/plain
 res/cardsfolder/g/gorehorn_minotaurs.txt svneol=native#text/plain
 res/cardsfolder/g/goretusk_firebeast.txt svneol=native#text/plain
@@ -5611,6 +5617,7 @@ res/cardsfolder/l/loam_dweller.txt svneol=native#text/plain
 res/cardsfolder/l/loam_lion.txt svneol=native#text/plain
 res/cardsfolder/l/loamdragger_giant.txt svneol=native#text/plain
 res/cardsfolder/l/loaming_shaman.txt -text
+res/cardsfolder/l/lobber_crew.txt -text
 res/cardsfolder/l/lobotomy.txt svneol=native#text/plain
 res/cardsfolder/l/loch_korrigan.txt svneol=native#text/plain
 res/cardsfolder/l/lockjaw_snapper.txt svneol=native#text/plain
@@ -7412,6 +7419,7 @@ res/cardsfolder/p/purify.txt svneol=native#text/plain
 res/cardsfolder/p/purify_the_grave.txt -text
 res/cardsfolder/p/purity.txt svneol=native#text/plain
 res/cardsfolder/p/purraj_of_urborg.txt svneol=native#text/plain
+res/cardsfolder/p/pursuit_of_flight.txt -text
 res/cardsfolder/p/pursuit_of_knowledge.txt -text
 res/cardsfolder/p/pus_kami.txt svneol=native#text/plain
 res/cardsfolder/p/put_away.txt svneol=native#text/plain
@@ -7500,6 +7508,7 @@ res/cardsfolder/r/rabid_elephant.txt svneol=native#text/plain
 res/cardsfolder/r/rabid_rats.txt svneol=native#text/plain
 res/cardsfolder/r/rabid_wolverines.txt svneol=native#text/plain
 res/cardsfolder/r/rabid_wombat.txt svneol=native#text/plain
+res/cardsfolder/r/racecourse_fury.txt -text
 res/cardsfolder/r/rack_and_ruin.txt svneol=native#text/plain
 res/cardsfolder/r/rackling.txt svneol=native#text/plain
 res/cardsfolder/r/radha_heir_to_keld.txt svneol=native#text/plain
@@ -9245,6 +9254,7 @@ res/cardsfolder/s/spitting_hydra.txt svneol=native#text/plain
 res/cardsfolder/s/spitting_image.txt svneol=native#text/plain
 res/cardsfolder/s/spitting_sliver.txt svneol=native#text/plain
 res/cardsfolder/s/spitting_spider.txt svneol=native#text/plain
+res/cardsfolder/s/splatter_thug.txt -text
 res/cardsfolder/s/splinter.txt svneol=native#text/plain
 res/cardsfolder/s/splinter_twin.txt svneol=native#text/plain
 res/cardsfolder/s/splinterfright.txt -text
@@ -9479,6 +9489,7 @@ res/cardsfolder/s/stream_of_consciousness.txt -text
 res/cardsfolder/s/stream_of_life.txt svneol=native#text/plain
 res/cardsfolder/s/stream_of_unconsciousness.txt svneol=native#text/plain
 res/cardsfolder/s/streambed_aquitects.txt -text
+res/cardsfolder/s/street_spasm.txt -text
 res/cardsfolder/s/street_wraith.txt svneol=native#text/plain
 res/cardsfolder/s/streetbreaker_wurm.txt svneol=native#text/plain
 res/cardsfolder/s/strength_in_numbers.txt svneol=native#text/plain
@@ -9615,6 +9626,7 @@ res/cardsfolder/s/surrakar_marauder.txt svneol=native#text/plain
 res/cardsfolder/s/surrakar_spellblade.txt svneol=native#text/plain
 res/cardsfolder/s/surreal_memoir.txt -text
 res/cardsfolder/s/surveilling_sprite.txt svneol=native#text/plain
+res/cardsfolder/s/survey_the_wreckage.txt -text
 res/cardsfolder/s/survival_cache.txt -text
 res/cardsfolder/s/survival_of_the_fittest.txt svneol=native#text/plain
 res/cardsfolder/s/survivor_of_the_unseen.txt -text
@@ -10528,6 +10540,7 @@ res/cardsfolder/v/vampiric_spirit.txt svneol=native#text/plain
 res/cardsfolder/v/vampiric_touch.txt svneol=native#text/plain
 res/cardsfolder/v/vampiric_tutor.txt svneol=native#text/plain
 res/cardsfolder/v/vampirism.txt svneol=native#text/plain
+res/cardsfolder/v/vandalblast.txt -text
 res/cardsfolder/v/vanguards_shield.txt -text
 res/cardsfolder/v/vanish_into_memory.txt -text
 res/cardsfolder/v/vanishing.txt -text
@@ -10649,6 +10662,7 @@ res/cardsfolder/v/viashino_fangtail.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_grappler.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_heretic.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_outrider.txt svneol=native#text/plain
+res/cardsfolder/v/viashino_racketeer.txt -text
 res/cardsfolder/v/viashino_runner.txt -text
 res/cardsfolder/v/viashino_sandscout.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_sandstalker.txt svneol=native#text/plain

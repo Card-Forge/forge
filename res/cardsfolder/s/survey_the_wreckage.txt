@@ -1,0 +1,11 @@
+Name:Survey the Wreckage
+ManaCost:4 R
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 4 R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBGoblin | SpellDescription$ Destroy target land. Put a 1/1 red Goblin creature token onto the battlefield.
+SVar:DBGoblin:DB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/survey_the_wreckage.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/107.jpg
+Oracle:Destroy target land. Put a 1/1 red Goblin creature token onto the battlefield.
+End
