@@ -1481,6 +1481,7 @@ res/cardsfolder/c/centaur_omenreader.txt svneol=native#text/plain
 res/cardsfolder/c/centaur_rootcaster.txt svneol=native#text/plain
 res/cardsfolder/c/centaur_safeguard.txt svneol=native#text/plain
 res/cardsfolder/c/centaur_veteran.txt svneol=native#text/plain
+res/cardsfolder/c/centaurs_herald.txt -text
 res/cardsfolder/c/cephalid_aristocrat.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_broker.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_coliseum.txt svneol=native#text/plain
@@ -5300,6 +5301,7 @@ res/cardsfolder/k/kor_skyfisher.txt svneol=native#text/plain
 res/cardsfolder/k/kor_spiritdancer.txt svneol=native#text/plain
 res/cardsfolder/k/korlash_heir_to_blackblade.txt svneol=native#text/plain
 res/cardsfolder/k/kormus_bell.txt svneol=native#text/plain
+res/cardsfolder/k/korozda_monitor.txt -text
 res/cardsfolder/k/koskun_keep.txt svneol=native#text/plain
 res/cardsfolder/k/koth_of_the_hammer.txt svneol=native#text/plain
 res/cardsfolder/k/koths_courier.txt svneol=native#text/plain
@@ -8041,6 +8043,7 @@ res/cardsfolder/r/royal_decree.txt svneol=native#text/plain
 res/cardsfolder/r/royal_falcon.txt svneol=native#text/plain
 res/cardsfolder/r/royal_herbalist.txt svneol=native#text/plain
 res/cardsfolder/r/royal_trooper.txt svneol=native#text/plain
+res/cardsfolder/r/rubbleback_rhino.txt -text
 res/cardsfolder/r/rubinia_soulsinger.txt svneol=native#text/plain
 res/cardsfolder/r/ruby_leech.txt svneol=native#text/plain
 res/cardsfolder/r/ruby_medallion.txt svneol=native#text/plain
@@ -9435,6 +9438,7 @@ res/cardsfolder/s/stone_throwing_devils.txt svneol=native#text/plain
 res/cardsfolder/s/stone_tongue_basilisk.txt svneol=native#text/plain
 res/cardsfolder/s/stonebrow_krosan_hero.txt svneol=native#text/plain
 res/cardsfolder/s/stonecloaker.txt svneol=native#text/plain
+res/cardsfolder/s/stonefare_crocodile.txt -text
 res/cardsfolder/s/stoneforge_mystic.txt svneol=native#text/plain
 res/cardsfolder/s/stonehands.txt svneol=native#text/plain
 res/cardsfolder/s/stonehorn_dignitary.txt -text
@@ -10187,6 +10191,7 @@ res/cardsfolder/t/tower_of_fortunes.txt svneol=native#text/plain
 res/cardsfolder/t/tower_of_murmurs.txt svneol=native#text/plain
 res/cardsfolder/t/tower_of_the_magistrate.txt svneol=native#text/plain
 res/cardsfolder/t/towering_baloth.txt svneol=native#text/plain
+res/cardsfolder/t/towering_indrik.txt -text
 res/cardsfolder/t/town_sentry.txt -text
 res/cardsfolder/t/toxic_iguanar.txt svneol=native#text/plain
 res/cardsfolder/t/toxic_nim.txt svneol=native#text/plain

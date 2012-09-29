@@ -1,0 +1,11 @@
+Name:Rubbleback Rhino
+ManaCost:4 G
+Types:Creature Rhino
+Text:no text
+PT:3/4
+K:Hexproof
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rubbleback_rhino.jpg
+SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/132.jpg
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)
+End
