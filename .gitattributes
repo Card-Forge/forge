@@ -2004,6 +2004,7 @@ res/cardsfolder/c/crypt_creeper.txt svneol=native#text/plain
 res/cardsfolder/c/crypt_of_agadeem.txt svneol=native#text/plain
 res/cardsfolder/c/crypt_ripper.txt svneol=native#text/plain
 res/cardsfolder/c/crypt_sliver.txt svneol=native#text/plain
+res/cardsfolder/c/cryptborn_horror.txt -text
 res/cardsfolder/c/cryptic_annelid.txt svneol=native#text/plain
 res/cardsfolder/c/cryptic_command.txt svneol=native#text/plain
 res/cardsfolder/c/cryptoplasm.txt -text
