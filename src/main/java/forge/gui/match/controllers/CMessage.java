@@ -20,8 +20,6 @@ package forge.gui.match.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.SwingWorker;
-
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
@@ -43,40 +41,22 @@ public enum CMessage implements ICDoc {
     private final ActionListener actCancel = new ActionListener() {
         @Override
         public void actionPerformed(final ActionEvent evt) {
-            // Pull all non-UI actions off off the EDT.
-            final SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
-                @Override
-                public Void doInBackground() {
-                    inputControl.selectButtonCancel();
-                    VMessage.SINGLETON_INSTANCE.getBtnOK().requestFocusInWindow();
-                    return null;
-                }
-            };
-
-            worker.execute();
+            inputControl.selectButtonCancel();
+            VMessage.SINGLETON_INSTANCE.getBtnOK().requestFocusInWindow();
         }
     };
 
     private final ActionListener actOK = new ActionListener() {
         @Override
         public void actionPerformed(final ActionEvent evt) {
-            // Pull all non-UI actions off off the EDT.
-            final SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
-                @Override
-                public Void doInBackground() {
-                    inputControl.selectButtonOK();
+            inputControl.selectButtonOK();
 
-                    if (Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhase()) {
-                        // moves to next turn
-                        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
-                        Singletons.getModel().getGameState().getPhaseHandler().nextPhase();
-                    }
-                    VMessage.SINGLETON_INSTANCE.getBtnOK().requestFocusInWindow();
-                    return null;
-                }
-            };
-
-            worker.execute();
+            if (Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhase()) {
+                // moves to next turn
+                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
+                Singletons.getModel().getGameState().getPhaseHandler().nextPhase();
+            }
+            VMessage.SINGLETON_INSTANCE.getBtnOK().requestFocusInWindow();
         }
     };
 
