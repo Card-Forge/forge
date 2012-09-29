@@ -2680,6 +2680,7 @@ res/cardsfolder/d/drudge_beetle.txt -text
 res/cardsfolder/d/drudge_reavers.txt svneol=native#text/plain
 res/cardsfolder/d/drudge_skeletons.txt svneol=native#text/plain
 res/cardsfolder/d/drudge_spell.txt svneol=native#text/plain
+res/cardsfolder/d/druid's_deliverance.txt -text
 res/cardsfolder/d/druid_lyrist.txt svneol=native#text/plain
 res/cardsfolder/d/druid_of_the_anima.txt svneol=native#text/plain
 res/cardsfolder/d/druidic_satchel.txt -text
