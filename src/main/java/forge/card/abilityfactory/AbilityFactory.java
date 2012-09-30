@@ -1594,7 +1594,7 @@ public class AbilityFactory {
                 try {
                     Integer.parseInt(amount);
                 }
-                catch(NumberFormatException ignored) {
+                catch (NumberFormatException ignored) {
                     //If this is reached, amount wasn't an integer
                     //Print a warning to console to help debug if an ability is not stolen properly.
                     StringBuilder sb = new StringBuilder("WARNING:SVar fallback to Card (");
@@ -1659,8 +1659,8 @@ public class AbilityFactory {
                 }
 
                 return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
-            } else if (calcX[0].startsWith("Enchanted")) {
-                // Add whole Imprinted list to handlePaid
+            } else if (calcX[0].matches("Enchanted")) {
+                // Add whole Enchanted list to handlePaid
                 final CardList list = new CardList();
                 if (card.isEnchanting()) {
                     Object o = card.getEnchanting();
@@ -1712,6 +1712,14 @@ public class AbilityFactory {
                     }
                     return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
                 }
+                // Added on 9/30/12 (ArsenalNut) - Ended up not using but might be useful in future
+                /*
+                if (calcX[0].startsWith("EnchantedController")) {
+                    final ArrayList<Player> players = new ArrayList<Player>();
+                    players.addAll(AbilityFactory.getDefinedPlayers(card, "EnchantedController", ability));
+                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                }
+                */
 
                 CardList list = new CardList();
                 if (calcX[0].startsWith("Sacrificed")) {

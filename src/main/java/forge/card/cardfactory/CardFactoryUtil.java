@@ -44,6 +44,7 @@ import forge.CommandArgs;
 import forge.Constant;
 import forge.Counters;
 import forge.GameActionUtil;
+import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardCharacteristics;
 import forge.card.abilityfactory.AbilityFactory;
@@ -2968,6 +2969,21 @@ public class CardFactoryUtil {
                         }
                     }
                 }
+            }
+        }
+
+        //  Count$InTargetedHand (targeted player's cards in hand)
+        if (sq[0].contains("InEnchantedHand")) {
+            GameEntity o = c.getEnchanting();
+            Player controller = null;
+            if (o instanceof Card) {
+                controller = ((Card) o).getController();
+            }
+            else {
+                controller = (Player) o;
+            }
+            if (controller != null) {
+                someCards.addAll(controller.getCardsIn(ZoneType.Hand));
             }
         }
 

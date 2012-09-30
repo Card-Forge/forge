@@ -1,0 +1,15 @@
+Name:Righteous Authority
+ManaCost:3 W U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each card in its controller's hand.
+SVar:X:Count$InEnchantedHand
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of the draw step of enchanted creature's controller, that player draws an additional card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | Defined$ EnchantedController
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_authority.jpg
+SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/189.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each card in its controller's hand.\nAt the beginning of the draw step of enchanted creature's controller, that player draws an additional card.
+End
