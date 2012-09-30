@@ -2685,6 +2685,7 @@ res/cardsfolder/d/druid_lyrist.txt svneol=native#text/plain
 res/cardsfolder/d/druid_of_the_anima.txt svneol=native#text/plain
 res/cardsfolder/d/druidic_satchel.txt -text
 res/cardsfolder/d/druids_call.txt svneol=native#text/plain
+res/cardsfolder/d/druids_deliverance.txt -text
 res/cardsfolder/d/druids_familiar.txt -text
 res/cardsfolder/d/druids_repository.txt -text
 res/cardsfolder/d/drumhunter.txt svneol=native#text/plain
