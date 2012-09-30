@@ -7,6 +7,7 @@ T:Mode$ DamageDone | ValidSource$ Sliver | Execute$ TrigGain | TriggerZones$ Bat
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ TriggeredSourceController | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:PlayMain1:TRUE
+SVar:HasCombatEffect:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_sliver.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/13.jpg

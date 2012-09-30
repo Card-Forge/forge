@@ -7,6 +7,7 @@ K:Defender
 T:Mode$ DamageDone | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGain | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME is dealt combat damage, you gain that much life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_essence.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/122.jpg

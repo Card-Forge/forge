@@ -5,6 +5,7 @@ Text:no text
 PT:4/2
 T:Mode$ DamageDone | ValidTarget$ Creature.Self | Execute$ TrigZombie | TriggerDescription$ Whenever a source deals damage to CARDNAME, put a 2/2 black Zombie creature token onto the battlefield.
 SVar:TrigZombie:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2
+SVar:HasCombatEffect:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nested_ghoul.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/48.jpg
