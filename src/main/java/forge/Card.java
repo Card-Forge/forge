@@ -102,7 +102,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // if this card is an Aura, what Entity is it enchanting?
     private GameEntity enchanting = null;
-    private ArrayList<String> prevType = new ArrayList<String>();
     private ArrayList<String> choicesMade = null;
     private ArrayList<String> optionalAdditionalCostsPaid = null;
 
@@ -4414,53 +4413,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         originalTypes.addAll(this.getCharacteristics().getType());
         this.getCharacteristics().getType().clear();
         return originalTypes;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>prevType</code>.
-     * </p>
-     * 
-     * @param a
-     *            a {@link java.util.ArrayList} object.
-     */
-    public final void setPrevType(final ArrayList<String> a) {
-        this.prevType = new ArrayList<String>(a);
-    }
-
-    /**
-     * <p>
-     * addPrevType.
-     * </p>
-     * 
-     * @param a
-     *            a {@link java.lang.String} object.
-     */
-    public final void addPrevType(final String a) {
-        this.prevType.add(a);
-    }
-
-    /**
-     * <p>
-     * removePrevType.
-     * </p>
-     * 
-     * @param a
-     *            a {@link java.lang.String} object.
-     */
-    public final void removePrevType(final String a) {
-        this.prevType.remove(a);
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>prevType</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final ArrayList<String> getPrevType() {
-        return new ArrayList<String>(this.prevType);
     }
 
     // values that are printed on card
