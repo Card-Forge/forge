@@ -8,4 +8,5 @@ SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sundering_growth.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/223.jpg
+Oracle:Destroy target artifact or enchantment, then populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
 End

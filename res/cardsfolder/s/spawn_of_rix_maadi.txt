@@ -10,4 +10,5 @@ SVar:X:Count$NumCounters.P1P1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spawn_of_rix_maadi.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/199.jpg
+Oracle:Unleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)
 End

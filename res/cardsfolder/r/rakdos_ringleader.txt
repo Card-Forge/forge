@@ -1,0 +1,14 @@
+Name:Rakdos Ringleader
+ManaCost:4 B R
+Types:Creature Skeleton Warrior
+Text:no text
+PT:3/1
+K:First Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDiscard | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards a card at random.
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ Random
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_ringleader.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/186.jpg
+Oracle:First strike\nWhenever Rakdos Ringleader deals combat damage to a player, that player discards a card at random.\n{B}: Regenerate Rakdos Ringleader.
+End

@@ -7,4 +7,5 @@ A:SP$ PumpAll | Cost$ 3 U R | ValidCards$ Creature.YouCtrl | ValidDescription$ e
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teleportal.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/202.jpg
+Oracle:Target creature you control gets +1/+0 until end of turn and is unblockable this turn.\nOverload {3}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
 End

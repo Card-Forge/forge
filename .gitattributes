@@ -4666,6 +4666,7 @@ res/cardsfolder/h/hurly_burly.txt svneol=native#text/plain
 res/cardsfolder/h/hurr_jackal.txt svneol=native#text/plain
 res/cardsfolder/h/hurricane.txt svneol=native#text/plain
 res/cardsfolder/h/hush.txt svneol=native#text/plain
+res/cardsfolder/h/hussar_patrol.txt -text
 res/cardsfolder/h/hyalopterous_lemure.txt svneol=native#text/plain
 res/cardsfolder/h/hydra_omnivore.txt svneol=native#text/plain
 res/cardsfolder/h/hydroblast.txt -text
@@ -7580,6 +7581,7 @@ res/cardsfolder/r/rakavolver.txt -text
 res/cardsfolder/r/rakdos_augermage.txt svneol=native#text/plain
 res/cardsfolder/r/rakdos_cackler.txt -text
 res/cardsfolder/r/rakdos_carnarium.txt svneol=native#text/plain
+res/cardsfolder/r/rakdos_charm.txt -text
 res/cardsfolder/r/rakdos_guildgate.txt -text
 res/cardsfolder/r/rakdos_guildmage.txt svneol=native#text/plain
 res/cardsfolder/r/rakdos_ickspitter.txt svneol=native#text/plain
@@ -7587,6 +7589,7 @@ res/cardsfolder/r/rakdos_keyrune.txt -text
 res/cardsfolder/r/rakdos_lord_of_riots.txt -text
 res/cardsfolder/r/rakdos_pit_dragon.txt svneol=native#text/plain
 res/cardsfolder/r/rakdos_ragemutt.txt -text
+res/cardsfolder/r/rakdos_ringleader.txt -text
 res/cardsfolder/r/rakdos_riteknife.txt -text
 res/cardsfolder/r/rakdos_shred_freak.txt -text
 res/cardsfolder/r/rakdos_signet.txt svneol=native#text/plain
@@ -8384,6 +8387,7 @@ res/cardsfolder/s/sealed_fate.txt svneol=native#text/plain
 res/cardsfolder/s/seance.txt -text
 res/cardsfolder/s/search_for_tomorrow.txt svneol=native#text/plain
 res/cardsfolder/s/search_the_city.txt -text
+res/cardsfolder/s/search_warrant.txt -text
 res/cardsfolder/s/searchlight_geist.txt -text
 res/cardsfolder/s/searing_blaze.txt -text
 res/cardsfolder/s/searing_flesh.txt svneol=native#text/plain
@@ -8452,6 +8456,7 @@ res/cardsfolder/s/sekki_seasons_guide.txt -text svneol=unset#text/plain
 res/cardsfolder/s/sekkuar_deathkeeper.txt svneol=native#text/plain
 res/cardsfolder/s/selective_memory.txt -text
 res/cardsfolder/s/selenia_dark_angel.txt svneol=native#text/plain
+res/cardsfolder/s/selesnya_charm.txt -text
 res/cardsfolder/s/selesnya_evangel.txt svneol=native#text/plain
 res/cardsfolder/s/selesnya_guildgate.txt -text
 res/cardsfolder/s/selesnya_guildmage.txt svneol=native#text/plain
@@ -8861,6 +8866,7 @@ res/cardsfolder/s/skyhunter_prowler.txt svneol=native#text/plain
 res/cardsfolder/s/skyhunter_skirmisher.txt svneol=native#text/plain
 res/cardsfolder/s/skyknight_legionnaire.txt svneol=native#text/plain
 res/cardsfolder/s/skyline_predator.txt -text
+res/cardsfolder/s/skymark_roc.txt -text
 res/cardsfolder/s/skyreach_manta.txt svneol=native#text/plain
 res/cardsfolder/s/skyrider_trainee.txt svneol=native#text/plain
 res/cardsfolder/s/skyscribing.txt svneol=native#text/plain
