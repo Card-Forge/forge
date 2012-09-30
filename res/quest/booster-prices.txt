@@ -1,5 +1,6 @@
 Tenth Edition Booster Pack =395
 Unlimited Edition Booster Pack =24999
+Unlimited Edition Starter Deck =99999
 Revised Edition Booster Pack =2499
 Revised Edition Starter Deck =9999
 Fourth Edition Booster Pack =699

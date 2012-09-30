@@ -1,6 +1,6 @@
 [shop]
-WinsToUnlock=0
-Credits=1200
+WinsToUnlock=20
+Credits=2500
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
