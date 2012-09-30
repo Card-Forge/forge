@@ -2383,6 +2383,7 @@ res/cardsfolder/d/destroy_the_evidence.txt -text
 res/cardsfolder/d/destructive_flow.txt svneol=native#text/plain
 res/cardsfolder/d/destructive_force.txt svneol=native#text/plain
 res/cardsfolder/d/destructive_urge.txt svneol=native#text/plain
+res/cardsfolder/d/detention_sphere.txt -text
 res/cardsfolder/d/detonate.txt svneol=native#text/plain
 res/cardsfolder/d/detritivore.txt -text
 res/cardsfolder/d/deus_of_calamity.txt svneol=native#text/plain
@@ -3024,6 +3025,7 @@ res/cardsfolder/e/esper_panorama.txt svneol=native#text/plain
 res/cardsfolder/e/esper_sojourners.txt svneol=native#text/plain
 res/cardsfolder/e/esper_stormblade.txt svneol=native#text/plain
 res/cardsfolder/e/esperzoa.txt svneol=native#text/plain
+res/cardsfolder/e/essence_backlash.txt -text
 res/cardsfolder/e/essence_bottle.txt -text
 res/cardsfolder/e/essence_drain.txt svneol=native#text/plain
 res/cardsfolder/e/essence_feed.txt svneol=native#text/plain
@@ -3348,6 +3350,7 @@ res/cardsfolder/f/firefly.txt svneol=native#text/plain
 res/cardsfolder/f/firefright_mage.txt -text
 res/cardsfolder/f/firemane_angel.txt svneol=native#text/plain
 res/cardsfolder/f/firemaw_kavu.txt svneol=native#text/plain
+res/cardsfolder/f/fireminds_foresight.txt -text
 res/cardsfolder/f/fires_of_undeath.txt -text
 res/cardsfolder/f/fires_of_yavimaya.txt svneol=native#text/plain
 res/cardsfolder/f/firescreamer.txt svneol=native#text/plain
@@ -4229,6 +4232,7 @@ res/cardsfolder/g/groundskeeper.txt svneol=native#text/plain
 res/cardsfolder/g/groundswell.txt svneol=native#text/plain
 res/cardsfolder/g/grove_of_the_burnwillows.txt svneol=native#text/plain
 res/cardsfolder/g/grove_of_the_guardian.txt -text
+res/cardsfolder/g/growing_ranks.txt -text
 res/cardsfolder/g/growth_spasm.txt svneol=native#text/plain
 res/cardsfolder/g/grozoth.txt svneol=native#text/plain
 res/cardsfolder/g/gruesome_deformity.txt -text
