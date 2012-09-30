@@ -7993,6 +7993,7 @@ res/cardsfolder/r/river_of_tears.txt -text
 res/cardsfolder/r/riverfall_mimic.txt svneol=native#text/plain
 res/cardsfolder/r/rivers_grasp.txt -text
 res/cardsfolder/r/rix_maadi_dungeon_palace.txt svneol=native#text/plain
+res/cardsfolder/r/rix_maadi_guildmage.txt -text
 res/cardsfolder/r/roar_of_jukai.txt -text
 res/cardsfolder/r/roar_of_reclamation.txt svneol=native#text/plain
 res/cardsfolder/r/roar_of_the_crowd.txt svneol=native#text/plain

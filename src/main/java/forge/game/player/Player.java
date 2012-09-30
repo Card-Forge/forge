@@ -2427,8 +2427,12 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
             if (this.isComputer() && !source.getDamageHistory().getDealtDmgToComputerThisGame()) {
                 return false;
             }
-        }  else if (property.startsWith("wasDealtDamageThisTurn")) {
+        } else if (property.startsWith("wasDealtDamageThisTurn")) {
             if (this.assignedDamage.isEmpty()) {
+                return false;
+            }
+        } else if (property.startsWith("LostLifeThisTurn")) {
+            if (this.lifeLostThisTurn <= 0) {
                 return false;
             }
         } else if (property.equals("IsRemembered")) {
