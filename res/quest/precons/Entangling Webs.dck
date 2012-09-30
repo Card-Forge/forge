@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Entangling Webs
+Description=If you believe that bigger is better, the "Entangling Webs" deck is right up your alley! Loaded with giant predators and crafty spiders, this deck is perfect for an all-out rumble in the jungle.
+Deck Type=constructed
+Set=M12
+Image=entangling_webs.jpg
+[main]
+18 Forest|M12
+7 Mountain|M12
+2 Acidic Slime|M12
+1 Arachnus Spinner|M12
+2 Crimson Mage|M12
+1 Garruk's Companion|M12
+1 Garruk's Horde|M12
+3 Giant Spider|M12
+1 Lightning Elemental|M12
+3 Llanowar Elves|M12
+1 Runeclaw Bear|M12
+2 Stampeding Rhino|M12
+2 Stingerfling Spider|M12
+1 Vastwood Gorger|M12
+3 Arachnus Web|M12
+1 Fireball|M12
+1 Fling|M12
+2 Greatsword|M12
+2 Hunter's Insight|M12
+1 Overrun|M12
+3 Rampant Growth|M12
+1 Slaughter Cry|M12
+1 Titanic Growth|M12
+[sideboard]

@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Sweet Revenge
+Description=The key card in this deck is Burning Vengeance, a 2R enchantment with the ability "Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to target creature or player."
+Deck Type=constructed
+Set=M13
+Image=sweet_revenge.jpg
+[main]
+1 Darkslick Shores|SOM
+2 Slagstorm|MBS
+1 Silent Departure|ISD
+1 Red Sun's Zenith|MBS
+3 Forbidden Alchemy|ISD
+4 Think Twice|ISD
+4 Desperate Ravings|ISD
+3 Pillar of Flame|AVR
+4 Fettergeist|AVR
+1 Desolate Lighthouse|AVR
+1 Sulfur Falls|ISD
+4 Burning Vengeance|ISD
+2 Armored Skaab|ISD
+4 Faithless Looting|DKA
+2 Geistflame|ISD
+1 Rolling Temblor|ISD
+1 Firewing Phoenix|M13
+4 Evolving Wilds|M13
+1 Swamp|M13
+7 Island|M13
+9 Mountain|M13
+[sideboard]

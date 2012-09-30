@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Kor Armory
+Description=The "Kor Armory" deck puts you in command of the Kor, a resourceful race of adventuring nomads who use Equipment to survive as they wander their dangerous world. Their ingenuity will be your opponents' downfall.
+Deck Type=constructed
+Set=ZEN
+Image=kor_armory.jpg
+[main]
+2 Kabira Crossroads|ZEN
+16 Plains|ZEN
+1 Armament Master|ZEN
+2 Kor Aeronaut|ZEN
+2 Kor Cartographer|ZEN
+1 Kor Duelist|ZEN
+2 Kor Hookmaster|ZEN
+2 Kor Sanctifiers|ZEN
+2 Kor Skyfisher|ZEN
+1 Serra Angel|M10
+1 Conqueror's Pledge|ZEN
+1 Divine Verdict|M10
+1 Explorer's Scope|ZEN
+1 Landbind Ritual|ZEN
+1 Narrow Escape|ZEN
+2 Pacifism|M10
+1 Spidersilk Net|ZEN
+1 Trusty Machete|ZEN
+1 Windborne Charge|ZEN
+[sideboard]

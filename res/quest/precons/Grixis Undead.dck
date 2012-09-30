@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Grixis Undead
+Description=The plane of Grixis is a decaying hellscape overrun with demons and the undead. Summon an army of shambling minions from Grixis, mastering their power of life beyond death to overpower any planeswalkers who would dare oppose you.
+Deck Type=constructed
+Set=ALA
+Image=grixis_undead.jpg
+[main]
+2 Agony Warp|ALA
+2 Blightning|ALA
+1 Blood Cultist|ALA
+1 Bone Splinters|ALA
+1 Cruel Ultimatum|ALA
+2 Crumbling Necropolis|ALA
+1 Dreg Reaver|ALA
+1 Dregscape Zombie|ALA
+1 Essence Drain|10E
+2 Fire-Field Ogre|ALA
+1 Fleshbag Marauder|ALA
+1 Gravedigger|10E
+2 Grixis Panorama|ALA
+1 Hidden Horror|10E
+2 Incurable Ogre|ALA
+3 Island|ALA
+2 Kederekt Creeper|ALA
+3 Mountain|ALA
+1 Obelisk of Grixis|ALA
+7 Swamp|ALA
+2 Terror|10E
+1 Vein Drinker|ALA
+1 Vithian Stinger|ALA
+[sideboard]

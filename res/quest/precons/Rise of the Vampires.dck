@@ -1,0 +1,31 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Rise of the Vampires
+Description=The "Rise of the Vampires" deck puts you in command of a relentless army of undead that's ready to drain the life out of your enemies.
+Deck Type=constructed
+Set=ZEN
+Image=rise_of_the_vampires.jpg
+[main]
+2 Piranha Marsh|ZEN
+1 Blood Tribute|ZEN
+2 Vampire's Bite|ZEN
+1 Mindless Null|ZEN
+1 Hideous End|ZEN
+2 Guul Draz Vampire|ZEN
+1 Gatekeeper of Malakir|ZEN
+2 Vampire Nighthawk|ZEN
+2 Feast of Blood|ZEN
+1 Rise from the Grave|M10
+1 Malakir Bloodwitch|ZEN
+1 Diabolic Tutor|M10
+1 Zombie Goliath|M10
+2 Vampire Aristocrat|M10
+2 Acolyte of Xathrid|M10
+2 Child of Night|M10
+1 Heartstabber Mosquito|ZEN
+16 Swamp|ZEN
+[sideboard]

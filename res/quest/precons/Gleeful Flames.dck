@@ -1,0 +1,28 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Gleeful Flames
+Description=The "Gleeful Flames" deck has a single-minded focus: deal 20 damage to your opponents before they deal 20 to you. You have twelve spells that each deal 5 damage, and it only takes four of them to win the game.
+Deck Type=constructed
+Set=DKA
+Image=gleeful_flames.jpg
+[main]
+3 Haunted Fengraf|DKA
+2 Inkmoth Nexus|MBS
+17 Mountain|ISD
+4 Forge Devil|DKA
+4 Goblin Arsonist|M12
+4 Goblin Fireslinger|M12
+4 Goblin Gaveleer|SOM
+1 Hellrider|DKA
+3 Torch Fiend|DKA
+4 Artillerize|NPH
+4 Brimstone Volley|ISD
+1 Curse of Stalked Prey|ISD
+2 Faithless Looting|DKA
+4 Goblin Grenade|M12
+3 Infiltration Lens|SOM
+[sideboard]

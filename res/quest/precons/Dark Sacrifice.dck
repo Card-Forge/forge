@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Dark Sacrifice
+Description=The "Dark Sacrifice" deck rewards you for cleverly and mercilessly sacrificing your own Human creatures to advance your evil agenda. It's got three main parts: cards that like to sacrifice Humans, cards that reward you for sacrificing Humans, and Humans that like to be sacrificed.
+Deck Type=constructed
+Set=DKA
+Image=dark_sacrifice.jpg
+[main]
+1 Haunted Fengraf|DKA
+12 Plains|ISD
+11 Swamp|ISD
+1 Champion of the Parish|ISD
+1 Disciple of Griselbrand|ISD
+2 Doomed Traveler|ISD
+2 Elder Cathar|ISD
+2 Elgaud Inquisitor|DKA
+3 Falkenrath Torturer|DKA
+1 Fiend of the Shadows|DKA
+2 Galvanic Juggernaut|ISD
+1 Mausoleum Guard|ISD
+1 Selfless Cathar|ISD
+1 Skirsdag Flayer|DKA
+2 Unruly Mob|ISD
+2 Village Cannibals|ISD
+1 Wakedancer|DKA
+2 Altar's Reap|ISD
+1 Avacyn's Collar|DKA
+2 Death's Caress|DKA
+1 Demonmail Hauberk|ISD
+3 Gather the Townsfolk|DKA
+1 Gravepurge|DKA
+1 Lingering Souls|DKA
+2 Night Terrors|ISD
+1 Unburial Rites|ISD
+[sideboard]

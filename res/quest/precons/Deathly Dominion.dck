@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Deathly Dominion
+Description=While playing the "Deathly Dominion" deck, you'll delve deep into the dark arts to harness the fearsome powers of death. Even killing your own creatures can work to your advantage! When death itself is on your side, who can stand in your way?
+Deck Type=constructed
+Set=INS
+Image=deathly_dominion.jpg
+[main]
+1 Prey Upon|ISD
+2 Dead Weight|ISD
+1 Typhoid Rats|ISD
+1 Ambush Viper|ISD
+2 Woodland Sleuth|ISD
+1 Make a Wish|ISD
+1 Doom Blade|M12
+2 Devouring Swarm|M12
+2 Reassembling Skeleton|M12
+2 Hollowhenge Scavenger|ISD
+1 Altar's Reap|ISD
+1 Demonmail Hauberk|ISD
+2 Lumberknot|ISD
+2 Morkrut Banshee|ISD
+1 Skirsdag High Priest|ISD
+2 Rampant Growth|M12
+2 Festerhide Boar|ISD
+2 Caravan Vigil|ISD
+1 Brain Weevil|ISD
+1 Somberwald Spider|ISD
+1 Naturalize|ISD
+2 Warpath Ghoul|M12
+2 Disciple of Griselbrand|ISD
+11 Swamp|ISD
+13 Forest|ISD
+1 Moldgraf Monstrosity|ISD
+[sideboard]

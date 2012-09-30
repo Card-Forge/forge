@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Unstable Terrain
+Description=The "Unstable Terrain" deck lets you harness the primal energy of the indigenous wildlife of Zendikar. This dangerous plane's powerful beasts will run roughshod over your enemies.
+Deck Type=constructed
+Set=ZEN
+Image=unstable_terrain.jpg
+[main]
+7 Forest|ZEN
+10 Island|ZEN
+1 Baloth Woodcrasher|ZEN
+1 Coral Merfolk|M10
+1 Frontier Guide|ZEN
+1 Gomazoa|ZEN
+1 Grazing Gladehart|ZEN
+1 Living Tsunami|ZEN
+1 Merfolk Wayfinder|ZEN
+1 Roil Elemental|ZEN
+2 Sage Owl|M10
+1 Sphinx of Jwar Isle|ZEN
+1 Territorial Baloth|ZEN
+1 Turntimber Basilisk|ZEN
+2 Windrider Eel|ZEN
+2 Ior Ruin Expedition|ZEN
+1 Mind Control|M10
+2 Paralyzing Grasp|ZEN
+1 Giant Growth|M10
+1 Harrow|ZEN
+1 Unsummon|M10
+1 Terramorphic Expanse|M10
+[sideboard]

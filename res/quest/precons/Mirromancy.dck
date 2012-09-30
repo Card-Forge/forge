@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Mirromancy
+Description=Some Magic decks win the game with powerful creatures. Others, like the "Mirromancy" deck, win with powerful spells. Burn spells like Lava Axe and Red Sun's Zenith take fiery bites out of your opponent's life total, while cards like Quicksilver Geyser and Sleep give you the time you need to win.
+Deck Type=constructed
+Set=MBS
+Image=mirromancy.jpg
+[main]
+11 Island|MBS
+13 Mountain|MBS
+2 Blisterstick Shaman|MBS
+1 Fire Servant|M11
+1 Galvanoth|MBS
+2 Iron Myr|SOM
+2 Koth's Courier|MBS
+2 Lumengrid Gargoyle|MBS
+2 Neurok Commando|MBS
+2 Ogre Resister|MBS
+2 Peace Strider|MBS
+1 Silver Myr|SOM
+2 Arc Trail|SOM
+1 Burn the Impure|MBS
+2 Call to Mind|M11
+1 Crush|MBS
+2 Foresee|M11
+2 Lava Axe|M11
+1 Lightning Bolt|M11
+1 Melt Terrain|SOM
+1 Preordain|M11
+2 Quicksilver Geyser|MBS
+1 Rally the Forces|MBS
+1 Red Sun's Zenith|MBS
+1 Sleep|M11
+1 Turn the Tide|MBS
+[sideboard]

@@ -1,0 +1,27 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Hold the Line
+Description=With the "Hold the Line" deck, the beatdown starts early and never stops. Use low-cost creatures like Elite Vanguard and Champion of the Parish to pressure your opponent starting from the first turn, then suit up your creatures with Equipment to maintain your advantage into the midgame.
+Deck Type=constructed
+Set=ISD
+Image=hold_the_line.jpg
+[main]
+24 Plains|ISD
+4 Accorder Paladin|MBS
+1 Champion of the Parish|ISD
+4 Doomed Traveler|ISD
+1 Elite Inquisitor|ISD
+2 Elite Vanguard|M12
+4 Fiend Hunter|ISD
+4 Gideon's Lawkeeper|M12
+2 Mirran Crusader|MBS
+4 Bonds of Faith|ISD
+2 Butcher's Cleaver|ISD
+2 Honor of the Pure|M12
+4 Oblivion Ring|M12
+2 Silver-Inlaid Dagger|ISD
+[sideboard]

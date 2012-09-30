@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Mysterious Realms
+Description=With the "Mysterious Realms" deck, you'll unleash fearsome creatures summoned from the wilds of Zendikar upon your hapless enemies.
+Deck Type=constructed
+Set=WWK
+Image=mysterious_realms.jpg
+[main]
+8 Forest|ZEN
+2 Halimar Depths|WWK
+8 Island|ZEN
+1 Baloth Woodcrasher|ZEN
+2 Calcite Snapper|WWK
+1 Coral Merfolk|M10
+1 Frontier Guide|ZEN
+1 Goliath Sphinx|WWK
+1 Hedron Rover|WWK
+1 Living Tsunami|ZEN
+1 Merfolk Wayfinder|ZEN
+1 Territorial Baloth|ZEN
+1 Tideforce Elemental|WWK
+1 Walking Atlas|WWK
+1 AEther Tradewinds|WWK
+1 Mysteries of the Deep|WWK
+2 Paralyzing Grasp|ZEN
+1 Seer's Sundial|WWK
+1 Telepathy|M10
+2 Treasure Hunt|WWK
+1 Vapor Snare|WWK
+2 Wind Zendikon|WWK
+[sideboard]

@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Metalcraft
+Description=With the "Metalcraft" deck, you'll be taking advantage of a powerful new ability from the Scars of Mirrodin set. When you accumulate three artifacts on the battlefield, your creatures and spells with metalcraft will become even more powerful.
+Deck Type=constructed
+Set=SOM
+Image=metalcraft.jpg
+[main]
+2 Rusted Relic|SOM
+2 Memnite|SOM
+2 Blade-Tribe Berserkers|SOM
+2 Iron Myr|SOM
+2 Lumengrid Drake|SOM
+2 Embersmith|SOM
+1 Golem Foundry|SOM
+2 Silver Myr|SOM
+2 Riddlesmith|SOM
+1 Golem's Heart|SOM
+1 Sylvok Lifestaff|SOM
+3 Galvanic Blast|SOM
+3 Snapsail Glider|SOM
+1 Darksteel Axe|SOM
+2 Trinket Mage|SOM
+1 Echo Circlet|SOM
+1 Accorder's Shield|SOM
+1 Disperse|SOM
+3 Chrome Steed|SOM
+12 Mountain|SOM
+12 Island|SOM
+1 Argent Sphinx|SOM
+1 Etched Champion|SOM
+[sideboard]

@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Naya Behemoths
+Description=The plane of Naya is a paradise of lush growth where elvish and leonin celebrants worship the gargantuan beasts that roam the world. These ancient behemoths are yours to command, an army massive enough to blot out the sun and shake the earth.
+Deck Type=constructed
+Set=ALA
+Image=naya_behemoths.jpg
+[main]
+1 Blaze|10E
+2 Giant Growth|10E
+2 Rampant Growth|10E
+1 Mosstodon|ALA
+1 Titanic Ultimatum|ALA
+1 Naturalize|ALA
+2 Druid of the Anima|ALA
+1 Spearbreaker Behemoth|ALA
+7 Forest|ALA
+2 Cylian Elf|ALA
+1 Naya Battlemage|ALA
+1 Bull Cerodon|ALA
+2 Wild Nacatl|ALA
+1 Cavern Thoctar|ALA
+3 Mountain|ALA
+3 Plains|ALA
+2 Gift of the Gargantuan|ALA
+2 Jungle Shrine|ALA
+2 Woolly Thoctar|ALA
+2 Rakeclaw Gargantuan|ALA
+2 Naya Panorama|ALA
+[sideboard]

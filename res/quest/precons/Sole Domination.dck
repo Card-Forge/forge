@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Sole Domination
+Description=The "Sole Domination" deck focuses on creatures with the exalted ability. If you attack with exactly one creature, each of your creatures with exalted boosts that creature by giving it +1/+1 for the turn—and you'll still have the other creatures back on defense!
+Deck Type=constructed
+Set=M13
+Image=sole_domination.jpg
+[main]
+1 Mark of the Vampire|M13
+1 Xathrid Gorgon|M13
+1 Veilborn Ghoul|M13
+2 Murder|M13
+1 Nefarox, Overlord of Grixis|M13
+1 Ring of Xathrid|M13
+2 Bloodhunter Bat|M13
+2 Pacifism|M13
+2 Walking Corpse|M13
+2 Duty-Bound Dead|M13
+1 Vampire Nighthawk|M13
+1 Liliana's Shade|M13
+2 Aven Squire|M13
+3 Servant of Nefarox|M13
+2 Duskmantle Prowler|M13
+1 Knight of Glory|M13
+2 Knight of Infamy|M13
+1 Evolving Wilds|M13
+2 Tormented Soul|M13
+1 Zombie Goliath|M13
+15 Swamp|M13
+1 Angelic Benediction|M13
+1 Guardians of Akrasa|M13
+1 Blood Reckoning|M13
+1 Warclamp Mastiff|M13
+2 Cower in Fear|M13
+8 Plains|M13
+[sideboard]

@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Firebomber
+Description=Fiery forces of destruction and frenzied creatures are the strengths of this deck. Spells like Lightning Bolt, Fireball, and Earthquake shake your opponent up, allowing creatures like Shivan Dragon to launch a fatal attack.
+Deck Type=constructed
+Set=M10
+Image=firebomber.jpg
+[main]
+1 Berserkers of Blood Ridge|M10
+1 Canyon Minotaur|M10
+1 Divination|M10
+1 Dragon Whelp|M10
+1 Earthquake|M10
+1 Fiery Hellhound|M10
+1 Fireball|M10
+1 Goblin Artillery|M10
+1 Goblin Piker|M10
+5 Island|M10
+1 Lava Axe|M10
+2 Lightning Bolt|M10
+2 Lightning Elemental|M10
+12 Mountain|M10
+1 Negate|M10
+1 Prodigal Pyromancer|M10
+1 Pyroclasm|M10
+1 Raging Goblin|M10
+2 Seismic Strike|M10
+1 Shivan Dragon|M10
+1 Sleep|M10
+1 Terramorphic Expanse|M10
+1 Wall of Fire|M10
+[sideboard]

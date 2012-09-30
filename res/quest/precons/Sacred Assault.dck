@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Sacred Assault
+Description=The nice thing about being a powerful Planeswalker is that you don't have to play by the rules. For example, you have the ability to custom-build your ideal creature, and that's exactly what the "Sacred Assault" deck lets you do!
+Deck Type=constructed
+Set=M12
+Image=sacred_assault.jpg
+[main]
+10 Forest|M12
+14 Plains|M12
+1 Aegis Angel|M12
+2 Alabaster Mage|M12
+3 Assault Griffin|M12
+2 Auramancer|M12
+2 Cudgel Troll|M12
+2 Elite Vanguard|M12
+1 Gladecover Scout|M12
+2 Griffin Rider|M12
+2 Griffin Sentinel|M12
+1 Jade Mage|M12
+1 Mesa Enchantress|M12
+2 Peregrine Griffin|M12
+2 Sacred Wolf|M12
+2 Thran Golem|M12
+2 Divine Favor|M12
+1 Lifelink|M12
+1 Lure|M12
+1 Naturalize|M12
+3 Pacifism|M12
+2 Spirit Mantle|M12
+1 Trollhide|M12
+[sideboard]

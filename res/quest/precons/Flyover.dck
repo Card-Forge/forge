@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Flyover
+Description=The "Flyover" deck puts you in command of a squadron of flying creatures. Halt your opponents' ground assaults and let loose a reign of terror from the air!
+Deck Type=constructed
+Set=WWK
+Image=flyover.jpg
+[main]
+1 Everflowing Chalice|WWK
+7 Island|ZEN
+9 Plains|ZEN
+2 Apex Hawks|WWK
+1 Archon of Redemption|WWK
+1 Enclave Elite|WWK
+1 Gomazoa|ZEN
+2 Kor Cartographer|ZEN
+1 Lightkeeper of Emeria|WWK
+1 Silvercoat Lion|M10
+1 Stormfront Pegasus|M10
+1 Surrakar Banisher|WWK
+1 Voyager Drake|WWK
+2 Guardian Zendikon|WWK
+1 Marshal's Anthem|WWK
+1 Pacifism|M10
+1 Divine Verdict|M10
+1 Righteousness|M10
+1 Unsummon|M10
+1 Veteran's Reflexes|WWK
+1 Dread Statuary|WWK
+1 Terramorphic Expanse|M10
+1 Iona's Judgment|WWK
+1 Sleep|M10
+[sideboard]

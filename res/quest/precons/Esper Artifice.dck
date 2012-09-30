@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Esper Artifice
+Description=The plane of Esper is dominated by brilliant wizards, artificers, and sphinxes who seek to control the very forces of nature through a magical alloy called etherium. Construct an army of unstoppable artifacts using the power of etherium, and dominate all who would stand in your way.
+Deck Type=constructed
+Set=ALA
+Image=esper_artifice.jpg
+[main]
+2 Arcane Sanctum|ALA
+2 Cloudheath Drake|ALA
+1 Courier's Capsule|ALA
+1 Esper Battlemage|ALA
+2 Esper Panorama|ALA
+2 Etherium Sculptor|ALA
+2 Executioner's Capsule|ALA
+1 Filigree Sages|ALA
+7 Island|ALA
+1 Marble Chalice|ALA
+1 Master of Etherium|ALA
+1 Obelisk of Esper|ALA
+2 Oblivion Ring|ALA
+1 Onyx Goblet|ALA
+3 Plains|ALA
+1 Sanctum Gargoyle|ALA
+1 Sharding Sphinx|ALA
+3 Swamp|ALA
+2 Tidehollow Strix|ALA
+1 Tidings|10E
+2 Tower Gargoyle|ALA
+2 Windwright Mage|ALA
+[sideboard]

@@ -1,0 +1,29 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Death's Encroach
+Description=When the dead walk the land, people are understandably nervous. The aggressive army of Zombies and other fiends in the "Death's Encroach" deck will incite panic starting on the first turn of the game.
+Deck Type=constructed
+Set=AVR
+Image=deaths_encroach.jpg
+[main]
+2 Lashwrithe|NPH
+24 Swamp|AVR
+1 Cemetery Reaper|M12
+2 Crypt Creeper|AVR
+4 Diregraf Ghoul|ISD
+1 Geralf's Messenger|DKA
+3 Ghoulraiser|ISD
+1 Gloom Surgeon|AVR
+1 Gravecrawler|DKA
+4 Highborn Ghoul|DKA
+4 Skinrender|SOM
+3 Altar's Reap|ISD
+2 Dismember|NPH
+2 Doom Blade|M12
+3 Go for the Throat|MBS
+3 Despise|NPH
+[sideboard]

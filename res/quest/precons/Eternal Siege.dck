@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Eternal Siege
+Description=The best strategy against an overwhelming enemy is to stay on the offensive. You’ll forge a new alliance between Bant and Naya against the forces of Nicol Bolas, charging into the fray with an array of efficient, battle-ready knights and behemoths.
+Deck Type=constructed
+Set=ARB
+Image=eternal_siege.jpg
+[main]
+1 Beacon Behemoth|CFX
+1 Captured Sunlight|ARB
+1 Dauntless Escort|ARB
+1 Drumhunter|ALA
+1 Enlisted Wurm|ARB
+2 Excommunicate|ALA
+8 Forest|ALA
+1 Godtoucher|ALA
+2 Grizzled Leotau|ARB
+1 Knight of New Alara|ARB
+1 Mighty Emergence|ALA
+1 Mosstodon|ALA
+2 Pale Recluse|ARB
+1 Path to Exile|CFX
+8 Plains|ALA
+1 Qasali Pridemage|ARB
+1 Reborn Hope|ARB
+1 Sigil Blessing|ALA
+1 Sigil of the Nayan Gods|ARB
+1 Sigiled Behemoth|ARB
+1 Sunseed Nurturer|ALA
+2 Terramorphic Expanse|10E
+1 Vagrant Plowbeasts|CFX
+[sideboard]

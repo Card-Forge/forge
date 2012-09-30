@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Rapid Fire
+Description=With the "Rapid Fire" deck, you'll crush the opposition under a sudden avalanche of creatures. By the time they know what hit them, they'll already be buried!
+Deck Type=constructed
+Set=WWK
+Image=rapid_fire.jpg
+[main]
+2 Pilgrim's Eye|WWK
+7 Mountain|ZEN
+9 Plains|ZEN
+2 Cosi's Ravager|WWK
+1 Dragon Whelp|M10
+1 Fledgling Griffin|WWK
+1 Geyser Glider|ZEN
+1 Goblin Roughrider|WWK
+1 Grotag Thrasher|WWK
+1 Kor Cartographer|ZEN
+1 Kor Firewalker|WWK
+1 Kor Skyfisher|ZEN
+1 Mordant Dragon|WWK
+1 Prodigal Pyromancer|M10
+1 Ruin Ghost|WWK
+1 Steppe Lynx|ZEN
+1 Armored Ascension|M10
+1 Narrow Escape|ZEN
+2 Searing Blaze|WWK
+2 Teetering Peaks|ZEN
+1 Act of Treason|M10
+1 Chain Reaction|WWK
+1 Magma Rift|ZEN
+[sideboard]
