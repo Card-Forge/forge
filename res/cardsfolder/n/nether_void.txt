@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:World Enchantment
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a player casts a spell, counter it unless its controller pays 3.
-SVar:TrigCounter:DB$Counter | Cost$ 0 | UnlessCost$ 3 | Defined$ TriggeredSpellAbility | UnlessPayer$ TriggeredCardController
+SVar:TrigCounter:DB$ Counter | Cost$ 0 | UnlessCost$ 3 | Defined$ TriggeredSpellAbility | UnlessPayer$ TriggeredCardController
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_void.jpg

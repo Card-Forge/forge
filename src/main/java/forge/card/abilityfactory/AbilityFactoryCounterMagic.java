@@ -280,6 +280,8 @@ public class AbilityFactoryCounterMagic {
             } else {
                 return false;
             }
+        } else {
+            return false;
         }
 
         if (this.unlessCost != null && !this.unlessCost.startsWith("Damage")) {
@@ -422,7 +424,21 @@ public class AbilityFactoryCounterMagic {
         ArrayList<SpellAbility> sas;
 
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
+        if (params.containsKey("AllType")) {
+            sas = new ArrayList<SpellAbility>();
+            for (int i=0; i < AllZone.getStack().size(); i++) {
+                SpellAbility spell = AllZone.getStack().peekAbility(i);
+                if (params.get("AllType").equals("Spell") && !spell.isSpell()) {
+                    continue;
+                }
+                if (params.containsKey("AllValid")) {
+                    if (!spell.getSourceCard().isValid(params.get("AllValid"), sa.getActivatingPlayer(), sa.getSourceCard())) {
+                        continue;
+                    }
+                }
+                sas.add(spell);
+            }
+        } else if (tgt != null) {
             sas = tgt.getTargetSAs();
         } else {
             sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), this.params.get("Defined"), sa);
@@ -485,7 +501,21 @@ public class AbilityFactoryCounterMagic {
         ArrayList<SpellAbility> sas;
 
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
+        if (params.containsKey("AllType")) {
+            sas = new ArrayList<SpellAbility>();
+            for (int i=0; i < AllZone.getStack().size(); i++) {
+                SpellAbility spell = AllZone.getStack().peekAbility(i);
+                if (params.get("AllType").equals("Spell") && !spell.isSpell()) {
+                    continue;
+                }
+                if (params.containsKey("AllValid")) {
+                    if (!spell.getSourceCard().isValid(params.get("AllValid"), sa.getActivatingPlayer(), sa.getSourceCard())) {
+                        continue;
+                    }
+                }
+                sas.add(spell);
+            }
+        } else if (tgt != null) {
             sas = tgt.getTargetSAs();
         } else {
             sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), this.params.get("Defined"), sa);
