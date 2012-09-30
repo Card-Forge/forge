@@ -1703,6 +1703,15 @@ public class AbilityFactory {
                     }
                     return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
                 }
+                if (calcX[0].startsWith("TriggeredPlayer")) {
+                    final SpellAbility root = ability.getRootSpellAbility();
+                    Object o = root.getTriggeringObject("Player");
+                    final ArrayList<Player> players = new ArrayList<Player>();
+                    if (o instanceof Player) {
+                        players.add((Player) o);
+                    }
+                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                }
 
                 CardList list = new CardList();
                 if (calcX[0].startsWith("Sacrificed")) {

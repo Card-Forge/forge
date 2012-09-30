@@ -1,0 +1,13 @@
+Name:Havoc Festival
+ManaCost:4 B R
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't gain life. | Description$ Players can't gain life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of each player's upkeep, that player loses half his or her life, rounded up.
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ HavocX
+SVar:HavocX:TriggeredPlayer$LifeTotal/HalfUp
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/havoc_festival.jpg
+SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/166.jpg
+Oracle:Players can't gain life.\nAt the beginning of each player's upkeep, that player loses half his or her life, rounded up.
+End
