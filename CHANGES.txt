@@ -178,6 +178,14 @@ Fixes/Features:
 - Added the quest deck Riptide 2 by Nordos.
 - Improved and fixed various AI discard functions.
 - Added the recent commit logs to changes.txt.
+- Fixed buildFilename not working without SetInfo.
+- add stack description to vandalblast.txt
+- Removed some duplicates from RtR added cards list
+- Fixed text of Consuming Vapors.
+- ran setInfo and Oracle scripts
+- fixed Druid's Deliverance file name
+- delete old file
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -201,7 +209,9 @@ Auger Spree
 Avenging Arrow
 Axebane Guardian
 Axebane Stag
+Azor's Elocutors
 Azorius Arrester
+Azorius Charm
 Azorius Guildgate
 Azorius Justiciar
 Azorius Keyrune
@@ -212,10 +222,13 @@ Blistercoil Weird
 Bloodfray Giant
 Blustersquall
 Brushstrider
+Call of the Conclave
+Carnival Hellsteed
 Catacomb Slug
 Centaur Healer
 Centaur's Herald
 Chaos Imps
+Chemister's Trick
 Chorus of Might
 Chromatic Lantern
 Chronic Flooding
@@ -223,9 +236,12 @@ Civic Saber
 Cobblebrute
 Codex Shredder
 Collective Blessing
+Common Bond
 Concordia Pegasus
 Conjured Currency
+Coursers' Accord
 Crosstown Courier
+Cryptborn Horror
 Cyclonic Rift
 Daggerdrome Imp
 Dark Revenant
@@ -242,6 +258,7 @@ Dramatic Rescue
 Dreadbore
 Dreg Mangler
 Drudge Beetle
+Druid's Deliverance
 Dryad Militant
 Dynacharge
 Electrickery
@@ -266,8 +283,10 @@ Grim Roustabout
 Grisly Salvage
 Grove of the Guardian
 Guttersnipe
+Hellhole Flailer
 Horncaller's Chant
 Hover Barrier
+Hussar Patrol
 Hypersonic Dragon
 Inaction Injunction
 Isperia's Skywatch
@@ -275,24 +294,29 @@ Isperia, Supreme Judge
 Izzet Charm
 Izzet Guildgate
 Izzet Keyrune
+Izzet Staticaster
 Jace, Architect of Thought
 Jarad, Golgari Lich Lord
 Judge's Familiar
 Keening Apparition
 Knightly Valor
+Korozda Guildmage
 Korozda Monitor
 Launch Party
 Lobber Crew
 Lotleth Troll
 Loxodon Smiter
 Lyev Skyknight
+Mana Bloom
 Martial Law
 Mercurial Chemister
 Minotaur Aggressor
 Mizzium Mortars
 Mizzium Skin
 Necropolis Regent
+New Prahv Guildmage
 Niv-Mizzet, Dracogenius
+Nivix Guildmage
 Oak Street Innkeeper
 Ogre Jailbreaker
 Pack Rat
@@ -305,9 +329,11 @@ Pursuit of Flight
 Pyroconvergence
 Racecourse Fury
 Rakdos Cackler
+Rakdos Charm
 Rakdos Guildgate
 Rakdos Keyrune
 Rakdos Ragemutt
+Rakdos Ringleader
 Rakdos Shred-Freak
 Rakdos's Return
 Rakdos, Lord of Riots
@@ -320,7 +346,9 @@ Rubbleback Rhino
 Runewing
 Savage Surge
 Search the City
+Search Warrant
 Security Blockade
+Selesnya Charm
 Selesnya Guildgate
 Selesnya Keyrune
 Selesnya Sentry
@@ -329,12 +357,14 @@ Sewer Shambler
 Shrieking Affliction
 Skull Rend
 Skyline Predator
+Skymark Roc
 Slime Molding
 Slitherhead
 Sluiceway Scorpion
 Slum Reaper
 Soul Tithe
 Soulsworn Spirit
+Spawn of Rix Maadi
 Sphere of Safety
 Sphinx's Revelation
 Splatter Thug
@@ -343,11 +373,13 @@ Stealer of Secrets
 Stonefare Crocodile
 Street Spasm
 Street Sweeper
+Sundering Growth
 Sunspire Griffin
 Supreme Verdict
 Survey the Wreckage
 Swift Justice
 Tavern Swindler
+Teleportal
 Tenement Crasher
 Terrus Wurm
 Thoughtflare
@@ -361,12 +393,14 @@ Trostani's Judgment
 Trostani, Selesnya's Voice
 Ultimate Price
 Underworld Connections
+Urban Burgeoning
 Utvara Hellkite
 Vandalblast
 Vassal Soul
 Viashino Racketeer
 Vitu-Ghazi Guildmage
 Voidwielder
+Volatile Rig
 Vraska the Unseen
 Wayfaring Temple
 Wild Beastmaster
@@ -408,6 +442,7 @@ Roiling Horror
 Fungal Behemoth
 Strip Bare
 Ignoble Soldier
+Dralnu's Pet
 
 
 end
