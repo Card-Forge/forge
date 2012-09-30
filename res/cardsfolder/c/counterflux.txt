@@ -1,0 +1,12 @@
+Name:Counterflux
+ManaCost:U U R
+Types:Instant
+Text:no text
+K:CARDNAME can't be countered.
+A:SP$ Counter | Cost$ U U R | TargetType$ Spell | TgtPrompt$ Select target spell you don't control. | ValidTgts$ Card.YouDontCtrl | SpellDescription$ Counter target spell you don't control.
+A:SP$ Counter | Cost$ 1 U U R | AllType$ Spell | AllValid$ Card.YouDontCtrl | PrecostDesc$ Overload | CostDesc$ 1 U U R | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/counterflux.jpg
+SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/153.jpg
+Oracle:Counterflux can't be countered by spells or abilities.\nCounter target spell you don't control.\nOverload {1}{U}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
+End
