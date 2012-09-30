@@ -3,25 +3,24 @@
 Name=Radiant 2
 Title=Radiant
 Difficulty=medium
-Description=WU flying creature deck with Radiant, Archangel, Gravitational Shift and Moat
+Description=WU flying creature deck with Radiant, Archangel, Soulcatcher and Pride of the Clouds
 Icon=Radiant.jpg
 Deck Type=constructed
 [main]
 4 Plains|M12
-2 Island|M12
+3 Island|M12
 4 Seachrome Coast
 4 Sejiri Refuge
-3 Glacial Fortress
+4 Glacial Fortress
 4 Flooded Strand
 1 Nimbus Maze
-1 Radiant, Archangel
-2 Soulcatcher
+2 Radiant, Archangel
+4 Soulcatcher
 1 Archon of Redemption
 2 Pride of the Clouds
 1 Sprite Noble
 1 Serra Aviary
 1 Favorable Winds
-1 Moat
 1 Gravitational Shift
 1 Abbey Griffin
 1 Araba Mothrider
@@ -50,4 +49,5 @@ Deck Type=constructed
 1 Suntail Hawk
 1 Talon Trooper
 1 Tempest Drake
+1 Skymark Roc
 [sideboard]

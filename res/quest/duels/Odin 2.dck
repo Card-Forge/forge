@@ -8,7 +8,7 @@ Icon=Odin.jpg
 Deck Type=constructed
 [main]
 3 Sejiri Refuge
-3 Glacial Fortress
+4 Glacial Fortress
 6 Island|M12
 6 Plains|M12
 4 Seachrome Coast
@@ -27,6 +27,7 @@ Deck Type=constructed
 1 Daring Leap
 1 Deft Duelist
 1 Esper Cormorants
+1 Hussar Patrol
 1 Galina's Knight
 1 Godhead of Awe
 1 Harbor Guardian
@@ -44,7 +45,7 @@ Deck Type=constructed
 1 Sky Spirit
 1 Talon Trooper
 1 Tempest Drake
+1 Vassal Soul
 1 Wall of Denial
-1 Wings of Aesthir
 1 Wings of Hope
 [sideboard]

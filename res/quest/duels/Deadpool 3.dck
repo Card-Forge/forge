@@ -7,19 +7,22 @@ Description=BR deck with Ashenmoor Liege and Grixis Grimblade
 Icon=Deadpool.jpg
 Deck Type=constructed
 [main]
+4 Rakdos Cackler
+4 Grixis Grimblade
+4 Jund Hackblade
 4 Ashenmoor Gouger
 4 Ashenmoor Liege
 4 Demigod of Revenge
-4 Emberstrike Duo
-4 Grixis Grimblade
-4 Jund Hackblade
-4 Shambling Remains
+2 Shambling Remains
 1 Defiler of Souls
-3 Fists of the Demigod
+1 Fists of the Demigod
+1 Blightning
 4 Terminate
+4 Dreadbore
 4 Blackcleave Cliffs
 4 Dragonskull Summit
-4 Lavaclaw Reaches
-6 Mountain|M12
-6 Swamp|M12
+1 Lavaclaw Reaches
+4 Badlands
+5 Mountain|M12
+5 Swamp|M12
 [sideboard]
