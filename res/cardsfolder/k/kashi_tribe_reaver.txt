@@ -7,6 +7,7 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDama
 SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ TriggeredTarget | SubAbility$ DBPump
 SVar:DBPump:DB$Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
+SVar:HasCombatEffect:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kashi_tribe_reaver.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/220.jpg

@@ -5,6 +5,7 @@ Text:no text
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, you gain 2 life unless that creature's controller pays 2.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2 | UnlessCost$ 2 | UnlessPayer$ TriggeredTargetController
+SVar:HasCombatEffect:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_charmer.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/24.jpg

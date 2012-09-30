@@ -899,11 +899,20 @@ public class ComputerUtilAttack {
                                             // wither or infect
         boolean isWorthLessThanAllKillers = true;
         boolean canBeBlocked = false;
-        boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");
         int numberOfPossibleBlockers = 0;
 
         if (!this.isEffectiveAttacker(attacker, combat)) {
             return false;
+        }
+        boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");
+        boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE"); // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
+        if (!hasCombatEffect) {
+            for (String keyword : attacker.getKeyword()) {
+                if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink") ) {
+                    hasCombatEffect = true;
+                    break;
+                }
+            }
         }
 
         // look at the attacker in relation to the blockers to establish a
@@ -928,11 +937,17 @@ public class ComputerUtilAttack {
                 // not record that it can't kill everything
                 if (!CombatUtil.canDestroyBlocker(defender, attacker, combat, false)) {
                     canKillAll = false;
-                    if (defender.hasKeyword("Wither") || defender.hasKeyword("Infect")) {
-                        canKillAllDangerous = false; // there is a dangerous
-                                                     // creature that can
-                                                     // survive an attack from
-                                                     // this creature
+                    if (defender.getSVar("HasCombatEffect").equals("TRUE")) {
+                        canKillAllDangerous = false;
+                    } else {
+                        for (String keyword : defender.getKeyword()) {
+                            if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink") ) {
+                                canKillAllDangerous = false;
+                                break;
+                                // there is a creature that can survive an attack from this creature 
+                                // and combat will have negative effects
+                            }
+                        }
                     }
                 }
             }
@@ -947,8 +962,8 @@ public class ComputerUtilAttack {
         }
 
         if (numberOfPossibleBlockers > 1
-                || (!attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
-                        && numberOfPossibleBlockers == 1)) {
+                || (numberOfPossibleBlockers == 1 
+                    && !attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures."))) {
             canBeBlocked = true;
         }
         /*System.out.println(attacker + " canBeKilledByOne: " + canBeKilledByOne + " canKillAll: "
@@ -974,7 +989,7 @@ public class ComputerUtilAttack {
         case 3: // expecting to at least kill a creature of equal value, not be
                 // blocked
             if ((canKillAll && isWorthLessThanAllKillers) 
-                    || ((canKillAllDangerous || hasAttackEffect) && !canBeKilledByOne)
+                    || ((canKillAllDangerous || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne)
                     || !canBeBlocked) {
                 System.out.println(attacker.getName()
                         + " = attacking expecting to kill creature or cause damage, or is unblockable");
@@ -983,13 +998,13 @@ public class ComputerUtilAttack {
             break;
         case 2: // attack expecting to attract a group block or destroying a
                 // single blocker and surviving
-            if (((canKillAll || hasAttackEffect) && !canBeKilledByOne) || !canBeBlocked) {
+            if (((canKillAll || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne) || !canBeBlocked) {
                 System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
                 return true;
             }
             break;
         case 1: // unblockable creatures only
-            if (!canBeBlocked) {
+            if (!canBeBlocked || (numberOfPossibleBlockers == 1 && canKillAll && !canBeKilledByOne)) {
                 System.out.println(attacker.getName() + " = attacking expecting not to be blocked");
                 return true;
             }

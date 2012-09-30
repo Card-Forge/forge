@@ -7,6 +7,7 @@ K:Indestructible
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, flip a coin. If you win the flip, destroy that creature.
 SVar:TrigFlip:AB$ FlipACoin | Cost$ 0 | Defined$ You | WinSubAbility$ DBDestroy
 SVar:DBDestroy:DB$Destroy | Cost$ 0 | Defined$ TriggeredTarget  | NoRegen$ False
+SVar:HasCombatEffect:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/creepy_doll.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/220.jpg

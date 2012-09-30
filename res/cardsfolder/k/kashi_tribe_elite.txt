@@ -7,6 +7,7 @@ S:Mode$ Continuous | Affected$ Snake.Legendary+YouCtrl | AddKeyword$ Shroud | De
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
 SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ TriggeredTarget | SubAbility$ DBPump
 SVar:DBPump:DB$Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True
+SVar:HasCombatEffect:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kashi_tribe_elite.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/135.jpg
