@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Minerva McGonagall 3
+Title=Minerva McGonagall
+Difficulty=hard
+Description=Mono U Wizard deck
+Icon=Minerva McGonagall.jpg
+Deck Type=constructed
+[main]
+2 Wingcrafter
+4 Stonybrook Banneret
+1 Azure Mage
+1 Minamo Scrollkeeper
+2 AEther Adept
+1 Ertai, Wizard Adept
+1 Laboratory Maniac
+2 Patron Wizard
+4 Sage of Fables
+1 Sage's Dousing
+4 Nameless One
+3 Riptide Director
+4 Sower of Temptation
+1 Azami, Lady of Scrolls
+4 Beguiler of Wills
+1 Arcanis the Omnipotent
+22 Island
+2 Riptide Laboratory
+[sideboard]
