@@ -3,7 +3,7 @@ ManaCost:3 W U
 Types:Enchantment Aura
 Text:no text
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | Cost$ 3 W U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each card in its controller's hand.
 SVar:X:Count$InEnchantedHand
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of the draw step of enchanted creature's controller, that player draws an additional card.
