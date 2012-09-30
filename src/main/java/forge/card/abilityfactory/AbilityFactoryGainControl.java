@@ -468,7 +468,9 @@ public class AbilityFactoryGainControl {
 
             if (AllZoneUtil.isCardInPlay(tgtC)) {
 
-                tgtC.addController(newController);
+                if (!tgtC.equals(newController)) {
+                    tgtC.addController(newController);
+                }
                 // Singletons.getModel().getGameAction().changeController(new CardList(tgtC),
                 // tgtC.getController(), newController.get(0));
 
