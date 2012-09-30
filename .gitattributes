@@ -4450,6 +4450,7 @@ res/cardsfolder/h/hellcarver_demon.txt -text svneol=unset#text/plain
 res/cardsfolder/h/helldozer.txt svneol=native#text/plain
 res/cardsfolder/h/hellfire.txt svneol=native#text/plain
 res/cardsfolder/h/hellfire_mongrel.txt svneol=native#text/plain
+res/cardsfolder/h/hellhole_flailer.txt -text
 res/cardsfolder/h/hellhole_rats.txt svneol=native#text/plain
 res/cardsfolder/h/hellion_crucible.txt -text
 res/cardsfolder/h/hellion_eruption.txt svneol=native#text/plain
@@ -4950,6 +4951,7 @@ res/cardsfolder/i/izzet_guildgate.txt -text
 res/cardsfolder/i/izzet_guildmage.txt -text
 res/cardsfolder/i/izzet_keyrune.txt -text
 res/cardsfolder/i/izzet_signet.txt svneol=native#text/plain
+res/cardsfolder/i/izzet_staticaster.txt -text
 res/cardsfolder/j/jabaris_banner.txt svneol=native#text/plain
 res/cardsfolder/j/jabaris_influence.txt -text
 res/cardsfolder/j/jace_architect_of_thought.txt -text
@@ -5317,6 +5319,7 @@ res/cardsfolder/k/kor_skyfisher.txt svneol=native#text/plain
 res/cardsfolder/k/kor_spiritdancer.txt svneol=native#text/plain
 res/cardsfolder/k/korlash_heir_to_blackblade.txt svneol=native#text/plain
 res/cardsfolder/k/kormus_bell.txt svneol=native#text/plain
+res/cardsfolder/k/korozda_guildmage.txt -text
 res/cardsfolder/k/korozda_monitor.txt -text
 res/cardsfolder/k/koskun_keep.txt svneol=native#text/plain
 res/cardsfolder/k/koth_of_the_hammer.txt svneol=native#text/plain
@@ -6577,6 +6580,7 @@ res/cardsfolder/n/nevermaker.txt svneol=native#text/plain
 res/cardsfolder/n/nevermore.txt -text
 res/cardsfolder/n/nevinyrrals_disk.txt svneol=native#text/plain
 res/cardsfolder/n/new_benalia.txt svneol=native#text/plain
+res/cardsfolder/n/new_prahv_guildmage.txt -text
 res/cardsfolder/n/nezumi_bone_reader.txt svneol=native#text/plain
 res/cardsfolder/n/nezumi_cutthroat.txt svneol=native#text/plain
 res/cardsfolder/n/nezumi_graverobber_nighteyes_the_desecrator.txt -text
@@ -6643,6 +6647,7 @@ res/cardsfolder/n/niv_mizzet_dracogenius.txt -text
 res/cardsfolder/n/niv_mizzet_the_firemind.txt svneol=native#text/plain
 res/cardsfolder/n/niveous_wisps.txt svneol=native#text/plain
 res/cardsfolder/n/nivix_aerie_of_the_firemind.txt -text
+res/cardsfolder/n/nivix_guildmage.txt -text
 res/cardsfolder/n/no_dachi.txt svneol=native#text/plain
 res/cardsfolder/n/no_mercy.txt svneol=native#text/plain
 res/cardsfolder/n/no_rest_for_the_wicked.txt -text

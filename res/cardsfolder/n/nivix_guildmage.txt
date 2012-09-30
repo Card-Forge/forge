@@ -1,0 +1,13 @@
+Name:Nivix Guildmage
+ManaCost:U R
+Types:Creature Human Wizard
+Text:no text
+PT:2/2
+A:AB$ Draw | Cost$ 1 U R  | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+A:AB$ CopySpell | Cost$ 2 U R | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nivix_guildmage.jpg
+SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/182.jpg
+Oracle:{1}{U}{R}: Draw a card, then discard a card.\n{2}{U}{R}: Copy target instant or sorcery spell you control. You may choose new targets for the copy.
+End
