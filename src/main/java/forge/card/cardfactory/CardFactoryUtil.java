@@ -899,7 +899,7 @@ public class CardFactoryUtil {
      *            a int.
      * @return a {@link forge.card.spellability.AbilityActivated} object.
      */
-    public static AbilityStatic abilityMorphUp(final Card sourceCard, final Cost cost, final int a, final int d) {
+    public static AbilityStatic abilityMorphUp(final Card sourceCard, final Cost cost) {
         final AbilityStatic morphUp = new AbilityStatic(sourceCard, cost, null) {
 
             @Override
@@ -4821,18 +4821,17 @@ public class CardFactoryUtil {
 
                 final String parse = card.getKeyword().get(n).toString();
                 card.setCanMorph(true);
+                Map<String,String> sVars = card.getSVars();
 
                 final String[] k = parse.split(":");
                 final Cost cost = new Cost(card, k[1], true);
-
-                final int attack = card.getBaseAttack();
-                final int defense = card.getBaseDefense();
 
                 card.addSpellAbility(CardFactoryUtil.abilityMorphDown(card));
 
                 card.turnFaceDown();
 
-                card.addSpellAbility(CardFactoryUtil.abilityMorphUp(card, cost, attack, defense));
+                card.addSpellAbility(CardFactoryUtil.abilityMorphUp(card, cost));
+                card.setSVars(sVars); // for Warbreak Trumpeter.
 
                 card.turnFaceUp();
             }
