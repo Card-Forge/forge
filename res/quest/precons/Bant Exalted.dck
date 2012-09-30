@@ -1,0 +1,33 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Bant Exalted
+Description=The plane of Bant is a regimented hierarchy of knights, aven, and tough-minded rhoxes who uphold the ideals of the angels. Summon Bant's most worthy heroes, then rally them around a mighty champion who will smite your planeswalker foes.
+Deck Type=constructed
+Set=ALA
+Image=bant_exalted.jpg
+[main]
+2 Akrasan Squire|ALA
+1 Angelic Benediction|ALA
+2 Bant Panorama|ALA
+1 Battlegrace Angel|ALA
+2 Excommunicate|ALA
+3 Forest|ALA
+2 Guardians of Akrasa|ALA
+3 Island|ALA
+1 Kiss of the Amesha|ALA
+2 Knight of the Skyward Eye|ALA
+1 Knight-Captain of Eos|ALA
+2 Pacifism|10E
+7 Plains|ALA
+2 Rhox War Monk|ALA
+2 Seaside Citadel|ALA
+1 Sigiled Paladin|ALA
+2 Steward of Valeron|ALA
+2 Suntail Hawk|10E
+1 Waveskimmer Aven|ALA
+2 Wild Griffin|10E
+[sideboard]
