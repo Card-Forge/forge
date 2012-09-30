@@ -1,0 +1,13 @@
+Name:Jarad's Orders
+ManaCost:2 B G
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 2 B G | Origin$ Library | Destination$ Library | ChangeType$ Creature | ChangeNum$ 2 | RememberChanged$ True | Reveal$ True | Shuffle$ False | StackDescription$ SpellDescription | SubAbility$ DBChangeZone1 | SpellDescription$ Search your library for up to two creature cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle your library.
+SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.IsRemembered | ChangeNum$ 1 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for your hand | Shuffle$ False | SubAbility$ DBChangeZone2 | StackDescription$ None
+SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Creature.IsRemembered | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for your graveyard | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jarads_orders.jpg
+SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/175.jpg
+Oracle:Search your library for up to two creature cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle your library.
+End

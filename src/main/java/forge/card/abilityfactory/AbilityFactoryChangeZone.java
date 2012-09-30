@@ -898,6 +898,7 @@ public final class AbilityFactoryChangeZone {
     private static void changeHiddenOriginResolveHuman(final AbilityFactory af, final SpellAbility sa, Player player) {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
+        final CardList reveal = new CardList();
         final boolean defined = params.containsKey("Defined");
 
         final Target tgt = sa.getTarget();
@@ -962,11 +963,8 @@ public final class AbilityFactoryChangeZone {
         }
 
         if (!defined) {
-            if (origin.contains(ZoneType.Library) && !defined) { // Look at whole
-                                                             // library before
-                                                             // moving onto
-                                                             // choosing
-                                                             // a card{
+            if (origin.contains(ZoneType.Library) && !defined && !params.containsKey("NoLooking")) { 
+                // Look at whole library before moving onto choosing a card
                 GuiUtils.chooseOneOrNone(sa.getSourceCard().getName() + " - Looking at Library",
                         player.getCardsIn(ZoneType.Library));
             }
@@ -982,6 +980,7 @@ public final class AbilityFactoryChangeZone {
         final String remember = params.get("RememberChanged");
         final String forget = params.get("ForgetChanged");
         final String imprint = params.get("Imprint");
+        final String selectPrompt = params.containsKey("SelectPrompt") ? params.get("SelectPrompt") : "Select a card";
 
         if (params.containsKey("Unimprint")) {
             card.clearImprinted();
@@ -996,11 +995,11 @@ public final class AbilityFactoryChangeZone {
             if (params.containsKey("AtRandom")) {
                 o = CardUtil.getRandom(fetchList);
             } else if (params.containsKey("Mandatory")) {
-                o = GuiUtils.chooseOne("Select a card", fetchList);
+                o = GuiUtils.chooseOne(selectPrompt, fetchList);
             } else if (params.containsKey("Defined")) {
                 o = fetchList.get(0);
             } else {
-                o = GuiUtils.chooseOneOrNone("Select a card", fetchList);
+                o = GuiUtils.chooseOneOrNone(selectPrompt, fetchList);
             }
 
             if (o != null) {
@@ -1012,9 +1011,9 @@ public final class AbilityFactoryChangeZone {
                     // do not shuffle the library once we have placed a fetched
                     // card on top.
                     if (params.containsKey("Reveal")) {
-                        GuiUtils.chooseOne(card + " - Revealed card: ", c);
+                        reveal.add(c);
                     }
-                    if (origin.contains(ZoneType.Library) && (i < 1)) {
+                    if (origin.contains(ZoneType.Library) && (i < 1) && "False".equals(params.get("Shuffle"))) {
                         player.shuffle();
                     }
                     movedCard = Singletons.getModel().getGameAction().moveToLibrary(c, libraryPos);
@@ -1082,6 +1081,9 @@ public final class AbilityFactoryChangeZone {
                     break;
                 }
             }
+        }
+        if (params.containsKey("Reveal")) {
+            GuiUtils.chooseOne(card + " - Revealed card: ", reveal.toArray());
         }
 
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
