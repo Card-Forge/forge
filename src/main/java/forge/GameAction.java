@@ -1773,12 +1773,7 @@ public class GameAction {
                 }
             } else if (spell.getSourceCard().hasKeyword("Convoke")) {
                 CardList untappedCreats = spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.CREATURES);
-                untappedCreats = untappedCreats.filter(new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return !c.isTapped();
-                    }
-                });
+                untappedCreats = untappedCreats.filter(CardPredicates.Presets.UNTAPPED);
 
                 if (untappedCreats.size() != 0) {
                     final ArrayList<Object> choices = new ArrayList<Object>();

@@ -22,6 +22,7 @@ import java.util.HashMap;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -276,7 +277,7 @@ class CardFactoryAuras {
                             return (c.getNetDefense() - c.getDamage()) <= 2;
                         }
                     };
-                    if (!list.filter(f).isEmpty()) {
+                    if (Iterables.any(list, f)) {
                         list = list.filter(f);
                     }
                     CardListUtil.sortAttack(list);

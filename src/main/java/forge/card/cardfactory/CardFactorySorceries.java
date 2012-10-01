@@ -298,11 +298,8 @@ public class CardFactorySorceries {
 
             @Override
             public boolean canPlayAI() {
-                CardList humTokenCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                humTokenCreats = humTokenCreats.filter(Presets.TOKEN);
-
-                CardList compTokenCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                compTokenCreats = compTokenCreats.filter(Presets.TOKEN);
+                CardList humTokenCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer()).filter(Presets.TOKEN);
+                CardList compTokenCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()).filter(Presets.TOKEN);
 
                 return compTokenCreats.size() > humTokenCreats.size();
             } // canPlayAI()

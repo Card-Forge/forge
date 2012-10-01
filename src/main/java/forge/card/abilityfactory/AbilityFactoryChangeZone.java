@@ -2949,10 +2949,10 @@ public final class AbilityFactoryChangeZone {
         // if Shuffle parameter exists, and any amount of cards were owned by
         // that player, then shuffle that library
         if (params.containsKey("Shuffle")) {
-            if (cards.filter(CardPredicates.isOwner(AllZone.getHumanPlayer())).size() > 0) {
+            if (Iterables.any(cards, CardPredicates.isOwner(AllZone.getHumanPlayer()))) {
                 AllZone.getHumanPlayer().shuffle();
             }
-            if (cards.filter(CardPredicates.isOwner(AllZone.getComputerPlayer())).size() > 0) {
+            if (Iterables.any(cards, CardPredicates.isOwner(AllZone.getComputerPlayer()))) {
                 AllZone.getComputerPlayer().shuffle();
             }
         }
