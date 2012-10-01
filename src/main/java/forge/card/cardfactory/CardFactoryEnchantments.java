@@ -99,17 +99,9 @@ class CardFactoryEnchantments {
                             chooseGrave.addAll(grave);
                         }
 
-                        final Object o = GuiUtils.chooseOne("Choose first creature to exile", chooseGrave);
-                        if (o != null) {
-                            CardList newGrave;
-                            final Card c = (Card) o;
-                            if (c.getOwner().isHuman()) {
-                                newGrave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
-                            } else {
-                                newGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                            }
-
-                            newGrave = newGrave.getType("Creature");
+                        final Card c = GuiUtils.chooseOne("Choose first creature to exile", chooseGrave);
+                        if (c != null) {
+                            CardList newGrave = c.getOwner().getCardsIn(ZoneType.Graveyard).filter(CardPredicates.Presets.CREATURES);
                             newGrave.remove(c);
 
                             final Object o2 = GuiUtils.chooseOne("Choose second creature to exile", newGrave);
