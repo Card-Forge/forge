@@ -30,6 +30,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
@@ -482,7 +483,7 @@ public final class AbilityFactoryProtection {
             list.remove(c);
         }
 
-        CardList pref = list.getController(AllZone.getComputerPlayer());
+        CardList pref = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
         pref = pref.filter(new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -490,7 +491,7 @@ public final class AbilityFactoryProtection {
                         AbilityFactoryProtection.getProtectionList(host, params));
             }
         });
-        final CardList pref2 = list.getController(AllZone.getComputerPlayer());
+        final CardList pref2 = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
         pref = pref.filter(new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -498,7 +499,7 @@ public final class AbilityFactoryProtection {
                         AbilityFactoryProtection.getProtectionList(host, params));
             }
         });
-        final CardList forced = list.getController(AllZone.getHumanPlayer());
+        final CardList forced = CardListUtil.filterControlledBy(list, AllZone.getHumanPlayer());
         final Card source = sa.getSourceCard();
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
@@ -743,7 +744,7 @@ public final class AbilityFactoryProtection {
                     if (logic.equals("MostProminentHumanCreatures")) {
                         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                         if (list.isEmpty()) {
-                            list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer());
+                            list = CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer());
                         }
                         if (!list.isEmpty()) {
                             choice = CardFactoryUtil.getMostProminentColor(list);

@@ -22,11 +22,14 @@ import java.util.HashMap;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
+import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -462,7 +465,7 @@ public class AbilityFactoryDealDamage {
             return false;
         }
         // burn Planeswalkers
-        if (!human.getCardsIn(ZoneType.Battlefield).getType("Planeswalker").isEmpty()) {
+        if (Iterables.any(human.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS)) {
             return true;
         }
 
@@ -1360,7 +1363,7 @@ public class AbilityFactoryDealDamage {
         }
 
         if (targetPlayer != null) {
-            list = list.getController(targetPlayer);
+            list = CardListUtil.filterControlledBy(list, targetPlayer);
         }
 
         list = AbilityFactory.filterListByType(list, params.get("ValidCards"), sa);

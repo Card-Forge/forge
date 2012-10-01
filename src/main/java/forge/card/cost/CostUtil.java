@@ -22,6 +22,7 @@ import java.util.Random;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCost;
@@ -77,7 +78,7 @@ public class CostUtil {
                         return false;
                     }
                     CardList auras = new CardList(source.getEnchantedBy());
-                    if (!auras.getController(source.getController()).isEmpty()) {
+                    if (!CardListUtil.filterControlledBy(auras, source.getController()).isEmpty()) {
                         return false;
                     }
                     continue;

@@ -28,6 +28,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.GameActionUtil;
@@ -941,7 +942,7 @@ public class MagicStack extends MyObservable {
                     AllZone.getInputControl().setInput(target);
                 } else {
                     // AI choosing what to haunt
-                    final CardList oppCreats = creats.getController(AllZone.getHumanPlayer());
+                    final CardList oppCreats = CardListUtil.filterControlledBy(creats, AllZone.getHumanPlayer());
                     if (oppCreats.size() != 0) {
                         haunterDiesWork.setTargetCard(CardFactoryUtil.getWorstCreatureAI(oppCreats));
                     } else {

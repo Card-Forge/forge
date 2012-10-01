@@ -1021,8 +1021,7 @@ public class CardFactorySorceries {
                 }
 
                 // Actually put everything on the battlefield
-                CardList bidded = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
-                bidded = bidded.getType("Creature");
+                CardList bidded = AllZoneUtil.getCardsIn(ZoneType.Graveyard).filter(CardPredicates.Presets.CREATURES);
                 for (final Card c : bidded) {
                     if (c.isType(input[1]) || (!input[0].equals("") && c.isType(input[0]))) {
                         Singletons.getModel().getGameAction().moveToPlay(c);

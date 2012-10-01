@@ -28,6 +28,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.Command;
 import forge.GameEntity;
 import forge.Singletons;
@@ -559,8 +560,7 @@ public class AbilityFactoryGainControl {
     private boolean gainControlDrawbackAI(final SpellAbility sa) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (this.params.containsKey("AllValid")) {
-                CardList tgtCards = AllZoneUtil.getCardsIn(ZoneType.Battlefield)
-                        .getController(AllZone.getHumanPlayer());
+                CardList tgtCards = CardListUtil.filterControlledBy(AllZoneUtil.getCardsIn(ZoneType.Battlefield), AllZone.getHumanPlayer());
                 tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
                 if (tgtCards.isEmpty()) {
                     return false;

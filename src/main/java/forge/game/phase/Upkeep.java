@@ -2026,7 +2026,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 final Ability ability = new Ability(oathList.get(0), "0") {
                     @Override
                     public void resolve() {
-                        final CardList graveyardCreatures = player.getCardsIn(ZoneType.Graveyard).getType("Creature");
+                        final CardList graveyardCreatures = player.getCardsIn(ZoneType.Graveyard).filter(CardPredicates.Presets.CREATURES);
 
                         if (AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0) {
                             if (player.isHuman()) {

@@ -23,10 +23,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
@@ -368,7 +371,7 @@ public final class AbilityFactoryAnimate {
         // don't animate if the AI won't attack anyway
         if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
                 && AllZone.getComputerPlayer().getLife() < 6 && AllZone.getHumanPlayer().getLife() > 6
-                && !AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getType("Creature").isEmpty()) {
+                && Iterables.any(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
             return false;
         }
 

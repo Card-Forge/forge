@@ -34,6 +34,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
@@ -389,13 +390,11 @@ public final class AbilityFactoryChoose {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(AllZone.getHumanPlayer()
                                             .getCardsIn(ZoneType.Battlefield));
                                     if (!CardUtil.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
-                                        chosen = CardFactoryUtil.getMostProminentCreatureType(AllZoneUtil.getCardsInGame()
-                                                .getController(AllZone.getHumanPlayer()));
+                                        chosen = CardFactoryUtil.getMostProminentCreatureType(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer()));
                                     }
                                 }
                                 if (logic.equals("MostProminentInComputerDeck")) {
-                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZoneUtil.getCardsInGame()
-                                            .getController(AllZone.getComputerPlayer()));
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer()));
                                 }
                                 if (logic.equals("MostProminentInComputerGraveyard")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(AllZone.getComputerPlayer()
@@ -726,11 +725,9 @@ public final class AbilityFactoryChoose {
                     if (params.containsKey("AILogic")) {
                         final String logic = params.get("AILogic");
                         if (logic.equals("MostProminentInHumanDeck")) {
-                            chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame().getController(
-                                    AllZone.getHumanPlayer()));
+                            chosen = CardFactoryUtil.getMostProminentColor(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer()));
                         } else if (logic.equals("MostProminentInComputerDeck")) {
-                            chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame().getController(
-                                    AllZone.getComputerPlayer()));
+                            chosen = CardFactoryUtil.getMostProminentColor(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer()));
                         }
                         else if (logic.equals("MostProminentInGame")) {
                             chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame());
@@ -738,7 +735,7 @@ public final class AbilityFactoryChoose {
                         else if (logic.equals("MostProminentHumanCreatures")) {
                             CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                             if (list.isEmpty()) {
-                                list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer())
+                                list = CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer())
                                         .filter(CardPredicates.Presets.CREATURES);
                             }
                             chosen = CardFactoryUtil.getMostProminentColor(list);
@@ -1644,7 +1641,7 @@ public final class AbilityFactoryChoose {
                                         .getCardsIn(ZoneType.Library));
                             }
                         } else {
-                            CardList list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer());
+                            CardList list = CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer());
                             list = list.filter(Predicates.not(Presets.LANDS));
                             if (!list.isEmpty()) {
                                 chosen = list.get(0).getName();

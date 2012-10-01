@@ -30,6 +30,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.Counters;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -1898,8 +1899,8 @@ public class AbilityFactoryCounters {
 
             tgt.addTarget(pl);
 
-            hList = hList.getController(pl);
-            cList = cList.getController(pl);
+            hList = CardListUtil.filterControlledBy(hList, pl);
+            cList = CardListUtil.filterControlledBy(cList, pl);
         }
 
         // TODO improve X value to don't overpay when extra mana won't do
@@ -2011,7 +2012,7 @@ public class AbilityFactoryCounters {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             final Player pl = sa.getTargetPlayer();
-            cards = cards.getController(pl);
+            cards = CardListUtil.filterControlledBy(cards, pl);
         }
 
         for (final Card tgtCard : cards) {
@@ -2266,7 +2267,7 @@ public class AbilityFactoryCounters {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             final Player pl = sa.getTargetPlayer();
-            cards = cards.getController(pl);
+            cards = CardListUtil.filterControlledBy(cards, pl);
         }
 
         for (final Card tgtCard : cards) {

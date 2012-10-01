@@ -24,6 +24,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.game.player.Player;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
@@ -294,5 +295,9 @@ public class CardListUtil {
         Collections.shuffle(list, MyRandom.getRandom());
         Collections.shuffle(list, MyRandom.getRandom());
         Collections.shuffle(list, MyRandom.getRandom());
+    }
+
+    public static CardList filterControlledBy(CardList cardList, Player player) {
+        return cardList.filter(CardPredicates.isController(player));
     }
 }

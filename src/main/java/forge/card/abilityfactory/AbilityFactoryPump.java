@@ -1075,11 +1075,11 @@ public class AbilityFactoryPump {
         final Card source = sa.getSourceCard();
 
         if (af.isCurse()) {
-            pref = list.getController(AllZone.getHumanPlayer());
-            forced = list.getController(AllZone.getComputerPlayer());
+            pref = CardListUtil.filterControlledBy(list, AllZone.getHumanPlayer());
+            forced = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
         } else {
-            pref = list.getController(AllZone.getComputerPlayer());
-            forced = list.getController(AllZone.getHumanPlayer());
+            pref = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
+            forced = CardListUtil.filterControlledBy(list, AllZone.getHumanPlayer());
         }
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {

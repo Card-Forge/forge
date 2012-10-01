@@ -1354,7 +1354,7 @@ public class ComputerUtil {
                 }
                 if (c.isType("Legendary") && !c.getName().equals("Flagstones of Trokair")) {
                     final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                    if (list.containsName(c.getName())) {
+                    if (Iterables.any(list, CardPredicates.nameEquals(c.getName()))) {
                         return false;
                     }
                 }
@@ -1366,7 +1366,7 @@ public class ComputerUtil {
                 final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
                 CardList lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 lands.addAll(hand);
-                lands = lands.getType("Land");
+                lands = lands.filter(CardPredicates.Presets.LANDS);
                 int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
                 for (final SpellAbility sa : spellAbilities) {
                     if (sa.isCycling()) {

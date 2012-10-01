@@ -22,10 +22,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardPredicates;
 import forge.Constant;
 import forge.Counters;
 import forge.Singletons;
@@ -995,9 +1000,9 @@ public class AbilityFactoryMana {
      */
     private static boolean hasUrzaLands(final Player p) {
         final CardList landsControlled = p.getCardsIn(ZoneType.Battlefield);
-
-        return (landsControlled.containsName("Urza's Mine") && landsControlled.containsName("Urza's Tower") && landsControlled
-                .containsName("Urza's Power Plant"));
+        return Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Mine")) &&  
+                Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Tower")) && 
+                Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Power Plant"));
     }
 
     // ****************************************

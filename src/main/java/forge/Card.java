@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.collect.Iterables;
 
 import forge.card.CardCharacteristics;
 import forge.card.CardManaCost;
@@ -8275,7 +8276,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         final CardList auras = new CardList(this.getEnchantedBy());
 
-        if (auras.containsName("Treacherous Link")) {
+        if (Iterables.any(auras, CardPredicates.nameEquals("Treacherous Link"))) {
             this.getController().addDamage(damageIn, source);
             return 0;
         }

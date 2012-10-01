@@ -419,7 +419,7 @@ public class AbilityFactoryRegenerate {
         // filter AIs battlefield by what I can target
         CardList targetables = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
-        final CardList compTargetables = targetables.getController(AllZone.getComputerPlayer());
+        final CardList compTargetables = CardListUtil.filterControlledBy(targetables, AllZone.getComputerPlayer());
 
         if (targetables.size() == 0) {
             return false;

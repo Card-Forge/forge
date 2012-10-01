@@ -35,6 +35,7 @@ import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
+import forge.Constant;
 import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
@@ -1356,34 +1357,15 @@ public final class AbilityFactoryChangeZone {
      */
     private static Card basicManaFixing(final CardList list) { // Search for a
                                                                // Basic Land
-        return AbilityFactoryChangeZone.basicManaFixing(list, "Plains, Island, Swamp, Mountain, Forest");
-    }
 
-    /**
-     * <p>
-     * basicManaFixing.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.Card} object.
-     */
-    private static Card basicManaFixing(CardList list, final String type) { // type
-                                                                            // =
-                                                                            // basic
-                                                                            // land
-                                                                            // types
         final CardList combined = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         combined.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand));
 
-        final String[] names = type.split(",");
         final ArrayList<String> basics = new ArrayList<String>();
 
         // what types can I go get?
-        for (final String name : names) {
-            if (list.getType(name).size() != 0) {
+        for (final String name : Constant.Color.BASIC_LANDS) {
+            if (!list.getType(name).isEmpty()) {
                 basics.add(name);
             }
         }
@@ -1402,11 +1384,12 @@ public final class AbilityFactoryChangeZone {
             }
         }
 
+        List<Card> result = list;
         if (minType != null) {
-            list = list.getType(minType);
+            result = list.getType(minType);
         }
 
-        return list.get(0);
+        return result.get(0);
     }
 
     /**
@@ -1665,7 +1648,7 @@ public final class AbilityFactoryChangeZone {
         if (origin.equals(ZoneType.Battlefield)) {
             // filter out untargetables
             list = list.getTargetableCards(sa);
-            CardList aiPermanents = list.getController(AllZone.getComputerPlayer());
+            CardList aiPermanents = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
 
             // Don't blink cards that will die.
             aiPermanents = aiPermanents.filter(new Predicate<Card>() {
@@ -1736,7 +1719,7 @@ public final class AbilityFactoryChangeZone {
         } else if (origin.equals(ZoneType.Graveyard)) {
             if (destination.equals(ZoneType.Hand)) {
                 // only retrieve cards from computer graveyard
-                list = list.getController(AllZone.getComputerPlayer());
+                list = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
                 System.out.println("changeZone:" + list);
             }
 
@@ -1761,7 +1744,7 @@ public final class AbilityFactoryChangeZone {
                     && AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()).isEmpty()) {
                 return false;
             }
-            list = list.getController(AllZone.getHumanPlayer());
+            list = CardListUtil.filterControlledBy(list, AllZone.getHumanPlayer());
             list = list.filter(new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {

@@ -141,7 +141,7 @@ public class CardFactoryUtil {
 
             // Add all cost of all auras with the same controller
             final CardList auras = new CardList(card.getEnchantedBy());
-            auras.getController(card.getController());
+            CardListUtil.filterControlledBy(auras, card.getController());
             curCMC += CardListUtil.sumCMC(auras) + auras.size();
 
             if (curCMC >= bigCMC) {
@@ -4151,7 +4151,7 @@ public class CardFactoryUtil {
                         AllZone.getInputControl().setInput(target);
                     } else {
                         // AI choosing what to haunt
-                        final CardList oppCreats = creats.getController(AllZone.getHumanPlayer());
+                        final CardList oppCreats = CardListUtil.filterControlledBy(creats, AllZone.getHumanPlayer());
                         if (oppCreats.size() != 0) {
                             haunterDiesWork.setTargetCard(CardFactoryUtil.getWorstCreatureAI(oppCreats));
                         } else {

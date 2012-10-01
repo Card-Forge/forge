@@ -59,15 +59,6 @@ public class CardList extends ArrayList<Card> {
         return new CardList(Iterables.filter(this, filt));
     }
 
-    public final boolean containsName(final String name) {
-        return Iterables.any(this, CardPredicates.nameEquals(name));
-    }
-
-    public final CardList getController(final Player player) {
-        return this.filter(CardPredicates.isController(player));
-    }
-
-
     // cardType is like "Land" or "Goblin", returns a new CardList that is a
     // subset of current CardList
     public final CardList getType(final String cardType) {

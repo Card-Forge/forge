@@ -399,7 +399,7 @@ public class AbilityFactoryAttach {
         }
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
-        final CardList prefList = list.getController(prefPlayer);
+        final CardList prefList = CardListUtil.filterControlledBy(list, prefPlayer);
 
         // If there are no preferred cards, and not mandatory bail out
         if (prefList.size() == 0) {

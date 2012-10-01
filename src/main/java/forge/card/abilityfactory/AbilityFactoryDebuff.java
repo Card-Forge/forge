@@ -29,6 +29,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.Command;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -490,8 +491,8 @@ public final class AbilityFactoryDebuff {
             list.remove(c);
         }
 
-        final CardList pref = list.getController(AllZone.getHumanPlayer());
-        final CardList forced = list.getController(AllZone.getComputerPlayer());
+        final CardList pref = CardListUtil.filterControlledBy(list, AllZone.getHumanPlayer());
+        final CardList forced = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
         final Card source = sa.getSourceCard();
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {

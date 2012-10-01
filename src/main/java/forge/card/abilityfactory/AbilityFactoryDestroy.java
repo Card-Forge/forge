@@ -28,6 +28,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Counters;
 import forge.Singletons;
@@ -318,7 +319,7 @@ public class AbilityFactoryDestroy {
             if (params.containsKey("Defined")) {
                 list = new CardList(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
                 if (list.isEmpty()
-                        || !list.getController(AllZone.getComputerPlayer()).isEmpty()
+                        || !CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer()).isEmpty()
                         || list.getNotKeyword("Indestructible").isEmpty()) {
                     return false;
                 }
@@ -387,7 +388,7 @@ public class AbilityFactoryDestroy {
             tgt.resetTargets();
 
             CardList preferred = list.getNotKeyword("Indestructible");
-            preferred = preferred.getController(AllZone.getHumanPlayer());
+            preferred = CardListUtil.filterControlledBy(preferred, AllZone.getHumanPlayer());
 
             // If NoRegen is not set, filter out creatures that have a
             // regeneration shield
@@ -1040,7 +1041,7 @@ public class AbilityFactoryDestroy {
         CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         if (targetPlayer != null) {
-            list = list.getController(targetPlayer);
+            list = CardListUtil.filterControlledBy(list, targetPlayer);
         }
 
         list = AbilityFactory.filterListByType(list, valid, sa);
