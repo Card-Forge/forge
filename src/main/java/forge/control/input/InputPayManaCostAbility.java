@@ -161,7 +161,11 @@ public class InputPayManaCostAbility extends InputMana {
                 this.phyLifeToLose += 2;
             }
 
-            this.showMessage();
+            if (this.manaCost.isPaid()) {
+                this.done();
+            } else {
+                this.showMessage();
+            }
         }
     }
 
@@ -229,9 +233,6 @@ public class InputPayManaCostAbility extends InputMana {
         }
 
         CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
-        if (this.manaCost.isPaid()) {
-            this.done();
-        }
     }
 
     /* (non-Javadoc)
