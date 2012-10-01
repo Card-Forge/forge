@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Enchantment Aura
 Text:no text
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature | AITgts$ Card.powerGE1 | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, you may return target creature card from your graveyard to your hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl
 SVar:Rarity:Common

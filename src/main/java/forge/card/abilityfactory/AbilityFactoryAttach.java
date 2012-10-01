@@ -597,7 +597,7 @@ public class AbilityFactoryAttach {
                 || keyword.equals("Intimidate") || keyword.equals("Shadow")
                 || keyword.equals("Flying") || keyword.equals("Horsemanship")
                 || keyword.endsWith("walk"));
-        // give evasive keywords to creatures that can or do attack
+        // give evasive keywords to creatures that can attack and deal damage
         if (evasive) {
             if (card.getNetCombatDamage() <= 0
                     || !CombatUtil.canAttackNextTurn(card)
@@ -662,7 +662,7 @@ public class AbilityFactoryAttach {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME can block an additional creature.")) {
-            if (!CombatUtil.canBlock(card, true)) {
+            if (!CombatUtil.canBlock(card, true) || card.hasKeyword("CARDNAME can block any number of creatures.")) {
                 return false;
             }
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
