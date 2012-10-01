@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import net.slightlymagic.braids.util.testng.BraidsAssertFunctions;
-import net.slightlymagic.braids.util.testng.ClumsyRunnable;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -104,55 +101,7 @@ public class BuildInfoTest {
         }
     }
 
-    /**
-     * Test BuildInfo with two mock forge jars placed in the class path; this is
-     * an error condition.
-     * 
-     * @throws IOException
-     *             indirectly
-     */
-    @Test(enabled = false)
-    public final void test_BuildInfo_twoJarsInCP() throws IOException {
-        // by
-        // Braids
-        // on
-        // 8/12/11
-        // 10:26
-        // AM
-        final String origClassPath = System.getProperty(BuildInfoTest.JAVA_CLASS_PATH);
-        File jarAsFile1 = null;
-        File jarAsFile2 = null;
-
-        try {
-            jarAsFile1 = this.makeTmpJarWithManifest("forge-BuildInfoTest-1-", "-with-dependencies.jar", new String[] {
-                    BuildInfoTest.MF_ATTR_NAME_VERSION, "1.1.1", BuildInfoTest.MF_ATTR_NAME_BUILD, "1111" });
-
-            jarAsFile2 = this.makeTmpJarWithManifest("forge-BuildInfoTest-2-", "-with-dependencies.jar", new String[] {
-                    BuildInfoTest.MF_ATTR_NAME_VERSION, "2.2.2", BuildInfoTest.MF_ATTR_NAME_BUILD, "2222" });
-
-            final String pathSep = System.getProperty("path.separator");
-
-            System.setProperty(BuildInfoTest.JAVA_CLASS_PATH,
-                    jarAsFile1.getAbsolutePath() + pathSep + jarAsFile2.getAbsolutePath() + pathSep + origClassPath);
-
-            final BuildInfo info = new BuildInfo();
-
-            BraidsAssertFunctions.assertThrowsException(MultipleForgeJarsFoundError.class, new ClumsyRunnable() {
-                @Override
-                public void run() throws Exception {
-                    // 8/12/11 10:29 AM
-                    info.getBuildID();
-                }
-            });
-
-        } finally {
-            Assert.assertTrue(jarAsFile1.delete(), "attempting to delete 1st temporary jar");
-            Assert.assertTrue(jarAsFile2.delete(), "attempting to delete 2nd temporary jar");
-            System.setProperty(BuildInfoTest.JAVA_CLASS_PATH, origClassPath);
-        }
-    }
-
-    /**
+     /**
      * Helper method to create jar files at specific locations with specific
      * name-value pairs in their manifests.
      * 

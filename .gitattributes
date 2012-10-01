@@ -12967,7 +12967,3 @@ src/test/java/forge/gui/game/CardDetailPanelTest.java svneol=native#text/plain
 src/test/java/forge/item/DeckHintsTest.java -text
 src/test/java/forge/model/BuildInfoTest.java -text
 src/test/java/forge/model/FModelTest.java -text
-src/test/java/net/slightlymagic/braids/util/testng/BraidsAssertFunctions.java svneol=native#text/plain
-src/test/java/net/slightlymagic/braids/util/testng/ClumsyRunnable.java svneol=native#text/plain
-src/test/java/net/slightlymagic/braids/util/testng/LICENSE.txt svneol=native#text/plain
-src/test/java/net/slightlymagic/braids/util/testng/package-info.java -text
