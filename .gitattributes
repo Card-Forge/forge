@@ -1860,6 +1860,7 @@ res/cardsfolder/c/corpse_harvester.txt svneol=native#text/plain
 res/cardsfolder/c/corpse_lunge.txt -text
 res/cardsfolder/c/corpse_traders.txt -text
 res/cardsfolder/c/corpsehatch.txt svneol=native#text/plain
+res/cardsfolder/c/corpsejack_menace.txt -text
 res/cardsfolder/c/corpulent_corpse.txt svneol=native#text/plain
 res/cardsfolder/c/corrosive_gale.txt svneol=native#text/plain
 res/cardsfolder/c/corrosive_mentor.txt svneol=native#text/plain

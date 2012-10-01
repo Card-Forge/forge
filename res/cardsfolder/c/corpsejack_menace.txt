@@ -1,0 +1,9 @@
+Name:Corpsejack Menace
+ManaCost:2 B G
+Types:Creature Fungus
+Text:If one or more +1/+1 counters would be placed on a creature you control, twice that many +1/+1 counters are placed on it instead.
+PT:4/4
+SVar:Picture:http://www.wizards.com/global/images/magic/general/corpsejack_menace.jpg
+SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/152.jpg
+Oracle:If one or more +1/+1 counters would be placed on a creature you control, twice that many +1/+1 counters are placed on it instead.
+End

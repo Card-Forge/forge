@@ -332,9 +332,12 @@ public abstract class AllZoneUtil {
      *            Doubling Season
      * @return a int.
      */
-    public static int getDoublingSeasonMagnitude(final Player player) {
-        final int doublingSeasons = player.getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
-        return (int) Math.pow(2, doublingSeasons); // pow(a,0) = 1; pow(a,1) = a
+    public static int getCounterDoublersMagnitude(final Player player, Counters type) {
+        int counterDoublers = player.getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
+        if(type == Counters.P1P1) {
+            counterDoublers += player.getCardsIn(ZoneType.Battlefield, "Corpsejack Menace").size();
+        }
+        return (int) Math.pow(2, counterDoublers); // pow(a,0) = 1; pow(a,1) = a
                                                    // ... no worries about size
                                                    // = 0
     }

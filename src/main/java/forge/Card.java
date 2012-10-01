@@ -1285,7 +1285,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!this.canHaveCountersPlacedOnIt(counterName)) {
             return;
         }
-        final int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(this.getController());
+        final int multiplier = AllZoneUtil.getCounterDoublersMagnitude(this.getController(),counterName);
         if (this.counters.containsKey(counterName)) {
             final Integer aux = this.counters.get(counterName) + (multiplier * n);
             this.counters.put(counterName, aux);
