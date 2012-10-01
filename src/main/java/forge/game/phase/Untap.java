@@ -144,18 +144,18 @@ public class Untap extends Phase implements java.io.Serializable {
                 if (c.isTapped()) {
                     if (c.getController().isHuman()) {
                         String prompt = "Untap " + c.getName() + "?";
-                        boolean defaultNo = false;
+                        boolean defaultChoice = true;
                         if (c.getGainControlTargets().size() > 0) {
                             final ArrayList<Card> targets = c.getGainControlTargets();
                             prompt += "\r\n" + c + " is controlling: ";
                             for (final Card target : targets) {
                                 prompt += target;
                                 if (AllZoneUtil.isCardInPlay(target)) {
-                                    defaultNo |= true;
+                                    defaultChoice = false;
                                 }
                             }
                         }
-                        if (GameActionUtil.showYesNoDialog(c, prompt, defaultNo)) {
+                        if (GameActionUtil.showYesNoDialog(c, prompt, defaultChoice)) {
                             c.untap();
                         }
                     } else { // computer

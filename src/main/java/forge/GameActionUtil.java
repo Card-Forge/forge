@@ -562,7 +562,7 @@ public final class GameActionUtil {
      * @return a boolean.
      */
     public static boolean showYesNoDialog(final Card c, final String question) {
-        return GameActionUtil.showYesNoDialog(c, question, false);
+        return GameActionUtil.showYesNoDialog(c, question, true);
     }
 
     /**
@@ -578,7 +578,7 @@ public final class GameActionUtil {
      *            true if the default option should be "No", false otherwise
      * @return a boolean.
      */
-    public static boolean showYesNoDialog(final Card c, String question, final boolean defaultNo) {
+    public static boolean showYesNoDialog(final Card c, String question, final boolean defaultChoice) {
         CMatchUI.SINGLETON_INSTANCE.setCard(c);
         final StringBuilder title = new StringBuilder();
         title.append(c.getName()).append(" - Ability");
@@ -588,7 +588,7 @@ public final class GameActionUtil {
         }
 
         int answer;
-        if (defaultNo) {
+        if (!defaultChoice) {
             final Object[] options = { "Yes", "No" };
             answer = JOptionPane.showOptionDialog(null, question, title.toString(), JOptionPane.YES_NO_OPTION,
                     JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
