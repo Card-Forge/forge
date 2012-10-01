@@ -1082,7 +1082,7 @@ public final class AbilityFactoryChangeZone {
                 }
             }
         }
-        if (params.containsKey("Reveal")) {
+        if (params.containsKey("Reveal") && !reveal.isEmpty()) {
             GuiUtils.chooseOne(card + " - Revealed card: ", reveal.toArray());
         }
 
