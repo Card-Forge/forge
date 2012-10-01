@@ -427,7 +427,7 @@ public class CostExile extends CostPartWithList {
                 }
 
                 for (int i = 0; i < nNeeded; i++) {
-                    if (this.saList.size() == 0) {
+                    if (this.saList.isEmpty()) {
                         this.cancel();
                     }
 

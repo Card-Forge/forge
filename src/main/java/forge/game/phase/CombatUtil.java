@@ -170,13 +170,11 @@ public class CombatUtil {
     
     public static boolean canBlockMoreCreatures(final Card blocker, final CardList blockedBy) {
         // TODO(sol) expand this for the additional blocking keyword
-        int size = blockedBy.size();
-        
-        if (size == 0 || blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
+        if (blockedBy.isEmpty() || blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
             return true;
         }
         
-        return blocker.getKeywordAmount("CARDNAME can block an additional creature.") >= size;
+        return blocker.getKeywordAmount("CARDNAME can block an additional creature.") >= blockedBy.size();
     }
 
     // can the attacker be blocked at all?

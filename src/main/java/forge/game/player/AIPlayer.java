@@ -30,6 +30,7 @@ import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 /**
@@ -181,13 +182,9 @@ public class AIPlayer extends Player {
         final CardList tHand = hand.getType(uType);
 
         if (tHand.size() > 0) {
-            CardListUtil.sortCMC(tHand);
-            tHand.reverse();
-            tHand.get(0).getController().discard(tHand.get(0), sa); // this got
-                                                                    // changed
-                                                                    // to
-                                                                    // doDiscard
-                                                                    // basically
+            Card toDiscard = Aggregates.itemWithMin(tHand, CardPredicates.Accessors.fnGetCmc);
+            toDiscard.getController().discard(toDiscard, sa); // this got changed
+                                                              // to doDiscard basically
             return;
         }
         AllZone.getComputerPlayer().discard(num, sa, false);

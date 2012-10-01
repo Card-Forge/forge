@@ -164,7 +164,7 @@ public class CardListUtil {
      */
     public static void sortNonFlyingFirst(final CardList list) {
         CardListUtil.sortFlying(list);
-        list.reverse();
+        Collections.reverse(list);
     } // sortNonFlyingFirst
 
     /**

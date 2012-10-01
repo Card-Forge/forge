@@ -19,6 +19,7 @@ package forge.game.player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -1115,7 +1116,7 @@ public class ComputerUtil {
         sortedManaSources.addAll(anyColorManaSources);
         //use better creatures later
         CardListUtil.sortByEvaluateCreature(otherManaSources);
-        otherManaSources.reverse();
+        Collections.reverse(otherManaSources);
         sortedManaSources.addAll(otherManaSources);
         return sortedManaSources;
     } // getAvailableMana()
@@ -2030,7 +2031,7 @@ public class ComputerUtil {
         }
 
         CardListUtil.sortCMC(list);
-        list.reverse();
+        Collections.reverse(list);
 
         for (int i = 0; i < max; i++) {
             Card c = null;

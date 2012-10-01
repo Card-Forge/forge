@@ -19,6 +19,7 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -481,7 +482,7 @@ public final class AbilityFactoryReveal {
                 }
 
                 if (!noMove) {
-                    CardList movedCards = new CardList();
+                    List<Card> movedCards = new CardList();
                     CardList andOrCards = new CardList();
                     for (final Card c : top) {
                         rest.add(c);
@@ -581,7 +582,7 @@ public final class AbilityFactoryReveal {
                     if (params.containsKey("ForgetOtherRemembered")) {
                         host.clearRemembered();
                     }
-                    movedCards.reverse();
+                    Collections.reverse(movedCards);
                     for (Card c : movedCards) {
                         if (c.equals(dummy)) {
                             continue;

@@ -60,15 +60,6 @@ public class CardList extends ArrayList<Card> {
     }
 
     /**
-     * <p>
-     * reverse.
-     * </p>return result;a
-     */
-    public final void reverse() {
-        Collections.reverse(this);
-    }
-
-    /**
      * Create a new list of cards by applying a filter to this one.
      * 
      * @param filt

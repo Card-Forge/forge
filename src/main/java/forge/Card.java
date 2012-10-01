@@ -6649,15 +6649,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("TopGraveyardCreature")) {
-            CardList list = this.getOwner().getCardsIn(ZoneType.Graveyard);
-            list = list.getType("Creature");
-            list.reverse();
+            List<Card> list = this.getOwner().getCardsIn(ZoneType.Graveyard).filter(CardPredicates.Presets.CREATURES);
+            Collections.reverse(list);
             if (list.isEmpty() || !this.equals(list.get(0))) {
                 return false;
             }
         } else if (property.startsWith("TopGraveyard")) {
             final CardList list = this.getOwner().getCardsIn(ZoneType.Graveyard);
-            list.reverse();
+            Collections.reverse(list);
             if (list.isEmpty() || !this.equals(list.get(0))) {
                 return false;
             }
