@@ -41,7 +41,7 @@ import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 
 
 /**
@@ -126,7 +126,7 @@ class CardFactoryAuras {
                 public void resolve() {
                     // Only query player, AI will have decided already.
                     if (card.getController().isHuman()) {
-                        newType[0] = GuiUtils.chooseOne("Select land type.", CardUtil.getLandTypes());
+                        newType[0] = GuiChoose.one("Select land type.", CardUtil.getLandTypes());
                     }
                     Singletons.getModel().getGameAction().moveToPlay(card);
 

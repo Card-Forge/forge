@@ -46,7 +46,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
 
@@ -2244,7 +2244,7 @@ public class AbilityFactoryPermanentState {
             if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 if (sa.getActivatingPlayer().isHuman()) {
                     final String[] tapOrUntap = new String[] { "Tap", "Untap" };
-                    final Object z = GuiUtils.chooseOneOrNone("Tap or Untap " + tgtC + "?", tapOrUntap);
+                    final Object z = GuiChoose.oneOrNone("Tap or Untap " + tgtC + "?", tapOrUntap);
                     if (null == z) {
                         continue;
                     }

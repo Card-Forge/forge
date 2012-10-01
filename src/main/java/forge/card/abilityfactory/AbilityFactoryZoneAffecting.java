@@ -45,7 +45,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
 /**
@@ -623,7 +623,7 @@ public class AbilityFactoryZoneAffecting {
                 } else {
                     final CardList drawn = p.drawCards(numCards);
                     if (params.containsKey("Reveal")) {
-                        GuiUtils.chooseOne("Revealing drawn cards", drawn);
+                        GuiChoose.one("Revealing drawn cards", drawn);
                     }
                     if (params.containsKey("RememberDrawn")) {
                         for (final Card c : drawn) {
@@ -1345,7 +1345,7 @@ public class AbilityFactoryZoneAffecting {
                     if (p.isHuman()) {
                         // "reveal to computer" for information gathering
                     } else {
-                        GuiUtils.chooseOneOrNone("Revealed computer hand", dPHand);
+                        GuiChoose.oneOrNone("Revealed computer hand", dPHand);
                     }
 
                     String valid = params.get("DiscardValid");
@@ -1394,7 +1394,7 @@ public class AbilityFactoryZoneAffecting {
                                 max = Math.min(max, numCards);
                                 CardList list = ComputerUtil.discardNumTypeAI(max, dValid, sa);
                                 if (mode.startsWith("Reveal")) {
-                                    GuiUtils.chooseOneOrNone("Computer has chosen", list);
+                                    GuiChoose.oneOrNone("Computer has chosen", list);
                                 }
                                 discarded.addAll(list);
                                 for (Card card : list) {
@@ -1427,7 +1427,7 @@ public class AbilityFactoryZoneAffecting {
                                     if (mode.startsWith("Reveal")) {
                                         final CardList dCs = new CardList();
                                         dCs.add(dC);
-                                        GuiUtils.chooseOneOrNone("Computer has chosen", dCs);
+                                        GuiChoose.oneOrNone("Computer has chosen", dCs);
                                     }
                                     discarded.add(dC);
                                     p.discard(dC, sa);
@@ -1436,16 +1436,16 @@ public class AbilityFactoryZoneAffecting {
                         } else {
                             // human
                             if (mode.startsWith("Reveal")) {
-                                GuiUtils.chooseOneOrNone("Revealed " + p + "  hand", dPHand);
+                                GuiChoose.oneOrNone("Revealed " + p + "  hand", dPHand);
                             }
 
                             for (int i = 0; i < numCards; i++) {
                                 if (dPChHand.size() > 0) {
                                     Card dC = null;
                                     if (params.containsKey("Optional")) {
-                                        dC = GuiUtils.chooseOneOrNone("Choose a card to be discarded", dPChHand);
+                                        dC = GuiChoose.oneOrNone("Choose a card to be discarded", dPChHand);
                                     } else {
-                                        dC = GuiUtils.chooseOne("Choose a card to be discarded", dPChHand);
+                                        dC = GuiChoose.one("Choose a card to be discarded", dPChHand);
                                     } if (dC != null) {
                                         dPChHand.remove(dC);
                                         discarded.add(dC);

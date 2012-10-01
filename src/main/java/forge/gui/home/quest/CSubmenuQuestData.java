@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
-import forge.gui.GuiUtils;
 import forge.gui.framework.ICDoc;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -151,7 +150,7 @@ public enum CSubmenuQuestData implements ICDoc {
 
         if (o == null) { return; }
 
-        final String questName = GuiUtils.cleanString(o.toString());
+        final String questName = SSubmenuQuestUtil.cleanString(o.toString());
 
         if (getAllQuests().get(questName) != null || questName.equals("")) {
             JOptionPane.showMessageDialog(null, "Please pick another quest name, a quest already has that name.");

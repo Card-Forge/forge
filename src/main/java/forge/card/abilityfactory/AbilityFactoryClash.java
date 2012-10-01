@@ -37,7 +37,7 @@ import forge.card.cost.Cost;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 
 /**
  * <p>
@@ -766,7 +766,7 @@ public final class AbilityFactoryClash {
 
                 // first, separate the cards into piles
                 if (separator.isHuman()) {
-                    final List<Object> firstPile = GuiUtils.getOrderChoices("Place into two piles", "Pile 1", -1, pool.toArray(), null);
+                    final List<Object> firstPile = GuiChoose.getOrderChoices("Place into two piles", "Pile 1", -1, pool.toArray(), null);
                     for (final Object o : firstPile) {
                         pile1.add((Card)o);
                     }
@@ -886,7 +886,7 @@ public final class AbilityFactoryClash {
 
                 // make sure Pile 1 or Pile 2 is clicked on
                 while (true) {
-                    final Object o = GuiUtils.chooseOne("Choose a pile", disp);
+                    final Object o = GuiChoose.one("Choose a pile", disp);
                     final Card c = (Card) o;
                     String name = c.getName();
                     

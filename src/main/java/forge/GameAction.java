@@ -58,7 +58,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneComesIntoPlay;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.match.ViewWinLose;
 
 
@@ -1334,7 +1334,7 @@ public class GameAction {
                     crd = list.get(0);
                 } else {
                     if (c.getController().isHuman()) {
-                        crd = GuiUtils.chooseOneOrNone("Select totem armor to destroy", list);
+                        crd = GuiChoose.oneOrNone("Select totem armor to destroy", list);
                     } else {
                         crd = list.get(0);
                     }
@@ -1517,7 +1517,7 @@ public class GameAction {
                     crd = list.get(0);
                 } else {
                     if (c.getController().isHuman()) {
-                        crd = GuiUtils.chooseOneOrNone("Select totem armor to destroy", list);
+                        crd = GuiChoose.oneOrNone("Select totem armor to destroy", list);
                     } else {
                         crd = list.get(0);
                     }
@@ -1581,7 +1581,7 @@ public class GameAction {
         } else if (choices.size() == 1) {
             choice = choices.get(0);
         } else {
-            choice = (String) GuiUtils.chooseOneOrNone("Choose", choices);
+            choice = (String) GuiChoose.oneOrNone("Choose", choices);
         }
 
         if (choice == null) {
@@ -1619,7 +1619,7 @@ public class GameAction {
         } else if (choices.size() == 1) {
             sa = choices.get(0);
         } else {
-            sa = (SpellAbility) GuiUtils.chooseOneOrNone("Choose", choices);
+            sa = (SpellAbility) GuiChoose.oneOrNone("Choose", choices);
         }
 
         if (sa == null) {
@@ -1708,12 +1708,12 @@ public class GameAction {
                         cntChoice[i] = Integer.valueOf(i);
                     }
                     
-                    final Integer chosenAmount = (Integer) GuiUtils.chooseOne("Exile how many cards?", cntChoice);
+                    final Integer chosenAmount = (Integer) GuiChoose.one("Exile how many cards?", cntChoice);
                     System.out.println("Delve for " + chosenAmount);
                     final CardList choices = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
                     final CardList chosen = new CardList();
                     for (int i = 0; i < chosenAmount; i++) {
-                        final Card nowChosen = GuiUtils.chooseOneOrNone("Exile which card?", choices);
+                        final Card nowChosen = GuiChoose.oneOrNone("Exile which card?", choices);
 
                         if (nowChosen == null) {
                             // User canceled,abort delving.
@@ -1790,7 +1790,7 @@ public class GameAction {
                     ManaCost newCost = new ManaCost(originalCost.toString());
                     Object tapForConvoke = null;
                     if (sa.getActivatingPlayer().isHuman()) {
-                        tapForConvoke = GuiUtils.chooseOneOrNone("Tap for Convoke? " + newCost.toString(),
+                        tapForConvoke = GuiChoose.oneOrNone("Tap for Convoke? " + newCost.toString(),
                                 choices);
                     } else {
                         // TODO: AI to choose a creature to tap would go here
@@ -1805,7 +1805,7 @@ public class GameAction {
                             String chosenColor = usableColors.get(0);
                             if (usableColors.size() > 1) {
                                 if (sa.getActivatingPlayer().isHuman()) {
-                                    chosenColor = (String) GuiUtils.chooseOne("Convoke for which color?",
+                                    chosenColor = (String) GuiChoose.one("Convoke for which color?",
                                             usableColors);
                                 } else {
                                     // TODO: AI for choosing which color to
@@ -1833,7 +1833,7 @@ public class GameAction {
                         }
 
                         if (sa.getActivatingPlayer().isHuman()) {
-                            tapForConvoke = GuiUtils.chooseOneOrNone("Tap for Convoke? " + newCost.toString(), choices);
+                            tapForConvoke = GuiChoose.oneOrNone("Tap for Convoke? " + newCost.toString(), choices);
                         } else {
                             // TODO: AI to choose a creature to tap would go
                             // here
@@ -1929,7 +1929,7 @@ public class GameAction {
         } else if (choices.size() == 1) {
             choice = choices.get(0);
         } else {
-            choice = (String) GuiUtils.chooseOneOrNone("Choose", choices);
+            choice = (String) GuiChoose.oneOrNone("Choose", choices);
         }
         final SpellAbility ability = map.get(choice);
 

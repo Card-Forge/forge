@@ -32,7 +32,7 @@ import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 
 import forge.view.ButtonUtil;
@@ -509,7 +509,7 @@ public class TargetSelection {
             choicesWithDone.add(dummy);
         }
 
-        final Card check = GuiUtils.chooseOneOrNone(message, choicesWithDone);
+        final Card check = GuiChoose.oneOrNone(message, choicesWithDone);
         if (check != null) {
             final Card c = (Card) check;
             if (!c.equals(divBattlefield) && !c.equals(divExile) && !c.equals(divGrave)
@@ -562,7 +562,7 @@ public class TargetSelection {
         if (choices.length == 0) {
             select.setCancel(true);
         } else {
-            final String madeChoice = GuiUtils.chooseOneOrNone(message, choices);
+            final String madeChoice = GuiChoose.oneOrNone(message, choices);
 
             if (madeChoice != null) {
                 if (madeChoice.equals(doneDummy)) {

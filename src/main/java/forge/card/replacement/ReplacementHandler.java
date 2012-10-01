@@ -31,7 +31,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 
 /**
  * TODO: Write javadoc for this type.
@@ -127,7 +127,7 @@ public class ReplacementHandler {
 
         if (possibleReplacers.size() > 1) {
             if (decider.isHuman()) {
-                chosenRE = GuiUtils.chooseOne("Choose which replacement effect to apply.",
+                chosenRE = GuiChoose.one("Choose which replacement effect to apply.",
                         possibleReplacers);
             } else {
                 // AI logic for choosing which replacement effect to apply

@@ -41,7 +41,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
 
@@ -130,7 +130,7 @@ public class CardFactoryInstants {
                     final CardList libraryList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
                     final CardList selectedCards = new CardList();
 
-                    Object o = GuiUtils.chooseOneOrNone("Select first card", libraryList);
+                    Object o = GuiChoose.oneOrNone("Select first card", libraryList);
                     if (o != null) {
                         final Card c1 = (Card) o;
                         libraryList.remove(c1);
@@ -138,7 +138,7 @@ public class CardFactoryInstants {
                     } else {
                         return;
                     }
-                    o = GuiUtils.chooseOneOrNone("Select second card", libraryList);
+                    o = GuiChoose.oneOrNone("Select second card", libraryList);
                     if (o != null) {
                         final Card c2 = (Card) o;
                         libraryList.remove(c2);
@@ -146,7 +146,7 @@ public class CardFactoryInstants {
                     } else {
                         return;
                     }
-                    o = GuiUtils.chooseOneOrNone("Select third card", libraryList);
+                    o = GuiChoose.oneOrNone("Select third card", libraryList);
                     if (o != null) {
                         final Card c3 = (Card) o;
                         libraryList.remove(c3);
@@ -194,7 +194,7 @@ public class CardFactoryInstants {
 
                     // NOTE: Using getChoiceOptional() results in a null error
                     // when you click on Cancel.
-                    final Card choice = GuiUtils.chooseOne("Select card to give to computer", selectedCards);
+                    final Card choice = GuiChoose.one("Select card to give to computer", selectedCards);
 
                     selectedCards.remove(choice);
                     Singletons.getModel().getGameAction().moveToHand(choice);
@@ -238,7 +238,7 @@ public class CardFactoryInstants {
 
                     if (player.isHuman()) {
                         for (int i = 0; i < x; i++) {
-                            final Object o = GuiUtils.chooseOne("Remove from game", graveList);
+                            final Object o = GuiChoose.one("Remove from game", graveList);
                             if (o == null) {
                                 break;
                             }
@@ -390,7 +390,7 @@ public class CardFactoryInstants {
                     }
 
                     for (int i = 0; (i < 3) && !choices.isEmpty(); i++) {
-                        final Object o = GuiUtils.chooseOne(this.prompt[i], choices);
+                        final Object o = GuiChoose.one(this.prompt[i], choices);
                         final Card c1 = (Card) o;
                         if (i == 0) {
                             Singletons.getModel().getGameAction().moveToHand(c1);
@@ -477,12 +477,12 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     final String[] choices = new String[] { "Artifact", "Creature", "Land" };
-                    final Object o = GuiUtils.chooseOne("Select permanent type", choices);
+                    final Object o = GuiChoose.one("Select permanent type", choices);
                     final String cardType = (String) o;
                     final CardList list = this.getTargetPlayer().getCardsIn(ZoneType.Battlefield).getType(cardType);
 
                     final String[] tapOrUntap = new String[] { "Tap", "Untap" };
-                    final Object z = GuiUtils.chooseOne("Tap or Untap?", tapOrUntap);
+                    final Object z = GuiChoose.one("Tap or Untap?", tapOrUntap);
                     final boolean tap = (z.equals("Tap")) ? true : false;
 
                     for (final Card c : list) {

@@ -52,7 +52,7 @@ import forge.game.GameLossReason;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
 
@@ -155,7 +155,7 @@ public final class GameActionUtil {
                             }
 
                         } // while
-                        GuiUtils.chooseOneOrNone("Revealed cards:", revealed);
+                        GuiChoose.oneOrNone("Revealed cards:", revealed);
 
                         if (cascadedCard != null) {
 
@@ -287,7 +287,7 @@ public final class GameActionUtil {
                                     rippledCards[i] = crd;
                                 }
                             } // for
-                            GuiUtils.chooseOneOrNone("Revealed cards:", revealed);
+                            GuiChoose.oneOrNone("Revealed cards:", revealed);
                             for (int i = 0; i < rippleMax; i++) {
                                 if (rippledCards[i] != null) {
 
@@ -628,7 +628,7 @@ public final class GameActionUtil {
 
         final boolean flip = MyRandom.getRandom().nextBoolean();
         if (caller.isHuman()) {
-            choice = GuiUtils.chooseOne(source.getName() + " - Call coin flip", choices);
+            choice = GuiChoose.one(source.getName() + " - Call coin flip", choices);
         } else {
             choice = choices[MyRandom.getRandom().nextInt(2)];
         }

@@ -28,7 +28,7 @@ import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.player.Player;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 
 /**
  * <p>
@@ -331,7 +331,7 @@ public class ManaPool {
                 Object o;
 
                 if (this.owner.isHuman()) {
-                    o = GuiUtils.chooseOneOrNone("Pay Mana from Mana Pool", alChoice);
+                    o = GuiChoose.oneOrNone("Pay Mana from Mana Pool", alChoice);
                 } else {
                     o = alChoice.get(0); // owner is computer
                 }

@@ -52,7 +52,7 @@ import forge.game.zone.DefaultPlayerZone;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneComesIntoPlay;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 
@@ -1280,7 +1280,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
                     }
                 }
                 if (reveal) {
-                    GuiUtils.chooseOne("Revealing the first card drawn", drawn);
+                    GuiChoose.one("Revealing the first card drawn", drawn);
                 }
             }
 

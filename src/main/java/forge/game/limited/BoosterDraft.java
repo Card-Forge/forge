@@ -38,7 +38,7 @@ import forge.card.CardBlock;
 import forge.card.CardEdition;
 import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
@@ -110,7 +110,7 @@ public final class BoosterDraft implements IBoosterDraft {
                 }
             }
 
-            final CardBlock block = GuiUtils.chooseOne("Choose Block", blocks);
+            final CardBlock block = GuiChoose.one("Choose Block", blocks);
 
             final CardEdition[] cardSets = block.getSets();
             final String[] sets = new String[cardSets.length + block.getNumberMetaSets()];
@@ -135,7 +135,7 @@ public final class BoosterDraft implements IBoosterDraft {
             }
 
             if (sets.length > 1) {
-                final Object p = GuiUtils.chooseOne("Choose Set Combination", setCombos);
+                final Object p = GuiChoose.one("Choose Set Combination", setCombos);
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
                     if (pp[i].charAt(0) == '*') {
@@ -168,7 +168,7 @@ public final class BoosterDraft implements IBoosterDraft {
                 JOptionPane
                         .showMessageDialog(null, "No custom draft files found.", "", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                final CustomLimited draft = (CustomLimited) GuiUtils.chooseOne("Choose Custom Draft",
+                final CustomLimited draft = (CustomLimited) GuiChoose.one("Choose Custom Draft",
                         myDrafts);
                 this.setupCustomDraft(draft);
             }

@@ -47,7 +47,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
 
@@ -731,7 +731,7 @@ public class AbilityFactoryCounters {
             for (int j = 0; j <= counterAmount; j++) {
                 integers[j] = Integer.valueOf(j);
             }
-            final Integer i = GuiUtils.chooseOneOrNone("How many counters?", integers);
+            final Integer i = GuiChoose.oneOrNone("How many counters?", integers);
             if (null == i) {
                 return;
             } else {
@@ -1194,7 +1194,7 @@ public class AbilityFactoryCounters {
                             }
                             if (typeChoices.size() > 1) {
                                 String prompt = "Select type counters to remove";
-                                chosenType = GuiUtils.chooseOne(prompt, typeChoices);
+                                chosenType = GuiChoose.one(prompt, typeChoices);
                             }
                             else {
                                 chosenType = typeChoices.get(0);
@@ -1211,7 +1211,7 @@ public class AbilityFactoryCounters {
                                     choices.add(Integer.valueOf(i));
                                 }
                                 String prompt = "Select the number of " + chosenType.getName() + " counters to remove";
-                                chosenAmount = GuiUtils.chooseOne(prompt, choices);
+                                chosenAmount = GuiChoose.one(prompt, choices);
                             }
                         }
                         else {
@@ -1246,7 +1246,7 @@ public class AbilityFactoryCounters {
                                 choices.add("" + i);
                             }
                             final String prompt = "Select the number of " + type + " counters to remove";
-                            final String o = GuiUtils.chooseOne(prompt, choices);
+                            final String o = GuiChoose.one(prompt, choices);
                             counterAmount = Integer.parseInt((String) o);
                         }
                     }
@@ -1550,7 +1550,7 @@ public class AbilityFactoryCounters {
                     }
                     if (choices.size() > 0) {
                         card.addCounter(
-                                Counters.getType((choices.size() == 1 ? choices.get(0) : GuiUtils.chooseOne(
+                                Counters.getType((choices.size() == 1 ? choices.get(0) : GuiChoose.one(
                                         "Select counter type", choices).toString())), 1);
                     }
                 }

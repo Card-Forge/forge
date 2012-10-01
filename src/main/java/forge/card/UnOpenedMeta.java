@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Singletons;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.item.CardPrinted;
 import forge.util.MyRandom;
 
@@ -127,7 +127,7 @@ public class UnOpenedMeta extends UnOpenedProduct {
                 for (MetaSet meta : metaSets) {
                     choices.add(meta.getCode());
                 }
-                final Object o = GuiUtils.chooseOne("Choose booster:", choices);
+                final Object o = GuiChoose.one("Choose booster:", choices);
 
                 for (int i = 0; i < metaSets.size(); i++) {
                     if (o.toString().equals(metaSets.get(i).getCode())) {

@@ -17,7 +17,7 @@ import forge.game.GameLossReason;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 import forge.CardPredicates;
@@ -99,12 +99,12 @@ class CardFactoryEnchantments {
                             chooseGrave.addAll(grave);
                         }
 
-                        final Card c = GuiUtils.chooseOne("Choose first creature to exile", chooseGrave);
+                        final Card c = GuiChoose.one("Choose first creature to exile", chooseGrave);
                         if (c != null) {
                             CardList newGrave = c.getOwner().getCardsIn(ZoneType.Graveyard).filter(CardPredicates.Presets.CREATURES);
                             newGrave.remove(c);
 
-                            final Object o2 = GuiUtils.chooseOne("Choose second creature to exile", newGrave);
+                            final Object o2 = GuiChoose.one("Choose second creature to exile", newGrave);
                             if (o2 != null) {
                                 final Card c2 = (Card) o2;
                                 newGrave.remove(c2);

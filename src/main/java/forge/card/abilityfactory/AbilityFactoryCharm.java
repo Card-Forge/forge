@@ -30,7 +30,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
 // Charm specific params:
@@ -246,9 +246,9 @@ public final class AbilityFactoryCharm {
         for (int i = 0; i < num; i++) {
             Object o;
             if (i < min) {
-                o = GuiUtils.chooseOne("Choose a mode", choices);
+                o = GuiChoose.one("Choose a mode", choices);
             } else {
-                o = GuiUtils.chooseOneOrNone("Choose a mode", choices);
+                o = GuiChoose.oneOrNone("Choose a mode", choices);
             }
             if (null == o) {
                 return sa;

@@ -21,7 +21,7 @@ import forge.game.GameNew;
 import forge.game.GameType;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorDraftingProcess;
@@ -234,7 +234,7 @@ public enum CSubmenuDraft implements ICDoc {
         draftTypes.add("Custom");
 
         final String prompt = "Choose Draft Format:";
-        final Object o = GuiUtils.chooseOne(prompt, draftTypes);
+        final Object o = GuiChoose.one(prompt, draftTypes);
 
         if (o.toString().equals(draftTypes.get(0))) {
             draft.showGui(new BoosterDraft(CardPoolLimitation.Full));

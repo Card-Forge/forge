@@ -33,7 +33,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 
 /**
  * <p>
@@ -189,7 +189,7 @@ public class InputPayManaCostUtil {
             for (final AbilityMana am : abilities) {
                 ability.put(am.toString(), am);
             }
-            chosen = GuiUtils.chooseOne("Choose mana ability", abilities);
+            chosen = GuiChoose.one("Choose mana ability", abilities);
         }
 
         // save off color needed for use by any mana and reflected mana

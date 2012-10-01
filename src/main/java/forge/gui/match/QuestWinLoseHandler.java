@@ -30,7 +30,6 @@ import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.gui.SOverlayUtils;
 import forge.gui.home.quest.CSubmenuChallenges;
@@ -51,6 +50,7 @@ import forge.util.MyRandom;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -486,7 +486,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         qData.getAssets().addCredits(credTotal);
 
         // Generate Swing components and attach.
-        this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_GOLD), 0.5);
+        this.icoTemp = QuestWinLoseHandler.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_GOLD), 0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
@@ -594,7 +594,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         qData.getAssets().addCredits(questRewardCredits);
 
         // Generate Swing components and attach.
-        this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
+        this.icoTemp = QuestWinLoseHandler.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
         this.lblTemp1 = new TitleLabel("Challenge Rewards for \"" + ((QuestEventChallenge) qEvent).getTitle() + "\"");
 
         this.lblTemp2 = new JLabel(sb.toString());
@@ -616,7 +616,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
     private void penalizeLoss() {
         final int x = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.PENALTY_LOSS);
-        this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_HEART), 0.5);
+        this.icoTemp = QuestWinLoseHandler.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_HEART), 0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
@@ -697,6 +697,24 @@ public class QuestWinLoseHandler extends ControlWinLose {
         }
 
         return credits;
+    }
+
+    /**
+     * <p>
+     * getResizedIcon.
+     * </p>
+     * 
+     * @param icon
+     *            ImageIcon
+     * @param scale
+     *            Double
+     * @return {@link javax.swing.ImageIcon} object
+     */
+    public static ImageIcon getResizedIcon(final ImageIcon icon, final double scale) {
+        final int w = (int) (icon.getIconWidth() * scale);
+        final int h = (int) (icon.getIconHeight() * scale);
+    
+        return new ImageIcon(icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
     }
 
     /**

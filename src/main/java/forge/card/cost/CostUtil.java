@@ -30,7 +30,7 @@ import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 
 /**
  * The Class CostUtil.
@@ -410,7 +410,7 @@ public class CostUtil {
         for (int i = 0; i < choiceArray.length; i++) {
             choiceArray[i] = i;
         }
-        final Integer chosenX = GuiUtils.chooseOne(card.toString() + " - Choose a Value for X", choiceArray);
+        final Integer chosenX = GuiChoose.one(card.toString() + " - Choose a Value for X", choiceArray);
         sa.setSVar("ChosenX", "Number$" + Integer.toString(chosenX));
         card.setSVar("ChosenX", "Number$" + Integer.toString(chosenX));
 
@@ -438,7 +438,7 @@ public class CostUtil {
         for (int i = 0; i < choiceArray.length; i++) {
             choiceArray[i] = Integer.valueOf(i);
         }
-        final Integer chosenY = GuiUtils.chooseOne(card.toString() + " - Choose a Value for Y", choiceArray);
+        final Integer chosenY = GuiChoose.one(card.toString() + " - Choose a Value for Y", choiceArray);
         sa.setSVar("ChosenY", "Number$" + Integer.toString(chosenY));
         card.setSVar("ChosenY", "Number$" + Integer.toString(chosenY));
 

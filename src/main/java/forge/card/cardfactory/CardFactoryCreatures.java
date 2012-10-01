@@ -55,7 +55,7 @@ import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 import forge.util.Aggregates;
 import forge.view.ButtonUtil;
@@ -218,7 +218,7 @@ public class CardFactoryCreatures {
                             .filter(CardPredicates.Presets.ARTIFACTS);
 
                     if (artifacts.size() != 0) {
-                        final Card c = GuiUtils.chooseOne("Select an artifact put a phylactery counter on", artifacts);
+                        final Card c = GuiChoose.one("Select an artifact put a phylactery counter on", artifacts);
                         if (c != null) {
                             c.addCounter(Counters.PHYLACTERY, 1);
                         }
@@ -310,7 +310,7 @@ public class CardFactoryCreatures {
                 if (card.getController().isHuman()) {
                     final String[] colors = Constant.Color.ONLY_COLORS;
 
-                    final Object o = GuiUtils.chooseOne("Choose color", colors);
+                    final Object o = GuiChoose.one("Choose color", colors);
                     color[0] = (String) o;
                 } else {
                     // AI chooses the color that appears in the keywords of
@@ -465,7 +465,7 @@ public class CardFactoryCreatures {
                 int lifeGain = 0;
                 if (card.getController().isHuman()) {
                     final String[] choices = { "white", "blue", "black", "red", "green" };
-                    final Object o = GuiUtils.chooseOneOrNone("Select Color: ", choices);
+                    final Object o = GuiChoose.oneOrNone("Select Color: ", choices);
                     Log.debug("Treva, the Renewer", "Color:" + o);
                     lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor((String) o);
 
@@ -509,7 +509,7 @@ public class CardFactoryCreatures {
                 final CardList cl = new CardList();
                 cl.add(lib.get(0));
 
-                GuiUtils.chooseOneOrNone("Top card", cl);
+                GuiChoose.oneOrNone("Top card", cl);
             }
 
             @Override
@@ -985,7 +985,7 @@ public class CardFactoryCreatures {
 
                 if (card.getController().isHuman()) {
                     if (creats.size() > 0) {
-                        final List<Card> selection = GuiUtils.chooseNoneOrMany("Select creatures to sacrifice", creats);
+                        final List<Card> selection = GuiChoose.noneOrMany("Select creatures to sacrifice", creats);
 
                         numCreatures[0] = selection.size();
                         for (int m = 0; m < selection.size(); m++) {
@@ -1063,7 +1063,7 @@ public class CardFactoryCreatures {
                     life[i] = String.valueOf(i);
                 }
 
-                final Object o = GuiUtils.chooseOne("Nameless Race - pay X life", life);
+                final Object o = GuiChoose.one("Nameless Race - pay X life", life);
                 final String answer = (String) o;
                 int loseLife = 0;
                 try {
@@ -1334,9 +1334,9 @@ public class CardFactoryCreatures {
                     hand.remove(random);
                 }
                 if (!revealed.isEmpty()) {
-                    GuiUtils.chooseOne("Revealed at random", revealed);
+                    GuiChoose.one("Revealed at random", revealed);
                 } else {
-                    GuiUtils.chooseOne("Revealed at random", new String[] { "Nothing to reveal" });
+                    GuiChoose.one("Revealed at random", new String[] { "Nothing to reveal" });
                 }
 
                 for (final Card c : revealed) {

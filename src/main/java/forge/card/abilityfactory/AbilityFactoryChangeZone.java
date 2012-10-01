@@ -58,7 +58,7 @@ import forge.game.player.ComputerUtilBlock;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
 
@@ -965,13 +965,13 @@ public final class AbilityFactoryChangeZone {
         if (!defined) {
             if (origin.contains(ZoneType.Library) && !defined && !params.containsKey("NoLooking")) { 
                 // Look at whole library before moving onto choosing a card
-                GuiUtils.chooseOneOrNone(sa.getSourceCard().getName() + " - Looking at Library",
+                GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Library",
                         player.getCardsIn(ZoneType.Library));
             }
 
             // Look at opponents hand before moving onto choosing a card
             if (origin.contains(ZoneType.Hand) && player.isComputer()) {
-                GuiUtils.chooseOneOrNone(sa.getSourceCard().getName() + " - Looking at Opponent's Hand", player
+                GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Opponent's Hand", player
                         .getCardsIn(ZoneType.Hand));
             }
             fetchList = AbilityFactory.filterListByType(fetchList, params.get("ChangeType"), sa);
@@ -995,11 +995,11 @@ public final class AbilityFactoryChangeZone {
             if (params.containsKey("AtRandom")) {
                 o = CardUtil.getRandom(fetchList);
             } else if (params.containsKey("Mandatory")) {
-                o = GuiUtils.chooseOne(selectPrompt, fetchList);
+                o = GuiChoose.one(selectPrompt, fetchList);
             } else if (params.containsKey("Defined")) {
                 o = fetchList.get(0);
             } else {
-                o = GuiUtils.chooseOneOrNone(selectPrompt, fetchList);
+                o = GuiChoose.oneOrNone(selectPrompt, fetchList);
             }
 
             if (o != null) {
@@ -1083,7 +1083,7 @@ public final class AbilityFactoryChangeZone {
             }
         }
         if (params.containsKey("Reveal") && !reveal.isEmpty()) {
-            GuiUtils.chooseOne(card + " - Revealed card: ", reveal.toArray());
+            GuiChoose.one(card + " - Revealed card: ", reveal.toArray());
         }
 
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
@@ -1337,9 +1337,9 @@ public final class AbilityFactoryChangeZone {
         if (!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined) {
             final String picked = sa.getSourceCard().getName() + " - Computer picked:";
             if (fetched.size() > 0) {
-                GuiUtils.chooseOne(picked, fetched);
+                GuiChoose.one(picked, fetched);
             } else {
-                GuiUtils.chooseOne(picked, new String[] { "<Nothing>" });
+                GuiChoose.one(picked, new String[] { "<Nothing>" });
             }
         }
     } // end changeHiddenOriginResolveAI

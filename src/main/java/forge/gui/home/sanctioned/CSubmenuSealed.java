@@ -23,7 +23,7 @@ import forge.deck.DeckGroup;
 import forge.game.GameType;
 import forge.game.limited.SealedDeck;
 import forge.game.limited.SealedDeckFormat;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorLimited;
@@ -140,7 +140,7 @@ public enum CSubmenuSealed implements ICDoc {
         sealedTypes.add("Custom");
 
         final String prompt = "Choose Sealed Deck Format:";
-        final Object o = GuiUtils.chooseOne(prompt, sealedTypes);
+        final Object o = GuiChoose.one(prompt, sealedTypes);
 
         SealedDeckFormat sd = null;
 
@@ -177,7 +177,7 @@ public enum CSubmenuSealed implements ICDoc {
             integers[i] = Integer.valueOf(i + 1);
         }
 
-        Integer rounds = GuiUtils.chooseOne("How many rounds?", integers);
+        Integer rounds = GuiChoose.one("How many rounds?", integers);
 
         // System.out.println("You selected " + rounds + " rounds.");
 

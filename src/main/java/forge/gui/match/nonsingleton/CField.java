@@ -49,8 +49,8 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction;
+import forge.gui.GuiChoose;
 import forge.gui.GuiDisplayUtil;
-import forge.gui.GuiUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
@@ -287,7 +287,7 @@ public class CField implements ICDoc {
             final ArrayList<Card> choices2 = new ArrayList<Card>();
 
             if (choices.isEmpty()) {
-                GuiUtils.chooseOneOrNone(this.title, new String[] { "no cards" });
+                GuiChoose.oneOrNone(this.title, new String[] { "no cards" });
             } else {
                 for (int i = 0; i < choices.size(); i++) {
                     final Card crd = choices.get(i);
@@ -306,7 +306,7 @@ public class CField implements ICDoc {
                         choices2.add(crd);
                     }
                 }
-                final Card choice = (Card) GuiUtils.chooseOneOrNone(this.title, choices2);
+                final Card choice = (Card) GuiChoose.oneOrNone(this.title, choices2);
                 if (choice != null) {
                     this.doAction(choice);
                 }

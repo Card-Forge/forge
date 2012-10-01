@@ -30,7 +30,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.game.player.ComputerUtil;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 
 /**
  * <p>
@@ -333,7 +333,7 @@ public final class AbilityFactoryBond {
         if (cards.size() == 1) {
             partner = cards.get(0);
         } else if (sa.getActivatingPlayer().isHuman()) {
-            Object o = GuiUtils.chooseOne("Select a card to pair with", cards);
+            Object o = GuiChoose.one("Select a card to pair with", cards);
 
             if (o != null) {
                 partner = (Card) o;

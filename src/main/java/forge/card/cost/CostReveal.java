@@ -27,7 +27,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
@@ -133,7 +133,7 @@ public class CostReveal extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
-        GuiUtils.chooseOneOrNone("Revealed cards:", this.getList());
+        GuiChoose.oneOrNone("Revealed cards:", this.getList());
     }
 
     /*

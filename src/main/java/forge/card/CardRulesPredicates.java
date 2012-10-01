@@ -505,8 +505,7 @@ public final class CardRulesPredicates {
         public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(false, CardCoreType.Land);
 
         /** The Constant isNonCreatureSpell. */
-        public static final Predicate<CardRules> IS_CREATURE_OR_LAND = Predicates.or(Presets.IS_CREATURE,Presets.IS_LAND);
-        public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicates.not(IS_CREATURE_OR_LAND);
+        public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicates.not(Predicates.or(Presets.IS_CREATURE,Presets.IS_LAND));
 
         @SuppressWarnings("unchecked")
         public static final Predicate<CardRules> IS_NONCREATURE_SPELL_FOR_GENERATOR = 

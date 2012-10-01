@@ -47,7 +47,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 
 
 /**
@@ -731,7 +731,7 @@ public final class AbilityFactoryProtection {
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
             if (sa.getActivatingPlayer().isHuman()) {
-                final String choice = GuiUtils.chooseOne("Choose a protection", choices);
+                final String choice = GuiChoose.one("Choose a protection", choices);
                 if (null == choice) {
                     return;
                 }
@@ -1161,7 +1161,7 @@ public final class AbilityFactoryProtection {
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
             if (sa.getActivatingPlayer().isHuman()) {
-                final String choice = GuiUtils.chooseOne("Choose a protection", choices);
+                final String choice = GuiChoose.one("Choose a protection", choices);
                 if (null == choice) {
                     return;
                 }

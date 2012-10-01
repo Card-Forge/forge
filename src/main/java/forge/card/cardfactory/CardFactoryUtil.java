@@ -75,7 +75,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -1059,7 +1059,7 @@ public class CardFactoryUtil {
                     return;
                 }
 
-                final Card o = GuiUtils.chooseOneOrNone("Select a card", sameCost);
+                final Card o = GuiChoose.oneOrNone("Select a card", sameCost);
                 if (o != null) {
                     // ability.setTargetCard((Card)o);
 
@@ -1267,7 +1267,7 @@ public class CardFactoryUtil {
                     question.append(manacost).append(" or less from your graveyard to your hand?");
 
                     if (GameActionUtil.showYesNoDialog(sourceCard, question.toString())) {
-                        final Card o = GuiUtils.chooseOneOrNone("Select a card", sameCost);
+                        final Card o = GuiChoose.oneOrNone("Select a card", sameCost);
                         if (o != null) {
 
                             final Card c1 = (Card) o;
@@ -4914,7 +4914,7 @@ public class CardFactoryUtil {
                         card.clearDevoured();
                         if (card.getController().isHuman()) {
                             if (creats.size() > 0) {
-                                final List<Object> selection = GuiUtils.getOrderChoices("Devour", "Devouring", -1, creats.toArray(), null);
+                                final List<Object> selection = GuiChoose.getOrderChoices("Devour", "Devouring", -1, creats.toArray(), null);
                                 numCreatures[0] = selection.size();
 
                                 for (Object o : selection) {

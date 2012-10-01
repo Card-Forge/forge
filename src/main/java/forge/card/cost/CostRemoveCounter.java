@@ -26,7 +26,7 @@ import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
@@ -418,8 +418,8 @@ public class CostRemoveCounter extends CostPartWithList {
                         this.cancel();
                     }
 
-                    final Card o = GuiUtils
-                            .chooseOneOrNone("Remove counter(s) from a card in " + costRemoveCounter.getZone(), this.typeList);
+                    final Card o = GuiChoose
+                            .oneOrNone("Remove counter(s) from a card in " + costRemoveCounter.getZone(), this.typeList);
 
                     if (o != null) {
                         final Card card = (Card) o;

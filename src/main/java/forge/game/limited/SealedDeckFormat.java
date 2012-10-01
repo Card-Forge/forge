@@ -30,7 +30,7 @@ import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
 import forge.card.CardEdition;
 import forge.card.UnOpenedProduct;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
@@ -75,7 +75,7 @@ public class SealedDeckFormat {
                 integers[i] = Integer.valueOf(i + 3);
             }
 
-            Integer nrBoosters = GuiUtils.chooseOne("How many booster packs?", integers);
+            Integer nrBoosters = GuiChoose.one("How many booster packs?", integers);
 
             for (int i = 0; i < nrBoosters; i++) {
                 this.product.add(new UnOpenedProduct(BoosterGenerator.IDENTITY_PICK, bpFull));
@@ -97,7 +97,7 @@ public class SealedDeckFormat {
                 }
             }
 
-            final CardBlock block = GuiUtils.chooseOne("Choose Block", blocks);
+            final CardBlock block = GuiChoose.one("Choose Block", blocks);
 
             final CardEdition[] cardSets = block.getSets();
             final String[] sets = new String[cardSets.length + block.getNumberMetaSets()];
@@ -123,7 +123,7 @@ public class SealedDeckFormat {
             }
 
             if (sets.length > 1) {
-                final Object p = GuiUtils.chooseOne("Choose Set Combination", setCombos);
+                final Object p = GuiChoose.one("Choose Set Combination", setCombos);
 
                 final String[] pp = p.toString().split("/");
 
@@ -179,7 +179,7 @@ public class SealedDeckFormat {
                         starterPacks.add(String.format("Two packs (%s, %s)", pp[starter1idx], pp[starter2idx]));
                     }
 
-                    final Object starterResult = GuiUtils.chooseOne("Choose starter pack(s):", starterPacks);
+                    final Object starterResult = GuiChoose.one("Choose starter pack(s):", starterPacks);
 
                     // Analyze the choice
                     final String starters = starterResult.toString();
@@ -229,7 +229,7 @@ public class SealedDeckFormat {
                     integers[i] = Integer.valueOf(i + 3);
                 }
 
-                Integer nrBoosters = GuiUtils.chooseOne("How many booster packs?", integers);
+                Integer nrBoosters = GuiChoose.one("How many booster packs?", integers);
 
                 for (int i = 0; i < nrBoosters; i++) {
                     this.product.add(product1);
@@ -268,7 +268,7 @@ public class SealedDeckFormat {
                 JOptionPane.showMessageDialog(null, "No custom sealed files found.", "",
                         JOptionPane.INFORMATION_MESSAGE);
             } else {
-                final CustomLimited draft = (CustomLimited) GuiUtils.chooseOne("Choose Custom Sealed Pool",
+                final CustomLimited draft = (CustomLimited) GuiChoose.one("Choose Custom Sealed Pool",
                         customs);
 
                 final BoosterGenerator bpCustom = new BoosterGenerator(draft.getCardPool());
@@ -293,7 +293,7 @@ public class SealedDeckFormat {
                     integers[i] = Integer.valueOf(i + 3);
                 }
 
-                Integer nrBoosters = GuiUtils.chooseOne("How many booster packs?", integers);
+                Integer nrBoosters = GuiChoose.one("How many booster packs?", integers);
 
                 for (int i = 0; i < nrBoosters; i++) {
                     this.product.add(new UnOpenedProduct(fnPick, bpCustom));

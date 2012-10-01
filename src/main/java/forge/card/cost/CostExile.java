@@ -35,7 +35,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
@@ -345,8 +345,8 @@ public class CostExile extends CostPartWithList {
                         this.cancel();
                     }
 
-                    final Card o = GuiUtils
-                            .chooseOneOrNone("Exile from " + part.getFrom(), this.typeList);
+                    final Card o = GuiChoose
+                            .oneOrNone("Exile from " + part.getFrom(), this.typeList);
 
                     if (o != null) {
                         final Card c = (Card) o;
@@ -432,8 +432,7 @@ public class CostExile extends CostPartWithList {
                     }
 
                     //Have to use the stack descriptions here because some copied spells have no description otherwise
-                    final String o = GuiUtils
-                            .chooseOneOrNone("Exile from " + part.getFrom(), this.descList);
+                    final String o = GuiChoose.oneOrNone("Exile from " + part.getFrom(), this.descList);
 
                     if (o != null) {
                         final SpellAbility toExile = this.saList.get(descList.indexOf(o));

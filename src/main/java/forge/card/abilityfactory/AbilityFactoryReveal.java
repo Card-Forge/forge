@@ -48,7 +48,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
 /**
@@ -438,7 +438,7 @@ public final class AbilityFactoryReveal {
                 boolean cardsRevealed = false;
 
                 if (params.containsKey("Reveal")) {
-                    GuiUtils.chooseOne("Revealing cards from library", top);
+                    GuiChoose.one("Revealing cards from library", top);
                     cardsRevealed = true;
                     // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                     // - for when it exists
@@ -448,18 +448,18 @@ public final class AbilityFactoryReveal {
                         question += c + " ";
                     }
                     if (p.isHuman() && GameActionUtil.showYesNoDialog(host, question)) {
-                        GuiUtils.chooseOne(host + "Revealing cards from library", top);
+                        GuiChoose.one(host + "Revealing cards from library", top);
                         // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                         cardsRevealed = true;
                     } else if (p.isComputer() && (top.get(0).isInstant() || top.get(0).isSorcery())) {
-                        GuiUtils.chooseOne(host + "Revealing cards from library", top);
+                        GuiChoose.one(host + "Revealing cards from library", top);
                         cardsRevealed = true;
                     }
                 } else if (params.containsKey("RevealValid")) {
                     final String revealValid = params.get("RevealValid");
                     final CardList toReveal = top.getValidCards(revealValid, host.getController(), host);
                     if (!toReveal.isEmpty()) {
-                        GuiUtils.chooseOne("Revealing cards from library", toReveal);
+                        GuiChoose.one("Revealing cards from library", toReveal);
                         if (params.containsKey("RememberRevealed")) {
                             for (final Card one : toReveal) {
                                 host.addRemembered(one);
@@ -470,7 +470,7 @@ public final class AbilityFactoryReveal {
                     // - for when it exists
                 } else if (choser.isHuman()) {
                     // show the user the revealed cards
-                    GuiUtils.chooseOne("Looking at cards from library", top);
+                    GuiChoose.one("Looking at cards from library", top);
                     cardsRevealed = true;
                 }
 
@@ -527,9 +527,9 @@ public final class AbilityFactoryReveal {
                                     prompt = "Chose a card to put on top of the ";
                                 }
                                 if (anyNumber || optional) {
-                                    chosen = GuiUtils.chooseOneOrNone(prompt + destZone1, valid);
+                                    chosen = GuiChoose.oneOrNone(prompt + destZone1, valid);
                                 } else {
-                                    chosen = GuiUtils.chooseOne(prompt + destZone1, valid);
+                                    chosen = GuiChoose.one(prompt + destZone1, valid);
                                 }
                                 if ((chosen == null) || chosen.getName().equals("[No valid cards]")) {
                                     break;
@@ -563,7 +563,7 @@ public final class AbilityFactoryReveal {
                                     break;
                                 }
                                 if (changeValid.length() > 0) {
-                                    GuiUtils.chooseOne("Computer picked: ", chosen);
+                                    GuiChoose.one("Computer picked: ", chosen);
                                 }
                                 movedCards.add(chosen);
                                 valid.remove(chosen);
@@ -629,7 +629,7 @@ public final class AbilityFactoryReveal {
                                     if (libraryPosition2 == -1) {
                                         prompt = "Put the rest on the bottom of the library in any order";
                                     }
-                                    chosen = GuiUtils.chooseOne(prompt, rest);
+                                    chosen = GuiChoose.one(prompt, rest);
                                 } else {
                                     chosen = rest.get(0);
                                 }
@@ -1050,7 +1050,7 @@ public final class AbilityFactoryReveal {
                 }
 
                 if (revealed.size() > 0) {
-                    GuiUtils.chooseOne(p + " revealed: ", revealed);
+                    GuiChoose.one(p + " revealed: ", revealed);
                 }
 
                 // TODO Allow Human to choose the order
@@ -1428,7 +1428,7 @@ public final class AbilityFactoryReveal {
                 final CardList hand = p.getCardsIn(ZoneType.Hand);
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (hand.size() > 0) {
-                        GuiUtils.chooseOne(p + "'s hand", hand);
+                        GuiChoose.one(p + "'s hand", hand);
                     } else {
                         final StringBuilder sb = new StringBuilder();
                         sb.append(p).append("'s hand is empty!");
@@ -2054,7 +2054,7 @@ public final class AbilityFactoryReveal {
             topCards.add(lib.get(j));
         }
 
-        List<Object> orderedCards = GuiUtils.getOrderChoices("Select order to Rearrange", "Top of Library", 0, topCards.toArray(), null);
+        List<Object> orderedCards = GuiChoose.getOrderChoices("Select order to Rearrange", "Top of Library", 0, topCards.toArray(), null);
         for (int i = maxCards - 1; i >= 0; i--) {
             Card next = (Card) orderedCards.get(i);
             Singletons.getModel().getGameAction().moveToLibrary(next, 0);
@@ -2377,7 +2377,7 @@ public final class AbilityFactoryReveal {
                     final CardList revealed = new CardList();
                     if (params.containsKey("Random")) {
                         revealed.add(CardUtil.getRandom(handChoices));
-                        GuiUtils.chooseOneOrNone("Revealed card(s)", revealed);
+                        GuiChoose.oneOrNone("Revealed card(s)", revealed);
                     } else {
                         CardList valid = new CardList(handChoices);
                         int max = 1;
@@ -2389,7 +2389,7 @@ public final class AbilityFactoryReveal {
                         }
                         revealed.addAll(AbilityFactoryReveal.getRevealedList(sa.getActivatingPlayer(), valid, max, anyNumber));
                         if (sa.getActivatingPlayer().isComputer()) {
-                            GuiUtils.chooseOneOrNone("Revealed card(s)", revealed);
+                            GuiChoose.oneOrNone("Revealed card(s)", revealed);
                         }
                     }
 
@@ -2418,7 +2418,7 @@ public final class AbilityFactoryReveal {
         final int validamount = Math.min(valid.size(), max);
 
         if (anyNumber && player.isHuman() && validamount > 0) {
-            final List<Object> selection = GuiUtils.getOrderChoices("Choose Which Cards to Reveal", "Revealed", -1, valid.toArray(), null);
+            final List<Object> selection = GuiChoose.getOrderChoices("Choose Which Cards to Reveal", "Revealed", -1, valid.toArray(), null);
             for (final Object o : selection) {
                 if (o != null && o instanceof Card) {
                     chosen.add((Card) o);
@@ -2427,7 +2427,7 @@ public final class AbilityFactoryReveal {
         } else {
             for (int i = 0; i < validamount; i++) {
                 if (player.isHuman()) {
-                    final Card o = GuiUtils.chooseOne("Choose card(s) to reveal", valid);
+                    final Card o = GuiChoose.one("Choose card(s) to reveal", valid);
                     if (o != null) {
                         chosen.add(o);
                         valid.remove(o);

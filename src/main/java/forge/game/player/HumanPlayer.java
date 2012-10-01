@@ -24,7 +24,7 @@ import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 
 /**
@@ -124,9 +124,9 @@ public class HumanPlayer extends Player {
     public final boolean dredge() {
         boolean dredged = false;
         final String[] choices = { "Yes", "No" };
-        final Object o = GuiUtils.chooseOne("Do you want to dredge?", choices);
+        final Object o = GuiChoose.one("Do you want to dredge?", choices);
         if (o.equals("Yes")) {
-            final Card c = GuiUtils.chooseOne("Select card to dredge", this.getDredge());
+            final Card c = GuiChoose.one("Select card to dredge", this.getDredge());
             // rule 702.49a
             if (this.getDredgeNumber(c) <= AllZone.getHumanPlayer().getZone(ZoneType.Library).size()) {
 
@@ -181,7 +181,7 @@ public class HumanPlayer extends Player {
     protected final void doScry(final CardList topN, final int n) {
         int num = n;
         for (int i = 0; i < num; i++) {
-            final Card c = GuiUtils.chooseOneOrNone("Put on bottom of library.", topN);
+            final Card c = GuiChoose.oneOrNone("Put on bottom of library.", topN);
             if (c != null) {
                 topN.remove(c);
                 Singletons.getModel().getGameAction().moveToBottomOfLibrary(c);
@@ -192,7 +192,7 @@ public class HumanPlayer extends Player {
         }
         num = topN.size();
         for (int i = 0; i < num; i++) {
-            final Card c = GuiUtils.chooseOne("Put on top of library.", topN);
+            final Card c = GuiChoose.one("Put on top of library.", topN);
             if (c != null) {
                 topN.remove(c);
                 Singletons.getModel().getGameAction().moveToLibrary(c);
@@ -214,7 +214,7 @@ public class HumanPlayer extends Player {
         String choice = "";
         final String[] choices = { "top", "bottom" };
         CMatchUI.SINGLETON_INSTANCE.setCard(c);
-        choice = GuiUtils.chooseOne(c.getName() + " - Top or bottom of Library", choices);
+        choice = GuiChoose.one(c.getName() + " - Top or bottom of Library", choices);
 
         if (choice.equals("bottom")) {
             Singletons.getModel().getGameAction().moveToBottomOfLibrary(c);

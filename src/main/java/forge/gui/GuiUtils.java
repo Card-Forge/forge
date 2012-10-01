@@ -17,36 +17,19 @@
  */
 package forge.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Window;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import forge.Card;
-import forge.gui.match.CMatchUI;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 
 /**
  * <p>
@@ -140,264 +123,6 @@ public final class GuiUtils {
         component.setFont(oldFont.deriveFont((float) newSize));
     }
 
-    /**
-     * <p>
-     * getIconFromFile.
-     * </p>
-     * 
-     * @param filename
-     *            a {@link java.lang.String} object.
-     * @return a {@link javax.swing.ImageIcon} object.
-     */
-    public static ImageIcon getIconFromFile(final String filename) {
-        final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-        final File file = new File(base, filename);
-        if (filename.equals("") || !file.exists()) {
-            return null;
-        } else {
-            return new ImageIcon(file.toString());
-        }
-    }
-
-    /**
-     * <p>
-     * getResizedIcon.
-     * </p>
-     * 
-     * @param filename
-     *            String.
-     * @param scale
-     *            Double.
-     * @return {@link javax.swing.ImageIcon} object
-     */
-    public static ImageIcon getResizedIcon(final String filename, final double scale) {
-        final ImageIcon icon = GuiUtils.getIconFromFile(filename);
-
-        final int w = (int) (icon.getIconWidth() * scale);
-        final int h = (int) (icon.getIconHeight() * scale);
-
-        return new ImageIcon(icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
-    }
-
-    /**
-     * <p>
-     * getResizedIcon.
-     * </p>
-     * 
-     * @param icon
-     *            ImageIcon
-     * @param scale
-     *            Double
-     * @return {@link javax.swing.ImageIcon} object
-     */
-    public static ImageIcon getResizedIcon(final ImageIcon icon, final double scale) {
-        final int w = (int) (icon.getIconWidth() * scale);
-        final int h = (int) (icon.getIconHeight() * scale);
-
-        return new ImageIcon(icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
-    }
-
-    /**
-     * <p>
-     * getResizedIcon.
-     * </p>
-     * 
-     * @param icon
-     *            a {@link javax.swing.ImageIcon} object.
-     * @param width
-     *            a int.
-     * @param height
-     *            a int.
-     * @return a {@link javax.swing.ImageIcon} object.
-     */
-    public static ImageIcon getResizedIcon(final ImageIcon icon, final int width, final int height) {
-        return new ImageIcon(icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
-    }
-
-    /**
-     * <p>
-     * getEmptyIcon.
-     * </p>
-     * 
-     * @param width
-     *            a int.
-     * @param height
-     *            a int.
-     * @return a {@link javax.swing.ImageIcon} object.
-     */
-    public static ImageIcon getEmptyIcon(final int width, final int height) {
-        return new ImageIcon(new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB));
-    }
-
-    /**
-     * Convenience for getChoices(message, 0, 1, choices).
-     * 
-     * @param <T>
-     *            is automatically inferred.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a T object.
-     * @return null if choices is missing, empty, or if the users' choices are
-     *         empty; otherwise, returns the first item in the List returned by
-     *         getChoices.
-     * @see #getChoices(String, int, int, Object...)
-     */
-    public static <T> T chooseOneOrNone(final String message, final T[] choices) {
-        if ((choices == null) || (choices.length == 0)) {
-            return null;
-        }
-        final List<T> choice = GuiUtils.getChoices(message, 0, 1, choices);
-        return choice.isEmpty() ? null : choice.get(0);
-    } // getChoiceOptional(String,T...)
-
-    public static <T> T chooseOneOrNone(final String message, final Collection<T> choices) {
-        if ((choices == null) || (choices.size() == 0)) {
-            return null;
-        }
-        final List<T> choice = GuiUtils.getChoices(message, 0, 1, choices);
-        return choice.isEmpty() ? null : choice.get(0);
-    } // getChoiceOptional(String,T...)    
-    
-    // returned Object will never be null
-    /**
-     * <p>
-     * getChoice.
-     * </p>
-     * 
-     * @param <T>
-     *            a T object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a T object.
-     * @return a T object.
-     */
-    public static <T> T chooseOne(final String message, final T[] choices) {
-        final List<T> choice = GuiUtils.getChoices(message, 1, 1, choices);
-        assert choice.size() == 1;
-        return choice.get(0);
-    } // getChoice()
-
-    // Nothing to choose here. Code uses this to just show a card.
-    public static Card chooseOne(final String message, final Card singleChoice) {
-        List<Card> choices = new ArrayList<Card>();
-        choices.add(singleChoice);
-        return chooseOne(message, choices);
-    }
-
-    public static <T> T chooseOne(final String message, final Collection<T> choices) {
-        final List<T> choice = GuiUtils.getChoices(message, 1, 1, choices);
-        assert choice.size() == 1;
-        return choice.get(0);
-    }
-
-    // returned Object will never be null
-    /**
-     * <p>
-     * getChoicesOptional.
-     * </p>
-     * 
-     * @param <T>
-     *            a T object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a T object.
-     * @return a {@link java.util.List} object.
-     */
-    public static <T> List<T> chooseNoneOrMany(final String message, final T[] choices) {
-        return GuiUtils.getChoices(message, 0, choices.length, choices);
-    } // getChoice()
-    public static <T> List<T> chooseNoneOrMany(final String message, final List<T> choices) {
-        return GuiUtils.getChoices(message, 0, choices.size(), choices);
-    }
-    // returned Object will never be null
-    /**
-     * <p>
-     * getChoices.
-     * </p>
-     * 
-     * @param <T>
-     *            a T object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a T object.
-     * @return a {@link java.util.List} object.
-     */
-    public static <T> List<T> chooseOneOrMany(final String message, final T[] choices) {
-        return GuiUtils.getChoices(message, 1, choices.length, choices);
-    } // getChoice()
-
-    // returned Object will never be null
-    /**
-     * <p>
-     * getChoices.
-     * </p>
-     * 
-     * @param <T>
-     *            a T object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param min
-     *            a int.
-     * @param max
-     *            a int.
-     * @param choices
-     *            a T object.
-     * @return a {@link java.util.List} object.
-     */
-    private static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices) {
-        final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
-        return getChoices(c);
-    }
-
-    private static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
-        final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
-        return getChoices(c);
-    }
-
-    private static <T> List<T> getChoices(final ListChooser<T> c) {
-
-        final JList list = c.getJList();
-        list.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(final ListSelectionEvent ev) {
-                if (list.getSelectedValue() instanceof Card) {
-                    CMatchUI.SINGLETON_INSTANCE.setCard((Card) list.getSelectedValue());
-                }
-            }
-        });
-        c.show();
-        return c.getSelectedValues();
-    } // getChoice()
-
-    public static List<Object> getOrderChoices(final String title, final String top, int remainingObjects, final Object[] sourceChoices, Object[] destChoices) {
-        // An input box for handling the order of choices.
-        final JFrame frame = new JFrame();
-        DualListBox dual = new DualListBox(remainingObjects, top, sourceChoices, destChoices);
-
-        frame.setLayout(new BorderLayout());
-        frame.setSize(dual.getPreferredSize());
-        frame.add(dual);
-        frame.setTitle(title);
-        frame.setVisible(false);
-
-        final JDialog dialog = new JDialog(frame, true);
-        dialog.setTitle(title);
-        dialog.setContentPane(dual);
-        dialog.setSize(dual.getPreferredSize());
-        dialog.setLocationRelativeTo(null);
-        dialog.pack();
-        dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        dialog.setVisible(true);
-
-        List<Object> objects = dual.getOrderedList();
-
-        dialog.dispose();
-        return objects;
-    }
 
     /**
      * Centers a frame on the screen based on its current size.
@@ -435,26 +160,6 @@ public final class GuiUtils {
             System.err.println("GuiUtils > newFont: can't find \"" + filename + "\"");
         }
         return ttf;
-    }
-
-    /** Duplicate in DeckEditorQuestMenu and
-     * probably elsewhere...can streamline at some point
-     * (probably shouldn't be here).
-     * 
-     * @param in &emsp; {@link java.lang.String}
-     * @return {@link java.lang.String}
-     */
-    public static String cleanString(final String in) {
-        final StringBuffer out = new StringBuffer();
-        final char[] c = in.toCharArray();
-
-        for (int i = 0; (i < c.length) && (i < 20); i++) {
-            if (Character.isLetterOrDigit(c[i]) || (c[i] == '-') || (c[i] == '_') || (c[i] == ' ')) {
-                out.append(c[i]);
-            }
-        }
-
-        return out.toString();
     }
 
     /** Checks if calling method uses event dispatch thread.

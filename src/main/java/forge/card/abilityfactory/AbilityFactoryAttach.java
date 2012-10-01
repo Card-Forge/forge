@@ -51,7 +51,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
 
@@ -1408,7 +1408,7 @@ public class AbilityFactoryAttach {
                     }
                 }
 
-                final Player p = GuiUtils.chooseOne(source + " - Select a player to attach to.", players);
+                final Player p = GuiChoose.one(source + " - Select a player to attach to.", players);
                 if (p != null) {
                     AbilityFactoryAttach.handleAura(source, p, false);
                     //source.enchantEntity((Player) o);
@@ -1418,7 +1418,7 @@ public class AbilityFactoryAttach {
                 CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
                 list = list.getValidCards(tgt.getValidTgts(), aura.getActivatingPlayer(), source);
 
-                final Object o = GuiUtils.chooseOne(source + " - Select a card to attach to.", list);
+                final Object o = GuiChoose.one(source + " - Select a card to attach to.", list);
                 if (o instanceof Card) {
                     AbilityFactoryAttach.handleAura(source, (Card) o, gainControl);
                     //source.enchantEntity((Card) o);

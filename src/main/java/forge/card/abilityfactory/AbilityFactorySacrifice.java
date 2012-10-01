@@ -38,7 +38,7 @@ import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
 /**
@@ -566,9 +566,9 @@ public class AbilityFactorySacrifice {
             }
             Object o;
             if (optional) {
-                o = GuiUtils.chooseOneOrNone("Select a card to sacrifice", list);
+                o = GuiChoose.oneOrNone("Select a card to sacrifice", list);
             } else {
-                o = GuiUtils.chooseOne("Select a card to sacrifice", list);
+                o = GuiChoose.one("Select a card to sacrifice", list);
             }
             if (o != null) {
                 final Card c = (Card) o;

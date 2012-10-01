@@ -18,7 +18,6 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
-import forge.gui.GuiUtils;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgeProps;
@@ -300,7 +299,7 @@ public class QuestFileLister extends JPanel {
 
         if (o == null) { return; }
 
-        final String questName = GuiUtils.cleanString(o.toString());
+        final String questName = SSubmenuQuestUtil.cleanString(o.toString());
 
         boolean exists = false;
 

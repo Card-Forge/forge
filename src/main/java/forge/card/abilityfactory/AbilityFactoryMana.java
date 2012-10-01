@@ -41,7 +41,7 @@ import forge.control.input.InputPayManaCostUtil;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
 /**
@@ -351,7 +351,7 @@ public class AbilityFactoryMana {
                         }
                         for (int nMana = 1; nMana <= amount; nMana++) {
                             String choice = "";
-                                Object o = GuiUtils.chooseOne("Select Mana to Produce", colorMenu);
+                                Object o = GuiChoose.one("Select Mana to Produce", colorMenu);
                                 if (o == null) {
                                     final StringBuilder sb = new StringBuilder();
                                     sb.append("AbilityFactoryMana::manaResolve() - Human color mana choice is empty for ");
@@ -376,7 +376,7 @@ public class AbilityFactoryMana {
                                 chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
                                         ZoneType.Hand));
                             }
-                            GuiUtils.chooseOne("Computer picked: ", new String[]{chosen});
+                            GuiChoose.one("Computer picked: ", new String[]{chosen});
                             abMana.setExpressChoice(InputPayManaCostUtil.getShortColorString(chosen));
                         }
                         if (abMana.getExpressChoice().isEmpty()) {
@@ -411,7 +411,7 @@ public class AbilityFactoryMana {
                             else {
                                 colorMenu = Constant.Color.ONLY_COLORS;
                             }
-                            String s = GuiUtils.chooseOne("Select Mana to Produce", colorMenu);
+                            String s = GuiChoose.one("Select Mana to Produce", colorMenu);
                             if (s == null) {
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append("AbilityFactoryMana::manaResolve() - Human color mana choice is empty for ");
@@ -431,7 +431,7 @@ public class AbilityFactoryMana {
                                 chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
                                         ZoneType.Hand));
                             }
-                            GuiUtils.chooseOne("Computer picked: ", new String[]{chosen});
+                            GuiChoose.one("Computer picked: ", new String[]{chosen});
                             abMana.setExpressChoice(InputPayManaCostUtil.getShortColorString(chosen));
                         }
                         if (abMana.getExpressChoice().isEmpty()) {
@@ -925,7 +925,7 @@ public class AbilityFactoryMana {
             baseMana = InputPayManaCostUtil.getShortColorString(colors.get(0));
         } else {
             if (player.isHuman()) {
-                final Object o = GuiUtils.chooseOneOrNone("Select Mana to Produce", colors);
+                final Object o = GuiChoose.oneOrNone("Select Mana to Produce", colors);
                 if (o == null) {
                     // User hit cancel
                     abMana.setCanceled(true);

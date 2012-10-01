@@ -21,7 +21,7 @@ import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 
 import forge.view.ButtonUtil;
@@ -59,7 +59,7 @@ class CardFactoryArtifacts {
                         imageName = "B 1 1 Thrull";
                         color = "B";
                     } else if (player.isHuman()) {
-                        final Object q = GuiUtils.chooseOneOrNone("Select type of creature", choices);
+                        final Object q = GuiChoose.oneOrNone("Select type of creature", choices);
                         if (q != null) {
                             if (q.equals("Citizen")) {
                                 type = "Citizen";
@@ -272,7 +272,7 @@ class CardFactoryArtifacts {
                             }
                         }
                     } // while
-                    GuiUtils.chooseOneOrNone("Revealed cards:", revealed);
+                    GuiChoose.oneOrNone("Revealed cards:", revealed);
                     for (final Card revealedCard : revealed) {
                         Singletons.getModel().getGameAction().moveToBottomOfLibrary(revealedCard);
                     }
@@ -361,7 +361,7 @@ class CardFactoryArtifacts {
                             if (i == 4) {
                                 title = "Put fourth from top of library: ";
                             }
-                            final Object o = GuiUtils.chooseOneOrNone(title, lands);
+                            final Object o = GuiChoose.oneOrNone(title, lands);
                             if (o == null) {
                                 break;
                             }
@@ -505,7 +505,7 @@ class CardFactoryArtifacts {
                         for (int j = 0; j <= num; j++) {
                             choices[j] = "" + j;
                         }
-                        final String answer = (GuiUtils.chooseOneOrNone("Life to pay:", choices));
+                        final String answer = (GuiChoose.oneOrNone("Life to pay:", choices));
                         lifeToPay = Integer.parseInt(answer);
                     } else {
                         // not implemented for Compy
@@ -590,7 +590,7 @@ class CardFactoryArtifacts {
                                 // Then look at the exiled cards and put them on
                                 // top of your library in any order.
                                 while (this.exiled.size() > 0) {
-                                    final Card c1 = GuiUtils.chooseOne("Put a card on top of your library.", this.exiled);
+                                    final Card c1 = GuiChoose.one("Put a card on top of your library.", this.exiled);
                                     Singletons.getModel().getGameAction().moveToLibrary(c1);
                                     this.exiled.remove(c1);
                                 }

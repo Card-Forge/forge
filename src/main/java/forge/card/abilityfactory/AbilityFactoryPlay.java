@@ -45,7 +45,7 @@ import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
 /**
@@ -392,7 +392,7 @@ public final class AbilityFactoryPlay {
             Card tgtCard = tgtCards.get(0);
             if (tgtCards.size() > 1) {
                 if (controller.isHuman()) {
-                    tgtCard = GuiUtils.chooseOne("Select a card to play", tgtCards);
+                    tgtCard = GuiChoose.one("Select a card to play", tgtCards);
                 } else {
                     // AI
                     tgtCards = tgtCards.filter(new Predicate<Card>() {
@@ -468,7 +468,7 @@ public final class AbilityFactoryPlay {
             if (sas.size() == 1) {
                 tgtSA = sas.get(0);
             } else if (sa.getActivatingPlayer().isHuman()) {
-                tgtSA = GuiUtils.chooseOne("Select a spell to cast", sas);
+                tgtSA = GuiChoose.one("Select a spell to cast", sas);
             } else {
                 tgtSA = sas.get(0);
             }

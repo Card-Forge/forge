@@ -60,7 +60,7 @@ import forge.game.player.ComputerUtilBlock;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.views.VCombat;
@@ -443,7 +443,7 @@ public class CombatUtil {
          
             CardList orderedBlockers = null;
             if (player.isHuman()) {
-                List<Object> ordered = GuiUtils.getOrderChoices("Choose Blocking Order", "Damaged First", 0, blockers.toArray(), null);
+                List<Object> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, blockers.toArray(), null);
                 
                 orderedBlockers = new CardList();
                 for(Object o : ordered) {
@@ -471,7 +471,7 @@ public class CombatUtil {
          
             CardList orderedAttacker = null;
             if (player.isHuman()) {
-                List<Object> ordered = GuiUtils.getOrderChoices("Choose Blocking Order", "Damaged First", 0, attackers.toArray(), null);
+                List<Object> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, attackers.toArray(), null);
                 
                 orderedAttacker = new CardList();
                 for(Object o : ordered) {
@@ -2836,7 +2836,7 @@ public class CombatUtil {
             if (lib.size() > 0) {
                 final CardList cl = new CardList();
                 cl.add(lib.get(0));
-                GuiUtils.chooseOneOrNone("Top card", cl);
+                GuiChoose.oneOrNone("Top card", cl);
                 final Card top = lib.get(0);
                 if (top.isCreature()) {
                     player.gainLife(top.getBaseDefense(), c);
@@ -3103,7 +3103,7 @@ public class CombatUtil {
                                 final Card crd = enchantments.get(j);
                                 target[j] = crd;
                             }
-                            final Object check = GuiUtils.chooseOneOrNone(
+                            final Object check = GuiChoose.oneOrNone(
                                     "Select enchantment to enchant exalted creature", target);
                             if (check != null) {
                                 enchantment = ((Card) check);

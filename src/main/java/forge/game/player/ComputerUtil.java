@@ -59,7 +59,7 @@ import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.util.Aggregates;
 
 
@@ -182,7 +182,7 @@ public class ComputerUtil {
             if (pay.payComputerCosts()) {
                 AllZone.getStack().addAndUnfreeze(sa);
                 if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
-                    GuiUtils.chooseOneOrNone("Computer reveals spliced cards:", sa.getSplicedCards());
+                    GuiChoose.oneOrNone("Computer reveals spliced cards:", sa.getSplicedCards());
                 }
                 return true;
                 // TODO: solve problems with TapsForMana triggers by adding

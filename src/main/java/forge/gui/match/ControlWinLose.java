@@ -16,7 +16,7 @@ import forge.deck.Deck;
 import forge.game.GameNew;
 import forge.game.GameType;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -106,7 +106,7 @@ public class ControlWinLose {
 
                 Constant.Runtime.COMPUTER_DECK[0] = cDeck;
 
-                List<Card> o = GuiUtils.chooseNoneOrMany("Select cards to add to your deck", compAntes);
+                List<Card> o = GuiChoose.noneOrMany("Select cards to add to your deck", compAntes);
                 if (null != o) {
                     for (Card c : o) {
                         hDeck.getMain().add(c);

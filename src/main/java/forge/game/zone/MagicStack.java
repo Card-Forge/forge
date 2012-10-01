@@ -51,7 +51,7 @@ import forge.control.input.InputPayManaCostAbility;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.gui.GuiUtils;
+import forge.gui.GuiChoose;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -1350,7 +1350,7 @@ public class MagicStack extends MyObservable {
             }
             else{
                 // Otherwise, gave a dual list form to create instead of needing to do it one at a time
-                List<Object> orderedSAs = GuiUtils.getOrderChoices("Select order for Simultaneous Spell Abilities", "Resolve first", 0, activePlayerSAs.toArray(), null);
+                List<Object> orderedSAs = GuiChoose.getOrderChoices("Select order for Simultaneous Spell Abilities", "Resolve first", 0, activePlayerSAs.toArray(), null);
                 int size = orderedSAs.size();
                 for(int i = size-1; i >= 0; i--){
                     SpellAbility next = (SpellAbility)orderedSAs.get(i);

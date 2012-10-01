@@ -12654,6 +12654,7 @@ src/main/java/forge/gui/CardPicturePanel.java svneol=native#text/plain
 src/main/java/forge/gui/DualListBox.java -text
 src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain
 src/main/java/forge/gui/GuiAssignDamageFrame.java svneol=native#text/plain
+src/main/java/forge/gui/GuiChoose.java -text
 src/main/java/forge/gui/GuiDisplayUtil.java svneol=native#text/plain
 src/main/java/forge/gui/GuiImportPicture.java svneol=native#text/plain
 src/main/java/forge/gui/GuiInput.java svneol=native#text/plain
