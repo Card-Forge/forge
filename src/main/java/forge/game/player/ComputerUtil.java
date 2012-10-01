@@ -1330,7 +1330,7 @@ public class ComputerUtil {
                         if (sa.getPayCosts() != null) {
                             for (CostPart part : sa.getPayCosts().getCostParts()) {
                                 if (part instanceof CostDiscard) {
-                                    return false; 
+                                    return false;
                                 }
                             }
                         }
@@ -1338,7 +1338,6 @@ public class ComputerUtil {
                 }
             }
         }
-        
 
         landList = landList.filter(new Predicate<Card>() {
             @Override
@@ -1481,7 +1480,7 @@ public class ComputerUtil {
                                              // priority 5 the highest
                 final int priority = 6 - ip;
                 for (Card c : typeList) {
-                    if (priority == 3 && c.isLand() 
+                    if (priority == 3 && c.isLand()
                             && !AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Crucible of Worlds").isEmpty()) {
                         return c;
                     }
@@ -1491,7 +1490,7 @@ public class ComputerUtil {
                 }
             }
 
-            // Discard lands 
+            // Discard lands
             final CardList landsInHand = typeList.getType("Land");
             if (!landsInHand.isEmpty()) {
                 final CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land");
@@ -1626,7 +1625,7 @@ public class ComputerUtil {
                 continue;
             }
             List<Card> aiCards = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            final int numLandsInPlay = Iterables.size(Iterables.filter(aiCards, CardPredicates.Presets.LANDS)); 
+            final int numLandsInPlay = Iterables.size(Iterables.filter(aiCards, CardPredicates.Presets.LANDS));
             final CardList landsInHand = hand.filter(CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
 
@@ -1636,7 +1635,7 @@ public class ComputerUtil {
                     || (numLandsInHand > 0 && numLandsInPlay > 5)) {
                 discardList.add(landsInHand.get(0));
                 hand.remove(landsInHand.get(0));
-            } else { // Discard other stuff 
+            } else { // Discard other stuff
                 CardListUtil.sortCMC(hand);
                 int numLandsAvailable = numLandsInPlay;
                 if (numLandsInHand > 0) {
@@ -1718,6 +1717,26 @@ public class ComputerUtil {
 
     /**
      * <p>
+     * chooseExileFromStackType.
+     * </p>
+     * 
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param activate
+     *            a {@link forge.Card} object.
+     * @param target
+     *            a {@link forge.Card} object.
+     * @param amount
+     *            a int.
+     * @return a {@link forge.CardList} object.
+     */
+    public static CardList chooseExileFromStackType(final String type, final Card activate, final Card target,
+            final int amount) {
+        return ComputerUtil.chooseExileFrom(ZoneType.Stack, type, activate, target, amount);
+    }
+
+    /**
+     * <p>
      * chooseExileFrom.
      * </p>
      * 
@@ -1735,8 +1754,16 @@ public class ComputerUtil {
      */
     public static CardList chooseExileFrom(final ZoneType zone, final String type, final Card activate,
             final Card target, final int amount) {
-        CardList typeList = AllZone.getComputerPlayer().getCardsIn(zone);
-        typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
+        CardList typeList = new CardList();
+        if (zone.equals(ZoneType.Stack)) {
+            for (int i = 0; i < AllZone.getStack().size(); i++) {
+                typeList.add(AllZone.getStack().peekAbility(i).getSourceCard());
+                typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
+            }
+        } else {
+            typeList = AllZone.getComputerPlayer().getCardsIn(zone);
+            typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
+        }
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
             typeList.remove(target); // don't exile the card we're pumping
         }

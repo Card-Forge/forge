@@ -37,7 +37,7 @@ import forge.gui.GuiUtils;
  */
 public class CostUtil {
     private static Random r = new Random();
-    
+
     /**
      * Check sacrifice cost.
      * 
@@ -457,8 +457,7 @@ public class CostUtil {
         // Just a shortcut..
         AllZone.getInputControl().setInput(in, true);
     }
-    
-    
+
     public static Cost combineCosts(Cost cost1, Cost cost2) {
         if (cost1 == null) {
             if (cost2 == null) {
@@ -467,11 +466,11 @@ public class CostUtil {
                 return cost2;
             }
         }
-        
+
         if (cost2 == null) {
             return cost1;
         }
-        
+
         for (final CostPart part : cost1.getCostParts()) {
             if (!(part instanceof CostMana)) {
                 cost2.getCostParts().add(part);
