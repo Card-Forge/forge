@@ -30,6 +30,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
@@ -368,7 +369,7 @@ public class AbilityFactoryAttach {
         Card c = AbilityFactoryAttach.attachGeneralAI(sa, list, mandatory, attachSource, params.get("AILogic"));
 
         if ((c == null) && mandatory) {
-            list.shuffle();
+            CardListUtil.shuffle(list);
             c = list.get(0);
         }
 

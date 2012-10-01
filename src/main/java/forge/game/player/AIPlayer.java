@@ -139,7 +139,7 @@ public class AIPlayer extends Player {
 
         // use dredge if there are more than one of them in your graveyard
         if ((dredgers.size() > 1) || ((dredgers.size() == 1) && random.nextBoolean())) {
-            dredgers.shuffle();
+            CardListUtil.shuffle(dredgers);
             final Card c = dredgers.get(0);
             // rule 702.49a
             if (this.getDredgeNumber(c) <= this.getCardsIn(ZoneType.Library).size()) {

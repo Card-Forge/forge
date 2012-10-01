@@ -32,6 +32,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
@@ -126,7 +127,7 @@ public class CardFactoryCreatures {
                         return (c.sumAllCounters() > 0);
                     }
                 });
-                perms.shuffle();
+                CardListUtil.shuffle(perms);
                 this.setTargetCard(perms.get(0)); // TODO improve this.
             }
 
@@ -653,14 +654,14 @@ public class CardFactoryCreatures {
                                         return c.hasKeyword("Indestructible");
                                     }
                                 });
-                                indestructibles.shuffle();
+                                CardListUtil.shuffle(indestructibles);
                                 indestructibles.get(0).addDamage(1, target);
                             }
 
                             // Then just add Damage randomnly
 
                             else {
-                                damageableWolves.shuffle();
+                                CardListUtil.shuffle(damageableWolves);
                                 wolves.get(0).addDamage(1, target);
                             }
                         }
@@ -743,7 +744,7 @@ public class CardFactoryCreatures {
                     this.setTargetPlayer(AllZone.getHumanPlayer());
                 } else {
                     final CardList list = this.getCreature();
-                    list.shuffle();
+                    CardListUtil.shuffle(list);
                     this.setTargetCard(list.get(0));
                 }
             } // chooseTargetAI()

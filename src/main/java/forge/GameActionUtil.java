@@ -194,7 +194,7 @@ public final class GameActionUtil {
                                 }
                             }
                         }
-                        revealed.shuffle();
+                        CardListUtil.shuffle(revealed);
                         for (final Card bottom : revealed) {
                             Singletons.getModel().getGameAction().moveToBottomOfLibrary(bottom);
                         }
@@ -323,7 +323,7 @@ public final class GameActionUtil {
                                     }
                                 }
                             }
-                            revealed.shuffle();
+                            CardListUtil.shuffle(revealed);
                             for (final Card bottom : revealed) {
                                 Singletons.getModel().getGameAction().moveToBottomOfLibrary(bottom);
                             }

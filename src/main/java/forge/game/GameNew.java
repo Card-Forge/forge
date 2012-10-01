@@ -14,6 +14,7 @@ import com.google.common.collect.Iterables;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.CardPredicates;
 import forge.CardUtil;
@@ -375,7 +376,7 @@ public class GameNew {
      */
     private static Iterable<Card> smoothComputerManaCurve(final Iterable<Card> in) {
         final CardList library = new CardList(in);
-        library.shuffle();
+        CardListUtil.shuffle(library);
 
         // remove all land, keep non-basicland in there, shuffled
         CardList land = library.filter(CardPredicates.Presets.LANDS);

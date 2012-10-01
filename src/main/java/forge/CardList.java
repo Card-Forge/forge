@@ -47,19 +47,6 @@ public class CardList extends ArrayList<Card> {
 
 
     /**
-     * <p>
-     * shuffle.
-     * </p>
-     */
-    public final void shuffle() {
-        // reseed Random each time we want to Shuffle
-        // MyRandom.random = MyRandom.random;
-        Collections.shuffle(this, MyRandom.getRandom());
-        Collections.shuffle(this, MyRandom.getRandom());
-        Collections.shuffle(this, MyRandom.getRandom());
-    }
-
-    /**
      * Create a new list of cards by applying a filter to this one.
      * 
      * @param filt

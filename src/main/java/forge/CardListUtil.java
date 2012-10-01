@@ -19,11 +19,13 @@ package forge;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import com.google.common.base.Predicate;
 
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 
 
 /**
@@ -275,10 +277,22 @@ public class CardListUtil {
 
         final CardList subList = new CardList();
         while (subList.size() < amount) {
-            c.shuffle();
+            CardListUtil.shuffle(c);
             subList.add(c.get(0));
             c.remove(0);
         }
         return subList;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param cardList
+     */
+    public static void shuffle(List<Card> list) {
+        // reseed Random each time we want to Shuffle
+        // MyRandom.random = MyRandom.random;
+        Collections.shuffle(list, MyRandom.getRandom());
+        Collections.shuffle(list, MyRandom.getRandom());
+        Collections.shuffle(list, MyRandom.getRandom());
     }
 }

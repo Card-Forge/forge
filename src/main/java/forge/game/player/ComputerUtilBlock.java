@@ -898,7 +898,7 @@ public class ComputerUtilBlock {
             }
         }
         if (!chumpBlockers.isEmpty()) {
-            ComputerUtilBlock.getAttackers().shuffle();
+            CardListUtil.shuffle(ComputerUtilBlock.getAttackers());
             for (final Card attacker : ComputerUtilBlock.getAttackers()) {
                 blockers = ComputerUtilBlock.getPossibleBlockers(attacker, chumpBlockers, combat);
                 for (final Card blocker : blockers) {

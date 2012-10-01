@@ -1453,7 +1453,7 @@ public class ComputerUtil {
                 final CardList prefList = typeList.getValidCards(prefValid[1].split(","), activate.getController(),
                         activate);
                 if (prefList.size() != 0) {
-                    prefList.shuffle();
+                    CardListUtil.shuffle(prefList);
                     return prefList.get(0);
                 }
             }
@@ -1469,7 +1469,7 @@ public class ComputerUtil {
                     }
                 });
                 if (sacMeList.size() != 0) {
-                    sacMeList.shuffle();
+                    CardListUtil.shuffle(sacMeList);
                     return sacMeList.get(0);
                 }
             }

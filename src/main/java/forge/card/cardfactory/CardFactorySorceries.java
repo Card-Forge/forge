@@ -619,7 +619,7 @@ public class CardFactorySorceries {
                 final CardList compLand = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
 
                 if (compLand.size() > humLand.size()) {
-                    compLand.shuffle();
+                    CardListUtil.shuffle(compLand);
                     for (int i = 0; i < (compLand.size() - humLand.size()); i++) {
                         Singletons.getModel().getGameAction().sacrifice(compLand.get(i), this);
                     }

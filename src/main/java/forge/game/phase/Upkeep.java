@@ -596,10 +596,10 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         }
                     });
                     if (humanCreatures.isEmpty()) {
-                        options.shuffle();
+                        CardListUtil.shuffle(options);
                         return options.get(0);
                     } else {
-                        humanCreatures.shuffle();
+                        CardListUtil.shuffle(humanCreatures);
                         return humanCreatures.get(0);
                     }
                 }

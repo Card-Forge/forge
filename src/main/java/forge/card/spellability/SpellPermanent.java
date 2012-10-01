@@ -26,6 +26,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.Command;
 import forge.CommandReturn;
@@ -107,7 +108,7 @@ public class SpellPermanent extends Spell {
                 computer = computer.getValidCards(SpellPermanent.this.championValid, controller, source);
                 computer.remove(source);
 
-                computer.shuffle();
+                CardListUtil.shuffle(computer);
                 if (computer.size() != 0) {
                     final Card c = computer.get(0);
                     source.setChampionedCard(c);

@@ -1169,7 +1169,7 @@ public final class AbilityFactoryChangeZone {
             } else if (defined) {
                 c = fetchList.get(0);
             } else {
-                fetchList.shuffle();
+                CardListUtil.shuffle(fetchList);
                 // Save a card as a default, in case we can't find anything suitable.
                 Card first = fetchList.get(0);
                 if (ZoneType.Battlefield.equals(destination)) {
@@ -1830,7 +1830,7 @@ public final class AbilityFactoryChangeZone {
                     }
                     if (choice == null) {
                         // No creatures or spells?
-                        list.shuffle();
+                        CardListUtil.shuffle(list);
                         choice = list.get(0);
                     }
                 } else {
@@ -1943,7 +1943,7 @@ public final class AbilityFactoryChangeZone {
                     }
                     if (choice == null) {
                         // No creatures or spells?
-                        list.shuffle();
+                        CardListUtil.shuffle(list);
                         choice = list.get(0);
                     }
                 } else {
