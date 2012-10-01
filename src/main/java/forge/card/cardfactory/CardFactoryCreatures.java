@@ -264,7 +264,7 @@ public class CardFactoryCreatures {
         card.addComesIntoPlayCommand(intoPlay);
     }
 
-    private static void getCard_SkySwallower(final Card card, final String cardName) {
+    /*private static void getCard_SkySwallower(final Card card, final String cardName) {
         final SpellAbility ability = new Ability(card, "0") {
 
             @Override
@@ -296,7 +296,7 @@ public class CardFactoryCreatures {
             }
         };
         card.addComesIntoPlayCommand(intoPlay);
-    }
+    }*/
 
     private static void getCard_PainterServant(final Card card, final String cardName) {
         final long[] timeStamp = new long[1];
@@ -1486,8 +1486,6 @@ public class CardFactoryCreatures {
             getCard_MinotaurExplorer(card, cardName);
         } else if (cardName.equals("Phylactery Lich")) {
             getCard_PhylacteryLich(card, cardName);
-        } else if (cardName.equals("Sky Swallower")) {
-            getCard_SkySwallower(card, cardName);
         } else if (cardName.equals("Painter's Servant")) {
             getCard_PainterServant(card, cardName);
         } else if (cardName.equals("Stangg")) {
