@@ -209,7 +209,7 @@ public class SFilterUtil {
         // Careful when changing this.
         chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.MULTICOLOR)).getCheckBox();
         final Predicate<CardPrinted> preMulti;
-        if (chbTemp.isSelected()) {
+        if (!chbTemp.isSelected()) {
             preMulti = Predicates.alwaysTrue();
         }
         else {
