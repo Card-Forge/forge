@@ -719,6 +719,13 @@ public class AbilityFactoryZoneAffecting {
                 AbilityFactoryZoneAffecting.millResolve(af, this);
             }
 
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryZoneAffecting.millTriggerNoCost(af, this, mandatory);
+                }
+                return AbilityFactoryZoneAffecting.millTrigger(af, this, mandatory);
+            }
         };
         return spMill;
     }
@@ -1015,6 +1022,10 @@ public class AbilityFactoryZoneAffecting {
             return false;
         }
 
+        return millTriggerNoCost(af, sa, mandatory);
+    }
+
+    private static boolean millTriggerNoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!AbilityFactoryZoneAffecting.millTargetAI(af, sa, mandatory)) {
             return false;
         }

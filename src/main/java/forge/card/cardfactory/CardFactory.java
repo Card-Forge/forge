@@ -28,6 +28,7 @@ import forge.CardCharacteristicName;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.CardRules;
+import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
@@ -212,6 +213,11 @@ public class CardFactory implements CardFactoryInterface {
 
         if (controller.isHuman()) {
             Singletons.getModel().getGameAction().playSpellAbilityForFree(copySA);
+        } else if (copySA instanceof Spell) {
+            Spell spell = (Spell) copySA;
+            if (spell.canPlayFromEffectAI(false, true)) {
+                ComputerUtil.playStackFree(copySA);
+            }
         } else if (copySA.canPlayAI()) {
             ComputerUtil.playStackFree(copySA);
         }
