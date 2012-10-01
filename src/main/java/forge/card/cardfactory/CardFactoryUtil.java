@@ -1580,34 +1580,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * getHumanCreatureAI.
-     * </p>
-     * 
-     * @param toughness
-     *            a int.
-     * @param spell
-     *            a {@link forge.Card} object.
-     * @param targeted
-     *            a boolean.
-     * @return a {@link forge.CardList} object.
-     */
-    public static CardList getHumanCreatureAI(final int toughness, final SpellAbility spell, final boolean targeted) {
-        CardList creature = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        creature = creature.filter(new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                if (targeted) {
-                    return c.isCreature() && (c.getNetDefense() <= toughness) && c.canBeTargetedBy(spell);
-                } else {
-                    return c.isCreature() && (c.getNetDefense() <= toughness);
-                }
-            }
-        });
-        return creature;
-    } // AI_getHumanCreature()
-
-    /**
-     * <p>
      * targetHumanAI.
      * </p>
      * 
@@ -1685,59 +1657,6 @@ public class CardFactoryUtil {
             }
         }
         return count;
-    }
-
-    /**
-     * <p>
-     * multiplyManaCost.
-     * </p>
-     * 
-     * @param manacost
-     *            a {@link java.lang.String} object.
-     * @param multiplier
-     *            a int.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String multiplyManaCost(final String manacost, final int multiplier) {
-        if (multiplier == 0) {
-            return "";
-        }
-        if (multiplier == 1) {
-            return manacost;
-        }
-
-        final String[] tokenized = manacost.split("\\s");
-        final StringBuilder sb = new StringBuilder();
-
-        if (Character.isDigit(tokenized[0].charAt(0))) {
-            // manacost starts with
-            // "colorless" number
-            // cost
-            int cost = Integer.parseInt(tokenized[0]);
-            cost = multiplier * cost;
-            tokenized[0] = "" + cost;
-            sb.append(tokenized[0]);
-        } else {
-            for (int i = 0; i < multiplier; i++) {
-                // tokenized[0] = tokenized[0] + " " + tokenized[0];
-                sb.append((" "));
-                sb.append(tokenized[0]);
-            }
-        }
-
-        for (int i = 1; i < tokenized.length; i++) {
-            for (int j = 0; j < multiplier; j++) {
-                // tokenized[i] = tokenized[i] + " " + tokenized[i];
-                sb.append((" "));
-                sb.append(tokenized[i]);
-
-            }
-        }
-
-        String result = sb.toString();
-        System.out.println("result: " + result);
-        result = result.trim();
-        return result;
     }
 
     /**
@@ -1865,19 +1784,6 @@ public class CardFactoryUtil {
         return target.canBeTargetedBy(ability);
     }
 
-    /**
-     * <p>
-     * isColored.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public static boolean isColored(final Card c) {
-        return c.isWhite() || c.isBlue() || c.isBlack() || c.isRed() || c.isGreen();
-    }
-
     // does "target" have protection from "card"?
     /**
      * <p>
@@ -1933,37 +1839,6 @@ public class CardFactoryUtil {
         //TODO: Add code for Autumn's Veil here
 
         return true;
-    }
-
-    // returns the number of equipments named "e" card c is equipped by
-    /**
-     * <p>
-     * Gets the number of equipments with a given name that a given card is
-     * equipped by.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @return a int.
-     */
-    public static int hasNumberEquipments(final Card card, final String name) {
-        if (!card.isEquipped()) {
-            return 0;
-        }
-
-        CardList list = new CardList(card.getEquippedBy());
-        list = list.filter(new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getName().equals(name);
-            }
-
-        });
-
-        return list.size();
-
     }
 
     /**

@@ -750,9 +750,7 @@ public class CardFactoryCreatures {
             } // chooseTargetAI()
 
             CardList getCreature() {
-
-                // toughness of 1
-                CardList list = CardFactoryUtil.getHumanCreatureAI(card.getCounters(Counters.P1P1), this, true);
+                CardList list = CardFactoryUtil.getHumanCreatureAI(this, true);
                 list = list.filter(new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
