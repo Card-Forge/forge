@@ -186,6 +186,32 @@ Fixes/Features:
 - fixed Druid's Deliverance file name
 - delete old file
 - Added the recent commit logs to changes.txt.
+- Added a new AI SVar "HasCombatEffect". The AI will no longer run into a Wall of Souls without gain and attack more aggressively with creatures like Mirri the Cursed.
+- Added 38 preconstructed decks by Xitax.
+- Forgot 3 files for the preconstructed decks by Xitax.
+- Added "SVar:HasCombatEffect:TRUE" to some more cards.
+- Updated card and product prices.
+- Updated some decks with new RtR cards.
+- Fixed Warbreak Trumpeter.
+- Removed the unused variable prevType from the card class.
+- Fixed Sower of Temptation infinite loop.
+- added TriggedPlayer to calculateAmount method. added Havoc Festival
+- Added Counterflux (once more with flux).
+- Fixed Casting Cost in Righteous Authroity
+- Fixed Crypt of Agadeem.
+- added processing of basic keywords to cardTemplateScript.py
+- Added the quest opponent Minerva McGonagall by Nordos.
+- fix cost of Slaughter Games. Fix First Strike keyword on Master of Arms and Renegade Warlord
+- fixed First Strike keyword on Natural Emergence
+- added check on reveal list size
+- There was endless loop due to my refactoring
+- from tests removed braids legacy
+- fixed incorrect m13 FP
+- fixed Hellhole Flailer issue with duplicate SVar
+- Little improvements for Attach AI.
+- Fixed Subterranean Hangar.
+- Reverted Triangle of War and fixed an issue with the AI targeting.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -239,6 +265,7 @@ Collective Blessing
 Common Bond
 Concordia Pegasus
 Conjured Currency
+Counterflux
 Coursers' Accord
 Crosstown Courier
 Cryptborn Horror
@@ -250,6 +277,7 @@ Deadbridge Goliath
 Death's Presence
 Deathrite Shaman
 Destroy the Evidence
+Detention Sphere
 Deviant Glee
 Doorkeeper
 Downsize
@@ -262,12 +290,14 @@ Druid's Deliverance
 Dryad Militant
 Dynacharge
 Electrickery
+Essence Backlash
 Ethereal Armor
 Explosive Impact
 Eyes in the Skies
 Faerie Imposter
 Fall of the Gavel
 Fencing Ace
+Firemind's Foresight
 Frostburn Weird
 Gatecreeper Vine
 Gobbling Ooze
@@ -279,9 +309,12 @@ Golgari Guildgate
 Golgari Keyrune
 Golgari Longlegs
 Gore-House Chainwalker
+Grave Betrayal
 Grim Roustabout
 Grisly Salvage
 Grove of the Guardian
+Growing Ranks
+Guild Feud
 Guttersnipe
 Hellhole Flailer
 Horncaller's Chant
@@ -296,6 +329,7 @@ Izzet Guildgate
 Izzet Keyrune
 Izzet Staticaster
 Jace, Architect of Thought
+Jarad's Orders
 Jarad, Golgari Lich Lord
 Judge's Familiar
 Keening Apparition
@@ -338,8 +372,10 @@ Rakdos Shred-Freak
 Rakdos's Return
 Rakdos, Lord of Riots
 Rest in Peace
+Righteous Authority
 Risen Sanctuary
 Rites of Reaping
+Rix Maadi Guildmage
 Rogue's Passage
 Rootborn Defenses
 Rubbleback Rhino
@@ -358,6 +394,7 @@ Shrieking Affliction
 Skull Rend
 Skyline Predator
 Skymark Roc
+Slaughter Games
 Slime Molding
 Slitherhead
 Sluiceway Scorpion
