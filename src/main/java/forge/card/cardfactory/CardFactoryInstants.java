@@ -95,7 +95,7 @@ public class CardFactoryInstants {
                 public void resolve() {
                     Player player = getTargetPlayer();
                     CardList artifacts = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-                    artifacts = artifacts.filter(CardPredicates.Presets.ARTIFACTS);
+                    artifacts = CardListUtil.filter(artifacts, CardPredicates.Presets.ARTIFACTS);
 
                     for (int i = 0; i < artifacts.size(); i++) {
                         Card thisArtifact = artifacts.get(i);
@@ -422,8 +422,8 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     final Player you = card.getController();
-                    final CardList ens = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(Presets.ENCHANTMENTS);
-                    final CardList toReturn = ens.filter(new Predicate<Card>() {
+                    final CardList ens = CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), Presets.ENCHANTMENTS);
+                    final CardList toReturn = CardListUtil.filter(ens, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             final Card enchanting = c.getEnchantingCard();

@@ -33,6 +33,7 @@ import javax.swing.SwingWorker;
 
 import forge.AllZone;
 import forge.Card;
+import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Constant;
@@ -152,7 +153,7 @@ public enum CDock implements ICDoc {
         final Player human = AllZone.getHumanPlayer();
 
         if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, human)) {
-            for (Card c : human.getCardsIn(ZoneType.Battlefield).filter(Presets.CREATURES)) {
+            for (Card c : CardListUtil.filter(human.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
                 if (!c.isAttacking() && CombatUtil.canAttack(c, AllZone.getCombat())) {
                     AllZone.getCombat().addAttacker(c);
                 }

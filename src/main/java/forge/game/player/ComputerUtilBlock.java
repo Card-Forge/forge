@@ -401,7 +401,7 @@ public class ComputerUtilBlock {
     final static Predicate<Card> rampagesOrNeedsManyToBlock = Predicates.or( CardPredicates.containsKeyword("Rampage"), CardPredicates.containsKeyword("CARDNAME can't be blocked by more than one creature."));
 
     private static Combat makeGangBlocks(final Combat combat) {
-        CardList currentAttackers = ComputerUtilBlock.getAttackersLeft().filter(Predicates.not(rampagesOrNeedsManyToBlock));
+        CardList currentAttackers = CardListUtil.filter(ComputerUtilBlock.getAttackersLeft(), Predicates.not(rampagesOrNeedsManyToBlock));
         CardList blockers;
 
         // Try to block an attacker without first strike with a gang of first strikers
@@ -457,7 +457,7 @@ public class ComputerUtilBlock {
             // than the attacker
             // Don't use blockers without First Strike or Double Strike if
             // attacker has it
-            usableBlockers = blockers.filter(new Predicate<Card>() {
+            usableBlockers = CardListUtil.filter(blockers, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if ((attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike"))
@@ -598,7 +598,7 @@ public class ComputerUtilBlock {
         CardList chumpBlockers;
 
         CardList tramplingAttackers = CardListUtil.getKeyword(ComputerUtilBlock.getAttackers(), "Trample");
-        tramplingAttackers = tramplingAttackers.filter(Predicates.not(rampagesOrNeedsManyToBlock));
+        tramplingAttackers = CardListUtil.filter(tramplingAttackers, Predicates.not(rampagesOrNeedsManyToBlock));
         
         // TODO - should check here for a "rampage-like" trigger that replaced
         // the keyword:
@@ -645,7 +645,7 @@ public class ComputerUtilBlock {
         CardList safeBlockers;
         CardList blockers;
         
-        CardList targetAttackers = ComputerUtilBlock.getBlockedButUnkilled().filter(Predicates.not(rampagesOrNeedsManyToBlock));
+        CardList targetAttackers = CardListUtil.filter(ComputerUtilBlock.getBlockedButUnkilled(), Predicates.not(rampagesOrNeedsManyToBlock));
         
         // TODO - should check here for a "rampage-like" trigger that replaced
         // the keyword:

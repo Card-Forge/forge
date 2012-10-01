@@ -735,8 +735,7 @@ public final class AbilityFactoryChoose {
                         else if (logic.equals("MostProminentHumanCreatures")) {
                             CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                             if (list.isEmpty()) {
-                                list = CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer())
-                                        .filter(CardPredicates.Presets.CREATURES);
+                                list = CardListUtil.filter(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer()), CardPredicates.Presets.CREATURES);
                             }
                             chosen = CardFactoryUtil.getMostProminentColor(list);
                         }
@@ -1642,7 +1641,7 @@ public final class AbilityFactoryChoose {
                             }
                         } else {
                             CardList list = CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer());
-                            list = list.filter(Predicates.not(Presets.LANDS));
+                            list = CardListUtil.filter(list, Predicates.not(Presets.LANDS));
                             if (!list.isEmpty()) {
                                 chosen = list.get(0).getName();
                             }
@@ -1975,8 +1974,8 @@ public final class AbilityFactoryChoose {
                         }
                     } else { // Computer
                         if (params.containsKey("AILogic") && params.get("AILogic").equals("BestBlocker")) {
-                            if (choices.filter(Presets.UNTAPPED).isEmpty()) {
-                                choices = choices.filter(Presets.UNTAPPED);
+                            if (CardListUtil.filter(choices, Presets.UNTAPPED).isEmpty()) {
+                                choices = CardListUtil.filter(choices, Presets.UNTAPPED);
                             }
                             chosen.add(CardFactoryUtil.getBestCreatureAI(choices));
                         } else {

@@ -1008,7 +1008,7 @@ public class ComputerUtil {
      */
     public static CardList getAvailableMana(final Player player, final boolean checkPlayable) {
         final CardList list = player.getCardsIn(ZoneType.Battlefield);
-        final CardList manaSources = list.filter(new Predicate<Card>() {
+        final CardList manaSources = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (checkPlayable) {
@@ -1305,8 +1305,8 @@ public class ComputerUtil {
             return false;
         }
         final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-        CardList landList = hand.filter(Presets.LANDS);
-        CardList nonLandList = hand.filter(Predicates.not(CardPredicates.Presets.LANDS));
+        CardList landList = CardListUtil.filter(hand, Presets.LANDS);
+        CardList nonLandList = CardListUtil.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
 
         final CardList lands = computer.getCardsIn(ZoneType.Graveyard);
         for (final Card crd : lands) {
@@ -1319,7 +1319,7 @@ public class ComputerUtil {
         }
         if (landList.size() == 1 && nonLandList.size() < 3) {
             CardList cardsInPlay = computer.getCardsIn(ZoneType.Battlefield);
-            CardList landsInPlay = cardsInPlay.filter(Presets.LANDS);
+            CardList landsInPlay = CardListUtil.filter(cardsInPlay, Presets.LANDS);
             CardList allCards = computer.getCardsIn(ZoneType.Graveyard);
             allCards.addAll(cardsInPlay);
             int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
@@ -1340,7 +1340,7 @@ public class ComputerUtil {
             }
         }
 
-        landList = landList.filter(new Predicate<Card>() {
+        landList = CardListUtil.filter(landList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (c.getSVar("NeedsToPlay").length() > 0) {
@@ -1366,7 +1366,7 @@ public class ComputerUtil {
                 final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
                 CardList lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 lands.addAll(hand);
-                lands = lands.filter(CardPredicates.Presets.LANDS);
+                lands = CardListUtil.filter(lands, CardPredicates.Presets.LANDS);
                 int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
                 for (final SpellAbility sa : spellAbilities) {
                     if (sa.isCycling()) {
@@ -1461,7 +1461,7 @@ public class ComputerUtil {
             for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest,
                                              // priority 5 the highest
                 final int priority = 6 - ip;
-                final CardList sacMeList = typeList.filter(new Predicate<Card>() {
+                final CardList sacMeList = CardListUtil.filter(typeList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return (!c.getSVar("SacMe").equals("") && (Integer.parseInt(c.getSVar("SacMe")) == priority));
@@ -1626,7 +1626,7 @@ public class ComputerUtil {
             }
             List<Card> aiCards = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             final int numLandsInPlay = Iterables.size(Iterables.filter(aiCards, CardPredicates.Presets.LANDS));
-            final CardList landsInHand = hand.filter(CardPredicates.Presets.LANDS);
+            final CardList landsInHand = CardListUtil.filter(hand, CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
 
             // Discard a land
@@ -1801,7 +1801,7 @@ public class ComputerUtil {
         typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
 
         // is this needed?
-        typeList = typeList.filter(Presets.UNTAPPED);
+        typeList = CardListUtil.filter(typeList, Presets.UNTAPPED);
 
         if (tap) {
             typeList.remove(activate);
@@ -1841,7 +1841,7 @@ public class ComputerUtil {
         typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
 
         // is this needed?
-        typeList = typeList.filter(Presets.TAPPED);
+        typeList = CardListUtil.filter(typeList, Presets.TAPPED);
 
         if (untap) {
             typeList.remove(activate);
@@ -1910,7 +1910,7 @@ public class ComputerUtil {
      */
     public static CardList getPossibleAttackers() {
         CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CombatUtil.canAttack(c);
@@ -2297,8 +2297,8 @@ public class ComputerUtil {
         if (!discard.getSVar("DiscardMe").equals("")) {
             return true;
         }
-        final CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.LANDS);
-        final CardList landsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).filter(CardPredicates.Presets.LANDS);
+        final CardList landsInPlay = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
+        final CardList landsInHand = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
         final CardList nonLandsInHand = CardListUtil.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
         final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
         final int discardCMC = discard.getCMC();

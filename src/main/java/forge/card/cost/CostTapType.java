@@ -120,7 +120,7 @@ public class CostTapType extends CostPartWithList {
         if (cost.getTap()) {
             typeList.remove(source);
         }
-        typeList = typeList.filter(Presets.UNTAPPED);
+        typeList = CardListUtil.filter(typeList, Presets.UNTAPPED);
 
         final Integer amount = this.convertAmount();
         if ((typeList.size() == 0) || ((amount != null) && (typeList.size() < amount))) {
@@ -154,7 +154,7 @@ public class CostTapType extends CostPartWithList {
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         CardList typeList = ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
         typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
-        typeList = typeList.filter(Presets.UNTAPPED);
+        typeList = CardListUtil.filter(typeList, Presets.UNTAPPED);
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {
@@ -188,7 +188,7 @@ public class CostTapType extends CostPartWithList {
             if (sVar.equals("XChoice")) {
                 CardList typeList = ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
                 typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
-                typeList = typeList.filter(Presets.UNTAPPED);
+                typeList = CardListUtil.filter(typeList, Presets.UNTAPPED);
                 c = typeList.size();
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));
             } else {

@@ -313,7 +313,7 @@ public class AbilityFactoryCounters {
         final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
 
         list = player.getCardsIn(ZoneType.Battlefield);
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.canBeTargetedBy(sa) && !c.hasKeyword("CARDNAME can't have counters placed on it.")
@@ -477,7 +477,7 @@ public class AbilityFactoryCounters {
             abTgt.resetTargets();
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
-                list = list.filter(new Predicate<Card>() {
+                list = CardListUtil.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return sa.canTarget(c);
@@ -659,7 +659,7 @@ public class AbilityFactoryCounters {
         Card choice;
         if (type.equals("M1M1")) {
             // try to kill the best killable creature, or reduce the best one
-            final CardList killable = list.filter(new Predicate<Card>() {
+            final CardList killable = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getNetDefense() <= amount;
@@ -693,7 +693,7 @@ public class AbilityFactoryCounters {
         if (type.equals("P1P1")) {
             choice = CardFactoryUtil.getBestCreatureAI(list);
         } else if (type.equals("DIVINITY")) {
-            final CardList boon = list.filter(new Predicate<Card>() {
+            final CardList boon = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getCounters(Counters.DIVINITY) == 0;
@@ -1448,7 +1448,7 @@ public class AbilityFactoryCounters {
         }
         CardList hperms = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         CardList cperms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        cperms = cperms.filter(new Predicate<Card>() {
+        cperms = CardListUtil.filter(cperms, new Predicate<Card>() {
             @Override
             public boolean apply(final Card crd) {
                 for (final Counters c1 : Counters.values()) {
@@ -1460,7 +1460,7 @@ public class AbilityFactoryCounters {
             }
         });
 
-        hperms = hperms.filter(new Predicate<Card>() {
+        hperms = CardListUtil.filter(hperms, new Predicate<Card>() {
             @Override
             public boolean apply(final Card crd) {
                 for (final Counters c1 : Counters.values()) {
@@ -1576,7 +1576,7 @@ public class AbilityFactoryCounters {
                 }
             });
         } else { // Compy
-            cperms = cperms.filter(new Predicate<Card>() {
+            cperms = CardListUtil.filter(cperms, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
                     for (final Counters c1 : Counters.values()) {
@@ -1590,7 +1590,7 @@ public class AbilityFactoryCounters {
                 }
             });
 
-            hperms = hperms.filter(new Predicate<Card>() {
+            hperms = CardListUtil.filter(hperms, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
                     for (final Counters c1 : Counters.values()) {
@@ -1919,7 +1919,7 @@ public class AbilityFactoryCounters {
 
         if (curse) {
             if (type.equals("M1M1")) {
-                final CardList killable = hList.filter(new Predicate<Card>() {
+                final CardList killable = CardListUtil.filter(hList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return c.getNetDefense() <= amount;

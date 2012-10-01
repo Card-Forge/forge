@@ -1419,7 +1419,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a CardList with all the cards currently in that player's library
      */
     public final CardList getCardsIn(final ZoneType zone, final String cardName) {
-        return this.getCardsIn(zone).filter(CardPredicates.nameEquals(cardName));
+        return CardListUtil.filter(this.getCardsIn(zone), CardPredicates.nameEquals(cardName));
     }
 
     /**
@@ -1889,7 +1889,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a {@link forge.Card} object.
      */
     public final Card getPlaneswalker() {
-        final CardList c = this.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.PLANEWALKERS);
+        final CardList c = CardListUtil.filter(this.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
         if ((null != c) && (c.size() > 0)) {
             return c.get(0);
         } else {
@@ -2287,7 +2287,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean hasMetalcraft() {
-        final CardList list = this.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.ARTIFACTS);
+        final CardList list = CardListUtil.filter(this.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
         return list.size() >= 3;
     }
 

@@ -357,7 +357,7 @@ public class SpellPermanent extends Spell {
         }
         if (card.isPlaneswalker()) {
             CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            list = list.filter(CardPredicates.Presets.PLANEWALKERS);
+            list = CardListUtil.filter(list, CardPredicates.Presets.PLANEWALKERS);
 
             for (int i = 0; i < list.size(); i++) {
                 List<String> type = card.getType();

@@ -59,7 +59,7 @@ public final class PlayerUtil {
         // Instead of hardcoded Ali from Cairo like cards, it is now a Keyword
         CardList list = player.getCardsIn(ZoneType.Battlefield);
         list = CardListUtil.getKeyword(list, "Damage that would reduce your life total to less than 1 reduces it to 1 instead.");
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !c.isFaceDown();

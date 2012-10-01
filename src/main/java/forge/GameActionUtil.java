@@ -864,7 +864,7 @@ public final class GameActionUtil {
                 public void resolve() {
                     for (int i = 0; i < damage; i++) {
                         CardList nonTokens = player.getCardsIn(ZoneType.Battlefield);
-                        nonTokens = nonTokens.filter(Presets.NON_TOKEN);
+                        nonTokens = CardListUtil.filter(nonTokens, Presets.NON_TOKEN);
                         if (nonTokens.size() == 0) {
                             player.loseConditionMet(GameLossReason.SpellEffect, lich.getName());
                         } else {
@@ -1159,7 +1159,7 @@ public final class GameActionUtil {
             produces.put("Swamp", "B");
 
             CardList lands = AllZoneUtil.getCardsInGame();
-            lands = lands.filter(Presets.LANDS);
+            lands = CardListUtil.filter(lands, Presets.LANDS);
 
             // remove all abilities granted by this Command
             for (final Card land : lands) {
@@ -1230,7 +1230,7 @@ public final class GameActionUtil {
             // add +1/+1 to cards
             list.clear();
             final int num = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Coat of Arms").size();
-            final List<Card> creatures = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.CREATURES);
+            final List<Card> creatures = CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
 
             for (Card c : creatures) {
                 for (Card c2 : creatures) {
@@ -1310,7 +1310,7 @@ public final class GameActionUtil {
         public void execute() {
             CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
-            list = list.filter(new Predicate<Card>() {
+            list = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getName().equals("Avatar") && c.getImageName().equals("W N N Avatar");
@@ -1372,7 +1372,7 @@ public final class GameActionUtil {
 
         private boolean getsBonus(final Card c) {
             CardList list = c.getController().getCardsIn(ZoneType.Battlefield);
-            list = list.filter(new Predicate<Card>() {
+            list = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getName().equals("Guan Yu, Sainted Warrior")
@@ -1392,7 +1392,7 @@ public final class GameActionUtil {
         @Override
         public void execute() {
             CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            list = list.filter(new Predicate<Card>() {
+            list = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getName().equals("Wolf")
@@ -1522,7 +1522,7 @@ public final class GameActionUtil {
     public static void doPowerSink(final Player p) {
         // get all lands with mana abilities
         CardList lands = AllZoneUtil.getPlayerLandsInPlay(p);
-        lands = lands.filter(new Predicate<Card>() {
+        lands = CardListUtil.filter(lands, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.getManaAbility().size() > 0;

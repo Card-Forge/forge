@@ -338,7 +338,7 @@ public class AbilityFactoryGainControl {
         list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getSourceCard().getController(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 final Map<String, String> vars = c.getSVars();
@@ -858,7 +858,7 @@ public class AbilityFactoryGainControl {
         list = CardListUtil.getValidCards(list, tgt.getValidTgts(), AllZone.getComputerPlayer(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 final Map<String, String> vars = c.getSVars();

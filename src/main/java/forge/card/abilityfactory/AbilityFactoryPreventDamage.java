@@ -380,7 +380,7 @@ public class AbilityFactoryPreventDamage {
                 if (targetables.size() == 0) {
                     return false;
                 }
-                final CardList combatants = targetables.filter(CardPredicates.Presets.CREATURES);
+                final CardList combatants = CardListUtil.filter(targetables, CardPredicates.Presets.CREATURES);
                 CardListUtil.sortByEvaluateCreature(combatants);
 
                 for (final Card c : combatants) {
@@ -470,7 +470,7 @@ public class AbilityFactoryPreventDamage {
         }
 
         if (compTargetables.size() > 0) {
-            final CardList combatants = compTargetables.filter(CardPredicates.Presets.CREATURES);
+            final CardList combatants = CardListUtil.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardListUtil.sortByEvaluateCreature(combatants);
             if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {

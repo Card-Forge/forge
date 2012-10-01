@@ -301,7 +301,7 @@ public class TargetSelection {
         // If the cards can't share a creature type
         if (tgt.isWithoutSameCreatureType() && !targeted.isEmpty()) {
             final Card card = targeted.get(0);
-            choices = choices.filter(new Predicate<Card>() {
+            choices = CardListUtil.filter(choices, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return !c.sharesCreatureTypeWith(card);

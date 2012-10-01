@@ -6,6 +6,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
@@ -184,7 +185,7 @@ class CardFactoryArtifacts {
                         }
                     } else {
                         CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                        list = list.filter(CardPredicates.Presets.LANDS);
+                        list = CardListUtil.filter(list, CardPredicates.Presets.LANDS);
                         AllZone.getComputerPlayer().discard(list.get(0), this);
                     } // else
                 } // resolve()
@@ -217,7 +218,7 @@ class CardFactoryArtifacts {
                 public boolean canPlay() {
                     CardList list = card.getController().getCardsIn(ZoneType.Hand);
                     list.remove(card);
-                    list = list.filter(CardPredicates.Presets.LANDS);
+                    list = CardListUtil.filter(list, CardPredicates.Presets.LANDS);
                     return (list.size() != 0) && super.canPlay();
                 } // canPlay()
             };
@@ -343,7 +344,7 @@ class CardFactoryArtifacts {
                     final Player player = this.getTargetPlayer();
 
                     CardList lands = player.getCardsIn(ZoneType.Graveyard);
-                    lands = lands.filter(Presets.BASIC_LANDS);
+                    lands = CardListUtil.filter(lands, Presets.BASIC_LANDS);
                     if (card.getController().isHuman()) {
                         // now, select up to four lands
                         int end = -1;
@@ -388,7 +389,7 @@ class CardFactoryArtifacts {
 
                 private CardList getComputerLands() {
                     final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                    return list.filter(CardPredicates.Presets.BASIC_LANDS);
+                    return CardListUtil.filter(list, CardPredicates.Presets.BASIC_LANDS);
                 }
             }
             final Cost abCost = new Cost(card, "1 T Sac<1/CARDNAME>", true);

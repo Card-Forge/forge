@@ -206,7 +206,7 @@ public class AIPlayer extends Player {
                                         // probably don't need more
             } else if (topN.get(i).isCreature()) {
                 CardList cl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                cl = cl.filter(CardPredicates.Presets.CREATURES);
+                cl = CardListUtil.filter(cl, CardPredicates.Presets.CREATURES);
                 bottom = cl.size() > 5; // if control more than 5 Creatures,
                                         // probably don't need more
             }

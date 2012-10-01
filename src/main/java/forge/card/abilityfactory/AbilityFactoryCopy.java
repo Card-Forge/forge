@@ -324,7 +324,7 @@ public final class AbilityFactoryCopy {
                 }
 
                 Card choice;
-                if (list.filter(Presets.CREATURES).size() > 0) {
+                if (CardListUtil.filter(list, Presets.CREATURES).size() > 0) {
                     choice = CardFactoryUtil.getBestCreatureAI(list);
                 } else {
                     choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, true);

@@ -297,8 +297,8 @@ public class CardFactorySorceries {
 
             @Override
             public boolean canPlayAI() {
-                CardList humTokenCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer()).filter(Presets.TOKEN);
-                CardList compTokenCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()).filter(Presets.TOKEN);
+                CardList humTokenCreats = CardListUtil.filter(AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer()), Presets.TOKEN);
+                CardList compTokenCreats = CardListUtil.filter(AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()), Presets.TOKEN);
 
                 return compTokenCreats.size() > humTokenCreats.size();
             } // canPlayAI()
@@ -306,7 +306,7 @@ public class CardFactorySorceries {
             @Override
             public void resolve() {
                 CardList tokens = AllZoneUtil.getCreaturesInPlay();
-                tokens = tokens.filter(Presets.TOKEN);
+                tokens = CardListUtil.filter(tokens, Presets.TOKEN);
 
                 CardFactoryUtil.copyTokens(tokens);
 
@@ -372,7 +372,7 @@ public class CardFactorySorceries {
                 }
 
                 // need to sacrifice the other non-basic land types
-                land = land.filter(new Predicate<Card>() {
+                land = CardListUtil.filter(land, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         if (c.getName().contains("Dryad Arbor")) {
@@ -439,7 +439,7 @@ public class CardFactorySorceries {
                     // controls and add them to target
                     CardList land = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
                     CardList cl = CardListUtil.getType(land, humanBasic.get(this.count));
-                    cl = cl.filter(new Predicate<Card>() {
+                    cl = CardListUtil.filter(cl, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card crd) {
                             return !saveList.contains(crd);
@@ -460,7 +460,7 @@ public class CardFactorySorceries {
                     }
 
                     // need to sacrifice the other non-basic land types
-                    land = land.filter(new Predicate<Card>() {
+                    land = CardListUtil.filter(land, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             if (c.getName().contains("Dryad Arbor")) {
@@ -661,7 +661,7 @@ public class CardFactorySorceries {
 
                 final CardList humCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                 CardList compCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                compCreats = compCreats.filter(CardPredicates.Presets.CREATURES);
+                compCreats = CardListUtil.filter(compCreats, CardPredicates.Presets.CREATURES);
                 diff += 1.5 * (humCreats.size() - compCreats.size());
 
                 final CardList humHand = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand);
@@ -835,7 +835,7 @@ public class CardFactorySorceries {
                 }
 
                 // Actually put everything on the battlefield
-                CardList bidded = AllZoneUtil.getCardsIn(ZoneType.Graveyard).filter(CardPredicates.Presets.CREATURES);
+                CardList bidded = CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
                 for (final Card c : bidded) {
                     if (c.isType(input[1]) || (!input[0].equals("") && c.isType(input[0]))) {
                         Singletons.getModel().getGameAction().moveToPlay(c);
@@ -1159,8 +1159,8 @@ public class CardFactorySorceries {
             @Override
             public void showMessage() {
                 CardList grave = card.getController().getCardsIn(ZoneType.Graveyard);
-                grave = grave.filter(Presets.CREATURES);
-                grave = grave.filter(new Predicate<Card>() {
+                grave = CardListUtil.filter(grave, Presets.CREATURES);
+                grave = CardListUtil.filter(grave, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return c.getCMC() <= x[0];
@@ -1308,7 +1308,7 @@ public class CardFactorySorceries {
                     // get all
                     final CardList creatures = AllZoneUtil.getCreaturesInPlay();
                     CardList grave = card.getController().getCardsIn(ZoneType.Graveyard);
-                    grave = grave.filter(Presets.CREATURES);
+                    grave = CardListUtil.filter(grave, Presets.CREATURES);
 
                     if (AllZone.getHumanPlayer().canBeTargetedBy(spell)
                             || AllZone.getComputerPlayer().canBeTargetedBy(spell)) {
@@ -1388,7 +1388,7 @@ public class CardFactorySorceries {
 
                 // Sacrifice an artifact
                 CardList arts = p.getCardsIn(ZoneType.Battlefield);
-                arts = arts.filter(Presets.ARTIFACTS);
+                arts = CardListUtil.filter(arts, Presets.ARTIFACTS);
                 final Object toSac = GuiChoose.oneOrNone("Sacrifice an artifact", arts);
                 if (toSac != null) {
                     final Card c = (Card) toSac;
@@ -1401,7 +1401,7 @@ public class CardFactorySorceries {
                 // Search your library for an artifact
                 final CardList lib = p.getCardsIn(ZoneType.Library);
                 GuiChoose.oneOrNone("Looking at Library", lib);
-                final CardList libArts = lib.filter(Presets.ARTIFACTS);
+                final CardList libArts = CardListUtil.filter(lib, Presets.ARTIFACTS);
                 final Object o = GuiChoose.oneOrNone("Search for artifact", libArts);
                 if (o != null) {
                     newArtifact[0] = (Card) o;

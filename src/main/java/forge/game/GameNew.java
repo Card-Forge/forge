@@ -379,7 +379,7 @@ public class GameNew {
         CardListUtil.shuffle(library);
 
         // remove all land, keep non-basicland in there, shuffled
-        CardList land = library.filter(CardPredicates.Presets.LANDS);
+        CardList land = CardListUtil.filter(library, CardPredicates.Presets.LANDS);
         for (Card c : land) {
             if (c.isLand()) {
                 library.remove(c);

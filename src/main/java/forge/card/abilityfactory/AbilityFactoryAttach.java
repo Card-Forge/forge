@@ -360,7 +360,7 @@ public class AbilityFactoryAttach {
         if (tgt.getZone().contains(ZoneType.Battlefield) && !mandatory) {
             list = CardListUtil.getTargetableCards(list, sa);
         } else {
-            list = list.filter(Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
+            list = CardListUtil.filter(list, Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
         }
 
         if (list.size() == 0) {
@@ -504,7 +504,7 @@ public class AbilityFactoryAttach {
         // AI For choosing a Card to Animate.
         CardList betterList = CardListUtil.getNotType(list, "Creature");
         if (sa.getSourceCard().getName().equals("Animate Artifact")) {
-            betterList = betterList.filter(new Predicate<Card>() {
+            betterList = CardListUtil.filter(betterList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getCMC() > 0;
@@ -696,7 +696,7 @@ public class AbilityFactoryAttach {
         String stCheck = null;
         if (attachSource.isAura()) {
             stCheck = "EnchantedBy";
-            magnetList = list.filter(new Predicate<Card>() {
+            magnetList = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if ( !c.isCreature() ) return false;
@@ -706,7 +706,7 @@ public class AbilityFactoryAttach {
             });
         } else if (attachSource.isEquipment()) {
             stCheck = "EquippedBy";
-            magnetList = list.filter(new Predicate<Card>() {
+            magnetList = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if ( !c.isCreature() ) return false;
@@ -721,7 +721,7 @@ public class AbilityFactoryAttach {
             // Probably want to "weight" the list by amount of Enchantments and
             // choose the "lightest"
 
-            magnetList = magnetList.filter(new Predicate<Card>() {
+            magnetList = CardListUtil.filter(magnetList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return CombatUtil.canAttack(c);
@@ -773,7 +773,7 @@ public class AbilityFactoryAttach {
         if (totToughness < 0) {
             // Don't kill my own stuff with Negative toughness Auras
             final int tgh = totToughness;
-            prefList = prefList.filter(new Predicate<Card>() {
+            prefList = CardListUtil.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getLethalDamage() > Math.abs(tgh);
@@ -783,7 +783,7 @@ public class AbilityFactoryAttach {
 
         //only add useful keywords unless P/T bonus is significant
         if (totToughness + totPower < 4 && !keywords.isEmpty()) {
-            prefList = prefList.filter(new Predicate<Card>() {
+            prefList = CardListUtil.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return containsUsefulKeyword(keywords, c, sa);
@@ -792,7 +792,7 @@ public class AbilityFactoryAttach {
         }
 
         // Don't pump cards that will die.
-        prefList = prefList.filter(new Predicate<Card>() {
+        prefList = CardListUtil.filter(prefList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !c.getSVar("Targeting").equals("Dies");
@@ -802,13 +802,13 @@ public class AbilityFactoryAttach {
         if (attachSource.isAura()) {
             // TODO For Auras like Rancor, that aren't as likely to lead to
             // card disadvantage, this check should be skipped
-            prefList = prefList.filter(Predicates.not(Presets.ENCHANTED));
+            prefList = CardListUtil.filter(prefList, Predicates.not(Presets.ENCHANTED));
         }
 
         if (!grantingAbilities) {
             // Probably prefer to Enchant Creatures that Can Attack
             // Filter out creatures that can't Attack or have Defender
-            prefList = prefList.filter(new Predicate<Card>() {
+            prefList = CardListUtil.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return !c.isCreature() || CombatUtil.canAttackNextTurn(c);
@@ -891,7 +891,7 @@ public class AbilityFactoryAttach {
         if (totToughness < 0) {
             // Kill a creature if we can
             final int tgh = totToughness;
-            prefList = list.filter(new Predicate<Card>() {
+            prefList = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if (!c.hasKeyword("Indestructible") && (c.getLethalDamage() <= Math.abs(tgh))) {
@@ -917,7 +917,7 @@ public class AbilityFactoryAttach {
             // things to begin with
             if (keywords.contains("CARDNAME can't attack.") || keywords.contains("Defender")
                     || keywords.contains("CARDNAME attacks each turn if able.")) {
-                prefList = prefList.filter(new Predicate<Card>() {
+                prefList = CardListUtil.filter(prefList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return !(c.hasKeyword("CARDNAME can't attack.") || c.hasKeyword("Defender"));
@@ -995,7 +995,7 @@ public class AbilityFactoryAttach {
     public static Card attachAIKeepTappedPreference(final SpellAbility sa, final CardList list,
             final boolean mandatory, final Card attachSource) {
         // AI For Cards like Paralyzing Grasp and Glimmerdust Nap
-        final CardList prefList = list.filter(new Predicate<Card>() {
+        final CardList prefList = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 // Don't do Untapped Vigilance cards

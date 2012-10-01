@@ -125,7 +125,7 @@ public class CostUntapType extends CostPartWithList {
         if (cost.getUntap()) {
             typeList.remove(source);
         }
-        typeList = typeList.filter(Presets.TAPPED);
+        typeList = CardListUtil.filter(typeList, Presets.TAPPED);
 
         final Integer amount = this.convertAmount();
         if ((typeList.size() == 0) || ((amount != null) && (typeList.size() < amount))) {
@@ -160,7 +160,7 @@ public class CostUntapType extends CostPartWithList {
         final boolean untap = payment.getCost().getUntap();
         CardList typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
-        typeList = typeList.filter(Presets.TAPPED);
+        typeList = CardListUtil.filter(typeList, Presets.TAPPED);
         if (untap) {
             typeList.remove(source);
         }
@@ -200,7 +200,7 @@ public class CostUntapType extends CostPartWithList {
                 if (untap) {
                     typeList.remove(source);
                 }
-                typeList = typeList.filter(Presets.TAPPED);
+                typeList = CardListUtil.filter(typeList, Presets.TAPPED);
                 c = typeList.size();
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));
             } else {

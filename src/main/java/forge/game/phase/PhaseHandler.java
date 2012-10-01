@@ -26,6 +26,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -660,7 +661,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     private boolean skipTurnTimeVault(Player turn) {
         // time vault:
         CardList vaults = turn.getCardsIn(ZoneType.Battlefield, "Time Vault");
-        vaults = vaults.filter(CardPredicates.Presets.TAPPED);
+        vaults = CardListUtil.filter(vaults, CardPredicates.Presets.TAPPED);
 
         if (vaults.size() > 0) {
             final Card crd = vaults.get(0);
@@ -831,7 +832,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         // resets the status of attacked/blocked this phase
         CardList list = player.getCardsIn(ZoneType.Battlefield);
 
-        list = list.filter(CardPredicates.Presets.CREATURES);
+        list = CardListUtil.filter(list, CardPredicates.Presets.CREATURES);
 
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);

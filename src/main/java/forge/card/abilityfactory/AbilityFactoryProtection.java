@@ -249,7 +249,7 @@ public final class AbilityFactoryProtection {
         final ArrayList<String> gains = AbilityFactoryProtection.getProtectionList(hostCard, af.getMapParams());
 
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (!c.canBeTargetedBy(sa)) {
@@ -417,7 +417,7 @@ public final class AbilityFactoryProtection {
         }
 
         // Don't target cards that will die.
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 System.out.println("Not Protecting");
@@ -484,7 +484,7 @@ public final class AbilityFactoryProtection {
         }
 
         CardList pref = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
-        pref = pref.filter(new Predicate<Card>() {
+        pref = CardListUtil.filter(pref, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !AbilityFactoryProtection.hasProtectionFromAll(c,
@@ -492,7 +492,7 @@ public final class AbilityFactoryProtection {
             }
         });
         final CardList pref2 = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
-        pref = pref.filter(new Predicate<Card>() {
+        pref = CardListUtil.filter(pref, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !AbilityFactoryProtection.hasProtectionFromAny(c,

@@ -451,7 +451,7 @@ public final class AbilityFactoryDebuff {
         list = CardListUtil.getTargetableCards(list, sa);
 
         if (!list.isEmpty()) {
-            list = list.filter(new Predicate<Card>() {
+            list = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.hasAnyKeyword(kws); // don't add duplicate negative
@@ -800,7 +800,7 @@ public final class AbilityFactoryDebuff {
         // TODO - add blocking situations here also
 
         // only count creatures that can attack
-        human = human.filter(new Predicate<Card>() {
+        human = CardListUtil.filter(human, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CombatUtil.canAttack(c);

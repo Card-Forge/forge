@@ -172,14 +172,14 @@ class CardFactoryLands {
                     }
                     this.inPlay.clear();
                     this.inPlay.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield));
-                    return (this.inPlay.filter(targets).size() > 1) && super.canPlayAI();
+                    return (CardListUtil.filter(this.inPlay, targets).size() > 1) && super.canPlayAI();
                 }
 
                 @Override
                 public void resolve() {
                     this.inPlay.clear();
                     this.inPlay.addAll(AllZoneUtil.getCardsIn(ZoneType.Battlefield));
-                    for (final Card targ : this.inPlay.filter(targets)) {
+                    for (final Card targ : CardListUtil.filter(this.inPlay, targets)) {
                         targ.addCounter(Counters.P1P1, 1);
                     }
                 }
@@ -251,7 +251,7 @@ class CardFactoryLands {
                                 }
                             } // selectCard()
                         }; // Input
-                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(Presets.UNTAPPED)
+                        if ((CardListUtil.filter(AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()), Presets.UNTAPPED)
                                 .size() < 2)) {
                             Singletons.getModel().getGameAction().sacrifice(card, null);
                             return;
@@ -297,7 +297,7 @@ class CardFactoryLands {
                     if (this.player.isComputer()) {
                         if (land.size() > 0) {
                             CardList tappedLand = new CardList(land);
-                            tappedLand = tappedLand.filter(Presets.TAPPED);
+                            tappedLand = CardListUtil.filter(tappedLand, Presets.TAPPED);
                             // if any are tapped, sacrifice it
                             // else sacrifice random
                             if (tappedLand.size() > 0) {
@@ -378,11 +378,11 @@ class CardFactoryLands {
                 @Override
                 public void execute() {
                     CardList plains = AllZoneUtil.getPlayerLandsInPlay(card.getController());
-                    plains = plains.filter(Presets.UNTAPPED);
+                    plains = CardListUtil.filter(plains, Presets.UNTAPPED);
 
                     if (this.player.isComputer()) {
                         if (plains.size() > 1) {
-                            CardList tappedPlains = plains.filter(CardPredicates.Presets.BASIC_LANDS);
+                            CardList tappedPlains = CardListUtil.filter(plains, CardPredicates.Presets.BASIC_LANDS);
                             for (final Card c : tappedPlains) {
                                 Singletons.getModel().getGameAction().sacrifice(c, null);
                             }
@@ -396,7 +396,7 @@ class CardFactoryLands {
                         }
                     } else { // this is the human resolution
                         final int[] paid = { 0 };
-                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(Presets.UNTAPPED)
+                        if ((CardListUtil.filter(AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()), Presets.UNTAPPED)
                                 .size() < 2)) {
                             Singletons.getModel().getGameAction().sacrifice(card, null);
                             return;

@@ -76,10 +76,10 @@ public class ComputerUtilAttack {
      */
     public ComputerUtilAttack(final CardList possibleAttackers, final CardList possibleBlockers) {
         this.humanList = new CardList(possibleBlockers);
-        this.humanList = this.humanList.filter(CardPredicates.Presets.CREATURES);
+        this.humanList = CardListUtil.filter(this.humanList, CardPredicates.Presets.CREATURES);
 
         this.computerList = new CardList(possibleAttackers);
-        this.computerList = this.computerList.filter(CardPredicates.Presets.CREATURES);
+        this.computerList = CardListUtil.filter(this.computerList, CardPredicates.Presets.CREATURES);
 
         this.attackers = this.getPossibleAttackers(possibleAttackers);
         this.blockers = this.getPossibleBlockers(possibleBlockers, this.attackers);
@@ -167,7 +167,7 @@ public class ComputerUtilAttack {
      */
     public final CardList getPossibleAttackers(final CardList in) {
         CardList list = new CardList(in);
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CombatUtil.canAttack(c);
@@ -189,7 +189,7 @@ public class ComputerUtilAttack {
      */
     public final CardList getPossibleBlockers(final CardList blockers, final CardList attackers) {
         CardList possibleBlockers = new CardList(blockers);
-        possibleBlockers = possibleBlockers.filter(new Predicate<Card>() {
+        possibleBlockers = CardListUtil.filter(possibleBlockers, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return canBlockAnAttacker(c, attackers);
@@ -847,7 +847,7 @@ public class ComputerUtilAttack {
      */
     public final int countExaltedBonus(final Player player) {
         CardList list = player.getCardsIn(ZoneType.Battlefield);
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.hasKeyword("Exalted");

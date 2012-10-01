@@ -23,6 +23,7 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -52,14 +53,12 @@ public class CardListUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList filterToughness(final CardList in, final int atLeastToughness) {
-        return in.filter(
-            new Predicate<Card>() {
-                @Override
-                public boolean apply(Card c) {
-                    return c.getNetDefense() <= atLeastToughness;
-                }
+        return CardListUtil.filter(in, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.getNetDefense() <= atLeastToughness;
             }
-        );
+        });
     }
 
     public static final Comparator<Card> DefenseComparator = new Comparator<Card>() {
@@ -208,7 +207,7 @@ public class CardListUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList getColor(final CardList list, final String color) {
-        return list.filter(new Predicate<Card>() {
+        return CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CardUtil.getColors(c).contains(color);
@@ -226,7 +225,7 @@ public class CardListUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList getGoldCards(final CardList list) {
-        return list.filter(new Predicate<Card>() {
+        return CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CardUtil.getColors(c).size() >= 2;
@@ -299,38 +298,51 @@ public class CardListUtil {
         Collections.shuffle(list, MyRandom.getRandom());
     }
 
-    public static CardList filterControlledBy(CardList cardList, Player player) {
-        return cardList.filter(CardPredicates.isController(player));
+    public static CardList filterControlledBy(List<Card> cardList, Player player) {
+        return CardListUtil.filter(cardList, CardPredicates.isController(player));
     }
 
 
-    public static CardList getValidCards(CardList cardList, String[] restrictions, Player sourceController, Card source) {
-        return cardList.filter(CardPredicates.restriction(restrictions, sourceController, source));
+    public static CardList getValidCards(List<Card> cardList, String[] restrictions, Player sourceController, Card source) {
+        return CardListUtil.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source));
     }
 
-    public static CardList getValidCards(CardList cardList, String restriction, Player sourceController, Card source) {
-        return cardList.filter(CardPredicates.restriction(restriction.split(","), sourceController, source));
+    public static CardList getValidCards(List<Card> cardList, String restriction, Player sourceController, Card source) {
+        return CardListUtil.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
     }
 
-    public static CardList getTargetableCards(CardList cardList, SpellAbility source) {
-        return cardList.filter(CardPredicates.isTargetableBy(source));
+    public static CardList getTargetableCards(List<Card> cardList, SpellAbility source) {
+        return CardListUtil.filter(cardList, CardPredicates.isTargetableBy(source));
     }
 
-    public static CardList getKeyword(CardList cardList, String keyword) {
-        return cardList.filter(CardPredicates.hasKeyword(keyword));
+    public static CardList getKeyword(List<Card> cardList, String keyword) {
+        return CardListUtil.filter(cardList, CardPredicates.hasKeyword(keyword));
     }
 
-    public static CardList getNotKeyword(CardList cardList, String keyword) {
-        return cardList.filter(Predicates.not(CardPredicates.hasKeyword(keyword)));
+    public static CardList getNotKeyword(List<Card> cardList, String keyword) {
+        return CardListUtil.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
     }
 
     // cardType is like "Land" or "Goblin", returns a new CardList that is a
     // subset of current CardList
-    public static CardList getNotType(CardList cardList, String cardType) {
-        return cardList.filter(Predicates.not(CardPredicates.isType(cardType)));
+    public static CardList getNotType(List<Card> cardList, String cardType) {
+        return CardListUtil.filter(cardList, Predicates.not(CardPredicates.isType(cardType)));
     }
 
-    public static CardList getType(CardList cardList, String cardType) {
-        return cardList.filter(CardPredicates.isType(cardType));
+    public static CardList getType(List<Card> cardList, String cardType) {
+        return CardListUtil.filter(cardList, CardPredicates.isType(cardType));
+    }
+
+    /**
+     * Create a new list of cards by applying a filter to this one.
+     * 
+     * @param filt
+     *            determines which cards are present in the resulting list
+     * 
+     * @return a subset of this CardList whose items meet the filtering
+     *         criteria; may be empty, but never null.
+     */
+    public static CardList filter(List<Card> cardList, Predicate<Card> filt) {
+        return new CardList(Iterables.filter(cardList, filt));
     }
 }

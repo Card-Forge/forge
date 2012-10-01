@@ -165,7 +165,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepEcho() {
         CardList list = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.hasStartOfKeyword("(Echo unpaid)");
@@ -484,8 +484,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
         for (final Card c : cards) {
             final Card abyss = c;
 
-            final CardList abyssGetTargets = AllZoneUtil.getCreaturesInPlay(player)
-                    .filter(Presets.NON_ARTIFACTS);
+            final CardList abyssGetTargets = CardListUtil.filter(AllZoneUtil.getCreaturesInPlay(player), Presets.NON_ARTIFACTS);
 
             final Ability sacrificeCreature = new Ability(abyss, "") {
                 @Override
@@ -589,7 +588,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private Card getCompyCardToDestroy(final CardList original) {
                     final CardList options = this.getLowestPowerList(original);
-                    final CardList humanCreatures = options.filter(new Predicate<Card>() {
+                    final CardList humanCreatures = CardListUtil.filter(options, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             return c.getController().isHuman();
@@ -1829,7 +1828,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
         CardList list = player.getCardsIn(ZoneType.Exile);
 
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.hasSuspend();
@@ -1857,7 +1856,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         CardList list = player.getCardsIn(ZoneType.Battlefield);
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CardFactoryUtil.hasKeyword(c, "Vanishing") != -1;
@@ -1894,7 +1893,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         CardList list = player.getCardsIn(ZoneType.Battlefield);
-        list = list.filter(new Predicate<Card>() {
+        list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CardFactoryUtil.hasKeyword(c, "Fading") != -1;
@@ -1959,8 +1958,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     oathFlag = false;
                                 }
                             } else { // if player == Computer
-                                final CardList creaturesInLibrary = player.getCardsIn(ZoneType.Library).filter(CardPredicates.Presets.CREATURES);
-                                final CardList creaturesInBattlefield = player.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.CREATURES);
+                                final CardList creaturesInLibrary = CardListUtil.filter(player.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
+                                final CardList creaturesInBattlefield = CardListUtil.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
 
                                 // if there are at least 3 creatures in library,
                                 // or none in play with one in library, oath
@@ -2026,7 +2025,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 final Ability ability = new Ability(oathList.get(0), "0") {
                     @Override
                     public void resolve() {
-                        final CardList graveyardCreatures = player.getCardsIn(ZoneType.Graveyard).filter(CardPredicates.Presets.CREATURES);
+                        final CardList graveyardCreatures = CardListUtil.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
 
                         if (AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0) {
                             if (player.isHuman()) {
@@ -2146,7 +2145,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 @Override
                 public void resolve() {
                     final int num = source.getCounters(Counters.FADE);
-                    final CardList list = player.getCardsIn(ZoneType.Battlefield).filter(new Predicate<Card>() {
+                    final CardList list = CardListUtil.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             return (c.isArtifact() || c.isLand() || c.isCreature()) && c.isUntapped();
@@ -2157,7 +2156,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         if (player.isComputer()) {
                             Card toTap = CardFactoryUtil.getWorstPermanentAI(list, false, false, false, false);
                             // try to find non creature cards without tap abilities 
-                            CardList betterList = list.filter(new Predicate<Card>() {
+                            CardList betterList = CardListUtil.filter(list, new Predicate<Card>() {
                                 @Override
                                 public boolean apply(final Card c) {
                                     if (c.isCreature()) {
@@ -2232,7 +2231,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
         CardList blaze = player.getCardsIn(ZoneType.Battlefield);
-        blaze = blaze.filter(new Predicate<Card>() {
+        blaze = CardListUtil.filter(blaze, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.isLand() && (c.getCounters(Counters.BLAZE) > 0);
@@ -2276,7 +2275,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 public void resolve() {
                     CardList enchantmentsInLibrary = source.getController().getCardsIn(ZoneType.Library);
                     final CardList enchantmentsAttached = new CardList(source.getEnchantingPlayer().getEnchantedBy());
-                    enchantmentsInLibrary = enchantmentsInLibrary.filter(new Predicate<Card>() {
+                    enchantmentsInLibrary = CardListUtil.filter(enchantmentsInLibrary, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             return c.isEnchantment() && c.hasKeyword("Enchant player")

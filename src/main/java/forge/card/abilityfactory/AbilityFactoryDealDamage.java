@@ -543,7 +543,7 @@ public class AbilityFactoryDealDamage {
         }
         hPlay = CardListUtil.getTargetableCards(hPlay, saMe);
 
-        final CardList killables = hPlay.filter(new Predicate<Card>() {
+        final CardList killables = CardListUtil.filter(hPlay, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return (c.getEnoughDamageToKill(d, source, false, noPrevention) <= d) && !ComputerUtil.canRegenerate(c)
@@ -1256,7 +1256,7 @@ public class AbilityFactoryDealDamage {
         };
 
         list = CardListUtil.getNotKeyword(list, "Indestructible");
-        list = list.filter(filterKillable);
+        list = CardListUtil.filter(list, filterKillable);
 
         return list;
     }
@@ -1880,7 +1880,7 @@ public class AbilityFactoryDealDamage {
 
         CardList aiCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
         aiCreatures = CardListUtil.getTargetableCards(aiCreatures, sa);
-        aiCreatures = aiCreatures.filter(new Predicate<Card>() {
+        aiCreatures = CardListUtil.filter(aiCreatures, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !c.getSVar("Targeting").equals("Dies");

@@ -1061,10 +1061,10 @@ public final class AbilityFactoryCombat {
         boolean chance = false;
 
         if (abTgt != null) {
-            CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.CREATURES);
+            CardList list = CardListUtil.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
             list = CardListUtil.getTargetableCards(list, sa);
             list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
-            list = list.filter(new Predicate<Card>() {
+            list = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     boolean tapped = c.isTapped();

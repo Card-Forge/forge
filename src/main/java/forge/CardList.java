@@ -18,8 +18,6 @@
 package forge;
 
 import java.util.ArrayList;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 
 /**
@@ -37,19 +35,5 @@ public class CardList extends ArrayList<Card> {
     public CardList() {}
     public CardList(final Card c) { this.add(c); }
     public CardList(final Iterable<Card> al) { for(Card c : al) this.add(c); }
-
-
-    /**
-     * Create a new list of cards by applying a filter to this one.
-     * 
-     * @param filt
-     *            determines which cards are present in the resulting list
-     * 
-     * @return a subset of this CardList whose items meet the filtering
-     *         criteria; may be empty, but never null.
-     */
-    public final CardList filter(final Predicate<Card> filt) {
-        return new CardList(Iterables.filter(this, filt));
-    }
 
 } // end class CardList

@@ -1217,7 +1217,7 @@ public class GameAction {
      */
     private void destroyPlaneswalkers() {
         // get all Planeswalkers
-        final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.PLANEWALKERS);
+        final CardList list = CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
 
         Card c;
         for (int i = 0; i < list.size(); i++) {
@@ -1258,7 +1258,7 @@ public class GameAction {
         while (!a.isEmpty()) {
             CardList b = AllZoneUtil.getCardsIn(ZoneType.Battlefield, a.get(0).getName());
             b = CardListUtil.getType(b, "Legendary");
-            b = b.filter(new Predicate<Card>() {
+            b = CardListUtil.filter(b, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return !c.isFaceDown();
@@ -1320,7 +1320,7 @@ public class GameAction {
 
         if (c.isEnchanted()) {
             CardList list = new CardList(c.getEnchantedBy());
-            list = list.filter(new Predicate<Card>() {
+            list = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
                     return crd.hasKeyword("Totem armor");
@@ -1503,7 +1503,7 @@ public class GameAction {
 
         if (c.isEnchanted()) {
             CardList list = new CardList(c.getEnchantedBy());
-            list = list.filter(new Predicate<Card>() {
+            list = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
                     return crd.hasKeyword("Totem armor");
@@ -1772,8 +1772,8 @@ public class GameAction {
                     manaCost.decreaseColorlessMana(numToExile);
                 }
             } else if (spell.getSourceCard().hasKeyword("Convoke")) {
-                CardList untappedCreats = spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.CREATURES);
-                untappedCreats = untappedCreats.filter(CardPredicates.Presets.UNTAPPED);
+                CardList untappedCreats = CardListUtil.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                untappedCreats = CardListUtil.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
 
                 if (untappedCreats.size() != 0) {
                     final ArrayList<Object> choices = new ArrayList<Object>();

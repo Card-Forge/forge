@@ -396,7 +396,7 @@ public final class AbilityFactoryPlay {
                     tgtCard = GuiChoose.one("Select a card to play", tgtCards);
                 } else {
                     // AI
-                    tgtCards = tgtCards.filter(new Predicate<Card>() {
+                    tgtCards = CardListUtil.filter(tgtCards, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             ArrayList<SpellAbility> spellAbilities = c.getBasicSpells();

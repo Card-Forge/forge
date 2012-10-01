@@ -24,6 +24,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.GameActionUtil;
@@ -162,7 +163,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                         @Override
                         public void resolve() {
                             CardList lands = tisLand.getController().getCardsIn(ZoneType.Battlefield);
-                            lands = lands.filter(Presets.LANDS);
+                            lands = CardListUtil.filter(lands, Presets.LANDS);
                             for (final Card land : lands) {
                                 land.tap();
                             }

@@ -341,7 +341,7 @@ public class AbilityFactoryRegenerate {
                 }
             } else {
                 if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                    final CardList combatants = targetables.filter(CardPredicates.Presets.CREATURES);
+                    final CardList combatants = CardListUtil.filter(targetables, CardPredicates.Presets.CREATURES);
                     CardListUtil.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
@@ -430,7 +430,7 @@ public class AbilityFactoryRegenerate {
         }
 
         if (compTargetables.size() > 0) {
-            final CardList combatants = compTargetables.filter(CardPredicates.Presets.CREATURES);
+            final CardList combatants = CardListUtil.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardListUtil.sortByEvaluateCreature(combatants);
             if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
@@ -740,7 +740,7 @@ public class AbilityFactoryRegenerate {
         } else {
 
             if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                final CardList combatants = list.filter(CardPredicates.Presets.CREATURES);
+                final CardList combatants = CardListUtil.filter(list, CardPredicates.Presets.CREATURES);
 
                 for (final Card c : combatants) {
                     if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {

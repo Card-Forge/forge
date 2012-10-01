@@ -89,7 +89,7 @@ public abstract class AllZoneUtil {
      * @return a CardList with all cards currently in a graveyard
      */
     public static CardList getCardsIn(final ZoneType zone, final String cardName) {
-        return AllZoneUtil.getCardsIn(zone).filter(CardPredicates.nameEquals(cardName));
+        return CardListUtil.filter(AllZoneUtil.getCardsIn(zone), CardPredicates.nameEquals(cardName));
     }
 
     // ////////// Creatures
@@ -102,7 +102,7 @@ public abstract class AllZoneUtil {
      */
     public static CardList getCreaturesInPlay() {
         final CardList creats = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        return creats.filter(Presets.CREATURES);
+        return CardListUtil.filter(creats, Presets.CREATURES);
     }
 
     /**
@@ -114,7 +114,7 @@ public abstract class AllZoneUtil {
      */
     public static CardList getCreaturesInPlay(final Player player) {
         final CardList creats = player.getCardsIn(ZoneType.Battlefield);
-        return creats.filter(Presets.CREATURES);
+        return CardListUtil.filter(creats, Presets.CREATURES);
     }
 
     // /////////////// Lands
@@ -127,7 +127,7 @@ public abstract class AllZoneUtil {
      * @return a CardList containing all lands the given player has in play
      */
     public static CardList getPlayerLandsInPlay(final Player player) {
-        return player.getCardsIn(ZoneType.Battlefield).filter(Presets.LANDS);
+        return CardListUtil.filter(player.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
     }
 
     /**
@@ -136,7 +136,7 @@ public abstract class AllZoneUtil {
      * @return a CardList of all lands on the battlefield
      */
     public static CardList getLandsInPlay() {
-        return AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(Presets.LANDS);
+        return CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
     }
 
     // =============================================================================
@@ -235,7 +235,7 @@ public abstract class AllZoneUtil {
      */
     public static CardList getPlayerColorInPlay(final Player player, final String color) {
         CardList cards = player.getCardsIn(ZoneType.Battlefield);
-        cards = cards.filter(new Predicate<Card>() {
+        cards = CardListUtil.filter(cards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 final List<String> colorList = CardUtil.getColors(c);

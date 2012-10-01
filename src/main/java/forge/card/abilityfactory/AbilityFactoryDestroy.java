@@ -255,7 +255,7 @@ public class AbilityFactoryDestroy {
             }
             list = CardListUtil.getNotKeyword(list, "Indestructible");
             if (!AbilityFactory.playReusable(sa)) {
-                list = list.filter(new Predicate<Card>() {
+                list = CardListUtil.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return (!c.hasKeyword("Undying") || c.getCounters(Counters.P1P1) > 0);
@@ -267,7 +267,7 @@ public class AbilityFactoryDestroy {
             // regeneration shield
             if (!noRegen) {
                 // TODO filter out things that might be tougher?
-                list = list.filter(new Predicate<Card>() {
+                list = CardListUtil.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return ((c.getShield() == 0) && !ComputerUtil.canRegenerate(c));
@@ -395,7 +395,7 @@ public class AbilityFactoryDestroy {
             if (!noRegen) {
                 // TODO filter out things that could regenerate in response?
                 // might be tougher?
-                preferred = preferred.filter(new Predicate<Card>() {
+                preferred = CardListUtil.filter(preferred, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return c.getShield() == 0;
@@ -863,13 +863,13 @@ public class AbilityFactoryDestroy {
         }
         humanlist = CardListUtil.getValidCards(humanlist, valid.split(","), source.getController(), source);
         computerlist = CardListUtil.getValidCards(computerlist, valid.split(","), source.getController(), source);
-        humanlist = humanlist.filter(new Predicate<Card>() {
+        humanlist = CardListUtil.filter(humanlist, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
             }
         });
-        computerlist = computerlist.filter(new Predicate<Card>() {
+        computerlist = CardListUtil.filter(computerlist, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
@@ -946,13 +946,13 @@ public class AbilityFactoryDestroy {
         humanlist = CardListUtil.getValidCards(humanlist, valid.split(","), source.getController(), source);
         computerlist = CardListUtil.getValidCards(computerlist, valid.split(","), source.getController(), source);
 
-        humanlist = humanlist.filter(new Predicate<Card>() {
+        humanlist = CardListUtil.filter(humanlist, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
             }
         });
-        computerlist = computerlist.filter(new Predicate<Card>() {
+        computerlist = CardListUtil.filter(computerlist, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
