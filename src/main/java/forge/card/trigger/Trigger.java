@@ -24,6 +24,7 @@ import java.util.Map;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
@@ -351,7 +352,7 @@ public abstract class Trigger extends TriggerReplacementBase {
                 list.addAll(this.getHostCard().getController().getOpponent().getCardsIn(presentZone));
             }
 
-            list = list.getValidCards(sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
+            list = CardListUtil.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
 
             int right = 1;
             final String rightString = presentCompare.substring(2);
@@ -390,7 +391,7 @@ public abstract class Trigger extends TriggerReplacementBase {
                 list.addAll(this.getHostCard().getController().getOpponent().getCardsIn(presentZone));
             }
 
-            list = list.getValidCards(sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
+            list = CardListUtil.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
 
             int right = 1;
             final String rightString = presentCompare.substring(2);

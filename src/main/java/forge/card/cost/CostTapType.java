@@ -19,6 +19,7 @@ package forge.card.cost;
 
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -114,7 +115,7 @@ public class CostTapType extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
 
-        typeList = typeList.getValidCards(this.getType().split(";"), activator, source);
+        typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
 
         if (cost.getTap()) {
             typeList.remove(source);
@@ -152,8 +153,7 @@ public class CostTapType extends CostPartWithList {
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         CardList typeList = ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
-        typeList = typeList.getValidCards(this.getType().split(";"), ability.getActivatingPlayer(),
-                ability.getSourceCard());
+        typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = typeList.filter(Presets.UNTAPPED);
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
@@ -187,8 +187,7 @@ public class CostTapType extends CostPartWithList {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 CardList typeList = ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
-                typeList = typeList.getValidCards(this.getType().split(";"), ability.getActivatingPlayer(),
-                        ability.getSourceCard());
+                typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
                 typeList = typeList.filter(Presets.UNTAPPED);
                 c = typeList.size();
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));

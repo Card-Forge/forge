@@ -436,7 +436,7 @@ class CardFactoryAuras {
                 public boolean canPlayAI() {
                     CardList cList = this.getCreturesInGrave();
                     // AI will only target something that will stick in play.
-                    cList = cList.getTargetableCards(this);
+                    cList = CardListUtil.getTargetableCards(cList, this);
                     if (cList.size() == 0) {
                         return false;
                     }

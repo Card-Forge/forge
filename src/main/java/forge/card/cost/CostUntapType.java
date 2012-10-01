@@ -20,6 +20,7 @@ package forge.card.cost;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -119,7 +120,7 @@ public class CostUntapType extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         CardList typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
-        typeList = typeList.getValidCards(this.getType().split(";"), activator, source);
+        typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
 
         if (cost.getUntap()) {
             typeList.remove(source);
@@ -158,8 +159,7 @@ public class CostUntapType extends CostPartWithList {
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final boolean untap = payment.getCost().getUntap();
         CardList typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        typeList = typeList.getValidCards(this.getType().split(";"), ability.getActivatingPlayer(),
-                ability.getSourceCard());
+        typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = typeList.filter(Presets.TAPPED);
         if (untap) {
             typeList.remove(source);
@@ -196,8 +196,7 @@ public class CostUntapType extends CostPartWithList {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 CardList typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-                typeList = typeList.getValidCards(this.getType().split(";"), ability.getActivatingPlayer(),
-                        ability.getSourceCard());
+                typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
                 if (untap) {
                     typeList.remove(source);
                 }

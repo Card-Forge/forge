@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -100,7 +101,7 @@ public class CostSacrifice extends CostPartWithList {
         // You can always sac all
         if (!this.getThis()) {
             CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
-            typeList = typeList.getValidCards(this.getType().split(";"), activator, source);
+            typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
 
@@ -155,7 +156,7 @@ public class CostSacrifice extends CostPartWithList {
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
         CardList list = activator.getCardsIn(ZoneType.Battlefield);
-        list = list.getValidCards(type.split(";"), activator, source);
+        list = CardListUtil.getValidCards(list, type.split(";"), activator, source);
         if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             list = list.getNotType("Creature");
         }
@@ -203,7 +204,7 @@ public class CostSacrifice extends CostPartWithList {
             this.getList().add(source);
         } else if (this.getAmount().equals("All")) {
             CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
-            typeList = typeList.getValidCards(this.getType().split(";"), activator, source);
+            typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
             if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
                 typeList = typeList.getNotType("Creature");
             }

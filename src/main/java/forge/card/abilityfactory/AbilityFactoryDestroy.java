@@ -248,10 +248,10 @@ public class AbilityFactoryDestroy {
         if (abTgt != null) {
             abTgt.resetTargets();
             list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-            list = list.getTargetableCards(sa);
-            list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
+            list = CardListUtil.getTargetableCards(list, sa);
+            list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             if (params.containsKey("AITgts")) {
-                list = list.getValidCards(params.get("AITgts"), sa.getActivatingPlayer(), source);
+                list = CardListUtil.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), source);
             }
             list = list.getNotKeyword("Indestructible");
             if (!AbilityFactory.playReusable(sa)) {
@@ -378,8 +378,8 @@ public class AbilityFactoryDestroy {
         if (tgt != null) {
             CardList list;
             list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            list = list.getTargetableCards(sa);
-            list = list.getValidCards(tgt.getValidTgts(), source.getController(), source);
+            list = CardListUtil.getTargetableCards(list, sa);
+            list = CardListUtil.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
 
             if ((list.size() == 0) || (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
                 return false;
@@ -861,8 +861,8 @@ public class AbilityFactoryDestroy {
         if (mandatory) {
             return true;
         }
-        humanlist = humanlist.getValidCards(valid.split(","), source.getController(), source);
-        computerlist = computerlist.getValidCards(valid.split(","), source.getController(), source);
+        humanlist = CardListUtil.getValidCards(humanlist, valid.split(","), source.getController(), source);
+        computerlist = CardListUtil.getValidCards(computerlist, valid.split(","), source.getController(), source);
         humanlist = humanlist.filter(new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -943,8 +943,8 @@ public class AbilityFactoryDestroy {
             computerlist.clear();
         }
 
-        humanlist = humanlist.getValidCards(valid.split(","), source.getController(), source);
-        computerlist = computerlist.getValidCards(valid.split(","), source.getController(), source);
+        humanlist = CardListUtil.getValidCards(humanlist, valid.split(","), source.getController(), source);
+        computerlist = CardListUtil.getValidCards(computerlist, valid.split(","), source.getController(), source);
 
         humanlist = humanlist.filter(new Predicate<Card>() {
             @Override

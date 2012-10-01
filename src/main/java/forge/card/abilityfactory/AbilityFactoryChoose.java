@@ -1869,7 +1869,7 @@ public final class AbilityFactoryChoose {
             }
             CardList choices = AllZoneUtil.getCardsIn(choiceZone);
             if (params.containsKey("Choices")) {
-                choices = choices.getValidCards(params.get("Choices"), host.getController(), host);
+                choices = CardListUtil.getValidCards(choices, params.get("Choices"), host.getController(), host);
             }
             if (params.get("AILogic").equals("AtLeast1")) {
                 if (choices.size() < 1) {
@@ -1935,7 +1935,7 @@ public final class AbilityFactoryChoose {
         }
         CardList choices = AllZoneUtil.getCardsIn(choiceZone);
         if (params.containsKey("Choices")) {
-            choices = choices.getValidCards(params.get("Choices"), host.getController(), host);
+            choices = CardListUtil.getValidCards(choices, params.get("Choices"), host.getController(), host);
         }
 
         final String numericAmount = params.containsKey("Amount") ? params.get("Amount") : "1";

@@ -22,6 +22,7 @@ import java.util.HashMap;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.CardListUtil;
 import forge.card.cost.Cost;
 import forge.CardList;
 import forge.GameActionUtil;
@@ -277,7 +278,7 @@ public final class AbilityFactoryRepeat {
                 list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             }
 
-            list = list.getValidCards(repeatPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            list = CardListUtil.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             int right;
             final String rightString = repeatCompare.substring(2);

@@ -19,6 +19,7 @@ package forge.card.cost;
 
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -162,8 +163,7 @@ public class CostRemoveCounter extends CostPartWithList {
             }
         }
         else {
-            final CardList typeList = activator.getCardsIn(this.getZone()).getValidCards(this.getType().split(";"),
-                    activator, source);
+            final CardList typeList = CardListUtil.getValidCards(activator.getCardsIn(this.getZone()), this.getType().split(";"), activator, source);
             if (amount != null) {
                 boolean payable = false;
                 for (Card c : typeList) {
@@ -335,8 +335,7 @@ public class CostRemoveCounter extends CostPartWithList {
                     msg.append("s");
                 }
 
-                this.typeList = sa.getActivatingPlayer().getCardsIn(costRemoveCounter.getZone()).
-                        getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+                this.typeList = CardListUtil.getValidCards(sa.getActivatingPlayer().getCardsIn(costRemoveCounter.getZone()), type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
@@ -410,8 +409,7 @@ public class CostRemoveCounter extends CostPartWithList {
                 }
 
                 this.typeList = sa.getActivatingPlayer().getCardsIn(costRemoveCounter.getZone());
-                this.typeList = this.typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(),
-                        sa.getSourceCard());
+                this.typeList = CardListUtil.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
 
                 for (int i = 0; i < nNeeded; i++) {
                     if (this.typeList.size() == 0) {

@@ -458,7 +458,7 @@ public final class AbilityFactoryReveal {
                     }
                 } else if (params.containsKey("RevealValid")) {
                     final String revealValid = params.get("RevealValid");
-                    final CardList toReveal = top.getValidCards(revealValid, host.getController(), host);
+                    final CardList toReveal = CardListUtil.getValidCards(top, revealValid, host.getController(), host);
                     if (!toReveal.isEmpty()) {
                         GuiChoose.one("Revealing cards from library", toReveal);
                         if (params.containsKey("RememberRevealed")) {
@@ -493,9 +493,9 @@ public final class AbilityFactoryReveal {
                         if (changeValid.contains("ChosenType")) {
                             changeValid = changeValid.replace("ChosenType", host.getChosenType());
                         }
-                        valid = top.getValidCards(changeValid.split(","), host.getController(), host);
+                        valid = CardListUtil.getValidCards(top, changeValid.split(","), host.getController(), host);
                         if (!andOrValid.equals("")) {
-                            andOrCards = top.getValidCards(andOrValid.split(","), host.getController(), host);
+                            andOrCards = CardListUtil.getValidCards(top, andOrValid.split(","), host.getController(), host);
                             andOrCards.removeAll(valid);
                             valid.addAll(andOrCards);
                         }
@@ -2383,7 +2383,7 @@ public final class AbilityFactoryReveal {
                         CardList valid = new CardList(handChoices);
                         int max = 1;
                         if (params.containsKey("RevealValid")) {
-                            valid = valid.getValidCards(params.get("RevealValid"), p, host);
+                            valid = CardListUtil.getValidCards(valid, params.get("RevealValid"), p, host);
                         }
                         if (params.containsKey("AnyNumber")) {
                             max = valid.size();

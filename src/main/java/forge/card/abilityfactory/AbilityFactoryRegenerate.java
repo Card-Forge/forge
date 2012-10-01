@@ -315,7 +315,7 @@ public class AbilityFactoryRegenerate {
             tgt.resetTargets();
             // filter AIs battlefield by what I can target
             CardList targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
+            targetables = CardListUtil.getValidCards(targetables, tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
 
             if (targetables.size() == 0) {
                 return false;
@@ -418,7 +418,7 @@ public class AbilityFactoryRegenerate {
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
         CardList targetables = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
+        targetables = CardListUtil.getValidCards(targetables, tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
         final CardList compTargetables = CardListUtil.filterControlledBy(targetables, AllZone.getComputerPlayer());
 
         if (targetables.size() == 0) {
@@ -727,7 +727,7 @@ public class AbilityFactoryRegenerate {
         }
 
         CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
+        list = CardListUtil.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         if (list.size() == 0) {
             return false;
@@ -811,7 +811,7 @@ public class AbilityFactoryRegenerate {
         }
 
         CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
+        list = CardListUtil.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card c : list) {
             final Command untilEOT = new Command() {

@@ -384,7 +384,7 @@ public final class AbilityFactoryProtection {
         tgt.resetTargets();
         CardList list = AbilityFactoryProtection.getProtectCreatures(af, sa);
 
-        list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         /*
          * TODO - What this should probably do is if it's time for instants and
@@ -471,7 +471,7 @@ public final class AbilityFactoryProtection {
 
         CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
-        list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             tgt.resetTargets();
@@ -1190,7 +1190,7 @@ public final class AbilityFactoryProtection {
         }
         if (!valid.equals("")) {
             CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            list = list.getValidCards(valid, sa.getActivatingPlayer(), host);
+            list = CardListUtil.getValidCards(list, valid, sa.getActivatingPlayer(), host);
 
             for (final Card tgtC : list) {
                 if (AllZoneUtil.isCardInPlay(tgtC)) {

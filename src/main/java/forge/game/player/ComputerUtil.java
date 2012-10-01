@@ -1347,7 +1347,7 @@ public class ComputerUtil {
                     final String needsToPlay = c.getSVar("NeedsToPlay");
                     CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
-                    list = list.getValidCards(needsToPlay.split(","), c.getController(), c);
+                    list = CardListUtil.getValidCards(list, needsToPlay.split(","), c.getController(), c);
                     if (list.isEmpty()) {
                         return false;
                     }
@@ -1450,8 +1450,7 @@ public class ComputerUtil {
         if (activate != null) {
             final String[] prefValid = activate.getSVar("AIPreference").split("\\$");
             if (prefValid[0].equals(pref)) {
-                final CardList prefList = typeList.getValidCards(prefValid[1].split(","), activate.getController(),
-                        activate);
+                final CardList prefList = CardListUtil.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate);
                 if (prefList.size() != 0) {
                     CardListUtil.shuffle(prefList);
                     return prefList.get(0);
@@ -1527,7 +1526,7 @@ public class ComputerUtil {
             final int amount) {
         Player activator = AllZone.getComputerPlayer();
         CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
-        typeList = typeList.getValidCards(type.split(";"), activate.getController(), activate);
+        typeList = CardListUtil.getValidCards(typeList, type.split(";"), activate.getController(), activate);
         if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             typeList = typeList.getNotType("Creature");
         }
@@ -1581,7 +1580,7 @@ public class ComputerUtil {
         Card sourceCard = null;
 
         if ((uTypes != null) && (sa != null)) {
-            hand = hand.getValidCards(uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
+            hand = CardListUtil.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
         }
 
         if (hand.size() < numDiscard) {
@@ -1759,11 +1758,11 @@ public class ComputerUtil {
         if (zone.equals(ZoneType.Stack)) {
             for (int i = 0; i < AllZone.getStack().size(); i++) {
                 typeList.add(AllZone.getStack().peekAbility(i).getSourceCard());
-                typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
+                typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
             }
         } else {
             typeList = AllZone.getComputerPlayer().getCardsIn(zone);
-            typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
+            typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
         }
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
             typeList.remove(target); // don't exile the card we're pumping
@@ -1799,7 +1798,7 @@ public class ComputerUtil {
      */
     public static CardList chooseTapType(final String type, final Card activate, final boolean tap, final int amount) {
         CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
+        typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
 
         // is this needed?
         typeList = typeList.filter(Presets.UNTAPPED);
@@ -1839,7 +1838,7 @@ public class ComputerUtil {
      */
     public static CardList chooseUntapType(final String type, final Card activate, final boolean untap, final int amount) {
         CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
+        typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
 
         // is this needed?
         typeList = typeList.filter(Presets.TAPPED);
@@ -1879,7 +1878,7 @@ public class ComputerUtil {
      */
     public static CardList chooseReturnType(final String type, final Card activate, final Card target, final int amount) {
         CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
+        typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
             // bounce
             // the
@@ -2125,8 +2124,7 @@ public class ComputerUtil {
 
                     final Target tgt = sa.getTarget();
                     if (tgt != null) {
-                        if (AllZoneUtil.getCardsIn(ZoneType.Battlefield)
-                                .getValidCards(tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
+                        if (CardListUtil.getValidCards(AllZoneUtil.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
                             return true;
                         }
                     } else if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa)
@@ -2175,8 +2173,7 @@ public class ComputerUtil {
                             }
                             final Target tgt = sa.getTarget();
                             if (tgt != null) {
-                                if (AllZoneUtil.getCardsIn(ZoneType.Battlefield)
-                                        .getValidCards(tgt.getValidTgts(), controller, af.getHostCard()).contains(card)) {
+                                if (CardListUtil.getValidCards(AllZoneUtil.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, af.getHostCard()).contains(card)) {
                                     prevented += AbilityFactory.calculateAmount(af.getHostCard(),
                                             mapParams.get("Amount"), sa);
                                 }

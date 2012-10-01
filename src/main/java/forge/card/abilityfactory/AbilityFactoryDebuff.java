@@ -393,7 +393,7 @@ public final class AbilityFactoryDebuff {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         CardList list = AbilityFactoryDebuff.getCurseCreatures(af, sa, kws);
-        list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         // several uses here:
         // 1. make human creatures lose evasion when they are attacking
@@ -448,7 +448,7 @@ public final class AbilityFactoryDebuff {
     private static CardList getCurseCreatures(final AbilityFactory af, final SpellAbility sa,
             final ArrayList<String> kws) {
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-        list = list.getTargetableCards(sa);
+        list = CardListUtil.getTargetableCards(list, sa);
 
         if (!list.isEmpty()) {
             list = list.filter(new Predicate<Card>() {
@@ -479,7 +479,7 @@ public final class AbilityFactoryDebuff {
     private static boolean debuffMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
-        list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             tgt.resetTargets();
@@ -793,9 +793,9 @@ public final class AbilityFactoryDebuff {
         }
 
         CardList comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        comp = comp.getValidCards(valid, hostCard.getController(), hostCard);
+        comp = CardListUtil.getValidCards(comp, valid, hostCard.getController(), hostCard);
         CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        human = human.getValidCards(valid, hostCard.getController(), hostCard);
+        human = CardListUtil.getValidCards(human, valid, hostCard.getController(), hostCard);
 
         // TODO - add blocking situations here also
 
@@ -840,7 +840,7 @@ public final class AbilityFactoryDebuff {
         }
 
         CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
+        list = CardListUtil.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card tgtC : list) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();

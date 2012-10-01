@@ -34,6 +34,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Constant;
@@ -1646,7 +1647,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
         final CardList discarded = new CardList();
         for (int i = 0; i < num; i++) {
             CardList list = this.getCardsIn(ZoneType.Hand);
-            list = list.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
+            list = CardListUtil.getValidCards(list, valid, sa.getSourceCard().getController(), sa.getSourceCard());
             if (list.size() != 0) {
                 final Card disc = CardUtil.getRandom(list);
                 discarded.add(disc);

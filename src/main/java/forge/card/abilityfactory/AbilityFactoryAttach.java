@@ -31,6 +31,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
+import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
@@ -347,9 +348,9 @@ public class AbilityFactoryAttach {
         }
 
         CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
-        list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
+        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
         if (params.containsKey("AITgts")) {
-            list = list.getValidCards(params.get("AITgts"), sa.getActivatingPlayer(), attachSource);
+            list = CardListUtil.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), attachSource);
         }
 
         // TODO If Attaching without casting, don't need to actually target.
@@ -357,9 +358,9 @@ public class AbilityFactoryAttach {
         // check that when starting that work
         // But we shouldn't attach to things with Protection
         if (tgt.getZone().contains(ZoneType.Battlefield) && !mandatory) {
-            list = list.getTargetableCards(sa);
+            list = CardListUtil.getTargetableCards(list, sa);
         } else {
-            list = list.getUnprotectedCards(attachSource);
+            list = list.filter(Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
         }
 
         if (list.size() == 0) {
@@ -1417,7 +1418,7 @@ public class AbilityFactoryAttach {
                 }
             } else {
                 CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
-                list = list.getValidCards(tgt.getValidTgts(), aura.getActivatingPlayer(), source);
+                list = CardListUtil.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source);
 
                 final Object o = GuiChoose.one(source + " - Select a card to attach to.", list);
                 if (o instanceof Card) {
@@ -1710,7 +1711,7 @@ public class AbilityFactoryAttach {
         for (final Object o : targets) {
             String valid = params.get("UnattachValid");
             CardList unattachList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            unattachList = unattachList.getValidCards(valid.split(","), source.getController(), source);
+            unattachList = CardListUtil.getValidCards(unattachList, valid.split(","), source.getController(), source);
             for (final Card c : unattachList) {
                 AbilityFactoryAttach.handleUnattachment(o, c, af);
             }

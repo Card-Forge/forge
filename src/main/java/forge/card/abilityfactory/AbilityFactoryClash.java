@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.GameActionUtil;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
@@ -708,7 +709,7 @@ public final class AbilityFactoryClash {
         } else {
             pool = p.getCardsIn(zone);
         }
-        pool = pool.getValidCards(valid, card.getController(), card);
+        pool = CardListUtil.getValidCards(pool, valid, card.getController(), card);
         int size = pool.size();
         return size > 2;
     }
@@ -761,7 +762,7 @@ public final class AbilityFactoryClash {
                 } else {
                     pool = p.getCardsIn(zone);
                 }
-                pool = pool.getValidCards(valid, card.getController(), card);
+                pool = CardListUtil.getValidCards(pool, valid, card.getController(), card);
                 int size = pool.size();
 
                 // first, separate the cards into piles

@@ -25,6 +25,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
@@ -291,8 +292,7 @@ class CardFactoryLands {
 
                 @Override
                 public void execute() {
-                    final CardList land = this.player.getCardsIn(ZoneType.Battlefield).getValidCards(type[0], this.player,
-                            card);
+                    final CardList land = CardListUtil.getValidCards(this.player.getCardsIn(ZoneType.Battlefield), type[0], this.player, card);
 
                     if (this.player.isComputer()) {
                         if (land.size() > 0) {

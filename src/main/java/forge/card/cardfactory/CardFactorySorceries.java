@@ -26,7 +26,6 @@ import java.util.Collections;
 
 import javax.swing.JOptionPane;
 
-import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;

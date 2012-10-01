@@ -490,7 +490,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final Ability sacrificeCreature = new Ability(abyss, "") {
                 @Override
                 public void resolve() {
-                    final CardList targets = abyssGetTargets.getTargetableCards(this);
+                    final CardList targets = CardListUtil.getTargetableCards(abyssGetTargets, this);
                     if (player.isHuman()) {
                         if (targets.size() > 0) {
                             AllZone.getInputControl().setInput(new Input() {
@@ -1215,11 +1215,11 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     final String[] smallCreatures = { "Creature.toughnessLE2" };
 
                     CardList humanCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                    humanCreatures = humanCreatures.getValidCards(smallCreatures, k.getController(), k);
+                    humanCreatures = CardListUtil.getValidCards(humanCreatures, smallCreatures, k.getController(), k);
                     humanCreatures = humanCreatures.getNotKeyword("Indestructible");
 
                     CardList computerCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                    computerCreatures = computerCreatures.getValidCards(smallCreatures, k.getController(), k);
+                    computerCreatures = CardListUtil.getValidCards(computerCreatures, smallCreatures, k.getController(), k);
                     computerCreatures = computerCreatures.getNotKeyword("Indestructible");
 
                     // We assume that both players will want to peek, ask if

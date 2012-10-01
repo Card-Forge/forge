@@ -25,6 +25,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -1061,8 +1062,8 @@ public final class AbilityFactoryCombat {
 
         if (abTgt != null) {
             CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.CREATURES);
-            list = list.getTargetableCards(sa);
-            list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
+            list = CardListUtil.getTargetableCards(list, sa);
+            list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             list = list.filter(new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {

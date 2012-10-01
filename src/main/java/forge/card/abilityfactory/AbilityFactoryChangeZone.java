@@ -570,7 +570,7 @@ public final class AbilityFactoryChangeZone {
 
             if ((type != null) && p.isComputer()) {
                 // AI only "knows" about his information
-                list = list.getValidCards(type, source.getController(), source);
+                list = CardListUtil.getValidCards(list, type, source.getController(), source);
             }
 
             if (list.isEmpty()) {
@@ -1635,7 +1635,7 @@ public final class AbilityFactoryChangeZone {
         }
 
         CardList list = AllZoneUtil.getCardsIn(origin);
-        list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
+        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
         if (source.isInZone(ZoneType.Hand)) {
             list = list.filter(Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
         }
@@ -1647,7 +1647,7 @@ public final class AbilityFactoryChangeZone {
         // Narrow down the list:
         if (origin.equals(ZoneType.Battlefield)) {
             // filter out untargetables
-            list = list.getTargetableCards(sa);
+            list = CardListUtil.getTargetableCards(list, sa);
             CardList aiPermanents = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
 
             // Don't blink cards that will die.
@@ -1760,7 +1760,7 @@ public final class AbilityFactoryChangeZone {
 
         // Only care about combatants during combat
         if (Singletons.getModel().getGameState().getPhaseHandler().inCombat()) {
-            list.getValidCards("Card.attacking,Card.blocking", null, null);
+            CardListUtil.getValidCards(list, "Card.attacking,Card.blocking", null, null);
         }
 
         if (list.isEmpty()) {
@@ -1867,12 +1867,12 @@ public final class AbilityFactoryChangeZone {
         final Target tgt = sa.getTarget();
 
         CardList list = AllZoneUtil.getCardsIn(origin);
-        list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
+        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
 
         // Narrow down the list:
         if (origin.equals(ZoneType.Battlefield)) {
             // filter out untargetables
-            list = list.getTargetableCards(sa);
+            list = CardListUtil.getTargetableCards(list, sa);
 
             // if Destination is hand, either bounce opponents dangerous stuff
             // or save my about to die stuff

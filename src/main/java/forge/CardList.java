@@ -76,22 +76,4 @@ public class CardList extends ArrayList<Card> {
         return this.filter(Predicates.not(CardPredicates.hasKeyword(keyword)));
     }
 
-    public final CardList getTargetableCards(final SpellAbility source) {
-        return this.filter(CardPredicates.isTargetableBy(source));
-    }
-
-    public final CardList getUnprotectedCards(final Card source) {
-        return this.filter(Predicates.not(CardPredicates.isProtectedFrom(source)));
-    }
-
-    public final CardList getValidCards(final String restrictions, final Player sourceController, final Card source) {
-        return this.filter(CardPredicates.restriction(restrictions.split(","), sourceController, source));
-    }
-
-    public final CardList getValidCards(final String[] restrictions, final Player sourceController, final Card source) {
-        return this.filter(CardPredicates.restriction(restrictions, sourceController, source));
-    }
-
-
-
 } // end class CardList

@@ -29,6 +29,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Command;
@@ -1298,7 +1299,7 @@ public final class AbilityFactoryAnimate {
             list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
         }
 
-        list = list.getValidCards(valid.split(","), host.getController(), host);
+        list = CardListUtil.getValidCards(list, valid.split(","), host.getController(), host);
 
         for (final Card c : list) {
 

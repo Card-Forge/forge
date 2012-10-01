@@ -21,6 +21,7 @@ import java.util.HashMap;
 
 import forge.AllZoneUtil;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -255,7 +256,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                 list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             }
 
-            list = list.getValidCards(this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            list = CardListUtil.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             int right;
             final String rightString = this.getPresentCompare().substring(2);

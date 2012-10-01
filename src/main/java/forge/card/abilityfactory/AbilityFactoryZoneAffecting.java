@@ -1357,7 +1357,7 @@ public class AbilityFactoryZoneAffecting {
                         valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(source, "X", sa)));
                     }
 
-                    final CardList dPChHand = dPHand.getValidCards(valid.split(","), source.getController(), source);
+                    final CardList dPChHand = CardListUtil.getValidCards(dPHand, valid.split(","), source.getController(), source);
                     // Reveal cards that will be discarded?
                     for (final Card c : dPChHand) {
                         p.discard(c, sa);
@@ -1378,7 +1378,7 @@ public class AbilityFactoryZoneAffecting {
                         String[] dValid = null;
                         if (params.containsKey("DiscardValid")) { // Restrict card choices
                             dValid = params.get("DiscardValid").split(",");
-                            dPChHand = dPHand.getValidCards(dValid, source.getController(), source);
+                            dPChHand = CardListUtil.getValidCards(dPHand, dValid, source.getController(), source);
                         }
                         Player chooser = p;
                         if (mode.equals("RevealYouChoose")) {

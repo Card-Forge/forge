@@ -704,7 +704,7 @@ public class AbilityFactoryPump {
      */
     private CardList getCurseCreatures(final SpellAbility sa, final int defense, final int attack) {
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-        list = list.getTargetableCards(sa);
+        list = CardListUtil.getTargetableCards(list, sa);
         if ((defense < 0) && !list.isEmpty()) { // with spells that give -X/-X,
                                                 // compi will try to destroy a
                                                 // creature
@@ -956,8 +956,8 @@ public class AbilityFactoryPump {
         CardList list = new CardList();
         if (this.abilityFactory.getMapParams().containsKey("AILogic")) {
             if (this.abilityFactory.getMapParams().get("AILogic").equals("HighestPower")) {
-                list = AllZoneUtil.getCreaturesInPlay().getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
-                list = list.getTargetableCards(sa);
+                list = CardListUtil.getValidCards(AllZoneUtil.getCreaturesInPlay(), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+                list = CardListUtil.getTargetableCards(list, sa);
                 CardListUtil.sortAttack(list);
                 if (!list.isEmpty()) {
                     tgt.addTarget(list.get(0));
@@ -985,7 +985,7 @@ public class AbilityFactoryPump {
             }
         }
 
-        list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
         if (AllZone.getStack().size() == 0) {
             // If the cost is tapping, don't activate before declare
             // attack/block
@@ -1057,8 +1057,8 @@ public class AbilityFactoryPump {
     private boolean pumpMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
-        list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
-        list = list.getTargetableCards(sa);
+        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardListUtil.getTargetableCards(list, sa);
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             tgt.resetTargets();
@@ -1701,9 +1701,9 @@ public class AbilityFactoryPump {
         }
 
         CardList comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        comp = comp.getValidCards(valid, source.getController(), source);
+        comp = CardListUtil.getValidCards(comp, valid, source.getController(), source);
         CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        human = human.getValidCards(valid, source.getController(), source);
+        human = CardListUtil.getValidCards(human, valid, source.getController(), source);
 
         final Target tgt = sa.getTarget();
         if (tgt != null && sa.canTarget(AllZone.getHumanPlayer()) && params.containsKey("IsCurse")) {

@@ -20,6 +20,7 @@ package forge.control.input;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.Command;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -74,7 +75,7 @@ public class InputPaySacCost extends Input {
 
         this.ability = sa;
         this.sacCost = cost;
-        this.choiceList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield).getValidCards(cost.getType().split(";"), AllZone.getHumanPlayer(), source);
+        this.choiceList = CardListUtil.getValidCards(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), AllZone.getHumanPlayer(), source);
         String amountString = cost.getAmount();
         this.numRequired = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                 : CardFactoryUtil.xCount(source, source.getSVar(amountString));

@@ -28,6 +28,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.Constant;
 import forge.Counters;
@@ -770,8 +771,7 @@ public class AbilityFactoryMana {
                 cards.add(c);
             }
         } else {
-            cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield).getValidCards(validCard, abMana.getActivatingPlayer(),
-                    card);
+            cards = CardListUtil.getValidCards(AllZoneUtil.getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
         }
 
         // remove anything cards that is already in parents

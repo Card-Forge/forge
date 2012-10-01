@@ -28,6 +28,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Singletons;
@@ -306,8 +307,8 @@ public final class AbilityFactoryCopy {
 
         if (abTgt != null) {
             CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
-            list = list.getTargetableCards(sa);
+            list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+            list = CardListUtil.getTargetableCards(list, sa);
             abTgt.resetTargets();
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {

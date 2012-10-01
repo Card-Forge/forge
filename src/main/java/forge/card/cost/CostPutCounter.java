@@ -19,6 +19,7 @@ package forge.card.cost;
 
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -135,8 +136,7 @@ public class CostPutCounter extends CostPartWithList {
             }
         } else {
             // 3 Cards have Put a -1/-1 Counter on a Creature you control.
-            final CardList typeList = activator.getCardsIn(ZoneType.Battlefield).getValidCards(this.getType().split(";"),
-                    activator, source);
+            final CardList typeList = CardListUtil.getValidCards(activator.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
 
             if (typeList.size() == 0) {
                 return false;
@@ -214,8 +214,7 @@ public class CostPutCounter extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
 
-            final CardList typeList = activator.getCardsIn(ZoneType.Battlefield).getValidCards(this.getType().split(";"),
-                    activator, source);
+            final CardList typeList = CardListUtil.getValidCards(activator.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
 
             Card card = null;
             if (this.getType().equals("Creature.YouCtrl")) {
@@ -268,8 +267,7 @@ public class CostPutCounter extends CostPartWithList {
                     msg.append("s");
                 }
 
-                this.typeList = sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield).
-                        getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+                this.typeList = CardListUtil.getValidCards(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }

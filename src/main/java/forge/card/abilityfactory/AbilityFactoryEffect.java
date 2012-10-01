@@ -27,6 +27,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.Command;
 import forge.Singletons;
@@ -286,8 +287,8 @@ public class AbilityFactoryEffect {
                 if (tgt != null) {
                     tgt.resetTargets();
                     CardList list = AllZone.getCombat().getAttackerList();
-                    list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
-                    list = list.getTargetableCards(sa);
+                    list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+                    list = CardListUtil.getTargetableCards(list, sa);
                     Card target = CardFactoryUtil.getBestCreatureAI(list);
                     if (target == null) {
                         return false;

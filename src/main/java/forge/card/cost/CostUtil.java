@@ -85,7 +85,7 @@ public class CostUtil {
                 }
 
                 CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                typeList = typeList.getValidCards(type.split(","), source.getController(), source);
+                typeList = CardListUtil.getValidCards(typeList, type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null) {
                     return false;
                 }
@@ -120,7 +120,7 @@ public class CostUtil {
                 }
 
                 CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                typeList = typeList.getValidCards(type.split(","), source.getController(), source);
+                typeList = CardListUtil.getValidCards(typeList, type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null) {
                     return false;
                 }
@@ -218,7 +218,7 @@ public class CostUtil {
                 if (typeList.size() > AllZone.getComputerPlayer().getMaxHandSize()) {
                     continue;
                 }
-                typeList = typeList.getValidCards(type.split(","), source.getController(), source);
+                typeList = CardListUtil.getValidCards(typeList, type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "DiscardCost", typeList) == null) {
                     return false;
                 }

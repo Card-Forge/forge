@@ -24,6 +24,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -299,5 +300,18 @@ public class CardListUtil {
 
     public static CardList filterControlledBy(CardList cardList, Player player) {
         return cardList.filter(CardPredicates.isController(player));
+    }
+
+
+    public static CardList getValidCards(CardList cardList, String[] restrictions, Player sourceController, Card source) {
+        return cardList.filter(CardPredicates.restriction(restrictions, sourceController, source));
+    }
+
+    public static CardList getValidCards(CardList cardList, String restriction, Player sourceController, Card source) {
+        return cardList.filter(CardPredicates.restriction(restriction.split(","), sourceController, source));
+    }
+
+    public static CardList getTargetableCards(CardList cardList, SpellAbility source) {
+        return cardList.filter(CardPredicates.isTargetableBy(source));
     }
 }

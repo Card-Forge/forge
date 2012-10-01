@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -107,7 +108,7 @@ public class CostReturn extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         if (!this.getThis()) {
             CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
-            typeList = typeList.getValidCards(this.getType().split(";"), activator, source);
+            typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
             if ((amount != null) && (typeList.size() < amount)) {
@@ -230,8 +231,7 @@ public class CostReturn extends CostPartWithList {
                 }
 
                 this.typeList = sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
-                this.typeList = this.typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(),
-                        sa.getSourceCard());
+                this.typeList = CardListUtil.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }

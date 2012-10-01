@@ -127,7 +127,7 @@ public class CostDiscard extends CostPartWithList {
                 handList.remove(source);// can't pay for itself
             }
             if (!type.equals("Random")) {
-                handList = handList.getValidCards(type.split(";"), activator, source);
+                handList = CardListUtil.getValidCards(handList, type.split(";"), activator, source);
             }
             if ((amount != null) && (amount > handList.size())) {
                 // not enough cards in hand to pay
@@ -204,7 +204,7 @@ public class CostDiscard extends CostPartWithList {
                 payment.setPaidManaPart(this);
             } else {
                 final String[] validType = discType.split(";");
-                handList = handList.getValidCards(validType, activator, ability.getSourceCard());
+                handList = CardListUtil.getValidCards(handList, validType, activator, ability.getSourceCard());
 
                 if (c == null) {
                     final String sVar = ability.getSVar(amount);

@@ -29,6 +29,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -302,7 +303,7 @@ public final class AbilityFactoryPlay {
         if (tgt != null) {
             ZoneType zone = tgt.getZone().get(0);
             cards = AllZoneUtil.getCardsIn(zone);
-            cards = cards.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
+            cards = CardListUtil.getValidCards(cards, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
             if (cards.isEmpty()) {
                 return false;
             }

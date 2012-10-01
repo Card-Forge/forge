@@ -25,6 +25,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -285,7 +286,7 @@ public class AbilityFactorySacrifice {
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 
             CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-            list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            list = CardListUtil.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             if (list.size() == 0) {
                 return false;
@@ -425,13 +426,12 @@ public class AbilityFactorySacrifice {
             }
 
             CardList humanList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-            humanList = humanList.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            humanList = CardListUtil.getValidCards(humanList, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
             CardList computerList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             if (defined.equals("Opponent")) {
                 computerList = new CardList();
             }
-            computerList = computerList.getValidCards(valid.split(","), sa.getActivatingPlayer(),
-                    sa.getSourceCard());
+            computerList = CardListUtil.getValidCards(computerList, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             // Since all of the cards have remAIDeck:True, I enabled 1 for 1
             // (or X for X) trades for special decks
@@ -850,8 +850,8 @@ public class AbilityFactorySacrifice {
         CardList humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         CardList computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
-        humanlist = humanlist.getValidCards(valid.split(","), source.getController(), source);
-        computerlist = computerlist.getValidCards(valid.split(","), source.getController(), source);
+        humanlist = CardListUtil.getValidCards(humanlist, valid.split(","), source.getController(), source);
+        computerlist = CardListUtil.getValidCards(computerlist, valid.split(","), source.getController(), source);
 
         if (abCost != null) {
             // AI currently disabled for some costs

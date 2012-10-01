@@ -1573,7 +1573,7 @@ public class CardFactoryUtil {
     public static CardList getHumanCreatureAI(final SpellAbility spell, final boolean targeted) {
         CardList creature = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
         if (targeted) {
-            creature = creature.getTargetableCards(spell);
+            creature = CardListUtil.getTargetableCards(creature, spell);
         }
         return creature;
     }
@@ -2003,7 +2003,7 @@ public class CardFactoryUtil {
             final String restrictions = l[0].replace("Valid ", "");
             final String[] rest = restrictions.split(",");
             CardList cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            cardsonbattlefield = cardsonbattlefield.getValidCards(rest, players.get(0), source);
+            cardsonbattlefield = CardListUtil.getValidCards(cardsonbattlefield, rest, players.get(0), source);
 
             n = cardsonbattlefield.size();
 
@@ -2211,7 +2211,7 @@ public class CardFactoryUtil {
             restrictions = restrictions.replace("Count$", "");
             final String[] rest = restrictions.split(",");
             CardList cards = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
-            cards = cards.getValidCards(rest, cardController, c);
+            cards = CardListUtil.getValidCards(cards, rest, cardController, c);
 
             n = cards.size();
 
@@ -2223,7 +2223,7 @@ public class CardFactoryUtil {
             restrictions = restrictions.replace("Count$", "");
             final String[] rest = restrictions.split(",");
             CardList cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            cardsonbattlefield = cardsonbattlefield.getValidCards(rest, cardController, c);
+            cardsonbattlefield = CardListUtil.getValidCards(cardsonbattlefield, rest, cardController, c);
 
             n = cardsonbattlefield.size();
 
@@ -2585,7 +2585,7 @@ public class CardFactoryUtil {
             final String validDevoured = l[0].split(" ")[1];
             final Card csource = c;
             CardList cl = c.getDevoured();
-            cl = cl.getValidCards(validDevoured.split(","), csource.getController(), csource);
+            cl = CardListUtil.getValidCards(cl, validDevoured.split(","), csource.getController(), csource);
             return CardFactoryUtil.doXMath(cl.size(), m, c);
         }
 
@@ -2606,7 +2606,7 @@ public class CardFactoryUtil {
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
             CardList cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            CardList filteredCards = cardsonbattlefield.getValidCards(rest, cardController, c);
+            CardList filteredCards = CardListUtil.getValidCards(cardsonbattlefield, rest, cardController, c);
             int sumPower = 0;
             for (int i = 0; i < filteredCards.size(); i++) {
                 sumPower += filteredCards.get(i).getManaCost().getCMC();
@@ -2626,7 +2626,7 @@ public class CardFactoryUtil {
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
             CardList cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            CardList filteredCards = cardsonbattlefield.getValidCards(rest, cardController, c);
+            CardList filteredCards = CardListUtil.getValidCards(cardsonbattlefield, rest, cardController, c);
             return CardListUtil.sumCMC(filteredCards);
         }
         // Count$CardNumColors
@@ -2647,7 +2647,7 @@ public class CardFactoryUtil {
             final Counters cType = Counters.getType(restrictions[1]);
             final String[] validFilter = restrictions[2].split(",");
             CardList validCards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            validCards = validCards.getValidCards(validFilter, cardController, c);
+            validCards = CardListUtil.getValidCards(validCards, validFilter, cardController, c);
             int cCount = 0;
             for (final Card card : validCards) {
                 cCount += card.getCounters(cType);
@@ -3081,7 +3081,7 @@ public class CardFactoryUtil {
             if (l.length > 1) {
                 m[0] = l[1];
             }
-            final CardList list = paidList.getValidCards(valid, source.getController(), source);
+            final CardList list = CardListUtil.getValidCards(paidList, valid, source.getController(), source);
             return CardFactoryUtil.doXMath(list.size(), m, source);
         }
 

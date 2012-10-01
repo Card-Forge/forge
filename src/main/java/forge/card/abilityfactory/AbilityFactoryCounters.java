@@ -322,7 +322,7 @@ public class AbilityFactoryCounters {
         });
 
         if (abTgt != null) {
-            list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
+            list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
 
             if (list.size() < abTgt.getMinTargets(source, sa)) {
                 return false;
@@ -468,7 +468,7 @@ public class AbilityFactoryCounters {
         list = player.getCardsIn(ZoneType.Battlefield);
 
         if (abTgt != null) {
-            list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
+            list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
 
             if (list.size() == 0) {
                 return false;
@@ -579,17 +579,17 @@ public class AbilityFactoryCounters {
             }
         } else {
             list = player.getCardsIn(ZoneType.Battlefield);
-            list = list.getTargetableCards(sa);
+            list = CardListUtil.getTargetableCards(list, sa);
             if (abTgt != null) {
-                list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
+                list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             }
             if (list.isEmpty() && mandatory) {
                 // If there isn't any prefered cards to target, gotta choose
                 // non-preferred ones
                 list = player.getOpponent().getCardsIn(ZoneType.Battlefield);
-                list = list.getTargetableCards(sa);
+                list = CardListUtil.getTargetableCards(list, sa);
                 if (abTgt != null) {
-                    list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
+                    list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
                 }
                 preferred = false;
             }
@@ -1871,8 +1871,8 @@ public class AbilityFactoryCounters {
         hList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         cList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
-        hList = hList.getValidCards(valid, source.getController(), source);
-        cList = cList.getValidCards(valid, source.getController(), source);
+        hList = CardListUtil.getValidCards(hList, valid, source.getController(), source);
+        cList = CardListUtil.getValidCards(cList, valid, source.getController(), source);
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -2007,7 +2007,7 @@ public class AbilityFactoryCounters {
         final ZoneType zone = params.containsKey("ValidZone") ? ZoneType.smartValueOf(params.get("ValidZone")) : ZoneType.Battlefield;
 
         CardList cards = AllZoneUtil.getCardsIn(zone);
-        cards = cards.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
+        cards = CardListUtil.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -2262,7 +2262,7 @@ public class AbilityFactoryCounters {
         final ZoneType zone = params.containsKey("ValidZone") ? ZoneType.smartValueOf(params.get("ValidZone")) : ZoneType.Battlefield;
 
         CardList cards = AllZoneUtil.getCardsIn(zone);
-        cards = cards.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
+        cards = CardListUtil.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -2585,14 +2585,14 @@ public class AbilityFactoryCounters {
         } else { // targeted
             final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
             CardList list = player.getCardsIn(ZoneType.Battlefield);
-            list = list.getTargetableCards(sa);
-            list = list.getValidCards(abTgt.getValidTgts(), host.getController(), host);
+            list = CardListUtil.getTargetableCards(list, sa);
+            list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), host.getController(), host);
             if (list.isEmpty() && mandatory) {
                 // If there isn't any prefered cards to target, gotta choose
                 // non-preferred ones
                 list = player.getOpponent().getCardsIn(ZoneType.Battlefield);
-                list = list.getTargetableCards(sa);
-                list = list.getValidCards(abTgt.getValidTgts(), host.getController(), host);
+                list = CardListUtil.getTargetableCards(list, sa);
+                list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), host.getController(), host);
                 preferred = false;
             }
             // Not mandatory, or the the list was regenerated and is still

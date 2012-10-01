@@ -84,7 +84,7 @@ public class SpellPermanent extends Spell {
         @Override
         public Object execute() {
             final CardList cards = SpellPermanent.this.getSourceCard().getController().getCardsIn(ZoneType.Battlefield);
-            return cards.getValidCards(SpellPermanent.this.championValid, SpellPermanent.this.getSourceCard()
+            return CardListUtil.getValidCards(cards, SpellPermanent.this.championValid, SpellPermanent.this.getSourceCard()
                     .getController(), SpellPermanent.this.getSourceCard());
         }
     }; // CommandReturn
@@ -105,7 +105,7 @@ public class SpellPermanent extends Spell {
                 AllZone.getInputControl().setInput(SpellPermanent.this.championInputComes);
             } else { // Computer
                 CardList computer = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                computer = computer.getValidCards(SpellPermanent.this.championValid, controller, source);
+                computer = CardListUtil.getValidCards(computer, SpellPermanent.this.championValid, controller, source);
                 computer.remove(source);
 
                 CardListUtil.shuffle(computer);

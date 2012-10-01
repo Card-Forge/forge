@@ -121,7 +121,7 @@ public class CardFactoryCreatures {
             @Override
             public void chooseTargetAI() {
                 CardList perms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                perms = perms.getTargetableCards(this).filter(new Predicate<Card>() {
+                perms = CardListUtil.getTargetableCards(perms, this).filter(new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return (c.sumAllCounters() > 0);
@@ -134,7 +134,7 @@ public class CardFactoryCreatures {
             @Override
             public boolean canPlayAI() {
                 CardList perms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                perms = perms.getTargetableCards(this).filter(new Predicate<Card>() {
+                perms = CardListUtil.getTargetableCards(perms, this).filter(new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return (c.sumAllCounters() > 0);
@@ -556,7 +556,7 @@ public class CardFactoryCreatures {
 
                 CardList targetables = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
 
-                targetables = targetables.getTargetableCards(this).filter(new Predicate<Card>() {
+                targetables = CardListUtil.getTargetableCards(targetables, this).filter(new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return c.isCreature() && (c.getNetDefense() <= totalPower);
