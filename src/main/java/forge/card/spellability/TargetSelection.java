@@ -548,7 +548,7 @@ public class TargetSelection {
 
         for (final SpellAbility sa : choosables) {
             if (!tgt.getTargetSAs().contains(sa)) {
-                map.put(sa.getStackDescription(), sa);
+                map.put(choosables.indexOf(sa) + ". " + sa.getStackDescription(), sa);
             }
         }
 
