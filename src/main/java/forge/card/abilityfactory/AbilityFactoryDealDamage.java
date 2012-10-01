@@ -283,12 +283,16 @@ public class AbilityFactoryDealDamage {
                     sb.append("Deals");
                 }
 
-                sb.append(" ").append(dmg).append(" damage to ");
+                sb.append(" ").append(dmg).append(" damage ");
+                
+                if (params.containsKey("DivideEvenly")) {
+                    sb.append("divided evenly (rounded down) ");
+                }
+                
+                sb.append("to");
 
                 for (int i = 0; i < tgts.size(); i++) {
-                    if (i != 0) {
-                        sb.append(" ");
-                    }
+                    sb.append(" ");
 
                     final Object o = tgts.get(i);
                     if ((o instanceof Card) || (o instanceof Player)) {
@@ -850,7 +854,7 @@ public class AbilityFactoryDealDamage {
     private void dealDamageResolve(final SpellAbility saMe) {
         final HashMap<String, String> params = this.abilityFactory.getMapParams();
 
-        final int dmg = this.getNumDamage(saMe);
+        int dmg = this.getNumDamage(saMe);
 
         final boolean noPrevention = params.containsKey("NoPrevention");
         final boolean combatDmg = params.containsKey("CombatDamage");
@@ -861,7 +865,15 @@ public class AbilityFactoryDealDamage {
         } else {
             tgts = saMe.getTarget().getTargets();
         }
-
+        
+        // Right now for Fireball, maybe later for other stuff
+        if (params.containsKey("DivideEvenly")) {
+            String evenly = params.get("DivideEvenly");
+            if (evenly.equals("RoundedDown")) {
+                dmg = dmg / tgts.size();
+            }
+        }
+        
         final boolean targeted = (saMe.getTarget() != null);
 
         if (params.containsKey("Radiance") && targeted) {
