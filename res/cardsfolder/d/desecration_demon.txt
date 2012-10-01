@@ -1,0 +1,17 @@
+Name:Desecration Demon
+ManaCost:2 B B
+Types:Creature Demon
+Text:no text
+PT:6/6
+K:Flying
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each combat, any opponent may sacrifice a creature. If a player does, tap CARDNAME and put a +1/+1 counter on it.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Opponent | Amount$ 1 | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBSacSelf
+SVar:DBSacSelf:DB$ Tap | Cost$ 0 | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desecration_demon.jpg
+SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/63.jpg
+Oracle:Flying\nAt the beginning of each combat, any opponent may sacrifice a creature. If a player does, tap Desecration Demon and put a +1/+1 counter on it.
+End
