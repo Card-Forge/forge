@@ -23,7 +23,7 @@ import java.util.Observable;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
@@ -46,7 +46,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     private final Player player;
     private boolean update = true;
 
-    private final CardList cardsAddedThisTurn = new CardList();
+    private final List<Card> cardsAddedThisTurn = new ArrayList<Card>();
     private final ArrayList<ZoneType> cardsAddedThisTurnSource = new ArrayList<ZoneType>();
 
     /**
@@ -431,9 +431,9 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList getCardsAddedThisTurn(final ZoneType origin) {
+    public final List<Card> getCardsAddedThisTurn(final ZoneType origin) {
         //System.out.print("Request cards put into " + this.getZoneType() + " from " + origin + ".Amount: ");
-        final CardList ret = new CardList();
+        final List<Card> ret = new ArrayList<Card>();
         for (int i = 0; i < this.cardsAddedThisTurn.size(); i++) {
             if ((this.cardsAddedThisTurnSource.get(i) == origin) || (origin == null)) {
                 ret.add(this.cardsAddedThisTurn.get(i));

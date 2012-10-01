@@ -17,8 +17,11 @@
  */
 package forge.card.cost;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.Card;
-import forge.CardList;
+
 import forge.CardUtil;
 import forge.card.spellability.SpellAbility;
 
@@ -28,14 +31,14 @@ import forge.card.spellability.SpellAbility;
 public abstract class CostPartWithList extends CostPart {
 
     /** The list. */
-    private CardList list = null;
+    private List<Card> list = null;
 
     /**
      * Gets the list.
      * 
      * @return the list
      */
-    public final CardList getList() {
+    public final List<Card> getList() {
         return this.list;
     }
 
@@ -45,7 +48,7 @@ public abstract class CostPartWithList extends CostPart {
      * @param setList
      *            the new list
      */
-    public final void setList(final CardList setList) {
+    public final void setList(final List<Card> setList) {
         this.list = setList;
     }
 
@@ -53,7 +56,7 @@ public abstract class CostPartWithList extends CostPart {
      * Reset list.
      */
     public final void resetList() {
-        this.setList(new CardList());
+        this.setList(new ArrayList<Card>());
     }
 
     /**

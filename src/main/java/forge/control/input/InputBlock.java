@@ -17,11 +17,13 @@
  */
 package forge.control.input;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.Singletons;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.PlayerZone;
@@ -44,7 +46,7 @@ public class InputBlock extends Input {
     private static final long serialVersionUID = 6120743598368928128L;
 
     private Card currentAttacker = null;
-    private final HashMap<Card,CardList> allBlocking = new HashMap<Card, CardList>();
+    private final HashMap<Card,List<Card>> allBlocking = new HashMap<Card, List<Card>>();
 
     /**
      * <p>
@@ -110,10 +112,10 @@ public class InputBlock extends Input {
                     && zone.is(ZoneType.Battlefield, AllZone.getHumanPlayer())) {
                 // Create a new blockedBy list if it doesn't exist
                 if (!this.allBlocking.containsKey(card)) {
-                    this.allBlocking.put(card, new CardList());
+                    this.allBlocking.put(card, new ArrayList<Card>());
                 }
                 
-                CardList attackersBlocked = this.allBlocking.get(card);
+                List<Card> attackersBlocked = this.allBlocking.get(card);
                 if (!attackersBlocked.contains(this.currentAttacker) && 
                         CombatUtil.canBlock(this.currentAttacker, card, AllZone.getCombat())) {
                     attackersBlocked.add(this.currentAttacker);

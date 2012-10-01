@@ -31,7 +31,7 @@ import com.google.common.collect.Iterables;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -991,7 +991,7 @@ public class ComputerUtil {
      * 
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getAvailableMana(boolean checkPlayable) {
+    public static List<Card> getAvailableMana(boolean checkPlayable) {
         return ComputerUtil.getAvailableMana(AllZone.getComputerPlayer(), checkPlayable);
     } // getAvailableMana()
 
@@ -1006,9 +1006,9 @@ public class ComputerUtil {
      * @param checkPlayable
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getAvailableMana(final Player player, final boolean checkPlayable) {
-        final CardList list = player.getCardsIn(ZoneType.Battlefield);
-        final CardList manaSources = CardListUtil.filter(list, new Predicate<Card>() {
+    public static List<Card> getAvailableMana(final Player player, final boolean checkPlayable) {
+        final List<Card> list = player.getCardsIn(ZoneType.Battlefield);
+        final List<Card> manaSources = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (checkPlayable) {
@@ -1026,15 +1026,15 @@ public class ComputerUtil {
             }
         }); // CardListFilter
 
-        final CardList sortedManaSources = new CardList();
-        final CardList otherManaSources = new CardList();
-        final CardList colorlessManaSources = new CardList();
-        final CardList oneManaSources = new CardList();
-        final CardList twoManaSources = new CardList();
-        final CardList threeManaSources = new CardList();
-        final CardList fourManaSources = new CardList();
-        final CardList fiveManaSources = new CardList();
-        final CardList anyColorManaSources = new CardList();
+        final List<Card> sortedManaSources = new ArrayList<Card>();
+        final List<Card> otherManaSources = new ArrayList<Card>();
+        final List<Card> colorlessManaSources = new ArrayList<Card>();
+        final List<Card> oneManaSources = new ArrayList<Card>();
+        final List<Card> twoManaSources = new ArrayList<Card>();
+        final List<Card> threeManaSources = new ArrayList<Card>();
+        final List<Card> fourManaSources = new ArrayList<Card>();
+        final List<Card> fiveManaSources = new ArrayList<Card>();
+        final List<Card> anyColorManaSources = new ArrayList<Card>();
 
         // Sort mana sources
         // 1. Use lands that can only produce colorless mana without
@@ -1129,7 +1129,7 @@ public class ComputerUtil {
      * @param player
      *            a {@link forge.game.player.Player} object.
      * @param checkPlayable TODO
-     * @return HashMap<String, CardList>
+     * @return HashMap<String, List<Card>>
      */
     public static HashMap<String, ArrayList<AbilityMana>> mapManaSources(final Player player, boolean checkPlayable) {
         final HashMap<String, ArrayList<AbilityMana>> manaMap = new HashMap<String, ArrayList<AbilityMana>>();
@@ -1143,7 +1143,7 @@ public class ComputerUtil {
         final ArrayList<AbilityMana> snowSources = new ArrayList<AbilityMana>();
 
         // Get list of current available mana sources
-        final CardList manaSources = ComputerUtil.getAvailableMana(checkPlayable);
+        final List<Card> manaSources = ComputerUtil.getAvailableMana(checkPlayable);
 
         // Loop over all mana sources
         for (int i = 0; i < manaSources.size(); i++) {
@@ -1304,11 +1304,11 @@ public class ComputerUtil {
         if (!computer.canPlayLand()) {
             return false;
         }
-        final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-        CardList landList = CardListUtil.filter(hand, Presets.LANDS);
-        CardList nonLandList = CardListUtil.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
+        final List<Card> hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+        List<Card> landList = CardListUtil.filter(hand, Presets.LANDS);
+        List<Card> nonLandList = CardListUtil.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
 
-        final CardList lands = computer.getCardsIn(ZoneType.Graveyard);
+        final List<Card> lands = computer.getCardsIn(ZoneType.Graveyard);
         for (final Card crd : lands) {
             if (crd.isLand() && crd.hasKeyword("May be played")) {
                 landList.add(crd);
@@ -1318,9 +1318,9 @@ public class ComputerUtil {
             return false;
         }
         if (landList.size() == 1 && nonLandList.size() < 3) {
-            CardList cardsInPlay = computer.getCardsIn(ZoneType.Battlefield);
-            CardList landsInPlay = CardListUtil.filter(cardsInPlay, Presets.LANDS);
-            CardList allCards = computer.getCardsIn(ZoneType.Graveyard);
+            List<Card> cardsInPlay = computer.getCardsIn(ZoneType.Battlefield);
+            List<Card> landsInPlay = CardListUtil.filter(cardsInPlay, Presets.LANDS);
+            List<Card> allCards = computer.getCardsIn(ZoneType.Graveyard);
             allCards.addAll(cardsInPlay);
             int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
             int max = Math.max(maxCmcInHand, 6);
@@ -1345,7 +1345,7 @@ public class ComputerUtil {
             public boolean apply(final Card c) {
                 if (c.getSVar("NeedsToPlay").length() > 0) {
                     final String needsToPlay = c.getSVar("NeedsToPlay");
-                    CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                    List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
                     list = CardListUtil.getValidCards(list, needsToPlay.split(","), c.getController(), c);
                     if (list.isEmpty()) {
@@ -1353,7 +1353,7 @@ public class ComputerUtil {
                     }
                 }
                 if (c.isType("Legendary") && !c.getName().equals("Flagstones of Trokair")) {
-                    final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                    final List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                     if (Iterables.any(list, CardPredicates.nameEquals(c.getName()))) {
                         return false;
                     }
@@ -1363,8 +1363,8 @@ public class ComputerUtil {
                 // available
                 final ArrayList<SpellAbility> spellAbilities = c.getSpellAbilities();
 
-                final CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                CardList lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                final List<Card> hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+                List<Card> lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 lands.addAll(hand);
                 lands = CardListUtil.filter(lands, CardPredicates.Presets.LANDS);
                 int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
@@ -1391,7 +1391,7 @@ public class ComputerUtil {
             Card land = landList.get(ix);
             //play basic lands that are needed the most
             if (!Iterables.any(landList, CardPredicates.Presets.BASIC_LANDS)) {
-                final CardList combined = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                final List<Card> combined = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
                 final ArrayList<String> basics = new ArrayList<String>();
 
@@ -1445,12 +1445,12 @@ public class ComputerUtil {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCardPreference(final Card activate, final String pref, final CardList typeList) {
+    public static Card getCardPreference(final Card activate, final String pref, final List<Card> typeList) {
 
         if (activate != null) {
             final String[] prefValid = activate.getSVar("AIPreference").split("\\$");
             if (prefValid[0].equals(pref)) {
-                final CardList prefList = CardListUtil.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate);
+                final List<Card> prefList = CardListUtil.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate);
                 if (prefList.size() != 0) {
                     CardListUtil.shuffle(prefList);
                     return prefList.get(0);
@@ -1461,7 +1461,7 @@ public class ComputerUtil {
             for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest,
                                              // priority 5 the highest
                 final int priority = 6 - ip;
-                final CardList sacMeList = CardListUtil.filter(typeList, new Predicate<Card>() {
+                final List<Card> sacMeList = CardListUtil.filter(typeList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return (!c.getSVar("SacMe").equals("") && (Integer.parseInt(c.getSVar("SacMe")) == priority));
@@ -1491,10 +1491,10 @@ public class ComputerUtil {
             }
 
             // Discard lands
-            final CardList landsInHand = CardListUtil.getType(typeList, "Land");
+            final List<Card> landsInHand = CardListUtil.getType(typeList, "Land");
             if (!landsInHand.isEmpty()) {
-                final CardList landsInPlay = CardListUtil.getType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), "Land");
-                final CardList nonLandsInHand = CardListUtil.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
+                final List<Card> landsInPlay = CardListUtil.getType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), "Land");
+                final List<Card> nonLandsInHand = CardListUtil.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
                 final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
                 if (landsInPlay.size() >= highestCMC
                         || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)) {
@@ -1522,10 +1522,10 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseSacrificeType(final String type, final Card activate, final Card target,
+    public static List<Card> chooseSacrificeType(final String type, final Card activate, final Card target,
             final int amount) {
         Player activator = AllZone.getComputerPlayer();
-        CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
+        List<Card> typeList = activator.getCardsIn(ZoneType.Battlefield);
         typeList = CardListUtil.getValidCards(typeList, type.split(";"), activate.getController(), activate);
         if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             typeList = CardListUtil.getNotType(typeList, "Creature");
@@ -1539,7 +1539,7 @@ public class ComputerUtil {
             return null;
         }
 
-        final CardList sacList = new CardList();
+        final List<Card> sacList = new ArrayList<Card>();
         int count = 0;
 
         while (count < amount) {
@@ -1573,10 +1573,10 @@ public class ComputerUtil {
      *            no restrictions.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a CardList of discarded cards.
+     * @return a List<Card> of discarded cards.
      */
-    public static CardList discardNumTypeAI(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
-        CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+    public static List<Card> discardNumTypeAI(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
+        List<Card> hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
         Card sourceCard = null;
 
         if ((uTypes != null) && (sa != null)) {
@@ -1587,7 +1587,7 @@ public class ComputerUtil {
             return null;
         }
 
-        final CardList discardList = new CardList();
+        final List<Card> discardList = new ArrayList<Card>();
         int count = 0;
         if (sa != null) {
             sourceCard = sa.getSourceCard();
@@ -1626,7 +1626,7 @@ public class ComputerUtil {
             }
             List<Card> aiCards = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             final int numLandsInPlay = Iterables.size(Iterables.filter(aiCards, CardPredicates.Presets.LANDS));
-            final CardList landsInHand = CardListUtil.filter(hand, CardPredicates.Presets.LANDS);
+            final List<Card> landsInHand = CardListUtil.filter(hand, CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
 
             // Discard a land
@@ -1671,7 +1671,7 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseExileType(final String type, final Card activate, final Card target, final int amount) {
+    public static List<Card> chooseExileType(final String type, final Card activate, final Card target, final int amount) {
         return ComputerUtil.chooseExileFrom(ZoneType.Battlefield, type, activate, target, amount);
     }
 
@@ -1690,7 +1690,7 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseExileFromHandType(final String type, final Card activate, final Card target,
+    public static List<Card> chooseExileFromHandType(final String type, final Card activate, final Card target,
             final int amount) {
         return ComputerUtil.chooseExileFrom(ZoneType.Hand, type, activate, target, amount);
     }
@@ -1710,7 +1710,7 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseExileFromGraveType(final String type, final Card activate, final Card target,
+    public static List<Card> chooseExileFromGraveType(final String type, final Card activate, final Card target,
             final int amount) {
         return ComputerUtil.chooseExileFrom(ZoneType.Graveyard, type, activate, target, amount);
     }
@@ -1730,7 +1730,7 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseExileFromStackType(final String type, final Card activate, final Card target,
+    public static List<Card> chooseExileFromStackType(final String type, final Card activate, final Card target,
             final int amount) {
         return ComputerUtil.chooseExileFrom(ZoneType.Stack, type, activate, target, amount);
     }
@@ -1752,9 +1752,9 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseExileFrom(final ZoneType zone, final String type, final Card activate,
+    public static List<Card> chooseExileFrom(final ZoneType zone, final String type, final Card activate,
             final Card target, final int amount) {
-        CardList typeList = new CardList();
+        List<Card> typeList = new ArrayList<Card>();
         if (zone.equals(ZoneType.Stack)) {
             for (int i = 0; i < AllZone.getStack().size(); i++) {
                 typeList.add(AllZone.getStack().peekAbility(i).getSourceCard());
@@ -1773,7 +1773,7 @@ public class ComputerUtil {
         }
 
         CardListUtil.sortAttackLowFirst(typeList);
-        final CardList exileList = new CardList();
+        final List<Card> exileList = new ArrayList<Card>();
 
         for (int i = 0; i < amount; i++) {
             exileList.add(typeList.get(i));
@@ -1796,8 +1796,8 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseTapType(final String type, final Card activate, final boolean tap, final int amount) {
-        CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+    public static List<Card> chooseTapType(final String type, final Card activate, final boolean tap, final int amount) {
+        List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
 
         // is this needed?
@@ -1813,7 +1813,7 @@ public class ComputerUtil {
 
         CardListUtil.sortAttackLowFirst(typeList);
 
-        final CardList tapList = new CardList();
+        final List<Card> tapList = new ArrayList<Card>();
 
         for (int i = 0; i < amount; i++) {
             tapList.add(typeList.get(i));
@@ -1836,8 +1836,8 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseUntapType(final String type, final Card activate, final boolean untap, final int amount) {
-        CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+    public static List<Card> chooseUntapType(final String type, final Card activate, final boolean untap, final int amount) {
+        List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
 
         // is this needed?
@@ -1853,7 +1853,7 @@ public class ComputerUtil {
 
         CardListUtil.sortAttack(typeList);
 
-        final CardList untapList = new CardList();
+        final List<Card> untapList = new ArrayList<Card>();
 
         for (int i = 0; i < amount; i++) {
             untapList.add(typeList.get(i));
@@ -1876,8 +1876,8 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseReturnType(final String type, final Card activate, final Card target, final int amount) {
-        CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+    public static List<Card> chooseReturnType(final String type, final Card activate, final Card target, final int amount) {
+        List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
             // bounce
@@ -1893,7 +1893,7 @@ public class ComputerUtil {
         }
 
         CardListUtil.sortAttackLowFirst(typeList);
-        final CardList returnList = new CardList();
+        final List<Card> returnList = new ArrayList<Card>();
 
         for (int i = 0; i < amount; i++) {
             returnList.add(typeList.get(i));
@@ -1908,8 +1908,8 @@ public class ComputerUtil {
      * 
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getPossibleAttackers() {
-        CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+    public static List<Card> getPossibleAttackers() {
+        List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -1941,7 +1941,7 @@ public class ComputerUtil {
      * @return a {@link forge.game.phase.Combat} object.
      */
     public static Combat getBlockers() {
-        final CardList blockers = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        final List<Card> blockers = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
         return ComputerUtilBlock.getBlockers(AllZone.getCombat(), blockers);
     }
@@ -2020,9 +2020,9 @@ public class ComputerUtil {
      *            the source SpellAbility
      * @return the card list
      */
-    public static CardList sacrificePermanents(final int amount, final CardList list, final boolean destroy,
+    public static List<Card> sacrificePermanents(final int amount, final List<Card> list, final boolean destroy,
             SpellAbility source) {
-        final CardList sacList = new CardList();
+        final List<Card> sacList = new ArrayList<Card>();
         // used in Annihilator and AF_Sacrifice
         int max = list.size();
         if (max > amount) {
@@ -2036,7 +2036,7 @@ public class ComputerUtil {
             Card c = null;
 
             if (destroy) {
-                final CardList indestructibles = CardListUtil.getKeyword(list, "Indestructible");
+                final List<Card> indestructibles = CardListUtil.getKeyword(list, "Indestructible");
                 if (!indestructibles.isEmpty()) {
                     c = indestructibles.get(0);
                 }
@@ -2104,7 +2104,7 @@ public class ComputerUtil {
         }
 
         final Player controller = card.getController();
-        final CardList l = controller.getCardsIn(ZoneType.Battlefield);
+        final List<Card> l = controller.getCardsIn(ZoneType.Battlefield);
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbility()) {
                 // This try/catch should fix the "computer is thinking" bug
@@ -2155,7 +2155,7 @@ public class ComputerUtil {
         int prevented = 0;
 
         final Player controller = card.getController();
-        final CardList l = controller.getCardsIn(ZoneType.Battlefield);
+        final List<Card> l = controller.getCardsIn(ZoneType.Battlefield);
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbility()) {
                 // if SA is from AF_Counter don't add to getPlayable
@@ -2210,7 +2210,7 @@ public class ComputerUtil {
         }
 
         // get all cards the computer controls with BuffedBy
-        final CardList buffed = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        final List<Card> buffed = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         for (int j = 0; j < buffed.size(); j++) {
             final Card buffedcard = buffed.get(j);
             if (buffedcard.getSVar("BuffedBy").length() > 0) {
@@ -2232,7 +2232,7 @@ public class ComputerUtil {
         } // BuffedBy
 
         // get all cards the human controls with AntiBuffedBy
-        final CardList antibuffed = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        final List<Card> antibuffed = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         for (int k = 0; k < antibuffed.size(); k++) {
             final Card buffedcard = antibuffed.get(k);
             if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
@@ -2243,10 +2243,10 @@ public class ComputerUtil {
                 }
             }
         } // AntiBuffedBy
-        final CardList vengevines = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard, "Vengevine");
+        final List<Card> vengevines = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard, "Vengevine");
         if (vengevines.size() > 0) {
-            final CardList creatures = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-            final CardList creatures2 = new CardList();
+            final List<Card> creatures = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+            final List<Card> creatures2 = new ArrayList<Card>();
             for (int i = 0; i < creatures.size(); i++) {
                 if (creatures.get(i).isCreature() && creatures.get(i).getManaCost().getCMC() <= 3) {
                     creatures2.add(creatures.get(i));
@@ -2273,7 +2273,7 @@ public class ComputerUtil {
             // Otherwise, if life is possibly in danger, then this is fine.
             Combat combat = new Combat();
             combat.initiatePossibleDefenders(AllZone.getComputerPlayer());
-            CardList attackers = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+            List<Card> attackers = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
             for (Card att : attackers) {
                 if (CombatUtil.canAttackNextTurn(att)) {
                     combat.addAttacker(att);
@@ -2297,9 +2297,9 @@ public class ComputerUtil {
         if (!discard.getSVar("DiscardMe").equals("")) {
             return true;
         }
-        final CardList landsInPlay = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
-        final CardList landsInHand = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
-        final CardList nonLandsInHand = CardListUtil.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
+        final List<Card> landsInPlay = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
+        final List<Card> landsInHand = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
+        final List<Card> nonLandsInHand = CardListUtil.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
         final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
         final int discardCMC = discard.getCMC();
         if (discard.isLand()) {

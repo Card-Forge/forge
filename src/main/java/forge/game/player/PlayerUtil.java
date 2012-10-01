@@ -17,11 +17,13 @@
  */
 package forge.game.player;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
@@ -57,7 +59,7 @@ public final class PlayerUtil {
      */
     public static boolean worshipFlag(final Player player) {
         // Instead of hardcoded Ali from Cairo like cards, it is now a Keyword
-        CardList list = player.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = player.getCardsIn(ZoneType.Battlefield);
         list = CardListUtil.getKeyword(list, "Damage that would reduce your life total to less than 1 reduces it to 1 instead.");
         list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
@@ -227,7 +229,7 @@ public final class PlayerUtil {
      * @return a {@link forge.control.input.Input} object.
      * @since 1.0.15
      */
-    public static Input inputSacrificePermanent(final CardList choices, final String message) {
+    public static Input inputSacrificePermanent(final List<Card> choices, final String message) {
         return PlayerUtil.inputSacrificePermanentsFromList(1, choices, message);
     } // input_sacrifice()
 
@@ -242,7 +244,7 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input inputSacrificePermanents(final int nCards) {
-        final CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        final List<Card> list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
     } // input_sacrificePermanents()
 
@@ -259,7 +261,7 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input inputSacrificePermanents(final int nCards, final String type) {
-        CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
 
         list = CardListUtil.getType(list, type);
         return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a " + type + " to sacrifice");
@@ -279,7 +281,7 @@ public final class PlayerUtil {
      * @return a {@link forge.control.input.Input} object.
      * @since 1.0.15
      */
-    public static Input inputSacrificePermanentsFromList(final int nCards, final CardList list, final String message) {
+    public static Input inputSacrificePermanentsFromList(final int nCards, final List<Card> list, final String message) {
         final Input target = new Input() {
             private static final long serialVersionUID = 1981791992623774490L;
             private int n = 0;

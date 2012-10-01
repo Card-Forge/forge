@@ -261,7 +261,7 @@ public class RunTest {
         c2.setUniqueNumber(2);
 
         // test CardList
-        final CardList cardList = new CardList(Arrays.asList(new Card[] { c, c2 }));
+        final List<Card> cardList = new ArrayList<Card>(Arrays.asList(new Card[] { c, c2 }));
         this.check("111", cardList.contains(c));
         this.check("112", cardList.contains(c2));
         this.check("113", cardList.containsName(c));
@@ -275,12 +275,12 @@ public class RunTest {
         this.check("118", !c.hasSickness());
 
         final CardFactoryInterface cf1 = AllZone.getCardFactory();
-        final CardList c1 = new CardList();
+        final List<Card> c1 = new ArrayList<Card>();
         c1.add(cf1.getCard("Shock", null));
         c1.add(cf1.getCard("Royal Assassin", null));
         c1.add(cf1.getCard("Hymn to Tourach", null));
 
-        CardList c3 = c1.filter(new Predicate<Card>() {
+        List<Card> c3 = c1.filter(new Predicate<Card>() {
             @Override
             public boolean isTrue(final Card c) {
                 return c.isCreature();

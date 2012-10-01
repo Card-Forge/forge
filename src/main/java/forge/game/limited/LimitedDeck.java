@@ -380,7 +380,7 @@ public class LimitedDeck {
      * Add non-basic lands to the deck.
      */
     // private void addNonBasicLands() {
-    // CardList lands = getAiPlayables().getType("Land");
+    // List<Card> lands = getAiPlayables().getType("Land");
     // while (!getColors().getColor1().equals(getColors().getColor2()) &&
     // landsNeeded > 0 && lands.size() > 0) {
     // final Card c = lands.get(0);

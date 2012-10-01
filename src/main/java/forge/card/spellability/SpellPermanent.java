@@ -25,7 +25,7 @@ import com.google.common.collect.Iterables;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.Command;
@@ -70,7 +70,8 @@ public class SpellPermanent extends Spell {
 
         @Override
         public void showMessage() {
-            final CardList choice = (CardList) SpellPermanent.this.championGetCreature.execute();
+            @SuppressWarnings("unchecked")
+            final List<Card> choice = (List<Card>) SpellPermanent.this.championGetCreature.execute();
 
             this.stopSetNext(CardFactoryUtil.inputTargetChampionSac(SpellPermanent.this.getSourceCard(),
                     SpellPermanent.this.championAbilityComes, choice, "Select another "
@@ -83,7 +84,7 @@ public class SpellPermanent extends Spell {
     private final CommandReturn championGetCreature = new CommandReturn() {
         @Override
         public Object execute() {
-            final CardList cards = SpellPermanent.this.getSourceCard().getController().getCardsIn(ZoneType.Battlefield);
+            final List<Card> cards = SpellPermanent.this.getSourceCard().getController().getCardsIn(ZoneType.Battlefield);
             return CardListUtil.getValidCards(cards, SpellPermanent.this.championValid, SpellPermanent.this.getSourceCard()
                     .getController(), SpellPermanent.this.getSourceCard());
         }
@@ -97,14 +98,15 @@ public class SpellPermanent extends Spell {
             final Card source = this.getSourceCard();
             final Player controller = source.getController();
 
-            final CardList creature = (CardList) SpellPermanent.this.championGetCreature.execute();
+            @SuppressWarnings("unchecked")
+            final List<Card> creature = (List<Card>) SpellPermanent.this.championGetCreature.execute();
             if (creature.size() == 0) {
                 Singletons.getModel().getGameAction().sacrifice(source, null);
                 return;
             } else if (controller.isHuman()) {
                 AllZone.getInputControl().setInput(SpellPermanent.this.championInputComes);
             } else { // Computer
-                CardList computer = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> computer = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 computer = CardListUtil.getValidCards(computer, SpellPermanent.this.championValid, controller, source);
                 computer.remove(source);
 
@@ -350,19 +352,19 @@ public class SpellPermanent extends Spell {
         
         // check on legendary
         if (card.isType("Legendary") && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
-            final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            final List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             if (Iterables.any(list, CardPredicates.nameEquals(card.getName()))) {
                 return false;
             }
         }
         if (card.isPlaneswalker()) {
-            CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             list = CardListUtil.filter(list, CardPredicates.Presets.PLANEWALKERS);
 
             for (int i = 0; i < list.size(); i++) {
                 List<String> type = card.getType();
                 final String subtype = type.get(type.size() - 1);
-                final CardList cl = CardListUtil.getType(list, subtype);
+                final List<Card> cl = CardListUtil.getType(list, subtype);
 
                 if (cl.size() > 0) {
                     return false;
@@ -370,7 +372,7 @@ public class SpellPermanent extends Spell {
             }
         }
         if (card.isType("World")) {
-            CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             list = CardListUtil.getType(list, "World");
             if (list.size() > 0) {
                 return false;
@@ -389,7 +391,8 @@ public class SpellPermanent extends Spell {
                 return false;
             }
 
-            final CardList cl = (CardList) this.championGetCreature.execute();
+            @SuppressWarnings("unchecked")
+            final List<Card> cl = (List<Card>) this.championGetCreature.execute();
             if ((o == null) || !(cl.size() > 0) || !this.getSourceCard().isInZone(ZoneType.Hand)) {
                 return false;
             }

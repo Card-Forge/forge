@@ -27,7 +27,8 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.CardList;
+import forge.Card;
+
 import forge.Singletons;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -161,7 +162,7 @@ public enum VPlayers implements IVDoc {
             temp[5].setText("");
         }
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-            CardList list = p0.getCardsIn(ZoneType.Ante);
+            List<Card> list = p0.getCardsIn(ZoneType.Ante);
             StringBuilder sb = new StringBuilder();
             sb.append("Ante'd: ");
             for (int i = 0; i < list.size(); i++) {

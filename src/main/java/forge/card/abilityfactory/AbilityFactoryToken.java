@@ -19,12 +19,13 @@ package forge.card.abilityfactory;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -571,7 +572,7 @@ public class AbilityFactoryToken extends AbilityFactory {
 
         final String remember = this.abilityFactory.getMapParams().get("RememberTokens");
         for (int i = 0; i < finalAmount; i++) {
-            final CardList tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost,
+            final List<Card> tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost,
                     substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
 
             // Grant abilities

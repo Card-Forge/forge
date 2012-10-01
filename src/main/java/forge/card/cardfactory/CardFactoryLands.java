@@ -17,6 +17,9 @@
  */
 package forge.card.cardfactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import com.google.common.base.Predicate;
@@ -24,7 +27,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -162,7 +165,7 @@ class CardFactoryLands {
 
                 private static final long serialVersionUID = 1416258136308898492L;
 
-                private final CardList inPlay = new CardList();
+                private final List<Card> inPlay = new ArrayList<Card>();
 
                 @Override
                 public boolean canPlayAI() {
@@ -292,11 +295,11 @@ class CardFactoryLands {
 
                 @Override
                 public void execute() {
-                    final CardList land = CardListUtil.getValidCards(this.player.getCardsIn(ZoneType.Battlefield), type[0], this.player, card);
+                    final List<Card> land = CardListUtil.getValidCards(this.player.getCardsIn(ZoneType.Battlefield), type[0], this.player, card);
 
                     if (this.player.isComputer()) {
                         if (land.size() > 0) {
-                            CardList tappedLand = new CardList(land);
+                            List<Card> tappedLand = new ArrayList<Card>(land);
                             tappedLand = CardListUtil.filter(tappedLand, Presets.TAPPED);
                             // if any are tapped, sacrifice it
                             // else sacrifice random
@@ -355,7 +358,7 @@ class CardFactoryLands {
                 @Override
                 public void execute() {
                     final Player player = card.getController();
-                    final CardList land = player.getCardsIn(ZoneType.Battlefield, "Sheltered Valley");
+                    final List<Card> land = player.getCardsIn(ZoneType.Battlefield, "Sheltered Valley");
                     land.remove(card);
 
                     if (land.size() > 0) {
@@ -377,12 +380,12 @@ class CardFactoryLands {
 
                 @Override
                 public void execute() {
-                    CardList plains = AllZoneUtil.getPlayerLandsInPlay(card.getController());
+                    List<Card> plains = AllZoneUtil.getPlayerLandsInPlay(card.getController());
                     plains = CardListUtil.filter(plains, Presets.UNTAPPED);
 
                     if (this.player.isComputer()) {
                         if (plains.size() > 1) {
-                            CardList tappedPlains = CardListUtil.filter(plains, CardPredicates.Presets.BASIC_LANDS);
+                            List<Card> tappedPlains = CardListUtil.filter(plains, CardPredicates.Presets.BASIC_LANDS);
                             for (final Card c : tappedPlains) {
                                 Singletons.getModel().getGameAction().sacrifice(c, null);
                             }
@@ -487,7 +490,7 @@ class CardFactoryLands {
                 }
 
                 public void computerExecute() {
-                    CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+                    List<Card> hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
                     hand = CardListUtil.getType(hand, type);
                     if (hand.size() > 0) {
                         this.revealCard(hand.get(0));
@@ -671,12 +674,12 @@ class CardFactoryLands {
                 @Override
                 public void execute() {
                     final Player player = card.getController();
-                    CardList land = AllZoneUtil.getPlayerLandsInPlay(player);
+                    List<Card> land = AllZoneUtil.getPlayerLandsInPlay(player);
                     land = land.getNotType("Lair");
 
                     if (player.isComputer()) {
                         if (land.size() > 0) {
-                            CardList tappedLand = new CardList(land);
+                            List<Card> tappedLand = new ArrayList<Card>(land);
                             tappedLand = tappedLand.filter(CardListFilter.TAPPED);
                             if (tappedLand.size() > 0) {
                                 Singletons.getModel().getGameAction().moveToHand(CardFactoryUtil.getWorstLand(tappedLand));
@@ -745,7 +748,7 @@ class CardFactoryLands {
                     final Player player = card.getController();
                     final StringBuilder sb = new StringBuilder();
                     sb.append(type[0]).append(".untapped");
-                    final CardList land = player.getCardsIn(ZoneType.Battlefield)
+                    final List<Card> land = player.getCardsIn(ZoneType.Battlefield)
                             .getValidCards(sb.toString(), player, card);
 
                     if (player.isComputer()) {

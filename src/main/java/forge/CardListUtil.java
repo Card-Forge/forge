@@ -17,6 +17,7 @@
  */
 package forge;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -52,7 +54,7 @@ public class CardListUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList filterToughness(final CardList in, final int atLeastToughness) {
+    public static List<Card> filterToughness(final List<Card> in, final int atLeastToughness) {
         return CardListUtil.filter(in, new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
@@ -116,32 +118,32 @@ public class CardListUtil {
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public static void sortAttack(final CardList list) {
+    public static void sortAttack(final List<Card> list) {
         Collections.sort(list, AttackComparator);
     } // sortAttack()
 
     /**
      * <p>
-     * Sorts a CardList by "best" using the EvaluateCreature function.
+     * Sorts a List<Card> by "best" using the EvaluateCreature function.
      * the best creatures will be first in the list.
      * </p>
      * 
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public static void sortByEvaluateCreature(final CardList list) {
+    public static void sortByEvaluateCreature(final List<Card> list) {
         Collections.sort(list, EvaluateCreatureComparator);
     } // sortByEvaluateCreature()
 
     /**
      * <p>
-     * Sorts a CardList by converted mana cost, putting highest first.
+     * Sorts a List<Card> by converted mana cost, putting highest first.
      * </p>
      * 
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public static void sortByMostExpensive(final CardList list) {
+    public static void sortByMostExpensive(final List<Card> list) {
         Collections.sort(list, CmcComparator);
     } // sortByMostExpensive()
 
@@ -154,7 +156,7 @@ public class CardListUtil {
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public static void sortAttackLowFirst(final CardList list) {
+    public static void sortAttackLowFirst(final List<Card> list) {
         Collections.sort(list, Collections.reverseOrder(AttackComparator));
     } // sortAttackLowFirst()
 
@@ -166,7 +168,7 @@ public class CardListUtil {
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public static void sortNonFlyingFirst(final CardList list) {
+    public static void sortNonFlyingFirst(final List<Card> list) {
         CardListUtil.sortFlying(list);
         Collections.reverse(list);
     } // sortNonFlyingFirst
@@ -179,19 +181,19 @@ public class CardListUtil {
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public static void sortFlying(final CardList list) {
+    public static void sortFlying(final List<Card> list) {
         Collections.sort(list, getKeywordComparator("Flying"));
     } // sortFlying()
 
     /**
      * <p>
-     * Sorts a CardList from highest converted mana cost to lowest.
+     * Sorts a List<Card> from highest converted mana cost to lowest.
      * </p>
      * 
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public static void sortCMC(final CardList list) {
+    public static void sortCMC(final List<Card> list) {
         Collections.sort( list, CmcComparator );
     } // sortCMC
 
@@ -206,7 +208,7 @@ public class CardListUtil {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getColor(final CardList list, final String color) {
+    public static List<Card> getColor(final List<Card> list, final String color) {
         return CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -224,7 +226,7 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getGoldCards(final CardList list) {
+    public static List<Card> getGoldCards(final List<Card> list) {
         return CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -243,7 +245,7 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      * @return a int.
      */
-    public static int sumCMC(final CardList c) {
+    public static int sumCMC(final List<Card> c) {
         return Aggregates.sum(c, CardPredicates.Accessors.fnGetCmc);
     } // sumCMC
 
@@ -256,7 +258,7 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      * @return a float.
      */
-    public static float getAverageCMC(final CardList c) {
+    public static float getAverageCMC(final List<Card> c) {
 
         return sumCMC(c) / c.size();
 
@@ -264,7 +266,7 @@ public class CardListUtil {
 
     /**
      * 
-     * Given a CardList c, return a CardList that contains a random amount of cards from c.
+     * Given a List<Card> c, return a List<Card> that contains a random amount of cards from c.
      * 
      * @param c
      *            CardList
@@ -272,12 +274,12 @@ public class CardListUtil {
      *            int
      * @return CardList
      */
-    public static CardList getRandomSubList(final CardList c, final int amount) {
+    public static List<Card> getRandomSubList(final List<Card> c, final int amount) {
         if (c.size() < amount) {
             return null;
         }
 
-        final CardList subList = new CardList();
+        final List<Card> subList = new ArrayList<Card>();
         while (subList.size() < amount) {
             CardListUtil.shuffle(c);
             subList.add(c.get(0));
@@ -298,38 +300,38 @@ public class CardListUtil {
         Collections.shuffle(list, MyRandom.getRandom());
     }
 
-    public static CardList filterControlledBy(List<Card> cardList, Player player) {
+    public static List<Card> filterControlledBy(List<Card> cardList, Player player) {
         return CardListUtil.filter(cardList, CardPredicates.isController(player));
     }
 
 
-    public static CardList getValidCards(List<Card> cardList, String[] restrictions, Player sourceController, Card source) {
+    public static List<Card> getValidCards(List<Card> cardList, String[] restrictions, Player sourceController, Card source) {
         return CardListUtil.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source));
     }
 
-    public static CardList getValidCards(List<Card> cardList, String restriction, Player sourceController, Card source) {
+    public static List<Card> getValidCards(List<Card> cardList, String restriction, Player sourceController, Card source) {
         return CardListUtil.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
     }
 
-    public static CardList getTargetableCards(List<Card> cardList, SpellAbility source) {
+    public static List<Card> getTargetableCards(List<Card> cardList, SpellAbility source) {
         return CardListUtil.filter(cardList, CardPredicates.isTargetableBy(source));
     }
 
-    public static CardList getKeyword(List<Card> cardList, String keyword) {
+    public static List<Card> getKeyword(List<Card> cardList, String keyword) {
         return CardListUtil.filter(cardList, CardPredicates.hasKeyword(keyword));
     }
 
-    public static CardList getNotKeyword(List<Card> cardList, String keyword) {
+    public static List<Card> getNotKeyword(List<Card> cardList, String keyword) {
         return CardListUtil.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
     }
 
-    // cardType is like "Land" or "Goblin", returns a new CardList that is a
+    // cardType is like "Land" or "Goblin", returns a new ArrayList<Card> that is a
     // subset of current CardList
-    public static CardList getNotType(List<Card> cardList, String cardType) {
+    public static List<Card> getNotType(List<Card> cardList, String cardType) {
         return CardListUtil.filter(cardList, Predicates.not(CardPredicates.isType(cardType)));
     }
 
-    public static CardList getType(List<Card> cardList, String cardType) {
+    public static List<Card> getType(List<Card> cardList, String cardType) {
         return CardListUtil.filter(cardList, CardPredicates.isType(cardType));
     }
 
@@ -339,10 +341,16 @@ public class CardListUtil {
      * @param filt
      *            determines which cards are present in the resulting list
      * 
-     * @return a subset of this CardList whose items meet the filtering
+     * @return a subset of this List<Card> whose items meet the filtering
      *         criteria; may be empty, but never null.
      */
-    public static CardList filter(List<Card> cardList, Predicate<Card> filt) {
-        return new CardList(Iterables.filter(cardList, filt));
+    public static List<Card> filter(List<Card> cardList, Predicate<Card> filt) {
+        return Lists.newArrayList(Iterables.filter(cardList, filt));
+    }
+
+    public static List<Card> createCardList(Card c) {
+        List<Card> res = new ArrayList<Card>();
+        res.add(c);
+        return res;
     }
 }

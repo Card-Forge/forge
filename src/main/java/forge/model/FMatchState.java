@@ -24,7 +24,7 @@ import java.util.Map;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.game.GameSummary;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -154,13 +154,13 @@ public class FMatchState {
     }
 
     /**
-     * Adds a CardList to the antes that have already been won this match.
+     * Adds a List<Card> to the antes that have already been won this match.
      *
      * @param antes cards won in ante
      * @return the list
      * @since 1.2.3
      */
-    public final List<CardPrinted> addAnteWon(final CardList antes) {
+    public final List<CardPrinted> addAnteWon(final List<Card> antes) {
         List<CardPrinted> antesPrinted = new ArrayList<CardPrinted>();
         for (Card ante : antes) {
             CardPrinted cp = CardDb.instance().getCard(ante.getName(), ante.getCurSetCode());
@@ -189,13 +189,13 @@ public class FMatchState {
     }
 
     /**
-     * Adds a CardList to the antes that have already been lost this match.
+     * Adds a List<Card> to the antes that have already been lost this match.
      *
      * @param antes cards lost in ante
      * @return the list
      * @since 1.2.3
      */
-    public final List<CardPrinted> addAnteLost(final CardList antes) {
+    public final List<CardPrinted> addAnteLost(final List<Card> antes) {
         List<CardPrinted> antesPrinted = new ArrayList<CardPrinted>();
         for (Card ante : antes) {
             CardPrinted cp = CardDb.instance().getCard(ante.getName(), ante.getCurSetCode());

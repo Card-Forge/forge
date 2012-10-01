@@ -1,11 +1,14 @@
 package forge.card.cardfactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -184,7 +187,7 @@ class CardFactoryArtifacts {
                             AllZone.getInputControl().setInput(discard);
                         }
                     } else {
-                        CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+                        List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
                         list = CardListUtil.filter(list, CardPredicates.Presets.LANDS);
                         AllZone.getComputerPlayer().discard(list.get(0), this);
                     } // else
@@ -216,7 +219,7 @@ class CardFactoryArtifacts {
 
                 @Override
                 public boolean canPlay() {
-                    CardList list = card.getController().getCardsIn(ZoneType.Hand);
+                    List<Card> list = card.getController().getCardsIn(ZoneType.Hand);
                     list.remove(card);
                     list = CardListUtil.filter(list, CardPredicates.Presets.LANDS);
                     return (list.size() != 0) && super.canPlay();
@@ -247,8 +250,8 @@ class CardFactoryArtifacts {
 
                 @Override
                 public void resolve() {
-                    final CardList topOfLibrary = card.getController().getCardsIn(ZoneType.Library);
-                    final CardList revealed = new CardList();
+                    final List<Card> topOfLibrary = card.getController().getCardsIn(ZoneType.Library);
+                    final List<Card> revealed = new ArrayList<Card>();
 
                     if (topOfLibrary.size() == 0) {
                         return;
@@ -343,7 +346,7 @@ class CardFactoryArtifacts {
                     final int limit = 4; // at most, this can target 4 cards
                     final Player player = this.getTargetPlayer();
 
-                    CardList lands = player.getCardsIn(ZoneType.Graveyard);
+                    List<Card> lands = player.getCardsIn(ZoneType.Graveyard);
                     lands = CardListUtil.filter(lands, Presets.BASIC_LANDS);
                     if (card.getController().isHuman()) {
                         // now, select up to four lands
@@ -373,7 +376,7 @@ class CardFactoryArtifacts {
                     } else { // Computer
                         // based on current AI, computer should always target
                         // himself.
-                        final CardList list = this.getComputerLands();
+                        final List<Card> list = this.getComputerLands();
                         int max = list.size();
                         if (max > limit) {
                             max = limit;
@@ -387,8 +390,8 @@ class CardFactoryArtifacts {
                     player.addSlowtripList(card);
                 }
 
-                private CardList getComputerLands() {
-                    final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
+                private List<Card> getComputerLands() {
+                    final List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
                     return CardListUtil.filter(list, CardPredicates.Presets.BASIC_LANDS);
                 }
             }
@@ -426,8 +429,8 @@ class CardFactoryArtifacts {
 
                 @Override
                 public boolean canPlayAI() {
-                    final CardList libList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
-                    // CardList list =
+                    final List<Card> libList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
+                    // List<Card> list =
                     // AllZoneUtil.getCardsInPlay("Painter's Servant");
                     return libList.size() > 0; // && list.size() > 0;
                 }
@@ -435,10 +438,10 @@ class CardFactoryArtifacts {
                 @Override
                 public void resolve() {
                     final Player target = this.getTargetPlayer();
-                    final CardList library = this.getTargetPlayer().getCardsIn(ZoneType.Library);
+                    final List<Card> library = this.getTargetPlayer().getCardsIn(ZoneType.Library);
 
                     boolean loop = true;
-                    final CardList grinding = new CardList();
+                    final List<Card> grinding = new ArrayList<Card>();
                     do {
                         grinding.clear();
 
@@ -544,7 +547,7 @@ class CardFactoryArtifacts {
                     if (card.getController().isHuman()) {
                         AllZone.getInputControl().setInput(new Input() {
                             private static final long serialVersionUID = -2305549394512889450L;
-                            private final CardList exiled = new CardList();
+                            private final List<Card> exiled = new ArrayList<Card>();
 
                             @Override
                             public void showMessage() {

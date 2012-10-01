@@ -20,6 +20,7 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -29,7 +30,7 @@ import com.google.common.base.Predicates;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -347,7 +348,7 @@ public class AbilityFactoryAttach {
             return null;
         }
 
-        CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
+        List<Card> list = AllZoneUtil.getCardsIn(tgt.getZone());
         list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
         if (params.containsKey("AITgts")) {
             list = CardListUtil.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), attachSource);
@@ -392,7 +393,7 @@ public class AbilityFactoryAttach {
      *            the logic
      * @return the card
      */
-    public static Card attachGeneralAI(final SpellAbility sa, final CardList list, final boolean mandatory,
+    public static Card attachGeneralAI(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource, final String logic) {
         Player prefPlayer = AllZone.getHumanPlayer();
         if ("Pump".equals(logic) || "Animate".equals(logic) ) {
@@ -400,7 +401,7 @@ public class AbilityFactoryAttach {
         }
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
-        final CardList prefList = CardListUtil.filterControlledBy(list, prefPlayer);
+        final List<Card> prefList = CardListUtil.filterControlledBy(list, prefPlayer);
 
         // If there are no preferred cards, and not mandatory bail out
         if (prefList.size() == 0) {
@@ -436,7 +437,7 @@ public class AbilityFactoryAttach {
      *            the list
      * @return the card
      */
-    public static Card chooseUnpreferred(final boolean mandatory, final CardList list) {
+    public static Card chooseUnpreferred(final boolean mandatory, final List<Card> list) {
         if (!mandatory) {
             return null;
         }
@@ -453,7 +454,7 @@ public class AbilityFactoryAttach {
      *            the list
      * @return the card
      */
-    public static Card chooseLessPreferred(final boolean mandatory, final CardList list) {
+    public static Card chooseLessPreferred(final boolean mandatory, final List<Card> list) {
         if (!mandatory) {
             return null;
         }
@@ -499,10 +500,10 @@ public class AbilityFactoryAttach {
      *            the attach source
      * @return the card
      */
-    public static Card attachAIAnimatePreference(final SpellAbility sa, final CardList list, final boolean mandatory,
+    public static Card attachAIAnimatePreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
         // AI For choosing a Card to Animate.
-        CardList betterList = CardListUtil.getNotType(list, "Creature");
+        List<Card> betterList = CardListUtil.getNotType(list, "Creature");
         if (sa.getSourceCard().getName().equals("Animate Artifact")) {
             betterList = CardListUtil.filter(betterList, new Predicate<Card>() {
                 @Override
@@ -537,7 +538,7 @@ public class AbilityFactoryAttach {
      *            the attach source
      * @return the card
      */
-    public static Card attachAIControlPreference(final SpellAbility sa, final CardList list, final boolean mandatory,
+    public static Card attachAIControlPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
         // AI For choosing a Card to Gain Control of.
 
@@ -688,11 +689,11 @@ public class AbilityFactoryAttach {
      *            the attach source
      * @return the card
      */
-    public static Card attachAIPumpPreference(final SpellAbility sa, final CardList list, final boolean mandatory,
+    public static Card attachAIPumpPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
         // AI For choosing a Card to Pump
         Card c = null;
-        CardList magnetList = null;
+        List<Card> magnetList = null;
         String stCheck = null;
         if (attachSource.isAura()) {
             stCheck = "EnchantedBy";
@@ -769,7 +770,7 @@ public class AbilityFactoryAttach {
             }
         }
 
-        CardList prefList = new CardList(list);
+        List<Card> prefList = new ArrayList<Card>(list);
         if (totToughness < 0) {
             // Don't kill my own stuff with Negative toughness Auras
             final int tgh = totToughness;
@@ -841,7 +842,7 @@ public class AbilityFactoryAttach {
      *            the attach source
      * @return the card
      */
-    public static Card attachAICursePreference(final SpellAbility sa, final CardList list, final boolean mandatory,
+    public static Card attachAICursePreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
         // AI For choosing a Card to Curse of.
 
@@ -887,7 +888,7 @@ public class AbilityFactoryAttach {
             }
         }
 
-        CardList prefList = null;
+        List<Card> prefList = null;
         if (totToughness < 0) {
             // Kill a creature if we can
             final int tgh = totToughness;
@@ -904,7 +905,7 @@ public class AbilityFactoryAttach {
         }
         Card c = null;
         if ((prefList == null) || (prefList.size() == 0)) {
-            prefList = new CardList(list);
+            prefList = new ArrayList<Card>(list);
         } else {
             c = CardFactoryUtil.getBestAI(prefList);
             if (c != null) {
@@ -948,7 +949,7 @@ public class AbilityFactoryAttach {
      *            the attach source
      * @return the card
      */
-    public static Card attachAIChangeTypePreference(final SpellAbility sa, CardList list, final boolean mandatory,
+    public static Card attachAIChangeTypePreference(final SpellAbility sa, List<Card> list, final boolean mandatory,
             final Card attachSource) {
         // AI For Cards like Evil Presence or Spreading Seas
 
@@ -992,10 +993,10 @@ public class AbilityFactoryAttach {
      *            the attach source
      * @return the card
      */
-    public static Card attachAIKeepTappedPreference(final SpellAbility sa, final CardList list,
+    public static Card attachAIKeepTappedPreference(final SpellAbility sa, final List<Card> list,
             final boolean mandatory, final Card attachSource) {
         // AI For Cards like Paralyzing Grasp and Glimmerdust Nap
-        final CardList prefList = CardListUtil.filter(list, new Predicate<Card>() {
+        final List<Card> prefList = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 // Don't do Untapped Vigilance cards
@@ -1417,7 +1418,7 @@ public class AbilityFactoryAttach {
                     return true;
                 }
             } else {
-                CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
+                List<Card> list = AllZoneUtil.getCardsIn(tgt.getZone());
                 list = CardListUtil.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source);
 
                 final Object o = GuiChoose.one(source + " - Select a card to attach to.", list);
@@ -1710,7 +1711,7 @@ public class AbilityFactoryAttach {
         // If Cast Targets will be checked on the Stack
         for (final Object o : targets) {
             String valid = params.get("UnattachValid");
-            CardList unattachList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            List<Card> unattachList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             unattachList = CardListUtil.getValidCards(unattachList, valid.split(","), source.getController(), source);
             for (final Card c : unattachList) {
                 AbilityFactoryAttach.handleUnattachment(o, c, af);

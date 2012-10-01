@@ -20,6 +20,7 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -28,7 +29,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -298,7 +299,7 @@ public final class AbilityFactoryPlay {
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getRestrictions().getNumberTurnActivations());
 
-        CardList cards;
+        List<Card> cards;
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             ZoneType zone = tgt.getZone().get(0);
@@ -309,7 +310,7 @@ public final class AbilityFactoryPlay {
             }
             tgt.addTarget(CardFactoryUtil.getBestAI(cards));
         } else if (!params.containsKey("Valid")) {
-            cards = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
+            cards = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
             if (cards.isEmpty()) {
                 return false;
             }
@@ -366,7 +367,7 @@ public final class AbilityFactoryPlay {
         }
 
         final Player controller = activator;
-        CardList tgtCards = new CardList();
+        List<Card> tgtCards = new ArrayList<Card>();
 
         final Target tgt = sa.getTarget();
         if (params.containsKey("Valid")) {
@@ -377,9 +378,9 @@ public final class AbilityFactoryPlay {
             tgtCards = AllZoneUtil.getCardsIn(zone);
             tgtCards = AbilityFactory.filterListByType(tgtCards, params.get("Valid"), sa);
         } else if (params.containsKey("Defined")) {
-            tgtCards = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
+            tgtCards = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
         } else if (tgt != null) {
-            tgtCards = new CardList(tgt.getTargetCards());
+            tgtCards = new ArrayList<Card>(tgt.getTargetCards());
         }
 
         if (tgtCards.isEmpty()) {

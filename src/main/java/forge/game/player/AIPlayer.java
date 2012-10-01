@@ -17,13 +17,14 @@
  */
 package forge.game.player;
 
+import java.util.List;
 import java.util.Random;
 
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.Singletons;
@@ -134,7 +135,7 @@ public class AIPlayer extends Player {
      */
     @Override
     public final boolean dredge() {
-        final CardList dredgers = this.getDredge();
+        final List<Card> dredgers = this.getDredge();
         final Random random = MyRandom.getRandom();
 
         // use dredge if there are more than one of them in your graveyard
@@ -164,10 +165,10 @@ public class AIPlayer extends Player {
 
     /** {@inheritDoc} */
     @Override
-    public final CardList discard(final int num, final SpellAbility sa, final boolean duringResolution) {
+    public final List<Card> discard(final int num, final SpellAbility sa, final boolean duringResolution) {
         int max = this.getCardsIn(ZoneType.Hand).size();
         max = Math.min(max, num);
-        final CardList discarded = ComputerUtil.discardNumTypeAI(max, null, sa);
+        final List<Card> discarded = ComputerUtil.discardNumTypeAI(max, null, sa);
         for (int i = 0; i < discarded.size(); i++) {
             this.doDiscard(discarded.get(i), sa);
         }
@@ -178,8 +179,8 @@ public class AIPlayer extends Player {
     /** {@inheritDoc} */
     @Override
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
-        final CardList hand = this.getCardsIn(ZoneType.Hand);
-        final CardList tHand = CardListUtil.getType(hand, uType);
+        final List<Card> hand = this.getCardsIn(ZoneType.Hand);
+        final List<Card> tHand = CardListUtil.getType(hand, uType);
 
         if (tHand.size() > 0) {
             Card toDiscard = Aggregates.itemWithMin(tHand, CardPredicates.Accessors.fnGetCmc);
@@ -194,18 +195,18 @@ public class AIPlayer extends Player {
 
     /** {@inheritDoc} */
     @Override
-    protected final void doScry(final CardList topN, final int n) {
+    protected final void doScry(final List<Card> topN, final int n) {
         int num = n;
         for (int i = 0; i < num; i++) {
             boolean bottom = false;
             if (topN.get(i).isBasicLand()) {
-                CardList bl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> bl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 int nBasicLands = Iterables.size(Iterables.filter(bl, CardPredicates.Presets.BASIC_LANDS));
 
                 bottom = nBasicLands > 5; // if control more than 5 Basic land,
                                         // probably don't need more
             } else if (topN.get(i).isCreature()) {
-                CardList cl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> cl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 cl = CardListUtil.filter(cl, CardPredicates.Presets.CREATURES);
                 bottom = cl.size() > 5; // if control more than 5 Creatures,
                                         // probably don't need more
@@ -229,7 +230,7 @@ public class AIPlayer extends Player {
 
     /** {@inheritDoc} */
     @Override
-    public final void sacrificePermanent(final String prompt, final CardList choices) {
+    public final void sacrificePermanent(final String prompt, final List<Card> choices) {
         if (choices.size() > 0) {
             // TODO - this could probably use better AI
             final Card c = CardFactoryUtil.getWorstPermanentAI(choices, false, false, false, false);

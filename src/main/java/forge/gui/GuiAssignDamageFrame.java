@@ -22,6 +22,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -36,7 +37,7 @@ import javax.swing.WindowConstants;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.GameEntity;
 import forge.error.ErrorViewer;
 import forge.gui.match.CMatchUI;
@@ -62,7 +63,7 @@ public class GuiAssignDamageFrame extends JFrame {
     private int assignedToActive = 0;
     private Card damageAssigner;
     private Card activeRecipient;
-    private CardList recipients;
+    private List<Card> recipients;
     private boolean deathtouch = false;
     
     private final BorderLayout borderLayout1 = new BorderLayout();
@@ -94,7 +95,7 @@ public class GuiAssignDamageFrame extends JFrame {
      * @param damage
      *            a int.
      */
-    public GuiAssignDamageFrame(final Card attacker, final CardList creatureList, final int damage) {
+    public GuiAssignDamageFrame(final Card attacker, final List<Card> creatureList, final int damage) {
         this();
         this.assignDamage = damage;
         this.damageAssigner = attacker;

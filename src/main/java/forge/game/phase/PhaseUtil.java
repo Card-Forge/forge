@@ -17,14 +17,16 @@
  */
 package forge.game.phase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.Singletons;
@@ -94,7 +96,7 @@ public class PhaseUtil {
         AllZone.getCombat().setDefendingPlayer(turn.getOpponent());
 
         // Tokens starting game in play now actually suffer from Sum. Sickness again
-        final CardList list = turn.getCardsIncludePhasingIn(ZoneType.Battlefield);
+        final List<Card> list = turn.getCardsIncludePhasingIn(ZoneType.Battlefield);
         for (final Card c : list) {
             if (turn.getTurn() > 0 || !c.isStartsGameInPlay()) {
                 c.setSickness(false);
@@ -104,7 +106,7 @@ public class PhaseUtil {
 
         Singletons.getModel().getGameAction().resetActivationsPerTurn();
 
-        final CardList lands = CardListUtil.filter(AllZoneUtil.getPlayerLandsInPlay(turn), Presets.UNTAPPED);
+        final List<Card> lands = CardListUtil.filter(AllZoneUtil.getPlayerLandsInPlay(turn), Presets.UNTAPPED);
         turn.setNumPowerSurgeLands(lands.size());
 
         // anything before this point happens regardless of whether the Untap
@@ -289,7 +291,7 @@ public class PhaseUtil {
         PhaseUtil.verifyCombat();
 
         // Handles removing cards like Mogg Flunkies from combat if group attack didn't occur
-        final CardList filterList = AllZone.getCombat().getAttackerList();
+        final List<Card> filterList = AllZone.getCombat().getAttackerList();
         for (Card c : filterList) {
             if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isAttacking()) {
                 if (AllZone.getCombat().getAttackers().size() < 2) {
@@ -298,7 +300,7 @@ public class PhaseUtil {
             }
         }
 
-        final CardList list = AllZone.getCombat().getAttackerList();
+        final List<Card> list = AllZone.getCombat().getAttackerList();
 
         // TODO move propaganda to happen as the Attacker is Declared
         // Remove illegal Propaganda attacks first only for attacking the Player
@@ -317,7 +319,7 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleAttackingTriggers() {
-        final CardList list = AllZone.getCombat().getAttackerList();
+        final List<Card> list = AllZone.getCombat().getAttackerList();
         AllZone.getStack().freezeStack();
         // Then run other Attacker bonuses
         // check for exalted:
@@ -357,7 +359,7 @@ public class PhaseUtil {
         PhaseUtil.verifyCombat();
 
         // Handles removing cards like Mogg Flunkies from combat if group block didn't occur
-        final CardList filterList = AllZone.getCombat().getAllBlockers();
+        final List<Card> filterList = AllZone.getCombat().getAllBlockers();
         for (Card c : filterList) {
             if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isBlocking()) {
                 if (AllZone.getCombat().getAllBlockers().size() < 2) {
@@ -370,7 +372,7 @@ public class PhaseUtil {
 
         AllZone.getCombat().setUnblocked();
 
-        CardList list = new CardList();
+        List<Card> list = new ArrayList<Card>();
         list.addAll(AllZone.getCombat().getAllBlockers());
 
         list = CardListUtil.filter(list, new Predicate<Card>() {
@@ -380,12 +382,12 @@ public class PhaseUtil {
             }
         });
 
-        final CardList attList = AllZone.getCombat().getAttackerList();
+        final List<Card> attList = AllZone.getCombat().getAttackerList();
 
         CombatUtil.checkDeclareBlockers(list);
 
         for (final Card a : attList) {
-            final CardList blockList = AllZone.getCombat().getBlockers(a);
+            final List<Card> blockList = AllZone.getCombat().getBlockers(a);
             for (final Card b : blockList) {
                 CombatUtil.checkBlockedAttackers(a, b);
             }

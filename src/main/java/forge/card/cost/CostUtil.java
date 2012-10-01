@@ -17,11 +17,13 @@
  */
 package forge.card.cost;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
@@ -77,14 +79,14 @@ public class CostUtil {
                     if (!important) {
                         return false;
                     }
-                    CardList auras = new CardList(source.getEnchantedBy());
+                    List<Card> auras = new ArrayList<Card>(source.getEnchantedBy());
                     if (!CardListUtil.filterControlledBy(auras, source.getController()).isEmpty()) {
                         return false;
                     }
                     continue;
                 }
 
-                CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 typeList = CardListUtil.getValidCards(typeList, type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null) {
                     return false;
@@ -119,7 +121,7 @@ public class CostUtil {
                     continue;
                 }
 
-                CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 typeList = CardListUtil.getValidCards(typeList, type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null) {
                     return false;
@@ -214,7 +216,7 @@ public class CostUtil {
                 final CostDiscard disc = (CostDiscard) part;
 
                 final String type = disc.getType();
-                CardList typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+                List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
                 if (typeList.size() > AllZone.getComputerPlayer().getMaxHandSize()) {
                     continue;
                 }

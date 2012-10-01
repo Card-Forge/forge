@@ -19,11 +19,12 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardUtil;
@@ -348,9 +349,9 @@ public class AbilityFactoryPreventDamage {
                 tgt.addTarget(AllZone.getComputerPlayer());
             }
 
-            final CardList threatenedTargets = new CardList();
+            final List<Card> threatenedTargets = new ArrayList<Card>();
             // filter AIs battlefield by what I can target
-            CardList targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            List<Card> targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             targetables = CardListUtil.getValidCards(targetables, tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
 
             for (final Card c : targetables) {
@@ -374,13 +375,13 @@ public class AbilityFactoryPreventDamage {
                 chance = true;
             } else {
                 // filter AIs battlefield by what I can target
-                CardList targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 targetables = CardListUtil.getValidCards(targetables, tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
 
                 if (targetables.size() == 0) {
                     return false;
                 }
-                final CardList combatants = CardListUtil.filter(targetables, CardPredicates.Presets.CREATURES);
+                final List<Card> combatants = CardListUtil.filter(targetables, CardPredicates.Presets.CREATURES);
                 CardListUtil.sortByEvaluateCreature(combatants);
 
                 for (final Card c : combatants) {
@@ -457,9 +458,9 @@ public class AbilityFactoryPreventDamage {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        CardList targetables = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> targetables = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         targetables = CardListUtil.getValidCards(targetables, tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
-        final CardList compTargetables = CardListUtil.filterControlledBy(targetables, AllZone.getComputerPlayer());
+        final List<Card> compTargetables = CardListUtil.filterControlledBy(targetables, AllZone.getComputerPlayer());
 
         if (targetables.size() == 0) {
             return false;
@@ -470,7 +471,7 @@ public class AbilityFactoryPreventDamage {
         }
 
         if (compTargetables.size() > 0) {
-            final CardList combatants = CardListUtil.filter(compTargetables, CardPredicates.Presets.CREATURES);
+            final List<Card> combatants = CardListUtil.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardListUtil.sortByEvaluateCreature(combatants);
             if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
@@ -780,7 +781,7 @@ public class AbilityFactoryPreventDamage {
         final int numDam = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), sa);
 
         String players = "";
-        CardList list = new CardList();
+        List<Card> list = new ArrayList<Card>();
 
         if (params.containsKey("ValidPlayers")) {
             players = params.get("ValidPlayers");

@@ -29,7 +29,7 @@ import com.google.common.collect.Iterables;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardUtil;
@@ -334,7 +334,7 @@ public class AbilityFactoryPump {
                 return false;
             }
             
-            CardList attackers = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.possibleAttackers);
+            List<Card> attackers = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.possibleAttackers);
             if(!CombatUtil.canBlockAtLeastOne(card, attackers)) {
                 return false;
             }
@@ -390,7 +390,7 @@ public class AbilityFactoryPump {
         }
         
         Predicate<Card> opBlockers = CardPredicates.possibleBlockers(card);
-        CardList cardsCanBlock = CardListUtil.filter(AllZoneUtil.getCreaturesInPlay(human), opBlockers);
+        List<Card> cardsCanBlock = CardListUtil.filter(AllZoneUtil.getCreaturesInPlay(human), opBlockers);
         
         final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Fear")
                 || keyword.endsWith("Intimidate") || keyword.endsWith("Shadow"));
@@ -455,7 +455,7 @@ public class AbilityFactoryPump {
                 }
             } else if (ph.isPlayerTurn(computer) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && CombatUtil.canAttack(card)) {
-                CardList blockers = AllZoneUtil.getCreaturesInPlay(human);
+                List<Card> blockers = AllZoneUtil.getCreaturesInPlay(human);
                 for (Card blocker : blockers) {
                     if (CombatUtil.canBlock(card, blocker, combat)
                             && !CombatUtil.canDestroyBlocker(blocker, card, combat, false)) {
@@ -630,7 +630,7 @@ public class AbilityFactoryPump {
             if (defense > 0 && CombatUtil.blockerWouldBeDestroyed(c)) {
                 return true;
             }
-            CardList blockedBy = AllZone.getCombat().getAttackersBlockedBy(c);
+            List<Card> blockedBy = AllZone.getCombat().getAttackersBlockedBy(c);
             // For now, Only care the first creature blocked by a card.
             // TODO Add in better BlockAdditional support
             if (!blockedBy.isEmpty() && attack > 0 && !CombatUtil.attackerWouldBeDestroyed(blockedBy.get(0))) {
@@ -654,7 +654,7 @@ public class AbilityFactoryPump {
         }
 
         // if the life of the computer is in danger, try to pump blockers blocking Tramplers
-        CardList blockedBy = AllZone.getCombat().getAttackersBlockedBy(c);
+        List<Card> blockedBy = AllZone.getCombat().getAttackersBlockedBy(c);
         boolean attackerHasTrample = false;
         for (Card b : blockedBy) {
             attackerHasTrample |= b.hasKeyword("Trample");
@@ -679,9 +679,9 @@ public class AbilityFactoryPump {
      * 
      * @return a {@link forge.CardList} object.
      */
-    private CardList getPumpCreatures(final SpellAbility sa) {
+    private List<Card> getPumpCreatures(final SpellAbility sa) {
 
-        CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+        List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
         list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -704,8 +704,8 @@ public class AbilityFactoryPump {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    private CardList getCurseCreatures(final SpellAbility sa, final int defense, final int attack) {
-        CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+    private List<Card> getCurseCreatures(final SpellAbility sa, final int defense, final int attack) {
+        List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
         list = CardListUtil.getTargetableCards(list, sa);
         if ((defense < 0) && !list.isEmpty()) { // with spells that give -X/-X,
                                                 // compi will try to destroy a
@@ -727,9 +727,9 @@ public class AbilityFactoryPump {
             if (activePlayer.isComputer()) {
                 if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
                     // TODO: Curse creatures that will block AI's creatures, if AI is going to attack.
-                    list = new CardList();
+                    list = new ArrayList<Card>();
                 } else {
-                    list = new CardList();
+                    list = new ArrayList<Card>();
                 }
             } else {
                 // Human active, only curse attacking creatures
@@ -751,7 +751,7 @@ public class AbilityFactoryPump {
                         }
                     });
                 } else {
-                    list = new CardList();
+                    list = new ArrayList<Card>();
                 }
             }
             Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
@@ -768,7 +768,7 @@ public class AbilityFactoryPump {
                     }
                 });
             } else {
-                list = new CardList();
+                list = new ArrayList<Card>();
             }
         }
 
@@ -955,7 +955,7 @@ public class AbilityFactoryPump {
 
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
-        CardList list = new CardList();
+        List<Card> list = new ArrayList<Card>();
         if (this.abilityFactory.getMapParams().containsKey("AILogic")) {
             if (this.abilityFactory.getMapParams().get("AILogic").equals("HighestPower")) {
                 list = CardListUtil.getValidCards(AllZoneUtil.getCreaturesInPlay(), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -1057,7 +1057,7 @@ public class AbilityFactoryPump {
      * @return a boolean.
      */
     private boolean pumpMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
         list = CardListUtil.getTargetableCards(list, sa);
@@ -1072,8 +1072,8 @@ public class AbilityFactoryPump {
             list.remove(c);
         }
 
-        CardList pref;
-        CardList forced;
+        List<Card> pref;
+        List<Card> forced;
         final Card source = sa.getSourceCard();
 
         if (af.isCurse()) {
@@ -1702,16 +1702,16 @@ public class AbilityFactoryPump {
             valid = this.params.get("ValidCards");
         }
 
-        CardList comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         comp = CardListUtil.getValidCards(comp, valid, source.getController(), source);
-        CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         human = CardListUtil.getValidCards(human, valid, source.getController(), source);
 
         final Target tgt = sa.getTarget();
         if (tgt != null && sa.canTarget(AllZone.getHumanPlayer()) && params.containsKey("IsCurse")) {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getHumanPlayer());
-            comp = new CardList();
+            comp = new ArrayList<Card>();
         }
 
         if (this.abilityFactory.isCurse()) {
@@ -1782,7 +1782,7 @@ public class AbilityFactoryPump {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private void pumpAllResolve(final SpellAbility sa) {
-        CardList list;
+        List<Card> list;
         ArrayList<Player> tgtPlayers = null;
         final ArrayList<ZoneType> affectedZones = new ArrayList<ZoneType>();
 
@@ -1802,7 +1802,7 @@ public class AbilityFactoryPump {
             affectedZones.add(ZoneType.Battlefield);
         }
 
-        list = new CardList();
+        list = new ArrayList<Card>();
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
             for (final ZoneType zone : affectedZones) {
                 list.addAll(AllZoneUtil.getCardsIn(zone));

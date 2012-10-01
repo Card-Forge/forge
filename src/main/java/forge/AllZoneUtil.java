@@ -44,15 +44,15 @@ public abstract class AllZoneUtil {
      * 
      * @param zone
      *            Constant.Zone
-     * @return a CardList with all cards currently in a graveyard
+     * @return a List<Card> with all cards currently in a graveyard
      */
-    public static CardList getCardsIn(final ZoneType zone) {
-        final CardList cards = new CardList();
+    public static List<Card> getCardsIn(final ZoneType zone) {
+        final List<Card> cards = new ArrayList<Card>();
         getCardsIn(zone, cards);
         return cards;
     }
 
-    private static void getCardsIn(final ZoneType zone, final CardList cards) {
+    private static void getCardsIn(final ZoneType zone, final List<Card> cards) {
         if (zone == ZoneType.Stack) {
             cards.addAll(AllZone.getStackZone().getCards());
         } else {
@@ -62,16 +62,16 @@ public abstract class AllZoneUtil {
         }
     }
 
-    public static CardList getCardsIn(final Iterable<ZoneType> zones) {
-        final CardList cards = new CardList();
+    public static List<Card> getCardsIn(final Iterable<ZoneType> zones) {
+        final List<Card> cards = new ArrayList<Card>();
         for (final ZoneType z : zones) {
             getCardsIn(z, cards);
         }
         return cards;
     }
 
-    public static CardList getCardsIn(final ZoneType[] zones) {
-        final CardList cards = new CardList();
+    public static List<Card> getCardsIn(final ZoneType[] zones) {
+        final List<Card> cards = new ArrayList<Card>();
         for (final ZoneType z : zones) {
             getCardsIn(z, cards);
         }
@@ -86,22 +86,22 @@ public abstract class AllZoneUtil {
      *            a Constant.Zone
      * @param cardName
      *            a String
-     * @return a CardList with all cards currently in a graveyard
+     * @return a List<Card> with all cards currently in a graveyard
      */
-    public static CardList getCardsIn(final ZoneType zone, final String cardName) {
+    public static List<Card> getCardsIn(final ZoneType zone, final String cardName) {
         return CardListUtil.filter(AllZoneUtil.getCardsIn(zone), CardPredicates.nameEquals(cardName));
     }
 
     // ////////// Creatures
 
     /**
-     * use to get a CardList of all creatures on the battlefield for both.
+     * use to get a List<Card> of all creatures on the battlefield for both.
      * players
      * 
-     * @return a CardList of all creatures on the battlefield on both sides
+     * @return a List<Card> of all creatures on the battlefield on both sides
      */
-    public static CardList getCreaturesInPlay() {
-        final CardList creats = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+    public static List<Card> getCreaturesInPlay() {
+        final List<Card> creats = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         return CardListUtil.filter(creats, Presets.CREATURES);
     }
 
@@ -110,10 +110,10 @@ public abstract class AllZoneUtil {
      * 
      * @param player
      *            the player to get creatures for
-     * @return a CardList containing all creatures a given player has in play
+     * @return a List<Card> containing all creatures a given player has in play
      */
-    public static CardList getCreaturesInPlay(final Player player) {
-        final CardList creats = player.getCardsIn(ZoneType.Battlefield);
+    public static List<Card> getCreaturesInPlay(final Player player) {
+        final List<Card> creats = player.getCardsIn(ZoneType.Battlefield);
         return CardListUtil.filter(creats, Presets.CREATURES);
     }
 
@@ -124,18 +124,18 @@ public abstract class AllZoneUtil {
      * 
      * @param player
      *            the player whose lands we want to get
-     * @return a CardList containing all lands the given player has in play
+     * @return a List<Card> containing all lands the given player has in play
      */
-    public static CardList getPlayerLandsInPlay(final Player player) {
+    public static List<Card> getPlayerLandsInPlay(final Player player) {
         return CardListUtil.filter(player.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
     }
 
     /**
      * gets a list of all lands in play.
      * 
-     * @return a CardList of all lands on the battlefield
+     * @return a List<Card> of all lands on the battlefield
      */
-    public static CardList getLandsInPlay() {
+    public static List<Card> getLandsInPlay() {
         return CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
     }
 
@@ -215,10 +215,10 @@ public abstract class AllZoneUtil {
      * 
      * @param color
      *            the color of cards to get
-     * @return a CardList of all cards in play of a given color
+     * @return a List<Card> of all cards in play of a given color
      */
-    public static CardList getColorInPlay(final String color) {
-        final CardList cards = AllZoneUtil.getPlayerColorInPlay(AllZone.getComputerPlayer(), color);
+    public static List<Card> getColorInPlay(final String color) {
+        final List<Card> cards = AllZoneUtil.getPlayerColorInPlay(AllZone.getComputerPlayer(), color);
         cards.addAll(AllZoneUtil.getPlayerColorInPlay(AllZone.getHumanPlayer(), color));
         return cards;
     }
@@ -231,10 +231,10 @@ public abstract class AllZoneUtil {
      *            the player's cards to get
      * @param color
      *            the color of cards to get
-     * @return a CardList of all cards in play of a given color
+     * @return a List<Card> of all cards in play of a given color
      */
-    public static CardList getPlayerColorInPlay(final Player player, final String color) {
-        CardList cards = player.getCardsIn(ZoneType.Battlefield);
+    public static List<Card> getPlayerColorInPlay(final Player player, final String color) {
+        List<Card> cards = player.getCardsIn(ZoneType.Battlefield);
         cards = CardListUtil.filter(cards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -279,8 +279,8 @@ public abstract class AllZoneUtil {
     public static int compareTypeAmountInPlay(final Player player, final String type) {
         // returns the difference between player's
         final Player opponent = player.getOpponent();
-        final CardList playerList = CardListUtil.getType(player.getCardsIn(ZoneType.Battlefield), type);
-        final CardList opponentList = CardListUtil.getType(opponent.getCardsIn(ZoneType.Battlefield), type);
+        final List<Card> playerList = CardListUtil.getType(player.getCardsIn(ZoneType.Battlefield), type);
+        final List<Card> opponentList = CardListUtil.getType(opponent.getCardsIn(ZoneType.Battlefield), type);
         return (playerList.size() - opponentList.size());
     }
 
@@ -298,8 +298,8 @@ public abstract class AllZoneUtil {
     public static int compareTypeAmountInGraveyard(final Player player, final String type) {
         // returns the difference between player's
         final Player opponent = player.getOpponent();
-        final CardList playerList = CardListUtil.getType(player.getCardsIn(ZoneType.Graveyard), type);
-        final CardList opponentList = CardListUtil.getType(opponent.getCardsIn(ZoneType.Graveyard), type);
+        final List<Card> playerList = CardListUtil.getType(player.getCardsIn(ZoneType.Graveyard), type);
+        final List<Card> opponentList = CardListUtil.getType(opponent.getCardsIn(ZoneType.Graveyard), type);
         return (playerList.size() - opponentList.size());
     }
 
@@ -309,8 +309,8 @@ public abstract class AllZoneUtil {
      * @return a {@link forge.CardList} with all cards in all Battlefields,
      *         Hands, Graveyards, Libraries, and Exiles.
      */
-    public static CardList getCardsInGame() {
-        final CardList all = new CardList();
+    public static List<Card> getCardsInGame() {
+        final List<Card> all = new ArrayList<Card>();
         for (final Player player : AllZone.getPlayersInGame()) {
             all.addAll(player.getZone(ZoneType.Graveyard).getCards());
             all.addAll(player.getZone(ZoneType.Hand).getCards());

@@ -8,7 +8,7 @@ import javax.swing.JButton;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.Constant;
 import forge.Singletons;
 import forge.control.FControl;
@@ -96,7 +96,7 @@ public class ControlWinLose {
             Deck hDeck = Constant.Runtime.HUMAN_DECK[0];
             Deck cDeck = Constant.Runtime.COMPUTER_DECK[0];
             if (Singletons.getModel().getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
-                CardList compAntes = AllZone.getComputerPlayer().getCardsIn(ZoneType.Ante);
+                List<Card> compAntes = AllZone.getComputerPlayer().getCardsIn(ZoneType.Ante);
 
                 //remove compy's ante cards form his deck
                 for (Card c : compAntes) {
@@ -114,7 +114,7 @@ public class ControlWinLose {
                 }
 
             } else { //compy won
-                CardList humanAntes = AllZone.getHumanPlayer().getCardsIn(ZoneType.Ante);
+                List<Card> humanAntes = AllZone.getHumanPlayer().getCardsIn(ZoneType.Ante);
 
                 //remove humans ante cards form his deck
                 for (Card c : humanAntes) {

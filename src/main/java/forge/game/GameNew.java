@@ -10,10 +10,11 @@ import javax.swing.JOptionPane;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.CardPredicates;
@@ -64,8 +65,8 @@ public class GameNew {
      * @param iconEnemy
      *              &emsp; {@link java.lang.String}
      */
-    public static void newGame(final Deck humanDeck, final Deck computerDeck, final CardList humanStart,
-            final CardList computerStart, final int humanLife, final int computerLife, String iconEnemy) {
+    public static void newGame(final Deck humanDeck, final Deck computerDeck, final List<Card> humanStart,
+            final List<Card> computerStart, final int humanLife, final int computerLife, String iconEnemy) {
         Singletons.getControl().changeState(FControl.MATCH_SCREEN);
         CMatchUI.SINGLETON_INSTANCE.initMatch(iconEnemy);
 
@@ -375,11 +376,11 @@ public class GameNew {
      * @return an array of {@link forge.Card} objects.
      */
     private static Iterable<Card> smoothComputerManaCurve(final Iterable<Card> in) {
-        final CardList library = new CardList(in);
+        final List<Card> library = Lists.newArrayList(in);
         CardListUtil.shuffle(library);
 
         // remove all land, keep non-basicland in there, shuffled
-        CardList land = CardListUtil.filter(library, CardPredicates.Presets.LANDS);
+        List<Card> land = CardListUtil.filter(library, CardPredicates.Presets.LANDS);
         for (Card c : land) {
             if (c.isLand()) {
                 library.remove(c);

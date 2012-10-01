@@ -17,8 +17,10 @@
  */
 package forge.card.cost;
 
+import java.util.List;
+
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
@@ -136,7 +138,7 @@ public class CostPutCounter extends CostPartWithList {
             }
         } else {
             // 3 Cards have Put a -1/-1 Counter on a Creature you control.
-            final CardList typeList = CardListUtil.getValidCards(activator.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
+            final List<Card> typeList = CardListUtil.getValidCards(activator.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
 
             if (typeList.size() == 0) {
                 return false;
@@ -214,7 +216,7 @@ public class CostPutCounter extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
 
-            final CardList typeList = CardListUtil.getValidCards(activator.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
+            final List<Card> typeList = CardListUtil.getValidCards(activator.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
 
             Card card = null;
             if (this.getType().equals("Creature.YouCtrl")) {
@@ -248,7 +250,7 @@ public class CostPutCounter extends CostPartWithList {
             final CostPutCounter costPutCounter, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
-            private CardList typeList;
+            private List<Card> typeList;
             private int nPut = 0;
 
             @Override

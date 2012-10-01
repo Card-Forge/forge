@@ -26,7 +26,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -79,7 +79,7 @@ public class ComputerAIGeneral implements Computer {
      *            a {@link java.lang.String} object.
      */
     private void playSpellAbilitiesStackEmpty() {
-        final CardList list = getAvailableCards();
+        final List<Card> list = getAvailableCards();
 
         final boolean nextPhase = ComputerUtil.playSpellAbilities(getSpellAbilities(list));
 
@@ -96,7 +96,7 @@ public class ComputerAIGeneral implements Computer {
      * @return a boolean.
      */
     public static boolean hasACardGivingHaste() {
-        final CardList all = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        final List<Card> all = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         all.addAll(CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer()));
         all.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand));
 
@@ -129,10 +129,10 @@ public class ComputerAIGeneral implements Computer {
      * 
      * @return a {@link forge.CardList} object.
      */
-    private CardList getAvailableCards() {
+    private List<Card> getAvailableCards() {
         final Player computer = AllZone.getComputerPlayer();
         final Player human = AllZone.getHumanPlayer();
-        CardList all = computer.getCardsIn(ZoneType.Hand);
+        List<Card> all = computer.getCardsIn(ZoneType.Hand);
         all.addAll(computer.getCardsIn(ZoneType.Battlefield));
         all.addAll(computer.getCardsIn(ZoneType.Exile));
         all.addAll(computer.getCardsIn(ZoneType.Graveyard));
@@ -210,7 +210,7 @@ public class ComputerAIGeneral implements Computer {
     private ArrayList<SpellAbility> getPossibleETBCounters() {
         final Player computer = AllZone.getComputerPlayer();
         final Player human = AllZone.getHumanPlayer();
-        CardList all = computer.getCardsIn(ZoneType.Hand);
+        List<Card> all = computer.getCardsIn(ZoneType.Hand);
         all.addAll(computer.getCardsIn(ZoneType.Exile));
         all.addAll(computer.getCardsIn(ZoneType.Graveyard));
         if (!computer.getCardsIn(ZoneType.Library).isEmpty()) {
@@ -238,7 +238,7 @@ public class ComputerAIGeneral implements Computer {
      *            a {@link forge.CardList} object.
      * @return an array of {@link forge.card.spellability.SpellAbility} objects.
      */
-    private ArrayList<SpellAbility> getSpellAbilities(final CardList l) {
+    private ArrayList<SpellAbility> getSpellAbilities(final List<Card> l) {
         final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getNonManaSpellAbilities()) {
@@ -257,7 +257,7 @@ public class ComputerAIGeneral implements Computer {
      *            a {@link forge.CardList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    private ArrayList<SpellAbility> getPlayableCounters(final CardList l) {
+    private ArrayList<SpellAbility> getPlayableCounters(final List<Card> l) {
         final ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getNonManaSpellAbilities()) {
@@ -307,7 +307,7 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void declareBlockers() {
-        final CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+        final List<Card> blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
 
         AllZone.setCombat(ComputerUtilBlock.getBlockers(AllZone.getCombat(), blockers));
         
@@ -347,7 +347,7 @@ public class ComputerAIGeneral implements Computer {
             Singletons.getModel().getGameState().getPhaseHandler().passPriority();
             return;
         }
-        final CardList cards = getAvailableCards();
+        final List<Card> cards = getAvailableCards();
         // top of stack is owned by human,
         ArrayList<SpellAbility> possibleCounters = getPlayableCounters(cards);
 

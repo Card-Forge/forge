@@ -31,7 +31,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.GameActionUtil;
@@ -423,9 +423,9 @@ public final class AbilityFactoryReveal {
             if (tgt != null && !p.canBeTargetedBy(sa)) {
                 continue;
             }
-            final CardList top = new CardList();
-            CardList valid = new CardList();
-            final CardList rest = new CardList();
+            final List<Card> top = new ArrayList<Card>();
+            List<Card> valid = new ArrayList<Card>();
+            final List<Card> rest = new ArrayList<Card>();
             final PlayerZone library = p.getZone(ZoneType.Library);
 
             numToDig = Math.min(numToDig, library.size());
@@ -458,7 +458,7 @@ public final class AbilityFactoryReveal {
                     }
                 } else if (params.containsKey("RevealValid")) {
                     final String revealValid = params.get("RevealValid");
-                    final CardList toReveal = CardListUtil.getValidCards(top, revealValid, host.getController(), host);
+                    final List<Card> toReveal = CardListUtil.getValidCards(top, revealValid, host.getController(), host);
                     if (!toReveal.isEmpty()) {
                         GuiChoose.one("Revealing cards from library", toReveal);
                         if (params.containsKey("RememberRevealed")) {
@@ -482,8 +482,8 @@ public final class AbilityFactoryReveal {
                 }
 
                 if (!noMove) {
-                    List<Card> movedCards = new CardList();
-                    CardList andOrCards = new CardList();
+                    List<Card> movedCards = new ArrayList<Card>();
+                    List<Card> andOrCards = new ArrayList<Card>();
                     for (final Card c : top) {
                         rest.add(c);
                     }
@@ -540,7 +540,7 @@ public final class AbilityFactoryReveal {
                                 if (!andOrValid.equals("")) {
                                     andOrCards.remove(chosen);
                                     if (!chosen.isValid(andOrValid.split(","), host.getController(), host)) {
-                                        valid = new CardList(andOrCards);
+                                        valid = new ArrayList<Card>(andOrCards);
                                     } else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
                                         valid.removeAll(andOrCards);
                                     }
@@ -661,7 +661,7 @@ public final class AbilityFactoryReveal {
         } // end foreach player
     } // end resolve
 
-    // returns a CardList that is a subset of list with cards that share a name
+    // returns a List<Card> that is a subset of list with cards that share a name
     // with a permanent on the battlefield
     /**
      * <p>
@@ -672,9 +672,9 @@ public final class AbilityFactoryReveal {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    private static CardList sharesNameWithCardOnBattlefield(final CardList list) {
-        final CardList toReturn = new CardList();
-        final CardList play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+    private static List<Card> sharesNameWithCardOnBattlefield(final List<Card> list) {
+        final List<Card> toReturn = new ArrayList<Card>();
+        final List<Card> play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card c : list) {
             for (final Card p : play) {
                 if (p.getName().equals(c.getName()) && !toReturn.contains(c)) {
@@ -1029,8 +1029,8 @@ public final class AbilityFactoryReveal {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                final CardList found = new CardList();
-                final CardList revealed = new CardList();
+                final List<Card> found = new ArrayList<Card>();
+                final List<Card> revealed = new ArrayList<Card>();
 
                 final PlayerZone library = p.getZone(ZoneType.Library);
 
@@ -1426,7 +1426,7 @@ public final class AbilityFactoryReveal {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                final CardList hand = p.getCardsIn(ZoneType.Hand);
+                final List<Card> hand = p.getCardsIn(ZoneType.Hand);
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (hand.size() > 0) {
                         GuiChoose.one(p + "'s hand", hand);
@@ -2049,7 +2049,7 @@ public final class AbilityFactoryReveal {
         if (maxCards == 0) {
             return;
         }
-        final CardList topCards = new CardList();
+        final List<Card> topCards = new ArrayList<Card>();
         // show top n cards:
         for (int j = 0; j < maxCards; j++) {
             topCards.add(lib.get(j));
@@ -2373,14 +2373,14 @@ public final class AbilityFactoryReveal {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                final CardList handChoices = p.getCardsIn(ZoneType.Hand);
+                final List<Card> handChoices = p.getCardsIn(ZoneType.Hand);
                 if (handChoices.size() > 0) {
-                    final CardList revealed = new CardList();
+                    final List<Card> revealed = new ArrayList<Card>();
                     if (params.containsKey("Random")) {
                         revealed.add(CardUtil.getRandom(handChoices));
                         GuiChoose.oneOrNone("Revealed card(s)", revealed);
                     } else {
-                        CardList valid = new CardList(handChoices);
+                        List<Card> valid = new ArrayList<Card>(handChoices);
                         int max = 1;
                         if (params.containsKey("RevealValid")) {
                             valid = CardListUtil.getValidCards(valid, params.get("RevealValid"), p, host);
@@ -2414,8 +2414,8 @@ public final class AbilityFactoryReveal {
      * @param anyNumber a boolean
      * @return the revealed list
      */
-    public static CardList getRevealedList(final Player player, final CardList valid, final int max, boolean anyNumber) {
-        final CardList chosen = new CardList();
+    public static List<Card> getRevealedList(final Player player, final List<Card> valid, final int max, boolean anyNumber) {
+        final List<Card> chosen = new ArrayList<Card>();
         final int validamount = Math.min(valid.size(), max);
 
         if (anyNumber && player.isHuman() && validamount > 0) {

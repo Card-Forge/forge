@@ -20,6 +20,7 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Predicate;
@@ -27,7 +28,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Command;
 import forge.GameEntity;
@@ -334,7 +335,7 @@ public class AbilityFactoryGainControl {
             }
         }
 
-        CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getSourceCard().getController(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
@@ -418,7 +419,7 @@ public class AbilityFactoryGainControl {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private void gainControlResolve(final SpellAbility sa) {
-        CardList tgtCards = new CardList();
+        List<Card> tgtCards = new ArrayList<Card>();
         Card source = sa.getSourceCard();
 
         final Target tgt = sa.getTarget();
@@ -472,7 +473,7 @@ public class AbilityFactoryGainControl {
                 if (!tgtC.equals(newController)) {
                     tgtC.addController(newController);
                 }
-                // Singletons.getModel().getGameAction().changeController(new CardList(tgtC),
+                // Singletons.getModel().getGameAction().changeController(new ArrayList<Card>(tgtC),
                 // tgtC.getController(), newController.get(0));
 
                 if (this.bUntap) {
@@ -560,7 +561,7 @@ public class AbilityFactoryGainControl {
     private boolean gainControlDrawbackAI(final SpellAbility sa) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (this.params.containsKey("AllValid")) {
-                CardList tgtCards = CardListUtil.filterControlledBy(AllZoneUtil.getCardsIn(ZoneType.Battlefield), AllZone.getHumanPlayer());
+                List<Card> tgtCards = CardListUtil.filterControlledBy(AllZoneUtil.getCardsIn(ZoneType.Battlefield), AllZone.getHumanPlayer());
                 tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
                 if (tgtCards.isEmpty()) {
                     return false;
@@ -651,7 +652,7 @@ public class AbilityFactoryGainControl {
         }
         if (AllZoneUtil.isCardInPlay(c)) {
             c.removeController(newController);
-            // Singletons.getModel().getGameAction().changeController(new CardList(c),
+            // Singletons.getModel().getGameAction().changeController(new ArrayList<Card>(c),
             // c.getController(), originalController);
 
             if (tapOnLose) {
@@ -854,7 +855,7 @@ public class AbilityFactoryGainControl {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
 
-        CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         list = CardListUtil.getValidCards(list, tgt.getValidTgts(), AllZone.getComputerPlayer(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
@@ -869,7 +870,7 @@ public class AbilityFactoryGainControl {
         if (params.containsKey("Defined")) {
             object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa).get(0);
         } else if (tgt.getMinTargets(sa.getSourceCard(), sa) > 1) {
-            CardList list2 = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            List<Card> list2 = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             list2 = CardListUtil.getValidCards(list2, tgt.getValidTgts(), AllZone.getComputerPlayer(), sa.getSourceCard());
             object2 = CardFactoryUtil.getWorstAI(list2);
             tgt.addTarget(object2);

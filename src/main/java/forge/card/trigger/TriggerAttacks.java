@@ -18,10 +18,11 @@
 package forge.card.trigger;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.CardList;
+
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
 
@@ -69,7 +70,8 @@ public class TriggerAttacks extends Trigger {
         }
 
         if (this.getMapParams().containsKey("Alone")) {
-            final CardList otherAttackers = (CardList) runParams2.get("OtherAttackers");
+            @SuppressWarnings("unchecked")
+            final List<Card> otherAttackers = (List<Card>) runParams2.get("OtherAttackers");
             if (otherAttackers == null) {
                 return false;
             }

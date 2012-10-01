@@ -26,7 +26,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.control.input.Input;
@@ -269,7 +269,7 @@ public class TargetSelection {
             return;
         }
 
-        CardList choices = CardListUtil.getTargetableCards(CardListUtil.getValidCards(AllZoneUtil
+        List<Card> choices = CardListUtil.getTargetableCards(CardListUtil.getValidCards(AllZoneUtil
                 .getCardsIn(zone), this.target.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getSourceCard()), this.ability);
 
         ArrayList<Object> objects = new ArrayList<Object>();
@@ -326,7 +326,7 @@ public class TargetSelection {
         }
     } // input_targetValid
 
-    // CardList choices are the only cards the user can successful select
+    // List<Card> choices are the only cards the user can successful select
     /**
      * <p>
      * input_targetSpecific.
@@ -342,7 +342,7 @@ public class TargetSelection {
      *            the already targeted
      * @return a {@link forge.control.input.Input} object.
      */
-    public final Input inputTargetSpecific(final CardList choices, final boolean targeted, final boolean mandatory,
+    public final Input inputTargetSpecific(final List<Card> choices, final boolean targeted, final boolean mandatory,
             final ArrayList<Object> alreadyTargeted) {
         final SpellAbility sa = this.ability;
         final TargetSelection select = this;
@@ -436,7 +436,7 @@ public class TargetSelection {
      * @param mandatory
      *            a boolean.
      */
-    public final void chooseCardFromList(final CardList choices, final boolean targeted, final boolean mandatory) {
+    public final void chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
         // Send in a list of valid cards, and popup a choice box to target
         final Card dummy = new Card();
         dummy.setName("[FINISH TARGETING]");
@@ -454,12 +454,12 @@ public class TargetSelection {
         final Card divStack = new Card();
         divStack.setName("--CARDS IN LIBRARY:--");
 
-        CardList choicesZoneUnfiltered = choices;
-        final CardList crdsBattle = new CardList();
-        final CardList crdsExile = new CardList();
-        final CardList crdsGrave = new CardList();
-        final CardList crdsLibrary = new CardList();
-        final CardList crdsStack = new CardList();
+        List<Card> choicesZoneUnfiltered = choices;
+        final List<Card> crdsBattle = new ArrayList<Card>();
+        final List<Card> crdsExile = new ArrayList<Card>();
+        final List<Card> crdsGrave = new ArrayList<Card>();
+        final List<Card> crdsLibrary = new ArrayList<Card>();
+        final List<Card> crdsStack = new ArrayList<Card>();
         for (final Card inZone : choicesZoneUnfiltered) {
             if (AllZoneUtil.getCardsIn(ZoneType.Battlefield).contains(inZone)) {
                 crdsBattle.add(inZone);
@@ -473,7 +473,7 @@ public class TargetSelection {
                 crdsStack.add(inZone);
             }
         }
-        CardList choicesFiltered = new CardList();
+        List<Card> choicesFiltered = new ArrayList<Card>();
         if (crdsBattle.size() >= 1) {
             choicesFiltered.add(divBattlefield);
             choicesFiltered.addAll(crdsBattle);
@@ -502,7 +502,7 @@ public class TargetSelection {
 
         final Target tgt = this.getTgt();
 
-        final CardList choicesWithDone = choicesFiltered;
+        final List<Card> choicesWithDone = choicesFiltered;
         if (tgt.isMinTargetsChosen(sa.getSourceCard(), sa)) {
             // is there a more elegant way of doing this?
             choicesWithDone.add(dummy);

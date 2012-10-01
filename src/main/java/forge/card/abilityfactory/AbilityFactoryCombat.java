@@ -19,12 +19,13 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.Singletons;
@@ -1061,7 +1062,7 @@ public final class AbilityFactoryCombat {
         boolean chance = false;
 
         if (abTgt != null) {
-            CardList list = CardListUtil.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+            List<Card> list = CardListUtil.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
             list = CardListUtil.getTargetableCards(list, sa);
             list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             list = CardListUtil.filter(list, new Predicate<Card>() {

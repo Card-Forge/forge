@@ -17,10 +17,11 @@
  */
 package forge.deck;
 
+import java.util.List;
 import java.util.Map.Entry;
 
 import forge.Card;
-import forge.CardList;
+
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
@@ -98,7 +99,7 @@ public class DeckSection extends ItemPool<CardPrinted> {
      * @param cardList
      *            the card list
      */
-    public void add(final CardList cardList) {
+    public void add(final List<Card> cardList) {
         for (final Card c : cardList) {
             this.add(c);
         }

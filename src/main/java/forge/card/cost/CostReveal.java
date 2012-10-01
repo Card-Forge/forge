@@ -17,9 +17,11 @@
  */
 package forge.card.cost;
 
+import java.util.List;
+
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -61,7 +63,7 @@ public class CostReveal extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        CardList handList = activator.getCardsIn(ZoneType.Hand);
+        List<Card> handList = activator.getCardsIn(ZoneType.Hand);
         final String type = this.getType();
         final Integer amount = this.convertAmount();
 
@@ -97,7 +99,7 @@ public class CostReveal extends CostPartWithList {
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
-        CardList hand = activator.getCardsIn(ZoneType.Hand);
+        List<Card> hand = activator.getCardsIn(ZoneType.Hand);
         this.resetList();
 
         if (this.getThis()) {
@@ -159,7 +161,7 @@ public class CostReveal extends CostPartWithList {
         } else {
             Integer num = this.convertAmount();
 
-            CardList handList = activator.getCardsIn(ZoneType.Hand);
+            List<Card> handList = activator.getCardsIn(ZoneType.Hand);
             handList = CardListUtil.getValidCards(handList, this.getType().split(";"), activator, ability.getSourceCard());
 
             if (num == null) {
@@ -245,7 +247,7 @@ public class CostReveal extends CostPartWithList {
      *            a int.
      * @return a {@link forge.control.input.Input} object.
      */
-    public static Input inputRevealCost(final String discType, final CardList handList, final CostPayment payment,
+    public static Input inputRevealCost(final String discType, final List<Card> handList, final CostPayment payment,
             final CostReveal part, final SpellAbility sa, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = -329993322080934435L;
@@ -286,7 +288,7 @@ public class CostReveal extends CostPartWithList {
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (zone.is(ZoneType.Hand) && handList.contains(card)) {
-                    // send in CardList for Typing
+                    // send in List<Card> for Typing
                     handList.remove(card);
                     part.addToList(card);
                     this.nReveal++;

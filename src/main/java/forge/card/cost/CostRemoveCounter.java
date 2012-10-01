@@ -17,8 +17,10 @@
  */
 package forge.card.cost;
 
+import java.util.List;
+
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
@@ -163,7 +165,7 @@ public class CostRemoveCounter extends CostPartWithList {
             }
         }
         else {
-            final CardList typeList = CardListUtil.getValidCards(activator.getCardsIn(this.getZone()), this.getType().split(";"), activator, source);
+            final List<Card> typeList = CardListUtil.getValidCards(activator.getCardsIn(this.getZone()), this.getType().split(";"), activator, source);
             if (amount != null) {
                 boolean payable = false;
                 for (Card c : typeList) {
@@ -316,7 +318,7 @@ public class CostRemoveCounter extends CostPartWithList {
             final CostRemoveCounter costRemoveCounter, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
-            private CardList typeList;
+            private List<Card> typeList;
             private int nRemove = 0;
 
             @Override
@@ -399,7 +401,7 @@ public class CostRemoveCounter extends CostPartWithList {
             final CostRemoveCounter costRemoveCounter, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = 734256837615635021L;
-            private CardList typeList;
+            private List<Card> typeList;
             private int nRemove = 0;
 
             @Override

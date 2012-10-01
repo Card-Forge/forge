@@ -19,9 +19,11 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -322,7 +324,7 @@ public final class AbilityFactoryBond {
         }
 
         // find list of valid cards to pair with
-        CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         cards = AbilityFactory.filterListByType(cards, params.get("ValidCards"), sa);
         if (cards.isEmpty()) {
             return;

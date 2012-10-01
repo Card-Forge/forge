@@ -33,7 +33,7 @@ import com.google.common.collect.HashBiMap;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -733,7 +733,7 @@ public final class AbilityFactoryChoose {
                             chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame());
                         }
                         else if (logic.equals("MostProminentHumanCreatures")) {
-                            CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                            List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                             if (list.isEmpty()) {
                                 list = CardListUtil.filter(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer()), CardPredicates.Presets.CREATURES);
                             }
@@ -744,7 +744,7 @@ public final class AbilityFactoryChoose {
                                     ZoneType.Battlefield));
                         }
                         else if (logic.equals("MostProminentPermanent")) {
-                            final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                            final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
                             chosen = CardFactoryUtil.getMostProminentColor(list);
                         }
                         else if (logic.equals("MostProminentAttackers")) {
@@ -1640,7 +1640,7 @@ public final class AbilityFactoryChoose {
                                         .getCardsIn(ZoneType.Library));
                             }
                         } else {
-                            CardList list = CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer());
+                            List<Card> list = CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer());
                             list = CardListUtil.filter(list, Predicates.not(Presets.LANDS));
                             if (!list.isEmpty()) {
                                 chosen = list.get(0).getName();
@@ -1866,7 +1866,7 @@ public final class AbilityFactoryChoose {
             if (params.containsKey("ChoiceZone")) {
                 choiceZone = ZoneType.smartValueOf(params.get("ChoiceZone"));
             }
-            CardList choices = AllZoneUtil.getCardsIn(choiceZone);
+            List<Card> choices = AllZoneUtil.getCardsIn(choiceZone);
             if (params.containsKey("Choices")) {
                 choices = CardListUtil.getValidCards(choices, params.get("Choices"), host.getController(), host);
             }
@@ -1932,7 +1932,7 @@ public final class AbilityFactoryChoose {
         if (params.containsKey("ChoiceZone")) {
             choiceZone = ZoneType.smartValueOf(params.get("ChoiceZone"));
         }
-        CardList choices = AllZoneUtil.getCardsIn(choiceZone);
+        List<Card> choices = AllZoneUtil.getCardsIn(choiceZone);
         if (params.containsKey("Choices")) {
             choices = CardListUtil.getValidCards(choices, params.get("Choices"), host.getController(), host);
         }
@@ -1942,11 +1942,11 @@ public final class AbilityFactoryChoose {
                 ? CardFactoryUtil.xCount(host, host.getSVar(params.get("Amount"))) : Integer.parseInt(numericAmount);
 
         if (params.containsKey("SunderingTitan")) {
-            final CardList land = AllZoneUtil.getLandsInPlay();
+            final List<Card> land = AllZoneUtil.getLandsInPlay();
             final ArrayList<String> basic = CardUtil.getBasicTypes();
 
             for (final String type : basic) {
-                final CardList cl = CardListUtil.getType(land, type);
+                final List<Card> cl = CardListUtil.getType(land, type);
                 if (cl.size() > 0) {
                     final String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
                     final Object o = GuiChoose.one(prompt, cl);

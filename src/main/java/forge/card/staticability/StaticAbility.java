@@ -514,7 +514,7 @@ public class StaticAbility {
 
         /*
          * if(mapParams.containsKey("isPresent")) { String isPresent =
-         * mapParams.get("isPresent"); CardList list =
+         * mapParams.get("isPresent"); List<Card> list =
          * AllZoneUtil.getCardsInPlay();
          * 
          * list = list.getValidCards(isPresent.split(","), controller,

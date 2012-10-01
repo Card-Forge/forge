@@ -19,10 +19,11 @@ package forge.card.spellability;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import forge.Card;
-import forge.CardList;
+
 import forge.Command;
 import forge.CommandArgs;
 import forge.GameEntity;
@@ -67,8 +68,8 @@ public abstract class SpellAbility {
     private Card sourceCard;
     private Card originalHost = null;
 
-    private CardList splicedCards = null;
-    private CardList targetList;
+    private List<Card> splicedCards = null;
+    private List<Card> targetList;
     // targetList doesn't appear to be used anymore
 
     private boolean spell;
@@ -108,7 +109,7 @@ public abstract class SpellAbility {
     private final ArrayList<AbilityMana> paidAbilities = new ArrayList<AbilityMana>();
     private ArrayList<String> optionalAdditionalCosts = new ArrayList<String>();
 
-    private HashMap<String, CardList> paidLists = new HashMap<String, CardList>();
+    private HashMap<String, List<Card>> paidLists = new HashMap<String, List<Card>>();
 
     private HashMap<String, Object> triggeringObjects = new HashMap<String, Object>();
 
@@ -125,7 +126,7 @@ public abstract class SpellAbility {
         }
     };
 
-    private CardList tappedForConvoke = new CardList();
+    private List<Card> tappedForConvoke = new ArrayList<Card>();
 
     private HashMap<String, String> sVars = new HashMap<String, String>();
 
@@ -823,7 +824,7 @@ public abstract class SpellAbility {
      * @param hash
      *            a {@link java.util.HashMap} object.
      */
-    public void setPaidHash(final HashMap<String, CardList> hash) {
+    public void setPaidHash(final HashMap<String, List<Card>> hash) {
         this.paidLists = hash;
     }
 
@@ -834,7 +835,7 @@ public abstract class SpellAbility {
      * 
      * @return a {@link java.util.HashMap} object.
      */
-    public HashMap<String, CardList> getPaidHash() {
+    public HashMap<String, List<Card>> getPaidHash() {
         return this.paidLists;
     }
 
@@ -849,7 +850,7 @@ public abstract class SpellAbility {
      * @param str
      *            a {@link java.lang.String} object.
      */
-    public void setPaidList(final CardList list, final String str) {
+    public void setPaidList(final List<Card> list, final String str) {
         this.paidLists.put(str, list);
     }
 
@@ -862,7 +863,7 @@ public abstract class SpellAbility {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList getPaidList(final String str) {
+    public List<Card> getPaidList(final String str) {
         return this.paidLists.get(str);
     }
 
@@ -878,7 +879,7 @@ public abstract class SpellAbility {
      */
     public void addCostToHashList(final Card c, final String str) {
         if (!this.paidLists.containsKey(str)) {
-            this.paidLists.put(str, new CardList());
+            this.paidLists.put(str, new ArrayList<Card>());
         }
 
         this.paidLists.get(str).add(c);
@@ -890,7 +891,7 @@ public abstract class SpellAbility {
      * </p>
      */
     public void resetPaidHash() {
-        this.paidLists = new HashMap<String, CardList>();
+        this.paidLists = new HashMap<String, List<Card>>();
     }
 
     /**
@@ -1318,7 +1319,7 @@ public abstract class SpellAbility {
      * 
      * @return a {@link forge.CardList} object.
      */
-    public CardList getTargetList() {
+    public List<Card> getTargetList() {
         return this.targetList;
     }
 
@@ -1330,7 +1331,7 @@ public abstract class SpellAbility {
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public void setTargetList(final CardList list) {
+    public void setTargetList(final List<Card> list) {
         // The line below started to create a null error at
         // forge.CardFactoryUtil.canBeTargetedBy(CardFactoryUtil.java:3329)
         // after ForgeSVN r2699. I hope that commenting out the line below will
@@ -1736,7 +1737,7 @@ public abstract class SpellAbility {
      */
     public void addTappedForConvoke(final Card c) {
         if (this.tappedForConvoke == null) {
-            this.tappedForConvoke = new CardList();
+            this.tappedForConvoke = new ArrayList<Card>();
         }
 
         this.tappedForConvoke.add(c);
@@ -1747,7 +1748,7 @@ public abstract class SpellAbility {
      * 
      * @return the tapped for convoke
      */
-    public CardList getTappedForConvoke() {
+    public List<Card> getTappedForConvoke() {
         return this.tappedForConvoke;
     }
 
@@ -1763,14 +1764,14 @@ public abstract class SpellAbility {
     /**
      * @return the splicedCards
      */
-    public CardList getSplicedCards() {
+    public List<Card> getSplicedCards() {
         return splicedCards;
     }
 
     /**
      * @param splicedCard the splicedCards to set
      */
-    public void setSplicedCards(CardList splicedCards) {
+    public void setSplicedCards(List<Card> splicedCards) {
         this.splicedCards = splicedCards;
     }
 
@@ -1779,7 +1780,7 @@ public abstract class SpellAbility {
      */
     public void addSplicedCards(Card splicedCard) {
         if (this.splicedCards == null) {
-            this.splicedCards = new CardList();
+            this.splicedCards = new ArrayList<Card>();
         }
         this.splicedCards.add(splicedCard);
     }

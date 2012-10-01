@@ -17,11 +17,13 @@
  */
 package forge.card.replacement;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.card.TriggerReplacementBase;
@@ -253,7 +255,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             if (this.getMapParams().containsKey("PresentPlayer")) {
                 presentPlayer = this.getMapParams().get("PresentPlayer");
             }
-            CardList list = new CardList();
+            List<Card> list = new ArrayList<Card>();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
                 list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
             }
@@ -292,7 +294,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             if (this.getMapParams().containsKey("PresentPlayer2")) {
                 presentPlayer = this.getMapParams().get("PresentPlayer2");
             }
-            CardList list = new CardList();
+            List<Card> list = new ArrayList<Card>();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
                 list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
             }
@@ -352,8 +354,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         }
 
         if (this.getMapParams().containsKey("WerewolfUntransformCondition")) {
-            final CardList you = CardUtil.getLastTurnCast("Card.YouCtrl", this.getHostCard());
-            final CardList opp = CardUtil.getLastTurnCast("Card.YouDontCtrl", this.getHostCard());
+            final List<Card> you = CardUtil.getLastTurnCast("Card.YouCtrl", this.getHostCard());
+            final List<Card> opp = CardUtil.getLastTurnCast("Card.YouDontCtrl", this.getHostCard());
             if (!((you.size() > 1) || (opp.size() > 1))) {
                 return false;
             }

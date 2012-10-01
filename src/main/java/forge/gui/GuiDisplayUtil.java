@@ -36,7 +36,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
-import forge.CardList;
+
 import forge.CardUtil;
 import forge.Constant;
 import forge.Counters;
@@ -434,16 +434,16 @@ public final class GuiDisplayUtil {
         final String[] humanSetupExile = tHumanSetupExile.split(";");
         final String[] computerSetupExile = tComputerSetupExile.split(";");
 
-        CardList humanDevSetup = new CardList();
-        CardList computerDevSetup = new CardList();
-        CardList humanDevHandSetup = new CardList();
-        CardList computerDevHandSetup = new CardList();
-        CardList humanDevGraveyardSetup = new CardList();
-        CardList computerDevGraveyardSetup = new CardList();
-        CardList humanDevLibrarySetup = new CardList();
-        CardList computerDevLibrarySetup = new CardList();
-        CardList humanDevExileSetup = new CardList();
-        CardList computerDevExileSetup = new CardList();
+        List<Card> humanDevSetup = new ArrayList<Card>();
+        List<Card> computerDevSetup = new ArrayList<Card>();
+        List<Card> humanDevHandSetup = new ArrayList<Card>();
+        List<Card> computerDevHandSetup = new ArrayList<Card>();
+        List<Card> humanDevGraveyardSetup = new ArrayList<Card>();
+        List<Card> computerDevGraveyardSetup = new ArrayList<Card>();
+        List<Card> humanDevLibrarySetup = new ArrayList<Card>();
+        List<Card> computerDevLibrarySetup = new ArrayList<Card>();
+        List<Card> humanDevExileSetup = new ArrayList<Card>();
+        List<Card> computerDevExileSetup = new ArrayList<Card>();
 
         if (!tChangePlayer.trim().toLowerCase().equals("none")) {
             if (tChangePlayer.trim().toLowerCase().equals("human")) {
@@ -575,8 +575,8 @@ public final class GuiDisplayUtil {
      *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList devProcessCardsForZone(final String[] data, final Player player) {
-        final CardList cl = new CardList();
+    public static List<Card> devProcessCardsForZone(final String[] data, final Player player) {
+        final List<Card> cl = new ArrayList<Card>();
         for (final String element : data) {
             final String[] cardinfo = element.trim().split("\\|");
 
@@ -619,7 +619,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeTutor() {
-        final CardList lib = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
+        final List<Card> lib = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
         final Object o = GuiChoose.oneOrNone("Choose a card", lib);
         if (null == o) {
             return;
@@ -716,7 +716,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeTapPerm() {
-        final CardList play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Object o = GuiChoose.oneOrNone("Choose a permanent", play);
         if (null == o) {
             return;
@@ -734,7 +734,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeUntapPerm() {
-        final CardList play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Object o = GuiChoose.oneOrNone("Choose a permanent", play);
         if (null == o) {
             return;

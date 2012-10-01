@@ -26,7 +26,8 @@ import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 
-import forge.CardList;
+
+import forge.Card;
 import forge.card.CardRules;
 
 /**
@@ -241,8 +242,8 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      * 
      * @return CardList
      */
-    public final CardList toForgeCardList() {
-        final CardList result = new CardList();
+    public final List<Card> toForgeCardList() {
+        final List<Card> result = new ArrayList<Card>();
         for (final Entry<T, Integer> e : this) {
             if (e.getKey() instanceof CardPrinted) {
                 for (int i = 0; i < e.getValue(); i++) {

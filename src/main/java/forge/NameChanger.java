@@ -19,6 +19,8 @@ package forge;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.StringTokenizer;
@@ -154,9 +156,9 @@ public class NameChanger {
      * @return either list itself or a new list (possibly wasteful) containing
      *         the side effected cards
      */
-    public final CardList changeCardsIfNeeded(CardList list) {
+    public final List<Card> changeCardsIfNeeded(List<Card> list) {
         if (this.shouldChangeCardName()) {
-            list = new CardList( Lists.transform(list, fnTransformCard) );
+            list = new ArrayList<Card>( Lists.transform(list, fnTransformCard) );
         }
         return list;
     }

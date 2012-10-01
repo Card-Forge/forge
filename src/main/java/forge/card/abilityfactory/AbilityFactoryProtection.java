@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -29,7 +30,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
@@ -244,11 +245,11 @@ public final class AbilityFactoryProtection {
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getProtectCreatures(final AbilityFactory af, final SpellAbility sa) {
+    private static List<Card> getProtectCreatures(final AbilityFactory af, final SpellAbility sa) {
         final Card hostCard = af.getHostCard();
         final ArrayList<String> gains = AbilityFactoryProtection.getProtectionList(hostCard, af.getMapParams());
 
-        CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+        List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
         list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -382,7 +383,7 @@ public final class AbilityFactoryProtection {
 
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
-        CardList list = AbilityFactoryProtection.getProtectCreatures(af, sa);
+        List<Card> list = AbilityFactoryProtection.getProtectCreatures(af, sa);
 
         list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -469,7 +470,7 @@ public final class AbilityFactoryProtection {
         final HashMap<String, String> params = af.getMapParams();
         final Card host = af.getHostCard();
 
-        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -483,7 +484,7 @@ public final class AbilityFactoryProtection {
             list.remove(c);
         }
 
-        CardList pref = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
+        List<Card> pref = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
         pref = CardListUtil.filter(pref, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -491,7 +492,7 @@ public final class AbilityFactoryProtection {
                         AbilityFactoryProtection.getProtectionList(host, params));
             }
         });
-        final CardList pref2 = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
+        final List<Card> pref2 = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
         pref = CardListUtil.filter(pref, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -499,7 +500,7 @@ public final class AbilityFactoryProtection {
                         AbilityFactoryProtection.getProtectionList(host, params));
             }
         });
-        final CardList forced = CardListUtil.filterControlledBy(list, AllZone.getHumanPlayer());
+        final List<Card> forced = CardListUtil.filterControlledBy(list, AllZone.getHumanPlayer());
         final Card source = sa.getSourceCard();
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
@@ -742,7 +743,7 @@ public final class AbilityFactoryProtection {
                 if (params.containsKey("AILogic")) {
                     final String logic = params.get("AILogic");
                     if (logic.equals("MostProminentHumanCreatures")) {
-                        CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                        List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                         if (list.isEmpty()) {
                             list = CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer());
                         }
@@ -1189,7 +1190,7 @@ public final class AbilityFactoryProtection {
             valid = params.get("ValidCards");
         }
         if (!valid.equals("")) {
-            CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             list = CardListUtil.getValidCards(list, valid, sa.getActivatingPlayer(), host);
 
             for (final Card tgtC : list) {

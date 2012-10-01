@@ -20,6 +20,7 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import com.google.common.collect.Iterables;
@@ -27,7 +28,7 @@ import com.google.common.collect.Iterables;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.Constant;
@@ -762,11 +763,11 @@ public class AbilityFactoryMana {
             maxChoices++;
         }
 
-        CardList cards = null;
+        List<Card> cards = null;
 
         // Reuse AF_Defined in a slightly different way
         if (validCard.startsWith("Defined.")) {
-            cards = new CardList();
+            cards = new ArrayList<Card>();
             for (final Card c : AbilityFactory.getDefinedCards(card, validCard.replace("Defined.", ""), abMana)) {
                 cards.add(c);
             }
@@ -852,7 +853,7 @@ public class AbilityFactoryMana {
      *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    private static ArrayList<String> hasProperty(final int maxChoices, final CardList cards,
+    private static ArrayList<String> hasProperty(final int maxChoices, final List<Card> cards,
             final ArrayList<String> colors) {
         for (final Card c : cards) {
             // For each card, go through all the colors and if the card is that
@@ -997,7 +998,7 @@ public class AbilityFactoryMana {
      * @return a boolean.
      */
     private static boolean hasUrzaLands(final Player p) {
-        final CardList landsControlled = p.getCardsIn(ZoneType.Battlefield);
+        final List<Card> landsControlled = p.getCardsIn(ZoneType.Battlefield);
         return Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Mine")) &&  
                 Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Tower")) && 
                 Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Power Plant"));

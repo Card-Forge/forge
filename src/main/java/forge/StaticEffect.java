@@ -19,6 +19,7 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -34,7 +35,7 @@ import forge.game.player.Player;
 public class StaticEffect {
     private Card source = new Card();
     private int keywordNumber = 0;
-    private CardList affectedCards = new CardList();
+    private List<Card> affectedCards = new ArrayList<Card>();
     private ArrayList<Player> affectedPlayers = new ArrayList<Player>();
     private int xValue = 0;
     private int yValue = 0;
@@ -739,7 +740,7 @@ public class StaticEffect {
      * 
      * @return a {@link forge.CardList} object.
      */
-    public final CardList getAffectedCards() {
+    public final List<Card> getAffectedCards() {
         return this.affectedCards;
     }
 
@@ -751,7 +752,7 @@ public class StaticEffect {
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public final void setAffectedCards(final CardList list) {
+    public final void setAffectedCards(final List<Card> list) {
         this.affectedCards = list;
     }
 

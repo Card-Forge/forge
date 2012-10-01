@@ -108,7 +108,7 @@ public final class CardUtil {
      *            a {@link forge.CardList} object.
      * @return a int.
      */
-    public static int getRandomIndex(final CardList c) {
+    public static int getRandomIndex(final List<Card> c) {
         return CardUtil.RANDOM.nextInt(c.size());
     }
 
@@ -621,11 +621,11 @@ public final class CardUtil {
      *            a isValid expression
      * @param src
      *            a Card object
-     * @return a CardList that matches the given criteria
+     * @return a List<Card> that matches the given criteria
      */
-    public static CardList getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid,
+    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid,
             final Card src) {
-        CardList res = new CardList();
+        List<Card> res = new ArrayList<Card>();
         if (to != ZoneType.Stack) {
             res.addAll(((DefaultPlayerZone) AllZone.getComputerPlayer().getZone(to)).getCardsAddedThisTurn(from));
             res.addAll(((DefaultPlayerZone) AllZone.getHumanPlayer().getZone(to)).getCardsAddedThisTurn(from));
@@ -645,10 +645,10 @@ public final class CardUtil {
      *            a String object
      * @param src
      *            a Card object
-     * @return a CardList that matches the given criteria
+     * @return a List<Card> that matches the given criteria
      */
-    public static CardList getThisTurnCast(final String valid, final Card src) {
-        CardList res = new CardList();
+    public static List<Card> getThisTurnCast(final String valid, final Card src) {
+        List<Card> res = new ArrayList<Card>();
 
         res.addAll(AllZone.getStack().getCardsCastThisTurn());
 
@@ -664,10 +664,10 @@ public final class CardUtil {
      *            a String object
      * @param src
      *            a Card object
-     * @return a CardList that matches the given criteria
+     * @return a List<Card> that matches the given criteria
      */
-    public static CardList getLastTurnCast(final String valid, final Card src) {
-        CardList res = new CardList();
+    public static List<Card> getLastTurnCast(final String valid, final Card src) {
+        List<Card> res = new ArrayList<Card>();
 
         res.addAll(AllZone.getStack().getCardsCastLastTurn());
 
@@ -820,8 +820,8 @@ public final class CardUtil {
      *            the valid
      * @return the radiance
      */
-    public static CardList getRadiance(final Card source, final Card origin, final String[] valid) {
-        final CardList res = new CardList();
+    public static List<Card> getRadiance(final Card source, final Card origin, final String[] valid) {
+        final List<Card> res = new ArrayList<Card>();
 
         for (final CardColor col : origin.getColor()) {
             for (final String strCol : col.toStringList()) {

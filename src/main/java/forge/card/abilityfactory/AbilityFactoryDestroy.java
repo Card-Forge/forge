@@ -20,6 +20,7 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -27,7 +28,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Counters;
@@ -225,7 +226,7 @@ public class AbilityFactoryDestroy {
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
         final boolean noRegen = params.containsKey("NoRegen");
-        CardList list;
+        List<Card> list;
 
         if (abCost != null) {
             if (!CostUtil.checkSacrificeCost(abCost, source)) {
@@ -317,7 +318,7 @@ public class AbilityFactoryDestroy {
             }
         } else {
             if (params.containsKey("Defined")) {
-                list = new CardList(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
+                list = new ArrayList<Card>(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
                 if (list.isEmpty()
                         || !CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer()).isEmpty()
                         || CardListUtil.getNotKeyword(list, "Indestructible").isEmpty()) {
@@ -376,7 +377,7 @@ public class AbilityFactoryDestroy {
         final boolean noRegen = params.containsKey("NoRegen");
 
         if (tgt != null) {
-            CardList list;
+            List<Card> list;
             list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             list = CardListUtil.getTargetableCards(list, sa);
             list = CardListUtil.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
@@ -387,7 +388,7 @@ public class AbilityFactoryDestroy {
 
             tgt.resetTargets();
 
-            CardList preferred = CardListUtil.getNotKeyword(list, "Indestructible");
+            List<Card> preferred = CardListUtil.getNotKeyword(list, "Indestructible");
             preferred = CardListUtil.filterControlledBy(preferred, AllZone.getHumanPlayer());
 
             // If NoRegen is not set, filter out creatures that have a
@@ -851,8 +852,8 @@ public class AbilityFactoryDestroy {
         if (params.containsKey("ValidCards")) {
             valid = params.get("ValidCards");
         }
-        CardList humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        CardList computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         if (sa.getTarget() != null) {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getHumanPlayer());
@@ -932,8 +933,8 @@ public class AbilityFactoryDestroy {
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        CardList humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        CardList computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
         final Target tgt = sa.getTarget();
 
@@ -1038,7 +1039,7 @@ public class AbilityFactoryDestroy {
             valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
         }
 
-        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         if (targetPlayer != null) {
             list = CardListUtil.filterControlledBy(list, targetPlayer);

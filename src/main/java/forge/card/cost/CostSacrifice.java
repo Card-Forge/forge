@@ -17,11 +17,13 @@
  */
 package forge.card.cost;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -100,7 +102,7 @@ public class CostSacrifice extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         // You can always sac all
         if (!this.getThis()) {
-            CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
+            List<Card> typeList = activator.getCardsIn(ZoneType.Battlefield);
             typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
@@ -155,7 +157,7 @@ public class CostSacrifice extends CostPartWithList {
         final String amount = this.getAmount();
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
-        CardList list = activator.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = activator.getCardsIn(ZoneType.Battlefield);
         list = CardListUtil.getValidCards(list, type.split(";"), activator, source);
         if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             list = CardListUtil.getNotType(list, "Creature");
@@ -203,7 +205,7 @@ public class CostSacrifice extends CostPartWithList {
         if (this.getThis()) {
             this.getList().add(source);
         } else if (this.getAmount().equals("All")) {
-            CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
+            List<Card> typeList = activator.getCardsIn(ZoneType.Battlefield);
             typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
             if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
                 typeList = CardListUtil.getNotType(typeList, "Creature");
@@ -244,7 +246,7 @@ public class CostSacrifice extends CostPartWithList {
      *            TODO
      */
     public static void sacrificeAll(final SpellAbility sa, final CostPayment payment, final CostPart part,
-            final CardList typeList) {
+            final List<Card> typeList) {
         // TODO Ask First
         for (final Card card : typeList) {
             payment.getAbility().addCostToHashList(card, "Sacrificed");
@@ -272,7 +274,7 @@ public class CostSacrifice extends CostPartWithList {
      * @return a {@link forge.control.input.Input} object.
      */
     public static Input sacrificeFromList(final SpellAbility sa, final CostPayment payment, final CostSacrifice part,
-            final CardList typeList, final int nNeeded) {
+            final List<Card> typeList, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
             private int nSacrifices = 0;

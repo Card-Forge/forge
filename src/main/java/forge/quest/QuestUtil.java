@@ -19,12 +19,13 @@ package forge.quest;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.card.cardfactory.CardFactory;
 import forge.game.player.Player;
 import forge.item.CardDb;
 import forge.quest.bazaar.QuestPetController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,8 +47,8 @@ public class QuestUtil {
      *            a {@link forge.quest.data.QuestData} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getComputerStartingCards() {
-        return new CardList();
+    public static List<Card> getComputerStartingCards() {
+        return new ArrayList<Card>();
     }
 
     /**
@@ -62,8 +63,8 @@ public class QuestUtil {
      *            a {@link forge.quest.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getComputerStartingCards(final QuestEvent qe) {
-        final CardList list = new CardList();
+    public static List<Card> getComputerStartingCards(final QuestEvent qe) {
+        final List<Card> list = new ArrayList<Card>();
 
         if (qe instanceof QuestEventChallenge) {
             final List<String> extras = ((QuestEventChallenge) qe).getAIExtraCards();
@@ -86,8 +87,8 @@ public class QuestUtil {
      *            a {@link forge.quest.data.QuestData} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanStartingCards(final QuestController qc) {
-        final CardList list = new CardList();
+    public static List<Card> getHumanStartingCards(final QuestController qc) {
+        final List<Card> list = new ArrayList<Card>();
 
         for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
 
@@ -122,8 +123,8 @@ public class QuestUtil {
      *            a {@link forge.quest.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanStartingCards(final QuestController qc, final QuestEvent qe) {
-        final CardList list = QuestUtil.getHumanStartingCards(qc);
+    public static List<Card> getHumanStartingCards(final QuestController qc, final QuestEvent qe) {
+        final List<Card> list = QuestUtil.getHumanStartingCards(qc);
 
         if (qe instanceof QuestEventChallenge) {
             final List<String> extras = ((QuestEventChallenge) qe).getHumanExtraCards();

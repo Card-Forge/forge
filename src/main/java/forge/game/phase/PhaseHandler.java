@@ -18,6 +18,7 @@
 package forge.game.phase;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Observer;
 import java.util.Stack;
 
@@ -25,7 +26,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.GameActionUtil;
@@ -425,7 +426,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case CLEANUP:
                 // Reset Damage received map
-                final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
                 for (final Card c : list) {
                     c.resetPreventNextDamage();
                     c.resetReceivedDamageFromThisTurn();
@@ -451,8 +452,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 }
 
                 AllZone.getEndOfTurn().executeUntil();
-                final CardList cHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                final CardList hHand = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand);
+                final List<Card> cHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+                final List<Card> hHand = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand);
                 for (final Card c : cHand) {
                     c.setDrawnThisTurn(false);
                 }
@@ -660,7 +661,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     private boolean skipTurnTimeVault(Player turn) {
         // time vault:
-        CardList vaults = turn.getCardsIn(ZoneType.Battlefield, "Time Vault");
+        List<Card> vaults = turn.getCardsIn(ZoneType.Battlefield, "Time Vault");
         vaults = CardListUtil.filter(vaults, CardPredicates.Presets.TAPPED);
 
         if (vaults.size() > 0) {
@@ -830,7 +831,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final void resetAttackedThisCombat(final Player player) {
         // resets the status of attacked/blocked this phase
-        CardList list = player.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = player.getCardsIn(ZoneType.Battlefield);
 
         list = CardListUtil.filter(list, CardPredicates.Presets.CREATURES);
 

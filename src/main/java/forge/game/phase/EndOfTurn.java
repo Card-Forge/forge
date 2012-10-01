@@ -17,12 +17,14 @@
  */
 package forge.game.phase;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Counters;
 import forge.Singletons;
@@ -55,7 +57,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
         // TODO - should this freeze the Stack?
 
-        final CardList all = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> all = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         //EndOfTurn.endOfTurnWallOfReverence();
         EndOfTurn.endOfTurnLighthouseChronologist();
@@ -152,7 +154,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                         if (AllZoneUtil.isCardInPlay(vale)) {
                             vale.addController(vale.getController().getOpponent());
                             // Singletons.getModel().getGameAction().changeController(
-                            // new CardList(vale), vale.getController(),
+                            // new ArrayList<Card>(vale), vale.getController(),
                             // vale.getController().getOpponent());
 
                             vale.removeAllExtrinsicKeyword("An opponent gains control of CARDNAME "
@@ -231,7 +233,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
     private static void endOfTurnLighthouseChronologist() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final Player opponent = player.getOpponent();
-        CardList list = opponent.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = opponent.getCardsIn(ZoneType.Battlefield);
 
         list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override

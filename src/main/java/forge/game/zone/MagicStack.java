@@ -27,7 +27,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.Command;
@@ -77,8 +77,8 @@ public class MagicStack extends MyObservable {
     private boolean bResolving = false;
     private int splitSecondOnStack = 0;
 
-    private final CardList thisTurnCast = new CardList();
-    private CardList lastTurnCast = new CardList();
+    private final List<Card> thisTurnCast = new ArrayList<Card>();
+    private List<Card> lastTurnCast = new ArrayList<Card>();
     private Card curResolvingCard = null;
 
     /**
@@ -762,9 +762,9 @@ public class MagicStack extends MyObservable {
          */
         if (sp.isSpell() && AllZoneUtil.isCardInPlay("Bazaar of Wonders")) {
             boolean found = false;
-            CardList all = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            List<Card> all = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             all = CardListUtil.filter(all, Presets.NON_TOKEN);
-            final CardList graves = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
+            final List<Card> graves = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
             all.addAll(graves);
 
             for (final Card c : all) {
@@ -774,7 +774,7 @@ public class MagicStack extends MyObservable {
             }
 
             if (found) {
-                final CardList bazaars = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Bazaar of Wonders"); // should
+                final List<Card> bazaars = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Bazaar of Wonders"); // should
                 // only
                 // be
                 // 1...
@@ -897,7 +897,7 @@ public class MagicStack extends MyObservable {
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
                 && AllZone.getZoneOf(source).is(ZoneType.Graveyard)) {
-            final CardList creats = AllZoneUtil.getCreaturesInPlay();
+            final List<Card> creats = AllZoneUtil.getCreaturesInPlay();
             final Ability haunterDiesWork = new Ability(source, "0") {
                 @Override
                 public void resolve() {
@@ -942,7 +942,7 @@ public class MagicStack extends MyObservable {
                     AllZone.getInputControl().setInput(target);
                 } else {
                     // AI choosing what to haunt
-                    final CardList oppCreats = CardListUtil.filterControlledBy(creats, AllZone.getHumanPlayer());
+                    final List<Card> oppCreats = CardListUtil.filterControlledBy(creats, AllZone.getHumanPlayer());
                     if (oppCreats.size() != 0) {
                         haunterDiesWork.setTargetCard(CardFactoryUtil.getWorstCreatureAI(oppCreats));
                     } else {
@@ -1421,7 +1421,7 @@ public class MagicStack extends MyObservable {
      * 
      * @return a CardList.
      */
-    public final CardList getCardsCastThisTurn() {
+    public final List<Card> getCardsCastThisTurn() {
         return this.thisTurnCast;
     }
 
@@ -1437,7 +1437,7 @@ public class MagicStack extends MyObservable {
      * setCardsCastLastTurn.
      */
     public final void setCardsCastLastTurn() {
-        this.lastTurnCast = new CardList(this.thisTurnCast);
+        this.lastTurnCast = new ArrayList<Card>(this.thisTurnCast);
     }
 
     /**
@@ -1445,7 +1445,7 @@ public class MagicStack extends MyObservable {
      * 
      * @return a CardList.
      */
-    public final CardList getCardsCastLastTurn() {
+    public final List<Card> getCardsCastLastTurn() {
         return this.lastTurnCast;
     }
 

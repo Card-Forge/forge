@@ -18,11 +18,12 @@
 package forge.control.input;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.GameAction;
 import forge.GameActionUtil;
@@ -88,7 +89,7 @@ public class InputMulligan extends Input {
      * @return an int
      */
     public final int doMulligan(final Player player, final GamePlayerRating playerRating) {
-        final CardList hand = player.getCardsIn(ZoneType.Hand);
+        final List<Card> hand = player.getCardsIn(ZoneType.Hand);
         for (final Card c : hand) {
             Singletons.getModel().getGameAction().moveToLibrary(c);
         }
@@ -140,7 +141,7 @@ public class InputMulligan extends Input {
         // 0 in its hand
         while (aiTakesMulligan) {
 
-            final CardList handList = aiPlayer.getCardsIn(ZoneType.Hand);
+            final List<Card> handList = aiPlayer.getCardsIn(ZoneType.Hand);
             final boolean hasLittleCmc0Cards = CardListUtil.getValidCards(handList, "Card.cmcEQ0", aiPlayer, null).size() < 2;
             aiTakesMulligan = (handList.size() > InputMulligan.AI_MULLIGAN_THRESHOLD) && hasLittleCmc0Cards;
 
@@ -152,7 +153,7 @@ public class InputMulligan extends Input {
         // Human Leylines & Chancellors
         ButtonUtil.reset();
         final AbilityFactory af = new AbilityFactory();
-        final CardList humanOpeningHand = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand);
+        final List<Card> humanOpeningHand = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand);
 
         for (final Card c : humanOpeningHand) {
             final ArrayList<String> kws = c.getKeyword();
@@ -178,7 +179,7 @@ public class InputMulligan extends Input {
         }
 
         // Computer Leylines & Chancellors
-        final CardList aiOpeningHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+        final List<Card> aiOpeningHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
         for (final Card c : aiOpeningHand) {
             if (!c.getName().startsWith("Leyline")) {
                 final ArrayList<String> kws = c.getKeyword();
@@ -231,7 +232,7 @@ public class InputMulligan extends Input {
 
         if (c0.getName().equals("Serum Powder") && z0.is(ZoneType.Hand)) {
             if (GameActionUtil.showYesNoDialog(c0, "Use " + c0.getName() + "'s ability?")) {
-                CardList hand = c0.getController().getCardsIn(ZoneType.Hand);
+                List<Card> hand = c0.getController().getCardsIn(ZoneType.Hand);
                 for (Card c : hand) {
                     Singletons.getModel().getGameAction().exile(c);
                 }

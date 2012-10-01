@@ -17,14 +17,16 @@
  */
 package forge.card.abilityfactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardListUtil;
 import forge.card.cost.Cost;
-import forge.CardList;
+
 import forge.GameActionUtil;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
@@ -265,7 +267,7 @@ public final class AbilityFactoryRepeat {
 
         if (params.containsKey("RepeatPresent")) {
             final String repeatPresent = params.get("RepeatPresent");
-            CardList list = new CardList();
+            List<Card> list = new ArrayList<Card>();
 
             String repeatCompare = "GE1";
             if (params.containsKey("RepeatCompare")) {

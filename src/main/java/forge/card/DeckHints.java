@@ -63,12 +63,12 @@ public class DeckHints {
     }
 
     /**
-     * Returns a list of Cards from the given CardList that match this
+     * Returns a list of Cards from the given List<Card> that match this
      * DeckHints. I.e., other cards that this Card needs in its deck.
      * 
      * @param cardList
      *            list of cards to be filtered
-     * @return CardList of Cards that match this DeckHints.
+     * @return List<Card> of Cards that match this DeckHints.
      */
     public List<CardPrinted> filter(Iterable<CardPrinted> cardList) {
         List<CardPrinted> ret;

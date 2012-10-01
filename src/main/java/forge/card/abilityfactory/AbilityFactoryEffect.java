@@ -19,6 +19,7 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -26,7 +27,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.Command;
@@ -286,7 +287,7 @@ public class AbilityFactoryEffect {
                 final Target tgt = sa.getTarget();
                 if (tgt != null) {
                     tgt.resetTargets();
-                    CardList list = AllZone.getCombat().getAttackerList();
+                    List<Card> list = AllZone.getCombat().getAttackerList();
                     list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
                     list = CardListUtil.getTargetableCards(list, sa);
                     Card target = CardFactoryUtil.getBestCreatureAI(list);
@@ -299,8 +300,8 @@ public class AbilityFactoryEffect {
             } else if (logic.equals("Always")) {
                 randomReturn = true;
             } else if (logic.equals("Evasion")) {
-                CardList comp = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-                CardList human = CardListUtil.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                List<Card> comp = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                List<Card> human = CardListUtil.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
 
                 // only count creatures that can attack or block
                 comp = CardListUtil.filter(comp, new Predicate<Card>() {
@@ -330,7 +331,7 @@ public class AbilityFactoryEffect {
             if (name == null) {
                 name = sa.getSourceCard().getName() + "'s Effect";
             }
-            final CardList list = sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield, name);
+            final List<Card> list = sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield, name);
             if (list.size() != 0) {
                 return false;
             }

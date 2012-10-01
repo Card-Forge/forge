@@ -17,6 +17,7 @@
  */
 package forge.game.player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -24,7 +25,7 @@ import com.google.common.base.Predicates;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.Counters;
@@ -44,21 +45,21 @@ import forge.game.phase.CombatUtil;
  */
 public class ComputerUtilBlock {
     /** Constant <code>attackers</code>. */
-    private static CardList attackers = new CardList(); // all attackers
+    private static List<Card> attackers = new ArrayList<Card>(); // all attackers
     /** Constant <code>attackersLeft</code>. */
-    private static CardList attackersLeft = new CardList(); // keeps track of
+    private static List<Card> attackersLeft = new ArrayList<Card>(); // keeps track of
                                                             // all currently
                                                             // unblocked
                                                             // attackers
     /** Constant <code>blockedButUnkilled</code>. */
-    private static CardList blockedButUnkilled = new CardList(); // blocked
+    private static List<Card> blockedButUnkilled = new ArrayList<Card>(); // blocked
                                                                  // attackers
                                                                  // that
                                                                  // currently
                                                                  // wouldn't be
                                                                  // destroyed
     /** Constant <code>blockersLeft</code>. */
-    private static CardList blockersLeft = new CardList(); // keeps track of all
+    private static List<Card> blockersLeft = new ArrayList<Card>(); // keeps track of all
                                                            // unassigned
                                                            // blockers
     /** Constant <code>diff=0</code>. */
@@ -73,7 +74,7 @@ public class ComputerUtilBlock {
      * 
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getAttackers() {
+    private static List<Card> getAttackers() {
         return ComputerUtilBlock.attackers;
     }
 
@@ -85,7 +86,7 @@ public class ComputerUtilBlock {
      * @param cardList
      *            a {@link forge.CardList} object.
      */
-    private static void setAttackers(final CardList cardList) {
+    private static void setAttackers(final List<Card> cardList) {
         ComputerUtilBlock.attackers = (cardList);
     }
 
@@ -96,7 +97,7 @@ public class ComputerUtilBlock {
      * 
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getAttackersLeft() {
+    private static List<Card> getAttackersLeft() {
         return ComputerUtilBlock.attackersLeft;
     }
 
@@ -108,7 +109,7 @@ public class ComputerUtilBlock {
      * @param cardList
      *            a {@link forge.CardList} object.
      */
-    private static void setAttackersLeft(final CardList cardList) {
+    private static void setAttackersLeft(final List<Card> cardList) {
         ComputerUtilBlock.attackersLeft = (cardList);
     }
 
@@ -119,7 +120,7 @@ public class ComputerUtilBlock {
      * 
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getBlockedButUnkilled() {
+    private static List<Card> getBlockedButUnkilled() {
         return ComputerUtilBlock.blockedButUnkilled;
 
     }
@@ -132,7 +133,7 @@ public class ComputerUtilBlock {
      * @param cardList
      *            a {@link forge.CardList} object.
      */
-    private static void setBlockedButUnkilled(final CardList cardList) {
+    private static void setBlockedButUnkilled(final List<Card> cardList) {
         ComputerUtilBlock.blockedButUnkilled = (cardList);
     }
 
@@ -143,7 +144,7 @@ public class ComputerUtilBlock {
      * 
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getBlockersLeft() {
+    private static List<Card> getBlockersLeft() {
         return ComputerUtilBlock.blockersLeft;
     }
 
@@ -155,7 +156,7 @@ public class ComputerUtilBlock {
      * @param cardList
      *            a {@link forge.CardList} object.
      */
-    private static void setBlockersLeft(final CardList cardList) {
+    private static void setBlockersLeft(final List<Card> cardList) {
         ComputerUtilBlock.blockersLeft = (cardList);
     }
 
@@ -196,8 +197,8 @@ public class ComputerUtilBlock {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getPossibleBlockers(final Card attacker, final CardList blockersLeft, final Combat combat) {
-        final CardList blockers = new CardList();
+    private static List<Card> getPossibleBlockers(final Card attacker, final List<Card> blockersLeft, final Combat combat) {
+        final List<Card> blockers = new ArrayList<Card>();
 
         for (final Card blocker : blockersLeft) {
             // if the blocker can block a creature with lure it can't block a
@@ -224,8 +225,8 @@ public class ComputerUtilBlock {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getSafeBlockers(final Card attacker, final CardList blockersLeft, final Combat combat) {
-        final CardList blockers = new CardList();
+    private static List<Card> getSafeBlockers(final Card attacker, final List<Card> blockersLeft, final Combat combat) {
+        final List<Card> blockers = new ArrayList<Card>();
 
         for (final Card b : blockersLeft) {
             if (!CombatUtil.canDestroyBlocker(b, attacker, combat, false)) {
@@ -250,8 +251,8 @@ public class ComputerUtilBlock {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getKillingBlockers(final Card attacker, final CardList blockersLeft, final Combat combat) {
-        final CardList blockers = new CardList();
+    private static List<Card> getKillingBlockers(final Card attacker, final List<Card> blockersLeft, final Combat combat) {
+        final List<Card> blockers = new ArrayList<Card>();
 
         for (final Card b : blockersLeft) {
             if (CombatUtil.canDestroyAttacker(attacker, b, combat, false)) {
@@ -271,19 +272,21 @@ public class ComputerUtilBlock {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList sortPotentialAttackers(final Combat combat) {
-        final CardList[] attackerLists = combat.sortAttackerByDefender();
-        final CardList sortedAttackers = new CardList();
-
+    public static List<Card> sortPotentialAttackers(final Combat combat) {
+        final List<List<Card>> attackerLists = combat.sortAttackerByDefender();
+        final List<Card> sortedAttackers = new ArrayList<Card>();
+        final List<Card> firstAttacker = attackerLists.get(0);
+        
         final List<GameEntity> defenders = combat.getDefenders();
 
+        
         // Begin with the attackers that pose the biggest threat
-        CardListUtil.sortByEvaluateCreature(attackerLists[0]);
-        CardListUtil.sortAttack(attackerLists[0]);
+        CardListUtil.sortByEvaluateCreature(firstAttacker);
+        CardListUtil.sortAttack(firstAttacker);
 
         // If I don't have any planeswalkers than sorting doesn't really matter
         if (defenders.size() == 1) {
-            return attackerLists[0];
+            return firstAttacker;
         }
 
         final boolean bLifeInDanger = CombatUtil.lifeInDanger(combat);
@@ -293,23 +296,23 @@ public class ComputerUtilBlock {
         // defend planeswalkers with more loyalty before planeswalkers with less
         // loyalty
         // if planeswalker will be too difficult to defend don't even bother
-        for (int i = 1; i < attackerLists.length; i++) {
+        for (List<Card> attacker : attackerLists) {
             // Begin with the attackers that pose the biggest threat
-            CardListUtil.sortAttack(attackerLists[i]);
-            for (final Card c : attackerLists[i]) {
+            CardListUtil.sortAttack(attacker);
+            for (final Card c : attacker) {
                 sortedAttackers.add(c);
             }
         }
 
         if (bLifeInDanger) {
             // add creatures attacking the Player to the front of the list
-            for (final Card c : attackerLists[0]) {
+            for (final Card c : firstAttacker) {
                 sortedAttackers.add(0, c);
             }
 
         } else {
             // add creatures attacking the Player to the back of the list
-            for (final Card c : attackerLists[0]) {
+            for (final Card c : firstAttacker) {
                 sortedAttackers.add(c);
             }
         }
@@ -332,7 +335,7 @@ public class ComputerUtilBlock {
      */
     private static Combat makeGoodBlocks(final Combat combat) {
 
-        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft());
+        List<Card> currentAttackers = new ArrayList<Card>(ComputerUtilBlock.getAttackersLeft());
 
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
 
@@ -342,11 +345,11 @@ public class ComputerUtilBlock {
 
             Card blocker = null;
 
-            final CardList blockers = ComputerUtilBlock.getPossibleBlockers(attacker,
+            final List<Card> blockers = ComputerUtilBlock.getPossibleBlockers(attacker,
                     ComputerUtilBlock.getBlockersLeft(), combat);
 
-            final CardList safeBlockers = ComputerUtilBlock.getSafeBlockers(attacker, blockers, combat);
-            CardList killingBlockers;
+            final List<Card> safeBlockers = ComputerUtilBlock.getSafeBlockers(attacker, blockers, combat);
+            List<Card> killingBlockers;
 
             if (safeBlockers.size() > 0) {
                 // 1.Blockers that can destroy the attacker but won't get
@@ -384,7 +387,7 @@ public class ComputerUtilBlock {
                 combat.addBlocker(attacker, blocker);
             }
         }
-        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers));
+        ComputerUtilBlock.setAttackersLeft(new ArrayList<Card>(currentAttackers));
         return combat;
     }
 
@@ -401,15 +404,15 @@ public class ComputerUtilBlock {
     final static Predicate<Card> rampagesOrNeedsManyToBlock = Predicates.or( CardPredicates.containsKeyword("Rampage"), CardPredicates.containsKeyword("CARDNAME can't be blocked by more than one creature."));
 
     private static Combat makeGangBlocks(final Combat combat) {
-        CardList currentAttackers = CardListUtil.filter(ComputerUtilBlock.getAttackersLeft(), Predicates.not(rampagesOrNeedsManyToBlock));
-        CardList blockers;
+        List<Card> currentAttackers = CardListUtil.filter(ComputerUtilBlock.getAttackersLeft(), Predicates.not(rampagesOrNeedsManyToBlock));
+        List<Card> blockers;
 
         // Try to block an attacker without first strike with a gang of first strikers
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
             if (!attacker.hasKeyword("First Strike") && !attacker.hasKeyword("Double Strike")) {
                 blockers = ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat);
-                final CardList firstStrikeBlockers = new CardList();
-                final CardList blockGang = new CardList();
+                final List<Card> firstStrikeBlockers = new ArrayList<Card>();
+                final List<Card> blockGang = new ArrayList<Card>();
                 for (int i = 0; i < blockers.size(); i++) {
                     if (blockers.get(i).hasFirstStrike() || blockers.get(i).hasDoubleStrike()) {
                         firstStrikeBlockers.add(blockers.get(i));
@@ -441,14 +444,14 @@ public class ComputerUtilBlock {
             }
         }
 
-        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers));
-        currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft());
+        ComputerUtilBlock.setAttackersLeft(new ArrayList<Card>(currentAttackers));
+        currentAttackers = new ArrayList<Card>(ComputerUtilBlock.getAttackersLeft());
 
         // Try to block an attacker with two blockers of which only one will die
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
             blockers = ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat);
-            CardList usableBlockers;
-            final CardList blockGang = new CardList();
+            List<Card> usableBlockers;
+            final List<Card> blockGang = new ArrayList<Card>();
             int absorbedDamage = 0; // The amount of damage needed to kill the
                                     // first blocker
             int currentValue = 0; // The value of the creatures in the blockgang
@@ -509,7 +512,7 @@ public class ComputerUtilBlock {
             }
         }
 
-        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers));
+        ComputerUtilBlock.setAttackersLeft(new ArrayList<Card>(currentAttackers));
         return combat;
     }
 
@@ -525,8 +528,8 @@ public class ComputerUtilBlock {
      */
     private static Combat makeTradeBlocks(final Combat combat) {
 
-        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft());
-        CardList killingBlockers;
+        List<Card> currentAttackers = new ArrayList<Card>(ComputerUtilBlock.getAttackersLeft());
+        List<Card> killingBlockers;
 
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
 
@@ -543,7 +546,7 @@ public class ComputerUtilBlock {
                 currentAttackers.remove(attacker);
             }
         }
-        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers));
+        ComputerUtilBlock.setAttackersLeft(new ArrayList<Card>(currentAttackers));
         return combat;
     }
 
@@ -559,8 +562,8 @@ public class ComputerUtilBlock {
      */
     private static Combat makeChumpBlocks(final Combat combat) {
 
-        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft());
-        CardList chumpBlockers;
+        List<Card> currentAttackers = new ArrayList<Card>(ComputerUtilBlock.getAttackersLeft());
+        List<Card> chumpBlockers;
 
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
 
@@ -578,7 +581,7 @@ public class ComputerUtilBlock {
                 ComputerUtilBlock.getBlockedButUnkilled().add(attacker);
             }
         }
-        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers));
+        ComputerUtilBlock.setAttackersLeft(new ArrayList<Card>(currentAttackers));
         return combat;
     }
 
@@ -595,9 +598,9 @@ public class ComputerUtilBlock {
      */
     private static Combat reinforceBlockersAgainstTrample(final Combat combat) {
 
-        CardList chumpBlockers;
+        List<Card> chumpBlockers;
 
-        CardList tramplingAttackers = CardListUtil.getKeyword(ComputerUtilBlock.getAttackers(), "Trample");
+        List<Card> tramplingAttackers = CardListUtil.getKeyword(ComputerUtilBlock.getAttackers(), "Trample");
         tramplingAttackers = CardListUtil.filter(tramplingAttackers, Predicates.not(rampagesOrNeedsManyToBlock));
         
         // TODO - should check here for a "rampage-like" trigger that replaced
@@ -642,10 +645,10 @@ public class ComputerUtilBlock {
      */
     private static Combat reinforceBlockersToKill(final Combat combat) {
 
-        CardList safeBlockers;
-        CardList blockers;
+        List<Card> safeBlockers;
+        List<Card> blockers;
         
-        CardList targetAttackers = CardListUtil.filter(ComputerUtilBlock.getBlockedButUnkilled(), Predicates.not(rampagesOrNeedsManyToBlock));
+        List<Card> targetAttackers = CardListUtil.filter(ComputerUtilBlock.getBlockedButUnkilled(), Predicates.not(rampagesOrNeedsManyToBlock));
         
         // TODO - should check here for a "rampage-like" trigger that replaced
         // the keyword:
@@ -678,7 +681,7 @@ public class ComputerUtilBlock {
                 safeBlockers = CardListUtil.getKeyword(blockers, "First Strike");
                 safeBlockers.addAll(CardListUtil.getKeyword(blockers, "Double Strike"));
             } else {
-                safeBlockers = new CardList(blockers);
+                safeBlockers = new ArrayList<Card>(blockers);
             }
 
             for (final Card blocker : safeBlockers) {
@@ -712,25 +715,25 @@ public class ComputerUtilBlock {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.game.phase.Combat} object.
      */
-    private static Combat resetBlockers(final Combat combat, final CardList possibleBlockers) {
+    private static Combat resetBlockers(final Combat combat, final List<Card> possibleBlockers) {
 
-        final CardList oldBlockers = combat.getAllBlockers();
+        final List<Card> oldBlockers = combat.getAllBlockers();
         for (final Card blocker : oldBlockers) {
             combat.removeFromCombat(blocker);
         }
 
-        ComputerUtilBlock.setAttackersLeft(new CardList(ComputerUtilBlock.getAttackers())); // keeps
+        ComputerUtilBlock.setAttackersLeft(new ArrayList<Card>(ComputerUtilBlock.getAttackers())); // keeps
                                                                                                       // track
         // of all
         // currently
         // unblocked
         // attackers
-        ComputerUtilBlock.setBlockersLeft(new CardList(possibleBlockers)); // keeps
+        ComputerUtilBlock.setBlockersLeft(new ArrayList<Card>(possibleBlockers)); // keeps
         // track of
         // all
         // unassigned
         // blockers
-        ComputerUtilBlock.setBlockedButUnkilled(new CardList()); // keeps track
+        ComputerUtilBlock.setBlockedButUnkilled(new ArrayList<Card>()); // keeps track
                                                                  // of all
                                                                  // blocked
         // attackers that currently
@@ -751,7 +754,7 @@ public class ComputerUtilBlock {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.game.phase.Combat} object.
      */
-    public static Combat getBlockers(final Combat originalCombat, final CardList possibleBlockers) {
+    public static Combat getBlockers(final Combat originalCombat, final List<Card> possibleBlockers) {
 
         Combat combat = originalCombat;
 
@@ -762,13 +765,13 @@ public class ComputerUtilBlock {
         }
 
         // keeps track of all currently unblocked attackers
-        ComputerUtilBlock.setAttackersLeft(new CardList(ComputerUtilBlock.getAttackers())); 
+        ComputerUtilBlock.setAttackersLeft(new ArrayList<Card>(ComputerUtilBlock.getAttackers())); 
         // keeps track of all unassigned blockers
-        ComputerUtilBlock.setBlockersLeft(new CardList(possibleBlockers)); 
+        ComputerUtilBlock.setBlockersLeft(new ArrayList<Card>(possibleBlockers)); 
         // keeps track of all blocked attackers that currently wouldn't be destroyed
-        ComputerUtilBlock.setBlockedButUnkilled(new CardList());
-        CardList blockers;
-        CardList chumpBlockers;
+        ComputerUtilBlock.setBlockedButUnkilled(new ArrayList<Card>());
+        List<Card> blockers;
+        List<Card> chumpBlockers;
 
         ComputerUtilBlock.setDiff((AllZone.getComputerPlayer().getLife() * 2) - 5); // This
                                                                                     // is
@@ -909,7 +912,7 @@ public class ComputerUtilBlock {
         return combat;
     }
     
-    public static CardList orderBlockers(Card attacker, CardList blockers) {
+    public static List<Card> orderBlockers(Card attacker, List<Card> blockers) {
         // very very simple ordering of blockers, sort by evaluate, then sort by attack
         //final int damage = attacker.getNetCombatDamage();
         CardListUtil.sortByEvaluateCreature(blockers);
@@ -921,7 +924,7 @@ public class ComputerUtilBlock {
         return blockers;
     }
     
-    public static CardList orderAttackers(Card attacker, CardList blockers) {
+    public static List<Card> orderAttackers(Card attacker, List<Card> blockers) {
         // This shouldn't really take trample into account, but otherwise should be pretty similar to orderBlockers
         // very very simple ordering of attackers, sort by evaluate, then sort by attack
         //final int damage = attacker.getNetCombatDamage();

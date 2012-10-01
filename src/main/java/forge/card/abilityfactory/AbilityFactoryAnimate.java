@@ -28,7 +28,7 @@ import com.google.common.collect.Iterables;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardUtil;
@@ -1282,7 +1282,7 @@ public final class AbilityFactoryAnimate {
             valid = params.get("ValidCards");
         }
 
-        CardList list;
+        List<Card> list;
         ArrayList<Player> tgtPlayers = null;
 
         final Target tgt = sa.getTarget();

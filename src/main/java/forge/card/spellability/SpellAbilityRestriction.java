@@ -19,10 +19,12 @@ package forge.card.spellability;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -353,7 +355,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
         if (this.getIsPresent() != null) {
-            CardList list = AllZoneUtil.getCardsIn(this.getPresentZone());
+            List<Card> list = AllZoneUtil.getCardsIn(this.getPresentZone());
 
             list = CardListUtil.getValidCards(list, this.getIsPresent().split(","), activator, c);
 

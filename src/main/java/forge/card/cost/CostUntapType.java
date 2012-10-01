@@ -17,9 +17,11 @@
  */
 package forge.card.cost;
 
+import java.util.List;
+
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.AbilityFactory;
@@ -118,7 +120,7 @@ public class CostUntapType extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        CardList typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
 
@@ -158,7 +160,7 @@ public class CostUntapType extends CostPartWithList {
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final boolean untap = payment.getCost().getUntap();
-        CardList typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = CardListUtil.filter(typeList, Presets.TAPPED);
         if (untap) {
@@ -195,7 +197,7 @@ public class CostUntapType extends CostPartWithList {
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
-                CardList typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                List<Card> typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
                 typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
                 if (untap) {
                     typeList.remove(source);
@@ -237,7 +239,7 @@ public class CostUntapType extends CostPartWithList {
      *            a int.
      * @return a {@link forge.control.input.Input} object.
      */
-    public static Input inputUntapYCost(final CostUntapType untapType, final CardList cardList, final SpellAbility sa,
+    public static Input inputUntapYCost(final CostUntapType untapType, final List<Card> cardList, final SpellAbility sa,
             final CostPayment payment, final int nCards) {
         final Input target = new Input() {
 
@@ -268,7 +270,7 @@ public class CostUntapType extends CostPartWithList {
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (zone.is(ZoneType.Battlefield) && cardList.contains(card) && card.isTapped()) {
-                    // send in CardList for Typing
+                    // send in List<Card> for Typing
                     card.untap();
                     untapType.addToList(card);
                     cardList.remove(card);

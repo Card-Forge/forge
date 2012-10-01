@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -75,7 +76,7 @@ public class GameAction {
      * </p>
      */
     public final void resetActivationsPerTurn() {
-        final CardList all = AllZoneUtil.getCardsInGame();
+        final List<Card> all = AllZoneUtil.getCardsInGame();
 
         // Reset Activations per Turn
         for (final Card card : all) {
@@ -246,7 +247,7 @@ public class GameAction {
             }
             // Handle unequipping creatures
             if (copied.isEquipped()) {
-                final CardList equipments = new CardList(copied.getEquippedBy());
+                final List<Card> equipments = new ArrayList<Card>(copied.getEquippedBy());
                 for (final Card equipment : equipments) {
                     if (AllZoneUtil.isCardInPlay(equipment)) {
                         equipment.unEquipCard(copied);
@@ -255,7 +256,7 @@ public class GameAction {
             }
             // Handle unequipping creatures
             if (copied.isEquipped()) {
-                final CardList equipments = new CardList(copied.getEquippedBy());
+                final List<Card> equipments = new ArrayList<Card>(copied.getEquippedBy());
                 for (final Card equipment : equipments) {
                     if (AllZoneUtil.isCardInPlay(equipment)) {
                         equipment.unEquipCard(copied);
@@ -271,7 +272,7 @@ public class GameAction {
             }
             // remove enchantments from creatures
             if (copied.isEnchanted()) {
-                final CardList auras = new CardList(copied.getEnchantedBy());
+                final List<Card> auras = new ArrayList<Card>(copied.getEnchantedBy());
                 for (final Card aura : auras) {
                     aura.unEnchantEntity(copied);
                 }
@@ -455,8 +456,8 @@ public class GameAction {
         final Player owner = c.getOwner();
         final PlayerZone grave = owner.getZone(ZoneType.Graveyard);
         final PlayerZone exile = owner.getZone(ZoneType.Exile);
-        final CardList ownerBoard = owner.getCardsIn(ZoneType.Battlefield);
-        final CardList opponentsBoard = owner.getOpponent().getCardsIn(ZoneType.Battlefield);
+        final List<Card> ownerBoard = owner.getCardsIn(ZoneType.Battlefield);
+        final List<Card> opponentsBoard = owner.getOpponent().getCardsIn(ZoneType.Battlefield);
 
         if (c.getName().equals("Nissa's Chosen") && origZone.is(ZoneType.Battlefield)) {
             return this.moveToLibrary(c, -1);
@@ -949,7 +950,7 @@ public class GameAction {
         AllZone.getStaticEffects().clearStaticEffects();
 
         // search for cards with static abilities
-        final CardList allCards = AllZoneUtil.getCardsInGame();
+        final List<Card> allCards = AllZoneUtil.getCardsInGame();
         final ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
         for (final Card card : allCards) {
             for (StaticAbility sa : card.getStaticAbilities()) {
@@ -1036,7 +1037,7 @@ public class GameAction {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             AllZone.getTriggerHandler().runTrigger(TriggerType.Always, runParams);
 
-            final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             Card c;
 
             final Iterator<Card> it = list.iterator();
@@ -1045,7 +1046,7 @@ public class GameAction {
                 c = it.next();
 
                 if (c.isEquipped()) {
-                    final CardList equipments = new CardList(c.getEquippedBy());
+                    final List<Card> equipments = new ArrayList<Card>(c.getEquippedBy());
                     for (final Card equipment : equipments) {
                         if (!AllZoneUtil.isCardInPlay(equipment)) {
                             equipment.unEquipCard(c);
@@ -1169,13 +1170,13 @@ public class GameAction {
         } // for q=0;q<2
         /*
         //Experiment Kraj experiment
-        CardList krajs = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(new Predicate<Card>() {
+        List<Card> krajs = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(new Predicate<Card>() {
             @Override
             public boolean addCard(Card c) {
                 return c.getName().equals("Experiment Kraj");
             }
         });
-        CardList P1P1s = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(new Predicate<Card>() {
+        List<Card> P1P1s = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(new Predicate<Card>() {
             @Override
             public boolean addCard(Card c) {
                 return c.getCounters(Counters.P1P1) > 0;
@@ -1217,7 +1218,7 @@ public class GameAction {
      */
     private void destroyPlaneswalkers() {
         // get all Planeswalkers
-        final CardList list = CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
+        final List<Card> list = CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
 
         Card c;
         for (int i = 0; i < list.size(); i++) {
@@ -1233,7 +1234,7 @@ public class GameAction {
                     continue;
                 }
 
-                final CardList cl = CardListUtil.getType(list, type);
+                final List<Card> cl = CardListUtil.getType(list, type);
 
                 if (cl.size() > 1) {
                     for (final Card crd : cl) {
@@ -1250,13 +1251,13 @@ public class GameAction {
      * </p>
      */
     private void destroyLegendaryCreatures() {
-        final CardList a = CardListUtil.getType(AllZoneUtil.getCardsIn(ZoneType.Battlefield), "Legendary");
+        final List<Card> a = CardListUtil.getType(AllZoneUtil.getCardsIn(ZoneType.Battlefield), "Legendary");
         if (a.isEmpty() || AllZoneUtil.isCardInPlay("Mirror Gallery")) {
             return;
         }
 
         while (!a.isEmpty()) {
-            CardList b = AllZoneUtil.getCardsIn(ZoneType.Battlefield, a.get(0).getName());
+            List<Card> b = AllZoneUtil.getCardsIn(ZoneType.Battlefield, a.get(0).getName());
             b = CardListUtil.getType(b, "Legendary");
             b = CardListUtil.filter(b, new Predicate<Card>() {
                 @Override
@@ -1319,7 +1320,7 @@ public class GameAction {
         }
 
         if (c.isEnchanted()) {
-            CardList list = new CardList(c.getEnchantedBy());
+            List<Card> list = new ArrayList<Card>(c.getEnchantedBy());
             list = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
@@ -1502,7 +1503,7 @@ public class GameAction {
         }
 
         if (c.isEnchanted()) {
-            CardList list = new CardList(c.getEnchantedBy());
+            List<Card> list = new ArrayList<Card>(c.getEnchantedBy());
             list = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
@@ -1710,8 +1711,8 @@ public class GameAction {
                     
                     final Integer chosenAmount = (Integer) GuiChoose.one("Exile how many cards?", cntChoice);
                     System.out.println("Delve for " + chosenAmount);
-                    final CardList choices = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
-                    final CardList chosen = new CardList();
+                    final List<Card> choices = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
+                    final List<Card> chosen = new ArrayList<Card>();
                     for (int i = 0; i < chosenAmount; i++) {
                         final Card nowChosen = GuiChoose.oneOrNone("Exile which card?", choices);
 
@@ -1743,7 +1744,7 @@ public class GameAction {
                     }
 
                     for (int i = 0; i < numToExile; i++) {
-                        final CardList grave = new CardList(AllZone.getComputerPlayer().getZone(ZoneType.Graveyard)
+                        final List<Card> grave = new ArrayList<Card>(AllZone.getComputerPlayer().getZone(ZoneType.Graveyard)
                                 .getCards());
                         Card chosen = null;
                         for (final Card c : grave) { // Exile noncreatures first
@@ -1772,7 +1773,7 @@ public class GameAction {
                     manaCost.decreaseColorlessMana(numToExile);
                 }
             } else if (spell.getSourceCard().hasKeyword("Convoke")) {
-                CardList untappedCreats = CardListUtil.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                List<Card> untappedCreats = CardListUtil.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
                 untappedCreats = CardListUtil.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
 
                 if (untappedCreats.size() != 0) {
@@ -1859,7 +1860,7 @@ public class GameAction {
             }
         } // isSpell
 
-        CardList cardsOnBattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> cardsOnBattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         cardsOnBattlefield.add(originalCard);
         final ArrayList<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
         final ArrayList<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();

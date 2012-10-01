@@ -26,7 +26,7 @@ import javax.swing.ImageIcon;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.Constant;
 import forge.Singletons;
 import forge.game.GameType;
@@ -152,7 +152,7 @@ public enum CMatchUI implements CardContainer {
      * @param blockers &emsp; {@link forge.CardList}
      * @param damage &emsp; int
      */
-    public void assignDamage(final Card attacker, final CardList blockers, final int damage) {
+    public void assignDamage(final Card attacker, final List<Card> blockers, final int damage) {
         if (damage <= 0) {
             return;
         }

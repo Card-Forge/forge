@@ -19,6 +19,7 @@ package forge.card.cardfactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
@@ -27,7 +28,7 @@ import com.google.common.collect.Iterables;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
@@ -84,7 +85,7 @@ class CardFactoryAuras {
                     }
                     final String[] landTypes = new String[] { "Plains", "Island", "Swamp", "Mountain", "Forest" };
                     final HashMap<String, Integer> humanLandCount = new HashMap<String, Integer>();
-                    final CardList humanlands = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
+                    final List<Card> humanlands = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
 
                     for (final String landType : landTypes) {
                         humanLandCount.put(landType, 0);
@@ -112,7 +113,7 @@ class CardFactoryAuras {
                     }
 
                     newType[0] = landTypes[minAt];
-                    CardList list = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
+                    List<Card> list = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
                     list = CardListUtil.getNotType(list, newType[0]); // Don't enchant lands
                                                         // that already have the
                                                         // type
@@ -247,7 +248,7 @@ class CardFactoryAuras {
 
                 @Override
                 public void showMessage() {
-                    final CardList land = AllZoneUtil.getLandsInPlay();
+                    final List<Card> land = AllZoneUtil.getLandsInPlay();
                     this.stopSetNext(CardFactoryUtil
                             .inputTargetSpecific(spell, land, "Select target land", true, false));
                 }
@@ -265,7 +266,7 @@ class CardFactoryAuras {
 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                    List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                     list = CardListUtil.getKeyword(list, "Flying");
                     if (list.isEmpty()) {
                         return false;
@@ -369,13 +370,13 @@ class CardFactoryAuras {
                 @Override
                 public boolean canPlayAI() {
 
-                    final CardList stuffy = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Stuffy Doll");
+                    final List<Card> stuffy = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Stuffy Doll");
 
                     if (stuffy.size() > 0) {
                         this.setTargetCard(stuffy.get(0));
                         return true;
                     } else {
-                        final CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                        final List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
 
                         if (list.isEmpty()) {
                             return false;
@@ -420,7 +421,7 @@ class CardFactoryAuras {
             final SpellPermanent animate = new SpellPermanent(card) {
                 private static final long serialVersionUID = 7126615291288065344L;
 
-                public CardList getCreturesInGrave() {
+                public List<Card> getCreturesInGrave() {
                     // This includes creatures Animate Dead can't enchant once
                     // in play.
                     // The human may try to Animate them, the AI will not.
@@ -434,7 +435,7 @@ class CardFactoryAuras {
 
                 @Override
                 public boolean canPlayAI() {
-                    CardList cList = this.getCreturesInGrave();
+                    List<Card> cList = this.getCreturesInGrave();
                     // AI will only target something that will stick in play.
                     cList = CardListUtil.getTargetableCards(cList, this);
                     if (cList.size() == 0) {

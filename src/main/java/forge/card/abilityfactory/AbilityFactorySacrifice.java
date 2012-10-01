@@ -19,12 +19,13 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Singletons;
@@ -285,7 +286,7 @@ public class AbilityFactorySacrifice {
             num = (num == null) ? "1" : num;
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 
-            CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+            List<Card> list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
             list = CardListUtil.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             if (list.size() == 0) {
@@ -425,11 +426,11 @@ public class AbilityFactorySacrifice {
                 amount = Math.min(ComputerUtil.determineLeftoverMana(sa), amount);
             }
 
-            CardList humanList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+            List<Card> humanList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
             humanList = CardListUtil.getValidCards(humanList, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-            CardList computerList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            List<Card> computerList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             if (defined.equals("Opponent")) {
-                computerList = new CardList();
+                computerList = new ArrayList<Card>();
             }
             computerList = CardListUtil.getValidCards(computerList, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -492,7 +493,7 @@ public class AbilityFactorySacrifice {
             }
         }
         else {
-            CardList sacList = null;
+            List<Card> sacList = null;
             for (final Player p : tgts) {
                 if (params.containsKey("Random")) {
                     sacList = AbilityFactorySacrifice.sacrificeRandom(p, amount, valid, sa, destroy);
@@ -529,10 +530,10 @@ public class AbilityFactorySacrifice {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static CardList sacrificeAI(final Player p, final int amount, final String valid, final SpellAbility sa,
+    private static List<Card> sacrificeAI(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy) {
-        CardList battlefield = p.getCardsIn(ZoneType.Battlefield);
-        CardList sacList = AbilityFactory.filterListByType(battlefield, valid, sa);
+        List<Card> battlefield = p.getCardsIn(ZoneType.Battlefield);
+        List<Card> sacList = AbilityFactory.filterListByType(battlefield, valid, sa);
         sacList = ComputerUtil.sacrificePermanents(amount, sacList, destroy, sa);
 
         return sacList;
@@ -554,11 +555,11 @@ public class AbilityFactorySacrifice {
      * @param message
      *            a {@link java.lang.String} object.
      */
-    public static CardList sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
+    public static List<Card> sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy, final boolean optional) {
-        CardList battlefield = p.getCardsIn(ZoneType.Battlefield);
-        CardList list = AbilityFactory.filterListByType(battlefield, valid, sa);
-        CardList sacList = new CardList();
+        List<Card> battlefield = p.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = AbilityFactory.filterListByType(battlefield, valid, sa);
+        List<Card> sacList = new ArrayList<Card>();
 
         for (int i = 0; i < amount; i++) {
             if (list.isEmpty()) {
@@ -606,12 +607,12 @@ public class AbilityFactorySacrifice {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static CardList sacrificeRandom(final Player p, final int amount, final String valid, final SpellAbility sa,
+    private static List<Card> sacrificeRandom(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy) {
-        CardList sacList = new CardList();
+        List<Card> sacList = new ArrayList<Card>();
         for (int i = 0; i < amount; i++) {
-            CardList battlefield = p.getCardsIn(ZoneType.Battlefield);
-            CardList list = AbilityFactory.filterListByType(battlefield, valid, sa);
+            List<Card> battlefield = p.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = AbilityFactory.filterListByType(battlefield, valid, sa);
             if (list.size() != 0) {
                 final Card sac = CardUtil.getRandom(list);
                 if (destroy) {
@@ -847,8 +848,8 @@ public class AbilityFactorySacrifice {
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        CardList humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        CardList computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
         humanlist = CardListUtil.getValidCards(humanlist, valid.split(","), source.getController(), source);
         computerlist = CardListUtil.getValidCards(computerlist, valid.split(","), source.getController(), source);
@@ -920,9 +921,9 @@ public class AbilityFactorySacrifice {
             valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
         }
 
-        CardList list;
+        List<Card> list;
         if (params.containsKey("Defined")) {
-            list = new CardList(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
+            list = new ArrayList<Card>(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
         } else {
             list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         }

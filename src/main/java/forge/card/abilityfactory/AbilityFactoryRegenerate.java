@@ -20,11 +20,12 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.Command;
@@ -314,7 +315,7 @@ public class AbilityFactoryRegenerate {
         } else {
             tgt.resetTargets();
             // filter AIs battlefield by what I can target
-            CardList targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            List<Card> targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             targetables = CardListUtil.getValidCards(targetables, tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
 
             if (targetables.size() == 0) {
@@ -326,7 +327,7 @@ public class AbilityFactoryRegenerate {
                 // control
                 final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
 
-                final CardList threatenedTargets = new CardList();
+                final List<Card> threatenedTargets = new ArrayList<Card>();
 
                 for (final Card c : targetables) {
                     if (objects.contains(c) && (c.getShield() == 0)) {
@@ -341,7 +342,7 @@ public class AbilityFactoryRegenerate {
                 }
             } else {
                 if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                    final CardList combatants = CardListUtil.filter(targetables, CardPredicates.Presets.CREATURES);
+                    final List<Card> combatants = CardListUtil.filter(targetables, CardPredicates.Presets.CREATURES);
                     CardListUtil.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
@@ -417,9 +418,9 @@ public class AbilityFactoryRegenerate {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        CardList targetables = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> targetables = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         targetables = CardListUtil.getValidCards(targetables, tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
-        final CardList compTargetables = CardListUtil.filterControlledBy(targetables, AllZone.getComputerPlayer());
+        final List<Card> compTargetables = CardListUtil.filterControlledBy(targetables, AllZone.getComputerPlayer());
 
         if (targetables.size() == 0) {
             return false;
@@ -430,7 +431,7 @@ public class AbilityFactoryRegenerate {
         }
 
         if (compTargetables.size() > 0) {
-            final CardList combatants = CardListUtil.filter(compTargetables, CardPredicates.Presets.CREATURES);
+            final List<Card> combatants = CardListUtil.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardListUtil.sortByEvaluateCreature(combatants);
             if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
@@ -726,7 +727,7 @@ public class AbilityFactoryRegenerate {
             valid = params.get("ValidCards");
         }
 
-        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         list = CardListUtil.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         if (list.size() == 0) {
@@ -740,7 +741,7 @@ public class AbilityFactoryRegenerate {
         } else {
 
             if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                final CardList combatants = CardListUtil.filter(list, CardPredicates.Presets.CREATURES);
+                final List<Card> combatants = CardListUtil.filter(list, CardPredicates.Presets.CREATURES);
 
                 for (final Card c : combatants) {
                     if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {
@@ -810,7 +811,7 @@ public class AbilityFactoryRegenerate {
             valid = params.get("ValidCards");
         }
 
-        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         list = CardListUtil.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card c : list) {

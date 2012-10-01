@@ -20,12 +20,13 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -470,7 +471,7 @@ public class AbilityFactorySetState {
             valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
         }
 
-        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         if (targetPlayer != null) {
             list = CardListUtil.filterControlledBy(list, targetPlayer);

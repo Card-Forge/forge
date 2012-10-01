@@ -21,13 +21,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.Command;
@@ -306,7 +307,7 @@ public final class AbilityFactoryCopy {
         final Target abTgt = sa.getTarget();
 
         if (abTgt != null) {
-            CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             list = CardListUtil.getTargetableCards(list, sa);
             abTgt.resetTargets();

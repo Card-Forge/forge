@@ -18,10 +18,11 @@
 package forge.card.cost;
 
 import java.util.Iterator;
+import java.util.List;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -138,7 +139,7 @@ public class CostMill extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
-        final CardList list = activator.getCardsIn(ZoneType.Library, c);
+        final List<Card> list = activator.getCardsIn(ZoneType.Library, c);
 
         if ((list == null) || (list.size() > c)) {
             // I don't believe this is possible

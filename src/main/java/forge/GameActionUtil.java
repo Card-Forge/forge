@@ -104,12 +104,12 @@ public final class GameActionUtil {
             public void execute() {
 
                 if (!c.isCopiedSpell()) {
-                    final CardList humanNexus = AllZone.getHumanPlayer()
+                    final List<Card> humanNexus = AllZone.getHumanPlayer()
                             .getCardsIn(ZoneType.Battlefield, "Maelstrom Nexus");
-                    final CardList computerNexus = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield,
+                    final List<Card> computerNexus = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield,
                             "Maelstrom Nexus");
 
-                    final CardList maelstromNexii = new CardList();
+                    final List<Card> maelstromNexii = new ArrayList<Card>();
                     maelstromNexii.addAll(humanNexus);
                     maelstromNexii.addAll(computerNexus);
 
@@ -133,8 +133,8 @@ public final class GameActionUtil {
                 final Ability ability = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        final CardList topOfLibrary = controller.getCardsIn(ZoneType.Library);
-                        final CardList revealed = new CardList();
+                        final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
+                        final List<Card> revealed = new ArrayList<Card>();
 
                         if (topOfLibrary.size() == 0) {
                             return;
@@ -229,9 +229,9 @@ public final class GameActionUtil {
             @Override
             public void execute() {
 
-                final CardList humanThrummingStone = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield,
+                final List<Card> humanThrummingStone = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield,
                         "Thrumming Stone");
-                final CardList computerThrummingStone = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield,
+                final List<Card> computerThrummingStone = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield,
                         "Thrumming Stone");
 
                 for (int i = 0; i < humanThrummingStone.size(); i++) {
@@ -264,8 +264,8 @@ public final class GameActionUtil {
                     final Ability ability = new Ability(c, "0") {
                         @Override
                         public void resolve() {
-                            final CardList topOfLibrary = controller.getCardsIn(ZoneType.Library);
-                            final CardList revealed = new CardList();
+                            final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
+                            final List<Card> revealed = new ArrayList<Card>();
                             int rippleNumber = rippleCount;
                             if (topOfLibrary.size() == 0) {
                                 return;
@@ -856,14 +856,14 @@ public final class GameActionUtil {
             return;
         }
 
-        final CardList playerLiches = player.getCardsIn(ZoneType.Battlefield, "Lich");
+        final List<Card> playerLiches = player.getCardsIn(ZoneType.Battlefield, "Lich");
 
         for (final Card lich : playerLiches) {
             final SpellAbility ability = new Ability(lich, "0") {
                 @Override
                 public void resolve() {
                     for (int i = 0; i < damage; i++) {
-                        CardList nonTokens = player.getCardsIn(ZoneType.Battlefield);
+                        List<Card> nonTokens = player.getCardsIn(ZoneType.Battlefield);
                         nonTokens = CardListUtil.filter(nonTokens, Presets.NON_TOKEN);
                         if (nonTokens.size() == 0) {
                             player.loseConditionMet(GameLossReason.SpellEffect, lich.getName());
@@ -916,7 +916,7 @@ public final class GameActionUtil {
         }
 
         if (c.isCreature() && AllZoneUtil.isCardInPlay("Contested War Zone", player)) {
-            final CardList zones = player.getCardsIn(ZoneType.Battlefield, "Contested War Zone");
+            final List<Card> zones = player.getCardsIn(ZoneType.Battlefield, "Contested War Zone");
             for (final Card zone : zones) {
                 final Ability ability = new Ability(zone, "0") {
                     @Override
@@ -1069,7 +1069,7 @@ public final class GameActionUtil {
                 @Override
                 public void resolve() {
 
-                    final CardList libList = opponent.getCardsIn(ZoneType.Library);
+                    final List<Card> libList = opponent.getCardsIn(ZoneType.Library);
                     int count = 0;
                     int broken = 0;
                     for (int i = 0; i < libList.size(); i = i + 4) {
@@ -1158,7 +1158,7 @@ public final class GameActionUtil {
             produces.put("Plains", "W");
             produces.put("Swamp", "B");
 
-            CardList lands = AllZoneUtil.getCardsInGame();
+            List<Card> lands = AllZoneUtil.getCardsInGame();
             lands = CardListUtil.filter(lands, Presets.LANDS);
 
             // remove all abilities granted by this Command
@@ -1217,11 +1217,11 @@ public final class GameActionUtil {
     private static Command coatOfArms = new Command() {
         private static final long serialVersionUID = 583505612126735693L;
 
-        private final CardList gloriousAnthemList = new CardList();
+        private final List<Card> gloriousAnthemList = new ArrayList<Card>();
 
         @Override
         public void execute() {
-            final CardList list = this.gloriousAnthemList;
+            final List<Card> list = this.gloriousAnthemList;
             // reset all cards in list - aka "old" cards
             for (int i2 = 0; i2 < list.size(); i2++) {
                 list.get(i2).addSemiPermanentAttackBoost(-1);
@@ -1249,14 +1249,14 @@ public final class GameActionUtil {
     private static Command alphaStatus = new Command() {
         private static final long serialVersionUID = -3213793711304934358L;
 
-        private final CardList previouslyPumped = new CardList();
+        private final List<Card> previouslyPumped = new ArrayList<Card>();
         private final ArrayList<Integer> previouslyPumpedValue = new ArrayList<Integer>();
 
         @Override
         public void execute() {
-            final CardList alphaStatuses = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Alpha Status");
+            final List<Card> alphaStatuses = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Alpha Status");
 
-            final CardList allCreatures = AllZoneUtil.getCreaturesInPlay();
+            final List<Card> allCreatures = AllZoneUtil.getCreaturesInPlay();
 
             for (int i = 0; i < this.previouslyPumped.size(); i++) {
                 this.previouslyPumped.get(i).addSemiPermanentAttackBoost(0 - this.previouslyPumpedValue.get(i));
@@ -1291,10 +1291,10 @@ public final class GameActionUtil {
         @Override
         public void execute() {
             // get all creatures
-            final CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Umbra Stalker");
+            final List<Card> cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Umbra Stalker");
             for (final Card c : cards) {
                 final Player player = c.getController();
-                final CardList grave = player.getCardsIn(ZoneType.Graveyard);
+                final List<Card> grave = player.getCardsIn(ZoneType.Graveyard);
                 final int pt = CardFactoryUtil.getNumberOfManaSymbolsByColor("B", grave);
                 c.setBaseAttack(pt);
                 c.setBaseDefense(pt);
@@ -1308,7 +1308,7 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
             list = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
@@ -1331,7 +1331,7 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Old Man of the Sea");
+            final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Old Man of the Sea");
             for (final Card oldman : list) {
                 if (!oldman.getGainControlTargets().isEmpty()) {
                     if (oldman.getNetAttack() < oldman.getGainControlTargets().get(0).getNetAttack()) {
@@ -1352,7 +1352,7 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Liu Bei, Lord of Shu");
+            final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Liu Bei, Lord of Shu");
 
             if (list.size() > 0) {
                 for (int i = 0; i < list.size(); i++) {
@@ -1371,7 +1371,7 @@ public final class GameActionUtil {
         } // execute()
 
         private boolean getsBonus(final Card c) {
-            CardList list = c.getController().getCardsIn(ZoneType.Battlefield);
+            List<Card> list = c.getController().getCardsIn(ZoneType.Battlefield);
             list = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -1391,7 +1391,7 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             list = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -1409,7 +1409,7 @@ public final class GameActionUtil {
         }
 
         private int countSoundTheCalls() {
-            CardList list = AllZoneUtil.getCardsIn(ZoneType.Graveyard, "Sound the Call");
+            List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Graveyard, "Sound the Call");
             return list.size();
         }
 
@@ -1422,7 +1422,7 @@ public final class GameActionUtil {
         @Override
         public void execute() {
             // get all creatures
-            final CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Tarmogoyf");
+            final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Tarmogoyf");
 
             for (int i = 0; i < list.size(); i++) {
                 final Card c = list.get(i);
@@ -1433,7 +1433,7 @@ public final class GameActionUtil {
         } // execute()
 
         private int countDiffTypes() {
-            final CardList list = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
+            final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
 
             int count = 0;
             for (int q = 0; q < list.size(); q++) {
@@ -1521,7 +1521,7 @@ public final class GameActionUtil {
      */
     public static void doPowerSink(final Player p) {
         // get all lands with mana abilities
-        CardList lands = AllZoneUtil.getPlayerLandsInPlay(p);
+        List<Card> lands = AllZoneUtil.getPlayerLandsInPlay(p);
         lands = CardListUtil.filter(lands, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

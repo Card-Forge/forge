@@ -31,7 +31,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.Command;
@@ -160,7 +160,7 @@ public class CombatUtil {
             return false;
         }
 
-        final CardList list = AllZoneUtil.getCreaturesInPlay(blocker.getController());
+        final List<Card> list = AllZoneUtil.getCreaturesInPlay(blocker.getController());
         if (list.size() < 2 && blocker.hasKeyword("CARDNAME can't attack or block alone.")) {
             return false;
         }
@@ -168,7 +168,7 @@ public class CombatUtil {
         return true;
     }
     
-    public static boolean canBlockMoreCreatures(final Card blocker, final CardList blockedBy) {
+    public static boolean canBlockMoreCreatures(final Card blocker, final List<Card> blockedBy) {
         // TODO(sol) expand this for the additional blocking keyword
         if (blockedBy.isEmpty() || blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
             return true;
@@ -286,7 +286,7 @@ public class CombatUtil {
 
         String valid = StringUtils.join(walkTypes, ",");
         final Player defendingPlayer = attacker.getController().getOpponent();
-        CardList defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
+        List<Card> defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
         for (Card c : defendingLands) {
             if (c.isValid(valid, defendingPlayer, attacker)) {
                 return true;
@@ -305,7 +305,7 @@ public class CombatUtil {
      *            the attackers
      * @return true, if one can be blocked
      */
-    public static boolean canBlockAtLeastOne(final Card blocker, final CardList attackers) {
+    public static boolean canBlockAtLeastOne(final Card blocker, final List<Card> attackers) {
         for (Card attacker : attackers) {
             if (CombatUtil.canBlock(attacker, blocker)) {
                 return true;
@@ -323,7 +323,7 @@ public class CombatUtil {
      *            the blockers
      * @return true, if successful
      */
-    public static boolean canBeBlocked(final Card attacker, final CardList blockers) {
+    public static boolean canBeBlocked(final Card attacker, final List<Card> blockers) {
         if (!CombatUtil.canBeBlocked(attacker)) {
             return false;
         }
@@ -382,8 +382,8 @@ public class CombatUtil {
      */
     public static boolean finishedMandatoryBlocks(final Combat combat) {
 
-        final CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-        final CardList attackers = combat.getAttackerList();
+        final List<Card> blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+        final List<Card> attackers = combat.getAttackerList();
 
         // if a creature does not block but should, return false
         for (final Card blocker : blockers) {
@@ -398,7 +398,7 @@ public class CombatUtil {
                     if (CombatUtil.canBlock(attacker, blocker, combat)) {
                         boolean must = true;
                         if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                            final CardList possibleBlockers = CardListUtil.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                            final List<Card> possibleBlockers = CardListUtil.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
                             possibleBlockers.remove(blocker);
                             if (!CombatUtil.canBeBlocked(attacker, possibleBlockers)) {
                                 must = false;
@@ -431,18 +431,18 @@ public class CombatUtil {
     private static void orderMultipleBlockers(final Combat combat) {
         // If there are multiple blockers, the Attacker declares the Assignment Order
         final Player player = combat.getAttackingPlayer();
-        final CardList attackers = combat.getAttackerList();
+        final List<Card> attackers = combat.getAttackerList();
         for (final Card attacker : attackers) {
-            CardList blockers = combat.getBlockers(attacker);
+            List<Card> blockers = combat.getBlockers(attacker);
             if (blockers.size() <= 1) {
                 continue;
             }
          
-            CardList orderedBlockers = null;
+            List<Card> orderedBlockers = null;
             if (player.isHuman()) {
                 List<Object> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, blockers.toArray(), null);
                 
-                orderedBlockers = new CardList();
+                orderedBlockers = new ArrayList<Card>();
                 for(Object o : ordered) {
                     orderedBlockers.add((Card)o);
                 }
@@ -459,18 +459,18 @@ public class CombatUtil {
     private static void orderBlockingMultipleAttackers(final Combat combat) {
         // If there are multiple blockers, the Attacker declares the Assignment Order
         final Player player = combat.getDefendingPlayer();
-        final CardList blockers = combat.getAllBlockers();
+        final List<Card> blockers = combat.getAllBlockers();
         for (final Card blocker : blockers) {
-            CardList attackers = combat.getAttackersBlockedBy(blocker);
+            List<Card> attackers = combat.getAttackersBlockedBy(blocker);
             if (attackers.size() <= 1) {
                 continue;
             }
          
-            CardList orderedAttacker = null;
+            List<Card> orderedAttacker = null;
             if (player.isHuman()) {
                 List<Object> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, attackers.toArray(), null);
                 
-                orderedAttacker = new CardList();
+                orderedAttacker = new ArrayList<Card>();
                 for(Object o : ordered) {
                     orderedAttacker.add((Card)o);
                 }
@@ -507,8 +507,8 @@ public class CombatUtil {
             return false;
         }
 
-        final CardList attackers = combat.getAttackerList();
-        final CardList attackersWithLure = new CardList();
+        final List<Card> attackers = combat.getAttackerList();
+        final List<Card> attackersWithLure = new ArrayList<Card>();
         for (final Card attacker : attackers) {
             if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
                     || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.") && combat.getBlockers(attacker)
@@ -521,7 +521,7 @@ public class CombatUtil {
             if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
                 boolean canBe = true;
                 if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                    final CardList blockers = CardListUtil.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                    final List<Card> blockers = CardListUtil.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
                     blockers.remove(blocker);
                     if (!CombatUtil.canBeBlocked(attacker, blockers)) {
                         canBe = false;
@@ -538,7 +538,7 @@ public class CombatUtil {
                 if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
                     boolean canBe = true;
                     if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                        final CardList blockers = CardListUtil.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                        final List<Card> blockers = CardListUtil.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
                         blockers.remove(blocker);
                         if (!CombatUtil.canBeBlocked(attacker, blockers)) {
                             canBe = false;
@@ -803,7 +803,7 @@ public class CombatUtil {
             }
         }
 
-        final CardList list = AllZoneUtil.getCreaturesInPlay(c.getController());
+        final List<Card> list = AllZoneUtil.getCreaturesInPlay(c.getController());
         if (list.size() < 2 && c.hasKeyword("CARDNAME can't attack or block alone.")) {
             return false;
         }
@@ -880,7 +880,7 @@ public class CombatUtil {
                 if (asSeparateWords[12].matches("[0-9][0-9]?")) {
                     powerLimit[0] = Integer.parseInt((asSeparateWords[12]).trim());
 
-                    CardList list = AllZoneUtil.getCreaturesInPlay(c.getController().getOpponent());
+                    List<Card> list = AllZoneUtil.getCreaturesInPlay(c.getController().getOpponent());
                     list = CardListUtil.filter(list, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card ct) {
@@ -897,8 +897,8 @@ public class CombatUtil {
         } // hasKeyword = CARDNAME can't attack if defending player controls an
           // untapped creature with power ...
 
-        final CardList list = c.getController().getOpponent().getCardsIn(ZoneType.Battlefield);
-        CardList temp;
+        final List<Card> list = c.getController().getOpponent().getCardsIn(ZoneType.Battlefield);
+        List<Card> temp;
         for (String keyword : c.getKeyword()) {
             if (keyword.equals("CARDNAME can't attack.") || keyword.equals("CARDNAME can't attack or block.")) {
                 return false;
@@ -959,7 +959,7 @@ public class CombatUtil {
     public static int getTotalFirstStrikeBlockPower(final Card attacker, final Player player) {
         final Card att = attacker;
 
-        CardList list = AllZoneUtil.getCreaturesInPlay(player);
+        List<Card> list = AllZoneUtil.getCreaturesInPlay(player);
         list = CardListUtil.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -1060,7 +1060,7 @@ public class CombatUtil {
      *            a {@link forge.game.player.Player} object.
      * @return a int.
      */
-    public static int sumDamageIfUnblocked(final CardList attackers, final Player attacked) {
+    public static int sumDamageIfUnblocked(final List<Card> attackers, final Player attacked) {
         int sum = 0;
         for (final Card attacker : attackers) {
             sum += CombatUtil.damageIfUnblocked(attacker, attacked, null);
@@ -1080,7 +1080,7 @@ public class CombatUtil {
      *            a {@link forge.game.player.Player} object.
      * @return a int.
      */
-    public static int sumPoisonIfUnblocked(final CardList attackers, final Player attacked) {
+    public static int sumPoisonIfUnblocked(final List<Card> attackers, final Player attacked) {
         int sum = 0;
         for (final Card attacker : attackers) {
             sum += CombatUtil.poisonIfUnblocked(attacker, attacked, null);
@@ -1102,12 +1102,12 @@ public class CombatUtil {
 
         int damage = 0;
 
-        final CardList attackers = combat.getAttackersByDefenderSlot(0);
-        final CardList unblocked = new CardList();
+        final List<Card> attackers = combat.getAttackersByDefenderSlot(0);
+        final List<Card> unblocked = new ArrayList<Card>();
 
         for (final Card attacker : attackers) {
 
-            final CardList blockers = combat.getBlockers(attacker);
+            final List<Card> blockers = combat.getBlockers(attacker);
 
             if ((blockers.size() == 0)
                     || attacker.hasKeyword("You may have CARDNAME assign its combat damage "
@@ -1144,12 +1144,12 @@ public class CombatUtil {
 
         int poison = 0;
 
-        final CardList attackers = combat.getAttackersByDefenderSlot(0);
-        final CardList unblocked = new CardList();
+        final List<Card> attackers = combat.getAttackersByDefenderSlot(0);
+        final List<Card> unblocked = new ArrayList<Card>();
 
         for (final Card attacker : attackers) {
 
-            final CardList blockers = combat.getBlockers(attacker);
+            final List<Card> blockers = combat.getBlockers(attacker);
 
             if ((blockers.size() == 0)
                     || attacker.hasKeyword("You may have CARDNAME assign its combat damage"
@@ -1189,11 +1189,11 @@ public class CombatUtil {
         }
 
         // check for creatures that must be blocked
-        final CardList attackers = combat.getAttackersByDefenderSlot(0);
+        final List<Card> attackers = combat.getAttackersByDefenderSlot(0);
 
         for (final Card attacker : attackers) {
 
-            final CardList blockers = combat.getBlockers(attacker);
+            final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.size() == 0) {
                 if (!attacker.getSVar("MustBeBlocked").equals("")) {
@@ -1243,11 +1243,11 @@ public class CombatUtil {
         }
 
         // check for creatures that must be blocked
-        final CardList attackers = combat.getAttackersByDefenderSlot(0);
+        final List<Card> attackers = combat.getAttackersByDefenderSlot(0);
 
         for (final Card attacker : attackers) {
 
-            final CardList blockers = combat.getBlockers(attacker);
+            final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.size() == 0) {
                 if (!attacker.getSVar("MustBeBlocked").equals("")) {
@@ -1276,7 +1276,7 @@ public class CombatUtil {
      *            a {@link forge.CardList} object.
      * @return a int.
      */
-    public static int totalDamageOfBlockers(final Card attacker, final CardList defenders) {
+    public static int totalDamageOfBlockers(final Card attacker, final List<Card> defenders) {
         int damage = 0;
 
         for (final Card defender : defenders) {
@@ -1350,7 +1350,7 @@ public class CombatUtil {
      *            a {@link forge.CardList} object.
      * @return a int.
      */
-    public static int totalShieldDamage(final Card attacker, final CardList defenders) {
+    public static int totalShieldDamage(final Card attacker, final List<Card> defenders) {
 
         int defenderDefense = 0;
 
@@ -1430,7 +1430,7 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean attackerWouldBeDestroyed(final Card attacker) {
-        final CardList blockers = AllZone.getCombat().getBlockers(attacker);
+        final List<Card> blockers = AllZone.getCombat().getBlockers(attacker);
 
         for (final Card defender : blockers) {
             if (CombatUtil.canDestroyAttacker(attacker, defender, AllZone.getCombat(), true)
@@ -1583,7 +1583,7 @@ public class CombatUtil {
 
         // look out for continuous static abilities that only care for blocking
         // creatures
-        final CardList cardList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> cardList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final HashMap<String, String> params = stAb.getMapParams();
@@ -1848,7 +1848,7 @@ public class CombatUtil {
 
         // look out for continuous static abilities that only care for attacking
         // creatures
-        final CardList cardList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> cardList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final HashMap<String, String> params = stAb.getMapParams();
@@ -1973,7 +1973,7 @@ public class CombatUtil {
 
         // look out for continuous static abilities that only care for attacking
         // creatures
-        final CardList cardList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> cardList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final HashMap<String, String> params = stAb.getMapParams();
@@ -2331,7 +2331,7 @@ public class CombatUtil {
     public static boolean blockerWouldBeDestroyed(final Card blocker) {
         // TODO THis function only checks if a single attacker at a time would destroy a blocker
         // This needs to expand to tally up damage
-        final CardList attackers = AllZone.getCombat().getAttackersBlockedBy(blocker);
+        final List<Card> attackers = AllZone.getCombat().getAttackersBlockedBy(blocker);
 
         for(Card attacker : attackers) {
             if (CombatUtil.canDestroyBlocker(blocker, attacker, AllZone.getCombat(), true)
@@ -2480,7 +2480,7 @@ public class CombatUtil {
      * </p>
      */
     public static void removeAllDamage() {
-        final CardList cl = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> cl = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card c : cl) {
             c.setDamage(0);
         }
@@ -2498,17 +2498,18 @@ public class CombatUtil {
         // Append Defending Player/Planeswalker
         final Combat combat = AllZone.getCombat();
         final List<GameEntity> defenders = combat.getDefenders();
-        final CardList[] attackers = combat.sortAttackerByDefender();
+        final List<List<Card>> attackers = combat.sortAttackerByDefender();
 
         // Not a big fan of the triple nested loop here
         for (int def = 0; def < defenders.size(); def++) {
-            if ((attackers[def] == null) || (attackers[def].size() == 0)) {
+            List<Card> attacker = attackers.get(def);
+            if ((attacker == null) || (attacker.size() == 0)) {
                 continue;
             }
 
             sb.append(combat.getAttackingPlayer()).append(" declared ");
-            for (final Card attacker : attackers[def]) {
-                sb.append(attacker).append(" ");
+            for (final Card atk : attacker) {
+                sb.append(atk).append(" ");
             }
 
             sb.append("attacking ").append(defenders.get(def).toString()).append(".");
@@ -2525,17 +2526,17 @@ public class CombatUtil {
     public static String getCombatBlockForLog() {
         final StringBuilder sb = new StringBuilder();
 
-        CardList defend = null;
+        List<Card> defend = null;
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
         final Combat combat = AllZone.getCombat();
         final List<GameEntity> defenders = combat.getDefenders();
-        final CardList[] attackers = combat.sortAttackerByDefender();
+        final List<List<Card>> attackers = combat.sortAttackerByDefender();
 
         // Not a big fan of the triple nested loop here
         for (int def = 0; def < defenders.size(); def++) {
-            final CardList list = attackers[def];
+            final List<Card> list = attackers.get(def);
 
             for (final Card attacker : list) {
                 sb.append(combat.getDefendingPlayer()).append(" assigned ");
@@ -2575,11 +2576,12 @@ public class CombatUtil {
         // Loop through Defenders
         // Append Defending Player/Planeswalker
         final List<GameEntity> defenders = AllZone.getCombat().getDefenders();
-        final CardList[] attackers = AllZone.getCombat().sortAttackerByDefender();
+        final List<List<Card>> attackers = AllZone.getCombat().sortAttackerByDefender();
 
         // Not a big fan of the triple nested loop here
         for (int def = 0; def < defenders.size(); def++) {
-            if ((attackers[def] == null) || (attackers[def].size() == 0)) {
+            List<Card> atk = attackers.get(def);
+            if ((atk == null) || (atk.size() == 0)) {
                 continue;
             }
 
@@ -2591,14 +2593,12 @@ public class CombatUtil {
             display.append(defenders.get(def).toString());
             display.append("\n");
 
-            final CardList list = attackers[def];
-
-            for (final Card c : list) {
+            for (final Card c : atk) {
                 // loop through attackers
                 display.append("-> ");
                 display.append(CombatUtil.combatantToString(c)).append("\n");
 
-                CardList blockers = AllZone.getCombat().getBlockers(c);
+                List<Card> blockers = AllZone.getCombat().getBlockers(c);
 
                 // loop through blockers
                 for (final Card element : blockers) {
@@ -2739,7 +2739,7 @@ public class CombatUtil {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attacker", c);
-        final CardList otherAttackers = AllZone.getCombat().getAttackerList();
+        final List<Card> otherAttackers = AllZone.getCombat().getAttackerList();
         otherAttackers.remove(c);
         runParams.put("OtherAttackers", otherAttackers);
         runParams.put("Attacked", AllZone.getCombat().getDefenderByAttacker(c));
@@ -2761,7 +2761,7 @@ public class CombatUtil {
                         @Override
                         public void resolve() {
                             if (crd.getController().isHuman()) {
-                                final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                                final List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                                 ComputerUtil.sacrificePermanents(a, list, false, this);
                             } else {
                                 AbilityFactorySacrifice.sacrificeHuman(AllZone.getHumanPlayer(), a, "Permanent", this,
@@ -2829,7 +2829,7 @@ public class CombatUtil {
             final PlayerZone lib = player.getZone(ZoneType.Library);
 
             if (lib.size() > 0) {
-                final CardList cl = new CardList();
+                final List<Card> cl = new ArrayList<Card>();
                 cl.add(lib.get(0));
                 GuiChoose.oneOrNone("Top card", cl);
                 final Card top = lib.get(0);
@@ -2871,7 +2871,7 @@ public class CombatUtil {
      * @param cl
      *            a {@link forge.CardList} object.
      */
-    public static void checkDeclareBlockers(final CardList cl) {
+    public static void checkDeclareBlockers(final List<Card> cl) {
         for (final Card c : cl) {
             if (!c.getDamageHistory().getCreatureBlockedThisCombat()) {
                 for (final Ability ab : CardFactoryUtil.getBushidoEffects(c)) {
@@ -3078,7 +3078,7 @@ public class CombatUtil {
                 final Ability ability4 = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        CardList enchantments = attacker.getController().getCardsIn(ZoneType.Library);
+                        List<Card> enchantments = attacker.getController().getCardsIn(ZoneType.Library);
                         enchantments = CardListUtil.filter(enchantments, new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {

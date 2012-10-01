@@ -1,5 +1,7 @@
 package forge;
 
+import java.util.List;
+
 import org.testng.annotations.Test;
 
 import forge.card.BoosterData;
@@ -77,7 +79,7 @@ public class BoosterDraftTest implements IBoosterDraft {
      * 
      * @return a {@link forge.CardList} object.
      */
-    public CardList getChosenCards() {
+    public List<Card> getChosenCards() {
         return null;
     }
 
@@ -88,7 +90,7 @@ public class BoosterDraftTest implements IBoosterDraft {
      * 
      * @return a {@link forge.CardList} object.
      */
-    public CardList getUnchosenCards() {
+    public List<Card> getUnchosenCards() {
         return null;
     }
 

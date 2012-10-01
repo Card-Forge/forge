@@ -17,10 +17,13 @@
  */
 package forge.card.spellability;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import forge.AllZoneUtil;
-import forge.CardList;
+import forge.Card;
+
 import forge.CardListUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -249,7 +252,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.getIsPresent() != null) {
-            CardList list = new CardList();
+            List<Card> list = new ArrayList<Card>();
             if (this.getPresentDefined() != null) {
                 list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), this.getPresentDefined(), sa));
             } else {

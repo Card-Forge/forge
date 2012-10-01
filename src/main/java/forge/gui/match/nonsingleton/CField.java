@@ -32,7 +32,7 @@ import com.google.common.collect.Lists;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
@@ -444,7 +444,7 @@ public class CField implements ICDoc {
                 }
             }
 
-            final CardList att = AllZone.getCombat().getAttackerList();
+            final List<Card> att = AllZone.getCombat().getAttackerList();
             if ((c.isTapped() || c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
                     && (input instanceof InputAttack)) {
                 final forge.view.arcane.CardPanel cardPanel = CField.this.view.getTabletop().getCardPanel(

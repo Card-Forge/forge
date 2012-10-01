@@ -17,9 +17,12 @@
  */
 package forge.game.player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -148,11 +151,11 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     @Override
-    public final CardList discard(final int num, final SpellAbility sa, final boolean duringResolution) {
+    public final List<Card> discard(final int num, final SpellAbility sa, final boolean duringResolution) {
         AllZone.getInputControl().setInput(PlayerUtil.inputDiscard(num, sa), duringResolution);
 
-        // why is CardList returned?
-        return new CardList();
+        // why is List<Card> returned?
+        return new ArrayList<Card>();
     }
 
     /** {@inheritDoc} */
@@ -178,7 +181,7 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     @Override
-    protected final void doScry(final CardList topN, final int n) {
+    protected final void doScry(final List<Card> topN, final int n) {
         int num = n;
         for (int i = 0; i < num; i++) {
             final Card c = GuiChoose.oneOrNone("Put on bottom of library.", topN);
@@ -203,7 +206,7 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     @Override
-    public final void sacrificePermanent(final String prompt, final CardList choices) {
+    public final void sacrificePermanent(final String prompt, final List<Card> choices) {
         final Input in = PlayerUtil.inputSacrificePermanent(choices, prompt);
         AllZone.getInputControl().setInput(in);
     }

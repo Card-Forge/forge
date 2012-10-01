@@ -17,7 +17,8 @@
 package forge.gui.match;
 
 import forge.AllZone;
-import forge.CardList;
+
+import forge.Card;
 import forge.Constant;
 import forge.Singletons;
 import forge.control.FControl;
@@ -123,8 +124,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
                 }
             }
 
-            final CardList humanList = QuestUtil.getHumanStartingCards(qData, qEvent);
-            final CardList computerList = QuestUtil.getComputerStartingCards(qEvent);
+            final List<Card> humanList = QuestUtil.getHumanStartingCards(qData, qEvent);
+            final List<Card> computerList = QuestUtil.getComputerStartingCards(qEvent);
 
             final int humanLife = qa.getLife(qData.getMode()) + extraLife;
             int computerLife = 20;
@@ -156,14 +157,14 @@ public class QuestWinLoseHandler extends ControlWinLose {
         //do per-game actions
         if (matchState.hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             if (isAnte) {
-                final CardList antes = AllZone.getComputerPlayer().getCardsIn(ZoneType.Ante);
+                final List<Card> antes = AllZone.getComputerPlayer().getCardsIn(ZoneType.Ante);
                 final List<CardPrinted> antesPrinted = Singletons.getModel().getMatchState().addAnteWon(antes);
                 this.anteWon(antesPrinted);
 
             }
         } else {
             if (isAnte) {
-                final CardList antes = AllZone.getHumanPlayer().getCardsIn(ZoneType.Ante);
+                final List<Card> antes = AllZone.getHumanPlayer().getCardsIn(ZoneType.Ante);
                 final List<CardPrinted> antesPrinted = Singletons.getModel().getMatchState().addAnteLost(antes);
                 for (final CardPrinted ante : antesPrinted) {
                     //the last param here (should) determine if this is added to the Card Shop

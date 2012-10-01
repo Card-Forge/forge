@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.GameActionUtil;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -703,9 +703,9 @@ public final class AbilityFactoryClash {
         }
 
         final Player p = tgtPlayers.get(0);
-        CardList pool = new CardList();
+        List<Card> pool = new ArrayList<Card>();
         if (params.containsKey("DefinedCards")) {
-            pool = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedCards"), sa));
+            pool = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedCards"), sa));
         } else {
             pool = p.getCardsIn(zone);
         }
@@ -756,9 +756,9 @@ public final class AbilityFactoryClash {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final ArrayList<Card> pile1 = new ArrayList<Card>();
                 final ArrayList<Card> pile2 = new ArrayList<Card>();
-                CardList pool = new CardList();
+                List<Card> pool = new ArrayList<Card>();
                 if (params.containsKey("DefinedCards")) {
-                    pool = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedCards"), sa));
+                    pool = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedCards"), sa));
                 } else {
                     pool = p.getCardsIn(zone);
                 }
@@ -845,7 +845,7 @@ public final class AbilityFactoryClash {
     } // end twoPiles resolve
 
     private static boolean selectPiles(final HashMap<String, String> params, final SpellAbility sa, ArrayList<Card> pile1, ArrayList<Card> pile2, 
-            Player chooser, Card card, CardList pool) {
+            Player chooser, Card card, List<Card> pool) {
         boolean pile1WasChosen = true;
         // then, the chooser picks a pile
         
@@ -899,11 +899,11 @@ public final class AbilityFactoryClash {
                     break;   
                 }
             } else {
-                int cmc1 = CardFactoryUtil.evaluatePermanentList(new CardList(pile1));
-                int cmc2 = CardFactoryUtil.evaluatePermanentList(new CardList(pile2));
+                int cmc1 = CardFactoryUtil.evaluatePermanentList(new ArrayList<Card>(pile1));
+                int cmc2 = CardFactoryUtil.evaluatePermanentList(new ArrayList<Card>(pile2));
                 if (CardListUtil.getNotType(pool, "Creature").isEmpty()) {
-                    cmc1 = CardFactoryUtil.evaluateCreatureList(new CardList(pile1));
-                    cmc2 = CardFactoryUtil.evaluateCreatureList(new CardList(pile2));
+                    cmc1 = CardFactoryUtil.evaluateCreatureList(new ArrayList<Card>(pile1));
+                    cmc2 = CardFactoryUtil.evaluateCreatureList(new ArrayList<Card>(pile2));
                     System.out.println("value:" + cmc1 + " " + cmc2);
                 }
 

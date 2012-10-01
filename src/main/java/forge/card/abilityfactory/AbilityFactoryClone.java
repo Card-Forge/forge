@@ -257,7 +257,7 @@ public final class AbilityFactoryClone {
         boolean useAbility = true;
 
 //        if (card.getController().isComputer()) {
-//            final CardList creatures = AllZoneUtil.getCreaturesInPlay();
+//            final List<Card> creatures = AllZoneUtil.getCreaturesInPlay();
 //            if (!creatures.isEmpty()) {
 //                cardToCopy = CardFactoryUtil.getBestCreatureAI(creatures);
 //            }

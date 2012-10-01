@@ -17,11 +17,13 @@
  */
 package forge.card.cost;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -107,7 +109,7 @@ public class CostReturn extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         if (!this.getThis()) {
-            CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
+            List<Card> typeList = activator.getCardsIn(ZoneType.Battlefield);
             typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
@@ -146,7 +148,7 @@ public class CostReturn extends CostPartWithList {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
-        final CardList list = activator.getCardsIn(ZoneType.Battlefield);
+        final List<Card> list = activator.getCardsIn(ZoneType.Battlefield);
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             // Generalize this
@@ -213,7 +215,7 @@ public class CostReturn extends CostPartWithList {
             final CostReturn part, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
-            private CardList typeList;
+            private List<Card> typeList;
             private int nReturns = 0;
 
             @Override

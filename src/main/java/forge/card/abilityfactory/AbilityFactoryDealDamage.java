@@ -19,6 +19,7 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -27,7 +28,7 @@ import com.google.common.collect.Iterables;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardUtil;
@@ -487,7 +488,7 @@ public class AbilityFactoryDealDamage {
             return false;
         }
 
-        final CardList hand = comp.getCardsIn(ZoneType.Hand);
+        final List<Card> hand = comp.getCardsIn(ZoneType.Hand);
 
         if (this.abilityFactory.isSpell()) {
             // If this is a spell, cast it instead of discarding
@@ -526,7 +527,7 @@ public class AbilityFactoryDealDamage {
         final Target tgt = saMe.getTarget();
         final Card source = saMe.getSourceCard();
         final HashMap<String, String> params = this.abilityFactory.getMapParams();
-        CardList hPlay = pl.getCardsIn(ZoneType.Battlefield);
+        List<Card> hPlay = pl.getCardsIn(ZoneType.Battlefield);
         hPlay = CardListUtil.getValidCards(hPlay, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
 
         final ArrayList<Object> objects = tgt.getTargets();
@@ -543,7 +544,7 @@ public class AbilityFactoryDealDamage {
         }
         hPlay = CardListUtil.getTargetableCards(hPlay, saMe);
 
-        final CardList killables = CardListUtil.filter(hPlay, new Predicate<Card>() {
+        final List<Card> killables = CardListUtil.filter(hPlay, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return (c.getEnoughDamageToKill(d, source, false, noPrevention) <= d) && !ComputerUtil.canRegenerate(c)
@@ -1164,14 +1165,14 @@ public class AbilityFactoryDealDamage {
             validP = params.get("ValidPlayers");
         }
 
-        final CardList humanList = this.getKillableCreatures(af, sa, AllZone.getHumanPlayer(), dmg);
-        CardList computerList = this.getKillableCreatures(af, sa, AllZone.getComputerPlayer(), dmg);
+        final List<Card> humanList = this.getKillableCreatures(af, sa, AllZone.getHumanPlayer(), dmg);
+        List<Card> computerList = this.getKillableCreatures(af, sa, AllZone.getComputerPlayer(), dmg);
 
         final Target tgt = sa.getTarget();
         if (tgt != null && sa.canTarget(AllZone.getHumanPlayer())) {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getHumanPlayer());
-            computerList = new CardList();
+            computerList = new ArrayList<Card>();
         }
 
         // abCost stuff that should probably be centralized...
@@ -1234,7 +1235,7 @@ public class AbilityFactoryDealDamage {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    private CardList getKillableCreatures(final AbilityFactory af, final SpellAbility sa, final Player player,
+    private List<Card> getKillableCreatures(final AbilityFactory af, final SpellAbility sa, final Player player,
             final int dmg) {
         final HashMap<String, String> params = af.getMapParams();
         final Card source = af.getHostCard();
@@ -1245,7 +1246,7 @@ public class AbilityFactoryDealDamage {
         }
 
         // TODO: X may be something different than X paid
-        CardList list = player.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = player.getCardsIn(ZoneType.Battlefield);
         list = CardListUtil.getValidCards(list, validC.split(","), source.getController(), source);
 
         final Predicate<Card> filterKillable = new Predicate<Card>() {
@@ -1319,8 +1320,8 @@ public class AbilityFactoryDealDamage {
                     }
 
                     // Evaluate creatures getting killed
-                    final CardList humanList = this.getKillableCreatures(af, sa, AllZone.getHumanPlayer(), dmg);
-                    final CardList computerList = this.getKillableCreatures(af, sa, AllZone.getComputerPlayer(), dmg);
+                    final List<Card> humanList = this.getKillableCreatures(af, sa, AllZone.getHumanPlayer(), dmg);
+                    final List<Card> computerList = this.getKillableCreatures(af, sa, AllZone.getComputerPlayer(), dmg);
                     if ((CardFactoryUtil.evaluateCreatureList(computerList) + 50) >= CardFactoryUtil
                             .evaluateCreatureList(humanList)) {
                         return false;
@@ -1364,7 +1365,7 @@ public class AbilityFactoryDealDamage {
         }
 
         String players = "";
-        CardList list = new CardList();
+        List<Card> list = new ArrayList<Card>();
 
         if (params.containsKey("ValidPlayers")) {
             players = params.get("ValidPlayers");
@@ -1635,7 +1636,7 @@ public class AbilityFactoryDealDamage {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
 
-        CardList sources = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> sources = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         if (params.containsKey("ValidCards")) {
             sources = CardListUtil.getValidCards(sources, params.get("ValidCards"), card.getController(), card);
         }
@@ -1878,7 +1879,7 @@ public class AbilityFactoryDealDamage {
         Target tgt = sa.getTarget();
         tgt.resetTargets();
 
-        CardList aiCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+        List<Card> aiCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
         aiCreatures = CardListUtil.getTargetableCards(aiCreatures, sa);
         aiCreatures = CardListUtil.filter(aiCreatures, new Predicate<Card>() {
             @Override
@@ -1887,7 +1888,7 @@ public class AbilityFactoryDealDamage {
             }
         });
 
-        CardList humCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+        List<Card> humCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
         humCreatures = CardListUtil.getTargetableCards(humCreatures, sa);
 
         final Random r = MyRandom.getRandom();

@@ -30,7 +30,8 @@ import javax.swing.JOptionPane;
 
 import com.google.common.base.Function;
 
-import forge.CardList;
+
+import forge.Card;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
@@ -294,7 +295,7 @@ public final class BoosterDraft implements IBoosterDraft {
         int iPlayer = 0;
         for (int i = 1; i < this.pack.size(); i++) {
 
-            final CardList forAi = new CardList();
+            final List<Card> forAi = new ArrayList<Card>();
             final List<CardPrinted> booster = this.pack.get((iHumansBooster + i) % this.pack.size());
             for (final CardPrinted cr : booster) {
                 forAi.add(cr.toForgeCard());

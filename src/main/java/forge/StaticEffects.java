@@ -20,6 +20,7 @@ package forge;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -75,7 +76,7 @@ public class StaticEffects {
      *            a StaticEffect
      */
     final void removeStaticEffect(final StaticEffect se) {
-        final CardList affectedCards = se.getAffectedCards();
+        final List<Card> affectedCards = se.getAffectedCards();
         final ArrayList<Player> affectedPlayers = se.getAffectedPlayers();
         final HashMap<String, String> params = se.getParams();
 
@@ -317,7 +318,7 @@ public class StaticEffects {
     public final void rePopulateStateBasedList() {
         this.reset();
 
-        final CardList cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         Log.debug("== Start add state effects ==");
         for (int i = 0; i < cards.size(); i++) {

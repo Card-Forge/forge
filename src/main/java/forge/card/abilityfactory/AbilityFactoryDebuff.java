@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -28,7 +29,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Command;
 import forge.Singletons;
@@ -392,7 +393,7 @@ public final class AbilityFactoryDebuff {
 
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
-        CardList list = AbilityFactoryDebuff.getCurseCreatures(af, sa, kws);
+        List<Card> list = AbilityFactoryDebuff.getCurseCreatures(af, sa, kws);
         list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         // several uses here:
@@ -445,9 +446,9 @@ public final class AbilityFactoryDebuff {
      *            a {@link java.util.ArrayList} object.
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getCurseCreatures(final AbilityFactory af, final SpellAbility sa,
+    private static List<Card> getCurseCreatures(final AbilityFactory af, final SpellAbility sa,
             final ArrayList<String> kws) {
-        CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+        List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
         list = CardListUtil.getTargetableCards(list, sa);
 
         if (!list.isEmpty()) {
@@ -477,7 +478,7 @@ public final class AbilityFactoryDebuff {
      * @return a boolean.
      */
     private static boolean debuffMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -491,8 +492,8 @@ public final class AbilityFactoryDebuff {
             list.remove(c);
         }
 
-        final CardList pref = CardListUtil.filterControlledBy(list, AllZone.getHumanPlayer());
-        final CardList forced = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
+        final List<Card> pref = CardListUtil.filterControlledBy(list, AllZone.getHumanPlayer());
+        final List<Card> forced = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
         final Card source = sa.getSourceCard();
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
@@ -792,9 +793,9 @@ public final class AbilityFactoryDebuff {
             valid = params.get("ValidCards");
         }
 
-        CardList comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         comp = CardListUtil.getValidCards(comp, valid, hostCard.getController(), hostCard);
-        CardList human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         human = CardListUtil.getValidCards(human, valid, hostCard.getController(), hostCard);
 
         // TODO - add blocking situations here also
@@ -839,7 +840,7 @@ public final class AbilityFactoryDebuff {
             valid = params.get("ValidCards");
         }
 
-        CardList list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         list = CardListUtil.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card tgtC : list) {

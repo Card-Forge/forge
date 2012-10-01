@@ -23,7 +23,7 @@ import java.util.List;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.Command;
@@ -81,7 +81,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 c.setTapped(true);
             } else {
                 // ETBTapped static abilities
-                final CardList allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                final List<Card> allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
                 for (final Card ca : allp) {
                     final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
                     for (final StaticAbility stAb : staticAbilities) {
@@ -141,7 +141,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             c.comesIntoPlay();
 
             if (c.isLand()) {
-                /*CardList list = player.getCardsIn(ZoneType.Battlefield);
+                /*List<Card> list = player.getCardsIn(ZoneType.Battlefield);
 
                 list = list.filter(new Predicate<Card>() {
                     @Override
@@ -155,14 +155,14 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 }*/
 
                 // Tectonic Instability
-                final CardList tis = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Tectonic Instability");
+                final List<Card> tis = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Tectonic Instability");
                 final Card tisLand = c;
                 for (final Card ti : tis) {
                     final Card source = ti;
                     final SpellAbility ability = new Ability(source, "") {
                         @Override
                         public void resolve() {
-                            CardList lands = tisLand.getController().getCardsIn(ZoneType.Battlefield);
+                            List<Card> lands = tisLand.getController().getCardsIn(ZoneType.Battlefield);
                             lands = CardListUtil.filter(lands, Presets.LANDS);
                             for (final Card land : lands) {
                                 land.tap();
@@ -177,14 +177,14 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
 
                 }
 
-                final CardList les = c.getOwner().getOpponent().getCardsIn(ZoneType.Battlefield, "Land Equilibrium");
+                final List<Card> les = c.getOwner().getOpponent().getCardsIn(ZoneType.Battlefield, "Land Equilibrium");
                 final Card lesLand = c;
                 if (les.size() > 0) {
                     final Card source = les.get(0);
                     final SpellAbility ability = new Ability(source, "") {
                         @Override
                         public void resolve() {
-                            final CardList lands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
+                            final List<Card> lands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
                             lesLand.getOwner().sacrificePermanent(source.getName() + " - Select a land to sacrifice",
                                     lands);
                         }
@@ -193,8 +193,8 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                     sb.append(source).append(" - ");
                     sb.append(tisLand.getController()).append(" sacrifices a land.");
                     ability.setStackDescription(sb.toString());
-                    final CardList pLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
-                    final CardList oLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner().getOpponent());
+                    final List<Card> pLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
+                    final List<Card> oLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner().getOpponent());
                     // (pLands - 1) because this land is in play, and the
                     // ability is before it is in play
                     if (oLands.size() <= (pLands.size() - 1)) {

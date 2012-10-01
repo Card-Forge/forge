@@ -17,6 +17,7 @@
  */
 package forge.card.cardfactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -25,7 +26,7 @@ import com.google.common.collect.Iterables;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -94,7 +95,7 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     Player player = getTargetPlayer();
-                    CardList artifacts = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                    List<Card> artifacts = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
                     artifacts = CardListUtil.filter(artifacts, CardPredicates.Presets.ARTIFACTS);
 
                     for (int i = 0; i < artifacts.size(); i++) {
@@ -128,8 +129,8 @@ public class CardFactoryInstants {
                 }
 
                 public void humanResolve() {
-                    final CardList libraryList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
-                    final CardList selectedCards = new CardList();
+                    final List<Card> libraryList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
+                    final List<Card> selectedCards = new ArrayList<Card>();
 
                     Object o = GuiChoose.oneOrNone("Select first card", libraryList);
                     if (o != null) {
@@ -168,8 +169,8 @@ public class CardFactoryInstants {
                 }
 
                 public void computerResolve() {
-                    final CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Library);
-                    final CardList selectedCards = new CardList();
+                    final List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Library);
+                    final List<Card> selectedCards = new ArrayList<Card>();
 
                     // pick best creature
                     Card c = CardFactoryUtil.getBestCreatureAI(list);
@@ -207,7 +208,7 @@ public class CardFactoryInstants {
 
                 @Override
                 public boolean canPlay() {
-                    final CardList library = card.getController().getCardsIn(ZoneType.Library);
+                    final List<Card> library = card.getController().getCardsIn(ZoneType.Library);
                     return library.size() >= 3 && super.canPlay();
                 }
 
@@ -234,7 +235,7 @@ public class CardFactoryInstants {
                     final Player player = card.getController();
                     final int max = card.getXManaCostPaid();
 
-                    final CardList graveList = tPlayer.getCardsIn(ZoneType.Graveyard);
+                    final List<Card> graveList = tPlayer.getCardsIn(ZoneType.Graveyard);
                     final int x = Math.min(max, graveList.size());
 
                     if (player.isHuman()) {
@@ -268,7 +269,7 @@ public class CardFactoryInstants {
 
                 @Override
                 public boolean canPlayAI() {
-                    final CardList graveList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
+                    final List<Card> graveList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
 
                     final int maxX = ComputerUtil.getAvailableMana(true).size() - 1;
                     return (maxX >= 3) && (graveList.size() > 0);
@@ -309,7 +310,7 @@ public class CardFactoryInstants {
                     // the siren flag
                     final Player player = card.getController();
                     final Player opponent = player.getOpponent();
-                    final CardList creatures = AllZoneUtil.getCreaturesInPlay(opponent);
+                    final List<Card> creatures = AllZoneUtil.getCreaturesInPlay(opponent);
                     for (final Card creature : creatures) {
                         // skip walls, skip creatures with summoning sickness
                         // also skip creatures with haste if they came onto the
@@ -325,7 +326,7 @@ public class CardFactoryInstants {
                         public void resolve() {
                             final Player player = card.getController();
                             final Player opponent = player.getOpponent();
-                            final CardList creatures = AllZoneUtil.getCreaturesInPlay(opponent);
+                            final List<Card> creatures = AllZoneUtil.getCreaturesInPlay(opponent);
 
                             for (final Card creature : creatures) {
                                 // System.out.println("Siren's Call - EOT - "+creature.getName()
@@ -385,7 +386,7 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     final PlayerZone lib = card.getController().getZone(ZoneType.Library);
-                    final CardList choices = new CardList();
+                    final List<Card> choices = new ArrayList<Card>();
                     for (int i = 0; (i < 3) && (lib.size() > 0); i++) {
                         choices.add(lib.get(i));
                     }
@@ -422,8 +423,8 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     final Player you = card.getController();
-                    final CardList ens = CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), Presets.ENCHANTMENTS);
-                    final CardList toReturn = CardListUtil.filter(ens, new Predicate<Card>() {
+                    final List<Card> ens = CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), Presets.ENCHANTMENTS);
+                    final List<Card> toReturn = CardListUtil.filter(ens, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             final Card enchanting = c.getEnchantingCard();
@@ -480,7 +481,7 @@ public class CardFactoryInstants {
                     final String[] choices = new String[] { "Artifact", "Creature", "Land" };
                     final Object o = GuiChoose.one("Select permanent type", choices);
                     final String cardType = (String) o;
-                    final CardList list = CardListUtil.getType(this.getTargetPlayer().getCardsIn(ZoneType.Battlefield), cardType);
+                    final List<Card> list = CardListUtil.getType(this.getTargetPlayer().getCardsIn(ZoneType.Battlefield), cardType);
 
                     final String[] tapOrUntap = new String[] { "Tap", "Untap" };
                     final Object z = GuiChoose.one("Tap or Untap?", tapOrUntap);

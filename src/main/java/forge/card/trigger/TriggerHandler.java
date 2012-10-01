@@ -20,11 +20,12 @@ package forge.card.trigger;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Command;
 import forge.CommandArgs;
@@ -64,7 +65,7 @@ public class TriggerHandler {
      * Clean up temporary triggers.
      */
     public final void cleanUpTemporaryTriggers() {
-        final CardList absolutelyAllCards = new CardList();
+        final List<Card> absolutelyAllCards = new ArrayList<Card>();
         absolutelyAllCards.addAll(AllZone.getHumanPlayer().getAllCards());
         absolutelyAllCards.addAll(AllZone.getComputerPlayer().getAllCards());
 
@@ -289,7 +290,7 @@ public class TriggerHandler {
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
         final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
-        CardList allCards = AllZoneUtil.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+        List<Card> allCards = AllZoneUtil.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         allCards.addAll(AllZoneUtil.getCardsIn(ZoneType.Stack));
         boolean checkStatics = false;
 
@@ -521,22 +522,22 @@ public class TriggerHandler {
             }
 
             @Override
-            public void setPaidHash(final HashMap<String, CardList> hash) {
+            public void setPaidHash(final HashMap<String, List<Card>> hash) {
                 sa[0].setPaidHash(hash);
             }
 
             @Override
-            public HashMap<String, CardList> getPaidHash() {
+            public HashMap<String, List<Card>> getPaidHash() {
                 return sa[0].getPaidHash();
             }
 
             @Override
-            public void setPaidList(final CardList list, final String str) {
+            public void setPaidList(final List<Card> list, final String str) {
                 sa[0].setPaidList(list, str);
             }
 
             @Override
-            public CardList getPaidList(final String str) {
+            public List<Card> getPaidList(final String str) {
                 return sa[0].getPaidList(str);
             }
 
@@ -701,7 +702,7 @@ public class TriggerHandler {
             }
 
             @Override
-            public CardList getTargetList() {
+            public List<Card> getTargetList() {
                 return sa[0].getTargetList();
             }
 
@@ -897,7 +898,7 @@ public class TriggerHandler {
             }
 
             @Override
-            public void setTargetList(final CardList list) {
+            public void setTargetList(final List<Card> list) {
                 sa[0].setTargetList(list);
             }
 

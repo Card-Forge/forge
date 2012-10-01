@@ -22,11 +22,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.GameActionUtil;
@@ -312,7 +313,7 @@ public class AbilityFactoryZoneAffecting {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
                         cd.decideAIPayment(sa, sa.getSourceCard(), null);
-                        CardList discards = cd.getList();
+                        List<Card> discards = cd.getList();
                         for (Card discard : discards) {
                             if (!ComputerUtil.isWorseThanDraw(discard)) {
                                 return false;
@@ -621,7 +622,7 @@ public class AbilityFactoryZoneAffecting {
                         p.addSlowtripList(source);
                     }
                 } else {
-                    final CardList drawn = p.drawCards(numCards);
+                    final List<Card> drawn = p.drawCards(numCards);
                     if (params.containsKey("Reveal")) {
                         GuiChoose.one("Revealing drawn cards", drawn);
                     }
@@ -965,7 +966,7 @@ public class AbilityFactoryZoneAffecting {
 
             final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 
-            final CardList pLibrary = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
+            final List<Card> pLibrary = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
 
             if (pLibrary.size() == 0) { // deck already empty, no need to mill
                 if (!mandatory) {
@@ -1085,7 +1086,7 @@ public class AbilityFactoryZoneAffecting {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                final CardList milled = p.mill(numCards, destination, bottom);
+                final List<Card> milled = p.mill(numCards, destination, bottom);
                 if (params.containsKey("RememberMilled")) {
                     for (final Card c : milled) {
                         source.addRemembered(c);
@@ -1295,7 +1296,7 @@ public class AbilityFactoryZoneAffecting {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        final CardList discarded = new CardList();
+        final List<Card> discarded = new ArrayList<Card>();
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
@@ -1314,7 +1315,7 @@ public class AbilityFactoryZoneAffecting {
                 }
 
                 if (mode.equals("Hand")) {
-                    final CardList list = p.discardHand(sa);
+                    final List<Card> list = p.discardHand(sa);
                     if (params.containsKey("RememberDiscarded")) {
                         for (final Card c : list) {
                             source.addRemembered(c);
@@ -1340,7 +1341,7 @@ public class AbilityFactoryZoneAffecting {
                     p.discardUnless(numCards, params.get("UnlessType"), sa);
                 } else if (mode.equals("RevealDiscardAll")) {
                     // Reveal
-                    final CardList dPHand = p.getCardsIn(ZoneType.Hand);
+                    final List<Card> dPHand = p.getCardsIn(ZoneType.Hand);
 
                     if (p.isHuman()) {
                         // "reveal to computer" for information gathering
@@ -1357,7 +1358,7 @@ public class AbilityFactoryZoneAffecting {
                         valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(source, "X", sa)));
                     }
 
-                    final CardList dPChHand = CardListUtil.getValidCards(dPHand, valid.split(","), source.getController(), source);
+                    final List<Card> dPChHand = CardListUtil.getValidCards(dPHand, valid.split(","), source.getController(), source);
                     // Reveal cards that will be discarded?
                     for (final Card c : dPChHand) {
                         p.discard(c, sa);
@@ -1366,7 +1367,7 @@ public class AbilityFactoryZoneAffecting {
                 } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose") || mode.equals("TgtChoose")) {
                     // Is Reveal you choose right? I think the wrong player is
                     // being used?
-                    CardList dPHand = p.getCardsIn(ZoneType.Hand);
+                    List<Card> dPHand = p.getCardsIn(ZoneType.Hand);
                     if (dPHand.size() != 0) {
                         if (params.containsKey("RevealNumber")) {
                             String amountString = params.get("RevealNumber");
@@ -1374,7 +1375,7 @@ public class AbilityFactoryZoneAffecting {
                                     : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                             dPHand = AbilityFactoryReveal.getRevealedList(p, dPHand, amount, false);
                         }
-                        CardList dPChHand = new CardList(dPHand);
+                        List<Card> dPChHand = new ArrayList<Card>(dPHand);
                         String[] dValid = null;
                         if (params.containsKey("DiscardValid")) { // Restrict card choices
                             dValid = params.get("DiscardValid").split(",");
@@ -1392,7 +1393,7 @@ public class AbilityFactoryZoneAffecting {
                             if (p.isComputer()) { // discard AI cards
                                 int max = chooser.getCardsIn(ZoneType.Hand).size();
                                 max = Math.min(max, numCards);
-                                CardList list = ComputerUtil.discardNumTypeAI(max, dValid, sa);
+                                List<Card> list = ComputerUtil.discardNumTypeAI(max, dValid, sa);
                                 if (mode.startsWith("Reveal")) {
                                     GuiChoose.oneOrNone("Computer has chosen", list);
                                 }
@@ -1405,7 +1406,7 @@ public class AbilityFactoryZoneAffecting {
                             // discard human cards
                             for (int i = 0; i < numCards; i++) {
                                 if (dPChHand.size() > 0) {
-                                    final CardList dChoices = new CardList();
+                                    final List<Card> dChoices = new ArrayList<Card>();
                                     if (params.containsKey("DiscardValid")) {
                                         final String validString = params.get("DiscardValid");
                                         if (validString.contains("Creature") && !validString.contains("nonCreature")) {
@@ -1425,7 +1426,7 @@ public class AbilityFactoryZoneAffecting {
                                     dPChHand.remove(dC);
 
                                     if (mode.startsWith("Reveal")) {
-                                        final CardList dCs = new CardList();
+                                        final List<Card> dCs = new ArrayList<Card>();
                                         dCs.add(dC);
                                         GuiChoose.oneOrNone("Computer has chosen", dCs);
                                     }

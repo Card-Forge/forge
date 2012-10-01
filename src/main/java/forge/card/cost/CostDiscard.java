@@ -17,9 +17,11 @@
  */
 package forge.card.cost;
 
+import java.util.List;
+
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -109,7 +111,7 @@ public class CostDiscard extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        CardList handList = activator.getCardsIn(ZoneType.Hand);
+        List<Card> handList = activator.getCardsIn(ZoneType.Hand);
         final String type = this.getType();
         final Integer amount = this.convertAmount();
 
@@ -162,7 +164,7 @@ public class CostDiscard extends CostPartWithList {
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final Player activator = ability.getActivatingPlayer();
-        CardList handList = activator.getCardsIn(ZoneType.Hand);
+        List<Card> handList = activator.getCardsIn(ZoneType.Hand);
         final String discType = this.getType();
         final String amount = this.getAmount();
         this.resetList();
@@ -235,7 +237,7 @@ public class CostDiscard extends CostPartWithList {
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
-        final CardList hand = activator.getCardsIn(ZoneType.Hand);
+        final List<Card> hand = activator.getCardsIn(ZoneType.Hand);
         this.resetList();
         if (type.equals("LastDrawn")) {
             if (!hand.contains(activator.getLastDrawnCard())) {
@@ -297,7 +299,7 @@ public class CostDiscard extends CostPartWithList {
      * 
      * @return a {@link forge.control.input.Input} object.
      */
-    public static Input inputDiscardCost(final String discType, final CardList handList, final SpellAbility sa,
+    public static Input inputDiscardCost(final String discType, final List<Card> handList, final SpellAbility sa,
             final CostPayment payment, final CostDiscard part, final int nNeeded) {
         final SpellAbility sp = sa;
         final Input target = new Input() {
@@ -341,7 +343,7 @@ public class CostDiscard extends CostPartWithList {
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (zone.is(ZoneType.Hand) && handList.contains(card)) {
-                    // send in CardList for Typing
+                    // send in List<Card> for Typing
                     card.getController().discard(card, sp);
                     part.addToList(card);
                     handList.remove(card);

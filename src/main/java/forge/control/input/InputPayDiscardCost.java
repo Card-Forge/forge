@@ -17,9 +17,11 @@
  */
 package forge.control.input;
 
+import java.util.List;
+
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Command;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -48,7 +50,7 @@ public class InputPayDiscardCost extends Input {
 
     private int numChosen = 0;
     private int numRequired = 0;
-    private CardList choiceList;
+    private List<Card> choiceList;
     private CostDiscard discardCost;
     private SpellAbility ability;
     private Command paid;

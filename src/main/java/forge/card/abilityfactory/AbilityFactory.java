@@ -19,11 +19,12 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
@@ -1627,7 +1628,7 @@ public class AbilityFactory {
                         * multiplier;
             } else if (calcX[0].startsWith("Remembered")) {
                 // Add whole Remembered list to handlePaid
-                final CardList list = new CardList();
+                final List<Card> list = new ArrayList<Card>();
                 if (card.getRemembered().isEmpty()) {
                     final Card newCard = AllZoneUtil.getCardState(card);
                     for (final Object o : newCard.getRemembered()) {
@@ -1654,7 +1655,7 @@ public class AbilityFactory {
                 return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
             } else if (calcX[0].startsWith("Imprinted")) {
                 // Add whole Imprinted list to handlePaid
-                final CardList list = new CardList();
+                final List<Card> list = new ArrayList<Card>();
                 for (final Card c : card.getImprinted()) {
                     list.add(AllZoneUtil.getCardState(c));
                 }
@@ -1662,7 +1663,7 @@ public class AbilityFactory {
                 return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
             } else if (calcX[0].matches("Enchanted")) {
                 // Add whole Enchanted list to handlePaid
-                final CardList list = new CardList();
+                final List<Card> list = new ArrayList<Card>();
                 if (card.isEnchanting()) {
                     Object o = card.getEnchanting();
                     if (o instanceof Card) {
@@ -1722,7 +1723,7 @@ public class AbilityFactory {
                 }
                 */
 
-                CardList list = new CardList();
+                List<Card> list = new ArrayList<Card>();
                 if (calcX[0].startsWith("Sacrificed")) {
                     list = AbilityFactory.findRootAbility(ability).getPaidList("Sacrificed");
                 } else if (calcX[0].startsWith("Discarded")) {
@@ -1743,14 +1744,14 @@ public class AbilityFactory {
                         final ArrayList<Object> all = t.getTargets();
                         if (!all.isEmpty() && (all.get(0) instanceof SpellAbility)) {
                             final SpellAbility saTargeting = AbilityFactory.findParentsTargetedSpellAbility(ability);
-                            list = new CardList();
+                            list = new ArrayList<Card>();
                             final ArrayList<SpellAbility> sas = saTargeting.getTarget().getTargetSAs();
                             for (final SpellAbility sa : sas) {
                                 list.add(sa.getSourceCard());
                             }
                         } else {
                             final SpellAbility saTargeting = AbilityFactory.findParentsTargetedCard(ability);
-                            list = new CardList(saTargeting.getTarget().getTargetCards());
+                            list = new ArrayList<Card>(saTargeting.getTarget().getTargetCards());
                         }
                     } else {
                         final SpellAbility parent = AbilityFactory.findParentsTargetedCard(ability);
@@ -1758,20 +1759,20 @@ public class AbilityFactory {
                         if (parent != null) {
                             final ArrayList<Object> all = parent.getTarget().getTargets();
                             if (!all.isEmpty() && (all.get(0) instanceof SpellAbility)) {
-                                list = new CardList();
+                                list = new ArrayList<Card>();
                                 final ArrayList<SpellAbility> sas = parent.getTarget().getTargetSAs();
                                 for (final SpellAbility sa : sas) {
                                     list.add(sa.getSourceCard());
                                 }
                             } else {
                                 final SpellAbility saTargeting = AbilityFactory.findParentsTargetedCard(ability);
-                                list = new CardList(saTargeting.getTarget().getTargetCards());
+                                list = new ArrayList<Card>(saTargeting.getTarget().getTargetCards());
                             }
                         }
                     }
                 } else if (calcX[0].startsWith("Triggered")) {
                     final SpellAbility root = ability.getRootSpellAbility();
-                    list = new CardList();
+                    list = new ArrayList<Card>();
                     list.add((Card) root.getTriggeringObject(calcX[0].substring(9)));
                 } else if (calcX[0].startsWith("TriggerCount")) {
                     // TriggerCount is similar to a regular Count, but just
@@ -1784,7 +1785,7 @@ public class AbilityFactory {
                     return CardFactoryUtil.doXMath(count, m, card) * multiplier;
                 } else if (calcX[0].startsWith("Replaced")) {
                     final SpellAbility root = ability.getRootSpellAbility();
-                    list = new CardList();
+                    list = new ArrayList<Card>();
                     list.add((Card) root.getReplacingObject(calcX[0].substring(8)));
                 } else if (calcX[0].startsWith("ReplaceCount")) {
                     // ReplaceCount is similar to a regular Count, but just
@@ -1852,6 +1853,7 @@ public class AbilityFactory {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      */
+    @SuppressWarnings("unchecked")
     public static ArrayList<Card> getDefinedCards(final Card hostCard, final String def, final SpellAbility sa) {
         final ArrayList<Card> cards = new ArrayList<Card>();
         final String defined = (def == null) ? "Self" : def; // default to Self
@@ -1886,7 +1888,7 @@ public class AbilityFactory {
         }
 
         else if (defined.equals("TopOfLibrary")) {
-            final CardList lib = hostCard.getController().getCardsIn(ZoneType.Library);
+            final List<Card> lib = hostCard.getController().getCardsIn(ZoneType.Library);
             if (lib.size() > 0) {
                 c = lib.get(0);
             } else {
@@ -1915,8 +1917,8 @@ public class AbilityFactory {
                 if (crd instanceof Card) {
                     c = AllZoneUtil.getCardState((Card) crd);
                     c = (Card) crd;
-                } else if (crd instanceof CardList) {
-                    for (final Card cardItem : (CardList) crd) {
+                } else if (crd instanceof List<?>) {
+                    for (final Card cardItem : (List<Card>) crd) {
                         cards.add(cardItem);
                     }
                 }
@@ -1926,8 +1928,8 @@ public class AbilityFactory {
             final Object crd = root.getReplacingObject(defined.substring(8));
             if (crd instanceof Card) {
                 c = AllZoneUtil.getCardState((Card) crd);
-            } else if (crd instanceof CardList) {
-                for (final Card cardItem : (CardList) crd) {
+            } else if (crd instanceof List<?>) {
+                for (final Card cardItem : (List<Card>) crd) {
                     cards.add(cardItem);
                 }
             }
@@ -1971,7 +1973,7 @@ public class AbilityFactory {
                 cards.add(cl);
             }
         } else {
-            CardList list = null;
+            List<Card> list = null;
             if (defined.startsWith("Sacrificed")) {
                 list = AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed");
             }
@@ -2472,7 +2474,7 @@ public class AbilityFactory {
                 if (threatParams.containsKey("Defined")) {
                     objects = AbilityFactory.getDefinedObjects(source, threatParams.get("Defined"), topStack);
                 } else if (threatParams.containsKey("ValidCards")) {
-                    CardList cards = CardListUtil.getValidCards(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), threatParams.get("ValidCards").split(","), source.getController(), source);
+                    List<Card> cards = CardListUtil.getValidCards(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), threatParams.get("ValidCards").split(","), source.getController(), source);
                     for (Card card : cards) {
                         objects.add(card);
                     }
@@ -2644,7 +2646,7 @@ public class AbilityFactory {
 
         if (params.containsKey("RememberCostCards")) {
             if (params.get("Cost").contains("Exile")) {
-                final CardList paidListExiled = sa.getPaidList("Exiled");
+                final List<Card> paidListExiled = sa.getPaidList("Exiled");
                 for (final Card exiledAsCost : paidListExiled) {
                     host.addRemembered(exiledAsCost);
                 }
@@ -2663,7 +2665,7 @@ public class AbilityFactory {
      *            a SpellAbility
      * @return a {@link forge.CardList} object.
      */
-    public static CardList filterListByType(final CardList list, String type, final SpellAbility sa) {
+    public static List<Card> filterListByType(final List<Card> list, String type, final SpellAbility sa) {
         if (type == null) {
             return list;
         }
@@ -2685,7 +2687,7 @@ public class AbilityFactory {
             }
 
             if (!(o instanceof Card)) {
-                return new CardList();
+                return new ArrayList<Card>();
             }
 
             if (type.equals("Triggered") || (type.equals("TriggeredCard")) || (type.equals("TriggeredAttacker")) || (type.equals("TriggeredBlocker"))) {
@@ -2716,7 +2718,7 @@ public class AbilityFactory {
                 }
             }
             if (source == null) {
-                return new CardList();
+                return new ArrayList<Card>();
             }
 
             if (type.startsWith("TargetedCard")) {
@@ -2737,7 +2739,7 @@ public class AbilityFactory {
             }
 
             if (!hasRememberedCard) {
-                return new CardList();
+                return new ArrayList<Card>();
             }
         } else if (type.equals("Card.AttachedBy")) {
             source = source.getEnchantingCard();

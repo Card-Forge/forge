@@ -19,12 +19,13 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -145,7 +146,7 @@ public class CostExile extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        CardList typeList = new CardList();
+        List<Card> typeList = new ArrayList<Card>();
         if (this.getFrom().equals(ZoneType.Stack)) {
             for (int i = 0; i < AllZone.getStack().size(); i++) {
                 typeList.add(AllZone.getStack().peekAbility(i).getSourceCard());
@@ -201,7 +202,7 @@ public class CostExile extends CostPartWithList {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
-        CardList list = activator.getCardsIn(this.getFrom());
+        List<Card> list = activator.getCardsIn(this.getFrom());
         list = CardListUtil.getValidCards(list, this.getType().split(";"), activator, source);
         if (c == null) {
             final String sVar = ability.getSVar(amount);
@@ -287,7 +288,7 @@ public class CostExile extends CostPartWithList {
             final int nNeeded) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Exile ").append(nNeeded).append(" cards from the top of your library?");
-        final CardList list = sa.getActivatingPlayer().getCardsIn(ZoneType.Library, nNeeded);
+        final List<Card> list = sa.getActivatingPlayer().getCardsIn(ZoneType.Library, nNeeded);
 
         if (list.size() > nNeeded) {
             // I don't believe this is possible
@@ -329,7 +330,7 @@ public class CostExile extends CostPartWithList {
             final CostPayment payment, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = 734256837615635021L;
-            private CardList typeList;
+            private List<Card> typeList;
 
             @Override
             public void showMessage() {
@@ -495,7 +496,7 @@ public class CostExile extends CostPartWithList {
         final Input target = new Input() {
             private static final long serialVersionUID = 1403915758082824694L;
 
-            private CardList typeList;
+            private List<Card> typeList;
             private int nExiles = 0;
 
             @Override

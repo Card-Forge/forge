@@ -20,11 +20,12 @@ package forge.card.staticability;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.StaticEffect;
@@ -56,7 +57,7 @@ public class StaticAbilityContinuous {
         final Card hostCard = stAb.getHostCard();
 
         final StaticEffect se = new StaticEffect();
-        final CardList affectedCards = StaticAbilityContinuous.getAffectedCards(stAb);
+        final List<Card> affectedCards = StaticAbilityContinuous.getAffectedCards(stAb);
         final ArrayList<Player> affectedPlayers = StaticAbilityContinuous.getAffectedPlayers(stAb);
 
         se.setAffectedCards(affectedCards);
@@ -230,7 +231,7 @@ public class StaticAbilityContinuous {
                 }
             }
 
-            CardList cardsIGainedAbilitiesFrom = AllZoneUtil.getCardsIn(validZones);
+            List<Card> cardsIGainedAbilitiesFrom = AllZoneUtil.getCardsIn(validZones);
             cardsIGainedAbilitiesFrom = CardListUtil.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard);
 
             if (cardsIGainedAbilitiesFrom.size() > 0) {
@@ -417,17 +418,17 @@ public class StaticAbilityContinuous {
         return players;
     }
 
-    private static CardList getAffectedCards(final StaticAbility stAb) {
+    private static List<Card> getAffectedCards(final StaticAbility stAb) {
         final HashMap<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
         final Player controller = hostCard.getController();
 
         if (params.containsKey("CharacteristicDefining")) {
-            return new CardList(hostCard); // will always be the card itself
+            return CardListUtil.createCardList(hostCard); // will always be the card itself
         }
 
         // non - CharacteristicDefining
-        CardList affectedCards = new CardList();
+        List<Card> affectedCards = new ArrayList<Card>();
 
         if (params.containsKey("AffectedZone")) {
             affectedCards.addAll(AllZoneUtil.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
@@ -437,13 +438,13 @@ public class StaticAbilityContinuous {
 
         if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {
             if (params.get("Affected").contains("Self")) {
-                affectedCards = new CardList(hostCard);
+                affectedCards = CardListUtil.createCardList(hostCard);
             } else if (params.get("Affected").contains("EnchantedBy")) {
-                affectedCards = new CardList(hostCard.getEnchantingCard());
+                affectedCards = CardListUtil.createCardList(hostCard.getEnchantingCard());
             } else if (params.get("Affected").contains("EquippedBy")) {
-                affectedCards = new CardList(hostCard.getEquippingCard());
+                affectedCards = CardListUtil.createCardList(hostCard.getEquippingCard());
             } else if (params.get("Affected").equals("EffectSource")) {
-                affectedCards = new CardList(AbilityFactory.getDefinedCards(hostCard, params.get("Affected"), null));
+                affectedCards = new ArrayList<Card>(AbilityFactory.getDefinedCards(hostCard, params.get("Affected"), null));
                 return affectedCards;
             }
         }

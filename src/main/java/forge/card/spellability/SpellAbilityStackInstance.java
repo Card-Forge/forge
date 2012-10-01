@@ -18,9 +18,10 @@
 package forge.card.spellability;
 
 import java.util.HashMap;
+import java.util.List;
 
 import forge.Card;
-import forge.CardList;
+
 import forge.game.player.Player;
 
 /**
@@ -49,7 +50,7 @@ public class SpellAbilityStackInstance {
     // When going to a SubAbility that SA has a Instance Choice object
     /** The tc. */
     private TargetChoices tc = null;
-    private CardList splicedCards = null;
+    private List<Card> splicedCards = null;
 
     /** The activating player. */
     private Player activatingPlayer = null;
@@ -67,7 +68,7 @@ public class SpellAbilityStackInstance {
     private int xManaPaid = 0;
 
     // Other Paid things
-    private HashMap<String, CardList> paidHash = new HashMap<String, CardList>();
+    private HashMap<String, List<Card>> paidHash = new HashMap<String, List<Card>>();
 
     // Additional info
     // is Kicked, is Buyback

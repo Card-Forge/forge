@@ -1,9 +1,11 @@
 package forge.card.cardfactory;
 
+import java.util.List;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Command;
 import forge.GameActionUtil;
@@ -68,8 +70,8 @@ class CardFactoryEnchantments {
 
                 @Override
                 public boolean canPlay() {
-                    final CardList grave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
-                    final CardList aiGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
+                    final List<Card> grave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
+                    final List<Card> aiGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
                     return ((CardListUtil.getType(grave, "Creature").size() > 1) || (CardListUtil.getType(aiGrave, "Creature").size() > 1))
                             && super.canPlay();
                 }
@@ -81,8 +83,8 @@ class CardFactoryEnchantments {
 
                 @Override
                 public void showMessage() {
-                    CardList grave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
-                    CardList aiGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
+                    List<Card> grave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
+                    List<Card> aiGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
                     grave = CardListUtil.filter(grave, CardPredicates.Presets.CREATURES);
                     aiGrave = CardListUtil.filter(aiGrave, CardPredicates.Presets.CREATURES);
 
@@ -90,7 +92,7 @@ class CardFactoryEnchantments {
                         this.once = false;
                         this.stop();
                     } else {
-                        CardList chooseGrave;
+                        List<Card> chooseGrave;
                         if (grave.size() < 2) {
                             chooseGrave = aiGrave;
                         } else if (aiGrave.size() < 2) {
@@ -102,7 +104,7 @@ class CardFactoryEnchantments {
 
                         final Card c = GuiChoose.one("Choose first creature to exile", chooseGrave);
                         if (c != null) {
-                            CardList newGrave = CardListUtil.filter(c.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+                            List<Card> newGrave = CardListUtil.filter(c.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
                             newGrave.remove(c);
 
                             final Object o2 = GuiChoose.one("Choose second creature to exile", newGrave);
@@ -148,8 +150,8 @@ class CardFactoryEnchantments {
 
                 @Override
                 public boolean canPlayAI() {
-                    final CardList compCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                    final CardList humCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                    final List<Card> compCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+                    final List<Card> humCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
 
                     // only play standstill if comp controls more creatures than
                     // human

@@ -29,7 +29,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.Counters;
 import forge.Singletons;
@@ -305,7 +305,7 @@ public class AbilityFactoryCounters {
         final Cost abCost = sa.getPayCosts();
         final Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-        CardList list;
+        List<Card> list;
         Card choice = null;
         final String type = params.get("CounterType");
         final String amountStr = params.get("CounterNum");
@@ -457,7 +457,7 @@ public class AbilityFactoryCounters {
         boolean chance = true;
         final Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-        CardList list;
+        List<Card> list;
         Card choice = null;
         final String type = params.get("CounterType");
         final String amountStr = params.get("CounterNum");
@@ -562,7 +562,7 @@ public class AbilityFactoryCounters {
         final Card source = sa.getSourceCard();
         // boolean chance = true;
         boolean preferred = true;
-        CardList list;
+        List<Card> list;
         final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
         final String type = params.get("CounterType");
         final String amountStr = params.get("CounterNum");
@@ -570,7 +570,7 @@ public class AbilityFactoryCounters {
 
         if (abTgt == null) {
             // No target. So must be defined
-            list = new CardList(AbilityFactory.getDefinedCards(source, params.get("Defined"), sa));
+            list = new ArrayList<Card>(AbilityFactory.getDefinedCards(source, params.get("Defined"), sa));
 
             if (!mandatory) {
                 // TODO - If Trigger isn't mandatory, when wouldn't we want to
@@ -655,11 +655,11 @@ public class AbilityFactoryCounters {
      *            a int.
      * @return a {@link forge.Card} object.
      */
-    private static Card chooseCursedTarget(final CardList list, final String type, final int amount) {
+    private static Card chooseCursedTarget(final List<Card> list, final String type, final int amount) {
         Card choice;
         if (type.equals("M1M1")) {
             // try to kill the best killable creature, or reduce the best one
-            final CardList killable = CardListUtil.filter(list, new Predicate<Card>() {
+            final List<Card> killable = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getNetDefense() <= amount;
@@ -688,12 +688,12 @@ public class AbilityFactoryCounters {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.Card} object.
      */
-    private static Card chooseBoonTarget(final CardList list, final String type) {
+    private static Card chooseBoonTarget(final List<Card> list, final String type) {
         Card choice;
         if (type.equals("P1P1")) {
             choice = CardFactoryUtil.getBestCreatureAI(list);
         } else if (type.equals("DIVINITY")) {
-            final CardList boon = CardListUtil.filter(list, new Predicate<Card>() {
+            final List<Card> boon = CardListUtil.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getCounters(Counters.DIVINITY) == 0;
@@ -995,7 +995,7 @@ public class AbilityFactoryCounters {
         final Cost abCost = sa.getPayCosts();
         Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-        // CardList list;
+        // List<Card> list;
         // Card choice = null;
         final HashMap<String, String> params = af.getMapParams();
 
@@ -1075,7 +1075,7 @@ public class AbilityFactoryCounters {
         // the expected targets could be
         // Target abTgt = sa.getTarget();
         // final Card source = sa.getSourceCard();
-        // CardList list;
+        // List<Card> list;
         // Card choice = null;
         // HashMap<String,String> params = af.getMapParams();
 
@@ -1446,8 +1446,8 @@ public class AbilityFactoryCounters {
         if (subAb != null && !subAb.chkAIDrawback()) {
             return false;
         }
-        CardList hperms = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        CardList cperms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> hperms = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> cperms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
         cperms = CardListUtil.filter(cperms, new Predicate<Card>() {
             @Override
             public boolean apply(final Card crd) {
@@ -1512,12 +1512,12 @@ public class AbilityFactoryCounters {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void proliferateResolve(final AbilityFactory af, final SpellAbility sa) {
-        CardList hperms = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        CardList cperms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> hperms = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> cperms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
         if (sa.getSourceCard().getController().isHuman()) {
             cperms.addAll(hperms);
-            final CardList unchosen = cperms;
+            final List<Card> unchosen = cperms;
             AllZone.getInputControl().setInput(new Input() {
                 private static final long serialVersionUID = -1779224307654698954L;
 
@@ -1860,8 +1860,8 @@ public class AbilityFactoryCounters {
         final HashMap<String, String> params = af.getMapParams();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        CardList hList;
-        CardList cList;
+        List<Card> hList;
+        List<Card> cList;
         final String type = params.get("CounterType");
         final String amountStr = params.get("CounterNum");
         final String valid = params.get("ValidCards");
@@ -1919,7 +1919,7 @@ public class AbilityFactoryCounters {
 
         if (curse) {
             if (type.equals("M1M1")) {
-                final CardList killable = CardListUtil.filter(hList, new Predicate<Card>() {
+                final List<Card> killable = CardListUtil.filter(hList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return c.getNetDefense() <= amount;
@@ -2006,7 +2006,7 @@ public class AbilityFactoryCounters {
         final String valid = params.get("ValidCards");
         final ZoneType zone = params.containsKey("ValidZone") ? ZoneType.smartValueOf(params.get("ValidZone")) : ZoneType.Battlefield;
 
-        CardList cards = AllZoneUtil.getCardsIn(zone);
+        List<Card> cards = AllZoneUtil.getCardsIn(zone);
         cards = CardListUtil.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();
@@ -2261,7 +2261,7 @@ public class AbilityFactoryCounters {
         final String valid = params.get("ValidCards");
         final ZoneType zone = params.containsKey("ValidZone") ? ZoneType.smartValueOf(params.get("ValidZone")) : ZoneType.Battlefield;
 
-        CardList cards = AllZoneUtil.getCardsIn(zone);
+        List<Card> cards = AllZoneUtil.getCardsIn(zone);
         cards = CardListUtil.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();
@@ -2584,7 +2584,7 @@ public class AbilityFactoryCounters {
             }
         } else { // targeted
             final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
-            CardList list = player.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = player.getCardsIn(ZoneType.Battlefield);
             list = CardListUtil.getTargetableCards(list, sa);
             list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), host.getController(), host);
             if (list.isEmpty() && mandatory) {

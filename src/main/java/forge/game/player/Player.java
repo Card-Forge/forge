@@ -33,7 +33,7 @@ import com.google.common.collect.Iterables;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
+
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardUtil;
@@ -124,7 +124,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
     private int numDrawnThisTurn = 0;
 
     /** The slowtrip list. */
-    private CardList slowtripList = new CardList();
+    private List<Card> slowtripList = new ArrayList<Card>();
 
     /** The keywords. */
     private ArrayList<String> keywords = new ArrayList<String>();
@@ -199,7 +199,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
         this.setPreventNextDamage(0);
         this.lastDrawnCard = null;
         this.numDrawnThisTurn = 0;
-        this.slowtripList = new CardList();
+        this.slowtripList = new ArrayList<Card>();
         this.nTurns = 0;
         this.altWin = false;
         this.altWinSourceName = null;
@@ -647,7 +647,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
         }
 
         // Prevent Damage static abilities
-        final CardList allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
@@ -784,7 +784,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
 
         if (AllZoneUtil.isCardInPlay("Crumbling Sanctuary")) {
             for (int i = 0; i < damage; i++) {
-                final CardList lib = this.getCardsIn(ZoneType.Library);
+                final List<Card> lib = this.getCardsIn(ZoneType.Library);
                 if (lib.size() > 0) {
                     Singletons.getModel().getGameAction().exile(lib.get(0));
                 }
@@ -1159,9 +1159,9 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * drawCard.
      * </p>
      * 
-     * @return a CardList of cards actually drawn
+     * @return a List<Card> of cards actually drawn
      */
-    public final CardList drawCard() {
+    public final List<Card> drawCard() {
         return this.drawCards(1);
     }
 
@@ -1170,9 +1170,9 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * drawCards.
      * </p>
      * 
-     * @return a CardList of cards actually drawn
+     * @return a List<Card> of cards actually drawn
      */
-    public final CardList drawCards() {
+    public final List<Card> drawCards() {
         return this.drawCards(1);
     }
 
@@ -1192,9 +1192,9 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * 
      * @param n
      *            a int.
-     * @return a CardList of cards actually drawn
+     * @return a List<Card> of cards actually drawn
      */
-    public final CardList drawCards(final int n) {
+    public final List<Card> drawCards(final int n) {
         return this.drawCards(n, false);
     }
 
@@ -1208,10 +1208,10 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @param firstFromDraw
      *            true if this is the card drawn from that player's draw step
      *            each turn
-     * @return a CardList of cards actually drawn
+     * @return a List<Card> of cards actually drawn
      */
-    public final CardList drawCards(final int n, final boolean firstFromDraw) {
-        final CardList drawn = new CardList();
+    public final List<Card> drawCards(final int n, final boolean firstFromDraw) {
+        final List<Card> drawn = new ArrayList<Card>();
 
         if (!this.canDraw()) {
             return drawn;
@@ -1250,10 +1250,10 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * doDraw.
      * </p>
      * 
-     * @return a CardList of cards actually drawn
+     * @return a List<Card> of cards actually drawn
      */
-    private CardList doDraw() {
-        final CardList drawn = new CardList();
+    private List<Card> doDraw() {
+        final List<Card> drawn = new ArrayList<Card>();
         final PlayerZone library = this.getZone(ZoneType.Library);
 
         // Replacement effects
@@ -1273,7 +1273,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
 
             if ((this.numDrawnThisTurn == 0) && this.isComputer()) {
                 boolean reveal = false;
-                final CardList cards = this.getCardsIn(ZoneType.Battlefield);
+                final List<Card> cards = this.getCardsIn(ZoneType.Battlefield);
                 for (final Card card : cards) {
                     if (card.hasKeyword("Reveal the first card you draw each turn")) {
                         reveal = true;
@@ -1327,15 +1327,15 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
 
     /**
      * gets a list of all cards in the requested zone. This function makes a
-     * CardList from Card[].
+     * List<Card> from Card[].
      * 
      * @param zone
      *            the zone
-     * @return a CardList with all the cards currently in requested zone
+     * @return a List<Card> with all the cards currently in requested zone
      */
-    public final CardList getCardsIn(final ZoneType zone) {
+    public final List<Card> getCardsIn(final ZoneType zone) {
         final List<Card> cards = zone == ZoneType.Stack ? AllZone.getStackZone().getCards() : this.getZone(zone).getCards();
-        return new CardList(cards);
+        return new ArrayList<Card>(cards);
     }
 
     /**
@@ -1343,7 +1343,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * 
      * @return the all cards
      */
-    public final CardList getAllCards() {
+    public final List<Card> getAllCards() {
         return this.getCardsIn(Player.ALL_ZONES);
     }
 
@@ -1354,24 +1354,24 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            the zone
      * @return the cards include phasing in
      */
-    public final CardList getCardsIncludePhasingIn(final ZoneType zone) {
+    public final List<Card> getCardsIncludePhasingIn(final ZoneType zone) {
         final List<Card> cards = zone == ZoneType.Stack ? AllZone.getStackZone().getCards() : this.getZone(zone)
                 .getCards(false);
-        return new CardList(cards);
+        return new ArrayList<Card>(cards);
     }
 
     /**
      * gets a list of first N cards in the requested zone. This function makes a
-     * CardList from Card[].
+     * List<Card> from Card[].
      * 
      * @param zone
      *            the zone
      * @param n
      *            the n
-     * @return a CardList with all the cards currently in requested zone
+     * @return a List<Card> with all the cards currently in requested zone
      */
-    public final CardList getCardsIn(final ZoneType zone, final int n) {
-        return new CardList(this.getZone(zone).getCards(n));
+    public final List<Card> getCardsIn(final ZoneType zone, final int n) {
+        return new ArrayList<Card>(this.getZone(zone).getCards(n));
     }
 
     /**
@@ -1379,10 +1379,10 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * 
      * @param zones
      *            the zones
-     * @return a CardList with all the cards currently in requested zones
+     * @return a List<Card> with all the cards currently in requested zones
      */
-    public final CardList getCardsIn(final List<ZoneType> zones) {
-        final CardList result = new CardList();
+    public final List<Card> getCardsIn(final List<ZoneType> zones) {
+        final List<Card> result = new ArrayList<Card>();
         for (final ZoneType z : zones) {
             if (z == ZoneType.Stack) {
                 for (Card c : AllZone.getStackZone().getCards()) {
@@ -1399,8 +1399,8 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
         return result;
     }
 
-    public final CardList getCardsIn(final ZoneType... zones) {
-        final CardList result = new CardList();
+    public final List<Card> getCardsIn(final ZoneType... zones) {
+        final List<Card> result = new ArrayList<Card>();
         for (final ZoneType z : zones) {
             if (this.getZone(z) != null) {
                 result.addAll(this.getZone(z).getCards());
@@ -1410,15 +1410,15 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
     }
     /**
      * gets a list of all cards with requested cardName in a given player's
-     * requested zone. This function makes a CardList from Card[].
+     * requested zone. This function makes a List<Card> from Card[].
      * 
      * @param zone
      *            the zone
      * @param cardName
      *            the card name
-     * @return a CardList with all the cards currently in that player's library
+     * @return a List<Card> with all the cards currently in that player's library
      */
-    public final CardList getCardsIn(final ZoneType zone, final String cardName) {
+    public final List<Card> getCardsIn(final ZoneType zone, final String cardName) {
         return CardListUtil.filter(this.getCardsIn(zone), CardPredicates.nameEquals(cardName));
     }
 
@@ -1429,9 +1429,9 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * 
      * @return a {@link forge.CardList} object.
      */
-    protected final CardList getDredge() {
-        final CardList dredge = new CardList();
-        final CardList cl = this.getCardsIn(ZoneType.Graveyard);
+    protected final List<Card> getDredge() {
+        final List<Card> dredge = new ArrayList<Card>();
+        final List<Card> cl = this.getCardsIn(ZoneType.Graveyard);
 
         for (final Card c : cl) {
             final ArrayList<String> kw = c.getKeyword();
@@ -1514,7 +1514,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            a boolean.
      * @return a {@link forge.CardList} object.
      */
-    public abstract CardList discard(final int num, final SpellAbility sa, boolean duringResolution);
+    public abstract List<Card> discard(final int num, final SpellAbility sa, boolean duringResolution);
 
     /**
      * <p>
@@ -1525,7 +1525,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList discard(final SpellAbility sa) {
+    public final List<Card> discard(final SpellAbility sa) {
         return this.discard(1, sa, false);
     }
 
@@ -1540,9 +1540,9 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList discard(final Card c, final SpellAbility sa) {
+    public final List<Card> discard(final Card c, final SpellAbility sa) {
         this.doDiscard(c, sa);
-        return new CardList(c);
+        return CardListUtil.createCardList(c);
     }
 
     /**
@@ -1596,8 +1596,8 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return the card list
      */
-    public final CardList discardHand(final SpellAbility sa) {
-        final CardList list = this.getCardsIn(ZoneType.Hand);
+    public final List<Card> discardHand(final SpellAbility sa) {
+        final List<Card> list = this.getCardsIn(ZoneType.Hand);
         this.discardRandom(list.size(), sa);
         return list;
     }
@@ -1609,9 +1609,9 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a CardList of cards discarded
+     * @return a List<Card> of cards discarded
      */
-    public final CardList discardRandom(final SpellAbility sa) {
+    public final List<Card> discardRandom(final SpellAbility sa) {
         return this.discardRandom(1, sa);
     }
 
@@ -1624,9 +1624,9 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            a int.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a CardList of cards discarded
+     * @return a List<Card> of cards discarded
      */
-    public final CardList discardRandom(final int num, final SpellAbility sa) {
+    public final List<Card> discardRandom(final int num, final SpellAbility sa) {
         return this.discardRandom(num, sa, "Card");
     }
 
@@ -1641,12 +1641,12 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param valid
      *            a valid expression
-     * @return a CardList of cards discarded
+     * @return a List<Card> of cards discarded
      */
-    public final CardList discardRandom(final int num, final SpellAbility sa, final String valid) {
-        final CardList discarded = new CardList();
+    public final List<Card> discardRandom(final int num, final SpellAbility sa, final String valid) {
+        final List<Card> discarded = new ArrayList<Card>();
         for (int i = 0; i < num; i++) {
-            CardList list = this.getCardsIn(ZoneType.Hand);
+            List<Card> list = this.getCardsIn(ZoneType.Hand);
             list = CardListUtil.getValidCards(list, valid, sa.getSourceCard().getController(), sa.getSourceCard());
             if (list.size() != 0) {
                 final Card disc = CardUtil.getRandom(list);
@@ -1680,7 +1680,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            a int.
      * @return the card list
      */
-    public final CardList mill(final int n) {
+    public final List<Card> mill(final int n) {
         return this.mill(n, ZoneType.Graveyard, false);
     }
 
@@ -1697,9 +1697,9 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            a boolean.
      * @return the card list
      */
-    public final CardList mill(final int n, final ZoneType zone, final boolean bottom) {
-        final CardList lib = this.getCardsIn(ZoneType.Library);
-        final CardList milled = new CardList();
+    public final List<Card> mill(final int n, final ZoneType zone, final boolean bottom) {
+        final List<Card> lib = this.getCardsIn(ZoneType.Library);
+        final List<Card> milled = new ArrayList<Card>();
 
         final int max = Math.min(n, lib.size());
 
@@ -1773,7 +1773,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @param n
      *            a int.
      */
-    protected abstract void doScry(CardList topN, int n);
+    protected abstract void doScry(List<Card> topN, int n);
 
     /**
      * <p>
@@ -1784,7 +1784,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            a int.
      */
     public final void scry(int numScry) {
-        final CardList topN = new CardList();
+        final List<Card> topN = new ArrayList<Card>();
         final PlayerZone library = this.getZone(ZoneType.Library);
         numScry = Math.min(numScry, library.size());
         for (int i = 0; i < numScry; i++) {
@@ -1841,7 +1841,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
         }
 
         // CantBeCast static abilities
-        final CardList allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
@@ -1889,7 +1889,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a {@link forge.Card} object.
      */
     public final Card getPlaneswalker() {
-        final CardList c = CardListUtil.filter(this.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
+        final List<Card> c = CardListUtil.filter(this.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
         if ((null != c) && (c.size() > 0)) {
             return c.get(0);
         } else {
@@ -1990,7 +1990,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * 
      * @return a {@link forge.CardList} object.
      */
-    public final CardList getSlowtripList() {
+    public final List<Card> getSlowtripList() {
         return this.slowtripList;
     }
 
@@ -2100,7 +2100,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @param choices
      *            a {@link forge.CardList} object.
      */
-    public abstract void sacrificePermanent(String prompt, CardList choices);
+    public abstract void sacrificePermanent(String prompt, List<Card> choices);
 
     // Game win/loss
 
@@ -2287,7 +2287,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean hasMetalcraft() {
-        final CardList list = CardListUtil.filter(this.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
+        final List<Card> list = CardListUtil.filter(this.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
         return list.size() >= 3;
     }
 
