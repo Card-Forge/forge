@@ -45,34 +45,36 @@ public class ReadDraftRankings {
 
         final Map<String, Map<String, Integer>> map = new HashMap<String, Map<String, Integer>>();
         for( String line : FileUtil.readFile(file)) {
-
             // stop reading if end of file or blank line is read
-            while ((line != null) && (line.trim().length() != 0)) {
-                if (!line.startsWith(ReadDraftRankings.COMMENT)) {
-                    final String[] s = line.split("\\|");
-                    final String rankStr = s[0].trim().substring(1);
-                    final String name = s[1].trim().replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");
-                    // final String rarity = s[2].trim();
-                    final String edition = s[3].trim();
+            if(line == null || line.length() == 0) {
+                break;
+            }
 
-                    try {
-                        final int rank = Integer.parseInt(rankStr);
-                        if (!map.containsKey(edition)) {
-                            map.put(edition, new HashMap<String, Integer>());
-                        }
-                        map.get(edition).put(name, rank);
-                        if (setSizes.containsKey(edition)) {
-                            setSizes.put(edition, Math.max(setSizes.get(edition), rank));
-                        } else {
-                            setSizes.put(edition, rank);
-                        }
-                    } catch (NumberFormatException nfe) {
-                        Log.warn("NumberFormatException: " + nfe.getMessage());
-                    }
+            if (line.startsWith(ReadDraftRankings.COMMENT)) {
+                continue;
+            }
+            final String[] s = line.split("\\|");
+            final String rankStr = s[0].trim().substring(1);
+            final String name = s[1].trim().replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");
+            // final String rarity = s[2].trim();
+            final String edition = s[3].trim();
+    
+            try {
+                final int rank = Integer.parseInt(rankStr);
+                if (!map.containsKey(edition)) {
+                    map.put(edition, new HashMap<String, Integer>());
                 }
-            } // if
+                map.get(edition).put(name, rank);
+                if (setSizes.containsKey(edition)) {
+                    setSizes.put(edition, Math.max(setSizes.get(edition), rank));
+                } else {
+                    setSizes.put(edition, rank);
+                }
+            } catch (NumberFormatException nfe) {
+                Log.warn("NumberFormatException: " + nfe.getMessage());
+            }
         } 
-
+        
         return map;
     } // readFile()
 
