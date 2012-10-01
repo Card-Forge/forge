@@ -212,6 +212,7 @@ public class CardReader {
                     continue;
                 }
 
+                //System.out.println(cardTxtFile.getName());
                 result.add(this.loadCard(cardTxtFile));
                 barProgress.increment();
 
