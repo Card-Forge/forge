@@ -362,7 +362,7 @@ public class SpellPermanent extends Spell {
             for (int i = 0; i < list.size(); i++) {
                 List<String> type = card.getType();
                 final String subtype = type.get(type.size() - 1);
-                final CardList cl = list.getType(subtype);
+                final CardList cl = CardListUtil.getType(list, subtype);
 
                 if (cl.size() > 0) {
                     return false;
@@ -371,7 +371,7 @@ public class SpellPermanent extends Spell {
         }
         if (card.isType("World")) {
             CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            list = list.getType("World");
+            list = CardListUtil.getType(list, "World");
             if (list.size() > 0) {
                 return false;
             }

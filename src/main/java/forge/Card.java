@@ -6547,7 +6547,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("ControllerControls")) {
             final String type = property.substring(18);
             final CardList list = this.getController().getCardsIn(ZoneType.Battlefield);
-            if (list.getType(type).isEmpty()) {
+            if (CardListUtil.getType(list, type).isEmpty()) {
                 return false;
             }
         } else if (property.startsWith("Other")) {

@@ -26,6 +26,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
@@ -479,7 +480,7 @@ public class CardFactoryInstants {
                     final String[] choices = new String[] { "Artifact", "Creature", "Land" };
                     final Object o = GuiChoose.one("Select permanent type", choices);
                     final String cardType = (String) o;
-                    final CardList list = this.getTargetPlayer().getCardsIn(ZoneType.Battlefield).getType(cardType);
+                    final CardList list = CardListUtil.getType(this.getTargetPlayer().getCardsIn(ZoneType.Battlefield), cardType);
 
                     final String[] tapOrUntap = new String[] { "Tap", "Untap" };
                     final Object z = GuiChoose.one("Tap or Untap?", tapOrUntap);

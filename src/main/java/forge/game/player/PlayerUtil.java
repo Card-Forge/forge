@@ -22,6 +22,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -57,7 +58,7 @@ public final class PlayerUtil {
     public static boolean worshipFlag(final Player player) {
         // Instead of hardcoded Ali from Cairo like cards, it is now a Keyword
         CardList list = player.getCardsIn(ZoneType.Battlefield);
-        list = list.getKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.");
+        list = CardListUtil.getKeyword(list, "Damage that would reduce your life total to less than 1 reduces it to 1 instead.");
         list = list.filter(new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -260,7 +261,7 @@ public final class PlayerUtil {
     public static Input inputSacrificePermanents(final int nCards, final String type) {
         CardList list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
 
-        list = list.getType(type);
+        list = CardListUtil.getType(list, type);
         return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a " + type + " to sacrifice");
     } // input_sacrificePermanents()
 

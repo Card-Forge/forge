@@ -22,6 +22,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -313,5 +314,23 @@ public class CardListUtil {
 
     public static CardList getTargetableCards(CardList cardList, SpellAbility source) {
         return cardList.filter(CardPredicates.isTargetableBy(source));
+    }
+
+    public static CardList getKeyword(CardList cardList, String keyword) {
+        return cardList.filter(CardPredicates.hasKeyword(keyword));
+    }
+
+    public static CardList getNotKeyword(CardList cardList, String keyword) {
+        return cardList.filter(Predicates.not(CardPredicates.hasKeyword(keyword)));
+    }
+
+    // cardType is like "Land" or "Goblin", returns a new CardList that is a
+    // subset of current CardList
+    public static CardList getNotType(CardList cardList, String cardType) {
+        return cardList.filter(Predicates.not(CardPredicates.isType(cardType)));
+    }
+
+    public static CardList getType(CardList cardList, String cardType) {
+        return cardList.filter(CardPredicates.isType(cardType));
     }
 }

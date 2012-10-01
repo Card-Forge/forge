@@ -247,7 +247,7 @@ public class CardFactoryUtil {
                             // lands of one type....
         int n = 0;
         for (String name : Constant.Color.BASIC_LANDS) {
-            n = land.getType(name).size();
+            n = CardListUtil.getType(land, name).size();
             if ((n < iminBL) && (n > 0)) {
                 // if two or more are tied, only the
                 // first
@@ -260,7 +260,7 @@ public class CardFactoryUtil {
             return null; // no basic land was a minimum
         }
 
-        final CardList bLand = land.getType(sminBL);
+        final CardList bLand = CardListUtil.getType(land, sminBL);
         
         for( Card ut : Iterables.filter(bLand, CardPredicates.Presets.UNTAPPED) )
         {
@@ -590,11 +590,11 @@ public class CardFactoryUtil {
     public static Card getBestAI(final CardList list) {
         // Get Best will filter by appropriate getBest list if ALL of the list
         // is of that type
-        if (list.getNotType("Creature").size() == 0) {
+        if (CardListUtil.getNotType(list, "Creature").size() == 0) {
             return CardFactoryUtil.getBestCreatureAI(list);
         }
 
-        if (list.getNotType("Land").size() == 0) {
+        if (CardListUtil.getNotType(list, "Land").size() == 0) {
             return CardFactoryUtil.getBestLandAI(list);
         }
 
@@ -726,7 +726,7 @@ public class CardFactoryUtil {
             return CardFactoryUtil.getWorstLand(lands);
         }
 
-        if ((list.getType("Artifact").size() > 0) || (list.getType("Enchantment").size() > 0)) {
+        if ((CardListUtil.getType(list, "Artifact").size() > 0) || (CardListUtil.getType(list, "Enchantment").size() > 0)) {
             return CardFactoryUtil.getCheapestPermanentAI(list.filter(new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -735,8 +735,8 @@ public class CardFactoryUtil {
             }), null, false);
         }
 
-        if (list.getType("Creature").size() > 0) {
-            return CardFactoryUtil.getWorstCreatureAI(list.getType("Creature"));
+        if (CardListUtil.getType(list, "Creature").size() > 0) {
+            return CardFactoryUtil.getWorstCreatureAI(CardListUtil.getType(list, "Creature"));
         }
 
         // Planeswalkers fall through to here, lands will fall through if there
@@ -2025,7 +2025,7 @@ public class CardFactoryUtil {
             final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
 
             for (int i = 0; i < basic.length; i++) {
-                if (!someCards.getType(basic[i]).isEmpty()) {
+                if (!CardListUtil.getType(someCards, basic[i]).isEmpty()) {
                     n++;
                 }
             }
@@ -2045,7 +2045,7 @@ public class CardFactoryUtil {
         }
         if (sq[0].contains("LandsInGraveyard")) {
             if (players.size() > 0) {
-                return CardFactoryUtil.doXMath(players.get(0).getCardsIn(ZoneType.Graveyard).getType("Land").size(), m,
+                return CardFactoryUtil.doXMath(CardListUtil.getType(players.get(0).getCardsIn(ZoneType.Graveyard), "Land").size(), m,
                         source);
             }
         }
@@ -2353,7 +2353,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("Domain")) {
             someCards.addAll(cardController.getCardsIn(ZoneType.Battlefield));
             for (String basic : Constant.Color.BASIC_LANDS) {
-                if (!someCards.getType(basic).isEmpty()) {
+                if (!CardListUtil.getType(someCards, basic).isEmpty()) {
                     n++;
                 }
             }
@@ -2364,7 +2364,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("OpponentDom")) {
             someCards.addAll(cardController.getOpponent().getCardsIn(ZoneType.Battlefield));
             for (String basic : Constant.Color.BASIC_LANDS) {
-                if (!someCards.getType(basic).isEmpty()) {
+                if (!CardListUtil.getType(someCards, basic).isEmpty()) {
                     n++;
                 }
             }
@@ -2493,7 +2493,7 @@ public class CardFactoryUtil {
             CardList enchantedControllerInPlay = new CardList();
             if (c.getEnchantingCard() != null) {
                 enchantedControllerInPlay = c.getEnchantingCard().getController().getCardsIn(ZoneType.Battlefield);
-                enchantedControllerInPlay = enchantedControllerInPlay.getType("Creature");
+                enchantedControllerInPlay = CardListUtil.getType(enchantedControllerInPlay, "Creature");
             }
             return enchantedControllerInPlay.size();
         }
@@ -4695,7 +4695,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void execute() {
-                    final CardList cardsInPlay = AllZoneUtil.getCardsIn(ZoneType.Battlefield).getType("World");
+                    final CardList cardsInPlay = CardListUtil.getType(AllZoneUtil.getCardsIn(ZoneType.Battlefield), "World");
                     cardsInPlay.remove(card);
                     for (int i = 0; i < cardsInPlay.size(); i++) {
                         Singletons.getModel().getGameAction().sacrificeDestroy(cardsInPlay.get(i));

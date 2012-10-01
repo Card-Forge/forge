@@ -1233,7 +1233,7 @@ public class GameAction {
                     continue;
                 }
 
-                final CardList cl = list.getType(type);
+                final CardList cl = CardListUtil.getType(list, type);
 
                 if (cl.size() > 1) {
                     for (final Card crd : cl) {
@@ -1250,14 +1250,14 @@ public class GameAction {
      * </p>
      */
     private void destroyLegendaryCreatures() {
-        final CardList a = AllZoneUtil.getCardsIn(ZoneType.Battlefield).getType("Legendary");
+        final CardList a = CardListUtil.getType(AllZoneUtil.getCardsIn(ZoneType.Battlefield), "Legendary");
         if (a.isEmpty() || AllZoneUtil.isCardInPlay("Mirror Gallery")) {
             return;
         }
 
         while (!a.isEmpty()) {
             CardList b = AllZoneUtil.getCardsIn(ZoneType.Battlefield, a.get(0).getName());
-            b = b.getType("Legendary");
+            b = CardListUtil.getType(b, "Legendary");
             b = b.filter(new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {

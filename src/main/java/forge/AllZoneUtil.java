@@ -279,8 +279,8 @@ public abstract class AllZoneUtil {
     public static int compareTypeAmountInPlay(final Player player, final String type) {
         // returns the difference between player's
         final Player opponent = player.getOpponent();
-        final CardList playerList = player.getCardsIn(ZoneType.Battlefield).getType(type);
-        final CardList opponentList = opponent.getCardsIn(ZoneType.Battlefield).getType(type);
+        final CardList playerList = CardListUtil.getType(player.getCardsIn(ZoneType.Battlefield), type);
+        final CardList opponentList = CardListUtil.getType(opponent.getCardsIn(ZoneType.Battlefield), type);
         return (playerList.size() - opponentList.size());
     }
 
@@ -298,8 +298,8 @@ public abstract class AllZoneUtil {
     public static int compareTypeAmountInGraveyard(final Player player, final String type) {
         // returns the difference between player's
         final Player opponent = player.getOpponent();
-        final CardList playerList = player.getCardsIn(ZoneType.Graveyard).getType(type);
-        final CardList opponentList = opponent.getCardsIn(ZoneType.Graveyard).getType(type);
+        final CardList playerList = CardListUtil.getType(player.getCardsIn(ZoneType.Graveyard), type);
+        final CardList opponentList = CardListUtil.getType(opponent.getCardsIn(ZoneType.Graveyard), type);
         return (playerList.size() - opponentList.size());
     }
 

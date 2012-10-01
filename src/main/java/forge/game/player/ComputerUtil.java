@@ -1397,7 +1397,7 @@ public class ComputerUtil {
 
                 // what types can I go get?
                 for (final String name : Constant.CardTypes.BASIC_TYPES) {
-                    if (!landList.getType(name).isEmpty()) {
+                    if (!CardListUtil.getType(landList, name).isEmpty()) {
                         basics.add(name);
                     }
                 }
@@ -1409,7 +1409,7 @@ public class ComputerUtil {
 
                 for (int i = 0; i < basics.size(); i++) {
                     final String b = basics.get(i);
-                    final int num = combined.getType(b).size();
+                    final int num = CardListUtil.getType(combined, b).size();
                     if (num < minSize) {
                         minType = b;
                         minSize = num;
@@ -1417,7 +1417,7 @@ public class ComputerUtil {
                 }
 
                 if (minType != null) {
-                    landList = landList.getType(minType);
+                    landList = CardListUtil.getType(landList, minType);
                 }
 
                 land = landList.get(0);
@@ -1491,10 +1491,10 @@ public class ComputerUtil {
             }
 
             // Discard lands
-            final CardList landsInHand = typeList.getType("Land");
+            final CardList landsInHand = CardListUtil.getType(typeList, "Land");
             if (!landsInHand.isEmpty()) {
-                final CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Land");
-                final CardList nonLandsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getNotType("Land");
+                final CardList landsInPlay = CardListUtil.getType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), "Land");
+                final CardList nonLandsInHand = CardListUtil.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
                 final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
                 if (landsInPlay.size() >= highestCMC
                         || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)) {
@@ -1528,7 +1528,7 @@ public class ComputerUtil {
         CardList typeList = activator.getCardsIn(ZoneType.Battlefield);
         typeList = CardListUtil.getValidCards(typeList, type.split(";"), activate.getController(), activate);
         if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-            typeList = typeList.getNotType("Creature");
+            typeList = CardListUtil.getNotType(typeList, "Creature");
         }
 
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
@@ -2036,7 +2036,7 @@ public class ComputerUtil {
             Card c = null;
 
             if (destroy) {
-                final CardList indestructibles = list.getKeyword("Indestructible");
+                final CardList indestructibles = CardListUtil.getKeyword(list, "Indestructible");
                 if (!indestructibles.isEmpty()) {
                     c = indestructibles.get(0);
                 }
@@ -2052,9 +2052,9 @@ public class ComputerUtil {
             }
 
             if (c == null) {
-                if (list.getNotType("Creature").size() == 0) {
+                if (CardListUtil.getNotType(list, "Creature").size() == 0) {
                     c = CardFactoryUtil.getWorstCreatureAI(list);
-                } else if (list.getNotType("Land").size() == 0) {
+                } else if (CardListUtil.getNotType(list, "Land").size() == 0) {
                     c = CardFactoryUtil.getWorstLand(AllZone.getComputerPlayer());
                 } else {
                     c = CardFactoryUtil.getWorstPermanentAI(list, false, false, false, false);
@@ -2299,7 +2299,7 @@ public class ComputerUtil {
         }
         final CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).filter(CardPredicates.Presets.LANDS);
         final CardList landsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).filter(CardPredicates.Presets.LANDS);
-        final CardList nonLandsInHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).getNotType("Land");
+        final CardList nonLandsInHand = CardListUtil.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
         final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
         final int discardCMC = discard.getCMC();
         if (discard.isLand()) {

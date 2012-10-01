@@ -1947,7 +1947,7 @@ public final class AbilityFactoryChoose {
             final ArrayList<String> basic = CardUtil.getBasicTypes();
 
             for (final String type : basic) {
-                final CardList cl = land.getType(type);
+                final CardList cl = CardListUtil.getType(land, type);
                 if (cl.size() > 0) {
                     final String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
                     final Object o = GuiChoose.one(prompt, cl);

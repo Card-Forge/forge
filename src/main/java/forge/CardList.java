@@ -19,11 +19,7 @@ package forge;
 
 import java.util.ArrayList;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
-import forge.card.spellability.SpellAbility;
-import forge.game.player.Player;
 
 
 /**
@@ -54,26 +50,6 @@ public class CardList extends ArrayList<Card> {
      */
     public final CardList filter(final Predicate<Card> filt) {
         return new CardList(Iterables.filter(this, filt));
-    }
-
-    // cardType is like "Land" or "Goblin", returns a new CardList that is a
-    // subset of current CardList
-    public final CardList getType(final String cardType) {
-        return this.filter(CardPredicates.isType(cardType));
-    }
-
-    // cardType is like "Land" or "Goblin", returns a new CardList with cards
-    // that do not have this type
-    public final CardList getNotType(final String cardType) {
-        return this.filter(Predicates.not(CardPredicates.isType(cardType)));
-    }
-
-    public final CardList getKeyword(final String keyword) {
-        return this.filter(CardPredicates.hasKeyword(keyword));
-    }
-
-    public final CardList getNotKeyword(final String keyword) {
-        return this.filter(Predicates.not(CardPredicates.hasKeyword(keyword)));
     }
 
 } // end class CardList

@@ -908,22 +908,22 @@ public class CombatUtil {
             } else if (keyword.equals("Defender") && !c.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
                 return false;
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls an Island.")) {
-                temp = list.getType("Island");
+                temp = CardListUtil.getType(list, "Island");
                 if (temp.isEmpty()) {
                     return false;
                 }
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls a Forest.")) {
-                temp = list.getType("Forest");
+                temp = CardListUtil.getType(list, "Forest");
                 if (temp.isEmpty()) {
                     return false;
                 }
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls a Swamp.")) {
-                temp = list.getType("Swamp");
+                temp = CardListUtil.getType(list, "Swamp");
                 if (temp.isEmpty()) {
                     return false;
                 }
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls a Mountain.")) {
-                temp = list.getType("Mountain");
+                temp = CardListUtil.getType(list, "Mountain");
                 if (temp.isEmpty()) {
                     return false;
                 }

@@ -431,7 +431,7 @@ public class AbilityFactoryPermanentState {
                 }
             }
 
-            if (untapList.getNotType("Creature").size() == 0) {
+            if (CardListUtil.getNotType(untapList, "Creature").size() == 0) {
                 choice = CardFactoryUtil.getBestCreatureAI(untapList); // if
                                                                        // only
                                                                        // creatures
@@ -551,7 +551,7 @@ public class AbilityFactoryPermanentState {
                 }
             }
 
-            if (tapList.getNotType("Creature").size() == 0) {
+            if (CardListUtil.getNotType(tapList, "Creature").size() == 0) {
                 choice = CardFactoryUtil.getBestCreatureAI(tapList); // if only
                                                                      // creatures
                                                                      // take
@@ -638,7 +638,7 @@ public class AbilityFactoryPermanentState {
                 AllZone.getInputControl().setInput(CardFactoryUtil.inputUntapUpToNType(num, valid));
             } else {
                 CardList list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                list = list.getType(valid);
+                list = CardListUtil.getType(list, valid);
                 list = list.filter(Presets.TAPPED);
 
                 int count = 0;
@@ -1191,7 +1191,7 @@ public class AbilityFactoryPermanentState {
                 }
             }
 
-            if (tapList.getNotType("Creature").size() == 0) {
+            if (CardListUtil.getNotType(tapList, "Creature").size() == 0) {
                 // if only creatures take the best
                 choice = CardFactoryUtil.getBestCreatureAI(tapList);
             } else {

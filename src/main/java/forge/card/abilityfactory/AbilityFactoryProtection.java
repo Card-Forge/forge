@@ -508,7 +508,7 @@ public final class AbilityFactoryProtection {
             }
 
             Card c;
-            if (pref.getNotType("Creature").size() == 0) {
+            if (CardListUtil.getNotType(pref, "Creature").size() == 0) {
                 c = CardFactoryUtil.getBestCreatureAI(pref);
             } else {
                 c = CardFactoryUtil.getMostExpensivePermanentAI(pref, sa, true);
@@ -525,7 +525,7 @@ public final class AbilityFactoryProtection {
             }
 
             Card c;
-            if (pref2.getNotType("Creature").size() == 0) {
+            if (CardListUtil.getNotType(pref2, "Creature").size() == 0) {
                 c = CardFactoryUtil.getBestCreatureAI(pref2);
             } else {
                 c = CardFactoryUtil.getMostExpensivePermanentAI(pref2, sa, true);
@@ -542,7 +542,7 @@ public final class AbilityFactoryProtection {
             }
 
             Card c;
-            if (forced.getNotType("Creature").size() == 0) {
+            if (CardListUtil.getNotType(forced, "Creature").size() == 0) {
                 c = CardFactoryUtil.getWorstCreatureAI(forced);
             } else {
                 c = CardFactoryUtil.getCheapestPermanentAI(forced, sa, true);

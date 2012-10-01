@@ -546,7 +546,7 @@ public class CardFactoryCreatures {
 
             @Override
             public boolean canPlayAI() {
-                List<Card> wolves = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield).getType("Wolf");
+                List<Card> wolves = CardListUtil.getType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), "Wolf");
                 Iterable<Card> untappedWolves = Iterables.filter(wolves, untappedCreature);
                 
                 final int totalPower = Aggregates.sum(untappedWolves, CardPredicates.Accessors.fnGetNetAttack);
@@ -575,7 +575,7 @@ public class CardFactoryCreatures {
 
             @Override
             public void resolve() {
-                CardList wolves = card.getController().getCardsIn(ZoneType.Battlefield).getType("Wolf");
+                CardList wolves = CardListUtil.getType(card.getController().getCardsIn(ZoneType.Battlefield), "Wolf");
                 wolves = wolves.filter(untappedCreature);
 
                 final Card target = this.getTargetCard();

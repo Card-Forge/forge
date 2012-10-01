@@ -517,7 +517,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         }
                     } else { // computer
 
-                        final CardList indestruct = targets.getKeyword("Indestructible");
+                        final CardList indestruct = CardListUtil.getKeyword(targets, "Indestructible");
                         if (indestruct.size() > 0) {
                             Singletons.getModel().getGameAction().destroyNoRegeneration(indestruct.get(0));
                         } else if (targets.size() > 0) {
@@ -1216,11 +1216,11 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                     CardList humanCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                     humanCreatures = CardListUtil.getValidCards(humanCreatures, smallCreatures, k.getController(), k);
-                    humanCreatures = humanCreatures.getNotKeyword("Indestructible");
+                    humanCreatures = CardListUtil.getNotKeyword(humanCreatures, "Indestructible");
 
                     CardList computerCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
                     computerCreatures = CardListUtil.getValidCards(computerCreatures, smallCreatures, k.getController(), k);
-                    computerCreatures = computerCreatures.getNotKeyword("Indestructible");
+                    computerCreatures = CardListUtil.getNotKeyword(computerCreatures, "Indestructible");
 
                     // We assume that both players will want to peek, ask if
                     // they want to reveal.
@@ -2065,7 +2065,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
     private static void upkeepKarma() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final CardList karmas = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Karma");
-        final CardList swamps = player.getCardsIn(ZoneType.Battlefield).getType("Swamp");
+        final CardList swamps = CardListUtil.getType(player.getCardsIn(ZoneType.Battlefield), "Swamp");
 
         // determine how much damage to deal the current player
         final int damage = swamps.size();

@@ -901,7 +901,7 @@ public final class AbilityFactoryClash {
             } else {
                 int cmc1 = CardFactoryUtil.evaluatePermanentList(new CardList(pile1));
                 int cmc2 = CardFactoryUtil.evaluatePermanentList(new CardList(pile2));
-                if (pool.getNotType("Creature").isEmpty()) {
+                if (CardListUtil.getNotType(pool, "Creature").isEmpty()) {
                     cmc1 = CardFactoryUtil.evaluateCreatureList(new CardList(pile1));
                     cmc2 = CardFactoryUtil.evaluateCreatureList(new CardList(pile2));
                     System.out.println("value:" + cmc1 + " " + cmc2);

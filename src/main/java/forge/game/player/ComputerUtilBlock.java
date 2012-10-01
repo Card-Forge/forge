@@ -597,7 +597,7 @@ public class ComputerUtilBlock {
 
         CardList chumpBlockers;
 
-        CardList tramplingAttackers = ComputerUtilBlock.getAttackers().getKeyword("Trample");
+        CardList tramplingAttackers = CardListUtil.getKeyword(ComputerUtilBlock.getAttackers(), "Trample");
         tramplingAttackers = tramplingAttackers.filter(Predicates.not(rampagesOrNeedsManyToBlock));
         
         // TODO - should check here for a "rampage-like" trigger that replaced
@@ -675,8 +675,8 @@ public class ComputerUtilBlock {
             // Don't use blockers without First Strike or Double Strike if
             // attacker has it
             if (attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike")) {
-                safeBlockers = blockers.getKeyword("First Strike");
-                safeBlockers.addAll(blockers.getKeyword("Double Strike"));
+                safeBlockers = CardListUtil.getKeyword(blockers, "First Strike");
+                safeBlockers.addAll(CardListUtil.getKeyword(blockers, "Double Strike"));
             } else {
                 safeBlockers = new CardList(blockers);
             }
@@ -884,7 +884,7 @@ public class ComputerUtilBlock {
         }
 
         // assign blockers that have to block
-        chumpBlockers = ComputerUtilBlock.getBlockersLeft().getKeyword("CARDNAME blocks each turn if able.");
+        chumpBlockers = CardListUtil.getKeyword(ComputerUtilBlock.getBlockersLeft(), "CARDNAME blocks each turn if able.");
         // if an attacker with lure attacks - all that can block
         for (final Card blocker : ComputerUtilBlock.getBlockersLeft()) {
             if (CombatUtil.mustBlockAnAttacker(blocker, combat)) {

@@ -501,7 +501,7 @@ public final class AbilityFactoryDebuff {
             }
 
             Card c;
-            if (pref.getNotType("Creature").size() == 0) {
+            if (CardListUtil.getNotType(pref, "Creature").size() == 0) {
                 c = CardFactoryUtil.getBestCreatureAI(pref);
             } else {
                 c = CardFactoryUtil.getMostExpensivePermanentAI(pref, sa, true);
@@ -520,7 +520,7 @@ public final class AbilityFactoryDebuff {
             // TODO - if forced targeting, just pick something without the given
             // keyword
             Card c;
-            if (forced.getNotType("Creature").size() == 0) {
+            if (CardListUtil.getNotType(forced, "Creature").size() == 0) {
                 c = CardFactoryUtil.getWorstCreatureAI(forced);
             } else {
                 c = CardFactoryUtil.getCheapestPermanentAI(forced, sa, true);

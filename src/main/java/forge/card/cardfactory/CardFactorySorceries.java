@@ -356,7 +356,7 @@ public class CardFactorySorceries {
                 CardList land = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
 
                 for (final String element : Constant.Color.BASIC_LANDS) {
-                    final CardList cl = land.getType(element);
+                    final CardList cl = CardListUtil.getType(land, element);
                     if (!cl.isEmpty()) {
                         // remove one land of this basic type from this list
                         // the computer AI should really jump in here and
@@ -438,7 +438,7 @@ public class CardFactorySorceries {
                     // get all other basic[count] lands human player
                     // controls and add them to target
                     CardList land = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
-                    CardList cl = land.getType(humanBasic.get(this.count));
+                    CardList cl = CardListUtil.getType(land, humanBasic.get(this.count));
                     cl = cl.filter(new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card crd) {
@@ -488,7 +488,7 @@ public class CardFactorySorceries {
                 final CardList land = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
 
                 for (final String element : Constant.Color.BASIC_LANDS) {
-                    final CardList c = land.getType(element);
+                    final CardList c = CardListUtil.getType(land, element);
                     if (!c.isEmpty()) {
                         humanBasic.add(element);
                         countBase[0]++;

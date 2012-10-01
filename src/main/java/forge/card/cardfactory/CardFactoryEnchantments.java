@@ -4,6 +4,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListUtil;
 import forge.Command;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -69,7 +70,7 @@ class CardFactoryEnchantments {
                 public boolean canPlay() {
                     final CardList grave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
                     final CardList aiGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                    return ((grave.getType("Creature").size() > 1) || (aiGrave.getType("Creature").size() > 1))
+                    return ((CardListUtil.getType(grave, "Creature").size() > 1) || (CardListUtil.getType(aiGrave, "Creature").size() > 1))
                             && super.canPlay();
                 }
             };

@@ -445,7 +445,7 @@ public class AbilityFactoryRegenerate {
             // can target
 
             // choose my best X without regen
-            if (compTargetables.getNotType("Creature").size() == 0) {
+            if (CardListUtil.getNotType(compTargetables, "Creature").size() == 0) {
                 for (final Card c : combatants) {
                     if (c.getShield() == 0) {
                         tgt.addTarget(c);

@@ -488,7 +488,7 @@ class CardFactoryLands {
 
                 public void computerExecute() {
                     CardList hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                    hand = hand.getType(type);
+                    hand = CardListUtil.getType(hand, type);
                     if (hand.size() > 0) {
                         this.revealCard(hand.get(0));
                     } else {

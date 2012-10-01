@@ -113,7 +113,7 @@ class CardFactoryAuras {
 
                     newType[0] = landTypes[minAt];
                     CardList list = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
-                    list = list.getNotType(newType[0]); // Don't enchant lands
+                    list = CardListUtil.getNotType(list, newType[0]); // Don't enchant lands
                                                         // that already have the
                                                         // type
                     if (list.isEmpty()) {
@@ -266,7 +266,7 @@ class CardFactoryAuras {
                 @Override
                 public boolean canPlayAI() {
                     CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                    list = list.getKeyword("Flying");
+                    list = CardListUtil.getKeyword(list, "Flying");
                     if (list.isEmpty()) {
                         return false;
                     }

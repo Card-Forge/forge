@@ -1255,7 +1255,7 @@ public class AbilityFactoryDealDamage {
             }
         };
 
-        list = list.getNotKeyword("Indestructible");
+        list = CardListUtil.getNotKeyword(list, "Indestructible");
         list = list.filter(filterKillable);
 
         return list;

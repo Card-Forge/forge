@@ -865,13 +865,13 @@ public class AbilityFactorySacrifice {
 
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
-        if ((humanlist.getNotType("Creature").size() == 0) && (computerlist.getNotType("Creature").size() == 0)) {
+        if ((CardListUtil.getNotType(humanlist, "Creature").size() == 0) && (CardListUtil.getNotType(computerlist, "Creature").size() == 0)) {
             if ((CardFactoryUtil.evaluateCreatureList(computerlist) + 200) >= CardFactoryUtil
                     .evaluateCreatureList(humanlist)) {
                 return false;
             }
         } // only lands involved
-        else if ((humanlist.getNotType("Land").size() == 0) && (computerlist.getNotType("Land").size() == 0)) {
+        else if ((CardListUtil.getNotType(humanlist, "Land").size() == 0) && (CardListUtil.getNotType(computerlist, "Land").size() == 0)) {
             if ((CardFactoryUtil.evaluatePermanentList(computerlist) + 1) >= CardFactoryUtil
                     .evaluatePermanentList(humanlist)) {
                 return false;

@@ -502,7 +502,7 @@ public class AbilityFactoryAttach {
     public static Card attachAIAnimatePreference(final SpellAbility sa, final CardList list, final boolean mandatory,
             final Card attachSource) {
         // AI For choosing a Card to Animate.
-        CardList betterList = list.getNotType("Creature");
+        CardList betterList = CardListUtil.getNotType(list, "Creature");
         if (sa.getSourceCard().getName().equals("Animate Artifact")) {
             betterList = betterList.filter(new Predicate<Card>() {
                 @Override
@@ -961,7 +961,7 @@ public class AbilityFactoryAttach {
             }
         }
 
-        list = list.getNotType(type); // Filter out Basic Lands that have the
+        list = CardListUtil.getNotType(list, type); // Filter out Basic Lands that have the
                                       // same type as the changing type
 
         final Card c = CardFactoryUtil.getBestAI(list);

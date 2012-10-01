@@ -179,7 +179,7 @@ public class AIPlayer extends Player {
     @Override
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
         final CardList hand = this.getCardsIn(ZoneType.Hand);
-        final CardList tHand = hand.getType(uType);
+        final CardList tHand = CardListUtil.getType(hand, uType);
 
         if (tHand.size() > 0) {
             Card toDiscard = Aggregates.itemWithMin(tHand, CardPredicates.Accessors.fnGetCmc);
