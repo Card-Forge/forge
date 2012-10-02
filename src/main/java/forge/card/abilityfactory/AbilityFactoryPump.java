@@ -333,9 +333,9 @@ public class AbilityFactoryPump {
                     || ph.getPhase().isBefore(PhaseType.MAIN1)) {
                 return false;
             }
-            
+
             List<Card> attackers = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.possibleAttackers);
-            if(!CombatUtil.canBlockAtLeastOne(card, attackers)) {
+            if (!CombatUtil.canBlockAtLeastOne(card, attackers)) {
                 return false;
             }
         } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
@@ -388,10 +388,10 @@ public class AbilityFactoryPump {
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
-        
+
         Predicate<Card> opBlockers = CardPredicates.possibleBlockers(card);
         List<Card> cardsCanBlock = CardListUtil.filter(AllZoneUtil.getCreaturesInPlay(human), opBlockers);
-        
+
         final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Fear")
                 || keyword.endsWith("Intimidate") || keyword.endsWith("Shadow"));
         final boolean combatRelevant = (keyword.endsWith("First Strike")
@@ -1499,6 +1499,8 @@ public class AbilityFactoryPump {
                 sa.getSourceCard().addChangeControllerCommand(untilEOT);
             } else if (this.params.containsKey("UntilYourNextTurn")) {
                 Singletons.getModel().getGameState().getCleanup().addUntilYourNextTurn(sa.getActivatingPlayer(), untilEOT);
+            } else if (params.containsKey("UntilUntaps")) {
+                sa.getSourceCard().addUntapCommand(untilEOT);
             } else {
                 AllZone.getEndOfTurn().addUntil(untilEOT);
             }
@@ -1865,8 +1867,11 @@ public class AbilityFactoryPump {
                         }
                     }
                 };
-
-                AllZone.getEndOfTurn().addUntil(untilEOT);
+                if (params.containsKey("UntilUntaps")) {
+                    sa.getSourceCard().addUntapCommand(untilEOT);
+                } else {
+                    AllZone.getEndOfTurn().addUntil(untilEOT);
+                }
             }
         }
     } // pumpAllResolve()
