@@ -11,7 +11,6 @@ import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.Constant;
 import forge.Singletons;
 import forge.game.GameType;
 import forge.game.phase.PhaseHandler;
@@ -55,11 +54,11 @@ public class ViewWinLose {
 
         // Control of the win/lose is handled differently for various game modes.
         ControlWinLose control;
-        if (Constant.Runtime.getGameType() == GameType.Quest) {
+        if (Singletons.getModel().getMatchState().getGameType() == GameType.Quest) {
             control = new QuestWinLoseHandler(this);
         }
-        else if ((Constant.Runtime.getGameType() == GameType.Sealed)
-                || (Constant.Runtime.getGameType() == GameType.Draft && AllZone.getGauntlet().getGauntletDraft())) {
+        else if (Singletons.getModel().getMatchState().getGameType() == GameType.Sealed
+                || (Singletons.getModel().getMatchState().getGameType() == GameType.Draft && AllZone.getGauntlet().getGauntletDraft())) {
 
             control = new GauntletWinLose(this);
         }

@@ -20,7 +20,6 @@ package forge;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.game.GameType;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -50,57 +49,14 @@ public final class Constant {
     }
     
     public static class Runtime {
-        /** The skin name. */
-        private static String skinName = "default";
-
-        /** The game type. */
-        private static GameType gameType = GameType.Constructed;
-
         /** The Constant NetConn. */
-        public static final boolean[] NET_CONN = new boolean[1];
+        public static boolean NET_CONN = false;
 
         /** The Constant width. */
-        public static final int[] WIDTH = { 300 };
+        public static final int WIDTH = 300;
 
         /** The Constant height. */
-        public static final int[] HEIGHT = new int[1];
-
-        /**
-         * Gets the game type.
-         * 
-         * @return the gameType
-         */
-        public static GameType getGameType() {
-            return Runtime.gameType;
-        }
-
-        /**
-         * Sets the game type.
-         * 
-         * @param gameType0
-         *            the gameType to set
-         */
-        public static void setGameType(final GameType gameType0) {
-            Runtime.gameType = gameType0;
-        }
-
-        /**
-         * Gets the skin name.
-         *
-         * @return the skin name
-         */
-        public static String getSkinName() {
-            return Runtime.skinName;
-        }
-
-        /**
-         * Sets the skin name.
-         *
-         * @param skinName the new skin name
-         */
-        public static void setSkinName(final String skinName) {
-            Runtime.skinName = skinName;
-        }
+        public static final int HEIGHT = 0;
     }
 
     /**
@@ -127,8 +83,7 @@ public final class Constant {
         public static final String COLORLESS = "colorless";
         // color order "wubrg"
         /** The Colors. */
-        public static final String[] COLORS = { Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN,
-                Color.COLORLESS };
+        public static final String[] COLORS = { Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN, Color.COLORLESS };
 
         /** The only colors. */
         public static final String[] ONLY_COLORS = { Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN };
@@ -139,9 +94,6 @@ public final class Constant {
         /** The Mana colors. */
         public static final String[] MANA_COLORS = { Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN,
                 Color.COLORLESS, Color.SNOW };
-
-        /** The loaded. */
-        public static final boolean[] LOADED = { false };
 
         /** The Basic lands. */
         public static final String[] BASIC_LANDS = { "Plains", "Island", "Swamp", "Mountain", "Forest" };

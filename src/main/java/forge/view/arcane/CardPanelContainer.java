@@ -62,7 +62,7 @@ public abstract class CardPanelContainer extends JPanel {
      */
     private int cardWidthMin = 50;
 
-    private int cardWidthMax = Constant.Runtime.WIDTH[0];
+    private int cardWidthMax = Constant.Runtime.WIDTH;
     /**
      * 
      */

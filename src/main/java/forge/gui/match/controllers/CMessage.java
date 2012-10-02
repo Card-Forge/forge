@@ -21,7 +21,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import forge.Command;
-import forge.Constant;
 import forge.Singletons;
 import forge.gui.GuiInput;
 import forge.gui.framework.ICDoc;
@@ -86,7 +85,7 @@ public enum CMessage implements ICDoc {
     /** Updates counter label in message area. */
     public void updateGameInfo() {
         VMessage.SINGLETON_INSTANCE.getLblGames().setText(
-                Constant.Runtime.getGameType().toString() + ": Game #"
+                Singletons.getModel().getMatchState().getGameType().toString() + ": Game #"
                 + (Singletons.getModel().getMatchState().getGamesPlayedCount() + 1)
                 + " of " + Singletons.getModel().getMatchState().getGamesPerMatch()
                 + ", turn " + Singletons.getModel().getGameSummary().getLastTurnNumber());

@@ -12,7 +12,6 @@ import javax.swing.SwingWorker;
 
 import forge.AllZone;
 import forge.Command;
-import forge.Constant;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
@@ -209,7 +208,7 @@ public enum CSubmenuDraft implements ICDoc {
                     throw new IllegalStateException("Draft: Computer deck is null!");
                 }
 
-                Constant.Runtime.setGameType(GameType.Draft);
+                Singletons.getModel().getMatchState().setGameType(GameType.Draft);
                 GameNew.newGame(AllZone.getHumanPlayer().getDeck(), AllZone.getComputerPlayer().getDeck());
                 return null;
             }

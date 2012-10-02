@@ -27,7 +27,6 @@ import javax.swing.ImageIcon;
 import forge.AllZone;
 import forge.Card;
 
-import forge.Constant;
 import forge.Singletons;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
@@ -75,7 +74,7 @@ public enum CMatchUI implements CardContainer {
         for (int i = 0; i < views.length; i++) {
             final Image img;
             // Update AI quest icon
-            if (i != 1 && Constant.Runtime.getGameType() == GameType.Quest) {
+            if (i != 1 && Singletons.getModel().getMatchState().getGameType() == GameType.Quest) {
                     String filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator;
 
                     if (strAvatarIcon != null) {

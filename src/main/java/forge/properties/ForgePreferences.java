@@ -251,7 +251,7 @@ public class ForgePreferences {
         final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
         Preferences.DEV_MODE = this.getPrefBoolean(FPref.DEV_MODE_ENABLED);
-        Preferences.UPLOAD_DRAFT = (Constant.Runtime.NET_CONN[0] ? this.getPrefBoolean(FPref.UI_UPLOAD_DRAFT) : false);
+        Preferences.UPLOAD_DRAFT = Constant.Runtime.NET_CONN && this.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
 
         // AI field is at index [0]
         fieldViews.get(0).getLblUpkeep().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_UPKEEP));

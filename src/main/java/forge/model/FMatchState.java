@@ -26,6 +26,7 @@ import forge.AllZone;
 import forge.Card;
 
 import forge.game.GameSummary;
+import forge.game.GameType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 
@@ -213,4 +214,13 @@ public class FMatchState {
         this.antesWon.clear();
         this.antesLost.clear();
     }
+    
+    private GameType gameType = GameType.Constructed;
+    public GameType getGameType() {
+        return gameType;
+    }
+    public void setGameType(final GameType gameType0) {
+        gameType = gameType0;
+    }
+    
 }

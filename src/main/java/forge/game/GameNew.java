@@ -19,7 +19,6 @@ import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.CardPredicates;
 import forge.CardUtil;
-import forge.Constant;
 import forge.Constant.Preferences;
 import forge.GameAction;
 import forge.Singletons;
@@ -136,7 +135,7 @@ public class GameNew {
 
         // friendliness
         final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL)
-                && Constant.Runtime.getGameType().equals(GameType.Constructed);
+                && Singletons.getModel().getMatchState().getGameType().equals(GameType.Constructed);
         final Random generator = MyRandom.getRandom();
 
         final ArrayList<String> hAnteRemoved = new ArrayList<String>();

@@ -22,7 +22,6 @@ import javax.swing.SwingWorker;
 import java.util.List;
 
 import forge.AllZone;
-import forge.Constant;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameNew;
@@ -162,7 +161,7 @@ public class GauntletMini {
 
             public Object doInBackground() {
 
-                Constant.Runtime.setGameType(gauntletType);
+                Singletons.getModel().getMatchState().setGameType(gauntletType);
 
                 GameNew.newGame(AllZone.getHumanPlayer().getDeck(), AllZone.getComputerPlayer().getDeck());
 

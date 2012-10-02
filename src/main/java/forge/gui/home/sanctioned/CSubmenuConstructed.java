@@ -25,7 +25,6 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import forge.AllZone;
 import forge.Command;
-import forge.Constant;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.generate.Generate2ColorDeck;
@@ -349,7 +348,7 @@ public enum CSubmenuConstructed implements ICDoc {
                 AllZone.getComputerPlayer().setDeck(
                         generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER));
                 
-                Constant.Runtime.setGameType(GameType.Constructed);
+                Singletons.getModel().getMatchState().setGameType(GameType.Constructed);
 
                 if (AllZone.getHumanPlayer().getDeck() != null && AllZone.getComputerPlayer().getDeck() != null) {
                     GameNew.newGame(AllZone.getHumanPlayer().getDeck(), AllZone.getComputerPlayer().getDeck());

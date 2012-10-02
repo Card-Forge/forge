@@ -13,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.AllZone;
 import forge.Command;
-import forge.Constant;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
@@ -234,7 +233,7 @@ public class SSubmenuQuestUtil {
             public Object doInBackground() {
                 AllZone.getHumanPlayer().setDeck(SSubmenuQuestUtil.getCurrentDeck());
                 AllZone.getComputerPlayer().setDeck(event.getEventDeck());
-                Constant.Runtime.setGameType(GameType.Quest);
+                Singletons.getModel().getMatchState().setGameType(GameType.Quest);
 
                 qData.getChallengesManager().randomizeOpponents();
                 qData.getDuelsManager().randomizeOpponents();

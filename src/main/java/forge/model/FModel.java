@@ -148,7 +148,7 @@ public enum FModel {
         // Set gameplay preferences and constants
         final HttpUtil pinger = new HttpUtil();
         final String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/ping.php";
-        Constant.Runtime.NET_CONN[0] = (pinger.getURL(url).equals("pong") ? true : false);
+        Constant.Runtime.NET_CONN = (pinger.getURL(url).equals("pong") ? true : false);
 
         this.setBuildInfo(new BuildInfo());
         FModel.loadDynamicGamedata();
@@ -231,10 +231,8 @@ public enum FModel {
         if (!Constant.Keywords.LOADED[0]) {
             final List<String> nskwListFile = FileUtil.readFile("res/gamedata/NonStackingKWList.txt");
 
-
             if (nskwListFile.size() > 1) {
-                for (int i = 0; i < nskwListFile.size(); i++) {
-                    final String s = nskwListFile.get(i);
+                for (String s : nskwListFile) {
                     if (s.length() > 1) {
                         Constant.Keywords.NON_STACKING_LIST.add(s);
                     }

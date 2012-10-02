@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import forge.AllZone;
 import forge.Card;
 
-import forge.Constant;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
@@ -89,7 +88,7 @@ public class ControlWinLose {
      */
     public void startNextRound() {
         boolean isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
-        GameType gameType = Constant.Runtime.getGameType();
+        GameType gameType = Singletons.getModel().getMatchState().getGameType();
 
         Deck hDeck = AllZone.getHumanPlayer().getDeck();
         Deck cDeck = AllZone.getComputerPlayer().getDeck();
