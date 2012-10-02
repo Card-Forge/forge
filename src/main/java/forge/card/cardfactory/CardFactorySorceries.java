@@ -69,7 +69,6 @@ import forge.view.ButtonUtil;
  */
 public class CardFactorySorceries {
 
-    
     private static final SpellAbility getBrilliantUltimatum(final Card card) {
         return new Spell(card) {
             private static final long serialVersionUID = 1481112451519L;
@@ -251,46 +250,9 @@ public class CardFactorySorceries {
                 return cards.size() >= 8;
             }
         }; // SpellAbility
-        
-    }
-    
-    private final static SpellAbility getMartialCoup(final Card card) {
-        final Cost cost = new Cost(card, card.getManaCost(), false);
-        return new Spell(card, cost, null) {
-
-            private static final long serialVersionUID = -29101524966207L;
-
-            @Override
-            public void resolve() {
-                final List<Card> all = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-                final int soldiers = card.getXManaCostPaid();
-                for (int i = 0; i < soldiers; i++) {
-                    CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card.getController(), "W", new String[] {
-                            "Creature", "Soldier" }, 1, 1, new String[] { "" });
-                }
-                if (soldiers >= 5) {
-                    for (int i = 0; i < all.size(); i++) {
-                        final Card c = all.get(i);
-                        if (c.isCreature()) {
-                            Singletons.getModel().getGameAction().destroy(c);
-                        }
-                    }
-                }
-            } // resolve()
-
-            @Override
-            public boolean canPlayAI() {
-                final List<Card> human = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                final List<Card> computer = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-
-                // the computer will at least destroy 2 more human creatures
-                return ((computer.size() < (human.size() - 1)) || ((AllZone.getComputerPlayer().getLife() < 7) && !human
-                        .isEmpty())) && (ComputerUtil.getAvailableMana(true).size() >= 7);
-            }
-        }; // SpellAbility
 
     }
-    
+
     private final static SpellAbility getParralelEvolution(final Card card) {
         final Spell result = new Spell(card) {
             private static final long serialVersionUID = 3456160935845779623L;
@@ -325,7 +287,7 @@ public class CardFactorySorceries {
         result.setStackDescription(sbStack.toString());
         return result;
     }
-    
+
     private final static SpellAbility getGlobalRuin( final Card card ) {
         final List<Card> target = new ArrayList<Card>();
         final List<Card> saveList = new ArrayList<Card>();
@@ -522,7 +484,7 @@ public class CardFactorySorceries {
                 // graveyard or library is empty
                 final List<Card> graveyard = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
                 final List<Card> library = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
-                
+
                 this.setTargetPlayer(AllZone.getHumanPlayer());
 
                 return Iterables.any(graveyard, nonBasicLands) && !library.isEmpty();
@@ -543,7 +505,7 @@ public class CardFactorySorceries {
             }
         }; 
     }
-    
+
     private final static SpellAbility getDonate( final Card card ) {
         final Target t2 = new Target(card, "Select target Player", "Player".split(","));
         class DrawbackDonate extends AbilitySub {
@@ -603,7 +565,7 @@ public class CardFactorySorceries {
         spell.setDescription(sbDesc.toString());
         return spell;
     }
-    
+
     private final static SpellAbility getBalance( final Card card ) {
         return new Spell(card) {
             private static final long serialVersionUID = -5941893280103164961L;
@@ -740,9 +702,8 @@ public class CardFactorySorceries {
                 thePlayer.drawCard();
             }
         };
-        
     }
-    
+
     private final static SpellAbility getWindfall( final Card card ) {
         return new Spell(card) {
             private static final long serialVersionUID = -7707012960887790709L;
@@ -774,7 +735,7 @@ public class CardFactorySorceries {
             }
         };
     }
-    
+
     private final static SpellAbility getPatriarchsBidding( final Card card ) {
         final String[] input = new String[2];
 
@@ -848,7 +809,7 @@ public class CardFactorySorceries {
         spell.setStackDescription(sb.toString());
         return spell;
     }
-    
+
     private final static SpellAbility getLeeches( final Card card ) {
         /*
          * Target player loses all poison counters. Leeches deals that much
@@ -885,9 +846,9 @@ public class CardFactorySorceries {
 
                 return false;
             }
-        }; 
+        };
     }
-    
+
     private final static SpellAbility getSanityGrinding( final Card card ) {
         /*
          * Chroma - Reveal the top ten cards of your library. For each blue
@@ -895,7 +856,7 @@ public class CardFactorySorceries {
          * opponent puts the top card of his or her library into his or her
          * graveyard. Then put the cards you revealed this way on the bottom
          * of your library in any order.
-         */        
+         */
         return new Spell(card) {
             private static final long serialVersionUID = 4475834103787262421L;
 
@@ -935,7 +896,7 @@ public class CardFactorySorceries {
 
         };
     }
-    
+
     private final static SpellAbility getProfaneCommand( final Card card ) {
         // not sure what to call variables, so I just made up something
         final Player[] ab0player = new Player[1];
@@ -1248,7 +1209,7 @@ public class CardFactorySorceries {
                     }
                 } else {
                     final int max = card.getController().getLife();
-                    final Integer[] choices = new Integer[max+1];
+                    final Integer[] choices = new Integer[max + 1];
                     for (int i = 0; i <= max; i++) {
                         choices[i] = Integer.valueOf(i);
                     }
@@ -1354,12 +1315,12 @@ public class CardFactorySorceries {
                 return out;
             } // chooseTwo()
         }; // Input chooseTwoInput
-        
+
         spell.setBeforePayMana(chooseTwoInput);
         card.setSpellWithChoices(true);
         return spell;
     }
-    
+
     private final static SpellAbility getTransmuteArtifact( final Card card ) {
         /*
          * Sacrifice an artifact. If you do, search your library for an
@@ -1439,11 +1400,10 @@ public class CardFactorySorceries {
             } // resolve()
         }; // SpellAbility
     }
-    
+
     public static void buildCard(final Card card, final String cardName) {
 
         if (cardName.equals("Brilliant Ultimatum")) { card.addSpellAbility(getBrilliantUltimatum(card));
-        } else if (cardName.equals("Martial Coup")) { card.addSpellAbility(getMartialCoup(card));
         } else if (cardName.equals("Parallel Evolution")) { card.addSpellAbility(getParralelEvolution(card));
         } else if (cardName.equals("Global Ruin")) { card.addSpellAbility(getGlobalRuin(card));
         } else if (cardName.equals("Haunting Echoes")) { card.addSpellAbility(getHauntingEchoes(card));
@@ -1457,6 +1417,6 @@ public class CardFactorySorceries {
         } else if (cardName.equals("Sanity Grinding")) { card.addSpellAbility(getSanityGrinding(card));
         } else if (cardName.equals("Profane Command")) { card.addSpellAbility(getProfaneCommand(card));
         } else if (cardName.equals("Transmute Artifact")) { card.addSpellAbility(getTransmuteArtifact(card));
-        } 
+        }
     } // getCard
 }
