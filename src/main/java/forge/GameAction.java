@@ -101,6 +101,12 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public static Card changeZone(final PlayerZone zoneFrom, final PlayerZone zoneTo, final Card c, Integer position) {
+        if (c.isCopiedSpell()) {
+            if ((zoneFrom != null)) {
+                zoneFrom.remove(c);
+            }
+            return c;
+        }
         if ((zoneFrom == null) && !c.isToken()) {
             if (position == null) {
                 zoneTo.add(c);

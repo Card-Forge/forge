@@ -182,6 +182,7 @@ public class CardFactory implements CardFactoryInterface {
 
         c.addController(controller);
         c.setCopiedSpell(true);
+        c.refreshUniqueNumber();
 
         final SpellAbility copySA = sa.copy();
         if (sa.getTarget() != null) {
