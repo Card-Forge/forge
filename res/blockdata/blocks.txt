@@ -38,7 +38,7 @@ Index:33|Set0:LRW|Set1:MOR|Name:Lorwyn|DraftPacks:3|LandSetCode:LRW|SealedPacks:
 Index:34|Set0:SHM|Set1:EVE|Name:Shadowmoor|DraftPacks:3|LandSetCode:SHM|SealedPacks:6
 Index:35|Set0:ALA|Set1:CFX|Set2:ARB|Name:Shards of Alara|DraftPacks:3|LandSetCode:ALA|SealedPacks:6
 Index:36|Set0:M10|Name:Magic 2010|DraftPacks:3|LandSetCode:M10|SealedPacks:6
-Index:37|Set0:ZEN|Set1:WWK|Name:Zendikar|DraftPacks:3|LandSetCode:ZEN|SealedPacks:6
+Index:37|Set0:ZEN|Set1:WWK|Set2:ROE|Name:Zendikar|DraftPacks:3|LandSetCode:ZEN|SealedPacks:6
 Index:38|Set0:ROE|Name:Rise of the Eldrazi|DraftPacks:3|LandSetCode:ROE|SealedPacks:6
 Index:39|Set0:M11|Name:Magic 2011|DraftPacks:3|LandSetCode:M11|SealedPacks:6
 
@@ -48,3 +48,4 @@ Index:42|Set0:ISD|Set1:DKA|Name:Innistrad|DraftPacks:3|LandSetCode:ISD|SealedPac
 Index:43|Set0:AVR|Name:Avacyn Restored|DraftPacks:3|LandSetCode:AVR|SealedPacks:6
 Index:44|Set0:M13|Name:Magic 2013|DraftPacks:3|LandSetCode:M13|SealedPacks:6
 Index:45|Set0:RTR|Name:Return to Ravnica|DraftPacks:3|LandSetCode:RTR|SealedPacks:6
+
