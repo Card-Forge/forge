@@ -2508,7 +2508,7 @@ public class AbilityFactory {
                         }
 
                         // don't use it on creatures that can't be regenerated
-                        if (saviourApi.equals("Regenerate") && !c.canBeShielded()) {
+                        if (saviourApi.startsWith("Regenerate") && !c.canBeShielded()) {
                             continue;
                         }
 
@@ -2543,7 +2543,7 @@ public class AbilityFactory {
             }
             // Destroy => regeneration/bounce/shroud
             else if ((threatApi.equals("Destroy") || threatApi.equals("DestroyAll"))
-                    && ((saviourApi.equals("Regenerate") && !threatParams.containsKey("NoRegen")) || saviourApi
+                    && ((saviourApi.startsWith("Regenerate") && !threatParams.containsKey("NoRegen")) || saviourApi
                             .equals("ChangeZone") || saviourApi.equals("Pump"))) {
                 for (final Object o : objects) {
                     if (o instanceof Card) {

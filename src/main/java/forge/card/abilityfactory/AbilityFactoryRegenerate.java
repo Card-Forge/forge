@@ -729,6 +729,7 @@ public class AbilityFactoryRegenerate {
 
         List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         list = CardListUtil.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
+        list = CardListUtil.filter(list, CardPredicates.isController(AllZone.getComputerPlayer()));
 
         if (list.size() == 0) {
             return false;
@@ -736,15 +737,19 @@ public class AbilityFactoryRegenerate {
 
         int numSaved = 0;
         if (AllZone.getStack().size() > 0) {
-            // TODO - check stack for something on the stack will kill anything
-            // i control
-        } else {
+            final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
 
+            for (final Card c : list) {
+                if (objects.contains(c) && c.getShield() == 0) {
+                    numSaved++;
+                }
+            }
+        } else {
             if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 final List<Card> combatants = CardListUtil.filter(list, CardPredicates.Presets.CREATURES);
 
                 for (final Card c : combatants) {
-                    if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {
+                    if (c.getShield() == 0 && CombatUtil.combatantWouldBeDestroyed(c)) {
                         numSaved++;
                     }
                 }
