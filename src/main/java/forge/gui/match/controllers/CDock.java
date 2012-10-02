@@ -36,7 +36,6 @@ import forge.Card;
 import forge.CardListUtil;
 import forge.CardPredicates.Presets;
 import forge.Command;
-import forge.Constant;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.phase.CombatUtil;
@@ -194,10 +193,10 @@ public enum CDock implements ICDoc {
         public void actionPerformed(final ActionEvent e) {
             Deck targetDeck;
 
-            if (!Constant.Runtime.HUMAN_DECK[0].getMain().isEmpty()) {
-                targetDeck = Constant.Runtime.HUMAN_DECK[0];
-            } else if (!Constant.Runtime.COMPUTER_DECK[0].getMain().isEmpty()) {
-                targetDeck = Constant.Runtime.COMPUTER_DECK[0];
+            if (!AllZone.getHumanPlayer().getDeck().getMain().isEmpty()) {
+                targetDeck = AllZone.getHumanPlayer().getDeck();
+            } else if (!AllZone.getComputerPlayer().getDeck().getMain().isEmpty()) {
+                targetDeck = AllZone.getComputerPlayer().getDeck();
             } else {
                 return;
             }

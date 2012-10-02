@@ -27,7 +27,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Supplier;
 
 import forge.AllZone;
-import forge.Constant;
 import forge.deck.Deck;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.SEditorUtil;
@@ -222,8 +221,8 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
         this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
 
-        Deck deck = Constant.Runtime.HUMAN_DECK[0] == null ? null : this.questData.getMyDecks().get(
-                Constant.Runtime.HUMAN_DECK[0].getName());
+        Deck deck = AllZone.getHumanPlayer().getDeck() == null ? null : this.questData.getMyDecks().get(
+                AllZone.getHumanPlayer().getDeck().getName());
 
         if (deck == null) {
             deck = new Deck();

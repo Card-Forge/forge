@@ -21,6 +21,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import java.util.List;
 
+import forge.AllZone;
 import forge.Constant;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -91,8 +92,8 @@ public class GauntletMini {
     public void resetCurrentRound() {
         wins = 0;
         losses = 0;
-        Constant.Runtime.HUMAN_DECK[0] = humanDeck;
-        Constant.Runtime.COMPUTER_DECK[0] = aiDecks.get(0);
+        AllZone.getHumanPlayer().setDeck(humanDeck);
+        AllZone.getComputerPlayer().setDeck(aiDecks.get(0));
         currentRound = 1;
     }
 
@@ -108,8 +109,8 @@ public class GauntletMini {
             return;
         }
 
-        Constant.Runtime.HUMAN_DECK[0] = humanDeck;
-        Constant.Runtime.COMPUTER_DECK[0] = aiDecks.get(currentRound);
+        AllZone.getHumanPlayer().setDeck(humanDeck);
+        AllZone.getComputerPlayer().setDeck(aiDecks.get(currentRound));
         currentRound += 1;
 
     }
@@ -163,7 +164,7 @@ public class GauntletMini {
 
                 Constant.Runtime.setGameType(gauntletType);
 
-                GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+                GameNew.newGame(AllZone.getHumanPlayer().getDeck(), AllZone.getComputerPlayer().getDeck());
 
                 return null;
             }

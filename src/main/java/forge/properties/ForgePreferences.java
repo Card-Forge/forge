@@ -234,14 +234,13 @@ public class ForgePreferences {
         this.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE, String.valueOf(fieldViews.get(1).getLblCombatDamage().getEnabled()));
         this.setPref(FPref.PHASE_HUMAN_ENDCOMBAT, String.valueOf(fieldViews.get(1).getLblEndCombat().getEnabled()));
         this.setPref(FPref.PHASE_HUMAN_MAIN2, String.valueOf(fieldViews.get(1).getLblMain2().getEnabled()));
-        this.setPref(FPref.PHASE_HUMAN_EOT, String.valueOf(fieldViews.get(1).getLblEndTurn().getEnabled()));
-        this.setPref(FPref.PHASE_HUMAN_CLEANUP, String.valueOf(fieldViews.get(1).getLblCleanup().getEnabled()));
+        this.setPref(FPref.PHASE_HUMAN_EOT, fieldViews.get(1).getLblEndTurn().getEnabled());
+        this.setPref(FPref.PHASE_HUMAN_CLEANUP, fieldViews.get(1).getLblCleanup().getEnabled());
 
         final VDev v = VDev.SINGLETON_INSTANCE;
-        Preferences.MILL = v.getLblMilling().getEnabled();
-
-        this.setPref(FPref.DEV_MILLING_LOSS, String.valueOf(Preferences.MILL));
-        this.setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(v.getLblUnlimitedLands().getEnabled()));
+        
+        this.setPref(FPref.DEV_MILLING_LOSS, v.getLblMilling().getEnabled());
+        this.setPref(FPref.DEV_UNLIMITED_LAND, v.getLblUnlimitedLands().getEnabled());
     }
 
     /**
@@ -251,9 +250,7 @@ public class ForgePreferences {
     public void actuateMatchPreferences() {
         final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
-        Preferences.MILL = this.getPrefBoolean(FPref.DEV_MILLING_LOSS);
         Preferences.DEV_MODE = this.getPrefBoolean(FPref.DEV_MODE_ENABLED);
-        Preferences.RANDOM_FOIL = this.getPrefBoolean(FPref.UI_RANDOM_FOIL);
         Preferences.UPLOAD_DRAFT = (Constant.Runtime.NET_CONN[0] ? this.getPrefBoolean(FPref.UI_UPLOAD_DRAFT) : false);
 
         // AI field is at index [0]
@@ -336,6 +333,10 @@ public class ForgePreferences {
         preferenceValues.put(q0, s0);
     }
 
+    public void setPref(FPref q0, boolean val) {
+        setPref(q0, String.valueOf(val));
+    }    
+    
     /**
      * Returns a non-difficulty-indexed preference value.
      * 

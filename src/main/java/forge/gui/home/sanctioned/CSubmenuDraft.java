@@ -202,15 +202,15 @@ public enum CSubmenuDraft implements ICDoc {
             public Object doInBackground() {
                 DeckGroup opponentDecks = Singletons.getModel().getDecks().getDraft().get(human.getName());
 
-                Constant.Runtime.HUMAN_DECK[0] = human;
-                Constant.Runtime.COMPUTER_DECK[0] = opponentDecks.getAiDecks().get(aiIndex); //zero is human deck, so it must be +1
+                AllZone.getHumanPlayer().setDeck(human);
+                AllZone.getComputerPlayer().setDeck(opponentDecks.getAiDecks().get(aiIndex)); //zero is human deck, so it must be +1
 
-                if (Constant.Runtime.COMPUTER_DECK[0] == null) {
+                if (AllZone.getComputerPlayer().getDeck() == null) {
                     throw new IllegalStateException("Draft: Computer deck is null!");
                 }
 
                 Constant.Runtime.setGameType(GameType.Draft);
-                GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+                GameNew.newGame(AllZone.getHumanPlayer().getDeck(), AllZone.getComputerPlayer().getDeck());
                 return null;
             }
 

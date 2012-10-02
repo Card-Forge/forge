@@ -38,7 +38,6 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
-import forge.Constant;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.CardCollections;
@@ -425,7 +424,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
     private <T extends DeckBase> void editDeck(final Deck d0) {
         switch (this.gametype) {
             case Quest:
-                    Constant.Runtime.HUMAN_DECK[0] = d0;
+                    AllZone.getHumanPlayer().setDeck(d0);
                     final CEditorQuest qEditor = new CEditorQuest(AllZone.getQuest());
                     CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(qEditor);
                     FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_QUEST);

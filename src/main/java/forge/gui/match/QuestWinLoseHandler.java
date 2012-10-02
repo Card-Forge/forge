@@ -19,7 +19,6 @@ package forge.gui.match;
 import forge.AllZone;
 
 import forge.Card;
-import forge.Constant;
 import forge.Singletons;
 import forge.control.FControl;
 
@@ -133,7 +132,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
                 computerLife = ((QuestEventChallenge) qEvent).getAILife();
             }
 
-            GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
+            GameNew.newGame(AllZone.getHumanPlayer().getDeck(), AllZone.getComputerPlayer().getDeck(),
                     humanList, computerList, humanLife, computerLife, qEvent.getIconFilename());
         } else {
             super.startNextRound();

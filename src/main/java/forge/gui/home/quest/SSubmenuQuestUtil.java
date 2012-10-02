@@ -232,8 +232,8 @@ public class SSubmenuQuestUtil {
         final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
             @Override
             public Object doInBackground() {
-                Constant.Runtime.HUMAN_DECK[0] = SSubmenuQuestUtil.getCurrentDeck();
-                Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
+                AllZone.getHumanPlayer().setDeck(SSubmenuQuestUtil.getCurrentDeck());
+                AllZone.getComputerPlayer().setDeck(event.getEventDeck());
                 Constant.Runtime.setGameType(GameType.Quest);
 
                 qData.getChallengesManager().randomizeOpponents();
@@ -255,8 +255,8 @@ public class SSubmenuQuestUtil {
                     }
 
                     GameNew.newGame(
-                            Constant.Runtime.HUMAN_DECK[0],
-                            Constant.Runtime.COMPUTER_DECK[0],
+                            AllZone.getHumanPlayer().getDeck(),
+                            AllZone.getComputerPlayer().getDeck(),
                             QuestUtil.getHumanStartingCards(qData, event),
                             QuestUtil.getComputerStartingCards(event),
                             baseLifeHuman + extraLifeHuman,

@@ -344,15 +344,15 @@ public enum CSubmenuConstructed implements ICDoc {
         final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
             @Override
             public Object doInBackground() {
-                Constant.Runtime.HUMAN_DECK[0] =
-                        generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks(), PlayerType.HUMAN);
-                Constant.Runtime.COMPUTER_DECK[0] =
-                        generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER);
+                AllZone.getHumanPlayer().setDeck(
+                        generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks(), PlayerType.HUMAN));
+                AllZone.getComputerPlayer().setDeck(
+                        generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER));
                 
                 Constant.Runtime.setGameType(GameType.Constructed);
 
-                if (Constant.Runtime.HUMAN_DECK[0] != null && Constant.Runtime.COMPUTER_DECK[0] != null) {
-                    GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+                if (AllZone.getHumanPlayer().getDeck() != null && AllZone.getComputerPlayer().getDeck() != null) {
+                    GameNew.newGame(AllZone.getHumanPlayer().getDeck(), AllZone.getComputerPlayer().getDeck());
                 }
                 return null;
             }

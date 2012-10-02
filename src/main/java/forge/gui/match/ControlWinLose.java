@@ -91,10 +91,11 @@ public class ControlWinLose {
         boolean isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
         GameType gameType = Constant.Runtime.getGameType();
 
+        Deck hDeck = AllZone.getHumanPlayer().getDeck();
+        Deck cDeck = AllZone.getComputerPlayer().getDeck();
+
         //This is called from QuestWinLoseHandler also.  If we're in a quest, this is already handled elsewhere
         if (isAnte && !gameType.equals(GameType.Quest)) {
-            Deck hDeck = Constant.Runtime.HUMAN_DECK[0];
-            Deck cDeck = Constant.Runtime.COMPUTER_DECK[0];
             if (Singletons.getModel().getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
                 List<Card> compAntes = AllZone.getComputerPlayer().getCardsIn(ZoneType.Ante);
 
@@ -103,8 +104,6 @@ public class ControlWinLose {
                     CardPrinted toRemove = CardDb.instance().getCard(c);
                     cDeck.getMain().remove(toRemove);
                 }
-
-                Constant.Runtime.COMPUTER_DECK[0] = cDeck;
 
                 List<Card> o = GuiChoose.noneOrMany("Select cards to add to your deck", compAntes);
                 if (null != o) {
@@ -121,11 +120,11 @@ public class ControlWinLose {
                     CardPrinted toRemove = CardDb.instance().getCard(c);
                     hDeck.getMain().remove(toRemove);
                 }
-                Constant.Runtime.HUMAN_DECK[0] = hDeck;
+                AllZone.getHumanPlayer().setDeck(hDeck);
             }
         }
         Singletons.getModel().savePrefs();
-        GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+        GameNew.newGame(hDeck, cDeck);
     }
 
     /**

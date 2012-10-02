@@ -20,7 +20,7 @@ package forge.gui.deckeditor.controllers;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import forge.Constant;
+import forge.AllZone;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
@@ -169,7 +169,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
      */
     private Deck getPlayersDeck() {
         final Deck deck = new Deck();
-        Constant.Runtime.HUMAN_DECK[0] = deck;
+        AllZone.getHumanPlayer().setDeck(deck);
 
         // add sideboard to deck
         deck.getSideboard().addAll(this.getTableDeck().getCards());

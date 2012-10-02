@@ -48,6 +48,7 @@ import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
+import forge.deck.Deck;
 import forge.game.GameLossReason;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.DefaultPlayerZone;
@@ -149,6 +150,10 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante, ZoneType.Stack));
 
+    
+    // Moved deck here from Constants.Runtime
+    private Deck deck; 
+    
     /**
      * <p>
      * Constructor for Player.
@@ -1304,7 +1309,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
             AllZone.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams);
         }
         // lose:
-        else if (!Preferences.DEV_MODE || Preferences.MILL) {
+        else if (!Preferences.DEV_MODE || Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MILLING_LOSS)) {
             // if devMode is off, or canLoseByDecking is Enabled, run Lose condition
             if (!this.cantLose()) {
                 this.loseConditionMet(GameLossReason.Milled, null);
@@ -2690,5 +2695,13 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
     @Override
     public int hashCode() {
         return (41 * (41 + this.getName().hashCode()));
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck; 
     }
 }

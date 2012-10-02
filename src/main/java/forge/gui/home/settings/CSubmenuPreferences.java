@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import org.apache.commons.lang3.text.WordUtils;
 
 import forge.Command;
-import forge.Constant;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.RestartUtil;
@@ -120,9 +119,7 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getCbStackLand().addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(final ItemEvent arg0) {
-                final boolean toggle = view.getCbStackLand().isSelected();
-                prefs.setPref(FPref.UI_SMOOTH_LAND, String.valueOf(toggle));
-                Constant.Runtime.SMOOTH[0] = toggle;
+                prefs.setPref(FPref.UI_SMOOTH_LAND, view.getCbRandomFoil().isSelected());
                 prefs.save();
             }
         });
@@ -130,9 +127,7 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getCbRandomFoil().addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(final ItemEvent arg0) {
-                final boolean toggle = view.getCbRandomFoil().isSelected();
-                prefs.setPref(FPref.UI_RANDOM_FOIL, String.valueOf(toggle));
-                Preferences.RANDOM_FOIL = toggle;
+                prefs.setPref(FPref.UI_RANDOM_FOIL, view.getCbRandomFoil().isSelected());
                 prefs.save();
             }
         });

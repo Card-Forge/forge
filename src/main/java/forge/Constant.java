@@ -20,7 +20,6 @@ package forge;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.deck.Deck;
 import forge.game.GameType;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -42,35 +41,20 @@ public final class Constant {
      * The Class Runtime.
      */
     public static class Preferences  {
-
-        /** The Constant Mill. */
-        public static boolean MILL;
         /** The Constant DevMode. */
         // one for normal mode, one for quest mode
         public static boolean DEV_MODE;
         /** The Constant UpldDrft. */
         public static boolean UPLOAD_DRAFT;
-        /** The Constant RndCFoil. */
-        public static boolean RANDOM_FOIL;
         
     }
     
     public static class Runtime {
-
-        /** The Constant HumanDeck. */
-        public static final Deck[] HUMAN_DECK = new Deck[1];
-
-        /** The Constant ComputerDeck. */
-        public static final Deck[] COMPUTER_DECK = new Deck[1];
-
         /** The skin name. */
         private static String skinName = "default";
 
         /** The game type. */
         private static GameType gameType = GameType.Constructed;
-
-        /** The Constant Smooth. */
-        public static final boolean[] SMOOTH = new boolean[1];
 
         /** The Constant NetConn. */
         public static final boolean[] NET_CONN = new boolean[1];

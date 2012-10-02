@@ -135,7 +135,7 @@ public class GameNew {
         CMessage.SINGLETON_INSTANCE.updateGameInfo();
 
         // friendliness
-        final boolean canRandomFoil = Preferences.RANDOM_FOIL
+        final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL)
                 && Constant.Runtime.getGameType().equals(GameType.Constructed);
         final Random generator = MyRandom.getRandom();
 
@@ -246,7 +246,7 @@ public class GameNew {
         }
 
         // do this instead of shuffling Computer's deck
-        final boolean smoothLand = Constant.Runtime.SMOOTH[0];
+        final boolean smoothLand = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SMOOTH_LAND);
 
         if (smoothLand) {
             final Iterable<Card> c1 = GameNew.smoothComputerManaCurve(AllZone.getComputerPlayer().getCardsIn(ZoneType.Library));
