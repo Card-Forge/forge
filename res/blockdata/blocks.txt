@@ -49,4 +49,3 @@ Index:43|Set0:AVR|Name:Avacyn Restored|DraftPacks:3|LandSetCode:AVR|SealedPacks:
 Index:44|Set0:M13|Name:Magic 2013|DraftPacks:3|LandSetCode:M13|SealedPacks:6
 Index:45|Set0:RTR|Name:Return to Ravnica|DraftPacks:3|LandSetCode:RTR|SealedPacks:6
 
-Index:46|Set0:ALL|Set1:HML|Set2:ICE|Set3:LEG|Set4:FEM|Meta0:CUBE/Microprose/DoTP|Meta1:META/DRK,CHR/DRK+CHR|Name:(0)BBU 00 Play|DraftPacks:3|LandSetCode:2ED|SealedPacks:7
