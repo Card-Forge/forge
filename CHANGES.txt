@@ -391,9 +391,9 @@ Mizzium Mortars
 Mizzium Skin
 Necropolis Regent
 New Prahv Guildmage
-Nicmagus Elemental
 Niv-Mizzet, Dracogenius
 Nivix Guildmage
+Nivmagus Elemental
 Oak Street Innkeeper
 Ogre Jailbreaker
 Pack Rat
