@@ -9,6 +9,7 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import forge.Command;
 import forge.Constant;
+import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.RestartUtil;
 import forge.gui.framework.ICDoc;
@@ -74,7 +75,7 @@ public enum CSubmenuPreferences implements ICDoc {
             public void itemStateChanged(final ItemEvent arg0) {
                 final boolean toggle = view.getCbDevMode().isSelected();
                 prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));
-                Constant.Runtime.DEV_MODE[0] = toggle;
+                Preferences.DEV_MODE = toggle;
                 prefs.save();
             }
         });
@@ -111,7 +112,7 @@ public enum CSubmenuPreferences implements ICDoc {
             public void itemStateChanged(final ItemEvent arg0) {
                 final boolean toggle = view.getCbUploadDraft().isSelected();
                 prefs.setPref(FPref.UI_UPLOAD_DRAFT , String.valueOf(toggle));
-                Constant.Runtime.UPLOAD_DRAFT[0] = toggle;
+                Preferences.UPLOAD_DRAFT = toggle;
                 prefs.save();
             }
         });
@@ -131,7 +132,7 @@ public enum CSubmenuPreferences implements ICDoc {
             public void itemStateChanged(final ItemEvent arg0) {
                 final boolean toggle = view.getCbRandomFoil().isSelected();
                 prefs.setPref(FPref.UI_RANDOM_FOIL, String.valueOf(toggle));
-                Constant.Runtime.RANDOM_FOIL[0] = toggle;
+                Preferences.RANDOM_FOIL = toggle;
                 prefs.save();
             }
         });

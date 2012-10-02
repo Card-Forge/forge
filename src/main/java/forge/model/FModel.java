@@ -27,6 +27,7 @@ import java.util.List;
 
 import forge.AllZone;
 import forge.Constant;
+import forge.Constant.Preferences;
 import forge.GameAction;
 import forge.Singletons;
 import forge.card.BoosterData;
@@ -138,7 +139,7 @@ public enum FModel {
         this.fantasyBlocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
 
         // TODO - there's got to be a better place for this...oblivion?
-        Constant.Runtime.DEV_MODE[0] = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
+        Preferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
         // Instantiate AI
         AllZone.setInputControl(new InputControl(FModel.this));

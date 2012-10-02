@@ -35,6 +35,7 @@ import forge.Card;
 
 import forge.Command;
 import forge.Constant;
+import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.control.input.Input;
@@ -326,7 +327,7 @@ public class CField implements ICDoc {
         if (!CField.this.player.isComputer()) {
             new ZoneAction(CField.this.player.getZone(ZoneType.Hand), HumanHand.BASE)
             .actionPerformed(null);
-        } else if (Constant.Runtime.DEV_MODE[0]
+        } else if (Preferences.DEV_MODE
                 || CField.this.player.hasKeyword("Play with your hand revealed.")) {
             new ZoneAction(CField.this.player.getZone(ZoneType.Hand), ComputerHand.BASE)
             .actionPerformed(null);
@@ -373,7 +374,7 @@ public class CField implements ICDoc {
 
     /** */
     private void libraryAction() {
-        if (!Constant.Runtime.DEV_MODE[0]) { return; }
+        if (!Preferences.DEV_MODE) { return; }
 
         if (!CField.this.player.isComputer()) {
             new ZoneAction(CField.this.player.getZone(ZoneType.Library), HumanLibrary.BASE)

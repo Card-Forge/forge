@@ -17,7 +17,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Constant;
+import forge.Constant.Preferences;
 import forge.card.CardColor;
 import forge.card.CardManaCost;
 import forge.card.CardRulesPredicates;
@@ -135,7 +135,7 @@ public class LimitedDeck {
                 deckList.add(c);
                 getAiPlayables().remove(c);
                 landsNeeded--;
-                if (Constant.Runtime.DEV_MODE[0]) {
+                if (Preferences.DEV_MODE) {
                     System.out.println("Low CMC:" + c.getName());
                 }
             }
@@ -167,7 +167,7 @@ public class LimitedDeck {
             result.getMain().add(deckList);
             result.getSideboard().add(aiPlayables);
             result.getSideboard().add(availableList);
-            if (Constant.Runtime.DEV_MODE[0]) {
+            if (Preferences.DEV_MODE) {
                 debugFinalDeck();
             }
             return result;
@@ -290,7 +290,7 @@ public class LimitedDeck {
                 final float p = (float) clrCnts[i].getCount() / (float) totalColor;
                 final int nLand = (int) (landsNeeded * p); // desired truncation
                                                            // to int
-                if (Constant.Runtime.DEV_MODE[0]) {
+                if (Preferences.DEV_MODE) {
                     System.out.println("Basics[" + clrCnts[i].getColor() + "]: " + clrCnts[i].getCount() + "/"
                             + totalColor + " = " + p + " = " + nLand);
                 }
@@ -313,7 +313,7 @@ public class LimitedDeck {
                 deckList.add(cp);
                 landsNeeded--;
 
-                if (Constant.Runtime.DEV_MODE[0]) {
+                if (Preferences.DEV_MODE) {
                     System.out.println("AddBasics: " + cp.getName());
                 }
             }
@@ -391,7 +391,7 @@ public class LimitedDeck {
     //
     // lands = getAiPlayables().getType("Land");
     //
-    // if (Constant.Runtime.DEV_MODE[0]) {
+    // if (Constant.Runtime.DEV_MODE) {
     // System.out.println("Land:" + c.getName());
     // }
     // }
@@ -410,7 +410,7 @@ public class LimitedDeck {
                 deckList.add(bean.getValue());
                 aiPlayables.remove(bean.getValue());
                 nCards--;
-                if (Constant.Runtime.DEV_MODE[0]) {
+                if (Preferences.DEV_MODE) {
                     System.out.println("Random[" + nCards + "]:" + bean.getValue().getName() + "("
                             + bean.getValue().getCard().getManaCost() + ")");
                 }
@@ -434,7 +434,7 @@ public class LimitedDeck {
                 deckList.add(cardToAdd);
                 num--;
                 getAiPlayables().remove(cardToAdd);
-                if (Constant.Runtime.DEV_MODE[0]) {
+                if (Preferences.DEV_MODE) {
                     System.out.println("Others[" + num + "]:" + cardToAdd.getName() + " ("
                             + cardToAdd.getCard().getManaCost() + ")");
                 }
@@ -461,7 +461,7 @@ public class LimitedDeck {
             DeckHints hints = cardToAdd.getCard().getDeckHints();
             Iterable<CardPrinted> onColor = Iterables.filter(aiPlayables, Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
             List<CardPrinted> comboCards = hints.filter(onColor);
-            if (Constant.Runtime.DEV_MODE[0]) {
+            if (Preferences.DEV_MODE) {
                 System.out.println("Found " + comboCards.size() + " cards for " + cardToAdd.getName());
             }
             for (Pair<Double, CardPrinted> comboBean : rankCards(comboCards)) {
@@ -509,7 +509,7 @@ public class LimitedDeck {
                     comboCards.addAll(hints.filter(deckList));
                 }
                 if (comboCards.isEmpty()) {
-                    if (Constant.Runtime.DEV_MODE[0]) {
+                    if (Preferences.DEV_MODE) {
                         System.out.println("No combo cards found for " + card.getName() + ", removing it.");
                     }
                     it.remove();
@@ -520,7 +520,7 @@ public class LimitedDeck {
                         numOthers++;
                     }
                 } else {
-                    if (Constant.Runtime.DEV_MODE[0]) {
+                    if (Preferences.DEV_MODE) {
                         System.out.println("Found " + comboCards.size() + " cards for " + card.getName());
                     }
                 }
@@ -554,7 +554,7 @@ public class LimitedDeck {
                 deckList.add(c);
                 num--;
                 getAiPlayables().remove(c);
-                if (Constant.Runtime.DEV_MODE[0]) {
+                if (Preferences.DEV_MODE) {
                     System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getCard().getManaCost() + ")");
                 }
                 num = addDeckHintsCards(c, num);
@@ -618,12 +618,12 @@ public class LimitedDeck {
                 num--;
                 getAiPlayables().remove(c);
                 creatureCosts.put(cmc, creatureCosts.get(cmc) + 1);
-                if (Constant.Runtime.DEV_MODE[0]) {
+                if (Preferences.DEV_MODE) {
                     System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getCard().getManaCost() + ")");
                 }
                 num = addDeckHintsCards(c, num);
             } else {
-                if (Constant.Runtime.DEV_MODE[0]) {
+                if (Preferences.DEV_MODE) {
                     System.out.println(c.getName() + " not added because CMC " + c.getCard().getManaCost().getCMC()
                             + " has " + currentAtCmc + " already.");
                 }

@@ -20,6 +20,7 @@ import forge.CardPredicates.Presets;
 import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Constant;
+import forge.Constant.Preferences;
 import forge.GameAction;
 import forge.Singletons;
 import forge.control.FControl;
@@ -68,6 +69,7 @@ public class GameNew {
     public static void newGame(final Deck humanDeck, final Deck computerDeck, final List<Card> humanStart,
             final List<Card> computerStart, final int humanLife, final int computerLife, String iconEnemy) {
         Singletons.getControl().changeState(FControl.MATCH_SCREEN);
+        
         CMatchUI.SINGLETON_INSTANCE.initMatch(iconEnemy);
 
         GameNew.newGameCleanup();
@@ -133,7 +135,7 @@ public class GameNew {
         CMessage.SINGLETON_INSTANCE.updateGameInfo();
 
         // friendliness
-        final boolean canRandomFoil = Constant.Runtime.RANDOM_FOIL[0]
+        final boolean canRandomFoil = Preferences.RANDOM_FOIL
                 && Constant.Runtime.getGameType().equals(GameType.Constructed);
         final Random generator = MyRandom.getRandom();
 
@@ -336,7 +338,7 @@ public class GameNew {
         if (Singletons.getModel().getMatchState().getGamesPlayedCount() != 0) { return; }
 
         // Update mouse events in case of dev mode toggle
-        if (Constant.Runtime.DEV_MODE[0]) {
+        if (Preferences.DEV_MODE) {
             // TODO restore this functionality!!!
             //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(true);
             final List<VField> allFields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();

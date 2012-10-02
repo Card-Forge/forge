@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Constant;
+import forge.Constant.Preferences;
 import forge.gui.home.EMenuItem;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.nonsingleton.VField;
@@ -237,9 +238,9 @@ public class ForgePreferences {
         this.setPref(FPref.PHASE_HUMAN_CLEANUP, String.valueOf(fieldViews.get(1).getLblCleanup().getEnabled()));
 
         final VDev v = VDev.SINGLETON_INSTANCE;
-        Constant.Runtime.MILL[0] = v.getLblMilling().getEnabled();
+        Preferences.MILL = v.getLblMilling().getEnabled();
 
-        this.setPref(FPref.DEV_MILLING_LOSS, String.valueOf(Constant.Runtime.MILL[0]));
+        this.setPref(FPref.DEV_MILLING_LOSS, String.valueOf(Preferences.MILL));
         this.setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(v.getLblUnlimitedLands().getEnabled()));
     }
 
@@ -250,12 +251,10 @@ public class ForgePreferences {
     public void actuateMatchPreferences() {
         final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
-        Constant.Runtime.MILL[0] = this.getPrefBoolean(FPref.DEV_MILLING_LOSS);
-        Constant.Runtime.DEV_MODE[0] = this.getPrefBoolean(FPref.DEV_MODE_ENABLED);
-        Constant.Runtime.UPLOAD_DRAFT[0] = this.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
-        Constant.Runtime.RANDOM_FOIL[0] = this.getPrefBoolean(FPref.UI_RANDOM_FOIL);
-        Constant.Runtime.UPLOAD_DRAFT[0] = (Constant.Runtime.NET_CONN[0] ? this.getPrefBoolean(FPref.UI_UPLOAD_DRAFT)
-                : false);
+        Preferences.MILL = this.getPrefBoolean(FPref.DEV_MILLING_LOSS);
+        Preferences.DEV_MODE = this.getPrefBoolean(FPref.DEV_MODE_ENABLED);
+        Preferences.RANDOM_FOIL = this.getPrefBoolean(FPref.UI_RANDOM_FOIL);
+        Preferences.UPLOAD_DRAFT = (Constant.Runtime.NET_CONN[0] ? this.getPrefBoolean(FPref.UI_UPLOAD_DRAFT) : false);
 
         // AI field is at index [0]
         fieldViews.get(0).getLblUpkeep().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_UPKEEP));

@@ -22,7 +22,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -51,7 +50,6 @@ import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
-import forge.card.trigger.Trigger;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;

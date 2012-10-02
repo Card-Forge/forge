@@ -27,7 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import forge.Constant;
+import forge.Constant.Preferences;
 
 /**
  * <p>
@@ -149,7 +149,7 @@ public class HttpUtil {
         } catch (final IOException e) {
             return;
         }
-        if (Constant.Runtime.DEV_MODE[0]) {
+        if (Preferences.DEV_MODE) {
             System.out.println(response.toString());
         }
     }

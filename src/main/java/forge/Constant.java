@@ -41,6 +41,20 @@ public final class Constant {
     /**
      * The Class Runtime.
      */
+    public static class Preferences  {
+
+        /** The Constant Mill. */
+        public static boolean MILL;
+        /** The Constant DevMode. */
+        // one for normal mode, one for quest mode
+        public static boolean DEV_MODE;
+        /** The Constant UpldDrft. */
+        public static boolean UPLOAD_DRAFT;
+        /** The Constant RndCFoil. */
+        public static boolean RANDOM_FOIL;
+        
+    }
+    
     public static class Runtime {
 
         /** The Constant HumanDeck. */
@@ -58,33 +72,14 @@ public final class Constant {
         /** The Constant Smooth. */
         public static final boolean[] SMOOTH = new boolean[1];
 
-        /** The Constant Mill. */
-        public static final boolean[] MILL = new boolean[1];
-
-        /** The Constant DevMode. */
-        // one for normal mode, one for quest mode
-        public static final boolean[] DEV_MODE = new boolean[1];
-
         /** The Constant NetConn. */
         public static final boolean[] NET_CONN = new boolean[1];
-
-        /** The Constant UpldDrft. */
-        public static final boolean[] UPLOAD_DRAFT = new boolean[1];
-
-        /** The Constant RndCFoil. */
-        public static final boolean[] RANDOM_FOIL = new boolean[1];
 
         /** The Constant width. */
         public static final int[] WIDTH = { 300 };
 
         /** The Constant height. */
         public static final int[] HEIGHT = new int[1];
-
-        /** The Constant stackSize. */
-        public static final int[] STACK_SIZE = new int[1];
-
-        /** The Constant stackOffset. */
-        public static final int[] STACK_OFFSET = new int[1];
 
         /**
          * Gets the game type.

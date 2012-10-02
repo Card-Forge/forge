@@ -32,7 +32,7 @@ import com.google.common.base.Function;
 
 
 import forge.Card;
-import forge.Constant;
+import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
@@ -340,7 +340,7 @@ public final class BoosterDraft implements IBoosterDraft {
                     + " - booster pack = " + thisBooster);
         }
 
-        if (Constant.Runtime.UPLOAD_DRAFT[0]) {
+        if (Preferences.UPLOAD_DRAFT) {
             for (int i = 0; i < thisBooster.size(); i++) {
                 final CardPrinted cc = thisBooster.get(i);
                 final String cnBk = cc.getName() + "|" + cc.getEdition();
@@ -370,7 +370,7 @@ public final class BoosterDraft implements IBoosterDraft {
     /** This will upload drafting picks to cardforge HQ. */
     @Override
     public void finishedDrafting() {
-        if (Constant.Runtime.UPLOAD_DRAFT[0]) {
+        if (Preferences.UPLOAD_DRAFT) {
             if (this.draftPicks.size() > 1) {
                 final ArrayList<String> outDraftData = new ArrayList<String>();
 

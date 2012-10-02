@@ -29,6 +29,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Constant;
+import forge.Constant.Preferences;
 import forge.card.CardColor;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
@@ -74,7 +75,7 @@ public class BoosterDraftAI {
      * @return a {@link forge.CardList} object.
      */
     public CardPrinted choose(final List<CardPrinted> chooseFrom, final int player) {
-        if (Constant.Runtime.DEV_MODE[0]) {
+        if (Preferences.DEV_MODE) {
             System.out.println("Player[" + player + "] pack: " + chooseFrom.toString());
         }
 
@@ -134,7 +135,7 @@ public class BoosterDraftAI {
                         }
                     }
                 }
-                if (Constant.Runtime.DEV_MODE[0]) {
+                if (Preferences.DEV_MODE) {
                     System.out.println("Player[" + player + "] Color1: " + this.playerColors.get(player).getColor1());
                     if (!this.playerColors.get(player).getColor2().equals("none")) {
                         System.out.println("Player[" + player + "] Color2: "
@@ -192,7 +193,7 @@ public class BoosterDraftAI {
                         }
                     }
                 }
-                if (Constant.Runtime.DEV_MODE[0]) {
+                if (Preferences.DEV_MODE) {
                     System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).getColor2());
                 }
             }
@@ -306,7 +307,7 @@ public class BoosterDraftAI {
         final Deck[] out = new Deck[this.deck.size()];
 
         for (int i = 0; i < this.deck.size(); i++) {
-            if (Constant.Runtime.DEV_MODE[0]) {
+            if (Preferences.DEV_MODE) {
                 System.out.println("Deck[" + i + "]");
             }
 

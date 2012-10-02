@@ -38,6 +38,7 @@ import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Constant;
+import forge.Constant.Preferences;
 import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
@@ -1303,9 +1304,8 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
             AllZone.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams);
         }
         // lose:
-        else if (!Constant.Runtime.DEV_MODE[0] || Constant.Runtime.MILL[0]) {
-            // if devMode is off, or canLoseByDecking is Enabled, run Lose
-            // Condition
+        else if (!Preferences.DEV_MODE || Preferences.MILL) {
+            // if devMode is off, or canLoseByDecking is Enabled, run Lose condition
             if (!this.cantLose()) {
                 this.loseConditionMet(GameLossReason.Milled, null);
                 Singletons.getModel().getGameAction().checkStateEffects();
@@ -1322,7 +1322,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return the zone
      */
     public final PlayerZone getZone(final ZoneType zone) {
-        return this.zones.get(zone);
+        return zone == ZoneType.Stack ? AllZone.getStackZone() : this.zones.get(zone);
     }
 
     /**
@@ -1334,8 +1334,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a List<Card> with all the cards currently in requested zone
      */
     public final List<Card> getCardsIn(final ZoneType zone) {
-        final List<Card> cards = zone == ZoneType.Stack ? AllZone.getStackZone().getCards() : this.getZone(zone).getCards();
-        return new ArrayList<Card>(cards);
+        return this.getZone(zone).getCards();
     }
 
     /**
@@ -1355,9 +1354,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return the cards include phasing in
      */
     public final List<Card> getCardsIncludePhasingIn(final ZoneType zone) {
-        final List<Card> cards = zone == ZoneType.Stack ? AllZone.getStackZone().getCards() : this.getZone(zone)
-                .getCards(false);
-        return new ArrayList<Card>(cards);
+        return this.getZone(zone).getCards(false);
     }
 
     /**
@@ -1371,7 +1368,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a List<Card> with all the cards currently in requested zone
      */
     public final List<Card> getCardsIn(final ZoneType zone, final int n) {
-        return new ArrayList<Card>(this.getZone(zone).getCards(n));
+        return this.getZone(zone).getCards(n);
     }
 
     /**
@@ -1381,7 +1378,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            the zones
      * @return a List<Card> with all the cards currently in requested zones
      */
-    public final List<Card> getCardsIn(final List<ZoneType> zones) {
+    public final List<Card> getCardsIn(final Iterable<ZoneType> zones) {
         final List<Card> result = new ArrayList<Card>();
         for (final ZoneType z : zones) {
             if (z == ZoneType.Stack) {
@@ -1431,16 +1428,11 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      */
     protected final List<Card> getDredge() {
         final List<Card> dredge = new ArrayList<Card>();
-        final List<Card> cl = this.getCardsIn(ZoneType.Graveyard);
-
-        for (final Card c : cl) {
-            final ArrayList<String> kw = c.getKeyword();
-            for (int i = 0; i < kw.size(); i++) {
-                if (kw.get(i).toString().startsWith("Dredge")) {
-                    if (this.getCardsIn(ZoneType.Library).size() >= this.getDredgeNumber(c)) {
-                        dredge.add(c);
-                    }
-                }
+        int cntLibrary = this.getCardsIn(ZoneType.Library).size();
+        for (final Card c : this.getCardsIn(ZoneType.Graveyard)) {
+            int nDr = getDredgeNumber(c);
+            if ( nDr > 0 && cntLibrary >= nDr) {
+                dredge.add(c);
             }
         }
         return dredge;
@@ -1456,18 +1448,13 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a int.
      */
     protected final int getDredgeNumber(final Card c) {
-        final ArrayList<String> a = c.getKeyword();
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i).toString().startsWith("Dredge")) {
-                final String s = a.get(i).toString();
+        for (String s : c.getKeyword()) {
+            if (s.startsWith("Dredge")) {
                 return Integer.parseInt("" + s.charAt(s.length() - 1));
             }
         }
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Input_Draw : getDredgeNumber() card doesn't have dredge - ").append(c.getName());
-
-        throw new RuntimeException(sb.toString());
+        return 0;
+//        throw new RuntimeException("Input_Draw : getDredgeNumber() card doesn't have dredge - " + c.getName());
     } // getDredgeNumber()
 
     /**
@@ -1836,7 +1823,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
     public final boolean canPlayLand() {
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)
                 && this.isHuman()
-                && Constant.Runtime.DEV_MODE[0]) {
+                && Preferences.DEV_MODE) {
             return PhaseHandler.canCastSorcery(this);
         }
 

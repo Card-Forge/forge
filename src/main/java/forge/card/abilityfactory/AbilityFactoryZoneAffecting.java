@@ -47,7 +47,6 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
 /**

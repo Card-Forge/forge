@@ -19,7 +19,6 @@ import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.game.player.Player;
