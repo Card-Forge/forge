@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 Text:no text
 A:AB$ Pump | Cost$ 3 T | NumAtt$ 2 | NumDef$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberTargets$ True | SubAbility$ DelTrig | SpellDescription$ Target creature you control gets +2/+2 until end of turn. Return it to its owner's hand at the beginning of the next end step. (Return it only if it's on the battlefield.)
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | SpellDescription$ Return creature to owner's hand
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | Secondary$ True | SpellDescription$ Return creature to owner's hand
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
