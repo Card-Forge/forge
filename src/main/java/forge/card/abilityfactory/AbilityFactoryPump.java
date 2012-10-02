@@ -328,6 +328,24 @@ public class AbilityFactoryPump {
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
+        } else if (keyword.endsWith("CARDNAME can't attack or block.")) {
+            if (ph.isPlayerTurn(human)) {
+                if (!CombatUtil.canAttack(card)
+                        || (card.getNetCombatDamage() <= 0)
+                        || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                    return false;
+                }
+            } else {
+                if (ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                        || ph.getPhase().isBefore(PhaseType.MAIN1)) {
+                    return false;
+                }
+
+                List<Card> attackers = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.possibleAttackers);
+                if (!CombatUtil.canBlockAtLeastOne(card, attackers)) {
+                    return false;
+                }
+            }
         } else if (keyword.endsWith("CARDNAME can't block.")) {
             if (ph.isPlayerTurn(human) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                     || ph.getPhase().isBefore(PhaseType.MAIN1)) {
@@ -365,6 +383,8 @@ public class AbilityFactoryPump {
             if (card.getShield() <= 0) {
                 return false;
             }
+        } else if (keyword.endsWith("CARDNAME's activated abilities can't be activated.")) {
+            return false; //too complex
         }
         return true;
     }
