@@ -212,6 +212,46 @@ Fixes/Features:
 - Fixed Subterranean Hangar.
 - Reverted Triangle of War and fixed an issue with the AI targeting.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Fireball.
+- For some reason, the multicolor filter box was working 'negatively' compared to earlier versions, fixed (earlier, more intuitive behavior restored).
+- fixing couter-logical defaultNo parameter
+- Improved AI of spells cast via copySpellontoStack.
+- Fixed chooseCardFromStack overwriting multiple spells with same stack description.
+- small changes
+- GuiUtils: choice methods moved to GuiChoose.java
+- GuiUtils: rarely used methods moved closer to usage
+- Converted Sky Swallower to script.
+- CardFactorySorceries: moved each SpellAbility creation to a separate function
+- CardList: removed reverse()
+- shuffle => CardListUtil as static
+- Restored the fix for Emrakul, the Aeons Torn shaking of auras like Dragon Breath (why was this removed?).
+- Cleanup of unused functions.
+- replacing CardList calls with iterables where possible
+- CostChange can now run through AF.calculateAmount()
+- Converted Fireball to Script
+- Removing chained calls to CardList.filter
+- Indirection of getValidCards and getTargetableCards. Moved to CardListUtil
+- Removed all except filter from CardList
+- CardList class stripped, preparing to remove it
+- CardList class replaced by java.util.(Array)List<Card>
+- Improving some potential NPEs in AFChangeZone related to Origin$ All. (Prepping for converting Mox Diamond and similar replacement effects)
+- Converting Mox Diamond to Script
+- Balduvian Horde, Minotaur Explorer and Pillaging Horde converted to script
+- Added a query for optional random discards in AF_ZoneChange
+- Convert Treva, the Renewer to script
+- Convert Molten Hydra to Script
+- Phyrexian Dreadnought ETB Ability is now a trigger and can be Stifled
+- fixed choosing any number of cards
+- fixed stack description
+- Constant.preferences
+- Cleanup.
+- Deck moved to player (still hardcoded, but no longer in constants)
+- Constants moved to better places
+- Copied spells will now have their own unique number.
+- Added additional cleanups to newGameCleanup().
+- Converted Martial Coup to script
+- Added support for tiny 3-pack Sealed Deck games.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -265,6 +305,7 @@ Collective Blessing
 Common Bond
 Concordia Pegasus
 Conjured Currency
+Corpsejack Menace
 Counterflux
 Coursers' Accord
 Crosstown Courier
@@ -276,6 +317,7 @@ Dead Reveler
 Deadbridge Goliath
 Death's Presence
 Deathrite Shaman
+Desecration Demon
 Destroy the Evidence
 Detention Sphere
 Deviant Glee
@@ -349,6 +391,7 @@ Mizzium Mortars
 Mizzium Skin
 Necropolis Regent
 New Prahv Guildmage
+Nicmagus Elemental
 Niv-Mizzet, Dracogenius
 Nivix Guildmage
 Oak Street Innkeeper
