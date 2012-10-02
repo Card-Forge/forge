@@ -111,8 +111,12 @@ public class MagicStack extends MyObservable {
      */
     public final void reset() {
         this.getStack().clear();
+        this.simultaneousStackEntryList.clear();
         this.frozen = false;
         this.splitSecondOnStack = 0;
+        this.lastTurnCast.clear();
+        this.thisTurnCast.clear();
+        this.curResolvingCard = null;
         this.getFrozenStack().clear();
         this.updateObservers();
     }
