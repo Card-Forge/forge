@@ -241,8 +241,8 @@ public final class AbilityFactoryChangeZone {
      * @return a boolean.
      */
     public static boolean isHidden(final String origin, final boolean hiddenOverride) {
-        return hiddenOverride || ZoneType.smartValueOf(origin).isHidden();
-
+        ZoneType zone = ZoneType.smartValueOf(origin);
+        return hiddenOverride || (zone != null && zone.isHidden());
     }
 
     /**
@@ -255,7 +255,8 @@ public final class AbilityFactoryChangeZone {
      * @return a boolean.
      */
     public static boolean isKnown(final String origin) {
-        return ZoneType.smartValueOf(origin).isKnown();
+        ZoneType zone = ZoneType.smartValueOf(origin);
+        return zone != null && zone.isKnown();
     }
 
     /**
@@ -434,7 +435,9 @@ public final class AbilityFactoryChangeZone {
 
         if (AbilityFactoryChangeZone.isHidden(origin, params.containsKey("Hidden")) && !params.containsKey("Ninjutsu")) {
             AbilityFactoryChangeZone.changeHiddenOriginResolve(af, sa);
-        } else if (AbilityFactoryChangeZone.isKnown(origin) || params.containsKey("Ninjutsu")) {
+        } else {
+            //else if (AbilityFactoryChangeZone.isKnown(origin) || params.containsKey("Ninjutsu")) {
+            // Why is this an elseif and not just an else?
             AbilityFactoryChangeZone.changeKnownOriginResolve(af, sa);
         }
     }
@@ -2146,8 +2149,8 @@ public final class AbilityFactoryChangeZone {
         final Player player = sa.getActivatingPlayer();
         final Card hostCard = sa.getSourceCard();
 
-        final ZoneType destination = ZoneType.valueOf(params.get("Destination"));
-        final ZoneType origin = ZoneType.valueOf(params.get("Origin"));
+        final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
+        final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
 
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
@@ -2200,12 +2203,19 @@ public final class AbilityFactoryChangeZone {
                     continue;
                 }
                 final PlayerZone originZone = AllZone.getZoneOf(tgtC);
+                
+                ZoneType actingOrigin = origin;
+                
+                if (actingOrigin == null && originZone != null) {
+                    actingOrigin = originZone.getZoneType();
+                }
+                
                 // if Target isn't in the expected Zone, continue
-                if ((originZone == null) || !originZone.is(origin)) {
+                if (originZone == null || !originZone.is(actingOrigin)) {
                     continue;
                 }
 
-                if ((tgt != null) && origin.equals(ZoneType.Battlefield)) {
+                if ((tgt != null) && actingOrigin.equals(ZoneType.Battlefield)) {
                     // check targeting
                     if (!tgtC.canBeTargetedBy(sa)) {
                         continue;
