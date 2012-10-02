@@ -622,89 +622,6 @@ public class CardFactoryCreatures {
         card.addSpellAbility(spell);
     }
 
-    private static void getCard_MoltenHydra(final Card card, final String cardName) {
-        final Target target = new Target(card, "TgtCP");
-        final Cost abCost = new Cost(card, "T", true);
-        class MoltenHydraAbility extends AbilityActivated {
-            public MoltenHydraAbility(final Card ca, final Cost co, final Target t) {
-                super(ca, co, t);
-            }
-
-            @Override
-            public AbilityActivated getCopy() {
-                return new MoltenHydraAbility(getSourceCard(),
-                        getPayCosts(), new Target(getTarget()));
-            }
-
-            private static final long serialVersionUID = 2626619319289064289L;
-
-            @Override
-            public boolean canPlay() {
-                return (card.getCounters(Counters.P1P1) > 0) && super.canPlay();
-            }
-
-            @Override
-            public boolean canPlayAI() {
-                return this.getCreature().size() != 0;
-            }
-
-            @Override
-            public void chooseTargetAI() {
-                if (AllZone.getHumanPlayer().getLife() < card.getCounters(Counters.P1P1)) {
-                    this.setTargetPlayer(AllZone.getHumanPlayer());
-                } else {
-                    final List<Card> list = this.getCreature();
-                    CardListUtil.shuffle(list);
-                    this.setTargetCard(list.get(0));
-                }
-            } // chooseTargetAI()
-
-            List<Card> getCreature() {
-                List<Card> list = CardFactoryUtil.getHumanCreatureAI(this, true);
-                list = CardListUtil.filter(list, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        final int total = card.getCounters(Counters.P1P1);
-                        return (total >= c.getKillDamage());
-                    }
-                });
-                return list;
-            } // getCreature()
-
-            @Override
-            public void resolve() {
-                final int total = card.getCounters(Counters.P1P1);
-                if (this.getTargetCard() != null) {
-                    if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && this.getTargetCard().canBeTargetedBy(this)) {
-                        this.getTargetCard().addDamage(total, card);
-                    }
-                } else {
-                    this.getTargetPlayer().addDamage(total, card);
-                }
-                card.subtractCounter(Counters.P1P1, total);
-            } // resolve()
-
-            @Override
-            public String getDescription() {
-                final StringBuilder sbDesc = new StringBuilder();
-                sbDesc.append(abCost).append("Remove all +1/+1 counters from ");
-                sbDesc.append(cardName).append(":  ").append(cardName);
-                sbDesc.append(" deals damage to target creature or player equal to the ");
-                sbDesc.append("number of +1/+1 counters removed this way.");
-                return sbDesc.toString();
-            }
-        }
-        final AbilityActivated ability2 = new MoltenHydraAbility(card, abCost, target);
-
-        card.addSpellAbility(ability2);
-
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append("Molten Hydra deals damage to number of +1/+1 ");
-        sbStack.append("counters on it to target creature or player.");
-        ability2.setStackDescription(sbStack.toString());
-    }
-
     private static void getCard_KinsbaileBorderguard(final Card card, final String cardName) {
         final SpellAbility ability = new Ability(card, "0") {
             @Override
@@ -1405,8 +1322,6 @@ public class CardFactoryCreatures {
             getCard_MasterOfTheWildHunt(card, cardName);
         } else if (cardName.equals("Apocalypse Hydra")) {
             getCard_ApocalypseHydra(card, cardName);
-        } else if (cardName.equals("Molten Hydra")) {
-            getCard_MoltenHydra(card, cardName);
         } else if (cardName.equals("Kinsbaile Borderguard")) {
             getCard_KinsbaileBorderguard(card, cardName);
         } else if (cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite")
