@@ -8,6 +8,7 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Permanent.counters_GE1_P
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:RemRandomDeck:True
 DeckHints:Type$Artifact
+SVar:NeedsToPlay:Artifact.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phylactery_lich.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/110.jpg

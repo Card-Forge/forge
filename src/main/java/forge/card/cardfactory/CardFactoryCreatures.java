@@ -157,56 +157,6 @@ public class CardFactoryCreatures {
         card.addSpellAbility(a1);
     }
 
-    private static void getCard_MinotaurExplorer(final Card card, final String cardName) {
-        final SpellAbility creature = new SpellPermanent(card) {
-            private static final long serialVersionUID = -7326018877172328480L;
-
-            @Override
-            public boolean canPlayAI() {
-                int reqHand = 1;
-                if (AllZone.getZoneOf(card).is(ZoneType.Hand)) {
-                    reqHand++;
-                }
-
-                // Don't play if it would sacrifice as soon as it comes into
-                // play
-                return AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).size() > reqHand;
-            }
-        };
-
-
-        final SpellAbility ability = new Ability(card, "0") {
-            @Override
-            public void resolve() {
-                final List<Card> hand = card.getController().getCardsIn(ZoneType.Hand);
-                if (hand.size() == 0) {
-                    Singletons.getModel().getGameAction().sacrifice(card, null);
-                } else {
-                    card.getController().discardRandom(this);
-                }
-            }
-        }; // SpellAbility
-
-        final Command intoPlay = new Command() {
-            private static final long serialVersionUID = 4986114285467649619L;
-
-            @Override
-            public void execute() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append(card.getController());
-                sb.append(" - discards at random or sacrifices ").append(cardName);
-                ability.setStackDescription(sb.toString());
-
-                AllZone.getStack().addSimultaneousStackEntry(ability);
-
-            }
-        };
-
-        card.clearFirstSpell();
-        card.addFirstSpellAbility(creature);
-        card.addComesIntoPlayCommand(intoPlay);
-    }
-
     private static void getCard_PhylacteryLich(final Card card, final String cardName) {
         final Command intoPlay = new Command() {
             private static final long serialVersionUID = -1601957445498569156L;
@@ -1480,8 +1430,6 @@ public class CardFactoryCreatures {
             getCard_ForceOfSavagery(card, cardName);
         } else if (cardName.equals("Gilder Bairn")) {
             getCard_GilderBairn(card, cardName);
-        } else if (cardName.equals("Minotaur Explorer") || cardName.equals("Balduvian Horde") || cardName.equals("Pillaging Horde")) {
-            getCard_MinotaurExplorer(card, cardName);
         } else if (cardName.equals("Phylactery Lich")) {
             getCard_PhylacteryLich(card, cardName);
         } else if (cardName.equals("Painter's Servant")) {

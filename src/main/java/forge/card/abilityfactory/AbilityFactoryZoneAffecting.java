@@ -47,6 +47,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 
 /**
@@ -1335,8 +1336,24 @@ public class AbilityFactoryZoneAffecting {
                 }
 
                 if (mode.equals("Random")) {
-                    final String valid = params.containsKey("DiscardValid") ? params.get("DiscardValid") : "Card";
-                    discarded.addAll(p.discardRandom(numCards, sa, valid));
+                    boolean runDiscard = true;
+                    if (params.containsKey("Optional")) {
+                       if (p.isHuman()) {
+                           // TODO Ask if Human would like to discard a card at Random
+                           StringBuilder sb = new StringBuilder("Would you like to discard ");
+                           sb.append(numCards).append(" random card(s)?");
+                           runDiscard = GameActionUtil.showYesNoDialog(source, sb.toString());
+                       }
+                       else {
+                           // TODO For now AI will always discard Random used currently with:
+                           // Balduvian Horde and similar cards
+                       }
+                    }
+                    
+                    if (runDiscard) {
+                        final String valid = params.containsKey("DiscardValid") ? params.get("DiscardValid") : "Card";
+                        discarded.addAll(p.discardRandom(numCards, sa, valid));
+                    }
                 } else if (mode.equals("TgtChoose") && params.containsKey("UnlessType")) {
                     p.discardUnless(numCards, params.get("UnlessType"), sa);
                 } else if (mode.equals("RevealDiscardAll")) {
