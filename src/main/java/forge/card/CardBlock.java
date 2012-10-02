@@ -195,6 +195,11 @@ public final class CardBlock implements Comparable<CardBlock> {
      */
     @Override
     public String toString() {
+        if (this.getNumberMetaSets() + this.getNumberSets() < 1) {
+            return this.name + "(empty)";
+        } else if (this.getNumberMetaSets() + this.getNumberSets() < 2) {
+            return this.name + "(set)";
+        }
         return this.name + " (block)";
     }
 
@@ -261,6 +266,20 @@ public final class CardBlock implements Comparable<CardBlock> {
             return new CardBlock(index, name, sets, metas, landSet, draftBoosters, sealedBoosters);
         }
 
+    }
+
+    /**
+     * The number of normal sets in the block.
+     *
+     * @return int, number of sets.
+     */
+    public int getNumberSets() {
+        if (sets == null || sets.length < 1) {
+            return 0;
+        }
+        else {
+            return sets.length;
+        }
     }
 
     /**
