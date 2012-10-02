@@ -277,7 +277,7 @@ public class TargetSelection {
             objects = getUniqueTargets(this.ability);
             for (final Object o : objects) {
                 if ((o instanceof Card) && objects.contains(o)) {
-                    choices.remove((Card) o);
+                    choices.remove(o);
                 }
             }
         }
@@ -510,7 +510,7 @@ public class TargetSelection {
 
         final Card check = GuiChoose.oneOrNone(message, choicesWithDone);
         if (check != null) {
-            final Card c = (Card) check;
+            final Card c = check;
             if (!c.equals(divBattlefield) && !c.equals(divExile) && !c.equals(divGrave)
                     && !c.equals(divLibrary) && !c.equals(divStack)) {
                 if (c.equals(dummy)) {

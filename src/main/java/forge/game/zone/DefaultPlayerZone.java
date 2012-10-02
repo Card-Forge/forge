@@ -66,6 +66,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
 
     // ************ BEGIN - these methods fire updateObservers() *************
 
+    @Override
     public void add(final Object o, boolean update) {
         final Card c = (Card) o;
 

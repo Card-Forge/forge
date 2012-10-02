@@ -112,6 +112,7 @@ class DeckColors {
      * 
      * @return description.
      */
+    @Override
     public String toString() {
         return color1 + '/' + color2;
     }

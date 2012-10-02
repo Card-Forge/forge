@@ -16,10 +16,12 @@ class UnsortedListModel extends AbstractListModel {
         model = new LinkedList<Object>();
     }
 
+    @Override
     public int getSize() {
         return model.size();
     }
 
+    @Override
     public Object getElementAt(int index) {
         return model.get(index);
     }

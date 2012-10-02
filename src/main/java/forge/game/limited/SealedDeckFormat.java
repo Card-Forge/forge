@@ -268,7 +268,7 @@ public class SealedDeckFormat {
                 JOptionPane.showMessageDialog(null, "No custom sealed files found.", "",
                         JOptionPane.INFORMATION_MESSAGE);
             } else {
-                final CustomLimited draft = (CustomLimited) GuiChoose.one("Choose Custom Sealed Pool",
+                final CustomLimited draft = GuiChoose.one("Choose Custom Sealed Pool",
                         customs);
 
                 final BoosterGenerator bpCustom = new BoosterGenerator(draft.getCardPool());

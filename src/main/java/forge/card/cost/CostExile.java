@@ -350,7 +350,7 @@ public class CostExile extends CostPartWithList {
                             .oneOrNone("Exile from " + part.getFrom(), this.typeList);
 
                     if (o != null) {
-                        final Card c = (Card) o;
+                        final Card c = o;
                         this.typeList.remove(c);
                         part.addToList(c);
                         Singletons.getModel().getGameAction().exile(c);

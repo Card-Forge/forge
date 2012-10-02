@@ -689,7 +689,7 @@ public final class GuiDisplayUtil {
         if (null == o) {
             return;
         } else {
-            final Card c = (Card) o;
+            final Card c = o;
             final Counters counter = GuiChoose.oneOrNone("Which type of counter?", Counters.values());
             if (null == counter) {
                 return;
@@ -768,7 +768,7 @@ public final class GuiDisplayUtil {
         if (null == o) {
             return;
         } else {
-            final Player p = (Player) o;
+            final Player p = o;
             final Integer[] integers = new Integer[99];
             for (int j = 0; j < 99; j++) {
                 integers[j] = Integer.valueOf(j);

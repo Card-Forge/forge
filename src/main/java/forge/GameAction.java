@@ -1582,7 +1582,7 @@ public class GameAction {
         } else if (choices.size() == 1) {
             choice = choices.get(0);
         } else {
-            choice = (String) GuiChoose.oneOrNone("Choose", choices);
+            choice = GuiChoose.oneOrNone("Choose", choices);
         }
 
         if (choice == null) {
@@ -1620,7 +1620,7 @@ public class GameAction {
         } else if (choices.size() == 1) {
             sa = choices.get(0);
         } else {
-            sa = (SpellAbility) GuiChoose.oneOrNone("Choose", choices);
+            sa = GuiChoose.oneOrNone("Choose", choices);
         }
 
         if (sa == null) {
@@ -1709,7 +1709,7 @@ public class GameAction {
                         cntChoice[i] = Integer.valueOf(i);
                     }
                     
-                    final Integer chosenAmount = (Integer) GuiChoose.one("Exile how many cards?", cntChoice);
+                    final Integer chosenAmount = GuiChoose.one("Exile how many cards?", cntChoice);
                     System.out.println("Delve for " + chosenAmount);
                     final List<Card> choices = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
                     final List<Card> chosen = new ArrayList<Card>();
@@ -1801,7 +1801,7 @@ public class GameAction {
                             String chosenColor = usableColors.get(0);
                             if (usableColors.size() > 1) {
                                 if (sa.getActivatingPlayer().isHuman()) {
-                                    chosenColor = (String) GuiChoose.one("Convoke for which color?",
+                                    chosenColor = GuiChoose.one("Convoke for which color?",
                                             usableColors);
                                 } else {
                                     // TODO: AI for choosing which color to
@@ -1925,7 +1925,7 @@ public class GameAction {
         } else if (choices.size() == 1) {
             choice = choices.get(0);
         } else {
-            choice = (String) GuiChoose.oneOrNone("Choose", choices);
+            choice = GuiChoose.oneOrNone("Choose", choices);
         }
         final SpellAbility ability = map.get(choice);
 

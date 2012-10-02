@@ -213,6 +213,7 @@ public class DualListBox extends JPanel {
     }
 
     private class AddListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             Object[] selected = sourceList.getSelectedValues();
             addDestinationElements(selected);
@@ -238,6 +239,7 @@ public class DualListBox extends JPanel {
     }
     
     private class AddAllListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             addAll();
             setButtonState();
@@ -245,6 +247,7 @@ public class DualListBox extends JPanel {
     }
 
     private class RemoveListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             Object[] selected = destList.getSelectedValues();
             addSourceElements(selected);
@@ -254,6 +257,7 @@ public class DualListBox extends JPanel {
     }
     
     private class RemoveAllListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {   
             Iterator<Object> itr = destListModel.iterator();
             
@@ -297,12 +301,14 @@ public class DualListBox extends JPanel {
     }
     
     private class OkListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             finishOrdering();
         }
     }
     
     private class AutoListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             addAll();
             finishOrdering();

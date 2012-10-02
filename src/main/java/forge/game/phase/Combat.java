@@ -110,13 +110,13 @@ public class Combat {
     public final void initiatePossibleDefenders(final Player defender) {
         this.defenders.clear();
         this.defenderMap.clear();
-        this.defenders.add((GameEntity) defender);
-        this.defenderMap.put((GameEntity) defender, new ArrayList<Card>());
+        this.defenders.add(defender);
+        this.defenderMap.put(defender, new ArrayList<Card>());
         List<Card> planeswalkers = defender.getCardsIn(ZoneType.Battlefield);
         planeswalkers = CardListUtil.filter(planeswalkers, CardPredicates.Presets.PLANEWALKERS);
         for (final Card pw : planeswalkers) {
-            this.defenders.add((GameEntity) pw);
-            this.defenderMap.put((GameEntity) pw, new ArrayList<Card>());
+            this.defenders.add(pw);
+            this.defenderMap.put(pw, new ArrayList<Card>());
         }
     }
 

@@ -2032,7 +2032,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             if (player.isHuman()) {
                                 final Card o = GuiChoose.oneOrNone("Pick a creature to return to hand", graveyardCreatures);
                                 if (o != null) {
-                                    final Card card = (Card) o;
+                                    final Card card = o;
 
                                     Singletons.getModel().getGameAction().moveToHand(card);
                                 }

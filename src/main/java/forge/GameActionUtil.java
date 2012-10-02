@@ -1737,7 +1737,7 @@ public final class GameActionUtil {
                     newSA.addSplicedCards(c);
                     SpellAbility child = newSA;
                     while (child.getSubAbility() != null) {
-                        AbilitySub newChild = (AbilitySub) child.getSubAbility().getCopy();
+                        AbilitySub newChild = child.getSubAbility().getCopy();
                         child.setSubAbility(newChild);
                         newChild.setParent(child);
                         child = newChild;

@@ -365,7 +365,7 @@ public class Untap extends Phase implements java.io.Serializable {
                 if (c.isAura()) {
                     final GameEntity ent = c.getEnchanting();
 
-                    if ((ent instanceof Card) && list.contains((Card) ent)) {
+                    if ((ent instanceof Card) && list.contains(ent)) {
                         continue;
                     }
                 } else if (c.isEquipment() && c.isEquipping()) {

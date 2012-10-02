@@ -226,7 +226,7 @@ public class CardFactorySorceries {
                             break;
                         }
 
-                        final Card playing = (Card) check;
+                        final Card playing = check;
                         if (playing.isLand()) {
                             if (card.getController().canPlayLand()) {
                                 card.getController().playLand(playing);
@@ -1169,7 +1169,7 @@ public class CardFactorySorceries {
 
                 final Card check = GuiChoose.oneOrNone("Select target creature with CMC < X", grave);
                 if (check != null) {
-                    final Card c = (Card) check;
+                    final Card c = check;
                     if (c.canBeTargetedBy(spell)) {
                         ab1card[0] = c;
                     }

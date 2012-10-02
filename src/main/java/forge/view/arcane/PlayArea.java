@@ -288,7 +288,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.extraCardSpacingX = Math.round(this.cardWidth * PlayArea.EXTRA_CARD_SPACING_X);
         this.cardSpacingX = (this.cardHeight - this.cardWidth) + this.extraCardSpacingX;
         this.cardSpacingY = Math.round(this.cardHeight * PlayArea.CARD_SPACING_Y);
-        this.stackSpacingX = (int) Math.round(this.cardWidth * PlayArea.STACK_SPACING_X);
+        this.stackSpacingX = Math.round(this.cardWidth * PlayArea.STACK_SPACING_X);
         this.stackSpacingY = Math.round(this.cardHeight * PlayArea.STACK_SPACING_Y);
 
         int afterFirstRow;

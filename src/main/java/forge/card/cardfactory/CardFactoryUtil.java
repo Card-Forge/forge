@@ -1064,7 +1064,7 @@ public class CardFactoryUtil {
                     // ability.setTargetCard((Card)o);
 
                     sourceCard.getController().discard(sourceCard, this);
-                    final Card c1 = (Card) o;
+                    final Card c1 = o;
 
                     Singletons.getModel().getGameAction().moveToHand(c1);
 
@@ -1270,7 +1270,7 @@ public class CardFactoryUtil {
                         final Card o = GuiChoose.oneOrNone("Select a card", sameCost);
                         if (o != null) {
 
-                            final Card c1 = (Card) o;
+                            final Card c1 = o;
                             Singletons.getModel().getGameAction().moveToHand(c1);
                         }
                     }

@@ -132,7 +132,7 @@ public enum CStatistics implements ICDoc {
         VStatistics.SINGLETON_INSTANCE.getLblCMC6().setText(
                 cmc6 + " (" + SEditorUtil.calculatePercentage(cmc6, total) + "%)");
 
-        double amc = (double) Math.round((double) tmc / (double) total * 100) / 100.0d;
+        double amc = Math.round((double) tmc / (double) total * 100) / 100.0d;
 
         VStatistics.SINGLETON_INSTANCE.getLblTotal().setText("TOTAL CARDS: " + deck.countAll());
         VStatistics.SINGLETON_INSTANCE.getLblTMC().setText("TOTAL MANA COST: " + tmc);

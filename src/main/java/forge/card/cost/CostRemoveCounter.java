@@ -422,7 +422,7 @@ public class CostRemoveCounter extends CostPartWithList {
                             .oneOrNone("Remove counter(s) from a card in " + costRemoveCounter.getZone(), this.typeList);
 
                     if (o != null) {
-                        final Card card = (Card) o;
+                        final Card card = o;
                     
                         if (card.getCounters(costRemoveCounter.getCounter()) > 0) {
                             this.nRemove++;

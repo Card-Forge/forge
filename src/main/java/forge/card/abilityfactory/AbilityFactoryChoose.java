@@ -1967,8 +1967,8 @@ public final class AbilityFactoryChoose {
                         final String choiceTitle = params.containsKey("ChoiceTitle") ? params.get("ChoiceTitle") : "Choose a card ";
                         final Card o = GuiChoose.oneOrNone(choiceTitle, choices);
                         if (o != null) {
-                            chosen.add((Card) o);
-                            choices.remove((Card) o);
+                            chosen.add(o);
+                            choices.remove(o);
                         } else {
                             break;
                         }
@@ -2227,7 +2227,7 @@ public final class AbilityFactoryChoose {
             SpellAbility chosenSA = null;
             AbilityFactory afChoice = new AbilityFactory();
             if (p.isHuman()) {
-                String choice = (String) GuiChoose.one("Choose one", choices.values());
+                String choice = GuiChoose.one("Choose one", choices.values());
                 chosenSA = afChoice.getAbility(host.getSVar(choices.inverse().get(choice)), host);
             } else { //Computer AI
                 chosenSA = afChoice.getAbility(host.getSVar(params.get("Choices").split(",")[0]), host);

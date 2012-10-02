@@ -1248,7 +1248,7 @@ public class AbilityFactoryCounters {
                             }
                             final String prompt = "Select the number of " + type + " counters to remove";
                             final String o = GuiChoose.one(prompt, choices);
-                            counterAmount = Integer.parseInt((String) o);
+                            counterAmount = Integer.parseInt(o);
                         }
                     }
                     tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);

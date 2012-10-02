@@ -46,10 +46,10 @@ public class SDisplayUtil {
         newA = new int[steps];
 
         for (int i = 0; i < steps; i++) {
-            newR[i] = (int) ((255 - oldR) / steps * i);
-            newG[i] = (int) (oldG / steps * i);
-            newB[i] = (int) (oldB / steps * i);
-            newA[i] = (int) ((255 - oldA) / steps * i);
+            newR[i] = ((255 - oldR) / steps * i);
+            newG[i] = (oldG / steps * i);
+            newB[i] = (oldB / steps * i);
+            newA[i] = ((255 - oldA) / steps * i);
         }
 
         final TimerTask tt = new TimerTask() {
