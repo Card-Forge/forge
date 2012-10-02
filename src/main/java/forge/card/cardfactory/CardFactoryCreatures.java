@@ -406,45 +406,6 @@ public class CardFactoryCreatures {
         copyTokens1.setStackDescription(sbStack.toString());
     }
 
-    private static void getCard_TrevaTheRenewer(final Card card, final String cardName) {
-        final Player player = card.getController();
-
-        final Ability ability2 = new Ability(card, "2 W") {
-            @Override
-            public void resolve() {
-                int lifeGain = 0;
-                if (card.getController().isHuman()) {
-                    final String[] choices = { "white", "blue", "black", "red", "green" };
-                    final Object o = GuiChoose.oneOrNone("Select Color: ", choices);
-                    Log.debug("Treva, the Renewer", "Color:" + o);
-                    lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor((String) o);
-
-                } else {
-                    final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-                    final String color = CardFactoryUtil.getMostProminentColor(list);
-                    lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor(color);
-                }
-
-                card.getController().gainLife(lifeGain, card);
-            }
-
-            @Override
-            public boolean canPlay() {
-                // this is set to false, since it should only TRIGGER
-                return false;
-            }
-        }; // ability2
-        final StringBuilder sb2 = new StringBuilder();
-        sb2.append(card.getName()).append(" - ").append(player);
-        sb2.append(" gains life equal to permanents of the chosen color.");
-        ability2.setStackDescription(sb2.toString());
-
-        Trigger dmgTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2 W. If you do, choose a color. You gain 1 life for each permanent of that color.", card, true);
-        dmgTrigger.setOverridingAbility(ability2);
-
-        card.addTrigger(dmgTrigger);
-    }
-
     private static void getCard_SphinxJwar(final Card card, final String cardName) {
         final SpellAbility ability1 = new Ability(card, "0") {
             @Override
@@ -1438,8 +1399,6 @@ public class CardFactoryCreatures {
             getCard_Stangg(card, cardName);
         } else if (cardName.equals("Rhys the Redeemed")) {
             getCard_RhysTheRedeemed(card, cardName);
-        } else if (cardName.equals("Treva, the Renewer")) {
-            getCard_TrevaTheRenewer(card, cardName);
         } else if (cardName.equals("Sphinx of Jwar Isle")) {
             getCard_SphinxJwar(card, cardName);
         } else if (cardName.equals("Master of the Wild Hunt")) {
