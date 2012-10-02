@@ -8,7 +8,7 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDama
 SVar:TrigSacrifice:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Permanent.YouCtrl+Other | SubAbility$ DBDiscardHand
 SVar:DBDiscardHand:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBExileSix
 SVar:DBExileSix:DB$ Mill | Destination$ Exile | RememberMilled$ True | NumCards$ 6 | SubAbility$ DBPlayThem
-SVar:DBPlayThem:DB$ Play | Valid$ Remembered.nonLand | ValidZone$ Exile | Controller$ You | WithoutManaCost$ True | Amount$ 6 | Optional$ True | SubAbility$ DBHellCleanup
+SVar:DBPlayThem:DB$ Play | Valid$ Card.IsRemembered+nonLand | ValidZone$ Exile | Controller$ You | WithoutManaCost$ True | Amount$ 6 | Optional$ True | SubAbility$ DBHellCleanup
 SVar:DBHellCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellcarver_demon.jpg
