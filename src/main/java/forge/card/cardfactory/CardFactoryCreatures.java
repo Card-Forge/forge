@@ -1102,6 +1102,7 @@ public class CardFactoryCreatures {
                 return sum;
             }
         }; // end sacOrSac
+        sacOrSac.setTrigger(true);
 
         final Command comesIntoPlay = new Command() {
             private static final long serialVersionUID = 7680692311339496770L;
