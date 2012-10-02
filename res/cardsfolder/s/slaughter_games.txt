@@ -3,8 +3,13 @@ ManaCost:2 B R
 Types:Sorcery
 Text:no text
 K:CARDNAME can't be countered.
-A:SP$ NameCard | Cost$ 2 B R | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SubAbility$ Exile | SpellDescription$ Name a nonland card. Search target player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library.
-SVar:Exile:DB$ ChangeZoneAll | Origin$ Graveyard,Hand,Library | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card.NamedCard | Shuffle$ True
+A:SP$ NameCard | Cost$ 2 B R | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SubAbility$ ExileYard | SpellDescription$ Name a nonland card. Search target player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library.
+SVar:ExileYard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ChangeType$ Card.NamedCard | Chooser$ You | ChangeNum$ NumInYard | Hidden$ True | SubAbility$ ExileHand | StackDescription$ Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library.
+SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Opponent | ChangeType$ Card.NamedCard | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ none
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Opponent | ChangeType$ Card.NamedCard | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | StackDescription$ none
+SVar:NumInLib:TargetedPlayer$CardsInLibrary
+SVar:NumInHand:TargetedPlayer$CardsInHand
+SVar:NumInYard:TargetedPlayer$CardsInGraveyard
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slaughter_games.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/197.jpg
