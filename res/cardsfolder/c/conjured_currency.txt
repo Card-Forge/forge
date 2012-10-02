@@ -4,6 +4,7 @@ Types:Enchantment
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ ExchangeCards | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may exchange control of CARDNAME and target permanent you neither own nor control.
 SVar:ExchangeCards:AB$ ExchangeControl | Cost$ 0 | Defined$ Self | ValidTgts$ Permanent.YouDontCtrl+YouDontOwn | TgtPrompt$ Select target permanent you neither own nor control | SpellDescription$ Exchange control of CARDNAME and target permanent you neither own nor control.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conjured_currency.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/33.jpg

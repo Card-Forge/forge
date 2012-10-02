@@ -2,7 +2,7 @@ Name:Dreadbore
 ManaCost:B R
 Types:Sorcery
 Text:no text
-A:SP$ Destroy | Cost$ B R | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker |SpellDescription$ Destroy target creature or planeswalker.
+A:SP$ Destroy | Cost$ B R | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreadbore.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/157.jpg

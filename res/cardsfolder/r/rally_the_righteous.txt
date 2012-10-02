@@ -3,7 +3,7 @@ ManaCost:1 R W
 Types:Instant
 Text:no text
 A:SP$Pump | Cost$ 1 R W | ValidTgts$ Creature | Radiance$ True | NumAtt$ 2 | SubAbility$ DBUntap | SpellDescription$ Radiance - Untap target creature and each other creature that shares a color with it. Those creatures get +2/+0 until end of turn.
-SVar:DBUntap:DB$Untap | Defined$ Targeted
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rally_the_righteous.jpg

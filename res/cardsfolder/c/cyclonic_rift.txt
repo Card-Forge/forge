@@ -4,7 +4,6 @@ Types:Instant
 Text:no text
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select target nonland permanent you don't control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent you don't control to its owner's hand.
 A:SP$ ChangeZoneAll | Cost$ 6 U | ChangeType$ Permanent.nonLand+YouDontCtrl | Origin$ Battlefield | Destination$ Hand | PrecostDesc$ Overload | CostDesc$ 6 U | NonBasicSpell$ True | SpellDescription$ (Return each nonland permanent you don't control to its owner's hand.)
-SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclonic_rift.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/35.jpg

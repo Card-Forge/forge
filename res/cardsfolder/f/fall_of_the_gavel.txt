@@ -3,7 +3,7 @@ ManaCost:3 W U
 Types:Instant
 Text:no text
 A:SP$ Counter | Cost$ 3 W U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell. You gain 5 life. | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$GainLife | LifeAmount$ 5
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fall_of_the_gavel.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/161.jpg
