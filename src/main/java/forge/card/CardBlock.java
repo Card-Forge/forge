@@ -196,9 +196,9 @@ public final class CardBlock implements Comparable<CardBlock> {
     @Override
     public String toString() {
         if (this.getNumberMetaSets() + this.getNumberSets() < 1) {
-            return this.name + "(empty)";
+            return this.name + " (empty)";
         } else if (this.getNumberMetaSets() + this.getNumberSets() < 2) {
-            return this.name + "(set)";
+            return this.name + " (set)";
         }
         return this.name + " (block)";
     }
