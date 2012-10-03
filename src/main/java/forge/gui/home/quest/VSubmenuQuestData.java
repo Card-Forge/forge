@@ -19,6 +19,8 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.text.WordUtils;
 
+import forge.Singletons;
+import forge.game.GameFormat;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -98,11 +100,12 @@ public enum VSubmenuQuestData implements IVSubmenu {
         group1.add(radExpert);
         radEasy.setSelected(true);
 
-        // TODO: Convert this to non-hardcoded info
+
         cbxFormat.removeAllItems();
-        cbxFormat.addItem("Standard");
-        cbxFormat.addItem("Extended");
-        cbxFormat.addItem("Modern");
+
+        for (GameFormat gf : Singletons.getModel().getFormats()) {
+            cbxFormat.addItem(gf.getName());
+        }
 
         // TODO: Listeners should be in controller, not in view.
         final ActionListener preconListener = new ActionListener() {
