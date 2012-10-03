@@ -95,7 +95,7 @@ public enum VSubmenuPreferences implements IVSubmenu {
         final String regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
 
         // Deck building options
-        pnlPrefs.add(new SectionLabel("Deck Building Options"), sectionConstraints + ", gaptop 2%");
+        pnlPrefs.add(new SectionLabel("Random Deck Generation Options"), sectionConstraints + ", gaptop 2%");
 
         pnlPrefs.add(cbRemoveSmall, regularConstraints);
         pnlPrefs.add(new NoteLabel("Disables 1/1 and 0/X creatures in generated decks."), regularConstraints);
