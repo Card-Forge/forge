@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Denethor 3
+Title=Denethor
+Difficulty=hard
+Description=WBR deck that gives you 1/1 tokens and forces them to attack into Hissing Miasma and Blood Reckoning
+Icon=Denethor.jpg
+Deck Type=constructed
+[main]
+4 Badlands
+4 Blood Reckoning
+4 Curse of the Nightly Hunt
+2 Dragonskull Summit
+4 Forbidden Orchard
+1 Fumiko the Lowblood
+2 Guardian Seraph
+4 Hissing Miasma
+4 Humility
+2 Hunted Dragon
+3 Isolated Chapel
+1 Mercy Killing
+2 Pestilence
+4 Polluted Delta
+4 Scrubland
+2 Swamp
+4 Thunderstaff
+3 Urza's Armor
+2 Varchild's War-Riders
+2 Wall of Hope
+2 Wall of Souls
+[sideboard]
