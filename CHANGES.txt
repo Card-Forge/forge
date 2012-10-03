@@ -252,6 +252,29 @@ Fixes/Features:
 - Converted Martial Coup to script
 - Added support for tiny 3-pack Sealed Deck games.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Zendikar block info was missing ROE, added.
+- The block names are now more informative and show you whether it is a single set or a block consisting of different sets.
+- Cosmetic fix for the previous commit.
+- Fixed Hellcarver Demon.
+- Fixed a small typo of mine on commit
+- Undid the Zendikar block change.
+- Fixed Thran Weaponry
+- This time the correct version of blocks.txt.
+- Fixed Dragon Mask's description
+- Fixed Omen Machine
+- Fixed casting cost of Auger Spree.
+- Little fixes and updates in RtR card scripts.
+- Improved isUsefulCurseKeyword for better AI use of Detain.
+- Improved regenerateAllCanPlayAI (the AI will now use Wrap in Vigor against Day of Judgment).
+- More little fixes and updates in RtR card scripts.
+- Fixed etbCounter triggering multiple times.
+- Fixed Fireball.
+- Use the formats defined in formats.txt instead of the hardcoded values for quests.
+- Cleanup.
+- Added the quest deck Denethor 3 by Nordos.
+- Cards without draft ranking will now be given the value 0.
+- Added RtR to rankings.txt.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
