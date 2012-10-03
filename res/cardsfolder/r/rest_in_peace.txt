@@ -5,7 +5,7 @@ Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from all graveyards.
 SVar:TrigChangeZoneAll:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card | ReplaceWith$ Exile | Description$ If a card or token would be put into a graveyard from anywhere, exile it instead.
-SVar:Exile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Destination$ Exile | Defined$ ReplacedCard
+SVar:Exile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rest_in_peace.jpg
