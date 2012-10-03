@@ -553,15 +553,21 @@ public class QuestWinLoseHandler extends ControlWinLose {
      */
     private void awardBooster() {
 
+        // Do not enable booster selection in this way...
+        final boolean allowSetSelection = false;
+
         final List<String> boosterTypes = new ArrayList<String>();
         boosterTypes.add("Format");
         boosterTypes.add("Set");
 
         final String prompt = "Choose bonus booster type:";
-        final Object o = GuiChoose.one(prompt, boosterTypes);
+        final Object o = null;
+        if (allowSetSelection) {
+            GuiChoose.one(prompt, boosterTypes);
+        }
         List<CardPrinted> cardsWon = null;
 
-        if (o.toString().equals(boosterTypes.get(0))) {
+        if (o == null || o.toString().equals(boosterTypes.get(0))) {
             final List<GameFormat> formats = new ArrayList<GameFormat>();
             String prefferedFormat = Singletons.getModel().getQuestPreferences().getPreference(QPref.BOOSTER_FORMAT);
 
