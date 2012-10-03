@@ -2460,7 +2460,7 @@ public final class AbilityFactoryChangeZone {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryChangeZone.changeZoneAllCanPlayAI(af, this);
+                return AbilityFactoryChangeZone.changeZoneAllCanPlayAI(af, this) && super.canPlayAI();
             }
 
             @Override

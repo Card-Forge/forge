@@ -11,7 +11,6 @@ SVar:SacSelf:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ StillLooking | 
 SVar:AllFoundCelebration:DB$ AddTurn | NumTurns$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X
 SVar:StillLooking:Remembered$Amount
 SVar:X:Remembered$Amount
-SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/search_the_city.jpg

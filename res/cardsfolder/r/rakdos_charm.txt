@@ -9,6 +9,7 @@ SVar:Smash:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact
 SVar:DamageYou:DB$ EachDamage | ValidCards$ Creature.YouCtrl | ValidDescription$ creature you control | DefinedPlayers$ You | References$ X | NumDmg$ X | SubAbility$ DamageOpp | SpellDescription$ Each creature deals 1 damage to its controller.
 SVar:DamageOpp:DB$ EachDamage | ValidCards$ Creature.YouDontCtrl | ValidDescription$ creature your opponent controls | References$ X | DefinedPlayers$ Opponent | NumDmg$ X
 SVar:X:Number$1
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_charm.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/184.jpg

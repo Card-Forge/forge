@@ -3,9 +3,9 @@ ManaCost:1 R
 Types:Enchantment Aura
 Text:no text
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature
+A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddAbility$ POFPump | Description$ Enchanted creature gets +2/+2 and has "U: This creature gains flying until end of turn."
-SVar:POFPump:AB$ Pump | Cost$ U | Defined$ Self | KW$ flying | SpellDescription$ This creature gains flying until end of turn.
+SVar:POFPump:AB$ Pump | Cost$ U | Defined$ Self | KW$ Flying | SpellDescription$ This creature gains flying until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pursuit_of_flight.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/102.jpg
