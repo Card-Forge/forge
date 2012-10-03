@@ -463,17 +463,9 @@ public class GameAction {
         final PlayerZone grave = owner.getZone(ZoneType.Graveyard);
         final PlayerZone exile = owner.getZone(ZoneType.Exile);
         final List<Card> ownerBoard = owner.getCardsIn(ZoneType.Battlefield);
-        final List<Card> opponentsBoard = owner.getOpponent().getCardsIn(ZoneType.Battlefield);
 
         if (c.getName().equals("Nissa's Chosen") && origZone.is(ZoneType.Battlefield)) {
             return this.moveToLibrary(c, -1);
-        }
-
-        for (final Card card : opponentsBoard) {
-            if (card.hasKeyword("If a card would be put into an opponent's "
-                    + "graveyard from anywhere, exile it instead.")) {
-                return this.moveTo(exile, c);
-            }
         }
 
         for (final Card card : ownerBoard) {
