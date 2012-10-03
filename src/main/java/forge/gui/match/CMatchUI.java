@@ -70,8 +70,8 @@ public enum CMatchUI implements CardContainer {
 
         // Update avatars
         final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
-        final Object[] views = VMatchUI.SINGLETON_INSTANCE.getFieldViews().toArray();
-        for (int i = 0; i < views.length; i++) {
+        int i = 0;
+        for (VField view : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
             final Image img;
             // Update AI quest icon
             if (i != 1 && Singletons.getModel().getMatchState().getGameType() == GameType.Quest) {
@@ -91,9 +91,10 @@ public enum CMatchUI implements CardContainer {
             else {
                 img = FSkin.getAvatars().get(Integer.parseInt(indices[i]));
             }
+            i++;
 
-            ((VField) views[i]).getLblAvatar().setIcon(new ImageIcon(img));
-            ((FLabel) ((VField) views[i]).getLblAvatar()).getResizeTimer().start();
+            view.getLblAvatar().setIcon(new ImageIcon(img));
+            view.getLblAvatar().getResizeTimer().start();
         }
 
         // Update observers

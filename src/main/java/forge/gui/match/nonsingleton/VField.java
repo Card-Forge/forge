@@ -72,9 +72,9 @@ public class VField implements IVDoc {
     private final JPanel pnlDetails = new JPanel();
 
     // Avatar area
-    private final JLabel lblAvatar = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+    private final FLabel lblAvatar = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
             .iconScaleFactor(1.0f).build();
-    private final JLabel lblLife = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+    private final FLabel lblLife = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
             .fontStyle(Font.BOLD).build();
 
     // Info labels
@@ -408,12 +408,12 @@ public class VField implements IVDoc {
     }
 
     /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblAvatar() {
+    public FLabel getLblAvatar() {
         return this.lblAvatar;
     }
 
     /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblLife() {
+    public FLabel getLblLife() {
         return this.lblLife;
     }
 

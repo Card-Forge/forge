@@ -34,6 +34,7 @@ import javax.swing.WindowConstants;
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
+import forge.game.player.Player;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.SOverflowUtil;
@@ -268,5 +269,9 @@ public enum FControl {
 
         children = display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
         if (children.length != 0) { children[0].setSize(display.getSize()); }
+    }
+    
+    public Player getPlayer() {
+        return AllZone.getHumanPlayer();
     }
 }

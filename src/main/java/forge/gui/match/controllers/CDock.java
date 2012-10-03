@@ -19,14 +19,11 @@ package forge.gui.match.controllers;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
@@ -43,7 +40,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.ForgeAction;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
@@ -55,7 +51,6 @@ import forge.gui.toolbox.SaveOpenDialog.Filetypes;
 import forge.item.CardPrinted;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
-import forge.properties.NewConstants;
 import forge.view.FView;
 
 /**
@@ -142,7 +137,7 @@ public enum CDock implements ICDoc {
      * View deck list.
      */
     private void viewDeckList() {
-        new DeckListAction(NewConstants.Lang.GuiDisplay.HUMAN_DECKLIST).actionPerformed(null);
+        showDeck(AllZone.getHumanPlayer().getDeck());
     }
 
     /** Attack with everyone. */
@@ -182,75 +177,52 @@ public enum CDock implements ICDoc {
      * (typically used in dev mode). Allows copy of the cardlist to clipboard.
      * 
      */
-    private class DeckListAction extends ForgeAction {
-        public DeckListAction(final String property) {
-            super(property);
+    private final void showDeck(Deck targetDeck) {
+        if ( null == targetDeck ) {
+            return;
         }
 
-        private static final long serialVersionUID = 9874492387239847L;
+        final TreeMap<String, Integer> deckMap = new TreeMap<String, Integer>();
 
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            Deck targetDeck;
-
-            if (!AllZone.getHumanPlayer().getDeck().getMain().isEmpty()) {
-                targetDeck = AllZone.getHumanPlayer().getDeck();
-            } else if (!AllZone.getComputerPlayer().getDeck().getMain().isEmpty()) {
-                targetDeck = AllZone.getComputerPlayer().getDeck();
-            } else {
-                return;
-            }
-
-            final HashMap<String, Integer> deckMap = new HashMap<String, Integer>();
-
-            for (final Entry<CardPrinted, Integer> s : targetDeck.getMain()) {
-                deckMap.put(s.getKey().getName(), s.getValue());
-            }
-
-            final String nl = System.getProperty("line.separator");
-            final StringBuilder deckList = new StringBuilder();
-            String dName = targetDeck.getName();
-
-            if (dName == null) {
-                dName = "";
-            } else {
-                deckList.append(dName + nl);
-            }
-
-            final ArrayList<String> dmKeys = new ArrayList<String>();
-            for (final String s : deckMap.keySet()) {
-                dmKeys.add(s);
-            }
-
-            Collections.sort(dmKeys);
-
-            for (final String s : dmKeys) {
-                deckList.append(deckMap.get(s) + " x " + s + nl);
-            }
-
-            int rcMsg = -1138;
-            String ttl = "Human's Decklist";
-            if (!dName.equals("")) {
-                ttl += " - " + dName;
-            }
-
-            final StringBuilder msg = new StringBuilder();
-            if (deckMap.keySet().size() <= 32) {
-                msg.append(deckList.toString() + nl);
-            } else {
-                msg.append("Decklist too long for dialog." + nl + nl);
-            }
-
-            msg.append("Copy Decklist to Clipboard?");
-
-            rcMsg = JOptionPane.showConfirmDialog(null, msg, ttl, JOptionPane.OK_CANCEL_OPTION);
-
-            if (rcMsg == JOptionPane.OK_OPTION) {
-                final StringSelection ss = new StringSelection(deckList.toString());
-                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-            }
+        for (final Entry<CardPrinted, Integer> s : targetDeck.getMain()) {
+            deckMap.put(s.getKey().getName(), s.getValue());
         }
-    } // End DeckListAction
+
+        final String nl = System.getProperty("line.separator");
+        final StringBuilder deckList = new StringBuilder();
+        String dName = targetDeck.getName();
+
+        if (dName != null) {
+            deckList.append(dName + nl);
+        }
+
+        for (final Entry<String, Integer> s : deckMap.entrySet()) {
+            deckList.append(s.getValue() + " x " + s.getKey() + nl);
+        }
+
+        int rcMsg = -1138;
+        String ttl = "Human's Decklist";
+        if (dName != null) {
+            ttl += " - " + dName;
+        }
+
+        final StringBuilder msg = new StringBuilder();
+        if (deckMap.keySet().size() <= 32) {
+            msg.append(deckList.toString() + nl);
+        } else {
+            msg.append("Decklist too long for dialog." + nl + nl);
+        }
+
+        msg.append("Copy Decklist to Clipboard?");
+
+        rcMsg = JOptionPane.showConfirmDialog(null, msg, ttl, JOptionPane.OK_CANCEL_OPTION);
+
+        if (rcMsg == JOptionPane.OK_OPTION) {
+            final StringSelection ss = new StringSelection(deckList.toString());
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+        }
+    }
+    // End DeckListAction
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
