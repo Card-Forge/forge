@@ -206,13 +206,13 @@ class CardFactoryLands {
         // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Lotus Vale")) {
+        /*else if (cardName.equals("Lotus Vale")) {
             /*
              * If Lotus Vale would enter the battlefield, sacrifice two untapped
              * lands instead. If you do, put Lotus Vale onto the battlefield. If
              * you don't, put it into its owner's graveyard.
              */
-            final Command comesIntoPlay = new Command() {
+            /*final Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = -194247993330560188L;
 
                 private final Player player = card.getController();
@@ -272,7 +272,7 @@ class CardFactoryLands {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Kjeldoran Outpost") || cardName.equals("Balduvian Trading Post")
+        /*else if (cardName.equals("Kjeldoran Outpost") || cardName.equals("Balduvian Trading Post")
                 || cardName.equals("Heart of Yavimaya") || cardName.equals("Lake of the Dead")
                 || cardName.equals("Soldevi Excavations")) {
 
@@ -342,7 +342,7 @@ class CardFactoryLands {
             };
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Sheltered Valley")) {
@@ -373,7 +373,7 @@ class CardFactoryLands {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Scorched Ruins")) {
+        /*else if (cardName.equals("Scorched Ruins")) {
             final Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = 6175830918425915833L;
                 private final Player player = card.getController();
@@ -440,7 +440,7 @@ class CardFactoryLands {
             };
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         // Lorwyn Dual Lands, and a couple Morningtide...

@@ -1,8 +1,14 @@
 Name:Lotus Vale
 ManaCost:no cost
 Types:Land
-Text:If Lotus Vale would enter the battlefield, sacrifice two untapped lands instead. If you do, put Lotus Vale onto the battlefield. If you don't, put it into its owner's graveyard.
+Text:no text
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any one color to your mana pool.
+R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ PayBeforeETB | Description$ If CARDNAME would enter the battlefield, sacrifice two untapped lands instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
+SVar:PayBeforeETB:AB$ Sacrifice | Cost$ 0 | SacValid$ Land.untapped | Defined$ You | RememberSacrificed$ True | Amount$ 2 | SubAbility$ MoveToGraveyard
+SVar:MoveToGraveyard:DB$ ChangeZone | Origin$ All | Destination$ Graveyard | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2 | SubAbility$ MoveToBattlefield
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_vale.jpg
