@@ -1685,6 +1685,18 @@ public class AbilityFactory {
                     }
                     return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
                 }
+                if (calcX[0].startsWith("TargetedObjects")) {
+                    final ArrayList<Object> objects = new ArrayList<Object>();
+                    final SpellAbility saTargeting = (ability.getTarget() == null) ? AbilityFactory
+                            .findParentsTargetedPlayer(ability) : ability;
+                    if (saTargeting.getTarget() != null) {
+                        objects.addAll(saTargeting.getTarget().getTargets());
+                    } else {
+                        objects.addAll(AbilityFactory.getDefinedObjects(card, saTargeting.getAbilityFactory()
+                                .getMapParams().get("Defined"), saTargeting));
+                    }
+                    return CardFactoryUtil.objectXCount(objects, calcX[1], card) * multiplier;
+                }
                 if (calcX[0].startsWith("TargetedController")) {
                     final ArrayList<Player> players = new ArrayList<Player>();
                     final ArrayList<Card> list = AbilityFactory.getDefinedCards(card, "Targeted", ability);

@@ -1974,6 +1974,36 @@ public class CardFactoryUtil {
 
         return m;
     }
+    
+    /**
+     * <p>
+     * Parse player targeted X variables.
+     * </p>
+     * 
+     * @param players
+     *            a {@link java.util.ArrayList} object.
+     * @param s
+     *            a {@link java.lang.String} object.
+     * @param source
+     *            a {@link forge.Card} object.
+     * @return a int.
+     */
+    public static int objectXCount(final ArrayList<Object> objects, final String s, final Card source) {
+        if (objects.size() == 0) {
+            return 0;
+        }
+
+        final String[] l = s.split("/");
+        final String[] m = CardFactoryUtil.parseMath(l);
+
+        int n = 0;
+        
+        if (s.startsWith("Amount")) {
+            n = objects.size();
+        }
+        
+        return CardFactoryUtil.doXMath(n, m, source);
+    }
 
     /**
      * <p>
