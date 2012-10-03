@@ -107,7 +107,10 @@ public class ReplacementHandler {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (replacementEffect.requirementsCheck()) {
-                        if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams) && replacementEffect.getLayer() == layer && replacementEffect.zonesCheck(AllZone.getZoneOf(crd))) {
+                        if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams) 
+                                && replacementEffect.getLayer() == layer
+                                && !possibleReplacers.contains(replacementEffect)
+                                && replacementEffect.zonesCheck(AllZone.getZoneOf(crd))) {
                             possibleReplacers.add(replacementEffect);
                         }
                     }
