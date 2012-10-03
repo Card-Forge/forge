@@ -648,6 +648,8 @@ public class LimitedDeck {
             Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());
             if (rkg != null) {
                 ranked.add(Pair.of(rkg, card));
+            } else {
+                ranked.add(Pair.of(0.0, card));
             }
         }
         Collections.sort(ranked, new CardRankingComparator());

@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -156,6 +158,8 @@ public class BoosterDraftAI {
                     Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());
                     if (rkg != null) {
                         rankedPlayableCards.put(rkg, card);
+                    } else {
+                        rankedPlayableCards.put(0.0, card);
                     }
                 }
             }
@@ -242,6 +246,7 @@ public class BoosterDraftAI {
                 rankedCards.put(rkg, card);
             } else {
                 System.out.println("Draft Rankings - Card Not Found: " + card.getName());
+                rankedCards.put(0.0, card);
             }
         }
         return rankedCards;
