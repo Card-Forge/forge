@@ -21,10 +21,8 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.card.CardEdition;
-import forge.card.CardRarity;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
-import forge.card.CardRulesPredicates.LeafNumber;
 import forge.game.GameFormat;
 import forge.gui.WrapLayout;
 import forge.gui.deckeditor.controllers.CFilters;
@@ -263,8 +261,8 @@ public class SFilterUtil {
      * @return Predicate<CardPrinted>
      */
     public static Predicate<CardPrinted> buildTextFilter() {
-        Predicate<CardPrinted> filterAnd = Predicates.alwaysTrue();
-        Predicate<CardPrinted> filterNot = Predicates.alwaysTrue();
+        Predicate<CardRules> filterAnd = null;
+        Predicate<CardRules> filterNot = null;
 
         final String strContains = VFilters.SINGLETON_INSTANCE.getTxfContains().getText();
         final String strWithout = VFilters.SINGLETON_INSTANCE.getTxfWithout().getText();
@@ -279,22 +277,18 @@ public class SFilterUtil {
                     .replaceAll("  ", " ")
                     .toLowerCase().split(" ");
 
-            final List<Predicate<CardPrinted>> ands = new ArrayList<Predicate<CardPrinted>>();
+            final List<Predicate<CardRules>> ands = new ArrayList<Predicate<CardRules>>();
 
             for (final String s : splitContains) {
-                final List<Predicate<CardPrinted>> subands = new ArrayList<Predicate<CardPrinted>>();
+                final List<Predicate<CardRules>> subands = new ArrayList<Predicate<CardRules>>();
 
-                if (useName) { subands.add(Predicates.compose(CardRulesPredicates.name(
-                        StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
-                if (useType) { subands.add(Predicates.compose(CardRulesPredicates.joinedType(
-                        StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES)); }
-                if (useText) { subands.add(Predicates.compose(CardRulesPredicates.rules(
-                        StringOp.CONTAINS, s), CardPrinted.FN_GET_RULES)); }
+                if (useName) { subands.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, s)); }
+                if (useType) { subands.add(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s)); }
+                // rules cannot compare in ignore-case way
+                if (useText) { subands.add(CardRulesPredicates.rules(StringOp.CONTAINS, s)); }
 
-                Predicate<CardPrinted> mvnMustDie = Predicates.or(subands); 
-                ands.add(mvnMustDie);
+                ands.add(Predicates.or(subands));
             }
-
             filterAnd = Predicates.and(ands);
         }
 
@@ -304,32 +298,23 @@ public class SFilterUtil {
                     .replaceAll(",", "")
                     .toLowerCase().split(" ");
 
-            final List<Predicate<CardPrinted>> nots = new ArrayList<Predicate<CardPrinted>>();
+            final List<Predicate<CardRules>> nots = new ArrayList<Predicate<CardRules>>();
 
             for (final String s : splitWithout) {
-                final List<Predicate<CardPrinted>> subnots = new ArrayList<Predicate<CardPrinted>>();
+                final List<Predicate<CardRules>> subnots = new ArrayList<Predicate<CardRules>>();
 
-                if (useName) {
-                    final Predicate<CardPrinted> pName = Predicates.compose(CardRulesPredicates.name(StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES); 
-                    subnots.add(pName); 
-                }
-                if (useType) {
-                    final Predicate<CardPrinted> pType = Predicates.compose(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES); 
-                    subnots.add(pType); 
-                }
-                if (useText) {
-                    final Predicate<CardPrinted> pRules = Predicates.compose(CardRulesPredicates.rules(StringOp.CONTAINS_IC, s), CardPrinted.FN_GET_RULES); 
-                    subnots.add(pRules); 
-                }
+                if (useName) { subnots.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, s)); }
+                if (useType) { subnots.add(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s)); }
+                // rules cannot compare in ignore-case way
+                if (useText) { subnots.add(CardRulesPredicates.rules(StringOp.CONTAINS, s)); }
 
-                Predicate<CardPrinted> mavenCompilerIsBugged = Predicates.or(subnots);
-                nots.add(mavenCompilerIsBugged);
+                nots.add(Predicates.or(subnots));
             }
-
-            Predicate<CardPrinted> iWouldNotWriteThisIfMavenProcessedGenericsCorrectly = Predicates.or(nots); 
-            filterNot = Predicates.not(iWouldNotWriteThisIfMavenProcessedGenericsCorrectly);
+            filterNot = Predicates.not(Predicates.or(nots));
         }
-        return Predicates.and(filterAnd, filterNot);
+        Predicate<CardRules> preResult = optimizedAnd(filterAnd, filterNot);
+        if ( preResult == null ) return Predicates.alwaysTrue();
+        return Predicates.compose(preResult, CardPrinted.FN_GET_RULES);
     }
 
     private static Predicate<CardRules> getCardRulesFieldPredicate(String min, String max, CardRulesPredicates.LeafNumber.CardField field) {
@@ -339,8 +324,7 @@ public class SFilterUtil {
         Predicate<CardRules> pMin = !hasMin ? null : new CardRulesPredicates.LeafNumber(field, ComparableOp.GT_OR_EQUAL, Integer.valueOf(min));
         Predicate<CardRules> pMax = !hasMax ? null : new CardRulesPredicates.LeafNumber(field, ComparableOp.LT_OR_EQUAL, Integer.valueOf(max));
         
-        Predicate<CardRules> pRange = optimizedAnd(pMin, pMax);
-        return pRange == null ? null : pRange;
+        return optimizedAnd(pMin, pMax);
     }
     
     private static <T> Predicate<T> optimizedAnd(Predicate<T> p1, Predicate<T> p2)
