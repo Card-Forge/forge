@@ -29,6 +29,7 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -1327,7 +1328,11 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return the zone
      */
     public final PlayerZone getZone(final ZoneType zone) {
-        return zone == ZoneType.Stack ? AllZone.getStackZone() : this.zones.get(zone);
+        return this.zones.get(zone);
+    }
+    
+    public final List<Card> getCardsIn(final ZoneType zoneType) {
+        return getCardsIn(zoneType, true);
     }
 
     /**
@@ -1338,17 +1343,20 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      *            the zone
      * @return a List<Card> with all the cards currently in requested zone
      */
-    public final List<Card> getCardsIn(final ZoneType zone) {
-        return this.getZone(zone).getCards();
-    }
-
-    /**
-     * Gets the all cards.
-     * 
-     * @return the all cards
-     */
-    public final List<Card> getAllCards() {
-        return this.getCardsIn(Player.ALL_ZONES);
+    public final List<Card> getCardsIn(final ZoneType zoneType, boolean includePhasedOut) {
+        List<Card> result;
+        if (zoneType == ZoneType.Stack) {
+            result = new ArrayList<Card>();
+            for (Card c : AllZone.getStackZone().getCards()) {
+                if (c.getOwner().equals(this)) {
+                    result.add(c);
+                }
+            }
+        } else {
+            PlayerZone zone = this.getZone(zoneType);
+            result = zone == null ? null : zone.getCards(includePhasedOut);
+        }
+        return result;
     }
 
     /**
@@ -1359,7 +1367,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return the cards include phasing in
      */
     public final List<Card> getCardsIncludePhasingIn(final ZoneType zone) {
-        return this.getZone(zone).getCards(false);
+        return this.getCardsIn(zone, false);
     }
 
     /**
@@ -1373,7 +1381,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a List<Card> with all the cards currently in requested zone
      */
     public final List<Card> getCardsIn(final ZoneType zone, final int n) {
-        return this.getZone(zone).getCards(n);
+        return Lists.newArrayList(Iterables.limit(this.getCardsIn(zone), n));
     }
 
     /**
@@ -1386,30 +1394,18 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
     public final List<Card> getCardsIn(final Iterable<ZoneType> zones) {
         final List<Card> result = new ArrayList<Card>();
         for (final ZoneType z : zones) {
-            if (z == ZoneType.Stack) {
-                for (Card c : AllZone.getStackZone().getCards()) {
-                    if (c.getOwner().equals(this)) {
-                        result.add(c);
-                    }
-                }
-            }
-            else if (this.getZone(z) != null) {
-                result.addAll(this.getZone(z).getCards());
-            }
+            result.addAll(getCardsIn(z));
         }
-
         return result;
     }
-
-    public final List<Card> getCardsIn(final ZoneType... zones) {
+    public final List<Card> getCardsIn(final ZoneType[] zones) {
         final List<Card> result = new ArrayList<Card>();
         for (final ZoneType z : zones) {
-            if (this.getZone(z) != null) {
-                result.addAll(this.getZone(z).getCards());
-            }
+            result.addAll(getCardsIn(z));
         }
         return result;
     }
+    
     /**
      * gets a list of all cards with requested cardName in a given player's
      * requested zone. This function makes a List<Card> from Card[].
@@ -1422,6 +1418,15 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      */
     public final List<Card> getCardsIn(final ZoneType zone, final String cardName) {
         return CardListUtil.filter(this.getCardsIn(zone), CardPredicates.nameEquals(cardName));
+    }
+
+    /**
+     * Gets the all cards.
+     * 
+     * @return the all cards
+     */
+    public final List<Card> getAllCards() {
+        return this.getCardsIn(Player.ALL_ZONES);
     }
 
     /**
