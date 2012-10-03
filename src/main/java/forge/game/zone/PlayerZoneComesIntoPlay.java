@@ -72,7 +72,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         super.add(o);
 
         final Card c = (Card) o;
-        final Player player = c.getController();
 
         if (this.trigger) {
             if (c.hasKeyword("CARDNAME enters the battlefield tapped.") || c.hasKeyword("Hideaway")) {
@@ -99,30 +98,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         // Keep track of max lands can play per turn
         int addMax = 0;
 
-        /*boolean adjustLandPlays = false;
-        boolean eachPlayer = false;
-
-        if (c.getName().equals("Exploration") || c.getName().equals("Oracle of Mul Daya")) {
-            addMax = 1;
-            adjustLandPlays = true;
-        } else if (c.getName().equals("Azusa, Lost but Seeking")) {
-            addMax = 2;
-            adjustLandPlays = true;
-        } else if (c.getName().equals("Storm Cauldron") || c.getName().equals("Rites of Flourishing")) {
-            adjustLandPlays = true;
-            eachPlayer = true;
-            addMax = 1;
-        }
-
-        if (adjustLandPlays) {
-            if (eachPlayer) {
-                AllZone.getHumanPlayer().addMaxLandsToPlay(addMax);
-                AllZone.getComputerPlayer().addMaxLandsToPlay(addMax);
-            } else {
-                player.addMaxLandsToPlay(addMax);
-            }
-        }*/
-
         for (String keyword : c.getKeyword()) {
             if (keyword.startsWith("AdjustLandPlays")) {
                 final String[] k = keyword.split(":");
@@ -141,18 +116,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             c.comesIntoPlay();
 
             if (c.isLand()) {
-                /*List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-
-                list = list.filter(new Predicate<Card>() {
-                    @Override
-                    public boolean isTrue(final Card c) {
-                        return c.hasKeyword("Landfall");
-                    }
-                });
-
-                for (int i = 0; i < list.size(); i++) {
-                    GameActionUtil.executeLandfallEffects(list.get(i));
-                }*/
 
                 // Tectonic Instability
                 final List<Card> tis = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Tectonic Instability");

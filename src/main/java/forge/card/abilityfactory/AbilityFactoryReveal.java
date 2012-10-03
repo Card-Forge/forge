@@ -436,11 +436,9 @@ public final class AbilityFactoryReveal {
             if (top.size() > 0) {
                 final Card dummy = new Card();
                 dummy.setName("[No valid cards]");
-                boolean cardsRevealed = false;
 
                 if (params.containsKey("Reveal")) {
                     GuiChoose.one("Revealing cards from library", top);
-                    cardsRevealed = true;
                     // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                     // - for when it exists
                 } else if (params.containsKey("RevealOptional")) {
@@ -451,10 +449,8 @@ public final class AbilityFactoryReveal {
                     if (p.isHuman() && GameActionUtil.showYesNoDialog(host, question)) {
                         GuiChoose.one(host + "Revealing cards from library", top);
                         // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
-                        cardsRevealed = true;
                     } else if (p.isComputer() && (top.get(0).isInstant() || top.get(0).isSorcery())) {
                         GuiChoose.one(host + "Revealing cards from library", top);
-                        cardsRevealed = true;
                     }
                 } else if (params.containsKey("RevealValid")) {
                     final String revealValid = params.get("RevealValid");
@@ -472,7 +468,6 @@ public final class AbilityFactoryReveal {
                 } else if (choser.isHuman()) {
                     // show the user the revealed cards
                     GuiChoose.one("Looking at cards from library", top);
-                    cardsRevealed = true;
                 }
 
                 if ((params.containsKey("RememberRevealed")) && !params.containsKey("RevealValid")) {

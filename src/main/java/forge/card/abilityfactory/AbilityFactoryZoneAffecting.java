@@ -481,7 +481,7 @@ public class AbilityFactoryZoneAffecting {
 
             if ((!tgtHuman || !canTgtHuman) && canTgtComp) {
                 tgt.addTarget(AllZone.getComputerPlayer());
-            } else if (mandatory) {
+            } else if (mandatory && canTgtHuman) {
                 tgt.addTarget(AllZone.getHumanPlayer());
             } else {
                 return false;
