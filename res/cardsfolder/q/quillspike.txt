@@ -3,7 +3,7 @@ ManaCost:2 BG
 Types:Creature Beast
 Text:no text
 PT:1/1
-A:AB$ Pump | Cost$ BG SubCounter<1/M1M1/Creature.YouCtrl/Creature you Control> | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ CARDNAME gets +3/+3 until end of turn.
+A:AB$ Pump | Cost$ BG SubCounter<1/M1M1/Creature/a creature you control> | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ CARDNAME gets +3/+3 until end of turn.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quillspike.jpg

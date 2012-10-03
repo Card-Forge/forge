@@ -257,6 +257,12 @@ public class CostUtil {
                 final Counters type = remCounter.getCounter();
                 final double percent = type.name().equals("P1P1") ? p1p1Percent : otherPercent;
                 final int currentNum = source.getCounters(type);
+                if (!part.getThis()) {
+                    if (type.name().equals("P1P1")) {
+                        return false;
+                    }
+                    continue;
+                }
 
                 Integer amount = part.convertAmount();
                 if (amount == null) {

@@ -21,6 +21,7 @@ import java.util.List;
 
 import forge.Card;
 
+import forge.AllZone;
 import forge.CardListUtil;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
@@ -167,14 +168,12 @@ public class CostRemoveCounter extends CostPartWithList {
         else {
             final List<Card> typeList = CardListUtil.getValidCards(activator.getCardsIn(this.getZone()), this.getType().split(";"), activator, source);
             if (amount != null) {
-                boolean payable = false;
                 for (Card c : typeList) {
                     if (c.getCounters(cntrs) - amount >= 0) {
-                        payable = true;
-                        break;
+                        return true;
                     }
                 }
-                return payable;
+                return false;
             }
         }
 
@@ -201,10 +200,9 @@ public class CostRemoveCounter extends CostPartWithList {
 
         if (this.getThis()) {
             source.subtractCounter(this.counter, c);
-        }
-        else {
+        } else {
             for (final Card card : this.getList()) {
-                card.subtractCounter(this.counter, 1);
+                card.subtractCounter(this.counter, c);
             }
         }
         source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
@@ -273,11 +271,7 @@ public class CostRemoveCounter extends CostPartWithList {
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
-
-        if (!this.getThis()) {
-            // TODO AI Can't handle remove counter by type
-            return false;
-        }
+        Player computer = AllZone.getComputerPlayer();
 
         if (c == null) {
             final String sVar = ability.getSVar(amount);
@@ -289,6 +283,19 @@ public class CostRemoveCounter extends CostPartWithList {
             } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
+        }
+
+        if (!this.getThis()) {
+            this.getList().clear();
+            final List<Card> typeList = CardListUtil
+                    .getValidCards(computer.getCardsIn(this.getZone()), this.getType().split(";"), computer, source);
+            for (Card card : typeList) {
+                if (card.getCounters(this.getCounter()) >= c) {
+                    this.addToList(card);
+                    return true;
+                }
+            }
+            return false;
         }
         if (c > source.getCounters(this.getCounter())) {
             System.out.println("Not enough " + this.counter + " on " + source.getName());
