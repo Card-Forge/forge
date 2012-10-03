@@ -58,7 +58,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private final int landStackMax = 5;
     private final int tokenStackMax = 5;
 
-    private boolean stackVertical;
     private final boolean mirror;
 
     // Computed in layout.

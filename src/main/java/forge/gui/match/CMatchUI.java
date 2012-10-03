@@ -41,7 +41,6 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.match.nonsingleton.CField;
 import forge.gui.match.nonsingleton.VField;
-import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;

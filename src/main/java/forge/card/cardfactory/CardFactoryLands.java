@@ -29,8 +29,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardListUtil;
-import forge.CardPredicates;
-import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Counters;
 import forge.GameActionUtil;
