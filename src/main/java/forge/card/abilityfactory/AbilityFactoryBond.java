@@ -342,7 +342,7 @@ public final class AbilityFactoryBond {
             }
         } else {
             // TODO - Pick best creature instead of just the first on the list
-            partner = cards.get(0);
+            partner = CardFactoryUtil.getBestCreatureAI(cards);
         }
 
         // pair choices together
