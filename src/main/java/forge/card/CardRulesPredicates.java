@@ -350,8 +350,8 @@ public final class CardRulesPredicates {
         }
     }
 
-    private static class LeafNumber implements Predicate<CardRules> {
-        protected enum CardField {
+    public static class LeafNumber implements Predicate<CardRules> {
+        public enum CardField {
             CMC, POWER, TOUGHNESS,
         }
 

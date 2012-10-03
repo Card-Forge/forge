@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -20,8 +21,10 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.card.CardEdition;
+import forge.card.CardRarity;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
+import forge.card.CardRulesPredicates.LeafNumber;
 import forge.game.GameFormat;
 import forge.gui.WrapLayout;
 import forge.gui.deckeditor.controllers.CFilters;
@@ -183,58 +186,27 @@ public class SFilterUtil {
     public static Predicate<CardPrinted> buildColorFilter() {
         if (MAP_COLOR_CHECKBOXES.isEmpty()) { return Predicates.alwaysTrue(); }
 
-        final List<Predicate<CardRules>> ors = new ArrayList<Predicate<CardRules>>();
-        JCheckBox chbTemp;
+        final List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
 
-        chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.BLACK)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_BLACK); }
+        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.BLACK).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_BLACK); }
+        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.BLUE).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_BLUE); }
+        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.GREEN).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_GREEN); }
+        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.RED).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_RED); }
+        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.WHITE).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_WHITE); }
+        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.COLORLESS).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_COLORLESS); }
+        
+        final Predicate<CardRules> preColors = colors.size() == 6 ? null : Predicates.or(colors);
+        
+        
+        boolean wantMulticolor = MAP_COLOR_CHECKBOXES.get(FilterProperty.MULTICOLOR).getCheckBox().isSelected(); 
+        final Predicate<CardRules> preExceptMulti = wantMulticolor ? null : Predicates.not(CardRulesPredicates.Presets.IS_MULTICOLOR); 
 
-        chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.BLUE)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_BLUE); }
-
-        chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.GREEN)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_GREEN); }
-
-        chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.RED)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_RED); }
-
-        chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.WHITE)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_WHITE); }
-
-        chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.COLORLESS)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_COLORLESS); }
-
-        // Multi-colored needs special XOR treatment, since "not multi" when OR-ed
-        // with any other of its colors except colorless, will return true.
-        // Careful when changing this.
-        chbTemp = ((ChbPnl) MAP_COLOR_CHECKBOXES.get(FilterProperty.MULTICOLOR)).getCheckBox();
-        final Predicate<CardPrinted> preMulti;
-        if (!chbTemp.isSelected()) {
-            preMulti = Predicates.alwaysTrue();
-        }
-        else {
-            preMulti = Predicates.compose(CardRulesPredicates.Presets.IS_MULTICOLOR, CardPrinted.FN_GET_RULES);
-        }
-
-        final Predicate<CardPrinted> preColors = Predicates.compose(Predicates.or(ors), CardPrinted.FN_GET_RULES);
-
-        // Corner case: if multi is checked, and the rest are empty, AND won't work.
-        // This still doesn't work perfectly :/
-        boolean allEmptyExceptMulti = true;
-        for (FilterProperty p : MAP_COLOR_CHECKBOXES.keySet()) {
-            if (p.equals(FilterProperty.MULTICOLOR)) { continue; }
-            if (((ChbPnl) MAP_COLOR_CHECKBOXES.get(p)).getCheckBox().isSelected()) {
-                allEmptyExceptMulti = false;
-                break;
-            }
-         }
-
-        if (allEmptyExceptMulti) {
-            return Predicates.compose(CardRulesPredicates.Presets.IS_MULTICOLOR, CardPrinted.FN_GET_RULES);
-        }
-        else {
-            return Predicates.and(preColors, preMulti);
-        }
+        Predicate<CardRules> preFinal = colors.isEmpty() && wantMulticolor ? CardRulesPredicates.Presets.IS_MULTICOLOR : optimizedAnd(preExceptMulti, preColors);
+        
+        if ( null == preFinal)
+            return Predicates.alwaysTrue();
+        
+        return Predicates.compose(preFinal, CardPrinted.FN_GET_RULES);
     }
 
     /**
@@ -244,16 +216,16 @@ public class SFilterUtil {
      */
     public static Predicate<CardPrinted> buildSetAndFormatFilter() {
         // Set/Format filter
-        if (VFilters.SINGLETON_INSTANCE.getCbxSets().getSelectedIndex() == 0) {
+        JComboBox cbox = VFilters.SINGLETON_INSTANCE.getCbxSets(); 
+        if (cbox.getSelectedIndex() == 0) {
             return Predicates.alwaysTrue();
         }
 
-        final Object selected = VFilters.SINGLETON_INSTANCE.getCbxSets().getSelectedItem();
+        final Object selected = cbox.getSelectedItem();
         final Predicate<CardPrinted> filter;
         if (selected instanceof CardEdition) {
             filter = CardPrinted.Predicates.printedInSets(((CardEdition) selected).getCode());
-        }
-        else {
+        } else {
             filter = ((GameFormat) selected).getFilterRules();
         }
 
@@ -269,29 +241,17 @@ public class SFilterUtil {
         if (MAP_TYPE_CHECKBOXES.isEmpty()) { return Predicates.alwaysTrue(); }
 
         final List<Predicate<CardRules>> ors = new ArrayList<Predicate<CardRules>>();
-        JCheckBox chbTemp;
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.ARTIFACT).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_ARTIFACT); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.CREATURE).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_CREATURE); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.ENCHANTMENT).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_ENCHANTMENT); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.INSTANT).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_INSTANT); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.LAND).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_LAND); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.PLANESWALKER).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_PLANESWALKER); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.SORCERY).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_SORCERY); }
 
-        chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.ARTIFACT)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_ARTIFACT); }
-
-        chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.CREATURE)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_CREATURE); }
-
-        chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.ENCHANTMENT)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_ENCHANTMENT); }
-
-        chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.INSTANT)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_INSTANT); }
-
-        chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.LAND)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_LAND); }
-
-        chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.PLANESWALKER)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_PLANESWALKER); }
-
-        chbTemp = ((ChbPnl) MAP_TYPE_CHECKBOXES.get(FilterProperty.SORCERY)).getCheckBox();
-        if (chbTemp.isSelected()) { ors.add(CardRulesPredicates.Presets.IS_SORCERY); }
-
+        if (ors.size() == 7)
+            return Predicates.alwaysTrue();
+        
         return Predicates.compose(Predicates.or(ors), CardPrinted.FN_GET_RULES);
     }
 
@@ -372,6 +332,22 @@ public class SFilterUtil {
         return Predicates.and(filterAnd, filterNot);
     }
 
+    private static Predicate<CardRules> getCardRulesFieldPredicate(String min, String max, CardRulesPredicates.LeafNumber.CardField field) {
+        boolean hasMin = !("*".equals(min));
+        boolean hasMax = !("10+".equals(max));
+        
+        Predicate<CardRules> pMin = !hasMin ? null : new CardRulesPredicates.LeafNumber(field, ComparableOp.GT_OR_EQUAL, Integer.valueOf(min));
+        Predicate<CardRules> pMax = !hasMax ? null : new CardRulesPredicates.LeafNumber(field, ComparableOp.LT_OR_EQUAL, Integer.valueOf(max));
+        
+        Predicate<CardRules> pRange = optimizedAnd(pMin, pMax);
+        return pRange == null ? null : pRange;
+    }
+    
+    private static <T> Predicate<T> optimizedAnd(Predicate<T> p1, Predicate<T> p2)
+    {
+        return p1 == null ? p2 : ( p2 == null ? p1 : Predicates.and(p1, p2) );
+    }
+    
     /**
      * Validates combo box input, assembles predicate filters for each case,
      * stacks them all together, and returns the predicate.
@@ -380,100 +356,20 @@ public class SFilterUtil {
      */
     public static Predicate<CardPrinted> buildIntervalFilter() {
         final VFilters view = VFilters.SINGLETON_INSTANCE;
-        Predicate<CardPrinted> filter = Predicates.alwaysTrue();
 
         // Must include -1 so non-creatures are included by default.
-        final int plow = view.getCbxPLow().getSelectedItem().toString().equals("*")
-                ? -1 : Integer.valueOf(view.getCbxPLow().getSelectedItem().toString());
-        final int tlow = view.getCbxTLow().getSelectedItem().toString().equals("*")
-                ? -1 : Integer.valueOf(view.getCbxTLow().getSelectedItem().toString());
-        final int clow = view.getCbxCMCLow().getSelectedItem().toString().equals("*")
-                ? -1 : Integer.valueOf(view.getCbxCMCLow().getSelectedItem().toString());
-
-        // If a power, toughness, or CMC is higher than 100, that's bad.
-        final int phigh = view.getCbxPHigh().getSelectedItem().toString().equals("10+")
-                ? 100 : Integer.valueOf(view.getCbxPHigh().getSelectedItem().toString());
-        final int thigh = view.getCbxTHigh().getSelectedItem().toString().equals("10+")
-                ? 100 : Integer.valueOf(view.getCbxTHigh().getSelectedItem().toString());
-        final int chigh = view.getCbxCMCHigh().getSelectedItem().toString().equals("10+")
-                ? 100 : Integer.valueOf(view.getCbxCMCHigh().getSelectedItem().toString());
-
-        // Assemble final predicates
-        final Predicate<CardPrinted> prePower;
-        final Predicate<CardPrinted> preToughness;
-        final Predicate<CardPrinted> preCMC;
-
-        // Power: CardRules returns null if no power, which means extra
-        // filtering must be applied to allow all cards to be shown if * is chosen.
-        // (Without this, lands and such would be filtered out by default.)
-        if (plow > phigh) { prePower = Predicates.alwaysFalse(); }
-        else {
-            // If * is selected in the combo box, cards without power
-            // will be included in the filter.
-            final Predicate<CardPrinted> preNotCreature;
-            if (plow == -1) {
-                preNotCreature = Predicates.not(
-                    Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE,
-                            CardPrinted.FN_GET_RULES));
-            }
-            // Otherwise, if 0 or higher is selected, cards without power
-            // are excluded.
-            else {
-                preNotCreature = Predicates.alwaysFalse();
-            }
-
-            final Predicate<CardPrinted> prePowerTemp = Predicates.and(
-            Predicates.compose(CardRulesPredicates.power(
-                    ComparableOp.GT_OR_EQUAL, plow), CardPrinted.FN_GET_RULES),
-            Predicates.compose(CardRulesPredicates.power(
-                    ComparableOp.LT_OR_EQUAL, phigh), CardPrinted.FN_GET_RULES));
-
-            prePower = Predicates.or(preNotCreature, prePowerTemp);
-        }
-
-        // Toughness: CardRules returns null if no toughness, which means extra
-        // filtering must be applied to allow all cards to be shown if * is chosen.
-        // (Without this, lands and such would be filtered out by default.)
-        if (tlow > thigh) { preToughness = Predicates.alwaysFalse(); }
-        else {
-            // If * is selected in the combo box, cards without toughness
-            // will be included in the filter.
-            final Predicate<CardPrinted> preNotCreature;
-            if (tlow == -1) {
-                preNotCreature = Predicates.not(
-                    Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE,
-                            CardPrinted.FN_GET_RULES));
-            }
-            // Otherwise, if 0 or higher is selected, cards without toughness
-            // are excluded.
-            else {
-                preNotCreature = Predicates.alwaysFalse();
-            }
-
-            final Predicate<CardPrinted> preToughnessTemp = Predicates.and(
-                Predicates.compose(CardRulesPredicates.toughness(
-                        ComparableOp.GT_OR_EQUAL, tlow), CardPrinted.FN_GET_RULES),
-                Predicates.compose(CardRulesPredicates.toughness(
-                        ComparableOp.LT_OR_EQUAL, thigh), CardPrinted.FN_GET_RULES));
-
-            preToughness = Predicates.or(preNotCreature, preToughnessTemp);
-        }
-
-        // CMC, thankfully, will return -1 if the card doesn't have a CMC,
-        // so it can be compared directly against the low value, and non-CMC
-        // cards will still be included if * is chosen.
-        if (clow > chigh) { preCMC = Predicates.alwaysFalse(); }
-        else {
-            preCMC = Predicates.and(
-                Predicates.compose(CardRulesPredicates.cmc(
-                        ComparableOp.GT_OR_EQUAL, clow), CardPrinted.FN_GET_RULES),
-                Predicates.compose(CardRulesPredicates.cmc(
-                    ComparableOp.LT_OR_EQUAL, chigh), CardPrinted.FN_GET_RULES));
-        }
-
-        // Stack them all together and return.
-        filter = Predicates.and(preCMC, Predicates.and(prePower, preToughness));
-        return filter;
+        Predicate<CardRules> preToughness = getCardRulesFieldPredicate(view.getCbxTLow().getSelectedItem().toString(), view.getCbxTHigh().getSelectedItem().toString(), CardRulesPredicates.LeafNumber.CardField.TOUGHNESS);
+        Predicate<CardRules> prePower = getCardRulesFieldPredicate(view.getCbxPLow().getSelectedItem().toString(), view.getCbxPHigh().getSelectedItem().toString(), CardRulesPredicates.LeafNumber.CardField.POWER);
+        Predicate<CardRules> preCMC = getCardRulesFieldPredicate(view.getCbxCMCLow().getSelectedItem().toString(), view.getCbxCMCHigh().getSelectedItem().toString(), CardRulesPredicates.LeafNumber.CardField.CMC);
+        
+        Predicate<CardRules> preCreature = optimizedAnd(preToughness, prePower);
+        preCreature = preCreature == null ? null : Predicates.and( preCreature, CardRulesPredicates.Presets.IS_CREATURE ); 
+        
+        Predicate<CardRules> preFinal = optimizedAnd(preCMC, preCreature);
+        if (preFinal == null)
+            return Predicates.alwaysTrue();
+        else
+            return Predicates.compose(preFinal, CardPrinted.FN_GET_RULES);
     }
 
     //========== Custom class handling
