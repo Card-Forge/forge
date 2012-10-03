@@ -6,7 +6,8 @@ A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any col
 R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ PayBeforeETB | Description$ If CARDNAME would enter the battlefield, you may discard a land card instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
 SVar:PayBeforeETB:AB$ Discard | Cost$ 0 | DiscardValid$ Card.Land | Mode$ TgtChoose | RememberDiscarded$ True | Optional$ True | SubAbility$ MoveToGraveyard
 SVar:MoveToGraveyard:DB$ ChangeZone | Origin$ All | Destination$ Graveyard | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ MoveToBattlefield
-SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

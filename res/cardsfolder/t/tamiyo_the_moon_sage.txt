@@ -5,7 +5,7 @@ Text:no text
 Loyalty:4
 A:AB$ Tap | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent | TgtPrompt$ Choose target permanent. | Planeswalker$ True | SubAbility$ TamiyoPump | SpellDescription$ Tap target permanent. It doesn't untap during its controller's next untap step.
 SVar:TamiyoPump:DB$Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.
-A:AB$ Draw | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | Defined$ You | NumCards$ X | References$ X | Planeswalker$ True | SpellDescription$  Draw a card for each tapped creature target player controls.
+A:AB$ Draw | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | Defined$ You | NumCards$ X | References$ X | Planeswalker$ True | SpellDescription$ Draw a card for each tapped creature target player controls.
 SVar:X:Count$Valid Creature.tapped+TargetedPlayerCtrl
 A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Tamiyo, the Moon Sage emblem | Image$ tamiyo_the_moon_sage_emblem | StaticAbilities$ UnlimitedHand | Triggers$ TamiyoCardToGrave | SVars$ TamiyoReturn | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
 SVar:UnlimitedHand:Mode$ Continuous | Affected$ You | SetMaxHandSize$ -1 | Description$ You have no maximum hand size.

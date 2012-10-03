@@ -1,9 +1,15 @@
 Name:Lake of the Dead
 ManaCost:no cost
 Types:Land
-Text:If CARDNAME would enter the battlefield, sacrifice a Swamp instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
+Text:no text
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 A:AB$ Mana | Cost$ T Sac<1/Swamp> | Produced$ B | Amount$ 4 | SpellDescription$ Add B B B B to your mana pool.
+R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ PayBeforeETB | Description$ If CARDNAME would enter the battlefield, sacrifice a Swamp instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
+SVar:PayBeforeETB:AB$ Sacrifice | Cost$ 0 | SacValid$ Swamp | Defined$ You | RememberSacrificed$ True | SubAbility$ MoveToGraveyard
+SVar:MoveToGraveyard:DB$ ChangeZone | Origin$ All | Destination$ Graveyard | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ MoveToBattlefield
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lake_of_the_dead.jpg

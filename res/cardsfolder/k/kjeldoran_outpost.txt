@@ -1,9 +1,15 @@
 Name:Kjeldoran Outpost
 ManaCost:no cost
 Types:Land
-Text:If Kjeldoran Outpost would enter the battlefield, sacrifice a Plains instead. If you do, put Kjeldoran Outpost onto the battlefield. If you don't, put it into its owner's graveyard.
+Text:no text
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Token | Cost$ 1 W T | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white Soldier creature token onto the battlefield.
+R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ PayBeforeETB | Description$ If CARDNAME would enter the battlefield, sacrifice a Plains instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
+SVar:PayBeforeETB:AB$ Sacrifice | Cost$ 0 | SacValid$ Plains | Defined$ You | RememberSacrificed$ True | SubAbility$ MoveToGraveyard
+SVar:MoveToGraveyard:DB$ ChangeZone | Origin$ All | Destination$ Graveyard | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ MoveToBattlefield
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
 SVar:NeedsToPlay:Plains.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_outpost.jpg
