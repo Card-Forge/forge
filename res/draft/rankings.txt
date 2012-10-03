@@ -1,4 +1,259 @@
 //Rank|Name|Rarity|Set
+#1|Vraska the Unseen|M|RTR
+#2|Trostani Selesnyas Voice|M|RTR
+#3|Niv Mizzet Dracogenius|M|RTR
+#4|Rakdos Lord of Riots|M|RTR
+#5|Jace Architect of Thought|M|RTR
+#6|Isperia Supreme Judge|M|RTR
+#7|Angel of Serenity|M|RTR
+#8|Necropolis Regent|M|RTR
+#9|Jarad Golgari Lich Lord|M|RTR
+#10|Armada Wurm|M|RTR
+#11|Utvara Hellkite|M|RTR
+#12|Sphinxs Revelation|M|RTR
+#13|Rakdoss Return|M|RTR
+#14|Worldspine Wurm|M|RTR
+#15|Mizzium Mortars|R|RTR
+#16|Desecration Demon|R|RTR
+#17|Mercurial Chemister|R|RTR
+#18|Hypersonic Dragon|R|RTR
+#19|Deadbridge Goliath|R|RTR
+#20|Lotleth Troll|R|RTR
+#21|Cyclonic Rift|R|RTR
+#22|Archon of the Triumvirate|R|RTR
+#23|Loxodon Smiter|R|RTR
+#24|Collective Blessing|R|RTR
+#25|Dreadbore|R|RTR
+#26|Chaos Imps|R|RTR
+#27|Abrupt Decay|R|RTR
+#28|Supreme Verdict|R|RTR
+#29|Wayfaring Temple|R|RTR
+#30|Corpsejack Menace|R|RTR
+#31|Carnival Hellsteed|R|RTR
+#32|Epic Experiment|M|RTR
+#33|Martial Law|R|RTR
+#34|Detention Sphere|R|RTR
+#35|Growing Ranks|R|RTR
+#36|Chromatic Lantern|R|RTR
+#37|Pack Rat|R|RTR
+#38|Sphinx of the Chimes|R|RTR
+#39|Deathrite Shaman|R|RTR
+#40|Grove of the Guardian|R|RTR
+#41|Precinct Captain|R|RTR
+#42|Cryptborn Horror|R|RTR
+#43|Righteous Authority|R|RTR
+#44|Underworld Connections|R|RTR
+#45|Palisade Giant|R|RTR
+#46|Wild Beastmaster|R|RTR
+#47|Vitu Ghazi Guildmage|U|RTR
+#48|Ash Zealot|R|RTR
+#49|Skymark Roc|U|RTR
+#50|Azors Elocutors|R|RTR
+#51|Call of the Conclave|U|RTR
+#52|Selesnya Charm|U|RTR
+#53|Lyev Skyknight|U|RTR
+#54|Jarads Orders|R|RTR
+#55|New Prahv Guildmage|U|RTR
+#56|Overgrown Tomb|R|RTR
+#57|Blood Crypt|R|RTR
+#58|Dreg Mangler|U|RTR
+#59|Hellhole Flailer|U|RTR
+#60|Ultimate Price|U|RTR
+#61|Arrest|U|RTR
+#62|Street Spasm|U|RTR
+#63|Azorius Justiciar|U|RTR
+#64|Temple Garden|R|RTR
+#65|Bloodfray Giant|U|RTR
+#66|Azorius Charm|U|RTR
+#67|Korozda Guildmage|U|RTR
+#68|Rix Maadi Guildmage|U|RTR
+#69|Grave Betrayal|R|RTR
+#70|Rakdos Cackler|U|RTR
+#71|Steam Vents|R|RTR
+#72|Izzet Charm|U|RTR
+#73|Volatile Rig|R|RTR
+#74|Deaths Presence|R|RTR
+#75|Hallowed Fountain|R|RTR
+#76|Slitherhead|U|RTR
+#77|Izzet Staticaster|U|RTR
+#78|Thrill Kill Assassin|U|RTR
+#79|Rakdos Ragemutt|U|RTR
+#80|Slime Molding|U|RTR
+#81|Dryad Militant|U|RTR
+#82|Nivmagus Elemental|R|RTR
+#83|Judges Familiar|U|RTR
+#84|Nivix Guildmage|U|RTR
+#85|Soulsworn Spirit|U|RTR
+#86|Mana Bloom|R|RTR
+#87|Annihilating Fire|C|RTR
+#88|Auger Spree|C|RTR
+#89|Guttersnipe|U|RTR
+#90|Golgari Charm|U|RTR
+#91|Slum Reaper|U|RTR
+#92|Stab Wound|C|RTR
+#93|Centaur Healer|C|RTR
+#94|Skyline Predator|U|RTR
+#95|Rogues Passage|U|RTR
+#96|Golgari Decoy|U|RTR
+#97|Assassins Strike|U|RTR
+#98|Selesnya Keyrune|U|RTR
+#99|Counterflux|R|RTR
+#100|Rites of Reaping|U|RTR
+#101|Fencing Ace|U|RTR
+#102|Risen Sanctuary|U|RTR
+#103|Vassal Soul|C|RTR
+#104|Syncopate|U|RTR
+#105|Splatter Thug|C|RTR
+#106|Azorius Keyrune|U|RTR
+#107|Hover Barrier|U|RTR
+#108|Phantom General|U|RTR
+#109|Gatecreeper Vine|C|RTR
+#110|Izzet Keyrune|U|RTR
+#111|Rakdos Keyrune|U|RTR
+#112|Golgari Keyrune|U|RTR
+#113|Blustersquall|U|RTR
+#114|Rakdos Shred Freak|C|RTR
+#115|Axebane Guardian|C|RTR
+#116|Azorius Arrester|C|RTR
+#117|Soul Tithe|U|RTR
+#118|Security Blockade|U|RTR
+#119|Trostanis Judgment|C|RTR
+#120|Explosive Impact|C|RTR
+#121|Zanikev Locust|U|RTR
+#122|Pithing Needle|R|RTR
+#123|Sunspire Griffin|C|RTR
+#124|Sluiceway Scorpion|C|RTR
+#125|Civic Saber|U|RTR
+#126|Brushstrider|U|RTR
+#127|Avenging Arrow|C|RTR
+#128|Gore House Chainwalker|C|RTR
+#129|Centaurs Herald|C|RTR
+#130|Teleportal|U|RTR
+#131|Eyes in the Skies|C|RTR
+#132|Thoughtflare|U|RTR
+#133|Dead Reveler|C|RTR
+#134|Rakdos Charm|U|RTR
+#135|Faerie Impostor|U|RTR
+#136|Blistercoil Weird|U|RTR
+#137|Runewing|C|RTR
+#138|Launch Party|C|RTR
+#139|Coursers Accord|C|RTR
+#140|Seek the Horizon|U|RTR
+#141|Seller of Songbirds|C|RTR
+#142|Transguild Promenade|C|RTR
+#143|Hussar Patrol|C|RTR
+#144|Rakdos Ringleader|U|RTR
+#145|Frostburn Weird|C|RTR
+#146|Selesnya Guildgate|C|RTR
+#147|Goblin Rally|U|RTR
+#148|Rakdos Guildgate|C|RTR
+#149|Sewer Shambler|C|RTR
+#150|Drudge Beetle|C|RTR
+#151|Korozda Monitor|C|RTR
+#152|Savage Surge|U|RTR
+#153|Golgari Guildgate|C|RTR
+#154|Inaction Injunction|C|RTR
+#155|Archweaver|U|RTR
+#156|Azorius Guildgate|C|RTR
+#157|Dark Revenant|U|RTR
+#158|Paralyzing Grasp|C|RTR
+#159|Daggerdrome Imp|C|RTR
+#160|Goblin Electromancer|C|RTR
+#161|Tower Drake|C|RTR
+#162|Stealer of Secrets|C|RTR
+#163|Dramatic Rescue|C|RTR
+#164|Grim Roustabout|C|RTR
+#165|Electrickery|C|RTR
+#166|Voidwielder|C|RTR
+#167|Treasured Find|U|RTR
+#168|Slaughter Games|R|RTR
+#169|Common Bond|C|RTR
+#170|Golgari Longlegs|C|RTR
+#171|Izzet Guildgate|C|RTR
+#172|Trestle Troll|C|RTR
+#173|Rootborn Defenses|C|RTR
+#174|Towering Indrik|C|RTR
+#175|Giant Growth|C|RTR
+#176|Concordia Pegasus|C|RTR
+#177|Spawn of Rix Maadi|C|RTR
+#178|Sundering Growth|C|RTR
+#179|Isperias Skywatch|C|RTR
+#180|Lobber Crew|C|RTR
+#181|Knightly Valor|C|RTR
+#182|Ogre Jailbreaker|C|RTR
+#183|Inspiration|C|RTR
+#184|Keening Apparition|C|RTR
+#185|Gobbling Ooze|U|RTR
+#186|Viashino Racketeer|C|RTR
+#187|Havoc Festival|R|RTR
+#188|Stonefare Crocodile|C|RTR
+#189|Pyroconvergence|U|RTR
+#190|Traitorous Instinct|C|RTR
+#191|Sphere of Safety|U|RTR
+#192|Druids Deliverance|C|RTR
+#193|Cancel|C|RTR
+#194|Rubbleback Rhino|C|RTR
+#195|Essence Backlash|C|RTR
+#196|Fall of the Gavel|U|RTR
+#197|Doorkeeper|C|RTR
+#198|Minotaur Aggressor|U|RTR
+#199|Selesnya Sentry|C|RTR
+#200|Grisly Salvage|C|RTR
+#201|Aerial Predation|C|RTR
+#202|Horncallers Chant|C|RTR
+#203|Swift Justice|C|RTR
+#204|Mind Rot|C|RTR
+#205|Perilous Shadow|C|RTR
+#206|Armory Guard|C|RTR
+#207|Skull Rend|C|RTR
+#208|Chemisters Trick|C|RTR
+#209|Deviant Glee|C|RTR
+#210|Rest in Peace|R|RTR
+#211|Crosstown Courier|C|RTR
+#212|Drainpipe Vermin|C|RTR
+#213|Dynacharge|C|RTR
+#214|Chorus of Might|C|RTR
+#215|Cobblebrute|C|RTR
+#216|Terrus Wurm|C|RTR
+#217|Oak Street Innkeeper|U|RTR
+#218|Ethereal Armor|C|RTR
+#219|Bazaar Krovod|U|RTR
+#220|Pursuit of Flight|C|RTR
+#221|Fireminds Foresight|R|RTR
+#222|Tenement Crasher|C|RTR
+#223|Search Warrant|C|RTR
+#224|Batterhorn|C|RTR
+#225|Bellows Lizard|C|RTR
+#226|Downsize|C|RTR
+#227|Trained Caracal|C|RTR
+#228|Mizzium Skin|C|RTR
+#229|Psychic Spiral|U|RTR
+#230|Dispel|C|RTR
+#231|Tavern Swindler|U|RTR
+#232|Axebane Stag|C|RTR
+#233|Chronic Flooding|C|RTR
+#234|Heroes Reunion|U|RTR
+#235|Tablet of the Guilds|U|RTR
+#236|Aquus Steed|U|RTR
+#237|Cremate|C|RTR
+#238|Catacomb Slug|C|RTR
+#239|Survey the Wreckage|C|RTR
+#240|Destroy the Evidence|C|RTR
+#241|Urban Burgeoning|C|RTR
+#242|Shrieking Affliction|U|RTR
+#243|Codex Shredder|U|RTR
+#244|Racecourse Fury|U|RTR
+#245|Vandalblast|U|RTR
+#246|Street Sweeper|U|RTR
+#247|Conjured Currency|R|RTR
+#248|Guild Feud|R|RTR
+#249|Search the City|R|RTR
+#250|Swamp|L|RTR
+#251|Mountain|L|RTR
+#252|Plains|L|RTR
+#253|Forest|L|RTR
+#254|Island|L|RTR
+//Rank|Name|Rarity|Set
 #1|Garruk Primal Hunter|M|M13
 #2|Ajani Caller of the Pride|M|M13
 #3|Thundermaw Hellkite|M|M13
