@@ -50,6 +50,8 @@ import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
+import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerHandler;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -1100,23 +1102,16 @@ public class CardFactoryCreatures {
                 return sum;
             }
         }; // end sacOrSac
-        sacOrSac.setTrigger(true);
+        
+        final StringBuilder sbTrig = new StringBuilder();
+        sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ");
+        sbTrig.append("Execute$ TrigOverride | TriggerDescription$  ");
+        sbTrig.append("When CARDNAME enters the battlefield, sacrifice it unless ");
+        sbTrig.append("you sacrifice any number of creatures with total power 12 or greater.");
+        final Trigger myTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
+        myTrigger.setOverridingAbility(sacOrSac);
 
-        final Command comesIntoPlay = new Command() {
-            private static final long serialVersionUID = 7680692311339496770L;
-
-            @Override
-            public void execute() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("When ").append(cardName);
-                sb.append(" enters the battlefield, sacrifice it unless you sacrifice ");
-                sb.append("any number of creatures with total power 12 or greater.");
-                sacOrSac.setStackDescription(sb.toString());
-                AllZone.getStack().addSimultaneousStackEntry(sacOrSac);
-            }
-        };
-
-        card.addComesIntoPlayCommand(comesIntoPlay);
+        card.addTrigger(myTrigger);
     }
 
     private static void getCard_Nebuchadnezzar(final Card card, final String cardName) {
