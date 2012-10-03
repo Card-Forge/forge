@@ -49,8 +49,8 @@ public class GuiChoose {
         }
         final List<T> choice = GuiChoose.getChoices(message, 0, 1, choices);
         return choice.isEmpty() ? null : choice.get(0);
-    } // getChoiceOptional(String,T...)    
-
+    } // getChoiceOptional(String,T...)
+    
     // returned Object will never be null
     /**
      * <p>
@@ -123,6 +123,34 @@ public class GuiChoose {
     public static <T> List<T> oneOrMany(final String message, final T[] choices) {
         return GuiChoose.getChoices(message, 1, choices.length, choices);
     } // getChoice()
+    
+    //returned Object will never be null
+    /**
+     * <p>
+     * Presents a list of choices where the player must choose exactly *amount* options.
+     * @param message
+     *          the message to display to the player.
+     * @param choices
+     *          the choices to choose from.
+     * @param amount
+     *          the amount of options that must be chosen.
+     * @return
+     */
+    public static <T> List<T> amount(final String message, final T[] choices, final int amount) {
+        if ((choices == null) || (choices.length == 0) || choices.length < amount) {
+            return null;
+        }
+        
+        return GuiChoose.getChoices(message, amount, amount, choices);        
+    }
+    
+    public static <T> List<T> amount(final String message, final Collection<T> choices, final int amount) {
+        if ((choices == null) || (choices.size() == 0) || choices.size() < amount) {
+            return null;
+        }
+        
+        return GuiChoose.getChoices(message, amount, amount, choices);        
+    }
 
     // returned Object will never be null
     /**

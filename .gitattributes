@@ -9757,6 +9757,7 @@ res/cardsfolder/s/syphon_mind.txt -text
 res/cardsfolder/s/syphon_soul.txt svneol=native#text/plain
 res/cardsfolder/s/szadek_lord_of_secrets.txt svneol=native#text/plain
 res/cardsfolder/t/tablet_of_epityr.txt svneol=native#text/plain
+res/cardsfolder/t/tablet_of_the_guild.txt -text
 res/cardsfolder/t/tahngarth_talruum_hero.txt svneol=native#text/plain
 res/cardsfolder/t/tahngarths_rage.txt svneol=native#text/plain
 res/cardsfolder/t/taiga.txt svneol=native#text/plain

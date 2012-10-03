@@ -6435,12 +6435,32 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.equals("ChosenColor")) {
-            // Should this match All chosen colors, or any? Default to first
-            // chosen for now until it matters.
             if (source.getChosenColor().size() == 0) {
                 return false;
             }
             if (!CardUtil.getColors(this).contains(source.getChosenColor().get(0))) {
+                return false;
+            }
+        } else if (property.equals("AllChosenColors")) {
+            if (source.getChosenColor().size() == 0) {
+                return false;
+            }
+            for(String col : source.getChosenColor()) {
+                if (!CardUtil.getColors(this).contains(col)) {
+                    return false;
+                }
+            }
+        } else if (property.equals("AnyChosenColor")) {
+            if (source.getChosenColor().size() == 0) {
+                return false;
+            }
+            int matched = 0;
+            for(String col : source.getChosenColor()) {
+                if (CardUtil.getColors(this).contains(col)) {
+                    matched++;
+                }
+            }
+            if(matched == 0) {
                 return false;
             }
         } else if (property.equals("DoubleFaced")) {

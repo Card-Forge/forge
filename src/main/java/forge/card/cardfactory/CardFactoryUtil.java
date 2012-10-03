@@ -35,6 +35,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 
+import forge.CardColor;
 import forge.CardListUtil;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -3293,6 +3294,34 @@ public class CardFactoryUtil {
         }
 
         return maxColor;
+    }
+    
+    public static List<String> getColorByProminence(final List<Card> list) {
+        HashMap<String, Integer> counts = new HashMap<String,Integer>();
+        for(String color : Constant.Color.ONLY_COLORS)
+        {
+            counts.put(color, 0);
+        }
+        for(Card c : list) {
+            for(CardColor col : c.getColor()) {
+                counts.put(col.toString(), counts.get(col.toString())+1);
+            }
+        }
+        ArrayList<String> res = new ArrayList<String>();
+        String maxkey = "";
+        int maxval = -1;
+        while(counts.keySet().size() > 0) {
+            for(String key : counts.keySet()) {
+                if(counts.get(key) > maxval) {
+                    maxkey = key;
+                    maxval = counts.get(key);
+                }
+            }
+            res.add(maxkey);
+            counts.remove(maxkey);
+        }
+        
+        return res;
     }
 
     /**

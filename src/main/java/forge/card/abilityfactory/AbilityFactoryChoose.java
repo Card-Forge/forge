@@ -710,6 +710,9 @@ public final class AbilityFactoryChoose {
                         final List<String> o = GuiChoose.oneOrMany("Choose a color or colors",
                                 Constant.Color.ONLY_COLORS);
                         card.setChosenColor(new ArrayList<String>(o));
+                    } else if (params.containsKey("TwoColors")) {
+                        final List<String> o = GuiChoose.amount("Choose two colors", Constant.Color.ONLY_COLORS, 2);
+                        card.setChosenColor(new ArrayList<String>(o));
                     } else {
                         final Object o = GuiChoose.one("Choose a color", Constant.Color.ONLY_COLORS);
                         if (null == o) {
@@ -721,43 +724,47 @@ public final class AbilityFactoryChoose {
                         card.setChosenColor(tmpColors);
                     }
                 } else {
-                    String chosen = "";
+                    List<String> chosen = new ArrayList<String>();
                     if (params.containsKey("AILogic")) {
                         final String logic = params.get("AILogic");
                         if (logic.equals("MostProminentInHumanDeck")) {
-                            chosen = CardFactoryUtil.getMostProminentColor(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer()));
+                            chosen.add(CardFactoryUtil.getMostProminentColor(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer())));
                         } else if (logic.equals("MostProminentInComputerDeck")) {
-                            chosen = CardFactoryUtil.getMostProminentColor(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer()));
+                            chosen.add(CardFactoryUtil.getMostProminentColor(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer())));
+                        } else if (logic.equals("MostProminentDualInComputerDeck")) {
+                            List<String> prominence = CardFactoryUtil.getColorByProminence(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer()));
+                            chosen.add(prominence.get(0));
+                            chosen.add(prominence.get(1));
                         }
                         else if (logic.equals("MostProminentInGame")) {
-                            chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame());
+                            chosen.add(CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame()));
                         }
                         else if (logic.equals("MostProminentHumanCreatures")) {
                             List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                             if (list.isEmpty()) {
                                 list = CardListUtil.filter(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer()), CardPredicates.Presets.CREATURES);
                             }
-                            chosen = CardFactoryUtil.getMostProminentColor(list);
+                            chosen.add(CardFactoryUtil.getMostProminentColor(list));
                         }
                         else if (logic.equals("MostProminentComputerControls")) {
-                            chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
-                                    ZoneType.Battlefield));
+                            chosen.add(CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
+                                    ZoneType.Battlefield)));
                         }
                         else if (logic.equals("MostProminentPermanent")) {
                             final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-                            chosen = CardFactoryUtil.getMostProminentColor(list);
+                            chosen.add(CardFactoryUtil.getMostProminentColor(list));
                         }
                         else if (logic.equals("MostProminentAttackers")) {
-                            chosen = CardFactoryUtil.getMostProminentColor(AllZone.getCombat()
-                                    .getAttackerList());
+                            chosen.add(CardFactoryUtil.getMostProminentColor(AllZone.getCombat()
+                                    .getAttackerList()));
                         }
                     }
-                    if (chosen.equals("")) {
-                        chosen = Constant.Color.GREEN;
+                    if (chosen.size() == 0) {
+                        chosen.add(Constant.Color.GREEN);
                     }
-                    GuiChoose.one("Computer picked: ", new String[]{chosen});
+                    GuiChoose.one("Computer picked: ", chosen);
                     final ArrayList<String> colorTemp = new ArrayList<String>();
-                    colorTemp.add(chosen);
+                    colorTemp.addAll(chosen);
                     card.setChosenColor(colorTemp);
                 }
             }
