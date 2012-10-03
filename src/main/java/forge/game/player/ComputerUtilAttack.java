@@ -145,7 +145,7 @@ public class ComputerUtilAttack {
             return true;
         }
 
-        final List<Card> controlledByCompy = AllZone.getComputerPlayer().getAllCards();
+        final List<Card> controlledByCompy = AllZone.getComputerPlayer().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         for (final Card c : controlledByCompy) {
             for (final Trigger trigger : c.getTriggers()) {
                 if (CombatUtil.combatTriggerWillTrigger(attacker, null, trigger, combat)) {

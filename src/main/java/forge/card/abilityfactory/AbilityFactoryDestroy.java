@@ -326,10 +326,9 @@ public class AbilityFactoryDestroy {
                 }
             }
         }
-        System.out.println("destroy2");
+
         final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
-            System.out.println("destroy3");
             chance &= subAb.chkAIDrawback();
         }
 
