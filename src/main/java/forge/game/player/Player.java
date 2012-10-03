@@ -1393,6 +1393,9 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
                     }
                 }
             }
+            else if (this.getZone(z) != null) {
+                result.addAll(this.getZone(z).getCards());
+            }
         }
 
         return result;
