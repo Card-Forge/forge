@@ -18,10 +18,13 @@ package forge.gui.match;
 
 import forge.AllZone;
 
+
 import forge.Card;
 import forge.Singletons;
 import forge.control.FControl;
 
+import forge.card.BoosterData;
+import forge.card.UnOpenedProduct;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameLossReason;
@@ -30,6 +33,7 @@ import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiChoose;
 import forge.gui.ListChooser;
 import forge.gui.SOverlayUtils;
 import forge.gui.home.quest.CSubmenuChallenges;
@@ -548,32 +552,61 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * 
      */
     private void awardBooster() {
-        final List<GameFormat> formats = new ArrayList<GameFormat>();
-        String prefferedFormat = Singletons.getModel().getQuestPreferences().getPreference(QPref.BOOSTER_FORMAT);
 
-        int index = 0, i = 0;
-        for (GameFormat f : Singletons.getModel().getFormats()) {
-            formats.add(f);
-            if (f.toString().equals(prefferedFormat)) {
-                index = i;
+        final List<String> boosterTypes = new ArrayList<String>();
+        boosterTypes.add("Format");
+        boosterTypes.add("Set");
+
+        final String prompt = "Choose bonus booster type:";
+        final Object o = GuiChoose.one(prompt, boosterTypes);
+        List<CardPrinted> cardsWon = null;
+
+        if (o.toString().equals(boosterTypes.get(0))) {
+            final List<GameFormat> formats = new ArrayList<GameFormat>();
+            String prefferedFormat = Singletons.getModel().getQuestPreferences().getPreference(QPref.BOOSTER_FORMAT);
+
+            int index = 0, i = 0;
+            for (GameFormat f : Singletons.getModel().getFormats()) {
+                formats.add(f);
+                if (f.toString().equals(prefferedFormat)) {
+                    index = i;
+                }
+                i++;
             }
-            i++;
+
+            final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1, formats);
+            ch.show(index);
+
+            final GameFormat selected = ch.getSelectedValue();
+            Singletons.getModel().getQuestPreferences().setPreference(QPref.BOOSTER_FORMAT, selected.toString());
+
+            cardsWon = qData.getCards().addCards(selected.getFilterPrinted());
+
+            // Generate Swing components and attach.
+            this.lblTemp1 = new TitleLabel("Bonus booster pack from the \"" + selected.getName() + "\" format!");
+
+        } else {
+            final List<String> sets = new ArrayList<String>();
+
+            for (BoosterData bd : Singletons.getModel().getBoosters()) {
+                sets.add(bd.getEdition());
+            }
+            final String setPrompt = "Choose bonus booster set:";
+            final String chSet = GuiChoose.one(setPrompt, sets);
+
+            cardsWon = (new UnOpenedProduct(Singletons.getModel().getBoosters().get(chSet))).open();
+            qData.getCards().addAllCards(cardsWon);
+            this.lblTemp1 = new TitleLabel("Bonus booster pack from the \"" + chSet + "\" booster!");
         }
 
-        final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1, formats);
-        ch.show(index);
+        if (cardsWon != null) {
+            // Generate Swing components and attach.
+            final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        final GameFormat selected = ch.getSelectedValue();
-        Singletons.getModel().getQuestPreferences().setPreference(QPref.BOOSTER_FORMAT, selected.toString());
+            this.view.getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
+            this.view.getPnlCustom().add(cv, QuestWinLoseHandler.CONSTRAINTS_CARDS);
+        }
 
-        final List<CardPrinted> cardsWon = qData.getCards().addCards(selected.getFilterPrinted());
-
-        // Generate Swing components and attach.
-        this.lblTemp1 = new TitleLabel("Bonus booster pack from the \"" + selected.getName() + "\" format!");
-        final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
-
-        this.view.getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
-        this.view.getPnlCustom().add(cv, QuestWinLoseHandler.CONSTRAINTS_CARDS);
     }
 
     /**
@@ -713,7 +746,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     public static ImageIcon getResizedIcon(final ImageIcon icon, final double scale) {
         final int w = (int) (icon.getIconWidth() * scale);
         final int h = (int) (icon.getIconHeight() * scale);
-    
+
         return new ImageIcon(icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
     }
 
