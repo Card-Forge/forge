@@ -561,9 +561,9 @@ public class QuestWinLoseHandler extends ControlWinLose {
         boosterTypes.add("Set");
 
         final String prompt = "Choose bonus booster type:";
-        final Object o = null;
+        Object o = null;
         if (allowSetSelection) {
-            GuiChoose.one(prompt, boosterTypes);
+            o = GuiChoose.one(prompt, boosterTypes);
         }
         List<CardPrinted> cardsWon = null;
 
