@@ -366,7 +366,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
          * @return the predicate
          */
         public static Predicate<CardPrinted> name(final String what) {
-            return new PredicateName(PredicateString.StringOp.EQUALS, what);
+            return new PredicateName(PredicateString.StringOp.EQUALS_IC, what);
         }
 
         /**
