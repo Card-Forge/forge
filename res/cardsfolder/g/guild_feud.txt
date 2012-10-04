@@ -8,6 +8,7 @@ SVar:YouPick:DB$ Dig | Cost$ 0 | Defined$ You | DigNum$ 3 | Reveal$ True | Chang
 SVar:PicksFight:DB$ Fight | Defined$ Remembered | SubAbility$ DBCleanup | ConditionCheckSVar$ NumFighters | ConditionSVarCompare$ EQ2 | StackDescription$ If two creatures are put onto the battlefield this way, those creatures fight each other.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumFighters:Remembered$Amount
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guild_feud.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/97.jpg

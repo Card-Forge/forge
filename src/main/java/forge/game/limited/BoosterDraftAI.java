@@ -173,26 +173,16 @@ public class BoosterDraftAI {
                     }
                 } else {
                     // Arbitrary ordering...
-                    if (color.hasWhite()) {
-                        if (!currentColor1.isWhite()) {
-                            this.playerColors.get(player).setColor2(Constant.Color.WHITE);
-                        }
-                    } else if (color.hasBlue()) {
-                        if (!currentColor1.isBlue()) {
-                            this.playerColors.get(player).setColor2(Constant.Color.BLUE);
-                        }
-                    } else if (color.hasBlack()) {
-                        if (!currentColor1.isBlack()) {
-                            this.playerColors.get(player).setColor2(Constant.Color.BLACK);
-                        }
-                    } else if (color.hasRed()) {
-                        if (!currentColor1.isRed()) {
-                            this.playerColors.get(player).setColor2(Constant.Color.RED);
-                        }
-                    } else if (color.hasGreen()) {
-                        if (!currentColor1.isGreen()) {
-                            this.playerColors.get(player).setColor2(Constant.Color.GREEN);
-                        }
+                    if (color.hasWhite() && !currentColor1.isWhite()) {
+                        this.playerColors.get(player).setColor2(Constant.Color.WHITE);
+                    } else if (color.hasBlue() && !currentColor1.isBlue()) {
+                        this.playerColors.get(player).setColor2(Constant.Color.BLUE);
+                    } else if (color.hasBlack() && !currentColor1.isBlack()) {
+                        this.playerColors.get(player).setColor2(Constant.Color.BLACK);
+                    } else if (color.hasRed() && !currentColor1.isRed()) {
+                        this.playerColors.get(player).setColor2(Constant.Color.RED);
+                    } else if (color.hasGreen() && !currentColor1.isGreen()) {
+                        this.playerColors.get(player).setColor2(Constant.Color.GREEN);
                     }
                 }
                 if (Preferences.DEV_MODE) {
