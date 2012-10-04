@@ -6,7 +6,6 @@ PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put it on top of its owner's library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_revenant.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/61.jpg

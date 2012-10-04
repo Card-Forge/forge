@@ -1093,7 +1093,7 @@ public class AbilityFactoryAttach {
         }
 
         // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= .9;
+        final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         // Attach spells always have a target
         final Target tgt = sa.getTarget();

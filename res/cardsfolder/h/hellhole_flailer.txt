@@ -9,7 +9,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can
 SVar:NumP1P1:Count$NumCounters.P1P1
 A:AB$ DealDamage | Cost$ 2 B R Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to its power to target player.
 SVar:X:Sacrificed$CardPower
-SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellhole_flailer.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/167.jpg
