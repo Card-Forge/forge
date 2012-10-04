@@ -4473,7 +4473,6 @@ public class CardFactoryUtil {
 
                 String[] splitkw = parse.split(":");
 
-                AbilityFactory af = new AbilityFactory();
                 String desc = "CARDNAME enters the battlefield with " + splitkw[2] + " "
                         + Counters.valueOf(splitkw[1]).getName() + " counters on it.";
                 String extraparams = "";
@@ -4486,27 +4485,29 @@ public class CardFactoryUtil {
                 if (splitkw.length > 4) {
                     desc = splitkw[4];
                 }
-                String repStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1] + " | CounterNum$ " + amount;
+                String abStr = "AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Battlefield" +
+                		"| Defined$ ReplacedCard | SubAbility$ ETBCounterDBSVar";
+                String dbStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1] + " | CounterNum$ " + amount;
                 try {
                     Integer.parseInt(amount);
                 }
                 catch (NumberFormatException ignored) {
-                    repStr += " | References$ " + amount;
+                    dbStr += " | References$ " + amount;
                 }
-                SpellAbility repAb = af.getAbility(repStr, card);
-                setupETBReplacementAbility(repAb);
+                card.setSVar("ETBCounterSVar", abStr);
+                card.setSVar("ETBCounterDBSVar", dbStr);
 
-                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
+                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield " +
+                		"| ReplaceWith$ ETBCounterSVar | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
 
                 ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
                 re.setLayer(ReplacementLayer.Other);
-                re.setOverridingAbility(repAb);
 
                 card.addReplacementEffect(re);
             }
         }
 
-        int etbcounter = CardFactoryUtil.hasKeyword(card, "etbCounter");
+        /*int etbcounter = CardFactoryUtil.hasKeyword(card, "etbCounter");
         if (etbcounter != -1) {
             String parse = card.getKeyword().get(etbcounter);
             card.removeIntrinsicKeyword(parse);
@@ -4542,7 +4543,7 @@ public class CardFactoryUtil {
             re.setOverridingAbility(repAb);
 
             card.addReplacementEffect(re);
-        }
+        }*/
 
     }
 
