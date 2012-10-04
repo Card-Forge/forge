@@ -10,6 +10,8 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbility$ DBDi
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
+SVar:RemRandomDeck:True
+DeckNeeds:Color$Blue|Red
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_keyrune.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/230.jpg
