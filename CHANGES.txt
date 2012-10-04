@@ -5,7 +5,9 @@ Forge Beta: 0#-##-2012 ver 1.2.15
 11### cards in total.
 
 
-Fixed the deck editor text filter and it should now work as expected.
+Most of the cards from the new card set Return to Ravnica are now available and we invite you to enjoy these additions. Forge has 251 of the cards from this new set.
+
+The deck editor filter bugs should be fixed and it should now work as expected.
 
 The content downloader window now uses the new UI.
 
