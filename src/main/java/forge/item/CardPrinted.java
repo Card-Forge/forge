@@ -29,6 +29,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.Card;
 import forge.CardUtil;
+import forge.Singletons;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.game.player.Player;
@@ -176,6 +177,13 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
         }
     };
 
+    public static final Function<CardPrinted, Integer> FN_GET_EDITION_INDEX = new Function<CardPrinted, Integer>() {
+        @Override
+        public Integer apply(final CardPrinted from) {
+            return Integer.valueOf(Singletons.getModel().getEditions().get(from.getEdition()).getIndex());
+        }
+    };    
+    
     // Constructor is private. All non-foiled instances are stored in CardDb
     private CardPrinted(final CardRules c, final String edition0, final CardRarity rare, final int index, final boolean foil) {
         this.card = c;

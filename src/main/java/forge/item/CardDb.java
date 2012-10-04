@@ -39,6 +39,7 @@ import forge.Singletons;
 import forge.card.CardInSet;
 import forge.card.CardRules;
 import forge.card.MtgDataParser;
+import forge.util.Aggregates;
 
 
 /**
@@ -393,22 +394,13 @@ public final class CardDb {
             } else {
                 // OK, plain name here
                 final Predicate<CardPrinted> predicate = CardPrinted.Predicates.name(nameWithSet.left);
-                final List<CardPrinted> namedCards = Lists.newArrayList(Iterables.filter(this.allCardsFlat, predicate));
-                if (namedCards.isEmpty()) {
+                final Iterable<CardPrinted> namedCards = Iterables.filter(this.allCardsFlat, predicate);
+                // Find card with maximal set index
+                result = Aggregates.itemWithMax(namedCards, CardPrinted.FN_GET_EDITION_INDEX);
+                if (null == result) {
                     throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
                 }
-
-                // Find card with maximal set index
-                result = namedCards.get(0);
-                int resIndex = Singletons.getModel().getEditions().get((result).getEdition()).getIndex();
-                for (final CardPrinted card : namedCards) {
-
-                    final int thisIndex = Singletons.getModel().getEditions().get((card).getEdition()).getIndex();
-                    if (thisIndex > resIndex) {
-                        result = card;
-                        resIndex = thisIndex;
-                    }
-                }
+                
             }
         }
         if (isFoil) {
