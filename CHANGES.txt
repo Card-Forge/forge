@@ -275,6 +275,36 @@ Fixes/Features:
 - Cards without draft ranking will now be given the value 0.
 - Added RtR to rankings.txt.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Improved AI of Soulbond.
+- Improving naming of Fireball RaiseCost SVar
+- When you win a quest booster, you can now select a specific set (in addition to format-based boosters).
+- Converted 5 of the alliances lands to script.
+- Converted Lotus Vale and Scorched Ruins to script.
+- Fixed Fireball again.
+- Disabled booster set selection in Quest mode until it can be restricted somehow.
+- Slight fix for the previous commit.
+- The AI can now use Quillspike.
+- Fixed Dryad Militant.
+- Fixed Rest in Peace and Wheel of Sun and Moon (someone must have changed the syntax).
+- small changes: FControl has getPlayer(), CMatchUI has iteration over list, return types of label getters improved
+- Added "AnyChosenColor","AllChosenColor" properties.
+- Added TwoColors parameter to AF_ChooseColor.
+- Added AILogic "MostProminentDualInComputerDeck" to AF_ChooseColor
+- Fixed Stack cards getting added twice/thrice to list from Player.getAllCards().
+- Added method to GuiChoose that lets you limit min/max options to choose.
+- Trimmed some unused script in Tablet of the Guilds
+- Fixed player
+- Player - returning the right cards regardless of zone
+- minus 4 warnings
+- Converted Leyline of the Void and Yawgmoth's Agenda to replacement effects.
+- Renamed "Deck Building Option" to "Random Deck Generation Options".
+- Cleanup.
+- Deckeditor filters
+- filters - further carving
+- Phyrexian Dreadnaught ETB ability now actually runs through TriggerHandler
+- Fixed Soul Tithe.
+- Updated some SVars of RtR cards.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -282,7 +312,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 
 
-Added the following cards to the Return to Ravnica branch (These cards may now be available in this shapshot/beta build):
+Added the following cards to the Return to Ravnica branch (These cards should now be available in this shapshot/beta build):
 
 Abrupt Decay
 Aerial Predation
@@ -481,6 +511,7 @@ Sunspire Griffin
 Supreme Verdict
 Survey the Wreckage
 Swift Justice
+Tablet of the Guilds
 Tavern Swindler
 Teleportal
 Tenement Crasher
