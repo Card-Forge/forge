@@ -141,7 +141,7 @@ public class CostDiscard extends CostPartWithList {
             }
             if (sameName) {
                 for (Card c : handList) {
-                    if (CardListUtil.filter(handList, CardPredicates.nameEquals(c.getName())).size() > 1) {
+                    if (CardLists.filter(handList, CardPredicates.nameEquals(c.getName())).size() > 1) {
                         return true;
                     }
                 }
@@ -231,7 +231,7 @@ public class CostDiscard extends CostPartWithList {
                 handList = CardLists.getValidCards(handList, validType, activator, ability.getSourceCard());
                 final List<Card> landList2 = handList;
                 if (sameName) {
-                    handList = CardListUtil.filter(handList, new Predicate<Card>() {
+                    handList = CardLists.filter(handList, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             for (Card card : landList2) {

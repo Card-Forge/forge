@@ -21,8 +21,9 @@ import java.util.List;
 
 import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.Command;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
@@ -76,7 +77,7 @@ public class InputPayDiscardCost extends Input {
 
         this.ability = sa;
         this.discardCost = cost;
-        this.choiceList = CardListUtil.getValidCards(AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand), cost.getType().split(";"), AllZone.getHumanPlayer(), source);
+        this.choiceList = CardLists.getValidCards(AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand), cost.getType().split(";"), AllZone.getHumanPlayer(), source);
         String amountString = cost.getAmount();
         this.numRequired = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                 : CardFactoryUtil.xCount(source, source.getSVar(amountString));
@@ -164,7 +165,7 @@ public class InputPayDiscardCost extends Input {
         this.stop();
         for (Card selected : this.discardCost.getList()) {
             selected.setUsedToPay(false);
-            AllZone.getHumanPlayer().discard(selected, this.ability);
+            Singletons.getControl().getPlayer().discard(selected, this.ability);
         }
         this.discardCost.addListToHash(ability, "Discarded");
         this.paid.execute();

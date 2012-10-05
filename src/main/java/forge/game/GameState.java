@@ -85,32 +85,12 @@ public class GameState {
     }
 
     /**
-     * Sets the human player.
-     * 
-     * @param humanPlayer0
-     *            the humanPlayer to set
-     */
-    protected final void setHumanPlayer(final Player humanPlayer0) {
-        this.humanPlayer = humanPlayer0;
-    }
-
-    /**
      * Gets the computer player.
      * 
      * @return the computerPlayer
      */
     public final Player getComputerPlayer() {
         return this.computerPlayer;
-    }
-
-    /**
-     * Sets the computer player.
-     * 
-     * @param computerPlayer0
-     *            the computerPlayer to set
-     */
-    protected final void setComputerPlayer(final Player computerPlayer0) {
-        this.computerPlayer = computerPlayer0;
     }
 
     /**

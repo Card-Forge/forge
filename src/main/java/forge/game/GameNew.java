@@ -17,7 +17,7 @@ import com.google.common.collect.Lists;
 import forge.AllZone;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.CardPredicates;
 import forge.CardUtil;
@@ -171,7 +171,7 @@ public class GameNew {
         {
             if ( player.isHuman() ) {
                 for (int i = 0; i < 100; i++) {
-                    AllZone.getHumanPlayer().shuffle();
+                    player.shuffle();
                 }
             }
             
@@ -326,10 +326,10 @@ public class GameNew {
      */
     private static Iterable<Card> smoothComputerManaCurve(final Iterable<Card> in) {
         final List<Card> library = Lists.newArrayList(in);
-        CardListUtil.shuffle(library);
+        CardLists.shuffle(library);
 
         // remove all land, keep non-basicland in there, shuffled
-        List<Card> land = CardListUtil.filter(library, CardPredicates.Presets.LANDS);
+        List<Card> land = CardLists.filter(library, CardPredicates.Presets.LANDS);
         for (Card c : land) {
             if (c.isLand()) {
                 library.remove(c);

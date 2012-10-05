@@ -1036,6 +1036,7 @@ public class GameAction {
             AllZone.getTriggerHandler().runTrigger(TriggerType.Always, runParams);
 
             for (Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+                
                 if (c.isEquipped()) {
                     final List<Card> equipments = new ArrayList<Card>(c.getEquippedBy());
                     for (final Card equipment : equipments) {
@@ -1209,7 +1210,7 @@ public class GameAction {
      */
     private void destroyPlaneswalkers() {
         // get all Planeswalkers
-        final List<Card> list = CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
+        final List<Card> list = CardLists.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
 
         Card c;
         for (int i = 0; i < list.size(); i++) {
@@ -1225,7 +1226,7 @@ public class GameAction {
                     continue;
                 }
 
-                final List<Card> cl = CardListUtil.getType(list, type);
+                final List<Card> cl = CardLists.getType(list, type);
 
                 if (cl.size() > 1) {
                     for (final Card crd : cl) {
@@ -1242,15 +1243,15 @@ public class GameAction {
      * </p>
      */
     private void destroyLegendaryCreatures() {
-        final List<Card> a = CardListUtil.getType(AllZoneUtil.getCardsIn(ZoneType.Battlefield), "Legendary");
+        final List<Card> a = CardLists.getType(AllZoneUtil.getCardsIn(ZoneType.Battlefield), "Legendary");
         if (a.isEmpty() || AllZoneUtil.isCardInPlay("Mirror Gallery")) {
             return;
         }
 
         while (!a.isEmpty()) {
             List<Card> b = AllZoneUtil.getCardsIn(ZoneType.Battlefield, a.get(0).getName());
-            b = CardListUtil.getType(b, "Legendary");
-            b = CardListUtil.filter(b, new Predicate<Card>() {
+            b = CardLists.getType(b, "Legendary");
+            b = CardLists.filter(b, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return !c.isFaceDown();
@@ -1312,13 +1313,13 @@ public class GameAction {
 
         if (c.isEnchanted()) {
             List<Card> list = new ArrayList<Card>(c.getEnchantedBy());
-            list = CardListUtil.filter(list, new Predicate<Card>() {
+            list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
                     return crd.hasKeyword("Totem armor");
                 }
             });
-            CardListUtil.sortCMC(list);
+            CardLists.sortCMC(list);
 
             if (list.size() != 0) {
                 final Card crd;
@@ -1495,13 +1496,13 @@ public class GameAction {
 
         if (c.isEnchanted()) {
             List<Card> list = new ArrayList<Card>(c.getEnchantedBy());
-            list = CardListUtil.filter(list, new Predicate<Card>() {
+            list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
                     return crd.hasKeyword("Totem armor");
                 }
             });
-            CardListUtil.sortCMC(list);
+            CardLists.sortCMC(list);
 
             if (list.size() != 0) {
                 final Card crd;
@@ -1764,8 +1765,8 @@ public class GameAction {
                     manaCost.decreaseColorlessMana(numToExile);
                 }
             } else if (spell.getSourceCard().hasKeyword("Convoke")) {
-                List<Card> untappedCreats = CardListUtil.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-                untappedCreats = CardListUtil.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
+                List<Card> untappedCreats = CardLists.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
 
                 if (untappedCreats.size() != 0) {
                     final ArrayList<Object> choices = new ArrayList<Object>();

@@ -29,7 +29,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Command;
@@ -371,7 +371,8 @@ public final class AbilityFactoryAnimate {
 
         // don't animate if the AI won't attack anyway
         if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
-                && AllZone.getComputerPlayer().getLife() < 6 && AllZone.getHumanPlayer().getLife() > 6
+                && AllZone.getComputerPlayer().getLife() < 6 
+                && AllZone.getHumanPlayer().getLife() > 6
                 && Iterables.any(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
             return false;
         }
@@ -1299,7 +1300,7 @@ public final class AbilityFactoryAnimate {
             list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
         }
 
-        list = CardListUtil.getValidCards(list, valid.split(","), host.getController(), host);
+        list = CardLists.getValidCards(list, valid.split(","), host.getController(), host);
 
         for (final Card c : list) {
 
