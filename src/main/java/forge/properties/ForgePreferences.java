@@ -121,7 +121,9 @@ public class ForgePreferences {
         SHORTCUT_SHOWPLAYERS ("80"), /** */
         SHORTCUT_SHOWDEV ("68"), /** */
         SHORTCUT_CONCEDE ("17"), /** */
-        SHORTCUT_ENDTURN ("69");
+        SHORTCUT_ENDTURN ("69"), /** */
+        SHORTCUT_ALPHASTRIKE ("65"), /** */
+        SHORTCUT_SHOWTARGETING ("84");
 
         private final String strDefaultVal;
 

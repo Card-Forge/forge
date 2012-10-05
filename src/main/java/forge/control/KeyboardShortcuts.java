@@ -111,6 +111,24 @@ public class KeyboardShortcuts {
             }
         };
 
+        /** Alpha Strike. */
+        final Action actAllAttack = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (Singletons.getControl().getState() != 1) { return; }
+                CDock.SINGLETON_INSTANCE.alphaStrike();
+            }
+        };
+
+        /** Targeting visualization overlay. */
+        final Action actTgtOverlay = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (Singletons.getControl().getState() != 1) { return; }
+                CDock.SINGLETON_INSTANCE.toggleTargeting();
+            }
+        };
+
         //========== Instantiate shortcut objects and add to list.
         list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, "Match: show stack panel", actShowStack, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWCOMBAT, "Match: show combat panel", actShowCombat, am, im));
@@ -119,6 +137,8 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_SHOWDEV, "Match: show dev panel", actShowDev, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CONCEDE, "Match: concede game", actConcede, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_ENDTURN, "Match: pass priority until EOT or next stack event", actEndTurn, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_ALPHASTRIKE, "Match: Alpha Strike (attack with all available)", actAllAttack, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWTARGETING, "Match: toggle targeting visual overlay", actTgtOverlay, am, im));
         return list;
     } // End initMatchShortcuts()
 
