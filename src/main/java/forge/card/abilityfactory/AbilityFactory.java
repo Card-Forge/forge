@@ -1516,9 +1516,10 @@ public class AbilityFactory {
      */
     public static boolean waitForBlocking(final SpellAbility sa) {
 
-        return (sa.getSourceCard().isCreature() && sa.getPayCosts().getTap() && (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(
-                PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) || Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(
-                AllZone.getHumanPlayer())));
+        return (sa.getSourceCard().isCreature() 
+                && sa.getPayCosts().getTap() 
+                && (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) 
+                 || Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(AllZone.getHumanPlayer())));
     }
 
     /**

@@ -28,6 +28,7 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -2694,5 +2695,23 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
 
     public void setDeck(Deck deck) {
         this.deck = deck; 
+    }
+    
+    public static class Accessors {
+        public static Function<Player, Integer> FN_GET_LIFE = new Function<Player, Integer>(){
+            @Override
+            public Integer apply(Player input) {
+                return input.getLife();
+            }
+        };
+        
+        public static Function<Player, Integer> countCardsInZone(final ZoneType zone){
+            return new Function<Player, Integer>(){
+                @Override
+                public Integer apply(Player input) {
+                    return input.getZone(zone).size();
+                }
+            };
+        }
     }
 }

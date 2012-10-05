@@ -25,6 +25,19 @@ public class Aggregates {
         }
         return max;
     }
+    
+    public final static <T> Integer min(final Iterable<T> source, final Function<T, Integer> valueAccessor) {
+        if (source == null) { return null; }  
+        int max = Integer.MAX_VALUE;
+        for (final T c : source) {
+            int value = valueAccessor.apply(c);
+            if ( value < max ) {
+                max = value;
+            }
+        }
+        return max;
+    }
+    
 
     public final static <T> T itemWithMax(final Iterable<T> source, final Function<T, Integer> valueAccessor) {
         if (source == null) { return null; }  
