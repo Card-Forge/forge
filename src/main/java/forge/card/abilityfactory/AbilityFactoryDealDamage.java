@@ -866,15 +866,19 @@ public class AbilityFactoryDealDamage {
         } else {
             tgts = saMe.getTarget().getTargets();
         }
-        
+
         // Right now for Fireball, maybe later for other stuff
         if (params.containsKey("DivideEvenly")) {
             String evenly = params.get("DivideEvenly");
             if (evenly.equals("RoundedDown")) {
-                dmg = dmg / tgts.size();
+                if (tgts.size() == 0) {
+                    dmg = 0;
+                } else {
+                    dmg = dmg / tgts.size();
+                }
             }
         }
-        
+
         final boolean targeted = (saMe.getTarget() != null);
 
         if (params.containsKey("Radiance") && targeted) {
