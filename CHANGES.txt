@@ -1,8 +1,8 @@
-Forge Beta: 0#-##-2012 ver 1.2.15
+Forge Beta: 10-05-2012 ver 1.2.15
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-11### cards in total.
+11448 cards in total.
 
 
 Most of the cards from the new card set Return to Ravnica are now available and we invite you to enjoy these additions. Forge has 251 of the cards from this new set.
@@ -307,14 +307,37 @@ Fixes/Features:
 - Fixed Soul Tithe.
 - Updated some SVars of RtR cards.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Improved choosing of second color in Draft AI.
+- Fixed filename of Tablet of the Guilds
+- Added a fluff piece to the changes.txt file.
+- Deck recognizer had problems with cardnames in lowercase
+- Find latest edition made through Aggregate
+- Added DeckNeeds to the Keyrunes and the Cameos.
+- The etbCounter keyword is now compatible with Doubling Season again.
+- Updated Firebloom bg texture (thanks WompWomp!)
+- Preparing the changes.txt file for the next beta build and release.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
+ArsenalNut
+Doublestrike
+Hellfish
+Marc
+Max
+Nordos
+RumbleBBU
+Sloth
+Sol
+WompWomp
+Xitax
+Zirbert
+ZzzzSleep
+Chris H
 
 
-
-Added the following cards to the Return to Ravnica branch (These cards should now be available in this shapshot/beta build):
+Added the following cards:
 
 Abrupt Decay
 Aerial Predation
@@ -339,10 +362,12 @@ Azorius Keyrune
 Batterhorn
 Bazaar Krovod
 Bellows Lizard
+Benalish Commander
 Blistercoil Weird
 Bloodfray Giant
 Blustersquall
 Brushstrider
+Burnt Offering
 Call of the Conclave
 Carnival Hellsteed
 Catacomb Slug
@@ -365,9 +390,11 @@ Counterflux
 Coursers' Accord
 Crosstown Courier
 Cryptborn Horror
+Curse Artifact
 Cyclonic Rift
 Daggerdrome Imp
 Dark Revenant
+Dawn's Reflection
 Dead Reveler
 Deadbridge Goliath
 Death's Presence
@@ -375,10 +402,12 @@ Deathrite Shaman
 Desecration Demon
 Destroy the Evidence
 Detention Sphere
+Detrivore
 Deviant Glee
 Doorkeeper
 Downsize
 Drainpipe Vermin
+Dralnu's Pet
 Dramatic Rescue
 Dreadbore
 Dreg Mangler
@@ -388,6 +417,7 @@ Dryad Militant
 Dynacharge
 Electrickery
 Essence Backlash
+Essence Vortex
 Ethereal Armor
 Explosive Impact
 Eyes in the Skies
@@ -395,11 +425,15 @@ Faerie Imposter
 Fall of the Gavel
 Fencing Ace
 Firemind's Foresight
+Flamekin Bladewhirl
 Frostburn Weird
+Fungal Behemoth
 Gatecreeper Vine
 Gobbling Ooze
 Goblin Electromancer
 Goblin Rally
+Goblin Sappers
+Goldmeadow Stalwart
 Golgari Charm
 Golgari Decoy
 Golgari Guildgate
@@ -407,6 +441,7 @@ Golgari Keyrune
 Golgari Longlegs
 Gore-House Chainwalker
 Grave Betrayal
+Grave Servitude
 Grim Roustabout
 Grisly Salvage
 Grove of the Guardian
@@ -414,10 +449,12 @@ Growing Ranks
 Guild Feud
 Guttersnipe
 Hellhole Flailer
+Helm of Obedience
 Horncaller's Chant
 Hover Barrier
 Hussar Patrol
 Hypersonic Dragon
+Ignoble Soldier
 Inaction Injunction
 Isperia's Skywatch
 Isperia, Supreme Judge
@@ -434,6 +471,7 @@ Knightly Valor
 Korozda Guildmage
 Korozda Monitor
 Launch Party
+Lightning Reflexes
 Lobber Crew
 Lotleth Troll
 Loxodon Smiter
@@ -441,18 +479,26 @@ Lyev Skyknight
 Mana Bloom
 Martial Law
 Mercurial Chemister
+Mindbreak Trap
 Minotaur Aggressor
 Mizzium Mortars
 Mizzium Skin
+Mystic Veil
+Necromancy
 Necropolis Regent
+Nettling Imp
 New Prahv Guildmage
 Niv-Mizzet, Dracogenius
 Nivix Guildmage
 Nivmagus Elemental
+Norn's Annex
+Norritt
 Oak Street Innkeeper
 Ogre Jailbreaker
+Orcish Librarian
 Pack Rat
 Palisade Giant
+Parapet
 Perilous Shadow
 Phantom General
 Precinct Captain
@@ -469,12 +515,14 @@ Rakdos Ringleader
 Rakdos Shred-Freak
 Rakdos's Return
 Rakdos, Lord of Riots
+Relic Ward
 Rest in Peace
 Righteous Authority
 Risen Sanctuary
 Rites of Reaping
 Rix Maadi Guildmage
 Rogue's Passage
+Roiling Horror
 Rootborn Defenses
 Rubbleback Rhino
 Runewing
@@ -489,6 +537,7 @@ Selesnya Sentry
 Seller of Songbirds
 Sewer Shambler
 Shrieking Affliction
+Silvergill Adept
 Skull Rend
 Skyline Predator
 Skymark Roc
@@ -497,17 +546,21 @@ Slime Molding
 Slitherhead
 Sluiceway Scorpion
 Slum Reaper
+Soar
 Soul Tithe
 Soulsworn Spirit
 Spawn of Rix Maadi
 Sphere of Safety
 Sphinx's Revelation
+Spider Climb
 Splatter Thug
+Squeaking Pie Sneak
 Stab Wound
 Stealer of Secrets
 Stonefare Crocodile
 Street Spasm
 Street Sweeper
+Strip Bare
 Sundering Growth
 Sunspire Griffin
 Supreme Verdict
@@ -520,6 +573,7 @@ Tenement Crasher
 Terrus Wurm
 Thoughtflare
 Thrill-Kill Assassin
+Thromok the Insatiable
 Towering Indrik
 Trained Caracal
 Transguild Promenade
@@ -538,47 +592,12 @@ Vitu-Ghazi Guildmage
 Voidwielder
 Volatile Rig
 Vraska the Unseen
+Ward of Lights
 Wayfaring Temple
 Wild Beastmaster
 Worldspine Wurm
-Zanikev Locust
-
-
-Added the following cards:
-
-Grave Servitude
-Lightning Reflexes
-Soar
-Ward of Lights
-Mystic Veil
-Necromancy
-Parapet
-Relic Ward
-Spider Climb
-Flamekin Bladewhirl
-Goldmeadow Stalwart
-Squeaking Pie Sneak
 Wren's Run Vanquisher
-Silvergill Adept
-Helm of Obedience
-Curse Artifact
-Burnt Offering
-Essence Vortex
-Dawn's Reflection
-Orcish Librarian
-Norn's Annex
-Goblin Sappers
-Norritt
-Nettling Imp
-Mindbreak Trap
-Thromok the Insatiable
-Benalish Commander
-Detrivore
-Roiling Horror
-Fungal Behemoth
-Strip Bare
-Ignoble Soldier
-Dralnu's Pet
+Zanikev Locust
 
 
 end
