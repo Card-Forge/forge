@@ -358,7 +358,7 @@ public final class AbilityFactoryPlay {
         boolean remember = params.containsKey("RememberPlayed");
         boolean wasFaceDown = false;
         int amount = 1;
-        if (params.containsKey("Amount")) {
+        if (params.containsKey("Amount") && !params.get("Amount").equals("All")) {
             amount = AbilityFactory.calculateAmount(source, params.get("Amount"), sa);
         }
 
@@ -385,6 +385,10 @@ public final class AbilityFactoryPlay {
 
         if (tgtCards.isEmpty()) {
             return;
+        }
+
+        if (params.containsKey("Amount") && params.get("Amount").equals("All")) {
+            amount = tgtCards.size();
         }
 
         for (int i = 0; i < amount; i++) {

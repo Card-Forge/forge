@@ -3,9 +3,9 @@ ManaCost:2 U U
 Types:Sorcery
 Text:no text
 A:SP$ ChangeZoneAll | Cost$ 2 U U | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | SubAbility$ DBChangeHand | SpellDescription$ Each player shuffles his or her hand and graveyard into his or her library.
-SVar:DBChangeHand:DB$ChangeZoneAll | ChangeType$ Card | Origin$ Hand | Destination$ Library | Shuffle$ True | SubAbility$ DBExile
-SVar:DBExile:DB$Mill | Defined$ You | NumCards$ 10 | Destination$ Exile | SubAbility$ DBDraw | SpellDescription$ You exile the top ten cards of your library.
-SVar:DBDraw:DB$Draw | Defined$ Each | NumCards$ 7 | SpellDescription$ Then each player draws up to seven cards.
+SVar:DBChangeHand:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand | Destination$ Library | Shuffle$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ Mill | Defined$ You | NumCards$ 10 | Destination$ Exile | SubAbility$ DBDraw | SpellDescription$ You exile the top ten cards of your library.
+SVar:DBDraw:DB$ Draw | Defined$ Each | NumCards$ 7 | SpellDescription$ Then each player draws up to seven cards.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diminishing_returns.jpg
