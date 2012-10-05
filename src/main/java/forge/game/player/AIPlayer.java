@@ -25,7 +25,7 @@ import com.google.common.collect.Iterables;
 import forge.AllZone;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -140,7 +140,7 @@ public class AIPlayer extends Player {
 
         // use dredge if there are more than one of them in your graveyard
         if ((dredgers.size() > 1) || ((dredgers.size() == 1) && random.nextBoolean())) {
-            CardListUtil.shuffle(dredgers);
+            CardLists.shuffle(dredgers);
             final Card c = dredgers.get(0);
             // rule 702.49a
             if (this.getDredgeNumber(c) <= this.getCardsIn(ZoneType.Library).size()) {
@@ -180,7 +180,7 @@ public class AIPlayer extends Player {
     @Override
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
         final List<Card> hand = this.getCardsIn(ZoneType.Hand);
-        final List<Card> tHand = CardListUtil.getType(hand, uType);
+        final List<Card> tHand = CardLists.getType(hand, uType);
 
         if (tHand.size() > 0) {
             Card toDiscard = Aggregates.itemWithMin(tHand, CardPredicates.Accessors.fnGetCmc);
@@ -207,7 +207,7 @@ public class AIPlayer extends Player {
                                         // probably don't need more
             } else if (topN.get(i).isCreature()) {
                 List<Card> cl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                cl = CardListUtil.filter(cl, CardPredicates.Presets.CREATURES);
+                cl = CardLists.filter(cl, CardPredicates.Presets.CREATURES);
                 bottom = cl.size() > 5; // if control more than 5 Creatures,
                                         // probably don't need more
             }

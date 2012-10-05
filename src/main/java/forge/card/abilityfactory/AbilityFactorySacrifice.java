@@ -26,7 +26,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -287,7 +287,7 @@ public class AbilityFactorySacrifice {
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 
             List<Card> list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-            list = CardListUtil.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            list = CardLists.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             if (list.size() == 0) {
                 return false;
@@ -427,12 +427,12 @@ public class AbilityFactorySacrifice {
             }
 
             List<Card> humanList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-            humanList = CardListUtil.getValidCards(humanList, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            humanList = CardLists.getValidCards(humanList, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
             List<Card> computerList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             if (defined.equals("Opponent")) {
                 computerList = new ArrayList<Card>();
             }
-            computerList = CardListUtil.getValidCards(computerList, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            computerList = CardLists.getValidCards(computerList, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             // Since all of the cards have remAIDeck:True, I enabled 1 for 1
             // (or X for X) trades for special decks
@@ -851,8 +851,8 @@ public class AbilityFactorySacrifice {
         List<Card> humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         List<Card> computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
 
-        humanlist = CardListUtil.getValidCards(humanlist, valid.split(","), source.getController(), source);
-        computerlist = CardListUtil.getValidCards(computerlist, valid.split(","), source.getController(), source);
+        humanlist = CardLists.getValidCards(humanlist, valid.split(","), source.getController(), source);
+        computerlist = CardLists.getValidCards(computerlist, valid.split(","), source.getController(), source);
 
         if (abCost != null) {
             // AI currently disabled for some costs
@@ -866,13 +866,13 @@ public class AbilityFactorySacrifice {
 
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
-        if ((CardListUtil.getNotType(humanlist, "Creature").size() == 0) && (CardListUtil.getNotType(computerlist, "Creature").size() == 0)) {
+        if ((CardLists.getNotType(humanlist, "Creature").size() == 0) && (CardLists.getNotType(computerlist, "Creature").size() == 0)) {
             if ((CardFactoryUtil.evaluateCreatureList(computerlist) + 200) >= CardFactoryUtil
                     .evaluateCreatureList(humanlist)) {
                 return false;
             }
         } // only lands involved
-        else if ((CardListUtil.getNotType(humanlist, "Land").size() == 0) && (CardListUtil.getNotType(computerlist, "Land").size() == 0)) {
+        else if ((CardLists.getNotType(humanlist, "Land").size() == 0) && (CardLists.getNotType(computerlist, "Land").size() == 0)) {
             if ((CardFactoryUtil.evaluatePermanentList(computerlist) + 1) >= CardFactoryUtil
                     .evaluatePermanentList(humanlist)) {
                 return false;

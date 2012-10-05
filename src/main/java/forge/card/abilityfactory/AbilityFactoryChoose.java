@@ -34,7 +34,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
@@ -390,11 +390,11 @@ public final class AbilityFactoryChoose {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(AllZone.getHumanPlayer()
                                             .getCardsIn(ZoneType.Battlefield));
                                     if (!CardUtil.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
-                                        chosen = CardFactoryUtil.getMostProminentCreatureType(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer()));
+                                        chosen = CardFactoryUtil.getMostProminentCreatureType(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer()));
                                     }
                                 }
                                 if (logic.equals("MostProminentInComputerDeck")) {
-                                    chosen = CardFactoryUtil.getMostProminentCreatureType(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer()));
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer()));
                                 }
                                 if (logic.equals("MostProminentInComputerGraveyard")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(AllZone.getComputerPlayer()
@@ -728,11 +728,11 @@ public final class AbilityFactoryChoose {
                     if (params.containsKey("AILogic")) {
                         final String logic = params.get("AILogic");
                         if (logic.equals("MostProminentInHumanDeck")) {
-                            chosen.add(CardFactoryUtil.getMostProminentColor(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer())));
+                            chosen.add(CardFactoryUtil.getMostProminentColor(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer())));
                         } else if (logic.equals("MostProminentInComputerDeck")) {
-                            chosen.add(CardFactoryUtil.getMostProminentColor(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer())));
+                            chosen.add(CardFactoryUtil.getMostProminentColor(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer())));
                         } else if (logic.equals("MostProminentDualInComputerDeck")) {
-                            List<String> prominence = CardFactoryUtil.getColorByProminence(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer()));
+                            List<String> prominence = CardFactoryUtil.getColorByProminence(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer()));
                             chosen.add(prominence.get(0));
                             chosen.add(prominence.get(1));
                         }
@@ -742,7 +742,7 @@ public final class AbilityFactoryChoose {
                         else if (logic.equals("MostProminentHumanCreatures")) {
                             List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                             if (list.isEmpty()) {
-                                list = CardListUtil.filter(CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer()), CardPredicates.Presets.CREATURES);
+                                list = CardLists.filter(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer()), CardPredicates.Presets.CREATURES);
                             }
                             chosen.add(CardFactoryUtil.getMostProminentColor(list));
                         }
@@ -1647,8 +1647,8 @@ public final class AbilityFactoryChoose {
                                         .getCardsIn(ZoneType.Library));
                             }
                         } else {
-                            List<Card> list = CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer());
-                            list = CardListUtil.filter(list, Predicates.not(Presets.LANDS));
+                            List<Card> list = CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer());
+                            list = CardLists.filter(list, Predicates.not(Presets.LANDS));
                             if (!list.isEmpty()) {
                                 chosen = list.get(0).getName();
                             }
@@ -1875,7 +1875,7 @@ public final class AbilityFactoryChoose {
             }
             List<Card> choices = AllZoneUtil.getCardsIn(choiceZone);
             if (params.containsKey("Choices")) {
-                choices = CardListUtil.getValidCards(choices, params.get("Choices"), host.getController(), host);
+                choices = CardLists.getValidCards(choices, params.get("Choices"), host.getController(), host);
             }
             if (params.get("AILogic").equals("AtLeast1")) {
                 if (choices.size() < 1) {
@@ -1941,7 +1941,7 @@ public final class AbilityFactoryChoose {
         }
         List<Card> choices = AllZoneUtil.getCardsIn(choiceZone);
         if (params.containsKey("Choices")) {
-            choices = CardListUtil.getValidCards(choices, params.get("Choices"), host.getController(), host);
+            choices = CardLists.getValidCards(choices, params.get("Choices"), host.getController(), host);
         }
 
         final String numericAmount = params.containsKey("Amount") ? params.get("Amount") : "1";
@@ -1953,7 +1953,7 @@ public final class AbilityFactoryChoose {
             final ArrayList<String> basic = CardUtil.getBasicTypes();
 
             for (final String type : basic) {
-                final List<Card> cl = CardListUtil.getType(land, type);
+                final List<Card> cl = CardLists.getType(land, type);
                 if (cl.size() > 0) {
                     final String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
                     final Object o = GuiChoose.one(prompt, cl);
@@ -1981,8 +1981,8 @@ public final class AbilityFactoryChoose {
                         }
                     } else { // Computer
                         if (params.containsKey("AILogic") && params.get("AILogic").equals("BestBlocker")) {
-                            if (CardListUtil.filter(choices, Presets.UNTAPPED).isEmpty()) {
-                                choices = CardListUtil.filter(choices, Presets.UNTAPPED);
+                            if (CardLists.filter(choices, Presets.UNTAPPED).isEmpty()) {
+                                choices = CardLists.filter(choices, Presets.UNTAPPED);
                             }
                             chosen.add(CardFactoryUtil.getBestCreatureAI(choices));
                         } else {

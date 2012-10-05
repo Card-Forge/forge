@@ -31,7 +31,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
@@ -349,9 +349,9 @@ public class AbilityFactoryAttach {
         }
 
         List<Card> list = AllZoneUtil.getCardsIn(tgt.getZone());
-        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
         if (params.containsKey("AITgts")) {
-            list = CardListUtil.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), attachSource);
+            list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), attachSource);
         }
 
         // TODO If Attaching without casting, don't need to actually target.
@@ -359,9 +359,9 @@ public class AbilityFactoryAttach {
         // check that when starting that work
         // But we shouldn't attach to things with Protection
         if (tgt.getZone().contains(ZoneType.Battlefield) && !mandatory) {
-            list = CardListUtil.getTargetableCards(list, sa);
+            list = CardLists.getTargetableCards(list, sa);
         } else {
-            list = CardListUtil.filter(list, Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
+            list = CardLists.filter(list, Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
         }
 
         if (list.size() == 0) {
@@ -371,7 +371,7 @@ public class AbilityFactoryAttach {
         Card c = AbilityFactoryAttach.attachGeneralAI(sa, list, mandatory, attachSource, params.get("AILogic"));
 
         if ((c == null) && mandatory) {
-            CardListUtil.shuffle(list);
+            CardLists.shuffle(list);
             c = list.get(0);
         }
 
@@ -401,7 +401,7 @@ public class AbilityFactoryAttach {
         }
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
-        final List<Card> prefList = CardListUtil.filterControlledBy(list, prefPlayer);
+        final List<Card> prefList = CardLists.filterControlledBy(list, prefPlayer);
 
         // If there are no preferred cards, and not mandatory bail out
         if (prefList.size() == 0) {
@@ -503,9 +503,9 @@ public class AbilityFactoryAttach {
     public static Card attachAIAnimatePreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
         // AI For choosing a Card to Animate.
-        List<Card> betterList = CardListUtil.getNotType(list, "Creature");
+        List<Card> betterList = CardLists.getNotType(list, "Creature");
         if (sa.getSourceCard().getName().equals("Animate Artifact")) {
-            betterList = CardListUtil.filter(betterList, new Predicate<Card>() {
+            betterList = CardLists.filter(betterList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getCMC() > 0;
@@ -697,7 +697,7 @@ public class AbilityFactoryAttach {
         String stCheck = null;
         if (attachSource.isAura()) {
             stCheck = "EnchantedBy";
-            magnetList = CardListUtil.filter(list, new Predicate<Card>() {
+            magnetList = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if ( !c.isCreature() ) return false;
@@ -707,7 +707,7 @@ public class AbilityFactoryAttach {
             });
         } else if (attachSource.isEquipment()) {
             stCheck = "EquippedBy";
-            magnetList = CardListUtil.filter(list, new Predicate<Card>() {
+            magnetList = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if ( !c.isCreature() ) return false;
@@ -722,7 +722,7 @@ public class AbilityFactoryAttach {
             // Probably want to "weight" the list by amount of Enchantments and
             // choose the "lightest"
 
-            magnetList = CardListUtil.filter(magnetList, new Predicate<Card>() {
+            magnetList = CardLists.filter(magnetList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return CombatUtil.canAttack(c);
@@ -774,7 +774,7 @@ public class AbilityFactoryAttach {
         if (totToughness < 0) {
             // Don't kill my own stuff with Negative toughness Auras
             final int tgh = totToughness;
-            prefList = CardListUtil.filter(prefList, new Predicate<Card>() {
+            prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getLethalDamage() > Math.abs(tgh);
@@ -784,7 +784,7 @@ public class AbilityFactoryAttach {
 
         //only add useful keywords unless P/T bonus is significant
         if (totToughness + totPower < 4 && !keywords.isEmpty()) {
-            prefList = CardListUtil.filter(prefList, new Predicate<Card>() {
+            prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return containsUsefulKeyword(keywords, c, sa);
@@ -793,7 +793,7 @@ public class AbilityFactoryAttach {
         }
 
         // Don't pump cards that will die.
-        prefList = CardListUtil.filter(prefList, new Predicate<Card>() {
+        prefList = CardLists.filter(prefList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !c.getSVar("Targeting").equals("Dies");
@@ -803,13 +803,13 @@ public class AbilityFactoryAttach {
         if (attachSource.isAura()) {
             // TODO For Auras like Rancor, that aren't as likely to lead to
             // card disadvantage, this check should be skipped
-            prefList = CardListUtil.filter(prefList, Predicates.not(Presets.ENCHANTED));
+            prefList = CardLists.filter(prefList, Predicates.not(Presets.ENCHANTED));
         }
 
         if (!grantingAbilities) {
             // Probably prefer to Enchant Creatures that Can Attack
             // Filter out creatures that can't Attack or have Defender
-            prefList = CardListUtil.filter(prefList, new Predicate<Card>() {
+            prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return !c.isCreature() || CombatUtil.canAttackNextTurn(c);
@@ -892,7 +892,7 @@ public class AbilityFactoryAttach {
         if (totToughness < 0) {
             // Kill a creature if we can
             final int tgh = totToughness;
-            prefList = CardListUtil.filter(list, new Predicate<Card>() {
+            prefList = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if (!c.hasKeyword("Indestructible") && (c.getLethalDamage() <= Math.abs(tgh))) {
@@ -918,7 +918,7 @@ public class AbilityFactoryAttach {
             // things to begin with
             if (keywords.contains("CARDNAME can't attack.") || keywords.contains("Defender")
                     || keywords.contains("CARDNAME attacks each turn if able.")) {
-                prefList = CardListUtil.filter(prefList, new Predicate<Card>() {
+                prefList = CardLists.filter(prefList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return !(c.hasKeyword("CARDNAME can't attack.") || c.hasKeyword("Defender"));
@@ -962,7 +962,7 @@ public class AbilityFactoryAttach {
             }
         }
 
-        list = CardListUtil.getNotType(list, type); // Filter out Basic Lands that have the
+        list = CardLists.getNotType(list, type); // Filter out Basic Lands that have the
                                       // same type as the changing type
 
         final Card c = CardFactoryUtil.getBestAI(list);
@@ -996,7 +996,7 @@ public class AbilityFactoryAttach {
     public static Card attachAIKeepTappedPreference(final SpellAbility sa, final List<Card> list,
             final boolean mandatory, final Card attachSource) {
         // AI For Cards like Paralyzing Grasp and Glimmerdust Nap
-        final List<Card> prefList = CardListUtil.filter(list, new Predicate<Card>() {
+        final List<Card> prefList = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 // Don't do Untapped Vigilance cards
@@ -1419,7 +1419,7 @@ public class AbilityFactoryAttach {
                 }
             } else {
                 List<Card> list = AllZoneUtil.getCardsIn(tgt.getZone());
-                list = CardListUtil.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source);
+                list = CardLists.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source);
 
                 final Object o = GuiChoose.one(source + " - Select a card to attach to.", list);
                 if (o instanceof Card) {
@@ -1712,7 +1712,7 @@ public class AbilityFactoryAttach {
         for (final Object o : targets) {
             String valid = params.get("UnattachValid");
             List<Card> unattachList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            unattachList = CardListUtil.getValidCards(unattachList, valid.split(","), source.getController(), source);
+            unattachList = CardLists.getValidCards(unattachList, valid.split(","), source.getController(), source);
             for (final Card c : unattachList) {
                 AbilityFactoryAttach.handleUnattachment(o, c, af);
             }

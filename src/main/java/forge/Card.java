@@ -6567,7 +6567,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("ControllerControls")) {
             final String type = property.substring(18);
             final List<Card> list = this.getController().getCardsIn(ZoneType.Battlefield);
-            if (CardListUtil.getType(list, type).isEmpty()) {
+            if (CardLists.getType(list, type).isEmpty()) {
                 return false;
             }
         } else if (property.startsWith("Other")) {
@@ -6670,7 +6670,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("TopGraveyardCreature")) {
-            List<Card> list = CardListUtil.filter(this.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+            List<Card> list = CardLists.filter(this.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
             Collections.reverse(list);
             if (list.isEmpty() || !this.equals(list.get(0))) {
                 return false;

@@ -89,7 +89,7 @@ public abstract class AllZoneUtil {
      * @return a List<Card> with all cards currently in a graveyard
      */
     public static List<Card> getCardsIn(final ZoneType zone, final String cardName) {
-        return CardListUtil.filter(AllZoneUtil.getCardsIn(zone), CardPredicates.nameEquals(cardName));
+        return CardLists.filter(AllZoneUtil.getCardsIn(zone), CardPredicates.nameEquals(cardName));
     }
 
     // ////////// Creatures
@@ -102,7 +102,7 @@ public abstract class AllZoneUtil {
      */
     public static List<Card> getCreaturesInPlay() {
         final List<Card> creats = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        return CardListUtil.filter(creats, Presets.CREATURES);
+        return CardLists.filter(creats, Presets.CREATURES);
     }
 
     /**
@@ -114,7 +114,7 @@ public abstract class AllZoneUtil {
      */
     public static List<Card> getCreaturesInPlay(final Player player) {
         final List<Card> creats = player.getCardsIn(ZoneType.Battlefield);
-        return CardListUtil.filter(creats, Presets.CREATURES);
+        return CardLists.filter(creats, Presets.CREATURES);
     }
 
     // /////////////// Lands
@@ -127,7 +127,7 @@ public abstract class AllZoneUtil {
      * @return a List<Card> containing all lands the given player has in play
      */
     public static List<Card> getPlayerLandsInPlay(final Player player) {
-        return CardListUtil.filter(player.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
+        return CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
     }
 
     /**
@@ -136,7 +136,7 @@ public abstract class AllZoneUtil {
      * @return a List<Card> of all lands on the battlefield
      */
     public static List<Card> getLandsInPlay() {
-        return CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
+        return CardLists.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
     }
 
     // =============================================================================
@@ -235,7 +235,7 @@ public abstract class AllZoneUtil {
      */
     public static List<Card> getPlayerColorInPlay(final Player player, final String color) {
         List<Card> cards = player.getCardsIn(ZoneType.Battlefield);
-        cards = CardListUtil.filter(cards, new Predicate<Card>() {
+        cards = CardLists.filter(cards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 final List<String> colorList = CardUtil.getColors(c);
@@ -279,8 +279,8 @@ public abstract class AllZoneUtil {
     public static int compareTypeAmountInPlay(final Player player, final String type) {
         // returns the difference between player's
         final Player opponent = player.getOpponent();
-        final List<Card> playerList = CardListUtil.getType(player.getCardsIn(ZoneType.Battlefield), type);
-        final List<Card> opponentList = CardListUtil.getType(opponent.getCardsIn(ZoneType.Battlefield), type);
+        final List<Card> playerList = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), type);
+        final List<Card> opponentList = CardLists.getType(opponent.getCardsIn(ZoneType.Battlefield), type);
         return (playerList.size() - opponentList.size());
     }
 
@@ -298,8 +298,8 @@ public abstract class AllZoneUtil {
     public static int compareTypeAmountInGraveyard(final Player player, final String type) {
         // returns the difference between player's
         final Player opponent = player.getOpponent();
-        final List<Card> playerList = CardListUtil.getType(player.getCardsIn(ZoneType.Graveyard), type);
-        final List<Card> opponentList = CardListUtil.getType(opponent.getCardsIn(ZoneType.Graveyard), type);
+        final List<Card> playerList = CardLists.getType(player.getCardsIn(ZoneType.Graveyard), type);
+        final List<Card> opponentList = CardLists.getType(opponent.getCardsIn(ZoneType.Graveyard), type);
         return (playerList.size() - opponentList.size());
     }
 

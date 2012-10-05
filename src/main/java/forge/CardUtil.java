@@ -633,7 +633,7 @@ public final class CardUtil {
             res.addAll(((DefaultPlayerZone) AllZone.getStackZone()).getCardsAddedThisTurn(from));
         }
 
-        res = CardListUtil.getValidCards(res, valid, src.getController(), src);
+        res = CardLists.getValidCards(res, valid, src.getController(), src);
 
         return res;
     }
@@ -652,7 +652,7 @@ public final class CardUtil {
 
         res.addAll(AllZone.getStack().getCardsCastThisTurn());
 
-        res = CardListUtil.getValidCards(res, valid, src.getController(), src);
+        res = CardLists.getValidCards(res, valid, src.getController(), src);
 
         return res;
     }
@@ -671,7 +671,7 @@ public final class CardUtil {
 
         res.addAll(AllZone.getStack().getCardsCastLastTurn());
 
-        res = CardListUtil.getValidCards(res, valid, src.getController(), src);
+        res = CardLists.getValidCards(res, valid, src.getController(), src);
 
         return res;
     }

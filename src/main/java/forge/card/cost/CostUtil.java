@@ -24,7 +24,7 @@ import java.util.Random;
 import forge.AllZone;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCost;
@@ -80,14 +80,14 @@ public class CostUtil {
                         return false;
                     }
                     List<Card> auras = new ArrayList<Card>(source.getEnchantedBy());
-                    if (!CardListUtil.filterControlledBy(auras, source.getController()).isEmpty()) {
+                    if (!CardLists.filterControlledBy(auras, source.getController()).isEmpty()) {
                         return false;
                     }
                     continue;
                 }
 
                 List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                typeList = CardListUtil.getValidCards(typeList, type.split(","), source.getController(), source);
+                typeList = CardLists.getValidCards(typeList, type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null) {
                     return false;
                 }
@@ -122,7 +122,7 @@ public class CostUtil {
                 }
 
                 List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                typeList = CardListUtil.getValidCards(typeList, type.split(","), source.getController(), source);
+                typeList = CardLists.getValidCards(typeList, type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null) {
                     return false;
                 }
@@ -220,7 +220,7 @@ public class CostUtil {
                 if (typeList.size() > AllZone.getComputerPlayer().getMaxHandSize()) {
                     continue;
                 }
-                typeList = CardListUtil.getValidCards(typeList, type.split(","), source.getController(), source);
+                typeList = CardLists.getValidCards(typeList, type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "DiscardCost", typeList) == null) {
                     return false;
                 }

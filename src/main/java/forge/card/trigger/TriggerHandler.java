@@ -26,7 +26,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.Command;
 import forge.CommandArgs;
 import forge.GameActionUtil;
@@ -317,7 +317,7 @@ public class TriggerHandler {
 
         // AP
         allCards = playerAP.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
-        allCards.addAll(CardListUtil.filterControlledBy(AllZoneUtil.getCardsIn(ZoneType.Stack), playerAP));
+        allCards.addAll(CardLists.filterControlledBy(AllZoneUtil.getCardsIn(ZoneType.Stack), playerAP));
         // add cards that move to hidden zones
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
@@ -343,7 +343,7 @@ public class TriggerHandler {
 
         // NAP
         allCards = playerAP.getOpponent().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
-        allCards.addAll(CardListUtil.filterControlledBy(AllZoneUtil.getCardsIn(ZoneType.Stack), playerAP.getOpponent()));
+        allCards.addAll(CardLists.filterControlledBy(AllZoneUtil.getCardsIn(ZoneType.Stack), playerAP.getOpponent()));
         // add cards that move to hidden zones
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");

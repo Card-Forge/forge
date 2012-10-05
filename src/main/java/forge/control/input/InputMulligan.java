@@ -24,7 +24,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.GameAction;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -142,7 +142,7 @@ public class InputMulligan extends Input {
         while (aiTakesMulligan) {
 
             final List<Card> handList = aiPlayer.getCardsIn(ZoneType.Hand);
-            final boolean hasLittleCmc0Cards = CardListUtil.getValidCards(handList, "Card.cmcEQ0", aiPlayer, null).size() < 2;
+            final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", aiPlayer, null).size() < 2;
             aiTakesMulligan = (handList.size() > InputMulligan.AI_MULLIGAN_THRESHOLD) && hasLittleCmc0Cards;
 
             if (aiTakesMulligan) {

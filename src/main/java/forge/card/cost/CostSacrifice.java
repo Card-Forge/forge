@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -103,12 +103,12 @@ public class CostSacrifice extends CostPartWithList {
         // You can always sac all
         if (!this.getThis()) {
             List<Card> typeList = activator.getCardsIn(ZoneType.Battlefield);
-            typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
+            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
 
             if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-                typeList = CardListUtil.getNotType(typeList, "Creature");
+                typeList = CardLists.getNotType(typeList, "Creature");
             }
 
             if ((amount != null) && (typeList.size() < amount)) {
@@ -158,9 +158,9 @@ public class CostSacrifice extends CostPartWithList {
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
         List<Card> list = activator.getCardsIn(ZoneType.Battlefield);
-        list = CardListUtil.getValidCards(list, type.split(";"), activator, source);
+        list = CardLists.getValidCards(list, type.split(";"), activator, source);
         if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-            list = CardListUtil.getNotType(list, "Creature");
+            list = CardLists.getNotType(list, "Creature");
         }
 
         if (this.getThis()) {
@@ -206,9 +206,9 @@ public class CostSacrifice extends CostPartWithList {
             this.getList().add(source);
         } else if (this.getAmount().equals("All")) {
             List<Card> typeList = activator.getCardsIn(ZoneType.Battlefield);
-            typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
+            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
             if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-                typeList = CardListUtil.getNotType(typeList, "Creature");
+                typeList = CardLists.getNotType(typeList, "Creature");
             }
             // Does the AI want to use Sacrifice All?
             return false;

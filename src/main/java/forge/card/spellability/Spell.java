@@ -24,7 +24,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
@@ -144,7 +144,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             final String needsToPlay = card.getSVar("NeedsToPlay");
             List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
-            list = CardListUtil.getValidCards(list, needsToPlay.split(","), card.getController(), card);
+            list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card);
             if (list.isEmpty()) {
                 return false;
             }

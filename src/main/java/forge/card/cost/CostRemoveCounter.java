@@ -22,7 +22,7 @@ import java.util.List;
 import forge.Card;
 
 import forge.AllZone;
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -166,7 +166,7 @@ public class CostRemoveCounter extends CostPartWithList {
             }
         }
         else {
-            final List<Card> typeList = CardListUtil.getValidCards(activator.getCardsIn(this.getZone()), this.getType().split(";"), activator, source);
+            final List<Card> typeList = CardLists.getValidCards(activator.getCardsIn(this.getZone()), this.getType().split(";"), activator, source);
             if (amount != null) {
                 for (Card c : typeList) {
                     if (c.getCounters(cntrs) - amount >= 0) {
@@ -287,7 +287,7 @@ public class CostRemoveCounter extends CostPartWithList {
 
         if (!this.getThis()) {
             this.getList().clear();
-            final List<Card> typeList = CardListUtil
+            final List<Card> typeList = CardLists
                     .getValidCards(computer.getCardsIn(this.getZone()), this.getType().split(";"), computer, source);
             for (Card card : typeList) {
                 if (card.getCounters(this.getCounter()) >= c) {
@@ -344,7 +344,7 @@ public class CostRemoveCounter extends CostPartWithList {
                     msg.append("s");
                 }
 
-                this.typeList = CardListUtil.getValidCards(sa.getActivatingPlayer().getCardsIn(costRemoveCounter.getZone()), type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+                this.typeList = CardLists.getValidCards(sa.getActivatingPlayer().getCardsIn(costRemoveCounter.getZone()), type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
@@ -418,7 +418,7 @@ public class CostRemoveCounter extends CostPartWithList {
                 }
 
                 this.typeList = sa.getActivatingPlayer().getCardsIn(costRemoveCounter.getZone());
-                this.typeList = CardListUtil.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+                this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
 
                 for (int i = 0; i < nNeeded; i++) {
                     if (this.typeList.size() == 0) {

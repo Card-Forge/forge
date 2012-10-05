@@ -31,7 +31,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
@@ -250,7 +250,7 @@ public final class AbilityFactoryProtection {
         final ArrayList<String> gains = AbilityFactoryProtection.getProtectionList(hostCard, af.getMapParams());
 
         List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-        list = CardListUtil.filter(list, new Predicate<Card>() {
+        list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (!c.canBeTargetedBy(sa)) {
@@ -385,7 +385,7 @@ public final class AbilityFactoryProtection {
         tgt.resetTargets();
         List<Card> list = AbilityFactoryProtection.getProtectCreatures(af, sa);
 
-        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         /*
          * TODO - What this should probably do is if it's time for instants and
@@ -418,7 +418,7 @@ public final class AbilityFactoryProtection {
         }
 
         // Don't target cards that will die.
-        list = CardListUtil.filter(list, new Predicate<Card>() {
+        list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 System.out.println("Not Protecting");
@@ -472,7 +472,7 @@ public final class AbilityFactoryProtection {
 
         List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
-        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             tgt.resetTargets();
@@ -484,23 +484,23 @@ public final class AbilityFactoryProtection {
             list.remove(c);
         }
 
-        List<Card> pref = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
-        pref = CardListUtil.filter(pref, new Predicate<Card>() {
+        List<Card> pref = CardLists.filterControlledBy(list, AllZone.getComputerPlayer());
+        pref = CardLists.filter(pref, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !AbilityFactoryProtection.hasProtectionFromAll(c,
                         AbilityFactoryProtection.getProtectionList(host, params));
             }
         });
-        final List<Card> pref2 = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
-        pref = CardListUtil.filter(pref, new Predicate<Card>() {
+        final List<Card> pref2 = CardLists.filterControlledBy(list, AllZone.getComputerPlayer());
+        pref = CardLists.filter(pref, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !AbilityFactoryProtection.hasProtectionFromAny(c,
                         AbilityFactoryProtection.getProtectionList(host, params));
             }
         });
-        final List<Card> forced = CardListUtil.filterControlledBy(list, AllZone.getHumanPlayer());
+        final List<Card> forced = CardLists.filterControlledBy(list, AllZone.getHumanPlayer());
         final Card source = sa.getSourceCard();
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
@@ -509,7 +509,7 @@ public final class AbilityFactoryProtection {
             }
 
             Card c;
-            if (CardListUtil.getNotType(pref, "Creature").size() == 0) {
+            if (CardLists.getNotType(pref, "Creature").size() == 0) {
                 c = CardFactoryUtil.getBestCreatureAI(pref);
             } else {
                 c = CardFactoryUtil.getMostExpensivePermanentAI(pref, sa, true);
@@ -526,7 +526,7 @@ public final class AbilityFactoryProtection {
             }
 
             Card c;
-            if (CardListUtil.getNotType(pref2, "Creature").size() == 0) {
+            if (CardLists.getNotType(pref2, "Creature").size() == 0) {
                 c = CardFactoryUtil.getBestCreatureAI(pref2);
             } else {
                 c = CardFactoryUtil.getMostExpensivePermanentAI(pref2, sa, true);
@@ -543,7 +543,7 @@ public final class AbilityFactoryProtection {
             }
 
             Card c;
-            if (CardListUtil.getNotType(forced, "Creature").size() == 0) {
+            if (CardLists.getNotType(forced, "Creature").size() == 0) {
                 c = CardFactoryUtil.getWorstCreatureAI(forced);
             } else {
                 c = CardFactoryUtil.getCheapestPermanentAI(forced, sa, true);
@@ -745,7 +745,7 @@ public final class AbilityFactoryProtection {
                     if (logic.equals("MostProminentHumanCreatures")) {
                         List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                         if (list.isEmpty()) {
-                            list = CardListUtil.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer());
+                            list = CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer());
                         }
                         if (!list.isEmpty()) {
                             choice = CardFactoryUtil.getMostProminentColor(list);
@@ -1191,7 +1191,7 @@ public final class AbilityFactoryProtection {
         }
         if (!valid.equals("")) {
             List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            list = CardListUtil.getValidCards(list, valid, sa.getActivatingPlayer(), host);
+            list = CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), host);
 
             for (final Card tgtC : list) {
                 if (AllZoneUtil.isCardInPlay(tgtC)) {

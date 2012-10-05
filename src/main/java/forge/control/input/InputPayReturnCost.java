@@ -22,7 +22,7 @@ import java.util.List;
 import forge.AllZone;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.Command;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -77,7 +77,7 @@ public class InputPayReturnCost extends Input {
 
         this.ability = sa;
         this.returnCost = cost;
-        this.choiceList = CardListUtil.getValidCards(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), AllZone.getHumanPlayer(), source);
+        this.choiceList = CardLists.getValidCards(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), AllZone.getHumanPlayer(), source);
         String amountString = cost.getAmount();
         this.numRequired = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                 : CardFactoryUtil.xCount(source, source.getSVar(amountString));

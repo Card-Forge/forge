@@ -26,7 +26,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.Counters;
 import forge.GameActionUtil;
@@ -122,7 +122,7 @@ public class Untap extends Phase implements java.io.Serializable {
             }
         }
 
-        list = CardListUtil.filter(list, new Predicate<Card>() {
+        list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (!Untap.canUntap(c)) {
@@ -202,7 +202,7 @@ public class Untap extends Phase implements java.io.Serializable {
                 // search for lands the computer has and only untap 1
                 List<Card> landList = AllZoneUtil.getPlayerLandsInPlay(player);
  
-                landList = CardListUtil.filter(landList, tappedCanUntap);
+                landList = CardLists.filter(landList, tappedCanUntap);
                 if (landList.size() > 0) {
                     landList.get(0).untap();
                 }
@@ -230,7 +230,7 @@ public class Untap extends Phase implements java.io.Serializable {
                     } // selectCard()
                 }; // Input
                 List<Card> landList = AllZoneUtil.getPlayerLandsInPlay(player);
-                landList = CardListUtil.filter(landList, tappedCanUntap);
+                landList = CardLists.filter(landList, tappedCanUntap);
                 if (landList.size() > 0) {
                     AllZone.getInputControl().setInput(target);
                 }
@@ -239,8 +239,8 @@ public class Untap extends Phase implements java.io.Serializable {
         if (AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue")) {
             if (Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
                 List<Card> artList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                artList = CardListUtil.filter(artList, Presets.ARTIFACTS);
-                artList = CardListUtil.filter(artList, tappedCanUntap);
+                artList = CardLists.filter(artList, Presets.ARTIFACTS);
+                artList = CardLists.filter(artList, tappedCanUntap);
                 if (artList.size() > 0) {
                     CardFactoryUtil.getBestArtifactAI(artList).untap();
                 }
@@ -269,8 +269,8 @@ public class Untap extends Phase implements java.io.Serializable {
                     } // selectCard()
                 }; // Input
                 List<Card> artList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-                artList = CardListUtil.filter(artList, Presets.ARTIFACTS);
-                artList = CardListUtil.filter(artList, tappedCanUntap);
+                artList = CardLists.filter(artList, Presets.ARTIFACTS);
+                artList = CardLists.filter(artList, tappedCanUntap);
                 if (artList.size() > 0) {
                     AllZone.getInputControl().setInput(target);
                 }
@@ -279,7 +279,7 @@ public class Untap extends Phase implements java.io.Serializable {
         if ((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel"))) {
             if (player.isComputer()) {
                 List<Card> creatures = AllZoneUtil.getCreaturesInPlay(player);
-                creatures = CardListUtil.filter(creatures, tappedCanUntap);
+                creatures = CardLists.filter(creatures, tappedCanUntap);
                 if (creatures.size() > 0) {
                     creatures.get(0).untap();
                 }
@@ -308,7 +308,7 @@ public class Untap extends Phase implements java.io.Serializable {
                     } // selectCard()
                 }; // Input
                 List<Card> creatures = AllZoneUtil.getCreaturesInPlay(player);
-                creatures = CardListUtil.filter(creatures, tappedCanUntap);
+                creatures = CardLists.filter(creatures, tappedCanUntap);
                 if (creatures.size() > 0) {
                     AllZone.getInputControl().setInput(target);
                 }
@@ -343,7 +343,7 @@ public class Untap extends Phase implements java.io.Serializable {
 
     private static void doPhasing(final Player turn) {
         // Needs to include phased out cards
-        final List<Card> list = CardListUtil.filter(turn.getCardsIncludePhasingIn(ZoneType.Battlefield), new Predicate<Card>() {
+        final List<Card> list = CardLists.filter(turn.getCardsIncludePhasingIn(ZoneType.Battlefield), new Predicate<Card>() {
 
             @Override
             public boolean apply(final Card c) {

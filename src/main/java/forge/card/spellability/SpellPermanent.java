@@ -26,7 +26,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.Command;
 import forge.CommandReturn;
@@ -85,7 +85,7 @@ public class SpellPermanent extends Spell {
         @Override
         public Object execute() {
             final List<Card> cards = SpellPermanent.this.getSourceCard().getController().getCardsIn(ZoneType.Battlefield);
-            return CardListUtil.getValidCards(cards, SpellPermanent.this.championValid, SpellPermanent.this.getSourceCard()
+            return CardLists.getValidCards(cards, SpellPermanent.this.championValid, SpellPermanent.this.getSourceCard()
                     .getController(), SpellPermanent.this.getSourceCard());
         }
     }; // CommandReturn
@@ -107,10 +107,10 @@ public class SpellPermanent extends Spell {
                 AllZone.getInputControl().setInput(SpellPermanent.this.championInputComes);
             } else { // Computer
                 List<Card> computer = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                computer = CardListUtil.getValidCards(computer, SpellPermanent.this.championValid, controller, source);
+                computer = CardLists.getValidCards(computer, SpellPermanent.this.championValid, controller, source);
                 computer.remove(source);
 
-                CardListUtil.shuffle(computer);
+                CardLists.shuffle(computer);
                 if (computer.size() != 0) {
                     final Card c = computer.get(0);
                     source.setChampionedCard(c);
@@ -359,12 +359,12 @@ public class SpellPermanent extends Spell {
         }
         if (card.isPlaneswalker()) {
             List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            list = CardListUtil.filter(list, CardPredicates.Presets.PLANEWALKERS);
+            list = CardLists.filter(list, CardPredicates.Presets.PLANEWALKERS);
 
             for (int i = 0; i < list.size(); i++) {
                 List<String> type = card.getType();
                 final String subtype = type.get(type.size() - 1);
-                final List<Card> cl = CardListUtil.getType(list, subtype);
+                final List<Card> cl = CardLists.getType(list, subtype);
 
                 if (cl.size() > 0) {
                     return false;
@@ -373,7 +373,7 @@ public class SpellPermanent extends Spell {
         }
         if (card.isType("World")) {
             List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            list = CardListUtil.getType(list, "World");
+            list = CardLists.getType(list, "World");
             if (list.size() > 0) {
                 return false;
             }

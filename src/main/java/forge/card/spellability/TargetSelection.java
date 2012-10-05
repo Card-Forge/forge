@@ -27,7 +27,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.control.input.Input;
 import forge.game.player.Player;
@@ -269,7 +269,7 @@ public class TargetSelection {
             return;
         }
 
-        List<Card> choices = CardListUtil.getTargetableCards(CardListUtil.getValidCards(AllZoneUtil
+        List<Card> choices = CardLists.getTargetableCards(CardLists.getValidCards(AllZoneUtil
                 .getCardsIn(zone), this.target.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getSourceCard()), this.ability);
 
         ArrayList<Object> objects = new ArrayList<Object>();
@@ -292,16 +292,16 @@ public class TargetSelection {
 
         // If all cards must be from the same zone
         if (tgt.isSingleZone() && !targeted.isEmpty()) {
-            choices = CardListUtil.filterControlledBy(choices, targeted.get(0).getController());
+            choices = CardLists.filterControlledBy(choices, targeted.get(0).getController());
         }
         // If all cards must be from different zones
         if (tgt.isDifferentZone() && !targeted.isEmpty()) {
-            choices = CardListUtil.filterControlledBy(choices, targeted.get(0).getController().getOpponent());
+            choices = CardLists.filterControlledBy(choices, targeted.get(0).getController().getOpponent());
         }
         // If the cards can't share a creature type
         if (tgt.isWithoutSameCreatureType() && !targeted.isEmpty()) {
             final Card card = targeted.get(0);
-            choices = CardListUtil.filter(choices, new Predicate<Card>() {
+            choices = CardLists.filter(choices, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return !c.sharesCreatureTypeWith(card);
@@ -313,7 +313,7 @@ public class TargetSelection {
             ArrayList<Player> pl = AbilityFactory.getDefinedPlayers(card, tgt.getDefinedController(), this.ability);
             if (pl != null && !pl.isEmpty()) {
                 Player controller = pl.get(0);
-                choices = CardListUtil.filterControlledBy(choices, controller);
+                choices = CardLists.filterControlledBy(choices, controller);
             } else {
                 choices.clear();
             }

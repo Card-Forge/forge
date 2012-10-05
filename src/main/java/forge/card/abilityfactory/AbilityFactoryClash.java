@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.GameActionUtil;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
@@ -709,7 +709,7 @@ public final class AbilityFactoryClash {
         } else {
             pool = p.getCardsIn(zone);
         }
-        pool = CardListUtil.getValidCards(pool, valid, card.getController(), card);
+        pool = CardLists.getValidCards(pool, valid, card.getController(), card);
         int size = pool.size();
         return size > 2;
     }
@@ -762,7 +762,7 @@ public final class AbilityFactoryClash {
                 } else {
                     pool = p.getCardsIn(zone);
                 }
-                pool = CardListUtil.getValidCards(pool, valid, card.getController(), card);
+                pool = CardLists.getValidCards(pool, valid, card.getController(), card);
                 int size = pool.size();
 
                 // first, separate the cards into piles
@@ -901,7 +901,7 @@ public final class AbilityFactoryClash {
             } else {
                 int cmc1 = CardFactoryUtil.evaluatePermanentList(new ArrayList<Card>(pile1));
                 int cmc2 = CardFactoryUtil.evaluatePermanentList(new ArrayList<Card>(pile2));
-                if (CardListUtil.getNotType(pool, "Creature").isEmpty()) {
+                if (CardLists.getNotType(pool, "Creature").isEmpty()) {
                     cmc1 = CardFactoryUtil.evaluateCreatureList(new ArrayList<Card>(pile1));
                     cmc2 = CardFactoryUtil.evaluateCreatureList(new ArrayList<Card>(pile2));
                     System.out.println("value:" + cmc1 + " " + cmc2);

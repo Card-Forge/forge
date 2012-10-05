@@ -30,7 +30,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.Command;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -394,7 +394,7 @@ public final class AbilityFactoryDebuff {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         List<Card> list = AbilityFactoryDebuff.getCurseCreatures(af, sa, kws);
-        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         // several uses here:
         // 1. make human creatures lose evasion when they are attacking
@@ -449,10 +449,10 @@ public final class AbilityFactoryDebuff {
     private static List<Card> getCurseCreatures(final AbilityFactory af, final SpellAbility sa,
             final ArrayList<String> kws) {
         List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-        list = CardListUtil.getTargetableCards(list, sa);
+        list = CardLists.getTargetableCards(list, sa);
 
         if (!list.isEmpty()) {
-            list = CardListUtil.filter(list, new Predicate<Card>() {
+            list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.hasAnyKeyword(kws); // don't add duplicate negative
@@ -480,7 +480,7 @@ public final class AbilityFactoryDebuff {
     private static boolean debuffMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
-        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             tgt.resetTargets();
@@ -492,8 +492,8 @@ public final class AbilityFactoryDebuff {
             list.remove(c);
         }
 
-        final List<Card> pref = CardListUtil.filterControlledBy(list, AllZone.getHumanPlayer());
-        final List<Card> forced = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
+        final List<Card> pref = CardLists.filterControlledBy(list, AllZone.getHumanPlayer());
+        final List<Card> forced = CardLists.filterControlledBy(list, AllZone.getComputerPlayer());
         final Card source = sa.getSourceCard();
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
@@ -502,7 +502,7 @@ public final class AbilityFactoryDebuff {
             }
 
             Card c;
-            if (CardListUtil.getNotType(pref, "Creature").size() == 0) {
+            if (CardLists.getNotType(pref, "Creature").size() == 0) {
                 c = CardFactoryUtil.getBestCreatureAI(pref);
             } else {
                 c = CardFactoryUtil.getMostExpensivePermanentAI(pref, sa, true);
@@ -521,7 +521,7 @@ public final class AbilityFactoryDebuff {
             // TODO - if forced targeting, just pick something without the given
             // keyword
             Card c;
-            if (CardListUtil.getNotType(forced, "Creature").size() == 0) {
+            if (CardLists.getNotType(forced, "Creature").size() == 0) {
                 c = CardFactoryUtil.getWorstCreatureAI(forced);
             } else {
                 c = CardFactoryUtil.getCheapestPermanentAI(forced, sa, true);
@@ -794,14 +794,14 @@ public final class AbilityFactoryDebuff {
         }
 
         List<Card> comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        comp = CardListUtil.getValidCards(comp, valid, hostCard.getController(), hostCard);
+        comp = CardLists.getValidCards(comp, valid, hostCard.getController(), hostCard);
         List<Card> human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        human = CardListUtil.getValidCards(human, valid, hostCard.getController(), hostCard);
+        human = CardLists.getValidCards(human, valid, hostCard.getController(), hostCard);
 
         // TODO - add blocking situations here also
 
         // only count creatures that can attack
-        human = CardListUtil.filter(human, new Predicate<Card>() {
+        human = CardLists.filter(human, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CombatUtil.canAttack(c);
@@ -841,7 +841,7 @@ public final class AbilityFactoryDebuff {
         }
 
         List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        list = CardListUtil.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
+        list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card tgtC : list) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();

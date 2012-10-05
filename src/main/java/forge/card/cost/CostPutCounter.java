@@ -21,7 +21,7 @@ import java.util.List;
 
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -138,7 +138,7 @@ public class CostPutCounter extends CostPartWithList {
             }
         } else {
             // 3 Cards have Put a -1/-1 Counter on a Creature you control.
-            final List<Card> typeList = CardListUtil.getValidCards(activator.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
+            final List<Card> typeList = CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
 
             if (typeList.size() == 0) {
                 return false;
@@ -216,7 +216,7 @@ public class CostPutCounter extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
 
-            final List<Card> typeList = CardListUtil.getValidCards(activator.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
+            final List<Card> typeList = CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
 
             Card card = null;
             if (this.getType().equals("Creature.YouCtrl")) {
@@ -269,7 +269,7 @@ public class CostPutCounter extends CostPartWithList {
                     msg.append("s");
                 }
 
-                this.typeList = CardListUtil.getValidCards(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+                this.typeList = CardLists.getValidCards(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }

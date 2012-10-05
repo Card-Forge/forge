@@ -9,7 +9,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
@@ -271,7 +271,7 @@ class CardFactoryArtifacts {
                     final Player player = this.getTargetPlayer();
 
                     List<Card> lands = player.getCardsIn(ZoneType.Graveyard);
-                    lands = CardListUtil.filter(lands, Presets.BASIC_LANDS);
+                    lands = CardLists.filter(lands, Presets.BASIC_LANDS);
                     if (card.getController().isHuman()) {
                         // now, select up to four lands
                         int end = -1;
@@ -316,7 +316,7 @@ class CardFactoryArtifacts {
 
                 private List<Card> getComputerLands() {
                     final List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                    return CardListUtil.filter(list, CardPredicates.Presets.BASIC_LANDS);
+                    return CardLists.filter(list, CardPredicates.Presets.BASIC_LANDS);
                 }
             }
             final Cost abCost = new Cost(card, "1 T Sac<1/CARDNAME>", true);

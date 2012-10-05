@@ -25,7 +25,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardUtil;
 import forge.Command;
 import forge.GameActionUtil;
@@ -2486,7 +2486,7 @@ public class AbilityFactory {
                 if (threatParams.containsKey("Defined")) {
                     objects = AbilityFactory.getDefinedObjects(source, threatParams.get("Defined"), topStack);
                 } else if (threatParams.containsKey("ValidCards")) {
-                    List<Card> cards = CardListUtil.getValidCards(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), threatParams.get("ValidCards").split(","), source.getController(), source);
+                    List<Card> cards = CardLists.getValidCards(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), threatParams.get("ValidCards").split(","), source.getController(), source);
                     for (Card card : cards) {
                         objects.add(card);
                     }
@@ -2762,7 +2762,7 @@ public class AbilityFactory {
         if (valid.contains("EQX")) {
             valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(source, "X", sa)));
         }
-        return CardListUtil.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), source);
+        return CardLists.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), source);
       }
 
     /**

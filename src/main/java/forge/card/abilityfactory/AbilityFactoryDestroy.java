@@ -29,7 +29,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardUtil;
 import forge.Counters;
 import forge.Singletons;
@@ -249,14 +249,14 @@ public class AbilityFactoryDestroy {
         if (abTgt != null) {
             abTgt.resetTargets();
             list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-            list = CardListUtil.getTargetableCards(list, sa);
-            list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+            list = CardLists.getTargetableCards(list, sa);
+            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             if (params.containsKey("AITgts")) {
-                list = CardListUtil.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), source);
+                list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), source);
             }
-            list = CardListUtil.getNotKeyword(list, "Indestructible");
+            list = CardLists.getNotKeyword(list, "Indestructible");
             if (!AbilityFactory.playReusable(sa)) {
-                list = CardListUtil.filter(list, new Predicate<Card>() {
+                list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return (!c.hasKeyword("Undying") || c.getCounters(Counters.P1P1) > 0);
@@ -268,7 +268,7 @@ public class AbilityFactoryDestroy {
             // regeneration shield
             if (!noRegen) {
                 // TODO filter out things that might be tougher?
-                list = CardListUtil.filter(list, new Predicate<Card>() {
+                list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return ((c.getShield() == 0) && !ComputerUtil.canRegenerate(c));
@@ -295,9 +295,9 @@ public class AbilityFactoryDestroy {
 
                 Card choice = null;
                 // If the targets are only of one type, take the best
-                if (CardListUtil.getNotType(list, "Creature").isEmpty()) {
+                if (CardLists.getNotType(list, "Creature").isEmpty()) {
                     choice = CardFactoryUtil.getBestCreatureAI(list);
-                } else if (CardListUtil.getNotType(list, "Land").isEmpty()) {
+                } else if (CardLists.getNotType(list, "Land").isEmpty()) {
                     choice = CardFactoryUtil.getBestLandAI(list);
                 } else {
                     choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, true);
@@ -320,8 +320,8 @@ public class AbilityFactoryDestroy {
             if (params.containsKey("Defined")) {
                 list = new ArrayList<Card>(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
                 if (list.isEmpty()
-                        || !CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer()).isEmpty()
-                        || CardListUtil.getNotKeyword(list, "Indestructible").isEmpty()) {
+                        || !CardLists.filterControlledBy(list, AllZone.getComputerPlayer()).isEmpty()
+                        || CardLists.getNotKeyword(list, "Indestructible").isEmpty()) {
                     return false;
                 }
             }
@@ -378,8 +378,8 @@ public class AbilityFactoryDestroy {
         if (tgt != null) {
             List<Card> list;
             list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            list = CardListUtil.getTargetableCards(list, sa);
-            list = CardListUtil.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
+            list = CardLists.getTargetableCards(list, sa);
+            list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
 
             if ((list.size() == 0) || (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
                 return false;
@@ -387,15 +387,15 @@ public class AbilityFactoryDestroy {
 
             tgt.resetTargets();
 
-            List<Card> preferred = CardListUtil.getNotKeyword(list, "Indestructible");
-            preferred = CardListUtil.filterControlledBy(preferred, AllZone.getHumanPlayer());
+            List<Card> preferred = CardLists.getNotKeyword(list, "Indestructible");
+            preferred = CardLists.filterControlledBy(preferred, AllZone.getHumanPlayer());
 
             // If NoRegen is not set, filter out creatures that have a
             // regeneration shield
             if (!noRegen) {
                 // TODO filter out things that could regenerate in response?
                 // might be tougher?
-                preferred = CardListUtil.filter(preferred, new Predicate<Card>() {
+                preferred = CardLists.filter(preferred, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return c.getShield() == 0;
@@ -422,9 +422,9 @@ public class AbilityFactoryDestroy {
                     }
                 } else {
                     Card c;
-                    if (CardListUtil.getNotType(preferred, "Creature").size() == 0) {
+                    if (CardLists.getNotType(preferred, "Creature").size() == 0) {
                         c = CardFactoryUtil.getBestCreatureAI(preferred);
-                    } else if (CardListUtil.getNotType(preferred, "Land").size() == 0) {
+                    } else if (CardLists.getNotType(preferred, "Land").size() == 0) {
                         c = CardFactoryUtil.getBestLandAI(preferred);
                     } else {
                         c = CardFactoryUtil.getMostExpensivePermanentAI(preferred, sa, false);
@@ -439,7 +439,7 @@ public class AbilityFactoryDestroy {
                     break;
                 } else {
                     Card c;
-                    if (CardListUtil.getNotType(list, "Creature").size() == 0) {
+                    if (CardLists.getNotType(list, "Creature").size() == 0) {
                         c = CardFactoryUtil.getWorstCreatureAI(list);
                     } else {
                         c = CardFactoryUtil.getCheapestPermanentAI(list, sa, false);
@@ -861,15 +861,15 @@ public class AbilityFactoryDestroy {
         if (mandatory) {
             return true;
         }
-        humanlist = CardListUtil.getValidCards(humanlist, valid.split(","), source.getController(), source);
-        computerlist = CardListUtil.getValidCards(computerlist, valid.split(","), source.getController(), source);
-        humanlist = CardListUtil.filter(humanlist, new Predicate<Card>() {
+        humanlist = CardLists.getValidCards(humanlist, valid.split(","), source.getController(), source);
+        computerlist = CardLists.getValidCards(computerlist, valid.split(","), source.getController(), source);
+        humanlist = CardLists.filter(humanlist, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
             }
         });
-        computerlist = CardListUtil.filter(computerlist, new Predicate<Card>() {
+        computerlist = CardLists.filter(computerlist, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
@@ -881,7 +881,7 @@ public class AbilityFactoryDestroy {
 
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
-        if ((CardListUtil.getNotType(humanlist, "Creature").size() == 0) && (CardListUtil.getNotType(computerlist, "Creature").size() == 0)) {
+        if ((CardLists.getNotType(humanlist, "Creature").size() == 0) && (CardLists.getNotType(computerlist, "Creature").size() == 0)) {
             if (CardFactoryUtil.evaluateCreatureList(computerlist) >= CardFactoryUtil.evaluateCreatureList(humanlist)
                     && !computerlist.isEmpty()) {
                 return false;
@@ -943,16 +943,16 @@ public class AbilityFactoryDestroy {
             computerlist.clear();
         }
 
-        humanlist = CardListUtil.getValidCards(humanlist, valid.split(","), source.getController(), source);
-        computerlist = CardListUtil.getValidCards(computerlist, valid.split(","), source.getController(), source);
+        humanlist = CardLists.getValidCards(humanlist, valid.split(","), source.getController(), source);
+        computerlist = CardLists.getValidCards(computerlist, valid.split(","), source.getController(), source);
 
-        humanlist = CardListUtil.filter(humanlist, new Predicate<Card>() {
+        humanlist = CardLists.filter(humanlist, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
             }
         });
-        computerlist = CardListUtil.filter(computerlist, new Predicate<Card>() {
+        computerlist = CardLists.filter(computerlist, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
@@ -972,13 +972,13 @@ public class AbilityFactoryDestroy {
 
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
-        if ((CardListUtil.getNotType(humanlist, "Creature").size() == 0) && (CardListUtil.getNotType(computerlist, "Creature").size() == 0)) {
+        if ((CardLists.getNotType(humanlist, "Creature").size() == 0) && (CardLists.getNotType(computerlist, "Creature").size() == 0)) {
             if ((CardFactoryUtil.evaluateCreatureList(computerlist) + 200) >= CardFactoryUtil
                     .evaluateCreatureList(humanlist)) {
                 return false;
             }
         } // only lands involved
-        else if ((CardListUtil.getNotType(humanlist, "Land").size() == 0) && (CardListUtil.getNotType(computerlist, "Land").size() == 0)) {
+        else if ((CardLists.getNotType(humanlist, "Land").size() == 0) && (CardLists.getNotType(computerlist, "Land").size() == 0)) {
             if ((CardFactoryUtil.evaluatePermanentList(computerlist) + 1) >= CardFactoryUtil
                     .evaluatePermanentList(humanlist)) {
                 return false;
@@ -1041,7 +1041,7 @@ public class AbilityFactoryDestroy {
         List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         if (targetPlayer != null) {
-            list = CardListUtil.filterControlledBy(list, targetPlayer);
+            list = CardLists.filterControlledBy(list, targetPlayer);
         }
 
         list = AbilityFactory.filterListByType(list, valid, sa);

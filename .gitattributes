@@ -12343,7 +12343,7 @@ src/main/java/forge/CardCharacteristicName.java -text
 src/main/java/forge/CardColor.java svneol=native#text/plain
 src/main/java/forge/CardDamageHistory.java -text
 src/main/java/forge/CardKeywords.java svneol=native#text/plain
-src/main/java/forge/CardListUtil.java svneol=native#text/plain
+src/main/java/forge/CardLists.java svneol=native#text/plain
 src/main/java/forge/CardPowerToughness.java svneol=native#text/plain
 src/main/java/forge/CardPredicates.java svneol=native#text/plain
 src/main/java/forge/CardType.java svneol=native#text/plain

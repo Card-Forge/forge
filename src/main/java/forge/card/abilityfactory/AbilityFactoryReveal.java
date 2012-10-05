@@ -32,7 +32,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -454,7 +454,7 @@ public final class AbilityFactoryReveal {
                     }
                 } else if (params.containsKey("RevealValid")) {
                     final String revealValid = params.get("RevealValid");
-                    final List<Card> toReveal = CardListUtil.getValidCards(top, revealValid, host.getController(), host);
+                    final List<Card> toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host);
                     if (!toReveal.isEmpty()) {
                         GuiChoose.one("Revealing cards from library", toReveal);
                         if (params.containsKey("RememberRevealed")) {
@@ -488,9 +488,9 @@ public final class AbilityFactoryReveal {
                         if (changeValid.contains("ChosenType")) {
                             changeValid = changeValid.replace("ChosenType", host.getChosenType());
                         }
-                        valid = CardListUtil.getValidCards(top, changeValid.split(","), host.getController(), host);
+                        valid = CardLists.getValidCards(top, changeValid.split(","), host.getController(), host);
                         if (!andOrValid.equals("")) {
-                            andOrCards = CardListUtil.getValidCards(top, andOrValid.split(","), host.getController(), host);
+                            andOrCards = CardLists.getValidCards(top, andOrValid.split(","), host.getController(), host);
                             andOrCards.removeAll(valid);
                             valid.addAll(andOrCards);
                         }
@@ -505,7 +505,7 @@ public final class AbilityFactoryReveal {
                         movedCards.addAll(valid);
                     } else if (params.containsKey("RandomChange")) {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
-                        movedCards = CardListUtil.getRandomSubList(valid, numChanging);
+                        movedCards = CardLists.getRandomSubList(valid, numChanging);
                     } else {
                         int j = 0;
                         if (choser.isHuman()) {
@@ -2378,7 +2378,7 @@ public final class AbilityFactoryReveal {
                         List<Card> valid = new ArrayList<Card>(handChoices);
                         int max = 1;
                         if (params.containsKey("RevealValid")) {
-                            valid = CardListUtil.getValidCards(valid, params.get("RevealValid"), p, host);
+                            valid = CardLists.getValidCards(valid, params.get("RevealValid"), p, host);
                         }
                         if (params.containsKey("AnyNumber")) {
                             max = valid.size();

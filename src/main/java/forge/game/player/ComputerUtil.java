@@ -32,7 +32,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
@@ -1008,7 +1008,7 @@ public class ComputerUtil {
      */
     public static List<Card> getAvailableMana(final Player player, final boolean checkPlayable) {
         final List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-        final List<Card> manaSources = CardListUtil.filter(list, new Predicate<Card>() {
+        final List<Card> manaSources = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (checkPlayable) {
@@ -1115,7 +1115,7 @@ public class ComputerUtil {
         sortedManaSources.addAll(fiveManaSources);
         sortedManaSources.addAll(anyColorManaSources);
         //use better creatures later
-        CardListUtil.sortByEvaluateCreature(otherManaSources);
+        CardLists.sortByEvaluateCreature(otherManaSources);
         Collections.reverse(otherManaSources);
         sortedManaSources.addAll(otherManaSources);
         return sortedManaSources;
@@ -1305,8 +1305,8 @@ public class ComputerUtil {
             return false;
         }
         final List<Card> hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-        List<Card> landList = CardListUtil.filter(hand, Presets.LANDS);
-        List<Card> nonLandList = CardListUtil.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
+        List<Card> landList = CardLists.filter(hand, Presets.LANDS);
+        List<Card> nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
 
         final List<Card> lands = computer.getCardsIn(ZoneType.Graveyard);
         for (final Card crd : lands) {
@@ -1319,7 +1319,7 @@ public class ComputerUtil {
         }
         if (landList.size() == 1 && nonLandList.size() < 3) {
             List<Card> cardsInPlay = computer.getCardsIn(ZoneType.Battlefield);
-            List<Card> landsInPlay = CardListUtil.filter(cardsInPlay, Presets.LANDS);
+            List<Card> landsInPlay = CardLists.filter(cardsInPlay, Presets.LANDS);
             List<Card> allCards = computer.getCardsIn(ZoneType.Graveyard);
             allCards.addAll(cardsInPlay);
             int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
@@ -1340,14 +1340,14 @@ public class ComputerUtil {
             }
         }
 
-        landList = CardListUtil.filter(landList, new Predicate<Card>() {
+        landList = CardLists.filter(landList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (c.getSVar("NeedsToPlay").length() > 0) {
                     final String needsToPlay = c.getSVar("NeedsToPlay");
                     List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
-                    list = CardListUtil.getValidCards(list, needsToPlay.split(","), c.getController(), c);
+                    list = CardLists.getValidCards(list, needsToPlay.split(","), c.getController(), c);
                     if (list.isEmpty()) {
                         return false;
                     }
@@ -1366,7 +1366,7 @@ public class ComputerUtil {
                 final List<Card> hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
                 List<Card> lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
                 lands.addAll(hand);
-                lands = CardListUtil.filter(lands, CardPredicates.Presets.LANDS);
+                lands = CardLists.filter(lands, CardPredicates.Presets.LANDS);
                 int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
                 for (final SpellAbility sa : spellAbilities) {
                     if (sa.isCycling()) {
@@ -1397,7 +1397,7 @@ public class ComputerUtil {
 
                 // what types can I go get?
                 for (final String name : Constant.CardTypes.BASIC_TYPES) {
-                    if (!CardListUtil.getType(landList, name).isEmpty()) {
+                    if (!CardLists.getType(landList, name).isEmpty()) {
                         basics.add(name);
                     }
                 }
@@ -1409,7 +1409,7 @@ public class ComputerUtil {
 
                 for (int i = 0; i < basics.size(); i++) {
                     final String b = basics.get(i);
-                    final int num = CardListUtil.getType(combined, b).size();
+                    final int num = CardLists.getType(combined, b).size();
                     if (num < minSize) {
                         minType = b;
                         minSize = num;
@@ -1417,7 +1417,7 @@ public class ComputerUtil {
                 }
 
                 if (minType != null) {
-                    landList = CardListUtil.getType(landList, minType);
+                    landList = CardLists.getType(landList, minType);
                 }
 
                 land = landList.get(0);
@@ -1450,9 +1450,9 @@ public class ComputerUtil {
         if (activate != null) {
             final String[] prefValid = activate.getSVar("AIPreference").split("\\$");
             if (prefValid[0].equals(pref)) {
-                final List<Card> prefList = CardListUtil.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate);
+                final List<Card> prefList = CardLists.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate);
                 if (prefList.size() != 0) {
-                    CardListUtil.shuffle(prefList);
+                    CardLists.shuffle(prefList);
                     return prefList.get(0);
                 }
             }
@@ -1461,14 +1461,14 @@ public class ComputerUtil {
             for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest,
                                              // priority 5 the highest
                 final int priority = 6 - ip;
-                final List<Card> sacMeList = CardListUtil.filter(typeList, new Predicate<Card>() {
+                final List<Card> sacMeList = CardLists.filter(typeList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return (!c.getSVar("SacMe").equals("") && (Integer.parseInt(c.getSVar("SacMe")) == priority));
                     }
                 });
                 if (sacMeList.size() != 0) {
-                    CardListUtil.shuffle(sacMeList);
+                    CardLists.shuffle(sacMeList);
                     return sacMeList.get(0);
                 }
             }
@@ -1491,10 +1491,10 @@ public class ComputerUtil {
             }
 
             // Discard lands
-            final List<Card> landsInHand = CardListUtil.getType(typeList, "Land");
+            final List<Card> landsInHand = CardLists.getType(typeList, "Land");
             if (!landsInHand.isEmpty()) {
-                final List<Card> landsInPlay = CardListUtil.getType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), "Land");
-                final List<Card> nonLandsInHand = CardListUtil.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
+                final List<Card> landsInPlay = CardLists.getType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), "Land");
+                final List<Card> nonLandsInHand = CardLists.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
                 final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
                 if (landsInPlay.size() >= highestCMC
                         || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)) {
@@ -1526,9 +1526,9 @@ public class ComputerUtil {
             final int amount) {
         Player activator = AllZone.getComputerPlayer();
         List<Card> typeList = activator.getCardsIn(ZoneType.Battlefield);
-        typeList = CardListUtil.getValidCards(typeList, type.split(";"), activate.getController(), activate);
+        typeList = CardLists.getValidCards(typeList, type.split(";"), activate.getController(), activate);
         if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-            typeList = CardListUtil.getNotType(typeList, "Creature");
+            typeList = CardLists.getNotType(typeList, "Creature");
         }
 
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
@@ -1553,7 +1553,7 @@ public class ComputerUtil {
             }
         }
 
-        CardListUtil.sortAttackLowFirst(typeList);
+        CardLists.sortAttackLowFirst(typeList);
 
         for (int i = count; i < amount; i++) {
             sacList.add(typeList.get(i));
@@ -1580,7 +1580,7 @@ public class ComputerUtil {
         Card sourceCard = null;
 
         if ((uTypes != null) && (sa != null)) {
-            hand = CardListUtil.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
+            hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
         }
 
         if (hand.size() < numDiscard) {
@@ -1626,7 +1626,7 @@ public class ComputerUtil {
             }
             List<Card> aiCards = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
             final int numLandsInPlay = Iterables.size(Iterables.filter(aiCards, CardPredicates.Presets.LANDS));
-            final List<Card> landsInHand = CardListUtil.filter(hand, CardPredicates.Presets.LANDS);
+            final List<Card> landsInHand = CardLists.filter(hand, CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
 
             // Discard a land
@@ -1636,7 +1636,7 @@ public class ComputerUtil {
                 discardList.add(landsInHand.get(0));
                 hand.remove(landsInHand.get(0));
             } else { // Discard other stuff
-                CardListUtil.sortCMC(hand);
+                CardLists.sortCMC(hand);
                 int numLandsAvailable = numLandsInPlay;
                 if (numLandsInHand > 0) {
                     numLandsAvailable++;
@@ -1758,11 +1758,11 @@ public class ComputerUtil {
         if (zone.equals(ZoneType.Stack)) {
             for (int i = 0; i < AllZone.getStack().size(); i++) {
                 typeList.add(AllZone.getStack().peekAbility(i).getSourceCard());
-                typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
+                typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
             }
         } else {
             typeList = AllZone.getComputerPlayer().getCardsIn(zone);
-            typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
+            typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
         }
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
             typeList.remove(target); // don't exile the card we're pumping
@@ -1772,7 +1772,7 @@ public class ComputerUtil {
             return null;
         }
 
-        CardListUtil.sortAttackLowFirst(typeList);
+        CardLists.sortAttackLowFirst(typeList);
         final List<Card> exileList = new ArrayList<Card>();
 
         for (int i = 0; i < amount; i++) {
@@ -1798,10 +1798,10 @@ public class ComputerUtil {
      */
     public static List<Card> chooseTapType(final String type, final Card activate, final boolean tap, final int amount) {
         List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
+        typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
 
         // is this needed?
-        typeList = CardListUtil.filter(typeList, Presets.UNTAPPED);
+        typeList = CardLists.filter(typeList, Presets.UNTAPPED);
 
         if (tap) {
             typeList.remove(activate);
@@ -1811,7 +1811,7 @@ public class ComputerUtil {
             return null;
         }
 
-        CardListUtil.sortAttackLowFirst(typeList);
+        CardLists.sortAttackLowFirst(typeList);
 
         final List<Card> tapList = new ArrayList<Card>();
 
@@ -1838,10 +1838,10 @@ public class ComputerUtil {
      */
     public static List<Card> chooseUntapType(final String type, final Card activate, final boolean untap, final int amount) {
         List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
+        typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
 
         // is this needed?
-        typeList = CardListUtil.filter(typeList, Presets.TAPPED);
+        typeList = CardLists.filter(typeList, Presets.TAPPED);
 
         if (untap) {
             typeList.remove(activate);
@@ -1851,7 +1851,7 @@ public class ComputerUtil {
             return null;
         }
 
-        CardListUtil.sortAttack(typeList);
+        CardLists.sortAttack(typeList);
 
         final List<Card> untapList = new ArrayList<Card>();
 
@@ -1878,7 +1878,7 @@ public class ComputerUtil {
      */
     public static List<Card> chooseReturnType(final String type, final Card activate, final Card target, final int amount) {
         List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        typeList = CardListUtil.getValidCards(typeList, type.split(","), activate.getController(), activate);
+        typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
             // bounce
             // the
@@ -1892,7 +1892,7 @@ public class ComputerUtil {
             return null;
         }
 
-        CardListUtil.sortAttackLowFirst(typeList);
+        CardLists.sortAttackLowFirst(typeList);
         final List<Card> returnList = new ArrayList<Card>();
 
         for (int i = 0; i < amount; i++) {
@@ -1910,7 +1910,7 @@ public class ComputerUtil {
      */
     public static List<Card> getPossibleAttackers() {
         List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        list = CardListUtil.filter(list, new Predicate<Card>() {
+        list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CombatUtil.canAttack(c);
@@ -2029,14 +2029,14 @@ public class ComputerUtil {
             max = amount;
         }
 
-        CardListUtil.sortCMC(list);
+        CardLists.sortCMC(list);
         Collections.reverse(list);
 
         for (int i = 0; i < max; i++) {
             Card c = null;
 
             if (destroy) {
-                final List<Card> indestructibles = CardListUtil.getKeyword(list, "Indestructible");
+                final List<Card> indestructibles = CardLists.getKeyword(list, "Indestructible");
                 if (!indestructibles.isEmpty()) {
                     c = indestructibles.get(0);
                 }
@@ -2052,9 +2052,9 @@ public class ComputerUtil {
             }
 
             if (c == null) {
-                if (CardListUtil.getNotType(list, "Creature").size() == 0) {
+                if (CardLists.getNotType(list, "Creature").size() == 0) {
                     c = CardFactoryUtil.getWorstCreatureAI(list);
-                } else if (CardListUtil.getNotType(list, "Land").size() == 0) {
+                } else if (CardLists.getNotType(list, "Land").size() == 0) {
                     c = CardFactoryUtil.getWorstLand(AllZone.getComputerPlayer());
                 } else {
                     c = CardFactoryUtil.getWorstPermanentAI(list, false, false, false, false);
@@ -2124,7 +2124,7 @@ public class ComputerUtil {
 
                     final Target tgt = sa.getTarget();
                     if (tgt != null) {
-                        if (CardListUtil.getValidCards(AllZoneUtil.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
+                        if (CardLists.getValidCards(AllZoneUtil.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
                             return true;
                         }
                     } else if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa)
@@ -2173,7 +2173,7 @@ public class ComputerUtil {
                             }
                             final Target tgt = sa.getTarget();
                             if (tgt != null) {
-                                if (CardListUtil.getValidCards(AllZoneUtil.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, af.getHostCard()).contains(card)) {
+                                if (CardLists.getValidCards(AllZoneUtil.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, af.getHostCard()).contains(card)) {
                                     prevented += AbilityFactory.calculateAmount(af.getHostCard(),
                                             mapParams.get("Amount"), sa);
                                 }
@@ -2297,9 +2297,9 @@ public class ComputerUtil {
         if (!discard.getSVar("DiscardMe").equals("")) {
             return true;
         }
-        final List<Card> landsInPlay = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
-        final List<Card> landsInHand = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
-        final List<Card> nonLandsInHand = CardListUtil.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
+        final List<Card> landsInPlay = CardLists.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
+        final List<Card> landsInHand = CardLists.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
+        final List<Card> nonLandsInHand = CardLists.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
         final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
         final int discardCMC = discard.getCMC();
         if (discard.isLand()) {

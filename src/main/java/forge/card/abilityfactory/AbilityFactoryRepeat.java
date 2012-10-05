@@ -24,7 +24,7 @@ import java.util.List;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.card.cost.Cost;
 
 import forge.GameActionUtil;
@@ -280,7 +280,7 @@ public final class AbilityFactoryRepeat {
                 list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
             }
 
-            list = CardListUtil.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             int right;
             final String rightString = repeatCompare.substring(2);

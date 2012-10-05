@@ -28,7 +28,7 @@ import java.util.Random;
 import forge.AllZone;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -1374,7 +1374,7 @@ public class AbilityFactoryZoneAffecting {
                         valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(source, "X", sa)));
                     }
 
-                    final List<Card> dPChHand = CardListUtil.getValidCards(dPHand, valid.split(","), source.getController(), source);
+                    final List<Card> dPChHand = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source);
                     // Reveal cards that will be discarded?
                     for (final Card c : dPChHand) {
                         p.discard(c, sa);
@@ -1395,7 +1395,7 @@ public class AbilityFactoryZoneAffecting {
                         String[] dValid = null;
                         if (params.containsKey("DiscardValid")) { // Restrict card choices
                             dValid = params.get("DiscardValid").split(",");
-                            dPChHand = CardListUtil.getValidCards(dPHand, dValid, source.getController(), source);
+                            dPChHand = CardLists.getValidCards(dPHand, dValid, source.getController(), source);
                         }
                         Player chooser = p;
                         if (mode.equals("RevealYouChoose")) {
@@ -1433,9 +1433,9 @@ public class AbilityFactoryZoneAffecting {
                                         }
                                     }
 
-                                    Collections.sort(dPChHand, CardListUtil.TextLenReverseComparator);
+                                    Collections.sort(dPChHand, CardLists.TextLenReverseComparator);
 
-                                    CardListUtil.sortCMC(dPChHand);
+                                    CardLists.sortCMC(dPChHand);
                                     dChoices.add(dPChHand.get(0));
 
                                     final Card dC = dChoices.get(CardUtil.getRandomIndex(dChoices));

@@ -25,7 +25,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardPredicates;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -137,7 +137,7 @@ public class CostDiscard extends CostPartWithList {
                 type = type.replace("+WithSameName", "");
             }
             if (!type.equals("Random")) {
-                handList = CardListUtil.getValidCards(handList, type.split(";"), activator, source);
+                handList = CardLists.getValidCards(handList, type.split(";"), activator, source);
             }
             if (sameName) {
                 for (Card c : handList) {
@@ -228,7 +228,7 @@ public class CostDiscard extends CostPartWithList {
                     type = type.replace("+WithSameName", "");
                 }
                 final String[] validType = type.split(";");
-                handList = CardListUtil.getValidCards(handList, validType, activator, ability.getSourceCard());
+                handList = CardLists.getValidCards(handList, validType, activator, ability.getSourceCard());
                 final List<Card> landList2 = handList;
                 if (sameName) {
                     handList = CardListUtil.filter(handList, new Predicate<Card>() {
@@ -308,7 +308,7 @@ public class CostDiscard extends CostPartWithList {
             }
 
             if (type.equals("Random")) {
-                this.setList(CardListUtil.getRandomSubList(hand, c));
+                this.setList(CardLists.getRandomSubList(hand, c));
             } else {
                 this.setList(ComputerUtil.discardNumTypeAI(c, type.split(";"), ability));
             }

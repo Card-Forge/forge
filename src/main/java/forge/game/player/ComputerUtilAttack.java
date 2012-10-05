@@ -27,7 +27,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.Counters;
 import forge.GameEntity;
@@ -77,10 +77,10 @@ public class ComputerUtilAttack {
      */
     public ComputerUtilAttack(final List<Card> possibleAttackers, final List<Card> possibleBlockers) {
         this.humanList = new ArrayList<Card>(possibleBlockers);
-        this.humanList = CardListUtil.filter(this.humanList, CardPredicates.Presets.CREATURES);
+        this.humanList = CardLists.filter(this.humanList, CardPredicates.Presets.CREATURES);
 
         this.computerList = new ArrayList<Card>(possibleAttackers);
-        this.computerList = CardListUtil.filter(this.computerList, CardPredicates.Presets.CREATURES);
+        this.computerList = CardLists.filter(this.computerList, CardPredicates.Presets.CREATURES);
 
         this.attackers = this.getPossibleAttackers(possibleAttackers);
         this.blockers = this.getPossibleBlockers(possibleBlockers, this.attackers);
@@ -168,7 +168,7 @@ public class ComputerUtilAttack {
      */
     public final List<Card> getPossibleAttackers(final List<Card> in) {
         List<Card> list = new ArrayList<Card>(in);
-        list = CardListUtil.filter(list, new Predicate<Card>() {
+        list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CombatUtil.canAttack(c);
@@ -190,7 +190,7 @@ public class ComputerUtilAttack {
      */
     public final List<Card> getPossibleBlockers(final List<Card> blockers, final List<Card> attackers) {
         List<Card> possibleBlockers = new ArrayList<Card>(blockers);
-        possibleBlockers = CardListUtil.filter(possibleBlockers, new Predicate<Card>() {
+        possibleBlockers = CardLists.filter(possibleBlockers, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return canBlockAnAttacker(c, attackers);
@@ -264,7 +264,7 @@ public class ComputerUtilAttack {
                 }
             }
         }
-        CardListUtil.sortAttackLowFirst(attackers);
+        CardLists.sortAttackLowFirst(attackers);
         int blockersNeeded = this.humanList.size();
 
         // don't hold back creatures that can't block any of the human creatures
@@ -392,7 +392,7 @@ public class ComputerUtilAttack {
             }
         }
 
-        CardListUtil.sortAttack(this.attackers);
+        CardLists.sortAttack(this.attackers);
 
         final List<Card> unblockedAttackers = new ArrayList<Card>();
         final List<Card> remainingAttackers = new ArrayList<Card>(this.attackers);
@@ -542,7 +542,7 @@ public class ComputerUtilAttack {
         }
         if (bAssault) {
             System.out.println("Assault");
-            CardListUtil.sortAttack(attackersLeft);
+            CardLists.sortAttack(attackersLeft);
             for (Card attacker : attackersLeft) {
                 if (CombatUtil.canAttack(attacker, combat) && this.isEffectiveAttacker(attacker, combat)) {
                     combat.addAttacker(attacker);
@@ -574,7 +574,7 @@ public class ComputerUtilAttack {
                 }
             }
             if (exalted) {
-                CardListUtil.sortAttack(this.attackers);
+                CardLists.sortAttack(this.attackers);
                 System.out.println("Exalted");
                 this.aiAggression = 6;
                 for (Card attacker : this.attackers) {
@@ -682,7 +682,7 @@ public class ComputerUtilAttack {
         // *********************
         boolean doAttritionalAttack = false;
         // get list of attackers ordered from low power to high
-        CardListUtil.sortAttackLowFirst(this.attackers);
+        CardLists.sortAttackLowFirst(this.attackers);
         // get player life total
         int humanLife = AllZone.getHumanPlayer().getLife();
         // get the list of attackers up to the first blocked one
@@ -818,7 +818,7 @@ public class ComputerUtilAttack {
                     int attackNum = 0;
                     int damage = 0;
                     List<Card> attacking = combat.getAttackersByDefenderSlot(combat.getCurrentDefenderNumber());
-                    CardListUtil.sortAttackLowFirst(attacking);
+                    CardLists.sortAttackLowFirst(attacking);
                     for (Card atta : attacking) {
                         if (attackNum >= blockNum || !CombatUtil.canBeBlocked(attacker, this.blockers)) {
                             damage += CombatUtil.damageIfUnblocked(atta, AllZone.getHumanPlayer(), null);
@@ -848,7 +848,7 @@ public class ComputerUtilAttack {
      */
     public final int countExaltedBonus(final Player player) {
         List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-        list = CardListUtil.filter(list, new Predicate<Card>() {
+        list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.hasKeyword("Exalted");

@@ -31,7 +31,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
@@ -573,7 +573,7 @@ public final class AbilityFactoryChangeZone {
 
             if ((type != null) && p.isComputer()) {
                 // AI only "knows" about his information
-                list = CardListUtil.getValidCards(list, type, source.getController(), source);
+                list = CardLists.getValidCards(list, type, source.getController(), source);
             }
 
             if (list.isEmpty()) {
@@ -1173,11 +1173,11 @@ public final class AbilityFactoryChangeZone {
             } else if (defined) {
                 c = fetchList.get(0);
             } else {
-                CardListUtil.shuffle(fetchList);
+                CardLists.shuffle(fetchList);
                 // Save a card as a default, in case we can't find anything suitable.
                 Card first = fetchList.get(0);
                 if (ZoneType.Battlefield.equals(destination)) {
-                    fetchList = CardListUtil.filter(fetchList, new Predicate<Card>() {
+                    fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             if (c.isType("Legendary")) {
@@ -1189,7 +1189,7 @@ public final class AbilityFactoryChangeZone {
                         }
                     });
                     if (player.isHuman() && params.containsKey("GainControl")) {
-                        fetchList = CardListUtil.filter(fetchList, new Predicate<Card>() {
+                        fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {
                                 if (!c.getSVar("RemAIDeck").equals("") || !c.getSVar("RemRandomDeck").equals("")) {
@@ -1210,21 +1210,21 @@ public final class AbilityFactoryChangeZone {
                 } else if (origin.contains(ZoneType.Library)
                         && (type.contains("Basic") || AbilityFactoryChangeZone.areAllBasics(type))) {
                     c = AbilityFactoryChangeZone.basicManaFixing(fetchList);
-                } else if (ZoneType.Hand.equals(destination) && CardListUtil.getNotType(fetchList, "Creature").size() == 0) {
+                } else if (ZoneType.Hand.equals(destination) && CardLists.getNotType(fetchList, "Creature").size() == 0) {
                     c = AbilityFactoryChangeZone.chooseCreature(fetchList);
                 } else if (ZoneType.Battlefield.equals(destination) || ZoneType.Graveyard.equals(destination)) {
                     c = CardFactoryUtil.getBestAI(fetchList);
                 } else {
                     // Don't fetch another tutor with the same name
-                    List<Card> sameNamed = CardListUtil.filter(fetchList, Predicates.not(CardPredicates.nameEquals(card.getName())));
+                    List<Card> sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(card.getName())));
                     if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
                         fetchList = sameNamed;
                     }
                     Player ai = AllZone.getComputerPlayer();
                     // Does AI need a land?
                     List<Card> hand = ai.getCardsIn(ZoneType.Hand);
-                    System.out.println("Lands in hand = " + CardListUtil.filter(hand, Presets.LANDS).size() + ", on battlefield = " + CardListUtil.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size());
-                    if (CardListUtil.filter(hand, Presets.LANDS).size() == 0 && CardListUtil.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
+                    System.out.println("Lands in hand = " + CardLists.filter(hand, Presets.LANDS).size() + ", on battlefield = " + CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size());
+                    if (CardLists.filter(hand, Presets.LANDS).size() == 0 && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
                         boolean canCastSomething = false;
                         for (Card cardInHand : hand) {
                             canCastSomething |= ComputerUtil.payManaCost(cardInHand.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false);
@@ -1236,15 +1236,15 @@ public final class AbilityFactoryChangeZone {
                     }
                     if (c == null) {
                         System.out.println("Don't need a land or none available; trying for a creature.");
-                        fetchList = CardListUtil.getNotType(fetchList, "Land");
+                        fetchList = CardLists.getNotType(fetchList, "Land");
                         // Prefer to pull a creature, generally more useful for AI.
-                        c = chooseCreature(CardListUtil.filter(fetchList, CardPredicates.Presets.CREATURES));
+                        c = chooseCreature(CardLists.filter(fetchList, CardPredicates.Presets.CREATURES));
                     }
                     if (c == null) { // Could not find a creature.
                         if (ai.getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
                             System.out.println("5 Life or less, trying to find something castable.");
-                            CardListUtil.sortByMostExpensive(fetchList);
+                            CardLists.sortByMostExpensive(fetchList);
                             for (Card potentialCard : fetchList) {
                                if (ComputerUtil.payManaCost(potentialCard.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false)) {
                                    c = potentialCard;
@@ -1368,7 +1368,7 @@ public final class AbilityFactoryChangeZone {
 
         // what types can I go get?
         for (final String name : Constant.Color.BASIC_LANDS) {
-            if (!CardListUtil.getType(list, name).isEmpty()) {
+            if (!CardLists.getType(list, name).isEmpty()) {
                 basics.add(name);
             }
         }
@@ -1380,7 +1380,7 @@ public final class AbilityFactoryChangeZone {
 
         for (int i = 0; i < basics.size(); i++) {
             final String b = basics.get(i);
-            final int num = CardListUtil.getType(combined, b).size();
+            final int num = CardLists.getType(combined, b).size();
             if (num < minSize) {
                 minType = b;
                 minSize = num;
@@ -1389,7 +1389,7 @@ public final class AbilityFactoryChangeZone {
 
         List<Card> result = list;
         if (minType != null) {
-            result = CardListUtil.getType(list, minType);
+            result = CardLists.getType(list, minType);
         }
 
         return result.get(0);
@@ -1441,7 +1441,7 @@ public final class AbilityFactoryChangeZone {
 
         if (CombatUtil.lifeInDanger(combat)) {
             // need something AI can cast now
-            CardListUtil.sortByEvaluateCreature(list);
+            CardLists.sortByEvaluateCreature(list);
             for (Card c : list) {
                if (ComputerUtil.payManaCost(c.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false)) {
                    card = c;
@@ -1638,9 +1638,9 @@ public final class AbilityFactoryChangeZone {
         }
 
         List<Card> list = AllZoneUtil.getCardsIn(origin);
-        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
         if (source.isInZone(ZoneType.Hand)) {
-            list = CardListUtil.filter(list, Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
+            list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
         }
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
@@ -1650,11 +1650,11 @@ public final class AbilityFactoryChangeZone {
         // Narrow down the list:
         if (origin.equals(ZoneType.Battlefield)) {
             // filter out untargetables
-            list = CardListUtil.getTargetableCards(list, sa);
-            List<Card> aiPermanents = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
+            list = CardLists.getTargetableCards(list, sa);
+            List<Card> aiPermanents = CardLists.filterControlledBy(list, AllZone.getComputerPlayer());
 
             // Don't blink cards that will die.
-            aiPermanents = CardListUtil.filter(aiPermanents, new Predicate<Card>() {
+            aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return !c.getSVar("Targeting").equals("Dies");
@@ -1687,8 +1687,8 @@ public final class AbilityFactoryChangeZone {
                 }
                 // Save combatants
                 else if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                    final List<Card> combatants = CardListUtil.filter(aiPermanents, CardPredicates.Presets.CREATURES);
-                    CardListUtil.sortByEvaluateCreature(combatants);
+                    final List<Card> combatants = CardLists.filter(aiPermanents, CardPredicates.Presets.CREATURES);
+                    CardLists.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
                         if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {
@@ -1699,7 +1699,7 @@ public final class AbilityFactoryChangeZone {
                 }
                 // Blink permanents with ETB triggers
                 else if (sa.isAbility() && (sa.getPayCosts() != null) && AbilityFactory.playReusable(sa)) {
-                    aiPermanents = CardListUtil.filter(aiPermanents, new Predicate<Card>() {
+                    aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             if (c.getNumberOfCounters() > 0) {
@@ -1722,7 +1722,7 @@ public final class AbilityFactoryChangeZone {
         } else if (origin.equals(ZoneType.Graveyard)) {
             if (destination.equals(ZoneType.Hand)) {
                 // only retrieve cards from computer graveyard
-                list = CardListUtil.filterControlledBy(list, AllZone.getComputerPlayer());
+                list = CardLists.filterControlledBy(list, AllZone.getComputerPlayer());
                 System.out.println("changeZone:" + list);
             }
 
@@ -1747,8 +1747,8 @@ public final class AbilityFactoryChangeZone {
                     && AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()).isEmpty()) {
                 return false;
             }
-            list = CardListUtil.filterControlledBy(list, AllZone.getHumanPlayer());
-            list = CardListUtil.filter(list, new Predicate<Card>() {
+            list = CardLists.filterControlledBy(list, AllZone.getHumanPlayer());
+            list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     for (Card aura : c.getEnchantedBy()) {
@@ -1763,7 +1763,7 @@ public final class AbilityFactoryChangeZone {
 
         // Only care about combatants during combat
         if (Singletons.getModel().getGameState().getPhaseHandler().inCombat()) {
-            CardListUtil.getValidCards(list, "Card.attacking,Card.blocking", null, null);
+            CardLists.getValidCards(list, "Card.attacking,Card.blocking", null, null);
         }
 
         if (list.isEmpty()) {
@@ -1794,14 +1794,14 @@ public final class AbilityFactoryChangeZone {
                         choice = mostExpensive;
                     }
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
-                    List<Card> nonLands = CardListUtil.getNotType(list, "Land");
+                    List<Card> nonLands = CardLists.getNotType(list, "Land");
                     // Prefer to pull a creature, generally more useful for AI.
-                    choice = chooseCreature(CardListUtil.filter(nonLands, CardPredicates.Presets.CREATURES));
+                    choice = chooseCreature(CardLists.filter(nonLands, CardPredicates.Presets.CREATURES));
                     if (choice == null) { // Could not find a creature.
                         if (AllZone.getComputerPlayer().getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
                             System.out.println("5 Life or less, trying to find something castable.");
-                            CardListUtil.sortByMostExpensive(nonLands);
+                            CardLists.sortByMostExpensive(nonLands);
                             for (Card potentialCard : nonLands) {
                                if (ComputerUtil.payManaCost(potentialCard.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false)) {
                                    choice = potentialCard;
@@ -1816,7 +1816,7 @@ public final class AbilityFactoryChangeZone {
                     }
                     if (choice == null) {
                         // No creatures or spells?
-                        CardListUtil.shuffle(list);
+                        CardLists.shuffle(list);
                         choice = list.get(0);
                     }
                 } else {
@@ -1870,12 +1870,12 @@ public final class AbilityFactoryChangeZone {
         final Target tgt = sa.getTarget();
 
         List<Card> list = AllZoneUtil.getCardsIn(origin);
-        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
 
         // Narrow down the list:
         if (origin.equals(ZoneType.Battlefield)) {
             // filter out untargetables
-            list = CardListUtil.getTargetableCards(list, sa);
+            list = CardLists.getTargetableCards(list, sa);
 
             // if Destination is hand, either bounce opponents dangerous stuff
             // or save my about to die stuff
@@ -1907,14 +1907,14 @@ public final class AbilityFactoryChangeZone {
                 } else if (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield)) {
                     choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, false);
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
-                    List<Card> nonLands = CardListUtil.getNotType(list, "Land");
+                    List<Card> nonLands = CardLists.getNotType(list, "Land");
                     // Prefer to pull a creature, generally more useful for AI.
-                    choice = chooseCreature(CardListUtil.filter(nonLands, CardPredicates.Presets.CREATURES));
+                    choice = chooseCreature(CardLists.filter(nonLands, CardPredicates.Presets.CREATURES));
                     if (choice == null) { // Could not find a creature.
                         if (AllZone.getComputerPlayer().getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
                             System.out.println("5 Life or less, trying to find something castable.");
-                            CardListUtil.sortByMostExpensive(nonLands);
+                            CardLists.sortByMostExpensive(nonLands);
                             for (Card potentialCard : nonLands) {
                                if (ComputerUtil.payManaCost(potentialCard.getFirstSpellAbility(), AllZone.getComputerPlayer(), true, 0, false)) {
                                    choice = potentialCard;
@@ -1929,7 +1929,7 @@ public final class AbilityFactoryChangeZone {
                     }
                     if (choice == null) {
                         // No creatures or spells?
-                        CardListUtil.shuffle(list);
+                        CardLists.shuffle(list);
                         choice = list.get(0);
                     }
                 } else {
@@ -2617,7 +2617,7 @@ public final class AbilityFactoryChangeZone {
                 tgt.addTarget(AllZone.getHumanPlayer());
                 computerType.clear();
             }
-            if ((CardListUtil.getNotType(humanType, "Creature").size() == 0) && (CardListUtil.getNotType(computerType, "Creature").size() == 0)) {
+            if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
                 if ((CardFactoryUtil.evaluateCreatureList(computerType) + 200) >= CardFactoryUtil
                         .evaluateCreatureList(humanType)) {
                     return false;
@@ -2655,7 +2655,7 @@ public final class AbilityFactoryChangeZone {
         if (destination.equals(ZoneType.Battlefield)) {
             if (params.get("GainControl") != null) {
                 // Check if the cards are valuable enough
-                if ((CardListUtil.getNotType(humanType, "Creature").size() == 0) && (CardListUtil.getNotType(computerType, "Creature").size() == 0)) {
+                if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
                     if ((CardFactoryUtil.evaluateCreatureList(computerType) + CardFactoryUtil
                             .evaluateCreatureList(humanType)) < 400) {
                         return false;
@@ -2668,7 +2668,7 @@ public final class AbilityFactoryChangeZone {
                 }
             } else {
                 // don't activate if human gets more back than AI does
-                if ((CardListUtil.getNotType(humanType, "Creature").size() == 0) && (CardListUtil.getNotType(computerType, "Creature").size() == 0)) {
+                if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
                     if (CardFactoryUtil.evaluateCreatureList(computerType) <= (CardFactoryUtil
                             .evaluateCreatureList(humanType) + 100)) {
                         return false;
@@ -2771,7 +2771,7 @@ public final class AbilityFactoryChangeZone {
             // if the AI is using it defensively, then something else needs to occur
             // if only creatures are affected evaluate both lists and pass only
             // if human creatures are more valuable
-            if ((CardListUtil.getNotType(humanType, "Creature").isEmpty()) && (CardListUtil.getNotType(computerType, "Creature").isEmpty())) {
+            if ((CardLists.getNotType(humanType, "Creature").isEmpty()) && (CardLists.getNotType(computerType, "Creature").isEmpty())) {
                 if (CardFactoryUtil.evaluateCreatureList(computerType) >= CardFactoryUtil
                         .evaluateCreatureList(humanType)) {
                     return false;
@@ -2805,7 +2805,7 @@ public final class AbilityFactoryChangeZone {
         if (destination.equals(ZoneType.Battlefield)) {
             if (params.get("GainControl") != null) {
                 // Check if the cards are valuable enough
-                if ((CardListUtil.getNotType(humanType, "Creature").size() == 0) && (CardListUtil.getNotType(computerType, "Creature").size() == 0)) {
+                if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
                     if ((CardFactoryUtil.evaluateCreatureList(computerType) + CardFactoryUtil
                             .evaluateCreatureList(humanType)) < 1) {
                         return false;
@@ -2818,7 +2818,7 @@ public final class AbilityFactoryChangeZone {
                 }
             } else {
                 // don't activate if human gets more back than AI does
-                if ((CardListUtil.getNotType(humanType, "Creature").isEmpty()) && (CardListUtil.getNotType(computerType, "Creature").isEmpty())) {
+                if ((CardLists.getNotType(humanType, "Creature").isEmpty()) && (CardLists.getNotType(computerType, "Creature").isEmpty())) {
                     if (CardFactoryUtil.evaluateCreatureList(computerType) <= CardFactoryUtil
                             .evaluateCreatureList(humanType)) {
                         return false;

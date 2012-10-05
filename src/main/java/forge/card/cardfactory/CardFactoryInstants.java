@@ -27,7 +27,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
@@ -96,7 +96,7 @@ public class CardFactoryInstants {
                 public void resolve() {
                     Player player = getTargetPlayer();
                     List<Card> artifacts = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-                    artifacts = CardListUtil.filter(artifacts, CardPredicates.Presets.ARTIFACTS);
+                    artifacts = CardLists.filter(artifacts, CardPredicates.Presets.ARTIFACTS);
 
                     for (int i = 0; i < artifacts.size(); i++) {
                         Card thisArtifact = artifacts.get(i);
@@ -423,8 +423,8 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     final Player you = card.getController();
-                    final List<Card> ens = CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), Presets.ENCHANTMENTS);
-                    final List<Card> toReturn = CardListUtil.filter(ens, new Predicate<Card>() {
+                    final List<Card> ens = CardLists.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), Presets.ENCHANTMENTS);
+                    final List<Card> toReturn = CardLists.filter(ens, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             final Card enchanting = c.getEnchantingCard();
@@ -481,7 +481,7 @@ public class CardFactoryInstants {
                     final String[] choices = new String[] { "Artifact", "Creature", "Land" };
                     final Object o = GuiChoose.one("Select permanent type", choices);
                     final String cardType = (String) o;
-                    final List<Card> list = CardListUtil.getType(this.getTargetPlayer().getCardsIn(ZoneType.Battlefield), cardType);
+                    final List<Card> list = CardLists.getType(this.getTargetPlayer().getCardsIn(ZoneType.Battlefield), cardType);
 
                     final String[] tapOrUntap = new String[] { "Tap", "Untap" };
                     final Object z = GuiChoose.one("Tap or Untap?", tapOrUntap);

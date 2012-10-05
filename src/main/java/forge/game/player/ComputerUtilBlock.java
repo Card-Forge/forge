@@ -26,7 +26,7 @@ import com.google.common.base.Predicates;
 import forge.AllZone;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.Counters;
 import forge.GameEntity;
@@ -281,8 +281,8 @@ public class ComputerUtilBlock {
 
         
         // Begin with the attackers that pose the biggest threat
-        CardListUtil.sortByEvaluateCreature(firstAttacker);
-        CardListUtil.sortAttack(firstAttacker);
+        CardLists.sortByEvaluateCreature(firstAttacker);
+        CardLists.sortAttack(firstAttacker);
 
         // If I don't have any planeswalkers than sorting doesn't really matter
         if (defenders.size() == 1) {
@@ -298,7 +298,7 @@ public class ComputerUtilBlock {
         // if planeswalker will be too difficult to defend don't even bother
         for (List<Card> attacker : attackerLists) {
             // Begin with the attackers that pose the biggest threat
-            CardListUtil.sortAttack(attacker);
+            CardLists.sortAttack(attacker);
             for (final Card c : attacker) {
                 sortedAttackers.add(c);
             }
@@ -404,7 +404,7 @@ public class ComputerUtilBlock {
     final static Predicate<Card> rampagesOrNeedsManyToBlock = Predicates.or( CardPredicates.containsKeyword("Rampage"), CardPredicates.containsKeyword("CARDNAME can't be blocked by more than one creature."));
 
     private static Combat makeGangBlocks(final Combat combat) {
-        List<Card> currentAttackers = CardListUtil.filter(ComputerUtilBlock.getAttackersLeft(), Predicates.not(rampagesOrNeedsManyToBlock));
+        List<Card> currentAttackers = CardLists.filter(ComputerUtilBlock.getAttackersLeft(), Predicates.not(rampagesOrNeedsManyToBlock));
         List<Card> blockers;
 
         // Try to block an attacker without first strike with a gang of first strikers
@@ -420,7 +420,7 @@ public class ComputerUtilBlock {
                 }
 
                 if (firstStrikeBlockers.size() > 1) {
-                    CardListUtil.sortAttack(firstStrikeBlockers);
+                    CardLists.sortAttack(firstStrikeBlockers);
                     for (final Card blocker : firstStrikeBlockers) {
                         final int damageNeeded = attacker.getKillDamage()
                                 + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
@@ -460,7 +460,7 @@ public class ComputerUtilBlock {
             // than the attacker
             // Don't use blockers without First Strike or Double Strike if
             // attacker has it
-            usableBlockers = CardListUtil.filter(blockers, new Predicate<Card>() {
+            usableBlockers = CardLists.filter(blockers, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if ((attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike"))
@@ -600,8 +600,8 @@ public class ComputerUtilBlock {
 
         List<Card> chumpBlockers;
 
-        List<Card> tramplingAttackers = CardListUtil.getKeyword(ComputerUtilBlock.getAttackers(), "Trample");
-        tramplingAttackers = CardListUtil.filter(tramplingAttackers, Predicates.not(rampagesOrNeedsManyToBlock));
+        List<Card> tramplingAttackers = CardLists.getKeyword(ComputerUtilBlock.getAttackers(), "Trample");
+        tramplingAttackers = CardLists.filter(tramplingAttackers, Predicates.not(rampagesOrNeedsManyToBlock));
         
         // TODO - should check here for a "rampage-like" trigger that replaced
         // the keyword:
@@ -648,7 +648,7 @@ public class ComputerUtilBlock {
         List<Card> safeBlockers;
         List<Card> blockers;
         
-        List<Card> targetAttackers = CardListUtil.filter(ComputerUtilBlock.getBlockedButUnkilled(), Predicates.not(rampagesOrNeedsManyToBlock));
+        List<Card> targetAttackers = CardLists.filter(ComputerUtilBlock.getBlockedButUnkilled(), Predicates.not(rampagesOrNeedsManyToBlock));
         
         // TODO - should check here for a "rampage-like" trigger that replaced
         // the keyword:
@@ -678,8 +678,8 @@ public class ComputerUtilBlock {
             // Don't use blockers without First Strike or Double Strike if
             // attacker has it
             if (attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike")) {
-                safeBlockers = CardListUtil.getKeyword(blockers, "First Strike");
-                safeBlockers.addAll(CardListUtil.getKeyword(blockers, "Double Strike"));
+                safeBlockers = CardLists.getKeyword(blockers, "First Strike");
+                safeBlockers.addAll(CardLists.getKeyword(blockers, "Double Strike"));
             } else {
                 safeBlockers = new ArrayList<Card>(blockers);
             }
@@ -800,7 +800,7 @@ public class ComputerUtilBlock {
         }
 
         // Begin with the weakest blockers
-        CardListUtil.sortAttackLowFirst(ComputerUtilBlock.getBlockersLeft());
+        CardLists.sortAttackLowFirst(ComputerUtilBlock.getBlockersLeft());
 
         // == 1. choose best blocks first ==
         combat = ComputerUtilBlock.makeGoodBlocks(combat);
@@ -887,7 +887,7 @@ public class ComputerUtilBlock {
         }
 
         // assign blockers that have to block
-        chumpBlockers = CardListUtil.getKeyword(ComputerUtilBlock.getBlockersLeft(), "CARDNAME blocks each turn if able.");
+        chumpBlockers = CardLists.getKeyword(ComputerUtilBlock.getBlockersLeft(), "CARDNAME blocks each turn if able.");
         // if an attacker with lure attacks - all that can block
         for (final Card blocker : ComputerUtilBlock.getBlockersLeft()) {
             if (CombatUtil.mustBlockAnAttacker(blocker, combat)) {
@@ -895,7 +895,7 @@ public class ComputerUtilBlock {
             }
         }
         if (!chumpBlockers.isEmpty()) {
-            CardListUtil.shuffle(ComputerUtilBlock.getAttackers());
+            CardLists.shuffle(ComputerUtilBlock.getAttackers());
             for (final Card attacker : ComputerUtilBlock.getAttackers()) {
                 blockers = ComputerUtilBlock.getPossibleBlockers(attacker, chumpBlockers, combat);
                 for (final Card blocker : blockers) {
@@ -915,8 +915,8 @@ public class ComputerUtilBlock {
     public static List<Card> orderBlockers(Card attacker, List<Card> blockers) {
         // very very simple ordering of blockers, sort by evaluate, then sort by attack
         //final int damage = attacker.getNetCombatDamage();
-        CardListUtil.sortByEvaluateCreature(blockers);
-        CardListUtil.sortAttack(blockers);
+        CardLists.sortByEvaluateCreature(blockers);
+        CardLists.sortAttack(blockers);
         
         // TODO: Take total damage, and attempt to maximize killing the greatest evaluation of creatures
         // It's probably generally better to kill the largest creature, but sometimes its better to kill a few smaller ones
@@ -928,8 +928,8 @@ public class ComputerUtilBlock {
         // This shouldn't really take trample into account, but otherwise should be pretty similar to orderBlockers
         // very very simple ordering of attackers, sort by evaluate, then sort by attack
         //final int damage = attacker.getNetCombatDamage();
-        CardListUtil.sortByEvaluateCreature(blockers);
-        CardListUtil.sortAttack(blockers);
+        CardLists.sortByEvaluateCreature(blockers);
+        CardLists.sortAttack(blockers);
         
         // TODO: Take total damage, and attempt to maximize killing the greatest evaluation of creatures
         // It's probably generally better to kill the largest creature, but sometimes its better to kill a few smaller ones

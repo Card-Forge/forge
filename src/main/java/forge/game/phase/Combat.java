@@ -30,7 +30,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameActionUtil;
 import forge.GameEntity;
@@ -113,7 +113,7 @@ public class Combat {
         this.defenders.add(defender);
         this.defenderMap.put(defender, new ArrayList<Card>());
         List<Card> planeswalkers = defender.getCardsIn(ZoneType.Battlefield);
-        planeswalkers = CardListUtil.filter(planeswalkers, CardPredicates.Presets.PLANEWALKERS);
+        planeswalkers = CardLists.filter(planeswalkers, CardPredicates.Presets.PLANEWALKERS);
         for (final Card pw : planeswalkers) {
             this.defenders.add(pw);
             this.defenderMap.put(pw, new ArrayList<Card>());
@@ -472,7 +472,7 @@ public class Combat {
         this.blocked.add(attacker);
         this.attackerMap.get(attacker).add(blocker);
         if (!this.blockerMap.containsKey(blocker)) {
-            this.blockerMap.put(blocker, CardListUtil.createCardList(attacker));
+            this.blockerMap.put(blocker, CardLists.createCardList(attacker));
         }
         else {
             this.blockerMap.get(blocker).add(attacker);

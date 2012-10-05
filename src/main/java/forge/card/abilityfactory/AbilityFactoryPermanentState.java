@@ -30,7 +30,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Singletons;
@@ -406,14 +406,14 @@ public class AbilityFactoryPermanentState {
         }
 
         List<Card> untapList = targetController.getCardsIn(ZoneType.Battlefield);
-        untapList = CardListUtil.getTargetableCards(untapList, sa);
-        untapList = CardListUtil.getValidCards(untapList, tgt.getValidTgts(), source.getController(), source);
+        untapList = CardLists.getTargetableCards(untapList, sa);
+        untapList = CardLists.getValidCards(untapList, tgt.getValidTgts(), source.getController(), source);
 
-        untapList = CardListUtil.filter(untapList, Presets.TAPPED);
+        untapList = CardLists.filter(untapList, Presets.TAPPED);
         // filter out enchantments and planeswalkers, their tapped state doesn't
         // matter.
         final String[] tappablePermanents = { "Creature", "Land", "Artifact" };
-        untapList = CardListUtil.getValidCards(untapList, tappablePermanents, source.getController(), source);
+        untapList = CardLists.getValidCards(untapList, tappablePermanents, source.getController(), source);
 
         if (untapList.size() == 0) {
             return false;
@@ -432,7 +432,7 @@ public class AbilityFactoryPermanentState {
                 }
             }
 
-            if (CardListUtil.getNotType(untapList, "Creature").size() == 0) {
+            if (CardLists.getNotType(untapList, "Creature").size() == 0) {
                 choice = CardFactoryUtil.getBestCreatureAI(untapList); // if
                                                                        // only
                                                                        // creatures
@@ -479,20 +479,20 @@ public class AbilityFactoryPermanentState {
 
         List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
-        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
-        list = CardListUtil.getTargetableCards(list, sa);
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
+        list = CardLists.getTargetableCards(list, sa);
 
         // filter by enchantments and planeswalkers, their tapped state doesn't
         // matter.
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
-        List<Card> tapList = CardListUtil.getValidCards(list, tappablePermanents, source.getController(), source);
+        List<Card> tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source);
 
         if (AbilityFactoryPermanentState.untapTargetList(source, tgt, af, sa, mandatory, tapList)) {
             return true;
         }
 
         // try to just tap already tapped things
-        tapList = CardListUtil.filter(list, Presets.UNTAPPED);
+        tapList = CardLists.filter(list, Presets.UNTAPPED);
 
         if (AbilityFactoryPermanentState.untapTargetList(source, tgt, af, sa, mandatory, tapList)) {
             return true;
@@ -552,7 +552,7 @@ public class AbilityFactoryPermanentState {
                 }
             }
 
-            if (CardListUtil.getNotType(tapList, "Creature").size() == 0) {
+            if (CardLists.getNotType(tapList, "Creature").size() == 0) {
                 choice = CardFactoryUtil.getBestCreatureAI(tapList); // if only
                                                                      // creatures
                                                                      // take
@@ -639,8 +639,8 @@ public class AbilityFactoryPermanentState {
                 AllZone.getInputControl().setInput(CardFactoryUtil.inputUntapUpToNType(num, valid));
             } else {
                 List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                list = CardListUtil.getType(list, valid);
-                list = CardListUtil.filter(list, Presets.TAPPED);
+                list = CardLists.getType(list, valid);
+                list = CardLists.filter(list, Presets.TAPPED);
 
                 int count = 0;
                 while ((list.size() != 0) && (count < num)) {
@@ -1002,12 +1002,12 @@ public class AbilityFactoryPermanentState {
     private static boolean tapPrefTargeting(final Card source, final Target tgt, final AbilityFactory af,
             final SpellAbility sa, final boolean mandatory) {
         List<Card> tapList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        tapList = CardListUtil.filter(tapList, Presets.UNTAPPED);
-        tapList = CardListUtil.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
+        tapList = CardLists.filter(tapList, Presets.UNTAPPED);
+        tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
         // filter out enchantments and planeswalkers, their tapped state doesn't matter.
         final String[] tappablePermanents = { "Creature", "Land", "Artifact" };
-        tapList = CardListUtil.getValidCards(tapList, tappablePermanents, source.getController(), source);
-        tapList = CardListUtil.getTargetableCards(tapList, sa);
+        tapList = CardLists.getValidCards(tapList, tappablePermanents, source.getController(), source);
+        tapList = CardLists.getTargetableCards(tapList, sa);
 
         if (tapList.size() == 0) {
             return false;
@@ -1038,7 +1038,7 @@ public class AbilityFactoryPermanentState {
                 if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     //Combat has already started
                     final List<Card> attackers = AllZone.getCombat().getAttackerList();
-                    List<Card> creatureList = CardListUtil.filter(tapList, new Predicate<Card>() {
+                    List<Card> creatureList = CardLists.filter(tapList, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             if (c.isCreature()) {
@@ -1053,7 +1053,7 @@ public class AbilityFactoryPermanentState {
                 } else {
                     final List<Card> attackers = ComputerUtil.getPossibleAttackers();
                     attackers.remove(sa.getSourceCard());
-                    List<Card> creatureList = CardListUtil.filter(tapList, new Predicate<Card>() {
+                    List<Card> creatureList = CardLists.filter(tapList, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             if (c.isCreature()) {
@@ -1070,7 +1070,7 @@ public class AbilityFactoryPermanentState {
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
                 if (Iterables.any(tapList, CardPredicates.Presets.CREATURES)) {
-                    List<Card> creatureList = CardListUtil.filter(tapList, CardPredicates.Presets.CREATURES_CAN_ATTACK);
+                    List<Card> creatureList = CardLists.filter(tapList, CardPredicates.Presets.CREATURES_CAN_ATTACK);
                     choice = CardFactoryUtil.getBestCreatureAI(creatureList);
                 } else { // no creatures available
                     choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
@@ -1119,19 +1119,19 @@ public class AbilityFactoryPermanentState {
         final Target tgt = sa.getTarget();
 
         List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
-        list = CardListUtil.getTargetableCards(list, sa);
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
+        list = CardLists.getTargetableCards(list, sa);
 
         // filter by enchantments and planeswalkers, their tapped state doesn't matter.
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
-        List<Card> tapList = CardListUtil.getValidCards(list, tappablePermanents, source.getController(), source);
+        List<Card> tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source);
 
         if (AbilityFactoryPermanentState.tapTargetList(af, sa, tapList, mandatory)) {
             return true;
         }
 
         // try to just tap already tapped things
-        tapList = CardListUtil.filter(list, Presets.TAPPED);
+        tapList = CardLists.filter(list, Presets.TAPPED);
 
         if (AbilityFactoryPermanentState.tapTargetList(af, sa, tapList, mandatory)) {
             return true;
@@ -1192,7 +1192,7 @@ public class AbilityFactoryPermanentState {
                 }
             }
 
-            if (CardListUtil.getNotType(tapList, "Creature").size() == 0) {
+            if (CardLists.getNotType(tapList, "Creature").size() == 0) {
                 // if only creatures take the best
                 choice = CardFactoryUtil.getBestCreatureAI(tapList);
             } else {
@@ -1442,7 +1442,7 @@ public class AbilityFactoryPermanentState {
         } else {
             list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
         }
-        list = CardListUtil.getValidCards(list, valid.split(","), card.getController(), card);
+        list = CardLists.getValidCards(list, valid.split(","), card.getController(), card);
 
         for (int i = 0; i < list.size(); i++) {
             list.get(i).untap();
@@ -1749,8 +1749,8 @@ public class AbilityFactoryPermanentState {
             validTappables = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
         }
 
-        validTappables = CardListUtil.getValidCards(validTappables, valid, source.getController(), source);
-        validTappables = CardListUtil.filter(validTappables, Presets.UNTAPPED);
+        validTappables = CardLists.getValidCards(validTappables, valid, source.getController(), source);
+        validTappables = CardLists.filter(validTappables, Presets.UNTAPPED);
 
         final Random r = MyRandom.getRandom();
         boolean rr = false;
@@ -1759,13 +1759,13 @@ public class AbilityFactoryPermanentState {
         }
 
         if (validTappables.size() > 0) {
-            final List<Card> human = CardListUtil.filter(validTappables, new Predicate<Card>() {
+            final List<Card> human = CardLists.filter(validTappables, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getController().isHuman();
                 }
             });
-            final List<Card> compy = CardListUtil.filter(validTappables, new Predicate<Card>() {
+            final List<Card> compy = CardLists.filter(validTappables, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getController().isComputer();
@@ -1791,8 +1791,8 @@ public class AbilityFactoryPermanentState {
      */
     private static List<Card> getTapAllTargets(final String valid, final Card source) {
         List<Card> tmpList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        tmpList = CardListUtil.getValidCards(tmpList, valid, source.getController(), source);
-        tmpList = CardListUtil.filter(tmpList, Presets.UNTAPPED);
+        tmpList = CardLists.getValidCards(tmpList, valid, source.getController(), source);
+        tmpList = CardLists.filter(tmpList, Presets.UNTAPPED);
         return tmpList;
     }
 
@@ -1874,13 +1874,13 @@ public class AbilityFactoryPermanentState {
         }
 
         if (validTappables.size() > 0) {
-            final List<Card> human = CardListUtil.filter(validTappables, new Predicate<Card>() {
+            final List<Card> human = CardLists.filter(validTappables, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getController().isHuman();
                 }
             });
-            final List<Card> compy = CardListUtil.filter(validTappables, new Predicate<Card>() {
+            final List<Card> compy = CardLists.filter(validTappables, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.getController().isComputer();
@@ -2619,7 +2619,7 @@ public class AbilityFactoryPermanentState {
         final Target tgt = sa.getTarget();
 
         List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        list = CardListUtil.getTargetableCards(CardListUtil.getValidCards(list, tgt.getValidTgts(), source.getController(), source), sa);
+        list = CardLists.getTargetableCards(CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source), sa);
 
         return false;
     }

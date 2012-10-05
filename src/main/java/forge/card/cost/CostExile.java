@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -155,7 +155,7 @@ public class CostExile extends CostPartWithList {
             typeList = activator.getCardsIn(this.getFrom());
         }
         if (!this.getThis()) {
-            typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
+            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
             if ((amount != null) && (typeList.size() < amount)) {
@@ -203,7 +203,7 @@ public class CostExile extends CostPartWithList {
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
         List<Card> list = activator.getCardsIn(this.getFrom());
-        list = CardListUtil.getValidCards(list, this.getType().split(";"), activator, source);
+        list = CardLists.getValidCards(list, this.getType().split(";"), activator, source);
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             // Generalize this
@@ -339,7 +339,7 @@ public class CostExile extends CostPartWithList {
                 }
 
                 this.typeList = sa.getActivatingPlayer().getCardsIn(part.getFrom());
-                this.typeList = CardListUtil.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+                this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
 
                 for (int i = 0; i < nNeeded; i++) {
                     if (this.typeList.size() == 0) {
@@ -519,7 +519,7 @@ public class CostExile extends CostPartWithList {
                     msg.append(" from the Stack");
                 }
                 this.typeList = sa.getActivatingPlayer().getCardsIn(part.getFrom());
-                this.typeList = CardListUtil.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+                this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }

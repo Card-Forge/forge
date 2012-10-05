@@ -42,7 +42,7 @@ import forge.util.MyRandom;
  * @author Forge
  * @version $Id$
  */
-public class CardListUtil {
+public class CardLists {
     /**
      * <p>
      * filterToughness.
@@ -55,7 +55,7 @@ public class CardListUtil {
      * @return a {@link forge.CardList} object.
      */
     public static List<Card> filterToughness(final List<Card> in, final int atLeastToughness) {
-        return CardListUtil.filter(in, new Predicate<Card>() {
+        return CardLists.filter(in, new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
                 return c.getNetDefense() <= atLeastToughness;
@@ -169,7 +169,7 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortNonFlyingFirst(final List<Card> list) {
-        CardListUtil.sortFlying(list);
+        CardLists.sortFlying(list);
         Collections.reverse(list);
     } // sortNonFlyingFirst
 
@@ -209,7 +209,7 @@ public class CardListUtil {
      * @return a {@link forge.CardList} object.
      */
     public static List<Card> getColor(final List<Card> list, final String color) {
-        return CardListUtil.filter(list, new Predicate<Card>() {
+        return CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CardUtil.getColors(c).contains(color);
@@ -227,7 +227,7 @@ public class CardListUtil {
      * @return a {@link forge.CardList} object.
      */
     public static List<Card> getGoldCards(final List<Card> list) {
-        return CardListUtil.filter(list, new Predicate<Card>() {
+        return CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CardUtil.getColors(c).size() >= 2;
@@ -281,7 +281,7 @@ public class CardListUtil {
 
         final List<Card> subList = new ArrayList<Card>();
         while (subList.size() < amount) {
-            CardListUtil.shuffle(c);
+            CardLists.shuffle(c);
             subList.add(c.get(0));
             c.remove(0);
         }
@@ -301,38 +301,38 @@ public class CardListUtil {
     }
 
     public static List<Card> filterControlledBy(List<Card> cardList, Player player) {
-        return CardListUtil.filter(cardList, CardPredicates.isController(player));
+        return CardLists.filter(cardList, CardPredicates.isController(player));
     }
 
 
     public static List<Card> getValidCards(List<Card> cardList, String[] restrictions, Player sourceController, Card source) {
-        return CardListUtil.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source));
+        return CardLists.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source));
     }
 
     public static List<Card> getValidCards(List<Card> cardList, String restriction, Player sourceController, Card source) {
-        return CardListUtil.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
+        return CardLists.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
     }
 
     public static List<Card> getTargetableCards(List<Card> cardList, SpellAbility source) {
-        return CardListUtil.filter(cardList, CardPredicates.isTargetableBy(source));
+        return CardLists.filter(cardList, CardPredicates.isTargetableBy(source));
     }
 
     public static List<Card> getKeyword(List<Card> cardList, String keyword) {
-        return CardListUtil.filter(cardList, CardPredicates.hasKeyword(keyword));
+        return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword));
     }
 
     public static List<Card> getNotKeyword(List<Card> cardList, String keyword) {
-        return CardListUtil.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
+        return CardLists.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
     }
 
     // cardType is like "Land" or "Goblin", returns a new ArrayList<Card> that is a
     // subset of current CardList
     public static List<Card> getNotType(List<Card> cardList, String cardType) {
-        return CardListUtil.filter(cardList, Predicates.not(CardPredicates.isType(cardType)));
+        return CardLists.filter(cardList, Predicates.not(CardPredicates.isType(cardType)));
     }
 
     public static List<Card> getType(List<Card> cardList, String cardType) {
-        return CardListUtil.filter(cardList, CardPredicates.isType(cardType));
+        return CardLists.filter(cardList, CardPredicates.isType(cardType));
     }
 
     /**

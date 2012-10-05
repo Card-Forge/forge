@@ -8,7 +8,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.Command;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -74,7 +74,7 @@ class CardFactoryEnchantments {
                 public boolean canPlay() {
                     boolean haveGraveWithSomeCreatures = false;
                     for( Player p : AllZone.getPlayersInGame()) {
-                        Iterable<Card> grave = CardListUtil.filter(p.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+                        Iterable<Card> grave = CardLists.filter(p.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
                         if( Iterables.size(grave) > 1)
                         {
                             haveGraveWithSomeCreatures = true;
@@ -93,8 +93,8 @@ class CardFactoryEnchantments {
                 public void showMessage() {
                     List<Card> grave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
                     List<Card> aiGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                    grave = CardListUtil.filter(grave, CardPredicates.Presets.CREATURES);
-                    aiGrave = CardListUtil.filter(aiGrave, CardPredicates.Presets.CREATURES);
+                    grave = CardLists.filter(grave, CardPredicates.Presets.CREATURES);
+                    aiGrave = CardLists.filter(aiGrave, CardPredicates.Presets.CREATURES);
 
                     if (this.once || ((grave.size() < 2) && (aiGrave.size() < 2))) {
                         this.once = false;
@@ -112,7 +112,7 @@ class CardFactoryEnchantments {
 
                         final Card c = GuiChoose.one("Choose first creature to exile", chooseGrave);
                         if (c != null) {
-                            List<Card> newGrave = CardListUtil.filter(c.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+                            List<Card> newGrave = CardLists.filter(c.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
                             newGrave.remove(c);
 
                             final Object o2 = GuiChoose.one("Choose second creature to exile", newGrave);

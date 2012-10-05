@@ -29,7 +29,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
@@ -114,7 +114,7 @@ class CardFactoryAuras {
 
                     newType[0] = landTypes[minAt];
                     List<Card> list = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
-                    list = CardListUtil.getNotType(list, newType[0]); // Don't enchant lands
+                    list = CardLists.getNotType(list, newType[0]); // Don't enchant lands
                                                         // that already have the
                                                         // type
                     if (list.isEmpty()) {
@@ -267,7 +267,7 @@ class CardFactoryAuras {
                 @Override
                 public boolean canPlayAI() {
                     List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                    list = CardListUtil.getKeyword(list, "Flying");
+                    list = CardLists.getKeyword(list, "Flying");
                     if (list.isEmpty()) {
                         return false;
                     }
@@ -279,9 +279,9 @@ class CardFactoryAuras {
                         }
                     };
                     if (Iterables.any(list, f)) {
-                        list = CardListUtil.filter(list, f);
+                        list = CardLists.filter(list, f);
                     }
-                    CardListUtil.sortAttack(list);
+                    CardLists.sortAttack(list);
 
                     for (int i = 0; i < list.size(); i++) {
                         if (list.get(i).canBeTargetedBy(this)) {
@@ -383,8 +383,8 @@ class CardFactoryAuras {
                         }
 
                         // else
-                        CardListUtil.sortAttack(list);
-                        CardListUtil.sortFlying(list);
+                        CardLists.sortAttack(list);
+                        CardLists.sortFlying(list);
 
                         for (int i = 0; i < list.size(); i++) {
                             if (list.get(i).canBeTargetedBy(this)
@@ -425,7 +425,7 @@ class CardFactoryAuras {
                     // This includes creatures Animate Dead can't enchant once
                     // in play.
                     // The human may try to Animate them, the AI will not.
-                    return CardListUtil.filter(AllZoneUtil.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
+                    return CardLists.filter(AllZoneUtil.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
                 }
 
                 @Override
@@ -437,7 +437,7 @@ class CardFactoryAuras {
                 public boolean canPlayAI() {
                     List<Card> cList = this.getCreturesInGrave();
                     // AI will only target something that will stick in play.
-                    cList = CardListUtil.getTargetableCards(cList, this);
+                    cList = CardLists.getTargetableCards(cList, this);
                     if (cList.size() == 0) {
                         return false;
                     }

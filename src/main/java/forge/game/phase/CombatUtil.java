@@ -32,7 +32,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.Command;
 import forge.Constant;
@@ -398,7 +398,7 @@ public class CombatUtil {
                     if (CombatUtil.canBlock(attacker, blocker, combat)) {
                         boolean must = true;
                         if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                            final List<Card> possibleBlockers = CardListUtil.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                            final List<Card> possibleBlockers = CardLists.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
                             possibleBlockers.remove(blocker);
                             if (!CombatUtil.canBeBlocked(attacker, possibleBlockers)) {
                                 must = false;
@@ -521,7 +521,7 @@ public class CombatUtil {
             if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
                 boolean canBe = true;
                 if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                    final List<Card> blockers = CardListUtil.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                    final List<Card> blockers = CardLists.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
                     blockers.remove(blocker);
                     if (!CombatUtil.canBeBlocked(attacker, blockers)) {
                         canBe = false;
@@ -538,7 +538,7 @@ public class CombatUtil {
                 if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
                     boolean canBe = true;
                     if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                        final List<Card> blockers = CardListUtil.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                        final List<Card> blockers = CardLists.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
                         blockers.remove(blocker);
                         if (!CombatUtil.canBeBlocked(attacker, blockers)) {
                             canBe = false;
@@ -881,7 +881,7 @@ public class CombatUtil {
                     powerLimit[0] = Integer.parseInt((asSeparateWords[12]).trim());
 
                     List<Card> list = AllZoneUtil.getCreaturesInPlay(c.getController().getOpponent());
-                    list = CardListUtil.filter(list, new Predicate<Card>() {
+                    list = CardLists.filter(list, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card ct) {
                             return ((ct.isUntapped() && (ct.getNetAttack() >= powerLimit[0]) && asSeparateWords[14]
@@ -905,32 +905,32 @@ public class CombatUtil {
             } else if (keyword.equals("Defender") && !c.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
                 return false;
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls an Island.")) {
-                temp = CardListUtil.getType(list, "Island");
+                temp = CardLists.getType(list, "Island");
                 if (temp.isEmpty()) {
                     return false;
                 }
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls a Forest.")) {
-                temp = CardListUtil.getType(list, "Forest");
+                temp = CardLists.getType(list, "Forest");
                 if (temp.isEmpty()) {
                     return false;
                 }
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls a Swamp.")) {
-                temp = CardListUtil.getType(list, "Swamp");
+                temp = CardLists.getType(list, "Swamp");
                 if (temp.isEmpty()) {
                     return false;
                 }
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls a Mountain.")) {
-                temp = CardListUtil.getType(list, "Mountain");
+                temp = CardLists.getType(list, "Mountain");
                 if (temp.isEmpty()) {
                     return false;
                 }
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls a snow land.")) {
-                temp = CardListUtil.filter(list, CardPredicates.Presets.SNOW_LANDS);
+                temp = CardLists.filter(list, CardPredicates.Presets.SNOW_LANDS);
                 if (temp.isEmpty()) {
                     return false;
                 }
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls a blue permanent.")) {
-                temp = CardListUtil.getColor(list, Constant.Color.BLUE);
+                temp = CardLists.getColor(list, Constant.Color.BLUE);
                 if (temp.isEmpty()) {
                     return false;
                 }
@@ -960,7 +960,7 @@ public class CombatUtil {
         final Card att = attacker;
 
         List<Card> list = AllZoneUtil.getCreaturesInPlay(player);
-        list = CardListUtil.filter(list, new Predicate<Card>() {
+        list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return CombatUtil.canBlock(att, c) && (c.hasFirstStrike() || c.hasDoubleStrike());
@@ -3079,7 +3079,7 @@ public class CombatUtil {
                     @Override
                     public void resolve() {
                         List<Card> enchantments = attacker.getController().getCardsIn(ZoneType.Library);
-                        enchantments = CardListUtil.filter(enchantments, new Predicate<Card>() {
+                        enchantments = CardLists.filter(enchantments, new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {
                                 if (attacker.hasKeyword("Protection from enchantments")

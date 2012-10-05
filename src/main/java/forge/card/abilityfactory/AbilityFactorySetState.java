@@ -27,7 +27,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
@@ -474,7 +474,7 @@ public class AbilityFactorySetState {
         List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
         if (targetPlayer != null) {
-            list = CardListUtil.filterControlledBy(list, targetPlayer);
+            list = CardLists.filterControlledBy(list, targetPlayer);
         }
 
         list = AbilityFactory.filterListByType(list, valid, sa);

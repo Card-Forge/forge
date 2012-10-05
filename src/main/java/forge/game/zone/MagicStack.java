@@ -28,7 +28,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.GameActionUtil;
@@ -767,7 +767,7 @@ public class MagicStack extends MyObservable {
         if (sp.isSpell() && AllZoneUtil.isCardInPlay("Bazaar of Wonders")) {
             boolean found = false;
             List<Card> all = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            all = CardListUtil.filter(all, Presets.NON_TOKEN);
+            all = CardLists.filter(all, Presets.NON_TOKEN);
             final List<Card> graves = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
             all.addAll(graves);
 
@@ -946,7 +946,7 @@ public class MagicStack extends MyObservable {
                     AllZone.getInputControl().setInput(target);
                 } else {
                     // AI choosing what to haunt
-                    final List<Card> oppCreats = CardListUtil.filterControlledBy(creats, AllZone.getHumanPlayer());
+                    final List<Card> oppCreats = CardLists.filterControlledBy(creats, AllZone.getHumanPlayer());
                     if (oppCreats.size() != 0) {
                         haunterDiesWork.setTargetCard(CardFactoryUtil.getWorstCreatureAI(oppCreats));
                     } else {

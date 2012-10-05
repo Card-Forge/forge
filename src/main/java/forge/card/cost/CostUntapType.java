@@ -22,7 +22,7 @@ import java.util.List;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -122,12 +122,12 @@ public class CostUntapType extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         List<Card> typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
 
-        typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), activator, source);
+        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
         if (cost.getUntap()) {
             typeList.remove(source);
         }
-        typeList = CardListUtil.filter(typeList, Presets.TAPPED);
+        typeList = CardLists.filter(typeList, Presets.TAPPED);
 
         final Integer amount = this.convertAmount();
         if ((typeList.size() == 0) || ((amount != null) && (typeList.size() < amount))) {
@@ -161,8 +161,8 @@ public class CostUntapType extends CostPartWithList {
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final boolean untap = payment.getCost().getUntap();
         List<Card> typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
-        typeList = CardListUtil.filter(typeList, Presets.TAPPED);
+        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+        typeList = CardLists.filter(typeList, Presets.TAPPED);
         if (untap) {
             typeList.remove(source);
         }
@@ -198,11 +198,11 @@ public class CostUntapType extends CostPartWithList {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 List<Card> typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-                typeList = CardListUtil.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+                typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
                 if (untap) {
                     typeList.remove(source);
                 }
-                typeList = CardListUtil.filter(typeList, Presets.TAPPED);
+                typeList = CardLists.filter(typeList, Presets.TAPPED);
                 c = typeList.size();
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));
             } else {

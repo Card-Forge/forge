@@ -36,7 +36,7 @@ import forge.Card;
 import forge.CardCharacteristicName;
 
 import forge.CardColor;
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
@@ -110,7 +110,7 @@ public class CardFactoryUtil {
     public static Card getMostExpensivePermanentAI(final List<Card> list, final SpellAbility spell, final boolean targeted) {
         List<Card> all = list;
         if (targeted) {
-            all = CardListUtil.filter(all, new Predicate<Card>() {
+            all = CardLists.filter(all, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.canBeTargetedBy(spell);
@@ -142,8 +142,8 @@ public class CardFactoryUtil {
 
             // Add all cost of all auras with the same controller
             final List<Card> auras = new ArrayList<Card>(card.getEnchantedBy());
-            CardListUtil.filterControlledBy(auras, card.getController());
-            curCMC += CardListUtil.sumCMC(auras) + auras.size();
+            CardLists.filterControlledBy(auras, card.getController());
+            curCMC += CardLists.sumCMC(auras) + auras.size();
 
             if (curCMC >= bigCMC) {
                 bigCMC = curCMC;
@@ -169,7 +169,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getCheapestCreatureAI(List<Card> list, final SpellAbility spell, final boolean targeted) {
-        list = CardListUtil.filter(list, new Predicate<Card>() {
+        list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.isCreature();
@@ -194,7 +194,7 @@ public class CardFactoryUtil {
     public static Card getCheapestPermanentAI(final List<Card> list, final SpellAbility spell, final boolean targeted) {
         List<Card> all = list;
         if (targeted) {
-            all = CardListUtil.filter(all, new Predicate<Card>() {
+            all = CardLists.filter(all, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.canBeTargetedBy(spell);
@@ -229,13 +229,13 @@ public class CardFactoryUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getBestLandAI(final List<Card> list) {
-        final List<Card> land = CardListUtil.filter(list, CardPredicates.Presets.LANDS);
+        final List<Card> land = CardLists.filter(list, CardPredicates.Presets.LANDS);
         if (!(land.size() > 0)) {
             return null;
         }
 
         // prefer to target non basic lands
-        final List<Card> nbLand = CardListUtil.filter(land, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
+        final List<Card> nbLand = CardLists.filter(land, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
 
         if (nbLand.size() > 0) {
             // TODO - Rank non basics?
@@ -248,7 +248,7 @@ public class CardFactoryUtil {
                             // lands of one type....
         int n = 0;
         for (String name : Constant.Color.BASIC_LANDS) {
-            n = CardListUtil.getType(land, name).size();
+            n = CardLists.getType(land, name).size();
             if ((n < iminBL) && (n > 0)) {
                 // if two or more are tied, only the
                 // first
@@ -261,7 +261,7 @@ public class CardFactoryUtil {
             return null; // no basic land was a minimum
         }
 
-        final List<Card> bLand = CardListUtil.getType(land, sminBL);
+        final List<Card> bLand = CardLists.getType(land, sminBL);
         
         for( Card ut : Iterables.filter(bLand, CardPredicates.Presets.UNTAPPED) )
         {
@@ -287,9 +287,9 @@ public class CardFactoryUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getBestEnchantmentAI(final List<Card> list, final SpellAbility spell, final boolean targeted) {
-        List<Card> all = CardListUtil.filter(list, CardPredicates.Presets.ENCHANTMENTS);
+        List<Card> all = CardLists.filter(list, CardPredicates.Presets.ENCHANTMENTS);
         if (targeted) {
-            all = CardListUtil.filter(all, new Predicate<Card>() {
+            all = CardLists.filter(all, new Predicate<Card>() {
 
                 @Override
                 public boolean apply(final Card c) {
@@ -313,7 +313,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getBestArtifactAI(final List<Card> list) {
-        List<Card> all = CardListUtil.filter(list, CardPredicates.Presets.ARTIFACTS);
+        List<Card> all = CardLists.filter(list, CardPredicates.Presets.ARTIFACTS);
         if (all.size() == 0) {
             return null;
         }
@@ -591,11 +591,11 @@ public class CardFactoryUtil {
     public static Card getBestAI(final List<Card> list) {
         // Get Best will filter by appropriate getBest list if ALL of the list
         // is of that type
-        if (CardListUtil.getNotType(list, "Creature").size() == 0) {
+        if (CardLists.getNotType(list, "Creature").size() == 0) {
             return CardFactoryUtil.getBestCreatureAI(list);
         }
 
-        if (CardListUtil.getNotType(list, "Land").size() == 0) {
+        if (CardLists.getNotType(list, "Land").size() == 0) {
             return CardFactoryUtil.getBestLandAI(list);
         }
 
@@ -612,7 +612,7 @@ public class CardFactoryUtil {
      * @return the card
      */
     public static Card getBestCreatureAI(final List<Card> list) {
-        List<Card> all = CardListUtil.filter(list, CardPredicates.Presets.CREATURES);
+        List<Card> all = CardLists.filter(list, CardPredicates.Presets.CREATURES);
         return Aggregates.itemWithMax(all, CardPredicates.Accessors.fnEvaluateCreature);
     }
 
@@ -628,7 +628,7 @@ public class CardFactoryUtil {
      */
     public static Card getBestCreatureToBounceAI(final List<Card> list) {
         final int tokenBonus = 40;
-        List<Card> all = CardListUtil.filter(list, CardPredicates.Presets.CREATURES);
+        List<Card> all = CardLists.filter(list, CardPredicates.Presets.CREATURES);
         Card biggest = null; // returns null if list.size() == 0
         int biggestvalue = 0;
         int newvalue = 0;
@@ -677,7 +677,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getWorstCreatureAI(final List<Card> list) {
-        List<Card> all = CardListUtil.filter(list, CardPredicates.Presets.CREATURES);
+        List<Card> all = CardLists.filter(list, CardPredicates.Presets.CREATURES);
         // get smallest creature
         return Aggregates.itemWithMin(all, CardPredicates.Accessors.fnEvaluateCreature);
     }
@@ -707,28 +707,28 @@ public class CardFactoryUtil {
         System.out.println("getWorstPermanentAI: " + list);
 
         if (biasEnch && Iterables.any(list, CardPredicates.Presets.ENCHANTMENTS)) {
-            return CardFactoryUtil.getCheapestPermanentAI(CardListUtil.filter(list, CardPredicates.Presets.ENCHANTMENTS), null, false);
+            return CardFactoryUtil.getCheapestPermanentAI(CardLists.filter(list, CardPredicates.Presets.ENCHANTMENTS), null, false);
         }
 
         if (biasArt && Iterables.any(list, CardPredicates.Presets.ARTIFACTS)) {
-            return CardFactoryUtil.getCheapestPermanentAI(CardListUtil.filter(list, CardPredicates.Presets.ARTIFACTS), null, false);
+            return CardFactoryUtil.getCheapestPermanentAI(CardLists.filter(list, CardPredicates.Presets.ARTIFACTS), null, false);
         }
 
         if (biasLand && Iterables.any(list, CardPredicates.Presets.LANDS)) {
-            return CardFactoryUtil.getWorstLand(CardListUtil.filter(list, CardPredicates.Presets.LANDS));
+            return CardFactoryUtil.getWorstLand(CardLists.filter(list, CardPredicates.Presets.LANDS));
         }
 
         if (biasCreature && Iterables.any(list, CardPredicates.Presets.CREATURES)) {
-            return CardFactoryUtil.getWorstCreatureAI(CardListUtil.filter(list, CardPredicates.Presets.CREATURES));
+            return CardFactoryUtil.getWorstCreatureAI(CardLists.filter(list, CardPredicates.Presets.CREATURES));
         }
 
-        List<Card> lands = CardListUtil.filter(list, CardPredicates.Presets.LANDS);
+        List<Card> lands = CardLists.filter(list, CardPredicates.Presets.LANDS);
         if (lands.size() > 6) {
             return CardFactoryUtil.getWorstLand(lands);
         }
 
-        if ((CardListUtil.getType(list, "Artifact").size() > 0) || (CardListUtil.getType(list, "Enchantment").size() > 0)) {
-            return CardFactoryUtil.getCheapestPermanentAI(CardListUtil.filter(list, new Predicate<Card>() {
+        if ((CardLists.getType(list, "Artifact").size() > 0) || (CardLists.getType(list, "Enchantment").size() > 0)) {
+            return CardFactoryUtil.getCheapestPermanentAI(CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return c.isArtifact() || c.isEnchantment();
@@ -736,8 +736,8 @@ public class CardFactoryUtil {
             }), null, false);
         }
 
-        if (CardListUtil.getType(list, "Creature").size() > 0) {
-            return CardFactoryUtil.getWorstCreatureAI(CardListUtil.getType(list, "Creature"));
+        if (CardLists.getType(list, "Creature").size() > 0) {
+            return CardFactoryUtil.getWorstCreatureAI(CardLists.getType(list, "Creature"));
         }
 
         // Planeswalkers fall through to here, lands will fall through if there
@@ -1574,7 +1574,7 @@ public class CardFactoryUtil {
     public static List<Card> getHumanCreatureAI(final SpellAbility spell, final boolean targeted) {
         List<Card> creature = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
         if (targeted) {
-            creature = CardListUtil.getTargetableCards(creature, spell);
+            creature = CardLists.getTargetableCards(creature, spell);
         }
         return creature;
     }
@@ -1882,11 +1882,11 @@ public class CardFactoryUtil {
 
         // Only check the top card of the library
         if (zone.is(ZoneType.Library) && !cl.isEmpty()) {
-            cl = CardListUtil.createCardList(cl.get(0));
+            cl = CardLists.createCardList(cl.get(0));
         }
 
         if (activator.isPlayer(zone.getPlayer())) {
-            cl = CardListUtil.filter(cl, new Predicate<Card>() {
+            cl = CardLists.filter(cl, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if (zone.is(ZoneType.Graveyard) && c.hasUnearth()) {
@@ -1920,7 +1920,7 @@ public class CardFactoryUtil {
             });
         } else {
             // the activator is not the owner of the card
-            cl = CardListUtil.filter(cl, new Predicate<Card>() {
+            cl = CardLists.filter(cl, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
 
@@ -2033,7 +2033,7 @@ public class CardFactoryUtil {
             final String restrictions = l[0].replace("Valid ", "");
             final String[] rest = restrictions.split(",");
             List<Card> cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            cardsonbattlefield = CardListUtil.getValidCards(cardsonbattlefield, rest, players.get(0), source);
+            cardsonbattlefield = CardLists.getValidCards(cardsonbattlefield, rest, players.get(0), source);
 
             n = cardsonbattlefield.size();
 
@@ -2055,7 +2055,7 @@ public class CardFactoryUtil {
             final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
 
             for (int i = 0; i < basic.length; i++) {
-                if (!CardListUtil.getType(someCards, basic[i]).isEmpty()) {
+                if (!CardLists.getType(someCards, basic[i]).isEmpty()) {
                     n++;
                 }
             }
@@ -2075,7 +2075,7 @@ public class CardFactoryUtil {
         }
         if (sq[0].contains("LandsInGraveyard")) {
             if (players.size() > 0) {
-                return CardFactoryUtil.doXMath(CardListUtil.getType(players.get(0).getCardsIn(ZoneType.Graveyard), "Land").size(), m,
+                return CardFactoryUtil.doXMath(CardLists.getType(players.get(0).getCardsIn(ZoneType.Graveyard), "Land").size(), m,
                         source);
             }
         }
@@ -2100,7 +2100,7 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("TopOfLibraryCMC")) {
             if (players.size() > 0) {
-                return CardFactoryUtil.doXMath(CardListUtil.sumCMC(players.get(0).getCardsIn(ZoneType.Library, 1)),
+                return CardFactoryUtil.doXMath(CardLists.sumCMC(players.get(0).getCardsIn(ZoneType.Library, 1)),
                         m, source);
             }
         }
@@ -2241,7 +2241,7 @@ public class CardFactoryUtil {
             restrictions = restrictions.replace("Count$", "");
             final String[] rest = restrictions.split(",");
             List<Card> cards = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
-            cards = CardListUtil.getValidCards(cards, rest, cardController, c);
+            cards = CardLists.getValidCards(cards, rest, cardController, c);
 
             n = cards.size();
 
@@ -2253,7 +2253,7 @@ public class CardFactoryUtil {
             restrictions = restrictions.replace("Count$", "");
             final String[] rest = restrictions.split(",");
             List<Card> cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            cardsonbattlefield = CardListUtil.getValidCards(cardsonbattlefield, rest, cardController, c);
+            cardsonbattlefield = CardLists.getValidCards(cardsonbattlefield, rest, cardController, c);
 
             n = cardsonbattlefield.size();
 
@@ -2383,7 +2383,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("Domain")) {
             someCards.addAll(cardController.getCardsIn(ZoneType.Battlefield));
             for (String basic : Constant.Color.BASIC_LANDS) {
-                if (!CardListUtil.getType(someCards, basic).isEmpty()) {
+                if (!CardLists.getType(someCards, basic).isEmpty()) {
                     n++;
                 }
             }
@@ -2394,7 +2394,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("OpponentDom")) {
             someCards.addAll(cardController.getOpponent().getCardsIn(ZoneType.Battlefield));
             for (String basic : Constant.Color.BASIC_LANDS) {
-                if (!CardListUtil.getType(someCards, basic).isEmpty()) {
+                if (!CardLists.getType(someCards, basic).isEmpty()) {
                     n++;
                 }
             }
@@ -2404,12 +2404,12 @@ public class CardFactoryUtil {
         // Count$ColoredCreatures *a DOMAIN for creatures*
         if (sq[0].contains("ColoredCreatures")) {
             someCards.addAll(cardController.getCardsIn(ZoneType.Battlefield));
-            someCards = CardListUtil.filter(someCards, Presets.CREATURES);
+            someCards = CardLists.filter(someCards, Presets.CREATURES);
 
             final String[] colors = { "green", "white", "red", "blue", "black" };
 
             for (final String color : colors) {
-                if (!CardListUtil.getColor(someCards, color).isEmpty()) {
+                if (!CardLists.getColor(someCards, color).isEmpty()) {
                     n++;
                 }
             }
@@ -2515,7 +2515,7 @@ public class CardFactoryUtil {
         // Count$TopOfLibraryCMC
         if (sq[0].contains("TopOfLibraryCMC")) {
             final List<Card> topcard = cardController.getCardsIn(ZoneType.Library, 1);
-            return CardFactoryUtil.doXMath(CardListUtil.sumCMC(topcard), m, c);
+            return CardFactoryUtil.doXMath(CardLists.sumCMC(topcard), m, c);
         }
 
         // Count$EnchantedControllerCreatures
@@ -2523,7 +2523,7 @@ public class CardFactoryUtil {
             List<Card> enchantedControllerInPlay = new ArrayList<Card>();
             if (c.getEnchantingCard() != null) {
                 enchantedControllerInPlay = c.getEnchantingCard().getController().getCardsIn(ZoneType.Battlefield);
-                enchantedControllerInPlay = CardListUtil.getType(enchantedControllerInPlay, "Creature");
+                enchantedControllerInPlay = CardLists.getType(enchantedControllerInPlay, "Creature");
             }
             return enchantedControllerInPlay.size();
         }
@@ -2615,7 +2615,7 @@ public class CardFactoryUtil {
             final String validDevoured = l[0].split(" ")[1];
             final Card csource = c;
             List<Card> cl = c.getDevoured();
-            cl = CardListUtil.getValidCards(cl, validDevoured.split(","), csource.getController(), csource);
+            cl = CardLists.getValidCards(cl, validDevoured.split(","), csource.getController(), csource);
             return CardFactoryUtil.doXMath(cl.size(), m, c);
         }
 
@@ -2636,7 +2636,7 @@ public class CardFactoryUtil {
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
             List<Card> cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            List<Card> filteredCards = CardListUtil.getValidCards(cardsonbattlefield, rest, cardController, c);
+            List<Card> filteredCards = CardLists.getValidCards(cardsonbattlefield, rest, cardController, c);
             int sumPower = 0;
             for (int i = 0; i < filteredCards.size(); i++) {
                 sumPower += filteredCards.get(i).getManaCost().getCMC();
@@ -2656,8 +2656,8 @@ public class CardFactoryUtil {
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
             List<Card> cardsonbattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            List<Card> filteredCards = CardListUtil.getValidCards(cardsonbattlefield, rest, cardController, c);
-            return CardListUtil.sumCMC(filteredCards);
+            List<Card> filteredCards = CardLists.getValidCards(cardsonbattlefield, rest, cardController, c);
+            return CardLists.sumCMC(filteredCards);
         }
         // Count$CardNumColors
         if (sq[0].contains("CardNumColors")) {
@@ -2677,7 +2677,7 @@ public class CardFactoryUtil {
             final Counters cType = Counters.getType(restrictions[1]);
             final String[] validFilter = restrictions[2].split(",");
             List<Card> validCards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            validCards = CardListUtil.getValidCards(validCards, validFilter, cardController, c);
+            validCards = CardLists.getValidCards(validCards, validFilter, cardController, c);
             int cCount = 0;
             for (final Card card : validCards) {
                 cCount += card.getCounters(cType);
@@ -2896,7 +2896,7 @@ public class CardFactoryUtil {
 
         // "Clerics you control" - Count$TypeYouCtrl.Cleric
         if (sq[0].contains("Type")) {
-            someCards = CardListUtil.filter(someCards, CardPredicates.isType(sq[1]));
+            someCards = CardLists.filter(someCards, CardPredicates.isType(sq[1]));
         }
 
         // "Named <CARDNAME> in all graveyards" - Count$NamedAllYards.<CARDNAME>
@@ -2905,18 +2905,18 @@ public class CardFactoryUtil {
             if (sq[1].equals("CARDNAME")) {
                 sq[1] = c.getName();
             }
-            someCards = CardListUtil.filter(someCards, CardPredicates.nameEquals(sq[1]));
+            someCards = CardLists.filter(someCards, CardPredicates.nameEquals(sq[1]));
         }
 
         // Refined qualities
 
         // "Untapped Lands" - Count$UntappedTypeYouCtrl.Land
         if (sq[0].contains("Untapped")) {
-            someCards = CardListUtil.filter(someCards, Presets.UNTAPPED);
+            someCards = CardLists.filter(someCards, Presets.UNTAPPED);
         }
 
         if (sq[0].contains("Tapped")) {
-            someCards = CardListUtil.filter(someCards, Presets.TAPPED);
+            someCards = CardLists.filter(someCards, Presets.TAPPED);
         }
 
 //        String sq0 = sq[0].toLowerCase();
@@ -2926,27 +2926,27 @@ public class CardFactoryUtil {
 //        }
         // "White Creatures" - Count$WhiteTypeYouCtrl.Creature
         if (sq[0].contains("White")) {
-            someCards = CardListUtil.filter(someCards, Presets.WHITE);
+            someCards = CardLists.filter(someCards, Presets.WHITE);
         }
 
         if (sq[0].contains("Blue")) {
-            someCards = CardListUtil.filter(someCards, Presets.BLUE);
+            someCards = CardLists.filter(someCards, Presets.BLUE);
         }
 
         if (sq[0].contains("Black")) {
-            someCards = CardListUtil.filter(someCards, Presets.BLACK);
+            someCards = CardLists.filter(someCards, Presets.BLACK);
         }
 
         if (sq[0].contains("Red")) {
-            someCards = CardListUtil.filter(someCards, Presets.RED);
+            someCards = CardLists.filter(someCards, Presets.RED);
         }
 
         if (sq[0].contains("Green")) {
-            someCards = CardListUtil.filter(someCards, Presets.GREEN);
+            someCards = CardLists.filter(someCards, Presets.GREEN);
         }
 
         if (sq[0].contains("Multicolor")) {
-            someCards = CardListUtil.filter(someCards, new Predicate<Card>() {
+            someCards = CardLists.filter(someCards, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return (CardUtil.getColors(c).size() > 1);
@@ -2955,7 +2955,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("Monocolor")) {
-            someCards = CardListUtil.filter(someCards, new Predicate<Card>() {
+            someCards = CardLists.filter(someCards, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return (CardUtil.getColors(c).size() == 1);
@@ -3111,7 +3111,7 @@ public class CardFactoryUtil {
             if (l.length > 1) {
                 m[0] = l[1];
             }
-            final List<Card> list = CardListUtil.getValidCards(paidList, valid, source.getController(), source);
+            final List<Card> list = CardLists.getValidCards(paidList, valid, source.getController(), source);
             return CardFactoryUtil.doXMath(list.size(), m, source);
         }
 
@@ -3334,7 +3334,7 @@ public class CardFactoryUtil {
      */
     public static int getUsableManaSources(final Player player) {
         List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-        list = CardListUtil.filter(list, new Predicate<Card>() {
+        list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 for (final AbilityMana am : c.getAIPlayableMana()) {
@@ -4209,7 +4209,7 @@ public class CardFactoryUtil {
                         AllZone.getInputControl().setInput(target);
                     } else {
                         // AI choosing what to haunt
-                        final List<Card> oppCreats = CardListUtil.filterControlledBy(creats, AllZone.getHumanPlayer());
+                        final List<Card> oppCreats = CardLists.filterControlledBy(creats, AllZone.getHumanPlayer());
                         if (oppCreats.size() != 0) {
                             haunterDiesWork.setTargetCard(CardFactoryUtil.getWorstCreatureAI(oppCreats));
                         } else {
@@ -4754,7 +4754,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void execute() {
-                    final List<Card> cardsInPlay = CardListUtil.getType(AllZoneUtil.getCardsIn(ZoneType.Battlefield), "World");
+                    final List<Card> cardsInPlay = CardLists.getType(AllZoneUtil.getCardsIn(ZoneType.Battlefield), "World");
                     cardsInPlay.remove(card);
                     for (int i = 0; i < cardsInPlay.size(); i++) {
                         Singletons.getModel().getGameAction().sacrificeDestroy(cardsInPlay.get(i));
@@ -4911,7 +4911,7 @@ public class CardFactoryUtil {
                         // Target as Modular is Destroyed
                         if (card.getController().isComputer()) {
                             List<Card> choices = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                            choices = CardListUtil.filter(choices, new Predicate<Card>() {
+                            choices = CardLists.filter(choices, new Predicate<Card>() {
                                 @Override
                                 public boolean apply(final Card c) {
                                     return c.isCreature() && c.isArtifact();

@@ -22,7 +22,7 @@ import java.util.List;
 import forge.AllZone;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -77,7 +77,7 @@ public class CostReveal extends CostPartWithList {
             if (ability.isSpell()) {
                 handList.remove(source); // can't pay for itself
             }
-            handList = CardListUtil.getValidCards(handList, type.split(";"), activator, source);
+            handList = CardLists.getValidCards(handList, type.split(";"), activator, source);
             if ((amount != null) && (amount > handList.size())) {
                 // not enough cards in hand to pay
                 return false;
@@ -112,7 +112,7 @@ public class CostReveal extends CostPartWithList {
             this.setList(activator.getCardsIn(ZoneType.Hand));
             return true;
         } else {
-            hand = CardListUtil.getValidCards(hand, type.split(";"), activator, source);
+            hand = CardLists.getValidCards(hand, type.split(";"), activator, source);
             Integer c = this.convertAmount();
             if (c == null) {
                 final String sVar = ability.getSVar(this.getAmount());
@@ -162,7 +162,7 @@ public class CostReveal extends CostPartWithList {
             Integer num = this.convertAmount();
 
             List<Card> handList = activator.getCardsIn(ZoneType.Hand);
-            handList = CardListUtil.getValidCards(handList, this.getType().split(";"), activator, ability.getSourceCard());
+            handList = CardLists.getValidCards(handList, this.getType().split(";"), activator, ability.getSourceCard());
 
             if (num == null) {
                 final String sVar = ability.getSVar(amount);

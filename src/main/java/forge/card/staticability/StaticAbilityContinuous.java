@@ -26,7 +26,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardUtil;
 import forge.StaticEffect;
 import forge.card.abilityfactory.AbilityFactory;
@@ -232,7 +232,7 @@ public class StaticAbilityContinuous {
             }
 
             List<Card> cardsIGainedAbilitiesFrom = AllZoneUtil.getCardsIn(validZones);
-            cardsIGainedAbilitiesFrom = CardListUtil.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard);
+            cardsIGainedAbilitiesFrom = CardLists.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard);
 
             if (cardsIGainedAbilitiesFrom.size() > 0) {
 
@@ -424,7 +424,7 @@ public class StaticAbilityContinuous {
         final Player controller = hostCard.getController();
 
         if (params.containsKey("CharacteristicDefining")) {
-            return CardListUtil.createCardList(hostCard); // will always be the card itself
+            return CardLists.createCardList(hostCard); // will always be the card itself
         }
 
         // non - CharacteristicDefining
@@ -438,11 +438,11 @@ public class StaticAbilityContinuous {
 
         if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {
             if (params.get("Affected").contains("Self")) {
-                affectedCards = CardListUtil.createCardList(hostCard);
+                affectedCards = CardLists.createCardList(hostCard);
             } else if (params.get("Affected").contains("EnchantedBy")) {
-                affectedCards = CardListUtil.createCardList(hostCard.getEnchantingCard());
+                affectedCards = CardLists.createCardList(hostCard.getEnchantingCard());
             } else if (params.get("Affected").contains("EquippedBy")) {
-                affectedCards = CardListUtil.createCardList(hostCard.getEquippingCard());
+                affectedCards = CardLists.createCardList(hostCard.getEquippingCard());
             } else if (params.get("Affected").equals("EffectSource")) {
                 affectedCards = new ArrayList<Card>(AbilityFactory.getDefinedCards(hostCard, params.get("Affected"), null));
                 return affectedCards;
@@ -450,7 +450,7 @@ public class StaticAbilityContinuous {
         }
 
         if (params.containsKey("Affected")) {
-            affectedCards = CardListUtil.getValidCards(affectedCards, params.get("Affected").split(","), controller, hostCard);
+            affectedCards = CardLists.getValidCards(affectedCards, params.get("Affected").split(","), controller, hostCard);
         }
 
         return affectedCards;

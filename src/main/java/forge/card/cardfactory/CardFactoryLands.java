@@ -28,7 +28,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.Command;
 import forge.Counters;
 import forge.GameActionUtil;
@@ -173,14 +173,14 @@ class CardFactoryLands {
                     }
                     this.inPlay.clear();
                     this.inPlay.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield));
-                    return (CardListUtil.filter(this.inPlay, targets).size() > 1) && super.canPlayAI();
+                    return (CardLists.filter(this.inPlay, targets).size() > 1) && super.canPlayAI();
                 }
 
                 @Override
                 public void resolve() {
                     this.inPlay.clear();
                     this.inPlay.addAll(AllZoneUtil.getCardsIn(ZoneType.Battlefield));
-                    for (final Card targ : CardListUtil.filter(this.inPlay, targets)) {
+                    for (final Card targ : CardLists.filter(this.inPlay, targets)) {
                         targ.addCounter(Counters.P1P1, 1);
                     }
                 }
@@ -489,7 +489,7 @@ class CardFactoryLands {
 
                 public void computerExecute() {
                     List<Card> hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                    hand = CardListUtil.getType(hand, type);
+                    hand = CardLists.getType(hand, type);
                     if (hand.size() > 0) {
                         this.revealCard(hand.get(0));
                     } else {

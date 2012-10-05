@@ -29,7 +29,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Singletons;
@@ -528,7 +528,7 @@ public class AbilityFactoryDealDamage {
         final Card source = saMe.getSourceCard();
         final HashMap<String, String> params = this.abilityFactory.getMapParams();
         List<Card> hPlay = pl.getCardsIn(ZoneType.Battlefield);
-        hPlay = CardListUtil.getValidCards(hPlay, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
+        hPlay = CardLists.getValidCards(hPlay, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
 
         final ArrayList<Object> objects = tgt.getTargets();
         if (params.containsKey("TargetUnique")) {
@@ -542,9 +542,9 @@ public class AbilityFactoryDealDamage {
                 }
             }
         }
-        hPlay = CardListUtil.getTargetableCards(hPlay, saMe);
+        hPlay = CardLists.getTargetableCards(hPlay, saMe);
 
-        final List<Card> killables = CardListUtil.filter(hPlay, new Predicate<Card>() {
+        final List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return (c.getEnoughDamageToKill(d, source, false, noPrevention) <= d) && !ComputerUtil.canRegenerate(c)
@@ -1251,7 +1251,7 @@ public class AbilityFactoryDealDamage {
 
         // TODO: X may be something different than X paid
         List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-        list = CardListUtil.getValidCards(list, validC.split(","), source.getController(), source);
+        list = CardLists.getValidCards(list, validC.split(","), source.getController(), source);
 
         final Predicate<Card> filterKillable = new Predicate<Card>() {
             @Override
@@ -1260,8 +1260,8 @@ public class AbilityFactoryDealDamage {
             }
         };
 
-        list = CardListUtil.getNotKeyword(list, "Indestructible");
-        list = CardListUtil.filter(list, filterKillable);
+        list = CardLists.getNotKeyword(list, "Indestructible");
+        list = CardLists.filter(list, filterKillable);
 
         return list;
     }
@@ -1380,7 +1380,7 @@ public class AbilityFactoryDealDamage {
         }
 
         if (targetPlayer != null) {
-            list = CardListUtil.filterControlledBy(list, targetPlayer);
+            list = CardLists.filterControlledBy(list, targetPlayer);
         }
 
         list = AbilityFactory.filterListByType(list, params.get("ValidCards"), sa);
@@ -1642,7 +1642,7 @@ public class AbilityFactoryDealDamage {
 
         List<Card> sources = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         if (params.containsKey("ValidCards")) {
-            sources = CardListUtil.getValidCards(sources, params.get("ValidCards"), card.getController(), card);
+            sources = CardLists.getValidCards(sources, params.get("ValidCards"), card.getController(), card);
         }
 
         ArrayList<Object> tgts = new ArrayList<Object>();
@@ -1901,8 +1901,8 @@ public class AbilityFactoryDealDamage {
         tgt.resetTargets();
 
         List<Card> aiCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-        aiCreatures = CardListUtil.getTargetableCards(aiCreatures, sa);
-        aiCreatures = CardListUtil.filter(aiCreatures, new Predicate<Card>() {
+        aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
+        aiCreatures = CardLists.filter(aiCreatures, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !c.getSVar("Targeting").equals("Dies");
@@ -1910,7 +1910,7 @@ public class AbilityFactoryDealDamage {
         });
 
         List<Card> humCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-        humCreatures = CardListUtil.getTargetableCards(humCreatures, sa);
+        humCreatures = CardLists.getTargetableCards(humCreatures, sa);
 
         final Random r = MyRandom.getRandom();
         if (r.nextFloat() > Math.pow(.6667, sa.getActivationsThisTurn())) {

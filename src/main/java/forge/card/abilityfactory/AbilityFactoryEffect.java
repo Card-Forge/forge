@@ -28,7 +28,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.Command;
 import forge.Singletons;
@@ -288,8 +288,8 @@ public class AbilityFactoryEffect {
                 if (tgt != null) {
                     tgt.resetTargets();
                     List<Card> list = AllZone.getCombat().getAttackerList();
-                    list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
-                    list = CardListUtil.getTargetableCards(list, sa);
+                    list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+                    list = CardLists.getTargetableCards(list, sa);
                     Card target = CardFactoryUtil.getBestCreatureAI(list);
                     if (target == null) {
                         return false;
@@ -304,13 +304,13 @@ public class AbilityFactoryEffect {
                 List<Card> human = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
 
                 // only count creatures that can attack or block
-                comp = CardListUtil.filter(comp, new Predicate<Card>() {
+                comp = CardLists.filter(comp, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return CombatUtil.canAttack(c);
                     }
                 });
-                human = CardListUtil.filter(human, new Predicate<Card>() {
+                human = CardLists.filter(human, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return CombatUtil.canBlock(c);

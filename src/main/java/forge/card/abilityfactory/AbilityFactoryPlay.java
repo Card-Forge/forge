@@ -30,7 +30,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -304,7 +304,7 @@ public final class AbilityFactoryPlay {
         if (tgt != null) {
             ZoneType zone = tgt.getZone().get(0);
             cards = AllZoneUtil.getCardsIn(zone);
-            cards = CardListUtil.getValidCards(cards, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
+            cards = CardLists.getValidCards(cards, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
             if (cards.isEmpty()) {
                 return false;
             }
@@ -401,7 +401,7 @@ public final class AbilityFactoryPlay {
                     tgtCard = GuiChoose.one("Select a card to play", tgtCards);
                 } else {
                     // AI
-                    tgtCards = CardListUtil.filter(tgtCards, new Predicate<Card>() {
+                    tgtCards = CardLists.filter(tgtCards, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             ArrayList<SpellAbility> spellAbilities = c.getBasicSpells();

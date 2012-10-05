@@ -29,7 +29,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Singletons;
@@ -308,8 +308,8 @@ public final class AbilityFactoryCopy {
 
         if (abTgt != null) {
             List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
-            list = CardListUtil.getTargetableCards(list, sa);
+            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+            list = CardLists.getTargetableCards(list, sa);
             abTgt.resetTargets();
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
@@ -325,7 +325,7 @@ public final class AbilityFactoryCopy {
                 }
 
                 Card choice;
-                if (CardListUtil.filter(list, Presets.CREATURES).size() > 0) {
+                if (CardLists.filter(list, Presets.CREATURES).size() > 0) {
                     choice = CardFactoryUtil.getBestCreatureAI(list);
                 } else {
                     choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, true);

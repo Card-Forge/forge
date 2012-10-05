@@ -29,7 +29,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.Command;
 import forge.GameEntity;
 import forge.Singletons;
@@ -336,10 +336,10 @@ public class AbilityFactoryGainControl {
         }
 
         List<Card> list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), sa.getSourceCard().getController(), sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getSourceCard().getController(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
-        list = CardListUtil.filter(list, new Predicate<Card>() {
+        list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 final Map<String, String> vars = c.getSVars();
@@ -561,7 +561,7 @@ public class AbilityFactoryGainControl {
     private boolean gainControlDrawbackAI(final SpellAbility sa) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (this.params.containsKey("AllValid")) {
-                List<Card> tgtCards = CardListUtil.filterControlledBy(AllZoneUtil.getCardsIn(ZoneType.Battlefield), AllZone.getHumanPlayer());
+                List<Card> tgtCards = CardLists.filterControlledBy(AllZoneUtil.getCardsIn(ZoneType.Battlefield), AllZone.getHumanPlayer());
                 tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
                 if (tgtCards.isEmpty()) {
                     return false;
@@ -856,10 +856,10 @@ public class AbilityFactoryGainControl {
         tgt.resetTargets();
 
         List<Card> list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        list = CardListUtil.getValidCards(list, tgt.getValidTgts(), AllZone.getComputerPlayer(), sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), AllZone.getComputerPlayer(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
-        list = CardListUtil.filter(list, new Predicate<Card>() {
+        list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 final Map<String, String> vars = c.getSVars();
@@ -871,7 +871,7 @@ public class AbilityFactoryGainControl {
             object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa).get(0);
         } else if (tgt.getMinTargets(sa.getSourceCard(), sa) > 1) {
             List<Card> list2 = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            list2 = CardListUtil.getValidCards(list2, tgt.getValidTgts(), AllZone.getComputerPlayer(), sa.getSourceCard());
+            list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), AllZone.getComputerPlayer(), sa.getSourceCard());
             object2 = CardFactoryUtil.getWorstAI(list2);
             tgt.addTarget(object2);
         }

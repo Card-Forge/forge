@@ -25,7 +25,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -357,7 +357,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (this.getIsPresent() != null) {
             List<Card> list = AllZoneUtil.getCardsIn(this.getPresentZone());
 
-            list = CardListUtil.getValidCards(list, this.getIsPresent().split(","), activator, c);
+            list = CardLists.getValidCards(list, this.getIsPresent().split(","), activator, c);
 
             int right = 1;
             final String rightString = this.getPresentCompare().substring(2);

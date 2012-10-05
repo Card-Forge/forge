@@ -31,7 +31,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
@@ -121,20 +121,20 @@ public class CardFactoryCreatures {
             @Override
             public void chooseTargetAI() {
                 List<Card> perms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                perms = CardListUtil.filter(CardListUtil.getTargetableCards(perms, this), new Predicate<Card>() {
+                perms = CardLists.filter(CardLists.getTargetableCards(perms, this), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return (c.sumAllCounters() > 0);
                     }
                 });
-                CardListUtil.shuffle(perms);
+                CardLists.shuffle(perms);
                 this.setTargetCard(perms.get(0)); // TODO improve this.
             }
 
             @Override
             public boolean canPlayAI() {
                 List<Card> perms = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                perms = CardListUtil.filter(CardListUtil.getTargetableCards(perms, this), new Predicate<Card>() {
+                perms = CardLists.filter(CardLists.getTargetableCards(perms, this), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return (c.sumAllCounters() > 0);
@@ -165,7 +165,7 @@ public class CardFactoryCreatures {
             public void execute() {
 
                 if (card.getController().isHuman()) {
-                    final List<Card> artifacts = CardListUtil.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
+                    final List<Card> artifacts = CardLists.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
 
                     if (artifacts.size() != 0) {
                         final Card c = GuiChoose.one("Select an artifact put a phylactery counter on", artifacts);
@@ -176,10 +176,10 @@ public class CardFactoryCreatures {
 
                 } else { // computer
                     List<Card> art = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                    art = CardListUtil.filter(art, Presets.ARTIFACTS);
+                    art = CardLists.filter(art, Presets.ARTIFACTS);
 
                     List<Card> list = new ArrayList<Card>(art);
-                    list = CardListUtil.filter(list, new Predicate<Card>() {
+                    list = CardLists.filter(list, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             return c.getIntrinsicKeyword().contains("Indestructible");
@@ -272,10 +272,10 @@ public class CardFactoryCreatures {
 
                     color[0] = Constant.Color.WHITE;
                     int max = 0;
-                    CardListUtil.filter(list, CardPredicates.containsKeyword(color[0])).size();
+                    CardLists.filter(list, CardPredicates.containsKeyword(color[0])).size();
 
                     for (final String c : Constant.Color.ONLY_COLORS) {
-                        final int cmp = CardListUtil.filter(list, CardPredicates.containsKeyword(c)).size();
+                        final int cmp = CardLists.filter(list, CardPredicates.containsKeyword(c)).size();
                         if (cmp > max) {
                             max = cmp;
                             color[0] = c;
@@ -374,7 +374,7 @@ public class CardFactoryCreatures {
             @Override
             public void resolve() {
                 List<Card> allTokens = AllZoneUtil.getCreaturesInPlay(card.getController());
-                allTokens = CardListUtil.filter(allTokens, Presets.TOKEN);
+                allTokens = CardLists.filter(allTokens, Presets.TOKEN);
 
                 CardFactoryUtil.copyTokens(allTokens);
             }
@@ -382,7 +382,7 @@ public class CardFactoryCreatures {
             @Override
             public boolean canPlayAI() {
                 List<Card> allTokens = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                allTokens = CardListUtil.filter(allTokens, Presets.TOKEN);
+                allTokens = CardLists.filter(allTokens, Presets.TOKEN);
 
                 return allTokens.size() >= 2;
             }
@@ -456,7 +456,7 @@ public class CardFactoryCreatures {
 
             @Override
             public boolean canPlayAI() {
-                List<Card> wolves = CardListUtil.getType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), "Wolf");
+                List<Card> wolves = CardLists.getType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), "Wolf");
                 Iterable<Card> untappedWolves = Iterables.filter(wolves, untappedCreature);
                 
                 final int totalPower = Aggregates.sum(untappedWolves, CardPredicates.Accessors.fnGetNetAttack);
@@ -466,7 +466,7 @@ public class CardFactoryCreatures {
 
                 List<Card> targetables = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
 
-                targetables = CardListUtil.filter(CardListUtil.getTargetableCards(targetables, this), new Predicate<Card>() {
+                targetables = CardLists.filter(CardLists.getTargetableCards(targetables, this), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return c.isCreature() && (c.getNetDefense() <= totalPower);
@@ -485,8 +485,8 @@ public class CardFactoryCreatures {
 
             @Override
             public void resolve() {
-                List<Card> wolves = CardListUtil.getType(card.getController().getCardsIn(ZoneType.Battlefield), "Wolf");
-                wolves = CardListUtil.filter(wolves, untappedCreature);
+                List<Card> wolves = CardLists.getType(card.getController().getCardsIn(ZoneType.Battlefield), "Wolf");
+                wolves = CardLists.filter(wolves, untappedCreature);
 
                 final Card target = this.getTargetCard();
 
@@ -518,7 +518,7 @@ public class CardFactoryCreatures {
                                 }));
                     }
                 } else { // AI Choose spread Damage
-                    final List<Card> damageableWolves = CardListUtil.filter(wolves, new Predicate<Card>() {
+                    final List<Card> damageableWolves = CardLists.filter(wolves, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             return (c.predictDamage(target.getNetAttack(), target, false) > 0);
@@ -531,7 +531,7 @@ public class CardFactoryCreatures {
                         return;
                     }
 
-                    List<Card> wolvesLeft = CardListUtil.filter(damageableWolves, new Predicate<Card>() {
+                    List<Card> wolvesLeft = CardLists.filter(damageableWolves, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             return !c.hasKeyword("Indestructible");
@@ -539,7 +539,7 @@ public class CardFactoryCreatures {
                     });
 
                     for (int i = 0; i < target.getNetAttack(); i++) {
-                        wolvesLeft = CardListUtil.filter(wolvesLeft, new Predicate<Card>() {
+                        wolvesLeft = CardLists.filter(wolvesLeft, new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {
                                 return (c.getKillDamage() > 0)
@@ -558,20 +558,20 @@ public class CardFactoryCreatures {
                         } else {
                             // Add -1/-1s to Random Indestructibles
                             if (target.hasKeyword("Infect") || target.hasKeyword("Wither")) {
-                                final List<Card> indestructibles = CardListUtil.filter(damageableWolves, new Predicate<Card>() {
+                                final List<Card> indestructibles = CardLists.filter(damageableWolves, new Predicate<Card>() {
                                     @Override
                                     public boolean apply(final Card c) {
                                         return c.hasKeyword("Indestructible");
                                     }
                                 });
-                                CardListUtil.shuffle(indestructibles);
+                                CardLists.shuffle(indestructibles);
                                 indestructibles.get(0).addDamage(1, target);
                             }
 
                             // Then just add Damage randomnly
 
                             else {
-                                CardListUtil.shuffle(damageableWolves);
+                                CardLists.shuffle(damageableWolves);
                                 wolves.get(0).addDamage(1, target);
                             }
                         }
@@ -633,7 +633,7 @@ public class CardFactoryCreatures {
 
             public int countKithkin() {
                 List<Card> kithkin = card.getController().getCardsIn(ZoneType.Battlefield);
-                kithkin = CardListUtil.filter(kithkin, new Predicate<Card>() {
+                kithkin = CardLists.filter(kithkin, new Predicate<Card>() {
 
                     @Override
                     public boolean apply(final Card c) {
@@ -744,7 +744,7 @@ public class CardFactoryCreatures {
 
                 // Dark Depths:
                 List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Dark Depths");
-                list = CardListUtil.filter(list, new Predicate<Card>() {
+                list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card crd) {
                         return crd.getCounters(Counters.ICE) >= 3;
@@ -758,7 +758,7 @@ public class CardFactoryCreatures {
 
                 // Get rid of Planeswalkers:
                 list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-                list = CardListUtil.filter(list, new Predicate<Card>() {
+                list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card crd) {
                         return crd.isPlaneswalker() && (crd.getCounters(Counters.LOYALTY) >= 5);
@@ -802,7 +802,7 @@ public class CardFactoryCreatures {
                 int intermSumToughness = 0;
                 // intermSumPower = intermSumToughness = 0;
                 List<Card> creats = card.getController().getCardsIn(ZoneType.Graveyard);
-                creats = CardListUtil.filter(creats, new Predicate<Card>() {
+                creats = CardLists.filter(creats, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return c.isCreature() && !c.equals(card);
@@ -854,7 +854,7 @@ public class CardFactoryCreatures {
             public boolean canPlayAI() {
                 // get all creatures
                 List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                list = CardListUtil.filter(list, Presets.CREATURES);
+                list = CardLists.filter(list, Presets.CREATURES);
                 return 0 < list.size();
             }
         });
@@ -876,12 +876,12 @@ public class CardFactoryCreatures {
                 final Player opp = player.getOpponent();
                 int max = 0;
                 List<Card> play = opp.getCardsIn(ZoneType.Battlefield);
-                play = CardListUtil.filter(play, Presets.NON_TOKEN);
-                play = CardListUtil.filter(play, Presets.WHITE);
+                play = CardLists.filter(play, Presets.NON_TOKEN);
+                play = CardLists.filter(play, Presets.WHITE);
                 max += play.size();
 
                 List<Card> grave = opp.getCardsIn(ZoneType.Graveyard);
-                grave = CardListUtil.filter(grave, Presets.WHITE);
+                grave = CardLists.filter(grave, Presets.WHITE);
                 max += grave.size();
 
                 final String[] life = new String[max + 1];

@@ -26,7 +26,7 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.Card;
 
-import forge.CardListUtil;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -1062,10 +1062,10 @@ public final class AbilityFactoryCombat {
         boolean chance = false;
 
         if (abTgt != null) {
-            List<Card> list = CardListUtil.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-            list = CardListUtil.getTargetableCards(list, sa);
-            list = CardListUtil.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
-            list = CardListUtil.filter(list, new Predicate<Card>() {
+            List<Card> list = CardLists.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+            list = CardLists.getTargetableCards(list, sa);
+            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+            list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     boolean tapped = c.isTapped();
