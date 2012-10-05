@@ -31,9 +31,8 @@ import forge.game.phase.Upkeep;
 import forge.game.player.AIPlayer;
 import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
-import forge.game.zone.DefaultPlayerZone;
-import forge.game.zone.MagicStack;
 import forge.game.zone.PlayerZone;
+import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 
 /**
@@ -64,7 +63,7 @@ public class GameState {
     private final GameLog gameLog = new GameLog();
     private boolean gameOver = false;
 
-    private final PlayerZone stackZone = new DefaultPlayerZone(ZoneType.Stack, null);
+    private final PlayerZone stackZone = new PlayerZone(ZoneType.Stack, null);
 
     private long timestamp = 0;
     private GameSummary gameSummary;

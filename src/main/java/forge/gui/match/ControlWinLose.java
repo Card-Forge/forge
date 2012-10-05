@@ -2,6 +2,7 @@ package forge.gui.match;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -13,8 +14,10 @@ import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameNew;
+import forge.game.GameSummary;
 import forge.game.GameType;
 import forge.game.PlayerStartsGame;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
@@ -91,41 +94,54 @@ public class ControlWinLose {
         boolean isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
         GameType gameType = Singletons.getModel().getMatchState().getGameType();
 
-        Deck hDeck = AllZone.getHumanPlayer().getDeck();
-        Deck cDeck = AllZone.getComputerPlayer().getDeck();
-
         //This is called from QuestWinLoseHandler also.  If we're in a quest, this is already handled elsewhere
         if (isAnte && !gameType.equals(GameType.Quest)) {
-            if (Singletons.getModel().getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
-                List<Card> compAntes = AllZone.getComputerPlayer().getCardsIn(ZoneType.Ante);
+            executeAnte();
+        }
+        Singletons.getModel().savePrefs();
+        CMatchUI.SINGLETON_INSTANCE.initMatch(null);
+        GameNew.newGame( new PlayerStartsGame(AllZone.getHumanPlayer(), AllZone.getHumanPlayer().getDeck()), 
+                         new PlayerStartsGame(AllZone.getComputerPlayer(), AllZone.getComputerPlayer().getDeck()));
 
-                //remove compy's ante cards form his deck
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param hDeck
+     * @param cDeck
+     */
+    private void executeAnte() {
+        List<GameSummary> games = Singletons.getModel().getMatchState().getGamesPlayed();
+        GameSummary lastGame = games.get(games.size()-1);
+        for (Player p: AllZone.getPlayersInGame()) {
+            if (!p.getName().equals(lastGame.getWinner())) continue; // not a loser
+            
+            // remove all the lost cards from owners' decks
+            List<CardPrinted> losses = new ArrayList<CardPrinted>();
+            for (Player loser: AllZone.getPlayersInGame()) {
+                if( loser.equals(p)) continue; // not a loser
+                
+                List<Card> compAntes = loser.getCardsIn(ZoneType.Ante);
+                Deck cDeck = loser.getDeck(); 
+
                 for (Card c : compAntes) {
                     CardPrinted toRemove = CardDb.instance().getCard(c);
                     cDeck.getMain().remove(toRemove);
                 }
-
-                List<Card> o = GuiChoose.noneOrMany("Select cards to add to your deck", compAntes);
+            }
+            
+            // offer to winner, if he is human
+            if( p.isHuman() ) {
+                List<CardPrinted> o = GuiChoose.noneOrMany("Select cards to add to your deck", losses);
                 if (null != o) {
-                    for (Card c : o) {
-                        hDeck.getMain().add(c);
+                    for (CardPrinted c : o) {
+                        p.getDeck().getMain().add(c);
                     }
                 }
-
-            } else { //compy won
-                List<Card> humanAntes = AllZone.getHumanPlayer().getCardsIn(ZoneType.Ante);
-
-                //remove humans ante cards form his deck
-                for (Card c : humanAntes) {
-                    CardPrinted toRemove = CardDb.instance().getCard(c);
-                    hDeck.getMain().remove(toRemove);
-                }
             }
+            
+            break; // expect no other winners
         }
-        Singletons.getModel().savePrefs();
-        CMatchUI.SINGLETON_INSTANCE.initMatch(null);
-        GameNew.newGame( new PlayerStartsGame(AllZone.getHumanPlayer(), hDeck), 
-                         new PlayerStartsGame(AllZone.getComputerPlayer(), cDeck));
 
     }
 

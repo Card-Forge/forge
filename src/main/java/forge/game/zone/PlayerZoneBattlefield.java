@@ -20,6 +20,10 @@ package forge.game.zone;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -41,7 +45,7 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id$
  */
-public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
+public class PlayerZoneBattlefield extends PlayerZone {
     /** Constant <code>serialVersionUID=5750837078903423978L</code>. */
     private static final long serialVersionUID = 5750837078903423978L;
 
@@ -58,7 +62,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
      * @param player
      *            a {@link forge.game.player.Player} object.
      */
-    public PlayerZoneComesIntoPlay(final ZoneType zone, final Player player) {
+    public PlayerZoneBattlefield(final ZoneType zone, final Player player) {
         super(zone, player);
     }
 
@@ -278,6 +282,14 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         this.leavesTrigger = b;
     }
 
+    private static Predicate<Card> isNotPhased = new Predicate<Card>(){
+        @Override
+        public boolean apply(Card crd) {
+            return !crd.isPhasedOut();
+        }
+        
+    };
+    
     /*
      * (non-Javadoc)
      * 
@@ -289,16 +301,9 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         // getCards(false) to get Phased Out cards
 
         if (!filter) {
-            return new ArrayList<Card>(this.getCardList());
+            return new ArrayList<Card>(cardList);
         }
+        return Lists.newArrayList(Iterables.filter(cardList, isNotPhased));
 
-        final ArrayList<Card> list = new ArrayList<Card>();
-        for (Card crd : this.getCardList()) {
-
-            if (!crd.isPhasedOut()) {
-                list.add(crd);
-            }
-        }
-        return list;
     }
 }

@@ -284,26 +284,14 @@ public class GameNew {
     private static void newMatchCleanup() {
         if (Singletons.getModel().getMatchState().getGamesPlayedCount() != 0) { return; }
 
-        // Update mouse events in case of dev mode toggle
-        if (Preferences.DEV_MODE) {
-            // TODO restore this functionality!!!
-            //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(true);
-            final List<VField> allFields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
-            for (final VField field : allFields) {
-                ((FLabel) field.getLblHand()).setHoverable(true);
-                ((FLabel) field.getLblLibrary()).setHoverable(true);
-            }
-        }
-        else {
-            // TODO restore this functionality!!!
-            //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(false);
-            final List<VField> allFields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
+        // TODO restore this functionality!!!
+        //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);
+        final List<VField> allFields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
-            for (final VField field : allFields) {
-                ((FLabel) field.getLblHand()).setHoverable(false);
-                ((FLabel) field.getLblLibrary()).setHoverable(false);
-            }
+        for (final VField field : allFields) {
+            ((FLabel) field.getLblHand()).setHoverable(Preferences.DEV_MODE);
+            ((FLabel) field.getLblLibrary()).setHoverable(Preferences.DEV_MODE);
         }
 
         VAntes.SINGLETON_INSTANCE.clearAnteCards();

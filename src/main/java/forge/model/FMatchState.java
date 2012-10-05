@@ -68,8 +68,8 @@ public class FMatchState {
      * 
      * @return the games played
      */
-    public final GameSummary[] getGamesPlayed() {
-        return this.gamesPlayed.toArray(new GameSummary[this.gamesPlayed.size()]);
+    public final List<GameSummary> getGamesPlayed() {
+        return this.gamesPlayed;
     }
 
     /**

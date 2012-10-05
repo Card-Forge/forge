@@ -52,9 +52,8 @@ import forge.card.trigger.TriggerType;
 import forge.deck.Deck;
 import forge.game.GameLossReason;
 import forge.game.phase.PhaseHandler;
-import forge.game.zone.DefaultPlayerZone;
 import forge.game.zone.PlayerZone;
-import forge.game.zone.PlayerZoneComesIntoPlay;
+import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.properties.ForgePreferences.FPref;
@@ -181,8 +180,8 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      */
     public Player(final String myName, final int myLife, final int myPoisonCounters) {
         for (final ZoneType z : Player.ALL_ZONES) {
-            final PlayerZone toPut = z == ZoneType.Battlefield ? new PlayerZoneComesIntoPlay(z, this)
-                    : new DefaultPlayerZone(z, this);
+            final PlayerZone toPut = z == ZoneType.Battlefield ? new PlayerZoneBattlefield(z, this)
+                    : new PlayerZone(z, this);
             this.zones.put(z, toPut);
         }
 
@@ -2305,7 +2304,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean hasLandfall() {
-        final List<Card> list = ((DefaultPlayerZone) this.getZone(ZoneType.Battlefield)).getCardsAddedThisTurn(null);
+        final List<Card> list = ((PlayerZone) this.getZone(ZoneType.Battlefield)).getCardsAddedThisTurn(null);
         return Iterables.any(list, CardPredicates.Presets.LANDS);
     }
 

@@ -38,7 +38,7 @@ import forge.card.CardManaCost;
 import forge.card.EditionInfo;
 import forge.card.mana.ManaCost;
 import forge.control.input.InputPayManaCostUtil;
-import forge.game.zone.DefaultPlayerZone;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDisplayUtil;
 import forge.item.CardPrinted;
@@ -627,10 +627,10 @@ public final class CardUtil {
             final Card src) {
         List<Card> res = new ArrayList<Card>();
         if (to != ZoneType.Stack) {
-            res.addAll(((DefaultPlayerZone) AllZone.getComputerPlayer().getZone(to)).getCardsAddedThisTurn(from));
-            res.addAll(((DefaultPlayerZone) AllZone.getHumanPlayer().getZone(to)).getCardsAddedThisTurn(from));
+            res.addAll(((PlayerZone) AllZone.getComputerPlayer().getZone(to)).getCardsAddedThisTurn(from));
+            res.addAll(((PlayerZone) AllZone.getHumanPlayer().getZone(to)).getCardsAddedThisTurn(from));
         } else {
-            res.addAll(((DefaultPlayerZone) AllZone.getStackZone()).getCardsAddedThisTurn(from));
+            res.addAll(((PlayerZone) AllZone.getStackZone()).getCardsAddedThisTurn(from));
         }
 
         res = CardLists.getValidCards(res, valid, src.getController(), src);

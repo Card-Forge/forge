@@ -56,7 +56,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
-import forge.game.zone.PlayerZoneComesIntoPlay;
+import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.ViewWinLose;
@@ -409,8 +409,8 @@ public class GameAction {
         }
 
         AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        ((PlayerZoneComesIntoPlay) AllZone.getHumanPlayer().getZone(ZoneType.Battlefield)).setTriggers(false);
-        ((PlayerZoneComesIntoPlay) AllZone.getComputerPlayer().getZone(ZoneType.Battlefield)).setTriggers(false);
+        ((PlayerZoneBattlefield) AllZone.getHumanPlayer().getZone(ZoneType.Battlefield)).setTriggers(false);
+        ((PlayerZoneBattlefield) AllZone.getComputerPlayer().getZone(ZoneType.Battlefield)).setTriggers(false);
 
         final int tiz = c.getTurnInZone();
 
@@ -429,8 +429,8 @@ public class GameAction {
         AllZone.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams);
 
         AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        ((PlayerZoneComesIntoPlay) AllZone.getHumanPlayer().getZone(ZoneType.Battlefield)).setTriggers(true);
-        ((PlayerZoneComesIntoPlay) AllZone.getComputerPlayer().getZone(ZoneType.Battlefield)).setTriggers(true);
+        ((PlayerZoneBattlefield) AllZone.getHumanPlayer().getZone(ZoneType.Battlefield)).setTriggers(true);
+        ((PlayerZoneBattlefield) AllZone.getComputerPlayer().getZone(ZoneType.Battlefield)).setTriggers(true);
     }
 
     /**
