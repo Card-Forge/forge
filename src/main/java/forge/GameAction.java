@@ -1035,14 +1035,7 @@ public class GameAction {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             AllZone.getTriggerHandler().runTrigger(TriggerType.Always, runParams);
 
-            final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-            Card c;
-
-            final Iterator<Card> it = list.iterator();
-
-            while (it.hasNext()) {
-                c = it.next();
-
+            for (Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
                 if (c.isEquipped()) {
                     final List<Card> equipments = new ArrayList<Card>(c.getEquippedBy());
                     for (final Card equipment : equipments) {

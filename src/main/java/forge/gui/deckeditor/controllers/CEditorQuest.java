@@ -221,8 +221,7 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
         this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
 
-        Deck deck = AllZone.getHumanPlayer().getDeck() == null ? null : this.questData.getMyDecks().get(
-                AllZone.getHumanPlayer().getDeck().getName());
+        Deck deck = null;
 
         if (deck == null) {
             deck = new Deck();

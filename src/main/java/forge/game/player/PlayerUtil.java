@@ -211,7 +211,7 @@ public final class PlayerUtil {
             private void done() {
                 this.stop();
                 // hack to not trigger Chains of Mephistopheles recursively
-                AllZone.getHumanPlayer().drawCards(1, true);
+                Singletons.getControl().getPlayer().drawCards(1, true);
             }
         };
         return target;

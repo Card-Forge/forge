@@ -300,8 +300,8 @@ public class AbilityFactoryEffect {
             } else if (logic.equals("Always")) {
                 randomReturn = true;
             } else if (logic.equals("Evasion")) {
-                List<Card> comp = CardListUtil.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-                List<Card> human = CardListUtil.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                List<Card> comp = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+                List<Card> human = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
 
                 // only count creatures that can attack or block
                 comp = CardListUtil.filter(comp, new Predicate<Card>() {

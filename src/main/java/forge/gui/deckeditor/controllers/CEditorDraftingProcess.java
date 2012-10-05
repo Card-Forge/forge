@@ -169,7 +169,6 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
      */
     private Deck getPlayersDeck() {
         final Deck deck = new Deck();
-        AllZone.getHumanPlayer().setDeck(deck);
 
         // add sideboard to deck
         deck.getSideboard().addAll(this.getTableDeck().getCards());

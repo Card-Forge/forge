@@ -197,7 +197,7 @@ public class InputPayManaCost extends InputMana {
      */
     private void done() {
         if (this.phyLifeToLose > 0) {
-            AllZone.getHumanPlayer().payLife(this.phyLifeToLose, this.originalCard);
+            Singletons.getControl().getPlayer().payLife(this.phyLifeToLose, this.originalCard);
         }
         if (this.spell.getSourceCard().isCopiedSpell()) {
             if (this.spell.getAfterPayMana() != null) {
@@ -206,7 +206,7 @@ public class InputPayManaCost extends InputMana {
                 AllZone.getInputControl().resetInput();
             }
         } else {
-            AllZone.getHumanPlayer().getManaPool().clearManaPaid(this.spell, false);
+            Singletons.getControl().getPlayer().getManaPool().clearManaPaid(this.spell, false);
             this.resetManaCost();
 
             // if tap ability, tap card

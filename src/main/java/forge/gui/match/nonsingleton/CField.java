@@ -471,7 +471,7 @@ public class CField implements ICDoc {
                     CombatUtil.showCombat();
                 }
                 else if (input instanceof InputPaySacCost) {
-                    ((InputPaySacCost) input).unselectCard(c, AllZone.getHumanPlayer().getZone(ZoneType.Battlefield));
+                    ((InputPaySacCost) input).unselectCard(c, Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield));
                 }
             } else {
                 //Yosei, the Morning Star required cards to be chosen on computer side
@@ -482,7 +482,7 @@ public class CField implements ICDoc {
                     input.selectCard(c, c.getController().getZone(ZoneType.Battlefield));
                 } else {
                     //in weird case card has no controller revert to default behaviour
-                    input.selectCard(c, AllZone.getHumanPlayer().getZone(ZoneType.Battlefield));
+                    input.selectCard(c, Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield));
                 }
             }
         }

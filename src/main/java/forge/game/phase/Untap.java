@@ -113,7 +113,7 @@ public class Untap extends Phase implements java.io.Serializable {
     private static void doUntap() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final Predicate<Card> tappedCanUntap = Predicates.and(Presets.TAPPED, Presets.CANUNTAP);
-        
+                
         List<Card> list = player.getCardsIn(ZoneType.Battlefield);
 
         for (final Card c : list) {
@@ -198,10 +198,9 @@ public class Untap extends Phase implements java.io.Serializable {
         }
         
         if (Untap.canOnlyUntapOneLand()) {
-
-            if (Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
+            if (player.isComputer()) {
                 // search for lands the computer has and only untap 1
-                List<Card> landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
+                List<Card> landList = AllZoneUtil.getPlayerLandsInPlay(player);
  
                 landList = CardListUtil.filter(landList, tappedCanUntap);
                 if (landList.size() > 0) {
@@ -230,7 +229,7 @@ public class Untap extends Phase implements java.io.Serializable {
                         }
                     } // selectCard()
                 }; // Input
-                List<Card> landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
+                List<Card> landList = AllZoneUtil.getPlayerLandsInPlay(player);
                 landList = CardListUtil.filter(landList, tappedCanUntap);
                 if (landList.size() > 0) {
                     AllZone.getInputControl().setInput(target);
@@ -278,8 +277,8 @@ public class Untap extends Phase implements java.io.Serializable {
             }
         }
         if ((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel"))) {
-            if (Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
-                List<Card> creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+            if (player.isComputer()) {
+                List<Card> creatures = AllZoneUtil.getCreaturesInPlay(player);
                 creatures = CardListUtil.filter(creatures, tappedCanUntap);
                 if (creatures.size() > 0) {
                     creatures.get(0).untap();
@@ -308,7 +307,7 @@ public class Untap extends Phase implements java.io.Serializable {
                         }
                     } // selectCard()
                 }; // Input
-                List<Card> creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                List<Card> creatures = AllZoneUtil.getCreaturesInPlay(player);
                 creatures = CardListUtil.filter(creatures, tappedCanUntap);
                 if (creatures.size() > 0) {
                     AllZone.getInputControl().setInput(target);

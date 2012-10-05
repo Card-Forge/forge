@@ -31,6 +31,7 @@ import forge.game.GameLossReason;
 import forge.game.GameNew;
 import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
+import forge.game.PlayerStartsGame;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -127,17 +128,17 @@ public class QuestWinLoseHandler extends ControlWinLose {
                 }
             }
 
-            final List<Card> humanList = QuestUtil.getHumanStartingCards(qData, qEvent);
-            final List<Card> computerList = QuestUtil.getComputerStartingCards(qEvent);
-
-            final int humanLife = qa.getLife(qData.getMode()) + extraLife;
-            int computerLife = 20;
-            if (qEvent instanceof QuestEventChallenge) {
-                computerLife = ((QuestEventChallenge) qEvent).getAILife();
-            }
-
-            GameNew.newGame(AllZone.getHumanPlayer().getDeck(), AllZone.getComputerPlayer().getDeck(),
-                    humanList, computerList, humanLife, computerLife, qEvent.getIconFilename());
+            CMatchUI.SINGLETON_INSTANCE.initMatch(qEvent.getIconFilename());
+            
+            PlayerStartsGame p1 = new PlayerStartsGame(AllZone.getHumanPlayer(),AllZone.getHumanPlayer().getDeck() );
+            p1.cardsOnBattlefield = QuestUtil.getHumanStartingCards(qData, qEvent);
+            p1.initialLives =  qa.getLife(qData.getMode()) + extraLife;
+            
+            PlayerStartsGame p2 = new PlayerStartsGame(AllZone.getComputerPlayer(), AllZone.getComputerPlayer().getDeck());
+            p2.cardsOnBattlefield = QuestUtil.getComputerStartingCards(qEvent);
+            p2.initialLives = qEvent instanceof QuestEventChallenge ? ((QuestEventChallenge) qEvent).getAILife() : 20;
+            
+            GameNew.newGame( p1, p2 );
         } else {
             super.startNextRound();
         }

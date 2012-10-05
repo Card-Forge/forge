@@ -12601,6 +12601,7 @@ src/main/java/forge/game/GamePlayerRating.java -text
 src/main/java/forge/game/GameState.java -text
 src/main/java/forge/game/GameSummary.java svneol=native#text/plain
 src/main/java/forge/game/GameType.java -text
+src/main/java/forge/game/PlayerStartsGame.java -text
 src/main/java/forge/game/limited/BoosterDeck.java -text
 src/main/java/forge/game/limited/BoosterDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/BoosterDraftAI.java svneol=native#text/plain

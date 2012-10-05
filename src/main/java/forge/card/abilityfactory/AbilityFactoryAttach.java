@@ -1154,7 +1154,7 @@ public class AbilityFactoryAttach {
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
             Card newTarget = (Card) targets.get(0);
             //don't equip human creatures
-            if (newTarget.getController().isPlayer(AllZone.getHumanPlayer())) {
+            if (newTarget.getController().isHuman()) {
                 return false;
             }
 

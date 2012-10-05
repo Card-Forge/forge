@@ -4,9 +4,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
@@ -162,23 +159,21 @@ public enum CFilters implements ICDoc {
     public <TItem extends InventoryItem, TModel extends DeckBase> void buildFilter() {
         // The main trick here is to apply a CardPrinted predicate
         // to the table. CardRules will lead to difficulties.
-        final List<Predicate<? super CardPrinted>> lstFilters = new ArrayList<Predicate<? super CardPrinted>>();
 
         final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
 
-        lstFilters.add(Predicates.instanceOf(CardPrinted.class));
-        lstFilters.add(SFilterUtil.buildColorFilter());
-        lstFilters.add(SFilterUtil.buildTypeFilter());
-        lstFilters.add(SFilterUtil.buildSetAndFormatFilter());
-        lstFilters.add(SFilterUtil.buildTextFilter());
-        lstFilters.add(SFilterUtil.buildIntervalFilter());
+        Predicate<? super CardPrinted> classFilter = Predicates.instanceOf(CardPrinted.class);
+        Predicate<CardPrinted> color = SFilterUtil.buildColorFilter();
+        Predicate<CardPrinted> type = SFilterUtil.buildTypeFilter();
+        Predicate<CardPrinted> set = SFilterUtil.buildSetAndFormatFilter();
+        Predicate<CardPrinted> text = SFilterUtil.buildTextFilter();
+        Predicate<CardPrinted> interval = SFilterUtil.buildIntervalFilter();
 
         // Until this is filterable, always show packs and decks in the card shop.
-        com.google.common.base.Predicate<? super CardPrinted> itemFilter = Predicates.and(lstFilters);
+        Predicate<? super CardPrinted> cardFilter = Predicates.and(classFilter, color, type, set, text, interval);
 
-        itemFilter = Predicates.or(itemFilter, ItemPredicate.Presets.IS_PACK);
-        itemFilter = Predicates.or(itemFilter, ItemPredicate.Presets.IS_DECK);
+        Predicate<? super CardPrinted> itemFilter = Predicates.or(cardFilter, ItemPredicate.Presets.IS_PACK, ItemPredicate.Presets.IS_DECK);
 
         // Apply to table
         ed.getTableCatalog().setFilter((Predicate<TItem>) itemFilter);

@@ -131,14 +131,14 @@ public class HumanPlayer extends Player {
         if (o.equals("Yes")) {
             final Card c = GuiChoose.one("Select card to dredge", this.getDredge());
             // rule 702.49a
-            if (this.getDredgeNumber(c) <= AllZone.getHumanPlayer().getZone(ZoneType.Library).size()) {
+            if (this.getDredgeNumber(c) <= getZone(ZoneType.Library).size()) {
 
                 // might have to make this more sophisticated
                 // dredge library, put card in hand
                 Singletons.getModel().getGameAction().moveToHand(c);
 
                 for (int i = 0; i < this.getDredgeNumber(c); i++) {
-                    final Card c2 = AllZone.getHumanPlayer().getZone(ZoneType.Library).get(0);
+                    final Card c2 = getZone(ZoneType.Library).get(0);
                     Singletons.getModel().getGameAction().moveToGraveyard(c2);
                 }
                 dredged = true;

@@ -33,9 +33,11 @@ import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameNew;
 import forge.game.GameType;
+import forge.game.PlayerStartsGame;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
+import forge.gui.match.CMatchUI;
 import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
@@ -343,15 +345,15 @@ public enum CSubmenuConstructed implements ICDoc {
         final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
             @Override
             public Object doInBackground() {
-                AllZone.getHumanPlayer().setDeck(
-                        generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks(), PlayerType.HUMAN));
-                AllZone.getComputerPlayer().setDeck(
-                        generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER));
+                Deck humanDeck = generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks(), PlayerType.HUMAN);
+                Deck aiDeck = generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER);
                 
+                CMatchUI.SINGLETON_INSTANCE.initMatch(null);
                 Singletons.getModel().getMatchState().setGameType(GameType.Constructed);
 
-                if (AllZone.getHumanPlayer().getDeck() != null && AllZone.getComputerPlayer().getDeck() != null) {
-                    GameNew.newGame(AllZone.getHumanPlayer().getDeck(), AllZone.getComputerPlayer().getDeck());
+                if (humanDeck != null && aiDeck != null) {
+                    GameNew.newGame( new PlayerStartsGame(AllZone.getHumanPlayer(), humanDeck),
+                                     new PlayerStartsGame(AllZone.getComputerPlayer(), aiDeck) );
                 }
                 return null;
             }

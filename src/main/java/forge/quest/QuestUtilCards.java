@@ -20,8 +20,6 @@ package forge.quest;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
 import forge.card.FormatCollection;
 import forge.deck.Deck;
 import forge.game.GameFormatQuest;

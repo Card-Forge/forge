@@ -20,6 +20,7 @@ package forge.control.input;
 import forge.AllZone;
 import forge.Card;
 import forge.Command;
+import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -188,11 +189,11 @@ public class InputPayManaCostAbility extends InputMana {
     
     private void done() {
         if (this.phyLifeToLose > 0) {
-            AllZone.getHumanPlayer().payLife(this.phyLifeToLose, null);
+            Singletons.getControl().getPlayer().payLife(this.phyLifeToLose, null);
         }
         this.paidCommand.execute();
         this.resetManaCost();
-        AllZone.getHumanPlayer().getManaPool().clearManaPaid(this.fakeAbility, false);
+        Singletons.getControl().getPlayer().getManaPool().clearManaPaid(this.fakeAbility, false);
         this.stop();
     }
 

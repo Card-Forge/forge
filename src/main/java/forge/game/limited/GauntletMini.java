@@ -26,7 +26,9 @@ import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameNew;
 import forge.game.GameType;
+import forge.game.PlayerStartsGame;
 import forge.gui.SOverlayUtils;
+import forge.gui.match.CMatchUI;
 
 /**
  * <p>
@@ -91,8 +93,6 @@ public class GauntletMini {
     public void resetCurrentRound() {
         wins = 0;
         losses = 0;
-        AllZone.getHumanPlayer().setDeck(humanDeck);
-        AllZone.getComputerPlayer().setDeck(aiDecks.get(0));
         currentRound = 1;
     }
 
@@ -108,8 +108,6 @@ public class GauntletMini {
             return;
         }
 
-        AllZone.getHumanPlayer().setDeck(humanDeck);
-        AllZone.getComputerPlayer().setDeck(aiDecks.get(currentRound));
         currentRound += 1;
 
     }
@@ -160,11 +158,10 @@ public class GauntletMini {
             @Override
 
             public Object doInBackground() {
-
+                CMatchUI.SINGLETON_INSTANCE.initMatch(null);
                 Singletons.getModel().getMatchState().setGameType(gauntletType);
-
-                GameNew.newGame(AllZone.getHumanPlayer().getDeck(), AllZone.getComputerPlayer().getDeck());
-
+                GameNew.newGame( new PlayerStartsGame(AllZone.getHumanPlayer(), humanDeck),
+                                 new PlayerStartsGame(AllZone.getComputerPlayer(), aiDecks.get(currentRound)));
                 return null;
             }
 

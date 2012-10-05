@@ -14,6 +14,7 @@ import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameNew;
 import forge.game.GameType;
+import forge.game.PlayerStartsGame;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
@@ -119,11 +120,13 @@ public class ControlWinLose {
                     CardPrinted toRemove = CardDb.instance().getCard(c);
                     hDeck.getMain().remove(toRemove);
                 }
-                AllZone.getHumanPlayer().setDeck(hDeck);
             }
         }
         Singletons.getModel().savePrefs();
-        GameNew.newGame(hDeck, cDeck);
+        CMatchUI.SINGLETON_INSTANCE.initMatch(null);
+        GameNew.newGame( new PlayerStartsGame(AllZone.getHumanPlayer(), hDeck), 
+                         new PlayerStartsGame(AllZone.getComputerPlayer(), cDeck));
+
     }
 
     /**

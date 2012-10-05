@@ -29,11 +29,21 @@ import forge.Constant;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryMana;
+import forge.card.cost.CostMana;
+import forge.card.cost.CostPayment;
+import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
+import forge.card.trigger.TriggerType;
+import forge.game.phase.PhaseHandler;
+import forge.game.player.Player;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.match.CMatchUI;
+import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -84,7 +94,7 @@ public class InputPayManaCostUtil {
         final Iterator<AbilityMana> it = abilities.iterator();
         while (it.hasNext()) {
             final AbilityMana ma = it.next();
-            ma.setActivatingPlayer(AllZone.getHumanPlayer());
+            ma.setActivatingPlayer(Singletons.getControl().getPlayer());
             if (!ma.canPlay()) {
                 it.remove();
             } else if (!InputPayManaCostUtil.canMake(ma, cneeded.toString())) {
@@ -197,7 +207,7 @@ public class InputPayManaCostUtil {
 
         Singletons.getModel().getGameAction().playSpellAbility(chosen);
 
-        manaCost = AllZone.getHumanPlayer().getManaPool().payManaFromAbility(sa, manaCost, chosen);
+        manaCost = Singletons.getControl().getPlayer().getManaPool().payManaFromAbility(sa, manaCost, chosen);
 
         //AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
         // DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
@@ -216,7 +226,7 @@ public class InputPayManaCostUtil {
      * @return ManaCost the amount of mana remaining to be paid after the mana is activated
      */
     public static ManaCost activateManaAbility(String color, final SpellAbility sa, ManaCost manaCost) {
-        ManaPool mp = AllZone.getHumanPlayer().getManaPool();
+        ManaPool mp = Singletons.getControl().getPlayer().getManaPool();
 
         // Convert Color to short String
         String manaStr = "1";
@@ -335,6 +345,277 @@ public class InputPayManaCostUtil {
         final Object o = m.get(color);
 
         return o.toString();
+    }
+
+    /**
+     * <p>
+     * input_payXMana.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param payment
+     *            a {@link forge.card.cost.CostPayment} object.
+     * @param costMana
+     *            TODO
+     * @param numX
+     *            a int.
+     * 
+     * @return a {@link forge.control.input.Input} object.
+     */
+    public static Input inputPayXMana(final SpellAbility sa, final CostPayment payment, final CostMana costMana,
+            final int numX) {
+        final Input payX = new InputMana() {
+            private static final long serialVersionUID = -6900234444347364050L;
+            private int xPaid = 0;
+            private String colorsPaid = sa.getSourceCard().getColorsPaid();
+            private ManaCost manaCost = new ManaCost(Integer.toString(numX));
+    
+            @Override
+            public void showMessage() {
+                if ((xPaid == 0 && costMana.isxCantBe0()) || 
+                        !this.manaCost.toString().equals(Integer.toString(numX))) {
+                    ButtonUtil.enableOnlyCancel();
+                    // only cancel if partially paid an X value
+                    // or X is 0, and x can't be 0
+                } else {
+                    ButtonUtil.enableAll();
+                }
+                
+                StringBuilder msg = new StringBuilder("Pay X Mana Cost for ");
+                msg.append(sa.getSourceCard().getName()).append("\n").append(this.xPaid);
+                msg.append(" Paid so far.");
+                if (costMana.isxCantBe0()) {
+                    msg.append(" X Can't be 0.");
+                }
+                
+                CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+            }
+    
+            // selectCard
+            @Override
+            public void selectCard(final Card card, final PlayerZone zone) {
+                if (sa.getSourceCard().equals(card) && sa.isTapAbility()) {
+                    // this really shouldn't happen but just in case
+                    return;
+                }
+    
+                this.manaCost = activateManaAbility(sa, card, this.manaCost);
+                if (this.manaCost.isPaid()) {
+                    if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
+                        this.colorsPaid += this.manaCost.getColorsPaid();
+                    }
+                    this.manaCost = new ManaCost(Integer.toString(numX));
+                    this.xPaid++;
+                }
+    
+                if (AllZone.getInputControl().getInput() == this) {
+                    this.showMessage();
+                }
+            }
+    
+            @Override
+            public void selectButtonCancel() {
+                this.stop();
+                payment.cancelCost();
+                AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
+            }
+    
+            @Override
+            public void selectButtonOK() {
+                this.stop();
+                payment.getCard().setXManaCostPaid(this.xPaid);
+                payment.paidCost(costMana);
+                payment.getCard().setColorsPaid(this.colorsPaid);
+                payment.getCard().setSunburstValue(this.colorsPaid.length());
+            }
+    
+            @Override
+            public void selectManaPool(String color) {
+                this.manaCost = activateManaAbility(color, sa, this.manaCost);
+                if (this.manaCost.isPaid()) {
+                    if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
+                        this.colorsPaid += this.manaCost.getColorsPaid();
+                    }
+                    this.manaCost = new ManaCost(Integer.toString(numX));
+                    this.xPaid++;
+                }
+    
+                if (AllZone.getInputControl().getInput() == this) {
+                    this.showMessage();
+                }
+            }
+    
+        };
+    
+        return payX;
+    }
+
+    /**
+     * <p>
+     * input_payMana.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param payment
+     *            a {@link forge.card.cost.CostPayment} object.
+     * @param costMana
+     *            the cost mana
+     * @param manaToAdd
+     *            a int.
+     * @return a {@link forge.control.input.Input} object.
+     */
+    public static Input inputPayMana(final SpellAbility sa, final CostPayment payment, final CostMana costMana,
+            final int manaToAdd) {
+        final ManaCost manaCost;
+    
+        if (PhaseHandler.getGameBegins() == 1) {
+            if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+                manaCost = new ManaCost("0");
+            } else {
+                final String mana = costMana.getManaToPay();
+                manaCost = new ManaCost(mana);
+                manaCost.increaseColorlessMana(manaToAdd);
+            }
+        } else {
+            System.out.println("Is input_payMana ever called when the Game isn't in progress?");
+            manaCost = new ManaCost(sa.getManaCost());
+        }
+    
+        final Input payMana = new InputMana() {
+            private ManaCost mana = manaCost;
+            private static final long serialVersionUID = 3467312982164195091L;
+    
+            private final String originalManaCost = costMana.getMana();
+    
+            private int phyLifeToLose = 0;
+    
+            private void resetManaCost() {
+                this.mana = new ManaCost(this.originalManaCost);
+                this.phyLifeToLose = 0;
+            }
+    
+            @Override
+            public void selectCard(final Card card, final PlayerZone zone) {
+                // prevent cards from tapping themselves if ability is a
+                // tapability, although it should already be tapped
+                if (sa.getSourceCard().equals(card) && sa.isTapAbility()) {
+                    return;
+                }
+    
+                this.mana = activateManaAbility(sa, card, this.mana);
+    
+                if (this.mana.isPaid()) {
+                    this.done();
+                } else if (AllZone.getInputControl().getInput() == this) {
+                    this.showMessage();
+                }
+            }
+    
+            @Override
+            public void selectPlayer(final Player player) {
+                if (player.isHuman()) {
+                    if (manaCost.payPhyrexian()) {
+                        this.phyLifeToLose += 2;
+                    }
+    
+                    this.showMessage();
+                }
+            }
+    
+            private void done() {
+                final Card source = sa.getSourceCard();
+                if (this.phyLifeToLose > 0) {
+                    Singletons.getControl().getPlayer().payLife(this.phyLifeToLose, source);
+                }
+                source.setColorsPaid(this.mana.getColorsPaid());
+                source.setSunburstValue(this.mana.getSunburst());
+                this.resetManaCost();
+                this.stop();
+    
+                if (costMana.hasNoXManaCost() || (manaToAdd > 0)) {
+                    payment.paidCost(costMana);
+                } else {
+                    source.setXManaCostPaid(0);
+                    CostUtil.setInput(InputPayManaCostUtil.inputPayXMana(sa, payment, costMana, costMana.getXMana()));
+                }
+    
+                // If this is a spell with convoke, re-tap all creatures used
+                // for it.
+                // This is done to make sure Taps triggers go off at the right
+                // time
+                // (i.e. AFTER cost payment, they are tapped previously as well
+                // so that
+                // any mana tapabilities can't be used in payment as well as
+                // being tapped for convoke)
+    
+                if (sa.getTappedForConvoke() != null) {
+                    AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
+                    for (final Card c : sa.getTappedForConvoke()) {
+                        c.untap();
+                        c.tap();
+                    }
+                    AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
+                    sa.clearTappedForConvoke();
+                }
+    
+            }
+    
+            @Override
+            public void selectButtonCancel() {
+                // If we're paying for a spell with convoke, untap all creatures
+                // used for it.
+                if (sa.getTappedForConvoke() != null) {
+                    AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
+                    for (final Card c : sa.getTappedForConvoke()) {
+                        c.untap();
+                    }
+                    AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
+                    sa.clearTappedForConvoke();
+                }
+    
+                this.stop();
+                this.resetManaCost();
+                payment.cancelCost();
+                AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
+            }
+    
+            @Override
+            public void showMessage() {
+                ButtonUtil.enableOnlyCancel();
+                final String displayMana = this.mana.toString().replace("X", "").trim();
+                CMatchUI.SINGLETON_INSTANCE.showMessage("Pay Mana Cost: " + displayMana);
+    
+                final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + displayMana);
+                if (this.phyLifeToLose > 0) {
+                    msg.append(" (");
+                    msg.append(this.phyLifeToLose);
+                    msg.append(" life paid for phyrexian mana)");
+                }
+    
+                if (this.mana.containsPhyrexianMana()) {
+                    msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
+                }
+    
+                CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+                if (this.mana.isPaid()) {
+                    this.done();
+                }
+            }
+    
+            @Override
+            public void selectManaPool(String color) {
+                this.mana = activateManaAbility(color, sa, this.mana);
+    
+                if (this.mana.isPaid()) {
+                    this.done();
+                } else if (AllZone.getInputControl().getInput() == this) {
+                    this.showMessage();
+                }
+            }
+        };
+        return payMana;
     }
 
 }

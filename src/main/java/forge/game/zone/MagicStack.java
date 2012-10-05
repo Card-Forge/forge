@@ -673,7 +673,7 @@ public class MagicStack extends MyObservable {
                     }
                 };
 
-                if (sp.getSourceCard().getController().equals(AllZone.getHumanPlayer())) {
+                if (sp.getSourceCard().getController().isHuman()) {
                     final ManaCost manaCost = this.getMultiKickerSpellCostChange(ability);
 
                     if (manaCost.isPaid()) {

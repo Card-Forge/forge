@@ -2,6 +2,8 @@ package forge.card.cardfactory;
 
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -70,10 +72,16 @@ class CardFactoryEnchantments {
 
                 @Override
                 public boolean canPlay() {
-                    final List<Card> grave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
-                    final List<Card> aiGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                    return ((CardListUtil.getType(grave, "Creature").size() > 1) || (CardListUtil.getType(aiGrave, "Creature").size() > 1))
-                            && super.canPlay();
+                    boolean haveGraveWithSomeCreatures = false;
+                    for( Player p : AllZone.getPlayersInGame()) {
+                        Iterable<Card> grave = CardListUtil.filter(p.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+                        if( Iterables.size(grave) > 1)
+                        {
+                            haveGraveWithSomeCreatures = true;
+                            break;
+                        }
+                    }
+                    return haveGraveWithSomeCreatures && super.canPlay();
                 }
             };
             final Input soilTarget = new Input() {

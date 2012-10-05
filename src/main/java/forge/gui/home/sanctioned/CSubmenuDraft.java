@@ -18,6 +18,7 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameNew;
 import forge.game.GameType;
+import forge.game.PlayerStartsGame;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
 import forge.gui.GuiChoose;
@@ -25,6 +26,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorDraftingProcess;
 import forge.gui.framework.ICDoc;
+import forge.gui.match.CMatchUI;
 import forge.gui.toolbox.FSkin;
 
 /** 
@@ -201,15 +203,15 @@ public enum CSubmenuDraft implements ICDoc {
             public Object doInBackground() {
                 DeckGroup opponentDecks = Singletons.getModel().getDecks().getDraft().get(human.getName());
 
-                AllZone.getHumanPlayer().setDeck(human);
-                AllZone.getComputerPlayer().setDeck(opponentDecks.getAiDecks().get(aiIndex)); //zero is human deck, so it must be +1
-
-                if (AllZone.getComputerPlayer().getDeck() == null) {
+                Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
+                if (aiDeck == null) {
                     throw new IllegalStateException("Draft: Computer deck is null!");
                 }
 
+                CMatchUI.SINGLETON_INSTANCE.initMatch(null);
                 Singletons.getModel().getMatchState().setGameType(GameType.Draft);
-                GameNew.newGame(AllZone.getHumanPlayer().getDeck(), AllZone.getComputerPlayer().getDeck());
+                GameNew.newGame( new PlayerStartsGame(AllZone.getHumanPlayer(), human),
+                                 new PlayerStartsGame(AllZone.getComputerPlayer(), aiDeck) );
                 return null;
             }
 

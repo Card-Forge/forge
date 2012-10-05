@@ -1889,11 +1889,10 @@ public class CardFactoryUtil {
             cl = CardListUtil.filter(cl, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if (zone.is(ZoneType.Graveyard)) {
-                        if (c.hasUnearth()) {
-                            return true;
-                        }
+                    if (zone.is(ZoneType.Graveyard) && c.hasUnearth()) {
+                        return true;
                     }
+
                     if (c.hasKeyword("You may look at this card.")) {
                         return true;
                     }
